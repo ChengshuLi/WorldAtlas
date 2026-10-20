@@ -1,0 +1,4102 @@
+{
+  "version": 1,
+  "kind": "caf-461-held-residual-factual-proposal",
+  "status": "local proposal only; unaccepted; no repair credit",
+  "as_of": {
+    "date": "2026-10-20",
+    "pinned_current_main": "cdce5b02d354431321436b8f8674d804df629c01"
+  },
+  "scope": {
+    "package_id": "gb-CAF-ADM3--repair-evaluation",
+    "denominator": {
+      "original_cells": 2130,
+      "original_intervals": 1319,
+      "original_owners": 46,
+      "original_positive_source_atoms": 46,
+      "original_land_cells": 2130,
+      "original_inland_water_cells": 0
+    },
+    "prior_qualified_support": {
+      "cells": 1669,
+      "components": 34,
+      "ledger_rows": 34,
+      "unchanged": true,
+      "accepted_repair_credit_from_this_packet": 0
+    },
+    "residual": {
+      "cells": 461,
+      "compressed_ledger_rows": 290,
+      "interval_rows_matched": 461,
+      "owners_with_holds": 36,
+      "wholly_held_owners": 12,
+      "land_cells": 461,
+      "inland_water_cells": 0,
+      "all_recorded_reason": "territorial_exclusion_cells"
+    },
+    "accounting_invariant": "1,669 previously qualified/supported cells + 461 held cells = 2,130 original cells; this packet changes no owner, interval, qualification, accepted outcome, or credit."
+  },
+  "evidence_pins": [
+    {
+      "role": "canonical source/held handoff",
+      "commit": "a14f4a9ab38d55298f7c7e5430e9e3f7a3b984ff",
+      "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/qualified1669-original-quartet.json",
+      "blob_oid": "3fac284786734a6577ea0dcc260f0867553054bb",
+      "bytes": 61132
+    },
+    {
+      "role": "immutable original scope",
+      "commit": "d4c9e2ae51ec32884dd61eb92c84eeb76f76ffd4",
+      "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/original-claim-scope.json",
+      "blob_oid": "89cf5e18865f0337d69a89864fa28d4838419a8c",
+      "bytes": 790964,
+      "sha256": "fe8138d8e9a289f973b20ee2d4d95ec58686ac40b6ad49539597b591d05883e8"
+    },
+    {
+      "role": "held-original ledger",
+      "commit": "58cbec91fe8cfba270f9d9d53711d51a611d695f",
+      "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/supported-inputs-001/held-original.json",
+      "blob_oid": "e8880c97544c0d5f4f4d4489141dcc45effc30b1",
+      "bytes": 21627,
+      "sha256": "bff9f77eb1a2ce5cec98abf5d38b8babd259b3ffabcf29c18ca4f002c16b23bb"
+    },
+    {
+      "role": "original interval block 030",
+      "commit": "d4c9e2ae51ec32884dd61eb92c84eeb76f76ffd4",
+      "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/original-intervals-001/block-030.json.gz",
+      "blob_oid": "18db60720bb8a2ef22683146490a0622e8614085",
+      "bytes": 5332,
+      "sha256": "6bdd015ae0aa13ea2f6ab80ba6179fa16e63fd45351e82b5346ea7f51ad94efc"
+    },
+    {
+      "role": "original interval block 031",
+      "commit": "d4c9e2ae51ec32884dd61eb92c84eeb76f76ffd4",
+      "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/original-intervals-001/block-031.json.gz",
+      "blob_oid": "aa3c1bbc49af726ef40570f008a5965192fc7374",
+      "bytes": 3440,
+      "sha256": "73ee671a1717cc9dd13d3022ef876d444e67b950594028979b19fed1082426f1"
+    },
+    {
+      "role": "full original source-target evidence",
+      "commit": "f1bc5e42011698f2593375991d59f4d1d692b910",
+      "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/source-evidence-001/source-evidence.json",
+      "blob_oid": "cc7b145215611327d1cb66489aa5740275fb0b7b",
+      "bytes": 277509,
+      "sha256": "80e4af2b6eaa22ed4785e5db42e771488a3ec6fd4dfbb19c50e0418cc47d6b8a"
+    },
+    {
+      "role": "narrow qualified source evidence",
+      "commit": "58cbec91fe8cfba270f9d9d53711d51a611d695f",
+      "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/supported-inputs-001/source-evidence.json",
+      "blob_oid": "82b1c319d9aa5049c414351cbe48fec6b526a633",
+      "bytes": 228343,
+      "sha256": "9f9a603cbbc9675dda1fcd221d7ef0845a33df30dc5be192c884be979d797ce2"
+    },
+    {
+      "role": "whole-target physical evidence",
+      "commit": "1f655c379e938d7ecf0f044f2f01da0a49b21b4b",
+      "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/physical-001/whole-target-support.json",
+      "blob_oid": "28c87655ce6bc27ba8b53ec0d0c19552e0e7e25d",
+      "bytes": 311103,
+      "sha256": "686d41e172c55480b5c1192fafb6a82c4bce4feefce906e003acffa8b2ac9ce8"
+    },
+    {
+      "role": "whole foreign-bounds census",
+      "commit": "c773c8cef2fd2598d07c78912060cf98b35e497a",
+      "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/source-review/foreign-bounds-001/complete-foreign-bounds.json",
+      "blob_oid": "51dbcd3ad7a4dd49d891d68a162970bea24e3725",
+      "bytes": 468893,
+      "sha256": "448d489613bc30eb600a09882257b2f52d58bd80fb26f307e482f426a247a343"
+    },
+    {
+      "role": "retained periodic negative reconciliation",
+      "commit": "7a13c8cb319935d188817eb8ab658fef1fb33329",
+      "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/source-review/retained-periodic-negative-reconciliation-001/retained-periodic-negative-reconciliation.json",
+      "blob_oid": "d145830ba86d23b385d1a54d5c6d42646e3a82a8",
+      "bytes": 17367,
+      "sha256": "4c22904e4e216e7d51d598bc7ba33980a5bbf8860316c9847b32592a108af52b"
+    },
+    {
+      "role": "thirteen-archive custody record",
+      "commit": "36b1fb6d42151afd251efb005d7cb1b9634d9744",
+      "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/native-source-custody-002/complete-thirteen-native-archive-custody.json",
+      "blob_oid": "3b1b4176f0b147aa078e42a076174c69c0715be3",
+      "bytes": 54982,
+      "sha256": "0f49af8b252858c67aaffd47c42a9af1c982d3cde8fa1845342e467bc97fe4b9"
+    },
+    {
+      "role": "source rights/vintage interpretation",
+      "commit": "36b1fb6d42151afd251efb005d7cb1b9634d9744",
+      "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/thirteen-whole-source-interpretation.md",
+      "blob_oid": "dac004d112899e75ae8c5079c73249f8067025a5",
+      "bytes": 11449,
+      "sha256": "258222312136107437edae5e1c36f8e505c11d55cec68e7a55c630cc24e4a04f"
+    },
+    {
+      "role": "whole original Raga negative and descendants",
+      "commit": "36b1fb6d42151afd251efb005d7cb1b9634d9744",
+      "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/native-source-custody-002/Raga-whole-original-negative-ancestry.json",
+      "blob_oid": "2b3818f7d2f4255093223a44edf3bd839ccdf1c1",
+      "bytes": 13667,
+      "sha256": "ccd100e9ce02f4c342839c4e8ea0f3af9a905b54e6c344d20ff84494e45b433e"
+    },
+    {
+      "role": "actual native result summary",
+      "commit": "cb07c6f1a64654788f61cb9f0d483f72ac335f3b",
+      "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/actual-native-result-summary.json",
+      "blob_oid": "fb4c163f367adfe352a444d5780453570a577aac",
+      "bytes": 2682,
+      "sha256": "47f087eab85ae07afeff14267ae4a92926b421028b7871ba8d8cdee66056588d"
+    },
+    {
+      "role": "distinct scientific review",
+      "commit": "cb07c6f1a64654788f61cb9f0d483f72ac335f3b",
+      "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/source-review/distinct-reviewer6/actual-physical-native-result-review.md",
+      "sha256": "5e2f099db7eaf3f8356420cd8032d248c33bf0b342cbf8379a5f5af7a276974a",
+      "reviewer": "/root/africa_worker6_caf_review"
+    },
+    {
+      "role": "current selected-owner observation for the complete original package",
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "path": "coordination/engineering/caf461-unresolved-proposal-20261020/current-selected-owner-observation-cdce5b02.json",
+      "bytes": 894123,
+      "sha256": "19d96f03308d7b67d0b878a2d9a63149bbe67300b2b0cca98157a0798daef6af",
+      "query_count": 2130,
+      "base_owner_zero": 2130,
+      "accepted_additive_owner_zero": 461,
+      "effective_selected_owner_zero": 461,
+      "existing_product_overlap": 0
+    }
+  ],
+  "source_identity_method": {
+    "interval_rows_per_block": {
+      "block_030": 771,
+      "block_031": 548
+    },
+    "concatenation_order": "block-030 then block-031; global ordinal is derived 1-based row position",
+    "schema": [
+      "y",
+      "start",
+      "end_exclusive",
+      "owner_indices",
+      "source_feature_indices",
+      "physical_class"
+    ],
+    "interval_id_limit": "The source interval records contain no separate source-native interval ID. Each key is joined to the exact source row tuple and a derived global row ordinal, which must not be represented as a native ID.",
+    "key_join": "Held ledger expands y/x half-open runs with owner and reason; each of 461 keys matched exactly one interval row by y, start <= x < end, owner membership; all 461 joined rows classify land.",
+    "source_feature_registry_note": "Each source_feature_index in an original interval row maps through the exact original complete_original_contact_roster. Those are candidate/context IDs only, not a finding that any candidate is currently applicable, legally authoritative, or the cause of the held decision."
+  },
+  "summary": {
+    "unique_candidate_source_features": 75,
+    "all_feature_indices_resolve": true,
+    "source_coverage": {
+      "full_original_evidence_matches": 461,
+      "full_original_class": "mapped_land_support",
+      "narrow_qualified_source_evidence_matches": 0,
+      "meaning": "Full original source evidence has mapped_land_support runs covering these keys; none appears as a run in the narrowed 1,669-qualified source evidence. The full receipt is original context, not accepted positive per-key support."
+    },
+    "physical": {
+      "targets": 46,
+      "results": 46,
+      "issue_rows": 0,
+      "query_witnesses": 93,
+      "full_candidate_reconstructions": 46,
+      "explicit_disjoints": 47,
+      "interpretation": "Whole-target results only. No per-held-cell physical/contact or applicable-source ruling."
+    },
+    "foreign": {
+      "complete_families": 365,
+      "complete_features": 73303,
+      "whole_required_families": 13,
+      "whole_native_dbf_rows": 1092,
+      "conservative_contact_features": 69,
+      "raw_disjoint_features": 73231,
+      "periodic_reconciled_features": 3,
+      "unresolved_foreign_bounds_features": 0,
+      "interpretation": "Conservative whole-bounds contacts and retained periodic proofs are source-level context; they do not establish per-cell contact or sovereignty."
+    }
+  },
+  "contract": {
+    "original_task_question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+    "completion_route": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+    "proposal_route": "The frozen original contract explicitly names either an additive repair to the recorded location or a documented exception for every exact interval, and calls for selected-native conservation plus source/physical witness checks. This packet proposes no outcome as complete. Review must decide whether the documented-exception path is acceptable for any of these held keys; otherwise retain holds or perform only evidence-supported repairs under a separately authorized workflow.",
+    "next_step": "The current selected-owner observation now covers all 2,130 original package cells and is included above. Review the exact per-key source/physical witnesses and remaining legal/applicability questions. Complete any required full native conservation and issue integration checks; preserve the 1,669 previously supported cells and all 461 held outcomes unless explicitly accepted. Obtain explicit issue/parent acceptance before any credit."
+  },
+  "source_and_rights_context": {
+    "primary_source": "geoBoundaries gbOpen CAF ADM3, represented 2018, source role Commune, stated metadata license CC BY 3.0 IGO; parent source level ADM2.",
+    "retained_primary_scope": "175 primary context members, 72 context parents, 76 ancestor records, 31 positive parents, all 46 original positive atoms retained.",
+    "source_versions": "CAF ADM1/2/3 historical 2006/2015/2018 roles remain distinct. CAF1 chosen CC BY 2.5 attribution; CAF2 archive CC BY 3 versus historical portal-footer/current-default distinctions; CAF3 metadata CC BY 3.0 IGO versus editionless actual license image.",
+    "foreign_scope": "13 whole foreign families / 1,092 native DBF rows; complete census covered 365 families / 73,303 features. Retain all candidates as negative operands and the 69 conservative contact features; do not shrink or assign them based on bounds alone.",
+    "physical_and_history": "Whole physical evidence is retained for all 46 targets. Original Raga remains one whole original SSD2 negative, with its three physical descendants retained as separate descendants; descendants do not replace the whole original negative.",
+    "legal_limits": "Issue #899 law-era crosswalk remains unresolved; 21 of 46 positive atoms overlap the #899 subject set of 92. No current legal boundary, sovereignty, source accuracy, or statutory parentage is inferred. Preserve underlying rights/attribution limits, including base-map share-alike uncertainty, ODbL duties, editionless or generic license evidence, unseen COD/FOD terms, and provider vintage/CRS limits."
+  },
+  "candidate_source_index_registry": [
+    {
+      "source_feature_index": 9188,
+      "source_id": "gb:CAF:ADM1:63714938B78522502559544",
+      "family_index": 50,
+      "source_ordinal": 0,
+      "source_name": "Mbomou",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9189,
+      "source_id": "gb:CAF:ADM1:63714938B76474956810594",
+      "family_index": 50,
+      "source_ordinal": 1,
+      "source_name": "Sangha-Mbaéré",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9190,
+      "source_id": "gb:CAF:ADM1:63714938B93412376758102",
+      "family_index": 50,
+      "source_ordinal": 2,
+      "source_name": "Mambéré-Kadéï",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9191,
+      "source_id": "gb:CAF:ADM1:63714938B21760912511834",
+      "family_index": 50,
+      "source_ordinal": 3,
+      "source_name": "Lobaye",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9192,
+      "source_id": "gb:CAF:ADM1:63714938B83899487779446",
+      "family_index": 50,
+      "source_ordinal": 4,
+      "source_name": "Nana-Mambéré",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9193,
+      "source_id": "gb:CAF:ADM1:63714938B70915793391768",
+      "family_index": 50,
+      "source_ordinal": 5,
+      "source_name": "Ombella-M'Poko",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9194,
+      "source_id": "gb:CAF:ADM1:63714938B19002536101711",
+      "family_index": 50,
+      "source_ordinal": 6,
+      "source_name": "Ouham-Pendé",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9195,
+      "source_id": "gb:CAF:ADM1:63714938B89906779781300",
+      "family_index": 50,
+      "source_ordinal": 7,
+      "source_name": "Ouham",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9198,
+      "source_id": "gb:CAF:ADM1:63714938B35477763827744",
+      "family_index": 50,
+      "source_ordinal": 10,
+      "source_name": "Vakaga",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9199,
+      "source_id": "gb:CAF:ADM1:63714938B6521805151082",
+      "family_index": 50,
+      "source_ordinal": 11,
+      "source_name": "Bamingui-Bangoran",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9200,
+      "source_id": "gb:CAF:ADM1:63714938B18739157330103",
+      "family_index": 50,
+      "source_ordinal": 12,
+      "source_name": "Ouaka",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9201,
+      "source_id": "gb:CAF:ADM1:63714938B99123991024226",
+      "family_index": 50,
+      "source_ordinal": 13,
+      "source_name": "Basse-Kotto",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9203,
+      "source_id": "gb:CAF:ADM1:63714938B95555008029378",
+      "family_index": 50,
+      "source_ordinal": 15,
+      "source_name": "Haut-Mbomou",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9241,
+      "source_id": "gb:CAF:ADM2:33826404B5322507148284",
+      "family_index": 51,
+      "source_ordinal": 36,
+      "source_name": "Bayanga",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9242,
+      "source_id": "gb:CAF:ADM2:33826404B1885733015759",
+      "family_index": 51,
+      "source_ordinal": 37,
+      "source_name": "Nola",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9244,
+      "source_id": "gb:CAF:ADM2:33826404B15620845480465",
+      "family_index": 51,
+      "source_ordinal": 39,
+      "source_name": "Gamboula",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9245,
+      "source_id": "gb:CAF:ADM2:33826404B6437617730206",
+      "family_index": 51,
+      "source_ordinal": 40,
+      "source_name": "Amada-Gaza",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9246,
+      "source_id": "gb:CAF:ADM2:33826404B17315710707848",
+      "family_index": 51,
+      "source_ordinal": 41,
+      "source_name": "Baboua",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9247,
+      "source_id": "gb:CAF:ADM2:33826404B23664805641311",
+      "family_index": 51,
+      "source_ordinal": 42,
+      "source_name": "Bouar",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9249,
+      "source_id": "gb:CAF:ADM2:33826404B71934397264584",
+      "family_index": 51,
+      "source_ordinal": 44,
+      "source_name": "Koui",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9250,
+      "source_id": "gb:CAF:ADM2:33826404B95792566341641",
+      "family_index": 51,
+      "source_ordinal": 45,
+      "source_name": "Ngaoundaye",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9254,
+      "source_id": "gb:CAF:ADM2:33826404B79989829713557",
+      "family_index": 51,
+      "source_ordinal": 49,
+      "source_name": "Kabo",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9282,
+      "source_id": "gb:CAF:ADM3:52401652B86682569461435",
+      "family_index": 52,
+      "source_ordinal": 5,
+      "source_name": "Mongoumba",
+      "source_owners": [
+        10639
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9284,
+      "source_id": "gb:CAF:ADM3:52401652B65052605957591",
+      "family_index": 52,
+      "source_ordinal": 7,
+      "source_name": "Mbaere",
+      "source_owners": [
+        10594
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9288,
+      "source_id": "gb:CAF:ADM3:52401652B8260276568756",
+      "family_index": 52,
+      "source_ordinal": 11,
+      "source_name": "Kounde",
+      "source_owners": [
+        10633
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9304,
+      "source_id": "gb:CAF:ADM3:52401652B97101163369552",
+      "family_index": 52,
+      "source_ordinal": 27,
+      "source_name": "Mia-Pende",
+      "source_owners": [
+        10659
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9308,
+      "source_id": "gb:CAF:ADM3:52401652B55058977960820",
+      "family_index": 52,
+      "source_ordinal": 31,
+      "source_name": "Lim",
+      "source_owners": [
+        10571
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9310,
+      "source_id": "gb:CAF:ADM3:52401652B68266089784761",
+      "family_index": 52,
+      "source_ordinal": 33,
+      "source_name": "Mbili",
+      "source_owners": [
+        10602
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9311,
+      "source_id": "gb:CAF:ADM3:52401652B21565212342700",
+      "family_index": 52,
+      "source_ordinal": 34,
+      "source_name": "Kodi",
+      "source_owners": [
+        10519
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9321,
+      "source_id": "gb:CAF:ADM3:52401652B53216405573620",
+      "family_index": 52,
+      "source_ordinal": 44,
+      "source_name": "Salo",
+      "source_owners": [
+        10567
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9322,
+      "source_id": "gb:CAF:ADM3:52401652B99363571212605",
+      "family_index": 52,
+      "source_ordinal": 45,
+      "source_name": "Yobe-Sangha",
+      "source_owners": [
+        10668
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9323,
+      "source_id": "gb:CAF:ADM3:52401652B27659488729720",
+      "family_index": 52,
+      "source_ordinal": 46,
+      "source_name": "Nola",
+      "source_owners": [
+        10532
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9324,
+      "source_id": "gb:CAF:ADM3:52401652B84569563404367",
+      "family_index": 52,
+      "source_ordinal": 47,
+      "source_name": "Ridina",
+      "source_owners": [
+        10635
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9326,
+      "source_id": "gb:CAF:ADM3:52401652B23917510341632",
+      "family_index": 52,
+      "source_ordinal": 49,
+      "source_name": "Ouandja",
+      "source_owners": [
+        10526
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9327,
+      "source_id": "gb:CAF:ADM3:52401652B2286145520715",
+      "family_index": 52,
+      "source_ordinal": 50,
+      "source_name": "Dar El Kouti",
+      "source_owners": [
+        10521
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9330,
+      "source_id": "gb:CAF:ADM3:52401652B67617163165287",
+      "family_index": 52,
+      "source_ordinal": 53,
+      "source_name": "Lili",
+      "source_owners": [
+        10600
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9332,
+      "source_id": "gb:CAF:ADM3:52401652B89925549074146",
+      "family_index": 52,
+      "source_ordinal": 55,
+      "source_name": "Sayo Niakari",
+      "source_owners": [
+        10645
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9335,
+      "source_id": "gb:CAF:ADM3:52401652B65189611062659",
+      "family_index": 52,
+      "source_ordinal": 58,
+      "source_name": "Ouango",
+      "source_owners": [
+        10595
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9337,
+      "source_id": "gb:CAF:ADM3:52401652B14361696899500",
+      "family_index": 52,
+      "source_ordinal": 60,
+      "source_name": "Bimbo",
+      "source_owners": [
+        10504
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9340,
+      "source_id": "gb:CAF:ADM3:52401652B92301081173176",
+      "family_index": 52,
+      "source_ordinal": 63,
+      "source_name": "Galabadja",
+      "source_owners": [
+        10649
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9347,
+      "source_id": "gb:CAF:ADM3:52401652B49227657461354",
+      "family_index": 52,
+      "source_ordinal": 70,
+      "source_name": "Damara",
+      "source_owners": [
+        10559
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9367,
+      "source_id": "gb:CAF:ADM3:52401652B60998928048694",
+      "family_index": 52,
+      "source_ordinal": 90,
+      "source_name": "Zemio",
+      "source_owners": [
+        10584
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9370,
+      "source_id": "gb:CAF:ADM3:52401652B39889213589793",
+      "family_index": 52,
+      "source_ordinal": 93,
+      "source_name": "Nana Markounda",
+      "source_owners": [
+        10552
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9372,
+      "source_id": "gb:CAF:ADM3:52401652B87621344901133",
+      "family_index": 52,
+      "source_ordinal": 95,
+      "source_name": "Niem-Yelewa",
+      "source_owners": [
+        10642
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9373,
+      "source_id": "gb:CAF:ADM3:52401652B98607316941388",
+      "family_index": 52,
+      "source_ordinal": 96,
+      "source_name": "Koui",
+      "source_owners": [
+        10666
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9377,
+      "source_id": "gb:CAF:ADM3:52401652B1604113558171",
+      "family_index": 52,
+      "source_ordinal": 100,
+      "source_name": "Kotto-Oubangui",
+      "source_owners": [
+        10509
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9384,
+      "source_id": "gb:CAF:ADM3:52401652B70517020130267",
+      "family_index": 52,
+      "source_ordinal": 107,
+      "source_name": "Obo",
+      "source_owners": [
+        10605
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9385,
+      "source_id": "gb:CAF:ADM3:52401652B10274630546415",
+      "family_index": 52,
+      "source_ordinal": 108,
+      "source_name": "Mboki",
+      "source_owners": [
+        10494
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9387,
+      "source_id": "gb:CAF:ADM3:52401652B18967628609342",
+      "family_index": 52,
+      "source_ordinal": 110,
+      "source_name": "Rafai",
+      "source_owners": [
+        10515
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9388,
+      "source_id": "gb:CAF:ADM3:52401652B64794494109005",
+      "family_index": 52,
+      "source_ordinal": 111,
+      "source_name": "Zangandou",
+      "source_owners": [
+        10593
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9395,
+      "source_id": "gb:CAF:ADM3:52401652B1736061354694",
+      "family_index": 52,
+      "source_ordinal": 118,
+      "source_name": "Yabongo",
+      "source_owners": [
+        10514
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9411,
+      "source_id": "gb:CAF:ADM3:52401652B74333479476310",
+      "family_index": 52,
+      "source_ordinal": 134,
+      "source_name": "Sido",
+      "source_owners": [
+        10610
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9424,
+      "source_id": "gb:CAF:ADM3:52401652B56175823548729",
+      "family_index": 52,
+      "source_ordinal": 147,
+      "source_name": "Basse-Boumne",
+      "source_owners": [
+        10573
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9427,
+      "source_id": "gb:CAF:ADM3:52401652B30715690483256",
+      "family_index": 52,
+      "source_ordinal": 150,
+      "source_name": "Haute-Boumbe",
+      "source_owners": [
+        10538
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9428,
+      "source_id": "gb:CAF:ADM3:52401652B33074004162122",
+      "family_index": 52,
+      "source_ordinal": 151,
+      "source_name": "Baboua",
+      "source_owners": [
+        10542
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9432,
+      "source_id": "gb:CAF:ADM3:52401652B966947158618",
+      "family_index": 52,
+      "source_ordinal": 155,
+      "source_name": "Goudrot",
+      "source_owners": [
+        10658
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9438,
+      "source_id": "gb:CAF:ADM3:52401652B91880463318488",
+      "family_index": 52,
+      "source_ordinal": 161,
+      "source_name": "Kouango",
+      "source_owners": [
+        10648
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 9443,
+      "source_id": "gb:CAF:ADM3:52401652B5866645340360",
+      "family_index": 52,
+      "source_ordinal": 166,
+      "source_name": "Ouambe",
+      "source_owners": [
+        10580
+      ],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 18301,
+      "source_id": "gb:CMR:ADM1:27767025B32580592296844",
+      "family_index": 66,
+      "source_ordinal": 4,
+      "source_name": "Adamaoua",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 18302,
+      "source_id": "gb:CMR:ADM1:27767025B81519146961984",
+      "family_index": 66,
+      "source_ordinal": 5,
+      "source_name": "East",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 18310,
+      "source_id": "gb:CMR:ADM2:32672807B16068661668461",
+      "family_index": 67,
+      "source_ordinal": 3,
+      "source_name": "Mbere",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 18322,
+      "source_id": "gb:CMR:ADM2:32672807B40314964499081",
+      "family_index": 67,
+      "source_ordinal": 15,
+      "source_name": "Boumba-Et-Ngoko",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 18324,
+      "source_id": "gb:CMR:ADM2:32672807B29047919086815",
+      "family_index": 67,
+      "source_ordinal": 17,
+      "source_name": "Kadei",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 18325,
+      "source_id": "gb:CMR:ADM2:32672807B76674513300734",
+      "family_index": 67,
+      "source_ordinal": 18,
+      "source_name": "Lom-Et-Djerem",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 18340,
+      "source_id": "gb:CMR:ADM2:32672807B45774164265008",
+      "family_index": 67,
+      "source_ordinal": 33,
+      "source_name": "Mayo-Rey",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 18727,
+      "source_id": "gb:COD:ADM1:28894549B55881681467015",
+      "family_index": 69,
+      "source_ordinal": 0,
+      "source_name": "Upper Uele",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 18730,
+      "source_id": "gb:COD:ADM1:28894549B47695765788779",
+      "family_index": 69,
+      "source_ordinal": 3,
+      "source_name": "Lower Uele",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 18732,
+      "source_id": "gb:COD:ADM1:28894549B30663222433478",
+      "family_index": 69,
+      "source_ordinal": 5,
+      "source_name": "Nord-Ubangi",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 18740,
+      "source_id": "gb:COD:ADM1:28894549B79448475719999",
+      "family_index": 69,
+      "source_ordinal": 13,
+      "source_name": "Sud-Ubangi",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 18946,
+      "source_id": "gb:COG:ADM1:67827341B88704799146201",
+      "family_index": 71,
+      "source_ordinal": 4,
+      "source_name": "Likouala",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 18951,
+      "source_id": "gb:COG:ADM1:67827341B91073241467510",
+      "family_index": 71,
+      "source_ordinal": 9,
+      "source_name": "Sangha",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 57091,
+      "source_id": "gb:TCD:ADM1:23847190B13389621272768",
+      "family_index": 317,
+      "source_ordinal": 4,
+      "source_name": "Salamat",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 57092,
+      "source_id": "gb:TCD:ADM1:23847190B78936858597948",
+      "family_index": 317,
+      "source_ordinal": 5,
+      "source_name": "Sila",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 57102,
+      "source_id": "gb:TCD:ADM1:23847190B88704211588167",
+      "family_index": 317,
+      "source_ordinal": 15,
+      "source_name": "Logone Oriental",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_feature_index": 57106,
+      "source_id": "gb:TCD:ADM1:23847190B97640124965572",
+      "family_index": 317,
+      "source_ordinal": 19,
+      "source_name": "Moyen-Chari",
+      "source_owners": [],
+      "geometry_status": "raw-native-supported"
+    }
+  ],
+  "target_level_context": [
+    {
+      "owner_index": 10494,
+      "owner_source_id": "gb:CAF:ADM3:52401652B10274630546415",
+      "owner_name": "Mboki",
+      "province_id": "framework:province:obo:a9ff5fa831a0",
+      "province_index": 3446,
+      "held_key_count": 14,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B10274630546415",
+        "pixel_index": 10494,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 5,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 3,
+            "geometry_sha256": "22bc29e2aa8e9899852ebfab2caef3e91caeaeec2596857b50b213cb5775d12c",
+            "negative_ordinal": 0,
+            "source_id": "gb:COD:ADM1:28894549B47695765788779"
+          },
+          {
+            "feature_ordinal": 2,
+            "geometry_sha256": "fb4253b877fe46050ef6e0ab7c13fb554f07f66cef0cb7f79a0b2a0d5fa60ed4",
+            "negative_ordinal": 1,
+            "source_id": "gb:COD:ADM2:63176286B24678106401017"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B10274630546415",
+        "pixel_index": 10494,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 2,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10504,
+      "owner_source_id": "gb:CAF:ADM3:52401652B14361696899500",
+      "owner_name": "Bimbo",
+      "province_id": "framework:province:bimbo:d5e5bb7f46a1",
+      "province_index": 921,
+      "held_key_count": 12,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B14361696899500",
+        "pixel_index": 10504,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 12,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 13,
+            "geometry_sha256": "c20b374d77e6012887d0583d3cf91b28af997630c09830f084f4d1964f672398",
+            "negative_ordinal": 0,
+            "source_id": "gb:COD:ADM1:28894549B79448475719999"
+          },
+          {
+            "feature_ordinal": 107,
+            "geometry_sha256": "390dcdfa27c2af8fce05684e1d3fe98efe6f9ab2d32af932c863e37d99fd4408",
+            "negative_ordinal": 1,
+            "source_id": "gb:COD:ADM2:63176286B16720510237815"
+          },
+          {
+            "feature_ordinal": 188,
+            "geometry_sha256": "71c8f43aafdf6fc7210b85bad55beb1d2dc49f15a7eed6ebd5da55d110215794",
+            "negative_ordinal": 2,
+            "source_id": "gb:COD:ADM2:63176286B53748739739840"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": null,
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10509,
+      "owner_source_id": "gb:CAF:ADM3:52401652B1604113558171",
+      "owner_name": "Kotto-Oubangui",
+      "province_id": "framework:province:satema:049fa46526bb",
+      "province_index": 4143,
+      "held_key_count": 36,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B1604113558171",
+        "pixel_index": 10509,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 17,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 5,
+            "geometry_sha256": "10d2c28fbc458f8cba14637cc13415f4433f767f7a499831ada0d8f444b6ff8b",
+            "negative_ordinal": 0,
+            "source_id": "gb:COD:ADM1:28894549B30663222433478"
+          },
+          {
+            "feature_ordinal": 144,
+            "geometry_sha256": "2d0669dcdc45daf13d145c0b3b94ff2f71e9fc5586fb9ee4e08b9f3f9128f3cc",
+            "negative_ordinal": 1,
+            "source_id": "gb:COD:ADM2:63176286B77587123851522"
+          },
+          {
+            "feature_ordinal": 185,
+            "geometry_sha256": "5d337a8d73bba0def3595cf73cf8108a80036c3a8fafd763efa35ca822bf1867",
+            "negative_ordinal": 2,
+            "source_id": "gb:COD:ADM2:63176286B72804638257173"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": null,
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10514,
+      "owner_source_id": "gb:CAF:ADM3:52401652B1736061354694",
+      "owner_name": "Yabongo",
+      "province_id": "framework:province:zangba:9db28203562c",
+      "province_index": 5084,
+      "held_key_count": 1,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B1736061354694",
+        "pixel_index": 10514,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 1,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 5,
+            "geometry_sha256": "10d2c28fbc458f8cba14637cc13415f4433f767f7a499831ada0d8f444b6ff8b",
+            "negative_ordinal": 0,
+            "source_id": "gb:COD:ADM1:28894549B30663222433478"
+          },
+          {
+            "feature_ordinal": 13,
+            "geometry_sha256": "c20b374d77e6012887d0583d3cf91b28af997630c09830f084f4d1964f672398",
+            "negative_ordinal": 1,
+            "source_id": "gb:COD:ADM1:28894549B79448475719999"
+          },
+          {
+            "feature_ordinal": 49,
+            "geometry_sha256": "e53b7067fbe88334f2a014cb60d776b1c10d9350596e3dc41352bfdde4baa5a0",
+            "negative_ordinal": 2,
+            "source_id": "gb:COD:ADM2:63176286B98421000452360"
+          },
+          {
+            "feature_ordinal": 144,
+            "geometry_sha256": "2d0669dcdc45daf13d145c0b3b94ff2f71e9fc5586fb9ee4e08b9f3f9128f3cc",
+            "negative_ordinal": 3,
+            "source_id": "gb:COD:ADM2:63176286B77587123851522"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": null,
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10515,
+      "owner_source_id": "gb:CAF:ADM3:52401652B18967628609342",
+      "owner_name": "Rafai",
+      "province_id": "framework:province:rafai:c19fd1cd302f",
+      "province_index": 3881,
+      "held_key_count": 35,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B18967628609342",
+        "pixel_index": 10515,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 36,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 3,
+            "geometry_sha256": "22bc29e2aa8e9899852ebfab2caef3e91caeaeec2596857b50b213cb5775d12c",
+            "negative_ordinal": 0,
+            "source_id": "gb:COD:ADM1:28894549B47695765788779"
+          },
+          {
+            "feature_ordinal": 5,
+            "geometry_sha256": "10d2c28fbc458f8cba14637cc13415f4433f767f7a499831ada0d8f444b6ff8b",
+            "negative_ordinal": 1,
+            "source_id": "gb:COD:ADM1:28894549B30663222433478"
+          },
+          {
+            "feature_ordinal": 2,
+            "geometry_sha256": "fb4253b877fe46050ef6e0ab7c13fb554f07f66cef0cb7f79a0b2a0d5fa60ed4",
+            "negative_ordinal": 2,
+            "source_id": "gb:COD:ADM2:63176286B24678106401017"
+          },
+          {
+            "feature_ordinal": 24,
+            "geometry_sha256": "adac56eb82196ec46b809a5e950d26062b4fd0fddf5d5aca8e20d8ccf51bebf6",
+            "negative_ordinal": 3,
+            "source_id": "gb:COD:ADM2:63176286B80368275017521"
+          },
+          {
+            "feature_ordinal": 4,
+            "geometry_sha256": "413b04a4fd1a277a515d4eb1fb494b037e04cf643be68e71c3a5cc5244a95426",
+            "negative_ordinal": 4,
+            "source_id": "gb:SSD:ADM1:48771326B76913720880161"
+          },
+          {
+            "feature_ordinal": 44,
+            "geometry_sha256": "e35336c1d590f1404163ad9f884f7903b67a8c4ca466ccbff01ded6340fc3d7c",
+            "negative_ordinal": 5,
+            "source_id": "gb:SSD:ADM2:79223893B70929244954658"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B18967628609342",
+        "pixel_index": 10515,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 24,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10519,
+      "owner_source_id": "gb:CAF:ADM3:52401652B21565212342700",
+      "owner_name": "Kodi",
+      "province_id": "framework:province:ngaoundaye:54c3b9f985c5",
+      "province_index": 3251,
+      "held_key_count": 9,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B21565212342700",
+        "pixel_index": 10519,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 57,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 2,
+            "geometry_sha256": "fccfca95ee9658d18f3800009099e2826e464a0dd6796ee4889f8536a6e04964",
+            "negative_ordinal": 0,
+            "source_id": "gb:CMR:ADM1:27767025B7666404469333"
+          },
+          {
+            "feature_ordinal": 33,
+            "geometry_sha256": "9534a4b8a60552acb883241541792e6cfb5b261e50114615ec43ce44041090a7",
+            "negative_ordinal": 1,
+            "source_id": "gb:CMR:ADM2:32672807B45774164265008"
+          },
+          {
+            "feature_ordinal": 19,
+            "geometry_sha256": "91822d691758f3239642f0bb3642c9537378ce15b58964e5dfc7419a69e70a36",
+            "negative_ordinal": 2,
+            "source_id": "gb:CMR:ADM3:9386221B49027895017551"
+          },
+          {
+            "feature_ordinal": 15,
+            "geometry_sha256": "1378f6573f0b266249131fdbe5c3aa9d398f6e5c67b933039bded50527b4eef5",
+            "negative_ordinal": 3,
+            "source_id": "gb:TCD:ADM1:23847190B88704211588167"
+          },
+          {
+            "feature_ordinal": 28,
+            "geometry_sha256": "345bf7d554889b487d8b913de1e0eea87329605c3b554ef3f070c3d64b0b9b37",
+            "negative_ordinal": 4,
+            "source_id": "gb:TCD:ADM2:50815135B14191552615898"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B21565212342700",
+        "pixel_index": 10519,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 54,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10521,
+      "owner_source_id": "gb:CAF:ADM3:52401652B2286145520715",
+      "owner_name": "Dar El Kouti",
+      "province_id": "framework:province:ndele:228bb4aa2c6a",
+      "province_index": 3221,
+      "held_key_count": 11,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B2286145520715",
+        "pixel_index": 10521,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 14,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 4,
+            "geometry_sha256": "0c849ff8ef660e8f4a9a0233dc4b60653a96fe6f82e9639ecbc0ccc7b6e2820e",
+            "negative_ordinal": 0,
+            "source_id": "gb:TCD:ADM1:23847190B13389621272768"
+          },
+          {
+            "feature_ordinal": 19,
+            "geometry_sha256": "5ff2f2fc61833b2d3c9d491de769482b93fb317e71ac3c4c17b370cc381a5782",
+            "negative_ordinal": 1,
+            "source_id": "gb:TCD:ADM1:23847190B97640124965572"
+          },
+          {
+            "feature_ordinal": 38,
+            "geometry_sha256": "ad524a618ca705c03b3d2ba143ea552c90fa851bbc163c053d3a2a813f485b69",
+            "negative_ordinal": 2,
+            "source_id": "gb:TCD:ADM2:50815135B5443465425830"
+          },
+          {
+            "feature_ordinal": 39,
+            "geometry_sha256": "3aa22bcfe78842972a87820840044708fd751d40915eb20ce166acd9cb85ae3a",
+            "negative_ordinal": 3,
+            "source_id": "gb:TCD:ADM2:50815135B94662216566844"
+          },
+          {
+            "feature_ordinal": 45,
+            "geometry_sha256": "c72a8cd0e25af30e6f732e38c57f2ac1c46a542383b8bba2367a333d8ce76d06",
+            "negative_ordinal": 4,
+            "source_id": "gb:TCD:ADM2:50815135B51440340925469"
+          },
+          {
+            "feature_ordinal": 61,
+            "geometry_sha256": "108753774e2e5b2585d464a9d4861835a1d004ebd92e74bfdded3cf78dcf93c9",
+            "negative_ordinal": 5,
+            "source_id": "gb:TCD:ADM2:50815135B48101754695472"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B2286145520715",
+        "pixel_index": 10521,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 7,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10526,
+      "owner_source_id": "gb:CAF:ADM3:52401652B23917510341632",
+      "owner_name": "Ouandja",
+      "province_id": "framework:province:birao:22cb07160dcf",
+      "province_index": 933,
+      "held_key_count": 3,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B23917510341632",
+        "pixel_index": 10526,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 37,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 14,
+            "geometry_sha256": "0974f9dc15773979c60d370d3d468e30d548e266d7cfe0c2d3f8485b5b3703a2",
+            "negative_ordinal": 0,
+            "source_id": "gb:SDN:ADM1:86620642B33888251991816"
+          },
+          {
+            "feature_ordinal": 50,
+            "geometry_sha256": "b0c31a1b313946be84a82eddcee88bd4fb67ec7b4bb3658674f5ce5d18db3d45",
+            "negative_ordinal": 1,
+            "source_id": "gb:SDN:ADM2:16777658B70477888733853"
+          },
+          {
+            "feature_ordinal": 174,
+            "geometry_sha256": "27a29bef4266f774a07ea431a9154a5032f61f04700e88705d79a4643822078c",
+            "negative_ordinal": 2,
+            "source_id": "gb:SDN:ADM2:16777658B44845642747034"
+          },
+          {
+            "feature_ordinal": 4,
+            "geometry_sha256": "0c849ff8ef660e8f4a9a0233dc4b60653a96fe6f82e9639ecbc0ccc7b6e2820e",
+            "negative_ordinal": 3,
+            "source_id": "gb:TCD:ADM1:23847190B13389621272768"
+          },
+          {
+            "feature_ordinal": 43,
+            "geometry_sha256": "27b61b561c4b3561383638ad25a6a12a44840d9c33fce756008b3a766f869d7b",
+            "negative_ordinal": 4,
+            "source_id": "gb:TCD:ADM2:50815135B73615292321578"
+          },
+          {
+            "feature_ordinal": 45,
+            "geometry_sha256": "c72a8cd0e25af30e6f732e38c57f2ac1c46a542383b8bba2367a333d8ce76d06",
+            "negative_ordinal": 5,
+            "source_id": "gb:TCD:ADM2:50815135B51440340925469"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B23917510341632",
+        "pixel_index": 10526,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 34,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10532,
+      "owner_source_id": "gb:CAF:ADM3:52401652B27659488729720",
+      "owner_name": "Nola",
+      "province_id": "framework:province:nola:f1edcac066c6",
+      "province_index": 3298,
+      "held_key_count": 1,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B27659488729720",
+        "pixel_index": 10532,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 1,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 5,
+            "geometry_sha256": "906fad80db92160e7686b0140865e24805f32e2d1190a465adcbfedc73673818",
+            "negative_ordinal": 0,
+            "source_id": "gb:CMR:ADM1:27767025B81519146961984"
+          },
+          {
+            "feature_ordinal": 15,
+            "geometry_sha256": "7b4c77a55745435f8e43fa7b15b2b0d7fe4d94f0eb6b072c70c34e56df96865f",
+            "negative_ordinal": 1,
+            "source_id": "gb:CMR:ADM2:32672807B40314964499081"
+          },
+          {
+            "feature_ordinal": 35,
+            "geometry_sha256": "197600edf1be7f87d4451b98f6101c8070d324f48e0c33a298a4181ac7065c64",
+            "negative_ordinal": 2,
+            "source_id": "gb:CMR:ADM3:9386221B14880096394558"
+          },
+          {
+            "feature_ordinal": 4,
+            "geometry_sha256": "87cdd75ecd99b913dd104604452d9fcace3439b5a4618cf3e410421865ea1760",
+            "negative_ordinal": 3,
+            "source_id": "gb:COG:ADM1:67827341B88704799146201"
+          },
+          {
+            "feature_ordinal": 41,
+            "geometry_sha256": "ff020d893f2e108769df9dc0cf52e4474c8f109c09210c8a3d27edacd11bf456",
+            "negative_ordinal": 4,
+            "source_id": "gb:COG:ADM2:1427508B65710782923529"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": null,
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10538,
+      "owner_source_id": "gb:CAF:ADM3:52401652B30715690483256",
+      "owner_name": "Haute-Boumbe",
+      "province_id": "framework:province:amada-gaza:d16e1f1903ec",
+      "province_index": 557,
+      "held_key_count": 1,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B30715690483256",
+        "pixel_index": 10538,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 7,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 5,
+            "geometry_sha256": "906fad80db92160e7686b0140865e24805f32e2d1190a465adcbfedc73673818",
+            "negative_ordinal": 0,
+            "source_id": "gb:CMR:ADM1:27767025B81519146961984"
+          },
+          {
+            "feature_ordinal": 17,
+            "geometry_sha256": "0c723902e1802b51c856b9b75783ea2a9b8028e0bf570cc4c29dea2c8356feb3",
+            "negative_ordinal": 1,
+            "source_id": "gb:CMR:ADM2:32672807B29047919086815"
+          },
+          {
+            "feature_ordinal": 33,
+            "geometry_sha256": "7b9fab3601cda574869ba49e7a6d84fd8e44eb1f761287f27932cf27d9a0085b",
+            "negative_ordinal": 2,
+            "source_id": "gb:CMR:ADM3:9386221B55011074826496"
+          },
+          {
+            "feature_ordinal": 92,
+            "geometry_sha256": "27770ceb026f235eeee163f1c87f183cf7e5f42e37c02918859a9f06ef20bd40",
+            "negative_ordinal": 3,
+            "source_id": "gb:CMR:ADM3:9386221B69502983306293"
+          },
+          {
+            "feature_ordinal": 127,
+            "geometry_sha256": "1c9c44a716b5d2cac17e90d041009680dfe6342bb28a289a9a2be620c2452888",
+            "negative_ordinal": 4,
+            "source_id": "gb:CMR:ADM3:9386221B21402585210419"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B30715690483256",
+        "pixel_index": 10538,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 6,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10542,
+      "owner_source_id": "gb:CAF:ADM3:52401652B33074004162122",
+      "owner_name": "Baboua",
+      "province_id": "framework:province:baboua:bca07ccb3682",
+      "province_index": 730,
+      "held_key_count": 3,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B33074004162122",
+        "pixel_index": 10542,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 86,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 4,
+            "geometry_sha256": "86e6b7d16407d83638a98e2b9b57bb6af86999e4755dc31fa3e31798ecc48ed3",
+            "negative_ordinal": 0,
+            "source_id": "gb:CMR:ADM1:27767025B32580592296844"
+          },
+          {
+            "feature_ordinal": 5,
+            "geometry_sha256": "906fad80db92160e7686b0140865e24805f32e2d1190a465adcbfedc73673818",
+            "negative_ordinal": 1,
+            "source_id": "gb:CMR:ADM1:27767025B81519146961984"
+          },
+          {
+            "feature_ordinal": 3,
+            "geometry_sha256": "ddf83ab1edc5518e616a51f2b5c2906020890879829eb5ea0c869701a035aeef",
+            "negative_ordinal": 2,
+            "source_id": "gb:CMR:ADM2:32672807B16068661668461"
+          },
+          {
+            "feature_ordinal": 17,
+            "geometry_sha256": "0c723902e1802b51c856b9b75783ea2a9b8028e0bf570cc4c29dea2c8356feb3",
+            "negative_ordinal": 3,
+            "source_id": "gb:CMR:ADM2:32672807B29047919086815"
+          },
+          {
+            "feature_ordinal": 18,
+            "geometry_sha256": "84c7292c9841ad339d334c4e62dca30dbd341a4055d221ecb3962eca315ec9e0",
+            "negative_ordinal": 4,
+            "source_id": "gb:CMR:ADM2:32672807B76674513300734"
+          },
+          {
+            "feature_ordinal": 69,
+            "geometry_sha256": "9e1ab996aa8a04dfef35724e32ea90e9283875541dd4a991c69b11a675c45dc1",
+            "negative_ordinal": 5,
+            "source_id": "gb:CMR:ADM3:9386221B82666420307712"
+          },
+          {
+            "feature_ordinal": 79,
+            "geometry_sha256": "3172941dda62b2ee83f6aedc58abb39cc9f2cab87959b3491e51cc686e2ec8c7",
+            "negative_ordinal": 6,
+            "source_id": "gb:CMR:ADM3:9386221B24384451871957"
+          },
+          {
+            "feature_ordinal": 116,
+            "geometry_sha256": "a02c7657778baa457c81c34a34d95a365331602660e5c2b605df97bbe54e7e30",
+            "negative_ordinal": 7,
+            "source_id": "gb:CMR:ADM3:9386221B62336518359995"
+          },
+          {
+            "feature_ordinal": 127,
+            "geometry_sha256": "1c9c44a716b5d2cac17e90d041009680dfe6342bb28a289a9a2be620c2452888",
+            "negative_ordinal": 8,
+            "source_id": "gb:CMR:ADM3:9386221B21402585210419"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B33074004162122",
+        "pixel_index": 10542,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 83,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10552,
+      "owner_source_id": "gb:CAF:ADM3:52401652B39889213589793",
+      "owner_name": "Nana Markounda",
+      "province_id": "framework:province:markounda:9afafdadda02",
+      "province_index": 2909,
+      "held_key_count": 7,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B39889213589793",
+        "pixel_index": 10552,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 6,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 15,
+            "geometry_sha256": "1378f6573f0b266249131fdbe5c3aa9d398f6e5c67b933039bded50527b4eef5",
+            "negative_ordinal": 0,
+            "source_id": "gb:TCD:ADM1:23847190B88704211588167"
+          },
+          {
+            "feature_ordinal": 16,
+            "geometry_sha256": "a1072f79553f53455460d30270f37b79f7d233c3be38076815c95c69adab10b5",
+            "negative_ordinal": 1,
+            "source_id": "gb:TCD:ADM1:23847190B9655016434554"
+          },
+          {
+            "feature_ordinal": 25,
+            "geometry_sha256": "5fc5be1156557578479c3c6e5be5415113d9b89e980c2d50ca80d786ea42a067",
+            "negative_ordinal": 2,
+            "source_id": "gb:TCD:ADM2:50815135B27112556056018"
+          },
+          {
+            "feature_ordinal": 27,
+            "geometry_sha256": "9e0cf95f89b269fe971389dc342d1679980cfe89958b6c184b2a336ae7417165",
+            "negative_ordinal": 3,
+            "source_id": "gb:TCD:ADM2:50815135B51143570982343"
+          },
+          {
+            "feature_ordinal": 30,
+            "geometry_sha256": "14b4bbafd9dfc168c668eae9d0883e3f15c0ffe2310a0a5a11696100cd2f9cd8",
+            "negative_ordinal": 4,
+            "source_id": "gb:TCD:ADM2:50815135B19223233714044"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B39889213589793",
+        "pixel_index": 10552,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 4,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10559,
+      "owner_source_id": "gb:CAF:ADM3:52401652B49227657461354",
+      "owner_name": "Damara",
+      "province_id": "framework:province:damara:de04dd26523a",
+      "province_index": 1438,
+      "held_key_count": 3,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B49227657461354",
+        "pixel_index": 10559,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 3,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 5,
+            "geometry_sha256": "10d2c28fbc458f8cba14637cc13415f4433f767f7a499831ada0d8f444b6ff8b",
+            "negative_ordinal": 0,
+            "source_id": "gb:COD:ADM1:28894549B30663222433478"
+          },
+          {
+            "feature_ordinal": 13,
+            "geometry_sha256": "c20b374d77e6012887d0583d3cf91b28af997630c09830f084f4d1964f672398",
+            "negative_ordinal": 1,
+            "source_id": "gb:COD:ADM1:28894549B79448475719999"
+          },
+          {
+            "feature_ordinal": 26,
+            "geometry_sha256": "a54525a3a36b45aa273ae81299620fb48be885aa2166978716a2d26a03c6da23",
+            "negative_ordinal": 2,
+            "source_id": "gb:COD:ADM2:63176286B50098701443330"
+          },
+          {
+            "feature_ordinal": 107,
+            "geometry_sha256": "390dcdfa27c2af8fce05684e1d3fe98efe6f9ab2d32af932c863e37d99fd4408",
+            "negative_ordinal": 3,
+            "source_id": "gb:COD:ADM2:63176286B16720510237815"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": null,
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10567,
+      "owner_source_id": "gb:CAF:ADM3:52401652B53216405573620",
+      "owner_name": "Salo",
+      "province_id": "framework:province:nola:f1edcac066c6",
+      "province_index": 3298,
+      "held_key_count": 20,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B53216405573620",
+        "pixel_index": 10567,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 33,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 5,
+            "geometry_sha256": "906fad80db92160e7686b0140865e24805f32e2d1190a465adcbfedc73673818",
+            "negative_ordinal": 0,
+            "source_id": "gb:CMR:ADM1:27767025B81519146961984"
+          },
+          {
+            "feature_ordinal": 15,
+            "geometry_sha256": "7b4c77a55745435f8e43fa7b15b2b0d7fe4d94f0eb6b072c70c34e56df96865f",
+            "negative_ordinal": 1,
+            "source_id": "gb:CMR:ADM2:32672807B40314964499081"
+          },
+          {
+            "feature_ordinal": 35,
+            "geometry_sha256": "197600edf1be7f87d4451b98f6101c8070d324f48e0c33a298a4181ac7065c64",
+            "negative_ordinal": 2,
+            "source_id": "gb:CMR:ADM3:9386221B14880096394558"
+          },
+          {
+            "feature_ordinal": 198,
+            "geometry_sha256": "a9d3b352a0d1b21942335550263a8b948c31c37df144d1c1de15b9139238d9a0",
+            "negative_ordinal": 3,
+            "source_id": "gb:CMR:ADM3:9386221B27515073075422"
+          },
+          {
+            "feature_ordinal": 9,
+            "geometry_sha256": "6cfdbe1c7373b245df02a68a1e48c434a2e53c15461901a3b97bae13aea2426c",
+            "negative_ordinal": 4,
+            "source_id": "gb:COG:ADM1:67827341B91073241467510"
+          },
+          {
+            "feature_ordinal": 39,
+            "geometry_sha256": "83858e8cd46fad9b3c02116285e63d5f45358940fff544280fbcce2a59fb2ecd",
+            "negative_ordinal": 5,
+            "source_id": "gb:COG:ADM2:1427508B81001765289527"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B53216405573620",
+        "pixel_index": 10567,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 13,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10571,
+      "owner_source_id": "gb:CAF:ADM3:52401652B55058977960820",
+      "owner_name": "Lim",
+      "province_id": "framework:province:ngaoundaye:54c3b9f985c5",
+      "province_index": 3251,
+      "held_key_count": 1,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B55058977960820",
+        "pixel_index": 10571,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 12,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 2,
+            "geometry_sha256": "fccfca95ee9658d18f3800009099e2826e464a0dd6796ee4889f8536a6e04964",
+            "negative_ordinal": 0,
+            "source_id": "gb:CMR:ADM1:27767025B7666404469333"
+          },
+          {
+            "feature_ordinal": 33,
+            "geometry_sha256": "9534a4b8a60552acb883241541792e6cfb5b261e50114615ec43ce44041090a7",
+            "negative_ordinal": 1,
+            "source_id": "gb:CMR:ADM2:32672807B45774164265008"
+          },
+          {
+            "feature_ordinal": 19,
+            "geometry_sha256": "91822d691758f3239642f0bb3642c9537378ce15b58964e5dfc7419a69e70a36",
+            "negative_ordinal": 2,
+            "source_id": "gb:CMR:ADM3:9386221B49027895017551"
+          },
+          {
+            "feature_ordinal": 15,
+            "geometry_sha256": "1378f6573f0b266249131fdbe5c3aa9d398f6e5c67b933039bded50527b4eef5",
+            "negative_ordinal": 3,
+            "source_id": "gb:TCD:ADM1:23847190B88704211588167"
+          },
+          {
+            "feature_ordinal": 28,
+            "geometry_sha256": "345bf7d554889b487d8b913de1e0eea87329605c3b554ef3f070c3d64b0b9b37",
+            "negative_ordinal": 4,
+            "source_id": "gb:TCD:ADM2:50815135B14191552615898"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B55058977960820",
+        "pixel_index": 10571,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 11,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10573,
+      "owner_source_id": "gb:CAF:ADM3:52401652B56175823548729",
+      "owner_name": "Basse-Boumne",
+      "province_id": "framework:province:gamboula:88c8afbf6d9f",
+      "province_index": 1779,
+      "held_key_count": 8,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B56175823548729",
+        "pixel_index": 10573,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 56,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 5,
+            "geometry_sha256": "906fad80db92160e7686b0140865e24805f32e2d1190a465adcbfedc73673818",
+            "negative_ordinal": 0,
+            "source_id": "gb:CMR:ADM1:27767025B81519146961984"
+          },
+          {
+            "feature_ordinal": 15,
+            "geometry_sha256": "7b4c77a55745435f8e43fa7b15b2b0d7fe4d94f0eb6b072c70c34e56df96865f",
+            "negative_ordinal": 1,
+            "source_id": "gb:CMR:ADM2:32672807B40314964499081"
+          },
+          {
+            "feature_ordinal": 17,
+            "geometry_sha256": "0c723902e1802b51c856b9b75783ea2a9b8028e0bf570cc4c29dea2c8356feb3",
+            "negative_ordinal": 2,
+            "source_id": "gb:CMR:ADM2:32672807B29047919086815"
+          },
+          {
+            "feature_ordinal": 33,
+            "geometry_sha256": "7b9fab3601cda574869ba49e7a6d84fd8e44eb1f761287f27932cf27d9a0085b",
+            "negative_ordinal": 3,
+            "source_id": "gb:CMR:ADM3:9386221B55011074826496"
+          },
+          {
+            "feature_ordinal": 71,
+            "geometry_sha256": "2615e3e3b58e278ae1a0c83b6d9654cfac2753c49b36c30da384ece950c0c310",
+            "negative_ordinal": 4,
+            "source_id": "gb:CMR:ADM3:9386221B22697281755042"
+          },
+          {
+            "feature_ordinal": 92,
+            "geometry_sha256": "27770ceb026f235eeee163f1c87f183cf7e5f42e37c02918859a9f06ef20bd40",
+            "negative_ordinal": 5,
+            "source_id": "gb:CMR:ADM3:9386221B69502983306293"
+          },
+          {
+            "feature_ordinal": 124,
+            "geometry_sha256": "8f16e57df0b96ae533855dc65336953eddbfb2777dac54e3c38524126eba7dfc",
+            "negative_ordinal": 6,
+            "source_id": "gb:CMR:ADM3:9386221B45326950687577"
+          },
+          {
+            "feature_ordinal": 139,
+            "geometry_sha256": "c5fed6bc2bc1dd6d11046b57e00433d516b1f6e840a68a387f12f877a5717f04",
+            "negative_ordinal": 7,
+            "source_id": "gb:CMR:ADM3:9386221B33572677015820"
+          },
+          {
+            "feature_ordinal": 311,
+            "geometry_sha256": "bebdbb95dd48ddb3f8d8487cab22fde1e1f260c68851ba2d0feb5feadbd65f6c",
+            "negative_ordinal": 8,
+            "source_id": "gb:CMR:ADM3:9386221B12783546794801"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B56175823548729",
+        "pixel_index": 10573,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 50,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10580,
+      "owner_source_id": "gb:CAF:ADM3:52401652B5866645340360",
+      "owner_name": "Ouambe",
+      "province_id": "framework:province:zangba:9db28203562c",
+      "province_index": 5084,
+      "held_key_count": 13,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B5866645340360",
+        "pixel_index": 10580,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 4,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 5,
+            "geometry_sha256": "10d2c28fbc458f8cba14637cc13415f4433f767f7a499831ada0d8f444b6ff8b",
+            "negative_ordinal": 0,
+            "source_id": "gb:COD:ADM1:28894549B30663222433478"
+          },
+          {
+            "feature_ordinal": 13,
+            "geometry_sha256": "c20b374d77e6012887d0583d3cf91b28af997630c09830f084f4d1964f672398",
+            "negative_ordinal": 1,
+            "source_id": "gb:COD:ADM1:28894549B79448475719999"
+          },
+          {
+            "feature_ordinal": 49,
+            "geometry_sha256": "e53b7067fbe88334f2a014cb60d776b1c10d9350596e3dc41352bfdde4baa5a0",
+            "negative_ordinal": 2,
+            "source_id": "gb:COD:ADM2:63176286B98421000452360"
+          },
+          {
+            "feature_ordinal": 144,
+            "geometry_sha256": "2d0669dcdc45daf13d145c0b3b94ff2f71e9fc5586fb9ee4e08b9f3f9128f3cc",
+            "negative_ordinal": 3,
+            "source_id": "gb:COD:ADM2:63176286B77587123851522"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": null,
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10584,
+      "owner_source_id": "gb:CAF:ADM3:52401652B60998928048694",
+      "owner_name": "Zemio",
+      "province_id": "framework:province:zemio:004c36f51168",
+      "province_index": 5095,
+      "held_key_count": 10,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B60998928048694",
+        "pixel_index": 10584,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 11,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 3,
+            "geometry_sha256": "22bc29e2aa8e9899852ebfab2caef3e91caeaeec2596857b50b213cb5775d12c",
+            "negative_ordinal": 0,
+            "source_id": "gb:COD:ADM1:28894549B47695765788779"
+          },
+          {
+            "feature_ordinal": 2,
+            "geometry_sha256": "fb4253b877fe46050ef6e0ab7c13fb554f07f66cef0cb7f79a0b2a0d5fa60ed4",
+            "negative_ordinal": 1,
+            "source_id": "gb:COD:ADM2:63176286B24678106401017"
+          },
+          {
+            "feature_ordinal": 24,
+            "geometry_sha256": "adac56eb82196ec46b809a5e950d26062b4fd0fddf5d5aca8e20d8ccf51bebf6",
+            "negative_ordinal": 2,
+            "source_id": "gb:COD:ADM2:63176286B80368275017521"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B60998928048694",
+        "pixel_index": 10584,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 1,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10593,
+      "owner_source_id": "gb:CAF:ADM3:52401652B64794494109005",
+      "owner_name": "Zangandou",
+      "province_id": "framework:province:bangassou:578b529a0124",
+      "province_index": 790,
+      "held_key_count": 29,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B64794494109005",
+        "pixel_index": 10593,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 15,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 3,
+            "geometry_sha256": "22bc29e2aa8e9899852ebfab2caef3e91caeaeec2596857b50b213cb5775d12c",
+            "negative_ordinal": 0,
+            "source_id": "gb:COD:ADM1:28894549B47695765788779"
+          },
+          {
+            "feature_ordinal": 5,
+            "geometry_sha256": "10d2c28fbc458f8cba14637cc13415f4433f767f7a499831ada0d8f444b6ff8b",
+            "negative_ordinal": 1,
+            "source_id": "gb:COD:ADM1:28894549B30663222433478"
+          },
+          {
+            "feature_ordinal": 24,
+            "geometry_sha256": "adac56eb82196ec46b809a5e950d26062b4fd0fddf5d5aca8e20d8ccf51bebf6",
+            "negative_ordinal": 2,
+            "source_id": "gb:COD:ADM2:63176286B80368275017521"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B64794494109005",
+        "pixel_index": 10593,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 7,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10594,
+      "owner_source_id": "gb:CAF:ADM3:52401652B65052605957591",
+      "owner_name": "Mbaere",
+      "province_id": "framework:province:bambio:411061ff7c58",
+      "province_index": 783,
+      "held_key_count": 3,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B65052605957591",
+        "pixel_index": 10594,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 6,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 4,
+            "geometry_sha256": "87cdd75ecd99b913dd104604452d9fcace3439b5a4618cf3e410421865ea1760",
+            "negative_ordinal": 0,
+            "source_id": "gb:COG:ADM1:67827341B88704799146201"
+          },
+          {
+            "feature_ordinal": 41,
+            "geometry_sha256": "ff020d893f2e108769df9dc0cf52e4474c8f109c09210c8a3d27edacd11bf456",
+            "negative_ordinal": 1,
+            "source_id": "gb:COG:ADM2:1427508B65710782923529"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B65052605957591",
+        "pixel_index": 10594,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 3,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10595,
+      "owner_source_id": "gb:CAF:ADM3:52401652B65189611062659",
+      "owner_name": "Ouango",
+      "province_id": "framework:province:ouango:9d1964a0d013",
+      "province_index": 3534,
+      "held_key_count": 2,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B65189611062659",
+        "pixel_index": 10595,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 2,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 3,
+            "geometry_sha256": "22bc29e2aa8e9899852ebfab2caef3e91caeaeec2596857b50b213cb5775d12c",
+            "negative_ordinal": 0,
+            "source_id": "gb:COD:ADM1:28894549B47695765788779"
+          },
+          {
+            "feature_ordinal": 5,
+            "geometry_sha256": "10d2c28fbc458f8cba14637cc13415f4433f767f7a499831ada0d8f444b6ff8b",
+            "negative_ordinal": 1,
+            "source_id": "gb:COD:ADM1:28894549B30663222433478"
+          },
+          {
+            "feature_ordinal": 24,
+            "geometry_sha256": "adac56eb82196ec46b809a5e950d26062b4fd0fddf5d5aca8e20d8ccf51bebf6",
+            "negative_ordinal": 2,
+            "source_id": "gb:COD:ADM2:63176286B80368275017521"
+          },
+          {
+            "feature_ordinal": 185,
+            "geometry_sha256": "5d337a8d73bba0def3595cf73cf8108a80036c3a8fafd763efa35ca822bf1867",
+            "negative_ordinal": 3,
+            "source_id": "gb:COD:ADM2:63176286B72804638257173"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": null,
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10600,
+      "owner_source_id": "gb:CAF:ADM3:52401652B67617163165287",
+      "owner_name": "Lili",
+      "province_id": "framework:province:bambouti:ab10be08e232",
+      "province_index": 784,
+      "held_key_count": 5,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B67617163165287",
+        "pixel_index": 10600,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 167,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 0,
+            "geometry_sha256": "6dafb10ae7e946a1822a734b78a8a87a788917708b9ed93dfeb787eb1fa83dd6",
+            "negative_ordinal": 0,
+            "source_id": "gb:COD:ADM1:28894549B55881681467015"
+          },
+          {
+            "feature_ordinal": 3,
+            "geometry_sha256": "22bc29e2aa8e9899852ebfab2caef3e91caeaeec2596857b50b213cb5775d12c",
+            "negative_ordinal": 1,
+            "source_id": "gb:COD:ADM1:28894549B47695765788779"
+          },
+          {
+            "feature_ordinal": 2,
+            "geometry_sha256": "fb4253b877fe46050ef6e0ab7c13fb554f07f66cef0cb7f79a0b2a0d5fa60ed4",
+            "negative_ordinal": 2,
+            "source_id": "gb:COD:ADM2:63176286B24678106401017"
+          },
+          {
+            "feature_ordinal": 45,
+            "geometry_sha256": "27866f12f961f3d600da9d3a75e020d0c81432a61d658dbd107bcbe63b9e3450",
+            "negative_ordinal": 3,
+            "source_id": "gb:COD:ADM2:63176286B6974395638231"
+          },
+          {
+            "feature_ordinal": 8,
+            "geometry_sha256": "ee00ca5401fec6a8816b54cb7d3f5b677df098d2e36f87c1e53cd5551b8cbdcf",
+            "negative_ordinal": 4,
+            "source_id": "gb:SSD:ADM1:48771326B90797869503386"
+          },
+          {
+            "feature_ordinal": 52,
+            "geometry_sha256": "77f02a237415f6df7adebf943ca86b79641ec0705643eb7547e6805eac5287b1",
+            "negative_ordinal": 5,
+            "source_id": "gb:SSD:ADM2:79223893B74346966367837"
+          },
+          {
+            "feature_ordinal": 53,
+            "geometry_sha256": "93c5facf8ad57c06cde53ce2fc0c412c0f6aec12ed0a7f521e2b06751b88ae9a",
+            "negative_ordinal": 6,
+            "source_id": "gb:SSD:ADM2:79223893B47853667167464"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B67617163165287",
+        "pixel_index": 10600,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 163,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10602,
+      "owner_source_id": "gb:CAF:ADM3:52401652B68266089784761",
+      "owner_name": "Mbili",
+      "province_id": "framework:province:ngaoundaye:54c3b9f985c5",
+      "province_index": 3251,
+      "held_key_count": 4,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B68266089784761",
+        "pixel_index": 10602,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 56,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 2,
+            "geometry_sha256": "fccfca95ee9658d18f3800009099e2826e464a0dd6796ee4889f8536a6e04964",
+            "negative_ordinal": 0,
+            "source_id": "gb:CMR:ADM1:27767025B7666404469333"
+          },
+          {
+            "feature_ordinal": 4,
+            "geometry_sha256": "86e6b7d16407d83638a98e2b9b57bb6af86999e4755dc31fa3e31798ecc48ed3",
+            "negative_ordinal": 1,
+            "source_id": "gb:CMR:ADM1:27767025B32580592296844"
+          },
+          {
+            "feature_ordinal": 3,
+            "geometry_sha256": "ddf83ab1edc5518e616a51f2b5c2906020890879829eb5ea0c869701a035aeef",
+            "negative_ordinal": 2,
+            "source_id": "gb:CMR:ADM2:32672807B16068661668461"
+          },
+          {
+            "feature_ordinal": 33,
+            "geometry_sha256": "9534a4b8a60552acb883241541792e6cfb5b261e50114615ec43ce44041090a7",
+            "negative_ordinal": 3,
+            "source_id": "gb:CMR:ADM2:32672807B45774164265008"
+          },
+          {
+            "feature_ordinal": 19,
+            "geometry_sha256": "91822d691758f3239642f0bb3642c9537378ce15b58964e5dfc7419a69e70a36",
+            "negative_ordinal": 4,
+            "source_id": "gb:CMR:ADM3:9386221B49027895017551"
+          },
+          {
+            "feature_ordinal": 74,
+            "geometry_sha256": "1f2adb7f42ab773b2fa365a779924b6329eaa6fd8b683a59cb6c6501727d8d09",
+            "negative_ordinal": 5,
+            "source_id": "gb:CMR:ADM3:9386221B43590333993773"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B68266089784761",
+        "pixel_index": 10602,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 52,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10605,
+      "owner_source_id": "gb:CAF:ADM3:52401652B70517020130267",
+      "owner_name": "Obo",
+      "province_id": "framework:province:obo:a9ff5fa831a0",
+      "province_index": 3446,
+      "held_key_count": 32,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B70517020130267",
+        "pixel_index": 10605,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 18,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 3,
+            "geometry_sha256": "22bc29e2aa8e9899852ebfab2caef3e91caeaeec2596857b50b213cb5775d12c",
+            "negative_ordinal": 0,
+            "source_id": "gb:COD:ADM1:28894549B47695765788779"
+          },
+          {
+            "feature_ordinal": 2,
+            "geometry_sha256": "fb4253b877fe46050ef6e0ab7c13fb554f07f66cef0cb7f79a0b2a0d5fa60ed4",
+            "negative_ordinal": 1,
+            "source_id": "gb:COD:ADM2:63176286B24678106401017"
+          },
+          {
+            "feature_ordinal": 8,
+            "geometry_sha256": "ee00ca5401fec6a8816b54cb7d3f5b677df098d2e36f87c1e53cd5551b8cbdcf",
+            "negative_ordinal": 2,
+            "source_id": "gb:SSD:ADM1:48771326B90797869503386"
+          },
+          {
+            "feature_ordinal": 53,
+            "geometry_sha256": "93c5facf8ad57c06cde53ce2fc0c412c0f6aec12ed0a7f521e2b06751b88ae9a",
+            "negative_ordinal": 3,
+            "source_id": "gb:SSD:ADM2:79223893B47853667167464"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B70517020130267",
+        "pixel_index": 10605,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 12,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10610,
+      "owner_source_id": "gb:CAF:ADM3:52401652B74333479476310",
+      "owner_name": "Sido",
+      "province_id": "framework:province:kabo:1b866cd0c14b",
+      "province_index": 2290,
+      "held_key_count": 19,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B74333479476310",
+        "pixel_index": 10610,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 26,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 16,
+            "geometry_sha256": "a1072f79553f53455460d30270f37b79f7d233c3be38076815c95c69adab10b5",
+            "negative_ordinal": 0,
+            "source_id": "gb:TCD:ADM1:23847190B9655016434554"
+          },
+          {
+            "feature_ordinal": 19,
+            "geometry_sha256": "5ff2f2fc61833b2d3c9d491de769482b93fb317e71ac3c4c17b370cc381a5782",
+            "negative_ordinal": 1,
+            "source_id": "gb:TCD:ADM1:23847190B97640124965572"
+          },
+          {
+            "feature_ordinal": 30,
+            "geometry_sha256": "14b4bbafd9dfc168c668eae9d0883e3f15c0ffe2310a0a5a11696100cd2f9cd8",
+            "negative_ordinal": 2,
+            "source_id": "gb:TCD:ADM2:50815135B19223233714044"
+          },
+          {
+            "feature_ordinal": 38,
+            "geometry_sha256": "ad524a618ca705c03b3d2ba143ea552c90fa851bbc163c053d3a2a813f485b69",
+            "negative_ordinal": 3,
+            "source_id": "gb:TCD:ADM2:50815135B5443465425830"
+          },
+          {
+            "feature_ordinal": 61,
+            "geometry_sha256": "108753774e2e5b2585d464a9d4861835a1d004ebd92e74bfdded3cf78dcf93c9",
+            "negative_ordinal": 4,
+            "source_id": "gb:TCD:ADM2:50815135B48101754695472"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B74333479476310",
+        "pixel_index": 10610,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 20,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10633,
+      "owner_source_id": "gb:CAF:ADM3:52401652B8260276568756",
+      "owner_name": "Kounde",
+      "province_id": "framework:province:baboua:bca07ccb3682",
+      "province_index": 730,
+      "held_key_count": 6,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B8260276568756",
+        "pixel_index": 10633,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 38,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 4,
+            "geometry_sha256": "86e6b7d16407d83638a98e2b9b57bb6af86999e4755dc31fa3e31798ecc48ed3",
+            "negative_ordinal": 0,
+            "source_id": "gb:CMR:ADM1:27767025B32580592296844"
+          },
+          {
+            "feature_ordinal": 5,
+            "geometry_sha256": "906fad80db92160e7686b0140865e24805f32e2d1190a465adcbfedc73673818",
+            "negative_ordinal": 1,
+            "source_id": "gb:CMR:ADM1:27767025B81519146961984"
+          },
+          {
+            "feature_ordinal": 3,
+            "geometry_sha256": "ddf83ab1edc5518e616a51f2b5c2906020890879829eb5ea0c869701a035aeef",
+            "negative_ordinal": 2,
+            "source_id": "gb:CMR:ADM2:32672807B16068661668461"
+          },
+          {
+            "feature_ordinal": 18,
+            "geometry_sha256": "84c7292c9841ad339d334c4e62dca30dbd341a4055d221ecb3962eca315ec9e0",
+            "negative_ordinal": 3,
+            "source_id": "gb:CMR:ADM2:32672807B76674513300734"
+          },
+          {
+            "feature_ordinal": 69,
+            "geometry_sha256": "9e1ab996aa8a04dfef35724e32ea90e9283875541dd4a991c69b11a675c45dc1",
+            "negative_ordinal": 4,
+            "source_id": "gb:CMR:ADM3:9386221B82666420307712"
+          },
+          {
+            "feature_ordinal": 79,
+            "geometry_sha256": "3172941dda62b2ee83f6aedc58abb39cc9f2cab87959b3491e51cc686e2ec8c7",
+            "negative_ordinal": 5,
+            "source_id": "gb:CMR:ADM3:9386221B24384451871957"
+          },
+          {
+            "feature_ordinal": 116,
+            "geometry_sha256": "a02c7657778baa457c81c34a34d95a365331602660e5c2b605df97bbe54e7e30",
+            "negative_ordinal": 6,
+            "source_id": "gb:CMR:ADM3:9386221B62336518359995"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B8260276568756",
+        "pixel_index": 10633,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 35,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10635,
+      "owner_source_id": "gb:CAF:ADM3:52401652B84569563404367",
+      "owner_name": "Ridina",
+      "province_id": "framework:province:birao:22cb07160dcf",
+      "province_index": 933,
+      "held_key_count": 46,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B84569563404367",
+        "pixel_index": 10635,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 77,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 14,
+            "geometry_sha256": "0974f9dc15773979c60d370d3d468e30d548e266d7cfe0c2d3f8485b5b3703a2",
+            "negative_ordinal": 0,
+            "source_id": "gb:SDN:ADM1:86620642B33888251991816"
+          },
+          {
+            "feature_ordinal": 50,
+            "geometry_sha256": "b0c31a1b313946be84a82eddcee88bd4fb67ec7b4bb3658674f5ce5d18db3d45",
+            "negative_ordinal": 1,
+            "source_id": "gb:SDN:ADM2:16777658B70477888733853"
+          },
+          {
+            "feature_ordinal": 140,
+            "geometry_sha256": "4e78f679c5d46a6858d2a705cd942b3247c9f06293be0371d76cc5a92b19f39c",
+            "negative_ordinal": 2,
+            "source_id": "gb:SDN:ADM2:16777658B32181362177213"
+          },
+          {
+            "feature_ordinal": 174,
+            "geometry_sha256": "27a29bef4266f774a07ea431a9154a5032f61f04700e88705d79a4643822078c",
+            "negative_ordinal": 3,
+            "source_id": "gb:SDN:ADM2:16777658B44845642747034"
+          },
+          {
+            "feature_ordinal": 4,
+            "geometry_sha256": "0c849ff8ef660e8f4a9a0233dc4b60653a96fe6f82e9639ecbc0ccc7b6e2820e",
+            "negative_ordinal": 4,
+            "source_id": "gb:TCD:ADM1:23847190B13389621272768"
+          },
+          {
+            "feature_ordinal": 5,
+            "geometry_sha256": "40de82dfbf24cf028214ce90b16b5fac267661e147a8f4744c18d701504b01e3",
+            "negative_ordinal": 5,
+            "source_id": "gb:TCD:ADM1:23847190B78936858597948"
+          },
+          {
+            "feature_ordinal": 45,
+            "geometry_sha256": "c72a8cd0e25af30e6f732e38c57f2ac1c46a542383b8bba2367a333d8ce76d06",
+            "negative_ordinal": 6,
+            "source_id": "gb:TCD:ADM2:50815135B51440340925469"
+          },
+          {
+            "feature_ordinal": 55,
+            "geometry_sha256": "c421726756ab2b413e9ae084786ecd11d95b814a2f44ab9a4b374fb46755a725",
+            "negative_ordinal": 7,
+            "source_id": "gb:TCD:ADM2:50815135B66817745888418"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B84569563404367",
+        "pixel_index": 10635,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 60,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10639,
+      "owner_source_id": "gb:CAF:ADM3:52401652B86682569461435",
+      "owner_name": "Mongoumba",
+      "province_id": "framework:province:mongoumba:8d17de9c98ff",
+      "province_index": 3077,
+      "held_key_count": 7,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B86682569461435",
+        "pixel_index": 10639,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 7,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 13,
+            "geometry_sha256": "c20b374d77e6012887d0583d3cf91b28af997630c09830f084f4d1964f672398",
+            "negative_ordinal": 0,
+            "source_id": "gb:COD:ADM1:28894549B79448475719999"
+          },
+          {
+            "feature_ordinal": 107,
+            "geometry_sha256": "390dcdfa27c2af8fce05684e1d3fe98efe6f9ab2d32af932c863e37d99fd4408",
+            "negative_ordinal": 1,
+            "source_id": "gb:COD:ADM2:63176286B16720510237815"
+          },
+          {
+            "feature_ordinal": 4,
+            "geometry_sha256": "87cdd75ecd99b913dd104604452d9fcace3439b5a4618cf3e410421865ea1760",
+            "negative_ordinal": 2,
+            "source_id": "gb:COG:ADM1:67827341B88704799146201"
+          },
+          {
+            "feature_ordinal": 41,
+            "geometry_sha256": "ff020d893f2e108769df9dc0cf52e4474c8f109c09210c8a3d27edacd11bf456",
+            "negative_ordinal": 3,
+            "source_id": "gb:COG:ADM2:1427508B65710782923529"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": null,
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10642,
+      "owner_source_id": "gb:CAF:ADM3:52401652B87621344901133",
+      "owner_name": "Niem-Yelewa",
+      "province_id": "framework:province:bouar:13501ff7fdc2",
+      "province_index": 1003,
+      "held_key_count": 15,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B87621344901133",
+        "pixel_index": 10642,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 15,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 4,
+            "geometry_sha256": "86e6b7d16407d83638a98e2b9b57bb6af86999e4755dc31fa3e31798ecc48ed3",
+            "negative_ordinal": 0,
+            "source_id": "gb:CMR:ADM1:27767025B32580592296844"
+          },
+          {
+            "feature_ordinal": 3,
+            "geometry_sha256": "ddf83ab1edc5518e616a51f2b5c2906020890879829eb5ea0c869701a035aeef",
+            "negative_ordinal": 1,
+            "source_id": "gb:CMR:ADM2:32672807B16068661668461"
+          },
+          {
+            "feature_ordinal": 74,
+            "geometry_sha256": "1f2adb7f42ab773b2fa365a779924b6329eaa6fd8b683a59cb6c6501727d8d09",
+            "negative_ordinal": 2,
+            "source_id": "gb:CMR:ADM3:9386221B43590333993773"
+          },
+          {
+            "feature_ordinal": 116,
+            "geometry_sha256": "a02c7657778baa457c81c34a34d95a365331602660e5c2b605df97bbe54e7e30",
+            "negative_ordinal": 3,
+            "source_id": "gb:CMR:ADM3:9386221B62336518359995"
+          },
+          {
+            "feature_ordinal": 182,
+            "geometry_sha256": "829c0b39970c627cc6d4638a475019ffd5e7cf47983c56ac1c600014dbd80542",
+            "negative_ordinal": 4,
+            "source_id": "gb:CMR:ADM3:9386221B20856421798014"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": null,
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10645,
+      "owner_source_id": "gb:CAF:ADM3:52401652B89925549074146",
+      "owner_name": "Sayo Niakari",
+      "province_id": "framework:province:bangassou:578b529a0124",
+      "province_index": 790,
+      "held_key_count": 1,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B89925549074146",
+        "pixel_index": 10645,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 1,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 3,
+            "geometry_sha256": "22bc29e2aa8e9899852ebfab2caef3e91caeaeec2596857b50b213cb5775d12c",
+            "negative_ordinal": 0,
+            "source_id": "gb:COD:ADM1:28894549B47695765788779"
+          },
+          {
+            "feature_ordinal": 5,
+            "geometry_sha256": "10d2c28fbc458f8cba14637cc13415f4433f767f7a499831ada0d8f444b6ff8b",
+            "negative_ordinal": 1,
+            "source_id": "gb:COD:ADM1:28894549B30663222433478"
+          },
+          {
+            "feature_ordinal": 24,
+            "geometry_sha256": "adac56eb82196ec46b809a5e950d26062b4fd0fddf5d5aca8e20d8ccf51bebf6",
+            "negative_ordinal": 2,
+            "source_id": "gb:COD:ADM2:63176286B80368275017521"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": null,
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10648,
+      "owner_source_id": "gb:CAF:ADM3:52401652B91880463318488",
+      "owner_name": "Kouango",
+      "province_id": "framework:province:kouango:9f9074db431b",
+      "province_index": 2516,
+      "held_key_count": 2,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B91880463318488",
+        "pixel_index": 10648,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 2,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 5,
+            "geometry_sha256": "10d2c28fbc458f8cba14637cc13415f4433f767f7a499831ada0d8f444b6ff8b",
+            "negative_ordinal": 0,
+            "source_id": "gb:COD:ADM1:28894549B30663222433478"
+          },
+          {
+            "feature_ordinal": 13,
+            "geometry_sha256": "c20b374d77e6012887d0583d3cf91b28af997630c09830f084f4d1964f672398",
+            "negative_ordinal": 1,
+            "source_id": "gb:COD:ADM1:28894549B79448475719999"
+          },
+          {
+            "feature_ordinal": 26,
+            "geometry_sha256": "a54525a3a36b45aa273ae81299620fb48be885aa2166978716a2d26a03c6da23",
+            "negative_ordinal": 2,
+            "source_id": "gb:COD:ADM2:63176286B50098701443330"
+          },
+          {
+            "feature_ordinal": 144,
+            "geometry_sha256": "2d0669dcdc45daf13d145c0b3b94ff2f71e9fc5586fb9ee4e08b9f3f9128f3cc",
+            "negative_ordinal": 3,
+            "source_id": "gb:COD:ADM2:63176286B77587123851522"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": null,
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10649,
+      "owner_source_id": "gb:CAF:ADM3:52401652B92301081173176",
+      "owner_name": "Galabadja",
+      "province_id": "framework:province:djoukou:65bfaf46248c",
+      "province_index": 1549,
+      "held_key_count": 2,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B92301081173176",
+        "pixel_index": 10649,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 2,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 5,
+            "geometry_sha256": "10d2c28fbc458f8cba14637cc13415f4433f767f7a499831ada0d8f444b6ff8b",
+            "negative_ordinal": 0,
+            "source_id": "gb:COD:ADM1:28894549B30663222433478"
+          },
+          {
+            "feature_ordinal": 26,
+            "geometry_sha256": "a54525a3a36b45aa273ae81299620fb48be885aa2166978716a2d26a03c6da23",
+            "negative_ordinal": 1,
+            "source_id": "gb:COD:ADM2:63176286B50098701443330"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": null,
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10658,
+      "owner_source_id": "gb:CAF:ADM3:52401652B966947158618",
+      "owner_name": "Goudrot",
+      "province_id": "framework:province:baboua:bca07ccb3682",
+      "province_index": 730,
+      "held_key_count": 7,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B966947158618",
+        "pixel_index": 10658,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 19,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 4,
+            "geometry_sha256": "86e6b7d16407d83638a98e2b9b57bb6af86999e4755dc31fa3e31798ecc48ed3",
+            "negative_ordinal": 0,
+            "source_id": "gb:CMR:ADM1:27767025B32580592296844"
+          },
+          {
+            "feature_ordinal": 5,
+            "geometry_sha256": "906fad80db92160e7686b0140865e24805f32e2d1190a465adcbfedc73673818",
+            "negative_ordinal": 1,
+            "source_id": "gb:CMR:ADM1:27767025B81519146961984"
+          },
+          {
+            "feature_ordinal": 3,
+            "geometry_sha256": "ddf83ab1edc5518e616a51f2b5c2906020890879829eb5ea0c869701a035aeef",
+            "negative_ordinal": 2,
+            "source_id": "gb:CMR:ADM2:32672807B16068661668461"
+          },
+          {
+            "feature_ordinal": 4,
+            "geometry_sha256": "9ae4e3d5ad4ade80f00d46e95bcc56fb830bc5f4f6dbb1da4080492292921aa6",
+            "negative_ordinal": 3,
+            "source_id": "gb:CMR:ADM2:32672807B59264134581656"
+          },
+          {
+            "feature_ordinal": 116,
+            "geometry_sha256": "a02c7657778baa457c81c34a34d95a365331602660e5c2b605df97bbe54e7e30",
+            "negative_ordinal": 4,
+            "source_id": "gb:CMR:ADM3:9386221B62336518359995"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B966947158618",
+        "pixel_index": 10658,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 12,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10659,
+      "owner_source_id": "gb:CAF:ADM3:52401652B97101163369552",
+      "owner_name": "Mia-Pende",
+      "province_id": "framework:province:paoua:0e3d8a2c134e",
+      "province_index": 3576,
+      "held_key_count": 25,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B97101163369552",
+        "pixel_index": 10659,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 15,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 15,
+            "geometry_sha256": "1378f6573f0b266249131fdbe5c3aa9d398f6e5c67b933039bded50527b4eef5",
+            "negative_ordinal": 0,
+            "source_id": "gb:TCD:ADM1:23847190B88704211588167"
+          },
+          {
+            "feature_ordinal": 27,
+            "geometry_sha256": "9e0cf95f89b269fe971389dc342d1679980cfe89958b6c184b2a336ae7417165",
+            "negative_ordinal": 1,
+            "source_id": "gb:TCD:ADM2:50815135B51143570982343"
+          },
+          {
+            "feature_ordinal": 28,
+            "geometry_sha256": "345bf7d554889b487d8b913de1e0eea87329605c3b554ef3f070c3d64b0b9b37",
+            "negative_ordinal": 2,
+            "source_id": "gb:TCD:ADM2:50815135B14191552615898"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B97101163369552",
+        "pixel_index": 10659,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 4,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10666,
+      "owner_source_id": "gb:CAF:ADM3:52401652B98607316941388",
+      "owner_name": "Koui",
+      "province_id": "framework:province:koui:7dc6a9b362b2",
+      "province_index": 2518,
+      "held_key_count": 12,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B98607316941388",
+        "pixel_index": 10666,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 18,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 2,
+            "geometry_sha256": "fccfca95ee9658d18f3800009099e2826e464a0dd6796ee4889f8536a6e04964",
+            "negative_ordinal": 0,
+            "source_id": "gb:CMR:ADM1:27767025B7666404469333"
+          },
+          {
+            "feature_ordinal": 4,
+            "geometry_sha256": "86e6b7d16407d83638a98e2b9b57bb6af86999e4755dc31fa3e31798ecc48ed3",
+            "negative_ordinal": 1,
+            "source_id": "gb:CMR:ADM1:27767025B32580592296844"
+          },
+          {
+            "feature_ordinal": 3,
+            "geometry_sha256": "ddf83ab1edc5518e616a51f2b5c2906020890879829eb5ea0c869701a035aeef",
+            "negative_ordinal": 2,
+            "source_id": "gb:CMR:ADM2:32672807B16068661668461"
+          },
+          {
+            "feature_ordinal": 33,
+            "geometry_sha256": "9534a4b8a60552acb883241541792e6cfb5b261e50114615ec43ce44041090a7",
+            "negative_ordinal": 3,
+            "source_id": "gb:CMR:ADM2:32672807B45774164265008"
+          },
+          {
+            "feature_ordinal": 19,
+            "geometry_sha256": "91822d691758f3239642f0bb3642c9537378ce15b58964e5dfc7419a69e70a36",
+            "negative_ordinal": 4,
+            "source_id": "gb:CMR:ADM3:9386221B49027895017551"
+          },
+          {
+            "feature_ordinal": 74,
+            "geometry_sha256": "1f2adb7f42ab773b2fa365a779924b6329eaa6fd8b683a59cb6c6501727d8d09",
+            "negative_ordinal": 5,
+            "source_id": "gb:CMR:ADM3:9386221B43590333993773"
+          },
+          {
+            "feature_ordinal": 116,
+            "geometry_sha256": "a02c7657778baa457c81c34a34d95a365331602660e5c2b605df97bbe54e7e30",
+            "negative_ordinal": 6,
+            "source_id": "gb:CMR:ADM3:9386221B62336518359995"
+          },
+          {
+            "feature_ordinal": 182,
+            "geometry_sha256": "829c0b39970c627cc6d4638a475019ffd5e7cf47983c56ac1c600014dbd80542",
+            "negative_ordinal": 7,
+            "source_id": "gb:CMR:ADM3:9386221B20856421798014"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B98607316941388",
+        "pixel_index": 10666,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 6,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    },
+    {
+      "owner_index": 10668,
+      "owner_source_id": "gb:CAF:ADM3:52401652B99363571212605",
+      "owner_name": "Yobe-Sangha",
+      "province_id": "framework:province:bayanga:4f6fa3c04410",
+      "province_index": 849,
+      "held_key_count": 56,
+      "full_original_source_target_context": {
+        "target_id": "gb:CAF:ADM3:52401652B99363571212605",
+        "pixel_index": 10668,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 64,
+        "target_level_territorial_exclusions": [
+          {
+            "feature_ordinal": 5,
+            "geometry_sha256": "906fad80db92160e7686b0140865e24805f32e2d1190a465adcbfedc73673818",
+            "negative_ordinal": 0,
+            "source_id": "gb:CMR:ADM1:27767025B81519146961984"
+          },
+          {
+            "feature_ordinal": 15,
+            "geometry_sha256": "7b4c77a55745435f8e43fa7b15b2b0d7fe4d94f0eb6b072c70c34e56df96865f",
+            "negative_ordinal": 1,
+            "source_id": "gb:CMR:ADM2:32672807B40314964499081"
+          },
+          {
+            "feature_ordinal": 35,
+            "geometry_sha256": "197600edf1be7f87d4451b98f6101c8070d324f48e0c33a298a4181ac7065c64",
+            "negative_ordinal": 2,
+            "source_id": "gb:CMR:ADM3:9386221B14880096394558"
+          },
+          {
+            "feature_ordinal": 40,
+            "geometry_sha256": "7193cf476fd798c2500e2bc2e61d2ca904ca9cee11a7d47fd8d4420fde59dffc",
+            "negative_ordinal": 3,
+            "source_id": "gb:CMR:ADM3:9386221B64770974028815"
+          },
+          {
+            "feature_ordinal": 198,
+            "geometry_sha256": "a9d3b352a0d1b21942335550263a8b948c31c37df144d1c1de15b9139238d9a0",
+            "negative_ordinal": 4,
+            "source_id": "gb:CMR:ADM3:9386221B27515073075422"
+          },
+          {
+            "feature_ordinal": 4,
+            "geometry_sha256": "87cdd75ecd99b913dd104604452d9fcace3439b5a4618cf3e410421865ea1760",
+            "negative_ordinal": 5,
+            "source_id": "gb:COG:ADM1:67827341B88704799146201"
+          },
+          {
+            "feature_ordinal": 9,
+            "geometry_sha256": "6cfdbe1c7373b245df02a68a1e48c434a2e53c15461901a3b97bae13aea2426c",
+            "negative_ordinal": 6,
+            "source_id": "gb:COG:ADM1:67827341B91073241467510"
+          },
+          {
+            "feature_ordinal": 39,
+            "geometry_sha256": "83858e8cd46fad9b3c02116285e63d5f45358940fff544280fbcce2a59fb2ecd",
+            "negative_ordinal": 7,
+            "source_id": "gb:COG:ADM2:1427508B81001765289527"
+          },
+          {
+            "feature_ordinal": 41,
+            "geometry_sha256": "ff020d893f2e108769df9dc0cf52e4474c8f109c09210c8a3d27edacd11bf456",
+            "negative_ordinal": 8,
+            "source_id": "gb:COG:ADM2:1427508B65710782923529"
+          }
+        ]
+      },
+      "narrowed_qualified_source_context": {
+        "target_id": "gb:CAF:ADM3:52401652B99363571212605",
+        "pixel_index": 10668,
+        "coverage_classes": [
+          "mapped_land_support"
+        ],
+        "coverage_row_count": 10,
+        "held_keys_have_run": false
+      },
+      "whole_target_physical_context": {
+        "issue_flags": [],
+        "query_relations": [
+          {
+            "source_id": 0,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 1,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction",
+            "intersects": true,
+            "source_covers_candidate": true,
+            "candidate_covers_source": false
+          },
+          {
+            "source_id": 187110,
+            "periodic_offset": 0,
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate",
+            "intersects": false,
+            "source_covers_candidate": false,
+            "candidate_covers_source": false
+          }
+        ]
+      },
+      "scope": "All source exclusions and physical query relations above are owner/whole-target context, not per-held-cell foreign contact, sovereignty, present-day applicability, or legal boundary determination."
+    }
+  ],
+  "disposition": {
+    "proposal_only": true,
+    "accepted": false,
+    "repair_credit": 0,
+    "owner_changes": 0,
+    "holds_removed": 0,
+    "prior_1669_qualified_support_rewritten": false,
+    "current_owner_receipt": "Pinned current observation at cdce5b02 queries all 2,130 original package cells: base owner is zero for 2,130; accepted-additive/effective owner is zero for 461 held cells, nonzero for the prior 1,669 supported cells; no overlap. It does not establish source applicability, physical correctness, acceptance, or full-repository native conservation.",
+    "native_diagnostic": "Pinned result records earlier refusal: proposed native cells lacked unique source-target coverage (diagnostic commit 9ac9f46f7d6ebece2dfdd43a4805893beb209f85).",
+    "unresolved": "Per-key causal source/foreign contact and current applicability, full native conservation/integration requirements, and explicit issue acceptance remain unresolved. The current selected-owner observation is supplied and confirms the held residual remains unowned.",
+    "no_sovereignty_or_boundary_claim": true
+  },
+  "original_owner_accounting": [
+    {
+      "held_cells": 14,
+      "original_cells": 21,
+      "owner": 10494,
+      "supported_cells": 7
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 357,
+      "owner": 10501,
+      "supported_cells": 357
+    },
+    {
+      "held_cells": 12,
+      "original_cells": 12,
+      "owner": 10504,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 36,
+      "original_cells": 36,
+      "owner": 10509,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 1,
+      "original_cells": 1,
+      "owner": 10514,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 35,
+      "original_cells": 62,
+      "owner": 10515,
+      "supported_cells": 27
+    },
+    {
+      "held_cells": 9,
+      "original_cells": 119,
+      "owner": 10519,
+      "supported_cells": 110
+    },
+    {
+      "held_cells": 11,
+      "original_cells": 48,
+      "owner": 10521,
+      "supported_cells": 37
+    },
+    {
+      "held_cells": 3,
+      "original_cells": 72,
+      "owner": 10526,
+      "supported_cells": 69
+    },
+    {
+      "held_cells": 1,
+      "original_cells": 1,
+      "owner": 10532,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 33,
+      "owner": 10536,
+      "supported_cells": 33
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 115,
+      "owner": 10537,
+      "supported_cells": 115
+    },
+    {
+      "held_cells": 1,
+      "original_cells": 8,
+      "owner": 10538,
+      "supported_cells": 7
+    },
+    {
+      "held_cells": 3,
+      "original_cells": 103,
+      "owner": 10542,
+      "supported_cells": 100
+    },
+    {
+      "held_cells": 7,
+      "original_cells": 13,
+      "owner": 10552,
+      "supported_cells": 6
+    },
+    {
+      "held_cells": 3,
+      "original_cells": 3,
+      "owner": 10559,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 20,
+      "original_cells": 35,
+      "owner": 10567,
+      "supported_cells": 15
+    },
+    {
+      "held_cells": 1,
+      "original_cells": 29,
+      "owner": 10571,
+      "supported_cells": 28
+    },
+    {
+      "held_cells": 8,
+      "original_cells": 74,
+      "owner": 10573,
+      "supported_cells": 66
+    },
+    {
+      "held_cells": 13,
+      "original_cells": 13,
+      "owner": 10580,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 10,
+      "original_cells": 11,
+      "owner": 10584,
+      "supported_cells": 1
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 28,
+      "owner": 10585,
+      "supported_cells": 28
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 5,
+      "owner": 10586,
+      "supported_cells": 5
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 11,
+      "owner": 10588,
+      "supported_cells": 11
+    },
+    {
+      "held_cells": 29,
+      "original_cells": 38,
+      "owner": 10593,
+      "supported_cells": 9
+    },
+    {
+      "held_cells": 3,
+      "original_cells": 6,
+      "owner": 10594,
+      "supported_cells": 3
+    },
+    {
+      "held_cells": 2,
+      "original_cells": 2,
+      "owner": 10595,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 5,
+      "original_cells": 279,
+      "owner": 10600,
+      "supported_cells": 274
+    },
+    {
+      "held_cells": 4,
+      "original_cells": 97,
+      "owner": 10602,
+      "supported_cells": 93
+    },
+    {
+      "held_cells": 32,
+      "original_cells": 65,
+      "owner": 10605,
+      "supported_cells": 33
+    },
+    {
+      "held_cells": 19,
+      "original_cells": 52,
+      "owner": 10610,
+      "supported_cells": 33
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 1,
+      "owner": 10622,
+      "supported_cells": 1
+    },
+    {
+      "held_cells": 6,
+      "original_cells": 52,
+      "owner": 10633,
+      "supported_cells": 46
+    },
+    {
+      "held_cells": 46,
+      "original_cells": 114,
+      "owner": 10635,
+      "supported_cells": 68
+    },
+    {
+      "held_cells": 7,
+      "original_cells": 7,
+      "owner": 10639,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 15,
+      "original_cells": 15,
+      "owner": 10642,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 1,
+      "original_cells": 1,
+      "owner": 10645,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 2,
+      "original_cells": 2,
+      "owner": 10648,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 2,
+      "original_cells": 2,
+      "owner": 10649,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 30,
+      "owner": 10656,
+      "supported_cells": 30
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 1,
+      "owner": 10657,
+      "supported_cells": 1
+    },
+    {
+      "held_cells": 7,
+      "original_cells": 19,
+      "owner": 10658,
+      "supported_cells": 12
+    },
+    {
+      "held_cells": 25,
+      "original_cells": 29,
+      "owner": 10659,
+      "supported_cells": 4
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 24,
+      "owner": 10663,
+      "supported_cells": 24
+    },
+    {
+      "held_cells": 12,
+      "original_cells": 18,
+      "owner": 10666,
+      "supported_cells": 6
+    },
+    {
+      "held_cells": 56,
+      "original_cells": 66,
+      "owner": 10668,
+      "supported_cells": 10
+    }
+  ],
+  "prior_native_operation_result": {
+    "selected_consumer_run": false,
+    "public_issue_pr_or_composition_created": false,
+    "new_accepted_cells": 0,
+    "scope_note": "These flags describe the original native author operation recorded in the pinned summary, not the later canonical source handoff or six-package repository delivery."
+  }
+}
