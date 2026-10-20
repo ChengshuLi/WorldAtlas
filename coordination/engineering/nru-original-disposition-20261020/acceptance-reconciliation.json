@@ -1,0 +1,217 @@
+{
+  "version": 1,
+  "kind": "nru-prior-acceptance-and-exception-key-reconciliation",
+  "as_of_public_main": "3a84c09bd20c8a5f3c4041e8c794175a0d8da602",
+  "package_id": "gb-NRU-ADM1--repair-evaluation",
+  "original_scope": {
+    "source_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "source_queue_blob": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "land_keys": 13,
+    "intervals": 11,
+    "owner_indices": [
+      7127
+    ],
+    "key_encoding": "(y,x); expanded from the exact original 11 half-open intervals in inventory/next-nru-contract.json",
+    "keys": [
+      [
+        131450,
+        252650
+      ],
+      [
+        131450,
+        252651
+      ],
+      [
+        131450,
+        252652
+      ],
+      [
+        131450,
+        252661
+      ],
+      [
+        131451,
+        252649
+      ],
+      [
+        131451,
+        252662
+      ],
+      [
+        131452,
+        252664
+      ],
+      [
+        131453,
+        252665
+      ],
+      [
+        131469,
+        252633
+      ],
+      [
+        131470,
+        252633
+      ],
+      [
+        131471,
+        252633
+      ],
+      [
+        131472,
+        252633
+      ],
+      [
+        131473,
+        252633
+      ]
+    ]
+  },
+  "named_acceptance_lineage": {
+    "current_active_roster": {
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/3a84c09bd20c8a5f3c4041e8c794175a0d8da602/coordination/engineering/cri-eri-phl-original-exceptions-20261018/active50-roster.json",
+      "blob": "4d061e144db89a4fac016944d093e82fc244c21b",
+      "row_count": 50,
+      "package_present": false
+    },
+    "historical_completed_unfinished_ledger": {
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/3a84c09bd20c8a5f3c4041e8c794175a0d8da602/coordination/engineering/poland-original-repair-20261017/source-review/current-named-package-ledger.json",
+      "blob": "cdcfb584a6b5a65e3aaef8d8b8c13cd730ad9a4a",
+      "accepted_main": "282d14b4682f738fed6a0e6f3ee0d0e4b775d611",
+      "completed_count": 28,
+      "unfinished_count": 18,
+      "package_in_completed": false,
+      "package_in_unfinished": false,
+      "global_queue_count": 660,
+      "scope_limit": "Named package activation/completion lineage, not a per-key ledger for every queued package."
+    },
+    "retained_exact_exception_record_scan": {
+      "method": "Expanded the 13 exact original (y,x) keys and compared them against each keyed exception_records/held_records/all_cases array in the 11 current named partition files, four current held-record partition files, and the explicit original-held-cell disposition partition. All 1,233 retained records were checked; exact key intersections are zero.",
+      "records_examined": 1233,
+      "exact_key_intersection_count": 0,
+      "files": [
+        {
+          "path": "coordination/engineering/civ-tun-gtm-original-exceptions-20261018/civ-original-partition.json",
+          "blob": "7c4f80f5aca2f65f726234b17188361556e60686",
+          "records": 8
+        },
+        {
+          "path": "coordination/engineering/civ-tun-gtm-original-exceptions-20261018/tun-original-partition.json",
+          "blob": "705a7e145d04829888eacf5bd4bc6a7e495f0c7e",
+          "records": 10
+        },
+        {
+          "path": "coordination/engineering/civ-tun-gtm-original-exceptions-20261018/gtm-original-partition.json",
+          "blob": "21c64b2940a3efa3323a5d64b9f8cf962c404c34",
+          "records": 13
+        },
+        {
+          "path": "coordination/engineering/cri-eri-phl-original-exceptions-20261018/cri-original-partition.json",
+          "blob": "3a42bbccdb068c48016c29b16d56ff4f63b78bea",
+          "records": 4
+        },
+        {
+          "path": "coordination/engineering/cri-eri-phl-original-exceptions-20261018/eri-original-partition.json",
+          "blob": "da097dfb7a72212537a4566fda862e877824ffc6",
+          "records": 5
+        },
+        {
+          "path": "coordination/engineering/cri-eri-phl-original-exceptions-20261018/phl-original-partition.json",
+          "blob": "0659720e192c13c31ddd2b76b2774552e272fb83",
+          "records": 7
+        },
+        {
+          "path": "coordination/engineering/sweden-el-salvador-original-exceptions-20261018/swe-original-partition.json",
+          "blob": "173f5a5785e9131792d8edcd6e1fa77e6b6f288b",
+          "records": 1
+        },
+        {
+          "path": "coordination/engineering/sweden-el-salvador-original-exceptions-20261018/slv-original-partition.json",
+          "blob": "92e036bb7eb5fab7d23cbed7b0a00d042f9469d3",
+          "records": 3
+        },
+        {
+          "path": "coordination/engineering/zaf-pol-original-exceptions-20261018/zaf-original-partition.json",
+          "blob": "11d47a4cf4c6d76fae600e7ac0a13a1a23e8cb52",
+          "records": 27
+        },
+        {
+          "path": "coordination/engineering/zaf-pol-original-exceptions-20261018/pol-original-partition.json",
+          "blob": "7e73c93098ac7f1142eacb5783ca82cf378a2a45",
+          "records": 73
+        },
+        {
+          "path": "coordination/engineering/slovakia-original-exceptions-20261018/svk-original-partition.json",
+          "blob": "95f2df4ae273f4ba0c97fc93088bd0e44b990281",
+          "records": 130
+        },
+        {
+          "path": "coordination/engineering/four-original-exceptions-20261018/can-original-partition.json",
+          "blob": "ee61ce77c7d17483684c37cd24892ff9fcd01da9",
+          "records": 103
+        },
+        {
+          "path": "coordination/engineering/four-original-exceptions-20261018/cze-original-partition.json",
+          "blob": "ff2ba535dece81a548b49dc88e0f17fd8721ccc7",
+          "records": 148
+        },
+        {
+          "path": "coordination/engineering/four-original-exceptions-20261018/ecu-original-partition.json",
+          "blob": "c2f91506ae9d34a4665f567093c43d9f87fa16ca",
+          "records": 582
+        },
+        {
+          "path": "coordination/engineering/four-original-exceptions-20261018/mex-original-partition.json",
+          "blob": "b94c06fb496d7434a8ec05d760e6d8e4fdd5a9ea",
+          "records": 116
+        },
+        {
+          "path": "coordination/engineering/original-held-cell-exceptions-20261018/disposition-partition.json",
+          "blob": "37cd3d2a8fbddec85605f7e22a51a9f69828bcbe",
+          "records": 3
+        }
+      ],
+      "scope_limit": "This is an exact intersection with the retained current exception/held arrays identified by the prior reconciliation inventory. It does not turn other packages' historical proposal statuses into accepted NRU credit and is not a private/global per-key audit of all 660 packages."
+    },
+    "prior_named_disposition_credit": 0,
+    "prior_disposition_residual": 13,
+    "basis": "NRU is absent from current active roster and linked historical completed/unfinished named ledgers, and none of the 13 exact original keys appears in the 1,233 retained exception/held records examined. The prior source-only Nauru PR #639 is a separate evidence packet and has no repair-evaluation cell credit."
+  },
+  "current_observation": {
+    "path": "nru-selected-owner-observation.json.gz",
+    "code_and_data_commit": "3a84c09bd20c8a5f3c4041e8c794175a0d8da602",
+    "query_sha256": "1bf71c492ff636322d7a878ec7dea753e53004fec6940b4c0ba4104c9c083674",
+    "original_intervals_sha256": "297fb917b1a6329fcc7cc591599f7d892f366640515d5552a93f9c3616a3e673",
+    "independent_exact_key_check": {
+      "expected_original_keys": 13,
+      "observed_keys": 13,
+      "unique_observed_keys": 13,
+      "missing": 0,
+      "extra": 0,
+      "duplicates": 0,
+      "recomputed_query_sha256_matches": true,
+      "recomputed_interval_sha256_matches": true,
+      "all_11_interval_rows_equal_original_queue": true
+    },
+    "selected_owner_counts": {
+      "base_owner_nonzero": 0,
+      "accepted_additive_owner_nonzero": 0,
+      "effective_selected_owner_nonzero": 0,
+      "existing_product_overlap_true": 0
+    },
+    "scientific_qualification": false,
+    "interpretation_limit": "This is current literal selected-owner state only; it does not prove prior accepted disposition. Prior named disposition credit was independently reconciled separately."
+  },
+  "combined_accounting": {
+    "prior_named_disposition_credit": 0,
+    "current_selected_assigned_keys": 0,
+    "residual_after_prior_credit_and_current_assignment": 13,
+    "accepted_credit_claimed_by_this_observation": 0,
+    "qualification_or_repair_credit": 0
+  },
+  "remaining_limits": [
+    "Public named ledger ancestry is positive package-accounting evidence but not exhaustive per-key accounting for every one of the 660 global queue entries.",
+    "Prior geography source-review issue #612 and PR #639 remain distinct; they do not qualify or accept this 13-cell repair package.",
+    "Recorded source rights, territory, physical support, and full competitor qualification remain unresolved as described in retained-source-physical-context.json."
+  ]
+}
