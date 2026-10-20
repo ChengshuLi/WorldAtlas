@@ -19,10 +19,13 @@ test('latest matching response wins, unrelated or malformed comments cannot conf
  assert.equal(readWorkerResult([late,early],'claim',request.request_id,26).accepted,false);
  assert.equal(readWorkerResult([bot('**Reservation result:** malformed')],'claim',request.request_id,26),null);
 });
-test('merge responses retain exact PR binding and embedded HTML cannot break the marker',()=>{
- const value={request_id:'merge-a',pr_number:31,accepted:false,reason:'contains <!-- and -->'};
- const body=renderWorkerResult('merge',value);
- assert.equal(readWorkerResult([bot(body)],'merge','merge-a',31).reason,value.reason);
- assert.equal(readWorkerResult([bot(body)],'merge','merge-a',32),null);
- assert.equal(body.includes('contains <!--'),false);
+test('merge responses retain exact PR binding with current and legacy fields, and escape embedded HTML',()=>{
+ for(const legacy of [{},{retryable:false},{retryable:true}]) {
+  const value={request_id:'merge-a',pr_number:31,accepted:false,reason:'contains <!-- and -->',...legacy};
+  const body=renderWorkerResult('merge',value);
+  assert.equal(readWorkerResult([bot(body)],'merge','merge-a',31).reason,value.reason);
+  assert.equal(readWorkerResult([bot(body)],'merge','merge-a',32),null);
+  assert.equal(body.includes('contains <!--'),false);
+  assert.deepEqual(readWorkerResult([bot(body)],'merge','merge-a',31),{...value,result_source:'github-comment',result_comment_id:1});
+ }
 });
