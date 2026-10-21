@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "kind": "rus-native-authority-001-exact-request-reconciliation",
+  "status": "Mechanical key-set and denominator reconciliation only. Constructor output is not root acceptance, a merged delivery, or a current-selected-owner conservation result.",
+  "source_commit": "7baddfd",
+  "constructor_result": {
+    "path": "coordination/engineering/rus-context-qualified-repair-20261021/native-authority-001/constructor-result.json",
+    "bytes": 4984392,
+    "sha256": "002aecd8043e7eb921def94c535cb78e52fe0cd6be2d91a31d2f1f3fafc2ae8b",
+    "components": 32,
+    "component_ids_match_ledger_order": true,
+    "qualified_cells": 8108,
+    "distinct_owner_indices": 32,
+    "native_cells_sum": 8108,
+    "duplicate_constructor_keys": 0
+  },
+  "diagnostic_result": {
+    "path": "coordination/engineering/rus-context-qualified-repair-20261021/native-diagnostic-002/native-diagnostic.json",
+    "bytes": 5278783,
+    "sha256": "72d66e29049391e01c06a31a3460efa5d581c16975e2daaa7cf54cf57da9683c",
+    "requested_cells": 9451,
+    "supported_cells": 8108,
+    "held_cells": 1343,
+    "requested_supported_held_partition_exact": true,
+    "rule_sha256": "68d44d2b44fbaf7018e30238c7e19d0d74419c185748a2705337f615b868b920"
+  },
+  "exact_native_patch": {
+    "path": "coordination/engineering/rus-context-qualified-repair-20261021/research/original-held-native-patch.json",
+    "bytes": 156307,
+    "sha256": "7375330bf8bf2ba6432bc8c0fba869e42bcdcb3ec47cccf7fd3c72e52204a403",
+    "rows": 3380,
+    "keys": 9451
+  },
+  "key_join": {
+    "diagnostic_requested_equals_original_patch": true,
+    "diagnostic_supported_plus_held_equals_requested": true,
+    "constructor_ledger_keys_equal_diagnostic_supported_keys": true,
+    "constructor_keys_outside_original_residual": 0,
+    "requested_residual_keys_not_in_constructor": 1343,
+    "constructor_keys_overlapping_diagnostic_held": 0,
+    "constructor_key_duplicates": 0
+  },
+  "whole_original_accounting": {
+    "source": "coordination/engineering/rus-context-qualified-repair-20261021/research/original-whole-scope-reconciliation.json",
+    "bytes": 98525,
+    "sha256": "3bad416ac48044ed2b92c2bc7c9c5a1b015afa86fbe61b899bcbcd048fd2792d",
+    "original_denominator": 2566967,
+    "prior_supported_partition": 2557516,
+    "original_residual": 9451,
+    "exact_partition_flag": true,
+    "arithmetic_after_candidate_constructor": {
+      "prior_supported_partition": 2557516,
+      "constructor_candidate_cells": 8108,
+      "remaining_original_residual": 1343,
+      "sum": 2566967,
+      "land": {
+        "prior": 2506594,
+        "candidate": 7971,
+        "remaining_residual": 1264,
+        "sum": 2515829
+      },
+      "inland_water": {
+        "prior": 50922,
+        "candidate": 137,
+        "remaining_residual": 79,
+        "sum": 51138
+      }
+    },
+    "original_class_counts": {
+      "supported_land": 2506594,
+      "supported_inland_water": 50922,
+      "residual_land": 9235,
+      "residual_inland_water": 216
+    },
+    "residual_classes_in_constructor": {
+      "land": 7971,
+      "inland_water": 137,
+      "derivation": "Exact constructor (owner,y,x) intervals joined to the committed source-evidence explicit coverage_rows classes; no class was inferred from the owner mask."
+    },
+    "constructor_candidate_classes": {
+      "land": 7971,
+      "inland_water": 137
+    },
+    "remaining_residual_classes": {
+      "land": 1264,
+      "inland_water": 79
+    },
+    "held_class_counts_in_diagnostic": {
+      "land": 1264,
+      "inland_water": 79
+    }
+  },
+  "original_contract": {
+    "source": "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/original-RUS-queue-row.json",
+    "package_id": "gb-RUS-ADM2--repair-evaluation",
+    "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+    "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+    "application": "This constructor qualifies a candidate 8,108-cell additive patch under the retained source/native inputs. The other 1,343 residual keys still need their own completed outcome; no exception or root acceptance is claimed here. The full original denominator remains 2,566,967."
+  },
+  "limits": [
+    "Exact constructor key set was checked against the stock diagnostic supported rows and original residual patch; the full previous accepted cell keys were not independently expanded or re-read in this check. The whole-scope reconciliation records an exact 2,557,516 / 9,451 partition and all original rows partitioned exactly.",
+    "This is not a merged composition or a selected-ledger/current-owner conservation test.",
+    "No science producer, diagnostic, or observer was rerun during this reconciliation."
+  ]
+}
