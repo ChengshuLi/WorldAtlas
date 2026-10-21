@@ -1017,10 +1017,12 @@ test('accepted checkpoint catch-up acquires only its appended completed-authorit
   const calls=[];
   const q=await f.api.qualifyAcceptedCheckpoint({reader:a.reader,acceptedHandle:a.handle,
     acquireAuthorityInputs:async (reader,pins)=>{
-      assert.equal(reader.version,next.candidate);
-      assert.deepEqual(pins,layers[calls.length]);calls.push(pins);
-      for(const p of pins)assert.equal(execFileSync('git',['-C',f.root,'hash-object','-w','--stdin'],
-        {input:bodies.get(p.git_blob_oid),encoding:'utf8'}).trim(),p.git_blob_oid);
+      if(pins.some(p=>bodies.has(p.git_blob_oid))){
+        assert.equal(reader.version,next.candidate);
+        assert.deepEqual(pins,layers[calls.length]);calls.push(pins);
+        for(const p of pins)assert.equal(execFileSync('git',['-C',f.root,'hash-object','-w','--stdin'],
+          {input:bodies.get(p.git_blob_oid),encoding:'utf8'}).trim(),p.git_blob_oid);
+      } else for(const p of pins)assert.doesNotThrow(()=>f.git('cat-file','-e',p.git_blob_oid));
       return {available:false,forged:'Callback return is not scientific evidence'};
     }});
   assert.equal(calls.length,2);assert.equal(q.available,true);
@@ -1029,4 +1031,45 @@ test('accepted checkpoint catch-up acquires only its appended completed-authorit
   assert.deepEqual(nativeLiteral(q.state.patch.rows),next.patch.rows);
   assert.deepEqual(nativeLiteral(q.state.ledger.rows),next.ledger.rows);
   f.api.releaseCheckpoint(q.state);f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+
+
+test('accepted aggregate acquires complete inherited read groups without reopening historical science',async t=>{
+  const f=await acceptedProducts(t,{nativeOnly:true,actualProducer:true}),a=await acquire(f);
+  const read=p=>JSON.parse(f.git('show',p.commit+':'+p.path));
+  const registry=read(f.sidecar.authority_registry),certificate=read(f.ledger.current_rebind);
+  const bindings=registry.entries.map(entry=>read(entry.source_authority));
+  const layers=[[f.sidecar.authority_registry,f.sidecar.runtime_envelope,...Object.values(f.sidecar.logical_asset_map)],
+    [f.ledger.current_rebind],[certificate.request,certificate.facts],registry.entries.map(entry=>entry.source_authority)];
+  assert.equal(layers.at(-1).length,2,'Both inherited authority bindings are one known group');
+  const pins=[...new Map(layers.flat().map(p=>[p.git_blob_oid,p])).values()];
+  const bodies=new Map(pins.map(p=>[p.git_blob_oid,f.git('cat-file','blob',p.git_blob_oid)]));
+  const unused=[certificate.publication,certificate.operating,certificate.result,...bindings.flatMap(binding=>
+    binding.kind==='source-target-native-custody-v1'?[binding.source_evidence,binding.native_patch]:
+      [binding.native_proof.publication,...binding.native_proof.assets])];
+  const omitted=[...new Map(unused.filter(p=>!bodies.has(p.git_blob_oid)).map(p=>[p.git_blob_oid,p])).values()];
+  assert(omitted.length>0);
+  for(const p of [...pins,...omitted])fs.unlinkSync(path.join(f.root,'.git/objects',p.git_blob_oid.slice(0,2),p.git_blob_oid.slice(2)));
+  await assert.rejects(()=>qualify(f,a),/Invalid immutable blob size batch/,'No callback keeps the library read-only');
+  const calls=[];
+  a.reader=currentReader(f,a,f.trusted);
+  const q=await f.api.qualifyAcceptedCheckpoint({reader:a.reader,acceptedHandle:a.handle,
+    acquireAuthorityInputs:async (reader,group)=>{
+      assert.equal(reader.version,f.trusted);
+      const ordered=pins=>[...pins].sort((a,b)=>a.path.localeCompare(b.path));
+      assert.deepEqual(ordered(group),ordered(layers[calls.length]));calls.push(group);
+      for(const p of group)assert.equal(execFileSync('git',['-C',f.root,'hash-object','-w','--stdin'],
+        {input:bodies.get(p.git_blob_oid),encoding:'utf8'}).trim(),p.git_blob_oid);
+      return {available:true,state:{forged:'The ordinary reader must still authenticate'}};
+    }});
+  assert.equal(q.available,true,q.reason);assert.equal(calls.length,layers.length);
+  assert.deepEqual(nativeLiteral(q.state.ledger.rows),f.ledger.rows);
+  assert.deepEqual(nativeLiteral(q.state.patch.rows),f.patch.rows);
+  for(const p of omitted)assert.throws(()=>f.git('cat-file','-e',p.git_blob_oid),'Metadata-only reuse must not acquire historical proof products');
+  f.api.releaseCheckpoint(q.state);
+  const binding=layers.at(-1)[0];fs.unlinkSync(path.join(f.root,'.git/objects',binding.git_blob_oid.slice(0,2),binding.git_blob_oid.slice(2)));
+  a.reader=currentReader(f,a,f.trusted);
+  await assert.rejects(()=>f.api.qualifyAcceptedCheckpoint({reader:a.reader,acceptedHandle:a.handle,
+    acquireAuthorityInputs:async()=>({available:true,complete:true})}),/Invalid immutable blob size batch/,'A successful callback return cannot replace missing bytes');
+  f.transport.releaseAcceptedCheckpoint(a.handle);
 });

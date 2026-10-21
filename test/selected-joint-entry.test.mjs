@@ -174,7 +174,7 @@ test('actual warm native-only transition rejects coherently repinned same-count 
 });
 
 
-test('actual joint CLI acquires only the appended completed-authority pins, then stays offline when warm',async t=>{
+test('actual joint CLI acquires exact inherited and appended read closure, then stays offline when warm',async t=>{
   const f=await checkpointFixture(t,{nativeAppend:true});
   for(const name of JOINT_CODE)f.save(name,fs.readFileSync(name));
   f.commit();
@@ -182,6 +182,14 @@ test('actual joint CLI acquires only the appended completed-authority pins, then
   const binding=JSON.parse(f.git('show',next.entry.source_authority.commit+':'+next.entry.source_authority.path));
   const pins=[next.entry.rule_preimage,next.entry.source_authority,next.entry.completed_constructor,
     binding.source_evidence,binding.native_patch];
+  const read=p=>JSON.parse(f.git('show',p.commit+':'+p.path));
+  const rebind=read(f.ledger.current_rebind),inherited=f.registry.entries.map(entry=>read(entry.source_authority));
+  const requiredPins=[...new Map([...pins,f.sidecar.authority_registry,f.sidecar.runtime_envelope,
+    ...Object.values(f.sidecar.logical_asset_map),f.ledger.current_rebind,
+    ...['request','facts','publication','operating','result'].map(role=>rebind[role]),
+    ...f.registry.entries.map(entry=>entry.source_authority),
+    ...inherited.flatMap(binding=>[binding.native_proof.publication,...binding.native_proof.assets])]
+    .map(p=>[p.git_blob_oid,p])).values()];
   const unrelated=f.pin('appended/source.json');
   const remote=fs.mkdtempSync(path.join(path.dirname(f.root),'.joint-remote-'));
   t.after(()=>fs.rmSync(remote,{recursive:true,force:true}));
@@ -192,7 +200,7 @@ test('actual joint CLI acquires only the appended completed-authority pins, then
   const unavailable=pathToFileURL(path.join(remote,'absent')).href;
   f.git('config','url.'+unavailable+'.insteadOf','https://github.com/ChengshuLi/WorldAtlas.git');
   const missing=p=>{try{f.git('cat-file','-e',p.git_blob_oid);return false;}catch{return true;}};
-  for(const p of [...pins,unrelated]){
+  for(const p of [...requiredPins,unrelated]){
     fs.unlinkSync(path.join(f.root,'.git/objects',p.git_blob_oid.slice(0,2),p.git_blob_oid.slice(2)));
     assert(missing(p));
   }
@@ -210,10 +218,10 @@ test('actual joint CLI acquires only the appended completed-authority pins, then
   assert.equal(report.mode,'authenticated-checkpoint-append-v1');
   assert.equal(report.native.status,'no-new-native-loss');
   assert.deepEqual(report.native.native_row_scope.changed_rows,[next.y]);
-  assert.deepEqual([...objects()].filter(id=>!before.has(id)).sort(),pins.map(p=>p.git_blob_oid).sort());
-  t.diagnostic('Imported '+pins.length+' exact blobs / '+pins.reduce((n,p)=>n+p.bytes,0)+' logical bytes; no network-byte or RSS claim');
+  assert.deepEqual([...objects()].filter(id=>!before.has(id)).sort(),requiredPins.map(p=>p.git_blob_oid).sort());
+  t.diagnostic('Imported '+requiredPins.length+' exact blobs / '+requiredPins.reduce((n,p)=>n+p.bytes,0)+' logical bytes; no network-byte or RSS claim');
   assert(missing(unrelated),'No source geometry or unrelated closure is acquired');
-  for(const p of pins){
+  for(const p of requiredPins){
     const body=f.git('cat-file','blob',p.git_blob_oid);
     assert.equal(body.length,p.bytes);
     assert.equal(createHash('sha256').update(body).digest('hex'),p.sha256);
@@ -224,7 +232,7 @@ test('actual joint CLI acquires only the appended completed-authority pins, then
   assert.equal(warm.status,0,warm.stderr);
   assert.equal(JSON.parse(warm.stdout).native.status,'no-new-native-loss');
   assert(missing(unrelated));
-  assert.deepEqual([...objects()].sort(),[...before,...pins.map(p=>p.git_blob_oid)].sort());
+  assert.deepEqual([...objects()].sort(),[...before,...requiredPins.map(p=>p.git_blob_oid)].sort());
   // An absent producer commit retains the existing exact current-path alias.
   const absent=next.entry.completed_constructor.commit;
   fs.unlinkSync(path.join(f.root,'.git/objects',absent.slice(0,2),absent.slice(2)));

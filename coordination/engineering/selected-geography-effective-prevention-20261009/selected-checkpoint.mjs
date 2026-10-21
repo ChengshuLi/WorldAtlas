@@ -116,6 +116,12 @@ function pin(p) {
     && p.decoded_bytes > 0 && hash(p.decoded_sha256),
   'Incomplete whole decoded checkpoint pin');
 }
+// Acquire only the complete pins this branch is about to consume. Callback
+// results are not evidence: the ordinary immutable readers still authenticate.
+async function acquireInputs(session, reader, pins) {
+  pins.forEach(pin);
+  if (pins.length) await session.acquireAuthorityInputs?.(reader, pins);
+}
 function resolvePin(reader, p) {
   pin(p);
   let version = p.commit;
@@ -255,6 +261,8 @@ async function readSelectionProducts(session, reader) {
   supported(sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2', 'Unsupported additive sidecar version');
   demand(same(sidecar.base_selection,nativeBaseSelection(selection)), 'Stale actual native base selection');
   keys(sidecar.logical_asset_map,'base_manifest,ledger,owner_roster,patch','Incomplete additive asset map');
+  await acquireInputs(session,reader,[sidecar.authority_registry,sidecar.runtime_envelope,
+    ...Object.values(sidecar.logical_asset_map)]);
   const [registry,wrapped,manifest] = readBodies(session,reader,[sidecar.authority_registry,
     sidecar.runtime_envelope,sidecar.logical_asset_map.base_manifest]);
   const ownerPin=sidecar.logical_asset_map.owner_roster;
@@ -392,13 +400,16 @@ function coordinateCheck(certificate, facts, additions) {
 }
 async function rebindOperands(session, reader, ledger, domain) {
   supported(ledger.current_rebind, 'Current-base-bound producer proof is unavailable');
+  await acquireInputs(session,reader,[ledger.current_rebind]);
   const certificate = readBody(session,reader,ledger.current_rebind);
   keys(certificate,'version,kind,execution_commit,base_selection,authority_registry_sha256,request,facts,publication,operating,result','Unknown current rebind certificate');
+  await acquireInputs(session,reader,[certificate.request,certificate.facts]);
   const request=await storedProduct(session,reader,certificate.request,domain,'envelope');
   return {certificate,request,facts:readBody(session,reader,certificate.facts)};
 }
 async function rebindProducts(session, reader, ledger, domain) {
   const operands=await rebindOperands(session,reader,ledger,domain),{certificate}=operands;
+  await acquireInputs(session,reader,[certificate.publication,certificate.operating,certificate.result]);
   return {...operands,publication:readBody(session,reader,certificate.publication),
     operating:readBody(session,reader,certificate.operating),
     result:await storedProduct(session,reader,certificate.result,domain,'envelope')};
@@ -500,7 +511,9 @@ async function acceptedAuthorities(session,reader,selected,{metadataOnly=false,.
   // Read only original small patch products already accepted by the checkpoint.
   // No original source/native qualification or selected acquisition is repeated.
   const entries=selected.registry.entries;
-  const bindings=readBodies(session,reader,entries.map(entry=>entry.source_authority));
+  const bindingPins=entries.map(entry=>entry.source_authority);
+  await acquireInputs(session,reader,bindingPins);
+  const bindings=readBodies(session,reader,bindingPins);
   if(metadataOnly){
     for(let i=0;i<entries.length;i++){
       const binding=bindings[i],nativeOnly=binding.kind==='source-target-native-custody-v1';
@@ -517,6 +530,7 @@ async function acceptedAuthorities(session,reader,selected,{metadataOnly=false,.
     }
     return binding.native_proof.publication;
   });
+  await acquireInputs(session,reader,productPins);
   const products=[];for(let i=0;i<productPins.length;i++)products.push(bindings[i].kind==='source-target-native-custody-v1'
     ?await storedProduct(session,reader,productPins[i],domain,false):readBody(session,reader,productPins[i]));
   const patchPins=[],patchesByEntry=new Map();
@@ -539,6 +553,7 @@ async function acceptedAuthorities(session,reader,selected,{metadataOnly=false,.
     oldAuthorities.set(entry.authority_sha256,{entry,patches:[]});
     patchesByEntry.set(entry,patches);
   }
+  await acquireInputs(session,reader,patchPins);
   const patches=[];for(const p of patchPins)patches.push(await storedProduct(session,reader,p,domain,false));
   for(const [entry,indices]of patchesByEntry)oldAuthorities.set(entry.authority_sha256,
     {entry,patches:indices.map(index=>patches[index])});
@@ -1122,15 +1137,11 @@ async function appendAuthority(session, reader, entry, domain) {
   const child = new ImmutableReader(reader.repo,reader.version,{invocation:reader.invocation,gitExecutable:reader.gitExecutable});
   child.inventory=reader.inventory; // retain actual appended-producer inputs without reopening them
   let proof;
-  const acquire = async pins => {
-    pins.forEach(pin);
-    await session.acquireAuthorityInputs?.(child,pins);
-  };
   if(entry.completed_constructor!==undefined){
-    await acquire([entry.rule_preimage,entry.source_authority]);
+    await acquireInputs(session,child,[entry.rule_preimage,entry.source_authority]);
     const {preimage,binding}=readRegistryAuthorityInputs(child,entry);
     if(binding?.kind==='source-target-native-custody-v1'){
-      await acquire([entry.completed_constructor,binding.source_evidence,binding.native_patch]);
+      await acquireInputs(session,child,[entry.completed_constructor,binding.source_evidence,binding.native_patch]);
       const constructed=await storedProduct(session,child,entry.completed_constructor,domain,'constructor');
       const evidence=await storedProduct(session,child,binding.source_evidence,domain,'envelope');
       const candidate=await storedProduct(session,child,binding.native_patch,domain,false);
