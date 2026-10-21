@@ -140,10 +140,10 @@ export class ImmutableReader {
       const pin=[...this.inventory.values()].find(p=>p.git_blob_oid===args[2]);
       demand(pin,'Missing immutable whole-body descriptor');options.maxBuffer=pin.bytes+1;
     }
-    return execFileSync(this.gitExecutable,['-c','core.hooksPath=/dev/null','-C',this.repo,...args],options);
+    return execFileSync(this.gitExecutable,['--no-replace-objects',...(args[0]==='ls-tree'||args[0]==='--literal-pathspecs'&&args[1]==='ls-tree'?['--no-lazy-fetch']:[]),'-c','core.hooksPath=/dev/null','-C',this.repo,...args],options);
   }
   gitBatch(args,input,maxBuffer) {
-    const result=spawnSync(this.gitExecutable,['-c','core.hooksPath=/dev/null','-C',this.repo,...args],
+    const result=spawnSync(this.gitExecutable,['--no-replace-objects','-c','core.hooksPath=/dev/null','-C',this.repo,...args],
       {input,maxBuffer,stdio:['pipe','pipe','inherit']});
     if(result.error)throw result.error;
     demand(result.status===0,'Incomplete immutable Git batch');
@@ -292,7 +292,7 @@ export class ImmutableReader {
   // never acquire a whole-body custody mark. Hash and child exit are both gates.
   async *stream(name,{version=this.version,expected}={}) {
     const pin=this.descriptor(name,version);
-    const child=spawn(this.gitExecutable,['-c','core.hooksPath=/dev/null','-C',this.repo,'cat-file','blob',pin.git_blob_oid],
+    const child=spawn(this.gitExecutable,['--no-replace-objects','-c','core.hooksPath=/dev/null','-C',this.repo,'cat-file','blob',pin.git_blob_oid],
       {stdio:['ignore','pipe','inherit']});
     let failed,complete=false,bytes=0;
     const exited=new Promise(resolve=>{child.once('error',error=>{failed=error;resolve(null);});child.once('close',resolve);});

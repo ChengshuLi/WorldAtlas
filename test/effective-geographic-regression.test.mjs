@@ -727,6 +727,7 @@ test('real selected reader admits same-M alias correction while preserving scien
 
 
 test('actual cold entry acquires a detached physical-program origin before preserving the next scientific refusal',async t=>{
+ const lazy=process.env.GIT_NO_LAZY_FETCH;process.env.GIT_NO_LAZY_FETCH='0';
  const f=fixture();try{
   const base=f.select([[[0,2,1]],[[1,3,2]],[],[]],{transport:true});
   const selection=JSON.parse(fs.readFileSync(path.join(f.repo,'data/ownership-selection.json')));
@@ -774,8 +775,8 @@ test('actual cold entry acquires a detached physical-program origin before prese
   assert.equal(consumed.reader.inventory.get(original+':physical.py').sha256,program.sha256);
   assert.equal(consumed.reader.inventory.get(original+':physical.py').whole_body_consumed,true);
   assert.deepEqual(calls.slice(0,5).map(row=>row.pin.path),['evidence.json','proposed.json',catalogue,'physical-input.json','physical.py']);
-  assert.throws(()=>f.git('cat-file','-e',original+'^{commit}'),'Private origin metadata never becomes a partial local producer');
+  assert.throws(()=>f.git('--no-lazy-fetch','cat-file','-e',original+'^{commit}'),'Private origin metadata never becomes a partial local producer');
   assert(!fs.existsSync(path.join(f.repo,'.git/shallow')));
   t.mock.restoreAll();
- }finally{f.cleanup();}
+ }finally{f.cleanup();if(lazy===undefined)delete process.env.GIT_NO_LAZY_FETCH;else process.env.GIT_NO_LAZY_FETCH=lazy;}
 });

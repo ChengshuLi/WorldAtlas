@@ -492,6 +492,7 @@ test('cold routing body acquisition uses the private original descriptor without
 // The full cold reader consumes the original pin, not the newer same-path
 // alias. Only the existing native metadata transport may issue its private proof.
 test('cold immutable reader authenticates absent original paths without importing producer history',async()=>{
+ const lazy=process.env.GIT_NO_LAZY_FETCH;process.env.GIT_NO_LAZY_FETCH='0';
  const f=originFixture();try{
   const name='scripts/physical.py',raw=Buffer.from('# original physical programme\n');
   const original=f.commit({[name]:raw.toString()}),current=f.commit({[name]:'# newer unrelated programme\n'});
@@ -535,13 +536,32 @@ test('cold immutable reader authenticates absent original paths without importin
   // refuse instead of continuing to use the previously authenticated fallback.
   importObject(original,'commit');
   assert.equal(reader.pinnedVersion(pin),original);
+  const beforeMissingTree=f.inventory();
   assert.throws(()=>reader.read(name,{version:reader.pinnedVersion(pin),expected:pin.sha256}));
+  assert.throws(()=>reader.readPinned([pin]));
+  assert.throws(()=>reader.treeRoute(name,original));
   await assert.rejects(reader.acquirePinned(pin,options));
+  assert.deepEqual(f.inventory(),beforeMissingTree,'Known-origin tree probes cannot hydrate producer history');
   importTrees(original);
   assert.deepEqual(reader.read(name,{version:reader.pinnedVersion(pin),expected:pin.sha256}),raw);
   // A known original with a different path identity cannot use an exact alias.
   await assert.rejects(reader.acquirePinned({...pin,commit:current},options));
- }finally{f.close();}
+ }finally{f.close();if(lazy===undefined)delete process.env.GIT_NO_LAZY_FETCH;else process.env.GIT_NO_LAZY_FETCH=lazy;}
+});
+
+test('immutable sync, batch and stream reads ignore replacements without ambient guards',async()=>{
+ const replace=process.env.GIT_NO_REPLACE_OBJECTS;delete process.env.GIT_NO_REPLACE_OBJECTS;
+ const f=fixture();try{
+  const name='data/source.json',row=f.maps.get(f.baseline).tree.find(p=>p.path===name),raw=f.bodies.get(row.sha);
+  f.git(f.destination,['hash-object','-w','--stdin'],raw);
+  const reader=new ImmutableReader(f.destination,f.baseline);reader.descriptor(name);
+  const replacement=f.git(f.destination,['hash-object','-w','--stdin'],Buffer.alloc(raw.length,120)).toString().trim();
+  f.git(f.destination,['update-ref','refs/replace/'+row.sha,replacement]);
+  assert.deepEqual(reader.read(name,{expected:digest(raw)}),raw);
+  assert.deepEqual(reader.gitBatch(['cat-file','--batch'],row.sha+'\n',raw.length+100),Buffer.concat([Buffer.from(`${row.sha} blob ${raw.length}\n`),raw,Buffer.from('\n')]));
+  const chunks=[];for await(const chunk of reader.stream(name,{expected:digest(raw)}))chunks.push(chunk);
+  assert.deepEqual(Buffer.concat(chunks),raw);
+ }finally{f.close();if(replace===undefined)delete process.env.GIT_NO_REPLACE_OBJECTS;else process.env.GIT_NO_REPLACE_OBJECTS=replace;}
 });
 
 test('warm exact current aliases need no original metadata or transport',async()=>{
