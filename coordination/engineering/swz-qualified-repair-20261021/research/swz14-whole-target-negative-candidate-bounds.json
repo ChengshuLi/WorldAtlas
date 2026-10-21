@@ -1,0 +1,907 @@
+{
+  "kind": "swz-source-candidate-bounding-box-screen-v1",
+  "purpose": "Conservative candidate-family screen for source/negative closure; not a polygon overlay or qualification.",
+  "scope": {
+    "package": "gb-SWZ-ADM2--repair-evaluation",
+    "original_cells": 14,
+    "intervals": 14,
+    "land": 14,
+    "water": 0,
+    "owners": [
+      40983,
+      40984,
+      40991,
+      41002,
+      41003,
+      41011,
+      41016,
+      41017
+    ]
+  },
+  "method": {
+    "target_geometry": "Exact current selected canonical feature geometry read from two pinned part blobs; only its envelope was transformed to native-grid x/y, with x=(lon+180)/360*262166 and y=(0.5-ln((1+sin(lat))/(1-sin(lat)))/(4*pi))*262166, matching src/pixel-grid.js.",
+    "run_intersection": "Union source_feature_indices from each complete source-candidate-block run intersecting the target geometry native-grid envelope. Envelope is conservative; a candidate run indicates native-raster source support somewhere in the bbox, not polygon intersection with target.",
+    "limits": [
+      "Screen uses source-candidate runs and indexes for blocks 36/37; families that geometrically overlap target but produce no native raster candidate-cell center in bbox may be omitted.",
+      "This does not prove polygon-level intersection or disjointness, legal territorial status, ancestry, or a complete source_evidence negative-family list.",
+      "SWZ ADM1 rows are broad tier context, not direct owner vectors or negative families.",
+      "Stock sourceTerritorialExclusions requires full original source bodies for selected negative families."
+    ],
+    "candidate_family_interpretation": "Five non-SWZ families have candidate raster feature spans inside at least one full canonical target-geometry native-grid bbox: MOZ ADM1/ADM2 and ZAF ADM1/ADM2/ADM3. These are bounded candidates to acquire and compare under stock sourceEvidence. They are not proven target polygon intersections or legal territorial exclusions. The 4 SWZ ADM1 features are explicit parent-tier context only; SWZ ADM2 is the positive family.",
+    "candidate_family_observations": [
+      "No MOZ ADM1 candidate occurs inside target-specific point candidate rows; MOZ families are flagged by raster candidate spans intersecting the full Mhlume, Lomahasha and Tikhuba geometry envelopes.",
+      "ZAF ADM1/ADM2/ADM3 families are flagged by raster candidate spans within the Ngwempisi and Zombodze geometry envelopes.",
+      "The family-level screen is conservative within native source-candidate coverage of the computed target bboxes, but the bbox screen can include features outside the exact target polygon and can omit non-rasterized tiny features."
+    ]
+  },
+  "immutable_inputs": {
+    "source_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "target_part_commit": "34b44bf538aabcb1a6485d56ed4859ecf553aa72",
+    "target_parts": [
+      {
+        "git_blob_oid": "b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f",
+        "bytes": 4746385,
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+        "feature_count": 1500
+      },
+      {
+        "git_blob_oid": "371e95033d9c542bbf07c42afe7111074e35f246",
+        "bytes": 4962410,
+        "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+        "feature_count": 1500
+      }
+    ],
+    "target_locator": "inventory/swz-canonical-target-locator.json",
+    "target_locator_roster_blob": "4c7f2d094eaf786d56032acb90098624b2256a22",
+    "native_grid_code": {
+      "path": "src/pixel-grid.js",
+      "git_blob_oid": "008aaf69e65105029e64e09317b8f9aa4df1f352",
+      "size": 3699
+    },
+    "source_candidate_blocks": [
+      {
+        "git_blob_oid": "5f936f6e18a5e4c7b6a398c0990dee045d1cc0a3",
+        "compressed_bytes": 158514,
+        "decoded_bytes": 1183179,
+        "decoded_sha256": "f3f90123cc8f59d70f860dc2d89e72e3f343a2b4994b0427d7ae744c8037e7b2",
+        "row_count": 4078
+      },
+      {
+        "git_blob_oid": "158db3a4ae8076def67a7aa289c20e57e6c3a5b1",
+        "compressed_bytes": 96025,
+        "decoded_bytes": 750430,
+        "decoded_sha256": "7fac7b1c2f69cfb6a2c47cee154dd575f5878a5a52de69c4693eb10b509c10b4",
+        "row_count": 3952
+      }
+    ],
+    "source_roster": {
+      "commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "decoded_bytes": 13496995,
+      "row_count": 73567
+    },
+    "original_catalogue": {
+      "commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "limits": [
+        "Complete original pointsets are custody inputs, not approved territorial facts.",
+        "Acquisition timestamps do not establish effective source dates."
+      ]
+    }
+  },
+  "candidate_family_union": [
+    {
+      "family_index": 223,
+      "source_id": "gb:MOZ:ADM1",
+      "feature_indexes": [
+        45695
+      ],
+      "target_ids": [
+        "gb:SWZ:ADM2:25544865B37706944907644",
+        "gb:SWZ:ADM2:25544865B99062950351047",
+        "gb:SWZ:ADM2:25544865B99429407754877"
+      ]
+    },
+    {
+      "family_index": 224,
+      "source_id": "gb:MOZ:ADM2",
+      "feature_indexes": [
+        45835
+      ],
+      "target_ids": [
+        "gb:SWZ:ADM2:25544865B37706944907644",
+        "gb:SWZ:ADM2:25544865B99062950351047"
+      ]
+    },
+    {
+      "family_index": 311,
+      "source_id": "gb:SWZ:ADM1",
+      "feature_indexes": [
+        56921,
+        56922,
+        56923,
+        56924
+      ],
+      "target_ids": [
+        "gb:SWZ:ADM2:25544865B37706944907644",
+        "gb:SWZ:ADM2:25544865B4123625373150",
+        "gb:SWZ:ADM2:25544865B616938903867",
+        "gb:SWZ:ADM2:25544865B74382320525051",
+        "gb:SWZ:ADM2:25544865B75252057291440",
+        "gb:SWZ:ADM2:25544865B91965971492812",
+        "gb:SWZ:ADM2:25544865B99062950351047",
+        "gb:SWZ:ADM2:25544865B99429407754877"
+      ]
+    },
+    {
+      "family_index": 312,
+      "source_id": "gb:SWZ:ADM2",
+      "feature_indexes": [
+        56927,
+        56933,
+        56935,
+        56940,
+        56950,
+        56955,
+        56975,
+        56977
+      ],
+      "target_ids": [
+        "gb:SWZ:ADM2:25544865B37706944907644",
+        "gb:SWZ:ADM2:25544865B4123625373150",
+        "gb:SWZ:ADM2:25544865B616938903867",
+        "gb:SWZ:ADM2:25544865B74382320525051",
+        "gb:SWZ:ADM2:25544865B75252057291440",
+        "gb:SWZ:ADM2:25544865B91965971492812",
+        "gb:SWZ:ADM2:25544865B99062950351047",
+        "gb:SWZ:ADM2:25544865B99429407754877"
+      ]
+    },
+    {
+      "family_index": 360,
+      "source_id": "gb:ZAF:ADM1",
+      "feature_indexes": [
+        66248,
+        66250
+      ],
+      "target_ids": [
+        "gb:SWZ:ADM2:25544865B616938903867",
+        "gb:SWZ:ADM2:25544865B75252057291440"
+      ]
+    },
+    {
+      "family_index": 361,
+      "source_id": "gb:ZAF:ADM2",
+      "feature_indexes": [
+        66275,
+        66305
+      ],
+      "target_ids": [
+        "gb:SWZ:ADM2:25544865B616938903867",
+        "gb:SWZ:ADM2:25544865B75252057291440"
+      ]
+    },
+    {
+      "family_index": 362,
+      "source_id": "gb:ZAF:ADM3",
+      "feature_indexes": [
+        66425,
+        66514
+      ],
+      "target_ids": [
+        "gb:SWZ:ADM2:25544865B616938903867",
+        "gb:SWZ:ADM2:25544865B75252057291440"
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B37706944907644",
+      "target_name": "Inkhundla Mhlume",
+      "geography_part": "data/geography/part-22.json",
+      "part_blob_oid": "b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f",
+      "original_geometry_sha256": "3be4e23b7e145dba8afc9d3995613c699faeccb7488533f6aee0f99540a3226e",
+      "native_bbox_float": [
+        154144.14089444,
+        150650.70914231,
+        154411.47739056,
+        150930.98856549
+      ],
+      "native_bbox_cell_envelope": [
+        154144,
+        150650,
+        154412,
+        150931
+      ],
+      "candidate_runs_intersecting_bbox": 12,
+      "candidate_native_cells_intersecting_bbox": 82,
+      "source_candidate_features": 4,
+      "candidate_families": [
+        {
+          "family_index": 223,
+          "source_id": "gb:MOZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 45695,
+              "source_id": "gb:MOZ:ADM1:27363107B47421408423272",
+              "name": "Maputo",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 224,
+          "source_id": "gb:MOZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 45835,
+              "source_id": "gb:MOZ:ADM2:85939544B88728478280907",
+              "name": "Namaacha",
+              "owners": [
+                30915
+              ]
+            }
+          ]
+        },
+        {
+          "family_index": 311,
+          "source_id": "gb:SWZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 56922,
+              "source_id": "gb:SWZ:ADM1:75366066B12234306804593",
+              "name": "Lubombo",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 312,
+          "source_id": "gb:SWZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 56950,
+              "source_id": "gb:SWZ:ADM2:25544865B37706944907644",
+              "name": "Inkhundla Mhlume",
+              "owners": [
+                40983
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B4123625373150",
+      "target_name": "Inkhundla Gege",
+      "geography_part": "data/geography/part-23.json",
+      "part_blob_oid": "371e95033d9c542bbf07c42afe7111074e35f246",
+      "original_geometry_sha256": "83f8b3e3c7b51ae3900d9406e0b086afb5eed4614b790d921d2c1fc0ab077ef2",
+      "native_bbox_float": [
+        153578.59057333,
+        151331.93302868,
+        153807.62170389,
+        151583.42609419
+      ],
+      "native_bbox_cell_envelope": [
+        153578,
+        151331,
+        153808,
+        151584
+      ],
+      "candidate_runs_intersecting_bbox": 15,
+      "candidate_native_cells_intersecting_bbox": 15,
+      "source_candidate_features": 2,
+      "candidate_families": [
+        {
+          "family_index": 311,
+          "source_id": "gb:SWZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 56923,
+              "source_id": "gb:SWZ:ADM1:75366066B21527038718027",
+              "name": "Shiselweni",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 312,
+          "source_id": "gb:SWZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 56977,
+              "source_id": "gb:SWZ:ADM2:25544865B4123625373150",
+              "name": "Inkhundla Gege",
+              "owners": [
+                40984
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B616938903867",
+      "target_name": "Inkhundla Ngwempisi",
+      "geography_part": "data/geography/part-23.json",
+      "part_blob_oid": "371e95033d9c542bbf07c42afe7111074e35f246",
+      "original_geometry_sha256": "cbea12cd5f98a77ba743ae127f17e94ee4cc6625d2bf3d17c8477f9bf28ee41a",
+      "native_bbox_float": [
+        153506.20362778,
+        151204.20246542,
+        153871.92519778,
+        151389.37537893
+      ],
+      "native_bbox_cell_envelope": [
+        153506,
+        151204,
+        153872,
+        151390
+      ],
+      "candidate_runs_intersecting_bbox": 4,
+      "candidate_native_cells_intersecting_bbox": 4,
+      "source_candidate_features": 7,
+      "candidate_families": [
+        {
+          "family_index": 311,
+          "source_id": "gb:SWZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 56921,
+              "source_id": "gb:SWZ:ADM1:75366066B3567364273406",
+              "name": "Manzini",
+              "owners": []
+            },
+            {
+              "source_feature_index": 56923,
+              "source_id": "gb:SWZ:ADM1:75366066B21527038718027",
+              "name": "Shiselweni",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 312,
+          "source_id": "gb:SWZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 56975,
+              "source_id": "gb:SWZ:ADM2:25544865B616938903867",
+              "name": "Inkhundla Ngwempisi",
+              "owners": [
+                40991
+              ]
+            },
+            {
+              "source_feature_index": 56977,
+              "source_id": "gb:SWZ:ADM2:25544865B4123625373150",
+              "name": "Inkhundla Gege",
+              "owners": [
+                40984
+              ]
+            }
+          ]
+        },
+        {
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1",
+          "features": [
+            {
+              "source_feature_index": 66250,
+              "source_id": "gb:ZAF:ADM1:76434192B92524600968894",
+              "name": "Mpumalanga",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2",
+          "features": [
+            {
+              "source_feature_index": 66275,
+              "source_id": "gb:ZAF:ADM2:47623444B27645248540404",
+              "name": "Gert Sibande",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3",
+          "features": [
+            {
+              "source_feature_index": 66425,
+              "source_id": "gb:ZAF:ADM3:15628383B23048095503212",
+              "name": "Mkhondo",
+              "owners": [
+                49176
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B74382320525051",
+      "target_name": "Inkhundla Maseyisini",
+      "geography_part": "data/geography/part-22.json",
+      "part_blob_oid": "b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f",
+      "original_geometry_sha256": "aadc56071f76bd140cf430f8d41c766d9cadc63d969c6d62a738fd14c2da19c8",
+      "native_bbox_float": [
+        153685.86016167,
+        151522.83831856,
+        153854.44746444,
+        151703.00214542
+      ],
+      "native_bbox_cell_envelope": [
+        153685,
+        151522,
+        153855,
+        151704
+      ],
+      "candidate_runs_intersecting_bbox": 2,
+      "candidate_native_cells_intersecting_bbox": 2,
+      "source_candidate_features": 2,
+      "candidate_families": [
+        {
+          "family_index": 311,
+          "source_id": "gb:SWZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 56923,
+              "source_id": "gb:SWZ:ADM1:75366066B21527038718027",
+              "name": "Shiselweni",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 312,
+          "source_id": "gb:SWZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 56955,
+              "source_id": "gb:SWZ:ADM2:25544865B74382320525051",
+              "name": "Inkhundla Maseyisini",
+              "owners": [
+                41002
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B75252057291440",
+      "target_name": "Inkhundla Zombodze",
+      "geography_part": "data/geography/part-22.json",
+      "part_blob_oid": "b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f",
+      "original_geometry_sha256": null,
+      "native_bbox_float": [
+        153825.68202833,
+        151588.82451786,
+        153955.45419833,
+        151744.94405126
+      ],
+      "native_bbox_cell_envelope": [
+        153825,
+        151588,
+        153956,
+        151745
+      ],
+      "candidate_runs_intersecting_bbox": 9,
+      "candidate_native_cells_intersecting_bbox": 9,
+      "source_candidate_features": 8,
+      "candidate_families": [
+        {
+          "family_index": 311,
+          "source_id": "gb:SWZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 56923,
+              "source_id": "gb:SWZ:ADM1:75366066B21527038718027",
+              "name": "Shiselweni",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 312,
+          "source_id": "gb:SWZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 56933,
+              "source_id": "gb:SWZ:ADM2:25544865B75252057291440",
+              "name": "Inkhundla Zombodze",
+              "owners": [
+                41003
+              ]
+            }
+          ]
+        },
+        {
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1",
+          "features": [
+            {
+              "source_feature_index": 66248,
+              "source_id": "gb:ZAF:ADM1:76434192B26311534340602",
+              "name": "KwaZulu-Natal",
+              "owners": []
+            },
+            {
+              "source_feature_index": 66250,
+              "source_id": "gb:ZAF:ADM1:76434192B92524600968894",
+              "name": "Mpumalanga",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2",
+          "features": [
+            {
+              "source_feature_index": 66275,
+              "source_id": "gb:ZAF:ADM2:47623444B27645248540404",
+              "name": "Gert Sibande",
+              "owners": []
+            },
+            {
+              "source_feature_index": 66305,
+              "source_id": "gb:ZAF:ADM2:47623444B26591670939926",
+              "name": "Zululand",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3",
+          "features": [
+            {
+              "source_feature_index": 66425,
+              "source_id": "gb:ZAF:ADM3:15628383B23048095503212",
+              "name": "Mkhondo",
+              "owners": [
+                49176
+              ]
+            },
+            {
+              "source_feature_index": 66514,
+              "source_id": "gb:ZAF:ADM3:15628383B83069245545305",
+              "name": "uPhongolo",
+              "owners": [
+                49311
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B91965971492812",
+      "target_name": "Inkhundla Piggs Peak",
+      "geography_part": "data/geography/part-22.json",
+      "part_blob_oid": "b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f",
+      "original_geometry_sha256": null,
+      "native_bbox_float": [
+        153720.30586111,
+        150591.28841506,
+        153969.94615222,
+        150773.71598595
+      ],
+      "native_bbox_cell_envelope": [
+        153720,
+        150591,
+        153970,
+        150774
+      ],
+      "candidate_runs_intersecting_bbox": 11,
+      "candidate_native_cells_intersecting_bbox": 11,
+      "source_candidate_features": 2,
+      "candidate_families": [
+        {
+          "family_index": 311,
+          "source_id": "gb:SWZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 56924,
+              "source_id": "gb:SWZ:ADM1:75366066B25905390127614",
+              "name": "Hhohho",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 312,
+          "source_id": "gb:SWZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 56940,
+              "source_id": "gb:SWZ:ADM2:25544865B91965971492812",
+              "name": "Inkhundla Piggs Peak",
+              "owners": [
+                41011
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B99062950351047",
+      "target_name": "Inkhundla Lomahasha",
+      "geography_part": "data/geography/part-22.json",
+      "part_blob_oid": "b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f",
+      "original_geometry_sha256": "dd4577a8330176db505defe3a7a15a5e63779af7cabfa5f4e5ea65797da94503",
+      "native_bbox_float": [
+        154295.97870278,
+        150664.25230734,
+        154463.32799944,
+        150860.02932696
+      ],
+      "native_bbox_cell_envelope": [
+        154295,
+        150664,
+        154464,
+        150861
+      ],
+      "candidate_runs_intersecting_bbox": 78,
+      "candidate_native_cells_intersecting_bbox": 194,
+      "source_candidate_features": 4,
+      "candidate_families": [
+        {
+          "family_index": 223,
+          "source_id": "gb:MOZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 45695,
+              "source_id": "gb:MOZ:ADM1:27363107B47421408423272",
+              "name": "Maputo",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 224,
+          "source_id": "gb:MOZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 45835,
+              "source_id": "gb:MOZ:ADM2:85939544B88728478280907",
+              "name": "Namaacha",
+              "owners": [
+                30915
+              ]
+            }
+          ]
+        },
+        {
+          "family_index": 311,
+          "source_id": "gb:SWZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 56922,
+              "source_id": "gb:SWZ:ADM1:75366066B12234306804593",
+              "name": "Lubombo",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 312,
+          "source_id": "gb:SWZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 56927,
+              "source_id": "gb:SWZ:ADM2:25544865B99062950351047",
+              "name": "Inkhundla Lomahasha",
+              "owners": [
+                41016
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B99429407754877",
+      "target_name": "Inkhundla Tikhuba",
+      "geography_part": "data/geography/part-22.json",
+      "part_blob_oid": "b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f",
+      "original_geometry_sha256": "afdfe6bb224f841a072d75c9391ddadd5f8dcb336da445f01871866e1472191d",
+      "native_bbox_float": [
+        154349.79555667,
+        151080.63287021,
+        154484.95669444,
+        151385.94741954
+      ],
+      "native_bbox_cell_envelope": [
+        154349,
+        151080,
+        154485,
+        151386
+      ],
+      "candidate_runs_intersecting_bbox": 34,
+      "candidate_native_cells_intersecting_bbox": 34,
+      "source_candidate_features": 3,
+      "candidate_families": [
+        {
+          "family_index": 223,
+          "source_id": "gb:MOZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 45695,
+              "source_id": "gb:MOZ:ADM1:27363107B47421408423272",
+              "name": "Maputo",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 311,
+          "source_id": "gb:SWZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 56922,
+              "source_id": "gb:SWZ:ADM1:75366066B12234306804593",
+              "name": "Lubombo",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 312,
+          "source_id": "gb:SWZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 56935,
+              "source_id": "gb:SWZ:ADM2:25544865B99429407754877",
+              "name": "Inkhundla Tikhuba",
+              "owners": [
+                41017
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "candidate_family_catalogue_records": [
+    {
+      "advertised_feature_count": 10,
+      "cohort": "administrative-registry",
+      "feature_count": 10,
+      "key": "gb:MOZ:ADM1",
+      "metadata_sha256": "b91b530250af5eaa550580a60a99b55d9d1dc77b2c716dcb492bdbb686ca6c80",
+      "original_bytes": 265588,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "453908a723bc988d958aa5c22a053391b30d0edbcb89f087650071940a528fd7",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 84089,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MOZ-ADM1-000.bin.gz",
+          "sha256": "2c357ab05635c8ff5733a3f987cee4892d1be5a21b146f20f3d0fff666da1492",
+          "uncompressed_bytes": 265588,
+          "uncompressed_sha256": "453908a723bc988d958aa5c22a053391b30d0edbcb89f087650071940a528fd7"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MOZ/ADM1/geoBoundaries-MOZ-ADM1_simplified.geojson",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "source_represented_year_claim": "2017"
+    },
+    {
+      "advertised_feature_count": 159,
+      "cohort": "administrative-registry",
+      "feature_count": 159,
+      "key": "gb:MOZ:ADM2",
+      "metadata_sha256": "687ae2e0acb150ee47196fabae632746687d0dd9cce4efda9605522f4683c004",
+      "original_bytes": 2565929,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "c50d41139d653bb03889cdf383d72a3cf851b5b576f406dfb0bc3a1b70de2bb9",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 827288,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MOZ-ADM2-000.bin.gz",
+          "sha256": "496411fecd431fc3461e3b62d766de3998195a15d57d47b35e183927e52f5f79",
+          "uncompressed_bytes": 2565929,
+          "uncompressed_sha256": "c50d41139d653bb03889cdf383d72a3cf851b5b576f406dfb0bc3a1b70de2bb9"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MOZ/ADM2/geoBoundaries-MOZ-ADM2_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "source_represented_year_claim": "2019"
+    },
+    {
+      "advertised_feature_count": 9,
+      "cohort": "administrative-registry",
+      "feature_count": 9,
+      "key": "gb:ZAF:ADM1",
+      "metadata_sha256": "0ad8c6b52464fa69ca0a4c9bf5c635a05e696cf50e480cf001141c6e34f754ec",
+      "original_bytes": 723491,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "e0be7fc729e409be2a1f596271b6d0aac5f704a066cd26cfa3bf9e23b1270fe3",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 198509,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-ZAF-ADM1-000.bin.gz",
+          "sha256": "09f5a6f67463c9ebf31be5db1672053c68042b26f7d748b9d99b3acd59e19b57",
+          "uncompressed_bytes": 723491,
+          "uncompressed_sha256": "e0be7fc729e409be2a1f596271b6d0aac5f704a066cd26cfa3bf9e23b1270fe3"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ZAF/ADM1/geoBoundaries-ZAF-ADM1_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "source_represented_year_claim": "2020"
+    },
+    {
+      "advertised_feature_count": 52,
+      "cohort": "administrative-registry",
+      "feature_count": 52,
+      "key": "gb:ZAF:ADM2",
+      "metadata_sha256": "688fe9604aa37566eb535d547bdcd711d5a12feb83374bdb28b5b3ab0153f9c9",
+      "original_bytes": 1518645,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "bb4800b804811ce9cfa5f6bf535466e3f812751249f0e1b7375d5f5753570e7c",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 423965,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-ZAF-ADM2-000.bin.gz",
+          "sha256": "d49ef1c2c698c4b6e370a7a9646e28945dfa7ead153ed49eb17cd3c5a27cb7ee",
+          "uncompressed_bytes": 1518645,
+          "uncompressed_sha256": "bb4800b804811ce9cfa5f6bf535466e3f812751249f0e1b7375d5f5753570e7c"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ZAF/ADM2/geoBoundaries-ZAF-ADM2_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "source_represented_year_claim": "2020"
+    },
+    {
+      "advertised_feature_count": 213,
+      "cohort": "administrative-registry",
+      "feature_count": 213,
+      "key": "gb:ZAF:ADM3",
+      "metadata_sha256": "68c46c9b5126fc8256d3cdab54035d7014b71c64063e6b2506488ab337fb61e7",
+      "original_bytes": 2740795,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "35cbea5cef92308a1894bdf6a68dfb49e73a90830bc62d3fb7d73d70f5ece3e6",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 759656,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-ZAF-ADM3-000.bin.gz",
+          "sha256": "1242c87b81eed8073f4963f42b660a16c78e5c1c29cea3e21789a2999cdaafc0",
+          "uncompressed_bytes": 2740795,
+          "uncompressed_sha256": "35cbea5cef92308a1894bdf6a68dfb49e73a90830bc62d3fb7d73d70f5ece3e6"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ZAF/ADM3/geoBoundaries-ZAF-ADM3_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "source_represented_year_claim": "2020"
+    }
+  ]
+}
