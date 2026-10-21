@@ -348,7 +348,11 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
                     prefetch_declared_inputs(repo, baseline, candidate)
             with stage_timing('selected-native'):
                 native_raw = subprocess.check_output([
-                    os.environ.get('NODE', 'node'), str(repo / 'scripts/check-effective-geographic-regression.mjs'),
+                    os.environ.get('NODE', 'node'), '--input-type=module', '--eval',
+                    "const [module, repo, baseline, candidate, parentRuntimePath] = process.argv.slice(1);"
+                    "const {inspectSelected} = await import(module);"
+                    "process.stdout.write(JSON.stringify(inspectSelected(repo, baseline, candidate, {parentRuntimePath})) + '\\n');",
+                    (repo / 'scripts/check-effective-geographic-regression.mjs').as_uri(),
                     str(repo), baseline, candidate, sys.executable], env=env)
 
             native = json.loads(native_raw)

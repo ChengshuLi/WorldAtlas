@@ -87,11 +87,12 @@ class TrustedCheckControls(unittest.TestCase):
         self.f.close()
 
     def selected_native_child(self, program):
-        # A real child runs through the real selected-native CLI route. Only its
+        # A real child runs through the existing Python-selected cold route. Only its
         # scientific calculation is a small controlled program; stdout/stderr,
         # immutable checkout validation and subprocess failure remain production.
         self.f.write('data/ownership-selection.json', {})
-        (self.f.repo / 'scripts/check-effective-geographic-regression.mjs').write_text(program)
+        (self.f.repo / 'scripts/check-effective-geographic-regression.mjs').write_text(
+            'export function inspectSelected(repo, baseline, candidate, {parentRuntimePath}) {\n' + program + '\n}\n')
         candidate = self.f.commit('selected-native-child-control')
         return self.f.run(candidate, rewind=False, extra_env={'GEOGRAPHY_CODE_COMMIT': candidate})
 
@@ -113,7 +114,7 @@ class TrustedCheckControls(unittest.TestCase):
         message = 'Original native progress remains on stderr\n'
         result, report = self.selected_native_child(
             'process.stderr.write(' + json.dumps(message) + ');\n'
-            'console.log(' + json.dumps(json.dumps(native)) + ');\n')
+            'return ' + json.dumps(native) + ';\n')
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(report['selected_native_report'], native)
         self.assertEqual(report['status'], 'no-new-native-loss')
@@ -676,8 +677,11 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
              self.mock.patch.object(g.subprocess, 'check_output', return_value=json.dumps(native).encode()) as checker:
             result = g.inspect(ROOT, self.baseline, self.candidate, code_commit=self.candidate, prefetch=True)
         prefetch.assert_called_once_with(ROOT, self.baseline, self.candidate)
-        self.assertIn('scripts/check-effective-geographic-regression.mjs', checker.call_args.args[0][1])
-        self.assertEqual(checker.call_args.args[0][2:5], [str(ROOT), self.baseline, self.candidate])
+        command = checker.call_args.args[0]
+        self.assertEqual(command[1:3], ['--input-type=module', '--eval'])
+        self.assertIn('inspectSelected', command[3])
+        self.assertEqual(command[4:], [(ROOT / 'scripts/check-effective-geographic-regression.mjs').as_uri(),
+                                       str(ROOT), self.baseline, self.candidate, sys.executable])
         self.assertEqual(result['selected_native_report'], native)
         self.assertEqual(result['status'], 'no-new-native-loss')
         self.assertNotIn('unchanged_selected_inputs', result)
