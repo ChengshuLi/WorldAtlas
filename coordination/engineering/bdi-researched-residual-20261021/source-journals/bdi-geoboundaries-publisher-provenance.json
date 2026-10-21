@@ -1,0 +1,89 @@
+{
+  "scope": "Metadata-only provenance check for the BDI Muha and Ntahangwa target identity discrepancy. No geometry was acquired or inspected.",
+  "checked_at": "2026-10-21",
+  "official_documentation": {
+    "url": "https://www.geoboundaries.org/api.html",
+    "definitions": {
+      "boundaryYearRepresented": "The year or range of years which the boundary layers represent.",
+      "sourceDataUpdateDate": "The date source information was integrated into the geoBoundaries repository.",
+      "buildDate": "The date the source data was most recently standardized and built into a geoBoundaries release."
+    },
+    "implication": "Repository integration/build dates must not be substituted for boundaryYearRepresented."
+  },
+  "gbOpen": {
+    "api_url": "https://www.geoboundaries.org/api/current/gbOpen/BDI/ADM2/",
+    "metadata": {
+      "boundaryID": "BDI-ADM2-21766830",
+      "boundaryYearRepresented": "2007",
+      "boundarySource": "New York University Spatial Data Repository, Stanford University, Map Maker Limited",
+      "boundaryLicense": "Public Domain",
+      "licenseSource": "geo.nyu.edu/catalog/stanford-th822mn7301#iso-metadata-reference-info",
+      "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+      "buildDate": "Dec 12, 2023",
+      "admUnitCount": "119",
+      "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BDI/ADM2/geoBoundaries-BDI-ADM2-all.zip",
+      "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BDI/ADM2/geoBoundaries-BDI-ADM2.geojson"
+    },
+    "metadata_path_at_pinned_release": "releaseData/gbOpen/BDI/ADM2/geoBoundaries-BDI-ADM2-metaData.json",
+    "release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "release_commit_url": "https://github.com/wmgeolab/geoBoundaries/commit/9469f09592ced973a3448cf66b6100b741b64c0d",
+    "metadata_lfs_pointer": {
+      "sha256": "8fd6a2d1c76c2373a29dfb0cde59ac62738876ff6966313006eaf3f2dc7edb34",
+      "size_bytes": 924,
+      "body_status": "Retrieved by a bounded ordinary GET after the sandbox's first DNS-only failure; actual bytes verified against the pinned SHA-256 and size."
+    },
+    "parent_metadata_lfs_object": {
+      "parent_commit": "55f27702ac698d96ed27d275afb918e496547fa6",
+      "sha256": "a6aef60468ef4f3881b0a460f0fbb3a6502e905cd5c172649dc04bd7ca46718a",
+      "size_bytes": 924,
+      "body_status": "Retrieved and verified by the same bounded method."
+    },
+    "authenticated_parent_to_release_field_diff": {
+      "changed_fields": {"buildDate": {"before": "Dec 07, 2023", "after": "Dec 12, 2023"}},
+      "unchanged_material_fields": ["boundaryID", "boundaryYear=2007", "boundarySource", "boundaryLicense", "licenseSource", "sourceDataUpdateDate=Thu Jan 19 07:31:04 2023", "admUnitCount=119", "all layer aggregate statistics"],
+      "interpretation": "The value-level metadata change is only a buildDate update. It does not revise the represented year or identify a target-specific geometry/member change."
+    },
+    "path_history": [
+      {"commit": "9469f09592ced973a3448cf66b6100b741b64c0d", "date": "2023-12-13T04:03:07Z", "message": "gB Core Data Update 2023-12-12 23:03"},
+      {"commit": "ea5b27e7aa608eb6827f2cc76620a5b21acc5962", "date": "2023-12-11T23:07:14Z", "message": "gB Core Data Update 2023-12-11 18:07"},
+      {"commit": "c0ed7b8dc62dabe97cf355622f557ccfe8546f2b", "date": "2023-10-04T10:44:27Z", "message": "gB Core Data Update 2023-10-04 06:44"},
+      {"commit": "41af8f1e141eb6826ab9877e306df6f848b9ff0b", "date": "2023-07-05T22:16:59Z", "message": "gB Core Data Update 2023-07-05 18:16"},
+      {"commit": "905b0baf5f4fb3b9ccf45293647dcacdb2b799d4", "date": "2023-01-23T22:22:19Z", "message": "Automated Nightly Build"},
+      {"commit": "b7dd6a55701c76a330500ad9d9240f2b9997c6a8", "date": "2023-01-19T12:31:04Z", "message": "Cleared history"}
+    ],
+    "specific_feature_result": "No dated or target-specific publisher explanation found for retained feature IDs 21766830B84199363749171 (Muha) or 21766830B87038696970617 (Ntahangwa). Existing retained 119-feature source properties contain no per-feature date or predecessor lineage."
+  },
+  "gbAuthoritative": {
+    "api_url": "https://www.geoboundaries.org/api/current/gbAuthoritative/BDI/ADM2/",
+    "metadata": {
+      "boundaryID": "BDI-ADM2-91688708",
+      "boundaryYearRepresented": "26-03-2015 to 01-05-2015",
+      "boundaryCanonical": "Communes",
+      "boundarySource": "UN SALB, Institut Geographique de Burundi",
+      "boundaryLicense": "UN SALB Data License",
+      "licenseSource": "www.unsalb.org/sites/default/files/wysiwyg_uploads/docs_uploads/TermsOfUseSALB2021.pdf",
+      "boundarySourceURL": "www.unsalb.org/data/bdi",
+      "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+      "buildDate": "Dec 12, 2023",
+      "admUnitCount": "119",
+      "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbAuthoritative/BDI/ADM2/geoBoundaries-BDI-ADM2-all.zip",
+      "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbAuthoritative/BDI/ADM2/geoBoundaries-BDI-ADM2.geojson"
+    },
+    "release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "release_commit_url": "https://github.com/wmgeolab/geoBoundaries/commit/9469f09592ced973a3448cf66b6100b741b64c0d",
+    "metadata_path_at_pinned_release": "releaseData/gbAuthoritative/BDI/ADM2/geoBoundaries-BDI-ADM2-metaData.json",
+    "metadata_lfs_pointer_at_commit": {
+      "previous_sha256": "fb4b6e3a996b9b52cdad72afe2713cc8d0d3a675c757dc3221cb84a1a0683ce0",
+      "current_sha256": "ad6a797fed2b1425d117a3b0223ca38b9804eae5b53a77f9df44528df176f8c6",
+      "size_bytes": 874
+    },
+    "geojson_lfs_pointer_at_commit": {
+      "previous_sha256": "69783348f55ed3833073691605333173a847627a87d2216ef5871de5f928644e",
+      "current_sha256": "4bfa9b857043dd39577eb54130a7a666878b6d63afd7a267ff784657a9eb814a",
+      "previous_size_bytes": 1423349,
+      "current_size_bytes": 1436461
+    },
+    "assessment": "This is a distinct, later-dated source family from gbOpen (different layer ID, source organizations, and license). Its 2015 represented interval makes it a potentially relevant independent provenance source, but layer-level metadata alone does not establish that either retained feature ID corresponds to Muha/Ntahangwa, or that its polygons are compatible with the original target geometry. The UN SALB terms apply; any later comparison must respect them. No authoritative geometry was acquired."
+  },
+  "conclusion": "Publisher material confirms a genuine 2007-versus-2015 source-family distinction but does not explain the two retained gbOpen feature IDs. The 2023 date denotes repository integration/build, not represented vintage. The gbAuthoritative layer is a plausible target-specific follow-up source, not proof by name, level, or 119-unit count."
+}

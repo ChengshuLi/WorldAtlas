@@ -1,0 +1,201 @@
+{
+  "kind": "BDI 2014 enacted communal-law membership follow-up",
+  "date": "2026-10-21",
+  "scope": "Bounded investigation of exact predecessor/constituent administrative memberships for the retained Muha and Ntahangwa ADM2 target identities. No geometry, observer, physical producer, or native diagnostic was run.",
+  "attachment": {
+    "official_page": "https://presidence.gov.bi/2014/11/loi-n133-du-28-novembre-2014-portant-revision-de-la-loi-n102-du-25-janvier-2010-portant-organisation-de-ladministration-communale/",
+    "page_action": "Read official Presidency page; it showed the enacted law dated 28 November 2014 and two attachment links. The primary download link resolves to the exact URL below.",
+    "official_attachment_url": "https://www.presidence.gov.bi/wp-content/uploads/2014/11/loi-033-2014.pdf",
+    "prior_state": "Saved inventory/bdi-ntahangwa-vintage-primary-source-check.json records only the web document reader failing HTTP 400 due 13,480,065-byte content size; it explicitly says no retry or alternate transfer was attempted. No prior local acquisition or uncertain transfer was found.",
+    "acquisition": "One exact programmatic GET completed successfully after confirming the saved record showed no prior transfer.",
+    "retained_file": "inventory/bdi-law-1-33-2014.pdf",
+    "bytes": 13480065,
+    "sha256": "d85a6845c2b95905048ec08e5105616ab7319d6b9f4b6700e189ec6af41a65bc",
+    "format": "31-page scanned PDF; each page is a 1654x2338 JPEG image stream. Relevant printed pages 29 and 31 were directly inspected as rendered page images. OCR libraries/commands were unavailable; no software was installed."
+  },
+  "relevant_provisions": [
+    {
+      "printed_page": 29,
+      "articles": "123-125",
+      "findings": [
+        "Article 123 establishes the Bujumbura urban perimeter as the Province of Mairie de Bujumbura.",
+        "Article 124 states the then-current Mairie perimeter has three urban communes: Muha, Mukaza, and Ntahangwa.",
+        "Article 125 expressly describes Muha as extending over the territories of Kanyosha, Kinindo, and Musaga administrative entities, with its seat at Kanyosha.",
+        "Article 125 expressly describes Ntahangwa as extending over Cibitoke, Gihosha, Buterere, Kamenge, Kinama, and Ngagara administrative entities, with its seat at Kamenge.",
+        "Article 125 says the administrative entities composing the urban communes are constituted as urban zones."
+      ],
+      "evidentiary_scope": "This is direct enacted textual constituent-membership evidence, stronger and more specific than the 2018 PND summary. It supplies names of constituent entities but no map, coordinates, boundary geometry, predecessor polygons, or source-feature IDs."
+    },
+    {
+      "printed_page": 31,
+      "articles": "136-138",
+      "findings": [
+        "Article 136 says geographical and administrative limits of communes, hills, and zones then in force are maintained; for Mairie communes, their limits and territorial authorities remain unchanged until the sitting authorities’ terms end.",
+        "Article 137 repeals inconsistent earlier provisions.",
+        "Article 138 makes the law effective on promulgation; the closing signature date is 28 November 2014."
+      ],
+      "evidentiary_scope": "The transition clause anchors the delineations to the legal state in force at promulgation and maintains them during the transition. It does not provide a map or prove equivalence to the retained source geometry."
+    }
+  ],
+  "retained_target_identity_join": {
+    "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "source_property_record": "inventory/bdi-source-property-identity-join.json",
+    "targets": [
+      {
+        "source_feature_id": "gb:BDI:ADM2:21766830B84199363749171",
+        "shapeName": "Muha",
+        "source_index": 2154,
+        "owner_index": 9087,
+        "original_cells": 41,
+        "land_cells": 19,
+        "inland_water_cells": 22
+      },
+      {
+        "source_feature_id": "gb:BDI:ADM2:21766830B87038696970617",
+        "shapeName": "Ntahangwa",
+        "source_index": 2156,
+        "owner_index": 9089,
+        "original_cells": 9,
+        "land_cells": 3,
+        "inland_water_cells": 6
+      }
+    ],
+    "source_vintage": "The retained catalogue calls the BDI ADM2 corpus represented-year 2007. Exact source feature names match the later 2014 law’s commune names, but names alone do not establish that their polygon geometry equals the legal union of the listed administrative entities."
+  },
+  "assessment": {
+    "new_evidence": "The 2014 law directly resolves the textual constituent roster for Muha and Ntahangwa, which the PND 2018-2027 paragraph 71 did not specify.",
+    "remaining_specific_gap": "The attachment contains no boundary annex or map. It does not connect the retained geoBoundaries feature geometries to the legally named constituent entities or resolve why a source labeled represented-year 2007 carries the exact later commune identities. Therefore it materially narrows the source-applicability question but does not by itself prove geometry equivalence or qualify any keys.",
+    "preserved_limits": "No changes to the frozen 448-key candidate or 135 held-key partition. No approval, acceptance, or completion credit is claimed. No observer, physical producer, or native diagnostic was rerun.",
+    "other_routes": "Assembly/CENI/Stanford outcomes remain as previously recorded; none were retried or bypassed. The inaccessible 2014 Presidency law PDF reader was not used as an alternate transfer route; this attachment is the exact official Presidency page’s own primary download link."
+  },
+  "official_statistical_geographic_identity_followup": {
+    "method": "Programmatic web search and open/find of official INSBU publications; no user browser, geometry read, payload acquisition, observer, physical producer, or native diagnostic.",
+    "queries": [
+      "site:insbu.bi Muha Ntahangwa Kanyosha Kinindo Musaga Cibitoke Gihosha Buterere Kamenge Kinama Ngagara",
+      "site:insbu.bi \"Muha\" \"Kinindo\" \"Musaga\" population",
+      "site:insbu.bi \"Gihosha\" \"Kamenge\" commune Ntahangwa"
+    ],
+    "documents": [
+      {
+        "title": "Annuaire Statistique du Burundi, Edition 2022",
+        "publisher": "Institut National de la Statistique du Burundi (INSBU)",
+        "url": "https://www.insbu.bi/documents/Annuaires/Annuaire-Statitistique-du-Burundi-Edition-2022.pdf",
+        "opened_as": "Official INSBU PDF; opened and searched through its indexed text, not downloaded locally.",
+        "locator": "Tableau 1.10, PDF page index 33 (printed Population page 34), lines 1517-1569 in web extraction.",
+        "observed_content": [
+          "Tableau 1.10 labels Mairie de Bujumbura and lists the legacy commune rows Kanyosha, Kinindo, Musaga before the Muha total; it likewise lists Buterere, Cibitoke, Gihosha, Kamenge, Kinama, Ngagara before Ntahangwa total.",
+          "The table note states that, starting in 2015, Bujumbura Mairie changed from 13 communes to three: Muha, Mukaza, and Ntahangwa.",
+          "The same table provides separate annual population series for those older named units and the three post-2015 communes; this corroborates official statistical continuity of the labels and aggregation structure."
+        ],
+        "scope_limit": "The annuaire is statistical tabulation, not a map or polygon crosswalk; the exact membership relationship comes from the 2014 enacted law, not inferred from counts or row order."
+      },
+      {
+        "title": "Annuaire Statistique du Burundi, Edition 2023",
+        "publisher": "Institut National de la Statistique du Burundi (INSBU)",
+        "url": "https://www.insbu.bi/documents/Annuaires/Annuaire_Statistique_Burundi_Edition_2023.pdf",
+        "opened_as": "Official INSBU PDF; opened and searched through its indexed text, not downloaded locally.",
+        "locator": "Population section, PDF page index 38 (printed Population page 30), lines 1930-1935 in web extraction.",
+        "observed_content": [
+          "Repeats the note that from 2015 Bujumbura Mairie moved from 13 communes to Muha, Mukaza, and Ntahangwa, with population series for these post-2015 communes."
+        ],
+        "scope_limit": "Confirms continued official statistical use of the post-reform commune labels, but does not supply constituent geometry or feature-ID mapping."
+      }
+    ],
+    "cross_source_result": {
+      "muha": "The 2014 law names Kanyosha, Kinindo, and Musaga as Muha constituents; the INSBU 2022 table independently contains those three historical commune rows and a later Muha aggregate, with the explicit 2015 transition note. This provides an official statistical identity/aggregation bridge for the names.",
+      "ntahangwa": "The 2014 law names Cibitoke, Gihosha, Buterere, Kamenge, Kinama, and Ngagara as Ntahangwa constituents; the INSBU 2022 table independently contains those six historical commune rows and a later Ntahangwa aggregate, with the explicit 2015 transition note. This provides an official statistical identity/aggregation bridge for the names.",
+      "connection_to_retained_features": "The retained geoBoundaries features are named Muha and Ntahangwa, matching the official post-2015 commune labels. The sources triangulate unit identity and legal/statistical membership, but do not establish geometric equality between the represented-year-2007 feature and the legal union of predecessor areas."
+    },
+    "bounded_conclusion": "This is useful direct national statistical corroboration of the 2014 legal constituent lists and the continued Muha/Ntahangwa aggregate identities. It narrows uncertainty about names and administrative lineage; it does not close the polygon/source-applicability question. No whole-boundary crosswalk or geometry was found in these publications.",
+    "other_outcomes": "INSBU dynamic population pages returned only a JavaScript-app shell on direct open; indexed search snippets exposed current summary text but no usable downloadable crosswalk. No Assembly, CENI, or Stanford source was used; no source geometry or large file was fetched."
+  },
+  "ocha_cod_ab_metadata_followup": {
+    "method": "Programmatic public-resource metadata discovery only. No COD-AB geometry/resource file was downloaded, and no geometry, owner observation, physical producer, or native diagnostic was run.",
+    "queries_and_reads": [
+      {
+        "query": "Burundi COD-AB dataset metadata and exact resources",
+        "url": "https://data.humdata.org/api/3/action/package_show?id=cod-ab-bdi",
+        "result": "An initial sandboxed curl failed before connecting with DNS resolution error (curl exit 6; data.humdata.org could not be resolved). The same small public metadata request then succeeded via the already authorized network-enabled route. No transfer was left uncertain."
+      },
+      {
+        "query": "HDX public dataset page",
+        "url": "https://data.humdata.org/dataset/cod-ab-bdi",
+        "result": "The web page returned HTTP 403 in the reader. Search snippets exposed the dataset title/version and resource identifiers; the successful API response supplied the exact metadata below."
+      },
+      {
+        "query": "OCHA COD-AB documentation",
+        "url": "https://knowledge.base.unocha.org/wiki/spaces/imtoolbox/pages/2557378679/Administrative%2BBoundaries%2BCOD-AB",
+        "result": "Opened the official OCHA Knowledge Base guidance on COD-AB. It describes COD-AB as country-standard administrative boundaries adopted by a country or regional IM working group; typical metadata includes dates representing administrative reality, and the resource should be reviewed every 12 months. This is general policy guidance, not a Burundi-specific adoption record."
+      }
+    ],
+    "dataset": {
+      "id": "63148f32-4505-433d-b8ea-1fd8088b4bdf",
+      "name": "cod-ab-bdi",
+      "title": "Burundi - Subnational Administrative Boundaries",
+      "dataset_url": "https://data.humdata.org/dataset/cod-ab-bdi",
+      "api_url": "https://data.humdata.org/api/3/action/package_show?id=cod-ab-bdi",
+      "metadata_created": "2017-11-07",
+      "metadata_modified": "2026-08-21",
+      "version": "02",
+      "notes_summary": "The dataset describes ADM0–ADM4 boundaries: 5 provinces, 42 communes, 462 zones, and 3,067 collines/quartiers. It says 462 ADM3 and 3,067 ADM4 differ from Government of Burundi LOI counts (451 and 3,044) because 11 protected-area polygons at ADM3 and 23 at ADM4, including two Parc de la Kibira polygons, are included but do not represent additional official administrative units.",
+      "dated_metadata_as_reported": "07 July 2026 for accuracy/completeness review, humanitarian validity, last edit before publishing, and boundary creation by source.",
+      "contributed_by": "OCHA Burundi",
+      "quality_assurance_and_publication": "OCHA FIS and HDX",
+      "source_field": null,
+      "license_title": "Creative Commons Attribution for Intergovernmental Organisations (CC BY-IGO)",
+      "license_id": "cc-by-igo"
+    },
+    "resources": [
+      {
+        "format": "GDB",
+        "name": "bdi_admin_boundaries.gdb.zip",
+        "resource_id": "71480559-a237-454c-917f-de2adb7620f6",
+        "url": "https://data.humdata.org/dataset/63148f32-4505-433d-b8ea-1fd8088b4bdf/resource/71480559-a237-454c-917f-de2adb7620f6/download/bdi_admin_boundaries.gdb.zip",
+        "bytes": 70873737,
+        "reported_hash": "49f06a79",
+        "hash_note": "API hash field as returned; not treated as a cryptographic digest.",
+        "last_modified": "2026-08-21T09:06:18Z",
+        "downloaded": false
+      },
+      {
+        "format": "SHP",
+        "name": "bdi_admin_boundaries.shp.zip",
+        "resource_id": "480da9de-1336-40fb-981d-21b5d8046d1c",
+        "url": "https://data.humdata.org/dataset/63148f32-4505-433d-b8ea-1fd8088b4bdf/resource/480da9de-1336-40fb-981d-21b5d8046d1c/download/bdi_admin_boundaries.shp.zip",
+        "bytes": 161628584,
+        "reported_hash": "6abdfcb9",
+        "hash_note": "API hash field as returned; not treated as a cryptographic digest.",
+        "last_modified": "2026-08-21T09:06:23Z",
+        "downloaded": false
+      },
+      {
+        "format": "GeoJSON",
+        "name": "bdi_admin_boundaries.geojson.zip",
+        "resource_id": "770dbebc-5b71-43ef-971a-7932645ad439",
+        "url": "https://data.humdata.org/dataset/63148f32-4505-433d-b8ea-1fd8088b4bdf/resource/770dbebc-5b71-43ef-971a-7932645ad439/download/bdi_admin_boundaries.geojson.zip",
+        "bytes": 185552912,
+        "reported_hash": "5d8bc8f3",
+        "hash_note": "API hash field as returned; not treated as a cryptographic digest.",
+        "last_modified": "2026-08-21T09:06:28Z",
+        "downloaded": false
+      },
+      {
+        "format": "XLSX",
+        "name": "bdi_admin_boundaries.xlsx",
+        "resource_id": "4c1eef45-149d-45c9-b865-c96016b62d84",
+        "url": "https://data.humdata.org/dataset/63148f32-4505-433d-b8ea-1fd8088b4bdf/resource/4c1eef45-149d-45c9-b865-c96016b62d84/download/bdi_admin_boundaries.xlsx",
+        "bytes": 663507,
+        "reported_hash": "2438eff8924f9728ba86ce2642252516",
+        "hash_note": "API hash field as returned; not treated as a cryptographic digest.",
+        "last_modified": "2026-08-21T09:06:33Z",
+        "downloaded": false
+      }
+    ],
+    "comparison_to_retained_119_feature_source": {
+      "assessment": "This is a distinct COD-AB resource/version pipeline from the retained 119-feature geoBoundaries ADM2 corpus: it describes a 2026 humanitarian/admin hierarchy with 42 communes and OCHA contribution/QA. However, its API source field is null and it does not expose underlying feature-level lineage, so independent underlying geometry provenance cannot be proven from metadata alone.",
+      "usefulness": "It offers a current 42-commune administrative comparison and count/vintage context, not confirmation of the represented-year-2007 geometry or of exact Muha/Ntahangwa feature identities in the retained 119-feature source.",
+      "specific_gap": "The metadata contains no feature IDs, constituent-to-aggregate crosswalk, source geometry lineage, or historical 2007-to-current boundary relationship for Muha or Ntahangwa. The published ADM3/ADM4 count caveat also shows COD-AB includes some protected-area polygons outside official administrative-unit counts.",
+      "next_step": "No further acquisition is justified by these metadata alone. A smaller official tabular/crosswalk resource may be inspected only if needed and separately authorized; the 2026 geometry archives are large and were not fetched."
+    }
+  }
+}
