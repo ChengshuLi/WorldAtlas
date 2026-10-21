@@ -289,8 +289,10 @@ feature's complete `properties.metadata.source_member_ids`. Every listed member
 must occur exactly once in the complete retained original product. Relevant
 split/ambiguous lineage, direct-owner conflicts, missing siblings, duplicate IDs
 and conflicting bases are rejected. Unrelated split records do not block a
-one-to-one aggregation. This route does not support transitive or cross-family
-lineage, nor claim a global reverse scan of unread canonical geography metadata.
+one-to-one aggregation. Positive reconciliation does not support transitive or
+cross-family lineage. For negative competitors, use the existing
+[complete complex ancestry](DELIVERY_HANDOFF.md#complete-complex-ancestry-for-negative-original-sources)
+interpretation; it does not infer unread canonical geography metadata.
 
 For a mapped repair target, keep `targets[].id` as the original source-member ID
 and add `targets[].target_id` for its accepted owner ID. `pixelIndex` remains that
