@@ -1,0 +1,9 @@
+# STP original package: proposed unresolved disposition
+
+This additive packet covers the exact original `gb-STP-ADM1--repair-evaluation` queue scope: 460 cells in 181 intervals, split across native blocks 031 and 032. It records a proposed documented-unresolved disposition for each interval. The proposal is unaccepted, adds zero accepted credit, and does not claim repair qualification or package completion.
+
+The stock selected-owner observation is retained beside this proposal. It is pinned to current main and reports zero base, additive, and effective selected ownership for all 460 keys. This establishes current selected-product nonassignment only. It does not establish the historical accepted-receipt overlap, source applicability, current physical classification, legal authority, or publication acceptance. Historical accepted-key overlap remains unknown because no complete exact-key receipt-ledger join was available in this review.
+
+The source candidates map to the two retained STP ADM1 source features and the 460 cells are land in the original queue mask. These are source-row and retained-mask observations. Issue [#865](https://github.com/ChengshuLi/WorldAtlas/issues/865) records the unresolved canonical source roles, source vintage/lineage, and whether the two main-island polygons omit associated land or islets; the parent packet is [#464](https://github.com/ChengshuLi/WorldAtlas/issues/464). This packet preserves those gaps and does not infer an official current administrative boundary.
+
+The current queue contract allows each exact interval to be handled as a qualified additive repair or documented exception and requires actual selected-native conservation plus source/physical witness checks. The attached proposal identifies those checks and remains explicitly unaccepted pending distinct exact-head review and the normal delivery/acceptance route.
