@@ -524,11 +524,13 @@ function miniatureInventory(root,prefix=''){
 }
 const miniatureBytes=inventory=>inventory.map(({device,inode,...file})=>file);
 
-for(const options of [{},{nativeAppend:true}])test(`miniature seed copies isolate all files and mutable state ${JSON.stringify(options)}`,async t=>{
+for(const options of [{},{nativeAppend:true}])for(const packed of [false,true])test(`miniature seed copies isolate all files and mutable state ${JSON.stringify(options)}, packed=${packed}`,async t=>{
  const [a,b]=await Promise.all([trustedFixture(t,options),trustedFixture(t,options)]);
+ if(packed)for(const f of [a,b])f.git('repack','-ad');
  const original=miniatureInventory(a.root),other=miniatureInventory(b.root);
  assert.deepEqual(miniatureBytes(original),miniatureBytes(other));
- assert.ok(original.some(file=>/^\.git\/objects\/[a-f0-9]{2}\/[a-f0-9]{38}$/.test(file.name)));
+ const object=original.find(file=>/^\.git\/objects\/(?:[a-f0-9]{2}\/[a-f0-9]{38}|pack\/pack-[a-f0-9]{40}\.pack)$/.test(file.name));
+ assert.ok(object,'Copied Git object body exists in loose or packed storage');
  assert.equal(fs.existsSync(path.join(a.root,'.git/objects/info/alternates')),false);
  for(let i=0;i<original.length;i++)
   assert.notEqual(`${original[i].device}:${original[i].inode}`,`${other[i].device}:${other[i].inode}`,original[i].name);
@@ -547,12 +549,13 @@ for(const options of [{},{nativeAppend:true}])test(`miniature seed copies isolat
  const originalData=structuredClone(Object.fromEntries(['ledger','patch','sidecar','envelope','selection','rootRow','manifest','features','registry'].map(key=>[key,b[key]])));
  a.features[0].properties.id='only the first consumer';a.ledger.rows[0].target_id='wrong owner';
  a.rootRow.certificate.decoded_sha256='0'.repeat(64);a.manifest.parts[0].sha256='0'.repeat(64);
- const object=original.find(file=>/^\.git\/objects\/[a-f0-9]{2}\/[a-f0-9]{38}$/.test(file.name));
  fs.chmodSync(path.join(a.root,object.name),0o644);
  fs.writeFileSync(path.join(a.root,object.name),'corrupt only the first object');
  fs.appendFileSync(path.join(a.root,'.git/config'),'\n# first consumer only\n');
  a.save('data/source.json',{changed:'first consumer only'});
- const c=await trustedFixture(t,options),third=miniatureInventory(c.root);
+ const c=await trustedFixture(t,options);
+ if(packed)c.git('repack','-ad');
+ const third=miniatureInventory(c.root);
  assert.deepEqual(miniatureBytes(miniatureInventory(b.root)),miniatureBytes(other));
  assert.deepEqual(miniatureBytes(third),miniatureBytes(original),'The private seed remains pristine');
  for(let i=0;i<third.length;i++)

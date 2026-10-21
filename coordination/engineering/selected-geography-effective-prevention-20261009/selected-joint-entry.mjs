@@ -10,7 +10,7 @@ import {gzipSync} from 'node:zlib';
 const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
 const P = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
 export const JOINT_CODE = Object.freeze([
-  'scripts/run-geographic-check.py',
+  'scripts/run-geographic-check.py', 'scripts/geography-prefetch.mjs',
   'scripts/native-word-store.mjs','scripts/native-patch-store.mjs', 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',
   'src/native-grid.js', 'src/ownership-codec.js',
   P + 'selected-neighbor-prevention.mjs', P + 'selected-checkpoint.mjs', P + 'selected-joint-entry.mjs',
@@ -105,6 +105,22 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
   const {valueBytes, valueSha} = await import('./selected-neighbor-prevention.mjs');
   const startup = native.selectedBootstrap(repo, baseline, candidate, {parentRuntimePath});
   const {beforeReader, afterReader} = startup;
+  const {createAcquisition} = await import('../../../scripts/geography-prefetch.mjs');
+  let declaredPin;
+  const acquisition = createAcquisition({repo,
+    // Complete pins already supply lengths. The existing acquisition compares
+    // mode/OID with the local origin tree, without a remote tree or blob read.
+    loadDescriptor:(_version,name) => {
+      demand(name === declaredPin.path, 'Appended authority acquisition path differs');
+      return {type:'blob',mode:declaredPin.mode,sha:declaredPin.git_blob_oid,size:declaredPin.bytes};
+    },
+    execute:(_command,args,options) => execFileSync(beforeReader.gitExecutable,args,
+      {...options,env:{...options.env,GIT_EXEC_PATH:startup.gitExecPath}})});
+  const acquireAuthorityInputs = async (reader,pins) => {
+    const rows=[];
+    for (const p of pins) { declaredPin=p; rows.push(await acquisition.pin(reader.version,p)); }
+    acquisition.acquire(rows);
+  };
   let state, acceptedHandle;
   const accepted = await import('../../../scripts/accepted-selected-checkpoint.mjs');
   const transportInputs = [];
@@ -136,10 +152,10 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
       phaseComplete('checkpoint-acquisition');
       if (!proof.available) return coldDecision({cold:'baseline-and-candidate', reason:proof.reason});
       acceptedHandle = proof.handle;
-      qualified = await checkpoint.qualifyAcceptedCheckpoint({reader:beforeReader, acceptedHandle});
+      qualified = await checkpoint.qualifyAcceptedCheckpoint({reader:beforeReader, acceptedHandle, acquireAuthorityInputs});
     } else {
       phaseComplete('checkpoint-acquisition');
-      qualified = await checkpoint.qualifyCheckpoint({reader:beforeReader});
+      qualified = await checkpoint.qualifyCheckpoint({reader:beforeReader, acquireAuthorityInputs});
     }
     phaseComplete('baseline-qualification');
     if (!qualified.available) return coldDecision(qualified);

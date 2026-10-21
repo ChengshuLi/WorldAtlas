@@ -415,9 +415,9 @@ function getState(state, reader) {
 
 /** Reader.version is the actual baseline, not the historical execution commit.
  * Unsupported reuse returns a cold-path decision. Corrupt custody throws. */
-export async function qualifyCheckpoint({reader,checkpointId}) {
+export async function qualifyCheckpoint({reader,checkpointId,acquireAuthorityInputs}) {
   sessionCheck(reader);
-  const session = {reader,invocation:reader.invocation,repo:reader.repo,closed:false,handles:new Set()};
+  const session = {reader,invocation:reader.invocation,repo:reader.repo,closed:false,handles:new Set(),acquireAuthorityInputs};
 
   try {
     const {catalogue,trusted,archiveReader} = rootCatalogue(session,reader);
@@ -603,9 +603,9 @@ function finishCheckpoint(session,reader,{data,routes,physicalPaths,rebind,selec
 // The accepted report is authority only after the transport module has verified
 // the existing bot merge receipt, actual merged tree, trusted job and archive.
 // Keep the legacy synchronous entry independent of this optional async boundary.
-export async function qualifyAcceptedCheckpoint({reader,acceptedHandle}) {
+export async function qualifyAcceptedCheckpoint({reader,acceptedHandle,acquireAuthorityInputs}) {
   sessionCheck(reader);
-  const session = {reader,invocation:reader.invocation,repo:reader.repo,closed:false,handles:new Set()};
+  const session = {reader,invocation:reader.invocation,repo:reader.repo,closed:false,handles:new Set(),acquireAuthorityInputs};
 
   try {
     const {trusted,archiveReader}=rootCatalogue(session,reader,{accepted:true});
@@ -1122,9 +1122,15 @@ async function appendAuthority(session, reader, entry, domain) {
   const child = new ImmutableReader(reader.repo,reader.version,{invocation:reader.invocation,gitExecutable:reader.gitExecutable});
   child.inventory=reader.inventory; // retain actual appended-producer inputs without reopening them
   let proof;
+  const acquire = async pins => {
+    pins.forEach(pin);
+    await session.acquireAuthorityInputs?.(child,pins);
+  };
   if(entry.completed_constructor!==undefined){
+    await acquire([entry.rule_preimage,entry.source_authority]);
     const {preimage,binding}=readRegistryAuthorityInputs(child,entry);
     if(binding?.kind==='source-target-native-custody-v1'){
+      await acquire([entry.completed_constructor,binding.source_evidence,binding.native_patch]);
       const constructed=await storedProduct(session,child,entry.completed_constructor,domain,'constructor');
       const evidence=await storedProduct(session,child,binding.source_evidence,domain,'envelope');
       const candidate=await storedProduct(session,child,binding.native_patch,domain,false);

@@ -8,6 +8,7 @@ import {pathToFileURL} from 'node:url';
 import childProcess, {execFileSync} from 'node:child_process';
 import {gzipSync,gunzipSync,crc32,deflateRawSync} from 'node:zlib';
 import {trustedFixture as trustedNativeFixture} from './helpers/selected-joint-fixture.mjs';
+import {trustedFixture as appendedFixture,appendNativeAuthority} from './fixtures/selected-checkpoint.mjs';
 import {ACCEPTED_CHECKPOINT_CODE} from '../scripts/accepted-selected-checkpoint.mjs';
 import {renderWorkerResult} from '../scripts/worker-result.mjs';
 import crypto, {createHash} from 'node:crypto';
@@ -333,8 +334,8 @@ const JSON_BODY=valueBytes;
 const P='coordination/engineering/selected-geography-effective-prevention-20261009/';
 const {JOINT_CODE:JOINT}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs');
 const MEMBERS=['derived-certificate.json.gz','derived-facts.json','derived-publication.json','checkpoint-routes.json'];
-async function acceptedProducts(t,{sourcePaths,actualProducer=false,nativeOnly=false,sourceOverride=false,physicalLogicalSource=false,inheritedCode=false,wireProducts=false}={}) {
-  const f=nativeOnly?await trustedNativeFixture(t,{nativeOnly:true}):await trustedFixture(t,{sourcePaths,sourceOverride,physicalLogicalSource,inheritedCode,wireProducts});
+async function acceptedProducts(t,{sourcePaths,actualProducer=false,nativeOnly=false,nativeAppend=false,sourceOverride=false,physicalLogicalSource=false,inheritedCode=false,wireProducts=false}={}) {
+  const f=nativeAppend?await appendedFixture(t,{nativeAppend:true}):nativeOnly?await trustedNativeFixture(t,{nativeOnly:true}):await trustedFixture(t,{sourcePaths,sourceOverride,physicalLogicalSource,inheritedCode,wireProducts});
   for(const name of [...JOINT,...(actualProducer?['scripts/check-geographic-regression.py','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt']:[])])f.save(name,fs.readFileSync(name));
   f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[f.rootRow]});
   if(f.inherited)f.save(f.inherited.path,{reviewed:'successor configuration'});
@@ -1000,4 +1001,32 @@ for(const role of ['ledger','patch'])test('accepted private digest does not cach
  assert(directories.length>0);for(const directory of directories)assert.equal(fs.existsSync(directory),false,'Failed invocation must release its own stores');
  assert.equal(valueSha(nativeLiteral(good.state[role])),f.products.facts.candidate_bindings[role+'_sha256'],'A failed separate admission must not close the valid snapshot');
  f.api.releaseCheckpoint(good.state);f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+
+
+test('accepted checkpoint catch-up acquires only its appended completed-authority operands',async t=>{
+  const f=await acceptedProducts(t,{nativeAppend:true,actualProducer:true}),a=await acquire(f);
+  const next=await appendNativeAuthority(f,{completedConstructor:true});
+  const binding=JSON.parse(f.git('show',next.entry.source_authority.commit+':'+next.entry.source_authority.path));
+  const layers=[[next.entry.rule_preimage,next.entry.source_authority],
+    [next.entry.completed_constructor,binding.source_evidence,binding.native_patch]];
+  const bodies=new Map(layers.flat().map(p=>[p.git_blob_oid,f.git('cat-file','blob',p.git_blob_oid)]));
+  for(const p of layers.flat())fs.unlinkSync(path.join(f.root,'.git/objects',p.git_blob_oid.slice(0,2),p.git_blob_oid.slice(2)));
+  a.reader=currentReader(f,a,next.candidate);
+  await assert.rejects(()=>qualify(f,a),/cat-file/,'Library callers remain read-only without acquisition');
+  const calls=[];
+  const q=await f.api.qualifyAcceptedCheckpoint({reader:a.reader,acceptedHandle:a.handle,
+    acquireAuthorityInputs:async (reader,pins)=>{
+      assert.equal(reader.version,next.candidate);
+      assert.deepEqual(pins,layers[calls.length]);calls.push(pins);
+      for(const p of pins)assert.equal(execFileSync('git',['-C',f.root,'hash-object','-w','--stdin'],
+        {input:bodies.get(p.git_blob_oid),encoding:'utf8'}).trim(),p.git_blob_oid);
+      return {available:false,forged:'Callback return is not scientific evidence'};
+    }});
+  assert.equal(calls.length,2);assert.equal(q.available,true);
+  assert.equal(q.state.selected_commit,next.candidate);
+  assert.equal(q.state.accepted_execution.historical_selected_commit,f.trusted);
+  assert.deepEqual(nativeLiteral(q.state.patch.rows),next.patch.rows);
+  assert.deepEqual(nativeLiteral(q.state.ledger.rows),next.ledger.rows);
+  f.api.releaseCheckpoint(q.state);f.transport.releaseAcceptedCheckpoint(a.handle);
 });
