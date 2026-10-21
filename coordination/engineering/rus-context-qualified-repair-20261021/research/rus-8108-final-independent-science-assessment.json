@@ -37,7 +37,7 @@
   },
   "source_comparison": {
     "report": "inventory/rus-mng-source-geometry-canonical-comparison.json",
-    "report_sha256": "368f84616e8d4fb606d002ced5dbdea282dc1a93ef440d8710f4566cb2aec1e8",
+    "report_sha256": "46ccf40d0f11cd1f3157ec0b3f540bdf30bfcead6c04d87cb8c1e32225c3664b",
     "source_commit": "9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c",
     "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MNG-ADM1-000.bin.gz",
     "source_blob_oid": "3268f5d6bc0cb37009f5861e8913b0b71e237949",
@@ -77,7 +77,9 @@
       "gb:RUS:ADM2:50074027B52464361757597",
       "gb:RUS:ADM2:50074027B57903229029345"
     ],
-    "limit": "These are whole-target adverse issue records and exact proposed-key counts per affected target; the receipt does not establish that every candidate center intersects an issue geometry or that target issues are immaterial."
+    "limit": "These are whole-target adverse issue records and exact proposed-key counts per affected target; the receipt does not establish that every candidate center intersects an issue geometry or that target issues are immaterial.",
+    "residual_targets_with_any_issues": 9,
+    "all_original_residual_keys_on_issue_bearing_targets": 1089
   },
   "native_evidence": {
     "diagnostic": "coordination/engineering/rus-context-qualified-repair-20261021/native-diagnostic-002/native-diagnostic.json",
