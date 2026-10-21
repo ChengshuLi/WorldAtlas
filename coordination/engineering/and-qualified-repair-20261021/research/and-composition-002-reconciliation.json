@@ -1,0 +1,108 @@
+{
+  "accounting": {
+    "actual_cumulative": 6336429,
+    "current_scope_count": 7009,
+    "expected_cumulative": 6336429,
+    "interpretation": "Normal stock composition output is retained-native-base-plus-delta-v2. The final ledger contains the exact single AND component matching the 71-cell constructor and totals 6,336,429, a net increase of 71 over the LIE-inclusive 6,336,358 reference.",
+    "limitation": "This bounded check uses the retained LIE reconciliation for prior cell-count reference and the stock composition envelope for the base binding. It does not independently byte-diff every inherited prior ledger row against a separately materialized full prior ledger.",
+    "net_delta_matches": true,
+    "new_AND_supported_cells": 71,
+    "prior_cells_evidence": "inventory/lie-composition-001-reconciliation.json: prior MNP selected cells 6,336,210 + LIE 148 = 6,336,358.",
+    "prior_lie_inclusive_native_cells": 6336358,
+    "prior_scope_count_from_LIE_reconciliation": 7007,
+    "scope_count_difference": 2
+  },
+  "component_delta": {
+    "component_id": "source-target:71ac6072da01ffade978f1b746f737e468eebeece5af619e3bab15a80465e56d",
+    "equals_constructor_native_keys": true,
+    "native_cells": 71,
+    "native_key_sha256_sorted_triplets": "128f7a7dc218eeca03926e3f4f7e56e1d7b2c8d31b604b67c86586103660050f",
+    "owner_id": 7109,
+    "target_id": "atlas:territory:AND"
+  },
+  "composition": {
+    "authority_registry": {
+      "bytes": 265371,
+      "path": "composition-002/authority-registry.json",
+      "sha256": "495f6fa697680299fe05700a604dcc73af2ced8582b89de7814f4fe462f08f87"
+    },
+    "base_manifest": {
+      "bytes": 252447,
+      "path": "additive-repairs/retained-activation-base-native-manifest.json",
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+    },
+    "base_reference": {
+      "footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+      "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+      "id": "geography:review:211cb423e8c3bdcb3cbe88a4327fbd47eb10ccb61cd0ca4b884ed376564e7718"
+    },
+    "cumulative_native_cells": 6336429,
+    "effective_reference": {
+      "footprints_sha256": "1fcb421376e7726140cb43a245c34138b2a8d001eac1487be61d8c18fde2e860",
+      "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+      "id": "geography:and71-evidenced-repair-20261021"
+    },
+    "ledger_row_count": 7009,
+    "local_commit": "0a1dabb21bdb5eb9fd2826f89c0deaf9d33b3cef",
+    "model": "retained-native-base-plus-delta-v2",
+    "output": {
+      "bytes": 63194622,
+      "path": "composition-002/selected-ledger.json",
+      "sha256": "a41d17fbd1177d987336cd558f8f1eaf1a610fd92fb64ce4a3bda1ba37167919"
+    },
+    "patch": {
+      "bytes": 30615086,
+      "path": "composition-002/patch.json",
+      "sha256": "7796924afbf3aca120544b71423415ab0681067c24503401e0c327484e4f50c2"
+    },
+    "runtime_envelope": {
+      "bytes": 1381,
+      "path": "composition-002/runtime-envelope.json",
+      "sha256": "67bcbfe4839869e27d1c098023aaf1f05c111746012222513585e6661e148dd0"
+    },
+    "scope_id_count": 7009,
+    "unique_component_id_count": 7008
+  },
+  "kind": "and-composition-002-bounded-reconciliation",
+  "limits": [
+    "No observer, physical producer, diagnostic, constructor, composition, or test was rerun by this reconciliation.",
+    "This is composition/accounting evidence, not root acceptance or historical-credit adjudication."
+  ],
+  "original_scope_join": {
+    "held_absent_from_composed_AND_component": true,
+    "held_key": {
+      "context": "Lleida source contact; original source evidence records empty direct owner list; retained as held under unique-source-target-coverage.",
+      "owner_id": 7109,
+      "x": 132142,
+      "y": 96891
+    },
+    "held_key_sha256_sorted_triplets": "21b00a08489c6da5df20b90cfb3b629b13e7eb1b5b8a4744707e6c3fdbe26529",
+    "held_keys": 1,
+    "original_key_sha256_sorted_triplets": "8558ed5c5f925a6f9c3830f8b8d53e5b6849e2ae866dad1c05b612df82e42d23",
+    "original_keys": 72,
+    "supported_equals_native_diagnostic_and_constructor": true,
+    "supported_key_sha256_sorted_triplets": "128f7a7dc218eeca03926e3f4f7e56e1d7b2c8d31b604b67c86586103660050f",
+    "supported_keys": 71
+  },
+  "package_declaration_adoption": {
+    "added_current_cumulative_roles": [
+      "coordination/engineering/and-qualified-repair-20261021/composition-002/patch.json",
+      "coordination/engineering/and-qualified-repair-20261021/composition-002/runtime-envelope.json",
+      "coordination/engineering/and-qualified-repair-20261021/composition-002/selected-ledger.json",
+      "coordination/engineering/and-qualified-repair-20261021/selection-sidecar-001.json"
+    ],
+    "base": "53eb39c23dc78f41cb674ac80a75b88c76b26770",
+    "current_inputs": 248,
+    "evidence_path": "coordination/engineering/and-qualified-repair-20261021/research/package-declaration-adoption.json",
+    "method": "Normal stock appendPackageReadPaths authenticates selected cumulative prior roles before retiring exactly superseded declarations. No historical evidence or refs deleted.",
+    "other_fields_and_retained_order_unchanged": true,
+    "prior_inputs": 248,
+    "retired_prior_cumulative_roles": [
+      "coordination/engineering/lie-qualified-repair-20261021/composition-001/patch.json",
+      "coordination/engineering/lie-qualified-repair-20261021/composition-001/runtime-envelope.json",
+      "coordination/engineering/lie-qualified-repair-20261021/composition-001/selected-ledger.json",
+      "coordination/engineering/lie-qualified-repair-20261021/selection-sidecar-001.json"
+    ]
+  },
+  "status": "verified"
+}
