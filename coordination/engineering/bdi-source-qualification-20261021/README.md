@@ -193,3 +193,28 @@ owner partitions and author provenance attempts are preserved under
 `evidence-investigation/`. Paragraph 71 of the 2018 development plan is on
 printed page 34, physical PDF page 43 (zero-based index 42). No observation,
 physical producer or diagnostic was repeated for this research update.
+
+## Upstream archive and bounded positive-candidate preparation
+
+The same independent reviewer acquired the exact public geoBoundaries source
+archive (448,304 bytes; SHA256
+`522c15fd275ab02381d545e77c291a2a5b6bdc948d20597064e9c84e911d2eae`).
+Its DBF contains only Name and Level; all 119 ordered pairs match the retained
+source names/levels. The archive metadata repeats the 2007 represented year and
+contains no per-feature predecessor history. No unsimplified-archive geometry
+equivalence is claimed. The raw archive is retained locally, not published.
+
+With exact stable-owner identity and the retained complete source, foreign,
+physical and center evidence, the independent reviewer found no specific source
+predicate contradiction for the 448 keys outside the four focal targets and
+supported continuing the stock positive-candidate path. This supersedes the
+earlier generic request for unspecified current-lineage proof for all 448.
+The four focal targets remain under separate investigation; the limitation is
+not erased or generalized to unrelated stable owners.
+
+Stock supported-input preparation completed once with 448 requested cells
+(290 land, 158 inland water) and 135 held cells (81 investigative, 54 territorial),
+zero overlap, preserving the complete 583-key original denominator. Complete
+source, competitor, negative and physical inputs remain pinned. This is a
+prepared request only; genuine native authority and selected-native conservation
+remain required before qualification or acceptance.
