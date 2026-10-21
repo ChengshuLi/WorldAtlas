@@ -1057,25 +1057,31 @@ export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,
   return Array.from(candidates,row=>witnesses.get(repairComponentKey(row))??null);
 }
 
+export function selectInstalledGit() {
+  const selected=(process.env.PATH??'').split(path.delimiter).map(p=>path.join(p,'git')).find(p=>{try{return fs.statSync(p).isFile();}catch{return false;}});
+  demand(selected,'Missing installed Git');
+  const launchGit=fs.realpathSync(selected);
+  // Resolve the full Git implementation, including a macOS command-line shim.
+  const gitExecPath=fs.realpathSync(execFileSync(launchGit,['--exec-path']).toString().trim());
+  const gitExecutable=fs.realpathSync(path.resolve(gitExecPath,'../../bin/git'));
+  // Bind helpers to this installed implementation, not an unrelated prefix alias.
+  // This is an installation relationship, not independent helper-byte authentication.
+  demand(path.resolve(gitExecPath,'../../bin')===path.dirname(gitExecutable),'Selected Git helpers do not share the implementation installation');
+  return {launchGit,gitExecutable,gitExecPath};
+}
+
 export function selectedBootstrap(repo,baseline,candidate,{parentRuntimePath}={}) {
   const runtimePaths=[fs.realpathSync(process.execPath),...(parentRuntimePath?[fs.realpathSync(parentRuntimePath)]:[])];
   const codeRoot=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
   const codePaths=['scripts/run-geographic-check.py','scripts/check-effective-geographic-regression.mjs','src/native-grid.js','src/ownership-codec.js','coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/selected-reference-metadata.mjs','src/reference-metadata.js'];
   const codeStats=codePaths.map(name=>{const file=path.join(codeRoot,name),stat=fs.statSync(file);demand(stat.isFile()&&Number.isSafeInteger(stat.size)&&stat.size>0,'Nonordinary trusted execution code');return {name,file,stat};});
-  const launchGit=(process.env.PATH??'').split(path.delimiter).map(p=>path.join(p,'git')).find(p=>{try{return fs.statSync(p).isFile();}catch{return false;}});
-  demand(launchGit,'Missing installed Git');runtimePaths.push(fs.realpathSync(launchGit));
-  // Resolve the full Git implementation, including a macOS command-line shim.
-  const execPath=fs.realpathSync(execFileSync(runtimePaths.at(-1),['--exec-path']).toString().trim());
-  const gitExecutable=fs.realpathSync(path.resolve(execPath,'../../bin/git'));runtimePaths.push(gitExecutable);
-  // Bind helpers to this installed implementation, not an unrelated prefix alias.
-  // This is an installation relationship, not independent helper-byte authentication.
-  demand(path.resolve(execPath,'../../bin')===path.dirname(gitExecutable),'Selected Git helpers do not share the implementation installation');
+  const {launchGit,gitExecutable,gitExecPath}=selectInstalledGit();runtimePaths.push(launchGit,gitExecutable);
   const invocation=Object.freeze({});
   const beforeReader=new ImmutableReader(repo,baseline,{gitExecutable,invocation}),afterReader=new ImmutableReader(repo,candidate,{gitExecutable,invocation});
   const identities=[...new Set(runtimePaths)].map(p=>runtimeIdentity(p));
   const runtime=identities.find(p=>p.path===fs.realpathSync(process.execPath)),callerRuntime=parentRuntimePath?identities.find(p=>p.path===fs.realpathSync(parentRuntimePath)):null;
   const executionCode=codeStats.map(({name,file,stat})=>{const body=fs.readFileSync(file);demand(body.length===stat.size,'Trusted execution code changed during whole read');return {path:name,bytes:body.length,mode:stat.mode&0o777,sha256:sha(body)};});
-  return {beforeReader,afterReader,runtime,callerRuntime,identities,executionCode,gitExecPath:execPath};
+  return {beforeReader,afterReader,runtime,callerRuntime,identities,executionCode,gitExecPath};
 }
 
 export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) {
