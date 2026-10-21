@@ -1,8 +1,8 @@
 {
   "observation_commit": "867740323969355fb3691f0130120fd99e7a7426",
   "main_at_execution": "867740323969355fb3691f0130120fd99e7a7426",
-  "verified_pr_base": "867740323969355fb3691f0130120fd99e7a7426",
-  "current_main": "867740323969355fb3691f0130120fd99e7a7426",
+  "verified_pr_base": "b463b4bbbd6f698a9ad2d04017b8f4153f4e64df",
+  "current_main": "b463b4bbbd6f698a9ad2d04017b8f4153f4e64df",
   "unchanged_inputs": [
     {
       "path": "scripts/run-geographic-check.py",
@@ -170,5 +170,5 @@
   "attempts": 1,
   "observation_repeated": false,
   "execution_elapsed_seconds": 5.543802375,
-  "reuse_reason": "Single observation executed at this author base; subsequent inert main changes require exact consumed-input comparison, not automatic re-execution."
+  "reuse_reason": "All40 consumed input/code blobs are identical at the observed execution commit and this verified public PR base. Main advanced without changing these inputs; original execution remains bound and is not repeated."
 }
