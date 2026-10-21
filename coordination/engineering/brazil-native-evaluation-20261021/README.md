@@ -1,0 +1,37 @@
+# Original Brazil partial native repair: 24,078 candidate cells, 447 holds
+
+Original scope: [issue #2415](https://github.com/ChengshuLi/WorldAtlas/issues/2415) and the complete [retained research/source/physical packet #2421](https://github.com/ChengshuLi/WorldAtlas/pull/2421). This delivery does not close the package, its 447 holds, or separate Brazilian companion categories. Constructor qualification is not selected delivery or acceptance; no repair credit is claimed here before independent review, ordinary delivery and explicit root acceptance.
+
+## Complete original scope and actual results
+
+The unchanged original request contains 24,525 cells (23,813 retained land-class, 712 inland-water-class), 10,068 original intervals, 123 intended owners and 920 whole original source members. `config/native-authority-001.json` retains the exact complete request and source-evidence locators at `cb36096d479cda171354f338d68c3658b44a7742`. The full original bodies remain public in #2421, not replaced by summaries here.
+
+After the independently anchored negative-lineage correction delivered in [#2651](https://github.com/ChengshuLi/WorldAtlas/pull/2651), one actual full native evaluation failed the unchanged unique-source-target-coverage predicate. `operating/native-authority.*` and its execution record preserve that failure (exit 1, 28.374 seconds), not an authority product. The existing `native-diagnostic` then completed once (22.677 seconds), preserving all original requested, supported and held rows.
+
+The stock `supported-inputs` operation produced an exact disjoint partition:
+
+- 24,078 requested candidates: 23,366 land-class and all 712 water-class keys.
+- 447 held original land-class keys, all with territorial-exclusion decisions.
+- 115 retained owners / 825 positive member records. Eight wholly held owners account for the 95 removed positive records; 28 retained records change only their exact coverage rows.
+
+All non-target source-evidence fields and every other field of retained targets remain unchanged. Complete source families, original physical input/report, lineage, foreign families and negative operands remain pinned. Removed positive records do not remove their full original source Features from competitor context. `supported-inputs-001/held-original.json`, `original-scope-partition.json`, the complete diagnostic and `supported-input-conservation.json` conserve the entire denominator. Request class labels are not independent physical evidence.
+
+All 447 held keys have actual native interior hits in five complete original foreign ADM1 Features: Misiones 248 and Corrientes 6 (Argentina), Ucayali 130 and Madre de Dios 61 (Peru), and Concepcion 2 (Paraguay). `held-cell-veto-attribution.json` retains every exact key, original reference ordinal/hash and witness effect; the compact summary is a convenience only. There are no split-original hits among these 447. These are retained-source overlaps, not a conclusion about present legal borders or permission to remove foreign competitors. Other physical issues remain preserved even when a territorial decision takes precedence.
+
+After independent review of that materially narrowed request, exactly one stock native-authority evaluation succeeded: 24,078 qualified cells / 115 native components, exit 0, 35.994 seconds. Its four genuine products are in `native-authority-supported-001/`; complete stdout, stderr, timing and actual executing HEAD are in `operating/`. Executing/data commit `dd979d87a5edfe6355b9d5f3829cd1c144c7639a` adds only data to delivered code `737b4e01c3d1f721a1df175f350bf75c16bbc5ba`; code bodies were unchanged. No original source/physical producer or historical geometry operation was replayed.
+
+## Source, physical and provenance boundaries
+
+The complete 5,570-feature original BRA ADM2 product is the retained geoBoundaries simplified release attributed to IBGE/OCHA ROLAC, represented year 2020, with its recorded CC BY 3.0 IGO provenance. Its whole decoded SHA-256 remains `96abf365ab2be5f620a1516bc555e6f7cfade6b43313c562ab1ab05d1039973f`. This is historical source-relative qualification, not a claim that this geometry establishes contemporary legal authority. The original source packet retains actual access limitations and substantive research.
+
+The unchanged 23,982,880-byte physical report at `25c222f99df290f5d10fbea49fa8376f61ce9b78:coordination/engineering/brazil-original-repair-20261017/physical-001/whole-target-support.json` has SHA-256 `b3194f057414988318e74917ccd81fac49b52cd7fa8c7b957ea84fb39ea6bff6`. It contains all 920 originals and 3,775 checked relations, including overlapping issue counts of 115 extra reconstruction, 80 missing reconstruction, 44 contradictory land/water and 13 L2-outside-L1 records. Native qualification applies the unchanged residual, class and ownership predicates to the requested keys; it does not erase those whole-source findings.
+
+The complete foreign source context remains ARG ADM1/2, BOL ADM1/2, PER ADM1/2, PRY ADM1/2, SUR ADM1/2 and URY ADM1. The source-evidence body retains the full catalogue, original membership, normative latitude and physical pins. The 36 intermediate and 152 terminal lineage edges already exist in the independently registered selected-origin semantic report. The delivered negative-only provenance rule authenticates that whole original body; it does not recreate missing historical intermediate geometry, accept candidate-imported history, or turn negative geometry into positive authority.
+
+## Current selection and retained ownership observation
+
+`composition-001/` uses accepted main `94fd166b4e0ced382659e2c15a1a5c14141717f8`, including the just-delivered Luxembourg and Saint Vincent authorities. The ordinary composer preserves all inherited registry entries and literal ledger rows, checks disjoint additive intervals, and adds only the genuine BRA authority. `config/compose-001.json` and `config/finalize-001.json` retain the exact inputs. The finalizer's canonical selector/package/sidecar and single expectations file are adopted without a duplicate finalized bundle.
+
+The complete prior BRA owner receipt is already public at `coordination/engineering/pan-bra-original-dispositions-20261020/bra-selected-owner-observation.json.gz` (encoded SHA-256 `b9567962887a9469cd66e46db609f0e48b910745b1c60e29c688d2299736f032`, decoded `002c1882e5ef77899b2e554aec6a050fa48229683126edcb54fe4ec48f51f314`). Its true observer code/data producer remains `42c89c9c73871d41d9c1f5cea84ffc015f23189e`. `observation-delivery-base-bridge.json` authenticates unchanged native base/transport/latitude identities and joins every one of the 24,525 original keys to the complete current additive patch: zero prior owners or overlaps. It does not relabel the old report, duplicate the observer, or certify final candidate ownership.
+
+Actual selected-consumer conservation and emitted-package checks remain distinct from this constructor result and must be retained through normal exact-head review and stock delivery. All 447 holds remain outside the additive patch.

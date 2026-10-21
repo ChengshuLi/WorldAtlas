@@ -1,0 +1,77 @@
+{
+  "started_at": "2026-10-21T04:52:53.318782+00:00",
+  "executing_head": "dd979d87a5edfe6355b9d5f3829cd1c144c7639a",
+  "data_commit": "dd979d87a5edfe6355b9d5f3829cd1c144c7639a",
+  "delivered_code_commit": "737b4e01c3d1f721a1df175f350bf75c16bbc5ba",
+  "code_unchanged_from_delivery": true,
+  "data_only_changes": [
+    "coordination/engineering/brazil-native-evaluation-20261021/config/native-authority-001.json",
+    "coordination/engineering/brazil-native-evaluation-20261021/config/supported-inputs-001.json",
+    "coordination/engineering/brazil-native-evaluation-20261021/native-diagnostic-001/native-diagnostic.json",
+    "coordination/engineering/brazil-native-evaluation-20261021/native-diagnostic-001/preparation.json",
+    "coordination/engineering/brazil-native-evaluation-20261021/supported-inputs-001/held-original.json",
+    "coordination/engineering/brazil-native-evaluation-20261021/supported-inputs-001/native-patch.json",
+    "coordination/engineering/brazil-native-evaluation-20261021/supported-inputs-001/original-scope-partition.json",
+    "coordination/engineering/brazil-native-evaluation-20261021/supported-inputs-001/preparation.json",
+    "coordination/engineering/brazil-native-evaluation-20261021/supported-inputs-001/source-evidence.json"
+  ],
+  "independent_review_sha256": "fa2cb235d38176588bc53ed6927af43077b9812e70f3a62a5416b3a04d335123",
+  "config_sha256": "15b3d1455dc47a4d3f175f09f927b8d5fa7ec3eefcbdb180fb7060f1a1559159",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "native-authority",
+    "coordination/engineering/brazil-native-evaluation-20261021/config/native-authority-supported-001.json",
+    "coordination/engineering/brazil-native-evaluation-20261021/native-authority-supported-001"
+  ],
+  "cwd": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/00ea0af393560806a40a3afe4a73936ad68205d8dfd9001f0807b9334511f129/work",
+  "runtime": {
+    "node": "v24.19.0",
+    "git": "git version 2.52.0",
+    "node_sha256": "bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12",
+    "git_sha256": "9dae295c1a4ffae4ee772e6205fcf22b26e1bfeeb5ee98f278b5139bda7ca22f",
+    "git_exec_path": "/usr/local/libexec/git-core"
+  },
+  "original_cells": 24525,
+  "requested_cells": 24078,
+  "retained_held_cells": 447,
+  "status": "completed",
+  "exit_code": 0,
+  "elapsed_seconds": 35.99350916000549,
+  "finished_at": "2026-10-21T04:53:29.312288+00:00",
+  "destination_exists": true,
+  "native-authority-supported.stdout.log": {
+    "bytes": 481,
+    "sha256": "fb57ea78fff240dbab28646c259aadcb28c31edbffad9a8d12f945fc4a402207"
+  },
+  "native-authority-supported.stderr.log": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "native-authority-supported.time.log": {
+    "bytes": 160,
+    "sha256": "2470d1b186dc73936128248ff2864fc11c9263f824f9028eccd6f4dcd3cc8e29"
+  },
+  "outputs": [
+    {
+      "path": "coordination/engineering/brazil-native-evaluation-20261021/native-authority-supported-001/authority-binding.json",
+      "bytes": 744,
+      "sha256": "1288a00ad06a08668993f137a55185907141c0539a8f5b42de5f416f93b3d613"
+    },
+    {
+      "path": "coordination/engineering/brazil-native-evaluation-20261021/native-authority-supported-001/constructor-result.json",
+      "bytes": 937327,
+      "sha256": "1319ccfe805993685f760adaffba19790840aec04831a7a6a375d048d5ff4f23"
+    },
+    {
+      "path": "coordination/engineering/brazil-native-evaluation-20261021/native-authority-supported-001/original-rule-preimage.json",
+      "bytes": 741,
+      "sha256": "60a9316a9b582c9a3227fa4a84142513bab49f2e1578df4785118169d17c7f2b"
+    },
+    {
+      "path": "coordination/engineering/brazil-native-evaluation-20261021/native-authority-supported-001/preparation.json",
+      "bytes": 502,
+      "sha256": "5ab561238a90e1f8527b29e54b104c1f3d3840a4c312b224dbbafc3c2f58083a"
+    }
+  ]
+}
