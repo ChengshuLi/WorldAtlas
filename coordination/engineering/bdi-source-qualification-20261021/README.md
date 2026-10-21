@@ -95,5 +95,25 @@ The prior observation has 35 of 38 consumed input paths unchanged at base
 Complete old/new additive patch comparison proves the delta is exactly 568
 LUX plus 633 VCT cells, with no overlap with the BDI original scope and an
 unchanged base reference. The original observation was executed by its old
-code. Independent review of the changed helper paths is pending; neither
-an all-inputs-unchanged statement nor execution by newer code is claimed.
+code. The independent review described below examines the changed helper paths;
+neither an all-inputs-unchanged statement nor execution by newer code is claimed.
+
+The subsequent independent reuse review parsed both complete patch operands and
+examined the actual observer/helper paths. It supports reuse of the original
+zero-assignment observation at this base, with literal old-code execution and
+no source-qualification claim. The full old patch's 6,310,118 cells are preserved
+within the new 6,311,319-cell patch; the only additions are the 1,201 cells above.
+
+Further whole-target comparison used all 18 BDI ADM1 parent features, 26 COD
+ADM1 features and 30 TZA ADM1 features. All 21 targets have some geometry outside
+the BDI ADM1 union. COD intersects four targets in four positive-area pairs;
+TZA intersects eight targets in nine pairs. These are planar CRS84 comparisons,
+with areas in square degrees and lengths in degrees, not geodesic measures.
+No geometry was reprojected, simplified or repaired. The parent and ADM2 source
+vintages differ; no cause or territorial precedence is inferred.
+
+Summarizing the already executed center comparison (without another geometry
+operation), 216 original centers lack a BDI ADM1 source hit: 146 land and 70
+water. Of these, 34 also have foreign contacts. This is additional adverse
+context, not an automatic ownership exclusion or a qualification result.
+The exact rows are retained for target-specific applicability investigation.
