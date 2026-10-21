@@ -14,12 +14,13 @@ import {loadedBaseFootprintSha256,footprintValueSha256,bindAdditiveLedgerFeature
 const sha=raw=>createHash('sha256').update(raw).digest('hex'),commit='a'.repeat(40);
 const plain=pin=>({path:pin.path,bytes:pin.bytes,sha256:pin.sha256});
 const rectangle=x=>({type:'Polygon',coordinates:[[[x,0],[x+1,0],[x+1,1],[x,1],[x,0]]]});
-async function fixture(t,{rosterBytes,rosterGzip=true}={}){
+async function fixture(t,{rosterBytes,rosterGzip=true,aliasSeed=false}={}){
  const root=await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(),'atlas-metadata-wiring-')));t.after(()=>fs.rm(root,{recursive:true,force:true}));
  const bodies=new Map(),pins=new Map();
  async function put(name,value){const raw=Buffer.isBuffer(value)?value:Buffer.from(JSON.stringify(value));await fs.mkdir(path.dirname(path.join(root,name)),{recursive:true});await fs.writeFile(path.join(root,name),raw);const pin={commit,path:name,mode:'100644',git_blob_oid:createHash('sha1').update('blob '+raw.length+'\0').update(raw).digest('hex'),bytes:raw.length,sha256:sha(raw)};bodies.set(pin.sha256,raw);pins.set(name,pin);return pin;}
  const reader={pin:(version,name)=>{assert.equal(version,commit);assert.ok(pins.has(name),name);return pins.get(name);},read:pin=>{assert.ok(bodies.has(pin.sha256),pin.path);return bodies.get(pin.sha256);},json:pin=>JSON.parse(reader.read(pin))};
  const original=['A','B','C'].map((id,i)=>({type:'Feature',id,pixelIndex:i+1,properties:{id,name:id,parent_id:i===2?'Q':'P',metadata:{}},geometry:rectangle(i*2)}));
+ if(aliasSeed)for(const feature of original){feature.properties.reference_owner='Recorded winner';Object.assign(feature.properties.metadata,{reference_polity:'Stale alias',reference_owner_id:'owner:Q1',reference_owner_evidence:{winner:{owner_id:'owner:Q1',name:'Recorded winner',share:.75}},semantic_review:{status:'open'}});}
  const owners=original.map(f=>({id:f.id,index:f.pixelIndex,province_id:f.properties.parent_id,province_index:f.id==='C'?2:1,bounds:[f.pixelIndex-1,0,f.pixelIndex,1]}));
  const beforeGroups=[['c','continent',null],['s','subcontinent','c'],['r','region','s'],['a','area','r'],['P','province','a'],['Q','province','a']].map(([id,level,parent_id])=>({id,name:id,level,parent_id}));
  const afterGroups=structuredClone(beforeGroups);afterGroups.at(-1).name='Current Q';
@@ -236,4 +237,47 @@ test('actual finalizer declares a fresh M projection and its exact seven-body ou
  await f.put('.github/package-inputs.json',{...definition,inputs:definition.inputs.filter(name=>name!==projectionPin.path)});
  await assert.rejects(prepareCurrentSelectedAdditive(args),/Undeclared current additive input/);
  assert.deepEqual(await fs.readFile(path.join(f.root,f.preparationConfig.native_manifest.path)),originalManifest);assert.deepEqual(await fs.readFile(path.join(f.root,f.preparationConfig.owner_roster.path)),originalRoster);
+});
+
+async function aliasPreparationFixture(t){
+ const f=await fixture(t,{aliasSeed:true}),config=structuredClone(f.preparationConfig);
+ const before=structuredClone(f.currentFeatures[0].properties),after=structuredClone(before);after.metadata.reference_polity=after.reference_owner;
+ const features=structuredClone(f.currentFeatures);features[0].properties=after;
+ const receipt={before_sha256:f.current.hierarchy_sha256,after_sha256:f.current.hierarchy_sha256,
+  footprints_sha256_before:f.current.footprints_sha256,footprints_sha256_after:f.current.footprints_sha256,
+  reference_only:true,historical_claims_transferred:false,summary:{geometry_changes:0},relationships:[],retired_units:[],group_changes:[],
+  before_units:f.reader.json(config.hierarchy.after),source_evidence:[{url:'https://example.invalid/recorded-winner',source_sha256:config.source_updates[0].after.sha256}],
+  changed_location_properties:[{location_id:'A',before_properties:before,after_properties:after}]};
+ const refresh=async()=>{config.receipts[1]=await f.put('inputs/alias-receipt.json',receipt);config.source_updates[0].after=await f.put('inputs/alias-source.json',{type:'FeatureCollection',features});};
+ await refresh();return {...f,config,receipt,features,refresh};
+}
+
+test('same-M preparation binds a complete alias receipt without minting a release or losing the prior reparent',async t=>{
+ const f=await aliasPreparationFixture(t),release=Buffer.from(f.reader.read(f.pins.get('data/geographic-releases/releases-v2.json.gz')));
+ const prepared=prepareReferenceMetadata(f.config,f.reader),projection=JSON.parse(prepared.products['reference-metadata.json']);
+ assert.deepEqual(projection.reference,f.current);assert.deepEqual(projection.native_reference,f.native);
+ assert.deepEqual(projection.receipts,f.config.receipts);assert.equal(projection.location_changes[0].after_properties.parent_id,'Q');
+ assert.equal(projection.location_changes[0].after_properties.metadata.reference_polity,'Recorded winner');
+ assert.deepEqual(projection.location_changes[0].after_properties.metadata.reference_corrections,f.currentFeatures[0].properties.metadata.reference_corrections);
+ assert.deepEqual(f.reader.read(f.pins.get('data/geographic-releases/releases-v2.json.gz')),release);
+ assert.ok(prepared.input_inventory.some(p=>p.sha256===f.config.receipts[1].sha256&&p.whole_body_consumed));
+ // A real reparent absent from M is never exempted by the later alias receipt.
+ const value=JSON.parse((await import('node:zlib')).gunzipSync(release));value.releases.at(-1).metadata.metadata_migration_sha256={};
+ const changed=await f.put('data/geographic-releases/releases-v2.json.gz',gzipSync(Buffer.from(JSON.stringify(value))));
+ const pointer=f.reader.json(f.pins.get('data/geographic-releases/current-manifest.json'));pointer.sha256=changed.sha256;await f.put('data/geographic-releases/current-manifest.json',pointer);
+ assert.throws(()=>prepareReferenceMetadata(f.config,f.reader),/does not bind every applied metadata receipt/);
+});
+
+test('same-M alias preparation refuses coherent hidden edits, missing scope and stale receipt chains',async t=>{
+ for(const mutate of [
+  f=>{f.receipt.changed_location_properties[0].after_properties.metadata.reference_owner_evidence.winner.owner_id='owner:Q2';f.features[0].properties.metadata.reference_owner_evidence.winner.owner_id='owner:Q2';},
+  f=>{f.receipt.changed_location_properties[0].after_properties.metadata.reference_polity='Wrong';f.features[0].properties.metadata.reference_polity='Wrong';},
+  f=>{f.receipt.changed_location_properties[0].after_properties.metadata.semantic_review.status='approved';f.features[0].properties.metadata.semantic_review.status='approved';},
+  f=>{f.features[0].geometry.coordinates[0][1][0]=.25;},
+  f=>{f.features[1].properties.metadata.reference_polity='Recorded winner';},
+  f=>{f.receipt.changed_location_properties=[];},
+  f=>{f.receipt.before_sha256=f.native.hierarchy_sha256;},
+  f=>{f.receipt.changed_location_properties[0].before_properties.parent_id='P';},
+ ]){const f=await aliasPreparationFixture(t);mutate(f);await f.refresh();assert.throws(()=>prepareReferenceMetadata(f.config,f.reader));}
+ const f=await aliasPreparationFixture(t);f.config.receipts.reverse();assert.throws(()=>prepareReferenceMetadata(f.config,f.reader),/chain|Stale|original|hierarchy/);
 });

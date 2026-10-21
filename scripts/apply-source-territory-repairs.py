@@ -161,6 +161,7 @@ def stage_repairs(features, units, report, root=ROOT):
                 meta['reference_owner_evidence'] = reference
                 meta['reference_owner_id'] = winner['owner_id'] if winner else None
                 by_id[id]['properties']['reference_owner'] = winner.get('name') or owner_labels.get(winner['owner_id']) if winner else None
+                meta['reference_polity'] = by_id[id]['properties']['reference_owner']
         relationships.append({'before_ids': before_ids, 'after_ids': list(proposed), 'kind': role, 'proposal_id': proposal['proposal_id'], 'history_transfer': False, 'canonical_parent_policy': 'Retained stable source ID keeps its current geographically audited source parent; political winner never chooses a geographic parent.'})
     after = [f for f in after if f['properties']['id'] not in removed]
     active_units, retired_units = prune(after, copy.deepcopy(units))

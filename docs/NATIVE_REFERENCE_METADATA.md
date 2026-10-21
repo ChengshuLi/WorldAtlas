@@ -18,9 +18,22 @@ Use `REFERENCE_HIERARCHY_CORRECTIONS`, the ordinary source decision writer,
 review the actual complete current source/hierarchy and reference release. The
 stock correction receipt must archive the exact original hierarchy and changed
 location properties, preserve historical claims, and report zero geometry edits.
-The new release must bind every applied receipt through its existing
+A reference-changing receipt must remain bound by M through its existing
 `metadata.metadata_migration_sha256` inventory. Preserve the original native bank
 and its artifact authority; do not replace their hashes with current metadata.
+
+An existing stale `metadata.reference_polity` may instead be synchronized to the
+unchanged recorded winner and `reference_owner` without creating another M. The
+whole pinned receipt and complete before/after source bodies must prove that only
+that scalar changed, with the same winner ID, every other property, geometry,
+source order and hierarchy. No caller flag grants this exception. The existing
+installer retains the exact selected M, N and historical products and refreshes
+only the changed source and its authenticated granularity-audit input binding.
+That audit reuse is limited to changed original `reference_version: 3` features;
+created-source features retain their separate whole-feature admission proof.
+The new projection still includes the entire prior receipt chain and this alias
+receipt; actual reference-changing receipts never lose their M membership.
+This does not make a new political decision or confer geographic approval.
 
 A raw source/hierarchy edit alone is not a coherent current reference. Current
 prepared evidence, audits and catalog products must match the new reference

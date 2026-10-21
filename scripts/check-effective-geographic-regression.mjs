@@ -445,7 +445,7 @@ export class SelectedGeometrySources {
         demand(same(Object.fromEntries(['id','footprints_sha256','hierarchy_sha256'].map(key=>[key,this.release[key]])),applied.reference),
           'Current reference metadata differs from the actual latest release');
         const migrationPins=new Set(Object.values(this.release.metadata?.metadata_migration_sha256??{}));
-        demand(projection.receipts.every(pin=>migrationPins.has(pin.sha256)),
+        demand(applied.releaseReceipts.every(pin=>migrationPins.has(pin.sha256)),
           'Current reference release does not bind every applied metadata receipt');
         const hierarchy=this.reader.descriptor('data/hierarchy.json');
         demand(projection.hierarchy.after.path==='data/hierarchy.json'&&projection.hierarchy.after.encoding===undefined

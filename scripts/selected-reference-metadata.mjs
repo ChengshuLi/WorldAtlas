@@ -5,7 +5,7 @@ import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {isDeepStrictEqual as same} from 'node:util';
 import {assertReferenceOnlyFeatureChange,assertReferenceOnlyLocationChange,projectReferenceOwners,
-  originalNativeReference,scientificNativeSelection,validateReferenceMetadataHeader,validateMetadataRelationships} from '../src/reference-metadata.js';
+  originalNativeReference,scientificNativeSelection,validateReferenceMetadataHeader,validateMetadataRelationships,isReferenceAliasReceipt} from '../src/reference-metadata.js';
 
 const sha = raw => createHash('sha256').update(raw).digest('hex');
 const need = (value, message) => { if (!value) throw Error(message); };
@@ -153,5 +153,6 @@ export function validateReferenceMetadataProjection({projection, selection, mani
   }
   need(seenChanges.size === byChange.size, 'Reference projection omits an actually changed whole source');
   return {projection, nativeReference: references.native, reference: references.reference,
-    owners: projectedOwners, units: [...finalUnits.values()], sourceUpdates: updates};
+    owners: projectedOwners, units: [...finalUnits.values()], sourceUpdates: updates,
+    releaseReceipts: projection.receipts.filter((pin, i) => !isReferenceAliasReceipt(changes[i]))};
 }

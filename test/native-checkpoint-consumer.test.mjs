@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
+import {execFileSync} from 'node:child_process';
+import {prepareReferenceMetadataProjection} from '../scripts/selected-reference-metadata.mjs';
 import {nativeRowLatitudes} from '../src/native-grid.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -404,4 +406,29 @@ test('validated reference metadata changes parents while native owners and cells
  const census=f.api.checkpointRouteCensus({transition});
  for(const name of ['data/hierarchy.json','data/geography/fixture.json','data/geographic-releases/current-manifest.json'])
   assert.equal(census.routes.find(p=>p.path===name).tree,reader.treeRoute(name));
+});
+
+
+test('existing checkpoint transition preserves same M and all native rows for a fully bound alias correction',async t=>{
+ const f=await referenceCheckpointFixture(t),firstReader=new f.native.ImmutableReader(f.repo,f.candidate,{invocation:f.reader.invocation});
+ const first=await f.api.qualifyTransition({state:f.state,reader:firstReader});assert.equal(first.available,true);
+ const read=p=>execFileSync('git',['-C',f.repo,'show',p.commit+':'+p.path],{maxBuffer:32*1024*1024});
+ const features=JSON.parse(read(f.projection.source_updates[0].after)).features,before=structuredClone(features[0].properties);
+ features[0].properties.metadata.reference_polity='Recorded winner';
+ const reference=f.projection.reference,receipt={before_sha256:reference.hierarchy_sha256,after_sha256:reference.hierarchy_sha256,footprints_sha256_before:reference.footprints_sha256,footprints_sha256_after:reference.footprints_sha256,
+  reference_only:true,historical_claims_transferred:false,summary:{geometry_changes:0},relationships:[],retired_units:[],group_changes:[],before_units:JSON.parse(read(f.projection.hierarchy.after)),
+  changed_location_properties:[{location_id:'A',before_properties:before,after_properties:features[0].properties}],source_evidence:[{url:'https://example.invalid/winner',source_sha256:f.projection.source_updates[0].after.sha256}]};
+ const release=fs.readFileSync(path.join(f.repo,'data/geographic-releases/releases.json.gz')),sidecar=fs.readFileSync(path.join(f.repo,f.selection.additive_release.path));
+ f.write('data/geography/fixture.json',{type:'FeatureCollection',features});f.write('inputs/alias-receipt.json',receipt);const inputs=f.commit();
+ Object.assign(f.projection,prepareReferenceMetadataProjection({selection:f.selection,manifest:f.manifest,owners:f.owners,reference,hierarchy:f.projection.hierarchy,
+  receipts:[...f.projection.receipts,f.pin('inputs/alias-receipt.json',inputs)],source_updates:[{...f.projection.source_updates[0],after:f.pin('data/geography/fixture.json',inputs)}],read}));
+ const version=f.project(),reader=new f.native.ImmutableReader(f.repo,version,{invocation:f.reader.invocation});
+ const next=await f.api.qualifyTransition({state:first.candidate,reader});assert.equal(next.available,true,next.reason);
+ const literal=value=>value&&typeof value==='object'?(typeof value[Symbol.iterator]==='function'?Array.from(value,literal):Object.fromEntries(Object.entries(value).map(([key,item])=>[key,literal(item)]))):value;
+ for(const role of ['ledger','registry','patch'])assert.deepEqual(literal(next.candidate[role]),literal(first.candidate[role]),role);
+ assert.deepEqual(next.candidate.certificate.entries.map(row=>[row[0],row[1],row[2],row[7],row[8],row[9]]),first.candidate.certificate.entries.map(row=>[row[0],row[1],row[2],row[7],row[8],row[9]]));
+ assert.equal(f.api.projectSourceFeatures({state:next.candidate,ids:['A']}).features[0].properties.metadata.reference_polity,'Recorded winner');
+ const consumer=await import(pathToFileURL(path.join(f.repo,'scripts/selected-checkpoint-native.mjs'))),result=await consumer.compareSelectedCheckpointNative({transition:next});
+ assert.equal(result.status,'no-new-native-loss');assert.equal(result.affected_rows,0);
+ assert.deepEqual(fs.readFileSync(path.join(f.repo,'data/geographic-releases/releases.json.gz')),release);assert.deepEqual(fs.readFileSync(path.join(f.repo,f.selection.additive_release.path)),sidecar);
 });

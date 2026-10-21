@@ -92,6 +92,39 @@ export function validateReferenceMetadataHeader(projection, {selection, manifest
   return {native, reference: projection.reference};
 }
 
+// A stale display alias may be synchronized only to its unchanged, recorded
+// reference winner. This is not a new winner, political decision or history.
+function referenceAliasMatchesWinner(before, after) {
+  const old = before?.metadata, next = after?.metadata;
+  const winner = old?.reference_owner_evidence?.winner;
+  return text(old?.reference_polity) && text(before.reference_owner)
+    && old.reference_polity !== before.reference_owner
+    && next?.reference_polity === before.reference_owner
+    && after.reference_owner === before.reference_owner
+    && text(old.reference_owner_id) && winner?.owner_id === old.reference_owner_id
+    && winner.name === before.reference_owner
+    && next.reference_owner_id === old.reference_owner_id
+    && same(next.reference_owner_evidence, old.reference_owner_evidence);
+}
+
+export function isReferenceAliasCorrection(before, after) {
+  return referenceAliasMatchesWinner(before, after)
+    && same({...before, metadata: {...before.metadata, reference_polity: after.metadata.reference_polity}}, after);
+}
+
+// Call only after complete receipt/source validation. The receipt remains whole
+// pinned in the projection; only a real release-membership change needs an M pin.
+export function isReferenceAliasReceipt(receipt) {
+  return hash(receipt.before_sha256) && receipt.before_sha256 === receipt.after_sha256
+    && hash(receipt.footprints_sha256_before) && receipt.footprints_sha256_before === receipt.footprints_sha256_after
+    && receipt.reference_only === true && receipt.historical_claims_transferred === false
+    && receipt.summary?.geometry_changes === 0
+    && ['group_changes', 'retired_units', 'relationships'].every(key => Array.isArray(receipt[key]) && receipt[key].length === 0)
+    && Array.isArray(receipt.changed_location_properties) && receipt.changed_location_properties.length > 0
+    && receipt.changed_location_properties.every(change => change.location_id === change.before_properties?.id
+      && isReferenceAliasCorrection(change.before_properties, change.after_properties));
+}
+
 // apply-geographic-decisions.py retains the original fallback/overlap metadata
 // and appends an explicit correction. Permit only that exact append-only shape;
 // ignoring all metadata would hide a source/name/identity or prior-history edit.
@@ -105,11 +138,12 @@ export function assertReferenceOnlyLocationChange(before, after) {
     && corrections.length >= oldCorrections.length
     && same(oldCorrections, corrections.slice(0, oldCorrections.length)),
   'Reference correction history must retain the exact original prefix');
+  const alias = referenceAliasMatchesWinner(before, after);
   const withoutAppliedParent = properties => {
     const result = {...properties, parent_id: null};
     if (Object.hasOwn(properties, 'metadata')) {
       const {reference_corrections, ...retained} = properties.metadata;
-      result.metadata = retained;
+      result.metadata = alias ? {...retained, reference_polity: after.metadata.reference_polity} : retained;
     }
     return result;
   };
