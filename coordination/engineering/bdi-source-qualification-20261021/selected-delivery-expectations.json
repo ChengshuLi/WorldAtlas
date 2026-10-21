@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "selected_ledger_sha256": "ca5b00ec82ebd1f2c714eb553535c8a6d5b27e6e5787aca8c4890d76630e8beb",
-  "cumulative_native_cells": 6311767,
+  "selected_ledger_sha256": "a426811a6511c5b44f394b09e00c1df6f585ea00f14d2bc618ebb86d3c045c51",
+  "cumulative_native_cells": 6335845,
   "cohorts": [
     {
       "original_batch_id": "retained-authority-scope:0037ca1e3f6f3c91f641977f10e592da91fd068935cd3a0aa83ce6b895149140",
@@ -28581,6 +28581,818 @@
           "target_id": "gb:TZA:ADM2:72390352B89793068246762",
           "disposition": "assigned",
           "native_rows_sha256": "464874d1269dea88c364510a311a2ced59a46988bf1b6e029de516208e8fc69a"
+        }
+      ]
+    },
+    {
+      "original_batch_id": "retained-authority-scope:8ccbea42e6bb3e4406fb66fc38c9bc6912b4affca8897f69b41c4ac2eda8e929",
+      "component_ids": [
+        "source-target:03a4b1ddf65056627290f1bb1786c2be2fedb29165fe8517a514168e030e8ec2",
+        "source-target:04d5af814f4a8ec5062bef8abfcd34820654cef4fc448a0fb2fd22364955df82",
+        "source-target:0510ff8c87ecbc265ca1eb67b5d24abb3341af7bb4cf318ee9cca447267d8dda",
+        "source-target:053cc348dd6260ddb11499ea33c12162565dd13ebc99633f0d695d12a0a52521",
+        "source-target:058b7419a8b787e33fb6816c106f9da8c62ea65f2f3553c77682519159aefde4",
+        "source-target:0b02a16b3e7f7e91ce500808361acd52fb53aac6e319329c8a33099eccd26e76",
+        "source-target:0bfe6bed7bba2bd080361ea469c9f24c2ade7727e15f9cd6f2f10f0946be7ff6",
+        "source-target:0c121c1ddf46dfc3da20c87c79de11d566b2e54f72d5d8b257f3ab203b17b423",
+        "source-target:0cc0646dc2ff4b16dfe50738f85df19e44e92e5f4ad3e9baab18bf93d1854050",
+        "source-target:0d07e4f781f2de517b6fcfd60a0c3d72b6291528c4a65fdae04e1626a2164f82",
+        "source-target:0dc50a5a4be1b4417655407de27b294b84fa6ff4323ba6626a795ae49c93b902",
+        "source-target:0f9870e7ad5f216d1363f9cdf8229c61856c3a68dd190db5fc864dba2fcaa50c",
+        "source-target:1193e388b8873025df35528382c370b5332dcf944bcdbbec00200d1618706160",
+        "source-target:13608a513055f632c46a4028bbf68354781f4a256bc5fa4e1f34e0208719491d",
+        "source-target:1a3dfb7138dec857f3af37dcec1f369c3b40bb5018e186662e1958380358bcdf",
+        "source-target:1a6938b6d62006f0378da8f7193e9e0e27dc501eaa2d236155fd7f043f300f23",
+        "source-target:1a6da5570cd356470f9ad51a22e0230b2d5217ab3c242616cf2a5dc98bac9ecb",
+        "source-target:1ca433972682fc183bd9ac5f3deeda6d369fc0ce2509ceb310e27ba65004f8fc",
+        "source-target:1f00325318ff8f1d6232fb93e126a660729fbe1cc1c0c0dc272e3207bb63765d",
+        "source-target:1f0b2420523bf254aaf7e7146376ce096d2866aecf387c3158e61d4c826b0997",
+        "source-target:20398923164477b533d52518619a7c1fc3fe6045d7b12fc1f78c31a64282dd4d",
+        "source-target:21f8564feefbd7ae90c08a1bf74578a7764e229f8a466ef05d12e2a3ee313394",
+        "source-target:2278fbee1bbe878695c99054faaa90d4aa1d384c47aeff5630aa2a957b53bf51",
+        "source-target:24c9f36f97b4cf1a834cd1c8c60a24ea4d4f84572ad95308a8fd77f0bd7ff740",
+        "source-target:279aab65c77e94f7698b919d0881176ce93343d0827bf348636ece4b5fe36d29",
+        "source-target:28a1cba46801d5ef6924c44cf76a89541a25ac16cd9a7732006d815c29aa5c59",
+        "source-target:2b6a00eb74d512211c156881014cb081b56f357cb7e6cfb62a996dd7ab2a3430",
+        "source-target:332078d0eca268dd265a98098e8451f1653008c58c1a8e10e5b6a1e1a2548545",
+        "source-target:350ba7ac40f9fcf632563e39b5646291321d933deee1dbdfdda7c882f9100920",
+        "source-target:3b94c3f0c964c7b54c7d8ec08dc85f62833825fe89ced648ba34aa12ea4ced14",
+        "source-target:3ffeeaf5acf0416b392ff0e46590c0ea12a56e4bd803bffa45d6d587c078e18f",
+        "source-target:411c048ad14e83d4be29a73bf4f6e523effb47868326ef53187c96bd5b2e24e8",
+        "source-target:41c609df33d5076b122eaa0b813057c00031f53790407174443377542436acb7",
+        "source-target:45919ec8cbc5bd96f40b10303965c77557b2b5ebcca76c04a6975cb1e464e75c",
+        "source-target:46dee0b3ad6f51ad0857e8af550b0e4ccbcce56ce1e55fd63f7ccfa8344e63a4",
+        "source-target:4afeb8696cff0b902d2685ad5254d8d79112be45da39ce32640e07a956eaa913",
+        "source-target:4b43ed988ee29c20bf3868596338a4c7869bb0c8e5497e0803ed785352446bc6",
+        "source-target:4b86a3edbacb20f5751c434fae69c25671035fc8f53be30a8a0c82a9b3bbb321",
+        "source-target:4e5d598f9d837837eba1a29ac6302967d10222980f2f4094c8365cea0cb253a1",
+        "source-target:4ed23fd85c9b204c45ded0f08e851785cf0bdfac00ac85ded97c5bbd412ab373",
+        "source-target:532a5598df276973742dedb349015f30a2771e06ffa45d5a4f148032605414cb",
+        "source-target:5835e5e1bcd9b6f35f1f60bb1b6fb8b203e64d70a05474ccb1a210adc9346cb7",
+        "source-target:5dad80b9e31090ee1b23d1f114a0b755f9b81a8f8e7a40f352bf7a7914659c58",
+        "source-target:5fc11e943852e2df651c48265b33f6f40d9a3280e3a197c5e70b04d19f0aafba",
+        "source-target:615c868dba8b7bb8855ad8a48722aa531a2fc7f7991364eb4130abaa28370b0f",
+        "source-target:622c23ed5c6e04964b58c09300b898fde1eabb8f919e863dceb1f31bab15d036",
+        "source-target:6481b59e7c3fbb6816e39afba07d88b00d11011565b99c27771841293207ee83",
+        "source-target:6924f6c0ffaf6acd0233a666e5be505f0c3850b35dda06149cdecac0d7ad7e1d",
+        "source-target:69eaddb54df46535f6ab24ec50189847b7c4d950b780e787021d7ebb45a878ba",
+        "source-target:6ac5fbf58433a4b9e7eef7e30db9ee6d6666c0bf42f05d7dfbf164e0467ed97b",
+        "source-target:6c5f750c0fd19bcab3460bffa71d5d9c4774a6f78aa57492f8b9ea383e1217b7",
+        "source-target:7337faab14944932b6892b4ec1a711d416c7729471b1993de227d9b28a9d0a0a",
+        "source-target:74f5d9710ad91ff6069befc5d0f7d93bf8c9413a9ed19da1b004a320e46b196d",
+        "source-target:7658f1520f79b305f647abdd5f70a8af13369c8a9f07eb830539d0d1b5a77523",
+        "source-target:78fbfbd4438239e7b6dbfc862d5d9145c7c093f44b0a7ae2ca3990ff78ab8e0c",
+        "source-target:7914c645bf6a4c7c7c103e460b67c54a35168676db8165bd5ea39be029de2f8e",
+        "source-target:7c8a7faa48e74834f68658651df52e812528da645f296c60f93657d03b5445f2",
+        "source-target:82d1aae98b6423451622b7e683f3bce85c205ee00229861cd1c002a79dba23a8",
+        "source-target:83eca255ef3511f8b5a493a1b6ea4f6fe1ea668680661d1c58aa6ac3781e5f1d",
+        "source-target:87f2cfddf3822a8df8e175b44762a31bcbc6ba4203e4aa8fe0b6b2b3d7187d5f",
+        "source-target:88194a5ee08c1cf7a29318c52928fa770124d5bb5693091c99b7848cd73b6982",
+        "source-target:92c2e039c4277ed4ab26557d3aa5a54ffb968b55b061cf73c49cdd890239b856",
+        "source-target:94e72142a01899a7d52a18ec7c9c2a5bfc355c02d7ff251bd0e18a85206da0e6",
+        "source-target:96f3b8694d23ce05fd033b0ff58f17f3189ad8a41d1dddbd46dc27d2ba7b8a2a",
+        "source-target:9953055ebd33982999654379effff732ba31b70915a224eb04a7096e926c72d3",
+        "source-target:99f72d80d0b25b7113aa05ab8b4b34926cb60f99e35d7e283b8d755ff3736311",
+        "source-target:9b54b6c65b0555bc2357c6665a228c9fb2a5c900cd0eeb741a65ddfa11b6e504",
+        "source-target:9d0ed6d85fbca86d2e466f009081d7009a6d7ba7cc1e894cf2dd412b223ebee6",
+        "source-target:a1eb63ed739d36a8ccbd27f37edc18ef63f9f4f60cf4a4571ff522a64f44fc45",
+        "source-target:a464d6076ec38b275fd37231332e09c6d0cb3504740d8472c0a79265424d0e53",
+        "source-target:a7c47d5dda30f9a7059375ed358033be129c576234823b078b08a4f3ab930f5c",
+        "source-target:a866dd1013c92e532c26196d45a1d4e38fa4daea97e6d1c6920511a98e6278b3",
+        "source-target:a8ad7bc6e4d55390044b803a601138e49af8b4a2335d8f1d374c0c361343fb96",
+        "source-target:b060809e5fef561b783046d30673f75760203d57ce19a0510336b0eaee741ae6",
+        "source-target:b0711175d0e834760ccc6e49c8a0d3290bfeee48463f890dbb99e5e08c69fe47",
+        "source-target:b0d443eeef08c08c04daac533dfa8390f559461ca7707bf2ab3fa0c1188d1654",
+        "source-target:b3bacc3ba3309ffb0fb1d85fd0c2b935271210a916b9e6c9e7ae52bf3b98623b",
+        "source-target:b3f0b5a11076bd91431059ec1942a0c378c94e8b6467a234e357ccb472e5a154",
+        "source-target:b6b4badfece7e857750842727188465eff2e6e86fb81ef68631c4efacd3e3acc",
+        "source-target:ba3dc08b97412a4caf44d71807c614a4ed017c1090fc5d2b18e40704245c8885",
+        "source-target:bf11403db46914fd40b74b9a10845add082c109436b1434c6f6c099ada82c4a7",
+        "source-target:c404191b5317bd96c61fc8aff3a8b514356dea838bd079c00e9d83b4979df6f8",
+        "source-target:c4b1bbd0ca1b3086b294c4abd3af760ab332614b014368a851d3bdbb90975062",
+        "source-target:c59975400ab83884773c7c487af18386c2220f579add1aae0480bdfe188b2b83",
+        "source-target:c7df7fe6e9b6d9e92236c5c3b1d421da7fb1a3b72cac8ed5f6e64014fe09108c",
+        "source-target:c80f878c82fd57337e589fe9111b9737b531add8f31a15e96e8ab8827f3a32b1",
+        "source-target:cb45bd567b6bdeec3c99f98e172b6202344341b306dc12c5112d36378d9aa755",
+        "source-target:cd9abfd5f2b1f8798344b96dbc74870f06a5933c1a65d27c6ce8b5a92fbfd43b",
+        "source-target:cfe35d8538a627c7ac26ad03e755614e066cfbc96fd7899a53d30b45d23a4768",
+        "source-target:cfe56229aa720270707b1cdf91cc81566a91db0da600af2945bd7fd7949b3bbb",
+        "source-target:d0c26971c197dff9b8ffe89e580841578d4df594cbb47841b8c3e3c9f90501b9",
+        "source-target:d115a0ff008d466f1329b4cedf88ac0e697da8ba60f1f288f912a3c7c6063dae",
+        "source-target:d21b894f1f0817c9e98f6e71cae0997024106862afa75ba34b26b2e866963ebb",
+        "source-target:d24eda02869ebc21e6c9e745024e8e8381313580511dfed5b44d1ba1e595f716",
+        "source-target:d689877916adbc8067166fe10d1c17ab8218d0cb92a517ae68b2e2d6c8accd8a",
+        "source-target:d82a2ce42b6a99e630c2d1f0aea92be1287a4e1505e9bcacab9fa24b6c13f207",
+        "source-target:da0073aa67a10421ad4b5056a3e95033acbccdfe05fbf48685e6329e2acf369d",
+        "source-target:dfe54acbc05b0bcd170383ae6533f32fb32a45bc6240b824a546d4889d49aa80",
+        "source-target:e1e13c607b6a334ac58f5a7e11e76eba2e9318fa74713b6c37dc7ed90fd65c1b",
+        "source-target:e232a4a0066d4ccfa9b5543e288004f512f1aaada0d3599facda6805be20d822",
+        "source-target:e31f0e21eec5a5a82d7ac4e26d69377b393f8323ccd9295cb4c19ee43c21d14e",
+        "source-target:e92cec80f806a229d6ea7526a73b1dcbad27ea69ba78f6c27a78b908a074b468",
+        "source-target:eae0de389f36568872b3f2b8c7744fe00ff707ad0be57377a9e28f6380744914",
+        "source-target:ed00ec45eda96d0b3278e54ebf560054f58c59fe748dde963e6f4eb0e0722151",
+        "source-target:eded8b4be4f2d569ffa2b3baacbac21e073ab060f2a9bd59babd1df682d4e63c",
+        "source-target:eea83889d8a2ad9c76e9a8780e67b99c87c828c203995f7eccade76812785bd1",
+        "source-target:eeac8df87597f35118f40dd0d0c8a0f95a8edb7cb963d56d577d8c5e589ebd69",
+        "source-target:ef4531c838d530f2cc8a48096f42c52da2cf28ee83ef41a5d71047bbdc2260c8",
+        "source-target:f462a14e26dc11a9ff86521bfe72c00ca833c27d5b69acbf774d73489eca9ee8",
+        "source-target:f4759f9a0fc1413af53fdc7b2a39a18c4f9a610450165388ce648814cfaf880b",
+        "source-target:f57c3ca7d69a5d6a71fd148d5eb489298e462a6c3144d8d5c16a27fb20bce7ed",
+        "source-target:fa346e316e0a06179df43b9d56c3895265b5852c982648fe4616f92512030e07",
+        "source-target:fab32c77a9d9c5fc2df160e4efec0b609d71ed610e531d03e5c956ca2c1fb606",
+        "source-target:fd2124068ed139f3bddea5be5215b53e0b53ad2d7ddc1cb1305d62175c90e2c6",
+        "source-target:fd4f605169c262ae017db92db807622dbd0937dece68b640c4a715c1449bdcfd"
+      ],
+      "members": [
+        {
+          "component_id": "source-target:03a4b1ddf65056627290f1bb1786c2be2fedb29165fe8517a514168e030e8ec2",
+          "target_id": "atlas:district:BRA-430009:BZS",
+          "disposition": "assigned",
+          "native_rows_sha256": "56f51a7ce570a52136ffcd10f96ca4166cfd0c11a4477e34eb3fb7e249d8bca5"
+        },
+        {
+          "component_id": "source-target:04d5af814f4a8ec5062bef8abfcd34820654cef4fc448a0fb2fd22364955df82",
+          "target_id": "gb:BRA:ADM2:56859067B85050647770651",
+          "disposition": "assigned",
+          "native_rows_sha256": "a463ba74817d484ee6956effe2db6b7daaeb349acf8f96c27d944e7a1c7c62dc"
+        },
+        {
+          "component_id": "source-target:0510ff8c87ecbc265ca1eb67b5d24abb3341af7bb4cf318ee9cca447267d8dda",
+          "target_id": "atlas:district:BRA-150005:BZN",
+          "disposition": "assigned",
+          "native_rows_sha256": "a04f7337fc67bdc39257f167285f8b64fb3278c1fce74243c35b2963a375de9a"
+        },
+        {
+          "component_id": "source-target:053cc348dd6260ddb11499ea33c12162565dd13ebc99633f0d695d12a0a52521",
+          "target_id": "atlas:district:BRA-420004:BZS",
+          "disposition": "assigned",
+          "native_rows_sha256": "20a3ef5476ac87edab1c3c8f8016eb1460a0d9991b74ab747c5156429daa0bbe"
+        },
+        {
+          "component_id": "source-target:058b7419a8b787e33fb6816c106f9da8c62ea65f2f3553c77682519159aefde4",
+          "target_id": "atlas:district:BRA-220006:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "bb0bdbd7a22962c6d94071088d5baf6a197507827fbc625af19d88a5d02872b5"
+        },
+        {
+          "component_id": "source-target:0b02a16b3e7f7e91ce500808361acd52fb53aac6e319329c8a33099eccd26e76",
+          "target_id": "gb:BRA:ADM2:56859067B40218496902561",
+          "disposition": "assigned",
+          "native_rows_sha256": "745a4662e7bc37c196221df8a2ac0746dd4bb75e8f6425856923832265031668"
+        },
+        {
+          "component_id": "source-target:0bfe6bed7bba2bd080361ea469c9f24c2ade7727e15f9cd6f2f10f0946be7ff6",
+          "target_id": "gb:BRA:ADM2:56859067B63290422041156",
+          "disposition": "assigned",
+          "native_rows_sha256": "72be09b9296560033aae8ce2a714b3b690b56a86c62e8337001fc1e2df60d305"
+        },
+        {
+          "component_id": "source-target:0c121c1ddf46dfc3da20c87c79de11d566b2e54f72d5d8b257f3ab203b17b423",
+          "target_id": "atlas:district:BRA-420003:BZS",
+          "disposition": "assigned",
+          "native_rows_sha256": "3b6bb7355f2589203cd43630e2c039d530c696b85521efd04fa234d810a3279b"
+        },
+        {
+          "component_id": "source-target:0cc0646dc2ff4b16dfe50738f85df19e44e92e5f4ad3e9baab18bf93d1854050",
+          "target_id": "atlas:district:BRA-330002:BZL",
+          "disposition": "assigned",
+          "native_rows_sha256": "ee30ee6fdce1b3060da0eac2dc00f6e3cd3e0d0c8186c5bd8d65c35f681580e0"
+        },
+        {
+          "component_id": "source-target:0d07e4f781f2de517b6fcfd60a0c3d72b6291528c4a65fdae04e1626a2164f82",
+          "target_id": "gb:BRA:ADM2:56859067B83599165614359",
+          "disposition": "assigned",
+          "native_rows_sha256": "bd10376bc3f23a3025b9bf4aac57f3b6603388ec7da8dff93954761c0e0d6ec0"
+        },
+        {
+          "component_id": "source-target:0dc50a5a4be1b4417655407de27b294b84fa6ff4323ba6626a795ae49c93b902",
+          "target_id": "gb:BRA:ADM2:56859067B69544192053781",
+          "disposition": "assigned",
+          "native_rows_sha256": "c27910a14979e24e64c9fd36f71c5a89ce8b44da94c7849ecf8730f87fec377b"
+        },
+        {
+          "component_id": "source-target:0f9870e7ad5f216d1363f9cdf8229c61856c3a68dd190db5fc864dba2fcaa50c",
+          "target_id": "gb:BRA:ADM2:56859067B31215399006442",
+          "disposition": "assigned",
+          "native_rows_sha256": "9368aa296e3ea270383dafb442fe129650d1cc649a3fa008306c89f529678fa0"
+        },
+        {
+          "component_id": "source-target:1193e388b8873025df35528382c370b5332dcf944bcdbbec00200d1618706160",
+          "target_id": "atlas:district:BRA-430001:BZS",
+          "disposition": "assigned",
+          "native_rows_sha256": "129951bae9b9df16106f7753d671ce11b9976f7d15f6b9dae96b8b4e4f319860"
+        },
+        {
+          "component_id": "source-target:13608a513055f632c46a4028bbf68354781f4a256bc5fa4e1f34e0208719491d",
+          "target_id": "atlas:district:BRA-510004:BZC",
+          "disposition": "assigned",
+          "native_rows_sha256": "cae2358d0d8110a599480269491027655cf152e200a1f10595bb10b53f922410"
+        },
+        {
+          "component_id": "source-target:1a3dfb7138dec857f3af37dcec1f369c3b40bb5018e186662e1958380358bcdf",
+          "target_id": "atlas:district:BRA-150004:BZN",
+          "disposition": "assigned",
+          "native_rows_sha256": "e42ad6fa5b49746fbc54a6f6b6ac10508cd3706f280bd0a8ba66b88e009a1db9"
+        },
+        {
+          "component_id": "source-target:1a6938b6d62006f0378da8f7193e9e0e27dc501eaa2d236155fd7f043f300f23",
+          "target_id": "gb:BRA:ADM2:56859067B90726041469305",
+          "disposition": "assigned",
+          "native_rows_sha256": "0b74a80f7d600228ede4fcb6f95d618272a54b3f916706a6b928f117db91635e"
+        },
+        {
+          "component_id": "source-target:1a6da5570cd356470f9ad51a22e0230b2d5217ab3c242616cf2a5dc98bac9ecb",
+          "target_id": "atlas:district:BRA-210011:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "cfc98616544a7b87fa71e8f25861f37df59f9ad55b2db3d8f634da4cc218ff3b"
+        },
+        {
+          "component_id": "source-target:1ca433972682fc183bd9ac5f3deeda6d369fc0ce2509ceb310e27ba65004f8fc",
+          "target_id": "gb:BRA:ADM2:56859067B62433131631908",
+          "disposition": "assigned",
+          "native_rows_sha256": "3519496c42fbce068519b72cc9936a5f913cde789a8635f0c50361f8a6dbfd14"
+        },
+        {
+          "component_id": "source-target:1f00325318ff8f1d6232fb93e126a660729fbe1cc1c0c0dc272e3207bb63765d",
+          "target_id": "atlas:district:BRA-160002:BZN",
+          "disposition": "assigned",
+          "native_rows_sha256": "4349b10886fb1b424e4c8f10a82cbff02c112521d9f8ca995b11435c5d4eac3b"
+        },
+        {
+          "component_id": "source-target:1f0b2420523bf254aaf7e7146376ce096d2866aecf387c3158e61d4c826b0997",
+          "target_id": "atlas:district:BRA-260002:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "f6451e5d45eb30977145c6b0dcb4e303d3e9b10b05ef2d15ff395b406162ca42"
+        },
+        {
+          "component_id": "source-target:20398923164477b533d52518619a7c1fc3fe6045d7b12fc1f78c31a64282dd4d",
+          "target_id": "atlas:district:BRA-430016:BZS",
+          "disposition": "assigned",
+          "native_rows_sha256": "23bc1da9e872e12cfb8cf8c9581c687af15ba5ab2962051d5a052672293397c3"
+        },
+        {
+          "component_id": "source-target:21f8564feefbd7ae90c08a1bf74578a7764e229f8a466ef05d12e2a3ee313394",
+          "target_id": "atlas:district:BRA-270004:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "cf117c241336ee42d1e0b31ce1e6a908f7b3357d4448d4f7a6b6dbc0a977ca26"
+        },
+        {
+          "component_id": "source-target:2278fbee1bbe878695c99054faaa90d4aa1d384c47aeff5630aa2a957b53bf51",
+          "target_id": "atlas:district:BRA-150020:BZN",
+          "disposition": "assigned",
+          "native_rows_sha256": "ceec5e50267b513c5288e69173036a9734cf153276d0311a1cbe5e3f97ae5e41"
+        },
+        {
+          "component_id": "source-target:24c9f36f97b4cf1a834cd1c8c60a24ea4d4f84572ad95308a8fd77f0bd7ff740",
+          "target_id": "atlas:district:BRA-240003:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "c856f995987d08c45cea2b850682e49ee0b51807c1dcae59087cc83c20793741"
+        },
+        {
+          "component_id": "source-target:279aab65c77e94f7698b919d0881176ce93343d0827bf348636ece4b5fe36d29",
+          "target_id": "atlas:district:BRA-290005:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "483a8ab2110bb27cab3e2021920428e57b2989f88cb8df466384e3516b73b5c0"
+        },
+        {
+          "component_id": "source-target:28a1cba46801d5ef6924c44cf76a89541a25ac16cd9a7732006d815c29aa5c59",
+          "target_id": "gb:BRA:ADM2:56859067B10091866773684",
+          "disposition": "assigned",
+          "native_rows_sha256": "46d9dab20e345d934276502326c72c46ade92ed15d615da952644f2099f8737a"
+        },
+        {
+          "component_id": "source-target:2b6a00eb74d512211c156881014cb081b56f357cb7e6cfb62a996dd7ab2a3430",
+          "target_id": "atlas:district:BRA-430008:BZS",
+          "disposition": "assigned",
+          "native_rows_sha256": "885e8979e2ed74e00af01a071c969516171adacdab79d42f86e61204176c770c"
+        },
+        {
+          "component_id": "source-target:332078d0eca268dd265a98098e8451f1653008c58c1a8e10e5b6a1e1a2548545",
+          "target_id": "atlas:district:BRA-150001:BZN",
+          "disposition": "assigned",
+          "native_rows_sha256": "6c5520aa4d6524bc3fc63318010b1db79e98a849bef11062dd7ea113fa5c9c1c"
+        },
+        {
+          "component_id": "source-target:350ba7ac40f9fcf632563e39b5646291321d933deee1dbdfdda7c882f9100920",
+          "target_id": "atlas:district:BRA-240011:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "76acc6d3593bb23df991a3888531ef1f96913c931be5db393cfc34e6ad94bb6d"
+        },
+        {
+          "component_id": "source-target:3b94c3f0c964c7b54c7d8ec08dc85f62833825fe89ced648ba34aa12ea4ced14",
+          "target_id": "atlas:district:BRA-290009:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "3d8a7f5873a7212023c307c7420d5093008204fafca2deebdbd7bcd4a02a1f30"
+        },
+        {
+          "component_id": "source-target:3ffeeaf5acf0416b392ff0e46590c0ea12a56e4bd803bffa45d6d587c078e18f",
+          "target_id": "atlas:district:BRA-110005:BZN",
+          "disposition": "assigned",
+          "native_rows_sha256": "719e789953bc459df433b4534555caef8b100ff8d1c2b849241370c6de61a76d"
+        },
+        {
+          "component_id": "source-target:411c048ad14e83d4be29a73bf4f6e523effb47868326ef53187c96bd5b2e24e8",
+          "target_id": "gb:BRA:ADM2:56859067B40416427449951",
+          "disposition": "assigned",
+          "native_rows_sha256": "ac08aeb12bf1a418a2fedbcc4007866c40d8c628572b6595fe9b987a0ab8d7e5"
+        },
+        {
+          "component_id": "source-target:41c609df33d5076b122eaa0b813057c00031f53790407174443377542436acb7",
+          "target_id": "atlas:district:BRA-210002:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "812a0a7064dfa7ba6b2911bdc77d63bc0456db2f48d16eac907f249f35e0e303"
+        },
+        {
+          "component_id": "source-target:45919ec8cbc5bd96f40b10303965c77557b2b5ebcca76c04a6975cb1e464e75c",
+          "target_id": "atlas:district:BRA-270002:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "1ecaac94813d8d858c04f8dcb6a7257e7cd17ec8be76293cb2481cf94b23328c"
+        },
+        {
+          "component_id": "source-target:46dee0b3ad6f51ad0857e8af550b0e4ccbcce56ce1e55fd63f7ccfa8344e63a4",
+          "target_id": "atlas:district:BRA-110006:BZN",
+          "disposition": "assigned",
+          "native_rows_sha256": "cdf2d085f15f1aab06f296607cc57a11ce8bb89fc9ae8e265236d2e07e90d053"
+        },
+        {
+          "component_id": "source-target:4afeb8696cff0b902d2685ad5254d8d79112be45da39ce32640e07a956eaa913",
+          "target_id": "atlas:district:BRA-110004:BZN",
+          "disposition": "assigned",
+          "native_rows_sha256": "1d05a09f4aa6dbf20f3c01d6b6d73b5caeacebdcfc5b7e61ed9e1276465f89a4"
+        },
+        {
+          "component_id": "source-target:4b43ed988ee29c20bf3868596338a4c7869bb0c8e5497e0803ed785352446bc6",
+          "target_id": "gb:BRA:ADM2:56859067B59614170446294",
+          "disposition": "assigned",
+          "native_rows_sha256": "7cf235fdf29142a15cf61d8604aa4e793a86cc45672c98dff6d743aae76da687"
+        },
+        {
+          "component_id": "source-target:4b86a3edbacb20f5751c434fae69c25671035fc8f53be30a8a0c82a9b3bbb321",
+          "target_id": "atlas:district:BRA-230017:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "0c52348f60b2f00e3a7e567b0d582065b1b6b914c9742a43f29f95861e05b03f"
+        },
+        {
+          "component_id": "source-target:4e5d598f9d837837eba1a29ac6302967d10222980f2f4094c8365cea0cb253a1",
+          "target_id": "atlas:district:BRA-230001:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "82f0315ecdcd677b7a685ca117c15f8e90a843c9cf638ac4ffbfe3c8b201bc17"
+        },
+        {
+          "component_id": "source-target:4ed23fd85c9b204c45ded0f08e851785cf0bdfac00ac85ded97c5bbd412ab373",
+          "target_id": "atlas:district:BRA-430015:BZS",
+          "disposition": "assigned",
+          "native_rows_sha256": "5788619bfa0b17001e35889b1a9483d0fe4ce3ae8da11ab9b572b474c7506a69"
+        },
+        {
+          "component_id": "source-target:532a5598df276973742dedb349015f30a2771e06ffa45d5a4f148032605414cb",
+          "target_id": "gb:BRA:ADM2:56859067B63803559021809",
+          "disposition": "assigned",
+          "native_rows_sha256": "07ee1c1a19741dd8f9b825355bdeb764c6744cdb66a74cc68fcd62419aa8c58c"
+        },
+        {
+          "component_id": "source-target:5835e5e1bcd9b6f35f1f60bb1b6fb8b203e64d70a05474ccb1a210adc9346cb7",
+          "target_id": "atlas:district:BRA-290008:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "8b376f4f0fe94fcfd04b743bb3ebe27c9224a5abac7ee14c6afb2d0ce4c205d5"
+        },
+        {
+          "component_id": "source-target:5dad80b9e31090ee1b23d1f114a0b755f9b81a8f8e7a40f352bf7a7914659c58",
+          "target_id": "atlas:district:BRA-500008:BZC",
+          "disposition": "assigned",
+          "native_rows_sha256": "5d7fba36aacd35d05d194db4399ac52a0a2411a651eb9473169348b0e5e24c2d"
+        },
+        {
+          "component_id": "source-target:5fc11e943852e2df651c48265b33f6f40d9a3280e3a197c5e70b04d19f0aafba",
+          "target_id": "atlas:district:BRA-350005:BZL",
+          "disposition": "assigned",
+          "native_rows_sha256": "26947fe8eea535b3e06cedee837f74b94bd25ea74e5959002e63942739c4de66"
+        },
+        {
+          "component_id": "source-target:615c868dba8b7bb8855ad8a48722aa531a2fc7f7991364eb4130abaa28370b0f",
+          "target_id": "atlas:district:BRA-270001:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "e27032f10e324b06b88930c1febc8c8a15abb69b717d93f2c0c439a8026e0164"
+        },
+        {
+          "component_id": "source-target:622c23ed5c6e04964b58c09300b898fde1eabb8f919e863dceb1f31bab15d036",
+          "target_id": "atlas:district:BRA-150021:BZN",
+          "disposition": "assigned",
+          "native_rows_sha256": "95747cbea41fb7cbc42341af719c9e0bef5c01c6feba3f66fb99d641112116f0"
+        },
+        {
+          "component_id": "source-target:6481b59e7c3fbb6816e39afba07d88b00d11011565b99c27771841293207ee83",
+          "target_id": "gb:BRA:ADM2:56859067B88878728392294",
+          "disposition": "assigned",
+          "native_rows_sha256": "4b4e1ca19c18540623427816ab8100484e0ccb0f4b3d45bf5b2873511a17559b"
+        },
+        {
+          "component_id": "source-target:6924f6c0ffaf6acd0233a666e5be505f0c3850b35dda06149cdecac0d7ad7e1d",
+          "target_id": "atlas:district:BRA-230008:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "f39ed0ea2bd79ef69584c6fd3919b51e1d83a774f61f87259844a1289a772ad0"
+        },
+        {
+          "component_id": "source-target:69eaddb54df46535f6ab24ec50189847b7c4d950b780e787021d7ebb45a878ba",
+          "target_id": "atlas:district:BRA-320001:BZL",
+          "disposition": "assigned",
+          "native_rows_sha256": "ed8f319618653a001a517569c3ccb98fcb75ced834b99467d8c1ed2b1c57dab1"
+        },
+        {
+          "component_id": "source-target:6ac5fbf58433a4b9e7eef7e30db9ee6d6666c0bf42f05d7dfbf164e0467ed97b",
+          "target_id": "gb:BRA:ADM2:56859067B94583558960101",
+          "disposition": "assigned",
+          "native_rows_sha256": "22ec43eb3365497e14bbdd9055cd2275a1392709b16dc6f77077356cc2c4d433"
+        },
+        {
+          "component_id": "source-target:6c5f750c0fd19bcab3460bffa71d5d9c4774a6f78aa57492f8b9ea383e1217b7",
+          "target_id": "atlas:district:BRA-350002:BZL",
+          "disposition": "assigned",
+          "native_rows_sha256": "64f518c3aa1020e11013a7cf44bda8d78a2164f980c0bddb2e693e5da6a6292d"
+        },
+        {
+          "component_id": "source-target:7337faab14944932b6892b4ec1a711d416c7729471b1993de227d9b28a9d0a0a",
+          "target_id": "atlas:district:BRA-420001:BZS",
+          "disposition": "assigned",
+          "native_rows_sha256": "bdde6644502669cd8fb7ed8d43849e39b232a21a890573255b8e45b2052f6af4"
+        },
+        {
+          "component_id": "source-target:74f5d9710ad91ff6069befc5d0f7d93bf8c9413a9ed19da1b004a320e46b196d",
+          "target_id": "atlas:district:BRA-500009:BZC",
+          "disposition": "assigned",
+          "native_rows_sha256": "b3617fe0a0369b0f9d37e6c933e29f22beab311e7f362cda19f027cd1eec5c38"
+        },
+        {
+          "component_id": "source-target:7658f1520f79b305f647abdd5f70a8af13369c8a9f07eb830539d0d1b5a77523",
+          "target_id": "atlas:district:BRA-250001:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "c30c5f75331e69c171c6215cd9559bd0ba6edfbaf81c8b15d554ada7936478e6"
+        },
+        {
+          "component_id": "source-target:78fbfbd4438239e7b6dbfc862d5d9145c7c093f44b0a7ae2ca3990ff78ab8e0c",
+          "target_id": "gb:BRA:ADM2:56859067B42691950323680",
+          "disposition": "assigned",
+          "native_rows_sha256": "91184b1c8f30ea8a01743930aec6525c5cf37697c50254e46fea9dcf060689d9"
+        },
+        {
+          "component_id": "source-target:7914c645bf6a4c7c7c103e460b67c54a35168676db8165bd5ea39be029de2f8e",
+          "target_id": "gb:BRA:ADM2:56859067B40128359128951",
+          "disposition": "assigned",
+          "native_rows_sha256": "9b841a59ffa02b2c4dcdf11b8c3c8bf9613673d6ad74df986218b21357466245"
+        },
+        {
+          "component_id": "source-target:7c8a7faa48e74834f68658651df52e812528da645f296c60f93657d03b5445f2",
+          "target_id": "atlas:district:BRA-350051:BZL",
+          "disposition": "assigned",
+          "native_rows_sha256": "f6eb774c103360df0bc92b0e73ae9e19fcfeca3fac7dfa137b023d9e517b53c9"
+        },
+        {
+          "component_id": "source-target:82d1aae98b6423451622b7e683f3bce85c205ee00229861cd1c002a79dba23a8",
+          "target_id": "atlas:district:BRA-210006:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "0e1e166b196915167887724dc6ccb5e7501ad14406abb7e8772468d83c83c12f"
+        },
+        {
+          "component_id": "source-target:83eca255ef3511f8b5a493a1b6ea4f6fe1ea668680661d1c58aa6ac3781e5f1d",
+          "target_id": "gb:BRA:ADM2:56859067B19267714233978",
+          "disposition": "assigned",
+          "native_rows_sha256": "66f8f2846e38e608ebb43e1190d932b0034097bc681938a228e261a5aba9dcbe"
+        },
+        {
+          "component_id": "source-target:87f2cfddf3822a8df8e175b44762a31bcbc6ba4203e4aa8fe0b6b2b3d7187d5f",
+          "target_id": "atlas:district:BRA-120004:BZN",
+          "disposition": "assigned",
+          "native_rows_sha256": "2a0b38fa4e16dd9bef6e041f7eebe9de99329cef6f30393cdcdd26580fec2733"
+        },
+        {
+          "component_id": "source-target:88194a5ee08c1cf7a29318c52928fa770124d5bb5693091c99b7848cd73b6982",
+          "target_id": "atlas:district:BRA-240005:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "8615b487928e0bd9e108999deb3b5875b4ee5bc4c6012d5decaf8e24078c50bc"
+        },
+        {
+          "component_id": "source-target:92c2e039c4277ed4ab26557d3aa5a54ffb968b55b061cf73c49cdd890239b856",
+          "target_id": "atlas:district:BRA-120002:BZN",
+          "disposition": "assigned",
+          "native_rows_sha256": "c44e3ca2d3700fc5e71b60cd66590834d5f01ece18dcb19cf5f73bf826766339"
+        },
+        {
+          "component_id": "source-target:94e72142a01899a7d52a18ec7c9c2a5bfc355c02d7ff251bd0e18a85206da0e6",
+          "target_id": "gb:BRA:ADM2:56859067B31395932343468",
+          "disposition": "assigned",
+          "native_rows_sha256": "dfe51e38fa884067d8aeef17548b795697d1837c17f5caab843f3e00ad3ed2c2"
+        },
+        {
+          "component_id": "source-target:96f3b8694d23ce05fd033b0ff58f17f3189ad8a41d1dddbd46dc27d2ba7b8a2a",
+          "target_id": "atlas:district:BRA-260001:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "87755347e18b0ecc0cfc6f2fc961a5430bb501b5ddfe76eb688f24747db27e2b"
+        },
+        {
+          "component_id": "source-target:9953055ebd33982999654379effff732ba31b70915a224eb04a7096e926c72d3",
+          "target_id": "atlas:district:BRA-240009:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "b7d3d803e25ccce9021f19c955c22dc0ae6adfa0a470f275a80ab0a063d558ed"
+        },
+        {
+          "component_id": "source-target:99f72d80d0b25b7113aa05ab8b4b34926cb60f99e35d7e283b8d755ff3736311",
+          "target_id": "atlas:district:BRA-210007:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "defe4a1710a730fb81ea9563a8569bfa7c86b944389fbfb19081b7571961f8d6"
+        },
+        {
+          "component_id": "source-target:9b54b6c65b0555bc2357c6665a228c9fb2a5c900cd0eeb741a65ddfa11b6e504",
+          "target_id": "atlas:district:BRA-330014:BZL",
+          "disposition": "assigned",
+          "native_rows_sha256": "295fdbbd784ed20ae97cbc33edfeab1524536fdec9fd0ca6bbac8a21095da705"
+        },
+        {
+          "component_id": "source-target:9d0ed6d85fbca86d2e466f009081d7009a6d7ba7cc1e894cf2dd412b223ebee6",
+          "target_id": "atlas:district:BRA-120003:BZN",
+          "disposition": "assigned",
+          "native_rows_sha256": "f6f481ce429dcee113470e79b20ee1c1d5cf9497a43b6afd0f27b0d908e39caa"
+        },
+        {
+          "component_id": "source-target:a1eb63ed739d36a8ccbd27f37edc18ef63f9f4f60cf4a4571ff522a64f44fc45",
+          "target_id": "atlas:district:BRA-260007:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "f0129be9dd0c8b0c151dbb4595f41c59e368861fc297f13acd46da4ba4e087e5"
+        },
+        {
+          "component_id": "source-target:a464d6076ec38b275fd37231332e09c6d0cb3504740d8472c0a79265424d0e53",
+          "target_id": "atlas:district:BRA-230018:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "89de1be39bfec648a05dbcf8441ede05551474f332098f806a1e8ff9dab6cc3d"
+        },
+        {
+          "component_id": "source-target:a7c47d5dda30f9a7059375ed358033be129c576234823b078b08a4f3ab930f5c",
+          "target_id": "atlas:district:BRA-290001:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "f9af7be482d55063f001c4c5b75fd764f4f0839b0e7f081f9ae1155585463933"
+        },
+        {
+          "component_id": "source-target:a866dd1013c92e532c26196d45a1d4e38fa4daea97e6d1c6920511a98e6278b3",
+          "target_id": "atlas:district:BRA-150006:BZN",
+          "disposition": "assigned",
+          "native_rows_sha256": "e629e1dfaaefded74feaa4e292fa614b6dc9b6e6f663c7d7daf10335bf66b357"
+        },
+        {
+          "component_id": "source-target:a8ad7bc6e4d55390044b803a601138e49af8b4a2335d8f1d374c0c361343fb96",
+          "target_id": "atlas:district:BRA-290007:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "982d18ff403b6dc0e9b1a1cfcfe4d6c9ae0f7b6dd877625566f1fb80cff177f3"
+        },
+        {
+          "component_id": "source-target:b060809e5fef561b783046d30673f75760203d57ce19a0510336b0eaee741ae6",
+          "target_id": "gb:BRA:ADM2:56859067B18632556721053",
+          "disposition": "assigned",
+          "native_rows_sha256": "8e954cbc567c84fe908fa19f7750a61c8f6abfe116c67e08c2842b62e2891aba"
+        },
+        {
+          "component_id": "source-target:b0711175d0e834760ccc6e49c8a0d3290bfeee48463f890dbb99e5e08c69fe47",
+          "target_id": "gb:BRA:ADM2:56859067B47097843111479",
+          "disposition": "assigned",
+          "native_rows_sha256": "2a69a2893cad5e9b6c6359cc77d3b808c50687d9370cd5e81331ef79cc4851bc"
+        },
+        {
+          "component_id": "source-target:b0d443eeef08c08c04daac533dfa8390f559461ca7707bf2ab3fa0c1188d1654",
+          "target_id": "atlas:district:BRA-210001:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "6a0403ce57c70df92512649c2c09116cb6d58013490089b7083377a0c134a4d3"
+        },
+        {
+          "component_id": "source-target:b3bacc3ba3309ffb0fb1d85fd0c2b935271210a916b9e6c9e7ae52bf3b98623b",
+          "target_id": "gb:BRA:ADM2:56859067B13821039974926",
+          "disposition": "assigned",
+          "native_rows_sha256": "b1896d5506fd0dfdc142ffbf8336333bde94cdc23c57c24f699b148ddc435a27"
+        },
+        {
+          "component_id": "source-target:b3f0b5a11076bd91431059ec1942a0c378c94e8b6467a234e357ccb472e5a154",
+          "target_id": "gb:BRA:ADM2:56859067B60094869559432",
+          "disposition": "assigned",
+          "native_rows_sha256": "3302e68b4bae534b8580e9ca3babaa1b21913e657621c24ece87751395c516f0"
+        },
+        {
+          "component_id": "source-target:b6b4badfece7e857750842727188465eff2e6e86fb81ef68631c4efacd3e3acc",
+          "target_id": "atlas:district:BRA-320004:BZL",
+          "disposition": "assigned",
+          "native_rows_sha256": "4d4a96f19f40bf3d60726c3a29cf494f9f36111912a7e4ba4f60e6a610bb74b2"
+        },
+        {
+          "component_id": "source-target:ba3dc08b97412a4caf44d71807c614a4ed017c1090fc5d2b18e40704245c8885",
+          "target_id": "atlas:district:BRA-110001:BZN",
+          "disposition": "assigned",
+          "native_rows_sha256": "5d80d613e59dccc99c2fabfe68d24e146c3036d74840e98b093bc4400020c480"
+        },
+        {
+          "component_id": "source-target:bf11403db46914fd40b74b9a10845add082c109436b1434c6f6c099ada82c4a7",
+          "target_id": "atlas:district:BRA-500006:BZC",
+          "disposition": "assigned",
+          "native_rows_sha256": "b99b06a451a7173d38a870d4dd8063ca75b2529921fe843f1ad6c197c12a4084"
+        },
+        {
+          "component_id": "source-target:c404191b5317bd96c61fc8aff3a8b514356dea838bd079c00e9d83b4979df6f8",
+          "target_id": "atlas:district:BRA-280001:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "225ce0d42d91ad88934487e75a95bec32c2a02af2c5ce6b4b433c30ad60f8835"
+        },
+        {
+          "component_id": "source-target:c4b1bbd0ca1b3086b294c4abd3af760ab332614b014368a851d3bdbb90975062",
+          "target_id": "gb:BRA:ADM2:56859067B36867001106125",
+          "disposition": "assigned",
+          "native_rows_sha256": "8c3119bfd5dff93df142ae4ac80e6753fb88ad5dc029e4de08422d60adeb7184"
+        },
+        {
+          "component_id": "source-target:c59975400ab83884773c7c487af18386c2220f579add1aae0480bdfe188b2b83",
+          "target_id": "atlas:district:BRA-410008:BZS",
+          "disposition": "assigned",
+          "native_rows_sha256": "f1cf481652408e046632167044ed21494834da52193f2d9535f28c0ae41cdfb7"
+        },
+        {
+          "component_id": "source-target:c7df7fe6e9b6d9e92236c5c3b1d421da7fb1a3b72cac8ed5f6e64014fe09108c",
+          "target_id": "atlas:district:BRA-230002:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "6e3f6eb85c50384d43bc5c346a776cc0d00f3742bc5a91bbf2a86f7150f06079"
+        },
+        {
+          "component_id": "source-target:c80f878c82fd57337e589fe9111b9737b531add8f31a15e96e8ab8827f3a32b1",
+          "target_id": "atlas:district:BRA-160003:BZN",
+          "disposition": "assigned",
+          "native_rows_sha256": "e040b97ba5f84697e6c2d769dd3422c4ef6261ab242c35377b28921fd5aba364"
+        },
+        {
+          "component_id": "source-target:cb45bd567b6bdeec3c99f98e172b6202344341b306dc12c5112d36378d9aa755",
+          "target_id": "atlas:district:BRA-500011:BZC",
+          "disposition": "assigned",
+          "native_rows_sha256": "172613402d6e7e81ff6f4019dcd3da0e814527558cc79c931f8fa19e305d579d"
+        },
+        {
+          "component_id": "source-target:cd9abfd5f2b1f8798344b96dbc74870f06a5933c1a65d27c6ce8b5a92fbfd43b",
+          "target_id": "gb:BRA:ADM2:56859067B80859432547876",
+          "disposition": "assigned",
+          "native_rows_sha256": "2c592db9d946b69ca65342e08878cb49398a1fc9eb7542e6ae8d3d0986aadf7f"
+        },
+        {
+          "component_id": "source-target:cfe35d8538a627c7ac26ad03e755614e066cfbc96fd7899a53d30b45d23a4768",
+          "target_id": "atlas:district:BRA-330010:BZL",
+          "disposition": "assigned",
+          "native_rows_sha256": "088dc04c1c626a2f55f472b5ba05353e00f66f739ff47b1a2a0245396306c410"
+        },
+        {
+          "component_id": "source-target:cfe56229aa720270707b1cdf91cc81566a91db0da600af2945bd7fd7949b3bbb",
+          "target_id": "atlas:district:BRA-210008:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "2e4d37322fda588ffa1b3e9f2bed37e33866c7ed00a24e6371f23215f5de7590"
+        },
+        {
+          "component_id": "source-target:d0c26971c197dff9b8ffe89e580841578d4df594cbb47841b8c3e3c9f90501b9",
+          "target_id": "atlas:district:BRA-420002:BZS",
+          "disposition": "assigned",
+          "native_rows_sha256": "d77a495af935d65ed28fa535c60cc77c76c4fe2d402044c1ee51e6f4ad5950ff"
+        },
+        {
+          "component_id": "source-target:d115a0ff008d466f1329b4cedf88ac0e697da8ba60f1f288f912a3c7c6063dae",
+          "target_id": "atlas:district:BRA-270003:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "50137bba21fe3522630eb520dcec605027809617576c48350e44c2d60c5a4829"
+        },
+        {
+          "component_id": "source-target:d21b894f1f0817c9e98f6e71cae0997024106862afa75ba34b26b2e866963ebb",
+          "target_id": "atlas:district:BRA-320007:BZL",
+          "disposition": "assigned",
+          "native_rows_sha256": "953f26b554be3af77af49403075215b66311c430595924522f652546391bc05e"
+        },
+        {
+          "component_id": "source-target:d24eda02869ebc21e6c9e745024e8e8381313580511dfed5b44d1ba1e595f716",
+          "target_id": "gb:BRA:ADM2:56859067B1800832829345",
+          "disposition": "assigned",
+          "native_rows_sha256": "22a7d4a67e50bc955f0521d18b1e9d917025b3acc1ab0aad304582f710416e35"
+        },
+        {
+          "component_id": "source-target:d689877916adbc8067166fe10d1c17ab8218d0cb92a517ae68b2e2d6c8accd8a",
+          "target_id": "atlas:district:BRA-330013:BZL",
+          "disposition": "assigned",
+          "native_rows_sha256": "5c4ad5acd8ce6456ed6fc86d837ca4869b0f263e44293dca2f22f72a9437e3df"
+        },
+        {
+          "component_id": "source-target:d82a2ce42b6a99e630c2d1f0aea92be1287a4e1505e9bcacab9fa24b6c13f207",
+          "target_id": "atlas:district:BRA-290010:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "8f716845c7b4e07d55502936a917a4ed2aa14683c4820c448e238148039c0850"
+        },
+        {
+          "component_id": "source-target:da0073aa67a10421ad4b5056a3e95033acbccdfe05fbf48685e6329e2acf369d",
+          "target_id": "atlas:district:BRA-120001:BZN",
+          "disposition": "assigned",
+          "native_rows_sha256": "164fc20c3aa9a3460949d5b6438ec1e65dada244498abc191726921944cd8723"
+        },
+        {
+          "component_id": "source-target:dfe54acbc05b0bcd170383ae6533f32fb32a45bc6240b824a546d4889d49aa80",
+          "target_id": "atlas:district:BRA-410002:BZS",
+          "disposition": "assigned",
+          "native_rows_sha256": "637d4e8e30fcf93c8f169482404a4d806c9eac491dd16cbbe8bcd0420a7e24b6"
+        },
+        {
+          "component_id": "source-target:e1e13c607b6a334ac58f5a7e11e76eba2e9318fa74713b6c37dc7ed90fd65c1b",
+          "target_id": "atlas:district:BRA-420020:BZS",
+          "disposition": "assigned",
+          "native_rows_sha256": "c9efa435cb5a3d9f43a8aa742ecc8bf4c3873104d108d6c88529ff49c9cd1b86"
+        },
+        {
+          "component_id": "source-target:e232a4a0066d4ccfa9b5543e288004f512f1aaada0d3599facda6805be20d822",
+          "target_id": "gb:BRA:ADM2:56859067B3847278912297",
+          "disposition": "assigned",
+          "native_rows_sha256": "937311f4f6a7ea9effc979ce34c0c1034221c8dd796759cc380a175383b35df4"
+        },
+        {
+          "component_id": "source-target:e31f0e21eec5a5a82d7ac4e26d69377b393f8323ccd9295cb4c19ee43c21d14e",
+          "target_id": "atlas:district:BRA-210005:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "7044396b3485ef7a7179ba63919492839a4b9f7fe5590b1171493fa38c658a6e"
+        },
+        {
+          "component_id": "source-target:e92cec80f806a229d6ea7526a73b1dcbad27ea69ba78f6c27a78b908a074b468",
+          "target_id": "gb:BRA:ADM2:56859067B16208795434371",
+          "disposition": "assigned",
+          "native_rows_sha256": "a589d7e02cda32c7a26b85f605659f4f749560e2f99c64b1e22789e3ecac6e47"
+        },
+        {
+          "component_id": "source-target:eae0de389f36568872b3f2b8c7744fe00ff707ad0be57377a9e28f6380744914",
+          "target_id": "atlas:district:BRA-330001:BZL",
+          "disposition": "assigned",
+          "native_rows_sha256": "8d2fda488036e5c8d0a5fb767fd9c92c034f622f7c27cde2ba76bba72294f197"
+        },
+        {
+          "component_id": "source-target:ed00ec45eda96d0b3278e54ebf560054f58c59fe748dde963e6f4eb0e0722151",
+          "target_id": "atlas:district:BRA-420016:BZS",
+          "disposition": "assigned",
+          "native_rows_sha256": "908d9c82d777f48dac35d3c6a12f7a4d4772262cb674d3537f34d6d23a58bfb0"
+        },
+        {
+          "component_id": "source-target:eded8b4be4f2d569ffa2b3baacbac21e073ab060f2a9bd59babd1df682d4e63c",
+          "target_id": "gb:BRA:ADM2:56859067B5224515262933",
+          "disposition": "assigned",
+          "native_rows_sha256": "3c19b58110572a5c079fe9dee1c5338e00960681cb9d8b9154f8b7a21e4226f0"
+        },
+        {
+          "component_id": "source-target:eea83889d8a2ad9c76e9a8780e67b99c87c828c203995f7eccade76812785bd1",
+          "target_id": "atlas:district:BRA-240001:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "b79bc86183e0493a2ade001a1b585b9a5b43b830524d39d4e4f916caa20ed471"
+        },
+        {
+          "component_id": "source-target:eeac8df87597f35118f40dd0d0c8a0f95a8edb7cb963d56d577d8c5e589ebd69",
+          "target_id": "atlas:district:BRA-250003:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "1e559aea408381a90b92b92c5dbeeb3e629178120a77abe788041d5c1b8d76c1"
+        },
+        {
+          "component_id": "source-target:ef4531c838d530f2cc8a48096f42c52da2cf28ee83ef41a5d71047bbdc2260c8",
+          "target_id": "atlas:district:BRA-430005:BZS",
+          "disposition": "assigned",
+          "native_rows_sha256": "ca63c018f5b4c73cd15f9d4cf67514f4d989a574f85d05bfdc795045e44e055f"
+        },
+        {
+          "component_id": "source-target:f462a14e26dc11a9ff86521bfe72c00ca833c27d5b69acbf774d73489eca9ee8",
+          "target_id": "gb:BRA:ADM2:56859067B83174667423697",
+          "disposition": "assigned",
+          "native_rows_sha256": "90b3e5394835197d0a69fedcc2251140755515b278c94988ca6ee77ba2999a17"
+        },
+        {
+          "component_id": "source-target:f4759f9a0fc1413af53fdc7b2a39a18c4f9a610450165388ce648814cfaf880b",
+          "target_id": "gb:BRA:ADM2:56859067B83893589630765",
+          "disposition": "assigned",
+          "native_rows_sha256": "f4cb5a19a10b4a3f92e467ac087f19f9b4b68b6f2c89c91dbad9f7551fe750bf"
+        },
+        {
+          "component_id": "source-target:f57c3ca7d69a5d6a71fd148d5eb489298e462a6c3144d8d5c16a27fb20bce7ed",
+          "target_id": "atlas:district:BRA-290006:BZE",
+          "disposition": "assigned",
+          "native_rows_sha256": "664de3624bad6dceb34c627772889442c114b14ead85af4b65d91c7c0d91b314"
+        },
+        {
+          "component_id": "source-target:fa346e316e0a06179df43b9d56c3895265b5852c982648fe4616f92512030e07",
+          "target_id": "gb:BRA:ADM2:56859067B84901972140981",
+          "disposition": "assigned",
+          "native_rows_sha256": "70d486773c8bcaa84876d7f168e2df1daadbbc440e648507021b6a22299fdd5b"
+        },
+        {
+          "component_id": "source-target:fab32c77a9d9c5fc2df160e4efec0b609d71ed610e531d03e5c956ca2c1fb606",
+          "target_id": "atlas:district:BRA-430024:BZS",
+          "disposition": "assigned",
+          "native_rows_sha256": "d760ec169029ebc21e0cb591ebc0ae92929cd496b1140985f5ccf1958a3a7ce1"
+        },
+        {
+          "component_id": "source-target:fd2124068ed139f3bddea5be5215b53e0b53ad2d7ddc1cb1305d62175c90e2c6",
+          "target_id": "atlas:district:BRA-430010:BZS",
+          "disposition": "assigned",
+          "native_rows_sha256": "95bec1a8e9563cb83a1dddfbbe8bdab997b0859ecd0dd1453fb172dcb1199ba6"
+        },
+        {
+          "component_id": "source-target:fd4f605169c262ae017db92db807622dbd0937dece68b640c4a715c1449bdcfd",
+          "target_id": "gb:BRA:ADM2:56859067B38463954563112",
+          "disposition": "assigned",
+          "native_rows_sha256": "5d98e2fa77abb8e79466c769bec01d8d8a49413387632a12c3703bf3bdb304a2"
         }
       ]
     },
