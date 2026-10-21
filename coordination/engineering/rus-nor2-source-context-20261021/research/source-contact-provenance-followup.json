@@ -1,0 +1,260 @@
+{
+  "title": "Bounded NOR2 official 2022 source comparison and contact provenance",
+  "scope": {
+    "package_id": "gb-RUS-ADM2--repair-evaluation",
+    "keys": [
+      [
+        152965,
+        59862
+      ],
+      [
+        152972,
+        59849
+      ]
+    ],
+    "owner": "gb:RUS:ADM2:50074027B59329255842991",
+    "owner_name": "Petsamo District",
+    "native_state": "Both remain held as territorial_exclusion_cells; this comparison changes no native state or credit."
+  },
+  "official_2022_source": {
+    "atom_feed_url": "https://nedlasting.geonorge.no/geonorge/ATOM-feeds/AdministrativeEnheterFylker2022_AtomFeedGML.xml",
+    "atom_feed_http": 200,
+    "atom_feed_bytes": 25780,
+    "atom_feed_sha256": "95bae8dec2e857d1e5813a99dc93ce935613a15d1a734ff1c585dee84ee336a5",
+    "atom_feed_file": "inventory/rus-nor2-official-2022-comparison/2022-atom-feed.xml",
+    "feed_title": "Administrative enheter fylker - historiske data 2022",
+    "publisher": "Kartverket",
+    "feed_updated": "2022-12-14T12:34:45",
+    "distribution": {
+      "url": "https://nedlasting.geonorge.no/geonorge/Basisdata/Fylker2022/GML/Basisdata_0000_Norge_25833_Fylker2022_GML.zip",
+      "http": 200,
+      "zip_bytes": 3425371,
+      "zip_sha256": "0162fff92a3354104a5e5380c82836ab50d4f8353de1a2d28f75d8a345746ad7",
+      "file": "inventory/rus-nor2-official-2022-comparison/Basisdata_0000_Norge_25833_Fylker2022_GML.zip",
+      "member": "Basisdata_0000_Norge_25833_Fylker2022_GML.gml",
+      "decoded_bytes": 37491789,
+      "crs": "urn:ogc:def:crs:EPSG::25833",
+      "fylke_features": 11,
+      "all_gml_feature_counts": {
+        "Fylke": 11,
+        "Fylkesgrense": 18892,
+        "Riksgrense": 237,
+        "Territorialgrense": 93,
+        "Grunnlinje": 80,
+        "AvtaltAvgrensningslinje": 9
+      },
+      "acquisition": "Direct public official Atom distribution; no account, payment, cart or terms acceptance used."
+    },
+    "specific_feature": {
+      "fylkesnummer": "54",
+      "name": "Troms og Finnmark nor 1",
+      "local_id": "545cbfe3-2f34-4792-a9e9-135375accefd",
+      "gml_id": "id923ec8b1-22ae-4c8c-a1c5-9f12f026966c",
+      "source_polygon_coordinate_structure_sha256": "f7b4870a8218505b267127e35ee33c0110b2fb1fba26497d57d28bf5081d49ef"
+    },
+    "comparison_script": {
+      "file": "inventory/rus-nor2-official-2022-comparison/inspect_2022_county_contacts.py",
+      "sha256": "3428d2ade452c058461d64e81836f4803e7a7c9f33f46897f40acd4aa4553c03",
+      "output": "inventory/rus-nor2-official-2022-comparison/two-center-2022-fylke-comparison.json",
+      "output_sha256": "67ce39f776a7e504b0d6da1fb64e5b8af4bae0c5874f9606a1ef7824e2c53a18",
+      "method": "Only the two retained native center lon/lat coordinates were transformed with a local GRS80 UTM33 forward formula and tested against the complete 11-polygon Fylke family using even-odd point-in-ring, union of polygon patches and exclusion of interiors. This was not a full-target geometry or owner scan."
+    },
+    "atom_feed_updated": "2026-10-21T04:06Z",
+    "entry_updated": "2022-12-14T12:34:45"
+  },
+  "key_results": [
+    {
+      "xy": [
+        152965,
+        59862
+      ],
+      "center_lon_lat": [
+        30.048518877352535,
+        69.4336981394968
+      ],
+      "utm33_center_m": [
+        1084844.5322013227,
+        7775150.282410879
+      ],
+      "inside_2022_feature_54": true,
+      "distance_to_nearest_2022_feature_boundary_m": 51.034476506651856,
+      "interpretation": "The official 2022 full Fylke polygon corroborates the original simplified GeoBoundaries contact and adjacent historical WMS/current API lineage. This is adverse to a positive RUS repair; keep held."
+    },
+    {
+      "xy": [
+        152972,
+        59849
+      ],
+      "center_lon_lat": [
+        30.058131107771402,
+        69.43996822160625
+      ],
+      "utm33_center_m": [
+        1085040.0010330724,
+        7775923.530136618
+      ],
+      "inside_any_of_complete_2022_11_feature_family": false,
+      "distance_to_nearest_2022_feature_boundary_m": 27.553042234129784,
+      "interpretation": "A concrete 2022 official full-polygon comparison disagrees with the original simplified contact, and agrees with the adjacent-year WMS no-hit and 2026 point-API no-hit. This makes the source-specific contact discrepancy actionable for further original-contract review, but does not prove RUS membership or authorize assignment. Keep held pending any full predicate review."
+    }
+  ],
+  "original_contact_source_and_code": {
+    "original_retained_source": "gb:NOR:ADM1:71437522B84427958303197, simplified Kartverket-derived GeoBoundaries 2022 feature in an 11-feature family; original family decoded SHA-256 a24bd867e42c8f2d7bdd07e723594f2d55736d50de8cf1e92062ae443a0f0f72. This original contact source is simplified, unlike the full official 2022 GML just compared.",
+    "original_contact_result_pin": {
+      "commit": "a7930ca6eb907823caeff668af09c2f9bcbdf5ef",
+      "path": "coordination/engineering/russia-repair-delivery-20261017/source-review/source-competitor-native-counts.json",
+      "git_blob_oid": "5fb0aa3905e08430eb53da3169ec1065daa45a42",
+      "bytes": 267145,
+      "sha256": "63a3debe872902a09d34dfd375a98a1a2129b7985231d289432fc942ccd4c2f3",
+      "rows": [
+        [
+          59849,
+          152972,
+          152973,
+          38297,
+          [
+            "gb:NOR:ADM1:71437522B84427958303197"
+          ]
+        ],
+        [
+          59862,
+          152965,
+          152966,
+          38297,
+          [
+            "gb:NOR:ADM1:71437522B84427958303197"
+          ]
+        ]
+      ]
+    },
+    "native_membership_implementation": {
+      "commit": "e9e4eb5afd7c5ed1ed1871e44996da8b10a37802",
+      "path": "src/native-grid.js",
+      "git_blob_oid": "add4cef02bb5a790f22a9078fdf9bd51679059d3",
+      "bytes": 53197,
+      "sha256": "3d20777f5896d28192e40428dd34cab89d47873a08bf073a17338c4ff97d43cd",
+      "relevance": "The frozen stage's native intervals use nativePolygonIntervals at normative row latitudes; this is a native center-row interval representation, not a test of whole-cell footprint area or legal source authority."
+    },
+    "reproduction_code_pin": {
+      "commit": "a7930ca6eb907823caeff668af09c2f9bcbdf5ef",
+      "path": "coordination/engineering/russia-repair-delivery-20261017/scripts/verify-original-stage.py",
+      "git_blob_oid": "01d5f2f0de56a9714a8a24d70d0155a695b9a564",
+      "bytes": 4883,
+      "role": "Rebuilds and byte-compares the frozen original stage and patch, including its foreign-contact rows; it verifies the retained output rather than documenting the initial contact-scanner invocation."
+    },
+    "provenance_limit": "The retained packets identify the source-contact result rows, source payload, native interval implementation and a verifier, but do not bind a separate original invocation/script for generating source-competitor-native-counts.json. No claim is made that this result was independently regenerated here."
+  },
+  "terms_and_access": {
+    "feed_rights": "The feed reports rights=Kartverket.",
+    "general_terms_url": "https://www.kartverket.no/en/api-and-data/terms-of-use",
+    "general_terms_summary": "Kartverket's general terms state free products may be used commercially and non-commercially under CC BY 4.0 with attribution; the dataset-specific Data Norge record was not independently read (the exact record URL returned HTTP 404 HTML, 23,984 bytes, SHA-256 44e0dcd293d0f593bfd3bd89cc976d6bde3bda4749f0bdc7bdfcc7bed49f1fc3).",
+    "not_a_license_clearance": true
+  },
+  "limits": [
+    "The full 2022 official feature is a separate representation from the original 2022 simplified GeoBoundaries contact source; the comparison demonstrates a source representation discrepancy, not that the original's recorded contact is false.",
+    "The 27.553 m nearest-boundary distance is a computed geometric distance, not a stated accuracy or legal error tolerance.",
+    "The official GML comparison does not establish other original contract predicates, full-target physical/competitor status, sovereign status, or native ownership.",
+    "The local transform and point-in-polygon implementation were independently cross-checked with PyProj 3.7.2 and Shapely 2.1.2 on the same two existing points and complete 11-feature family; this remains a bounded check, not a new target/owner scan.",
+    "No full-source GeoBoundaries 2022 payload was retrieved as part of this bounded check.",
+    "An independent PyProj/Shapely cross-check confirmed both 2022 point-in-polygon outcomes; its 1 m CRS operation accuracy is not a source-geometry accuracy claim."
+  ],
+  "independent_numerical_crosscheck": {
+    "file": "inventory/rus-nor2-official-2022-comparison/independent-numerical-crosscheck.json",
+    "sha256": "4641a617a8ea315086b716272c09742fe7dca9cc4ec08ded28ac4851e9e7afc8",
+    "script": "inventory/rus-nor2-official-2022-comparison/crosscheck_pyproj_shapely.py",
+    "script_sha256": "dfb04637f0a661bf7f34145d7712f637a133b755c1b702a3a7580a654d9b9f11",
+    "runtime": {
+      "pyproj": "3.7.2",
+      "shapely": "2.1.2"
+    },
+    "method": "Independent PyProj CRS84-to-EPSG:25833 operation and Shapely 2.1.2 covers/distance checks on the same two original coordinates and complete 11-feature 2022 Fylke family. All 11 geometries are valid.",
+    "results": [
+      {
+        "xy": [
+          152965,
+          59862
+        ],
+        "feature_54_covers_center": true,
+        "nearest_boundary_m": 50.651847306453845,
+        "computed_transform_delta_from_handwritten_m": 0.3908628828867003
+      },
+      {
+        "xy": [
+          152972,
+          59849
+        ],
+        "any_2022_fylke_covers_center": false,
+        "nearest_boundary_m": 27.937773003054836,
+        "computed_transform_delta_from_handwritten_m": 0.39247459120833234
+      }
+    ],
+    "interpretation": "Confirms the earlier bounded comparison outcomes using an independent CRS library and geometry implementation. The second key remains a source-specific representation discrepancy and a possible bounded positive-applicability review path; it is not proof of Russian ownership or an authorized assignment. The first remains adverse to a positive repair.",
+    "limit": "PROJ reports 1 m coordinate-operation accuracy; that is transform metadata, not source boundary accuracy. The sub-metre difference from the hand-written transform does not affect either point-in-polygon result. This check does not determine legal status, native owner, full physical status or the original contact generator."
+  },
+  "report_revision": {
+    "previous_sha256": "a782d5288be750491ca4e82cfc1b502c289f91c52de23f6e430bfe25a6c3eaa5",
+    "reason": "Clarified the independent PyProj/Shapely cross-check and feed-level versus historical-entry timestamps; added a read-only exact original key/owner/native-hold and whole-target physical receipt binding. No geometry or owner operation was rerun."
+  },
+  "read_only_native_physical_binding": {
+    "exact_key": [
+      152972,
+      59849
+    ],
+    "original_partition": {
+      "path": "inventory/rus-1343-current-held-partition.json",
+      "sha256": "3cdf5990adf6147ec1de269915f0e5ebac6c7f85bbcd0511b08bc8be46ec3bf4",
+      "group": "other_families_471_preserved",
+      "owner_index": 38297,
+      "owner_id": "gb:RUS:ADM2:50074027B59329255842991",
+      "owner_name": "Petsamo District",
+      "class": "mapped_land_support",
+      "held_interval_ordinal_1based": 1,
+      "held_interval": [
+        59849,
+        152972,
+        152973
+      ],
+      "foreign_contact": "gb:NOR:ADM1:71437522B84427958303197",
+      "foreign_target_negative_ordinal": 0
+    },
+    "native_diagnostic": {
+      "commit": "c6720857e7ad3530ca44a542d96ea9edb9eca77b",
+      "path": "coordination/engineering/rus-context-qualified-repair-20261021/native-diagnostic-002/native-diagnostic.json",
+      "bytes": 5278783,
+      "sha256": "72d66e29049391e01c06a31a3460efa5d581c16975e2daaa7cf54cf57da9683c",
+      "retained_reason": "territorial_exclusion_cells; this is a source-applicability diagnostic label, not legal ownership."
+    },
+    "physical_target_receipt": {
+      "commit": "d41ba96f505fe507773cb1a23aab558941ee5a9c",
+      "path": "coordination/engineering/russia-repair-delivery-20261017/physical-001/whole-target-support.json",
+      "bytes": 54074211,
+      "sha256": "38c8d148dbc33bab7fc94e2c7931b9a2ca757ff04d90191f08fa2506a6fc1a8c",
+      "target_id": "gb:RUS:ADM2:50074027B59329255842991",
+      "target_source_query_count": 74,
+      "whole_target_issues": [
+        {
+          "reason": "contradictory_land_water_support",
+          "geometry": "MultiLineString",
+          "bbox_lonlat": [
+            29.276489,
+            69.226389,
+            30.218056,
+            69.500278
+          ]
+        },
+        {
+          "reason": "L2-outside-L1",
+          "geometry": "MultiPolygon",
+          "bbox_lonlat": [
+            30.07610058797251,
+            69.45182001083352,
+            30.10064138689374,
+            69.46301158306987
+          ]
+        }
+      ]
+    },
+    "per_key_physical_limit": "The retained receipt reports issue geometries for the whole Petsamo target, not an exact intersection result for this native center. The L2-outside-L1 issue bbox does not contain the key center; the broader contradictory-land-water bbox does. No per-key physical issue intersection was computed here, so exact effect on this key remains unestablished. Preserve both target issues.",
+    "interpretation": "Original target/owner and land class are bound; the official full 2022 Norwegian county comparison exposes a simplified-source discrepancy for this key, while the stock diagnostic still holds it for the NOR negative. Existing target physical evidence retains two adverse issue records. A positive path requires the complete original source/physical/native predicates and cannot infer Russian inclusion from Norway non-coverage."
+  }
+}
