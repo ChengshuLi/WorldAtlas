@@ -1,0 +1,620 @@
+{
+  "version": 1,
+  "kind": "vct-bounded-competitor-closure",
+  "as_of": "2026-10-21",
+  "scope": {
+    "package_id": "gb-VCT-ADM1--repair-evaluation",
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "land_cells": 633,
+    "intervals": 224,
+    "positive_owner": 7132,
+    "positive_source_family": "gb:VCT:ADM1",
+    "positive_features": [
+      64726,
+      64727,
+      64728,
+      64729,
+      64730,
+      64731
+    ],
+    "separate_physical_companion": {
+      "cells": 389,
+      "intervals": 179
+    }
+  },
+  "research_basis": [
+    {
+      "source": "Government of SVG, Coastal and Marine Ecosystems Management Strengthening Project ESMF (July 2024)",
+      "url": "https://www.gov.vc/images/projects/CMEMSP_Environmental-and-Social-Management-Framework.pdf",
+      "pages": "23-24",
+      "observations": [
+        "The SVG chain of Grenadine islands stretches south toward Grenada.",
+        "Saint Vincent lies about 20 miles southwest of Saint Lucia and about 100 miles west of Barbados.",
+        "It names the larger SVG-associated Grenadines, and the Tobago Cays east of Mayreau."
+      ],
+      "use": "Supports the geographic near-neighbor screen: Grenada south, Saint Lucia north, Barbados east. It does not define source authority or national maritime/land boundaries."
+    },
+    {
+      "source": "World Bank/OECS Regional Tourism Competitiveness Project ESMF hosted by Government of SVG (2016)",
+      "url": "https://www.gov.vc/images/pdf_documents/OECS_Regional_Tourism_Competitiveness_Project_ESMF.pdf",
+      "pages": "6, 16-17",
+      "observations": [
+        "The regional location map treats Saint Lucia, Grenada, and SVG as the three project-country islands.",
+        "It describes SVG as a main island plus 32 islands/cays; Saint Lucia is north, with Martinique north of Saint Lucia; Grenada includes Grenada, Carriacou, and Petite Martinique."
+      ],
+      "use": "Supports selecting the two nearest archipelagic administrative families and treating Martinique as farther north behind Saint Lucia in this bounded screen; not a global exclusion proof."
+    },
+    {
+      "source": "Government of Saint Lucia, Open Source GIS Stack, Saint Lucia Administrative Boundaries",
+      "url": "https://geoservices.govt.lc/maps/adm-boundries/",
+      "date": "2023-02-10",
+      "observations": [
+        "Government geospatial service lists an administrative-boundaries publication."
+      ],
+      "use": "Confirms Saint Lucia has a public national administrative-boundary mapping product; it is not the 2015 GeoBoundaries product inspected here."
+    },
+    {
+      "source": "Government of Grenada, Central Statistics Office, Country Poverty Assessment: Grenada, Carriacou and Petit Martinique",
+      "url": "https://stats.gov.gd/wp-content/uploads/2021/05/Grenada_CPA_-_Vol._1_Main_Report__Submitted_.pdf",
+      "observations": [
+        "Official document title covers Grenada, Carriacou, and Petite Martinique."
+      ],
+      "use": "Supports retaining Grenada ADM1 family as a near-neighbor screen; not source geometry authority."
+    }
+  ],
+  "candidate_set_method": "Finite nearest-jurisdiction screen justified by official SVG regional/island descriptions: complete retained ADM1 source families for GRD, LCA, and BRB. This is an evidence-based screen, not a claim that every possible source family worldwide was enumerated. The source-candidate census remains a separate 633-center result. The exact family products were compared whole-family feature-by-feature to all six complete VCT ADM1 source features.",
+  "source_products": [
+    {
+      "family": "gb:VCT:ADM1",
+      "role": "target source product",
+      "git_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "git_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-VCT-ADM1-000.bin.gz",
+      "git_blob": "b1f7ca51235ca21c1c83e49f892574e5eaed3588",
+      "compressed_bytes": 5578,
+      "compressed_sha256": "3bdfc64d8b6f528b9e3ae7af5ab4e031a8aa712619a502230f0fc7bb3d6b5f9d",
+      "decoded_bytes": 19562,
+      "decoded_sha256": "cf42ead8ec9a00b1b4da1d57a255faa285257b6f71c1b156490567e76550b080",
+      "feature_count": 6,
+      "catalogue_recorded_year": "2017",
+      "catalogue_recorded_license": "Open Data Commons Open Database License 1.0"
+    },
+    {
+      "family": "gb:GRD:ADM1",
+      "role": "south-neighbor candidate",
+      "git_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "git_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-GRD-ADM1-000.bin.gz",
+      "git_blob": "739e8e0c45e0d01cb325002c78292bb87f4b7b01",
+      "compressed_bytes": 5971,
+      "compressed_sha256": "58de8da0d087d4b1c1ebf64d847c256514dacdd1772ea96581b0722e326da36e",
+      "decoded_bytes": 21305,
+      "decoded_sha256": "77fd71e1e8a9552c8807aed586dcb30399627e7dd462707cdc2b9af64a5a2b5b",
+      "feature_count": 7,
+      "catalogue_recorded_year": "2017",
+      "catalogue_recorded_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "features": [
+        "Saint Andrew",
+        "Saint David",
+        "Saint Mark",
+        "Saint John",
+        "Saint George",
+        "Saint Patrick",
+        "Southern Grenadine Islands"
+      ]
+    },
+    {
+      "family": "gb:LCA:ADM1",
+      "role": "north-neighbor candidate",
+      "git_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "git_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LCA-ADM1-000.bin.gz",
+      "git_blob": "d3984e5663ad18af4de116815b22b41af6930535",
+      "compressed_bytes": 14393,
+      "compressed_sha256": "a44c6ecca991d0dc7913c85dde9fc09072790df5c046c874017306c393e85140",
+      "decoded_bytes": 49834,
+      "decoded_sha256": "8d718c820ccd74baac7c892c63c7a8ebd3ace7016e0d2a5341ff306848470c0b",
+      "feature_count": 10,
+      "catalogue_recorded_year": "2015",
+      "catalogue_recorded_license": "CC0 1.0 Universal",
+      "features": [
+        "Vieux Fort",
+        "Anse la Raya",
+        "Castries",
+        "Gros Islet",
+        "Dennery",
+        "Micoud",
+        "Soufrière",
+        "Choiseul",
+        "Laborie",
+        "Canaries"
+      ]
+    },
+    {
+      "family": "gb:BRB:ADM1",
+      "role": "eastward-neighbor comparator",
+      "git_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "git_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BRB-ADM1-000.bin.gz",
+      "git_blob": "861c29e435d27925b57d0937fcdad8f65d48f322",
+      "compressed_bytes": 3341,
+      "compressed_sha256": "dd78db3fd484415d048363643ba02454b3ea44af7c8f87ac27b669a80803d7d6",
+      "decoded_bytes": 12184,
+      "decoded_sha256": "0a324c3112b9277fd3c986bb87485dcd434fad600b6d49e65b5f685e361757f9",
+      "feature_count": 11,
+      "catalogue_recorded_year": "2005",
+      "catalogue_recorded_license": "Creative Commons Attribution 2.5 Generic",
+      "features": [
+        "Saint George",
+        "Saint Lucy",
+        "Saint Andrew",
+        "Saint Peter",
+        "Saint James",
+        "Saint Thomas",
+        "Saint Joseph",
+        "Christ Church",
+        "Saint Michael",
+        "Saint Philip",
+        "Saint John"
+      ]
+    }
+  ],
+  "comparison": {
+    "operation": "Parsed the complete GeoJSON FeatureCollections for the four named products using the isolated task runtime (Python 3.12.14, Shapely 2.1.2); checked exact polygon `intersects` for every one of 6 VCT targets against every feature of each complete candidate family. No raster, native owner observer, source-candidate observer, or stock physical producer was rerun.",
+    "pairwise_test_count": 168,
+    "intersections": 0,
+    "target_features": [
+      {
+        "name": "Charlotte",
+        "source_id": "94954027B88448576527444",
+        "bbox_lonlat": [
+          -61.2051239,
+          13.1670465,
+          -61.1148288,
+          13.383259
+        ]
+      },
+      {
+        "name": "Saint Andrew",
+        "source_id": "94954027B50419639501702",
+        "bbox_lonlat": [
+          -61.2726371,
+          13.1541942,
+          -61.1990051,
+          13.2343807
+        ]
+      },
+      {
+        "name": "Saint David",
+        "source_id": "94954027B75488374461778",
+        "bbox_lonlat": [
+          -61.2628884,
+          13.2556591,
+          -61.1638794,
+          13.3813567
+        ]
+      },
+      {
+        "name": "Saint George",
+        "source_id": "94954027B8071677306874",
+        "bbox_lonlat": [
+          -61.236716,
+          13.1224239,
+          -61.1432789,
+          13.2100677
+        ]
+      },
+      {
+        "name": "Saint Patrick",
+        "source_id": "94954027B24043744256815",
+        "bbox_lonlat": [
+          -61.2793834,
+          13.2015905,
+          -61.1882629,
+          13.2744511
+        ]
+      },
+      {
+        "name": "Grenadines",
+        "source_id": "94954027B73683206567439",
+        "bbox_lonlat": [
+          -61.4609162,
+          12.5787908,
+          -61.1367259,
+          13.0483912
+        ]
+      }
+    ],
+    "nearest_family_feature_gaps_degrees_in_lonlat_coordinate_space_not_geodesic": {
+      "GRD": {
+        "distance": 0.04883855299014837,
+        "target": "Grenadines",
+        "candidate": "Southern Grenadine Islands",
+        "target_shapeID": "94954027B73683206567439",
+        "candidate_shapeID": "93511190B76376744251170"
+      },
+      "LCA": {
+        "distance": 0.37861855496400226,
+        "target": "Charlotte",
+        "candidate": "Vieux Fort",
+        "target_shapeID": "94954027B88448576527444",
+        "candidate_shapeID": "63095687B63570319440385"
+      },
+      "BRB": {
+        "distance": 1.4644826627250438,
+        "target": "Charlotte",
+        "candidate": "Saint Lucy",
+        "target_shapeID": "94954027B88448576527444",
+        "candidate_shapeID": "18249212B83355432632114"
+      }
+    },
+    "interpretation": "The three whole retained candidate ADM1 products have no polygon intersection with any whole VCT target polygon at their archived simplified source geometries. This is a dataset-relative screening result only. Grenada’s Southern Grenadine Islands is closest to the VCT Grenadines feature; its nearest stored source polygons have a small positive separation (~0.049 degree in lon/lat coordinate distance), so this does not prove no unsupplied/cross-vintage feature exists in the intervening area.",
+    "aggregate_product_bounds_lonlat": {
+      "vct": [
+        -61.4609162,
+        12.5787908,
+        -61.1148288,
+        13.383259
+      ],
+      "GRD": [
+        -61.80241539999997,
+        11.987247099999934,
+        -61.378065100000015,
+        12.529968699999984
+      ],
+      "LCA": [
+        -61.08057113851743,
+        13.707691624522624,
+        -60.873508854191925,
+        14.109537253932615
+      ],
+      "BRB": [
+        -59.65070741061845,
+        13.045057586038808,
+        -59.42034416734941,
+        13.33464876283017
+      ]
+    },
+    "complete_candidate_feature_checks": {
+      "GRD": [
+        {
+          "name": "Saint Andrew",
+          "source_id": "93511190B48408833278115",
+          "bbox_lonlat": [
+            -61.70159391876598,
+            12.04967780000004,
+            -61.602000799999985,
+            12.17365807768914
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Saint David",
+          "source_id": "93511190B20758743929628",
+          "bbox_lonlat": [
+            -61.71507118590296,
+            12.006585100000052,
+            -61.63471069999997,
+            12.075552880187502
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Saint Mark",
+          "source_id": "93511190B55681603978518",
+          "bbox_lonlat": [
+            -61.72434379999987,
+            12.152051316281813,
+            -61.67121296064357,
+            12.219704600000057
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Saint John",
+          "source_id": "93511190B21658762393869",
+          "bbox_lonlat": [
+            -61.75326739999991,
+            12.109235534791765,
+            -61.68172066044531,
+            12.17708140000002
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Saint George",
+          "source_id": "93511190B82420517640996",
+          "bbox_lonlat": [
+            -61.80241539999997,
+            11.987247099999934,
+            -61.69514082051825,
+            12.110659271931524
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Saint Patrick",
+          "source_id": "93511190B28979172348328",
+          "bbox_lonlat": [
+            -61.68297039999999,
+            12.167241795343102,
+            -61.57698679999993,
+            12.318241800000237
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Southern Grenadine Islands",
+          "source_id": "93511190B76376744251170",
+          "bbox_lonlat": [
+            -61.49970359999992,
+            12.435786700000222,
+            -61.378065100000015,
+            12.529968699999984
+          ],
+          "intersects_any_vct_target": false
+        }
+      ],
+      "LCA": [
+        {
+          "name": "Vieux Fort",
+          "source_id": "63095687B63570319440385",
+          "bbox_lonlat": [
+            -61.00091119811623,
+            13.707691624522624,
+            -60.92589503156074,
+            13.843449676032265
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Anse la Raya",
+          "source_id": "63095687B3915284984293",
+          "bbox_lonlat": [
+            -61.05277691207351,
+            13.868739888098332,
+            -60.98438898816124,
+            13.958497362263529
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Castries",
+          "source_id": "63095687B33875357323526",
+          "bbox_lonlat": [
+            -61.03344189762544,
+            13.864730045555234,
+            -60.936849579244665,
+            14.038700131705752
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Gros Islet",
+          "source_id": "63095687B77911403325027",
+          "bbox_lonlat": [
+            -60.97684981055767,
+            13.96403079756152,
+            -60.873508854191925,
+            14.109537253932615
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Dennery",
+          "source_id": "63095687B97045845903589",
+          "bbox_lonlat": [
+            -60.97192414088636,
+            13.876530910082465,
+            -60.87464996897586,
+            13.969771919858204
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Micoud",
+          "source_id": "63095687B12253142447206",
+          "bbox_lonlat": [
+            -60.99391509200785,
+            13.760263395539312,
+            -60.87662815116818,
+            13.89282043947469
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Soufrière",
+          "source_id": "63095687B32971577162412",
+          "bbox_lonlat": [
+            -61.08057113851743,
+            13.797214748062174,
+            -60.98095941904194,
+            13.90346084669227
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Choiseul",
+          "source_id": "63095687B49372508754012",
+          "bbox_lonlat": [
+            -61.06830383725634,
+            13.75917860459549,
+            -60.99863939987631,
+            13.843463226605706
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Laborie",
+          "source_id": "63095687B42817258586373",
+          "bbox_lonlat": [
+            -61.03601520755785,
+            13.734913526735397,
+            -60.98042330795653,
+            13.834763181098253
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Canaries",
+          "source_id": "63095687B90177859016877",
+          "bbox_lonlat": [
+            -61.07054220825057,
+            13.856024669833687,
+            -60.99722799301054,
+            13.93526494241496
+          ],
+          "intersects_any_vct_target": false
+        }
+      ],
+      "BRB": [
+        {
+          "name": "Saint George",
+          "source_id": "18249212B61473051882148",
+          "bbox_lonlat": [
+            -59.581958855516746,
+            13.097225086143576,
+            -59.50639896833769,
+            13.180883771169135
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Saint Lucy",
+          "source_id": "18249212B83355432632114",
+          "bbox_lonlat": [
+            -59.65070741061845,
+            13.273785436448804,
+            -59.57387297815535,
+            13.33464876283017
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Saint Andrew",
+          "source_id": "18249212B32162439805208",
+          "bbox_lonlat": [
+            -59.600100853071865,
+            13.204745573849209,
+            -59.54204664363766,
+            13.293716472437325
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Saint Peter",
+          "source_id": "18249212B80874946619424",
+          "bbox_lonlat": [
+            -59.64675336857306,
+            13.225240296802326,
+            -59.57330842514364,
+            13.298185317898174
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Saint James",
+          "source_id": "18249212B3001356606985",
+          "bbox_lonlat": [
+            -59.64300471279722,
+            13.136147013074265,
+            -59.59754407060234,
+            13.237419013897053
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Saint Thomas",
+          "source_id": "18249212B6474479975640",
+          "bbox_lonlat": [
+            -59.61657199749965,
+            13.145268827961644,
+            -59.5529708254432,
+            13.216800718778188
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Saint Joseph",
+          "source_id": "18249212B83249722744294",
+          "bbox_lonlat": [
+            -59.57455569758736,
+            13.168507757127315,
+            -59.50972205143148,
+            13.23447799256536
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Christ Church",
+          "source_id": "18249212B50725355749374",
+          "bbox_lonlat": [
+            -59.60708557174172,
+            13.045057586038808,
+            -59.474020048086686,
+            13.124485085018705
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Saint Michael",
+          "source_id": "18249212B34902747010981",
+          "bbox_lonlat": [
+            -59.63605923784348,
+            13.076746238847875,
+            -59.56741690168628,
+            13.157640565359827
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Saint Philip",
+          "source_id": "18249212B1074587975674",
+          "bbox_lonlat": [
+            -59.511325506666765,
+            13.077300785103205,
+            -59.42034416734941,
+            13.181718587542832
+          ],
+          "intersects_any_vct_target": false
+        },
+        {
+          "name": "Saint John",
+          "source_id": "18249212B15509533795694",
+          "bbox_lonlat": [
+            -59.54004185694612,
+            13.13629198918403,
+            -59.45707647809695,
+            13.210008469415357
+          ],
+          "intersects_any_vct_target": false
+        }
+      ]
+    }
+  },
+  "relation_to_original_evidence": {
+    "source_center_census": "Original block-029 evidence shows 633 center rows contact only six VCT family features. This new whole-source-polygon comparison tests only the three named regional candidate families and is not a global candidate-family census.",
+    "physical_receipt": "One actual stock physical run was completed previously for the six target features; 4 rows had no flagged issue, Saint George had extra_reconstruction, Grenadines had missing_reconstruction plus extra_reconstruction. These adverse issues remain even though none intersects the 633 original cell intervals in the prior native key comparison.",
+    "authority_source_membership": "Official regional references establish a plausible geographic competitor screen and the retained source products bound their own archived geometries. They do not establish current government adoption, legal jurisdiction, source applicability, maritime claims, or whether the 2017 VCT representation is correct/current."
+  },
+  "remaining_limits": [
+    "The official SVG source describes Grenadines islands, Saint Lucia, and Barbados geographically, not administrative or maritime sovereignty boundaries. This analysis makes no territorial or legal inference.",
+    "The result does not eliminate other global, out-of-date, unsupplied, or unnamed sources; nor does it prove the original contract’s full relevant competitor set has been exhaustively enumerated.",
+    "The near Grenada-VCT source gap is material to source applicability; exact current official treatment of Grenadine islands remains unverified.",
+    "The physical receipt has adverse sub-cell flags for Saint George and Grenadines; zero original-cell-key intersection does not erase whole-target adverse findings.",
+    "No positive repair qualification or root acceptance is asserted. The distinct 389-cell/179-interval companion remains excluded. ODbL, CC BY-SA, CC0 and CC BY metadata are preserved as recorded terms only; no legal clearance conclusion."
+  ],
+  "retrieval_events": [
+    {
+      "tool_route": "github_fetch_blob",
+      "attempts": 3,
+      "result": "Each raw gzip blob response failed UTF-8 decoding in the connector (byte 0x8b); no file was written by those calls. This was a content-decoding mismatch, not a policy denial."
+    },
+    {
+      "tool_route": "github_fetch_file",
+      "repository": "ChengshuLi/WorldAtlas",
+      "ref": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "encoding": "base64",
+      "result": "Success for each exact catalogue path gb-GRD-ADM1-000.bin.gz, gb-LCA-ADM1-000.bin.gz, gb-BRB-ADM1-000.bin.gz. Decoded only into ephemeral /tmp files for validation and comparison; no raw geometry copied into the saved inventory."
+    },
+    {
+      "verification": "Each gzip byte size/SHA256 and decoded byte size/SHA256 matched the immutable retained-source-catalogue record before source comparison."
+    }
+  ]
+}
