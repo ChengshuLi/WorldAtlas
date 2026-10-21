@@ -22,7 +22,8 @@ physical queues sit underneath it.
 
 ## Start a worker
 
-1. Read the combined queue and select a source-family session. Keep its related
+1. Select remaining work through the [existing issue lifecycle](../../../docs/ISSUE_LIFECYCLE.md#before-starting-work),
+   then use the combined queue for its original source-family scope. Keep related
    cause packages on one worker so the original source is decoded/indexed once.
 2. For a source/cause package, reuse a complete authenticated ownership report for
    that exact original package. If none remains applicable, use the committed
@@ -92,8 +93,7 @@ claims to that denominator.
 
 ## Efficient scheduling and completion
 
-The first source-backed evaluation sessions include Russia ADM2, Norway ADM2,
-Greenland ADM1 and Canada ADM3. Package costs record actual original-source decoded
+Package costs record actual original-source decoded
 bytes, complete competitor inputs, measured full-source raster seconds and sparse
 interval counts. For example, the full Russia ADM2 source pass took 12.279 seconds;
 it did not require one operation per candidate cell.
@@ -104,8 +104,9 @@ boundaries. Do not create one task per component or set arbitrary cell quotas.
 Read-only research is parallel. Repair authoring claims must have disjoint owner
 IDs and interval selectors; shared crosswalk changes coordinate all dependent
 packages. Final selected-bank changes still use the normal serialized merge path.
-On resumption, reconcile the ownership bindings as above; newer repairs can make
-parts of this frozen inventory stale without invalidating retained evidence.
+Newer repairs can change ownership without invalidating retained evidence.
+Accepted documented exceptions may remain owner-zero; a zero owner does not make
+completed work available again.
 
 The largest shared-lineage concentration is Canada ADM3: a few original
 unorganized administrative regions were divided among named physical atlas
