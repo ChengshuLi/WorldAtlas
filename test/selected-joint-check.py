@@ -1,6 +1,7 @@
 """Selected map repairs run native checks; raw polygon changes keep their detector."""
 import builtins
 import importlib.util
+import io
 import json
 import pathlib
 import sys
@@ -46,14 +47,20 @@ class JointRouting(unittest.TestCase):
 
     def test_only_explicit_unavailable_custody_selects_cold_native_fallback(self):
         value = self.issued(mode='legacy-cold-required', reuse_unavailable={'cold': 'candidate', 'reason': 'changed base'})
-        with no_polygons(), mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)) as launch:
+        stream = io.StringIO()
+        with no_polygons(), mock.patch.object(G.sys, 'stderr', stream), \
+             mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)) as launch:
             self.assertEqual(G.selected_joint(ROOT, BASE, NEXT), value)
+        self.assertEqual([json.loads(line) for line in stream.getvalue().splitlines()], [value])
         self.assertEqual(launch.call_count, 1)
         self.assertTrue(launch.call_args.args[0][1].endswith('/selected-joint-entry.mjs'))
         del value['reuse_unavailable']
-        with mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)):
+        stream = io.StringIO()
+        with mock.patch.object(G.sys, 'stderr', stream), \
+             mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)):
             with self.assertRaisesRegex(ValueError, 'fallback omitted'):
                 G.selected_joint(ROOT, BASE, NEXT)
+        self.assertEqual(stream.getvalue(), '')
 
     def test_native_failure_returns_without_additional_comparison(self):
         value = self.issued(mode='authenticated-checkpoint-append-v1',
@@ -65,9 +72,12 @@ class JointRouting(unittest.TestCase):
     def test_joint_success_returns_direct_native_checkpoint_without_polygon_receipts(self):
         value = self.issued(mode='authenticated-checkpoint-append-v1', native=native(),
                             derived_checkpoint={'validation_stage': 'native-passed', 'accepted_checkpoint': False})
-        with no_polygons(), mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)) as child:
+        stream = io.StringIO()
+        with no_polygons(), mock.patch.object(G.sys, 'stderr', stream), \
+             mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)) as child:
             result = G.selected_joint(ROOT, BASE, NEXT)
         self.assertEqual(result, value)
+        self.assertEqual(stream.getvalue(), '')
         self.assertEqual(child.call_count, 1)
         self.assertNotIn('continuous', result)
         self.assertNotIn('continuous_result', result)
@@ -133,6 +143,36 @@ class InspectRouting(unittest.TestCase):
             self.assertEqual(report['validation_scope'], 'selected-native-map-cells')
             self.assertNotIn('selected_continuous_report', report)
             self.assertNotIn('differential_report', report)
+
+    def test_cold_decision_survives_later_native_failure(self):
+        value = {'version': 1, 'kind': 'trusted-selected-joint-comparison-v1',
+                 'candidate_code_executed': False, 'mode': 'legacy-cold-required',
+                 'reuse_unavailable': {'cold': 'baseline-and-candidate', 'reason': 'not accepted'}}
+        failure = G.subprocess.CalledProcessError(128, ['missing-native-input'], output=b'')
+        stream, output, calls = io.StringIO(), io.StringIO(), []
+
+        def decisions():
+            return [row for row in map(json.loads, stream.getvalue().splitlines())
+                    if row.get('kind') == value['kind']]
+
+        def child(command, **kwargs):
+            calls.append(command)
+            if len(calls) == 1:
+                self.assertTrue(command[1].endswith('/selected-joint-entry.mjs'))
+                return raw(value)
+            self.assertTrue(command[1].endswith('/check-effective-geographic-regression.mjs'))
+            self.assertEqual(decisions(), [value])
+            raise failure
+
+        with self.fixture(), no_polygons(), mock.patch.object(G.sys, 'stderr', stream), \
+             mock.patch.object(G.sys, 'stdout', output), \
+             mock.patch.object(G.subprocess, 'check_output', side_effect=child):
+            with self.assertRaises(G.subprocess.CalledProcessError) as caught:
+                G.inspect(ROOT, BASE, NEXT)
+        self.assertIs(caught.exception, failure)
+        self.assertEqual(len(calls), 2)
+        self.assertEqual(decisions(), [value])
+        self.assertEqual(output.getvalue(), '')
 
     def test_software_identical_consumed_inputs_use_applicability_without_native_or_checkpoint(self):
         proof = {'version': 1, 'kind': 'trusted-unchanged-selected-geography-v1',
