@@ -76,7 +76,7 @@ export async function resolveTypedSnapshot(input,year,{examples=false}={}){
   derivations.set(row.id,row);
  }
  validateTypedDerivations([...observations,...links],derivations,input.sources);
- validateTypedGeography([...observations,...links,...derivations.values()],input.geography_pins);
+ validateTypedGeography([...observations,...links,...derivations.values()],input.geography_pins,contract.registries);
  const seen=new Set(),targets=new Set(),retired={observations:[],feature_links:[]};
  for(const inputRow of input.retirements){
   const row=normalizeTypedRetirement(inputRow,{sources:input.sources,observations,feature_links:links},{requireReplacement:false});

@@ -2,6 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
+import {registeredObservationRegistry} from '../src/observation-modules.js';
+import {normalizeTypedObservation} from '../src/typed-observations.js';
+import {storageExportV3Definitions as typedStorage} from '../hosted/storage-export-v3-contract.js';
 import {previewImport} from '../src/import-records.js';
 import {normalizeTemporalGeographyClaim} from '../hosted/temporal-geography.js';
 
@@ -109,7 +112,52 @@ function compileTemporalResearch(input,geography,sources){
  while(corrections.size){const remaining=new Set([...corrections.values()].flatMap(group=>Object.entries(group).filter(([kind])=>kind!=='retirements').flatMap(([kind,rows])=>rows.map(row=>`${kind}/${row.id}`))));const ready=[...corrections.entries()].filter(([,group])=>group.retirements.every(row=>!remaining.has(`${row.collection}/${row.target_id}`))).sort((a,b)=>compare(a[1].retirements[0],b[1].retirements[0]));if(!ready.length)throw Error('Geographic correction dependency cycle');for(const [key,group]of ready){add(group);flush();corrections.delete(key);}}
  flush();return {counts,batches};
 }
+/** Lossless transfer of the retained series, not a new population calculation.
+ * No caller flag can turn arbitrary location research into identity-only data. */
+export const settlementEstimateSource={
+ id:'source:ne:settlement-estimates:27ccde8541410a43807e511c3b53194f6758dae8',
+ name:'Natural Earth populated places / retained UN urban agglomeration estimate or projection series',
+ url:'https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/',
+ license:'Natural Earth public domain; https://www.naturalearthdata.com/about/terms-of-use/',
+ vintage:'Natural Earth ca96624a56bd078437bca8184e78163e5039ad19; embedded UN edition and estimate/projection cutoff unspecified',
+ supported_from:1950,supported_to:2026,status:'estimate',
+ metadata:{source_path:'data/settlement-estimates.json',source_git_blob:'27ccde8541410a43807e511c3b53194f6758dae8',
+  source_sha256:'8c7cb39cfce591b87eedeb0eddfbd21e0cabdce6a53d39023409e633e617ce0d',
+  archive_member_sha256:'9b8e3de09048ef00dfc70357dbb9fa324493f214b5e0ae4daf1aa79a8d10116b',
+  estimate_or_projection:'not_disambiguated_by_retained_source',un_edition:null,estimate_projection_cutoff:null,
+  units:'persons; already converted from source thousands by the original producer',
+  scope:'settlements or urban agglomerations, not territorial location totals; only recorded one-year intervals are supported'},
+};
+export const typedResearchEndpoint='/api/typed/v1/import';
+export function compileSettlementEstimates(input){
+ if(researchHash(researchJSON(input))!=='3b4cf1e42b0f0696e279f09ba2bb3c02566fd10e1c60d1a2025f571bb28500aa')throw Error('Settlement series differs from the retained 582 identities / 9301 original facts');
+ const entities=new Map(input.entities.map(row=>[row.id,row])),ids=new Set(),pairs=new Set();
+ if(entities.size!==582||input.entity_history.length!==9301||input.entities.some(row=>row.kind!=='settlement'||!/^settlement:ne:\d+$/.test(row.id)))throw Error('Invalid original settlement identity inventory');
+ const source=settlementEstimateSource,registry=registeredObservationRegistry,registry_sha256=researchHash(JSON.stringify(registry));
+ const sourceRow={...source,metadata:researchJSON(source.metadata)},source_pins=[{id:source.id,sha256:researchHash(JSON.stringify(typedStorage.sources.columns.map(key=>sourceRow[key])))}];
+ const observations=input.entity_history.map(row=>{
+  const pair=JSON.stringify([row.entity_id,row.valid_from]);
+  if(!entities.has(row.entity_id)||ids.has(row.id)||pairs.has(pair)||row.id!==`ne-pop:${row.entity_id}:${row.valid_from}`||row.field!=='attributes'||row.valid_to!==row.valid_from+1||!Number.isSafeInteger(row.value.population)||row.value.population<0)throw Error('Settlement identity/date/value parity failed');
+  ids.add(row.id);pairs.add(pair);
+  return normalizeTypedObservation({version:1,id:row.id,subject_id:row.entity_id,subject_kind:'settlement',field_id:'settlement.population',
+   value:row.value.population,valid_from:row.valid_from,valid_to:row.valid_to,source_id:source.id,method:'estimate',status:'estimate',is_example:0,registry_sha256,
+   metadata:{original_record:row,language:'und',name_role:'preferred',measurement:{unit:'persons',definition:registry.metrics['settlement.population'].definition,period:{from:row.valid_from,to:row.valid_to}},
+    estimate_or_projection:'not_disambiguated_by_retained_source',un_edition:null,estimate_projection_cutoff:null}},
+   {sources:[source],entities:input.entities},registry);
+ }).sort(compare);
+ const batches=[];
+ function add(value,rows,endpoint){
+  const prefix=endpoint?'typed-research':'research',payload={...value,ingestion_id:`${prefix}:${researchHash(researchJSON(value))}`},bytes=Buffer.from(researchJSON(payload));
+  if(bytes.length>1048576||rows>200)throw Error('Settlement batch exceeds existing import bounds');
+  batches.push({payload,bytes,rows,sha256:researchHash(bytes),...(endpoint?{endpoint}:{})});
+ }
+ add({sources:[source]},1);
+ for(let i=0;i<observations.length;i+=200)add({version:1,registry_sha256,source_pins,observations:observations.slice(i,i+200)},Math.min(200,observations.length-i),typedResearchEndpoint);
+ return {geography:null,counts:{sources:1,observations:observations.length,settlement_subjects:entities.size},batches};
+}
+
 export function compileResearchInput(input,release){
+ if(input&&Object.hasOwn(input,'entity_history'))return compileSettlementEstimates(input);
  const geography=validateResearchGeography(release),hasTemporal=input&&Object.hasOwn(input,'temporal_geography'),ordinary=hasTemporal?Object.fromEntries(Object.entries(input).filter(([key])=>key!=='temporal_geography')):input,collections=validateRows(ordinary),counts=Object.fromEntries(researchCollections.map(kind=>[kind,collections[kind]?.length??0]));
  const temporal=hasTemporal?compileTemporalResearch(input.temporal_geography,geography,new Map((collections.sources??[]).map(row=>[row.id,row]))):null;if(temporal)counts.temporal_geography=temporal.counts;
  if(!researchCollections.some(kind=>counts[kind])&&!temporal?.batches.length)throw Error('Research input contains no rows');
@@ -164,7 +212,7 @@ export function prepareResearchBundle({input,geography,output,sourceFiles=[]}){
  }catch(error){fs.rmSync(staging,{recursive:true,force:true});throw error;}
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
- const [input,geography,output,sourceFileList]=process.argv.slice(2);
- if(!input||!geography||!output)throw Error('Usage: node scripts/prepare-research-bundle.mjs input.json geographic-release.json output-directory [licensed-source-files.json]');
+ const args=process.argv.slice(2),[input,geography,output,sourceFileList]=args.length===2?[args[0],null,args[1]]:args;
+ if(!input||!output)throw Error('Usage: node scripts/prepare-research-bundle.mjs input.json [geographic-release.json] output-directory [licensed-source-files.json]; geography may be omitted only for the exact retained settlement series');
  const manifest=prepareResearchBundle({input,geography,output,sourceFiles:sourceFileList?JSON.parse(fs.readFileSync(sourceFileList)):[]});console.log(JSON.stringify({counts:manifest.counts,batches:manifest.batches.length,input_sha256:manifest.input.sha256,output}));
 }
