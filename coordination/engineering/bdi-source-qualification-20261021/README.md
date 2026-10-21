@@ -240,3 +240,7 @@ partition. Candidate classes are 290 land and 158 water; holds are 88 land and
 47 water. All 17 constructor component rows match exact source/owner identities.
 No full-feature physical issue, source-vintage limit or territorial contact has
 been silently removed. The original whole-target outputs remain pinned.
+
+## Final selected candidate
+
+The stock composition and finalization succeeded using the constructor’s exact original native patch pin and the unchanged selected baseline at `94fd166b4e0ced382659e2c15a1a5c14141717f8`. The emitted selector, package roles, single sidecar and single smoke expectations are adopted without a duplicate finalized bundle. Earlier research-only status statements above record their checkpoint time; the later upstream archive inspection and independent review support this bounded 448-cell candidate. Actual selected-native conservation, emitted smoke, exact-public-head review and delivery are still required. The 135 held cells remain pending or territorially excluded, not completed unresolved outcomes.
