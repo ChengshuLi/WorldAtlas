@@ -1039,6 +1039,7 @@ export function resolveFinalizeConfig(config, reader) {
   const selected = locate(reader, config.composition), prefix = path.posix.dirname(selected.path);
   const sibling = name => locate(reader, {commit: selected.commit, path: prefix + '/' + name});
   const {composition, ...original} = config;
+  if (!Object.hasOwn(original, 'restored_read_roles')) original.restored_read_roles = {commit: selected.commit};
   return {...original, selector: locate(reader, config.selector), package_inputs: locate(reader, config.package_inputs),
     rebind: locate(reader, config.rebind), registry: sibling('authority-registry.json'),
     ledger: selected, selected_ledger: selected, patch: sibling('patch.json'), runtime_envelope: sibling('runtime-envelope.json')};

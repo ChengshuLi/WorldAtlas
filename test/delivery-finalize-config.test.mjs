@@ -82,7 +82,8 @@ function fixture(t) {
 
 test('modern compact config resolves exact full pins and preserves legacy objects and canonical outputs', t => {
   const f = fixture(t), before = jsonBytes(f.compact);
-  assert.deepEqual(resolveFinalizeConfig(f.compact, f.reader()), f.full);
+  assert.deepEqual(resolveFinalizeConfig(f.compact, f.reader()), {...f.full,
+    restored_read_roles: {commit: f.compact.composition.commit}});
   assert.strictEqual(resolveFinalizeConfig(f.full, f.reader()), f.full);
   assert.deepEqual(finalizeDelivery(f.compact, f.reader()), finalizeDelivery(f.full, f.reader()));
   assert.deepEqual(jsonBytes(f.compact), before);
@@ -108,6 +109,57 @@ test('compact form refuses mixed full pins, existing sidecar and handwritten loc
     assert.throws(() => finalizeDelivery({...f.compact, [key]: f.full.ledger}, f.reader()), /cannot mix/);
   for (const key of ['selector', 'package_inputs', 'rebind', 'composition'])
     assert.throws(() => finalizeDelivery({...f.compact, [key]: {...f.compact[key], sha256: '0'.repeat(64)}}, f.reader()), /exact commit\/path locator/);
+});
+
+test('compact finalization uses its committed composition for exact absent original roles', t => {
+  const f = fixture(t), original = f.reader().json(f.full.registry).entries[0].rule_preimage;
+  const filename = path.join(f.root, original.path), raw = fs.readFileSync(filename);
+  fs.unlinkSync(filename);
+  const missing = f.commit();
+  fs.writeFileSync(filename, raw, {flag: 'wx'});
+  f.write('coordination/engineering/unbound/snapshot-file.json', {unrelated: true});
+  const restored = f.commit();
+  const config = {...f.compact, new_prefix: PREFIX + 'compose/', sidecar_output: PREFIX + 'compose/sidecar.json',
+    package_inputs: {...f.compact.package_inputs, commit: missing},
+    composition: {...f.compact.composition, commit: restored}};
+  const before = jsonBytes(config), destination = '.cache/delivery-handoff/composition-restoration';
+  const result = f.run(config, destination); assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(jsonBytes(config), before, 'The caller does not supply or receive a second snapshot choice');
+  const explicit = finalizeDelivery({...config, restored_read_roles: {commit: restored}}, f.reader());
+  const output = name => fs.readFileSync(path.join(f.root, destination, name));
+  const receipt = JSON.parse(output('preparation.json'));
+  assert.deepEqual(Object.keys(receipt.outputs).sort(), Object.keys(explicit).sort());
+  for (const [name, body] of Object.entries(explicit)) assert.deepEqual(output(name), body);
+  const roles = JSON.parse(output('package-roles.json')).paths;
+  assert.ok(roles.some(pin => pin.path === original.path && pin.sha256 === original.sha256));
+  assert.ok(!roles.some(pin => pin.path.includes('/unbound/')));
+  assert.ok(Object.keys(explicit).every(name => !name.includes('/')), 'No original-body copying');
+  assert.deepEqual(fs.readFileSync(filename), raw);
+
+  f.write(original.path, {retained: false});
+  const changed = f.commit();
+  fs.writeFileSync(filename, raw); fs.chmodSync(filename, 0o755);
+  const executable = f.commit();
+  const cases = [
+    ['missing', {...config, composition: {...config.composition, commit: missing}}],
+    ['changed', {...config, composition: {...config.composition, commit: changed}}],
+    ['nonordinary', {...config, composition: {...config.composition, commit: executable}}],
+    ['accepted-conflict', {...config, package_inputs: {...config.package_inputs, commit: changed}}],
+    ['explicit-null', {...config, restored_read_roles: null}],
+    ['explicit-missing', {...config, restored_read_roles: {commit: missing}}],
+    ['explicit-incomplete', {...config, restored_read_roles: {commit: restored, paths: []}}]
+  ];
+  for (const [name, refusedConfig] of cases) {
+    const refusedDestination = '.cache/delivery-handoff/composition-refused-' + name;
+    const refused = f.run(refusedConfig, refusedDestination);
+    assert.notEqual(refused.status, 0, name);
+    assert.match(refused.stderr, /accepted path identity|restored read-role inventory/i, name);
+    assert.equal(fs.existsSync(path.join(f.root, refusedDestination)), false, name);
+  }
+  const override = {...config, composition: {...config.composition, commit: missing},
+    restored_read_roles: {commit: restored}};
+  const overridden = f.run(override, '.cache/delivery-handoff/explicit-other-snapshot');
+  assert.equal(overridden.status, 0, overridden.stderr);
 });
 
 test('wrong commit, wrong path, missing product and changed product hash fail before writes', t => {

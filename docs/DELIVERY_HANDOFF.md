@@ -425,15 +425,16 @@ local output tree. Whole-cohort retention keeps new owned originals available
 without a second staging/adoption pass.
 
 For historical or cross-prefix roles absent from the accepted package baseline,
-supply an exact committed `restored_read_roles` snapshot:
-`{"commit":"<exact commit>"}`. The finalizer derives missing paths from its
+compact finalization uses its exact `composition.commit` as the restoration
+snapshot. Explicit full-pin configurations, or restorations at another commit,
+use `restored_read_roles: {"commit":"<exact commit>"}`. The finalizer derives missing paths from its
 already authenticated consumed-role projection; no separate package prepass or
 handwritten path inventory is needed. Unrelated snapshot files grant no read or
 write scope. The older explicit `paths` list remains supported and checked exactly.
 Declare the exact restored write paths in the ordinary issue scope. The snapshot
 must preserve each original ordinary mode, Git object, size and SHA-256. Duplicate,
 unbound, changed, nonordinary, missing or accepted-path-overwriting entries fail.
-Absent roles without that explicit snapshot also fail. Original custody commits
+Full-pin configurations without a snapshot still refuse absent roles. Original custody commits
 remain unchanged; this readback grants no additional write scope.
 
 Completion is written last. Exact `--resume` checks every flat output and its
