@@ -157,3 +157,39 @@ include 41 Muha and nine Ntahangwa keys; these cannot silently inherit factual
 clearance from the mechanical result. The enacted-law PDF access failures and
 other feasible evidence routes remain explicit. No generic authority certificate
 or blanket modern crosswalk requirement is added to the original contract.
+
+## Further independent assessment and predicate correction
+
+The same independent reviewer assessed public head `d05e05db` and the exact
+original contract. The 529 mechanical passes divide into 81 keys in four
+explicitly investigated reform groups (Muha 41, Ntahangwa 9, Bugarama 19,
+Muhuta 12) and 448 keys across the other 17 recorded owners. The 54 held keys
+exactly match original COD/TZA contact keys. Current-name recurrence or absence
+in the official 42-commune table does not establish source applicability or
+invalidate a stable recorded location. No blanket successor-unit crosswalk is
+required, and none has been inferred from name matching. No positive subset
+has independent scientific endorsement at this research checkpoint.
+
+A preliminary reading of the physical documentation was corrected against the
+actual immutable admission code at `94fd166b`. Complete, exactly witnessed
+contradictory-support and hierarchy geometries are retained as veto pointsets,
+and requested centers are checked against them. Nine issue-bearing targets
+are therefore not categorically disqualified; no issue geometry was cleared.
+The 133 supported cells on 11 issue-free, non-focal targets are a conservative
+descriptive subgroup, not a new requirement or qualified candidate.
+
+Fresh official INSBU table and enacted-law entry reads produced bounded
+per-owner findings. The enacted annex still has not been inspected. One normal
+network-enabled retry of the Assembly PDF ended with curl exit 7, connection
+failure and zero bytes. Stanford's catalogue returned a Request Rejected
+access-control page; that route was stopped without bypass. The upstream
+geoBoundaries source-path history returned only its 2023 cleared-history
+commit, which does not explain the source's claimed vintage. Those outcomes
+and the feasible source-provenance questions remain explicit. They do not
+constitute completed-unresolved acceptance.
+
+The initial independent assessment, its subsequent source/predicate corrections,
+owner partitions and author provenance attempts are preserved under
+`evidence-investigation/`. Paragraph 71 of the 2018 development plan is on
+printed page 34, physical PDF page 43 (zero-based index 42). No observation,
+physical producer or diagnostic was repeated for this research update.
