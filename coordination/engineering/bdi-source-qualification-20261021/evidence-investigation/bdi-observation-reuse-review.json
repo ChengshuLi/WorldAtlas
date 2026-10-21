@@ -1,0 +1,109 @@
+{
+  "assessment": {
+    "execution_truth": "The sole stock observation executed at 5c1919dd1c7e89618398454220b57edf0fa388d2 under its exact recorded code. This review only compares immutable blobs/code and keysets; no observer, tests, geometry, or producer was rerun.",
+    "not_supported_for": "Claiming the original observer executed at candidate base, claiming all 38 inputs unchanged, or treating this reuse bridge as source qualification, positive repair, root acceptance, or proof about other keys/packages.",
+    "reuse_supported_for": "The prior literal selected-owner result for these exact 583 original BDI keys as a bounded zero-assignment diagnostic at candidate base 94fd166b4e0ced382659e2c15a1a5c14141717f8. The selected base_reference is identical, every old patch cell is preserved, and the 1,201 added cells are disjoint from all 583 keys. The observer source, native grid/ownership calculation, queue/extractor, and BDI source/physical/water inputs are unchanged."
+  },
+  "code_diff_assessment": [
+    {
+      "candidate_blob": "0758e885885d76549bf6835324afba7942889a3f",
+      "diff": "Factors selected-geometry-bank loading and ownership-selection parsing into helpers and adds requireSelectedOriginLineage. Existing SelectedGeometrySources validation and loadBaseSelection checks are structurally moved. The observer uses selectedBootstrap; the new requireSelectedOriginLineage export is not called on the observer path.",
+      "observed_blob": "f1ba9acb95e949b778131245229888e72437b582",
+      "path": "scripts/check-effective-geographic-regression.mjs"
+    },
+    {
+      "candidate_blob": "b56641a48e2c5456999c2ea60dd68d8404a10cd1",
+      "diff": "Adds requireSelectedOriginLineage to complex source-target native-authority evaluation when intermediate provenance differs. observe-selected-owners imports nativeBaseSelection and valueSha from this module; its call path does not invoke evaluateSourceTargetNativeAuthority.",
+      "observed_blob": "ccd128029e0b9522c29acb4bbc5bd35f36f2d1dd",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs"
+    },
+    {
+      "candidate_blob": "7e687549a0d97acd46079cf84986af59d34051ad",
+      "diff": "Only the additive_release sidecar path/size/SHA changes. Top-level base-selection, manifest, selected-geometry and method fields are unchanged.",
+      "observed_blob": "2e1ec2875d2932eafb33f4c1062412282df234cb",
+      "path": "data/ownership-selection.json"
+    }
+  ],
+  "consumed_input_bridge": {
+    "changed": [
+      {
+        "base_blob": "0758e885885d76549bf6835324afba7942889a3f",
+        "observed_blob": "f1ba9acb95e949b778131245229888e72437b582",
+        "path": "scripts/check-effective-geographic-regression.mjs",
+        "unchanged": false
+      },
+      {
+        "base_blob": "b56641a48e2c5456999c2ea60dd68d8404a10cd1",
+        "observed_blob": "ccd128029e0b9522c29acb4bbc5bd35f36f2d1dd",
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+        "unchanged": false
+      },
+      {
+        "base_blob": "7e687549a0d97acd46079cf84986af59d34051ad",
+        "observed_blob": "2e1ec2875d2932eafb33f4c1062412282df234cb",
+        "path": "data/ownership-selection.json",
+        "unchanged": false
+      }
+    ],
+    "critical_observer_blob_unchanged": true,
+    "native_grid_blob_unchanged": true,
+    "total": 38,
+    "unchanged": 35
+  },
+  "kind": "Independent BDI selected-owner observation reuse review",
+  "patch_delta": {
+    "BDI_key_intersection_added": 0,
+    "BDI_key_intersection_candidate_patch": 0,
+    "BDI_key_intersection_old_patch": 0,
+    "added_only_cells": 1201,
+    "candidate": {
+      "base_reference": {
+        "footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+        "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+        "id": "geography:review:211cb423e8c3bdcb3cbe88a4327fbd47eb10ccb61cd0ca4b884ed376564e7718"
+      },
+      "blob": "05a5043840538fb20988a49ade4c9b2bbbec7d08",
+      "bytes": 30411523,
+      "cell_count": 6311319,
+      "commit": "94fd166b4e0ced382659e2c15a1a5c14141717f8",
+      "effective_reference": {
+        "footprints_sha256": "90693e88a6ed32572eefad70491dbe42c9f77af11c72cc5c58643a43c8c7203c",
+        "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+        "id": "geography:lux568-vct633-evidence-repair-20261020"
+      },
+      "path": "coordination/engineering/lux-vct-evidenced-repair-20261021/composition-002/patch.json",
+      "sha256": "b8b2bd6d333b3a4c5821b196417d16c44474268215209e05a9519b5712dbd2f0"
+    },
+    "changed_owner_counts": {
+      "7122": 568,
+      "7132": 633
+    },
+    "old": {
+      "base_reference": {
+        "footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+        "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+        "id": "geography:review:211cb423e8c3bdcb3cbe88a4327fbd47eb10ccb61cd0ca4b884ed376564e7718"
+      },
+      "blob": "441d191f751eff76845cecd7666bdd0c76f14d19",
+      "bytes": 30403385,
+      "cell_count": 6310118,
+      "commit": "5c1919dd1c7e89618398454220b57edf0fa388d2",
+      "effective_reference": {
+        "footprints_sha256": "871027784842e56cea846ccf3ff955078bec3e2c5ae7e74629ccbe3a33abbfbc",
+        "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+        "id": "geography:review:brn828-delivery-candidate-20261019"
+      },
+      "path": "coordination/engineering/brunei-original-repair-20261019/composition-002/patch.json",
+      "sha256": "fca6c6c0227f67513bf24fcf46c550da045edecec189379c26783724f474ae3e"
+    },
+    "old_cells_preserved_exactly": true
+  },
+  "review_scope": {
+    "candidate_base": "94fd166b4e0ced382659e2c15a1a5c14141717f8",
+    "observed_commit": "5c1919dd1c7e89618398454220b57edf0fa388d2",
+    "original_intervals_sha256": "cdfb7670eabd7fa8512208b27b427b1d788d7079297cdca4a725f27a66308a3c",
+    "original_package": "gb-BDI-ADM2--repair-evaluation",
+    "query_count": 583,
+    "query_sha256": "3e51e503891e714c22546e801535fb1833dce1b0ffe05eabe67bd2024a62d19a"
+  }
+}

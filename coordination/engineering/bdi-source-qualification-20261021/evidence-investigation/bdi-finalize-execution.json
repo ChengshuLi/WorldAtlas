@@ -1,0 +1,34 @@
+{
+  "exit_code": 0,
+  "config": ".cache/delivery-handoff/bdi-finalize-001.json",
+  "receipt": {
+    "binding": {
+      "config_sha256": "586cbaa6a998fae410df68f9d32cafb8aa595946faf1040200a6211b680fd252",
+      "phase": "finalize"
+    },
+    "outputs": {
+      "ownership-selection.json": {
+        "bytes": 1829,
+        "sha256": "bd4d522fd92f028b9c68e3db0bbdd79ebdfd3bbec8a985f21c4eb6899e6ac035"
+      },
+      "package-inputs.json": {
+        "bytes": 41420,
+        "sha256": "82f92a105ca912a1f10cf675a5aaac8eab168e6e4712757422ffc9a685f05f7c"
+      },
+      "package-roles.json": {
+        "bytes": 9388,
+        "sha256": "15568c0b1d9cf62b15eefde71e3cbe9d7a6c0f82fc9e066ae9fc9212998283db"
+      },
+      "selected-delivery-expectations.json": {
+        "bytes": 2905324,
+        "sha256": "db60fb7d19966938add24036fb38dfc6bb7d4c1da3ccf865ebec3abad5663b22"
+      },
+      "selection-sidecar.json": {
+        "bytes": 3448,
+        "sha256": "4b908efc895c8843aa54688c544c2fad14f41aa0ae8c0805d9080f9072568ac3"
+      }
+    },
+    "version": 1
+  },
+  "limitations": "Actual selected-native consumer and emitted asset smoke remain stock hosted gates; no local full build or synthetic success receipt."
+}
