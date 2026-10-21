@@ -1,17 +1,21 @@
-# BDI source qualification investigation
+# BDI bounded 448-cell repair candidate
 
-This is ongoing investigation for original `gb-BDI-ADM2--repair-evaluation`,
-issue #2648: 583 keys (378 land, 205 inland water), 433 intervals, 21 recorded
-owners. The separate 13-cell source-conflict and 784-cell ADM1 location-mapping
-packages, and source-only regional issue #215, are excluded. No repair or
-completed-unresolved outcome is claimed by this checkpoint.
+This proposes a bounded positive repair for 448 original keys (290 land and
+158 inland water) under `gb-BDI-ADM2--repair-evaluation`, issue #2648. The genuine
+stock constructor qualified these keys; final selected conservation, exact-head
+review, delivery and root acceptance remain separate. All 583 original keys
+(378 land, 205 inland water; 433 intervals; 21 recorded owners) remain accounted
+for. The other 135 keys stay held: 81 pending target-specific source investigation
+and 54 original COD/TZA territorial exclusions. They are not completed unresolved
+outcomes. The separate 13-cell source-conflict and 784-cell ADM1 location-mapping
+packages, and source-only regional issue #215, are excluded.
 
-The full-scope stock diagnostic has now executed once: 529 cells satisfy its
+The original full-scope stock diagnostic executed once: 529 cells satisfy its
 mechanical predicates and 54 are held as territorial exclusions, in
 3.368908208 seconds. These are diagnostic results, not scientific approval or
-an accepted repair. The supported set is 324 land plus 205 water. Independent
-scientific assessment of applicability and the adverse facts below remains
-necessary before any positive candidate. The original denominator remains 583.
+an accepted repair. The supported set is 324 land plus 205 water. The later upstream-archive examination and independent assessment below support
+the bounded 448-key candidate, without clearing the held keys or whole-target
+issues. The original denominator remains 583.
 
 The frozen queue is commit `2d1fc6f430e756498908bf2c4e267356a13f5cc7`,
 `coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json`,
@@ -218,3 +222,21 @@ zero overlap, preserving the complete 583-key original denominator. Complete
 source, competitor, negative and physical inputs remain pinned. This is a
 prepared request only; genuine native authority and selected-native conservation
 remain required before qualification or acceptance.
+
+## Actual bounded constructor and independent key conservation
+
+The original 583-key observation and diagnostic remain unchanged. The existing
+stock supported-input phase narrowed only positive coverage using the exact
+81-key prior hold. The genuine native-authority constructor on those pinned
+inputs at `fd35809976a5b3791c0a6710c6aeccf50e707e9f` qualified 448 cells in
+3.515441208 seconds. Its first launch rejected the symlinked macOS temporary
+path before any output. The same guarded command succeeded using an ordinary
+task-owned scratch directory; both attempts are retained. No guard or test was
+changed, and no science producer or unchanged owner observation was replayed.
+
+The same independent reviewer expanded the complete original, candidate and
+held rows as `(y,x,owner)` triples and verified a disjoint exact 583 = 448 + 135
+partition. Candidate classes are 290 land and 158 water; holds are 88 land and
+47 water. All 17 constructor component rows match exact source/owner identities.
+No full-feature physical issue, source-vintage limit or territorial contact has
+been silently removed. The original whole-target outputs remain pinned.
