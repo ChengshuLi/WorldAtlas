@@ -6,6 +6,13 @@ owners. The separate 13-cell source-conflict and 784-cell ADM1 location-mapping
 packages, and source-only regional issue #215, are excluded. No repair or
 completed-unresolved outcome is claimed by this checkpoint.
 
+The full-scope stock diagnostic has now executed once: 529 cells satisfy its
+mechanical predicates and 54 are held as territorial exclusions, in
+3.368908208 seconds. These are diagnostic results, not scientific approval or
+an accepted repair. The supported set is 324 land plus 205 water. Independent
+scientific assessment of applicability and the adverse facts below remains
+necessary before any positive candidate. The original denominator remains 583.
+
 The frozen queue is commit `2d1fc6f430e756498908bf2c4e267356a13f5cc7`,
 `coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json`,
 blob `9c9a9bc83627afd3e8435ff4009e39530543bf54`, zero-based row 168.
@@ -117,3 +124,36 @@ operation), 216 original centers lack a BDI ADM1 source hit: 146 land and 70
 water. Of these, 34 also have foreign contacts. This is additional adverse
 context, not an automatic ownership exclusion or a qualification result.
 The exact rows are retained for target-specific applicability investigation.
+
+## Resolved canonical operand and actual diagnostic
+
+The later exact granularity-audit metadata provides the correct locator. Its
+49,625 ordered IDs reproduce both known parts' complete 1,500-ID sequences at
+their expected offsets; all 21 BDI targets lie at ordinals 2,105–2,219. The
+actual complete `data/geography/part-1.json` was then acquired and authenticated:
+8,060,108 bytes, blob `471e45dcd13904489bc434ae5115105fadba7ab9`, SHA256
+`4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7`.
+All 21 exact IDs, recorded owner indices and parents were joined. The earlier
+failed part-5/6 derivation remains documented rather than silently discarded.
+
+The post-execution physical-input join adds these selected canonical features
+without changing any consumed original source geometry or backdating the
+physical receipt. Stock source-evidence preparation includes the complete
+119-member BDI ADM2 positive family and whole COD, TZA and RWA ADM1 territorial
+exclusion operands. BDI ADM1 remains independently inspected parent context.
+
+`native-diagnostic-001` binds exact source-evidence and original 583-key patch
+inputs at `590147fe5928ee201ee2009edcd9b5afaaa4bbb1`. The stock diagnostic
+completed with 529 `assigned_cells` and 54 `territorial_exclusion_cells`; it
+emits no authority or selected release. No owner observation, physical producer,
+VCT check or completed diagnostic was repeated.
+
+Fresh official-source research documents delimitation and regrouping of
+Bujumbura Mairie into Muha, Ntahangwa and Mukaza in the 2018 development plan.
+The retained publisher and canonical metadata label their source 2007. This is
+a concrete vintage/applicability concern, not proof of a geometry's true date
+or equivalence to a successor polygon. The 529 diagnostic-supported keys
+include 41 Muha and nine Ntahangwa keys; these cannot silently inherit factual
+clearance from the mechanical result. The enacted-law PDF access failures and
+other feasible evidence routes remain explicit. No generic authority certificate
+or blanket modern crosswalk requirement is added to the original contract.

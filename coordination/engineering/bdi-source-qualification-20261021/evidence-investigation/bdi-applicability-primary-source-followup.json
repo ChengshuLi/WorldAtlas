@@ -11,13 +11,51 @@
     "inland_water": 205,
     "intervals": 433,
     "owners": 21,
-    "separate_scopes_excluded": ["gb-BDI-ADM2--source-conflict (13 cells)", "gb-BDI-ADM1--location-mapping (784 cells)", "regional source-only issue #215"]
+    "separate_scopes_excluded": [
+      "gb-BDI-ADM2--source-conflict (13 cells)",
+      "gb-BDI-ADM1--location-mapping (784 cells)",
+      "regional source-only issue #215"
+    ]
   },
   "retained_evidence_read": [
-    {"path": "inventory/bdi-retained-source-physical-water-witness-join.json", "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7", "source_mask_blob": "5c56cb06a4879060a4ad933395cd643cdaaa5565", "physical_mask_blob": "5f8f1e8aa032abc85e931930eb4eb9b0dbc0ebdb", "water_mask_blob": "9bee5462a2f4a8bf1e54816c4a3bd61d9227e221"},
-    {"path": "inventory/bdi-source-property-identity-join.json", "source_corpus_commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365", "corpus_tree": "78f85570b9a542fbb2c01131138ab0e69147cca9", "contacts": 33, "full_families": ["gb:BDI:ADM1 (18 features; 2014; CC0 1.0)", "gb:BDI:ADM2 (119 features; represented-year claim 2007; Public Domain)", "gb:COD:ADM1 (26 features; 2017; ODbL 1.0)", "gb:TZA:ADM1 (30 features; 2015; ODbL 1.0)"]},
-    {"path": "inventory/bdi-selected-owner-observation.json", "execution_path": "inventory/bdi-observation-execution.json", "commit": "5c1919dd1c7e89618398454220b57edf0fa388d2", "query_count": 583, "successful_runs": 1, "current_base_additive_effective_owner": 0, "product_overlap": false},
-    {"path": ".worldatlas-workspaces/2d82c0ae06b92ab3/42d17456f7a54d6568c34d0f3b55d222f56a720a7015812071dce708422d5208/work/coordination/engineering/bdi-source-qualification-20261021/physical-001/whole-target-support.json", "support_sha256": "bf9f07eff9b26e237d717e9a060e35ad242924eb1a0d91fb0f239e3dcff911c3", "producer": "scripts/qualify-source-cohort.py", "targets": 21, "elapsed_seconds": 5.614461917, "note": "Retained full-target physical support includes whole-target adverse cases; do not treat the center-intersection result as repair qualification."}
+    {
+      "path": "inventory/bdi-retained-source-physical-water-witness-join.json",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "source_mask_blob": "5c56cb06a4879060a4ad933395cd643cdaaa5565",
+      "physical_mask_blob": "5f8f1e8aa032abc85e931930eb4eb9b0dbc0ebdb",
+      "water_mask_blob": "9bee5462a2f4a8bf1e54816c4a3bd61d9227e221"
+    },
+    {
+      "path": "inventory/bdi-source-property-identity-join.json",
+      "source_corpus_commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+      "corpus_tree": "78f85570b9a542fbb2c01131138ab0e69147cca9",
+      "contacts": 33,
+      "full_families": [
+        "gb:BDI:ADM1 (18 features; 2014; CC0 1.0)",
+        "gb:BDI:ADM2 (119 features; represented-year claim 2007; Public Domain)",
+        "gb:COD:ADM1 (26 features; 2017; ODbL 1.0)",
+        "gb:TZA:ADM1 (30 features; 2015; ODbL 1.0)"
+      ]
+    },
+    {
+      "path": "inventory/bdi-selected-owner-observation.json",
+      "execution_path": "inventory/bdi-observation-execution.json",
+      "commit": "5c1919dd1c7e89618398454220b57edf0fa388d2",
+      "query_count": 583,
+      "successful_runs": 1,
+      "current_base_additive_effective_owner": 0,
+      "product_overlap": false
+    },
+    {
+      "path": ".worldatlas-workspaces/2d82c0ae06b92ab3/42d17456f7a54d6568c34d0f3b55d222f56a720a7015812071dce708422d5208/work/coordination/engineering/bdi-source-qualification-20261021/physical-001/whole-target-support.json",
+      "support_sha256": "bf9f07eff9b26e237d717e9a060e35ad242924eb1a0d91fb0f239e3dcff911c3",
+      "producer": "scripts/qualify-source-cohort.py",
+      "targets": 21,
+      "note": "Retained full-target physical support includes whole-target adverse cases; do not treat the center-intersection result as repair qualification.",
+      "wrapper_elapsed_seconds": 5.614461917,
+      "producer_elapsed_seconds": 5.452841541962698,
+      "timing_source": "physical-001/execution-receipt.json"
+    }
   ],
   "retained_point_join_findings": {
     "source_and_physical_result": "The independent 583-center comparison against all 193 features in the four queue-named complete source families reports 583 direct expected-target hits, 0 stored-source-roster mismatches, 583 physical expected-class hits, 0 original centers intersecting an adverse physical-issue geometry, and 54 source-contact rows from foreign ADM1 candidates (51 TZA, 3 COD).",
@@ -38,19 +76,19 @@
       "finding": "The indexed draft expressly says the proposed new Muhuta commune would consist of the old Bugarama and Muhuta communes. This is positive historical-to-proposed composition evidence, but the document is a draft, not proof that all 2007 feature boundaries were unchanged in the enacted law."
     },
     {
-      "title": "INSBU Annuaire Statistique du Burundi, édition 2024 (RGPHAE 2024 results)",
+      "title": "INSBU Annuaire Statistique du Burundi, \u00e9dition 2024 (RGPHAE 2024 results)",
       "url": "https://api.insbu.bi/storage/documents/01M0WF6F346CZ0KBK8A07YJVSP.pdf",
-      "finding": "Tables 1.04–1.05 (PDF pages 25–26; extracted lines 854–958) present the 2024 census results under the post-reform five-province/42-commune frame. The current Bujumbura table contains Muhuta and Ntahangwa; Buhumuza contains Gisagara and Muyinga; Burunga contains Rumonge and Nyanza. Several old names therefore persist in current statistical nomenclature, while many other old contacts are absent from the top-level current commune list. The tables are administrative statistics, not boundary polygons or a cellwise crosswalk."
+      "finding": "Tables 1.04\u20131.05 (PDF pages 25\u201326; extracted lines 854\u2013958) present the 2024 census results under the post-reform five-province/42-commune frame. The current Bujumbura table contains Muhuta and Ntahangwa; Buhumuza contains Gisagara and Muyinga; Burunga contains Rumonge and Nyanza. Several old names therefore persist in current statistical nomenclature, while many other old contacts are absent from the top-level current commune list. The tables are administrative statistics, not boundary polygons or a cellwise crosswalk."
     },
     {
-      "title": "Presidency of Burundi, Council of Ministers communiqué, 15 June 2022",
+      "title": "Presidency of Burundi, Council of Ministers communiqu\u00e9, 15 June 2022",
       "url": "https://www.presidence.gov.bi/wp-content/uploads/2022/06/Communique-CM-15-JUIN-2022.pdf",
-      "finding": "The official communiqué describes the reorganization proposal, the history/criteria, and annexes the proposed 42-commune list. It is prior to enactment and is useful for proposal context only."
+      "finding": "The official communiqu\u00e9 describes the reorganization proposal, the history/criteria, and annexes the proposed 42-commune list. It is prior to enactment and is useful for proposal context only."
     },
     {
-      "title": "Presidency of Burundi, Council of Ministers communiqué, 18 September 2025",
+      "title": "Presidency of Burundi, Council of Ministers communiqu\u00e9, 18 September 2025",
       "url": "https://www.presidence.gov.bi/wp-content/uploads/2025/09/CMQ-CM-EXTRA-DU-18.09.25.pdf",
-      "finding": "The communiqué treats the reorganization as implemented in 2025 and describes institutions adjusted to the new province/commune structure. This confirms contemporary administrative operation, not a geospatial crosswalk."
+      "finding": "The communiqu\u00e9 treats the reorganization as implemented in 2025 and describes institutions adjusted to the new province/commune structure. This confirms contemporary administrative operation, not a geospatial crosswalk."
     }
   ],
   "applicability_assessment": {
