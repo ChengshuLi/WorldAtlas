@@ -7,3 +7,5 @@ This packet reuses the existing current-owner observation and the retained 2015 
 The DoPDUR body is not copied into this packet. Its raw geometry remains task-local because the retained response does not establish redistribution terms. Its 326/324 comparison is corroborative only.
 
 The GSHHG-derived physical report and output geometry are retained in this local branch for the stock diagnostic. The original license metadata says redistributable but preserves a conflict between the original LICENSE and README LGPL versions. This branch has not been pushed; do not publish GSHHG-derived geometry until those exact terms are resolved. No accepted ownership changes or credit are asserted.
+
+The first `native-diagnostic` attempt stopped before producing output because the original compressed source-family pin omitted its decoded byte/hash fields. The corrected v2 source-evidence preparation includes those exact decoded identities for the source family and all 34 canonical cohort shards; no scientific input or geometry changed in this correction. The first rejected source-evidence body remains preserved at its earlier commit for audit.
