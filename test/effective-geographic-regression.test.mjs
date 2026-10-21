@@ -68,6 +68,9 @@ test('actual immutable entry rejects owner loss/reassignment with rawworld geome
   const base=f.select([[[0,2,1]],[[1,3,2]],[],[]]);
   const gain=f.select([[[0,3,1]],[[1,3,2]],[],[]]);
   assert.equal(inspectSelected(f.repo,base,gain).status,'no-new-native-loss');
+  const retired=spawnSync(process.execPath,[path.join(f.repo,'scripts/check-effective-geographic-regression.mjs'),f.repo,base,gain],{encoding:'utf8'});
+  assert.equal(retired.status,1);assert.equal(retired.stdout,'');
+  assert.match(retired.stderr,/Use python -I -B scripts\/run-geographic-check\.py/);
   const lost=f.select([[[0,1,1]],[[1,3,2]],[],[]]);
   const report=inspectSelected(f.repo,base,lost);assert.equal(report.lost_or_reassigned_cells,1);assert.deepEqual(report.intervals,[{row:0,start:1,end:2,previous_owner:'old-owner',candidate_owner:null}]);
   const transferred=f.select([[[0,2,2]],[[1,3,2]],[],[]]);assert.equal(inspectSelected(f.repo,base,transferred).lost_or_reassigned_cells,2);
@@ -77,6 +80,10 @@ test('actual immutable entry rejects owner loss/reassignment with rawworld geome
   const result=spawnSync(process.env.WORLDATLAS_TEST_PYTHON??'python3',['-I','-B',command[0],'--repo',f.repo,'--baseline',base,'--candidate',lost,'--out',path.join(f.repo,'blocked.json')],{encoding:'utf8',env:{...process.env,NODE:process.execPath,NODE_OPTIONS:'--require='+preload,NODE_PATH:f.repo}});
   assert.equal(fs.existsSync(preloadSentinel),false,'actual trusted child must not execute an inherited preload');
   assert.equal(result.status,1,result.stderr);assert.ok(fs.existsSync(path.join(f.repo,'blocked.json')),result.stderr);const actual=JSON.parse(fs.readFileSync(path.join(f.repo,'blocked.json')));assert.equal(actual.status,'native-regressions-found');assert.equal(actual.candidate_code_executed,false);assert.equal(actual.selected_native_report.lost_or_reassigned_cells,1);
+  const native=actual.selected_native_report;
+  assert.equal(native.runtime.path,fs.realpathSync(process.execPath));
+  assert(native.caller_runtime&&native.execution_runtimes.some(p=>p.path===native.caller_runtime.path&&p.sha256===native.caller_runtime.sha256));
+  assert(native.execution_runtimes.some(p=>p.path===native.runtime.path&&p.sha256===native.runtime.sha256));
   const sentinel=fs.readFileSync(path.join(f.repo,'blocked.json'));
   fs.appendFileSync(path.join(f.repo,'scripts/check-effective-geographic-regression.mjs'),'\n// Deliberate current checkout drift');
   const collision=spawnSync(process.env.WORLDATLAS_TEST_PYTHON??'python3',['-I','-B',command[0],'--repo',f.repo,'--baseline',base,'--candidate',lost,'--out',path.join(f.repo,'blocked.json')],{encoding:'utf8',env:{...process.env,NODE:process.execPath}});

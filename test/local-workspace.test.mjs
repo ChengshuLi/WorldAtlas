@@ -169,7 +169,7 @@ test('cold stock delivery and selected-check entries resolve imports before ordi
   const run = name => spawnSync(process.execPath, [name], {cwd: entry.path, encoding: 'utf8', timeout: 10000,
     env: {PATH: process.env.PATH, HOME: repo, GIT_NO_LAZY_FETCH: '1'}});
   for (const [name, expected] of [['scripts/prepare-delivery-handoff.mjs', /Use prepare-delivery-handoff\.mjs/],
-    ['scripts/check-effective-geographic-regression.mjs', /Require immutable input commit/]]) {
+    ['scripts/check-effective-geographic-regression.mjs', /Use python -I -B scripts\/run-geographic-check\.py/]]) {
     const result = run(name);
     assert.equal(result.error, undefined);
     assert.equal(result.status, 1, result.stderr);

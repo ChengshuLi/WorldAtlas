@@ -1178,7 +1178,8 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
-  const [repo,baseline,candidate,parentRuntimePath]=process.argv.slice(2);const result=inspectSelected(repo,baseline,candidate,{parentRuntimePath});const body=JSON.stringify(result)+'\n';process.stdout.write(body);
+  console.error('Use python -I -B scripts/run-geographic-check.py --baseline BASE --candidate CANDIDATE --out REPORT; inspectSelected remains a library cold consumer.');
+  process.exitCode = 1;
 }
 
 export {loadBaseSelection};

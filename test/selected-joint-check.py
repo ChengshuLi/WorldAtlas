@@ -125,8 +125,9 @@ class InspectRouting(unittest.TestCase):
                 return {'mode': 'authenticated-checkpoint-append-v1', 'native': result}
 
             def child(command, **kwargs):
-                self.assertTrue(command[1].endswith('/check-effective-geographic-regression.mjs'))
-                self.assertEqual(command[2:5], [str(ROOT), BASE, NEXT])
+                self.assertEqual(command[1:3], ['--input-type=module', '--eval'])
+                self.assertIn('inspectSelected', command[3])
+                self.assertEqual(command[4:], [(ROOT / 'scripts/check-effective-geographic-regression.mjs').as_uri(), str(ROOT), BASE, NEXT, sys.executable])
                 calls.append('native')
                 return raw(result)
 
@@ -160,7 +161,9 @@ class InspectRouting(unittest.TestCase):
             if len(calls) == 1:
                 self.assertTrue(command[1].endswith('/selected-joint-entry.mjs'))
                 return raw(value)
-            self.assertTrue(command[1].endswith('/check-effective-geographic-regression.mjs'))
+            self.assertEqual(command[1:3], ['--input-type=module', '--eval'])
+            self.assertIn('inspectSelected', command[3])
+            self.assertEqual(command[4:], [(ROOT / 'scripts/check-effective-geographic-regression.mjs').as_uri(), str(ROOT), BASE, NEXT, sys.executable])
             self.assertEqual(decisions(), [value])
             raise failure
 
