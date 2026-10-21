@@ -39,7 +39,7 @@ export const postgresMapSnapshotQueries=postgresMapQueries(mapSnapshotQueries);
  * caches can therefore merge by claim identity without restoring retired data.
  * Source metadata occurs once per page; evidence remains individually queryable.
  */
-export async function mapSnapshotPage(db,year,{examples=false,cursor='',limit=1000,aliasLimit=5,evidenceOnly=false,includeTemporal=false}={}){
+export async function mapSnapshotPage(db,year,{examples=false,cursor='',limit=1000,aliasLimit=5,evidenceOnly=false,includeTemporal=false,releaseId=null}={}){
  if(!validYear(year))throw new RecordError('Invalid selected year');
  if(typeof cursor!=='string'||cursor.length>2000||cursor&&!cursor.trim())throw new RecordError('Invalid map cursor');
  const entityLimit=evidenceOnly?4096:1000;
@@ -79,7 +79,7 @@ export async function mapSnapshotPage(db,year,{examples=false,cursor='',limit=10
  // retain their existing paging protocol; never truncate a stream to inline it.
  if(evidenceOnly&&includeTemporal&&result.next_cursor===null){
   let pages;
-  try{pages=await Promise.all(['records','withdrawals'].map(stream=>temporalGeographySnapshotPage(db,year,{examples,stream})));}
+  try{pages=await Promise.all(['records','withdrawals'].map(stream=>temporalGeographySnapshotPage(db,year,{examples,stream,releaseId})));}
   catch(error){if(error.status===409)error.retryable=true;if(error.status!==413)throw error;}
   if(pages){
    if(pages.some(page=>page.revision!==initial)||['release_id','hierarchy_sha256','footprints_sha256'].some(key=>pages[0][key]!==pages[1][key])){const error=new RecordError('Historical content changed while reading; retry the map snapshot',409);error.retryable=true;throw error;}

@@ -104,7 +104,7 @@ async function loadHostedSnapshotPages(year,examples,signal){
  const attributes=[],names=[],retirements=[];let cursor='',revision=null,limit=4096,temporalPages;const cursors=new Set();
  try{
  while(true){
-  const params=new URLSearchParams({year:String(year),examples:String(Number(examples)),limit:String(limit),evidence_only:'1',include_temporal:String(Number(datedGeographySupported))});if(cursor)params.set('cursor',cursor);
+  const params=new URLSearchParams({year:String(year),examples:String(Number(examples)),limit:String(limit),evidence_only:'1',include_temporal:String(Number(datedGeographySupported)),...(datedGeographySupported?{release_id:expectedGeography.release_id}:{})});if(cursor)params.set('cursor',cursor);
   const response=await fetch('/api/map/snapshot?'+params,{signal});
   if(!response.ok){const error=await response.json().catch(()=>({}));if(response.status===400&&limit>1000&&error.error==='Map entity page limit must be between 1 and 1000'){limit=1000;continue;}if(response.status===409&&error.retryable)throw new ContentRevisionError();if(response.status===413&&error.retryable&&limit>1){limit=Math.max(1,Math.min(limit-1,Number.isInteger(error.suggested_limit)?error.suggested_limit:Math.floor(limit/2)));continue;}throw Error(`Atlas data unavailable (${response.status})`);}
   const raw=await response.json(),page=hydrateMapSnapshotPage(raw);
