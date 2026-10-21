@@ -1,0 +1,149 @@
+{
+  "kind": "lie-source-evidence-002-coverage-correction-verification",
+  "status": "verified",
+  "purpose": "Bounded comparison after stock source-evidence-001 supplied per-source subsets where the unchanged native admission requires each sibling source row to bind the complete owner request. This is author reconciliation, not a second science review.",
+  "source_evidence": {
+    "first": {
+      "path": "coordination/engineering/lie-qualified-repair-20261021/source-evidence-001/source-evidence.json",
+      "bytes": 34865,
+      "sha256": "c9a694cd3ef743e26b9bdb22923faaedf2c75e6acdabbd4466642cbeaa5ff19d",
+      "config_sha256": "ea0da2d64af328f74071f78ae088691eb5f8ec5c9c356ab82a90041910ff4b80"
+    },
+    "corrected": {
+      "path": "coordination/engineering/lie-qualified-repair-20261021/source-evidence-002/source-evidence.json",
+      "bytes": 52355,
+      "sha256": "b30bf4c1715e3d5313bd561040625dc9a80e9a3cf5c30ca858d3bb8a1b823c42",
+      "config_sha256": "df220828b6a49084424ce15efbe83fb8cfa822ab90dd2685e4cc567d9e78b2c4"
+    },
+    "only_scientific_field_changes": [
+      "targets[*].coverage_rows",
+      "targets[*].coverage_classes"
+    ],
+    "same_targets": [
+      "gb:LIE:ADM1:41692755B66371769109520",
+      "gb:LIE:ADM1:41692755B18610673403937",
+      "gb:LIE:ADM1:41692755B54662867343220",
+      "gb:LIE:ADM1:41692755B26730620500431",
+      "gb:LIE:ADM1:41692755B63992629942054",
+      "gb:LIE:ADM1:41692755B23424129986871"
+    ],
+    "coverage": {
+      "per_target_rows": 58,
+      "all_six_rows_identical": true,
+      "all_classes": [
+        "mapped_land_support"
+      ],
+      "distinct_cells": 148,
+      "sum_cells": 148,
+      "matches_original_native_patch_exactly": true,
+      "matches_retained_owner_observation_exactly": true,
+      "admission_semantics": "The stock schema requires any supplied coverage_rows to cover the complete owner request. A single complete owner binding can serve owner-wide; repeating it on every sibling source row is permitted but not required. This corrected source-evidence-002 repeats the identical complete 148-key coverage on all six rows; no further rewrite or producer rerun is warranted.",
+      "coverage_class_provenance": "mapped_land_support labels are carried from the original physical support/contract evidence; they are not inferred solely from the owner mask."
+    },
+    "unchanged_common_fields": [
+      "base_reference",
+      "catalogue",
+      "families",
+      "kind",
+      "native_contract",
+      "native_latitudes",
+      "owner_roster",
+      "physical_evidence",
+      "physical_input",
+      "physical_reproduction",
+      "source_membership",
+      "territorial_exclusion_sources",
+      "version"
+    ]
+  },
+  "territorial_exclusion_provenance": {
+    "byte_identical_between_001_002": true,
+    "bytes": 79238,
+    "sha256": "21b21ebb2a2a468c3b32b39ed6a7d8364c148936ef795a205c6539acd3f7d3a9",
+    "negative_families": [
+      "gb:AUT:ADM1",
+      "gb:AUT:ADM2",
+      "gb:CHE:ADM1",
+      "gb:CHE:ADM2"
+    ]
+  },
+  "failed_first_admission": {
+    "record": {
+      "path": "coordination/engineering/lie-qualified-repair-20261021/research/native-coverage-admission-correction.json",
+      "bytes": 603,
+      "sha256": "7d0262aabb110fb7e3cdee3102a27d756b66dda80cbb84305b9e0dc94a83c958"
+    },
+    "evidence": {
+      "first_source_commit": "2a38756f0cf862d035d6914dd55d87965bb47904",
+      "failed_diagnostic": "Native coverage classes differ from complete requested owner cells",
+      "result_created": false,
+      "cause": "Per-source member key subsets were supplied where the unchanged stock schema requires identical complete owner coverage for every sibling source row.",
+      "correction": "All six source targets bind the same complete 148-key owner7121 coverage. Original request, source geometries, competitors and predicates remain unchanged.",
+      "source_member_counts": [
+        5,
+        3,
+        9,
+        53,
+        43,
+        35
+      ],
+      "complete_owner_cells": 148,
+      "physical_repeated": false
+    },
+    "result_created": false
+  },
+  "original_request": {
+    "path": "coordination/engineering/lie-qualified-repair-20261021/native-preparation/original-native-patch.json",
+    "unique_keys": 148,
+    "owner": 7121,
+    "rows": 58
+  },
+  "retained_selected_owner_observation": {
+    "file": "inventory/lie-selected-owner-observation.json",
+    "bytes": 48287,
+    "sha256": "995ee53087ce9f4599d0448edb6f8126a5f50fab63907b3e03bcef62272b56da",
+    "commit": "51adbbae1d65f2b253c3ccb0edf227ce64009e30",
+    "query_count": 148,
+    "query_sha256": "528ce9496cddab93c17975b2c9a900be0381c8a5738728881e3185ff6677d63a",
+    "original_intervals_sha256": "28830be606d09b08a53c51876e16b4c72ab2542bf0ddcf84734796c4d52d669d",
+    "base_owner_counts": {
+      "0": 148
+    },
+    "accepted_additive_owner_counts": {
+      "0": 148
+    },
+    "effective_selected_owner_counts": {
+      "0": 148
+    },
+    "existing_product_overlap_keys": 0,
+    "selection_pin": {
+      "bytes": 1851,
+      "commit": "51adbbae1d65f2b253c3ccb0edf227ce64009e30",
+      "git_blob_oid": "2e1ec2875d2932eafb33f4c1062412282df234cb",
+      "mode": "100644",
+      "path": "data/ownership-selection.json",
+      "sha256": "c84656cbbab04c214a37717933cb129ea78bac8838bf0feff44b02f5a1997c62",
+      "whole_body_consumed": true
+    },
+    "limit": "This reports the retained selection at the observer commit/pin; it is not a new current-main observation."
+  },
+  "physical_result": {
+    "receipt": {
+      "path": "coordination/engineering/lie-qualified-repair-20261021/physical-001/execution-receipt.json",
+      "bytes": 59078,
+      "sha256": "a62b488abcfac88cd2a3f15724644745590ddd6b5026cfb2c3abc9f0dc2cc01b"
+    },
+    "whole_target": {
+      "path": "coordination/engineering/lie-qualified-repair-20261021/physical-001/whole-target-support.json",
+      "bytes": 36732,
+      "sha256": "200ad351b58d2bbb9e04e067890bb5b474fe8b40b62bbb225e438c7c8ee4676e"
+    },
+    "complete": true,
+    "elapsed_seconds": 5.096570083998813,
+    "input_count": 25,
+    "whole_family_target_count": 11,
+    "targets_with_zero_recorded_issues": 11,
+    "limits": "Source-relative physical comparison only; it does not adjudicate the seven same-release full-source misses or the separate AUT conflict."
+  },
+  "remaining": "The corrected source-evidence-002 input is prepared. Native diagnostic and later selection/conservation are not repeated here."
+}
