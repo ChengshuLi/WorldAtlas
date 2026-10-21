@@ -1,0 +1,102 @@
+{
+  "original_package": "gb-RUS-ADM2--repair-evaluation",
+  "status": "proposed_researched_unresolved_not_accepted",
+  "keys": 2,
+  "land": 2,
+  "water": 0,
+  "original_denominator": 2566967,
+  "prior_accepted": 2557516,
+  "accepted_new_repairs": 8108,
+  "accepted_researched_unresolved": 872,
+  "other_pending": 469,
+  "scope_keys": [
+    {
+      "y": 59849,
+      "x": 152972,
+      "owner_index": 38297,
+      "owner_id": "gb:RUS:ADM2:50074027B59329255842991",
+      "owner_name": "Petsamo District",
+      "held_interval_ordinal_1based": 1,
+      "held_interval": [
+        59849,
+        152972,
+        152973
+      ],
+      "retained_class": "mapped_land_support",
+      "foreign_contacts": [
+        {
+          "id": "gb:NOR:ADM1:71437522B84427958303197",
+          "family": "gb:NOR:ADM1",
+          "name": "Troms og Finnmark",
+          "ordinal": 10,
+          "target_negative_ordinal": 0,
+          "geometry_sha256_native_valueSha": "5a07311444d5d762a8aa53654dda5af78a0d5e844fb49e0faca7db6905e4b27a",
+          "historical_python_geometry_sha256": "08dce60353db21bd3000bc0a54581134c0f2e648da8469f7fe0da6d355caf6d0",
+          "complete_source_geometry_pointer": "/features/9/geometry",
+          "complete_source_parts": [
+            {
+              "bytes": 970485,
+              "commit": "9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c",
+              "decoded_bytes": 3216652,
+              "decoded_sha256": "a24bd867e42c8f2d7bdd07e723594f2d55736d50de8cf1e92062ae443a0f0f72",
+              "git_blob_oid": "aa4785e3271cadd5137e5535f1fb7270d5b16445",
+              "mode": "100644",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-NOR-ADM1-000.bin.gz",
+              "sha256": "c9c54f05520e49bd2dbfb13795b0d8a7005f55a972853f3fb9c5f6d36df7a36a"
+            }
+          ]
+        }
+      ],
+      "longitude": 30.058131107771402,
+      "normative_latitude": 69.43996822160625,
+      "original_owner": 38297,
+      "proposed_scope": "other_families_471_preserved"
+    },
+    {
+      "y": 59862,
+      "x": 152965,
+      "owner_index": 38297,
+      "owner_id": "gb:RUS:ADM2:50074027B59329255842991",
+      "owner_name": "Petsamo District",
+      "held_interval_ordinal_1based": 2,
+      "held_interval": [
+        59862,
+        152965,
+        152966
+      ],
+      "retained_class": "mapped_land_support",
+      "foreign_contacts": [
+        {
+          "id": "gb:NOR:ADM1:71437522B84427958303197",
+          "family": "gb:NOR:ADM1",
+          "name": "Troms og Finnmark",
+          "ordinal": 10,
+          "target_negative_ordinal": 0,
+          "geometry_sha256_native_valueSha": "5a07311444d5d762a8aa53654dda5af78a0d5e844fb49e0faca7db6905e4b27a",
+          "historical_python_geometry_sha256": "08dce60353db21bd3000bc0a54581134c0f2e648da8469f7fe0da6d355caf6d0",
+          "complete_source_geometry_pointer": "/features/9/geometry",
+          "complete_source_parts": [
+            {
+              "bytes": 970485,
+              "commit": "9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c",
+              "decoded_bytes": 3216652,
+              "decoded_sha256": "a24bd867e42c8f2d7bdd07e723594f2d55736d50de8cf1e92062ae443a0f0f72",
+              "git_blob_oid": "aa4785e3271cadd5137e5535f1fb7270d5b16445",
+              "mode": "100644",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-NOR-ADM1-000.bin.gz",
+              "sha256": "c9c54f05520e49bd2dbfb13795b0d8a7005f55a972853f3fb9c5f6d36df7a36a"
+            }
+          ]
+        }
+      ],
+      "longitude": 30.048518877352507,
+      "normative_latitude": 69.4336981394968,
+      "original_owner": 38297,
+      "proposed_scope": "other_families_471_preserved"
+    }
+  ],
+  "native_holds_unchanged": true,
+  "no_repair_or_package_completion_claim": true,
+  "research_basis": "Actual source-specific historical and current Kartverket comparisons, metadata/distribution investigation, original exact source and native conflict; independent researched-unresolved assessment supplied.",
+  "future_research_trigger": "New exact source-revision geometry, service explanation or other materially relevant evidence resolving either specific contact; no universal certificate or exhaustive archive search required."
+}
