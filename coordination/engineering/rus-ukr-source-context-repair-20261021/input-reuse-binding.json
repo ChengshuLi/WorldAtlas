@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "reused_source": {
+    "commit": "c6720857e7ad3530ca44a542d96ea9edb9eca77b",
+    "path": "coordination/engineering/rus-context-qualified-repair-20261021/source-inputs/source-evidence.json",
+    "mode": "100644",
+    "git_blob_oid": "5331c8a4e2c0ecb57a8f61491fe4280672b48a11",
+    "bytes": 8172157,
+    "sha256": "3ef2620e959dce79c9278534de33923cd7dc2c1d8f6a7f928cb28ede935abc91"
+  },
+  "runtime_targets": 66,
+  "runtime_associated_negatives": 93,
+  "complete_original_source": {
+    "commit": "a8c114c829646ac2191e21bbb9f4f15fec710787",
+    "path": "coordination/engineering/russia-repair-delivery-20261017/native-inputs-002/source-evidence.json",
+    "mode": "100644",
+    "git_blob_oid": "1206cb657064415bc31d5f5c6d5086f2e3788b63",
+    "bytes": 23554075,
+    "sha256": "a55983972a251bde712c739006cd9a0165188060e44a0982927a6d243fc00ddc"
+  },
+  "original_targets": 334,
+  "original_negatives": 230,
+  "only_changed_field": "territorial_applicability",
+  "prior_context_pin": {
+    "bytes": 4628896,
+    "commit": "0af07a880521ea99e4e42a15b9e8ebb030526db3",
+    "git_blob_oid": "bb00208d5311faf4ad996d1dacec47a3ca97fdb6",
+    "mode": "100644",
+    "path": "coordination/engineering/rus-context-qualified-repair-20261021/territorial-applicability.json",
+    "sha256": "2d76c30570591c8ac0632145572430102145a24f06b678737dfa1e804f4e7b37"
+  },
+  "new_context": {
+    "commit": "0f8d69633e6aa74d4ca00fd438d19a81880a47dc",
+    "path": "coordination/engineering/rus-ukr-source-context-repair-20261021/territorial-applicability.json",
+    "mode": "100644",
+    "git_blob_oid": "c23bad3dab23a2411c43835a84034233d9b47613",
+    "bytes": 4487,
+    "sha256": "9e238dd7e2f9b8e699f0760729aca9a10e2857009d1df92c23db72ede3ed4be5"
+  },
+  "original_held_request": {
+    "commit": "c6720857e7ad3530ca44a542d96ea9edb9eca77b",
+    "path": "coordination/engineering/rus-context-qualified-repair-20261021/research/original-held-native-patch.json",
+    "mode": "100644",
+    "git_blob_oid": "65e399377825e07b14d8763b37eb0ad515ef8de9",
+    "bytes": 156307,
+    "sha256": "7375330bf8bf2ba6432bc8c0fba869e42bcdcb3ec47cccf7fd3c72e52204a403"
+  },
+  "physical_reuse": {
+    "bytes": 54074211,
+    "commit": "d41ba96f505fe507773cb1a23aab558941ee5a9c",
+    "git_blob_oid": "68cdef5a025eb092990571c2181c736ae76e4eec",
+    "mode": "100644",
+    "path": "coordination/engineering/russia-repair-delivery-20261017/physical-001/whole-target-support.json",
+    "sha256": "38c8d148dbc33bab7fc94e2c7931b9a2ca757ff04d90191f08fa2506a6fc1a8c"
+  },
+  "observer_repeated": false,
+  "physical_producer_repeated": false
+}
