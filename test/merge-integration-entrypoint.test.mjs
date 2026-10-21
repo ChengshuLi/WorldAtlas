@@ -176,7 +176,7 @@ for(const wrapped of [false,true]) for(const notification of ['denied','transpor
     sha:createHash('sha1').update(`blob ${packageRaw.length}\0`).update(packageRaw).digest('hex'),content:packageRaw.toString('base64')};
   fs.mkdirSync(path.join(directory,'.github'));
   fs.copyFileSync(path.join(root,'.github/evidence-policy.json'),path.join(directory,'.github/evidence-policy.json'));
-  const reviewed={base,head,files:['test/merge-integration.test.mjs'],inputs:[]};
+  const reviewed={base,head,files:['test/example.test.mjs'],inputs:[]};
   fs.writeFileSync(path.join(directory,'event.json'),JSON.stringify({inputs:{pr_number:'2',expected_head:head,request_id:'notification-cleanup-test',...(wrapped?{reviewed_tests:JSON.stringify(reviewed)}:{})}}));
   const issue={number:1,state:'open',created_at:'2020-01-01T00:00:00Z',labels:['type:engineering','kind:work-item','status:ready'],
     body:'<!-- worldatlas-work:v1\n'+JSON.stringify({mode:'engineering',max_prs:2,depends_on:[],scope:'code'})+'\n-->'};
@@ -196,7 +196,7 @@ for(const wrapped of [false,true]) for(const notification of ['denied','transpor
     ['/git/commits/'+owned]:{sha:owned,tree:{sha:sha('6')},parents:[{sha:base},{sha:head}]},
     ['/git/commits/'+head]:{tree:{sha:sha('6')}},
     ['/git/trees/'+sha('6')]:{truncated:false,tree:[...authorityRows,{path:'src/a.js',sha:'blob',mode:'100644',type:'blob'},
-      {path:'test/merge-integration.test.mjs',sha:sha('7'),mode:'100644',type:'blob'}]}
+      {path:'test/example.test.mjs',sha:sha('7'),mode:'100644',type:'blob'}]}
   };
   fs.writeFileSync(path.join(directory,'mock.mjs'),capacityShim+`import fs from 'node:fs';const routes=${JSON.stringify(routes)},refs=new Map();
     const originalSetTimeout=globalThis.setTimeout;globalThis.setTimeout=(fn,ms,...args)=>{if(ms===2000)throw Error('Unexpected candidate polling sleep');return originalSetTimeout(fn,ms,...args);};
