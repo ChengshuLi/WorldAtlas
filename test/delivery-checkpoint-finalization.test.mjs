@@ -9,7 +9,7 @@ import {crc32, gzipSync, deflateRawSync} from 'node:zlib';
 import {CHECKPOINT_MEMBERS, reportHash} from '../scripts/geographic-report-artifact.mjs';
 import {renderWorkerResult} from '../scripts/worker-result.mjs';
 import {releaseAcceptedCheckpoint} from '../scripts/accepted-selected-checkpoint.mjs';
-import {pinReader, publish, publishFinalizedDelivery, finalizeDelivery, digest, jsonBytes} from '../scripts/prepare-delivery-handoff.mjs';
+import {pinReader, publishFinalizedDelivery, finalizeDelivery, digest, jsonBytes} from '../scripts/prepare-delivery-handoff.mjs';
 import {acquireFinalizationCheckpoint, finalizationCheckpointBytes, admitCanonicalCheckpoint} from '../scripts/delivery-checkpoint-finalization.mjs';
 
 // Same real ZIP/accepted-receipt fixture protocol as accepted-selected-checkpoint.
@@ -120,26 +120,41 @@ test('optional checkpoint leaves the legacy finalizer and canonical file untouch
   assert.deepEqual(fs.readFileSync(path.join(f.root, 'data/selected-checkpoint.json')), original);
 });
 
-test('authenticated chosen locator publishes and automatically adopts exact bytes; identical resume works', async t => {
-  const f = repository(t), handle = await acquireFinalizationCheckpoint(f.config, f.reader, f.f.options);
-  t.after(() => releaseAcceptedCheckpoint(handle));
-  const bytes = finalizationCheckpointBytes(f.config, f.reader, handle), destination = 'coordination/engineering/checkpoint-test/final';
-  const products = {'selected-checkpoint.json': bytes}, binding = {phase: 'finalize', config_sha256: 'a'.repeat(64)};
-  publishFinalizedDelivery(f.root, destination, products, binding, f.reader, f.config.selector);
-  assert.deepEqual(fs.readFileSync(path.join(f.root, 'data/selected-checkpoint.json')), bytes);
-  publishFinalizedDelivery(f.root, destination, products, binding, f.reader, f.config.selector, true);
+test('authenticated complete finalization publishes and adopts exact bytes; identical resume works', async t => {
+  const f = await finalizedFixture(t), destination = '.cache/delivery-handoff/final';
+  const head = f.reader.git('rev-parse', 'HEAD'), index = f.reader.git('ls-files', '--stage');
+  f.publish(destination);
+  for (const [name, output] of [['data/selected-checkpoint.json', 'selected-checkpoint.json'],
+    ['data/ownership-selection.json', 'ownership-selection.json'], ['.github/package-inputs.json', 'package-inputs.json'],
+    [f.config.sidecar_output, 'sidecar.json'], [PREFIX + 'selected-delivery-expectations.json', 'selected-delivery-expectations.json']])
+    assert.deepEqual(fs.readFileSync(path.join(f.root, name)), f.outputs[output]);
+  f.publish(destination, true);
   const receipt = JSON.parse(fs.readFileSync(path.join(f.root, destination, 'preparation.json')));
-  assert.equal(receipt.outputs['selected-checkpoint.json'].sha256, reportHash(bytes));
+  assert.equal(receipt.outputs['selected-checkpoint.json'].sha256, reportHash(f.outputs['selected-checkpoint.json']));
+  assert.deepEqual(receipt.binding.selector, f.originalSelector);
+  assert.deepEqual(receipt.binding.package_inputs, f.originalPackage);
+  assert.deepEqual(f.reader.git('rev-parse', 'HEAD'), head);
+  assert.deepEqual(f.reader.git('ls-files', '--stage'), index);
 });
 
-test('interruption after completed batch publication resumes canonical adoption', async t => {
-  const f = repository(t, {old: false}), handle = await acquireFinalizationCheckpoint(f.config, f.reader, f.f.options);
-  t.after(() => releaseAcceptedCheckpoint(handle));
-  const bytes = finalizationCheckpointBytes(f.config, f.reader, handle), destination = 'coordination/engineering/checkpoint-test/final';
-  publish(f.root, destination, {'selected-checkpoint.json': bytes}, {phase: 'finalize'});
-  assert.equal(fs.existsSync(path.join(f.root, 'data/selected-checkpoint.json')), false);
-  publishFinalizedDelivery(f.root, destination, {'selected-checkpoint.json': bytes}, {phase: 'finalize'}, f.reader, f.config.selector, true);
-  assert.deepEqual(fs.readFileSync(path.join(f.root, 'data/selected-checkpoint.json')), bytes);
+test('interrupted canonical adoption requires exact complete outputs and explicit resume', async t => {
+  const f = await finalizedFixture(t), destination = '.cache/delivery-handoff/interrupted';
+  const originalSelector = fs.readFileSync(path.join(f.root, 'data/ownership-selection.json'));
+  const rename = fs.renameSync; let count = 0;
+  fs.renameSync = (...args) => { if (++count === 2) throw Error('Deliberate adoption interruption'); return rename(...args); };
+  try { assert.throws(() => f.publish(destination), /Deliberate adoption interruption/); }
+  finally { fs.renameSync = rename; }
+  assert.equal(count, 2);
+  assert.ok(fs.existsSync(path.join(f.root, destination, 'preparation.json')), 'The immutable staged batch is complete');
+  assert.deepEqual(fs.readFileSync(path.join(f.root, f.config.sidecar_output)), f.outputs['sidecar.json']);
+  assert.deepEqual(fs.readFileSync(path.join(f.root, 'data/ownership-selection.json')), originalSelector, 'Selector is last, not a false atomicity claim');
+  const fresh = '.cache/delivery-handoff/uncommitted-mixture';
+  assert.throws(() => f.publish(fresh), /changed outside/);
+  assert.equal(fs.existsSync(path.join(f.root, fresh)), false);
+  assert.throws(() => f.publish(destination), /changed outside/);
+  f.publish(destination, true);
+  assert.deepEqual(fs.readFileSync(path.join(f.root, 'data/ownership-selection.json')), f.outputs['ownership-selection.json']);
+  assert.deepEqual(fs.readFileSync(path.join(f.root, 'data/selected-checkpoint.json')), f.outputs['selected-checkpoint.json']);
 });
 
 test('incompatible prior selector, unaccepted self candidate and fabricated custody refuse', async t => {
@@ -211,6 +226,7 @@ function fullDeliveryFixture(t) {
     logical_asset_map: {base_manifest: manifest, owner_roster: body, ledger: body, patch: body}};
   write(common + 'sidecar.json', sidecar);
   const inherited = commit(), rebind = pin(inherited, common + 'rebind.json'), priorSidecar = pin(inherited, common + 'sidecar.json');
+  write('data/selected-checkpoint.json', {old: true});
   write('data/ownership-selection.json', {...base, additive_release: {path: priorSidecar.path, bytes: priorSidecar.bytes, sha256: priorSidecar.sha256}});
   write('.github/package-inputs.json', {version: 1, inputs: ['public/', '.github/package-inputs.json'],
     optional_inputs: ['public/'], verification_paths: [], generated_outputs: []});
@@ -285,11 +301,101 @@ test('changed archive and retargeted operand cannot borrow an accepted capabilit
 });
 
 test('publication preflight rejects conflicting canonical bytes before any batch output', async t => {
-  const f = repository(t), handle = await acquireFinalizationCheckpoint(f.config, f.reader, f.f.options);
-  t.after(() => releaseAcceptedCheckpoint(handle));
-  const bytes = finalizationCheckpointBytes(f.config, f.reader, handle), destination = 'coordination/engineering/checkpoint-test/final';
-  f.write('data/selected-checkpoint.json', json({unrelated: true}));
-  assert.throws(() => publishFinalizedDelivery(f.root, destination, {'selected-checkpoint.json': bytes},
-    {phase: 'finalize'}, f.reader, f.config.selector), /changed outside/);
+  const f = await finalizedFixture(t), destination = '.cache/delivery-handoff/conflict';
+  const before = fs.readFileSync(path.join(f.root, 'data/ownership-selection.json'));
+  f.write('data/selected-checkpoint.json', {unrelated: true});
+  assert.throws(() => f.publish(destination), /changed outside/);
   assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+  assert.deepEqual(fs.readFileSync(path.join(f.root, 'data/ownership-selection.json')), before);
+});
+
+async function finalizedFixture(t) {
+  const f = fullDeliveryFixture(t), originalSelector = f.full.selector, originalPackage = f.full.package_inputs;
+  const accepted = acceptedFixture(undefined, undefined, f.reader().json(originalSelector));
+  const directory = PREFIX + 'accepted', name = directory + '/selected-checkpoint.json';
+  const chosen = {version: 1, kind: 'accepted-selected-checkpoint-locator-v1', acceptance: accepted.options.locator,
+    retained_artifact: {path: directory + '/geography-artifact.zip'}};
+  f.write(name, chosen); fs.writeFileSync(path.join(f.root, chosen.retained_artifact.path), accepted.zip);
+  const config = {...f.compact, accepted_checkpoint: {commit: f.commit(), path: name}}, reader = f.reader();
+  const handle = await acquireFinalizationCheckpoint(config, reader, accepted.options);
+  t.after(() => releaseAcceptedCheckpoint(handle));
+  const outputs = finalizeDelivery(config, reader, {acceptedCheckpoint: handle}), binding = {phase: 'finalize', config_sha256: digest(jsonBytes(config))};
+  return {...f, reader, config, outputs, originalSelector, originalPackage,
+    publish: (destination, resume = false) => publishFinalizedDelivery(f.root, destination, outputs, binding, resume)};
+}
+
+test('derived current products are restored together without copying unrelated historical roles', async t => {
+  const f = await finalizedFixture(t);
+  const pins = [f.full.registry, f.full.selected_ledger, f.full.patch, f.full.runtime_envelope];
+  const historical = f.reader.json(f.full.registry).entries[0].source_authority;
+  for (const pin of [...pins, historical, f.full.rebind]) fs.unlinkSync(path.join(f.root, pin.path));
+  fs.rmdirSync(path.join(f.root, PREFIX, 'compose')); // Restore ordinary parents as well.
+  const archive = PREFIX + 'accepted/geography-artifact.zip', archived = fs.readFileSync(path.join(f.root, archive));
+  fs.unlinkSync(path.join(f.root, archive));
+  f.publish('.cache/delivery-handoff/missing-current');
+  for (const pin of pins) assert.deepEqual(fs.readFileSync(path.join(f.root, pin.path)), f.reader.read(pin));
+  assert.deepEqual(fs.readFileSync(path.join(f.root, archive)), archived, 'The selected locator retains its one authenticated archive');
+  // The same fixture body is also the current owner roster, so that exact
+  // current consumer is restored. The unrelated archive never becomes a copy.
+  assert.deepEqual(fs.readFileSync(path.join(f.root, historical.path)), f.reader.read(historical));
+  assert.equal(fs.existsSync(path.join(f.root, f.full.rebind.path)), false, 'Historical-only rebind stays original-pin evidence, not a working-tree copy');
+  assert.deepEqual(fs.readdirSync(path.join(f.root, '.cache/delivery-handoff/missing-current')).sort(),
+    [...Object.keys(f.outputs), 'preparation.json'].sort());
+});
+
+for (const target of ['data/ownership-selection.json', '.github/package-inputs.json'])
+  test('a third committed canonical body refuses before staging: ' + target, async t => {
+    const f = await finalizedFixture(t), destination = '.cache/delivery-handoff/stale';
+    const before = fs.readFileSync(path.join(f.root, target));
+    f.write(target, {...JSON.parse(before), unrelated_selection: true}); f.commit();
+    assert.throws(() => f.publish(destination), /Committed canonical baseline differs/);
+    assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+    assert.notDeepEqual(fs.readFileSync(path.join(f.root, target)), before);
+  });
+
+test('inert commit advances preserve original bindings and committed exact adoption is idempotent', async t => {
+  const f = await finalizedFixture(t), destination = '.cache/delivery-handoff/inert';
+  f.write('unrelated.json', {inert: true}); f.commit();
+  f.publish(destination);
+  const receipt = fs.readFileSync(path.join(f.root, destination, 'preparation.json'));
+  f.commit(); // Exact canonical postimages are now committed, not a resume exemption.
+  f.publish(destination, true);
+  f.publish('.cache/delivery-handoff/committed');
+  assert.deepEqual(fs.readFileSync(path.join(f.root, destination, 'preparation.json')), receipt);
+});
+
+for (const kind of ['symlink', 'executable', 'edited-current', 'staging-overlap', 'staging-below-output', 'mutated-output', 'forged-output'])
+  test('complete canonical preflight refuses ' + kind + ' without partial adoption', async t => {
+    const f = await finalizedFixture(t), before = fs.readFileSync(path.join(f.root, 'data/ownership-selection.json'));
+    let destination = '.cache/delivery-handoff/refused-' + kind, call = () => f.publish(destination), pattern;
+    const filename = path.join(f.root, f.full.patch.path);
+    if (kind === 'symlink') { fs.unlinkSync(filename); fs.symlinkSync('selected-ledger.json', filename); pattern = /Nonordinary/; }
+    if (kind === 'executable') { fs.chmodSync(filename, 0o755); pattern = /Nonordinary/; }
+    if (kind === 'edited-current') { fs.writeFileSync(filename, 'not the authenticated patch'); pattern = /changed outside/; }
+    if (kind === 'staging-overlap') { destination = PREFIX.slice(0, -1); pattern = /overlaps canonical/; }
+    if (kind === 'staging-below-output') { destination = f.config.sidecar_output + '/staged'; pattern = /overlaps canonical/; }
+    if (kind === 'mutated-output') { f.outputs['ownership-selection.json'][0] ^= 1; pattern = /Authenticated complete/; }
+    if (kind === 'forged-output') { call = () => publishFinalizedDelivery(f.root, destination, {...f.outputs}, {}); pattern = /Authenticated complete/; }
+    assert.throws(call, pattern);
+    if (kind !== 'staging-overlap') assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+    assert.deepEqual(fs.readFileSync(path.join(f.root, 'data/ownership-selection.json')), before);
+  });
+
+test('conflicting derived roles cannot claim the same canonical destination', t => {
+  const f = fullDeliveryFixture(t), name = PREFIX + 'selected-delivery-expectations.json';
+  f.write(name, f.reader().json(f.full.registry));
+  const config = {...f.full, registry: f.reader().pin(f.commit(), name)};
+  assert.throws(() => finalizeDelivery(config, f.reader()), /Conflicting canonical finalization roles/);
+});
+
+test('ancestor and descendant derived destinations refuse before staging or adoption', t => {
+  const f = fullDeliveryFixture(t), name = PREFIX + 'selected-delivery-expectations.json/registry.json';
+  f.write(name, f.reader().json(f.full.registry));
+  const config = {...f.full, registry: f.reader().pin(f.commit(), name)};
+  const reader = f.reader(), outputs = finalizeDelivery(config, reader);
+  fs.unlinkSync(path.join(f.root, name)); fs.rmdirSync(path.dirname(path.join(f.root, name))); f.commit();
+  const destination = '.cache/delivery-handoff/overlapping';
+  assert.throws(() => publishFinalizedDelivery(f.root, destination, outputs, {phase: 'finalize'}), /Overlapping canonical output paths/);
+  assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+  assert.equal(fs.existsSync(path.dirname(path.join(f.root, name))), false);
 });

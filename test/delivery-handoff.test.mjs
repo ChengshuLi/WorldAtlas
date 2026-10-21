@@ -897,13 +897,16 @@ for (const mixed of [false, true]) test('real finalizer supports ' + (mixed ? 'm
   assert.ok(!inputs.inputs.includes(f.incidental)); assert.ok(!inputs.inputs.some(name => name.endsWith('selected-delivery-expectations.json')));
   const selected = JSON.parse(products('ownership-selection.json')), original = {...selected}; delete original.additive_release;
   assert.equal(JSON.stringify(original), JSON.stringify(JSON.parse(f.originalSelector)));
-  assert.deepEqual(fs.readFileSync(path.join(f.root, 'data/ownership-selection.json')), f.originalSelector);
+  assert.deepEqual(fs.readFileSync(path.join(f.root, 'data/ownership-selection.json')), products('ownership-selection.json'));
+  assert.deepEqual(fs.readFileSync(path.join(f.root, '.github/package-inputs.json')), products('package-inputs.json'));
+  assert.deepEqual(fs.readFileSync(path.join(f.root, f.config.new_prefix, 'selected-delivery-expectations.json')), products('selected-delivery-expectations.json'));
   const expected = JSON.parse(products('selected-delivery-expectations.json'));
   const members = expected.cohorts.flatMap(cohort => cohort.members);
   assert.equal(members.find(row => row.component_id === 'source-target:fixture').native_rows_sha256, digest(jsonBytes([{y: 2, runs: [[2, 4, 1]]}])));
   assert.equal(expected.cumulative_native_cells, mixed ? 3 : 2);
   if (mixed) assert.ok(members.find(row => row.component_id === 'legacy:fixture').geometry_sha256);
   const resumed = f.run('finalize', first, ['--resume']); assert.equal(resumed.status, 0, resumed.stderr); assert.equal(JSON.parse(resumed.stdout).resumed, true);
+  f.commitAll(); // Normal committed adoption, distinct from interrupted --resume.
   const repeated = f.run('finalize', second); assert.equal(repeated.status, 0, repeated.stderr);
   for (const name of ['ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json'])
     assert.deepEqual(fs.readFileSync(path.join(f.root, second, name)), products(name));
@@ -1124,7 +1127,12 @@ for (const mixed of [false, true]) test('late compose and finalize replace moder
   assert.equal(JSON.parse(read('selected-delivery-expectations.json')).cumulative_native_cells, mixed ? 5 : 4);
   const roles = JSON.parse(read('package-roles.json')).paths.find(p => p.path === finalConfig.sidecar_output);
   assert.ok(!Object.hasOwn(roles, 'commit')); assert.deepEqual(roles.roles, ['generated final sidecar']);
-  f.save(finalConfig.sidecar_output, sidecarRaw); f.commitAll();
+  assert.deepEqual(fs.readFileSync(path.join(f.root, finalConfig.sidecar_output)), sidecarRaw);
+  assert.deepEqual(fs.readFileSync(path.join(f.root, 'data/ownership-selection.json')), read('ownership-selection.json'));
+  assert.deepEqual(fs.readFileSync(path.join(f.root, '.github/package-inputs.json')), read('package-inputs.json'));
+  for (const pin of [sidecar.authority_registry, sidecar.runtime_envelope, ...Object.values(sidecar.logical_asset_map)])
+    assert.deepEqual(fs.readFileSync(path.join(f.root, pin.path)), f.r.read(pin));
+  f.commitAll();
   const resumed = f.run('finalize', destination, ['--resume'], finalConfig); assert.equal(resumed.status, 0, resumed.stderr);
   const repeated = f.run('finalize', '.cache/delivery-handoff/final-again', [], finalConfig); assert.equal(repeated.status, 0, repeated.stderr);
   for (const name of ['selection-sidecar.json', 'ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json'])

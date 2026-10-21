@@ -11,8 +11,8 @@ import {fileURLToPath} from 'node:url';
 import {gunzipSync} from 'node:zlib';
 import {locate, deliveryAcquisitionExecute} from './delivery-handoff-advance.mjs';
 import {createAcquisition, githubTree, githubCommit} from './geography-prefetch.mjs';
-import {acquireFinalizationCheckpoint, finalizationCheckpointBytes, admitCanonicalCheckpoint} from './delivery-checkpoint-finalization.mjs';
-import {releaseAcceptedCheckpoint} from './accepted-selected-checkpoint.mjs';
+import {acquireFinalizationCheckpoint, finalizationCheckpointBytes, admitCanonicalOutputs} from './delivery-checkpoint-finalization.mjs';
+import {releaseAcceptedCheckpoint, ACCEPTED_CHECKPOINT_LOCATOR} from './accepted-selected-checkpoint.mjs';
 import {repairComponentKey, compareRepairComponents} from '../src/native-grid.js';
 import {scientificNativeSelection,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
 import {prepareReferenceMetadataProjection,validateReferenceMetadataProjection} from './selected-reference-metadata.mjs';
@@ -1046,6 +1046,8 @@ export function resolveFinalizeConfig(config, reader) {
     ledger: selected, selected_ledger: selected, patch: sibling('patch.json'), runtime_envelope: sibling('runtime-envelope.json')};
 }
 
+const finalizedAdoptions = new WeakMap();
+
 export function finalizeDelivery(config, reader, {acceptedCheckpoint} = {}) {
   const checkpoint = finalizationCheckpointBytes(config, reader, acceptedCheckpoint);
   config = resolveFinalizeConfig(config, reader);
@@ -1215,14 +1217,65 @@ export function finalizeDelivery(config, reader, {acceptedCheckpoint} = {}) {
       component_ids: c.component_ids, members: c.members.map(m => ({component_id: m.component_id, target_id: m.target_id,
         disposition: m.disposition, ...(Object.hasOwn(m, 'native_rows_sha256')
           ? {native_rows_sha256: m.native_rows_sha256} : {geometry_sha256: m.geometry_sha256})}))}))};
-  return {...outputs, ...(checkpoint ? {'selected-checkpoint.json': checkpoint} : {}),
+  const result = {...outputs, ...(checkpoint ? {'selected-checkpoint.json': checkpoint} : {}),
     'ownership-selection.json': selector, 'package-inputs.json': orderedBytes(packageInputs),
     'selected-delivery-expectations.json': orderedBytes(expectations)};
+  // Derive application from the admitted current consumers, not the complete
+  // historical read inventory or a second author-maintained copy list.
+  const adoption = new Map();
+  const add = (name, bytes, previous, kind, pin) => {
+    need(safe(name) && Buffer.isBuffer(bytes), 'Exact canonical finalization body required');
+    const expected = pin ? {bytes: pin.bytes, sha256: pin.sha256} : visitProduct(bytes), old = adoption.get(name);
+    need(!old || same(old.expected, expected) && old.kind === kind, 'Conflicting canonical finalization roles: ' + name);
+    if (!old) adoption.set(name, {path: name, bytes, expected,
+      previous: previous === undefined ? undefined : previous === bytes ? expected : visitProduct(previous), kind});
+  };
+  for (const pin of [config.registry, sidecar.runtime_envelope, ...Object.values(assets),
+    ...(references.projectionPin ? [references.projectionPin] : []),
+    ...projection.paths.filter(pin => matched.has(pin.path)), ...(!generatedSidecar ? [config.sidecar] : [])]) {
+    const bytes = reader.read(pin);
+    add(pin.path, bytes, bytes, 'input', pin);
+  }
+  if (generatedSidecar) add(config.sidecar.path, generatedSidecar, undefined, 'generated');
+  add(config.new_prefix + 'selected-delivery-expectations.json', result['selected-delivery-expectations.json'], undefined, 'generated');
+  if (checkpoint) {
+    const chosen = locate(reader, config.accepted_checkpoint);
+    const archive = locate(reader, {commit: chosen.commit, path: JSON.parse(checkpoint).retained_artifact.path});
+    const bytes = reader.read(archive);
+    add(archive.path, bytes, bytes, 'input', archive);
+    add(ACCEPTED_CHECKPOINT_LOCATOR, checkpoint,
+      reader.hasPath(config.selector.commit, ACCEPTED_CHECKPOINT_LOCATOR)
+        ? reader.read(reader.pin(config.selector.commit, ACCEPTED_CHECKPOINT_LOCATOR)) : undefined, 'canonical');
+  }
+  add(config.package_inputs.path, result['package-inputs.json'], reader.read(config.package_inputs), 'canonical');
+  add(config.selector.path, result['ownership-selection.json'], originalSelector, 'canonical');
+  finalizedAdoptions.set(result, {reader, adoption: [...adoption.values()],
+    selector: {...config.selector}, package_inputs: {...config.package_inputs},
+    outputs: Object.fromEntries(Object.entries(result).map(([name, bytes]) => [name, visitProduct(bytes)]))});
+  return result;
 }
 
-export function publishFinalizedDelivery(root, destination, outputs, binding, reader, selector, resume = false) {
-  const adopt = admitCanonicalCheckpoint(root, reader, selector, outputs['selected-checkpoint.json'], resume);
-  const publication = publish(root, destination, outputs, binding, resume);
+export function publishFinalizedDelivery(root, destination, outputs, binding, resume = false) {
+  const plan = finalizedAdoptions.get(outputs);
+  need(plan && same(Object.keys(outputs).sort(), Object.keys(plan.outputs).sort())
+    && Object.entries(outputs).every(([name, bytes]) => same(visitProduct(bytes), plan.outputs[name])),
+    'Authenticated complete finalization outputs required');
+  const reader = plan.reader, head = reader.git('rev-parse', 'HEAD').toString().trim();
+  const rows = plan.adoption.map(row => {
+    const current = reader.hasPath(head, row.path) ? visitProduct(reader.read(reader.pin(head, row.path))) : undefined;
+    need(row.kind === 'canonical'
+      ? same(current, row.previous) || same(current, row.expected)
+      : current === undefined || same(current, row.expected),
+    'Committed canonical baseline differs from finalization: ' + row.path);
+    return {...row, previous: current ?? row.previous, allowMissing: row.kind === 'input'};
+  });
+  need(rows.every(row => row.path !== destination && !row.path.startsWith(destination + '/')
+    && !destination.startsWith(row.path + '/')),
+    'Staging destination overlaps canonical finalization outputs');
+  const adopt = admitCanonicalOutputs(root, rows, resume);
+  const publication = publish(root, destination, outputs,
+    {...binding, selector: plan.selector, package_inputs: plan.package_inputs}, resume);
+  need(reader.git('rev-parse', 'HEAD').toString().trim() === head, 'Finalization HEAD changed before adoption');
   adopt();
   return publication;
 }
@@ -1792,7 +1845,7 @@ async function main(args) {
     const handle = await acquireFinalizationCheckpoint(config, reader, {token});
     try { outputs = finalizeDelivery(config, reader, {acceptedCheckpoint: handle}); }
     finally { if (handle) releaseAcceptedCheckpoint(handle); }
-    const publication = publishFinalizedDelivery(root, destination, outputs, binding, reader, config.selector, flags.includes('--resume'));
+    const publication = publishFinalizedDelivery(root, destination, outputs, binding, flags.includes('--resume'));
     console.log(JSON.stringify(publication)); return;
   }
   console.log(JSON.stringify({...publishOwnedProducts(root, destination, outputs, binding, flags.includes('--resume')), ...(observation ? {observation} : {})}));
