@@ -1,0 +1,5 @@
+# NRU exact 12-key stock source evidence
+
+This is a separate 12-key evidence version for the existing candidate native patch. It retains all three source target identities (Anabar, Ewa, Aiwo) and pins the same exact 12-key owner-level `mapped_land_support` mask in each sibling target's `coverage_rows`, as required by the stock validator for targets sharing native owner 7127. The repeated rows assert only the retained physical class for each requested owner key; they do not assert that each source feature independently contains every key.
+
+The original 13-key census and full-source evidence remain unchanged. The full-source miss at Aiwo `(131469,252633)` remains held and is excluded from this 12-key patch. The package denominator remains 13 cells / 11 original intervals. The retained-corpus candidate census is limited to 368 retained families and 73,567 features; it is not a statement about all real-world claims. Source applicability, physical interpretation beyond the retained mask, and acceptance remain unresolved.

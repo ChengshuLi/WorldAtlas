@@ -1,0 +1,452 @@
+{
+  "version": 1,
+  "kind": "nauru-retained-source-candidate-exclusion-census-v1",
+  "status": "bounded retained-corpus candidate screen; not a real-world claim inventory or accepted authority finding",
+  "scope": {
+    "package_id": "gb-NRU-ADM1--repair-evaluation",
+    "original_cells": 13,
+    "original_intervals": 11,
+    "owner": 7127,
+    "full_and_simplified_match_cells": 12,
+    "simplified_only_full_source_miss": 1,
+    "held_key": {
+      "y": 131469,
+      "x": 252633,
+      "source_id": "gb:NRU:ADM1:42797286B70192209207598",
+      "name": "Aiwo"
+    }
+  },
+  "retained_index_build": {
+    "build_commit": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+    "products_processed": 368,
+    "catalogue_families": 368,
+    "families_with_candidate_cells": 368,
+    "features_processed": 73567,
+    "roster_rows": 73567,
+    "catalogue_feature_count_sum": 73567,
+    "source_features_excluded": [],
+    "roster_to_catalogue_feature_counts_match": true,
+    "scope_limit": "Exhaustive only for the pinned 368-family/73,567-feature retained corpus and source-candidate index build; no claim about external or real-world claims, later releases, or legal applicability."
+  },
+  "input_pins": [
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+      "bytes": 1754890,
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8"
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "blob_oid": "fa1e4d101edb54b02bd1ff42a240f2f80ac65832",
+      "bytes": 120963,
+      "sha256": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d"
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-raster-summary.json",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "blob_oid": "e17b10b5643c1f6b0c492d02edc70a0d7afc5ee3",
+      "bytes": 110705,
+      "sha256": "2eec390eb9f9b6595bd0f3c7059b75f271dba013fbad0b3ac0c404114d48eea9"
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "bytes": 1844315,
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa",
+      "decoded_bytes": 13496995,
+      "decoded_sha256": "7fa99cbf064121e0130b66758c212ae22b2a7be5649f2e250e9cda89a9bd595e"
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-032.json.gz",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "blob_oid": "5c56cb06a4879060a4ad933395cd643cdaaa5565",
+      "bytes": 800317,
+      "sha256": "00a677c75540d3be3a750e7f41d2d296f05dc24b84cec9d3776713986a7f6064",
+      "decoded_bytes": 5600583,
+      "decoded_sha256": "f86385a134758b6df4f13ad07ba81a2c545547a9068c5ad66fdffd0f8ece6aa9"
+    }
+  ],
+  "method": "Expanded the 13 original (y,x) keys from the pinned original interval table; for each key read the exact source-candidates-block-032 run and resolved its 1-based source index through the pinned full feature roster. Compared candidate ID with the retained full/simplified point-contact result. The block contains all candidate source IDs for that native key under the retained build; no new geometry was computed.",
+  "summary": {
+    "requested_keys": 13,
+    "unique_candidate_keys": 13,
+    "keys_with_exactly_one_retained_candidate": 13,
+    "keys_with_multiple_retained_candidates": 0,
+    "shared_full_and_simplified": 12,
+    "simplified_only_full_source_miss": 1,
+    "non_nru_candidates_across_request": 0,
+    "nru_candidates_across_request": 13,
+    "distinct_nru_candidate_features": 3,
+    "external_families_in_retained_catalogue": 367,
+    "external_features_in_retained_catalogue": 73553
+  },
+  "records": [
+    {
+      "key": {
+        "y": 131450,
+        "x": 252650,
+        "owner": 7127
+      },
+      "original_source_id": "gb:NRU:ADM1:42797286B43186886097675",
+      "source_index": 48489,
+      "source_name": "Ewa",
+      "family_index": 248,
+      "candidate_owners": [
+        7127
+      ],
+      "candidate_geometry_status": "raw-native-supported",
+      "full_representation_hit": true,
+      "simplified_representation_hit": true,
+      "physical_class": "land",
+      "retained_index_candidates": [
+        {
+          "source_id": "gb:NRU:ADM1:42797286B43186886097675",
+          "source_index": 48489,
+          "name": "Ewa"
+        }
+      ],
+      "non_nru_candidates": [],
+      "classification": "shared-full-and-simplified"
+    },
+    {
+      "key": {
+        "y": 131450,
+        "x": 252651,
+        "owner": 7127
+      },
+      "original_source_id": "gb:NRU:ADM1:42797286B43186886097675",
+      "source_index": 48489,
+      "source_name": "Ewa",
+      "family_index": 248,
+      "candidate_owners": [
+        7127
+      ],
+      "candidate_geometry_status": "raw-native-supported",
+      "full_representation_hit": true,
+      "simplified_representation_hit": true,
+      "physical_class": "land",
+      "retained_index_candidates": [
+        {
+          "source_id": "gb:NRU:ADM1:42797286B43186886097675",
+          "source_index": 48489,
+          "name": "Ewa"
+        }
+      ],
+      "non_nru_candidates": [],
+      "classification": "shared-full-and-simplified"
+    },
+    {
+      "key": {
+        "y": 131450,
+        "x": 252652,
+        "owner": 7127
+      },
+      "original_source_id": "gb:NRU:ADM1:42797286B43186886097675",
+      "source_index": 48489,
+      "source_name": "Ewa",
+      "family_index": 248,
+      "candidate_owners": [
+        7127
+      ],
+      "candidate_geometry_status": "raw-native-supported",
+      "full_representation_hit": true,
+      "simplified_representation_hit": true,
+      "physical_class": "land",
+      "retained_index_candidates": [
+        {
+          "source_id": "gb:NRU:ADM1:42797286B43186886097675",
+          "source_index": 48489,
+          "name": "Ewa"
+        }
+      ],
+      "non_nru_candidates": [],
+      "classification": "shared-full-and-simplified"
+    },
+    {
+      "key": {
+        "y": 131450,
+        "x": 252661,
+        "owner": 7127
+      },
+      "original_source_id": "gb:NRU:ADM1:42797286B10235022797721",
+      "source_index": 48487,
+      "source_name": "Anabar",
+      "family_index": 248,
+      "candidate_owners": [
+        7127
+      ],
+      "candidate_geometry_status": "raw-native-supported",
+      "full_representation_hit": true,
+      "simplified_representation_hit": true,
+      "physical_class": "land",
+      "retained_index_candidates": [
+        {
+          "source_id": "gb:NRU:ADM1:42797286B10235022797721",
+          "source_index": 48487,
+          "name": "Anabar"
+        }
+      ],
+      "non_nru_candidates": [],
+      "classification": "shared-full-and-simplified"
+    },
+    {
+      "key": {
+        "y": 131451,
+        "x": 252649,
+        "owner": 7127
+      },
+      "original_source_id": "gb:NRU:ADM1:42797286B43186886097675",
+      "source_index": 48489,
+      "source_name": "Ewa",
+      "family_index": 248,
+      "candidate_owners": [
+        7127
+      ],
+      "candidate_geometry_status": "raw-native-supported",
+      "full_representation_hit": true,
+      "simplified_representation_hit": true,
+      "physical_class": "land",
+      "retained_index_candidates": [
+        {
+          "source_id": "gb:NRU:ADM1:42797286B43186886097675",
+          "source_index": 48489,
+          "name": "Ewa"
+        }
+      ],
+      "non_nru_candidates": [],
+      "classification": "shared-full-and-simplified"
+    },
+    {
+      "key": {
+        "y": 131451,
+        "x": 252662,
+        "owner": 7127
+      },
+      "original_source_id": "gb:NRU:ADM1:42797286B10235022797721",
+      "source_index": 48487,
+      "source_name": "Anabar",
+      "family_index": 248,
+      "candidate_owners": [
+        7127
+      ],
+      "candidate_geometry_status": "raw-native-supported",
+      "full_representation_hit": true,
+      "simplified_representation_hit": true,
+      "physical_class": "land",
+      "retained_index_candidates": [
+        {
+          "source_id": "gb:NRU:ADM1:42797286B10235022797721",
+          "source_index": 48487,
+          "name": "Anabar"
+        }
+      ],
+      "non_nru_candidates": [],
+      "classification": "shared-full-and-simplified"
+    },
+    {
+      "key": {
+        "y": 131452,
+        "x": 252664,
+        "owner": 7127
+      },
+      "original_source_id": "gb:NRU:ADM1:42797286B10235022797721",
+      "source_index": 48487,
+      "source_name": "Anabar",
+      "family_index": 248,
+      "candidate_owners": [
+        7127
+      ],
+      "candidate_geometry_status": "raw-native-supported",
+      "full_representation_hit": true,
+      "simplified_representation_hit": true,
+      "physical_class": "land",
+      "retained_index_candidates": [
+        {
+          "source_id": "gb:NRU:ADM1:42797286B10235022797721",
+          "source_index": 48487,
+          "name": "Anabar"
+        }
+      ],
+      "non_nru_candidates": [],
+      "classification": "shared-full-and-simplified"
+    },
+    {
+      "key": {
+        "y": 131453,
+        "x": 252665,
+        "owner": 7127
+      },
+      "original_source_id": "gb:NRU:ADM1:42797286B10235022797721",
+      "source_index": 48487,
+      "source_name": "Anabar",
+      "family_index": 248,
+      "candidate_owners": [
+        7127
+      ],
+      "candidate_geometry_status": "raw-native-supported",
+      "full_representation_hit": true,
+      "simplified_representation_hit": true,
+      "physical_class": "land",
+      "retained_index_candidates": [
+        {
+          "source_id": "gb:NRU:ADM1:42797286B10235022797721",
+          "source_index": 48487,
+          "name": "Anabar"
+        }
+      ],
+      "non_nru_candidates": [],
+      "classification": "shared-full-and-simplified"
+    },
+    {
+      "key": {
+        "y": 131469,
+        "x": 252633,
+        "owner": 7127
+      },
+      "original_source_id": "gb:NRU:ADM1:42797286B70192209207598",
+      "source_index": 48494,
+      "source_name": "Aiwo",
+      "family_index": 248,
+      "candidate_owners": [
+        7127
+      ],
+      "candidate_geometry_status": "raw-native-supported",
+      "full_representation_hit": false,
+      "simplified_representation_hit": true,
+      "physical_class": "land",
+      "retained_index_candidates": [
+        {
+          "source_id": "gb:NRU:ADM1:42797286B70192209207598",
+          "source_index": 48494,
+          "name": "Aiwo"
+        }
+      ],
+      "non_nru_candidates": [],
+      "classification": "simplified-only-full-source-miss"
+    },
+    {
+      "key": {
+        "y": 131470,
+        "x": 252633,
+        "owner": 7127
+      },
+      "original_source_id": "gb:NRU:ADM1:42797286B70192209207598",
+      "source_index": 48494,
+      "source_name": "Aiwo",
+      "family_index": 248,
+      "candidate_owners": [
+        7127
+      ],
+      "candidate_geometry_status": "raw-native-supported",
+      "full_representation_hit": true,
+      "simplified_representation_hit": true,
+      "physical_class": "land",
+      "retained_index_candidates": [
+        {
+          "source_id": "gb:NRU:ADM1:42797286B70192209207598",
+          "source_index": 48494,
+          "name": "Aiwo"
+        }
+      ],
+      "non_nru_candidates": [],
+      "classification": "shared-full-and-simplified"
+    },
+    {
+      "key": {
+        "y": 131471,
+        "x": 252633,
+        "owner": 7127
+      },
+      "original_source_id": "gb:NRU:ADM1:42797286B70192209207598",
+      "source_index": 48494,
+      "source_name": "Aiwo",
+      "family_index": 248,
+      "candidate_owners": [
+        7127
+      ],
+      "candidate_geometry_status": "raw-native-supported",
+      "full_representation_hit": true,
+      "simplified_representation_hit": true,
+      "physical_class": "land",
+      "retained_index_candidates": [
+        {
+          "source_id": "gb:NRU:ADM1:42797286B70192209207598",
+          "source_index": 48494,
+          "name": "Aiwo"
+        }
+      ],
+      "non_nru_candidates": [],
+      "classification": "shared-full-and-simplified"
+    },
+    {
+      "key": {
+        "y": 131472,
+        "x": 252633,
+        "owner": 7127
+      },
+      "original_source_id": "gb:NRU:ADM1:42797286B70192209207598",
+      "source_index": 48494,
+      "source_name": "Aiwo",
+      "family_index": 248,
+      "candidate_owners": [
+        7127
+      ],
+      "candidate_geometry_status": "raw-native-supported",
+      "full_representation_hit": true,
+      "simplified_representation_hit": true,
+      "physical_class": "land",
+      "retained_index_candidates": [
+        {
+          "source_id": "gb:NRU:ADM1:42797286B70192209207598",
+          "source_index": 48494,
+          "name": "Aiwo"
+        }
+      ],
+      "non_nru_candidates": [],
+      "classification": "shared-full-and-simplified"
+    },
+    {
+      "key": {
+        "y": 131473,
+        "x": 252633,
+        "owner": 7127
+      },
+      "original_source_id": "gb:NRU:ADM1:42797286B70192209207598",
+      "source_index": 48494,
+      "source_name": "Aiwo",
+      "family_index": 248,
+      "candidate_owners": [
+        7127
+      ],
+      "candidate_geometry_status": "raw-native-supported",
+      "full_representation_hit": true,
+      "simplified_representation_hit": true,
+      "physical_class": "land",
+      "retained_index_candidates": [
+        {
+          "source_id": "gb:NRU:ADM1:42797286B70192209207598",
+          "source_index": 48494,
+          "name": "Aiwo"
+        }
+      ],
+      "non_nru_candidates": [],
+      "classification": "shared-full-and-simplified"
+    }
+  ],
+  "limits": [
+    "The retained source-index build processes the complete pinned catalogue roster and reports no excluded source features; absence here means no candidate in that corpus/index, not a universal territorial or legal conclusion.",
+    "The one full-source miss at Aiwo remains held; simplified-source membership does not cure the discrepancy.",
+    "The source index verifies candidate membership under its retained source geometry/build, not contemporary source applicability, sovereign authority, or acceptance.",
+    "Physical class is separately pinned as land in the original interval/source-evidence records; whole-target Anabar/Aiwo reconstruction flags remain contextual and are not per-key exclusion findings."
+  ]
+}
