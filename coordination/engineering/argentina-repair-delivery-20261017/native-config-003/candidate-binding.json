@@ -1,0 +1,56 @@
+{
+  "kind": "arg-tdf-exact-4502-candidate-input-binding-v1",
+  "package_id": "gb-ARG-ADM2--repair-evaluation",
+  "roster": {
+    "cells": 4502,
+    "owners": {
+      "8100": 537,
+      "8196": 3965
+    },
+    "original_interval_ordinals": 1110,
+    "canonical_tuple_sha256": "5c2062714b224bd36bbdc0d7e3f0a40f04fe818b4b6d741fa8e2d9dc4017c169"
+  },
+  "strata_complement": {
+    "CHL_contact": 1,
+    "no_department_contact": 586,
+    "other_residual": 1060,
+    "held_total": 1647,
+    "credit": 0
+  },
+  "physical_center_check": {
+    "mapped_land_support": {
+      "mapped_land_support": 4502
+    },
+    "contradictory_issue_center_hits": 0,
+    "whole_target_issue_preserved": true,
+    "whole_cell_qualification": false
+  },
+  "input_pins": {
+    "exact_residual_and_research_strata": {
+      "bytes": 4576532,
+      "sha256": "80356b29795e1b472783510c56690320ea5895e2cc553e622d54d33772dbefd9"
+    },
+    "official_key_comparison": {
+      "bytes": 7384082,
+      "sha256": "5ac7b943cfa36ee281811a3e8c3568942128d33483b1fdd552f0122902f1de01"
+    },
+    "original_intervals_gzip": {
+      "bytes": 60456,
+      "sha256": "138a1491d050ced863ade71a76a9bc1a972abc2bd3fbb6ce8de59f501495e44e"
+    },
+    "physical_whole_target_support": {
+      "bytes": 6883540,
+      "sha256": "5465e326f125749494f4cf4c15dab8fce955f3513e551019d6af34934d901565"
+    },
+    "original_stage_inputs": {
+      "bytes": 2527236,
+      "sha256": "519e6819225a74c62d15322a78b9911ddf27853f9b6abf352acd53809e081066"
+    },
+    "selector_commit": "b163f0c1a496dd8a341d646458e5f8ecac076e12"
+  },
+  "limits": [
+    "Candidate input only; no credit, accepted repair, present-day authority, or whole-cell claim.",
+    "The 1 CHL-contact key, 586 no-department-contact keys, and 1,060 other residual keys remain outside this candidate.",
+    "The original target-level contradictory land/water issue geometries are retained; the center join only found 4,502 land-support hits and no issue-line hits."
+  ]
+}
