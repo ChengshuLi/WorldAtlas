@@ -297,9 +297,20 @@ With explicit user authorization to delete an exact retired checkout, an operato
 
 Release preserves the current commit at a local `refs/worldatlas-local-recovery/`
 ref, then asks Git to remove the exact owned worktree without `--force`. Branches
-and the shared Git store remain. It rejects uncommitted, untracked **and ignored**
-files, plus index trust flags that can hide edits (`assume-unchanged` or materialized `skip-worktree`): first commit/push necessary evidence, preserve unique scratch outputs, and
+and the shared Git store remain. It rejects uncommitted, untracked and unrecognized
+ignored files, plus index trust flags that can hide edits (`assume-unchanged` or materialized `skip-worktree`): first commit/push necessary evidence, preserve unique scratch outputs, and
 remove only verified regenerable artifacts. A review checkout must be clean too.
+After the last SQL parity/static-history consumer, the same release can remove
+`.cache/package-atlas.sqlite` and `.cache/package-input-build.json` with the
+checkout when they are the only remaining ignored files. It binds the successful
+build receipt to the clean producer HEAD, committed input definition, exact DB
+byte count and whole Git blob OID. The release result retains that descriptor and
+the receipt hash; it does not archive another SQLite copy. An edited DB, missing
+or stale receipt, WAL/SHM, symlink or any other ignored file still refuses before
+removal. Keep unknown local databases and historical evidence under the existing
+preservation rules. This local receipt check establishes unchanged generated
+output, not an authenticated receipt from an untrusted actor.
+
 Release does not decide whether acceptance is complete or a process is finished;
 the operator must establish that before calling it. It does not delete remote refs,
 original repository evidence, other workers' work or production data.

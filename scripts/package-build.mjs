@@ -391,6 +391,18 @@ export async function runPackageBuild(kind, {root = repository, execute, preflig
     if(currentExecution)receipt.current_context_execution=currentExecution;
     if(pythonExecution)receipt.current_python_execution=pythonExecution.record;
     receipt.preflight = readiness;
+    // Only the closed file actually exported by this successful build is disposable.
+    const database = '.cache/package-atlas.sqlite';
+    if (exports.some(output => output.target === path.join(root, database))) {
+      const file = path.join(root, database), before = fsSync.lstatSync(file);
+      if (!before.isFile() || fsSync.realpathSync(file) !== file) throw Error('Generated comparison database must be ordinary');
+      // Native Git streams this binary with no filters, object write or hydration.
+      const oid = command('git', ['-C', root, '-c', 'core.bigFileThreshold=0', 'hash-object', '--no-filters', '--', database], {env: gitEnv()}).trim();
+      const after = fsSync.lstatSync(file);
+      if (!/^[a-f0-9]{40}$/.test(oid) || ['dev','ino','size','mode','mtimeMs','ctimeMs'].some(key => before[key] !== after[key]))
+        throw Error('Generated comparison database changed while hashing');
+      receipt.generated_database = {path: database, bytes: after.size, git_blob_oid: oid};
+    }
     await fs.writeFile(path.join(cache, 'package-input-build.json'), JSON.stringify(receipt, null, 2) + '\n');
     return receipt;
   } finally {
