@@ -1,0 +1,35 @@
+{
+  "scope": "Three original mapped-land Ust-Kansky/East Kazakhstan contact keys, x192315/y88189, x192316/y88189, x192318/y88190.",
+  "question": "Does the actual source-specific primary treaty evidence justify treating the retained KAZ contact as irrelevant to a RUS repair?",
+  "performed_research": [
+    "Authenticated exact original owner/contact/class tuples and retained source/physical/native evidence.",
+    "Retrieved and examined actual UN Treaty I-52717 text and map annex, resolving the official annex catalogue and full PDF after web-reader size limits.",
+    "Opened actual M-45-49 pixels, margin, printed projected-grid labels and watershed/high-point route. Replaced a coarse frame interpolation with explicit manual projected-grid fit.",
+    "Read Annex 1 route1338–1343 through Koksuyskiy ridge and named high points, joining source-specific landmarks rather than using country labels alone.",
+    "Independent reviewer inspected actual map pixels and treaty text, then computed a conditional EPSG4326-to-28415 datum cross-check using bundled PyProj3.7.2 and examined the resulting overlay."
+  ],
+  "finding": "Both the recorded grid-fit placement and independent conditional datum alternative leave the three centers over or within broad red watershed-border ink. The inspected treaty text identifies the ridge route but does not separate these centers from the printed stroke. This does not demonstrate that the original KAZ contact is irrelevant, nor prove a present-day jurisdiction.",
+  "why_researched_unresolved": "Substantial source-specific retrieval, actual primary text/pixel examination, projected controls and independent datum sensitivity did not resolve the original competing-source contact. No concrete further public coordinate operand was located in the examined treaty/annex routes. The finite limitation is stroke width, map generalization, manual fit and conditional datum at1:100,000, not simply absence of a universal authority certificate. A new exact boundary/coordinate witness could justify further investigation; none is invented.",
+  "limits": [
+    "Map represented1942 coordinate system, edition2004, terrain1979, scale1:100,000. EPSG28415 realization and selected operation are conditional.",
+    "Grid residuals are in-sample descriptive residuals, not held-out accuracy, survey uncertainty or proof of map accuracy. The provider operation accuracy is not a qualification threshold.",
+    "No stable side assignment, sovereignty/legal determination, positive repair, negative-contact removal, native hold removal or whole-package completion is claimed.",
+    "The two accepted M44-3 keys and all other RUS outcomes remain unchanged. Root alone owns acceptance/accounting."
+  ],
+  "effects": {
+    "proposed_researched_unresolved": 3,
+    "positive_repairs": 0,
+    "holds_removed": 0,
+    "whole_package_completion": false
+  },
+  "scientific_execution_reuse": {
+    "physical_commit": "d41ba96f505fe507773cb1a23aab558941ee5a9c",
+    "physical_path": "coordination/engineering/russia-repair-delivery-20261017/physical-001/whole-target-support.json",
+    "physical_blob": "68cdef5a025eb092990571c2181c736ae76e4eec",
+    "physical_sha256": "38c8d148dbc33bab7fc94e2c7931b9a2ca757ff04d90191f08fa2506a6fc1a8c",
+    "native_commit": "c6720857e7ad3530ca44a542d96ea9edb9eca77b",
+    "native_path": "coordination/engineering/rus-context-qualified-repair-20261021/native-diagnostic-002/native-diagnostic.json",
+    "native_sha256": "72d66e29049391e01c06a31a3460efa5d581c16975e2daaa7cf54cf57da9683c",
+    "truth": "Literal historical execution. Current code has not rerun unchanged scientific operands; new bounded map comparison is separately described."
+  }
+}
