@@ -1,0 +1,9 @@
+# Four exact RUS Ukraine-contact source interpretations
+
+This continues four of the sixteen pending original Ukraine contacts: three Klimovsky/Chernihiv keys and one Sudzhansky/Sumy key. All four are originally mapped land. The original RUS denominator remains 2,566,967; this is no whole-package completion or sovereignty determination.
+
+The consumed simplified Ukrainian feature covers each center, but its authenticated archived full feature excludes it and the archived Russian target contains it. Bounded replay establishes center-span membership, not a footprint explanation. Original source years, later processing dates, ODbL terms and incomplete archive-to-OSM-version linkage remain explicit. Treaty-map placements and unresolved datum/control limits are adverse context, not an automatic veto or clearance threshold. See the exact per-key decision and retained research.
+
+The author will run the ordinary native diagnostic on the authenticated historical 9,451 residual request using its existing successful 66-target projection and all 93 associated negatives. All 334 original targets and 230 negative bindings remain in immutable archival source evidence. Only the contextual applicability pin changes from that projection; no physical producer or owner observation is repeated. Any supported-input and constructor result will be recorded literally. Previously accepted results remain cumulative selections; held output from this diagnostic does not revoke or recount them.
+
+The one-key preparation manifest incorrectly paired the full original native request path with the residual request hash. This was detected before execution, and both actual bindings are recorded. No failed assertion is described as a scientific result. Actual result and delivery details will follow, with one independent exact-head review and root accounting kept separate.
