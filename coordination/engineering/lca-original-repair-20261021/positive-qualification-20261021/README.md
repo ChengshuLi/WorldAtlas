@@ -1,0 +1,9 @@
+# LCA positive qualification attempt (local evidence)
+
+This packet reuses the existing current-owner observation and the retained 2015 CC0 geoBoundaries ADM1 source. Scope remains 360 land cells in 165 original intervals, owner 7120. A separate local screen matched 326 original land keys against the high-precision DoPDUR representation and 324 against the rounded EPSG:4326 response. The two projected-only keys are (120729, 86724) Gros Islet and (120852, 86741) Dennery. The other 34 projected mismatches remain held. These are source-comparison strata, not legal-applicability or acceptance determinations.
+
+`physical-inputs.json` preserves the exact ten consumed source geometries from the historical whole-target run and appends the current canonical `atlas:territory:LCA` geometry as an explicit downstream identity binding. `physical-evidence.json` is the unchanged whole-target report; `physical-run-bindings.json` records the exact producer, adapter, comparison module, inputs, output, runtime and limits. The whole-target report found five targets with reconstruction issues but no candidate center in those whole-target residuals. That is not a per-cell physical qualification.
+
+The DoPDUR body is not copied into this packet. Its raw geometry remains task-local because the retained response does not establish redistribution terms. Its 326/324 comparison is corroborative only.
+
+The GSHHG-derived physical report and output geometry are retained in this local branch for the stock diagnostic. The original license metadata says redistributable but preserves a conflict between the original LICENSE and README LGPL versions. This branch has not been pushed; do not publish GSHHG-derived geometry until those exact terms are resolved. No accepted ownership changes or credit are asserted.
