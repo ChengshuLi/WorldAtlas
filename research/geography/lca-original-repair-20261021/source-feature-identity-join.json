@@ -1,0 +1,200 @@
+{
+  "kind": "retained_source_feature_identity_join",
+  "version": 1,
+  "status": "identity_and_catalogue_provenance_only",
+  "package_id": "gb-LCA-ADM1--repair-evaluation",
+  "scope": {
+    "cell_count": 360,
+    "interval_count": 165,
+    "queue_block": 29,
+    "owner_index": 7120,
+    "candidate_feature_indices": [
+      41674,
+      41675,
+      41676,
+      41677,
+      41678,
+      41679,
+      41680,
+      41681,
+      41682,
+      41683
+    ]
+  },
+  "join_key": "proposal-packet.json rows[].source_candidate_feature_indices → features[].source_index",
+  "features": [
+    {
+      "source_index": 41674,
+      "family_index": 192,
+      "source_id": "gb:LCA:ADM1:63095687B63570319440385",
+      "ordinal": 0,
+      "owners": [
+        7120
+      ],
+      "name": "Vieux Fort",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 41675,
+      "family_index": 192,
+      "source_id": "gb:LCA:ADM1:63095687B3915284984293",
+      "ordinal": 1,
+      "owners": [
+        7120
+      ],
+      "name": "Anse la Raya",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 41676,
+      "family_index": 192,
+      "source_id": "gb:LCA:ADM1:63095687B33875357323526",
+      "ordinal": 2,
+      "owners": [
+        7120
+      ],
+      "name": "Castries",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 41677,
+      "family_index": 192,
+      "source_id": "gb:LCA:ADM1:63095687B77911403325027",
+      "ordinal": 3,
+      "owners": [
+        7120
+      ],
+      "name": "Gros Islet",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 41678,
+      "family_index": 192,
+      "source_id": "gb:LCA:ADM1:63095687B97045845903589",
+      "ordinal": 4,
+      "owners": [
+        7120
+      ],
+      "name": "Dennery",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 41679,
+      "family_index": 192,
+      "source_id": "gb:LCA:ADM1:63095687B12253142447206",
+      "ordinal": 5,
+      "owners": [
+        7120
+      ],
+      "name": "Micoud",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 41680,
+      "family_index": 192,
+      "source_id": "gb:LCA:ADM1:63095687B32971577162412",
+      "ordinal": 6,
+      "owners": [
+        7120
+      ],
+      "name": "Soufrière",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 41681,
+      "family_index": 192,
+      "source_id": "gb:LCA:ADM1:63095687B49372508754012",
+      "ordinal": 7,
+      "owners": [
+        7120
+      ],
+      "name": "Choiseul",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 41682,
+      "family_index": 192,
+      "source_id": "gb:LCA:ADM1:63095687B42817258586373",
+      "ordinal": 8,
+      "owners": [
+        7120
+      ],
+      "name": "Laborie",
+      "geometry_status": "raw-native-supported"
+    },
+    {
+      "source_index": 41683,
+      "family_index": 192,
+      "source_id": "gb:LCA:ADM1:63095687B90177859016877",
+      "ordinal": 9,
+      "owners": [
+        7120
+      ],
+      "name": "Canaries",
+      "geometry_status": "raw-native-supported"
+    }
+  ],
+  "inputs": [
+    {
+      "role": "source feature identity roster",
+      "commit": "867740323969355fb3691f0130120fd99e7a7426",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "bytes": 1844315,
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa"
+    },
+    {
+      "role": "source lineage",
+      "commit": "867740323969355fb3691f0130120fd99e7a7426",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+      "git_blob_oid": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+      "bytes": 4404456,
+      "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4"
+    },
+    {
+      "role": "retained source catalogue",
+      "commit": "867740323969355fb3691f0130120fd99e7a7426",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    {
+      "role": "per-key source-candidate references",
+      "commit": "867740323969355fb3691f0130120fd99e7a7426",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-029.json.gz",
+      "git_blob_oid": "3fc846f1a3a57841d82c695b97ad31b93af681e6",
+      "sha256": "7775f315311056808bfead2394034459a83a3590a201fe0deedb66fea1866528"
+    }
+  ],
+  "lineage_join": {
+    "lookup": "lineage.reverse[source_id]",
+    "result_for_all_ten_ids": [
+      7120
+    ],
+    "meaning": "retained lineage owner association only; not current owner acceptance, legal authority, or source applicability"
+  },
+  "catalogue_provenance": {
+    "catalogue_record_baseline_commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+    "product_key": "gb:LCA:ADM1",
+    "advertised_feature_count": 10,
+    "feature_count": 10,
+    "original_metadata_path": "data/administrative-sources.json",
+    "metadata_sha256": "835a409e0dfa0475a66129ebad48dcf3e3fa574f2e5f1025477057d972da367f",
+    "payload_part": {
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LCA-ADM1-000.bin.gz",
+      "compressed_bytes": 14393,
+      "compressed_sha256": "a44c6ecca991d0dc7913c85dde9fc09072790df5c046c874017306c393e85140",
+      "uncompressed_bytes": 49834,
+      "uncompressed_sha256": "8d718c820ccd74baac7c892c63c7a8ebd3ace7016e0d2a5341ff306848470c0b",
+      "body_read_or_decoded": false
+    },
+    "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/LCA/ADM1/geoBoundaries-LCA-ADM1_simplified.geojson",
+    "recorded_license_label": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+    "recorded_source_represented_year_claim": "2015"
+  },
+  "processing_note": "Roster and lineage gzip bytes were read from the authorized task-owned object database, verified against the listed Git blob OIDs, sizes and SHA-256 values, then decompressed and JSON-parsed in memory. The lineage JSON contains location metadata with bounds arrays; no geometry payload was accessed, no geometry was computed or replayed, and no payload part was read or decoded.",
+  "limits": [
+    "Identity/name/ordinal and retained lineage-owner relations are record-level metadata only. They do not establish present source applicability, effective legal authority, complete competitor coverage, sovereignty, current land/water truth, or qualification. Catalogue license/year labels and hashes are recorded metadata, not legal findings."
+  ]
+}
