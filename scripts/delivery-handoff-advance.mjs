@@ -1,5 +1,5 @@
 import {gunzipSync} from 'node:zlib';
-import {ImmutableReader} from './check-effective-geographic-regression.mjs';
+import {ImmutableReader, selectInstalledGit} from './check-effective-geographic-regression.mjs';
 import {valueBytes, valueSha, readOriginalRuleAuthority, qualifyOriginalSourceAuthority, qualifyOriginalNativeAuthority, readRetainedRegistryAuthority, qualifySourceTargetNativeAuthority, qualifySourceTargetNativeAuthorityStored} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 // Immutable delivery metadata, authority constructors and exact-body acquisition.
 // Resolve actual committed outputs; never accept caller-written derived hashes.
@@ -200,7 +200,7 @@ export function deliveryAuthorityReader(root, pinReader) {
 // or persisted, and warm verification never consults account credentials.
 export function deliveryAcquisitionExecute({execute = execFileSync,
   readToken = () => execFileSync('gh', ['auth', 'token'], {encoding: 'utf8', maxBuffer: 16384, timeout: 20_000}).trim()} = {}) {
-  let token;
+  let token, selectedGit;
   return (command, args, options) => {
     if (command === 'git' && args.includes('fetch')) {
       need(args.includes('https://github.com/ChengshuLi/WorldAtlas.git'), 'Unexpected acquisition repository');
@@ -208,7 +208,12 @@ export function deliveryAcquisitionExecute({execute = execFileSync,
       const env = {...options.env, GIT_CONFIG_COUNT: '3',
         GIT_CONFIG_KEY_2: 'http.https://github.com/.extraheader',
         GIT_CONFIG_VALUE_2: 'AUTHORIZATION: basic ' + Buffer.from('x-access-token:' + token).toString('base64')};
-      return execute(command, args, {...options, env});
+      options = {...options, env};
+    }
+    if (command === 'git') {
+      selectedGit ??= selectInstalledGit();
+      command = selectedGit.gitExecutable;
+      options = {...options, env: {...options.env, GIT_EXEC_PATH: selectedGit.gitExecPath}};
     }
     return execute(command, args, options);
   };
