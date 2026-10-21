@@ -174,3 +174,5 @@ try {
   if(process.env.ATLAS_HOSTED_BUILD!=='1')for(const file of await fs.readdir('dist',{recursive:true})){const stat=await fs.stat(`dist/${file}`);if(stat.isFile()&&stat.size>25*1024*1024)throw new Error(`Static asset exceeds 25 MiB: ${file}`);}
   console.log(`Static atlas ready: ${reference.features.length} polygons and ${history.states.length} dated records.`);
 } finally { db.close(); }
+await fs.mkdir('.cache',{recursive:true});
+await fs.rename('data/atlas.sqlite','.cache/package-atlas.sqlite');
