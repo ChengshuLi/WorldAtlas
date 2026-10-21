@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
+import fs from 'node:fs';
 import {deriveSourceTargetNativeDelta,nativeRowLatitudes,nativePolygonIntervals,polygonParts} from '../src/native-grid.js';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {constructOriginalAuthority,constructOriginalAuthorityStored} from '../scripts/delivery-handoff-advance.mjs';
@@ -54,12 +55,27 @@ function constructorFixture(change=()=>{}){
     proposed:{rows:[{y:size/2,runs:[[Math.floor(size/2-.02/360*size),Math.floor(size/2-.02/360*size)+1,1]]}]},
     membership:true};
   change(state);
-  const files=new Map(),byBlob=new Map();
+  const files=new Map(),byBlob=new Map(),originFiles=new Map(),reads=[];
   const put=(name,value)=>{
     const raw=Buffer.isBuffer(value)?value:Buffer.from(JSON.stringify(value));
     const pin={commit:version,path:name,mode:'100644',git_blob_oid:blob(raw),bytes:raw.length,sha256:digest(raw)};
     files.set(name,{raw,pin});byBlob.set(pin.git_blob_oid,raw);return pin;
   };
+  // Reuse real registered certificate/review/bank bodies. Only immutable Git
+  // transport maps the selected origin to this miniature semantic-report tree.
+  let originCommit;
+  if(state.originLineage){
+    const directory='test/fixtures/artifact-authority/authority-121149/';
+    for(const p of JSON.parse(fs.readFileSync(directory+'original-inputs.json')).pins){
+      const raw=fs.readFileSync(directory+p.copy);assert.equal(digest(raw),p.sha256);put(p.path,raw);
+    }
+    const selection=JSON.parse(files.get('data/ownership-selection.json').raw);
+    const bank=JSON.parse(files.get(selection.selected_geography.path).raw);originCommit=bank.world_index.commit;
+    const raw=Buffer.from(JSON.stringify(state.originLineage));
+    const pin={commit:originCommit,path:'data/semantic-report.json',mode:'100644',git_blob_oid:blob(raw),bytes:raw.length,sha256:digest(raw)};
+    originFiles.set(pin.path,{raw,pin});byBlob.set(pin.git_blob_oid,raw);
+    state.changeAuthority?.({files,put,selection,bank,originFiles});
+  }
   const source=put('original-source.json',collection(state.originals)),roster=put('owners.json',state.roster);
   const physical=put('physical.json',state.physical),measured=put('measured.json',state.measured);
   const extraSources=(state.extraFamilies??[]).map(f=>({...f,pin:put(f.source_id+'.json',collection(f.features))}));
@@ -88,6 +104,7 @@ function constructorFixture(change=()=>{}){
       atoms:state.external.atoms??[{source_id:'TST-1',feature_ordinal:0,geometry_sha256:valueSha(state.external.features[0].geometry)}]};
     state.external.mutate?.(membership.negative_natural_earth);
   }
+  Object.assign(membership,state.membershipExtra);
   const evidence=put('source-evidence.json',{version:1,kind:'source-target-native-evidence-v1',catalogue,
     owner_roster:roster,physical_evidence:physical,physical_input:measured,physical_reproduction:put('physical.py',Buffer.from('# retained fixture')),
     native_latitudes:nativeLatitudes,native_contract:{size,native_latitudes:nativeLatitudes,original_assets:{bounds:{sha256:roster.sha256}}},
@@ -99,8 +116,9 @@ function constructorFixture(change=()=>{}){
     async *stream(name,options){yield this.read(name,options);}
     git(...args){
       if(args[0]==='ls-tree'){
-        const name=args.at(-1),entry=files.get(name);assert.ok(entry,name);
-        return Buffer.from(`100644 blob ${entry.pin.git_blob_oid}\t${name}\0`);
+        const name=args.at(-1),at=args[2],entry=(at===originCommit?originFiles:files).get(name);
+        reads.push({commit:at,path:name});if(!entry)return Buffer.alloc(0);
+        return Buffer.from(`${entry.pin.mode} blob ${entry.pin.git_blob_oid}\t${name}\0`);
       }
       if(args[0]==='cat-file'&&args[1]==='-e')return Buffer.alloc(0);
       if(args[0]==='cat-file'&&args[1]==='-s')return Buffer.from(String(byBlob.get(args[2]).length));
@@ -113,7 +131,7 @@ function constructorFixture(change=()=>{}){
   const binding={version:1,kind:'source-target-native-custody-v1',source_evidence:evidence,native_patch:patch};
   const preimage={...binding,kind:'source-target-native-rule-v1'};
   return {run:()=>constructOriginalAuthority(reader(),locators),
-    locators,preimage,binding,diagnose:()=>diagnoseSourceTargetNativeAuthority(reader(),preimage,binding),files,byBlob,membership,reader,state};
+    locators,preimage,binding,diagnose:()=>diagnoseSourceTargetNativeAuthority(reader(),preimage,binding),files,byBlob,membership,reader,state,reads,originCommit};
 }
 test('actual constructor joins original member evidence into one accepted owner ledger',()=>{
   const fixture=constructorFixture(),result=fixture.run();
@@ -451,6 +469,60 @@ for(const transitive of [false,true])test('complete '+(transitive?'transitive':'
  assert.deepEqual(diagnostic.split_source_competitors,result.split_source_competitors);
  assert.deepEqual(f.state.physical.results.map(x=>x.target),[c]);
  assert.equal(diagnostic.supported_cells,1);assert.equal(diagnostic.held_cells,0);
+});
+function anchoredCompetitorFixture(change=()=>{}){
+ return complexCompetitorFixture(state=>{
+  state.lineage.changes[2].source='https://example.org/independent-original-provider';
+  state.originLineage=structuredClone(state.lineage);change(state);
+ },true);
+}
+test('registered selected-origin lineage admits cross-provider negatives, never positive geometry',async()=>{
+ const f=anchoredCompetitorFixture(),result=f.run(),diagnostic=f.diagnose();
+ assert.equal(result.ledger_rows[0].target_id,c);assert.equal(result.ledger_rows[0].native_cells,1);
+ assert.deepEqual(result.split_source_competitors.map(x=>x.source_id),[a,b]);
+ assert.deepEqual(diagnostic.split_source_competitors,result.split_source_competitors);
+ const owned=await constructOriginalAuthorityStored(f.reader(),f.locators);
+ try{assert.deepEqual(owned.result.split_source_competitors,result.split_source_competitors);}finally{owned.close();}
+ assert.equal(f.reads.filter(x=>x.commit===f.originCommit&&x.path==='data/semantic-report.json').length,3,
+  'One origin-tree binding per evaluator, not per original atom or descendant');
+});
+for(const [name,change,pattern]of [
+ ['missing registered selection',s=>s.changeAuthority=({files})=>files.delete('data/ownership-selection.json'),/missing registered selected origin/],
+ ['missing certificate authority',s=>s.changeAuthority=({put,selection})=>{delete selection.artifact_consumption;put('data/ownership-selection.json',selection);},/missing registered selected origin/],
+ ['caller-supplied origin',s=>s.membershipExtra={origin_commit:'b'.repeat(40)},/Incomplete accepted source membership/],
+ ['candidate operation history',s=>s.membershipExtra={operation_stages:[{commit:'b'.repeat(40),path:'fabricated-stage.json'}]},/Incomplete accepted source membership/],
+ ['origin mode mismatch',s=>s.changeAuthority=({originFiles})=>{originFiles.get('data/semantic-report.json').pin.mode='100755';},/lineage differs from independently selected origin/],
+ ['unregistered review',s=>s.changeAuthority=({put,selection})=>{selection.artifact_consumption.review.sha256='0'.repeat(64);put('data/ownership-selection.json',selection);},/independently registered/],
+ ['retired review',s=>s.changeAuthority=({put,selection})=>{selection.artifact_consumption.review.sha256='79024f6fd9335b0ad9da0ed936f5eabc600188f6176d9f953ceb006946626dbd';put('data/ownership-selection.json',selection);},/Historical artifact authority/],
+ ['forged origin bank',s=>s.changeAuthority=({put,selection,bank})=>{bank.world_index.commit='b'.repeat(40);const p=put(selection.selected_geography.path,bank);selection.selected_geography.bytes=p.bytes;selection.selected_geography.sha256=p.sha256;put('data/ownership-selection.json',selection);},/Selected source\/policy/],
+ ['altered bank body',s=>s.changeAuthority=({put,selection,bank})=>{bank.world_index.commit='b'.repeat(40);put(selection.selected_geography.path,bank);},/Whole immutable input|size differs/],
+ ['missing original tree body',s=>s.changeAuthority=({originFiles})=>originFiles.clear(),/whole ordinary Git input/],
+ ['candidate-imported intermediate',s=>s.lineage.changes[2].source='https://candidate.example/fabricated',/lineage differs from independently selected origin/],
+ ['candidate-imported edge',s=>s.lineage.changes[2].replaces=[a],/lineage differs from independently selected origin/],
+ ['canonical parent mismatch',s=>s.accepted.features[0].properties.parent_id='foreign-parent',/parent or source identity/],
+ ['missing reverse member',s=>{s.lineage.changes.pop();s.originLineage=structuredClone(s.lineage);},/complex/],
+ ['missing cohort member',s=>s.cohort.rows.pop(),/cohort/],
+ ['duplicate origin intermediate',s=>{s.lineage.changes.push({...s.lineage.changes[2]});s.originLineage=structuredClone(s.lineage);},/complex/],
+])test('selected-origin negative ancestry rejects '+name+' after coherent candidate repinning',()=>{
+ const f=anchoredCompetitorFixture(change);assert.throws(()=>f.run(),pattern);assert.throws(()=>f.diagnose(),pattern);
+});
+for(const [name,geometry,reason]of [
+ ['interior',()=>rectangle(.04,.06,-.02,.02),'territorial_exclusion_cells'],
+ ['boundary',()=>rectangle(.04,.06,latitudes[size/2],.02),'boundary_cells'],
+])test('anchored cross-provider '+name+' still vetoes the complete raw original',()=>{
+ const f=anchoredCompetitorFixture(s=>{s.originals[0].geometry=geometry();});
+ assert.throws(()=>f.run(),/lack unique source-target coverage/);
+ const result=f.diagnose();assert.equal(result.supported_cells,0);assert.equal(result.held_cells,1);
+ assert.equal(result.decision_rows[0].runs[0][3],reason);
+});
+test('anchored cross-provider ancestry cannot qualify an original atom positively',()=>{
+ const f=anchoredCompetitorFixture(s=>{
+  const geometry=s.originals[0].geometry,selected=s.accepted.features[0].geometry;
+  s.targets=[{id:a,target_id:'city',pixelIndex:1,source_family:family,base_geometry:selected,coverage_classes:['mapped_land_support']}];
+  s.measured=[{target:a,consumed:{geometry},selected:{id:'city',geometry:selected}}];
+  s.physical.results=[{target:a,issues:[],support:{mapped_land_support:geometry}}];s.proposed.rows[0].runs[0][2]=1;
+ });
+ assert.throws(()=>f.run(),/ambiguous accepted source membership/);
 });
 test('one descendant with shared complete source atoms remains a negative rather than an inferred positive owner',()=>{
  const f=complexCompetitorFixture(s=>{

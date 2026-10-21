@@ -7,7 +7,7 @@ import os from 'node:os';
 import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
-import {ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias, selectedGeometrySourceAlias, selectedReferenceOwners, selectedNativeSourceMembership} from '../../../scripts/check-effective-geographic-regression.mjs';
+import {ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias, selectedGeometrySourceAlias, selectedReferenceOwners, selectedNativeSourceMembership, requireSelectedOriginLineage} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {repairComponentKey, compareRepairComponents, nativeOnlyComponent, deriveSourceTargetNativeDelta, nativePolygonIntervals, polygonParts, witnessCellEffects, validateWitnessGeometry, verifyNativeSeamView} from '../../../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 import {scientificNativeSelection} from '../../../src/reference-metadata.js';
@@ -1136,7 +1136,7 @@ function* evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnos
  // Complex accepted membership is only a negative ancestry witness. Keep the
  // flat positive reconciliation above unchanged; no descendant polygon stands
  // in for any part of the complete original source veto.
- const complexContexts=new WeakMap();
+ const complexContexts=new WeakMap();let originLineageBound=false;
  const complexSourceCompetitor = function*(id, originals) {
   if(owners.has(id)||evidence.targets.some(target=>target.id===id))return null;
   const changes=memberOwners.get(id)??[];
@@ -1214,8 +1214,9 @@ function* evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnos
      &&metadata.location_basis===change.basis&&metadata.source_url===change.source,
     'Complex source descendant parent or source identity differs');
     for(const member of members){const original=atoms(member);
-     demand([...original.sources].every(source=>source===change.source),
-      'Complex source intermediate provenance differs');}
+     if(![...original.sources].every(source=>source===change.source)&&!originLineageBound){
+      requireSelectedOriginLineage(reader,evidence.source_membership.lineage);originLineageBound=true;
+     }}
     if(metadata.original_id!==undefined)demand(members.length===1&&originals.has(members[0])
      &&metadata.original_id===originals.get(members[0]).properties?.shapeID,
     'Complex source original identity differs');
