@@ -1,0 +1,264 @@
+{
+  "title": "Bounded upstream source-artifact review for the 2015 geoBoundaries GEO ADM1 family",
+  "status": "Exact public geoBoundaries source archive acquired once from its pinned public Git LFS object and inspected. No geometry computation, point test, owner observation, or native producer was run.",
+  "frozen_scope": {
+    "held_family": "gb:GEO:ADM1",
+    "original_contact_cells": 382,
+    "source_members": [
+      {
+        "source_id": "gb:GEO:ADM1:13066534B27338241074695",
+        "name": "Abkhazia",
+        "shapeISO": "GE-AB",
+        "keys": 150
+      },
+      {
+        "source_id": "gb:GEO:ADM1:13066534B64349154399075",
+        "name": "Mtskheta-Mtianeti",
+        "shapeISO": "GE-MM",
+        "keys": 136
+      },
+      {
+        "source_id": "gb:GEO:ADM1:13066534B80116330304733",
+        "name": "Samegrelo-Zemo Svaneti",
+        "shapeISO": "GE-SZ",
+        "keys": 38
+      },
+      {
+        "source_id": "gb:GEO:ADM1:13066534B45176100929029",
+        "name": "Racha-Lechkhumi and Kvemo Svaneti",
+        "shapeISO": "GE-RL",
+        "keys": 35
+      },
+      {
+        "source_id": "gb:GEO:ADM1:13066534B18810562533194",
+        "name": "Kakheti",
+        "shapeISO": "GE-KA",
+        "keys": 23
+      }
+    ],
+    "key_source": "inventory/rus-other-contact-471-key-and-family-index.json",
+    "key_source_sha256": "b9a968677ce39d4d03f9fc0b61997d92a21d45f2b20fec7cb017510ae8d32d23"
+  },
+  "upstream_pins": {
+    "repository": "https://github.com/wmgeolab/geoBoundaries",
+    "release_commit_prefix": "9469f09",
+    "metadata_pointer_url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/GEO/ADM1/geoBoundaries-GEO-ADM1-metaData.json",
+    "metadata_lfs_oid": "sha256:95f12c3b91889ffbdd9b05d68865503d6f02639fcc8257e8fd078ddd2172cae5",
+    "metadata_bytes": 833,
+    "archive_pointer_url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/GEO/ADM1/geoBoundaries-GEO-ADM1-all.zip",
+    "archive_lfs_oid": "sha256:f77abcdc56534904af18997fa1721d79ac514642120459f40faf6bb1ae27a295",
+    "archive_bytes": 423515,
+    "archive_public_media_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/GEO/ADM1/geoBoundaries-GEO-ADM1-all.zip",
+    "archive_sha256": "f77abcdc56534904af18997fa1721d79ac514642120459f40faf6bb1ae27a295",
+    "archive_integrity": "Downloaded successfully once; byte count and SHA256 exactly matched the raw Git LFS pointer. No retry or access denial."
+  },
+  "archive_members": {
+    "member_count": 16,
+    "uncompressed_total_bytes": 913542,
+    "actual_members": [
+      "geoBoundaries-GEO-ADM1-metaData.json",
+      "geoBoundaries-GEO-ADM1-metaData.txt",
+      "CITATION-AND-USE-geoBoundaries.txt",
+      "geoBoundaries-GEO-ADM1.shp",
+      ".shx",
+      ".dbf",
+      ".prj",
+      "geoBoundaries-GEO-ADM1.topojson",
+      "geoBoundaries-GEO-ADM1.geojson",
+      "geoBoundaries-GEO-ADM1_simplified.shp",
+      "geoBoundaries-GEO-ADM1_simplified.shx",
+      "geoBoundaries-GEO-ADM1_simplified.dbf",
+      "geoBoundaries-GEO-ADM1_simplified.prj",
+      "geoBoundaries-GEO-ADM1_simplified.topojson",
+      "geoBoundaries-GEO-ADM1_simplified.geojson",
+      "geoBoundaries-GEO-ADM1-PREVIEW.png"
+    ],
+    "metadata_json": {
+      "bytes": 833,
+      "sha256": "95f12c3b91889ffbdd9b05d68865503d6f02639fcc8257e8fd078ddd2172cae5"
+    },
+    "metadata_text": {
+      "bytes": 996,
+      "sha256": "1d8e37ac03f69d6634ef1daad2e48db368aaffcc89b73a4af6632f1963cc4132"
+    },
+    "citation_text": {
+      "bytes": 4316,
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+    },
+    "full_geojson": {
+      "bytes": 396344,
+      "sha256": "d9a34f3b97c39a00bc5eb4f2e5a76c8a2aca6ca679c50d83e4536b188bf254fc"
+    },
+    "simplified_geojson": {
+      "bytes": 165715,
+      "sha256": "68b5cea2e8fec0ecf93530d0149b1c7ad923e5e942697b9eb861969f341d0be3"
+    },
+    "full_shp": {
+      "bytes": 144564,
+      "sha256": "422ecdd0834534bbbbee63f27b215d4d524b7a265501fb38e2036c317aac8497"
+    },
+    "simplified_shp": {
+      "bytes": 60292,
+      "sha256": "f571f39724ce05eae33ed76d44a4fba8dd73868edac447ad7213526dde0f9978"
+    },
+    "full_dbf": {
+      "bytes": 1022,
+      "sha256": "9f84a6951bd96157c752fa421e7259e485a430ed3f8f2f762f0217816e2f8db7"
+    },
+    "simplified_dbf": {
+      "bytes": 1022,
+      "sha256": "9f84a6951bd96157c752fa421e7259e485a430ed3f8f2f762f0217816e2f8db7"
+    }
+  },
+  "metadata_facts": {
+    "boundaryID": "GEO-ADM1-13066534",
+    "boundaryISO": "GEO",
+    "boundaryYear": "2015",
+    "boundaryType": "ADM1",
+    "boundaryCanonical": "Autonomous Republic, Region, City",
+    "admUnitCount": "12",
+    "boundarySource": "geoBoundaries, Wikimedia",
+    "boundaryLicense": "Creative Commons Attribution 3.0 License",
+    "licenseDetail": "",
+    "licenseSource": "https//commons.wikimedia.org/wiki/File",
+    "boundarySourceURL": "https//commons.wikimedia.org/wiki/File",
+    "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+    "buildDate": "Dec 12, 2023",
+    "geometry_reference": "Both full and simplified .prj members declare geographic WGS84."
+  },
+  "citation_and_terms": {
+    "product_terms": "CITATION-AND-USE-geoBoundaries.txt says geoBoundaries code and derivative works are CC BY 4.0 and require attribution; users of individual boundary files should also cite source(s) listed in per-file metadata.",
+    "source_layer_terms": "Per-file metadata states Creative Commons Attribution 3.0 License.",
+    "source_attribution_gap": "Both boundarySourceURL and licenseSource are malformed generic strings (“https//commons.wikimedia.org/wiki/File”) with no colon and no file title/identifier. The archive does not identify a specific Wikimedia file, author, map edition, or source-feature citation.",
+    "interpretation": "The geoBoundaries archive distributes coordinate-bearing 12-feature ADM1 vector data in full and simplified GeoJSON, Shapefile, and TopoJSON formats. That describes only the distributed product; it does not establish whether the underlying Wikimedia material was an official/reference dataset, an illustrative map, or another cartographic source. The source item is not identified in the per-file metadata or the bounded exact file history."
+  },
+  "feature_properties": {
+    "dbf_fields": [
+      "shapeName",
+      "shapeISO",
+      "shapeID",
+      "shapeGroup",
+      "shapeType"
+    ],
+    "feature_count": 12,
+    "contact_feature_properties": [
+      {
+        "shapeName": "Abkhazia",
+        "shapeISO": "GE-AB",
+        "shapeID": "13066534B27338241074695",
+        "shapeGroup": "GEO",
+        "shapeType": "ADM1"
+      },
+      {
+        "shapeName": "Kakheti",
+        "shapeISO": "GE-KA",
+        "shapeID": "13066534B18810562533194",
+        "shapeGroup": "GEO",
+        "shapeType": "ADM1"
+      },
+      {
+        "shapeName": "Mtskheta-Mtianeti",
+        "shapeISO": "GE-MM",
+        "shapeID": "13066534B64349154399075",
+        "shapeGroup": "GEO",
+        "shapeType": "ADM1"
+      },
+      {
+        "shapeName": "Racha-Lechkhumi and Kvemo Svaneti",
+        "shapeISO": "GE-RL",
+        "shapeID": "13066534B45176100929029",
+        "shapeGroup": "GEO",
+        "shapeType": "ADM1"
+      },
+      {
+        "shapeName": "Samegrelo-Zemo Svaneti",
+        "shapeISO": "GE-SZ",
+        "shapeID": "13066534B80116330304733",
+        "shapeGroup": "GEO",
+        "shapeType": "ADM1"
+      }
+    ],
+    "dbf_comparison": "Full and simplified DBF files are byte-identical, each 1,022 bytes with 12 rows and the five fields above. No per-feature citation, source-version, edit date, or lineage field is present."
+  },
+  "retained_product_identity": {
+    "retained_corpus_commit": "9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c",
+    "retained_corpus_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-GEO-ADM1-000.bin.gz",
+    "retained_corpus_git_blob_oid": "8dc0386c0754b09aa055d57f007808543b4c92d7",
+    "retained_corpus_gzip_sha256": "73f696e445f057f744f5d2908a5e59ec37498307aee059e970f29922069a268e",
+    "retained_decoded_bytes": 165715,
+    "retained_decoded_sha256": "68b5cea2e8fec0ecf93530d0149b1c7ad923e5e942697b9eb861969f341d0be3",
+    "identity_result": "The retained source-corpus body is byte-identical to the archive’s geoBoundaries-GEO-ADM1_simplified.geojson member, by length and SHA256. The 382 contacts arise from the 2015-represented, 2023-built simplified GeoBoundaries product, not the full member."
+  },
+  "source_applicability_assessment": {
+    "supports": "The distributed product is a coordinate-bearing named ADM1 feature collection. Its Abkhazia feature identity/ISO/ID matches the retained contact source ID; the product reports 2015 representation and a 2023 source-data update/build. These facts establish the product and its feature labeling, but do not establish the cartographic intent or authority of the upstream Wikimedia item.",
+    "does_not_establish": "The archive and bounded exact file history do not name the Wikimedia file or identify its author, edition, scale, or cartographic intent, nor explain whether the 2015 Abkhazia linework was derived from a legal boundary, a reference map, an illustrative map, or another layer. A 2023 package update is not itself proof that geometry was updated in 2023. The official Georgian statutory pages previously read establish the named entity but do not validate this polygon lineage or the 150 contact centers.",
+    "finite_remaining_question": "A specific Wikimedia file/source citation or geoBoundaries feature-level provenance statement for Abkhazia, sufficient to connect this exact 2015 ADM1 polygon to the intended recorded location and reveal the upstream item’s cartographic role. Exact metadata/archive path history was checked; it has generic build entries only.",
+    "no_decision": "The source artifact and bounded path history identify what geoBoundaries distributed but do not determine the upstream Wikimedia item or its cartographic role. They do not clear or invalidate any of the 382 GEO keys.",
+    "correction": "Coordinate-bearing vector output describes the geoBoundaries distributed product only; it does not establish a non-illustrative or authoritative upstream Wikimedia source."
+  },
+  "operations": {
+    "actual_acquisitions": [
+      {
+        "item": "metadata JSON LFS object",
+        "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/GEO/ADM1/geoBoundaries-GEO-ADM1-metaData.json",
+        "bytes": 833,
+        "sha256": "95f12c3b91889ffbdd9b05d68865503d6f02639fcc8257e8fd078ddd2172cae5",
+        "result": "success"
+      },
+      {
+        "item": "all.zip LFS object",
+        "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/GEO/ADM1/geoBoundaries-GEO-ADM1-all.zip",
+        "bytes": 423515,
+        "sha256": "f77abcdc56534904af18997fa1721d79ac514642120459f40faf6bb1ae27a295",
+        "result": "success; matched exact public Git LFS OID"
+      }
+    ],
+    "nonblocking_web_reader_result": "Web reader could not render the ZIP because it was application/zip; normal code download via the publisher public Git LFS media URL succeeded and was verified.",
+    "inspection_scope": "Read metadata/citation text; ZIP member list; DBF attributes; WGS84 .prj strings; hashes/lengths. Did not inspect, transform, compare, or publish polygon coordinates."
+  },
+  "correction": "Supersedes any wording that treated the coordinate-bearing vector output as evidence that its upstream Wikimedia source was non-illustrative or authoritative. The upstream source intent remains unknown.",
+  "repository_history": {
+    "metadata_file_history_url": "https://api.github.com/repos/wmgeolab/geoBoundaries/commits?path=releaseData%2FgbOpen%2FGEO%2FADM1%2FgeoBoundaries-GEO-ADM1-metaData.json&per_page=10",
+    "archive_file_history_url": "https://api.github.com/repos/wmgeolab/geoBoundaries/commits?path=releaseData%2FgbOpen%2FGEO%2FADM1%2FgeoBoundaries-GEO-ADM1-all.zip&per_page=10",
+    "common_visible_entries": [
+      {
+        "commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+        "date": "2023-12-13T04:03:07Z",
+        "author": "DanRunfola",
+        "message": "gB Core Data Update 2023-12-12 23:03"
+      },
+      {
+        "commit": "ea5b27e7aa608eb6827f2cc76620a5b21acc5962",
+        "date": "2023-12-11T23:07:14Z",
+        "author": "DanRunfola",
+        "message": "gB Core Data Update 2023-12-11 18:07"
+      },
+      {
+        "commit": "c0ed7b8dc62dabe97cf355622f557ccfe8546f2b",
+        "date": "2023-10-04T10:44:27Z",
+        "author": "DanRunfola",
+        "message": "gB Core Data Update 2023-10-04 06:44"
+      },
+      {
+        "commit": "41af8f1e141eb6826ab9877e306df6f848b9ff0b",
+        "date": "2023-07-05T22:16:59Z",
+        "author": "DanRunfola",
+        "message": "gB Core Data Update 2023-07-05 18:16"
+      },
+      {
+        "commit": "905b0baf5f4fb3b9ccf45293647dcacdb2b799d4",
+        "date": "2023-01-23T22:22:19Z",
+        "author": "DanRunfola",
+        "message": "Automated Nightly Build"
+      },
+      {
+        "commit": "b7dd6a55701c76a330500ad9d9240f2b9997c6a8",
+        "date": "2023-01-19T12:31:04Z",
+        "author": "DanRunfola",
+        "message": "Cleared history"
+      }
+    ],
+    "finding": "The exact metadata and all.zip paths share only generic release-build/nightly commit messages in the available history. The oldest visible entry is named “Cleared history”; no source submission, Wikimedia item URL, source author, map edition, or Abkhazia-specific provenance appears in these path-history records.",
+    "limit": "This was a bounded inspection of the two exact release paths, not a search of every geoBoundaries issue, pull request, contributor message, or the full upstream site. It establishes that the available path history does not recover the missing Wikimedia source item; it does not prove no separate source-submission record exists elsewhere."
+  }
+}
