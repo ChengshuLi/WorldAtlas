@@ -6,8 +6,7 @@ never run a scientific operator, accept a source, submit a review, commit, queue
 or merge. Publish the real head, obtain
 substantive independent review, then use the standard worker integration workflow.
 Scientific source/native supervision, rebind, selected-reader and output checks remain authoritative.
-Use Node 24 without loaders/preloads. Check storage with `local-workspace.mjs`
-before preparation. Sparse checkouts need the two literal existing composition
+Use Node 24 without loaders/preloads. Sparse checkouts need the two literal existing composition
 and selected-neighbor helper paths imported by the command; no dataset directory
 is required for the code. Missing immutable bodies fail with lazy fetch disabled.
 
