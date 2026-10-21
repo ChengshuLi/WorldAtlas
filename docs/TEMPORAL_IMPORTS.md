@@ -1,6 +1,8 @@
-# Temporal import contract
+# Retained local temporal schema
 
-Use `npm run data:import -- records.json`, then restart the server or rebuild the static export. Imports are atomic. Signed calendar years have no zero; starts are inclusive, ends exclusive. `2027` is the end sentinel for 2026. Year precision does not establish an exact day within a year.
+This describes the legacy SQLite fixture and archive contract, not a supported production content-import route. Use the [existing hosted research workflow](RESEARCH_IMPORT_WORKFLOW.md) for new content under its current approval and write requirements. Existing local rows are not synchronized with Neon, and their payloads must not be submitted to the hosted API without reviewed translation. Preserve unique local records during reconciliation.
+
+The retained low-level imports are atomic. Signed calendar years have no zero; starts are inclusive, ends exclusive. `2027` is the end sentinel for 2026. Year precision does not establish an exact day within a year.
 
 ## Identity and existence
 

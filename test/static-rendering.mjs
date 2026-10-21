@@ -116,8 +116,8 @@ try{
  assert.equal(await page.locator('.breadcrumbs [data-unit]').count(),6);
  const geometryCheck=await page.evaluate(async()=>{const manifest=await(await fetch('./atlas-geography.json')).json();const bytes=await(await fetch('./'+manifest.geometryParts[0])).arrayBuffer();const decoded=JSON.parse(await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text());return decoded.length>0&&decoded.every(f=>f.id&&f.geometry?.type);});assert.equal(geometryCheck,true);
  await page.screenshot({path:'/workspace/atlas-fixed-grid-hong-kong.png'});
- const db=new DatabaseSync('data/atlas.sqlite',{readOnly:true});let example;
- try{example=await findHistoricalMapCase(year=>snapshot(db,year,false));}finally{db.close();}
+ const databasePath='.cache/package-atlas.sqlite',db=new DatabaseSync(databasePath,{readOnly:true});let example;
+ try{example=await findHistoricalMapCase(year=>snapshot(db,year,false),databasePath);}finally{db.close();}
  const historical=await checkHistoricalMapCase(page,example);
  assert.equal(historical.hasPolitical,false);assert.ok(historical.tested>=12);assert.equal(historical.eligible,historical.totalCells);assert.equal(historical.tested,historical.eligible);assert.equal(historical.mismatches,0);assert.equal(historical.error,0);assert.equal(historical.legend,historical.expected);
  const expected=historical.expected.match(/\d+/g).slice(0,3).map(Number);assert.ok(expected.every((channel,i)=>Math.abs(channel-historical.palette[i])<=1));
