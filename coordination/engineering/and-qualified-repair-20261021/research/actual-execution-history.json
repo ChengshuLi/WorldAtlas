@@ -32,5 +32,23 @@
     "No original owner observer or retained source scanner was repeated.",
     "No current-owner-zero, selected-output acceptance or package completion is claimed by these preparatory/qualification results.",
     "One original foreign-contact key remains pending with its native hold; no unresolved-completion claim is made."
-  ]
+  ],
+  "composition": {
+    "failed_admission": {
+      "error": "Committed modern constructor scope/rule/patch differs",
+      "output_created": false,
+      "reason": "Unchanged native patch was repinned at a later commit instead of preserving the exact constructor-bound descriptor."
+    },
+    "successful_commit": "0a1dabb21bdb5eb9fd2826f89c0deaf9d33b3cef",
+    "correction": "Use literal authority-binding.native_patch, preserving all scientific inputs and native output."
+  },
+  "finalize": {
+    "failed_admission": {
+      "error": "Supply an exact commit/path locator, without handwritten derived descriptors",
+      "output_created": false,
+      "reason": "Compact finalize rebind requires only commit and path, not the full derived descriptor."
+    },
+    "successful_phase": "finalize-002",
+    "correction": "Use exact existing rebind commit/path; no science or successful composition was repeated."
+  }
 }
