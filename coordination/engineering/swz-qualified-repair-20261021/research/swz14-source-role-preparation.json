@@ -1,0 +1,501 @@
+{
+  "kind": "SWZ14 independent source-role and evidence preparation, not qualification",
+  "scope": {
+    "package": "gb-SWZ-ADM2--repair-evaluation",
+    "original_cells": 14,
+    "intervals": 14,
+    "owners": 8,
+    "land": 14,
+    "water": 0,
+    "excluded": [
+      "gb-SWZ-ADM1--location-mapping 26/26",
+      "issue #964 separate 53-subject source review"
+    ]
+  },
+  "basis": {
+    "handoff": "inventory/swz-audit-handoff/extracted/SWZ14-effort-and-qualification-handoff.json",
+    "original_contract": {
+      "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+      "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+      "priority": 1
+    },
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "authenticated_queue_commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+    "contact_result_code": {
+      "commit": "01fe271e2554b03675769701691fb3dc07442303",
+      "path": "src/native-grid.js",
+      "sha256": "3d20777f5896d28192e40428dd34cab89d47873a08bf073a17338c4ff97d43cd"
+    },
+    "contact_result_existing_not_rerun": true
+  },
+  "original_source_versions": {
+    "ADM2": {
+      "source": "OpenStreetMap / Wambacher",
+      "represented_year": "2017",
+      "license": "ODbL 1.0",
+      "source_data_updated": "2023-01-19",
+      "metadata": "inventory/swz-audit-handoff/extracted/primary/gb-ADM2-meta.json",
+      "properties": {
+        "feature_count": 53,
+        "bytes": 120065,
+        "sha256": "5d54a3629b8b766c061734f7fa3d04c84eab5946b62932e77d067d1b01e7749f",
+        "property_keys": [
+          "shapeGroup",
+          "shapeID",
+          "shapeISO",
+          "shapeName",
+          "shapeType"
+        ]
+      },
+      "comparison_source_properties": {
+        "feature_count": 53,
+        "bytes": 334110,
+        "sha256": "5731b27769f77d547ca6165f88357ac981477cca6b47eb84d8641cb3d09e54c0",
+        "property_keys": [
+          "shapeGroup",
+          "shapeID",
+          "shapeISO",
+          "shapeName",
+          "shapeType"
+        ]
+      },
+      "static_urls": [
+        "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SWZ/ADM2/geoBoundaries-SWZ-ADM2.geojson",
+        "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SWZ/ADM2/geoBoundaries-SWZ-ADM2_simplified.geojson"
+      ]
+    },
+    "ADM1": {
+      "source": "OpenStreetMap / Wambacher",
+      "represented_year": "2017",
+      "license": "ODbL 1.0",
+      "metadata": "inventory/swz-audit-handoff/extracted/primary/gb-ADM1-meta.json",
+      "properties": {
+        "feature_count": 4,
+        "bytes": 20867,
+        "sha256": "09ee41e828454553928a1b472a8be6fcbf13c46988c7e57d940476425e0aa24a",
+        "property_keys": [
+          "shapeGroup",
+          "shapeID",
+          "shapeISO",
+          "shapeName",
+          "shapeType"
+        ]
+      },
+      "static_urls": [
+        "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SWZ/ADM1/geoBoundaries-SWZ-ADM1.geojson",
+        "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SWZ/ADM1/geoBoundaries-SWZ-ADM1_simplified.geojson"
+      ]
+    }
+  },
+  "source_relationship_summary": {
+    "simplified_ADM2_unique_direct_hits": 14,
+    "full_ADM2_direct_hits": 8,
+    "full_ADM2_no_contact": 6,
+    "ADM1_unique_parent_region_contacts": 14,
+    "ADM1_feature_count": 4,
+    "ADM1_direct_owner_vectors_empty": true,
+    "boundary_ties": 0,
+    "all_53_simplified_features_valid": true,
+    "all_53_full_features_valid": true,
+    "all_4_ADM1_features_valid": true,
+    "geometry_repaired_or_changed": false
+  },
+  "parent_role_interpretation": "The 4 ADM1 polygons provide one broad-region spatial contact for each original key. Their roster direct-owner arrays are empty. The matching owner lineage province IDs align with those region names, but the GeoJSON properties have no parent field; these contacts establish spatial/tier context, not standalone parent ancestry, ownership, territorial exclusion, or competitor completeness.",
+  "tikhuba_role": {
+    "owner": 41017,
+    "source_feature_index": 56935,
+    "source_id": "gb:SWZ:ADM2:25544865B99429407754877",
+    "source_name": "Inkhundla Tikhuba",
+    "owner_province_id": "framework:province:lubombo:d4c6d5b83fc8",
+    "source_parent_contact": "Lubombo",
+    "retained_EBC_context": "Indexed 2013/2018/2023 EBC tables list Tikhuba under Matsanjeni North; full publisher responses returned 503/timeouts, and copyright-marked 2017 EBC map was not downloaded/traced/redistributed.",
+    "interpretation": "This is a source-role/tier discrepancy to resolve explicitly; a name match alone does not authorize renaming Tikhuba to Matsanjeni North or exclude the key."
+  },
+  "per_original_key": [
+    {
+      "block": 36,
+      "ordinal": 0,
+      "xy": [
+        154238,
+        150666
+      ],
+      "owner": 40983,
+      "owner_name": "Inkhundla Mhlume",
+      "owner_province_id": "framework:province:lubombo:d4c6d5b83fc8",
+      "original_adm2_id": "gb:SWZ:ADM2:25544865B37706944907644",
+      "original_adm2_name": "Inkhundla Mhlume",
+      "simplified_direct_hits": [
+        "gb:SWZ:ADM2:25544865B37706944907644"
+      ],
+      "full_direct_hits": [
+        "gb:SWZ:ADM2:25544865B37706944907644"
+      ],
+      "parent_adm1_hits": [
+        "gb:SWZ:ADM1:75366066B12234306804593"
+      ],
+      "parent_names": [
+        "Lubombo"
+      ],
+      "boundary_ties": [],
+      "physical_class": "land"
+    },
+    {
+      "block": 36,
+      "ordinal": 1,
+      "xy": [
+        153734,
+        150701
+      ],
+      "owner": 41011,
+      "owner_name": "Inkhundla Piggs Peak",
+      "owner_province_id": "framework:province:hhohho:11b5857c9be8",
+      "original_adm2_id": "gb:SWZ:ADM2:25544865B91965971492812",
+      "original_adm2_name": "Inkhundla Piggs Peak",
+      "simplified_direct_hits": [
+        "gb:SWZ:ADM2:25544865B91965971492812"
+      ],
+      "full_direct_hits": [],
+      "parent_adm1_hits": [
+        "gb:SWZ:ADM1:75366066B25905390127614"
+      ],
+      "parent_names": [
+        "Hhohho"
+      ],
+      "boundary_ties": [],
+      "physical_class": "land"
+    },
+    {
+      "block": 36,
+      "ordinal": 2,
+      "xy": [
+        153728,
+        150714
+      ],
+      "owner": 41011,
+      "owner_name": "Inkhundla Piggs Peak",
+      "owner_province_id": "framework:province:hhohho:11b5857c9be8",
+      "original_adm2_id": "gb:SWZ:ADM2:25544865B91965971492812",
+      "original_adm2_name": "Inkhundla Piggs Peak",
+      "simplified_direct_hits": [
+        "gb:SWZ:ADM2:25544865B91965971492812"
+      ],
+      "full_direct_hits": [
+        "gb:SWZ:ADM2:25544865B91965971492812"
+      ],
+      "parent_adm1_hits": [
+        "gb:SWZ:ADM1:75366066B25905390127614"
+      ],
+      "parent_names": [
+        "Hhohho"
+      ],
+      "boundary_ties": [],
+      "physical_class": "land"
+    },
+    {
+      "block": 36,
+      "ordinal": 3,
+      "xy": [
+        154451,
+        150748
+      ],
+      "owner": 41016,
+      "owner_name": "Inkhundla Lomahasha",
+      "owner_province_id": "framework:province:lubombo:d4c6d5b83fc8",
+      "original_adm2_id": "gb:SWZ:ADM2:25544865B99062950351047",
+      "original_adm2_name": "Inkhundla Lomahasha",
+      "simplified_direct_hits": [
+        "gb:SWZ:ADM2:25544865B99062950351047"
+      ],
+      "full_direct_hits": [
+        "gb:SWZ:ADM2:25544865B99062950351047"
+      ],
+      "parent_adm1_hits": [
+        "gb:SWZ:ADM1:75366066B12234306804593"
+      ],
+      "parent_names": [
+        "Lubombo"
+      ],
+      "boundary_ties": [],
+      "physical_class": "land"
+    },
+    {
+      "block": 36,
+      "ordinal": 4,
+      "xy": [
+        154456,
+        150784
+      ],
+      "owner": 41016,
+      "owner_name": "Inkhundla Lomahasha",
+      "owner_province_id": "framework:province:lubombo:d4c6d5b83fc8",
+      "original_adm2_id": "gb:SWZ:ADM2:25544865B99062950351047",
+      "original_adm2_name": "Inkhundla Lomahasha",
+      "simplified_direct_hits": [
+        "gb:SWZ:ADM2:25544865B99062950351047"
+      ],
+      "full_direct_hits": [
+        "gb:SWZ:ADM2:25544865B99062950351047"
+      ],
+      "parent_adm1_hits": [
+        "gb:SWZ:ADM1:75366066B12234306804593"
+      ],
+      "parent_names": [
+        "Lubombo"
+      ],
+      "boundary_ties": [],
+      "physical_class": "land"
+    },
+    {
+      "block": 36,
+      "ordinal": 5,
+      "xy": [
+        154461,
+        150820
+      ],
+      "owner": 41016,
+      "owner_name": "Inkhundla Lomahasha",
+      "owner_province_id": "framework:province:lubombo:d4c6d5b83fc8",
+      "original_adm2_id": "gb:SWZ:ADM2:25544865B99062950351047",
+      "original_adm2_name": "Inkhundla Lomahasha",
+      "simplified_direct_hits": [
+        "gb:SWZ:ADM2:25544865B99062950351047"
+      ],
+      "full_direct_hits": [
+        "gb:SWZ:ADM2:25544865B99062950351047"
+      ],
+      "parent_adm1_hits": [
+        "gb:SWZ:ADM1:75366066B12234306804593"
+      ],
+      "parent_names": [
+        "Lubombo"
+      ],
+      "boundary_ties": [],
+      "physical_class": "land"
+    },
+    {
+      "block": 36,
+      "ordinal": 6,
+      "xy": [
+        154464,
+        151365
+      ],
+      "owner": 41017,
+      "owner_name": "Inkhundla Tikhuba",
+      "owner_province_id": "framework:province:lubombo:d4c6d5b83fc8",
+      "original_adm2_id": "gb:SWZ:ADM2:25544865B99429407754877",
+      "original_adm2_name": "Inkhundla Tikhuba",
+      "simplified_direct_hits": [
+        "gb:SWZ:ADM2:25544865B99429407754877"
+      ],
+      "full_direct_hits": [],
+      "parent_adm1_hits": [
+        "gb:SWZ:ADM1:75366066B12234306804593"
+      ],
+      "parent_names": [
+        "Lubombo"
+      ],
+      "boundary_ties": [],
+      "physical_class": "land"
+    },
+    {
+      "block": 36,
+      "ordinal": 7,
+      "xy": [
+        153585,
+        151385
+      ],
+      "owner": 40984,
+      "owner_name": "Inkhundla Gege",
+      "owner_province_id": "framework:province:shiselweni:45345f6cac08",
+      "original_adm2_id": "gb:SWZ:ADM2:25544865B4123625373150",
+      "original_adm2_name": "Inkhundla Gege",
+      "simplified_direct_hits": [
+        "gb:SWZ:ADM2:25544865B4123625373150"
+      ],
+      "full_direct_hits": [],
+      "parent_adm1_hits": [
+        "gb:SWZ:ADM1:75366066B21527038718027"
+      ],
+      "parent_names": [
+        "Shiselweni"
+      ],
+      "boundary_ties": [],
+      "physical_class": "land"
+    },
+    {
+      "block": 36,
+      "ordinal": 8,
+      "xy": [
+        153529,
+        151386
+      ],
+      "owner": 40991,
+      "owner_name": "Inkhundla Ngwempisi",
+      "owner_province_id": "framework:province:manzini:e6997ed83572",
+      "original_adm2_id": "gb:SWZ:ADM2:25544865B616938903867",
+      "original_adm2_name": "Inkhundla Ngwempisi",
+      "simplified_direct_hits": [
+        "gb:SWZ:ADM2:25544865B616938903867"
+      ],
+      "full_direct_hits": [
+        "gb:SWZ:ADM2:25544865B616938903867"
+      ],
+      "parent_adm1_hits": [
+        "gb:SWZ:ADM1:75366066B3567364273406"
+      ],
+      "parent_names": [
+        "Manzini"
+      ],
+      "boundary_ties": [],
+      "physical_class": "land"
+    },
+    {
+      "block": 37,
+      "ordinal": 0,
+      "xy": [
+        153813,
+        151698
+      ],
+      "owner": 41002,
+      "owner_name": "Inkhundla Maseyisini",
+      "owner_province_id": "framework:province:shiselweni:45345f6cac08",
+      "original_adm2_id": "gb:SWZ:ADM2:25544865B74382320525051",
+      "original_adm2_name": "Inkhundla Maseyisini",
+      "simplified_direct_hits": [
+        "gb:SWZ:ADM2:25544865B74382320525051"
+      ],
+      "full_direct_hits": [
+        "gb:SWZ:ADM2:25544865B74382320525051"
+      ],
+      "parent_adm1_hits": [
+        "gb:SWZ:ADM1:75366066B21527038718027"
+      ],
+      "parent_names": [
+        "Shiselweni"
+      ],
+      "boundary_ties": [],
+      "physical_class": "land"
+    },
+    {
+      "block": 37,
+      "ordinal": 1,
+      "xy": [
+        153840,
+        151708
+      ],
+      "owner": 41003,
+      "owner_name": "Inkhundla Zombodze",
+      "owner_province_id": "framework:province:shiselweni:45345f6cac08",
+      "original_adm2_id": "gb:SWZ:ADM2:25544865B75252057291440",
+      "original_adm2_name": "Inkhundla Zombodze",
+      "simplified_direct_hits": [
+        "gb:SWZ:ADM2:25544865B75252057291440"
+      ],
+      "full_direct_hits": [],
+      "parent_adm1_hits": [
+        "gb:SWZ:ADM1:75366066B21527038718027"
+      ],
+      "parent_names": [
+        "Shiselweni"
+      ],
+      "boundary_ties": [],
+      "physical_class": "land"
+    },
+    {
+      "block": 37,
+      "ordinal": 2,
+      "xy": [
+        153848,
+        151711
+      ],
+      "owner": 41003,
+      "owner_name": "Inkhundla Zombodze",
+      "owner_province_id": "framework:province:shiselweni:45345f6cac08",
+      "original_adm2_id": "gb:SWZ:ADM2:25544865B75252057291440",
+      "original_adm2_name": "Inkhundla Zombodze",
+      "simplified_direct_hits": [
+        "gb:SWZ:ADM2:25544865B75252057291440"
+      ],
+      "full_direct_hits": [],
+      "parent_adm1_hits": [
+        "gb:SWZ:ADM1:75366066B21527038718027"
+      ],
+      "parent_names": [
+        "Shiselweni"
+      ],
+      "boundary_ties": [],
+      "physical_class": "land"
+    },
+    {
+      "block": 37,
+      "ordinal": 3,
+      "xy": [
+        153875,
+        151721
+      ],
+      "owner": 41003,
+      "owner_name": "Inkhundla Zombodze",
+      "owner_province_id": "framework:province:shiselweni:45345f6cac08",
+      "original_adm2_id": "gb:SWZ:ADM2:25544865B75252057291440",
+      "original_adm2_name": "Inkhundla Zombodze",
+      "simplified_direct_hits": [
+        "gb:SWZ:ADM2:25544865B75252057291440"
+      ],
+      "full_direct_hits": [],
+      "parent_adm1_hits": [
+        "gb:SWZ:ADM1:75366066B21527038718027"
+      ],
+      "parent_names": [
+        "Shiselweni"
+      ],
+      "boundary_ties": [],
+      "physical_class": "land"
+    },
+    {
+      "block": 37,
+      "ordinal": 4,
+      "xy": [
+        153902,
+        151731
+      ],
+      "owner": 41003,
+      "owner_name": "Inkhundla Zombodze",
+      "owner_province_id": "framework:province:shiselweni:45345f6cac08",
+      "original_adm2_id": "gb:SWZ:ADM2:25544865B75252057291440",
+      "original_adm2_name": "Inkhundla Zombodze",
+      "simplified_direct_hits": [
+        "gb:SWZ:ADM2:25544865B75252057291440"
+      ],
+      "full_direct_hits": [
+        "gb:SWZ:ADM2:25544865B75252057291440"
+      ],
+      "parent_adm1_hits": [
+        "gb:SWZ:ADM1:75366066B21527038718027"
+      ],
+      "parent_names": [
+        "Shiselweni"
+      ],
+      "boundary_ties": [],
+      "physical_class": "land"
+    }
+  ],
+  "needed_source_evidence_operands": [
+    "Authenticate and use the complete 53-feature full ADM2 source family as the actual candidate/competitor basis; retain the same-release simplified/full crosswalk as representation context (14 vs 8 is not an outcome partition).",
+    "Include all four ADM1 features and the exact per-key parent-region contacts as broader-tier context, with direct owner arrays empty and no implicit ancestry claim.",
+    "Join the eight exact ADM2 source atoms and owner lineages to actual retained selected/current ownership and source properties; preserve Tikhuba role discrepancy.",
+    "Include physical producer witnesses for all eight direct targets and any justified negative source families/territorial exclusions from the original source catalog; do not substitute geometry validity or country-wide review counts.",
+    "Run stock source-evidence/native diagnostic and selected-native conservation only after author’s prepared inputs; reviewer did not run them."
+  ],
+  "actual_gaps": [
+    "No actual SWZ stock source_evidence/native diagnostic, physical producer receipt, or native-authority result appears in this handoff; prior inspection states this route is available and has not been exhausted.",
+    "The full current EBC/govt response retrieval had 503/timeouts; this is an access limitation, not proof of source exhaustion. The copyright-marked 2017 EBC map remains unacquired and must not be redistributed.",
+    "Tikhuba vs EBC Matsanjeni North is an explicit tier/role discrepancy, not a per-cell causal determination."
+  ],
+  "nonconclusions": [
+    "The 14 simplified hits do not qualify 14 cells; the 8 full hits do not qualify eight or make six unresolved.",
+    "All 14 parent ADM1 contacts are not automatically a second direct owner or excluded foreign competitor.",
+    "Source validity/IoU findings at ADM2 feature level do not diagnose individual native cells.",
+    "No public-domain-only requirement: the retained ODbL 1.0 source is valid for review with required attribution/share-alike obligations.",
+    "This is preparation only; no author allocation, source/physical/native run, claim, acceptance, or credit."
+  ]
+}
