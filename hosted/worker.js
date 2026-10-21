@@ -61,7 +61,7 @@ export default {
     return json(await importTypedBatch(db,JSON.parse(new TextDecoder().decode(await boundedBody(request,1024*1024)))));
    }
    if(url.pathname==='/api/storage/capacity'&&request.method==='GET')return json(await capacityReport(db,{databaseBudgetBytes:env.ATLAS_DATABASE_BUDGET_BYTES==null?null:Number(env.ATLAS_DATABASE_BUDGET_BYTES)}));
-   if(url.pathname==='/api/map/snapshot'&&request.method==='GET')return json(await mapSnapshotPage(db,selectedYear(url),{examples:url.searchParams.get('examples')==='1',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||1000),evidenceOnly:url.searchParams.get('evidence_only')==='1',includeTemporal:url.searchParams.get('include_temporal')==='1'}));
+   if(url.pathname==='/api/map/snapshot'&&request.method==='GET')return json(await mapSnapshotPage(db,selectedYear(url),{examples:url.searchParams.get('examples')==='1',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||1000),evidenceOnly:url.searchParams.get('evidence_only')==='1',includeTemporal:url.searchParams.get('include_temporal')==='1',releaseId:url.searchParams.get('release_id')}));
    const catalog=/^\/api\/catalog\/(sources|categories|entities)$/.exec(url.pathname);
    if(catalog&&request.method==='GET')return json(await catalogPage(db,catalog[1],{q:url.searchParams.get('q')??'',kind:url.searchParams.get('kind'),cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250),examples:url.searchParams.get('examples')==='1',active:url.searchParams.has('active')?url.searchParams.get('active')==='1':null}));
    const graph=/^\/api\/entities\/([^/]+)\/(relationships|media)$/.exec(url.pathname);
