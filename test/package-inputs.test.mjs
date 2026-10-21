@@ -21,12 +21,13 @@ test('declaration uses literal paths, precise directory membership and approved 
   }
   assert.throws(() => validatePackageInputs({...value, inputs: [...value.inputs, 'src/nested/']}), /Overlapping/);
   assert.throws(() => validatePackageInputs({...value, optional_inputs: ['not-declared']}), /Incomplete/);
-  assert.throws(() => validatePackageInputs({...value, generated_outputs: ['research/']}), /Unsupported generated/);
+  assert.doesNotThrow(() => validatePackageInputs({...value, generated_outputs: ['.cache/package-atlas.sqlite']}));
+  for (const output of ['research/', '.cache/other.sqlite', 'data/atlas.sqlite.bak']) assert.throws(() => validatePackageInputs({...value, generated_outputs: [output]}), /Unsupported generated/);
 });
 
 
 test('complete package declarations retain exact whole immutable blob identity',async()=>{
-  const value={version:1,inputs:['.github/package-inputs.json',...Array.from({length:4096},(_,i)=>`coordination/engineering/scaled-selected/role-${i}.json`)],optional_inputs:[],verification_paths:[],generated_outputs:['dist/']};
+  const value={version:1,inputs:['.github/package-inputs.json',...Array.from({length:4096},(_,i)=>`coordination/engineering/scaled-selected/role-${i}.json`)],optional_inputs:[],verification_paths:[],generated_outputs:['dist/', '.cache/package-atlas.sqlite']};
   const raw=Buffer.from(JSON.stringify(value));
   assert.ok(raw.length>128*1024);
   assert.equal(validatePackageInputs(value),value);
