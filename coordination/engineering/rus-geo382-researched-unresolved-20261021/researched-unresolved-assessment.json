@@ -1,0 +1,125 @@
+{
+  "title": "GEO 382 source-specific researched-unresolved outcome assessment",
+  "status": "Recommendation only; preserves all existing native holds, no selected-output changes, no acceptance credit.",
+  "contract": {
+    "issue": "https://github.com/ChengshuLi/WorldAtlas/issues/2302",
+    "package": "gb-RUS-ADM2--repair-evaluation",
+    "scope": "382 exact original GEO-family contact keys within the 471 other-family contacts; excludes the remaining 89 contacts and does not complete the original package.",
+    "requirement": "Each original interval must be a qualified additive repair or a documented exception. Source membership, retained territorial exclusions, complete source competitors and zero-reassignment conservation remain the governing criteria. No universal current-authority certificate or accuracy threshold is stated."
+  },
+  "exact_scope": {
+    "source_index": "inventory/rus-other-contact-471-key-and-family-index.json",
+    "source_index_sha256": "b9a968677ce39d4d03f9fc0b61997d92a21d45f2b20fec7cb017510ae8d32d23",
+    "keys": 382,
+    "classes": {
+      "mapped_land_support": 382
+    },
+    "feature_groups": [
+      {
+        "source_id": "gb:GEO:ADM1:13066534B27338241074695",
+        "name": "Abkhazia",
+        "source_ordinal_1based": 1,
+        "keys": 150,
+        "classes": {
+          "mapped_land_support": 150
+        },
+        "owners": [
+          "gb:RUS:ADM2:50074027B20844544643532",
+          "gb:RUS:ADM2:50074027B2873749547467",
+          "gb:RUS:ADM2:50074027B62060220581137",
+          "gb:RUS:ADM2:50074027B97915743109256"
+        ],
+        "owner_count": 4
+      },
+      {
+        "source_id": "gb:GEO:ADM1:13066534B80116330304733",
+        "name": "Samegrelo-Zemo Svaneti",
+        "source_ordinal_1based": 12,
+        "keys": 38,
+        "classes": {
+          "mapped_land_support": 38
+        },
+        "owners": [
+          "gb:RUS:ADM2:50074027B29250362520572",
+          "gb:RUS:ADM2:50074027B37698717435395",
+          "gb:RUS:ADM2:50074027B96475461506325"
+        ],
+        "owner_count": 3
+      },
+      {
+        "source_id": "gb:GEO:ADM1:13066534B45176100929029",
+        "name": "Racha-Lechkhumi and Kvemo Svaneti",
+        "source_ordinal_1based": 11,
+        "keys": 35,
+        "classes": {
+          "mapped_land_support": 35
+        },
+        "owners": [
+          "gb:RUS:ADM2:50074027B82899893742051",
+          "gb:RUS:ADM2:50074027B91264381594576"
+        ],
+        "owner_count": 2
+      },
+      {
+        "source_id": "gb:GEO:ADM1:13066534B64349154399075",
+        "name": "Mtskheta-Mtianeti",
+        "source_ordinal_1based": 5,
+        "keys": 136,
+        "classes": {
+          "mapped_land_support": 136
+        },
+        "owners": [
+          "gb:RUS:ADM2:50074027B27316284331880",
+          "gb:RUS:ADM2:50074027B40406912244936",
+          "gb:RUS:ADM2:50074027B45872163346699",
+          "gb:RUS:ADM2:50074027B57020766667209",
+          "gb:RUS:ADM2:50074027B82899893742051"
+        ],
+        "owner_count": 5
+      },
+      {
+        "source_id": "gb:GEO:ADM1:13066534B18810562533194",
+        "name": "Kakheti",
+        "source_ordinal_1based": 2,
+        "keys": 23,
+        "classes": {
+          "mapped_land_support": 23
+        },
+        "owners": [
+          "gb:RUS:ADM2:50074027B26544936319083",
+          "gb:RUS:ADM2:50074027B33840805886085",
+          "gb:RUS:ADM2:50074027B57020766667209"
+        ],
+        "owner_count": 3
+      }
+    ]
+  },
+  "research_basis": [
+    "Searched upstream source submission history and inspected the exact merged 2022 sourceData PR/archive; the source archive hash equals the retained source archive.",
+    "Parsed the archive metadata, license record, 2022 ArcGIS lineage XML and feature properties. The metadata identifies a 2015-represented Georgia.svg source; the XML records creation of a WGS84 GEO_subdivisions polyline feature class, polygonization and shapefile export, but no acquisition or digitization source for GEO_subdivisions.",
+    "Inspected the exact Commons SVG page, revision history, actual SVG metadata and published preview pixels. The map has no visible scale, graticule or geographic control points and the SVG has no CRS/geographic coordinates. This limits provenance and reproducibility but does not invalidate the derived shapefile by itself.",
+    "Reviewed issue #1799 and PRs #1815 and #2518. The 2021 request concerned licensing for geoBoundaries 5.0; the later exact source submission merged and its human review supplies no further digitization detail.",
+    "Searched for a relevant external administrative-boundary comparator. Search surfaced Georgia COD-AB, described as sourced from the National Statistics Office of Georgia, but its metadata page returned HTTP 403. The request stopped there; no retry, API, mirror, alternate host or geometry download was attempted."
+  ],
+  "recommendation": {
+    "outcome": "A documented researched-unresolved proposal is supportable for these exact 382 held contact keys, grouped by their five recorded GEO ADM1 features, while retaining native holds.",
+    "why": "The unresolved issue is not merely a missing certificate: an authenticated source submission and processor record establish a concrete map-to-linework-to-polygon chain, but omit the input linework acquisition and digitization/georeferencing method. The exact cited image is a cartographic subdivisions map without visible geographic controls. All 382 original contact rows rely on this same source archive and are already retained as native territorial-exclusion contacts. The extensive source-specific follow-up found no accessible record that would materially resolve the chain; the one concrete independent catalogue route encountered was inaccessible with HTTP 403.",
+    "limits": "This supports only an explicit unresolved disposition with every native hold intact. It is neither a positive repair nor a claim that the GEO source geometry is invalid, that each key has a proven geometric error, or that a sovereign boundary has been established. Root retains disposition-credit authority."
+  },
+  "remaining_material_step": {
+    "currently_available": false,
+    "reason": "The exact upstream submission, its recorded processing metadata, source SVG, file history and visual content have been inspected. The source archive omits the named GEO_subdivisions input linework. The surfaced COD-AB page returned 403; further access via another API/mirror is prohibited for this task. No concrete untried public locator for the missing linework or its digitization record is identified in the inspected records.",
+    "future_trigger": "If a lawful direct source record for GEO_subdivisions or a properly documented same-scope GeoStat boundary comparator becomes available, reassess these keys against the existing exact 382-key partition; no whole-world dataset or universal certificate is required."
+  },
+  "no_science_execution": true,
+  "references": [
+    "inventory/rus-geo-exact-submission-and-svg-inspection.json",
+    "inventory/rus-geo-sourceData-provenance-followup.json",
+    "inventory/rus-geo-sourceData-original-submission-review.json",
+    "inventory/rus-geo-upstream-source-artifact-review.json"
+  ],
+  "editorial_correction": {
+    "original_sha256": "25facbc99c44030139214f0b47f19e392201b6f197a5f0c1a684188e60402172",
+    "change": "Corrected scope wording from not the other 471 contacts to 382 within 471, excluding 89; no scientific finding changed."
+  }
+}
