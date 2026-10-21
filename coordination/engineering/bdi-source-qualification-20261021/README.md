@@ -64,3 +64,36 @@ and stock native diagnostic/qualification with independent review where
 justified. The physical result and source joins are preserved so these steps
 do not repeat completed evidence operations. No selected release, owner, hold,
 geometry or root accounting changes at this checkpoint.
+
+## Further evidence and failed locator, October 20 Pacific Time
+
+An additional complete Rwanda ADM1 source (five features, represented year
+2020, declared CC BY 4.0) was acquired through the existing exact-object
+importer and compared with all 21 whole targets. Mabayi, Rugombo, Bugabira and
+Busoni intersect Rwandan source polygons in six target/province pairs. None
+of the 583 requested centers intersects this fifth source family. Those
+whole-target overlaps remain adverse facts; zero center hits do not remove
+Rwanda from competitor/exclusion context.
+
+Two initially proposed canonical part paths were wrong. Dividing a canonical
+owner index by the finalizer's 1,500-feature chunk size confuses different
+orderings. Full reads of exact part-5 and part-6 found no BDI targets; the
+canonical join assertion stopped and emitted no joined source input. The
+corrected locator report retains this failed derivation. Owner 8987 is Mabayi;
+Bugarama is owner 9019. The source and original coverage joins use the actual
+pinned owner mappings. Further metadata location work remains pending.
+
+The two official enacted-law PDF routes did not yield inspectable annex pages:
+the web reader exposed a Cloudflare loader or no extracted text, browser
+navigation timed out, and one TLS-verified download timed out with zero bytes.
+Search snippets are explicitly distinguished from inspected page evidence.
+No Bugarama/Muhuta boundary relation is asserted from them. This is a concrete
+remaining research limitation, not a completed-unresolved disposition.
+
+The prior observation has 35 of 38 consumed input paths unchanged at base
+`94fd166b4e0ced382659e2c15a1a5c14141717f8`. Two helpers and the selector changed.
+Complete old/new additive patch comparison proves the delta is exactly 568
+LUX plus 633 VCT cells, with no overlap with the BDI original scope and an
+unchanged base reference. The original observation was executed by its old
+code. Independent review of the changed helper paths is pending; neither
+an all-inputs-unchanged statement nor execution by newer code is claimed.

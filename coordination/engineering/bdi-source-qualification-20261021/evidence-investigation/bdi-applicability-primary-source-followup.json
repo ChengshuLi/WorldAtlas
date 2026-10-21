@@ -1,0 +1,76 @@
+{
+  "kind": "BDI historical-source applicability and retained-contact follow-up",
+  "as_of": "2026-10-21",
+  "scope": {
+    "package_id": "gb-BDI-ADM2--repair-evaluation",
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "queue_blob": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "cells": 583,
+    "land": 378,
+    "inland_water": 205,
+    "intervals": 433,
+    "owners": 21,
+    "separate_scopes_excluded": ["gb-BDI-ADM2--source-conflict (13 cells)", "gb-BDI-ADM1--location-mapping (784 cells)", "regional source-only issue #215"]
+  },
+  "retained_evidence_read": [
+    {"path": "inventory/bdi-retained-source-physical-water-witness-join.json", "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7", "source_mask_blob": "5c56cb06a4879060a4ad933395cd643cdaaa5565", "physical_mask_blob": "5f8f1e8aa032abc85e931930eb4eb9b0dbc0ebdb", "water_mask_blob": "9bee5462a2f4a8bf1e54816c4a3bd61d9227e221"},
+    {"path": "inventory/bdi-source-property-identity-join.json", "source_corpus_commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365", "corpus_tree": "78f85570b9a542fbb2c01131138ab0e69147cca9", "contacts": 33, "full_families": ["gb:BDI:ADM1 (18 features; 2014; CC0 1.0)", "gb:BDI:ADM2 (119 features; represented-year claim 2007; Public Domain)", "gb:COD:ADM1 (26 features; 2017; ODbL 1.0)", "gb:TZA:ADM1 (30 features; 2015; ODbL 1.0)"]},
+    {"path": "inventory/bdi-selected-owner-observation.json", "execution_path": "inventory/bdi-observation-execution.json", "commit": "5c1919dd1c7e89618398454220b57edf0fa388d2", "query_count": 583, "successful_runs": 1, "current_base_additive_effective_owner": 0, "product_overlap": false},
+    {"path": ".worldatlas-workspaces/2d82c0ae06b92ab3/42d17456f7a54d6568c34d0f3b55d222f56a720a7015812071dce708422d5208/work/coordination/engineering/bdi-source-qualification-20261021/physical-001/whole-target-support.json", "support_sha256": "bf9f07eff9b26e237d717e9a060e35ad242924eb1a0d91fb0f239e3dcff911c3", "producer": "scripts/qualify-source-cohort.py", "targets": 21, "elapsed_seconds": 5.614461917, "note": "Retained full-target physical support includes whole-target adverse cases; do not treat the center-intersection result as repair qualification."}
+  ],
+  "retained_point_join_findings": {
+    "source_and_physical_result": "The independent 583-center comparison against all 193 features in the four queue-named complete source families reports 583 direct expected-target hits, 0 stored-source-roster mismatches, 583 physical expected-class hits, 0 original centers intersecting an adverse physical-issue geometry, and 54 source-contact rows from foreign ADM1 candidates (51 TZA, 3 COD).",
+    "source_contact_ownership": "Of 33 exact contacted features, 21 are directly owner-mapped BDI ADM2 features with matching reverse lineage; 9 BDI ADM1 contacts have empty direct-owner and reverse-owner vectors because they are parent-level context; 1 COD ADM1 and 2 TZA ADM1 contacts are ownerless foreign context. These parent/foreign overlaps are retained, not credited as direct owners or dismissed as non-candidates.",
+    "water": "All 205 inland-water keys remain in the package and are not reclassified by the physical-center hit result. Existing block masks support the recorded land/water labels, but cannot substitute for current physical/source qualification."
+  },
+  "official_primary_sources_examined": [
+    {
+      "title": "Organic Law No. 1/05 of 16 March 2023 on determining and delimiting provinces, communes, zones, hills/neighborhoods",
+      "url": "https://assemblee.bi/wp-content/uploads/2024/01/n%C2%B05-du-16-mars-2023.pdf",
+      "hosted_landing_url": "https://www.ceniburundi.bi/loi-organique-n-1-05-du-16-mars-2023-portant-determination-et-delimitation-des-provinces-des-communes-des-zones-des-collines-et-ou-quartiers-de-la-republique-du-burundi",
+      "finding": "This is the enacted boundary-setting law, not merely a proposal. Search-indexed annex text identifies the new Bujumbura commune list including Muhuta and places Bugarama in the annex's zone-name list. The PDF extraction/screenshot route returned no readable page text (Assembly PDF 0 text lines; CENI returned Cloudflare verification), so I did not independently read or certify the annex's exact heading/old-to-new boundaries from the image.",
+      "limit": "It establishes the current legal subdivision framework; it does not itself establish that a particular 2007 polygon is boundary-equivalent to a present legal unit or where each original cell falls relative to any revised boundary."
+    },
+    {
+      "title": "2022 Senate-hosted draft organic law and explanatory text",
+      "url": "https://www.senat.bi/wp-content/uploads/2022/11/PROJET-DE-LOI-ORGANIQUE-PORTANT-DELIMITATION-DES-PROVINCES-Expose-des-motifs-1-60.pdf",
+      "finding": "The indexed draft expressly says the proposed new Muhuta commune would consist of the old Bugarama and Muhuta communes. This is positive historical-to-proposed composition evidence, but the document is a draft, not proof that all 2007 feature boundaries were unchanged in the enacted law."
+    },
+    {
+      "title": "INSBU Annuaire Statistique du Burundi, édition 2024 (RGPHAE 2024 results)",
+      "url": "https://api.insbu.bi/storage/documents/01M0WF6F346CZ0KBK8A07YJVSP.pdf",
+      "finding": "Tables 1.04–1.05 (PDF pages 25–26; extracted lines 854–958) present the 2024 census results under the post-reform five-province/42-commune frame. The current Bujumbura table contains Muhuta and Ntahangwa; Buhumuza contains Gisagara and Muyinga; Burunga contains Rumonge and Nyanza. Several old names therefore persist in current statistical nomenclature, while many other old contacts are absent from the top-level current commune list. The tables are administrative statistics, not boundary polygons or a cellwise crosswalk."
+    },
+    {
+      "title": "Presidency of Burundi, Council of Ministers communiqué, 15 June 2022",
+      "url": "https://www.presidence.gov.bi/wp-content/uploads/2022/06/Communique-CM-15-JUIN-2022.pdf",
+      "finding": "The official communiqué describes the reorganization proposal, the history/criteria, and annexes the proposed 42-commune list. It is prior to enactment and is useful for proposal context only."
+    },
+    {
+      "title": "Presidency of Burundi, Council of Ministers communiqué, 18 September 2025",
+      "url": "https://www.presidence.gov.bi/wp-content/uploads/2025/09/CMQ-CM-EXTRA-DU-18.09.25.pdf",
+      "finding": "The communiqué treats the reorganization as implemented in 2025 and describes institutions adjusted to the new province/commune structure. This confirms contemporary administrative operation, not a geospatial crosswalk."
+    }
+  ],
+  "applicability_assessment": {
+    "positive_evidence": [
+      "The four pinned historical source-family bodies are complete and their exact property identities, owner vectors, terms, and represented-year metadata were joined to the original contact indices.",
+      "Official source evidence shows continuity of multiple names into the current census frame; the Senate draft gives a specific Bugarama+Muhuta-to-Muhuta transition, while the enacted law and 2024 census place Muhuta in the current Bujumbura structure.",
+      "583 original centers match their recorded BDI ADM2 source feature, and all 583 land/water classes match retained physical expected-class coverage, with no center in any retained adverse physical issue geometry."
+    ],
+    "not_established": [
+      "The complete old-119-to-current-42 legal unit crosswalk for all 21 BDI ADM2 owner features; exact applicable zone membership for each source; or whether source/candidate geometries preserve all post-reform boundary definitions.",
+      "Whole-target physical issues remain on 9 targets, even though no original center intersects the adverse geometries. The full-target issues have not been cleared.",
+      "The official law annex could not be extracted/rendered by the browser PDF reader; do not state its detailed Bugarama/Muhuta annex assignment based solely on search snippets.",
+      "Historical licence labels/represented years are source-catalogue facts, not current rights/applicability clearance. The BDI ADM2 Public Domain label and 2007 vintage do not prove current source authority or geometry equivalence."
+    ],
+    "next_witness_to_seek": "A machine-readable official/INSBU/CENI current commune-zone boundary layer or an authenticated law-appendix table linking current legal zones to the old 119 commune roster, followed by an exact source-membership comparison limited to the 583 keys and their 21 target IDs. If no such official crosswalk exists, a bounded documented lineage from old commune to current zone may be sufficient where exact legal membership is demonstrable; do not demand a generic modern certificate or replace the 2007 source solely by date.",
+    "scope_limits": [
+      "This research did not run another selected-owner observer, replay the physical producer, or compute geometry.",
+      "It did not contact agencies, alter claims, publish candidate data, or change root credit.",
+      "The 2022 draft is not treated as enacted law; current statistical names are not treated as proof of identical boundaries.",
+      "Physical and source geometries were already incidentally parsed by earlier retained evidence work; no new geometry analysis was performed in this official-document investigation."
+    ]
+  }
+}

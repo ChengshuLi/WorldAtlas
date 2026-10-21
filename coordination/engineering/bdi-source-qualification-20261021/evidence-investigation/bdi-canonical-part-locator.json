@@ -1,0 +1,182 @@
+{
+  "kind": "bdi-canonical-part-locator-correction",
+  "as_of": "2026-10-21",
+  "scope": {
+    "package_id": "gb-BDI-ADM2--repair-evaluation",
+    "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "direct_owner_count": 21
+  },
+  "canonical_index_evidence": {
+    "bounds_path": "data/canonical-grid/bounds.json.gz",
+    "bounds_blob": "9c44513df64995d417dd3832ae604c703e84a506",
+    "bounds_decoded_sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+    "bounds_entry_count": 49625,
+    "method_code": {
+      "path": "src/pixel-grid.js",
+      "blob": "008aaf69e65105029e64e09317b8f9aa4df1f352",
+      "behavior": "createGridIndex may sort for native indexing; bounds.index is the native-owner index, not a geography-part raw ordinal"
+    },
+    "part_writer": {
+      "path": "scripts/finalize-geography.py",
+      "blob": "f12bed86a6b7950fa762e61355b0907689d92548",
+      "behavior": "concatenates the feature arrays in world-index-listed parts and writes successive 1500-feature chunks"
+    },
+    "critical_correction": "Do not map bounds.index to geography part number. The previous arithmetic locator was falsified by actual body inspection."
+  },
+  "verified_failed_candidate_parts": [
+    {
+      "path": "data/geography/part-5.json",
+      "blob": "cf59e69b02ab2c9ad7344ddbf309a221a8be587b",
+      "bytes": 5226173,
+      "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc",
+      "feature_count": 1500,
+      "first_feature_id": "gb:CMR:ADM3:9386221B52857634221291",
+      "last_feature_id": "gb:CPV:ADM1:35879248B42709825939270",
+      "bdi_target_ids_found": [],
+      "bdi_target_matches": 0
+    },
+    {
+      "path": "data/geography/part-6.json",
+      "blob": "4be02d1d055a66c4e1606bab4f23ecda90350f34",
+      "bytes": 4607953,
+      "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a",
+      "feature_count": 1500,
+      "first_feature_id": "gb:CPV:ADM1:35879248B58765438888265",
+      "last_feature_id": "gb:DZA:ADM2:62766556B90764215114001",
+      "bdi_target_ids_found": [],
+      "bdi_target_matches": 0
+    }
+  ],
+  "corrected_pairing": {
+    "owner_8987": {
+      "name": "Mabayi",
+      "source_id": "gb:BDI:ADM2:21766830B12025098844752",
+      "canonical_bounds_index": 8987,
+      "province_id": "framework:province:cibitoke:d42ee79a8fe7"
+    },
+    "owner_9019": {
+      "name": "Bugarama",
+      "source_id": "gb:BDI:ADM2:21766830B31049489476840",
+      "canonical_bounds_index": 9019,
+      "province_id": "framework:province:rumonge:d425d957d00c"
+    }
+  },
+  "owner_canonical_indices": [
+    {
+      "owner_index": 8987,
+      "source_id": "gb:BDI:ADM2:21766830B12025098844752",
+      "name": "Mabayi"
+    },
+    {
+      "owner_index": 8990,
+      "source_id": "gb:BDI:ADM2:21766830B14140898215143",
+      "name": "Muhuta"
+    },
+    {
+      "owner_index": 8994,
+      "source_id": "gb:BDI:ADM2:21766830B1729082638594",
+      "name": "Gisagara"
+    },
+    {
+      "owner_index": 9001,
+      "source_id": "gb:BDI:ADM2:21766830B2147150443328",
+      "name": "Buganda"
+    },
+    {
+      "owner_index": 9019,
+      "source_id": "gb:BDI:ADM2:21766830B31049489476840",
+      "name": "Bugarama"
+    },
+    {
+      "owner_index": 9021,
+      "source_id": "gb:BDI:ADM2:21766830B32777890626704",
+      "name": "Rumonge"
+    },
+    {
+      "owner_index": 9028,
+      "source_id": "gb:BDI:ADM2:21766830B36835382033084",
+      "name": "Kabezi"
+    },
+    {
+      "owner_index": 9029,
+      "source_id": "gb:BDI:ADM2:21766830B3809417619483",
+      "name": "Buhinyuza"
+    },
+    {
+      "owner_index": 9030,
+      "source_id": "gb:BDI:ADM2:21766830B38172137244003",
+      "name": "Giharo"
+    },
+    {
+      "owner_index": 9036,
+      "source_id": "gb:BDI:ADM2:21766830B41528201457160",
+      "name": "Muyinga"
+    },
+    {
+      "owner_index": 9040,
+      "source_id": "gb:BDI:ADM2:21766830B44986812705529",
+      "name": "Kigamba"
+    },
+    {
+      "owner_index": 9047,
+      "source_id": "gb:BDI:ADM2:21766830B51540876931984",
+      "name": "Rugombo"
+    },
+    {
+      "owner_index": 9050,
+      "source_id": "gb:BDI:ADM2:21766830B53810177315638",
+      "name": "Bugabira"
+    },
+    {
+      "owner_index": 9057,
+      "source_id": "gb:BDI:ADM2:21766830B6345718789328",
+      "name": "Mutimbuzi"
+    },
+    {
+      "owner_index": 9067,
+      "source_id": "gb:BDI:ADM2:21766830B71257741300393",
+      "name": "Mabanda"
+    },
+    {
+      "owner_index": 9072,
+      "source_id": "gb:BDI:ADM2:21766830B74257208244788",
+      "name": "Nyanza-Lac"
+    },
+    {
+      "owner_index": 9077,
+      "source_id": "gb:BDI:ADM2:21766830B78190696569930",
+      "name": "Busoni"
+    },
+    {
+      "owner_index": 9078,
+      "source_id": "gb:BDI:ADM2:21766830B78591112120307",
+      "name": "Gihanga"
+    },
+    {
+      "owner_index": 9079,
+      "source_id": "gb:BDI:ADM2:21766830B80223800900582",
+      "name": "Mishiha"
+    },
+    {
+      "owner_index": 9087,
+      "source_id": "gb:BDI:ADM2:21766830B84199363749171",
+      "name": "Muha"
+    },
+    {
+      "owner_index": 9089,
+      "source_id": "gb:BDI:ADM2:21766830B87038696970617",
+      "name": "Ntahangwa"
+    }
+  ],
+  "actual_part_locator": {
+    "status": "not yet located",
+    "reason": "The two previously arithmetic-derived part blobs both contain zero of the 21 BDI target IDs; no raw geography ordinal-to-canonical-owner index map has been found in the inspected metadata. A verified actual-ID anchor in the relevant geography part, or an authenticated explicit mapping, is still needed.",
+    "no_guessed_part_proposed": true
+  },
+  "limits": {
+    "part5_part6_content_read": true,
+    "geometry_inspected_or_computed": false,
+    "source_or_physical_rerun": false,
+    "observer_rerun": false
+  }
+}
