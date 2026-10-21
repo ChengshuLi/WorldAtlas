@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "kind": "lie148-independent-physical-source-native-review",
+  "reviewer_worker_id": "01a15a0e-9f15-70f9-9391-bfaf7502a007",
+  "scope": {
+    "package_id": "gb-LIE-ADM1--repair-evaluation",
+    "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "original_queue_blob": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "cells": 148,
+    "intervals": 60,
+    "owner": 7121,
+    "selected_location": "atlas:territory:LIE",
+    "original_selected_source": "gb:LIE:ADM1",
+    "original_contact_features": [41684, 41687, 41690, 41691, 41692, 41693]
+  },
+  "physical_review": {
+    "commit": "670e16bd1b334ce681ab3f8de8eaf0c5d9585d92",
+    "whole_target_support_path": "coordination/engineering/lie-qualified-repair-20261021/physical-001/whole-target-support.json",
+    "whole_target_support_sha256": "200ad351b58d2bbb9e04e067890bb5b474fe8b40b62bbb225e438c7c8ee4676e",
+    "execution_receipt_path": "coordination/engineering/lie-qualified-repair-20261021/physical-001/execution-receipt.json",
+    "execution_receipt_complete": true,
+    "producer": "scripts/qualify-source-cohort.py",
+    "producer_sha256": "abc801b9a35d20c9f0dfe3bbc9bb2cb7dc107f1758414970d9cde11380574a18",
+    "pinned_input_count": 25,
+    "source_features_checked": 11,
+    "issues_by_target": 0,
+    "source_covers_candidate_all_targets": true,
+    "interpretation": "The complete 11-feature selected family covers each whole target in the physical support check. This is actual source-relative physical evidence for the selected 2017 simplified family; it is not a legal boundary determination and does not erase the seven-key same-release full-representation misses."
+  },
+  "source_review": {
+    "source_evidence_path": "coordination/engineering/lie-qualified-repair-20261021/source-evidence-002/source-evidence.json",
+    "source_evidence_sha256": "b30bf4c1715e3d5313bd561040625dc9a80e9a3cf5c30ca858d3bb8a1b823c42",
+    "territorial_provenance_path": "coordination/engineering/lie-qualified-repair-20261021/source-evidence-002/territorial-exclusion-provenance.json",
+    "territorial_provenance_sha256": "21b21ebb2a2a468c3b32b39ed6a7d8364c148936ef795a205c6539acd3f7d3a9",
+    "source_payload": {
+      "commit": "b163f0c1a496dd8a341d646458e5f8ecac076e12",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LIE-ADM1-000.bin.gz",
+      "blob": "fb895b3ea2445a1f8b67d5f474c8f20fe2399106",
+      "compressed_bytes": 3986,
+      "compressed_sha256": "3285859249ca41e6de8357137249abd79780c9f196f5dcdb99bffc8556ff7bdd",
+      "decoded_bytes": 18157,
+      "decoded_sha256": "6e951b381a6529bd8fbda4194414f822777ebc8f470caa30eb89c2a8b3576ebc"
+    },
+    "six_contact_rows_each_cover_exact_full_owner_request": true,
+    "coverage_check": "For each of the six source-target rows, the set of (y,x) coordinates in coverage_rows equals the original patch set exactly (148 keys); the coverage class is mapped_land_support. The first diagnostic's pre-output admission failure was fixed by supplying complete owner coverage to every sibling source row.",
+    "whole_family_negatives": [
+      {"family": "gb:AUT:ADM1", "features": 9, "decoded_bytes": 392050, "decoded_sha256": "b4a2304bac51b36a7f8463c91089e4b468ef8ee1faa529592673dbefc8cee69e"},
+      {"family": "gb:AUT:ADM2", "features": 94, "decoded_bytes": 1240074, "decoded_sha256": "d233a5447dfbe517844536aec583cc7054475ce9e6a34013ab0d4e6e8b63bb18"},
+      {"family": "gb:CHE:ADM1", "features": 26, "decoded_bytes": 439174, "decoded_sha256": "c0a78aa1cc5ce4a50e08e72d6424d4744024eb7421b13aedd8c3dd1139285cef"},
+      {"family": "gb:CHE:ADM2", "features": 169, "decoded_bytes": 726296, "decoded_sha256": "bb272c66b2ad16c5e9d8a82dd6dbb774027dbac5f05a3a48288783f49ab11dfc"}
+    ],
+    "negative_family_contacts": {
+      "whole_families_scanned": ["gb:AUT:ADM1", "gb:AUT:ADM2", "gb:CHE:ADM1", "gb:CHE:ADM2"],
+      "distinct_AUT_features_in_source_exclusions": 4,
+      "distinct_CHE_features_in_source_exclusions": 6,
+      "per_source_target_contact_counts": [7, 6, 5, 7, 8, 4],
+      "separate_excluded_AUT_conflict_key": {"y": 92138, "x": 138082}
+    },
+    "limits": [
+      "The per-cell candidate roster alone is not a whole-target competitor proof; the source-evidence-002 payload includes full AUT and CHE ADM1/ADM2 families and target-specific exclusions.",
+      "The 2022 CHE catalogue license label is 'Federal Office of Topography swisstopo License' and licenseDetail was recorded as nan. Current official swisstopo materials support broad OGD use and mandatory attribution, but do not independently certify the exact archived 2022 delivery conditions.",
+      "The original selected LIE family is the 2017 simplified source under ODbL 1.0. The seven original-key misses from the same-release full representation remain adverse evidence; no 141/7 split or boundary-equivalence claim is made.",
+      "No current-authority, legal-boundary, or root acceptance determination is made."
+    ]
+  },
+  "native_review": {
+    "diagnostic_path": "coordination/engineering/lie-qualified-repair-20261021/native-diagnostic-002/native-diagnostic.json",
+    "diagnostic_sha256": "5eb32e2dc8f74e53512e877bab3858ac63991792b7d5322d2e1a07e378b79fe4",
+    "diagnostic_commit_binding": "source evidence commit 749125808c1476aaf2b412be171faaba62226b68; original patch commit 62db32a6bae7c337a8616f8c6e63e2480ac7e9b7",
+    "requested_cells": 148,
+    "supported_cells": 148,
+    "held_cells": 0,
+    "requested_intervals": 60,
+    "patch_equals_requested_equals_supported": true,
+    "rule_sha256": "9eaaf756ebe3d58062c4f424894f57b0a0c664f092a2e3d55b55f9788fa7bb26",
+    "diagnostic_limitation": "This is stock native source-support screening, not authority/constructor completion, owner-zero proof, acceptance, or evidence that the historical full-source discrepancies are immaterial."
+  },
+  "official_swisstopo_terms_read": {
+    "method": "Public web search/open only; no user-local browser.",
+    "obsolete_recorded_terms_url": {
+      "url": "https://www.swisstopo.admin.ch/en/home/meta/conditions/geodata/ogd.html",
+      "result": "Previously fetched normally; 404 with a small application/json response. This is an obsolete URL, not an access denial."
+    },
+    "official_pages_opened": [
+      {
+        "url": "https://www.swisstopo.admin.ch/en/conditions-geodata",
+        "published": "2024-01-08",
+        "finding": "Standard digital products have been free OGD since 2021-03-01; unless delivery specifies otherwise, the swisstopo OGD terms apply."
+      },
+      {
+        "url": "https://www.swisstopo.admin.ch/en/terms-of-use-free-geodata-and-geoservices",
+        "published": "2022-08-26",
+        "version": "1.3.2021",
+        "finding": "Free swisstopo geodata may be used, distributed, made accessible, enriched, processed and used commercially; source attribution is mandatory."
+      },
+      {
+        "url": "https://www.swisstopo.admin.ch/en/source-reference-ogd-swisstopo",
+        "published": "2021-09-14",
+        "finding": "For analysis/derived data without direct visual representation, source indication should be in accompanying documentation; derived-data attribution follows direct-use rules."
+      },
+      {
+        "url": "https://www.swisstopo.admin.ch/en/landscape-model-swissboundaries3d",
+        "published": "2025-12-18",
+        "finding": "Product describes all Swiss and Liechtenstein administrative units/national boundaries; updating uses Cadastral Survey and Federal Statistical Office inputs; generalized 1:25,000 GG25 data were imported and geometry is continually improved with cadastral survey; stated accuracy is ±0.5 m. This describes the current product process and does not prove the exact 2022 archived competitor geometry's revision or detail."
+      }
+    ],
+    "reuse_assessment": "Current official terms make the OGD permission and attribution condition concrete. Because the historical catalogue's per-delivery detail is absent, the report records a qualified source/terms association rather than retroactive legal clearance."
+  },
+  "overall_independent_assessment": "The actual physical, selected-source, complete AUT/CHE negative-family, and stock native diagnostic artifacts are internally consistent with the exact 148-key/60-interval LIE scope. They support proceeding to the stock native authority/constructor and selected-native conservation steps. Preserve the seven full-source misses, the separate AUT conflict key, 2017 ODbL selected-source context, and caveat that current OGD terms do not adjudicate exact archived 2022 delivery terms. This review does not certify final package composition, hosted execution, current owners, acceptance, or legal boundary authority."
+}

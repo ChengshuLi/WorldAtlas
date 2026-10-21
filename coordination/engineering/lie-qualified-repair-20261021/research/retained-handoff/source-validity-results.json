@@ -1,0 +1,1041 @@
+{
+  "runtime": {
+    "shapely": "2.2.0",
+    "geos": "3.14.1"
+  },
+  "sources": [
+    {
+      "path": "primary/lie-original.geojson",
+      "sha256": "6e951b381a6529bd8fbda4194414f822777ebc8f470caa30eb89c2a8b3576ebc",
+      "complete_features": 11,
+      "invalid": [],
+      "features": [
+        {
+          "ordinal": 0,
+          "id": "41692755B66371769109520",
+          "name": "Triesen",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 1,
+          "id": "41692755B68962474767900",
+          "name": "Schellenberg",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 2,
+          "id": "41692755B90684947638296",
+          "name": "Gamprin",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "MultiPolygon"
+        },
+        {
+          "ordinal": 3,
+          "id": "41692755B18610673403937",
+          "name": "Triesenberg",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "MultiPolygon"
+        },
+        {
+          "ordinal": 4,
+          "id": "41692755B941757218579",
+          "name": "Eschen",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "MultiPolygon"
+        },
+        {
+          "ordinal": 5,
+          "id": "41692755B33734108210637",
+          "name": "Ruggell",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 6,
+          "id": "41692755B54662867343220",
+          "name": "Mauren",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 7,
+          "id": "41692755B26730620500431",
+          "name": "Schaan",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "MultiPolygon"
+        },
+        {
+          "ordinal": 8,
+          "id": "41692755B63992629942054",
+          "name": "Balzers",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "MultiPolygon"
+        },
+        {
+          "ordinal": 9,
+          "id": "41692755B23424129986871",
+          "name": "Planken",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "MultiPolygon"
+        },
+        {
+          "ordinal": 10,
+          "id": "41692755B54479018835512",
+          "name": "Vaduz",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "MultiPolygon"
+        }
+      ]
+    },
+    {
+      "path": "primary/lie-full.geojson",
+      "sha256": "326cc1da31d15c85ada8e6afc7f049290a728de42f7b48e05191673974e53afd",
+      "complete_features": 11,
+      "invalid": [],
+      "features": [
+        {
+          "ordinal": 0,
+          "id": "41692755B66371769109520",
+          "name": "Triesen",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 1,
+          "id": "41692755B68962474767900",
+          "name": "Schellenberg",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 2,
+          "id": "41692755B90684947638296",
+          "name": "Gamprin",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "MultiPolygon"
+        },
+        {
+          "ordinal": 3,
+          "id": "41692755B18610673403937",
+          "name": "Triesenberg",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "MultiPolygon"
+        },
+        {
+          "ordinal": 4,
+          "id": "41692755B941757218579",
+          "name": "Eschen",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "MultiPolygon"
+        },
+        {
+          "ordinal": 5,
+          "id": "41692755B33734108210637",
+          "name": "Ruggell",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 6,
+          "id": "41692755B54662867343220",
+          "name": "Mauren",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 7,
+          "id": "41692755B26730620500431",
+          "name": "Schaan",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "MultiPolygon"
+        },
+        {
+          "ordinal": 8,
+          "id": "41692755B63992629942054",
+          "name": "Balzers",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "MultiPolygon"
+        },
+        {
+          "ordinal": 9,
+          "id": "41692755B23424129986871",
+          "name": "Planken",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "MultiPolygon"
+        },
+        {
+          "ordinal": 10,
+          "id": "41692755B54479018835512",
+          "name": "Vaduz",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "MultiPolygon"
+        }
+      ]
+    },
+    {
+      "path": "primary/aut1-original.geojson",
+      "sha256": "b4a2304bac51b36a7f8463c91089e4b468ef8ee1faa529592673dbefc8cee69e",
+      "complete_features": 9,
+      "invalid": [],
+      "features": [
+        {
+          "ordinal": 0,
+          "id": "97560089B12055607938436",
+          "name": "Burgenland",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 1,
+          "id": "97560089B55365172259742",
+          "name": "K\u00e4rnten",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 2,
+          "id": "97560089B30234814950985",
+          "name": "Nieder\u00f6sterreich",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 3,
+          "id": "97560089B86772589826985",
+          "name": "Ober\u00f6sterreich",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 4,
+          "id": "97560089B65158936715310",
+          "name": "Salzburg",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 5,
+          "id": "97560089B87855108402029",
+          "name": "Steiermark",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 6,
+          "id": "97560089B46292059412713",
+          "name": "Tirol",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "MultiPolygon"
+        },
+        {
+          "ordinal": 7,
+          "id": "97560089B20931628540879",
+          "name": "Vorarlberg",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 8,
+          "id": "97560089B24691553772644",
+          "name": "Wien",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        }
+      ]
+    },
+    {
+      "path": "primary/aut2-original.geojson",
+      "sha256": "d233a5447dfbe517844536aec583cc7054475ce9e6a34013ab0d4e6e8b63bb18",
+      "complete_features": 94,
+      "invalid": [],
+      "features": [
+        {
+          "ordinal": 0,
+          "id": "14549572B96499603225399",
+          "name": "Amstetten",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "MultiPolygon"
+        },
+        {
+          "ordinal": 1,
+          "id": "14549572B55208293376472",
+          "name": "Baden",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 2,
+          "id": "14549572B41160672699042",
+          "name": "Bludenz",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 3,
+          "id": "14549572B55197725393171",
+          "name": "Braunau am Inn",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 4,
+          "id": "14549572B81751018593131",
+          "name": "Bregenz",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 5,
+          "id": "14549572B94683998284044",
+          "name": "Bruck-M\u00fcrzzuschlag",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 6,
+          "id": "14549572B44160776014902",
+          "name": "Bruck an der Leitha",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 7,
+          "id": "14549572B41302115637619",
+          "name": "Deutschlandsberg",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 8,
+          "id": "14549572B2788459518344",
+          "name": "Dornbirn",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 9,
+          "id": "14549572B58956451713860",
+          "name": "Eferding",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 10,
+          "id": "14549572B42773382597279",
+          "name": "Eisenstadt-Umgebung",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 11,
+          "id": "14549572B42934090716904",
+          "name": "Eisenstadt(Stadt)",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 12,
+          "id": "14549572B80242755253081",
+          "name": "Feldkirch",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 13,
+          "id": "14549572B47665987386389",
+          "name": "Feldkirchen",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 14,
+          "id": "14549572B58764549276326",
+          "name": "Freistadt",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 15,
+          "id": "14549572B11117294773802",
+          "name": "G\u00e4nserndorf",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 16,
+          "id": "14549572B74783988457601",
+          "name": "Gm\u00fcnd",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 17,
+          "id": "14549572B77434838752176",
+          "name": "Gmunden",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 18,
+          "id": "14549572B3684891259076",
+          "name": "Graz-Umgebung",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 19,
+          "id": "14549572B62018826292176",
+          "name": "Graz(Stadt)",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 20,
+          "id": "14549572B9940951169199",
+          "name": "Grieskirchen",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 21,
+          "id": "14549572B95513222830775",
+          "name": "G\u00fcssing",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 22,
+          "id": "14549572B58062952294319",
+          "name": "Hallein",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 23,
+          "id": "14549572B55609752698856",
+          "name": "Hartberg-F\u00fcrstenfeld",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 24,
+          "id": "14549572B75103702321427",
+          "name": "Hermagor",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 25,
+          "id": "14549572B25663415293212",
+          "name": "Hollabrunn",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 26,
+          "id": "14549572B37819300822483",
+          "name": "Horn",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 27,
+          "id": "14549572B38890589563780",
+          "name": "Imst",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 28,
+          "id": "14549572B66922118471265",
+          "name": "Innsbruck-Land",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 29,
+          "id": "14549572B66440199286019",
+          "name": "Innsbruck-Stadt",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 30,
+          "id": "14549572B56118074720485",
+          "name": "Jennersdorf",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 31,
+          "id": "14549572B38894740445417",
+          "name": "Kirchdorf an der Krems",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 32,
+          "id": "14549572B44298066383841",
+          "name": "Kitzb\u00fchel",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 33,
+          "id": "14549572B38736902146486",
+          "name": "Klagenfurt Land",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 34,
+          "id": "14549572B120046562569",
+          "name": "Klagenfurt(Stadt)",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 35,
+          "id": "14549572B4505835090563",
+          "name": "Korneuburg",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "MultiPolygon"
+        },
+        {
+          "ordinal": 36,
+          "id": "14549572B91135602876428",
+          "name": "Krems an der Donau(Stadt)",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 37,
+          "id": "14549572B17511586897466",
+          "name": "Krems(Land)",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 38,
+          "id": "14549572B59844818715451",
+          "name": "Kufstein",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 39,
+          "id": "14549572B1495369757846",
+          "name": "Landeck",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 40,
+          "id": "14549572B13674595787966",
+          "name": "Leibnitz",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 41,
+          "id": "14549572B99745106362124",
+          "name": "Leoben",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 42,
+          "id": "14549572B80741192481461",
+          "name": "Lienz",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 43,
+          "id": "14549572B47205834081822",
+          "name": "Liezen",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 44,
+          "id": "14549572B21749172067380",
+          "name": "Lilienfeld",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 45,
+          "id": "14549572B77519525915524",
+          "name": "Linz-Land",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 46,
+          "id": "14549572B96217640183416",
+          "name": "Linz(Stadt)",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 47,
+          "id": "14549572B54924722393177",
+          "name": "Mattersburg",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 48,
+          "id": "14549572B79532405595503",
+          "name": "Melk",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 49,
+          "id": "14549572B80454690020215",
+          "name": "Mistelbach",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 50,
+          "id": "14549572B30005967940450",
+          "name": "M\u00f6dling",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 51,
+          "id": "14549572B5680127390919",
+          "name": "Murau",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 52,
+          "id": "14549572B5280501817334",
+          "name": "Murtal",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 53,
+          "id": "14549572B78442529062401",
+          "name": "Neunkirchen",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 54,
+          "id": "14549572B9829477646273",
+          "name": "Neusiedl am See",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 55,
+          "id": "14549572B63430755874658",
+          "name": "Oberpullendorf",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 56,
+          "id": "14549572B34947061849091",
+          "name": "Oberwart",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 57,
+          "id": "14549572B82951321979539",
+          "name": "Perg",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 58,
+          "id": "14549572B67671541166056",
+          "name": "Reutte",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "MultiPolygon"
+        },
+        {
+          "ordinal": 59,
+          "id": "14549572B74865377205393",
+          "name": "Ried im Innkreis",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 60,
+          "id": "14549572B3648245440037",
+          "name": "Rohrbach",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 61,
+          "id": "14549572B63332464794516",
+          "name": "Rust(Stadt)",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 62,
+          "id": "14549572B80883353663725",
+          "name": "Salzburg-Umgebung",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 63,
+          "id": "14549572B48902523635521",
+          "name": "Salzburg(Stadt)",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 64,
+          "id": "14549572B81375384151440",
+          "name": "Sankt Johann im Pongau",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 65,
+          "id": "14549572B36790044704136",
+          "name": "Sankt P\u00f6lten(Land)",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 66,
+          "id": "14549572B80710785745839",
+          "name": "Sankt P\u00f6lten(Stadt)",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 67,
+          "id": "14549572B79241155070811",
+          "name": "Sankt Veit an der Glan",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 68,
+          "id": "14549572B77378087983833",
+          "name": "Sch\u00e4rding",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 69,
+          "id": "14549572B41539684313682",
+          "name": "Scheibbs",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 70,
+          "id": "14549572B36703389506709",
+          "name": "Schwaz",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 71,
+          "id": "14549572B5563288813378",
+          "name": "Spittal an der Drau",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 72,
+          "id": "14549572B95795857580368",
+          "name": "Steyr-Land",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 73,
+          "id": "14549572B44973380908998",
+          "name": "Steyr(Stadt)",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 74,
+          "id": "14549572B2105693319096",
+          "name": "S\u00fcdoststeiermark",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 75,
+          "id": "14549572B5163353655398",
+          "name": "Tamsweg",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 76,
+          "id": "14549572B69834744400271",
+          "name": "Tulln",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 77,
+          "id": "14549572B23101130248383",
+          "name": "Urfahr-Umgebung",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 78,
+          "id": "14549572B90792399877062",
+          "name": "Villach Land",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 79,
+          "id": "14549572B91657793065449",
+          "name": "Villach(Stadt)",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 80,
+          "id": "14549572B27080070946592",
+          "name": "V\u00f6cklabruck",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 81,
+          "id": "14549572B18383956859097",
+          "name": "Voitsberg",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 82,
+          "id": "14549572B94258611275926",
+          "name": "V\u00f6lkermarkt",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 83,
+          "id": "14549572B32658939517567",
+          "name": "Waidhofen an der Thaya",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 84,
+          "id": "14549572B22426676215566",
+          "name": "Waidhofen an der Ybbs(Stadt)",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 85,
+          "id": "14549572B66706481000186",
+          "name": "Weiz",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 86,
+          "id": "14549572B79017974410181",
+          "name": "Wels-Land",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 87,
+          "id": "14549572B59174273305720",
+          "name": "Wels(Stadt)",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 88,
+          "id": "14549572B24691553772644",
+          "name": "Wien(Stadt)",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 89,
+          "id": "14549572B56305741888940",
+          "name": "Wiener Neustadt(Land)",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "MultiPolygon"
+        },
+        {
+          "ordinal": 90,
+          "id": "14549572B50853821374645",
+          "name": "Wiener Neustadt(Stadt)",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 91,
+          "id": "14549572B95590877678273",
+          "name": "Wolfsberg",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 92,
+          "id": "14549572B17202762284767",
+          "name": "Zell am See",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        },
+        {
+          "ordinal": 93,
+          "id": "14549572B69216186018190",
+          "name": "Zwettl",
+          "valid": true,
+          "reason": "Valid Geometry",
+          "geometry_type": "Polygon"
+        }
+      ]
+    }
+  ],
+  "limits": "Validity inspection only. No repair, snapping, tolerance change, source replacement or qualification."
+}
