@@ -1,0 +1,207 @@
+{
+  "kind": "mnp-original-territorial-applicability-review",
+  "as_of": "2026-10-21",
+  "scope": {
+    "package_id": "gb-MNP-ADM2--repair-evaluation",
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "cells": 205,
+    "intervals": 83,
+    "owners": {
+      "30770": 189,
+      "30767": 11,
+      "30769": 5
+    },
+    "excluded": [
+      "Saipan owner 30768",
+      "31-cell physical-interpretation companion",
+      "regional source review #383"
+    ]
+  },
+  "handoff": {
+    "path": "inventory/mnp-audit-handoff/extracted",
+    "zip_bytes": 9748086,
+    "zip_sha256": "8fb3f85e82464b51509bf78553af554bc0f681df1eb811a8506ad4234e2f8c3d",
+    "manifest_members_verified_by_parent": 44,
+    "reviewed_files": [
+      "census-hierarchy-identity-join.json",
+      "exact-foreign-operands.json",
+      "source-contact-results.json",
+      "same-release-full-source-adverse-keys.json",
+      "retained/original-queue-MNP-rows.json",
+      "MNP205-portable-handoff.json"
+    ]
+  },
+  "census_identity": {
+    "method": "Exact source shapeName-to-Census BASENAME join; no normalization.",
+    "usa_adm1": {
+      "source_index": 61269,
+      "feature_ordinal": 45,
+      "source_id": "gb:USA:ADM1:66186276B16791499040259",
+      "name": "Commonwealth of the Northern Mariana Islands",
+      "iso": "US-MP",
+      "census_state_fips": "69",
+      "owner_indices": [],
+      "original_native_center_incidences": 203
+    },
+    "usa_adm2": {
+      "source_index": 64048,
+      "feature_ordinal": 2768,
+      "source_id": "gb:USA:ADM2:52423323B84565222808084",
+      "name": "Northern Islands",
+      "census_state_fips": "69",
+      "census_county_fips": "085",
+      "census_geoid": "69085",
+      "census_countyns": "01805245",
+      "census_name": "Northern Islands Municipality",
+      "owner_indices": [],
+      "original_native_center_incidences": 150
+    },
+    "vintages": "The retained Census joins cover 2018 and 2021 records; the 69085/GEOID and county namespace are unchanged across them.",
+    "contact_rows": [
+      {
+        "owner": 30767,
+        "member": "Tinian",
+        "usa_adm1_incidences": 11,
+        "usa_adm2_incidences": 0
+      },
+      {
+        "owner": 30769,
+        "member": "Rota",
+        "usa_adm1_incidences": 5,
+        "usa_adm2_incidences": 0
+      },
+      {
+        "owner": 30770,
+        "member": "Northern Islands",
+        "usa_adm1_incidences": 39,
+        "usa_adm2_incidences": 0
+      },
+      {
+        "owner": 30770,
+        "member": "Northern Islands",
+        "usa_adm1_incidences": 39,
+        "usa_adm2_incidences": 148
+      },
+      {
+        "owner": 30770,
+        "member": "Northern Islands",
+        "usa_adm1_incidences": 0,
+        "usa_adm2_incidences": 2
+      }
+    ],
+    "incidence_limit": "203 ADM1 plus 150 ADM2 equals 353 source incidences, with overlap; these are not 353 unique cells. Census identity/name/identifier corroboration is not polygon equality, source adoption, owner assignment, or a legal sovereignty determination.",
+    "decision": "Yes: the exact official state-69 parent and county-085/GEOID-69085 Northern Islands records support the narrow contextual treatment of these exact original USA contact operands. The state record is parent-jurisdiction context for the enumerated Tinian, Rota, and Northern Islands cells; the county record corroborates the same Northern Islands Municipality identity for only the Northern Islands contacts. This is an identity/context interpretation, not an independent ownership or exclusion result. All original source geometries remain present in the negative/contact evidence, and exact native-key, source-membership, physical, and selected-owner predicates remain separately required. No specific identity contradiction was found between the Census records and the recorded MNP names; the separate same-release full-source misses and the Northern Islands physical land/water issue remain adverse."
+  },
+  "stock_contract_predicates": {
+    "source_script": {
+      "commit": "8a0d0302",
+      "path": "scripts/prepare-delivery-handoff.mjs",
+      "blob_oid": "240c39a8249f10067289432dfb6bcdef806363a1",
+      "relevant_sections": "sourceTerritorialExclusions; sourceEvidence territorial_applicability role validation"
+    },
+    "integration_script": {
+      "commit": "8a0d0302",
+      "path": "scripts/integration-profile.mjs",
+      "blob_oid": "cb64826ebabd08bf4519fc2947be91c4f1fdf638"
+    },
+    "delivery_contract": {
+      "commit": "8a0d0302",
+      "path": "docs/DELIVERY_HANDOFF.md",
+      "blob_oid": "7ebaae4628e77ad59f6b64c6b833e391c781f6d4"
+    },
+    "predicates": [
+      "The positive target id binds to a selected current target; its pixelIndex is a positive native owner index.",
+      "The physical stage binds the target's whole consumed original source geometry and shapeID, plus selected target id and exact selected base geometry.",
+      "Negative families are an explicit, unique reviewed list of whole original catalogue products; names, prefixes, or absent owner fields do not infer foreign status or applicability.",
+      "For each target, a candidate negative is retained only when complete source-member and feature bounds touch/intersect. Only bbox-disjoint features are omitted; retained geometries remain whole and source_id/feature ordinal/geometry hash are preserved.",
+      "Compact references bind source_id, feature_ordinal, negative_ordinal and geometry_sha256; ambiguous or unmatched geometry remains literal. Native reader expands exact complete original geometry before existing applicability/veto checks.",
+      "The code explicitly says this preparation does not derive positive ownership or an applicability exception; native source, owner, physical, geometry and full-scope qualification remain required."
+    ]
+  },
+  "narrow_adoption_statement": "The exact Census state-69 ADM1 feature is supportable as a parent-jurisdiction context reference for the MNP targets, and Census ADM2 GEOID 69085/COUNTYNS 01805245 is supportable as same-entity identity corroboration for the Northern Islands Municipality contact. This specific interpretation is justified by the exact Census name/identifier hierarchy join; it must not be generalized to exclude all USA-labeled sources or to treat these features as replacement positive geometries. Preserve the two complete source operands and every recorded contact; keep per-key native effects separate.",
+  "remaining_scientific_limits": [
+    "The Census name/GEOID join corroborates administrative identity, not geometry equality or point membership equivalence.",
+    "The MNP original simplified source matches all 205 keys, while the same-release full MNP source matches 202 and misses 3; all three adverse keys remain explicit and require separate treatment.",
+    "Current audit #2649 suspends prior MNP unresolved completion credit; PR #2601 and comment #6303477494 are historical evidence, not current root acceptance.",
+    "No positive qualification, owner change, or credit is claimed by this review."
+  ],
+  "operations": {
+    "read_only": true,
+    "owner_observer_rerun": false,
+    "source_scan_or_geometry_rerun": false,
+    "physical_run": false,
+    "allocation_or_claim": false,
+    "network_acquisition": false,
+    "physical_receipt_rerun": false
+  },
+  "physical_receipt": {
+    "commit": "0e7ea3e7e363eefd300bed90feccbef2cac07e1d",
+    "receipt": {
+      "path": "coordination/engineering/mnp-qualified-repair-20261021/physical-001/execution-receipt.json",
+      "blob_oid": "4853804a59525034653f24ed46f89381cd74cfa6"
+    },
+    "output": {
+      "path": "coordination/engineering/mnp-qualified-repair-20261021/physical-001/whole-target-support.json",
+      "blob_oid": "ecb15685085888234e88d147e245987f634d488b",
+      "bytes": 162259,
+      "sha256": "452ccc1d92479c5d595395813cb0430947a47cd0750ee4cb3eef4739e890df3a"
+    },
+    "stage": {
+      "commit": "f9bef01154b4ee944122dda1f3334051355b2f4f",
+      "path": "coordination/engineering/mnp-qualified-repair-20261021/physical-preparation/original-stage-inputs.json",
+      "blob_oid": "bf5b46bcf7e1363eac8f41cb08b6e4e3b7848731",
+      "bytes": 8719,
+      "sha256": "ad9b9a0d7cbc119156f201b2e1ec4f8aafed8cb2fca563e903594769478191ca"
+    },
+    "producer": {
+      "path": "scripts/qualify-source-cohort.py",
+      "blob_oid": "f69180b425d665a022dd18290688864674dd20a5"
+    },
+    "source_member": {
+      "source": "GSHHG full member gshhs_f.b",
+      "original_source_commit": "f8f99612e4d83d561b370189a1969c3e4301a1e3",
+      "original_zip_bytes": 118617033,
+      "original_zip_sha256": "28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+      "member_bytes": 95809336,
+      "member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+      "record_count": 188612,
+      "geometry_operations": false
+    },
+    "targets": [
+      {
+        "id": "gb:MNP:ADM2:39175420B24162802066299",
+        "name": "Tinian",
+        "source_queries": 4,
+        "issues": [],
+        "hierarchy_disagreement_empty": true,
+        "missing_reconstruction_empty": true,
+        "extra_reconstruction_empty": true
+      },
+      {
+        "id": "gb:MNP:ADM2:39175420B64217482742742",
+        "name": "Rota",
+        "source_queries": 2,
+        "issues": [],
+        "hierarchy_disagreement_empty": true,
+        "missing_reconstruction_empty": true,
+        "extra_reconstruction_empty": true
+      },
+      {
+        "id": "gb:MNP:ADM2:39175420B77088391070908",
+        "name": "Northern Islands",
+        "source_queries": 16,
+        "issues": [
+          "contradictory_land_water_support: 5-line MultiLineString"
+        ],
+        "hierarchy_disagreement_empty": true,
+        "missing_reconstruction_empty": true,
+        "extra_reconstruction_empty": true
+      }
+    ],
+    "limits": [
+      "This is a whole-target physical diagnostic, not a per-key native-center verdict. The Northern Islands contradiction must remain adverse until actual key-specific effects are checked.",
+      "No owner observer, source scan, or physical producer was rerun for this review."
+    ]
+  }
+}
