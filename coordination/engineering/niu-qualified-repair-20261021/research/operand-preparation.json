@@ -1,0 +1,262 @@
+{
+  "kind": "niu116-source-and-physical-operand-preparation-not-executed",
+  "original_package": {
+    "id": "gb-NIU-ADM1--repair-evaluation",
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_blob": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "native_block": 35,
+    "cells": 116,
+    "intervals": 50,
+    "land": 116,
+    "water": 0,
+    "owner_index": 7126,
+    "source_features": [
+      47591,
+      47592,
+      47593,
+      47597,
+      47598,
+      47599,
+      47600,
+      47602
+    ],
+    "companion_excluded": {
+      "package_id": "gb-NIU-ADM1--physical-interpretation",
+      "source_relative_cells": 47,
+      "interval_segments": 38,
+      "land_cells": 0,
+      "inland_water_cells": 0,
+      "source_features": [
+        47593,
+        47595,
+        47596
+      ],
+      "meaning": "Distinct companion scope: 21 source-relative Mutalau cells plus 18 Liku and 8 Hakupu cells. Excluded from this repair package."
+    }
+  },
+  "stage_input": {
+    "local_path": "inventory/niu116-operand-preparation/physical-stage-inputs.json",
+    "bytes": 7918,
+    "sha256": "8631332ba95eaec03a23d0ee2a77a7ade1fadbb6644635a68ea6bc66f23ecae9",
+    "rows": 8,
+    "schema": "stock physical stage rows: family, target, consumed Feature; each consumed geometry is the original simplified feature, target is the exact original gb source ID."
+  },
+  "complete_source_family": {
+    "simplified": {
+      "local_path": "inventory/niu116-operand-preparation/original-simplified-14-member-family.geojson",
+      "bytes": 12712,
+      "sha256": "c80eb71138eab37e47d29ba12e9695806d3173109c7edb931a9e63e9f5d93e34",
+      "source_pin": {
+        "repo_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-NIU-ADM1-000.bin.gz",
+        "git_blob_oid": "0846aee08451e6c2dbe2553fb871b7e362a3f192",
+        "compressed_bytes": 3251,
+        "compressed_sha256": "396f6e10e5ab71cbb1eae927f47a518511ae1d485cc057a6eeaa97395ca8f7e3",
+        "decoded_bytes": 14444,
+        "decoded_sha256": "4bf1e8967a32d43da06c12e43bf99ea35c704aa00ffaaa821f63728335088b13",
+        "feature_count": 14,
+        "acquisition_receipt": {
+          "path": "gb-NIU-ADM1-000.bin.gz",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "0846aee08451e6c2dbe2553fb871b7e362a3f192",
+          "size": 3251,
+          "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/0846aee08451e6c2dbe2553fb871b7e362a3f192",
+          "sha256": "396f6e10e5ab71cbb1eae927f47a518511ae1d485cc057a6eeaa97395ca8f7e3",
+          "decoded_bytes": 14444,
+          "decoded_sha256": "4bf1e8967a32d43da06c12e43bf99ea35c704aa00ffaaa821f63728335088b13",
+          "feature_count": 14
+        },
+        "inspection": "Read feature properties only; geometry was not read or processed. All 14 properties have shapeGroup NIU, shapeType ADM1, blank shapeISO. The eight package-contact features match the original source roster by index, ordinal, source ID and name.",
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7"
+      },
+      "feature_count": 14,
+      "role": "complete original NIU family; source evidence should retain all fourteen members"
+    },
+    "same_release_full_sensitivity": {
+      "local_path": "inventory/niu116-operand-preparation/same-release-full-14-member-sensitivity.geojson",
+      "bytes": 98271,
+      "sha256": "67698cda5779dcb64dda31c025dc9221ad1cf1cbc034805e733492fa3d663c7e",
+      "feature_count": 14,
+      "role": "adverse sensitivity only, not a replacement for the consumed simplified family"
+    },
+    "metadata": {
+      "path": "primary/gb-metadata.json",
+      "bytes": 1766,
+      "sha256": "f2c39888cecc1fa2aa3d170a32c7a51512e63236b4089842880020644e6a615b",
+      "boundaryYearRepresented": "2020",
+      "boundaryCanonical": "village",
+      "boundarySource": "Pacific Data Hub",
+      "boundaryLicense": "CC BY 4.0"
+    }
+  },
+  "accepted_aggregation": {
+    "owner": {
+      "id": "atlas:territory:NIU",
+      "index": 7126,
+      "bounds": [
+        7319.601896111104,
+        145144.21752617377,
+        7447.189349444451,
+        145299.92588968753
+      ],
+      "province_id": "framework:province:niue:41699e810a4a",
+      "province_index": 3290,
+      "name": "Niue",
+      "reference_owner": "Niue",
+      "source_id": "atlas:territory:NIU",
+      "location_basis": "Compact source country/territory",
+      "source_atoms": [
+        "gb:NIU:ADM1:93272968B22364225711306",
+        "gb:NIU:ADM1:93272968B39016058610074",
+        "gb:NIU:ADM1:93272968B40090915564601",
+        "gb:NIU:ADM1:93272968B40499677561204",
+        "gb:NIU:ADM1:93272968B4423412382248",
+        "gb:NIU:ADM1:93272968B46019940392073",
+        "gb:NIU:ADM1:93272968B57426624534658",
+        "gb:NIU:ADM1:93272968B73075059072765",
+        "gb:NIU:ADM1:93272968B74056989697157",
+        "gb:NIU:ADM1:93272968B79995440519868",
+        "gb:NIU:ADM1:93272968B84066650409930",
+        "gb:NIU:ADM1:93272968B84240109118138",
+        "gb:NIU:ADM1:93272968B92904151584159",
+        "gb:NIU:ADM1:93272968B97328284886537"
+      ]
+    },
+    "canonical_parent_pin": {
+      "commit": "01fe271e2554b03675769701691fb3dc07442303",
+      "path": "data/geography/part-28.json",
+      "mode": "100644",
+      "git_blob_oid": "a9e03cb07194a73f643af85d1e6db94abe3b5fc9",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    },
+    "lineage_and_index_pins": [
+      {
+        "commit": "01fe271e2554b03675769701691fb3dc07442303",
+        "path": "data/semantic-report.json",
+        "mode": "100644",
+        "git_blob_oid": "db3e1ec83d764bc8183caa4779a94b3ad1db0456",
+        "bytes": 6091596,
+        "sha256": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831"
+      },
+      {
+        "commit": "01fe271e2554b03675769701691fb3dc07442303",
+        "path": "data/world-index.json",
+        "mode": "100644",
+        "git_blob_oid": "d4ca1f07f7f504484461007919f90af5c5732b61",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+      }
+    ],
+    "complete_member_join": true,
+    "canonical_feature_excerpt": "retained/canonical-NIU-feature.json",
+    "route": "Existing original-members-of-accepted-source-aggregations route. Source targets retain original gb IDs, target_id atlas:territory:NIU and pixelIndex 7126 with exact current canonical base geometry. Include the complete 14-member family. No village-to-new-Location reassignment."
+  },
+  "original_masks": {
+    "block": 35,
+    "source_candidates": {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-035.json.gz",
+      "git_blob_oid": "efadb30876bf9a1604b2c2cf84534a8ebf4a1856",
+      "compressed_bytes": 254815,
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7"
+    },
+    "physical_support": {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-035.json.gz",
+      "git_blob_oid": "a97e15cd1af0e4a58f334cfe13a9a963b39067ba",
+      "compressed_bytes": 217105,
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7"
+    },
+    "inland_water_support": {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-035.json.gz",
+      "git_blob_oid": "ab4b5de28776f34acff1ccd57c89d1dc660c584e",
+      "compressed_bytes": 5076,
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7"
+    },
+    "block_scan_counts": {
+      "owner_7126_candidates": 163,
+      "owner_7126_with_any_of_8_package_features": 137,
+      "those_137_not_in_physical_support": 21,
+      "land_intersection_matching_original_package": 116,
+      "inland_water_intersection": 0,
+      "neither_physical_nor_water_in_package": 0,
+      "overlap_physical_and_water_in_package": 0
+    },
+    "separate_physical_interpretation_companion": {
+      "package_id": "gb-NIU-ADM1--physical-interpretation",
+      "source_relative_cells": 47,
+      "interval_segments": 38,
+      "land_cells": 0,
+      "inland_water_cells": 0,
+      "source_features": [
+        47593,
+        47595,
+        47596
+      ],
+      "meaning": "Distinct companion scope: 21 source-relative Mutalau cells plus 18 Liku and 8 Hakupu cells. Excluded from this repair package."
+    },
+    "global_physical_summary": {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-unassigned-summary.json",
+      "git_blob_oid": "0c934cdaf4b007a741e66d4a080890154bdae53c",
+      "limits": "Global methodology/context only; not a per-key NIU physical proof. Existing river water remains location-owned under the original contract.",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7"
+    }
+  },
+  "shared_physical_operand_inventory": {
+    "local_path": "inventory/niu-audit-handoff/extracted/shared-physical-operand-inventory.json",
+    "bytes": 12608,
+    "sha256": "6b940ff6b2cc53f89810b7dbac72940d384406ef42cca6e7250ef88be835ae8d",
+    "shared_inventory": "shared-physical-operand-inventory.json"
+  },
+  "foreign_family_status": {
+    "complete_reviewed_foreign_family_exclusion_set": false,
+    "exact_raster_candidate_finding": "The retained block-035 source-candidates rows for the exact 116 original keys expose only the eight NIU source-feature indices mapped in source-family-membership.json. This is a native-cell candidate finding, not polygon-wide negative-family closure.",
+    "retained_statement": "No complete reviewed foreign-family exclusion set is established by the old NIU packet or this source-only comparison. Use the existing retained catalogue/census and explicit bounded family assessment; never relabel default empty lists as reviewed negatives. Preserve Niue/New Zealand reference uncertainty, all actual contacts and every whole-operand negative.",
+    "missing": "No exact foreign-family candidate IDs or public payload descriptors have yet been authenticated in this handoff. Do not encode an empty negatives list or claim complete competitor closure."
+  },
+  "execution_status": {
+    "physical_producer": "not executed by this preparation",
+    "source_evidence_producer": "not executed",
+    "owner_observer": "not rerun",
+    "geometry_repair_or_assignment": "none",
+    "acceptance": "none"
+  },
+  "limits": [
+    "The eight stage rows are only inputs, not a physical support receipt.",
+    "All fourteen simplified source features are preserved as complete source-family context; the same-release full geometry is separately adverse sensitivity.",
+    "The 47-cell physical-interpretation companion is excluded.",
+    "No new source-contact scanner, physical operator, source-evidence producer or geometry operation was run.",
+    "The shared GSHHG inventory is not an NIU-specific executed result; full metadata and required native fragment completeness are not proven for NIU."
+  ],
+  "prepared_artifacts": [
+    {
+      "path": "physical-stage-inputs.json",
+      "bytes": 7918,
+      "sha256": "8631332ba95eaec03a23d0ee2a77a7ade1fadbb6644635a68ea6bc66f23ecae9"
+    },
+    {
+      "path": "source-family-membership.json",
+      "bytes": 5909,
+      "sha256": "a9c74c096ed5fb83aa37405b69ad5eefb4c7c95d041ca05e45c76be3e6abc4e6"
+    },
+    {
+      "path": "original-simplified-14-member-family.geojson",
+      "bytes": 12712,
+      "sha256": "c80eb71138eab37e47d29ba12e9695806d3173109c7edb931a9e63e9f5d93e34"
+    },
+    {
+      "path": "same-release-full-14-member-sensitivity.geojson",
+      "bytes": 98271,
+      "sha256": "67698cda5779dcb64dda31c025dc9221ad1cf1cbc034805e733492fa3d663c7e"
+    },
+    {
+      "path": "accepted-canonical-target-feature.json",
+      "bytes": 3611,
+      "sha256": "8e8ba9595a862a82de78e30919293afeebd2a6099ba23d1e74d5a37bd4d91d97"
+    },
+    {
+      "path": "canonical-source-membership-join.json",
+      "bytes": 1806,
+      "sha256": "e2b5e744039249d839d4d2f97eadc3a494fe0a0aa578c6e7ae4a3fb9e5ed225d"
+    }
+  ]
+}
