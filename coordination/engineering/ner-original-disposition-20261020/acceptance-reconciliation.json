@@ -1,0 +1,280 @@
+{
+  "version": 1,
+  "kind": "ner-exact-prior-key-reconciliation",
+  "as_of": "2026-10-20 (America/Los_Angeles)",
+  "target": {
+    "package_id": "gb-NER-ADM3--repair-evaluation",
+    "execution_commit": "762a44508ebd1a409753ea4932455633c27f9a36",
+    "execution_code_commit": "762a44508ebd1a409753ea4932455633c27f9a36",
+    "original_native_cells": 532,
+    "land_cells": 528,
+    "inland_water_cells": 4,
+    "interval_rows": 363,
+    "interval_sha256": "63697821525fd8551d7b5c80aa687c26619ceeb173196a48e62341d62a22b5cd",
+    "query_sha256": "256056b0bd03948b62d07a7364cd143cde441b2dfd76fd2baef4ed48ae561981",
+    "query_count": 532,
+    "unique_observation_keys": 532,
+    "sorted_yx_sha256": "990feea569f2a48413dba42727755dcfb7e62ceb73f28b25600e984b847ae13a",
+    "interval_expansion_cells": 532,
+    "interval_expansion_unique_keys": 532,
+    "interval_expansion_matches_observation": true,
+    "missing_observation_keys_from_expansion": 0,
+    "missing_expansion_keys_from_observation": 0,
+    "physical_class_cells": {
+      "land": 528,
+      "inland-water": 4
+    },
+    "base_owner_zero_count": 532,
+    "accepted_additive_owner_zero_count": 532,
+    "effective_selected_owner_zero_count": 532,
+    "existing_product_overlap_count": 0,
+    "consumed_input_count": 41
+  },
+  "examined_prior": {
+    "set_count": 20,
+    "unique_union_count": 58406,
+    "unique_union_sorted_yx_sha256": "4611190363e9c528e9b309ac73d2c166f6017af1812d566fab06b08ba274b1ec",
+    "intersection_with_target_count": 0,
+    "target_residual_after_prior_union": 532,
+    "union_plus_target_count": 58938,
+    "union_plus_target_sorted_yx_sha256": "ee66c6a5ee7d15ba37599557579ad8a92b520f9d87186ea952a0b156777b876f",
+    "sets": [
+      {
+        "name": "mixed 17 exception/held partitions",
+        "key_count": 2147,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+          "path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+          "git_blob_oid": "1c56ef45f503344a3dba5edbefc485e7ad202ca1",
+          "selector": "#/prior_set_keysets_yx/mixed 17 exception/held partitions"
+        }
+      },
+      {
+        "name": "gb-PAN-ADM2--repair-evaluation",
+        "key_count": 22669,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+          "path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+          "git_blob_oid": "1c56ef45f503344a3dba5edbefc485e7ad202ca1",
+          "selector": "#/prior_set_keysets_yx/gb-PAN-ADM2--repair-evaluation"
+        }
+      },
+      {
+        "name": "gb-BRA-ADM2--repair-evaluation",
+        "key_count": 24525,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+          "path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+          "git_blob_oid": "1c56ef45f503344a3dba5edbefc485e7ad202ca1",
+          "selector": "#/prior_set_keysets_yx/gb-BRA-ADM2--repair-evaluation"
+        }
+      },
+      {
+        "name": "gb-TGO-ADM2--repair-evaluation",
+        "key_count": 509,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+          "path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+          "git_blob_oid": "1c56ef45f503344a3dba5edbefc485e7ad202ca1",
+          "selector": "#/prior_set_keysets_yx/gb-TGO-ADM2--repair-evaluation"
+        }
+      },
+      {
+        "name": "gb-SOM-ADM2--repair-evaluation",
+        "key_count": 2247,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+          "path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+          "git_blob_oid": "1c56ef45f503344a3dba5edbefc485e7ad202ca1",
+          "selector": "#/prior_set_keysets_yx/gb-SOM-ADM2--repair-evaluation"
+        }
+      },
+      {
+        "name": "gb-MDA-ADM1--repair-evaluation",
+        "key_count": 1986,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+          "path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+          "git_blob_oid": "1c56ef45f503344a3dba5edbefc485e7ad202ca1",
+          "selector": "#/prior_set_keysets_yx/gb-MDA-ADM1--repair-evaluation"
+        }
+      },
+      {
+        "name": "gb-NRU-ADM1--repair-evaluation",
+        "key_count": 13,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+          "path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+          "git_blob_oid": "1c56ef45f503344a3dba5edbefc485e7ad202ca1",
+          "selector": "#/prior_set_keysets_yx/gb-NRU-ADM1--repair-evaluation"
+        }
+      },
+      {
+        "name": "gb-SWZ-ADM2--repair-evaluation",
+        "key_count": 14,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+          "path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+          "git_blob_oid": "1c56ef45f503344a3dba5edbefc485e7ad202ca1",
+          "selector": "#/prior_set_keysets_yx/gb-SWZ-ADM2--repair-evaluation"
+        }
+      },
+      {
+        "name": "legacy accepted patch",
+        "key_count": 1306,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+          "path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+          "git_blob_oid": "1c56ef45f503344a3dba5edbefc485e7ad202ca1",
+          "selector": "#/prior_set_keysets_yx/legacy accepted patch"
+        }
+      },
+      {
+        "name": "gb-AND-ADM1--repair-evaluation",
+        "key_count": 72,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+          "path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+          "git_blob_oid": "1c56ef45f503344a3dba5edbefc485e7ad202ca1",
+          "selector": "#/prior_set_keysets_yx/gb-AND-ADM1--repair-evaluation"
+        }
+      },
+      {
+        "name": "gb-NIU-ADM1--repair-evaluation",
+        "key_count": 116,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+          "path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+          "git_blob_oid": "1c56ef45f503344a3dba5edbefc485e7ad202ca1",
+          "selector": "#/prior_set_keysets_yx/gb-NIU-ADM1--repair-evaluation"
+        }
+      },
+      {
+        "name": "gb-GUM-ADM2--repair-evaluation",
+        "key_count": 139,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+          "path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+          "git_blob_oid": "1c56ef45f503344a3dba5edbefc485e7ad202ca1",
+          "selector": "#/prior_set_keysets_yx/gb-GUM-ADM2--repair-evaluation"
+        }
+      },
+      {
+        "name": "gb-LIE-ADM1--repair-evaluation",
+        "key_count": 148,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+          "path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+          "git_blob_oid": "1c56ef45f503344a3dba5edbefc485e7ad202ca1",
+          "selector": "#/prior_set_keysets_yx/gb-LIE-ADM1--repair-evaluation"
+        }
+      },
+      {
+        "name": "gb-MNP-ADM2--repair-evaluation",
+        "key_count": 205,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+          "path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+          "git_blob_oid": "1c56ef45f503344a3dba5edbefc485e7ad202ca1",
+          "selector": "#/prior_set_keysets_yx/gb-MNP-ADM2--repair-evaluation"
+        }
+      },
+      {
+        "name": "gb-BTN-ADM1--repair-evaluation",
+        "key_count": 256,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+          "path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+          "git_blob_oid": "1c56ef45f503344a3dba5edbefc485e7ad202ca1",
+          "selector": "#/prior_set_keysets_yx/gb-BTN-ADM1--repair-evaluation"
+        }
+      },
+      {
+        "name": "gb-PSE-ADM2--repair-evaluation",
+        "key_count": 427,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+          "path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+          "git_blob_oid": "1c56ef45f503344a3dba5edbefc485e7ad202ca1",
+          "selector": "#/current_selected_owner_observation/original_keys_yx",
+          "root_acceptance": "https://github.com/ChengshuLi/WorldAtlas/pull/2607#issuecomment-6304001433"
+        }
+      },
+      {
+        "name": "gb-NPL-ADM2--repair-evaluation",
+        "key_count": 334,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "b383955191818f348ab201d125b7f5ec6f97fc6b",
+          "path": "coordination/engineering/npl-original-disposition-20261020/npl-selected-owner-observation.json.gz",
+          "git_blob_oid": "5f8091e9c02b6818ca70e8417c7e0abd7e5bcc9b",
+          "selector": "keys[*].{y,x}",
+          "root_acceptance": "https://github.com/ChengshuLi/WorldAtlas/pull/2614#issuecomment-6304587134"
+        }
+      },
+      {
+        "name": "gb-KNA-ADM1--repair-evaluation",
+        "key_count": 305,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "775f0a1eddf8964b81d217d01a801c2b338db9c6",
+          "path": "coordination/engineering/kna-original-disposition-20261020/kna-selected-owner-observation.json.gz",
+          "git_blob_oid": "ab012815bd4dda4d39d2d4dbe004ea31e648b952",
+          "selector": "keys[*].{y,x}",
+          "root_acceptance": "https://github.com/ChengshuLi/WorldAtlas/pull/2610#issuecomment-6304273664"
+        }
+      },
+      {
+        "name": "gb-WSM-ADM1--repair-evaluation",
+        "key_count": 469,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "867740323969355fb3691f0130120fd99e7a7426",
+          "path": "coordination/engineering/wsm-original-disposition-20261020/wsm-selected-owner-observation.json.gz",
+          "git_blob_oid": "c633ffb83316ff39b693ed0854502f3a9bd898ed",
+          "selector": "keys[*].{y,x}",
+          "root_acceptance": "https://github.com/ChengshuLi/WorldAtlas/pull/2619#issuecomment-6304958963"
+        }
+      },
+      {
+        "name": "gb-ALB-ADM2--repair-evaluation",
+        "key_count": 519,
+        "target_overlap_count": 0,
+        "source": {
+          "commit": "04c0bef8bfd8a5d685aaa91b60247152904267c7",
+          "path": "coordination/engineering/alb-original-disposition-20261020/alb-selected-owner-observation.json.gz",
+          "git_blob_oid": "dcf0616f0fc452fd4ba90770aa118421425370ef",
+          "selector": "keys[*].{y,x}",
+          "root_acceptance": "https://github.com/ChengshuLi/WorldAtlas/pull/2623#issuecomment-6305258884"
+        }
+      }
+    ],
+    "basis": "Fifteen baseline keysets from the exact accepted PSE reconciliation (including mixed held/exception partitions), its PSE keyset, plus exact NPL, KNA, WSM and ALB root-accepted observation keysets. Each newer set is read from its immutable merged commit/path; root acceptance URLs are recorded per set. Overlap counts are key accounting only, not repair credit."
+  },
+  "execution_attempts": {
+    "completed_observation_attempts": 1,
+    "failed_pre_output_attempts": 1,
+    "failed_attempt_facts": "Attempt 1 stopped at scratch-directory admission because the default path traversed a symlink; its captured stdout/stderr show no output/result. The same stock command with ordinary task-owned TMPDIR completed once; no code/check bypass. See inventory/ner-observation-attempt1-execution.json and inventory/ner-observation-execution.json."
+  },
+  "limits": [
+    "Bounded overlap only; not proof of absence from every private or historical acceptance source.",
+    "Zero current owner fields and zero overlap do not establish source applicability, territorial qualification, complete competitors, physical qualification, lawful reuse, or root acceptance.",
+    "All four inland-water keys remain included. Separate source-rights issue #834 and shared-lineage, source-conflict and ADM1/ADM2 location-mapping packages are not resolved by this join."
+  ]
+}
