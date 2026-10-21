@@ -508,6 +508,19 @@ scientific payload. The payload uses the existing `source-target-native-evidence
 targets, geometry, exclusions and other scientific claims remain the operator's
 explicit reviewed inputs.
 
+A target's optional `coverage_rows` binds the land/water class of the complete
+requested native patch for its owner (`pixelIndex`), not that source member's
+geometric coverage. When using `coverage_rows` for same-owner siblings, one
+reviewed complete owner binding on any target suffices; the others may omit it.
+If supplied on more than one sibling, the complete bindings must be identical.
+Each binding uses sorted, nonoverlapping half-open `[start, end, class]` runs and
+must cover exactly that owner's requested cells; partial per-member rows,
+conflicting class bindings and extra cells are refused. Do not union partial
+rows, treat request-mask membership alone as physical class evidence, or omit a
+required class binding to bypass admission. The preparation command preserves
+this scientific input, and the native consumer still checks actual source/physical
+support and every retained sibling veto.
+
 The entry authenticates the selected sidecar, base manifest and runtime envelope,
 then fills only `native_contract`, `native_latitudes`, `owner_roster` and
 `base_reference`. Supplied versions of those fields must match exactly. The
