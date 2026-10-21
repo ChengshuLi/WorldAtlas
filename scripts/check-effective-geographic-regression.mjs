@@ -384,6 +384,15 @@ export class NativeAssetImage {
 // Resolve the selected continuous source independently of raw Git target bytes.
 // The accepted v8 bank replaces part29 while the same raw Git path remains the
 // historical original. Logical inverse provenance stays distinct from Git pins.
+function readSelectedGeometryBank(reader,selection) {
+  const declared=selection.selected_geography;
+  demand(declared.version===1&&declared.kind==='complete-world-index-with-exact-encoded-overrides'&&same(Object.keys(declared).sort(),['bytes','kind','path','sha256','version'])&&safe(declared.path)&&hash(declared.sha256)&&Number.isSafeInteger(declared.bytes)&&declared.bytes>0,'Unsupported explicit selected geometry bank');
+  const pin=reader.descriptor(declared.path);demand(pin.bytes===declared.bytes,'Selected source map size differs');
+  const bank=reader.json(declared.path,{expected:declared.sha256});
+  demand(bank.version===1&&bank.kind===declared.kind&&bank.release_id===selection.release_id&&bank.native_manifest_sha256===selection.sha256&&hash(bank.footprints_sha256),'Selected source/native/release binding differs');
+  return bank;
+}
+
 export class SelectedGeometrySources {
   constructor(snapshot) {
     demand(selectedSnapshots.has(snapshot)&&snapshot?.reader instanceof ImmutableReader,'Require authenticated selected snapshot');
@@ -391,10 +400,7 @@ export class SelectedGeometrySources {
     const accepted=selectedSnapshots.get(snapshot);demand(accepted.selection===JSON.stringify(snapshot.selection)&&accepted.manifest===JSON.stringify(snapshot.manifest),'Selected snapshot metadata drift');
     const declared=snapshot.selection.selected_geography;
     if(declared){
-      demand(declared.version===1&&declared.kind==='complete-world-index-with-exact-encoded-overrides'&&same(Object.keys(declared).sort(),['bytes','kind','path','sha256','version'])&&safe(declared.path)&&hash(declared.sha256)&&Number.isSafeInteger(declared.bytes)&&declared.bytes>0,'Unsupported explicit selected geometry bank');
-      const pin=this.reader.descriptor(declared.path);demand(pin.bytes===declared.bytes,'Selected source map size differs');
-      this.bank=this.reader.json(declared.path,{expected:declared.sha256});
-      demand(this.bank.version===1&&this.bank.kind===declared.kind&&this.bank.release_id===snapshot.selection.release_id&&this.bank.native_manifest_sha256===snapshot.selection.sha256&&hash(this.bank.footprints_sha256),'Selected source/native/release binding differs');
+      this.bank=readSelectedGeometryBank(this.reader,snapshot.selection);
     }else{
       demand(snapshot.selection.manifest_path==='data/canonical-grid/eastern-v8/manifest.json','Selected continuous source transport unsupported; explicit release binding required');
       this.image=snapshot.image instanceof StockImage?snapshot.image:new StockImage(this.reader);
@@ -663,7 +669,7 @@ export function readArtifactConsumption(reader,selection,manifest) {
     scope:'Once-qualified immutable artifact provenance only. This gate independently consumes actual selected native/source products; no source authority, activation or production approval.'});
 }
 
-function loadBaseSelection(reader) {
+function readOwnershipSelection(reader) {
   const has=reader.git('ls-tree','-z',reader.version,'--','data/ownership-selection.json').length;
   if(!has)return null;
   const selection=reader.json('data/ownership-selection.json');
@@ -672,6 +678,28 @@ function loadBaseSelection(reader) {
   demand(selection.version===1&&selection.method==='native-linear-evenodd-first-owner-v1'&&safe(selection.manifest_path)&&hash(selection.sha256),'Unsupported ownership selection');
   demand(selection.reference_projection===undefined||selection.selected_geography,
     'Reference metadata application requires the explicit selected source bank');
+  return selection;
+}
+
+// Negative ancestry may cross provider stages only when the WHOLE consumed
+// lineage already exists in the independently registered selected source origin.
+// Candidate ancestry and caller-supplied origins cannot establish this binding.
+export function requireSelectedOriginLineage(reader,pin) {
+  const selection=readOwnershipSelection(reader);
+  demand(selection?.artifact_consumption&&pin?.path==='data/semantic-report.json',
+    'Complex source intermediate provenance differs: missing registered selected origin');
+  const manifest=reader.json(selection.manifest_path,{expected:selection.sha256});
+  demand(readArtifactConsumption(reader,selection,manifest),'Missing independent selected origin authority');
+  const bank=readSelectedGeometryBank(reader,selection),origin=bank.world_index;
+  demand(commit(origin?.commit)&&origin.path==='data/world-index.json','Invalid selected source origin');
+  const actual=reader.descriptor(pin.path,origin.commit);
+  demand(actual.mode===pin.mode&&actual.git_blob_oid===pin.git_blob_oid&&actual.bytes===pin.bytes,
+    'Complex source lineage differs from independently selected origin');
+  reader.read(pin.path,{version:origin.commit,expected:pin.sha256});
+}
+
+function loadBaseSelection(reader) {
+  const selection=readOwnershipSelection(reader);if(!selection)return null;
   const manifest=reader.json(selection.manifest_path,{expected:selection.sha256});validateParts(manifest);
   const artifactConsumption=readArtifactConsumption(reader,selection,manifest);
   demand(selection.release_id===manifest.geographic_release,'Selected reference differs from native bank');
