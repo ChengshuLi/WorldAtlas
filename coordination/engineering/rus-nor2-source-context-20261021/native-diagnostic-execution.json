@@ -1,0 +1,42 @@
+{
+  "code_commit": "066060c17453aeeed1da21e245e03eaf1ec16456",
+  "phase": "native-diagnostic",
+  "stdout": {
+    "destination": "coordination/engineering/rus-nor2-source-context-20261021/native-diagnostic-001",
+    "resumed": false,
+    "binding": {
+      "phase": "native-diagnostic",
+      "config_sha256": "ddc310eedecf6f25e4179d1ac42ea356846e0b9aceca5faeb2e8c5661e973496"
+    },
+    "observation": {
+      "elapsed_seconds": 2.3648688339999997,
+      "requested_cells": 2,
+      "supported_cells": 1,
+      "held_cells": 1,
+      "limits": [
+        "Original source/physical producers are not replayed.",
+        "Diagnostic screening produces no authority, current-owner-zero or selected-output acceptance."
+      ]
+    }
+  },
+  "first_attempt": "Input load failed for missing exact NOR corpus before destination/output; error retained, body acquired with matching Git/blob/encoded+decoded hashes, same unchanged operation then succeeded.",
+  "source_acquisition": {
+    "source": {
+      "bytes": 970485,
+      "commit": "9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c",
+      "decoded_bytes": 3216652,
+      "decoded_sha256": "a24bd867e42c8f2d7bdd07e723594f2d55736d50de8cf1e92062ae443a0f0f72",
+      "git_blob_oid": "aa4785e3271cadd5137e5535f1fb7270d5b16445",
+      "mode": "100644",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-NOR-ADM1-000.bin.gz",
+      "sha256": "c9c54f05520e49bd2dbfb13795b0d8a7005f55a972853f3fb9c5f6d36df7a36a"
+    },
+    "url": "https://raw.githubusercontent.com/ChengshuLi/WorldAtlas/9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c/coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-NOR-ADM1-000.bin.gz",
+    "verified": true,
+    "feature_count": 11,
+    "prior_diagnostic_result": "input load failed before destination exists; no result",
+    "next_operation": "same unchanged diagnostic once after exact missing input recovery"
+  },
+  "original_owner_observation_repeated": false,
+  "physical_producer_repeated": false
+}
