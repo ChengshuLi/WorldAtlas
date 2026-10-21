@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "kind": "lso-exact-prior-key-reconciliation",
+  "as_of": "2026-10-20 (America/Los_Angeles)",
+  "status": "Exact interval-key and bounded prior-set reconciliation complete; XKX documented-unresolved disposition is now root-accepted; root accounting for LSO remains separate.",
+  "target": {
+    "package_id": "gb-LSO-ADM1--repair-evaluation",
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "queue_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "queue_row_index_zero_based": 169,
+    "native_cells": 577,
+    "land_cells": 577,
+    "inland_water_cells": 0,
+    "intervals": 246,
+    "owners": [
+      27116,
+      27117,
+      27118,
+      27119,
+      27121,
+      27122,
+      27123,
+      27124,
+      27125
+    ],
+    "source_features": [
+      41729,
+      41730,
+      41731,
+      41732,
+      41733,
+      41734,
+      41736,
+      41737,
+      41738
+    ]
+  },
+  "original_interval_and_observation_join": {
+    "observation_path": "inventory/lso-selected-owner-observation.json",
+    "execution_commit": "fb285f16b4be98068fadcf217a7e6bb325ad01e7",
+    "execution_code_commit": "fb285f16b4be98068fadcf217a7e6bb325ad01e7",
+    "execution_exit_code": 0,
+    "elapsed_seconds": 4.295319166,
+    "attempt": 1,
+    "consumed_inputs": 38,
+    "interval_rows": 246,
+    "unique_interval_rows": true,
+    "expanded_interval_keys": 577,
+    "unique_observation_keys": 577,
+    "exact_interval_expansion_equals_observation_keyset": true,
+    "original_intervals_sha256": "d6b80f1105843700313ba2042758478aa508cffe6bca84628393e92da5a6c3b3",
+    "query_sha256": "391824c07e3b8681282ec811bad7823f078c3cc5637ff59c9dfbd9e6c7f58c51",
+    "method_limit": "Compared the already completed stock observation's retained original interval rows and key list; no observer was rerun. Source/physical/roster derivation is covered by the separate source-context task."
+  },
+  "current_selected_owner_observation": {
+    "key_count": 577,
+    "effective_owner_counts": {
+      "0": 577
+    },
+    "base_owner_nonzero": 0,
+    "accepted_additive_owner_nonzero": 0,
+    "effective_selected_owner_nonzero": 0,
+    "existing_product_overlap_true": 0,
+    "interpretation": "Current observer fields only; zero current assignment is not proof of zero prior acceptance."
+  },
+  "bounded_prior_union": {
+    "keys": 58938,
+    "sorted_yx_sha256": "ee66c6a5ee7d15ba37599557579ad8a92b520f9d87186ea952a0b156777b876f",
+    "basis": {
+      "pre-PSE_union": {
+        "keys": 56352,
+        "sha256": "a88e4faa57150ad90493fd8faf569f9a2450bed91f2069f9b6ebfd1b3db5d549",
+        "source": {
+          "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+          "path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+          "git_blob_oid": "1c56ef45f503344a3dba5edbefc485e7ad202ca1",
+          "selector": "#/bounded_prior_union/including_root_accepted_MNP_and_BTN/keys_yx"
+        },
+        "classification": "Bounded examined union inherited from the PSE packet; contains retained exception/held sets as described there, not a global accepted ledger."
+      },
+      "root_accepted_sets": [
+        {
+          "package_id": "gb-PSE-ADM2--repair-evaluation",
+          "keys": 427,
+          "source_path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+          "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+          "selector": "#/current_selected_owner_observation/original_keys_yx",
+          "receipt": "https://github.com/ChengshuLi/WorldAtlas/pull/2607#issuecomment-6304001433"
+        },
+        {
+          "package_id": "gb-NPL-ADM2--repair-evaluation",
+          "keys": 334,
+          "commit": "b383955191818f348ab201d125b7f5ec6f97fc6b",
+          "path": "coordination/engineering/npl-original-disposition-20261020/npl-selected-owner-observation.json.gz",
+          "blob": "5f8091e9c02b6818ca70e8417c7e0abd7e5bcc9b",
+          "receipt": "https://github.com/ChengshuLi/WorldAtlas/pull/2614#issuecomment-6304587134"
+        },
+        {
+          "package_id": "gb-KNA-ADM1--repair-evaluation",
+          "keys": 305,
+          "commit": "775f0a1eddf8964b81d217d01a801c2b338db9c6",
+          "path": "coordination/engineering/kna-original-disposition-20261020/kna-selected-owner-observation.json.gz",
+          "blob": "ab012815bd4dda4d39d2d4dbe004ea31e648b952",
+          "receipt": "https://github.com/ChengshuLi/WorldAtlas/pull/2610#issuecomment-6304273664"
+        },
+        {
+          "package_id": "gb-WSM-ADM1--repair-evaluation",
+          "keys": 469,
+          "commit": "867740323969355fb3691f0130120fd99e7a7426",
+          "path": "coordination/engineering/wsm-original-disposition-20261020/wsm-selected-owner-observation.json.gz",
+          "blob": "c633ffb83316ff39b693ed0854502f3a9bd898ed",
+          "receipt": "https://github.com/ChengshuLi/WorldAtlas/pull/2619#issuecomment-6304958963"
+        },
+        {
+          "package_id": "gb-ALB-ADM2--repair-evaluation",
+          "keys": 519,
+          "commit": "04c0bef8bfd8a5d685aaa91b60247152904267c7",
+          "path": "coordination/engineering/alb-original-disposition-20261020/alb-selected-owner-observation.json.gz",
+          "blob": "dcf0616f0fc452fd4ba90770aa118421425370ef",
+          "receipt": "https://github.com/ChengshuLi/WorldAtlas/pull/2623#issuecomment-6305258884"
+        },
+        {
+          "package_id": "gb-NER-ADM3--repair-evaluation",
+          "keys": 532,
+          "commit": "e6010eb3458289e9713b8cf5d94ad365e7da7409",
+          "path": "coordination/engineering/ner-original-disposition-20261020/ner-selected-owner-observation.json.gz",
+          "blob": "7e39d035d94a5b068d3f51317319b1f539f208cf",
+          "receipt": "https://github.com/ChengshuLi/WorldAtlas/pull/2628#issuecomment-6305490378"
+        }
+      ],
+      "limitations": "Bounded exact union of the listed retained sets and receipts, not an exhaustive claim about every private/historical ledger."
+    },
+    "target_intersection": 0,
+    "target_residual_after_union": 577,
+    "including_root_accepted_XKX": {
+      "keys": 59488,
+      "sorted_yx_sha256": "437b712acba5d3250e4da6ad798799e19c418e0eb02eb887bd9a6413ccfe0338",
+      "xkx_receipt": "https://github.com/ChengshuLi/WorldAtlas/pull/2630#issuecomment-6305770501"
+    },
+    "limitation": "Finite exact union of listed examined sets and subsequent root-accepted disposition sets; inherited held/exception sets are not all accepted credit. Not exhaustive historical or private-ledger absence. Documented-unresolved outcomes are not repair credit.",
+    "target_intersection_with_examined_union": 0,
+    "target_residual_after_examined_union": 577
+  },
+  "separately_delivered_XKX": {
+    "package_id": "gb-XKX-ADM1--repair-evaluation",
+    "keys": 550,
+    "public_head": "20e38694ca5821f3032bdcc9f0e9dc786e400709",
+    "path": "coordination/engineering/xkx-original-disposition-20261020/xkx-selected-owner-observation.json.gz",
+    "root_acceptance_status": "root accepted documented-unresolved disposition (zero repair credit)",
+    "intersection_with_prior_union": 0,
+    "intersection_with_LSO": 0,
+    "union_plus_XKX_keys": 59488,
+    "union_plus_XKX_sha256": "437b712acba5d3250e4da6ad798799e19c418e0eb02eb887bd9a6413ccfe0338",
+    "combined_examined_plus_LSO_keys": 60065,
+    "combined_examined_plus_LSO_sha256": "ba6290f91f5d6995c6fafedbb400e83ad718535533e89ed45ac86906d2fe3316",
+    "accounting_rule": "This is now a root-accepted documented-unresolved keyset, not repair credit. The previously examined 58,938-key union plus these 550 accepted disposition keys totals 59,488; LSO has zero overlap with either and retains 577 residual keys.",
+    "root_acceptance_receipt": "https://github.com/ChengshuLi/WorldAtlas/pull/2630#issuecomment-6305770501",
+    "root_acceptance_counts": {
+      "original_cells": 550,
+      "intervals": 298,
+      "owners": 7,
+      "contacts": 13,
+      "repairs": 0,
+      "owner_changes": 0,
+      "holds_removed": 0
+    },
+    "merged_commit": "fb285f16b4be98068fadcf217a7e6bb325ad01e7",
+    "git_blob_oid": "d6e51b594ba89bbfad3a7d71aa4be29076052a1d",
+    "review_id": 5593836534,
+    "canonical_delivery": "https://github.com/ChengshuLi/WorldAtlas/pull/2630#issuecomment-6305677902"
+  },
+  "actions_not_taken": [
+    "No observer rerun.",
+    "No source payload acquisition, geometry computation, claim, allocation, or public mutation."
+  ],
+  "pending_join_status": "The exact key join is complete. Root acceptance/credit accounting for the LSO package remains separate."
+}
