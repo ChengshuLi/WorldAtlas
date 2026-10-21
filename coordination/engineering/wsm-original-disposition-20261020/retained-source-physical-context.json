@@ -1,0 +1,3331 @@
+{
+  "version": 1,
+  "kind": "wsm-original-retained-source-contract-dependency-inventory",
+  "as_of": "October 20, 2026 (America/Los_Angeles)",
+  "package": {
+    "package_id": "gb-WSM-ADM1--repair-evaluation",
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "queue_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "queue_index_zero_based": 178,
+    "source_family": "gb:WSM:ADM1",
+    "source_family_index": 356,
+    "native_cells": 469,
+    "land_cells": 469,
+    "inland_water_cells": 0,
+    "intervals": 212,
+    "owners": [
+      7134
+    ],
+    "source_features": [
+      65870,
+      65871,
+      65872,
+      65874,
+      65875,
+      65876,
+      65877,
+      65878,
+      65879,
+      65880
+    ],
+    "source_families": [
+      356
+    ],
+    "native_blocks": [
+      34
+    ],
+    "location_ids": [
+      "framework:province:samoa:c3e94ef76253"
+    ],
+    "contract": {
+      "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+      "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+      "priority": 1
+    }
+  },
+  "separate_companion": {
+    "package_id": "gb-WSM-ADM1--physical-interpretation",
+    "native_cells": 1020,
+    "land_cells": 0,
+    "inland_water_cells": 0,
+    "intervals": 356,
+    "owners": [
+      7134
+    ],
+    "source_features": [
+      65870,
+      65871,
+      65872,
+      65873,
+      65874,
+      65875,
+      65876,
+      65877,
+      65878,
+      65879,
+      65880
+    ],
+    "native_blocks": [
+      34
+    ],
+    "companion_only_feature": [
+      65873
+    ],
+    "scope_relation": "Independent physical-interpretation queue row; excluded from the repair-evaluation. Feature 65873 appears only in this companion, not repair feature vector."
+  },
+  "retained_mask_join": {
+    "method": "From original block-34 candidate runs, retain runs whose candidate owner vector includes 7134 and source-feature vector intersects the frozen repair feature set [65870,65871,65872,65874,...,65880]. Intersect with retained physical-support runs; coalesce contiguous x cells on each y only while owner and full source-feature vectors are unchanged. No geometry operation or owner observation.",
+    "repair_feature_candidate_cells": 1325,
+    "repair_cells_after_physical_mask": 469,
+    "nonphysical_candidate_cells_for_repair_feature_set": 856,
+    "repair_water_overlap_cells": 0,
+    "repair_intervals_after_vector_preserving_coalescing": 212,
+    "all_repair_cells_have_owner_7134": true,
+    "family_all_11_feature_candidates": 1489,
+    "family_physical_support_cells": 469,
+    "family_nonphysical_candidate_cells": 1020,
+    "family_water_overlap_cells": 0,
+    "companion_row_count_matches_family_nonphysical_candidate_cells": true,
+    "intervals": [
+      {
+        "y": 140966,
+        "start": 5547,
+        "end_exclusive": 5551,
+        "cell_count": 4,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65875
+        ]
+      },
+      {
+        "y": 140967,
+        "start": 5552,
+        "end_exclusive": 5554,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65875
+        ]
+      },
+      {
+        "y": 140980,
+        "start": 5482,
+        "end_exclusive": 5483,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65875
+        ]
+      },
+      {
+        "y": 140982,
+        "start": 5492,
+        "end_exclusive": 5497,
+        "cell_count": 5,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65875
+        ]
+      },
+      {
+        "y": 140982,
+        "start": 5502,
+        "end_exclusive": 5509,
+        "cell_count": 7,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65875
+        ]
+      },
+      {
+        "y": 140986,
+        "start": 5457,
+        "end_exclusive": 5458,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65875
+        ]
+      },
+      {
+        "y": 141007,
+        "start": 5368,
+        "end_exclusive": 5369,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141008,
+        "start": 5365,
+        "end_exclusive": 5368,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141009,
+        "start": 5363,
+        "end_exclusive": 5367,
+        "cell_count": 4,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141010,
+        "start": 5363,
+        "end_exclusive": 5366,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141011,
+        "start": 5363,
+        "end_exclusive": 5365,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141012,
+        "start": 5347,
+        "end_exclusive": 5348,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141013,
+        "start": 5347,
+        "end_exclusive": 5348,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141014,
+        "start": 5327,
+        "end_exclusive": 5332,
+        "cell_count": 5,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141014,
+        "start": 5347,
+        "end_exclusive": 5348,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141015,
+        "start": 5327,
+        "end_exclusive": 5332,
+        "cell_count": 5,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141016,
+        "start": 5326,
+        "end_exclusive": 5332,
+        "cell_count": 6,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141017,
+        "start": 5324,
+        "end_exclusive": 5332,
+        "cell_count": 8,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141017,
+        "start": 5351,
+        "end_exclusive": 5352,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141018,
+        "start": 5305,
+        "end_exclusive": 5308,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141018,
+        "start": 5320,
+        "end_exclusive": 5328,
+        "cell_count": 8,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141019,
+        "start": 5309,
+        "end_exclusive": 5311,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141019,
+        "start": 5319,
+        "end_exclusive": 5323,
+        "cell_count": 4,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141020,
+        "start": 5313,
+        "end_exclusive": 5314,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141020,
+        "start": 5317,
+        "end_exclusive": 5318,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141031,
+        "start": 5249,
+        "end_exclusive": 5250,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141032,
+        "start": 5249,
+        "end_exclusive": 5251,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141033,
+        "start": 5250,
+        "end_exclusive": 5251,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141035,
+        "start": 5252,
+        "end_exclusive": 5253,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141036,
+        "start": 5253,
+        "end_exclusive": 5254,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141037,
+        "start": 5253,
+        "end_exclusive": 5254,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141038,
+        "start": 5253,
+        "end_exclusive": 5255,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141039,
+        "start": 5253,
+        "end_exclusive": 5256,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141040,
+        "start": 5255,
+        "end_exclusive": 5256,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141060,
+        "start": 5281,
+        "end_exclusive": 5282,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141061,
+        "start": 5283,
+        "end_exclusive": 5284,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141077,
+        "start": 5298,
+        "end_exclusive": 5299,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141078,
+        "start": 5299,
+        "end_exclusive": 5300,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141079,
+        "start": 5300,
+        "end_exclusive": 5302,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141080,
+        "start": 5301,
+        "end_exclusive": 5303,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141081,
+        "start": 5301,
+        "end_exclusive": 5304,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141082,
+        "start": 5302,
+        "end_exclusive": 5305,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141083,
+        "start": 5305,
+        "end_exclusive": 5307,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141084,
+        "start": 5306,
+        "end_exclusive": 5308,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141085,
+        "start": 5307,
+        "end_exclusive": 5309,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141086,
+        "start": 5308,
+        "end_exclusive": 5310,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141087,
+        "start": 5309,
+        "end_exclusive": 5312,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141088,
+        "start": 5310,
+        "end_exclusive": 5313,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141089,
+        "start": 5311,
+        "end_exclusive": 5314,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141090,
+        "start": 5312,
+        "end_exclusive": 5315,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141091,
+        "start": 5313,
+        "end_exclusive": 5317,
+        "cell_count": 4,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141092,
+        "start": 5316,
+        "end_exclusive": 5318,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65880
+        ]
+      },
+      {
+        "y": 141094,
+        "start": 5320,
+        "end_exclusive": 5322,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65877
+        ]
+      },
+      {
+        "y": 141095,
+        "start": 5321,
+        "end_exclusive": 5323,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65877
+        ]
+      },
+      {
+        "y": 141096,
+        "start": 5321,
+        "end_exclusive": 5322,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65877
+        ]
+      },
+      {
+        "y": 141097,
+        "start": 5328,
+        "end_exclusive": 5329,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65877
+        ]
+      },
+      {
+        "y": 141099,
+        "start": 5329,
+        "end_exclusive": 5330,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65877
+        ]
+      },
+      {
+        "y": 141104,
+        "start": 5331,
+        "end_exclusive": 5333,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65877
+        ]
+      },
+      {
+        "y": 141105,
+        "start": 5331,
+        "end_exclusive": 5333,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65877
+        ]
+      },
+      {
+        "y": 141106,
+        "start": 5332,
+        "end_exclusive": 5334,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65877
+        ]
+      },
+      {
+        "y": 141143,
+        "start": 5364,
+        "end_exclusive": 5365,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65877
+        ]
+      },
+      {
+        "y": 141144,
+        "start": 5364,
+        "end_exclusive": 5366,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65877
+        ]
+      },
+      {
+        "y": 141145,
+        "start": 5366,
+        "end_exclusive": 5367,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65877
+        ]
+      },
+      {
+        "y": 141150,
+        "start": 5371,
+        "end_exclusive": 5372,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65877
+        ]
+      },
+      {
+        "y": 141151,
+        "start": 5372,
+        "end_exclusive": 5373,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65877
+        ]
+      },
+      {
+        "y": 141155,
+        "start": 5379,
+        "end_exclusive": 5381,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141159,
+        "start": 5383,
+        "end_exclusive": 5384,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141172,
+        "start": 5392,
+        "end_exclusive": 5393,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141173,
+        "start": 5392,
+        "end_exclusive": 5393,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141174,
+        "start": 5392,
+        "end_exclusive": 5393,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141175,
+        "start": 5392,
+        "end_exclusive": 5393,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141180,
+        "start": 5391,
+        "end_exclusive": 5392,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141181,
+        "start": 5391,
+        "end_exclusive": 5392,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141182,
+        "start": 5391,
+        "end_exclusive": 5392,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141186,
+        "start": 5393,
+        "end_exclusive": 5395,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141187,
+        "start": 5394,
+        "end_exclusive": 5396,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141188,
+        "start": 5395,
+        "end_exclusive": 5398,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141189,
+        "start": 5397,
+        "end_exclusive": 5399,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141190,
+        "start": 5400,
+        "end_exclusive": 5401,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141195,
+        "start": 5402,
+        "end_exclusive": 5403,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141196,
+        "start": 5402,
+        "end_exclusive": 5403,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141197,
+        "start": 5402,
+        "end_exclusive": 5403,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141198,
+        "start": 5402,
+        "end_exclusive": 5403,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141198,
+        "start": 5603,
+        "end_exclusive": 5604,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141199,
+        "start": 5403,
+        "end_exclusive": 5404,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141199,
+        "start": 5597,
+        "end_exclusive": 5598,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141199,
+        "start": 5604,
+        "end_exclusive": 5606,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141200,
+        "start": 5403,
+        "end_exclusive": 5404,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141200,
+        "start": 5606,
+        "end_exclusive": 5608,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141207,
+        "start": 5618,
+        "end_exclusive": 5619,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141208,
+        "start": 5618,
+        "end_exclusive": 5619,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141209,
+        "start": 5616,
+        "end_exclusive": 5620,
+        "cell_count": 4,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141210,
+        "start": 5616,
+        "end_exclusive": 5620,
+        "cell_count": 4,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141211,
+        "start": 5563,
+        "end_exclusive": 5564,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141211,
+        "start": 5619,
+        "end_exclusive": 5621,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141212,
+        "start": 5570,
+        "end_exclusive": 5573,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65877
+        ]
+      },
+      {
+        "y": 141212,
+        "start": 5619,
+        "end_exclusive": 5621,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141213,
+        "start": 5619,
+        "end_exclusive": 5622,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141214,
+        "start": 5620,
+        "end_exclusive": 5622,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141215,
+        "start": 5621,
+        "end_exclusive": 5623,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141216,
+        "start": 5622,
+        "end_exclusive": 5623,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141219,
+        "start": 5424,
+        "end_exclusive": 5425,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141220,
+        "start": 5424,
+        "end_exclusive": 5425,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141222,
+        "start": 5425,
+        "end_exclusive": 5426,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141223,
+        "start": 5425,
+        "end_exclusive": 5426,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141225,
+        "start": 5426,
+        "end_exclusive": 5427,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141227,
+        "start": 5629,
+        "end_exclusive": 5638,
+        "cell_count": 9,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141228,
+        "start": 5631,
+        "end_exclusive": 5638,
+        "cell_count": 7,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141228,
+        "start": 5922,
+        "end_exclusive": 5924,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65874
+        ]
+      },
+      {
+        "y": 141228,
+        "start": 5931,
+        "end_exclusive": 5933,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141229,
+        "start": 5632,
+        "end_exclusive": 5636,
+        "cell_count": 4,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141232,
+        "start": 5646,
+        "end_exclusive": 5647,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65876
+        ]
+      },
+      {
+        "y": 141243,
+        "start": 5860,
+        "end_exclusive": 5861,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141244,
+        "start": 5858,
+        "end_exclusive": 5860,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141245,
+        "start": 5857,
+        "end_exclusive": 5858,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141247,
+        "start": 5854,
+        "end_exclusive": 5855,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141247,
+        "start": 5973,
+        "end_exclusive": 5975,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141248,
+        "start": 5973,
+        "end_exclusive": 5975,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141249,
+        "start": 5975,
+        "end_exclusive": 5976,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141250,
+        "start": 5989,
+        "end_exclusive": 5991,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141251,
+        "start": 5814,
+        "end_exclusive": 5816,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141252,
+        "start": 5803,
+        "end_exclusive": 5804,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141252,
+        "start": 5813,
+        "end_exclusive": 5817,
+        "cell_count": 4,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141252,
+        "start": 5833,
+        "end_exclusive": 5836,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141253,
+        "start": 5801,
+        "end_exclusive": 5807,
+        "cell_count": 6,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141254,
+        "start": 5799,
+        "end_exclusive": 5800,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65871
+        ]
+      },
+      {
+        "y": 141255,
+        "start": 5798,
+        "end_exclusive": 5799,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65871
+        ]
+      },
+      {
+        "y": 141268,
+        "start": 5785,
+        "end_exclusive": 5786,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65871
+        ]
+      },
+      {
+        "y": 141276,
+        "start": 6036,
+        "end_exclusive": 6037,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141277,
+        "start": 6043,
+        "end_exclusive": 6047,
+        "cell_count": 4,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141286,
+        "start": 5773,
+        "end_exclusive": 5774,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65871
+        ]
+      },
+      {
+        "y": 141287,
+        "start": 5774,
+        "end_exclusive": 5775,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65871
+        ]
+      },
+      {
+        "y": 141287,
+        "start": 6086,
+        "end_exclusive": 6087,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141289,
+        "start": 6109,
+        "end_exclusive": 6110,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141290,
+        "start": 6107,
+        "end_exclusive": 6108,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141291,
+        "start": 6105,
+        "end_exclusive": 6107,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141299,
+        "start": 6125,
+        "end_exclusive": 6126,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65879
+        ]
+      },
+      {
+        "y": 141300,
+        "start": 5777,
+        "end_exclusive": 5778,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65871
+        ]
+      },
+      {
+        "y": 141300,
+        "start": 6125,
+        "end_exclusive": 6126,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65879
+        ]
+      },
+      {
+        "y": 141309,
+        "start": 5788,
+        "end_exclusive": 5789,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141310,
+        "start": 5791,
+        "end_exclusive": 5793,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141311,
+        "start": 5793,
+        "end_exclusive": 5796,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141312,
+        "start": 5799,
+        "end_exclusive": 5800,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141313,
+        "start": 5799,
+        "end_exclusive": 5803,
+        "cell_count": 4,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141314,
+        "start": 5802,
+        "end_exclusive": 5807,
+        "cell_count": 5,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141315,
+        "start": 5804,
+        "end_exclusive": 5809,
+        "cell_count": 5,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141325,
+        "start": 5819,
+        "end_exclusive": 5820,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141326,
+        "start": 5818,
+        "end_exclusive": 5820,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141330,
+        "start": 5824,
+        "end_exclusive": 5825,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141331,
+        "start": 5823,
+        "end_exclusive": 5827,
+        "cell_count": 4,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141332,
+        "start": 5823,
+        "end_exclusive": 5827,
+        "cell_count": 4,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141335,
+        "start": 5847,
+        "end_exclusive": 5848,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141338,
+        "start": 5840,
+        "end_exclusive": 5841,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141339,
+        "start": 5840,
+        "end_exclusive": 5841,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141340,
+        "start": 5839,
+        "end_exclusive": 5843,
+        "cell_count": 4,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141341,
+        "start": 5839,
+        "end_exclusive": 5841,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141342,
+        "start": 5838,
+        "end_exclusive": 5839,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141343,
+        "start": 5854,
+        "end_exclusive": 5855,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141344,
+        "start": 5837,
+        "end_exclusive": 5838,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141344,
+        "start": 5854,
+        "end_exclusive": 5855,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141345,
+        "start": 5854,
+        "end_exclusive": 5856,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141346,
+        "start": 5855,
+        "end_exclusive": 5856,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141347,
+        "start": 5855,
+        "end_exclusive": 5856,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141348,
+        "start": 5855,
+        "end_exclusive": 5857,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141349,
+        "start": 5855,
+        "end_exclusive": 5857,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141350,
+        "start": 5855,
+        "end_exclusive": 5857,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141351,
+        "start": 5856,
+        "end_exclusive": 5858,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141352,
+        "start": 5856,
+        "end_exclusive": 5858,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141353,
+        "start": 5857,
+        "end_exclusive": 5859,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141354,
+        "start": 5857,
+        "end_exclusive": 5859,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141355,
+        "start": 5858,
+        "end_exclusive": 5859,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141356,
+        "start": 5859,
+        "end_exclusive": 5860,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141361,
+        "start": 5861,
+        "end_exclusive": 5862,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141362,
+        "start": 5861,
+        "end_exclusive": 5862,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141369,
+        "start": 5867,
+        "end_exclusive": 5868,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65870
+        ]
+      },
+      {
+        "y": 141370,
+        "start": 5927,
+        "end_exclusive": 5928,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141378,
+        "start": 5880,
+        "end_exclusive": 5881,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65874
+        ]
+      },
+      {
+        "y": 141380,
+        "start": 5882,
+        "end_exclusive": 5884,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65874
+        ]
+      },
+      {
+        "y": 141388,
+        "start": 5968,
+        "end_exclusive": 5975,
+        "cell_count": 7,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141389,
+        "start": 5981,
+        "end_exclusive": 5982,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141393,
+        "start": 5987,
+        "end_exclusive": 5988,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141395,
+        "start": 5989,
+        "end_exclusive": 5990,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141396,
+        "start": 5989,
+        "end_exclusive": 5990,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141397,
+        "start": 5989,
+        "end_exclusive": 5991,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141398,
+        "start": 5990,
+        "end_exclusive": 5991,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141399,
+        "start": 5990,
+        "end_exclusive": 5991,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141400,
+        "start": 5991,
+        "end_exclusive": 5992,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141401,
+        "start": 5991,
+        "end_exclusive": 5992,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141402,
+        "start": 5992,
+        "end_exclusive": 5993,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141406,
+        "start": 6040,
+        "end_exclusive": 6042,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141407,
+        "start": 6104,
+        "end_exclusive": 6105,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141408,
+        "start": 5994,
+        "end_exclusive": 5995,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141408,
+        "start": 6100,
+        "end_exclusive": 6102,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141409,
+        "start": 5994,
+        "end_exclusive": 5995,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141409,
+        "start": 6096,
+        "end_exclusive": 6099,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141409,
+        "start": 6110,
+        "end_exclusive": 6111,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141410,
+        "start": 5994,
+        "end_exclusive": 5996,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141410,
+        "start": 6092,
+        "end_exclusive": 6094,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141410,
+        "start": 6111,
+        "end_exclusive": 6114,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141411,
+        "start": 5994,
+        "end_exclusive": 5996,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141411,
+        "start": 6112,
+        "end_exclusive": 6116,
+        "cell_count": 4,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141411,
+        "start": 6172,
+        "end_exclusive": 6194,
+        "cell_count": 22,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141411,
+        "start": 6196,
+        "end_exclusive": 6197,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141412,
+        "start": 5995,
+        "end_exclusive": 5997,
+        "cell_count": 2,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141412,
+        "start": 6116,
+        "end_exclusive": 6119,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141412,
+        "start": 6174,
+        "end_exclusive": 6191,
+        "cell_count": 17,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141412,
+        "start": 6201,
+        "end_exclusive": 6204,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141413,
+        "start": 5996,
+        "end_exclusive": 5997,
+        "cell_count": 1,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65878
+        ]
+      },
+      {
+        "y": 141413,
+        "start": 6207,
+        "end_exclusive": 6211,
+        "cell_count": 4,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141414,
+        "start": 6128,
+        "end_exclusive": 6134,
+        "cell_count": 6,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141414,
+        "start": 6212,
+        "end_exclusive": 6218,
+        "cell_count": 6,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      },
+      {
+        "y": 141415,
+        "start": 6213,
+        "end_exclusive": 6216,
+        "cell_count": 3,
+        "owner_indices": [
+          7134
+        ],
+        "source_feature_indices": [
+          65872
+        ]
+      }
+    ]
+  },
+  "source_identity": {
+    "lineage_location": {
+      "id": "atlas:territory:WSM",
+      "index": 7134,
+      "province_id": "framework:province:samoa:c3e94ef76253",
+      "name": "Samoa",
+      "reference_owner": "Samoa",
+      "source_atoms": [
+        "gb:WSM:ADM1:40696546B1701315009328",
+        "gb:WSM:ADM1:40696546B29543190564601",
+        "gb:WSM:ADM1:40696546B36446689180219",
+        "gb:WSM:ADM1:40696546B40781349975951",
+        "gb:WSM:ADM1:40696546B45584224409911",
+        "gb:WSM:ADM1:40696546B5747120083880",
+        "gb:WSM:ADM1:40696546B72194673836531",
+        "gb:WSM:ADM1:40696546B90373058224054",
+        "gb:WSM:ADM1:40696546B9385579031596",
+        "gb:WSM:ADM1:40696546B94827234951055",
+        "gb:WSM:ADM1:40696546B98223692696505"
+      ]
+    },
+    "roster_contacts": [
+      {
+        "source_index": 65870,
+        "source_id": "gb:WSM:ADM1:40696546B36446689180219",
+        "ordinal": 0,
+        "name": "A'ana",
+        "owners": [
+          7134
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65871,
+        "source_id": "gb:WSM:ADM1:40696546B9385579031596",
+        "ordinal": 1,
+        "name": "Aiga-i-le-Tai",
+        "owners": [
+          7134
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65872,
+        "source_id": "gb:WSM:ADM1:40696546B40781349975951",
+        "ordinal": 2,
+        "name": "Atua",
+        "owners": [
+          7134
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65873,
+        "source_id": "gb:WSM:ADM1:40696546B94827234951055",
+        "ordinal": 3,
+        "name": "Fa'asaleleage",
+        "owners": [
+          7134
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65874,
+        "source_id": "gb:WSM:ADM1:40696546B45584224409911",
+        "ordinal": 4,
+        "name": "Gaga'emauga",
+        "owners": [
+          7134
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65875,
+        "source_id": "gb:WSM:ADM1:40696546B1701315009328",
+        "ordinal": 5,
+        "name": "Gaga'ifomauga",
+        "owners": [
+          7134
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65876,
+        "source_id": "gb:WSM:ADM1:40696546B72194673836531",
+        "ordinal": 6,
+        "name": "Palauli",
+        "owners": [
+          7134
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65877,
+        "source_id": "gb:WSM:ADM1:40696546B5747120083880",
+        "ordinal": 7,
+        "name": "Satupa'itea",
+        "owners": [
+          7134
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65878,
+        "source_id": "gb:WSM:ADM1:40696546B29543190564601",
+        "ordinal": 8,
+        "name": "Tuamasaga",
+        "owners": [
+          7134
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65879,
+        "source_id": "gb:WSM:ADM1:40696546B90373058224054",
+        "ordinal": 9,
+        "name": "Va'a-o-Fonoti",
+        "owners": [
+          7134
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65880,
+        "source_id": "gb:WSM:ADM1:40696546B98223692696505",
+        "ordinal": 10,
+        "name": "Vaisigano",
+        "owners": [
+          7134
+        ],
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "owner_contact_fact": "All eleven WSM ADM1 roster contacts are directly tagged to owner 7134. Ten appear in the repair row; feature 65873 appears in the physical companion only. No other family/foreign contact is listed for this package.",
+    "property_join": "inventory/wsm-source-property-identity-join.json",
+    "payload_property_identity_matches": 11,
+    "payload_property_identity_mismatches": 0,
+    "property_fields_checked": [
+      "shapeName",
+      "shapeID",
+      "shapeGroup",
+      "shapeType"
+    ]
+  },
+  "source_catalogue_record": {
+    "catalogue_path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+    "catalogue_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+    "baseline_commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+    "key": "gb:WSM:ADM1",
+    "feature_count": 11,
+    "advertised_feature_count": 11,
+    "recorded_license": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+    "represented_year_claim": "2018",
+    "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/WSM/ADM1/geoBoundaries-WSM-ADM1_simplified.geojson",
+    "payload_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-WSM-ADM1-000.bin.gz",
+    "payload_oid": "fad5910ce72abe5a041073bd9afa736578627756",
+    "payload_compressed_bytes": 15650,
+    "payload_decoded_bytes": 47246,
+    "payload_compressed_sha256": "5f86f0c734f8e94db91efc19c1f4b4c48df8f7cce6e122c899656317431b2e62",
+    "payload_decoded_sha256": "16bc5ba7994b7ad8407596db7f31f56c4a7bf7efdbbdf1064dddf43e8d9f7756",
+    "payload_status": "Warm in task-owned Git store; exact blob authenticated against original path/tree and compressed/decoded hashes, then parsed for source feature identity properties."
+  },
+  "retained_inputs": [
+    {
+      "role": "source candidates block34",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-034.json.gz",
+      "oid": "8f9fd6a445d02d67ec6aa130ee7b06d904f84c48",
+      "bytes": 360842,
+      "status": "warm"
+    },
+    {
+      "role": "physical support block34",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-034.json.gz",
+      "oid": "7128c4c4c2709f327e42584448fb14797801fbbf",
+      "bytes": 306738,
+      "status": "warm"
+    },
+    {
+      "role": "inland water support block34",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-034.json.gz",
+      "oid": "6675dece48ee7bca2d4041c5492d992f36c47460",
+      "bytes": 21621,
+      "status": "warm"
+    },
+    {
+      "role": "ownership binding",
+      "oid": "b9d81d18aab6d03dc701ff1337b35e53be81d0af",
+      "bytes": 3048,
+      "status": "warm"
+    },
+    {
+      "role": "lineage",
+      "oid": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+      "bytes": 4404456,
+      "status": "warm"
+    },
+    {
+      "role": "source feature roster",
+      "oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "bytes": 1844315,
+      "status": "warm"
+    },
+    {
+      "role": "source census summary",
+      "oid": "fa1e4d101edb54b02bd1ff42a240f2f80ac65832",
+      "bytes": 120963,
+      "status": "warm"
+    },
+    {
+      "role": "physical unassigned summary",
+      "oid": "0c934cdaf4b007a741e66d4a080890154bdae53c",
+      "bytes": 154672,
+      "status": "warm"
+    },
+    {
+      "role": "retained source catalogue",
+      "oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376,
+      "status": "warm"
+    },
+    {
+      "role": "original WSM source payload",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-WSM-ADM1-000.bin.gz",
+      "oid": "fad5910ce72abe5a041073bd9afa736578627756",
+      "bytes": 15650,
+      "decoded_bytes": 47246,
+      "status": "warm; authenticated and parsed for properties"
+    }
+  ],
+  "limits": [
+    "Catalogue terms and vintage are historical source metadata, not a present source-rights, territorial, or fitness determination.",
+    "The source-context worker did not fetch source bodies, claim or allocate work, publish changes, or run an additional owner observation or geometry operation. The author separately acquired the authenticated payload, allocated and claimed the original repair scope, and executed the one stock observation retained in this packet. The source worker used the acquired payload for its property join.",
+    "The exact payload is authenticated and properties agree with all 11 roster contacts. Full JSON parsing materialized geometry fields in memory; no geometry values were inspected or operated on."
+  ],
+  "source_properties": {
+    "version": 1,
+    "kind": "wsm-whole-source-property-identity-join",
+    "source_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-WSM-ADM1-000.bin.gz",
+    "git_blob_oid": "fad5910ce72abe5a041073bd9afa736578627756",
+    "compressed_bytes": 15650,
+    "compressed_sha256": "5f86f0c734f8e94db91efc19c1f4b4c48df8f7cce6e122c899656317431b2e62",
+    "decoded_bytes": 47246,
+    "decoded_sha256": "16bc5ba7994b7ad8407596db7f31f56c4a7bf7efdbbdf1064dddf43e8d9f7756",
+    "payload_feature_count": 11,
+    "roster_contact_count": 11,
+    "matched_count": 11,
+    "unmatched_payload_features": [],
+    "unmatched_roster_contacts": [],
+    "duplicate_or_ambiguous_shape_id_matches": [],
+    "all_identity_fields_match": true,
+    "matched_fields": [
+      "shapeName",
+      "shapeID",
+      "shapeGroup=WSM",
+      "shapeType=ADM1",
+      "source_index ordinal"
+    ],
+    "contacts": [
+      {
+        "source_index": 65870,
+        "roster_ordinal": 0,
+        "source_id": "gb:WSM:ADM1:40696546B36446689180219",
+        "roster_name": "A'ana",
+        "payload_properties": {
+          "shapeName": "A'ana",
+          "shapeISO": "",
+          "shapeID": "40696546B36446689180219",
+          "shapeGroup": "WSM",
+          "shapeType": "ADM1"
+        },
+        "roster_owner_indices": [
+          7134
+        ],
+        "identity_matches": {
+          "shapeName": true,
+          "shapeID": true,
+          "shapeGroup": true,
+          "shapeType": true,
+          "source_index_matches_ordinal": true
+        }
+      },
+      {
+        "source_index": 65871,
+        "roster_ordinal": 1,
+        "source_id": "gb:WSM:ADM1:40696546B9385579031596",
+        "roster_name": "Aiga-i-le-Tai",
+        "payload_properties": {
+          "shapeName": "Aiga-i-le-Tai",
+          "shapeISO": "",
+          "shapeID": "40696546B9385579031596",
+          "shapeGroup": "WSM",
+          "shapeType": "ADM1"
+        },
+        "roster_owner_indices": [
+          7134
+        ],
+        "identity_matches": {
+          "shapeName": true,
+          "shapeID": true,
+          "shapeGroup": true,
+          "shapeType": true,
+          "source_index_matches_ordinal": true
+        }
+      },
+      {
+        "source_index": 65872,
+        "roster_ordinal": 2,
+        "source_id": "gb:WSM:ADM1:40696546B40781349975951",
+        "roster_name": "Atua",
+        "payload_properties": {
+          "shapeName": "Atua",
+          "shapeISO": "",
+          "shapeID": "40696546B40781349975951",
+          "shapeGroup": "WSM",
+          "shapeType": "ADM1"
+        },
+        "roster_owner_indices": [
+          7134
+        ],
+        "identity_matches": {
+          "shapeName": true,
+          "shapeID": true,
+          "shapeGroup": true,
+          "shapeType": true,
+          "source_index_matches_ordinal": true
+        }
+      },
+      {
+        "source_index": 65873,
+        "roster_ordinal": 3,
+        "source_id": "gb:WSM:ADM1:40696546B94827234951055",
+        "roster_name": "Fa'asaleleage",
+        "payload_properties": {
+          "shapeName": "Fa'asaleleage",
+          "shapeISO": "",
+          "shapeID": "40696546B94827234951055",
+          "shapeGroup": "WSM",
+          "shapeType": "ADM1"
+        },
+        "roster_owner_indices": [
+          7134
+        ],
+        "identity_matches": {
+          "shapeName": true,
+          "shapeID": true,
+          "shapeGroup": true,
+          "shapeType": true,
+          "source_index_matches_ordinal": true
+        }
+      },
+      {
+        "source_index": 65874,
+        "roster_ordinal": 4,
+        "source_id": "gb:WSM:ADM1:40696546B45584224409911",
+        "roster_name": "Gaga'emauga",
+        "payload_properties": {
+          "shapeName": "Gaga'emauga",
+          "shapeISO": "",
+          "shapeID": "40696546B45584224409911",
+          "shapeGroup": "WSM",
+          "shapeType": "ADM1"
+        },
+        "roster_owner_indices": [
+          7134
+        ],
+        "identity_matches": {
+          "shapeName": true,
+          "shapeID": true,
+          "shapeGroup": true,
+          "shapeType": true,
+          "source_index_matches_ordinal": true
+        }
+      },
+      {
+        "source_index": 65875,
+        "roster_ordinal": 5,
+        "source_id": "gb:WSM:ADM1:40696546B1701315009328",
+        "roster_name": "Gaga'ifomauga",
+        "payload_properties": {
+          "shapeName": "Gaga'ifomauga",
+          "shapeISO": "",
+          "shapeID": "40696546B1701315009328",
+          "shapeGroup": "WSM",
+          "shapeType": "ADM1"
+        },
+        "roster_owner_indices": [
+          7134
+        ],
+        "identity_matches": {
+          "shapeName": true,
+          "shapeID": true,
+          "shapeGroup": true,
+          "shapeType": true,
+          "source_index_matches_ordinal": true
+        }
+      },
+      {
+        "source_index": 65876,
+        "roster_ordinal": 6,
+        "source_id": "gb:WSM:ADM1:40696546B72194673836531",
+        "roster_name": "Palauli",
+        "payload_properties": {
+          "shapeName": "Palauli",
+          "shapeISO": "",
+          "shapeID": "40696546B72194673836531",
+          "shapeGroup": "WSM",
+          "shapeType": "ADM1"
+        },
+        "roster_owner_indices": [
+          7134
+        ],
+        "identity_matches": {
+          "shapeName": true,
+          "shapeID": true,
+          "shapeGroup": true,
+          "shapeType": true,
+          "source_index_matches_ordinal": true
+        }
+      },
+      {
+        "source_index": 65877,
+        "roster_ordinal": 7,
+        "source_id": "gb:WSM:ADM1:40696546B5747120083880",
+        "roster_name": "Satupa'itea",
+        "payload_properties": {
+          "shapeName": "Satupa'itea",
+          "shapeISO": "",
+          "shapeID": "40696546B5747120083880",
+          "shapeGroup": "WSM",
+          "shapeType": "ADM1"
+        },
+        "roster_owner_indices": [
+          7134
+        ],
+        "identity_matches": {
+          "shapeName": true,
+          "shapeID": true,
+          "shapeGroup": true,
+          "shapeType": true,
+          "source_index_matches_ordinal": true
+        }
+      },
+      {
+        "source_index": 65878,
+        "roster_ordinal": 8,
+        "source_id": "gb:WSM:ADM1:40696546B29543190564601",
+        "roster_name": "Tuamasaga",
+        "payload_properties": {
+          "shapeName": "Tuamasaga",
+          "shapeISO": "",
+          "shapeID": "40696546B29543190564601",
+          "shapeGroup": "WSM",
+          "shapeType": "ADM1"
+        },
+        "roster_owner_indices": [
+          7134
+        ],
+        "identity_matches": {
+          "shapeName": true,
+          "shapeID": true,
+          "shapeGroup": true,
+          "shapeType": true,
+          "source_index_matches_ordinal": true
+        }
+      },
+      {
+        "source_index": 65879,
+        "roster_ordinal": 9,
+        "source_id": "gb:WSM:ADM1:40696546B90373058224054",
+        "roster_name": "Va'a-o-Fonoti",
+        "payload_properties": {
+          "shapeName": "Va'a-o-Fonoti",
+          "shapeISO": "",
+          "shapeID": "40696546B90373058224054",
+          "shapeGroup": "WSM",
+          "shapeType": "ADM1"
+        },
+        "roster_owner_indices": [
+          7134
+        ],
+        "identity_matches": {
+          "shapeName": true,
+          "shapeID": true,
+          "shapeGroup": true,
+          "shapeType": true,
+          "source_index_matches_ordinal": true
+        }
+      },
+      {
+        "source_index": 65880,
+        "roster_ordinal": 10,
+        "source_id": "gb:WSM:ADM1:40696546B98223692696505",
+        "roster_name": "Vaisigano",
+        "payload_properties": {
+          "shapeName": "Vaisigano",
+          "shapeISO": "",
+          "shapeID": "40696546B98223692696505",
+          "shapeGroup": "WSM",
+          "shapeType": "ADM1"
+        },
+        "roster_owner_indices": [
+          7134
+        ],
+        "identity_matches": {
+          "shapeName": true,
+          "shapeID": true,
+          "shapeGroup": true,
+          "shapeType": true,
+          "source_index_matches_ordinal": true
+        }
+      }
+    ],
+    "method_and_limits": "Read the exact authenticated gzip source payload and source-feature roster, then matched only GeoJSON identity properties to roster IDs/names/family. Python JSON parsing materialized geometry fields in memory, but no geometry values were inspected, transformed, rasterized or used for inference. Property identity agreement does not qualify current source fitness, territorial status, legal reuse, or repair causation."
+  },
+  "source_payload_acquisition": {
+    "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-WSM-ADM1-000.bin.gz",
+    "oid": "fad5910ce72abe5a041073bd9afa736578627756",
+    "compressed_bytes": 15650,
+    "decoded_bytes": 47246,
+    "compressed_sha256": "5f86f0c734f8e94db91efc19c1f4b4c48df8f7cce6e122c899656317431b2e62",
+    "decoded_sha256": "16bc5ba7994b7ad8407596db7f31f56c4a7bf7efdbbdf1064dddf43e8d9f7756",
+    "verified": true
+  },
+  "bounded_custody_checks": {
+    "kind": "bounded-public-custody-and-acceptance-check",
+    "candidate": {
+      "package_id": "gb-WSM-ADM1--repair-evaluation",
+      "queue_index": 178,
+      "original_land_cells": 469,
+      "original_water_cells": 0,
+      "intervals": 212,
+      "owners": [
+        7134
+      ],
+      "repair_source_feature_indices": [
+        65870,
+        65871,
+        65872,
+        65874,
+        65875,
+        65876,
+        65877,
+        65878,
+        65879,
+        65880
+      ],
+      "excluded_from_repair_feature_index": 65873,
+      "excluded_feature_scope": "separate physical-interpretation companion"
+    },
+    "public_searches": {
+      "exact_issue_query": "repo:ChengshuLi/WorldAtlas \\\"gb-WSM-ADM1--repair-evaluation\\\"",
+      "exact_issue_results": [],
+      "exact_pr_query": "\\\"gb-WSM-ADM1--repair-evaluation\\\"",
+      "exact_pr_results": [],
+      "source_identity_issue_query": "repo:ChengshuLi/WorldAtlas \\\"gb:WSM:ADM1\\\"",
+      "source_identity_issue_results": [],
+      "source_identity_pr_query": "\\\"gb:WSM:ADM1\\\"",
+      "source_identity_pr_results": [],
+      "branch_queries": [
+        {
+          "query": "WSM",
+          "results": []
+        },
+        {
+          "query": "Samoa",
+          "results": []
+        }
+      ],
+      "broad_issue_search": "repo:ChengshuLi/WorldAtlas WSM Samoa",
+      "result": "#134 only; read-only regional source/semantic review"
+    },
+    "related_public_records": [
+      {
+        "url": "https://github.com/ChengshuLi/WorldAtlas/issues/134",
+        "title": "Review Western Polynesian Islands interior batch 1: Niue, Samoa, Tokelau Archipelago + 3 more existing areas",
+        "state": "closed",
+        "state_reason": "completed",
+        "scope": "read-only regional source/semantic review; includes atlas:territory:WSM, not gb:WSM ADM1 repair-evaluation",
+        "reservation": {
+          "worker_id": "codex-20261003-western-polynesia-134-905c2490-f0da-43eb-9e62-d1d599a97aac",
+          "branch": "geography/regional-review-a5b86fc6ff2463cd",
+          "released_at": "2026-10-03T16:18:40.181Z",
+          "live_work": false
+        },
+        "limit": "No evidence this worker held the separate WSM repair-evaluation package."
+      },
+      {
+        "url": "https://github.com/ChengshuLi/WorldAtlas/pull/1240",
+        "title": "Preserve complete original geography sources with lossless custody",
+        "state": "merged",
+        "scope": "broad corpus source retention, not WSM repair disposition"
+      }
+    ],
+    "named_acceptance_snapshot": {
+      "public_url": "https://github.com/ChengshuLi/WorldAtlas/blob/282d14b4682f738fed6a0e6f3ee0d0e4b775d611/coordination/engineering/poland-original-repair-20261017/source-review/current-named-package-ledger.json",
+      "accepted_main": "282d14b4682f738fed6a0e6f3ee0d0e4b775d611",
+      "completed_count": 28,
+      "unfinished_count": 18,
+      "candidate_membership": "WSM repair-evaluation absent from both completed and unfinished lists",
+      "limit": "Historical named-package snapshot; absence is not proof of zero prior key overlap or exhaustive current acceptance."
+    },
+    "task_history_check": {
+      "tool": "list_threads",
+      "window": "latest 50 threads returned by the app",
+      "matching_title_or_summary": [],
+      "limit": "No specific WSM repair-task identity surfaced in this bounded recent task listing; this is not exhaustive ancient-history evidence."
+    },
+    "conclusion": "No concrete current WSM repair claim, PR, branch, or named-ledger acceptance surfaced in the checked public records. The only identified former task was a separate regional source-review reservation that was explicitly released. Bounded result only; do not claim never-owned or zero prior key credit without exact key reconciliation.",
+    "no_mutations": true
+  },
+  "author_scope_controls": {
+    "actual_rejected_cases": [
+      "missing original interval",
+      "duplicated original interval",
+      "substituted recorded owner"
+    ],
+    "method": "Finite custom exact-row comparison against independently derived retained-mask intervals, followed by key and selected-owner checks. No assertion of an unexecuted shared helper."
+  },
+  "source_review_context": {
+    "purpose": "Bounded source-context evidence for the original gb-WSM-ADM1 repair-evaluation documented-unresolved rationale. This is not a repair qualification or a per-cell causal finding.",
+    "sources": [
+      {
+        "url": "https://github.com/ChengshuLi/WorldAtlas/issues/134",
+        "title": "Review Western Polynesian Islands interior batch 1: Niue, Samoa, Tokelau Archipelago + 3 more existing areas",
+        "scope": "Read-only regional source/semantic review of 24 location identities, including atlas:territory:WSM.",
+        "pinned_source_metadata_for_wsm": {
+          "role": [],
+          "vintage": [
+            "Undated modern reference"
+          ],
+          "license": [
+            "Underlying source licenses retained in semantic-report.json"
+          ],
+          "entry_point": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/"
+        },
+        "relevant_short_quote": "Source/role/license entries below are starting metadata to verify, not independent approval.",
+        "interpretation": "The issue explicitly requires evidence for source role, vintage, completeness, license and semantic-tier suitability; an ADM label alone is insufficient. Its pinned WSM profile is Natural Earth country/territory scale and does not establish a local island or district partition."
+      },
+      {
+        "url": "https://github.com/ChengshuLi/WorldAtlas/pull/617",
+        "merged_commit": "3d2c5cee2fa748a7eff90051088b6998c9c84968",
+        "title": "Geography evidence: exhaustive Western Polynesia batch 1 review",
+        "evidence_path": "data/regional-review/regional-review-a5b86fc6ff2463cd/assessment.json",
+        "wsm_assessment": {
+          "classification": "insufficient-evidence",
+          "source_role_observed": "Natural Earth ADM0 / sovereign-state aggregation",
+          "vintage_observed": "Undated modern reference",
+          "assessment": "Insufficient evidence to endorse the aggregate as an interior partition. Country/island-state identity is supported, but local completeness and island treatment remain unresolved.",
+          "unresolved_items": [
+            "Natural Earth ADM0 aggregation is country-scale rather than local island/district boundary evidence; exact vintage and island/land-water completeness not independently retained here.",
+            "Country-level single-location tier versus settlement and outer-island detail needs semantic purpose validation at regional integration."
+          ],
+          "crosswalk": "Samoa PHC 2021 enumerates population over 51 political districts and villages, including populated offshore islands; current ID is Natural Earth ADM0 national aggregation, not a district subdivision.",
+          "physical_screen_limit": "GSHHG 2.3.7 comparison is diagnostic physical-land evidence only; it does not authorize political or administrative changes."
+        },
+        "relevant_short_quote": "This evidence packet does not approve the full region or enable location-attribute imports.",
+        "interpretation": "This is concrete WSM-specific evidence of a country-level aggregation and unresolved completeness/island-treatment questions, not evidence that any particular repair interval is caused by those gaps. The packet’s census crosswalk is about population/admin context, not a legal boundary or polygon source."
+      },
+      {
+        "url": "https://github.com/ChengshuLi/WorldAtlas/pull/1240",
+        "merged_commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+        "title": "Preserve complete original geography sources with lossless custody",
+        "evidence_paths": [
+          "coordination/engineering/original-geography-source-corpus-20261006/individual-source-attribution.json",
+          "coordination/engineering/original-geography-source-corpus-20261006/complete-custody-validity.json",
+          "coordination/engineering/original-geography-source-corpus-20261006/README.md"
+        ],
+        "wsm_custody_row": {
+          "source_id": "gb:WSM:ADM1",
+          "recorded_role": "actual consumed original administrative-registry product; byte custody only, source authority unapproved",
+          "recorded_represented_year": "2018 (effective applicability unverified)",
+          "recorded_underlying_license": "Creative Commons Attribution-ShareAlike 3.0 Unported, preserved as source metadata and not independently broadened or reapproved",
+          "recorded_geoBoundaries_derivative_terms": "CC-BY4.0 attribution statement preserved; it does not independently establish underlying original permission particulars",
+          "verification": "unverified",
+          "payload": {
+            "original_bytes": 47246,
+            "original_sha256": "16bc5ba7994b7ad8407596db7f31f56c4a7bf7efdbbdf1064dddf43e8d9f7756",
+            "advertised_features": 11,
+            "retained_complete_features": 11,
+            "invalid_empty_or_unsupported": []
+          }
+        },
+        "relevant_short_quote": "Exact original-byte reconstruction and unmodified source feature validity only.",
+        "interpretation": "The corpus confirms byte custody, feature count/hash consistency and a producer validity check. It expressly does not approve source authority, effective date, land/water meaning, political ownership or boundary correctness. The retrieved records do not establish WSM-specific native CRS suitability or independent island completeness, and they do not turn preserved catalog terms into a permission or repair qualification."
+      }
+    ],
+    "limits": [
+      "No per-cell source causation or interval-specific rejection is inferred from these country- and corpus-level facts.",
+      "No geometry was analyzed or replayed for this task.",
+      "The public evidence supports an unresolved source-context rationale; catalogue metadata and shape-validity alone do not qualify a repair."
+    ]
+  }
+}
