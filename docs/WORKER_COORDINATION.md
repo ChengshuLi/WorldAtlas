@@ -137,21 +137,9 @@ unresolved substantive objection requires renewed relevant review, not another
 identity or a blind retry. A comment does not create scientific approval or make an
 author their own independent reviewer.
 
-All workers submit merges through:
-
-```sh
-gh workflow run worker-merge.yml --repo ChengshuLi/WorldAtlas --ref main \
-  -f pr_number=PR-NUMBER -f expected_head=VERIFIED-HEAD-SHA \
-  -f request_id=UNIQUE-REQUEST-ID
-```
-
-Use a fresh 16–100 character request ID containing only ASCII letters, digits and
-hyphens. Record it before dispatch, identify the exact matching Actions run with
-`gh run list`, then inspect or watch that numeric run ID. The native Actions queue
-holds the entire preparation, isolated candidate tests and final merge lifecycle
-in the top-level `worldatlas-main-integrate` concurrency group. The workflow uses
-`queue: max` and does not cancel an in-progress merge when another arrives.
-Research, PR checks and independent review remain parallel.
+Submit, find, observe and recover native merge executions through the single
+[merge queue client procedure](MERGE_QUEUE_CLIENT.md). Research, PR checks and
+independent review can continue while Actions holds pending runs.
 
 The queue validates the exact reviewed head, current checks and current main,
 then creates one owned disposable candidate branch and asks GitHub to merge the
@@ -350,25 +338,9 @@ now owns queueing, while the existing top-level concurrency group still holds th
 complete candidate/test/final lifecycle to prevent cooperating merges from
 invalidating one another's tested base.
 
-Submit `worker-merge.yml` directly on main with the exact reviewed head and a fresh
-request ID. `queue: max` retains up to 100 pending executions; excess executions
-can be cancelled. There is no separate scheduler, registration comment, FIFO
-ticket, dispatch-attempt ledger, completion wake or automatic recovery daemon.
-Provider ordering, queue limits and runner availability remain external controls,
-not an application-level availability guarantee. No queue-capacity engine is
-introduced; existing per-run API quota and deadline guards remain mandatory.
-
-Record the matching run ID/URL and use `gh run list`, `gh run view` and
-`gh run watch` to inspect it. Preserve failure diagnostics and result receipts,
-then independently verify actual PR merged state, exact head and squash commit.
-An interrupted local wait does not end a workflow. An uncertain dispatch, missing
-run on a bounded history page, pending state or missing receipt never authorizes a
-blind duplicate. After a settled failed/cancelled execution, reconcile the PR and
-all earlier unresolved executions. With successful preparation and unchanged
-reviewed head/tested main, address the cause and rerun failed jobs of that same
-execution; successful original jobs need no repetition. Failed preparation or a
-changed base requires a fresh request. Changed reviewed bytes require new
-substantive review. See [MERGE_QUEUE_CLIENT.md](MERGE_QUEUE_CLIENT.md).
+Use [MERGE_QUEUE_CLIENT.md](MERGE_QUEUE_CLIENT.md) for submission, run discovery,
+observation and recovery. Provider ordering, queue limits and runner availability
+remain external controls, not an application-level availability guarantee.
 
 ### Migrate existing requests safely
 
