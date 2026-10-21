@@ -21,3 +21,11 @@ The stock full-scope diagnostic consumed the prepared source evidence and all 1,
 The genuine stock native constructor executed on the narrowed source evidence and native patch at commit `7e0e63ce8eaff7ff7ae902521ccfffcc6ee9e219`. It emitted 16 components containing 1,853 qualified cells; the output is retained at `native-authority-001/` in commit `ed04a46f54889e6979c720478221565bf7013d02`. Complete positive and negative source operands and whole-target physical findings remain bound. No observer or completed physical producer was replayed.
 
 This is a partial positive candidate. None of the 133 held keys is claimed as repaired or completed unresolved. Current-owner conservation, cumulative composition, independent final-head review and hosted delivery remain required before root can consider acceptance. The source evidence does not certify modern legal or cadastral boundaries or an unbounded absence of competitors.
+
+## Delivery candidate
+
+Cumulative composition completed against main `242a7fa60b79705a81b812fc91a8cd8475f77f8f`, preserving its LCA-inclusive selected product. Compact finalization completed once from composition commit `88b56525f73c3d6adf993edc2ba046d98e344fdb`. The emitted selected-delivery expectations contain 6,346,714 cumulative selected cells, an additive 1,853-cell candidate increase from 6,344,861. The current-main advance from the allocation base changed only `scripts/package-inputs.mjs` and its test; the completed scientific executions are not relabeled as execution by those newer files.
+
+The initial composition attempt refused a later-commit alias for the native patch before publishing output. Its corrected configuration binds the exact successful constructor input commit. Earlier source preparation stops were missing immutable metadata or a retained ROU payload, all subsequently authenticated; no completed scientific run was repeated.
+
+The intended delivery uses one stock worker merge run with its required geography/selected-output checks. Those hosted checks are not claimed complete in this authored packet. Root acceptance remains separate.
