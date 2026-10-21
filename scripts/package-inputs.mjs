@@ -24,7 +24,7 @@ export function validatePackageInputs(value) {
   }
   // Ambient databases, secrets and existing build/cache output cannot become source inputs.
   if (value.inputs.some(row => /^(?:\.git(?:\/|$)|node_modules(?:\/|$)|\.cache(?:\/|$)|dist(?:\/|$)|data\/atlas\.sqlite)/.test(row))) throw Error('Ambient/generated package source input');
-  const outputs = ['dist/', '.cache/deployment-budget.json', 'data/prepared-evidence/', 'data/atlas.sqlite'];
+  const outputs = ['dist/', '.cache/deployment-budget.json', 'data/prepared-evidence/', 'data/atlas.sqlite', '.cache/package-atlas.sqlite'];
   if (value.generated_outputs.some(row => !outputs.includes(row))) throw Error('Unsupported generated package output');
   return value;
 }
