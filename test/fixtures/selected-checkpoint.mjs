@@ -167,15 +167,16 @@ async function appendNativeAuthority(f,{owner=0,targetOwners,name='appended',com
  f.save(membershipPath,{type:'FeatureCollection',features:f.features.map(p=>({...p,
   properties:{...p.properties,metadata:{source_member_ids:[family+':'+p.id]}}}))});
  f.save(name+'/native-patch.json',{rows:nativePatchRows===undefined?mergeCompletedNativePatches(requested.map(({owner,x,y})=>({rows:[{y,runs:[[x,x+1,owner+1]]}]})),f.manifest.size):structuredClone(nativePatchRows)});const originals=f.commit();
+ const physicalEvidence=f.pin(name+'/physical.json',originals);
  const evidence={version:1,kind:'source-target-native-evidence-v1',
   catalogue:f.pin('coordination/engineering/original-geography-source-corpus-20261006/catalogue.json',originals),
-  owner_roster:f.pin('data/owners.json',originals),physical_evidence:f.pin(name+'/physical.json',originals),
+  owner_roster:f.pin('data/owners.json',originals),physical_evidence:physicalEvidence,
   physical_input:f.pin(name+'/measured.json',originals),physical_reproduction:f.pin(name+'/physical.py',originals),
   native_latitudes:f.manifest.native_latitudes,
   native_contract:Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k=>[k,f.manifest[k]])),
   base_reference:f.envelope.base_reference,families:[{source_id:family,parts:[f.pin(name+'/source.json',originals)]}],
   targets:requested.map(({target,feature,owner})=>({id:target,target_id:feature.id,pixelIndex:owner+1,source_family:family,base_geometry:feature.geometry,
-   source_receipt_sha256:f.pin(name+'/physical.json',originals).sha256,coverage_classes:['mapped_land_support']})),
+   source_receipt_sha256:physicalEvidence.sha256,coverage_classes:['mapped_land_support']})),
   source_membership:{index:f.pin('data/world-index.json',originals),lineage:f.pin('data/semantic-report.json',originals),parts:[f.pin(membershipPath,originals)]}};
  mutateEvidence(evidence);f.save(name+'/evidence.json',evidence);const ev=f.commit();
  const operands={source_evidence:f.pin(name+'/evidence.json',ev),native_patch:f.pin(name+'/native-patch.json',originals)};
