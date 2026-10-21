@@ -1,0 +1,77 @@
+{
+  "composition_delta": {
+    "added_cells": 148,
+    "current_finalized_expectation": 6336358,
+    "current_patch_cells": 6336358,
+    "exact_original_request_delta_match": true,
+    "expected_current_total": 6336358,
+    "prior_mnp_selected_cells": 6336210,
+    "prior_patch_cells": 6336210,
+    "removed_prior_intervals": 0,
+    "request_owner_additions": {
+      "7121": 148
+    },
+    "request_rows": 58
+  },
+  "kind": "lie-composition-001-bounded-reconciliation",
+  "limitations": [
+    "This is bounded composition/accounting reconciliation, not root acceptance or global historical-credit adjudication.",
+    "No producer, observer, tests, or source review were repeated."
+  ],
+  "prior_observation_limit": {
+    "note": "The single retained owner observation predates composition and is bound to its recorded selection commit. Current admission is evidenced by the finalized selected-ledger conservation product; no new owner observation was run.",
+    "path": "inventory/lie-selected-owner-observation.json",
+    "sha256": "995ee53087ce9f4599d0448edb6f8126a5f50fab63907b3e03bcef62272b56da"
+  },
+  "products": {
+    "authority_registry": {
+      "bytes": 264097,
+      "path": "coordination/engineering/lie-qualified-repair-20261021/composition-001/authority-registry.json",
+      "sha256": "f1aec403689fffb2a1fe2de99cac967a2b6ea31760adb40e775b4f07502bd113"
+    },
+    "patch": {
+      "bytes": 30614793,
+      "path": "coordination/engineering/lie-qualified-repair-20261021/composition-001/patch.json",
+      "sha256": "28349dc1ffeaad2e7f11f8e8fcc5f390ba2a3b581fceaeb6626a331767332d3c"
+    },
+    "selected_ledger": {
+      "bytes": 63190595,
+      "path": "coordination/engineering/lie-qualified-repair-20261021/composition-001/selected-ledger.json",
+      "sha256": "ac7a538841e74165bff132713d3d0e35c3f2e0a9a82732bda8348f88f32ced82"
+    }
+  },
+  "scope": {
+    "component_id": "source-target:660186e9db29b4101ac31d51cf96c9f4e3ce81605c6d9a8fe0ba9000373e5174",
+    "native_patch_rows": 58,
+    "original_cells": 148,
+    "original_intervals": 60,
+    "owner_id": 7121,
+    "target_id": "atlas:territory:LIE"
+  },
+  "selected_ledger_overlap_check": {
+    "method": "Streaming row/interval comparison of prior MNP composition patch to LIE composition-001, paired with scope-ID/authority-registry delta; no full-world key expansion.",
+    "result": "The prior selected component registry and scope IDs are preserved; exactly one new source-target scope ID and authority are added. LIE request coordinates are exactly the 148-cell composition delta; no prior LIE component overlap is present in the prior selected scope IDs."
+  },
+  "selected_ledger_scope_accounting": {
+    "added_authorities": [
+      {
+        "authority_sha256": "e8ad56a93339d77605537025e576c8291cecb2acba3297683cf8d5a1cfc6c3dd",
+        "constructor_commit": "82ce593e4fa995b4a05cee13f620dbd8c1196bc0",
+        "constructor_path": "coordination/engineering/lie-qualified-repair-20261021/native-authority-001/constructor-result.json",
+        "constructor_sha256": "e3fc5fd0f775f143383013d099d7f9220f80f2ada456c982f3bc9e81b9d1abb1",
+        "source_authority_commit": "82ce593e4fa995b4a05cee13f620dbd8c1196bc0",
+        "source_authority_path": "coordination/engineering/lie-qualified-repair-20261021/native-authority-001/authority-binding.json",
+        "source_authority_sha256": "ad9654b40b062ec649afd630fb3e412ef94982816b68340a82b4d4d47ed0b689"
+      }
+    ],
+    "added_scope_ids": [
+      "source-target:660186e9db29b4101ac31d51cf96c9f4e3ce81605c6d9a8fe0ba9000373e5174"
+    ],
+    "current_authority_registry_entries": 229,
+    "current_scope_id_count": 7007,
+    "prior_authority_registry_entries": 228,
+    "prior_scope_id_count": 7006,
+    "removed_scope_ids": []
+  },
+  "status": "verified"
+}

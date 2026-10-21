@@ -1,0 +1,148 @@
+{
+  "kind": "retained-LIE-handoff-evidence-copies",
+  "purpose": "Preserve selected original custody, source-contact, source-validity, lineage, queue and primary attribution/metadata evidence for the LIE 148-cell original repair package.",
+  "origin": {
+    "artifact": "LIE148 portable audit handoff ZIP",
+    "bytes": 3034449,
+    "sha256": "495d9763079d683caff41a765b722d366778522252cc0cf079d25757f4d9e84b",
+    "manifest_sha256": "6763f1f5a0bead08f1640c71c5be881197325c7e9d0e65da16f1ccfb96eaa078",
+    "verified_member_count": 34
+  },
+  "copied_files": [
+    {
+      "path": "LIE148-portable-handoff.json",
+      "bytes": 165440,
+      "sha256": "a96acd1889abaac9a081de799c597c4ef7b33b357500658aff8f3a37637d23b5"
+    },
+    {
+      "path": "source-contact-results.json",
+      "bytes": 486367,
+      "sha256": "9aa1c74416dce5161fe8ca5cf42b30124611804a20a57e712c04b1b37afb68a3"
+    },
+    {
+      "path": "source-validity-results.json",
+      "bytes": 28909,
+      "sha256": "e565bb722cf8814fda0c1cb31a868714cef813a538665c9afb9ff5ae0fa0fe3a"
+    },
+    {
+      "path": "official-name-identity-join.json",
+      "bytes": 2475,
+      "sha256": "994d0233b6ae21c4041c071539de67ae93af0cab56bd2d713917baf872e8a890"
+    },
+    {
+      "path": "retained/original-lineage-excerpt.json",
+      "bytes": 2217,
+      "sha256": "440e18dfb132bed456781425e6b6ae2387961af02840ad363d54793922a8354c"
+    },
+    {
+      "path": "retained/original-queue-row.json",
+      "bytes": 2649,
+      "sha256": "071bea0a351df66dc1028827fe1ccce87650b021b7744572721ec0fd52eefe71"
+    },
+    {
+      "path": "retained/context.json",
+      "bytes": 22972,
+      "sha256": "583751a88f24fc0139deb5b152f35d27701a7842e51708723097ddeb4b2bbed4"
+    },
+    {
+      "path": "retained/disposition.json",
+      "bytes": 25452,
+      "sha256": "340294d620ff51cdd6f8de6fb915c92dc34124021cda4f6fd01b17077d8daa4d"
+    },
+    {
+      "path": "retained/verified-original-pins.json",
+      "bytes": 3531,
+      "sha256": "f5a938ed117dbe8ba0338ab3c02b1074a49cb66d5b9371df8cfc4ef7d1559ba0"
+    },
+    {
+      "path": "primary/CITATION-AND-USE-geoBoundaries.txt",
+      "bytes": 4316,
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+    },
+    {
+      "path": "primary/archive-member-bindings.json",
+      "bytes": 669,
+      "sha256": "b90f31ab7596b41e61867c90446b9855b0be106d1cc1b62169c93c1cd245a553"
+    },
+    {
+      "path": "primary/geoBoundaries-LIE-ADM1-metaData.json",
+      "bytes": 848,
+      "sha256": "cd26368e93bc0ef8d462cbc248dbb28ae223e632a919a0ff4332dbc7d2ae0ff7"
+    },
+    {
+      "path": "primary/geoBoundaries-LIE-ADM1-metaData.txt",
+      "bytes": 1012,
+      "sha256": "a5059095df96dc8f27657786edae08bb2156ffbc05069eb6ab17822c31453dac"
+    },
+    {
+      "path": "primary/gb-lie-metadata.json",
+      "bytes": 1737,
+      "sha256": "10621deac86e1e0d4df955c61642b74935af429a5feb8cf3bc75fc863d65e5b8"
+    },
+    {
+      "path": "primary/acquisition.json",
+      "bytes": 3596,
+      "sha256": "bf1be030b11545a5396af77e13a5f085bcbd3256a60f97a933a2deed1a5238a4"
+    },
+    {
+      "path": "primary/acquisition2.json",
+      "bytes": 1157,
+      "sha256": "b0a55a560f2e39c4d1cc869afb273218c8d67517152829b1e7842333881633db"
+    },
+    {
+      "path": "primary/acquisition3.json",
+      "bytes": 405,
+      "sha256": "a5423968413fad0ef528abc3370f532d138a905898084d5ceb3345d975274c9f"
+    },
+    {
+      "path": "primary/osm-copyright.html",
+      "bytes": 21314,
+      "sha256": "93afe81d2d2260a3b0af7bf76d2f045569adfebf6bd681fe513ec8ab44c2b60a"
+    },
+    {
+      "path": "primary/official-download.html",
+      "bytes": 74515,
+      "sha256": "4fb01db4e404ee38a96daec19d8be9aa16a642bb30bb348431b2c41e349e2b47"
+    },
+    {
+      "path": "primary/lie-full.geojson",
+      "bytes": 184567,
+      "sha256": "326cc1da31d15c85ada8e6afc7f049290a728de42f7b48e05191673974e53afd"
+    }
+  ],
+  "not_copied": [
+    {
+      "path": "primary/lie-original.geojson",
+      "reason": "Original simplified source body is already bound through authenticated public corpus pins and is present in the handoff manifest."
+    },
+    {
+      "path": "primary/aut1-original.geojson",
+      "reason": "Complete AUT ADM1 simplified source is already bound through authenticated public corpus pins and is present in the handoff manifest."
+    },
+    {
+      "path": "primary/aut2-original.geojson",
+      "reason": "Complete AUT ADM2 simplified source is already bound through authenticated public corpus pins and is present in the handoff manifest."
+    },
+    {
+      "path": "code/native-grid.mjs",
+      "reason": "Executable is retained as an authenticated public code pin; no code copy is needed in this research packet."
+    },
+    {
+      "path": "code/native-row-latitudes.f64le.gz",
+      "reason": "Large native row table remains in its authenticated original operand; not duplicated."
+    },
+    {
+      "path": "primary/lie-all.zip",
+      "reason": "Original archive is preserved in the Library handoff; hash and archive-member bindings are copied above."
+    },
+    {
+      "path": "primary/official-geodata.html",
+      "reason": "Large optional government portal page remains in the Library handoff; its 200 response and hash are recorded in copied acquisition metadata. The linked terms file returned HTTP 404 and the separate municipal page returned HTTP 403; no alternate route was used."
+    }
+  ],
+  "limits": [
+    "These are retained copies of authenticated handoff records and source documents, not new source retrievals or geometry analysis.",
+    "The OSM copyright page and geoBoundaries attribution text describe source terms; the optional current-government route is not treated as approved or as a replacement source.",
+    "The seven full-source differences and separate AUT conflict remain adverse and unchanged."
+  ]
+}
