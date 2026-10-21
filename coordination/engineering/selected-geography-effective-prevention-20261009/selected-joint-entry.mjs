@@ -111,7 +111,7 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
     // Complete pins already supply lengths. The existing acquisition compares
     // mode/OID with the local origin tree, without a remote tree or blob read.
     loadDescriptor:(_version,name) => {
-      demand(name === declaredPin.path, 'Appended authority acquisition path differs');
+      demand(name === declaredPin.path, 'Selected input acquisition path differs');
       return {type:'blob',mode:declaredPin.mode,sha:declaredPin.git_blob_oid,size:declaredPin.bytes};
     },
     execute:(_command,args,options) => execFileSync(beforeReader.gitExecutable,args,
