@@ -1,0 +1,175 @@
+{
+  "method": "src/native-grid.js nativePolygonIntervals using the observation-pinned native-row-latitudes table and exact original x/y/source-index key set. Receipt polygon geometries converted without coordinate transformation to the routine polygon-ring input. Compared rasterized intervals and exact boundary-tie records to each target\u2019s original source-indexed native cells; this is a bounded diagnostic, not a producer/observer rerun.",
+  "native_method": "native-linear-evenodd-first-owner-v1",
+  "native_grid_module": {
+    "path": "src/native-grid.js",
+    "commit": "723da3c6515939c66e07d1f95af1566d65e6968f",
+    "blob": "add4cef02bb5a790f22a9078fdf9bd51679059d3",
+    "bytes": 53197,
+    "sha256": "3d20777f5896d28192e40428dd34cab89d47873a08bf073a17338c4ff97d43cd"
+  },
+  "latitude_table": {
+    "commit": "723da3c6515939c66e07d1f95af1566d65e6968f",
+    "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "blob": "de6905e162dc031b1b93248fae91190c39c4ad53",
+    "bytes": 1851757,
+    "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+    "decoded_bytes": 2097328,
+    "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+  },
+  "observation": {
+    "commit": "723da3c6515939c66e07d1f95af1566d65e6968f",
+    "query_sha256": "a2d1962c8c327fdb2b30fae23a8bf04198f9c776b204094c34f6a456b2c9cac5",
+    "intervals_sha256": "e97a1a872cc20039624f7899043986461d6fac3d25af47da2eb7f50d26c4a91a",
+    "key_count": 633
+  },
+  "physical_receipt": {
+    "commit": "e447ef5fc4fcae9b8f04a6d517904cbf30b413df",
+    "path": "coordination/engineering/vct-original-disposition-20261020/physical-001/whole-target-support.json",
+    "sha256": "bf26a53fb99f43f09f426f7b3901e6eebb066da664a505c604f8c54a57a15d8a"
+  },
+  "targets": [
+    {
+      "target": "gb:VCT:ADM1:94954027B88448576527444",
+      "source_index": 64726,
+      "target_name": "Charlotte",
+      "original_key_count": 2,
+      "mapped_land_native_matches": 2,
+      "mapped_land_boundary_tie_keys": [],
+      "mapped_land_native_tie_count": 0,
+      "issue_checks": []
+    },
+    {
+      "target": "gb:VCT:ADM1:94954027B50419639501702",
+      "source_index": 64727,
+      "target_name": "Saint Andrew",
+      "original_key_count": 30,
+      "mapped_land_native_matches": 30,
+      "mapped_land_boundary_tie_keys": [],
+      "mapped_land_native_tie_count": 0,
+      "issue_checks": []
+    },
+    {
+      "target": "gb:VCT:ADM1:94954027B75488374461778",
+      "source_index": 64728,
+      "target_name": "Saint David",
+      "original_key_count": 95,
+      "mapped_land_native_matches": 95,
+      "mapped_land_boundary_tie_keys": [],
+      "mapped_land_native_tie_count": 0,
+      "issue_checks": []
+    },
+    {
+      "target": "gb:VCT:ADM1:94954027B8071677306874",
+      "source_index": 64729,
+      "target_name": "Saint George",
+      "original_key_count": 96,
+      "mapped_land_native_matches": 96,
+      "mapped_land_boundary_tie_keys": [],
+      "mapped_land_native_tie_count": 0,
+      "issue_checks": [
+        {
+          "issue_ordinal": 1,
+          "reason": "extra_reconstruction",
+          "native_key_matches": [],
+          "boundary_tie_keys": [],
+          "native_tie_count": 0
+        }
+      ]
+    },
+    {
+      "target": "gb:VCT:ADM1:94954027B24043744256815",
+      "source_index": 64730,
+      "target_name": "Saint Patrick",
+      "original_key_count": 4,
+      "mapped_land_native_matches": 4,
+      "mapped_land_boundary_tie_keys": [],
+      "mapped_land_native_tie_count": 0,
+      "issue_checks": []
+    },
+    {
+      "target": "gb:VCT:ADM1:94954027B73683206567439",
+      "source_index": 64731,
+      "target_name": "Grenadines",
+      "original_key_count": 406,
+      "mapped_land_native_matches": 406,
+      "mapped_land_boundary_tie_keys": [],
+      "mapped_land_native_tie_count": 0,
+      "issue_checks": [
+        {
+          "issue_ordinal": 1,
+          "reason": "missing_reconstruction",
+          "native_key_matches": [],
+          "boundary_tie_keys": [],
+          "native_tie_count": 0
+        },
+        {
+          "issue_ordinal": 2,
+          "reason": "extra_reconstruction",
+          "native_key_matches": [],
+          "boundary_tie_keys": [],
+          "native_tie_count": 0
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Native interval rasterization does not validate physical source applicability, topology, or legal authority.",
+    "All adverse issue geometry is retained even where native center overlap is zero; this does not clear sub-cell physical discrepancies.",
+    "Separate 389-cell physical companion is excluded."
+  ],
+  "role_status": {
+    "physical_evidence": {
+      "status": "available for six exact target rows",
+      "receipt_path": "coordination/engineering/vct-original-disposition-20261020/physical-001/whole-target-support.json",
+      "receipt_sha256": "bf26a53fb99f43f09f426f7b3901e6eebb066da664a505c604f8c54a57a15d8a",
+      "physical_result_targets": 6,
+      "native_key_support": "All 633 original target/source-specific cells matched the corresponding mapped_land_support polygon under the pinned native interval routine; per-target counts are recorded below, with zero matching boundary ties.",
+      "issue_intersections": "George extra_reconstruction and Grenadines missing_reconstruction plus extra_reconstruction each intersect zero original native centers; issue geometries remain present in the receipt and are not cleared."
+    },
+    "physical_input_and_reproduction": {
+      "status": "available and bound to the completed run",
+      "stage_commit": "e46369617079abf993c7c3b08715b7d3a90d5234",
+      "stage_path": "coordination/engineering/vct-original-disposition-20261020/physical-preparation/original-stage-inputs.json",
+      "stage_blob": "8da066ce249f3ff93b26b62ebbe1f9cdfb1f1993",
+      "producer": "scripts/qualify-source-cohort.py",
+      "producer_sha256": "abc801b9a35d20c9f0dfe3bbc9bb2cb7dc107f1758414970d9cde11380574a18",
+      "execution_receipt": "coordination/engineering/vct-original-disposition-20261020/physical-001/execution-receipt.json",
+      "completed_execution": {
+        "status": "complete",
+        "input_count": 25,
+        "elapsed_seconds": 6.004953250056133,
+        "whole_target_support_bytes": 154272,
+        "whole_target_support_sha256": "bf26a53fb99f43f09f426f7b3901e6eebb066da664a505c604f8c54a57a15d8a"
+      }
+    },
+    "native_latitudes_and_original_owner_roster": {
+      "status": "available from the already consumed original observer/source joins",
+      "latitude_table_commit": "723da3c6515939c66e07d1f95af1566d65e6968f",
+      "latitude_table_path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "latitude_table_blob": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "owner": "7132",
+      "original_source_feature_indices": [
+        64726,
+        64727,
+        64728,
+        64729,
+        64730,
+        64731
+      ]
+    },
+    "coverage_classes_and_rows": {
+      "status": "cell-level evidence available for the original scope",
+      "cells": 633,
+      "intervals": 224,
+      "physical_class": "land for all original rows",
+      "inland_water_or_contradictory_support_intersections": 0,
+      "separate_389_cell_physical_companion": "excluded"
+    },
+    "complete_competitor_and_territorial_exclusions": {
+      "status": "unresolved",
+      "reason": "The completed physical receipt compares these six target geometries to retained GSHHG support; it does not supply a justified complete cross-family competitor/territorial-exclusion census."
+    },
+    "qualification_status": "No native patch was produced and no positive repair qualification or hold removal is claimed. The physical result is source-relative, with retained adverse sub-cell reconstruction geometry, and does not settle source applicability, complete competitors, rights, or territorial authority."
+  }
+}

@@ -1,0 +1,276 @@
+{
+  "version": 1,
+  "kind": "vct-native-diagnostic-independent-key-review",
+  "scope": {
+    "package_id": "gb-VCT-ADM1--repair-evaluation",
+    "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "original_land_cells": 633,
+    "original_intervals": 224,
+    "owner_index": 7132,
+    "source_features": [
+      64726,
+      64727,
+      64728,
+      64729,
+      64730,
+      64731
+    ],
+    "excluded_physical_companion": {
+      "cells": 389,
+      "intervals": 179
+    }
+  },
+  "reviewer_operations": {
+    "owner_observer_rerun": false,
+    "physical_producer_rerun": false,
+    "native_diagnostic_rerun": false,
+    "geometry_replay": false,
+    "public_mutation": false
+  },
+  "inputs": [
+    {
+      "path": "inventory/vct-selected-owner-observation.json",
+      "bytes": 140065,
+      "sha256": "d6047c6824f0b0e29ec8d6813895f568aa3bdccaeaca3fe4726bb9a3cbbf0979"
+    },
+    {
+      "path": ".worldatlas-workspaces/2d82c0ae06b92ab3/42d17456f7a54d6568c34d0f3b55d222f56a720a7015812071dce708422d5208/work/coordination/engineering/vct-original-disposition-20261020/native-preparation/requested-native-patch.json",
+      "bytes": 8293,
+      "sha256": "1e0ec325eb346df0cd75190ac2eb7789ab214235abefe4963227699fbf46efa4"
+    },
+    {
+      "path": ".worldatlas-workspaces/2d82c0ae06b92ab3/42d17456f7a54d6568c34d0f3b55d222f56a720a7015812071dce708422d5208/work/coordination/engineering/vct-original-disposition-20261020/native-diagnostic-001/native-diagnostic.json",
+      "bytes": 31011,
+      "sha256": "882e7cccfef8b7f99361b5a8a7713e5dcedbb42e35e3a9c6aa958602be1abf1e"
+    },
+    {
+      "path": "inventory/vct-physical-native-interval-overlap.json",
+      "bytes": 8008,
+      "sha256": "f45eb5b0a876f93ad23376c66f9de1f20ebad7f5ea9d8c8002a6b38b99eb7339"
+    },
+    {
+      "path": "inventory/vct-bounded-competitor-closure.json",
+      "bytes": 22830,
+      "sha256": "f4a14489e32cc24e6b5d8c915706a1983bb1d0c739b36898dd4b059976a4d044"
+    },
+    {
+      "path": ".worldatlas-workspaces/2d82c0ae06b92ab3/42d17456f7a54d6568c34d0f3b55d222f56a720a7015812071dce708422d5208/work/coordination/engineering/vct-original-disposition-20261020/source-evidence-001/source-evidence.json",
+      "bytes": 87488,
+      "sha256": "b2484e7f65f535c0a91d79495096beeb2d4946d19bd6b29e1e9ff00950c21cf8"
+    },
+    {
+      "path": ".worldatlas-workspaces/2d82c0ae06b92ab3/42d17456f7a54d6568c34d0f3b55d222f56a720a7015812071dce708422d5208/work/coordination/engineering/vct-original-disposition-20261020/native-diagnostic-001/preparation.json",
+      "bytes": 266,
+      "sha256": "e4a4fef80237a299c03bfedcc6c7a911e4e9128968f0f378f2465b6cbe37713c"
+    }
+  ],
+  "bindings": {
+    "original_observation_commit": "723da3c6515939c66e07d1f95af1566d65e6968f",
+    "original_query_sha256": "a2d1962c8c327fdb2b30fae23a8bf04198f9c776b204094c34f6a456b2c9cac5",
+    "original_interval_sha256": "e97a1a872cc20039624f7899043986461d6fac3d25af47da2eb7f50d26c4a91a",
+    "native_patch_pin": {
+      "bytes": 8293,
+      "commit": "ef463ebfb2107a6fc15402254f58435968a4d78a",
+      "git_blob_oid": "dd1a9cc4e5e0a4eb8f1d6db0ef69200324615d34",
+      "mode": "100644",
+      "path": "coordination/engineering/vct-original-disposition-20261020/native-preparation/requested-native-patch.json",
+      "sha256": "1e0ec325eb346df0cd75190ac2eb7789ab214235abefe4963227699fbf46efa4"
+    },
+    "source_evidence_pin": {
+      "bytes": 87488,
+      "commit": "ef463ebfb2107a6fc15402254f58435968a4d78a",
+      "git_blob_oid": "b28f6a3748131fab240685e68a9689cdbfa55e4d",
+      "mode": "100644",
+      "path": "coordination/engineering/vct-original-disposition-20261020/source-evidence-001/source-evidence.json",
+      "sha256": "b2484e7f65f535c0a91d79495096beeb2d4946d19bd6b29e1e9ff00950c21cf8"
+    },
+    "diagnostic_rule_sha256": "f6121a74d3d70b2cf9ee2e953fddd8f8e9ed420b734583569341baf9c45cdc3f",
+    "native_contract": "native-linear-evenodd-first-owner-v1",
+    "native_latitude_commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+    "native_latitude_path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "physical_receipt_commit": "e447ef5fc4fcae9b8f04a6d517904cbf30b413df",
+    "physical_receipt_path": "coordination/engineering/vct-original-disposition-20261020/physical-001/whole-target-support.json",
+    "physical_receipt_sha256": "bf26a53fb99f43f09f426f7b3901e6eebb066da664a505c604f8c54a57a15d8a"
+  },
+  "exact_key_join": {
+    "method": "Expanded each interval row [y,x0,x1,owners,source_feature_indices,class] and each requested-patch/diagnostic RLE row to exact x,y,owner tuples; compared sorted unique (x,y) sets and owner values.",
+    "original_keys": 633,
+    "requested_patch_keys": 633,
+    "diagnostic_decision_keys": 633,
+    "diagnostic_supported_keys": 633,
+    "diagnostic_held_keys": 0,
+    "diagnostic_held_rows": 0,
+    "diagnostic_assigned_runs": 224,
+    "original_interval_rows": 224,
+    "request_unique_xy": 633,
+    "diagnostic_unique_xy": 633,
+    "original_equals_requested_patch": true,
+    "original_equals_diagnostic": true,
+    "owner_values": [
+      7132
+    ],
+    "first_failure": null,
+    "output_sha256": "882e7cccfef8b7f99361b5a8a7713e5dcedbb42e35e3a9c6aa958602be1abf1e"
+  },
+  "target_partition": [
+    {
+      "source_feature_index": 64726,
+      "target_name": "Charlotte",
+      "original_keys": 2,
+      "original_intervals": 2,
+      "physical_receipt_native_key_matches": 2,
+      "issue_checks": []
+    },
+    {
+      "source_feature_index": 64727,
+      "target_name": "Saint Andrew",
+      "original_keys": 30,
+      "original_intervals": 11,
+      "physical_receipt_native_key_matches": 30,
+      "issue_checks": []
+    },
+    {
+      "source_feature_index": 64728,
+      "target_name": "Saint David",
+      "original_keys": 95,
+      "original_intervals": 46,
+      "physical_receipt_native_key_matches": 95,
+      "issue_checks": []
+    },
+    {
+      "source_feature_index": 64729,
+      "target_name": "Saint George",
+      "original_keys": 96,
+      "original_intervals": 31,
+      "physical_receipt_native_key_matches": 96,
+      "issue_checks": [
+        {
+          "issue_ordinal": 1,
+          "reason": "extra_reconstruction",
+          "native_key_matches": [],
+          "boundary_tie_keys": [],
+          "native_tie_count": 0
+        }
+      ]
+    },
+    {
+      "source_feature_index": 64730,
+      "target_name": "Saint Patrick",
+      "original_keys": 4,
+      "original_intervals": 4,
+      "physical_receipt_native_key_matches": 4,
+      "issue_checks": []
+    },
+    {
+      "source_feature_index": 64731,
+      "target_name": "Grenadines",
+      "original_keys": 406,
+      "original_intervals": 130,
+      "physical_receipt_native_key_matches": 406,
+      "issue_checks": [
+        {
+          "issue_ordinal": 1,
+          "reason": "missing_reconstruction",
+          "native_key_matches": [],
+          "boundary_tie_keys": [],
+          "native_tie_count": 0
+        },
+        {
+          "issue_ordinal": 2,
+          "reason": "extra_reconstruction",
+          "native_key_matches": [],
+          "boundary_tie_keys": [],
+          "native_tie_count": 0
+        }
+      ]
+    }
+  ],
+  "physical_adverse_facts": {
+    "all_633_keys_match_mapped_land_support": true,
+    "whole_target_issues": [
+      {
+        "target": "Saint George",
+        "source_feature_index": 64729,
+        "issues": [
+          {
+            "reason": "extra_reconstruction",
+            "original_native_key_matches": 0
+          }
+        ]
+      },
+      {
+        "target": "Grenadines",
+        "source_feature_index": 64731,
+        "issues": [
+          {
+            "reason": "missing_reconstruction",
+            "original_native_key_matches": 0
+          },
+          {
+            "reason": "extra_reconstruction",
+            "original_native_key_matches": 0
+          }
+        ]
+      }
+    ],
+    "interpretation": "Zero original-center intersections do not clear the whole-target issues; retain Saint George extra_reconstruction and Grenadines missing_reconstruction plus extra_reconstruction."
+  },
+  "bounded_competitor_scope": {
+    "candidate_families": [
+      "gb:GRD:ADM1",
+      "gb:LCA:ADM1",
+      "gb:BRB:ADM1"
+    ],
+    "complete_feature_counts": {
+      "GRD": 7,
+      "LCA": 10,
+      "BRB": 11
+    },
+    "candidate_polygon_pairs": 168,
+    "intersections": 0,
+    "products": [
+      {
+        "family": "gb:GRD:ADM1",
+        "catalogue_year": "2017",
+        "catalogue_license": "Creative Commons Attribution-ShareAlike 2.0",
+        "features": 7
+      },
+      {
+        "family": "gb:LCA:ADM1",
+        "catalogue_year": "2015",
+        "catalogue_license": "CC0 1.0 Universal",
+        "features": 10
+      },
+      {
+        "family": "gb:BRB:ADM1",
+        "catalogue_year": "2005",
+        "catalogue_license": "Creative Commons Attribution 2.5 Generic",
+        "features": 11
+      }
+    ],
+    "basis": "Bounded nearest-jurisdiction screen supported by retained Government SVG/OECS/CSO documents; not a global exhaustive source-family or sovereignty census."
+  },
+  "assessment": {
+    "supports_proceeding_to_ordinary_native_authority_evaluation": true,
+    "reason": "The exact requested scope is independently identical across original intervals, requested patch and diagnostic; all six original targets have pinned source and physical witnesses; the completed diagnostic has no missing requested center and the three evidence-based regional candidate families are full-family screened with no polygon intersections. This is enough to run the ordinary authority/qualification constructor against the bound evidence, not to claim that it passes.",
+    "not_established": [
+      "current or authoritative VCT source applicability",
+      "complete global competitor/territorial census",
+      "legal territorial or sovereignty conclusion",
+      "source or license clearance",
+      "positive additive native patch qualification",
+      "resolution of Saint George/Grenadines whole-target physical issues",
+      "native-authority constructor result or acceptance"
+    ]
+  },
+  "next_unmet_evidence": {
+    "next_stock_step": "Run the ordinary stock native-authority/source qualification constructor, using exact original 633-key patch, six complete VCT source features and retained source evidence, physical receipt, and bounded GRD/LCA/BRB exclusions. Preserve the constructor’s adverse and missing fields; do not elevate diagnostic output to qualification.",
+    "specific_unmet_operand_caveat": "The diagnostic contains no authority-product result and is not itself a source-evidence or selected-metadata authority receipt. Any additional exact reference metadata required by the stock constructor must be resolved to immutable pins and bound before that run; this review did not identify or fetch an unpinned object."
+  },
+  "limits": [
+    "All comparisons are to the retained, source-relative original and candidate families. A zero native-cell or polygon-intersection count does not eliminate sub-cell physical discrepancies.",
+    "The 2017 VCT ODbL 1.0 metadata and comparator license/vintage metadata are recorded as declared; no legal interpretation is made.",
+    "The source and physical evidence paths include geometry internally; this review used precomputed exact interval/source masks, native decision rows and receipt issue summaries and did not execute a geometry operation.",
+    "No raw geometry is republished in this review inventory."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "scope": "First VCT six-target whole-source physical investigation; no owner observation repeated",
+  "attempts": [
+    {
+      "log": "inventory/vct-physical-001-command.stderr.log",
+      "result": "exit1 before physical processing: wrong resolved global launcher could not import Shapely",
+      "fix": "Use actual venv launcher path with the same resolved binary hash"
+    },
+    {
+      "log": "inventory/vct-physical-001-corrected-launch.stderr.log",
+      "result": "exit1 at initial runtime admission before physical input reads: three CLI-loaded stdlib sources omitted",
+      "fix": "Add byte/hash pins for existing bz2.py, lzma.py, shutil.py; unchanged stock helper and isolation"
+    },
+    {
+      "log": "inventory/vct-physical-001-admitted-cli.stderr.log",
+      "state": "terminal exit0; six-target stock physical result and execution receipt published locally",
+      "runtime_pin_count": 202,
+      "elapsed_seconds": 6.004953250056133
+    }
+  ],
+  "limits": [
+    "No scientific result or execution receipt claimed before successful terminal output.",
+    "No package installation beyond exact approved NumPy/Shapely pins; no stock predicate or launcher-isolation override."
+  ]
+}
