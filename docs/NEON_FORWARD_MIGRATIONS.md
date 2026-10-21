@@ -50,7 +50,7 @@ Root owns the concrete operation and its publication. Do not substitute a succes
 }
 ```
 
-All placeholder values fail validation. Migration IDs, file paths, order and byte hashes are pinned. The template supports the first migration alone, or both in order. Source checkpoint parts are unpacked and independently verified before SQL.
+All placeholder values fail validation. Migration IDs, file paths, order and byte hashes are pinned. The initial-baseline template supports the first migration alone, the first two, or all three known migrations in order (the third is `postgres/migrations/0003_typed_observations.sql`). For that initial route, source checkpoint parts are unpacked and independently verified before SQL. Do not run the historical revision-1321 example against a grown database.
 
 Root privately verifies the Site's maintenance state and commits a fresh hash-pinned attestation:
 
@@ -69,7 +69,7 @@ Root privately verifies the Site's maintenance state and commits a fresh hash-pi
 }
 ```
 
-The attestation must match the operation and be at most one hour old, with at most 30 seconds of future clock skew. CI checks its bytes and freshness before and after the transaction. This is an explicit reviewed root attestation: **the runner does not independently access the private Site**. No private Site access credential is copied into Actions. Keep maintenance enabled until root verifies the compatible website, runtime, forward schema and storage v2.
+The attestation must match the operation and be at most one hour old, with at most 30 seconds of future clock skew. CI checks its bytes and freshness before and after the transaction. This is an explicit reviewed root attestation: **the runner does not independently access the private Site**. No private Site access credential is copied into Actions. Keep maintenance enabled until root verifies the compatible website, runtime and resulting forward/storage contract.
 
 ## Execution and receipts
 
@@ -98,8 +98,31 @@ The registry is owner-only and rejects update, delete and truncate. The installe
 
 The runtime receives SELECT/INSERT on the four dated membership/existence tables. For footprints it receives SELECT only on `atlas_footprint_versions` and `atlas_footprint_version_objects`, and SELECT/INSERT on the three selection/withdrawal tables. Publication fields remain owner-only. No new sequence, explicit ingestion rowid, mutation of original facts, registry access, guard bypass, schema creation or role membership is granted. The original narrow geographic-release publication permissions remain as reviewed in the frozen foundation.
 
-Storage v1 still describes the original fourteen tables. Storage v2 describes the eighteen/23 atlas fact tables and their source/target migration and catalog proofs; the administrative registry must be preserved separately in owner-maintenance receipts/backups, without granting public/runtime access. This tool targets the initial frozen baseline; later migrations after content growth need a newly reviewed current snapshot and technical-maintainer operation.
+Storage v1 still describes the original fourteen tables. Storage v2 describes the eighteen/23 atlas fact tables and their source/target migration and catalog proofs; the administrative registry must be preserved separately in owner-maintenance receipts/backups, without granting public/runtime access. After content growth, use the explicit current-source preservation pin below rather than replacing the immutable historical baseline or copying its old facts back.
+
+## Current compact-source continuation
+
+The same operation may include this additional pin, with **all three** existing migrations in their original order:
+
+```json
+"current_source": {
+  "inventory_file": "data/validation/current-recovery/source-inventory.json",
+  "inventory_sha256": "ACTUAL_CURRENT_INVENTORY_SHA256",
+  "receipt_file": "data/validation/current-recovery/receipt.json",
+  "receipt_sha256": "ACTUAL_SUCCESSFUL_NATIVE_RECOVERY_RECEIPT_SHA256"
+}
+```
+
+Use the existing current PostgreSQL recovery operation's successful native backup/isolated-restore receipt and complete owner inventory. Its read-only source marker must be exact compact-only V4 over frozen base2 or base3. The receipt pins the same collections, owner registry, compact physical rows and dictionary sequences; its encrypted-backup and isolated-restore readback must have succeeded. These are reviewed operation inputs, not self-generated assertions of live readiness. No operation file or fresh maintenance receipt is supplied by this implementation.
+
+Keep the original top-level checkpoint/source fields and authenticated baseline receipt unchanged as historical provenance. The old registry rows retain their original fingerprint, guards and application timestamps. The fresh maintenance attestation instead binds the current recovery marker's revision/fingerprint. A current-source continuation does not unpack or compare live facts to the old revision-1321 snapshot, restore any old row, or reopen the retired baseline copy executor.
+
+Inside the existing owner lock and atomic transaction, the installer reads the actual current compact inventory and compares it with the reviewed pin. It applies only the missing canonical V3 DDL and necessary typed-table grants. The only accepted delta is three empty typed tables, their known catalog/functions/permissions, and one new immutable migration row. Every inherited logical collection, original registry row, compact physical row, dictionary key/sequence, ingestion sequence, database/default ACL and inherited function/table/sequence permission remains exact. Unknown profiles, data drift, modified registry rows, extra access and unreviewed DDL refuse and roll back. Repeating the same operation after a successful commit verifies a no-op; a new base3 recovery pin can independently verify the resulting state.
+
+Issue #2696's historical settlement import is a **separate later owner operation**. Accepting this repository support neither authorizes nor performs a production migration, import, publisher contact or deployment. The standing #907 publication hold remains. Before requesting an owner window, prepare the exact reviewed current recovery/maintenance pins, unchanged historical proof, migration hashes, narrow grant delta, rehearsal/readback results and the separately scoped import/parity package. A stale or missing current pin is a real blocker, not permission to reset production or invent a new baseline.
 
 ## Local validation
 
-Focused tests use actual PostgreSQL 18.3/PGlite to exercise both forward migrations, complete original-byte and sequence preservation, idempotent retries, atomic rollback, restricted runtime permissions, immutable registry, catalog tampering rejection and no-network skipped operations. They also exercise private maintenance attestation boundaries and the actual Bash operation selector. No production or disposable Neon call is made by those tests.
+Focused tests use actual PostgreSQL/PGlite SQL to exercise all three forward migrations, complete original-byte and sequence preservation, idempotent retries, atomic rollback, restricted runtime permissions, immutable registry, catalog tampering rejection and no-network skipped operations. They also exercise private maintenance attestation boundaries and the actual Bash operation selector. No production or disposable Neon call is made by those tests.
+
+The grown-state tests execute the real installer and recovery inventory against an isolated compact PostgreSQL database with additional source/entity/release rows. They cover exact preservation, idempotence, base3 inventory, transactional rollback and adverse fingerprints/private ACLs/physical evidence/sequences/registry rows. They do not claim a native `pg_dump` rehearsal, provider branch execution, HTTP deployment or production import.
