@@ -97,11 +97,58 @@
       }
     ]
   },
-  "interpretation": "The two whole-target issue geometries do not intersect either exact cell. Mapped-land support intersects each cell and covers its center, but does not cover the whole cell. The whole-target issue records remain preserved, and both original cells remain native-held. The outside-NOR key's official 2022 Fylke comparison remains a source-applicability question; being outside Norway does not establish Russian jurisdiction.",
+  "interpretation": "The two whole-target issue geometries do not intersect either exact cell. Mapped-land support intersects each cell and covers its center, but does not cover the whole cell. The whole-target issue records remain preserved, and both original cells remain native-held. The outside-NOR key's official 2022 Fylke comparison remains a source-applicability question; being outside Norway does not establish Russian jurisdiction. The actual stock native diagnostic accepted the outside key as assigned_cells and retained the inside key as territorial_exclusion_cells (first failure unique-source-target-coverage). This is screening only; no authority, constructor, or root acceptance is implied.",
   "source_and_native_bindings": {
     "original_tuple_partition": "inventory/rus-1343-current-held-partition.json",
     "native_diagnostic_binding": "inventory/rus-1343-diagnostic-reuse-binding.json",
-    "official_2022_context": "inventory/rus-nor2-official-2022-applicability-assessment.json"
+    "official_2022_context": "inventory/rus-nor2-official-2022-applicability-assessment.json",
+    "source_evidence": {
+      "commit": "066060c17453aeeed1da21e245e03eaf1ec16456",
+      "path": "coordination/engineering/rus-nor2-source-context-20261021/source-evidence.json",
+      "git_blob_oid": "96c75f01a5b73f7ab601a3256e1dd0648f623860",
+      "bytes": 540994,
+      "sha256": "34bec9b66ef91db92cee51d409fb4035c47373e6a6e67c640cd1fd86266a0d70"
+    },
+    "applicability_record": {
+      "commit": "d0b1e2a7d0467865d9a7b76934c067451670c7e1",
+      "path": "coordination/engineering/rus-nor2-source-context-20261021/territorial-applicability.json",
+      "git_blob_oid": "8be1c5a056d1003103b9b7f6bd2e863ae7f43a17",
+      "bytes": 1832,
+      "sha256": "75ea8bb1e79d49f1ce3a9306ac72e43a81a07bcd113fb7ca514997f987d9da0e",
+      "record": "Outside key only: owner 38297, x 152972, y 59849, negative ordinal 0; source pointer original-nor-adm1 /features/9/geometry, Troms og Finnmark feature id 71437522B84427958303197. Stock diagnostic accepted the schema fingerprint and operand binding. Source-contact tuple separately records nativeValueSha 5a073114… and historical Python canonical geometry SHA 08dce603…."
+    },
+    "native_diagnostic": {
+      "output_path": "coordination/engineering/rus-nor2-source-context-20261021/native-diagnostic-001/native-diagnostic.json",
+      "result_stdout": "inventory/rus-nor2-context-diagnostic-001.stdout.json",
+      "result_stdout_sha256": "9c09241b162b67a19dd117405947c1afb04cdabe9d2feecc80e25854d768b586",
+      "first_attempt_stderr": "inventory/rus-nor2-context-diagnostic-001-admission-failure.stderr.txt",
+      "first_attempt_stderr_sha256": "e3e22ab8ee9f61c49713dfe57f0381c803e832b153df929127afd17552735c32",
+      "completed_elapsed_seconds": 2.364868834,
+      "requested": 2,
+      "supported": 1,
+      "held": 1,
+      "rows": [
+        {
+          "key": [
+            152972,
+            59849
+          ],
+          "owner": 38297,
+          "status": "assigned_cells",
+          "failure": null
+        },
+        {
+          "key": [
+            152965,
+            59862
+          ],
+          "owner": 38297,
+          "status": "territorial_exclusion_cells",
+          "first_failure": "unique-source-target-coverage"
+        }
+      ],
+      "admission_history": "First attempt failed before output when the referenced original NOR blob was missing; exact 970485-byte object was then recovered and encoded/decoded hashes verified, and the unchanged stock diagnostic completed once."
+    }
   },
   "physical_producer_code": {
     "commit": "9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c",

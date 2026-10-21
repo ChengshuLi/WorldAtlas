@@ -1,0 +1,64 @@
+{
+  "kind": "source-specific-researched-unresolved-proposal",
+  "scope": {
+    "original_package": "RUS NOR2 two-key source-context review",
+    "key": [152965, 59862],
+    "owner_index": 38297,
+    "owner_id": "gb:RUS:ADM2:50074027B59329255842991",
+    "owner_name": "Petsamo District",
+    "original_interval_ordinal_1based": 2,
+    "native_diagnostic_status": "territorial_exclusion_cells",
+    "native_diagnostic_first_failure": "unique-source-target-coverage"
+  },
+  "recommendation": "Retain this exact key as researched-unresolved, with its native hold intact. Do not include it in the one-cell positive constructor result, do not delete the original RUS source, and do not treat this proposal as accepted until root accounting accepts it.",
+  "evidence": [
+    {
+      "type": "original_source_membership",
+      "fact": "The native key is in the original RUS ADM2 target gb:RUS:ADM2:50074027B59329255842991, owner 38297."
+    },
+    {
+      "type": "historical_source_contact",
+      "fact": "The original simplified NOR ADM1 competitor is Troms og Finnmark, feature id 71437522B84427958303197, source feature pointer /features/9/geometry. Its complete 11-feature family was retained. The exact official 2022 full county geometry also covers this key's center."
+    },
+    {
+      "type": "physical_support_and_issue_overlay",
+      "fact": "The original whole-target receipt marks the center mapped_land_support. The exact native cell intersects mapped land but is not wholly covered. Neither the retained contradictory_land_water_support geometry nor the L2-outside-L1 geometry intersects this cell. Whole-target issue records remain preserved."
+    },
+    {
+      "type": "native_screen",
+      "fact": "The completed stock diagnostic held this key as territorial_exclusion_cells with first failure unique-source-target-coverage. The outside NOR-contact key alone was contextualized and supported; this inside contact was not waived."
+    }
+  ],
+  "significant_research": {
+    "completed": [
+      "Authenticated the original RUS target, exact tuple, complete NOR source family and original negative operand.",
+      "Compared the exact point against the official Kartverket 2022 full eleven-county family in its declared EPSG:25833 coordinates; this key is inside the Troms og Finnmark geometry.",
+      "Retained the feed and historical dataset metadata separately and performed an independent CRS-library numerical cross-check.",
+      "Inspected the original whole-target physical receipt and joined both recorded issue geometries to this exact cell.",
+      "Ran the one authorized stock two-key native diagnostic after the exact missing NOR source blob was recovered and verified; the unchanged command completed once."
+    ],
+    "limits": [
+      "The historical invocation that produced the original source-contact count artifact is not authenticated; this is a provenance limitation, not proof that its count is wrong.",
+      "The official 2022 Norwegian geometry is evidence of a source conflict, not a legal ruling on the international boundary or Russian jurisdiction.",
+      "No whole-cell mapped-land coverage is claimed, and neither whole-target physical issue is erased.",
+      "No further reasonable same-year family comparison is identified in the retained evidence; this conclusion does not require an exhaustive archive search or a universal boundary certificate."
+    ]
+  },
+  "source_pins": {
+    "contract": "inventory/rus-original-contract-readback.json",
+    "official_2022_comparison": "inventory/rus-nor2-official-2022-applicability-assessment.json",
+    "physical_key_join": "inventory/rus-nor2-physical-key-issue-join.json",
+    "diagnostic_stdout": "inventory/rus-nor2-context-diagnostic-001.stdout.json",
+    "constructor_result": {
+      "commit": "2c16d5a4b96fe81e86815cb2319822157878b008",
+      "path": "coordination/engineering/rus-nor2-source-context-20261021/native-authority-001/constructor-result.json",
+      "sha256": "bc7700ecbcf970fad43c1a8ef649b19e3f7e5ab136b00c52e867e45a8cd2aa00"
+    }
+  },
+  "constructor_partition": {
+    "qualified_cells": 1,
+    "qualified_key": [152972, 59849],
+    "held_inside_key": [152965, 59862],
+    "interpretation": "The exact constructor ledger contains one assigned cell at y=59849, x=152972, owner 38297. It does not contain the inside key. This constructor result is not root acceptance."
+  }
+}
