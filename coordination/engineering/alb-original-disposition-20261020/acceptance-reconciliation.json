@@ -407,9 +407,9 @@
     "target_residual_vs_examined_union": 519,
     "union_plus_target_unique_count": 58406,
     "union_plus_target_sha256_sorted_yx": "4611190363e9c528e9b309ac73d2c166f6017af1812d566fab06b08ba274b1ec",
-    "hash_method": "For the ALB target and extended 57,418-key examined union, SHA-256 is computed over UTF-8 JSON.stringify of the deduplicated [y,x] pairs sorted numerically by y then x. The 56,352-key baseline digest is copied from the immutable PSE reconciliation, whose digest format is not re-derived here.",
+    "hash_method": "SHA-256 over UTF-8 compact JSON of deduplicated [y,x] pairs sorted numerically by y, then x, with no trailing newline. This applies to the ALB target, the complete 57,887-key examined union, and the 58,406-key union plus ALB. The separately labeled 56,352-key baseline digest is retained from the immutable PSE reconciliation.",
     "scope_detail": "15 retained keysets from accepted PSE reconciliation plus exact root-accepted PSE, KNA, NPL and WSM keysets. The four subsequent accepted sets are bound to public receipts and immutable packet paths. Mixed held/exception and documented-unresolved records are overlap evidence, not repair credit.",
-    "union_hash_note": "The 56,352-key base-union digest is copied from the authenticated PSE reconciliation. The extended 57,418-key count is independently recomputed from exact key arrays; the WSM reconciliation independently reports the same count and pairwise disjointness scope. No extended-union digest is asserted here.",
+    "union_hash_note": "The examined union includes the 56,352-key prior union plus accepted PSE 427, KNA 305, NPL 334 and WSM 469. Its 57,887-key count and stored unique_union_sha256_sorted_yx digest were recomputed from exact key arrays, as were the 58,406-key union-plus-ALB count and digest. ALB overlap is zero; the comparison remains bounded to these records.",
     "base_56_352_union_sha256_sorted_yx": "a88e4faa57150ad90493fd8faf569f9a2450bed91f2069f9b6ebfd1b3db5d549",
     "unique_union_sha256_sorted_yx": "48f68621ebc86fdb7cf90f9ed2ff12d3fe13ab7081bffdc8ed40a7bc586fd51c"
   },
