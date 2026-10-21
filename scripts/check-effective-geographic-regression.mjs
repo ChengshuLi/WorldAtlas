@@ -12,7 +12,7 @@ import {isDeepStrictEqual} from 'node:util';
 import {nativePolygonIntervals,NATIVE_GRID_METHOD} from '../src/native-grid.js';
 import {repairComponentKey,nativeOnlyComponent} from '../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../src/ownership-codec.js';
-import {readSelectedAdditive,selectedAdditiveRows,compareVersionedRepairLedgers,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {readSelectedAdditive,readSelectedAdditiveAcquired,selectedAdditiveRows,compareVersionedRepairLedgers,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {validateReferenceMetadataProjection} from './selected-reference-metadata.mjs';
 
 const sha=b=>createHash('sha256').update(b).digest('hex');
@@ -96,6 +96,39 @@ const STOCK_INDEX='b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7
 
 export class ImmutableReader {
   #trees = new Map();
+  #originDescriptors = new Map();
+  pinnedVersion(pin) {
+    try{this.git('--no-lazy-fetch','cat-file','-e',pin.commit+'^{commit}');return pin.commit;}catch{}
+    return this.#originDescriptors.has(pin.commit+':'+pin.path)?pin.commit:this.version;
+  }
+  // Transport supplies exact bytes and private native origin proof, never a
+  // scientific result. The evaluator subsequently performs its ordinary read.
+  async acquirePinned(pin,{loadTree,loadCommit,execute=execFileSync}={}) {
+    demand(pin&&commit(pin.commit)&&safe(pin.path)&&['100644','100755'].includes(pin.mode)
+      &&commit(pin.git_blob_oid)&&Number.isSafeInteger(pin.bytes)&&pin.bytes>=0&&hash(pin.sha256),
+      'Incomplete immutable acquisition pin');
+    let known=true;try{this.git('--no-lazy-fetch','cat-file','-e',pin.commit+'^{commit}');}catch{known=false;}
+    const version=this.pinnedVersion(pin);
+    let failure;
+    try{const d=this.descriptor(pin.path,version);
+      demand(d.mode===pin.mode&&d.git_blob_oid===pin.git_blob_oid&&d.bytes===pin.bytes,'Source-target whole identity differs');return;
+    }catch(error){failure=error;}
+    const expected=`${pin.mode} blob ${pin.git_blob_oid}\t${pin.path}\0`;
+    let matching=false;try{matching=this.git('ls-tree','-z',known?pin.commit:this.version,'--',pin.path).toString()===expected;}catch{}
+    if(known&&!matching)throw failure; // A known original never falls back.
+    const {createAcquisition,githubTree,githubCommit}=await import('./geography-prefetch.mjs');
+    const gitExecPath=fs.realpathSync(execFileSync(this.gitExecutable,['--exec-path']).toString().trim());
+    const a=createAcquisition({repo:this.repo,loadTree:loadTree??githubTree,loadCommit:loadCommit??githubCommit,
+      loadDescriptor:(_version,name)=>{demand(name===pin.path,'Foreign immutable acquisition path');return {type:'blob',mode:pin.mode,sha:pin.git_blob_oid,size:pin.bytes};},
+      execute:(command,args,options)=>{demand(command==='git','Foreign immutable acquisition executable');
+        return execute(this.gitExecutable,args,{...options,env:{...options.env,GIT_EXEC_PATH:gitExecPath}});}});
+    const original=!known&&!matching;
+    if(original)await a.resolvePath(pin.commit,pin.path);
+    const selected=known||original?pin.commit:this.version;
+    const row=await a.descriptor(selected,pin.path,pin);a.acquire([row]);a.body(row);
+    if(original)this.#originDescriptors.set(pin.commit+':'+pin.path,
+      {commit:pin.commit,path:pin.path,mode:pin.mode,git_blob_oid:pin.git_blob_oid,bytes:pin.bytes});
+  }
   constructor(repo,version,{gitExecutable='git',invocation}={}) {
     demand(commit(version),'Require immutable input commit');
     this.repo=repo;this.version=version;this.gitExecutable=gitExecutable;
@@ -228,7 +261,16 @@ export class ImmutableReader {
   }
   descriptor(name,version=this.version) {
     demand(safe(name)&&commit(version),'Unsafe immutable path/commit');
-    const key=version+':'+name,previous=this.inventory.get(key);
+    const key=version+':'+name,original=this.#originDescriptors.get(key);
+    if(original){
+      let present=true;try{this.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{present=false;}
+      if(!present){const pin=this.inventory.get(key);
+        if(pin&&['commit','path','mode','git_blob_oid','bytes'].every(field=>pin[field]===original[field]))return pin;
+        const copy={...original};this.inventory.set(key,copy);return copy;}
+      // A subsequently available origin must pass its own actual path again.
+      this.#originDescriptors.delete(key);this.inventory.delete(key);
+    }
+    const previous=this.inventory.get(key);
     if(previous)return previous;
     const row=this.git('ls-tree','-z',version,'--',name).toString();
     demand(/^100(644|755) blob [a-f0-9]{40}\t/.test(row)&&row.slice(row.indexOf('\t')+1)===name+'\0','Require whole ordinary Git input: '+name);
@@ -741,15 +783,20 @@ function loadBaseSelection(reader) {
   return snapshot;
 }
 
-export function loadSelection(reader) {
+function beginSelection(reader) {
   const snapshot=loadBaseSelection(reader);if(!snapshot)return null;
-  const basePhase={kind:'complete-selected-base-acquisition-v1',inputs:structuredClone(consumedInputs(reader))};
-  snapshot.acquisitionPhases=[basePhase];
-  if(snapshot.selection.additive_release!==undefined){
-    snapshot.additive=readSelectedAdditive(snapshot);
-    snapshot.acquisitionPhases.push({kind:'complete-selected-additive-acquisition-v1',inputs:structuredClone(consumedInputs(reader))});
-  }else snapshot.additive=null;
+  snapshot.acquisitionPhases=[{kind:'complete-selected-base-acquisition-v1',inputs:structuredClone(consumedInputs(reader))}];return snapshot;
+}
+function finishSelection(snapshot,additive) {
+  snapshot.additive=additive;
+  if(snapshot.selection.additive_release!==undefined)snapshot.acquisitionPhases.push({kind:'complete-selected-additive-acquisition-v1',inputs:structuredClone(consumedInputs(snapshot.reader))});
   freezeJson(snapshot.acquisitionPhases);freezeJson(snapshot.selection);freezeJson(snapshot.manifest);freezeJson(snapshot.owners);return Object.freeze(snapshot);
+}
+export function loadSelection(reader) {
+  const snapshot=beginSelection(reader);return snapshot?finishSelection(snapshot,readSelectedAdditive(snapshot)):null;
+}
+async function loadSelectionAcquired(reader) {
+  const snapshot=beginSelection(reader);return snapshot?finishSelection(snapshot,await readSelectedAdditiveAcquired(snapshot)):null;
 }
 
 function asset(snapshot,pin) {
@@ -1101,7 +1148,7 @@ export function selectInstalledGit() {
 export function selectedBootstrap(repo,baseline,candidate,{parentRuntimePath}={}) {
   const runtimePaths=[fs.realpathSync(process.execPath),...(parentRuntimePath?[fs.realpathSync(parentRuntimePath)]:[])];
   const codeRoot=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-  const codePaths=['scripts/run-geographic-check.py','scripts/check-effective-geographic-regression.mjs','src/native-grid.js','src/ownership-codec.js','coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/selected-reference-metadata.mjs','src/reference-metadata.js'];
+  const codePaths=['scripts/run-geographic-check.py','scripts/check-effective-geographic-regression.mjs','scripts/geography-prefetch.mjs','src/native-grid.js','src/ownership-codec.js','coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/selected-reference-metadata.mjs','src/reference-metadata.js'];
   const codeStats=codePaths.map(name=>{const file=path.join(codeRoot,name),stat=fs.statSync(file);demand(stat.isFile()&&Number.isSafeInteger(stat.size)&&stat.size>0,'Nonordinary trusted execution code');return {name,file,stat};});
   const {launchGit,gitExecutable,gitExecPath}=selectInstalledGit();runtimePaths.push(launchGit,gitExecutable);
   const invocation=Object.freeze({});
@@ -1113,9 +1160,14 @@ export function selectedBootstrap(repo,baseline,candidate,{parentRuntimePath}={}
 }
 
 export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) {
-  const {beforeReader,afterReader,runtime,callerRuntime,identities,executionCode}=selectedBootstrap(repo,baseline,candidate,{parentRuntimePath});
-  const before=loadSelection(beforeReader);
-  const after=loadSelection(afterReader);
+  const bootstrap=selectedBootstrap(repo,baseline,candidate,{parentRuntimePath});
+  return compareSelected(bootstrap,baseline,candidate,loadSelection(bootstrap.beforeReader),loadSelection(bootstrap.afterReader));
+}
+export async function inspectSelectedAcquired(repo,baseline,candidate,{parentRuntimePath}={}) {
+  const bootstrap=selectedBootstrap(repo,baseline,candidate,{parentRuntimePath});
+  return compareSelected(bootstrap,baseline,candidate,await loadSelectionAcquired(bootstrap.beforeReader),await loadSelectionAcquired(bootstrap.afterReader));
+}
+function compareSelected({beforeReader,afterReader,runtime,callerRuntime,identities,executionCode},baseline,candidate,before,after) {
   if(!before&&!after)return {version:1,status:'legacy-selection',limits:['Legacy raw polygon gate remains applicable.']};
   demand(before&&after,'Selected native ownership removed or introduced without comparable migration');
   const a=before.manifest,b=after.manifest;

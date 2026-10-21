@@ -6,6 +6,7 @@ import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {createAcquisition, prefetchSelectedGeography, githubTree} from '../scripts/geography-prefetch.mjs';
+import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {createRoutingMetadataAcquisition} from '../scripts/geography-routing-metadata.mjs';
 
 const digest = b => createHash('sha256').update(b).digest('hex');
@@ -485,4 +486,72 @@ test('cold routing body acquisition uses the private original descriptor without
     await assert.rejects(a.acquire({...pin, git_blob_oid: 'f'.repeat(40)}, {bytes: row.size}), /differs from tree/);
     assert.equal(a.summary().fetched_objects, 1);
   } finally { f.close(); }
+});
+
+
+// The full cold reader consumes the original pin, not the newer same-path
+// alias. Only the existing native metadata transport may issue its private proof.
+test('cold immutable reader authenticates absent original paths without importing producer history',async()=>{
+ const f=originFixture();try{
+  const name='scripts/physical.py',raw=Buffer.from('# original physical programme\n');
+  const original=f.commit({[name]:raw.toString()}),current=f.commit({[name]:'# newer unrelated programme\n'});
+  const row=f.maps.get(original).tree.find(p=>p.path===name);
+  const pin={commit:original,path:name,mode:row.mode,git_blob_oid:row.sha,bytes:row.size,sha256:digest(raw)};
+  const importObject=(id,type)=>f.git(f.remote,['hash-object','-w','-t',type,'--stdin'],f.git(f.origin,['cat-file',type,id]));
+  const importTrees=id=>{const root=f.git(f.origin,['rev-parse',id+'^{tree}']).toString().trim();
+   importObject(root,'tree');for(const line of f.git(f.origin,['ls-tree','-rt',id]).toString().trim().split('\n')){
+    const [mode,type,oid]=line.split(/[ \t]/);if(type==='tree')importObject(oid,'tree');}
+  };
+  importObject(current,'commit');importTrees(current);
+  const options={...f.loaders,execute:(command,args,options)=>{
+    assert.equal(options.env.GIT_NO_LAZY_FETCH,'1');assert.equal(options.env.GIT_NO_REPLACE_OBJECTS,'1');
+    if(args.includes('init'))f.calls.stores.push(args[args.indexOf('-C')+1]);
+    if(args.includes('fetch'))args=args.map(arg=>arg==='https://github.com/ChengshuLi/WorldAtlas.git'?'file://'+f.origin:arg);
+    return execFileSync(command,args,options);
+  }};
+  const reader=new ImmutableReader(f.remote,current);
+  assert.equal(reader.pinnedVersion(pin),current);
+  assert.throws(()=>reader.descriptor(name,reader.pinnedVersion(pin)));
+  await reader.acquirePinned(pin,options);
+  assert.equal(reader.pinnedVersion(pin),original);
+  assert.deepEqual(reader.read(name,{version:reader.pinnedVersion(pin),expected:pin.sha256}),raw);
+  assert.equal(reader.inventory.get(original+':'+name).whole_body_consumed,true);
+  assert.deepEqual(f.inventory().filter(([,type])=>type==='blob'),[[pin.git_blob_oid,'blob']]);
+  assert.throws(()=>f.git(f.remote,['cat-file','-e',original+'^{commit}']));
+  assert(!fs.existsSync(path.join(f.remote,'shallow')));
+  for(const directory of f.calls.stores)assert(!fs.existsSync(directory));
+  // Public inventory is observation, never authority for an absent origin.
+  const forged=new ImmutableReader(f.remote,current);forged.inventory.set(original+':'+name,{...pin});
+  assert.equal(forged.pinnedVersion(pin),current);
+  await assert.rejects(forged.acquirePinned(pin,{...options,loadCommit:async()=>{throw Error('metadata unavailable');}}),/metadata unavailable/);
+  assert.equal(forged.pinnedVersion(pin),current);
+  for(const changed of [{mode:'100755'},{git_blob_oid:'f'.repeat(40)},{bytes:pin.bytes+1},{sha256:'f'.repeat(64)}]){
+   const bad=new ImmutableReader(f.remote,current);
+   await assert.rejects(bad.acquirePinned({...pin,...changed},options),/differs|acquisition failed/);
+   assert.equal(bad.pinnedVersion(pin),current);
+  }
+  await assert.rejects(new ImmutableReader(f.remote,current).acquirePinned(pin,{...options,execute:()=>{throw Error('transport unavailable');}}),/acquisition failed/);
+  // Once original commit metadata becomes local, its own missing tree must
+  // refuse instead of continuing to use the previously authenticated fallback.
+  importObject(original,'commit');
+  assert.equal(reader.pinnedVersion(pin),original);
+  assert.throws(()=>reader.read(name,{version:reader.pinnedVersion(pin),expected:pin.sha256}));
+  await assert.rejects(reader.acquirePinned(pin,options));
+  importTrees(original);
+  assert.deepEqual(reader.read(name,{version:reader.pinnedVersion(pin),expected:pin.sha256}),raw);
+  // A known original with a different path identity cannot use an exact alias.
+  await assert.rejects(reader.acquirePinned({...pin,commit:current},options));
+ }finally{f.close();}
+});
+
+test('warm exact current aliases need no original metadata or transport',async()=>{
+ const f=fixture();try{
+  const name='data/source.json',row=f.maps.get(f.baseline).tree.find(p=>p.path===name),raw=f.bodies.get(row.sha);
+  f.git(f.destination,['hash-object','-w','--stdin'],raw);
+  const reader=new ImmutableReader(f.destination,f.baseline),pin={commit:'f'.repeat(40),path:name,mode:row.mode,git_blob_oid:row.sha,bytes:row.size,sha256:digest(raw)};
+  const unavailable=()=>{throw Error('Warm aliases must remain offline');};
+  await reader.acquirePinned(pin,{loadCommit:unavailable,loadTree:unavailable,execute:unavailable});
+  assert.equal(reader.pinnedVersion(pin),f.baseline);
+  assert.deepEqual(reader.read(name,{version:reader.pinnedVersion(pin),expected:pin.sha256}),raw);
+ }finally{f.close();}
 });
