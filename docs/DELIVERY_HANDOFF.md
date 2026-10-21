@@ -172,9 +172,10 @@ No proposed input is called accepted merely because a hash matches.
    retain their positions and must retain their exact accepted byte identities.
    Never use a globally sorted candidate list as the accepted baseline. The existing package definition
    validator rejects overlaps, missing optional declarations and unsafe paths.
-   No tracked selector or package file is written: inspect and adopt these staged
-   files in the delivery owner's ordinary commit/review flow. Repeating from the
-   staged selector/package or using exact `--resume` must produce no changes.
+   Finalize stages the complete outputs, then adopts the exact derived canonical
+   selector, package definition, current runtime bodies, admitted restorations,
+   sidecar, expectations and optional checkpoint. It does not copy the full
+   historical role inventory or replace different-vintage physical helpers.
    Scientific assembly, package builds and final delivery remain separate.
 
 For finalization, use local staging by default:
@@ -183,21 +184,29 @@ For finalization, use local staging by default:
 node scripts/prepare-delivery-handoff.mjs finalize CONFIG .cache/delivery-handoff/final-UNIQUE
 ```
 
-Adopt `ownership-selection.json` as `data/ownership-selection.json` and
-`package-inputs.json` as `.github/package-inputs.json`. Adopt the emitted sidecar
-and `selected-delivery-expectations.json` once at the configured receiving
-`new_prefix`; retain the staged bundle locally for exact `--resume`. Do not also
-commit that bundle under a `finalized/` directory. The delivery has one canonical,
-current-ledger-bound expectations file. A duplicate authoritative copy is not a
-prospective template and correctly retains full regression. This uses the existing
-staging/adoption contract; it performs no automatic Git mutation.
+The normal finalizer applies its authenticated write set without a separate copy
+list. Inspect and commit the resulting canonical diff in the ordinary review
+flow; it performs no Git index, commit or push operation. Publish the complete
+reviewed tree and genuine evidence ancestry, not a hand-written subset of files.
+Retain the staged bundle locally for exact `--resume`, rather than committing a
+second `finalized/` copy. Expectations have one current-ledger-bound canonical
+path under `new_prefix`.
+
+The preparation binding records the resolved original selector/package pins.
+Actual committed canonical bodies must still equal those preimages or the exact
+outputs; an unrelated commit advance is harmless, but a different selection must
+be reconciled rather than silently overwritten. All destinations are preflighted
+before staging. Adoption rechecks each ordinary file before rename, with the
+selector last; this is not atomic rollback. After interrupted adoption, only the
+same complete staged outputs with explicit `--resume` may finish a mixture of
+exact preimages/postimages. Edited, linked or conflicting files still refuse.
 
 Outputs use a fresh directory below `.cache/delivery-handoff/` or the caller's
 issue-owned `coordination/engineering/<job>/`. All products are admitted before
 mutation and created exclusively; `preparation.json` is written last. An explicit
 `--resume` checks every product, the complete file inventory and original binding.
 It never rewrites, repairs or blesses a partial directory. A changed config,
-input, result, head or body needs a fresh vintage. Commit boundaries above are
+input, result or body needs a fresh vintage. Commit boundaries above are
 intentional: immutable future pins cannot be predicted by bookkeeping.
 
 ## Reuse accepted methods; declare only consumed package roles
