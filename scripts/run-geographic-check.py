@@ -201,6 +201,7 @@ def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destin
             decision = issued.get('reuse_unavailable')
             if not isinstance(decision, dict) or decision.get('cold') not in ['candidate', 'baseline-and-candidate'] or not decision.get('reason'):
                 raise ValueError('Joint fallback omitted its unavailable custody decision')
+            print(json.dumps(issued), file=sys.stderr, flush=True)
             return issued
         if issued.get('mode') != 'authenticated-checkpoint-append-v1' or not isinstance(issued.get('native'), dict):
             raise ValueError('Joint selected comparison did not complete native validation')
