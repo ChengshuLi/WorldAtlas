@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "kind": "mnp205-territorial-applicability-construction-review",
+  "reviewer_id": "01a15a0e-9f15-70f9-9391-bfaf7502a007",
+  "status": "schema and source-contact tuple coverage checked; actual generated negative ordinals not yet checked against a produced source-evidence baseline",
+  "code": {
+    "commit": "8a0d0302db6c982f3eb081eea05da63bb991259e",
+    "helper": {
+      "path": "scripts/prepare-delivery-handoff.mjs",
+      "blob_oid": "240c39a8249f10067289432dfb6bcdef806363a1",
+      "functions": ["sourceTerritorialExclusions", "sourceEvidence"]
+    },
+    "schema_validator": {
+      "path": "scripts/integration-profile.mjs",
+      "blob_oid": "cb64826ebabd08bf4519fc2947be91c4f1fdf638"
+    },
+    "documentation": {
+      "path": "docs/DELIVERY_HANDOFF.md",
+      "blob_oid": "7ebaae4628e77ad59f6b64c6b833e391c781f6d4"
+    }
+  },
+  "inspected_requirements": [
+    "sourceTerritorialExclusions requires original catalogue evidence and an explicit unique negative-family list. It rejects evidence already containing territorial_exclusion_sources.",
+    "It preserves each target's existing exclusions, appends selected complete-original geometries, and assigns negative_ordinal from the target exclusion array's current length. Family and feature order therefore determine generated ordinals.",
+    "Compact mode replaces a uniquely matched whole geometry with source_id, feature_ordinal, negative_ordinal, and geometry_sha256 at the same target position; the companion territorial_exclusion_sources retains complete family parts.",
+    "The helper emits source-evidence.json and territorial-exclusion-provenance.json. Provenance binds complete negative families, original feature ordinals/hashes, target exclusion ordinals, and disjoint omitted IDs. Native reading expands compact refs before existing applicability/veto checks.",
+    "territorial_applicability is an independently pinned adopted-native-territorial-applicability-v1 object. The source-evidence and integration-profile validators authenticate its provenance roles adoption, scope, and original-source; an original-source role may carry complete multipart source pins. The helper does not synthesize this interpretation object or derive an exception from it.",
+    "The helper can create a clean source-evidence output only from the original unprepared evidence input; reusing its first prepared output is rejected by the explicit already-prepared territorial_exclusion_sources guard."
+  ],
+  "minimal_sequence_if_context_records_need_generated_ordinals": [
+    "Run source-evidence from the original unprepared scientific input with the exact reviewed USA ADM1 and ADM2 family list into a distinct baseline destination; retain the generated evidence and territorial-exclusion-provenance outputs.",
+    "Author and commit the typed applicability object, pinning the genuine generated provenance record and the adoption/scope/original-source evidence. Its per-key records must bind to the actual generated negative_ordinal and exact geometry hash, not a predicted source-feature index.",
+    "Run source-evidence a second time from the same original unprepared scientific input with the same family list and the committed applicability-object pin, into a separate final destination. This regenerates the negatives/ordinals and includes the typed pin in final evidence. Do not feed the baseline prepared evidence back into source-evidence.",
+    "Use only the final generated source-evidence locator for subsequent native diagnostic/authority work. Keep baseline outputs immutable as provenance inputs; no existing output should be overwritten."
+  ],
+  "contact_tuple_check": {
+    "input": "inventory/mnp-audit-handoff/extracted/source-contact-results.json",
+    "original_foreign_operands": "inventory/mnp-audit-handoff/extracted/exact-foreign-operands.json",
+    "original_key_identity": ["block", "original_interval_ordinal", "y", "x", "original_owner"],
+    "requested_keys": 205,
+    "USA_ADM1_contacts": 203,
+    "USA_ADM2_contacts": 150,
+    "total_foreign_contact_tuples": 353,
+    "unique_requested_keys_with_at_least_one_foreign_contact": 205,
+    "keys_with_one_foreign_contact": 57,
+    "keys_with_two_foreign_contacts": 148,
+    "keys_with_no_foreign_contact": 0,
+    "identity_result": "The exact original foreign-contact tuples cover every one of the 205 distinct requested keys; they partition into 57 keys with one contact and 148 keys with both family contacts.",
+    "complete_negative_families_to_retain": [
+      {
+        "source_id": "gb:USA:ADM1:66186276B16791499040259",
+        "family": "gb:USA:ADM1",
+        "feature_count": 56,
+        "feature_ordinal": 45,
+        "geometry_pointer": "/features/45/geometry",
+        "geometry_sha256": "4ea9fe3e0b31837bae5ee4f4c601ee1c5979881f9578055547c665b989d913ab"
+      },
+      {
+        "source_id": "gb:USA:ADM2:52423323B84565222808084",
+        "family": "gb:USA:ADM2",
+        "feature_count": 3233,
+        "feature_ordinal": 2768,
+        "geometry_pointer": "/features/2768/geometry",
+        "geometry_sha256": "bec54272e9de186f503c6c848bd246e1ee4e92c621f5b1ffba69c2617ceeb118"
+      }
+    ],
+    "key_preservation": "The 353 contextual records must be additional interpretation metadata only. They must not delete or narrow the 205 target records, owner coverage, positive MNP operands, or either complete USA negative family. Preserve the three existing MNP full-source mismatches (202 matched, 3 mismatched) as adverse evidence.",
+    "ordinal_limit": "Source-contact hits and feature ordinals do not determine each negative_ordinal. Other complete-family features selected by whole-geometry bounds and any pre-existing target exclusions affect the final ordinal. Bind each contextual record only after reading the helper-generated target/provenance output."
+  },
+  "assessment_limits": [
+    "No source-evidence or native producer was run for this check; there is no generated baseline output to verify ordinals against yet.",
+    "Contact coverage proves tuple coverage, not source applicability, polygon equality, sovereignty, or positive native qualification.",
+    "The 353 per-key contextual records do not replace complete USA family negatives; those remain retained and subject to native predicates.",
+    "MNP scope remains 205 requested cells / 83 intervals / owners 30767, 30769, and 30770; Saipan and the separate 31-cell physical companion remain excluded."
+  ]
+}
