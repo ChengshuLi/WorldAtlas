@@ -31,10 +31,18 @@ export function validateTypedDerivations(roots, inputs, sources) {
   return [...factualSubjects];
 }
 
+/** Only a reviewed registry field can declare identity-bound evidence. Unknown
+ * vintages, links and legacy inputs retain their territorial requirements. */
+export function typedRequiresGeography(row, registries = {}) {
+  const field = registries[row.registry_sha256]?.fields[row.field_id];
+  return row.relationship_type != null || row.location_id != null
+    || !field?.subject_kinds.includes(row.subject_kind) || field.geography_scope !== 'identity';
+}
+
 /** Original territorial meaning is evidence, never a caller-selected repin. */
-export function validateTypedGeography(rows, pins) {
+export function validateTypedGeography(rows, pins, registries = {}) {
   for (const row of rows) {
-    if (row.is_example === 1) continue;
+    if (row.is_example === 1 || !typedRequiresGeography(row, registries)) continue;
     const retained = row.metadata?.expected_geography;
     if (!pins || !retained
       || Object.keys(retained).sort().join(',') !== 'footprints_sha256,hierarchy_sha256,release_id'
