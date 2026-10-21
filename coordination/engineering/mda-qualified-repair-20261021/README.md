@@ -13,3 +13,11 @@ The available archived UNHCR/OCHA FISS source, its metadata, CC BY 3.0 IGO licen
 The physical producer completed all 18 targets. It retained five contradictory land/water support findings, one extra reconstruction finding and one L2-outside-L1 finding across five targets. Whole-target findings do not themselves determine which original cells pass native predicates. Native diagnostic and constructor qualification are subsequent steps; no repair, unresolved completion, removed hold or acceptance is claimed here.
 
 Root owns final acceptance and accounting. The full original denominator remains 1,986 until explicitly reconciled.
+
+## Executed native qualification
+
+The stock full-scope diagnostic consumed the prepared source evidence and all 1,986 original land keys. It reported 1,918 supported and 68 territorial-contact holds. The separate research hold set remains 133 keys: all 68 UKR contacts plus the 65 otherwise mechanically supported upstream-source nonmatches. Stock `supported-inputs` preserves the actual diagnostic and intersects its positives with these research holds, emitting exactly 1,853 supported keys and 133 held keys. Both sets are disjoint and reconstruct the complete original request. The supported set exactly equals the independently reviewed MDA-only, unique archived-upstream target matches.
+
+The genuine stock native constructor executed on the narrowed source evidence and native patch at commit `7e0e63ce8eaff7ff7ae902521ccfffcc6ee9e219`. It emitted 16 components containing 1,853 qualified cells; the output is retained at `native-authority-001/` in commit `ed04a46f54889e6979c720478221565bf7013d02`. Complete positive and negative source operands and whole-target physical findings remain bound. No observer or completed physical producer was replayed.
+
+This is a partial positive candidate. None of the 133 held keys is claimed as repaired or completed unresolved. Current-owner conservation, cumulative composition, independent final-head review and hosted delivery remain required before root can consider acceptance. The source evidence does not certify modern legal or cadastral boundaries or an unbounded absence of competitors.
