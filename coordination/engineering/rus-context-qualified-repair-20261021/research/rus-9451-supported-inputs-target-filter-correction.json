@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "kind": "rus-exact-held-stock-supported-inputs-correction",
+  "status": "Read-only mechanical correction proposal. No source evidence was rewritten, no producer/native diagnostic was rerun, and no scientific result or qualification is asserted.",
+  "supersedes": {
+    "path": "rus-9451-narrowed-coverage-rows-draft.json",
+    "sha256": "7d828708ae19f0e21c7317a55dc30fae07d3914c9c0cae7c73c3cd0b09d1505a",
+    "correction": "The earlier draft incorrectly proposed keeping all 334 target records in the runtime native input while omitting coverage_rows from 268 nonrequested targets. The stock physical guard rejects omission for these mixed-class conflict targets. Preserve the complete 334-target source/physical evidence as immutable historical inputs, but derive a stock supported-inputs runtime projection containing only the 66 targets that intersect the exact request."
+  },
+  "failed_attempt": {
+    "path": "inventory/rus-native-diagnostic-001-outcome.json",
+    "source_evidence_commit": "26e1a5258d1c7f9d79d597548e11629f06966682",
+    "native_patch_commit": "a7930ca6eb907823caeff668af09c2f9bcbdf5ef",
+    "exit_code": 1,
+    "stderr": "Mixed physical conflict coverage requires explicit native class rows",
+    "destination_exists": false,
+    "classification": "Input admission failure before a diagnostic result; not a scientific outcome."
+  },
+  "stock_rule": {
+    "code_source": "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/native-applicability-implementation.mjs.txt",
+    "commit": "e9e4eb5afd7c5ed1ed1871e44996da8b10a37802",
+    "blob": "b56641a48e2c5456999c2ea60dd68d8404a10cd1",
+    "coverage_rule": "For every runtime target carrying coverage_rows, rows must be nonempty and their explicit class runs must cover exactly the complete owner request; siblings for an owner must agree. Mixed-class physical-conflict owners require explicit rows.",
+    "correction": "Use the stock supported-inputs projection to filter runtime target records to requested/support owners (66). For each retained target use explicit source-provided class rows intersected with the exact requested tuples. Do not send empty coverage_rows or retain unrelated mixed-class target records in the runtime target list. Keep coverage_classes and all other target fields for retained targets unchanged."
+  },
+  "exact_scope": {
+    "native_patch": {
+      "path": "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/original-held-native-patch.json",
+      "bytes": 156307,
+      "sha256": "7375330bf8bf2ba6432bc8c0fba869e42bcdcb3ec47cccf7fd3c72e52204a403",
+      "schema": {
+        "rows": 3380
+      },
+      "unique_requested_keys": 9451,
+      "unique_requested_owners_and_targets": 66,
+      "requested_class_counts": {
+        "mapped_land_support": 9235,
+        "mapped_inland_water_support": 216
+      }
+    },
+    "whole_scope_reconciliation": {
+      "path": "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/original-whole-scope-reconciliation.json",
+      "bytes": 98525,
+      "sha256": "3bad416ac48044ed2b92c2bc7c9c5a1b015afa86fbe61b899bcbcd048fd2792d",
+      "schema": [
+        "version",
+        "whole_original_denominator",
+        "original_target_count",
+        "supported_cells",
+        "held_cells",
+        "reasons",
+        "class_outcomes",
+        "complete_foreign_source_contact_cells_held",
+        "all_original_rows_partitioned_exactly",
+        "per_owner",
+        "historical_components",
+        "diagnostic_sha256"
+      ],
+      "role": "Partition/reconciliation record, not native patch."
+    },
+    "class_rule": "For each explicit original coverage class run, intersect by exact (owner_index,y,x) membership from the 9,451-key native patch. Preserve source-provided class values; never derive class from an ownership mask.",
+    "validation": {
+      "original_explicit_coverage_cells": 2566967,
+      "original_explicit_class_counts": {
+        "mapped_land_support": 2515829,
+        "mapped_inland_water_support": 51138
+      },
+      "exact_patch_keys_found": 9451,
+      "patch_keys_missing_explicit_class": 0,
+      "class_mismatches": 0,
+      "full_original_coverage_outside_request": 2557516
+    },
+    "original_target_records": 334,
+    "runtime_requested_target_records": 66,
+    "nonrequested_target_records": 268
+  },
+  "negative_operand_partition": {
+    "source": "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/complete-source-negative-bindings.json",
+    "complete_foreign_features": 122,
+    "original_target_bindings": 334,
+    "total_negative_operand_bindings": 230,
+    "retained_on_66_runtime_targets": 93,
+    "associated_with_268_omitted_target_records": 137,
+    "rule": "Retain all 93 bindings associated with requested targets in the stock runtime view. Keep the complete 334-binding source artifact unchanged as historical evidence; do not transfer or drop the 137 bindings in that artifact. They are unrelated to the 9,451 requested cells and do not need to be copied onto the narrowed request targets."
+  },
+  "omitted_target_evidence_and_competitors": {
+    "physical_history": "The unchanged 334-target whole-target physical result remains pinned at commit d41ba96f505fe507773cb1a23aab558941ee5a9c, blob 68cdef5a025eb092990571c2181c736ae76e4eec, path coordination/engineering/russia-repair-delivery-20261017/physical-001/whole-target-support.json. It records 334 targets, 140 with issues, 194 without, 236 issue records; SHA-256 38c8d148dbc33bab7fc94e2c7931b9a2ca757ff04d90191f08fa2506a6fc1a8c.",
+    "complete_positive_source_family": "The complete RUS ADM2 family remains in the immutable public source corpus: commit 9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c, payloads/gb-RUS-ADM2-000.bin.gz, blob 44996c4808c192bd7c886575824f3ec77d04798c; 2,327 features, 26,338,801 decoded bytes, decoded SHA-256 81dabf7930ff5e306e2423b586bcec14163fbd10481db6e49aab47273953b128. Full-family membership check: all 334 original target IDs present, including all 66 requested and all 268 omitted runtime targets.",
+    "source_negative_archive": "The original 334-target source evidence and 230 negative bindings remain unchanged and must stay retained with the candidate provenance. Thus narrowing only the request-specific runtime target projection does not remove full-family competitors or erase original physical/negative records."
+  },
+  "other_immutable_inputs": {
+    "complete_native_source_evidence": "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/retained-source-evidence-complete-native.json; 334 targets; SHA-256 a55983972a251bde712c739006cd9a0165188060e44a0982927a6d243fc00ddc.",
+    "complete_foreign_roster_and_negative_bindings": "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/complete-source-negative-bindings.json; 122 features, 334 target bindings, 230 bindings.",
+    "native_patch": "The exact original 9,451-key patch remains unmodified; no geometry/class overrides are proposed."
+  },
+  "proposed_stock_action": "Because supported-inputs requires a successful diagnostic, it cannot repair this pre-diagnostic admission failure. Build a distinct, pinned source-evidence projection with exactly the 66 requested target records and exact explicit class coverage for the 9,451 requested tuples, while retaining full source-family and full original physical/negative artifacts as immutable bound provenance. Run the stock diagnostic on that corrected input only after the author prepares it. Do not call the manual projection the output of supported-inputs.",
+  "limits": [
+    "The 268 nonrequested target records are absent only from the request-specific pre-diagnostic projection; their geometries remain in the complete 2,327-feature RUS family and their original physical and 137 target-negative records remain in immutable archival evidence.",
+    "The exact 66 requested runtime targets retain 93 target-associated negative bindings; all 230 bindings remain in the complete original source-evidence archive.",
+    "This is a mechanical input-admission correction, not scientific qualification, acceptance, or current-owner evidence.",
+    "No producer, owner observer, or native diagnostic was run during this check."
+  ],
+  "stock_supported_inputs_check": {
+    "implementation": "scripts/prepare-delivery-handoff.mjs, supportedInputs()",
+    "actual_flow": "The helper requires an existing retained source-target-native-diagnostic-v1 input, verifies its requested/supported/held partition against the native patch, then emits narrowed source-evidence.json/native-patch.json/held-original.json.",
+    "precondition": "A successful diagnostic output is mandatory. It cannot produce the pre-diagnostic input needed to get past the current admission failure.",
+    "required_correction": "Author should form a separate, provenance-bound pre-diagnostic source-evidence projection directly from the immutable complete source-evidence and exact native patch: retain only the 66 owners represented in the patch, and for those targets supply the exact nonempty explicit class rows intersected with the patch. Preserve the complete source family, full physical result and complete 334-target/230-binding evidence as separately bound immutable provenance. Then run the stock native diagnostic. Only after a successful diagnostic may supported-inputs be used for its intended diagnostic-derived supported/held partition.",
+    "not_proposed": "Do not alter stock code, overwrite original source/physical evidence, delete foreign family competitors, or fabricate a successful diagnostic."
+  }
+}

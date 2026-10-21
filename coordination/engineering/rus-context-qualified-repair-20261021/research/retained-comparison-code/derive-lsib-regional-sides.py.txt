@@ -1,0 +1,30 @@
+from pathlib import Path
+from osgeo import ogr,gdal
+import json,hashlib,collections,datetime
+D=Path(__file__).resolve().parent
+source=D/'primary/State-LSIB-RUS-CHN-full-resolution.geojson';f=json.loads(source.read_text())['features'][0]
+keys=json.loads((D/'RUS9451-exact-retained-key-tuples.json').read_text())['rows'];keys=[r for r in keys if any(c['family']=='gb:CHN:ADM1' for c in r['foreign_contacts'])]
+assert f['properties']['COUNTRY1']=='CHINA' and f['properties']['COUNTRY2']=='RUSSIA' and f['properties']['RANK']=='1'
+polys=[];facts=[];results={}
+for i,line in enumerate(f['geometry']['coordinates']):
+ start,end=line[0],line[-1];west=i==1; rr=[r for r in keys if (r['longitude']<100)==west];assert len(rr)==(80 if west else 8900)
+ variants=[]
+ for top,right in ([(50,89),(52,91)] if west else [(60,140),(65,150)]):
+  ring=line+[[end[0],top],[right,top],[right,start[1]],start]
+  geom={'type':'Polygon','coordinates':[ring]};g=ogr.CreateGeometryFromJson(json.dumps(geom));assert g.IsValid() and g.IsSimple()
+  closure=ogr.CreateGeometryFromJson(json.dumps({'type':'LineString','coordinates':[end]+ring[len(line):]}))
+  rows=[]
+  for r in rr:
+   x,y=r['longitude'],r['normative_latitude'];pt=ogr.Geometry(ogr.wkbPoint);pt.AddPoint_2D(x,y)
+   assert x>end[0] and y<top and x<right and (west and x<start[0] or y>start[1])
+   assert not closure.Intersects(pt)
+   rows.append({**r,'regional_side_relation':'north_east_region' if g.Contains(pt) else 'boundary' if g.Intersects(pt) else 'opposite_region'})
+  variants.append(rows)
+  polys.append({'type':'Feature','properties':{'source_feature_id':f['id'],'source_line_part_index':i,'variant':len(variants),'purpose':'Finite regional side comparison only; artificial outer closure is not a national boundary or source replacement.','unchanged_source_segment_count':len(line)-1},'geometry':geom})
+ assert [r['regional_side_relation'] for r in variants[0]]==[r['regional_side_relation'] for r in variants[1]]
+ facts.append({'line_part_index':i,'source_vertices':len(line),'start':start,'end':end,'keys':len(rr),'counts':dict(collections.Counter(r['regional_side_relation'] for r in variants[0])),'alternative_remote_closure_agreement':True})
+ for r in variants[0]:results[(r['y'],r['x'])]=r
+out={'kind':'RUS_CHN_original_keys_full_resolution_LSIB_regional_side_research_not_adoption','created_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'source_attributes':f['properties'],'runtime':gdal.VersionInfo('--version'),'parts':facts,'summary':dict(collections.Counter(r['regional_side_relation'] for r in results.values())),'rows':list(results.values()),'limits':['Exact retained native latitude/longitude used in ordinary OGR floating point relation; stock exact witness comparison follows separately.','Complete original LSIB line parts are unchanged. Two alternative remote outer closures agree for every queried center. Added closure segments are not asserted as international boundaries and are not intended for constructor source substitution.','North/east-region country interpretation requires the primary source/country anchor and source-specific applicability review.','No physical qualification, deletion of original foreign negative geometry, adoption, repair, universal sovereignty assertion or completion credit.']}
+(D/'RUS8980-LSIB-regional-side-comparison.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+(D/'RUS-CHN-LSIB-regional-comparison-rings.geojson').write_text(json.dumps({'type':'FeatureCollection','features':polys},separators=(',',':'))+'\n')
+print(json.dumps({'parts':facts,'summary':out['summary']},indent=2))

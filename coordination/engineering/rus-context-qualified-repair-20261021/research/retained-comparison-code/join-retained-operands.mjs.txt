@@ -1,0 +1,26 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
+const D=new URL('.',import.meta.url).pathname,read=p=>JSON.parse(fs.readFileSync(D+p));
+const sha=b=>createHash('sha256').update(b).digest('hex');
+const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
+const valueSha=v=>sha(Buffer.from(JSON.stringify(canonical(v))+'\n'));
+const full=read('retained-source-evidence-complete-native.json'),bindings=read('complete-source-negative-bindings.json'),tuples=read('RUS9451-exact-retained-key-tuples.json').rows,chn=read('original-CHN-ADM1.geojson');
+const byOwner=new Map(full.targets.map(t=>[t.pixelIndex,t])),byBinding=new Map(bindings.target_bindings.map(t=>[t.pixelIndex,t])),bySource=new Map(bindings.complete_original_roster.map(s=>[s.source_id,s]));
+const side=new Map(read('RUS8980-LSIB-exact-native-regional-sides.json').rows.map(r=>[`${r.y}:${r.x}`,r])),dist=new Map(read('RUS8980-LSIB-distance-context.json').rows.map(r=>[`${r.y}:${r.x}`,r]));
+const original=read('original-held-native-patch.json');console.log('patch keys',Object.keys(original));
+let originals=[];for(const row of original.rows)for(const run of row.runs)for(let x=run[0];x<run[1];x++)originals.push([row.y,x,run[2]].join(':'));
+assert.equal(originals.length,9451);assert.deepEqual(originals.sort(),tuples.map(r=>[r.y,r.x,r.owner_index].join(':')).sort());
+const rows=tuples.map(r=>{
+ const t=byOwner.get(r.owner_index),b=byBinding.get(r.owner_index);assert(t&&b&&t.id===r.owner_id&&t.target_id===r.owner_id);
+ const hits=t.coverage_rows.filter(row=>row.y===r.y).flatMap(row=>row.runs).filter(run=>run[0]<=r.x&&r.x<run[1]);assert.equal(hits.length,1);assert.equal(hits[0][2],r.retained_class);
+ const negatives=r.foreign_contacts.map(c=>{
+  const matches=b.negative_operands.filter(n=>n.source_id===c.id);assert.equal(matches.length,1);const n=matches[0],s=bySource.get(c.id),g=t.territorial_exclusions[n.negative_ordinal];assert(g&&s);assert.equal(n.geometry_sha256,s.geometry_sha256);
+  if(c.family==='gb:CHN:ADM1'){assert.deepEqual(g,chn.features[s.source_ordinal-1].geometry);assert.equal(s.source_ordinal,c.ordinal);}
+  return {...c,target_negative_ordinal:n.negative_ordinal,geometry_sha256_native_valueSha:valueSha(g),historical_python_geometry_sha256:n.geometry_sha256,complete_source_geometry_pointer:`/features/${s.source_ordinal-1}/geometry`,complete_source_parts:s.product_parts};
+ });
+ const s=side.get(`${r.y}:${r.x}`),d=dist.get(`${r.y}:${r.x}`);assert(!!s===!!d);
+ return {...r,original_owner:r.owner_index,foreign_contacts:negatives,...(s?{native_regional_relation:s.native_regional_relation,distance_context:d.geodesic_distance_to_that_source_point_m,nearest_source_point:d.planar_nearest_source_point,distance_context_stratum:d.geodesic_distance_to_that_source_point_m<=100?'at_most_100m_not_a_cutoff':'over_100m_not_a_cutoff'}:{}),proposed_scope:s?.native_regional_relation==='interior'?'RUS_CHN_source_applicability_review_8108':s?'CHN_opposite_side_872_preserved':'other_families_471_preserved'};
+});
+const hist=field=>Object.fromEntries([...new Set(rows.map(r=>r[field]))].map(k=>[k,rows.filter(r=>r[field]===k).length]));
+const summary={keys:rows.length,owners:new Set(rows.map(r=>r.owner_index)).size,classes:hist('retained_class'),partition:hist('proposed_scope'),whole_native_targets:full.targets.length,targets_with_foreign_operands:full.targets.filter(t=>t.territorial_exclusions.length).length,whole_foreign_operand_bindings:full.targets.reduce((n,t)=>n+t.territorial_exclusions.length,0),all_keys_joined_to_exact_held_patch_and_original_class:true,all_CHN_operand_values_equal_complete_original_feature:true};
+const out={kind:'RUS_original_held_key_and_complete_negative_operand_join_not_adoption',created_utc:new Date().toISOString(),summary,source_pins:{complete_native_input:read('complete-native-input-read.json'),original_held_patch:read('original-review-input-pins.json').held_patch,bindings:{commit:'a7930ca6eb907823caeff668af09c2f9bcbdf5ef',path:'coordination/engineering/russia-repair-delivery-20261017/config/complete-negatives/complete-source-negative-bindings.json',git_blob_oid:'cca707e319a7655a3b9b23ecdd4b2f1bdcfa9821',bytes:fs.statSync(D+'complete-source-negative-bindings.json').size,sha256:sha(fs.readFileSync(D+'complete-source-negative-bindings.json'))}},limits:['No geometric predicate or producer was rerun by this identity join.','The original binding report uses Python sorted compact JSON without the native final newline. Both identities are retained, never conflated. Native value hash here uses the unchanged sorted ordinary-JSON plus newline semantics of valueBytes; GeoJSON consists only of JSON values.','Foreign source ordinals are 1-based; /features pointers and target negative ordinals are 0-based.','Held serialized interval ordinal is not an original queue interval ID.','No record adopts contextual status; these are exact inputs for one independent scientific interpretation.'],rows};
+fs.writeFileSync(D+'RUS9451-portable-exact-source-key-tuples.json',JSON.stringify(out,null,2)+'\n');console.log(JSON.stringify(summary,null,2));
