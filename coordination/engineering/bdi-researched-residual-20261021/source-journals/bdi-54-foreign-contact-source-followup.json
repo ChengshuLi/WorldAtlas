@@ -1,0 +1,441 @@
+{
+  "purpose": "Bounded source-context follow-up for the 54 original BDI territory-exclusion keys. This records retained-key joins and primary-source reads; it does not change owner or hold outcomes.",
+  "scope": {
+    "original_package": "gb-BDI-ADM2--repair-evaluation",
+    "original_key_count": 583,
+    "foreign_contact_key_count": 54,
+    "land_key_count": 54,
+    "water_key_count": 0,
+    "country_groups": {
+      "TZA": 51,
+      "COD": 3
+    },
+    "grouping_method": "Expanded territorial_exclusion_cells from the retained native-diagnostic decision rows; joined each x/y/owner to exactly one original interval row using start <= x < end_exclusive, then joined its source feature index to retained source-property identities and its x/y to the original selected-owner observation latitude. No producer, observer, geometry, or distance computation was rerun."
+  },
+  "immutable_evidence": {
+    "native_diagnostic": {
+      "commit": "d05e05db3ea89fbf76a283aed0619c38571fca89",
+      "path": "coordination/engineering/bdi-source-qualification-20261021/native-diagnostic-001/native-diagnostic.json",
+      "blob": "7731c85d68c48cad2a0feaf0b846cac70992e3fb"
+    },
+    "original_masks_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "source_mask_blob": "5c56cb06a4879060a4ad933395cd643cdaaa5565",
+    "physical_mask_blob": "5f8f1e8aa032abc85e931930eb4eb9b0dbc0ebdb",
+    "water_mask_blob": "9bee5462a2f4a8bf1e54816c4a3bd61d9227e221",
+    "source_property_identity_join": "inventory/bdi-source-property-identity-join.json",
+    "source_corpus_commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+    "original_owner_observation": "inventory/bdi-selected-owner-observation.json",
+    "observation_note": "Used only as retained x/y/owner/latitude evidence; no observer rerun.",
+    "native_center_longitude_formula": {
+      "formula": "((x + 0.5) / 262166 * 360) - 180",
+      "source": "inventory/bdi-cod-three-frontier-source-context.json",
+      "scope": "Coordinate conversion only; retained native grid x values plus original observer latitudes. No geometry or distance computation."
+    }
+  },
+  "groups": [
+    {
+      "owner": 9030,
+      "country": "TZA",
+      "source_feature_index": 60207,
+      "foreign_feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+      "foreign_feature_name": "Kigoma",
+      "count": 7,
+      "keys_xy": [
+        "153097:133965",
+        "153097:133966",
+        "153097:133967",
+        "153100:133956",
+        "153101:133952",
+        "153102:133951",
+        "153117:133913"
+      ],
+      "x_extent": [
+        153097,
+        153117
+      ],
+      "y_extent": [
+        133913,
+        133967
+      ],
+      "latitude_extent": [
+        -3.957774327,
+        -3.883796389
+      ],
+      "longitude_extent": [
+        30.229778079537,
+        30.25724159502
+      ]
+    },
+    {
+      "owner": 9036,
+      "country": "TZA",
+      "source_feature_index": 60195,
+      "foreign_feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+      "foreign_feature_name": "Kagera",
+      "count": 1,
+      "keys_xy": [
+        "153249:133033"
+      ],
+      "x_extent": [
+        153249,
+        153249
+      ],
+      "y_extent": [
+        133033,
+        133033
+      ],
+      "latitude_extent": [
+        -2.677404397,
+        -2.677404397
+      ],
+      "longitude_extent": [
+        30.438500797205,
+        30.438500797205
+      ]
+    },
+    {
+      "owner": 9040,
+      "country": "TZA",
+      "source_feature_index": 60195,
+      "foreign_feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+      "foreign_feature_name": "Kagera",
+      "count": 31,
+      "keys_xy": [
+        "153290:133231",
+        "153292:133232",
+        "153295:133233",
+        "153299:133233",
+        "153300:133232",
+        "153301:133232",
+        "153302:133231",
+        "153303:133230",
+        "153304:133229",
+        "153307:133227",
+        "153308:133227",
+        "153310:133226",
+        "153311:133225",
+        "153311:133226",
+        "153312:133224",
+        "153312:133225",
+        "153321:133219",
+        "153322:133219",
+        "153325:133214",
+        "153325:133215",
+        "153326:133213",
+        "153327:133212",
+        "153328:133210",
+        "153329:133209",
+        "153331:133206",
+        "153387:133221",
+        "153388:133222",
+        "153389:133223",
+        "153391:133225",
+        "153392:133226",
+        "153396:133231"
+      ],
+      "x_extent": [
+        153290,
+        153396
+      ],
+      "y_extent": [
+        133206,
+        133233
+      ],
+      "latitude_extent": [
+        -2.951707995,
+        -2.914680823
+      ],
+      "longitude_extent": [
+        30.494801003944,
+        30.640357636002
+      ]
+    },
+    {
+      "owner": 9067,
+      "country": "TZA",
+      "source_feature_index": 60207,
+      "foreign_feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+      "foreign_feature_name": "Kigoma",
+      "count": 1,
+      "keys_xy": [
+        "152743:134336"
+      ],
+      "x_extent": [
+        152743,
+        152743
+      ],
+      "y_extent": [
+        134336,
+        134336
+      ],
+      "latitude_extent": [
+        -4.463107002,
+        -4.463107002
+      ],
+      "longitude_extent": [
+        29.743673855496,
+        29.743673855496
+      ]
+    },
+    {
+      "owner": 9079,
+      "country": "TZA",
+      "source_feature_index": 60195,
+      "foreign_feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+      "foreign_feature_name": "Kagera",
+      "count": 10,
+      "keys_xy": [
+        "153514:133259",
+        "153515:133259",
+        "153519:133258",
+        "153520:133257",
+        "153521:133256",
+        "153521:133257",
+        "153525:133255",
+        "153526:133255",
+        "153529:133254",
+        "153530:133254"
+      ],
+      "x_extent": [
+        153514,
+        153530
+      ],
+      "y_extent": [
+        133254,
+        133259
+      ],
+      "latitude_extent": [
+        -2.987362624,
+        -2.980506054
+      ],
+      "longitude_extent": [
+        30.802392377349,
+        30.824363189735
+      ]
+    },
+    {
+      "owner": 9079,
+      "country": "TZA",
+      "source_feature_index": 60207,
+      "foreign_feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+      "foreign_feature_name": "Kigoma",
+      "count": 1,
+      "keys_xy": [
+        "153512:133313"
+      ],
+      "x_extent": [
+        153512,
+        153512
+      ],
+      "y_extent": [
+        133313,
+        133313
+      ],
+      "latitude_extent": [
+        -3.06141083,
+        -3.06141083
+      ],
+      "longitude_extent": [
+        30.7996460258,
+        30.7996460258
+      ]
+    },
+    {
+      "owner": 9001,
+      "country": "COD",
+      "source_feature_index": 60180,
+      "foreign_feature_id": "gb:COD:ADM1:28894549B54646848790483",
+      "foreign_feature_name": "South Kivu",
+      "count": 2,
+      "keys_xy": [
+        "152388:133327",
+        "152389:133323"
+      ],
+      "x_extent": [
+        152388,
+        152389
+      ],
+      "y_extent": [
+        133323,
+        133327
+      ],
+      "latitude_extent": [
+        -3.0806076822523325,
+        -3.075122902449578
+      ],
+      "longitude_extent": [
+        29.256196455681,
+        29.257569631455
+      ]
+    },
+    {
+      "owner": 9047,
+      "country": "COD",
+      "source_feature_index": 60180,
+      "foreign_feature_id": "gb:COD:ADM1:28894549B54646848790483",
+      "foreign_feature_name": "South Kivu",
+      "count": 1,
+      "keys_xy": [
+        "152240:133142"
+      ],
+      "x_extent": [
+        152240,
+        152240
+      ],
+      "y_extent": [
+        133142,
+        133142
+      ],
+      "latitude_extent": [
+        -2.826907874256714,
+        -2.826907874256714
+      ],
+      "longitude_extent": [
+        29.05296644111,
+        29.05296644111
+      ]
+    }
+  ],
+  "primary_source_research": [
+    {
+      "source": "United Nations Treaty Series, League of Nations, Volume 54 (1926), protocol signed at Kigoma 5 August 1924 and exchange of notes accepting it",
+      "url": "https://treaties.un.org/doc/Publication/UNTS/LON/Volume%2054/v54.pdf",
+      "result": "Opened and read the treaty PDF. The notes accept the protocol and accompanying maps as defining the Tanganyika Territory–Ruanda-Urundi boundary. The text says the annexed map controls where it conflicts with the textual description. The Kagera section describes the river midstream as the provisional line pending survey and subsequent government acceptance.",
+      "pdf_page_indices_zero_based": [
+        239,
+        242,
+        250,
+        252
+      ],
+      "page_content_limit": "Visual inspection now covers the complete protocol entry pages: treaty No. 1287 text is present, but no map plate is reproduced in this volume entry. The attached map is referenced by the protocol but unavailable here. No key-to-marker/segment or distance link was established.",
+      "visual_inspection_attempt": {
+        "method": "Downloaded the exact official PDF after one HEAD response established content-length 7,041,838 bytes; rendered selected pages with Apple PDFKit via Swift. No browser used.",
+        "pdf": {
+          "local_path": "inventory/ln-treaty-vol54-1926.pdf",
+          "bytes": 7041838,
+          "sha256": "e89a0ea710dfb3f420703a7bd42e696d48e1d4bd379cdce0b3254e8670c6cbda",
+          "pages": 446
+        },
+        "visually_inspected_pdf_page_indices_zero_based": [
+          238,
+          239,
+          240,
+          241,
+          242,
+          243,
+          244,
+          245,
+          246,
+          247,
+          248,
+          249,
+          250,
+          251,
+          252
+        ],
+        "printed_pages_identified": "Treaty starts printed page 240; protocol text continues printed pp. 242–251. The following PDF page index 252 begins treaty No. 1288.",
+        "page_images": [
+          {
+            "pdf_page_index_zero_based": 238,
+            "path": "local-retained/v54-page-238.png",
+            "sha256": "55e952176a1308d68cf7118a038d8c1b07f2fe6305424a0f15c5d70d1cdb8c05"
+          },
+          {
+            "pdf_page_index_zero_based": 239,
+            "path": "local-retained/v54-page-239.png",
+            "sha256": "ec2a7fae9b7e38455f4031f567161b9505459ebfb2494eb8d3f83ce037946c44"
+          },
+          {
+            "pdf_page_index_zero_based": 240,
+            "path": "local-retained/v54-page-240.png",
+            "sha256": "331f93e7ff658c2c260fe5b44fc4773a7089387824e4d19276c59f4dff0a9099"
+          },
+          {
+            "pdf_page_index_zero_based": 241,
+            "path": "local-retained/v54-page-241.png",
+            "sha256": "da79e4f8db61f037a2e4cc4cf398ce58f0c1f0249d1bcf01b6c27a228c9900f5"
+          },
+          {
+            "pdf_page_index_zero_based": 242,
+            "path": "local-retained/v54-page-242.png",
+            "sha256": "0b33c38faa3f1f94f7498a09b929f029c040010ad0941cbc1bb9c7e333892ff4"
+          },
+          {
+            "pdf_page_index_zero_based": 243,
+            "path": "local-retained/v54-page-243.png",
+            "sha256": "4046a8f6de7328035fc1506a6df83d497201614f8b2048d70cecbc1d0f81cc91"
+          },
+          {
+            "pdf_page_index_zero_based": 244,
+            "path": "local-retained/v54-page-244.png",
+            "sha256": "c77c4b61555f063ec048af53e2ff5cf1f89c84dc7422bfda16ce886985768add"
+          },
+          {
+            "pdf_page_index_zero_based": 245,
+            "path": "local-retained/v54-page-245.png",
+            "sha256": "0d42a314088e242d753d8a9f18c859d420c6e115fd5e238eeabc170918862ec8"
+          },
+          {
+            "pdf_page_index_zero_based": 246,
+            "path": "local-retained/v54-page-246.png",
+            "sha256": "3ed639c1bd536469b60400359ba7196014cb26d7980f06403a9980a1c6e446ee"
+          },
+          {
+            "pdf_page_index_zero_based": 247,
+            "path": "local-retained/v54-page-247.png",
+            "sha256": "f641c7d9f20a58617ac57a5d12cf293d396317836099a091d45318cfcb9cb87f"
+          },
+          {
+            "pdf_page_index_zero_based": 248,
+            "path": "local-retained/v54-page-248.png",
+            "sha256": "d788d227ff7731b10c0eb6620c8b4ef0eacb1256524b761192ae0c83ec4387ca"
+          },
+          {
+            "pdf_page_index_zero_based": 249,
+            "path": "local-retained/v54-page-249.png",
+            "sha256": "919db2e89707e8295168900944421560860beeb7a881c07cff54ed21969dcba1"
+          },
+          {
+            "pdf_page_index_zero_based": 250,
+            "path": "local-retained/v54-page-250.png",
+            "sha256": "4023f0e8513b8caaaf9e0a7b52248c8a040fb708c849b9cfc39be4913148938a"
+          },
+          {
+            "pdf_page_index_zero_based": 251,
+            "path": "local-retained/v54-page-251.png",
+            "sha256": "0bd910117518e0ab8dd14a706589f2b3941c804897c4de71c5ad016d25b64963"
+          },
+          {
+            "pdf_page_index_zero_based": 252,
+            "path": "local-retained/v54-page-252.png",
+            "sha256": "cb83e5e3ab2e51e602ae168527159091478276025ada0dfe21af5f20d2107528"
+          }
+        ],
+        "visual_findings": "The text of the 1924 protocol occupies the inspected pages; no map plate, map scale, graticule, or drawn marker map appears in this treaty entry. PDF index 251 (printed p. 252 verso / blank after printed p. 251) is blank except the treaty number; index 252 starts treaty No. 1288. Printed pp. 244–251 contain a textual 51-part boundary description with named rivers, hills, and numbered boundary pillars. Items 49–50 (printed pp. 248–250) run from Mwibu to Kagera and then downstream on Kagera to Uganda; item 51 concerns the Lake Tanganyika boundary. The protocol says the Kagera course will be surveyed by the Belgian section, the midstream line provisionally fixed, and submitted for acceptance by the two governments, with local representatives if needed. The accompanying map is therefore referenced but not reproduced in this volume entry."
+      }
+    },
+    {
+      "source": "Library of Congress item 76696266, Burundi-Tanzania boundary, 4-66 (1966)",
+      "url": "https://www.loc.gov/item/76696266/",
+      "result": "Search surfaced this primary cartographic record; accessible Commons metadata identifies the item, approximate 1:1,200,000 scale and U.S. Department of State/CIA cartographic producers. The direct LOC page returned HTTP 403 to the web reader; no retry. The map image was not inspected, so it does not provide a verified key-level witness here.",
+      "secondary_metadata_record": "https://commons.wikimedia.org/wiki/File:Burundi-Tanzania_boundary._4-66._LOC_76696266.jpg"
+    },
+    {
+      "source": "United Nations Treaty Series, Volume 1089, 1978 Kagera River Basin organization agreement",
+      "url": "https://treaties.un.org/doc/Publication/UNTS/Volume%201089/volume-1089-I-16695-English.pdf",
+      "result": "Read for context: the agreement defines basin cooperation by the Kagera and tributaries and refers to an attached map. It is not a boundary-delimitation instrument and does not resolve these keys."
+    },
+    {
+      "source": "UN Geneva Archives record for the 1924 frontier protocol",
+      "url": "https://archives.ungeneva.org/frontier-between-the-ruanda-and-tanganyika-territory",
+      "result": "Direct official archive record request returned HTTP 403; no retry."
+    }
+  ],
+  "limits": [
+    "The 54-key grouping is a retained source-contact/territorial-exclusion join, not an independent current boundary adjudication.",
+    "The official UNTS volume visually contains the protocol text and no accompanying map plate in the No. 1287 entry. That protocol references an attached authoritative map, but the map itself was not part of this volume entry and no inspected source map/control point connects individual retained native keys to a treaty marker or exact boundary segment.",
+    "The Kagera midstream description is expressly provisional pending survey and government acceptance in the treaty text; the applicable later acceptance/survey was not established here.",
+    "Original records provide grid x/y and latitude, not stored nearest-boundary distances; longitudes in this report are deterministic native-center formula conversions only. No distance was calculated.",
+    "No rights, territorial status, owner assignment, hold, or root credit outcome is changed by this report. COD is separated from the TZA primary-source lane."
+  ]
+}

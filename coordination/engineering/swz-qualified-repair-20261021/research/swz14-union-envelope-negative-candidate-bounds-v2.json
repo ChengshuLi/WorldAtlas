@@ -1,0 +1,638 @@
+{
+  "kind": "SWZ source-family union-envelope screen v2",
+  "purpose": "Extend canonical target envelope to include each exact simplified source geometry consumed by the completed physical operation. Candidate screen only; not polygon overlay or qualification.",
+  "scope": {
+    "package": "gb-SWZ-ADM2--repair-evaluation",
+    "original_cells": 14,
+    "intervals": 14,
+    "targets": 8
+  },
+  "pins": {
+    "canonical_part22": "34b44bf538aabcb1a6485d56ed4859ecf553aa72:data/geography/part-22.json#b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f",
+    "canonical_part23": "34b44bf538aabcb1a6485d56ed4859ecf553aa72:data/geography/part-23.json#371e95033d9c542bbf07c42afe7111074e35f246",
+    "physical_consumed_stage": "coordination/engineering/swz-qualified-repair-20261021/physical-preparation/original-stage-inputs.json",
+    "physical_receipt": "0bc1bbb89c0428336cfba710fa1691aefe6c6904:coordination/engineering/swz-qualified-repair-20261021/physical-001/execution-receipt.json",
+    "source_candidate_blocks": [
+      "5f936f6e18a5e4c7b6a398c0990dee045d1cc0a3",
+      "158db3a4ae8076def67a7aa289c20e57e6c3a5b1"
+    ],
+    "complete_source_roster": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d:coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz#e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+    "projection_code": "008aaf69e65105029e64e09317b8f9aa4df1f352:src/pixel-grid.js"
+  },
+  "method": {
+    "transform": "src/pixel-grid.js projectCell, width 262166",
+    "screen": "Union each canonical target bbox with exact consumed simplified feature bbox; include source-candidate runs if row center y and x interval overlap union envelope; map source indexes through full roster.",
+    "limits": [
+      "Raster envelope screen only; no exact target-polygon overlay or disjointness proof.",
+      "May omit geometries without rasterized candidate centers.",
+      "No legal territorial status, ancestry, or source-role conclusion.",
+      "SWZ ADM1 remains broad parent context."
+    ]
+  },
+  "comparison": {
+    "canonical_only_families": [
+      223,
+      224,
+      311,
+      312,
+      360,
+      361,
+      362
+    ],
+    "union_envelope_families": [
+      223,
+      224,
+      311,
+      312,
+      360,
+      361,
+      362
+    ],
+    "new_family_indices": [],
+    "removed_family_indices": []
+  },
+  "targets": [
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B37706944907644",
+      "target_name": "Inkhundla Mhlume",
+      "canonical_bbox": [
+        154144.14089444443,
+        150650.70914230685,
+        154411.47739055555,
+        150930.98856548965
+      ],
+      "consumed_simplified_bbox": [
+        154143.50004422222,
+        150650.70541723323,
+        154411.44731428946,
+        150930.96419961148
+      ],
+      "union_bbox": [
+        154143.50004422222,
+        150650.70541723323,
+        154411.47739055555,
+        150930.98856548965
+      ],
+      "new_family_indices": [],
+      "candidate_families": [
+        {
+          "family_index": 223,
+          "family_id": "gb:MOZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 45695,
+              "source_id": "gb:MOZ:ADM1:27363107B47421408423272",
+              "name": "Maputo",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 224,
+          "family_id": "gb:MOZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 45835,
+              "source_id": "gb:MOZ:ADM2:85939544B88728478280907",
+              "name": "Namaacha",
+              "owners": [
+                30915
+              ]
+            }
+          ]
+        },
+        {
+          "family_index": 311,
+          "family_id": "gb:SWZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 56922,
+              "source_id": "gb:SWZ:ADM1:75366066B12234306804593",
+              "name": "Lubombo",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 312,
+          "family_id": "gb:SWZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 56950,
+              "source_id": "gb:SWZ:ADM2:25544865B37706944907644",
+              "name": "Inkhundla Mhlume",
+              "owners": [
+                40983
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B4123625373150",
+      "target_name": "Inkhundla Gege",
+      "canonical_bbox": [
+        153578.59057333335,
+        151331.9330286786,
+        153807.62170388887,
+        151583.42609418544
+      ],
+      "consumed_simplified_bbox": [
+        153578.6109640222,
+        151331.51702806278,
+        153814.65117541168,
+        151586.84710379512
+      ],
+      "union_bbox": [
+        153578.59057333335,
+        151331.51702806278,
+        153814.65117541168,
+        151586.84710379512
+      ],
+      "new_family_indices": [],
+      "candidate_families": [
+        {
+          "family_index": 311,
+          "family_id": "gb:SWZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 56923,
+              "source_id": "gb:SWZ:ADM1:75366066B21527038718027",
+              "name": "Shiselweni",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 312,
+          "family_id": "gb:SWZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 56977,
+              "source_id": "gb:SWZ:ADM2:25544865B4123625373150",
+              "name": "Inkhundla Gege",
+              "owners": [
+                40984
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B616938903867",
+      "target_name": "Inkhundla Ngwempisi",
+      "canonical_bbox": [
+        153506.20362777778,
+        151204.20246541576,
+        153871.92519777777,
+        151389.37537893027
+      ],
+      "consumed_simplified_bbox": [
+        153506.21091016667,
+        151204.210611099,
+        153871.94704494442,
+        151389.35905501278
+      ],
+      "union_bbox": [
+        153506.20362777778,
+        151204.20246541576,
+        153871.94704494442,
+        151389.37537893027
+      ],
+      "new_family_indices": [],
+      "candidate_families": [
+        {
+          "family_index": 311,
+          "family_id": "gb:SWZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 56921,
+              "source_id": "gb:SWZ:ADM1:75366066B3567364273406",
+              "name": "Manzini",
+              "owners": []
+            },
+            {
+              "source_feature_index": 56923,
+              "source_id": "gb:SWZ:ADM1:75366066B21527038718027",
+              "name": "Shiselweni",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 312,
+          "family_id": "gb:SWZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 56975,
+              "source_id": "gb:SWZ:ADM2:25544865B616938903867",
+              "name": "Inkhundla Ngwempisi",
+              "owners": [
+                40991
+              ]
+            },
+            {
+              "source_feature_index": 56977,
+              "source_id": "gb:SWZ:ADM2:25544865B4123625373150",
+              "name": "Inkhundla Gege",
+              "owners": [
+                40984
+              ]
+            }
+          ]
+        },
+        {
+          "family_index": 360,
+          "family_id": "gb:ZAF:ADM1",
+          "features": [
+            {
+              "source_feature_index": 66250,
+              "source_id": "gb:ZAF:ADM1:76434192B92524600968894",
+              "name": "Mpumalanga",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 361,
+          "family_id": "gb:ZAF:ADM2",
+          "features": [
+            {
+              "source_feature_index": 66275,
+              "source_id": "gb:ZAF:ADM2:47623444B27645248540404",
+              "name": "Gert Sibande",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 362,
+          "family_id": "gb:ZAF:ADM3",
+          "features": [
+            {
+              "source_feature_index": 66425,
+              "source_id": "gb:ZAF:ADM3:15628383B23048095503212",
+              "name": "Mkhondo",
+              "owners": [
+                49176
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B74382320525051",
+      "target_name": "Inkhundla Maseyisini",
+      "canonical_bbox": [
+        153685.86016166667,
+        151522.83831855556,
+        153854.44746444444,
+        151703.00214542472
+      ],
+      "consumed_simplified_bbox": [
+        153685.89089334777,
+        151522.7283811399,
+        153855.1757033333,
+        151703.03572399603
+      ],
+      "union_bbox": [
+        153685.86016166667,
+        151522.7283811399,
+        153855.1757033333,
+        151703.03572399603
+      ],
+      "new_family_indices": [],
+      "candidate_families": [
+        {
+          "family_index": 311,
+          "family_id": "gb:SWZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 56923,
+              "source_id": "gb:SWZ:ADM1:75366066B21527038718027",
+              "name": "Shiselweni",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 312,
+          "family_id": "gb:SWZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 56955,
+              "source_id": "gb:SWZ:ADM2:25544865B74382320525051",
+              "name": "Inkhundla Maseyisini",
+              "owners": [
+                41002
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B75252057291440",
+      "target_name": "Inkhundla Zombodze",
+      "canonical_bbox": [
+        153825.68202833334,
+        151588.82451786235,
+        153955.45419833335,
+        151744.9440512607
+      ],
+      "consumed_simplified_bbox": [
+        153825.65100535666,
+        151588.84905687792,
+        153955.48332788888,
+        151744.9597830983
+      ],
+      "union_bbox": [
+        153825.65100535666,
+        151588.82451786235,
+        153955.48332788888,
+        151744.9597830983
+      ],
+      "new_family_indices": [],
+      "candidate_families": [
+        {
+          "family_index": 311,
+          "family_id": "gb:SWZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 56923,
+              "source_id": "gb:SWZ:ADM1:75366066B21527038718027",
+              "name": "Shiselweni",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 312,
+          "family_id": "gb:SWZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 56933,
+              "source_id": "gb:SWZ:ADM2:25544865B75252057291440",
+              "name": "Inkhundla Zombodze",
+              "owners": [
+                41003
+              ]
+            }
+          ]
+        },
+        {
+          "family_index": 360,
+          "family_id": "gb:ZAF:ADM1",
+          "features": [
+            {
+              "source_feature_index": 66248,
+              "source_id": "gb:ZAF:ADM1:76434192B26311534340602",
+              "name": "KwaZulu-Natal",
+              "owners": []
+            },
+            {
+              "source_feature_index": 66250,
+              "source_id": "gb:ZAF:ADM1:76434192B92524600968894",
+              "name": "Mpumalanga",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 361,
+          "family_id": "gb:ZAF:ADM2",
+          "features": [
+            {
+              "source_feature_index": 66275,
+              "source_id": "gb:ZAF:ADM2:47623444B27645248540404",
+              "name": "Gert Sibande",
+              "owners": []
+            },
+            {
+              "source_feature_index": 66305,
+              "source_id": "gb:ZAF:ADM2:47623444B26591670939926",
+              "name": "Zululand",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 362,
+          "family_id": "gb:ZAF:ADM3",
+          "features": [
+            {
+              "source_feature_index": 66425,
+              "source_id": "gb:ZAF:ADM3:15628383B23048095503212",
+              "name": "Mkhondo",
+              "owners": [
+                49176
+              ]
+            },
+            {
+              "source_feature_index": 66514,
+              "source_id": "gb:ZAF:ADM3:15628383B83069245545305",
+              "name": "uPhongolo",
+              "owners": [
+                49311
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B91965971492812",
+      "target_name": "Inkhundla Piggs Peak",
+      "canonical_bbox": [
+        153720.30586111112,
+        150591.28841505892,
+        153969.9461522222,
+        150773.71598594563
+      ],
+      "consumed_simplified_bbox": [
+        153720.27949886335,
+        150588.14840171175,
+        153969.92168339554,
+        150774.38899075115
+      ],
+      "union_bbox": [
+        153720.27949886335,
+        150588.14840171175,
+        153969.9461522222,
+        150774.38899075115
+      ],
+      "new_family_indices": [],
+      "candidate_families": [
+        {
+          "family_index": 311,
+          "family_id": "gb:SWZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 56924,
+              "source_id": "gb:SWZ:ADM1:75366066B25905390127614",
+              "name": "Hhohho",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 312,
+          "family_id": "gb:SWZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 56940,
+              "source_id": "gb:SWZ:ADM2:25544865B91965971492812",
+              "name": "Inkhundla Piggs Peak",
+              "owners": [
+                41011
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B99062950351047",
+      "target_name": "Inkhundla Lomahasha",
+      "canonical_bbox": [
+        154295.97870277776,
+        150664.25230733922,
+        154463.32799944445,
+        150860.02932695614
+      ],
+      "consumed_simplified_bbox": [
+        154295.98474716055,
+        150664.27115638345,
+        154463.36404726945,
+        150860.05911215328
+      ],
+      "union_bbox": [
+        154295.97870277776,
+        150664.25230733922,
+        154463.36404726945,
+        150860.05911215328
+      ],
+      "new_family_indices": [],
+      "candidate_families": [
+        {
+          "family_index": 223,
+          "family_id": "gb:MOZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 45695,
+              "source_id": "gb:MOZ:ADM1:27363107B47421408423272",
+              "name": "Maputo",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 224,
+          "family_id": "gb:MOZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 45835,
+              "source_id": "gb:MOZ:ADM2:85939544B88728478280907",
+              "name": "Namaacha",
+              "owners": [
+                30915
+              ]
+            }
+          ]
+        },
+        {
+          "family_index": 311,
+          "family_id": "gb:SWZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 56922,
+              "source_id": "gb:SWZ:ADM1:75366066B12234306804593",
+              "name": "Lubombo",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 312,
+          "family_id": "gb:SWZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 56927,
+              "source_id": "gb:SWZ:ADM2:25544865B99062950351047",
+              "name": "Inkhundla Lomahasha",
+              "owners": [
+                41016
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B99429407754877",
+      "target_name": "Inkhundla Tikhuba",
+      "canonical_bbox": [
+        154349.79555666665,
+        151080.6328702092,
+        154484.95669444444,
+        151385.947419539
+      ],
+      "consumed_simplified_bbox": [
+        154349.82468622224,
+        151079.957675075,
+        154484.95108700497,
+        151385.9162420157
+      ],
+      "union_bbox": [
+        154349.79555666665,
+        151079.957675075,
+        154484.95669444444,
+        151385.947419539
+      ],
+      "new_family_indices": [],
+      "candidate_families": [
+        {
+          "family_index": 223,
+          "family_id": "gb:MOZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 45695,
+              "source_id": "gb:MOZ:ADM1:27363107B47421408423272",
+              "name": "Maputo",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 311,
+          "family_id": "gb:SWZ:ADM1",
+          "features": [
+            {
+              "source_feature_index": 56922,
+              "source_id": "gb:SWZ:ADM1:75366066B12234306804593",
+              "name": "Lubombo",
+              "owners": []
+            }
+          ]
+        },
+        {
+          "family_index": 312,
+          "family_id": "gb:SWZ:ADM2",
+          "features": [
+            {
+              "source_feature_index": 56935,
+              "source_id": "gb:SWZ:ADM2:25544865B99429407754877",
+              "name": "Inkhundla Tikhuba",
+              "owners": [
+                41017
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

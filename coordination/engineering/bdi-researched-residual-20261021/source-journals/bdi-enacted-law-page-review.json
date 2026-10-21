@@ -1,0 +1,41 @@
+{
+  "kind": "bdi-enacted-law-page-review",
+  "status": "official enacted PDF page inspection blocked by retrieval/render access; no annex page visually inspected",
+  "law": {
+    "title": "Loi organique n° 1/05 du 16 mars 2023 portant détermination et délimitation des provinces, des communes, des zones, des collines et/ou quartiers de la République du Burundi",
+    "official_assembly_pdf": "https://assemblee.bi/wp-content/uploads/2024/01/n%C2%B05-du-16-mars-2023.pdf",
+    "official_ceni_pdf": "https://www.ceniburundi.bi/wp-content/uploads/2024/06/LOI-n%C2%B05-du-16-mars-2023DETERMINATION-ET-DELIMITATION-DES-PROVINCES-COMMUNES-ZONES-ET-QUARTIERS.pdf",
+    "indexed_page_count": 78,
+    "document_pages_visually_inspected": [],
+    "annex_pages_visually_inspected": []
+  },
+  "actual_attempts": [
+    {
+      "route": "web open PDF metadata",
+      "result": "both official PDF URLs resolve in search/open metadata as 78-page PDFs, but return zero text lines"
+    },
+    {
+      "route": "web screenshot CENI PDF pages 0 through 4",
+      "result": "screenshot references displayed Cloudflare verification/One moment loader rather than PDF pages"
+    },
+    {
+      "route": "Chrome PDF view of Assembly PDF",
+      "result": "navigation timed out; browser showed ERR_TIMED_OUT, no PDF content"
+    },
+    {
+      "route": "certificate-verified curl of Assembly PDF to local-retained/bdi-organic-law-1-05-2023.pdf",
+      "result": "exit 28 after 45.006 seconds, zero bytes received; no file was rendered"
+    }
+  ],
+  "limited_indexed_text": {
+    "official_assembly_search_result": "PDF search index snippet places Commune Muhuta among the communes listed under Province de Bujumbura in Article 5; snippet has no page number and is not a page image.",
+    "official_ceni_search_result": "PDF search index snippet contains Bugarama in a zone-list context, but the available snippet lacks enough surrounding text to identify the exact relation or page.",
+    "target_specific_conclusion": "No enacted-law old-to-new relationship for the original Bugarama/Muhuta targets is established from the material actually inspected. The enacted-law index supports the existence of a current commune named Muhuta, but exact old target membership/boundary equivalence remains unverified."
+  },
+  "draft_separation": "The 2022 Senate explanatory draft is distinct from the enacted 2023 Organic Law and was not used as enacted-law evidence in this record.",
+  "limits": [
+    "Search-index snippets are not visual inspection of enacted annex pages and do not establish exact page numbers.",
+    "Current name or hierarchy continuity does not establish polygon equivalence, source applicability, or territorial authority for a 2007 source feature.",
+    "No OCR/PDF software was installed; no access control or browser security warning was bypassed."
+  ]
+}

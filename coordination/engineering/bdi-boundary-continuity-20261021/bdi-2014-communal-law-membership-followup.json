@@ -1,0 +1,71 @@
+{
+  "kind": "BDI 2014 enacted communal-law membership follow-up",
+  "date": "2026-10-21",
+  "scope": "Bounded investigation of exact predecessor/constituent administrative memberships for the retained Muha and Ntahangwa ADM2 target identities. No geometry, observer, physical producer, or native diagnostic was run.",
+  "attachment": {
+    "official_page": "https://presidence.gov.bi/2014/11/loi-n133-du-28-novembre-2014-portant-revision-de-la-loi-n102-du-25-janvier-2010-portant-organisation-de-ladministration-communale/",
+    "page_action": "Read official Presidency page; it showed the enacted law dated 28 November 2014 and two attachment links. The primary download link resolves to the exact URL below.",
+    "official_attachment_url": "https://www.presidence.gov.bi/wp-content/uploads/2014/11/loi-033-2014.pdf",
+    "prior_state": "Saved inventory/bdi-ntahangwa-vintage-primary-source-check.json records only the web document reader failing HTTP 400 due 13,480,065-byte content size; it explicitly says no retry or alternate transfer was attempted. No prior local acquisition or uncertain transfer was found.",
+    "acquisition": "One exact programmatic GET completed successfully after confirming the saved record showed no prior transfer.",
+    "retained_file": "inventory/bdi-law-1-33-2014.pdf",
+    "bytes": 13480065,
+    "sha256": "d85a6845c2b95905048ec08e5105616ab7319d6b9f4b6700e189ec6af41a65bc",
+    "format": "31-page scanned PDF; each page is a 1654x2338 JPEG image stream. Relevant printed pages 29 and 31 were directly inspected as rendered page images. OCR libraries/commands were unavailable; no software was installed."
+  },
+  "relevant_provisions": [
+    {
+      "printed_page": 29,
+      "articles": "123-125",
+      "findings": [
+        "Article 123 establishes the Bujumbura urban perimeter as the Province of Mairie de Bujumbura.",
+        "Article 124 states the then-current Mairie perimeter has three urban communes: Muha, Mukaza, and Ntahangwa.",
+        "Article 125 expressly describes Muha as extending over the territories of Kanyosha, Kinindo, and Musaga administrative entities, with its seat at Kanyosha.",
+        "Article 125 expressly describes Ntahangwa as extending over Cibitoke, Gihosha, Buterere, Kamenge, Kinama, and Ngagara administrative entities, with its seat at Kamenge.",
+        "Article 125 says the administrative entities composing the urban communes are constituted as urban zones."
+      ],
+      "evidentiary_scope": "This is direct enacted textual constituent-membership evidence, stronger and more specific than the 2018 PND summary. It supplies names of constituent entities but no map, coordinates, boundary geometry, predecessor polygons, or source-feature IDs."
+    },
+    {
+      "printed_page": 31,
+      "articles": "136-138",
+      "findings": [
+        "Article 136 says geographical and administrative limits of communes, hills, and zones then in force are maintained; for Mairie communes, their limits and territorial authorities remain unchanged until the sitting authorities’ terms end.",
+        "Article 137 repeals inconsistent earlier provisions.",
+        "Article 138 makes the law effective on promulgation; the closing signature date is 28 November 2014."
+      ],
+      "evidentiary_scope": "The transition clause anchors the delineations to the legal state in force at promulgation and maintains them during the transition. It does not provide a map or prove equivalence to the retained source geometry."
+    }
+  ],
+  "retained_target_identity_join": {
+    "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "source_property_record": "inventory/bdi-source-property-identity-join.json",
+    "targets": [
+      {
+        "source_feature_id": "gb:BDI:ADM2:21766830B84199363749171",
+        "shapeName": "Muha",
+        "source_index": 2154,
+        "owner_index": 9087,
+        "original_cells": 41,
+        "land_cells": 19,
+        "inland_water_cells": 22
+      },
+      {
+        "source_feature_id": "gb:BDI:ADM2:21766830B87038696970617",
+        "shapeName": "Ntahangwa",
+        "source_index": 2156,
+        "owner_index": 9089,
+        "original_cells": 9,
+        "land_cells": 3,
+        "inland_water_cells": 6
+      }
+    ],
+    "source_vintage": "The retained catalogue calls the BDI ADM2 corpus represented-year 2007. Exact source feature names match the later 2014 law’s commune names, but names alone do not establish that their polygon geometry equals the legal union of the listed administrative entities."
+  },
+  "assessment": {
+    "new_evidence": "The 2014 law directly resolves the textual constituent roster for Muha and Ntahangwa, which the PND 2018-2027 paragraph 71 did not specify.",
+    "remaining_specific_gap": "The attachment contains no boundary annex or map. It does not connect the retained geoBoundaries feature geometries to the legally named constituent entities or resolve why a source labeled represented-year 2007 carries the exact later commune identities. Therefore it materially narrows the source-applicability question but does not by itself prove geometry equivalence or qualify any keys.",
+    "preserved_limits": "No changes to the frozen 448-key candidate or 135 held-key partition. No approval, acceptance, or completion credit is claimed. No observer, physical producer, or native diagnostic was rerun.",
+    "other_routes": "Assembly/CENI/Stanford outcomes remain as previously recorded; none were retried or bypassed. The inaccessible 2014 Presidency law PDF reader was not used as an alternate transfer route; this attachment is the exact official Presidency page’s own primary download link."
+  }
+}

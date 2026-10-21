@@ -1,0 +1,1266 @@
+{
+  "kind": "original-bra-supported-input-conservation",
+  "code_commit": "737b4e01c3d1f721a1df175f350bf75c16bbc5ba",
+  "diagnostic_commit": "658698da3317c765bbf2385923259b3131426a97",
+  "original_cells": 24525,
+  "screening_supported_cells": 24078,
+  "held_cells": 447,
+  "original_target_atoms": 920,
+  "retained_target_atoms": 825,
+  "original_owners": 123,
+  "retained_owners": 115,
+  "wholly_held_owners": [
+    {
+      "held_cells": 2,
+      "original_cells": 2,
+      "owner": 435,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 103,
+      "original_cells": 103,
+      "owner": 437,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 85,
+      "original_cells": 85,
+      "owner": 466,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 4,
+      "original_cells": 4,
+      "owner": 498,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 1,
+      "original_cells": 1,
+      "owner": 500,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 24,
+      "original_cells": 24,
+      "owner": 502,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 2,
+      "original_cells": 2,
+      "owner": 503,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 14,
+      "original_cells": 14,
+      "owner": 504,
+      "supported_cells": 0
+    }
+  ],
+  "removed_positive_target_records": [
+    {
+      "source_id": "gb:BRA:ADM2:56859067B12275728934529",
+      "owner": 435
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B44371373624465",
+      "owner": 435
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B53471345312520",
+      "owner": 435
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B64572394282984",
+      "owner": 435
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B67809594674729",
+      "owner": 435
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B79605387637563",
+      "owner": 435
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B10630725090155",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B10738168470860",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B18280238969622",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B18957785190727",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B237930900866",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B30656278128756",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B32532391106562",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B42823585611232",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B42853932915842",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B45409060945550",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B47648271195329",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B51279708820455",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B54894241849206",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B67045600360452",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B68120244559309",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B71285319126532",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B76158301560942",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B76374785013373",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B82411919014006",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B92196836998679",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B94130308653150",
+      "owner": 437
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B17921911489726",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B29465738256221",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B29932927337968",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B30119387857874",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B35573440952052",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B36403486213311",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B45941896173238",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B52966542395998",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B59860797410622",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B63581322441845",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B68439029217006",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B71517349655646",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B80116174386319",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B85066808515960",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B88081254239904",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B9215522088689",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B92254336371282",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B92561105565380",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B94974109827372",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B97480516483925",
+      "owner": 466
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B22729484732675",
+      "owner": 498
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B60830385241918",
+      "owner": 498
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B95150406275386",
+      "owner": 498
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B17988346737710",
+      "owner": 500
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B20748730789342",
+      "owner": 500
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B40873252146886",
+      "owner": 500
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B50046704042959",
+      "owner": 500
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B53312005117926",
+      "owner": 500
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B53654769142521",
+      "owner": 500
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B57284725629844",
+      "owner": 500
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B58621448764792",
+      "owner": 500
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B60578081820335",
+      "owner": 500
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B84968133223300",
+      "owner": 500
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B89394810714034",
+      "owner": 500
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B981200421316",
+      "owner": 500
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B11672596232419",
+      "owner": 502
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B27923524578183",
+      "owner": 502
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B34602546660204",
+      "owner": 502
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B42324023180319",
+      "owner": 502
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B44026938864112",
+      "owner": 502
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B44510514495911",
+      "owner": 502
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B54458267467801",
+      "owner": 502
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B54570666253245",
+      "owner": 502
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B65128822842334",
+      "owner": 502
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B67687441249744",
+      "owner": 502
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B72053715457244",
+      "owner": 502
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B78781577060325",
+      "owner": 502
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B90024458991146",
+      "owner": 502
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B90277540164960",
+      "owner": 502
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B95685031401719",
+      "owner": 502
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B9967974442205",
+      "owner": 502
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B12655775892146",
+      "owner": 503
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B25851744085744",
+      "owner": 503
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B53289402005788",
+      "owner": 503
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B54223989013555",
+      "owner": 503
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B57075431460973",
+      "owner": 503
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B65449398596196",
+      "owner": 503
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B97658409243233",
+      "owner": 503
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B99298801417178",
+      "owner": 503
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B99796327021212",
+      "owner": 503
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B28717369395740",
+      "owner": 504
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B45095421643767",
+      "owner": 504
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B50874549869187",
+      "owner": 504
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B5829656226463",
+      "owner": 504
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B68819599415533",
+      "owner": 504
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B7037292151986",
+      "owner": 504
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B86093452456643",
+      "owner": 504
+    },
+    {
+      "source_id": "gb:BRA:ADM2:56859067B92342663625367",
+      "owner": 504
+    }
+  ],
+  "changed_coverage_records": 28,
+  "classes": {
+    "original": {
+      "mapped_land_support": 23813,
+      "mapped_inland_water_support": 712
+    },
+    "supported": {
+      "mapped_land_support": 23366,
+      "mapped_inland_water_support": 712
+    },
+    "held": {
+      "mapped_land_support": 447
+    }
+  },
+  "held_reasons": {
+    "territorial_exclusion_cells": 447
+  },
+  "all_non_target_fields_unchanged": true,
+  "retained_target_changes_only_coverage_rows": true,
+  "complete_original_source_physical_foreign_negative_operands_retained": true,
+  "per_owner": [
+    {
+      "held_cells": 0,
+      "original_cells": 214,
+      "owner": 94,
+      "supported_cells": 214
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 52,
+      "owner": 97,
+      "supported_cells": 52
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 61,
+      "owner": 98,
+      "supported_cells": 61
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 19,
+      "owner": 99,
+      "supported_cells": 19
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 206,
+      "owner": 100,
+      "supported_cells": 206
+    },
+    {
+      "held_cells": 61,
+      "original_cells": 778,
+      "owner": 101,
+      "supported_cells": 717
+    },
+    {
+      "held_cells": 41,
+      "original_cells": 113,
+      "owner": 102,
+      "supported_cells": 72
+    },
+    {
+      "held_cells": 89,
+      "original_cells": 146,
+      "owner": 103,
+      "supported_cells": 57
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 102,
+      "owner": 104,
+      "supported_cells": 102
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 169,
+      "owner": 107,
+      "supported_cells": 169
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 423,
+      "owner": 108,
+      "supported_cells": 423
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 103,
+      "owner": 109,
+      "supported_cells": 103
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 184,
+      "owner": 116,
+      "supported_cells": 184
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 260,
+      "owner": 117,
+      "supported_cells": 260
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 32,
+      "owner": 119,
+      "supported_cells": 32
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 1425,
+      "owner": 120,
+      "supported_cells": 1425
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 221,
+      "owner": 132,
+      "supported_cells": 221
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 251,
+      "owner": 133,
+      "supported_cells": 251
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 59,
+      "owner": 136,
+      "supported_cells": 59
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 314,
+      "owner": 137,
+      "supported_cells": 314
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 41,
+      "owner": 138,
+      "supported_cells": 41
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 1313,
+      "owner": 139,
+      "supported_cells": 1313
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 658,
+      "owner": 142,
+      "supported_cells": 658
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 52,
+      "owner": 159,
+      "supported_cells": 52
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 65,
+      "owner": 173,
+      "supported_cells": 65
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 28,
+      "owner": 174,
+      "supported_cells": 28
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 38,
+      "owner": 180,
+      "supported_cells": 38
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 27,
+      "owner": 189,
+      "supported_cells": 27
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 135,
+      "owner": 190,
+      "supported_cells": 135
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 167,
+      "owner": 191,
+      "supported_cells": 167
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 19,
+      "owner": 193,
+      "supported_cells": 19
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 54,
+      "owner": 195,
+      "supported_cells": 54
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 53,
+      "owner": 199,
+      "supported_cells": 53
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 55,
+      "owner": 201,
+      "supported_cells": 55
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 286,
+      "owner": 202,
+      "supported_cells": 286
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 26,
+      "owner": 204,
+      "supported_cells": 26
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 267,
+      "owner": 217,
+      "supported_cells": 267
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 15,
+      "owner": 218,
+      "supported_cells": 15
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 20,
+      "owner": 223,
+      "supported_cells": 20
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 39,
+      "owner": 235,
+      "supported_cells": 39
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 194,
+      "owner": 236,
+      "supported_cells": 194
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 27,
+      "owner": 237,
+      "supported_cells": 27
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 20,
+      "owner": 238,
+      "supported_cells": 20
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 15,
+      "owner": 246,
+      "supported_cells": 15
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 38,
+      "owner": 252,
+      "supported_cells": 38
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 61,
+      "owner": 256,
+      "supported_cells": 61
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 23,
+      "owner": 257,
+      "supported_cells": 23
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 58,
+      "owner": 258,
+      "supported_cells": 58
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 150,
+      "owner": 259,
+      "supported_cells": 150
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 12,
+      "owner": 260,
+      "supported_cells": 12
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 9,
+      "owner": 261,
+      "supported_cells": 9
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 285,
+      "owner": 354,
+      "supported_cells": 285
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 44,
+      "owner": 357,
+      "supported_cells": 44
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 55,
+      "owner": 360,
+      "supported_cells": 55
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 1129,
+      "owner": 362,
+      "supported_cells": 1129
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 2375,
+      "owner": 363,
+      "supported_cells": 2375
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 67,
+      "owner": 371,
+      "supported_cells": 67
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 596,
+      "owner": 374,
+      "supported_cells": 596
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 29,
+      "owner": 375,
+      "supported_cells": 29
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 390,
+      "owner": 377,
+      "supported_cells": 390
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 202,
+      "owner": 380,
+      "supported_cells": 202
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 1613,
+      "owner": 426,
+      "supported_cells": 1613
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 74,
+      "owner": 430,
+      "supported_cells": 74
+    },
+    {
+      "held_cells": 2,
+      "original_cells": 2,
+      "owner": 435,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 17,
+      "owner": 436,
+      "supported_cells": 17
+    },
+    {
+      "held_cells": 103,
+      "original_cells": 103,
+      "owner": 437,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 356,
+      "owner": 458,
+      "supported_cells": 356
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 1,
+      "owner": 459,
+      "supported_cells": 1
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 131,
+      "owner": 460,
+      "supported_cells": 131
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 3,
+      "owner": 461,
+      "supported_cells": 3
+    },
+    {
+      "held_cells": 85,
+      "original_cells": 85,
+      "owner": 466,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 79,
+      "owner": 473,
+      "supported_cells": 79
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 467,
+      "owner": 477,
+      "supported_cells": 467
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 1270,
+      "owner": 482,
+      "supported_cells": 1270
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 225,
+      "owner": 486,
+      "supported_cells": 225
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 13,
+      "owner": 489,
+      "supported_cells": 13
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 1763,
+      "owner": 490,
+      "supported_cells": 1763
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 46,
+      "owner": 491,
+      "supported_cells": 46
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 13,
+      "owner": 496,
+      "supported_cells": 13
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 152,
+      "owner": 497,
+      "supported_cells": 152
+    },
+    {
+      "held_cells": 4,
+      "original_cells": 4,
+      "owner": 498,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 1,
+      "original_cells": 1,
+      "owner": 500,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 24,
+      "original_cells": 24,
+      "owner": 502,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 2,
+      "original_cells": 2,
+      "owner": 503,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 14,
+      "original_cells": 14,
+      "owner": 504,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 18,
+      "original_cells": 24,
+      "owner": 505,
+      "supported_cells": 6
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 56,
+      "owner": 530,
+      "supported_cells": 56
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 49,
+      "owner": 532,
+      "supported_cells": 49
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 15,
+      "owner": 533,
+      "supported_cells": 15
+    },
+    {
+      "held_cells": 2,
+      "original_cells": 179,
+      "owner": 534,
+      "supported_cells": 177
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 149,
+      "owner": 537,
+      "supported_cells": 149
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 13,
+      "owner": 10308,
+      "supported_cells": 13
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 161,
+      "owner": 10315,
+      "supported_cells": 161
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 1,
+      "owner": 10318,
+      "supported_cells": 1
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 103,
+      "owner": 10322,
+      "supported_cells": 103
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 21,
+      "owner": 10323,
+      "supported_cells": 21
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 99,
+      "owner": 10324,
+      "supported_cells": 99
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 376,
+      "owner": 10347,
+      "supported_cells": 376
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 11,
+      "owner": 10348,
+      "supported_cells": 11
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 23,
+      "owner": 10355,
+      "supported_cells": 23
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 3,
+      "owner": 10358,
+      "supported_cells": 3
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 34,
+      "owner": 10359,
+      "supported_cells": 34
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 1,
+      "owner": 10361,
+      "supported_cells": 1
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 39,
+      "owner": 10362,
+      "supported_cells": 39
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 386,
+      "owner": 10363,
+      "supported_cells": 386
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 53,
+      "owner": 10368,
+      "supported_cells": 53
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 4,
+      "owner": 10374,
+      "supported_cells": 4
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 44,
+      "owner": 10381,
+      "supported_cells": 44
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 12,
+      "owner": 10389,
+      "supported_cells": 12
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 21,
+      "owner": 10390,
+      "supported_cells": 21
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 11,
+      "owner": 10392,
+      "supported_cells": 11
+    },
+    {
+      "held_cells": 1,
+      "original_cells": 28,
+      "owner": 10393,
+      "supported_cells": 27
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 64,
+      "owner": 10395,
+      "supported_cells": 64
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 628,
+      "owner": 10407,
+      "supported_cells": 628
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 71,
+      "owner": 10417,
+      "supported_cells": 71
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 47,
+      "owner": 10419,
+      "supported_cells": 47
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 28,
+      "owner": 10420,
+      "supported_cells": 28
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 35,
+      "owner": 10421,
+      "supported_cells": 35
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 3,
+      "owner": 10422,
+      "supported_cells": 3
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 260,
+      "owner": 10423,
+      "supported_cells": 260
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 54,
+      "owner": 10430,
+      "supported_cells": 54
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 651,
+      "owner": 10433,
+      "supported_cells": 651
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 41,
+      "owner": 10441,
+      "supported_cells": 41
+    }
+  ],
+  "files": [
+    {
+      "path": "coordination/engineering/brazil-native-evaluation-20261021/config/native-authority-001.json",
+      "bytes": 385,
+      "sha256": "a496b3e92521d9f459155516c7a849f0555e594bc502c61a89c454e65f98ebd8",
+      "git_blob_oid": "d8ae39890f05f3f8d421f5029d030cc0b2b125f9"
+    },
+    {
+      "path": "coordination/engineering/brazil-native-evaluation-20261021/config/supported-inputs-001.json",
+      "bytes": 218,
+      "sha256": "f7308ae251785b0da30981e0c9f9c9b56dc82c56412a0d7691f65e0173efc441",
+      "git_blob_oid": "3b4c1e0a3dea8c975e762be13e89b7723aa42295"
+    },
+    {
+      "path": "coordination/engineering/brazil-native-evaluation-20261021/native-diagnostic-001/native-diagnostic.json",
+      "bytes": 1212979,
+      "sha256": "10627459d0bb35e8069c696428d3d3558ebe1fa84f4ad8e9a450edc47e53ba85",
+      "git_blob_oid": "b75285cad5a58007c8c281c69fed81b0441697e4"
+    },
+    {
+      "path": "coordination/engineering/brazil-native-evaluation-20261021/native-diagnostic-001/preparation.json",
+      "bytes": 268,
+      "sha256": "3d45394fdd05e127e52de3d0d3e811b555cf98f1c5463a66885970b0d4c3e88e",
+      "git_blob_oid": "b0e90c4005598e8b14f8864a3a2e2d96779a53ef"
+    },
+    {
+      "path": "coordination/engineering/brazil-native-evaluation-20261021/supported-inputs-001/held-original.json",
+      "bytes": 15937,
+      "sha256": "6155ccd61649b2f1fb3ee787a0ed2ef797b5934ffe091b585add9d1e19e534eb",
+      "git_blob_oid": "610af8bd0af7be71fe28722da86e249b7b088f41"
+    },
+    {
+      "path": "coordination/engineering/brazil-native-evaluation-20261021/supported-inputs-001/native-patch.json",
+      "bytes": 330569,
+      "sha256": "9af8fa6d394db040d678da41610e9c9e0c0962d0224ef4e1694bba91e9b767f4",
+      "git_blob_oid": "1e5f8005d70731d7269f1adb7776e4134715213e"
+    },
+    {
+      "path": "coordination/engineering/brazil-native-evaluation-20261021/supported-inputs-001/original-scope-partition.json",
+      "bytes": 10620,
+      "sha256": "181ae185dc87ea93c64affe40d25059f477a250ec83bbd5d2367df4200333b97",
+      "git_blob_oid": "b00fcaac893fb9c3321e6ed87273926d9855205d"
+    },
+    {
+      "path": "coordination/engineering/brazil-native-evaluation-20261021/supported-inputs-001/preparation.json",
+      "bytes": 615,
+      "sha256": "4be3cc4acb1b829a30f6dbb4bd2e06bd8b46d0ee4f8ded3222b4623e09ab3810",
+      "git_blob_oid": "cac0099365b25b34479eaed05d0dfd9d6cff7941"
+    },
+    {
+      "path": "coordination/engineering/brazil-native-evaluation-20261021/supported-inputs-001/source-evidence.json",
+      "bytes": 8740190,
+      "sha256": "9afb53b1ff9b4090e443e98affebf036902756c3cbc398606093c085785ad537",
+      "git_blob_oid": "ad3c79a4ec1306318e75db0933ea3aeb88ae0026"
+    }
+  ],
+  "limits": [
+    "Screening and lossless narrowing only, not native authority or qualification.",
+    "Requested class labels are conserved identities, not independent physical proof.",
+    "The complete original physical report, independent physical operands and all raw source competitors remain unchanged and require their existing scientific checks.",
+    "No holds relaxed; all 447 keys remain outside the next requested patch."
+  ]
+}

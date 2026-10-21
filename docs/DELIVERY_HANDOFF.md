@@ -866,8 +866,11 @@ IDs. Each node requires unique complete members; terminals retain the accepted
 canonical ID, owner, roster parent, source URL and location basis. Missing retired
 intermediaries, missing or extra descendants, foreign leaves, conflicting source
 metadata, duplicate edges and cycles fail closed. Unknown or opaque same-cohort
-ancestry is not treated as an unrelated family: mixed-family cohorts may therefore
-be conservatively rejected until they have separately reviewed complete support.
+ancestry is not treated as an unrelated family. Cross-provider negative ancestry
+automatically binds the whole consumed lineage to the independently registered
+selected source origin. It accepts neither caller-supplied origins nor
+`operation_stages`; historical intermediate geometries are not inputs to this
+negative-only check.
 The native geometry, boundary, physical and requested-cell checks still run.
 
 Legacy flat/single-original split inputs need no new inventory. Package assembly
