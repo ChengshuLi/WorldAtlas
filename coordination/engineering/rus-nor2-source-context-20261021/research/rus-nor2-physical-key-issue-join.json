@@ -1,0 +1,148 @@
+{
+  "title": "NOR2 retained physical issue to exact key-cell join",
+  "method": "Read-only, bounded overlay of the two exact original native cells against retained per-target physical support and issue geometries. This is not a producer rerun, broad scan, physical clearance, or qualification result.",
+  "original_contract": {
+    "contract_readback": "inventory/rus-original-contract-readback.json",
+    "relevant_clause": "Clause 5 keeps source, physical, and native evidence distinct and requires each original cell to be supported, held, already owned, or explicitly unresolved; target-level issues are retained rather than automatically assigned to every key."
+  },
+  "physical_receipt": {
+    "commit": "d41ba96f505fe507773cb1a23aab558941ee5a9c",
+    "path": "coordination/engineering/russia-repair-delivery-20261017/physical-001/whole-target-support.json",
+    "git_blob": "68cdef5a025eb092990571c2181c736ae76e4eec",
+    "bytes": 54074211,
+    "sha256": "38c8d148dbc33bab7fc94e2c7931b9a2ca757ff04d90191f08fa2506a6fc1a8c",
+    "target": "gb:RUS:ADM2:50074027B59329255842991",
+    "owner_index": 38297,
+    "source_query_count": 74,
+    "physical_issues": [
+      {
+        "kind": "contradictory_land_water_support",
+        "geometry_type": "MultiLineString",
+        "bbox": [
+          29.276489,
+          69.226389,
+          30.218056,
+          69.500278
+        ]
+      },
+      {
+        "kind": "L2-outside-L1",
+        "geometry_type": "MultiPolygon",
+        "bbox": [
+          30.07610058797251,
+          69.45182001083352,
+          30.10064138689374,
+          69.46301158306987
+        ]
+      }
+    ],
+    "physical_support_class": "mapped_land_support"
+  },
+  "overlay": {
+    "runtime": "Previously approved isolated Python 3.12.14 environment with Shapely 2.1.2; only these two cell geometries and the receipt's issue/support geometries were evaluated.",
+    "cell_bounds_coordinate_units": "longitude/latitude degrees from the retained native-grid cell formula; reported distances are planar degree distances and are not geodesic measurements.",
+    "predicate": "For each exact native-cell rectangle, test center coverage by mapped land/water, intersection and full coverage by mapped land, and intersection with each issue geometry.",
+    "results": [
+      {
+        "key": [
+          152965,
+          59862
+        ],
+        "original_interval_ordinal": 2,
+        "center_lon_lat": [
+          30.048518877352535,
+          69.4336981394968
+        ],
+        "cell_bounds_lon_lat": [
+          30.047832289465475,
+          69.43345694596381,
+          30.049205465239595,
+          69.43393933032371
+        ],
+        "center_in_mapped_land": true,
+        "center_in_mapped_water": false,
+        "mapped_land_intersects_cell": true,
+        "mapped_land_covers_entire_cell": false,
+        "contradictory_land_water_issue_intersects_cell": false,
+        "L2_outside_L1_issue_intersects_cell": false,
+        "planar_distance_degrees_to_contradictory_issue": 0.04518682,
+        "planar_distance_degrees_to_L2_issue": 0.03229654,
+        "native_diagnostic_status": "territorial_exclusion_cells"
+      },
+      {
+        "key": [
+          152972,
+          59849
+        ],
+        "original_interval_ordinal": 1,
+        "center_lon_lat": [
+          30.058131107771402,
+          69.43996822160625
+        ],
+        "cell_bounds_lon_lat": [
+          30.057444519884342,
+          69.43972709842214,
+          30.058817695658462,
+          69.44020934208498
+        ],
+        "center_in_mapped_land": true,
+        "center_in_mapped_water": false,
+        "mapped_land_intersects_cell": true,
+        "mapped_land_covers_entire_cell": false,
+        "contradictory_land_water_issue_intersects_cell": false,
+        "L2_outside_L1_issue_intersects_cell": false,
+        "planar_distance_degrees_to_contradictory_issue": 0.03387804,
+        "planar_distance_degrees_to_L2_issue": 0.02082081,
+        "native_diagnostic_status": "territorial_exclusion_cells"
+      }
+    ]
+  },
+  "interpretation": "The two whole-target issue geometries do not intersect either exact cell. Mapped-land support intersects each cell and covers its center, but does not cover the whole cell. The whole-target issue records remain preserved, and both original cells remain native-held. The outside-NOR key's official 2022 Fylke comparison remains a source-applicability question; being outside Norway does not establish Russian jurisdiction.",
+  "source_and_native_bindings": {
+    "original_tuple_partition": "inventory/rus-1343-current-held-partition.json",
+    "native_diagnostic_binding": "inventory/rus-1343-diagnostic-reuse-binding.json",
+    "official_2022_context": "inventory/rus-nor2-official-2022-applicability-assessment.json"
+  },
+  "physical_producer_code": {
+    "commit": "9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c",
+    "path": "scripts/qualify-source-cohort.py",
+    "git_blob": "f69180b425d665a022dd18290688864674dd20a5",
+    "role": "Original whole-target physical receipt producer; no producer rerun was performed for this key-cell overlay."
+  },
+  "overlay_script_provenance": {
+    "standalone_script_saved": false,
+    "script_sha256": null,
+    "reason": "The two-cell overlay was executed as a bounded read-only calculation against the retained receipt; no standalone script was persisted. The exact input receipt, key/cell coordinates, predicates, outputs, runtime, and method are recorded above. No script hash is claimed."
+  },
+  "contract_disposition_assessment": {
+    "outside_key_152972_59849": {
+      "recommendation": "A narrow contextual territorial_applicability treatment is supportable for consideration by the stock native path, not automatic qualification.",
+      "basis": [
+        "The exact key remains in original RUS target owner 38297 and original target source membership.",
+        "The retained official full-resolution 2022 Norway family comparison places the center outside all 11 county geometries; it does not establish Russian sovereignty.",
+        "The retained RUS physical receipt marks the center as mapped land; exact-cell overlay shows neither recorded whole-target issue geometry intersects this cell.",
+        "The original contract allows source-specific contextual treatment and stock native qualification; no universal contemporary boundary certificate is required."
+      ],
+      "limits": [
+        "mapped land intersects but does not cover the entire native cell.",
+        "Both whole-target issue records remain preserved.",
+        "The original native diagnostic currently holds the key as territorial_exclusion_cells; no native result has been rerun or changed.",
+        "Outside-Norway evidence is not proof of Russian jurisdiction or legal boundary position."
+      ]
+    },
+    "inside_key_152965_59862": {
+      "recommendation": "A narrowly researched-unresolved disposition is supportable with its native hold retained.",
+      "basis": [
+        "The original RUS target membership and mapped-land support conflict with the official 2022 full-resolution Norway county result at this center.",
+        "The bounded official same-year comparison and source-history investigation are material adverse evidence; exact-cell overlay finds neither recorded physical issue geometry intersects the cell.",
+        "The competing source applicability cannot be resolved by treating either map alone as sovereign truth."
+      ],
+      "limits": [
+        "No evidence supports positive repair or deletion of the RUS source.",
+        "Mapped land intersects but does not cover the whole cell.",
+        "The native diagnostic still holds the key as territorial_exclusion_cells."
+      ]
+    },
+    "scope": "These are source-specific recommendations for two exact keys only. The other 471-contact partition and all other native holds are outside this conclusion."
+  }
+}
