@@ -75,7 +75,7 @@ export function fullCheckoutPatterns(definition) {
 export function focusedCheckoutPatterns(definition, verificationPaths = definition.verification_paths) {
   validatePackageInputs(definition);
   return [
-    'scripts', 'src', 'test', '.github', 'drizzle', 'hosted', '/*.mjs',
+    'scripts', 'src', 'test', '.github', 'drizzle', 'hosted', 'postgres', '/*.mjs',
     'coordination/engineering/**/*.mjs', 'coordination/engineering/**/*.js',
     'coordination/engineering/**/*.cjs', 'coordination/engineering/**/*.py',
     'coordination/engineering/**/package.json',

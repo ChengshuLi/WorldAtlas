@@ -237,7 +237,7 @@ test('default mixed changes retain broad routing and missing packet consumers ca
 });
 
 test('reviewed tests bind both trusted phases without changing actual geography obligations', async () => {
-  const f=controlFixture({withContractBoundary:true}), files=['test/merge-integration.test.mjs'];
+  const f=controlFixture({withContractBoundary:true}), files=['test/example.test.mjs'];
   const request={base:f.base,head:f.head,files,inputs:[]};
   const prepared=await prepareIntegration({...f.options(),reviewedTests:JSON.stringify(request)});
   assert.equal(prepared.profile,'evidence');assert.equal(prepared.test_selection,'reviewed');
@@ -311,6 +311,56 @@ for (const [label, consumer, operand] of [
   assert.deepEqual(reviewedTestPlan(request,{...context,entries:changed}),plan,'Select the current body, not a historical fixture copy');
 });
 
+test('reviewed PostgreSQL consumers retain their current inputs through actual sparse materialization', () => {
+  const operands=['coordination/publication/cloudflare-history.json','data/observation-registry-history/base-v1.json',
+    'data/research-geography-gate.json','data/hosted-type-catalog.json'];
+  const consumers=['test/neon-forward-migrations.test.mjs','test/compact-membership-profile.test.mjs','test/current-postgres-recovery.test.mjs','test/merge-integration.test.mjs'];
+  const row={sha:sha('e'),mode:'100644',type:'blob'};
+  const entries=new Map([...EXECUTION_CODE,...operands,...consumers,'test/example.test.mjs','test/fixtures/contract/input.json'].map(name=>[name,row]));
+  const request={base:sha('a'),head:sha('b'),files:consumers};
+  const context={base:request.base,head:request.head,entries,files:[],definition:loadPackageInputs()};
+  const plan=reviewedTestPlan(request,context);
+  assert.equal(plan.build,false);assert.deepEqual(plan.files,consumers);
+  assert.deepEqual(plan.inputs,[...EXECUTION_CODE,...operands]);
+  assert(plan.checkout_patterns.includes('postgres'),'PostgreSQL DDL is executing source, like drizzle');
+  for(const consumer of consumers) {
+    const expected=consumer===consumers[2]?[operands[0]]:operands;
+    assert.deepEqual(reviewedTestPlan({...request,files:[consumer]},context).inputs,[...EXECUTION_CODE,...expected]);
+    for(const operand of expected) {
+      const absent=new Map(entries);absent.delete(operand);
+      assert.throws(()=>reviewedTestPlan({...request,files:[consumer]},{...context,entries:absent}),/unavailable/);
+      for(const name of [operand,path.posix.dirname(operand)]) {
+        const redirected=new Map(entries);redirected.set(name,{...row,mode:'120000'});
+        assert.throws(()=>reviewedTestPlan({...request,files:[consumer]},{...context,entries:redirected}),/unavailable/);
+      }
+      const definition={...context.definition,verification_paths:context.definition.verification_paths.filter(name=>name!==operand)};
+      assert.throws(()=>reviewedTestPlan({...request,files:[consumer]},{...context,definition}),/verification declaration/);
+    }
+  }
+  assert.deepEqual(reviewedTestPlan({...request,files:['test/example.test.mjs']},context).inputs,[...EXECUTION_CODE]);
+  assert.throws(()=>reviewedTestPlan({...request,inputs:[...plan.inputs,'data/arbitrary.json']},context),/manual inputs/);
+  const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'reviewed-postgres-inputs-'));
+  try {
+    const git=(args,options={})=>execFileSync('git',args,{cwd:temporary,encoding:'utf8',...options});
+    git(['init','-q']);
+    for(const name of [...operands,'postgres/schema.sql','scripts/publication-cloudflare.mjs',
+      'src/observation-modules.js','src/observation-registry.js','src/json-contract.js']) {
+      fs.mkdirSync(path.dirname(path.join(temporary,name)),{recursive:true});
+      fs.copyFileSync(name,path.join(temporary,name));
+    }
+    fs.writeFileSync(path.join(temporary,'package.json'),JSON.stringify({type:'module'}));
+    const excluded='data/unrelated-retained-input.json';fs.writeFileSync(path.join(temporary,excluded),'not a reviewed operand');
+    git(['add','.']);git(['-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','current PostgreSQL inputs']);
+    git(['sparse-checkout','set','--no-cone','--stdin'],{input:plan.checkout_patterns.join('\n')+'\n'});
+    for(const name of [...operands,'postgres/schema.sql'])assert.deepEqual(fs.readFileSync(path.join(temporary,name)),fs.readFileSync(name));
+    assert.equal(fs.existsSync(path.join(temporary,excluded)),false);
+    const result=spawnSync(process.execPath,['--input-type=module','-e',
+      "await import('./src/observation-modules.js'); await import('./scripts/publication-cloudflare.mjs'); console.log('actual-sparse-postgres-inputs');"],
+      {cwd:temporary,encoding:'utf8'});
+    assert.equal(result.status,0,result.stderr);assert.equal(result.stdout.trim(),'actual-sparse-postgres-inputs');
+  } finally { fs.rmSync(temporary,{recursive:true,force:true}); }
+});
+
 test('reviewed regional gate materializes only its live policy for the actual sparse consumer', () => {
   const consumer='test/regional-research-gate.test.mjs',operand='data/research-geography-gate.json';
   const row={sha:sha('e'),mode:'100644',type:'blob'};
@@ -350,7 +400,7 @@ test('reviewed lists cannot omit actual packaged consumers when package source c
     const f=controlFixture({withContractBoundary:true});f.packageInputs.inputs.push('src/');
     const required=['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
     const entries=new Map([...f.integrated,...required.map(path=>({path,sha:sha('e'),type:'blob',mode:'100644'}))].map(row=>[row.path,row]));
-    const request={base:f.base,head:f.head,files:['test/merge-integration.test.mjs'],inputs:[]};
+    const request={base:f.base,head:f.head,files:['test/example.test.mjs'],inputs:[]};
     const context={base:f.base,head:f.head,entries,files:[changed],definition:f.packageInputs};
     const plan=reviewedTestPlan(request,context);
     assert.equal(plan.build,true);assert.deepEqual(plan.files,[...request.files,...required]);
@@ -393,7 +443,7 @@ test('minimal reviewed package consumer derives real inputs without a changed pa
  const packagePlan=reviewedTestPlan({base:f.base,head:f.head,files:[required]},context);
  assert.equal(packagePlan.build,true);assert.deepEqual(packagePlan.files,[required]);
  assert.deepEqual(packagePlan.checkout_patterns,fullCheckoutPatterns(f.packageInputs));
- const unitPlan=reviewedTestPlan({base:f.base,head:f.head,files:['test/merge-integration.test.mjs']},context);
+ const unitPlan=reviewedTestPlan({base:f.base,head:f.head,files:['test/example.test.mjs']},context);
  assert.equal(unitPlan.build,false);assert.deepEqual(unitPlan.inputs,[...EXECUTION_CODE]);
 });
 
@@ -846,7 +896,7 @@ function controlFixture({withContractBoundary=false}={}) {
   f.pr.changed_files=f.files.length;
   f.authored=f.files.map(file=>({path:file.filename,sha:sha('e'),mode:'100644',type:'blob'}));
   f.baseline=f.authored.map(row=>({...row,sha:sha('d')}));
-  const stable=(withContractBoundary?[...EXECUTION_CODE,'test/fixtures/contract/input.json']:[]).filter(name=>!f.authored.some(row=>row.path===name))
+  const stable=(withContractBoundary?[...EXECUTION_CODE,'test/example.test.mjs','test/fixtures/contract/input.json']:[]).filter(name=>!f.authored.some(row=>row.path===name))
     .map(path=>({path,sha:sha('c'),mode:'100644',type:'blob'}));
   f.authored.push(...structuredClone(stable));f.baseline.push(...structuredClone(stable));
   f.integrated=structuredClone(f.authored);

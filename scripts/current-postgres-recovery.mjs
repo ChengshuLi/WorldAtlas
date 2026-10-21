@@ -3,13 +3,14 @@ import path from 'node:path';
 import {execFileSync,spawn} from 'node:child_process';
 import {createHash,randomUUID} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
-import {storageExportV2Contract,storageExportV2Definitions,storageExportV2Collections} from '../hosted/storage-export-v2-contract.js';
+import {storageExportV2Contract} from '../hosted/storage-export-v2-contract.js';
 import {storageCatalogV2} from '../hosted/storage-export-v2.js';
-import {storageRowsHashV2Ordered} from './restore-postgres-storage-v2.mjs';
+import {storageRowsHashV3Ordered} from './restore-postgres-storage-v3.mjs';
+import {storageExportV3Definitions} from '../hosted/storage-export-v3-contract.js';
 import {readClaim,workSpec,githubPages,githubAPI} from './issue-claim-contract.mjs';
 import {expectedNeonProjectId,verifyNeonProject} from './verify-neon-project.mjs';
 import {backupRecipientFingerprint,sealRecoveryBackup} from './recovery-backup-envelope.mjs';
-import {originalRecoveryProfile,compactRecoveryProfile,compactRecoveryTables,recoveryProfileForMarker,readCompactRecoveryStorage,verifyCompactRecoveryRegistry} from './compact-recovery-profile.mjs';
+import {originalRecoveryProfile,recoveryBaseContract,compactRecoveryTables,recoveryProfileForMarker,readCompactRecoveryStorage,verifyCompactRecoveryRegistry} from './compact-recovery-profile.mjs';
 import {readPublicationState,marker as publicationMarker} from './publication-plan.mjs';
 
 export const recoveryImage='postgres@sha256:77f585114c32fbca283dc835b0596f4e52b51b4c6662d7810b2f4084f60a1873';
@@ -109,7 +110,7 @@ export function validatedOwnerConnection(value,host){
 }
 
 export function tableReadSQL(collection){
- const definition=storageExportV2Definitions[collection];need(definition,'unknown-factual-table');
+ const definition=storageExportV3Definitions[collection];need(definition,'unknown-factual-table');
  const order=definition.keys.map(k=>ident(k)+(k==='rowid'?'':' COLLATE "C"')).join(',');
  return `SELECT ${definition.columns.map(ident).join(',')} FROM ${ident(definition.table)} ORDER BY ${order}`;
 }
@@ -136,16 +137,16 @@ export function nativeMembershipDigestSQL(){
 }
 
 export async function readRecoveryInventory(query,{profile=originalRecoveryProfile}={}){
- need([originalRecoveryProfile,compactRecoveryProfile].includes(profile),'unsupported-recovery-profile');
- const compact=profile===compactRecoveryProfile;
- const names=await query(inventorySQL),expected=[...storageExportV2Collections.filter(k=>!compact||k!=='geographic_memberships').map(k=>storageExportV2Definitions[k].table),'worldatlas_schema_migrations',...(compact?Object.keys(compactRecoveryTables):[])].sort();
+ const contract=recoveryBaseContract(profile),definitions=contract.definitions,collections=Object.keys(definitions);
+ const compact=profile!==originalRecoveryProfile;
+ const names=await query(inventorySQL),expected=[...collections.filter(k=>!compact||k!=='geographic_memberships').map(k=>definitions[k].table),'worldatlas_schema_migrations',...(compact?Object.keys(compactRecoveryTables):[])].sort();
  need(same(names.map(r=>r.table_name),expected),'incomplete-owner-and-factual-inventory');
  const identity=(await query("SELECT current_database() database_name,current_user role_name,current_schema() schema_name,current_setting('server_version_num') version"))[0];
  need(identity?.role_name==='neondb_owner'&&identity.schema_name==='public'&&/^18\d{4}$/.test(String(identity.version)),'unexpected-postgres-owner-or-version');
- const compactStorage=compact?await readCompactRecoveryStorage(query):null;
+ const compactStorage=compact?await readCompactRecoveryStorage(query,contract.version):null;
  const catalog=compactStorage?.catalog??await storageCatalogV2({dialect:'postgres',prepare:sql=>({all:async()=>({results:await query(sql)})})});
  const proofs={};let revision=0;
- for(const collection of storageExportV2Collections){
+ for(const collection of collections){
   const metrics=(await query(`SELECT count(*) rows,coalesce(sum(octet_length(row_to_json(q)::text)),0) bytes,coalesce(max(octet_length(row_to_json(q)::text)),0) largest FROM (${tableReadSQL(collection)}) q`))[0];
   need(metrics&&['rows','bytes','largest'].every(k=>Number.isSafeInteger(metrics[k])&&metrics[k]>=0)&&metrics.largest<=8*1024*1024,'measured-source-table-exceeds-bound');
   if(collection==='geographic_memberships'){
@@ -157,22 +158,23 @@ export async function readRecoveryInventory(query,{profile=originalRecoveryProfi
   need(metrics.bytes+metrics.rows*2+2<=maxJSON,'measured-source-table-exceeds-bound');
   const rows=await query(tableReadSQL(collection));
   need(rows.length===metrics.rows,'measured-source-table-changed');
-  need(rows.every(row=>same(Object.keys(row),storageExportV2Definitions[collection].columns)),'changed-raw-factual-columns');
+  need(rows.every(row=>same(Object.keys(row),definitions[collection].columns)),'changed-raw-factual-columns');
   if(collection==='ingestions')for(const row of rows){need(Number.isSafeInteger(row.rowid)&&row.rowid>0,'unsafe-original-rowid');revision=Math.max(revision,row.rowid);}
-  proofs[collection]={count:rows.length,ordered_rows_sha256:storageRowsHashV2Ordered(collection,rows)};
+  proofs[collection]={count:rows.length,ordered_rows_sha256:storageRowsHashV3Ordered(collection,rows)};
  }
  const registry=await query(registrySQL);need(registry.length>0,'missing-owner-registry-state');
- if(compact)await verifyCompactRecoveryRegistry(query,registry);
+ if(compact)await verifyCompactRecoveryRegistry(query,registry,contract.version);
  const permissions=await query(permissionSQL),privateRegistry=permissions.find(r=>r.object_name==='worldatlas_schema_migrations');
  need(privateRegistry?.owner==='neondb_owner'&&!privateRegistry.app_select&&!privateRegistry.app_insert&&!privateRegistry.app_update&&!privateRegistry.app_delete&&!privateRegistry.app_truncate,'owner-registry-exposed');
  const sequence=await query('SELECT last_value,is_called FROM atlas_ingestions_rowid_seq');
  need(sequence.length===1&&Number.isSafeInteger(sequence[0].last_value)&&sequence[0].last_value>=revision,'invalid-ingestion-sequence');
+ const column_permissions=await query(`SELECT c.relname object_name,a.attname column_name,${canonicalACL('a.attacl','c.relowner','c')} acl FROM pg_attribute a JOIN pg_class c ON c.oid=a.attrelid JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND a.attnum>0 AND NOT a.attisdropped AND a.attacl IS NOT NULL ORDER BY c.relname,a.attnum`);
  const database_acl=await query("SELECT datacl::text acl FROM pg_database WHERE datname=current_database()");
  const default_acls=await query("SELECT pg_get_userbyid(d.defaclrole) role_name,n.nspname schema_name,d.defaclobjtype object_type,d.defaclacl::text acl FROM pg_default_acl d LEFT JOIN pg_namespace n ON n.oid=d.defaclnamespace WHERE n.nspname='public' ORDER BY role_name,object_type");
  // acldefault uses lowercase 's' for sequences; uppercase 'S' is a foreign server.
  const sequence_permissions=await query(`SELECT c.relname name,pg_get_userbyid(c.relowner) owner,${canonicalACL('c.relacl','c.relowner','s')} acl,has_sequence_privilege('worldatlas_app',c.oid,'USAGE') app_usage,has_sequence_privilege('worldatlas_app',c.oid,'SELECT') app_select,has_sequence_privilege('worldatlas_app',c.oid,'UPDATE') app_update FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND c.relkind='S' ORDER BY c.relname`);
  const function_permissions=await query(`SELECT p.proname name,pg_get_function_identity_arguments(p.oid) arguments,pg_get_userbyid(p.proowner) owner,${canonicalACL('p.proacl','p.proowner','f')} acl,p.prosecdef security_definer,p.proconfig settings FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='public' AND p.prokind IN ('f','p') ORDER BY p.proname,arguments`);
- return {database_acl,default_acls,identity,revision,catalog_sha256:sha(JSON.stringify(catalog)),collections:proofs,owner_registry:registry,owner_registry_sha256:sha(JSON.stringify(registry)),permissions,sequence,sequence_permissions,function_permissions,...(compact?{profile,compact_storage:compactStorage}:{} )};
+ return {database_acl,default_acls,column_permissions,identity,revision,catalog_sha256:sha(JSON.stringify(catalog)),collections:proofs,owner_registry:registry,owner_registry_sha256:sha(JSON.stringify(registry)),permissions,sequence,sequence_permissions,function_permissions,...(compact?{profile,compact_storage:compactStorage}:{} )};
 }
 
 // pg_restore clears search_path, but frozen PL/pgSQL helpers resolve public
@@ -280,9 +282,10 @@ export function isolatedOriginalChecks(schema){
 
 export function assertCurrentInventory(inventory,marker){
  const profile=recoveryProfileForMarker(marker);
- need(profile===compactRecoveryProfile?inventory.profile===profile:inventory.profile===undefined,'source-profile-drift');
+ need(profile!==originalRecoveryProfile?inventory.profile===profile:inventory.profile===undefined,'source-profile-drift');
  need(inventory.identity.database_name==='neondb'&&inventory.revision===marker.revision&&inventory.catalog_sha256===marker.catalog_sha256,'source-identity-or-catalog-drift');
- need(storageExportV2Collections.every(k=>inventory.collections[k].count===marker.counts[k]),'source-count-drift');
+ const collections=Object.keys(recoveryBaseContract(profile).definitions);
+ need(same(Object.keys(inventory.collections).sort(),[...collections].sort())&&collections.every(k=>inventory.collections[k].count===marker.counts[k]),'source-count-drift');
  need(inventory.collections.geographic_releases.ordered_rows_sha256===marker.geographic_releases_sha256&&inventory.collections.footprint_versions.ordered_rows_sha256===marker.footprint_versions_sha256,'source-release-drift');
 }
 export function assertRestoredInventory(before,target,after){

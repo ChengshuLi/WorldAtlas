@@ -238,7 +238,11 @@ export function reviewedTestPlan(request, {base, head, entries, files, definitio
   for (const [consumer, operand] of [
     ['test/current-rebind-product-custody.test.mjs', 'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json'],
     ['test/local-workspace.test.mjs', 'docs/LOCAL_WORKSPACES.md'],
-    ['test/regional-research-gate.test.mjs', 'data/research-geography-gate.json']
+    ['test/regional-research-gate.test.mjs', 'data/research-geography-gate.json'],
+    ['test/current-postgres-recovery.test.mjs', 'coordination/publication/cloudflare-history.json'],
+    ...['test/neon-forward-migrations.test.mjs', 'test/compact-membership-profile.test.mjs', 'test/merge-integration.test.mjs'].flatMap(consumer =>
+      ['coordination/publication/cloudflare-history.json', 'data/observation-registry-history/base-v1.json',
+        'data/research-geography-gate.json', 'data/hosted-type-catalog.json'].map(operand => [consumer, operand]))
   ]) if (tests.includes(consumer)) {
     need(definition.verification_paths.includes(operand), 'Current reviewed operand lacks its verification declaration: ' + operand);
     if (!inputs.includes(operand)) inputs.push(operand);
