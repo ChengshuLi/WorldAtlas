@@ -16,6 +16,7 @@ import {releaseAcceptedCheckpoint} from './accepted-selected-checkpoint.mjs';
 import {repairComponentKey, compareRepairComponents} from '../src/native-grid.js';
 import {scientificNativeSelection,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
 import {prepareReferenceMetadataProjection,validateReferenceMetadataProjection} from './selected-reference-metadata.mjs';
+import {isReferenceAliasReceipt} from '../src/reference-metadata.js';
 import {validatePackageInputs, selectedCumulativePackageRoles, admitSelectedPackageDeclarations} from './package-inputs.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
 import {coordinateBounds, normaliseRetainedRepairLedger, compareVersionedRepairLedgers, verifyCompletedSourceTargetNativeAuthority, mergeCompletedNativePatches, verifyCurrentRebindExecution, CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
@@ -973,8 +974,6 @@ export function prepareReferenceMetadata(config, reader) {
     .map(key => [key, row[key]])), native)), 'Current reference registry omits the exact original native release');
   const reference = Object.fromEntries(['id', 'footprints_sha256', 'hierarchy_sha256'].map(key => [key, current[key]]));
   const migrationPins=new Set(Object.values(current.metadata?.metadata_migration_sha256??{}));
-  need(config.receipts.every(pin=>migrationPins.has(pin.sha256)),
-    'Current reference release does not bind every applied metadata receipt');
   read(config.hierarchy.before, 'original complete hierarchy'); read(config.hierarchy.after, 'current complete hierarchy');
   for (const pin of config.receipts) read(pin, 'existing reference correction receipt');
   for (const update of config.source_updates) {
@@ -983,6 +982,8 @@ export function prepareReferenceMetadata(config, reader) {
   }
   const projection = prepareReferenceMetadataProjection({selection, manifest, owners: JSON.parse(ownersRaw), reference,
     hierarchy: config.hierarchy, receipts: config.receipts, source_updates: config.source_updates, read});
+  need(config.receipts.every(pin=>migrationPins.has(pin.sha256) || isReferenceAliasReceipt(json(pin, 'existing reference correction receipt'))),
+    'Current reference release does not bind every applied metadata receipt');
   return {products: {'reference-metadata.json': jsonBytes(projection)},
     input_inventory: [...inventory.values()].map(({pin, roles}) => ({...pin, roles, whole_body_consumed: true}))};
 }

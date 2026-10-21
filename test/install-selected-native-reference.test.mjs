@@ -3,7 +3,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import {gzipSync} from 'node:zlib';
+import {prepareReferenceMetadataProjection} from '../scripts/selected-reference-metadata.mjs';
+import {footprintHash} from '../scripts/check-prepared.mjs';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {selectedNativeReference,composeEvidence,applyInstall,retainHistoricalMacroReview,validateMetadataStages} from '../scripts/install-macro-reference.mjs';
@@ -199,3 +202,79 @@ test('an unchanged member cannot acquire unreceipted history while retaining its
  const row=after.features[1].properties;row.metadata.reference_corrections.push(correction('retained','old','new'),correction('retained','new','old'));assert.equal(row.parent_id,'old');
  assert.throws(()=>validateMetadataStages(before,after,[file],{mode:'reference-correction'}),/Unreceipted location properties/);
 }));
+
+// Private synthetic registration exercises the real installer, not geographic
+// qualification. All executable bodies are copied unchanged from this candidate.
+async function aliasInstallerFixture(t,{referenceVersion=3}={}){
+ const repo=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-alias-install-')));t.after(()=>fs.rmSync(repo,{recursive:true,force:true}));
+ const git=(...args)=>execFileSync('git',['-C',repo,...args],{stdio:['ignore','pipe','pipe']}).toString().trim();git('init');git('config','user.name','Fixture');git('config','user.email','fixture@example.invalid');
+ const write=(name,value)=>{const raw=Buffer.isBuffer(value)?value:Buffer.from(JSON.stringify(value));fs.mkdirSync(path.dirname(path.join(repo,name)),{recursive:true});fs.writeFileSync(path.join(repo,name),raw);return raw;};
+ const commit=()=>{git('add','.');git('commit','-m','Synthetic reference alias fixture');return git('rev-parse','HEAD');};
+ const read=p=>execFileSync('git',['-C',repo,'show',p.commit+':'+p.path],{maxBuffer:32*1024*1024});
+ const pin=(name,version)=>{const raw=read({path:name,commit:version}),[mode,,oid]=git('ls-tree',version,'--',name).split(/[ \t]/);return {commit:version,path:name,mode,git_blob_oid:oid,bytes:raw.length,sha256:sha(raw)};};
+ for(const name of ['hosted/geographic-releases.js','scripts/check-prepared.mjs','scripts/evidence-quality.mjs','scripts/evidence/encode-json.mjs','scripts/install-macro-reference.mjs','scripts/native-ownership/read-pinned-build-file.mjs','scripts/native-ownership/require-verified-selection.mjs','scripts/prepare-geographic-release.mjs','scripts/prepare-macro-review-projection.mjs','scripts/prepare-reference-macro-binding.mjs','scripts/read-geographic-release-manifest.mjs','scripts/selected-reference-metadata.mjs','scripts/validate-evidence-revalidation-chain.mjs','src/category-palette.js','src/environment-classifications.js','src/model.js','src/ownership-method.js','src/prepared-evidence.js','src/reference-metadata.js'])write(name,fs.readFileSync(new URL('../'+name,import.meta.url)));
+ write('package.json',{type:'module'});
+ const units=[],features=[],owners=[];
+ for(let i=0;i<6;i++){
+  for(const [j,level]of ['continent','subcontinent','region','area','province'].entries())units.push({id:level+i,name:level+i,level,parent_id:j?['continent','subcontinent','region','area'][j-1]+i:null});
+  features.push({type:'Feature',id:'L'+i,properties:{id:'L'+i,name:'Location '+i,parent_id:'province'+i,reference_owner:'Recorded winner',metadata:{reference_version:i===0?referenceVersion:i===5?4:3,reference_polity:'Stale alias',reference_owner_id:'owner:Q1',reference_owner_evidence:{winner:{owner_id:'owner:Q1',name:'Recorded winner',share:.75}},semantic_review:{status:'open'}}},geometry:{type:'Polygon',coordinates:[[[i,0],[i+1,0],[i+1,1],[i,0]]]}});
+  owners.push({id:'L'+i,index:i+1,province_id:'province'+i,province_index:i+1});
+ }
+ const source='geography/fixture.json',index={parts:[source]},originalHierarchy=write('data/hierarchy.json',units);write('data/world-index.json',index);write('data/'+source,{type:'FeatureCollection',features});
+ const ownerRaw=write('inputs/owners.json.gz',gzipSync(Buffer.from(JSON.stringify(owners)))),origin=commit();
+ const native={id:'geography:fixture-native',hierarchy_sha256:sha(originalHierarchy),footprints_sha256:footprintHash(features)};
+ const manifest=JSON.parse(fs.readFileSync(path.join(fixtureDirectory,'native-manifest.json')));Object.assign(manifest,{geographic_release:native.id,hierarchy_sha256:native.hierarchy_sha256,footprints_sha256:native.footprints_sha256});manifest.original_assets.bounds={...pin('inputs/owners.json.gz',origin),sha256:sha(ownerRaw)};
+ const manifestRaw=write('data/native-fixture.json',manifest),manifestSha=sha(manifestRaw),products=[{path:'manifest.json',bytes:manifestRaw.length,sha256:manifestSha},...manifest.parts.map(p=>({path:p.path,bytes:p.bytes,sha256:p.sha256}))];
+ const receiptPath='coordination/engineering/alias-fixture/native-receipt.json';write(receiptPath,{method:manifest.method,baseline_commit:manifest.provenance?.baseline_commit,preparation_commit:manifest.provenance?.evaluation_commit,checked_rows:manifest.size,checked_cells:manifest.size**2,unchecked_cells:0,checked_runs:manifest.runWords/2,owned_cells:manifest.accounting?.owned_cells,owners:manifest.accounting?.owners,installation_ready:false,products,two_run_products:products.length,run_one_sha256:sha(Buffer.from(JSON.stringify(products))),run_two_sha256:sha(Buffer.from(JSON.stringify(products)))});const proof=commit();
+ write('scripts/native-ownership/verified-candidates.json',{version:1,candidates:{[manifestSha]:{...pin(receiptPath,proof),role:'reviewed-exhaustive-native-rule-comparison',installation_approval:false}}});
+ const bank={version:1,kind:'complete-world-index-with-exact-encoded-overrides',release_id:native.id,native_manifest_sha256:manifestSha,world_index:pin('data/world-index.json',origin),unchanged_files:[pin('data/'+source,origin)],overrides:[]},bankRaw=write('inputs/bank.json',bank);
+ const selection={version:1,method:manifest.method,manifest_path:'data/native-fixture.json',release_id:native.id,sha256:manifestSha,selected_geography:{path:'inputs/bank.json',bytes:bankRaw.length,sha256:sha(bankRaw)}};
+ const currentUnits=structuredClone(units);currentUnits[4].name='Current province';const currentHierarchy=write('data/hierarchy.json',currentUnits),reference={...native,id:'geography:fixture-current',hierarchy_sha256:sha(currentHierarchy)};
+ const common={footprints_sha256_before:native.footprints_sha256,footprints_sha256_after:native.footprints_sha256,reference_only:true,historical_claims_transferred:false,summary:{geometry_changes:0},relationships:[],retired_units:[],source_evidence:[{url:'https://example.invalid/retained',source_sha256:pin('data/'+source,origin).sha256}]};
+ const oldReceipt={...common,before_sha256:native.hierarchy_sha256,after_sha256:reference.hierarchy_sha256,before_units:units,group_changes:[{id:units[4].id,before:units[4],after:currentUnits[4]}],changed_location_properties:[]};write('inputs/prior-receipt.json',oldReceipt);const prior=commit();
+ const projection=prepareReferenceMetadataProjection({selection,manifest,owners,reference,hierarchy:{before:pin('data/hierarchy.json',origin),after:pin('data/hierarchy.json',prior)},receipts:[pin('inputs/prior-receipt.json',prior)],source_updates:[],read});
+ const projectionRaw=write('inputs/projection.json',projection);selection.reference_projection={path:'inputs/projection.json',bytes:projectionRaw.length,sha256:sha(projectionRaw)};write('data/ownership-selection.json',selection);
+ const release={version:1,releases:[{...native,version:1},{...reference,version:2,expected_counts:{location:6},metadata:{metadata_migration_sha256:{prior:pin('inputs/prior-receipt.json',prior).sha256}}}],batches:[]};write('data/geographic-releases/index.json',release);
+ for(const name of ['world-review.json','global-semantic-closure.json.gz','macro-foundation/current-membership-inventory.json.gz','prepared-evidence/imports/index.json','demographic-evidence/revalidation.json','dated-reference-names/revalidation.json','ownership-history/original.json'])write('data/'+name,{retained:name});
+ const pixel={footprints_sha256:reference.footprints_sha256,hierarchy_sha256:reference.hierarchy_sha256,method:manifest.method,native_manifest:{sha256:manifestSha}};write('data/pixel-audit.json',pixel);
+ const evidence={footprints_sha256:reference.footprints_sha256,hierarchy_sha256:reference.hierarchy_sha256,location_index_sha256:sha(Buffer.from(JSON.stringify(index))),products:[]};write('data/prepared-evidence/index.json',evidence);
+ const audit={input_sha256:Object.fromEntries(['hierarchy.json','world-index.json',source].map(p=>[p,sha(fs.readFileSync(path.join(repo,'data',p)))])),counts:{location:6},locations_audited:[{id:'L0',result:'retained'}],coarse_units:[],small_units:[]};write('data/granularity-audit.json',audit);
+ for(const p of ['hierarchy.json','world-index.json'])write('after/'+p,fs.readFileSync(path.join(repo,'data',p)));
+ const next=structuredClone(features);next[0].properties.metadata.reference_polity='Recorded winner';write('after/'+source,{type:'FeatureCollection',features:next});
+ const alias={...common,before_sha256:reference.hierarchy_sha256,after_sha256:reference.hierarchy_sha256,before_units:currentUnits,group_changes:[],changed_location_properties:[{location_id:'L0',before_properties:features[0].properties,after_properties:next[0].properties}]};write('alias-receipt.json',alias);commit();
+ const api=await import(pathToFileURL(path.join(repo,'scripts/install-macro-reference.mjs')));
+ return {repo,write,api,source,audit,pixel,evidence,release,alias,features,next,options:{data:path.join(repo,'data'),geographyData:path.join(repo,'after'),releaseData:path.join(repo,'data/geographic-releases'),stage:path.join(repo,'stage'),receipts:[path.join(repo,'alias-receipt.json')],metadataMode:'reference-correction',repository:repo}};
+}
+
+test('actual alias installer changes only source and audit pins, preserving M, N and historical evidence',async t=>{
+ const f=await aliasInstallerFixture(t),baseline=fs.readFileSync(path.join(f.repo,'data/geographic-releases/index.json'));
+ const prepared=await f.api.prepareInstall(f.options);
+ assert.deepEqual(Object.keys(prepared.report.writes).sort(),[f.source,'granularity-audit.json']);assert.deepEqual(prepared.report.archives,[]);
+ for(const p of ['pixel-audit.json','prepared-evidence/index.json','prepared-evidence/imports/index.json','demographic-evidence/revalidation.json','dated-reference-names/revalidation.json'])assert.equal(prepared.report.preserved[p],sha(fs.readFileSync(path.join(f.repo,'data',p))));
+ const audit=JSON.parse(fs.readFileSync(path.join(prepared.stage,'after/granularity-audit.json'))),expected=structuredClone(f.audit);expected.input_sha256[f.source]=sha(fs.readFileSync(path.join(f.repo,'after',f.source)));assert.deepEqual(audit,expected);
+ assert.equal(prepared.report.release_id,f.release.releases.at(-1).id);assert.equal(prepared.report.ownership_recompiled,false);
+ assert.throws(()=>f.api.applyInstall(prepared,{expectedValidation:prepared.validation_sha256,failAfter:1}),/Injected metadata install failure/);
+ assert.deepEqual(JSON.parse(fs.readFileSync(path.join(f.repo,'data',f.source))).features,f.features);
+ assert.equal(f.api.applyInstall(prepared,{expectedValidation:prepared.validation_sha256}).applied,true);
+ assert.deepEqual(JSON.parse(fs.readFileSync(path.join(f.repo,'data',f.source))).features,f.next);
+ assert.deepEqual(fs.readFileSync(path.join(f.repo,'data/geographic-releases/index.json')),baseline);
+ assert.deepEqual(JSON.parse(fs.readFileSync(path.join(f.repo,'data/ownership-history/original.json'))),{retained:'ownership-history/original.json'});
+});
+
+test('actual alias installer refuses stale audit, changed source inventory and hidden fields before staging',async t=>{
+ for(const mutate of [
+  f=>{f.audit.input_sha256[f.source]='0'.repeat(64);f.write('data/granularity-audit.json',f.audit);},
+  f=>{f.pixel.hierarchy_sha256='0'.repeat(64);f.write('data/pixel-audit.json',f.pixel);},
+  f=>{f.evidence.location_index_sha256='0'.repeat(64);f.write('data/prepared-evidence/index.json',f.evidence);},
+  f=>f.write('after/'+f.source,{type:'FeatureCollection',extra:'hidden',features:f.next}),
+  f=>f.write('after/'+f.source,{type:'FeatureCollection',features:[...f.next].reverse()}),
+  f=>{f.next[0].properties.metadata.semantic_review.status='approved';f.alias.changed_location_properties[0].after_properties=f.next[0].properties;f.write('alias-receipt.json',f.alias);f.write('after/'+f.source,{type:'FeatureCollection',features:f.next});},
+  f=>{f.release.releases.at(-1).metadata.metadata_migration_sha256={};f.write('data/geographic-releases/index.json',f.release);},
+ ]){const f=await aliasInstallerFixture(t);mutate(f);await assert.rejects(()=>f.api.prepareInstall(f.options));assert.equal(fs.existsSync(f.options.stage),false);}
+});
+
+test('alias audit reuse refuses changed created features without rejecting unchanged created features',async t=>{
+ const f=await aliasInstallerFixture(t,{referenceVersion:4});
+ await assert.rejects(()=>f.api.prepareInstall(f.options),/Alias audit reuse requires an original reference-version-3 feature/);
+ assert.equal(fs.existsSync(f.options.stage),false);
+});
