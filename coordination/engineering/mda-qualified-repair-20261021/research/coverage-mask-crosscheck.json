@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "kind": "mda-original-coverage-mask-crosscheck",
+  "result": "verified",
+  "original_request": {
+    "path": "inventory/mda-research-handoff/unpacked/mda-1986-original-keys.json",
+    "count": 1986,
+    "land_labels": 1986,
+    "water_labels": 0,
+    "coordinate_set_sha256": "ac424a0ca481905bdb01a6464a16367e06730b29b0cc9dd16942d9cd2e05eefe"
+  },
+  "drafted_source_coverage": {
+    "path": "inventory/mda-source-evidence-preparation/source-evidence-config-draft.json",
+    "target_count": 16,
+    "run_tuple_count": 1986,
+    "coverage_classes": [
+      "mapped_land_support"
+    ],
+    "coordinate_set_sha256": "ac424a0ca481905bdb01a6464a16367e06730b29b0cc9dd16942d9cd2e05eefe",
+    "missing_original": 0,
+    "extra_not_original": 0
+  },
+  "retained_mask_witness": {
+    "path": "inventory/mda-research-handoff/unpacked/retained/mda-retained-witness-join.json.gz",
+    "decoded_kind": "mda-original-retained-source-physical-water-factual-join",
+    "interval_rows": 539,
+    "physical_support_path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-022.json.gz",
+    "physical_support_git_blob_oid": "6473fa0629f974d76909d8d5db126ab6fea02cfd",
+    "physical_support_decoded_sha256": "815ab60ec3bfbda0c2734bc4d4f96b384dbee468abca4e5f4ac0dcbf04d04fbb",
+    "inland_water_path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-022.json.gz",
+    "inland_water_git_blob_oid": "81411b27437b95b18314fbeb8c7e6a40f0e51c94",
+    "inland_water_decoded_sha256": "8e24dc8a720d6e71dd546dc3cf627d37c90afd4fc76ebeb1afc15512e2a6a891"
+  },
+  "join_counts": {
+    "requested_cells_in_land_support": 1986,
+    "requested_cells_in_water_support": 0,
+    "requested_cells_outside_both_masks": 0,
+    "land_water_mask_overlap": 0
+  },
+  "limits": [
+    "This validates the drafted coverage classes against the retained original physical-support mask witness. It does not itself establish whole-target physical qualification or native qualification.",
+    "The physical-input canonical join and actual physical producer receipt are separate inputs.",
+    "ROU payload body and the absent historical code-tree metadata were reported resolved by the author; no retry or source execution was performed here."
+  ]
+}
