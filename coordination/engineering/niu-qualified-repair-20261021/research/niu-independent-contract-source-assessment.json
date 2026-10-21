@@ -1,0 +1,191 @@
+{
+  "kind": "niu-bounded-independent-contract-and-source-assessment-v1",
+  "performed_at": "2026-10-21",
+  "public_custody": {
+    "repair_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/2592",
+    "latest_checkpoint": "https://github.com/ChengshuLi/WorldAtlas/issues/2592#issuecomment-6302300649",
+    "latest_checkpoint_fact": "Issue #2592 comment 6302300649 was an earlier snapshot saying root acceptance was pending at that time. PR #2593 later received root acceptance comment 6302405289 for a documented-unresolved disposition; subsequent audit #2649 suspended that recent unresolved completion credit pending substantive evidence review. Do not count the historical NIU completion as current credit. This assessment creates no new credit or disposition.",
+    "historical_source_only_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/134",
+    "source_only_issue_status": "closed/completed; its one regional-review reservation was released at comment 5971001351; source-only PR #617 is merged. Issue #134 was 24-location read-only source/semantic review, not this repair package.",
+    "nonoverlap_limits": "The 47-cell gb-NIU-ADM1--physical-interpretation companion is a distinct package, excluded from repair. No present assignment or acceptance was created by this read-only assessment.",
+    "historical_root_receipt": "https://github.com/ChengshuLi/WorldAtlas/pull/2593#issuecomment-6302405289",
+    "current_audit_status": "https://github.com/ChengshuLi/WorldAtlas/issues/2649; NIU is listed among the 44 suspended recent completion cases. The audit says pending investigation is distinct from a substantiated unresolved completion."
+  },
+  "original_contract": {
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "queue_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "package": "gb-NIU-ADM1--repair-evaluation",
+    "scope": {
+      "land_cells": 116,
+      "inland_water_cells": 0,
+      "intervals": 50,
+      "owners": [
+        7126
+      ],
+      "block": 35,
+      "original_source_features": [
+        47591,
+        47592,
+        47593,
+        47597,
+        47598,
+        47599,
+        47600,
+        47602
+      ]
+    },
+    "completion": "Every exact interval must be either a qualified additive repair to its recorded location or a documented exception; actual selected-native conservation and source/physical witness checks are required. Existing river water remains location-owned.",
+    "positive_qualification_predicates": [
+      "Preserve exact original 116 key / 50 interval identity and owner; no reassignment.",
+      "Establish relevant source member identity and role for the recorded village targets, retained territorial exclusions and complete relevant source competitors.",
+      "Use actual whole-target source/physical witnesses for the eight contacted original source members; retained masks or point-contact records are not a physical receipt.",
+      "Produce successful stock source-evidence and native-authority/conservation results for any positive candidate, preserving every unsupported/held original key.",
+      "Do not treat the separate 47-cell physical companion or regional source-only review as the repair result."
+    ]
+  },
+  "primary_source_read": {
+    "official_2022_census_url": "https://niuestatistics.nu/population/niue-census-of-population-and-housing-2022/",
+    "stored_body_path": "inventory/niu-audit-handoff/extracted/primary/primary-pages-web-read.json",
+    "actual_content": "The Niue Statistics Office 2022 census page identifies the 2022 enumeration and publishes census-night population by village (Table 1.2 and Table 1.3), listing the same 14 village names as the original source roster.",
+    "source_vintage_context": "PDH page for 2011 Niue PHC administrative boundaries says the boundaries were used to conduct the 2011 population and housing census, labels the level Villages, and says they were used in PopGIS3. It includes a disclaimer that upper-level units may differ slightly from official boundaries and shown boundaries/codes/names do not imply SPC endorsement. The separate geoBoundaries metadata declares represented year 2020, 14 ADM1/village features, source PDH, and CC BY 4.0; represented-year/publication metadata is not proof that geometry was surveyed or substantively revised in 2020.",
+    "interpretation": "The 2022 census is positive evidence that the 14 village names remain in statistical use; it does not corroborate exact boundaries or prove the applicable geometrical variant. The old source-only #134 assessment raised a country/island aggregate versus local partition role concern and did not approve interiors or source completeness."
+  },
+  "stored_same_release_comparison": {
+    "evidence_path": "inventory/niu-audit-handoff/extracted/source-contact-results.json",
+    "method_status": "Read existing output only; no scanner, geometry, observation or producer rerun.",
+    "original_simplified": {
+      "feature_count": 14,
+      "matching_original_keys": 116,
+      "unique_matches": 116,
+      "ties": 0
+    },
+    "same_release_full": {
+      "feature_count": 14,
+      "matching_original_keys": 101,
+      "unique_matches": 101,
+      "ties": 0,
+      "original_keys_without_full_hit": 15
+    },
+    "full_noncontacts_by_original_village": {
+      "Mutalau": 6,
+      "Vaiea": 6,
+      "Hikutavake": 1,
+      "Makefu": 1,
+      "Tamakautoga": 1
+    },
+    "meaning": "All 15 are exact native-center contact differences between two representations sharing the same 14-feature roster; they do not identify 15 new/dropped villages. This is material geometric representation sensitivity. It is not automatically a 101-positive/15-held partition and does not itself establish which geometry is applicable, physical agreement, territorial authority, or qualification. Use the original simplified product as the original contract input while retaining the full same-release output as adverse comparative evidence until actual physical/source evidence resolves per-key implications."
+  },
+  "accepted_semantic_aggregation": {
+    "records": "inventory/niu-audit-handoff/extracted/retained/accepted-semantic-changes.json and retained/canonical-NIU-feature.json",
+    "finding": "The retained one-step NIU semantic replacement maps all 14 original NIU ADM1 village source IDs into existing atlas:territory:NIU (owner 7126); the original 14 source IDs match the canonical source_member_ids. This supports retained aggregation membership/reference continuity, not geometry, current boundary applicability, or rights/legal clearance.",
+    "source_payload": "Exact public geoBoundaries simplified payload OID 0846aee08451e6c2dbe2553fb871b7e362a3f192; 3,251 compressed bytes / SHA-256 396f6e10e5ab71cbb1eae927f47a518511ae1d485cc057a6eeaa97395ca8f7e3; 14,444 decoded bytes / SHA-256 4bf1e8967a32d43da06c12e43bf99ea35c704aa00ffaaa821f63728335088b13. Same-release full geometry: 111,310 bytes / SHA-256 e944ea8ad2249b8bde9d53ce75bdd5bd44d365516c541fcb78cb80b3a47b51ea."
+  },
+  "other_retained_facts_and_limits": {
+    "current_owner_observation": "Existing prior stock observation reports 116/116 effective owner fields zero and no product overlap; this is current literal assignment only, not qualification or credit.",
+    "retained_source_membership": "Eight of 14 features contact original keys; the other six remain relevant as complete family competitors. Existing block scan counts are 163 same-owner candidates, 137 with any of eight package features, 21 not in physical support, and exactly 116 matching land package cells; these are retained mask counts, not physical proof.",
+    "prior_current_claim": "The exact older author branch/PR work has already delivered; #2592 still states root acceptance pending. This review makes no ownership reservation, no accepted-credit claim, and no root acceptance determination.",
+    "access": "Earlier PDH dataset/package and Niue microdata routes returned HTTP 403 and were stopped; the handoff supplies lawful public geoBoundaries source bodies plus public Niue Statistics census page. No denied route was retried or bypassed.",
+    "nonclaims": [
+      "No original or full source geometry was reprocessed in this assessment.",
+      "No positive qualification, documented-exception completion, repair credit or hold removal.",
+      "No complete foreign competitor scan, selected native conservation, source/physical witness, or fresh owner observation.",
+      "No rights, legal territorial or current-boundary conclusion."
+    ]
+  },
+  "source_choice_assessment": {
+    "kind": "retained-evidence-assessment-no-rescan",
+    "existing_comparison": "inventory/niu-audit-handoff/extracted/source-contact-results.json",
+    "original_source_payload": {
+      "path": "inventory/niu-audit-handoff/extracted/primary/gb-original.geojson",
+      "sha256": "4bf1e8967a32d43da06c12e43bf99ea35c704aa00ffaaa821f63728335088b13",
+      "basis": "Exact original queue input: simplified NIU ADM1 family, 14 villages; existing retained scan reports unique source-ID contacts for all 116 package keys, zero ties."
+    },
+    "same_release_full_variant": {
+      "path": "inventory/niu-audit-handoff/extracted/primary/gb-full.geojson",
+      "sha256": "e944ea8ad2249b8bde9d53ce75bdd5bd44d365516c541fcb78cb80b3a47b51ea",
+      "basis": "Existing retained comparison reports 101 unique contacts and 15 noncontacts (Mutalau 6, Vaiea 6, Hikutavake 1, Makefu 1, Tamakautoga 1), zero ties; same 14 feature IDs/names."
+    },
+    "what_metadata_establishes": [
+      "geoBoundaries metadata explicitly exposes a separate simplifiedGeometryGeoJSON URL, records boundaryYearRepresented=2020, sourceDataUpdateDate 2023-01-19, buildDate 2023-12-12, source Pacific Data Hub, source URL to the 2011 Niue census village-boundary dataset, and CC BY 4.0.",
+      "The PDH page says the dataset was issued 2011 and that village boundaries were used for the 2011 population and housing census and PopGIS3; it cautions upper units may slightly differ from official boundaries and that displayed boundaries/codes/names do not imply SPC endorsement.",
+      "Niue Statistics Office 2022 census table lists the same 14 village names and population counts. This supports continuity of the statistical village roster, not exact spatial boundaries."
+    ],
+    "assessment": "The simplified file is the exact representation specified by the original package, so the full same-release geometry is comparative adverse evidence, not an automatic substitute or veto. The metadata supports that the products are distinct simplified/full representations from the same release, but does not document a simplification tolerance or explain these 15 specific contact differences. The 2022 census corroborates names only. Thus neither the full product mismatch alone nor the simplified 116/116 contact scan alone settles per-key source applicability. Keep the 15 keys visible for the source/physical review; do not split them mechanically into held versus positive or silently use the full product instead of the original operand.",
+    "remaining_positive_predicates": [
+      "Resolve source applicability to the original recorded village targets using the documented 2011 census-village role and any retained whole-target source/physical evidence; name continuity does not prove exact boundaries.",
+      "Assess all 15 representation-sensitive keys using the actual whole-target physical/source witness results and complete relevant competitors. This reviewer did not rerun those checks; bra_review owns the distinct physical/source preparation.",
+      "Any positive subset still needs the stock source-evidence/native-authority and selected-native conservation path; no prior historical owner-zero observation qualifies cells."
+    ],
+    "limits": [
+      "No source scanner, geometric comparison, physical producer, observer, or native authority producer was run for this assessment.",
+      "No evidence here proves that the full variant is more authoritative, that the simplified shifts are acceptable at each discrepant point, or that either variant reflects current official boundaries.",
+      "No complete foreign competitor census or rights/legal clearance is inferred."
+    ]
+  },
+  "competitor_and_parent_context": {
+    "original_family": {
+      "family_index": 241,
+      "family_id": "gb:NIU:ADM1",
+      "feature_count": 14,
+      "source_payload_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "source_payload_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-NIU-ADM1-000.bin.gz",
+      "payload_git_blob_oid": "0846aee08451e6c2dbe2553fb871b7e362a3f192",
+      "source_roster_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "package_members": [
+        47591,
+        47592,
+        47593,
+        47597,
+        47598,
+        47599,
+        47600,
+        47602
+      ],
+      "full_family_names": [
+        "Tuapa",
+        "Namukulu",
+        "Hikutavake",
+        "Toi",
+        "Mutalau",
+        "Lakepa",
+        "Liku",
+        "Hakupu",
+        "Vaiea",
+        "Avatele",
+        "Tamakautoga",
+        "Alofi South",
+        "Alofi North",
+        "Makefu"
+      ],
+      "ownership": "All 14 retained roster members map to owner index 7126; 8 source contacts are package members and 6 noncontact members remain part of the complete family context.",
+      "bounded_result": "The existing source scan is only the NIU family comparison; it does not establish absence of foreign source competitors."
+    },
+    "canonical_parent_context": {
+      "commit": "01fe271e2554b03675769701691fb3dc07442303",
+      "path": "data/geography/part-28.json",
+      "blob_oid": "a9e03cb07194a73f643af85d1e6db94abe3b5fc9",
+      "canonical_id": "atlas:territory:NIU",
+      "canonical_name": "Niue",
+      "parent_id": "framework:province:niue:41699e810a4a",
+      "source_membership": "All 14 NIU source IDs are listed in the canonical feature source_member_ids and the retained one-step semantic replacement; current original roster maps all 14 to owner7126.",
+      "new_zealand_reference": {
+        "metadata_reference_polity": "New Zealand",
+        "metadata_reference_polity_status": "reference",
+        "reference_owner_id": "owner:Q664",
+        "reference_territory": "Niue",
+        "classification": "Dependency",
+        "note": "Assoc. with N.Z.",
+        "uncertainty": true,
+        "interpretation": "This is an explicitly uncertain Natural Earth reference relationship, not a source-roster owner assignment. It does not itself establish an ownership conflict with Niue owner7126 or prove foreign-source overlap."
+      }
+    },
+    "foreign_competitor_scope": {
+      "contract_requires": "Retained territorial exclusions and complete relevant source competitors for the original 116 keys.",
+      "identifiable_context": "The source family is gb:NIU:ADM1. The canonical feature carries an uncertain New Zealand reference relationship; this identifies a question to retain, not a competing family or ownership conflict.",
+      "bounded_gap": "These retained files do not name or spatially test a complete set of foreign competitor families against the 116 keys. The source-contact scan explicitly excludes complete foreign competitor clearance. Do not claim disjointness or invent a New Zealand source-family index from the canonical reference_owner_id.",
+      "role_conflict_found": false,
+      "why": "Original roster owner index is 7126 for all 14 NIU ADM1 members; canonical feature is atlas:territory:NIU with reference_owner Niue. The separate Natural Earth metadata marks New Zealand as reference_polity/status reference and uncertainty=true. No retained NIU ownership record assigns these source members to New Zealand."
+    }
+  }
+}
