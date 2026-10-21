@@ -6,7 +6,8 @@ import path from 'node:path';
 import {materializePackageInputs, runPackageBuild, verifyPackageDependencies, assertPackageStage, inspectPackageRuntime, inspectPackageInputs} from '../scripts/package-build.mjs';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {selectedDataCheckoutPatterns} from '../scripts/package-inputs.mjs';
+import {selectedDataCheckoutPatterns, validatePackageInputs} from '../scripts/package-inputs.mjs';
+import {DatabaseSync} from 'node:sqlite';
 import {committedPackageInputs} from '../scripts/package-output-artifact.mjs';
 
 const fixturePreflight = async () => ({passed: true, errors: [], synthetic_package_boundary_fixture: true});
@@ -70,6 +71,41 @@ test('only declared files enter the source image; unrelated research cannot alte
   assert.equal(await fs.readFile(path.join(root, 'dist/value.json'), 'utf8'), '42');
   assert.equal(first.source_bytes, second.source_bytes);
   assert.deepEqual((await fs.readdir(path.join(root, '.cache'))).filter(name => name.startsWith('package-input-image-')), []);
+});
+
+test('package publication preserves local imports and exports only its generated comparison database', async t => {
+  const {root, definition} = await fixture(t, {program: `
+    import fs from 'node:fs';
+    import path from 'node:path';
+    import assert from 'node:assert/strict';
+    import {DatabaseSync} from 'node:sqlite';
+    assert.equal(fs.existsSync('data/atlas.sqlite'), false, 'Persistent local data must not enter the package image');
+    fs.mkdirSync('data');
+    const db = new DatabaseSync('data/atlas.sqlite');
+    db.exec("CREATE TABLE records(id TEXT PRIMARY KEY, value TEXT); INSERT INTO records VALUES ('seed', 'declared input');");
+    db.close();
+    const output = JSON.parse(fs.readFileSync('.github/package-inputs.json')).generated_outputs.find(name => name.endsWith('.sqlite'));
+    fs.mkdirSync(path.dirname(output), {recursive:true});
+    if (output !== 'data/atlas.sqlite') fs.renameSync('data/atlas.sqlite', output);
+    fs.mkdirSync('dist'); fs.writeFileSync('dist/value.json', '42');
+  `});
+  definition.generated_outputs = JSON.parse(await fs.readFile(new URL('../.github/package-inputs.json', import.meta.url))).generated_outputs;
+  await fs.writeFile(path.join(root, '.github/package-inputs.json'), JSON.stringify(definition));
+  await fs.mkdir(path.join(root, 'data'));
+  const localPath = path.join(root, 'data/atlas.sqlite'), local = new DatabaseSync(localPath);
+  local.exec("CREATE TABLE records(id TEXT PRIMARY KEY, value TEXT); INSERT INTO records VALUES ('local-import', 'unique retained evidence');");
+  local.close();
+  const before = await fs.readFile(localPath);
+  await runPackageBuild('static', {root, preflight: fixturePreflight});
+  assert.deepEqual(await fs.readFile(localPath), before, 'Every byte of the persistent local database is unchanged');
+  for (const [file, expected] of [[localPath, 'local-import'], [path.join(root, '.cache/package-atlas.sqlite'), 'seed']]) {
+    const db = new DatabaseSync(file, {readOnly:true});
+    try { assert.deepEqual(db.prepare('SELECT id FROM records').all().map(row => row.id), [expected]); }
+    finally { db.close(); }
+  }
+  assert.equal(await fs.readFile(path.join(root, 'dist/value.json'), 'utf8'), '42');
+  assert.deepEqual((await fs.readdir(path.join(root, '.cache'))).filter(name => name.startsWith('package-input-image-')), []);
+  assert.throws(() => validatePackageInputs({...definition, generated_outputs: ['data/atlas.sqlite']}), /Unsupported generated/);
 });
 
 test('undeclared reads and imports fail before replacing caller outputs and clean the image', async t => {

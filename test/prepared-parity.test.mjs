@@ -131,7 +131,7 @@ test('default-map static and server exports preserve complete state and attribut
  const years=[1444],owners=ownershipSnapshots(path.join(root,'data/ownership-history'),years),references=prepared(path.join(staticRoot,'reference-attributes'),'reference');
  const runtime=read(path.join(staticRoot,'ownership-runtime/index.json')),buckets=new Map();
  assert.equal(runtime.source_index_sha256,createHash('sha256').update(fs.readFileSync(ownerPath)).digest('hex'),'Static ownership is derived from the current prepared source');
- const db=new DatabaseSync(path.join(root,'data/atlas.sqlite'),{readOnly:true});
+ const db=new DatabaseSync(path.join(root,'.cache/package-atlas.sqlite'),{readOnly:true});
  try{
   const serverFeatures=db.prepare('SELECT id,name,parent_id,reference_owner,metadata,active FROM locations WHERE active=1 ORDER BY id').all().map(({metadata,...properties})=>({id:properties.id,properties:{...properties,metadata:JSON.parse(metadata)}}));
   const serverUnits=db.prepare('WITH RECURSIVE used(id) AS (SELECT parent_id FROM locations WHERE active=1 UNION SELECT u.parent_id FROM units u JOIN used x ON u.id=x.id WHERE u.parent_id IS NOT NULL) SELECT * FROM units WHERE id IN (SELECT id FROM used)').all().map(u=>({...u,metadata:JSON.parse(u.metadata)}));
