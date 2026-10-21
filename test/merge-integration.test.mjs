@@ -13,7 +13,7 @@ import {focusedIntegrationTest, integrationTestFiles, integrationNeedsBrowser, p
 import {renderClaim, githubAPI} from '../scripts/issue-claim-contract.mjs';
 import {reviewedTestPlan, prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile, integrationChanges, geographyRequired, createCandidate, cleanupCandidate, cleanupMergedHead} from '../scripts/merge-integration.mjs';
 
-import {EXECUTION_CODE} from '../scripts/check-unchanged-selected-geography.mjs';
+import {EXECUTION_CODE, REBIND_CODE} from '../scripts/check-unchanged-selected-geography.mjs';
 import {staticModuleClosure} from './helpers/static-module-closure.mjs';
 const sha = letter => letter.repeat(40);
 const FOCUSED_INTEGRATION_TESTS = integrationTestFiles('evidence', 0);
@@ -357,10 +357,12 @@ test('reviewed lists cannot omit actual packaged consumers when package source c
     assert.deepEqual(plan.checkout_patterns,fullCheckoutPatterns(f.packageInputs));
     entries.delete(required[0]);assert.throws(()=>reviewedTestPlan(request,context),/packaged consumer/);
   }
+  assert(REBIND_CODE.includes('scripts/worker-identity.mjs'),'Author support custody remains mandatory');
   // Use the actual declaration, not a synthetic allowlist. Author and scientific
   // comparison controls are not builder inputs; runtime and package policy are.
   for (const [source,consumer] of [
     ['scripts/local-workspace.mjs','test/local-workspace.test.mjs'],
+    ['scripts/worker-identity.mjs','test/local-workspace.test.mjs'],
     ['scripts/check-effective-geographic-regression.mjs','test/effective-geographic-regression.test.mjs']
   ]) {
     const required=['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];

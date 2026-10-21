@@ -781,7 +781,10 @@ for(const count of [3,16,64])test('genuine completed source/owner/component grow
   ...Array.from({length:count-3},(_,i)=>feature('D'+String(i).padStart(3,'0'),10+i))];
  const f=await trustedFixture(t,{nativeAppend:true,sourceFeatures}),baseline=await f.api.qualifyCheckpoint({reader:f.reader});
  assert.equal(baseline.state.certificate.entries.length,count);
+ const pin=f.pin;let physicalPinReads=0;
+ f.pin=(name,...args)=>{if(name==='appended/physical.json')physicalPinReads++;return pin(name,...args);};
  const next=await appendNativeAuthority(f,{completedConstructor:true,targetOwners:Array.from({length:count},(_,i)=>i)});
+ assert.equal(physicalPinReads,1,'One immutable physical descriptor serves every target');
  assert.equal(next.proof.source_rows.length,count);
  const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
  const transition=await f.api.qualifyTransition({state:baseline.state,reader});
