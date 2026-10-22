@@ -11,6 +11,7 @@ const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
 const P = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
 export const JOINT_CODE = Object.freeze([
   'scripts/run-geographic-check.py', 'scripts/geography-prefetch.mjs',
+  'scripts/package-startup-ownership.mjs','src/ownership-assets.js','src/ownership-method.js',
   'scripts/native-word-store.mjs','scripts/native-patch-store.mjs', 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',
   'src/native-grid.js', 'src/ownership-codec.js',
   P + 'selected-neighbor-prevention.mjs', P + 'selected-checkpoint.mjs', P + 'selected-joint-entry.mjs',
@@ -89,21 +90,10 @@ function executionGuard(repo, trusted) {
   });
 }
 
-export async function selectedJointStage(repo, trusted, baseline, candidate, destination, parentRuntimePath) {
-  demand(commit(baseline) && commit(candidate), 'Joint comparison requires immutable selected commits');
-  destination = path.resolve(destination); fresh(destination);
-  let phaseStarted = performance.now();
-  const phaseComplete = phase => {
-    const now = performance.now();
-    process.stderr.write(JSON.stringify({selected_joint_phase:phase, elapsed_ms:Math.round(now - phaseStarted)}) + '\n');
-    phaseStarted = now;
-  };
-  const code = executionGuard(repo, trusted);
-  const native = await import('../../../scripts/check-effective-geographic-regression.mjs');
+async function withSelectedComparison({repo,baseline,candidate,startup,phaseComplete,publicAccepted=false},consume) {
   const {compareSelectedCheckpointNative} = await import('../../../scripts/selected-checkpoint-native.mjs');
   const checkpoint = await import('./selected-checkpoint.mjs');
   const {valueBytes, valueSha} = await import('./selected-neighbor-prevention.mjs');
-  const startup = native.selectedBootstrap(repo, baseline, candidate, {parentRuntimePath});
   const {beforeReader, afterReader} = startup;
   const {createAcquisition} = await import('../../../scripts/geography-prefetch.mjs');
   let declaredPin;
@@ -138,12 +128,13 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
         transportInputs.push(checkpointTransportInput(afterReader, archiveName, {consume:false}).pin);
       }
       const token = process.env.GH_TOKEN;
-      if (!token) {
+      if (!token && (!publicAccepted || !archiveName)) {
         phaseComplete('checkpoint-acquisition');
         return coldDecision({cold:'baseline-and-candidate', reason:'Accepted checkpoint authenticated API access unavailable'});
       }
       const proof = await accepted.acquireAcceptedCheckpoint({repo:process.env.GITHUB_REPOSITORY ?? 'ChengshuLi/WorldAtlas',
         locator:locator.acceptance, token,
+        ...(!token?{api:accepted.acceptedCheckpointAPI(undefined,{publicReadOnly:true})}:{}),
         retainedArchive:archiveName ? () => {
           const input = checkpointTransportInput(afterReader, archiveName);
           transportInputs[archiveIndex] = input.pin;
@@ -168,7 +159,49 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
     phaseComplete('native-comparison');
     demand(nativeReport && ['native-regressions-found', 'no-new-native-loss'].includes(nativeReport.status),
       'Joint native consumer did not complete an actual comparison');
-    if (nativeReport.status === 'native-regressions-found') return result(nativeReport, null);
+
+    return await consume({transition,nativeReport,checkpoint,transportInputs,valueBytes,valueSha});
+  } finally {
+    if (state) checkpoint.releaseCheckpoint(state);
+    if (acceptedHandle) accepted.releaseAcceptedCheckpoint(acceptedHandle);
+  }
+}
+function coldDecision(decision) {
+  return {version:1, kind:'trusted-selected-joint-comparison-v1', mode:'legacy-cold-required',
+    reuse_unavailable:{cold:decision.cold, reason:decision.reason}, candidate_code_executed:false};
+}
+// The existing cold/software entry uses the same exhaustive comparison but has
+// no checkpoint destination or publication callback. It cannot mint a retained
+// acceptance product, and an unavailable current final state never replays v1.
+export async function inspectSelectedFinalBank(repo,baseline,candidate,startup) {
+  const answer=await withSelectedComparison({repo,baseline,candidate,startup,phaseComplete:()=>{},publicAccepted:true},
+    async ({transition,nativeReport,checkpoint})=>{
+      const genuine=checkpoint.authenticateTransition({transition});
+      demand(genuine.candidate.version===2,'Current final-bank report cannot downgrade to historical replay');
+      return {...nativeReport,candidate_code_executed:startup.beforeReader.git('-C',ROOT,'rev-parse','HEAD').toString().trim()!==baseline,
+        runtime:startup.runtime,caller_runtime:startup.callerRuntime,
+        execution_runtimes:startup.identities,execution_code_inventory:startup.executionCode};
+    });
+  demand(answer?.method==='selected-native-owner-conservation-v1',
+    'Current final ownership requires its authenticated accepted checkpoint: '+(answer?.reuse_unavailable?.reason??'comparison unavailable'));
+  return answer;
+}
+
+export async function selectedJointStage(repo, trusted, baseline, candidate, destination, parentRuntimePath) {
+  demand(commit(baseline) && commit(candidate), 'Joint comparison requires immutable selected commits');
+  destination = path.resolve(destination); fresh(destination);
+  let phaseStarted = performance.now();
+  const phaseComplete = phase => {
+    const now = performance.now();
+    process.stderr.write(JSON.stringify({selected_joint_phase:phase, elapsed_ms:Math.round(now - phaseStarted)}) + '\n');
+    phaseStarted = now;
+  };
+  const code = executionGuard(repo, trusted);
+  const native = await import('../../../scripts/check-effective-geographic-regression.mjs');
+  const startup = native.selectedBootstrap(repo, baseline, candidate, {parentRuntimePath});
+  const {beforeReader,afterReader}=startup;
+  return withSelectedComparison({repo,baseline,candidate,startup,phaseComplete},async({transition,nativeReport,checkpoint,transportInputs,valueBytes,valueSha})=>{
+    if(nativeReport.status==='native-regressions-found')return result(nativeReport,null);
     // Native comparison is the selected-map acceptance boundary. Do not build
     // or compare continuous polygon operands, including on no-change runs.
     const genuine = checkpoint.authenticateTransition({transition});
@@ -182,7 +215,9 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
       (a.commit + ':' + a.path).localeCompare(b.commit + ':' + b.path));
     const routes = valueBytes(checkpoint.checkpointRouteCensus({transition}));
     const routePin = {path:'checkpoint-routes.json', bytes:routes.length, sha256:sha(routes)};
-    const derivedFactsBase = {version:1, kind:'derived-selected-checkpoint-candidate-v1',
+    const final=genuine.candidate.version===2;
+    const profile={version:final?2:1,kind:final?'derived-selected-final-checkpoint-candidate-v2':'derived-selected-checkpoint-candidate-v1'};
+    const derivedFactsBase = {...profile,
       validation_stage:'native-passed', accepted_checkpoint:false,
       executing_commit:trusted, execution_code:code, runtime:startup.identities,
       baseline_accepted_execution:genuine.baseline.accepted_execution,
@@ -191,7 +226,10 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
       actual_reader_inventories:{baseline:inventory(beforeReader), candidate:inventory(afterReader)},
       baseline_commit:baseline, candidate_commit:candidate,
       baseline_selection:genuine.baseline.selection, candidate_selection:genuine.candidate.selection,
-      candidate_bindings:{ledger_sha256:valueSha(genuine.candidate.ledger), registry_sha256:valueSha(genuine.candidate.registry),
+      ...(final?{accepted_authorities:genuine.candidate.accepted_authorities}:{}),
+      candidate_bindings:final?{index:genuine.candidate.selection.prepared_bank,
+        manifest_sha256:genuine.candidate.baseSelection.sha256,effective_reference:genuine.candidate.selection.reference,
+        accepted_authorities_sha256:valueSha(genuine.candidate.accepted_authorities)}:{ledger_sha256:valueSha(genuine.candidate.ledger), registry_sha256:valueSha(genuine.candidate.registry),
         patch_sha256:valueSha(genuine.candidate.patch), manifest_sha256:valueSha(genuine.candidate.manifest)},
       native_result_sha256:valueSha(nativeReport), candidate_code_executed:false};
     const certificate = valueBytes(genuine.candidate.certificate);
@@ -199,7 +237,7 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
     const certificatePin = {path:'derived-certificate.json.gz', bytes:certificateEncoded.length,
       sha256:sha(certificateEncoded), decoded_bytes:certificate.length, decoded_sha256:sha(certificate)};
     const derivedFacts = valueBytes({...derivedFactsBase, certificate:certificatePin});
-    const derivedPublication = {version:1, complete:true, kind:'derived-selected-checkpoint-candidate-v1',
+    const derivedPublication = {...profile, complete:true,
       accepted_checkpoint:false, validation_stage:'native-passed', certificate:certificatePin,
       facts:{path:'derived-facts.json', bytes:derivedFacts.length, sha256:sha(derivedFacts)}, routes:routePin};
     const derivedPublicationBody = valueBytes(derivedPublication);
@@ -210,14 +248,7 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
       fs.writeFileSync(path.join(destination, name), body, {flag:'wx', mode:0o644});
     phaseComplete('checkpoint-output');
     return result(nativeReport, derivedPublication);
-  } finally {
-    if (state) checkpoint.releaseCheckpoint(state);
-    if (acceptedHandle) accepted.releaseAcceptedCheckpoint(acceptedHandle);
-  }
-  function coldDecision(decision) {
-    return {version:1, kind:'trusted-selected-joint-comparison-v1', mode:'legacy-cold-required',
-      reuse_unavailable:{cold:decision.cold, reason:decision.reason}, candidate_code_executed:false};
-  }
+  });
   function result(nativeReport, derivedCheckpoint) {
     return {version:1, kind:'trusted-selected-joint-comparison-v1', mode:'authenticated-checkpoint-append-v1',
       native:{...nativeReport, runtime:startup.runtime, caller_runtime:startup.callerRuntime,

@@ -30,8 +30,8 @@ const freeze = value => {
   return value;
 };
 
-export function acceptedCheckpointAPI(token, {fetchImpl = fetch} = {}) {
-  return githubAPI(token, {conditionalReads: false, fetchImpl});
+export function acceptedCheckpointAPI(token, {fetchImpl = fetch, publicReadOnly = false} = {}) {
+  return githubAPI(token, {conditionalReads: false, fetchImpl, publicReadOnly});
 }
 
 export async function acquireAcceptedCheckpoint({api, repo, locator, token, retainedArchive, fetchImpl = fetch}) {

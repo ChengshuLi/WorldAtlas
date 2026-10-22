@@ -20,9 +20,46 @@ Historical request fields remain literal provenance when reading original eviden
 without enforcing their old memory policy on current execution. Failed or partial
 products still cannot establish a successful result.
 
+## Current final-bank authoring
+
+After the support code is accepted, use the existing `finalize` command with
+`version: 2`, `selector: {commit, path: "data/ownership-selection.json"}` and
+`package_inputs: {commit, path: ".github/package-inputs.json"}` at the actual
+accepted selection. The initial conversion forbids new scientific or reference
+inputs. It retains N/M, exact E words and fixed compatibility files while making
+finished geometry/interval context explicit and issuing a truthful new E identity.
+Normal accepted-code joint validation, not the producer, admits the conversion.
+The first migration requires a new full package capture.
+
+For a later new native addition, version-2 `compose` takes the accepted selector
+and only the newly reviewed authorities' complete rule/binding/constructor/patch
+pins. It produces a new-evidence registry, not another cumulative ledger. Supply
+its whole pin as `change_evidence` to version-2 `finalize`. An unchanged hook is
+already accepted and contributes no new authorities. Legacy new-positive
+append/rebind methods are explicitly unsupported in this profile, not rerouted
+through an old selector. Existing reference-metadata preparation remains available;
+its complete new projection pin may be supplied as `reference_projection` without
+new cell authorities. Original N/source-contract changes require their genuine
+separate path, not an append exemption.
+
+Preparation reads the accepted final bank, applies only the proposed new intervals
+and emits the complete final bank/context. The ordinary joint consumer separately
+qualifies new evidence and exhaustively checks all changed and unchanged cells
+and context. It retains canonical prior authority identity/full-entry digest
+pairs without reacquiring their old bodies. No public preparation result is a
+scientific capability. Historical evidence remains in Git; `change_evidence` is a
+qualification input, not a browser/build product.
+
+The same staging, full-set preflight, exact interrupted resume and selector-last
+adoption below apply. The new expectations point to the complete current bank;
+there is no current-ledger expectation. Later final-to-final selected-data changes
+can use the existing eligible retained-package route. Unknown/restoration/checkpoint
+changes retain the ordinary full plan, and code changes never borrow old output
+as a new producer.
+
 ## Configurations and explicit commit boundaries
 
-Each config has `version: 1`. Input pins contain exact `commit`, `path`, ordinary
+The historical configurations below have `version: 1`. Input pins contain exact `commit`, `path`, ordinary
 `mode: "100644"`, `git_blob_oid` (or the existing `blob` spelling), `bytes`, and
 whole-file `sha256`. Git confirms the path/mode/OID before the bytes are consumed.
 No proposed input is called accepted merely because a hash matches.

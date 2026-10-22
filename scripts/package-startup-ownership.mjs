@@ -4,7 +4,11 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {isDeepStrictEqual} from 'node:util';
 import {gzipSync,gunzipSync} from 'node:zlib';
-import {bindPreparedNativeFeatures} from '../src/effective-footprint.js';
+import {bindPreparedNativeFeatures as bindPreparedNativeFeaturesPure,additiveBaseReference as additiveBaseReferencePure} from '../src/reference-metadata.js';
+import {canonicalValue} from '../src/native-grid.js';
+const footprintHash=value=>createHash('sha256').update(JSON.stringify(canonicalValue(value))+'\n').digest('hex');
+const bindPreparedNativeFeatures=(...args)=>bindPreparedNativeFeaturesPure(...args,footprintHash,bytes=>createHash('sha256').update(bytes).digest('hex'));
+const additiveBaseReference=data=>additiveBaseReferencePure(data,footprintHash);
 import {loadOwnershipAssets} from '../src/ownership-assets.js';
 import {shuffleOwnershipBytes, unshuffleOwnershipBytes} from '../src/ownership-codec.js';
 
@@ -69,8 +73,17 @@ export async function packageStartupOwnership({manifest, source, destination}) {
 // releases instead of renaming the entire bank for one changed ownership word.
 export async function packageFinalStartupOwnership({ownership, expectedReference, destination, previousParts=[]}) {
   const metadata=ownershipMetadata(ownership,{requireNative:true,expectedReference});
-  if(!(ownership.rows instanceof Uint32Array)||ownership.rows.length!==metadata.size*2
-    ||!(ownership.runs instanceof Uint32Array)||ownership.runs.length!==metadata.runWords)
+  const encoded=await encodeFinalOwnershipWords({ownership,destination,previousParts});
+  return {...encoded,pixelMap:{...metadata,...encoded.pixelMap}};
+}
+
+// Reference-free encoding arithmetic. A new E can bind these actual descriptors
+// without a provisional or circular claim that new words belong to old E/N.
+export async function encodeFinalOwnershipWords({ownership,destination,previousParts=[]}) {
+  const metadata=Object.fromEntries(['version','coordinateBits','size','runWords','method','native_latitudes','reference_owner_sha256'].filter(key=>Object.hasOwn(ownership,key)).map(key=>[key,ownership[key]]));
+  if(metadata.version!==2||metadata.method!=='native-linear-evenodd-first-owner-v1'||metadata.size!==262166||metadata.coordinateBits!==19
+    ||!(ownership.rows instanceof Uint32Array)||ownership.rows.length!==metadata.size*2
+    ||!(ownership.runs instanceof Uint32Array)||ownership.runs.length!==metadata.runWords||metadata.runWords%2!==0)
     throw Error('Complete final ownership words required');
   const parts=[],outputs=[];
   for(const kind of ['rows','runs'])for(let offset=0;offset<ownership[kind].length;offset+=WORDS_PER_PART){
@@ -118,29 +131,21 @@ export function validatePreparedNativeStartup({manifest,manifestSha,nativePixelM
   if(nativePixelMap.canonical_grid_sha256!==undefined&&nativePixelMap.canonical_grid_sha256!==manifestSha)throw Error('Prepared startup canonical grid identity differs');
 }
 
-// Prepared deployment bytes are regenerated only when a reviewed native bank
-// changes. Ordinary builds authenticate and copy them without decoding the
-// complete GPU stream or recompressing an already accepted transport.
-export async function packagePreparedStartupOwnership({manifest,manifestSha,source,destination,selected,features}) {
-  if(!validHash(manifestSha))throw Error('Prepared startup requires the selected native manifest hash');
-  const root=await fs.realpath(source);
-  if(root!==path.resolve(source))throw Error('Prepared startup source must be ordinary');
-  const indexFile=path.join(root,'index.json');
-  if(await fs.realpath(indexFile)!==indexFile||!(await fs.lstat(indexFile)).isFile())throw Error('Prepared startup index must be ordinary');
-  const indexRaw=await fs.readFile(indexFile),index=JSON.parse(indexRaw);
-  const inputInventory=[];
-  const consumed=async(name,raw)=>{const stat=await fs.lstat(path.join(root,name));
-    inputInventory.push({path:name,mode:(stat.mode&0o111)?'100755':'100644',bytes:raw.length,sha256:digest(raw),
-      git_blob_oid:createHash('sha1').update('blob '+raw.length+'\0').update(raw).digest('hex'),whole_body_consumed:true});};
-  await consumed('index.json',indexRaw);
+// One metadata admission shared by copying and the actual complete-word reader.
+export function validatePreparedStartupIndex({index,indexRaw,manifest,manifestSha,selected,features}) {
   const metadata=ownershipMetadata(manifest);
-  const final=index.version===2,proof=index.preparedOwnership;
+  const authority=index.version===3,final=index.version===2||authority,proof=index.preparedOwnership;
   if((index.version!==1&&!final)||index.native_manifest_sha256!==manifestSha)
     throw Error('Prepared startup differs from selected native reference; regenerate matching startup products');
   if(final){
-    const effective=selected?.envelope?.effective_reference;
-    if(!selected||!Array.isArray(features)||proof?.version!==2||proof.selection_sha256!==digest(selected.selectionBytes)
-      ||proof.native_manifest_sha256!==manifestSha||!isDeepStrictEqual(index.additiveRelease,selected.envelope)
+    const effective=authority?selected?.reference_release:selected?.envelope?.effective_reference;
+    if(authority){
+      if(!selected?.finalBank||selected.finalBank.bytes!==indexRaw.length||selected.finalBank.sha256!==digest(indexRaw)
+        ||proof?.version!==3||index.additiveRelease!==undefined)throw Error('Prepared final bank differs from the one-way selected index pin');
+      additiveBaseReference({preparedOwnership:proof,reference_release:effective,pixelMap:index.pixelMap});
+    }
+    if(!selected||!Array.isArray(features)||(!authority&&(proof?.version!==2||proof.selection_sha256!==digest(selected.selectionBytes)))
+      ||proof.native_manifest_sha256!==manifestSha||(!authority&&!isDeepStrictEqual(index.additiveRelease,selected.envelope))
       ||!isDeepStrictEqual(proof.base_reference,selected.base)||!isDeepStrictEqual(proof.effective_reference,effective)
       ||index.release_id!==effective.id||index.footprints_sha256!==effective.footprints_sha256
       ||index.hierarchy_sha256!==effective.hierarchy_sha256)
@@ -151,6 +156,7 @@ export async function packagePreparedStartupOwnership({manifest,manifestSha,sour
     ||index.hierarchy_sha256!==manifest.hierarchy_sha256)throw Error('Selected repairs require a corrected prepared bank');
   const nativePixelMap=final?proof.native_pixel_map:index.pixelMap;
   if(!Array.isArray(index.files)||!index.files.length||new Set(index.files.map(pin=>pin.path)).size!==index.files.length)throw Error('Incomplete prepared startup roster');
+  for(const pin of index.files)if(typeof pin.path!=='string'||!pin.path.split('/').every(piece=>/^[A-Za-z0-9_.-]+$/.test(piece)&&piece!=='.'&&piece!=='..')||!Number.isSafeInteger(pin.bytes)||pin.bytes<=0||!validHash(pin.sha256))throw Error('Unsafe prepared startup member');
   const pins=new Map(index.files.map(pin=>[pin.path,pin]));
   if(final){
     if(!Array.isArray(index.compatibility_files)||!index.compatibility_files.length
@@ -160,17 +166,6 @@ export async function packagePreparedStartupOwnership({manifest,manifestSha,sour
       .map(p=>p.path));current.add(nativePixelMap.native_latitudes.transport_path);
     if(index.files.some(p=>!current.has(p.path))||current.size!==index.files.length)throw Error('Inactive final-bank member remains in current deployment');
   }
-  const actual=[];
-  async function inventory(relative=''){
-    for(const entry of await fs.readdir(path.join(root,relative),{withFileTypes:true})){
-      const name=relative?relative+'/'+entry.name:entry.name;
-      if(entry.isDirectory())await inventory(name);
-      else if(entry.isFile()){if(name!=='index.json')actual.push(name);}
-      else throw Error('Prepared startup contains a nonordinary member');
-    }
-  }
-  await inventory();
-  if(JSON.stringify(actual.sort())!==JSON.stringify([...pins.keys()].sort()))throw Error('Prepared startup roster omits or invents a member');
   validatePreparedNativeStartup({manifest,manifestSha,nativePixelMap,files:index.files});
   if(final){
     if(new Set(index.pixelMap.parts.map(p=>p.path)).size!==index.pixelMap.parts.length
@@ -199,10 +194,39 @@ export async function packagePreparedStartupOwnership({manifest,manifestSha,sour
     }
     if(offset!==proof.owners||proof.owners!==features.length)throw Error('Prepared complete context roster differs');
   }
+  return {authority,final,proof,pins,nativePixelMap};
+}
+
+// Prepared deployment bytes are regenerated only when a reviewed native bank
+// changes. Ordinary builds authenticate and copy them without decoding the
+// complete GPU stream or recompressing an already accepted transport.
+export async function packagePreparedStartupOwnership({manifest,manifestSha,source,destination,selected,features}) {
+  if(!validHash(manifestSha))throw Error('Prepared startup requires the selected native manifest hash');
+  const root=await fs.realpath(source);
+  if(root!==path.resolve(source))throw Error('Prepared startup source must be ordinary');
+  const indexFile=path.join(root,'index.json');
+  if(await fs.realpath(indexFile)!==indexFile||!(await fs.lstat(indexFile)).isFile())throw Error('Prepared startup index must be ordinary');
+  const indexRaw=await fs.readFile(indexFile),index=JSON.parse(indexRaw);
+  const inputInventory=[];
+  const consumed=async(name,raw)=>{const stat=await fs.lstat(path.join(root,name));
+    inputInventory.push({path:name,mode:(stat.mode&0o111)?'100755':'100644',bytes:raw.length,sha256:digest(raw),
+      git_blob_oid:createHash('sha1').update('blob '+raw.length+'\0').update(raw).digest('hex'),whole_body_consumed:true});};
+  await consumed('index.json',indexRaw);
+  const {final,proof,pins}=validatePreparedStartupIndex({index,indexRaw,manifest,manifestSha,selected,features});
+  const actual=[];
+  async function inventory(relative=''){
+    for(const entry of await fs.readdir(path.join(root,relative),{withFileTypes:true})){
+      const name=relative?relative+'/'+entry.name:entry.name;
+      if(entry.isDirectory())await inventory(name);
+      else if(entry.isFile()){if(name!=='index.json')actual.push(name);}
+      else throw Error('Prepared startup contains a nonordinary member');
+    }
+  }
+  await inventory();
+  if(JSON.stringify(actual.sort())!==JSON.stringify([...pins.keys()].sort()))throw Error('Prepared startup roster omits or invents a member');
   // Authenticate every current and retained compatibility URL before writing.
   const bodies=[];
   for(const pin of index.files){
-    if(typeof pin.path!=='string'||!pin.path.split('/').every(piece=>/^[A-Za-z0-9_.-]+$/.test(piece)&&piece!=='.'&&piece!=='..')||!Number.isSafeInteger(pin.bytes)||pin.bytes<=0||!validHash(pin.sha256))throw Error('Unsafe prepared startup member');
     const file=path.join(root,pin.path);
     if(await fs.realpath(file)!==file||!(await fs.lstat(file)).isFile())throw Error('Prepared startup member must be ordinary');
     const bytes=await fs.readFile(file);
@@ -228,4 +252,41 @@ export async function packagePreparedStartupOwnership({manifest,manifestSha,sour
     await fs.writeFile(file,bytes,{flag:'wx'});
   }
   return {pixelMap:index.pixelMap,files:index.files,input_inventory:inputInventory,...(final?{preparedOwnership:proof}:{})};
+}
+
+// Load exactly the selected finished bank for preparation/conservation. This
+// authenticates transport and words, not acceptance of a caller's selection.
+export async function readPreparedFinalOwnership({indexRaw,manifest,manifestSha,selected,features,ownerCount=features?.length,read}) {
+  const index=JSON.parse(indexRaw);
+  if(![2,3].includes(index.version))throw Error('A complete prepared final bank is required');
+  if(!Number.isSafeInteger(ownerCount)||ownerCount<1)throw Error('Complete final owner denominator required');
+  const {proof,pins}=validatePreparedStartupIndex({index,indexRaw,manifest,manifestSha,selected,features:features??new Array(ownerCount)});
+  const bodies=new Map();
+  async function whole(name){
+    const pin=pins.get(name);if(!pin)throw Error('Final ownership input outside the complete prepared roster');
+    if(!bodies.has(name)){
+      const raw=Buffer.from(await read(pin));
+      if(raw.length!==pin.bytes||digest(raw)!==pin.sha256)throw Error('Prepared final input whole identity differs: '+name);
+      bodies.set(name,raw);
+    }
+    return bodies.get(name);
+  }
+  const ownership=await loadOwnershipAssets(index.pixelMap,async url=>{
+    if(typeof url!=='string'||!url.startsWith('./'))throw Error('Unexpected prepared ownership URL');
+    return new Response(await whole(url.slice(2)));
+  },{requireNative:true,expectedReference:proof.effective_reference});
+  if(digest(Buffer.from(ownership.rows.buffer,ownership.rows.byteOffset,ownership.rows.byteLength))!==proof.rows_sha256
+    ||digest(Buffer.from(ownership.runs.buffer,ownership.runs.byteOffset,ownership.runs.byteLength))!==proof.runs_word_stream_sha256)
+    throw Error('Prepared complete word stream differs from its declared identity');
+  const context=[];
+  for(const pin of proof.context_parts){
+    const raw=gunzipSync(await whole(pin.path),{maxOutputLength:pin.decoded_bytes});
+    if(raw.length!==pin.decoded_bytes||digest(raw)!==pin.decoded_sha256)throw Error('Prepared context decoded bytes differ');
+    context.push(JSON.parse(raw));
+  }
+  // A body-only reader can bind the complete supplied denominator and context
+  // schema without claiming independent source/acceptance authority. The private
+  // checkpoint subsequently joins every value to its accepted certificate/base.
+  const prepared=bindPreparedNativeFeatures({preparedOwnership:proof,referenceMetadata:selected.referenceMetadata},features??context.flat(),context);
+  return {index,ownership,features:prepared};
 }

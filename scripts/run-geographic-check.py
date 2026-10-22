@@ -64,6 +64,7 @@ def prefetch_declared_inputs(repo, baseline, candidate, timeout=120):
 
 
 TRUSTED_PATHS = ['scripts/run-geographic-check.py', 'scripts/geography-prefetch.mjs', 'scripts/check-geographic-regression.py',
+                 'scripts/package-startup-ownership.mjs','src/ownership-assets.js','src/ownership-method.js',
                  'scripts/native-word-store.mjs','scripts/native-patch-store.mjs', 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',  'src/native-grid.js', 'src/ownership-codec.js',
                  'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py',
                  'scripts/ellipsoidal_area.py', 'requirements.txt',
@@ -314,7 +315,7 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
               'published': False, 'source_approval': False}
     if software:
         report['execution_limits'] = [
-            'Candidate checker code executed against distinct baseline and candidate data; no checkpoint reuse or new checkpoint authority.',
+            'Candidate checker code executed against distinct baseline and candidate data; authenticated accepted-state input may be read, but no new checkpoint authority is issued.',
             'Authenticated source adjudication remains baseline-only; deliver checker upgrades separately from data corrections that require it.',
             'Nested child receipts retain their legacy candidate_code_executed=false marker verbatim. That marker is not evidence that candidate checker code was absent; this report binds actual executing code.']
     if before == after and baseline != candidate:
@@ -356,8 +357,10 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
                     str(repo), baseline, candidate, sys.executable], env=env)
 
             native = json.loads(native_raw)
+        final_profile = (native.get('candidate_selection') or {}).get('version') == 2
+        expected_child_software = software if final_profile else False
         if (native.get('method') != 'selected-native-owner-conservation-v1'
-                or native.get('candidate_code_executed') is not False
+                or native.get('candidate_code_executed') is not expected_child_software
                 or native.get('status') not in ['native-regressions-found', 'no-new-native-loss']):
             raise ValueError('Selected map comparison lacks a completed native result')
         report['selected_native_report'] = native
