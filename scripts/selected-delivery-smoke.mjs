@@ -315,7 +315,7 @@ async function checkFinalBankEmitted({selection,expectations,read,inputs}) {
   for(const pin of index.files){read('root',prefix+pin.path,{...pin,path:prefix+pin.path});read('emitted',pin.path,pin);}
   if(referenceMetadata)read('emitted',referenceMetadata.asset.path,referenceMetadata.asset);
   const expected=await readPreparedFinalOwnership({indexRaw,manifest,manifestSha:native.sha256,
-    selected:{finalBank:selection.prepared_bank,reference_release:selection.reference,base,referenceMetadata},features:structuredClone(features),
+    selected:{finalBank:selection.prepared_bank,reference_release:selection.reference,base,referenceMetadata:atlas.referenceMetadata},features:structuredClone(features),
     read:pin=>read('root',prefix+pin.path,{...pin,path:prefix+pin.path})});
   const fetcher=async name=>{const relative=String(name).replace(/^\.\//,'');const pin=pins.get(relative);assert(pin,'Unlisted emitted final bank operand');return new Response(read('emitted',relative,pin));};
   const words=await loadOwnershipAssets(atlas.pixelMap,fetcher,{requireNative:true,expectedReference:selection.reference});
