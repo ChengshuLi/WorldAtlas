@@ -507,6 +507,7 @@ test('actual owner entry preserves existing modes, verify-only isolation and sam
 
 test('geography modes remain in the existing private owner workflow and fixed operation selector',()=>{
  const workflow=fs.readFileSync(path.join(root,'.github/workflows/neon-forward-migrations.yml'),'utf8');
+ assert.equal(workflow.match(/^    timeout-minutes: (.+)$/m)?.[1], "${{ inputs.mode == 'geography-production' && 120 || 30 }}", 'The complete geographic publication gets the existing two-hour budget; other modes retain 30 minutes');
  assert.match(workflow,/geography-verify/);assert.match(workflow,/geography-production/);assert.match(workflow,/group: neon-storage-owner-maintenance/);assert.match(workflow,/cancel-in-progress: false/);assert.match(workflow,/PUBLICATION_DEPLOYMENT_ID: \$\{\{ inputs.publication_deployment_id \}\}/);assert.match(workflow,/operation=\.github\/operations\/neon-geographic-production\.json/);
  const reuse=workflow.indexOf('Reuse exact already-built'),build=workflow.indexOf('node scripts/build-cloudflare.mjs --publication'),upload=workflow.indexOf('Preserve the exact public package');assert.ok(reuse>0&&reuse<build&&build<upload);
  assert.equal((workflow.match(/gh api --paginate --slurp/g)||[]).length,2);assert.match(workflow,/head_sha=\$GITHUB_SHA/);assert.match(workflow,/include-hidden-files: true/);assert.match(workflow,/\.cache\/cloudflare-publication\.json/);assert.ok(!workflow.slice(upload,workflow.indexOf('Preserve sanitized forward receipt')).includes('sqlite'));

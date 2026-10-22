@@ -36,7 +36,9 @@ jobs:
   forward:
     if: github.repository == 'ChengshuLi/WorldAtlas' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # Geography includes four ordered releases, verification and the public build.
+    # This execution budget does not extend the separately checked owner window.
+    timeout-minutes: ${{ inputs.mode == 'geography-production' && 120 || 30 }}
     steps:
       - name: Checkout exact reviewed operation
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
