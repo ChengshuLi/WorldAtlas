@@ -801,7 +801,7 @@ test('discovery and actual private execution admit data leaves and a later accep
 
 // A small real current-product fixture. It exercises the same consumer after
 // private original-output admission, without any scientific custody inputs.
-async function currentProductFixture(t,{changeCatalog=()=>{},changeGeometry=()=>{},reference=false,sourceRevision=false,priorGzip=false}={}) {
+async function currentProductFixture(t,{changeCatalog=()=>{},changeGeometry=()=>{},reference=false,sourceRevision=false,priorGzip=false,nativePrepared=false}={}) {
   const {gzipSync}=await import('node:zlib');
   const {footprintHash}=await import('../scripts/check-prepared.mjs');
   const {footprintValueSha256,additiveReleaseFootprintDigest}=await import('../src/effective-footprint.js');
@@ -814,8 +814,25 @@ async function currentProductFixture(t,{changeCatalog=()=>{},changeGeometry=()=>
   const base={id:'geography:base',footprints_sha256:footprintHash([feature]),hierarchy_sha256:'a'.repeat(64)};
   const native=reference?{...base,id:'geography:native',hierarchy_sha256:'9'.repeat(64)}:base;
   const rosterRaw=Buffer.from(JSON.stringify([{id:feature.id,index:1,province_id:reference?'old-parent':'parent',bounds:[0,0,1,1]}])),bounds=gzipSync(rosterRaw);
-  const manifestRaw=Buffer.from(JSON.stringify({size:262166,geographic_release:native.id,footprints_sha256:native.footprints_sha256,
-    hierarchy_sha256:native.hierarchy_sha256,original_assets:{bounds:{sha256:sha(bounds)}}}));
+  const manifest={size:262166,geographic_release:native.id,footprints_sha256:native.footprints_sha256,
+    hierarchy_sha256:native.hierarchy_sha256,original_assets:{bounds:{sha256:sha(bounds)}}};
+  let nativeSource;
+  if(nativePrepared){
+    nativeSource=fs.mkdtempSync(path.join(os.tmpdir(),'original-native-words-'));t.after(()=>fs.rmSync(nativeSource,{recursive:true,force:true}));
+    const {shuffleOwnershipBytes}=await import('../src/ownership-codec.js');
+    const rows=new Uint32Array(manifest.size*2);rows[1]=1;for(let y=1;y<manifest.size;y++)rows[y*2]=1;
+    const runs=Uint32Array.from([1,1]);
+    Object.assign(manifest,{version:2,method:'native-linear-evenodd-first-owner-v1',coordinateBits:19,runWords:runs.length,
+      parts:[['rows',rows],['runs',runs]].map(([kind,words])=>{
+        const raw=gzipSync(shuffleOwnershipBytes(words)),name='native-v1/ownership/'+kind+'-0.bin.gz';
+        fs.mkdirSync(path.dirname(path.join(nativeSource,name)),{recursive:true});fs.writeFileSync(path.join(nativeSource,name),raw);
+        return {kind,path:name,offset:0,words:words.length,encoding:'byte-shuffle',bytes:raw.length,sha256:sha(raw),decoded_sha256:sha(Buffer.from(words.buffer))};
+      })});
+    const name='coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz';
+    const raw=fs.readFileSync(fileURLToPath(new URL('../'+name,import.meta.url)));
+    manifest.native_latitudes={commit:'a'.repeat(40),path:name,root:'repository',role:'immutable-normative-rule-input',bytes:raw.length,sha256:sha(raw),decoded_bytes:gunzipSync(raw).length,decoded_sha256:sha(gunzipSync(raw))};
+  }
+  const manifestRaw=Buffer.from(JSON.stringify(manifest));
   const ledger={version:1,kind:'native-additive-repair-ledger-v1',rule_sha256:'b'.repeat(64),base_reference:base,
     parent_inventory:{components:1,report_sha256:'c'.repeat(64),roster_sha256:'d'.repeat(64)},scope_ids:['gap'],assigned_cells:2,
     rows:[{component_id:'gap',disposition:'assigned',target_id:'owner',pixelIndex:1,base_geometry:feature.geometry,
@@ -894,7 +911,7 @@ async function currentProductFixture(t,{changeCatalog=()=>{},changeGeometry=()=>
   f.manifestRaw=Buffer.from(JSON.stringify(captured)+'\n');
   f.receipt.package_output_manifest_sha256=sha(f.manifestRaw);f.receipt.package_output_manifest_bytes=f.manifestRaw.length;
   const originalToken=await authenticateOriginalPackageOutput(f);
-  return {f,currentRoot,originalToken,files,sidecar,currentSelection,feature,bodies,envelope,priorBodies,priorEnvelope,priorSourceBodies,priorSourceEnvelope,projection,projectionRaw,referenceRevision};
+  return {f,currentRoot,originalToken,files,sidecar,currentSelection,feature,bodies,envelope,priorBodies,priorEnvelope,priorSourceBodies,priorSourceEnvelope,projection,projectionRaw,referenceRevision,nativeSource};
 }
 
 test('shared current consumer publishes authenticated original context with historical custody entirely cold',async t=>{
@@ -1014,13 +1031,13 @@ test('original reference metadata refuses coherent source, native, revision and 
 });
 
 
-for(const [priorGzip,retirement] of [[false,false],[true,false],[true,true]])test('actual '+(priorGzip?'gzip':'plain')+(retirement?' retired-input':'')+' retained assembly preserves invariants and emits current gzip',async t=>{
+for(const [priorGzip,retirement] of [[false,false],[true,false],[true,true]])test('actual '+(priorGzip?'gzip':'plain')+(retirement?' retired-input':'')+' retained assembly preserves invariants and copies the final current bank',async t=>{
   if(process.execArgv.length||process.env.NODE_OPTIONS?.trim()||process.env.NODE_PATH?.trim()){
     execFileSync(process.execPath,[new URL(import.meta.url).pathname,t.name],{env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',NODE_TEST_CONTEXT:undefined},encoding:'utf8'});return;
   }
   const oldFetch=globalThis.fetch,oldEntry=process.argv[1];
   t.after(()=>{globalThis.fetch=oldFetch;process.argv[1]=oldEntry;});
-  const f=await currentProductFixture(t,{reference:true,priorGzip}),directory=f.currentRoot;
+  const f=await currentProductFixture(t,{reference:true,priorGzip,nativePrepared:true}),directory=f.currentRoot;
   const sourceRoot=fileURLToPath(new URL('../',import.meta.url)),copied=new Set();
   const write=(name,raw)=>{fs.mkdirSync(path.dirname(path.join(directory,name)),{recursive:true});fs.writeFileSync(path.join(directory,name),raw);};
   const copy=name=>{
@@ -1044,7 +1061,41 @@ for(const [priorGzip,retirement] of [[false,false],[true,false],[true,true]])tes
   const priorPin=pin(prefix+'sidecar.json',priorSidecarRaw);write(priorPin.path,priorSidecarRaw);
   const priorSelection={...f.currentSelection,additive_release:priorPin};write('data/ownership-selection.json',JSON.stringify(priorSelection));
   const retired=[priorPin.path,priorEnvelopePin.path,priorMap.ledger.path,priorMap.patch.path];
-  const definition=loadPackageInputs(directory);definition.inputs.push(...copied,...(retirement?[...Object.values(priorMap).map(pin=>pin.path),priorEnvelopePin.path,priorPin.path]:[prefix]));
+  const bankPrefix='data/canonical-grid/current-startup/',bank=path.join(directory,bankPrefix);
+  const {packageStartupOwnership,packagePreparedStartupOwnership}=await import('../scripts/package-startup-ownership.mjs');
+  const {prepareSelectedStartupOwnership}=await import('../scripts/prepare-startup-ownership.mjs');
+  const nativeManifest=JSON.parse(f.bodies.base_manifest),nativeSha=sha(f.bodies.base_manifest),nativePrefix='ownership-vintages/'+nativeSha+'/';
+  const encoded=await packageStartupOwnership({manifest:nativeManifest,source:f.nativeSource,destination:path.join(bank,nativePrefix)});
+  for(const pin of nativeManifest.parts.filter(p=>p.kind==='rows'))write(bankPrefix+pin.path,fs.readFileSync(path.join(f.nativeSource,pin.path)));
+  write(bankPrefix+'native-v1/native-row-latitudes.f64le.gz',fs.readFileSync(path.join(sourceRoot,nativeManifest.native_latitudes.path)));
+  const inventory=(root,relative='')=>fs.readdirSync(path.join(root,relative),{withFileTypes:true}).flatMap(e=>{
+    const name=relative+e.name;if(e.isDirectory())return inventory(root,name+'/');
+    const raw=fs.readFileSync(path.join(root,name));return [{path:name,bytes:raw.length,sha256:sha(raw)}];
+  }).sort((a,b)=>a.path.localeCompare(b.path));
+  let previous={version:1,pixelMap:{...encoded.pixelMap,canonical_grid_sha256:nativeSha,
+    native_latitudes:{...nativeManifest.native_latitudes,transport_path:'native-v1/native-row-latitudes.f64le.gz'},
+    parts:encoded.pixelMap.parts.map(p=>p.kind==='rows'?p:{...p,path:nativePrefix+p.path})},files:inventory(bank)};
+  const prepare=async(selection,envelope,sidecar)=>{
+    const temporary=fs.mkdtempSync(path.join(directory,'.prepared-'));
+    try{
+      const selectionBytes=Buffer.from(JSON.stringify(selection));
+      const index=await prepareSelectedStartupOwnership({selectionBytes,manifest:nativeManifest,previous,
+        readNative:name=>fs.readFileSync(path.join(bank,name)),readPin:p=>fs.readFileSync(path.join(directory,p.path)),destination:temporary});
+      for(const pin of index.compatibility_files){const name=path.join(temporary,pin.path);fs.mkdirSync(path.dirname(name),{recursive:true});fs.copyFileSync(path.join(bank,pin.path),name);}
+      index.files=inventory(temporary);fs.writeFileSync(path.join(temporary,'index.json'),JSON.stringify(index));
+      fs.rmSync(bank,{recursive:true});fs.renameSync(temporary,bank);previous=index;
+      return {index,selected:{selection,selectionBytes,sidecar,envelope,base:envelope.base_reference,referenceMetadata:JSON.parse(fs.readFileSync(path.join(f.f.root,'dist/client/atlas-geography.json'))).referenceMetadata}};
+    }finally{fs.rmSync(temporary,{recursive:true,force:true});}
+  };
+  const priorPrepared=await prepare(priorSelection,f.priorSourceEnvelope,priorSidecar);
+  const priorOutput=path.join(f.f.root,'dist/client');
+  const packed=await packagePreparedStartupOwnership({manifest:nativeManifest,manifestSha:nativeSha,source:bank,destination:priorOutput,
+    selected:priorPrepared.selected,features:[f.feature]});
+  fs.rmSync(path.join(priorOutput,'additive-repairs'),{recursive:true});
+  const oldAtlas=JSON.parse(fs.readFileSync(path.join(priorOutput,'atlas-geography.json')));
+  Object.assign(oldAtlas,{pixelMap:packed.pixelMap,preparedOwnership:packed.preparedOwnership,additiveRelease:f.priorSourceEnvelope});
+  fs.writeFileSync(path.join(priorOutput,'atlas-geography.json'),JSON.stringify(oldAtlas));
+  const definition=loadPackageInputs(directory);definition.inputs.push(bankPrefix,...copied,...(retirement?[...Object.values(priorMap).map(pin=>pin.path),priorEnvelopePin.path,priorPin.path]:[prefix]));
   write('.github/package-inputs.json',JSON.stringify(definition));
   const git=(...args)=>execFileSync('git',['-C',directory,...args],{encoding:'utf8'}).trim();
   git('init','-q');const commit=()=>{git('add','.');git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','fixture');};commit();
@@ -1052,6 +1103,7 @@ for(const [priorGzip,retirement] of [[false,false],[true,false],[true,true]])tes
     input_definition_sha256:sha(fs.readFileSync(path.join(directory,'.github/package-inputs.json'))),
     files:committedPackageInputs(directory,definition),producer:committedPackageProducer(directory)};
   const manifest=JSON.parse(f.f.manifestRaw),{packageBuildConfiguration}=await import('../scripts/package-output-artifact.mjs');
+  manifest.output.files=inventory(path.join(f.f.root,'dist')).map(p=>({...p,path:'dist/'+p.path}));manifest.output.bytes=manifest.output.files.reduce((n,p)=>n+p.bytes,0);
   manifest.source=source;manifest.runtime={node:process.version,platform:process.platform,arch:process.arch,dependencies:sha(fs.readFileSync(path.join(directory,'package-lock.json')))};
   manifest.configuration=packageBuildConfiguration();
   const receipt=Buffer.from(JSON.stringify({version:1,kind:'cloudflare',preflight:{passed:true}}));
@@ -1091,11 +1143,12 @@ with zipfile.ZipFile(sys.argv[2],'w',zipfile.ZIP_DEFLATED) as z:
   let downloads=0;api.artifactRedirect=async()=>{downloads++;return new Response(null,{status:302,headers:{location:'https://fixture.blob.core.windows.net/original.zip'}});};
   globalThis.fetch=async url=>new Response(String(url).endsWith('/original.zip')?archive:f.f.log());
   if(retirement){const next=structuredClone(definition);next.inputs=next.inputs.filter(name=>!retired.includes(name));write('.github/package-inputs.json',JSON.stringify(next));}
-  write('data/ownership-selection.json',JSON.stringify(f.currentSelection));commit();
+  write('data/ownership-selection.json',JSON.stringify(f.currentSelection));
+  const currentPrepared=await prepare(f.currentSelection,f.envelope,f.sidecar);commit();
   const entry=path.join(directory,'scripts/assemble-selected-package.mjs'),{assembleSelectedPackage}=await import(pathToFileURL(entry));process.argv[1]=entry;
   const assemble=()=>assembleSelectedPackage({api,repo:f.f.repo,expectedHead:git('rev-parse','HEAD'),originalRunId:17});
   const result=await assemble();assert.equal(result.assembled,true);assert.equal(downloads,1);
-  assert.equal(result.current_additive_assets,4);
+  assert.equal(result.current_prepared_assets,currentPrepared.index.files.length);
   if(retirement){
     const receipt=JSON.parse(fs.readFileSync(path.join(directory,'.cache/package-input-build.json')));
     assert.deepEqual([...receipt.assembly.transition.removed_selected_inputs].sort(),[...retired].sort());
@@ -1109,43 +1162,47 @@ with zipfile.ZipFile(sys.argv[2],'w',zipfile.ZIP_DEFLATED) as z:
     const authority=await import(pathToFileURL(path.join(directory,'coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs')));
     const original=await authority.authenticateOriginalPackageOutput({api,repo:f.f.repo,origin:found.origin,root:f.f.root,manifestRaw:f.f.manifestRaw});
     const stage=fs.mkdtempSync(path.join(directory,'.cache/proof-'));
-    const issue=priorSidecarRaw=>authority.issuePackageAssemblyExecution({original,source:directory,stage,executingRoot:directory,priorSidecarRaw});
+    const issue=priorSidecarRaw=>authority.issuePackageAssemblyExecution({original,source:directory,stage,executingRoot:directory,priorSidecarRaw,preparedStartup:found.preparedStartup});
     assert.throws(()=>issue(undefined),/Authenticated prior cumulative|authenticated prior cumulative/);
     const corrupt=Buffer.from(priorSidecarRaw);corrupt[corrupt.length-1]^=1;
     assert.throws(()=>issue(corrupt),/Authenticated prior cumulative|authenticated prior cumulative/);
     assert.equal(authority.requirePackageAssemblyExecution(issue(found.priorSidecarRaw)).source_commit,current.head);
   }
-  const changed=new Set(['dist/client/atlas-geography.json',...Object.values(f.priorEnvelope).filter(pin=>pin?.path).map(pin=>'dist/client/'+pin.path)]);
+  const fixed=new Set(priorPrepared.index.compatibility_files.map(p=>p.path));
+  const changed=new Set(['dist/client/atlas-geography.json',...[...priorPrepared.index.pixelMap.parts,...priorPrepared.index.preparedOwnership.context_parts].filter(p=>!fixed.has(p.path)).map(p=>'dist/client/'+p.path)]);
   for(const output of manifest.output.files)if(!changed.has(output.path)){
     const raw=fs.readFileSync(path.join(directory,output.path));assert.equal(raw.length,output.bytes);assert.equal(sha(raw),output.sha256,output.path);
   }
   const atlas=JSON.parse(fs.readFileSync(path.join(directory,'dist/client/atlas-geography.json')));
   assert.deepEqual(atlas.referenceMetadata,JSON.parse(fs.readFileSync(path.join(f.f.root,'dist/client/atlas-geography.json'))).referenceMetadata);
   assert.deepEqual(atlas.reference_release,f.envelope.effective_reference);
-  for(const [role,raw]of Object.entries(f.bodies)){const actual=fs.readFileSync(path.join(directory,'dist/client',atlas.additiveRelease[role].path));assert.deepEqual(['ledger','patch'].includes(role)?gunzipSync(actual):actual,raw);}
+  assert.deepEqual(atlas.pixelMap,currentPrepared.index.pixelMap);assert.deepEqual(atlas.preparedOwnership,currentPrepared.index.preparedOwnership);
+  assert.equal(fs.existsSync(path.join(directory,'dist/client/additive-repairs')),false,'No served patch replay operands');
+  for(const pin of currentPrepared.index.files)assert.equal(sha(fs.readFileSync(path.join(directory,'dist/client',pin.path))),pin.sha256);
+  for(const pin of priorPrepared.index.files)if(!currentPrepared.index.files.some(p=>p.path===pin.path))assert.equal(fs.existsSync(path.join(directory,'dist/client',pin.path)),false,'Inactive v2 output is retired');
   const published=sha(fs.readFileSync(path.join(directory,'dist/client/atlas-geography.json')));
   // A later mutable staging write is still checked against the original whole
   // output inventory. Identical metadata is never added to the mutable set.
-  const writeFile=fs.promises.writeFile;
-  fs.promises.writeFile=async function(file,...args){
-    const result=await writeFile.call(this,file,...args);
-    if(String(file).endsWith('/assembly/dist/reference-metadata/current.json'))fs.appendFileSync(file,' ');
+  const writeFile=fs.writeFileSync;
+  fs.writeFileSync=function(file,...args){
+    const result=writeFile.call(this,file,...args);
+    if(String(file).endsWith('/assembly/dist/atlas-geography.json'))fs.appendFileSync(path.join(path.dirname(file),'reference-metadata/current.json'),' ');
     return result;
   };
   try{await assert.rejects(assemble(),/Invariant output changed during assembly/);}
-  finally{fs.promises.writeFile=writeFile;}
+  finally{fs.writeFileSync=writeFile;}
   assert.equal(downloads,2);
   assert.equal(sha(fs.readFileSync(path.join(directory,'dist/client/atlas-geography.json'))),published,'Failed staging preserves the previous publication');
   // The actual assembly caller checks new static output before publication.
-  fs.promises.writeFile=async function(file,...args){
-    const result=await writeFile.call(this,file,...args);
-    if(String(file).endsWith('/assembly/dist/reference-metadata/current.json')){
+  fs.writeFileSync=function(file,...args){
+    const result=writeFile.call(this,file,...args);
+    if(String(file).endsWith('/assembly/dist/atlas-geography.json')){
       const over=path.join(path.dirname(file),'oversize.bin'),fd=fs.openSync(over,'w');fs.ftruncateSync(fd,26214401);fs.closeSync(fd);
     }
     return result;
   };
   try{await assert.rejects(assemble(),/Cloudflare static asset exceeds 25 MiB/);}
-  finally{fs.promises.writeFile=writeFile;}
+  finally{fs.writeFileSync=writeFile;}
   assert.equal(downloads,3);
   assert.equal(sha(fs.readFileSync(path.join(directory,'dist/client/atlas-geography.json'))),published,'Oversized staging preserves the previous publication');
   for(const mutation of [selection=>selection.reference_projection.sha256='f'.repeat(64),selection=>delete selection.reference_projection,

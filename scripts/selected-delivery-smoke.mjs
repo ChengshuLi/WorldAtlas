@@ -9,7 +9,7 @@ import {repairComponentKey} from '../src/native-grid.js';
 import {repositoryReader, sha256} from './evidence-quality.mjs';
 import {loadOwnershipAssets} from '../src/ownership-assets.js';
 import {additiveBaseReference, decodedAdditiveAssetIdentity, loadAdditiveNativePatch, effectivePrimitiveGeometries, footprintValueSha256,
-  verifyAdditiveLedgerSelection, nativeOnlyComponent} from '../src/effective-footprint.js';
+  verifyAdditiveLedgerSelection, nativeOnlyComponent, loadPreparedNativeContext, nativeReferenceForData} from '../src/effective-footprint.js';
 import {ownershipRun, pickOwnership, samplePackedOwnership} from '../src/pixel-ownership.js';
 
 const hash = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
@@ -217,23 +217,43 @@ export async function checkEmittedSelectedDelivery({root = process.cwd(), emitte
     }
   }
   if (expectations !== undefined) assert.equal(decodedAdditiveAssetIdentity(envelope.ledger).sha256, expectations.selected_ledger_sha256, 'Wrong selected ledger hash');
-  const ledger = whole('emitted', envelope.ledger), patch = whole('emitted', envelope.patch);
+  const final=atlas.preparedOwnership!==undefined;
+  if(final)assert.equal(atlas.preparedOwnership.version,2,'Unsupported prepared final bank');
+  const logical=final?{}:null;
+  if(final)for(const role of ['base_manifest','ledger','owner_roster','patch']) {
+    const pin=sidecar.logical_asset_map?.[role],asset=source[role];
+    assert(pin,'Missing original scientific asset pin: '+role);
+    assert(pin.bytes===asset.bytes&&pin.sha256===asset.sha256
+      &&(pin.decoded_bytes??pin.bytes)===(asset.decoded_bytes??asset.bytes)
+      &&(pin.decoded_sha256??pin.sha256)===(asset.decoded_sha256??asset.sha256),
+      'Original scientific identity differs: '+role);
+    // Git pins bind physical bytes; only the authenticated envelope owns decoding.
+    logical[role]={...pin,encoding:asset.encoding};
+  }
+  const ledger = whole(final?'root':'emitted', final?logical.ledger:envelope.ledger), patch = whole(final?'root':'emitted', final?logical.patch:envelope.patch);
   const assets = new Map(), nativeParts = new Set(atlas.pixelMap?.method === 'native-linear-evenodd-first-owner-v1'
     ? (atlas.pixelMap.parts ?? []).map(part => part.path) : []);
-  for (const descriptor of [...(atlas.pixelMap?.parts ?? []), envelope.ledger, envelope.patch,
-    envelope.owner_roster, envelope.base_manifest, ...(atlas.referenceMetadata?[atlas.referenceMetadata.asset]:[])]) {
-    assert(descriptor && !assets.has(descriptor.path), 'Missing/duplicate emitted asset path');
+  const original=final?{...atlas,pixelMap:atlas.preparedOwnership.native_pixel_map}:atlas;
+  if(final)delete original.preparedOwnership;
+  const scientific=new Map(final?['base_manifest','ledger','owner_roster','patch'].map(role=>[source[role].path,logical[role]]):[]);
+  for (const descriptor of [...(atlas.pixelMap?.parts ?? []), ...(final?original.pixelMap.parts:[]),
+    ...(final?atlas.preparedOwnership.context_parts:[envelope.ledger,envelope.patch,envelope.owner_roster,envelope.base_manifest]),
+    ...(atlas.referenceMetadata?[atlas.referenceMetadata.asset]:[])]) {
+    assert(descriptor, 'Missing emitted asset path');
+    if(assets.has(descriptor.path)){assert.deepEqual(assets.get(descriptor.path),descriptor,'Conflicting emitted asset path');continue;}
     assets.set(descriptor.path, descriptor);
   }
   const fetcher = async name => {
     assert(typeof name === 'string', 'Invalid asset fetch path');
     const relative = name.startsWith('./') ? name.slice(2) : name;
+    if(scientific.has(relative)){const pin=scientific.get(relative);return new Response(read('root',pin.path,pin));}
     const descriptor = assets.get(relative);
     assert(descriptor, `Unlisted emitted asset: ${relative}`);
     const bytes = read('emitted', relative, descriptor, {nativePart: nativeParts.has(relative)});
     return new Response(bytes, {status: 200, headers: {'Content-Length': String(bytes.length)}});
   };
-  const base = await loadOwnershipAssets(atlas.pixelMap, fetcher);
+  for(const part of original.pixelMap?.parts??[])nativeParts.add(part.path);
+  const base = await loadOwnershipAssets(original.pixelMap, fetcher,final?{requireNative:true,expectedReference:nativeReferenceForData(original)}:{});
   const beforeControls = selectedStableOwnerControls(base, patch);
   uniqueStrings(atlas.parts, 'emitted feature parts');
   const features = atlas.parts.flatMap(name => {
@@ -243,7 +263,21 @@ export async function checkEmittedSelectedDelivery({root = process.cwd(), emitte
     assert(Array.isArray(rows) && rows.length > 0, 'Missing emitted feature records');
     return rows;
   });
-  const effective = await loadAdditiveNativePatch(atlas, features, base, {fetcher});
+  let effective;
+  if(final){
+    const expectedFeatures=structuredClone(features);
+    const expected=await loadAdditiveNativePatch(original,expectedFeatures,base,{fetcher});
+    const emitted=await loadOwnershipAssets(atlas.pixelMap,fetcher,{requireNative:true,expectedReference:atlas.reference_release});
+    effective=await loadPreparedNativeContext(atlas,features,emitted,{fetcher});
+    // E is now a committed operand, so sampled stable cells are not sufficient:
+    // preserve every old/held word against the existing scientific consumer.
+    for(const key of ['rows','runs'])assert(Buffer.from(effective[key].buffer,effective[key].byteOffset,effective[key].byteLength)
+      .equals(Buffer.from(expected[key].buffer,expected[key].byteOffset,expected[key].byteLength)),'Complete emitted '+key+' differ from accepted native composition');
+    assert.deepEqual(features,expectedFeatures,'Complete emitted effective context differs');
+    for(const key of ['additive_patch_sha256','additive_ledger_sha256','additive_added_cells','reference_owner_sha256',
+      'reference_owner_source_sha256','effective_footprint_domain','additive_authority_registry_sha256','additive_rule_sha256'])
+      assert.deepEqual(effective[key],expected[key],'Emitted provenance differs: '+key);
+  }else effective=await loadAdditiveNativePatch(atlas,features,base,{fetcher});
   const report = (expectations === undefined ? verifyEmittedDelivery : verifySelectedDelivery)({expectations, ledger, ledgerSha256: decodedAdditiveAssetIdentity(envelope.ledger).sha256,
     patch, patchSha256: decodedAdditiveAssetIdentity(envelope.patch).sha256, features, base, effective, beforeControls});
   report.inputs = [...inputs.values()].sort((a, b) => `${a.scope}:${a.path}`.localeCompare(`${b.scope}:${b.path}`));

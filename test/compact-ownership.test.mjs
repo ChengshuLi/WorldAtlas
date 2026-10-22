@@ -215,7 +215,7 @@ test('actual emitted selected additive cells retain exact owners and sampler out
  const {loadNativeLatitudes}=await import('../src/native-latitudes.js');
  const {nativeReferenceForData}=await import('../src/effective-footprint.js');
  const atlas=JSON.parse(fs.readFileSync('dist/client/atlas-geography.json'));
- const latitudes=await loadNativeLatitudes(atlas.pixelMap,nativeReferenceForData(atlas),
+ const latitudes=await loadNativeLatitudes(atlas.preparedOwnership?.native_pixel_map??atlas.pixelMap,nativeReferenceForData(atlas),
   async name=>new Response(fs.readFileSync('dist/client/'+name.replace(/^\.\//,''))));
  assert.equal(latitudes.length,atlas.pixelMap.size);
  console.log(JSON.stringify(report));

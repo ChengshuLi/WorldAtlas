@@ -1096,7 +1096,7 @@ export function finalizeDelivery(config, reader, {acceptedCheckpoint} = {}) {
   }
   if (config.sidecar_output !== undefined) {
     need(!config.sidecar && safe(config.sidecar_output) && path.posix.dirname(config.sidecar_output) + '/' === config.new_prefix
-      && !['ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json', 'preparation.json']
+      && !['ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json', 'startup-ownership.json', 'preparation.json']
         .includes(path.posix.basename(config.sidecar_output)) && config.patch && config.runtime_envelope,
     'Fresh flat owned sidecar output and committed patch/envelope required');
     generatedSidecar = jsonBytes({...prior, authority_registry: config.registry, runtime_envelope: config.runtime_envelope,
@@ -1121,6 +1121,9 @@ export function finalizeDelivery(config, reader, {acceptedCheckpoint} = {}) {
     && same(sidecar.authority_registry, config.registry) && same(assets.ledger, config.selected_ledger), 'Final sidecar authority/selected-ledger pins differ');
   need(assets.base_manifest.sha256 === selection.sha256, 'Final base manifest differs from unchanged selector');
   const baseManifest = reader.json(assets.base_manifest);
+  const startupRequired = selection.method !== undefined || selection.manifest_path !== undefined || baseManifest.method !== undefined;
+  need(!startupRequired || selection.method === 'native-linear-evenodd-first-owner-v1'
+    && baseManifest.method === selection.method && safe(selection.manifest_path), 'Final native selector/manifest method differs');
   const references = selectedDeliveryReference(selection, baseManifest, reader, config.selector.commit);
   need(assets.owner_roster.sha256 === baseManifest.original_assets?.bounds?.sha256, 'Final owner roster differs from original native bounds');
   reader.read(assets.owner_roster); // Authenticate the retained encoded alias; no decoding or graph computation.
@@ -1251,8 +1254,91 @@ export function finalizeDelivery(config, reader, {acceptedCheckpoint} = {}) {
   add(config.selector.path, result['ownership-selection.json'], originalSelector, 'canonical');
   finalizedAdoptions.set(result, {reader, adoption: [...adoption.values()],
     selector: {...config.selector}, package_inputs: {...config.package_inputs},
+    startupRequired,
     outputs: Object.fromEntries(Object.entries(result).map(([name, bytes]) => [name, visitProduct(bytes)]))});
   return result;
+}
+
+// The existing asynchronous finalization boundary prepares the finished map
+// before the ordinary whole-set writer can adopt its selector. This private map
+// is not a caller-provided write roster or a second publication mechanism.
+async function prepareFinalizedStartupOwnership(outputs) {
+  const plan = finalizedAdoptions.get(outputs);
+  need(plan, 'Authenticated finalization required for startup preparation');
+  if (!plan.startupRequired) return; // Historical metadata-only library contract.
+  const reader = plan.reader, selection = JSON.parse(outputs['ownership-selection.json']);
+  const prefix = 'data/canonical-grid/current-startup/', indexPath = prefix + 'index.json';
+  const definition = JSON.parse(outputs['package-inputs.json']);
+  need(definition.inputs.includes(prefix), 'Final map bank must remain an ordinary package input');
+  const originalIndex = reader.read(reader.pin(plan.selector.commit, indexPath)), previous = JSON.parse(originalIndex);
+  need([1, 2].includes(previous.version) && previous.native_manifest_sha256 === selection.sha256
+    && Array.isArray(previous.files) && previous.files.length > 0
+    && new Set(previous.files.map(pin => pin.path)).size === previous.files.length,
+  'Complete original prepared bank required');
+  const tree = new Map(reader.git('ls-tree', '-rz', plan.selector.commit, '--', prefix).toString().split('\0').filter(Boolean).map(line => {
+    const match = /^100644 blob ([a-f0-9]{40})\t(.+)$/.exec(line);
+    need(match && match[2].startsWith(prefix), 'Nonordinary prepared bank member');
+    return [match[2].slice(prefix.length), match[1]];
+  }));
+  need(same([...tree.keys()].filter(name => name !== 'index.json').sort(), previous.files.map(pin => pin.path).sort()),
+    'Original prepared bank inventory differs');
+  const pins = previous.files.map(pin => {
+    need(safe(pin.path) && Number.isSafeInteger(pin.bytes) && pin.bytes > 0 && hex(pin.sha256, 64), 'Invalid prepared bank pin');
+    return {...pin, path: prefix + pin.path, commit: plan.selector.commit, mode: '100644', git_blob_oid: tree.get(pin.path)};
+  });
+  // The index supplies the entire exact consumed group, not a missing-file loop.
+  await reader.acquire(pins);
+  const originalBodies = new Map(pins.map(pin => [pin.path.slice(prefix.length), reader.read(pin)]));
+  const inputs = new Map(plan.adoption.map(row => [row.path, row.bytes]));
+  const readPin = pin => {
+    const body = inputs.get(pin.path);
+    if (body !== undefined) {
+      need(body.length === pin.bytes && digest(body) === pin.sha256, 'Final-map adopted input differs');
+      return body;
+    }
+    return reader.read(pin);
+  };
+  const manifest = JSON.parse(reader.read(reader.pin(plan.selector.commit, selection.manifest_path)));
+  need(digest(reader.read(reader.pin(plan.selector.commit, selection.manifest_path))) === selection.sha256,
+    'Final-map original manifest differs');
+  const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-final-startup-'));
+  try {
+    const {prepareSelectedStartupOwnership} = await import('./prepare-startup-ownership.mjs');
+    const index = await prepareSelectedStartupOwnership({selectionBytes: outputs['ownership-selection.json'], manifest,
+      previous, destination: temporary,
+      readNative: name => { need(originalBodies.has(name), 'Undeclared original native part'); return originalBodies.get(name); }, readPin});
+    const bodies = new Map(index.compatibility_files.map(pin => [pin.path, originalBodies.get(pin.path)]));
+    const collect = (directory, relative = '') => {
+      for (const entry of fs.readdirSync(directory, {withFileTypes: true})) {
+        const name = relative + entry.name, full = path.join(directory, entry.name);
+        if (entry.isDirectory()) collect(full, name + '/');
+        else {
+          need(entry.isFile() && safe(name), 'Nonordinary generated startup member');
+          const bytes = fs.readFileSync(full), old = bodies.get(name);
+          need(!old || old.equals(bytes), 'Immutable startup URL changed'); bodies.set(name, bytes);
+        }
+      }
+    };
+    collect(temporary);
+    index.files = [...bodies].map(([name, bytes]) => ({path: name, ...visitProduct(bytes)})).sort((a, b) => a.path.localeCompare(b.path));
+    const indexBytes = jsonBytes(index), adoption = new Map(plan.adoption.map(row => [row.path, row]));
+    for (const [name, bytes] of originalBodies) if (!bodies.has(name)) {
+      need(previous.version === 2 && [...previous.pixelMap.parts, ...previous.preparedOwnership.context_parts].some(pin => pin.path === name),
+        'Only inactive prior final-bank operands may retire');
+      adoption.set(prefix + name, {path: prefix + name, bytes: null, expected: undefined, previous: visitProduct(bytes), kind: 'retired'});
+    }
+    for (const [name, bytes] of [...bodies, ['index.json', indexBytes]]) {
+      const target = prefix + name, expected = visitProduct(bytes), old = adoption.get(target);
+      need(!old || same(old.expected, expected), 'Conflicting prepared finalization role');
+      if (!old) adoption.set(target, {path: target, bytes, expected,
+        previous: name === 'index.json' ? visitProduct(originalIndex) : originalBodies.has(name) ? expected : undefined,
+        kind: name === 'index.json' ? 'canonical' : originalBodies.has(name) ? 'input' : 'generated'});
+    }
+    outputs['startup-ownership.json'] = indexBytes;
+    plan.outputs['startup-ownership.json'] = visitProduct(indexBytes);
+    const selector = adoption.get(plan.selector.path); adoption.delete(plan.selector.path); adoption.set(plan.selector.path, selector);
+    plan.adoption = [...adoption.values()]; plan.startupPrepared = true;
+  } finally { fs.rmSync(temporary, {recursive: true, force: true}); }
 }
 
 export function publishFinalizedDelivery(root, destination, outputs, binding, resume = false) {
@@ -1260,14 +1346,15 @@ export function publishFinalizedDelivery(root, destination, outputs, binding, re
   need(plan && same(Object.keys(outputs).sort(), Object.keys(plan.outputs).sort())
     && Object.entries(outputs).every(([name, bytes]) => same(visitProduct(bytes), plan.outputs[name])),
     'Authenticated complete finalization outputs required');
+  need(!plan.startupRequired || plan.startupPrepared, 'Native finalization requires the finished startup bank before publication');
   const reader = plan.reader, head = reader.git('rev-parse', 'HEAD').toString().trim();
   const rows = plan.adoption.map(row => {
     const current = reader.hasPath(head, row.path) ? visitProduct(reader.read(reader.pin(head, row.path))) : undefined;
-    need(row.kind === 'canonical'
+    need(row.kind === 'canonical' || row.kind === 'retired'
       ? same(current, row.previous) || same(current, row.expected)
       : current === undefined || same(current, row.expected),
     'Committed canonical baseline differs from finalization: ' + row.path);
-    return {...row, previous: current ?? row.previous, allowMissing: row.kind === 'input'};
+    return {...row, previous: current ?? row.previous, allowMissing: row.kind === 'input' || row.kind === 'retired' && current === undefined};
   });
   need(rows.every(row => row.path !== destination && !row.path.startsWith(destination + '/')
     && !destination.startsWith(row.path + '/')),
@@ -1845,6 +1932,7 @@ async function main(args) {
     const handle = await acquireFinalizationCheckpoint(config, reader, {token});
     try { outputs = finalizeDelivery(config, reader, {acceptedCheckpoint: handle}); }
     finally { if (handle) releaseAcceptedCheckpoint(handle); }
+    await prepareFinalizedStartupOwnership(outputs);
     const publication = publishFinalizedDelivery(root, destination, outputs, binding, flags.includes('--resume'));
     console.log(JSON.stringify(publication)); return;
   }
