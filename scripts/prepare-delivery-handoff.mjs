@@ -17,6 +17,7 @@ import {repairComponentKey, compareRepairComponents} from '../src/native-grid.js
 import {scientificNativeSelection,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
 import {prepareReferenceMetadataProjection,validateReferenceMetadataProjection,referenceMetadataReader} from './selected-reference-metadata.mjs';
 import {isReferenceAliasReceipt} from '../src/reference-metadata.js';
+import {readSelectedGeometryBank} from './check-effective-geographic-regression.mjs';
 import {validatePackageInputs, selectedCumulativePackageRoles, admitSelectedPackageDeclarations} from './package-inputs.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
 import {coordinateBounds, normaliseRetainedRepairLedger, compareVersionedRepairLedgers, verifyCompletedSourceTargetNativeAuthority, mergeCompletedNativePatches, verifyCurrentRebindExecution, CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
@@ -980,8 +981,27 @@ export function prepareReferenceMetadata(config, reader) {
     need(update && same(Object.keys(update).sort(), ['after', 'before', 'logical_path']), 'Exact whole metadata source update required');
     read(update.before, 'original complete source'); read(update.after, 'current complete source');
   }
+  // Use the same selected N bank as the actual consumer. Identical bytes at a
+  // later commit do not replace the original issued source-path identity.
+  const bank = readSelectedGeometryBank({
+    descriptor: name => reader.pin(config.selector.commit, name),
+    json: (name, {expected}) => {
+      const pin = reader.pin(config.selector.commit, name);
+      need(pin.sha256 === expected, 'Original selected source bank checksum differs');
+      return json(pin, 'original selected source bank');
+    }
+  }, selection);
+  need(Array.isArray(bank.unchanged_files) && Array.isArray(bank.overrides),
+    'Complete original selected source roster required');
+  const originalSources = new Map();
+  for (const [name, pin] of [...bank.unchanged_files.map(pin => [pin.path, pin]),
+    ...bank.overrides.map(pin => [pin.logical_path, pin])]) {
+    need(/^data\/geography\/[^/]+\.json$/.test(name) && !originalSources.has(name),
+      'Duplicate or foreign original selected source');
+    originalSources.set(name, pin);
+  }
   const projection = prepareReferenceMetadataProjection({selection, manifest, owners: JSON.parse(ownersRaw), reference,
-    hierarchy: config.hierarchy, receipts: config.receipts, source_updates: config.source_updates, read});
+    hierarchy: config.hierarchy, receipts: config.receipts, source_updates: config.source_updates, read, originalSources});
   const receiptJSON = referenceMetadataReader(pin => read(pin, 'existing reference correction receipt'));
   need(config.receipts.every(pin=>migrationPins.has(pin.sha256) || isReferenceAliasReceipt(receiptJSON(pin))),
     'Current reference release does not bind every applied metadata receipt');

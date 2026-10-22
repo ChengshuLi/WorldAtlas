@@ -470,7 +470,7 @@ export class NativeAssetImage {
 // Resolve the selected continuous source independently of raw Git target bytes.
 // The accepted v8 bank replaces part29 while the same raw Git path remains the
 // historical original. Logical inverse provenance stays distinct from Git pins.
-function readSelectedGeometryBank(reader,selection) {
+export function readSelectedGeometryBank(reader,selection) {
   const declared=selection.selected_geography;
   demand(declared.version===1&&declared.kind==='complete-world-index-with-exact-encoded-overrides'&&same(Object.keys(declared).sort(),['bytes','kind','path','sha256','version'])&&safe(declared.path)&&hash(declared.sha256)&&Number.isSafeInteger(declared.bytes)&&declared.bytes>0,'Unsupported explicit selected geometry bank');
   const pin=reader.descriptor(declared.path);demand(pin.bytes===declared.bytes,'Selected source map size differs');

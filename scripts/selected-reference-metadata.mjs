@@ -77,7 +77,7 @@ function groupChanges(before, after) {
     .map(id => ({id, before: before.get(id) ?? null, after: after.get(id) ?? null})));
 }
 
-export function prepareReferenceMetadataProjection({selection, manifest, owners, reference, hierarchy, receipts, source_updates, read}) {
+export function prepareReferenceMetadataProjection({selection, manifest, owners, reference, hierarchy, receipts, source_updates, read, originalSources}) {
   const json = reader(read), before = unitMap(json(hierarchy.before)), after = unitMap(json(hierarchy.after));
   const values = receipts.map(json);
   const projection = {version: 1, kind: 'native-reference-metadata-projection-v1',
@@ -85,7 +85,7 @@ export function prepareReferenceMetadataProjection({selection, manifest, owners,
     original_owner_roster_sha256: manifest.original_assets?.bounds?.sha256, hierarchy, receipts, source_updates,
     location_changes: collapsedLocations(values), group_changes: groupChanges(before, after),
     provinces: [...after.values()].filter(row => row.level === 'province').map(row => row.id).sort()};
-  validateReferenceMetadataProjection({projection, selection, manifest, owners, read});
+  validateReferenceMetadataProjection({projection, selection, manifest, owners, read, originalSources});
   return projection;
 }
 
