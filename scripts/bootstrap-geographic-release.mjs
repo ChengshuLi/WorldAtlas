@@ -11,13 +11,13 @@ export function bootstrapConcurrency(value=process.env.ATLAS_IMPORT_CONCURRENCY?
  if(!/^[1-8]$/.test(String(value)))throw Error('ATLAS_IMPORT_CONCURRENCY must be an integer from 1 to 8');
  return Number(value);
 }
-function validatePrior(actual,release){
+export function validateGeographicReleasePrior(actual,release){
  for(const key of ['id','source_id','version','reference_date',...releasePins])if(actual[key]!==release[key])throw Error(`Existing reference ${key} mismatch`);
  if(!actual.expected_counts||Object.keys(actual.expected_counts).length!==Object.keys(release.expected_counts).length||Object.keys(release.expected_counts).some(k=>actual.expected_counts[k]!==release.expected_counts[k]))throw Error('Existing reference counts mismatch');
  if(!['staged','published'].includes(actual.status))throw Error('Unexpected existing reference status');
 }
 export async function publishGeographicReleases({manifest,batch,readBatch,request,concurrency=bootstrapConcurrency(),mode='publish'}){
- if(!['publish','stage','finalize'].includes(mode))throw Error('Unknown geographic publication mode');
+ if(!['publish','stage','finalize','validate'].includes(mode))throw Error('Unknown geographic publication mode');
  concurrency=bootstrapConcurrency(concurrency);
  manifest=structuredClone(manifest);
  if(!Array.isArray(manifest?.batches)||!manifest.batches.length||!Array.isArray(manifest.releases)||!manifest.releases.length)throw Error('Nonempty prepared release and batch inventories required');
@@ -35,7 +35,7 @@ export async function publishGeographicReleases({manifest,batch,readBatch,reques
  for(const release of manifest.releases){
   if(priors.has(release.id))throw Error('Duplicate prepared release ID');
   const route='/api/geography/release?'+new URLSearchParams({release_id:release.id});
-  const prior=await(await request(route)).json();if(prior)validatePrior(prior,release);
+  const prior=mode==='validate'?null:await(await request(route)).json();if(prior)validateGeographicReleasePrior(prior,release);
   priors.set(release.id,prior);
  }
  const entityGroups=['continent','subcontinent','region','area','province','location'].map(tier=>
@@ -66,6 +66,7 @@ export async function publishGeographicReleases({manifest,batch,readBatch,reques
       await geographicChangesHash(changes)!==release.changes_sha256)throw Error('Prepared complete release record hash mismatch');
   }
  }
+ if(mode==='validate')return manifest.releases.map(release=>({id:release.id,version:release.version,status:'input-validated',database_writes:0}));
  if(mode!=='finalize'){
  await concurrent(sourcePaths.map(need));
  for(const parts of entityGroups)await concurrent(parts);
@@ -85,7 +86,7 @@ export async function publishGeographicReleases({manifest,batch,readBatch,reques
    if(mode==='stage'){published.push({id:release.id,version:release.version,status:'staged',public_readback_verified:false});continue;}
    await request('/api/geography/finalize',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({release_id:release.id})});
   }
-  const actual=await (await request(route)).json();if(!actual)throw Error('Published reference release is missing');validatePrior(actual,release);
+  const actual=await (await request(route)).json();if(!actual)throw Error('Published reference release is missing');validateGeographicReleasePrior(actual,release);
   if(actual.status!=='published')throw Error('Reference release remains staged after finalization');
   published.push({id:actual.id,version:actual.version,counts:actual.expected_counts,membership_sha256:actual.membership_sha256});
  }

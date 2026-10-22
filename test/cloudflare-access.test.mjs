@@ -95,3 +95,12 @@ test('authenticated wrapper preserves the real atlas API and static asset routin
   assert.equal((await response.json()).version, 1);
   assert.equal((await worker.fetch(req('/api/import', jwt, 'POST'), actualEnv)).status, 503);
 });
+
+
+test('Worker-only compatibility config reuses assets and existing bindings without credentials or uploads',()=>{
+ const value=cloudflareConfig({preserveAssets:true});
+ assert.equal(value.name,'worldatlas-explorer');assert.equal(value.assets,undefined);assert.equal(value.r2_buckets,undefined);assert.equal(value.vars,undefined);
+ assert.deepEqual(value.unsafe.metadata,{keep_assets:true,keep_bindings:['plain_text','json','secret_text','secret_key','r2_bucket','hyperdrive','assets']});
+ assert.equal(value.preview_urls,false);assert.equal(value.workers_dev,true);
+ const ordinary=cloudflareConfig({publicReadOnly:true});assert.equal(ordinary.unsafe,undefined);assert.equal(ordinary.vars.ATLAS_PUBLIC_READ_ONLY,'1');assert.ok(ordinary.assets.directory);
+});

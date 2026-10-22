@@ -287,7 +287,9 @@ test('reviewed tests derive the complete fixture and executing-policy boundary w
 for (const [label, consumer, operand] of [
   ['rebind custody', 'test/current-rebind-product-custody.test.mjs', 'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json'],
   ['workspace bootstrap', 'test/local-workspace.test.mjs', 'docs/LOCAL_WORKSPACES.md'],
-  ['regional research gate', 'test/regional-research-gate.test.mjs', 'data/research-geography-gate.json']
+  ['regional research gate', 'test/regional-research-gate.test.mjs', 'data/research-geography-gate.json'],
+  ...['test/publication-plan.test.mjs','test/package-current-additive.test.mjs'].map(consumer =>
+    [consumer,consumer,'coordination/publication/cloudflare-history.json'])
 ]) test(`reviewed ${label} retains current declared policy and refuses missing or redirected operands`, () => {
   const row=(mode='100644',type='blob')=>({sha:sha('e'),mode,type});
   const entries=new Map([...EXECUTION_CODE.map(name=>[name,row()]),[operand,row()],
@@ -313,20 +315,21 @@ for (const [label, consumer, operand] of [
 
 test('reviewed PostgreSQL consumers retain their current inputs through actual sparse materialization', () => {
   const operands=['coordination/publication/cloudflare-history.json','data/observation-registry-history/base-v1.json',
-    'data/research-geography-gate.json','data/hosted-type-catalog.json','data/settlement-estimates.json'];
+    'data/research-geography-gate.json','data/hosted-type-catalog.json','data/settlement-estimates.json',
+    'coordination/engineering/cloudflare-publication-846-20261007/registry-source.json'];
   const consumers=['test/neon-forward-migrations.test.mjs','test/compact-membership-profile.test.mjs','test/current-postgres-recovery.test.mjs',
-    'test/merge-integration.test.mjs','test/settlement-population-import.test.mjs'];
+    'test/merge-integration.test.mjs','test/settlement-population-import.test.mjs','test/publication-cloudflare.test.mjs'];
   const row={sha:sha('e'),mode:'100644',type:'blob'};
   const entries=new Map([...EXECUTION_CODE,...operands,...consumers,'test/example.test.mjs','test/fixtures/contract/input.json'].map(name=>[name,row]));
   const request={base:sha('a'),head:sha('b'),files:consumers};
   const context={base:request.base,head:request.head,entries,files:[],definition:loadPackageInputs()};
   const plan=reviewedTestPlan(request,context);
   assert.equal(plan.build,false);assert.deepEqual(plan.files,consumers);
-  assert.deepEqual(plan.inputs,[...EXECUTION_CODE,...operands]);
+  assert.deepEqual(plan.inputs,[...EXECUTION_CODE,operands[0],operands[5],...operands.slice(1,5)]);
   assert(plan.checkout_patterns.includes('postgres'),'PostgreSQL DDL is executing source, like drizzle');
   for(const consumer of consumers) {
-    const expected=consumer===consumers[2]?[operands[0]]:consumer===consumers[1]?operands.slice(0,-1):
-      consumer===consumers[4]?operands.slice(1):operands;
+    const expected=consumer===consumers[5]?[operands[0],operands[5]]:consumer===consumers[2]?[operands[0]]:consumer===consumers[1]?operands.slice(0,4):
+      consumer===consumers[4]?operands.slice(1,5):operands.slice(0,5);
     assert.deepEqual(reviewedTestPlan({...request,files:[consumer]},context).inputs,[...EXECUTION_CODE,...expected]);
     for(const operand of expected) {
       const absent=new Map(entries);absent.delete(operand);
@@ -359,7 +362,7 @@ test('reviewed PostgreSQL consumers retain their current inputs through actual s
     const result=spawnSync(process.execPath,['--input-type=module','-e',
       "await import('./src/observation-modules.js'); await import('./scripts/publication-cloudflare.mjs'); "+
       "const assert=(await import('node:assert/strict')).default,fs=await import('node:fs'),source=JSON.parse(fs.readFileSync('data/settlement-estimates.json')); "+
-      "assert.equal(source.entities.length,582); assert.equal(source.entity_history.length,9301); console.log('actual-sparse-postgres-inputs');"],
+      "assert.equal(source.entities.length,582); assert.equal(source.entity_history.length,9301); assert.ok(JSON.parse(fs.readFileSync('coordination/engineering/cloudflare-publication-846-20261007/registry-source.json')).deployments.length); console.log('actual-sparse-postgres-inputs');"],
       {cwd:temporary,encoding:'utf8'});
     assert.equal(result.status,0,result.stderr);assert.equal(result.stdout.trim(),'actual-sparse-postgres-inputs');
   } finally { fs.rmSync(temporary,{recursive:true,force:true}); }

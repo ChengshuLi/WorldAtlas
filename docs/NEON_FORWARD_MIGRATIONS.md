@@ -1,6 +1,6 @@
 # Reviewed PostgreSQL forward deployment
 
-The frozen fourteen-table copy and its original evidence must be verified first. `scripts/neon-forward-migrations.mjs` then applies reviewed PostgreSQL forward migrations without rotating credentials, changing Site audience or moving media. Only an explicitly pinned historical settlement bundle may be added through the existing private ingestion services after forward verification.
+For schema-forward modes, the frozen fourteen-table copy and its original evidence must be verified first. `scripts/neon-forward-migrations.mjs` then applies reviewed PostgreSQL forward migrations without rotating credentials, changing Site audience or moving media. Only an explicitly pinned historical settlement bundle may be added through the existing private ingestion services after forward verification.
 
 The workflow is `.github/workflows/neon-forward-migrations.yml`, with explicit manual dispatch for production, verify-only or rehearsal. Ordinary pushes and merges never select a forward operation. The selector uses Bash builtins, and the script checks the repository and branch. The workflow shares the owner-maintenance concurrency group with current PostgreSQL recovery. The completed original copy executor and workflow are retired; its original workflow/repository identities and exact committed receipt remain available to authenticate the preserved production proof. The forward executor does not depend on an expiring Actions ZIP.
 
@@ -177,3 +177,83 @@ verify-only with zero import calls. Provider/native Docker behavior remains the
 separately disclosed fixture, not a production rehearsal. The future production
 backup, narrow V3 grants and exact import still need their applicable action-time
 authorization; this code does not lift the #907 hold.
+
+
+## Ordered geographic publication, without schema or settlement work
+
+Issue #2701 uses the same private owner workflow with `geography-verify` and
+`geography-production`, selecting `.github/operations/neon-geographic-production.json`.
+The closed operation pins the existing production project/branch, v10 compressed
+manifest and original index, plus the exact retained v8 membership image. Four
+ordered v7–v10 plans reuse the existing complete admission, stage and finalize
+services. Each phase stays within the unchanged 512-descriptor bound. There is no
+archive-upload tail, public write endpoint, DDL, grant, role membership, backup
+or settlement operation. The cancelled settlement import remains cancelled.
+
+`geography-verify` validates every complete input, including restored v8 bytes,
+before returning with no database calls. Production requires a fresh existing
+`worldatlas-production` / `worldatlas-publication` GitHub deployment record with
+`kind: geography`, the exact accepted `primary_commit`, issue #2701, the complete
+operation-file SHA-256, the existing origin, and `read_only: true`. Its creator
+must match the workflow actor; its operation window is at most two hours. Pass
+that existing record's ID as `publication_deployment_id`. Complete publication
+registry reconciliation must show it as the sole unsettled operation. The same
+window is reauthenticated between releases, and expiry checked before each write.
+This uses the existing owner-maintenance concurrency and server-side Neon binding,
+not the historical fourteen-table copy baseline or the cancelled import window.
+
+The exact published v6 predecessor and all later existing release pins must match.
+The same immutable ingestion IDs and service transactions preserve prior entities,
+prior release memberships, unrelated content and access. Cát Hải's new parent is
+release-scoped membership, not an overwrite of `atlas_entities`. A failed or lost
+response requires reconciliation of those original IDs and release states before
+continuation; previous committed batches are not undone or replaced. Only the
+sanitized receipt is uploaded. Settle the same publication record with separate
+per-issue results and `delivery: null`; geographic publication cannot claim a
+website deployment. Publish the separately tested read-only website only after
+its exact requested content release is verified published.
+
+Issue discovery is reporting, not artifact or database compatibility. References
+to earlier PRs stay PR provenance, not invented original issues or a deployment
+blocker. Exact head/release pins and genuine unsettled-operation serialization
+remain authoritative.
+
+
+### Coordinated public map publication
+
+The publication operation selects one accepted source and its exact M content
+release. The public Worker compatibility deployment must precede any release
+finalization: the two legacy map snapshot routes keep omitted `release_id` at
+the retained published v6, while explicit new clients keep their own M and
+separate generic release endpoints keep their existing semantics. Empty or
+unknown explicit IDs do not fall back. This protects cached/open old pages and
+asset rollback after later releases are published.
+
+Compile only that same Worker entry with `node scripts/build-cloudflare.mjs
+--legacy-worker`. Its existing Wrangler metadata uses `keep_assets` and retained
+binding types; it does not copy credentials, upload a replacement asset set, or
+change the public write policy. Before the normal serialized Worker deployment,
+verify the actual provider's non-secret binding inventory against the retained
+configuration. Stop on an unexpected binding rather than discard it. The same
+existing publication record must bind the old asset inventory and the new
+Worker separately; do not claim a new full website package was published.
+
+Once this compatibility deployment is verified, `geography-production` performs
+the exact bounded append through the existing private services and immutable
+batch receipts. It then uses the existing public builder's `--publication`
+boundary: authenticate the source-bound successful operation, derive M from the
+accepted selected products, and verify the published exact M and old-client
+compatibility before the expensive build. A mismatch stops, never selects
+latest or starts an unrelated synchronization. No future write authorization is
+inferred from the current v7–v10 operation/window.
+
+The owner workflow retains the completed public package with its exact source,
+operation, M, configuration, original build receipt, and complete output hashes.
+A retry looks for that same workflow/source/operation artifact and verifies all
+bytes before reuse, without claiming another build. A damaged or incompatible
+retained package refuses rather than silently rebuilding. Only the public
+package and sanitized receipts are uploaded, never SQLite or private database
+inventories. The existing publisher deploys that exact package under the normal
+serialized publication operation and verifies served assets plus explicit M;
+the prior live pair remains usable throughout. A failed deploy resumes from the
+retained package instead of rebuilding or issuing new ingestion IDs.

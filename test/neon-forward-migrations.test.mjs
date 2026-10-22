@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {createHash,generateKeyPairSync} from 'node:crypto';
 import {backupRecipientFingerprint} from '../scripts/recovery-backup-envelope.mjs';
-import {deflateRawSync} from 'node:zlib';
+import {deflateRawSync,gzipSync} from 'node:zlib';
 import {rehearsalReceiptFromZIP} from '../scripts/neon-storage-migration.mjs';
 import {spawnSync} from 'node:child_process';
 import {createLocalPostgres} from '../scripts/verify-postgres-schema.mjs';
@@ -24,7 +24,7 @@ import {restorePostgresStorage} from '../scripts/restore-postgres-storage.mjs';
 import {provisionPostgresRuntimeRole} from '../scripts/provision-postgres-runtime-role.mjs';
 import {prepareResearchBundle} from '../scripts/prepare-research-bundle.mjs';
 import {readResearchBundle,importResearchBundle} from '../scripts/import-research-bundle.mjs';
-import {importForwardSettlementBundle,authenticateForwardBaseline,applyPostgresForwardMigrations,forwardMigrationDefinitions,validateForwardOperation,validateForwardMaintenance,runNeonForwardMigrations,verifyForwardRuntimeRole,readForwardCurrentSource,assertForwardCurrentPreserved} from '../scripts/neon-forward-migrations.mjs';
+import {prepareForwardGeography,publishForwardGeography,authenticateGeographicWindow,importForwardSettlementBundle,authenticateForwardBaseline,applyPostgresForwardMigrations,forwardMigrationDefinitions,validateForwardOperation,validateForwardMaintenance,runNeonForwardMigrations,verifyForwardRuntimeRole,readForwardCurrentSource,assertForwardCurrentPreserved} from '../scripts/neon-forward-migrations.mjs';
 const root=path.resolve(new URL('..',import.meta.url).pathname),hash=value=>createHash('sha256').update(value).digest('hex');
 const migration={...forwardMigrationDefinitions[0],sha256:hash(fs.readFileSync(new URL('../postgres/migrations/0001_temporal_geography.sql',import.meta.url)))};
 async function fixture({currentOwner=false}={}){
@@ -387,4 +387,128 @@ test('private owner service imports the same 48 frozen settlement IDs, reconcile
   const withdrawn=await readRecoveryInventory(f.query,{profile:compactRecoveryProfileV3});await assert.rejects(importForwardSettlementBundle(args),/settlement-population-parity-required/);assert.equal(committed,48);assert.deepEqual(await readRecoveryInventory(f.query,{profile:compactRecoveryProfileV3}),withdrawn,'Parity refusal does not remove an existing withdrawal or change any fact');
   t.diagnostic(JSON.stringify({engine:(await f.owner.query('SELECT version() version')).rows[0].version,transport:'actual service and PostgreSQL, no HTTP',campaign_committed_transactions:committed,original_ingestion_ids:48,private_role:'neondb_owner without role changes',parity:result.parity}));
  }finally{await f.close();fs.rmSync(directory,{recursive:true,force:true});}
+});
+
+
+// Isolated PostgreSQL, using the exact ingestion and release service functions.
+import {legacyPublicMapRelease} from '../hosted/cloudflare-access.js';
+import {retainWholeImage} from '../scripts/evidence/restore-whole-image.mjs';
+async function geographicOwnerFixture({currentOwner=false}={}){
+ const originalOwner=currentOwner?await fixture({currentOwner:true}):null,directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-geographic-owner-')),pg=originalOwner?.pg??await createLocalPostgres(),tiers=['continent','subcontinent','region','area','province','location'];
+ const catalog=JSON.parse(fs.readFileSync(path.join(root,'data/hosted-type-catalog.json')));await importBatch(pg.db,catalog);
+ const source=version=>({id:'geo-source:'+version,name:'Isolated reference '+version,license:'CC0 test-only',vintage:'2026',supported_from:2026,supported_to:2027,status:'reference'});
+ const entities=Array.from({length:6},(_,n)=>tiers.map((kind,i)=>({id:kind+':'+n,kind,name:'Retained '+kind+' '+n,parent_id:i?tiers[i-1]+':'+n:null,source_id:source(6).id}))).flat();
+ await importBatch(pg.db,{sources:[source(6)],entities,ingestion_id:'original-entities'});
+ const manifest={version:1,original_catalog_sha256:hash(JSON.stringify(catalog)),releases:[],batches:[],sources_batches:['sources.json'],new_entities:0,total_memberships:36,changes:0},payloads=new Map();
+ const part=(name,payload,route='/api/geography/stage')=>{const bytes=Buffer.from(JSON.stringify(payload));payloads.set(name,bytes);manifest.batches.push({path:name,route,sha256:hash(bytes)});};
+ for(let version=6;version<=10;version++){
+  const members=entities.map(e=>({entity_id:e.id,kind:e.kind,parent_id:version===10&&e.id==='location:0'?'province:1':version===10&&e.id==='location:1'?'province:0':e.parent_id,reference_name:version===10&&e.id==='location:0'?'Reviewed reference label':e.name,active:1,source_id:source(version).id,evidence:{version}}));
+  const release={id:version===6?legacyPublicMapRelease:'geo:'+version,version,source_id:source(version).id,reference_date:'2026-10-01',membership_sha256:await geographicMembershipHash(members),location_ids_sha256:await geographicLocationIdsHash(members),changes_sha256:await geographicChangesHash([]),hierarchy_sha256:String(version%10).repeat(64),footprints_sha256:'f'.repeat(64),expected_counts:Object.fromEntries(tiers.map(kind=>[kind,6]))};manifest.releases.push(release);
+  if(version===6){await stageGeographicRelease(pg.db,{release,memberships:members,ingestion_id:'original-v6'});await finalizeGeographicRelease(pg.db,release.id);}
+  else {part('release-'+version+'.json',{release,ingestion_id:'release:'+version});part(version+'-memberships-0.json',{release_id:release.id,memberships:members,ingestion_id:'members:'+version});}
+ }
+ part('sources.json',{sources:[7,8,9,10].map(source),ingestion_id:'forward-sources'},'/api/records/import');
+ for(const tier of tiers)part('entities-'+tier+'-0.json',{entities:entities.filter(e=>e.kind===tier),ingestion_id:'entities:'+tier},'/api/records/import');
+ const base={...manifest,releases:manifest.releases.slice(0,1),batches:[],sources_batches:['sources.json']};manifest.total_memberships=180;
+ const data=path.join(directory,'data/geographic-releases');fs.mkdirSync(data,{recursive:true});for(const [name,bytes] of payloads)fs.writeFileSync(path.join(data,name),bytes);
+ const original=Buffer.from(JSON.stringify(base)),compressed=gzipSync(Buffer.from(JSON.stringify(manifest))),pointer={path:'releases-v10-gzip.json.gz',sha256:hash(compressed),predecessor_index_sha256:hash(original)};
+ fs.writeFileSync(path.join(data,'index.json'),original);fs.writeFileSync(path.join(data,pointer.path),compressed);fs.writeFileSync(path.join(data,'current-manifest.json'),JSON.stringify(pointer));
+ const imageDirectory='coordination/engineering/eastern-two-gap-repair-native-20261007/release-memberships',imageSource=path.join(directory,'original-image'),missing='data/geographic-releases/8-memberships-0.json';fs.mkdirSync(path.dirname(path.join(imageSource,missing)),{recursive:true});fs.renameSync(path.join(directory,missing),path.join(imageSource,missing));fs.mkdirSync(path.dirname(path.join(directory,imageDirectory)),{recursive:true});retainWholeImage(imageSource,path.join(directory,imageDirectory));
+ const operation={...JSON.parse(fs.readFileSync(path.join(root,'.github/operations/neon-geographic-production.json'))),manifest:{path:'data/geographic-releases/'+pointer.path,sha256:pointer.sha256,predecessor_index_sha256:pointer.predecessor_index_sha256},restored_memberships:{directory:imageDirectory,index_sha256:hash(fs.readFileSync(path.join(directory,imageDirectory,'index.json')))}};
+ fs.mkdirSync(path.join(directory,'restored'));const prepared=prepareForwardGeography(operation,{root:directory,temporary:path.join(directory,'restored')});
+ return {pg,owner:originalOwner?.owner,directory,operation,manifest,payloads,...prepared,close:async()=>{if(originalOwner)await originalOwner.close();else await pg.close();fs.rmSync(directory,{recursive:true,force:true});}};
+}
+
+test('geography owner route uses actual PostgreSQL ordered publication, original IDs, and unchanged older rows/access',async()=>{
+ const f=await geographicOwnerFixture();try{
+  await f.pg.driver.query('CREATE ROLE isolated_geography_app');await f.pg.driver.query('GRANT SELECT ON atlas_entities TO isolated_geography_app');
+  const original=await f.pg.driver.query('SELECT * FROM atlas_entities ORDER BY id'),prior=await f.pg.driver.query("SELECT * FROM atlas_geographic_releases WHERE version=6"),acl=await f.pg.driver.query("SELECT relacl FROM pg_class WHERE relname='atlas_entities'");
+  const counts=async()=> (await f.pg.driver.query('SELECT count(*) n FROM atlas_ingestions')).rows[0].n;
+  let authorize=0,before=0;const options={database:f.pg.db,...f,authorize:async()=>authorize++,beforeBatch:()=>before++};
+  const result=await publishForwardGeography(options);assert.equal(result.status,'published');assert.equal(result.releases.length,4);assert.ok(before>0);assert.equal(authorize,5);assert.match(result.receipts_sha256,/^[a-f0-9]{64}$/);
+  assert.deepEqual(await f.pg.driver.query('SELECT * FROM atlas_entities ORDER BY id'),original);assert.deepEqual(await f.pg.driver.query("SELECT * FROM atlas_geographic_releases WHERE version=6"),prior);assert.deepEqual(await f.pg.driver.query("SELECT relacl FROM pg_class WHERE relname='atlas_entities'"),acl);
+  assert.deepEqual((await f.pg.driver.query('SELECT version,status FROM atlas_geographic_releases ORDER BY version')).rows.map(x=>[x.version,x.status]),[6,7,8,9,10].map(v=>[v,'published']));
+  assert.equal((await f.pg.driver.query("SELECT parent_id FROM atlas_geographic_memberships WHERE release_id='geo:10' AND entity_id='location:0'")).rows[0].parent_id,'province:1');assert.equal(original.rows.find(x=>x.id==='location:0').parent_id,'province:0');
+  const receipts=await counts(),replay=await publishForwardGeography(options);assert.equal(replay.committed_batches,0);assert.equal(await counts(),receipts);
+  const preserved=await f.pg.driver.query('SELECT * FROM atlas_geographic_memberships ORDER BY release_id,entity_id');
+  await assert.rejects(stageGeographicRelease(f.pg.db,{release_id:'geo:10',ingestion_id:'members:10',memberships:[]}),/Ingestion ID/);assert.deepEqual(await f.pg.driver.query('SELECT * FROM atlas_geographic_memberships ORDER BY release_id,entity_id'),preserved);
+ }finally{await f.close();}
+});
+
+test('geography owner interruption resumes original immutable receipts and database transactions roll back bad batches',async()=>{
+ const f=await geographicOwnerFixture();try{
+  let callbacks=0;await assert.rejects(publishForwardGeography({database:f.pg.db,...f,beforeBatch:()=>{if(++callbacks===11)throw Error('simulated interruption after a committed phase');}}),/simulated interruption/);
+  const retained=(await f.pg.driver.query('SELECT id,fingerprint,counts FROM atlas_ingestions ORDER BY id')).rows;assert.ok(retained.some(row=>row.id==='members:7'));
+  const result=await publishForwardGeography({database:f.pg.db,...f});assert.equal(result.status,'published');assert.ok(result.duplicate_batches>0);
+  const after=(await f.pg.driver.query('SELECT id,fingerprint,counts FROM atlas_ingestions ORDER BY id')).rows;for(const receipt of retained)assert.deepEqual(after.find(row=>row.id===receipt.id),receipt);
+  const before=(await f.pg.driver.query('SELECT id FROM atlas_ingestions ORDER BY id')).rows;
+  await assert.rejects(importBatch(f.pg.db,{ingestion_id:'bad-atomic',entities:[{id:'invalid-new',kind:'location',name:'Invalid',parent_id:'absent-parent',source_id:'geo-source:10'}]}));
+  assert.deepEqual((await f.pg.driver.query('SELECT id FROM atlas_ingestions ORDER BY id')).rows,before);assert.equal((await f.pg.driver.query("SELECT count(*) n FROM atlas_entities WHERE id='invalid-new'")).rows[0].n,0);
+ }finally{await f.close();}
+});
+
+test('geography verify-only authenticates complete restored input with zero database access; corrupt phase fails before writes',async()=>{
+ const f=await geographicOwnerFixture();try{
+  const database=new Proxy({},{get(){throw Error('verify-only database access');}}),result=await publishForwardGeography({database,...f,verifyOnly:true});assert.equal(result.database_writes,0);assert.equal(result.releases.length,4);
+  const bad=part=>part.path==='10-memberships-0.json'?Buffer.from('{}'):f.readBatch(part);
+  await assert.rejects(publishForwardGeography({database,...f,readBatch:bad}),/hash mismatch/);
+  for(const change of [{kind:'recovery'},{versions:[10]},{issue:51},{settlement_import:{}},{project_id:'other'}])assert.throws(()=>prepareForwardGeography({...f.operation,...change},{root:f.directory,temporary:path.join(f.directory,'adverse')}));
+  const original=f.operation.manifest.sha256;f.operation.manifest.sha256='0'.repeat(64);assert.throws(()=>prepareForwardGeography(f.operation,{root:f.directory,temporary:path.join(f.directory,'adverse')}),/pin-mismatch/);f.operation.manifest.sha256=original;
+ }finally{await f.close();}
+});
+
+
+function geographicWindowFixture(){
+ const now=Date.parse('2026-10-22T00:00:00Z'),env={GITHUB_SHA:'a'.repeat(40),GITHUB_ACTOR:'fixture-owner',GITHUB_TOKEN:'fixture-only',PUBLICATION_DEPLOYMENT_ID:'123'},operation={issue:2701,site_origin:'https://worldatlas-explorer.chengshu-worldatlas.workers.dev'},operationSHA='b'.repeat(64);
+ const window={version:1,kind:'geography',operation_id:'geographic-fixture',publisher_worker_id:'existing-owner',primary_commit:env.GITHUB_SHA,issues:[2701],started_at:new Date(now-1000).toISOString(),expires_at:new Date(now+60000).toISOString(),rollback_url:'https://github.com/ChengshuLi/WorldAtlas/issues/2701',operation_sha256:operationSHA,read_only:true,origin:operation.site_origin};
+ const deployment={id:123,sha:env.GITHUB_SHA,environment:'worldatlas-production',task:'worldatlas-publication',creator:{type:'User',login:env.GITHUB_ACTOR},payload:{worldatlas_publication:window}};let additional=[];
+ const fetchImpl=async url=>{const route=new URL(url).pathname;assert.equal(new URL(url).hostname,'api.github.com');let value;if(route.endsWith('/deployments/123'))value=deployment;else if(route.endsWith('/deployments'))value=[deployment,...additional];else if(route.endsWith('/statuses'))value=[];else throw Error('Unexpected fixture route '+route);return Response.json(value);};
+ return {now,env,operation,operationSHA,window,deployment,fetchImpl,setAdditional:rows=>additional=rows};
+}
+test('geography private operation is exact-head/window bound and shares complete website serialization',async()=>{
+ const f=geographicWindowFixture(),first=await authenticateGeographicWindow(f);assert.equal(first.deployment_id,123);
+ for(const change of [{GITHUB_ACTOR:'another'},{GITHUB_SHA:'c'.repeat(40)},{PUBLICATION_DEPLOYMENT_ID:''}])await assert.rejects(authenticateGeographicWindow({...f,env:{...f.env,...change}}));
+ for(const change of [{kind:'recovery'},{read_only:false},{operation_sha256:'c'.repeat(64)},{issues:[2701,51]},{origin:'https://other.invalid'},{expires_at:new Date(f.now).toISOString()},{started_at:new Date(f.now+1).toISOString()}]){
+  const original=structuredClone(f.window);Object.assign(f.window,change);await assert.rejects(authenticateGeographicWindow(f));Object.assign(f.window,original);
+ }
+ const original=f.window.rollback_url;f.window.rollback_url+='?changed';await assert.rejects(authenticateGeographicWindow({...f,expectedWindowSHA:first.window_sha256}),/changed-geographic/);f.window.rollback_url=original;
+ f.setAdditional([{...f.deployment,id:124,payload:{worldatlas_publication:{...f.window,kind:'site',operation_id:'other-site'}}}]);await assert.rejects(authenticateGeographicWindow(f),/overlap-or-settled/);
+});
+
+
+test('actual owner entry preserves existing modes, verify-only isolation and same-ID reconciliation after a lost committed response',async()=>{
+ const f=await geographicOwnerFixture({currentOwner:true}),w=geographicWindowFixture();try{
+  w.window.started_at=new Date(Date.now()-1000).toISOString();w.window.expires_at=new Date(Date.now()+120000).toISOString();w.operation=f.operation;w.operationSHA=hash(JSON.stringify(f.operation));w.window.operation_sha256=w.operationSHA;
+  const operationFile='.github/operations/neon-geographic-production.json';fs.mkdirSync(path.dirname(path.join(f.directory,operationFile)),{recursive:true});fs.writeFileSync(path.join(f.directory,operationFile),JSON.stringify(f.operation));
+  const env={...w.env,GITHUB_EVENT_NAME:'workflow_dispatch',GITHUB_REPOSITORY:'ChengshuLi/WorldAtlas',GITHUB_RUN_ID:'901',GITHUB_RUN_ATTEMPT:'1',GITHUB_WORKFLOW_REF:'ChengshuLi/WorldAtlas/.github/workflows/neon-forward-migrations.yml@refs/heads/main',NEON_PROJECT_ID:f.operation.project_id,NEON_API_KEY:'synthetic-fixture-key'};
+  const requests=[];let connections=0,closed=0,loseResponse=true;
+  const fetchImpl=async(url,options)=>{requests.push(String(url));url=new URL(url);if(url.hostname==='api.github.com')return w.fetchImpl(url,options);if(url.hostname==='worldatlas-explorer.chengshu-worldatlas.workers.dev'){const pin=f.manifest.releases[0];return Response.json({release_id:pin.id,hierarchy_sha256:pin.hierarchy_sha256,footprints_sha256:pin.footprints_sha256},{headers:{'X-Atlas-Legacy-Map-Release':pin.id}});}assert.equal(url.hostname,'console.neon.tech');assert.ok(!options.method||options.method==='GET');let value;
+   if(url.pathname.endsWith('/projects/'+env.NEON_PROJECT_ID))value={project:{id:env.NEON_PROJECT_ID,pg_version:18}};
+   else if(url.pathname.endsWith('/branches'))value={branches:[{id:f.operation.production_branch_id,name:'production',default:true}]};
+   else if(url.pathname.endsWith('/databases'))value={databases:[{name:'neondb',owner_name:'neondb_owner'}]};
+   else if(url.pathname.endsWith('/roles'))value={roles:[{name:'neondb_owner'},{name:'worldatlas_app'}]};
+   else if(url.pathname.endsWith('/endpoints'))value={endpoints:[{branch_id:f.operation.production_branch_id,type:'read_write',host:'ep-fixture.us-east-2.aws.neon.tech'}]};
+   else if(url.pathname.endsWith('/connection_uri'))value={uri:'postgresql://neondb_owner:isolated-fixture-only@ep-fixture.us-east-2.aws.neon.tech/neondb?sslmode=require'};
+   assert.notEqual(value,undefined,'Unexpected owner fixture route '+url.href);return Response.json(value);
+  };
+  const options={root:f.directory,operationFile,env,fetchImpl,recoveryImpl:()=>{throw Error('Geography must not invoke native/cancelled settlement recovery');},ownerDriverFactory:async()=>{connections++;return {...f.owner,close:async()=>closed++};},serviceDatabaseFactory:()=>({...f.pg.db,batch:async statements=>{const value=await f.pg.db.batch(statements);if(loseResponse){loseResponse=false;throw Error('Synthetic lost response, never leak private fixture details');}return value;}})};
+  const checked=await runNeonForwardMigrations({...options,mode:'geography-verify'});assert.equal(checked.status,'verified');assert.equal(checked.geography.database_writes,0);assert.equal(requests.length,0);assert.equal(connections,0);
+  for(const headers of [{},{'X-Atlas-Legacy-Map-Release':'wrong-release'}]){
+   requests.length=0;const denied=await runNeonForwardMigrations({...options,mode:'geography-production',fetchImpl:async(url,options)=>new URL(url).hostname==='worldatlas-explorer.chengshu-worldatlas.workers.dev'?Response.json({}, {headers}):fetchImpl(url,options)});
+   assert.equal(denied.status,'failed');assert.equal(denied.failure_stage,'legacy-public-map-compatibility');assert.equal(connections,0);assert.ok(requests.every(url=>new URL(url).hostname==='api.github.com'));
+  }
+  const first=await runNeonForwardMigrations({...options,mode:'geography-production'});assert.equal(first.status,'failed');assert.equal(first.failure_stage,'existing-geographic-services');assert.equal(first.commit_status,'reconcile-original-ingestion-ids');assert.ok(!JSON.stringify(first).includes('Synthetic lost response'));assert.ok(!JSON.stringify(first).includes('isolated-fixture-only'));assert.equal(closed,1);
+  const receipt=(await f.owner.query("SELECT id,fingerprint,counts FROM atlas_ingestions WHERE id='forward-sources'")).rows[0];assert.ok(receipt);
+  const second=await runNeonForwardMigrations({...options,mode:'geography-production'});assert.equal(second.status,'verified',JSON.stringify(second));assert.ok(second.geography.duplicate_batches>0);assert.equal(closed,2);assert.deepEqual((await f.owner.query("SELECT id,fingerprint,counts FROM atlas_ingestions WHERE id='forward-sources'")).rows[0],receipt);
+  assert.ok(requests.every(url=>!url.includes('/actions/runs/')&&!url.includes('/issues/51')),'No obsolete copy or cancelled import approval dependency');assert.equal(second.forward,undefined);assert.equal(second.settlement_import,undefined);
+ }finally{await f.close();}
+});
+
+
+test('geography modes remain in the existing private owner workflow and fixed operation selector',()=>{
+ const workflow=fs.readFileSync(path.join(root,'.github/workflows/neon-forward-migrations.yml'),'utf8');
+ assert.match(workflow,/geography-verify/);assert.match(workflow,/geography-production/);assert.match(workflow,/group: neon-storage-owner-maintenance/);assert.match(workflow,/cancel-in-progress: false/);assert.match(workflow,/PUBLICATION_DEPLOYMENT_ID: \$\{\{ inputs.publication_deployment_id \}\}/);assert.match(workflow,/operation=\.github\/operations\/neon-geographic-production\.json/);
+ const reuse=workflow.indexOf('Reuse exact already-built'),build=workflow.indexOf('node scripts/build-cloudflare.mjs --publication'),upload=workflow.indexOf('Preserve the exact public package');assert.ok(reuse>0&&reuse<build&&build<upload);
+ assert.equal((workflow.match(/gh api --paginate --slurp/g)||[]).length,2);assert.match(workflow,/head_sha=\$GITHUB_SHA/);assert.match(workflow,/include-hidden-files: true/);assert.match(workflow,/\.cache\/cloudflare-publication\.json/);assert.ok(!workflow.slice(upload,workflow.indexOf('Preserve sanitized forward receipt')).includes('sqlite'));
+ const op=JSON.parse(fs.readFileSync(path.join(root,'.github/operations/neon-geographic-production.json')));assert.equal(op.kind,'geography');assert.deepEqual(op.versions,[7,8,9,10]);for(const absent of ['migrations','settlement_import','runtime_grants','baseline'])assert.equal(op[absent],undefined);
 });
