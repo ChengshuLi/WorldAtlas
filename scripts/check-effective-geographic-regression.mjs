@@ -116,18 +116,50 @@ export class ImmutableReader {
     const expected=`${pin.mode} blob ${pin.git_blob_oid}\t${pin.path}\0`;
     let matching=false;try{matching=this.git('ls-tree','-z',known?pin.commit:this.version,'--',pin.path).toString()===expected;}catch{}
     if(known&&!matching)throw failure; // A known original never falls back.
-    const {createAcquisition,githubTree,githubCommit}=await import('./geography-prefetch.mjs');
-    const gitExecPath=fs.realpathSync(execFileSync(this.gitExecutable,['--exec-path']).toString().trim());
-    const a=createAcquisition({repo:this.repo,loadTree:loadTree??githubTree,loadCommit:loadCommit??githubCommit,
-      loadDescriptor:(_version,name)=>{demand(name===pin.path,'Foreign immutable acquisition path');return {type:'blob',mode:pin.mode,sha:pin.git_blob_oid,size:pin.bytes};},
-      execute:(command,args,options)=>{demand(command==='git','Foreign immutable acquisition executable');
-        return execute(this.gitExecutable,args,{...options,env:{...options.env,GIT_EXEC_PATH:gitExecPath}});}});
+    const a=await this.#acquisition({loadTree,loadCommit,execute,
+      loadDescriptor:(_version,name)=>{demand(name===pin.path,'Foreign immutable acquisition path');return {type:'blob',mode:pin.mode,sha:pin.git_blob_oid,size:pin.bytes};}});
     const original=!known&&!matching;
     if(original)await a.resolvePath(pin.commit,pin.path);
     const selected=known||original?pin.commit:this.version;
     const row=await a.descriptor(selected,pin.path,pin);a.acquire([row]);a.body(row);
     if(original)this.#originDescriptors.set(pin.commit+':'+pin.path,
       {commit:pin.commit,path:pin.path,mode:pin.mode,git_blob_oid:pin.git_blob_oid,bytes:pin.bytes});
+  }
+  async #acquisition({loadTree,loadCommit,loadDescriptor,execute=execFileSync}={}) {
+    const {createAcquisition,githubTree,githubCommit}=await import('./geography-prefetch.mjs');
+    const gitExecPath=fs.realpathSync(execFileSync(this.gitExecutable,['--exec-path']).toString().trim());
+    return createAcquisition({repo:this.repo,loadTree:loadTree??githubTree,loadCommit:loadCommit??githubCommit,loadDescriptor,
+      execute:(command,args,options)=>{demand(command==='git','Foreign immutable acquisition executable');
+        return execute(this.gitExecutable,args,{...options,env:{...options.env,GIT_EXEC_PATH:gitExecPath}});}});
+  }
+  // Historical executed-code rows issue path/bytes/SHA, not a current alias.
+  // Authenticate the complete actual path group in one private origin session;
+  // no commit/tree is imported into this reader's repository or public inventory.
+  async acquireOriginalPaths(pins,options={}) {
+    demand(Array.isArray(pins)&&new Set(pins.map(p=>p?.commit+':'+p?.path)).size===pins.length,
+      'Require unique original path group');
+    const missing=[];
+    for(const p of pins){
+      demand(p&&commit(p.commit)&&safe(p.path)&&Number.isSafeInteger(p.bytes)&&p.bytes>=0&&hash(p.sha256),
+        'Incomplete original path identity');
+      let known=true;try{this.git('--no-lazy-fetch','cat-file','-e',p.commit+'^{commit}');}catch{known=false;}
+      if(known||this.#originDescriptors.has(p.commit+':'+p.path)){
+        // A known original with an absent/wrong tree never uses current bytes.
+        const d=this.descriptor(p.path,p.commit);demand(d.bytes===p.bytes,'Original path whole size differs');
+      }else missing.push(p);
+    }
+    if(!missing.length)return;
+    const proofs=new Map(),a=await this.#acquisition({...options,
+      loadDescriptor:(version,name)=>{const p=proofs.get(version+':'+name);demand(p,'Foreign original acquisition path');
+        return {type:'blob',mode:p.mode,sha:p.git_blob_oid,size:p.bytes};}});
+    const rows=[];
+    for(const p of missing){
+      const origin=await a.resolvePath(p.commit,p.path),q={...p,mode:origin.mode,git_blob_oid:origin.git_blob_oid};
+      proofs.set(p.commit+':'+p.path,q);rows.push(await a.descriptor(p.commit,p.path,q));
+    }
+    a.acquire(rows);for(const row of rows)a.body(row);
+    for(const q of proofs.values())this.#originDescriptors.set(q.commit+':'+q.path,
+      {commit:q.commit,path:q.path,mode:q.mode,git_blob_oid:q.git_blob_oid,bytes:q.bytes});
   }
   constructor(repo,version,{gitExecutable='git',invocation}={}) {
     demand(commit(version),'Require immutable input commit');

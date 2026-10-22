@@ -575,3 +575,48 @@ test('warm exact current aliases need no original metadata or transport',async()
   assert.deepEqual(reader.read(name,{version:reader.pinnedVersion(pin),expected:pin.sha256}),raw);
  }finally{f.close();}
 });
+
+test('historical code path groups authenticate one private origin session, never current aliases',async()=>{
+ const lazy=process.env.GIT_NO_LAZY_FETCH;process.env.GIT_NO_LAZY_FETCH='0';
+ const f=originFixture();try{
+  const bodies={'code/a.js':'original first code\n','code/b.js':'original second code\n'};
+  const original=f.commit(bodies),current=f.commit({...bodies,'code/b.js':'different current code\n'});
+  const pins=Object.entries(bodies).map(([path,raw])=>({commit:original,path,bytes:Buffer.byteLength(raw),sha256:digest(raw)}));
+  const importObject=(id,type)=>f.git(f.remote,['hash-object','-w','-t',type,'--stdin'],f.git(f.origin,['cat-file',type,id]));
+  const importTrees=id=>{importObject(f.git(f.origin,['rev-parse',id+'^{tree}']).toString().trim(),'tree');
+   for(const line of f.git(f.origin,['ls-tree','-rt',id]).toString().trim().split('\n')){const [,type,oid]=line.split(/[ \t]/);if(type==='tree')importObject(oid,'tree');}};
+  importObject(current,'commit');importTrees(current);
+  let blobBatches=0;
+  const options={...f.loaders,execute:(command,args,options)=>{
+   assert.equal(options.env.GIT_NO_LAZY_FETCH,'1');assert.equal(options.env.GIT_NO_REPLACE_OBJECTS,'1');
+   if(args.includes('init'))f.calls.stores.push(args[args.indexOf('-C')+1]);
+   if(args.includes('fetch')){if(!args.includes('--filter=tree:0'))blobBatches++;args=args.map(x=>x==='https://github.com/ChengshuLi/WorldAtlas.git'?'file://'+f.origin:x);}
+   return execFileSync(command,args,options);
+  }};
+  const reader=new ImmutableReader(f.remote,current);
+  await reader.acquireOriginalPaths(pins,options);
+  assert.equal(f.calls.commits.length,1,'One native origin authentication for the known complete group');
+  assert.equal(f.calls.trees.length,2,'One complete root and one complete code tree');assert.equal(blobBatches,1);
+  for(const p of pins){assert.equal(reader.pinnedVersion(p),original);assert.deepEqual(reader.read(p.path,{version:original,expected:p.sha256}),Buffer.from(bodies[p.path]));}
+  assert.throws(()=>f.git(f.remote,['--no-lazy-fetch','cat-file','-e',original+'^{commit}']));
+  assert(!fs.existsSync(path.join(f.remote,'shallow')));for(const dir of f.calls.stores)assert(!fs.existsSync(dir));
+  const before=f.calls.commits.length;await reader.acquireOriginalPaths(pins,{...options,loadCommit:()=>{throw Error('warm original must not fetch');}});assert.equal(f.calls.commits.length,before);
+  // Even an exact current a.js is not proof that the original commit had it.
+  const forged=new ImmutableReader(f.remote,current);forged.inventory.set(original+':'+pins[0].path,{...pins[0],mode:'100644',git_blob_oid:'a'.repeat(40)});
+  await assert.rejects(forged.acquireOriginalPaths([pins[0]],{...options,loadCommit:()=>{throw Error('origin unavailable');}}),/origin unavailable/);
+  for(const change of [{bytes:pins[0].bytes+1},{sha256:'f'.repeat(64)},{path:'code/absent.js'}]){
+   const bad=new ImmutableReader(f.remote,current);await assert.rejects(bad.acquireOriginalPaths([{...pins[0],...change}],options));
+   assert.equal(bad.pinnedVersion(pins[0]),current,'Failed acquisition must not install private origin proof');
+  }
+  await assert.rejects(new ImmutableReader(f.remote,current).acquireOriginalPaths([pins[0],pins[0]],options),/unique original path group/);
+  await assert.rejects(new ImmutableReader(f.remote,current).acquireOriginalPaths(pins,{...options,execute:()=>{throw Error('transport unavailable');}}),/acquisition failed/);
+  importObject(original,'commit');const inventory=f.inventory();
+  await assert.rejects(reader.acquireOriginalPaths(pins,options));
+  assert.throws(()=>reader.read(pins[0].path,{version:original,expected:pins[0].sha256}));
+  assert.deepEqual(f.inventory(),inventory,'A now-known missing original tree cannot hydrate or use cached/current metadata');
+  importTrees(original);await reader.acquireOriginalPaths(pins,{...options,loadCommit:()=>{throw Error('known origin must not fetch');}});
+  for(const p of pins)assert.deepEqual(reader.read(p.path,{version:original,expected:p.sha256}),Buffer.from(bodies[p.path]));
+  await assert.rejects(reader.acquireOriginalPaths([{...pins[0],commit:current,path:'code/absent.js'}],options));
+  assert.throws(()=>reader.read(pins[1].path,{version:current,expected:pins[1].sha256}),'Known wrong original bytes never fall back');
+ }finally{f.close();if(lazy===undefined)delete process.env.GIT_NO_LAZY_FETCH;else process.env.GIT_NO_LAZY_FETCH=lazy;}
+});

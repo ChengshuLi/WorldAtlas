@@ -11,7 +11,7 @@ import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {prepareReferenceMetadataProjection} from '../scripts/selected-reference-metadata.mjs';
 import {projectReferenceFeatures} from '../src/reference-metadata.js';
 import {JOINT_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs';
-import {valueBytes,valueSha,readOriginalRuleAuthority,selectedCoordinateShard,joinSelectedCoordinateCertificate,acceptColdCoordinateCertificate,selectedAffectedPlan,possibleNeighbors,compareVersionedRepairLedgers,selectedCertificateAffectedPlan,acquireCurrentRebindOperands,sealColdCoordinateCertificate,reopenColdCoordinateCertificate} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {valueBytes,valueSha,readOriginalRuleAuthority,readCurrentRebindCustody,LEGACY_CURRENT_REBIND_CODE,selectedCoordinateShard,joinSelectedCoordinateCertificate,acceptColdCoordinateCertificate,selectedAffectedPlan,possibleNeighbors,compareVersionedRepairLedgers,selectedCertificateAffectedPlan,acquireCurrentRebindOperands,sealColdCoordinateCertificate,reopenColdCoordinateCertificate} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const sha=b=>createHash('sha256').update(b).digest('hex'),root=process.cwd();
 const retained=process.env.WORLDATLAS_PREVENTION_CONTROLS;
@@ -809,4 +809,109 @@ test('actual cold entry acquires a detached physical-program origin before prese
   assert(!fs.existsSync(path.join(f.repo,'.git/shallow')));
   t.mock.restoreAll();
  }finally{f.cleanup();if(lazy===undefined)delete process.env.GIT_NO_LAZY_FETCH;else process.env.GIT_NO_LAZY_FETCH=lazy;}
+});
+
+// This is a small real-Git custody fixture, not a source/native producer run.
+// It must get through the complete administrative source proof and then refuse
+// the deliberately absent native proof, with no successful geography receipt.
+for(const variant of ['exact','duplicate-map','missing-map','map-path','map-hash','map-bytes','map-oid','map-mode','wrong-map-origin','known-selector-missing-tree','metadata-unavailable'])
+test('actual cold administrative read preserves issued selector and consumed-map custody: '+variant,async t=>{
+ const f=fixture();try{
+  const base=f.select([[[0,2,1]],[[1,3,2]],[],[]],{transport:true});
+  const selection=JSON.parse(fs.readFileSync(path.join(f.repo,'data/ownership-selection.json')));
+  const pin=(name,version=f.git('rev-parse','HEAD'))=>{const raw=execFileSync('git',['-C',f.repo,'show',version+':'+name]);const [mode,,oid]=f.git('ls-tree',version,'--',name).split(/[ \t]/);return {commit:version,path:name,mode,git_blob_oid:oid,bytes:raw.length,sha256:sha(raw)};};
+  const cataloguePath='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';f.write(cataloguePath,fs.readFileSync(cataloguePath));
+  const programme=JSON.parse(fs.readFileSync(path.join(f.repo,cataloguePath))).programs.find(p=>p.source_profile==='retained-consumed-administrative-source');
+  const reference={id:selection.release_id,footprints_sha256:'a'.repeat(64),hierarchy_sha256:'b'.repeat(64)};
+  const release=f.write('data/geographic-releases/selected.json.gz',gzipSync(valueBytes({releases:[reference]})));
+  f.write('data/geographic-releases/current-manifest.json',{path:'selected.json.gz',sha256:sha(release)});
+  const target=pin('data/geography/fixture.json',base),targetInput={...target,blob:target.git_blob_oid};delete targetInput.git_blob_oid;
+  const bank={version:1,kind:'complete-world-index-with-exact-encoded-overrides',release_id:selection.release_id,native_manifest_sha256:selection.sha256,footprints_sha256:reference.footprints_sha256,locations:2,world_index:pin('data/world-index.json',base),unchanged_files:[target],overrides:[]};
+  const bankRaw=f.write('source/selected-bank.json',bank),baseSelection={...selection,selected_geography:{version:1,kind:bank.kind,path:'source/selected-bank.json',bytes:bankRaw.length,sha256:sha(bankRaw)}};
+  const mapOrigin=f.commit(),mapPin=pin('source/selected-bank.json',mapOrigin);
+  f.write('source/selected-bank.json',{different:true});const wrongMapOrigin=f.commit();f.write('source/selected-bank.json',bankRaw);
+  f.write('data/ownership-selection.json',baseSelection);const old=f.commit(),oldPin=pin('data/ownership-selection.json',old);
+  const selected={...baseSelection,additive_release:{path:'prior-sidecar.json',bytes:1,sha256:'c'.repeat(64)}};
+  f.write('data/ownership-selection.json',selected);const newer=f.commit(),newPin=pin('data/ownership-selection.json',newer);
+  const baseline=p=>({version:2,kind:'current-selected-native-baseline-v1',pins:[p]});
+  const id='component:held',parent={},runtime={},installed_modules=[],report={whole:'fixture-report'};
+  const source_rule={profile:programme.source_profile,expected_ids:[id],inputs:[targetInput],target_banks:[target.path]};
+  const issued={version:1,operation:'retained-land-source-premises-v1',executed_code:programme.source_executed_code,baseline:baseline(oldPin),parent,source_rule,installed_modules,report,destination:'source-output'};
+  f.write('source/request.json',issued);const sr=pin('source/request.json',f.commit());
+  const source={operation:issued.operation,request:sr,executed_code:issued.executed_code,baseline:issued.baseline,parent,source_rule,components:1,execution_commit:base,runtime,installed_modules,input_descriptors:[report,targetInput,oldPin]};
+  f.write('source/facts.json',source);const sf=pin('source/facts.json',f.commit());
+  f.write('source/inventory.jsonl',Buffer.from(JSON.stringify({component_id:id})+'\n'));const si=pin('source/inventory.jsonl',f.commit());
+  f.write('source/publication.json',{complete:true,facts:{bytes:sf.bytes,sha256:sf.sha256},inventory:{bytes:si.bytes,sha256:si.sha256}});
+  f.write('source/operating.json',{qualified:true,execution_commit:base,exit:{code:0,signal:null},owned_processes_remaining:[],refusal:null,request_sha256:sr.sha256,destination:issued.destination});const proofs=f.commit(),sp=pin('source/publication.json',proofs),so=pin('source/operating.json',proofs);
+  const mp=pin(selection.manifest_path,base),additive={scope_ids:[id],source_profile:source_rule.profile,source_execution_commit:base,source_runtime:runtime,inputs:[sr,sf,sp,si,so,mp],source_request_path:sr.path,facts_path:sf.path,publication_path:sp.path,inventory_path:si.path,operating_path:so.path,manifest_path:mp.path};
+  const request={version:1,operation:'unactivated-additive-native-batch-v1',executed_code:programme.native_executed_code,baseline:baseline(newPin),parent,additive};
+  f.write('native/request.json',request);const nr=pin('native/request.json',f.commit());
+  const consumed={...mapPin,whole_body_consumed:true};if(variant==='map-path')consumed.path='source/absent-bank.json';if(variant==='map-hash')consumed.sha256='f'.repeat(64);if(variant==='map-bytes')consumed.bytes++;if(variant==='map-oid')consumed.git_blob_oid='f'.repeat(40);if(variant==='map-mode')consumed.mode='100755';if(variant==='wrong-map-origin')consumed.commit=wrongMapOrigin;
+  const acquisition={kind:'current-selected-native-baseline-custody-v1',baseline_pin:newPin,selection:selected,manifest_sha256:mp.sha256,source_map_sha256:baseSelection.selected_geography.sha256,input_inventory:[{...mp,whole_body_consumed:true},...(variant==='missing-map'?[]:variant==='duplicate-map'?[consumed,consumed]:[consumed])],source_bindings:[{...target,kind:'ordinary-immutable-git-source'}]};
+  const preimage={version:3,source_profile:source_rule.profile,source_rule,representation:'literal-base-or-complete-additions',native_method:selection.method,executed_code:request.executed_code};
+  f.write('native/facts.json',{operation:request.operation,executed_code:request.executed_code,baseline:request.baseline,parent,request:nr,source_predecessor:additive,baseline_acquisition:acquisition});
+  f.write('native/ledger.json',{version:1,kind:'native-additive-repair-ledger-v1',scope_ids:[id],rows:[{component_id:id,disposition:'held'}],rule_sha256:valueSha(preimage)});const native=f.commit();
+  f.write('binding.json',{version:1,kind:'original-issued-rule-source-custody-v1',original_pins:{ledger:pin('native/ledger.json',native),native_facts:pin('native/facts.json',native),native_manifest:mp,native_request:nr,source_facts:sf,source_request:sr},native_proof:{}});
+  f.write('rule.json',valueBytes(preimage));const rules=f.commit(),e={policy_id:'retained-source-literal-additions',policy_version:1,rule_sha256:valueSha(preimage),rule_preimage:pin('rule.json',rules),source_authority:pin('binding.json',rules)};
+  const registry={version:1,kind:'retained-rule-authority-registry-v1',entries:[{...e,authority_sha256:valueSha(e)}]};
+  f.write('registry.json',registry);f.write('ledger.json',{version:2,kind:'native-additive-repair-ledger-v2',authority_registry_sha256:valueSha(registry),scope_ids:[],rows:[]});f.write('patch.json',{rows:[]});const products=f.commit();
+  const manifest=JSON.parse(fs.readFileSync(path.join(f.repo,selection.manifest_path))),assets={base_manifest:mp,owner_roster:pin(manifest.original_assets.bounds.path,base),ledger:pin('ledger.json',products),patch:pin('patch.json',products)};
+  const owners=gunzipSync(fs.readFileSync(path.join(f.repo,assets.owner_roster.path)));Object.assign(assets.owner_roster,{decoded_bytes:owners.length,decoded_sha256:sha(owners)});
+  f.write('envelope.json',{version:2,kind:'retained-native-base-plus-delta-v2',base_reference:reference,effective_reference:reference,...assets});const envelope=f.commit();
+  const sidecar=f.write('sidecar.json',{version:2,kind:'retained-native-additive-selection-v2',base_selection:baseSelection,authority_registry:pin('registry.json',products),runtime_envelope:pin('envelope.json',envelope),logical_asset_map:assets});
+  f.write('data/ownership-selection.json',{...baseSelection,additive_release:{path:'sidecar.json',bytes:sidecar.length,sha256:sha(sidecar)}});const current=f.commit();
+  const remote=path.join(f.repo,'remote.git');execFileSync('git',['clone','--bare','--no-hardlinks',f.repo,remote],{stdio:'pipe'});for(const key of ['uploadpack.allowFilter','uploadpack.allowAnySHA1InWant'])execFileSync('git',['-C',remote,'config',key,'true']);
+  const removed=[...(variant==='known-selector-missing-tree'?[f.git('rev-parse',old+'^{tree}')]:[old]),newer,mapOrigin,oldPin.git_blob_oid,newPin.git_blob_oid];
+  for(const oid of removed)fs.unlinkSync(path.join(f.repo,'.git/objects',oid.slice(0,2),oid.slice(2)));
+  // Use the fixture's actual executing module, whose committed policy catalogue
+  // is authenticated by the same real module-body binding as production.
+  const mod=await import('file://'+path.join(f.repo,'scripts/check-effective-geographic-regression.mjs'));
+  const original=mod.ImmutableReader.prototype.acquirePinned,calls=[];
+  t.mock.method(mod.ImmutableReader.prototype,'acquirePinned',async function(p){calls.push({reader:this,pin:p});return original.call(this,p,{
+   loadCommit:async id=>{if(variant==='metadata-unavailable')throw Error('fixture original metadata unavailable');return {sha:id,tree:{sha:execFileSync('git',['-C',remote,'rev-parse',id+'^{tree}']).toString().trim()}};},
+   loadTree:async id=>({sha:id,truncated:false,tree:execFileSync('git',['-C',remote,'ls-tree','-z',id]).toString().split('\0').filter(Boolean).map(line=>{const [,mode,type,sha,name]=line.match(/^(\d+) (\w+) ([a-f0-9]+)\t(.+)$/s);return {mode,type,sha,path:name};})}),
+   execute:(command,args,options)=>execFileSync(command,args.map(arg=>arg==='https://github.com/ChengshuLi/WorldAtlas.git'?'file://'+remote:arg),options)
+  });});
+  const expected=variant==='exact'?/Require complete native proof roster/:['duplicate-map','missing-map','map-path'].includes(variant)?/Missing\/duplicate administrative consumed source map/:['map-hash','map-bytes'].includes(variant)?/Administrative consumed source map identity differs/:variant==='metadata-unavailable'?/fixture original metadata unavailable/:variant==='known-selector-missing-tree'?/not a tree object|unable to read tree|bad tree object/:['map-oid','map-mode'].includes(variant)?/differs from original path|differs from tree|descriptor differs|blob identity differs/:/Source-target whole identity differs/;
+  await assert.rejects(mod.inspectSelectedAcquired(f.repo,current,current),expected);
+  assert.deepEqual(calls.slice(0,2).map(r=>r.pin),['metadata-unavailable','known-selector-missing-tree'].includes(variant)?[oldPin]:[oldPin,newPin]);
+  if(variant==='exact'){
+   assert.equal(calls[2].pin.commit,mapOrigin,'The map retains its genuine native origin, not a selector origin');
+   assert.equal(calls[2].reader.inventory.get(current+':'+mapPin.path).whole_body_consumed,true,'An exact current map remains the cheap whole-body route');
+   for(const oid of [old,newer,mapOrigin])assert.throws(()=>f.git('--no-lazy-fetch','cat-file','-e',oid+'^{commit}'));
+   assert(!fs.existsSync(path.join(f.repo,'.git','shallow')));
+  }
+ }finally{f.cleanup();}
+});
+
+test('real current-rebind custody consumes privately authenticated historical code and retains its execution refusal',async()=>{
+ const f=fixture();try{
+  const baseline=f.select([[[0,2,1]],[[1,3,2]],[],[]]);
+  const pin=(name,version)=>{const raw=execFileSync('git',['-C',f.repo,'show',version+':'+name]);const [mode,,git_blob_oid]=f.git('ls-tree',version,'--',name).split(/[ \t]/);return {commit:version,path:name,mode,git_blob_oid,bytes:raw.length,sha256:sha(raw)};};
+  const code=LEGACY_CURRENT_REBIND_CODE.map(name=>{const raw=f.write(name,Buffer.from('retained original code: '+name+'\n'));return {path:name,bytes:raw.length,sha256:sha(raw)};});
+  const execution=f.commit(),externalNames=['code_source','terminal','stderr','stdout','issued_plan'];
+  for(const name of externalNames)f.write('rebind/'+name+'.json',{});const external=f.commit();
+  const externalPins=Object.fromEntries(externalNames.map(name=>[name,pin('rebind/'+name+'.json',external)]));
+  f.write('rebind/request.json',{executed_code:code});f.write('rebind/operating.json',{execution_custody:externalPins});
+  for(const name of ['facts','publication','result'])f.write('rebind/'+name+'.json',{});const products=f.commit();
+  const names=['request','facts','publication','operating','result'],productPins=Object.fromEntries(names.map(name=>[name,pin('rebind/'+name+'.json',products)]));
+  f.write('rebind/certificate.json',{version:1,kind:'qualified-native-additive-current-bank-rebind-v1',execution_commit:execution,base_selection:{},authority_registry_sha256:'a'.repeat(64),...productPins});const issued=f.commit(),certificate=pin('rebind/certificate.json',issued);
+  for(const p of code)f.write(p.path,Buffer.from('different current code\n'));
+  f.write('rebind/request.json',{unrelated:true});const current=f.commit();
+  const remote=path.join(f.repo,'remote.git');execFileSync('git',['clone','--bare','--no-hardlinks',f.repo,remote],{stdio:'pipe'});for(const key of ['uploadpack.allowFilter','uploadpack.allowAnySHA1InWant'])execFileSync('git',['-C',remote,'config',key,'true']);
+  for(const oid of [execution,products,issued])fs.unlinkSync(path.join(f.repo,'.git/objects',oid.slice(0,2),oid.slice(2)));
+  const options={loadCommit:async id=>({sha:id,tree:{sha:execFileSync('git',['-C',remote,'rev-parse',id+'^{tree}']).toString().trim()}}),
+   loadTree:async id=>({sha:id,truncated:false,tree:execFileSync('git',['-C',remote,'ls-tree','-z',id]).toString().split('\0').filter(Boolean).map(line=>{const [,mode,type,sha,name]=line.match(/^(\d+) (\w+) ([a-f0-9]+)\t(.+)$/s);return {mode,type,sha,path:name};})}),
+   execute:(command,args,options)=>execFileSync(command,args.map(arg=>arg==='https://github.com/ChengshuLi/WorldAtlas.git'?'file://'+remote:arg),options)};
+  const reader=new ImmutableReader(f.repo,current),snapshot=loadSelection(reader);
+  const consume=()=>readCurrentRebindCustody(reader,certificate,{snapshot});
+  assert.throws(consume,/Whole rebind product mode\/OID\/length differs/,'The sync wrapper does not acquire missing-origin proof');
+  for(const p of [certificate,...Object.values(productPins),...Object.values(externalPins)])await reader.acquirePinned(p,options);
+  await reader.acquireOriginalPaths(code.map(p=>({...p,commit:execution})),options);
+  assert.throws(consume,/Missing issued actual execution contract/,'Authenticating historical code never fabricates successful operating custody');
+  for(const p of code){const row=reader.inventory.get(execution+':'+p.path);assert.equal(row.whole_body_consumed,true);assert.equal(row.sha256,p.sha256);assert.equal(row.bytes,p.bytes);}
+  assert.equal(reader.inventory.get(products+':rebind/request.json').whole_body_consumed,true);
+  for(const oid of [execution,products,issued])assert.throws(()=>f.git('--no-lazy-fetch','cat-file','-e',oid+'^{commit}'));
+  assert(!fs.existsSync(path.join(f.repo,'.git','shallow')));assert.equal(baseline.length,40);
+ }finally{f.cleanup();}
 });
