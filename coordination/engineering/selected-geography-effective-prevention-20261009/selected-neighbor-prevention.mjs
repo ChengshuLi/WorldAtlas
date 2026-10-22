@@ -828,7 +828,9 @@ function* readAdoptedOsmRevision({evidence,proposed,owners,latitudes,read,json,r
 }
 
 function sourceTargetBodyVersion(reader,p) {
-  pinCheck(p);let version=p.commit;try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+  pinCheck(p);let version=p.commit;
+  if(reader instanceof ImmutableReader)version=reader.pinnedVersion(p);
+  else try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
   const d=reader.descriptor(p.path,version);
   demand(d.mode===p.mode&&d.git_blob_oid===p.git_blob_oid&&d.bytes===p.bytes,'Source-target whole identity differs');
   return version;
@@ -865,6 +867,7 @@ export async function qualifySourceTargetNativeAuthorityStored(reader,preimage,b
   demand(bytes===pin.decoded_bytes&&hash.digest('hex')===pin.decoded_sha256,'Source-target decoded body differs');
  };
  const acquire=async request=>{
+  if(request.kind==='bytes')return request.read();
   let input,expected;
   if(request.kind==='json'){
    const p=request.pin,version=sourceTargetBodyVersion(reader,p);input=chunks(p,version);expected={bytes:p.decoded_bytes??p.bytes,sha256:p.decoded_sha256??p.sha256};
@@ -915,7 +918,8 @@ function* evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnos
   &&same(preimage.source_evidence,binding.source_evidence)&&same(preimage.native_patch,binding.native_patch),
  'Source-target authority inputs differ');
  const read=p=>readSourceTargetBody(reader,p);
- const json=function*(pin){return yield {kind:'json',pin,read:()=>JSON.parse(read(pin))};};
+ const json=function*(pin){return yield {kind:'json',reader,pin,read:()=>JSON.parse(read(pin))};};
+  const bytes=function*(pin){return yield {kind:'bytes',reader,pin,read:()=>read(pin)};};
  const evidence=(yield* json(binding.source_evidence)), proposed=(yield* json(binding.native_patch));
  const dated = evidence?.version===2&&evidence.kind==='source-target-native-evidence-v2';
  const revised = evidence?.version===3&&evidence.kind==='source-target-native-evidence-v3';
@@ -933,13 +937,13 @@ function* evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnos
  demand(currentCatalogue.git_blob_oid===evidence.catalogue.git_blob_oid,'Source catalogue differs from the selected retained corpus');
  const catalogue=(yield* json(evidence.catalogue));
  const physicalInputs=(yield* json(evidence.physical_input));
- const physicalProgram=read(evidence.physical_reproduction);
+ const physicalProgram=yield* bytes(evidence.physical_reproduction);
  const candidateFrame=evidence.physical_reproduction.path===candidateFramePhysicalProgram.path
   &&sha(physicalProgram)===candidateFramePhysicalProgram.sha256?candidateFramePhysicalProgram:null;
  demand(evidence.native_latitudes.sha256===evidence.native_contract.native_latitudes.sha256
   &&evidence.native_latitudes.decoded_sha256===evidence.native_contract.native_latitudes.decoded_sha256,
  'Native source-target latitude contract differs');
- const latitudeRaw=read(evidence.native_latitudes);
+ const latitudeRaw=yield* bytes(evidence.native_latitudes);
  const physical=(yield* json(evidence.physical_evidence));
  demand(evidence.native_contract.size===262166&&latitudeRaw.length===262166*8,
  'Unsupported source-target native lattice');
@@ -1569,7 +1573,7 @@ function* evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnos
     &&pin.bytes===expected.bytes&&pin.decoded_bytes===expected.uncompressed_bytes
     &&pin.decoded_sha256===expected.uncompressed_sha256,'Source family part differs from retained catalogue');yield pin;
   }};
-  const product=yield {kind:'source',sourceParts,record,read:()=>{
+  const product=yield {kind:'source',reader,sourceParts,record,read:()=>{
    const pieces=Array.from(sourceParts(),read),raw=Buffer.concat(pieces);
    demand(raw.length===record.original_bytes&&sha(raw)===record.original_sha256,'Whole original consumed source product differs');
    return JSON.parse(raw);
@@ -2127,7 +2131,10 @@ export function readRegistryAuthorityInputs(reader,entry) {
  return {pins,preimage,binding};
 }
 
-export function readRetainedRegistryAuthority(reader, entry, observationReader, {snapshot}={}) {
+export function readRetainedRegistryAuthority(reader,entry,observationReader,options={}) {
+ return driveSourceAuthority(retainedRegistryAuthority(reader,entry,observationReader,options));
+}
+function* retainedRegistryAuthority(reader, entry, observationReader, {snapshot}={}) {
  // Retain every actual whole input consumed by a detached authority reader.
  const observed=proof=>{
   if(observationReader!==undefined){
@@ -2147,7 +2154,7 @@ export function readRetainedRegistryAuthority(reader, entry, observationReader, 
  if(binding?.kind==='source-target-native-custody-v1'){
   const whole=p=>JSON.parse(readSourceTargetBody(reader,p));
   const proof=entry.completed_constructor===undefined
-   ?qualifySourceTargetNativeAuthority(reader,preimage,binding,{snapshot})
+   ?yield* evaluateSourceTargetNativeAuthority(reader,preimage,binding,false,snapshot)
    :verifyCompletedSourceTargetNativeAuthority({constructed:whole(entry.completed_constructor),preimage,binding,
      evidence:whole(binding.source_evidence),candidate:whole(binding.native_patch)});
   return observed(freeze({...proof,version:1,kind:'authenticated-registry-source-custody-v1',authority_sha256:entry.authority_sha256,
@@ -2640,6 +2647,21 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
 
 // Explicit committed data-only hook. This does not discover proposal files.
 export function readSelectedAdditive(snapshot) {
+ return driveSourceAuthority(selectedAdditive(snapshot));
+}
+export async function readSelectedAdditiveAcquired(snapshot) {
+ const steps=selectedAdditive(snapshot);
+ try{let step=steps.next();
+  while(!step.done){let value;try{
+   const request=step.value;
+   demand(request.reader instanceof ImmutableReader,'Require actual immutable acquisition reader');
+   for(const pin of request.kind==='source'?request.sourceParts():[request.pin])await request.reader.acquirePinned(pin);
+   value=request.read();
+  }catch(error){step=steps.throw(error);continue;}step=steps.next(value);}
+  return step.value;
+ }catch(error){try{steps.return();}catch{}throw error;}
+}
+function* selectedAdditive(snapshot) {
  const {reader,selection,manifest,owners}=snapshot,hook=selection.additive_release;
  if(hook===undefined)return null;
  demand(hook&&Object.keys(hook).sort().join(',')==='bytes,path,sha256'&&Number.isSafeInteger(hook.bytes)&&hook.bytes>0&&hash(hook.sha256),'Unsupported committed additive hook');
@@ -2684,7 +2706,7 @@ export function readSelectedAdditive(snapshot) {
  for(const entry of registry.entries){
   demand(entry.policy_id==='retained-source-literal-additions'&&entry.policy_version===1,'Unsupported source policy semantics/version');
   const child=new ImmutableReader(reader.repo,reader.version,{gitExecutable:reader.gitExecutable,invocation:reader.invocation});
-  const proof=readRetainedRegistryAuthority(child,entry,reader,{snapshot});
+  const proof=yield* retainedRegistryAuthority(child,entry,reader,{snapshot});
   for(const row of normalized.rows.values())if(row.authority_sha256===entry.authority_sha256){
    const original=proof.original_ledger.rows.find(r=>r.component_id===row.component_id);
    demand(original&&['assigned','zero-cell'].includes(original.disposition)&&same({...original,authority_sha256:entry.authority_sha256,rule_sha256:entry.rule_sha256},row),'Selected component rebinds original full native/source primitive');

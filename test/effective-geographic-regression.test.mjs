@@ -6,7 +6,7 @@ import path from 'node:path';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
-import {ImmutableReader,NativeAssetImage,SelectedGeometrySources,loadBaseSelection,loadSelection,selectedReferenceOwners,selectedGeometrySourceAlias,selectedNativeSourceMembership,inspectSelected,compareIntervals,compareRepairLedgers,readArtifactConsumption,validateReleaseCatalogue,validateArtifactSourceMetadata,loadNativeRowTable,acquireNativeRows,validateNativeRowCarry} from '../scripts/check-effective-geographic-regression.mjs';
+import {ImmutableReader,NativeAssetImage,SelectedGeometrySources,loadBaseSelection,loadSelection,inspectSelectedAcquired,selectedReferenceOwners,selectedGeometrySourceAlias,selectedNativeSourceMembership,inspectSelected,compareIntervals,compareRepairLedgers,readArtifactConsumption,validateReleaseCatalogue,validateArtifactSourceMetadata,loadNativeRowTable,acquireNativeRows,validateNativeRowCarry} from '../scripts/check-effective-geographic-regression.mjs';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {prepareReferenceMetadataProjection} from '../scripts/selected-reference-metadata.mjs';
 import {projectReferenceFeatures} from '../src/reference-metadata.js';
@@ -82,6 +82,7 @@ test('actual immutable entry rejects owner loss/reassignment with rawworld geome
   assert.equal(result.status,1,result.stderr);assert.ok(fs.existsSync(path.join(f.repo,'blocked.json')),result.stderr);const actual=JSON.parse(fs.readFileSync(path.join(f.repo,'blocked.json')));assert.equal(actual.status,'native-regressions-found');assert.equal(actual.candidate_code_executed,false);assert.equal(actual.selected_native_report.lost_or_reassigned_cells,1);
   const native=actual.selected_native_report;
   assert.equal(native.runtime.path,fs.realpathSync(process.execPath));
+  assert(native.execution_code_inventory.some(p=>p.path==='scripts/geography-prefetch.mjs'&&p.sha256===sha(fs.readFileSync(path.join(f.repo,p.path)))));
   assert(native.caller_runtime&&native.execution_runtimes.some(p=>p.path===native.caller_runtime.path&&p.sha256===native.caller_runtime.sha256));
   assert(native.execution_runtimes.some(p=>p.path===native.runtime.path&&p.sha256===native.runtime.sha256));
   const sentinel=fs.readFileSync(path.join(f.repo,'blocked.json'));
@@ -722,4 +723,60 @@ test('real selected reader admits same-M alias correction while preserving scien
   f.setRelease([f.native,{...f.reference,metadata:{metadata_migration_sha256:{}}}]);const invalid=f.commit();
   assert.throws(()=>loadSelection(new ImmutableReader(f.repo,invalid)),/does not bind every applied metadata receipt/);
  }finally{f.cleanup();}
+});
+
+
+test('actual cold entry acquires a detached physical-program origin before preserving the next scientific refusal',async t=>{
+ const lazy=process.env.GIT_NO_LAZY_FETCH;process.env.GIT_NO_LAZY_FETCH='0';
+ const f=fixture();try{
+  const base=f.select([[[0,2,1]],[[1,3,2]],[],[]],{transport:true});
+  const selection=JSON.parse(fs.readFileSync(path.join(f.repo,'data/ownership-selection.json')));
+  const pin=(name,version=f.git('rev-parse','HEAD'))=>{const raw=execFileSync('git',['-C',f.repo,'show',version+':'+name]);
+   const [mode,,oid]=f.git('ls-tree',version,'--',name).split(/[ \t]/);return {commit:version,path:name,mode,git_blob_oid:oid,bytes:raw.length,sha256:sha(raw)};};
+  const footprint='a'.repeat(64),reference={id:selection.release_id,footprints_sha256:footprint,hierarchy_sha256:'b'.repeat(64)};
+  const release=f.write('data/geographic-releases/selected.json.gz',gzipSync(valueBytes({releases:[reference]})));
+  f.write('data/geographic-releases/current-manifest.json',{path:'selected.json.gz',sha256:sha(release)});
+  const catalogue='coordination/engineering/original-geography-source-corpus-20261006/catalogue.json';
+  f.write(catalogue,{products:[]});f.write('physical.py',Buffer.from('# original retained programme\n'));
+  f.write('physical-input.json',[]);f.write('physical-evidence.json',{});f.write('latitudes.bin',Buffer.alloc(0));
+  const original=f.commit(),program=pin('physical.py',original);
+  const bank={version:1,kind:'complete-world-index-with-exact-encoded-overrides',release_id:selection.release_id,
+   native_manifest_sha256:selection.sha256,footprints_sha256:footprint,locations:2,world_index:pin('data/world-index.json',base),
+   unchanged_files:[pin('data/geography/fixture.json',base)],overrides:[]};
+  const bankRaw=f.write('source/selected-bank.json',bank),baseSelection={...selection,selected_geography:{version:1,kind:bank.kind,path:'source/selected-bank.json',bytes:bankRaw.length,sha256:sha(bankRaw)}};
+  const latitude=pin('latitudes.bin',original),evidence={version:1,kind:'source-target-native-evidence-v1',targets:[{}],
+   catalogue:pin(catalogue,original),physical_input:pin('physical-input.json',original),physical_evidence:pin('physical-evidence.json',original),
+   physical_reproduction:program,native_latitudes:latitude,native_contract:{size:4,native_latitudes:latitude}};
+  f.write('evidence.json',evidence);f.write('proposed.json',{rows:[]});const evidenceCommit=f.commit();
+  const binding={version:1,kind:'source-target-native-custody-v1',source_evidence:pin('evidence.json',evidenceCommit),native_patch:pin('proposed.json',evidenceCommit)};
+  const preimage={...binding,kind:'source-target-native-rule-v1'};f.write('binding.json',binding);f.write('rule.json',valueBytes(preimage));const rules=f.commit();
+  const e={policy_id:'retained-source-literal-additions',policy_version:1,rule_sha256:valueSha(preimage),rule_preimage:pin('rule.json',rules),source_authority:pin('binding.json',rules)};
+  const registry={version:1,kind:'retained-rule-authority-registry-v1',entries:[{...e,authority_sha256:valueSha(e)}]};
+  f.write('registry.json',registry);f.write('ledger.json',{version:2,kind:'native-additive-repair-ledger-v2',authority_registry_sha256:valueSha(registry),scope_ids:[],rows:[]});f.write('patch.json',{rows:[]});const products=f.commit();
+  const manifest=JSON.parse(fs.readFileSync(path.join(f.repo,selection.manifest_path)));
+  const assets={base_manifest:pin(selection.manifest_path,base),owner_roster:pin(manifest.original_assets.bounds.path,base),ledger:pin('ledger.json',products),patch:pin('patch.json',products)};
+  const ownerBody=gunzipSync(fs.readFileSync(path.join(f.repo,assets.owner_roster.path)));Object.assign(assets.owner_roster,{decoded_bytes:ownerBody.length,decoded_sha256:sha(ownerBody)});
+  f.write('envelope.json',{version:2,kind:'retained-native-base-plus-delta-v2',base_reference:reference,effective_reference:reference,...assets});const envelope=f.commit();
+  const sidecar=f.write('sidecar.json',{version:2,kind:'retained-native-additive-selection-v2',base_selection:baseSelection,authority_registry:pin('registry.json',products),runtime_envelope:pin('envelope.json',envelope),logical_asset_map:assets});
+  f.write('data/ownership-selection.json',{...baseSelection,additive_release:{path:'sidecar.json',bytes:sidecar.length,sha256:sha(sidecar)}});
+  f.write('physical.py',Buffer.from('# newer incompatible programme\n'));const current=f.commit();
+  const remote=path.join(f.repo,'remote.git');execFileSync('git',['clone','--bare','--no-hardlinks',f.repo,remote],{stdio:'pipe'});
+  execFileSync('git',['-C',remote,'config','uploadpack.allowFilter','true']);execFileSync('git',['-C',remote,'config','uploadpack.allowAnySHA1InWant','true']);
+  for(const oid of [original,program.git_blob_oid])fs.unlinkSync(path.join(f.repo,'.git/objects',oid.slice(0,2),oid.slice(2)));
+  assert.throws(()=>loadSelection(new ImmutableReader(f.repo,current)),/Source-target whole identity differs/);
+  const actual=ImmutableReader.prototype.acquirePinned,calls=[];
+  t.mock.method(ImmutableReader.prototype,'acquirePinned',async function(p){calls.push({reader:this,pin:p});return actual.call(this,p,{
+   loadCommit:async id=>({sha:id,tree:{sha:execFileSync('git',['-C',remote,'rev-parse',id+'^{tree}']).toString().trim()}}),
+   loadTree:async id=>({sha:id,truncated:false,tree:execFileSync('git',['-C',remote,'ls-tree','-z',id]).toString().split('\0').filter(Boolean).map(line=>{const [,mode,type,sha,name]=line.match(/^(\d+) (\w+) ([a-f0-9]+)\t(.+)$/s);return {mode,type,sha,path:name};})}),
+   execute:(command,args,options)=>execFileSync(command,args.map(arg=>arg==='https://github.com/ChengshuLi/WorldAtlas.git'?'file://'+remote:arg),options)
+  });});
+  await assert.rejects(inspectSelectedAcquired(f.repo,current,current),/Unsupported source-target native lattice/);
+  const consumed=calls.find(row=>row.pin.path==='physical.py');assert(consumed,'Actual evaluator must yield the physical program');
+  assert.equal(consumed.reader.inventory.get(original+':physical.py').sha256,program.sha256);
+  assert.equal(consumed.reader.inventory.get(original+':physical.py').whole_body_consumed,true);
+  assert.deepEqual(calls.slice(0,5).map(row=>row.pin.path),['evidence.json','proposed.json',catalogue,'physical-input.json','physical.py']);
+  assert.throws(()=>f.git('--no-lazy-fetch','cat-file','-e',original+'^{commit}'),'Private origin metadata never becomes a partial local producer');
+  assert(!fs.existsSync(path.join(f.repo,'.git/shallow')));
+  t.mock.restoreAll();
+ }finally{f.cleanup();if(lazy===undefined)delete process.env.GIT_NO_LAZY_FETCH;else process.env.GIT_NO_LAZY_FETCH=lazy;}
 });

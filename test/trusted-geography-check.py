@@ -92,7 +92,7 @@ class TrustedCheckControls(unittest.TestCase):
         # immutable checkout validation and subprocess failure remain production.
         self.f.write('data/ownership-selection.json', {})
         (self.f.repo / 'scripts/check-effective-geographic-regression.mjs').write_text(
-            'export function inspectSelected(repo, baseline, candidate, {parentRuntimePath}) {\n' + program + '\n}\n')
+            'export async function inspectSelectedAcquired(repo, baseline, candidate, {parentRuntimePath}) {\n' + program + '\n}\n')
         candidate = self.f.commit('selected-native-child-control')
         return self.f.run(candidate, rewind=False, extra_env={'GEOGRAPHY_CODE_COMMIT': candidate})
 

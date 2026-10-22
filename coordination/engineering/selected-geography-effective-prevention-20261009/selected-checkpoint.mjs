@@ -511,14 +511,22 @@ async function acceptedAuthorities(session,reader,selected,{metadataOnly=false,.
   // Read only original small patch products already accepted by the checkpoint.
   // No original source/native qualification or selected acquisition is repeated.
   const entries=selected.registry.entries;
-  const bindingPins=entries.map(entry=>entry.source_authority);
+  // Only accepted aggregate metadata can reuse this classification: its whole
+  // registry is authenticated before this call, and completed constructors are
+  // admitted exclusively for native source-target custody. Cold/full reads stay.
+  const bindingPins=entries.filter(entry=>!metadataOnly||entry.completed_constructor===undefined)
+    .map(entry=>entry.source_authority);
   await acquireInputs(session,reader,bindingPins);
   const bindings=readBodies(session,reader,bindingPins);
   if(metadataOnly){
-    for(let i=0;i<entries.length;i++){
-      const binding=bindings[i],nativeOnly=binding.kind==='source-target-native-custody-v1';
+    let i=0;
+    for(const entry of entries){
+      if(entry.completed_constructor!==undefined){
+        oldAuthorities.set(entry.authority_sha256,{entry,nativeOnly:true});continue;
+      }
+      const binding=bindings[i++],nativeOnly=binding.kind==='source-target-native-custody-v1';
       if(nativeOnly){keys(binding,'version,kind,source_evidence,native_patch','Unknown accepted native source custody');demand(binding.version===1,'Unknown accepted native source custody version');}
-      oldAuthorities.set(entries[i].authority_sha256,{entry:entries[i],nativeOnly});
+      oldAuthorities.set(entry.authority_sha256,{entry,nativeOnly});
     }
     return oldAuthorities;
   }
