@@ -285,6 +285,8 @@ test('reviewed tests derive the complete fixture and executing-policy boundary w
 
 
 for (const [label, consumer, operand] of [
+  ...['test/final-bank-finalizer.test.mjs','test/selected-delivery-smoke.test.mjs','test/final-bank-checkpoint.test.mjs'].map(consumer =>
+    [consumer,consumer,'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz']),
   ['rebind custody', 'test/current-rebind-product-custody.test.mjs', 'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json'],
   ['workspace bootstrap', 'test/local-workspace.test.mjs', 'docs/LOCAL_WORKSPACES.md'],
   ['regional research gate', 'test/regional-research-gate.test.mjs', 'data/research-geography-gate.json'],
@@ -313,6 +315,34 @@ for (const [label, consumer, operand] of [
   assert.deepEqual(reviewedTestPlan(request,{...context,entries:changed}),plan,'Select the current body, not a historical fixture copy');
 });
 
+for (const consumer of ['test/final-bank-finalizer.test.mjs','test/selected-delivery-smoke.test.mjs','test/final-bank-checkpoint.test.mjs'])
+test(`reviewed ${consumer} materializes its normative latitude operand through actual sparse checkout`, () => {
+  const operand='coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz';
+  const row={sha:sha('e'),mode:'100644',type:'blob'};
+  const entries=new Map([...EXECUTION_CODE,operand,consumer,'test/fixtures/contract/input.json'].map(name=>[name,row]));
+  const request={base:sha('a'),head:sha('b'),files:[consumer]};
+  const plan=reviewedTestPlan(request,{...request,entries,files:[],definition:loadPackageInputs()});
+  assert.equal(plan.build,false);
+  const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'reviewed-final-bank-inputs-'));
+  try {
+    const git=(args,options={})=>execFileSync('git',args,{cwd:temporary,encoding:'utf8',...options});
+    git(['init','-q']);
+    fs.mkdirSync(path.dirname(path.join(temporary,operand)),{recursive:true});
+    // This control tests opaque current-body materialization, not scientific decoding.
+    const body=Buffer.from('Synthetic current latitude operand\n');
+    fs.writeFileSync(path.join(temporary,operand),body);
+    const excluded='data/unrelated-retained-input.json';
+    fs.mkdirSync(path.join(temporary,'data'));fs.writeFileSync(path.join(temporary,excluded),'not a reviewed operand');
+    git(['add','.']);git(['-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','current final-bank fixture inputs']);
+    const head=git(['rev-parse','HEAD']),tree=git(['rev-parse','HEAD^{tree}']);
+    git(['sparse-checkout','set','--no-cone','--stdin'],{input:plan.checkout_patterns.join('\n')+'\n'});
+    assert.deepEqual(fs.readFileSync(path.join(temporary,operand)),body);
+    assert.equal(fs.existsSync(path.join(temporary,excluded)),false);
+    assert.equal(git(['rev-parse','HEAD']),head);assert.equal(git(['rev-parse','HEAD^{tree}']),tree);
+    assert.equal(git(['status','--porcelain']), '');
+  } finally { fs.rmSync(temporary,{recursive:true,force:true}); }
+});
+
 test('reviewed PostgreSQL consumers retain their current inputs through actual sparse materialization', () => {
   const operands=['coordination/publication/cloudflare-history.json','data/observation-registry-history/base-v1.json',
     'data/research-geography-gate.json','data/hosted-type-catalog.json','data/settlement-estimates.json',
@@ -328,7 +358,7 @@ test('reviewed PostgreSQL consumers retain their current inputs through actual s
   assert.deepEqual(plan.inputs,[...EXECUTION_CODE,operands[0],operands[5],...operands.slice(1,5)]);
   assert(plan.checkout_patterns.includes('postgres'),'PostgreSQL DDL is executing source, like drizzle');
   for(const consumer of consumers) {
-    const expected=consumer===consumers[5]?[operands[0],operands[5]]:consumer===consumers[2]?[operands[0]]:consumer===consumers[1]?operands.slice(0,4):
+    const expected=consumer===consumers[5]?[operands[0],operands[5]]:consumer===consumers[3]?[operands[5],...operands.slice(0,5)]:consumer===consumers[2]?[operands[0]]:consumer===consumers[1]?operands.slice(0,4):
       consumer===consumers[4]?operands.slice(1,5):operands.slice(0,5);
     assert.deepEqual(reviewedTestPlan({...request,files:[consumer]},context).inputs,[...EXECUTION_CODE,...expected]);
     for(const operand of expected) {
@@ -457,11 +487,13 @@ test('minimal reviewed package consumer derives real inputs without a changed pa
 test('reviewed full builds materialize real historical fixture paths without widening tests or accepting manual inputs',async()=>{
   const f=controlFixture({withContractBoundary:true}), kernel='src/effective-footprint.js';
   f.packageInputs.inputs.push('src/','data/package-input.json');
+  const latitude='coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz';
+  f.packageInputs.verification_paths.push(latitude);
   const files=['test/additive-release.test.mjs','test/selected-delivery-smoke.test.mjs',
     'test/effective-footprint.test.mjs','test/source-target-native-delivery.test.mjs'];
   const expected=[...files,'test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
   for(const rows of [f.baseline,f.authored,f.integrated]) {
-    for(const name of expected)rows.push({path:name,sha:sha('c'),mode:'100644',type:'blob'});
+    for(const name of [...expected,latitude])rows.push({path:name,sha:sha('c'),mode:'100644',type:'blob'});
     const existing=rows.find(row=>row.path===kernel);
     if(existing)existing.sha=rows===f.baseline?sha('d'):sha('e');
     else rows.push({path:kernel,sha:rows===f.baseline?sha('d'):sha('e'),mode:'100644',type:'blob'});

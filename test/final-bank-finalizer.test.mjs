@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
+import {gunzipSync} from 'node:zlib';
 import {committedPackageInputs} from '../scripts/package-output-artifact.mjs';
 import {admitPackageInputTransition,preparedStartupPackageTransition} from '../scripts/package-inputs.mjs';
 import {trustedFixture,appendNativeAuthority,referenceCheckpointFixture} from './fixtures/selected-checkpoint.mjs';
@@ -164,5 +165,34 @@ test('final-bank reference-only authoring retains words and uses the existing co
  assert(!declarations.inputs.includes('inputs/projection.json'));assert(declarations.inputs.includes('inputs/projection-next.json'));
  assert(fs.existsSync(path.join(f.root,'inputs/projection.json')),'Original projection evidence remains recoverable');
  assert.equal(again.index.preparedOwnership.runs_word_stream_sha256,result.index.preparedOwnership.runs_word_stream_sha256);
+ // The real database publication stamps generated reference revisions on its
+ // catalog rows. The bank preserves source properties, not those DB defaults.
+ const {packagePreparedStartupOwnership}=await import('../scripts/package-startup-ownership.mjs');
+ const {checkEmittedSelectedDelivery}=await import('../scripts/selected-delivery-smoke.mjs');
+ const revision='a'.repeat(64),referenceMetadata={...again.index.referenceMetadata,application_reference_revision:revision};
+ const features=again.index.preparedOwnership.context_parts.flatMap(pin=>JSON.parse(gunzipSync(fs.readFileSync(path.join(f.root,bank,pin.path)))))
+  .map(({finishedFootprint,...feature})=>({...feature,properties:{...feature.properties,metadata:{...feature.properties.metadata,reference_revision:revision}}}));
+ const emitted=path.join(f.root,'dist/client');
+ const copied=await packagePreparedStartupOwnership({manifest:f.manifest,manifestSha:f.selection.sha256,source:path.join(f.root,bank),destination:emitted,
+  selected:{finalBank:again.selection.prepared_bank,reference_release:again.selection.reference,base:projection.reference,referenceMetadata},features});
+ const atlas={parts:['locations.json'],pixelMap:copied.pixelMap,preparedOwnership:copied.preparedOwnership,reference_release:again.selection.reference,referenceMetadata};
+ const write=(name,value)=>{const file=path.join(emitted,name);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,JSON.stringify(value));};
+ write('atlas-geography.json',atlas);write('locations.json',features);
+ const projectionFile=path.join(emitted,referenceMetadata.asset.path);fs.mkdirSync(path.dirname(projectionFile),{recursive:true});
+ fs.writeFileSync(projectionFile,fs.readFileSync(path.join(f.root,again.selection.reference_projection.path)));
+ const options={root:f.root,emittedDirectory:emitted};
+ assert.equal((await checkEmittedSelectedDelivery(options)).kind,'actual-emitted-final-bank-consumer');
+ for(const value of [undefined,'b'.repeat(64)]){
+  const metadata={...referenceMetadata};if(value===undefined)delete metadata.application_reference_revision;else metadata.application_reference_revision=value;
+  write('atlas-geography.json',{...atlas,referenceMetadata:metadata});
+  await assert.rejects(checkEmittedSelectedDelivery(options),/Generated reference revision differs/);
+ }
+ write('atlas-geography.json',atlas);
+ const wrongRow=structuredClone(features);wrongRow[0].properties.metadata.reference_revision='c'.repeat(64);write('locations.json',wrongRow);
+ await assert.rejects(checkEmittedSelectedDelivery(options),/Generated reference revision differs/);
+ const wrongProperty=structuredClone(features);wrongProperty[0].properties.name+=' altered';write('locations.json',wrongProperty);
+ await assert.rejects(checkEmittedSelectedDelivery(options),/Current reference properties differ/);write('locations.json',features);
+ write('atlas-geography.json',{...atlas,referenceMetadata:{...referenceMetadata,asset:{...referenceMetadata.asset,sha256:'d'.repeat(64)}}});
+ await assert.rejects(checkEmittedSelectedDelivery(options),/deep-equal|equal/);write('atlas-geography.json',atlas);
  f.api.releaseCheckpoint(next.candidate);f.api.releaseCheckpoint(original.state);
 });
