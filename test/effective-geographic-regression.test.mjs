@@ -812,8 +812,8 @@ test('actual cold entry acquires a detached physical-program origin before prese
 // This is a small real-Git custody fixture, not a source/native producer run.
 // It must get through the complete administrative source proof and then refuse
 // the deliberately absent native proof, with no successful geography receipt.
-for(const variant of ['exact','duplicate-map','missing-map','map-path','map-hash','map-bytes','map-oid','map-mode','wrong-map-origin','known-selector-missing-tree','metadata-unavailable'])
-test('actual cold administrative read preserves issued selector and consumed-map custody: '+variant,async t=>{
+for(const [variant,storage] of [...['exact','duplicate-map','missing-map','map-path','map-hash','map-bytes','map-oid','map-mode','wrong-map-origin','known-selector-missing-tree','metadata-unavailable'].map(variant=>[variant,'ordinary']),['map-bytes','packed']])
+test('actual cold administrative read preserves issued selector and consumed-map custody: '+variant+(storage==='packed'?' (packed objects)':''),async t=>{
  const f=fixture();try{
   const base=f.select([[[0,2,1]],[[1,3,2]],[],[]],{transport:true});
   const selection=JSON.parse(fs.readFileSync(path.join(f.repo,'data/ownership-selection.json')));
@@ -860,7 +860,23 @@ test('actual cold administrative read preserves issued selector and consumed-map
   f.write('data/ownership-selection.json',{...baseSelection,additive_release:{path:'sidecar.json',bytes:sidecar.length,sha256:sha(sidecar)}});const current=f.commit();
   const remote=path.join(f.repo,'remote.git');execFileSync('git',['clone','--bare','--no-hardlinks',f.repo,remote],{stdio:'pipe'});for(const key of ['uploadpack.allowFilter','uploadpack.allowAnySHA1InWant'])execFileSync('git',['-C',remote,'config',key,'true']);
   const removed=[...(variant==='known-selector-missing-tree'?[f.git('rev-parse',old+'^{tree}')]:[old]),newer,mapOrigin,oldPin.git_blob_oid,newPin.git_blob_oid];
-  for(const oid of removed)fs.unlinkSync(path.join(f.repo,'.git/objects',oid.slice(0,2),oid.slice(2)));
+  // As in the finalizer's cold-store fixture, remove exact objects independently
+  // of Git's loose/packed storage choice. The complete remote remains intact.
+  const objects=path.join(f.repo,'.git/objects');
+  if(storage==='packed'){
+   f.git('repack','-ad');
+   assert(fs.readdirSync(path.join(objects,'pack')).some(name=>name.endsWith('.pack')));
+   assert(removed.every(oid=>!fs.existsSync(path.join(objects,oid.slice(0,2),oid.slice(2)))));
+  }
+  const all=f.git('cat-file','--batch-all-objects','--batch-check=%(objectname)').split('\n');
+  assert.equal(new Set(removed).size,removed.length);assert(removed.every(oid=>all.includes(oid)));
+  const retained=all.filter(oid=>!removed.includes(oid)),env={...process.env,GIT_NO_LAZY_FETCH:'1'};
+  const pack=execFileSync('git',['-C',f.repo,'pack-objects','--stdout'],{env,input:retained.join('\n')+'\n',maxBuffer:16*1024*1024});
+  fs.renameSync(objects,path.join(f.repo,'complete-fixture-objects'));
+  fs.mkdirSync(path.join(objects,'pack'),{recursive:true});fs.mkdirSync(path.join(objects,'info'));
+  execFileSync('git',['-C',f.repo,'index-pack','--stdin'],{env,input:pack,stdio:['pipe','pipe','pipe']});
+  assert.deepEqual(f.git('cat-file','--batch-all-objects','--batch-check=%(objectname)').split('\n').sort(),retained.sort());
+  for(const oid of removed)assert.throws(()=>f.git('--no-lazy-fetch','cat-file','-e',oid));
   // Use the fixture's actual executing module, whose committed policy catalogue
   // is authenticated by the same real module-body binding as production.
   const mod=await import('file://'+path.join(f.repo,'scripts/check-effective-geographic-regression.mjs'));
