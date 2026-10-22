@@ -219,10 +219,16 @@ export async function checkEmittedSelectedDelivery({root = process.cwd(), emitte
   if (expectations !== undefined) assert.equal(decodedAdditiveAssetIdentity(envelope.ledger).sha256, expectations.selected_ledger_sha256, 'Wrong selected ledger hash');
   const final=atlas.preparedOwnership!==undefined;
   if(final)assert.equal(atlas.preparedOwnership.version,2,'Unsupported prepared final bank');
-  const logical=final?sidecar.logical_asset_map:null;
+  const logical=final?{}:null;
   if(final)for(const role of ['base_manifest','ledger','owner_roster','patch']) {
-    assert(logical?.[role],'Missing original scientific asset pin: '+role);
-    assert.deepEqual(decodedAdditiveAssetIdentity(logical[role]),decodedAdditiveAssetIdentity(source[role]),'Original scientific identity differs: '+role);
+    const pin=sidecar.logical_asset_map?.[role],asset=source[role];
+    assert(pin,'Missing original scientific asset pin: '+role);
+    assert(pin.bytes===asset.bytes&&pin.sha256===asset.sha256
+      &&(pin.decoded_bytes??pin.bytes)===(asset.decoded_bytes??asset.bytes)
+      &&(pin.decoded_sha256??pin.sha256)===(asset.decoded_sha256??asset.sha256),
+      'Original scientific identity differs: '+role);
+    // Git pins bind physical bytes; only the authenticated envelope owns decoding.
+    logical[role]={...pin,encoding:asset.encoding};
   }
   const ledger = whole(final?'root':'emitted', final?logical.ledger:envelope.ledger), patch = whole(final?'root':'emitted', final?logical.patch:envelope.patch);
   const assets = new Map(), nativeParts = new Set(atlas.pixelMap?.method === 'native-linear-evenodd-first-owner-v1'
