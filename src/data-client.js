@@ -1,3 +1,4 @@
+import {readOwnerLabels} from './owner-labels.js';
 import {hydrateMapSnapshotPage} from './map-snapshot-format.js';
 import {loadHostedTemporalGeography} from './hosted-temporal-client.js';
 import {mergeHostedTemporalHistory} from './hosted-temporal-geography.js';
@@ -190,6 +191,9 @@ export async function loadGeography(initialSelection) {
   preparedEvidenceIndexRequest=null;preparedEvidenceRequests=new Map();
   const data=await readJSON(staticAtlas ? './atlas-geography.json' : '/api/geography');
   if(generation!==geographyGeneration)throw new DOMException('Geography superseded','AbortError');
+  // Older immutable packages may lack the generated replica. Keep their map
+  // browsable, but never revive unverified source aliases as display names.
+  data.ownerLabels=data.ownerLabels===undefined?new Map():readOwnerLabels(data.ownerLabels);
   const baseReference=additiveBaseReference(data),nativeReference=nativeReferenceForData(data);
   referenceAttributeBundle=data.referenceAttributes??null;
   referenceAttributeFootprints=baseReference?.footprints_sha256??data.preparedEvidence?.footprints_sha256;

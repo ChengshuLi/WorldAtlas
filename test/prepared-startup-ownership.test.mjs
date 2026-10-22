@@ -32,6 +32,25 @@ test('prepared startup copies every exact current and retained public asset',asy
  await assert.rejects(packagePreparedStartupOwnership(f),/EEXIST/);
 });
 
+test('prepared startup ignores row object key order but preserves every field identity',async t=>{
+ const f=await fixture(t),original=f.index.pixelMap.parts[0];
+ const reordered=Object.fromEntries(Object.entries(original).sort(([a],[b])=>a.localeCompare(b)));
+ assert.notEqual(JSON.stringify(reordered),JSON.stringify(original));
+ assert.deepEqual(reordered,original);
+ f.index.pixelMap.parts[0]=reordered;await f.write();
+ const result=await packagePreparedStartupOwnership(f);
+ assert.deepEqual(result.pixelMap.parts[0],original);
+ for(const [name,bytes]of f.payloads)assert.deepEqual(await fs.readFile(path.join(f.destination,name)),bytes);
+ const changes=Object.entries(reordered).map(([key,value])=>[key,{...reordered,[key]:typeof value==='number'?value+1:'changed-'+value}]);
+ changes.push(['extra',{...reordered,unexpected:true}]);
+ const missing={...reordered};delete missing.decoded_sha256;changes.push(['missing',missing]);
+ for(const [label,part]of changes){
+  f.index.pixelMap.parts[0]=part;await f.write();const destination=f.destination+'-'+label;
+  await assert.rejects(packagePreparedStartupOwnership({...f,destination}),/row identity differs/);
+  await assert.rejects(fs.stat(destination),{code:'ENOENT'});
+ }
+});
+
 test('prepared startup rejects stale selection, missing rosters and changed bytes before publication',async t=>{
  const f=await fixture(t);
  await assert.rejects(packagePreparedStartupOwnership({...f,manifestSha:'c'.repeat(64)}),/selected native reference/);

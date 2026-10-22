@@ -1,3 +1,4 @@
+import {ownerDisplayName} from './owner-labels.js';
 import {attributes,validYear,explicitPopulationZero} from './model.js';
 import {environmentalAttributes,environmentalClassification} from './environment-classifications.js';
 import {referenceContextByLocation} from './reference-context.js';
@@ -5,7 +6,7 @@ import {evidencePriority as priority} from './evidence-priority.js';
 export const locationAttributes=[...attributes,'habitation'];
 export const unresolvedAttributeStatuses=['unknown','disputed','no-majority'];
 export function categoryId(kind,name){return name==null?null:`${kind}:${encodeURIComponent(name.normalize('NFC').trim().toLocaleLowerCase('en'))}`;}
-export function resolveAttributes(features,year,{states=[],records=[],temporal,examples=false,evidenceAvailable=true,referenceBaselines=[],referenceContexts}={}){
+export function resolveAttributes(features,year,{states=[],records=[],temporal,examples=false,evidenceAvailable=true,referenceBaselines=[],referenceContexts,ownerLabels}={}){
  if(!validYear(year))throw Error('Year must be between 3000 BC and 2026 AD, excluding zero');
  if(!evidenceAvailable){states=[];records=[];temporal=undefined;}
  const candidates=new Map();
@@ -29,6 +30,9 @@ export function resolveAttributes(features,year,{states=[],records=[],temporal,e
    value.provenance[attribute]=c?{...c.evidence,value:undefined,location_id:undefined,attribute:undefined}:{status:'unknown',method:null,source:null};
    if(['owner','culture','religion'].includes(attribute)){value.category_ids[attribute]=value[attribute]==null?null:c?.evidence.category_id??categoryId(attribute,value[attribute]);if(value[attribute]==null)value.provenance[attribute].category_id=null;}
   }
+  // Assignment and explicit uncertainty are resolved above. Only its label
+  // comes from the one owner-ID authority, never the source feature alias.
+  if(value.owner!=null)value.owner=ownerDisplayName(value.category_ids.owner,{labels:ownerLabels,nameRecord:temporal?.entities.get(value.category_ids.owner)?.name_record});
   for(const attribute of environmentalAttributes){
    const original=value[attribute],classification=environmentalClassification(attribute,original);
    value.category_ids[attribute]=classification?.id??null;

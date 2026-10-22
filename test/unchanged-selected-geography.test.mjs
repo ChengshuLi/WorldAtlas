@@ -404,20 +404,11 @@ function coldOrigins(f, baseline, candidate, extra = {}) {
   }
   const fetches = [];
   const acquisition = createRoutingMetadataAcquisition({repo: directory, baseline, token: '',
-    async loadCommit(id) {
-      assert.equal(f.git(['cat-file', '-t', id]), 'commit');
-      return {sha: id, tree: {sha: f.git(['rev-parse', id + '^{tree}'])}};
-    },
-    async loadTree(id, recursive) {
-      assert.equal(recursive, false);
-      return {sha: id, truncated: false, tree: git(f.directory, ['ls-tree', '-z', id]).toString().split('\0').filter(Boolean).map(line => {
-        const [, mode, type, sha, name] = line.match(/^(\d+) (\w+) ([a-f0-9]+)\t(.+)$/s); return {mode, type, sha, path: name};
-      })};
-    },
+    loadTree() { assert.fail('Historical metadata must use native Git'); },
     execute(command, args, options) {
       if (args.includes('fetch')) {
-        assert(args.includes('--filter=tree:0')); assert(args.includes('--depth=1'));
-        fetches.push(options.input.trim());
+        assert(args.includes('--filter=tree:0'));
+        if(args.includes('--depth=1'))fetches.push(options.input.trim());
         args = args.map(arg => arg === 'https://github.com/ChengshuLi/WorldAtlas.git' ? 'file://' + f.directory : arg);
       }
       return execFileSync(command, args, options);
@@ -473,9 +464,9 @@ test('cold collector retains full-check fallback and pin guards: ' + failure, as
     }
     const baseline = f.commit(files, f.baseline), candidate = f.commit({...files, unrelated: body('new evidence'),
       ...(failure === 'changed alias' ? {'data/geography/source.json': body('candidate drift')} : {})}, baseline);
-    const cold = coldOrigins(f, baseline, candidate, failure === 'denied origin' ? {loadCommit: async () => {throw Error('origin unavailable');}} : {});
+    const cold = coldOrigins(f, baseline, candidate, failure === 'denied origin' ? {execute: (command,args,options) => {if(args.includes('fetch'))throw Error('origin unavailable');return execFileSync(command,args,options);}} : {});
     const result = await cold.inspect(); assert.equal(result.status, 'full-check-required');
-    assert.match(result.reason, failure === 'denied origin' ? /origin unavailable/ : failure === 'changed alias' ? /changed-current-input/ : /historical-pin-identity/);
+    assert.match(result.reason, failure === 'denied origin' ? /Immutable origin object fetch failed/ : failure === 'changed alias' ? /changed-current-input/ : /historical-pin-identity/);
     if (failure !== 'forged pin') assert.equal(cold.fetches.length, 0);
   } finally { f.close(); }
 });

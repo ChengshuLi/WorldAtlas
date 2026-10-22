@@ -597,7 +597,8 @@ test('finalization refuses a new identity at an accepted package path', async ()
 
 // Actual Git/plain-Node fixture for metadata assembly. The source interpretation
 // and native construction controls live in source-member-native-delivery.test;
-// this fixture exercises the consumed-role boundary without replaying science.
+// this method-free fixture exercises the consumed-role boundary without claiming a native bank.
+// The actual native CLI/bank contract is exercised by delivery-finalize-config.test.mjs.
 function modernFinalizationFixture(t, {completed = false, mixed = false, membership = true, cohort = false, external = false, dated = false, territorial = false, territorialParts = false, provider = false, seam = false, negativeSources = false} = {}) {
   const root = directory(t), owned = 'coordination/engineering/modern-finalize/';
   const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
@@ -624,7 +625,7 @@ function modernFinalizationFixture(t, {completed = false, mixed = false, members
   save(ownerPath, gzipSync(ownerRaw)); commitAll();
   const owner = {...pin(ownerPath), encoding: 'gzip', decoded_bytes: ownerRaw.length, decoded_sha256: digest(ownerRaw)};
   save(inherited + 'base-manifest.json', {geographic_release: baseReference.id, footprints_sha256: baseReference.footprints_sha256,
-    hierarchy_sha256: baseReference.hierarchy_sha256, size: 8, coordinateBits: 3, method: 'native-linear-evenodd-first-owner-v1',
+    hierarchy_sha256: baseReference.hierarchy_sha256, size: 8, coordinateBits: 3,
     native_latitudes: pin(roles.native_latitudes), original_assets: {bounds: {sha256: owner.sha256}}}); commitAll();
   const baseManifest = pin(inherited + 'base-manifest.json');
   // Deliberately unsorted nested selector keys and accepted declaration ordering.
@@ -1640,7 +1641,7 @@ test('malformed prior cumulative role cannot authorize package input removal',as
 
 
 // Real cold object store: no ancestor graph, alternates, native corpus or copied
-// working tree. Only the original fixture repository supplies public-API metadata
+// working tree. Only the original fixture repository supplies native metadata
 // and exact-OID Git transport; the production composition and reader run unchanged.
 function coldCompositionReader(t, original, control = {}) {
   const root = directory(t), git = (...args) => execFileSync('git', ['-C', root, ...args],
@@ -1649,20 +1650,7 @@ function coldCompositionReader(t, original, control = {}) {
   original.git('config', 'uploadpack.allowAnySHA1InWant', 'true');
   const calls = {commits: [], trees: [], fetches: []};
   const reader = pinReader(root, {
-    async loadCommit(id) {
-      calls.commits.push(id);
-      if (control.denyMetadata) throw Error('fixture metadata denied');
-      return {sha: id, tree: {sha: original.git('rev-parse', id + '^{tree}')}};
-    },
-    async loadTree(id, recursive) {
-      assert.equal(recursive, false); calls.trees.push(id);
-      const tree = original.git('ls-tree', '-z', id).split('\0').filter(Boolean).map(line => {
-        const [, mode, type, sha, name] = line.match(/^(\d+) (\w+) ([a-f0-9]+)\t(.+)$/s);
-        return {mode, type, sha, path: name};
-      });
-      if (control.wrongTree) tree[0].sha = 'f'.repeat(40);
-      return {sha: id, truncated: false, tree};
-    },
+    loadTree() { assert.fail('Historical metadata must use native Git'); },
     execute(command, args, options) {
       assert.equal(command, 'git');
       assert.equal(options.env.GIT_NO_LAZY_FETCH, '1');
@@ -1673,6 +1661,8 @@ function coldCompositionReader(t, original, control = {}) {
         assert(metadata || args.includes('--filter=blob:none'));
         const ids = options.input.trim().split('\n'); assert(ids.every(id => /^[a-f0-9]{40}$/.test(id)));
         calls.fetches.push({metadata, ids});
+        if(metadata)(args.includes('--depth=1')?calls.commits:calls.trees).push(...ids);
+        if(metadata&&control.denyMetadata)throw Error('fixture native metadata denied');
         if (!metadata && control.denyBodies) throw Error('fixture acquisition denied');
         if (!metadata && control.partial) {
           control.partial = false;
@@ -1682,7 +1672,9 @@ function coldCompositionReader(t, original, control = {}) {
         }
         args = args.map(a => a === 'https://github.com/ChengshuLi/WorldAtlas.git' ? 'file://' + original.root : a);
       }
-      return execFileSync(command, args, options);
+      const result=execFileSync(command,args,options);
+      if(control.wrongTree&&args.includes('cat-file')&&args[args.indexOf('cat-file')+1]==='tree'){const changed=Buffer.from(result);changed[0]^=1;return changed;}
+      return result;
     }
   });
   return {root, git, reader, calls, control,
@@ -1699,8 +1691,7 @@ test('cold composition acquires only its complete multi-authority operands and w
   assert.deepEqual(cold.inventory(), []);
   const actual = await composeAuthorities(config, cold.reader);
   assert.deepEqual(actual, expected);
-  const warm = pinReader(f.root, {loadCommit: () => assert.fail('Warm commit must stay local'),
-    loadTree: () => assert.fail('Warm path trees must stay local'), execute(command, args, options) {
+  const warm = pinReader(f.root, {loadTree: () => assert.fail('Warm path trees must stay local'), execute(command, args, options) {
       assert(!args.includes('fetch'), 'A fully warm invocation must not fetch or consult authentication');
       return execFileSync(command, args, options);
     }});
@@ -1730,7 +1721,7 @@ for (const refusal of ['metadata', 'tree', 'bodies', 'hash', 'partial']) test('c
   if (refusal === 'hash') config.ledger.sha256 = '0'.repeat(64);
   const cold = coldCompositionReader(t, f, control), destination = '.cache/delivery-handoff/refused';
   await assert.rejects(async () => publish(cold.root, destination, await composeAuthorities(config, cold.reader), {phase: 'compose'}),
-    /denied|identity|hash differs|acquisition failed/);
+    /denied|identity|hash differs|acquisition failed|fetch failed/);
   assert.equal(fs.existsSync(path.join(cold.root, destination)), false);
   if (refusal === 'partial') {
     assert.equal(cold.inventory().length, 1, 'The failed import actually retained one owned immutable body');

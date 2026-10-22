@@ -1,3 +1,4 @@
+import {omitFixtureObjects} from './helpers/git-object-fixture.mjs';
 import {nativeLiteral} from './helpers/native-literal.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -200,10 +201,8 @@ test('actual joint CLI acquires exact inherited and appended read closure, then 
   const unavailable=pathToFileURL(path.join(remote,'absent')).href;
   f.git('config','url.'+unavailable+'.insteadOf','https://github.com/ChengshuLi/WorldAtlas.git');
   const missing=p=>{try{f.git('cat-file','-e',p.git_blob_oid);return false;}catch{return true;}};
-  for(const p of [...requiredPins,unrelated]){
-    fs.unlinkSync(path.join(f.root,'.git/objects',p.git_blob_oid.slice(0,2),p.git_blob_oid.slice(2)));
-    assert(missing(p));
-  }
+  omitFixtureObjects(t,f.root,[...requiredPins,unrelated].map(p=>p.git_blob_oid));
+  for(const p of [...requiredPins,unrelated])assert(missing(p));
   const objects=()=>new Set(f.git('cat-file','--batch-all-objects','--batch-check=%(objectname)').toString().trim().split('\n'));
   const before=objects();
   const refused=run(f,f.selected,next.candidate,path.join(f.root,'refused'),{GH_TOKEN:''});
@@ -235,7 +234,7 @@ test('actual joint CLI acquires exact inherited and appended read closure, then 
   assert.deepEqual([...objects()].sort(),[...before,...requiredPins.map(p=>p.git_blob_oid)].sort());
   // An absent producer commit retains the existing exact current-path alias.
   const absent=next.entry.completed_constructor.commit;
-  fs.unlinkSync(path.join(f.root,'.git/objects',absent.slice(0,2),absent.slice(2)));
+  omitFixtureObjects(t,f.root,[absent]);
   const alias=run(f,f.selected,next.candidate,path.join(f.root,'alias'),{GH_TOKEN:''});
   assert.equal(alias.status,0,alias.stderr);
   assert.equal(JSON.parse(alias.stdout).native.status,'no-new-native-loss');
@@ -244,7 +243,7 @@ test('actual joint CLI acquires exact inherited and appended read closure, then 
   const p=pins[0],originalTree=f.git('rev-parse',p.commit+':appended').toString().trim();
   assert.notEqual(originalTree,f.git('rev-parse',next.candidate+':appended').toString().trim());
   assert.equal(f.git('rev-parse',next.candidate+':'+p.path).toString().trim(),p.git_blob_oid);
-  fs.unlinkSync(path.join(f.root,'.git/objects',originalTree.slice(0,2),originalTree.slice(2)));
+  omitFixtureObjects(t,f.root,[originalTree]);
   const mismatch=run(f,f.selected,next.candidate,path.join(f.root,'mismatch'),{GH_TOKEN:''});
   assert.notEqual(mismatch.status,0);assert.match(mismatch.stderr,/Geography object acquisition failed/);
   assert.equal(mismatch.stdout,'');assert(!fs.existsSync(path.join(f.root,'mismatch')));

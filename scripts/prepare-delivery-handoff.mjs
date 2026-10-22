@@ -10,13 +10,14 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {gunzipSync} from 'node:zlib';
 import {locate, deliveryAcquisitionExecute} from './delivery-handoff-advance.mjs';
-import {createAcquisition, githubTree, githubCommit} from './geography-prefetch.mjs';
+import {createAcquisition, githubTree} from './geography-prefetch.mjs';
 import {acquireFinalizationCheckpoint, finalizationCheckpointBytes, admitCanonicalOutputs} from './delivery-checkpoint-finalization.mjs';
 import {releaseAcceptedCheckpoint, ACCEPTED_CHECKPOINT_LOCATOR} from './accepted-selected-checkpoint.mjs';
 import {repairComponentKey, compareRepairComponents} from '../src/native-grid.js';
 import {scientificNativeSelection,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
-import {prepareReferenceMetadataProjection,validateReferenceMetadataProjection} from './selected-reference-metadata.mjs';
+import {prepareReferenceMetadataProjection,validateReferenceMetadataProjection,referenceMetadataReader} from './selected-reference-metadata.mjs';
 import {isReferenceAliasReceipt} from '../src/reference-metadata.js';
+import {readSelectedGeometryBank} from './check-effective-geographic-regression.mjs';
 import {validatePackageInputs, selectedCumulativePackageRoles, admitSelectedPackageDeclarations} from './package-inputs.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
 import {coordinateBounds, normaliseRetainedRepairLedger, compareVersionedRepairLedgers, verifyCompletedSourceTargetNativeAuthority, mergeCompletedNativePatches, verifyCurrentRebindExecution, CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
@@ -33,7 +34,7 @@ const safe = name => typeof name === 'string' && /^[a-zA-Z0-9_./-]+$/.test(name)
 const unique = values => Array.isArray(values) && values.length > 0 && values.every(v => typeof v === 'string' && v) && new Set(values).size === values.length;
 const environment = () => ({...process.env, GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0'});
 
-export function pinReader(root, {loadTree = githubTree, loadCommit = githubCommit,
+export function pinReader(root, {loadTree = githubTree,
   execute = deliveryAcquisitionExecute()} = {}) {
   const cache = new Map(), descriptors = new Map(), declared = new Map();
   let acquisition;
@@ -48,7 +49,7 @@ export function pinReader(root, {loadTree = githubTree, loadCommit = githubCommi
         'Conflicting composition input identities');
       declared.set(key, pin);
     }
-    acquisition ??= createAcquisition({repo: root, execute, token: '', loadTree, loadCommit,
+    acquisition ??= createAcquisition({repo: root, execute, token: '', loadTree,
       loadDescriptor: async (commit, name) => {
         const pin = declared.get(commit + ':' + name);
         need(pin, 'Undeclared composition input');
@@ -980,9 +981,29 @@ export function prepareReferenceMetadata(config, reader) {
     need(update && same(Object.keys(update).sort(), ['after', 'before', 'logical_path']), 'Exact whole metadata source update required');
     read(update.before, 'original complete source'); read(update.after, 'current complete source');
   }
+  // Use the same selected N bank as the actual consumer. Identical bytes at a
+  // later commit do not replace the original issued source-path identity.
+  const bank = readSelectedGeometryBank({
+    descriptor: name => reader.pin(config.selector.commit, name),
+    json: (name, {expected}) => {
+      const pin = reader.pin(config.selector.commit, name);
+      need(pin.sha256 === expected, 'Original selected source bank checksum differs');
+      return json(pin, 'original selected source bank');
+    }
+  }, selection);
+  need(Array.isArray(bank.unchanged_files) && Array.isArray(bank.overrides),
+    'Complete original selected source roster required');
+  const originalSources = new Map();
+  for (const [name, pin] of [...bank.unchanged_files.map(pin => [pin.path, pin]),
+    ...bank.overrides.map(pin => [pin.logical_path, pin])]) {
+    need(/^data\/geography\/[^/]+\.json$/.test(name) && !originalSources.has(name),
+      'Duplicate or foreign original selected source');
+    originalSources.set(name, pin);
+  }
   const projection = prepareReferenceMetadataProjection({selection, manifest, owners: JSON.parse(ownersRaw), reference,
-    hierarchy: config.hierarchy, receipts: config.receipts, source_updates: config.source_updates, read});
-  need(config.receipts.every(pin=>migrationPins.has(pin.sha256) || isReferenceAliasReceipt(json(pin, 'existing reference correction receipt'))),
+    hierarchy: config.hierarchy, receipts: config.receipts, source_updates: config.source_updates, read, originalSources});
+  const receiptJSON = referenceMetadataReader(pin => read(pin, 'existing reference correction receipt'));
+  need(config.receipts.every(pin=>migrationPins.has(pin.sha256) || isReferenceAliasReceipt(receiptJSON(pin))),
     'Current reference release does not bind every applied metadata receipt');
   return {products: {'reference-metadata.json': jsonBytes(projection)},
     input_inventory: [...inventory.values()].map(({pin, roles}) => ({...pin, roles, whole_body_consumed: true}))};

@@ -36,7 +36,9 @@ async function fixture(t,{rosterBytes,rosterGzip=true,aliasSeed=false}={}){
  after.parent_id='Q';after.metadata.reference_corrections=[{id:'A',action:'reparent',current_name:'A',current_parent_id:'P',new_parent_id:'Q',rationale:'Synthetic sourced correction',evidence:[{url:'https://example.invalid/reference',title:'Synthetic reference',inspected_fact:'A belongs to Q'}]}];
  const change={location_id:'A',before_properties:before,after_properties:after};
  const receipt=await put('inputs/receipt.json',{before_sha256:beforeHierarchy.sha256,after_sha256:afterHierarchy.sha256,footprints_sha256_before:native.footprints_sha256,footprints_sha256_after:native.footprints_sha256,reference_only:true,historical_claims_transferred:false,summary:{geometry_changes:0},relationships:[],source_evidence:[{url:'https://example.invalid/reference',source_sha256:'c'.repeat(64)}],before_units:beforeGroups,retired_units:[],group_changes:[{id:'Q',before:beforeGroups.at(-1),after:afterGroups.at(-1)}],changed_location_properties:[change]});
- const beforeSource=await put('inputs/source-before.json',{type:'FeatureCollection',features:original}),afterSource=await put('inputs/source-after.json',{type:'FeatureCollection',features:currentFeatures});
+ const beforeSource=await put('data/geography/part-0.json',{type:'FeatureCollection',features:original}),afterSource=await put('inputs/source-after.json',{type:'FeatureCollection',features:currentFeatures});
+ const sourceBank=await put('inputs/original-source-map.json',{version:1,kind:'complete-world-index-with-exact-encoded-overrides',release_id:native.id,native_manifest_sha256:baseManifest.sha256,footprints_sha256:native.footprints_sha256,unchanged_files:[beforeSource],overrides:[]});
+ selection.selected_geography={version:1,kind:'complete-world-index-with-exact-encoded-overrides',...plain(sourceBank)};
  const projection=prepareReferenceMetadataProjection({selection,manifest,owners,reference:current,hierarchy:{before:beforeHierarchy,after:afterHierarchy},receipts:[receipt],source_updates:[{logical_path:'data/geography/part-0.json',before:beforeSource,after:afterSource}],read:reader.read});
  const projectionPin=await put('inputs/projection.json',projection);selection.reference_projection=plain(projectionPin);
  const registry='d'.repeat(64),addition=rectangle(1),ledger={version:1,kind:'native-additive-repair-ledger-v1',rule_sha256:registry,base_reference:current,parent_inventory:{components:1,report_sha256:'e'.repeat(64),roster_sha256:'f'.repeat(64)},scope_ids:['gap'],assigned_cells:1,rows:[{component_id:'gap',disposition:'assigned',target_id:'A',pixelIndex:1,base_geometry:original[0].geometry,base_geometry_sha256:footprintValueSha256(original[0].geometry),geometry:addition,geometry_sha256:footprintValueSha256(addition),source_receipt_sha256:'1'.repeat(64),native_cells:1}]};
@@ -83,8 +85,8 @@ test('compact current context derives receipted parents from complete projection
 test('reference-metadata preparation derives one canonical application from stock receipts and the actual current release registry',async t=>{
  const f=await fixture(t),result=prepareReferenceMetadata(f.preparationConfig,f.reader);
  assert.deepEqual(Object.keys(result.products),['reference-metadata.json']);assert.deepEqual(JSON.parse(result.products['reference-metadata.json']),f.projection);
- assert.equal(result.input_inventory.length,11);assert.ok(result.input_inventory.every(pin=>pin.whole_body_consumed&&pin.roles.length>0&&/^[a-f0-9]{40}$/.test(pin.git_blob_oid)));
- for(const name of ['data/ownership-selection.json','data/geographic-releases/current-manifest.json','data/geographic-releases/index.json','data/geographic-releases/releases-v2.json.gz','inputs/receipt.json','inputs/source-before.json','inputs/source-after.json'])assert.ok(result.input_inventory.some(pin=>pin.path===name),name);
+ assert.equal(result.input_inventory.length,12);assert.ok(result.input_inventory.every(pin=>pin.whole_body_consumed&&pin.roles.length>0&&/^[a-f0-9]{40}$/.test(pin.git_blob_oid)));
+ for(const name of ['data/ownership-selection.json','data/geographic-releases/current-manifest.json','data/geographic-releases/index.json','data/geographic-releases/releases-v2.json.gz','inputs/receipt.json','data/geography/part-0.json','inputs/source-after.json','inputs/original-source-map.json'])assert.ok(result.input_inventory.some(pin=>pin.path===name),name);
  assert.deepEqual(prepareReferenceMetadata(f.preparationConfig,f.reader),result);
 });
 
@@ -116,6 +118,31 @@ test('same owner roster admits exact large encoded/decoded bodies in both prepar
   }
   assert.deepEqual(f.reader.read(pin),original);
  }
+});
+
+test('reference preparation rejects a later identical source pin before publishing a projection',async t=>{
+ const f=await fixture(t),config=structuredClone(f.preparationConfig),before=config.source_updates[0].before;
+ // This reader returns the exact same bytes. Only issued origin custody differs.
+ before.commit='b'.repeat(40);
+ assert.deepEqual(f.reader.read(before),f.reader.read(f.preparationConfig.source_updates[0].before));
+ assert.throws(()=>prepareReferenceMetadata(config,f.reader),/does not start at the actual selected source/);
+ for(const change of [{path:'inputs/same-bytes.json'},{encoding:'gzip',decoded_bytes:before.bytes,decoded_sha256:before.sha256}]){
+  const altered=structuredClone(f.preparationConfig);Object.assign(altered.source_updates[0].before,change);
+  assert.throws(()=>prepareReferenceMetadata(altered,f.reader),/does not start at the actual selected source/);
+ }
+ assert.deepEqual(JSON.parse(prepareReferenceMetadata(f.preparationConfig,f.reader).products['reference-metadata.json']),f.projection);
+});
+
+test('reference preparation authenticates the selected source bank and refuses missing or duplicate source membership',async t=>{
+ for(const mutate of [bank=>bank.unchanged_files=[],bank=>bank.unchanged_files.push({...bank.unchanged_files[0]}),bank=>bank.native_manifest_sha256='0'.repeat(64)]){
+  const f=await fixture(t),bank=f.reader.json(f.pins.get('inputs/original-source-map.json'));mutate(bank);
+  const pin=await f.put('inputs/original-source-map.json',bank),selection={...f.selection,selected_geography:{...f.selection.selected_geography,...plain(pin)}};
+  const config={...f.preparationConfig,selector:await f.put('data/ownership-selection.json',selection)};
+  assert.throws(()=>prepareReferenceMetadata(config,f.reader),/actual selected source|Duplicate or foreign|source\/native\/release/);
+ }
+ const f=await fixture(t),pin=f.pins.get('inputs/original-source-map.json');
+ f.bodies.set(pin.sha256,Buffer.alloc(pin.bytes,32));
+ assert.throws(()=>prepareReferenceMetadata(f.preparationConfig,f.reader),/Whole reference preparation input differs/);
 });
 
 test('reference-metadata preparation rejects handwritten current identities, extra config, stale native/owner pins and incomplete source receipts',async t=>{
@@ -252,8 +279,15 @@ async function aliasPreparationFixture(t){
  await refresh();return {...f,config,receipt,features,refresh};
 }
 
-test('same-M preparation binds a complete alias receipt without minting a release or losing the prior reparent',async t=>{
+for(const compressed of [false,true]) test('same-M preparation binds a complete alias receipt without minting a release or losing the prior reparent: '+(compressed?'gzip':'plain'),async t=>{
  const f=await aliasPreparationFixture(t),release=Buffer.from(f.reader.read(f.pins.get('data/geographic-releases/releases-v2.json.gz')));
+ if(compressed){
+  const raw=f.reader.read(f.config.receipts[1]),pin=await f.put('inputs/alias-receipt.json.gz',gzipSync(raw));
+  f.config.receipts[1]={...pin,encoding:'gzip',decoded_bytes:raw.length,decoded_sha256:sha(raw)};
+  for(const change of [{encoding:'unknown'},{decoded_bytes:raw.length-1},{decoded_sha256:'0'.repeat(64)},{decoded_bytes:undefined}]){
+   const config=structuredClone(f.config);Object.assign(config.receipts[1],change);assert.throws(()=>prepareReferenceMetadata(config,f.reader));
+  }
+ }
  const prepared=prepareReferenceMetadata(f.config,f.reader),projection=JSON.parse(prepared.products['reference-metadata.json']);
  assert.deepEqual(projection.reference,f.current);assert.deepEqual(projection.native_reference,f.native);
  assert.deepEqual(projection.receipts,f.config.receipts);assert.equal(projection.location_changes[0].after_properties.parent_id,'Q');

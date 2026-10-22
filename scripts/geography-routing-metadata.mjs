@@ -3,12 +3,12 @@
 // Historical parent graphs and scientific leaves are never acquired.
 import {execFileSync} from 'node:child_process';
 import path from 'node:path';
-import {createAcquisition, githubTree, githubCommit} from './geography-prefetch.mjs';
+import {createAcquisition, githubTree} from './geography-prefetch.mjs';
 
 const demand = (value, message) => { if (!value) throw Error(message); };
 const oid = value => /^[a-f0-9]{40}$/.test(value ?? '');
 export function createRoutingMetadataAcquisition({repo, baseline, execute = execFileSync,
-  loadTree = githubTree, loadCommit = githubCommit, token = process.env.GH_TOKEN}) {
+  loadTree = githubTree, token = process.env.GH_TOKEN}) {
   const env = {...Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('GIT_'))),
     GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1', GIT_CONFIG_NOSYSTEM: '1',
     GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0', GIT_OPTIONAL_LOCKS: '0'};
@@ -71,7 +71,7 @@ export function createRoutingMetadataAcquisition({repo, baseline, execute = exec
     planned.set(original.git_blob_oid, size);
     return {path: name, type: 'blob', mode: original.mode, sha: original.git_blob_oid, size};
   }
-  const acquisition = createAcquisition({repo, loadDescriptor: descriptor, loadCommit,
+  const acquisition = createAcquisition({repo, loadDescriptor: descriptor,
     loadTree: async root => ({sha: root, tree: await tree(root, false), truncated: false}), execute, token});
   let pending = [], scheduled = false;
   async function flush() {
