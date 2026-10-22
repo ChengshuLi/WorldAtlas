@@ -127,6 +127,8 @@ async function syntheticPreparation() {
     mock.module(pathToFileURL(path.join(repository, 'scripts/read-geographic-release-manifest.mjs')).href,
       {namedExports: {readGeographicReleaseManifest: () => ({releases: [reference]})}});
     const {prepareStartupOwnership} = await import(pathToFileURL(script).href);
+    await fs.mkdir(path.join(root,'data'),{recursive:true});
+    await fs.writeFile(path.join(root,'data/ownership-selection.json'),JSON.stringify({version:1,method:manifest.method,manifest_path:manifestPath,sha256:sha(manifestBytes),release_id:reference.id}));
     const output = path.join(root, 'prepared');
     const first = await prepareStartupOwnership({output, previous});
     for (const pin of oldFiles) assert.equal(sha(await fs.readFile(path.join(output, pin.path))), pin.sha256);

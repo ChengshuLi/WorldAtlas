@@ -261,7 +261,10 @@ export function additiveBaseReference(data) {
 // original reference before any native loader uses the selection.
 export function nativeReferenceForData(data) {
   const current=additiveBaseReference(data),metadata=data.referenceMetadata;
-  if(metadata===undefined)return current;
+  if(metadata===undefined){
+    if(data.preparedOwnership){require(JSON.stringify(canonicalValue(originalNativeReference(data.preparedOwnership.native_pixel_map)))===JSON.stringify(canonicalValue(current)),'Prepared native/content reference differs');}
+    return current;
+  }
   require(data.additiveRelease!==undefined,'Reference metadata requires an explicit selected native asset closure');
   exactKeys(metadata,['version','asset','native_reference','reference',...(Object.hasOwn(metadata,'application_reference_revision')?['application_reference_revision']:[])],'Reference metadata');
   require(metadata.application_reference_revision===undefined||hex.test(metadata.application_reference_revision),'Invalid application reference revision');
@@ -276,7 +279,7 @@ export function nativeReferenceForData(data) {
       &&hex.test(reference.footprints_sha256)&&hex.test(reference.hierarchy_sha256),'Incomplete reference metadata reference');
   }
   const same=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
-  require(same(metadata.reference,current)&&same(metadata.native_reference,originalNativeReference(data.pixelMap)),
+  require(same(metadata.reference,current)&&same(metadata.native_reference,originalNativeReference(data.preparedOwnership?.native_pixel_map??data.pixelMap)),
     'Reference metadata differs from the current or original native reference');
   require(metadata.reference.footprints_sha256===metadata.native_reference.footprints_sha256
     &&metadata.reference.hierarchy_sha256!==metadata.native_reference.hierarchy_sha256
@@ -338,6 +341,88 @@ async function readWholeAdditiveAsset(asset,fetcher,label) {
     require(Array.from(sha256(decoded),byte=>byte.toString(16).padStart(2,'0')).join('')===asset.decoded_sha256,label+' whole decoded checksum mismatch');
   }
   return JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(decoded));
+}
+
+// Fixed accepted repairs are already present in the served word bank. This
+// reader installs only its whole-pinned feature context; it never fetches or
+// replays a ledger/patch and has no fallback to original ownership words.
+export function bindPreparedNativeFeatures(data,features,parts) {
+  const proof=data.preparedOwnership,same=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+  require(proof?.version===2&&features.length===proof.owners&&parts.length===proof.context_parts.length,'Incomplete prepared feature context');
+  const byId=new Map(features.map(f=>[f.id,f])),seen=new Set(),indices=new Set(),prepared=new Map();
+  require(byId.size===features.length,'Duplicate prepared current feature');
+  for(let part=0;part<parts.length;part++){
+    require(Array.isArray(parts[part])&&parts[part].length===proof.context_parts[part].features,'Prepared context count differs');
+    for(const context of parts[part]){
+      const current=byId.get(context.id);
+      require(current&&!seen.has(context.id)&&context.properties?.id===context.id
+        &&context.properties.parent_id===current.properties?.parent_id&&context.pixelIndex===current.pixelIndex
+        &&Number.isSafeInteger(context.pixelIndex)&&context.pixelIndex>0&&!indices.has(context.pixelIndex)
+        &&Array.isArray(context.gridBounds)&&context.gridBounds.length===4&&context.gridBounds.every(Number.isFinite),
+        'Prepared current owner, parent or bounds differ');
+      seen.add(context.id);indices.add(context.pixelIndex);
+      if(Object.keys(context.properties).length>2)assertAppliedReferenceProperties(current.properties,context.properties,
+        {referenceRevision:data.referenceMetadata?.application_reference_revision});
+      const next={...current,gridBounds:[...context.gridBounds]};
+      if(context.geometry!==null){
+        require(current.geometry==null||same(current.geometry,context.geometry),'Prepared base geometry differs');
+        next.geometry=context.geometry;
+      }
+      if(Object.hasOwn(context,'additiveFootprint')){
+        require(!Object.hasOwn(current,'additiveFootprint')||same(current.additiveFootprint,context.additiveFootprint),'Prepared effective footprint differs');
+        next.additiveFootprint=context.additiveFootprint;effectivePrimitiveGeometries(next);
+      }
+      prepared.set(context.id,next);
+    }
+  }
+  const mapping=features.map(f=>[f.pixelIndex,f.id]).sort((a,b)=>a[0]-b[0]);
+  const ownerDigest=Array.from(sha256(new TextEncoder().encode(JSON.stringify(mapping))),b=>b.toString(16).padStart(2,'0')).join('');
+  require(ownerDigest===proof.reference_owner_sha256,'Prepared complete owner roster differs');
+  const result=features.map(feature=>prepared.get(feature.id));
+  require(additiveReleaseFootprintDigest(proof.base_reference,result)===proof.effective_reference?.footprints_sha256,'Prepared effective footprint digest differs');
+  return result;
+}
+
+export async function loadPreparedNativeContext(data,features,ownership,{fetcher=fetch}={}) {
+  if(data.additiveRelease===undefined){require(data.preparedOwnership===undefined,'Unexpected prepared additive context');return ownership;}
+  const proof=data.preparedOwnership,base=additiveBaseReference(data),effective=data.reference_release;
+  require(proof?.version===2,'Selected repairs require a corrected prepared ownership bank');
+  const same=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+  require(same(proof.base_reference,base)&&same(proof.effective_reference,effective)
+    &&hex.test(proof.selection_sha256)&&proof.native_manifest_sha256===data.additiveRelease.base_manifest.sha256,
+    'Prepared ownership selection or reference differs');
+  const native=nativeReferenceForData(data);
+  require(proof.native_pixel_map?.canonical_grid_sha256===proof.native_manifest_sha256
+    &&same(originalNativeReference(proof.native_pixel_map),native),'Prepared original native identity differs');
+  require(ownership?.geographic_release===effective.id&&ownership.footprints_sha256===effective.footprints_sha256
+    &&ownership.hierarchy_sha256===effective.hierarchy_sha256&&ownership.rows instanceof Uint32Array
+    &&ownership.runs instanceof Uint32Array,'Prepared final ownership differs from selected effective reference');
+  require(Array.isArray(features)&&features.length===proof.owners&&Array.isArray(proof.context_parts)
+    &&proof.context_parts.length>0,'Incomplete prepared effective context');
+  let offset=0;const paths=new Set();
+  for(const pin of proof.context_parts){
+    require(/^geography\/effective-context-[a-f0-9]{64}\.json\.gz$/.test(pin.path)&&!paths.has(pin.path)
+      &&pin.offset===offset&&Number.isSafeInteger(pin.features)&&pin.features>0&&pin.features<=1500
+      &&pin.encoding==='gzip'&&Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&pin.bytes<=8*1024*1024
+      &&Number.isSafeInteger(pin.decoded_bytes)&&pin.decoded_bytes>0&&pin.decoded_bytes<=32*1024*1024
+      &&hex.test(pin.sha256)&&hex.test(pin.decoded_sha256),'Invalid prepared effective context part');
+    paths.add(pin.path);offset+=pin.features;
+  }
+  require(offset===features.length,'Incomplete prepared effective context roster');
+  const parts=await Promise.all(proof.context_parts.map(pin=>readWholeAdditiveAsset(pin,fetcher,'Prepared effective context')));
+  require(ownership.reference_owner_sha256===proof.reference_owner_sha256,'Prepared final owner mapping differs');
+  const prepared=bindPreparedNativeFeatures(data,features,parts);
+  require(proof.effective_footprint_domain===`worldatlas-effective-native-footprints:v${data.additiveRelease.version}`
+    &&hex.test(proof.additive_patch_sha256)
+    &&proof.additive_ledger_sha256===decodedAdditiveAssetIdentity(data.additiveRelease.ledger).sha256
+    &&Number.isSafeInteger(proof.additive_added_cells)&&proof.additive_added_cells>=0,'Incomplete prepared effective provenance');
+  for(let i=0;i<features.length;i++)features[i]=prepared[i];
+  return {...ownership,effective_footprint_sha256:effective.footprints_sha256,
+    effective_footprint_domain:proof.effective_footprint_domain,additive_base_reference:{...base},
+    additive_patch_sha256:proof.additive_patch_sha256,additive_ledger_sha256:proof.additive_ledger_sha256,
+    additive_added_cells:proof.additive_added_cells,reference_owner_source_sha256:data.additiveRelease.owner_roster.sha256,
+    ...(proof.additive_authority_registry_sha256?{additive_authority_registry_sha256:proof.additive_authority_registry_sha256}:{}),
+    ...(proof.additive_rule_sha256?{additive_rule_sha256:proof.additive_rule_sha256}:{})};
 }
 
 export function loadedBaseFootprintSha256(features) {

@@ -5,12 +5,14 @@ import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
-import {gzipSync} from 'node:zlib';
+import {gzipSync,gunzipSync} from 'node:zlib';
 import {sha256} from '../scripts/evidence-quality.mjs';
 import {runSelectedDeliverySmoke, checkEmittedSelectedDelivery, verifySelectedDelivery, selectedStableOwnerControls} from '../scripts/selected-delivery-smoke.mjs';
 import {packOwnership} from '../src/pixel-ownership.js';
+import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {loadOwnershipAssets} from '../src/ownership-assets.js';
-import {packageStartupOwnership} from '../scripts/package-startup-ownership.mjs';
+import {packageStartupOwnership,packageFinalStartupOwnership,packagePreparedStartupOwnership} from '../scripts/package-startup-ownership.mjs';
+import {prepareSelectedStartupOwnership} from '../scripts/prepare-startup-ownership.mjs';
 import {footprintValueSha256 as geometryHash, loadedBaseFootprintSha256,
   additiveReleaseFootprintDigest, loadAdditiveNativePatch} from '../src/effective-footprint.js';
 
@@ -408,4 +410,85 @@ test('selected-map CLI and kernel still require independent expectations',async 
  await assert.rejects(runSelectedDeliverySmoke({...f.options,expectationsPath:undefined}),/Missing expectations path/);
  assert.equal(fs.existsSync(f.outputPath),false);
  assert.throws(()=>verifySelectedDelivery({expectations:undefined}),/Expectations must be an object/);
+});
+
+
+async function finalFixture(t) {
+  const f=fixture(t),bank=path.join(f.directory,'bank'),nativeSource=path.join(f.directory,'native');
+  const write=(root,name,bytes)=>{const file=path.join(root,name);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,bytes);return asset(name,bytes);};
+  const read=name=>fs.readFileSync(path.join(f.emittedDirectory,name));
+  const manifest=JSON.parse(read(f.atlas.additiveRelease.base_manifest.path));
+  manifest.version=2;manifest.runWords=f.atlas.pixelMap.runWords;
+  manifest.parts=manifest.parts.map(part=>({...part,...write(nativeSource,`native-v1/ownership/${part.kind}-0.bin.gz`,read(part.path))}));
+  const latitudeName=f.atlas.pixelMap.native_latitudes.path;
+  const latitudeRaw=fs.readFileSync(fileURLToPath(new URL('../'+latitudeName,import.meta.url)));
+  manifest.native_latitudes={...f.atlas.pixelMap.native_latitudes,bytes:latitudeRaw.length,sha256:sha256(latitudeRaw)};
+  manifest.original_assets.bounds=pin('additive-repairs/owners.json.gz',read('additive-repairs/owners.json.gz'));
+  const envelope=structuredClone(f.atlas.additiveRelease),manifestRaw=json(manifest);
+  envelope.base_manifest=asset(envelope.base_manifest.path,manifestRaw);
+  const prefix='ownership-vintages/'+envelope.base_manifest.sha256+'/';
+  const packaged=await packageStartupOwnership({manifest,source:nativeSource,destination:path.join(bank,prefix)});
+  for(const part of manifest.parts.filter(p=>p.kind==='rows'))write(bank,part.path,fs.readFileSync(path.join(nativeSource,part.path)));
+  write(bank,'native-v1/native-row-latitudes.f64le.gz',latitudeRaw);
+  const nativePixelMap={...packaged.pixelMap,canonical_grid_sha256:envelope.base_manifest.sha256,
+    native_latitudes:{...manifest.native_latitudes,transport_path:'native-v1/native-row-latitudes.f64le.gz'},
+    parts:packaged.pixelMap.parts.map(part=>part.kind==='rows'?part:{...part,path:prefix+part.path})};
+  const assets={};
+  for(const role of ['base_manifest','owner_roster','ledger','patch']){
+    const a=envelope[role],raw=role==='base_manifest'?manifestRaw:read(a.path);
+    const name='coordination/fixture-science/'+role+(a.path.endsWith('.gz')?'.json.gz':'.json');
+    write(f.root,name,raw);assets[role]={...pin(name,raw),...(a.encoding?{encoding:a.encoding,decoded_bytes:a.decoded_bytes,decoded_sha256:a.decoded_sha256}:{})};
+  }
+  let selection={version:1,method:manifest.method,manifest_path:'data/native.json',sha256:envelope.base_manifest.sha256,release_id:manifest.geographic_release};
+  const sidecar={version:2,kind:'retained-native-additive-selection-v2',base_selection:{...selection},logical_asset_map:assets,
+    runtime_envelope:pin('selection/envelope.json',json(envelope))};
+  write(f.root,'selection/envelope.json',json(envelope));write(f.root,'selection/sidecar.json',json(sidecar));
+  selection.additive_release=pin('selection/sidecar.json',json(sidecar));const selectionBytes=json(selection);
+  write(f.root,'data/ownership-selection.json',selectionBytes);write(f.root,'data/native.json',manifestRaw);
+  const inventory=(directory,relative='')=>fs.readdirSync(path.join(directory,relative),{withFileTypes:true}).flatMap(entry=>{
+    const name=relative+entry.name;return entry.isDirectory()?inventory(directory,name+'/'):[asset(name,fs.readFileSync(path.join(directory,name)))];
+  }).sort((a,b)=>a.path.localeCompare(b.path));
+  const index=await prepareSelectedStartupOwnership({selectionBytes,manifest,previous:{version:1,pixelMap:nativePixelMap,files:inventory(bank)},
+    readNative:name=>fs.readFileSync(path.join(bank,name)),readPin:p=>fs.readFileSync(path.join(f.root,p.path)),destination:bank});
+  index.files=inventory(bank);write(bank,'index.json',json(index));
+  const selected={selection,selectionBytes,sidecar,envelope,base:envelope.base_reference};
+  const output=path.join(f.directory,'copied');
+  const prepared=await packagePreparedStartupOwnership({manifest,manifestSha:selection.sha256,source:bank,destination:output,selected,features:JSON.parse(gunzipSync(read(f.atlas.parts[0])))});
+  fs.cpSync(output,f.emittedDirectory,{recursive:true});
+  fs.rmSync(path.join(f.emittedDirectory,'additive-repairs'),{recursive:true});
+  const atlas={...f.atlas,additiveRelease:envelope,pixelMap:prepared.pixelMap,preparedOwnership:prepared.preparedOwnership};
+  write(f.emittedDirectory,'atlas-geography.json',json(atlas));
+  return {...f,atlas,index,bank,write,selected,manifest};
+}
+
+test('finished-bank emitted consumer uses E directly and independently checks every word against original science',async t=>{
+  const f=await finalFixture(t);
+  assert.equal(fs.existsSync(path.join(f.emittedDirectory,'additive-repairs')),false);
+  const report=await runSelectedDeliverySmoke(f.options);
+  assert.equal(report.cumulative_native_cells_picked_and_sampled,2);
+  assert.equal(report.expected_components_verified,2);assert.equal(report.stable_owner_controls,1);
+  assert(report.inputs.some(p=>p.path==='coordination/fixture-science/ledger.json'&&p.scope==='root'));
+  assert(!report.inputs.some(p=>p.path.startsWith('additive-repairs/')));
+  fs.unlinkSync(f.outputPath);
+  const fetcher=async name=>new Response(fs.readFileSync(path.join(f.emittedDirectory,name.replace(/^\.\//,''))));
+  const words=await loadOwnershipAssets(f.atlas.pixelMap,fetcher);
+  // Change an unrelated occupied owner, outside every repair and held component.
+  words.runs[words.rows[4*2]+2]=1;
+  const forged=await packageFinalStartupOwnership({ownership:words,expectedReference:f.atlas.reference_release,destination:path.join(f.directory,'forged')});
+  fs.cpSync(path.join(f.directory,'forged'),f.emittedDirectory,{recursive:true});
+  const atlas=structuredClone(f.atlas);atlas.pixelMap=forged.pixelMap;
+  atlas.preparedOwnership.rows_sha256=forged.rows_sha256;atlas.preparedOwnership.runs_word_stream_sha256=forged.runs_word_stream_sha256;
+  f.write(f.emittedDirectory,'atlas-geography.json',json(atlas));
+  await assert.rejects(runSelectedDeliverySmoke(f.options),/Complete emitted (rows|runs) differ/);
+  assert.equal(fs.existsSync(f.outputPath),false,'Forged unrelated words cannot publish success');
+  const native=await loadOwnershipAssets(atlas.preparedOwnership.native_pixel_map,fetcher);
+  native.runs[native.rows[4*2]+2]=1;
+  const part=atlas.preparedOwnership.native_pixel_map.parts.find(p=>p.kind==='runs');
+  assert.equal(part.words,native.runs.length);
+  const raw=gzipSync(shuffleOwnershipBytes(native.runs));
+  f.write(f.emittedDirectory,part.path,raw);part.sha256=sha256(raw);part.bytes=raw.length;part.decoded_sha256=sha256(Buffer.from(native.runs.buffer));
+  f.write(f.emittedDirectory,'atlas-geography.json',json(atlas));
+  await assert.rejects(runSelectedDeliverySmoke(f.options),/Decoded native ownership differs from original selected manifest/,
+    'A mutually forged N and E cannot authorize each other');
+  assert.equal(fs.existsSync(f.outputPath),false);
 });

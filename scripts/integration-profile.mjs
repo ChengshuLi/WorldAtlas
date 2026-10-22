@@ -112,7 +112,7 @@ import {createHash} from 'node:crypto';
 import {isDeepStrictEqual as same} from 'node:util';
 import {gunzipSync} from 'node:zlib';
 import {isUtf8} from 'node:buffer';
-import {validatePackageInputs, admitSelectedPackageDeclarations, loadPackageInputs, packagePathRequired, safePackagePath, containsPackagePath, PACKAGE_INPUT_FILE} from './package-inputs.mjs';
+import {validatePackageInputs, admitSelectedPackageDeclarations, loadPackageInputs, packagePathRequired, safePackagePath, containsPackagePath, PACKAGE_INPUT_FILE, PREPARED_STARTUP_PREFIX, PREPARED_STARTUP_INDEX, preparedStartupPackageTransition} from './package-inputs.mjs';
 const SELECTION = 'data/ownership-selection.json';
 const CHECKPOINT_LOCATOR = 'data/selected-checkpoint.json';
 const ADMINISTRATIVE_REGISTRY = 'coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json';
@@ -199,7 +199,9 @@ export function selectedDataCandidate(branch, files, reservation = {}) {
     files.some(file => file.filename === SELECTION && file.status === 'modified') &&
     files.every(file => !file.previous_filename && (file.filename === CHECKPOINT_LOCATOR
       ? ['added', 'modified'].includes(file.status) : [SELECTION, PACKAGE_INPUT_FILE, ADMINISTRATIVE_REGISTRY].includes(file.filename)
-      ? file.status === 'modified' : file.status === 'modified' && scientificManifest(file.filename) ||
+      ? file.status === 'modified' : file.filename === PREPARED_STARTUP_INDEX ? file.status === 'modified'
+      : file.filename.startsWith(PREPARED_STARTUP_PREFIX) ? ['added','removed'].includes(file.status)
+      : file.status === 'modified' && scientificManifest(file.filename) ||
         file.status === 'added' && packetPath(file.filename)));
 }
 export async function integrationTree(api, repo, commit) {
@@ -229,7 +231,8 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     const added = new Set(files.filter(file => file.status === 'added').map(file => file.filename));
     // New executable originals may be supporting custody. Every consumed role
     // remains 100644; the complete role walk below must prove custody unconsumed.
-    needSelected(files.every(({filename}) => ordinary(authored.entries.get(filename)) ||
+    needSelected(files.every(({filename,status}) => status==='removed'&&filename.startsWith(PREPARED_STARTUP_PREFIX)
+      ? ordinary(baseline.entries.get(filename)) : ordinary(authored.entries.get(filename)) ||
       added.has(filename) && ordinary(authored.entries.get(filename), '100755')) &&
       [...added].every(name => !baseline.entries.has(name)), 'nonordinary or overwritten data');
     const expectedPaths = [...added].filter(name => name.endsWith('/selected-delivery-expectations.json'));
@@ -269,6 +272,14 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     const json = async (name, tree, retain = true) => parseJSON(await read(name, tree, retain));
     const registryChanged = files.some(file => file.filename === ADMINISTRATIVE_REGISTRY);
     const oldSelection = await json(SELECTION, baseline), selection = await json(SELECTION);
+    let bank={changed:new Set()};
+    if(baseline.entries.has(PREPARED_STARTUP_INDEX)||authored.entries.has(PREPARED_STARTUP_INDEX)||files.some(file=>file.filename.startsWith(PREPARED_STARTUP_PREFIX))){
+      const source=(tree,selection)=>({selection,files:[...tree.entries].filter(([,row])=>row.type==='blob').map(([path,row])=>({path,mode:row.mode,oid:row.sha,bytes:row.size}))});
+      bank=preparedStartupPackageTransition(source(baseline,oldSelection),source(authored,selection),{
+        beforeIndex:await read(PREPARED_STARTUP_INDEX,baseline),afterIndex:await read(PREPARED_STARTUP_INDEX),
+        beforeSelection:await read(SELECTION,baseline),afterSelection:await read(SELECTION)});
+      needSelected(files.filter(file=>file.filename.startsWith(PREPARED_STARTUP_PREFIX)).every(file=>bank.changed.has(file.filename)), 'Unbound prepared-bank change');
+    }
     let packageAdditions = [], packageDefinitions;
     if (files.some(file => file.filename === PACKAGE_INPUT_FILE)) {
       packageDefinitions = {before:validatePackageInputs(await json(PACKAGE_INPUT_FILE, baseline)),
@@ -277,7 +288,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     const {additive_release: oldHook, ...oldBase} = oldSelection, {additive_release: hook, ...newBase} = selection;
     needSelected(selection.version === 1 && selection.method === 'native-linear-evenodd-first-owner-v1' &&
       selection.artifact_consumption && same(oldBase, newBase) && !same(oldHook, hook), 'selection changes method/base authority');
-    const reachable = new Set(), nativeOperands = new Set(), identities = new Map();
+    const reachable = new Set(bank.changed), nativeOperands = new Set(), identities = new Map();
     const unchangedRole = name => {
       const before = baseline.entries.get(name), after = authored.entries.get(name);
       return ordinary(before) && ordinary(after) && before.sha === after.sha && before.size === after.size;

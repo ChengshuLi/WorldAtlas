@@ -1,1 +1,1298 @@
-{"version":1,"native_manifest_sha256":"d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba","release_id":"geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb","footprints_sha256":"2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9","hierarchy_sha256":"568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b","pixelMap":{"version":2,"coordinateBits":19,"size":262166,"runWords":57617774,"footprints_sha256":"2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9","hierarchy_sha256":"568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b","geographic_release":"geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb","method":"native-linear-evenodd-first-owner-v1","native_latitudes":{"root":"repository","role":"immutable-normative-rule-input","path":"coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz","commit":"5b32388df0501b013ac9a3ba97864932db493d59","bytes":1851757,"sha256":"ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147","decoded_bytes":2097328,"decoded_sha256":"66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23","transport_path":"native-v1/native-row-latitudes.f64le.gz"},"parts":[{"kind":"rows","offset":0,"words":524332,"path":"native-v1/ownership/rows-0.bin.gz","bytes":306620,"sha256":"89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0","decoded_bytes":2097328,"decoded_sha256":"e9044c8304a47cd0d0acbb306bd31c2ba15f71e57648ab7d1581a6a77a875294","encoding":"byte-shuffle"},{"kind":"runs","path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-0.bin.gz","offset":0,"words":4194304,"encoding":"byte-shuffle","sha256":"5e73bd6ee306f3be021c7f89bf336c590ae3c02021df1c436d22088ed4284171","decoded_sha256":"8aa34f92fbb32e4bd6a135903a0f46c0b0b786be01cd4926353b1d7c8e050df2"},{"kind":"runs","path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-4194304.bin.gz","offset":4194304,"words":4194304,"encoding":"byte-shuffle","sha256":"da6498fc3c898adca6231896e9b1f2c734153064d78431bc5a311fec768c18f9","decoded_sha256":"301f2c428ac4307931951ab30dd1b0a10870f7d68741a7d993909ea8c3f33867"},{"kind":"runs","path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-8388608.bin.gz","offset":8388608,"words":4194304,"encoding":"byte-shuffle","sha256":"244e3da13a412b4a4ccbc652191a080495a5611df5d0ee2207c8d08ac27b929a","decoded_sha256":"8b44d4f6952eb5f6ed886019fa7aa740ad5da2ca8bc9d606e17e7c1e7233f5ff"},{"kind":"runs","path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-12582912.bin.gz","offset":12582912,"words":4194304,"encoding":"byte-shuffle","sha256":"01012dd358291a9e4ee51888a1d2b618ab2003e06a6eebd3a236392ecdbbc015","decoded_sha256":"c4e3df743ed0dc0e39b36ff5997ba96011802730a8e23b3da6a7ec7997a7d9b8"},{"kind":"runs","path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-16777216.bin.gz","offset":16777216,"words":4194304,"encoding":"byte-shuffle","sha256":"d5ed4d7e1700fb60298a53cc37ad9943257f57f853e19cc786ef975ebc7f0cae","decoded_sha256":"4b0d02e1979ab7816936779d6dba7372306796e3ad679faebf0a785d12f8d9be"},{"kind":"runs","path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-20971520.bin.gz","offset":20971520,"words":4194304,"encoding":"byte-shuffle","sha256":"198daba78eaeed9f316f088a86f8a7c4cf8f7e868253fc09487870eceddaf58a","decoded_sha256":"c4e602fe369200947d4dfcbf4a59a8574c88c30afccffd8e60c5ac4108f4af00"},{"kind":"runs","path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-25165824.bin.gz","offset":25165824,"words":4194304,"encoding":"byte-shuffle","sha256":"764a967753d010daa794b30ca597bee0503646e7cae6965b14df63f280b9c544","decoded_sha256":"d3ed586cf2a904879cbe274bc8163e73cc3b008d561b7bbfddaeaf24cd3cbb54"},{"kind":"runs","path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-29360128.bin.gz","offset":29360128,"words":4194304,"encoding":"byte-shuffle","sha256":"ff29a1956ae0dd99e4db155c9cdabf96c72155a1a772210910d5119845759cf8","decoded_sha256":"c2d0e75e64f787e437728054ae172fde06db0ee93df2f5e20b4bd29b2c24c043"},{"kind":"runs","path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-33554432.bin.gz","offset":33554432,"words":4194304,"encoding":"byte-shuffle","sha256":"826cffaf4b05286a68ae479bc6e6caba3b3b3993f7fa57eae08efe7f6089694b","decoded_sha256":"8d14ac64a860a3287a9a71a7f7c4d634efed364a564cf5764d05a258ad2b1a78"},{"kind":"runs","path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-37748736.bin.gz","offset":37748736,"words":4194304,"encoding":"byte-shuffle","sha256":"18472136ceb94b95a17918acdfba32c56d13a2979043c66fb74cf615d81551ee","decoded_sha256":"1301ba2061b8bc9549a2258ba8e879ef5312b366e11d52ea19c3b953f6c4df7b"},{"kind":"runs","path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-41943040.bin.gz","offset":41943040,"words":4194304,"encoding":"byte-shuffle","sha256":"f4e7f8de92e3d709db9675386961fac934a8a21652bf6f34f8d122ed71c73c44","decoded_sha256":"1fff26cbed9840b752d855ab5a7ea436dd15775d080b02245c1e43234fe6cb3c"},{"kind":"runs","path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-46137344.bin.gz","offset":46137344,"words":4194304,"encoding":"byte-shuffle","sha256":"bb9b1ba3ace6229a338eee6c903e1d5db637a765c46ed60f957ceb6e34346101","decoded_sha256":"4acf3f62fc98be33e696ebc3f988e2653548473ee87124ba9a9fcf685f5d7388"},{"kind":"runs","path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-50331648.bin.gz","offset":50331648,"words":4194304,"encoding":"byte-shuffle","sha256":"09aaf4d9a115dea6a85ed2a853532045c627ea2408f259513ce9de8e616ef55d","decoded_sha256":"d4e3abc0859e5a391b39a063f04b56e624b25fa8cd8f698bd7b06fd803a20b9f"},{"kind":"runs","path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-54525952.bin.gz","offset":54525952,"words":3091822,"encoding":"byte-shuffle","sha256":"91bfddd9aa632dc18ecc2f487a71673b504f971d2795e7c4af9c9298f4fe4fbc","decoded_sha256":"cca574edbba522647c9641257096caa024047f776eafa31273e0995b4f0eb335"}],"reference_owner_sha256":"90facdfa2c74a935e7e64fe2b2467de3b09f3b816eb96ba350f4f5bacb2227c2","canonical_grid_sha256":"d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"},"files":[{"path":"native-v1/native-row-latitudes.f64le.gz","bytes":1851757,"sha256":"ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147"},{"path":"native-v1/ownership/rows-0.bin.gz","bytes":306620,"sha256":"89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0"},{"path":"native-v1/ownership/startup-runs-0.bin.gz","bytes":3854101,"sha256":"3d551738a3454d2028e1d9adc352b7446d7c0f25c8d42044704cf1efb6f64b6b"},{"path":"native-v1/ownership/startup-runs-12582912.bin.gz","bytes":3478667,"sha256":"01012dd358291a9e4ee51888a1d2b618ab2003e06a6eebd3a236392ecdbbc015"},{"path":"native-v1/ownership/startup-runs-16777216.bin.gz","bytes":3289324,"sha256":"d5ed4d7e1700fb60298a53cc37ad9943257f57f853e19cc786ef975ebc7f0cae"},{"path":"native-v1/ownership/startup-runs-20971520.bin.gz","bytes":3146696,"sha256":"198daba78eaeed9f316f088a86f8a7c4cf8f7e868253fc09487870eceddaf58a"},{"path":"native-v1/ownership/startup-runs-25165824.bin.gz","bytes":3272873,"sha256":"764a967753d010daa794b30ca597bee0503646e7cae6965b14df63f280b9c544"},{"path":"native-v1/ownership/startup-runs-29360128.bin.gz","bytes":3296575,"sha256":"ff29a1956ae0dd99e4db155c9cdabf96c72155a1a772210910d5119845759cf8"},{"path":"native-v1/ownership/startup-runs-33554432.bin.gz","bytes":3521891,"sha256":"826cffaf4b05286a68ae479bc6e6caba3b3b3993f7fa57eae08efe7f6089694b"},{"path":"native-v1/ownership/startup-runs-37748736.bin.gz","bytes":3497645,"sha256":"18472136ceb94b95a17918acdfba32c56d13a2979043c66fb74cf615d81551ee"},{"path":"native-v1/ownership/startup-runs-4194304.bin.gz","bytes":3428397,"sha256":"da6498fc3c898adca6231896e9b1f2c734153064d78431bc5a311fec768c18f9"},{"path":"native-v1/ownership/startup-runs-41943040.bin.gz","bytes":3534601,"sha256":"f4e7f8de92e3d709db9675386961fac934a8a21652bf6f34f8d122ed71c73c44"},{"path":"native-v1/ownership/startup-runs-46137344.bin.gz","bytes":3556931,"sha256":"bb9b1ba3ace6229a338eee6c903e1d5db637a765c46ed60f957ceb6e34346101"},{"path":"native-v1/ownership/startup-runs-50331648.bin.gz","bytes":3397952,"sha256":"09aaf4d9a115dea6a85ed2a853532045c627ea2408f259513ce9de8e616ef55d"},{"path":"native-v1/ownership/startup-runs-54525952.bin.gz","bytes":2460609,"sha256":"91bfddd9aa632dc18ecc2f487a71673b504f971d2795e7c4af9c9298f4fe4fbc"},{"path":"native-v1/ownership/startup-runs-8388608.bin.gz","bytes":3423683,"sha256":"244e3da13a412b4a4ccbc652191a080495a5611df5d0ee2207c8d08ac27b929a"},{"path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-0.bin.gz","bytes":3854096,"sha256":"5e73bd6ee306f3be021c7f89bf336c590ae3c02021df1c436d22088ed4284171"},{"path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-12582912.bin.gz","bytes":3478667,"sha256":"01012dd358291a9e4ee51888a1d2b618ab2003e06a6eebd3a236392ecdbbc015"},{"path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-16777216.bin.gz","bytes":3289324,"sha256":"d5ed4d7e1700fb60298a53cc37ad9943257f57f853e19cc786ef975ebc7f0cae"},{"path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-20971520.bin.gz","bytes":3146696,"sha256":"198daba78eaeed9f316f088a86f8a7c4cf8f7e868253fc09487870eceddaf58a"},{"path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-25165824.bin.gz","bytes":3272873,"sha256":"764a967753d010daa794b30ca597bee0503646e7cae6965b14df63f280b9c544"},{"path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-29360128.bin.gz","bytes":3296575,"sha256":"ff29a1956ae0dd99e4db155c9cdabf96c72155a1a772210910d5119845759cf8"},{"path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-33554432.bin.gz","bytes":3521891,"sha256":"826cffaf4b05286a68ae479bc6e6caba3b3b3993f7fa57eae08efe7f6089694b"},{"path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-37748736.bin.gz","bytes":3497645,"sha256":"18472136ceb94b95a17918acdfba32c56d13a2979043c66fb74cf615d81551ee"},{"path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-4194304.bin.gz","bytes":3428397,"sha256":"da6498fc3c898adca6231896e9b1f2c734153064d78431bc5a311fec768c18f9"},{"path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-41943040.bin.gz","bytes":3534601,"sha256":"f4e7f8de92e3d709db9675386961fac934a8a21652bf6f34f8d122ed71c73c44"},{"path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-46137344.bin.gz","bytes":3556931,"sha256":"bb9b1ba3ace6229a338eee6c903e1d5db637a765c46ed60f957ceb6e34346101"},{"path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-50331648.bin.gz","bytes":3397952,"sha256":"09aaf4d9a115dea6a85ed2a853532045c627ea2408f259513ce9de8e616ef55d"},{"path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-54525952.bin.gz","bytes":2460609,"sha256":"91bfddd9aa632dc18ecc2f487a71673b504f971d2795e7c4af9c9298f4fe4fbc"},{"path":"ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-8388608.bin.gz","bytes":3423683,"sha256":"244e3da13a412b4a4ccbc652191a080495a5611df5d0ee2207c8d08ac27b929a"}]}
+{
+  "version": 2,
+  "native_manifest_sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+  "release_id": "geography:rus-ukr4-source-context-repair-20261021",
+  "footprints_sha256": "1ae20bc5d736a2bf1c850b8daaf7ae893a1d496df2a55c8d04d8017edac035af",
+  "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+  "pixelMap": {
+    "version": 2,
+    "coordinateBits": 19,
+    "size": 262166,
+    "runWords": 58331652,
+    "footprints_sha256": "1ae20bc5d736a2bf1c850b8daaf7ae893a1d496df2a55c8d04d8017edac035af",
+    "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+    "geographic_release": "geography:rus-ukr4-source-context-repair-20261021",
+    "reference_owner_sha256": "90facdfa2c74a935e7e64fe2b2467de3b09f3b816eb96ba350f4f5bacb2227c2",
+    "method": "native-linear-evenodd-first-owner-v1",
+    "native_latitudes": {
+      "root": "repository",
+      "role": "immutable-normative-rule-input",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "decoded_bytes": 2097328,
+      "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+      "transport_path": "native-v1/native-row-latitudes.f64le.gz"
+    },
+    "parts": [
+      {
+        "kind": "rows",
+        "path": "ownership-vintages/ac8093fd56b2d5905412346c11162cf54277d28ba85c572a1dc81ab43265cc0b/native-v1/ownership/rows-0.bin.gz",
+        "offset": 0,
+        "words": 524332,
+        "encoding": "byte-shuffle",
+        "sha256": "ac8093fd56b2d5905412346c11162cf54277d28ba85c572a1dc81ab43265cc0b",
+        "decoded_sha256": "7a995a868d50ede7afbe462b631e3217393cc86ace89b779e50ef785feaf1d1a"
+      },
+      {
+        "kind": "runs",
+        "path": "ownership-vintages/2387e91ae885b6c57d38b1d688703f5497ce7a56a992867cb01049dca9c82cde/native-v1/ownership/startup-runs-0.bin.gz",
+        "offset": 0,
+        "words": 4194304,
+        "encoding": "byte-shuffle",
+        "sha256": "2387e91ae885b6c57d38b1d688703f5497ce7a56a992867cb01049dca9c82cde",
+        "decoded_sha256": "d1a7f359121453858176b4909ef91edb00b697a4955e4efc00de0fb8f043b61f"
+      },
+      {
+        "kind": "runs",
+        "path": "ownership-vintages/08ef9b61e0c2e7f65c6d84078d28265a190e902ad3d0a5e27a88b5494244d15d/native-v1/ownership/startup-runs-4194304.bin.gz",
+        "offset": 4194304,
+        "words": 4194304,
+        "encoding": "byte-shuffle",
+        "sha256": "08ef9b61e0c2e7f65c6d84078d28265a190e902ad3d0a5e27a88b5494244d15d",
+        "decoded_sha256": "d0c781cc166ec1a4f9573bd78b8396570823a16f03bbc51f5f2bbcf2a3716a2f"
+      },
+      {
+        "kind": "runs",
+        "path": "ownership-vintages/c296ad1d9f3150d8a29374026eb2b1ab5ef296bb108fe61e76a3d56b6fc20e08/native-v1/ownership/startup-runs-8388608.bin.gz",
+        "offset": 8388608,
+        "words": 4194304,
+        "encoding": "byte-shuffle",
+        "sha256": "c296ad1d9f3150d8a29374026eb2b1ab5ef296bb108fe61e76a3d56b6fc20e08",
+        "decoded_sha256": "a0a5440f3ecdcd9d7e239c8d58ae9738dc5a40cdd94373854d2d9701d3a2536f"
+      },
+      {
+        "kind": "runs",
+        "path": "ownership-vintages/0b802e8990dbef5d3250e21cae6a5fd53b90737d3ac25b3742f19f52e9ae96cf/native-v1/ownership/startup-runs-12582912.bin.gz",
+        "offset": 12582912,
+        "words": 4194304,
+        "encoding": "byte-shuffle",
+        "sha256": "0b802e8990dbef5d3250e21cae6a5fd53b90737d3ac25b3742f19f52e9ae96cf",
+        "decoded_sha256": "d6c88feb0d11cdcc1f4050541e2d9fc4393956818dfeab18e0d248c6a03afcb1"
+      },
+      {
+        "kind": "runs",
+        "path": "ownership-vintages/af9b94fabe7cfb2c47ed04f97be432a52bee3aa7761c459f2a73d064a21b9ae0/native-v1/ownership/startup-runs-16777216.bin.gz",
+        "offset": 16777216,
+        "words": 4194304,
+        "encoding": "byte-shuffle",
+        "sha256": "af9b94fabe7cfb2c47ed04f97be432a52bee3aa7761c459f2a73d064a21b9ae0",
+        "decoded_sha256": "c87950400599f814a1abe9ecc582f7faa4b6e0ac5b2dc154b96062ee0db48b6a"
+      },
+      {
+        "kind": "runs",
+        "path": "ownership-vintages/387c4916c1d8a06f1556c3e98e5fa2ac9561bf2be19e46ccb2ef11faafce5465/native-v1/ownership/startup-runs-20971520.bin.gz",
+        "offset": 20971520,
+        "words": 4194304,
+        "encoding": "byte-shuffle",
+        "sha256": "387c4916c1d8a06f1556c3e98e5fa2ac9561bf2be19e46ccb2ef11faafce5465",
+        "decoded_sha256": "c1b70940c313308d77955f990a36a1660bc1cf5bb46330df63528406851cf536"
+      },
+      {
+        "kind": "runs",
+        "path": "ownership-vintages/f5d7dafd5e19d2cc3602de5c00dd8083e9f4fa1f96d1ac34532f0d6617088156/native-v1/ownership/startup-runs-25165824.bin.gz",
+        "offset": 25165824,
+        "words": 4194304,
+        "encoding": "byte-shuffle",
+        "sha256": "f5d7dafd5e19d2cc3602de5c00dd8083e9f4fa1f96d1ac34532f0d6617088156",
+        "decoded_sha256": "04e5787a5c87047dd66ce7b1e5cb8e0a229bd76a81c4fcd48f4e8bdced0a0fcf"
+      },
+      {
+        "kind": "runs",
+        "path": "ownership-vintages/14f0c529d172276bdd06f124974c1113e5d1111e35dd74e4b78a23a64ac117d4/native-v1/ownership/startup-runs-29360128.bin.gz",
+        "offset": 29360128,
+        "words": 4194304,
+        "encoding": "byte-shuffle",
+        "sha256": "14f0c529d172276bdd06f124974c1113e5d1111e35dd74e4b78a23a64ac117d4",
+        "decoded_sha256": "4690a1ff7ffafc0bdc2c8c5a9188b672469b8dbc8b0fe9c134c16d1a275b0fb0"
+      },
+      {
+        "kind": "runs",
+        "path": "ownership-vintages/1121f583c069ede389035793f07a9c5783c239929d1636005394b9379192677d/native-v1/ownership/startup-runs-33554432.bin.gz",
+        "offset": 33554432,
+        "words": 4194304,
+        "encoding": "byte-shuffle",
+        "sha256": "1121f583c069ede389035793f07a9c5783c239929d1636005394b9379192677d",
+        "decoded_sha256": "09fdb129e4a9e31203a1039db5e103dd5f44acfcb669c728a28b9a65dc1df103"
+      },
+      {
+        "kind": "runs",
+        "path": "ownership-vintages/782493a0d76b99d322e8e8bf666109a189e91611ae7190f74d40077a0dd3c6b4/native-v1/ownership/startup-runs-37748736.bin.gz",
+        "offset": 37748736,
+        "words": 4194304,
+        "encoding": "byte-shuffle",
+        "sha256": "782493a0d76b99d322e8e8bf666109a189e91611ae7190f74d40077a0dd3c6b4",
+        "decoded_sha256": "ddba45e6f61d9d14b352c96f087f438fc4cb549b731716954f060a46f0eb0450"
+      },
+      {
+        "kind": "runs",
+        "path": "ownership-vintages/4622e83231434bc023de7768e7c281b85a643ae4a588816d29b7c05702c3c25c/native-v1/ownership/startup-runs-41943040.bin.gz",
+        "offset": 41943040,
+        "words": 4194304,
+        "encoding": "byte-shuffle",
+        "sha256": "4622e83231434bc023de7768e7c281b85a643ae4a588816d29b7c05702c3c25c",
+        "decoded_sha256": "e81e8054651fcc07a92467a687cc56713a685de9a38b9c460c339684deaf1f80"
+      },
+      {
+        "kind": "runs",
+        "path": "ownership-vintages/b4f0c5cd984fd7eafde86f7f19b54e3023c3259bc8aae14b65b5cab677b9eb6c/native-v1/ownership/startup-runs-46137344.bin.gz",
+        "offset": 46137344,
+        "words": 4194304,
+        "encoding": "byte-shuffle",
+        "sha256": "b4f0c5cd984fd7eafde86f7f19b54e3023c3259bc8aae14b65b5cab677b9eb6c",
+        "decoded_sha256": "196ecf1fbc859aba2fb77741eec7a02339cda812ecb8ce06f3ab63134ecfa25b"
+      },
+      {
+        "kind": "runs",
+        "path": "ownership-vintages/794c4c00f8df45e09b65b5458fcd63fb93de0f59b0069d1eb6d14f09bbb2f4e8/native-v1/ownership/startup-runs-50331648.bin.gz",
+        "offset": 50331648,
+        "words": 4194304,
+        "encoding": "byte-shuffle",
+        "sha256": "794c4c00f8df45e09b65b5458fcd63fb93de0f59b0069d1eb6d14f09bbb2f4e8",
+        "decoded_sha256": "4582d6fb317abd60f78270902e6d6b5f5b7396225e84316dcc6a11eb7c0249d6"
+      },
+      {
+        "kind": "runs",
+        "path": "ownership-vintages/2dabd37a53179ebc28aed13f546ef0031eaf712e1272aedf7292223e7042e5db/native-v1/ownership/startup-runs-54525952.bin.gz",
+        "offset": 54525952,
+        "words": 3805700,
+        "encoding": "byte-shuffle",
+        "sha256": "2dabd37a53179ebc28aed13f546ef0031eaf712e1272aedf7292223e7042e5db",
+        "decoded_sha256": "0e7df12a018083c92371b35a25f61dcc258ef1cebfda0578cdb159bd9d283406"
+      }
+    ]
+  },
+  "preparedOwnership": {
+    "version": 2,
+    "selection_sha256": "616754c9958ab0d7111baa2a7b894d7f1b1423acac1696e60593c9fce9f847ba",
+    "native_manifest_sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+    "native_pixel_map": {
+      "version": 2,
+      "coordinateBits": 19,
+      "size": 262166,
+      "runWords": 57617774,
+      "footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+      "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "geographic_release": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+      "method": "native-linear-evenodd-first-owner-v1",
+      "native_latitudes": {
+        "root": "repository",
+        "role": "immutable-normative-rule-input",
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "decoded_bytes": 2097328,
+        "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+        "transport_path": "native-v1/native-row-latitudes.f64le.gz"
+      },
+      "parts": [
+        {
+          "kind": "rows",
+          "offset": 0,
+          "words": 524332,
+          "path": "native-v1/ownership/rows-0.bin.gz",
+          "bytes": 306620,
+          "sha256": "89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0",
+          "decoded_bytes": 2097328,
+          "decoded_sha256": "e9044c8304a47cd0d0acbb306bd31c2ba15f71e57648ab7d1581a6a77a875294",
+          "encoding": "byte-shuffle"
+        },
+        {
+          "kind": "runs",
+          "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-0.bin.gz",
+          "offset": 0,
+          "words": 4194304,
+          "encoding": "byte-shuffle",
+          "sha256": "5e73bd6ee306f3be021c7f89bf336c590ae3c02021df1c436d22088ed4284171",
+          "decoded_sha256": "8aa34f92fbb32e4bd6a135903a0f46c0b0b786be01cd4926353b1d7c8e050df2"
+        },
+        {
+          "kind": "runs",
+          "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-4194304.bin.gz",
+          "offset": 4194304,
+          "words": 4194304,
+          "encoding": "byte-shuffle",
+          "sha256": "da6498fc3c898adca6231896e9b1f2c734153064d78431bc5a311fec768c18f9",
+          "decoded_sha256": "301f2c428ac4307931951ab30dd1b0a10870f7d68741a7d993909ea8c3f33867"
+        },
+        {
+          "kind": "runs",
+          "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-8388608.bin.gz",
+          "offset": 8388608,
+          "words": 4194304,
+          "encoding": "byte-shuffle",
+          "sha256": "244e3da13a412b4a4ccbc652191a080495a5611df5d0ee2207c8d08ac27b929a",
+          "decoded_sha256": "8b44d4f6952eb5f6ed886019fa7aa740ad5da2ca8bc9d606e17e7c1e7233f5ff"
+        },
+        {
+          "kind": "runs",
+          "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-12582912.bin.gz",
+          "offset": 12582912,
+          "words": 4194304,
+          "encoding": "byte-shuffle",
+          "sha256": "01012dd358291a9e4ee51888a1d2b618ab2003e06a6eebd3a236392ecdbbc015",
+          "decoded_sha256": "c4e3df743ed0dc0e39b36ff5997ba96011802730a8e23b3da6a7ec7997a7d9b8"
+        },
+        {
+          "kind": "runs",
+          "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-16777216.bin.gz",
+          "offset": 16777216,
+          "words": 4194304,
+          "encoding": "byte-shuffle",
+          "sha256": "d5ed4d7e1700fb60298a53cc37ad9943257f57f853e19cc786ef975ebc7f0cae",
+          "decoded_sha256": "4b0d02e1979ab7816936779d6dba7372306796e3ad679faebf0a785d12f8d9be"
+        },
+        {
+          "kind": "runs",
+          "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-20971520.bin.gz",
+          "offset": 20971520,
+          "words": 4194304,
+          "encoding": "byte-shuffle",
+          "sha256": "198daba78eaeed9f316f088a86f8a7c4cf8f7e868253fc09487870eceddaf58a",
+          "decoded_sha256": "c4e602fe369200947d4dfcbf4a59a8574c88c30afccffd8e60c5ac4108f4af00"
+        },
+        {
+          "kind": "runs",
+          "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-25165824.bin.gz",
+          "offset": 25165824,
+          "words": 4194304,
+          "encoding": "byte-shuffle",
+          "sha256": "764a967753d010daa794b30ca597bee0503646e7cae6965b14df63f280b9c544",
+          "decoded_sha256": "d3ed586cf2a904879cbe274bc8163e73cc3b008d561b7bbfddaeaf24cd3cbb54"
+        },
+        {
+          "kind": "runs",
+          "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-29360128.bin.gz",
+          "offset": 29360128,
+          "words": 4194304,
+          "encoding": "byte-shuffle",
+          "sha256": "ff29a1956ae0dd99e4db155c9cdabf96c72155a1a772210910d5119845759cf8",
+          "decoded_sha256": "c2d0e75e64f787e437728054ae172fde06db0ee93df2f5e20b4bd29b2c24c043"
+        },
+        {
+          "kind": "runs",
+          "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-33554432.bin.gz",
+          "offset": 33554432,
+          "words": 4194304,
+          "encoding": "byte-shuffle",
+          "sha256": "826cffaf4b05286a68ae479bc6e6caba3b3b3993f7fa57eae08efe7f6089694b",
+          "decoded_sha256": "8d14ac64a860a3287a9a71a7f7c4d634efed364a564cf5764d05a258ad2b1a78"
+        },
+        {
+          "kind": "runs",
+          "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-37748736.bin.gz",
+          "offset": 37748736,
+          "words": 4194304,
+          "encoding": "byte-shuffle",
+          "sha256": "18472136ceb94b95a17918acdfba32c56d13a2979043c66fb74cf615d81551ee",
+          "decoded_sha256": "1301ba2061b8bc9549a2258ba8e879ef5312b366e11d52ea19c3b953f6c4df7b"
+        },
+        {
+          "kind": "runs",
+          "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-41943040.bin.gz",
+          "offset": 41943040,
+          "words": 4194304,
+          "encoding": "byte-shuffle",
+          "sha256": "f4e7f8de92e3d709db9675386961fac934a8a21652bf6f34f8d122ed71c73c44",
+          "decoded_sha256": "1fff26cbed9840b752d855ab5a7ea436dd15775d080b02245c1e43234fe6cb3c"
+        },
+        {
+          "kind": "runs",
+          "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-46137344.bin.gz",
+          "offset": 46137344,
+          "words": 4194304,
+          "encoding": "byte-shuffle",
+          "sha256": "bb9b1ba3ace6229a338eee6c903e1d5db637a765c46ed60f957ceb6e34346101",
+          "decoded_sha256": "4acf3f62fc98be33e696ebc3f988e2653548473ee87124ba9a9fcf685f5d7388"
+        },
+        {
+          "kind": "runs",
+          "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-50331648.bin.gz",
+          "offset": 50331648,
+          "words": 4194304,
+          "encoding": "byte-shuffle",
+          "sha256": "09aaf4d9a115dea6a85ed2a853532045c627ea2408f259513ce9de8e616ef55d",
+          "decoded_sha256": "d4e3abc0859e5a391b39a063f04b56e624b25fa8cd8f698bd7b06fd803a20b9f"
+        },
+        {
+          "kind": "runs",
+          "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-54525952.bin.gz",
+          "offset": 54525952,
+          "words": 3091822,
+          "encoding": "byte-shuffle",
+          "sha256": "91bfddd9aa632dc18ecc2f487a71673b504f971d2795e7c4af9c9298f4fe4fbc",
+          "decoded_sha256": "cca574edbba522647c9641257096caa024047f776eafa31273e0995b4f0eb335"
+        }
+      ],
+      "reference_owner_sha256": "90facdfa2c74a935e7e64fe2b2467de3b09f3b816eb96ba350f4f5bacb2227c2",
+      "canonical_grid_sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+    },
+    "base_reference": {
+      "footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+      "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+      "id": "geography:review:211cb423e8c3bdcb3cbe88a4327fbd47eb10ccb61cd0ca4b884ed376564e7718"
+    },
+    "effective_reference": {
+      "footprints_sha256": "1ae20bc5d736a2bf1c850b8daaf7ae893a1d496df2a55c8d04d8017edac035af",
+      "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+      "id": "geography:rus-ukr4-source-context-repair-20261021"
+    },
+    "context_parts": [
+      {
+        "path": "geography/effective-context-49569d2f87c54bca7e5e5187f42fee0f16096762029ac16e7854f0d4064a3080.json.gz",
+        "bytes": 938453,
+        "sha256": "49569d2f87c54bca7e5e5187f42fee0f16096762029ac16e7854f0d4064a3080",
+        "encoding": "gzip",
+        "decoded_bytes": 5349967,
+        "decoded_sha256": "6cfeb95b146b92287942d996eba2a4ed77dc084658b1b876d9febd1f235e03f9",
+        "offset": 0,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-91df629dfdf1597fd4f79d9e039fc5b403d287c7a882b9f5f9687b0f444aba56.json.gz",
+        "bytes": 92272,
+        "sha256": "91df629dfdf1597fd4f79d9e039fc5b403d287c7a882b9f5f9687b0f444aba56",
+        "encoding": "gzip",
+        "decoded_bytes": 418125,
+        "decoded_sha256": "b9141196e5382ec9f5d270cab9e34b4d09ed7ff7fce73716e5f01a180263f822",
+        "offset": 1500,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-dfe8783d7fae5c04edaf67b9b8159b12d4f2a1c6e1f936686af2e82f68925153.json.gz",
+        "bytes": 92791,
+        "sha256": "dfe8783d7fae5c04edaf67b9b8159b12d4f2a1c6e1f936686af2e82f68925153",
+        "encoding": "gzip",
+        "decoded_bytes": 418159,
+        "decoded_sha256": "592b769ef38c7c6bdbe1464f6512675e2d0ab663e98d1c218481590abc524875",
+        "offset": 3000,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-15af8a6481457cd4f0b9d9a2670f137cb5464cc071d2cd665efdf1793a7260bc.json.gz",
+        "bytes": 144460,
+        "sha256": "15af8a6481457cd4f0b9d9a2670f137cb5464cc071d2cd665efdf1793a7260bc",
+        "encoding": "gzip",
+        "decoded_bytes": 715631,
+        "decoded_sha256": "9dcdfd487e7f7cf44bdb754c0a60a334b2dc97ef3c50643003ae6b84b2b51684",
+        "offset": 4500,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-3d9d29c417d5f3968a0e7e37beb6220c0040943c9b135417ce6c79297d5b8730.json.gz",
+        "bytes": 1100736,
+        "sha256": "3d9d29c417d5f3968a0e7e37beb6220c0040943c9b135417ce6c79297d5b8730",
+        "encoding": "gzip",
+        "decoded_bytes": 4652058,
+        "decoded_sha256": "fc342b414c4ff943f2b0e52db153a8c841e116bd92a18cb7eeb560239bdaff93",
+        "offset": 6000,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-3abc2cd16c9907347bef6dcc4bc4fa581a0f05b6efde0cf358153d50424a9777.json.gz",
+        "bytes": 1050604,
+        "sha256": "3abc2cd16c9907347bef6dcc4bc4fa581a0f05b6efde0cf358153d50424a9777",
+        "encoding": "gzip",
+        "decoded_bytes": 5920177,
+        "decoded_sha256": "0bb7bb2fd99edcc7235d94673f30048001d9d00d0c991a34111606726ff10859",
+        "offset": 7500,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-37bbef58f2c0881c7304e1fcbbbcd0d58fda872b05af1ca0da99bdd3ab0557d5.json.gz",
+        "bytes": 318184,
+        "sha256": "37bbef58f2c0881c7304e1fcbbbcd0d58fda872b05af1ca0da99bdd3ab0557d5",
+        "encoding": "gzip",
+        "decoded_bytes": 1786282,
+        "decoded_sha256": "a7298d26a17a235fad9cc9a56c804e6b651063b6fec085df1ffcc48165aef90d",
+        "offset": 9000,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-fddab81f76313dbae0194393ae4e627aa75b6bf916df17d241eb367e48609af9.json.gz",
+        "bytes": 921575,
+        "sha256": "fddab81f76313dbae0194393ae4e627aa75b6bf916df17d241eb367e48609af9",
+        "encoding": "gzip",
+        "decoded_bytes": 5022326,
+        "decoded_sha256": "ed9f73bdec3daa42e974488ecba6ea04af208288604ccbc67cbf9baa9cc23bf7",
+        "offset": 10500,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-c7092bba48403be0f746cd27fc92911b4bb140388612d8f3f9a94f53eb3c1bda.json.gz",
+        "bytes": 105207,
+        "sha256": "c7092bba48403be0f746cd27fc92911b4bb140388612d8f3f9a94f53eb3c1bda",
+        "encoding": "gzip",
+        "decoded_bytes": 463935,
+        "decoded_sha256": "b567c13c4cc99c0075f62cd794a9a16dc5bfca6413491b20558ffaf029360332",
+        "offset": 12000,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-788548a7f6494d0f5107826ded2dddbdc02f5dcf5dac87d89600594a2a0a990a.json.gz",
+        "bytes": 269530,
+        "sha256": "788548a7f6494d0f5107826ded2dddbdc02f5dcf5dac87d89600594a2a0a990a",
+        "encoding": "gzip",
+        "decoded_bytes": 1427761,
+        "decoded_sha256": "d2b32049fb23477cf5d63e12057066683aeb0eb4d22dd660684b04e473aebdc2",
+        "offset": 13500,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-4c3519bcf35beb3a6ef4dfde34072fd37335d34d17887bf73a0007388bf07382.json.gz",
+        "bytes": 410300,
+        "sha256": "4c3519bcf35beb3a6ef4dfde34072fd37335d34d17887bf73a0007388bf07382",
+        "encoding": "gzip",
+        "decoded_bytes": 2255644,
+        "decoded_sha256": "7f585a48c9098d2960ef130f6447b362afb675bc6099cbc09b2a57a792f0550d",
+        "offset": 15000,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-3c5524c5a70f1f643b3fa985a8388f259ea707ca03910b05e721366f00888fdd.json.gz",
+        "bytes": 260674,
+        "sha256": "3c5524c5a70f1f643b3fa985a8388f259ea707ca03910b05e721366f00888fdd",
+        "encoding": "gzip",
+        "decoded_bytes": 1482390,
+        "decoded_sha256": "202750f1d5b962c420689e2393d98688b597881b658432221314721232efb0fa",
+        "offset": 16500,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-dd79abd13235a97854b272e2e77833a070bcf465c44a4cc2c5fc8cc14024100f.json.gz",
+        "bytes": 430839,
+        "sha256": "dd79abd13235a97854b272e2e77833a070bcf465c44a4cc2c5fc8cc14024100f",
+        "encoding": "gzip",
+        "decoded_bytes": 2542120,
+        "decoded_sha256": "c344a18d1b5e196cf500c86aa061896c71b896c07a0bb62c1c170f2b4aecd34a",
+        "offset": 18000,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-46c904823cd2e7477909e7541935dc648624605c796c92efd30a4c0179f8a30e.json.gz",
+        "bytes": 550861,
+        "sha256": "46c904823cd2e7477909e7541935dc648624605c796c92efd30a4c0179f8a30e",
+        "encoding": "gzip",
+        "decoded_bytes": 3278130,
+        "decoded_sha256": "50126d34b2fb4520b0b2cda1386f1a9f2942ceac14f6da93d4b5cce4fb5af18f",
+        "offset": 19500,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-8fc28a6cc9ab7cd2d3dcc91e4269afac6605085678e7c4139a8fd0960dee272e.json.gz",
+        "bytes": 513058,
+        "sha256": "8fc28a6cc9ab7cd2d3dcc91e4269afac6605085678e7c4139a8fd0960dee272e",
+        "encoding": "gzip",
+        "decoded_bytes": 3002995,
+        "decoded_sha256": "1e0a8c85d8f83cbd2dc1e5a8ca641bb0939adada79608b1c0882d3ed7917d738",
+        "offset": 21000,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-b3bb346243f8e5701245f9a16b80d2ad13c57dda3c17e49d03a4a42c3d6d26a1.json.gz",
+        "bytes": 920683,
+        "sha256": "b3bb346243f8e5701245f9a16b80d2ad13c57dda3c17e49d03a4a42c3d6d26a1",
+        "encoding": "gzip",
+        "decoded_bytes": 5566154,
+        "decoded_sha256": "4ccbb665cbb01eeac93f7bdd3fcf44c03df1cec6489acd95211c51b3db0d5c42",
+        "offset": 22500,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-d8c4c41ca582be229aa31284ca1b1bcb412661ba1f1fe3f454997915946ccf12.json.gz",
+        "bytes": 530446,
+        "sha256": "d8c4c41ca582be229aa31284ca1b1bcb412661ba1f1fe3f454997915946ccf12",
+        "encoding": "gzip",
+        "decoded_bytes": 3235462,
+        "decoded_sha256": "bdfefd83dc7147a34c22c7478a67dc583afe7f2dc9126d403d03cafc1851a745",
+        "offset": 24000,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-1b2c4c023a9060e70651c7b79c848fcb8f13b12d6700840b15f0a89b38bf9720.json.gz",
+        "bytes": 334068,
+        "sha256": "1b2c4c023a9060e70651c7b79c848fcb8f13b12d6700840b15f0a89b38bf9720",
+        "encoding": "gzip",
+        "decoded_bytes": 1939606,
+        "decoded_sha256": "5b2527e38d58836cf39e887526de92cb61d401f3755662fffe7693643c730447",
+        "offset": 25500,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-0a1f38e655bceb306e9f7766ca7e832f73d8aeb68e0d6491cb5d2ccbd221feeb.json.gz",
+        "bytes": 315159,
+        "sha256": "0a1f38e655bceb306e9f7766ca7e832f73d8aeb68e0d6491cb5d2ccbd221feeb",
+        "encoding": "gzip",
+        "decoded_bytes": 1750156,
+        "decoded_sha256": "0a4ce47186326994664672b110751df3403a8e11d2abf0a3c17cadfb1cd41705",
+        "offset": 27000,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-310e277c774c331e733edd84379af095cac3e3c6a2da1620fe39cd61a318bf39.json.gz",
+        "bytes": 189186,
+        "sha256": "310e277c774c331e733edd84379af095cac3e3c6a2da1620fe39cd61a318bf39",
+        "encoding": "gzip",
+        "decoded_bytes": 1026842,
+        "decoded_sha256": "66da10ace86a190b868dd53b2d1d95131c9d1b2f97021359abf8e4df2e361a57",
+        "offset": 28500,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-9e5bc8ed138ffd3131a9eb72430229c9f01d9dcafc1ed219336fecce8842ae7a.json.gz",
+        "bytes": 434332,
+        "sha256": "9e5bc8ed138ffd3131a9eb72430229c9f01d9dcafc1ed219336fecce8842ae7a",
+        "encoding": "gzip",
+        "decoded_bytes": 2564364,
+        "decoded_sha256": "79436a4ba63dc269a87f5eba648617819b2ceef7f1ab6987d4afc96051792cb1",
+        "offset": 30000,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-2ca66d3acfc2d19a430977a06b53956cb6e1ded9129e513709c79a73c199b199.json.gz",
+        "bytes": 486822,
+        "sha256": "2ca66d3acfc2d19a430977a06b53956cb6e1ded9129e513709c79a73c199b199",
+        "encoding": "gzip",
+        "decoded_bytes": 2981034,
+        "decoded_sha256": "bc9b25f9a26f6027fc012a9b8ffded88fda1a65732ef86380518445bfa03af9c",
+        "offset": 31500,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-52a85b223ef8dc111e31f837f71b2d3b5aa82bb2f84a09721fcdc0d7ce39c9ee.json.gz",
+        "bytes": 993155,
+        "sha256": "52a85b223ef8dc111e31f837f71b2d3b5aa82bb2f84a09721fcdc0d7ce39c9ee",
+        "encoding": "gzip",
+        "decoded_bytes": 6146395,
+        "decoded_sha256": "80dc612be307a45f8c02175c3b0b104b3c7a00ee917096402123405a675173ca",
+        "offset": 33000,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-0f92c8c043ca4b3dbd56edfdd4eca1ac9393a03f8f2e034cdf5890ec13f96199.json.gz",
+        "bytes": 602849,
+        "sha256": "0f92c8c043ca4b3dbd56edfdd4eca1ac9393a03f8f2e034cdf5890ec13f96199",
+        "encoding": "gzip",
+        "decoded_bytes": 3610895,
+        "decoded_sha256": "6e857788f06155151426920a2da04c395ccada18c179e53fdc5153ee24d967b6",
+        "offset": 34500,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-e967dd100502ac2af746eb84841984d04597d17c83ddf7820cf35704e34a6ba9.json.gz",
+        "bytes": 395652,
+        "sha256": "e967dd100502ac2af746eb84841984d04597d17c83ddf7820cf35704e34a6ba9",
+        "encoding": "gzip",
+        "decoded_bytes": 2292462,
+        "decoded_sha256": "a59786a4a7f9b076dbaae43f0f7f9e3928545ef0e02d56995f8cef7844f3846b",
+        "offset": 36000,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-77a3037599175c5b7ec1d4a5aad3e7dae51d78d0d35a4d06c2e965db7bfe511b.json.gz",
+        "bytes": 1553140,
+        "sha256": "77a3037599175c5b7ec1d4a5aad3e7dae51d78d0d35a4d06c2e965db7bfe511b",
+        "encoding": "gzip",
+        "decoded_bytes": 9283308,
+        "decoded_sha256": "18dd43bf39fa955e59e38518d6a3dfcdb9ebfba9b48ddf6d8e45715390b0305d",
+        "offset": 37500,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-cebb9a67df4bbb933a96330d058fffbae0a277fce1693914278524a27c25a613.json.gz",
+        "bytes": 746058,
+        "sha256": "cebb9a67df4bbb933a96330d058fffbae0a277fce1693914278524a27c25a613",
+        "encoding": "gzip",
+        "decoded_bytes": 4422531,
+        "decoded_sha256": "600f93b8fe32f73de25bd6de045160dced3a38c4b55d05f51f2986ff022c038e",
+        "offset": 39000,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-e8d9f2c9375e3295d4b8dfc71508897a927089448c3e168dd476ab50b96e3cdd.json.gz",
+        "bytes": 198847,
+        "sha256": "e8d9f2c9375e3295d4b8dfc71508897a927089448c3e168dd476ab50b96e3cdd",
+        "encoding": "gzip",
+        "decoded_bytes": 1086921,
+        "decoded_sha256": "509c9f95191594e8c328b3a04d388a4dd5f6bf95f42bcdecf099efb79b98a165",
+        "offset": 40500,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-2393aba56f92f487312358b0106f2d4ea5f06883995d5c715f930babe6a80309.json.gz",
+        "bytes": 148274,
+        "sha256": "2393aba56f92f487312358b0106f2d4ea5f06883995d5c715f930babe6a80309",
+        "encoding": "gzip",
+        "decoded_bytes": 780397,
+        "decoded_sha256": "042daefc7e639056138604bf011a2e9e35c8e380bb0652bcb36d20c6584a37e2",
+        "offset": 42000,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-096d08ede4b916c825c1efb783b068a80f5db8bf1864bc978d06104805399b02.json.gz",
+        "bytes": 352377,
+        "sha256": "096d08ede4b916c825c1efb783b068a80f5db8bf1864bc978d06104805399b02",
+        "encoding": "gzip",
+        "decoded_bytes": 2008706,
+        "decoded_sha256": "07b99a4ed268ba133281b05aef33419301391d5d6cc2caa9299c28e486665e62",
+        "offset": 43500,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-1d5ec33a2d2fa6b0608dd0f690ba08785ee23699530b7eac0db486918047a586.json.gz",
+        "bytes": 327979,
+        "sha256": "1d5ec33a2d2fa6b0608dd0f690ba08785ee23699530b7eac0db486918047a586",
+        "encoding": "gzip",
+        "decoded_bytes": 1867702,
+        "decoded_sha256": "f8b292c82754ab67c564754d006c8a9aef622d0c32112c1123375a3e3373de12",
+        "offset": 45000,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-1b9021acb88857c3d70cd00b06df9fc48199433f7bffc946abf9f3f80ac5077e.json.gz",
+        "bytes": 276055,
+        "sha256": "1b9021acb88857c3d70cd00b06df9fc48199433f7bffc946abf9f3f80ac5077e",
+        "encoding": "gzip",
+        "decoded_bytes": 1540192,
+        "decoded_sha256": "1458e841e06b374878646902313c5c1b1eed30af6d7e22dab8d0e424b986916c",
+        "offset": 46500,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-7fab9d582550a80ce2ded7fd5afab0d5fac85fb7243097075b654a2297eefdee.json.gz",
+        "bytes": 391636,
+        "sha256": "7fab9d582550a80ce2ded7fd5afab0d5fac85fb7243097075b654a2297eefdee",
+        "encoding": "gzip",
+        "decoded_bytes": 2200737,
+        "decoded_sha256": "5c98fdd410447d5fc22f6f52470ed33db6f2c85db6e4bf5abc5379df48d70810",
+        "offset": 48000,
+        "features": 1500
+      },
+      {
+        "path": "geography/effective-context-4729a4f4c464529491c83a20151c98af4802fadd4ae54c073268c04f96b80804.json.gz",
+        "bytes": 41802,
+        "sha256": "4729a4f4c464529491c83a20151c98af4802fadd4ae54c073268c04f96b80804",
+        "encoding": "gzip",
+        "decoded_bytes": 222956,
+        "decoded_sha256": "46be1c9f46d5c8489ae74d05f363cd1456969ff0b83ab914d961e672882dd658",
+        "offset": 49500,
+        "features": 125
+      }
+    ],
+    "owners": 49625,
+    "reference_owner_sha256": "90facdfa2c74a935e7e64fe2b2467de3b09f3b816eb96ba350f4f5bacb2227c2",
+    "rows_sha256": "7a995a868d50ede7afbe462b631e3217393cc86ace89b779e50ef785feaf1d1a",
+    "runs_word_stream_sha256": "bba97219a29bd112a8cb4dafe2b0d808b5c9088fe42738a39a7c947a053fce83",
+    "effective_footprint_domain": "worldatlas-effective-native-footprints:v2",
+    "additive_patch_sha256": "d251c8f42ebfd44ce61e14cd6d790d1b1a00beed054c574552d8faeef6fca78e",
+    "additive_ledger_sha256": "285fc4087c5c035e1398b6ac61801be598593e62457787a37b11df2dc75af3f8",
+    "additive_added_cells": 6346858,
+    "additive_authority_registry_sha256": "a3c3f434f641e81466e847b6d18ac33a16a6820ecf251df4071ae82a6df04822"
+  },
+  "additiveRelease": {
+    "base_manifest": {
+      "bytes": 252447,
+      "path": "additive-repairs/retained-activation-base-native-manifest.json",
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+    },
+    "base_reference": {
+      "footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+      "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+      "id": "geography:review:211cb423e8c3bdcb3cbe88a4327fbd47eb10ccb61cd0ca4b884ed376564e7718"
+    },
+    "effective_reference": {
+      "footprints_sha256": "1ae20bc5d736a2bf1c850b8daaf7ae893a1d496df2a55c8d04d8017edac035af",
+      "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+      "id": "geography:rus-ukr4-source-context-repair-20261021"
+    },
+    "kind": "retained-native-base-plus-delta-v2",
+    "ledger": {
+      "bytes": 63587436,
+      "path": "additive-repairs/native-supplement-ledger.json",
+      "sha256": "285fc4087c5c035e1398b6ac61801be598593e62457787a37b11df2dc75af3f8"
+    },
+    "owner_roster": {
+      "bytes": 2663523,
+      "decoded_bytes": 11096191,
+      "decoded_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428",
+      "encoding": "gzip",
+      "path": "additive-repairs/retained-activation-owners.json.gz",
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f"
+    },
+    "patch": {
+      "bytes": 30701375,
+      "path": "additive-repairs/native-supplement-patch.json",
+      "sha256": "d251c8f42ebfd44ce61e14cd6d790d1b1a00beed054c574552d8faeef6fca78e"
+    },
+    "version": 2
+  },
+  "referenceMetadata": {
+    "version": 1,
+    "asset": {
+      "path": "reference-metadata/current.json",
+      "bytes": 249161,
+      "sha256": "f953d19abd30d78c3bf009427bb49eec3ccf50cc356fd8861ad1c4b9aab93536"
+    },
+    "native_reference": {
+      "id": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+      "footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+      "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    "reference": {
+      "footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+      "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+      "id": "geography:review:211cb423e8c3bdcb3cbe88a4327fbd47eb10ccb61cd0ca4b884ed376564e7718"
+    }
+  },
+  "files": [
+    {
+      "path": "geography/effective-context-096d08ede4b916c825c1efb783b068a80f5db8bf1864bc978d06104805399b02.json.gz",
+      "bytes": 352377,
+      "sha256": "096d08ede4b916c825c1efb783b068a80f5db8bf1864bc978d06104805399b02"
+    },
+    {
+      "path": "geography/effective-context-0a1f38e655bceb306e9f7766ca7e832f73d8aeb68e0d6491cb5d2ccbd221feeb.json.gz",
+      "bytes": 315159,
+      "sha256": "0a1f38e655bceb306e9f7766ca7e832f73d8aeb68e0d6491cb5d2ccbd221feeb"
+    },
+    {
+      "path": "geography/effective-context-0f92c8c043ca4b3dbd56edfdd4eca1ac9393a03f8f2e034cdf5890ec13f96199.json.gz",
+      "bytes": 602849,
+      "sha256": "0f92c8c043ca4b3dbd56edfdd4eca1ac9393a03f8f2e034cdf5890ec13f96199"
+    },
+    {
+      "path": "geography/effective-context-15af8a6481457cd4f0b9d9a2670f137cb5464cc071d2cd665efdf1793a7260bc.json.gz",
+      "bytes": 144460,
+      "sha256": "15af8a6481457cd4f0b9d9a2670f137cb5464cc071d2cd665efdf1793a7260bc"
+    },
+    {
+      "path": "geography/effective-context-1b2c4c023a9060e70651c7b79c848fcb8f13b12d6700840b15f0a89b38bf9720.json.gz",
+      "bytes": 334068,
+      "sha256": "1b2c4c023a9060e70651c7b79c848fcb8f13b12d6700840b15f0a89b38bf9720"
+    },
+    {
+      "path": "geography/effective-context-1b9021acb88857c3d70cd00b06df9fc48199433f7bffc946abf9f3f80ac5077e.json.gz",
+      "bytes": 276055,
+      "sha256": "1b9021acb88857c3d70cd00b06df9fc48199433f7bffc946abf9f3f80ac5077e"
+    },
+    {
+      "path": "geography/effective-context-1d5ec33a2d2fa6b0608dd0f690ba08785ee23699530b7eac0db486918047a586.json.gz",
+      "bytes": 327979,
+      "sha256": "1d5ec33a2d2fa6b0608dd0f690ba08785ee23699530b7eac0db486918047a586"
+    },
+    {
+      "path": "geography/effective-context-2393aba56f92f487312358b0106f2d4ea5f06883995d5c715f930babe6a80309.json.gz",
+      "bytes": 148274,
+      "sha256": "2393aba56f92f487312358b0106f2d4ea5f06883995d5c715f930babe6a80309"
+    },
+    {
+      "path": "geography/effective-context-2ca66d3acfc2d19a430977a06b53956cb6e1ded9129e513709c79a73c199b199.json.gz",
+      "bytes": 486822,
+      "sha256": "2ca66d3acfc2d19a430977a06b53956cb6e1ded9129e513709c79a73c199b199"
+    },
+    {
+      "path": "geography/effective-context-310e277c774c331e733edd84379af095cac3e3c6a2da1620fe39cd61a318bf39.json.gz",
+      "bytes": 189186,
+      "sha256": "310e277c774c331e733edd84379af095cac3e3c6a2da1620fe39cd61a318bf39"
+    },
+    {
+      "path": "geography/effective-context-37bbef58f2c0881c7304e1fcbbbcd0d58fda872b05af1ca0da99bdd3ab0557d5.json.gz",
+      "bytes": 318184,
+      "sha256": "37bbef58f2c0881c7304e1fcbbbcd0d58fda872b05af1ca0da99bdd3ab0557d5"
+    },
+    {
+      "path": "geography/effective-context-3abc2cd16c9907347bef6dcc4bc4fa581a0f05b6efde0cf358153d50424a9777.json.gz",
+      "bytes": 1050604,
+      "sha256": "3abc2cd16c9907347bef6dcc4bc4fa581a0f05b6efde0cf358153d50424a9777"
+    },
+    {
+      "path": "geography/effective-context-3c5524c5a70f1f643b3fa985a8388f259ea707ca03910b05e721366f00888fdd.json.gz",
+      "bytes": 260674,
+      "sha256": "3c5524c5a70f1f643b3fa985a8388f259ea707ca03910b05e721366f00888fdd"
+    },
+    {
+      "path": "geography/effective-context-3d9d29c417d5f3968a0e7e37beb6220c0040943c9b135417ce6c79297d5b8730.json.gz",
+      "bytes": 1100736,
+      "sha256": "3d9d29c417d5f3968a0e7e37beb6220c0040943c9b135417ce6c79297d5b8730"
+    },
+    {
+      "path": "geography/effective-context-46c904823cd2e7477909e7541935dc648624605c796c92efd30a4c0179f8a30e.json.gz",
+      "bytes": 550861,
+      "sha256": "46c904823cd2e7477909e7541935dc648624605c796c92efd30a4c0179f8a30e"
+    },
+    {
+      "path": "geography/effective-context-4729a4f4c464529491c83a20151c98af4802fadd4ae54c073268c04f96b80804.json.gz",
+      "bytes": 41802,
+      "sha256": "4729a4f4c464529491c83a20151c98af4802fadd4ae54c073268c04f96b80804"
+    },
+    {
+      "path": "geography/effective-context-49569d2f87c54bca7e5e5187f42fee0f16096762029ac16e7854f0d4064a3080.json.gz",
+      "bytes": 938453,
+      "sha256": "49569d2f87c54bca7e5e5187f42fee0f16096762029ac16e7854f0d4064a3080"
+    },
+    {
+      "path": "geography/effective-context-4c3519bcf35beb3a6ef4dfde34072fd37335d34d17887bf73a0007388bf07382.json.gz",
+      "bytes": 410300,
+      "sha256": "4c3519bcf35beb3a6ef4dfde34072fd37335d34d17887bf73a0007388bf07382"
+    },
+    {
+      "path": "geography/effective-context-52a85b223ef8dc111e31f837f71b2d3b5aa82bb2f84a09721fcdc0d7ce39c9ee.json.gz",
+      "bytes": 993155,
+      "sha256": "52a85b223ef8dc111e31f837f71b2d3b5aa82bb2f84a09721fcdc0d7ce39c9ee"
+    },
+    {
+      "path": "geography/effective-context-77a3037599175c5b7ec1d4a5aad3e7dae51d78d0d35a4d06c2e965db7bfe511b.json.gz",
+      "bytes": 1553140,
+      "sha256": "77a3037599175c5b7ec1d4a5aad3e7dae51d78d0d35a4d06c2e965db7bfe511b"
+    },
+    {
+      "path": "geography/effective-context-788548a7f6494d0f5107826ded2dddbdc02f5dcf5dac87d89600594a2a0a990a.json.gz",
+      "bytes": 269530,
+      "sha256": "788548a7f6494d0f5107826ded2dddbdc02f5dcf5dac87d89600594a2a0a990a"
+    },
+    {
+      "path": "geography/effective-context-7fab9d582550a80ce2ded7fd5afab0d5fac85fb7243097075b654a2297eefdee.json.gz",
+      "bytes": 391636,
+      "sha256": "7fab9d582550a80ce2ded7fd5afab0d5fac85fb7243097075b654a2297eefdee"
+    },
+    {
+      "path": "geography/effective-context-8fc28a6cc9ab7cd2d3dcc91e4269afac6605085678e7c4139a8fd0960dee272e.json.gz",
+      "bytes": 513058,
+      "sha256": "8fc28a6cc9ab7cd2d3dcc91e4269afac6605085678e7c4139a8fd0960dee272e"
+    },
+    {
+      "path": "geography/effective-context-91df629dfdf1597fd4f79d9e039fc5b403d287c7a882b9f5f9687b0f444aba56.json.gz",
+      "bytes": 92272,
+      "sha256": "91df629dfdf1597fd4f79d9e039fc5b403d287c7a882b9f5f9687b0f444aba56"
+    },
+    {
+      "path": "geography/effective-context-9e5bc8ed138ffd3131a9eb72430229c9f01d9dcafc1ed219336fecce8842ae7a.json.gz",
+      "bytes": 434332,
+      "sha256": "9e5bc8ed138ffd3131a9eb72430229c9f01d9dcafc1ed219336fecce8842ae7a"
+    },
+    {
+      "path": "geography/effective-context-b3bb346243f8e5701245f9a16b80d2ad13c57dda3c17e49d03a4a42c3d6d26a1.json.gz",
+      "bytes": 920683,
+      "sha256": "b3bb346243f8e5701245f9a16b80d2ad13c57dda3c17e49d03a4a42c3d6d26a1"
+    },
+    {
+      "path": "geography/effective-context-c7092bba48403be0f746cd27fc92911b4bb140388612d8f3f9a94f53eb3c1bda.json.gz",
+      "bytes": 105207,
+      "sha256": "c7092bba48403be0f746cd27fc92911b4bb140388612d8f3f9a94f53eb3c1bda"
+    },
+    {
+      "path": "geography/effective-context-cebb9a67df4bbb933a96330d058fffbae0a277fce1693914278524a27c25a613.json.gz",
+      "bytes": 746058,
+      "sha256": "cebb9a67df4bbb933a96330d058fffbae0a277fce1693914278524a27c25a613"
+    },
+    {
+      "path": "geography/effective-context-d8c4c41ca582be229aa31284ca1b1bcb412661ba1f1fe3f454997915946ccf12.json.gz",
+      "bytes": 530446,
+      "sha256": "d8c4c41ca582be229aa31284ca1b1bcb412661ba1f1fe3f454997915946ccf12"
+    },
+    {
+      "path": "geography/effective-context-dd79abd13235a97854b272e2e77833a070bcf465c44a4cc2c5fc8cc14024100f.json.gz",
+      "bytes": 430839,
+      "sha256": "dd79abd13235a97854b272e2e77833a070bcf465c44a4cc2c5fc8cc14024100f"
+    },
+    {
+      "path": "geography/effective-context-dfe8783d7fae5c04edaf67b9b8159b12d4f2a1c6e1f936686af2e82f68925153.json.gz",
+      "bytes": 92791,
+      "sha256": "dfe8783d7fae5c04edaf67b9b8159b12d4f2a1c6e1f936686af2e82f68925153"
+    },
+    {
+      "path": "geography/effective-context-e8d9f2c9375e3295d4b8dfc71508897a927089448c3e168dd476ab50b96e3cdd.json.gz",
+      "bytes": 198847,
+      "sha256": "e8d9f2c9375e3295d4b8dfc71508897a927089448c3e168dd476ab50b96e3cdd"
+    },
+    {
+      "path": "geography/effective-context-e967dd100502ac2af746eb84841984d04597d17c83ddf7820cf35704e34a6ba9.json.gz",
+      "bytes": 395652,
+      "sha256": "e967dd100502ac2af746eb84841984d04597d17c83ddf7820cf35704e34a6ba9"
+    },
+    {
+      "path": "geography/effective-context-fddab81f76313dbae0194393ae4e627aa75b6bf916df17d241eb367e48609af9.json.gz",
+      "bytes": 921575,
+      "sha256": "fddab81f76313dbae0194393ae4e627aa75b6bf916df17d241eb367e48609af9"
+    },
+    {
+      "path": "native-v1/native-row-latitudes.f64le.gz",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147"
+    },
+    {
+      "path": "native-v1/ownership/rows-0.bin.gz",
+      "bytes": 306620,
+      "sha256": "89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-0.bin.gz",
+      "bytes": 3854101,
+      "sha256": "3d551738a3454d2028e1d9adc352b7446d7c0f25c8d42044704cf1efb6f64b6b"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-12582912.bin.gz",
+      "bytes": 3478667,
+      "sha256": "01012dd358291a9e4ee51888a1d2b618ab2003e06a6eebd3a236392ecdbbc015"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-16777216.bin.gz",
+      "bytes": 3289324,
+      "sha256": "d5ed4d7e1700fb60298a53cc37ad9943257f57f853e19cc786ef975ebc7f0cae"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-20971520.bin.gz",
+      "bytes": 3146696,
+      "sha256": "198daba78eaeed9f316f088a86f8a7c4cf8f7e868253fc09487870eceddaf58a"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-25165824.bin.gz",
+      "bytes": 3272873,
+      "sha256": "764a967753d010daa794b30ca597bee0503646e7cae6965b14df63f280b9c544"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-29360128.bin.gz",
+      "bytes": 3296575,
+      "sha256": "ff29a1956ae0dd99e4db155c9cdabf96c72155a1a772210910d5119845759cf8"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-33554432.bin.gz",
+      "bytes": 3521891,
+      "sha256": "826cffaf4b05286a68ae479bc6e6caba3b3b3993f7fa57eae08efe7f6089694b"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-37748736.bin.gz",
+      "bytes": 3497645,
+      "sha256": "18472136ceb94b95a17918acdfba32c56d13a2979043c66fb74cf615d81551ee"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-4194304.bin.gz",
+      "bytes": 3428397,
+      "sha256": "da6498fc3c898adca6231896e9b1f2c734153064d78431bc5a311fec768c18f9"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-41943040.bin.gz",
+      "bytes": 3534601,
+      "sha256": "f4e7f8de92e3d709db9675386961fac934a8a21652bf6f34f8d122ed71c73c44"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-46137344.bin.gz",
+      "bytes": 3556931,
+      "sha256": "bb9b1ba3ace6229a338eee6c903e1d5db637a765c46ed60f957ceb6e34346101"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-50331648.bin.gz",
+      "bytes": 3397952,
+      "sha256": "09aaf4d9a115dea6a85ed2a853532045c627ea2408f259513ce9de8e616ef55d"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-54525952.bin.gz",
+      "bytes": 2460609,
+      "sha256": "91bfddd9aa632dc18ecc2f487a71673b504f971d2795e7c4af9c9298f4fe4fbc"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-8388608.bin.gz",
+      "bytes": 3423683,
+      "sha256": "244e3da13a412b4a4ccbc652191a080495a5611df5d0ee2207c8d08ac27b929a"
+    },
+    {
+      "path": "ownership-vintages/08ef9b61e0c2e7f65c6d84078d28265a190e902ad3d0a5e27a88b5494244d15d/native-v1/ownership/startup-runs-4194304.bin.gz",
+      "bytes": 3510331,
+      "sha256": "08ef9b61e0c2e7f65c6d84078d28265a190e902ad3d0a5e27a88b5494244d15d"
+    },
+    {
+      "path": "ownership-vintages/0b802e8990dbef5d3250e21cae6a5fd53b90737d3ac25b3742f19f52e9ae96cf/native-v1/ownership/startup-runs-12582912.bin.gz",
+      "bytes": 3504948,
+      "sha256": "0b802e8990dbef5d3250e21cae6a5fd53b90737d3ac25b3742f19f52e9ae96cf"
+    },
+    {
+      "path": "ownership-vintages/1121f583c069ede389035793f07a9c5783c239929d1636005394b9379192677d/native-v1/ownership/startup-runs-33554432.bin.gz",
+      "bytes": 3542883,
+      "sha256": "1121f583c069ede389035793f07a9c5783c239929d1636005394b9379192677d"
+    },
+    {
+      "path": "ownership-vintages/14f0c529d172276bdd06f124974c1113e5d1111e35dd74e4b78a23a64ac117d4/native-v1/ownership/startup-runs-29360128.bin.gz",
+      "bytes": 3292694,
+      "sha256": "14f0c529d172276bdd06f124974c1113e5d1111e35dd74e4b78a23a64ac117d4"
+    },
+    {
+      "path": "ownership-vintages/2387e91ae885b6c57d38b1d688703f5497ce7a56a992867cb01049dca9c82cde/native-v1/ownership/startup-runs-0.bin.gz",
+      "bytes": 3939024,
+      "sha256": "2387e91ae885b6c57d38b1d688703f5497ce7a56a992867cb01049dca9c82cde"
+    },
+    {
+      "path": "ownership-vintages/2dabd37a53179ebc28aed13f546ef0031eaf712e1272aedf7292223e7042e5db/native-v1/ownership/startup-runs-54525952.bin.gz",
+      "bytes": 3097313,
+      "sha256": "2dabd37a53179ebc28aed13f546ef0031eaf712e1272aedf7292223e7042e5db"
+    },
+    {
+      "path": "ownership-vintages/387c4916c1d8a06f1556c3e98e5fa2ac9561bf2be19e46ccb2ef11faafce5465/native-v1/ownership/startup-runs-20971520.bin.gz",
+      "bytes": 3184418,
+      "sha256": "387c4916c1d8a06f1556c3e98e5fa2ac9561bf2be19e46ccb2ef11faafce5465"
+    },
+    {
+      "path": "ownership-vintages/4622e83231434bc023de7768e7c281b85a643ae4a588816d29b7c05702c3c25c/native-v1/ownership/startup-runs-41943040.bin.gz",
+      "bytes": 3570525,
+      "sha256": "4622e83231434bc023de7768e7c281b85a643ae4a588816d29b7c05702c3c25c"
+    },
+    {
+      "path": "ownership-vintages/782493a0d76b99d322e8e8bf666109a189e91611ae7190f74d40077a0dd3c6b4/native-v1/ownership/startup-runs-37748736.bin.gz",
+      "bytes": 3517615,
+      "sha256": "782493a0d76b99d322e8e8bf666109a189e91611ae7190f74d40077a0dd3c6b4"
+    },
+    {
+      "path": "ownership-vintages/794c4c00f8df45e09b65b5458fcd63fb93de0f59b0069d1eb6d14f09bbb2f4e8/native-v1/ownership/startup-runs-50331648.bin.gz",
+      "bytes": 3483007,
+      "sha256": "794c4c00f8df45e09b65b5458fcd63fb93de0f59b0069d1eb6d14f09bbb2f4e8"
+    },
+    {
+      "path": "ownership-vintages/ac8093fd56b2d5905412346c11162cf54277d28ba85c572a1dc81ab43265cc0b/native-v1/ownership/rows-0.bin.gz",
+      "bytes": 317225,
+      "sha256": "ac8093fd56b2d5905412346c11162cf54277d28ba85c572a1dc81ab43265cc0b"
+    },
+    {
+      "path": "ownership-vintages/af9b94fabe7cfb2c47ed04f97be432a52bee3aa7761c459f2a73d064a21b9ae0/native-v1/ownership/startup-runs-16777216.bin.gz",
+      "bytes": 3346307,
+      "sha256": "af9b94fabe7cfb2c47ed04f97be432a52bee3aa7761c459f2a73d064a21b9ae0"
+    },
+    {
+      "path": "ownership-vintages/b4f0c5cd984fd7eafde86f7f19b54e3023c3259bc8aae14b65b5cab677b9eb6c/native-v1/ownership/startup-runs-46137344.bin.gz",
+      "bytes": 3619593,
+      "sha256": "b4f0c5cd984fd7eafde86f7f19b54e3023c3259bc8aae14b65b5cab677b9eb6c"
+    },
+    {
+      "path": "ownership-vintages/c296ad1d9f3150d8a29374026eb2b1ab5ef296bb108fe61e76a3d56b6fc20e08/native-v1/ownership/startup-runs-8388608.bin.gz",
+      "bytes": 3471862,
+      "sha256": "c296ad1d9f3150d8a29374026eb2b1ab5ef296bb108fe61e76a3d56b6fc20e08"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-0.bin.gz",
+      "bytes": 3854096,
+      "sha256": "5e73bd6ee306f3be021c7f89bf336c590ae3c02021df1c436d22088ed4284171"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-12582912.bin.gz",
+      "bytes": 3478667,
+      "sha256": "01012dd358291a9e4ee51888a1d2b618ab2003e06a6eebd3a236392ecdbbc015"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-16777216.bin.gz",
+      "bytes": 3289324,
+      "sha256": "d5ed4d7e1700fb60298a53cc37ad9943257f57f853e19cc786ef975ebc7f0cae"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-20971520.bin.gz",
+      "bytes": 3146696,
+      "sha256": "198daba78eaeed9f316f088a86f8a7c4cf8f7e868253fc09487870eceddaf58a"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-25165824.bin.gz",
+      "bytes": 3272873,
+      "sha256": "764a967753d010daa794b30ca597bee0503646e7cae6965b14df63f280b9c544"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-29360128.bin.gz",
+      "bytes": 3296575,
+      "sha256": "ff29a1956ae0dd99e4db155c9cdabf96c72155a1a772210910d5119845759cf8"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-33554432.bin.gz",
+      "bytes": 3521891,
+      "sha256": "826cffaf4b05286a68ae479bc6e6caba3b3b3993f7fa57eae08efe7f6089694b"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-37748736.bin.gz",
+      "bytes": 3497645,
+      "sha256": "18472136ceb94b95a17918acdfba32c56d13a2979043c66fb74cf615d81551ee"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-4194304.bin.gz",
+      "bytes": 3428397,
+      "sha256": "da6498fc3c898adca6231896e9b1f2c734153064d78431bc5a311fec768c18f9"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-41943040.bin.gz",
+      "bytes": 3534601,
+      "sha256": "f4e7f8de92e3d709db9675386961fac934a8a21652bf6f34f8d122ed71c73c44"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-46137344.bin.gz",
+      "bytes": 3556931,
+      "sha256": "bb9b1ba3ace6229a338eee6c903e1d5db637a765c46ed60f957ceb6e34346101"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-50331648.bin.gz",
+      "bytes": 3397952,
+      "sha256": "09aaf4d9a115dea6a85ed2a853532045c627ea2408f259513ce9de8e616ef55d"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-54525952.bin.gz",
+      "bytes": 2460609,
+      "sha256": "91bfddd9aa632dc18ecc2f487a71673b504f971d2795e7c4af9c9298f4fe4fbc"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-8388608.bin.gz",
+      "bytes": 3423683,
+      "sha256": "244e3da13a412b4a4ccbc652191a080495a5611df5d0ee2207c8d08ac27b929a"
+    },
+    {
+      "path": "ownership-vintages/f5d7dafd5e19d2cc3602de5c00dd8083e9f4fa1f96d1ac34532f0d6617088156/native-v1/ownership/startup-runs-25165824.bin.gz",
+      "bytes": 3274377,
+      "sha256": "f5d7dafd5e19d2cc3602de5c00dd8083e9f4fa1f96d1ac34532f0d6617088156"
+    }
+  ],
+  "compatibility_files": [
+    {
+      "path": "native-v1/native-row-latitudes.f64le.gz",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147"
+    },
+    {
+      "path": "native-v1/ownership/rows-0.bin.gz",
+      "bytes": 306620,
+      "sha256": "89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-0.bin.gz",
+      "bytes": 3854101,
+      "sha256": "3d551738a3454d2028e1d9adc352b7446d7c0f25c8d42044704cf1efb6f64b6b"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-12582912.bin.gz",
+      "bytes": 3478667,
+      "sha256": "01012dd358291a9e4ee51888a1d2b618ab2003e06a6eebd3a236392ecdbbc015"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-16777216.bin.gz",
+      "bytes": 3289324,
+      "sha256": "d5ed4d7e1700fb60298a53cc37ad9943257f57f853e19cc786ef975ebc7f0cae"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-20971520.bin.gz",
+      "bytes": 3146696,
+      "sha256": "198daba78eaeed9f316f088a86f8a7c4cf8f7e868253fc09487870eceddaf58a"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-25165824.bin.gz",
+      "bytes": 3272873,
+      "sha256": "764a967753d010daa794b30ca597bee0503646e7cae6965b14df63f280b9c544"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-29360128.bin.gz",
+      "bytes": 3296575,
+      "sha256": "ff29a1956ae0dd99e4db155c9cdabf96c72155a1a772210910d5119845759cf8"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-33554432.bin.gz",
+      "bytes": 3521891,
+      "sha256": "826cffaf4b05286a68ae479bc6e6caba3b3b3993f7fa57eae08efe7f6089694b"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-37748736.bin.gz",
+      "bytes": 3497645,
+      "sha256": "18472136ceb94b95a17918acdfba32c56d13a2979043c66fb74cf615d81551ee"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-4194304.bin.gz",
+      "bytes": 3428397,
+      "sha256": "da6498fc3c898adca6231896e9b1f2c734153064d78431bc5a311fec768c18f9"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-41943040.bin.gz",
+      "bytes": 3534601,
+      "sha256": "f4e7f8de92e3d709db9675386961fac934a8a21652bf6f34f8d122ed71c73c44"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-46137344.bin.gz",
+      "bytes": 3556931,
+      "sha256": "bb9b1ba3ace6229a338eee6c903e1d5db637a765c46ed60f957ceb6e34346101"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-50331648.bin.gz",
+      "bytes": 3397952,
+      "sha256": "09aaf4d9a115dea6a85ed2a853532045c627ea2408f259513ce9de8e616ef55d"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-54525952.bin.gz",
+      "bytes": 2460609,
+      "sha256": "91bfddd9aa632dc18ecc2f487a71673b504f971d2795e7c4af9c9298f4fe4fbc"
+    },
+    {
+      "path": "native-v1/ownership/startup-runs-8388608.bin.gz",
+      "bytes": 3423683,
+      "sha256": "244e3da13a412b4a4ccbc652191a080495a5611df5d0ee2207c8d08ac27b929a"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-0.bin.gz",
+      "bytes": 3854096,
+      "sha256": "5e73bd6ee306f3be021c7f89bf336c590ae3c02021df1c436d22088ed4284171"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-12582912.bin.gz",
+      "bytes": 3478667,
+      "sha256": "01012dd358291a9e4ee51888a1d2b618ab2003e06a6eebd3a236392ecdbbc015"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-16777216.bin.gz",
+      "bytes": 3289324,
+      "sha256": "d5ed4d7e1700fb60298a53cc37ad9943257f57f853e19cc786ef975ebc7f0cae"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-20971520.bin.gz",
+      "bytes": 3146696,
+      "sha256": "198daba78eaeed9f316f088a86f8a7c4cf8f7e868253fc09487870eceddaf58a"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-25165824.bin.gz",
+      "bytes": 3272873,
+      "sha256": "764a967753d010daa794b30ca597bee0503646e7cae6965b14df63f280b9c544"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-29360128.bin.gz",
+      "bytes": 3296575,
+      "sha256": "ff29a1956ae0dd99e4db155c9cdabf96c72155a1a772210910d5119845759cf8"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-33554432.bin.gz",
+      "bytes": 3521891,
+      "sha256": "826cffaf4b05286a68ae479bc6e6caba3b3b3993f7fa57eae08efe7f6089694b"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-37748736.bin.gz",
+      "bytes": 3497645,
+      "sha256": "18472136ceb94b95a17918acdfba32c56d13a2979043c66fb74cf615d81551ee"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-4194304.bin.gz",
+      "bytes": 3428397,
+      "sha256": "da6498fc3c898adca6231896e9b1f2c734153064d78431bc5a311fec768c18f9"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-41943040.bin.gz",
+      "bytes": 3534601,
+      "sha256": "f4e7f8de92e3d709db9675386961fac934a8a21652bf6f34f8d122ed71c73c44"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-46137344.bin.gz",
+      "bytes": 3556931,
+      "sha256": "bb9b1ba3ace6229a338eee6c903e1d5db637a765c46ed60f957ceb6e34346101"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-50331648.bin.gz",
+      "bytes": 3397952,
+      "sha256": "09aaf4d9a115dea6a85ed2a853532045c627ea2408f259513ce9de8e616ef55d"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-54525952.bin.gz",
+      "bytes": 2460609,
+      "sha256": "91bfddd9aa632dc18ecc2f487a71673b504f971d2795e7c4af9c9298f4fe4fbc"
+    },
+    {
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-8388608.bin.gz",
+      "bytes": 3423683,
+      "sha256": "244e3da13a412b4a4ccbc652191a080495a5611df5d0ee2207c8d08ac27b929a"
+    }
+  ]
+}

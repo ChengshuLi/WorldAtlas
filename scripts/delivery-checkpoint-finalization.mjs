@@ -55,13 +55,13 @@ export function finalizationCheckpointBytes(config, reader, handle) {
 // One canonical writer for the existing finalizer's derived destinations.
 // All files are preflighted before staging; interrupted adoption can resume only
 // with the same immutable outputs and exact preimage/postimage bytes.
-const identity = raw => ({bytes: raw.length, sha256: createHash('sha256').update(raw).digest('hex')});
+const identity = raw => raw === null ? undefined : ({bytes: raw.length, sha256: createHash('sha256').update(raw).digest('hex')});
 export function admitCanonicalOutputs(root, bindings, resume = false) {
   const rows = bindings.map(({path: name, bytes, expected = identity(bytes), previous, allowMissing = false}) => {
     need(typeof name === 'string' && !path.isAbsolute(name)
       && name.split('/').every(part => part && part !== '.' && part !== '..'), 'Safe canonical output path required');
-    need(Buffer.isBuffer(bytes) && same(identity(bytes), expected), 'Canonical output changed after finalization');
-    return {name, bytes, expected: {...expected}, previous: previous && {...previous}, allowMissing};
+    need((Buffer.isBuffer(bytes) || bytes === null && previous && Number.isSafeInteger(previous.bytes) && /^[a-f0-9]{64}$/.test(previous.sha256)) && same(identity(bytes), expected), 'Canonical output changed after finalization');
+    return {name, bytes, expected: expected && {...expected}, previous: previous && {...previous}, allowMissing};
   });
   need(new Set(rows.map(row => row.name)).size === rows.length, 'Duplicate canonical output path');
   need(rows.every(row => rows.every(other => row === other || !row.name.startsWith(other.name + '/'))),
@@ -78,7 +78,7 @@ export function admitCanonicalOutputs(root, bindings, resume = false) {
     need(!stat || stat.isFile() && !(stat.mode & 0o111) && fs.realpathSync(filename) === filename,
       'Nonordinary canonical output file');
     const current = stat ? identity(fs.readFileSync(filename)) : undefined;
-    need(current === undefined && (row.previous === undefined || row.allowMissing)
+    need(current === undefined && (row.previous === undefined || row.allowMissing || resume && row.bytes === null)
       || current !== undefined && (row.previous && same(current, row.previous) || resume && same(current, row.expected)),
     'Canonical output changed outside this finalization: ' + row.name);
     return current;
@@ -89,6 +89,7 @@ export function admitCanonicalOutputs(root, bindings, resume = false) {
       need(same(identity(row.bytes), row.expected), 'Canonical output changed after finalization');
       if (same(inspect(row), row.expected)) continue;
       const filename = path.join(root, row.name), directory = path.dirname(filename);
+      if (row.bytes === null) { inspect(row); fs.unlinkSync(filename); continue; }
       fs.mkdirSync(directory, {recursive: true});
       const temporary = path.join(directory, `.finalize-${randomUUID()}.tmp`);
       try {
