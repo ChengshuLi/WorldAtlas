@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {createHash} from 'node:crypto';
+import {createHash,generateKeyPairSync} from 'node:crypto';
+import {backupRecipientFingerprint} from '../scripts/recovery-backup-envelope.mjs';
 import {deflateRawSync} from 'node:zlib';
 import {rehearsalReceiptFromZIP} from '../scripts/neon-storage-migration.mjs';
 import {spawnSync} from 'node:child_process';
@@ -14,14 +15,14 @@ import {observationContract} from '../src/observation-modules.js';
 import {createPostgresDatabase} from '../hosted/postgres-adapter.js';
 import {rehearseCompactMembershipStorage} from '../scripts/compact-membership-storage.mjs';
 import {exportStorageMarkerV4} from '../hosted/storage-export-v4.js';
-import {readRecoveryInventory,assertCurrentInventory,assertRestoredInventory} from '../scripts/current-postgres-recovery.mjs';
+import {readRecoveryInventory,assertCurrentInventory,assertRestoredInventory,authenticateRecoveryWindow} from '../scripts/current-postgres-recovery.mjs';
 import {compactRecoveryProfile,compactRecoveryProfileV3} from '../scripts/compact-recovery-profile.mjs';
 import {stageGeographicRelease,finalizeGeographicRelease,geographicMembershipHash,geographicLocationIdsHash,geographicChangesHash} from '../hosted/geographic-releases.js';
 import {importBatch} from '../hosted/records.js';
 import {exportStorageMarker,exportStoragePage,storageExportCollections,storageExportColumns} from '../hosted/storage-export.js';
 import {restorePostgresStorage} from '../scripts/restore-postgres-storage.mjs';
 import {provisionPostgresRuntimeRole} from '../scripts/provision-postgres-runtime-role.mjs';
-import {applyPostgresForwardMigrations,forwardMigrationDefinitions,validateForwardOperation,validateForwardMaintenance,runNeonForwardMigrations,verifyForwardRuntimeRole,readForwardCurrentSource,assertForwardCurrentPreserved} from '../scripts/neon-forward-migrations.mjs';
+import {authenticateForwardBaseline,applyPostgresForwardMigrations,forwardMigrationDefinitions,validateForwardOperation,validateForwardMaintenance,runNeonForwardMigrations,verifyForwardRuntimeRole,readForwardCurrentSource,assertForwardCurrentPreserved} from '../scripts/neon-forward-migrations.mjs';
 const root=path.resolve(new URL('..',import.meta.url).pathname),hash=value=>createHash('sha256').update(value).digest('hex');
 const migration={...forwardMigrationDefinitions[0],sha256:hash(fs.readFileSync(new URL('../postgres/migrations/0001_temporal_geography.sql',import.meta.url)))};
 async function fixture({currentOwner=false}={}){
@@ -244,4 +245,95 @@ test('grown compact refuses post-DDL foreign table, column or function ACL addit
    await assert.rejects(applyPostgresForwardMigrations({...f.options,driver,currentSource:f.currentSource}),e=>e.commit_status==='rolled-back-or-not-started');assert(applied);assert.deepEqual(await readRecoveryInventory(f.query,{profile:compactRecoveryProfile}),f.currentSource.inventory);
   }
  }finally{await f.close();}
+});
+
+
+function durableBaselineFixture(directory, original={}) {
+ const source={checkpoint_sha256:'c'.repeat(64),source_manifest_sha256:'d'.repeat(64),source_snapshot_fingerprint:'e'.repeat(64),source_revision:1321,...original};
+ const proof={run_id:'101',run_attempt:'1',head_sha:'a'.repeat(40),artifact_id:'102',artifact_sha256:'b'.repeat(64),run_url:'https://github.com/ChengshuLi/WorldAtlas/actions/runs/101'};
+ const receipt={version:1,mode:'production',status:'verified',project_id:'weathered-lab-37571695',target_branch_id:'br-summer-butterfly-ar8qikk5',raw_snapshot_verified:true,runtime_read_only_checks:true,schema_sha256:'1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618',restore:{status:'verified',trigger_inventory_sha256:'f'.repeat(64)},readback:{status:'verified'},...source,github:{repository:'ChengshuLi/WorldAtlas',workflow_path:'.github/workflows/neon-storage-migration.yml',head_sha:proof.head_sha,run_id:proof.run_id,run_attempt:proof.run_attempt}};
+ const file=path.join(directory,'data/validation/neon-production-storage-migration.json');fs.mkdirSync(path.dirname(file),{recursive:true});
+ const save=()=>{const bytes=JSON.stringify(receipt);fs.writeFileSync(file,bytes);proof.receipt_sha256=hash(bytes);};save();
+ const run={id:101,run_attempt:1,repository:{full_name:'ChengshuLi/WorldAtlas'},path:receipt.github.workflow_path,head_branch:'main',head_sha:proof.head_sha,status:'completed',conclusion:'success',html_url:proof.run_url};
+ return {receipt,run,file,save,operation:{...source,baseline:proof},calls:[],fetch:async function(url){this.calls.push(String(url));assert.equal(String(url),'https://api.github.com/repos/ChengshuLi/WorldAtlas/actions/runs/101','No archive request or unbound download');return Response.json(this.run);}};
+}
+test('durable exact baseline receipt authenticates the original successful run without an expiring archive',async()=>{
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-durable-baseline-'));try{
+  const f=durableBaselineFixture(directory),options={operation:f.operation,root:directory,env:{GITHUB_TOKEN:'fixture-actions-token'},fetchImpl:url=>f.fetch(url)};
+  assert.deepEqual(await authenticateForwardBaseline(options),f.receipt);assert.equal(f.calls.length,1);
+  for(const field of ['repository','workflow_path','head_sha','run_id','run_attempt']){
+   const original=f.receipt.github[field];f.receipt.github[field]='other';f.save();await assert.rejects(authenticateForwardBaseline(options),/receipt-run-mismatch/);f.receipt.github[field]=original;f.save();
+  }
+  for(const change of [{status:'in_progress'},{conclusion:'failure'},{head_sha:'b'.repeat(40)},{run_attempt:2},{repository:{full_name:'other/repo'}}]){const original=f.run;f.run={...original,...change};await assert.rejects(authenticateForwardBaseline(options),/baseline-run-mismatch/);f.run=original;}
+  fs.appendFileSync(f.file,' ');await assert.rejects(authenticateForwardBaseline(options),/receipt-bytes-mismatch/);f.save();
+  f.receipt.source_revision++;f.save();await assert.rejects(authenticateForwardBaseline(options),/source-identity-mismatch/);
+  fs.renameSync(f.file,f.file+'.retained');fs.symlinkSync(f.file+'.retained',f.file);await assert.rejects(authenticateForwardBaseline(options),/symlink-refused/);
+ }finally{fs.rmSync(directory,{recursive:true,force:true});}
+});
+
+function capturedReceipt(inventory,marker,env,windowSHA) {
+ return {version:1,status:'verified',source_read_only:true,production_writes:0,source_marker:marker,window_comment_id:Number(env.WINDOW_COMMENT_ID),window_sha256:windowSHA,github:{head:env.GITHUB_SHA,run_id:env.GITHUB_RUN_ID,run_attempt:env.GITHUB_RUN_ATTEMPT},project:{branch:{id:'br-summer-butterfly-ar8qikk5'},project:{configured_postgres_major:18}},owner_registry_private:true,owner_registry_sha256:inventory.owner_registry_sha256,catalog_sha256:inventory.catalog_sha256,collections:inventory.collections,compact_storage:{physical:inventory.compact_storage.physical,sequences:inventory.compact_storage.sequences},dump:{sha256:'d'.repeat(64),local_readback_verified:true},encrypted_backup:{in_memory_aead_roundtrip_verified:true,ciphertext_disk_readback_verified:true,ciphertext_sha256:'e'.repeat(64)},isolated_target_cleanup:'removed-and-absence-confirmed',source_lock_cleanup:'database-lock-absence-and-reader-removal-confirmed'};
+}
+
+test('same-job native capture fixture keeps inventory private while actual PostgreSQL forward SQL preserves grown state and replays',async t=>{
+ const f=await grownCompactFixture(),directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-forward-owner-job-'));
+ try{
+  for(const file of ['postgres/schema.sql',...forwardMigrationDefinitions.map(d=>d.file)]){fs.mkdirSync(path.dirname(path.join(directory,file)),{recursive:true});fs.copyFileSync(path.join(root,file),path.join(directory,file));}
+  const checkpoint_directory='data/storage-checkpoints/fixture',checkpoint=Buffer.from('exact reviewed original checkpoint fixture');fs.mkdirSync(path.join(directory,checkpoint_directory),{recursive:true});fs.writeFileSync(path.join(directory,checkpoint_directory,'checkpoint.json'),checkpoint);
+  const b=durableBaselineFixture(directory,{checkpoint_sha256:hash(checkpoint),source_manifest_sha256:f.baseline.source_manifest_sha256,source_snapshot_fingerprint:f.baseline.source_snapshot_fingerprint,source_revision:f.baseline.source_revision});b.receipt.restore.trigger_inventory_sha256=f.baseline.trigger_inventory_sha256;b.save();
+  const env={GITHUB_EVENT_NAME:'workflow_dispatch',GITHUB_REPOSITORY:'ChengshuLi/WorldAtlas',GITHUB_WORKFLOW_REF:'ChengshuLi/WorldAtlas/.github/workflows/neon-forward-migrations.yml@refs/heads/main',GITHUB_SHA:'9'.repeat(40),GITHUB_RUN_ID:'202',GITHUB_RUN_ATTEMPT:'1',GITHUB_ACTOR:'fixture-owner',WINDOW_COMMENT_ID:'123',GITHUB_TOKEN:'fixture-actions-token',NEON_API_KEY:'fixture-provider-key',NEON_PROJECT_ID:'weathered-lab-37571695'};
+  const {publicKey}=generateKeyPairSync('rsa',{modulusLength:3072,publicKeyEncoding:{type:'spki',format:'pem'}}),now=Date.now();
+  const claim={active:true,live_work:true,issue_number:51,claim_id:'fixture-claim',worker_id:'engineering-central-publication-20261003',branch:'engineering/fixture',expires_at:new Date(now+3600000).toISOString()};
+  const window={version:1,issue:51,queue:51,operator_worker_id:claim.worker_id,operator_github_login:env.GITHUB_ACTOR,primary_main_commit:env.GITHUB_SHA,capture_tool_sha256:hash(fs.readFileSync(path.join(root,'scripts/current-postgres-recovery.mjs'))),method:'readonly-native-pg-dump-and-isolated-restore',backup_recipient_public_key:publicKey,backup_recipient_sha256:backupRecipientFingerprint(publicKey),observed_at_utc:new Date(now).toISOString(),expires_at_utc:new Date(now+1800000).toISOString(),claim_id:claim.claim_id,holder_worker_id:claim.worker_id,claim_branch:claim.branch,site:{project_id:'appgprj_6abdf87277c08191bce4a22b8dfb25db',version:24,deployment_id:'appgdep_fixture'},read_only:true,drain_verified:true,restore_writes_operator:claim.worker_id,rollback_receipt_url:'https://github.com/ChengshuLi/WorldAtlas/issues/51',source_marker:f.currentSource.marker};
+  const operation={version:1,project_id:env.NEON_PROJECT_ID,production_branch_id:'br-summer-butterfly-ar8qikk5',core_schema_sha256:b.receipt.schema_sha256,checkpoint_directory,...b.operation,site_origin:'https://example.org',site_backend:'postgres',migrations:f.options.migrations,current_source:'capture-current-native',production_acknowledgement:'apply-reviewed-forward-migrations-after-verified-baseline'};
+  const operationFile='operation.json',refresh=()=>{const site={version:1,verification_method:'root-private-site-authenticated-read',site_origin:operation.site_origin,backend:'postgres',source_revision:window.source_marker.revision,source_snapshot_fingerprint:window.source_marker.fingerprint,read_only:true,verified_at_utc:new Date().toISOString(),deployment_id:'fixture-deployment',environment_revision:1},bytes=JSON.stringify(site);fs.writeFileSync(path.join(directory,'maintenance.json'),bytes);operation.maintenance={receipt_file:'maintenance.json',receipt_sha256:hash(bytes)};const raw=JSON.stringify(operation);fs.writeFileSync(path.join(directory,operationFile),raw);window.forward_operation_sha256=hash(raw);};refresh();
+  const requests=[],fetchImpl=async value=>{
+   const url=new URL(value);requests.push(url.href);let data;
+   if(url.hostname==='api.github.com'){
+    if(url.pathname.endsWith('/actions/runs/101'))data=b.run;
+    else if(url.pathname.endsWith('/issues/comments/'+env.WINDOW_COMMENT_ID))data={id:Number(env.WINDOW_COMMENT_ID),html_url:`https://github.com/ChengshuLi/WorldAtlas/issues/51#issuecomment-${env.WINDOW_COMMENT_ID}`,user:{type:'User',login:env.GITHUB_ACTOR},author_association:'OWNER',body:'<!-- worldatlas-recovery-window:v1\n'+JSON.stringify(window)+'\n-->'};
+    else if(url.pathname.endsWith('/issues/51/comments'))data=[{id:55,user:{login:'github-actions[bot]'},body:'**Worker reservation:** fixture\n<!-- worldatlas-claim:v1\n'+JSON.stringify({version:1,...claim})+'\n-->'}];
+   }else if(url.hostname==='console.neon.tech'){
+    if(url.pathname.endsWith('/projects/'+env.NEON_PROJECT_ID))data={project:{id:env.NEON_PROJECT_ID,pg_version:18}};
+    else if(url.pathname.endsWith('/branches'))data={branches:[{id:operation.production_branch_id,name:'production',default:true}]};
+    else if(url.pathname.endsWith('/databases'))data={databases:[{name:'neondb',owner_name:'neondb_owner'}]};
+    else if(url.pathname.endsWith('/roles'))data={roles:[{name:'neondb_owner'},{name:'worldatlas_app'}]};
+    else if(url.pathname.endsWith('/endpoints'))data={endpoints:[{branch_id:operation.production_branch_id,type:'read_write',host:'ep-fixture.us-east-2.aws.neon.tech'}]};
+    else if(url.pathname.endsWith('/connection_uri'))data={uri:'postgresql://neondb_owner:isolated-fixture-only@ep-fixture.us-east-2.aws.neon.tech/neondb?sslmode=require'};
+   }
+   assert.notEqual(data,undefined,'Unexpected fixture request '+url.href);return Response.json(data);
+  };
+  const authenticate=changes=>authenticateRecoveryWindow({env,fetcher:fetchImpl,forwardOperationSHA:window.forward_operation_sha256,...changes});
+  const initialWindow=await authenticate();assert.equal(initialWindow.windowSHA,hash(JSON.stringify(window)));
+  for(const change of [{GITHUB_EVENT_NAME:'push'},{GITHUB_WORKFLOW_REF:'ChengshuLi/WorldAtlas/.github/workflows/other.yml@refs/heads/main'},{GITHUB_SHA:'0'.repeat(40)},{GITHUB_ACTOR:'other-actor'}])await assert.rejects(authenticate({env:{...env,...change}}));
+  for(const forwardOperationSHA of [undefined,'f'.repeat(64)])await assert.rejects(authenticate({forwardOperationSHA}),/unreviewed-forward-recovery-window/);
+  const operationPin=window.forward_operation_sha256;delete window.forward_operation_sha256;await assert.rejects(authenticate({forwardOperationSHA:operationPin}),/unreviewed-forward-recovery-window/);window.forward_operation_sha256=operationPin;
+  await assert.rejects(authenticate({expectedWindowSHA:'f'.repeat(64),phase:'end'}),/changed-publisher-window/);
+  const observedAt=window.observed_at_utc;window.observed_at_utc=new Date(Date.parse(observedAt)+1).toISOString();await assert.rejects(authenticate({expectedWindowSHA:initialWindow.windowSHA,phase:'end'}),/changed-publisher-window/);window.observed_at_utc=observedAt;
+  // Existing read-only recovery still authenticates its genuine workflow, not a spoof.
+  await authenticate({env:{...env,GITHUB_WORKFLOW_REF:'ChengshuLi/WorldAtlas/.github/workflows/current-postgres-recovery.yml@refs/heads/main'},forwardOperationSHA:undefined});
+  assert(requests.every(url=>url.startsWith('https://api.github.com/')),'Authorization refusals never contact the provider');
+  let captureCalls=0,ownerCalls=0;
+  const recoveryImpl=async options=>{
+   captureCalls++;assert.equal(options.env.GITHUB_WORKFLOW_REF,env.GITHUB_WORKFLOW_REF,'Real workflow identity is not spoofed');assert.equal(options.forwardOperationSHA,window.forward_operation_sha256);
+   const authenticated=await authenticateRecoveryWindow({env:options.env,fetcher:options.fetcher,forwardOperationSHA:options.forwardOperationSHA});
+   assert(!fs.existsSync(options.output),'Native capture refuses an existing target');fs.mkdirSync(path.join(options.output,'public-receipts'),{recursive:true});
+   const profile=(await f.owner.query("SELECT to_regclass('public.atlas_typed_observations') IS NOT NULL present")).rows[0].present?compactRecoveryProfileV3:compactRecoveryProfile;
+   const inventory=await readRecoveryInventory(f.query,{profile}),marker={...await exportStorageMarkerV4(f.pg.db),read_only:true},receipt=capturedReceipt(inventory,marker,env,authenticated.windowSHA);
+   fs.writeFileSync(path.join(options.output,'source-inventory.json'),JSON.stringify(inventory));fs.writeFileSync(path.join(options.output,'public-receipts/receipt.json'),JSON.stringify(receipt));return receipt;
+  };
+  const args={root:directory,operationFile,env,fetchImpl,recoveryImpl,ownerDriverFactory:async()=>{ownerCalls++;return {...f.owner,close:async()=>{}};}};
+  const failed=await runNeonForwardMigrations({...args,mode:'production',output:'capture-failed.json',recoveryImpl:async()=>({status:'failed'})});assert.equal(failed.status,'failed');assert.equal(failed.error_code,'same-job-native-recovery-required');assert.equal(ownerCalls,0);
+  const wrongHead=await runNeonForwardMigrations({...args,mode:'production',output:'capture-other-head.json',recoveryImpl:async options=>{const receipt=await recoveryImpl(options);return {...receipt,github:{...receipt.github,head:'0'.repeat(40)}};}});assert.equal(wrongHead.status,'failed');assert.equal(wrongHead.error_code,'same-job-native-recovery-required');assert.equal(ownerCalls,0);
+  const capturePath=path.join(directory,'data/validation/current-postgres-recovery');fs.renameSync(capturePath,capturePath+'-rejected-head');captureCalls=0;
+  const before=f.currentSource.inventory,first=await runNeonForwardMigrations({...args,mode:'production'});assert.equal(first.status,'verified',JSON.stringify(first));assert.equal(first.forward.current_source_preserved,true);assert.equal(captureCalls,1);assert.equal(ownerCalls,1);
+  const after=await readRecoveryInventory(f.query,{profile:compactRecoveryProfileV3});assertForwardCurrentPreserved(before,after);assert.deepEqual(after.owner_registry.slice(0,2),before.owner_registry);
+  const privatePath=path.join(directory,'data/validation/current-postgres-recovery/source-inventory.json');assert(fs.existsSync(privatePath));assert(!fs.existsSync(path.join(directory,'data/validation/current-postgres-recovery/public-receipts/source-inventory.json')));assert(!JSON.stringify(first).includes('owner_registry":'));
+  // A fresh hosted job has a fresh private directory and freshly reviewed current pin.
+  fs.renameSync(path.dirname(privatePath),path.dirname(privatePath)+'-retained');env.GITHUB_RUN_ID='203';env.WINDOW_COMMENT_ID='124';window.source_marker={...await exportStorageMarkerV4(f.pg.db),read_only:true};refresh();
+  const second=await runNeonForwardMigrations({...args,mode:'verify-only'});assert.equal(second.status,'verified',JSON.stringify(second));assert(second.forward.migrations.every(m=>m.status==='already-applied'));assert.deepEqual(await readRecoveryInventory(f.query,{profile:compactRecoveryProfileV3}),after);
+  assert.equal(requests.filter(url=>url.includes('/actions/artifacts/')).length,0);
+  const workflow=fs.readFileSync(path.join(root,'.github/workflows/neon-forward-migrations.yml'),'utf8');assert.match(workflow,/WINDOW_COMMENT_ID: \$\{\{ inputs.window_comment_id \}\}/);assert.match(workflow,/path: data\/validation\/current-postgres-recovery\/public-receipts\//);assert(!workflow.includes('path: data/validation/current-postgres-recovery/\n'));
+  t.diagnostic(JSON.stringify({sql_engine:(await f.owner.query('SELECT version() version')).rows[0].version,native_capture:'in-process fixture only, not Docker',actual_forward_transactions:2,private_inventory_not_uploaded:true}));
+ }finally{await f.close();fs.rmSync(directory,{recursive:true,force:true});}
 });
