@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {DatabaseSync} from 'node:sqlite';
 import worker from '../hosted/worker.js';
+import {protectedWorker,legacyPublicMapRelease} from '../hosted/cloudflare-access.js';
+import {loadHostedTemporalGeography} from '../src/hosted-temporal-client.js';
 import {importBatch} from '../hosted/records.js';
 import {createLocalPostgres} from '../scripts/verify-postgres-schema.mjs';
 import {stageGeographicRelease,finalizeGeographicRelease,geographicMembershipHash,geographicLocationIdsHash,geographicChangesHash} from '../hosted/geographic-releases.js';
@@ -101,5 +103,41 @@ for(const backend of ['sqlite','postgres'])test(`map-bound release remains selec
    const response=await f.request(path+'&release_id='+id);assert.equal(response.status,409);assert.match((await response.json()).error,/Published reference geography/);
   }
   assert.equal((await f.DB.prepare('SELECT coalesce(max(rowid),0) revision FROM atlas_ingestions').first()).revision,before,'Read selection never publishes or imports data');
+ }finally{await f.close();}
+});
+
+
+for(const backend of ['sqlite','postgres'])test(`public legacy map pair stays fixed across staging, finalization, new clients and rollback on actual ${backend}`,async()=>{
+ const f=await fixture(backend),publicWorker=protectedWorker(worker),publicEnv={...f.env,ATLAS_PUBLIC_READ_ONLY:'1',ATLAS_READ_ONLY:'0'};
+ const request=route=>publicWorker.fetch(new Request(origin+route),publicEnv,{});
+ const legacyPaths=['/api/map/snapshot?year=1000&evidence_only=1&include_temporal=1','/api/geography/temporal/snapshot?year=1000'];
+ const create=async(id,version)=>stageGeographicRelease(f.DB,{release:{id,source_id:'worker-reference-source',version,reference_date:'2026-10-03',hierarchy_sha256:pin.hierarchy_sha256,footprints_sha256:pin.footprints_sha256,membership_sha256:await geographicMembershipHash(f.memberships),location_ids_sha256:await geographicLocationIdsHash(f.memberships),changes_sha256:await geographicChangesHash([]),expected_counts:Object.fromEntries(tiers.map(kind=>[kind,6]))},memberships:f.memberships});
+ const pins=page=>({release_id:page.release_id,hierarchy_sha256:page.hierarchy_sha256,footprints_sha256:page.footprints_sha256});
+ const expected={...pin,release_id:legacyPublicMapRelease};
+ const readOld=async()=>{
+  const bodies=[];
+  // These are the two release-omitting request shapes issued by the retained
+  // deployed 4a1fc677 clients. Exercise the real public wrapper and SQL, not a
+  // mocked release selector or generic service whose latest semantics differ.
+  for(const route of legacyPaths){const response=await request(route);assert.equal(response.status,200);assert.equal(response.headers.get('X-Atlas-Legacy-Map-Release'),legacyPublicMapRelease);const body=await response.json();if(!body.temporal_geography)assert.deepEqual(pins(body),expected);if(body.temporal_geography)for(const stream of ['records','withdrawals'])assert.deepEqual(pins(body.temporal_geography[stream]),expected);bodies.push(body);}
+  return bodies;
+ };
+ try{
+  for(const route of legacyPaths)assert.equal((await request(route)).status,409,'absent fixed legacy release must not become latest');
+  await create(legacyPublicMapRelease,6);
+  for(const route of legacyPaths)assert.equal((await request(route)).status,409,'staged fixed legacy release must not become latest');
+  await finalizeGeographicRelease(f.DB,legacyPublicMapRelease);
+  const before=await readOld();
+  await create('worker-target-v10',10);await readOld();
+  for(const route of legacyPaths)assert.equal((await request(route+'&release_id=worker-target-v10')).status,409,'explicit staged target refuses');
+  await finalizeGeographicRelease(f.DB,'worker-target-v10');
+  const after=await readOld();const withoutRevision=value=>JSON.parse(JSON.stringify(value,(key,value)=>key==='revision'?undefined:value));assert.deepEqual(withoutRevision(after),withoutRevision(before),'old open/cached page pins and content remain unchanged');
+  const generic=await (await request('/api/geography/release')).json();assert.equal(generic.id,'worker-target-v10','separate generic latest endpoint is unchanged');
+  const seen=[];
+  const current=await loadHostedTemporalGeography({apiGet:async route=>{seen.push(route);const response=await request(route);assert.equal(response.status,200);return response.json();},year:1000,expectedGeography:{...pin,release_id:'worker-target-v10'}});
+  assert.ok(current);assert.ok(seen.length>=2);assert.ok(seen.every(route=>new URL(origin+route).searchParams.get('release_id')==='worker-target-v10'));
+  await readOld(); // Reverting the page/asset deployment still uses the fixed old pair.
+  for(const id of ['', 'worker-missing','%20'])for(const route of legacyPaths)assert.ok((await request(route+'&release_id='+id)).status>=400,'explicit invalid selection never falls back');
+  assert.equal((await publicWorker.fetch(new Request(origin+'/api/records/import',{method:'POST',body:'{}'}),publicEnv,{})).status,503,'public write protection remains forced');
  }finally{await f.close();}
 });

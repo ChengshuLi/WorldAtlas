@@ -1,3 +1,4 @@
+import {readOwnerLabels} from '../src/owner-labels.js';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -42,7 +43,7 @@ test('the nine retained Somaliland decisions replace only stale reference aliase
   // The synthetic adjacent-tier chain isolates metadata migration from geography preparation.
   const current=source.map(({properties:p,geometry})=>({...p,parent_id:'province',geometry}));
   const original=current.map(row=>({...row,metadata:{...row.metadata,reference_polity:'Somalia'}}));
-  const unrelated={...location('custom:untouched',{reference_polity:'Other polity'}),reference_owner:'Other territory'};
+  const unrelated={...location('custom:untouched',{reference_polity:'Other polity',reference_owner_id:'owner:uncaptured'}),reference_owner:'Other territory'};
   const db=migrationDatabase([...original,unrelated],[{location_id:ids[0],valid_from:1900,valid_to:1901,owner:'Retained historical claim',source:'Migration regression fixture'}]);
   try{
     const before=db.prepare('SELECT * FROM locations ORDER BY id').all(),states=db.prepare('SELECT * FROM states').all();
@@ -54,9 +55,9 @@ test('the nine retained Somaliland decisions replace only stale reference aliase
       if(ids.includes(before[index].id))expected.reference_polity='Somaliland';
       assert.deepEqual(actual,expected);assert.deepEqual({...after[index],metadata:null},{...before[index],metadata:null});
     }
-    const features=geography(db).features,modern=resolveAttributes(features,2026),past=resolveAttributes(features,1900);
+    const data=geography(db),features=data.features,ownerLabels=readOwnerLabels(data.ownerLabels),modern=resolveAttributes(features,2026,{ownerLabels}),past=resolveAttributes(features,1900,{ownerLabels});
     for(const id of ids){assert.equal(modern.get(id).owner,'Somaliland');assert.equal(modern.get(id).category_ids.owner,'owner:Q34754');assert.equal(past.get(id).owner,null);}
-    assert.equal(modern.get(unrelated.id).owner,'Other polity');assert.deepEqual(db.prepare('SELECT * FROM states').all(),states);
+    assert.equal(modern.get(unrelated.id).owner,null,'Uncaptured fixture owner has no raw-source label fallback');assert.equal(modern.get(unrelated.id).category_ids.owner,unrelated.metadata.reference_owner_id);assert.deepEqual(db.prepare('SELECT * FROM states').all(),states);
     migrateReference(db,read);assert.deepEqual(db.prepare('SELECT * FROM locations ORDER BY id').all(),after);
   }finally{db.close();}
 });

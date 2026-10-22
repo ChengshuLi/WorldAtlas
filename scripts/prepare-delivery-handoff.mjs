@@ -10,7 +10,7 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {gunzipSync} from 'node:zlib';
 import {locate, deliveryAcquisitionExecute} from './delivery-handoff-advance.mjs';
-import {createAcquisition, githubTree, githubCommit} from './geography-prefetch.mjs';
+import {createAcquisition, githubTree} from './geography-prefetch.mjs';
 import {acquireFinalizationCheckpoint, finalizationCheckpointBytes, admitCanonicalOutputs} from './delivery-checkpoint-finalization.mjs';
 import {releaseAcceptedCheckpoint, ACCEPTED_CHECKPOINT_LOCATOR} from './accepted-selected-checkpoint.mjs';
 import {repairComponentKey, compareRepairComponents} from '../src/native-grid.js';
@@ -33,7 +33,7 @@ const safe = name => typeof name === 'string' && /^[a-zA-Z0-9_./-]+$/.test(name)
 const unique = values => Array.isArray(values) && values.length > 0 && values.every(v => typeof v === 'string' && v) && new Set(values).size === values.length;
 const environment = () => ({...process.env, GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0'});
 
-export function pinReader(root, {loadTree = githubTree, loadCommit = githubCommit,
+export function pinReader(root, {loadTree = githubTree,
   execute = deliveryAcquisitionExecute()} = {}) {
   const cache = new Map(), descriptors = new Map(), declared = new Map();
   let acquisition;
@@ -48,7 +48,7 @@ export function pinReader(root, {loadTree = githubTree, loadCommit = githubCommi
         'Conflicting composition input identities');
       declared.set(key, pin);
     }
-    acquisition ??= createAcquisition({repo: root, execute, token: '', loadTree, loadCommit,
+    acquisition ??= createAcquisition({repo: root, execute, token: '', loadTree,
       loadDescriptor: async (commit, name) => {
         const pin = declared.get(commit + ':' + name);
         need(pin, 'Undeclared composition input');

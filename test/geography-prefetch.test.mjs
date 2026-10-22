@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {createAcquisition, prefetchSelectedGeography, githubTree, githubCommit} from '../scripts/geography-prefetch.mjs';
+import {createAcquisition, prefetchSelectedGeography, githubTree} from '../scripts/geography-prefetch.mjs';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {createRoutingMetadataAcquisition} from '../scripts/geography-routing-metadata.mjs';
 
@@ -206,8 +206,7 @@ test('GitHub metadata retries only one interrupted immutable GET, including body
   const id = 'a'.repeat(40), value = {sha: id, tree: {sha: 'b'.repeat(40)}};
   const interrupted = () => new TypeError('fixture-metadata-secret', {cause: {code: 'UND_ERR_SOCKET'}});
   try {
-    for (const [read, locator] of [[() => githubCommit(id), `commits/${id}`],
-      [() => githubTree(id, false), `trees/${id}`], [() => githubTree(id), `trees/${id}?recursive=1`]]) {
+    for (const [read, locator] of [[() => githubTree(id, false), `trees/${id}`], [() => githubTree(id), `trees/${id}?recursive=1`]]) {
       for (const bodyFailure of [false, true]) {
         const requests = [];
         globalThis.fetch = async (url, options) => {
@@ -235,7 +234,7 @@ test('GitHub metadata retries only one interrupted immutable GET, including body
 test('repeated metadata socket closure stops after two GETs with a safe exact locator', async () => {
   const originalFetch = globalThis.fetch, id = 'a'.repeat(40);
   try {
-    for (const [read, locator] of [[() => githubCommit(id), `commits/${id}`], [() => githubTree(id), `trees/${id}?recursive=1`]]) {
+    for (const [read, locator] of [[() => githubTree(id, false), `trees/${id}`], [() => githubTree(id), `trees/${id}?recursive=1`]]) {
       let requests = 0;
       globalThis.fetch = async () => { requests++; throw new TypeError('private header fixture-secret', {cause: {code: 'UND_ERR_SOCKET'}}); };
       await assert.rejects(read(), error => error.message === `Geography metadata transport unavailable (${locator}; UND_ERR_SOCKET)`
@@ -251,7 +250,7 @@ test('metadata HTTP refusals, parsing, timeout, abort and other errors never ret
     for (const status of [401, 403, 404, 429, 500, 503]) {
       let requests = 0;
       globalThis.fetch = async () => { requests++; return new Response('fixture-secret response', {status}); };
-      await assert.rejects(githubCommit(id), error => error.message === `Geography tree metadata unavailable (commits/${id}; HTTP ${status})`);
+      await assert.rejects(githubTree(id, false), error => error.message === `Geography tree metadata unavailable (trees/${id}; HTTP ${status})`);
       assert.equal(requests, 1, 'An HTTP refusal is not a socket interruption');
     }
     for (const error of [new SyntaxError('malformed metadata'), new DOMException('timeout', 'TimeoutError'),
@@ -266,7 +265,7 @@ test('metadata HTTP refusals, parsing, timeout, abort and other errors never ret
       if (++requests === 1) throw new TypeError('socket closed', {cause: {code: 'UND_ERR_SOCKET'}});
       return new Response('denied', {status: 403});
     };
-    await assert.rejects(githubCommit(id), /HTTP 403/);
+    await assert.rejects(githubTree(id, false), /HTTP 403/);
     assert.equal(requests, 2, 'A refusal after the one retry cannot become success or another attempt');
   } finally { globalThis.fetch = originalFetch; }
 });
@@ -429,22 +428,12 @@ function originFixture() {
   f.git(f.origin, ['config', 'uploadpack.allowAnySHA1InWant', 'true']);
   const calls = {commits: [], trees: [], fetches: [], stores: []};
   const loaders = {
-    async loadCommit(id) {
-      calls.commits.push(id);
-      assert.equal(f.git(f.origin, ['cat-file', '-t', id]).toString().trim(), 'commit');
-      return {sha: id, tree: {sha: f.git(f.origin, ['rev-parse', id + '^{tree}']).toString().trim()}};
-    },
-    async loadTree(id, recursive) {
-      assert.equal(recursive, false); calls.trees.push(id);
-      return {sha: id, truncated: false, tree: f.git(f.origin, ['ls-tree', '-z', id]).toString().split('\0').filter(Boolean).map(line => {
-        const [, mode, type, sha, name] = line.match(/^(\d+) (\w+) ([a-f0-9]+)\t(.+)$/s);
-        return {mode, type, sha, path: name};
-      })};
-    },
+    loadTree() { assert.fail('Historical metadata must use the native Git transport'); },
     execute(command, args, options) {
       if (args.includes('init')) calls.stores.push(args[args.indexOf('-C') + 1]);
       if (args.includes('fetch')) {
-        assert(args.includes('--filter=tree:0')); assert(args.includes('--depth=1'));
+        assert(args.includes('--filter=tree:0'));
+        (args.includes('--depth=1') ? calls.commits : calls.trees).push(options.input.trim());
         calls.fetches.push(options.input.trim());
         args = args.map(arg => arg === 'https://github.com/ChengshuLi/WorldAtlas.git' ? 'file://' + f.origin : arg);
       }
@@ -468,7 +457,7 @@ test('cold origin metadata resolves and caches exact path trees without blobs or
     const first = await a.resolvePath(withParent, 'first/a.json');
     assert(Object.isFrozen(first)); f.assertIsolated();
     const before = {...a.stats}; await a.resolvePath(withParent, 'first/a.json');
-    assert.deepEqual(a.stats, before); assert.equal(f.calls.fetches.length, 1);
+    assert.deepEqual(a.stats, before); assert.equal(f.calls.fetches.length, 3);
     // A present commit/root must not conceal a missing second path's tree.
     await a.resolvePath(withParent, 'second/b.json');
     assert.equal(a.stats.origin_metadata_objects, 4); assert.equal(a.stats.origin_metadata_imports, 0);
@@ -483,34 +472,34 @@ test('cold origin metadata resolves and caches exact path trees without blobs or
   } finally { f.close(); }
 });
 
-for (const mode of ['denied commit', 'failed transport', 'wrong commit', 'wrong root', 'denied tree', 'wrong tree', 'truncated tree', 'duplicate tree', 'changed child', 'unsafe child'])
-test('cold origin metadata refuses unavailable or unauthenticated metadata: ' + mode, async () => {
+for (const mode of ['denied commit', 'denied tree', 'wrong inventory type', 'extra private object',
+  'wrong object oid', 'wrong type', 'wrong length', 'wrong commit bytes', 'wrong tree bytes', 'changed child'])
+test('cold origin metadata refuses unavailable or unauthenticated native objects: ' + mode, async () => {
   const f = originFixture(); try {
     const id = f.commit({'nested/input.json': 'scientific leaf'}), a = f.acquisition({
       execute(command, args, options) {
-        if (mode === 'failed transport' && args.includes('fetch')) throw Error('failed transport');
-        return f.loaders.execute(command, args, options);
-      },
-      loadCommit: async value => {
-        if (mode === 'denied commit') throw Error('denied commit');
-        const result = await f.loaders.loadCommit(value);
-        return mode === 'wrong commit' ? {...result, sha: 'a'.repeat(40)}
-          : mode === 'wrong root' ? {...result, tree: {sha: 'b'.repeat(40)}} : result;
-      },
-      loadTree: async (...args) => {
-        if (mode === 'denied tree') throw Error('denied tree');
-        const result = await f.loaders.loadTree(...args);
-        if (mode === 'wrong tree') result.sha = 'c'.repeat(40);
-        if (mode === 'truncated tree') result.truncated = true;
-        if (mode === 'duplicate tree') result.tree.push(result.tree[0]);
-        if (mode === 'changed child') result.tree[0].sha = 'd'.repeat(40);
-        if (mode === 'unsafe child') result.tree[0].path = '../escape';
+        const isCommit=args.includes('--depth=1');
+        if(args.includes('fetch')&&(mode==='denied commit'&&isCommit||mode==='denied tree'&&!isCommit))throw Error('denied native transport');
+        const result=f.loaders.execute(command,args,options);
+        if(args.includes('--batch-all-objects')){
+          if(mode==='wrong inventory type')return Buffer.from(result.toString().replace(/ (commit|tree)\n/,' blob\n'));
+          if(mode==='extra private object')return Buffer.concat([result,Buffer.from('f'.repeat(40)+' blob\n')]);
+          if(mode==='wrong object oid')return Buffer.from(result.toString().replace(/^[a-f0-9]{40}/,'f'.repeat(40)));
+        }
+        if(mode==='wrong type'&&args.includes('--batch-check=%(objectname) %(objecttype) %(objectsize)'))
+          return Buffer.from(result.toString().replace(/ (commit|tree) /,' blob '));
+        const i=args.indexOf('cat-file'),kind=args[i+1];
+        if(i>=0&&['commit','tree'].includes(kind)){
+          if(mode==='wrong length')return result.subarray(0,result.length-1);
+          if(mode==='wrong commit bytes'&&kind==='commit'||['wrong tree bytes','changed child'].includes(mode)&&kind==='tree'){
+            const changed=Buffer.from(result);changed[mode==='changed child'?changed.length-1:0]^=1;return changed;
+          }
+        }
         return result;
       }
     });
-    await assert.rejects(a.resolvePath(id, 'nested/input.json'), /denied|acquisition failed|Wrong immutable|Malformed immutable/);
+    await assert.rejects(a.resolvePath(id,'nested/input.json'),/fetch failed|Unexpected private origin|Wrong immutable/);
     f.assertIsolated();
-    if (['denied commit', 'wrong commit'].includes(mode)) assert.equal(f.calls.fetches.length, 0);
   } finally { f.close(); }
 });
 
@@ -518,7 +507,7 @@ test('cold origin metadata rejects blob-valued origins, nonordinary members and 
   const f = originFixture(); try {
     const id = f.commit({'input.json': 'scientific leaf'}), blob = f.git(f.origin, ['rev-parse', id + ':input.json']).toString().trim();
     const a = f.acquisition();
-    await assert.rejects(a.resolvePath(blob, 'input.json')); assert.equal(f.calls.fetches.length, 0);
+    await assert.rejects(a.resolvePath(blob, 'input.json')); assert.equal(f.calls.fetches.length, 1);
     for (const name of ['../input.json', '/input.json', 'a//b', 'a\\b']) await assert.rejects(a.resolvePath(id, name), /Unsafe/);
     await assert.rejects(a.resolvePath(id, 'missing.json'), /Missing or nonordinary/);
     const tree = f.git(f.origin, ['mktree'], `120000 blob ${blob}\tlink\n`).toString().trim();
@@ -552,7 +541,6 @@ test('cold routing body acquisition uses the private original descriptor without
     const row = f.maps.get(id).tree[0], pin = {commit: id, path: row.path, mode: row.mode, git_blob_oid: row.sha};
     const before = f.git(f.destination, ['cat-file', '--batch-all-objects', '--batch-check=%(objectname)']).toString().trim().split('\n');
     const a = createRoutingMetadataAcquisition({repo: f.destination, baseline: f.baseline, token: '',
-      loadCommit: async id => ({sha: id, tree: {sha: f.git(f.origin, ['rev-parse', id + '^{tree}']).toString().trim()}}),
       loadTree: async (root, recursive) => ({sha: root, truncated: false,
         tree: f.git(f.origin, ['ls-tree', '-l', '-z', ...(recursive ? ['-r'] : []), root]).toString().split('\0').filter(Boolean).map(line => {
           const [, mode, type, sha, size, name] = line.match(/^(\d+) (\w+) ([a-f0-9]+)\s+(\d+|-)\t(.+)$/s);
@@ -610,7 +598,7 @@ test('cold immutable reader authenticates absent original paths without importin
   // Public inventory is observation, never authority for an absent origin.
   const forged=new ImmutableReader(f.remote,current);forged.inventory.set(original+':'+name,{...pin});
   assert.equal(forged.pinnedVersion(pin),current);
-  await assert.rejects(forged.acquirePinned(pin,{...options,loadCommit:async()=>{throw Error('metadata unavailable');}}),/metadata unavailable/);
+  await assert.rejects(forged.acquirePinned(pin,{...options,execute:()=>{throw Error('metadata unavailable');}}),/acquisition failed/);
   assert.equal(forged.pinnedVersion(pin),current);
   for(const changed of [{mode:'100755'},{git_blob_oid:'f'.repeat(40)},{bytes:pin.bytes+1},{sha256:'f'.repeat(64)}]){
    const bad=new ImmutableReader(f.remote,current);
@@ -656,7 +644,7 @@ test('warm exact current aliases need no original metadata or transport',async()
   f.git(f.destination,['hash-object','-w','--stdin'],raw);
   const reader=new ImmutableReader(f.destination,f.baseline),pin={commit:'f'.repeat(40),path:name,mode:row.mode,git_blob_oid:row.sha,bytes:row.size,sha256:digest(raw)};
   const unavailable=()=>{throw Error('Warm aliases must remain offline');};
-  await reader.acquirePinned(pin,{loadCommit:unavailable,loadTree:unavailable,execute:unavailable});
+  await reader.acquirePinned(pin,{execute:unavailable});
   assert.equal(reader.pinnedVersion(pin),f.baseline);
   assert.deepEqual(reader.read(name,{version:reader.pinnedVersion(pin),expected:pin.sha256}),raw);
  }finally{f.close();}
@@ -676,7 +664,7 @@ test('historical code path groups authenticate one private origin session, never
   const options={...f.loaders,execute:(command,args,options)=>{
    assert.equal(options.env.GIT_NO_LAZY_FETCH,'1');assert.equal(options.env.GIT_NO_REPLACE_OBJECTS,'1');
    if(args.includes('init'))f.calls.stores.push(args[args.indexOf('-C')+1]);
-   if(args.includes('fetch')){if(!args.includes('--filter=tree:0'))blobBatches++;args=args.map(x=>x==='https://github.com/ChengshuLi/WorldAtlas.git'?'file://'+f.origin:x);}
+   if(args.includes('fetch')){if(!args.includes('--filter=tree:0'))blobBatches++;else(args.includes('--depth=1')?f.calls.commits:f.calls.trees).push(options.input.trim());args=args.map(x=>x==='https://github.com/ChengshuLi/WorldAtlas.git'?'file://'+f.origin:x);}
    return execFileSync(command,args,options);
   }};
   const reader=new ImmutableReader(f.remote,current);
@@ -686,10 +674,10 @@ test('historical code path groups authenticate one private origin session, never
   for(const p of pins){assert.equal(reader.pinnedVersion(p),original);assert.deepEqual(reader.read(p.path,{version:original,expected:p.sha256}),Buffer.from(bodies[p.path]));}
   assert.throws(()=>f.git(f.remote,['--no-lazy-fetch','cat-file','-e',original+'^{commit}']));
   assert(!fs.existsSync(path.join(f.remote,'shallow')));for(const dir of f.calls.stores)assert(!fs.existsSync(dir));
-  const before=f.calls.commits.length;await reader.acquireOriginalPaths(pins,{...options,loadCommit:()=>{throw Error('warm original must not fetch');}});assert.equal(f.calls.commits.length,before);
+  const before=f.calls.commits.length;await reader.acquireOriginalPaths(pins,{...options,execute:()=>{throw Error('warm original must not fetch');}});assert.equal(f.calls.commits.length,before);
   // Even an exact current a.js is not proof that the original commit had it.
   const forged=new ImmutableReader(f.remote,current);forged.inventory.set(original+':'+pins[0].path,{...pins[0],mode:'100644',git_blob_oid:'a'.repeat(40)});
-  await assert.rejects(forged.acquireOriginalPaths([pins[0]],{...options,loadCommit:()=>{throw Error('origin unavailable');}}),/origin unavailable/);
+  await assert.rejects(forged.acquireOriginalPaths([pins[0]],{...options,execute:()=>{throw Error('origin unavailable');}}),/acquisition failed/);
   for(const change of [{bytes:pins[0].bytes+1},{sha256:'f'.repeat(64)},{path:'code/absent.js'}]){
    const bad=new ImmutableReader(f.remote,current);await assert.rejects(bad.acquireOriginalPaths([{...pins[0],...change}],options));
    assert.equal(bad.pinnedVersion(pins[0]),current,'Failed acquisition must not install private origin proof');
@@ -700,9 +688,48 @@ test('historical code path groups authenticate one private origin session, never
   await assert.rejects(reader.acquireOriginalPaths(pins,options));
   assert.throws(()=>reader.read(pins[0].path,{version:original,expected:pins[0].sha256}));
   assert.deepEqual(f.inventory(),inventory,'A now-known missing original tree cannot hydrate or use cached/current metadata');
-  importTrees(original);await reader.acquireOriginalPaths(pins,{...options,loadCommit:()=>{throw Error('known origin must not fetch');}});
+  importTrees(original);await reader.acquireOriginalPaths(pins,{...options,execute:()=>{throw Error('known origin must not fetch');}});
   for(const p of pins)assert.deepEqual(reader.read(p.path,{version:original,expected:p.sha256}),Buffer.from(bodies[p.path]));
   await assert.rejects(reader.acquireOriginalPaths([{...pins[0],commit:current,path:'code/absent.js'}],options));
   assert.throws(()=>reader.read(pins[1].path,{version:current,expected:pins[1].sha256}),'Known wrong original bytes never fall back');
  }finally{f.close();if(lazy===undefined)delete process.env.GIT_NO_LAZY_FETCH;else process.env.GIT_NO_LAZY_FETCH=lazy;}
+});
+
+
+test('cold reader reuses native metadata across actual invocation readers, not bodies or transports',async()=>{
+ const f=originFixture();try{
+  const names=['a','b','c','d','e'],bodies=Object.fromEntries(names.map(n=>['code/'+n+'.js','original '+n+'\n']));
+  const original=f.commit(bodies),current=f.commit(Object.fromEntries(names.map(n=>['code/'+n+'.js','current '+n+'\n'])));
+  const pins=f.maps.get(original).tree.map(row=>({commit:original,path:row.path,mode:row.mode,git_blob_oid:row.sha,bytes:row.size,sha256:digest(bodies[row.path])}));
+  for(const id of [current,f.git(f.origin,['rev-parse',current+'^{tree}']).toString().trim(),f.git(f.origin,['rev-parse',current+':code']).toString().trim()]){
+   const type=f.git(f.origin,['cat-file','-t',id]).toString().trim();f.git(f.remote,['hash-object','-w','-t',type,'--stdin'],f.git(f.origin,['cat-file',type,id]));
+  }
+  const metadata=[],blobs=[],invocation=Object.freeze({});
+  const execute=(command,args,options)=>{
+   assert.equal(options.env.GIT_NO_LAZY_FETCH,'1');assert.equal(options.env.GIT_NO_REPLACE_OBJECTS,'1');
+   if(args.includes('fetch')){(args.includes('--filter=tree:0')?metadata:blobs).push(options.input.trim());
+    args=args.map(x=>x==='https://github.com/ChengshuLi/WorldAtlas.git'?'file://'+f.origin:x);}
+   return execFileSync(command,args,options);
+  };
+  const a=new ImmutableReader(f.remote,current,{invocation}),b=new ImmutableReader(f.remote,current,{invocation});
+  await a.acquirePinned(pins[0],{execute});await a.acquirePinned(pins[1],{execute});await b.acquirePinned(pins[2],{execute});
+  await b.acquireOriginalPaths([{commit:original,path:pins[3].path,bytes:pins[3].bytes,sha256:pins[3].sha256}],{execute});
+  assert.equal(metadata.length,3,'One genuine commit, root tree and shared code tree for the entire invocation');
+  assert.equal(new Set(metadata).size,3);assert.equal(blobs.length,4,'Each newly consumed exact body is still acquired');
+  for(const [reader,group]of [[a,pins.slice(0,2)],[b,pins.slice(2,4)]])for(const p of group){
+   assert.deepEqual(reader.read(p.path,{version:reader.pinnedVersion(p),expected:p.sha256}),Buffer.from(bodies[p.path]));
+   assert.equal(reader.inventory.get(original+':'+p.path).whole_body_consumed,true);
+  }
+  const foreign=new ImmutableReader(f.remote,current,{invocation});
+  await assert.rejects(foreign.acquirePinned(pins[4],{execute:(...args)=>{if(args[1].includes('fetch'))throw Error('distinct transport unavailable');return execute(...args);}}),/Immutable origin object fetch failed/);
+  assert.equal(foreign.pinnedVersion(pins[4]),current,'A different transport cannot inherit private origin admission');
+  const separate=new ImmutableReader(f.remote,current);await separate.acquirePinned(pins[4],{execute});
+  assert.equal(metadata.length,6,'A separate invocation authenticates its own three origin objects');
+  assert.throws(()=>f.git(f.remote,['--no-lazy-fetch','cat-file','-e',original+'^{commit}']));
+  for(const changed of [{mode:'100755'},{git_blob_oid:'f'.repeat(40)},{bytes:pins[4].bytes+1},{sha256:'f'.repeat(64)}])
+   await assert.rejects(new ImmutableReader(f.remote,current,{invocation}).acquirePinned({...pins[4],...changed},{execute}));
+  f.git(f.remote,['hash-object','-w','-t','commit','--stdin'],f.git(f.origin,['cat-file','commit',original]));
+  const before=f.inventory();await assert.rejects(b.acquirePinned(pins[4],{execute}));assert.deepEqual(f.inventory(),before);
+  assert.throws(()=>a.read(pins[0].path,{version:a.pinnedVersion(pins[0]),expected:pins[0].sha256}),'Newly local incomplete origin overrides shared private proof');
+ }finally{f.close();}
 });

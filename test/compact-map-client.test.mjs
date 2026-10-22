@@ -467,3 +467,23 @@ test('actual additive map requests its content base release on every compact pag
  assert.deepEqual(calls.map(row=>row.limit),[4096,4096,400]);
  assert.ok(calls.every(row=>row.release===base.id&&row.release!==effective.id));
 }));
+
+
+test('normal geography loading carries one canonical owner replica and never revives source labels',async()=>withLoader(async loader=>{
+ const {resolveAttributes}=await import('../src/attributes.js');
+ const replica=JSON.parse(fs.readFileSync(new URL('../data/current-owner-labels.json',import.meta.url),'utf8'));
+ const units=['continent','subcontinent','region','area','province'].map((level,i)=>({id:level,name:level,level,parent_id:i?['continent','subcontinent','region','area'][i-1]:null}));
+ const feature={id:'location:owner-carrier',properties:{id:'location:owner-carrier',name:'Owner carrier',parent_id:'province',reference_owner:'Wrong source name',metadata:{reference_owner_id:'owner:Q34754',reference_polity:'Somalia',reference_polity_status:'reference'}}};
+ let body={units,features:[feature],ownerLabels:replica,contentCapabilities:{}};
+ global.fetch=async url=>{assert.equal(url,'./atlas-geography.json');return Response.json(body);};
+ const loaded=await loader.loadGeography();
+ assert.equal(loaded.ownerLabels.size,replica.owners.length);
+ assert.equal(loaded.ownerLabels.get('owner:Q1045').name,'Somalia');
+ assert.equal(resolveAttributes(loaded.features,2026,{ownerLabels:loaded.ownerLabels}).get(feature.id).owner,'Somaliland');
+ assert.deepEqual(loaded.features[0].properties,feature.properties,'Raw source provenance is not rewritten by display resolution');
+ body={...body,ownerLabels:{...replica,owners:[...replica.owners,replica.owners[0]]}};
+ await assert.rejects(loader.loadGeography(),/Invalid canonical owner-label snapshot/);
+ delete body.ownerLabels;
+ const legacy=await loader.loadGeography(),unlabelled=resolveAttributes(legacy.features,2026,{ownerLabels:legacy.ownerLabels}).get(feature.id);
+ assert.equal(legacy.ownerLabels.size,0);assert.equal(unlabelled.owner,null);assert.equal(unlabelled.category_ids.owner,'owner:Q34754');
+}));

@@ -796,8 +796,6 @@ test('actual cold entry acquires a detached physical-program origin before prese
   assert.throws(()=>loadSelection(new ImmutableReader(f.repo,current)),/Source-target whole identity differs/);
   const actual=ImmutableReader.prototype.acquirePinned,calls=[];
   t.mock.method(ImmutableReader.prototype,'acquirePinned',async function(p){calls.push({reader:this,pin:p});return actual.call(this,p,{
-   loadCommit:async id=>({sha:id,tree:{sha:execFileSync('git',['-C',remote,'rev-parse',id+'^{tree}']).toString().trim()}}),
-   loadTree:async id=>({sha:id,truncated:false,tree:execFileSync('git',['-C',remote,'ls-tree','-z',id]).toString().split('\0').filter(Boolean).map(line=>{const [,mode,type,sha,name]=line.match(/^(\d+) (\w+) ([a-f0-9]+)\t(.+)$/s);return {mode,type,sha,path:name};})}),
    execute:(command,args,options)=>execFileSync(command,args.map(arg=>arg==='https://github.com/ChengshuLi/WorldAtlas.git'?'file://'+remote:arg),options)
   });});
   await assert.rejects(inspectSelectedAcquired(f.repo,current,current),/Unsupported source-target native lattice/);
@@ -868,11 +866,9 @@ test('actual cold administrative read preserves issued selector and consumed-map
   const mod=await import('file://'+path.join(f.repo,'scripts/check-effective-geographic-regression.mjs'));
   const original=mod.ImmutableReader.prototype.acquirePinned,calls=[];
   t.mock.method(mod.ImmutableReader.prototype,'acquirePinned',async function(p){calls.push({reader:this,pin:p});return original.call(this,p,{
-   loadCommit:async id=>{if(variant==='metadata-unavailable')throw Error('fixture original metadata unavailable');return {sha:id,tree:{sha:execFileSync('git',['-C',remote,'rev-parse',id+'^{tree}']).toString().trim()}};},
-   loadTree:async id=>({sha:id,truncated:false,tree:execFileSync('git',['-C',remote,'ls-tree','-z',id]).toString().split('\0').filter(Boolean).map(line=>{const [,mode,type,sha,name]=line.match(/^(\d+) (\w+) ([a-f0-9]+)\t(.+)$/s);return {mode,type,sha,path:name};})}),
-   execute:(command,args,options)=>execFileSync(command,args.map(arg=>arg==='https://github.com/ChengshuLi/WorldAtlas.git'?'file://'+remote:arg),options)
+   execute:(command,args,options)=>{if(variant==='metadata-unavailable'&&args.includes('fetch'))throw Error('fixture original metadata unavailable');return execFileSync(command,args.map(arg=>arg==='https://github.com/ChengshuLi/WorldAtlas.git'?'file://'+remote:arg),options); }
   });});
-  const expected=variant==='exact'?/Require complete native proof roster/:['duplicate-map','missing-map','map-path'].includes(variant)?/Missing\/duplicate administrative consumed source map/:['map-hash','map-bytes'].includes(variant)?/Administrative consumed source map identity differs/:variant==='metadata-unavailable'?/fixture original metadata unavailable/:variant==='known-selector-missing-tree'?/not a tree object|unable to read tree|bad tree object/:['map-oid','map-mode'].includes(variant)?/differs from original path|differs from tree|descriptor differs|blob identity differs/:/Source-target whole identity differs/;
+  const expected=variant==='exact'?/Require complete native proof roster/:['duplicate-map','missing-map','map-path'].includes(variant)?/Missing\/duplicate administrative consumed source map/:['map-hash','map-bytes'].includes(variant)?/Administrative consumed source map identity differs/:variant==='metadata-unavailable'?/Immutable origin object fetch failed/:variant==='known-selector-missing-tree'?/not a tree object|unable to read tree|bad tree object/:['map-oid','map-mode'].includes(variant)?/differs from original path|differs from tree|descriptor differs|blob identity differs/:/Source-target whole identity differs/;
   await assert.rejects(mod.inspectSelectedAcquired(f.repo,current,current),expected);
   assert.deepEqual(calls.slice(0,2).map(r=>r.pin),['metadata-unavailable','known-selector-missing-tree'].includes(variant)?[oldPin]:[oldPin,newPin]);
   if(variant==='exact'){
@@ -900,8 +896,7 @@ test('real current-rebind custody consumes privately authenticated historical co
   f.write('rebind/request.json',{unrelated:true});const current=f.commit();
   const remote=path.join(f.repo,'remote.git');execFileSync('git',['clone','--bare','--no-hardlinks',f.repo,remote],{stdio:'pipe'});for(const key of ['uploadpack.allowFilter','uploadpack.allowAnySHA1InWant'])execFileSync('git',['-C',remote,'config',key,'true']);
   for(const oid of [execution,products,issued])fs.unlinkSync(path.join(f.repo,'.git/objects',oid.slice(0,2),oid.slice(2)));
-  const options={loadCommit:async id=>({sha:id,tree:{sha:execFileSync('git',['-C',remote,'rev-parse',id+'^{tree}']).toString().trim()}}),
-   loadTree:async id=>({sha:id,truncated:false,tree:execFileSync('git',['-C',remote,'ls-tree','-z',id]).toString().split('\0').filter(Boolean).map(line=>{const [,mode,type,sha,name]=line.match(/^(\d+) (\w+) ([a-f0-9]+)\t(.+)$/s);return {mode,type,sha,path:name};})}),
+  const options={
    execute:(command,args,options)=>execFileSync(command,args.map(arg=>arg==='https://github.com/ChengshuLi/WorldAtlas.git'?'file://'+remote:arg),options)};
   const reader=new ImmutableReader(f.repo,current),snapshot=loadSelection(reader);
   const consume=()=>readCurrentRebindCustody(reader,certificate,{snapshot});

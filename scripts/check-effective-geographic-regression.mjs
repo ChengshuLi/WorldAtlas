@@ -27,6 +27,9 @@ const freezeJson=value=>{if(value&&typeof value==='object'){Object.values(value)
 const installedRuntimes=new Map();
 const selectedSnapshots=new WeakMap();
 const sourceApplications=new WeakMap();
+// Share only authenticated immutable metadata within this real invocation.
+// Declared pins and whole-body checks remain fresh on every consumption.
+const originAcquisitions=new WeakMap();
 // Reuse only a graph whose complete encoded/decoded body was authenticated by
 // the original selected-base acquisition. Ordinary alias bytes are still read.
 export function selectedBaseAssetAlias(snapshot,role,pin) {
@@ -103,7 +106,7 @@ export class ImmutableReader {
   }
   // Transport supplies exact bytes and private native origin proof, never a
   // scientific result. The evaluator subsequently performs its ordinary read.
-  async acquirePinned(pin,{loadTree,loadCommit,execute=execFileSync}={}) {
+  async acquirePinned(pin,{execute=execFileSync}={}) {
     demand(pin&&commit(pin.commit)&&safe(pin.path)&&['100644','100755'].includes(pin.mode)
       &&commit(pin.git_blob_oid)&&Number.isSafeInteger(pin.bytes)&&pin.bytes>=0&&hash(pin.sha256),
       'Incomplete immutable acquisition pin');
@@ -116,21 +119,32 @@ export class ImmutableReader {
     const expected=`${pin.mode} blob ${pin.git_blob_oid}\t${pin.path}\0`;
     let matching=false;try{matching=this.git('ls-tree','-z',known?pin.commit:this.version,'--',pin.path).toString()===expected;}catch{}
     if(known&&!matching)throw failure; // A known original never falls back.
-    const a=await this.#acquisition({loadTree,loadCommit,execute,
-      loadDescriptor:(_version,name)=>{demand(name===pin.path,'Foreign immutable acquisition path');return {type:'blob',mode:pin.mode,sha:pin.git_blob_oid,size:pin.bytes};}});
+    const session=await this.#acquisition({execute}),a=session.acquisition;
     const original=!known&&!matching;
     if(original)await a.resolvePath(pin.commit,pin.path);
     const selected=known||original?pin.commit:this.version;
+    session.declarations.set(selected+':'+pin.path,pin);
     const row=await a.descriptor(selected,pin.path,pin);a.acquire([row]);a.body(row);
     if(original)this.#originDescriptors.set(pin.commit+':'+pin.path,
       {commit:pin.commit,path:pin.path,mode:pin.mode,git_blob_oid:pin.git_blob_oid,bytes:pin.bytes});
   }
-  async #acquisition({loadTree,loadCommit,loadDescriptor,execute=execFileSync}={}) {
-    const {createAcquisition,githubTree,githubCommit}=await import('./geography-prefetch.mjs');
-    const gitExecPath=fs.realpathSync(execFileSync(this.gitExecutable,['--exec-path']).toString().trim());
-    return createAcquisition({repo:this.repo,loadTree:loadTree??githubTree,loadCommit:loadCommit??githubCommit,loadDescriptor,
+  async #acquisition({execute=execFileSync}={}) {
+    const {createAcquisition}=await import('./geography-prefetch.mjs');
+    const repo=fs.realpathSync(this.repo),gitExecPath=fs.realpathSync(execFileSync(this.gitExecutable,['--exec-path']).toString().trim()),
+      token=process.env.GH_TOKEN;
+    let sessions=originAcquisitions.get(this.invocation);
+    if(!sessions)originAcquisitions.set(this.invocation,sessions=[]);
+    const previous=sessions.find(s=>s.repo===repo&&s.gitExecutable===this.gitExecutable
+      &&s.gitExecPath===gitExecPath&&s.execute===execute&&s.token===token);
+    if(previous)return previous;
+    const declarations=new Map();
+    const acquisition=createAcquisition({repo,token,
+      loadDescriptor:(version,name)=>{const p=declarations.get(version+':'+name);
+        demand(p,'Foreign immutable acquisition path');return {type:'blob',mode:p.mode,sha:p.git_blob_oid,size:p.bytes};},
       execute:(command,args,options)=>{demand(command==='git','Foreign immutable acquisition executable');
         return execute(this.gitExecutable,args,{...options,env:{...options.env,GIT_EXEC_PATH:gitExecPath}});}});
+    const session={repo,gitExecutable:this.gitExecutable,gitExecPath,execute,token,declarations,acquisition};
+    sessions.push(session);return session;
   }
   // Historical executed-code rows issue path/bytes/SHA, not a current alias.
   // Authenticate the complete actual path group in one private origin session;
@@ -149,13 +163,11 @@ export class ImmutableReader {
       }else missing.push(p);
     }
     if(!missing.length)return;
-    const proofs=new Map(),a=await this.#acquisition({...options,
-      loadDescriptor:(version,name)=>{const p=proofs.get(version+':'+name);demand(p,'Foreign original acquisition path');
-        return {type:'blob',mode:p.mode,sha:p.git_blob_oid,size:p.bytes};}});
+    const proofs=new Map(),session=await this.#acquisition(options),a=session.acquisition;
     const rows=[];
     for(const p of missing){
       const origin=await a.resolvePath(p.commit,p.path),q={...p,mode:origin.mode,git_blob_oid:origin.git_blob_oid};
-      proofs.set(p.commit+':'+p.path,q);rows.push(await a.descriptor(p.commit,p.path,q));
+      proofs.set(p.commit+':'+p.path,q);session.declarations.set(p.commit+':'+p.path,q);rows.push(await a.descriptor(p.commit,p.path,q));
     }
     a.acquire(rows);for(const row of rows)a.body(row);
     for(const q of proofs.values())this.#originDescriptors.set(q.commit+':'+q.path,
