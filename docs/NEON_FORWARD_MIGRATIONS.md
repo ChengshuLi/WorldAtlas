@@ -202,6 +202,15 @@ window is reauthenticated between releases, and expiry checked before each write
 This uses the existing owner-maintenance concurrency and server-side Neon binding,
 not the historical fourteen-table copy baseline or the cancelled import window.
 
+The `geography-production` job has a 120-minute execution budget, covering
+checkout, all four ordered releases, verification, the public build and receipt
+retention. The former 30-minute whole-job limit interrupted healthy publication
+before all releases finished. Other modes retain their 30-minute limit. This
+budget matches the maximum publication-window duration; it does not renew that
+window or permit writes after its actual expiry. A timed-out or expired operation
+still requires durable-state reconciliation and a fresh exact-head window before
+resuming the original immutable ingestion IDs. Stuck jobs remain bounded.
+
 The exact published v6 predecessor and all later existing release pins must match.
 The same immutable ingestion IDs and service transactions preserve prior entities,
 prior release memberships, unrelated content and access. Cát Hải's new parent is
