@@ -41,6 +41,8 @@ function reader(read) {
   };
 }
 
+export {reader as referenceMetadataReader};
+
 function unitMap(rows) {
   need(Array.isArray(rows) && rows.length > 0 && rows.every(row => typeof row.id === 'string'),
     'Complete reference hierarchy required');

@@ -597,7 +597,8 @@ test('finalization refuses a new identity at an accepted package path', async ()
 
 // Actual Git/plain-Node fixture for metadata assembly. The source interpretation
 // and native construction controls live in source-member-native-delivery.test;
-// this fixture exercises the consumed-role boundary without replaying science.
+// this method-free fixture exercises the consumed-role boundary without claiming a native bank.
+// The actual native CLI/bank contract is exercised by delivery-finalize-config.test.mjs.
 function modernFinalizationFixture(t, {completed = false, mixed = false, membership = true, cohort = false, external = false, dated = false, territorial = false, territorialParts = false, provider = false, seam = false, negativeSources = false} = {}) {
   const root = directory(t), owned = 'coordination/engineering/modern-finalize/';
   const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
@@ -624,7 +625,7 @@ function modernFinalizationFixture(t, {completed = false, mixed = false, members
   save(ownerPath, gzipSync(ownerRaw)); commitAll();
   const owner = {...pin(ownerPath), encoding: 'gzip', decoded_bytes: ownerRaw.length, decoded_sha256: digest(ownerRaw)};
   save(inherited + 'base-manifest.json', {geographic_release: baseReference.id, footprints_sha256: baseReference.footprints_sha256,
-    hierarchy_sha256: baseReference.hierarchy_sha256, size: 8, coordinateBits: 3, method: 'native-linear-evenodd-first-owner-v1',
+    hierarchy_sha256: baseReference.hierarchy_sha256, size: 8, coordinateBits: 3,
     native_latitudes: pin(roles.native_latitudes), original_assets: {bounds: {sha256: owner.sha256}}}); commitAll();
   const baseManifest = pin(inherited + 'base-manifest.json');
   // Deliberately unsorted nested selector keys and accepted declaration ordering.

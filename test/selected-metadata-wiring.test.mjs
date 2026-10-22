@@ -252,8 +252,15 @@ async function aliasPreparationFixture(t){
  await refresh();return {...f,config,receipt,features,refresh};
 }
 
-test('same-M preparation binds a complete alias receipt without minting a release or losing the prior reparent',async t=>{
+for(const compressed of [false,true]) test('same-M preparation binds a complete alias receipt without minting a release or losing the prior reparent: '+(compressed?'gzip':'plain'),async t=>{
  const f=await aliasPreparationFixture(t),release=Buffer.from(f.reader.read(f.pins.get('data/geographic-releases/releases-v2.json.gz')));
+ if(compressed){
+  const raw=f.reader.read(f.config.receipts[1]),pin=await f.put('inputs/alias-receipt.json.gz',gzipSync(raw));
+  f.config.receipts[1]={...pin,encoding:'gzip',decoded_bytes:raw.length,decoded_sha256:sha(raw)};
+  for(const change of [{encoding:'unknown'},{decoded_bytes:raw.length-1},{decoded_sha256:'0'.repeat(64)},{decoded_bytes:undefined}]){
+   const config=structuredClone(f.config);Object.assign(config.receipts[1],change);assert.throws(()=>prepareReferenceMetadata(config,f.reader));
+  }
+ }
  const prepared=prepareReferenceMetadata(f.config,f.reader),projection=JSON.parse(prepared.products['reference-metadata.json']);
  assert.deepEqual(projection.reference,f.current);assert.deepEqual(projection.native_reference,f.native);
  assert.deepEqual(projection.receipts,f.config.receipts);assert.equal(projection.location_changes[0].after_properties.parent_id,'Q');

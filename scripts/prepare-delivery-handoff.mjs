@@ -15,7 +15,7 @@ import {acquireFinalizationCheckpoint, finalizationCheckpointBytes, admitCanonic
 import {releaseAcceptedCheckpoint, ACCEPTED_CHECKPOINT_LOCATOR} from './accepted-selected-checkpoint.mjs';
 import {repairComponentKey, compareRepairComponents} from '../src/native-grid.js';
 import {scientificNativeSelection,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
-import {prepareReferenceMetadataProjection,validateReferenceMetadataProjection} from './selected-reference-metadata.mjs';
+import {prepareReferenceMetadataProjection,validateReferenceMetadataProjection,referenceMetadataReader} from './selected-reference-metadata.mjs';
 import {isReferenceAliasReceipt} from '../src/reference-metadata.js';
 import {validatePackageInputs, selectedCumulativePackageRoles, admitSelectedPackageDeclarations} from './package-inputs.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
@@ -982,7 +982,8 @@ export function prepareReferenceMetadata(config, reader) {
   }
   const projection = prepareReferenceMetadataProjection({selection, manifest, owners: JSON.parse(ownersRaw), reference,
     hierarchy: config.hierarchy, receipts: config.receipts, source_updates: config.source_updates, read});
-  need(config.receipts.every(pin=>migrationPins.has(pin.sha256) || isReferenceAliasReceipt(json(pin, 'existing reference correction receipt'))),
+  const receiptJSON = referenceMetadataReader(pin => read(pin, 'existing reference correction receipt'));
+  need(config.receipts.every(pin=>migrationPins.has(pin.sha256) || isReferenceAliasReceipt(receiptJSON(pin))),
     'Current reference release does not bind every applied metadata receipt');
   return {products: {'reference-metadata.json': jsonBytes(projection)},
     input_inventory: [...inventory.values()].map(({pin, roles}) => ({...pin, roles, whole_body_consumed: true}))};
