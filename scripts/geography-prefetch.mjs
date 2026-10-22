@@ -220,7 +220,7 @@ export function createAcquisition({repo, loadTree, loadDescriptor, loadCommit, e
     acquire([row]);
     return JSON.parse(body(row));
   }
-  return {tree, descriptor, pin, acquire, json, resolvePath, stats};
+  return {tree, descriptor, pin, acquire, body, json, resolvePath, stats};
 }
 
 export async function prefetchSelectedGeography(acquisition, baseline, candidate) {
