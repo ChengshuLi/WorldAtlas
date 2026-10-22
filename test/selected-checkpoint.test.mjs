@@ -1,3 +1,4 @@
+import {omitFixtureObjects} from './helpers/git-object-fixture.mjs';
 import {nativeLiteral} from './helpers/native-literal.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -472,7 +473,7 @@ test('scalar availability rechecks a remote-only original after explicit acquisi
 
 for(const populated of [true,false])test('scalar actual body acquisition remains '+(populated?'authenticated':'a failure, never an alias fallback'),async t=>{
  const f=await trustedFixture(t),p=f.pin('data/source.json',f.selected),expected=f.git('show',p.commit+':'+p.path),s=scalarPromisor(f,{populated});
- fs.unlinkSync(path.join(f.root,'.git','objects',p.git_blob_oid.slice(0,2),p.git_blob_oid.slice(2)));
+ omitFixtureObjects(t,f.root,[p.git_blob_oid]);
  if(populated){assert.deepEqual(s.readSource(p),expected);assert.throws(()=>s.readSource({...p,sha256:'0'.repeat(64)}),/Whole immutable input differs/);}
  else assert.throws(()=>s.readSource(p),/Command failed|Require whole ordinary/);
  assert.match(s.tracing(),remoteAttempt);
@@ -482,7 +483,7 @@ test('complete checkpoint qualification uses exact rebind aliases without implic
  const f=await trustedFixture(t),certificate=f.ledger.current_rebind,body=JSON.parse(f.git('show',certificate.commit+':'+certificate.path));
  const commits=new Set([certificate.commit,...['request','facts','publication','operating','result'].map(k=>body[k].commit)]);
  const s=scalarPromisor(f);
- for(const commit of commits)fs.unlinkSync(path.join(f.root,'.git','objects',commit.slice(0,2),commit.slice(2)));
+ omitFixtureObjects(t,f.root,[...commits]);
  const result=(await f.api.qualifyCheckpoint({reader:s.reader()}));
  assert.equal(result.available,true);assert.equal(result.state.ledger.rows.length,2);
  assert.deepEqual(nativeLiteral(f.api.projectNativeRows({state:result.state,rows:[1]}).rows),[{y:1,runs:[[0,1,2]]}]);

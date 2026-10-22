@@ -1,3 +1,4 @@
+import {omitFixtureObjects} from './helpers/git-object-fixture.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -792,7 +793,7 @@ test('actual cold entry acquires a detached physical-program origin before prese
   f.write('physical.py',Buffer.from('# newer incompatible programme\n'));const current=f.commit();
   const remote=path.join(f.repo,'remote.git');execFileSync('git',['clone','--bare','--no-hardlinks',f.repo,remote],{stdio:'pipe'});
   execFileSync('git',['-C',remote,'config','uploadpack.allowFilter','true']);execFileSync('git',['-C',remote,'config','uploadpack.allowAnySHA1InWant','true']);
-  for(const oid of [original,program.git_blob_oid])fs.unlinkSync(path.join(f.repo,'.git/objects',oid.slice(0,2),oid.slice(2)));
+  omitFixtureObjects(t,f.repo,[original,program.git_blob_oid]);
   assert.throws(()=>loadSelection(new ImmutableReader(f.repo,current)),/Source-target whole identity differs/);
   const actual=ImmutableReader.prototype.acquirePinned,calls=[];
   t.mock.method(ImmutableReader.prototype,'acquirePinned',async function(p){calls.push({reader:this,pin:p});return actual.call(this,p,{
@@ -860,23 +861,7 @@ test('actual cold administrative read preserves issued selector and consumed-map
   f.write('data/ownership-selection.json',{...baseSelection,additive_release:{path:'sidecar.json',bytes:sidecar.length,sha256:sha(sidecar)}});const current=f.commit();
   const remote=path.join(f.repo,'remote.git');execFileSync('git',['clone','--bare','--no-hardlinks',f.repo,remote],{stdio:'pipe'});for(const key of ['uploadpack.allowFilter','uploadpack.allowAnySHA1InWant'])execFileSync('git',['-C',remote,'config',key,'true']);
   const removed=[...(variant==='known-selector-missing-tree'?[f.git('rev-parse',old+'^{tree}')]:[old]),newer,mapOrigin,oldPin.git_blob_oid,newPin.git_blob_oid];
-  // As in the finalizer's cold-store fixture, remove exact objects independently
-  // of Git's loose/packed storage choice. The complete remote remains intact.
-  const objects=path.join(f.repo,'.git/objects');
-  if(storage==='packed'){
-   f.git('repack','-ad');
-   assert(fs.readdirSync(path.join(objects,'pack')).some(name=>name.endsWith('.pack')));
-   assert(removed.every(oid=>!fs.existsSync(path.join(objects,oid.slice(0,2),oid.slice(2)))));
-  }
-  const all=f.git('cat-file','--batch-all-objects','--batch-check=%(objectname)').split('\n');
-  assert.equal(new Set(removed).size,removed.length);assert(removed.every(oid=>all.includes(oid)));
-  const retained=all.filter(oid=>!removed.includes(oid)),env={...process.env,GIT_NO_LAZY_FETCH:'1'};
-  const pack=execFileSync('git',['-C',f.repo,'pack-objects','--stdout'],{env,input:retained.join('\n')+'\n',maxBuffer:16*1024*1024});
-  fs.renameSync(objects,path.join(f.repo,'complete-fixture-objects'));
-  fs.mkdirSync(path.join(objects,'pack'),{recursive:true});fs.mkdirSync(path.join(objects,'info'));
-  execFileSync('git',['-C',f.repo,'index-pack','--stdin'],{env,input:pack,stdio:['pipe','pipe','pipe']});
-  assert.deepEqual(f.git('cat-file','--batch-all-objects','--batch-check=%(objectname)').split('\n').sort(),retained.sort());
-  for(const oid of removed)assert.throws(()=>f.git('--no-lazy-fetch','cat-file','-e',oid));
+  omitFixtureObjects(t,f.repo,removed,{packed:storage==='packed'});
   // Use the fixture's actual executing module, whose committed policy catalogue
   // is authenticated by the same real module-body binding as production.
   const mod=await import('file://'+path.join(f.repo,'scripts/check-effective-geographic-regression.mjs'));
@@ -896,7 +881,7 @@ test('actual cold administrative read preserves issued selector and consumed-map
  }finally{f.cleanup();}
 });
 
-test('real current-rebind custody consumes privately authenticated historical code and retains its execution refusal',async()=>{
+test('real current-rebind custody consumes privately authenticated historical code and retains its execution refusal',async t=>{
  const f=fixture();try{
   const baseline=f.select([[[0,2,1]],[[1,3,2]],[],[]]);
   const pin=(name,version)=>{const raw=execFileSync('git',['-C',f.repo,'show',version+':'+name]);const [mode,,git_blob_oid]=f.git('ls-tree',version,'--',name).split(/[ \t]/);return {commit:version,path:name,mode,git_blob_oid,bytes:raw.length,sha256:sha(raw)};};
@@ -911,7 +896,7 @@ test('real current-rebind custody consumes privately authenticated historical co
   for(const p of code)f.write(p.path,Buffer.from('different current code\n'));
   f.write('rebind/request.json',{unrelated:true});const current=f.commit();
   const remote=path.join(f.repo,'remote.git');execFileSync('git',['clone','--bare','--no-hardlinks',f.repo,remote],{stdio:'pipe'});for(const key of ['uploadpack.allowFilter','uploadpack.allowAnySHA1InWant'])execFileSync('git',['-C',remote,'config',key,'true']);
-  for(const oid of [execution,products,issued])fs.unlinkSync(path.join(f.repo,'.git/objects',oid.slice(0,2),oid.slice(2)));
+  omitFixtureObjects(t,f.repo,[execution,products,issued]);
   const options={
    execute:(command,args,options)=>execFileSync(command,args.map(arg=>arg==='https://github.com/ChengshuLi/WorldAtlas.git'?'file://'+remote:arg),options)};
   const reader=new ImmutableReader(f.repo,current),snapshot=loadSelection(reader);

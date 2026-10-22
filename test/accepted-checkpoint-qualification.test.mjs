@@ -1,3 +1,4 @@
+import {omitFixtureObjects} from './helpers/git-object-fixture.mjs';
 import {checkpointTestAPI} from './helpers/native-literal.mjs';
 import {nativeLiteral} from './helpers/native-literal.mjs';
 import test, {after} from 'node:test';
@@ -157,14 +158,15 @@ test('default accepted fixture copies history but isolates bytes, private state 
   assert.equal(Number(f.git('rev-list','--count','HEAD')),12);
  }
  const original=first.pin('data/source.json',first.selected),relative=path.join('.git/objects',original.git_blob_oid.slice(0,2),original.git_blob_oid.slice(2));
- const a=fs.statSync(path.join(first.root,relative)),b=fs.statSync(path.join(second.root,relative));
- assert(a.dev!==b.dev||a.ino!==b.ino,'Copied Git objects must not be hard-linked');
+ const files=root=>fs.readdirSync(path.join(root,'.git/objects'),{recursive:true,withFileTypes:true}).filter(e=>e.isFile()).map(e=>path.relative(root,path.join(e.parentPath,e.name))).sort();
+ const physical=files(first.root);assert.deepEqual(physical,files(second.root));assert(physical.length>0);
+ for(const name of physical){const a=fs.statSync(path.join(first.root,name)),b=fs.statSync(path.join(second.root,name));assert(a.dev!==b.dev||a.ino!==b.ino,'Copied Git objects must not be hard-linked');}
  const admitted=await first.api.qualifyCheckpoint({reader:first.reader});assert.equal(admitted.available,true);
  assert.throws(()=>second.api.releaseCheckpoint(admitted.state),/foreign/);
  first.api.releaseCheckpoint(admitted.state);
  first.ledger.rows[0].target_id='mutated returned row';
  first.save('data/source.json',{changed:'committed mutation'});first.commit();
- fs.unlinkSync(path.join(first.root,relative));fs.writeFileSync(path.join(first.root,relative),'corrupted only in first copy');
+ omitFixtureObjects(t,first.root,[original.git_blob_oid]);fs.mkdirSync(path.dirname(path.join(first.root,relative)),{recursive:true});fs.writeFileSync(path.join(first.root,relative),'corrupted only in first copy');
  assert.deepEqual(second.ledger,originalLedger);assert.equal(second.git('rev-parse','HEAD').toString(),originalHead);
  assert.equal(second.pin('data/source.json',second.selected).sha256,original.sha256);
  fs.rmSync(first.root,{recursive:true,force:true});
@@ -1014,14 +1016,14 @@ for(const role of ['ledger','patch'])test('accepted private digest does not cach
 });
 
 
-test('accepted checkpoint catch-up acquires only its appended completed-authority operands',async t=>{
+for(const packed of [false,true])test('accepted checkpoint catch-up acquires only its appended completed-authority operands'+(packed?' (packed objects)':''),async t=>{
   const f=await acceptedProducts(t,{nativeAppend:true,actualProducer:true}),a=await acquire(f);
   const next=await appendNativeAuthority(f,{completedConstructor:true});
   const binding=JSON.parse(f.git('show',next.entry.source_authority.commit+':'+next.entry.source_authority.path));
   const layers=[[next.entry.rule_preimage,next.entry.source_authority],
     [next.entry.completed_constructor,binding.source_evidence,binding.native_patch]];
   const bodies=new Map(layers.flat().map(p=>[p.git_blob_oid,f.git('cat-file','blob',p.git_blob_oid)]));
-  for(const p of layers.flat())fs.unlinkSync(path.join(f.root,'.git/objects',p.git_blob_oid.slice(0,2),p.git_blob_oid.slice(2)));
+  omitFixtureObjects(t,f.root,layers.flat().map(p=>p.git_blob_oid),{packed});
   a.reader=currentReader(f,a,next.candidate);
   await assert.rejects(()=>qualify(f,a),/cat-file/,'Library callers remain read-only without acquisition');
   const calls=[];
@@ -1059,7 +1061,7 @@ test('accepted aggregate acquires complete inherited read groups without reopeni
       [binding.native_proof.publication,...binding.native_proof.assets])];
   const omitted=[...new Map(unused.filter(p=>!bodies.has(p.git_blob_oid)).map(p=>[p.git_blob_oid,p])).values()];
   assert(omitted.length>0);
-  for(const p of [...pins,...omitted])fs.unlinkSync(path.join(f.root,'.git/objects',p.git_blob_oid.slice(0,2),p.git_blob_oid.slice(2)));
+  omitFixtureObjects(t,f.root,[...pins,...omitted].map(p=>p.git_blob_oid));
   await assert.rejects(()=>qualify(f,a),/Invalid immutable blob size batch/,'No callback keeps the library read-only');
   const calls=[];
   a.reader=currentReader(f,a,f.trusted);
@@ -1077,7 +1079,7 @@ test('accepted aggregate acquires complete inherited read groups without reopeni
   assert.deepEqual(nativeLiteral(q.state.patch.rows),f.patch.rows);
   for(const p of omitted)assert.throws(()=>f.git('cat-file','-e',p.git_blob_oid),'Metadata-only reuse must not acquire historical proof products');
   f.api.releaseCheckpoint(q.state);
-  const binding=layers.at(-1)[0];fs.unlinkSync(path.join(f.root,'.git/objects',binding.git_blob_oid.slice(0,2),binding.git_blob_oid.slice(2)));
+  const binding=layers.at(-1)[0];omitFixtureObjects(t,f.root,[binding.git_blob_oid]);
   a.reader=currentReader(f,a,f.trusted);
   await assert.rejects(()=>f.api.qualifyAcceptedCheckpoint({reader:a.reader,acceptedHandle:a.handle,
     acquireAuthorityInputs:async()=>({available:true,complete:true})}),/Invalid immutable blob size batch/,'A successful callback return cannot replace missing bytes');
@@ -1110,8 +1112,7 @@ test('accepted aggregate reuses only completed native classification under its w
     await assert.rejects(()=>qualify(f,forged),/Accepted checkpoint changed the complete ledger\/registry\/patch\/manifest/,name);
     f.transport.releaseAcceptedCheckpoint(forged.handle);
   }
-  const p=completed.source_authority,object=path.join(f.root,'.git/objects',p.git_blob_oid.slice(0,2),p.git_blob_oid.slice(2));
-  fs.unlinkSync(object);
+  const p=completed.source_authority;omitFixtureObjects(t,f.root,[p.git_blob_oid]);
   const groups=[];
   const q=await f.api.qualifyAcceptedCheckpoint({reader:a.reader,acceptedHandle:a.handle,
     acquireAuthorityInputs:async(_reader,pins)=>{
@@ -1125,7 +1126,7 @@ test('accepted aggregate reuses only completed native classification under its w
   assert.throws(()=>f.git('cat-file','-e',p.git_blob_oid),'The completed original binding remains absent');
   for(const entry of pending){
     const pin=entry.source_authority,body=f.git('cat-file','blob',pin.git_blob_oid);
-    fs.unlinkSync(path.join(f.root,'.git/objects',pin.git_blob_oid.slice(0,2),pin.git_blob_oid.slice(2)));
+    omitFixtureObjects(t,f.root,[pin.git_blob_oid]);
     a.reader=currentReader(f,a,f.trusted);
     await assert.rejects(()=>qualify(f,a),/Invalid immutable blob size batch/,'Unclassified accepted bindings still require exact bytes');
     assert.equal(execFileSync('git',['-C',f.root,'hash-object','-w','--stdin'],{input:body,encoding:'utf8'}).trim(),pin.git_blob_oid);
@@ -1136,4 +1137,15 @@ test('accepted aggregate reuses only completed native classification under its w
     /cat-file|Invalid immutable blob size batch/,'A fresh append must still read completed authority custody');
   f.api.releaseCheckpoint(cold.state);
   f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+
+
+test('missing-object fixture refuses duplicate or absent targets before changing its store',async t=>{
+ const f=await trustedFixture(t),p=f.pin('data/source.json',f.selected);
+ const inventory=()=>f.git('cat-file','--batch-all-objects','--batch-check=%(objectname)').toString();
+ const before=inventory();
+ assert.throws(()=>omitFixtureObjects(t,f.root,[p.git_blob_oid,p.git_blob_oid]),/targets must be unique/);
+ assert.equal(inventory(),before);assert.doesNotThrow(()=>f.git('cat-file','-e',p.git_blob_oid));
+ assert.throws(()=>omitFixtureObjects(t,f.root,['0'.repeat(40)]),/Every omission target must exist first/);
+ assert.equal(inventory(),before);assert.doesNotThrow(()=>f.git('cat-file','-e',p.git_blob_oid));
 });
