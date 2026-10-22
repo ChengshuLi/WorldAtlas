@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {createAcquisition, prefetchSelectedGeography, githubTree} from '../scripts/geography-prefetch.mjs';
+import {createAcquisition, prefetchSelectedGeography, githubTree, githubCommit} from '../scripts/geography-prefetch.mjs';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {createRoutingMetadataAcquisition} from '../scripts/geography-routing-metadata.mjs';
 
@@ -198,6 +198,92 @@ test('GitHub metadata preserves a complete response and propagates malformed res
     globalThis.fetch = async () => new Response('unavailable', {status: 503});
     await assert.rejects(githubTree(value.sha), /metadata unavailable/);
   } finally { globalThis.fetch = originalFetch; }
+});
+
+test('GitHub metadata retries only one interrupted immutable GET, including body transport', async () => {
+  const originalFetch = globalThis.fetch, originalToken = process.env.GH_TOKEN;
+  process.env.GH_TOKEN = 'fixture-metadata-secret';
+  const id = 'a'.repeat(40), value = {sha: id, tree: {sha: 'b'.repeat(40)}};
+  const interrupted = () => new TypeError('fixture-metadata-secret', {cause: {code: 'UND_ERR_SOCKET'}});
+  try {
+    for (const [read, locator] of [[() => githubCommit(id), `commits/${id}`],
+      [() => githubTree(id, false), `trees/${id}`], [() => githubTree(id), `trees/${id}?recursive=1`]]) {
+      for (const bodyFailure of [false, true]) {
+        const requests = [];
+        globalThis.fetch = async (url, options) => {
+          requests.push({url, headers: {...options.headers}});
+          assert(options.signal instanceof AbortSignal);
+          if (requests.length === 1) {
+            if (bodyFailure) return {ok: true, json: async () => { throw interrupted(); }};
+            throw interrupted();
+          }
+          return new Response(JSON.stringify(value));
+        };
+        assert.deepEqual(await read(), value);
+        assert.equal(requests.length, 2);
+        assert.deepEqual(requests[1], requests[0], 'Retry must preserve the exact immutable GET and headers');
+        assert.equal(requests[0].url, `https://api.github.com/repos/ChengshuLi/WorldAtlas/git/${locator}`);
+        assert.equal(requests[0].headers.Authorization, 'Bearer fixture-metadata-secret');
+      }
+    }
+  } finally {
+    globalThis.fetch = originalFetch;
+    if (originalToken === undefined) delete process.env.GH_TOKEN; else process.env.GH_TOKEN = originalToken;
+  }
+});
+
+test('repeated metadata socket closure stops after two GETs with a safe exact locator', async () => {
+  const originalFetch = globalThis.fetch, id = 'a'.repeat(40);
+  try {
+    for (const [read, locator] of [[() => githubCommit(id), `commits/${id}`], [() => githubTree(id), `trees/${id}?recursive=1`]]) {
+      let requests = 0;
+      globalThis.fetch = async () => { requests++; throw new TypeError('private header fixture-secret', {cause: {code: 'UND_ERR_SOCKET'}}); };
+      await assert.rejects(read(), error => error.message === `Geography metadata transport unavailable (${locator}; UND_ERR_SOCKET)`
+        && !String(error.stack).includes('fixture-secret') && error.cause === undefined);
+      assert.equal(requests, 2, 'A second socket failure must remain terminal');
+    }
+  } finally { globalThis.fetch = originalFetch; }
+});
+
+test('metadata HTTP refusals, parsing, timeout, abort and other errors never retry', async () => {
+  const originalFetch = globalThis.fetch, id = 'a'.repeat(40);
+  try {
+    for (const status of [401, 403, 404, 429, 500, 503]) {
+      let requests = 0;
+      globalThis.fetch = async () => { requests++; return new Response('fixture-secret response', {status}); };
+      await assert.rejects(githubCommit(id), error => error.message === `Geography tree metadata unavailable (commits/${id}; HTTP ${status})`);
+      assert.equal(requests, 1, 'An HTTP refusal is not a socket interruption');
+    }
+    for (const error of [new SyntaxError('malformed metadata'), new DOMException('timeout', 'TimeoutError'),
+      new DOMException('abort', 'AbortError'), new TypeError('other network failure', {cause: {code: 'ECONNRESET'}})]) {
+      let requests = 0;
+      globalThis.fetch = async () => { requests++; return {ok: true, json: async () => { throw error; }}; };
+      await assert.rejects(githubTree(id), actual => actual === error);
+      assert.equal(requests, 1);
+    }
+    let requests = 0;
+    globalThis.fetch = async () => {
+      if (++requests === 1) throw new TypeError('socket closed', {cause: {code: 'UND_ERR_SOCKET'}});
+      return new Response('denied', {status: 403});
+    };
+    await assert.rejects(githubCommit(id), /HTTP 403/);
+    assert.equal(requests, 2, 'A refusal after the one retry cannot become success or another attempt');
+  } finally { globalThis.fetch = originalFetch; }
+});
+
+test('a successful metadata retry does not admit a wrong immutable tree', async () => {
+  const originalFetch = globalThis.fetch, f = fixture();
+  try {
+    let requests = 0;
+    globalThis.fetch = async () => {
+      if (++requests === 1) throw new TypeError('socket closed', {cause: {code: 'UND_ERR_SOCKET'}});
+      return new Response(JSON.stringify({...f.maps.get(f.baseline), sha: 'f'.repeat(40)}));
+    };
+    const a = f.acquisition({loadTree: githubTree});
+    await assert.rejects(a.tree(f.baseline), /wrong immutable tree metadata/);
+    assert.equal(requests, 2); assert.equal(a.stats.complete_scientific_closure, false);
+    assert.deepEqual(f.batches, []);
+  } finally { globalThis.fetch = originalFetch; f.close(); }
 });
 
 test('failed transport remains unavailable and redacts subprocess errors', async () => {

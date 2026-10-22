@@ -280,9 +280,18 @@ export async function githubTree(version, recursive = true) {
 async function githubMetadata(locator) {
   const headers = {'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'};
   if (process.env.GH_TOKEN) headers.Authorization = 'Bearer ' + process.env.GH_TOKEN;
-  const response = await fetch(`https://api.github.com/repos/${repository}/git/${locator}`, {headers, signal: AbortSignal.timeout(60000)});
-  requireValue(response.ok, 'Geography tree metadata unavailable');
-  return response.json();
+  // Retry only an interrupted read of this same immutable metadata object.
+  // A response, parse refusal or any other transport error remains terminal.
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const response = await fetch(`https://api.github.com/repos/${repository}/git/${locator}`, {headers, signal: AbortSignal.timeout(60000)});
+      requireValue(response.ok, `Geography tree metadata unavailable (${locator}; HTTP ${response.status})`);
+      return await response.json();
+    } catch (error) {
+      if (error?.cause?.code !== 'UND_ERR_SOCKET') throw error;
+      if (attempt === 1) throw Error(`Geography metadata transport unavailable (${locator}; UND_ERR_SOCKET)`);
+    }
+  }
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
