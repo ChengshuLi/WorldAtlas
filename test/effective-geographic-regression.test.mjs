@@ -284,7 +284,7 @@ test('explicit v2 authority conservation permits append but preserves every orig
 });
 
 
-test('whole original rule custody derives actual issued preimage and refuses rebinding before selection',()=>{
+for(const completedAliases of [false,true])test('whole original rule custody derives actual issued preimage and refuses rebinding before selection, aliases='+completedAliases,()=>{
  const f=fixture();try{
   const pin=(name,commit)=>{const raw=execFileSync('git',['-C',f.repo,'show',commit+':'+name]),[mode,,blob]=f.git('ls-tree',commit,'--',name).split(/[ \t]/);return {commit,path:name,mode,blob,bytes:raw.length,sha256:sha(raw)};};
   const id='component:a',geometry={type:'Polygon',coordinates:[[[0,0],[1,0],[1,1],[0,0]]]},executed_code=[{path:'model.js',bytes:1,sha256:'1'.repeat(64)}];
@@ -292,12 +292,23 @@ test('whole original rule custody derives actual issued preimage and refuses reb
   f.write('source/request.json',{version:1,operation:'retained-land-source-premises-v1',executed_code,baseline,parent,source_rule});
   const sr=pin('source/request.json',f.commit());
   f.write('source/facts.json',{operation:'retained-land-source-premises-v1',request:sr,executed_code,baseline,parent,source_rule,components:1});
-  const sf=pin('source/facts.json',f.commit());
+  let sf=pin('source/facts.json',f.commit());
+  const aliases=[],absent='f'.repeat(40),beforePublication=sf.commit;let stalePublication,published;
+  if(completedAliases){
+   f.write('source/publication.json',{stale:true});stalePublication=f.commit();
+   f.write('source/publication.json',{complete:true});const decoded=Buffer.from('whole synthetic inventory\n');
+   f.write('source/inventory.jsonl.gz',gzipSync(decoded));published=f.commit();sf={...sf,commit:absent};
+   for(const item of [sf,pin('source/publication.json',published),{...pin('source/inventory.jsonl.gz',published),uncompressed_bytes:decoded.length,uncompressed_sha256:sha(decoded)}]){
+    const q={...item,commit:absent},original={kind:'completed-inventory-body',mode:q.mode,path:'.cache/native-grid-candidates/completed-source/'+path.basename(q.path),bytes:q.bytes,sha256:q.sha256};
+    if(q.uncompressed_bytes!==undefined)Object.assign(original,{uncompressed_bytes:q.uncompressed_bytes,uncompressed_sha256:q.uncompressed_sha256});
+    aliases.push({original,published:q});
+   }
+  }
   f.write('native/manifest.json',{method:'model-native-method'});const mp=pin('native/manifest.json',f.commit());baseline.pins=[mp];
   // Source baseline belongs to its original issued vintage, which must also be
   // present unchanged in its facts. The proposal has its independently bound
   // native baseline; these are not asserted to be one source authority.
-  const additive={scope_ids:[id],inputs:[sr,sf],source_request_path:sr.path,facts_path:sf.path,manifest_path:mp.path};
+  const additive={scope_ids:[id],inputs:[sr,...(completedAliases?aliases.map(a=>a.original):[sf])],source_request_path:sr.path,facts_path:aliases[0]?.original.path??sf.path,manifest_path:mp.path,...(completedAliases?{publication_path:aliases[1].original.path,inventory_path:aliases[2].original.path}:{})};
   const request={version:1,operation:'unactivated-additive-native-batch-v1',executed_code,baseline,parent,additive};
   f.write('native/request.json',request);const nr=pin('native/request.json',f.commit());
   const preimage={version:3,source_profile:source_rule.profile,source_rule,representation:'literal-base-or-complete-additions',native_method:'model-native-method',executed_code};
@@ -307,7 +318,26 @@ test('whole original rule custody derives actual issued preimage and refuses reb
   f.write('native/facts.json',native);f.write('native/ledger.json',ledger);const head=f.commit();
   const pins={ledger:pin('native/ledger.json',head),native_facts:pin('native/facts.json',head),native_manifest:mp,native_request:nr,source_facts:sf,source_request:sr};
   const open=()=>new ImmutableReader(f.repo,head);
-  const result=readOriginalRuleAuthority(open(),pins);assert.equal(result.rule_sha256,valueSha(preimage));assert.equal(result.ledger.rows[0].native_cells,0);
+  const reader=open(),calls=[],git=reader.git.bind(reader);reader.git=(...args)=>{calls.push(args);return git(...args);};
+  const result=readOriginalRuleAuthority(reader,pins,aliases);assert.equal(result.rule_sha256,valueSha(preimage));assert.equal(result.ledger.rows[0].native_cells,0);
+  if(completedAliases){
+   assert.deepEqual(result.source_output_aliases,aliases,'Issued published tuples stay unchanged');
+   assert.ok(!calls.some(args=>args.includes('fetch')||args.includes('ls-tree')&&args.includes(absent)),'Exact current aliases need no origin metadata transport');
+   for(const commit of [beforePublication,stalePublication]){
+    const wrong=structuredClone(aliases);wrong[1].published.commit=commit;
+    assert.throws(()=>readOriginalRuleAuthority(open(),pins,wrong),/whole ordinary Git input|actual Git identity differs/,'A known missing/mismatched origin never falls back to current');
+   }
+   for(const [key,value]of [['mode','100755'],['blob','0'.repeat(40)],['bytes',0],['sha256','0'.repeat(64)]]){
+    const wrong=structuredClone(aliases);wrong[1].published[key]=value;
+    assert.throws(()=>readOriginalRuleAuthority(open(),pins,wrong),/whole encoded\/decoded pins differ|actual Git identity differs/);
+   }
+   f.write('source/publication.json',{changed:true});const changed=f.commit();
+   assert.throws(()=>readOriginalRuleAuthority(new ImmutableReader(f.repo,changed),pins,aliases),/actual Git identity differs/);
+   const known=structuredClone(aliases);known[1].published.commit=published;
+   assert.equal(readOriginalRuleAuthority(new ImmutableReader(f.repo,changed),pins,known).rule_sha256,valueSha(preimage),'Known exact original wins over a changed current path');
+   fs.unlinkSync(path.join(f.repo,'source/publication.json'));const missingCurrent=f.commit();
+   assert.throws(()=>readOriginalRuleAuthority(new ImmutableReader(f.repo,missingCurrent),pins,aliases),/whole ordinary Git input/);
+  }
   const wrong=structuredClone(pins);wrong.source_request.sha256='0'.repeat(64);assert.throws(()=>readOriginalRuleAuthority(open(),wrong),/Whole immutable input differs/);
   f.write('native/facts.json',{...native,executed_code:[]});const rebound=f.commit();assert.throws(()=>readOriginalRuleAuthority(new ImmutableReader(f.repo,rebound),{...pins,native_facts:pin('native/facts.json',rebound)}),/executed code differs/);
   const missing={...pins};delete missing.source_request;assert.throws(()=>readOriginalRuleAuthority(open(),missing),/exact original rule body roster/);

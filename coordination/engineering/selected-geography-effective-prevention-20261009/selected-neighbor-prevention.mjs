@@ -360,11 +360,12 @@ function originalSourceAliases(reader, request, aliases) {
   demand([request.additive.facts_path,request.additive.publication_path,request.additive.inventory_path].includes(p.path),'Unconsumed completed alias');
   pinCheck({...q,git_blob_oid:q.git_blob_oid??q.blob});
   demand(q.mode==='100644'&&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(k=>q[k]===p[k]),'Completed alias whole encoded/decoded pins differ');
-  const actual=reader.descriptor(q.path,q.commit);
+  const version=reader.pinnedVersion({...q,git_blob_oid:q.git_blob_oid??q.blob});
+  const actual=reader.descriptor(q.path,version);
   demand(actual.mode===q.mode&&actual.git_blob_oid===(q.git_blob_oid??q.blob)&&actual.bytes===q.bytes,'Completed alias actual Git identity differs');
   const decoded=p.uncompressed_bytes??0;
   demand(Number.isSafeInteger(decoded)&&decoded>=0,'Invalid completed alias decoded byte length');
-  const encoded=reader.read(q.path,{version:q.commit,expected:q.sha256});
+  const encoded=reader.read(q.path,{version,expected:q.sha256});
   if(p.uncompressed_bytes!==undefined){demand(hash(p.uncompressed_sha256),'Missing completed decoded hash');const raw=gunzipSync(encoded,{maxOutputLength:decoded});demand(raw.length===decoded&&sha(raw)===p.uncompressed_sha256,'Completed alias decoded body differs');}
   byPath.set(p.path,q);
  }
