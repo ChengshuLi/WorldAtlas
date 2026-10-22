@@ -12,9 +12,16 @@ on:
         type: choice
         options: [verify-only, production, rehearsal]
 
+      window_comment_id:
+        description: Fresh publisher window for an operation with current native capture
+        type: string
+        required: false
+
 permissions:
   contents: read
   actions: read
+  issues: read
+  deployments: read
 
 concurrency:
   group: neon-storage-owner-maintenance
@@ -22,7 +29,7 @@ concurrency:
 
 jobs:
   forward:
-    if: github.repository == 'ChengshuLi/WorldAtlas'
+    if: github.repository == 'ChengshuLi/WorldAtlas' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -61,6 +68,7 @@ jobs:
           NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
           NEON_PROJECT_ID: ${{ vars.NEON_PROJECT_ID }}
           GITHUB_TOKEN: ${{ github.token }}
+          WINDOW_COMMENT_ID: ${{ inputs.window_comment_id }}
           FORWARD_MODE: ${{ steps.operation.outputs.mode }}
           FORWARD_OPERATION: ${{ steps.operation.outputs.file }}
         run: node scripts/neon-forward-migrations.mjs "$FORWARD_MODE" "$FORWARD_OPERATION"
@@ -72,3 +80,12 @@ jobs:
           path: data/validation/neon-forward-migrations/
           if-no-files-found: error
           retention-days: 14
+      - name: Retain encrypted native backup and sanitized recovery receipts only
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: current-postgres-recovery-${{ github.run_id }}-${{ github.run_attempt }}
+          # Never upload private inventories or the plaintext native dump.
+          path: data/validation/current-postgres-recovery/public-receipts/
+          if-no-files-found: ignore
+          retention-days: 90

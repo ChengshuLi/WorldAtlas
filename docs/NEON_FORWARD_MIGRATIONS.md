@@ -1,10 +1,10 @@
 # Reviewed PostgreSQL forward deployment
 
-The frozen fourteen-table copy and its original evidence must be verified first. `scripts/neon-forward-migrations.mjs` then applies reviewed PostgreSQL forward migrations without importing historical facts, rotating credentials, changing Site audience or moving media.
+The frozen fourteen-table copy and its original evidence must be verified first. `scripts/neon-forward-migrations.mjs` then applies reviewed PostgreSQL forward migrations without rotating credentials, changing Site audience or moving media. Only an explicitly pinned historical settlement bundle may be added through the existing private ingestion services after forward verification.
 
-The workflow is `.github/workflows/neon-forward-migrations.yml`, with explicit manual dispatch for production, verify-only or rehearsal. Ordinary pushes and merges never select a forward operation. The selector uses Bash builtins, and the script checks the repository and branch. The workflow shares the owner-maintenance concurrency group with current PostgreSQL recovery. The completed original copy executor and workflow are retired; the historical receipt ZIP reader and original workflow/repository identities remain available to authenticate its preserved production proof.
+The workflow is `.github/workflows/neon-forward-migrations.yml`, with explicit manual dispatch for production, verify-only or rehearsal. Ordinary pushes and merges never select a forward operation. The selector uses Bash builtins, and the script checks the repository and branch. The workflow shares the owner-maintenance concurrency group with current PostgreSQL recovery. The completed original copy executor and workflow are retired; its original workflow/repository identities and exact committed receipt remain available to authenticate the preserved production proof. The forward executor does not depend on an expiring Actions ZIP.
 
-Root owns the concrete operation and its publication. Do not substitute a successful rehearsal receipt for the production baseline. The original production run must be completed and successful; its authenticated artifact and receipt bytes must match the reviewed hashes, source identity, original full-byte copy and readback. No forward operation is automatically created by this tool.
+Root owns the concrete operation and its publication. Do not substitute a successful rehearsal receipt for the production baseline. The original production run must be completed and successful; the whole committed `data/validation/neon-production-storage-migration.json` body must match the reviewed receipt hash, and its repository/workflow/head/run/attempt must match that original run. The original source identity, full-byte copy, runtime checks and readback remain mandatory. Historical artifact ID/hash fields are retained as provenance, not fetched as a second copy of the receipt. No forward operation is automatically created by this tool.
 
 ## Reviewed operation template
 
@@ -115,14 +115,65 @@ The same operation may include this additional pin, with **all three** existing 
 
 Use the existing current PostgreSQL recovery operation's successful native backup/isolated-restore receipt and complete owner inventory. Its read-only source marker must be exact compact-only V4 over frozen base2 or base3. The receipt pins the same collections, owner registry, compact physical rows and dictionary sequences; its encrypted-backup and isolated-restore readback must have succeeded. These are reviewed operation inputs, not self-generated assertions of live readiness. No operation file or fresh maintenance receipt is supplied by this implementation.
 
+For a current capture followed immediately by the reviewed forward operation, the same operation may instead set `"current_source": "capture-current-native"`. Supply `window_comment_id` to the existing forward workflow. It invokes the existing native recovery function in that same owner job, under its genuine forward-workflow identity and the shared maintenance concurrency group. The fresh publisher window must additionally pin `forward_operation_sha256` to the complete committed operation-file bytes. An old read-only-only window cannot authorize this caller. All existing actor, exact main/tool/source, reservation, hosting/drain, recipient and expiry checks remain, and the exact window is reread before and after forward SQL.
+
+The successful native capture must belong to the same head, run, attempt and window. The executor reads its actual private inventory and sanitized receipt from local runner files, computes their whole-byte pins in memory, and passes them through the unchanged current-source validator. It does not publish an inventory to Git or transfer it through an artifact. Only encrypted backup bytes, the recipient envelope and sanitized recovery receipts from `data/validation/current-postgres-recovery/public-receipts/` are uploaded alongside the sanitized forward receipt. Plaintext dump and inventories remain private. Explicit pre-existing `current_source` pins remain supported unchanged.
+
+This integration does not produce its own maintenance approval. The existing fresh hash-pinned root maintenance attestation still must match the captured current marker and pass before and after SQL. Capture/restore or authorization failure stops before the owner installer; a post-commit check failure must be reconciled, never treated as permission to repeat unknown writes. Repository acceptance is not permission for the live backup, grants or migration.
+
 Keep the original top-level checkpoint/source fields and authenticated baseline receipt unchanged as historical provenance. The old registry rows retain their original fingerprint, guards and application timestamps. The fresh maintenance attestation instead binds the current recovery marker's revision/fingerprint. A current-source continuation does not unpack or compare live facts to the old revision-1321 snapshot, restore any old row, or reopen the retired baseline copy executor.
 
 Inside the existing owner lock and atomic transaction, the installer reads the actual current compact inventory and compares it with the reviewed pin. It applies only the missing canonical V3 DDL and necessary typed-table grants. The only accepted delta is three empty typed tables, their known catalog/functions/permissions, and one new immutable migration row. Every inherited logical collection, original registry row, compact physical row, dictionary key/sequence, ingestion sequence, database/default ACL and inherited function/table/sequence permission remains exact. Unknown profiles, data drift, modified registry rows, extra access and unreviewed DDL refuse and roll back. Repeating the same operation after a successful commit verifies a no-op; a new base3 recovery pin can independently verify the resulting state.
 
-Issue #2696's historical settlement import is a **separate later owner operation**. Accepting this repository support neither authorizes nor performs a production migration, import, publisher contact or deployment. The standing #907 publication hold remains. Before requesting an owner window, prepare the exact reviewed current recovery/maintenance pins, unchanged historical proof, migration hashes, narrow grant delta, rehearsal/readback results and the separately scoped import/parity package. A stale or missing current pin is a real blocker, not permission to reset production or invent a new baseline.
+Issue #2696's historical settlement import requires the explicitly scoped owner operation below. Accepting this repository support neither authorizes nor performs a production migration, import, publisher contact or deployment. The standing #907 publication hold remains. Before requesting an owner window, prepare the exact reviewed current recovery/maintenance pins, unchanged historical proof, migration hashes, narrow grant delta, rehearsal/readback results and the separately scoped import/parity package. A stale or missing current pin is a real blocker, not permission to reset production or invent a new baseline.
 
 ## Local validation
 
 Focused tests use actual PostgreSQL/PGlite SQL to exercise all three forward migrations, complete original-byte and sequence preservation, idempotent retries, atomic rollback, restricted runtime permissions, immutable registry, catalog tampering rejection and no-network skipped operations. They also exercise private maintenance attestation boundaries and the actual Bash operation selector. No production or disposable Neon call is made by those tests.
 
 The grown-state tests execute the real installer and recovery inventory against an isolated compact PostgreSQL database with additional source/entity/release rows. They cover exact preservation, idempotence, base3 inventory, transactional rollback and adverse fingerprints/private ACLs/physical evidence/sequences/registry rows. They do not claim a native `pg_dump` rehearsal, provider branch execution, HTTP deployment or production import.
+
+The same-job test uses an in-process native-capture/provider fixture but executes the actual forward service and PostgreSQL SQL twice, including a fresh base3 verification. It checks preserved rows/registry/ACLs, no archive request, genuine workflow identity, exact operation/window binding, changed-window refusal and private upload boundaries. It is not a native Docker dump/restore or production execution receipt.
+
+
+## Exact historical settlement service import
+
+A reviewed current-native operation may additionally declare `settlement_import`
+with exactly `input_sha256` and `manifest_sha256`. The first must bind the unchanged
+`data/settlement-estimates.json` source; the second pins the deterministic bundle
+from the accepted compiler. For the final lossless metadata contract this bundle
+is `da0a886f662ff9c80343ee92c347c50ce16718fd216add3f3d9669e6a62a1c80`.
+The earlier pre-final bundle omitted `language`/`name_role` metadata and must not
+be substituted. The whole-operation publisher window covers this declaration.
+All three migrations and a fresh current native capture are required. An ordinary
+forward operation without the declaration imports nothing, and verify-only never
+invokes a database import even when the declaration is present.
+
+After V3 verification, the same owner job invokes `importResearchBundle` through
+`createPostgresDatabase` and the unchanged `importBatch`/`importTypedBatch` services.
+The 48 exact ingestion IDs, source/subject/registry/date checks, immutable guards,
+receipt validation and ingestion advisory lock remain authoritative. Transactions
+honor the service's ReadCommitted boundary; no private HTTP endpoint, fake bearer
+token, application credential, role impersonation or membership is introduced.
+The public Cloudflare Worker remains read-only. This is owner maintenance, not
+proof of a public API write or a website deployment.
+
+The runner verifies all 582 retained settlement identities before importing and
+runs the existing two-way 9,301-row field/source/contract parity query afterward.
+It retains only sanitized batch receipts under the existing forward artifact.
+Derived payloads are prepared from the immutable Git source in temporary private
+files, not uploaded alongside receipts. Every resume checks the original IDs
+against actual server receipts, including those already present in a local ledger.
+A lost response after commit therefore resolves to the same fingerprint and does
+not authorize a new ID. The schema transaction and each import batch commit
+separately: a later error does not roll back earlier successful batches. Reconcile
+actual receipts and obtain the applicable fresh owner operation/window before
+continuing; do not replay a stale migration or clear existing data.
+
+Local proof executes the actual services and PostgreSQL transactions on grown
+compact state, including a committed-but-lost-response interruption, complete
+idempotent replay, unchanged non-campaign inventories/ACLs, exact parity, and
+verify-only with zero import calls. Provider/native Docker behavior remains the
+separately disclosed fixture, not a production rehearsal. The future production
+backup, narrow V3 grants and exact import still need their applicable action-time
+authorization; this code does not lift the #907 hold.

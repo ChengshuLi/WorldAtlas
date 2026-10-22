@@ -354,26 +354,33 @@ export async function boundedOwnerJSON(response){
  const result=JSON.parse(Buffer.concat(chunks).toString());need(result&&typeof result==='object'&&!Array.isArray(result),'invalid-owner-api-object');return result;
 }
 
+export async function authenticateRecoveryWindow({env,fetcher=fetch,phase='start',forwardOperationSHA,expectedWindowSHA}={}){
+  need(env.GITHUB_EVENT_NAME==='workflow_dispatch'&&env.GITHUB_REPOSITORY===repo&&[recoveryWorkflow,'.github/workflows/neon-forward-migrations.yml'].some(workflow=>env.GITHUB_WORKFLOW_REF===repo+'/'+workflow+'@refs/heads/main')&&/^[a-f0-9]{40}$/.test(env.GITHUB_SHA??'')&&/^[1-9]\d*$/.test(env.WINDOW_COMMENT_ID??'')&&env.NEON_PROJECT_ID===expectedNeonProjectId,'trusted-main-manual-context-required');
+  const api=githubAPI(env.GITHUB_TOKEN,{fetchImpl:fetcher});
+  const comment=await api('/repos/'+repo+'/issues/comments/'+env.WINDOW_COMMENT_ID);
+  need(/^https:\/\/github\.com\/ChengshuLi\/WorldAtlas\/issues\/(51|714)#issuecomment-[1-9]\d*$/.test(comment.html_url??'')&&comment.user?.type==='User'&&['OWNER','MEMBER','COLLABORATOR'].includes(comment.author_association)&&comment.user.login===env.GITHUB_ACTOR,'authorized-publisher-queue-window-required');
+  const matches=[...String(comment.body).matchAll(/<!-- worldatlas-recovery-window:v1\n([\s\S]*?)\n-->/g)];need(matches.length===1,'unique-publisher-window-required');
+  const toolSHA=sha(fs.readFileSync(fileURLToPath(import.meta.url))),requestedWindow=JSON.parse(matches[0][1]),reservation=await loadRecoveryReservation(requestedWindow,api),{claim}=reservation;
+  const window=validateRecoveryWindow(requestedWindow,claim,{head:env.GITHUB_SHA,toolSHA,phase,...reservation});
+  need(comment.html_url==='https://github.com/'+repo+'/issues/'+window.queue+'#issuecomment-'+comment.id,'window-tracking-issue-mismatch');
+  need(window.operator_github_login===comment.user.login,'publisher-author-binding-required');
+  const windowSHA=sha(JSON.stringify(window));need(expectedWindowSHA===undefined||expectedWindowSHA===windowSHA,'changed-publisher-window');
+  if(env.GITHUB_WORKFLOW_REF!==repo+'/'+recoveryWorkflow+'@refs/heads/main')need(/^[a-f0-9]{64}$/.test(forwardOperationSHA??'')&&window.forward_operation_sha256===forwardOperationSHA,'unreviewed-forward-recovery-window');
+  return {window,windowSHA,comment,claim,api};
+}
+
 /** Only the publisher's fresh reviewed window plus a live canonical claim can
  * obtain the existing owner connection. Source clients enforce read-only; all
  * restoration and role/schema writes stay on a network-none ephemeral target.
  */
-export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,output='data/validation/current-postgres-recovery'}={}){
+export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,output='data/validation/current-postgres-recovery',forwardOperationSHA}={}){
  const started=Date.now(),receipt={version:1,status:'failed',source_read_only:true,production_writes:0,started_at_utc:new Date().toISOString()},secrets=[];
  let target,lock,releaseProbe,stage='authorize';const readers=new Set();
  need(!fs.existsSync(output),'preserve-existing-recovery-target');fs.mkdirSync(output,{recursive:true,mode:0o700});
  const publicOutput=path.join(output,'public-receipts');fs.mkdirSync(publicOutput,{mode:0o700});const receiptFile=path.join(publicOutput,'receipt.json');
  try{
-  need(env.GITHUB_EVENT_NAME==='workflow_dispatch'&&env.GITHUB_REPOSITORY===repo&&env.GITHUB_WORKFLOW_REF===repo+'/'+recoveryWorkflow+'@refs/heads/main'&&/^[a-f0-9]{40}$/.test(env.GITHUB_SHA??'')&&/^[1-9]\d*$/.test(env.WINDOW_COMMENT_ID??'')&&env.NEON_PROJECT_ID===expectedNeonProjectId,'trusted-main-manual-context-required');
-  secrets.push(env.NEON_API_KEY,env.GITHUB_TOKEN);const api=githubAPI(env.GITHUB_TOKEN);
-  const comment=await api('/repos/'+repo+'/issues/comments/'+env.WINDOW_COMMENT_ID);
-  need(/^https:\/\/github\.com\/ChengshuLi\/WorldAtlas\/issues\/(51|714)#issuecomment-[1-9]\d*$/.test(comment.html_url??'')&&comment.user?.type==='User'&&['OWNER','MEMBER','COLLABORATOR'].includes(comment.author_association)&&comment.user.login===env.GITHUB_ACTOR,'authorized-publisher-queue-window-required');
-  const matches=[...String(comment.body).matchAll(/<!-- worldatlas-recovery-window:v1\n([\s\S]*?)\n-->/g)];need(matches.length===1,'unique-publisher-window-required');
-  const toolSHA=sha(fs.readFileSync(fileURLToPath(import.meta.url))),requestedWindow=JSON.parse(matches[0][1]),reservation=await loadRecoveryReservation(requestedWindow,api),{claim}=reservation;
-  const window=validateRecoveryWindow(requestedWindow,claim,{head:env.GITHUB_SHA,toolSHA,...reservation});
-  need(comment.html_url==='https://github.com/'+repo+'/issues/'+window.queue+'#issuecomment-'+comment.id,'window-tracking-issue-mismatch');
-  need(window.operator_github_login===comment.user.login,'publisher-author-binding-required');
-  receipt.window_comment_id=comment.id;receipt.claim_id=claim.claim_id;receipt.reservation_issue=claim.issue_number;receipt.source_marker=window.source_marker;receipt.site=window.site;receipt.hosting=window.hosting;receipt.github={head:env.GITHUB_SHA,run_id:env.GITHUB_RUN_ID,run_attempt:env.GITHUB_RUN_ATTEMPT};save(receiptFile,receipt,secrets);
+  secrets.push(env.NEON_API_KEY,env.GITHUB_TOKEN);const {window,windowSHA,comment,claim,api}=await authenticateRecoveryWindow({env,fetcher,forwardOperationSHA});
+  receipt.window_sha256=windowSHA;receipt.window_comment_id=comment.id;receipt.claim_id=claim.claim_id;receipt.reservation_issue=claim.issue_number;receipt.source_marker=window.source_marker;receipt.site=window.site;receipt.hosting=window.hosting;receipt.github={head:env.GITHUB_SHA,run_id:env.GITHUB_RUN_ID,run_attempt:env.GITHUB_RUN_ATTEMPT};save(receiptFile,receipt,secrets);
   stage='verify-hosting-and-registry';receipt.hosting_start=await verifyRecoveryHosting(window,api,fetcher);
   stage='verify-production-metadata';receipt.project=await verifyNeonProject({apiKey:env.NEON_API_KEY,projectId:expectedNeonProjectId,fetchImpl:fetcher});
   need(receipt.project.branch.id===branchId&&receipt.project.project.configured_postgres_major===18,'production-branch-or-major-changed');
@@ -407,8 +414,7 @@ export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,
   stage='restored-target-inventory';const targetQuery=queryJSON(sql=>targetExec(['psql','-X','-Atq','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1','-v','VERBOSITY=sqlstate'],'SET ROLE neondb_owner; '+sql),secrets),restored=await readRecoveryInventory(targetQuery,{profile});
   stage='final-source-inventory';const after=await readRecoveryInventory(sourceQuery,{profile});assertCurrentInventory(after,window.source_marker);assertRestoredInventory(before,restored,after);
   stage='final-hosting-and-registry';receipt.hosting_end=await verifyRecoveryHosting(window,api,fetcher);
-  const finalReservation=await loadRecoveryReservation(window,api);
-  validateRecoveryWindow(window,finalReservation.claim,{head:env.GITHUB_SHA,toolSHA,phase:'end',...finalReservation});
+  await authenticateRecoveryWindow({env,fetcher,phase:'end',forwardOperationSHA,expectedWindowSHA:windowSHA});
   save(path.join(output,'restored-inventory.json'),restored,secrets);save(path.join(output,'after-inventory.json'),after,secrets);receipt.status='verified';receipt.collections=before.collections;receipt.owner_registry_sha256=before.owner_registry_sha256;receipt.catalog_sha256=before.catalog_sha256;receipt.owner_registry_private=true;if(before.compact_storage)receipt.compact_storage={profile,public_sha256:before.compact_storage.catalog.public_sha256,private_sha256:before.compact_storage.catalog.private_sha256,physical:before.compact_storage.physical,sequences:before.compact_storage.sequences};
  }catch(error){receipt.status='failed';receipt.failure_stage=stage;receipt.native_error_code=/^[a-z0-9-]{1,100}$/.test(error?.message??'')?error.message:'native-command-failed';receipt.error_code='bounded-current-recovery-'+stage+'-failed';}
  finally{

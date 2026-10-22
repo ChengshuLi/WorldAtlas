@@ -313,8 +313,9 @@ for (const [label, consumer, operand] of [
 
 test('reviewed PostgreSQL consumers retain their current inputs through actual sparse materialization', () => {
   const operands=['coordination/publication/cloudflare-history.json','data/observation-registry-history/base-v1.json',
-    'data/research-geography-gate.json','data/hosted-type-catalog.json'];
-  const consumers=['test/neon-forward-migrations.test.mjs','test/compact-membership-profile.test.mjs','test/current-postgres-recovery.test.mjs','test/merge-integration.test.mjs'];
+    'data/research-geography-gate.json','data/hosted-type-catalog.json','data/settlement-estimates.json'];
+  const consumers=['test/neon-forward-migrations.test.mjs','test/compact-membership-profile.test.mjs','test/current-postgres-recovery.test.mjs',
+    'test/merge-integration.test.mjs','test/settlement-population-import.test.mjs'];
   const row={sha:sha('e'),mode:'100644',type:'blob'};
   const entries=new Map([...EXECUTION_CODE,...operands,...consumers,'test/example.test.mjs','test/fixtures/contract/input.json'].map(name=>[name,row]));
   const request={base:sha('a'),head:sha('b'),files:consumers};
@@ -324,7 +325,8 @@ test('reviewed PostgreSQL consumers retain their current inputs through actual s
   assert.deepEqual(plan.inputs,[...EXECUTION_CODE,...operands]);
   assert(plan.checkout_patterns.includes('postgres'),'PostgreSQL DDL is executing source, like drizzle');
   for(const consumer of consumers) {
-    const expected=consumer===consumers[2]?[operands[0]]:operands;
+    const expected=consumer===consumers[2]?[operands[0]]:consumer===consumers[1]?operands.slice(0,-1):
+      consumer===consumers[4]?operands.slice(1):operands;
     assert.deepEqual(reviewedTestPlan({...request,files:[consumer]},context).inputs,[...EXECUTION_CODE,...expected]);
     for(const operand of expected) {
       const absent=new Map(entries);absent.delete(operand);
@@ -355,7 +357,9 @@ test('reviewed PostgreSQL consumers retain their current inputs through actual s
     for(const name of [...operands,'postgres/schema.sql'])assert.deepEqual(fs.readFileSync(path.join(temporary,name)),fs.readFileSync(name));
     assert.equal(fs.existsSync(path.join(temporary,excluded)),false);
     const result=spawnSync(process.execPath,['--input-type=module','-e',
-      "await import('./src/observation-modules.js'); await import('./scripts/publication-cloudflare.mjs'); console.log('actual-sparse-postgres-inputs');"],
+      "await import('./src/observation-modules.js'); await import('./scripts/publication-cloudflare.mjs'); "+
+      "const assert=(await import('node:assert/strict')).default,fs=await import('node:fs'),source=JSON.parse(fs.readFileSync('data/settlement-estimates.json')); "+
+      "assert.equal(source.entities.length,582); assert.equal(source.entity_history.length,9301); console.log('actual-sparse-postgres-inputs');"],
       {cwd:temporary,encoding:'utf8'});
     assert.equal(result.status,0,result.stderr);assert.equal(result.stdout.trim(),'actual-sparse-postgres-inputs');
   } finally { fs.rmSync(temporary,{recursive:true,force:true}); }
