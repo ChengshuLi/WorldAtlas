@@ -20,7 +20,6 @@ export const PUBLIC_PACKAGE_RECEIPT='.cache/cloudflare-publication.json';
 export async function preparePublicCloudflarePackage({root=process.cwd(),receiptFile='data/validation/neon-forward-migrations/receipt.json',fetchImpl=fetch,env=process.env,build=()=>runPackageBuild('cloudflare',{root})}={}){
  root=fs.realpathSync(root);const read=file=>fs.readFileSync(path.join(root,file)),json=file=>JSON.parse(read(file));
  const sourceHead=execFileSync('git',['-C',root,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
- const sourceTree=execFileSync('git',['-C',root,'rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim();
  const receipt=json(receiptFile),operation=read('.github/operations/neon-geographic-production.json');
  need(receipt.status==='verified'&&receipt.mode==='geography-production'&&receipt.github?.head_sha===sourceHead&&receipt.operation_sha256===hash(operation)&&receipt.geography?.status==='published','Exact successful source-bound geographic operation required before public build');
  const release=readGeographicReleaseManifest(path.join(root,'data/geographic-releases')).releases.at(-1);
@@ -31,15 +30,15 @@ export async function preparePublicCloudflarePackage({root=process.cwd(),receipt
  need(selected,'An exact source-selected additive/content pair is required');
  await verifyLegacyPublicMap({prior:receipt.geography.prior,fetchImpl});await verifyPublicRelease({release,fetchImpl});
  const configuration=packageBuildConfiguration(env);need(configuration.ATLAS_PUBLIC_READ_ONLY==='1','Public package must retain read-only access');
+ const {producer,...source}=snapshotPackageOutputSource(root);
  const retained=path.join(root,PUBLIC_PACKAGE_RECEIPT);
  if(fs.existsSync(retained)){
   const prior=json(PUBLIC_PACKAGE_RECEIPT);
-  need(prior.version===1&&prior.kind==='coordinated-public-cloudflare-package'&&prior.source.head===sourceHead&&prior.source.tree===sourceTree&&prior.operation_sha256===receipt.operation_sha256&&isDeepStrictEqual(prior.release,release)&&isDeepStrictEqual(prior.configuration,configuration),'Retained public package belongs to a different source/release/configuration');
+  need(prior.version===1&&prior.kind==='coordinated-public-cloudflare-package'&&isDeepStrictEqual(prior.source,source)&&prior.operation_sha256===receipt.operation_sha256&&isDeepStrictEqual(prior.release,release)&&isDeepStrictEqual(prior.configuration,configuration),'Retained public package belongs to a different source/release/configuration');
   need(isDeepStrictEqual(prior.output,inventoryPackageOutput(root)),'Retained public package output changed');
   need(isDeepStrictEqual(prior.build_receipt,streamedPackageFile(root,'.cache/package-input-build.json')),'Retained public package build receipt changed');
   return {reused:true,receipt:prior};
  }
- const {producer,...source}=snapshotPackageOutputSource(root);
  await build();
  const completed=json('.cache/package-input-build.json');
  need(completed.version===1&&completed.kind==='cloudflare'&&completed.preflight?.passed===true&&completed.preflight.errors.length===0&&completed.preflight.inputs.head===sourceHead&&!completed.assembly&&completed.input_definition_sha256===source.input_definition_sha256,'Actual successful fresh full build required');

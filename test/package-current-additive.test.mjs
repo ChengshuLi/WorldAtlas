@@ -283,6 +283,12 @@ test('coordinated publication selects M not N/E, stops before build, and resumes
  f.live={...f.release,status:'published'};f.legacy=false;await assert.rejects(preparePublicCloudflarePackage(f.args),/Previous live map pair/);assert.equal(f.builds,0);f.legacy=true;
  const built=await preparePublicCloudflarePackage(f.args);assert.equal(built.reused,false);assert.equal(f.builds,1);assert.equal(built.receipt.source.producer,undefined,'Owner publication output is not relabelled as a stock integration artifact');
  const resumed=await preparePublicCloudflarePackage(f.args);assert.equal(resumed.reused,true);assert.equal(f.builds,1);assert.deepEqual(resumed.receipt,built.receipt);
+ await write(f.root,'package-lock.json',{lockfileVersion:3,changed:true});
+ await assert.rejects(preparePublicCloudflarePackage(f.args),/Actual original source image differs/);
+ f.git('add','package-lock.json');await assert.rejects(preparePublicCloudflarePackage(f.args),/Actual original source image differs/);
+ f.git('restore','--staged','--worktree','package-lock.json');
+ await write(f.root,'inputs/untracked.json',{unexpected:true});await assert.rejects(preparePublicCloudflarePackage(f.args),/Actual original source image differs/);await fs.unlink(path.join(f.root,'inputs/untracked.json'));
+ assert.equal((await preparePublicCloudflarePackage(f.args)).reused,true);assert.equal(f.builds,1,'dirty, staged and untracked source changes never reuse or rebuild a package');
  await write(f.root,'dist/client/assets/app.js','substituted bytes');await assert.rejects(preparePublicCloudflarePackage(f.args),/output changed/);assert.equal(f.builds,1,'bad retained output cannot silently rebuild or publish');
 });
 test('coordinated publication refuses stale operation/source/configuration and uncompleted build without output custody',async t=>{

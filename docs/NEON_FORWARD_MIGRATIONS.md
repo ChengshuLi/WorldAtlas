@@ -234,9 +234,11 @@ Compile only that same Worker entry with `node scripts/build-cloudflare.mjs
 binding types; it does not copy credentials, upload a replacement asset set, or
 change the public write policy. Before the normal serialized Worker deployment,
 verify the actual provider's non-secret binding inventory against the retained
-configuration. Stop on an unexpected binding rather than discard it. The same
-existing publication record must bind the old asset inventory and the new
-Worker separately; do not claim a new full website package was published.
+configuration. Stop on an unexpected binding rather than discard it. The explicit
+geography publication window binds the old asset inventory and new Worker
+separately and settles with `delivery:null`; it is not a staging/recovery action
+or a new full website delivery. After synchronization, the existing Cloudflare
+publication record binds and publishes the complete new package.
 
 Once this compatibility deployment is verified, `geography-production` performs
 the exact bounded append through the existing private services and immutable
