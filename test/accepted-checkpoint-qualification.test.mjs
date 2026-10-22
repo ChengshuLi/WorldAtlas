@@ -1,6 +1,8 @@
 import {omitFixtureObjects} from './helpers/git-object-fixture.mjs';
 import {checkpointTestAPI} from './helpers/native-literal.mjs';
 import {nativeLiteral} from './helpers/native-literal.mjs';
+import {oldBank,writeFinal} from './fixtures/final-bank.mjs';
+import {finishEffectiveFootprint} from '../src/native-grid.js';
 import test, {after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -21,7 +23,7 @@ const MODULE='coordination/engineering/selected-geography-effective-prevention-2
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const CATALOGUE='coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
 const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/native-word-store.mjs','scripts/native-patch-store.mjs','scripts/check-effective-geographic-regression.mjs',
-  'scripts/selected-reference-metadata.mjs','src/reference-metadata.js','src/native-grid.js','src/ownership-codec.js'];
+  'scripts/selected-reference-metadata.mjs','src/reference-metadata.js','src/native-grid.js','src/ownership-codec.js','scripts/package-startup-ownership.mjs','src/ownership-assets.js','src/ownership-method.js'];
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const polygon=(x,y=0)=>({type:'Polygon',coordinates:[[[x,y],[x+.2,y],[x+.2,y+.2],[x,y+.2],[x,y]]]});
 const feature=(id,x)=>({type:'Feature',id,properties:{id,parent_id:'parent'},geometry:polygon(x)});
@@ -336,9 +338,12 @@ const JSON_BODY=valueBytes;
 const P='coordination/engineering/selected-geography-effective-prevention-20261009/';
 const {JOINT_CODE:JOINT}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs');
 const MEMBERS=['derived-certificate.json.gz','derived-facts.json','derived-publication.json','checkpoint-routes.json'];
-async function acceptedProducts(t,{sourcePaths,actualProducer=false,nativeOnly=false,nativeAppend=false,sourceOverride=false,physicalLogicalSource=false,inheritedCode=false,wireProducts=false,completedNative=false}={}) {
-  const f=nativeAppend||completedNative?await appendedFixture(t,{nativeAppend:true}):nativeOnly?await trustedNativeFixture(t,{nativeOnly:true}):await trustedFixture(t,{sourcePaths,sourceOverride,physicalLogicalSource,inheritedCode,wireProducts});
-  for(const name of [...JOINT,...(actualProducer?['scripts/check-geographic-regression.py','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt']:[])])f.save(name,fs.readFileSync(name));
+async function acceptedProducts(t,{sourcePaths,actualProducer=false,nativeOnly=false,nativeAppend=false,sourceOverride=false,physicalLogicalSource=false,inheritedCode=false,wireProducts=false,completedNative=false,finalBank=false}={}) {
+  const f=nativeAppend||completedNative||finalBank?await appendedFixture(t,{nativeAppend:true,finalBank}):nativeOnly?await trustedNativeFixture(t,{nativeOnly:true}):await trustedFixture(t,{sourcePaths,sourceOverride,physicalLogicalSource,inheritedCode,wireProducts});
+  let prepared;
+  if(finalBank){const admitted=await f.api.qualifyCheckpoint({reader:f.reader});assert.equal(admitted.available,true);
+    prepared=await oldBank(f,admitted.state);f.api.releaseCheckpoint(admitted.state);}
+  for(const name of [...JOINT,...(actualProducer?['scripts/check-geographic-regression.py','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt','.github/evidence-policy.json']:[])])f.save(name,fs.readFileSync(name));
   f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[f.rootRow]});
   if(f.inherited)f.save(f.inherited.path,{reviewed:'successor configuration'});
   const trusted=f.commit();
@@ -366,6 +371,8 @@ async function acceptedProducts(t,{sourcePaths,actualProducer=false,nativeOnly=f
   const transport=await import(pathToFileURL(path.join(f.root,'scripts/accepted-selected-checkpoint.mjs')));
   if(actualProducer){
     let candidate=trusted;
+    if(finalBank){const final=await writeFinal(f,prepared.index,prepared.features.map(p=>finishEffectiveFootprint(p,valueSha)),prepared.ownership);candidate=final.commit;}
+
     if(completedNative){
       Object.assign(f,await appendNativeAuthority(f,{name:'completed',completedConstructor:true}));
       Object.assign(f,await appendNativeAuthority(f,{name:'unfinished',owner:1,mutatePatch:patch=>{
@@ -438,7 +445,7 @@ async function acquire(f,mutate,{merged=f.trusted,tree=f.git('rev-parse',f.trust
     token:'fixture',fetchImpl:async()=>new Response(p.zip)});
   assert.equal(result.available,true);
   const reader=new f.native.ImmutableReader(f.root,f.trusted);
-  return {handle:result.handle,reader};
+  return {handle:result.handle,reader,fixture:{api,archive:p.zip,locator:{version:1,kind:'accepted-selected-checkpoint-locator-v1',acceptance:{pr_number:7,request_id:request,head}}}};
 }
 async function qualify(f,a) {return f.api.qualifyAcceptedCheckpoint({reader:a.reader,acceptedHandle:a.handle});}
 
@@ -1148,4 +1155,68 @@ test('missing-object fixture refuses duplicate or absent targets before changing
  assert.equal(inventory(),before);assert.doesNotThrow(()=>f.git('cat-file','-e',p.git_blob_oid));
  assert.throws(()=>omitFixtureObjects(t,f.root,['0'.repeat(40)]),/Every omission target must exist first/);
  assert.equal(inventory(),before);assert.doesNotThrow(()=>f.git('cat-file','-e',p.git_blob_oid));
+});
+
+// Actual existing Node/Python producer, actual retained artifact parser and a
+// fresh private reader. A live transition alone cannot cover this boundary.
+test('final-bank joint output survives retention and fresh accepted checkpoint admission',async t=>{
+ const f=await acceptedProducts(t,{actualProducer:true,finalBank:true});
+ assert.equal(f.products.facts.version,2);assert.equal(f.products.facts.kind,'derived-selected-final-checkpoint-candidate-v2');
+ const a=await acquire(f);t.after(()=>f.transport.releaseAcceptedCheckpoint(a.handle));
+ const admitted=await qualify(f,a);assert.equal(admitted.available,true);assert.equal(admitted.state.version,2);
+ assert.equal(admitted.state.selection.version,2);
+ const next=await f.api.qualifyTransition({state:admitted.state,reader:new f.native.ImmutableReader(f.root,f.trusted,{invocation:a.reader.invocation})});
+ assert.equal(next.available,true);assert.deepEqual(next.changedNativeRows,[]);assert.deepEqual(next.changedIds,[]);
+});
+
+
+test('final-bank software cold report reuses comparison without checkpoint issuance',async t=>{
+ const f=await acceptedProducts(t,{actualProducer:true,finalBank:true}),a=await acquire(f);
+ const acceptedSource=f.transport.readAcceptedCheckpoint(a.handle).source;
+ f.transport.releaseAcceptedCheckpoint(a.handle);
+ const archivePath='coordination/engineering/final-bank-fixture/geography-artifact.zip';
+ f.save(archivePath,a.fixture.archive);f.save('data/selected-checkpoint.json',{...a.fixture.locator,retained_artifact:{path:archivePath}});
+ const codePath='scripts/check-effective-geographic-regression.mjs';
+ f.save(codePath,Buffer.concat([fs.readFileSync(path.join(f.root,codePath)),Buffer.from('\n// Actual reviewed software fixture.\n')]));
+ const candidate=f.commit(),native=await import(pathToFileURL(path.join(f.root,codePath)));
+ const keys=['GH_TOKEN','GITHUB_TOKEN','WORLDATLAS_CHECKOUT_TOKEN','GITHUB_REPOSITORY'];
+ const previous={fetch:globalThis.fetch,environment:Object.fromEntries(keys.map(key=>[key,process.env[key]]))};
+ const requests=[];
+ globalThis.fetch=async(input,options)=>{const url=new URL(input);requests.push(url.href);
+   assert.equal(options.headers.Authorization,undefined,'Candidate reads carry no credentials');
+   assert.equal(options.method,'GET');
+   assert.notEqual(url.hostname,'fixtures.blob.core.windows.net','No Actions archive transport in candidate code');
+   assert.equal(url.origin,'https://api.github.com');
+   assert(!url.pathname.endsWith('/zip'),'No authenticated artifact fallback');
+   return new Response(JSON.stringify(await a.fixture.api(url.pathname+url.search)),{headers:{'content-type':'application/json'}});
+ };
+ for(const key of keys)delete process.env[key];process.env.GITHUB_REPOSITORY='owner/repo';
+ try{
+   const publicApi=f.transport.acceptedCheckpointAPI(undefined,{publicReadOnly:true});
+   await assert.rejects(()=>publicApi('/repos/owner/repo/issues','POST',{}),/metadata GET only/);
+   await assert.rejects(()=>publicApi.artifactRedirect('/repos/owner/repo/actions/artifacts/56/zip'),/metadata GET only/);
+   assert.throws(()=>f.transport.acceptedCheckpointAPI('fixture',{publicReadOnly:true}),/cannot carry credentials/);
+   assert.throws(()=>f.transport.acceptedCheckpointAPI(undefined),/token required/,'Ordinary joint issuance retains token-required acquisition');
+   const {loadGeographicReport}=await import(pathToFileURL(path.join(f.root,'scripts/geographic-report-artifact.mjs')));
+   const retained={api:a.fixture.api,repo:'owner/repo',runId:acceptedSource.run_id,artifactName:acceptedSource.artifact_name,
+     expectedHash:acceptedSource.report_sha256,source:acceptedSource};
+   await assert.rejects(()=>loadGeographicReport({...retained,retainedArchive:()=>undefined}),/requires its exact retained geographic archive/);
+   await assert.rejects(()=>loadGeographicReport({...retained,retainedArchive:()=>Buffer.from('corrupt')}),/differs from accepted artifact digest/);
+   const report=await native.inspectSelectedAcquired(f.root,f.trusted,candidate);
+   assert.equal(report.status,'no-new-native-loss');assert.equal(report.candidate_code_executed,true);
+   assert.equal(report.derived_checkpoint,undefined);assert.equal(report.checkpoint,undefined);
+   assert(report.execution_code_inventory.some(p=>p.path.endsWith('selected-checkpoint.mjs')));
+   assert(report.execution_code_inventory.some(p=>p.path===codePath&&p.sha256===sha(fs.readFileSync(path.join(f.root,codePath)))));
+   assert(requests.length>0,'Accepted input was authenticated through the existing transport');
+   assert.deepEqual(f.git('status','--porcelain').toString().trim(),'','Report-only comparison writes no checkpoint products');
+   const raw=path.join(f.root,'fixture-native-report.json');fs.writeFileSync(raw,JSON.stringify(report));
+   const driver="import importlib.util,json,pathlib,sys,io,contextlib\nrepo=pathlib.Path(sys.argv[1]);baseline,candidate,raw,out=sys.argv[2:];s=importlib.util.spec_from_file_location('wrapper',repo/'scripts/run-geographic-check.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)\noriginal=m.subprocess.check_output\ndef transport(command,*args,**kwargs):\n if '--input-type=module' in command:return pathlib.Path(raw).read_bytes()\n return original(command,*args,**kwargs)\nm.subprocess.check_output=transport\nm.unchanged_selected_inputs=lambda *args,**kwargs:None\nsys.argv=['run-geographic-check.py','--repo',str(repo),'--baseline',baseline,'--candidate',candidate,'--code-commit',candidate,'--out',out]\nwith contextlib.redirect_stdout(io.StringIO()):result=m.main()\nassert result==0\nprint(pathlib.Path(out).read_text())";
+   let calls=0;const enclosing=()=>JSON.parse(execFileSync(process.env.PYTHON??'python3',['-I','-B','-c',driver,f.root,f.trusted,candidate,raw,path.join(f.root,'cold-main-'+(++calls)+'.json')],{encoding:'utf8',env:{...process.env,NODE:process.execPath}}));
+   const wrapped=enclosing();assert.equal(wrapped.candidate_code_executed,true);assert.equal(wrapped.selected_native_report.candidate_code_executed,true);
+   assert.equal(wrapped.checkpoint,undefined);assert.equal(wrapped.source_approval,false);
+   fs.writeFileSync(raw,JSON.stringify({...report,candidate_code_executed:false}));
+   assert.throws(enclosing,/lacks a completed native result/,'The real wrapper refuses a false candidate-code child claim');
+   f.save('data/selected-checkpoint.json',a.fixture.locator);const missingArchive=f.commit();
+   await assert.rejects(()=>native.inspectSelectedAcquired(f.root,f.trusted,missingArchive),/requires its authenticated accepted checkpoint/);
+ }finally{globalThis.fetch=previous.fetch;for(const [key,value]of Object.entries(previous.environment)){if(value===undefined)delete process.env[key];else process.env[key]=value;}}
 });

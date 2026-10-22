@@ -27,6 +27,31 @@ between the Python wrapper and a new Node child. Releasing it expires access.
 Original predecessor acceptance remains lineage; it is not a request to reacquire
 or rerun historical science.
 
+## Final-bank authority profile
+
+The versioned existing checkpoint can bind selector-v2's complete index-v3 final
+bank/context instead of cumulative repair products. Initial adoption authenticates
+the actual accepted predecessor's exact words and deterministic finished-footprint
+conversion. Its compact authority list is derived from the complete accepted
+registry: unique sorted authority SHA plus the complete canonical entry digest,
+including any completed constructor. Later transitions retain every prior pair
+exactly and reject a repeated authority SHA even if its completion pin changes.
+Only the existing privately qualified new native append can add pairs/cells.
+
+The shared comparison checks every unchanged word/context value, exact new
+unassigned-before intervals/qualified owners, fixed compatibility URLs and current
+reference metadata. Lazy untouched reference geometry stays lazy; a newly touched
+owner must match its retained original geometry hash. Metadata-only projection
+updates remain distinct from new positive cell authorities. Old authority bodies
+and cumulative ledgers remain historical evidence, not normal final-bank inputs.
+
+Candidate-code cold reports use the same exhaustive comparison, identify their
+actual executing code, and cannot issue or retain accepted checkpoint authority.
+This route is credential-free: anonymous read-only custody metadata plus the exact
+retained artifact, with no authenticated Actions-download fallback. Ordinary
+accepted-code joint issuance still requires its existing authenticated custody.
+A malformed or downgraded current profile cannot choose legacy replay.
+
 ## Authenticated artifact
 
 `geography-check.json` remains the authenticated root, including the actual native

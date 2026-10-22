@@ -265,7 +265,7 @@ export async function validateGeographyOrigin(options) {
 
 export async function loadGeographicReport({api, repo, runId, artifactName, expectedHash, source, fresh, retainedArchive, token, fetchImpl = fetch, onRequest = () => {}}) {
   need(/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') && /^[1-9]\d*$/.test(String(runId)) &&
-    hash(expectedHash) && token && (source || fresh), 'Missing trusted geographic artifact outputs');
+    hash(expectedHash) && (token || !fresh && typeof retainedArchive === 'function') && (source || fresh), 'Missing trusted geographic artifact outputs');
   if (fresh) {
     const originAttempt = Number(artifactName?.split('-').at(-1));
     need(!source && positive(fresh.run_attempt) && positive(fresh.artifact_id) &&
@@ -302,6 +302,7 @@ export async function loadGeographicReport({api, repo, runId, artifactName, expe
     }
   }
   if (bytes == null) {
+    need(token, 'Credential-free checkpoint requires its exact retained geographic archive');
     // The fixed API host receives credentials; exact-ID signed delivery does
     // not. Permission, expiry and transport errors propagate without guessing
     // whether a missing remote object means access was denied.

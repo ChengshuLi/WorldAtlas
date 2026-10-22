@@ -118,7 +118,7 @@ test('reference metadata rejects stale current/native references and original so
  }
  f.projection=original;await saveProjection(f);
  await assert.rejects(prepareCurrentSelectedAdditive({...f,geographicRelease:f.native}),/selected geographic release/);
- f.selection.release_id=f.current.id;await saveSelection(f);await assert.rejects(prepareCurrentSelectedAdditive(f),/different native base/);
+ f.selection.release_id=f.current.id;await saveSelection(f);await assert.rejects(prepareCurrentSelectedAdditive(f),/different native base|misidentifies its original native selection/);
 });
 
 test('reference metadata admits only receipted actual parents and the complete current province inventory',async t=>{
@@ -274,7 +274,7 @@ async function publicationFixture(t){
  const receiptFile='data/validation/neon-forward-migrations/receipt.json';await write(f.root,receiptFile,receipt);
  let builds=0,queries=0,live={...release,status:'published'},legacy=true;
  const fetchImpl=async(url,options)=>{queries++;assert.equal(options.redirect,'error');const u=new URL(url);if(u.pathname==='/api/geography/release'){assert.equal(u.searchParams.get('release_id'),release.id);return Response.json(live);}const page={release_id:legacy?prior.id:release.id,hierarchy_sha256:prior.hierarchy_sha256,footprints_sha256:prior.footprints_sha256};return Response.json(page,{headers:{'X-Atlas-Legacy-Map-Release':prior.id}});};
- const build=async()=>{builds++;await write(f.root,'dist/client/atlas-geography.json',{additiveRelease:{base_reference:f.current}});await write(f.root,'dist/client/assets/app.js','actual fixture output');await write(f.root,'dist/cloudflare/index.js','actual fixture Worker output');await write(f.root,'dist/cloudflare/wrangler.json',{name:'worldatlas-explorer',vars:{ATLAS_PUBLIC_READ_ONLY:'1',ATLAS_READ_ONLY:'1',ATLAS_CONTENT_BACKEND:'postgres'}});await write(f.root,'.cache/package-input-build.json',{version:1,kind:'cloudflare',preflight:{passed:true,errors:[],inputs:{head:git('rev-parse','HEAD')}},input_definition_sha256:sha(await fs.readFile(path.join(f.root,'.github/package-inputs.json')))});};
+ const build=async()=>{builds++;await write(f.root,'dist/client/atlas-geography.json',{additiveRelease:f.envelope,reference_release:f.envelope.effective_reference});await write(f.root,'dist/client/assets/app.js','actual fixture output');await write(f.root,'dist/cloudflare/index.js','actual fixture Worker output');await write(f.root,'dist/cloudflare/wrangler.json',{name:'worldatlas-explorer',vars:{ATLAS_PUBLIC_READ_ONLY:'1',ATLAS_READ_ONLY:'1',ATLAS_CONTENT_BACKEND:'postgres'}});await write(f.root,'.cache/package-input-build.json',{version:1,kind:'cloudflare',preflight:{passed:true,errors:[],inputs:{head:git('rev-parse','HEAD')}},input_definition_sha256:sha(await fs.readFile(path.join(f.root,'.github/package-inputs.json')))});};
  return {...f,release,prior,receipt,receiptFile,git,args:{root:f.root,fetchImpl,build,env:{ATLAS_PUBLIC_READ_ONLY:'1'}},get builds(){return builds;},get queries(){return queries;},set live(value){live=value;},set legacy(value){legacy=value;}};
 }
 test('coordinated publication selects M not N/E, stops before build, and resumes exact retained output without rebuilding',async t=>{

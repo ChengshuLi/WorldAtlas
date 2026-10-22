@@ -546,7 +546,7 @@ export function qualifyOriginalNativeAuthority(custody, pins) {
 // Comparison is conservation, not admission of new authorities. The caller
 // must authenticate every whole registry preimage/source-authority body through
 // the committed selector before using this view. A registry is not approval.
-function authorityRegistry(registry) {
+export function authorityRegistry(registry) {
  demand(registry?.version===1&&registry.kind==='retained-rule-authority-registry-v1'&&Array.isArray(registry.entries)&&registry.entries.length>0,'Missing explicit retained authority registry');
  const byId=new Map();let previous='';
  for(const entry of registry.entries){

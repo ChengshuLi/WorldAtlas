@@ -5,11 +5,14 @@ consume the reviewed current atlas products. They do not reconstruct v8, install
 v9, replay original scientific qualification or rewrite temporal bucket headers.
 The normal test shards likewise read the committed current products.
 
-`data/ownership-selection.json` selects the base native manifest and optional
-accepted additive sidecar. Prepared ownership/reference/evidence indices and
-runtime buckets remain bound to that **base** footprint. The additive envelope
-supplies its separate effective reference. A new additive selection does not
-silently rebind temporal data to a different footprint.
+The final-authority profile uses selector version 2 and prepared index version 3.
+The selector whole-pins the complete final bank/context in one direction; the
+index does not hash that selector back. N remains the original physical/latitude
+reference, M the content reference for dated/Neon reads, and E the complete final
+word/context identity. A cell correction alone does not silently change M.
+Historical selector version 1/index version 2 remain readable as provenance and
+as the one-time migration source, not as a fallback for a malformed final profile.
+Support-code publication alone does not adopt the new profile.
 
 The native deployment transport is prepared once in
 `data/canonical-grid/current-startup/`. Its index binds the selected native
@@ -42,7 +45,7 @@ output directory, preserving the fixed compatibility URLs and normative N:
 node scripts/prepare-startup-ownership.mjs --output /tmp/worldatlas-startup-next
 ```
 
-The default reads the committed selection and current-startup predecessor. An
+For the historical/native setup route, the default reads the committed selection and current-startup predecessor. An
 explicit reviewed candidate may be supplied with `--manifest REPOSITORY_PATH
 --sha256 WHOLE_MANIFEST_SHA256`; `--previous DIRECTORY` selects its predecessor.
 The command uses the existing native packers and exact-fragment restorer. It does
@@ -53,10 +56,12 @@ unchanged chunks reuse the same paths. The fixed normative latitude-rule URL
 remains unchanged.
 The completed index is written last; failed attempts cannot become a valid bank.
 
-For accepted additive updates, the existing delivery finalizer prepares and
-adopts the matching final bank automatically with the selector/package outputs.
-It consumes the reviewed source sidecar and patch once during preparation, not in
-the visitor's browser. Bank or context failure cannot publish a successful
+For final-profile updates, the existing delivery finalizer uses the actual
+accepted E bank and only a newly proposed native interval delta. It does not
+reconstruct the bank from N and cumulative historical repairs. Metadata-only
+updates preserve every word and update only authenticated current context.
+The finalizer prepares bytes, not scientific authority; the ordinary accepted-code
+joint comparison separately qualifies new evidence and every changed cell. Bank or context failure cannot publish a successful
 selector. Its ordinary whole-set preflight and explicit interrupted resume apply
 to bank writes and exact obsolete-v2 removals; the selector is adopted last.
 This is resumable publication, not an atomic multi-file transaction.
@@ -66,20 +71,33 @@ source products. Git records the actual corrected map chunks and context as well
 as the original scientific evidence. Website builds authenticate and copy that
 bank. Browser startup reads E directly and loads its bound feature/parent/geometry
 context; it does not fetch or replay the four repair operands and cannot silently
-fall back to N. The retained additive envelope is provenance, not a served-asset
-roster. M remains the dated content reference, so an ownership-cell repair alone
+fall back to N. An old additive envelope is historical provenance, not a current final-profile
+package input or served-asset roster. M remains the dated content reference, so an ownership-cell repair alone
 does not change the Neon geographic release or require database writes.
 
-Full builds and retained-output assembly independently compare every emitted row
-and run word with stock N plus the accepted patch. N is checked against the
-original manifest's complete decoded chunk identities, without fetching another
-copy of its historical compressed parts. Exact selected, held and unchanged owner
-checks remain. These are representation/consumer checks, not a science rerun.
+Final-profile builds and retained-output assembly compare every emitted row/run
+word and complete context with the selected whole bank, including decoded stream
+hashes. They do not consume the old ledger, patch, registry or repair envelope.
+The one-time accepted-code migration proves unchanged words against the actual
+accepted E and deterministic finished polygon/ring/interval conversion. Later
+joint comparisons prove every unchanged cell and context value and admit only
+new, disjoint, unassigned-before cells with their qualified owners. Unsupported
+native/source-base changes refuse rather than silently using historical replay.
+
+The first migration must follow delivery of its support code and receive its own
+ordinary accepted-code joint result; a software-only report cannot issue that
+checkpoint. Run version-2 `finalize` through the existing delivery command (see
+[DELIVERY_HANDOFF.md](DELIVERY_HANDOFF.md)). The older standalone startup producer
+is for historical/native setup and explicitly refuses a current final selector.
+Only the initial migration inspects the accepted historical package-role graph
+to retire exact old website declarations. Verification custody and historical
+files remain; current N, source/reference and independently used application
+inputs are retained. Later final-profile updates need no historical graph scan.
 
 ## Deployment lifetime and reuse
 
 Every preexisting version-1 compatibility URL and normative N file remains
-available with exactly its original bytes. Version 2 records that fixed roster
+available with exactly its original bytes. Versions 2 and 3 record that fixed roster
 explicitly. Only the current deployment's newly introduced E/context set is active;
 obsolete prior-v2 files may be removed only from their authenticated prior roster,
 with exact whole preimages. No directory-wide deletion or same-URL rebinding is
@@ -90,7 +108,7 @@ No unique source evidence is deleted.
 The first changed-consumer rollout requires a genuine new full-build capture.
 Later selected-data updates can reuse an eligible invariant package: the existing
 assembler copies the current authenticated bank/context, retires only the prior
-v2 mutable set and preserves all other output bytes. Two exact selector-bound
+authenticated mutable E/context set and preserves all other output bytes. Two exact selector-bound
 indices derive its allowed additions/removals; a prefix or self-declared hash
 alone does not grant admission. Normal package checks and emitted full-word
 parity remain mandatory. Temporary stages and generated artifacts follow the

@@ -12,7 +12,7 @@ import {loadCoverageClassification} from './coverage-classification.js';
 import {loadOwnershipAssets} from './ownership-assets.js';
 import {loadNativeLatitudes} from './native-latitudes.js';
 import {NATIVE_METHOD} from './ownership-method.js';
-import {additiveBaseReference,nativeReferenceForData,loadPreparedNativeContext,loadedBaseFootprintSha256,additiveReleaseFootprintDigest,footprintValueSha256} from './effective-footprint.js';
+import {additiveBaseReference,nativeReferenceForData,loadPreparedNativeContext,loadedBaseFootprintSha256,additiveReleaseFootprintDigest,finishedReleaseFootprintDigest,footprintValueSha256} from './effective-footprint.js';
 import { validYear } from './model.js';
 import { validateHierarchy } from './hierarchy.js';
 
@@ -279,10 +279,11 @@ export async function loadSnapshot(year, examples, signal) {
 }
 
 export async function ensureGeometry(data,signal){
-  if(!data.geometryParts){if(data.additiveRelease&&data.features.some(f=>!f.geometry))throw Error('Additive release requires complete original geometry transport');return;}
+  const final=data.preparedOwnership?.version===3,corrected=final||data.additiveRelease!==undefined;
+  if(!data.geometryParts){if(corrected&&data.features.some(f=>!f.geometry))throw Error('Additive release requires complete original geometry transport');return;}
   data.geometryRequest ||= Promise.all(data.geometryParts.map(p=>readJSON(`./${p}`))).then(parts=>{
     const rows=parts.flat();
-    if(data.additiveRelease){
+    if(corrected){
       const ids=new Set(data.features.map(f=>f.id));
       if(ids.size!==data.features.length||rows.length!==ids.size||new Set(rows.map(f=>f.id)).size!==rows.length
         ||rows.some(f=>!ids.has(f.id)||!f.geometry))throw Error('Incomplete/duplicate/foreign additive base geometry transport');
@@ -291,11 +292,14 @@ export async function ensureGeometry(data,signal){
   }).catch(error=>{data.geometryRequest=null;throw error;});
   const geometries=await data.geometryRequest;signal?.throwIfAborted();
   const loaded=data.features.map(f=>({...f,geometry:geometries.get(f.id)}));
-  if(data.additiveRelease){
+  if(corrected){
     const reference=additiveBaseReference(data);
     if(loadedBaseFootprintSha256(loaded)!==reference.footprints_sha256)throw Error('Complete original additive base geometry checksum differs');
-    for(const f of loaded)if(f.additiveFootprint&&footprintValueSha256(f.geometry)!==f.additiveFootprint.base_geometry_sha256)throw Error('Selected additive target base geometry differs');
-    if(additiveReleaseFootprintDigest(reference,loaded)!==data.reference_release.footprints_sha256)throw Error('Additive geometry effective domain differs');
+    for(const f of loaded){
+      const expected=final?f.finishedFootprint?.reference_geometry_sha256:f.additiveFootprint?.base_geometry_sha256;
+      if(expected!==undefined&&footprintValueSha256(f.geometry)!==expected)throw Error('Selected effective target reference geometry differs');
+    }
+    if((final?finishedReleaseFootprintDigest:additiveReleaseFootprintDigest)(reference,loaded)!==data.reference_release.footprints_sha256)throw Error('Effective geometry domain differs');
   }
   for(let i=0;i<loaded.length;i++)data.features[i].geometry=loaded[i].geometry;
 }

@@ -115,14 +115,15 @@ export async function linkedPulls(api,repo,number){
  return completeReads([...ids].map(id=>api(`/repos/${repo}/pulls/${id}`)));
 }
 export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readWaitMs = 0, now = Date.now, sleep = ms => new Promise(resolve => setTimeout(resolve, ms)), deadlineRemaining,
- conditionalReads = true, snapshotBytes = 64 * 1024 * 1024, snapshotEntries = 128} = {}){
- if(!token)throw Error('Read/write GitHub token required');
+ publicReadOnly = false, conditionalReads = true, snapshotBytes = 64 * 1024 * 1024, snapshotEntries = 128} = {}){
+ if(publicReadOnly ? token !== undefined && token !== '' : !token)throw Error(publicReadOnly?'Public GitHub reads cannot carry credentials':'Read/write GitHub token required');
  if(deadlineRemaining!==undefined&&typeof deadlineRemaining!=='function')throw Error('Invalid job deadline');
  const remaining=()=>{const value=deadlineRemaining?deadlineRemaining():Infinity;if(deadlineRemaining&&!Number.isFinite(value))throw Error('Invalid job deadline');return value;};
  const admit=()=>{if(remaining()<=HTTP_ATTEMPT_MS)throw Object.assign(Error('Job deadline cannot admit another bounded HTTP attempt'),{jobDeadline:true});};
  const apiStarted=now();
  const snapshots=conditionalSnapshots({maxBytes:snapshotBytes,maxEntries:snapshotEntries});
  const request = async(route,method='GET',body,artifactRedirect=false,maxResponseBytes)=>{
+  if(publicReadOnly&&(method!=='GET'||body!==undefined||artifactRedirect))throw Error('Public GitHub access permits metadata GET only');
   admit();
   // Immutable blobs already have independently bounded custody/transport caches.
   // Actions may retain a queued snapshot while the same job starts. Always
@@ -131,7 +132,7 @@ export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readW
   const conditional=maxResponseBytes===undefined&&!jobInventory&&!artifactRedirect&&conditionalReads&&method==='GET'&&body===undefined&&route!=='/rate_limit'&&!/\/git\/blobs\//.test(route);
   const snapshot=conditional?snapshots.get(route):undefined;
   let response;
-  try {response=await fetchImpl('https://api.github.com'+route,{method,headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(snapshot?{'If-None-Match':snapshot.etag}:{}),...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(HTTP_ATTEMPT_MS),redirect:artifactRedirect?'manual':'error'});}
+  try {response=await fetchImpl('https://api.github.com'+route,{method,headers:{...(!publicReadOnly?{Authorization:`Bearer ${token}`} : {}),Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(snapshot?{'If-None-Match':snapshot.etag}:{}),...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(HTTP_ATTEMPT_MS),redirect:artifactRedirect?'manual':'error'});}
   catch(error){onRequest({route,method,status:'transport-error'});throw error;}
   // Optional caller-owned phase admission. Cap the actual stream before JSON
   // allocation; never revalidate a larger cached representation for this read.

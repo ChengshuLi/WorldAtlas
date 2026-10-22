@@ -10,7 +10,8 @@ import {isDeepStrictEqual} from 'node:util';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
 import {footprintHash} from './check-prepared.mjs';
-import {originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
+import {additiveBaseReference} from '../src/effective-footprint.js';
+import {scientificNativeSelection,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
 import {githubAPI, githubPages} from './issue-claim-contract.mjs';
 import {loadPackageInputs, readPackageInputs, containsPackagePath, safePackagePath, PREPARED_STARTUP_INDEX} from './package-inputs.mjs';
 import {compatiblePackageProducers,requireProducerInstallation} from './package-producer-contract.mjs';
@@ -266,7 +267,7 @@ export function readOriginalPackageGeography(original,{sourceRoot}={}) {
     need(raw.length===pin.bytes&&hash(raw)===pin.sha256,'Original geography output differs');return raw;
   };
   const atlas=JSON.parse(read('dist/client/atlas-geography.json'));
-  need(atlas.additiveRelease?.base_reference,'Original additive base descriptor missing');
+  need(additiveBaseReference(atlas),'Original content base descriptor missing');
   const asset=pin=>{
     need(/^additive-repairs\/[A-Za-z0-9_.-]+$/.test(pin?.path??''),'Original additive asset path differs');
     const name='dist/client/'+pin.path;
@@ -275,12 +276,12 @@ export function readOriginalPackageGeography(original,{sourceRoot}={}) {
   };
   let selectedGrid;
   if(atlas.preparedOwnership!==undefined){
-    need(atlas.preparedOwnership.version===2&&sourceRoot,'Original corrected bank requires its unchanged source native manifest');
-    const name=manifest.source.selection.manifest_path,originalPin=manifest.source.files.find(pin=>pin.path===name);
+    need(atlas.preparedOwnership.version===(manifest.source.selection.version===2?3:2)&&sourceRoot,'Original corrected bank requires its unchanged source native manifest');
+    const native=scientificNativeSelection(manifest.source.selection),name=native.manifest_path,originalPin=manifest.source.files.find(pin=>pin.path===name);
     need(safePackagePath(name)&&originalPin?.mode==='100644','Original native source pin missing');
     const file=path.join(sourceRoot,name),raw=fs.readFileSync(file);
     need(fs.lstatSync(file).isFile()&&fs.realpathSync(file)===file&&createHash('sha1').update('blob '+raw.length+'\0').update(raw).digest('hex')===originalPin.oid
-      &&hash(raw)===manifest.source.selection.sha256&&hash(raw)===atlas.preparedOwnership.native_manifest_sha256,'Original native source body differs');
+      &&hash(raw)===native.sha256&&hash(raw)===atlas.preparedOwnership.native_manifest_sha256,'Original native source body differs');
     selectedGrid={sha256:hash(raw),manifest:JSON.parse(raw)};
   }else selectedGrid={sha256:atlas.additiveRelease.base_manifest.sha256,
     manifest:JSON.parse(asset(atlas.additiveRelease.base_manifest)),bounds:asset(atlas.additiveRelease.owner_roster)};
@@ -301,7 +302,7 @@ export function readOriginalPackageGeography(original,{sourceRoot}={}) {
     need(typeof feature.id==='string'&&!ids.has(feature.id)&&feature.geometry===null&&geometries.has(feature.id),'Original geography identity join differs');
     ids.add(feature.id);return {...feature,geometry:geometries.get(feature.id)};
   });
-  const geographicRelease=atlas.additiveRelease.base_reference;
+  const geographicRelease=additiveBaseReference(atlas);
   need(ids.size===geometries.size&&footprintHash(features)===geographicRelease.footprints_sha256,'Original complete base geometry differs');
   let referenceRevision;
   if(manifest.source.selection?.reference_projection!==undefined||atlas.referenceMetadata!==undefined){
@@ -359,7 +360,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     const publication=await readCurrentSelectedAdditive({root,selectedGrid,geographicRelease,referenceRevision});
     need(publication&&same(publication.selection,current.selection),'Genuine same-source current additive publication required');
     need(isDeepStrictEqual(publication.referenceMetadata,atlas.referenceMetadata),'Current reference metadata differs from retained output');
-    need(atlas.preparedOwnership?.version===2,'Corrected-bank reuse requires a matching full-capture producer');
+    need(atlas.preparedOwnership?.version===(publication.finalBank?3:2),'Corrected-bank reuse requires a matching full-capture producer');
     const bankPrefix='data/canonical-grid/current-startup/',preparedDirectory=path.join(scratch,'prepared');
     const prepared=await packagePreparedStartupOwnership({manifest:selectedGrid.manifest,manifestSha:selectedGrid.sha256,
       source:path.join(root,bankPrefix),destination:preparedDirectory,selected:publication,features});
@@ -380,7 +381,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
       const name='dist/client/'+pin.path,prior=originalFiles.get(name);
       need(!prior||same(prior,{path:name,bytes:pin.bytes,sha256:pin.sha256}),'Prepared immutable output URL would be rebound');
     }
-    atlas.reference_release=publication.reference_release;atlas.additiveRelease=publication.additiveRelease;
+    atlas.reference_release=publication.reference_release;if(publication.additiveRelease)atlas.additiveRelease=publication.additiveRelease;else delete atlas.additiveRelease;
     atlas.pixelMap=prepared.pixelMap;atlas.preparedOwnership=prepared.preparedOwnership;
     const atlasRaw=Buffer.from(JSON.stringify(atlas));
     admitDisk(atlasRaw.length+prepared.files.reduce((sum,pin)=>sum+pin.bytes,0)+6*4096,'the actual corrected bank and atlas');

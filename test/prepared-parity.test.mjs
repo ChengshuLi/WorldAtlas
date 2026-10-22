@@ -264,6 +264,8 @@ test('finished static native bank preserves every accepted word, owner and effec
  assert.ok(haveStatic,'A complete static build is required for publication');
  const data=read(path.join(staticRoot,'atlas-geography.json'));
  const selection=read(path.join(root,'data/ownership-selection.json'));
+ if(selection.version===2){const {checkEmittedSelectedDelivery}=await import('../scripts/selected-delivery-smoke.mjs');
+  const report=await checkEmittedSelectedDelivery({root,emittedDirectory:staticRoot});assert.equal(report.kind,'actual-emitted-final-bank-consumer');assert(report.complete_run_words>0);return;}
  const native=read(path.join(root,selection.manifest_path));
  const selected=await readCurrentSelectedAdditive({root,selectedGrid:{manifest:native,sha256:selection.sha256},
    geographicRelease:data.preparedOwnership?.base_reference??data.reference_release,referenceRevision:data.referenceMetadata?.application_reference_revision});

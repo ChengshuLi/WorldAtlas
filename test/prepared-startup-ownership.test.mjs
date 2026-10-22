@@ -4,7 +4,7 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {packagePreparedStartupOwnership} from '../scripts/package-startup-ownership.mjs';
+import {packagePreparedStartupOwnership,readPreparedFinalOwnership} from '../scripts/package-startup-ownership.mjs';
 const hash=raw=>createHash('sha256').update(raw).digest('hex');
 const nativePath='coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json';
 
@@ -103,4 +103,46 @@ test('prepared startup binds complete selected latitude and optional canonical i
  await assert.rejects(fs.stat(f.destination),{code:'ENOENT'});
  f.index.pixelMap.canonical_grid_sha256=f.manifestSha;await f.write();
  await packagePreparedStartupOwnership(f);
+});
+
+test('finished-bank profile uses the existing copier and complete decoder without historical repair reads',async t=>{
+ const f=await fixture(t),{prepareFinalBankStartupOwnership}=await import('../scripts/prepare-startup-ownership.mjs');
+ const {finalBankReference}=await import('../src/effective-footprint.js');
+ const base={id:f.manifest.geographic_release,footprints_sha256:f.manifest.footprints_sha256,hierarchy_sha256:f.manifest.hierarchy_sha256};
+ const ownerHash=hash(Buffer.from(JSON.stringify([[1,'A']]))),features=[{id:'A',pixelIndex:1,geometry:null,properties:{id:'A',parent_id:'P'},gridBounds:[0,0,1,1]}];
+ const native={...f.index.pixelMap,canonical_grid_sha256:f.manifestSha};
+ const previous={...f.index,version:2,compatibility_files:f.index.files,preparedOwnership:{native_pixel_map:native,owners:1,reference_owner_sha256:ownerHash}};
+ const rows=new Uint32Array(262166*2);rows[1]=1;for(let y=1;y<262166;y++)rows[y*2]=1;
+ const ownership={...native,rows,runs:Uint32Array.of(2**19+12,19),runWords:2,reference_owner_sha256:ownerHash};
+ const stage=path.join(path.dirname(f.source),'finished');
+ const index=await prepareFinalBankStartupOwnership({manifest:f.manifest,manifestSha:f.manifestSha,previous,ownership,features,baseReference:base,destination:stage});
+ const generated=[];
+ async function collect(relative=''){
+  for(const entry of await fs.readdir(path.join(stage,relative),{withFileTypes:true})){
+   const name=relative?relative+'/'+entry.name:entry.name;
+   if(entry.isDirectory())await collect(name);else {const raw=await fs.readFile(path.join(stage,name));generated.push({path:name,bytes:raw.length,sha256:hash(raw)});await fs.mkdir(path.dirname(path.join(f.source,name)),{recursive:true});await fs.writeFile(path.join(f.source,name),raw);}
+  }
+ }
+ await collect();index.files=[...previous.files,...generated].sort((a,b)=>a.path.localeCompare(b.path));
+ const indexRaw=Buffer.from(JSON.stringify(index));await fs.writeFile(path.join(f.source,'index.json'),indexRaw);
+ const selected={finalBank:{path:'data/canonical-grid/current-startup/index.json',bytes:indexRaw.length,sha256:hash(indexRaw)},base,reference_release:index.preparedOwnership.effective_reference};
+ const copied=await packagePreparedStartupOwnership({...f,selected,features});assert.deepEqual(copied.pixelMap,index.pixelMap);assert.equal(copied.preparedOwnership.version,3);assert(!Object.hasOwn(index,'additiveRelease'));
+ for(const [name,raw]of f.payloads)assert.deepEqual(await fs.readFile(path.join(f.destination,name)),raw);
+ const requests=[],read=async pin=>{requests.push(pin.path);return fs.readFile(path.join(f.source,pin.path));};
+ const decoded=await readPreparedFinalOwnership({indexRaw,manifest:f.manifest,manifestSha:f.manifestSha,selected,features,read});
+ assert.deepEqual(decoded.ownership.rows,rows);assert.deepEqual(decoded.ownership.runs,ownership.runs);assert.deepEqual(decoded.features,features);
+ assert.deepEqual([...new Set(requests)].sort(),[...index.pixelMap.parts,...index.preparedOwnership.context_parts].map(p=>p.path).sort());
+ assert(!requests.some(p=>/ledger|patch|sidecar/.test(p)));
+ // Recompute a coherent E/selector around a false whole-stream declaration.
+ // Hashing declarations is not proof that they describe the consumed arrays.
+ const forged=structuredClone(index);forged.preparedOwnership.rows_sha256='c'.repeat(64);
+ const e=finalBankReference(forged.preparedOwnership,forged.pixelMap,forged.footprints_sha256);
+ forged.preparedOwnership.effective_reference=e;forged.release_id=e.id;forged.pixelMap.geographic_release=e.id;
+ const badRaw=Buffer.from(JSON.stringify(forged)),badSelected={...selected,finalBank:{...selected.finalBank,bytes:badRaw.length,sha256:hash(badRaw)},reference_release:e};
+ await assert.rejects(readPreparedFinalOwnership({indexRaw:badRaw,manifest:f.manifest,manifestSha:f.manifestSha,selected:badSelected,features,read}),/complete word stream differs/);
+ const changed=structuredClone(features);changed[0].properties.parent_id='foreign';
+ await assert.rejects(readPreparedFinalOwnership({indexRaw,manifest:f.manifest,manifestSha:f.manifestSha,selected,features:changed,read}),/owner, parent or bounds differ/);
+ await assert.rejects(readPreparedFinalOwnership({indexRaw,manifest:f.manifest,manifestSha:f.manifestSha,selected:{...selected,finalBank:{...selected.finalBank,sha256:'f'.repeat(64)}},features,read}),/one-way selected index pin/);
+ const badRead=async pin=>{const raw=await read(pin);return pin.path===index.pixelMap.parts[0].path?Buffer.concat([raw,Buffer.from('changed')]):raw;};
+ await assert.rejects(readPreparedFinalOwnership({indexRaw,manifest:f.manifest,manifestSha:f.manifestSha,selected,features,read:badRead}),/whole identity differs/);
 });

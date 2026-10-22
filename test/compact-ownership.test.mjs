@@ -206,10 +206,11 @@ test('packaged coverage supports all modes, gap explanations and unavailable-ref
 // Actual selected output probe in the existing shard0 route.
 test('actual emitted selected additive cells retain exact owners and sampler output', {timeout:240000},async t=>{
  const selection=JSON.parse(fs.readFileSync('data/ownership-selection.json'));
- if(selection.additive_release===undefined){t.skip('Actual selected bank has no additive release');return;}
+ if(selection.version!==2&&selection.additive_release===undefined){t.skip('Actual selected bank has no additive release');return;}
  const {checkEmittedSelectedDelivery}=await import('../scripts/selected-delivery-smoke.mjs');
  const report=await checkEmittedSelectedDelivery();
- assert.ok(report.cumulative_native_cells_picked_and_sampled>0);
+ if(selection.version===2){assert.equal(report.kind,'actual-emitted-final-bank-consumer');assert.ok(report.complete_row_words>0&&report.occupied_controls_picked_and_sampled>0);}
+ else assert.ok(report.cumulative_native_cells_picked_and_sampled>0);
  // The real numerical-rule loader retains the former latitude transport check,
  // validating every row rather than constructing unused coordinates per cell.
  const {loadNativeLatitudes}=await import('../src/native-latitudes.js');

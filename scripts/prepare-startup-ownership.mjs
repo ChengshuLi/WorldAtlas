@@ -6,9 +6,9 @@ import {createHash} from 'node:crypto';
 import {isDeepStrictEqual} from 'node:util';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import {loadOwnershipAssets} from '../src/ownership-assets.js';
-import {additiveBaseReference,loadAdditiveNativePatch} from '../src/effective-footprint.js';
+import {additiveBaseReference,loadAdditiveNativePatch,finishedReleaseFootprintDigest,finalBankReference} from '../src/effective-footprint.js';
 import {originalNativeReference,scientificNativeSelection,validateReferenceMetadataHeader,projectReferenceOwners} from '../src/reference-metadata.js';
-import {packageFinalStartupOwnership,validatePreparedNativeStartup} from './package-startup-ownership.mjs';
+import {packageFinalStartupOwnership,encodeFinalOwnershipWords,validatePreparedNativeStartup} from './package-startup-ownership.mjs';
 
 import {readBuildOwnershipSelection, selectBuildOwnership} from './select-build-ownership.mjs';
 import {readGeographicReleaseManifest} from './read-geographic-release-manifest.mjs';
@@ -128,6 +128,20 @@ async function selectedSource(manifest, source, temporary) {
 
 // The normal finalization boundary prepares the selected final words once. The
 // original native bank and every scientific product keep their own identities.
+async function packageFeatureContext(features,destination) {
+  const contextParts=[];
+  for(let offset=0;offset<features.length;offset+=1500){
+    const raw=Buffer.from(JSON.stringify(features.slice(offset,offset+1500))),bytes=gzipSync(raw,{level:9});
+    need(raw.length<=32*1024*1024&&bytes.length<=8*1024*1024,'Prepared effective context exceeds existing part limits');
+    const sha256=digest(bytes),relative=`geography/effective-context-${sha256}.json.gz`;
+    await fs.mkdir(path.join(destination,'geography'),{recursive:true});
+    await fs.writeFile(path.join(destination,relative),bytes,{flag:'wx'});
+    contextParts.push({path:relative,bytes:bytes.length,sha256,encoding:'gzip',decoded_bytes:raw.length,
+      decoded_sha256:digest(raw),offset,features:Math.min(1500,features.length-offset)});
+  }
+  return contextParts;
+}
+
 export async function prepareSelectedStartupOwnership({selectionBytes,manifest,previous,readNative,readPin,destination}) {
   need([1,2].includes(previous?.version)&&Array.isArray(previous.files),'Authenticated previous prepared index required');
   const nativePixelMap=previous.preparedOwnership?.native_pixel_map??previous.pixelMap,nativeFiles=previous.files,previousParts=previous.pixelMap.parts;
@@ -188,16 +202,7 @@ export async function prepareSelectedStartupOwnership({selectionBytes,manifest,p
   }});
   const packaged=await packageFinalStartupOwnership({ownership:final,expectedReference:release.effective_reference,
     destination,previousParts});
-  const contextParts=[];
-  for(let offset=0;offset<features.length;offset+=1500){
-    const raw=Buffer.from(JSON.stringify(features.slice(offset,offset+1500))),bytes=gzipSync(raw,{level:9});
-    need(raw.length<=32*1024*1024&&bytes.length<=8*1024*1024,'Prepared effective context exceeds existing part limits');
-    const sha256=digest(bytes),relative=`geography/effective-context-${sha256}.json.gz`;
-    await fs.mkdir(path.join(destination,'geography'),{recursive:true});
-    await fs.writeFile(path.join(destination,relative),bytes,{flag:'wx'});
-    contextParts.push({path:relative,bytes:bytes.length,sha256,encoding:'gzip',decoded_bytes:raw.length,
-      decoded_sha256:digest(raw),offset,features:Math.min(1500,features.length-offset)});
-  }
+  const contextParts=await packageFeatureContext(features,destination);
   const preparedOwnership={version:2,selection_sha256:digest(selectionBytes),native_manifest_sha256:selection.sha256,
     native_pixel_map:{...nativePixelMap,canonical_grid_sha256:selection.sha256},base_reference:base,effective_reference:release.effective_reference,
     context_parts:contextParts,owners:features.length,reference_owner_sha256:final.reference_owner_sha256,
@@ -209,6 +214,38 @@ export async function prepareSelectedStartupOwnership({selectionBytes,manifest,p
   return {version:2,compatibility_files:compatibility,native_manifest_sha256:selection.sha256,release_id:release.effective_reference.id,
     footprints_sha256:release.effective_reference.footprints_sha256,hierarchy_sha256:release.effective_reference.hierarchy_sha256,
     pixelMap:packaged.pixelMap,preparedOwnership,additiveRelease:release,
+    ...(referenceMetadata?{referenceMetadata}:{})};
+}
+
+// The existing encoder publishes proposed finished words/context. It does not
+// qualify them: accepted-code joint conservation compares them with actual main.
+// No historical repair product is consumed by this final-profile producer.
+export async function prepareFinalBankStartupOwnership({manifest,manifestSha,previous,ownership,features,baseReference,referenceMetadata,destination}) {
+  need([2,3].includes(previous?.version)&&Array.isArray(previous.files),'Authenticated accepted final bank required');
+  const nativePixelMap=previous.preparedOwnership.native_pixel_map,compatibility=previous.compatibility_files;
+  validatePreparedNativeStartup({manifest,manifestSha,nativePixelMap,files:previous.files});
+  need(previous.native_manifest_sha256===manifestSha&&Array.isArray(compatibility)&&compatibility.length>0
+    &&new Set(compatibility.map(p=>p.path)).size===compatibility.length
+    &&compatibility.every(pin=>previous.files.some(old=>isDeepStrictEqual(pin,old))), 'Finished bank cannot change original native or compatibility custody');
+  need(Array.isArray(features)&&features.length===previous.preparedOwnership.owners
+    &&ownership.reference_owner_sha256===previous.preparedOwnership.reference_owner_sha256
+    &&isDeepStrictEqual(ownership.native_latitudes,nativePixelMap.native_latitudes), 'Finished bank changed complete original owner or physical domain');
+  const footprints=finishedReleaseFootprintDigest(baseReference,features);
+  const mapping=features.map(f=>[f.pixelIndex,f.id]).sort((a,b)=>a[0]-b[0]);
+  need(digest(Buffer.from(JSON.stringify(mapping)))===ownership.reference_owner_sha256,'Finished bank complete owner mapping differs');
+  const packaged=await encodeFinalOwnershipWords({ownership,destination,previousParts:previous.pixelMap.parts});
+  const contextParts=await packageFeatureContext(features,destination);
+  const preparedOwnership={version:3,kind:'prepared-final-native-bank-v3',native_manifest_sha256:manifestSha,
+    native_pixel_map:nativePixelMap,base_reference:baseReference,context_parts:contextParts,
+    owners:features.length,reference_owner_sha256:ownership.reference_owner_sha256,
+    rows_sha256:packaged.rows_sha256,runs_word_stream_sha256:packaged.runs_word_stream_sha256,
+    effective_footprint_domain:'worldatlas-final-native-footprints:v1'};
+  const reference=finalBankReference(preparedOwnership,packaged.pixelMap,footprints);
+  preparedOwnership.effective_reference=reference;
+  const pixelMap={...packaged.pixelMap,geographic_release:reference.id,footprints_sha256:reference.footprints_sha256,hierarchy_sha256:reference.hierarchy_sha256};
+  additiveBaseReference({preparedOwnership,pixelMap,reference_release:reference});
+  return {version:3,compatibility_files:compatibility,native_manifest_sha256:manifestSha,release_id:reference.id,
+    footprints_sha256:reference.footprints_sha256,hierarchy_sha256:reference.hierarchy_sha256,pixelMap,preparedOwnership,
     ...(referenceMetadata?{referenceMetadata}:{})};
 }
 
@@ -232,6 +269,7 @@ export async function prepareStartupOwnership({output, previous = defaultPreviou
   need(!selection.releaseId||selection.releaseId===selected.manifest.geographic_release,'Selected original native release differs');
   const selectionBytes=manifestPath===undefined?await read(path.resolve('data/ownership-selection.json')):null;
   const currentSelection=selectionBytes?JSON.parse(selectionBytes):null;
+  need(currentSelection?.version!==2,'Final ownership banks are prepared by the existing finalizer from accepted E, not by replaying original-native repairs');
   need(!inside(path.resolve(selected.source), output), 'Output cannot be inside the selected native source bank');
   const retained = await previousBank(previous);
   const temporary = await fs.mkdtemp(path.join(path.dirname(output), '.prepare-startup-'));

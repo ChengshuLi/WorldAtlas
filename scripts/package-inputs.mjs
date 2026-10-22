@@ -1,3 +1,4 @@
+import {scientificNativeSelection,finalBankSelection} from '../src/reference-metadata.js';
 import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
@@ -205,13 +206,16 @@ export function preparedStartupPackageTransition(before, current, raw = {}) {
   const inspect=(source,indexRaw,selectionRaw)=>{
     const index=parse(source,PREPARED_STARTUP_INDEX,indexRaw),selection=parse(source,'data/ownership-selection.json',selectionRaw);
     const proof=index.preparedOwnership;
-    need(equal(selection,source.selection)&&selection.method==='native-linear-evenodd-first-owner-v1'
-      &&index.version===2&&proof?.version===2&&proof.selection_sha256===sha(selectionRaw)
-      &&index.native_manifest_sha256===selection.sha256&&proof.native_manifest_sha256===selection.sha256
-      &&proof.native_pixel_map?.canonical_grid_sha256===selection.sha256,'Prepared transition selector/native binding differs');
-    need(equal(proof.base_reference,index.additiveRelease?.base_reference)
-      &&equal(proof.effective_reference,index.additiveRelease?.effective_reference)
-      &&index.release_id===proof.effective_reference?.id&&index.footprints_sha256===proof.effective_reference?.footprints_sha256
+    const final=index.version===3,selectedNative=scientificNativeSelection(selection);
+    need(equal(selection,source.selection)&&selectedNative.method==='native-linear-evenodd-first-owner-v1'
+      &&(final?proof?.version===3: index.version===2&&proof?.version===2&&proof.selection_sha256===sha(selectionRaw))
+      &&index.native_manifest_sha256===selectedNative.sha256&&proof.native_manifest_sha256===selectedNative.sha256
+      &&proof.native_pixel_map?.canonical_grid_sha256===selectedNative.sha256,'Prepared transition selector/native binding differs');
+    if(final){const pin=finalBankSelection(selection);need(pin.path===PREPARED_STARTUP_INDEX&&pin.bytes===indexRaw.length&&pin.sha256===sha(indexRaw)
+      &&index.additiveRelease===undefined&&equal(proof.effective_reference,selection.reference),'Prepared final transition index binding differs');}
+    else need(equal(proof.base_reference,index.additiveRelease?.base_reference)
+      &&equal(proof.effective_reference,index.additiveRelease?.effective_reference),'Prepared legacy transition content binding differs');
+    need(index.release_id===proof.effective_reference?.id&&index.footprints_sha256===proof.effective_reference?.footprints_sha256
       &&index.hierarchy_sha256===proof.effective_reference?.hierarchy_sha256,'Prepared transition content/effective binding differs');
     need(Array.isArray(index.files)&&index.files.length>0&&new Set(index.files.map(pin=>pin.path)).size===index.files.length
       &&Array.isArray(index.compatibility_files)&&index.compatibility_files.length>0
@@ -266,7 +270,12 @@ export function admitPackageInputTransition(before, current, {acceptedInputs, ty
     before.definition,current.definition,{selection:before.selection,priorSidecarRaw,priorEntry:name=>oldInventory.get(name),currentPaths:current.files.map(row=>row.path)});
   const {additive_release:oldAdditive,...oldBase}=before.selection;
   const {additive_release:newAdditive,...newBase}=current.selection;
-  need(same(oldBase,newBase)&&oldAdditive&&newAdditive,'Original invariant selection differs');
+  if(before.selection.version===2||current.selection.version===2){
+    need(before.selection.version===2&&current.selection.version===2,'First final-profile adoption requires a genuine full capture');
+    finalBankSelection(before.selection);finalBankSelection(current.selection);
+    need(isDeepStrictEqual(scientificNativeSelection(before.selection),scientificNativeSelection(current.selection))
+      &&isDeepStrictEqual(before.selection.reference_projection,current.selection.reference_projection),'Original final-profile native/reference selection differs');
+  }else need(same(oldBase,newBase)&&oldAdditive&&newAdditive,'Original invariant selection differs');
   const oldFiles=new Map(before.files.map(row=>[row.path,row])),newFiles=new Map(current.files.map(row=>[row.path,row]));
   need(oldFiles.size===before.files.length&&oldFiles.size>0&&newFiles.size===current.files.length,'Duplicate or incomplete source input inventory');
   const bank=preparedStartup?preparedStartupPackageTransition(before,current,preparedStartup):{changed:new Set(),added:new Set(),removed:new Set()};

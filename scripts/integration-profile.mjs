@@ -1,5 +1,5 @@
 import {repairComponentKey} from '../src/native-grid.js';
-import {scientificNativeSelection} from '../src/reference-metadata.js';
+import {finalBankSelection,scientificNativeSelection} from '../src/reference-metadata.js';
 import {focusedIntegrationTest} from './run-integration-tests.mjs';
 
 // These delivery controls use their actual focused consumers. Unknown runtime
@@ -284,6 +284,55 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     if (files.some(file => file.filename === PACKAGE_INPUT_FILE)) {
       packageDefinitions = {before:validatePackageInputs(await json(PACKAGE_INPUT_FILE, baseline)),
         after:validatePackageInputs(await json(PACKAGE_INPUT_FILE))};
+    }
+    if(oldSelection.version===2||selection.version===2){
+      // First adoption requires a fresh full capture. Later final banks use
+      // only current files and the newly proposed authority group, never the
+      // historical cumulative ledger or registry. Geography remains authority.
+      needSelected(oldSelection.version===2&&selection.version===2,'First final-profile adoption requires full capture');
+      finalBankSelection(oldSelection);finalBankSelection(selection);
+      needSelected(same(scientificNativeSelection(oldSelection),scientificNativeSelection(selection))
+        &&same(oldSelection.reference_projection,selection.reference_projection),'Final native/reference selection changed');
+      const reachable=new Set([SELECTION,PACKAGE_INPUT_FILE,...bank.changed]);
+      const pinned=async(value,jsonBody=false)=>{
+        needSelected(value&&safe(value.path)&&hash(value.sha256)&&Number.isSafeInteger(value.bytes)&&value.bytes>0,'Invalid final role');
+        const row=authored.entries.get(value.path);
+        needSelected(ordinary(row)&&row.size===value.bytes&&(value.mode===undefined||value.mode===row.mode)
+          &&(value.git_blob_oid===undefined||value.git_blob_oid===row.sha),'Final role tree differs');
+        reachable.add(value.path);
+        if(!jsonBody&&value.mode==='100644'&&value.git_blob_oid&&value.commit)return;
+        const raw=await read(value.path);needSelected(sha256(raw)===value.sha256,'Final role whole identity differs');
+        return jsonBody?parseJSON(raw):raw;
+      };
+      const full=value=>{needSelected(value?.mode==='100644'&&/^[a-f0-9]{40}$/.test(value.commit??'')
+        &&/^[a-f0-9]{40}$/.test(value.git_blob_oid??''),'Complete final evidence pin required');return value;};
+      if(selection.reference_projection){
+        const p=selection.reference_projection,a=baseline.entries.get(p.path),b=authored.entries.get(p.path);
+        needSelected(ordinary(a)&&a.sha===b?.sha&&a.size===b.size,'Final reference body changed');await pinned(p);
+      }
+      if(!same(oldSelection.change_evidence,selection.change_evidence)){
+        needSelected(selection.change_evidence,'New final evidence required');const registry=await pinned(selection.change_evidence,true),seen=new Set();
+        needSelected(registry.version===1&&registry.kind==='retained-rule-authority-registry-v1'&&Array.isArray(registry.entries)&&registry.entries.length>0,'New final registry required');
+        for(const entry of registry.entries){
+          needSelected(keys(entry,['authority_sha256','policy_id','policy_version','rule_preimage','rule_sha256','source_authority','completed_constructor'])
+            &&hash(entry.authority_sha256)&&!seen.has(entry.authority_sha256),'Final native authority shape/identity differs');seen.add(entry.authority_sha256);
+          const binding=await pinned(full(entry.source_authority),true),rule=await pinned(full(entry.rule_preimage),true);
+          needSelected(binding.version===1&&binding.kind==='source-target-native-custody-v1'
+            &&keys(binding,['version','kind','source_evidence','native_patch'])&&same(rule,{...binding,kind:'source-target-native-rule-v1'}),'Final native rule/binding differs');
+          await pinned(full(entry.completed_constructor));await pinned(full(binding.native_patch));await pinned(full(binding.source_evidence));
+        }
+      }
+      for(const name of expectedPaths){
+        const raw=await read(name),expected=parseJSON(raw);
+        if(expected.version!==2||expected.kind!=='selected-final-bank-consumer-v2'||!keys(expected,['version','kind','bank','reference'])
+          ||!same(expected.bank,selection.prepared_bank)||!same(expected.reference,selection.reference))continue;
+        needSelected(!expectationsBytes||expectationsBytes.equals(raw),'Multiple final expectations');expectationsBytes=raw;expectationsPath??=name;reachable.add(name);
+      }
+      needSelected(expectationsPath,'One exact final-bank expectations file required');
+      if(packageDefinitions){const declarations=admitSelectedPackageDeclarations(packageDefinitions.before,packageDefinitions.after,{currentPaths:[...reachable]});
+        needSelected(declarations.additions.every(name=>bank.changed.has(name)),'Final package declaration is not current bank data');}
+      needSelected(files.every(file=>reachable.has(file.filename)),'Unbound final-profile change');
+      return {test_selection:'selected-data',expectations_path:expectationsPath,shards:[0]};
     }
     const {additive_release: oldHook, ...oldBase} = oldSelection, {additive_release: hook, ...newBase} = selection;
     needSelected(selection.version === 1 && selection.method === 'native-linear-evenodd-first-owner-v1' &&
@@ -986,6 +1035,10 @@ export async function selectedDeliverySmoke(expectationsPath) {
     return JSON.parse(bytes);
   };
   const selection = JSON.parse(read('data/ownership-selection.json'));
+  if(selection.version===2){
+    const {runSelectedDeliverySmoke}=await import('./selected-delivery-smoke.mjs');
+    return runSelectedDeliverySmoke({root:process.cwd(),emittedDirectory:path.resolve('dist/client'),expectationsPath,outputPath:path.resolve('.cache/selected-delivery-smoke.json')});
+  }
   if (!selection.artifact_consumption || !selection.additive_release) throw Error('Missing actual selected artifact');
   const sidecar = pinned(selection.additive_release), ledgerPin = sidecar.logical_asset_map?.ledger;
   validateSelectedExpectations(JSON.parse(read(expectationsPath)), pinned(ledgerPin), ledgerPin.sha256);
