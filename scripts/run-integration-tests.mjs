@@ -228,7 +228,7 @@ const FOCUSED_TEST_FAMILIES = [
   'immutable-reader-read', 'installed-runtime-identity', 'map-cell-diagnosis',
   'native-(?:additions-order|checkpoint-consumer|word-store|stream-custody|interval-stream|interval-projection)', 'canonical-value-hash', 'parallel-geography-comparison',
   'selected-native-witness',
-  'qualification-exclusion-prefilter', 'selected-checkpoint',
+  'qualification-exclusion-prefilter', 'selected-checkpoint', 'final-bank-(?:checkpoint|finalizer)',
   'selected-joint-(?:check|entry|package-boundary)', 'selected-metadata-wiring',
   'source-target-native-diagnostic', 'supported-programs', 'trusted-geography-check',
   'unchanged-selected-geography', 'visible-gap-eligibility',

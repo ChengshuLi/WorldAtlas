@@ -236,13 +236,16 @@ export function reviewedTestPlan(request, {base, head, entries, files, definitio
   const inputs = [...EXECUTION_CODE];
   // These consumers read current declared policy, not historical fixture copies.
   for (const [consumer, operand] of [
+    ...['test/final-bank-finalizer.test.mjs', 'test/selected-delivery-smoke.test.mjs', 'test/final-bank-checkpoint.test.mjs'].map(consumer =>
+      [consumer, 'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz']),
     ['test/current-rebind-product-custody.test.mjs', 'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json'],
     ['test/local-workspace.test.mjs', 'docs/LOCAL_WORKSPACES.md'],
     ['test/regional-research-gate.test.mjs', 'data/research-geography-gate.json'],
     ...['test/current-postgres-recovery.test.mjs', 'test/publication-plan.test.mjs',
       'test/publication-cloudflare.test.mjs', 'test/package-current-additive.test.mjs'].map(consumer =>
       [consumer, 'coordination/publication/cloudflare-history.json']),
-    ['test/publication-cloudflare.test.mjs', 'coordination/engineering/cloudflare-publication-846-20261007/registry-source.json'],
+    ...['test/publication-cloudflare.test.mjs', 'test/merge-integration.test.mjs'].map(consumer =>
+      [consumer, 'coordination/engineering/cloudflare-publication-846-20261007/registry-source.json']),
     ...['test/neon-forward-migrations.test.mjs', 'test/compact-membership-profile.test.mjs', 'test/merge-integration.test.mjs'].flatMap(consumer =>
       ['coordination/publication/cloudflare-history.json', 'data/observation-registry-history/base-v1.json',
         'data/research-geography-gate.json', 'data/hosted-type-catalog.json'].map(operand => [consumer, operand])),
