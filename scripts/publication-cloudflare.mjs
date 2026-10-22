@@ -23,6 +23,27 @@ const history=JSON.parse(historyBytes);
 need(history.version===1&&history.records.length===7&&new Set(history.records.map(r=>r.deployment_id)).size===7,'Incomplete Cloudflare history inventory');
 const legacy=new Map(history.records.map(row=>[row.deployment_id,row]));
 export const runtimePinFields=['package_inventory_sha256','worker_sha256','config_sha256','assets_sha256','lookup_sha256','hierarchy_sha256','footprint_sha256','catalog_sha256','source_fingerprint'];
+// Verify the two actual legacy map calls before a new release can become
+// visible. Generic release/catalog routes retain their existing semantics.
+export async function verifyLegacyPublicMap({prior,fetchImpl=fetch}) {
+ const {legacyPublicMapRelease}=await import('../hosted/cloudflare-access.js');
+ need(prior?.id===legacyPublicMapRelease,'Unexpected previous live map release');
+ const routes=['/api/map/snapshot?year=2026&limit=1&evidence_only=1&include_temporal=1','/api/geography/temporal/snapshot?year=2026&limit=1'];
+ for(const route of routes){
+  const response=await fetchImpl(cloudflareOrigin+route,{redirect:'error',signal:AbortSignal.timeout(30000)});
+  need(response.ok&&response.headers.get('X-Atlas-Legacy-Map-Release')===prior.id,'Legacy map compatibility deployment is not verified');
+  const value=await response.json(),pages=value.temporal_geography?Object.values(value.temporal_geography):[value];
+  need(pages.length>0&&pages.every(page=>page.release_id===prior.id&&page.hierarchy_sha256===prior.hierarchy_sha256&&page.footprints_sha256===prior.footprints_sha256),'Previous live map pair differs');
+ }
+ return {release_id:prior.id,hierarchy_sha256:prior.hierarchy_sha256,footprints_sha256:prior.footprints_sha256,omitted_map_requests:'fixed-published-release'};
+}
+export async function verifyPublicRelease({release,fetchImpl=fetch}) {
+ const {validateGeographicReleasePrior}=await import('./bootstrap-geographic-release.mjs');
+ const response=await fetchImpl(cloudflareOrigin+'/api/geography/release?'+new URLSearchParams({release_id:release.id}),{redirect:'error',signal:AbortSignal.timeout(30000)});
+ need(response.ok,'Exact required public geography is unavailable before build');
+ const actual=await response.json();need(actual?.status==='published','Exact required public geography is not published');validateGeographicReleasePrior(actual,release);
+ return actual;
+}
 export function validateCloudflareDelivery(value){
  need(value?.version===1&&value.provider==='cloudflare'&&hex(value.primary_commit,40),'Missing Cloudflare primary identity');
  need(value.site===undefined&&value.source_commit===undefined&&!value.historical,'Cloudflare delivery cannot fabricate a Site/mirror or historical exception');

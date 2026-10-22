@@ -257,3 +257,47 @@ for(const metadata of [false,true])test('cold selected-data checkout preserves r
  await fs.unlink(path.join(f.root,f.sidecar.logical_asset_map.patch.path));
  await assert.rejects(prepareCurrentSelectedAdditive(f),{code:'ENOENT'});
 });
+
+
+import {preparePublicCloudflarePackage,PUBLIC_PACKAGE_RECEIPT} from '../scripts/build-cloudflare.mjs';
+import {legacyPublicMapRelease} from '../hosted/cloudflare-access.js';
+async function publicationFixture(t){
+ const f=await fixture(t,{metadata:true});
+ const release={...f.current,version:10,source_id:'fixture-source',reference_date:'2026-10-01',membership_sha256:'a'.repeat(64),location_ids_sha256:'b'.repeat(64),changes_sha256:'c'.repeat(64),expected_counts:{location:3}};
+ const prior={...release,id:legacyPublicMapRelease,version:6};
+ await write(f.root,'data/geographic-releases/index.json',{version:1,releases:[release]});
+ const operation=await write(f.root,'.github/operations/neon-geographic-production.json',{fixture:'closed operation'});
+ const definition=loadPackageInputs(f.root);definition.inputs.push('data/geographic-releases/','.github/operations/neon-geographic-production.json','package-lock.json');definition.generated_outputs=['dist/'];
+ await write(f.root,'.github/package-inputs.json',definition);await write(f.root,'package-lock.json',{lockfileVersion:3});await write(f.root,'.github/workflows/worker-merge.yml','fixture producer body');
+ const git=(...args)=>execFileSync('git',['-C',f.root,...args],{encoding:'utf8'}).trim();git('init','-q');git('add','.');git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','prepared pair');
+ const receipt={version:1,status:'verified',mode:'geography-production',github:{head_sha:git('rev-parse','HEAD')},operation_sha256:operation.sha256,geography:{status:'published',target:release,prior}};
+ const receiptFile='data/validation/neon-forward-migrations/receipt.json';await write(f.root,receiptFile,receipt);
+ let builds=0,queries=0,live={...release,status:'published'},legacy=true;
+ const fetchImpl=async(url,options)=>{queries++;assert.equal(options.redirect,'error');const u=new URL(url);if(u.pathname==='/api/geography/release'){assert.equal(u.searchParams.get('release_id'),release.id);return Response.json(live);}const page={release_id:legacy?prior.id:release.id,hierarchy_sha256:prior.hierarchy_sha256,footprints_sha256:prior.footprints_sha256};return Response.json(page,{headers:{'X-Atlas-Legacy-Map-Release':prior.id}});};
+ const build=async()=>{builds++;await write(f.root,'dist/client/atlas-geography.json',{additiveRelease:{base_reference:f.current}});await write(f.root,'dist/client/assets/app.js','actual fixture output');await write(f.root,'dist/cloudflare/index.js','actual fixture Worker output');await write(f.root,'dist/cloudflare/wrangler.json',{name:'worldatlas-explorer',vars:{ATLAS_PUBLIC_READ_ONLY:'1',ATLAS_READ_ONLY:'1',ATLAS_CONTENT_BACKEND:'postgres'}});await write(f.root,'.cache/package-input-build.json',{version:1,kind:'cloudflare',preflight:{passed:true,errors:[],inputs:{head:git('rev-parse','HEAD')}},input_definition_sha256:sha(await fs.readFile(path.join(f.root,'.github/package-inputs.json')))});};
+ return {...f,release,prior,receipt,receiptFile,git,args:{root:f.root,fetchImpl,build,env:{ATLAS_PUBLIC_READ_ONLY:'1'}},get builds(){return builds;},get queries(){return queries;},set live(value){live=value;},set legacy(value){legacy=value;}};
+}
+test('coordinated publication selects M not N/E, stops before build, and resumes exact retained output without rebuilding',async t=>{
+ const f=await publicationFixture(t);assert.notEqual(f.native.id,f.release.id);assert.notEqual(f.envelope.effective_reference.id,f.release.id);
+ for(const actual of [null,{...f.release,status:'staged'},{...f.release,status:'published',hierarchy_sha256:'f'.repeat(64)}]){f.live=actual;await assert.rejects(preparePublicCloudflarePackage(f.args));assert.equal(f.builds,0);}
+ f.live={...f.release,status:'published'};f.legacy=false;await assert.rejects(preparePublicCloudflarePackage(f.args),/Previous live map pair/);assert.equal(f.builds,0);f.legacy=true;
+ const built=await preparePublicCloudflarePackage(f.args);assert.equal(built.reused,false);assert.equal(f.builds,1);assert.equal(built.receipt.source.producer,undefined,'Owner publication output is not relabelled as a stock integration artifact');
+ const resumed=await preparePublicCloudflarePackage(f.args);assert.equal(resumed.reused,true);assert.equal(f.builds,1);assert.deepEqual(resumed.receipt,built.receipt);
+ await write(f.root,'package-lock.json',{lockfileVersion:3,changed:true});
+ await assert.rejects(preparePublicCloudflarePackage(f.args),/Actual original source image differs/);
+ f.git('add','package-lock.json');await assert.rejects(preparePublicCloudflarePackage(f.args),/Actual original source image differs/);
+ f.git('restore','--staged','--worktree','package-lock.json');
+ await write(f.root,'inputs/untracked.json',{unexpected:true});await assert.rejects(preparePublicCloudflarePackage(f.args),/Actual original source image differs/);await fs.unlink(path.join(f.root,'inputs/untracked.json'));
+ assert.equal((await preparePublicCloudflarePackage(f.args)).reused,true);assert.equal(f.builds,1,'dirty, staged and untracked source changes never reuse or rebuild a package');
+ await write(f.root,'dist/client/assets/app.js','substituted bytes');await assert.rejects(preparePublicCloudflarePackage(f.args),/output changed/);assert.equal(f.builds,1,'bad retained output cannot silently rebuild or publish');
+});
+test('coordinated publication refuses stale operation/source/configuration and uncompleted build without output custody',async t=>{
+ const f=await publicationFixture(t);
+ for(const change of [{status:'failed'},{operation_sha256:'f'.repeat(64)},{github:{head_sha:'f'.repeat(40)}}]){await write(f.root,f.receiptFile,{...f.receipt,...change});await assert.rejects(preparePublicCloudflarePackage(f.args),/source-bound geographic/);assert.equal(f.builds,0);}
+ await write(f.root,f.receiptFile,f.receipt);
+ await assert.rejects(preparePublicCloudflarePackage({...f.args,env:{ATLAS_PUBLIC_READ_ONLY:'0'}}),/read-only/);assert.equal(f.builds,0);
+ await assert.rejects(preparePublicCloudflarePackage({...f.args,build:async()=>{throw Error('Actual builder interrupted');}}),/builder interrupted/);
+ await assert.rejects(fs.stat(path.join(f.root,PUBLIC_PACKAGE_RECEIPT)),/ENOENT/);
+ const result=await preparePublicCloudflarePackage(f.args);assert.equal(result.reused,false);assert.equal(f.builds,1);
+ await assert.rejects(preparePublicCloudflarePackage({...f.args,env:{ATLAS_PUBLIC_READ_ONLY:'1',ATLAS_ACCESS_AUD:'changed'}}),/different source/);assert.equal(f.builds,1);
+});

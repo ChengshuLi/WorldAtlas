@@ -117,3 +117,10 @@ for(const [name,change] of [
 ])test('long comparison still rejects '+name,async()=>{
  const f=longComparison(change);await assert.rejects(()=>publicationPlan(f.api,{bootstrap:delivery()}));assert.equal(f.pages.length,101);
 });
+
+
+test('explicit referenced PRs are provenance, not blocking or invented original issues',async()=>{
+ const f=fixture();f.routes.set(root+'/issues/2',{...issue(2),pull_request:{url:'https://api.github.com/repos/ChengshuLi/WorldAtlas/pulls/2'}});
+ const plan=await publicationPlan(f.api,{bootstrap:delivery()});assert.deepEqual(plan.issues.map(row=>row.number),[3,51]);assert.deepEqual(plan.pull_requests[0].related_pull_requests,[2]);assert.deepEqual(plan.pull_requests[0].issues,[3]);assert.equal(plan.pull_requests[0].needs_manual_issue_mapping,false);
+ f.routes.set(root+'/issues/3',{...issue(3),pull_request:{url:'https://api.github.com/repos/ChengshuLi/WorldAtlas/pulls/3'}});const onlyPRs=await publicationPlan(f.api,{bootstrap:delivery()});assert.deepEqual(onlyPRs.pull_requests[0].issues,[]);assert.equal(onlyPRs.pull_requests[0].needs_manual_issue_mapping,true);assert.deepEqual(onlyPRs.issues.map(row=>row.number),[51]);
+});

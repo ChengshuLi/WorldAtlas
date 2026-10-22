@@ -4,8 +4,8 @@ import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {build} from 'esbuild';
 
-export function cloudflareConfig({domain = '', audience = '', publicReadOnly = false} = {}) {
-  return {
+export function cloudflareConfig({domain = '', audience = '', publicReadOnly = false, preserveAssets = false} = {}) {
+  const config = {
     name: 'worldatlas-explorer', main: 'index.js', compatibility_date: '2026-10-01',
     workers_dev: true, preview_urls: false,
     // Authentication must run even when a request matches a static file.
@@ -15,6 +15,15 @@ export function cloudflareConfig({domain = '', audience = '', publicReadOnly = f
       ATLAS_ACCESS_TEAM_DOMAIN: domain, ATLAS_ACCESS_AUD: audience,
       ATLAS_PUBLIC_READ_ONLY: publicReadOnly === true ? '1' : '0'},
   };
+  // Worker-only compatibility comes first. Wrangler's existing metadata path
+  // retains the deployed assets and bindings without exporting secret values.
+  if(preserveAssets){delete config.assets;delete config.r2_buckets;delete config.vars;config.unsafe={metadata:{keep_assets:true,keep_bindings:['plain_text','json','secret_text','secret_key','r2_bucket','hyperdrive','assets']}};}
+  return config;
+}
+
+export async function bundleCloudflareWorker(root,output){
+  await fs.mkdir(output,{recursive:true});
+  await build({absWorkingDir:root,entryPoints:['hosted/cloudflare-worker.js'],outfile:path.join(output,'index.js'),bundle:true,format:'esm',platform:'browser',target:'es2022',minify:true});
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
@@ -28,8 +37,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     if (name !== 'client') await fs.rename(`dist/${name}`, `dist/client/${name}`);
   }
   await fs.mkdir('dist/cloudflare', {recursive: true});
-  await build({entryPoints: ['hosted/cloudflare-worker.js'], outfile: 'dist/cloudflare/index.js',
-    bundle: true, format: 'esm', platform: 'browser', target: 'es2022', minify: true});
+  await bundleCloudflareWorker(root,path.join(root,'dist/cloudflare'));
   await fs.writeFile('dist/cloudflare/wrangler.json', JSON.stringify(cloudflareConfig({
     domain: process.env.ATLAS_ACCESS_TEAM_DOMAIN, audience: process.env.ATLAS_ACCESS_AUD,
     publicReadOnly: process.env.ATLAS_PUBLIC_READ_ONLY === '1',
