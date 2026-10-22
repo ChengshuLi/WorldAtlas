@@ -103,7 +103,7 @@ export function validatePreparedNativeStartup({manifest,manifestSha,nativePixelM
   const prefix='ownership-vintages/'+manifestSha+'/';
   if(preparedRows.length!==rows.length||preparedRows.some((pin,i)=>
     (pin.path!==rows[i].path&&pin.path!==prefix+rows[i].path)||
-    JSON.stringify({...pin,path:rows[i].path})!==JSON.stringify(rows[i])))throw Error('Immutable startup URL would be rebound: prepared startup row identity differs');
+    !isDeepStrictEqual({...pin,path:rows[i].path},rows[i])))throw Error('Immutable startup URL would be rebound: prepared startup row identity differs');
   let words=0;
   for(const part of parts){
     const pin=pins.get(part.path);
