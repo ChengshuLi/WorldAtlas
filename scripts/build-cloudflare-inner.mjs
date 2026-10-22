@@ -15,6 +15,14 @@ export function cloudflareConfig({domain = '', audience = '', publicReadOnly = f
       ATLAS_ACCESS_TEAM_DOMAIN: domain, ATLAS_ACCESS_AUD: audience,
       ATLAS_PUBLIC_READ_ONLY: publicReadOnly === true ? '1' : '0'},
   };
+  // Omitted public-build settings retain deployed plain-text/JSON variables.
+  // Empty Access defaults are placeholders, not an instruction to clear them.
+  if (publicReadOnly === true && !preserveAssets) {
+    config.keep_vars = true;
+    for (const key of ['ATLAS_ACCESS_TEAM_DOMAIN', 'ATLAS_ACCESS_AUD']) {
+      if (config.vars[key] === '') delete config.vars[key];
+    }
+  }
   // Worker-only compatibility comes first. Wrangler's existing metadata path
   // retains the deployed assets and bindings without exporting secret values.
   if(preserveAssets){delete config.assets;delete config.r2_buckets;delete config.vars;config.unsafe={metadata:{keep_assets:true,keep_bindings:['plain_text','json','secret_text','secret_key','r2_bucket','hyperdrive','assets']}};}
