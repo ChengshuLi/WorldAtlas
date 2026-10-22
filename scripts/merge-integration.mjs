@@ -242,7 +242,11 @@ export function reviewedTestPlan(request, {base, head, entries, files, definitio
     ['test/current-postgres-recovery.test.mjs', 'coordination/publication/cloudflare-history.json'],
     ...['test/neon-forward-migrations.test.mjs', 'test/compact-membership-profile.test.mjs', 'test/merge-integration.test.mjs'].flatMap(consumer =>
       ['coordination/publication/cloudflare-history.json', 'data/observation-registry-history/base-v1.json',
-        'data/research-geography-gate.json', 'data/hosted-type-catalog.json'].map(operand => [consumer, operand]))
+        'data/research-geography-gate.json', 'data/hosted-type-catalog.json'].map(operand => [consumer, operand])),
+    ...['data/observation-registry-history/base-v1.json', 'data/research-geography-gate.json',
+      'data/hosted-type-catalog.json'].map(operand => ['test/settlement-population-import.test.mjs', operand]),
+    ...['test/neon-forward-migrations.test.mjs', 'test/settlement-population-import.test.mjs',
+      'test/merge-integration.test.mjs'].map(consumer => [consumer, 'data/settlement-estimates.json'])
   ]) if (tests.includes(consumer)) {
     need(definition.verification_paths.includes(operand), 'Current reviewed operand lacks its verification declaration: ' + operand);
     if (!inputs.includes(operand)) inputs.push(operand);
