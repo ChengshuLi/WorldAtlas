@@ -207,7 +207,7 @@ export async function inspectMerge({api, repo, number, expectedHead, candidateCo
 // The operator supplies the consumers actually reviewed for
 // this immutable pair. This is an execution argument, not source approval or an
 // automated proof that an arbitrary roster is sufficient. Unknown impact uses
-// the complete suite; package and geography obligations remain independent.
+// explicit complete or legacy queued routing; package and geography duties remain independent.
 export function reviewedTestPlan(request, {base, head, entries, files, definition}) {
   if (request === undefined || request === null || request === '') return null;
   const plan = typeof request === 'string' ? JSON.parse(request) : request;
@@ -274,6 +274,8 @@ export function reviewedTestPlan(request, {base, head, entries, files, definitio
 
 export async function prepareIntegration(options) {
   options = {...options, api: memoizeImmutableGitBlobs(options.api)};
+  const automatic = options.reviewedTests === 'auto', complete = options.reviewedTests === 'complete';
+  const requested = automatic || complete ? undefined : options.reviewedTests;
   const state = await inspectMerge(options);
   if (state.replayed) return state;
   const fresh = await createCandidate(options, state);
@@ -288,32 +290,34 @@ export async function prepareIntegration(options) {
     const files = integrationChanges(baseline.entries, integrated.entries);
     const applicability = integrationProfile(state.pr.head.ref, files, {}, integrated.entries);
     let selection = null;
-    if (applicability === 'full' && selectedDataCandidate(state.pr.head.ref, files, {})) {
+    if (!complete && applicability === 'full' && selectedDataCandidate(state.pr.head.ref, files, {})) {
       try {
         // Applicability belongs to the actual combined candidate; older author
         // snapshots need not reproduce accepted-main smoke or package edits.
         selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files, reservation: {}, baseline, authored: integrated});
-      } catch { /* Unknown applicability retains the complete suite. */ }
+      } catch { /* Legacy requests retain full fallback; explicit auto refuses below. */ }
     }
     const geographyRequiredForCandidate = geographyRequired(state.pr.head.ref, files, {}, integrated.entries);
     const software = geographyRequiredForCandidate && candidateGeographyCode(applicability, files, selection?.test_selection, baseline.entries);
     const packageInputs = await readPackageInputs({api: options.api, route: root(options.repo), base: candidate, maximumBytes: 8 * 1024 * 1024});
     // Pure new evidence packets need the same reviewed consumer contract by
     // default, not an operator-selected mode or all coordination-code regressions.
-    const request = [undefined, null, ''].includes(options.reviewedTests) &&
+    const request = !complete && [undefined, null, ''].includes(requested) &&
       inertEvidenceAdditions(files, integrated.entries, packageInputs)
       ? {base:state.base, head:state.pr.head.sha, files:[
         'test/evidence-quality.test.mjs', 'test/premerge-evidence.test.mjs',
         'test/engineering-owned-scope-routing.test.mjs']}
-      : options.reviewedTests;
+      : requested;
     const reviewed = reviewedTestPlan(request, {base:state.base, head:state.pr.head.sha,
       entries:integrated.entries, files, definition:packageInputs});
     need(!reviewed || !selection, 'Selected-data delivery retains its mandatory native and emitted execution path');
-    const profile = reviewed ? (reviewed.build ? 'full' : 'evidence') : applicability;
+    need(!automatic || reviewed || selection, 'Automatic test scope is unavailable; supply exact plan.request JSON or explicitly request complete');
+    const profile = complete ? 'full' : reviewed ? (reviewed.build ? 'full' : 'evidence') : applicability;
     const checkoutPatterns = selection?.test_selection === 'selected-data'
       ? selectedDataCheckoutPatterns(packageInputs, integrated.entries, selection.expectations_path)
       : reviewed?.checkout_patterns ?? (profile === 'full' ? fullCheckoutPatterns(packageInputs) : focusedCheckoutPatterns(packageInputs));
     return {...state, candidate, profile, ...selection,
+      ...(complete ? {test_selection:'complete', shards:[0,1,2]} : {}),
       ...(reviewed ? {test_selection:'reviewed', test_files:reviewed.files, shards:[0]} : {}), geography_software: software,
       geography_required: geographyRequiredForCandidate,
       candidate_tree: integrated.object.tree.sha, checkout_patterns: checkoutPatterns,
@@ -360,7 +364,7 @@ export async function completeIntegration(options) {
     tree(options.api, options.repo, state.base), tree(options.api, options.repo, options.testedCandidate, candidate)
   ]);
   const files = integrationChanges(baseline.entries, integrated.entries);
-  if (options.reviewedTests) reviewedTestPlan(options.reviewedTests, {base:state.base, head:state.pr.head.sha,
+  if (options.reviewedTests && !['auto','complete'].includes(options.reviewedTests)) reviewedTestPlan(options.reviewedTests, {base:state.base, head:state.pr.head.sha,
     entries:integrated.entries, files,
     definition:await readPackageInputs({api:options.api, route:root(options.repo), base:options.testedCandidate})});
   const omitGeography = options.geographyResult === 'skipped' &&

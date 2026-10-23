@@ -50,6 +50,40 @@ test('only staging-test shards prepare the immutable migration derivative', () =
     assert.deepEqual(fs.readFileSync('drizzle/0002_geographic_reference_releases.sql'),original);
   } finally { process.chdir(cwd); fs.rmSync(temporary,{recursive:true,force:true}); }
 });
+test('new native dispatch refuses absent or blank intent before API setup without changing queued legacy inputs', () => {
+  const workflow=fs.readFileSync('.github/workflows/worker-merge.yml','utf8');
+  const field=workflow.match(/      reviewed_tests:\n([\s\S]*?)(?=      request_id:)/)[1];
+  assert.match(field,/required: true/);assert.doesNotMatch(field,/default:/);
+  assert.match(workflow,/REVIEWED_TESTS_REQUIRED: 'true'/);
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-dispatch-intent-'));
+  try {
+    for(const name of staticModuleClosure(process.cwd(),['scripts/run-worker-merge.mjs'])){
+      const target=path.join(directory,name);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(name,target);
+    }
+    fs.copyFileSync('package.json',path.join(directory,'package.json'));
+    const event=path.join(directory,'event.json'),output=path.join(directory,'output');
+    const invoke=(reviewed_tests,required=true)=>{
+      fs.writeFileSync(event,JSON.stringify({inputs:{pr_number:'2',expected_head:sha('a'),request_id:'dispatch-intent-test',reviewed_tests}}));
+      const env={...process.env,GH_TOKEN:'',GITHUB_TOKEN:'',NODE_OPTIONS:'',NODE_PATH:'',
+        GITHUB_EVENT_PATH:event,GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',
+        MERGE_PHASE:'prepare',GITHUB_OUTPUT:output};
+      if(required)env.REVIEWED_TESTS_REQUIRED='true';else delete env.REVIEWED_TESTS_REQUIRED;
+      return spawnSync(process.execPath,['scripts/run-worker-merge.mjs'],{cwd:directory,env,encoding:'utf8',timeout:10000});
+    };
+    for(const missing of [undefined,null,'','  ',{}]){
+      const result=invoke(missing);assert.notEqual(result.status,0);
+      assert.match(result.stderr,/Required reviewed_tests/);
+      assert.doesNotMatch(result.stderr,/Read\/write GitHub token required/,'Intent rejects before constructing an API client');
+      assert.equal(fs.existsSync(output),false);assert.equal(fs.existsSync(path.join(directory,'merge-result.json')),false);
+    }
+    // No credentials are supplied: reaching this existing boundary proves that
+    // valid intent and already-queued old definitions survive the new check.
+    for(const intent of ['auto','complete',JSON.stringify({base:sha('b'),head:sha('a'),files:['test/example.test.mjs']})])
+      assert.match(invoke(intent).stderr,/Read\/write GitHub token required/);
+    assert.match(invoke(undefined,false).stderr,/Read\/write GitHub token required/);
+  } finally {fs.rmSync(directory,{recursive:true,force:true});}
+});
+
 function fixture({head=sha('a'),base=sha('b'),candidate=sha('c')}={}) {
   const repo = 'owner/repo';
   const issue = {number: 1, state: 'open', created_at: '2026-10-03T00:00:00Z', labels: ['type:engineering','kind:work-item','status:ready'],
@@ -133,6 +167,27 @@ test('actual full preparation emits archive patterns from the authenticated cand
   assert.equal(f.calls.filter(row=>row.route.includes('/contents/.github/package-inputs.json')).length,1);
 });
 
+test('explicit auto refuses unsupported scope and cleans its candidate while complete deliberately selects every shard',async()=>{
+  for(const make of [fixture,packetFixture]){
+    const f=make();
+    if(make===fixture){
+      await assert.rejects(prepareIntegration({...f.options(),reviewedTests:'auto'}),/Automatic test scope is unavailable/);
+      assert.equal(f.refs.size,0);assert.equal(f.writes.length,0);
+      assert.equal(f.calls.filter(row=>row.method==='DELETE'&&row.route.includes('/git/refs/heads/worldatlas-integration/')).length,1);
+    }
+    const prepared=await prepareIntegration({...f.options(),reviewedTests:'complete'});
+    assert.equal(prepared.profile,'full');assert.equal(prepared.test_selection,'complete');
+    assert.deepEqual(prepared.shards,[0,1,2]);assert.equal(prepared.test_files,undefined);
+    assert.deepEqual(prepared.checkout_patterns,fullCheckoutPatterns(f.packageInputs));
+    assert.equal(prepared.geography_required,true);
+    assert.equal(prepared.geography_software,false);
+  }
+  const legacy=fixture(),prepared=await prepareIntegration(legacy.options());
+  assert.equal(prepared.profile,'full');assert.equal(prepared.test_selection,undefined,'Already-queued omitted input keeps its old route');
+  const final=fixture();
+  assert.equal((await final.complete({reviewedTests:'complete'})).accepted,true,'Explicit complete retains final admission');
+});
+
 
 const PACKET_TESTS = ['test/evidence-quality.test.mjs','test/premerge-evidence.test.mjs','test/engineering-owned-scope-routing.test.mjs'];
 function packetFixture(format = 'json') {
@@ -154,7 +209,7 @@ function packetFixture(format = 'json') {
 }
 
 test('default actual preparation derives the inert packet consumers without an operator roster',async()=>{
-  for(const format of ['json','jsonl','json.gz','jsonl.gz'])for(const reviewedTests of [undefined,null,'']){
+  for(const format of ['json','jsonl','json.gz','jsonl.gz'])for(const reviewedTests of [undefined,null,'','auto']){
     const f=packetFixture(format),prepared=await prepareIntegration({...f.options(),reviewedTests});
     assert.equal(prepared.profile,'evidence');assert.equal(prepared.test_selection,'reviewed');
     assert.deepEqual(prepared.test_files,PACKET_TESTS);assert.deepEqual(prepared.shards,[0]);
