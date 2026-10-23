@@ -23,3 +23,5 @@ These 92 keys belong to the existing original COD repair-evaluation scope of 3,9
 
 
 Publication-status correction: the user approved publication of these exact 33 Oïcha and 59 Kasongo-Lunda project-cell identifiers and derived findings. No scientific disposition changed: all 92 remain held, with root acceptance and credit pending. No raw source polygons or map images are included.
+
+The attached independent-review records were authored before the user approved this exact 33+59 publication. Any publication restriction stated in those historical reviews records their then-current scope; it is superseded only for these exact project-cell identifiers and derived findings by the user approval documented in the manifest. The reviews’ scientific conclusions, held status, and absence of root acceptance or credit are unchanged.
