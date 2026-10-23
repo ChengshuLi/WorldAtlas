@@ -24,6 +24,26 @@ There is no separate registration, FIFO-ticket store, scheduler, wake notifier o
 custom observation client. Research, PR checks and independent review can continue
 while native Actions holds pending merge runs.
 
+## Submit reviewed consumers without rebuilding the request
+
+When the review identifies a bounded consumer roster, use the existing
+`reviewedTestPlan` in the actual accepted `scripts/merge-integration.mjs` with the
+exact accepted base, reviewed head, candidate tree, changed files and package
+input definition. Its `request` contains that validated pair and the normalized
+consumer list, including mandatory packaged consumers. Serialize
+`JSON.stringify(plan.request)` directly as the dispatch's `reviewed_tests` value,
+and pass that exact serialized value back through `reviewedTestPlan` with the
+same current context before recording a request or dispatching it. Do not
+serialize `plan.files`, reconstruct the pair, or send the full derived plan.
+
+The reviewed roster remains human-selected review scope, not an automated
+sufficiency certificate. Inputs, checkout patterns, build and geography duties
+remain independently derived and revalidated by trusted preparation and final
+admission. A changed base or head requires review of the new pair, not silently
+rebinding the old argument. Without a reviewed argument, ordinary automatic
+routing remains unchanged. This is direct use of the existing planner and native
+workflow, not a separate dispatch client.
+
 ## Find the execution and inspect its outcome
 
 Use ordinary GitHub CLI commands and match the exact request ID in the displayed
