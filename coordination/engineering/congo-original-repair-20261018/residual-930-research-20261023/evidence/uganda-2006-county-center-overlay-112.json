@@ -1,0 +1,92 @@
+{
+  "kind": "cod-residual-930-uganda-2006-official-county-center-overlay-v1",
+  "status": "research-only-proposal-no-accepted-credit",
+  "scope": {
+    "package_id": "gb-COD-ADM2--repair-evaluation",
+    "original_cells": 3905,
+    "residual_cells": 930,
+    "tested_cells": 112,
+    "owner_index": 14568,
+    "target_source_id": "gb:COD:ADM2:63176286B75372177576839",
+    "target_name": "Irumu",
+    "target_reference_year": 2019,
+    "tested_class": "original residual source-center conflict stratum",
+    "separately_excluded_from_this_check": {
+      "owner_index": 14593,
+      "cells": 4,
+      "target_name": "Kimvula",
+      "reason": "These four keys are not Uganda candidates; the retained full-family overlay records Angola ADM1 Uíge and COD ADM2 Kimvula."
+    }
+  },
+  "candidate_context": {
+    "family": "gb:UGA:ADM2",
+    "recorded_represented_year": "2006",
+    "recorded_unit_label": "Counties",
+    "registered_candidate_center_counts": {
+      "Ntoroko": 66,
+      "Bughendra": 46
+    }
+  },
+  "official_comparator": {
+    "creator": "Uganda Bureau of Statistics",
+    "publisher": "Uganda Bureau of Statistics",
+    "title": "County Boundaries: Uganda, 2006",
+    "catalog_record": "https://geodata-cdn.lib.utexas.edu/catalog/stanford-sv534fc7879",
+    "persistent_record": "https://purl.stanford.edu/sv534fc7879",
+    "catalog_description": "Polygon county boundaries, Level 4 / ADM4, based on 2006 data; item record declares public domain and says downloadable data are in native coordinate system.",
+    "downloaded_archive_local_path": "/tmp/ubos-uganda-county-2006-sv534fc7879.zip",
+    "archive_bytes": 8325415,
+    "archive_sha256": "9857cf0088b578beccea29c467f9e1a1224b6341ebe944320c975cb9ca984921",
+    "polygon_count": 164,
+    "raw_archive_or_geometry_included": false
+  },
+  "coordinate_reference_review": {
+    "used_definition": "Embedded .prj identifies WGS 84 UTM Zone 36N with central meridian 33 degrees, scale 0.9996, false easting 500000 m, and custom false northing 200000 m.",
+    "crosscheck": "Reprojection under the embedded .prj reproduced shapefile coordinate bounds [118484.0404, 36309.7602, 722525.5000, 668071.0000], matching its recorded spatial extent.",
+    "conflicting_metadata": "The ISO metadata identifies EPSG:32736, and the ESRI metadata includes a Zone 36S / 10000000 m false-northing definition. These conflict with the embedded .prj and observed coordinate extent.",
+    "impact": "All containment counts are provisional source-relative center comparisons because of this internal projection-metadata conflict; no boundary or ownership conclusion relies on them."
+  },
+  "method": {
+    "point_source": "Center coordinates from the already retained complete-537-feature-center-overlay.json; no new center/geometry derivation for the COD target was run.",
+    "projection": "WGS 84 ellipsoid; UTM Zone 36N, k=0.9996, central meridian 33 degrees, false easting 500000 m, false northing 200000 m, following the dataset .prj.",
+    "spatial_test": "Ray-crossing point-in-polygon against each of the 164 UBOS county polygons, after bounding-box pruning. This tests recorded cell centers only, not whole-cell intersection or boundary ties.",
+    "initial_pilot_correction": "An earlier exploratory pass omitted the .prj custom false northing; its results were discarded and are not reported."
+  },
+  "results": {
+    "all_112_centers_classified": true,
+    "matrix_by_registered_UGA_candidate_label": [
+      {
+        "candidate_label": "Ntoroko",
+        "keys": 66,
+        "inside_UBOS_2006_Ntoroko": 31,
+        "inside_other_UBOS_county": 0,
+        "outside_all_164_UBOS_county_polygons": 35
+      },
+      {
+        "candidate_label": "Bughendra",
+        "keys": 46,
+        "inside_UBOS_2006_Bughendera": 1,
+        "inside_other_UBOS_county_Bwamba": 30,
+        "outside_all_164_UBOS_county_polygons": 15
+      }
+    ],
+    "totals": {
+      "inside_Ntoroko": 31,
+      "inside_Bughendera": 1,
+      "inside_Bwamba": 30,
+      "outside_all_164": 50
+    }
+  },
+  "interpretation_and_limits": [
+    "The official UBOS county source does not reproduce the registered candidate-label partition: 30 Bughendra-labeled centers fall in the UBOS 2006 Bwamba polygon and 50 of 112 fall in no UBOS county polygon under the used projection.",
+    "These differences are evidence of product/geometry or metadata disagreement, not proof that the registered Uganda source does or does not apply to an original COD cell.",
+    "Center containment does not establish full-cell physical/native qualification, territorial exclusion, source-member attribution, or legal/current ownership.",
+    "The result does not fill the missing source-evidence target rows for Irumu and Kimvula, does not resolve GNQ or other family applicability, and changes no hold, owner, patch, disposition, denominator, prior credit, or selected product.",
+    "The source archive is retained only in local temporary storage; only the archive digest, metadata, method, and aggregate counts are recorded here. No coordinates or raw geometry are redistributed."
+  ],
+  "input_pins": {
+    "target_context_recovery_116_json_sha256": "d5b5b8542cc408c96394a0a68a9721fae85bd6337fb8b80685139d839134a729",
+    "complete_537_feature_center_overlay_json_sha256": "00fc57c3290d4d0cf1ef7df68860ac6d2c3ee82e67509d0ae2f9d1c550cdf24d",
+    "ubos_source_archive_sha256": "9857cf0088b578beccea29c467f9e1a1224b6341ebe944320c975cb9ca984921"
+  }
+}
