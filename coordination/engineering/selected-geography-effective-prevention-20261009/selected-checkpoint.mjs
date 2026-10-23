@@ -14,6 +14,7 @@ import {ImmutableReader, NativeAssetImage, decodeVisibilityLatitudes,
 import {repairComponentKey, nativeOnlyComponent} from '../../../src/native-grid.js';
 import {finalBankSelection,scientificNativeSelection,validateReferenceMetadataHeader} from '../../../src/reference-metadata.js';
 import {readPreparedFinalOwnership} from '../../../scripts/package-startup-ownership.mjs';
+import {validateReferenceMetadataProjection} from '../../../scripts/selected-reference-metadata.mjs';
 import {finishEffectiveFootprint as finishEffectiveFootprintPure,extendFinishedNativeFootprint as extendFinishedNativeFootprintPure,
   effectiveFootprintValue as effectiveFootprintValuePure,mergeUnassignedNativeIntervals} from '../../../src/native-grid.js';
 const finishEffectiveFootprint=feature=>finishEffectiveFootprintPure(feature,valueSha);
@@ -1674,7 +1675,7 @@ function sameWords(a,b){return a.length===b.length&&a.every((word,i)=>word===b[i
 // Normal authority is the immutable accepted main supplied by the merge queue,
 // not a locator or a replayable chain of old repair receipts. Read current E,
 // validate only the new reviewed proposal, and require the complete result.
-export async function compareAcceptedFinalBank({beforeReader,afterReader,acquireAuthorityInputs}) {
+export async function compareAcceptedFinalBank({beforeReader,afterReader,acquireAuthorityInputs,acquireMetadataInputs}) {
   sessionCheck(beforeReader);
   const session={invocation:beforeReader.invocation,repo:beforeReader.repo,closed:false,stores:new Set(),acquireAuthorityInputs};
   sessionCheck(afterReader,session);
@@ -1696,17 +1697,79 @@ export async function compareAcceptedFinalBank({beforeReader,afterReader,acquire
       // Compare object identity, not path spelling or missing local body size.
       demand(old.split('\t')[0]===current.split('\t')[0], 'Final bank rebound an accepted compatibility body');
     }
+    let sources;
+    const originalSources=async()=>{
+      if(sources)return sources;
+      const source=scientificNativeSelection(beforeSelection).selected_geography;
+      const route=beforeReader.treeRoute(source.path),match=/^(100644) blob ([a-f0-9]{40})\t/.exec(route);
+      demand(match,'Original source index is not an ordinary accepted file');
+      await acquireInputs(session,beforeReader,[{commit:beforeReader.version,path:source.path,mode:match[1],
+        git_blob_oid:match[2],bytes:source.bytes,sha256:source.sha256}]);
+      const bank=readSelectedGeometryBank(beforeReader,beforeSelection);
+      demand(bank.locations===count&&bank.footprints_sha256===before.manifest.footprints_sha256,
+        'Original source index differs from accepted owner scope');
+      await acquireInputs(session,beforeReader,[bank.world_index]);
+      const world=readBody(session,beforeReader,bank.world_index);
+      const paths=world.parts.map(p=>'data/'+p);
+      demand(new Set(paths).size===paths.length,'Duplicate original source containing route');
+      sources=new Map();
+      for(const p of [...bank.unchanged_files,...bank.overrides]){
+        pin(p);const name=p.logical_path??p.path;
+        demand(paths.includes(name)&&!sources.has(name),'Foreign or duplicate original source route');sources.set(name,p);
+      }
+      demand(sources.size===paths.length,'Incomplete original source containing roster');
+      return sources;
+    };
     let reference=before.reference,properties=new Map();
     if(!same(beforeSelection.reference_projection,afterSelection.reference_projection)){
       demand(afterSelection.reference_projection,'Removing a selected metadata application is unsupported');
-      const snapshot=loadBaseSelection(afterReader),resolver=selectedGeometrySourceAlias(snapshot);
-      demand(same(snapshot.manifest,before.manifest),'Reference metadata changed original native input');
-      const owners=selectedReferenceOwners(snapshot);
-      demand(owners.length===count&&before.bank.features.every((f,i)=>owners[i].id===f.id&&owners[i].index===f.pixelIndex),
-        'Reference metadata changed stable owner identity');
-      reference=resolver.release;
-      reference=Object.fromEntries(['id','footprints_sha256','hierarchy_sha256'].map(k=>[k,reference[k]]));
-      properties=new Map(resolver.metadataProjection.location_changes.map(p=>[p.location_id,p.after_properties]));
+      const projection=afterReader.json(afterSelection.reference_projection.path,{expected:afterSelection.reference_projection.sha256});
+      const previous=beforeSelection.reference_projection
+        ?beforeReader.json(beforeSelection.reference_projection.path,{expected:beforeSelection.reference_projection.sha256}):null;
+      const originalProperties=new Map((previous?.location_changes??[]).map(row=>[row.location_id,row.before_properties]));
+      const owners=before.bank.features.map(f=>({id:f.id,index:f.pixelIndex,
+        province_id:(originalProperties.get(f.id)??f.properties).parent_id}));
+      const roster=await originalSources();
+      const inputs=[projection.hierarchy.before,projection.hierarchy.after,...projection.receipts,
+        ...projection.source_updates.flatMap(update=>[update.before,update.after])];
+      await acquireInputs(session,afterReader,inputs);
+      const applied=validateReferenceMetadataProjection({projection,selection:afterSelection,manifest:before.manifest,
+        owners,originalSources:roster,read:p=>afterReader.read(p.path,{version:resolvePin(afterReader,p).version,expected:p.sha256})});
+      // Keep the existing receipt/release/current-tree joins without reopening
+      // original native transports, artifact receipts or all source bodies.
+      const readMetadata=async(name,expected)=>{
+        await acquireMetadataInputs?.(afterReader,[{path:name,...(expected?{sha256:expected}:{})}]);
+        return afterReader.read(name,{...(expected?{expected}:{})});
+      };
+      const pointer=JSON.parse(await readMetadata('data/geographic-releases/current-manifest.json'));
+      demand(safe(pointer.path)&&hash(pointer.sha256),'Unbound selected geographic release');
+      const encoded=await readMetadata('data/geographic-releases/'+pointer.path,pointer.sha256);
+      demand(encoded.length>=18&&encoded[0]===31&&encoded[1]===139,'Invalid whole reference release gzip');
+      const decodedBytes=encoded.readUInt32LE(encoded.length-4),decoded=gunzipSync(encoded,{maxOutputLength:decodedBytes});
+      demand(decoded.length===decodedBytes,'Whole reference release decoded size differs');
+      const releases=JSON.parse(decoded).releases;
+      demand(Array.isArray(releases)&&releases.length>0&&new Set(releases.map(r=>r.id)).size===releases.length,'Incomplete selected release roster');
+      const native=releases.find(r=>r.id===scientificNativeSelection(beforeSelection).release_id),current=releases.at(-1);
+      const identity=row=>Object.fromEntries(['id','footprints_sha256','hierarchy_sha256'].map(k=>[k,row?.[k]]));
+      demand(same(identity(native),applied.nativeReference)&&same(identity(current),applied.reference),
+        'Current reference metadata differs from the actual selected releases');
+      const receipts=new Set(Object.values(current.metadata?.metadata_migration_sha256??{}));
+      demand(applied.releaseReceipts.every(p=>receipts.has(p.sha256)),'Current reference release does not bind every applied metadata receipt');
+      const matches=(name,p)=>afterReader.treeRoute(name)===p.mode+' blob '+p.git_blob_oid+'\t'+name+'\0';
+      demand(projection.hierarchy.after.path==='data/hierarchy.json'&&projection.hierarchy.after.encoding===undefined
+        &&matches('data/hierarchy.json',projection.hierarchy.after),'Current hierarchy differs from the metadata application');
+      const source=readSelectedGeometryBank(beforeReader,beforeSelection);
+      demand(matches('data/world-index.json',source.world_index),'Source bank original index differs from current complete index');
+      for(const [name,p] of roster){
+        const update=applied.sourceUpdates.get(name);
+        if(update)demand(update.after.path===name&&update.after.encoding===undefined&&matches(name,update.after),
+          'Current complete source differs from the metadata application');
+        else if(!p.logical_path)demand(matches(name,p),'Current original containing body differs without a complete metadata application');
+      }
+      demand(applied.owners.every((owner,i)=>owner.id===after.bank.features[i].id&&owner.index===after.bank.features[i].pixelIndex
+        &&owner.province_id===after.bank.features[i].properties.parent_id),'Final context differs from projected owner identities');
+      reference=applied.reference;
+      properties=new Map(projection.location_changes.map(p=>[p.location_id,p.after_properties]));
     }
     demand(same(after.reference,reference),'Final bank silently changed content reference');
     const added=await finalNativeAdditions(session,afterReader,
@@ -1724,14 +1787,7 @@ export async function compareAcceptedFinalBank({beforeReader,afterReader,acquire
     if(lazy.size){
       // Candidate paths only locate a member of the accepted immutable source
       // index. They cannot supply the original geometry or redefine its pin.
-      const source=scientificNativeSelection(beforeSelection).selected_geography;
-      const route=beforeReader.treeRoute(source.path),match=/^(100644) blob ([a-f0-9]{40})\t/.exec(route);
-      demand(match,'Original source index is not an ordinary accepted file');
-      await acquireInputs(session,beforeReader,[{commit:beforeReader.version,path:source.path,mode:match[1],
-        git_blob_oid:match[2],bytes:source.bytes,sha256:source.sha256}]);
-      const bank=readSelectedGeometryBank(beforeReader,beforeSelection);
-      const sources=new Map(bank.unchanged_files.map(p=>[p.path,p]));
-      for(const p of bank.overrides){demand(!sources.has(p.logical_path),'Duplicate original source route');sources.set(p.logical_path,p);}
+      const sources=await originalSources();
       for(const name of added.referenceSources){
         const pin=sources.get(name);demand(pin,'New target source is outside the accepted original source roster');
         await acquireInputs(session,beforeReader,[pin]);

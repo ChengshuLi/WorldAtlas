@@ -142,7 +142,7 @@ async function withSelectedComparison({repo,baseline,candidate,startup,phaseComp
       await acquireMetadata(reader,[{path:native.manifest_path,sha256:native.sha256},bank,
         ...(selection.reference_projection?[selection.reference_projection]:[])]);
     }
-    const nativeReport=await checkpoint.compareAcceptedFinalBank({beforeReader,afterReader,acquireAuthorityInputs});
+    const nativeReport=await checkpoint.compareAcceptedFinalBank({beforeReader,afterReader,acquireAuthorityInputs,acquireMetadataInputs:acquireMetadata});
     phaseComplete('native-comparison');
     return consume({direct:true,nativeReport});
   }

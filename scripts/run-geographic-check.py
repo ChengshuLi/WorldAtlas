@@ -340,11 +340,10 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
         if joint is not None and joint['mode'] in ['authenticated-checkpoint-append-v1', 'accepted-final-map-comparison-v1']:
             native = joint['native']
         else:
-            # Eager whole-bank transport helps the legacy cold consumers, but
-            # needlessly downloads sources/native assets for a qualified warm
-            # checkpoint. Software with changed or unknown consumed data takes this cold path;
-            # baseline-code callers require the joint entry's explicit unavailable decision.
-            if prefetch:
+            # The final-bank reader acquires its exact current operands itself.
+            # This optional prefetch serves only historical version-1 selectors;
+            # selection shape and all pins are still admitted by the real reader.
+            if prefetch and json.loads(read(repo, baseline, 'data/ownership-selection.json')).get('version') != 2:
                 with stage_timing('selected-prefetch'):
                     prefetch_declared_inputs(repo, baseline, candidate)
             with stage_timing('selected-native'):

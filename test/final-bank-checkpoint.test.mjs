@@ -96,7 +96,8 @@ test('accepted main directly advances A then B then code-only without any histor
  const old=await oldBank(f,seed.state);f.api.releaseCheckpoint(seed.state);
  // One actual accepted source member locates the lazy owner. No old certificate
  // or candidate-authored geometry is used as its original geometry authority.
- f.save('data/bank.json',{version:1,kind:'complete-world-index-with-exact-encoded-overrides',
+ const sourceWorld=f.selected;
+ f.save('data/bank.json',{version:1,kind:'complete-world-index-with-exact-encoded-overrides',locations:old.features.length,world_index:f.pin('data/world-index.json',sourceWorld),
   release_id:f.selection.release_id,native_manifest_sha256:f.selection.sha256,
   footprints_sha256:f.manifest.footprints_sha256,unchanged_files:[f.pin('data/source.json',f.selected)],overrides:[]});
  const sourceAt=f.commit(),sourcePin=f.pin('data/bank.json',sourceAt);
@@ -199,7 +200,8 @@ test('accepted main directly advances A then B then code-only without any histor
    assert(!result.stderr.includes('checkpoint-acquisition'));
   }
   f.git('reset','--hard',b.commit);
-  const refused=spawnSync(process.execPath,[path.join(f.root,entry),f.root,b.commit,a.commit,b.commit,path.join(f.root,'wrong-code')],{encoding:'utf8',env:process.env});
+  const env={...process.env};delete env.NODE_OPTIONS;delete env.NODE_PATH;
+  const refused=spawnSync(process.execPath,[path.join(f.root,entry),f.root,b.commit,a.commit,b.commit,path.join(f.root,'wrong-code')],{encoding:'utf8',env});
   assert.notEqual(refused.status,0);assert.match(refused.stderr,/must execute the accepted baseline checker/);
  });
  await t.test('cold current operands import exactly once while compatibility and previous repairs stay absent',()=>{
@@ -209,7 +211,7 @@ test('accepted main directly advances A then B then code-only without any histor
   const inputs=[...a.index.pixelMap.parts,...a.index.preparedOwnership.context_parts].map(p=>f.pin(root+'/'+p.path,a.commit));
   inputs.push(...[...b.index.pixelMap.parts,...b.index.preparedOwnership.context_parts].map(p=>f.pin(root+'/'+p.path,b.commit)),
    b.hook,b.added.entry.rule_preimage,b.added.entry.source_authority,b.added.entry.completed_constructor,
-   binding.source_evidence,binding.native_patch,sourcePin,f.pin('data/source.json',f.selected));
+   binding.source_evidence,binding.native_patch,sourcePin,f.pin('data/world-index.json',sourceWorld),f.pin('data/source.json',f.selected));
   const required=[...new Map(inputs.map(p=>[p.git_blob_oid,p])).values()];
   const compatibility=f.pin(root+'/'+b.index.compatibility_files.find(p=>p.path.endsWith('999.bin.gz')).path,b.commit);
   const omitted=[...required,compatibility,a.hook];

@@ -119,6 +119,7 @@ class InspectRouting(unittest.TestCase):
             stack.enter_context(mock.patch.object(G, 'inventory', return_value=[]))
             stack.enter_context(mock.patch.object(G, 'unchanged_selected_inputs', return_value=None))
             stack.enter_context(mock.patch.object(G, 'git', return_value=b'present'))
+            stack.enter_context(mock.patch.object(G, 'read', return_value=raw({'version': 1})))
             yield
 
     def test_warm_and_cold_selected_routes_never_import_or_launch_continuous_polygons(self):
@@ -237,6 +238,26 @@ class InspectRouting(unittest.TestCase):
                 self.assertNotIn('unchanged_selected_inputs', report)
                 self.assertNotIn('selected_continuous_report', report)
                 self.assertNotIn('checkpoint', report)
+
+    def test_final_software_fetch_skips_legacy_prefetch_and_keeps_real_native_result_checks(self):
+        for invalid in [False, True]:
+            result = native(candidate_code_executed=True, candidate_selection={'version': 2, 'kind': 'selected-final-native-bank-v2'})
+            if invalid:
+                result['lost_or_reassigned_cells'] = 1
+            with self.subTest(invalid=invalid), self.fixture(), no_polygons(), \
+                 mock.patch.object(G, 'read', return_value=raw({'version': 2})), \
+                 mock.patch.object(G, 'selected_joint', side_effect=AssertionError('software checkpoint reuse')), \
+                 mock.patch.object(G, 'prefetch_declared_inputs', side_effect=AssertionError('final-bank legacy prefetch')), \
+                 mock.patch.object(G.subprocess, 'check_output', return_value=raw(result)) as child:
+                if invalid:
+                    with self.assertRaisesRegex(ValueError, 'contradicts conservation'):
+                        G.inspect(ROOT, BASE, NEXT, code_commit=NEXT, prefetch=True)
+                else:
+                    report = G.inspect(ROOT, BASE, NEXT, code_commit=NEXT, prefetch=True)
+                    self.assertTrue(report['candidate_code_executed'])
+                    self.assertEqual(report['selected_native_report'], result)
+                    self.assertNotIn('checkpoint', report)
+                self.assertEqual(child.call_count, 1)
 
     def test_warm_and_cold_invalid_native_results_fail_closed(self):
         for cold in [False, True]:
