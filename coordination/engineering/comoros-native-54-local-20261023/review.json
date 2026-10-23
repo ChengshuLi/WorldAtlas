@@ -1,0 +1,24 @@
+{
+  "reviewed_at": "2026-10-23",
+  "reviewer": "gnb_correction_reviewer",
+  "scope": {
+    "original_keys": 571,
+    "accepted_prior": 485,
+    "held_prior_proposal": 32,
+    "native_authority_proposal": 54,
+    "native_authority_keys_match_patch": true,
+    "native_authority_keys_match_ocha_adverse_partition": true
+  },
+  "findings": [
+    "The three partitions are disjoint and conserve the full 571-key original scope.",
+    "The 54-key constructor is bound to the retained source and physical evidence; the diagnostic covering all 571 keys is screening only.",
+    "OCHA remains adverse, non-operative comparator context; no OCHA geometry was adopted or redistributed.",
+    "No material discrepancy was found in the reviewed packet."
+  ],
+  "not_established": [
+    "current selected ownership",
+    "acceptance or scientific credit",
+    "release",
+    "whole-source clearance"
+  ]
+}
