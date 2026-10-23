@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
+import {gunzipSync} from 'node:zlib';
 import {pinReader, jsonBytes, digest} from '../../../../scripts/prepare-delivery-handoff.mjs';
 
 const root = process.cwd();
@@ -75,6 +76,10 @@ const ownerRoster = currentManifest.original_assets?.bounds;
 if (!ownerRoster?.commit || !ownerRoster.path || !ownerRoster.sha256) throw new Error('Selected manifest has no original owner-roster locator');
 sourceEvidence.owner_roster = reader.pin(ownerRoster.commit, ownerRoster.path);
 if (sourceEvidence.owner_roster.sha256 !== ownerRoster.sha256) throw new Error('Selected owner-roster hash differs from manifest');
+const ownerRosterBytes = reader.read(sourceEvidence.owner_roster);
+const ownerRosterDecoded = gunzipSync(ownerRosterBytes, {maxOutputLength: 20_000_000});
+sourceEvidence.owner_roster.decoded_bytes = ownerRosterDecoded.length;
+sourceEvidence.owner_roster.decoded_sha256 = digest(ownerRosterDecoded);
 sourceEvidence.targets = targets;
 const config = {version:1, selector:{commit:head,path:'data/ownership-selection.json'}, compact_territorial_exclusions:true,
   territorial_exclusion_families:familyParts.map(f=>f.source_id), source_evidence:sourceEvidence};
