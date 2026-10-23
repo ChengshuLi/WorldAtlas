@@ -232,14 +232,16 @@ test('final-bank reference-only authoring retains words and uses the existing co
   execFileSync('git',['-C',remote,'config','uploadpack.allowAnySHA1InWant','true']);execFileSync('git',['-C',remote,'config','uploadpack.allowFilter','true']);
   f.git('reset','--hard',at);f.git('config','url.'+pathToFileURL(remote).href+'.insteadOf','https://github.com/ChengshuLi/WorldAtlas.git');
   omitFixtureObjects(t,f.root,[...required,...unnecessary].map(p=>p.git_blob_oid));
-  const objects=()=>new Set(f.git('cat-file','--batch-all-objects','--batch-check=%(objectname)').toString().trim().split('\n'));
+  const objects=()=>new Set(f.git('--no-lazy-fetch','--no-replace-objects','cat-file','--batch-all-objects','--batch-check=%(objectname)').toString().trim().split('\n'));
   const before=objects(),env={...process.env,GH_TOKEN:''};delete env.NODE_OPTIONS;delete env.NODE_PATH;
   const command='coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs';
   const run=()=>spawnSync(process.execPath,[path.join(f.root,command),f.root,at,at,candidate,path.join(f.root,'no-reference-product')],{encoding:'utf8',env});
   const cold=run();assert.equal(cold.status,0,cold.stderr);const report=JSON.parse(cold.stdout);
   assert.equal(report.mode,'accepted-final-map-comparison-v1');assert.equal(report.native.native_row_scope.added_cells,0);
-  assert.deepEqual([...objects()].filter(id=>!before.has(id)).sort(),required.map(p=>p.git_blob_oid).sort());
-  for(const p of unnecessary)assert.throws(()=>f.git('cat-file','-e',p.git_blob_oid));
+  const after=objects();
+  assert.deepEqual([...after].filter(id=>!before.has(id)).sort(),required.map(p=>p.git_blob_oid).sort());
+  // Promisor-aware existence probes need not prove local materialization.
+  for(const p of unnecessary)assert(!after.has(p.git_blob_oid),'Unrelated object remains absent locally: '+p.path);
   assert(!fs.existsSync(path.join(f.root,'no-reference-product')));
   f.git('config','--unset','url.'+pathToFileURL(remote).href+'.insteadOf');
   f.git('config','url.'+pathToFileURL(path.join(remote,'absent')).href+'.insteadOf','https://github.com/ChengshuLi/WorldAtlas.git');
