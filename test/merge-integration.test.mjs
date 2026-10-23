@@ -1815,3 +1815,36 @@ test('successful original build archive is retained before later tests without r
  assert.match(yaml,/INTEGRATION_RESULT: \$\{\{ needs\.integration\.result \}\}/);
  assert.match(yaml,/GEOGRAPHY_RESULT: \$\{\{ needs\.geography\.result \}\}/);
 });
+
+
+test('actual preparation completes a truncated candidate tree and refuses incomplete child metadata before scope selection',async()=>{
+  for(const incomplete of [false,true]){
+    const f=fixture(),original=f.api,root=sha('e'),directory=sha('d'),calls=[];
+    f.api=githubAPI('synthetic-tree-token',{fetchImpl:async(url,init)=>{
+      const route=new URL(url).pathname+new URL(url).search;calls.push(route);
+      let value;
+      if(route==='/repos/owner/repo/git/trees/'+root+'?recursive=1')
+        value={sha:root,truncated:true,tree:[{path:'ignored-partial',sha:sha('f'),type:'blob',mode:'100644',size:1}]};
+      else if(route==='/repos/owner/repo/git/trees/'+root)
+        value={sha:root,truncated:false,tree:[{path:'src',sha:directory,type:'tree',mode:'040000'}]};
+      else if(route==='/repos/owner/repo/git/trees/'+directory+'?recursive=1')
+        value={sha:directory,truncated:false,tree:[{path:incomplete?'missing/a.js':'a.js',sha:sha('a'),type:'blob',mode:'100644',size:7}]};
+      else{
+        value=await original(route,init.method,init.body?JSON.parse(init.body):undefined);
+        if(route==='/repos/owner/repo/git/commits/'+f.candidate)value={...value,tree:{sha:root}};
+      }
+      return init.method==='DELETE'?new Response(null,{status:204}):Response.json(value);
+    }});
+    if(incomplete){
+      await assert.rejects(prepareIntegration(f.options()),/Incomplete immutable tree parent inventory/);
+      assert.equal(f.refs.size,0,'owned candidate is cleaned on incomplete child refusal');
+      assert(!calls.some(route=>route.includes('/contents/.github/package-inputs.json')),'no reviewed scope accepted from a partial tree');
+    }else{
+      const prepared=await prepareIntegration(f.options());
+      assert.equal(prepared.candidate_tree,root);assert.equal(prepared.candidate,f.candidate);
+      assert.equal(prepared.profile,'full');assert.equal(prepared.base,f.base);
+    }
+    assert.equal(calls.filter(route=>route==='/repos/owner/repo/git/trees/'+root+'?recursive=1').length,1);
+    assert(!calls.some(route=>route.includes('/git/blobs/')));
+  }
+});

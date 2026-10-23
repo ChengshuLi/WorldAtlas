@@ -125,3 +125,109 @@ test('recovery keeps ref ownership checks and never repeats an ambiguous delete'
   await assert.rejects(api.recovery('/repos/a/b/git/refs/heads/worldatlas-integration/pr-1-synthetic-unique-request','DELETE'),/lost deletion response/);
   assert.deepEqual(methods,['GET','DELETE']);
 });
+
+
+function truncatedTrees() {
+  const root='1'.repeat(40), shared='2'.repeat(40), nested='3'.repeat(40), blob='4'.repeat(40);
+  const route=sha=>'/repos/a/b/git/trees/'+sha;
+  const directory=(path,sha)=>({path,sha,type:'tree',mode:'040000'});
+  const file=(path,mode='100644')=>({path,sha:blob,type:'blob',mode,size:7});
+  const payloads=new Map([
+    [route(root)+'?recursive=1',{sha:root,truncated:true,tree:[file('../discarded-partial-row')]}],
+    [route(root),{sha:root,truncated:false,tree:[directory('one',shared),directory('two',shared),directory('nested',nested),file('root')]}],
+    [route(shared)+'?recursive=1',{sha:shared,truncated:false,tree:[file('ordinary'),file('executable','100755'),file('symlink','120000')]}],
+    [route(nested)+'?recursive=1',{sha:nested,truncated:true,tree:[file('discarded')]}],
+    [route(nested),{sha:nested,truncated:false,tree:[directory('again',shared),{path:'gitlink',sha:blob,type:'commit',mode:'160000'}]}]
+  ]);
+  const calls=[];
+  const fetchImpl=async(url,init)=>{
+    const name=new URL(url).pathname+new URL(url).search;calls.push({name,init});
+    assert(payloads.has(name),'Unexpected tree or non-metadata request: '+name);
+    return Response.json(payloads.get(name));
+  };
+  return {root,shared,nested,blob,route,payloads,calls,fetchImpl};
+}
+
+test('truncated immutable trees expand complete children, preserve every entry and reuse repeated subtree identities',async()=>{
+  const f=truncatedTrees(),accounting=requestAccounting('tree');
+  const result=await githubAPI(undefined,{publicReadOnly:true,fetchImpl:f.fetchImpl,onRequest:accounting.observe})(f.route(f.root)+'?recursive=1');
+  assert.equal(result.sha,f.root);assert.equal(result.truncated,false);
+  assert.deepEqual(result.tree.map(row=>row.path),['nested','nested/again','nested/again/executable','nested/again/ordinary','nested/again/symlink','nested/gitlink',
+    'one','one/executable','one/ordinary','one/symlink','root','two','two/executable','two/ordinary','two/symlink']);
+  assert.deepEqual(result.tree.find(row=>row.path==='one/executable'),{path:'one/executable',sha:f.blob,type:'blob',mode:'100755',size:7});
+  assert.equal(result.tree.find(row=>row.path==='nested/gitlink').mode,'160000');
+  assert.equal(f.calls.length,5);assert.equal(accounting.receipt().actual_http_attempts,5);
+  assert(f.calls.every(row=>row.init.method==='GET'&&!row.init.headers.Authorization));
+  assert(!f.calls.some(row=>row.name.includes('/blobs/')));
+});
+
+test('tree decomposition refuses wrong identity, incomplete children, unsafe entries, missing parents and cycles',async()=>{
+  const cases=[
+    ['root identity',f=>f.payloads.get(f.route(f.root)+'?recursive=1').sha=f.blob],
+    ['direct truncation',f=>f.payloads.get(f.route(f.root)).truncated=true],
+    ['direct identity',f=>f.payloads.get(f.route(f.root)).sha=f.blob],
+    ['direct nested path',f=>f.payloads.get(f.route(f.root)).tree[0].path='a/b'],
+    ['direct duplicate',f=>f.payloads.get(f.route(f.root)).tree.push({...f.payloads.get(f.route(f.root)).tree[0]})],
+    ['unsafe path',f=>f.payloads.get(f.route(f.shared)+'?recursive=1').tree[0].path='../outside'],
+    ['type/mode',f=>f.payloads.get(f.route(f.shared)+'?recursive=1').tree[0].mode='040000'],
+    ['size',f=>f.payloads.get(f.route(f.shared)+'?recursive=1').tree[0].size=-1],
+    ['missing parent',f=>f.payloads.get(f.route(f.shared)+'?recursive=1').tree[0].path='absent/leaf'],
+    ['child identity',f=>f.payloads.get(f.route(f.shared)+'?recursive=1').sha=f.blob],
+    ['cycle',f=>f.payloads.get(f.route(f.root)).tree[0].sha=f.root],
+    ['recursive ancestor cycle',f=>f.payloads.get(f.route(f.shared)+'?recursive=1').tree.push({path:'cycle',sha:f.root,type:'tree',mode:'040000'})],
+    ['cached subtree ancestor cycle',f=>f.payloads.get(f.route(f.shared)+'?recursive=1').tree.push({path:'later-ancestor',sha:f.nested,type:'tree',mode:'040000'})]
+  ];
+  for(const [label,mutate]of cases){
+    const f=truncatedTrees();mutate(f);
+    await assert.rejects(githubAPI('fixture',{fetchImpl:f.fetchImpl})(f.route(f.root)+'?recursive=1'),/immutable tree/i,label);
+  }
+});
+
+test('truncated-tree completion does not retry the root when a child refuses or exhausts its bounded retries',async()=>{
+  for(const status of [403,404,503]){
+    const f=truncatedTrees();let child=0;
+    const api=githubAPI('fixture',{readWaitMs:60000,now:()=>0,sleep:async()=>{},fetchImpl:async(url,init)=>{
+      if(url.endsWith(f.route(f.shared)+'?recursive=1')){child++;return Response.json({message:'Unavailable'},{status});}
+      return f.fetchImpl(url,init);
+    }});
+    await assert.rejects(api(f.route(f.root)+'?recursive=1'),error=>error.github?.http_status===status);
+    assert.equal(child,status===503?3:1);assert.deepEqual(f.calls.map(row=>row.name),[f.route(f.root)+'?recursive=1',f.route(f.root)]);
+  }
+  const f=truncatedTrees();
+  // Finish the second request within its deadline, then refuse the child before fetch.
+  let checks=0;const bounded=githubAPI('fixture',{deadlineRemaining:()=>++checks>4?0:60000,fetchImpl:f.fetchImpl});
+  await assert.rejects(bounded(f.route(f.root)+'?recursive=1'),/deadline/);
+  assert.equal(f.calls.length,2);
+});
+
+test('raw partial ETag snapshots never become synthetic complete provider responses',async()=>{
+  const f=truncatedTrees(),seen=new Map();
+  const api=githubAPI('fixture',{fetchImpl:async(url,init)=>{
+    const name=new URL(url).pathname+new URL(url).search,etag='"'+name+'"';
+    if(seen.has(name)){assert.equal(init.headers['If-None-Match'],etag);seen.set(name,seen.get(name)+1);return new Response(null,{status:304,headers:{etag}});}
+    seen.set(name,1);assert(f.payloads.has(name));return Response.json(f.payloads.get(name),{headers:{etag}});
+  }});
+  const first=await api(f.route(f.root)+'?recursive=1');
+  assert.deepEqual(await api(f.route(f.root)+'?recursive=1'),first);
+  assert.equal(seen.size,5);assert([...seen.values()].every(count=>count===2));
+});
+
+test('tree completion cannot broaden bounded reads, malformed responses, mutable refs or mutation routes',async()=>{
+  const f=truncatedTrees();
+  const api=githubAPI('fixture',{fetchImpl:f.fetchImpl});
+  const raw=await api(f.route(f.root)+'?recursive=1','GET',undefined,{maxResponseBytes:4096});
+  assert.equal(raw.truncated,true);assert.equal(f.calls.length,1);
+  for(const [route,method,body,payload]of [
+    [f.route(f.root)+'?recursive=1','GET',undefined,{truncated:'true',tree:[]}],
+    [f.route(f.root)+'?recursive=1','GET',undefined,{truncated:true}],
+    ['/repos/a/b/git/trees/main?recursive=1','GET',undefined,{truncated:true,tree:[]}],
+    [f.route(f.root)+'?recursive=true','GET',undefined,{truncated:true,tree:[]}],
+    [f.route(f.root)+'?recursive=1','POST',{}, {truncated:true,tree:[]}]
+  ]){
+    let calls=0;const client=githubAPI('fixture',{fetchImpl:async()=>{calls++;return Response.json(payload);}});
+    if(payload.truncated===true&&route===f.route(f.root)+'?recursive=1'&&method==='GET')
+      await assert.rejects(client(route,method,body),/tree response identity/);
+    else assert.deepEqual(await client(route,method,body),payload);
+    assert.equal(calls,1);
+  }
+});

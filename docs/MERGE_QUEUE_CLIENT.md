@@ -152,6 +152,13 @@ reviewed bytes need fresh substantive review. A pending run, uncertain dispatch 
 missing result is not a settled failure. No new recovery daemon is involved;
 existing API quota/deadline guards and native provider queueing still apply.
 
+If GitHub explicitly truncates an exact recursive Git-tree response, the existing
+client discards those partial rows and assembles the complete inventory from
+nonrecursive child trees, reusing identical subtree identities within that read.
+This is metadata acquisition, not a scope-check exemption or another queue retry.
+Wrong identities, incomplete child inventories, provider refusals and explicit
+caller byte limits remain failures; no source blobs are fetched by this walk.
+
 On a rate-limit rejection, use the response's existing headers rather than polling
 `/rate_limit`. Exhausted primary capacity (`x-ratelimit-remaining: 0`) requires
 waiting past `x-ratelimit-reset`; `retry-after` must also elapse when supplied.
