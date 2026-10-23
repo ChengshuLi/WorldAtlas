@@ -16,7 +16,7 @@ The finite retained France ADM1/ADM2/ADM3 pair matrices report zero intersection
 
 ## Current selection transition
 
-`compose-config-current-v2.json` pins the exact accepted selector at `c8a7e746356bc957265ce5ea007179edbce317e7` and the previously reviewed COM rule, custody binding, constructor, and patch. `composition-001/authority-registry.json` is the new-only authority operand. The next documented finalizer step binds this operand to the same current selector and package-inputs snapshot. It must preserve the whole accepted current bank and produce exact current-E output; stale cumulative ledgers from the closed earlier PR are not reused.
+`compose-config-current-v2.json` pins the exact accepted selector at `c8a7e746356bc957265ce5ea007179edbce317e7` and the previously reviewed COM rule, custody binding, constructor, and patch. `composition-001/authority-registry.json` is the new-only authority operand. The accepted v2 finalizer bound this operand to that selector and package-inputs snapshot, preserved the accepted baseline, and generated the current-bank outputs recorded in `finalize-001/preparation.json`. Stale cumulative ledgers from the closed earlier PR were not reused.
 
 The 485 cells remain proposed until the normal current-bank consumer, exact public-head independent review, and required stock delivery complete. No observation or scientific producer was rerun for this transition. The 86 held keys and all adverse evidence remain intact.
 
