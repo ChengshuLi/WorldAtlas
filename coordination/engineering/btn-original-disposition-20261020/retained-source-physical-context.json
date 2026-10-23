@@ -1,0 +1,1430 @@
+{
+  "version": 1,
+  "kind": "btn-original-retained-source-physical-context",
+  "as_of": "2026-10-20",
+  "method": "Read the exact original queue and its retained source/physical/water masks at pinned OIDs. Reproduced only interval/category/contact joining logic from the pinned source-batch classifier; expanded original intervals to keys for equality against the already completed observation. Source payloads were fully decoded for property-only feature identity joins; only properties objects were parsed. No geometry coordinates were parsed, inspected, transformed or redistributed. No observer or geometry run was performed.",
+  "scope": {
+    "package_id": "gb-BTN-ADM1--repair-evaluation",
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "queue_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "category": "repair-evaluation",
+    "land_cells": 256,
+    "intervals": 124,
+    "owners": [
+      10452,
+      10454,
+      10457,
+      10459,
+      10464,
+      10465,
+      10466,
+      10467,
+      10470
+    ],
+    "source_features": [
+      9134,
+      9136,
+      9138,
+      9142,
+      9144,
+      9145,
+      9147,
+      9149,
+      9151,
+      15331,
+      36798,
+      36801,
+      66758,
+      66790,
+      66870,
+      66875
+    ],
+    "source_families": [
+      47,
+      61,
+      154,
+      367
+    ],
+    "native_blocks": [
+      26,
+      27
+    ],
+    "locality_count": 9,
+    "provinces": [
+      "framework:province:gasa:eca53d038723",
+      "framework:province:lhuntse:c7692df7f101",
+      "framework:province:paro:b91236e7025f",
+      "framework:province:samdrup-jongkhar:acc9b13063f4",
+      "framework:province:samtse:529843f61064",
+      "framework:province:sarpang:59d3a805a15c",
+      "framework:province:thimpu:9bb77dc54783",
+      "framework:province:trashiyangtse:4560836739c7",
+      "framework:province:wangdue-phodrang:e1b207b1c0f1"
+    ],
+    "contract": {
+      "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+      "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+      "priority": 1
+    }
+  },
+  "immutable_inputs": {
+    "classifier": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs",
+      "git_blob_oid": "c5ba9331deb93eed40662d1dc579cdaedea55c46",
+      "bytes": 6840,
+      "sha256": "2589022806876f7faa645293fd9a0ea4b22d0c35a5a6a29fbdc30f5b730f5689"
+    },
+    "mask_operands": [
+      {
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-026.json.gz",
+        "git_blob_oid": "9c1dc50879a40f6e24a996e761b913fca8dbda61",
+        "compressed_bytes": 440574,
+        "compressed_sha256": "fc85e70b9caef53bb4a34d0df4c617bd0046aed029eca3b14eb8cea52e9e9707",
+        "decoded_bytes": 3101061,
+        "decoded_sha256": "a2236fe7b0201747775622957f215398076fa2698ac3e8cc725b638ea94edce3",
+        "row_count": 4096
+      },
+      {
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-027.json.gz",
+        "git_blob_oid": "3236b54ab1b49b184a2fbe8593fb87a018e78420",
+        "compressed_bytes": 658909,
+        "compressed_sha256": "3ef85aa6a7bc9235fffe06a46bea69bfffa9fcb9d13aeb32a364b16191efb696",
+        "decoded_bytes": 5022444,
+        "decoded_sha256": "7f1751b5c741ffed290a3553a8ee86410ba2f42dda0681d9acf954ad719d2a22",
+        "row_count": 4096
+      },
+      {
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-026.json.gz",
+        "git_blob_oid": "355559350599390e256bd1180bcfaf6723504068",
+        "compressed_bytes": 390394,
+        "compressed_sha256": "8c263a02fe617bcd4844473c9237a8868c134860649022b7ad2e2b7371584fa2",
+        "decoded_bytes": 1862642,
+        "decoded_sha256": "d4ea09c93e2790a9304a6f1864225ce3d0199d952e6211be4bba2dd4a458430b",
+        "row_count": 4096
+      },
+      {
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-027.json.gz",
+        "git_blob_oid": "c057e75fe5dec634ace87f59631dc02eca380033",
+        "compressed_bytes": 502097,
+        "compressed_sha256": "bd038c98361e9d2ee6187765ceb7d91b6bb174114f5dfccd7b92c376839c1eea",
+        "decoded_bytes": 2488924,
+        "decoded_sha256": "bbae9fd5766c25ab46c02fda90f2bc788e81eb4eca3b419591866ab43ba98b61",
+        "row_count": 4096
+      },
+      {
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-026.json.gz",
+        "git_blob_oid": "cf49a65b32bbd2ab296e873a72da981ae6cc44a6",
+        "compressed_bytes": 4376,
+        "compressed_sha256": "703c18aee9e56cd3635eff1d4c8a4998bdf61497965883c27e41717b426edf16",
+        "decoded_bytes": 31228,
+        "decoded_sha256": "468ba76e47d059c05112e8652b8f26cd577b4aabe7a68656d695a4474046f2ab",
+        "row_count": 762
+      },
+      {
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-027.json.gz",
+        "git_blob_oid": "5d11ca716f75ca9a6ac27031d114bb4a752d1375",
+        "compressed_bytes": 14381,
+        "compressed_sha256": "2280371346676eac0ca982c040504a9dcba640cf66c5c2c3d1385de44cb3767a",
+        "decoded_bytes": 92288,
+        "decoded_sha256": "2d251bfcf589c0db7d02be77ac011b25e509bb910e7811532f20aa75a33720f4",
+        "row_count": 1768
+      }
+    ],
+    "source_family_catalogue_claims": [
+      {
+        "source_family_index": 47,
+        "key": "gb:BTN:ADM1",
+        "cohort": "administrative-registry",
+        "advertised_feature_count": 20,
+        "feature_count": 20,
+        "original_bytes": 100517,
+        "original_sha256": "a4e2e3f3267f3990bb918e880ba4e51e639a7fc7af8f7c2ec1489de3e1546351",
+        "metadata_sha256": "59cbb7a54d41861bc955d62557ddca4025c922f375b0486d638ceef052abaeec",
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BTN/ADM1/geoBoundaries-BTN-ADM1_simplified.geojson",
+        "recorded_license": "Creative Commons Attribution 3.0 License",
+        "source_represented_year_claim": "2010",
+        "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+        "parts": [
+          {
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BTN-ADM1-000.bin.gz",
+            "blob_oid": "eed1b8cd49526c9874c9566f142d2ca928a08a1b",
+            "compressed_bytes": 25128,
+            "compressed_sha256": "ff328427711ffb6c998389200155fad8df3605cab37fa47181cf16df6ec9e24b",
+            "decoded_bytes": 100517,
+            "decoded_sha256": "a4e2e3f3267f3990bb918e880ba4e51e639a7fc7af8f7c2ec1489de3e1546351",
+            "warm_in_store": true
+          }
+        ]
+      },
+      {
+        "source_family_index": 61,
+        "key": "gb:CHN:ADM1",
+        "cohort": "administrative-registry",
+        "advertised_feature_count": 34,
+        "feature_count": 34,
+        "original_bytes": 263343,
+        "original_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623",
+        "metadata_sha256": "df10c7b79297bd3b71ca8d5f36f61f3396d94c2abee48a85938471c0e2e5bded",
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CHN/ADM1/geoBoundaries-CHN-ADM1_simplified.geojson",
+        "recorded_license": "Public Domain",
+        "source_represented_year_claim": "2019",
+        "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+        "parts": [
+          {
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+            "blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+            "compressed_bytes": 77377,
+            "compressed_sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+            "decoded_bytes": 263343,
+            "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623",
+            "warm_in_store": true
+          }
+        ]
+      },
+      {
+        "source_family_index": 154,
+        "key": "gb:IND:ADM1",
+        "cohort": "administrative-registry",
+        "advertised_feature_count": 36,
+        "feature_count": 36,
+        "original_bytes": 5103747,
+        "original_sha256": "4c63fe43294a391e8f2de4e9f86f3edb60f8688275b9fee90c61fb2aa0c26061",
+        "metadata_sha256": "a7c6dfef4bd15f029d82c471cb15b9264b2c05eba684f662d0d4aa594839f64c",
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IND/ADM1/geoBoundaries-IND-ADM1_simplified.geojson",
+        "recorded_license": "Creative Commons Attribution 2.5 India (CC BY 2.5 IN)",
+        "source_represented_year_claim": "2011",
+        "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+        "parts": [
+          {
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM1-000.bin.gz",
+            "blob_oid": "6c717053e0e9893cbe32ee9e09e4cba76760798a",
+            "compressed_bytes": 2009868,
+            "compressed_sha256": "4a716fa04288d6742b1f43031ea90a26998c86becb1389f46acd3200b3acb1e0",
+            "decoded_bytes": 5103747,
+            "decoded_sha256": "4c63fe43294a391e8f2de4e9f86f3edb60f8688275b9fee90c61fb2aa0c26061",
+            "warm_in_store": true
+          }
+        ]
+      },
+      {
+        "source_family_index": 367,
+        "key": "gb:IND:ADM3",
+        "cohort": "separate-refinement",
+        "advertised_feature_count": 6836,
+        "feature_count": 6822,
+        "original_bytes": 40040002,
+        "original_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb",
+        "metadata_sha256": "df90173ff564d1848427608474a14eb8856927c8b22fb7d6fb7fa7d267e232c0",
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IND/ADM3/geoBoundaries-IND-ADM3_simplified.geojson",
+        "recorded_license": "Open Data Commons Open Database License 1.0",
+        "source_represented_year_claim": "2018",
+        "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+        "parts": [
+          {
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+            "blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+            "compressed_bytes": 11542134,
+            "compressed_sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+            "decoded_bytes": 33554432,
+            "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297",
+            "warm_in_store": true
+          },
+          {
+            "ordinal": 1,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+            "blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+            "compressed_bytes": 2253028,
+            "compressed_sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+            "decoded_bytes": 6485570,
+            "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf",
+            "warm_in_store": true
+          }
+        ]
+      }
+    ],
+    "source_feature_roster": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "compressed_bytes": 1844315,
+      "decoded_bytes": 13496995,
+      "decoded_sha256": "7fa99cbf064121e0130b66758c212ae22b2a7be5649f2e250e9cda89a9bd595e",
+      "warm_in_store": true
+    },
+    "lineage_and_metadata_source": "Original queue input_sha256 pins at 2d1fc6f430e756498908bf2c4e267356a13f5cc7: lineage.json.gz, ownership-binding.json, retained-source-catalogue.json, source-raster-summary.json, source-census-summary.json, physical-unassigned-summary.json and normalized-source-seams.json under coordination/engineering/global-current-cell-work-queue-20261014/. Source family claims derive from that pinned retained-source-catalogue.json and its authenticated source-corpus descriptors."
+  },
+  "classifier_reconstruction": {
+    "interval_count": 124,
+    "key_count": 256,
+    "interval_sha256": "3c5b36207c762dc735b277dc2625cc6bb05bca100932b61a0a1698c4ecca6b97",
+    "query_sha256": "126b1a744d48c12d39369fd5a9c36fea8efe25632e2982fa93c2ebdaa3823062",
+    "physical_counts": {
+      "land": 256,
+      "inland_water": 0,
+      "source_relative": 0
+    },
+    "blocks": [
+      {
+        "block": 26,
+        "intervals": 86,
+        "cells": 174
+      },
+      {
+        "block": 27,
+        "intervals": 38,
+        "cells": 82
+      }
+    ],
+    "disjoint_contact_groups": [
+      {
+        "source_indices": [
+          9134
+        ],
+        "owners": [
+          10466
+        ],
+        "physical": "land",
+        "intervals": 1,
+        "cells": 1
+      },
+      {
+        "source_indices": [
+          9134,
+          36798
+        ],
+        "owners": [
+          10466
+        ],
+        "physical": "land",
+        "intervals": 1,
+        "cells": 1
+      },
+      {
+        "source_indices": [
+          9136,
+          15331
+        ],
+        "owners": [
+          10452
+        ],
+        "physical": "land",
+        "intervals": 18,
+        "cells": 21
+      },
+      {
+        "source_indices": [
+          9138
+        ],
+        "owners": [
+          10464
+        ],
+        "physical": "land",
+        "intervals": 6,
+        "cells": 19
+      },
+      {
+        "source_indices": [
+          9138,
+          36801,
+          66758
+        ],
+        "owners": [
+          10464
+        ],
+        "physical": "land",
+        "intervals": 12,
+        "cells": 25
+      },
+      {
+        "source_indices": [
+          9138,
+          36801,
+          66790
+        ],
+        "owners": [
+          10464
+        ],
+        "physical": "land",
+        "intervals": 2,
+        "cells": 3
+      },
+      {
+        "source_indices": [
+          9138,
+          66758
+        ],
+        "owners": [
+          10464
+        ],
+        "physical": "land",
+        "intervals": 1,
+        "cells": 1
+      },
+      {
+        "source_indices": [
+          9138,
+          66790
+        ],
+        "owners": [
+          10464
+        ],
+        "physical": "land",
+        "intervals": 12,
+        "cells": 29
+      },
+      {
+        "source_indices": [
+          9138,
+          66875
+        ],
+        "owners": [
+          10464
+        ],
+        "physical": "land",
+        "intervals": 1,
+        "cells": 1
+      },
+      {
+        "source_indices": [
+          9142
+        ],
+        "owners": [
+          10454
+        ],
+        "physical": "land",
+        "intervals": 1,
+        "cells": 1
+      },
+      {
+        "source_indices": [
+          9144
+        ],
+        "owners": [
+          10465
+        ],
+        "physical": "land",
+        "intervals": 15,
+        "cells": 30
+      },
+      {
+        "source_indices": [
+          9144,
+          15331
+        ],
+        "owners": [
+          10465
+        ],
+        "physical": "land",
+        "intervals": 3,
+        "cells": 3
+      },
+      {
+        "source_indices": [
+          9145
+        ],
+        "owners": [
+          10457
+        ],
+        "physical": "land",
+        "intervals": 3,
+        "cells": 4
+      },
+      {
+        "source_indices": [
+          9145,
+          15331
+        ],
+        "owners": [
+          10457
+        ],
+        "physical": "land",
+        "intervals": 21,
+        "cells": 60
+      },
+      {
+        "source_indices": [
+          9147
+        ],
+        "owners": [
+          10467
+        ],
+        "physical": "land",
+        "intervals": 1,
+        "cells": 1
+      },
+      {
+        "source_indices": [
+          9149
+        ],
+        "owners": [
+          10459
+        ],
+        "physical": "land",
+        "intervals": 1,
+        "cells": 1
+      },
+      {
+        "source_indices": [
+          9149,
+          15331
+        ],
+        "owners": [
+          10459
+        ],
+        "physical": "land",
+        "intervals": 21,
+        "cells": 51
+      },
+      {
+        "source_indices": [
+          9151,
+          36801
+        ],
+        "owners": [
+          10470
+        ],
+        "physical": "land",
+        "intervals": 2,
+        "cells": 2
+      },
+      {
+        "source_indices": [
+          9151,
+          66870
+        ],
+        "owners": [
+          10470
+        ],
+        "physical": "land",
+        "intervals": 2,
+        "cells": 2
+      }
+    ],
+    "contact_cell_incidence": [
+      {
+        "source_index": 9134,
+        "cells": 2
+      },
+      {
+        "source_index": 9136,
+        "cells": 21
+      },
+      {
+        "source_index": 9138,
+        "cells": 78
+      },
+      {
+        "source_index": 9142,
+        "cells": 1
+      },
+      {
+        "source_index": 9144,
+        "cells": 33
+      },
+      {
+        "source_index": 9145,
+        "cells": 64
+      },
+      {
+        "source_index": 9147,
+        "cells": 1
+      },
+      {
+        "source_index": 9149,
+        "cells": 52
+      },
+      {
+        "source_index": 9151,
+        "cells": 4
+      },
+      {
+        "source_index": 15331,
+        "cells": 135
+      },
+      {
+        "source_index": 36798,
+        "cells": 1
+      },
+      {
+        "source_index": 36801,
+        "cells": 30
+      },
+      {
+        "source_index": 66758,
+        "cells": 26
+      },
+      {
+        "source_index": 66790,
+        "cells": 32
+      },
+      {
+        "source_index": 66870,
+        "cells": 2
+      },
+      {
+        "source_index": 66875,
+        "cells": 1
+      }
+    ],
+    "equals_original_observation_intervals": true,
+    "equals_original_observation_keys": true
+  },
+  "source_property_identity": {
+    "families": [
+      {
+        "source_family_index": 47,
+        "source": "gb:BTN:ADM1",
+        "feature_count": 20,
+        "advertised_feature_count": 20,
+        "concatenated_decoded_bytes": 100517,
+        "concatenated_decoded_sha256": "a4e2e3f3267f3990bb918e880ba4e51e639a7fc7af8f7c2ec1489de3e1546351",
+        "part_pins": [
+          {
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BTN-ADM1-000.bin.gz",
+            "blob_oid": "eed1b8cd49526c9874c9566f142d2ca928a08a1b",
+            "compressed_bytes": 25128,
+            "compressed_sha256": "ff328427711ffb6c998389200155fad8df3605cab37fa47181cf16df6ec9e24b",
+            "decoded_bytes": 100517,
+            "decoded_sha256": "a4e2e3f3267f3990bb918e880ba4e51e639a7fc7af8f7c2ec1489de3e1546351",
+            "warm_in_store": false
+          }
+        ],
+        "selected_property_matches": [
+          {
+            "source_index": 9134,
+            "source_id": "gb:BTN:ADM1:66845921B83925222569127",
+            "source_family_index": 47,
+            "roster_name": "Trashiyangtse",
+            "owner_indices": [
+              10466
+            ],
+            "matched_property": {
+              "shapeName": "Trashiyangtse",
+              "shapeISO": "BT-TY",
+              "shapeID": "66845921B83925222569127",
+              "shapeGroup": "BTN",
+              "shapeType": "ADM1"
+            },
+            "exact_shapeID_match_count": 1
+          },
+          {
+            "source_index": 9136,
+            "source_id": "gb:BTN:ADM1:66845921B11724657218086",
+            "source_family_index": 47,
+            "roster_name": "Lhuntse",
+            "owner_indices": [
+              10452
+            ],
+            "matched_property": {
+              "shapeName": "Lhuntse",
+              "shapeISO": "BT-44",
+              "shapeID": "66845921B11724657218086",
+              "shapeGroup": "BTN",
+              "shapeType": "ADM1"
+            },
+            "exact_shapeID_match_count": 1
+          },
+          {
+            "source_index": 9138,
+            "source_id": "gb:BTN:ADM1:66845921B74484063825186",
+            "source_family_index": 47,
+            "roster_name": "Sarpang",
+            "owner_indices": [
+              10464
+            ],
+            "matched_property": {
+              "shapeName": "Sarpang",
+              "shapeISO": "BT-31",
+              "shapeID": "66845921B74484063825186",
+              "shapeGroup": "BTN",
+              "shapeType": "ADM1"
+            },
+            "exact_shapeID_match_count": 1
+          },
+          {
+            "source_index": 9142,
+            "source_id": "gb:BTN:ADM1:66845921B16337540791352",
+            "source_family_index": 47,
+            "roster_name": "Wangdue Phodrang",
+            "owner_indices": [
+              10454
+            ],
+            "matched_property": {
+              "shapeName": "Wangdue Phodrang",
+              "shapeISO": "BT-24",
+              "shapeID": "66845921B16337540791352",
+              "shapeGroup": "BTN",
+              "shapeType": "ADM1"
+            },
+            "exact_shapeID_match_count": 1
+          },
+          {
+            "source_index": 9144,
+            "source_id": "gb:BTN:ADM1:66845921B82067974050695",
+            "source_family_index": 47,
+            "roster_name": "Thimpu",
+            "owner_indices": [
+              10465
+            ],
+            "matched_property": {
+              "shapeName": "Thimpu",
+              "shapeISO": "BT-15",
+              "shapeID": "66845921B82067974050695",
+              "shapeGroup": "BTN",
+              "shapeType": "ADM1"
+            },
+            "exact_shapeID_match_count": 1
+          },
+          {
+            "source_index": 9145,
+            "source_id": "gb:BTN:ADM1:66845921B30697351958460",
+            "source_family_index": 47,
+            "roster_name": "Gasa",
+            "owner_indices": [
+              10457
+            ],
+            "matched_property": {
+              "shapeName": "Gasa",
+              "shapeISO": "BT-GA",
+              "shapeID": "66845921B30697351958460",
+              "shapeGroup": "BTN",
+              "shapeType": "ADM1"
+            },
+            "exact_shapeID_match_count": 1
+          },
+          {
+            "source_index": 9147,
+            "source_id": "gb:BTN:ADM1:66845921B8526775626410",
+            "source_family_index": 47,
+            "roster_name": "Samtse",
+            "owner_indices": [
+              10467
+            ],
+            "matched_property": {
+              "shapeName": "Samtse",
+              "shapeISO": "BT-14",
+              "shapeID": "66845921B8526775626410",
+              "shapeGroup": "BTN",
+              "shapeType": "ADM1"
+            },
+            "exact_shapeID_match_count": 1
+          },
+          {
+            "source_index": 9149,
+            "source_id": "gb:BTN:ADM1:66845921B43572720469260",
+            "source_family_index": 47,
+            "roster_name": "Paro",
+            "owner_indices": [
+              10459
+            ],
+            "matched_property": {
+              "shapeName": "Paro",
+              "shapeISO": "BT-11",
+              "shapeID": "66845921B43572720469260",
+              "shapeGroup": "BTN",
+              "shapeType": "ADM1"
+            },
+            "exact_shapeID_match_count": 1
+          },
+          {
+            "source_index": 9151,
+            "source_id": "gb:BTN:ADM1:66845921B95017424672663",
+            "source_family_index": 47,
+            "roster_name": "Samdrup Jongkhar",
+            "owner_indices": [
+              10470
+            ],
+            "matched_property": {
+              "shapeName": "Samdrup Jongkhar",
+              "shapeISO": "BT-45",
+              "shapeID": "66845921B95017424672663",
+              "shapeGroup": "BTN",
+              "shapeType": "ADM1"
+            },
+            "exact_shapeID_match_count": 1
+          }
+        ]
+      },
+      {
+        "source_family_index": 61,
+        "source": "gb:CHN:ADM1",
+        "feature_count": 34,
+        "advertised_feature_count": 34,
+        "concatenated_decoded_bytes": 263343,
+        "concatenated_decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623",
+        "part_pins": [
+          {
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+            "blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+            "compressed_bytes": 77377,
+            "compressed_sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+            "decoded_bytes": 263343,
+            "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623",
+            "warm_in_store": false
+          }
+        ],
+        "selected_property_matches": [
+          {
+            "source_index": 15331,
+            "source_id": "gb:CHN:ADM1:43563684B19802372559419",
+            "source_family_index": 61,
+            "roster_name": "Tibet Autonomous Region",
+            "owner_indices": [],
+            "matched_property": {
+              "shapeName": "Tibet Autonomous Region",
+              "shapeISO": "CHN",
+              "shapeID": "43563684B19802372559419",
+              "shapeGroup": "CHN",
+              "shapeType": "ADM1"
+            },
+            "exact_shapeID_match_count": 1
+          }
+        ]
+      },
+      {
+        "source_family_index": 154,
+        "source": "gb:IND:ADM1",
+        "feature_count": 36,
+        "advertised_feature_count": 36,
+        "concatenated_decoded_bytes": 5103747,
+        "concatenated_decoded_sha256": "4c63fe43294a391e8f2de4e9f86f3edb60f8688275b9fee90c61fb2aa0c26061",
+        "part_pins": [
+          {
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM1-000.bin.gz",
+            "blob_oid": "6c717053e0e9893cbe32ee9e09e4cba76760798a",
+            "compressed_bytes": 2009868,
+            "compressed_sha256": "4a716fa04288d6742b1f43031ea90a26998c86becb1389f46acd3200b3acb1e0",
+            "decoded_bytes": 5103747,
+            "decoded_sha256": "4c63fe43294a391e8f2de4e9f86f3edb60f8688275b9fee90c61fb2aa0c26061",
+            "warm_in_store": false
+          }
+        ],
+        "selected_property_matches": [
+          {
+            "source_index": 36798,
+            "source_id": "gb:IND:ADM1:1811400B16134215155042",
+            "source_family_index": 154,
+            "roster_name": "Arunāchal Pradesh",
+            "owner_indices": [],
+            "matched_property": {
+              "shapeName": "Arunāchal Pradesh",
+              "shapeISO": "IN-AR",
+              "shapeID": "1811400B16134215155042",
+              "shapeGroup": "IND",
+              "shapeType": "ADM1"
+            },
+            "exact_shapeID_match_count": 1
+          },
+          {
+            "source_index": 36801,
+            "source_id": "gb:IND:ADM1:1811400B78322693766699",
+            "source_family_index": 154,
+            "roster_name": "Assam",
+            "owner_indices": [],
+            "matched_property": {
+              "shapeName": "Assam",
+              "shapeISO": "IN-AS",
+              "shapeID": "1811400B78322693766699",
+              "shapeGroup": "IND",
+              "shapeType": "ADM1"
+            },
+            "exact_shapeID_match_count": 1
+          }
+        ]
+      },
+      {
+        "source_family_index": 367,
+        "source": "gb:IND:ADM3",
+        "feature_count": 6822,
+        "advertised_feature_count": 6836,
+        "concatenated_decoded_bytes": 40040002,
+        "concatenated_decoded_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb",
+        "part_pins": [
+          {
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+            "blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+            "compressed_bytes": 11542134,
+            "compressed_sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+            "decoded_bytes": 33554432,
+            "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297",
+            "warm_in_store": false
+          },
+          {
+            "ordinal": 1,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+            "blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+            "compressed_bytes": 2253028,
+            "compressed_sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+            "decoded_bytes": 6485570,
+            "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf",
+            "warm_in_store": false
+          }
+        ],
+        "selected_property_matches": [
+          {
+            "source_index": 66758,
+            "source_id": "gb:IND:ADM3:7132399B8475849801445",
+            "source_family_index": 367,
+            "roster_name": "Gossaigaon (Pt)",
+            "owner_indices": [],
+            "matched_property": {
+              "shapeName": "Gossaigaon (Pt)",
+              "shapeISO": "",
+              "shapeID": "7132399B8475849801445",
+              "shapeGroup": "IND",
+              "shapeType": "ADM3"
+            },
+            "exact_shapeID_match_count": 1
+          },
+          {
+            "source_index": 66790,
+            "source_id": "gb:IND:ADM3:7132399B64676381846309",
+            "source_family_index": 367,
+            "roster_name": "Bijni (Pt)",
+            "owner_indices": [],
+            "matched_property": {
+              "shapeName": "Bijni (Pt)",
+              "shapeISO": "",
+              "shapeID": "7132399B64676381846309",
+              "shapeGroup": "IND",
+              "shapeType": "ADM3"
+            },
+            "exact_shapeID_match_count": 1
+          },
+          {
+            "source_index": 66870,
+            "source_id": "gb:IND:ADM3:7132399B38662484373116",
+            "source_family_index": 367,
+            "roster_name": "Udalguri",
+            "owner_indices": [],
+            "matched_property": {
+              "shapeName": "Udalguri",
+              "shapeISO": "",
+              "shapeID": "7132399B38662484373116",
+              "shapeGroup": "IND",
+              "shapeType": "ADM3"
+            },
+            "exact_shapeID_match_count": 1
+          },
+          {
+            "source_index": 66875,
+            "source_id": "gb:IND:ADM3:7132399B57811367635943",
+            "source_family_index": 367,
+            "roster_name": "Dotoma",
+            "owner_indices": [],
+            "matched_property": {
+              "shapeName": "Dotoma",
+              "shapeISO": "",
+              "shapeID": "7132399B57811367635943",
+              "shapeGroup": "IND",
+              "shapeType": "ADM3"
+            },
+            "exact_shapeID_match_count": 1
+          },
+          {
+            "source_index": 73452,
+            "source_id": "gb:IND:ADM3:7132399B69160610836422",
+            "source_family_index": 367,
+            "roster_name": "Madarihat",
+            "owner_indices": [
+              3731
+            ],
+            "matched_property": {
+              "shapeName": "Madarihat",
+              "shapeISO": "",
+              "shapeID": "7132399B69160610836422",
+              "shapeGroup": "IND",
+              "shapeType": "ADM3"
+            },
+            "exact_shapeID_match_count": 1
+          }
+        ]
+      }
+    ],
+    "selected_contacts": [
+      {
+        "source_index": 9134,
+        "source_id": "gb:BTN:ADM1:66845921B83925222569127",
+        "source_family_index": 47,
+        "roster_name": "Trashiyangtse",
+        "owner_indices": [
+          10466
+        ],
+        "matched_property": {
+          "shapeName": "Trashiyangtse",
+          "shapeISO": "BT-TY",
+          "shapeID": "66845921B83925222569127",
+          "shapeGroup": "BTN",
+          "shapeType": "ADM1"
+        },
+        "exact_shapeID_match_count": 1,
+        "cell_incidence": 2
+      },
+      {
+        "source_index": 9136,
+        "source_id": "gb:BTN:ADM1:66845921B11724657218086",
+        "source_family_index": 47,
+        "roster_name": "Lhuntse",
+        "owner_indices": [
+          10452
+        ],
+        "matched_property": {
+          "shapeName": "Lhuntse",
+          "shapeISO": "BT-44",
+          "shapeID": "66845921B11724657218086",
+          "shapeGroup": "BTN",
+          "shapeType": "ADM1"
+        },
+        "exact_shapeID_match_count": 1,
+        "cell_incidence": 21
+      },
+      {
+        "source_index": 9138,
+        "source_id": "gb:BTN:ADM1:66845921B74484063825186",
+        "source_family_index": 47,
+        "roster_name": "Sarpang",
+        "owner_indices": [
+          10464
+        ],
+        "matched_property": {
+          "shapeName": "Sarpang",
+          "shapeISO": "BT-31",
+          "shapeID": "66845921B74484063825186",
+          "shapeGroup": "BTN",
+          "shapeType": "ADM1"
+        },
+        "exact_shapeID_match_count": 1,
+        "cell_incidence": 78
+      },
+      {
+        "source_index": 9142,
+        "source_id": "gb:BTN:ADM1:66845921B16337540791352",
+        "source_family_index": 47,
+        "roster_name": "Wangdue Phodrang",
+        "owner_indices": [
+          10454
+        ],
+        "matched_property": {
+          "shapeName": "Wangdue Phodrang",
+          "shapeISO": "BT-24",
+          "shapeID": "66845921B16337540791352",
+          "shapeGroup": "BTN",
+          "shapeType": "ADM1"
+        },
+        "exact_shapeID_match_count": 1,
+        "cell_incidence": 1
+      },
+      {
+        "source_index": 9144,
+        "source_id": "gb:BTN:ADM1:66845921B82067974050695",
+        "source_family_index": 47,
+        "roster_name": "Thimpu",
+        "owner_indices": [
+          10465
+        ],
+        "matched_property": {
+          "shapeName": "Thimpu",
+          "shapeISO": "BT-15",
+          "shapeID": "66845921B82067974050695",
+          "shapeGroup": "BTN",
+          "shapeType": "ADM1"
+        },
+        "exact_shapeID_match_count": 1,
+        "cell_incidence": 33
+      },
+      {
+        "source_index": 9145,
+        "source_id": "gb:BTN:ADM1:66845921B30697351958460",
+        "source_family_index": 47,
+        "roster_name": "Gasa",
+        "owner_indices": [
+          10457
+        ],
+        "matched_property": {
+          "shapeName": "Gasa",
+          "shapeISO": "BT-GA",
+          "shapeID": "66845921B30697351958460",
+          "shapeGroup": "BTN",
+          "shapeType": "ADM1"
+        },
+        "exact_shapeID_match_count": 1,
+        "cell_incidence": 64
+      },
+      {
+        "source_index": 9147,
+        "source_id": "gb:BTN:ADM1:66845921B8526775626410",
+        "source_family_index": 47,
+        "roster_name": "Samtse",
+        "owner_indices": [
+          10467
+        ],
+        "matched_property": {
+          "shapeName": "Samtse",
+          "shapeISO": "BT-14",
+          "shapeID": "66845921B8526775626410",
+          "shapeGroup": "BTN",
+          "shapeType": "ADM1"
+        },
+        "exact_shapeID_match_count": 1,
+        "cell_incidence": 1
+      },
+      {
+        "source_index": 9149,
+        "source_id": "gb:BTN:ADM1:66845921B43572720469260",
+        "source_family_index": 47,
+        "roster_name": "Paro",
+        "owner_indices": [
+          10459
+        ],
+        "matched_property": {
+          "shapeName": "Paro",
+          "shapeISO": "BT-11",
+          "shapeID": "66845921B43572720469260",
+          "shapeGroup": "BTN",
+          "shapeType": "ADM1"
+        },
+        "exact_shapeID_match_count": 1,
+        "cell_incidence": 52
+      },
+      {
+        "source_index": 9151,
+        "source_id": "gb:BTN:ADM1:66845921B95017424672663",
+        "source_family_index": 47,
+        "roster_name": "Samdrup Jongkhar",
+        "owner_indices": [
+          10470
+        ],
+        "matched_property": {
+          "shapeName": "Samdrup Jongkhar",
+          "shapeISO": "BT-45",
+          "shapeID": "66845921B95017424672663",
+          "shapeGroup": "BTN",
+          "shapeType": "ADM1"
+        },
+        "exact_shapeID_match_count": 1,
+        "cell_incidence": 4
+      },
+      {
+        "source_index": 15331,
+        "source_id": "gb:CHN:ADM1:43563684B19802372559419",
+        "source_family_index": 61,
+        "roster_name": "Tibet Autonomous Region",
+        "owner_indices": [],
+        "matched_property": {
+          "shapeName": "Tibet Autonomous Region",
+          "shapeISO": "CHN",
+          "shapeID": "43563684B19802372559419",
+          "shapeGroup": "CHN",
+          "shapeType": "ADM1"
+        },
+        "exact_shapeID_match_count": 1,
+        "cell_incidence": 135
+      },
+      {
+        "source_index": 36798,
+        "source_id": "gb:IND:ADM1:1811400B16134215155042",
+        "source_family_index": 154,
+        "roster_name": "Arunāchal Pradesh",
+        "owner_indices": [],
+        "matched_property": {
+          "shapeName": "Arunāchal Pradesh",
+          "shapeISO": "IN-AR",
+          "shapeID": "1811400B16134215155042",
+          "shapeGroup": "IND",
+          "shapeType": "ADM1"
+        },
+        "exact_shapeID_match_count": 1,
+        "cell_incidence": 1
+      },
+      {
+        "source_index": 36801,
+        "source_id": "gb:IND:ADM1:1811400B78322693766699",
+        "source_family_index": 154,
+        "roster_name": "Assam",
+        "owner_indices": [],
+        "matched_property": {
+          "shapeName": "Assam",
+          "shapeISO": "IN-AS",
+          "shapeID": "1811400B78322693766699",
+          "shapeGroup": "IND",
+          "shapeType": "ADM1"
+        },
+        "exact_shapeID_match_count": 1,
+        "cell_incidence": 30
+      },
+      {
+        "source_index": 66758,
+        "source_id": "gb:IND:ADM3:7132399B8475849801445",
+        "source_family_index": 367,
+        "roster_name": "Gossaigaon (Pt)",
+        "owner_indices": [],
+        "matched_property": {
+          "shapeName": "Gossaigaon (Pt)",
+          "shapeISO": "",
+          "shapeID": "7132399B8475849801445",
+          "shapeGroup": "IND",
+          "shapeType": "ADM3"
+        },
+        "exact_shapeID_match_count": 1,
+        "cell_incidence": 26
+      },
+      {
+        "source_index": 66790,
+        "source_id": "gb:IND:ADM3:7132399B64676381846309",
+        "source_family_index": 367,
+        "roster_name": "Bijni (Pt)",
+        "owner_indices": [],
+        "matched_property": {
+          "shapeName": "Bijni (Pt)",
+          "shapeISO": "",
+          "shapeID": "7132399B64676381846309",
+          "shapeGroup": "IND",
+          "shapeType": "ADM3"
+        },
+        "exact_shapeID_match_count": 1,
+        "cell_incidence": 32
+      },
+      {
+        "source_index": 66870,
+        "source_id": "gb:IND:ADM3:7132399B38662484373116",
+        "source_family_index": 367,
+        "roster_name": "Udalguri",
+        "owner_indices": [],
+        "matched_property": {
+          "shapeName": "Udalguri",
+          "shapeISO": "",
+          "shapeID": "7132399B38662484373116",
+          "shapeGroup": "IND",
+          "shapeType": "ADM3"
+        },
+        "exact_shapeID_match_count": 1,
+        "cell_incidence": 2
+      },
+      {
+        "source_index": 66875,
+        "source_id": "gb:IND:ADM3:7132399B57811367635943",
+        "source_family_index": 367,
+        "roster_name": "Dotoma",
+        "owner_indices": [],
+        "matched_property": {
+          "shapeName": "Dotoma",
+          "shapeISO": "",
+          "shapeID": "7132399B57811367635943",
+          "shapeGroup": "IND",
+          "shapeType": "ADM3"
+        },
+        "exact_shapeID_match_count": 1,
+        "cell_incidence": 1
+      }
+    ],
+    "property_fields_checked": [
+      "shapeName",
+      "shapeISO",
+      "shapeID",
+      "shapeGroup",
+      "shapeType"
+    ],
+    "join_rule": "The source feature ID suffix was matched to the exact payload shapeID and each requested feature matched exactly once; source feature names/owner references are retained roster/catalogue metadata.",
+    "geometry_accessed": false,
+    "rights_applicability_limit": "Recorded catalogue license/year values and payload property matches are provenance metadata only; they do not establish present rights, territorial applicability, source completeness or competitor fitness."
+  },
+  "owner_lineage": [
+    {
+      "owner_index": 10452,
+      "province_id": "framework:province:lhuntse:c7692df7f101",
+      "province_index": 2680,
+      "name": "Lhuntse",
+      "source_id": "gb:BTN:ADM1",
+      "source_atoms": [
+        "gb:BTN:ADM1:66845921B11724657218086"
+      ]
+    },
+    {
+      "owner_index": 10454,
+      "province_id": "framework:province:wangdue-phodrang:e1b207b1c0f1",
+      "province_index": 4869,
+      "name": "Wangdue Phodrang",
+      "source_id": "gb:BTN:ADM1",
+      "source_atoms": [
+        "gb:BTN:ADM1:66845921B16337540791352"
+      ]
+    },
+    {
+      "owner_index": 10457,
+      "province_id": "framework:province:gasa:eca53d038723",
+      "province_index": 1791,
+      "name": "Gasa",
+      "source_id": "gb:BTN:ADM1",
+      "source_atoms": [
+        "gb:BTN:ADM1:66845921B30697351958460"
+      ]
+    },
+    {
+      "owner_index": 10459,
+      "province_id": "framework:province:paro:b91236e7025f",
+      "province_index": 3589,
+      "name": "Paro",
+      "source_id": "gb:BTN:ADM1",
+      "source_atoms": [
+        "gb:BTN:ADM1:66845921B43572720469260"
+      ]
+    },
+    {
+      "owner_index": 10464,
+      "province_id": "framework:province:sarpang:59d3a805a15c",
+      "province_index": 4138,
+      "name": "Sarpang",
+      "source_id": "gb:BTN:ADM1",
+      "source_atoms": [
+        "gb:BTN:ADM1:66845921B74484063825186"
+      ]
+    },
+    {
+      "owner_index": 10465,
+      "province_id": "framework:province:thimpu:9bb77dc54783",
+      "province_index": 4586,
+      "name": "Thimpu",
+      "source_id": "gb:BTN:ADM1",
+      "source_atoms": [
+        "gb:BTN:ADM1:66845921B82067974050695"
+      ]
+    },
+    {
+      "owner_index": 10466,
+      "province_id": "framework:province:trashiyangtse:4560836739c7",
+      "province_index": 4654,
+      "name": "Trashiyangtse",
+      "source_id": "gb:BTN:ADM1",
+      "source_atoms": [
+        "gb:BTN:ADM1:66845921B83925222569127"
+      ]
+    },
+    {
+      "owner_index": 10467,
+      "province_id": "framework:province:samtse:529843f61064",
+      "province_index": 4054,
+      "name": "Samtse",
+      "source_id": "gb:BTN:ADM1",
+      "source_atoms": [
+        "gb:BTN:ADM1:66845921B8526775626410"
+      ]
+    },
+    {
+      "owner_index": 10470,
+      "province_id": "framework:province:samdrup-jongkhar:acc9b13063f4",
+      "province_index": 4049,
+      "name": "Samdrup Jongkhar",
+      "source_id": "gb:BTN:ADM1",
+      "source_atoms": [
+        "gb:BTN:ADM1:66845921B95017424672663"
+      ]
+    }
+  ],
+  "physical_water_context": {
+    "block_mask_sources": [
+      {
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-026.json.gz",
+        "git_blob_oid": "355559350599390e256bd1180bcfaf6723504068",
+        "compressed_bytes": 390394,
+        "compressed_sha256": "8c263a02fe617bcd4844473c9237a8868c134860649022b7ad2e2b7371584fa2",
+        "decoded_bytes": 1862642,
+        "decoded_sha256": "d4ea09c93e2790a9304a6f1864225ce3d0199d952e6211be4bba2dd4a458430b",
+        "row_count": 4096
+      },
+      {
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-027.json.gz",
+        "git_blob_oid": "c057e75fe5dec634ace87f59631dc02eca380033",
+        "compressed_bytes": 502097,
+        "compressed_sha256": "bd038c98361e9d2ee6187765ceb7d91b6bb174114f5dfccd7b92c376839c1eea",
+        "decoded_bytes": 2488924,
+        "decoded_sha256": "bbae9fd5766c25ab46c02fda90f2bc788e81eb4eca3b419591866ab43ba98b61",
+        "row_count": 4096
+      },
+      {
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-026.json.gz",
+        "git_blob_oid": "cf49a65b32bbd2ab296e873a72da981ae6cc44a6",
+        "compressed_bytes": 4376,
+        "compressed_sha256": "703c18aee9e56cd3635eff1d4c8a4998bdf61497965883c27e41717b426edf16",
+        "decoded_bytes": 31228,
+        "decoded_sha256": "468ba76e47d059c05112e8652b8f26cd577b4aabe7a68656d695a4474046f2ab",
+        "row_count": 762
+      },
+      {
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-027.json.gz",
+        "git_blob_oid": "5d11ca716f75ca9a6ac27031d114bb4a752d1375",
+        "compressed_bytes": 14381,
+        "compressed_sha256": "2280371346676eac0ca982c040504a9dcba640cf66c5c2c3d1385de44cb3767a",
+        "decoded_bytes": 92288,
+        "decoded_sha256": "2d251bfcf589c0db7d02be77ac011b25e509bb910e7811532f20aa75a33720f4",
+        "row_count": 1768
+      }
+    ],
+    "selected_package_counts": {
+      "land": 256,
+      "inland_water": 0,
+      "source_relative": 0
+    },
+    "note": "These are retained original physical-support and inland-water mask classifications at the exact queue keys. They are not fresh physical/geometric witness checks."
+  },
+  "stock_owner_observation": {
+    "commit": "6dc935908f6397226445b1dc5acbd618c4a50a42",
+    "code_commit": "6dc935908f6397226445b1dc5acbd618c4a50a42",
+    "kind": "literal-selected-owner-observation-v1",
+    "query_count": 256,
+    "consumed_input_count": 41,
+    "fetches": 0,
+    "owner_field_values": [
+      0
+    ],
+    "overlap_count": 0,
+    "original_interval_sha256": "3c5b36207c762dc735b277dc2625cc6bb05bca100932b61a0a1698c4ecca6b97",
+    "query_sha256": "126b1a744d48c12d39369fd5a9c36fea8efe25632e2982fa93c2ebdaa3823062",
+    "scope": "Reference to the one completed stock observation; not rerun by this reviewer.",
+    "path": "btn-selected-owner-observation.json.gz"
+  },
+  "excluded_scope": {
+    "package_id": "gb-BTN-ADM1--source-conflict",
+    "cells": 1,
+    "intervals": 1,
+    "owners": [
+      3731,
+      10467
+    ],
+    "source_features": [
+      9147,
+      73452
+    ],
+    "source_families": [
+      47,
+      367
+    ],
+    "block": 27,
+    "note": "Separate one-cell source-conflict work remains excluded from the 256-cell repair-evaluation package. It has different owner mappings and is not resolved by the repair packet."
+  },
+  "remaining_limits": [
+    "All 16 exact raster-contact source features are property-joined, including seven direct-owner-empty foreign contacts (one CHN ADM1, two IND ADM1, four IND ADM3); these contact masks do not establish complete source competitors or current applicability.",
+    "IND ADM3 retained catalogue advertises 6,836 features while its actual retained payload/property count and catalogue feature_count are 6,822; discrepancy is preserved and not resolved here.",
+    "BTN ADM1 is recorded CC BY 3.0, represented 2010; CHN ADM1 Public Domain, 2019; IND ADM1 CC BY 2.5 India, 2011; IND ADM3 ODbL 1.0, 2018. These are historical catalogue claims, not current legal clearance.",
+    "No source geometry was inspected and no geometric overlay, physical witness, rights determination, territorial conclusion, repair qualification or root acceptance is asserted."
+  ]
+}

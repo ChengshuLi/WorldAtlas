@@ -1,0 +1,41 @@
+{
+  "head": "cf4842c39192c5a13242461679a88f0ac7b7058f",
+  "base": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+  "production_files": [
+    "scripts/assemble-selected-package.mjs",
+    "coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs"
+  ],
+  "test_file": "test/selected-package-assembly.test.mjs",
+  "negative_control": "Accepted code fails real retired-input assembly during private execution issuance: Complete authenticated prior cumulative package roles required",
+  "tests": {
+    "command": "env -u NODE_PATH -u NODE_OPTIONS PATH=/workspace/shared/worldatlas-python-282d14b/bin:$PATH node --test test/selected-package-assembly.test.mjs test/package-output-artifact.test.mjs",
+    "passed": 56,
+    "failed": 0,
+    "duration_ms": 10605.463012
+  },
+  "caller_census": [
+    "findOriginalPackage \u2192 sourceCompatible \u2192 admitPackageInputTransition (existing authenticated priorSidecarRaw)",
+    "assembleSelectedPackage \u2192 issuePackageAssemblyExecution \u2192 assemblySourceAdmission \u2192 admitPackageInputTransition (fixed propagation)",
+    "assembleSelectedPackage \u2192 admitPackageOutputTransition \u2192 admitPackageInputTransition (existing authenticated priorSidecarRaw)",
+    "requirePackageAssemblyExecution rechecks private record, original package, Git head/tree, executing code and runtime before publication"
+  ],
+  "proof": "Raw prior sidecar is checked against original token manifest selector and inventory; missing and corrupt proof refused. No public bypass flag or relaxed runtime/code guard.",
+  "limits": [
+    "Synthetic self-contained genuine original package/archive and actual production consumers; not a hosted acceptance or real Slovakia artifact execution.",
+    "Shared-rule core f07e4bc3 independent review is static; combined regression rerun belongs to integration author."
+  ],
+  "logs": {
+    "assembly-retirement-before.log": {
+      "path": "/workspace/shared/worldatlas-recovery/assembly-retirement-before.log",
+      "sha256": "6325c070acf4ee48f15fa53cc3c7f2adacb55b93c8b1fe4944b3f6993e0d25c4"
+    },
+    "assembly-retirement-after.log": {
+      "path": "/workspace/shared/worldatlas-recovery/assembly-retirement-after.log",
+      "sha256": "6f6cdda81ff336476410342ff8dead266452859545d4a191ef73684634c98063"
+    },
+    "assembly-retirement-full.log": {
+      "path": "/workspace/shared/worldatlas-recovery/assembly-retirement-full.log",
+      "sha256": "389d399c70bf0aede5f0589c8959a6544b1cf79eb62dc919c3eea32e23827ae2"
+    }
+  }
+}

@@ -1,7 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
-import {transitionClaim,readClaim,renderClaim,verifyIssueScope,workSpec,githubPages,canonicalIssueNumber} from '../scripts/issue-claim-contract.mjs';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {prepareResearchBundle} from '../scripts/prepare-research-bundle.mjs';
+import {transitionClaim,readClaim,renderClaim,verifyIssueScope,workSpec,githubPages,canonicalIssueNumber,linkedPulls} from '../scripts/issue-claim-contract.mjs';
 import {assertResearchImportsReady,assertResearchBundleApproved} from '../scripts/research-import-gate.mjs';
 
 const now=Date.parse('2026-10-02T12:00:00Z');
@@ -64,7 +68,7 @@ test('canonical comments cannot be impersonated or ambiguous',()=>{
  assert.throws(()=>readClaim([value,{...value,id:102}]),/Multiple/);
  assert.throws(()=>readClaim([{...value,body:'**Worker reservation:** worldatlas-claim:v1 malformed'}]),/Malformed/);
 });
-test('ordinary scope no longer requires a lease, but content imports retain their scientific gate',()=>{
+test('ordinary scope no longer requires a lease, but content imports retain their scientific gate',t=>{
  assert.deepEqual(verifyIssueScope({issue:issue(),branch:'engineering/repair-a'}),{mode:'engineering'});
  assert.deepEqual(verifyIssueScope({issue:issue({labels:['type:engineering']}),branch:'engineering/other'}),{mode:'engineering'});
  assert.throws(()=>verifyIssueScope({issue:issue(),branch:'research/repair-a'}),/type:/);
@@ -72,7 +76,14 @@ test('ordinary scope no longer requires a lease, but content imports retain thei
  assert.equal(verifyIssueScope({issue:researchIssue('source-only'),branch:'research/source-a'}).mode,'source-only');
  assert.throws(()=>transitionClaim({issue:researchIssue('source-only'),comments:[],request:request({branch:'research/source-a'}),now}),/only for engineering live/);
  assert.throws(()=>assertResearchImportsReady({version:1,ready_for_location_attributes:false}),/paused/);
- assert.throws(()=>execFileSync(process.execPath,['scripts/import-research-bundle.mjs','https://example.com','unused-bundle'],{stdio:'pipe'}),error=>error.stderr.toString().includes('Research imports are paused'));
+ // The actual importer identifies territorial dependence from a valid bundle
+ // before applying the gate; an absent directory never reaches that boundary.
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-gated-import-'));t.after(()=>fs.rmSync(directory,{recursive:true,force:true}));
+ const input=path.join(directory,'input.json'),output=path.join(directory,'bundle');
+ fs.writeFileSync(input,JSON.stringify({sources:[{id:'source:gate-fixture',name:'Gate fixture',url:'https://example.invalid/source',license:'CC0',vintage:'2026',supported_from:1000,supported_to:1100,status:'historical'}],
+  records:[{id:'gate-fixture',location_id:'location',attribute:'population',value:1,valid_from:1000,valid_to:1100,source_id:'source:gate-fixture'}]}));
+ prepareResearchBundle({input,output,geography:{id:'geography:gate-fixture',status:'published',footprints_sha256:'a'.repeat(64),hierarchy_sha256:'b'.repeat(64)}});
+ assert.throws(()=>execFileSync(process.execPath,['scripts/import-research-bundle.mjs','https://example.invalid',output],{stdio:'pipe'}),error=>error.stderr.toString().includes('Research imports are paused'));
 });
 test('in-scope continuation beyond the estimate claims, rotates and merges under the same ownership rules',()=>{
  const prs=Array.from({length:6},(_,i)=>({number:i+100,state:'closed',merged_at:'2026-10-02',head:{ref:'engineering/previous'}}));
@@ -166,4 +177,17 @@ for(const failure of ['malformed','error'])test(`pagination propagates a late ${
   if(failure==='error')throw Error('provider denied page');return {check_runs:null};
  },'/comments'),failure==='error'?/provider denied page/:/Invalid paginated/);
  assert.equal(calls,101);
+});
+
+
+test('live-operation PR discovery uses native same-repository references without body syntax',async()=>{
+ const rows=['','Refs #1. Context.\nCloses #2','Edited after cross-reference'].map((body,i)=>({source:{issue:{number:i+3,body,pull_request:{url:`https://api.github.com/repos/a/b/pulls/${i+3}`}}}}));
+ rows.push(structuredClone(rows[0]),{source:{issue:{number:6,pull_request:{url:'https://api.github.com/repos/foreign/repo/pulls/6'}}}});
+ const reads=[],api=async route=>{reads.push(route);return route.includes('/timeline')?rows:{number:Number(route.split('/').at(-1)),state:'open'};};
+ assert.deepEqual((await linkedPulls(api,'a/b',1)).map(pr=>pr.number),[3,4,5]);
+ assert.equal(reads.length,4);assert(!reads.some(route=>route.endsWith('/pulls/6')));
+});
+test('unknown native cross-reference identity blocks live-operation admission conservatively',async()=>{
+ for(const source of [{number:3,pull_request:{}},{number:0,pull_request:{url:'https://api.github.com/repos/a/b/pulls/3'}},{number:3,pull_request:{url:'https://api.github.com/repos/a/b/pulls/4'}}])
+  await assert.rejects(linkedPulls(async()=>[{source:{issue:source}}],'a/b',1));
 });

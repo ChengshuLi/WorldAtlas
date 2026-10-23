@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "kind": "five-country-original-whole-target-physical-input",
+  "stage_members": 389,
+  "countries": [
+    {
+      "iso": "MEX",
+      "members": 158
+    },
+    {
+      "iso": "ECU",
+      "members": 58
+    },
+    {
+      "iso": "BOL",
+      "members": 37
+    },
+    {
+      "iso": "PER",
+      "members": 55
+    },
+    {
+      "iso": "COL",
+      "members": 81
+    }
+  ],
+  "original_cells": 66919,
+  "excluded_panama_cells": 22669,
+  "original_scope_receipts": "../../six-original-scopes-001.json",
+  "byte_preservation": "Original array interiors concatenated without reserializing rows; final JSON values equal the complete concatenation of all five original stages.",
+  "source_stages": [
+    {
+      "country_iso": "MEX",
+      "country": "Mexico",
+      "stage_members": 158,
+      "combined_row_start": 0,
+      "combined_row_end": 158,
+      "original_package_id": "gb-MEX-ADM2--repair-evaluation",
+      "source_stage": {
+        "bytes": 2421676,
+        "sha256": "16eeefbc6873a97fc42711fe377be686a6419758e50c2d6e6721d1394cd08229",
+        "git_blob_oid": "40ce8cf8c075236078cc21a6262514c6024b9b0b"
+      },
+      "source_membership": {
+        "bytes": 25805,
+        "sha256": "1dbdc7f847e2e116460b260e159281bcf539aab24bdeca2b776947a2cd0bc3f2",
+        "git_blob_oid": "e55a89660b653467c1fc9fc925fbe63589da6bdf"
+      }
+    },
+    {
+      "country_iso": "ECU",
+      "country": "Ecuador",
+      "stage_members": 58,
+      "combined_row_start": 158,
+      "combined_row_end": 216,
+      "original_package_id": "gb-ECU-ADM2--repair-evaluation",
+      "source_stage": {
+        "bytes": 1366254,
+        "sha256": "31785e5f1538419cfc94591f89e174a2d677f26c1ea739217302b9b75f2cce7f",
+        "git_blob_oid": "aa1cfbb33efc073552a6fbcaf59e4304288617a1"
+      },
+      "source_membership": {
+        "bytes": 9302,
+        "sha256": "c950543cfea6e91ff0a895c807b782ae3181d94af45d2084ef8eade858834afb",
+        "git_blob_oid": "efe5252a89bf527039b1965ae9ff1134ca2025d5"
+      }
+    },
+    {
+      "country_iso": "BOL",
+      "country": "Bolivia",
+      "stage_members": 37,
+      "combined_row_start": 216,
+      "combined_row_end": 253,
+      "original_package_id": "gb-BOL-ADM2--repair-evaluation",
+      "source_stage": {
+        "bytes": 1200101,
+        "sha256": "dc103e8155b5363ed43477f4c670d634d0c4a66cee63e789bbd4831444fcd87e",
+        "git_blob_oid": "dc345edb00552b7cca00b4debbdb33385b3924ae"
+      },
+      "source_membership": {
+        "bytes": 5940,
+        "sha256": "9b548ce7c0dd41d5f9e3189382d7b1ec7267a4e799ba0db2f82ce64dca20ce8d",
+        "git_blob_oid": "72ae5f1e684d3eb9c077010179d8aa0ef4cbd6f3"
+      }
+    },
+    {
+      "country_iso": "PER",
+      "country": "Peru",
+      "stage_members": 55,
+      "combined_row_start": 253,
+      "combined_row_end": 308,
+      "original_package_id": "gb-PER-ADM2--repair-evaluation",
+      "source_stage": {
+        "bytes": 1731617,
+        "sha256": "2e310ea3596739d8793cb04a4ab3c5fe97097c71328a44b6017df18f3f9e317f",
+        "git_blob_oid": "de1563adc6a4b2329b7c8841e2c183c1f5108007"
+      },
+      "source_membership": {
+        "bytes": 8913,
+        "sha256": "fadaff6920407923c3ff9e5b604605edc90cdebe508b66864068194fc873d087",
+        "git_blob_oid": "7f0e1cd1754ea24cd701db98ca4cc97ad3729bb6"
+      }
+    },
+    {
+      "country_iso": "COL",
+      "country": "Colombia",
+      "stage_members": 81,
+      "combined_row_start": 308,
+      "combined_row_end": 389,
+      "original_package_id": "gb-COL-ADM2--repair-evaluation",
+      "source_stage": {
+        "bytes": 1638196,
+        "sha256": "d9774ba0d02ad491c04bba84c91897cfc2ab8920e57e14b74af38c7b22d4e311",
+        "git_blob_oid": "2e353b7db3f23b9e954c25acabdf1123029b75c2"
+      },
+      "source_membership": {
+        "bytes": 13058,
+        "sha256": "009ef4c9f74e991cca25447b6715484319bdafe1701a9a966ee3cf3c93be2775",
+        "git_blob_oid": "2a0266d328ba8cd3d5e5ab139003e5ea658db599"
+      }
+    }
+  ],
+  "limits": [
+    "Original consumed geometry is preserved, without transformation or substitution.",
+    "This is input custody only; no physical result, qualification, ownership or acceptance is claimed.",
+    "Country-specific source vintage, source rights, recorded CRS, topology and foreign applicability limits remain.",
+    "Panama whole-source geometry is excluded because the original archive rights/vintage discrepancy remains unresolved."
+  ],
+  "source_attribution": {
+    "MEX": "World Bank 0039294 / retained geoBoundaries MEX ADM2, recorded 2012 municipalities, CC BY 4.0; complete current dataset license corroborated.",
+    "ECU": "INEC / OCHA retained 2019 Ecuador ADM2, recorded CC BY 3.0 IGO; primary current endpoint unavailable. Newer identity rosters do not establish geometry equivalence.",
+    "BOL": "GeoBolivia-derived retained ADM2, recorded 2015 and Public Domain; unavailable primary catalogue and topology reconciliation limits retained.",
+    "PER": "IGN / OCHA ROLAC retained 2020 ADM2, recorded CC BY 3.0 IGO; original encoded names and source geometry preserved.",
+    "COL": "DANE retained 2020 ADM2, recorded CC BY 4.0; current primary application unavailable. Direct ADM2 territories include non-municipality types and retain original properties."
+  }
+}

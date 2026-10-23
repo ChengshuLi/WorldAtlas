@@ -1,0 +1,212 @@
+{
+  "kind": "bounded-exact-original-key-prior-credit-reconciliation",
+  "target": {
+    "package_id": "gb-WSM-ADM1--repair-evaluation",
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "queue_index_zero_based": 178,
+    "land_cells": 469,
+    "inland_water_cells": 0,
+    "intervals": 212,
+    "owners": [
+      7134
+    ],
+    "repair_source_features": [
+      65870,
+      65871,
+      65872,
+      65874,
+      65875,
+      65876,
+      65877,
+      65878,
+      65879,
+      65880
+    ],
+    "separate_physical_companion_feature_excluded": [
+      65873
+    ]
+  },
+  "current_observation": {
+    "path": "wsm-selected-owner-observation.json.gz",
+    "execution_commit": "9cc6ef541ecf9e042459b481d9c3f0a521abf7a2",
+    "query_count": 469,
+    "query_sha256": "c1cfb5a5b8d8b7e6f1271d2fbd7cd398bb5df37f56a48e1620f2cc034512b4a1",
+    "original_interval_sha256": "f1d5a1b0d3b34f280b352da9dad48f664f5307e15f1f9fb99c84798c779a17ea",
+    "interval_rows": 212,
+    "interval_semantics": "half-open [x_start,x_end); each retained segment row expands to all original coordinates",
+    "expanded_interval_key_count": 469,
+    "unique_observation_key_count": 469,
+    "exact_interval_expansion_matches_observation": true,
+    "canonical_sorted_yx_sha256": "ab1b40a5584f86b6d7ac0ab58ad1f348c9893dc54836270c071b5005581daecc",
+    "nonzero_or_true_owner_fields": {
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "existing_product_overlap": 0
+    },
+    "interpretation": "current selection only; owner zero is not prior acceptance or qualification evidence"
+  },
+  "bounded_prior_key_sets": {
+    "source": "PSE accepted packet retained acceptance-reconciliation.json.gz",
+    "source_public_url": "https://github.com/ChengshuLi/WorldAtlas/blob/718cb8c3911f43739e50dfd1d423938c5c1e8b42/coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz#/prior_set_keysets_yx",
+    "set_count": 15,
+    "union_key_count": 56352,
+    "union_canonical_sorted_yx_sha256": "a88e4faa57150ad90493fd8faf569f9a2450bed91f2069f9b6ebfd1b3db5d549",
+    "legacy_accepted_patch_key_count": 1306,
+    "legacy_patch_classification": "accepted legacy repair patch",
+    "intersection_with_wsm": 0,
+    "per_set_intersections": [
+      {
+        "name": "mixed 17 exception/held partitions",
+        "key_count": 2147,
+        "wsm_intersection": 0,
+        "classification": "mixed exception and held records; key overlap only, not accepted repair credit"
+      },
+      {
+        "name": "gb-PAN-ADM2--repair-evaluation",
+        "key_count": 22669,
+        "wsm_intersection": 0,
+        "classification": "root-accepted documented disposition packet; not repair credit"
+      },
+      {
+        "name": "gb-BRA-ADM2--repair-evaluation",
+        "key_count": 24525,
+        "wsm_intersection": 0,
+        "classification": "root-accepted documented disposition packet; not repair credit"
+      },
+      {
+        "name": "gb-TGO-ADM2--repair-evaluation",
+        "key_count": 509,
+        "wsm_intersection": 0,
+        "classification": "root-accepted documented disposition packet; not repair credit"
+      },
+      {
+        "name": "gb-SOM-ADM2--repair-evaluation",
+        "key_count": 2247,
+        "wsm_intersection": 0,
+        "classification": "root-accepted documented disposition packet; not repair credit"
+      },
+      {
+        "name": "gb-MDA-ADM1--repair-evaluation",
+        "key_count": 1986,
+        "wsm_intersection": 0,
+        "classification": "root-accepted documented disposition packet; not repair credit"
+      },
+      {
+        "name": "gb-NRU-ADM1--repair-evaluation",
+        "key_count": 13,
+        "wsm_intersection": 0,
+        "classification": "root-accepted documented disposition packet; not repair credit"
+      },
+      {
+        "name": "gb-SWZ-ADM2--repair-evaluation",
+        "key_count": 14,
+        "wsm_intersection": 0,
+        "classification": "root-accepted documented disposition packet; not repair credit"
+      },
+      {
+        "name": "legacy accepted patch",
+        "key_count": 1306,
+        "wsm_intersection": 0,
+        "classification": "accepted legacy repair patch"
+      },
+      {
+        "name": "gb-AND-ADM1--repair-evaluation",
+        "key_count": 72,
+        "wsm_intersection": 0,
+        "classification": "root-accepted documented-unresolved; no repair credit"
+      },
+      {
+        "name": "gb-NIU-ADM1--repair-evaluation",
+        "key_count": 116,
+        "wsm_intersection": 0,
+        "classification": "root-accepted documented-unresolved; no repair credit"
+      },
+      {
+        "name": "gb-GUM-ADM2--repair-evaluation",
+        "key_count": 139,
+        "wsm_intersection": 0,
+        "classification": "root-accepted documented-unresolved; no repair credit"
+      },
+      {
+        "name": "gb-LIE-ADM1--repair-evaluation",
+        "key_count": 148,
+        "wsm_intersection": 0,
+        "classification": "root-accepted documented-unresolved; no repair credit"
+      },
+      {
+        "name": "gb-MNP-ADM2--repair-evaluation",
+        "key_count": 205,
+        "wsm_intersection": 0,
+        "classification": "root-accepted documented-unresolved; no repair credit"
+      },
+      {
+        "name": "gb-BTN-ADM1--repair-evaluation",
+        "key_count": 256,
+        "wsm_intersection": 0,
+        "classification": "root-accepted documented-unresolved; not repair credit"
+      }
+    ]
+  },
+  "newer_accepted_public_keysets": [
+    {
+      "package_id": "gb-PSE-ADM2--repair-evaluation",
+      "accepted": true,
+      "pr": 2607,
+      "merge_commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+      "acceptance_url": "https://github.com/ChengshuLi/WorldAtlas/pull/2607#issuecomment-6304001433",
+      "public_keyset_url": "https://github.com/ChengshuLi/WorldAtlas/blob/718cb8c3911f43739e50dfd1d423938c5c1e8b42/coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz#/current_selected_owner_observation/original_keys_yx",
+      "exact_key_source": "PSE retained exact reconciliation current_selected_owner_observation.original_keys_yx",
+      "key_count": 427,
+      "canonical_sorted_yx_sha256": "adec7fe88109ff30a5fe38e69899801e2987a72af3d8ca0aa1a96e5674784bdc",
+      "wsm_intersection": 0,
+      "overlap_with_prior_union": 0
+    },
+    {
+      "package_id": "gb-KNA-ADM1--repair-evaluation",
+      "accepted": true,
+      "pr": 2610,
+      "merge_commit": "775f0a1eddf8964b81d217d01a801c2b338db9c6",
+      "acceptance_url": "https://github.com/ChengshuLi/WorldAtlas/pull/2610#issuecomment-6304273664",
+      "public_keyset_url": "https://github.com/ChengshuLi/WorldAtlas/blob/775f0a1eddf8964b81d217d01a801c2b338db9c6/coordination/engineering/kna-original-disposition-20261020/kna-selected-owner-observation.json.gz",
+      "exact_key_source": "root-owned selected-owner observation mirrored locally; canonical accepted PR receipt",
+      "key_count": 305,
+      "canonical_sorted_yx_sha256": "f58fb49daa5b00c34f70bee18a9c66f13a1c6955895f4896a96ab6b82f3092e4",
+      "wsm_intersection": 0,
+      "overlap_with_prior_union": 0
+    },
+    {
+      "package_id": "gb-NPL-ADM2--repair-evaluation",
+      "accepted": true,
+      "pr": 2614,
+      "merge_commit": "b383955191818f348ab201d125b7f5ec6f97fc6b",
+      "acceptance_url": "https://github.com/ChengshuLi/WorldAtlas/pull/2614#issuecomment-6304587134",
+      "public_keyset_url": "https://github.com/ChengshuLi/WorldAtlas/blob/b383955191818f348ab201d125b7f5ec6f97fc6b/coordination/engineering/npl-original-disposition-20261020/npl-selected-owner-observation.json.gz",
+      "exact_key_source": "root-owned selected-owner observation mirrored locally; canonical accepted PR receipt",
+      "key_count": 334,
+      "canonical_sorted_yx_sha256": "d3cc814f0d114855a33a63e17198d7ea0160196532c3a5780fd8349ca48d7d4b",
+      "wsm_intersection": 0,
+      "overlap_with_prior_union": 0
+    }
+  ],
+  "combined_examined_sets": {
+    "prior_union_plus_PSE_KNA_NPL_key_count": 57418,
+    "wsm_intersection_count": 0,
+    "wsm_residual_relative_to_examined_union": 469,
+    "prior_union_plus_new_sets_disjoint_from_each_other": true,
+    "disjointness_scope": "One pre-unioned 56,352-key prior set was compared as a single set against each separate accepted PSE, KNA and NPL keyset, and those three new accepted keysets were compared pairwise. This does not assert pairwise disjointness among all 15 constituent prior sets."
+  },
+  "acceptance_snapshot_limit": {
+    "named_ledger_url": "https://github.com/ChengshuLi/WorldAtlas/blob/282d14b4682f738fed6a0e6f3ee0d0e4b775d611/coordination/engineering/poland-original-repair-20261017/source-review/current-named-package-ledger.json",
+    "accepted_main": "282d14b4682f738fed6a0e6f3ee0d0e4b775d611",
+    "candidate_absent_from_named_completed_and_unfinished": "WSM absent; ledger snapshot is earlier than newer accepted packets and is not a global all-history key ledger"
+  },
+  "custody_context": {
+    "current_claim_url": "https://github.com/ChengshuLi/WorldAtlas/issues/2617",
+    "separate_closed_source_review": "https://github.com/ChengshuLi/WorldAtlas/issues/134",
+    "separate_source_review_delivery": "https://github.com/ChengshuLi/WorldAtlas/pull/617",
+    "former_source_review_reservation": "codex-20261003-western-polynesia-134-905c2490-f0da-43eb-9e62-d1d599a97aac; released with live_work=false; not repair ownership"
+  },
+  "conclusion": "The exact WSM original keyset is 469/469 covered by its retained half-open original intervals. It intersects none of the 56,352-key enumerated prior union, the separately accepted exact PSE (427), KNA (305), or NPL (334) keysets. The 57,418 examined-key union is bounded and includes mixed held/exception outcomes plus accepted unresolved packages; only the legacy 1,306 set is classified as accepted repair credit here. WSM has zero current selected ownership and zero overlap, but no global all-history zero-prior-credit or qualification conclusion is made. Root named accounting remains authoritative."
+}

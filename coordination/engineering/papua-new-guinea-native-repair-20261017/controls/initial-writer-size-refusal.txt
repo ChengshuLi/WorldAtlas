@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/prepare-supported.py", line 21, in <module>
+    source=read(P+'/native-inputs-001/source-evidence.json');diag=read(P+'/native-diagnostic-001/native-diagnostic.json');supported={};held={}
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/prepare-supported.py", line 12, in read
+    n=int(subprocess.check_output(cmd+['cat-file','-s',oid],env=env));assert 0<n<=MAX;b=subprocess.check_output(cmd+['cat-file','blob',oid],env=env);assert len(b)==n and hashlib.sha1(b'blob '+str(n).encode()+b'\0'+b).hexdigest()==oid
+                                                                             ^^^^^^^^
+AssertionError

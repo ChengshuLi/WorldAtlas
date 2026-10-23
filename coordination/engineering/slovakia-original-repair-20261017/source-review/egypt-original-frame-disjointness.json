@@ -1,0 +1,40 @@
+{
+  "kind": "Slovakia-Egypt-conservative-native-frame-disjointness",
+  "egypt_issue": 2424,
+  "egypt_package": "gb-EGY-ADM2--repair-evaluation",
+  "egypt_original_cells_declared": 19065,
+  "egypt_native_frames": [
+    26,
+    27
+  ],
+  "frame_rows": 4096,
+  "egypt_conservative_y_ranges": [
+    [
+      106496,
+      110592
+    ],
+    [
+      110592,
+      114688
+    ]
+  ],
+  "slovakia_actual_original_y_min": 89348,
+  "slovakia_actual_original_y_max": 91415,
+  "spatial_overlap_possible": false,
+  "method": "Every actual Slovakia original y lies outside every whole declared Egypt native frame. This proves disjointness without geography labels or selecting contact subsets.",
+  "limitations": [
+    "Egypt full original keys were not separately replayed; original size is the exact immutable queue declaration and live issue scope."
+  ],
+  "inputs": [
+    {
+      "path": "/workspace/shared/worldatlas-recovery/austria-source-screening/stock-extraction-inputs/source-package-queue.json",
+      "bytes": 1754890,
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8"
+    },
+    {
+      "path": "/workspace/shared/worldatlas-recovery/austria-source-screening/stock-extraction-inputs/ownership-binding.json",
+      "bytes": 3048,
+      "sha256": "b952192475435c8fbc74a84627994aff4f4e073c36c479d369554fc75251bc89"
+    }
+  ]
+}

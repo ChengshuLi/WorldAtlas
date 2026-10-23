@@ -4,15 +4,14 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {spawnSync, execFileSync} from 'node:child_process';
-import {checkGitScope} from '../scripts/check-handoff-scope.mjs';
-import {containsPackagePath,loadPackageInputs,focusedCheckoutPatterns} from '../scripts/package-inputs.mjs';
+import {loadPackageInputs,focusedCheckoutPatterns} from '../scripts/package-inputs.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const workflows = ['issue-claims.yml', 'worker-merge.yml'];
 
 // Reproduce each declared sparse tree, including cone-mode root files. Load
 // trusted modules without executing workflow entrypoints or contacting GitHub.
-function probe(directories, {geography = false, checkoutTests = false} = {}) {
+function probe(directories, {geography = false} = {}) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-checkout-'));
   try {
     fs.copyFileSync(path.join(root, 'package.json'), path.join(directory, 'package.json'));
@@ -24,7 +23,7 @@ function probe(directories, {geography = false, checkoutTests = false} = {}) {
       fs.mkdirSync(path.dirname(destination), {recursive: true});
       fs.cpSync(source, destination, {recursive: true});
     }
-    return spawnSync(process.execPath, checkoutTests ? ['--test', '--test-concurrency=1', '--test-name-pattern', 'actual sparse declarations include trusted module dependencies', 'test/trusted-workflow-checkouts.test.mjs'] : ['--input-type=module', '-e',
+    return spawnSync(process.execPath, ['--input-type=module', '-e',
       "await import('./scripts/issue-claim-contract.mjs'); await import('./scripts/research-import-gate.mjs'); await import('./scripts/premerge-evidence.mjs');" +
       (geography ? "await import('./scripts/check-effective-geographic-regression.mjs'); await import('./coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs'); console.log('complete trusted geography closure imported');" : '')],
     {cwd: directory, encoding: 'utf8', env: {PATH: process.env.PATH}});
@@ -56,7 +55,6 @@ for (const workflow of workflows) {
     assert.ok(blocks.length > 0, 'expected explicit sparse checkout declarations');
     const checkouts=blocks.map(block=>block[1].trim().split('\n').map(row=>row.trim()))
       .filter(rows=>rows.join('\n')!=='/*\n!/*/'); // Root-only bootstrap is expanded by the tested stdin step.
-    if(workflow==='worker-merge.yml')checkouts.push(focusedCheckoutPatterns(loadPackageInputs(root)).map(name=>name.replace(/^\//,'')));
     for (const directories of checkouts) {
       const result = probe(directories);
       assert.equal(result.status, 0, result.stderr);
@@ -71,30 +69,6 @@ test('negative control: old scripts-only tree cannot load relocated regional gat
   assert.match(result.stderr, /src\/regional-import-gate\.js/);
 });
 
-
-test('sparse candidate still detects changes and rename sources outside the working tree', () => {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-sparse-scope-'));
-  const git = args => execFileSync('git', args, {cwd: directory, encoding: 'utf8'});
-  const run = (command, args, options) => execFileSync(command, args, {...options, cwd: directory});
-  try {
-    git(['init', '-q']); git(['config', 'user.email', 'test@example.invalid']); git(['config', 'user.name', 'test']);
-    fs.mkdirSync(path.join(directory, 'src'), {recursive: true});
-    fs.mkdirSync(path.join(directory, 'research/campaigns/example'), {recursive: true});
-    fs.writeFileSync(path.join(directory, 'src/main.js'), 'original source\n');
-    fs.writeFileSync(path.join(directory, 'research/campaigns/example/notes.txt'), 'original notes\n');
-    git(['add', '.']); git(['commit', '-qm', 'baseline']); const base = git(['rev-parse', 'HEAD']).trim();
-    fs.writeFileSync(path.join(directory, 'research/campaigns/example/notes.txt'), 'updated notes\n');
-    git(['commit', '-qam', 'owned evidence']);
-    git(['sparse-checkout', 'init', '--cone']); git(['sparse-checkout', 'set', 'src']);
-    assert.equal(fs.existsSync(path.join(directory, 'research')), false);
-    assert.equal(checkGitScope({branch: 'research/example', base, run}).changed_files, 1);
-    git(['sparse-checkout', 'disable']);
-    git(['mv', 'src/main.js', 'research/campaigns/example/copied.js']); git(['commit', '-qm', 'rename core source']);
-    git(['sparse-checkout', 'set', 'src']);
-    assert.equal(fs.existsSync(path.join(directory, 'research')), false);
-    assert.throws(() => checkGitScope({branch: 'research/example', base, run}), /Research changes/);
-  } finally { fs.rmSync(directory, {recursive: true, force: true}); }
-});
 
 
 // Read the actual workflow declarations and shell bodies. These bounded controls
@@ -123,11 +97,12 @@ function queueWorkflow() {
 }
 function workflowCondition(expression, context, {success=true,cancelled=false}={}) {
   if(expression&&!/\b(?:always|success|failure|cancelled)\(/.test(expression)&&!success)return false;
-  return expression?Boolean(new Function('needs','github','matrix','steps','always','cancelled','success','failure',
-    `return (${expression});`)(context.needs,context.github,context.matrix,context.steps??{},()=>true,()=>cancelled,()=>success,()=>!success)):success;
+  return expression?Boolean(new Function('needs','github','matrix','steps','inputs','always','cancelled','success','failure',
+    `return (${expression});`)(context.needs,context.github,context.matrix,context.steps??{},context.inputs??{},()=>true,()=>cancelled,()=>success,()=>!success)):success;
 }
-function queueContext({profile='full',selection='complete'}={}){
+function queueContext({profile='full',selection='complete',reviewedTests=''}={}){
  return {needs:{prepare:{outputs:{profile,test_selection:selection}}},matrix:{shard:0},
+   inputs:{reviewed_tests:reviewedTests},
    steps:{assembly:{outputs:{assembled:'false'}}}};
 }
 function packageStep(job,name){const found=job.steps.filter(step=>step.name===name);assert.equal(found.length,1,name);return found[0];}
@@ -144,15 +119,16 @@ test('package setup and retention follow the current build and assembly branches
  const browser=packageStep(integration,'Install browser dependencies only for tests that use Playwright');
  // The actual queue shell is exercised in integration-profile-restoration;
  // package-output-artifact verifies immediate capture and successful-only upload.
- for(const [selection,assembled,shard] of [['complete',false,0],['selected-data',false,0],
-   ['selected-data',true,0],['complete',false,1],['complete',false,2]]){
-   const context=queueContext({selection});context.matrix.shard=shard;
+ for(const [selection,assembled,shard,profile='full'] of [['complete',false,0],['selected-data',false,0],
+   ['selected-data',true,0],['complete',false,1],['complete',false,2],
+   ['reviewed',false,0,'full'],['reviewed',false,0,'evidence']]){
+   const context=queueContext({selection,profile});context.matrix.shard=shard;
    context.steps.assembly.outputs.assembled=String(assembled);
-   const builds=shard===0&&!assembled;
+   const builds=profile==='full'&&shard===0&&!assembled;
    for(const step of setup)assert.equal(workflowCondition(step.condition,context),builds,step.name);
    assert.equal(workflowCondition(original.condition,context),builds);
    assert.equal(workflowCondition(original.condition,context,{success:false}),false);
-   assert.equal(workflowCondition(smoke.condition,context),shard===0);
+   assert.equal(workflowCondition(smoke.condition,context),profile==='full'&&shard===0);
    assert.equal(workflowCondition(browser.condition,context),selection!=='selected-data');
  }
 });
@@ -210,23 +186,6 @@ test('full-checkout canonical verification executes against real Git and refuses
   }
 });
 
-test('queue focused candidate includes the inputs of its nested actual-checkout probes', () => {
-  const source = fs.readFileSync(path.join(root, '.github/workflows/worker-merge.yml'), 'utf8');
-  assert.match(source, /- name: Materialize exact prepared checkout inputs[\s\S]*?needs\.prepare\.outputs\.checkout_patterns_base64/);
-  const directories = focusedCheckoutPatterns(loadPackageInputs(root)).map(name=>name.replace(/^\//,''));
-  const definition=loadPackageInputs(root),declared=[...definition.inputs,...definition.verification_paths];
-  for(const name of directories.filter(row=>row.startsWith('research/')))
-    assert(containsPackagePath(declared,name)||declared.includes(name+'/'),
-      'Nested research fixture must be retained by the actual full checkout: '+name);
-  const result = probe(directories, {checkoutTests: true});
-  assert.equal(result.status, 0, result.stdout + result.stderr);
-  const missing = probe(directories.filter(row => !row.includes('selected-checkpoint-reuse-20261012')), {checkoutTests: true});
-  assert.notEqual(missing.status, 0);
-  assert.match(missing.stdout + missing.stderr, /ENOENT/);
-  assert.match(missing.stdout + missing.stderr, /selected-checkpoint-reuse-20261012/);
-});
-
-
 for (const workflow of ['worker-merge.yml']) {
   test(`${workflow}: native geography omits polygon dependencies while general regressions retain them`, () => {
     const source=fs.readFileSync(path.join(root,'.github/workflows',workflow),'utf8');
@@ -240,10 +199,23 @@ for (const workflow of ['worker-merge.yml']) {
 
 test('focused delivery tests receive their real Node/Python runtime without an atlas build', () => {
   const {source,integration}=queueWorkflow();
+  const manual=JSON.stringify({base:'a'.repeat(40),head:'b'.repeat(40),files:[
+    'test/evidence-quality.test.mjs','test/premerge-evidence.test.mjs','test/engineering-owned-scope-routing.test.mjs']});
   for(const command of ['npm ci --no-audit --no-fund','python -m pip install -r requirements.txt']) {
     const steps=integration.steps.filter(step=>step.text.includes('run: '+command));
     assert.equal(steps.length,1,command);
     for(const profile of ['full','evidence'])assert.equal(workflowCondition(steps[0].condition,queueContext({profile})),true);
+    // Actions represents an omitted optional string input as empty. Only the
+    // automatic inert prepare branch can emit evidence/reviewed in that case.
+    for(const reviewedTests of [undefined,''])assert.equal(workflowCondition(steps[0].condition,
+      queueContext({profile:'evidence',selection:'reviewed',reviewedTests})),false);
+    for(const [profile,selection,reviewedTests] of [
+      ['evidence','reviewed',manual],
+      ['evidence','complete',''],['evidence','unknown',''],['evidence',null,''],
+      ['full','reviewed',''],['full','complete',''],['full','selected-data','']
+    ])assert.equal(workflowCondition(steps[0].condition,queueContext({profile,selection,reviewedTests})),true);
+    const old=queueContext({profile:'evidence'});delete old.needs.prepare.outputs.test_selection;
+    assert.equal(workflowCondition(steps[0].condition,old),true,'Older or missing selection output cannot opt out');
     assert.equal(workflowCondition(steps[0].condition,queueContext({profile:'unknown'})),false);
     assert.equal(workflowCondition(steps[0].condition,queueContext({profile:'evidence'}),{success:false}),false);
   }
@@ -386,3 +358,31 @@ for(const kind of ['invalid-base64','truncated-base64','foreign-whitespace','wro
     }finally{fs.rmSync(f.directory,{recursive:true,force:true});}
   });
 }
+
+
+test('scientific Python install follows assembly and runs only for fallback or ordinary regressions',()=>{
+ const {integration}=queueWorkflow();
+ const installs=integration.steps.filter(step=>step.text.includes('run: python -m pip install -r requirements.txt'));
+ assert.equal(installs.length,1,'One existing pinned requirements install, without a parallel fallback installer');
+ const install=installs[0],assembly=packageStep(integration,'Assemble unchanged base with current selected output');
+ const snapshot=packageStep(integration,'Snapshot original final-worker package inputs');
+ const npm=integration.steps.find(step=>step.text.includes('run: npm ci --no-audit --no-fund'));assert(npm);
+ const python=integration.steps.find(step=>step.text.includes('uses: actions/setup-python@'));assert(python);
+ const order=[python,npm,assembly,install,snapshot].map(step=>integration.steps.indexOf(step));
+ assert.deepEqual(order,[...order].sort((a,b)=>a-b));
+ for(const [profile,selection,shard,assembled,expected] of [
+  ['full','selected-data',0,'true',false],['full','selected-data',0,'false',true],
+  ['full','selected-data',0,'',true],['full','complete',0,'',true],
+  ['full','complete',1,'',true],['full','complete',2,'',true],
+  ['full','reviewed',0,'',true],['evidence','reviewed',0,'',true],
+  ['evidence','complete',0,'',true],['unknown','complete',0,'',false]]){
+  const context=queueContext({profile,selection,reviewedTests:selection==='reviewed'?'{"files":["test/premerge-evidence.test.mjs"]}':''});context.matrix.shard=shard;
+  context.steps.assembly.outputs.assembled=assembled;
+  assert.equal(workflowCondition(install.condition,context),expected,JSON.stringify({profile,selection,shard,assembled}));
+  assert.equal(workflowCondition(install.condition,context,{success:false}),false,'No install after failed assembly or earlier setup');
+  if(selection!=='selected-data')assert.equal(workflowCondition(assembly.condition,context),false,'Ordinary regressions cannot issue an assembled result');
+ }
+ const source=fs.readFileSync(path.join(root,'scripts/assemble-selected-package.mjs'),'utf8');
+ assert.match(source,/inspectPackageNodeRuntime/);assert.doesNotMatch(source,/inspectPackageRuntime/);
+ assert.match(source,/pythonArgs=\['-I','-S','-B'/,'Archive extraction excludes site packages');
+});

@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "kind": "MDA original source applicability independent assessment",
+  "package_id": "gb-MDA-ADM1--repair-evaluation",
+  "handoff": {
+    "path": "inventory/mda-research-handoff/moldova-1986-research-and-1853-proposal-handoff.json",
+    "sha256": "a137a3dc4878ce4d5ef848596c9a62f902e64c1aadf1a62d7361127891653a8f",
+    "evidence_zip_library_id": "libfile_c2d18bdb99e08191bb26a0df5d7bdc10",
+    "evidence_zip_path": "moldova-1986-research-and-1853-proposal.zip",
+    "evidence_zip_bytes": 7737046,
+    "evidence_zip_sha256": "466e0ae26843fd9b0adfa0c864f7f7523f6d630eff190f455b43cca39e374045",
+    "decoded_archive_entries": 65
+  },
+  "original_contract": {
+    "issue": "https://github.com/ChengshuLi/WorldAtlas/issues/2582",
+    "text": "Each exact interval must be a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+    "separate_scope": "Issue #225 is a separate regional source review, not a substitute for per-package completion and not a requirement for a universal contemporary authority certificate."
+  },
+  "source_applicability_finding": {
+    "status": "supports continuing qualification investigation for the exact 1,853-key candidate; does not qualify or accept repairs",
+    "archived_source": "The exact upstream archive is the source input of the consumed geoBoundaries release. Its metadata records 2020 ADM1 Districts, UNHCR and OCHA FISS, and CC BY 3.0 IGO. The retained archive includes 37 valid features; its source metadata and license image corroborate the declared source and reuse terms.",
+    "identity_join": "The bounded comparison maps all 1,986 original centers to exactly one upstream feature or to outside. 1,899 match a unique feature; 87 are outside; there are no ties, multiple-target, or different-target cases. The 16 target names/ISO-level identities match the source features. This is identity/center evidence, not footprint or legal boundary proof.",
+    "candidate_partition": {
+      "mda_only_same_unique_source_target": 1853,
+      "mda_and_ukr_contact_same_unique_source_target": 46,
+      "mda_only_outside_archived_source": 65,
+      "ukr_contact_outside_archived_source": 22,
+      "total_original": 1986
+    },
+    "neighbor_families": "The complete retained original UKR ADM1 (27 features) and ROU ADM1 (42 features) were compared. The source-key join reports 68 UKR contacts and zero ROU key contacts, with no original vector mismatches or ties. This is a bounded retained-family comparison, not an open-world present-day competitor census; UKR-contact rows remain distinct and are not cleared by MDA source matches.",
+    "reform_context": "The 12 October 2026 Moldovan government page calls the 35-feature map a proposal, says legislative work/consideration remains, and ties implementation to 2027 local elections. It does not establish replacement of the archived 2020 37-feature district source or a final boundary change. No proposal geometry was used.",
+    "rights": "Archive metadata and retained license.png support CC BY 3.0 IGO attribution to geoBoundaries and its UNHCR/OCHA FISS source; retain attribution and indicate derivatives as required. This is not a legal opinion or endorsement. Current cadastral geometry service access returned 403 and was stopped; it is not needed to assert the historical archive's declared license."
+  },
+  "assessment": "A source-specific positive route is reasonable for only the 1,853 MDA-only keys whose centers fall in a unique archived source target. The original upstream MDA source is a plausible location witness because the consumed target IDs/names and the archived feature identities align, but the humanitarian source vintage does not independently establish current legal or cadastral boundaries. Do not promote the 46 MDA+UKR contacts, 65 MDA-only nonmatches, or 22 UKR-contact nonmatches through this conclusion. Keep the full 1,986-key denominator and exact partitions. Before any repair claim, the proposed subset still needs actual source-evidence joins, whole-target physical checks, native diagnostics/authority, current selected-owner conservation, and independent final-head review under the ordinary contract.",
+  "not_established": [
+    "Current political, sovereign, or legal boundary truth",
+    "Cadastral accuracy or independent surveyed corroboration",
+    "Physical suitability from center matching or the retained land mask alone",
+    "Complete worldwide contemporary competitor absence",
+    "Qualification or acceptance of any of the 1,986 keys"
+  ],
+  "actual_access_limits": [
+    "HDX source page returned 403; no alternate API/proxy route was used.",
+    "Cadastral WFS request returned 403; no WMS or alternate geometry route was used.",
+    "The linked CUATM archive returned 404; no body was obtained.",
+    "The 2026 government proposal page is automatically translated and remains a proposal."
+  ]
+}

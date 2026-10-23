@@ -1,0 +1,852 @@
+{
+  "as_of": "2026-10-21",
+  "inputs": {
+    "corpus_commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+    "families": {
+      "gb_BDI_ADM1": {
+        "blob": "53033c106d2b841c040c73a4dfa6359c24a651c8",
+        "bytes": 43830,
+        "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+        "crs_member": {
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          },
+          "type": "name"
+        },
+        "decoded_bytes": 138787,
+        "decoded_sha256": "2e134d7b93d0c55c490afe45c7ff0a6ca6d78e6e841264d5119420caacdbf32b",
+        "family": "gb:BDI:ADM1",
+        "feature_count": 18,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BDI-ADM1-000.bin.gz",
+        "sha256": "39eb94814dc7a41afeefb836648d7c971b1caed1c794bfc72b21eb253d00fe43",
+        "tree": "78f85570b9a542fbb2c01131138ab0e69147cca9"
+      },
+      "gb_BDI_ADM2": {
+        "blob": "2443da0c46ca3884e36a0c8ab5a3dca9678cb332",
+        "bytes": 85146,
+        "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+        "crs_member": {
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          },
+          "type": "name"
+        },
+        "decoded_bytes": 350000,
+        "decoded_sha256": "b90f58bf70724da30e8fd2fc5e89ea68ce2139e88dade8722fd85d20f92b15c2",
+        "family": "gb:BDI:ADM2",
+        "feature_count": 119,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BDI-ADM2-000.bin.gz",
+        "sha256": "521c5c2318763d957a1b164ca1f41e540965c0f5db06e0974b247a0f3f203c0e",
+        "tree": "78f85570b9a542fbb2c01131138ab0e69147cca9"
+      },
+      "gb_COD_ADM1": {
+        "blob": "9c044aab8159821ba629020dee2e787388d20b52",
+        "bytes": 378900,
+        "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+        "crs_member": {
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          },
+          "type": "name"
+        },
+        "decoded_bytes": 1153436,
+        "decoded_sha256": "bf6096f1c16f2632be9c4d4c0305276024fd5b3f3b9b3e635b2e2018d02f0331",
+        "family": "gb:COD:ADM1",
+        "feature_count": 26,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-COD-ADM1-000.bin.gz",
+        "sha256": "a2e524c39c94b065d6ae76ca335730ef716d6378c050f1d11c15a1a40fe8b584",
+        "tree": "78f85570b9a542fbb2c01131138ab0e69147cca9"
+      },
+      "gb_TZA_ADM1": {
+        "blob": "3c5016cc626f36fb17f6fa269b629317efcbe396",
+        "bytes": 131832,
+        "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+        "crs_member": {
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          },
+          "type": "name"
+        },
+        "decoded_bytes": 426148,
+        "decoded_sha256": "8b84f3f0a9e6e16322b777a5bba90c8e33c5e93c0dcb03ef1d3f6332036d066f",
+        "family": "gb:TZA:ADM1",
+        "feature_count": 30,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-TZA-ADM1-000.bin.gz",
+        "sha256": "1594bd12d18f550af5eb9c0c7130d71ce57c400018070ef27b04db61f1a77f13",
+        "tree": "78f85570b9a542fbb2c01131138ab0e69147cca9"
+      }
+    }
+  },
+  "kind": "BDI whole-target contact and parent-coverage comparison",
+  "limits": [
+    "Positive-area cross-family intersections indicate contact/overlap in these retained dataset geometries only; they do not identify legally authoritative jurisdiction or resolve applicability.",
+    "No center locations were recomputed here; the separate 583-center comparison is retained as its own evidence.",
+    "The parent-union coverage measures each 2007 BDI ADM2 target against all 18 2014 BDI ADM1 features in stored planar coordinates; this is not proof of a boundary change or a qualification decision."
+  ],
+  "method": {
+    "geometry_engine": "Shapely 2.1.2 / GEOS bundled environment",
+    "geometry_read": true,
+    "geos_version": "3.13.1",
+    "operations": "Exact planar intersection and difference on parsed source geometries. Inputs validated valid; no geometry repair, simplification, or reprojection. Whole FeatureCollection JSON parsing materialized geometry.",
+    "shapely_version": "2.1.2",
+    "whole_feature_json_parse": true
+  },
+  "scope": {
+    "context_families": {
+      "BDI_ADM1_parent_features": 18,
+      "COD_ADM1_features": 26,
+      "TZA_ADM1_features": 30
+    },
+    "earlier_center_check_reused_not_repeated": true,
+    "original_scope_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "package_id": "gb-BDI-ADM2--repair-evaluation",
+    "target_count": 21
+  },
+  "source_context": {
+    "catalogue_terms": {
+      "BDI_ADM1": "CC0",
+      "BDI_ADM2": "Public Domain",
+      "COD_ADM1": "ODbL",
+      "TZA_ADM1": "ODbL"
+    },
+    "coordinate_reference": "Feature geometries were compared in stored coordinate space without CRS transformation; FeatureCollection CRS member values are recorded per input descriptor.",
+    "units": "Planar area in stored coordinate units squared; lengths in stored coordinate units. For lon/lat coordinates these are degree-squared and degrees, not geodesic area or distance.",
+    "vintages": {
+      "BDI_ADM1": 2014,
+      "BDI_ADM2": 2007,
+      "COD_ADM1": 2017,
+      "TZA_ADM1": 2015
+    }
+  },
+  "summary": {
+    "cod_adm1_contacts": {
+      "positive_area_pairs": 4,
+      "target_feature_pairs": 4,
+      "targets_with_any_contact": 4,
+      "touch_only_pairs": 0
+    },
+    "parent_bdi_adm1_contacts": {
+      "positive_area_pairs": 42,
+      "target_feature_pairs": 42,
+      "targets_with_any_contact": 21,
+      "touch_only_pairs": 0
+    },
+    "parent_coverage": {
+      "targets_with_any_parent_contact": 21,
+      "targets_with_positive_area_outside_parent_union": 21,
+      "total_outside_area_coordinate_units_squared": 0.005194108512410299
+    },
+    "tza_adm1_contacts": {
+      "positive_area_pairs": 9,
+      "target_feature_pairs": 9,
+      "targets_with_any_contact": 8,
+      "touch_only_pairs": 0
+    }
+  },
+  "targets": [
+    {
+      "cod_adm1_contacts": [],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 9.494226381789173e-05,
+      "outside_bdi_adm1_union_area_fraction": 0.008993134815652608,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 3.793792449874629e-06,
+          "feature_id": "gb:BDI:ADM1:87207978B39611815861631",
+          "feature_name": "Bujumbura Rural",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 0.016470570018752795,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 6.382638623595425e-06,
+          "feature_id": "gb:BDI:ADM1:87207978B31722215463268",
+          "feature_name": "Bururi",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.03238519456736941,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 0.010452074738108693,
+          "feature_id": "gb:BDI:ADM1:87207978B49849916836933",
+          "feature_name": "Rumonge",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 0.599487081263135,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.01055719343300004,
+      "target_id": "gb:BDI:ADM2:21766830B31049489476840",
+      "target_name": "Bugarama",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": []
+    },
+    {
+      "cod_adm1_contacts": [],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 0.00028706442554555513,
+      "outside_bdi_adm1_union_area_fraction": 0.011218749120255254,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 5.7792993527399805e-08,
+          "feature_id": "gb:BDI:ADM1:87207978B35376687740120",
+          "feature_name": "Makamba",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.0025881231602178124,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 9.537670718031717e-05,
+          "feature_id": "gb:BDI:ADM1:87207978B31722215463268",
+          "feature_name": "Bururi",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.36721081893875607,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 0.025205418449780637,
+          "feature_id": "gb:BDI:ADM1:87207978B49849916836933",
+          "feature_name": "Rumonge",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 1.512684941510525,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.025587917375500036,
+      "target_id": "gb:BDI:ADM2:21766830B32777890626704",
+      "target_name": "Rumonge",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": []
+    },
+    {
+      "cod_adm1_contacts": [],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 2.8592847865027532e-05,
+      "outside_bdi_adm1_union_area_fraction": 0.004906095036307633,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.005792589110069135,
+          "feature_id": "gb:BDI:ADM1:87207978B39611815861631",
+          "feature_name": "Bujumbura Rural",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 0.3516996454673189,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 6.84372306584855e-06,
+          "feature_id": "gb:BDI:ADM1:87207978B49849916836933",
+          "feature_name": "Rumonge",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.03445337846206767,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.0058280256810000035,
+      "target_id": "gb:BDI:ADM2:21766830B36835382033084",
+      "target_name": "Kabezi",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": []
+    },
+    {
+      "cod_adm1_contacts": [],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 4.20309733627388e-05,
+      "outside_bdi_adm1_union_area_fraction": 0.00397907368979304,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 7.446224241283607e-05,
+          "feature_id": "gb:BDI:ADM1:87207978B39611815861631",
+          "feature_name": "Bujumbura Rural",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.29902748430431864,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 0.010446511302224433,
+          "feature_id": "gb:BDI:ADM1:87207978B49849916836933",
+          "feature_name": "Rumonge",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 0.5639272513162091,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.010563004517999998,
+      "target_id": "gb:BDI:ADM2:21766830B14140898215143",
+      "target_name": "Muhuta",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": []
+    },
+    {
+      "cod_adm1_contacts": [],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 0.00021556251301808164,
+      "outside_bdi_adm1_union_area_fraction": 0.00810249102077252,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.026388911649981844,
+          "feature_id": "gb:BDI:ADM1:87207978B68487327478732",
+          "feature_name": "Cibitoke",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 0.8378769181048821,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.02660447416299995,
+      "target_id": "gb:BDI:ADM2:21766830B12025098844752",
+      "target_name": "Mabayi",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": []
+    },
+    {
+      "cod_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 7.224847588231744e-05,
+          "feature_id": "gb:COD:ADM1:28894549B54646848790483",
+          "feature_name": "South Kivu",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.3941412866438832,
+          "positive_area_overlap": true
+        }
+      ],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 0.00021562166136344758,
+      "outside_bdi_adm1_union_area_fraction": 0.013224644303191953,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.01608891223913655,
+          "feature_id": "gb:BDI:ADM1:87207978B68487327478732",
+          "feature_name": "Cibitoke",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 0.8259879022196023,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.016304533900500014,
+      "target_id": "gb:BDI:ADM2:21766830B51540876931984",
+      "target_name": "Rugombo",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": []
+    },
+    {
+      "cod_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.00012058352575600859,
+          "feature_id": "gb:COD:ADM1:28894549B54646848790483",
+          "feature_name": "South Kivu",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.3906798011979119,
+          "positive_area_overlap": true
+        }
+      ],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 0.000156442050190827,
+      "outside_bdi_adm1_union_area_fraction": 0.010812853008747509,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.014288603600605599,
+          "feature_id": "gb:BDI:ADM1:87207978B68487327478732",
+          "feature_name": "Cibitoke",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 0.8544110248065542,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 2.3110909203652423e-05,
+          "feature_id": "gb:BDI:ADM1:87207978B36636371084075",
+          "feature_name": "Bubanza",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.11048575324044357,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.01446815656000009,
+      "target_id": "gb:BDI:ADM2:21766830B2147150443328",
+      "target_name": "Buganda",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": []
+    },
+    {
+      "cod_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 7.43121225432904e-05,
+          "feature_id": "gb:COD:ADM1:28894549B54646848790483",
+          "feature_name": "South Kivu",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.31687249341846024,
+          "positive_area_overlap": true
+        }
+      ],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 0.00022425249091859615,
+      "outside_bdi_adm1_union_area_fraction": 0.010079251414575306,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 1.9910909290604835e-05,
+          "feature_id": "gb:BDI:ADM1:87207978B68487327478732",
+          "feature_name": "Cibitoke",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.0502942376306571,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 0.02195865587576515,
+          "feature_id": "gb:BDI:ADM1:87207978B36636371084075",
+          "feature_name": "Bubanza",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 0.6775812865357871,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 4.610395202564001e-05,
+          "feature_id": "gb:BDI:ADM1:87207978B39611815861631",
+          "feature_name": "Bujumbura Rural",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.20504185882643197,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.022248923227999977,
+      "target_id": "gb:BDI:ADM2:21766830B78591112120307",
+      "target_name": "Gihanga",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": []
+    },
+    {
+      "cod_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 4.2201149952831915e-05,
+          "feature_id": "gb:COD:ADM1:28894549B54646848790483",
+          "feature_name": "South Kivu",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.19802627284627689,
+          "positive_area_overlap": true
+        }
+      ],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 3.4355743166902175e-05,
+      "outside_bdi_adm1_union_area_fraction": 0.002993617843578349,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 3.4462807496766274e-05,
+          "feature_id": "gb:BDI:ADM1:87207978B36636371084075",
+          "feature_name": "Bubanza",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.2674650115535932,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 0.011230862460973585,
+          "feature_id": "gb:BDI:ADM1:87207978B39611815861631",
+          "feature_name": "Bujumbura Rural",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 0.8494155799230636,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 0.00017664795286272507,
+          "feature_id": "gb:BDI:ADM1:87207978B47636051590360",
+          "feature_name": "Bujumbura Mairie",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.2566016430281296,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.011476328964499979,
+      "target_id": "gb:BDI:ADM2:21766830B6345718789328",
+      "target_name": "Mutimbuzi",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": []
+    },
+    {
+      "cod_adm1_contacts": [],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 0.000272742236987035,
+      "outside_bdi_adm1_union_area_fraction": 0.009059330628623461,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.029794285317671688,
+          "feature_id": "gb:BDI:ADM1:87207978B35376687740120",
+          "feature_name": "Makamba",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 0.9440719133131672,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 4.926974310079502e-07,
+          "feature_id": "gb:BDI:ADM1:87207978B31722215463268",
+          "feature_name": "Bururi",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 0.003738509910848708,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 3.870372491039414e-05,
+          "feature_id": "gb:BDI:ADM1:87207978B49849916836933",
+          "feature_name": "Rumonge",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.09265961449561727,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.030106223977000093,
+      "target_id": "gb:BDI:ADM2:21766830B74257208244788",
+      "target_name": "Nyanza-Lac",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 2.1851405063404457e-05,
+          "feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+          "feature_name": "Kigoma",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.09400226184133757,
+          "positive_area_overlap": true
+        }
+      ]
+    },
+    {
+      "cod_adm1_contacts": [],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 0.0003244528079895293,
+      "outside_bdi_adm1_union_area_fraction": 0.014628749542878357,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.021854668315010435,
+          "feature_id": "gb:BDI:ADM1:87207978B35376687740120",
+          "feature_name": "Makamba",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 0.9007693987541696,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.022179121122999957,
+      "target_id": "gb:BDI:ADM2:21766830B71257741300393",
+      "target_name": "Mabanda",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 8.252256623426973e-05,
+          "feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+          "feature_name": "Kigoma",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.3248694746960308,
+          "positive_area_overlap": true
+        }
+      ]
+    },
+    {
+      "cod_adm1_contacts": [],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 0.00039893346146723007,
+      "outside_bdi_adm1_union_area_fraction": 0.00868640422127457,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.04550057420742165,
+          "feature_id": "gb:BDI:ADM1:87207978B60452886876050",
+          "feature_name": "Rutana",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 1.268367282215635,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 2.668357261121671e-05,
+          "feature_id": "gb:BDI:ADM1:87207978B85164203636576",
+          "feature_name": "Ruyigi",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.11426619867895528,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.045926191241500144,
+      "target_id": "gb:BDI:ADM2:21766830B38172137244003",
+      "target_name": "Giharo",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.0003594197419206167,
+          "feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+          "feature_name": "Kigoma",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 1.0930358506991071,
+          "positive_area_overlap": true
+        }
+      ]
+    },
+    {
+      "cod_adm1_contacts": [],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 0.00040567078570119536,
+      "outside_bdi_adm1_union_area_fraction": 0.015138200161032098,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.02639215071129883,
+          "feature_id": "gb:BDI:ADM1:87207978B60812330206497",
+          "feature_name": "Cankuzo",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 0.9749613715719871,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.026797821497000034,
+      "target_id": "gb:BDI:ADM2:21766830B1729082638594",
+      "target_name": "Gisagara",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.0002663755910159857,
+          "feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+          "feature_name": "Kigoma",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.8242514041315601,
+          "positive_area_overlap": true
+        }
+      ]
+    },
+    {
+      "cod_adm1_contacts": [],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 0.00033896934907772186,
+      "outside_bdi_adm1_union_area_fraction": 0.011406279464848006,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.029378814624422243,
+          "feature_id": "gb:BDI:ADM1:87207978B60812330206497",
+          "feature_name": "Cankuzo",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 0.8452576303865117,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.02971778397349997,
+      "target_id": "gb:BDI:ADM2:21766830B80223800900582",
+      "target_name": "Mishiha",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.00018694727372183513,
+          "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+          "feature_name": "Kagera",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.40021305841946225,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 0.00011237132135020648,
+          "feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+          "feature_name": "Kigoma",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.3109119586986251,
+          "positive_area_overlap": true
+        }
+      ]
+    },
+    {
+      "cod_adm1_contacts": [],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 0.0003100872738983814,
+      "outside_bdi_adm1_union_area_fraction": 0.007035656124205123,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 3.8603006721422236e-05,
+          "feature_id": "gb:BDI:ADM1:87207978B26491438187770",
+          "feature_name": "Muyinga",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.11782265043052494,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 0.04372499217688012,
+          "feature_id": "gb:BDI:ADM1:87207978B60812330206497",
+          "feature_name": "Cankuzo",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 1.1404688577439914,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.04407368245749995,
+      "target_id": "gb:BDI:ADM2:21766830B44986812705529",
+      "target_name": "Kigamba",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.0002814599334683384,
+          "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+          "feature_name": "Kagera",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.5401793993589873,
+          "positive_area_overlap": true
+        }
+      ]
+    },
+    {
+      "cod_adm1_contacts": [],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 6.234733840418658e-05,
+      "outside_bdi_adm1_union_area_fraction": 0.0027444175730170855,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.022484460386082785,
+          "feature_id": "gb:BDI:ADM1:87207978B26491438187770",
+          "feature_name": "Muyinga",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 0.7810886966993004,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 0.0001391711843967992,
+          "feature_id": "gb:BDI:ADM1:87207978B60812330206497",
+          "feature_name": "Cankuzo",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.2903748331387818,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 3.189719611610801e-05,
+          "feature_id": "gb:BDI:ADM1:87207978B19413274687877",
+          "feature_name": "Karuzi",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.07169886570018318,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.02271787610499987,
+      "target_id": "gb:BDI:ADM2:21766830B3809417619483",
+      "target_name": "Buhinyuza",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 5.141713171720565e-05,
+          "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+          "feature_name": "Kagera",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.19004579869586746,
+          "positive_area_overlap": true
+        }
+      ]
+    },
+    {
+      "cod_adm1_contacts": [],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 0.00033316482850512594,
+      "outside_bdi_adm1_union_area_fraction": 0.011075957788367676,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.02973191811725429,
+          "feature_id": "gb:BDI:ADM1:87207978B26491438187770",
+          "feature_name": "Muyinga",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 1.1649455886666906,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 1.4918700240566691e-05,
+          "feature_id": "gb:BDI:ADM1:87207978B19413274687877",
+          "feature_name": "Karuzi",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.06154428407496165,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.030080001645999978,
+      "target_id": "gb:BDI:ADM2:21766830B41528201457160",
+      "target_name": "Muyinga",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.00028051325176344194,
+          "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+          "feature_name": "Kagera",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 1.0639040308913124,
+          "positive_area_overlap": true
+        }
+      ]
+    },
+    {
+      "cod_adm1_contacts": [],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 0.0012447659463370134,
+      "outside_bdi_adm1_union_area_fraction": 0.029774287824386646,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.040445391763055706,
+          "feature_id": "gb:BDI:ADM1:87207978B16018837471159",
+          "feature_name": "Kirundo",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 0.9386505460298885,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 0.00011658351910731522,
+          "feature_id": "gb:BDI:ADM1:87207978B26491438187770",
+          "feature_name": "Muyinga",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.08129729204297895,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.04180674122850009,
+      "target_id": "gb:BDI:ADM2:21766830B78190696569930",
+      "target_name": "Busoni",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": []
+    },
+    {
+      "cod_adm1_contacts": [],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 0.00018410183289578017,
+      "outside_bdi_adm1_union_area_fraction": 0.009331831071183714,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.01954426996160428,
+          "feature_id": "gb:BDI:ADM1:87207978B16018837471159",
+          "feature_name": "Kirundo",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 0.6074143759076002,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.01972837179450007,
+      "target_id": "gb:BDI:ADM2:21766830B53810177315638",
+      "target_name": "Bugabira",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": []
+    },
+    {
+      "cod_adm1_contacts": [],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 9.227195467241822e-06,
+      "outside_bdi_adm1_union_area_fraction": 0.003127695737853814,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.0014010000255125774,
+          "feature_id": "gb:BDI:ADM1:87207978B39611815861631",
+          "feature_name": "Bujumbura Rural",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.23417636350339455,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 0.0015399304160201935,
+          "feature_id": "gb:BDI:ADM1:87207978B47636051590360",
+          "feature_name": "Bujumbura Mairie",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 0.18705569331901165,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.0029501576370000136,
+      "target_id": "gb:BDI:ADM2:21766830B84199363749171",
+      "target_name": "Muha",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": []
+    },
+    {
+      "cod_adm1_contacts": [],
+      "outside_bdi_adm1_union_area_coordinate_units_squared": 1.0780486430790325e-05,
+      "outside_bdi_adm1_union_area_fraction": 0.0019514786741697161,
+      "parent_bdi_adm1_contacts": [
+        {
+          "area_coordinate_units_squared": 0.00011115108065053185,
+          "feature_id": "gb:BDI:ADM1:87207978B39611815861631",
+          "feature_name": "Bujumbura Rural",
+          "intersection_type": "MultiPolygon",
+          "length_coordinate_units": 0.22325370911275821,
+          "positive_area_overlap": true
+        },
+        {
+          "area_coordinate_units_squared": 0.005402333992918719,
+          "feature_id": "gb:BDI:ADM1:87207978B47636051590360",
+          "feature_name": "Bujumbura Mairie",
+          "intersection_type": "Polygon",
+          "length_coordinate_units": 0.36806189475058515,
+          "positive_area_overlap": true
+        }
+      ],
+      "target_area_coordinate_units_squared": 0.005524265560000051,
+      "target_id": "gb:BDI:ADM2:21766830B87038696970617",
+      "target_name": "Ntahangwa",
+      "target_type": "Polygon",
+      "tza_adm1_contacts": []
+    }
+  ]
+}

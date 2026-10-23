@@ -28,11 +28,11 @@ const joined = async promises => {
 // a compatibility catalogue for historical producer schemas.
 export const EXECUTION_CODE = Object.freeze([
   'scripts/run-geographic-check.py',
-  'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs', 'src/native-grid.js', 'src/ownership-codec.js',
+  'scripts/native-word-store.mjs', 'scripts/native-patch-store.mjs',  'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs', 'src/native-grid.js', 'src/ownership-codec.js',
   'package.json', 'package-lock.json',
   PREFIX + 'selected-neighbor-prevention.mjs',
   PREFIX + 'selected-checkpoint.mjs', PREFIX + 'selected-joint-entry.mjs',
-  CHECKPOINTS, ...ACCEPTED_CHECKPOINT_CODE, 'scripts/geographic_checkpoint_products.py',
+  CHECKPOINTS, PREFIX + 'supported-programs.json', ...ACCEPTED_CHECKPOINT_CODE, 'scripts/geographic_checkpoint_products.py',
   'scripts/selected-reference-metadata.mjs', 'src/reference-metadata.js'
 ]);
 // Preparation imports only this path vector. Keep it equal to the canonical
@@ -117,6 +117,20 @@ function createReader({repo, baseline, candidate, acquisition}) {
     current.set(name, before ? {path: name, mode: before.mode, git_blob_oid: before.git_blob_oid} : {path: name, absent: true});
     return before;
   }
+  async function originalDescriptor(commit, name) {
+    try { return descriptor(commit, name); }
+    catch (error) {
+      // Only unavailable Git metadata can request transport. Missing paths,
+      // nonordinary entries and identity disagreements remain refusals.
+      if (!error.message.startsWith('immutable-object-unavailable:') || !acquisition.resolvePath) throw error;
+      const resolved = await acquisition.resolvePath(commit, name);
+      demand(resolved?.commit === commit && resolved.path === name && ['100644', '100755'].includes(resolved.mode)
+        && oid(resolved.git_blob_oid), 'invalid-original-descriptor');
+      const result = {commit, path: name, mode: resolved.mode, git_blob_oid: resolved.git_blob_oid};
+      descriptors.set(commit + ':' + name, result);
+      return result;
+    }
+  }
   async function body(pin, expected) {
     // Each role still authenticates its own origin/path/mode and expected hash.
     // Only the immutable raw body is shared by OID within this invocation.
@@ -164,14 +178,16 @@ function createReader({repo, baseline, candidate, acquisition}) {
     }
     return origins.get(commit);
   }
-  function pinned(value) {
+  async function pinned(value) {
     demand(value && oid(value.commit) && safe(value.path) && ['100644', '100755'].includes(value.mode)
       && oid(value.git_blob_oid ?? value.blob) && Number.isSafeInteger(value.bytes) && value.bytes > 0 && hash(value.sha256), 'unsupported-historical-pin');
     // Compare candidate-visible aliases, including absence. An unavailable
     // original can use the retained current copy only at its exact pinned OID.
     // Never acquire an old producer graph to prove an unchanged output.
-    equalCurrent(value.path, true);
-    const actual = descriptor(originExists(value.commit) ? value.commit : baseline, value.path);
+    const current = equalCurrent(value.path, true);
+    const aliasMatches = current && current.mode === value.mode && current.git_blob_oid === (value.git_blob_oid ?? value.blob);
+    const actual = originExists(value.commit) || !aliasMatches
+      ? await originalDescriptor(value.commit, value.path) : current;
     demand(actual.mode === value.mode && actual.git_blob_oid === (value.git_blob_oid ?? value.blob), 'historical-pin-identity');
     return actual;
   }
@@ -183,7 +199,7 @@ function createReader({repo, baseline, candidate, acquisition}) {
     demand(value.mode === undefined || value.mode === p.mode, 'current-pin-mode');
     return p;
   }
-  return {git, descriptor, equalCurrent, currentJson, currentPin, pinned, jsonAt, originExists,
+  return {git, descriptor, originalDescriptor, equalCurrent, currentJson, currentPin, pinned, jsonAt, originExists,
     summary() {
       const rows = [...descriptors.values()].filter(Boolean).sort((a, b) => (a.commit + ':' + a.path).localeCompare(b.commit + ':' + b.path));
       const alternatives = [...current.values()].sort((a, b) => a.path.localeCompare(b.path));
@@ -229,14 +245,14 @@ async function collect(reader) {
   }
   const bounds = manifest.original_assets?.bounds;
   demand(bounds && oid(bounds.commit) && bounds.path === 'data/canonical-grid/bounds.json.gz', 'unsupported-owner-roster');
-  reader.descriptor(bounds.commit, bounds.path);
+  await reader.originalDescriptor(bounds.commit, bounds.path);
   const verified = await reader.currentJson('scripts/native-ownership/verified-candidates.json');
   const receipt = verified.candidates?.[selection.sha256];
   demand(verified.version === 1 && receipt?.role === 'reviewed-exhaustive-native-rule-comparison' && oid(receipt.commit) && safe(receipt.path), 'unsupported-native-receipt');
   // This historical receipt has no declared Git OID/mode; its retained location
   // still requires exact before/after identity and its origin remains explicit.
   reader.equalCurrent(receipt.path, true);
-  if (reader.originExists(receipt.commit)) reader.descriptor(receipt.commit, receipt.path);
+  if (reader.originExists(receipt.commit)) await reader.originalDescriptor(receipt.commit, receipt.path);
   else reader.equalCurrent(receipt.path);
   const transport = manifest.native_asset_transport;
   keys(transport, 'index,kind,logical_assets,original_compressed_bytes,version', 'native-transport');
@@ -252,7 +268,7 @@ async function collect(reader) {
   demand(declared.version === 1 && declared.kind === 'complete-world-index-with-exact-encoded-overrides', 'unsupported-selected-source-map');
   const bank = await reader.currentJson(declared.path, declared);
   demand(bank.version === 1 && bank.kind === declared.kind, 'unsupported-selected-source-bank');
-  for (const p of [bank.world_index, ...array(bank.unchanged_files, 'unchanged-sources', 0), ...array(bank.overrides, 'source-overrides', 0)]) reader.pinned(p);
+  for (const p of [bank.world_index, ...array(bank.unchanged_files, 'unchanged-sources', 0), ...array(bank.overrides, 'source-overrides', 0)]) await reader.pinned(p);
   if (selection.reference_projection !== undefined) {
     // Reference metadata is an existing selected input. Compare its complete
     // body and every immutable operand/current alias used by the real reader;
@@ -273,7 +289,7 @@ async function collect(reader) {
     }
     for (const input of inputs) {
       demand(input?.mode === '100644', 'nonordinary-reference-input');
-      reader.pinned(input);
+      await reader.pinned(input);
     }
   }
   if (selection.artifact_consumption !== undefined) {
@@ -293,11 +309,11 @@ async function collect(reader) {
     keys(sidecar, 'authority_registry,base_selection,kind,logical_asset_map,runtime_envelope,version', 'additive-sidecar');
     demand(sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2', 'unsupported-additive-sidecar');
     keys(sidecar.logical_asset_map, 'base_manifest,ledger,owner_roster,patch', 'additive-assets');
-    for (const p of [sidecar.runtime_envelope, ...Object.values(sidecar.logical_asset_map)]) reader.pinned(p);
+    for (const p of [sidecar.runtime_envelope, ...Object.values(sidecar.logical_asset_map)]) await reader.pinned(p);
     // Registry and ledger are actual selected outputs. Bind their complete
     // immutable bodies, without recursively interpreting the original producer
     // or rerunning its authority checks for an unchanged result.
-    reader.pinned(sidecar.authority_registry);
+    await reader.pinned(sidecar.authority_registry);
   }
 }
 

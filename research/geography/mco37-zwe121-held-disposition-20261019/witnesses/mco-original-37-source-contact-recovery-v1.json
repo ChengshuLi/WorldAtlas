@@ -1,0 +1,1499 @@
+{
+  "contract_status": {
+    "contract_pin": null,
+    "effect": "cannot make a contract-conforming repair or exception disposition; this artifact is only a source-relative review table and preserves every hold",
+    "original_contract_issue_or_artifact": "not identified in the retained MCO candidate/supplement/review files or task instructions; no issue number or contract bytes were supplied"
+  },
+  "disposition_limits": [
+    "All 37 remain held_unresolved; no accepted unresolved credit, repair qualification, documented exception acceptance, or clearance is claimed.",
+    "No legal-boundary, sovereignty, or current ownership claim is made.",
+    "Cell-center and footprint outcomes are copied from the previously pinned geometry addenda; no PIP or ownership diagnostic was rerun."
+  ],
+  "negative_evidence_and_open_questions": [
+    "The pinned source-candidate block records numeric owner code 27303 and feature code 41951 but no source class, source ID, polygon contact, or causal trace per cell.",
+    "The pinned physical-support block records x intervals only; it provides neither class values nor feature links.",
+    "The retained authority registry has no row mapping numeric feature code 41951 to stable source shape ID 64170238B96397749018979.",
+    "The pinned source payload contains one feature and its polygon; geometry products establish relation to that polygon only, not that numeric code 41951 identifies it.",
+    "Original class per key remains unknown. Confirm whether the exact original contract classifies these as land, inland water, territorial exclusion, or another held class.",
+    "The source register records 2017 represented year and ODbL 1.0, but its reviewer notes say effective applicability, source authority particulars, and land/water/political interpretation are not independently verified.",
+    "Target-level feature identity and polygon geometry do not provide per-key source-contact/question narratives or source-fit/residual measurements.",
+    "The original MCO acceptance contract is not included or identified by issue number in the retained package; exact contract classes and permitted disposition cannot be verified in this task."
+  ],
+  "pins": {
+    "authority_registry_reviewed_observation": {
+      "bytes": 248663,
+      "entry_count": 217,
+      "path": "authority-registry.json",
+      "repository_source_commit": "not pinned in this workspace artifact; do not treat this derived local snapshot as authoritative source data",
+      "search_observation": "No occurrence of numeric feature code 41951, stable shapeID 64170238B96397749018979, or MCO identifier in this local authority-registry snapshot. This is a bounded local negative check, not proof no mapping exists elsewhere.",
+      "sha256": "6e85750b1cf05e47085a54f3d670e8279ef110d83dc1e91402a1f8251e409e72"
+    },
+    "center_geometry_addendum": {
+      "sha256": "4b65c5d80760857b2ac44105fb754c3dbd704bdbbdf44235a33dcecc112eacba"
+    },
+    "footprint_geometry_addendum": {
+      "sha256": "f10d16e51a34620b25a133c43fce60d2fabd1baa98eb3074f0fe2edbd0230865"
+    },
+    "independent_source_contact_review": {
+      "sha256": "f614090260785537c0c1074a0570e770a5a1679e202bd31a8117505044099954"
+    },
+    "physical_support_block_023": {
+      "bytes": 513203,
+      "git_blob_sha1": "b0ff34869d57ca095bce9014383cc5648f6d2e24",
+      "sha256": "a1c483ffe23e3d215885edc9f16a12ce40c7f092149479c418493165e8c70868"
+    },
+    "source_candidates_block_023": {
+      "bytes": 681528,
+      "git_blob_sha1": "d02153e8510a9d29bcb7629cc69a6354518f5124",
+      "sha256": "228d2bb7727267ddeba240017f9eb1c737e91da7fa8982018b230602b1d81d2b"
+    },
+    "source_registry": {
+      "license": "ODbL 1.0",
+      "metadata_raw_bytes": 1094,
+      "metadata_raw_sha256": "51a7b2da1c91213c6dc3b17675ddf0531cde50546fdc583b5aa568755e7e43d2",
+      "payload_gzip_sha256": "1135297a3146d4e445dd6090f5a4812df9ea36249e21bf997b8fa53b6c4d3a23",
+      "product": "2017 OSM/Wambacher",
+      "role_limit": "Source registry identity/provenance does not establish a current legal boundary or sovereignty.",
+      "shape_id": "64170238B96397749018979",
+      "source_identity": "gb:MCO:ADM1"
+    }
+  },
+  "rows": [
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "outside",
+          "inside",
+          "inside",
+          "outside"
+        ],
+        "footprint_fully_contained": false,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": true,
+        "polygon_boundary_intersects_closed_footprint": true
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136498,
+      "y": 95580
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136499,
+      "y": 95580
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "outside",
+          "outside"
+        ],
+        "footprint_fully_contained": false,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": true,
+        "polygon_boundary_intersects_closed_footprint": true
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136497,
+      "y": 95581
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "outside"
+        ],
+        "footprint_fully_contained": false,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": true,
+        "polygon_boundary_intersects_closed_footprint": true
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136498,
+      "y": 95581
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136499,
+      "y": 95581
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "outside",
+          "outside"
+        ],
+        "footprint_fully_contained": false,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": true,
+        "polygon_boundary_intersects_closed_footprint": true
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136494,
+      "y": 95582
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "outside"
+        ],
+        "footprint_fully_contained": false,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": true,
+        "polygon_boundary_intersects_closed_footprint": true
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136495,
+      "y": 95582
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136496,
+      "y": 95582
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136497,
+      "y": 95582
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136498,
+      "y": 95582
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136499,
+      "y": 95582
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136494,
+      "y": 95583
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "outside"
+        ],
+        "footprint_fully_contained": false,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": true,
+        "polygon_boundary_intersects_closed_footprint": true
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136493,
+      "y": 95584
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136493,
+      "y": 95585
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "outside",
+          "inside",
+          "inside",
+          "outside"
+        ],
+        "footprint_fully_contained": false,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": true,
+        "polygon_boundary_intersects_closed_footprint": true
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136492,
+      "y": 95586
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136493,
+      "y": 95586
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "outside"
+        ],
+        "footprint_fully_contained": false,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": true,
+        "polygon_boundary_intersects_closed_footprint": true
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136492,
+      "y": 95587
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136493,
+      "y": 95587
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "outside",
+          "inside",
+          "inside",
+          "outside"
+        ],
+        "footprint_fully_contained": false,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": true,
+        "polygon_boundary_intersects_closed_footprint": true
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136491,
+      "y": 95588
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136492,
+      "y": 95588
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136493,
+      "y": 95588
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "outside"
+        ],
+        "footprint_fully_contained": false,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": true,
+        "polygon_boundary_intersects_closed_footprint": true
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136491,
+      "y": 95589
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136492,
+      "y": 95589
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136493,
+      "y": 95589
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "outside"
+        ],
+        "footprint_fully_contained": false,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": true,
+        "polygon_boundary_intersects_closed_footprint": true
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136488,
+      "y": 95590
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136489,
+      "y": 95590
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136490,
+      "y": 95590
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136491,
+      "y": 95590
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136492,
+      "y": 95590
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136488,
+      "y": 95591
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136489,
+      "y": 95591
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136490,
+      "y": 95591
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136491,
+      "y": 95591
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "outside",
+          "outside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": false,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": true,
+        "polygon_boundary_intersects_closed_footprint": true
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136489,
+      "y": 95594
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "outside",
+          "inside"
+        ],
+        "footprint_fully_contained": false,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": true,
+        "polygon_boundary_intersects_closed_footprint": true
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136489,
+      "y": 95598
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "outside"
+        ],
+        "footprint_fully_contained": false,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": true,
+        "polygon_boundary_intersects_closed_footprint": true
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136490,
+      "y": 95598
+    },
+    {
+      "candidate_membership": {
+        "feature_code": 41951,
+        "interpretation": "candidate membership and support intersection only; not causal trace or per-key source attribution",
+        "owner_code": 27303,
+        "physical_support_intersection": true
+      },
+      "disposition": "held_unresolved; proposed/unaccepted; no credit or clearance",
+      "geometry_only_contact": {
+        "cell_center_relation_to_polygon": "inside",
+        "classification": "geometry only; not source qualification, legal boundary, sovereignty, cell-class attribution, or owner",
+        "footprint_corner_relations": [
+          "inside",
+          "inside",
+          "inside",
+          "inside"
+        ],
+        "footprint_fully_contained": true,
+        "footprint_positive_area_overlap": true,
+        "polygon_boundary_enters_footprint_interior": false,
+        "polygon_boundary_intersects_closed_footprint": false
+      },
+      "mismatch_or_limit": "No geometry contradiction is recorded between the center and footprint products. The unresolved join is numeric feature code 41951 to pinned shapeID 64170238B96397749018979; geometry coincidence does not establish that identity mapping.",
+      "source_class": {
+        "reason": "source-candidates block row has owner/feature numeric arrays only; physical-support row is only an x interval; no original class label is carried by these pinned records",
+        "status": "unavailable",
+        "value": null
+      },
+      "source_feature": {
+        "contact_scope": "this row is geometrically compared with the sole polygon in the pinned payload; does not prove candidate feature-code identity",
+        "feature_count_in_pinned_payload": 1,
+        "numeric_candidate_feature_code_to_shape_id_join": "unresolved; retained authority registry has no mapping for 41951",
+        "pinned_shape_id": "64170238B96397749018979",
+        "source_identity": "gb:MCO:ADM1"
+      },
+      "x": 136489,
+      "y": 95599
+    }
+  ],
+  "schema": "worldatlas.mco-original-37-source-contact-recovery.v1",
+  "scope": {
+    "candidate_sha256": "2c33f35094fa8e0cc62e9bd6d0c1bedab98a5f7ecdab34fd4b503622db5c0f11",
+    "coordinates": "(x,y)",
+    "label": "MCO original 37 exact native-grid cells"
+  },
+  "source_feature_scope": {
+    "feature_count": 1,
+    "identity": "gb:MCO:ADM1",
+    "license": "ODbL 1.0",
+    "metadata_raw_sha256": "51a7b2da1c91213c6dc3b17675ddf0531cde50546fdc583b5aa568755e7e43d2",
+    "native_crs": "CRS84",
+    "payload_gzip_sha256": "1135297a3146d4e445dd6090f5a4812df9ea36249e21bf997b8fa53b6c4d3a23",
+    "product": "2017 OSM/Wambacher geoBoundaries ADM1",
+    "shape_id": "64170238B96397749018979"
+  },
+  "status": "bounded read-only source-relative evidence; proposed/unaccepted; all cells held",
+  "summary": {
+    "accepted_credit": 0,
+    "accepted_source_qualification": 0,
+    "boundary_intersects_closed_footprint": 14,
+    "center_inside": 37,
+    "footprints_fully_contained": 23,
+    "footprints_partial_overlap": 14,
+    "footprints_positive_area_overlap": 37,
+    "held": 37,
+    "key_count": 37,
+    "numeric_feature_code_identity_join_rows_established": 0,
+    "source_class_rows_known": 0
+  }
+}

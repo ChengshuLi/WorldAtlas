@@ -1,0 +1,196 @@
+{
+  "version": 1,
+  "kind": "vct-native-authority-independent-review",
+  "scope": {
+    "package": "gb-VCT-ADM1--repair-evaluation",
+    "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "original_keys": 633,
+    "intervals": 224,
+    "owner": 7132,
+    "source_features": [
+      64726,
+      64727,
+      64728,
+      64729,
+      64730,
+      64731
+    ],
+    "excluded_companion": {
+      "cells": 389,
+      "intervals": 179
+    }
+  },
+  "reviewed_inputs": [
+    {
+      "path": "inventory/vct-selected-owner-observation.json",
+      "bytes": 140065,
+      "sha256": "d6047c6824f0b0e29ec8d6813895f568aa3bdccaeaca3fe4726bb9a3cbbf0979"
+    },
+    {
+      "path": ".worldatlas-workspaces/2d82c0ae06b92ab3/42d17456f7a54d6568c34d0f3b55d222f56a720a7015812071dce708422d5208/work/coordination/engineering/vct-original-disposition-20261020/native-diagnostic-001/native-diagnostic.json",
+      "bytes": 31011,
+      "sha256": "882e7cccfef8b7f99361b5a8a7713e5dcedbb42e35e3a9c6aa958602be1abf1e"
+    },
+    {
+      "path": ".worldatlas-workspaces/2d82c0ae06b92ab3/42d17456f7a54d6568c34d0f3b55d222f56a720a7015812071dce708422d5208/work/coordination/engineering/vct-original-disposition-20261020/supported-inputs-001/native-patch.json",
+      "bytes": 8293,
+      "sha256": "6e60462dc46808016829c4827e043015d170124d65d967249024e420db099ad8"
+    },
+    {
+      "path": ".worldatlas-workspaces/2d82c0ae06b92ab3/42d17456f7a54d6568c34d0f3b55d222f56a720a7015812071dce708422d5208/work/coordination/engineering/vct-original-disposition-20261020/supported-inputs-001/source-evidence.json",
+      "bytes": 87488,
+      "sha256": "b2484e7f65f535c0a91d79495096beeb2d4946d19bd6b29e1e9ff00950c21cf8"
+    },
+    {
+      "path": ".worldatlas-workspaces/2d82c0ae06b92ab3/42d17456f7a54d6568c34d0f3b55d222f56a720a7015812071dce708422d5208/work/coordination/engineering/vct-original-disposition-20261020/native-authority-001/constructor-result.json",
+      "bytes": 10935,
+      "sha256": "d21d8065217f37de93d92836cba74d958f7ebb0bdcb865bce76a46bba88a98bb"
+    },
+    {
+      "path": ".worldatlas-workspaces/2d82c0ae06b92ab3/42d17456f7a54d6568c34d0f3b55d222f56a720a7015812071dce708422d5208/work/coordination/engineering/vct-original-disposition-20261020/native-authority-001/authority-binding.json",
+      "bytes": 740,
+      "sha256": "77068662c5f670d3443925a9ec714ef52e93b75b3306020e41ff3af4cd4d02a3"
+    },
+    {
+      "path": ".worldatlas-workspaces/2d82c0ae06b92ab3/42d17456f7a54d6568c34d0f3b55d222f56a720a7015812071dce708422d5208/work/coordination/engineering/vct-original-disposition-20261020/native-authority-001/original-rule-preimage.json",
+      "bytes": 737,
+      "sha256": "aeb57f93e1b62b28e34f8b507f633119edc10634751ac85bfc80b7f599ca9b71"
+    },
+    {
+      "path": ".worldatlas-workspaces/2d82c0ae06b92ab3/42d17456f7a54d6568c34d0f3b55d222f56a720a7015812071dce708422d5208/work/coordination/engineering/vct-original-disposition-20261020/native-authority-001/preparation.json",
+      "bytes": 501,
+      "sha256": "726b0e371063cf7c0568f123c248b107c0a19db0c580e9b02d36083c9d4a3b5d"
+    },
+    {
+      "path": "inventory/vct-native-authority-001-ordinary-scratch.stdout.json",
+      "bytes": 468,
+      "sha256": "24ab887d3d078bca869b1cbe33d8e9b361c6a9ca43708116135af3c7d7e0adeb"
+    },
+    {
+      "path": "inventory/vct-physical-native-interval-overlap.json",
+      "bytes": 8008,
+      "sha256": "f45eb5b0a876f93ad23376c66f9de1f20ebad7f5ea9d8c8002a6b38b99eb7339"
+    }
+  ],
+  "authority_output_bindings": {
+    "constructor_result": {
+      "commit": "a3364f333ad1cd06af55df5738cde46d52ba31e2",
+      "path": "coordination/engineering/vct-original-disposition-20261020/native-authority-001/constructor-result.json",
+      "sha256": "d21d8065217f37de93d92836cba74d958f7ebb0bdcb865bce76a46bba88a98bb"
+    },
+    "authority_binding": {
+      "commit": "a3364f333ad1cd06af55df5738cde46d52ba31e2",
+      "path": "coordination/engineering/vct-original-disposition-20261020/native-authority-001/authority-binding.json",
+      "sha256": "77068662c5f670d3443925a9ec714ef52e93b75b3306020e41ff3af4cd4d02a3"
+    },
+    "original_rule_preimage": {
+      "commit": "a3364f333ad1cd06af55df5738cde46d52ba31e2",
+      "path": "coordination/engineering/vct-original-disposition-20261020/native-authority-001/original-rule-preimage.json",
+      "sha256": "aeb57f93e1b62b28e34f8b507f633119edc10634751ac85bfc80b7f599ca9b71"
+    },
+    "result_inputs": {
+      "native_patch": {
+        "commit": "f932e4f75ba5e345c70787b5bd49edbaaf40f941",
+        "path": "coordination/engineering/vct-original-disposition-20261020/supported-inputs-001/native-patch.json"
+      },
+      "source_evidence": {
+        "commit": "f932e4f75ba5e345c70787b5bd49edbaaf40f941",
+        "path": "coordination/engineering/vct-original-disposition-20261020/supported-inputs-001/source-evidence.json"
+      }
+    },
+    "stock_summary": {
+      "elapsed_seconds": 4.008293583,
+      "qualified_cells": 633,
+      "limits": [
+        "Original source/physical producers are not replayed.",
+        "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+      ]
+    },
+    "qualified_cells": 633
+  },
+  "independent_key_join": {
+    "method": "Expanded original source intervals, bound requested patch rows, diagnostic supported rows, and authority constructor native_rows into sorted exact (x,y,owner) keys.",
+    "original_interval_key_count": 633,
+    "patch_key_count": 633,
+    "diagnostic_key_count": 633,
+    "authority_key_count": 633,
+    "all_sets_exactly_equal": true,
+    "unique_xy": 633,
+    "owner_values": [
+      7132
+    ],
+    "source_feature_key_counts": {
+      "64726": 2,
+      "64727": 30,
+      "64728": 95,
+      "64729": 96,
+      "64730": 4,
+      "64731": 406
+    },
+    "original_interval_rows": 224,
+    "authority_component_count": 1,
+    "authority_ledger_count": 1,
+    "authority_component_id": "source-target:1fcd38a3051e9cca59315220c4b6ddbdadd451dba55dbdb35e2eb65531d0064b",
+    "authority_disposition": "assigned",
+    "authority_target_id": "atlas:territory:VCT",
+    "authority_pixel_index": 7132,
+    "authority_native_cells": 633,
+    "authority_physical_receipt_sha256_matches": true,
+    "diagnostic_held_cells": 0,
+    "diagnostic_first_failure": null
+  },
+  "source_physical_context": {
+    "selected_source_family_count": 1,
+    "complete_territorial_exclusion_family_count": 3,
+    "selected_target_count": 6,
+    "physical_receipt_path": "coordination/engineering/vct-original-disposition-20261020/physical-001/whole-target-support.json",
+    "physical_receipt_sha256": "bf26a53fb99f43f09f426f7b3901e6eebb066da664a505c604f8c54a57a15d8a",
+    "native_key_supports": 633,
+    "whole_target_issues": [
+      {
+        "target_name": "Saint George",
+        "source_index": 64729,
+        "issues": [
+          {
+            "reason": "extra_reconstruction",
+            "original_native_key_matches": 0
+          }
+        ]
+      },
+      {
+        "target_name": "Grenadines",
+        "source_index": 64731,
+        "issues": [
+          {
+            "reason": "missing_reconstruction",
+            "original_native_key_matches": 0
+          },
+          {
+            "reason": "extra_reconstruction",
+            "original_native_key_matches": 0
+          }
+        ]
+      }
+    ],
+    "interpretation": "The constructor assigns all 633 native cells to atlas:territory:VCT in one native-cells component, while source/physical issues remain preserved. Saint George extra reconstruction and Grenadines missing and extra reconstruction have zero original native-center matches but remain whole-target adverse evidence."
+  },
+  "review_assessment": {
+    "result": "Bounded evidence supports the ordinary stock native source-target constructor result: 633 cells are assigned, and exact requested keys and original source intervals match, with bound source/physical receipt inputs. This is not proof of current government source adoption, globally complete competitors, legal territorial status or final selected-output acceptance.",
+    "qualification": "The stock summary labels 633 cells qualified; this describes only the constructor result. It does not establish root acceptance or resolve physical/source applicability.",
+    "not_established": [
+      "final selected-product owner conservation / current-owner-zero is a separate consumer check",
+      "positive physical resolution of whole-target adverse issues",
+      "global complete competitor census beyond the documented three-family screen",
+      "legal/rights clearance or current government adoption",
+      "the separate 389-cell/179-interval companion"
+    ]
+  },
+  "operations": {
+    "owner_observer_rerun": false,
+    "physical_producer_rerun": false,
+    "native_diagnostic_rerun": false,
+    "native_authority_constructor_rerun": false,
+    "checkout_allocated_for_review": false,
+    "public_mutation": false
+  }
+}

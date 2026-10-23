@@ -1,0 +1,74 @@
+{
+  "package_id": "gb-BRN-ADM1--repair-evaluation",
+  "primary_source": "gb:BRN:ADM1",
+  "source_family_index": 46,
+  "category": "repair-evaluation",
+  "native_cells": 828,
+  "land_cells": 828,
+  "inland_water_cells": 0,
+  "source_relative_cells": 0,
+  "interval_segments": 323,
+  "owners": [
+    10448,
+    10449,
+    10450,
+    10451
+  ],
+  "source_features": [
+    9129,
+    9130,
+    9131,
+    9132,
+    45977
+  ],
+  "source_families": [
+    46,
+    230
+  ],
+  "native_blocks": [
+    31
+  ],
+  "provinces": [
+    "framework:province:belait:02089012c32c",
+    "framework:province:brunei-muara:b7213cc1c869",
+    "framework:province:temburong:69b48b6329c0",
+    "framework:province:tutong:22f040bbf2ea"
+  ],
+  "location_count": 4,
+  "source_feature_count": 5,
+  "locality_count": 4,
+  "cost": {
+    "primary_source_decoded_bytes": 34750,
+    "all_required_source_decoded_bytes": 617944,
+    "primary_full_source_raster_measured_seconds": 0.039,
+    "source_interval_segments": 323,
+    "maximum_native_rows_per_execution_frame": 4096,
+    "observed_global_census_peak_rss_bytes": 884973568
+  },
+  "evidence": {
+    "selection": "ownership-binding.json",
+    "lineage": "lineage.json",
+    "territorial_source_catalogue": "retained-source-catalogue.json",
+    "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+    "source_features": "source-feature-roster.json",
+    "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+    "physical": "physical-unassigned-summary.json",
+    "source_domain_transform": []
+  },
+  "work": {
+    "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+    "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+    "priority": 1
+  },
+  "execution": {
+    "command": "node source-batch-intervals.mjs gb-BRN-ADM1--repair-evaluation OUTPUT_DIRECTORY",
+    "output_columns": [
+      "y",
+      "start",
+      "end",
+      "candidate_owner_indices",
+      "source_feature_indices",
+      "physical_class"
+    ]
+  }
+}

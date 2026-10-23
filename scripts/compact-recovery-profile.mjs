@@ -1,5 +1,6 @@
 import {createHash} from 'node:crypto';
-import {storageExportV2Contract,storageExportV2Collections,v2MarkerIdentity} from '../hosted/storage-export-v2-contract.js';
+import {storageExportV2Contract,v2MarkerIdentity} from '../hosted/storage-export-v2-contract.js';
+import {storageExportV3Contract} from '../hosted/storage-export-v3-contract.js';
 import {checkedStorageV4Contract,v4MarkerIdentity} from '../hosted/storage-export-v4-contract.js';
 import {compactMembershipCatalog} from '../hosted/membership-storage-profile.js';
 
@@ -9,6 +10,11 @@ const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const hash=value=>/^[a-f0-9]{64}$/.test(value??'');
 export const originalRecoveryProfile='original-v2';
 export const compactRecoveryProfile='compact-only-v4-base2';
+export const compactRecoveryProfileV3='compact-only-v4-base3';
+export function recoveryBaseContract(profile){
+ need([originalRecoveryProfile,compactRecoveryProfile,compactRecoveryProfileV3].includes(profile),'unsupported-recovery-profile');
+ return profile===compactRecoveryProfileV3?storageExportV3Contract:storageExportV2Contract;
+}
 export const compactRecoveryTables=Object.freeze({
  worldatlas_membership_release_keys:{columns:['key','id'],keys:['key']},
  worldatlas_membership_entity_keys:{columns:['key','id'],keys:['key']},
@@ -19,6 +25,7 @@ export const compactRecoveryTables=Object.freeze({
 const forwardProfiles=[
  {id:'0001_temporal_geography',prefix:'atlas_temporal_',tables:['atlas_temporal_geography_validations','atlas_geographic_membership_records','atlas_geographic_existence_records','atlas_temporal_geography_retirements']},
  {id:'0002_footprint_versions',prefix:'atlas_footprint_',tables:['atlas_footprint_versions','atlas_footprint_version_objects','atlas_footprint_selection_validations','atlas_geographic_footprint_records','atlas_footprint_retirements']},
+ {id:'0003_typed_observations',prefix:'atlas_typed_',tables:['atlas_typed_observations','atlas_typed_feature_links','atlas_typed_retirements']},
 ];
 
 /** Matches the original forward installer's native catalog hash, with fixed
@@ -35,17 +42,19 @@ export async function recoveryForwardContract(query,id){
  need(functions.length>0,'forward-functions-missing');
  return sha(JSON.stringify({columns,constraints,triggers,functions}));
 }
-export async function verifyCompactRecoveryRegistry(query,registry){
- need(same(registry.map(row=>row.migration_id),forwardProfiles.map(item=>item.id)),'unsupported-compact-migration-registry');
+export async function verifyCompactRecoveryRegistry(query,registry,baseVersion=2){
+ need([2,3].includes(baseVersion),'unsupported-recovery-profile');
+ const contract=baseVersion===3?storageExportV3Contract:storageExportV2Contract;
+ need(same(registry.map(row=>row.migration_id),forwardProfiles.slice(0,baseVersion).map(item=>item.id)),'unsupported-compact-migration-registry');
  for(const row of registry){
-  const pin=storageExportV2Contract.postgres_migrations.find(item=>item.path==='postgres/migrations/'+row.migration_id+'.sql');
+  const pin=contract.postgres_migrations.find(item=>item.path==='postgres/migrations/'+row.migration_id+'.sql');
   need(row.file_sha256===pin.sha256&&row.core_schema_sha256===storageExportV2Contract.postgres_migrations[0].sha256&&hash(row.source_snapshot_fingerprint)&&hash(row.base_guards_sha256)&&Number.isSafeInteger(row.applied_at)&&row.applied_at>0,'changed-compact-migration-registry');
   need(row.installed_contract_sha256===await recoveryForwardContract(query,row.migration_id),'registered-forward-contract-mismatch');
  }
 }
 
-/** Only the installed original profile or the reviewed current compact-only
- * base2 profile is supported. Retained-original/base3 need their own review. */
+/** Only the frozen original V2 or compact-only V4 over known V2/V3 is
+ * supported. Retained-original and unknown contracts remain refused. */
 export function recoveryProfileForMarker(marker){
  need(marker?.backend==='postgres'&&marker.read_only===true&&!marker.legacy_projection&&Number.isSafeInteger(marker.revision)&&marker.revision>=0,'unsupported-source-contract');
  let profile,identity;
@@ -55,11 +64,12 @@ export function recoveryProfileForMarker(marker){
  }else{
   need(marker.version===4,'unsupported-source-contract');
   checkedStorageV4Contract(marker.contract);
-  need(marker.contract.profile==='compact-only'&&marker.contract.base_contract.version===2,'unsupported-recovery-profile');
-  profile=compactRecoveryProfile;identity=v4MarkerIdentity;
+  need(marker.contract.profile==='compact-only'&&[2,3].includes(marker.contract.base_contract.version),'unsupported-recovery-profile');
+  profile=marker.contract.base_contract.version===3?compactRecoveryProfileV3:compactRecoveryProfile;identity=v4MarkerIdentity;
  }
  need(['fingerprint','catalog_sha256','geographic_releases_sha256','footprint_versions_sha256'].every(k=>hash(marker[k])),'incomplete-source-hashes');
- need(same(Object.keys(marker.counts??{}).sort(),[...storageExportV2Collections].sort())&&storageExportV2Collections.every(k=>Number.isSafeInteger(marker.counts[k])&&marker.counts[k]>=0),'incomplete-source-counts');
+ const collections=Object.keys(recoveryBaseContract(profile).definitions);
+ need(same(Object.keys(marker.counts??{}).sort(),[...collections].sort())&&collections.every(k=>Number.isSafeInteger(marker.counts[k])&&marker.counts[k]>=0),'incomplete-source-counts');
  need(sha(JSON.stringify(identity(marker)))===marker.fingerprint,'invalid-source-marker');
  return profile;
 }
@@ -77,10 +87,10 @@ export function compactPhysicalDigestSQL(table){
 
 /** Exact logical and private DDL/ACL pins precede any physical row scan. Native
  * ordered digests preserve raw JSON TEXT spelling, BYTEA and dictionary keys. */
-export async function readCompactRecoveryStorage(query){
+export async function readCompactRecoveryStorage(query,baseVersion=2){
  const db={dialect:'postgres',prepare:sql=>({all:async()=>({results:await query(sql)})})};
  const catalog=await compactMembershipCatalog(db);
- need(catalog.base_version===2&&catalog.profile==='compact-only','unsupported-recovery-profile');
+ need([2,3].includes(baseVersion)&&catalog.base_version===baseVersion&&catalog.profile==='compact-only','unsupported-recovery-profile');
  const physical={};
  for(const table of Object.keys(compactRecoveryTables)){
   const metrics=(await query(`SELECT count(*) rows,coalesce(max(octet_length(row_to_json(q)::text)),0) largest FROM (${compactPhysicalReadSQL(table)}) q`))[0];

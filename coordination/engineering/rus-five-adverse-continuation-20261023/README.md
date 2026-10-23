@@ -1,0 +1,14 @@
+# Five researched source conflicts in the original Russia package
+
+This packet proposes researched-unresolved outcomes for exactly five original mapped-land cells: one Sumy/Trubchevsky contact and four Luhansk contacts (two Tarasovsky, two Krasnosulinsky). It preserves all five original owner/interval/contact tuples, all native holds, and the full 2,566,967-cell denominator. It proposes zero repairs, zero owner changes, zero hold removals, and no whole-package completion. Root acceptance/accounting remains separate.
+
+The retained full-resolution RUS and UKR records directly conflict at these centers. Substantive primary research includes exact source identity/provenance, treaty text and map inspection, and targeted historical OSM relation/outer-member/node lineage. Those lineage details strengthen the source record but do not establish legal side or current authority. Distances are local diagnostics only. The Sumy relation-version-full request returned 404; the bounded historical Overpass query returned HTTP406 twice. Neither result is described as an access denial. No full historical multipolygon reconstruction was made, and the research assessment explicitly does not claim exhaustive search.
+
+For each key, the source-to-owner contradiction, map uncertainty and remaining limitation are in `research-assessment.json`; exact original tuples are in `exact-original-five-tuples.json`; proposed outcomes are in `proposed-disposition.json.gz`; source and independent-assessment bodies, hashes and ODbL notice are in the compressed retained records. The independent prior five-key assessment is included; an exact public-head review remains required. No new observer, geometry producer, native diagnostic or constructor was run.
+
+Original contract: [issue #2302](https://github.com/ChengshuLi/WorldAtlas/issues/2302). Earlier seven positive keys accepted in [PR #2715](https://github.com/ChengshuLi/WorldAtlas/pull/2715) are excluded. Four additional accepted RUS keys from PR #2695 are excluded. This packet does not dispose of other pending RUS contacts or companion scopes.
+
+
+## Follow-up evidence
+
+The bounded 2017 historical relation reconstruction and its effect on the five held outcomes are documented in [`historical-osm-relation-reconstruction-addendum.md`](historical-osm-relation-reconstruction-addendum.md). It supersedes the earlier statement that a bounded reconstruction remained unperformed; it does not change the five proposed dispositions or package denominator.

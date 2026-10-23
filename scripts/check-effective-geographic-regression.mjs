@@ -1,16 +1,20 @@
 // Trusted immutable data reader. Proposed project code is never imported.
 import fs from 'node:fs';
+import {isNativeSequence} from '../src/native-grid.js';
 import path from 'node:path';
-import {execFileSync,spawnSync} from 'node:child_process';
+import {execFileSync,spawnSync,spawn} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {gunzipSync} from 'node:zlib';
+import {gunzipSync,createGunzip} from 'node:zlib';
+import {Readable} from 'node:stream';
+import {pipeline} from 'node:stream/promises';
 import {fileURLToPath} from 'node:url';
 import {isDeepStrictEqual} from 'node:util';
 import {nativePolygonIntervals,NATIVE_GRID_METHOD} from '../src/native-grid.js';
 import {repairComponentKey,nativeOnlyComponent} from '../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../src/ownership-codec.js';
-import {readSelectedAdditive,selectedAdditiveRows,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {readSelectedAdditive,readSelectedAdditiveAcquired,selectedAdditiveRows,compareVersionedRepairLedgers,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {validateReferenceMetadataProjection} from './selected-reference-metadata.mjs';
+import {finalBankSelection,scientificNativeSelection} from '../src/reference-metadata.js';
 
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const demand=(v,m)=>{if(!v)throw Error(m);};
@@ -24,6 +28,9 @@ const freezeJson=value=>{if(value&&typeof value==='object'){Object.values(value)
 const installedRuntimes=new Map();
 const selectedSnapshots=new WeakMap();
 const sourceApplications=new WeakMap();
+// Share only authenticated immutable metadata within this real invocation.
+// Declared pins and whole-body checks remain fresh on every consumption.
+const originAcquisitions=new WeakMap();
 // Reuse only a graph whose complete encoded/decoded body was authenticated by
 // the original selected-base acquisition. Ordinary alias bytes are still read.
 export function selectedBaseAssetAlias(snapshot,role,pin) {
@@ -45,7 +52,7 @@ export function selectedGeometrySourceAlias(snapshot) {
   demand(accepted&&snapshot.reader===accepted.reader&&snapshot.reader.version===accepted.readerVersion&&snapshot.manifest===accepted.manifestObject&&snapshot.owners===accepted.ownerObject,'Require unchanged privately authenticated selected base');
   demand(accepted.selection===JSON.stringify(snapshot.selection)&&accepted.manifest===JSON.stringify(snapshot.manifest),'Selected source alias metadata drift');
   const resolver=accepted.geometrySources;
-  demand(snapshot.selection.selected_geography&&resolver&&snapshot.geometrySources===resolver
+  demand(scientificNativeSelection(snapshot.selection).selected_geography&&resolver&&snapshot.geometrySources===resolver
     &&resolver instanceof SelectedGeometrySources&&Object.isFrozen(resolver)
     &&resolver.snapshot===snapshot&&resolver.reader===snapshot.reader,'Foreign selected source view');
   demand(resolver.bank&&Object.isFrozen(resolver.bank)&&resolver.replacements instanceof Map
@@ -93,6 +100,80 @@ const STOCK_INDEX='b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7
 
 export class ImmutableReader {
   #trees = new Map();
+  #originDescriptors = new Map();
+  pinnedVersion(pin) {
+    try{this.git('--no-lazy-fetch','cat-file','-e',pin.commit+'^{commit}');return pin.commit;}catch{}
+    return this.#originDescriptors.has(pin.commit+':'+pin.path)?pin.commit:this.version;
+  }
+  // Transport supplies exact bytes and private native origin proof, never a
+  // scientific result. The evaluator subsequently performs its ordinary read.
+  async acquirePinned(pin,{execute=execFileSync}={}) {
+    demand(pin&&commit(pin.commit)&&safe(pin.path)&&['100644','100755'].includes(pin.mode)
+      &&commit(pin.git_blob_oid)&&Number.isSafeInteger(pin.bytes)&&pin.bytes>=0&&hash(pin.sha256),
+      'Incomplete immutable acquisition pin');
+    let known=true;try{this.git('--no-lazy-fetch','cat-file','-e',pin.commit+'^{commit}');}catch{known=false;}
+    const version=this.pinnedVersion(pin);
+    let failure;
+    try{const d=this.descriptor(pin.path,version);
+      demand(d.mode===pin.mode&&d.git_blob_oid===pin.git_blob_oid&&d.bytes===pin.bytes,'Source-target whole identity differs');return;
+    }catch(error){failure=error;}
+    const expected=`${pin.mode} blob ${pin.git_blob_oid}\t${pin.path}\0`;
+    let matching=false;try{matching=this.git('ls-tree','-z',known?pin.commit:this.version,'--',pin.path).toString()===expected;}catch{}
+    if(known&&!matching)throw failure; // A known original never falls back.
+    const session=await this.#acquisition({execute}),a=session.acquisition;
+    const original=!known&&!matching;
+    if(original)await a.resolvePath(pin.commit,pin.path);
+    const selected=known||original?pin.commit:this.version;
+    session.declarations.set(selected+':'+pin.path,pin);
+    const row=await a.descriptor(selected,pin.path,pin);a.acquire([row]);a.body(row);
+    if(original)this.#originDescriptors.set(pin.commit+':'+pin.path,
+      {commit:pin.commit,path:pin.path,mode:pin.mode,git_blob_oid:pin.git_blob_oid,bytes:pin.bytes});
+  }
+  async #acquisition({execute=execFileSync}={}) {
+    const {createAcquisition}=await import('./geography-prefetch.mjs');
+    const repo=fs.realpathSync(this.repo),gitExecPath=fs.realpathSync(execFileSync(this.gitExecutable,['--exec-path']).toString().trim()),
+      token=process.env.GH_TOKEN;
+    let sessions=originAcquisitions.get(this.invocation);
+    if(!sessions)originAcquisitions.set(this.invocation,sessions=[]);
+    const previous=sessions.find(s=>s.repo===repo&&s.gitExecutable===this.gitExecutable
+      &&s.gitExecPath===gitExecPath&&s.execute===execute&&s.token===token);
+    if(previous)return previous;
+    const declarations=new Map();
+    const acquisition=createAcquisition({repo,token,
+      loadDescriptor:(version,name)=>{const p=declarations.get(version+':'+name);
+        demand(p,'Foreign immutable acquisition path');return {type:'blob',mode:p.mode,sha:p.git_blob_oid,size:p.bytes};},
+      execute:(command,args,options)=>{demand(command==='git','Foreign immutable acquisition executable');
+        return execute(this.gitExecutable,args,{...options,env:{...options.env,GIT_EXEC_PATH:gitExecPath}});}});
+    const session={repo,gitExecutable:this.gitExecutable,gitExecPath,execute,token,declarations,acquisition};
+    sessions.push(session);return session;
+  }
+  // Historical executed-code rows issue path/bytes/SHA, not a current alias.
+  // Authenticate the complete actual path group in one private origin session;
+  // no commit/tree is imported into this reader's repository or public inventory.
+  async acquireOriginalPaths(pins,options={}) {
+    demand(Array.isArray(pins)&&new Set(pins.map(p=>p?.commit+':'+p?.path)).size===pins.length,
+      'Require unique original path group');
+    const missing=[];
+    for(const p of pins){
+      demand(p&&commit(p.commit)&&safe(p.path)&&Number.isSafeInteger(p.bytes)&&p.bytes>=0&&hash(p.sha256),
+        'Incomplete original path identity');
+      let known=true;try{this.git('--no-lazy-fetch','cat-file','-e',p.commit+'^{commit}');}catch{known=false;}
+      if(known||this.#originDescriptors.has(p.commit+':'+p.path)){
+        // A known original with an absent/wrong tree never uses current bytes.
+        const d=this.descriptor(p.path,p.commit);demand(d.bytes===p.bytes,'Original path whole size differs');
+      }else missing.push(p);
+    }
+    if(!missing.length)return;
+    const proofs=new Map(),session=await this.#acquisition(options),a=session.acquisition;
+    const rows=[];
+    for(const p of missing){
+      const origin=await a.resolvePath(p.commit,p.path),q={...p,mode:origin.mode,git_blob_oid:origin.git_blob_oid};
+      proofs.set(p.commit+':'+p.path,q);session.declarations.set(p.commit+':'+p.path,q);rows.push(await a.descriptor(p.commit,p.path,q));
+    }
+    a.acquire(rows);for(const row of rows)a.body(row);
+    for(const q of proofs.values())this.#originDescriptors.set(q.commit+':'+q.path,
+      {commit:q.commit,path:q.path,mode:q.mode,git_blob_oid:q.git_blob_oid,bytes:q.bytes});
+  }
   constructor(repo,version,{gitExecutable='git',invocation}={}) {
     demand(commit(version),'Require immutable input commit');
     this.repo=repo;this.version=version;this.gitExecutable=gitExecutable;
@@ -104,10 +185,10 @@ export class ImmutableReader {
       const pin=[...this.inventory.values()].find(p=>p.git_blob_oid===args[2]);
       demand(pin,'Missing immutable whole-body descriptor');options.maxBuffer=pin.bytes+1;
     }
-    return execFileSync(this.gitExecutable,['-c','core.hooksPath=/dev/null','-C',this.repo,...args],options);
+    return execFileSync(this.gitExecutable,['--no-replace-objects',...(args[0]==='ls-tree'||args[0]==='--literal-pathspecs'&&args[1]==='ls-tree'?['--no-lazy-fetch']:[]),'-c','core.hooksPath=/dev/null','-C',this.repo,...args],options);
   }
   gitBatch(args,input,maxBuffer) {
-    const result=spawnSync(this.gitExecutable,['-c','core.hooksPath=/dev/null','-C',this.repo,...args],
+    const result=spawnSync(this.gitExecutable,['--no-replace-objects','-c','core.hooksPath=/dev/null','-C',this.repo,...args],
       {input,maxBuffer,stdio:['pipe','pipe','inherit']});
     if(result.error)throw result.error;
     demand(result.status===0,'Incomplete immutable Git batch');
@@ -225,7 +306,16 @@ export class ImmutableReader {
   }
   descriptor(name,version=this.version) {
     demand(safe(name)&&commit(version),'Unsafe immutable path/commit');
-    const key=version+':'+name,previous=this.inventory.get(key);
+    const key=version+':'+name,original=this.#originDescriptors.get(key);
+    if(original){
+      let present=true;try{this.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{present=false;}
+      if(!present){const pin=this.inventory.get(key);
+        if(pin&&['commit','path','mode','git_blob_oid','bytes'].every(field=>pin[field]===original[field]))return pin;
+        const copy={...original};this.inventory.set(key,copy);return copy;}
+      // A subsequently available origin must pass its own actual path again.
+      this.#originDescriptors.delete(key);this.inventory.delete(key);
+    }
+    const previous=this.inventory.get(key);
     if(previous)return previous;
     const row=this.git('ls-tree','-z',version,'--',name).toString();
     demand(/^100(644|755) blob [a-f0-9]{40}\t/.test(row)&&row.slice(row.indexOf('\t')+1)===name+'\0','Require whole ordinary Git input: '+name);
@@ -242,6 +332,26 @@ export class ImmutableReader {
     demand(!expected||actualSha===expected,'Whole immutable input differs: '+name);
     pin.sha256=actualSha;pin.whole_body_consumed=true;
     return body;
+  }
+  // Stream one exact immutable blob. A consumer must reach EOF; partial reads
+  // never acquire a whole-body custody mark. Hash and child exit are both gates.
+  async *stream(name,{version=this.version,expected}={}) {
+    const pin=this.descriptor(name,version);
+    const child=spawn(this.gitExecutable,['--no-replace-objects','-c','core.hooksPath=/dev/null','-C',this.repo,'cat-file','blob',pin.git_blob_oid],
+      {stdio:['ignore','pipe','inherit']});
+    let failed,complete=false,bytes=0;
+    const exited=new Promise(resolve=>{child.once('error',error=>{failed=error;resolve(null);});child.once('close',resolve);});
+    const hasher=createHash('sha256');
+    try {
+      for await(const chunk of child.stdout){
+        bytes+=chunk.length;demand(bytes<=pin.bytes,'Whole immutable input exceeds descriptor: '+name);
+        hasher.update(chunk);yield chunk;
+      }
+      const status=await exited;if(failed)throw failed;
+      demand(status===0&&bytes===pin.bytes,'Incomplete immutable streamed input: '+name);
+      const actual=hasher.digest('hex');demand(!expected||actual===expected,'Whole immutable input differs: '+name);
+      pin.sha256=actual;pin.whole_body_consumed=true;complete=true;
+    }finally{if(!complete){child.kill();await exited;}}
   }
   json(name,options){return JSON.parse(this.read(name,options));}
 }
@@ -312,6 +422,40 @@ export class NativeAssetImage {
       }demand(offset===this.index.whole_bytes,'Native transport omitted complete bytes');
     }
   }
+  async *logicalStream(name,pin) {
+    demand(name===path.posix.join(this.nativeRoot,pin.path),'Foreign selected native logical path');
+    const member=this.index.files.find(p=>p.path===pin.path);
+    demand(member&&member.bytes===pin.bytes&&member.sha256===pin.sha256,'Selected native asset differs from manifest-bound whole member');
+    const hasher=createHash('sha256');let bytes=0;
+    for(const p of this.index.parts){
+      if(!(p.offset<member.offset+member.bytes&&member.offset<p.offset+p.decoded_bytes))continue;
+      let decoded=0,encoded=0;const whole=createHash('sha256'),reader=this.reader,directory=this.directory;
+      async function* source(){for await(const chunk of reader.stream(path.posix.join(directory,p.path),{expected:p.sha256})){encoded+=chunk.length;yield chunk;}}
+      const input=Readable.from(source()),stream=createGunzip();
+      // Observe failure immediately, including cancellation while the consumer is
+      // suspended at a yield. Join the entire producer before returning to it.
+      const settled=pipeline(input,stream).then(()=>null,error=>error);
+      let consumed=false;
+      try{
+        for await(const raw of stream){
+          const offset=decoded;decoded+=raw.length;
+          demand(decoded<=p.decoded_bytes,'Native fragment decoded size exceeds pin');whole.update(raw);
+          const start=Math.max(member.offset,p.offset+offset),end=Math.min(member.offset+member.bytes,p.offset+decoded);
+          if(start<end){const chunk=raw.subarray(start-p.offset-offset,end-p.offset-offset);bytes+=chunk.length;hasher.update(chunk);yield chunk;}
+        }
+        consumed=true;
+      }finally{
+        if(!consumed){input.destroy();stream.destroy();}
+        const failure=await settled;
+        if(consumed&&failure)throw failure;
+      }
+      // Consume the suffix outside this member too. Its hash still authenticates
+      // the entire containing fragment, even when no more member bytes are due.
+      demand(encoded===p.bytes&&decoded===p.decoded_bytes&&whole.digest('hex')===p.decoded_sha256,
+        'Whole native fragment decoded body differs');
+    }
+    demand(bytes===member.bytes&&hasher.digest('hex')===member.sha256,'Whole native member changed');
+  }
   logical(name,pin) {
     demand(name===path.posix.join(this.nativeRoot,pin.path),'Foreign selected native logical path');
     const member=this.index.files.find(p=>p.path===pin.path);
@@ -327,19 +471,27 @@ export class NativeAssetImage {
 // Resolve the selected continuous source independently of raw Git target bytes.
 // The accepted v8 bank replaces part29 while the same raw Git path remains the
 // historical original. Logical inverse provenance stays distinct from Git pins.
+export function readSelectedGeometryBank(reader,selection) {
+  selection=scientificNativeSelection(selection);
+  const declared=selection.selected_geography;
+  demand(declared.version===1&&declared.kind==='complete-world-index-with-exact-encoded-overrides'&&same(Object.keys(declared).sort(),['bytes','kind','path','sha256','version'])&&safe(declared.path)&&hash(declared.sha256)&&Number.isSafeInteger(declared.bytes)&&declared.bytes>0,'Unsupported explicit selected geometry bank');
+  const pin=reader.descriptor(declared.path);demand(pin.bytes===declared.bytes,'Selected source map size differs');
+  const bank=reader.json(declared.path,{expected:declared.sha256});
+  demand(bank.version===1&&bank.kind===declared.kind&&bank.release_id===selection.release_id&&bank.native_manifest_sha256===selection.sha256&&hash(bank.footprints_sha256),'Selected source/native/release binding differs');
+  return bank;
+}
+
 export class SelectedGeometrySources {
   constructor(snapshot) {
     demand(selectedSnapshots.has(snapshot)&&snapshot?.reader instanceof ImmutableReader,'Require authenticated selected snapshot');
     this.reader=snapshot.reader;this.snapshot=snapshot;
     const accepted=selectedSnapshots.get(snapshot);demand(accepted.selection===JSON.stringify(snapshot.selection)&&accepted.manifest===JSON.stringify(snapshot.manifest),'Selected snapshot metadata drift');
-    const declared=snapshot.selection.selected_geography;
+    const native=scientificNativeSelection(snapshot.selection);
+    const declared=native.selected_geography;
     if(declared){
-      demand(declared.version===1&&declared.kind==='complete-world-index-with-exact-encoded-overrides'&&same(Object.keys(declared).sort(),['bytes','kind','path','sha256','version'])&&safe(declared.path)&&hash(declared.sha256)&&Number.isSafeInteger(declared.bytes)&&declared.bytes>0,'Unsupported explicit selected geometry bank');
-      const pin=this.reader.descriptor(declared.path);demand(pin.bytes===declared.bytes,'Selected source map size differs');
-      this.bank=this.reader.json(declared.path,{expected:declared.sha256});
-      demand(this.bank.version===1&&this.bank.kind===declared.kind&&this.bank.release_id===snapshot.selection.release_id&&this.bank.native_manifest_sha256===snapshot.selection.sha256&&hash(this.bank.footprints_sha256),'Selected source/native/release binding differs');
+      this.bank=readSelectedGeometryBank(this.reader,snapshot.selection);
     }else{
-      demand(snapshot.selection.manifest_path==='data/canonical-grid/eastern-v8/manifest.json','Selected continuous source transport unsupported; explicit release binding required');
+      demand(native.manifest_path==='data/canonical-grid/eastern-v8/manifest.json','Selected continuous source transport unsupported; explicit release binding required');
       this.image=snapshot.image instanceof StockImage?snapshot.image:new StockImage(this.reader);
     }
     const pointer=this.reader.json('data/geographic-releases/current-manifest.json');
@@ -349,7 +501,7 @@ export class SelectedGeometrySources {
     const release=JSON.parse(ordinaryGzip(encoded));
     const entries=release.releases;
     demand(Array.isArray(entries)&&entries.length>0&&new Set(entries.map(r=>r.id)).size===entries.length,'Incomplete selected release roster');
-    this.nativeRelease=entries.find(r=>r.id===snapshot.selection.release_id);
+    this.nativeRelease=entries.find(r=>r.id===native.release_id);
     this.release=entries.at(-1);
     demand(this.nativeRelease&&hash(this.nativeRelease.footprints_sha256)
       &&(snapshot.selection.reference_projection||this.nativeRelease===this.release),
@@ -382,7 +534,7 @@ export class SelectedGeometrySources {
         demand(same(Object.fromEntries(['id','footprints_sha256','hierarchy_sha256'].map(key=>[key,this.release[key]])),applied.reference),
           'Current reference metadata differs from the actual latest release');
         const migrationPins=new Set(Object.values(this.release.metadata?.metadata_migration_sha256??{}));
-        demand(projection.receipts.every(pin=>migrationPins.has(pin.sha256)),
+        demand(applied.releaseReceipts.every(pin=>migrationPins.has(pin.sha256)),
           'Current reference release does not bind every applied metadata receipt');
         const hierarchy=this.reader.descriptor('data/hierarchy.json');
         demand(projection.hierarchy.after.path==='data/hierarchy.json'&&projection.hierarchy.after.encoding===undefined
@@ -606,18 +758,42 @@ export function readArtifactConsumption(reader,selection,manifest) {
     scope:'Once-qualified immutable artifact provenance only. This gate independently consumes actual selected native/source products; no source authority, activation or production approval.'});
 }
 
-function loadBaseSelection(reader) {
+function readOwnershipSelection(reader) {
   const has=reader.git('ls-tree','-z',reader.version,'--','data/ownership-selection.json').length;
   if(!has)return null;
   const selection=reader.json('data/ownership-selection.json');
+  if(selection.version===2){finalBankSelection(selection);return selection;}
   const selectionKeys=['manifest_path','method','release_id','sha256','version',...(selection.selected_geography?['selected_geography']:[]),...(Object.hasOwn(selection,'additive_release')?['additive_release']:[]),...(Object.hasOwn(selection,'artifact_consumption')?['artifact_consumption']:[]),...(Object.hasOwn(selection,'reference_projection')?['reference_projection']:[])].sort();
   demand(same(Object.keys(selection).sort(),selectionKeys),'Unsupported committed additive/ownership selection; no proposal scanning');
   demand(selection.version===1&&selection.method==='native-linear-evenodd-first-owner-v1'&&safe(selection.manifest_path)&&hash(selection.sha256),'Unsupported ownership selection');
   demand(selection.reference_projection===undefined||selection.selected_geography,
     'Reference metadata application requires the explicit selected source bank');
-  const manifest=reader.json(selection.manifest_path,{expected:selection.sha256});validateParts(manifest);
-  const artifactConsumption=readArtifactConsumption(reader,selection,manifest);
-  demand(selection.release_id===manifest.geographic_release,'Selected reference differs from native bank');
+  return selection;
+}
+
+// Negative ancestry may cross provider stages only when the WHOLE consumed
+// lineage already exists in the independently registered selected source origin.
+// Candidate ancestry and caller-supplied origins cannot establish this binding.
+export function requireSelectedOriginLineage(reader,pin) {
+  const current=readOwnershipSelection(reader),selection=current&&scientificNativeSelection(current);
+  demand(selection?.artifact_consumption&&pin?.path==='data/semantic-report.json',
+    'Complex source intermediate provenance differs: missing registered selected origin');
+  const manifest=reader.json(selection.manifest_path,{expected:selection.sha256});
+  demand(readArtifactConsumption(reader,selection,manifest),'Missing independent selected origin authority');
+  const bank=readSelectedGeometryBank(reader,selection),origin=bank.world_index;
+  demand(commit(origin?.commit)&&origin.path==='data/world-index.json','Invalid selected source origin');
+  const actual=reader.descriptor(pin.path,origin.commit);
+  demand(actual.mode===pin.mode&&actual.git_blob_oid===pin.git_blob_oid&&actual.bytes===pin.bytes,
+    'Complex source lineage differs from independently selected origin');
+  reader.read(pin.path,{version:origin.commit,expected:pin.sha256});
+}
+
+function loadBaseSelection(reader) {
+  const selection=readOwnershipSelection(reader);if(!selection)return null;
+  const native=scientificNativeSelection(selection);
+  const manifest=reader.json(native.manifest_path,{expected:native.sha256});validateParts(manifest);
+  const artifactConsumption=readArtifactConsumption(reader,native,manifest);
+  demand(native.release_id===manifest.geographic_release,'Selected reference differs from native bank');
   const bounds=manifest.original_assets?.bounds;
   demand(bounds?.role==='original-identity-parent-camera-context'&&commit(bounds.commit)&&bounds.path==='data/canonical-grid/bounds.json.gz'&&bounds.sha256===manifest.bounds?.sha256,'Missing independent original native owner roster');
   const rawBounds=reader.read(bounds.path,{version:bounds.commit,expected:bounds.sha256});
@@ -625,7 +801,7 @@ function loadBaseSelection(reader) {
   const owners=JSON.parse(decoded),ids=new Set();
   demand(Array.isArray(owners)&&owners.length>0&&owners.every((p,i)=>p.index===i+1&&typeof p.id==='string'&&p.id.length>0&&!ids.has(p.id)&&ids.add(p.id)),'Incomplete/duplicate stable native owner roster');
   const registry=reader.json('scripts/native-ownership/verified-candidates.json');
-  const proof=registry.candidates?.[selection.sha256];
+  const proof=registry.candidates?.[native.sha256];
   demand(registry.version===1&&proof?.role==='reviewed-exhaustive-native-rule-comparison'&&proof.installation_approval===false&&commit(proof.commit)&&safe(proof.path)&&hash(proof.sha256),'Missing registered complete native comparison');
   let proofVersion=proof.commit;
   // Squash merges may omit the original producer commit from a clean clone.
@@ -636,35 +812,40 @@ function loadBaseSelection(reader) {
   const receiptProvenance={registered_origin:{commit:proof.commit,path:proof.path,sha256:proof.sha256},consumed:{...reader.inventory.get(proofVersion+':'+proof.path)},whole_body_alias:proofVersion!==proof.commit};
   demand(receipt.method===manifest.method&&receipt.baseline_commit===manifest.provenance?.baseline_commit&&receipt.preparation_commit===manifest.provenance?.evaluation_commit&&receipt.owned_cells===manifest.accounting?.owned_cells&&receipt.owners===manifest.accounting?.owners&&receipt.checked_rows===manifest.size&&receipt.checked_cells===manifest.size**2&&receipt.unchecked_cells===0&&receipt.checked_runs*2===manifest.runWords&&receipt.installation_ready===false,'Native registered comparison differs');
   const products=receipt.products;
-  demand(Array.isArray(products)&&products.length>0&&products.every(p=>safe(p.path)&&hash(p.sha256)&&Number.isSafeInteger(p.bytes)&&p.bytes>=0)&&new Set(products.map(p=>p.path)).size===products.length&&receipt.two_run_products===products.length&&receipt.run_one_sha256===sha(Buffer.from(JSON.stringify(products)))&&receipt.run_two_sha256===receipt.run_one_sha256&&products.find(p=>p.path==='manifest.json')?.sha256===selection.sha256,'Incomplete two-run native comparison');
+  demand(Array.isArray(products)&&products.length>0&&products.every(p=>safe(p.path)&&hash(p.sha256)&&Number.isSafeInteger(p.bytes)&&p.bytes>=0)&&new Set(products.map(p=>p.path)).size===products.length&&receipt.two_run_products===products.length&&receipt.run_one_sha256===sha(Buffer.from(JSON.stringify(products)))&&receipt.run_two_sha256===receipt.run_one_sha256&&products.find(p=>p.path==='manifest.json')?.sha256===native.sha256,'Incomplete two-run native comparison');
   demand(products.filter(p=>p.path.startsWith('native-v1/ownership/')).length===manifest.parts.length,'Comparison contains foreign/missing native assets');
   for(const part of manifest.parts)demand(products.some(p=>p.path===part.path&&p.sha256===part.sha256&&p.bytes===part.bytes),'Comparison omitted selected native asset');
-  let image=manifest.native_asset_transport?new NativeAssetImage(reader,manifest,selection.manifest_path):undefined;
-  for(const part of manifest.parts){const name=path.posix.join(path.posix.dirname(selection.manifest_path),part.path);
+  let image=manifest.native_asset_transport?new NativeAssetImage(reader,manifest,native.manifest_path):undefined;
+  for(const part of manifest.parts){const name=path.posix.join(path.posix.dirname(native.manifest_path),part.path);
     if(reader.git('ls-tree','-z',reader.version,'--',name).length)reader.descriptor(name);
-    else{if(image instanceof NativeAssetImage){demand(image.index.files.some(p=>p.path===part.path&&p.bytes===part.bytes&&p.sha256===part.sha256),'Missing selected native transport asset');}else{demand(selection.manifest_path==='data/canonical-grid/eastern-v8/manifest.json','Missing selected ordinary bank asset');image??=new StockImage(reader);const target=image.map.logical_targets.find(p=>p.target===name);demand(target&&target.bytes===part.bytes&&target.sha256===part.sha256,'Selected native asset absent from complete bank');}}}
+    else{if(image instanceof NativeAssetImage){demand(image.index.files.some(p=>p.path===part.path&&p.bytes===part.bytes&&p.sha256===part.sha256),'Missing selected native transport asset');}else{demand(native.manifest_path==='data/canonical-grid/eastern-v8/manifest.json','Missing selected ordinary bank asset');image??=new StockImage(reader);const target=image.map.logical_targets.find(p=>p.target===name);demand(target&&target.bytes===part.bytes&&target.sha256===part.sha256,'Selected native asset absent from complete bank');}}}
   if(image instanceof StockImage)for(const part of image.index.parts){const actual=reader.descriptor(NS+'/'+part.path);demand(actual.bytes===part.bytes,'Whole selected container length differs');}
   const snapshot={selection,manifest,owners,image,receiptProvenance,artifactConsumption,reader};
   freezeJson(manifest);freezeJson(owners);
   selectedSnapshots.set(snapshot,{selection:JSON.stringify(selection),manifest:JSON.stringify(manifest),reader,readerVersion:reader.version,manifestObject:manifest,ownerObject:owners,assets:{
-    base_manifest:{mode:reader.inventory.get(reader.version+':'+selection.manifest_path).mode,bytes:reader.inventory.get(reader.version+':'+selection.manifest_path).bytes,sha256:selection.sha256},
+    base_manifest:{mode:reader.inventory.get(reader.version+':'+native.manifest_path).mode,bytes:reader.inventory.get(reader.version+':'+native.manifest_path).bytes,sha256:native.sha256},
     owner_roster:{mode:reader.inventory.get(bounds.commit+':'+bounds.path).mode,bytes:rawBounds.length,sha256:sha(rawBounds),decoded_bytes:decoded.length,decoded_sha256:sha(decoded)}
   }});
-  if(selection.selected_geography){snapshot.geometrySources=new SelectedGeometrySources(snapshot);Object.assign(selectedSnapshots.get(snapshot),{
+  if(native.selected_geography){snapshot.geometrySources=new SelectedGeometrySources(snapshot);Object.assign(selectedSnapshots.get(snapshot),{
     geometrySources:snapshot.geometrySources,referenceOwners:snapshot.geometrySources.referenceOwners,
     metadataProjection:snapshot.geometrySources.metadataProjection});}
   return snapshot;
 }
 
-export function loadSelection(reader) {
+function beginSelection(reader) {
   const snapshot=loadBaseSelection(reader);if(!snapshot)return null;
-  const basePhase={kind:'complete-selected-base-acquisition-v1',inputs:structuredClone(consumedInputs(reader))};
-  snapshot.acquisitionPhases=[basePhase];
-  if(snapshot.selection.additive_release!==undefined){
-    snapshot.additive=readSelectedAdditive(snapshot);
-    snapshot.acquisitionPhases.push({kind:'complete-selected-additive-acquisition-v1',inputs:structuredClone(consumedInputs(reader))});
-  }else snapshot.additive=null;
+  snapshot.acquisitionPhases=[{kind:'complete-selected-base-acquisition-v1',inputs:structuredClone(consumedInputs(reader))}];return snapshot;
+}
+function finishSelection(snapshot,additive) {
+  snapshot.additive=additive;
+  if(snapshot.selection.additive_release!==undefined)snapshot.acquisitionPhases.push({kind:'complete-selected-additive-acquisition-v1',inputs:structuredClone(consumedInputs(snapshot.reader))});
   freezeJson(snapshot.acquisitionPhases);freezeJson(snapshot.selection);freezeJson(snapshot.manifest);freezeJson(snapshot.owners);return Object.freeze(snapshot);
+}
+export function loadSelection(reader) {
+  const snapshot=beginSelection(reader);return snapshot?finishSelection(snapshot,readSelectedAdditive(snapshot)):null;
+}
+async function loadSelectionAcquired(reader) {
+  const snapshot=beginSelection(reader);return snapshot?finishSelection(snapshot,await readSelectedAdditiveAcquired(snapshot)):null;
 }
 
 function asset(snapshot,pin) {
@@ -704,7 +885,7 @@ function sidePlan(snapshot,table,rows) {
   for(const pin of pins){
     const memberInputs=new Map();
     demand(Number.isSafeInteger(pin.decoded_bytes)&&pin.decoded_bytes>0,'Invalid whole decoded native member size');
-    const name=path.posix.join(path.posix.dirname(snapshot.selection.manifest_path),pin.path),reader=snapshot.reader;
+    const name=path.posix.join(path.posix.dirname(scientificNativeSelection(snapshot.selection).manifest_path),pin.path),reader=snapshot.reader;
     if(reader.git('ls-tree','-z',reader.version,'--',name).length){
       const d=reader.descriptor(name);demand(d.bytes===pin.bytes,'Whole immutable input differs (native size)');inputs.set(d.commit+':'+d.path,{pin:d});memberInputs.set(d.commit+':'+d.path,{pin:d});
     }else{
@@ -749,7 +930,7 @@ export function acquireNativeRows(snapshot,table,rows,options={}) {
   for(let k=0;k<rows.length;k++)demand(counts[k]===table[rows[k]*2+1],'Incomplete projected native row');
   demand(at===words.length,'Incomplete native row projection');
   const digest=projectionSha({rows:indices,offsets,words});
-  const product={rows:indices,offsets,words,custody:{selection:snapshot.selection.sha256,rows:plan.rows,whole_parts:plan.pins,whole_inputs:plan.inputs.map(p=>p.pin),member_phases:memberPhases}};
+  const product={rows:indices,offsets,words,custody:{selection:scientificNativeSelection(snapshot.selection).sha256,rows:plan.rows,whole_parts:plan.pins,whole_inputs:plan.inputs.map(p=>p.pin),member_phases:memberPhases}};
   nativeProjections.set(product,{snapshot,digest,custody:JSON.stringify(product.custody)});return product;
 }
 export function validateNativeRowCarry(product,snapshot,rows) {
@@ -773,17 +954,26 @@ export function compareRepairLedgers(before,after) {
 export function compareIntervals(before,after,{row,ownersBefore,ownersAfter}) {
   const validate=(runs,owners)=>{let end=0;for(const r of runs){demand(Array.isArray(r)&&r.length===3&&r.every(Number.isSafeInteger)&&r[0]>=end&&r[1]>r[0]&&r[2]>0&&owners[r[2]-1],'Invalid complete owner interval');end=r[1];}};
   validate(before,ownersBefore);validate(after,ownersAfter);
-  const losses=[];let j=0;
-  for(const [start,end,owner]of before){let at=start;while(j<after.length&&after[j][1]<=at)j++;let k=j;while(at<end){const next=after[k];const stop=Math.min(end,next?(next[0]>at?next[0]:next[1]):end);demand(stop>at,'Nonadvancing owner interval');const actual=next&&next[0]<=at?ownersAfter[next[2]-1].id:null,expected=ownersBefore[owner-1].id;if(actual!==expected)losses.push({row,start:at,end:stop,previous_owner:expected,candidate_owner:actual});at=stop;if(next&&at>=next[1])k++;}}
+  const losses=[],iterator=after[Symbol.iterator]();let current=iterator.next();
+  try{for(const [start,end,owner]of before){
+    let at=start;
+    while(!current.done&&current.value[1]<=at)current=iterator.next();
+    while(at<end){
+      const next=current.done?null:current.value;
+      const stop=Math.min(end,next?(next[0]>at?next[0]:next[1]):end);
+      demand(stop>at,'Nonadvancing owner interval');
+      const actual=next&&next[0]<=at?ownersAfter[next[2]-1].id:null,expected=ownersBefore[owner-1].id;
+      if(actual!==expected)losses.push({row,start:at,end:stop,previous_owner:expected,candidate_owner:actual});
+      at=stop;if(next&&at>=next[1])current=iterator.next();
+    }
+  }}finally{iterator.return?.();}
   return losses;
 }
 
 // Eligibility belongs to the actual selected ownership validator. Keep one
 // implementation here, also exported for bounded inventory screening.
 // It only validates proposed repairs and does not change native compilation.
-const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'
-  ?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
-export const visibilityDigest=value=>sha(Buffer.from(JSON.stringify(canonical(value))+'\n'));
+export const visibilityDigest=value=>valueSha(value);
 export const VISIBILITY_METHOD='current-native-unassigned-cell-witness-v1';
 
 export function decodeVisibilityLatitudes(encoded,pin,size) {
@@ -795,7 +985,7 @@ export function decodeVisibilityLatitudes(encoded,pin,size) {
 }
 
 function indexCandidates(candidates) {
-  demand(Array.isArray(candidates)&&candidates.length<=4096,'Bounded visibility candidate roster required');
+  demand(Array.isArray(candidates),'Visibility candidate roster required');
   const ids=new Set();
   return candidates.map((candidate,i)=>{
     demand(typeof candidate.component_id==='string'&&!ids.has(repairComponentKey(candidate)),'Duplicate/missing visibility component');
@@ -816,10 +1006,23 @@ function indexCandidates(candidates) {
     return {index:i+1,polygons,bounds,vertices,candidate,geometry_sha256:digest};
   });
 }
+function* visibilityCandidateBatches(candidates) {
+  let batch=[],coordinates=0;
+  for(const candidate of candidates){
+    if(candidate.representation==='native-cells')continue;
+    const geometry=candidate.geometry,polygons=geometry?.type==='Polygon'?[geometry.coordinates]:geometry?.coordinates;
+    // Validation remains in indexCandidates. Count existing coordinate slots
+    // without serializing or copying the original geometry.
+    const size=Array.isArray(polygons)?polygons.reduce((n,p)=>n+(Array.isArray(p)?p.reduce((m,r)=>m+(Array.isArray(r)?r.length*2:0),0):0),0):0;
+    if(batch.length&&coordinates+size>65536){yield batch;batch=[];coordinates=0;}
+    batch.push(candidate);coordinates+=size;
+  }
+  if(batch.length)yield batch;
+}
 function ownerRows(rows,size) {
   const result=new Map();let previous=-1;
   for(const row of rows){
-    demand(Number.isInteger(row.y)&&row.y>previous&&row.y>=0&&row.y<size&&Array.isArray(row.runs),'Incomplete/unordered visibility owner row');
+    demand(Number.isInteger(row.y)&&row.y>previous&&row.y>=0&&row.y<size&&isNativeSequence(row.runs),'Incomplete/unordered visibility owner row');
     previous=row.y;let end=0;
     for(const run of row.runs){
       demand(run.length===3&&run.every(Number.isSafeInteger)&&run[0]>=end&&run[1]>run[0]
@@ -829,15 +1032,16 @@ function ownerRows(rows,size) {
   }
   return result;
 }
-function emptySpans(start,end,owned) {
-  const result=[];let at=start;
+function* emptySpans(start,end,owned) {
+  let at=start;
   for(const [left,right]of owned){
     if(right<=at)continue;if(left>=end)break;
-    if(left>at)result.push([at,Math.min(left,end)]);
+    if(left>at)yield [at,Math.min(left,end)];
     at=Math.max(at,right);if(at>=end)break;
   }
-  if(at<end)result.push([at,end]);return result;
+  if(at<end)yield [at,end];
 }
+function findInterval(runs,predicate){for(const run of runs)if(predicate(run))return run;}
 function firstAtOrBelow(latitudes,value) {
   let lo=0,hi=latitudes.length;
   while(lo<hi){const mid=Math.floor((lo+hi)/2);if(latitudes[mid]>value)lo=mid+1;else hi=mid;}
@@ -854,7 +1058,21 @@ function mergeSpans(spans) {
 
 // Group candidates sharing one <=4096-row block to amortize latitude validation.
 // Archived representative cells may choose this block; failure never proves zero.
-export function screenNativeGapCandidates({candidates,size,latitudes,rows,rowStart,rowEnd,selection}) {
+export function screenNativeGapCandidates(options) {
+  const {candidates}=options;
+  demand(Array.isArray(candidates),'Visibility candidate roster required');
+  const ids=new Set();
+  for(const candidate of candidates){
+    const key=repairComponentKey(candidate);
+    demand(typeof candidate.component_id==='string'&&!ids.has(key),'Duplicate/missing visibility component');ids.add(key);
+    demand(['Polygon','MultiPolygon'].includes(candidate.geometry?.type),'Visibility requires the exact polygon primitive');
+  }
+  if(!candidates.length)return screenNativeGapBatch(options);
+  const result=[];
+  for(const batch of visibilityCandidateBatches(candidates))result.push(...screenNativeGapBatch({...options,candidates:batch}));
+  return result;
+}
+function screenNativeGapBatch({candidates,size,latitudes,rows,rowStart,rowEnd,selection}) {
   demand(selection&&/^[a-f0-9]{64}$/.test(selection.current_selection_sha256)
     &&/^[a-f0-9]{64}$/.test(selection.patch_sha256),'Current effective selection binding required');
   const index=indexCandidates(candidates),owned=ownerRows(rows,size);
@@ -899,23 +1117,21 @@ export function screenNativeGapCandidates({candidates,size,latitudes,rows,rowSta
 // checkpoint traversal and unchanged accepted zero-cell primitives remain valid.
 export function newVisibleRepairCandidates(before,after) {
   const old=new Set(before.map(repairComponentKey)),seen=new Set();
-  const added=[];
   for(const row of after){
     demand(!seen.has(repairComponentKey(row)),'Duplicate candidate repair component');seen.add(repairComponentKey(row));
     if(old.has(repairComponentKey(row)))continue;
     if(!['assigned','zero-cell'].includes(row.disposition))continue;
     demand(row.disposition==='assigned'&&Number.isSafeInteger(row.native_cells)&&row.native_cells>0,
       'New gap repair must change map cells: '+row.component_id);
-    added.push(row);
   }
-  return added;
+  return after.filter(row=>!old.has(repairComponentKey(row))&&['assigned','zero-cell'].includes(row.disposition));
 }
 
 // Every observed row is a complete actual before/after owner row. Find a literal
 // native sample inside each new primitive that changes from unowned to its owner.
 // A positive aggregate or a sibling's unrelated changed cell cannot pass.
 export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,afterRows}) {
-  demand(Array.isArray(candidates),'Visibility candidate array required');
+  demand(isNativeSequence(candidates),'Visibility candidate array required');
   const before=ownerRows(beforeRows,size),after=ownerRows(afterRows,size),ys=[...before.keys()];
   demand(JSON.stringify(ys)===JSON.stringify([...after.keys()]),'Visibility before/after row scope differs');
   const ids=new Set(),witnesses=new Map();
@@ -928,7 +1144,7 @@ export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,
       if(witnesses.has(repairComponentKey(candidate))||!before.has(row.y))continue;
       for(const [start,end]of row.runs){
         for(const [left,right]of emptySpans(start,end,before.get(row.y))){
-          const hit=after.get(row.y).find(run=>run[2]===candidate.pixelIndex&&Math.max(left,run[0])<Math.min(right,run[1]));
+          const hit=findInterval(after.get(row.y),run=>run[2]===candidate.pixelIndex&&Math.max(left,run[0])<Math.min(right,run[1]));
           if(hit){witnesses.set(repairComponentKey(candidate),{component_id:candidate.component_id,
             ...(candidate.authority_sha256?{authority_sha256:candidate.authority_sha256}:{}),
             native_rows_sha256:visibilityDigest(candidate.native_rows),x:Math.max(left,hit[0]),y:row.y,
@@ -938,7 +1154,11 @@ export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,
       }
     }
   }
-  const index=indexCandidates(candidates.filter(row=>row.representation!=='native-cells'));
+  // Polygon membership is independent per primitive. Byte-sized preparation
+  // batches replace the arbitrary component-count admission ceiling. One large
+  // original geometry remains a disclosed maximum-primitive working term.
+  for(const batch of visibilityCandidateBatches(candidates)){
+    const index=indexCandidates(batch);
   for(let k=0;index.length&&k<ys.length;){
     const start=ys[k];let end=k+1;while(end<ys.length&&ys[end]-start<4096)end++;
     const native=nativePolygonIntervals(index,{size,latitudes,rowStart:start,rowEnd:ys[end-1]+1});
@@ -947,7 +1167,7 @@ export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,
       for(const span of native.rows.get(y)??[]){
         const item=index[span.owner-1];if(witnesses.has(repairComponentKey(item.candidate)))continue;
         for(const [left,right]of emptySpans(span.start,span.end,before.get(y))){
-          const hit=after.get(y).find(run=>run[2]===item.candidate.pixelIndex&&Math.max(left,run[0])<Math.min(right,run[1]));
+          const hit=findInterval(after.get(y),run=>run[2]===item.candidate.pixelIndex&&Math.max(left,run[0])<Math.min(right,run[1]));
           if(hit){witnesses.set(repairComponentKey(item.candidate),{component_id:item.candidate.component_id,
             ...(item.candidate.authority_sha256?{authority_sha256:item.candidate.authority_sha256}:{}),
             geometry_sha256:item.geometry_sha256,x:Math.max(left,hit[0]),y,
@@ -957,31 +1177,59 @@ export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,
     }
     k=end;
   }
-  return candidates.map(row=>witnesses.get(repairComponentKey(row))??null);
+  }
+  return Array.from(candidates,row=>witnesses.get(repairComponentKey(row))??null);
 }
 
+export function selectInstalledGit() {
+  const selected=(process.env.PATH??'').split(path.delimiter).map(p=>path.join(p,'git')).find(p=>{try{return fs.statSync(p).isFile();}catch{return false;}});
+  demand(selected,'Missing installed Git');
+  const launchGit=fs.realpathSync(selected);
+  // Resolve the full Git implementation, including a macOS command-line shim.
+  const gitExecPath=fs.realpathSync(execFileSync(launchGit,['--exec-path']).toString().trim());
+  const gitExecutable=fs.realpathSync(path.resolve(gitExecPath,'../../bin/git'));
+  // Bind helpers to this installed implementation, not an unrelated prefix alias.
+  // This is an installation relationship, not independent helper-byte authentication.
+  demand(path.resolve(gitExecPath,'../../bin')===path.dirname(gitExecutable),'Selected Git helpers do not share the implementation installation');
+  return {launchGit,gitExecutable,gitExecPath};
+}
+
+function selectedExecutionCode(codePaths) {
+  const codeRoot=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+  return codePaths.map(name=>{const file=path.join(codeRoot,name),stat=fs.statSync(file);
+    demand(stat.isFile()&&Number.isSafeInteger(stat.size)&&stat.size>0,'Nonordinary trusted execution code');
+    const body=fs.readFileSync(file);demand(body.length===stat.size,'Trusted execution code changed during whole read');
+    return {path:name,bytes:body.length,mode:stat.mode&0o777,sha256:sha(body)};});
+}
 export function selectedBootstrap(repo,baseline,candidate,{parentRuntimePath}={}) {
   const runtimePaths=[fs.realpathSync(process.execPath),...(parentRuntimePath?[fs.realpathSync(parentRuntimePath)]:[])];
-  const codeRoot=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-  const codePaths=['scripts/run-geographic-check.py','scripts/check-effective-geographic-regression.mjs','src/native-grid.js','src/ownership-codec.js','coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/selected-reference-metadata.mjs','src/reference-metadata.js'];
-  const codeStats=codePaths.map(name=>{const file=path.join(codeRoot,name),stat=fs.statSync(file);demand(stat.isFile()&&Number.isSafeInteger(stat.size)&&stat.size>0,'Nonordinary trusted execution code');return {name,file,stat};});
-  const launchGit=(process.env.PATH??'').split(path.delimiter).map(p=>path.join(p,'git')).find(p=>{try{return fs.statSync(p).isFile();}catch{return false;}});
-  demand(launchGit,'Missing installed Git');runtimePaths.push(fs.realpathSync(launchGit));
-  // Resolve the full Git implementation, including a macOS command-line shim.
-  const execPath=execFileSync(runtimePaths.at(-1),['--exec-path']).toString().trim();
-  const gitExecutable=fs.realpathSync(path.resolve(execPath,'../../bin/git'));runtimePaths.push(gitExecutable);
+  const codePaths=['scripts/run-geographic-check.py','scripts/check-effective-geographic-regression.mjs','scripts/geography-prefetch.mjs','src/native-grid.js','src/ownership-codec.js','coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/selected-reference-metadata.mjs','src/reference-metadata.js'];
+  const {launchGit,gitExecutable,gitExecPath}=selectInstalledGit();runtimePaths.push(launchGit,gitExecutable);
   const invocation=Object.freeze({});
   const beforeReader=new ImmutableReader(repo,baseline,{gitExecutable,invocation}),afterReader=new ImmutableReader(repo,candidate,{gitExecutable,invocation});
   const identities=[...new Set(runtimePaths)].map(p=>runtimeIdentity(p));
   const runtime=identities.find(p=>p.path===fs.realpathSync(process.execPath)),callerRuntime=parentRuntimePath?identities.find(p=>p.path===fs.realpathSync(parentRuntimePath)):null;
-  const executionCode=codeStats.map(({name,file,stat})=>{const body=fs.readFileSync(file);demand(body.length===stat.size,'Trusted execution code changed during whole read');return {path:name,bytes:body.length,mode:stat.mode&0o777,sha256:sha(body)};});
-  return {beforeReader,afterReader,runtime,callerRuntime,identities,executionCode};
+  const executionCode=selectedExecutionCode(codePaths);
+  return {beforeReader,afterReader,runtime,callerRuntime,identities,executionCode,gitExecPath};
 }
 
+function usesFinalProfile(bootstrap){return [bootstrap.beforeReader,bootstrap.afterReader].some(reader=>
+  reader.treeRoute('data/ownership-selection.json')&&reader.json('data/ownership-selection.json')?.version===2);}
 export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) {
-  const {beforeReader,afterReader,runtime,callerRuntime,identities,executionCode}=selectedBootstrap(repo,baseline,candidate,{parentRuntimePath});
-  const before=loadSelection(beforeReader);
-  const after=loadSelection(afterReader);
+  const bootstrap=selectedBootstrap(repo,baseline,candidate,{parentRuntimePath});
+  demand(!usesFinalProfile(bootstrap),'Current final ownership requires the acquired accepted-checkpoint reader');
+  return compareSelected(bootstrap,baseline,candidate,loadSelection(bootstrap.beforeReader),loadSelection(bootstrap.afterReader));
+}
+export async function inspectSelectedAcquired(repo,baseline,candidate,{parentRuntimePath}={}) {
+  const bootstrap=selectedBootstrap(repo,baseline,candidate,{parentRuntimePath});
+  if(usesFinalProfile(bootstrap)){
+    const {JOINT_CODE,inspectSelectedFinalBank}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs');
+    bootstrap.executionCode=selectedExecutionCode(JOINT_CODE);
+    return inspectSelectedFinalBank(repo,baseline,candidate,bootstrap);
+  }
+  return compareSelected(bootstrap,baseline,candidate,await loadSelectionAcquired(bootstrap.beforeReader),await loadSelectionAcquired(bootstrap.afterReader));
+}
+function compareSelected({beforeReader,afterReader,runtime,callerRuntime,identities,executionCode},baseline,candidate,before,after) {
   if(!before&&!after)return {version:1,status:'legacy-selection',limits:['Legacy raw polygon gate remains applicable.']};
   demand(before&&after,'Selected native ownership removed or introduced without comparable migration');
   const a=before.manifest,b=after.manifest;
@@ -1004,7 +1252,7 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
   const oldParts=runs(before),newParts=runs(after);
   let offset=0;for(let y=0;y<a.size;y++){demand(oldRows[y*2]===offset,'Baseline row partition incomplete');offset+=oldRows[y*2+1];}demand(offset*2===a.runWords,'Baseline rows omitted runs');
   offset=0;for(let y=0;y<b.size;y++){demand(newRows[y*2]===offset,'Candidate row partition incomplete');offset+=newRows[y*2+1];}demand(offset*2===b.runWords,'Candidate rows omitted runs');
-  const bodyChanged=(p,snapshot,other)=>{const ownPath=path.posix.join(path.posix.dirname(snapshot.selection.manifest_path),p.path),otherPath=path.posix.join(path.posix.dirname(other.selection.manifest_path),p.path),own=snapshot.reader.inventory.get(snapshot.reader.version+':'+ownPath),prior=other.reader.inventory.get(other.reader.version+':'+otherPath);return !!own!==!!prior||!!own&&(own.mode!==prior.mode||own.git_blob_oid!==prior.git_blob_oid);};
+  const bodyChanged=(p,snapshot,other)=>{const ownPath=path.posix.join(path.posix.dirname(scientificNativeSelection(snapshot.selection).manifest_path),p.path),otherPath=path.posix.join(path.posix.dirname(scientificNativeSelection(other.selection).manifest_path),p.path),own=snapshot.reader.inventory.get(snapshot.reader.version+':'+ownPath),prior=other.reader.inventory.get(other.reader.version+':'+otherPath);return !!own!==!!prior||!!own&&(own.mode!==prior.mode||own.git_blob_oid!==prior.git_blob_oid);};
   const changed=oldParts.filter(p=>!newParts.some(q=>same(p,q))||bodyChanged(p,before,after)).concat(newParts.filter(p=>!oldParts.some(q=>same(p,q))||bodyChanged(p,after,before)));
   const additiveRows=new Set([...(before.additive?.patch.rows??[]),...(after.additive?.patch.rows??[])].map(r=>r.y));
   let additiveConservation=null;if(before.additive){demand(after.additive,'Previously selected additive repair ledger removed');additiveConservation=compareVersionedRepairLedgers(before.additive.ledger,after.additive.ledger,{beforeRegistry:before.additive.registry,afterRegistry:after.additive.registry});}
@@ -1044,7 +1292,8 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
-  const [repo,baseline,candidate,parentRuntimePath]=process.argv.slice(2);const result=inspectSelected(repo,baseline,candidate,{parentRuntimePath});const body=JSON.stringify(result)+'\n';process.stdout.write(body);
+  console.error('Use python -I -B scripts/run-geographic-check.py --baseline BASE --candidate CANDIDATE --out REPORT; inspectSelected remains a library cold consumer.');
+  process.exitCode = 1;
 }
 
 export {loadBaseSelection};

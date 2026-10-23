@@ -63,8 +63,9 @@ def prefetch_declared_inputs(repo, baseline, candidate, timeout=120):
               'complete_scientific_closure': False, 'partial_import_possible': True}}), file=sys.stderr, flush=True)
 
 
-TRUSTED_PATHS = ['scripts/run-geographic-check.py', 'scripts/check-geographic-regression.py',
-                 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',  'src/native-grid.js', 'src/ownership-codec.js',
+TRUSTED_PATHS = ['scripts/run-geographic-check.py', 'scripts/geography-prefetch.mjs', 'scripts/geography-routing-metadata.mjs', 'scripts/check-geographic-regression.py',
+                 'scripts/package-startup-ownership.mjs','src/ownership-assets.js','src/ownership-method.js',
+                 'scripts/native-word-store.mjs','scripts/native-patch-store.mjs', 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',  'src/native-grid.js', 'src/ownership-codec.js',
                  'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py',
                  'scripts/ellipsoidal_area.py', 'requirements.txt',
                  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
@@ -201,8 +202,9 @@ def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destin
             decision = issued.get('reuse_unavailable')
             if not isinstance(decision, dict) or decision.get('cold') not in ['candidate', 'baseline-and-candidate'] or not decision.get('reason'):
                 raise ValueError('Joint fallback omitted its unavailable custody decision')
+            print(json.dumps(issued), file=sys.stderr, flush=True)
             return issued
-        if issued.get('mode') != 'authenticated-checkpoint-append-v1' or not isinstance(issued.get('native'), dict):
+        if issued.get('mode') not in ['authenticated-checkpoint-append-v1', 'accepted-final-map-comparison-v1'] or not isinstance(issued.get('native'), dict):
             raise ValueError('Joint selected comparison did not complete native validation')
         native = issued['native']
         if native.get('method') != 'selected-native-owner-conservation-v1' or native.get('candidate_code_executed') is not False or native.get('status') not in ['native-regressions-found', 'no-new-native-loss']:
@@ -211,7 +213,7 @@ def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destin
             return issued
         if native.get('lost_or_reassigned_cells') != 0 or native.get('intervals') != []:
             raise ValueError('Successful native comparison contradicts conservation results')
-        if checkpoint_destination is not None:
+        if checkpoint_destination is not None and issued.get('mode') == 'authenticated-checkpoint-append-v1':
             with stage_timing('selected-checkpoint-retention'):
                 issued['checkpoint'] = products.retain_checkpoint_products(destination, checkpoint_destination, issued)
         return issued
@@ -313,9 +315,9 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
               'published': False, 'source_approval': False}
     if software:
         report['execution_limits'] = [
-            'Candidate checker code executed against distinct baseline and candidate data; no checkpoint reuse or new checkpoint authority.',
+            'Candidate checker code executed against distinct baseline and candidate data; authenticated accepted-state input may be read, but no new checkpoint authority is issued.',
             'Authenticated source adjudication remains baseline-only; deliver checker upgrades separately from data corrections that require it.',
-            'Nested child receipts retain their legacy candidate_code_executed=false marker verbatim. That marker is not evidence that candidate checker code was absent; this report binds actual executing code.']
+            'Historical child receipts retain their legacy candidate_code_executed=false marker; final-bank children bind actual execution. Neither format grants accepted-checkpoint issuance under candidate code.']
     if before == after and baseline != candidate:
         with stage_timing('unchanged-selected-inputs'):
             applicability = unchanged_selected_inputs(repo, baseline, candidate, code_commit=code_commit)
@@ -335,24 +337,30 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
         env = dict(os.environ)
         for name in ['NODE_OPTIONS', 'NODE_PATH']:
             env.pop(name, None)
-        if joint is not None and joint['mode'] == 'authenticated-checkpoint-append-v1':
+        if joint is not None and joint['mode'] in ['authenticated-checkpoint-append-v1', 'accepted-final-map-comparison-v1']:
             native = joint['native']
         else:
-            # Eager whole-bank transport helps the legacy cold consumers, but
-            # needlessly downloads sources/native assets for a qualified warm
-            # checkpoint. Software with changed or unknown consumed data takes this cold path;
-            # baseline-code callers require the joint entry's explicit unavailable decision.
-            if prefetch:
+            # The final-bank reader acquires its exact current operands itself.
+            # This optional prefetch serves only historical version-1 selectors;
+            # selection shape and all pins are still admitted by the real reader.
+            if prefetch and json.loads(read(repo, baseline, 'data/ownership-selection.json')).get('version') != 2:
                 with stage_timing('selected-prefetch'):
                     prefetch_declared_inputs(repo, baseline, candidate)
             with stage_timing('selected-native'):
                 native_raw = subprocess.check_output([
-                    os.environ.get('NODE', 'node'), str(repo / 'scripts/check-effective-geographic-regression.mjs'),
+                    os.environ.get('NODE', 'node'), '--input-type=module', '--eval',
+                    "const [module, repo, baseline, candidate, parentRuntimePath] = process.argv.slice(1);"
+                    "const {inspectSelectedAcquired} = await import(module);"
+                    "process.stdout.write(JSON.stringify(await inspectSelectedAcquired(repo, baseline, candidate, {parentRuntimePath})) + '\\n');",
+                    (repo / 'scripts/check-effective-geographic-regression.mjs').as_uri(),
                     str(repo), baseline, candidate, sys.executable], env=env)
 
             native = json.loads(native_raw)
+        final_profile = (native.get('candidate_selection') or {}).get('version') == 2
+        expected_child_software = software if final_profile else False
         if (native.get('method') != 'selected-native-owner-conservation-v1'
-                or native.get('candidate_code_executed') is not False
+                or native.get('candidate_code_executed') is not expected_child_software
+                or (final_profile and native['candidate_selection'].get('kind') != 'selected-final-native-bank-v2')
                 or native.get('status') not in ['native-regressions-found', 'no-new-native-loss']):
             raise ValueError('Selected map comparison lacks a completed native result')
         report['selected_native_report'] = native
@@ -360,11 +368,27 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
             return {**report, 'status': 'native-regressions-found',
                     'regressions': len(native['intervals']),
                     'limits': ['Existing owner loss/reassignment has no automatic water or political exception. Unsupported native scope requires an explicit migration.']}
-        if native.get('lost_or_reassigned_cells') != 0 or native.get('intervals') != []:
+        if type(native.get('lost_or_reassigned_cells')) is not int or native['lost_or_reassigned_cells'] != 0 or native.get('intervals') != []:
             raise ValueError('Successful native comparison contradicts conservation results')
         if joint is not None and joint.get('checkpoint') is not None:
             report['checkpoint'] = joint['checkpoint']
-        return {**report, 'status':'no-new-native-loss', 'regressions':0,
+        # An identical admitted final bank includes all words AND finished context.
+        # Preserve this existing summary category for older merge readers without
+        # rewriting the child's truthful execution marker or skipping comparison.
+        bank = (native.get('candidate_selection') or {}).get('prepared_bank')
+        custody, scope = native.get('checkpoint_custody') or {}, native.get('native_row_scope') or {}
+        unchanged_final = (software and final_profile and isinstance(bank, dict)
+            and isinstance(bank.get('path'), str) and bool(bank['path'])
+            and type(bank.get('bytes')) is int and bank['bytes'] > 0
+            and isinstance(bank.get('sha256'), str) and re.fullmatch('[a-f0-9]{64}', bank['sha256'])
+            and native.get('baseline_selection') == native.get('candidate_selection')
+            and custody.get('accepted_bank') == bank == custody.get('candidate_bank')
+            and scope.get('proof') == 'complete-accepted-final-bank-and-qualified-new-intervals'
+            and scope.get('representation_migration') is False
+            and scope.get('changed_rows') == [] and type(scope.get('added_cells')) is int and scope['added_cells'] == 0
+            and type(scope.get('compared_rows')) is int and scope['compared_rows'] > 0
+            and type(native.get('affected_rows')) is int and native['affected_rows'] == 0)
+        return {**report, 'status':'no-footprint-change' if unchanged_final else 'no-new-native-loss', 'regressions':0,
                 'validation_scope':'selected-native-map-cells',
                 'limits':['Selected map-cell conservation and source-qualified visible additions were checked. Continuous polygon overlap is outside map-cell repair scope.',
                           'This does not approve a new grid, ownership identity migration or unsupported source methodology.']}
@@ -487,8 +511,6 @@ def main():
             if git(repo, 'remote', 'get-url', remote).decode().strip() not in [
                     'https://github.com/ChengshuLi/WorldAtlas', 'https://github.com/ChengshuLi/WorldAtlas.git']:
                 raise ValueError('Candidate acquisition requires the anonymous public repository remote')
-    with stage_timing('trusted-checkout-initial'):
-        verify_trusted_checkout(repo, args.code_commit)
     if args.fetch:
         with stage_timing('candidate-fetch'):
             fetch_candidate(repo, args.candidate)

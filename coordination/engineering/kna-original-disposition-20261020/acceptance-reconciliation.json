@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "kind": "kna-current-custody-and-bounded-prior-key-reconciliation",
+  "checked_at_pacific": "2026-10-20 16:24 PDT",
+  "scope": {
+    "package_id": "gb-KNA-ADM1--repair-evaluation",
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "queue_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "land_cells": 305,
+    "intervals": 125,
+    "owners": [
+      7119
+    ],
+    "excluded_physical_companion": "gb-KNA-ADM1--physical-interpretation: 154 source-relative cells / 90 intervals; excluded from repair denominator",
+    "separate_source_review": "Issue #179; read-only regional source/semantic scope, excluded"
+  },
+  "public_custody_checks": {
+    "issue_searches": [
+      {
+        "query": "\"gb-KNA-ADM1--repair-evaluation\"",
+        "result_count": 0
+      },
+      {
+        "query": "KNA repair",
+        "result_count": 0
+      },
+      {
+        "query": "\"Saint Kitts and Nevis\" repair",
+        "result_count": 0
+      }
+    ],
+    "pull_request_searches": [
+      {
+        "query": "\"gb-KNA-ADM1--repair-evaluation\"",
+        "result_count": 0
+      },
+      {
+        "query": "KNA",
+        "result_count": 1,
+        "result": {
+          "number": 1240,
+          "url": "https://github.com/ChengshuLi/WorldAtlas/pull/1240",
+          "title": "Preserve complete original geography sources with lossless custody",
+          "state": "closed/merged",
+          "scope": "worldwide source-corpus preservation; not a KNA repair package"
+        }
+      }
+    ],
+    "branch_searches": [
+      {
+        "query": "KNA",
+        "result_count": 0
+      },
+      {
+        "query": "Nevis",
+        "result_count": 0
+      }
+    ],
+    "related_issue": {
+      "number": 179,
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/179",
+      "state": "open",
+      "assignees": [],
+      "comments": 0,
+      "title": "Review Caribbean interior batch 3: Cuba, Haiti, Jamaica + 6 more existing areas",
+      "scope": "read-only source/semantic review; KNA appears as source/reference metadata, not an explicit member repair assignment"
+    },
+    "current_authorized_claim": {
+      "number": 2609,
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/2609",
+      "state": "open",
+      "assignees": [],
+      "title": "[ENG] Original KNA ADM1 repair-evaluation disposition — 305 cells",
+      "claimant_worker": "01a15a0d-70a7-703d-86ad-e85dd2813035",
+      "branch": "engineering/kna-original-disposition-20261020",
+      "interpretation": "Created by the root-authorized continuation after the preceding bounded checks; it is the current KNA claim, not a former competing owner."
+    },
+    "former_coordinator_latest_turns": [
+      {
+        "thread_id": "01a13b6c-91af-722c-88a4-0d9bb2ea0029",
+        "title": "Process Indonesia work packages",
+        "status": "idle",
+        "latest_turn_id": "01a15053-3897-77bc-a9d3-f160ccc3b455",
+        "latest_turn_status": "completed",
+        "visible_work": "bounded issue/ownership review, with MDA package evaluation; latest turn contains no KNA, Kitts, Nevis or owner 7119 reference",
+        "pending_operation_surfaced": false
+      },
+      {
+        "thread_id": "01a13635-0ded-77e8-acf7-b9576de0b032",
+        "title": "Process Vietnam work packages",
+        "status": "idle",
+        "latest_turn_id": "01a15053-1cfe-7589-9532-3b2380876e11",
+        "latest_turn_status": "completed",
+        "visible_work": "PR #2508 evidence refresh; latest turn contains no KNA, Kitts, Nevis or owner 7119 reference",
+        "pending_operation_surfaced": false
+      }
+    ],
+    "conclusion": "Before the authorized #2609 claim, no concrete competing current KNA repair claim, branch, PR or live operation surfaced in the bounded public and latest-task checks. The current author claim is recorded separately above. This does not prove the package was never owned or establish exhaustive historical clearance."
+  },
+  "prior_key_reconciliation": {
+    "method": "Expand each existing half-open retained repair-evaluation interval [start,end) from the KNA source/physical witness join; compare coordinate keys to exact key arrays in the retained prior reconciliation. No observer or geometry operation was run.",
+    "target_key_source": {
+      "path": "retained-source-physical-context.json",
+      "scope_group": "exact_interval_witness.groups.repair-evaluation",
+      "queue_pin": "2d1fc6f430e756498908bf2c4e267356a13f5cc7:coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json@9c9a9bc83627afd3e8435ff4009e39530543bf54",
+      "expanded_keys": 305,
+      "intervals": 125,
+      "canonical_sorted_yx_sha256": "f58fb49daa5b00c34f70bee18a9c66f13a1c6955895f4896a96ab6b82f3092e4",
+      "separate_companion_keys_excluded": true
+    },
+    "prior_key_source": {
+      "path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+      "purpose": "exact bounded prior key sets from mixed partitions, delivered package packets, and the legacy accepted repair bridge, ending before PSE",
+      "prior_union_before_pse": 56352,
+      "prior_union_sha256": "a88e4faa57150ad90493fd8faf569f9a2450bed91f2069f9b6ebfd1b3db5d549",
+      "legacy_accepted_patch_keys": 1306,
+      "legacy_patch_source_blob": "5d9cbebb7de2a856bae2aa5aff2bda17e0325315",
+      "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+      "blob_oid": "1c56ef45f503344a3dba5edbefc485e7ad202ca1",
+      "encoded_bytes": 358029,
+      "encoded_sha256": "8b2f21475c5146af6097ef1ae2a22e4cb48c1a67b8ba9a6e4bae884ab6f165f8",
+      "decoded_sha256": "927b82b18ce12872adce326994eae3d5527105cb55dd18b9aac87e2565d69c26"
+    },
+    "newest_accepted_package": {
+      "package_id": "gb-PSE-ADM2--repair-evaluation",
+      "acceptance_url": "https://github.com/ChengshuLi/WorldAtlas/pull/2607#issuecomment-6304001433",
+      "accepted_keys": 427,
+      "exact_key_source": "718cb8c3911f43739e50dfd1d423938c5c1e8b42:coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz#/current_selected_owner_observation/original_keys_yx",
+      "canonical_sorted_yx_sha256": "adec7fe88109ff30a5fe38e69899801e2987a72af3d8ca0aa1a96e5674784bdc",
+      "overlap_with_prior_union": 0
+    },
+    "intersections": {
+      "KNA_with_mixed_17_exception_held_partitions": 0,
+      "KNA_with_prior_named_package_and_legacy_sets": 0,
+      "KNA_with_accepted_PSE": 0,
+      "KNA_with_combined_examined_union": 0,
+      "known_union_size_including_PSE": 56779,
+      "KNA_residual_after_examined_keysets": 305
+    },
+    "classification_limit": "The 56,779-key set is a bounded exact union (prior retained key sets plus accepted PSE), not a complete all-history accepted-repair ledger. Zero overlap supports zero overlap with examined keys only; it is not global historical zero-credit proof. The PSE receipt reports 98/660 unified packages after acceptance, but package totals do not prove KNA key membership."
+  },
+  "current_stock_observation_join": {
+    "path": "kna-selected-owner-observation.json.gz",
+    "producer": "root-owned single stock observation; not rerun by this reviewer",
+    "execution_commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+    "query_count": 305,
+    "query_sha256": "125811a3381b5e54af86c63a6512f939fb4151f9ebf45a7b2d50497695fb65f3",
+    "original_interval_sha256": "023f92e0c9eb73c7615c1e5eed32eb09887291fe07b391504aa362decb5b56d6",
+    "observation_key_count": 305,
+    "exact_keyset_match_to_retained_original_intervals": true,
+    "missing_or_extra_keys": 0,
+    "base_owner_nonzero": 0,
+    "accepted_additive_owner_nonzero": 0,
+    "effective_selected_owner_nonzero": 0,
+    "existing_product_overlap_true": 0,
+    "returned_owner_ids": [
+      null
+    ],
+    "consumed_input_count": 38,
+    "fetched_object_count": 0,
+    "interpretation": "The one stock observation covers the exact 305 retained original keys and shows no current selected assignment or overlap. This does not establish prior accepted-credit status; the separate exact prior-key reconciliation above shows zero intersection with the examined 56,779-key union only."
+  },
+  "actions_not_taken_by_reviewer": [
+    "no claim",
+    "no allocation",
+    "no observer rerun",
+    "no geometry",
+    "no source acquisition",
+    "no public write"
+  ],
+  "remaining_unknowns": [
+    "No exhaustive historic KNA package ownership trace was established; the latest checks show no current operation in the bounded sources.",
+    "The current-owner result is limited to the single exact stock observation; it is not prior-acceptance proof.",
+    "No complete all-history accepted-repair key ledger is represented by the examined bounded union."
+  ]
+}

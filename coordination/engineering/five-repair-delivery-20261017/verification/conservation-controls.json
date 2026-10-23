@@ -1,0 +1,19 @@
+{
+  "negative_interval_controls": [
+    {
+      "name": "overlap",
+      "rejected": true
+    },
+    {
+      "name": "wrong-owner",
+      "rejected": true
+    },
+    {
+      "name": "outside-original",
+      "rejected": true
+    }
+  ],
+  "positive_exact_complement": true,
+  "existing_output_refused": true,
+  "scope": "Direct interval helpers and fresh-output boundary; immutable source proof separately exercises full entry point."
+}

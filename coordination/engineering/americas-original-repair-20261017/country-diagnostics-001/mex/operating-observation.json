@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "kind": "derived-public-native-attempt-observation",
+  "country": "MEX",
+  "code_base_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+  "original_inputs_commit": "b6900b2fe487f3971045b63fb51c39dd30e013f3",
+  "observations": {
+    "first_direct_authority": {
+      "started_at": "2026-10-18T00:25:06.346750+00:00",
+      "ended_at": "2026-10-18T00:25:10.647933+00:00",
+      "exit_code": 1,
+      "external_seconds": 4.300913375103846,
+      "darwin_time_l_maximum_resident_set_size_bytes": 682278912,
+      "scientific_refusal": "Proposed native cells lack unique source-target coverage"
+    },
+    "diagnostic": {
+      "started_at": "2026-10-18T00:27:03.679131+00:00",
+      "ended_at": "2026-10-18T00:27:11.190453+00:00",
+      "exit_code": 0,
+      "external_seconds": 7.512768500018865,
+      "darwin_time_l_maximum_resident_set_size_bytes": 708034560
+    }
+  },
+  "hard_deadline": null,
+  "enforced_rss_limit": null,
+  "limits": [
+    "Original complete host-path execution records and logs retained unchanged privately.",
+    "Optional unsupported Git no-lazy-fetch probe warnings were handled by the existing fallback; the direct call reached the actual scientific coverage guard.",
+    "Diagnostics are observations only, not authority, current-owner-zero or accepted credit."
+  ]
+}

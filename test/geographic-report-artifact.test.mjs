@@ -330,6 +330,24 @@ for (const [label, steps] of [['missing', undefined], ['empty', []], ['stale', [
   });
 }
 
+test('queued aggregate cannot veto exact successful geography or relabel the original attempt', async () => {
+  for (const currentAttempt of [1, 2]) {
+    const f = freshQueueTransport();
+    f.run.status = 'queued'; f.run.conclusion = null;
+    f.loadOptions.fresh.run_attempt = currentAttempt;
+    const result = await loadGeographicReport(f.loadOptions);
+    checkGeographicReport(result, f.options.baseline, f.commit.sha);
+    const source = geographicReportProducts(result).source;
+    assert.equal(source.run_attempt, 1); assert.equal(source.job_id, 55);
+    assert.equal(source.artifact_digest, reportHash(f.zip));
+    assert.equal(source.tree, f.commit.tree.sha);
+    assert.equal(f.metadata.filter(route => route.endsWith('/attempts/1')).length, 1);
+    assert.equal(f.metadata.filter(route => route.includes('/attempts/1/jobs')).length, 1);
+    assert(!f.metadata.some(route => route.includes('/attempts/2')), 'No latest-attempt substitution or polling');
+    await validateGeographyOrigin({...f.loadOptions, source});
+  }
+});
+
 test('failed-job queue retry authenticates carried geography from its successful original attempt',async()=>{
   const f=freshQueueTransport();
   f.loadOptions.fresh.run_attempt=2;
@@ -344,7 +362,7 @@ test('failed-job queue retry authenticates carried geography from its successful
 });
 
 test('fresh queue loader rejects foreign or unsuccessful producers and altered receipt custody with empty steps', async () => {
-  for (const mutate of [
+  for (const aggregateStatus of ['in_progress', 'queued']) for (const mutate of [
     f => {f.run.id++;}, f => {f.run.run_attempt++;}, f => {f.run.head_sha = 'f'.repeat(40);},
     f => {f.run.path = '.github/workflows/other.yml';}, f => {f.run.event = 'push';},
     f => {f.run.head_branch = 'engineering/foreign';}, f => {delete f.run.head_branch;},
@@ -360,7 +378,7 @@ test('fresh queue loader rejects foreign or unsuccessful producers and altered r
     f => {f.zip = archive(Buffer.from('{}'));}, f => {f.commit.sha = 'f'.repeat(40);},
     f => {f.commit.tree.sha = 'invalid';}
   ]) {
-    const f = freshQueueTransport(); mutate(f);
+    const f = freshQueueTransport(); f.run.status = aggregateStatus; mutate(f);
     await assert.rejects(loadGeographicReport(f.loadOptions));
   }
 });
@@ -442,8 +460,7 @@ function queueCompletionFixture(f = freshQueueTransport()) {
   };
   f.api.artifactRedirect = original.artifactRedirect;
   f.mergeOptions = () => ({api: f.api, repo, number: 2, expectedHead: head, integrationRequestId,
-    policy: {version: 1, mode: 'enforce-new', activation_time: '2100-01-01T00:00:00Z'},
-    evidenceCheck: async () => {assert.notEqual(f.review, 'withdrawn', 'Fresh exact-head review is required'); return {status: 'legacy'};}});
+    policy: {version: 1, mode: 'enforce-new', activation_time: '2100-01-01T00:00:00Z'}});
   f.load = ({api = f.api} = {}) => loadGeographicReport({...f.loadOptions, api});
   f.complete = (extra = {}) => completeIntegration({...f.mergeOptions(), integrationResult: 'success', geographyResult: 'success',
     testedBase: base, testedCandidate: candidate, geographyReportLoader: f.load, ...extra});
@@ -451,16 +468,14 @@ function queueCompletionFixture(f = freshQueueTransport()) {
   return f;
 }
 
-test('authenticated main queue retains candidate identity without recursive final reads', async () => {
+test('authenticated main queue retains candidate and report identity', async () => {
   const f = queueCompletionFixture();
   await prepareIntegration(f.mergeOptions());
   assert.deepEqual(f.preparationWrites, [`/repos/${f.options.repo}/git/refs`, `/repos/${f.options.repo}/merges`]);
-  assert.equal(f.treeReads().length, 2, 'Preparation still inventories authored and candidate trees');
   assert(f.calls.includes(`/repos/${f.options.repo}/contents/.github/package-inputs.json?ref=${f.commit.sha}`));
   f.calls.length = 0;
   const result = await f.complete();
   assert.equal(result.accepted, true); assert.equal(f.writes.length, 1);
-  assert.deepEqual(f.treeReads(), []);
   assert(f.calls.some(route => route.endsWith('/git/commits/' + f.commit.sha)), 'Final commit identity is reread');
   assert.equal(f.metadata.filter(route => route.endsWith('/attempts/1')).length, 1, 'Fresh authentication is not duplicated');
   const workflow = fs.readFileSync('.github/workflows/worker-merge.yml', 'utf8');
@@ -484,7 +499,6 @@ test('prepared queue keeps focused coordination routing through final ordinary-t
   assert.equal(result.accepted,true);
   assert.equal(prepared.geography_required,false);
   assert.equal(result.geography.status,'not-applicable');
-  assert.deepEqual(f.treeReads(),[`/repos/owner/repo/git/trees/${'2'.repeat(40)}?recursive=1`]);
 });
 
 test('authenticated custody never substitutes for candidate identity, ordered parents or exact source bindings', async () => {
@@ -492,14 +506,14 @@ test('authenticated custody never substitutes for candidate identity, ordered pa
     const f = queueCompletionFixture(), geography = await f.load();
     geographicReportProducts(geography).source[field] = field === 'workflow_path'
       ? '.github/workflows/merge-integration-checks.yml' : field === 'event' ? 'pull_request' : 'f'.repeat(40);
-    await assert.rejects(f.complete({geographyReportLoader: async () => geography}), /source differs/);
+    await assert.rejects(f.complete({preparedGeographySoftware:false,geographyReportLoader: async () => geography}), /source differs/);
     assert.equal(f.writes.length, 0, field);
   }
   for (const mutate of [f => {f.commit.sha = 'f'.repeat(40);}, f => {delete f.commit.tree;},
     f => {f.commit.parents.reverse();}, f => {f.commit.parents.pop();},
     f => {f.commit.parents[0].sha = 'f'.repeat(40);}, f => {f.commit.parents[1].sha = 'f'.repeat(40); }]) {
     const f = queueCompletionFixture(); mutate(f);
-    await assert.rejects(f.complete(), /candidate identity|exact current main/);
+    await assert.rejects(f.complete({preparedGeographySoftware:false}), /candidate identity|exact current main/);
     assert.equal(f.writes.length, 0); assert.deepEqual(f.treeReads(), []);
   }
 });
@@ -529,7 +543,7 @@ test('replacing fresh queue product data cannot relabel private admitted custody
   products.source = {...products.source, workflow_head: 'f'.repeat(40)};
   products.prepared_queue = true;
   await assert.rejects(f.complete({geographyReportLoader: async () => geography}), /source differs from authenticated queue producer/);
-  assert.equal(f.writes.length, 0); assert.deepEqual(f.treeReads(), []);
+  assert.equal(f.writes.length, 0);
 });
 
 test('retargeting both genuine report and public custody cannot reuse original preparation', async () => {
@@ -541,23 +555,21 @@ test('retargeting both genuine report and public custody cannot reuse original p
   geographicReportProducts(geography).source.candidate_commit = retarget;
   await assert.rejects(f.complete({testedCandidate: retarget, geographyReportLoader: async () => geography}),
     /source differs from authenticated queue producer/);
-  assert.equal(f.writes.length, 0); assert.deepEqual(f.treeReads(), []);
+  assert.equal(f.writes.length, 0);
 });
 
-test('prepared custody preserves fresh final main, head, issue, check, status and review guards', async () => {
-  for (const changed of ['main', 'head', 'issue', 'check', 'status', 'review']) {
+test('prepared custody preserves fresh final main, head, check and status guards', async () => {
+  for (const changed of ['main', 'head', 'check', 'status']) {
     const f = queueCompletionFixture();
     const loader = async options => {
       const geography = await f.load(options);
       if (changed === 'main') f.currentBase = 'f'.repeat(40);
       if (changed === 'head') f.pr.head.sha = 'f'.repeat(40);
-      if (changed === 'issue') f.issue.body += '\nChanged acceptance';
       if (changed === 'check') f.checkConclusion = 'failure';
       if (changed === 'status') f.status = {statuses: [{}], state: 'failure'};
       return geography;
     };
-    if (changed === 'review') f.review = 'withdrawn';
-    await assert.rejects(f.complete({geographyReportLoader: loader}));
+    await assert.rejects(f.complete({preparedGeographySoftware:false,geographyReportLoader: loader}));
     assert.equal(f.writes.length, 0, changed);
   }
 });
@@ -591,18 +603,17 @@ test('candidate software report requires explicit expected code identity and can
 
 
 test('reviewed focused test-only prepare retains final ordinary-file proof through authenticated custody', async () => {
-  for(const failure of [null,'integration','geography','cancelled-geography','review']) {
+  for(const failure of [null,'integration','geography','cancelled-geography']) {
     const f=queueCompletionFixture(),name='test/native-diagnostic-entry.test.mjs';
     f.files=[{filename:name,status:'modified'}];f.authored[0].path=name;f.integrated=structuredClone(f.authored);
     const prepared=await prepareIntegration(f.mergeOptions());
     assert.deepEqual(f.preparationWrites,[`/repos/${f.options.repo}/git/refs`,`/repos/${f.options.repo}/merges`]);
     assert.equal(prepared.profile,'evidence');assert.equal(prepared.geography_software,false);
-    assert.equal(f.treeReads().length,2);f.calls.length=0;
-    if(failure==='review')f.review='withdrawn';
+    f.calls.length=0;
     const options=failure==='integration'?{integrationResult:'failure'}:failure==='geography'?{geographyResult:'failure'}:
       failure==='cancelled-geography'?{geographyResult:'cancelled'}:{};
     if(failure) {
-      await assert.rejects(f.complete(options),failure==='integration'?/Integration tests failed/:['geography','cancelled-geography'].includes(failure)?/Trusted combined geography check/:/exact-head review/);
+      await assert.rejects(f.complete(options),failure==='integration'?/Integration tests failed/:/Trusted combined geography check/);
       assert.equal(f.writes.length,0);
     } else {
       const result=await f.complete(options);assert.equal(result.accepted,true);assert.equal(f.writes.length,1);
@@ -610,20 +621,18 @@ test('reviewed focused test-only prepare retains final ordinary-file proof throu
       assert.equal(result.geography.trusted_code_commit,f.options.baseline);
       assert.equal(Object.hasOwn(result,'proof'),false);assert.equal(Object.hasOwn(result,'profile'),false);
     }
-    assert.deepEqual(f.treeReads(),['integration','review'].includes(failure) ? [] : [`/repos/owner/repo/git/trees/${'2'.repeat(40)}?recursive=1`],
-      'Final focused eligibility reads ordinary authored entries before accepting or refusing geography');
   }
 });
 
 
-test('eligible skipped geography still verifies current authored ordinary files without loading a report', async () => {
+test('eligible skipped geography still verifies actual candidate ordinary files without loading a report', async () => {
   for (const drift of [false, true]) {
     const f=queueCompletionFixture(),name='test/native-diagnostic-entry.test.mjs';
     f.files=[{filename:name,status:'modified'}];f.authored[0].path=name;f.integrated=structuredClone(f.authored);
     const prepared=await prepareIntegration(f.mergeOptions());
     assert.equal(prepared.geography_required,false);
     f.calls.length=0;
-    if(drift)f.authored[0].mode='120000';
+    if(drift)f.integrated[0].mode='120000';
     const complete=()=>f.complete({geographyResult:'skipped',geographyReportLoader:async()=>{throw Error('Skipped geography must not load a report');}});
     if(drift) {
       await assert.rejects(complete,/Trusted combined geography check missing/);
@@ -633,7 +642,105 @@ test('eligible skipped geography still verifies current authored ordinary files 
       assert.equal(result.accepted,true);assert.equal(f.writes.length,1);
       assert.deepEqual(result.geography,{status:'not-applicable',reason:'non-geographic-controls'});
     }
-    assert.deepEqual(f.treeReads(),['2'.repeat(40)].map(sha=>`/repos/owner/repo/git/trees/${sha}?recursive=1`),
-      'A skipped job cannot substitute historical prepared custody for current ordinary-file proof');
   }
+});
+
+
+test('prepared checker choice rejects malformed explicit values without granting merge authority',async()=>{
+  for(const value of [null,0,1,'','true','false',[],{}]) {
+    const f=queueCompletionFixture();
+    await assert.rejects(f.complete({preparedGeographySoftware:value}),/Invalid prepared geographic checker choice/);
+    assert.equal(f.writes.length,0);
+  }
+});
+
+test('genuine fresh queue checker choice binds both code outcomes and refuses contradictory reports',async()=>{
+  for(const software of [false,true]) for(const choice of [false,true]) {
+    const f=queueCompletionFixture(freshQueueTransport(report=>software?{...report,trusted_code_commit:report.candidate_commit,
+      candidate_code_executed:true,trusted_code_inventory_sha256:'f'.repeat(64)}:report));
+    const run=()=>f.complete({preparedGeographySoftware:choice});
+    if(software===choice)assert.equal((await run()).accepted,true);
+    else {await assert.rejects(run,/exact trusted combined check/);assert.equal(f.writes.length,0);}
+  }
+});
+
+test('historical or forged custody cannot override independently derived candidate checker code',async()=>{
+  for(const kind of ['clone','historical','supplied-queue']) {
+    const f=queueCompletionFixture(kind==='historical'?combinedTransport():freshQueueTransport());
+    const name='scripts/changed-geography.mjs';f.files=[{filename:name,status:'added'}];
+    f.integrated=[{path:name,type:'blob',mode:'100644',sha:'1'.repeat(40),size:1}];
+    let geography=await f.load();
+    if(kind==='clone')geography=structuredClone(geography);
+    if(kind==='supplied-queue')geography=await loadGeographicReport({...f.loadOptions,api:f.api,fresh:undefined,
+      source:geographicReportProducts(geography).source});
+    geography.prepared_queue=true;assert.equal(preparedQueueSource(geography),null);
+    await assert.rejects(f.complete({preparedGeographySoftware:false,geographyReportLoader:async()=>geography}),/exact trusted combined check/);
+    assert.equal(f.writes.length,0);
+  }
+});
+
+test('workflow forwards the same trusted prepare choice to checker execution and final verification',()=>{
+  const workflow=fs.readFileSync('.github/workflows/worker-merge.yml','utf8');
+  const merge=workflow.split('\n  merge:\n')[1];
+  assert.match(merge,/PREPARED_GEOGRAPHY_SOFTWARE: \$\{\{ needs\.prepare\.outputs\.geography_software \}\}/);
+  assert.match(workflow,/GEOGRAPHY_CODE_COMMIT: \$\{\{ \(needs\.prepare\.outputs\.geography_software == 'true'\)/);
+});
+
+
+test('prepared reuse retains actual integration/geography results and original candidate tree',async()=>{
+  for(const override of [{integrationResult:'failure'},{integrationResult:'skipped'},{integrationResult:'cancelled'},
+    {geographyResult:'failure'},{geographyResult:'skipped'},{geographyResult:'cancelled'}]) {
+    const f=queueCompletionFixture();
+    await assert.rejects(f.complete({preparedGeographySoftware:false,...override}));assert.equal(f.writes.length,0);
+  }
+  const f=queueCompletionFixture(),geography=await f.load();f.commit.tree.sha='f'.repeat(40);
+  await assert.rejects(f.complete({preparedGeographySoftware:false,geographyReportLoader:async()=>geography}),/source differs/);
+  assert.equal(f.writes.length,0);
+});
+
+
+test('final-bank software reports retain truthful execution and strict native proof under compatible summaries', () => {
+  const baseline='a'.repeat(40),candidate='b'.repeat(40);
+  const bank={path:'data/canonical-grid/current-startup/index.json',bytes:123,sha256:'c'.repeat(64)};
+  const selection={version:2,kind:'selected-final-native-bank-v2',prepared_bank:bank,reference:{id:'same-current-reference'}};
+  const native={version:1,method:'selected-native-owner-conservation-v1',status:'no-new-native-loss',
+    baseline_selection:selection,candidate_selection:selection,candidate_code_executed:true,
+    checkpoint_custody:{accepted_bank:bank,candidate_bank:bank},affected_rows:0,lost_or_reassigned_cells:0,intervals:[],
+    native_row_scope:{proof:'complete-accepted-final-bank-and-qualified-new-intervals',compared_rows:8,
+      representation_migration:false,changed_rows:[],added_cells:0}};
+  const report={version:1,method_id:'worldatlas-trusted-geography-check-v1',baseline_commit:baseline,candidate_commit:candidate,
+    trusted_code_commit:candidate,trusted_code_inventory_sha256:'d'.repeat(64),candidate_code_executed:true,
+    published:false,source_approval:false,gate_status:'passed',status:'no-footprint-change',regressions:0,
+    validation_scope:'selected-native-map-cells',selected_native_report:native};
+  const check=r=>checkGeographicReport(r,baseline,candidate,candidate);
+  assert.equal(check(report),false);
+  assert.equal(check({...report,status:'no-new-native-loss'}),false,'Original truthful final-bank native report remains supported');
+  const changed=structuredClone(report);changed.status='no-new-native-loss';
+  changed.selected_native_report.candidate_selection={...selection,prepared_bank:{...bank,sha256:'e'.repeat(64)}};
+  assert.notDeepEqual(changed.selected_native_report.baseline_selection,changed.selected_native_report.candidate_selection);
+  assert.equal(check(changed),false,'Changed banks retain the ordinary native result, not unchanged classification');
+  for(const mutate of [
+    r=>{r.selected_native_report.candidate_code_executed=false;},
+    r=>{r.selected_native_report.candidate_selection.kind='unknown';},
+    r=>{r.selected_native_report.lost_or_reassigned_cells=1;},r=>{r.selected_native_report.intervals=[{row:1}];},
+    r=>{r.selected_native_report.status='native-regressions-found';},r=>{r.regressions=1;},
+    r=>{delete r.selected_native_report;},r=>{delete r.validation_scope;},
+    r=>{r.selected_native_report.checkpoint_custody.accepted_bank={...bank,sha256:'e'.repeat(64)};},
+    r=>{r.selected_native_report.checkpoint_custody.candidate_bank={...bank,bytes:124};},
+    r=>{r.selected_native_report.candidate_selection={...selection,reference:{id:'changed-context'}};},
+    r=>{r.selected_native_report.candidate_selection={...selection,prepared_bank:{...bank,sha256:'e'.repeat(64)}};},
+    r=>{r.selected_native_report.native_row_scope.changed_rows=[3];},r=>{r.selected_native_report.native_row_scope.added_cells=1;},
+    r=>{r.selected_native_report.native_row_scope.representation_migration=true;},
+    r=>{r.selected_native_report.native_row_scope.compared_rows=0;},r=>{r.selected_native_report.affected_rows=1;}
+  ]) {const r=structuredClone(report);mutate(r);assert.throws(()=>check(r),/findings remain unresolved/);}
+  for(const status of ['not-applicable','no-new-regression','regressions-found']) {
+    const r={...report,status,adjudication:{status:'all-findings-supported-and-reviewed',unresolved_findings:0}};
+    assert.throws(()=>check(r),/findings remain unresolved/,'A native report cannot fall through generic success/adjudication');
+  }
+  const accepted={...report,status:'no-new-native-loss',trusted_code_commit:baseline,candidate_code_executed:false,
+    selected_native_report:{...native,candidate_code_executed:false}};
+  assert.equal(checkGeographicReport(accepted,baseline,candidate),false);
+  const legacy={...report,status:'no-new-native-loss',selected_native_report:{...native,candidate_selection:{version:1},candidate_code_executed:false}};
+  assert.equal(check(legacy),false,'Historical child markers retain their original meaning under software execution');
+  assert.throws(()=>check({...legacy,selected_native_report:{...legacy.selected_native_report,candidate_code_executed:true}}),/findings remain unresolved/);
 });

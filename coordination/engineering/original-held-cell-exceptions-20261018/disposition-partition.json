@@ -1,0 +1,169 @@
+{
+  "kind": "original-repair-exception-review-partition",
+  "version": 1,
+  "scope": {
+    "original_keys": 3,
+    "accepted": [],
+    "pending_independent_review": [
+      {
+        "y": 126219,
+        "x": 124938,
+        "owner": 26987,
+        "source_id": "gb:LBR:ADM2:62588387B45934307689461",
+        "diagnostic_hold_reason": "territorial_exclusion_cells",
+        "original_physical_class": "land",
+        "source_evidence_coverage_class": "mapped_land_support"
+      },
+      {
+        "y": 108405,
+        "x": 156464,
+        "owner": 18676,
+        "source_id": "gb:EGY:ADM2:37247803B50825531526089",
+        "diagnostic_hold_reason": "territorial_exclusion_cells",
+        "original_physical_class": "land",
+        "source_evidence_coverage_class": "mapped_land_support"
+      },
+      {
+        "y": 109906,
+        "x": 156358,
+        "owner": 18637,
+        "source_id": "gb:EGY:ADM2:37247803B39887765706268",
+        "diagnostic_hold_reason": "territorial_exclusion_cells",
+        "original_physical_class": "land",
+        "source_evidence_coverage_class": "mapped_land_support"
+      }
+    ],
+    "unresolved_questions_are_recorded_on_each_pending_case": true,
+    "counts": {
+      "accepted": 0,
+      "pending_independent_review": 3,
+      "otherwise_resolved": 0
+    },
+    "package_partitions": [
+      {
+        "country": "LBR",
+        "package_id": "gb-LBR-ADM2--repair-evaluation",
+        "original_scope_cells": 2026,
+        "pending_held_original_cells": 1,
+        "otherwise_resolved_original_cells": 0,
+        "original_physical_class_counts": {
+          "land": 2026
+        },
+        "diagnostic_hold_reason_counts": {
+          "territorial_exclusion_cells": 1
+        },
+        "exact_owner_key_partition_review": "https://github.com/ChengshuLi/WorldAtlas/pull/2495#issuecomment-6247233787",
+        "partition_basis": "The independent exact owner-key join reconciles the complete original interval scope against the current cumulative patch; this packet records only the held exception key, not a duplicate expansion of the full interval roster.",
+        "original_class_join_review": "https://github.com/ChengshuLi/WorldAtlas/pull/2495#issuecomment-6247244352",
+        "accepted_original_owner_cells": 2025,
+        "accepted_original_owner_cells_evidence": "Exact current-patch owner-key rejoin: https://github.com/ChengshuLi/WorldAtlas/pull/2495#issuecomment-6247233787",
+        "accepted_original_owner_class_counts": {
+          "land": 2025
+        },
+        "pending_held_original_class_counts": {
+          "land": 1
+        }
+      },
+      {
+        "country": "EGY",
+        "package_id": "gb-EGY-ADM2--repair-evaluation",
+        "original_scope_cells": 19065,
+        "pending_held_original_cells": 2,
+        "otherwise_resolved_original_cells": 0,
+        "original_physical_class_counts": {
+          "land": 18591,
+          "inland-water": 474
+        },
+        "diagnostic_hold_reason_counts": {
+          "territorial_exclusion_cells": 2
+        },
+        "exact_owner_key_partition_review": "https://github.com/ChengshuLi/WorldAtlas/pull/2495#issuecomment-6247233787",
+        "partition_basis": "The independent exact owner-key join reconciles the complete original interval scope against the current cumulative patch; this packet records only the held exception keys, not a duplicate expansion of the full interval roster.",
+        "original_class_join_review": "https://github.com/ChengshuLi/WorldAtlas/pull/2495#issuecomment-6247244352",
+        "accepted_original_owner_cells": 19063,
+        "accepted_original_owner_cells_evidence": "Exact current-patch owner-key rejoin: https://github.com/ChengshuLi/WorldAtlas/pull/2495#issuecomment-6247233787",
+        "accepted_original_owner_class_counts": {
+          "land": 18589,
+          "inland-water": 474
+        },
+        "pending_held_original_class_counts": {
+          "land": 2
+        }
+      }
+    ]
+  },
+  "all_cases": [
+    {
+      "country": "LBR",
+      "package_id": "gb-LBR-ADM2--repair-evaluation",
+      "key": {
+        "y": 126219,
+        "x": 124938,
+        "owner": 26987,
+        "source_id": "gb:LBR:ADM2:62588387B45934307689461",
+        "diagnostic_hold_reason": "territorial_exclusion_cells",
+        "original_physical_class": "land",
+        "source_evidence_coverage_class": "mapped_land_support"
+      },
+      "status": "pending_independent_review",
+      "candidate_disposition": "documented_unresolved_applicability_exception_candidate",
+      "evidence_reason": "The retained query evaluates target.base_geometry, the selected Buu-Yao base footprint in the source-evidence record, not the raw positive source operand. This selected footprint has no center hit; that may be the expected missing-footprint repair gap and does not establish source absence or no-repair eligibility. The original roster includes Buu-Yao, Nimba and Montagnes. The retained whole-target report has mapped-land-support geometry at this center and adjacent x=124939, while the existing territorial veto remains. The exact CIV ADM1 Montagnes negative center-interior contact also remains, and the original two-cell diagnostic refuses unique source-target coverage.",
+      "unresolved_question": "How do the exact original source membership and selected base footprint differ at this center, and what does the original package contract require after that distinction is reviewed? Is a documented unresolved applicability exception appropriate, or does ordinary repair work remain required?",
+      "next_action": "Independent reviewer reconciles the original Buu-Yao/Nimba/Montagnes source roster, selected base footprint, positive mapped-land-support observation and territorial veto under the original interval contract. Do not infer source absence or no-repair eligibility from the base-footprint no-hit; retain the territorial hold until normal package review adopts a disposition.",
+      "credit": 0,
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "original_physical_class": "land",
+      "source_evidence_coverage_class": "mapped_land_support"
+    },
+    {
+      "country": "EGY",
+      "package_id": "gb-EGY-ADM2--repair-evaluation",
+      "key": {
+        "y": 108405,
+        "x": 156464,
+        "owner": 18676,
+        "source_id": "gb:EGY:ADM2:37247803B50825531526089",
+        "diagnostic_hold_reason": "territorial_exclusion_cells",
+        "original_physical_class": "land",
+        "source_evidence_coverage_class": "mapped_land_support"
+      },
+      "status": "pending_independent_review",
+      "candidate_disposition": "documented_unresolved_source_territorial_exception",
+      "evidence_reason": "The retained complete reference geometry scan places the center in the Egypt Nakhl ADM2 target and Israel Southern District ADM1, but outside the recorded Israel Be’er Sheva ADM2 and Saudi Tabuk ADM1 polygons; the complete foreign-bounds report retains overlapping/touching feature-part bounding boxes for all three foreign operands; this is a conservative bounds screen, not exact polygon intersection. Legal/source applicability is unresolved; treaty and administrative reference products do not adjudicate this exact cell.",
+      "unresolved_question": "Does the official Egypt-Israel legal boundary/source authority resolve this exact point, and what is the applicability of the retained Israel/Saudi administrative products?",
+      "next_action": "Cloud legal/source adjudication; obtain authoritative applicable boundary/source data or adopt a reviewer-approved unresolved exception. Preserve the original territorial hold and all three contacts.",
+      "credit": 0,
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "original_physical_class": "land",
+      "source_evidence_coverage_class": "mapped_land_support"
+    },
+    {
+      "country": "EGY",
+      "package_id": "gb-EGY-ADM2--repair-evaluation",
+      "key": {
+        "y": 109906,
+        "x": 156358,
+        "owner": 18637,
+        "source_id": "gb:EGY:ADM2:37247803B39887765706268",
+        "diagnostic_hold_reason": "territorial_exclusion_cells",
+        "original_physical_class": "land",
+        "source_evidence_coverage_class": "mapped_land_support"
+      },
+      "status": "pending_independent_review",
+      "candidate_disposition": "documented_unresolved_source_territorial_exception",
+      "evidence_reason": "The retained complete reference geometry scan places the center inside the Egyptian Sharm ADM2/South Sinai ADM1 and the Saudi Tabuk ADM1 polygons, but outside the retained Saudi Tabuk ADM2 polygon; the complete foreign-bounds report retains overlapping/touching feature-part bounding boxes for both Saudi administrative operands; this is a conservative bounds screen, not polygon-intersection proof. No complete authoritative Sanafir/island coastline polygon was found in the public official materials reviewed. The treaty maritime segment’s approximate position is not a substitute for island/land geometry.",
+      "unresolved_question": "Does the exact center fall on Sanafir or another Saudi land area, and what authoritative terrestrial geometry/source determines the land surface and administrative role here?",
+      "next_action": "Cloud legal/source adjudication; request/use complete authoritative Saudi island or land geometry (GEOSA/Saudi Geological Survey/hydrographic product) and review its applicability against exact center; until then, preserve all exact center contacts and bounds-screen records and the original territorial hold.",
+      "credit": 0,
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "original_physical_class": "land",
+      "source_evidence_coverage_class": "mapped_land_support"
+    }
+  ],
+  "invariants": [
+    "These are proposed evidence-backed exception packets only, not accepted dispositions, not repaired/qualified keys, and not new repair credit.",
+    "The original physical class land, source-evidence coverage class mapped_land_support, and diagnostic territorial_exclusion_cells hold are separate facts; none substitutes for another.",
+    "No target relabelling or source/owner/selection/hold changes.",
+    "Normal original package selected-native owner-zero, conservation, witness and emitted-output checks remain required for any future selected delivery."
+  ]
+}

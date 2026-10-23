@@ -1,0 +1,26 @@
+{
+  "baseline": "3b3e9e675cfb37999d5665438f9fbf25bbd4238b",
+  "candidate": "0db52cf5a1b7c06a1b27989ec044face48c65286",
+  "base_manifest_sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+  "bounded_eager": {
+    "rows": 256,
+    "base_runs": 48541,
+    "lost_cells": 0,
+    "complete_before_after_rows_sha256": "85b4c24958b27069c84891048179f4dfcf6b2c36c6ff87163f1e0d9ea02f10b5"
+  },
+  "bounded_batched": {
+    "rows": 256,
+    "base_runs": 48541,
+    "lost_cells": 0,
+    "complete_before_after_rows_sha256": "85b4c24958b27069c84891048179f4dfcf6b2c36c6ff87163f1e0d9ea02f10b5"
+  },
+  "complete_batched": {
+    "rows": 107587,
+    "base_runs": 20514842,
+    "lost_cells": 0,
+    "complete_before_after_rows_sha256": "03e79439dc50186ec8775597d770521a4e08771e24089f3f0f184387082f974b"
+  },
+  "max_rss_kib": 1100084,
+  "heap_limit_default": true,
+  "limits": "Actual complete original native rows and exact cumulative patch arithmetic. Existing retained emitted base matched original selected base manifest; all emitted encoded/decoded native body hashes checked by loader. No source qualification replay or private transition authority/hosted acceptance is claimed."
+}

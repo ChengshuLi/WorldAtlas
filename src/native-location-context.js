@@ -7,7 +7,7 @@ import {nativeSourceDigest} from './native-source-digest.js';
 const digest = async bytes => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)),
   byte => byte.toString(16).padStart(2, '0')).join('');
 const geometryKey = feature => JSON.stringify(effectiveFootprintValue(feature));
-const sameFootprint = (a,b) => a && b && (a.geometry === b.geometry && a.additiveFootprint === b.additiveFootprint
+const sameFootprint = (a,b) => a && b && (a.geometry === b.geometry && a.additiveFootprint === b.additiveFootprint && a.finishedFootprint === b.finishedFootprint
   || geometryKey(a) === geometryKey(b));
 const yieldTask = () => new Promise(resolve => setTimeout(resolve, 0));
 
@@ -55,7 +55,9 @@ export async function compileNativeLocationContext({referenceFeatures, features,
   const raw = new Uint8Array(latitudes.length * 8), tableView = new DataView(raw.buffer);
   latitudes.forEach((value, y) => tableView.setFloat64(y * 8, value, true));
   if (await digest(raw) !== LATITUDE_DIGEST) throw Error('Native context latitude rule changed');
-  const sourceDigest = await nativeSourceDigest(referenceFeatures, {signal, onProgress,additiveBaseReference:base.additive_base_reference});
+  const sourceDigest = await nativeSourceDigest(referenceFeatures, {signal, onProgress,
+    ...(base.effective_footprint_domain === 'worldatlas-final-native-footprints:v1'
+      ? {finalBaseReference:base.additive_base_reference} : {additiveBaseReference:base.additive_base_reference})});
   if (sourceDigest.sha256 !== base.footprints_sha256)
     throw Error('Native context reference source bytes changed');
   const referenceOwners = referenceFeatures.map(f => [f.pixelIndex, f.id]).sort((a, b) => a[0] - b[0]);

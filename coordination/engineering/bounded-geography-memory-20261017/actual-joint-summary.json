@@ -1,0 +1,40 @@
+{
+  "trusted_code": "20fec608099fa89505ad1da4355ae73561a27192",
+  "baseline": "2223d85bbe8b18585c221cc1329d115e8e774a42",
+  "candidate": "0db52cf5a1b7c06a1b27989ec044face48c65286",
+  "hosted_comparison_run": "39006904251",
+  "hosted_candidate": "412a3718ed62be75ddf55897a7768e66042c6c75",
+  "max_rss_kib": 1398912,
+  "semantic_equality_to_hosted": {
+    "status": true,
+    "affected_rows": true,
+    "lost_or_reassigned_cells": true,
+    "intervals": true,
+    "repair_visibility": true,
+    "native_row_scope": true,
+    "baseline_selection": true,
+    "candidate_selection": true
+  },
+  "affected_rows": 107587,
+  "new_components": 2507,
+  "lost_cells": 0,
+  "result_sha256": "1cb765939656ba2e0967b3b294b53e1d4268304122f0db26f470ba14618228a1",
+  "limits": "Actual full selected checkpoint acquisition, qualification, native comparison and checkpoint output; no source producer replay, no hosted acceptance for this new checker. Full parsed JSON retained terms remain.",
+  "exact_hosted_candidate_bindings": {
+    "ledger_sha256": "fc1dc802a930cf2ad6c89c01a052b6d42dfa38e4e9f394d8d79322c3e0d9d0c2",
+    "manifest_sha256": "8b8f5f6f96b4f85b91929764edc2f5cf37530f0245cca066a9399de0de0ed35e",
+    "patch_sha256": "c3c83e3bec5a1dbe60df63eea7d22d5173281de1ad1068c5632cbda674c6cf9d",
+    "registry_sha256": "cf8f1b945d99a3c1252e72777b98f8af0c6736548eb2b7b6350d359519c2fed9"
+  },
+  "phase_timings_ms": {
+    "trusted_startup": 2789,
+    "checkpoint_acquisition": 10665,
+    "baseline_qualification": 11552,
+    "candidate_qualification": 31568,
+    "native_comparison": 16609,
+    "checkpoint_output": 6198
+  },
+  "spill_bound_bytes_from_actual_manifest": 6291632,
+  "disk_high_water_sampled": false,
+  "scratch_remnants_after_completion": 0
+}

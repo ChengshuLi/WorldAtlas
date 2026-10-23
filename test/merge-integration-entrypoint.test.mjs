@@ -6,6 +6,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
+import {EXECUTION_CODE} from '../scripts/check-unchanged-selected-geography.mjs';
 
 const root=path.resolve(import.meta.dirname,'..');
 // Mock the real authenticated core-response boundary even when these child
@@ -43,6 +44,7 @@ test('actual trusted entry point preserves the original rejection before a denie
   assert.notEqual(result.status,0);
   assert.equal(receipt.accepted,false);assert.equal(receipt.status,'not-merged');
   assert.match(receipt.reason,/GET.*HTTP 418/);assert.match(summary,/GET.*HTTP 418/);
+  assert.equal(Object.hasOwn(receipt,'retryable'),false);
   assert.equal(receipt.api_error.http_status,418);assert.equal(receipt.notification_api_error.http_status,403);
 });
 test('actual trusted entry point retains its preparation receipt before successful notification',()=>{
@@ -120,7 +122,7 @@ test('actual entry point saves owned-parent/conflict diagnostics when notificati
         GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:'prepare'}});
     const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
     assert.notEqual(result.status,0);assert.match(receipt.notification_error,/HTTP 403/);
-    assert.equal(receipt.retryable,kind==='parents');
+    assert.equal(Object.hasOwn(receipt,'retryable'),false);
     assert.equal(receipt.candidate_diagnostics.expected_base,base);
     assert.equal(receipt.candidate_diagnostics.expected_head,head);
     assert.equal(receipt.candidate_diagnostics.candidate,kind==='conflict'?null:candidate);
@@ -174,11 +176,13 @@ for(const wrapped of [false,true]) for(const notification of ['denied','transpor
     sha:createHash('sha1').update(`blob ${packageRaw.length}\0`).update(packageRaw).digest('hex'),content:packageRaw.toString('base64')};
   fs.mkdirSync(path.join(directory,'.github'));
   fs.copyFileSync(path.join(root,'.github/evidence-policy.json'),path.join(directory,'.github/evidence-policy.json'));
-  fs.writeFileSync(path.join(directory,'event.json'),JSON.stringify({inputs:{pr_number:'2',expected_head:head,request_id:'notification-cleanup-test'}}));
+  const reviewed={base,head,files:['test/example.test.mjs'],inputs:[]};
+  fs.writeFileSync(path.join(directory,'event.json'),JSON.stringify({inputs:{pr_number:'2',expected_head:head,request_id:'notification-cleanup-test',...(wrapped?{reviewed_tests:JSON.stringify(reviewed)}:{})}}));
   const issue={number:1,state:'open',created_at:'2020-01-01T00:00:00Z',labels:['type:engineering','kind:work-item','status:ready'],
     body:'<!-- worldatlas-work:v1\n'+JSON.stringify({mode:'engineering',max_prs:2,depends_on:[],scope:'code'})+'\n-->'};
   const pr={number:2,state:'open',draft:false,body:'Closes #1',title:'Repair',changed_files:1,
     head:{sha:head,ref:'engineering/test',repo:{full_name:'owner/repo'}},base:{ref:'main',sha:base},mergeable:true,merge_commit_sha:candidate};
+  const authorityRows=[...EXECUTION_CODE,'test/fixtures/owned-prepare.json'].map(name=>({path:name,sha:sha('8'),mode:'100644',type:'blob'}));
   const routes={
     '/pulls/2':pr,'/issues/1':issue,'/issues/1/timeline':[],
     '/issues/1/comments':[{id:1,user:{login:'github-actions[bot]'},body:renderClaim({version:1,active:true,worker_id:'worker',claim_id:'nonce',branch:'engineering/test',expires_at:new Date(Date.now()+3600000).toISOString()})}],
@@ -187,9 +191,12 @@ for(const wrapped of [false,true]) for(const notification of ['denied','transpor
     ['/commits/'+head+'/status']:{statuses:[]},'/git/ref/heads/main':{object:{sha:base}},
     ['/git/commits/'+candidate]:{sha:candidate,parents:[{sha:sha('d')},{sha:head}]},
     '/contents/.github/package-inputs.json':packageBlob,
+    ['/git/commits/'+base]:{sha:base,tree:{sha:sha('5')}},
+    ['/git/trees/'+sha('5')]:{truncated:false,tree:authorityRows},
     ['/git/commits/'+owned]:{sha:owned,tree:{sha:sha('6')},parents:[{sha:base},{sha:head}]},
     ['/git/commits/'+head]:{tree:{sha:sha('6')}},
-    ['/git/trees/'+sha('6')]:{truncated:false,tree:[{path:'src/a.js',sha:'blob',mode:'100644',type:'blob'}]}
+    ['/git/trees/'+sha('6')]:{truncated:false,tree:[...authorityRows,{path:'src/a.js',sha:'blob',mode:'100644',type:'blob'},
+      {path:'test/example.test.mjs',sha:sha('7'),mode:'100644',type:'blob'}]}
   };
   fs.writeFileSync(path.join(directory,'mock.mjs'),capacityShim+`import fs from 'node:fs';const routes=${JSON.stringify(routes)},refs=new Map();
     const originalSetTimeout=globalThis.setTimeout;globalThis.setTimeout=(fn,ms,...args)=>{if(ms===2000)throw Error('Unexpected candidate polling sleep');return originalSetTimeout(fn,ms,...args);};
@@ -216,7 +223,9 @@ for(const wrapped of [false,true]) for(const notification of ['denied','transpor
     assert.deepEqual(JSON.parse(fs.readFileSync(path.join(directory,'remaining-refs.json'))),[[receipt.candidate_ref,owned]]);
     const outputs=fs.readFileSync(path.join(directory,'outputs'),'utf8');
     assert.match(outputs,new RegExp('^candidate='+owned+'$','m'));assert.match(outputs,new RegExp('^base='+base+'$','m'));
-    assert.match(outputs,/shards=\[0,1,2\]/);
+    assert.match(outputs,wrapped?/shards=\[0\]/:/shards=\[0,1,2\]/);
+    assert.deepEqual(JSON.parse(Buffer.from(outputs.match(/^test_files_base64=(.+)$/m)[1],'base64')),wrapped?reviewed.files:[]);
+    assert.equal(receipt.test_selection,wrapped?'reviewed':'complete');
     const encoded=outputs.match(wrapped?/^checkout_patterns_base64<<CHECKOUT_BASE64\n([A-Za-z0-9+/=\n]+)\nCHECKOUT_BASE64$/m:/^checkout_patterns_base64=([A-Za-z0-9+/=]+)$/m)?.[1];assert(encoded);
     if(wrapped)assert(encoded.split('\n').every(line=>line.length<=76),'Encoded data uses short lines without limiting the complete payload');
     else assert(!encoded.includes('\n'),'Old queued workflow keeps its single-quoted decoder input');
@@ -225,9 +234,12 @@ for(const wrapped of [false,true]) for(const notification of ['denied','transpor
       const legacy=spawnSync(process.env.PYTHON??'python3',['-c',"import base64,sys; sys.stdout.buffer.write(base64.b64decode('"+encoded+"', validate=True))"],{encoding:'utf8'});
       assert.equal(legacy.status,0,legacy.stderr);assert.equal(legacy.stdout,patterns,'The queued legacy single-quoted decoder consumes the actual new producer output');
     }
-    assert.match(patterns,/^\/\*\n/);
-    assert.match(patterns,/!\/coordination\/engineering\/reference-source-custody-20261007\//);
-    assert.match(patterns,/!\/research\/geography\/\*/);
+    if(wrapped) {assert.match(patterns,/^scripts\n/);assert(!patterns.includes('/*\n'));}
+    else {
+      assert.match(patterns,/^\/\*\n/);
+      assert.match(patterns,/!\/coordination\/engineering\/reference-source-custody-20261007\//);
+      assert.match(patterns,/!\/research\/geography\/\*/);
+    }
   } finally {fs.rmSync(directory,{recursive:true,force:true});}
 });
 
@@ -239,6 +251,7 @@ for (const phase of ['prepare', 'merge']) test(`actual ${phase} replay accepts m
 for (const integration of ['failure', 'cancelled', 'skipped']) test(`actual final ${integration} run fails when PR is still open`, () => {
   const {result, receipt} = run({phase: 'merge', merged: false, integration});
   assert.notEqual(result.status, 0); assert.equal(receipt.accepted, false);
+  assert.equal(Object.hasOwn(receipt,'retryable'),false);
 });
 test('actual final replay refuses a different merged head', () => {
   const {result, receipt} = run({phase: 'merge', head: 'c'.repeat(40)});
@@ -253,7 +266,7 @@ test('native Actions concurrency holds the full existing lifecycle without custo
 });
 
 test('actual queue entry points omit geography only for independently rechecked controls', () => {
-  for (const phase of ['prepare','merge']) {
+  for (const [phase,choice] of [['prepare',undefined],...[undefined,'false','true','','False','0','null'].map(choice=>['merge',choice])]) {
     const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-control-geography-'));
     const sha=c=>c.repeat(40), head=sha('a'),base=sha('b'),candidate=sha('c');
     const packageRaw=Buffer.from(JSON.stringify({version:1,inputs:['.github/package-inputs.json'],optional_inputs:[],verification_paths:[],generated_outputs:[]}));
@@ -270,6 +283,8 @@ test('actual queue entry points omit geography only for independently rechecked 
       '/contents/.github/package-inputs.json':packageBlob,
       ['/commits/'+head+'/check-runs']:{check_runs:[{id:1,name:'scope',app:{id:1},status:'completed',conclusion:'success'}]},
       ['/commits/'+head+'/status']:{statuses:[]},'/git/ref/heads/main':{object:{sha:base}},
+      ['/git/commits/'+base]:{sha:base,tree:{sha:sha('5')}},
+      ['/git/trees/'+sha('5')]:{truncated:false,tree:[]},
       ['/git/commits/'+head]:{tree:{sha:sha('6')}},['/git/trees/'+sha('6')]:{truncated:false,tree:rows},
       ['/git/commits/'+candidate]:{sha:candidate,tree:{sha:sha('7')},parents:[{sha:base},{sha:head}]},
       ['/git/trees/'+sha('7')]:{truncated:false,tree:rows}
@@ -293,9 +308,15 @@ test('actual queue entry points omit geography only for independently rechecked 
         cwd:directory,encoding:'utf8',env:{...process.env,GITHUB_ACTIONS:'false',GH_TOKEN:'synthetic-token',
           GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',GITHUB_EVENT_PATH:path.join(directory,'event.json'),
           GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:phase,
-          INTEGRATION_RESULT:'success',GEOGRAPHY_RESULT:'skipped',TESTED_BASE:base,TESTED_CANDIDATE:candidate,CANDIDATE_REF:''}});
-      assert.equal(result.status,0,result.stderr);
+          INTEGRATION_RESULT:'success',GEOGRAPHY_RESULT:'skipped',TESTED_BASE:base,TESTED_CANDIDATE:candidate,CANDIDATE_REF:'',
+          ...(choice===undefined?{}:{PREPARED_GEOGRAPHY_SOFTWARE:choice})}});
       const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
+      if(choice!==undefined&&!['true','false'].includes(choice)) {
+        assert.notEqual(result.status,0);assert.equal(receipt.accepted,false);
+        assert.match(receipt.reason,/Invalid prepared geographic checker choice/);
+        assert.equal(fs.existsSync(path.join(directory,'merge-write.json')),false);continue;
+      }
+      assert.equal(result.status,0,result.stderr);
       if(phase==='prepare') {
         assert.equal(receipt.geography_required,false);
         assert.match(fs.readFileSync(path.join(directory,'outputs'),'utf8'),/^geography_required=false$/m);

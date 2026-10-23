@@ -87,11 +87,12 @@ class TrustedCheckControls(unittest.TestCase):
         self.f.close()
 
     def selected_native_child(self, program):
-        # A real child runs through the real selected-native CLI route. Only its
+        # A real child runs through the existing Python-selected cold route. Only its
         # scientific calculation is a small controlled program; stdout/stderr,
         # immutable checkout validation and subprocess failure remain production.
         self.f.write('data/ownership-selection.json', {})
-        (self.f.repo / 'scripts/check-effective-geographic-regression.mjs').write_text(program)
+        (self.f.repo / 'scripts/check-effective-geographic-regression.mjs').write_text(
+            'export async function inspectSelectedAcquired(repo, baseline, candidate, {parentRuntimePath}) {\n' + program + '\n}\n')
         candidate = self.f.commit('selected-native-child-control')
         return self.f.run(candidate, rewind=False, extra_env={'GEOGRAPHY_CODE_COMMIT': candidate})
 
@@ -113,13 +114,31 @@ class TrustedCheckControls(unittest.TestCase):
         message = 'Original native progress remains on stderr\n'
         result, report = self.selected_native_child(
             'process.stderr.write(' + json.dumps(message) + ');\n'
-            'console.log(' + json.dumps(json.dumps(native)) + ');\n')
+            'return ' + json.dumps(native) + ';\n')
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(report['selected_native_report'], native)
         self.assertEqual(report['status'], 'no-new-native-loss')
         self.assertEqual(result.stderr.count(message), 1)
         self.assertNotIn(message.strip(), result.stdout)
         self.assertEqual(json.loads(result.stdout)['status'], 'no-new-native-loss')
+
+    def test_identical_final_bank_software_child_keeps_native_proof_and_truthful_markers(self):
+        bank = {'path': 'data/canonical-grid/current-startup/index.json', 'bytes': 123, 'sha256': 'c' * 64}
+        selection = {'version': 2, 'kind': 'selected-final-native-bank-v2', 'prepared_bank': bank}
+        native = {'method': 'selected-native-owner-conservation-v1', 'status': 'no-new-native-loss',
+                  'candidate_code_executed': True, 'lost_or_reassigned_cells': 0, 'intervals': [],
+                  'baseline_selection': selection, 'candidate_selection': selection, 'affected_rows': 0,
+                  'checkpoint_custody': {'accepted_bank': bank, 'candidate_bank': bank},
+                  'native_row_scope': {'proof': 'complete-accepted-final-bank-and-qualified-new-intervals',
+                      'compared_rows': 8, 'changed_rows': [], 'added_cells': 0, 'representation_migration': False}}
+        result, report = self.selected_native_child('return ' + json.dumps(native) + ';')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(report['status'], 'no-footprint-change')
+        self.assertEqual(report['regressions'], 0)
+        self.assertTrue(report['candidate_code_executed'])
+        self.assertEqual(report['selected_native_report'], native)
+        self.assertEqual(report['validation_scope'], 'selected-native-map-cells')
+        self.assertNotIn('checkpoint', report)
 
     def test_fatal_git_child_preserves_original_stderr_without_publishing_a_report(self):
         result, report = self.f.run('f' * 40)
@@ -665,22 +684,76 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
 
     def test_changed_selected_inputs_retain_the_existing_native_validation_route(self):
         g = self.g
+        for version in [1, 2]:
+            with self.subTest(selector_version=version):
+                selection = {'version': version}
+                if version == 2:
+                    selection['kind'] = 'selected-final-native-bank-v2'
+                native = {'method': 'selected-native-owner-conservation-v1', 'status': 'no-new-native-loss',
+                          'candidate_code_executed': version == 2, 'lost_or_reassigned_cells': 0,
+                          'intervals': [], 'candidate_selection': selection}
+                with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='fixture'), \
+                     self.mock.patch.object(g, 'inventory', return_value=['same raw world']), \
+                     self.mock.patch.object(g, 'unchanged_selected_inputs', return_value=None), \
+                     self.mock.patch.object(g, 'git', return_value=b'selected'), \
+                     self.mock.patch.object(g, 'read', return_value=json.dumps(selection).encode()) as selector, \
+                     self.mock.patch.object(g, 'selected_joint', side_effect=AssertionError('software checkpoint reuse')), \
+                     self.mock.patch.object(g, 'prefetch_declared_inputs') as prefetch, \
+                     self.mock.patch.object(g.subprocess, 'check_output', return_value=json.dumps(native).encode()) as checker:
+                    result = g.inspect(ROOT, self.baseline, self.candidate, code_commit=self.candidate, prefetch=True)
+                selector.assert_called_once_with(ROOT, self.baseline, 'data/ownership-selection.json')
+                if version == 1:
+                    prefetch.assert_called_once_with(ROOT, self.baseline, self.candidate)
+                else:
+                    prefetch.assert_not_called()
+                checker.assert_called_once()
+                command = checker.call_args.args[0]
+                self.assertEqual(command[1:3], ['--input-type=module', '--eval'])
+                self.assertIn('inspectSelectedAcquired', command[3])
+                self.assertEqual(command[4:], [(ROOT / 'scripts/check-effective-geographic-regression.mjs').as_uri(),
+                                               str(ROOT), self.baseline, self.candidate, sys.executable])
+                self.assertEqual(result['selected_native_report'], native)
+                self.assertEqual(result['trusted_code_commit'], self.candidate)
+                self.assertEqual(result['status'], 'no-new-native-loss')
+                self.assertNotIn('unchanged_selected_inputs', result)
+                self.assertNotIn('checkpoint', result)
+
+    def test_final_bank_summary_never_labels_changed_or_incomplete_bindings_unchanged(self):
+        import copy
+        bank = {'path': 'data/canonical-grid/current-startup/index.json', 'bytes': 123, 'sha256': 'c' * 64}
+        selection = {'version': 2, 'kind': 'selected-final-native-bank-v2', 'prepared_bank': bank}
         native = {'method': 'selected-native-owner-conservation-v1', 'status': 'no-new-native-loss',
-                  'candidate_code_executed': False, 'lost_or_reassigned_cells': 0, 'intervals': []}
-        with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='fixture'), \
-             self.mock.patch.object(g, 'inventory', return_value=['same raw world']), \
-             self.mock.patch.object(g, 'unchanged_selected_inputs', return_value=None), \
-             self.mock.patch.object(g, 'git', return_value=b'selected'), \
-             self.mock.patch.object(g, 'selected_joint', side_effect=AssertionError('software checkpoint reuse')), \
-             self.mock.patch.object(g, 'prefetch_declared_inputs') as prefetch, \
-             self.mock.patch.object(g.subprocess, 'check_output', return_value=json.dumps(native).encode()) as checker:
-            result = g.inspect(ROOT, self.baseline, self.candidate, code_commit=self.candidate, prefetch=True)
-        prefetch.assert_called_once_with(ROOT, self.baseline, self.candidate)
-        self.assertIn('scripts/check-effective-geographic-regression.mjs', checker.call_args.args[0][1])
-        self.assertEqual(checker.call_args.args[0][2:5], [str(ROOT), self.baseline, self.candidate])
-        self.assertEqual(result['selected_native_report'], native)
-        self.assertEqual(result['status'], 'no-new-native-loss')
-        self.assertNotIn('unchanged_selected_inputs', result)
+                  'candidate_code_executed': True, 'lost_or_reassigned_cells': 0, 'intervals': [],
+                  'baseline_selection': selection, 'candidate_selection': selection, 'affected_rows': 0,
+                  'checkpoint_custody': {'accepted_bank': bank, 'candidate_bank': bank},
+                  'native_row_scope': {'proof': 'complete-accepted-final-bank-and-qualified-new-intervals',
+                      'compared_rows': 8, 'changed_rows': [], 'added_cells': 0, 'representation_migration': False}}
+        def inspect(value):
+            g = self.g
+            with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='actual-inventory'), \
+                 self.mock.patch.object(g, 'inventory', return_value=['same']), \
+                 self.mock.patch.object(g, 'unchanged_selected_inputs', return_value=None), \
+                 self.mock.patch.object(g, 'git', return_value=b'selected'), \
+                 self.mock.patch.object(g, 'selected_joint', side_effect=AssertionError('software checkpoint reuse')), \
+                 self.mock.patch.object(g.subprocess, 'check_output', return_value=json.dumps(value).encode()):
+                return g.inspect(ROOT, self.baseline, self.candidate, code_commit=self.candidate)
+        for field, replacement in [
+            ('checkpoint_custody', {'accepted_bank': bank, 'candidate_bank': {**bank, 'sha256': 'e' * 64}}),
+            ('checkpoint_custody', {'accepted_bank': {**bank, 'bytes': 124}, 'candidate_bank': bank}),
+            ('candidate_selection', {**selection, 'reference': {'id': 'changed-context'}}),
+            ('candidate_selection', {**selection, 'prepared_bank': {**bank, 'sha256': 'e' * 64}}),
+            ('checkpoint_custody', {}), ('affected_rows', 1),
+            *[('native_row_scope', {**native['native_row_scope'], k: v}) for k, v in
+              [('changed_rows', [3]), ('added_cells', 1), ('representation_migration', True), ('compared_rows', 0)]]]:
+            with self.subTest(field=field, replacement=replacement):
+                value = copy.deepcopy(native); value[field] = replacement
+                result = inspect(value)
+                self.assertEqual(result['status'], 'no-new-native-loss')
+                self.assertEqual(result['selected_native_report'], value)
+        for changed in [{'candidate_code_executed': False}, {'lost_or_reassigned_cells': 1},
+                        {'intervals': [{'row': 1}]}, {'candidate_selection': {**selection, 'kind': 'unknown'}}]:
+            with self.subTest(changed=changed), self.assertRaises(ValueError):
+                inspect({**native, **changed})
 
     def test_changed_raw_inputs_never_consult_selected_shortcut(self):
         g = self.g

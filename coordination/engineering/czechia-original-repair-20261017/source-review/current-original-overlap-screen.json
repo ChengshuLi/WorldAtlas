@@ -1,0 +1,98 @@
+{
+  "kind": "Czechia-complete-original-spatial-overlap-screen",
+  "accepted_main": "21984e9ec4ec7370bc807e2da23cea2228747698",
+  "original_cells": 3934,
+  "original_intervals": 1400,
+  "original_owners": 35,
+  "comparisons": [
+    {
+      "reference": "actual_accepted_additive",
+      "cells": 6102970,
+      "overlap_cells": 0,
+      "overlap_keys": []
+    },
+    {
+      "reference": "entire_Sweden_original",
+      "cells": 18381,
+      "overlap_cells": 0,
+      "overlap_keys": []
+    },
+    {
+      "reference": "entire_Germany_original",
+      "cells": 27555,
+      "overlap_cells": 0,
+      "overlap_keys": []
+    },
+    {
+      "reference": "entire_Spain_original",
+      "cells": 29477,
+      "overlap_cells": 0,
+      "overlap_keys": []
+    },
+    {
+      "reference": "entire_Poland_original",
+      "cells": 7309,
+      "overlap_cells": 0,
+      "overlap_keys": []
+    }
+  ],
+  "inputs": [
+    {
+      "path": "block-021.json.gz",
+      "bytes": 7135,
+      "sha256": "2460a63b78ef9b51d65c61e22b82c53eda6001a5b8471a0b1e654712ebdb8e1c"
+    },
+    {
+      "path": "block-022.json.gz",
+      "bytes": 1834,
+      "sha256": "4aac9620ba46ea4aa973c2c5276543ae10b71b19c926a039170e7748ae8a0c75"
+    },
+    {
+      "commit": "21984e9ec4ec7370bc807e2da23cea2228747698",
+      "path": "data/ownership-selection.json",
+      "bytes": 1854,
+      "sha256": "f37d8f605b952e21ffc51a43fd2856d44d96311c1e0aa32ecee7c8ccc9aa8373"
+    },
+    {
+      "commit": "21984e9ec4ec7370bc807e2da23cea2228747698",
+      "path": "coordination/engineering/sweden-germany-spain-selected-delivery-20261017/ownership-selection-combined.json",
+      "bytes": 3504,
+      "sha256": "7c453331ede0fcbb02e99aa815b9d2afc8061e888a49402959ad5fc743eb9165"
+    },
+    {
+      "commit": "7713412453b95bec3660d2c3019f28d198339037",
+      "path": "coordination/engineering/sweden-germany-spain-selected-delivery-20261017/composition-001/patch.json",
+      "bytes": 28521034,
+      "sha256": "3488ab3e9e5428e940c55d9c5f3582ee9a20d1f790d0d2ebd43a2790e880fb1b"
+    },
+    {
+      "commit": "a1a8c3060a97cfc0648a7412c1662e19fde83f76",
+      "path": "coordination/engineering/sweden-original-repair-20261017/source-stage-001/original-native-patch.json",
+      "bytes": 217998,
+      "sha256": "47694b3131fdca8b648bc7988712e1eef028a99bee1ee06d0ae017afbeb920bf"
+    },
+    {
+      "commit": "9ebe37b375b46b06f2eed17302c746582e80a2aa",
+      "path": "coordination/engineering/germany-original-repair-20261017/source-stage-001/original-native-patch.json",
+      "bytes": 219583,
+      "sha256": "6e6e56ca235716532eeb1c34fe4bd95b7e612c4dc4083ce49ba41a3e77d37ab9"
+    },
+    {
+      "commit": "c1a507348cd1ade4167f548a1f9fe384da8fe7c2",
+      "path": "coordination/engineering/spain-original-repair-20261017/source-stage-001/original-native-patch.json",
+      "bytes": 319338,
+      "sha256": "ae200d8a6c46386a208db318d29e6919cf3459a403c367b55f9c845d86cc6d0f"
+    },
+    {
+      "commit": "d6017783b1154a59386ea8701b1a729749806741",
+      "path": "coordination/engineering/poland-original-repair-20261017/source-stage-001/original-native-patch.json",
+      "bytes": 101377,
+      "sha256": "d87a525f66b69f88d0c4e5a347d9297aa840d327f9f63773d36d6a7e3d6535aa"
+    }
+  ],
+  "limitations": [
+    "Spatial keys are compared irrespective of owner; complete pending originals conservatively cover their proposed supported subsets.",
+    "This does not replace genuine native-base owner-zero or final selected-output conservation.",
+    "Czechia remains unclaimed and outside active denominators."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "selector": {
+    "commit": "2d097d44081411110935bc9cd5b211a30d9c50eb",
+    "path": "data/ownership-selection.json"
+  },
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "3dcc031fe86346cf4cb285cef02f81d9a903c55c",
+        "path": "coordination/engineering/comoros-native-54-local-20261023/evidence/native-authority-54-001/original-rule-preimage.json"
+      },
+      "source_authority": {
+        "commit": "3dcc031fe86346cf4cb285cef02f81d9a903c55c",
+        "path": "coordination/engineering/comoros-native-54-local-20261023/evidence/native-authority-54-001/authority-binding.json"
+      },
+      "ledger": {
+        "commit": "3dcc031fe86346cf4cb285cef02f81d9a903c55c",
+        "path": "coordination/engineering/comoros-native-54-local-20261023/evidence/native-authority-54-001/constructor-result.json"
+      },
+      "native_patch": {
+        "commit": "c33c9c6b268c30c613890dc34ae037d18d715429",
+        "path": "coordination/engineering/comoros-native-54-local-20261023/evidence/supported-inputs-001/native-patch.json"
+      }
+    }
+  ]
+}

@@ -29,9 +29,10 @@ OFFLINE_GIT_READ = subprocess.check_output
 def actual_static_graph(source_root, entry_point):
     # Node parses these bodies without linking or evaluating them. This test
     # observes the true graph instead of maintaining a parallel regex allowlist.
-    walker="import fs from 'node:fs';import path from 'node:path';import vm from 'node:vm';const root=process.argv[1],q=[process.argv[2]],seen=new Set();while(q.length){const n=q.pop();if(seen.has(n))continue;seen.add(n);for(const s of new vm.SourceTextModule(fs.readFileSync(path.join(root,n),'utf8')).dependencySpecifiers)if(s.startsWith('.'))q.push(path.posix.normalize(path.posix.join(path.posix.dirname(n),s)));}process.stdout.write(JSON.stringify([...seen]));"
-    result=subprocess.run([SYSTEM_NODE,'--experimental-vm-modules','--input-type=module','-e',walker,str(source_root),entry_point],
-                          stdout=subprocess.PIPE,stderr=subprocess.PIPE,check=False)
+    helper=Path(__file__).resolve().parent / 'helpers/static-module-closure.mjs'
+    env={key:value for key,value in os.environ.items() if key not in ('NODE_OPTIONS','NODE_PATH')}
+    result=subprocess.run([SYSTEM_NODE,'--experimental-vm-modules',str(helper),str(source_root),json.dumps([entry_point])],
+                          stdout=subprocess.PIPE,stderr=subprocess.PIPE,check=False,timeout=20,env=env)
     if result.returncode:
         raise AssertionError('Actual static graph could not be read: '+result.stderr.decode())
     return json.loads(result.stdout)
@@ -310,6 +311,8 @@ class BootstrapTests(unittest.TestCase):
         # Copy Node's independently parsed static graph, without evaluating modules.
         names=actual_static_graph(SOURCE_ROOT, 'scripts/assemble-selected-package.mjs')
         self.assertIn('scripts/assemble-selected-package.mjs',names)
+        self.assertIn('src/reference-metadata.js',names)
+        self.assertNotIn('src/effective-footprint.js',names, 'Use the pure reference API before installed dependencies are admitted')
         self.assertNotIn('scripts/package-current-additive.mjs',names, 'Installed modules stay outside credential-bearing static startup')
         self.assertNotIn('scripts/check-effective-geographic-regression.mjs',names, 'Assembly must not import the historical scientific reader')
         for name in names+['scripts/extract-package-output.py']: self.write(name,(SOURCE_ROOT/name).read_bytes())
@@ -384,26 +387,34 @@ class WorkerWorkflowBootstrapTests(WorkflowBootstrapFixture, unittest.TestCase):
     def test_nonexact_base_falls_back_before_token_request(self):
         self.env['SELECTED_PACKAGE_TRUSTED_BASE']='main';self.assert_rejected();self.assertFalse(self.requests)
     def test_actual_worker_order_and_fallback_consumers(self):
-        order=['Authenticate selected package installer inputs','npm ci','pip install',
-          'Assemble unchanged base with current selected output','Snapshot original final-worker package inputs',
-          'Build the combined application once before asset-dependent tests','Inventory original final-worker package output',
-          'Install browser dependencies only for tests that use Playwright',
-          'Test applicable combined-tree invariants without publishing or live imports','Retain original final-worker package output']
+        snapshot_name='Snapshot original final-worker package inputs'
+        build_name='Build the combined application once before asset-dependent tests'
+        inventory_name='Inventory original final-worker package output'
+        upload_name='Retain original final-worker package output'
+        browser_name='Install browser dependencies only for tests that use Playwright'
+        tests_name='Test applicable combined-tree invariants without publishing or live imports'
+        order=['Authenticate selected package installer inputs','npm ci',
+          'Assemble unchanged base with current selected output','pip install',snapshot_name,build_name,inventory_name,
+          upload_name,browser_name,tests_name]
         positions=[self.integration.index(name) for name in order]
         self.assertEqual(positions,sorted(positions))
-        for name in [order[4],order[5],order[6],order[-1]]:
+        install=self.integration.split('- run: python -m pip install -r requirements.txt',1)[1].split('      - ',1)[0]
+        self.assertIn("steps.assembly.outputs.assembled != 'true'",install)
+        for profile in ['full','evidence']:
+            self.assertIn("needs.prepare.outputs.profile == '"+profile+"'",install)
+        for name in [snapshot_name,build_name,inventory_name,upload_name]:
             step=self.integration.split('- name: '+name,1)[1].split('      - ',1)[0]
             self.assertIn("steps.assembly.outputs.assembled != 'true'",step)
-        for name in [order[7],order[8]]:
+        for name in [browser_name,tests_name]:
             step=self.integration.split('- name: '+name,1)[1].split('      - ',1)[0]
             self.assertIn("steps.assembly.outputs.assembled == 'true' && 'selected-output' || needs.prepare.outputs.test_selection",step)
-        build=self.integration.split('- name: '+order[5],1)[1].split('      - ',1)[0]
+        build=self.integration.split('- name: '+build_name,1)[1].split('      - ',1)[0]
         self.assertIn('run: npm run build:cloudflare',build)
         self.assertEqual(self.integration.count('npm run build:cloudflare'),1)
-        tests=self.integration.split('- name: '+order[8],1)[1].split('      - ',1)[0]
+        tests=self.integration.split('- name: '+tests_name,1)[1].split('      - ',1)[0]
         self.assertIn('SELECTED_PACKAGE_ASSEMBLY_SHA256: ${{ steps.assembly.outputs.assembly_sha256 }}',tests)
         self.assertIn('= selected-output',tests);self.assertIn('selectedDeliverySmoke',tests)
-        browser=self.integration.split('- name: '+order[7],1)[1].split('      - ',1)[0]
+        browser=self.integration.split('- name: '+browser_name,1)[1].split('      - ',1)[0]
         self.assertIn("if: needs.prepare.outputs.test_selection != 'selected-data'",browser)
         self.assertIn('if test "$INTEGRATION_TEST_SELECTION" = selected-output; then',tests)
         self.assertIn('requireCurrentPackageAssembly()',tests)

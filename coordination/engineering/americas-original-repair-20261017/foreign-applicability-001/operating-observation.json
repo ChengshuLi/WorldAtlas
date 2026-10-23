@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "kind": "actual-completed-foreign-adapter-execution-summary",
+  "started_at": "2026-10-18T00:16:23.767315+00:00",
+  "ended_at": "2026-10-18T00:16:58.934684+00:00",
+  "external_timeout_seconds": 600,
+  "deadline_expired": false,
+  "observed_wrapper_exit_code": 1,
+  "separately_observed_node_exit_code": null,
+  "wrapper_error": "time: sysctl kern.clockrate: Operation not permitted",
+  "observed_time_wrapper_seconds": {
+    "real": 35.11,
+    "user": 27.13,
+    "sys": 8.61
+  },
+  "external_observed_seconds": 35.16693199996371,
+  "driver_recorded_seconds": 34.468234125,
+  "inventory_complete": true,
+  "country_applicability_complete": true,
+  "node_final_stdout_published_completion": true,
+  "time_l_maximum_rss": null,
+  "time_l_resource_report_complete": false,
+  "driver_resource_usage_observation": {
+    "process_max_rss_platform_units": 758640,
+    "platform": "darwin",
+    "conversion_applied": false,
+    "limit_enforced": false
+  },
+  "rss_limit": null,
+  "driver_sha256": "5d6a2d516c5c1ae96208f01a58736e99266bcb0dc1780f383b56649100f92cac",
+  "config_sha256": "c7ca78b1183719d1f3c0642baaa16413144e605d16b14ed21d33374add8d6bb2",
+  "method_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+  "complete_families": 368,
+  "complete_source_features": 73567,
+  "complete_target_members": 389,
+  "encoded_source_bytes": 196820704,
+  "decoded_source_bytes": 620368518,
+  "source_receipts": [
+    {
+      "path": "execution-001/started.json",
+      "bytes": 1144,
+      "sha256": "ffd6d01ccca43e34cf5d7c3a69e86a89ae57e655f6cef85a77e0d730d8d1c85a",
+      "publication_status": "Original contains private host paths where applicable; publish only an explicitly sanitized derivative."
+    },
+    {
+      "path": "execution-001/execution.json",
+      "bytes": 1282,
+      "sha256": "9bd15672ad51ed4c46c3e378448dfcabe31b01ca51a5a9b8bacaf0522ca772b6",
+      "publication_status": "Original contains private host paths where applicable; publish only an explicitly sanitized derivative."
+    },
+    {
+      "path": "execution-001/stdout.log",
+      "bytes": 18766,
+      "sha256": "cf9a10f759ee97330871be4428ef5804fccd1d13d09067b2c05b22223b156c04",
+      "publication_status": "Original contains private host paths where applicable; publish only an explicitly sanitized derivative."
+    },
+    {
+      "path": "execution-001/stderr.log",
+      "bytes": 106,
+      "sha256": "96dad7e6dacd1f68d52315b871c9254a443b24d11d92c8b6a51f6a0a69d16214",
+      "publication_status": "Original contains private host paths where applicable; publish only an explicitly sanitized derivative."
+    }
+  ],
+  "limits": [
+    "The time wrapper reported exit1 after the Node completion artifacts/final completion stdout; no separately observed numeric Node exit is available. Do not claim Node/stock process exit0.",
+    "The wrapper failure did not invalidate or require rerunning the complete original scan.",
+    "No time-l maximum RSS is available. Driver resourceUsage fields are retained raw with no unit conversion or enforcement claim.",
+    "Counts describe completed input/bounds preparation only, not source authority, physical/native qualification or accepted delivery."
+  ]
+}

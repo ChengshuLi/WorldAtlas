@@ -1,0 +1,1591 @@
+{
+  "kind": "read-only-AAFC-native-centre-applicability-screening",
+  "base": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+  "grid_size": 262166,
+  "latitudes_pin": {
+    "root": "repository",
+    "role": "immutable-normative-rule-input",
+    "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+    "bytes": 1851757,
+    "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+    "decoded_bytes": 2097328,
+    "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+  },
+  "baseline_source": {
+    "path": "data/regional-review/regional-review-a9f03b364bdefa4a/sources/aafc-baseline-arcgis-layer0.geojson",
+    "sha256": "30e5e2fc80df6624ecc10d2a6714cf88339fad88e5a8577e41f9fb26e2c4a992",
+    "bytes": 12241679,
+    "feature_count": 218,
+    "crs": {
+      "type": "name",
+      "properties": {
+        "name": "EPSG:4326"
+      }
+    }
+  },
+  "official_source": {
+    "path": "data/regional-review/regional-review-a9f03b364bdefa4a/sources/aafc-terrestrial-ecoregions-v2.2.geojson",
+    "sha256": "f2c7ac1cabc601c364479c4616c245c993443ac61f6842f01a12078844a71e6b",
+    "bytes": 13567291,
+    "feature_count": 218,
+    "crs": null
+  },
+  "counts": {
+    "all": 144097,
+    "within_intended_ecoregion": 144049,
+    "outside_intended_ecoregion": 48,
+    "other_ecoregion_contact": 37,
+    "no_ecoregion_contact": 11,
+    "same_without_competitor": 144049
+  },
+  "targets": [
+    {
+      "index": 6640,
+      "id": "atlas:physical:CAN-13:NUN",
+      "name": "Lancaster Plateau",
+      "ecoregion_id": 13,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 1238,
+        "within_intended_ecoregion": 1238,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 1238
+      },
+      "coastline_adjustments": [
+        {
+          "region": 13,
+          "area_km2": 1.154092,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6631,
+      "id": "atlas:physical:CAN-12:NUN",
+      "name": "Parry Islands Plateau",
+      "ecoregion_id": 12,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 2058,
+        "within_intended_ecoregion": 2058,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 2058
+      },
+      "coastline_adjustments": []
+    },
+    {
+      "index": 6754,
+      "id": "atlas:physical:CAN-22:NUN",
+      "name": "Borden Peninsula Plateau",
+      "ecoregion_id": 22,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 1723,
+        "within_intended_ecoregion": 1723,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 1723
+      },
+      "coastline_adjustments": [
+        {
+          "region": 22,
+          "area_km2": 0.56932,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6678,
+      "id": "atlas:physical:CAN-16:NWT",
+      "name": "Amundsen Gulf Lowlands",
+      "ecoregion_id": 16,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 2581,
+        "within_intended_ecoregion": 2581,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 2581
+      },
+      "coastline_adjustments": [
+        {
+          "region": 16,
+          "area_km2": 4.633661,
+          "distance_band_degrees": 0.001
+        },
+        {
+          "region": 16,
+          "area_km2": 0.006056,
+          "distance_band_degrees": 0.005
+        }
+      ]
+    },
+    {
+      "index": 6807,
+      "id": "atlas:physical:CAN-6:NUN",
+      "name": "Baffin Island Coastal Lowlands",
+      "ecoregion_id": 6,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 600,
+        "within_intended_ecoregion": 600,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 600
+      },
+      "coastline_adjustments": [
+        {
+          "region": 6,
+          "area_km2": 0.021763,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6767,
+      "id": "atlas:physical:CAN-33:NWT",
+      "name": "Tuktoyaktuk Coastal Plain",
+      "ecoregion_id": 33,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 954,
+        "within_intended_ecoregion": 954,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 954
+      },
+      "coastline_adjustments": [
+        {
+          "region": 33,
+          "area_km2": 4.012683,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6757,
+      "id": "atlas:physical:CAN-25:NUN",
+      "name": "Foxe Basin Plain",
+      "ecoregion_id": 25,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 3061,
+        "within_intended_ecoregion": 3061,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 3061
+      },
+      "coastline_adjustments": [
+        {
+          "region": 25,
+          "area_km2": 2.32974,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6770,
+      "id": "atlas:physical:CAN-35:NWT",
+      "name": "Dease Arm Plain",
+      "ecoregion_id": 35,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 189,
+        "within_intended_ecoregion": 189,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 189
+      },
+      "coastline_adjustments": [
+        {
+          "region": 35,
+          "area_km2": 4.964107,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6677,
+      "id": "atlas:physical:CAN-16:NUN",
+      "name": "Amundsen Gulf Lowlands",
+      "ecoregion_id": 16,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 887,
+        "within_intended_ecoregion": 887,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 887
+      },
+      "coastline_adjustments": [
+        {
+          "region": 16,
+          "area_km2": 3.966837,
+          "distance_band_degrees": 0.001
+        },
+        {
+          "region": 16,
+          "area_km2": 0.007287,
+          "distance_band_degrees": 0.005
+        }
+      ]
+    },
+    {
+      "index": 6707,
+      "id": "atlas:physical:CAN-18:NUN",
+      "name": "Victoria Islands Lowland",
+      "ecoregion_id": 18,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 430,
+        "within_intended_ecoregion": 430,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 430
+      },
+      "coastline_adjustments": [
+        {
+          "region": 18,
+          "area_km2": 2.319183,
+          "distance_band_degrees": 0.001
+        },
+        {
+          "region": 18,
+          "area_km2": 0.002324,
+          "distance_band_degrees": 0.005
+        }
+      ]
+    },
+    {
+      "index": 6743,
+      "id": "atlas:physical:CAN-21:NUN",
+      "name": "Gulf of Boothia Plain",
+      "ecoregion_id": 21,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 236,
+        "within_intended_ecoregion": 236,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 236
+      },
+      "coastline_adjustments": [
+        {
+          "region": 21,
+          "area_km2": 0.811355,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6771,
+      "id": "atlas:physical:CAN-36:NUN",
+      "name": "Coronation Hills",
+      "ecoregion_id": 36,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 2902,
+        "within_intended_ecoregion": 2902,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 2902
+      },
+      "coastline_adjustments": [
+        {
+          "region": 36,
+          "area_km2": 3.974562,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6776,
+      "id": "atlas:physical:CAN-39:NUN",
+      "name": "Queen Maud Gulf Lowland",
+      "ecoregion_id": 39,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 1133,
+        "within_intended_ecoregion": 1133,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 1133
+      },
+      "coastline_adjustments": [
+        {
+          "region": 39,
+          "area_km2": 1.759027,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6793,
+      "id": "atlas:physical:CAN-5:NUN",
+      "name": "Baffin Mountains",
+      "ecoregion_id": 5,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 659,
+        "within_intended_ecoregion": 659,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 659
+      },
+      "coastline_adjustments": [
+        {
+          "region": 5,
+          "area_km2": 1.50186,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6775,
+      "id": "atlas:physical:CAN-38:NUN",
+      "name": "Bathurst Hills",
+      "ecoregion_id": 38,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 406,
+        "within_intended_ecoregion": 406,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 406
+      },
+      "coastline_adjustments": [
+        {
+          "region": 38,
+          "area_km2": 0.593416,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6762,
+      "id": "atlas:physical:CAN-30:NUN",
+      "name": "Wager Bay Plateau",
+      "ecoregion_id": 30,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 3177,
+        "within_intended_ecoregion": 3177,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 3177
+      },
+      "coastline_adjustments": [
+        {
+          "region": 30,
+          "area_km2": 4.60782,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6760,
+      "id": "atlas:physical:CAN-28:NUN",
+      "name": "Meta Incognita Peninsula",
+      "ecoregion_id": 28,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 979,
+        "within_intended_ecoregion": 979,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 979
+      },
+      "coastline_adjustments": [
+        {
+          "region": 28,
+          "area_km2": 1.589506,
+          "distance_band_degrees": 0.001
+        },
+        {
+          "region": 28,
+          "area_km2": 0.0,
+          "distance_band_degrees": 0.005
+        }
+      ]
+    },
+    {
+      "index": 6788,
+      "id": "atlas:physical:CAN-46:NUN",
+      "name": "Southampton Island Plain",
+      "ecoregion_id": 46,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 225,
+        "within_intended_ecoregion": 225,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 225
+      },
+      "coastline_adjustments": [
+        {
+          "region": 46,
+          "area_km2": 0.084793,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6787,
+      "id": "atlas:physical:CAN-45:NUN",
+      "name": "Maguse River Upland",
+      "ecoregion_id": 45,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 7427,
+        "within_intended_ecoregion": 7427,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 7427
+      },
+      "coastline_adjustments": [
+        {
+          "region": 45,
+          "area_km2": 1.478018,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6764,
+      "id": "atlas:physical:CAN-31:QUE",
+      "name": "Northern Ungava Peninsula",
+      "ecoregion_id": 31,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 2658,
+        "within_intended_ecoregion": 2658,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 2658
+      },
+      "coastline_adjustments": []
+    },
+    {
+      "index": 6790,
+      "id": "atlas:physical:CAN-47:QUE",
+      "name": "Central Ungava Peninsula",
+      "ecoregion_id": 47,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 5707,
+        "within_intended_ecoregion": 5707,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 5707
+      },
+      "coastline_adjustments": [
+        {
+          "region": 47,
+          "area_km2": 1.053405,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 5797,
+      "id": "atlas:multipart:eb54b54f2e8cdb87e6b1",
+      "name": "George Plateau",
+      "ecoregion_id": 76,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 3112,
+        "within_intended_ecoregion": 3112,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 3112
+      },
+      "coastline_adjustments": [
+        {
+          "region": 76,
+          "area_km2": 0.293571,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6747,
+      "id": "atlas:physical:CAN-215:MAN",
+      "name": "Coastal Hudson Bay Lowland",
+      "ecoregion_id": 215,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 8,
+        "within_intended_ecoregion": 8,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 8
+      },
+      "coastline_adjustments": [
+        {
+          "region": 215,
+          "area_km2": 5.261725,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 5780,
+      "id": "atlas:multipart:b584f34f0420c6386763",
+      "name": "Ungava Bay Basin",
+      "ecoregion_id": 75,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 450,
+        "within_intended_ecoregion": 450,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 450
+      },
+      "coastline_adjustments": [
+        {
+          "region": 75,
+          "area_km2": 1.59699,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6792,
+      "id": "atlas:physical:CAN-49:NUN",
+      "name": "Belcher Islands",
+      "ecoregion_id": 49,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 2285,
+        "within_intended_ecoregion": 2285,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 2285
+      },
+      "coastline_adjustments": []
+    },
+    {
+      "index": 6847,
+      "id": "atlas:physical:CAN-79:LAB",
+      "name": "Coastal Barrens",
+      "ecoregion_id": 79,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 881,
+        "within_intended_ecoregion": 881,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 881
+      },
+      "coastline_adjustments": [
+        {
+          "region": 79,
+          "area_km2": 0.703624,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6718,
+      "id": "atlas:physical:CAN-185:BRC",
+      "name": "Northern Coastal Mountains",
+      "ecoregion_id": 185,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 15,
+        "within_intended_ecoregion": 14,
+        "outside_intended_ecoregion": 1,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 1,
+        "same_without_competitor": 14
+      },
+      "coastline_adjustments": [
+        {
+          "region": 185,
+          "area_km2": 16.116372,
+          "distance_band_degrees": 0.001
+        },
+        {
+          "region": 185,
+          "area_km2": 12.575792,
+          "distance_band_degrees": 0.005
+        },
+        {
+          "region": 185,
+          "area_km2": 0.331137,
+          "distance_band_degrees": 0.01
+        },
+        {
+          "region": 185,
+          "area_km2": 0.005595,
+          "distance_band_degrees": 0.025
+        }
+      ]
+    },
+    {
+      "index": 6843,
+      "id": "atlas:physical:CAN-77:LAB",
+      "name": "Kingurutuk-Fraser Rivers",
+      "ecoregion_id": 77,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 28,
+        "within_intended_ecoregion": 28,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 28
+      },
+      "coastline_adjustments": [
+        {
+          "region": 77,
+          "area_km2": 4.097848,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6837,
+      "id": "atlas:physical:CAN-72:QUE",
+      "name": "La Grande Hills",
+      "ecoregion_id": 72,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 4159,
+        "within_intended_ecoregion": 4159,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 4159
+      },
+      "coastline_adjustments": [
+        {
+          "region": 72,
+          "area_km2": 5.222916,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6845,
+      "id": "atlas:physical:CAN-78:LAB",
+      "name": "Smallwood Reservoir-Michikamau",
+      "ecoregion_id": 78,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 3,
+        "within_intended_ecoregion": 3,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 3
+      },
+      "coastline_adjustments": [
+        {
+          "region": 78,
+          "area_km2": 4.402565,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6722,
+      "id": "atlas:physical:CAN-191:BRC",
+      "name": "Coastal Gap",
+      "ecoregion_id": 191,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 601,
+        "within_intended_ecoregion": 601,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 601
+      },
+      "coastline_adjustments": [
+        {
+          "region": 191,
+          "area_km2": 0.730546,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6616,
+      "id": "atlas:physical:CAN-104:LAB",
+      "name": "Paradise River",
+      "ecoregion_id": 104,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 262,
+        "within_intended_ecoregion": 262,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 262
+      },
+      "coastline_adjustments": [
+        {
+          "region": 104,
+          "area_km2": 0.994126,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6617,
+      "id": "atlas:physical:CAN-105:LAB",
+      "name": "Lake Melville",
+      "ecoregion_id": 105,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 35,
+        "within_intended_ecoregion": 35,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 35
+      },
+      "coastline_adjustments": [
+        {
+          "region": 105,
+          "area_km2": 1.165126,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6752,
+      "id": "atlas:physical:CAN-217:ONT",
+      "name": "James Bay Lowlands",
+      "ecoregion_id": 217,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 120,
+        "within_intended_ecoregion": 120,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 120
+      },
+      "coastline_adjustments": [
+        {
+          "region": 217,
+          "area_km2": 0.35888,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6753,
+      "id": "atlas:physical:CAN-217:QUE",
+      "name": "James Bay Lowlands",
+      "ecoregion_id": 217,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 128,
+        "within_intended_ecoregion": 128,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 128
+      },
+      "coastline_adjustments": [
+        {
+          "region": 217,
+          "area_km2": 0.828032,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6614,
+      "id": "atlas:physical:CAN-103:LAB",
+      "name": "Mecatina Plateau",
+      "ecoregion_id": 103,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 92,
+        "within_intended_ecoregion": 92,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 92
+      },
+      "coastline_adjustments": [
+        {
+          "region": 103,
+          "area_km2": 1.500734,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6618,
+      "id": "atlas:physical:CAN-106:NFL",
+      "name": "Strait of Belle Isle",
+      "ecoregion_id": 106,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 1358,
+        "within_intended_ecoregion": 1358,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 1358
+      },
+      "coastline_adjustments": [
+        {
+          "region": 106,
+          "area_km2": 0.851124,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6615,
+      "id": "atlas:physical:CAN-103:QUE",
+      "name": "Mecatina Plateau",
+      "ecoregion_id": 103,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 19947,
+        "within_intended_ecoregion": 19947,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 19947
+      },
+      "coastline_adjustments": [
+        {
+          "region": 103,
+          "area_km2": 0.393721,
+          "distance_band_degrees": 0.001
+        },
+        {
+          "region": 103,
+          "area_km2": 0.008846,
+          "distance_band_degrees": 0.005
+        }
+      ]
+    },
+    {
+      "index": 6619,
+      "id": "atlas:physical:CAN-107:NFL",
+      "name": "Northern Penninsula",
+      "ecoregion_id": 107,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 2103,
+        "within_intended_ecoregion": 2103,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 2103
+      },
+      "coastline_adjustments": [
+        {
+          "region": 107,
+          "area_km2": 2.114222,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6723,
+      "id": "atlas:physical:CAN-192:BRC",
+      "name": "Pacific Ranges",
+      "ecoregion_id": 192,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 39,
+        "within_intended_ecoregion": 39,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 39
+      },
+      "coastline_adjustments": []
+    },
+    {
+      "index": 6612,
+      "id": "atlas:physical:CAN-101:QUE",
+      "name": "Central Laurentians",
+      "ecoregion_id": 101,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 937,
+        "within_intended_ecoregion": 937,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 937
+      },
+      "coastline_adjustments": [
+        {
+          "region": 101,
+          "area_km2": 2.688689,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6625,
+      "id": "atlas:physical:CAN-113:NFL",
+      "name": "Northeastern Newfoundland",
+      "ecoregion_id": 113,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 9734,
+        "within_intended_ecoregion": 9734,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 9734
+      },
+      "coastline_adjustments": [
+        {
+          "region": 113,
+          "area_km2": 0.319921,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6725,
+      "id": "atlas:physical:CAN-194:BRC",
+      "name": "Eastern Vancouver Island",
+      "ecoregion_id": 194,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 56,
+        "within_intended_ecoregion": 56,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 56
+      },
+      "coastline_adjustments": []
+    },
+    {
+      "index": 6724,
+      "id": "atlas:physical:CAN-193:BRC",
+      "name": "Western Vancouver Island",
+      "ecoregion_id": 193,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 369,
+        "within_intended_ecoregion": 369,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 369
+      },
+      "coastline_adjustments": []
+    },
+    {
+      "index": 6613,
+      "id": "atlas:physical:CAN-102:QUE",
+      "name": "Anticosti Island",
+      "ecoregion_id": 102,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 1782,
+        "within_intended_ecoregion": 1782,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 1782
+      },
+      "coastline_adjustments": []
+    },
+    {
+      "index": 6864,
+      "id": "atlas:physical:CAN-91:ONT",
+      "name": "Lake of the Woods",
+      "ecoregion_id": 91,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 4410,
+        "within_intended_ecoregion": 4410,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 4410
+      },
+      "coastline_adjustments": [
+        {
+          "region": 91,
+          "area_km2": 0.138775,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6624,
+      "id": "atlas:physical:CAN-112:NFL",
+      "name": "Central Newfoundland",
+      "ecoregion_id": 112,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 1358,
+        "within_intended_ecoregion": 1351,
+        "outside_intended_ecoregion": 7,
+        "other_ecoregion_contact": 7,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 1351
+      },
+      "coastline_adjustments": [
+        {
+          "region": 112,
+          "area_km2": 4.845711,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6863,
+      "id": "atlas:physical:CAN-91:MAN",
+      "name": "Lake of the Woods",
+      "ecoregion_id": 91,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 85,
+        "within_intended_ecoregion": 85,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 85
+      },
+      "coastline_adjustments": [
+        {
+          "region": 91,
+          "area_km2": 0.665506,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6621,
+      "id": "atlas:physical:CAN-109:NFL",
+      "name": "Southwestern Newfoundland",
+      "ecoregion_id": 109,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 4016,
+        "within_intended_ecoregion": 4016,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 4016
+      },
+      "coastline_adjustments": [
+        {
+          "region": 109,
+          "area_km2": 0.438614,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6744,
+      "id": "atlas:physical:CAN-213:BRC",
+      "name": "Southern Rocky Mountain Trench",
+      "ecoregion_id": 213,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 58,
+        "within_intended_ecoregion": 58,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 58
+      },
+      "coastline_adjustments": [
+        {
+          "region": 213,
+          "area_km2": 0.326012,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6676,
+      "id": "atlas:physical:CAN-159:SAS",
+      "name": "Mixed Grassland",
+      "ecoregion_id": 159,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 472,
+        "within_intended_ecoregion": 472,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 472
+      },
+      "coastline_adjustments": [
+        {
+          "region": 159,
+          "area_km2": 0.038728,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6673,
+      "id": "atlas:physical:CAN-157:SAS",
+      "name": "Moist Mixed Grassland",
+      "ecoregion_id": 157,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 212,
+        "within_intended_ecoregion": 212,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 212
+      },
+      "coastline_adjustments": [
+        {
+          "region": 157,
+          "area_km2": 0.806768,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6671,
+      "id": "atlas:physical:CAN-156:SAS",
+      "name": "Aspen Parkland",
+      "ecoregion_id": 156,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 196,
+        "within_intended_ecoregion": 196,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 196
+      },
+      "coastline_adjustments": [
+        {
+          "region": 156,
+          "area_km2": 0.485414,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6670,
+      "id": "atlas:physical:CAN-156:MAN",
+      "name": "Aspen Parkland",
+      "ecoregion_id": 156,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 417,
+        "within_intended_ecoregion": 417,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 417
+      },
+      "coastline_adjustments": [
+        {
+          "region": 156,
+          "area_km2": 3.477391,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6745,
+      "id": "atlas:physical:CAN-214:ABT",
+      "name": "Northern Continental Divide",
+      "ecoregion_id": 214,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 11,
+        "within_intended_ecoregion": 11,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 11
+      },
+      "coastline_adjustments": [
+        {
+          "region": 214,
+          "area_km2": 0.041241,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6867,
+      "id": "atlas:physical:CAN-94:ONT",
+      "name": "Lake Nipigon",
+      "ecoregion_id": 94,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 1893,
+        "within_intended_ecoregion": 1893,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 1893
+      },
+      "coastline_adjustments": [
+        {
+          "region": 94,
+          "area_km2": 1.428971,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6626,
+      "id": "atlas:physical:CAN-114:NFL",
+      "name": "Maritime Barrens",
+      "ecoregion_id": 114,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 23159,
+        "within_intended_ecoregion": 23159,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 23159
+      },
+      "coastline_adjustments": [
+        {
+          "region": 114,
+          "area_km2": 1.741959,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6866,
+      "id": "atlas:physical:CAN-93:ONT",
+      "name": "Thunder Bay-Quetico",
+      "ecoregion_id": 93,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 2692,
+        "within_intended_ecoregion": 2692,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 2692
+      },
+      "coastline_adjustments": [
+        {
+          "region": 93,
+          "area_km2": 0.932479,
+          "distance_band_degrees": 0.001
+        },
+        {
+          "region": 93,
+          "area_km2": 1.106797,
+          "distance_band_degrees": 0.005
+        },
+        {
+          "region": 93,
+          "area_km2": 0.009597,
+          "distance_band_degrees": 0.01
+        }
+      ]
+    },
+    {
+      "index": 6630,
+      "id": "atlas:physical:CAN-118:QUE",
+      "name": "Northern New Brunswick Uplands",
+      "ecoregion_id": 118,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 23,
+        "within_intended_ecoregion": 23,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 23
+      },
+      "coastline_adjustments": []
+    },
+    {
+      "index": 5760,
+      "id": "atlas:multipart:31ba3f8cfe5dec603858",
+      "name": "Appalachians",
+      "ecoregion_id": 117,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 237,
+        "within_intended_ecoregion": 237,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 237
+      },
+      "coastline_adjustments": []
+    },
+    {
+      "index": 6869,
+      "id": "atlas:physical:CAN-96:ONT",
+      "name": "Abitibi Plains",
+      "ecoregion_id": 96,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 3,
+        "within_intended_ecoregion": 3,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 3
+      },
+      "coastline_adjustments": [
+        {
+          "region": 96,
+          "area_km2": 2.206381,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6642,
+      "id": "atlas:physical:CAN-131:QUE",
+      "name": "\u00celes-de-la-Madeleine",
+      "ecoregion_id": 131,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 2310,
+        "within_intended_ecoregion": 2300,
+        "outside_intended_ecoregion": 10,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 10,
+        "same_without_competitor": 2300
+      },
+      "coastline_adjustments": []
+    },
+    {
+      "index": 6634,
+      "id": "atlas:physical:CAN-122:NBR",
+      "name": "Maritime Lowlands",
+      "ecoregion_id": 122,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 159,
+        "within_intended_ecoregion": 159,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 159
+      },
+      "coastline_adjustments": []
+    },
+    {
+      "index": 6644,
+      "id": "atlas:physical:CAN-132:QUE",
+      "name": "St. Lawrence Lowlands",
+      "ecoregion_id": 132,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 2415,
+        "within_intended_ecoregion": 2415,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 2415
+      },
+      "coastline_adjustments": []
+    },
+    {
+      "index": 6628,
+      "id": "atlas:physical:CAN-116:NFL",
+      "name": "South Avalon-Burin Oceanic Barrens",
+      "ecoregion_id": 116,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 724,
+        "within_intended_ecoregion": 724,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 724
+      },
+      "coastline_adjustments": [
+        {
+          "region": 116,
+          "area_km2": 0.02803,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6641,
+      "id": "atlas:physical:CAN-130:PEI",
+      "name": "Prince Edward Island",
+      "ecoregion_id": 130,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 636,
+        "within_intended_ecoregion": 636,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 636
+      },
+      "coastline_adjustments": []
+    },
+    {
+      "index": 6871,
+      "id": "atlas:physical:CAN-97:ONT",
+      "name": "Lac Temiscamingue Lowland",
+      "ecoregion_id": 97,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 431,
+        "within_intended_ecoregion": 431,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 431
+      },
+      "coastline_adjustments": [
+        {
+          "region": 97,
+          "area_km2": 0.377415,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6872,
+      "id": "atlas:physical:CAN-98:ONT",
+      "name": "Algonquin-Lake Nipissing",
+      "ecoregion_id": 98,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 8926,
+        "within_intended_ecoregion": 8896,
+        "outside_intended_ecoregion": 30,
+        "other_ecoregion_contact": 30,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 8896
+      },
+      "coastline_adjustments": [
+        {
+          "region": 98,
+          "area_km2": 9e-06,
+          "distance_band_degrees": 0.001
+        }
+      ]
+    },
+    {
+      "index": 6645,
+      "id": "atlas:physical:CAN-134:ONT",
+      "name": "Manitoulin-Lake Simcoe",
+      "ecoregion_id": 134,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 744,
+        "within_intended_ecoregion": 744,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 744
+      },
+      "coastline_adjustments": [
+        {
+          "region": 134,
+          "area_km2": 0.010665,
+          "distance_band_degrees": 0.001
+        },
+        {
+          "region": 134,
+          "area_km2": 0.000205,
+          "distance_band_degrees": 0.005
+        }
+      ]
+    },
+    {
+      "index": 6635,
+      "id": "atlas:physical:CAN-122:NSC",
+      "name": "Maritime Lowlands",
+      "ecoregion_id": 122,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 41,
+        "within_intended_ecoregion": 41,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 41
+      },
+      "coastline_adjustments": []
+    },
+    {
+      "index": 6643,
+      "id": "atlas:physical:CAN-132:ONT",
+      "name": "St. Lawrence Lowlands",
+      "ecoregion_id": 132,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 290,
+        "within_intended_ecoregion": 290,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 290
+      },
+      "coastline_adjustments": []
+    },
+    {
+      "index": 6636,
+      "id": "atlas:physical:CAN-123:NBR",
+      "name": "Fundy Coast",
+      "ecoregion_id": 123,
+      "source_geometry_valid": true,
+      "counts": {
+        "all": 445,
+        "within_intended_ecoregion": 445,
+        "outside_intended_ecoregion": 0,
+        "other_ecoregion_contact": 0,
+        "no_ecoregion_contact": 0,
+        "same_without_competitor": 445
+      },
+      "coastline_adjustments": []
+    }
+  ],
+  "limits": [
+    "Shapely complete-source point predicate screening, not native scanline qualification or final authority. Boundary observations require unchanged constructor verification.",
+    "Outside-ecoregion cells have not been accepted through historic coastline adjustment. #887 clipping/completeness obligations remain open."
+  ]
+}

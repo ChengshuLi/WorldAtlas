@@ -1,0 +1,38 @@
+[
+  {
+    "writer": "prepare-stage.py",
+    "case": "occupied",
+    "exit_code": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/c5c7c86ee0afc5a6fe1e5224108daa9a803de080841d8576043b9dcfe9d6c746/work/coordination/engineering/japan-native-repair-20261017/method/prepare-stage.py\", line 12, in <module>\n    assert W.is_dir() and O.parent.is_dir() and not O.exists()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+    "writer": "prepare-stage.py",
+    "case": "dangling-symlink",
+    "exit_code": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/c5c7c86ee0afc5a6fe1e5224108daa9a803de080841d8576043b9dcfe9d6c746/work/coordination/engineering/japan-native-repair-20261017/method/prepare-stage.py\", line 13, in <module>\n    assert all(not p.is_symlink() for root in (W,O) for p in (root,*root.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+    "writer": "check-historical.py",
+    "case": "occupied",
+    "exit_code": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/c5c7c86ee0afc5a6fe1e5224108daa9a803de080841d8576043b9dcfe9d6c746/work/coordination/engineering/japan-native-repair-20261017/method/check-historical.py\", line 7, in <module>\n    W=pathlib.Path(sys.argv[1]).absolute();H=sys.argv[2];O=pathlib.Path(sys.argv[3]).absolute();assert len(H)==40 and O.parent.is_dir() and not O.exists();assert all(not p.is_symlink() for p in (O,*O.parents));P='coordination/engineering/japan-native-repair-20261017/';OLD='research/geography/japan-nine-gap-family-source-fitness-20261007/';inputs=[]\n                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+    "writer": "check-historical.py",
+    "case": "dangling-symlink",
+    "exit_code": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/c5c7c86ee0afc5a6fe1e5224108daa9a803de080841d8576043b9dcfe9d6c746/work/coordination/engineering/japan-native-repair-20261017/method/check-historical.py\", line 7, in <module>\n    W=pathlib.Path(sys.argv[1]).absolute();H=sys.argv[2];O=pathlib.Path(sys.argv[3]).absolute();assert len(H)==40 and O.parent.is_dir() and not O.exists();assert all(not p.is_symlink() for p in (O,*O.parents));P='coordination/engineering/japan-native-repair-20261017/';OLD='research/geography/japan-nine-gap-family-source-fitness-20261007/';inputs=[]\n                                                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+    "writer": "check-accounting.py",
+    "case": "occupied",
+    "exit_code": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/c5c7c86ee0afc5a6fe1e5224108daa9a803de080841d8576043b9dcfe9d6c746/work/coordination/engineering/japan-native-repair-20261017/method/check-accounting.py\", line 5, in <module>\n    W=pathlib.Path(sys.argv[1]).absolute();H=sys.argv[2];O=pathlib.Path(sys.argv[3]).absolute();assert len(sys.argv)==4 and len(H)==40 and O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents));P='coordination/engineering/japan-native-repair-20261017';sha=lambda b:hashlib.sha256(b).hexdigest()\n                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+    "writer": "check-accounting.py",
+    "case": "dangling-symlink",
+    "exit_code": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/c5c7c86ee0afc5a6fe1e5224108daa9a803de080841d8576043b9dcfe9d6c746/work/coordination/engineering/japan-native-repair-20261017/method/check-accounting.py\", line 5, in <module>\n    W=pathlib.Path(sys.argv[1]).absolute();H=sys.argv[2];O=pathlib.Path(sys.argv[3]).absolute();assert len(sys.argv)==4 and len(H)==40 and O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents));P='coordination/engineering/japan-native-repair-20261017';sha=lambda b:hashlib.sha256(b).hexdigest()\n                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  }
+]

@@ -1,0 +1,7 @@
+# Stock source-evidence metadata and original requested patches
+
+Five existing source-evidence invocations completed separately using the common389-target physical result and the complete reviewed foreign-family lists. They preserve66,919 original requested cells, including3,554 inland-water cells; Panama's22,669 cells remain outside this cohort. The original native-requested patches are unchanged. All original215 physical issue geometries and source/owner/territorial distinctions remain in the pinned complete physical report.
+
+Each country directory preserves the actual source-evidence output, automatic territorial-exclusion provenance, stock preparation receipt and exact input config. These are baseline/source-role metadata, not source classification, native qualification, owner-zero/conservation, accepted ownership or repair credit. Current code and actual inputs remain authenticated by the ordinary stock native-authority entry. No diagnostic is required before its first direct attempt; a real scientific coverage refusal would justify one.
+
+The negative source operands remain compact whole-original identity references. Colombia has no inline territorial-exclusion geometries, so this checkpoint does not republish Panama's source boundaries or waive its unresolved positive-source rights block. Existing complete original source references are retained, without source substitution or relaxed exclusions.

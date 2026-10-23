@@ -1,6 +1,6 @@
 # Trusted evidence and independent premerge review
 
-This is a preventive gate, not proof that every fact is true. Read `EVIDENCE_QUALITY.md` and, for geographic measurements or generators, `EVIDENCE_GEOGRAPHY_HELPERS.md`. CI reads immutable Git blobs with trusted base code and a read-only token; it never executes a packet's reproduction commands. The integration workflow repeats applicable scientific byte checks using trusted main. Every PR still needs a separate worker's substantive review of its exact head. Existing regional approval, import and publisher gates remain in force.
+This is a preventive gate, not proof that every fact is true. Read `EVIDENCE_QUALITY.md` and, for geographic measurements or generators, `EVIDENCE_GEOGRAPHY_HELPERS.md`. Actual scientific readers authenticate immutable inputs with trusted code. The queue does not replay the generic remote manifest walk. Retained validators support author/reviewer evidence checks and specialized source-exception authorization; they never execute a packet's reproduction commands. Every PR still needs a separate worker's substantive review of its exact head. Existing regional approval, import and publisher gates remain in force.
 
 ## Ordinary engineering and scientific evidence
 
@@ -24,25 +24,14 @@ records, original identities/vintages, consumed-input/result bindings and substa
 source interpretation. Declare a scientific manifest when the issue's result uses
 those bindings; engineering code changes do not acquire one merely by changing
 files. Unknown or changed consumed inputs still get the actual applicable checks.
-An explicitly declared manifest remains checked, including retained engineering
-contracts. Do not drop a scientific declaration to hide failed or missing proof.
+Review the actual manifest and its consumed-input/result bindings when applicable. Do not drop a scientific declaration to hide failed or missing proof.
 
-`.github/evidence-policy.json` preserves the original activation/legacy rules for
-geography and history work. Their new issues declare this field in the existing
-`worldatlas-work:v1` scope; older issues retain their original scopes unless they
-explicitly adopt it. Historical evidence and rollout inventories remain unchanged.
-
-```json
-"evidence_quality": {
-  "version": 1,
-  "manifest_path": "coordination/engineering/{job}/evidence-quality.json",
-  "subject_ids": [],
-  "pins": {},
-  "review_kind": "code"
-}
-```
-
-The example is a field fragment, not a replacement for max_prs, dependencies, mode or scope. `subject_ids` lists the exact geographic subjects if applicable; `pins` maps named release/scope/input hashes to actual baseline files. `review_kind` is `code`, `source`, `geometry` or `release`. Use geography's declared owned directory or history's campaign directory for those lanes. Engineering's `{job}` resolves to the branch ID, allowing a new owned manifest for each PR. The issue declares these scientific bindings before implementation; an as-yet unwritten manifest is not required to begin authoring. Missing issue creation timestamps cannot claim legacy status.
+Ordinary work needs no `worldatlas-work:v1` issue block. Existing scientific
+manifests and `.github/evidence-policy.json` remain supported by the retained
+validators and explicit special-operation contracts. Preserve historical evidence
+and rollout records. Review exact subjects, original pins, methods, results and
+limits in the scientific records themselves rather than duplicating them as issue
+readiness metadata.
 
 ## Preparing declared scientific evidence
 
@@ -54,7 +43,7 @@ Start with `coordination/templates/evidence-v1.json`, replace placeholders, and 
 - Every method declares kind `code`, `source`, `geography`, `generator` or `measurement`. Geographic methods use `helper_version: "worldatlas-evidence-geometry-v1"` and the exact shared helper method policy. Generator methods use `kind: "generator"` and `helper_version: "worldatlas-evidence-preparation-v1"`. Measurement methods use `kind: "measurement"`.
 - `validation` is optional retained control evidence, not a requirement to create JSON wrappers for tests. Applicable positive/adverse tests still establish changed behavior and independent review checks their substance. Cite actual test output in the PR/review; reuse applicable unchanged tests. Repeat a full execution only when needed for a changed repeatability claim, invalidated evidence or explicit acceptance. If supplied, each row has `method_id`, `kind`, `outcome: "passed"`, and `evidence_path` referring to a hashed JSON output with the same first three fields. Reproducibility outputs also record equal `run_one_sha256` and `run_two_sha256`. Review must assess whether checks are meaningful; typed receipts cannot prove an experiment was honestly performed. Omitting optional metadata never authorizes hiding a failed check or claiming unverified correctness.
 
-The gate checks scientific file hashes, subjects, supported vintages, method policy and result bindings; complete Git change accounting and exact-head review remain required. Existing v1 scientific manifests remain supported, including validation of their supplied optional scientific fields. Exact reviewed encoded/decoded lengths establish finite per-file and complete-packet bounds, with safe-integer/overflow admission before reads or decompression. Actual lengths and hashes must match, and fresh complete immutable Git trees must agree with the manifest before hosted acquisition. File and historical-vintage counts follow the actual complete evidence scope; the manifest wrapper is bounded by its exact immutable tree size. Actual memory, storage, provider and job limits still apply; large data may require streaming or a reviewed execution approach. The 272 MiB in-memory cache, timeouts and legacy unplanned-reader guards remain unchanged. Git prefetch streams the admitted exact-object inventory to disk without aggregate byte or entry-count cutoffs; whole-body type/length/OID verification and exact per-body buffers remain mandatory. A premerge manifest cannot certify a deployment or geographic approval. Initial research may be complete with unresolved facts; it cannot close a correction that remains unresolved.
+The retained evidence validator checks scientific file hashes, subjects, supported vintages, method policy and result bindings; complete Git change accounting and exact-head review remain required. Existing v1 scientific manifests remain supported, including validation of their supplied optional scientific fields. Exact reviewed encoded/decoded lengths establish finite per-file and complete-packet bounds, with safe-integer/overflow admission before reads or decompression. Actual lengths and hashes must match, and fresh complete immutable Git trees must agree with the manifest before hosted acquisition. File and historical-vintage counts follow the actual complete evidence scope; the manifest wrapper is bounded by its exact immutable tree size. Actual memory, storage, provider and job limits still apply; large data may require streaming or a reviewed execution approach. The 272 MiB in-memory cache, timeouts and legacy unplanned-reader guards remain unchanged. Git prefetch streams the admitted exact-object inventory to disk without aggregate byte or entry-count cutoffs; whole-body type/length/OID verification and exact per-body buffers remain mandatory. A premerge manifest cannot certify a deployment or geographic approval.
 
 ### Multiple historical file vintages
 
@@ -113,7 +102,7 @@ out of `baseline.files` into candidate source/output descriptors, bind baseline 
 to real files at the ancestor, and refresh affected metric vintages/bindings honestly.
 If the actual reviewed metric inputs differ from the chosen ancestor, retain those results
 as archived with their true evaluation commit; do not merely relabel them current. Then run
-the trusted hosted gate and obtain a fresh exact-head review including its new limits.
+the relevant scientific validator and obtain a fresh exact-head review including its new limits.
 
 Local self-check:
 
@@ -122,13 +111,13 @@ node scripts/evidence-quality.mjs PATH/TO/evidence-quality.json
 node --test test/evidence-quality.test.mjs test/premerge-evidence.test.mjs
 ```
 
-The trusted CI `evidence` job publishes `evidence-check.json`, stating checked scope and unavailable evidence. It runs with read-only rights. Its success is mechanical validation, not an independent review.
+Retained validator outputs state checked scope and unavailable evidence. Their success is mechanical validation, not independent review or source approval. Ordinary queue phases no longer repeat this generic evidence traversal.
 
 ## Independent reviewer
 
 Request one coherent PR review from a distinct worker. A reviewer must inspect actual changes, sources, methods, applicable tests, linked acceptance criteria and preservation/release implications; green CI or an author's claims are insufficient. Do not claim the author's issue or edit its scope. If no reviewer is available, the merge waits. Implementation review and source/factual review are separate domains. Limited primary-source access must appear in both the reviewer limits and accepted-with-limits source outcome.
 
-Read [LOCAL_WORKSPACES.md](LOCAL_WORKSPACES.md). Allocate isolated checkouts through `scripts/local-workspace.mjs`; keep bounded work/review slots, include exact required sparse inputs, check storage before generation/installations, and release finished slots after preserving unique work. Do not retain a full checkout per task or review revision. Existing chats must refresh their saved instructions.
+Read [LOCAL_WORKSPACES.md](LOCAL_WORKSPACES.md). Allocate isolated checkouts through `scripts/local-workspace.mjs`; keep bounded work/review slots, include exact required sparse inputs, and release finished slots after preserving unique work. Do not retain a full checkout per task or review revision. Existing chats must refresh their saved instructions.
 
 Before accepting a consequential claim, follow it to the final evidence using
 [AUDIT_FAILURE_PREVENTION.md](AUDIT_FAILURE_PREVENTION.md#follow-a-claim-through-the-final-evidence).
@@ -148,7 +137,7 @@ A review sub-agent in the author's chat is permitted. It provides a separate exa
 
 Copy-ready task (replace placeholders):
 
-> Review PR URL at exact HEAD_SHA for ISSUE_URL. Read AGENTS.md, docs/WORKER_COORDINATION.md, docs/LOCAL_WORKSPACES.md, docs/AUTHOR_PREFLIGHT.md, docs/AUDIT_FAILURE_PREVENTION.md and docs/PREMERGE_EVIDENCE_REVIEW.md from current main, plus relevant lane/data contracts. Follow consequential claims through their actual inputs, computation, report/control writers and final evidence. Select independent bounded probes for applicable field/unit transfer, comparison products, writer safety, combined budgets and inherited/source claims; distinguish executed checks from unavailable full-source/GIS proof in the existing domain scope. Use API/blob inspection without a checkout when sufficient; when local execution is needed, use the managed sparse detached review slot, include all required inputs, check disk before reproduction, and release the slot when the review is durably posted. Inspect every changed file and renamed original, linked acceptance criteria, actual sources/methods/controls, evidence manifest MANIFEST_PATH, checks and identity/history/release preservation. Inspect author claims and CI evidence independently. Reuse applicable retained tests instead of repeating unchanged expensive executions or creating ceremonial control files; renew relevant review for changed inputs/behavior. Use a unique reviewer worker ID distinct from AUTHOR_WORKER_ID. Do not claim the issue or edit/merge/deploy/import. Report specific findings and actual validation limits. Post one substantive PR review or ordinary comment naming the exact head and distinct worker. For scientific work inspect the declared manifest, original inputs/results and applicable domains; retain every actual validation/source limit in the review. Use accepted-with-limits only where policy permits it. If access or evidence prevents acceptance, report the blocker without claiming approval.
+> Review PR URL at exact HEAD_SHA for ISSUE_URL. Read AGENTS.md, docs/WORKER_COORDINATION.md, docs/LOCAL_WORKSPACES.md, docs/AUTHOR_PREFLIGHT.md, docs/AUDIT_FAILURE_PREVENTION.md and docs/PREMERGE_EVIDENCE_REVIEW.md from current main, plus relevant lane/data contracts. Follow consequential claims through their actual inputs, computation, report/control writers and final evidence. Select independent bounded probes for applicable field/unit transfer, comparison products, writer safety, combined budgets and inherited/source claims; distinguish executed checks from unavailable full-source/GIS proof in the existing domain scope. Use API/blob inspection without a checkout when sufficient; when local execution is needed, use the managed sparse detached review slot, include all required inputs, and release the slot when the review is durably posted. Inspect every changed file and renamed original, linked acceptance criteria, actual sources/methods/controls, evidence manifest MANIFEST_PATH, checks and identity/history/release preservation. Inspect author claims and CI evidence independently. Reuse applicable retained tests instead of repeating unchanged expensive executions or creating ceremonial control files; renew relevant review for changed inputs/behavior. Use a unique reviewer worker ID distinct from AUTHOR_WORKER_ID. Do not claim the issue or edit/merge/deploy/import. Report specific findings and actual validation limits. Post one substantive PR review or ordinary comment naming the exact head and distinct worker. For scientific work inspect the declared manifest, original inputs/results and applicable domains; retain every actual validation/source limit in the review. Use accepted-with-limits only where policy permits it. If access or evidence prevents acceptance, report the blocker without claiming approval.
 
 The author addresses findings and requests review of any updated head before using the normal merge queue. Authors reconcile the latest current-head review from every reviewer before submission; acceptance by one reviewer cannot override another reviewer's unresolved objection. A new head requires renewed relevant review of earlier objections, not merely reliance on their previous-head reviews becoming ineligible. Scoped resolution comments do not replace the required whole-PR acceptance. If no review sub-agent is available, ask another available worker on the PR. Record unavailable review/access on the linked issue; continue independent work within the existing owned scope if possible, otherwise leave a durable checkpoint and safely release or hand over. Do not ask the user to manually launch a reviewer when an available review agent can do it. No reviewer means no merge, not an exception or a self-review under another ID.
 
@@ -158,8 +147,8 @@ implementation/source/geometry/release claims and retains applicable evidence
 limits. Resolve every reviewer's outstanding objection; a green byte-check job,
 arbitrary comment or stale-head review cannot substitute for that examination.
 Scientific manifests still bind original inputs and results mechanically. The
-standard queue rereads the head, checks, issue contract and scientific bytes before
-a SHA-guarded squash merge; it does not certify the operator's review judgment.
+standard queue binds the reviewed head/current main, candidate tests and actual
+scientific reports before a SHA-guarded squash merge; it does not certify the operator's review judgment.
 
 The separate physical-water exception in [GEOGRAPHIC_GAP_ADJUDICATION.md](GEOGRAPHIC_GAP_ADJUDICATION.md)
 retains its structured exact-dossier source decision, latest-decision checks and
@@ -176,7 +165,7 @@ Regression controls reflect concrete moderator findings: #579's malformed hierar
 
 ## Acceptance and disposition
 
-Read ISSUE_LIFECYCLE.md. Review the original acceptance and PR completion/continuation/wait independently of implementation acceptance. Before a final allowed partial PR, check where actual unfinished obligations go; an explicit original-issue wait is valid and no duplicate follow-up is forced. Initial research may close with permitted unknowns; correction/production acceptance may not.
+Read [ISSUE_LIFECYCLE.md](ISSUE_LIFECYCLE.md#author-and-premerge-reviewer). Review the original acceptance and PR completion/continuation/wait independently of implementation acceptance. Before a final allowed partial PR, check where actual unfinished obligations go; an explicit original-issue wait is valid and no duplicate follow-up is forced.
 
 Review substantive acceptance, scope and completion/continuation changes directly;
 request renewed relevant review when they change. Ordinary progress comments do

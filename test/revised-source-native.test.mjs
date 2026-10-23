@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {nativeRowLatitudes} from '../src/native-grid.js';
-import {qualifySourceTargetNativeAuthority, valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {qualifySourceTargetNativeAuthority, qualifySourceTargetNativeAuthorityStored, valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const version = 'a'.repeat(40), size = 262166, y = size / 2, x = size / 2;
 const rectangle = (left, right) => ({type: 'Polygon', coordinates: [[[left, -.02], [right, -.02], [right, .02], [left, .02], [left, -.02]]]});
@@ -29,7 +29,7 @@ function fixture(change = () => {}) {
     currentGeometryChanged: false, currentAdoptionChanged: false, omitCurrentPart: false,
     otherRelationOverlaps: false, version: 3};
   change(state);
-  const rawGeometry = rectangle(-.03, .03);
+  const rawGeometry = state.rawGeometry ?? rectangle(-.03, .03);
   const relation = (id, geometry, relationVersion) => ({type: 'relation', id, version: relationVersion, timestamp,
     members: [{type: 'way', ref: id + 100, role: 'outer', geometry: geometry.coordinates[0].map(([lon, lat]) => ({lon, lat}))}]});
   const raw = put(prefix + 'raw.json', {osm3s: {timestamp_osm_base: snapshot}, elements: [relation(17, rawGeometry, state.relationVersion),
@@ -93,7 +93,7 @@ function fixture(change = () => {}) {
     },
     read(name, {expected}) { const {body} = bodies.get(name); assert.equal(digest(body), expected); reads.push(name); return body; }};
   const binding = {version: 1, kind: 'source-target-native-custody-v1', source_evidence: evidence, native_patch: patch};
-  return {bodies, reader, state, run: () => qualifySourceTargetNativeAuthority(reader, {...binding, kind: 'source-target-native-rule-v1'}, binding)};
+  return {bodies, reader, state, binding, run: () => qualifySourceTargetNativeAuthority(reader, {...binding, kind: 'source-target-native-rule-v1'}, binding)};
 }
 
 test('v3 qualifies only the adopted exact native key while retaining distinct source and canonical base', () => {
@@ -125,4 +125,22 @@ test('v3 rejects wrong original scope, raw version, geometry, license, competing
     'new-source adoption smuggled into v1': s => { s.version = 1; },
   };
   for (const [name, change] of Object.entries(mutations)) await t.test(name, () => assert.throws(() => fixture(change).run()));
+});
+
+for(const count of [31,32,33])test('stored revised-source evaluator preserves complete raw segment multiset at '+count+' vertices',async()=>{
+ const fs=await import('node:fs'),os=await import('node:os'),path=await import('node:path');
+ const {ImmutableReader}=await import('../scripts/check-effective-geographic-regression.mjs');
+ const f=fixture(state=>{const ring=[];
+  for(let i=0;i<count-1;i++){const angle=2*Math.PI*i/(count-1);ring.push([.03*Math.cos(angle),.02*Math.sin(angle)]);}
+  ring.push(ring[0]);state.geometry={type:'Polygon',coordinates:[ring]};state.rawGeometry=state.geometry;
+ });
+ class Reader extends ImmutableReader{
+  constructor(){super('.',version);}git(...args){return f.reader.git(...args);}
+  descriptor(...args){return f.reader.descriptor(...args);}read(...args){return f.reader.read(...args);}
+  async *stream(...args){yield this.read(...args);}
+ }
+ const expected=f.run(),directory=fs.mkdtempSync(path.join(os.tmpdir(),'revised-segments-'));let owned;
+ try{owned=await qualifySourceTargetNativeAuthorityStored(new Reader(),{...f.binding,kind:'source-target-native-rule-v1'},f.binding,{directory});
+  assert.equal(valueSha(owned.proof),valueSha(expected));assert.equal(expected.source_rows[0].native_cells,1);
+ }finally{owned?.close();assert.deepEqual(fs.readdirSync(directory),[]);fs.rmSync(directory,{recursive:true});}
 });

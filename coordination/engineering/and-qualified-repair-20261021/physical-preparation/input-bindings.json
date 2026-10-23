@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "kind": "and-original-source-to-physical-stage-binding",
+  "scope": "Original gb-AND-ADM1--repair-evaluation; all seven original parish members are retained as physical source targets. This binding is not a physical result or native qualification.",
+  "source": {
+    "catalogue_key": "gb:AND:ADM1",
+    "source_corpus_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AND-ADM1-000.bin.gz",
+    "source_corpus_blob": "c3a38ae37cdeb0bd12d7ec4630d5b79e94d25653",
+    "encoded_bytes": 4274,
+    "encoded_sha256": "a424badfa741c6a2cfea7933392475333a8960bdad2cbe6667d3976d0c9471a9",
+    "original_file": "geoBoundaries-AND-ADM1_simplified.geojson",
+    "source_commit": "9469f09",
+    "upstream_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AND/ADM1/geoBoundaries-AND-ADM1_simplified.geojson",
+    "decoded_bytes": 13699,
+    "decoded_sha256": "159b76ce81686d6c57ede4fc978e2806384306c80d4d1f4ea9de18db67f26ea2",
+    "feature_count": 7,
+    "catalogue_represented_year_claim": "2007",
+    "catalogue_license": "Public Domain",
+    "license_limit": "Original source page includes public-domain dedication and CC BY-SA text; preserve that source-rights context.",
+    "member_ids": [
+      "gb:AND:ADM1:23515209B82836637605816",
+      "gb:AND:ADM1:23515209B25074230340039",
+      "gb:AND:ADM1:23515209B96881004874456",
+      "gb:AND:ADM1:23515209B12259378502884",
+      "gb:AND:ADM1:23515209B87138494217820",
+      "gb:AND:ADM1:23515209B43580600008856",
+      "gb:AND:ADM1:23515209B24107209170284"
+    ]
+  },
+  "canonical_target": {
+    "id": "atlas:territory:AND",
+    "commit": "53eb39c23dc78f41cb674ac80a75b88c76b26770",
+    "path": "data/geography/part-28.json",
+    "git_blob_oid": "a9e03cb07194a73f643af85d1e6db94abe3b5fc9",
+    "bytes": 6613963,
+    "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+    "feature_pointer": "/features/1252",
+    "selected_source_member_ids_match_all_seven": true,
+    "note": "Selected canonical geometry is joined as the same target for all seven member stage rows; source geometries remain literal consumed features."
+  },
+  "stage_output": {
+    "path": "coordination/engineering/and-qualified-repair-20261021/physical-preparation/original-stage-inputs.json",
+    "bytes": 12581,
+    "sha256": "c2520d734cdd7aa6ab7e2d411339e945dd28aafafdfc5f0581ef13ea88ed147e"
+  },
+  "canonical_join_output": {
+    "path": "coordination/engineering/and-qualified-repair-20261021/source-preparation/physical-input-canonical-join.json",
+    "bytes": 31572,
+    "sha256": "ad5bb62aae78f8709291f3238ce5ce7631d9a4ce19f70ba425cbd1e72392a368"
+  },
+  "not_performed": [
+    "No physical producer execution in this file",
+    "No native observation or source-contact scan",
+    "No inference that source/full-source differences are resolved"
+  ]
+}

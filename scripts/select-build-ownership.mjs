@@ -5,7 +5,7 @@ import {safePackagePath,containsPackagePath,loadPackageInputs} from './package-i
 import {repositoryReader} from './evidence-quality.mjs';
 import {createHash} from 'node:crypto';
 import {ownershipMetadata, NATIVE_METHOD} from '../src/ownership-method.js';
-import {validateReferenceMetadataHeader} from '../src/reference-metadata.js';
+import {validateReferenceMetadataHeader,finalBankSelection,scientificNativeSelection} from '../src/reference-metadata.js';
 import {requireVerifiedNativeSelection} from './native-ownership/require-verified-selection.mjs';
 
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -21,11 +21,12 @@ export async function readBuildOwnershipSelection({root='.',env=process.env}={})
   const file=path.join(root,'data/ownership-selection.json');
   const bytes=await fs.readFile(file).catch(error=>{if(error.code==='ENOENT')return null;throw error;});
   if(!bytes)return {manifestPath:'data/canonical-grid/manifest.json',requireNative:false};
-  const selection=JSON.parse(bytes);
-  if(selection.version!==1||selection.method!==NATIVE_METHOD||!safePackagePath(selection.manifest_path)||
-    !/^[a-f0-9]{64}$/.test(selection.sha256??'')||!selection.release_id?.startsWith('geography:review:'))
+  const selection=JSON.parse(bytes),final=finalBankSelection(selection),native=scientificNativeSelection(selection);
+  if(native.version!==1||native.method!==NATIVE_METHOD||!safePackagePath(native.manifest_path)||
+    !/^[a-f0-9]{64}$/.test(native.sha256??'')||!native.release_id?.startsWith('geography:review:'))
     throw Error('Invalid committed ownership selection');
-  return {manifestPath:selection.manifest_path,expectedSha256:selection.sha256,requireNative:true,releaseId:selection.release_id,
+  return {manifestPath:native.manifest_path,expectedSha256:native.sha256,requireNative:true,releaseId:native.release_id,
+    ...(final?{finalSelection:selection}:{}),
     ...(Object.hasOwn(selection,'reference_projection')?{referenceSelection:selection,referenceProjection:selection.reference_projection,root}:{})};
 }
 
@@ -55,8 +56,8 @@ export async function selectBuildOwnership({manifestPath = 'data/canonical-grid/
     throw Error('Explicit native build requires the reviewed manifest checksum');
   let metadataProjection,nativeReference,applicationReference;
   if(referenceProjection!==undefined){
-    if(!native||!referenceSelection||!referenceProjection||referenceSelection.manifest_path!==manifestPath
-      ||referenceSelection.sha256!==sha256||JSON.stringify(referenceSelection.reference_projection)!==JSON.stringify(referenceProjection)
+    if(!native||!referenceSelection||!referenceProjection||scientificNativeSelection(referenceSelection).manifest_path!==manifestPath
+      ||scientificNativeSelection(referenceSelection).sha256!==sha256||JSON.stringify(referenceSelection.reference_projection)!==JSON.stringify(referenceProjection)
       ||Object.keys(referenceProjection).sort().join(',')!=='bytes,path,sha256'||!safePackagePath(referenceProjection.path)||referenceProjection.path.endsWith('/')
       ||!Number.isSafeInteger(referenceProjection.bytes)||referenceProjection.bytes<=0||!/^[a-f0-9]{64}$/.test(referenceProjection.sha256??''))
       throw Error('Invalid selected build reference metadata pointer');

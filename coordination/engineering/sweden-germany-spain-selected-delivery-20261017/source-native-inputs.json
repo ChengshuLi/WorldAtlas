@@ -1,0 +1,178 @@
+{
+  "packages": [
+    {
+      "country": "Sweden",
+      "original_cells": 18381,
+      "supported_cells": 18380,
+      "held_cells": 1,
+      "quartets": [
+        {
+          "rule_preimage": {
+            "commit": "a1a8c3060a97cfc0648a7412c1662e19fde83f76",
+            "path": "coordination/engineering/sweden-original-repair-20261017/native-authority-001/original-rule-preimage.json",
+            "mode": "100644",
+            "git_blob_oid": "0d6f5ebb2ab01672c55d5dd8d6d5146047269a3c",
+            "bytes": 736,
+            "sha256": "edb4d7d5b1012f5fa667f08f20f70f6400b217ab8d6ea05f08d7340a6b5c9e2c"
+          },
+          "source_authority": {
+            "commit": "a1a8c3060a97cfc0648a7412c1662e19fde83f76",
+            "path": "coordination/engineering/sweden-original-repair-20261017/native-authority-001/authority-binding.json",
+            "mode": "100644",
+            "git_blob_oid": "d17c2eac71d739c696cfbbaed53669dddd7a76a1",
+            "bytes": 739,
+            "sha256": "aedc3d64d8c7e7af8e05f0ef0dff969f537652eeec6294f4cd80e45a27464b52"
+          },
+          "ledger": {
+            "commit": "a1a8c3060a97cfc0648a7412c1662e19fde83f76",
+            "path": "coordination/engineering/sweden-original-repair-20261017/native-authority-001/constructor-result.json",
+            "mode": "100644",
+            "git_blob_oid": "b578185d61cded6f043c26288766fcabf5ca55da",
+            "bytes": 411199,
+            "sha256": "27644681e0e40a50056bad5352555a05993e7e0a0d63558b43538e23d015e08a"
+          },
+          "native_patch": {
+            "bytes": 217955,
+            "commit": "c81f9ea171efad3c01de1a3b525a2bb435d07d51",
+            "git_blob_oid": "6ab1a0fd1b10bf99b87787d84100e2a1eea2931c",
+            "mode": "100644",
+            "path": "coordination/engineering/sweden-original-repair-20261017/supported-inputs-001/native-patch.json",
+            "sha256": "0af2b7c1d499485d723e115a075ce12cea7273d97fd61da2c0e4b3eca6f1b08a"
+          }
+        }
+      ],
+      "original_patch": {
+        "commit": "a1a8c3060a97cfc0648a7412c1662e19fde83f76",
+        "path": "coordination/engineering/sweden-original-repair-20261017/source-stage-001/original-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "7bab610663448ffa22bfc5829f57bf01d4f3b624",
+        "bytes": 217998,
+        "sha256": "47694b3131fdca8b648bc7988712e1eef028a99bee1ee06d0ae017afbeb920bf"
+      },
+      "literal_holds": {
+        "commit": "a1a8c3060a97cfc0648a7412c1662e19fde83f76",
+        "path": "coordination/engineering/sweden-original-repair-20261017/supported-inputs-001/held-original.json",
+        "mode": "100644",
+        "git_blob_oid": "5940c4d4026ac548fa133e622f55a28473bf93cc",
+        "bytes": 84,
+        "sha256": "2b2e6f696c54f4b22f0ea6664706609e51a03c9bbaba4e18c29e968fe700a67d"
+      }
+    },
+    {
+      "country": "Germany",
+      "original_cells": 27555,
+      "supported_cells": 27181,
+      "held_cells": 374,
+      "quartets": [
+        {
+          "rule_preimage": {
+            "commit": "9ebe37b375b46b06f2eed17302c746582e80a2aa",
+            "path": "coordination/engineering/germany-original-repair-20261017/native-authority-001/original-rule-preimage.json",
+            "mode": "100644",
+            "git_blob_oid": "3b3d191530eaf0302c324113278d8e2d6bf5bf71",
+            "bytes": 738,
+            "sha256": "76615b21eae21466269480df82f6c443498249a5373c999693e30d2bbded683c"
+          },
+          "source_authority": {
+            "commit": "9ebe37b375b46b06f2eed17302c746582e80a2aa",
+            "path": "coordination/engineering/germany-original-repair-20261017/native-authority-001/authority-binding.json",
+            "mode": "100644",
+            "git_blob_oid": "551d8cdd5f2617a3bb78fa476aa057ea448ec8d2",
+            "bytes": 741,
+            "sha256": "32cfe42b525c950a0cf6752bfa12d7c5402aeb8fd3726c2cf63b5d8decb706bc"
+          },
+          "ledger": {
+            "commit": "9ebe37b375b46b06f2eed17302c746582e80a2aa",
+            "path": "coordination/engineering/germany-original-repair-20261017/native-authority-001/constructor-result.json",
+            "mode": "100644",
+            "git_blob_oid": "5cef046b641bf001c711815b45b970a73b5adad1",
+            "bytes": 485957,
+            "sha256": "dc49210671fe5ffc06ef3dc4428767aff7ef5c60834da8b6c2c3985cf9498caa"
+          },
+          "native_patch": {
+            "bytes": 214142,
+            "commit": "699d0d1ca90d1db0da21b0429ff61fb405debbcc",
+            "git_blob_oid": "93833bc02e981f52cab7ec8bbdc57cff949ddc15",
+            "mode": "100644",
+            "path": "coordination/engineering/germany-original-repair-20261017/supported-inputs-001/native-patch.json",
+            "sha256": "c43a9ed85ee34b330c1b0d60928e1c0fc195349a031c9eb19581b0664c89849e"
+          }
+        }
+      ],
+      "original_patch": {
+        "commit": "9ebe37b375b46b06f2eed17302c746582e80a2aa",
+        "path": "coordination/engineering/germany-original-repair-20261017/source-stage-001/original-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "e4e1cb5570e36680cde29159118144807bdfc288",
+        "bytes": 219583,
+        "sha256": "6e6e56ca235716532eeb1c34fe4bd95b7e612c4dc4083ce49ba41a3e77d37ab9"
+      },
+      "literal_holds": {
+        "commit": "9ebe37b375b46b06f2eed17302c746582e80a2aa",
+        "path": "coordination/engineering/germany-original-repair-20261017/supported-inputs-001/held-original.json",
+        "mode": "100644",
+        "git_blob_oid": "f9b57ada58be4f57290699ba1552b476f1e5febe",
+        "bytes": 19979,
+        "sha256": "002e75d15e75f15b5ad2a0a423c08226877a25aa877a690ad456b0a7f494cc37"
+      }
+    },
+    {
+      "country": "Spain",
+      "original_cells": 29477,
+      "supported_cells": 29173,
+      "held_cells": 304,
+      "quartets": [
+        {
+          "rule_preimage": {
+            "commit": "c1a507348cd1ade4167f548a1f9fe384da8fe7c2",
+            "path": "coordination/engineering/spain-original-repair-20261017/native-authority-001/original-rule-preimage.json",
+            "mode": "100644",
+            "git_blob_oid": "f92b4350a2712547907ae817a10e96ce0429aa34",
+            "bytes": 736,
+            "sha256": "0a417d423489945a20f35a843472d1e38ac5c38e2b72935ce6547d337896ac1a"
+          },
+          "source_authority": {
+            "commit": "c1a507348cd1ade4167f548a1f9fe384da8fe7c2",
+            "path": "coordination/engineering/spain-original-repair-20261017/native-authority-001/authority-binding.json",
+            "mode": "100644",
+            "git_blob_oid": "68bd65f551b048ed464cdcce1fb4392063d491f2",
+            "bytes": 739,
+            "sha256": "5a2ad78082b38c13ed180921344bb2c248faa7b3a224b1ad1d336ea4bae5e7f4"
+          },
+          "ledger": {
+            "commit": "c1a507348cd1ade4167f548a1f9fe384da8fe7c2",
+            "path": "coordination/engineering/spain-original-repair-20261017/native-authority-001/constructor-result.json",
+            "mode": "100644",
+            "git_blob_oid": "53ff94feacd487c5c1c78932398b5c6c5f46cb8f",
+            "bytes": 589505,
+            "sha256": "9a4352931d0242e5fa4a09f34f67c80dae7b11342c16f9496b3a4f4e9372279a"
+          },
+          "native_patch": {
+            "bytes": 315345,
+            "commit": "c9099d209b9098330720c6711ab61016ae8e93df",
+            "git_blob_oid": "bef55a84aba88e9b01ee0321c5e5ade157e210ca",
+            "mode": "100644",
+            "path": "coordination/engineering/spain-original-repair-20261017/supported-inputs-001/native-patch.json",
+            "sha256": "0a003f48ee43500c17fdc4aa9009ed43e883992aa0007fe063f4d45ba5140411"
+          }
+        }
+      ],
+      "original_patch": {
+        "commit": "c1a507348cd1ade4167f548a1f9fe384da8fe7c2",
+        "path": "coordination/engineering/spain-original-repair-20261017/source-stage-001/original-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "feef1b5e117d17d68f56f0cb8bc8ae71ad5edc11",
+        "bytes": 319338,
+        "sha256": "ae200d8a6c46386a208db318d29e6919cf3459a403c367b55f9c845d86cc6d0f"
+      },
+      "literal_holds": {
+        "commit": "c1a507348cd1ade4167f548a1f9fe384da8fe7c2",
+        "path": "coordination/engineering/spain-original-repair-20261017/supported-inputs-001/held-original.json",
+        "mode": "100644",
+        "git_blob_oid": "dda049d9206878e25945072d9e60864d6a0e0898",
+        "bytes": 16810,
+        "sha256": "d37c5454eaec0c43f8b548815e3578ced0d907c28fb920022719a8d4bb73d3b1"
+      }
+    }
+  ]
+}

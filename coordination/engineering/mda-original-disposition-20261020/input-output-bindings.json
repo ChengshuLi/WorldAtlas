@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "purpose": "Actual output byte bindings, not a test-pass or acceptance receipt",
+  "selected_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+  "outputs": [
+    {
+      "path": "acceptance-reconciliation.json",
+      "bytes": 15327,
+      "sha256": "ed01c5589d416f8b6032bff3af4c57b8b592c580ca9578a3dd680ddff9dd3947"
+    },
+    {
+      "path": "evidence-context.json",
+      "bytes": 17806,
+      "sha256": "27f96bf63bc12c80e22be1bf8832019665ed4614a2813a26680e67bdb2d6d192"
+    },
+    {
+      "path": "mda-disposition.json.gz",
+      "bytes": 9843,
+      "sha256": "1b4f5609a69c68002a11accc0a21873e011b90e7e9603ad4595bb2f01ef1bd74",
+      "decoded_bytes": 83096,
+      "decoded_sha256": "015e954a23465f1b69c8c6a310625739959330d514e040d3ae1f3f6045ceb15d"
+    },
+    {
+      "path": "mda-retained-witness-join.json.gz",
+      "bytes": 16218,
+      "sha256": "a51ef00508caa601244f83c87c8c64886101b10fa5e682524a7a1998111a5e87",
+      "decoded_bytes": 390006,
+      "decoded_sha256": "4edcf0e31196391bc975e055f8644e878a1ca70cbf68b0e5c5e84b45f9774571"
+    },
+    {
+      "path": "mda-selected-owner-observation.json.gz",
+      "bytes": 22230,
+      "sha256": "1238ab80c2e57f727c7d5df4c8fbbc3e984da391942fb4f50e096ebb63637301",
+      "decoded_bytes": 613301,
+      "decoded_sha256": "330c911f0a0fa51cfddf6ab552fe7fb338522f69fe5734297fdfaa3b6dadc30f"
+    }
+  ]
+}

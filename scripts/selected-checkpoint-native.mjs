@@ -1,17 +1,18 @@
+import {isNativeSequence,nativeRowAt} from '../src/native-grid.js';
 // Joint-only native checkpoint consumer. Keep the cold/package import closure literal.
-import {compareIntervals,newVisibleRepairCandidates,repairVisibilityWitnesses} from './check-effective-geographic-regression.mjs';
+import {compareIntervals,newVisibleRepairCandidates,repairVisibilityWitnesses,visibilityDigest} from './check-effective-geographic-regression.mjs';
 const demand=(v,m)=>{if(!v)throw Error(m);};
-const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const same=(a,b)=>visibilityDigest(a)===visibilityDigest(b);
 
 // Numerical consumers of complete row projections. These helpers do not issue
 // selection/checkpoint authority: the trusted shared reader must authenticate
 // each vintage, scope, owner/parent binding and complete native input custody.
 function effectiveNativeRows(rows,size,owners) {
   demand(Number.isSafeInteger(size)&&size>0&&Number.isSafeInteger(size*size),'Invalid effective native domain');
-  demand(Array.isArray(rows)&&Array.isArray(owners)&&owners.length>0,'Missing complete effective native projections');
+  demand(isNativeSequence(rows)&&Array.isArray(owners)&&owners.length>0,'Missing complete effective native projections');
   const indexed=new Map();let previous=-1;
   for(const row of rows){
-    demand(row&&Number.isSafeInteger(row.y)&&row.y>previous&&row.y<size&&Array.isArray(row.runs),'Duplicate/foreign/unordered effective native row');
+    demand(row&&Number.isSafeInteger(row.y)&&row.y>previous&&row.y<size&&isNativeSequence(row.runs),'Duplicate/foreign/unordered effective native row');
     previous=row.y;let end=0;
     for(const run of row.runs){
       demand(Array.isArray(run)&&run.length===3&&run.every(Number.isSafeInteger)&&run[0]>=end&&run[1]>run[0]&&run[1]<=size&&run[2]>0
@@ -30,7 +31,7 @@ export function applyNativeAdditiveRows(baseRows,patch,{size,owners}) {
   const additions=effectiveNativeRows(patch==null?[]:patch.rows,size,owners);
   const rows=[];
   for(const [y,row]of base){
-    const runs=[...row.runs.map(run=>[...run]),...(additions.get(y)?.runs??[]).map(run=>[...run])].sort((a,b)=>a[0]-b[0]);
+    const runs=[...Array.from(row.runs,run=>[...run]),...Array.from(additions.get(y)?.runs??[],run=>[...run])].sort((a,b)=>a[0]-b[0]);
     let end=0;
     for(const run of runs){demand(run[0]>=end,'Selected additive delta overlaps preexisting assigned native cells');end=run[1];}
     rows.push({y,runs});
@@ -46,7 +47,8 @@ export function deriveEffectiveNativeRowDelta(beforeRows,afterRows,{size,ownersB
     if(!old||!next||!same(old.runs,next.runs))return true;
     // Stable indices are independently checked by the acquisition boundary;
     // do not let this pure helper hide an ID change behind an equal run count.
-    return old.runs.some(run=>ownersBefore[run[2]-1].id!==ownersAfter[run[2]-1].id);
+    for(const run of old.runs)if(ownersBefore[run[2]-1].id!==ownersAfter[run[2]-1].id)return true;
+    return false;
   });
 }
 
@@ -61,11 +63,44 @@ export function compareEffectiveNativeRows(beforeRows,afterRows,{size,ownersBefo
   return {checked_rows:rows.length,lost_or_reassigned_cells:lostCells,intervals};
 }
 
+// A shared original base cancels only after proving both patches disjoint.
+// Consume the whole base row even when the patch is empty, preserving validation
+// and custody. This helper does not mint selected-checkpoint authority.
+export async function compareNativeAdditiveIntervals(runs,{y,before,after,size,owners}) {
+  effectiveNativeRows([{y,runs:before}],size,owners);
+  effectiveNativeRows([{y,runs:after}],size,owners);
+  const old=before[Symbol.iterator](),next=after[Symbol.iterator]();let a=old.next(),b=next.next(),end=0;
+  try{for await(const run of runs){
+    demand(Array.isArray(run)&&run.length===3&&run.every(Number.isSafeInteger)&&run[0]>=end&&run[1]>run[0]
+      &&run[1]<=size&&run[2]>0&&owners[run[2]-1],'Invalid complete effective native interval/owner');end=run[1];
+    while(!a.done&&a.value[1]<=run[0])a=old.next();
+    while(!b.done&&b.value[1]<=run[0])b=next.next();
+    demand((a.done||a.value[0]>=run[1])&&(b.done||b.value[0]>=run[1]),
+      'Selected additive delta overlaps preexisting assigned native cells');
+  }}finally{old.return?.();next.return?.();}
+  const intervals=compareIntervals(before,after,{row:y,ownersBefore:owners,ownersAfter:owners});
+  return {checked_rows:1,lost_or_reassigned_cells:intervals.reduce((n,loss)=>n+loss.end-loss.start,0),intervals};
+}
+
 // The joint launcher qualifies both states in one invocation and owns release.
 // Authentication stays in the shared projector, including the zero-row path.
 export async function compareSelectedCheckpointNative({transition}) {
-  const {authenticateTransition,projectNativeRows,projectVisibilityLatitudes}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs');
+  const {authenticateTransition,visitNativeIntervals,projectVisibilityLatitudes,finalBankComparison}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs');
   const {baseline,candidate,changedNativeRows}=authenticateTransition({transition});
+  if(candidate.version===2){
+    const proof=finalBankComparison({transition});
+    return {version:1,method:'selected-native-owner-conservation-v1',status:'no-new-native-loss',
+      repair_visibility:{new_components:proof.witnesses.length,witnesses:proof.witnesses},
+      baseline_selection:baseline.selection,candidate_selection:candidate.selection,
+      affected_rows:changedNativeRows.length,lost_or_reassigned_cells:0,intervals:[],
+      native_row_scope:{proof:'complete-accepted-final-bank-and-qualified-new-intervals',
+        compared_rows:candidate.manifest.size,changed_rows:changedNativeRows,
+        representation_migration:proof.migration,added_cells:proof.addedCells},
+      checkpoint_custody:{baseline_checkpoint:baseline.accepted_execution,
+        accepted_bank:proof.baselineIndex,candidate_bank:proof.candidateIndex},candidate_code_executed:false,
+      limits:['The same private transition exhaustively compares every final word and context value against accepted E plus newly qualified native intervals.',
+        'Original physical/source authority is retained; this is not sub-cell polygon coverage or approval of unsupported source changes.']};
+  }
   const visibilityCandidates=newVisibleRepairCandidates(baseline.additions,candidate.additions);
   const size=baseline.manifest.size,oldEntries=baseline.certificate.entries,newEntries=candidate.certificate.entries;
   demand(size===candidate.manifest.size&&oldEntries.length===newEntries.length,'Checkpoint native domain or complete owner roster differs');
@@ -79,21 +114,62 @@ export async function compareSelectedCheckpointNative({transition}) {
 
   // qualifyTransition proves identical base selection and all native routes;
   // its candidate cache already contains newly qualified original base rows.
-  // Project once, then apply the two cumulative patches to that SAME base.
+  // Visit bounded batches and apply both cumulative patches to the SAME base.
   demand(same(baseline.baseSelection,candidate.baseSelection)&&baseline.selection.sha256===candidate.selection.sha256,
     'Checkpoint original native base/manifest binding differs');
-  const projection=projectNativeRows({state:candidate,rows:expected});
-  let result={checked_rows:0,lost_or_reassigned_cells:0,intervals:[]},visibilityWitnesses=[];
-  if(expected.length){
-
-    const owners=oldEntries.map(row=>({id:row[0],index:row[1],province_id:row[2],province_index:row[3]}));
-    const oldRows=applyNativeAdditiveRows(projection.rows,baseline.patch,{size,owners});
-    const newRows=applyNativeAdditiveRows(projection.rows,candidate.patch,{size,owners});
-    result=compareEffectiveNativeRows(oldRows,newRows,{size,ownersBefore:owners,ownersAfter:owners,rows:expected});
-    if(visibilityCandidates.length){
-
-      const latitudes=projectVisibilityLatitudes({state:candidate});
-      visibilityWitnesses=repairVisibilityWitnesses({candidates:visibilityCandidates,size,latitudes,beforeRows:oldRows,afterRows:newRows});
+  const owners=oldEntries.map(row=>({id:row[0],index:row[1],province_id:row[2],province_index:row[3]}));
+  const oldPatch=baseline.patch?.rows??[];
+  const newPatch=candidate.patch?.rows??[];
+  const result={checked_rows:0,lost_or_reassigned_cells:0,intervals:[]};
+  const visibilityWitnesses=Array(visibilityCandidates.length).fill(null);
+  // Both vintages share the same immutable base and stable owners. Once we
+  // establish that BOTH patches are disjoint from that base, B cancels from
+  // (B + old) \ (B + new). Comparing patch intervals gives exactly the same
+  // loss segmentation and visibility witnesses without ever expanding B.
+  const projection=await visitNativeIntervals({state:candidate,rows:expected,visit:async ({y,runs})=>{
+    const old=nativeRowAt(oldPatch,y)?.runs??[],next=nativeRowAt(newPatch,y)?.runs??[];
+    const part=await compareNativeAdditiveIntervals(runs,{y,before:old,after:next,size,owners});
+    result.checked_rows++;
+    result.lost_or_reassigned_cells+=part.lost_or_reassigned_cells;
+    for(const loss of part.intervals)result.intervals.push(loss);
+    demand(Number.isSafeInteger(result.lost_or_reassigned_cells),'Native loss count exceeds exact integer domain');
+  }});
+  // qualifyTransition binds every new native component to the exact appended
+  // patch union and rejects ANY overlap with the old cumulative patch, including
+  // same-owner overlap. The complete base scan above establishes current
+  // owner-zero. Therefore each new native component's first cell is already its
+  // deterministic 0 -> owner witness; searching all row batches repeats proof.
+  let hasPolygons=false,ordinal=0;
+  for(const item of visibilityCandidates){
+    const index=ordinal++;
+    if(item.representation!=='native-cells'){hasPolygons=true;continue;}
+    demand(!result.intervals.length&&result.lost_or_reassigned_cells===0,
+      'Qualified native append lost or reassigned map cells');
+    const row=item.native_rows.at(0),run=row?.runs.at(0);
+    demand(run,'New gap repair has no actual changed map-cell witness');
+    visibilityWitnesses[index]={component_id:item.component_id,
+      ...(item.authority_sha256?{authority_sha256:item.authority_sha256}:{}),
+      native_rows_sha256:visibilityDigest(item.native_rows),x:run[0],y:row.y,
+      previous_owner:0,candidate_owner:run[2]};
+  }
+  if(hasPolygons&&expected.length){
+    const latitudes=projectVisibilityLatitudes({state:candidate});
+    // Base intervals have already been validated and need not be visited again.
+    // These small batches contain references to patch rows, never copied runs.
+    for(let start=0;start<expected.length;start+=128){
+      const rows=expected.slice(start,start+128);let pending=[],indices=[],i=0;
+      const visit=()=>{
+        const witnesses=repairVisibilityWitnesses({candidates:pending,size,latitudes,
+          beforeRows:rows.map(y=>({y,runs:nativeRowAt(oldPatch,y)?.runs??[]})),afterRows:rows.map(y=>({y,runs:nativeRowAt(newPatch,y)?.runs??[]}))});
+        for(let n=0;n<indices.length;n++)visibilityWitnesses[indices[n]]=witnesses[n];
+        pending=[];indices=[];
+      };
+      for(const item of visibilityCandidates){
+        if(!visibilityWitnesses[i]){
+          pending.push(item);indices.push(i);if(pending.length===16)visit();
+        }i++;
+      }
+      if(pending.length)visit();
     }
   }
   demand(visibilityWitnesses.length===visibilityCandidates.length&&visibilityWitnesses.every(Boolean),'New gap repair has no actual changed map-cell witness');

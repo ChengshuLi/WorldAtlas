@@ -9,6 +9,10 @@ on:
       expected_head:
         type: string
         required: true
+      reviewed_tests:
+        description: 'Exact plan.request JSON, auto for proven automatic routing, or complete for the full suite'
+        type: string
+        required: true
       request_id:
         type: string
         required: true
@@ -45,6 +49,7 @@ jobs:
       geography_required: ${{ steps.prepare.outputs.geography_required }}
       shards: ${{ steps.prepare.outputs.shards }}
       test_selection: ${{ steps.prepare.outputs.test_selection }}
+      test_files_base64: ${{ steps.prepare.outputs.test_files_base64 }}
       expectations_path: ${{ steps.prepare.outputs.expectations_path }}
       candidate_tree: ${{ steps.prepare.outputs.candidate_tree }}
       checkout_patterns_base64: ${{ steps.prepare.outputs.checkout_patterns_base64 }}
@@ -66,6 +71,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           MERGE_PHASE: prepare
           CHECKOUT_PATTERNS_FORMAT: wrapped-base64
+          REVIEWED_TESTS_REQUIRED: 'true'
         run: node scripts/run-worker-merge.mjs
   geography:
     needs: prepare
@@ -276,10 +282,10 @@ jobs:
           PACKAGE_BOOTSTRAP
       # The focused delivery tests import @noble/hashes and exercise tiny
       # source/physical CLI fixtures with NumPy/Shapely. Keep their real runtime.
+      # Only trusted automatic inert packets use the dependency-free consumers;
+      # explicit reviewed requests and all broader routes retain installation.
       - run: npm ci --no-audit --no-fund
-        if: needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence'
-      - run: python -m pip install -r requirements.txt
-        if: needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence'
+        if: (needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence') && !(needs.prepare.outputs.profile == 'evidence' && needs.prepare.outputs.test_selection == 'reviewed' && (inputs.reviewed_tests == 'auto' || inputs.reviewed_tests == ''))
       - name: Assemble unchanged base with current selected output
         id: assembly
         if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && needs.prepare.outputs.test_selection == 'selected-data'
@@ -310,6 +316,10 @@ jobs:
           assert len(body) == blob['size'] and hashlib.sha1(('blob ' + str(len(body)) + '\0').encode() + body).hexdigest() == blob['sha']
           exec(compile(body, '<authenticated selected package bootstrap>', 'exec'), {'__name__':'__main__'})
           PACKAGE_BOOTSTRAP
+      # Retained assembly uses Node and isolated Python standard-library extraction.
+      # Keep scientific dependencies for fallback builds and ordinary regressions.
+      - run: python -m pip install -r requirements.txt
+        if: (needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence') && steps.assembly.outputs.assembled != 'true' && !(needs.prepare.outputs.profile == 'evidence' && needs.prepare.outputs.test_selection == 'reviewed' && (inputs.reviewed_tests == 'auto' || inputs.reviewed_tests == ''))
       - name: Snapshot original final-worker package inputs
         if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'
         run: node scripts/package-output-artifact.mjs --snapshot
@@ -319,33 +329,8 @@ jobs:
       - name: Inventory original final-worker package output
         if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'
         run: node scripts/package-output-artifact.mjs
-      - name: Install browser dependencies only for tests that use Playwright
-        if: needs.prepare.outputs.test_selection != 'selected-data'
-        env:
-          INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}
-          INTEGRATION_SHARD: ${{ matrix.shard }}
-          INTEGRATION_TEST_SELECTION: ${{ steps.assembly.outputs.assembled == 'true' && 'selected-output' || needs.prepare.outputs.test_selection }}
-          SELECTED_EXPECTATIONS_PATH: ${{ needs.prepare.outputs.expectations_path }}
-        run: |
-          if node --input-type=module -e "import {integrationNeedsBrowser} from './scripts/run-integration-tests.mjs'; process.exit(integrationNeedsBrowser(process.env.INTEGRATION_PROFILE, Number(process.env.INTEGRATION_SHARD), process.env.INTEGRATION_TEST_SELECTION || 'complete') ? 0 : 1)"; then
-            npx playwright install --with-deps chromium
-          fi
-      - name: Test applicable combined-tree invariants without publishing or live imports
-        env:
-          INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}
-          INTEGRATION_SHARD: ${{ matrix.shard }}
-          INTEGRATION_TEST_SELECTION: ${{ steps.assembly.outputs.assembled == 'true' && 'selected-output' || needs.prepare.outputs.test_selection }}
-          SELECTED_PACKAGE_ASSEMBLY_SHA256: ${{ steps.assembly.outputs.assembly_sha256 }}
-          SELECTED_EXPECTATIONS_PATH: ${{ needs.prepare.outputs.expectations_path }}
-        run: |
-          if test "$INTEGRATION_TEST_SELECTION" = selected-data || test "$INTEGRATION_TEST_SELECTION" = selected-output; then
-            node --input-type=module -e 'import {selectedDeliverySmoke} from "./scripts/integration-profile.mjs"; const report=await selectedDeliverySmoke(process.env.SELECTED_EXPECTATIONS_PATH); console.log(JSON.stringify({selected_delivery_smoke:Object.fromEntries(Object.entries(report).filter(([,value])=>value===null||typeof value!=="object"))}));'
-          fi
-          if test "$INTEGRATION_TEST_SELECTION" = selected-output; then
-            node --input-type=module -e "import {requireCurrentPackageAssembly} from './scripts/run-integration-tests.mjs'; console.log(JSON.stringify({package_assembly:requireCurrentPackageAssembly()}))"
-          elif test "$INTEGRATION_TEST_SELECTION" != selected-data; then
-            node scripts/run-integration-tests.mjs
-          fi
+      # Preserve the successful build before later tests can fail or mutate it.
+      # Retention alone grants no test, reuse or merge acceptance.
       - name: Retain original final-worker package output
         if: success() && needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -360,6 +345,35 @@ jobs:
           if-no-files-found: error
           compression-level: 0
           retention-days: 30
+      - name: Install browser dependencies only for tests that use Playwright
+        if: needs.prepare.outputs.test_selection != 'selected-data'
+        env:
+          INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}
+          INTEGRATION_SHARD: ${{ matrix.shard }}
+          INTEGRATION_TEST_SELECTION: ${{ steps.assembly.outputs.assembled == 'true' && 'selected-output' || needs.prepare.outputs.test_selection }}
+          INTEGRATION_TEST_FILES_BASE64: ${{ needs.prepare.outputs.test_files_base64 }}
+          SELECTED_EXPECTATIONS_PATH: ${{ needs.prepare.outputs.expectations_path }}
+        run: |
+          if node --input-type=module -e "import {integrationNeedsBrowser} from './scripts/run-integration-tests.mjs'; process.exit(integrationNeedsBrowser(process.env.INTEGRATION_PROFILE, Number(process.env.INTEGRATION_SHARD), process.env.INTEGRATION_TEST_SELECTION || 'complete') ? 0 : 1)"; then
+            npx playwright install --with-deps chromium
+          fi
+      - name: Test applicable combined-tree invariants without publishing or live imports
+        env:
+          INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}
+          INTEGRATION_SHARD: ${{ matrix.shard }}
+          INTEGRATION_TEST_SELECTION: ${{ steps.assembly.outputs.assembled == 'true' && 'selected-output' || needs.prepare.outputs.test_selection }}
+          SELECTED_PACKAGE_ASSEMBLY_SHA256: ${{ steps.assembly.outputs.assembly_sha256 }}
+          INTEGRATION_TEST_FILES_BASE64: ${{ needs.prepare.outputs.test_files_base64 }}
+          SELECTED_EXPECTATIONS_PATH: ${{ needs.prepare.outputs.expectations_path }}
+        run: |
+          if test "$INTEGRATION_TEST_SELECTION" = selected-data || test "$INTEGRATION_TEST_SELECTION" = selected-output; then
+            node --input-type=module -e 'import {selectedDeliverySmoke} from "./scripts/integration-profile.mjs"; const report=await selectedDeliverySmoke(process.env.SELECTED_EXPECTATIONS_PATH); console.log(JSON.stringify({selected_delivery_smoke:Object.fromEntries(Object.entries(report).filter(([,value])=>value===null||typeof value!=="object"))}));'
+          fi
+          if test "$INTEGRATION_TEST_SELECTION" = selected-output; then
+            node --input-type=module -e "import {requireCurrentPackageAssembly} from './scripts/run-integration-tests.mjs'; console.log(JSON.stringify({package_assembly:requireCurrentPackageAssembly()}))"
+          elif test "$INTEGRATION_TEST_SELECTION" != selected-data; then
+            node scripts/run-integration-tests.mjs
+          fi
       - name: Retain selected delivery smoke
         if: always() && needs.prepare.outputs.profile == 'full' && matrix.shard == 0
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -402,6 +416,7 @@ jobs:
           TESTED_CANDIDATE: ${{ needs.prepare.outputs.candidate }}
           INTEGRATION_RESULT: ${{ needs.integration.result }}
           GEOGRAPHY_RESULT: ${{ needs.geography.result }}
+          PREPARED_GEOGRAPHY_SOFTWARE: ${{ needs.prepare.outputs.geography_software }}
           GEOGRAPHY_REPORT_SHA256: ${{ needs.geography.outputs.report_sha256 }}
           GEOGRAPHY_ARTIFACT_NAME: ${{ needs.geography.outputs.artifact_name }}
           GEOGRAPHY_REPORT_BYTES: ${{ needs.geography.outputs.report_bytes }}

@@ -1,0 +1,546 @@
+{
+  "kind": "rus-mng-exclusion-source-geometry-canonical-comparison",
+  "version": 1,
+  "status": "Exact MNG source comparison completed against the authenticated complete family and original full source-evidence blob.",
+  "inputs": {
+    "mng_family": {
+      "commit": "9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MNG-ADM1-000.bin.gz",
+      "git_blob_oid": "3268f5d6bc0cb37009f5861e8913b0b71e237949",
+      "encoded_bytes": 81094,
+      "encoded_sha256": "41e797ec554a3e90965c3354f5abe33da2068cc71e9491bf503e7dc13640b793",
+      "decoded_bytes": 260408,
+      "decoded_sha256": "4e692ea5cff967b716e59975768d1560ade8c9844fbe6831bd4d9e6a7123f7aa",
+      "features": 22
+    },
+    "complete_source_evidence": {
+      "git_blob_oid": "1206cb657064415bc31d5f5c6d5086f2e3788b63",
+      "bytes": 23554075,
+      "sha256": "a55983972a251bde712c739006cd9a0165188060e44a0982927a6d243fc00ddc",
+      "targets": 334
+    }
+  },
+  "method": {
+    "canonical": "Recursively sort object keys; compare JSON.stringify canonical value; stock valueSha = SHA-256 UTF-8 JSON plus newline.",
+    "comparison": "For every original complete-source negative binding whose source_id is gb:MNG:ADM1, compare the source feature geometry at the roster source_ordinal-1 to the target territorial_exclusions[negative_ordinal] from the original complete-native source-evidence blob."
+  },
+  "summary": {
+    "mng_operand_bindings": 29,
+    "geometry_mismatches": 0,
+    "active_66_mng_bindings": 11,
+    "active_66_bindings_equal": 11,
+    "active_66_target_ids_with_mng_binding": [
+      "gb:RUS:ADM2:50074027B11056050899621",
+      "gb:RUS:ADM2:50074027B1949274339631",
+      "gb:RUS:ADM2:50074027B33807030271571",
+      "gb:RUS:ADM2:50074027B68324499400164",
+      "gb:RUS:ADM2:50074027B79971887964789",
+      "gb:RUS:ADM2:50074027B8579713719118",
+      "gb:RUS:ADM2:50074027B90632265551754"
+    ],
+    "active_66_supported_binding_count": 4,
+    "active_66_held_binding_count": 7,
+    "exact_mng_point_contacts": 8,
+    "diagnostic_requested": 9451,
+    "diagnostic_supported": 8108,
+    "diagnostic_held": 1343,
+    "proposed_8108_exact_set_matches_diagnostic": true,
+    "proposed_cells_on_issue_bearing_targets": 937,
+    "proposed_issue_land": 800,
+    "proposed_issue_water": 137,
+    "physical_issue_bearing_target_count": 140,
+    "proposed_scope_target_count": 32,
+    "proposed_land_on_issue_bearing_targets": 800,
+    "proposed_water_on_issue_bearing_targets": 137,
+    "proposed_issue_bearing_target_ids": [
+      "gb:RUS:ADM2:50074027B15761543307374",
+      "gb:RUS:ADM2:50074027B18064199701976",
+      "gb:RUS:ADM2:50074027B22004389566857",
+      "gb:RUS:ADM2:50074027B42733914964900",
+      "gb:RUS:ADM2:50074027B52464361757597",
+      "gb:RUS:ADM2:50074027B57903229029345"
+    ],
+    "all_residual_keys_on_issue_bearing_targets": 1089,
+    "mng_point_contacts_within_proposed_8108": 0,
+    "mng_point_contacts_in_preserved_other_family_471": 8,
+    "residual_target_count_with_any_issue": 9
+  },
+  "mng_operand_bindings": [
+    {
+      "target_id": "gb:RUS:ADM2:50074027B11056050899621",
+      "negative_ordinal_zero_based": 2,
+      "source_id": "gb:MNG:ADM1:14279143B7284431230829",
+      "source_name": "Bayan-Ölgii",
+      "source_ordinal_one_based": 20,
+      "roster_historical_python_geometry_sha256": "09e5a14945221f5397660c32aa1e29cb8bf3367ea46205ad9050e723bc9352c9",
+      "stock_valueSha_source_geometry": "63aaaaad7cf3db74c37122f626c9d55f5bcf37d2c1791025a03dddd194caa044",
+      "stock_valueSha_exclusion_geometry": "63aaaaad7cf3db74c37122f626c9d55f5bcf37d2c1791025a03dddd194caa044",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": true,
+      "diagnostic_result": "supported"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B14990510856215",
+      "negative_ordinal_zero_based": 1,
+      "source_id": "gb:MNG:ADM1:14279143B84215380438566",
+      "source_name": "Selenge",
+      "source_ordinal_one_based": 18,
+      "roster_historical_python_geometry_sha256": "bd6cb4233a65ab796ee9a6d027326669ca67d0f1a73d9a9396bb5543327372a7",
+      "stock_valueSha_source_geometry": "ca3157a9903cbe51fef9b37b3273d29d13f43db097d2e47eb3c7af7731e5f8dd",
+      "stock_valueSha_exclusion_geometry": "ca3157a9903cbe51fef9b37b3273d29d13f43db097d2e47eb3c7af7731e5f8dd",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": false,
+      "diagnostic_result": "not_requested"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B15616734085439",
+      "negative_ordinal_zero_based": 0,
+      "source_id": "gb:MNG:ADM1:14279143B81467460095364",
+      "source_name": "Uvs",
+      "source_ordinal_one_based": 1,
+      "roster_historical_python_geometry_sha256": "cbc209344703e310cb6eebf970bdbb3763da3e5dc13b375d22609be9d6cd1786",
+      "stock_valueSha_source_geometry": "ebfa507f00c01f3bcf7eea6e83f0a888402f8e96ad9abe8104342bd361df161f",
+      "stock_valueSha_exclusion_geometry": "ebfa507f00c01f3bcf7eea6e83f0a888402f8e96ad9abe8104342bd361df161f",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": false,
+      "diagnostic_result": "not_requested"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B15616734085439",
+      "negative_ordinal_zero_based": 1,
+      "source_id": "gb:MNG:ADM1:14279143B7284431230829",
+      "source_name": "Bayan-Ölgii",
+      "source_ordinal_one_based": 20,
+      "roster_historical_python_geometry_sha256": "09e5a14945221f5397660c32aa1e29cb8bf3367ea46205ad9050e723bc9352c9",
+      "stock_valueSha_source_geometry": "63aaaaad7cf3db74c37122f626c9d55f5bcf37d2c1791025a03dddd194caa044",
+      "stock_valueSha_exclusion_geometry": "63aaaaad7cf3db74c37122f626c9d55f5bcf37d2c1791025a03dddd194caa044",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": false,
+      "diagnostic_result": "not_requested"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B1949274339631",
+      "negative_ordinal_zero_based": 1,
+      "source_id": "gb:MNG:ADM1:14279143B35762276870520",
+      "source_name": "Dornod",
+      "source_ordinal_one_based": 17,
+      "roster_historical_python_geometry_sha256": "b6bc92071f8cb8363ad82dc0b9ea5da81ec26cc0a7917cf90f183cd8fdea4d70",
+      "stock_valueSha_source_geometry": "aaf303d770fe2d4dadf44685f5341cc0ad0599a601980d25e468ba192cc1c825",
+      "stock_valueSha_exclusion_geometry": "aaf303d770fe2d4dadf44685f5341cc0ad0599a601980d25e468ba192cc1c825",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": true,
+      "diagnostic_result": "supported"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B28237485565854",
+      "negative_ordinal_zero_based": 1,
+      "source_id": "gb:MNG:ADM1:14279143B81467460095364",
+      "source_name": "Uvs",
+      "source_ordinal_one_based": 1,
+      "roster_historical_python_geometry_sha256": "cbc209344703e310cb6eebf970bdbb3763da3e5dc13b375d22609be9d6cd1786",
+      "stock_valueSha_source_geometry": "ebfa507f00c01f3bcf7eea6e83f0a888402f8e96ad9abe8104342bd361df161f",
+      "stock_valueSha_exclusion_geometry": "ebfa507f00c01f3bcf7eea6e83f0a888402f8e96ad9abe8104342bd361df161f",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": false,
+      "diagnostic_result": "not_requested"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B28237485565854",
+      "negative_ordinal_zero_based": 2,
+      "source_id": "gb:MNG:ADM1:14279143B20985490361275",
+      "source_name": "Hovsgel",
+      "source_ordinal_one_based": 19,
+      "roster_historical_python_geometry_sha256": "7eec5ff96df529bd19bd048767751cd3bf2f51e91309fa58b1359e1826ce2a89",
+      "stock_valueSha_source_geometry": "475cceea326f265c92a9d76f6e75f10f769f7108e8afb040758d28a16307c1d3",
+      "stock_valueSha_exclusion_geometry": "475cceea326f265c92a9d76f6e75f10f769f7108e8afb040758d28a16307c1d3",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": false,
+      "diagnostic_result": "not_requested"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B33807030271571",
+      "negative_ordinal_zero_based": 1,
+      "source_id": "gb:MNG:ADM1:14279143B81467460095364",
+      "source_name": "Uvs",
+      "source_ordinal_one_based": 1,
+      "roster_historical_python_geometry_sha256": "cbc209344703e310cb6eebf970bdbb3763da3e5dc13b375d22609be9d6cd1786",
+      "stock_valueSha_source_geometry": "ebfa507f00c01f3bcf7eea6e83f0a888402f8e96ad9abe8104342bd361df161f",
+      "stock_valueSha_exclusion_geometry": "ebfa507f00c01f3bcf7eea6e83f0a888402f8e96ad9abe8104342bd361df161f",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": true,
+      "diagnostic_result": "held"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B33807030271571",
+      "negative_ordinal_zero_based": 2,
+      "source_id": "gb:MNG:ADM1:14279143B63368554420497",
+      "source_name": "Zavkhan",
+      "source_ordinal_one_based": 3,
+      "roster_historical_python_geometry_sha256": "cfd6e2d4ce23d67988b5d72ebba8e12ac76923d37228aa77bd6e89d5b5d64a23",
+      "stock_valueSha_source_geometry": "108eba8205299bd4f6c3fde0c045a5c73b10c5df13458acceaad23ff91bb5ca4",
+      "stock_valueSha_exclusion_geometry": "108eba8205299bd4f6c3fde0c045a5c73b10c5df13458acceaad23ff91bb5ca4",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": true,
+      "diagnostic_result": "held"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B33807030271571",
+      "negative_ordinal_zero_based": 3,
+      "source_id": "gb:MNG:ADM1:14279143B20985490361275",
+      "source_name": "Hovsgel",
+      "source_ordinal_one_based": 19,
+      "roster_historical_python_geometry_sha256": "7eec5ff96df529bd19bd048767751cd3bf2f51e91309fa58b1359e1826ce2a89",
+      "stock_valueSha_source_geometry": "475cceea326f265c92a9d76f6e75f10f769f7108e8afb040758d28a16307c1d3",
+      "stock_valueSha_exclusion_geometry": "475cceea326f265c92a9d76f6e75f10f769f7108e8afb040758d28a16307c1d3",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": true,
+      "diagnostic_result": "held"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B35209567650538",
+      "negative_ordinal_zero_based": 0,
+      "source_id": "gb:MNG:ADM1:14279143B81467460095364",
+      "source_name": "Uvs",
+      "source_ordinal_one_based": 1,
+      "roster_historical_python_geometry_sha256": "cbc209344703e310cb6eebf970bdbb3763da3e5dc13b375d22609be9d6cd1786",
+      "stock_valueSha_source_geometry": "ebfa507f00c01f3bcf7eea6e83f0a888402f8e96ad9abe8104342bd361df161f",
+      "stock_valueSha_exclusion_geometry": "ebfa507f00c01f3bcf7eea6e83f0a888402f8e96ad9abe8104342bd361df161f",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": false,
+      "diagnostic_result": "not_requested"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B54571182544478",
+      "negative_ordinal_zero_based": 1,
+      "source_id": "gb:MNG:ADM1:14279143B20985490361275",
+      "source_name": "Hovsgel",
+      "source_ordinal_one_based": 19,
+      "roster_historical_python_geometry_sha256": "7eec5ff96df529bd19bd048767751cd3bf2f51e91309fa58b1359e1826ce2a89",
+      "stock_valueSha_source_geometry": "475cceea326f265c92a9d76f6e75f10f769f7108e8afb040758d28a16307c1d3",
+      "stock_valueSha_exclusion_geometry": "475cceea326f265c92a9d76f6e75f10f769f7108e8afb040758d28a16307c1d3",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": false,
+      "diagnostic_result": "not_requested"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B55220147812936",
+      "negative_ordinal_zero_based": 1,
+      "source_id": "gb:MNG:ADM1:14279143B63368554420497",
+      "source_name": "Zavkhan",
+      "source_ordinal_one_based": 3,
+      "roster_historical_python_geometry_sha256": "cfd6e2d4ce23d67988b5d72ebba8e12ac76923d37228aa77bd6e89d5b5d64a23",
+      "stock_valueSha_source_geometry": "108eba8205299bd4f6c3fde0c045a5c73b10c5df13458acceaad23ff91bb5ca4",
+      "stock_valueSha_exclusion_geometry": "108eba8205299bd4f6c3fde0c045a5c73b10c5df13458acceaad23ff91bb5ca4",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": false,
+      "diagnostic_result": "not_requested"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B55220147812936",
+      "negative_ordinal_zero_based": 2,
+      "source_id": "gb:MNG:ADM1:14279143B20985490361275",
+      "source_name": "Hovsgel",
+      "source_ordinal_one_based": 19,
+      "roster_historical_python_geometry_sha256": "7eec5ff96df529bd19bd048767751cd3bf2f51e91309fa58b1359e1826ce2a89",
+      "stock_valueSha_source_geometry": "475cceea326f265c92a9d76f6e75f10f769f7108e8afb040758d28a16307c1d3",
+      "stock_valueSha_exclusion_geometry": "475cceea326f265c92a9d76f6e75f10f769f7108e8afb040758d28a16307c1d3",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": false,
+      "diagnostic_result": "not_requested"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B59094736613024",
+      "negative_ordinal_zero_based": 1,
+      "source_id": "gb:MNG:ADM1:14279143B20985490361275",
+      "source_name": "Hovsgel",
+      "source_ordinal_one_based": 19,
+      "roster_historical_python_geometry_sha256": "7eec5ff96df529bd19bd048767751cd3bf2f51e91309fa58b1359e1826ce2a89",
+      "stock_valueSha_source_geometry": "475cceea326f265c92a9d76f6e75f10f769f7108e8afb040758d28a16307c1d3",
+      "stock_valueSha_exclusion_geometry": "475cceea326f265c92a9d76f6e75f10f769f7108e8afb040758d28a16307c1d3",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": false,
+      "diagnostic_result": "not_requested"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B61474695304771",
+      "negative_ordinal_zero_based": 0,
+      "source_id": "gb:MNG:ADM1:14279143B81467460095364",
+      "source_name": "Uvs",
+      "source_ordinal_one_based": 1,
+      "roster_historical_python_geometry_sha256": "cbc209344703e310cb6eebf970bdbb3763da3e5dc13b375d22609be9d6cd1786",
+      "stock_valueSha_source_geometry": "ebfa507f00c01f3bcf7eea6e83f0a888402f8e96ad9abe8104342bd361df161f",
+      "stock_valueSha_exclusion_geometry": "ebfa507f00c01f3bcf7eea6e83f0a888402f8e96ad9abe8104342bd361df161f",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": false,
+      "diagnostic_result": "not_requested"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B64669214156055",
+      "negative_ordinal_zero_based": 1,
+      "source_id": "gb:MNG:ADM1:14279143B35762276870520",
+      "source_name": "Dornod",
+      "source_ordinal_one_based": 17,
+      "roster_historical_python_geometry_sha256": "b6bc92071f8cb8363ad82dc0b9ea5da81ec26cc0a7917cf90f183cd8fdea4d70",
+      "stock_valueSha_source_geometry": "aaf303d770fe2d4dadf44685f5341cc0ad0599a601980d25e468ba192cc1c825",
+      "stock_valueSha_exclusion_geometry": "aaf303d770fe2d4dadf44685f5341cc0ad0599a601980d25e468ba192cc1c825",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": false,
+      "diagnostic_result": "not_requested"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B68324499400164",
+      "negative_ordinal_zero_based": 1,
+      "source_id": "gb:MNG:ADM1:14279143B49613281560709",
+      "source_name": "Bulgan",
+      "source_ordinal_one_based": 4,
+      "roster_historical_python_geometry_sha256": "6a9f9bd6254926ff68ea928f700d8173ee18ba048ff7acdfb0a22b1a82ec06ae",
+      "stock_valueSha_source_geometry": "06d8ca58db16fd57d57a354a30230a800f605c2db7c936246d745e8eb6b5220a",
+      "stock_valueSha_exclusion_geometry": "06d8ca58db16fd57d57a354a30230a800f605c2db7c936246d745e8eb6b5220a",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": true,
+      "diagnostic_result": "held"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B68324499400164",
+      "negative_ordinal_zero_based": 2,
+      "source_id": "gb:MNG:ADM1:14279143B84215380438566",
+      "source_name": "Selenge",
+      "source_ordinal_one_based": 18,
+      "roster_historical_python_geometry_sha256": "bd6cb4233a65ab796ee9a6d027326669ca67d0f1a73d9a9396bb5543327372a7",
+      "stock_valueSha_source_geometry": "ca3157a9903cbe51fef9b37b3273d29d13f43db097d2e47eb3c7af7731e5f8dd",
+      "stock_valueSha_exclusion_geometry": "ca3157a9903cbe51fef9b37b3273d29d13f43db097d2e47eb3c7af7731e5f8dd",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": true,
+      "diagnostic_result": "held"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B68324499400164",
+      "negative_ordinal_zero_based": 3,
+      "source_id": "gb:MNG:ADM1:14279143B20985490361275",
+      "source_name": "Hovsgel",
+      "source_ordinal_one_based": 19,
+      "roster_historical_python_geometry_sha256": "7eec5ff96df529bd19bd048767751cd3bf2f51e91309fa58b1359e1826ce2a89",
+      "stock_valueSha_source_geometry": "475cceea326f265c92a9d76f6e75f10f769f7108e8afb040758d28a16307c1d3",
+      "stock_valueSha_exclusion_geometry": "475cceea326f265c92a9d76f6e75f10f769f7108e8afb040758d28a16307c1d3",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": true,
+      "diagnostic_result": "held"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B75343755211502",
+      "negative_ordinal_zero_based": 1,
+      "source_id": "gb:MNG:ADM1:14279143B35762276870520",
+      "source_name": "Dornod",
+      "source_ordinal_one_based": 17,
+      "roster_historical_python_geometry_sha256": "b6bc92071f8cb8363ad82dc0b9ea5da81ec26cc0a7917cf90f183cd8fdea4d70",
+      "stock_valueSha_source_geometry": "aaf303d770fe2d4dadf44685f5341cc0ad0599a601980d25e468ba192cc1c825",
+      "stock_valueSha_exclusion_geometry": "aaf303d770fe2d4dadf44685f5341cc0ad0599a601980d25e468ba192cc1c825",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": false,
+      "diagnostic_result": "not_requested"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B75343755211502",
+      "negative_ordinal_zero_based": 2,
+      "source_id": "gb:MNG:ADM1:14279143B70362797710090",
+      "source_name": "Khentii",
+      "source_ordinal_one_based": 22,
+      "roster_historical_python_geometry_sha256": "b1677ea1885e2b3150f30ff067b3e097878fa0d43b490cfe0aa94a6da6391e86",
+      "stock_valueSha_source_geometry": "15bce77e5c155ba43140fda1959f7754c68883ee08af4d51bf6f141dd5b4c1ba",
+      "stock_valueSha_exclusion_geometry": "15bce77e5c155ba43140fda1959f7754c68883ee08af4d51bf6f141dd5b4c1ba",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": false,
+      "diagnostic_result": "not_requested"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B79971887964789",
+      "negative_ordinal_zero_based": 1,
+      "source_id": "gb:MNG:ADM1:14279143B35762276870520",
+      "source_name": "Dornod",
+      "source_ordinal_one_based": 17,
+      "roster_historical_python_geometry_sha256": "b6bc92071f8cb8363ad82dc0b9ea5da81ec26cc0a7917cf90f183cd8fdea4d70",
+      "stock_valueSha_source_geometry": "aaf303d770fe2d4dadf44685f5341cc0ad0599a601980d25e468ba192cc1c825",
+      "stock_valueSha_exclusion_geometry": "aaf303d770fe2d4dadf44685f5341cc0ad0599a601980d25e468ba192cc1c825",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": true,
+      "diagnostic_result": "supported"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B8579713719118",
+      "negative_ordinal_zero_based": 1,
+      "source_id": "gb:MNG:ADM1:14279143B35762276870520",
+      "source_name": "Dornod",
+      "source_ordinal_one_based": 17,
+      "roster_historical_python_geometry_sha256": "b6bc92071f8cb8363ad82dc0b9ea5da81ec26cc0a7917cf90f183cd8fdea4d70",
+      "stock_valueSha_source_geometry": "aaf303d770fe2d4dadf44685f5341cc0ad0599a601980d25e468ba192cc1c825",
+      "stock_valueSha_exclusion_geometry": "aaf303d770fe2d4dadf44685f5341cc0ad0599a601980d25e468ba192cc1c825",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": true,
+      "diagnostic_result": "held"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B86196657571295",
+      "negative_ordinal_zero_based": 1,
+      "source_id": "gb:MNG:ADM1:14279143B84215380438566",
+      "source_name": "Selenge",
+      "source_ordinal_one_based": 18,
+      "roster_historical_python_geometry_sha256": "bd6cb4233a65ab796ee9a6d027326669ca67d0f1a73d9a9396bb5543327372a7",
+      "stock_valueSha_source_geometry": "ca3157a9903cbe51fef9b37b3273d29d13f43db097d2e47eb3c7af7731e5f8dd",
+      "stock_valueSha_exclusion_geometry": "ca3157a9903cbe51fef9b37b3273d29d13f43db097d2e47eb3c7af7731e5f8dd",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": false,
+      "diagnostic_result": "not_requested"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B86196657571295",
+      "negative_ordinal_zero_based": 2,
+      "source_id": "gb:MNG:ADM1:14279143B70362797710090",
+      "source_name": "Khentii",
+      "source_ordinal_one_based": 22,
+      "roster_historical_python_geometry_sha256": "b1677ea1885e2b3150f30ff067b3e097878fa0d43b490cfe0aa94a6da6391e86",
+      "stock_valueSha_source_geometry": "15bce77e5c155ba43140fda1959f7754c68883ee08af4d51bf6f141dd5b4c1ba",
+      "stock_valueSha_exclusion_geometry": "15bce77e5c155ba43140fda1959f7754c68883ee08af4d51bf6f141dd5b4c1ba",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": false,
+      "diagnostic_result": "not_requested"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B90632265551754",
+      "negative_ordinal_zero_based": 1,
+      "source_id": "gb:MNG:ADM1:14279143B35762276870520",
+      "source_name": "Dornod",
+      "source_ordinal_one_based": 17,
+      "roster_historical_python_geometry_sha256": "b6bc92071f8cb8363ad82dc0b9ea5da81ec26cc0a7917cf90f183cd8fdea4d70",
+      "stock_valueSha_source_geometry": "aaf303d770fe2d4dadf44685f5341cc0ad0599a601980d25e468ba192cc1c825",
+      "stock_valueSha_exclusion_geometry": "aaf303d770fe2d4dadf44685f5341cc0ad0599a601980d25e468ba192cc1c825",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": true,
+      "diagnostic_result": "supported"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B95740998867041",
+      "negative_ordinal_zero_based": 1,
+      "source_id": "gb:MNG:ADM1:14279143B49613281560709",
+      "source_name": "Bulgan",
+      "source_ordinal_one_based": 4,
+      "roster_historical_python_geometry_sha256": "6a9f9bd6254926ff68ea928f700d8173ee18ba048ff7acdfb0a22b1a82ec06ae",
+      "stock_valueSha_source_geometry": "06d8ca58db16fd57d57a354a30230a800f605c2db7c936246d745e8eb6b5220a",
+      "stock_valueSha_exclusion_geometry": "06d8ca58db16fd57d57a354a30230a800f605c2db7c936246d745e8eb6b5220a",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": false,
+      "diagnostic_result": "not_requested"
+    },
+    {
+      "target_id": "gb:RUS:ADM2:50074027B95740998867041",
+      "negative_ordinal_zero_based": 2,
+      "source_id": "gb:MNG:ADM1:14279143B84215380438566",
+      "source_name": "Selenge",
+      "source_ordinal_one_based": 18,
+      "roster_historical_python_geometry_sha256": "bd6cb4233a65ab796ee9a6d027326669ca67d0f1a73d9a9396bb5543327372a7",
+      "stock_valueSha_source_geometry": "ca3157a9903cbe51fef9b37b3273d29d13f43db097d2e47eb3c7af7731e5f8dd",
+      "stock_valueSha_exclusion_geometry": "ca3157a9903cbe51fef9b37b3273d29d13f43db097d2e47eb3c7af7731e5f8dd",
+      "canonical_parsed_geometry_equal": true,
+      "target_in_exact_66_request": false,
+      "diagnostic_result": "not_requested"
+    }
+  ],
+  "point_contact_rows": [
+    {
+      "key": {
+        "y": 88538,
+        "x": 206218,
+        "owner_index": 38532
+      },
+      "owner_id": "gb:RUS:ADM2:50074027B68324499400164",
+      "feature_id": "gb:MNG:ADM1:14279143B49613281560709",
+      "feature_name": "Bulgan",
+      "geometry_sha256_native_valueSha": "06d8ca58db16fd57d57a354a30230a800f605c2db7c936246d745e8eb6b5220a",
+      "historical_python_geometry_sha256": "6a9f9bd6254926ff68ea928f700d8173ee18ba048ff7acdfb0a22b1a82ec06ae"
+    },
+    {
+      "key": {
+        "y": 88914,
+        "x": 213846,
+        "owner_index": 38949
+      },
+      "owner_id": "gb:RUS:ADM2:50074027B8579713719118",
+      "feature_id": "gb:MNG:ADM1:14279143B35762276870520",
+      "feature_name": "Dornod",
+      "geometry_sha256_native_valueSha": "aaf303d770fe2d4dadf44685f5341cc0ad0599a601980d25e468ba192cc1c825",
+      "historical_python_geometry_sha256": "b6bc92071f8cb8363ad82dc0b9ea5da81ec26cc0a7917cf90f183cd8fdea4d70"
+    },
+    {
+      "key": {
+        "y": 88915,
+        "x": 213845,
+        "owner_index": 38949
+      },
+      "owner_id": "gb:RUS:ADM2:50074027B8579713719118",
+      "feature_id": "gb:MNG:ADM1:14279143B35762276870520",
+      "feature_name": "Dornod",
+      "geometry_sha256_native_valueSha": "aaf303d770fe2d4dadf44685f5341cc0ad0599a601980d25e468ba192cc1c825",
+      "historical_python_geometry_sha256": "b6bc92071f8cb8363ad82dc0b9ea5da81ec26cc0a7917cf90f183cd8fdea4d70"
+    },
+    {
+      "key": {
+        "y": 88916,
+        "x": 213844,
+        "owner_index": 38949
+      },
+      "owner_id": "gb:RUS:ADM2:50074027B8579713719118",
+      "feature_id": "gb:MNG:ADM1:14279143B35762276870520",
+      "feature_name": "Dornod",
+      "geometry_sha256_native_valueSha": "aaf303d770fe2d4dadf44685f5341cc0ad0599a601980d25e468ba192cc1c825",
+      "historical_python_geometry_sha256": "b6bc92071f8cb8363ad82dc0b9ea5da81ec26cc0a7917cf90f183cd8fdea4d70"
+    },
+    {
+      "key": {
+        "y": 88917,
+        "x": 213843,
+        "owner_index": 38949
+      },
+      "owner_id": "gb:RUS:ADM2:50074027B8579713719118",
+      "feature_id": "gb:MNG:ADM1:14279143B35762276870520",
+      "feature_name": "Dornod",
+      "geometry_sha256_native_valueSha": "aaf303d770fe2d4dadf44685f5341cc0ad0599a601980d25e468ba192cc1c825",
+      "historical_python_geometry_sha256": "b6bc92071f8cb8363ad82dc0b9ea5da81ec26cc0a7917cf90f183cd8fdea4d70"
+    },
+    {
+      "key": {
+        "y": 89149,
+        "x": 201818,
+        "owner_index": 37642
+      },
+      "owner_id": "gb:RUS:ADM2:50074027B33807030271571",
+      "feature_id": "gb:MNG:ADM1:14279143B20985490361275",
+      "feature_name": "Hovsgel",
+      "geometry_sha256_native_valueSha": "475cceea326f265c92a9d76f6e75f10f769f7108e8afb040758d28a16307c1d3",
+      "historical_python_geometry_sha256": "7eec5ff96df529bd19bd048767751cd3bf2f51e91309fa58b1359e1826ce2a89"
+    },
+    {
+      "key": {
+        "y": 89490,
+        "x": 195959,
+        "owner_index": 37052
+      },
+      "owner_id": "gb:RUS:ADM2:50074027B11056050899621",
+      "feature_id": "gb:MNG:ADM1:14279143B7284431230829",
+      "feature_name": "Bayan-Ölgii",
+      "geometry_sha256_native_valueSha": "63aaaaad7cf3db74c37122f626c9d55f5bcf37d2c1791025a03dddd194caa044",
+      "historical_python_geometry_sha256": "09e5a14945221f5397660c32aa1e29cb8bf3367ea46205ad9050e723bc9352c9"
+    },
+    {
+      "key": {
+        "y": 89491,
+        "x": 195956,
+        "owner_index": 37052
+      },
+      "owner_id": "gb:RUS:ADM2:50074027B11056050899621",
+      "feature_id": "gb:MNG:ADM1:14279143B7284431230829",
+      "feature_name": "Bayan-Ölgii",
+      "geometry_sha256_native_valueSha": "63aaaaad7cf3db74c37122f626c9d55f5bcf37d2c1791025a03dddd194caa044",
+      "historical_python_geometry_sha256": "09e5a14945221f5397660c32aa1e29cb8bf3367ea46205ad9050e723bc9352c9"
+    }
+  ],
+  "interpretation": "All 29 MNG negative geometry operands in the original 334-target complete evidence are canonically equal (stock JavaScript JSON value semantics) to their exact feature geometry in the verified MNG source corpus. The six earlier Python-hash differences are serialization/hash-method differences, not geometry structure/value mismatches under the stock JavaScript parser. The 8 exact MNG point-contact keys are all in the separately preserved other-families-471 set, not in the proposed 8,108. The 66-target diagnostic proposal is set-equal to 8,108 supported cells; 11 MNG negative bindings apply within the 66 target records, with 4 binding rows attached to supported target records and 7 to held target records. The 8,108 candidate includes 7,971 land and 137 inland-water cells. The original physical receipt has 140 issue-bearing targets overall; 6 of the 32 proposal targets have issues and contain 937 proposed cells (800 land and all 137 water). The remaining 1,343 original residual cells stay held. Target-level physical issues are retained as adverse context; no claim is made that every proposed point intersects the reported issue geometry or that target-level issues are immaterial."
+}

@@ -1,0 +1,59 @@
+{
+  "kind": "cod-uganda-primary-census-context-2002-2014-v1",
+  "status": "source-context only; no key-level national-boundary qualification",
+  "scope": {
+    "original_package": "gb-COD-ADM2--repair-evaluation",
+    "residual_cells": 930,
+    "Irumu_owner": 14568,
+    "Irumu_candidate_centers": 112
+  },
+  "documents": [
+    {
+      "title": "2002 Uganda Population and Housing Census: Population Size and Distribution",
+      "publisher": "Uganda Bureau of Statistics (UBOS)",
+      "url": "https://www.ubos.org/wp-content/uploads/publications/03_20182002_CensusPopnSizeGrowthAnalyticalReport.pdf",
+      "retrieved_bytes": 1339227,
+      "sha256": "8b2a9092b173ac3882bc8285a2bf8c97cd02917eb8c340638e4434bec75d0769",
+      "examined_pages": [
+        8,
+        12
+      ],
+      "observed_content": [
+        "Page 12 is titled Figure 1.1, Map of Uganda showing the Districts as of September 2002.",
+        "The map labels D.R. Congo, the international boundary, district boundary, water body, Bundibugyo and neighboring districts."
+      ],
+      "limit": "A printed census map with no coordinate-level geometry or test against the 112 original cell centers; it cannot resolve exact border inclusion."
+    },
+    {
+      "title": "National Population and Housing Census 2014 Area Specific Profiles: Bundibugyo District",
+      "publisher": "Uganda Bureau of Statistics (UBOS)",
+      "report_date": "April 2017",
+      "census_reference": "2014",
+      "url": "https://www.ubos.org/wp-content/uploads/publications/2014CensusProfiles/BUNDIBUGYO.pdf",
+      "retrieved_bytes": 1859473,
+      "sha256": "52230b61ab2f3f8db67aecc867d099ffc87480fac9d3b4579c5f310157cdc48e",
+      "examined_pdf_page": 18,
+      "observed_content": [
+        "The page heading is Map 3: Distribution of Population by Sub-county; Bundibugyo District, 2014.",
+        "The scanned map labels Bwamba County and Bughendera County and sub-counties including Ntoroko, Harugale, and others."
+      ],
+      "limit": "The page is a 2014 population map, not a georeferenced boundary dataset; it cannot establish key-level membership for a 2006 source feature or the 2019 OCHA target."
+    },
+    {
+      "title": "National Boundary: Uganda, 2006 (catalog record)",
+      "publisher": "Uganda Bureau of Statistics (catalogued creator/publisher)",
+      "catalog_url": "https://geodiscovery.uwm.edu/catalog/stanford-ks911mt6862",
+      "recorded_year": 2006,
+      "catalogued_license": "Public Domain",
+      "geometry_object_url": "https://stacks.stanford.edu/object/ks911mt6862.zip",
+      "attempt_result": "The documented object URL returned HTTP 403 Forbidden; no geometry acquired and no alternate actor or mirror used."
+    }
+  ],
+  "existing_polygon_comparison": "evidence/uganda-2006-candidate-county-polygon-overlap.json",
+  "polygon_comparison_review": {
+    "reviewer": "existing independent reviewer",
+    "result": "source pins, candidate IDs, method description, and non-overclaim reviewed; numeric areas not independently recomputed because Shapely/GEOS was unavailable",
+    "additional_note": "A near-zero-area unrelated Bbaale ring was found in a raw shapefile inspection; it is not among intersecting counties and is not evidence against these reported overlaps."
+  },
+  "assessment": "The UBOS 2006 county polygons and UBOS 2002/2014 census maps add source-context evidence but do not establish which registered 2006 Uganda feature applies to any 2019 OCHA Irumu cell. All 112 Irumu candidates and all 930 residual keys remain pending and held; no ownership, patch, credit, or denominator changed."
+}

@@ -7,6 +7,7 @@ import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gzipSync, gunzipSync} from 'node:zlib';
 import {fileURLToPath, pathToFileURL} from 'node:url';
+import {scientificNativeSelection} from '../src/reference-metadata.js';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const script = fileURLToPath(new URL('../scripts/prepare-startup-ownership.mjs', import.meta.url));
@@ -26,7 +27,7 @@ async function syntheticPreparation() {
     const {loadNativeLatitudes} = await import('../src/native-latitudes.js');
     const {LATITUDE_DIGEST} = await import('../src/ownership-method.js');
     const reference = {id: 'geography:synthetic-startup-preparation', footprints_sha256: '3'.repeat(64), hierarchy_sha256: '4'.repeat(64)};
-    const selected = JSON.parse(await fs.readFile('data/ownership-selection.json'));
+    const selected = scientificNativeSelection(JSON.parse(await fs.readFile('data/ownership-selection.json')));
     const native = JSON.parse(await fs.readFile(selected.manifest_path));
     // Use the exact prepared numerical rule in an ordinary fixture snapshot.
     // Synthetic transport preparation must not need the scientific Git history.
@@ -127,6 +128,8 @@ async function syntheticPreparation() {
     mock.module(pathToFileURL(path.join(repository, 'scripts/read-geographic-release-manifest.mjs')).href,
       {namedExports: {readGeographicReleaseManifest: () => ({releases: [reference]})}});
     const {prepareStartupOwnership} = await import(pathToFileURL(script).href);
+    await fs.mkdir(path.join(root,'data'),{recursive:true});
+    await fs.writeFile(path.join(root,'data/ownership-selection.json'),JSON.stringify({version:1,method:manifest.method,manifest_path:manifestPath,sha256:sha(manifestBytes),release_id:reference.id}));
     const output = path.join(root, 'prepared');
     const first = await prepareStartupOwnership({output, previous});
     for (const pin of oldFiles) assert.equal(sha(await fs.readFile(path.join(output, pin.path))), pin.sha256);
@@ -229,7 +232,7 @@ if (process.env.WORLDATLAS_STARTUP_SYNTHETIC === '1') {
     await fs.mkdir('.cache', {recursive: true});
     const inputs = await fs.mkdtemp(path.resolve('.cache/prepare-startup-selection-'));
     t.after(async () => { await fs.rm(root, {recursive: true, force: true}); await fs.rm(inputs, {recursive: true, force: true}); });
-    const selection = JSON.parse(await fs.readFile('data/ownership-selection.json'));
+    const selection = scientificNativeSelection(JSON.parse(await fs.readFile('data/ownership-selection.json')));
     const output = path.join(root, 'output');
     const stale = spawnSync(process.execPath, [script, '--output', output, '--manifest', selection.manifest_path, '--sha256', '0'.repeat(64)], {encoding: 'utf8'});
     assert.equal(stale.status, 1, stale.stdout + stale.stderr);

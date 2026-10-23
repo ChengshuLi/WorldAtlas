@@ -1,6 +1,6 @@
 import {gunzipSync} from 'node:zlib';
-import {ImmutableReader} from './check-effective-geographic-regression.mjs';
-import {valueBytes, valueSha, readOriginalRuleAuthority, qualifyOriginalSourceAuthority, qualifyOriginalNativeAuthority, readRetainedRegistryAuthority, qualifySourceTargetNativeAuthority} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {ImmutableReader, selectInstalledGit} from './check-effective-geographic-regression.mjs';
+import {valueBytes, valueSha, readOriginalRuleAuthority, qualifyOriginalSourceAuthority, qualifyOriginalNativeAuthority, readRetainedRegistryAuthority, qualifySourceTargetNativeAuthority, qualifySourceTargetNativeAuthorityStored} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 // Immutable delivery metadata, authority constructors and exact-body acquisition.
 // Resolve actual committed outputs; never accept caller-written derived hashes.
 import path from 'node:path';
@@ -24,7 +24,7 @@ export function locate(reader, locator) {
 }
 
 // Existing-contract constructor, scoped to avoid mixing scientific identities.
-export const {constructOriginalAuthority, constructAuthorityRegistry} = (() => {
+export const {constructOriginalAuthority, constructOriginalAuthorityStored, constructAuthorityRegistry} = (() => {
 // Scratch integration fragment. Replace only the two absolute import specifiers
 // with their normal relative repository imports in delivery-handoff-advance.mjs.
 // These constructors read committed evidence and never execute a science operator.
@@ -115,6 +115,29 @@ function deriveOriginalBinding(reader, inputs) {
     native_proof: {publication: native.pin, inventory: native.inventory.pin, operating, assets}};
 }
 
+function sourceAuthorityResult(proof,preimage,binding) {
+ return {products:{'original-rule-preimage.json':valueBytes(preimage),'authority-binding.json':valueBytes(binding)},
+      component_ids:proof.source_scope_ids,ledger_rows:proof.original_ledger.rows,rule_sha256:valueSha(preimage),limitations:proof.limitations,
+      ...(Object.hasOwn(proof,'physical_context_hits') ? {physical_context_hits:proof.physical_context_hits} : {}),
+      ...(Object.hasOwn(proof,'split_source_competitors') ? {split_source_competitors:proof.split_source_competitors} : {}),
+      ...(Object.hasOwn(proof,'territorial_contacts') ? {territorial_contacts:proof.territorial_contacts} : {})};
+}
+async function constructOriginalAuthorityStored(reader,inputs,{directory}={}) {
+ need(reader instanceof ImmutableReader,'Require the existing ImmutableReader');
+ need(inputs&&Object.keys(inputs).sort().join(',')==='native_patch,source_evidence','Source-target authority requires two immutable inputs');
+ const pin=async locator=>{
+  exactLocator(locator);const {commit,path:name}=locator,d=reader.descriptor(name,commit),hash=createHash('sha256');
+  for await(const bytes of reader.stream(name,{version:commit}))hash.update(bytes);
+  return identity({...d,sha256:hash.digest('hex')});
+ };
+ const source_evidence=await pin(inputs.source_evidence),native_patch=await pin(inputs.native_patch);
+ const binding={version:1,kind:'source-target-native-custody-v1',source_evidence,native_patch};
+ const preimage={...binding,kind:'source-target-native-rule-v1'};
+ const owned=await qualifySourceTargetNativeAuthorityStored(reader,preimage,binding,{directory});
+ try{return Object.freeze({result:sourceAuthorityResult(owned.proof,preimage,binding),close:owned.close,[Symbol.dispose]:owned.close});}
+ catch(error){try{owned.close();}catch{}throw error;}
+}
+
 function constructOriginalAuthority(reader, inputs) {
   need(reader instanceof ImmutableReader, 'Require the existing ImmutableReader');
   if (inputs.source_evidence !== undefined) {
@@ -123,11 +146,7 @@ function constructOriginalAuthority(reader, inputs) {
     const binding = {version:1,kind:'source-target-native-custody-v1',source_evidence:source.pin,native_patch:patch.pin};
     const preimage = {...binding,kind:'source-target-native-rule-v1'};
     const proof = qualifySourceTargetNativeAuthority(reader,preimage,binding);
-    return {products:{'original-rule-preimage.json':valueBytes(preimage),'authority-binding.json':valueBytes(binding)},
-      component_ids:proof.source_scope_ids,ledger_rows:proof.original_ledger.rows,rule_sha256:valueSha(preimage),limitations:proof.limitations,
-      ...(Object.hasOwn(proof,'physical_context_hits') ? {physical_context_hits:proof.physical_context_hits} : {}),
-      ...(Object.hasOwn(proof,'split_source_competitors') ? {split_source_competitors:proof.split_source_competitors} : {}),
-      ...(Object.hasOwn(proof,'territorial_contacts') ? {territorial_contacts:proof.territorial_contacts} : {})};
+    return sourceAuthorityResult(proof,preimage,binding);
   }
   const binding = deriveOriginalBinding(reader, inputs);
   const custody = readOriginalRuleAuthority(reader, binding.original_pins, binding.source_output_aliases ?? []);
@@ -165,7 +184,7 @@ function constructAuthorityRegistry(reader, authorities) {
   entries.sort((a, b) => a.authority_sha256.localeCompare(b.authority_sha256));
   return {'authority-registry.json': valueBytes({version: 1, kind: 'retained-rule-authority-registry-v1', entries})};
 }
-return {constructOriginalAuthority, constructAuthorityRegistry};
+return {constructOriginalAuthority, constructOriginalAuthorityStored, constructAuthorityRegistry};
 })();
 
 export function deliveryAuthorityReader(root, pinReader) {
@@ -181,7 +200,7 @@ export function deliveryAuthorityReader(root, pinReader) {
 // or persisted, and warm verification never consults account credentials.
 export function deliveryAcquisitionExecute({execute = execFileSync,
   readToken = () => execFileSync('gh', ['auth', 'token'], {encoding: 'utf8', maxBuffer: 16384, timeout: 20_000}).trim()} = {}) {
-  let token;
+  let token, selectedGit;
   return (command, args, options) => {
     if (command === 'git' && args.includes('fetch')) {
       need(args.includes('https://github.com/ChengshuLi/WorldAtlas.git'), 'Unexpected acquisition repository');
@@ -189,7 +208,12 @@ export function deliveryAcquisitionExecute({execute = execFileSync,
       const env = {...options.env, GIT_CONFIG_COUNT: '3',
         GIT_CONFIG_KEY_2: 'http.https://github.com/.extraheader',
         GIT_CONFIG_VALUE_2: 'AUTHORIZATION: basic ' + Buffer.from('x-access-token:' + token).toString('base64')};
-      return execute(command, args, {...options, env});
+      options = {...options, env};
+    }
+    if (command === 'git') {
+      selectedGit ??= selectInstalledGit();
+      command = selectedGit.gitExecutable;
+      options = {...options, env: {...options.env, GIT_EXEC_PATH: selectedGit.gitExecPath}};
     }
     return execute(command, args, options);
   };

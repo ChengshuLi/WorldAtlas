@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "kind": "comoros-held32-stock-preparation-history",
+  "original_scope": {
+    "package_id": "gb-COM-ADM1--repair-evaluation",
+    "keys": 571,
+    "intervals": 296,
+    "owner": 7114,
+    "accepted_keys": 485,
+    "remaining_held_keys": 86,
+    "this_attempt": 32,
+    "other_held_ocha_adverse": 54
+  },
+  "source_of_partition": {
+    "commit": "88482b58d6662a34436d2ff8fb82dc64720f71dd",
+    "path": "coordination/engineering/comoros-original-disposition-20261021/decision-review-001/decision-and-key-join.json",
+    "bytes": 405537,
+    "sha256": "0fc8371056c99f27635bc821ee42cbfc2468f585ef1afd1ba1b94a2cc437464c"
+  },
+  "source_evidence_base": {
+    "commit": "88482b58d6662a34436d2ff8fb82dc64720f71dd",
+    "path": "coordination/engineering/comoros-original-disposition-20261021/evidence/source-004/source-evidence.json",
+    "bytes": 63667,
+    "sha256": "1696a8cb4d7e97dbefbf8bfbd939433e4b971fb3b00c7806693099e5ba96edc7"
+  },
+  "current_selector": {
+    "commit": "0e50bd281afec27ce32fac8dcb4dfe2401f94b6c",
+    "path": "data/ownership-selection.json",
+    "version": 2
+  },
+  "attempts": [
+    {
+      "phase": "source-evidence",
+      "config": "input/source-evidence-config.json",
+      "outcome": "failed-before-publication",
+      "error": "Final-profile source preparation requires its genuine original owner pin",
+      "cause": "The retained historical source-evidence body named an equivalent old roster path; current selected final profile requires the exact bounds.json.gz locator from its manifest."
+    },
+    {
+      "phase": "source-evidence",
+      "config": "input/source-evidence-config-v2.json",
+      "destination": "evidence/source-evidence-002",
+      "outcome": "failed-before-publication",
+      "error": "git ls-tree could not resolve the pinned current reference-projection path in commit 929af97a43859ebfcb66112d5091da303e7396b2",
+      "cause": "The exact current selector projection's required commit/tree/blob closure was absent from the sparse local object database."
+    },
+    {
+      "phase": "exact-reference-closure",
+      "outcome": "completed",
+      "receipt": "input/reference-closure-receipt-v2.json",
+      "result": "Resolved the eight exact pins in the accepted projection, including all five required commit identities and 20 exact tree objects; all reconstructed tree hashes match GitHub OIDs and all eight complete blob pins match their declared Git OID, byte length and SHA-256."
+    },
+    {
+      "phase": "source-evidence",
+      "config": "input/source-evidence-config-v2.json",
+      "destination": "evidence/source-evidence-003",
+      "outcome": "completed",
+      "result": "Stock helper completed; three original source members each bind the same exact 32-key mapped-land coverage; current final selector contract/reference and owner roster are authenticated."
+    }
+  ],
+  "limits": [
+    "No observation, source producer, physical producer, geometry producer or historical repair replay was run.",
+    "No selection, hold, accepted count, public PR or root accounting was changed by preparation.",
+    "The 32 remain pending the stock native diagnostic and constructor; the 54 OCHA-adverse keys remain held."
+  ]
+}

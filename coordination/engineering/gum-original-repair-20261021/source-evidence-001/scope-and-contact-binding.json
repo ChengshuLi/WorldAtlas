@@ -1,0 +1,85 @@
+{
+  "base": "2bfc64ad6c622fd4e9c5f5f4cf763db22828e940",
+  "exact_key_rows_sha256": "88e227b88a2318678f92550a383a4dc62b19ee8890803c14d4ab53a3b23dc0db",
+  "exact_keys": 139,
+  "exact_original_interval_rows": 86,
+  "exact_original_intervals_sha256": "fea49893b86b14a8e46abd1554490ccdf59c0b44dd68cb80162a5d7206e6a99b",
+  "foreign_contact_incidences": 269,
+  "foreign_families": [
+    "gb:USA:ADM1",
+    "gb:USA:ADM2"
+  ],
+  "inland_water_block_029": {
+    "blob_oid": "01851c2ff5b06938769c6662bea70c19c69148ba",
+    "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "compressed_or_raw_bytes": 19710,
+    "decoded_bytes": 125470,
+    "decoded_sha256": "c4611ff0fcfb89048a4c524493a60b90ced1ff4d80ef9c1bc94a66d6b02b62c9",
+    "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-029.json.gz",
+    "sha256": "c3a2e3b0c84e34e19aa39c7afbb02f62a434f29fad6e64aa7429522b9ebfe30f",
+    "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-029.json.gz"
+  },
+  "kind": "gum-original-scope-and-contact-binding-v1",
+  "limits": [
+    "Pins preserve retained records and candidate incidences only. They do not establish foreign applicability or any legal conclusion.",
+    "The complete USA ADM1/ADM2 families are separately retained in source-evidence; this scope binding is not a contact adjudication."
+  ],
+  "package": "gb-GUM-ADM2--repair-evaluation",
+  "physical_support_block_029": {
+    "blob_oid": "2e1d884705c104bd3dbc61ac5444761875210ba5",
+    "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "compressed_or_raw_bytes": 508848,
+    "decoded_bytes": 2354796,
+    "decoded_sha256": "a62fb29038527ceba28ebef27ee3d487ec4fb0a31ca64610d16f02947b5189ee",
+    "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-029.json.gz",
+    "sha256": "7af023db048ed84fe910c0ce966508b5b4127c95c6215f0d36213ed20d94b5d2",
+    "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-029.json.gz"
+  },
+  "queue": {
+    "blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+    "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json"
+  },
+  "scope": {
+    "cells": 139,
+    "excluded_physical_companion": {
+      "cells": 37,
+      "intervals": 29
+    },
+    "intervals": 86,
+    "land": 139,
+    "owner": 7117,
+    "target_id": "atlas:territory:GUM",
+    "water": 0
+  },
+  "source_candidates_block_029": {
+    "blob_oid": "3fc846f1a3a57841d82c695b97ad31b93af681e6",
+    "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "compressed_or_raw_bytes": 613896,
+    "decoded_bytes": 4552072,
+    "decoded_sha256": "a497602aa36f61e9d86b2078d6811e2362612fe7a11920f50df315b991106798",
+    "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-029.json.gz",
+    "sha256": "7775f315311056808bfead2394034459a83a3590a201fe0deedb66fea1866528",
+    "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-029.json.gz"
+  },
+  "source_feature_roster": {
+    "blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+    "bytes": 1844315,
+    "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "decoded_entries": 73567,
+    "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+    "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa",
+    "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz"
+  },
+  "source_lineage": {
+    "blob_oid": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+    "bytes": 4404456,
+    "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+    "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4",
+    "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz"
+  },
+  "version": 1
+}

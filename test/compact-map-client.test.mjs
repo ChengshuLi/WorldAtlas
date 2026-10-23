@@ -20,7 +20,7 @@ function validPage({id='location:A',year=2020,revision=7,next_cursor=null,stamp=
   names:[{id:`name:${id}${stamp}`,entity_id:id,name:`Historical ${id}`,language:'en',role:'preferred',field:'name',value:`Historical ${id}`,name_role:'preferred',valid_from:year,valid_to:year+1,source_id:source.id,is_example:0,metadata:{attested:true}}],
   retirements:[{id:`retirement:${id}${stamp}`,collection:'records',target_id:`prepared:${id}`,source_id:source.id,reason:'Source correction',replacement_id:null,metadata:{review:'retained'}}]};
 }
-function request(url){const parsed=new URL(url,'https://atlas.example');assert.equal(parsed.pathname,'/api/map/snapshot','compact reads must not download independent claim streams');assert.equal(parsed.searchParams.get('evidence_only'),'1');return parsed.searchParams;}
+function request(url){const parsed=new URL(url,'https://atlas.example');assert.equal(parsed.pathname,'/api/map/snapshot','compact reads must not download independent claim streams');assert.equal(parsed.searchParams.get('evidence_only'),'1');assert.equal(parsed.searchParams.get('release_id'),parsed.searchParams.get('include_temporal')==='1'?temporalPins.release_id:null);return parsed.searchParams;}
 function unavailable(result,{stale=false,authority=false}={}){
  assert.equal(result.stale,stale);assert.equal(result.retirementAuthority,authority);
  for(const key of ['attributes','names','retirements']){assert.equal(result[key].available,false);if(!stale)assert.deepEqual(result[key].records,[]);}
@@ -292,7 +292,7 @@ test('inline temporal revision or release drift restarts the scalar snapshot rat
 },{geography:true}));
 
 test('absent inline temporal pages retain bounded ordinary geography paging',async()=>withLoader(async loader=>{
- const calls=[];global.fetch=async url=>{const p=new URL(url,'https://atlas.invalid');calls.push(p.pathname);if(p.pathname==='/api/map/snapshot')return Response.json(validPage());assert.equal(p.pathname,'/api/geography/temporal/snapshot');return Response.json(temporalPage(p.searchParams.get('stream')));};
+ const calls=[];global.fetch=async url=>{const p=new URL(url,'https://atlas.invalid');calls.push(p.pathname);if(p.pathname==='/api/map/snapshot')return Response.json(validPage());assert.equal(p.pathname,'/api/geography/temporal/snapshot');assert.equal(p.searchParams.get('release_id'),temporalPins.release_id);return Response.json(temporalPage(p.searchParams.get('stream')));};
  const result=await loader.loadHostedMapEvidence(2020,false);assert.equal(calls.length,3);assert.equal(result.temporalGeography.complete,true);
 },{geography:true}));
 
@@ -446,3 +446,44 @@ test('selected native geography rejects mixed source releases and unavailable de
   await assert.rejects(loader.loadGeography(),mismatch?/reference release/:/coverage classification/);
  });
 });
+
+
+test('actual additive map requests its content base release on every compact page and size retry',async()=>withLoader(async loader=>{
+ const base={id:temporalPins.release_id,hierarchy_sha256:temporalPins.hierarchy_sha256,footprints_sha256:temporalPins.footprints_sha256};
+ const effective={...base,id:'geography:effective-cell-repair',footprints_sha256:'e'.repeat(64)};
+ const asset=role=>({path:`additive-repairs/${role}.json${role==='owner_roster'?'.gz':''}`,bytes:1,sha256:'f'.repeat(64),...(role==='owner_roster'?{encoding:'gzip',decoded_bytes:1,decoded_sha256:'f'.repeat(64)}:{})});
+ const calls=[];let retry=true;
+ global.fetch=async url=>{
+  if(url==='./atlas-geography.json')return Response.json({units:[],features:[],contentCapabilities:{mapSnapshots:1,datedGeography:1},reference_release:effective,
+   additiveRelease:{version:2,kind:'retained-native-base-plus-delta-v2',base_reference:base,effective_reference:effective,...Object.fromEntries(['patch','ledger','owner_roster','base_manifest'].map(role=>[role,asset(role)]))}});
+  const p=request(url);calls.push({cursor:p.get('cursor'),release:p.get('release_id'),limit:Number(p.get('limit'))});
+  if(!p.has('cursor'))return Response.json(validPage({next_cursor:'location:A'}));
+  if(retry){retry=false;return Response.json({error:'Page too large',retryable:true,suggested_limit:400},{status:413});}
+  return Response.json({...validPage({id:'location:B'}),temporal_geography:{records:temporalPage('records'),withdrawals:temporalPage('withdrawals')}});
+ };
+ await loader.loadGeography();const result=await loader.loadHostedMapEvidence(2020,false);
+ assert.equal(result.retirementAuthority,true);assert.equal(result.temporalGeography.complete,true);
+ assert.deepEqual(calls.map(row=>row.cursor),[null,'location:A','location:A']);
+ assert.deepEqual(calls.map(row=>row.limit),[4096,4096,400]);
+ assert.ok(calls.every(row=>row.release===base.id&&row.release!==effective.id));
+}));
+
+
+test('normal geography loading carries one canonical owner replica and never revives source labels',async()=>withLoader(async loader=>{
+ const {resolveAttributes}=await import('../src/attributes.js');
+ const replica=JSON.parse(fs.readFileSync(new URL('../data/current-owner-labels.json',import.meta.url),'utf8'));
+ const units=['continent','subcontinent','region','area','province'].map((level,i)=>({id:level,name:level,level,parent_id:i?['continent','subcontinent','region','area'][i-1]:null}));
+ const feature={id:'location:owner-carrier',properties:{id:'location:owner-carrier',name:'Owner carrier',parent_id:'province',reference_owner:'Wrong source name',metadata:{reference_owner_id:'owner:Q34754',reference_polity:'Somalia',reference_polity_status:'reference'}}};
+ let body={units,features:[feature],ownerLabels:replica,contentCapabilities:{}};
+ global.fetch=async url=>{assert.equal(url,'./atlas-geography.json');return Response.json(body);};
+ const loaded=await loader.loadGeography();
+ assert.equal(loaded.ownerLabels.size,replica.owners.length);
+ assert.equal(loaded.ownerLabels.get('owner:Q1045').name,'Somalia');
+ assert.equal(resolveAttributes(loaded.features,2026,{ownerLabels:loaded.ownerLabels}).get(feature.id).owner,'Somaliland');
+ assert.deepEqual(loaded.features[0].properties,feature.properties,'Raw source provenance is not rewritten by display resolution');
+ body={...body,ownerLabels:{...replica,owners:[...replica.owners,replica.owners[0]]}};
+ await assert.rejects(loader.loadGeography(),/Invalid canonical owner-label snapshot/);
+ delete body.ownerLabels;
+ const legacy=await loader.loadGeography(),unlabelled=resolveAttributes(legacy.features,2026,{ownerLabels:legacy.ownerLabels}).get(feature.id);
+ assert.equal(legacy.ownerLabels.size,0);assert.equal(unlabelled.owner,null);assert.equal(unlabelled.category_ids.owner,'owner:Q34754');
+}));

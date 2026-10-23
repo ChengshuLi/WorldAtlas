@@ -1,0 +1,62 @@
+{
+  "attempt": 3,
+  "command": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/prepare-delivery-handoff.mjs physical research/geography/libya-80-owner-observation-20261019/physical-config-003.json .cache/delivery-handoff/lby80-physical-20261019",
+  "config_file_sha256": "0a529459f8b778635cdcc1614918532435526ce0ef8d471f1dd00e1780c95414",
+  "config_path": "research/geography/libya-80-owner-observation-20261019/physical-config-003.json",
+  "git_version": "git version 2.39.5 (Apple Git-154)",
+  "issues": [
+    {
+      "reasons": [
+        "extra_reconstruction"
+      ],
+      "target": "gb:LBY:ADM1:10800210B74925506200485"
+    }
+  ],
+  "kind": "lby80-physical-attempt-record-v1",
+  "limits": [
+    "Runtime inventory covers executables, loaded modules and package libraries, not a hermetic OS-loader/system-library closure.",
+    "Physical source-relative evidence only; no native selection, factual approval or repaired credit.",
+    "The output is whole original-source-feature geometry support, not per-cell or selected-native geometry qualification; the runner consumes stage[\"consumed\"][\"geometry\"].",
+    "All eight targets have nonempty outside_mapped_L1_context geometry; missing_reconstruction is empty because the helper footprint includes candidate.difference(levels[1]), so that emptiness does not establish whole-target Level-1 land support.",
+    "The Benghazi extra_reconstruction issue is retained; independent review measured two residual polygons totaling about 7.36e-18 square degrees, with no tolerance rule permitting suppression."
+  ],
+  "node_version": "v24.19.0",
+  "outputs_published": true,
+  "phase": "physical",
+  "phase_config_sha256": "ddf891d189ce8e4ec13252d7d32700833778877f32c7513e7aafffe3fdea469b",
+  "program_sha256": "abc801b9a35d20c9f0dfe3bbc9bb2cb7dc107f1758414970d9cde11380574a18",
+  "python": {
+    "bytes": 18058560,
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-18/task-3/.selected-audit-103b230/libya-handoff-20261019/runtime/lby80-physical-venv/bin/python",
+    "sha256": "21a9986bad1dbbcd813a252b19b4263fc0755ed2dbf8632c83e5d6117a12f319"
+  },
+  "qualification_or_credit": false,
+  "result": "completed",
+  "retained_products": [
+    {
+      "bytes": 629965,
+      "path": "research/geography/libya-80-owner-observation-20261019/physical-001/whole-target-support.json",
+      "runner_output_path": ".cache/delivery-handoff/lby80-physical-20261019/whole-target-support.json",
+      "sha256": "4a1837f7977c58456a54713118247ce44014d76f26202fcd575a4844b0138811"
+    },
+    {
+      "bytes": 64048,
+      "path": "research/geography/libya-80-owner-observation-20261019/physical-001/execution-receipt.json",
+      "runner_output_path": null,
+      "sha256": "5d3e65d2081772c953c2b9fc0e8c547cdca6104992c16112d193b935946f561e"
+    }
+  ],
+  "runtime_file_count": 204,
+  "runtime_versions": {
+    "geos": "3.13.1",
+    "numpy": "2.3.5",
+    "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+    "shapely": "2.1.2"
+  },
+  "scope": {
+    "query_relations": 38,
+    "targets_with_issues": 1,
+    "whole_targets": 8
+  },
+  "version": 1
+}

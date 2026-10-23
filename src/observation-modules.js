@@ -4,7 +4,13 @@ import {createObservationRegistry} from './observation-registry.js';
 import {assertJSONData} from './json-contract.js';
 import baseline from '../data/observation-registry-history/base-v1.json' with {type:'json'};
 
-export const observationModules=Object.freeze([]);
+export const observationModules=Object.freeze([{
+ id:'settlement',version:1,
+ metrics:[{id:'settlement.population',unit:'persons',minimum:0,maximum:Number.MAX_SAFE_INTEGER,
+  definition:'Population of the identified settlement or urban agglomeration, not its containing location.'}],
+ fields:[{id:'settlement.population',subject_kinds:['settlement'],value_type:'number',metric_id:'settlement.population',geography_scope:'identity',
+  definition:'Source-supported settlement population estimate or projection for the stated interval; no territorial aggregation or interpolation.'}],
+}]);
 export const registeredObservationRegistry=createObservationRegistry(observationModules);
 const freeze=value=>{if(value&&typeof value==='object'){Object.values(value).forEach(freeze);Object.freeze(value);}return value;};
 const baselineDigest='cc6aae6c18099d3e776c73ee4144556422ac87b911aa30aa95bef831ca18d2d2';

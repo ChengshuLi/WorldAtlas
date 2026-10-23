@@ -1,0 +1,713 @@
+{
+  "kind": "independent-HTI411-proposal-crossjoin-and-retained-physical-summary",
+  "original_cells": 4082,
+  "original_intervals": 1741,
+  "original_owners": 37,
+  "original_contacts": 52,
+  "accepted_prior_conserved": 3671,
+  "A": {
+    "keys": 190,
+    "original_interval_rows": 92
+  },
+  "B": {
+    "keys": 221,
+    "original_interval_rows": 121
+  },
+  "union": 411,
+  "intersection": 0,
+  "held_original_interval_rows_touched": 213,
+  "original_interval_rows_with_both_accepted_and_held_keys": [],
+  "exact_original_block_matches_previously_verified_observer": true,
+  "all_per_key_original_source_sets_and_classes_match": true,
+  "positive_repair_credit": 0,
+  "accepted_outcome_credit": 0,
+  "physical_pin": {
+    "commit": "f4da746a48e4db574ded6107b17cf780f985a7a2",
+    "path": "coordination/engineering/americas-next-original-evaluations-20261018/physical140-001/whole-target-support.json",
+    "mode": "100644",
+    "git_blob_oid": "b3c836a71a6fdb4122ecd367053380c543b7446e",
+    "bytes": 7060799,
+    "sha256": "a2c6bf195a6fdaf3555c09ffefa55bc4e312106438a02c306063c6a64ffe327c"
+  },
+  "retained_physical_summaries": [
+    {
+      "owner": 22478,
+      "target_id": "gb:HTI:ADM2:57096268B10864130869566",
+      "report_result_index": 0,
+      "report_json_pointer": "/results/0",
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "positive_and_adverse_roles": {
+        "mapped_land_support": {
+          "geometry_type": "MultiPolygon",
+          "retained_nonempty": true
+        },
+        "mapped_inland_water_support": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        },
+        "outside_mapped_L1_context": {
+          "geometry_type": "MultiPolygon",
+          "retained_nonempty": true
+        },
+        "missing_reconstruction": {
+          "geometry_type": "MultiPolygon",
+          "retained_nonempty": true
+        },
+        "extra_reconstruction": {
+          "geometry_type": "MultiPolygon",
+          "retained_nonempty": true
+        },
+        "contradictory_land_water_support": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        }
+      },
+      "hierarchy_context": {
+        "L2-outside-L1": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        },
+        "L3-outside-L2": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        },
+        "L4-outside-L3": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        }
+      },
+      "source_id_queries": [
+        2,
+        29,
+        16076,
+        89555,
+        90576,
+        90789
+      ],
+      "retained_query_results": [
+        {
+          "source_id": 2,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        },
+        {
+          "source_id": 29,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-operation-pointset"
+        },
+        {
+          "source_id": 16076,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        },
+        {
+          "source_id": 89555,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        },
+        {
+          "source_id": 90576,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-operation-pointset"
+        },
+        {
+          "source_id": 90789,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        }
+      ]
+    },
+    {
+      "owner": 22492,
+      "target_id": "gb:HTI:ADM2:57096268B36101678820445",
+      "report_result_index": 11,
+      "report_json_pointer": "/results/11",
+      "issue_reasons": [
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "positive_and_adverse_roles": {
+        "mapped_land_support": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": true
+        },
+        "mapped_inland_water_support": {
+          "geometry_type": "MultiPolygon",
+          "retained_nonempty": true
+        },
+        "outside_mapped_L1_context": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": false
+        },
+        "missing_reconstruction": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": false
+        },
+        "extra_reconstruction": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": false
+        },
+        "contradictory_land_water_support": {
+          "geometry_type": "MultiLineString",
+          "retained_nonempty": true
+        }
+      },
+      "hierarchy_context": {
+        "L2-outside-L1": {
+          "geometry_type": "MultiPolygon",
+          "retained_nonempty": true
+        },
+        "L3-outside-L2": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        },
+        "L4-outside-L3": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        }
+      },
+      "source_id_queries": [
+        2,
+        29,
+        183083
+      ],
+      "retained_query_results": [
+        {
+          "source_id": 2,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        },
+        {
+          "source_id": 29,
+          "periodic_offset": 0,
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-candidate-reconstruction"
+        },
+        {
+          "source_id": 183083,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-operation-pointset"
+        }
+      ]
+    },
+    {
+      "owner": 22496,
+      "target_id": "gb:HTI:ADM2:57096268B46256442272467",
+      "report_result_index": 15,
+      "report_json_pointer": "/results/15",
+      "issue_reasons": [],
+      "positive_and_adverse_roles": {
+        "mapped_land_support": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": true
+        },
+        "mapped_inland_water_support": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        },
+        "outside_mapped_L1_context": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": false
+        },
+        "missing_reconstruction": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": false
+        },
+        "extra_reconstruction": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": false
+        },
+        "contradictory_land_water_support": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        }
+      },
+      "hierarchy_context": {
+        "L2-outside-L1": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        },
+        "L3-outside-L2": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        },
+        "L4-outside-L3": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        }
+      },
+      "source_id_queries": [
+        2,
+        29
+      ],
+      "retained_query_results": [
+        {
+          "source_id": 2,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        },
+        {
+          "source_id": 29,
+          "periodic_offset": 0,
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-candidate-reconstruction"
+        }
+      ]
+    },
+    {
+      "owner": 22500,
+      "target_id": "gb:HTI:ADM2:57096268B55617934237810",
+      "report_result_index": 19,
+      "report_json_pointer": "/results/19",
+      "issue_reasons": [],
+      "positive_and_adverse_roles": {
+        "mapped_land_support": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": true
+        },
+        "mapped_inland_water_support": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        },
+        "outside_mapped_L1_context": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": false
+        },
+        "missing_reconstruction": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": false
+        },
+        "extra_reconstruction": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": false
+        },
+        "contradictory_land_water_support": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        }
+      },
+      "hierarchy_context": {
+        "L2-outside-L1": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        },
+        "L3-outside-L2": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        },
+        "L4-outside-L3": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        }
+      },
+      "source_id_queries": [
+        2,
+        29
+      ],
+      "retained_query_results": [
+        {
+          "source_id": 2,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        },
+        {
+          "source_id": 29,
+          "periodic_offset": 0,
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-candidate-reconstruction"
+        }
+      ]
+    },
+    {
+      "owner": 22501,
+      "target_id": "gb:HTI:ADM2:57096268B6056210372718",
+      "report_result_index": 20,
+      "report_json_pointer": "/results/20",
+      "issue_reasons": [],
+      "positive_and_adverse_roles": {
+        "mapped_land_support": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": true
+        },
+        "mapped_inland_water_support": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        },
+        "outside_mapped_L1_context": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": false
+        },
+        "missing_reconstruction": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": false
+        },
+        "extra_reconstruction": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": false
+        },
+        "contradictory_land_water_support": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        }
+      },
+      "hierarchy_context": {
+        "L2-outside-L1": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        },
+        "L3-outside-L2": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        },
+        "L4-outside-L3": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        }
+      },
+      "source_id_queries": [
+        2,
+        29
+      ],
+      "retained_query_results": [
+        {
+          "source_id": 2,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        },
+        {
+          "source_id": 29,
+          "periodic_offset": 0,
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-candidate-reconstruction"
+        }
+      ]
+    },
+    {
+      "owner": 22506,
+      "target_id": "gb:HTI:ADM2:57096268B67842804061774",
+      "report_result_index": 25,
+      "report_json_pointer": "/results/25",
+      "issue_reasons": [
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "positive_and_adverse_roles": {
+        "mapped_land_support": {
+          "geometry_type": "MultiPolygon",
+          "retained_nonempty": true
+        },
+        "mapped_inland_water_support": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": true
+        },
+        "outside_mapped_L1_context": {
+          "geometry_type": "MultiPolygon",
+          "retained_nonempty": true
+        },
+        "missing_reconstruction": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": false
+        },
+        "extra_reconstruction": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": false
+        },
+        "contradictory_land_water_support": {
+          "geometry_type": "MultiLineString",
+          "retained_nonempty": true
+        }
+      },
+      "hierarchy_context": {
+        "L2-outside-L1": {
+          "geometry_type": "MultiPolygon",
+          "retained_nonempty": true
+        },
+        "L3-outside-L2": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        },
+        "L4-outside-L3": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        }
+      },
+      "source_id_queries": [
+        2,
+        29,
+        49688,
+        59443,
+        100375,
+        134844,
+        181039,
+        181661,
+        187513
+      ],
+      "retained_query_results": [
+        {
+          "source_id": 2,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        },
+        {
+          "source_id": 29,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-operation-pointset"
+        },
+        {
+          "source_id": 49688,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        },
+        {
+          "source_id": 59443,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        },
+        {
+          "source_id": 100375,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        },
+        {
+          "source_id": 134844,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        },
+        {
+          "source_id": 181039,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        },
+        {
+          "source_id": 181661,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-operation-pointset"
+        },
+        {
+          "source_id": 187513,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        }
+      ]
+    },
+    {
+      "owner": 22511,
+      "target_id": "gb:HTI:ADM2:57096268B78477673147329",
+      "report_result_index": 29,
+      "report_json_pointer": "/results/29",
+      "issue_reasons": [],
+      "positive_and_adverse_roles": {
+        "mapped_land_support": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": true
+        },
+        "mapped_inland_water_support": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        },
+        "outside_mapped_L1_context": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": false
+        },
+        "missing_reconstruction": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": false
+        },
+        "extra_reconstruction": {
+          "geometry_type": "Polygon",
+          "retained_nonempty": false
+        },
+        "contradictory_land_water_support": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        }
+      },
+      "hierarchy_context": {
+        "L2-outside-L1": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        },
+        "L3-outside-L2": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        },
+        "L4-outside-L3": {
+          "geometry_type": "GeometryCollection",
+          "retained_nonempty": false
+        }
+      },
+      "source_id_queries": [
+        2,
+        29,
+        146588,
+        157700
+      ],
+      "retained_query_results": [
+        {
+          "source_id": 2,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        },
+        {
+          "source_id": 29,
+          "periodic_offset": 0,
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-candidate-reconstruction"
+        },
+        {
+          "source_id": 146588,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        },
+        {
+          "source_id": 157700,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "All physical values are read from the existing authenticated whole-target report, not newly computed.",
+    "Nonempty role geometry and issue flags are whole-target source-relative context, not proof of a per-key physical veto or clearance.",
+    "The independent full current-owner receipt and earlier scientific source/native review are reused; no observer or geometry rerun."
+  ]
+}

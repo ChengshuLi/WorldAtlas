@@ -3,11 +3,14 @@ export function quotaDelay(error, wallNow = Date.now()) {
   const row = error?.github;
   if (![403, 429].includes(row?.http_status)) return null;
   const seconds = Number(row.retry_after);
-  if (/^\d+$/.test(row.retry_after ?? '') && seconds > 0 && seconds <= 3600) return seconds * 1000 + 1000;
+  const retryAfter = /^\d+$/.test(row.retry_after ?? '') && seconds > 0 && seconds <= 3600
+    ? seconds * 1000 + 1000 : null;
   const reset = Number(row.rate_reset);
+  // Both signals can apply. A shorter secondary delay must not resume reads
+  // while the primary window is still exhausted (or vice versa).
   if (row.rate_remaining === '0' && /^\d+$/.test(row.rate_reset ?? '') && Number.isSafeInteger(reset))
-    return Math.max(1000, reset * 1000 - wallNow + 1000);
-  return null;
+    return Math.max(retryAfter ?? 0, 1000, reset * 1000 - wallNow + 1000);
+  return retryAfter;
 }
 export function requestCategory(route) {
   if (route === '/rate_limit') return 'generic-capacity';

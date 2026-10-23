@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {gzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
-import {nativeRowLatitudes} from '../src/native-grid.js';
+import {nativeRowLatitudes,nativeSequence} from '../src/native-grid.js';
 import {screenNativeGapCandidates,newVisibleRepairCandidates,repairVisibilityWitnesses,
   decodeVisibilityLatitudes,visibilityDigest} from '../scripts/check-effective-geographic-regression.mjs';
 
@@ -67,6 +67,16 @@ test('zero-cell exclusion is permanent for new additions; accepted history survi
  assert.deepEqual(newVisibleRepairCandidates([old],[old,candidate('new')]).map(x=>x.component_id),['new']);
  assert.throws(()=>newVisibleRepairCandidates([],[{...candidate('fake'),native_cells:0}]),/must change map cells/);
 });
+test('public selection follows arbitrary native iteration rather than caller entryAt',()=>{
+ const good=candidate('good'),bad={...candidate('bad'),disposition:'zero-cell',native_cells:0};
+ let indexedReads=0;
+ const after=nativeSequence(1,function*(){yield good;},{entryAt:()=>{indexedReads++;return bad;}});
+ const selected=newVisibleRepairCandidates([],after);
+ assert.deepEqual(Array.from(selected),[good]);assert.equal(selected.at(0),good);
+ assert.equal(indexedReads,0);
+ assert.throws(()=>newVisibleRepairCandidates([],nativeSequence(2,function*(){yield good;yield good;})),/Duplicate/);
+ assert.throws(()=>newVisibleRepairCandidates([],nativeSequence(1,function*(){yield bad;})),/must change map cells/);
+});
 test('actual transition needs a per-primitive unowned-to-correct-owner witness',()=>{
  const c=candidate('new'),before=rows(),after=rows();after[8].runs=[[8,9,1]];
  const check=(b,a,cs=[c])=>repairVisibilityWitnesses({candidates:cs,size,latitudes,beforeRows:b,afterRows:a});
@@ -76,6 +86,18 @@ test('actual transition needs a per-primitive unowned-to-correct-owner witness',
  const unrelated=rows();unrelated[8].runs=[[9,10,1]];assert.deepEqual(check(before,unrelated),[null]);
  const sibling=candidate('sibling',9,8);assert.deepEqual(check(before,after,[sibling]),[null]);
  assert.throws(()=>check(before,after.slice(1)),/scope differs/);
+});
+test('unqualified mixed native and polygon witnesses still inspect actual before and after cells',()=>{
+ const legacy=candidate('polygon',9,8),base=polygon(...at(8,8));
+ const native={representation:'native-cells',component_id:'native',target_id:'A',pixelIndex:1,disposition:'assigned',
+  base_geometry:base,base_geometry_sha256:visibilityDigest(base),native_rows:[{y:8,runs:[[8,9,1]]}],
+  native_bounds:[0,0,1,1],native_cells:1,source_receipt_sha256:'a'.repeat(64),authority_sha256:'b'.repeat(64),rule_sha256:'c'.repeat(64)};
+ const before=rows(),after=rows();after[8].runs=[[8,10,1]];
+ const inspect=(b,a)=>repairVisibilityWitnesses({candidates:[native,legacy],size,latitudes,beforeRows:b,afterRows:a});
+ assert.deepEqual(inspect(before,after).map(w=>[w.component_id,w.x,w.y]),[['native',8,8],['polygon',9,8]]);
+ const already=rows();already[8].runs=[[8,9,1]];
+ assert.deepEqual(inspect(already,after).map(w=>w?.component_id??null),[null,'polygon']);
+ assert.deepEqual(inspect(after,after),[null,null]);
 });
 test('normative table loading checks whole encoded and decoded bytes',()=>{
  const raw=Buffer.alloc(size*8);latitudes.forEach((x,y)=>raw.writeDoubleLE(x,y*8));

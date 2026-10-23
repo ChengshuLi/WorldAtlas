@@ -1,0 +1,125 @@
+{
+  "experiments": [
+    {
+      "writer": "prepare-stage.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/philippines-native-repair-20261017/method/prepare-stage.py\", line 12, in <module>\n    assert W.is_dir() and O.parent.is_dir() and not O.exists()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "prepare-stage.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/philippines-native-repair-20261017/method/prepare-stage.py\", line 13, in <module>\n    assert all(not p.is_symlink() for root in (W,O) for p in (root,*root.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-historical.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/philippines-native-repair-20261017/method/check-historical.py\", line 10, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-historical.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/philippines-native-repair-20261017/method/check-historical.py\", line 10, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "verify-complete-context.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/philippines-native-repair-20261017/method/verify-complete-context.py\", line 8, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "verify-complete-context.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/philippines-native-repair-20261017/method/verify-complete-context.py\", line 8, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-prior-records.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/philippines-native-repair-20261017/method/check-prior-records.py\", line 8, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-prior-records.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/philippines-native-repair-20261017/method/check-prior-records.py\", line 8, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "preserve-interpretation.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/philippines-native-repair-20261017/method/preserve-interpretation.py\", line 6, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "preserve-interpretation.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/philippines-native-repair-20261017/method/preserve-interpretation.py\", line 6, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "prepare-supported.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/philippines-native-repair-20261017/method/prepare-supported.py\", line 6, in <module>\n    W=pathlib.Path(sys.argv[1]).absolute();H=sys.argv[2];O=pathlib.Path(sys.argv[3]).absolute();P='coordination/engineering/philippines-native-repair-20261017';assert len(sys.argv)==4 and len(H)==40 and all(c in '0123456789abcdef' for c in H) and O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n                                                                                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "prepare-supported.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/philippines-native-repair-20261017/method/prepare-supported.py\", line 6, in <module>\n    W=pathlib.Path(sys.argv[1]).absolute();H=sys.argv[2];O=pathlib.Path(sys.argv[3]).absolute();P='coordination/engineering/philippines-native-repair-20261017';assert len(sys.argv)==4 and len(H)==40 and all(c in '0123456789abcdef' for c in H) and O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n                                                                                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-accounting.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/philippines-native-repair-20261017/method/check-accounting.py\", line 7, in <module>\n    assert len(H)==40 and all(c in '0123456789abcdef' for c in H) and O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-accounting.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/philippines-native-repair-20261017/method/check-accounting.py\", line 7, in <module>\n    assert len(H)==40 and all(c in '0123456789abcdef' for c in H) and O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  ],
+  "method_files": [
+    {
+      "path": "coordination/engineering/philippines-native-repair-20261017/method/check-accounting.py",
+      "bytes": 12818,
+      "sha256": "eb8942c7dee13a63f274f6866d68647478cbc9abea6d6cb39de08f8f3182ade1"
+    },
+    {
+      "path": "coordination/engineering/philippines-native-repair-20261017/method/check-historical.py",
+      "bytes": 7411,
+      "sha256": "e7c58322ebbbbc15a7ee709211ab71150de11dc0d0d6032b73c0c6f6d90a59cf"
+    },
+    {
+      "path": "coordination/engineering/philippines-native-repair-20261017/method/check-prior-records.py",
+      "bytes": 7813,
+      "sha256": "a1a4bc2a65b846cc24f1762de288a529b06cf8b0084aa1b1d16217f20b6ac825"
+    },
+    {
+      "path": "coordination/engineering/philippines-native-repair-20261017/method/prepare-stage.py",
+      "bytes": 14130,
+      "sha256": "aa10b2eaabe0afe7b9ab5d496754f205e3c56df064bbc5e4a4bda988fe83ad97"
+    },
+    {
+      "path": "coordination/engineering/philippines-native-repair-20261017/method/prepare-supported.py",
+      "bytes": 8329,
+      "sha256": "11caadca6a8155f9371cef628c1f250622e3fd58975a80c1d3e9963c1d357170"
+    },
+    {
+      "path": "coordination/engineering/philippines-native-repair-20261017/method/preserve-interpretation.py",
+      "bytes": 7534,
+      "sha256": "b8b0b5ace75e4c8e736501de624ac967eb43a8e112e2d8ceb2693dfc3ff11ea0"
+    },
+    {
+      "path": "coordination/engineering/philippines-native-repair-20261017/method/verify-complete-context.py",
+      "bytes": 7752,
+      "sha256": "3d9203d4c476eb20cef27ad9743752c07d32bc4b28b228bae38fa556a4a30ca4"
+    }
+  ]
+}

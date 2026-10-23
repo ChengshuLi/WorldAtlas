@@ -1,0 +1,896 @@
+{
+  "acquisition": {
+    "complete_scientific_closure": false,
+    "declarations": 50,
+    "declared_bytes": 95630350,
+    "fetch_batches": 0,
+    "fetch_ms": 0,
+    "fetched_bytes": 0,
+    "fetched_objects": 0,
+    "origin_metadata_bytes": 0,
+    "origin_metadata_fetches": 0,
+    "origin_metadata_imports": 0,
+    "origin_metadata_objects": 0,
+    "scope": "original-package-and-selected-native-observation",
+    "tree_metadata_ms": 0,
+    "unique_objects": 46
+  },
+  "code_commit": "cdce5b02d354431321436b8f8674d804df629c01",
+  "consumed_inputs": [
+    {
+      "bytes": 30910,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "aa34cb268a3b826ef74601a69852b86bb5b49782",
+      "mode": "100644",
+      "path": "scripts/run-geographic-check.py",
+      "sha256": "aa45ab9676bd9dca6f156f3d483f4a4cd3874e5710f2e7c6fbbf0c052fb0a2da",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 97109,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "ede85b72423e347bf15d30567ac22c643c423c69",
+      "mode": "100644",
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "sha256": "136e49006c84a35ea4e06d79bc1d2d222bd73343717694f8d5718937f76b816c",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 53197,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "add4cef02bb5a790f22a9078fdf9bd51679059d3",
+      "mode": "100644",
+      "path": "src/native-grid.js",
+      "sha256": "3d20777f5896d28192e40428dd34cab89d47873a08bf073a17338c4ff97d43cd",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 2948,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+      "mode": "100644",
+      "path": "src/ownership-codec.js",
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 234923,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "ccd128029e0b9522c29acb4bbc5bd35f36f2d1dd",
+      "mode": "100644",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "sha256": "ff37dc7a69b2cd692e0adaf8627a7d9e0f2cff21f34b6e636df6d7d7623c11ba",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 10403,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "38c941e96aee6a0cc62615b7d797e51439570c42",
+      "mode": "100644",
+      "path": "scripts/selected-reference-metadata.mjs",
+      "sha256": "369352d4b78a862fd79ea88bcc6420fbec9ea8d80348dd2d3b6a122dc5dd2a5d",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 25758,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "7db5ba2883a6d8542f830b25e54d96c7d837a187",
+      "mode": "100644",
+      "path": "src/reference-metadata.js",
+      "sha256": "15130cb6bb9cd0cb32879de01ca13d8e8d96490cce6fc2640e5e406bcfc6cf02",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 19263,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "c8a10d5a6c5457b8ba90c43a4788b62cc07e0dad",
+      "mode": "100644",
+      "path": "scripts/observe-selected-owners.mjs",
+      "sha256": "cea530a5579b1aeab5df0e53516f0ee6aff5739d02fa0fc48c644618c79b81e2",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 20341,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "245acaf961811fcc5a1023f53ac42f80e0c7b2c4",
+      "mode": "100644",
+      "path": "scripts/geography-prefetch.mjs",
+      "sha256": "c68343f5559e5f148a66b10f71b52fc85aa234ba8aa4fb13ee70ed891d99205d",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 3389,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "07a7d06cd7a0c030fcf4327faaf2b69fe5a37dbb",
+      "mode": "100644",
+      "path": "scripts/native-word-store.mjs",
+      "sha256": "199425e178b7cb2ac62538d428581f17517c201f524a0cf3307d16d9a79840bd",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 42142,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "c4afd08b55e176b90ade259d80059f2393bb54b5",
+      "mode": "100644",
+      "path": "scripts/native-patch-store.mjs",
+      "sha256": "05175fe3b3b5b747c1d825ff10e713cd555185a269cf08914acebf347534c495",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 6134,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "de88d87bea5ddca72c5816b1356ab18b9795f985",
+      "mode": "100644",
+      "path": "src/pixel-ownership.js",
+      "sha256": "da8e0b4f05e5ce390b47713030bffeefb7ea0df2700f7c358a9ebe77fe92586f",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 3699,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "008aaf69e65105029e64e09317b8f9aa4df1f352",
+      "mode": "100644",
+      "path": "src/pixel-grid.js",
+      "sha256": "ad31039b651e157480eaf0053787b119bdab4b9a2a699e5f6a05d396736c7595",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 7200,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "b42e2fed2890296d6d410047d942e4a407563638",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs",
+      "sha256": "7c44cfe98557b5f58ae2ae50434bd4dbe8dd384bd23b777836d37a404ae25fbc",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 1851,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "2e1ec2875d2932eafb33f4c1062412282df234cb",
+      "mode": "100644",
+      "path": "data/ownership-selection.json",
+      "sha256": "c84656cbbab04c214a37717933cb129ea78bac8838bf0feff44b02f5a1997c62",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 252447,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "31d970d0fe2bf8c899f020aad09a3826ea451790",
+      "mode": "100644",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 1754890,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 1844315,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 110705,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "e17b10b5643c1f6b0c492d02edc70a0d7afc5ee3",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-raster-summary.json",
+      "sha256": "2eec390eb9f9b6595bd0f3c7059b75f271dba013fbad0b3ac0c404114d48eea9",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 120963,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "fa1e4d101edb54b02bd1ff42a240f2f80ac65832",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json",
+      "sha256": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 154672,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "0c934cdaf4b007a741e66d4a080890154bdae53c",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-unassigned-summary.json",
+      "sha256": "a82c56c1d92ff52c0b0e52c9bf329905a05bace4b6a27c12771509d419888501",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 4404456,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+      "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 3048,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "b9d81d18aab6d03dc701ff1337b35e53be81d0af",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/ownership-binding.json",
+      "sha256": "b952192475435c8fbc74a84627994aff4f4e073c36c479d369554fc75251bc89",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 403376,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 156199,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "e22b6270aaf9c27dd3d21381d757b6c34ab81d7b",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/normalized-source-seams.json",
+      "sha256": "0e74bb81ae45ae9913ee5d43afd303fa33a4b7da8b06e4e6f1cd4419ecd264b4",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 254815,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "efadb30876bf9a1604b2c2cf84534a8ebf4a1856",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-035.json.gz",
+      "sha256": "4d9c4230647c65f711b48d2e6958d5714ce1bd059c9c51a42b205979061ce6c5",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 217105,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "a97e15cd1af0e4a58f334cfe13a9a963b39067ba",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-035.json.gz",
+      "sha256": "981e5d1bf9cb91f3eff7e811a322732c3dce87808923e2dbcb54c7d956b48ea7",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 5076,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "ab4b5de28776f34acff1ccd57c89d1dc660c584e",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-035.json.gz",
+      "sha256": "75f06da7dbbbfa0c217328d5d55c34df918840235e3155ae203b45fc4158ae44",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 158514,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "5f936f6e18a5e4c7b6a398c0990dee045d1cc0a3",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-036.json.gz",
+      "sha256": "e65c3df7b6a015e38a88f0a1785fe6c00102476d3808b73135a2d9dd99105b64",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 148279,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "7369c93e48d3b67a394d27e5a857612ae1e3d7e2",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-036.json.gz",
+      "sha256": "11f095b9f450a01aa41e91a37e9b8db7df3e8f42b276cf7fe92f7190a9706871",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 23,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "95890a0fc5a9cb9fb6bbd8f48425a8887b043a6e",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-036.json.gz",
+      "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 96025,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "158db3a4ae8076def67a7aa289c20e57e6c3a5b1",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-037.json.gz",
+      "sha256": "3740e8b69b7f47c5c09061fd2bab50eeb2f14319638f1ab19122825cedb18d37",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 88683,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "1acfb0bcbd519f8781e2ad6196d1c8ba2e7dac29",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-037.json.gz",
+      "sha256": "7968adeb24cacca45f6ac1d015fa88eb3b288aef86dcf10cdfe3f775d59d84c4",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 4481,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "150081fec15e4da19c8259327209fec2c2a1d110",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-037.json.gz",
+      "sha256": "2e25139f622de52715c528923b7f16952aea2fa6ab3996c2b74d77c4fd6690d7",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 162512,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "7dc482113656ed76b761c636b2eec1cb3ad4dc4e",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-038.json.gz",
+      "sha256": "22daa09abac662d8668f95f3638a13639547cc85e4429bb8860c7f189c68c7e5",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 157766,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "b2879b4c01086e3cb119a342fd70e5ff1f7ac18f",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-038.json.gz",
+      "sha256": "af6039ecdc8b86d54b956753d36787c0398fe06f6572a86ffd4ae7c42f1c668d",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 6783,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "5cbffac01fe9b936d05c7b77baa6f8e5a4c1df86",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-038.json.gz",
+      "sha256": "b014ac7486ea04f9989b57c6720179959271e83772cf49b3428f6b36878a2cc6",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 129343,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "f2f416eab5b735d52126b13b11ff99dc91d0c65c",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-039.json.gz",
+      "sha256": "3322d4e03ac425f451ffbe7b7c3ebe4cb3bdb215000ffc6e39f956900a637ee6",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 128890,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "478bc6efae549b2cc8d9b09838d854fe007658b3",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-039.json.gz",
+      "sha256": "10c65c786f747e1430684408b430e0a30a0e1417edcc8168d4649649f61ccdb6",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 23,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "95890a0fc5a9cb9fb6bbd8f48425a8887b043a6e",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-039.json.gz",
+      "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 245390,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "6caee728bdd2d83d360b6c360e506d6d9a7c9997",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-040.json.gz",
+      "sha256": "5ac14798f194a217eec0690f9693b7109e6bc1158a4c30d1a08a9469374eb59e",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 177209,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "2a8765ea92c5e5d30a11b755a286d2b17a70fa20",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-040.json.gz",
+      "sha256": "7d5426df0af4706813a4c51bd67e2f0d3f8ad806773dcfb3903c7590ac596531",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 100,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "281f49fb3e9bb037329ccce3eb3e6f011be6c7e7",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-040.json.gz",
+      "sha256": "1524b311531d62c18933581b22d43a87fc75ce6c5f04329f3aabb60720fb4915",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 253661,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "731313860c4b0bf4a7cf90d619f216708db5245d",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-041.json.gz",
+      "sha256": "3ef2f96e70417cbeef72d1a1d7f83eca7b1ff56a795616bc79569a027c62d964",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 167567,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "ebcfb481530f238eee87b016270b8bf97d8086eb",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-041.json.gz",
+      "sha256": "5f0748149e052f47b55aead425742fcfc89facc740eb4fb3a4128906f9d629c8",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 982,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "79278b2a3ce201d8b04410e8b56cc356da126c8e",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-041.json.gz",
+      "sha256": "cc2fb53fd46b5a3a1701d1f50cae469f9a192bdd0f2ce8297103ec213e8fbc56",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 320397,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "a7d429a072f6cb3d6c0ed25b142bdec9a56b28a8",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-042.json.gz",
+      "sha256": "23c531fe98ff13235d02e21ff2403e6bc493d143ee5c4764bde7260982095c74",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 255994,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "f5b2b6fb1c60f9448dfed59c35bc24729d2ee7f7",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-042.json.gz",
+      "sha256": "7779139ffc2e9d81b7010849b10ad44a75d94b527f2f47b614e7a2bd5c273363",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 23,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "95890a0fc5a9cb9fb6bbd8f48425a8887b043a6e",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-042.json.gz",
+      "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 419938,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "0f263d9e0860a255acc6d5e2ce09e03ac830bd4c",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-043.json.gz",
+      "sha256": "074190a1d990707f43418e6da2d6046ce0de11e0199fdc70bb9e6fa6a2330333",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 231257,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "68e9155989e9c371d7c654129a64c5d7e25bdf89",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-043.json.gz",
+      "sha256": "2bb6524100aa66867abcb4adb433f7e06297f440eafef68b0dd2266eb4276993",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 23,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "95890a0fc5a9cb9fb6bbd8f48425a8887b043a6e",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-043.json.gz",
+      "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 3440,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "ea5fb193ca975d499ebae354d257d4ce9332ba95",
+      "mode": "100644",
+      "path": "coordination/engineering/brunei-original-repair-20261019/finalized-002/ownership-selection-brn-828.json",
+      "sha256": "813392703f41cedef539fa91e74bf75df990a9ff1083aa7c82e7dcad30bc9989",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 252447,
+      "commit": "7e423077552651d6ec1d6bf6b879c34e956f985a",
+      "git_blob_oid": "31d970d0fe2bf8c899f020aad09a3826ea451790",
+      "mode": "100644",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/base-native-manifest.json",
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 2663523,
+      "commit": "7e423077552651d6ec1d6bf6b879c34e956f985a",
+      "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+      "mode": "100644",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 1391,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "756fc10940ac428fabebdc4d5362ad671d56d911",
+      "mode": "100644",
+      "path": "coordination/engineering/brunei-original-repair-20261019/composition-002/runtime-envelope.json",
+      "sha256": "0d8ec6bbb53e1b27748752ea4aada91bd0bd94aa21100f24e7e126c2a15dd76e",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 252551,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "6e827006b2542340fc3b87f822769cbc9eafa428",
+      "mode": "100644",
+      "path": "coordination/engineering/brunei-original-repair-20261019/composition-002/authority-registry.json",
+      "sha256": "3736928a13c569c805bd65d32fd55ab81dffc0da3201fb7503ac95fda17b8ce4",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 1851757,
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "mode": "100644",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 21330,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "f9e9bb67281cec0ceeb3b8d7a5cf94616f26c32c",
+      "mode": "100644",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/index.json",
+      "sha256": "91b868b66f52d3051a09b88a84411f7c70f38de9528a0166a8fb16dcdc71ba02",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 16773351,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "359bfc9c3b80f2d0b60fa2cc859aaaebdeb6b22f",
+      "mode": "100644",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-00/part-000.bin.gz",
+      "sha256": "74dd9af0c01fa5552b9af60d03935eb97b56bf6685c5bf964862d3b2b5d2b22d",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 16775548,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "4ad9de48ccd8db37d753b5c024ca6cdc0e5836a5",
+      "mode": "100644",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-01/part-000.bin.gz",
+      "sha256": "e0506f0969dc1d1d58c4cd28dbd441a986e9a07ef3ebc6c447fed35d3c6bd798",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 7512977,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "e269ff85537529e550438ce4a6d54475783901fc",
+      "mode": "100644",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-01/part-001.bin.gz",
+      "sha256": "7853385cbc84cb1de9489f8c49f3492ee4794e6497b3782398e5dfc10b6225aa",
+      "whole_body_consumed": true
+    },
+    {
+      "bytes": 30403385,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "441d191f751eff76845cecd7666bdd0c76f14d19",
+      "mode": "100644",
+      "path": "coordination/engineering/brunei-original-repair-20261019/composition-002/patch.json",
+      "sha256": "fca6c6c0227f67513bf24fcf46c550da045edecec189379c26783724f474ae3e",
+      "whole_body_consumed": true
+    }
+  ],
+  "data_commit": "cdce5b02d354431321436b8f8674d804df629c01",
+  "execution_code": [
+    {
+      "bytes": 30910,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "aa34cb268a3b826ef74601a69852b86bb5b49782",
+      "mode": 420,
+      "path": "scripts/run-geographic-check.py",
+      "sha256": "aa45ab9676bd9dca6f156f3d483f4a4cd3874e5710f2e7c6fbbf0c052fb0a2da"
+    },
+    {
+      "bytes": 97109,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "ede85b72423e347bf15d30567ac22c643c423c69",
+      "mode": 420,
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "sha256": "136e49006c84a35ea4e06d79bc1d2d222bd73343717694f8d5718937f76b816c"
+    },
+    {
+      "bytes": 53197,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "add4cef02bb5a790f22a9078fdf9bd51679059d3",
+      "mode": 420,
+      "path": "src/native-grid.js",
+      "sha256": "3d20777f5896d28192e40428dd34cab89d47873a08bf073a17338c4ff97d43cd"
+    },
+    {
+      "bytes": 2948,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+      "mode": 420,
+      "path": "src/ownership-codec.js",
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+    },
+    {
+      "bytes": 234923,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "ccd128029e0b9522c29acb4bbc5bd35f36f2d1dd",
+      "mode": 420,
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "sha256": "ff37dc7a69b2cd692e0adaf8627a7d9e0f2cff21f34b6e636df6d7d7623c11ba"
+    },
+    {
+      "bytes": 10403,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "38c941e96aee6a0cc62615b7d797e51439570c42",
+      "mode": 420,
+      "path": "scripts/selected-reference-metadata.mjs",
+      "sha256": "369352d4b78a862fd79ea88bcc6420fbec9ea8d80348dd2d3b6a122dc5dd2a5d"
+    },
+    {
+      "bytes": 25758,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "7db5ba2883a6d8542f830b25e54d96c7d837a187",
+      "mode": 420,
+      "path": "src/reference-metadata.js",
+      "sha256": "15130cb6bb9cd0cb32879de01ca13d8e8d96490cce6fc2640e5e406bcfc6cf02"
+    },
+    {
+      "bytes": 19263,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "c8a10d5a6c5457b8ba90c43a4788b62cc07e0dad",
+      "path": "scripts/observe-selected-owners.mjs",
+      "sha256": "cea530a5579b1aeab5df0e53516f0ee6aff5739d02fa0fc48c644618c79b81e2"
+    },
+    {
+      "bytes": 20341,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "245acaf961811fcc5a1023f53ac42f80e0c7b2c4",
+      "path": "scripts/geography-prefetch.mjs",
+      "sha256": "c68343f5559e5f148a66b10f71b52fc85aa234ba8aa4fb13ee70ed891d99205d"
+    },
+    {
+      "bytes": 3389,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "07a7d06cd7a0c030fcf4327faaf2b69fe5a37dbb",
+      "path": "scripts/native-word-store.mjs",
+      "sha256": "199425e178b7cb2ac62538d428581f17517c201f524a0cf3307d16d9a79840bd"
+    },
+    {
+      "bytes": 42142,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "c4afd08b55e176b90ade259d80059f2393bb54b5",
+      "path": "scripts/native-patch-store.mjs",
+      "sha256": "05175fe3b3b5b747c1d825ff10e713cd555185a269cf08914acebf347534c495"
+    },
+    {
+      "bytes": 6134,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "de88d87bea5ddca72c5816b1356ab18b9795f985",
+      "path": "src/pixel-ownership.js",
+      "sha256": "da8e0b4f05e5ce390b47713030bffeefb7ea0df2700f7c358a9ebe77fe92586f"
+    },
+    {
+      "bytes": 3699,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "008aaf69e65105029e64e09317b8f9aa4df1f352",
+      "path": "src/pixel-grid.js",
+      "sha256": "ad31039b651e157480eaf0053787b119bdab4b9a2a699e5f6a05d396736c7595"
+    },
+    {
+      "bytes": 7200,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "b42e2fed2890296d6d410047d942e4a407563638",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs",
+      "sha256": "7c44cfe98557b5f58ae2ae50434bd4dbe8dd384bd23b777836d37a404ae25fbc"
+    }
+  ],
+  "kind": "argentina-held-residual-observation-pins-v1",
+  "observation_report": {
+    "compressed_bytes": 280875,
+    "compressed_sha256": "2a84acf17ba0324ef4aa43a44d2c81e9d41d6d4c5a388cdffeda0eb6af529a79",
+    "consumed_latitudes": {
+      "bytes": 1851757,
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "mode": "100644",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "whole_body_consumed": true
+    },
+    "decoded_bytes": 10040091,
+    "decoded_sha256": "05f0660ebdb400e5c916f87ded56498d2b8af09aab0365efd4ebd775e83329bd",
+    "kind": "literal-selected-owner-observation-v1",
+    "native_latitudes": {
+      "bytes": 1851757,
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "decoded_bytes": 2097328,
+      "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "role": "immutable-normative-rule-input",
+      "root": "repository",
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147"
+    },
+    "native_manifest_sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+    "original_intervals_sha256": "592ee9ca48e2544fb8fef65edae65b426226eed2dbc160571ead2fb97c073d11",
+    "patch_pin": {
+      "bytes": 30403385,
+      "commit": "cbc470a2185a739fc07835c622ec1987d867310a",
+      "git_blob_oid": "441d191f751eff76845cecd7666bdd0c76f14d19",
+      "mode": "100644",
+      "path": "coordination/engineering/brunei-original-repair-20261019/composition-002/patch.json",
+      "sha256": "fca6c6c0227f67513bf24fcf46c550da045edecec189379c26783724f474ae3e"
+    },
+    "path": "coordination/engineering/argentina-repair-delivery-20261017/unresolved-disposition-001/selected-owner-observation.json.gz",
+    "query_count": 28846,
+    "query_sha256": "f7dd5688ed652735daa56888cd82328eab74ea18ba2a1f3b6c8e2afa103cf407",
+    "row_member": {
+      "bytes": 306620,
+      "decoded_bytes": 2097328,
+      "decoded_sha256": "e9044c8304a47cd0d0acbb306bd31c2ba15f71e57648ab7d1581a6a77a875294",
+      "encoding": "byte-shuffle",
+      "kind": "rows",
+      "offset": 0,
+      "path": "native-v1/ownership/rows-0.bin.gz",
+      "sha256": "89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0",
+      "words": 524332
+    },
+    "run_members": [
+      {
+        "bytes": 848562,
+        "decoded_bytes": 4194304,
+        "decoded_sha256": "41675431fa9f46bc7c2c144debb02f2100278e2a1dd56fb1804cc863083f092a",
+        "encoding": "byte-shuffle",
+        "kind": "runs",
+        "offset": 52428800,
+        "path": "native-v1/ownership/runs-52428800.bin.gz",
+        "sha256": "a9143cff7852fe32d40dccf7d79f0b438acb4b28db25e87e00908526722ba6e0",
+        "words": 1048576
+      },
+      {
+        "bytes": 822830,
+        "decoded_bytes": 4194304,
+        "decoded_sha256": "85dd59759a1f0665d5022237645189c63706758c5361723248b7e8dd618e850e",
+        "encoding": "byte-shuffle",
+        "kind": "runs",
+        "offset": 53477376,
+        "path": "native-v1/ownership/runs-53477376.bin.gz",
+        "sha256": "e9776a1205aaa5ac02bff9518d9bef7ec8f598d9cce5a22dd003b92dfcc2b9c8",
+        "words": 1048576
+      },
+      {
+        "bytes": 798490,
+        "decoded_bytes": 4194304,
+        "decoded_sha256": "5b1fdf53fbadbd809d903a0ce1e9d8476547c17f623015ddded41d0b09921f85",
+        "encoding": "byte-shuffle",
+        "kind": "runs",
+        "offset": 54525952,
+        "path": "native-v1/ownership/runs-54525952.bin.gz",
+        "sha256": "47c5f61a7957e054f2523dee8788eae7ac2a3d9fc175e8715d2b3aa1c5b2a2a3",
+        "words": 1048576
+      },
+      {
+        "bytes": 813344,
+        "decoded_bytes": 4194304,
+        "decoded_sha256": "1f6cbc56b84e7198fff86370d1d695d89762227e4a7ea1228318e8e6f722670e",
+        "encoding": "byte-shuffle",
+        "kind": "runs",
+        "offset": 55574528,
+        "path": "native-v1/ownership/runs-55574528.bin.gz",
+        "sha256": "6d32230bbb1ee4db07d5c4b7b784fcf497cd3e7e1687ab5bfad77cb78968ad07",
+        "words": 1048576
+      },
+      {
+        "bytes": 852165,
+        "decoded_bytes": 3978680,
+        "decoded_sha256": "c5ee14b44ed0369fd488f27e6b72502de27a7f9808464cbd2ac8929d99c48a47",
+        "encoding": "byte-shuffle",
+        "kind": "runs",
+        "offset": 56623104,
+        "path": "native-v1/ownership/runs-56623104.bin.gz",
+        "sha256": "c96d891b83a8f35390f4fc60d224df14b8117a84f62c86dc131425524d7bb9e7",
+        "words": 994670
+      }
+    ],
+    "selector_pin": {
+      "bytes": 1851,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "2e1ec2875d2932eafb33f4c1062412282df234cb",
+      "mode": "100644",
+      "path": "data/ownership-selection.json",
+      "sha256": "c84656cbbab04c214a37717933cb129ea78bac8838bf0feff44b02f5a1997c62",
+      "whole_body_consumed": true
+    }
+  },
+  "source_reference_pins": [
+    {
+      "bytes": 762814,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "d54be66ce49fa5f25b43efe04b0c5c47465d1f67",
+      "mode": "100644",
+      "path": "coordination/engineering/argentina-repair-delivery-20261017/source-review/complete-scope-002/held-original-keys.json",
+      "sha256": "95b0b947a853f167f60bffaa44578a87f5301f661850a863d210c19f4dd5a604"
+    },
+    {
+      "bytes": 60456,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "ba0556c2d70d9f57cfa14f76384772630a5200e8",
+      "mode": "100644",
+      "path": "coordination/engineering/argentina-repair-delivery-20261017/original-scope/original-intervals.json.gz",
+      "sha256": "138a1491d050ced863ade71a76a9bc1a972abc2bd3fbb6ce8de59f501495e44e"
+    },
+    {
+      "bytes": 359161,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "45f3e101362eca3401e53c299945aa9c98656ef7",
+      "mode": "100644",
+      "path": "coordination/engineering/argentina-repair-delivery-20261017/source-stage-001/original-native-patch.json",
+      "sha256": "8ff5760a6f6a48132f2cace25f4efe7ded45eef5b2dbbac241a317dd9f374262"
+    },
+    {
+      "bytes": 1754890,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+      "mode": "100644",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8"
+    },
+    {
+      "bytes": 800414,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "eafb64ab05ac33f0dff4def543b7baab8af9b9ab",
+      "mode": "100644",
+      "path": "coordination/engineering/argentina-repair-delivery-20261017/final-handoff-001/complete-native-authority-accounting.json",
+      "sha256": "b192965b21dc05facaa15fd7e71d07ccb40226287c59a41dbd628a9801e8ec38"
+    },
+    {
+      "bytes": 7076,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "7befa26687d607464ab8fd5ff59c2dfd90524475",
+      "mode": "100644",
+      "path": "coordination/engineering/argentina-repair-delivery-20261017/final-handoff-001/qualified-authority-handoff.json",
+      "sha256": "06f7ce19ca890bee88c3b60e5c5c62ecfc0fd1a9b6b2efd820f933a4e5cf053a"
+    },
+    {
+      "bytes": 9572,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "5048e7388079563a5b5fcc593d4c5b61dfd07bd9",
+      "mode": "100644",
+      "path": "coordination/engineering/argentina-repair-delivery-20261017/independent-source-review/REVIEW.md",
+      "sha256": "e2a936879e6ce1550b8d2960f4a58637b29c46c19a3a1a6a59b0896f36a735a0"
+    },
+    {
+      "bytes": 795659,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "988fdd0640d65b0fd15583ba1b8e7140ee7645c7",
+      "mode": "100644",
+      "path": "coordination/engineering/argentina-repair-delivery-20261017/native-config-002/complete-original-accounting.json",
+      "sha256": "604d1ee1567617c550965979d54e4fc3f249deb97878c630052a19467566cefc"
+    },
+    {
+      "bytes": 1181,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "4bad47d9855c582f62b6a543753addf2acb2b292",
+      "mode": "100644",
+      "path": "coordination/engineering/argentina-repair-delivery-20261017/native-config-002/coverage-preservation.json",
+      "sha256": "29e2fae99d1711c2de9ac1c31ad47138c1cfaad3f01075f095db561b9c730529"
+    },
+    {
+      "bytes": 302798,
+      "commit": "cdce5b02d354431321436b8f8674d804df629c01",
+      "git_blob_oid": "8e9e644ea87820bd818f0ced3bfe1048db624b72",
+      "mode": "100644",
+      "path": "coordination/engineering/argentina-repair-delivery-20261017/native-config-002/native-qualified-patch.json",
+      "sha256": "e9a9db71a85f7da569007a006257846413b37af513a2529aafb1830dc9c1c20a"
+    }
+  ],
+  "version": 1
+}

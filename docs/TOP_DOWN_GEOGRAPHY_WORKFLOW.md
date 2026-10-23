@@ -27,7 +27,7 @@ Suggested macro work-item boundaries are: global convention/coverage contract, e
 
 For each region, retain a complete membership inventory and child-issue crosswalk. Track separately: inventory/screening, own-boundary approval, interior descendants approved, publication, and research readiness. “66 regions screened” is not “66 regions finished.” Child completion cannot close an umbrella whose other branches remain open.
 
-Ready content campaigns depend on the completed macro milestone and their published regional approval, rather than worldwide descendant completion. Source-only campaigns may be ready earlier. Use [WORKER_COORDINATION.md](WORKER_COORDINATION.md) for distinct worker IDs, serialized leases, exact branch ownership, one claimed work item, and squash merges. One publisher serializes geographic publication and revalidates exact global pins after each release; disjoint Git branches do not independently deploy.
+Ready content campaigns depend on the completed macro milestone and their published regional approval, rather than worldwide descendant completion. Source-only campaigns may be ready earlier. Use [WORKER_COORDINATION.md](WORKER_COORDINATION.md) for distinct worker IDs, ordinary issue-comment scope coordination, isolated branch ownership, one coherent work item, and serialized squash merges. One publisher serializes geographic publication and revalidates exact global pins after each release; disjoint Git branches do not independently deploy.
 
 ## Handover and chat creation
 

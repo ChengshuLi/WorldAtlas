@@ -1,0 +1,44 @@
+[
+  {
+    "probe": "existing-directory",
+    "head": "4d634bbecb438244ce99c23070b6502332aa813a",
+    "returncode": 1,
+    "output_exists": true,
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<string>\", line 6, in <module>\nAssertionError\n"
+  },
+  {
+    "probe": "dangling-symlink",
+    "head": "4d634bbecb438244ce99c23070b6502332aa813a",
+    "returncode": 1,
+    "output_exists": false,
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<string>\", line 6, in <module>\nAssertionError\n"
+  },
+  {
+    "probe": "changed-positive",
+    "head": "85c0fc0fecb3cea68a41c388827795dbf4805e31",
+    "returncode": 1,
+    "output_exists": false,
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<string>\", line 62, in <module>\nAssertionError\n"
+  },
+  {
+    "probe": "missing-negative",
+    "head": "a457cb0bd5d4fab94a37b8b77c92104ab76ed8f2",
+    "returncode": 1,
+    "output_exists": false,
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<string>\", line 77, in <module>\nAssertionError\n"
+  },
+  {
+    "probe": "empty-proof",
+    "head": "a0fec6a6d444f6f6c1571eb4d52ffe10b57b3432",
+    "returncode": 1,
+    "output_exists": false,
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<string>\", line 38, in <module>\nAssertionError\n"
+  },
+  {
+    "probe": "changed-foreign-owner",
+    "head": "e5bd7fac1ff4e8e9068d9a22176745d5bb08206d",
+    "returncode": 1,
+    "output_exists": false,
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<string>\", line 61, in <module>\nAssertionError\n"
+  }
+]

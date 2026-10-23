@@ -1,0 +1,4839 @@
+{
+  "version": 1,
+  "original_queue_row": {
+    "package_id": "gb-LUX-ADM1--repair-evaluation",
+    "primary_source": "gb:LUX:ADM1",
+    "source_family_index": 199,
+    "category": "repair-evaluation",
+    "native_cells": 624,
+    "land_cells": 624,
+    "inland_water_cells": 0,
+    "source_relative_cells": 0,
+    "interval_segments": 214,
+    "owners": [
+      7122
+    ],
+    "source_features": [
+      2160,
+      20561,
+      20596,
+      41809,
+      41810,
+      41811,
+      41813,
+      41815,
+      41816,
+      41817,
+      41818,
+      41820
+    ],
+    "source_families": [
+      21,
+      84,
+      85,
+      199
+    ],
+    "native_blocks": [
+      21
+    ],
+    "provinces": [
+      "framework:province:luxembourg:18736e14a46e"
+    ],
+    "location_count": 1,
+    "source_feature_count": 12,
+    "locality_count": 1,
+    "cost": {
+      "primary_source_decoded_bytes": 58247,
+      "all_required_source_decoded_bytes": 3301503,
+      "primary_full_source_raster_measured_seconds": 0.055,
+      "source_interval_segments": 214,
+      "maximum_native_rows_per_execution_frame": 4096,
+      "observed_global_census_peak_rss_bytes": 884973568
+    },
+    "evidence": {
+      "selection": "ownership-binding.json",
+      "lineage": "lineage.json",
+      "territorial_source_catalogue": "retained-source-catalogue.json",
+      "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "source_features": "source-feature-roster.json",
+      "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+      "physical": "physical-unassigned-summary.json",
+      "source_domain_transform": []
+    },
+    "work": {
+      "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+      "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+      "priority": 1
+    },
+    "execution": {
+      "command": "node source-batch-intervals.mjs gb-LUX-ADM1--repair-evaluation OUTPUT_DIRECTORY",
+      "output_columns": [
+        "y",
+        "start",
+        "end",
+        "candidate_owner_indices",
+        "source_feature_indices",
+        "physical_class"
+      ]
+    }
+  },
+  "retained_contract_context": {
+    "version": 1,
+    "kind": "lux-original-repair-candidate-proposal-inventory",
+    "candidate_status": "Exact LUX repair scope claimed in public issue #2643; stock author allocation and single owner observation completed. Root disposition acceptance is not asserted by this inventory.",
+    "frozen_queue": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "blob": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+      "index_zero_based": 167,
+      "queue_input_sha256": {
+        "source-feature-roster.json": "7fa99cbf064121e0130b66758c212ae22b2a7be5649f2e250e9cda89a9bd595e",
+        "source-raster-summary.json": "2eec390eb9f9b6595bd0f3c7059b75f271dba013fbad0b3ac0c404114d48eea9",
+        "source-census-summary.json": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d",
+        "physical-unassigned-summary.json": "a82c56c1d92ff52c0b0e52c9bf329905a05bace4b6a27c12771509d419888501",
+        "lineage.json": "607372a1af11bebf58c24aa15bdfae1999fafc532bb65ab7d822c0c20b57a435",
+        "ownership-binding.json": "b952192475435c8fbc74a84627994aff4f4e073c36c479d369554fc75251bc89",
+        "retained-source-catalogue.json": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "normalized-source-seams.json": "0e74bb81ae45ae9913ee5d43afd303fa33a4b7da8b06e4e6f1cd4419ecd264b4"
+      }
+    },
+    "package": {
+      "package_id": "gb-LUX-ADM1--repair-evaluation",
+      "primary_source": "gb:LUX:ADM1",
+      "source_family_index": 199,
+      "category": "repair-evaluation",
+      "native_cells": 624,
+      "land_cells": 624,
+      "inland_water_cells": 0,
+      "source_relative_cells": 0,
+      "interval_segments": 214,
+      "owners": [
+        7122
+      ],
+      "source_features": [
+        2160,
+        20561,
+        20596,
+        41809,
+        41810,
+        41811,
+        41813,
+        41815,
+        41816,
+        41817,
+        41818,
+        41820
+      ],
+      "source_families": [
+        21,
+        84,
+        85,
+        199
+      ],
+      "native_blocks": [
+        21
+      ],
+      "provinces": [
+        "framework:province:luxembourg:18736e14a46e"
+      ],
+      "location_count": 1,
+      "source_feature_count": 12,
+      "locality_count": 1,
+      "cost": {
+        "primary_source_decoded_bytes": 58247,
+        "all_required_source_decoded_bytes": 3301503,
+        "primary_full_source_raster_measured_seconds": 0.055,
+        "source_interval_segments": 214,
+        "maximum_native_rows_per_execution_frame": 4096,
+        "observed_global_census_peak_rss_bytes": 884973568
+      },
+      "evidence": {
+        "selection": "ownership-binding.json",
+        "lineage": "lineage.json",
+        "territorial_source_catalogue": "retained-source-catalogue.json",
+        "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "source_features": "source-feature-roster.json",
+        "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+        "physical": "physical-unassigned-summary.json",
+        "source_domain_transform": []
+      },
+      "work": {
+        "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+        "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+        "priority": 1
+      },
+      "execution": {
+        "command": "node source-batch-intervals.mjs gb-LUX-ADM1--repair-evaluation OUTPUT_DIRECTORY",
+        "output_columns": [
+          "y",
+          "start",
+          "end",
+          "candidate_owner_indices",
+          "source_feature_indices",
+          "physical_class"
+        ]
+      }
+    },
+    "contract": {
+      "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+      "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+      "operational_interpretation": "The queue requires each exact interval to receive either a qualified additive repair to its recorded location or a documented exception, with selected-native conservation and source/physical witness checks; this inventory makes no interval outcome."
+    },
+    "retained_contacts": {
+      "roster_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "blob": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "compressed_bytes": 1844315,
+      "compressed_sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa",
+      "decoded_bytes": 13496995,
+      "decoded_sha256": "7fa99cbf064121e0130b66758c212ae22b2a7be5649f2e250e9cda89a9bd595e",
+      "selected_feature_records": [
+        {
+          "source_index": 2160,
+          "family_index": 21,
+          "source_id": "gb:BEL:ADM1:27649430B38670918582344",
+          "ordinal": 2,
+          "owners": [],
+          "name": "Wallonne Gewest",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20561,
+          "family_index": 84,
+          "source_id": "gb:DEU:ADM1:10402087B42728698084544",
+          "ordinal": 10,
+          "owners": [],
+          "name": "Rheinland-Pfalz",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20596,
+          "family_index": 85,
+          "source_id": "gb:DEU:ADM2:9070358B88105018400154",
+          "ordinal": 29,
+          "owners": [],
+          "name": "Trier",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 41809,
+          "family_index": 199,
+          "source_id": "gb:LUX:ADM1:76397094B75044033408583",
+          "ordinal": 0,
+          "owners": [
+            7122
+          ],
+          "name": "Canton Echternach",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 41810,
+          "family_index": 199,
+          "source_id": "gb:LUX:ADM1:76397094B81286574502905",
+          "ordinal": 1,
+          "owners": [
+            7122
+          ],
+          "name": "Canton Grevenmacher",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 41811,
+          "family_index": 199,
+          "source_id": "gb:LUX:ADM1:76397094B46061876108979",
+          "ordinal": 2,
+          "owners": [
+            7122
+          ],
+          "name": "Canton Remich",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 41813,
+          "family_index": 199,
+          "source_id": "gb:LUX:ADM1:76397094B22879125121781",
+          "ordinal": 4,
+          "owners": [
+            7122
+          ],
+          "name": "Canton Capellen",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 41815,
+          "family_index": 199,
+          "source_id": "gb:LUX:ADM1:76397094B45773647818245",
+          "ordinal": 6,
+          "owners": [
+            7122
+          ],
+          "name": "Canton Redange",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 41816,
+          "family_index": 199,
+          "source_id": "gb:LUX:ADM1:76397094B91879595380480",
+          "ordinal": 7,
+          "owners": [
+            7122
+          ],
+          "name": "Canton Diekirch",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 41817,
+          "family_index": 199,
+          "source_id": "gb:LUX:ADM1:76397094B23155303849994",
+          "ordinal": 8,
+          "owners": [
+            7122
+          ],
+          "name": "Canton Esch-sur-Alzette",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 41818,
+          "family_index": 199,
+          "source_id": "gb:LUX:ADM1:76397094B70222545473363",
+          "ordinal": 9,
+          "owners": [
+            7122
+          ],
+          "name": "Canton Clervaux",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 41820,
+          "family_index": 199,
+          "source_id": "gb:LUX:ADM1:76397094B51041035930086",
+          "ordinal": 11,
+          "owners": [
+            7122
+          ],
+          "name": "Canton Vianden",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "summary": {
+        "total_contacts": 12,
+        "LUX_owner_tagged": 9,
+        "foreign_ownerless_contacts": 3,
+        "foreign_contacts": [
+          {
+            "feature": 2160,
+            "source_id": "gb:BEL:ADM1:27649430B38670918582344",
+            "name": "Wallonne Gewest",
+            "family_index": 21,
+            "owner_indices": []
+          },
+          {
+            "feature": 20561,
+            "source_id": "gb:DEU:ADM1:10402087B42728698084544",
+            "name": "Rheinland-Pfalz",
+            "family_index": 84,
+            "owner_indices": []
+          },
+          {
+            "feature": 20596,
+            "source_id": "gb:DEU:ADM2:9070358B88105018400154",
+            "name": "Trier",
+            "family_index": 85,
+            "owner_indices": []
+          }
+        ],
+        "LUX_owner_feature_indices": [
+          41809,
+          41810,
+          41811,
+          41813,
+          41815,
+          41816,
+          41817,
+          41818,
+          41820
+        ]
+      }
+    },
+    "source_family_catalogue": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+      "blob": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "tree": "9954105d964a6239c5721d4909881da7b1f558d4",
+      "products": [
+        {
+          "source_key": "gb:BEL:ADM1",
+          "catalogue_record": {
+            "advertised_feature_count": 3,
+            "cohort": "administrative-registry",
+            "feature_count": 3,
+            "key": "gb:BEL:ADM1",
+            "metadata_sha256": "0977543031df50d3896eb8cc5e92ca8f868a6890b17a28711cf172b40c5c3d37",
+            "original_bytes": 6352,
+            "original_metadata_file": "data/administrative-sources.json",
+            "original_sha256": "7af87f5035779f0aefe5bf930288572979e490ab0441fd9b92942a519bea0974",
+            "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+            "parts": [
+              {
+                "bytes": 1965,
+                "hash_kind": "file-bytes",
+                "offset": 0,
+                "ordinal": 0,
+                "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BEL-ADM1-000.bin.gz",
+                "sha256": "2096862dfa0fdd33ff03cd4b47566547b45658408bad7314dc0065dd8426f3cf",
+                "uncompressed_bytes": 6352,
+                "uncompressed_sha256": "7af87f5035779f0aefe5bf930288572979e490ab0441fd9b92942a519bea0974"
+              }
+            ],
+            "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BEL/ADM1/geoBoundaries-BEL-ADM1_simplified.geojson",
+            "recorded_license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+            "source_represented_year_claim": "2022"
+          },
+          "payload_descriptor": {
+            "corpus_commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+            "corpus_tree": "78f85570b9a542fbb2c01131138ab0e69147cca9",
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BEL-ADM1-000.bin.gz",
+            "blob": "17d45c15cf1c8fae8faab802c0e4db7d30f36e9c",
+            "compressed_bytes": 1965,
+            "compressed_sha256": "2096862dfa0fdd33ff03cd4b47566547b45658408bad7314dc0065dd8426f3cf",
+            "decoded_bytes": 6352,
+            "decoded_sha256": "7af87f5035779f0aefe5bf930288572979e490ab0441fd9b92942a519bea0974",
+            "local_object_state": "cold at bounded exact cat-file existence probe; no payload fetched"
+          }
+        },
+        {
+          "source_key": "gb:DEU:ADM1",
+          "catalogue_record": {
+            "advertised_feature_count": 16,
+            "cohort": "administrative-registry",
+            "feature_count": 16,
+            "key": "gb:DEU:ADM1",
+            "metadata_sha256": "f1b467b00ba2fea6b77bd70deb0bca1c89b5dca72589b335e3ab73463e237361",
+            "original_bytes": 1209873,
+            "original_metadata_file": "data/administrative-sources.json",
+            "original_sha256": "511b3625ad4568d12a6bfcb1bdea4e877199e1923e502cb80224b8164128eb05",
+            "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+            "parts": [
+              {
+                "bytes": 399950,
+                "hash_kind": "file-bytes",
+                "offset": 0,
+                "ordinal": 0,
+                "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-DEU-ADM1-000.bin.gz",
+                "sha256": "a83906c63494bc2d74bba4815ec489cce99b78406f957a9cae2c85ba7d6367c3",
+                "uncompressed_bytes": 1209873,
+                "uncompressed_sha256": "511b3625ad4568d12a6bfcb1bdea4e877199e1923e502cb80224b8164128eb05"
+              }
+            ],
+            "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/DEU/ADM1/geoBoundaries-DEU-ADM1_simplified.geojson",
+            "recorded_license": "Data license Germany - Attribution - Version 2.0",
+            "source_represented_year_claim": "2021"
+          },
+          "payload_descriptor": {
+            "corpus_commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+            "corpus_tree": "78f85570b9a542fbb2c01131138ab0e69147cca9",
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-DEU-ADM1-000.bin.gz",
+            "blob": "11ef8fc0bb85ef38a3d476023bd00e3bbb1cef3a",
+            "compressed_bytes": 399950,
+            "compressed_sha256": "a83906c63494bc2d74bba4815ec489cce99b78406f957a9cae2c85ba7d6367c3",
+            "decoded_bytes": 1209873,
+            "decoded_sha256": "511b3625ad4568d12a6bfcb1bdea4e877199e1923e502cb80224b8164128eb05",
+            "local_object_state": "cold at bounded exact cat-file existence probe; no payload fetched"
+          }
+        },
+        {
+          "source_key": "gb:DEU:ADM2",
+          "catalogue_record": {
+            "advertised_feature_count": 38,
+            "cohort": "administrative-registry",
+            "feature_count": 38,
+            "key": "gb:DEU:ADM2",
+            "metadata_sha256": "8cecb3fc8bee009ad3e603ac0d7e78a2ee4782d3958e5b5433606dbf43d5fb4c",
+            "original_bytes": 2027031,
+            "original_metadata_file": "data/administrative-sources.json",
+            "original_sha256": "b811e77a73d37d9826ed0b17aaa017f7c92340c80707bdda4b95ce363e6364ab",
+            "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+            "parts": [
+              {
+                "bytes": 662630,
+                "hash_kind": "file-bytes",
+                "offset": 0,
+                "ordinal": 0,
+                "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-DEU-ADM2-000.bin.gz",
+                "sha256": "fdfe9268fa7b639698107b7dad27bf23a2671b87cfe298327e2e278875d5d4df",
+                "uncompressed_bytes": 2027031,
+                "uncompressed_sha256": "b811e77a73d37d9826ed0b17aaa017f7c92340c80707bdda4b95ce363e6364ab"
+              }
+            ],
+            "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/DEU/ADM2/geoBoundaries-DEU-ADM2_simplified.geojson",
+            "recorded_license": "Data license Germany - Attribution - Version 2.0",
+            "source_represented_year_claim": "2021"
+          },
+          "payload_descriptor": {
+            "corpus_commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+            "corpus_tree": "78f85570b9a542fbb2c01131138ab0e69147cca9",
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-DEU-ADM2-000.bin.gz",
+            "blob": "e59499d1e0dc6e71c9d7a285a0b6f65e7a7d8ef9",
+            "compressed_bytes": 662630,
+            "compressed_sha256": "fdfe9268fa7b639698107b7dad27bf23a2671b87cfe298327e2e278875d5d4df",
+            "decoded_bytes": 2027031,
+            "decoded_sha256": "b811e77a73d37d9826ed0b17aaa017f7c92340c80707bdda4b95ce363e6364ab",
+            "local_object_state": "cold at bounded exact cat-file existence probe; no payload fetched"
+          }
+        },
+        {
+          "source_key": "gb:LUX:ADM1",
+          "catalogue_record": {
+            "advertised_feature_count": 12,
+            "cohort": "administrative-registry",
+            "feature_count": 12,
+            "key": "gb:LUX:ADM1",
+            "metadata_sha256": "4ecee2075b9425aa2059371609a6a5ddd98fd701b5995b457a25c4a3606465e0",
+            "original_bytes": 58247,
+            "original_metadata_file": "data/administrative-sources.json",
+            "original_sha256": "80b7488f2214934e2fa37c4796a3d28f58ac820cbbb02deb71d16ee7d7564a2b",
+            "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+            "parts": [
+              {
+                "bytes": 14306,
+                "hash_kind": "file-bytes",
+                "offset": 0,
+                "ordinal": 0,
+                "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LUX-ADM1-000.bin.gz",
+                "sha256": "eeb43150251bb8fb0cc901a2a802da97e37770f3c67d4e8ff88f13f2adf56b16",
+                "uncompressed_bytes": 58247,
+                "uncompressed_sha256": "80b7488f2214934e2fa37c4796a3d28f58ac820cbbb02deb71d16ee7d7564a2b"
+              }
+            ],
+            "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/LUX/ADM1/geoBoundaries-LUX-ADM1_simplified.geojson",
+            "recorded_license": "Open Data Commons Open Database License 1.0",
+            "source_represented_year_claim": "2017"
+          },
+          "payload_descriptor": {
+            "corpus_commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+            "corpus_tree": "78f85570b9a542fbb2c01131138ab0e69147cca9",
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LUX-ADM1-000.bin.gz",
+            "blob": "90f1b013a822e1ec067d1faa6d9e2f21044648e6",
+            "compressed_bytes": 14306,
+            "compressed_sha256": "eeb43150251bb8fb0cc901a2a802da97e37770f3c67d4e8ff88f13f2adf56b16",
+            "decoded_bytes": 58247,
+            "decoded_sha256": "80b7488f2214934e2fa37c4796a3d28f58ac820cbbb02deb71d16ee7d7564a2b",
+            "local_object_state": "cold at bounded exact cat-file existence probe; no payload fetched"
+          }
+        }
+      ],
+      "all_source_payloads_fetched": true,
+      "all_required_source_decoded_bytes": 3301503,
+      "authenticated_acquisition_inventory": "inventory/lux-exact-input-acquisition.json",
+      "property_identity_join": "inventory/lux-source-property-identity-join.json"
+    },
+    "block_21_witnesses": {
+      "tree": "9954105d964a6239c5721d4909881da7b1f558d4",
+      "inputs": [
+        {
+          "kind": "source-candidates",
+          "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-021.json.gz",
+          "blob": "b76f269a890af98a56ea2a5251a3f9353329d17b",
+          "local_object_state": "cold exact cat-file existence probe"
+        },
+        {
+          "kind": "physical-support",
+          "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-021.json.gz",
+          "blob": "e07d569fa54f66161c1d68ec83c32c782b9ffae7",
+          "local_object_state": "cold exact cat-file existence probe"
+        },
+        {
+          "kind": "inland-water-support",
+          "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-021.json.gz",
+          "blob": "4f27e9ebd6786cfa1ab2a31f2bcfee97fa20fd27",
+          "local_object_state": "cold exact cat-file existence probe"
+        }
+      ],
+      "fetched": false,
+      "fetched_and_joined": true,
+      "witness_join": "inventory/lux-retained-source-physical-water-witness-join.json"
+    },
+    "separate_package_kinds": {
+      "same_contact_source_conflict_and_location_mapping_rows": [
+        {
+          "queue_index_zero_based": 248,
+          "package_id": "gb-DEU-ADM3--source-conflict",
+          "category": "source-conflict",
+          "cells": 28,
+          "land_cells": 28,
+          "inland_water_cells": 0,
+          "intervals": 28,
+          "owner_7122_present": true,
+          "overlapping_candidate_features": [
+            20561,
+            20596,
+            41809,
+            41818
+          ]
+        },
+        {
+          "queue_index_zero_based": 254,
+          "package_id": "gb-BEL-ADM3--source-conflict",
+          "category": "source-conflict",
+          "cells": 25,
+          "land_cells": 25,
+          "inland_water_cells": 0,
+          "intervals": 22,
+          "owner_7122_present": true,
+          "overlapping_candidate_features": [
+            2160,
+            41813,
+            41818
+          ]
+        },
+        {
+          "queue_index_zero_based": 430,
+          "package_id": "gb-DEU-ADM2--location-mapping",
+          "category": "location-mapping",
+          "cells": 1041,
+          "land_cells": 683,
+          "inland_water_cells": 8,
+          "intervals": 846,
+          "owner_7122_present": false,
+          "overlapping_candidate_features": [
+            20561,
+            20596
+          ]
+        },
+        {
+          "queue_index_zero_based": 441,
+          "package_id": "gb-BEL-ADM1--location-mapping",
+          "category": "location-mapping",
+          "cells": 327,
+          "land_cells": 325,
+          "inland_water_cells": 0,
+          "intervals": 291,
+          "owner_7122_present": false,
+          "overlapping_candidate_features": [
+            2160
+          ]
+        },
+        {
+          "queue_index_zero_based": 442,
+          "package_id": "gb-FRA-ADM2--location-mapping",
+          "category": "location-mapping",
+          "cells": 447,
+          "land_cells": 324,
+          "inland_water_cells": 0,
+          "intervals": 421,
+          "owner_7122_present": false,
+          "overlapping_candidate_features": [
+            2160
+          ]
+        },
+        {
+          "queue_index_zero_based": 451,
+          "package_id": "gb-BEL-ADM2--location-mapping",
+          "category": "location-mapping",
+          "cells": 131,
+          "land_cells": 123,
+          "inland_water_cells": 0,
+          "intervals": 119,
+          "owner_7122_present": false,
+          "overlapping_candidate_features": [
+            2160
+          ]
+        }
+      ],
+      "interpretation": "These are separate queue package kinds. Their shared owner/contact indices identify relevant retained context only; they do not establish repair-evaluation credit, an active claim, or territorial/source qualification."
+    },
+    "bounded_current_public_custody_checks": {
+      "performed_at": "2026-10-21",
+      "queries": [
+        {
+          "kind": "issue_search",
+          "query": "repo:ChengshuLi/WorldAtlas \"gb-LUX-ADM1--repair-evaluation\"",
+          "result_count": 0
+        },
+        {
+          "kind": "pull_request_search",
+          "query": "\"gb-LUX-ADM1--repair-evaluation\" in ChengshuLi/WorldAtlas",
+          "state": "all",
+          "result_count": 0
+        },
+        {
+          "kind": "branch_search",
+          "query": "lux repair",
+          "result_count": 0
+        },
+        {
+          "kind": "branch_search",
+          "query": "luxembourg",
+          "result_count": 0
+        },
+        {
+          "kind": "branch_search",
+          "query": "lux",
+          "result_count": 0
+        },
+        {
+          "kind": "issue_search",
+          "query": "repo:ChengshuLi/WorldAtlas LUX repair",
+          "result_count": 0
+        },
+        {
+          "kind": "pull_request_search",
+          "query": "Luxembourg repair",
+          "state": "open",
+          "result_count": 0
+        }
+      ],
+      "named_acceptance_snapshot": {
+        "path": "inventory/root-named105-completed-original-ids.txt",
+        "exact_code_hit": false,
+        "coverage_note": "This is a bounded named completed-ID snapshot. Root separately reports later named entries and exclusions; neither the snapshot nor exact searches prove zero global prior credit or absence of all unseen history."
+      },
+      "direct_related_scope_searches": [
+        {
+          "package_id": "gb-BEL-ADM3--source-conflict",
+          "issue_result_count": 0,
+          "pull_request_result_count": 0
+        },
+        {
+          "package_id": "gb-DEU-ADM3--source-conflict",
+          "issue_result_count": 0,
+          "pull_request_result_count": 0
+        }
+      ],
+      "related_public_context": [
+        {
+          "url": "https://github.com/ChengshuLi/WorldAtlas/issues/286",
+          "number": 286,
+          "title": "Review Low Countries interior batch 1: Belgium, Capital Region, Flemish + 2 more existing areas",
+          "state": "open",
+          "labels": [
+            "kind:work-item",
+            "status:ready",
+            "type:geography"
+          ],
+          "assignees": null,
+          "comments": 0,
+          "updated_at": "2026-10-03T07:10:52Z",
+          "scope_kind": "read-only source/semantic review packet, 209 locations",
+          "exact_LUX_subject": "atlas:territory:LUX",
+          "interpretation": "Related territory-level research only. It explicitly does not approve interiors, source completeness or location-attribute imports; the member identity is not the gb:LUX:ADM1 repair package or its twelve feature indices."
+        },
+        {
+          "url": "https://github.com/ChengshuLi/WorldAtlas/issues/6",
+          "number": 6,
+          "title": "[ENG-02] Install three validated hierarchy corrections",
+          "state": "open",
+          "labels": [
+            "type:engineering",
+            "kind:work-item",
+            "status:blocked",
+            "publisher-needed"
+          ],
+          "comments": 82,
+          "updated_at": "2026-10-18T06:27:49Z",
+          "scope_kind": "shared prepared Monaco/Luxembourg grouping correction and publisher installation",
+          "interpretation": "Related hierarchy metadata dependency. The issue says it does not audit regional interiors; it may be tracked as a shared-change dependency if later work touches the correction. It does not establish a repair-evaluation claim or credit."
+        },
+        {
+          "url": "https://github.com/ChengshuLi/WorldAtlas/pull/673",
+          "number": 673,
+          "title": "Rebase frozen hierarchy corrections onto retained published release five",
+          "evidence_role": "Related hierarchy-correction rebase; not exact LUX repair-evaluation."
+        },
+        {
+          "url": "https://github.com/ChengshuLi/WorldAtlas/pull/680",
+          "number": 680,
+          "title": "Install reviewed hierarchy metadata with append-only release evidence",
+          "evidence_role": "Related hierarchy metadata installation; not exact LUX repair-evaluation."
+        }
+      ]
+    },
+    "limits": [
+      "Current exact searches were bounded; they do not establish exhaustive historical absence or zero prior key credit.",
+      "The three ownerless Belgium/Germany contacts are exact source roster contacts in this repair package; their presence does not alone prove a competing current location or territorial conclusion.",
+      "Source terms and year claims are catalogue metadata; they do not establish current authority, completeness, or suitability.",
+      "Issue #286 is an open, unassigned read-only regional source/semantic packet that includes `atlas:territory:LUX`; it is distinct from the exact `gb:LUX:ADM1` repair package. Issue #6 and PRs #673/#680 concern prepared hierarchy label/grouping corrections and publication, not repair of this package.",
+      "The exact claim and stock observer are complete as recorded above; this inventory does not state that a repair or documented exception was accepted by the root.",
+      "The author acquired seven exact public operands through authenticated transport (inventory/lux-exact-input-acquisition.json). Source payloads were parsed for integrity and inspected by properties only; geometry members were not accessed or analyzed.",
+      "This worker did not acquire source data, run an observer, claim, or allocate. It performed only the retained source/physical/water joins and proposal evidence update."
+    ],
+    "author_allocation": {
+      "commit": "c107b2053841498763d92a38da3924b3fa04b077",
+      "status": "ready allocation used for stock observation"
+    },
+    "selected_owner_observation": {
+      "path": "inventory/lux-selected-owner-observation.json",
+      "commit": "c107b2053841498763d92a38da3924b3fa04b077",
+      "query_count": 624,
+      "interval_count": 214,
+      "consumed_inputs": 37,
+      "fetched_objects": 0,
+      "result": "all current base/additive/effective owner fields zero; no product overlap",
+      "note": "This is a separate stock observation result; exact retained witness rows were independently joined to source-candidate, physical-support and inland-water-support masks."
+    }
+  },
+  "independent_retained_witness": {
+    "version": 1,
+    "kind": "lux-retained-source-physical-water-witness-join",
+    "package_id": "gb-LUX-ADM1--repair-evaluation",
+    "original_scope": {
+      "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "queue_blob": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+      "queue_index_zero_based": 167,
+      "cells": 624,
+      "land_cells": 624,
+      "inland_water_cells": 0,
+      "intervals": 214,
+      "owners": [
+        7122
+      ],
+      "source_features": [
+        2160,
+        20561,
+        20596,
+        41809,
+        41810,
+        41811,
+        41813,
+        41815,
+        41816,
+        41817,
+        41818,
+        41820
+      ],
+      "source_families": [
+        21,
+        84,
+        85,
+        199
+      ],
+      "block": 21
+    },
+    "inputs": [
+      {
+        "kind": "source-candidates",
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "tree": "9954105d964a6239c5721d4909881da7b1f558d4",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-021.json.gz",
+        "blob": "b76f269a890af98a56ea2a5251a3f9353329d17b",
+        "compressed_bytes": 938366,
+        "compressed_sha256": "3b00eb08519bf6e06ddde872fa2e669930e19bbe9b415f7103cc5b7d86af48fa",
+        "decoded_bytes": 7181190,
+        "decoded_sha256": "9bb3f065aed981a7eb57ec09444abc274da5b3c30498bdb03827139212cd74e4"
+      },
+      {
+        "kind": "physical-support",
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "tree": "9954105d964a6239c5721d4909881da7b1f558d4",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-021.json.gz",
+        "blob": "e07d569fa54f66161c1d68ec83c32c782b9ffae7",
+        "compressed_bytes": 578032,
+        "compressed_sha256": "3bf48e2e9b50b22c805240bd458bf6087a131b001c0bef15d1aee9b4120a9fcd",
+        "decoded_bytes": 2612418,
+        "decoded_sha256": "993925f71e340378ad8e19b57f6de8c710e69a1f569e7a5bd1460038db0873c0"
+      },
+      {
+        "kind": "inland-water-support",
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "tree": "9954105d964a6239c5721d4909881da7b1f558d4",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-021.json.gz",
+        "blob": "4f27e9ebd6786cfa1ab2a31f2bcfee97fa20fd27",
+        "compressed_bytes": 15843,
+        "compressed_sha256": "7421eac82c2a2690fd626a9aa794ae2e3509b9475d9e29f2a537189175e39fff",
+        "decoded_bytes": 85720,
+        "decoded_sha256": "6d140bb9492cec51c757ed73fd3ca49adb6f36a1d9eea54378572469824daa84"
+      }
+    ],
+    "candidate_interval_rows": [
+      {
+        "y": 88734,
+        "start": 135488,
+        "end_exclusive": 135489,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88737,
+        "start": 135495,
+        "end_exclusive": 135496,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88740,
+        "start": 135534,
+        "end_exclusive": 135535,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          2160,
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88762,
+        "start": 135545,
+        "end_exclusive": 135546,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88763,
+        "start": 135546,
+        "end_exclusive": 135547,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88804,
+        "start": 135372,
+        "end_exclusive": 135373,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          2160,
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88805,
+        "start": 135372,
+        "end_exclusive": 135373,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          2160,
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88806,
+        "start": 135371,
+        "end_exclusive": 135373,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          2160,
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88807,
+        "start": 135371,
+        "end_exclusive": 135373,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          2160,
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88808,
+        "start": 135370,
+        "end_exclusive": 135372,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          2160,
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88809,
+        "start": 135370,
+        "end_exclusive": 135372,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          2160,
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88810,
+        "start": 135370,
+        "end_exclusive": 135372,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          2160,
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88811,
+        "start": 135370,
+        "end_exclusive": 135372,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          2160,
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88812,
+        "start": 135370,
+        "end_exclusive": 135372,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          2160,
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88813,
+        "start": 135370,
+        "end_exclusive": 135372,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          2160,
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88814,
+        "start": 135370,
+        "end_exclusive": 135371,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          2160,
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88815,
+        "start": 135370,
+        "end_exclusive": 135371,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          2160,
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88816,
+        "start": 135370,
+        "end_exclusive": 135371,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          2160,
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88817,
+        "start": 135370,
+        "end_exclusive": 135371,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88818,
+        "start": 135370,
+        "end_exclusive": 135371,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88819,
+        "start": 135370,
+        "end_exclusive": 135371,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88831,
+        "start": 135540,
+        "end_exclusive": 135541,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88832,
+        "start": 135540,
+        "end_exclusive": 135541,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88833,
+        "start": 135540,
+        "end_exclusive": 135541,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88847,
+        "start": 135536,
+        "end_exclusive": 135537,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88848,
+        "start": 135537,
+        "end_exclusive": 135538,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88849,
+        "start": 135538,
+        "end_exclusive": 135539,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88850,
+        "start": 135538,
+        "end_exclusive": 135540,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88851,
+        "start": 135539,
+        "end_exclusive": 135541,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88852,
+        "start": 135540,
+        "end_exclusive": 135541,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88853,
+        "start": 135541,
+        "end_exclusive": 135542,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88854,
+        "start": 135541,
+        "end_exclusive": 135543,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88855,
+        "start": 135542,
+        "end_exclusive": 135544,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88856,
+        "start": 135543,
+        "end_exclusive": 135545,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88857,
+        "start": 135543,
+        "end_exclusive": 135545,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88858,
+        "start": 135544,
+        "end_exclusive": 135546,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88859,
+        "start": 135545,
+        "end_exclusive": 135546,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88860,
+        "start": 135546,
+        "end_exclusive": 135547,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88861,
+        "start": 135546,
+        "end_exclusive": 135547,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88862,
+        "start": 135547,
+        "end_exclusive": 135548,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88919,
+        "start": 135561,
+        "end_exclusive": 135562,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88920,
+        "start": 135562,
+        "end_exclusive": 135563,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88922,
+        "start": 135563,
+        "end_exclusive": 135564,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88925,
+        "start": 135565,
+        "end_exclusive": 135566,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88926,
+        "start": 135566,
+        "end_exclusive": 135567,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88927,
+        "start": 135567,
+        "end_exclusive": 135570,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88928,
+        "start": 135567,
+        "end_exclusive": 135573,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88929,
+        "start": 135568,
+        "end_exclusive": 135574,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88930,
+        "start": 135568,
+        "end_exclusive": 135575,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88931,
+        "start": 135569,
+        "end_exclusive": 135575,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88932,
+        "start": 135570,
+        "end_exclusive": 135575,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88933,
+        "start": 135570,
+        "end_exclusive": 135575,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88934,
+        "start": 135571,
+        "end_exclusive": 135575,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88935,
+        "start": 135572,
+        "end_exclusive": 135574,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88936,
+        "start": 135572,
+        "end_exclusive": 135574,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88937,
+        "start": 135573,
+        "end_exclusive": 135574,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41818
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88965,
+        "start": 135584,
+        "end_exclusive": 135585,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41820
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 88975,
+        "start": 135610,
+        "end_exclusive": 135611,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41820
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89004,
+        "start": 135620,
+        "end_exclusive": 135621,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41820
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89007,
+        "start": 135621,
+        "end_exclusive": 135622,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41820
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89030,
+        "start": 135628,
+        "end_exclusive": 135631,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89031,
+        "start": 135629,
+        "end_exclusive": 135633,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89032,
+        "start": 135630,
+        "end_exclusive": 135633,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89033,
+        "start": 135630,
+        "end_exclusive": 135634,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89034,
+        "start": 135631,
+        "end_exclusive": 135635,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89035,
+        "start": 135632,
+        "end_exclusive": 135635,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89036,
+        "start": 135633,
+        "end_exclusive": 135636,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89037,
+        "start": 135634,
+        "end_exclusive": 135637,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89038,
+        "start": 135635,
+        "end_exclusive": 135637,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89039,
+        "start": 135636,
+        "end_exclusive": 135638,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89040,
+        "start": 135637,
+        "end_exclusive": 135639,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89041,
+        "start": 135638,
+        "end_exclusive": 135639,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89042,
+        "start": 135639,
+        "end_exclusive": 135640,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89043,
+        "start": 135640,
+        "end_exclusive": 135641,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89060,
+        "start": 135676,
+        "end_exclusive": 135679,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89061,
+        "start": 135674,
+        "end_exclusive": 135680,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89062,
+        "start": 135671,
+        "end_exclusive": 135680,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89063,
+        "start": 135669,
+        "end_exclusive": 135681,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89064,
+        "start": 135670,
+        "end_exclusive": 135681,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89065,
+        "start": 135672,
+        "end_exclusive": 135681,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89066,
+        "start": 135674,
+        "end_exclusive": 135681,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89067,
+        "start": 135676,
+        "end_exclusive": 135681,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89068,
+        "start": 135677,
+        "end_exclusive": 135681,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89069,
+        "start": 135679,
+        "end_exclusive": 135681,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41816
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89071,
+        "start": 135681,
+        "end_exclusive": 135682,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89073,
+        "start": 135682,
+        "end_exclusive": 135683,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89074,
+        "start": 135682,
+        "end_exclusive": 135684,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89075,
+        "start": 135682,
+        "end_exclusive": 135684,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89076,
+        "start": 135682,
+        "end_exclusive": 135685,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89077,
+        "start": 135682,
+        "end_exclusive": 135686,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89078,
+        "start": 135683,
+        "end_exclusive": 135686,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89079,
+        "start": 135683,
+        "end_exclusive": 135687,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89080,
+        "start": 135683,
+        "end_exclusive": 135687,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89081,
+        "start": 135683,
+        "end_exclusive": 135687,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89082,
+        "start": 135683,
+        "end_exclusive": 135687,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89083,
+        "start": 135684,
+        "end_exclusive": 135687,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89084,
+        "start": 135684,
+        "end_exclusive": 135686,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89084,
+        "start": 135686,
+        "end_exclusive": 135687,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          20561,
+          20596,
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89085,
+        "start": 135684,
+        "end_exclusive": 135686,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89086,
+        "start": 135684,
+        "end_exclusive": 135686,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89087,
+        "start": 135684,
+        "end_exclusive": 135686,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89088,
+        "start": 135685,
+        "end_exclusive": 135686,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89091,
+        "start": 135685,
+        "end_exclusive": 135686,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89092,
+        "start": 135685,
+        "end_exclusive": 135686,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89094,
+        "start": 135264,
+        "end_exclusive": 135265,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          2160,
+          41815
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89115,
+        "start": 135797,
+        "end_exclusive": 135799,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89116,
+        "start": 135795,
+        "end_exclusive": 135800,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89117,
+        "start": 135794,
+        "end_exclusive": 135801,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89118,
+        "start": 135793,
+        "end_exclusive": 135802,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89119,
+        "start": 135791,
+        "end_exclusive": 135803,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89120,
+        "start": 135790,
+        "end_exclusive": 135804,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89121,
+        "start": 135789,
+        "end_exclusive": 135804,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89122,
+        "start": 135787,
+        "end_exclusive": 135805,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89123,
+        "start": 135786,
+        "end_exclusive": 135802,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89124,
+        "start": 135785,
+        "end_exclusive": 135792,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89126,
+        "start": 135766,
+        "end_exclusive": 135768,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89155,
+        "start": 135823,
+        "end_exclusive": 135824,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89156,
+        "start": 135823,
+        "end_exclusive": 135824,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89157,
+        "start": 135823,
+        "end_exclusive": 135824,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89158,
+        "start": 135823,
+        "end_exclusive": 135824,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89162,
+        "start": 135824,
+        "end_exclusive": 135825,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89163,
+        "start": 135824,
+        "end_exclusive": 135825,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89166,
+        "start": 135310,
+        "end_exclusive": 135311,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          2160,
+          41815
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89170,
+        "start": 135825,
+        "end_exclusive": 135826,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89171,
+        "start": 135825,
+        "end_exclusive": 135826,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89172,
+        "start": 135825,
+        "end_exclusive": 135826,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89175,
+        "start": 135826,
+        "end_exclusive": 135827,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89176,
+        "start": 135826,
+        "end_exclusive": 135827,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89177,
+        "start": 135826,
+        "end_exclusive": 135827,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89178,
+        "start": 135826,
+        "end_exclusive": 135827,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89179,
+        "start": 135826,
+        "end_exclusive": 135827,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89181,
+        "start": 135318,
+        "end_exclusive": 135319,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          2160,
+          41815
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89181,
+        "start": 135827,
+        "end_exclusive": 135828,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89182,
+        "start": 135827,
+        "end_exclusive": 135828,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89183,
+        "start": 135827,
+        "end_exclusive": 135828,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89198,
+        "start": 135817,
+        "end_exclusive": 135818,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89199,
+        "start": 135817,
+        "end_exclusive": 135818,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89200,
+        "start": 135817,
+        "end_exclusive": 135818,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89201,
+        "start": 135817,
+        "end_exclusive": 135818,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89202,
+        "start": 135817,
+        "end_exclusive": 135818,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89203,
+        "start": 135817,
+        "end_exclusive": 135818,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89204,
+        "start": 135817,
+        "end_exclusive": 135818,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89205,
+        "start": 135817,
+        "end_exclusive": 135818,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89206,
+        "start": 135817,
+        "end_exclusive": 135818,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89207,
+        "start": 135817,
+        "end_exclusive": 135818,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89208,
+        "start": 135817,
+        "end_exclusive": 135818,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41809
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89215,
+        "start": 135818,
+        "end_exclusive": 135819,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89216,
+        "start": 135818,
+        "end_exclusive": 135820,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89217,
+        "start": 135818,
+        "end_exclusive": 135820,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89218,
+        "start": 135819,
+        "end_exclusive": 135820,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89219,
+        "start": 135819,
+        "end_exclusive": 135820,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89220,
+        "start": 135351,
+        "end_exclusive": 135352,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41815
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89220,
+        "start": 135819,
+        "end_exclusive": 135820,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89221,
+        "start": 135819,
+        "end_exclusive": 135820,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89233,
+        "start": 135820,
+        "end_exclusive": 135821,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89234,
+        "start": 135819,
+        "end_exclusive": 135820,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89235,
+        "start": 135818,
+        "end_exclusive": 135819,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89256,
+        "start": 135796,
+        "end_exclusive": 135797,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89263,
+        "start": 135784,
+        "end_exclusive": 135785,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89264,
+        "start": 135783,
+        "end_exclusive": 135784,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89265,
+        "start": 135782,
+        "end_exclusive": 135783,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89266,
+        "start": 135782,
+        "end_exclusive": 135783,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89267,
+        "start": 135781,
+        "end_exclusive": 135782,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89268,
+        "start": 135780,
+        "end_exclusive": 135781,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89269,
+        "start": 135779,
+        "end_exclusive": 135780,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89270,
+        "start": 135778,
+        "end_exclusive": 135779,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89273,
+        "start": 135776,
+        "end_exclusive": 135777,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89274,
+        "start": 135775,
+        "end_exclusive": 135776,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89275,
+        "start": 135774,
+        "end_exclusive": 135775,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89276,
+        "start": 135773,
+        "end_exclusive": 135774,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89279,
+        "start": 135771,
+        "end_exclusive": 135772,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89280,
+        "start": 135770,
+        "end_exclusive": 135771,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89281,
+        "start": 135769,
+        "end_exclusive": 135770,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89282,
+        "start": 135768,
+        "end_exclusive": 135769,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89284,
+        "start": 135372,
+        "end_exclusive": 135373,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41813
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89285,
+        "start": 135373,
+        "end_exclusive": 135375,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41813
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89285,
+        "start": 135766,
+        "end_exclusive": 135767,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89286,
+        "start": 135373,
+        "end_exclusive": 135376,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41813
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89287,
+        "start": 135374,
+        "end_exclusive": 135375,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41813
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89288,
+        "start": 135374,
+        "end_exclusive": 135375,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41813
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89298,
+        "start": 135771,
+        "end_exclusive": 135772,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89306,
+        "start": 135382,
+        "end_exclusive": 135383,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41813
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89328,
+        "start": 135368,
+        "end_exclusive": 135369,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41813
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89331,
+        "start": 135369,
+        "end_exclusive": 135370,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41813
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89342,
+        "start": 135757,
+        "end_exclusive": 135758,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89343,
+        "start": 135756,
+        "end_exclusive": 135757,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41810
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89396,
+        "start": 135352,
+        "end_exclusive": 135354,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89397,
+        "start": 135351,
+        "end_exclusive": 135353,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89398,
+        "start": 135351,
+        "end_exclusive": 135352,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89399,
+        "start": 135351,
+        "end_exclusive": 135352,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89410,
+        "start": 135728,
+        "end_exclusive": 135729,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41811
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89455,
+        "start": 135715,
+        "end_exclusive": 135716,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41811
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89460,
+        "start": 135625,
+        "end_exclusive": 135627,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89461,
+        "start": 135623,
+        "end_exclusive": 135627,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89462,
+        "start": 135621,
+        "end_exclusive": 135626,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89463,
+        "start": 135619,
+        "end_exclusive": 135626,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89464,
+        "start": 135619,
+        "end_exclusive": 135625,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89465,
+        "start": 135622,
+        "end_exclusive": 135625,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89492,
+        "start": 135433,
+        "end_exclusive": 135434,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89503,
+        "start": 135432,
+        "end_exclusive": 135433,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89514,
+        "start": 135501,
+        "end_exclusive": 135504,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89515,
+        "start": 135506,
+        "end_exclusive": 135513,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89516,
+        "start": 135510,
+        "end_exclusive": 135522,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89517,
+        "start": 135510,
+        "end_exclusive": 135524,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89518,
+        "start": 135511,
+        "end_exclusive": 135524,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89519,
+        "start": 135511,
+        "end_exclusive": 135525,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89520,
+        "start": 135511,
+        "end_exclusive": 135525,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89521,
+        "start": 135511,
+        "end_exclusive": 135525,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89522,
+        "start": 135512,
+        "end_exclusive": 135526,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89523,
+        "start": 135514,
+        "end_exclusive": 135526,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89524,
+        "start": 135516,
+        "end_exclusive": 135526,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89525,
+        "start": 135519,
+        "end_exclusive": 135526,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89526,
+        "start": 135521,
+        "end_exclusive": 135526,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      },
+      {
+        "y": 89527,
+        "start": 135523,
+        "end_exclusive": 135526,
+        "owner_indices": [
+          7122
+        ],
+        "source_feature_indices": [
+          41817
+        ],
+        "physical_class": "land",
+        "land_support_mask": true,
+        "inland_water_support_mask": false
+      }
+    ],
+    "counts": {
+      "cells": 624,
+      "land_cells": 624,
+      "inland_water_cells": 0,
+      "intervals": 214,
+      "water_intersection_intervals": 0,
+      "unique_candidate_source_indices": [
+        2160,
+        20561,
+        20596,
+        41809,
+        41810,
+        41811,
+        41813,
+        41815,
+        41816,
+        41817,
+        41818,
+        41820
+      ],
+      "unique_candidate_owner_indices": [
+        7122
+      ]
+    },
+    "separate_queue_kind_rows": [
+      {
+        "queue_index_zero_based": 248,
+        "package_id": "gb-DEU-ADM3--source-conflict",
+        "category": "source-conflict",
+        "cells": 28,
+        "land_cells": 28,
+        "inland_water_cells": 0,
+        "intervals": 28,
+        "owner_7122_present": true,
+        "overlapping_candidate_features": [
+          20561,
+          20596,
+          41809,
+          41818
+        ]
+      },
+      {
+        "queue_index_zero_based": 254,
+        "package_id": "gb-BEL-ADM3--source-conflict",
+        "category": "source-conflict",
+        "cells": 25,
+        "land_cells": 25,
+        "inland_water_cells": 0,
+        "intervals": 22,
+        "owner_7122_present": true,
+        "overlapping_candidate_features": [
+          2160,
+          41813,
+          41818
+        ]
+      },
+      {
+        "queue_index_zero_based": 430,
+        "package_id": "gb-DEU-ADM2--location-mapping",
+        "category": "location-mapping",
+        "cells": 1041,
+        "land_cells": 683,
+        "inland_water_cells": 8,
+        "intervals": 846,
+        "owner_7122_present": false,
+        "overlapping_candidate_features": [
+          20561,
+          20596
+        ]
+      },
+      {
+        "queue_index_zero_based": 441,
+        "package_id": "gb-BEL-ADM1--location-mapping",
+        "category": "location-mapping",
+        "cells": 327,
+        "land_cells": 325,
+        "inland_water_cells": 0,
+        "intervals": 291,
+        "owner_7122_present": false,
+        "overlapping_candidate_features": [
+          2160
+        ]
+      },
+      {
+        "queue_index_zero_based": 442,
+        "package_id": "gb-FRA-ADM2--location-mapping",
+        "category": "location-mapping",
+        "cells": 447,
+        "land_cells": 324,
+        "inland_water_cells": 0,
+        "intervals": 421,
+        "owner_7122_present": false,
+        "overlapping_candidate_features": [
+          2160
+        ]
+      },
+      {
+        "queue_index_zero_based": 451,
+        "package_id": "gb-BEL-ADM2--location-mapping",
+        "category": "location-mapping",
+        "cells": 131,
+        "land_cells": 123,
+        "inland_water_cells": 0,
+        "intervals": 119,
+        "owner_7122_present": false,
+        "overlapping_candidate_features": [
+          2160
+        ]
+      }
+    ],
+    "scope_limits": [
+      "The 624/214 rows are source-candidate runs for owner 7122 and the exact twelve queue contact indices, intersected with block-21 physical support. All rows intersect the land support mask and none intersects the water support mask.",
+      "The related source-conflict and location-mapping entries are different queue package kinds and retain their own row counts; sharing an owner/contact index does not make them repair-evaluation rows or establish live custody.",
+      "Three owner-7122 LUX ADM1 features in the 12-feature primary source catalogue are absent from this repair package contact vector; that is recorded without causal attribution.",
+      "Physical mask support does not qualify repair. Every interval still requires a qualified additive repair or documented exception under the exact queue contract.",
+      "No geometry was inspected or computed."
+    ]
+  },
+  "source_properties": {
+    "version": 1,
+    "kind": "lux-source-property-identity-join",
+    "package_id": "gb-LUX-ADM1--repair-evaluation",
+    "source_payloads": [
+      {
+        "key": "gb:BEL:ADM1",
+        "family_index": 21,
+        "catalogue_record": {
+          "advertised_feature_count": 3,
+          "cohort": "administrative-registry",
+          "feature_count": 3,
+          "key": "gb:BEL:ADM1",
+          "metadata_sha256": "0977543031df50d3896eb8cc5e92ca8f868a6890b17a28711cf172b40c5c3d37",
+          "original_bytes": 6352,
+          "original_metadata_file": "data/administrative-sources.json",
+          "original_sha256": "7af87f5035779f0aefe5bf930288572979e490ab0441fd9b92942a519bea0974",
+          "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+          "parts": [
+            {
+              "bytes": 1965,
+              "hash_kind": "file-bytes",
+              "offset": 0,
+              "ordinal": 0,
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BEL-ADM1-000.bin.gz",
+              "sha256": "2096862dfa0fdd33ff03cd4b47566547b45658408bad7314dc0065dd8426f3cf",
+              "uncompressed_bytes": 6352,
+              "uncompressed_sha256": "7af87f5035779f0aefe5bf930288572979e490ab0441fd9b92942a519bea0974"
+            }
+          ],
+          "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BEL/ADM1/geoBoundaries-BEL-ADM1_simplified.geojson",
+          "recorded_license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+          "source_represented_year_claim": "2022"
+        },
+        "descriptor": {
+          "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+          "tree": "78f85570b9a542fbb2c01131138ab0e69147cca9",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BEL-ADM1-000.bin.gz",
+          "blob": "17d45c15cf1c8fae8faab802c0e4db7d30f36e9c",
+          "compressed_bytes": 1965,
+          "compressed_sha256": "2096862dfa0fdd33ff03cd4b47566547b45658408bad7314dc0065dd8426f3cf",
+          "decoded_bytes": 6352,
+          "decoded_sha256": "7af87f5035779f0aefe5bf930288572979e490ab0441fd9b92942a519bea0974",
+          "feature_count": 3
+        }
+      },
+      {
+        "key": "gb:DEU:ADM1",
+        "family_index": 84,
+        "catalogue_record": {
+          "advertised_feature_count": 16,
+          "cohort": "administrative-registry",
+          "feature_count": 16,
+          "key": "gb:DEU:ADM1",
+          "metadata_sha256": "f1b467b00ba2fea6b77bd70deb0bca1c89b5dca72589b335e3ab73463e237361",
+          "original_bytes": 1209873,
+          "original_metadata_file": "data/administrative-sources.json",
+          "original_sha256": "511b3625ad4568d12a6bfcb1bdea4e877199e1923e502cb80224b8164128eb05",
+          "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+          "parts": [
+            {
+              "bytes": 399950,
+              "hash_kind": "file-bytes",
+              "offset": 0,
+              "ordinal": 0,
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-DEU-ADM1-000.bin.gz",
+              "sha256": "a83906c63494bc2d74bba4815ec489cce99b78406f957a9cae2c85ba7d6367c3",
+              "uncompressed_bytes": 1209873,
+              "uncompressed_sha256": "511b3625ad4568d12a6bfcb1bdea4e877199e1923e502cb80224b8164128eb05"
+            }
+          ],
+          "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/DEU/ADM1/geoBoundaries-DEU-ADM1_simplified.geojson",
+          "recorded_license": "Data license Germany - Attribution - Version 2.0",
+          "source_represented_year_claim": "2021"
+        },
+        "descriptor": {
+          "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+          "tree": "78f85570b9a542fbb2c01131138ab0e69147cca9",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-DEU-ADM1-000.bin.gz",
+          "blob": "11ef8fc0bb85ef38a3d476023bd00e3bbb1cef3a",
+          "compressed_bytes": 399950,
+          "compressed_sha256": "a83906c63494bc2d74bba4815ec489cce99b78406f957a9cae2c85ba7d6367c3",
+          "decoded_bytes": 1209873,
+          "decoded_sha256": "511b3625ad4568d12a6bfcb1bdea4e877199e1923e502cb80224b8164128eb05",
+          "feature_count": 16
+        }
+      },
+      {
+        "key": "gb:DEU:ADM2",
+        "family_index": 85,
+        "catalogue_record": {
+          "advertised_feature_count": 38,
+          "cohort": "administrative-registry",
+          "feature_count": 38,
+          "key": "gb:DEU:ADM2",
+          "metadata_sha256": "8cecb3fc8bee009ad3e603ac0d7e78a2ee4782d3958e5b5433606dbf43d5fb4c",
+          "original_bytes": 2027031,
+          "original_metadata_file": "data/administrative-sources.json",
+          "original_sha256": "b811e77a73d37d9826ed0b17aaa017f7c92340c80707bdda4b95ce363e6364ab",
+          "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+          "parts": [
+            {
+              "bytes": 662630,
+              "hash_kind": "file-bytes",
+              "offset": 0,
+              "ordinal": 0,
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-DEU-ADM2-000.bin.gz",
+              "sha256": "fdfe9268fa7b639698107b7dad27bf23a2671b87cfe298327e2e278875d5d4df",
+              "uncompressed_bytes": 2027031,
+              "uncompressed_sha256": "b811e77a73d37d9826ed0b17aaa017f7c92340c80707bdda4b95ce363e6364ab"
+            }
+          ],
+          "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/DEU/ADM2/geoBoundaries-DEU-ADM2_simplified.geojson",
+          "recorded_license": "Data license Germany - Attribution - Version 2.0",
+          "source_represented_year_claim": "2021"
+        },
+        "descriptor": {
+          "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+          "tree": "78f85570b9a542fbb2c01131138ab0e69147cca9",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-DEU-ADM2-000.bin.gz",
+          "blob": "e59499d1e0dc6e71c9d7a285a0b6f65e7a7d8ef9",
+          "compressed_bytes": 662630,
+          "compressed_sha256": "fdfe9268fa7b639698107b7dad27bf23a2671b87cfe298327e2e278875d5d4df",
+          "decoded_bytes": 2027031,
+          "decoded_sha256": "b811e77a73d37d9826ed0b17aaa017f7c92340c80707bdda4b95ce363e6364ab",
+          "feature_count": 38
+        }
+      },
+      {
+        "key": "gb:LUX:ADM1",
+        "family_index": 199,
+        "catalogue_record": {
+          "advertised_feature_count": 12,
+          "cohort": "administrative-registry",
+          "feature_count": 12,
+          "key": "gb:LUX:ADM1",
+          "metadata_sha256": "4ecee2075b9425aa2059371609a6a5ddd98fd701b5995b457a25c4a3606465e0",
+          "original_bytes": 58247,
+          "original_metadata_file": "data/administrative-sources.json",
+          "original_sha256": "80b7488f2214934e2fa37c4796a3d28f58ac820cbbb02deb71d16ee7d7564a2b",
+          "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+          "parts": [
+            {
+              "bytes": 14306,
+              "hash_kind": "file-bytes",
+              "offset": 0,
+              "ordinal": 0,
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LUX-ADM1-000.bin.gz",
+              "sha256": "eeb43150251bb8fb0cc901a2a802da97e37770f3c67d4e8ff88f13f2adf56b16",
+              "uncompressed_bytes": 58247,
+              "uncompressed_sha256": "80b7488f2214934e2fa37c4796a3d28f58ac820cbbb02deb71d16ee7d7564a2b"
+            }
+          ],
+          "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/LUX/ADM1/geoBoundaries-LUX-ADM1_simplified.geojson",
+          "recorded_license": "Open Data Commons Open Database License 1.0",
+          "source_represented_year_claim": "2017"
+        },
+        "descriptor": {
+          "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+          "tree": "78f85570b9a542fbb2c01131138ab0e69147cca9",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LUX-ADM1-000.bin.gz",
+          "blob": "90f1b013a822e1ec067d1faa6d9e2f21044648e6",
+          "compressed_bytes": 14306,
+          "compressed_sha256": "eeb43150251bb8fb0cc901a2a802da97e37770f3c67d4e8ff88f13f2adf56b16",
+          "decoded_bytes": 58247,
+          "decoded_sha256": "80b7488f2214934e2fa37c4796a3d28f58ac820cbbb02deb71d16ee7d7564a2b",
+          "feature_count": 12
+        }
+      }
+    ],
+    "roster": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "blob": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "compressed_bytes": 1844315,
+      "compressed_sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa",
+      "decoded_bytes": 13496995,
+      "decoded_sha256": "7fa99cbf064121e0130b66758c212ae22b2a7be5649f2e250e9cda89a9bd595e"
+    },
+    "lineage": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+      "blob": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+      "decoded_sha256": "607372a1af11bebf58c24aa15bdfae1999fafc532bb65ab7d822c0c20b57a435",
+      "current_commit": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+      "method": "native-linear-evenodd-first-owner-v1"
+    },
+    "candidate_contacts": [
+      {
+        "source_index": 2160,
+        "source_id": "gb:BEL:ADM1:27649430B38670918582344",
+        "family_index": 21,
+        "ordinal": 2,
+        "roster_name": "Wallonne Gewest",
+        "owner_indices": [],
+        "lineage_reverse_owner_indices": [],
+        "source_properties": {
+          "shapeName": "Wallonne Gewest",
+          "shapeISO": "WAL",
+          "shapeID": "27649430B38670918582344",
+          "shapeGroup": "BEL",
+          "shapeType": "ADM1"
+        },
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 20561,
+        "source_id": "gb:DEU:ADM1:10402087B42728698084544",
+        "family_index": 84,
+        "ordinal": 10,
+        "roster_name": "Rheinland-Pfalz",
+        "owner_indices": [],
+        "lineage_reverse_owner_indices": [],
+        "source_properties": {
+          "shapeName": "Rheinland-Pfalz",
+          "shapeISO": "DE-RP",
+          "shapeID": "10402087B42728698084544",
+          "shapeGroup": "DEU",
+          "shapeType": "ADM1"
+        },
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 20596,
+        "source_id": "gb:DEU:ADM2:9070358B88105018400154",
+        "family_index": 85,
+        "ordinal": 29,
+        "roster_name": "Trier",
+        "owner_indices": [],
+        "lineage_reverse_owner_indices": [],
+        "source_properties": {
+          "shapeName": "Trier",
+          "shapeISO": "",
+          "shapeID": "9070358B88105018400154",
+          "shapeGroup": "DEU",
+          "shapeType": "ADM2"
+        },
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41809,
+        "source_id": "gb:LUX:ADM1:76397094B75044033408583",
+        "family_index": 199,
+        "ordinal": 0,
+        "roster_name": "Canton Echternach",
+        "owner_indices": [
+          7122
+        ],
+        "lineage_reverse_owner_indices": [
+          7122
+        ],
+        "source_properties": {
+          "shapeName": "Canton Echternach",
+          "shapeISO": "LU-EC",
+          "shapeID": "76397094B75044033408583",
+          "shapeGroup": "LUX",
+          "shapeType": "ADM1"
+        },
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41810,
+        "source_id": "gb:LUX:ADM1:76397094B81286574502905",
+        "family_index": 199,
+        "ordinal": 1,
+        "roster_name": "Canton Grevenmacher",
+        "owner_indices": [
+          7122
+        ],
+        "lineage_reverse_owner_indices": [
+          7122
+        ],
+        "source_properties": {
+          "shapeName": "Canton Grevenmacher",
+          "shapeISO": "LU-GR",
+          "shapeID": "76397094B81286574502905",
+          "shapeGroup": "LUX",
+          "shapeType": "ADM1"
+        },
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41811,
+        "source_id": "gb:LUX:ADM1:76397094B46061876108979",
+        "family_index": 199,
+        "ordinal": 2,
+        "roster_name": "Canton Remich",
+        "owner_indices": [
+          7122
+        ],
+        "lineage_reverse_owner_indices": [
+          7122
+        ],
+        "source_properties": {
+          "shapeName": "Canton Remich",
+          "shapeISO": "LU-RM",
+          "shapeID": "76397094B46061876108979",
+          "shapeGroup": "LUX",
+          "shapeType": "ADM1"
+        },
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41813,
+        "source_id": "gb:LUX:ADM1:76397094B22879125121781",
+        "family_index": 199,
+        "ordinal": 4,
+        "roster_name": "Canton Capellen",
+        "owner_indices": [
+          7122
+        ],
+        "lineage_reverse_owner_indices": [
+          7122
+        ],
+        "source_properties": {
+          "shapeName": "Canton Capellen",
+          "shapeISO": "LU-CA",
+          "shapeID": "76397094B22879125121781",
+          "shapeGroup": "LUX",
+          "shapeType": "ADM1"
+        },
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41815,
+        "source_id": "gb:LUX:ADM1:76397094B45773647818245",
+        "family_index": 199,
+        "ordinal": 6,
+        "roster_name": "Canton Redange",
+        "owner_indices": [
+          7122
+        ],
+        "lineage_reverse_owner_indices": [
+          7122
+        ],
+        "source_properties": {
+          "shapeName": "Canton Redange",
+          "shapeISO": "LU-RD",
+          "shapeID": "76397094B45773647818245",
+          "shapeGroup": "LUX",
+          "shapeType": "ADM1"
+        },
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41816,
+        "source_id": "gb:LUX:ADM1:76397094B91879595380480",
+        "family_index": 199,
+        "ordinal": 7,
+        "roster_name": "Canton Diekirch",
+        "owner_indices": [
+          7122
+        ],
+        "lineage_reverse_owner_indices": [
+          7122
+        ],
+        "source_properties": {
+          "shapeName": "Canton Diekirch",
+          "shapeISO": "LU-DI",
+          "shapeID": "76397094B91879595380480",
+          "shapeGroup": "LUX",
+          "shapeType": "ADM1"
+        },
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41817,
+        "source_id": "gb:LUX:ADM1:76397094B23155303849994",
+        "family_index": 199,
+        "ordinal": 8,
+        "roster_name": "Canton Esch-sur-Alzette",
+        "owner_indices": [
+          7122
+        ],
+        "lineage_reverse_owner_indices": [
+          7122
+        ],
+        "source_properties": {
+          "shapeName": "Canton Esch-sur-Alzette",
+          "shapeISO": "LU-ES",
+          "shapeID": "76397094B23155303849994",
+          "shapeGroup": "LUX",
+          "shapeType": "ADM1"
+        },
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41818,
+        "source_id": "gb:LUX:ADM1:76397094B70222545473363",
+        "family_index": 199,
+        "ordinal": 9,
+        "roster_name": "Canton Clervaux",
+        "owner_indices": [
+          7122
+        ],
+        "lineage_reverse_owner_indices": [
+          7122
+        ],
+        "source_properties": {
+          "shapeName": "Canton Clervaux",
+          "shapeISO": "LU-CL",
+          "shapeID": "76397094B70222545473363",
+          "shapeGroup": "LUX",
+          "shapeType": "ADM1"
+        },
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41820,
+        "source_id": "gb:LUX:ADM1:76397094B51041035930086",
+        "family_index": 199,
+        "ordinal": 11,
+        "roster_name": "Canton Vianden",
+        "owner_indices": [
+          7122
+        ],
+        "lineage_reverse_owner_indices": [
+          7122
+        ],
+        "source_properties": {
+          "shapeName": "Canton Vianden",
+          "shapeISO": "LU-VD",
+          "shapeID": "76397094B51041035930086",
+          "shapeGroup": "LUX",
+          "shapeType": "ADM1"
+        },
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "primary_family_features_omitted_from_package_contact_vector": [
+      {
+        "source_index": 41812,
+        "source_id": "gb:LUX:ADM1:76397094B49543500261856",
+        "name": "Canton Mersch",
+        "ordinal": 3,
+        "owner_indices": [
+          7122
+        ],
+        "source_properties": {
+          "shapeName": "Canton Mersch",
+          "shapeISO": "LU-ME",
+          "shapeID": "76397094B49543500261856",
+          "shapeGroup": "LUX",
+          "shapeType": "ADM1"
+        },
+        "included_in_repair_contact_vector": false
+      },
+      {
+        "source_index": 41814,
+        "source_id": "gb:LUX:ADM1:76397094B53618071923197",
+        "name": "Canton Luxembourg",
+        "ordinal": 5,
+        "owner_indices": [
+          7122
+        ],
+        "source_properties": {
+          "shapeName": "Canton Luxembourg",
+          "shapeISO": "LU-LU",
+          "shapeID": "76397094B53618071923197",
+          "shapeGroup": "LUX",
+          "shapeType": "ADM1"
+        },
+        "included_in_repair_contact_vector": false
+      },
+      {
+        "source_index": 41819,
+        "source_id": "gb:LUX:ADM1:76397094B67457450323927",
+        "name": "Canton Wiltz",
+        "ordinal": 10,
+        "owner_indices": [
+          7122
+        ],
+        "source_properties": {
+          "shapeName": "Canton Wiltz",
+          "shapeISO": "LU-WI",
+          "shapeID": "76397094B67457450323927",
+          "shapeGroup": "LUX",
+          "shapeType": "ADM1"
+        },
+        "included_in_repair_contact_vector": false
+      }
+    ],
+    "summary": {
+      "candidate_contacts": 12,
+      "owner_7122_LUX_features": 9,
+      "ownerless_foreign_contacts": 3,
+      "primary_LUX_catalogue_features": 12,
+      "primary_LUX_features_in_repair_contacts": 9,
+      "primary_LUX_features_omitted": 3,
+      "owner_lineage_matches_roster_for_all_contacts": true
+    },
+    "source_terms_and_vintages": [
+      {
+        "source_key": "gb:BEL:ADM1",
+        "license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+        "represented_year_claim": "2022",
+        "feature_count": 3,
+        "original_sha256": "7af87f5035779f0aefe5bf930288572979e490ab0441fd9b92942a519bea0974",
+        "metadata_sha256": "0977543031df50d3896eb8cc5e92ca8f868a6890b17a28711cf172b40c5c3d37",
+        "recorded_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BEL/ADM1/geoBoundaries-BEL-ADM1_simplified.geojson"
+      },
+      {
+        "source_key": "gb:DEU:ADM1",
+        "license": "Data license Germany - Attribution - Version 2.0",
+        "represented_year_claim": "2021",
+        "feature_count": 16,
+        "original_sha256": "511b3625ad4568d12a6bfcb1bdea4e877199e1923e502cb80224b8164128eb05",
+        "metadata_sha256": "f1b467b00ba2fea6b77bd70deb0bca1c89b5dca72589b335e3ab73463e237361",
+        "recorded_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/DEU/ADM1/geoBoundaries-DEU-ADM1_simplified.geojson"
+      },
+      {
+        "source_key": "gb:DEU:ADM2",
+        "license": "Data license Germany - Attribution - Version 2.0",
+        "represented_year_claim": "2021",
+        "feature_count": 38,
+        "original_sha256": "b811e77a73d37d9826ed0b17aaa017f7c92340c80707bdda4b95ce363e6364ab",
+        "metadata_sha256": "8cecb3fc8bee009ad3e603ac0d7e78a2ee4782d3958e5b5433606dbf43d5fb4c",
+        "recorded_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/DEU/ADM2/geoBoundaries-DEU-ADM2_simplified.geojson"
+      },
+      {
+        "source_key": "gb:LUX:ADM1",
+        "license": "Open Data Commons Open Database License 1.0",
+        "represented_year_claim": "2017",
+        "feature_count": 12,
+        "original_sha256": "80b7488f2214934e2fa37c4796a3d28f58ac820cbbb02deb71d16ee7d7564a2b",
+        "metadata_sha256": "4ecee2075b9425aa2059371609a6a5ddd98fd701b5995b457a25c4a3606465e0",
+        "recorded_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/LUX/ADM1/geoBoundaries-LUX-ADM1_simplified.geojson"
+      }
+    ],
+    "limits": [
+      "Each complete source payload was decompressed and parsed for integrity. Code inspected properties only and never read, evaluated or published geometry members.",
+      "Catalogue license and represented-year values are retained metadata claims, not independent confirmation of present-day source rights, completeness, or suitability.",
+      "Owner/lineage associations are retained index facts, not political-authority findings. The three ownerless Belgium/Germany contacts are source contacts; their presence does not alone prove a competing current location.",
+      "No source qualification, territorial exclusion, or interval repair disposition is inferred from names, owner tags, geometry_status, license, or year."
+    ]
+  },
+  "source_payload_acquisition": {
+    "items": [
+      {
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "tree": "9954105d964a6239c5721d4909881da7b1f558d4",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-021.json.gz",
+        "oid": "b76f269a890af98a56ea2a5251a3f9353329d17b",
+        "kind": "source-candidates",
+        "encoded_bytes": 938366,
+        "already_present": false,
+        "encoded_sha256": "3b00eb08519bf6e06ddde872fa2e669930e19bbe9b415f7103cc5b7d86af48fa",
+        "decoded_bytes": 7181190,
+        "decoded_sha256": "9bb3f065aed981a7eb57ec09444abc274da5b3c30498bdb03827139212cd74e4"
+      },
+      {
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "tree": "9954105d964a6239c5721d4909881da7b1f558d4",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-021.json.gz",
+        "oid": "e07d569fa54f66161c1d68ec83c32c782b9ffae7",
+        "kind": "physical-support",
+        "encoded_bytes": 578032,
+        "already_present": false,
+        "encoded_sha256": "3bf48e2e9b50b22c805240bd458bf6087a131b001c0bef15d1aee9b4120a9fcd",
+        "decoded_bytes": 2612418,
+        "decoded_sha256": "993925f71e340378ad8e19b57f6de8c710e69a1f569e7a5bd1460038db0873c0"
+      },
+      {
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "tree": "9954105d964a6239c5721d4909881da7b1f558d4",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-021.json.gz",
+        "oid": "4f27e9ebd6786cfa1ab2a31f2bcfee97fa20fd27",
+        "kind": "inland-water-support",
+        "encoded_bytes": 15843,
+        "already_present": false,
+        "encoded_sha256": "7421eac82c2a2690fd626a9aa794ae2e3509b9475d9e29f2a537189175e39fff",
+        "decoded_bytes": 85720,
+        "decoded_sha256": "6d140bb9492cec51c757ed73fd3ca49adb6f36a1d9eea54378572469824daa84"
+      },
+      {
+        "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+        "tree": "78f85570b9a542fbb2c01131138ab0e69147cca9",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BEL-ADM1-000.bin.gz",
+        "oid": "17d45c15cf1c8fae8faab802c0e4db7d30f36e9c",
+        "kind": "gb:BEL:ADM1",
+        "encoded_bytes": 1965,
+        "already_present": false,
+        "encoded_sha256": "2096862dfa0fdd33ff03cd4b47566547b45658408bad7314dc0065dd8426f3cf",
+        "decoded_bytes": 6352,
+        "decoded_sha256": "7af87f5035779f0aefe5bf930288572979e490ab0441fd9b92942a519bea0974",
+        "feature_count": 3
+      },
+      {
+        "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+        "tree": "78f85570b9a542fbb2c01131138ab0e69147cca9",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-DEU-ADM1-000.bin.gz",
+        "oid": "11ef8fc0bb85ef38a3d476023bd00e3bbb1cef3a",
+        "kind": "gb:DEU:ADM1",
+        "encoded_bytes": 399950,
+        "already_present": false,
+        "encoded_sha256": "a83906c63494bc2d74bba4815ec489cce99b78406f957a9cae2c85ba7d6367c3",
+        "decoded_bytes": 1209873,
+        "decoded_sha256": "511b3625ad4568d12a6bfcb1bdea4e877199e1923e502cb80224b8164128eb05",
+        "feature_count": 16
+      },
+      {
+        "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+        "tree": "78f85570b9a542fbb2c01131138ab0e69147cca9",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-DEU-ADM2-000.bin.gz",
+        "oid": "e59499d1e0dc6e71c9d7a285a0b6f65e7a7d8ef9",
+        "kind": "gb:DEU:ADM2",
+        "encoded_bytes": 662630,
+        "already_present": false,
+        "encoded_sha256": "fdfe9268fa7b639698107b7dad27bf23a2671b87cfe298327e2e278875d5d4df",
+        "decoded_bytes": 2027031,
+        "decoded_sha256": "b811e77a73d37d9826ed0b17aaa017f7c92340c80707bdda4b95ce363e6364ab",
+        "feature_count": 38
+      },
+      {
+        "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+        "tree": "78f85570b9a542fbb2c01131138ab0e69147cca9",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LUX-ADM1-000.bin.gz",
+        "oid": "90f1b013a822e1ec067d1faa6d9e2f21044648e6",
+        "kind": "gb:LUX:ADM1",
+        "encoded_bytes": 14306,
+        "already_present": false,
+        "encoded_sha256": "eeb43150251bb8fb0cc901a2a802da97e37770f3c67d4e8ff88f13f2adf56b16",
+        "decoded_bytes": 58247,
+        "decoded_sha256": "80b7488f2214934e2fa37c4796a3d28f58ac820cbbb02deb71d16ee7d7564a2b",
+        "feature_count": 12
+      }
+    ],
+    "new_objects": 7,
+    "new_bytes": 2611092,
+    "free_bytes_before": 12769144832,
+    "geometry_use": "Full source JSON parsed for syntax/integrity, with no geometry inspection, computation or republication."
+  },
+  "bounded_custody_inventory": {
+    "performed_at": "2026-10-21",
+    "queries": [
+      {
+        "kind": "issue_search",
+        "query": "repo:ChengshuLi/WorldAtlas \"gb-LUX-ADM1--repair-evaluation\"",
+        "result_count": 0
+      },
+      {
+        "kind": "pull_request_search",
+        "query": "\"gb-LUX-ADM1--repair-evaluation\" in ChengshuLi/WorldAtlas",
+        "state": "all",
+        "result_count": 0
+      },
+      {
+        "kind": "branch_search",
+        "query": "lux repair",
+        "result_count": 0
+      },
+      {
+        "kind": "branch_search",
+        "query": "luxembourg",
+        "result_count": 0
+      },
+      {
+        "kind": "branch_search",
+        "query": "lux",
+        "result_count": 0
+      },
+      {
+        "kind": "issue_search",
+        "query": "repo:ChengshuLi/WorldAtlas LUX repair",
+        "result_count": 0
+      },
+      {
+        "kind": "pull_request_search",
+        "query": "Luxembourg repair",
+        "state": "open",
+        "result_count": 0
+      }
+    ],
+    "named_acceptance_snapshot": {
+      "path": "inventory/root-named105-completed-original-ids.txt",
+      "exact_code_hit": false,
+      "coverage_note": "This is a bounded named completed-ID snapshot. Root separately reports later named entries and exclusions; neither the snapshot nor exact searches prove zero global prior credit or absence of all unseen history."
+    },
+    "direct_related_scope_searches": [
+      {
+        "package_id": "gb-BEL-ADM3--source-conflict",
+        "issue_result_count": 0,
+        "pull_request_result_count": 0
+      },
+      {
+        "package_id": "gb-DEU-ADM3--source-conflict",
+        "issue_result_count": 0,
+        "pull_request_result_count": 0
+      }
+    ],
+    "related_public_context": [
+      {
+        "url": "https://github.com/ChengshuLi/WorldAtlas/issues/286",
+        "number": 286,
+        "title": "Review Low Countries interior batch 1: Belgium, Capital Region, Flemish + 2 more existing areas",
+        "state": "open",
+        "labels": [
+          "kind:work-item",
+          "status:ready",
+          "type:geography"
+        ],
+        "assignees": null,
+        "comments": 0,
+        "updated_at": "2026-10-03T07:10:52Z",
+        "scope_kind": "read-only source/semantic review packet, 209 locations",
+        "exact_LUX_subject": "atlas:territory:LUX",
+        "interpretation": "Related territory-level research only. It explicitly does not approve interiors, source completeness or location-attribute imports; the member identity is not the gb:LUX:ADM1 repair package or its twelve feature indices."
+      },
+      {
+        "url": "https://github.com/ChengshuLi/WorldAtlas/issues/6",
+        "number": 6,
+        "title": "[ENG-02] Install three validated hierarchy corrections",
+        "state": "open",
+        "labels": [
+          "type:engineering",
+          "kind:work-item",
+          "status:blocked",
+          "publisher-needed"
+        ],
+        "comments": 82,
+        "updated_at": "2026-10-18T06:27:49Z",
+        "scope_kind": "shared prepared Monaco/Luxembourg grouping correction and publisher installation",
+        "interpretation": "Related hierarchy metadata dependency. The issue says it does not audit regional interiors; it may be tracked as a shared-change dependency if later work touches the correction. It does not establish a repair-evaluation claim or credit."
+      },
+      {
+        "url": "https://github.com/ChengshuLi/WorldAtlas/pull/673",
+        "number": 673,
+        "title": "Rebase frozen hierarchy corrections onto retained published release five",
+        "evidence_role": "Related hierarchy-correction rebase; not exact LUX repair-evaluation."
+      },
+      {
+        "url": "https://github.com/ChengshuLi/WorldAtlas/pull/680",
+        "number": 680,
+        "title": "Install reviewed hierarchy metadata with append-only release evidence",
+        "evidence_role": "Related hierarchy metadata installation; not exact LUX repair-evaluation."
+      }
+    ]
+  },
+  "current_ownership_recheck": {
+    "as_of": "2026-10-20 (America/Los_Angeles)",
+    "issues": [
+      {
+        "number": 286,
+        "title": "Review Low Countries interior batch 1: Belgium, Capital Region, Flemish + 2 more existing areas",
+        "state": "open",
+        "body": "2026-10-02 (America/Los_Angeles): macro publication queue migration. Exact original workload member IDs, member hashes and owned evidence directories are preserved. Previous issue bodies/pins are archived with this migration. Global release/certificate and current region envelopes are refreshed; nine retained IDs changed (six footprints, three present-day names), with no historical claim transfer. Newly sourced locations are assigned separately to eight bounded supplemental packets. This update does not approve region interiors, original source completeness or location-attribute imports.\n\n2026-10-02 (America/Los_Angeles): worker lane updated to **geography research**, as agreed by the user. Use `geography/<job-id>` and the declared owned_paths; source evidence and proposals only. Engineering implements shared corrections and publishes approved regions; historical imports wait for that publication. See docs/GEOGRAPHY_HANDOFF.md and docs/WORKER_COORDINATION.md on main.\n\nRaised/recorded: 2026-10-02 (America/Los_Angeles). Regional scope is pinned to the published reference; this task is not a claim that its interiors are approved.\n\nParent: #285; worldwide umbrella #7. **Read-only source/semantic review packet**, 209 locations, maximum 2 focused PRs.\n\nRegion ID: `framework:region:low-countries:ef8aac563ed4`.\nContinent: Europe; subcontinent: Western and Central Europe.\nRelease: `geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e` (v5).\nHierarchy SHA-256: `03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d`.\nFootprints SHA-256: `2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286`.\nMacro certificate SHA-256: `979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e`.\nFrozen region geometry SHA-256: `dbd0c7160720a3775b8a96a120f76f3531cf6dc581d31cb1b5fc3ef7c263fd9e`.\nFrozen region member IDs SHA-256: `e04d142bb16614c5a404767840f8367c0b00b6ad9533bdf48820f2c99bc5bad3`.\nDurable baseline: `data/macro-foundation/regional-handoffs.json.gz` and `current-membership-inventory.json.gz` in current main.\n\nOwned evidence directory: `data/regional-review/regional-review-d93f7c8e1d36ea6a/`. Suggested geography job/branch suffix: `regional-review-d93f7c8e1d36ea6a`.\n\nScope: Belgium, Capital Region, Flemish + 2 more existing areas. Only the exact member IDs below belong to this packet. For a partly owned area/province, review and document this part; the region integration owns combined parent decisions. Source/role/license entries below are starting metadata to verify, not independent approval.\n\nAcceptance:\n- Document every scoped location and province; classify justified/correction-needed/insufficient-evidence individually.\n- Research actual source geographic role, source vintage, completeness, license, semantic tier suitability and traceable citations; ADM number alone cannot justify a tier.\n- Review fragmented city territories, province-sized locations, anonymous administrative remainders, disconnected territories, omitted islands, repeated tiers, oversized groups, weak parents and inconsistent neighboring units.\n- Cover every scoped area purpose, referencing other packet scopes where only part of an area is owned.\n- Give sourced correction recommendations and explicit unresolved gaps; create bounded correction/source-restoration followups. Never close source gaps by structure checks or unsupported exceptions.\n- Preserve approved outer scopes and coordinate shared parent/source predecessor edits. No geographic or record changes in initial review.\n- Two PR budget applies to this evidence packet; if new work exceeds it split bounded children. Completion of initial review does not certify the regional branch or enable imports.\n\nPreserve baseline sources, original inspections, existing factual claims, the macro envelope and other workers' artifacts. Do not change shared hierarchy, footprints, canonical grid, UI/schema, claims or live releases in this initial packet. Findings must link bounded follow-up correction/restoration issues to the parent, with exact affected units and source evidence; not every finding is a geography edit.\n\nRetained source metadata to independently verify (identical metadata grouped; exact source/entity IDs remain in the scope JSON):\n- 1 source/entity IDs, 1 scoped locations: roles=[]; vintage=['Undated modern reference']; license=['Underlying source licenses retained in semantic-report.json']; entry points=['https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/']\n- 1 source/entity IDs, 43 scoped locations: roles=['Arrondissements']; vintage=['2014']; license=['CC0 1.0 Universal (CC0 1.0) Public Domain Dedication']; entry points=['https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BEL/ADM3/geoBoundaries-BEL-ADM3.geojson']\n- 1 source/entity IDs, 165 scoped locations: roles=['Municipality']; vintage=['2022']; license=['CC0 1.0 Universal (CC0 1.0) Public Domain Dedication']; entry points=['https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/NLD/ADM2/geoBoundaries-NLD-ADM2.geojson']\n\nDerived atlas-unit IDs are not independent source collections. Reconstruct their original source membership/role from retained inputs and independently verify it. Province subset membership is recoverable from the exact location list and pinned index; duplicated location lists were omitted from province summaries.\n\nMachine-readable exact workload scope (JSON; it is an evidence workload partition, not an atlas geographic partition):\n\n```json\n{\"area_scopes\":[{\"full_area_location_count\":1,\"id\":\"framework:area:belgium:3a14f80912de\",\"name\":\"Belgium\",\"original_full_area_location_count\":1,\"owned_member_location_count\":1,\"partial\":false},{\"full_area_location_count\":1,\"id\":\"framework:area:capital-region:e013911a5366\",\"name\":\"Capital Region\",\"original_full_area_location_count\":1,\"owned_member_location_count\":1,\"partial\":false},{\"full_area_location_count\":22,\"id\":\"framework:area:flemish:9ca4b9592138\",\"name\":\"Flemish\",\"original_full_area_location_count\":22,\"owned_member_location_count\":22,\"partial\":false},{\"full_area_location_count\":344,\"id\":\"framework:area:netherlands:0d9e86ccdd80\",\"name\":\"Netherlands\",\"original_full_area_location_count\":344,\"owned_member_location_count\":165,\"partial\":true},{\"full_area_location_count\":20,\"id\":\"framework:area:walloon:e38b0ad77bd4\",\"name\":\"Walloon\",\"original_full_area_location_count\":20,\"owned_member_location_count\":20,\"partial\":false}],\"batch_id\":\"regional-review:d93f7c8e1d36ea6a\",\"frozen_region_geometry_sha256\":\"dbd0c7160720a3775b8a96a120f76f3531cf6dc581d31cb1b5fc3ef7c263fd9e\",\"frozen_region_member_ids_sha256\":\"e04d142bb16614c5a404767840f8367c0b00b6ad9533bdf48820f2c99bc5bad3\",\"location_count\":209,\"macro_certificate_sha256\":\"979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e\",\"member_location_ids\":[\"atlas:territory:LUX\",\"gb:BEL:ADM3:23234654B10463033383162\",\"gb:BEL:ADM3:23234654B12260002226229\",\"gb:BEL:ADM3:23234654B13690457715982\",\"gb:BEL:ADM3:23234654B15291559420264\",\"gb:BEL:ADM3:23234654B19544786269985\",\"gb:BEL:ADM3:23234654B20001979598197\",\"gb:BEL:ADM3:23234654B20808081281343\",\"gb:BEL:ADM3:23234654B21881384503915\",\"gb:BEL:ADM3:23234654B22154553555993\",\"gb:BEL:ADM3:23234654B25026512181333\",\"gb:BEL:ADM3:23234654B29365569927709\",\"gb:BEL:ADM3:23234654B31660526766970\",\"gb:BEL:ADM3:23234654B3310592508043\",\"gb:BEL:ADM3:23234654B34707996358448\",\"gb:BEL:ADM3:23234654B35036313832996\",\"gb:BEL:ADM3:23234654B38054417923601\",\"gb:BEL:ADM3:23234654B38874983321272\",\"gb:BEL:ADM3:23234654B39097167778277\",\"gb:BEL:ADM3:23234654B41920595041702\",\"gb:BEL:ADM3:23234654B4882362793170\",\"gb:BEL:ADM3:23234654B51539859984864\",\"gb:BEL:ADM3:23234654B51831382125896\",\"gb:BEL:ADM3:23234654B53305973894398\",\"gb:BEL:ADM3:23234654B56071823277526\",\"gb:BEL:ADM3:23234654B60276487110698\",\"gb:BEL:ADM3:23234654B61712777926279\",\"gb:BEL:ADM3:23234654B61943877061373\",\"gb:BEL:ADM3:23234654B63665278763641\",\"gb:BEL:ADM3:23234654B64818352892983\",\"gb:BEL:ADM3:23234654B64938461820336\",\"gb:BEL:ADM3:23234654B65913081887651\",\"gb:BEL:ADM3:23234654B66410336476289\",\"gb:BEL:ADM3:23234654B67357471589178\",\"gb:BEL:ADM3:23234654B70270542096209\",\"gb:BEL:ADM3:23234654B71081416500106\",\"gb:BEL:ADM3:23234654B74442524904222\",\"gb:BEL:ADM3:23234654B75140683241785\",\"gb:BEL:ADM3:23234654B75220532225459\",\"gb:BEL:ADM3:23234654B82283630276148\",\"gb:BEL:ADM3:23234654B82562824470258\",\"gb:BEL:ADM3:23234654B87817516337938\",\"gb:BEL:ADM3:23234654B90057103027988\",\"gb:BEL:ADM3:23234654B93424225751881\",\"gb:NLD:ADM2:6326949B10155979142139\",\"gb:NLD:ADM2:6326949B10391839507344\",\"gb:NLD:ADM2:6326949B10451218555657\",\"gb:NLD:ADM2:6326949B10569140780030\",\"gb:NLD:ADM2:6326949B11181264963907\",\"gb:NLD:ADM2:6326949B11720350341334\",\"gb:NLD:ADM2:6326949B12217524678561\",\"gb:NLD:ADM2:6326949B12363687207938\",\"gb:NLD:ADM2:6326949B1243164224126\",\"gb:NLD:ADM2:6326949B1246311998557\",\"gb:NLD:ADM2:6326949B12806125708238\",\"gb:NLD:ADM2:6326949B12862747379665\",\"gb:NLD:ADM2:6326949B14111890142812\",\"gb:NLD:ADM2:6326949B15428140131776\",\"gb:NLD:ADM2:6326949B15659642618503\",\"gb:NLD:ADM2:6326949B16072016096330\",\"gb:NLD:ADM2:6326949B1679798000878\",\"gb:NLD:ADM2:6326949B16829541191970\",\"gb:NLD:ADM2:6326949B17219588023251\",\"gb:NLD:ADM2:6326949B17750517520147\",\"gb:NLD:ADM2:6326949B19243153872397\",\"gb:NLD:ADM2:6326949B19414277691711\",\"gb:NLD:ADM2:6326949B20290330691137\",\"gb:NLD:ADM2:6326949B20459487982464\",\"gb:NLD:ADM2:6326949B22720644545948\",\"gb:NLD:ADM2:6326949B24591073914340\",\"gb:NLD:ADM2:6326949B24881260895403\",\"gb:NLD:ADM2:6326949B25601261343635\",\"gb:NLD:ADM2:6326949B25939661204192\",\"gb:NLD:ADM2:6326949B26201619362436\",\"gb:NLD:ADM2:6326949B27886960256598\",\"gb:NLD:ADM2:6326949B28559348449199\",\"gb:NLD:ADM2:6326949B28698094502949\",\"gb:NLD:ADM2:6326949B29161299179415\",\"gb:NLD:ADM2:6326949B29533481095238\",\"gb:NLD:ADM2:6326949B29665837615412\",\"gb:NLD:ADM2:6326949B29713994538031\",\"gb:NLD:ADM2:6326949B3037358920764\",\"gb:NLD:ADM2:6326949B30737301574950\",\"gb:NLD:ADM2:6326949B31079897562518\",\"gb:NLD:ADM2:6326949B31180787122352\",\"gb:NLD:ADM2:6326949B31690191590270\",\"gb:NLD:ADM2:6326949B31825522291609\",\"gb:NLD:ADM2:6326949B32251552675078\",\"gb:NLD:ADM2:6326949B33385594138749\",\"gb:NLD:ADM2:6326949B33496836807668\",\"gb:NLD:ADM2:6326949B33588539709853\",\"gb:NLD:ADM2:6326949B3369554265068\",\"gb:NLD:ADM2:6326949B3496624998105\",\"gb:NLD:ADM2:6326949B35085344325863\",\"gb:NLD:ADM2:6326949B35182149476625\",\"gb:NLD:ADM2:6326949B3608073145237\",\"gb:NLD:ADM2:6326949B36275678342581\",\"gb:NLD:ADM2:6326949B3670086386110\",\"gb:NLD:ADM2:6326949B37301636239269\",\"gb:NLD:ADM2:6326949B37702767177993\",\"gb:NLD:ADM2:6326949B38309574133073\",\"gb:NLD:ADM2:6326949B38517074221522\",\"gb:NLD:ADM2:6326949B38585086995539\",\"gb:NLD:ADM2:6326949B3936656159813\",\"gb:NLD:ADM2:6326949B39885659385056\",\"gb:NLD:ADM2:6326949B40585384070761\",\"gb:NLD:ADM2:6326949B40744758531983\",\"gb:NLD:ADM2:6326949B41369938524082\",\"gb:NLD:ADM2:6326949B4245688321620\",\"gb:NLD:ADM2:6326949B42613420061544\",\"gb:NLD:ADM2:6326949B42737315583657\",\"gb:NLD:ADM2:6326949B43570757330374\",\"gb:NLD:ADM2:6326949B43873207843171\",\"gb:NLD:ADM2:6326949B43926966977356\",\"gb:NLD:ADM2:6326949B44029658680347\",\"gb:NLD:ADM2:6326949B4576326162856\",\"gb:NLD:ADM2:6326949B45779726628378\",\"gb:NLD:ADM2:6326949B46441940402531\",\"gb:NLD:ADM2:6326949B48566307694504\",\"gb:NLD:ADM2:6326949B48835479136340\",\"gb:NLD:ADM2:6326949B49925038629159\",\"gb:NLD:ADM2:6326949B50163313594410\",\"gb:NLD:ADM2:6326949B50247401451622\",\"gb:NLD:ADM2:6326949B50303337761735\",\"gb:NLD:ADM2:6326949B50941675836803\",\"gb:NLD:ADM2:6326949B51640145634696\",\"gb:NLD:ADM2:6326949B5198989789548\",\"gb:NLD:ADM2:6326949B523319393128\",\"gb:NLD:ADM2:6326949B52425900686836\",\"gb:NLD:ADM2:6326949B52767007773218\",\"gb:NLD:ADM2:6326949B52811816416418\",\"gb:NLD:ADM2:6326949B52829064558657\",\"gb:NLD:ADM2:6326949B53858734726992\",\"gb:NLD:ADM2:6326949B54976538615964\",\"gb:NLD:ADM2:6326949B55320992871196\",\"gb:NLD:ADM2:6326949B56112339503679\",\"gb:NLD:ADM2:6326949B56936528103985\",\"gb:NLD:ADM2:6326949B57125519324160\",\"gb:NLD:ADM2:6326949B57624243850384\",\"gb:NLD:ADM2:6326949B57976108434899\",\"gb:NLD:ADM2:6326949B59687324731711\",\"gb:NLD:ADM2:6326949B60524061283729\",\"gb:NLD:ADM2:6326949B60940309425177\",\"gb:NLD:ADM2:6326949B61212698350093\",\"gb:NLD:ADM2:6326949B62746426981431\",\"gb:NLD:ADM2:6326949B66148717783622\",\"gb:NLD:ADM2:6326949B66152801340332\",\"gb:NLD:ADM2:6326949B66276661234302\",\"gb:NLD:ADM2:6326949B66554747402730\",\"gb:NLD:ADM2:6326949B67120856251926\",\"gb:NLD:ADM2:6326949B68142534510044\",\"gb:NLD:ADM2:6326949B68381004062168\",\"gb:NLD:ADM2:6326949B68429604867621\",\"gb:NLD:ADM2:6326949B69485420920073\",\"gb:NLD:ADM2:6326949B69762252447495\",\"gb:NLD:ADM2:6326949B69937984570912\",\"gb:NLD:ADM2:6326949B71510094074769\",\"gb:NLD:ADM2:6326949B71586177807215\",\"gb:NLD:ADM2:6326949B71801070478852\",\"gb:NLD:ADM2:6326949B71921166023383\",\"gb:NLD:ADM2:6326949B71985362418068\",\"gb:NLD:ADM2:6326949B72030349627304\",\"gb:NLD:ADM2:6326949B72042777534396\",\"gb:NLD:ADM2:6326949B72596125477073\",\"gb:NLD:ADM2:6326949B74577576920447\",\"gb:NLD:ADM2:6326949B74925869781753\",\"gb:NLD:ADM2:6326949B75136097066874\",\"gb:NLD:ADM2:6326949B75137291849873\",\"gb:NLD:ADM2:6326949B78332299759776\",\"gb:NLD:ADM2:6326949B78651691159408\",\"gb:NLD:ADM2:6326949B79033255924519\",\"gb:NLD:ADM2:6326949B79471926410122\",\"gb:NLD:ADM2:6326949B79705923764982\",\"gb:NLD:ADM2:6326949B80110375564043\",\"gb:NLD:ADM2:6326949B80665930632751\",\"gb:NLD:ADM2:6326949B80827814559487\",\"gb:NLD:ADM2:6326949B8148918487264\",\"gb:NLD:ADM2:6326949B8164801118031\",\"gb:NLD:ADM2:6326949B82028476449042\",\"gb:NLD:ADM2:6326949B83094148172558\",\"gb:NLD:ADM2:6326949B83173005742078\",\"gb:NLD:ADM2:6326949B83177775989799\",\"gb:NLD:ADM2:6326949B83457760015598\",\"gb:NLD:ADM2:6326949B86116845039505\",\"gb:NLD:ADM2:6326949B86462259358438\",\"gb:NLD:ADM2:6326949B86621762707137\",\"gb:NLD:ADM2:6326949B86973189891179\",\"gb:NLD:ADM2:6326949B87698355372902\",\"gb:NLD:ADM2:6326949B8869090595059\",\"gb:NLD:ADM2:6326949B89092473221427\",\"gb:NLD:ADM2:6326949B89511959643085\",\"gb:NLD:ADM2:6326949B89866166978709\",\"gb:NLD:ADM2:6326949B90025582046191\",\"gb:NLD:ADM2:6326949B90099876945918\",\"gb:NLD:ADM2:6326949B91205406123023\",\"gb:NLD:ADM2:6326949B91980754405751\",\"gb:NLD:ADM2:6326949B94220918271569\",\"gb:NLD:ADM2:6326949B94592387287284\",\"gb:NLD:ADM2:6326949B9558089239087\",\"gb:NLD:ADM2:6326949B95848699566336\",\"gb:NLD:ADM2:6326949B95896723363367\",\"gb:NLD:ADM2:6326949B96348311169789\",\"gb:NLD:ADM2:6326949B96692353293855\",\"gb:NLD:ADM2:6326949B97280521048387\",\"gb:NLD:ADM2:6326949B97819203783200\",\"gb:NLD:ADM2:6326949B98267604037576\",\"gb:NLD:ADM2:6326949B99100278363504\",\"gb:NLD:ADM2:6326949B99166140133178\",\"gb:NLD:ADM2:6326949B99945652837924\"],\"member_location_ids_sha256\":\"a67fdd3ddf3cc9645fc5e9e6beea6117e89d575ea5484b09aac2c7df2808c839\",\"original_scope_release\":{\"footprints_sha256\":\"5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8\",\"hierarchy_sha256\":\"4cd48d8704e3510a6cacef89838704e04f2a9ee886570852aa2ed940e175cafa\",\"id\":\"geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8\",\"version\":3},\"owned_evidence_path\":\"data/regional-review/regional-review-d93f7c8e1d36ea6a/\",\"policy_codes\":[\"BEL\",\"LUX\",\"NLD\"],\"province_scopes\":[{\"full_province_locations\":1,\"id\":\"framework:province:brussels:d9050d32db48\",\"name\":\"Brussels\",\"original_full_province_locations\":1,\"original_name\":\"Brussels\",\"original_parts\":1,\"part\":1,\"partial\":false,\"parts\":1},{\"full_province_locations\":8,\"id\":\"framework:province:west-vlaanderen:37f17f02f72f\",\"name\":\"West-Vlaanderen\",\"original_full_province_locations\":8,\"original_name\":\"West-Vlaanderen\",\"original_parts\":1,\"part\":1,\"partial\":false,\"parts\":1},{\"full_province_locations\":6,\"id\":\"framework:province:oost-vlaanderen:770f7b0b5fba\",\"name\":\"Oost-Vlaanderen\",\"original_full_province_locations\":6,\"original_name\":\"Oost-Vlaanderen\",\"original_parts\":1,\"part\":1,\"partial\":false,\"parts\":1},{\"full_province_locations\":2,\"id\":\"framework:province:vlaams-brabant:2161d79eb8f3\",\"name\":\"Vlaams-Brabant\",\"original_full_province_locations\":2,\"original_name\":\"Vlaams-Brabant\",\"original_parts\":1,\"part\":1,\"partial\":false,\"parts\":1},{\"full_province_locations\":3,\"id\":\"framework:province:antwerpen:5793358b8740\",\"name\":\"Antwerpen\",\"original_full_province_locations\":3,\"original_name\":\"Antwerpen\",\"original_parts\":1,\"part\":1,\"partial\":false,\"parts\":1},{\"full_province_locations\":3,\"id\":\"framework:province:limburg:ce68a125795b\",\"name\":\"Limburg\",\"original_full_province_locations\":3,\"original_name\":\"Limburg\",\"original_parts\":1,\"part\":1,\"partial\":false,\"parts\":1},{\"full_province_locations\":7,\"id\":\"framework:province:henegouwen:320253260da1\",\"name\":\"Henegouwen\",\"original_full_province_locations\":7,\"original_name\":\"Henegouwen\",\"original_parts\":1,\"part\":1,\"partial\":false,\"parts\":1},{\"full_province_locations\":1,\"id\":\"framework:province:waals-brabant:8c691cc2f68d\",\"name\":\"Waals-Brabant\",\"original_full_province_locations\":1,\"original_name\":\"Waals-Brabant\",\"original_parts\":1,\"part\":1,\"partial\":false,\"parts\":1},{\"full_province_locations\":3,\"id\":\"framework:province:namen:048fad0bf903\",\"name\":\"Namen\",\"original_full_province_locations\":3,\"original_name\":\"Namen\",\"original_parts\":1,\"part\":1,\"partial\":false,\"parts\":1},{\"full_province_locations\":4,\"id\":\"framework:province:luik:fbc344a584f9\",\"name\":\"Luik\",\"original_full_province_locations\":4,\"original_name\":\"Luik\",\"original_parts\":1,\"part\":1,\"partial\":false,\"parts\":1},{\"full_province_locations\":5,\"id\":\"framework:province:luxemburg:8081419d87cb\",\"name\":\"Luxemburg\",\"original_full_province_locations\":5,\"original_name\":\"Luxemburg\",\"original_parts\":1,\"part\":1,\"partial\":false,\"parts\":1},{\"full_province_locations\":1,\"id\":\"framework:province:luxembourg:18736e14a46e\",\"name\":\"Luxembourg\",\"original_full_province_locations\":1,\"original_name\":\"Luxembourg\",\"original_parts\":1,\"part\":1,\"partial\":false,\"parts\":1},{\"full_province_locations\":13,\"id\":\"framework:province:zeeland:6cb70a1dac04\",\"name\":\"Zeeland\",\"original_full_province_locations\":13,\"original_name\":\"Zeeland\",\"original_parts\":1,\"part\":1,\"partial\":false,\"parts\":1},{\"full_province_locations\":52,\"id\":\"framework:province:zuid-holland:4e145936d3d9\",\"name\":\"Zuid-Holland\",\"original_full_province_locations\":52,\"original_name\":\"Zuid-Holland\",\"original_parts\":1,\"part\":1,\"partial\":false,\"parts\":1},{\"full_province_locations\":44,\"id\":\"framework:province:noord-holland:48b4c7411526\",\"name\":\"Noord-Holland\",\"original_full_province_locations\":44,\"original_name\":\"Noord-Holland\",\"original_parts\":1,\"part\":1,\"partial\":false,\"parts\":1},{\"full_province_locations\":56,\"id\":\"framework:province:noord-brabant:86761ea929e6\",\"name\":\"Noord-Brabant\",\"original_full_province_locations\":56,\"original_name\":\"Noord-Brabant\",\"original_parts\":1,\"part\":1,\"partial\":false,\"parts\":1}],\"reference_owners\":[\"Belgium\",\"Luxembourg\",\"Netherlands\"],\"region_id\":\"framework:region:low-countries:ef8aac563ed4\",\"release\":{\"id\":\"geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e\",\"version\":5,\"hierarchy_sha256\":\"03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d\",\"footprints_sha256\":\"2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286\"},\"required_revalidation_location_ids\":[],\"review_only\":true,\"source_ids\":[\"atlas:territory:LUX\",\"gb:BEL:ADM3\",\"gb:NLD:ADM2\"]}\n```\n\n<!-- worldatlas-work:v1\n{\"max_prs\":2,\"depends_on\":[33,36],\"scope\":\"Review-only geographic evidence packet regional-review:d93f7c8e1d36ea6a for framework:region:low-countries:ef8aac563ed4: exactly 209 pinned member locations; owned scoped evidence only; stage sourced bounded correction children\",\"mode\":\"geography\",\"owned_paths\":[\"data/regional-review/regional-review-d93f7c8e1d36ea6a/\"]}\n-->\n\n\n<!-- worldatlas-queue-item:regional-batch:regional-review:d93f7c8e1d36ea6a -->\n\n\nRetained-ID changes in this exact packet require source/footprint/label revalidation: none. Existing semantic assessments remain open. New locations are owned by separate supplemental packets; combined parent acceptance belongs to the integration task.\n\n\n2026-10-03 (America/Los_Angeles): v5 queue scope refresh; original members/owned paths and all claims/comments remain unchanged. Region now has 388 locations. New supplemental dependencies: none. Regional interiors and historical location-attribute imports remain unapproved.\n",
+        "comments": 0,
+        "updated_at": "2026-10-03T07:10:52Z",
+        "assignees": [],
+        "labels": [
+          "kind:work-item",
+          "status:ready",
+          "type:geography"
+        ],
+        "latest_comment_page": 1,
+        "latest_comments": []
+      },
+      {
+        "number": 6,
+        "title": "[ENG-02] Install three validated hierarchy corrections",
+        "state": "open",
+        "body": "Install three validated hierarchy corrections\n\n## Scope and acceptance guidance\n\n- Install the prepared Monaco/Luxembourg grouping corrections and West Virginia duplicate-province correction through a coherent reviewed geographic release.\n- Update every dependent hierarchy/catalog/grid-parent lookup and manifest; preserve all original IDs, predecessor relationships, geometry and historical evidence. Revalidate dependent prepared evidence explicitly rather than silently repinning it.\n- Publish and verify matching map, inspector, parent boundaries, complete chains, migration accounting and before/after hashes.\n\n**Why:** the candidates are validated proposals, but the live atlas still uses the previous parent assignments. Partial installation would make its datasets disagree.\n\n**References:** [REFERENCE_HIERARCHY_CORRECTIONS.md](REFERENCE_HIERARCHY_CORRECTIONS.md), `data/reference-hierarchy-corrections/migration-receipt.json.gz`, `scripts/prepare-reference-hierarchy-corrections.py`.\n\n## Retained work record\n\nLegacy ID: ENG-02\nOriginal status: open\nFirst raised: unknown\nFirst durably recorded: 2026-10-02\nOriginal completion: —\nDate timezone: America/Los_Angeles. Unknown earlier dates remain unknown. GitHub creation/closure timestamps describe this migration, not the original work dates.\n\nEvidence / next action: `docs/REFERENCE_HIERARCHY_CORRECTIONS.md`; prepare coherent release and explicit evidence revalidation\n\nOriginal snapshot: [docs/archive/pre-github-issues-20261002/ENGINEERING_HANDOFF.md](https://github.com/ChengshuLi/WorldAtlas/blob/main/docs/archive/pre-github-issues-20261002/ENGINEERING_HANDOFF.md).\nGitHub Issues now holds current status, dated progress, blockers and completion evidence. Preserve this issue after completion.\n\nFocused PRs may incrementally address this issue. Use `Refs #N` for partial work and `Closes #N` only after its complete acceptance criteria are satisfied. For worldwide objectives, completing one campaign does not close the objective; link bounded child issues when useful.\n\n## Bounded queue readiness — 2026-10-02 (America/Los_Angeles)\n\nStill uninstalled. Active hierarchy labels remain France/Belgium; active WV provinces have 54 and 1 members. Do not close from macro publication counts alone.\n\nAcceptance for this bounded installation:\n- Fresh latest-release crosswalk explicitly verifies the three prepared corrections without rerunning baseline-dependent preparation against mismatched pins.\n- Every unchanged location geometry and canonical ownership part byte remains identical; archived parent and same-tier merge evidence are retained.\n- Matching served release, hierarchy, lookup, static/server pins, original claims and archives verified; branch semantic approval remains open.\n\nRegional tasks containing Monaco, Luxembourg and West Virginia must list #6 as shared-change dependency; #6 does not audit their full interiors. Designated publisher serializes live release with all other geography workers.\n\n<!-- worldatlas-work:v1\n{\"max_prs\":2,\"depends_on\":[],\"scope\":\"Rebase and install the exact prepared Monaco/Luxembourg label and West Virginia duplicate-province correction receipts on latest published geographic release; preserve geometry/IDs/original claims and source evidence; publish matching parent lookup and historical evidence revalidation.\",\"mode\":\"engineering\"}\n-->\n",
+        "comments": 82,
+        "updated_at": "2026-10-18T06:27:49Z",
+        "assignees": [],
+        "labels": [
+          "type:engineering",
+          "kind:work-item",
+          "status:blocked",
+          "publisher-needed"
+        ],
+        "latest_comment_page": 3,
+        "latest_comments": [
+          {
+            "id": 5987131798,
+            "body": "Cloudflare migration and release6 served acceptance complete, with precise residual archive access. Public website: https://worldatlas-explorer.chengshu-worldatlas.workers.dev/ . Deployed current runtime against published6; main advances since reviewed825 were source-only regional-review evidence. Actual public served/frontend/browser acceptance https://github.com/ChengshuLi/WorldAtlas/issues/822#issuecomment-5987131625. NativeNeon publication preservation/settlement5987056851/5987056979 unchanged. Monaco/Luxembourg/Hancock corrected labels/retained parent chains checked in actual rendered browser.\n\nAll available required/source and existing-media originals restored:558objects381274652bytes. Full GET proofs below; retain old Site/storage and all561 metadata rows. Three old README originals unavailable from authorized old Site access are NOT replaced with newer text and are NOT deleted. This is an archive availability residual, not lost data; #6 remains open/publisher-needed for exactoriginal access and complete prior primary-Site delivery/semantic claims. Do not close based on this boundedCloudflare receipt or fabricate delivery under the Site-only schema.\n\n```json\n{\n  \"restored_objects\": 558,\n  \"restored_bytes\": 381274652,\n  \"registered_media_rows\": 561,\n  \"required452_proof\": \"https://github.com/ChengshuLi/WorldAtlas/issues/6#issuecomment-5986986532\",\n  \"additional106_proof\": [\n    \"https://github.com/ChengshuLi/WorldAtlas/issues/6#issuecomment-5987131357\",\n    \"https://github.com/ChengshuLi/WorldAtlas/issues/6#issuecomment-5987131492\"\n  ],\n  \"missing_exact_originals\": [\n    {\n      \"name\": \"macro-improvements/loose-ends-v5/evidence/README.md\",\n      \"key\": \"media/701cf42128a55ea764d2e09169018b85ae2b8d50d78920175e67f8d8c528a888\",\n      \"bytes\": 2205,\n      \"sha256\": \"701cf42128a55ea764d2e09169018b85ae2b8d50d78920175e67f8d8c528a888\"\n    },\n    {\n      \"name\": \"macro-improvements/loose-ends-v5/derived/README.md\",\n      \"key\": \"media/9c92f2b995c3c6ebf3cdbcf111cc947eaaeddd705aff97cc59320f4c6e5636d0\",\n      \"bytes\": 4887,\n      \"sha256\": \"9c92f2b995c3c6ebf3cdbcf111cc947eaaeddd705aff97cc59320f4c6e5636d0\"\n    },\n    {\n      \"name\": \"macro-improvements/loose-ends-v5/publication/README.md\",\n      \"key\": \"media/e8af1149a4bdc7038b0f4432cb338efe761ad57445326b30e4eeb994be5989f2\",\n      \"bytes\": 1822,\n      \"sha256\": \"e8af1149a4bdc7038b0f4432cb338efe761ad57445326b30e4eeb994be5989f2\"\n    }\n  ],\n  \"old_site_and_storage_preserved\": true,\n  \"metadata_preserved\": true,\n  \"original_bytes_regenerated\": false,\n  \"database_information_deleted\": false\n}\n```",
+            "created_at": "2026-10-05T02:35:30Z",
+            "updated_at": "2026-10-05T02:35:30Z",
+            "html_url": "https://github.com/ChengshuLi/WorldAtlas/issues/6#issuecomment-5987131798"
+          },
+          {
+            "id": 5987342638,
+            "body": "Remaining migration TODOs now have explicit bounded engineering issues, preserving this original work and its completed publication/verification evidence:\n\n- #845 — complete old Site R2 inventory, recover the three exact old README originals and verify complete lossless object migration. Blocked on authorized original storage inventory/export access.\n- #846 — switch ongoing primary publication/delivery tracking to Cloudflare while retaining historical Site/Neon records, matched data/assets, serialization and public read-only behavior. Ready for reviewed implementation; not yet claimed or completed.\n- #847 — verify current recovery and safely retire obsolete old Site serving/publishing, after #845/#846. Old buckets/database/source/backup deletion is excluded.\n\nExisting public deployment #822 remains completed; current Cloudflare release6 works and its receipts are unchanged. Full old-bucket parity is not certified by the 558 verified copies. No production changes made while creating these tracking issues. Original #6 geographic acceptance and #51 recovery criteria remain independently tracked; these follow-ups do not silently close or replace them.\n",
+            "created_at": "2026-10-05T03:00:50Z",
+            "updated_at": "2026-10-05T03:00:50Z",
+            "html_url": "https://github.com/ChengshuLi/WorldAtlas/issues/6#issuecomment-5987342638"
+          },
+          {
+            "id": 6246559342,
+            "body": "Publisher reconciliation blocker — 2026-10-18 UTC\n\nThe records I reread conflict on the current release6 state. The #714 retirement reconciliation (comment 5984163533) records the earlier partial release6 stage as failed-settled, and publisher note 5984825536 says release5 remained served. The production deployments registry also contains later recovery deployment 6849839849 with a success status pointing to #6 comment 5987056979; #6 comment 5987056851 says release6 was published, and comment 5987131798 reports served release6 acceptance. These are historical claims/receipts; I have not independently reverified current serving or the full archive envelope in this run.\n\nThe current publisher handoff continues to treat release6 as not deployed and prohibits another finalization until the fresh storage envelope, archive-read authorization, complete 119-object retention/full-GET checks, source/media comparisons and rollback evidence are verified. I have started no live operation and made no storage or deployment changes. Please reconcile the later success receipt with the current failed-settled status before any future release6 operation; preserve all existing rows, objects and receipts.\n",
+            "created_at": "2026-10-18T06:27:48Z",
+            "updated_at": "2026-10-18T06:27:48Z",
+            "html_url": "https://github.com/ChengshuLi/WorldAtlas/issues/6#issuecomment-6246559342"
+          }
+        ],
+        "retained_comment_selection": "Three relevant latest release/archive/publisher reconciliation statements from the inspected last page; unrelated media-object inventories omitted from this packet. Exact issue comment URLs remain."
+      }
+    ],
+    "exact_package_search": {
+      "query": "repo:ChengshuLi/WorldAtlas \"gb-LUX-ADM1--repair-evaluation\"",
+      "total_count": 0,
+      "items": []
+    },
+    "engineering_lux_branches": [],
+    "root_exclusive_reservation": true
+  },
+  "owner_lineage_input": {
+    "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+    "blob": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa"
+  },
+  "owner_lineage": {
+    "id": "atlas:territory:LUX",
+    "index": 7122,
+    "bounds": [
+      135259.959795,
+      88704.79517683093,
+      135838.90971166664,
+      89534.16968472954
+    ],
+    "province_id": "framework:province:luxembourg:18736e14a46e",
+    "province_index": 2786,
+    "name": "Luxembourg",
+    "reference_owner": "Luxembourg",
+    "source_id": "atlas:territory:LUX",
+    "location_basis": "Compact source country/territory",
+    "source_atoms": [
+      "gb:LUX:ADM1:76397094B22879125121781",
+      "gb:LUX:ADM1:76397094B23155303849994",
+      "gb:LUX:ADM1:76397094B45773647818245",
+      "gb:LUX:ADM1:76397094B46061876108979",
+      "gb:LUX:ADM1:76397094B49543500261856",
+      "gb:LUX:ADM1:76397094B51041035930086",
+      "gb:LUX:ADM1:76397094B53618071923197",
+      "gb:LUX:ADM1:76397094B67457450323927",
+      "gb:LUX:ADM1:76397094B70222545473363",
+      "gb:LUX:ADM1:76397094B75044033408583",
+      "gb:LUX:ADM1:76397094B81286574502905",
+      "gb:LUX:ADM1:76397094B91879595380480"
+    ]
+  },
+  "author_scope_controls": {
+    "actual_rejected_cases": [
+      "missing interval",
+      "duplicate interval",
+      "substituted owner",
+      "reclassified land as water",
+      "omitted ownerless foreign contacts"
+    ],
+    "method": "Exact independently retained interval/vector/class equality and unique-key/selected-owner checks."
+  },
+  "limits": [
+    "Complete source JSON parsing materialized geometry fields; property joins did not inspect, compute or publish geometry.",
+    "624 original repair land cells remain separate from source-conflict and location-mapping packages; all three ownerless foreign contacts and three omitted primary catalogue features remain explicit.",
+    "Current zero ownership is not historical zero-credit proof. Root retains final named acceptance and unique-key accounting."
+  ]
+}

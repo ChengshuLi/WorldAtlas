@@ -1,5 +1,5 @@
 import {repairComponentKey} from '../src/native-grid.js';
-import {scientificNativeSelection} from '../src/reference-metadata.js';
+import {finalBankSelection,scientificNativeSelection} from '../src/reference-metadata.js';
 import {focusedIntegrationTest} from './run-integration-tests.mjs';
 
 // These delivery controls use their actual focused consumers. Unknown runtime
@@ -10,14 +10,14 @@ export const COORDINATION_PATHS = new Set([
   'scripts/prepare-delivery-handoff.mjs', 'scripts/delivery-handoff-advance.mjs',
   // The immutable comparison/checkpoint family has no application or builder
   // imports. Its complete focused consumers and candidate geography still run.
-  'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs', 'scripts/run-geographic-check.py',
+  'scripts/native-word-store.mjs','scripts/native-patch-store.mjs', 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs', 'scripts/run-geographic-check.py',
   'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs',
   'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs',
   'docs/WORKER_COORDINATION.md', 'docs/PREMERGE_EVIDENCE_REVIEW.md',
   'scripts/issue-claim-contract.mjs', 'scripts/run-issue-claim.mjs',
-  'scripts/worker-result.mjs', 'scripts/check-handoff-scope.mjs', 'scripts/check-linked-github-issue.mjs',
+  'scripts/worker-result.mjs', 'scripts/check-handoff-scope.mjs',
   'scripts/evidence-quality.mjs', 'scripts/evidence-policy.mjs', 'scripts/premerge-evidence.mjs',
-  'scripts/check-pr-evidence.mjs', 'scripts/merge-integration.mjs', 'scripts/integration-proof.mjs',
+  'scripts/merge-integration.mjs', 'scripts/integration-proof.mjs',
   'scripts/geographic-adjudication-api.mjs',
   'scripts/git-blob-transport.mjs', 'scripts/immutable-git-blobs.mjs',
   'scripts/integration-profile.mjs',
@@ -34,25 +34,20 @@ export const COORDINATION_PATHS = new Set([
   '.github/workflows/worker-merge.yml',
   '.github/evidence-policy.json'
 ]);
+const packet = name => /\.(?:md|txt|jsonl?(?:\.gz)?|log|stdout|stderr|csv|tsv)$/.test(name) &&
+  !/^(?:package(?:-lock)?\.json|npm-shrinkwrap\.json|(?:requirements|constraints)(?:[.-].*)?\.txt|pyproject\.toml|setup\.(?:py|cfg)|__init__\.py|(?:site|user)customize\.py|(?:js|ts)config(?:\.[^.]+)?\.json|import[-_.]?map\.json)$/i.test(name.split('/').at(-1));
+const sourcePacketPath = name => safePackagePath(name) && /^(?:research\/(?:campaigns|geography)|data\/regional-review)\/[^/]+\//.test(name);
+
 // Existing tests are checked as ordinary current files. Added controls run by
 // the same discovery rule; removed controls need no replacement full suite.
-// Callers supply the current linked issue's validated lane and declared scope.
-// Candidate metadata is never an ownership source.
-function engineeringOwnedScopes(reservation) {
-  if (reservation.mode !== 'engineering') return [];
-  try {
-    // Keep the issue's literal file/directory grants; a restored read role need
-    // not grant ownership of its whole original packet. Invalid scopes fail closed.
-    return validateEngineeringOwnedPaths(reservation.owned_paths)
-      .filter(owned => /^coordination\/engineering\/[^/]+\//.test(owned));
-  } catch { return []; }
-}
+// Routing follows actual changed files and consumed package roles, never a
+// branch name or an issue-owned path declaration.
 export function integrationProfile(branch, files, reservation = {}, authoredEntries) {
   const names = files.flatMap(file => [file.filename, ...(file.previous_filename ? [file.previous_filename] : [])]);
   if (!names.length) return 'full';
   // Validate each focused test before composing it with the existing route.
   const focused = files.filter(file => [file.filename, file.previous_filename].some(name => focusedIntegrationTest(name)));
-  if (focused.length && !(branch.startsWith('engineering/') && authoredEntries instanceof Map &&
+  if (focused.length && !(authoredEntries instanceof Map &&
       focused.every(file => focusedIntegrationTest(file.filename) && (file.status === 'removed'
         ? !authoredEntries.has(file.filename)
         : authoredEntries.get(file.filename)?.type === 'blob' &&
@@ -63,47 +58,50 @@ export function integrationProfile(branch, files, reservation = {}, authoredEntr
             return wrapper?.type === 'blob' && wrapper.mode === '100644' && /^[a-f0-9]{40}$/.test(wrapper.sha ?? '');
           })()))))) return 'full';
 
-  if (branch.startsWith('geography/') && Array.isArray(reservation.owned_paths) &&
-      names.every(name => reservation.owned_paths.some(prefix => name.startsWith(prefix)))) return 'evidence';
-  const job = branch.split('/').slice(1).join('/');
-  if (branch.startsWith('research/') && names.every(name => name.startsWith(`research/campaigns/${job}/`))) return 'evidence';
-  if (branch.startsWith('engineering/')) {
-    // Deleted controls outside the declared package need no application rebuild.
-    // Remaining focused consumers still execute and missing imports/calls fail.
-    // Declared runtime inputs and other unknown deletions retain full regression.
-    let currentPackage;
-    try { currentPackage = loadPackageInputs(); } catch { return 'full'; }
-    const removed = new Set(files.filter(file => file.status === 'removed' && !file.previous_filename &&
-      /^(?:scripts\/|test\/|\.github\/workflows\/)/.test(file.filename) &&
-      !packagePathRequired(file.filename, currentPackage)).map(file => file.filename));
-    const legacy = name => removed.has(name) || COORDINATION_PATHS.has(name) || focusedIntegrationTest(name) || (name.startsWith('docs/') && /\.(md|txt)$/.test(name)) ||
-      name.startsWith(`coordination/engineering/${job}/`) || name === `coordination/engineering/${job}.json`;
-    if (names.every(legacy)) return 'evidence';
-    // A verified retained scope permits new packets, not edits to its existing
-    // methods. Keep the original branch-matched policy above unchanged.
-    // Evidence-only packet routing keeps its existing directory-grant policy.
-    // Exact restored files are considered only by the full selected-data walk.
-    const scopes = engineeringOwnedScopes(reservation).filter(owned => owned.endsWith('/'));
-    if (!scopes.length) return 'full';
-    const definition = currentPackage;
-    const packet = name => /\.(?:md|txt|json|jsonl|jsonl\.gz|log|stdout|stderr|mjs|py|csv|tsv)$/.test(name) &&
-      !/^(?:package(?:-lock)?\.json|npm-shrinkwrap\.json|(?:requirements|constraints)(?:[.-].*)?\.txt|pyproject\.toml|setup\.(?:py|cfg)|__init__\.py|(?:site|user)customize\.py|(?:js|ts)config(?:\.[^.]+)?\.json|import[-_.]?map\.json)$/i.test(name.split('/').at(-1));
-    if (files.every(file => {
-      if ([file.filename, ...(file.previous_filename ? [file.previous_filename] : [])].every(legacy)) return true;
-      if (file.previous_filename || !safePackagePath(file.filename) || file.filename.split('/').some(part => part.startsWith('.')) ||
-          file.mode !== undefined && !['100644', '100755'].includes(file.mode) || packagePathRequired(file.filename, definition)) return false;
-      return scopes.some(prefix => containsPackagePath([prefix], file.filename) &&
-        (file.status === 'added' && packet(file.filename) || file.status === 'modified' && file.filename === prefix + 'evidence-quality.json'));
-    })) return 'evidence';
-  }
+  let definition;
+  try { definition = loadPackageInputs(); } catch { return 'full'; }
+  // Source packets are inert unless declared as actual package inputs. Their
+  // real scientific checks remain selected independently by geographyRequired.
+  if (names.every(name => sourcePacketPath(name) && !packagePathRequired(name, definition))) return 'evidence';
+  const removed = new Set(files.filter(file => file.status === 'removed' && !file.previous_filename &&
+    /^(?:scripts\/|test\/|\.github\/workflows\/)/.test(file.filename) &&
+    !packagePathRequired(file.filename, definition)).map(file => file.filename));
+  const control = name => removed.has(name) || COORDINATION_PATHS.has(name) || focusedIntegrationTest(name) ||
+    name.startsWith('docs/') && /\.(md|txt)$/.test(name);
+  if (files.every(file => {
+    if ([file.filename, ...(file.previous_filename ? [file.previous_filename] : [])].every(control)) return true;
+    if (file.previous_filename || !packetPath(file.filename) ||
+        file.mode !== undefined && !['100644', '100755'].includes(file.mode) ||
+        packagePathRequired(file.filename, definition)) return false;
+    return file.status === 'added' && packet(file.filename) ||
+      file.status === 'modified' && file.filename.endsWith('/evidence-quality.json');
+  })) return 'evidence';
   return 'full';
 }
 
-// Route executable checker/producer changes through actual candidate science.
+// The existing inert packet contract can derive the default consumer roster.
+// Mixed/changed code, selected roles and nonordinary trees retain normal routing.
+export function inertEvidenceAdditions(files, entries, definition) {
+  return entries instanceof Map && files.length > 0 && files.every(file =>
+    file.status === 'added' && !file.previous_filename &&
+    (packetPath(file.filename) || sourcePacketPath(file.filename)) && packet(file.filename) &&
+    !packagePathRequired(file.filename, definition) && ordinary(entries.get(file.filename)) &&
+    file.filename.split('/').slice(0,-1).every((_, index, parts) => {
+      const parent = entries.get(parts.slice(0,index+1).join('/'));
+      return parent?.type === 'tree' && parent.mode === '040000';
+    }));
+}
+
+// Exercise checker upgrades on unchanged data; proposed map edits use accepted code.
 // This is conservative path classification, not a programme/hash exemption.
 // Data-only full checks still use baseline code and authenticated adjudication.
-export function candidateGeographyCode(profile, files, testSelection) {
+export function candidateGeographyCode(profile, files, testSelection, acceptedEntries) {
   if (!['full','evidence'].includes(profile) || testSelection === 'selected-data') return false;
+  // A candidate cannot certify its own map edit, even when it also changes the
+  // checker. Ordinary source tests exercise that upgrade separately.
+  if (acceptedEntries?.has('data/canonical-grid/current-startup/index.json') &&
+    files.some(file => [file.filename,file.previous_filename].some(name =>
+      name === 'data/ownership-selection.json' || name?.startsWith('data/canonical-grid/current-startup/')))) return false;
   return files.some(file => [file.filename, file.previous_filename].filter(Boolean).some(name =>
     /^scripts\/.*\.(?:[cm]?js|[cm]?ts|py|wasm)$/.test(name) ||
     /^src\/(?:native-|effective-footprint\.|ownership-codec\.|regional-import-gate\.|reference-metadata\.)/.test(name) ||
@@ -119,8 +117,7 @@ import {createHash} from 'node:crypto';
 import {isDeepStrictEqual as same} from 'node:util';
 import {gunzipSync} from 'node:zlib';
 import {isUtf8} from 'node:buffer';
-import {validatePackageInputs, loadPackageInputs, packagePathRequired, safePackagePath, containsPackagePath, PACKAGE_INPUT_FILE} from './package-inputs.mjs';
-import {validateEngineeringOwnedPaths} from './check-handoff-scope.mjs';
+import {validatePackageInputs, admitSelectedPackageDeclarations, loadPackageInputs, packagePathRequired, safePackagePath, containsPackagePath, PACKAGE_INPUT_FILE, PREPARED_STARTUP_PREFIX, PREPARED_STARTUP_INDEX, preparedStartupPackageTransition} from './package-inputs.mjs';
 const SELECTION = 'data/ownership-selection.json';
 const CHECKPOINT_LOCATOR = 'data/selected-checkpoint.json';
 const ADMINISTRATIVE_REGISTRY = 'coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json';
@@ -130,7 +127,7 @@ const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
 const hash = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 const safe = value => typeof value === 'string' && /^[A-Za-z0-9_./-]+$/.test(value) &&
   value.split('/').every(part => part && part !== '.' && part !== '..' && !part.startsWith('.'));
-const ordinary = row => row?.type === 'blob' && row.mode === '100644' &&
+const ordinary = (row, mode = '100644') => row?.type === 'blob' && row.mode === mode &&
   /^[a-f0-9]{40}$/.test(row.sha ?? '') && Number.isSafeInteger(row.size) && row.size >= 0;
 const needSelected = (value, message) => { if (!value) throw Error('Selected-data: ' + message); };
 const keys = (value, names) => value && typeof value === 'object' && !Array.isArray(value) &&
@@ -197,28 +194,20 @@ export function validateSelectedExpectations(expected, ledger, ledgerHash, previ
   return expected;
 }
 
-const branchScope = branch => `coordination/engineering/${branch.slice('engineering/'.length)}/`;
-const inScope = (name, scopes) => containsPackagePath(scopes, name);
-function nativeOperandPath(name, branch, reservation) {
-  return /^(?:rows|runs)-[0-9]+\.bin\.gz$/.test(name.split('/').at(-1)) &&
-    (name === branchScope(branch) + 'native-operands/' + name.split('/').at(-1) ||
-      inScope(name, engineeringOwnedScopes(reservation)));
-}
-// Only the linked issue's validated scientific receipt can be updated metadata.
-// Existing independent evidence validation remains mandatory.
-function scientificManifest(branch, reservation) {
-  const name = reservation.evidence_manifest;
-  return reservation.mode === 'engineering' && safe(name) && name.endsWith('/evidence-quality.json') &&
-    inScope(name, [branchScope(branch), ...engineeringOwnedScopes(reservation)]) ? name : null;
-}
-// Fast prefilter avoids any extra tree/blob requests for ordinary code PRs.
+const packetPath = name => safe(name) && /^coordination\/engineering\/[^/]+\//.test(name);
+const nativeOperandPath = name => packetPath(name) && /^(?:rows|runs)-[0-9]+\.bin\.gz$/.test(name.split('/').at(-1));
+const scientificManifest = name => packetPath(name) && name.endsWith('/evidence-quality.json');
+// This is only a cheap candidate filter. The complete authenticated role walk
+// below decides applicability, including every added or changed supporting file.
 export function selectedDataCandidate(branch, files, reservation = {}) {
-  const scopes = [branchScope(branch), ...engineeringOwnedScopes(reservation)], manifest = scientificManifest(branch, reservation);
-  return branch.startsWith('engineering/') && files.length > 1 &&
+  return files.length > 1 &&
     files.some(file => file.filename === SELECTION && file.status === 'modified') &&
     files.every(file => !file.previous_filename && (file.filename === CHECKPOINT_LOCATOR
       ? ['added', 'modified'].includes(file.status) : [SELECTION, PACKAGE_INPUT_FILE, ADMINISTRATIVE_REGISTRY].includes(file.filename)
-      ? file.status === 'modified' : file.filename === manifest && file.status === 'modified' || file.status === 'added' && inScope(file.filename, scopes) && safe(file.filename)));
+      ? file.status === 'modified' : file.filename === PREPARED_STARTUP_INDEX ? file.status === 'modified'
+      : file.filename.startsWith(PREPARED_STARTUP_PREFIX) ? ['added','removed'].includes(file.status)
+      : file.status === 'modified' && scientificManifest(file.filename) ||
+        file.status === 'added' && packetPath(file.filename)));
 }
 export async function integrationTree(api, repo, commit) {
   const object = await api(`/repos/${repo}/git/commits/${commit}`);
@@ -245,7 +234,11 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     needSelected(ordinary(approved) && approved.size > 0 && approved.sha === candidate?.sha && candidate.mode === approved.mode,
       'generic smoke is not accepted unchanged on baseline');
     const added = new Set(files.filter(file => file.status === 'added').map(file => file.filename));
-    needSelected(files.every(file => ordinary(authored.entries.get(file.filename))) &&
+    // New executable originals may be supporting custody. Every consumed role
+    // remains 100644; the complete role walk below must prove custody unconsumed.
+    needSelected(files.every(({filename,status}) => status==='removed'&&filename.startsWith(PREPARED_STARTUP_PREFIX)
+      ? ordinary(baseline.entries.get(filename)) : ordinary(authored.entries.get(filename)) ||
+      added.has(filename) && ordinary(authored.entries.get(filename), '100755')) &&
       [...added].every(name => !baseline.entries.has(name)), 'nonordinary or overwritten data');
     const expectedPaths = [...added].filter(name => name.endsWith('/selected-delivery-expectations.json'));
     needSelected(expectedPaths.length > 0, 'one reviewed expectations file required');
@@ -282,20 +275,74 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       return JSON.parse(bytes);
     };
     const json = async (name, tree, retain = true) => parseJSON(await read(name, tree, retain));
-    let packageAdditions = [];
-    if (files.some(file => file.filename === PACKAGE_INPUT_FILE)) {
-      const {inputs: before, ...oldPolicy} = validatePackageInputs(await json(PACKAGE_INPUT_FILE, baseline));
-      const {inputs: after, ...policy} = validatePackageInputs(await json(PACKAGE_INPUT_FILE));
-      needSelected(same(oldPolicy, policy) && after.length >= before.length && same(before, after.slice(0, before.length)),
-        'package policy is not append-only');
-      packageAdditions = after.slice(before.length);
-    }
     const registryChanged = files.some(file => file.filename === ADMINISTRATIVE_REGISTRY);
     const oldSelection = await json(SELECTION, baseline), selection = await json(SELECTION);
+    let bank={changed:new Set()};
+    if(baseline.entries.has(PREPARED_STARTUP_INDEX)||authored.entries.has(PREPARED_STARTUP_INDEX)||files.some(file=>file.filename.startsWith(PREPARED_STARTUP_PREFIX))){
+      const source=(tree,selection)=>({selection,files:[...tree.entries].filter(([,row])=>row.type==='blob').map(([path,row])=>({path,mode:row.mode,oid:row.sha,bytes:row.size}))});
+      bank=preparedStartupPackageTransition(source(baseline,oldSelection),source(authored,selection),{
+        beforeIndex:await read(PREPARED_STARTUP_INDEX,baseline),afterIndex:await read(PREPARED_STARTUP_INDEX),
+        beforeSelection:await read(SELECTION,baseline),afterSelection:await read(SELECTION)});
+      needSelected(files.filter(file=>file.filename.startsWith(PREPARED_STARTUP_PREFIX)).every(file=>bank.changed.has(file.filename)), 'Unbound prepared-bank change');
+    }
+    let packageAdditions = [], packageDefinitions;
+    if (files.some(file => file.filename === PACKAGE_INPUT_FILE)) {
+      packageDefinitions = {before:validatePackageInputs(await json(PACKAGE_INPUT_FILE, baseline)),
+        after:validatePackageInputs(await json(PACKAGE_INPUT_FILE))};
+    }
+    if(oldSelection.version===2||selection.version===2){
+      // First adoption requires a fresh full capture. Later final banks use
+      // only current files and the newly proposed authority group, never the
+      // historical cumulative ledger or registry. Geography remains authority.
+      needSelected(oldSelection.version===2&&selection.version===2,'First final-profile adoption requires full capture');
+      finalBankSelection(oldSelection);finalBankSelection(selection);
+      needSelected(same(scientificNativeSelection(oldSelection),scientificNativeSelection(selection))
+        &&same(oldSelection.reference_projection,selection.reference_projection),'Final native/reference selection changed');
+      const reachable=new Set([SELECTION,PACKAGE_INPUT_FILE,...bank.changed]);
+      const pinned=async(value,jsonBody=false)=>{
+        needSelected(value&&safe(value.path)&&hash(value.sha256)&&Number.isSafeInteger(value.bytes)&&value.bytes>0,'Invalid final role');
+        const row=authored.entries.get(value.path);
+        needSelected(ordinary(row)&&row.size===value.bytes&&(value.mode===undefined||value.mode===row.mode)
+          &&(value.git_blob_oid===undefined||value.git_blob_oid===row.sha),'Final role tree differs');
+        reachable.add(value.path);
+        if(!jsonBody&&value.mode==='100644'&&value.git_blob_oid&&value.commit)return;
+        const raw=await read(value.path);needSelected(sha256(raw)===value.sha256,'Final role whole identity differs');
+        return jsonBody?parseJSON(raw):raw;
+      };
+      const full=value=>{needSelected(value?.mode==='100644'&&/^[a-f0-9]{40}$/.test(value.commit??'')
+        &&/^[a-f0-9]{40}$/.test(value.git_blob_oid??''),'Complete final evidence pin required');return value;};
+      if(selection.reference_projection){
+        const p=selection.reference_projection,a=baseline.entries.get(p.path),b=authored.entries.get(p.path);
+        needSelected(ordinary(a)&&a.sha===b?.sha&&a.size===b.size,'Final reference body changed');await pinned(p);
+      }
+      if(!same(oldSelection.change_evidence,selection.change_evidence)){
+        needSelected(selection.change_evidence,'New final evidence required');const registry=await pinned(selection.change_evidence,true),seen=new Set();
+        needSelected(registry.version===1&&registry.kind==='retained-rule-authority-registry-v1'&&Array.isArray(registry.entries)&&registry.entries.length>0,'New final registry required');
+        for(const entry of registry.entries){
+          needSelected(keys(entry,['authority_sha256','policy_id','policy_version','rule_preimage','rule_sha256','source_authority','completed_constructor'])
+            &&hash(entry.authority_sha256)&&!seen.has(entry.authority_sha256),'Final native authority shape/identity differs');seen.add(entry.authority_sha256);
+          const binding=await pinned(full(entry.source_authority),true),rule=await pinned(full(entry.rule_preimage),true);
+          needSelected(binding.version===1&&binding.kind==='source-target-native-custody-v1'
+            &&keys(binding,['version','kind','source_evidence','native_patch'])&&same(rule,{...binding,kind:'source-target-native-rule-v1'}),'Final native rule/binding differs');
+          await pinned(full(entry.completed_constructor));await pinned(full(binding.native_patch));await pinned(full(binding.source_evidence));
+        }
+      }
+      for(const name of expectedPaths){
+        const raw=await read(name),expected=parseJSON(raw);
+        if(expected.version!==2||expected.kind!=='selected-final-bank-consumer-v2'||!keys(expected,['version','kind','bank','reference'])
+          ||!same(expected.bank,selection.prepared_bank)||!same(expected.reference,selection.reference))continue;
+        needSelected(!expectationsBytes||expectationsBytes.equals(raw),'Multiple final expectations');expectationsBytes=raw;expectationsPath??=name;reachable.add(name);
+      }
+      needSelected(expectationsPath,'One exact final-bank expectations file required');
+      if(packageDefinitions){const declarations=admitSelectedPackageDeclarations(packageDefinitions.before,packageDefinitions.after,{currentPaths:[...reachable]});
+        needSelected(declarations.additions.every(name=>bank.changed.has(name)),'Final package declaration is not current bank data');}
+      needSelected(files.every(file=>reachable.has(file.filename)),'Unbound final-profile change');
+      return {test_selection:'selected-data',expectations_path:expectationsPath,shards:[0]};
+    }
     const {additive_release: oldHook, ...oldBase} = oldSelection, {additive_release: hook, ...newBase} = selection;
     needSelected(selection.version === 1 && selection.method === 'native-linear-evenodd-first-owner-v1' &&
       selection.artifact_consumption && same(oldBase, newBase) && !same(oldHook, hook), 'selection changes method/base authority');
-    const reachable = new Set(), nativeOperands = new Set(), identities = new Map();
+    const reachable = new Set(bank.changed), nativeOperands = new Set(), identities = new Map();
     const unchangedRole = name => {
       const before = baseline.entries.get(name), after = authored.entries.get(name);
       return ordinary(before) && ordinary(after) && before.sha === after.sha && before.size === after.size;
@@ -451,7 +498,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         needSelected(['rows','runs'].includes(descriptor.kind) && descriptor.encoding === 'byte-shuffle' &&
           Number.isSafeInteger(descriptor.offset) && descriptor.offset >= 0 && Number.isSafeInteger(descriptor.words) && descriptor.words > 0 &&
           descriptor.path === `native-v1/ownership/${descriptor.kind}-${descriptor.offset}.bin.gz` &&
-          nativeOperandPath(part.path, branch, reservation) && part.path.split('/').at(-1) === descriptor.path.split('/').at(-1) && input.mode === '100644' &&
+          nativeOperandPath(part.path) && part.path.split('/').at(-1) === descriptor.path.split('/').at(-1) && input.mode === '100644' &&
           same(part.manifest_descriptor, descriptor) && same(inverse?.manifest_descriptor, descriptor) &&
           inverse.logical_path === manifestRoot + descriptor.path && same(inverse.bank_member, member) &&
           ['bytes','sha256'].every(key => input[key] === descriptor[key] && member[key] === descriptor[key]) &&
@@ -582,6 +629,20 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       keys(sidecar, ['version','kind','base_selection','runtime_envelope','authority_registry','logical_asset_map']) &&
       same(sidecar.base_selection, scientificNativeSelection(selection)) && keys(sidecar.logical_asset_map, ['base_manifest','ledger','owner_roster','patch']),
       'unsupported selected sidecar');
+    if (packageDefinitions) {
+      const {before,after}=packageDefinitions;
+      const removes=before.inputs.some(name=>!after.inputs.includes(name));
+      const transition=admitSelectedPackageDeclarations(before,after,{selection:oldSelection,
+        priorSidecarRaw:removes ? await read(oldHook.path,baseline) : undefined,
+        priorEntry:name=>baseline.entries.get(name),
+        currentPaths:[hook.path,sidecar.runtime_envelope.path,sidecar.authority_registry.path,
+          ...Object.values(sidecar.logical_asset_map).map(pin=>pin.path)]});
+      needSelected(transition.removed.every(name=>{
+        const a=baseline.entries.get(name),b=authored.entries.get(name);
+        return ordinary(b)&&a.mode===b.mode&&a.sha===b.sha&&a.size===b.size;
+      }), 'retired cumulative custody changed');
+      packageAdditions=transition.additions;
+    }
     pin(sidecar.runtime_envelope);
     for (const value of Object.values(sidecar.logical_asset_map)) pin(value);
     const ledger = await pinnedJSON(sidecar.logical_asset_map.ledger);
@@ -639,7 +700,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       pin(entry.rule_preimage); pin(entry.source_authority);
       if (entry.completed_constructor !== undefined) pin(entry.completed_constructor);
       const retained = !added.has(entry.source_authority.path);
-      if (retained && ![...added].some(name => nativeOperandPath(name, branch, reservation) && !nativeOperands.has(name))) continue;
+      if (retained && ![...added].some(name => nativeOperandPath(name) && !nativeOperands.has(name))) continue;
       const authority = await pinnedJSON(entry.source_authority);
       let restoredRequest;
       if (retained) {
@@ -670,6 +731,12 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
           ||evidence.version===3&&evidence.kind==='source-target-native-evidence-v3')
           &&Array.isArray(evidence.families)&&evidence.families.length>0&&Array.isArray(evidence.targets)&&evidence.targets.length>0,
           'missing source-target evidence roles');
+        // Completed source-target authorities are consumed through the exact
+        // rule, binding, constructor, evidence and patch pins above. Historical
+        // source operands remain bound inside evidence, but are not current
+        // package inputs. Scientific qualification still runs in geography.
+        // Match packageProjection; unqualified authorities retain the full walk.
+        if (entry.completed_constructor !== undefined) continue;
         for (const role of ['catalogue','physical_evidence','physical_input','owner_roster','native_latitudes']) pin(evidence[role]);
         if(evidence.canonical_seam_views!==undefined){
           const views=await pinnedJSON(evidence.canonical_seam_views);
@@ -808,7 +875,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       const archive = locator.retained_artifact?.path;
       needSelected(files.some(file => file.filename === ACCEPTED_CHECKPOINT_LOCATOR) &&
         added.has(archive) &&
-        inScope(archive, [branchScope(branch), ...engineeringOwnedScopes(reservation)]), 'unbound checkpoint archive');
+        packetPath(archive), 'unbound checkpoint archive');
       const definition = validatePackageInputs(await json(PACKAGE_INPUT_FILE));
       needSelected([ACCEPTED_CHECKPOINT_LOCATOR, archive].every(name => !reachable.has(name) &&
         !sourceDeclarations.has(name) && !packagePathRequired(name, definition)), 'checkpoint custody is a consumed package role');
@@ -845,21 +912,19 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         'checkpoint does not supply selected baseline');
       transport.add(ACCEPTED_CHECKPOINT_LOCATOR); transport.add(archive);
     }
-    const updatedManifest = scientificManifest(branch, reservation);
-    const manifestChanged = updatedManifest && files.some(file => file.filename === updatedManifest && file.status === 'modified');
     // Unconsumed bytes are custody, not configuration or executable input. Do
     // not decode, parse, unpack or execute them according to their filename.
     // The complete fixed-role proof below excludes them from all current roles;
     // actual scientific validators continue to qualify any scientific claims.
     const supporting = new Set([...added].filter(name => !reachable.has(name) &&
       !transport.has(name) && name !== expectationsPath));
-    if (manifestChanged) {
-      needSelected(ordinary(baseline.entries.get(updatedManifest)), 'nonordinary scientific manifest');
-      supporting.add(updatedManifest);
+    for (const file of files.filter(file => file.status === 'modified' && scientificManifest(file.filename))) {
+      needSelected(ordinary(baseline.entries.get(file.filename)), 'nonordinary scientific manifest');
+      supporting.add(file.filename);
     }
-    for (const name of supporting) needSelected(!nativeOperandPath(name, branch, reservation), 'unbound native operand');
+    for (const name of supporting) needSelected(!nativeOperandPath(name), 'unbound native operand');
     if (supporting.size) {
-      // Issue ownership and a historical-looking filename establish no role.
+      // A historical-looking filename establishes no role.
       // Reuse the fixed base-reader walk for every newly admitted retained file,
       // including helper copies. None may become current code or package input.
       const definition = validatePackageInputs(await json(PACKAGE_INPUT_FILE));
@@ -936,7 +1001,8 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
           !Array.isArray(code.entry_critical_files), 'unknown base entry source routing');
         for (const values of Object.values(code.entry_critical_files)) for (const value of roles(values)) rolePin(value);
       }
-      if (manifestChanged) await json(updatedManifest, authored, false);
+      for (const file of files.filter(file => file.status === 'modified' && scientificManifest(file.filename)))
+        await json(file.filename, authored, false);
     }
     if (registryChanged) {
       const previous = registryEntries(await json(ADMINISTRATIVE_REGISTRY, baseline));
@@ -974,6 +1040,10 @@ export async function selectedDeliverySmoke(expectationsPath) {
     return JSON.parse(bytes);
   };
   const selection = JSON.parse(read('data/ownership-selection.json'));
+  if(selection.version===2){
+    const {runSelectedDeliverySmoke}=await import('./selected-delivery-smoke.mjs');
+    return runSelectedDeliverySmoke({root:process.cwd(),emittedDirectory:path.resolve('dist/client'),expectationsPath,outputPath:path.resolve('.cache/selected-delivery-smoke.json')});
+  }
   if (!selection.artifact_consumption || !selection.additive_release) throw Error('Missing actual selected artifact');
   const sidecar = pinned(selection.additive_release), ledgerPin = sidecar.logical_asset_map?.ledger;
   validateSelectedExpectations(JSON.parse(read(expectationsPath)), pinned(ledgerPin), ledgerPin.sha256);

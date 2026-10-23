@@ -1,0 +1,30 @@
+{
+  "original_cells": 1811,
+  "supported_cells": 1681,
+  "held_cells": 130,
+  "exact_owner_key_disjoint_union": true,
+  "original_owners": 24,
+  "supported_owners": 21,
+  "held_owners": 12,
+  "held_reasons": {
+    "territorial_exclusion_cells": 130
+  },
+  "files": {
+    "source-stage-001/original-native-patch.json": {
+      "bytes": 26524,
+      "sha256": "5e6bc1b2304cec35e19148b88c08b7f9fff085f72b679e2843e3b4b1d4e8b2a1"
+    },
+    "supported-inputs-001/native-patch.json": {
+      "bytes": 24951,
+      "sha256": "0a6d1b971f21aba7c96577245f1bbba2ebc1c2aab0a7fdba6a3e4883c17b9bcc"
+    },
+    "supported-inputs-001/held-original.json": {
+      "bytes": 3880,
+      "sha256": "c79f8d1daad4173fd148116bafcbb7c04ea0c4211f5df374ba3a107ee480821b"
+    },
+    "native-authority-001/constructor-result.json": {
+      "bytes": 71769,
+      "sha256": "f8f3bc822a130b4c533ddcc5ffaa96c95d803f2d28f02a630ecd8009e660c0fc"
+    }
+  }
+}

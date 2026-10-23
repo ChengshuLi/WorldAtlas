@@ -1,0 +1,9 @@
+# Nine researched source conflicts in the original Russia package
+
+This packet proposes researched-unresolved outcomes for exactly eight MNG contacts and one Sumy contact (x155649/y86176). All nine are original mapped-land cells. Every native hold and selected assignment remains unchanged; the full original 2,566,967-cell denominator stays intact. This is not a package completion or root acceptance.
+
+For MNG, actual primary research examined the original source properties, retained physical context, Mongolian approval and ratification acts, the official export/annex route, and the published LSIB service. WFS remains stopped as disabled. The independently advertised public WMS returned an identified bilateral line, now preserved with its real query and comparison. It supplies proximity and participant attributes but does not resolve the original source-contact conflict. The specific inspection-approved map/coordinate records remain unavailable in the official routes examined.
+
+For Sumy, actual treaty text and map inspection, corrected conditional zone-6 registration, and route tracing provide adverse source evidence: the one key lies on the sheet's Ukraine-labeled side under the stated assumptions. Datum, frame and map limits remain explicit; no current sovereignty is inferred. The four other non-robust Sumy placements are outside this proposal.
+
+The compressed disposition preserves exact original tuples and source pins. The research bundle preserves actual source/response records, corrections and scripts with hashes. The independent assessments are by the existing pan_review worker; exact public-head review is separate. No completed observer or producer was repeated. Root-accepted KAZ2 is excluded, and the other 16 KAZ plus 60 UKR contacts remain pending outside this packet.

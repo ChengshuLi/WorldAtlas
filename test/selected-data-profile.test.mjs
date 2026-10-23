@@ -1,17 +1,33 @@
 import {readFileSync} from 'node:fs';
 import {gzipSync, crc32} from 'node:zlib';
-import {CHECKPOINT_MEMBERS} from '../scripts/geographic-report-artifact.mjs';
+import {CHECKPOINT_MEMBERS, loadGeographicReport, preparedQueueSource} from '../scripts/geographic-report-artifact.mjs';
 import {renderWorkerResult} from '../scripts/worker-result.mjs';
 import {isDeepStrictEqual as same} from "node:util";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
+import {selectedHistory} from './fixtures/selected-data-history.mjs';
 import {createHash} from 'node:crypto';
 import {checkPremergeEvidence} from '../scripts/premerge-evidence.mjs';
 import {prepareIntegration, completeIntegration} from '../scripts/merge-integration.mjs';
 import {integrationProfile, selectedDataSelection, selectedDataCandidate, candidateGeographyCode, validateSelectedExpectations, SELECTED_SMOKE} from '../scripts/integration-profile.mjs';
 const prefix = 'coordination/engineering/fixture-delivery/';
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
+// These routing specimens predate generated SQLite moving into .cache. Keep
+// their captured bytes immutable. Derived routing fixtures change only that
+// output declaration, re-pin both in-memory trees, and never claim the derived
+// tree identities are the original public commits.
+function currentOutputPolicy(value) {
+  assert(value.generated_outputs.includes('data/atlas.sqlite'));
+  return {...value,generated_outputs:value.generated_outputs.map(name=>name==='data/atlas.sqlite'?'.cache/package-atlas.sqlite':name)};
+}
+function deriveCurrentOutputPolicy({baseline,authored,read,put}) {
+  const name='.github/package-inputs.json',old=currentOutputPolicy(JSON.parse(read(baseline.entries.get(name).sha))),
+    next=currentOutputPolicy(JSON.parse(read(authored.entries.get(name).sha)));
+  put(name,old,true);put(name,next);
+  for(const [state,policy]of [[baseline,old],[authored,next]])if(state.object)
+    state.object={sha:createHash('sha1').update('synthetic-current-output-policy\0'+state.object.sha+JSON.stringify(policy)).digest('hex')};
+}
 // Real ordinary ZIP records exercise the existing authenticated fixed-member
 // parser. These small products establish only structural profile eligibility.
 function checkpointZip(members) {
@@ -167,7 +183,7 @@ for(const [name,mutate] of Object.entries({
   'package reordering':f=>{f.definition.inputs.reverse();f.put('.github/package-inputs.json',f.definition);},
   'package policy rewrite':f=>{f.definition.verification_paths.push('src/');f.put('.github/package-inputs.json',f.definition);},
   'directory package append':f=>{f.definition.inputs.push(prefix+'extra/');f.put('.github/package-inputs.json',f.definition);},
-  'foreign data':f=>f.put('coordination/engineering/other/result.json',{}),
+  'foreign data':f=>f.put('data/foreign-result.json',{}),
   'malformed required expectations':f=>f.put(prefix+'selected-delivery-expectations.json','console.log("not data")'),
   'symlink role':f=>f.authored.entries.get(prefix+'patch.json').mode='120000',
   'executable role':f=>f.authored.entries.get(prefix+'patch.json').mode='100755',
@@ -220,15 +236,17 @@ function gateFixture(f=fixture()) {
   };
   return f;
 }
-test('actual queue classification validates current issue authority without author jobs',async()=>{
+test('actual queue classification needs no ordinary issue authority',async()=>{
   const f=gateFixture();
   assert.equal((await f.select()).test_selection,'selected-data');
   f.claim.active=false;assert.equal((await f.select()).test_selection,'selected-data');
-  f.issue.state='closed';await assert.rejects(f.select());
+  f.issue.state='closed';f.issue.labels=[];f.issue.body='';f.pr.body='';
+  assert.equal((await f.select()).test_selection,'selected-data');
 });
 test('actual selector retains all three shards when accepted smoke or complete expectations are unavailable',async()=>{
-  for(const mutate of [f=>f.baseline.entries.delete(SELECTED_SMOKE),f=>f.blobs.delete(f.authored.entries.get(prefix+'selected-delivery-expectations.json').sha)]){
-    const f=gateFixture();mutate(f);assert.deepEqual(await f.select(),{profile:'full',shards:[0,1,2],geography_software:false});
+  for(const [mutate,software] of [[f=>f.baseline.entries.delete(SELECTED_SMOKE),true],
+    [f=>f.blobs.delete(f.authored.entries.get(prefix+'selected-delivery-expectations.json').sha),false]]){
+    const f=gateFixture();mutate(f);assert.deepEqual(await f.select(),{profile:'full',shards:[0,1,2],geography_software:software});
   }
 });
 
@@ -309,7 +327,8 @@ test('final checker choice skips selected-data classification when no candidate 
   assert.equal(result.geography.trusted_code_commit, f.base);
   assert.deepEqual(diagnostics, {}, 'eligible classifier was never entered');
   assert.equal(f.reads.length, 0, 'no classifier metadata or supporting bodies were read');
-  assert(!f.mergeReads.includes('/repos/owner/repo/git/commits/' + f.base), 'no classifier-only baseline tree');
+  assert.equal(f.mergeReads.filter(route=>route==='/repos/owner/repo/git/commits/'+f.base).length,1, 'one baseline tree for actual execution routing');
+  assert.equal(f.mergeReads.filter(route=>route==='/repos/owner/repo/git/trees/base-tree?recursive=1').length,1);
   assert.equal(f.writes.length, 1);
 });
 
@@ -332,7 +351,7 @@ function retainedUKRFixture() {
   const blobs=new Map(), parsed=new Map(), pins=new Map();
   const readOriginal=name=>{
     if(parsed.has(name))return parsed.get(name);
-    const bytes=execFileSync('git',['show','HEAD:'+name],{maxBuffer:4*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
+    const bytes=selectedHistory().readFile(name);
     const oid=createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');blobs.set(oid,bytes);
     pins.set(name,{path:name,bytes:bytes.length,sha256:digest(bytes),git_blob_oid:oid,mode:'100644'});
     const value=JSON.parse(bytes);parsed.set(name,value);return value;
@@ -349,10 +368,10 @@ function retainedUKRFixture() {
     for(const child of Object.values(value))collect(child);
   };
   for(const value of [sidecar,ledger,registry,certificate])collect(value);
-  const names=[...pins.keys()],rows=execFileSync('git',['ls-tree','HEAD','--',...names],{encoding:'utf8',maxBuffer:1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}}).trim().split('\n');
   const baseline={entries:new Map()},authored={entries:new Map()};
-  for(const line of rows){const m=/^(\d+) (\w+) ([a-f0-9]+)\t(.+)$/.exec(line);assert(m,line);const pin=pins.get(m[4]);
-    assert.equal(m[1],pin.mode);assert.equal(m[3],pin.git_blob_oid);baseline.entries.set(m[4],{path:m[4],type:m[2],mode:m[1],sha:m[3],size:pin.bytes});}
+  for(const [name,pin] of pins) {const row=selectedHistory().entry(name);assert(row,name);
+    assert.equal(row.mode,pin.mode);assert.equal(row.sha,pin.git_blob_oid);assert.equal(row.size,pin.bytes);
+    baseline.entries.set(name,row);}
   for(const [name,row] of baseline.entries)authored.entries.set(name,{...row});
   const put=(name,value,old=false)=>{const bytes=Buffer.from(typeof value==='string'?value:JSON.stringify(value)),sha=createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
     blobs.set(sha,bytes);const row={path:name,mode:'100644',type:'blob',sha,size:bytes.length};authored.entries.set(name,row);if(old)baseline.entries.set(name,row);
@@ -360,7 +379,7 @@ function retainedUKRFixture() {
   put(SELECTED_SMOKE,'// fixture: generic helper accepted unchanged on future baseline',true);
   const oldHook=pins.get(stem+'selected-release-001/selection-sidecar.json');
   put('data/ownership-selection.json',{...sidecar.base_selection,additive_release:{path:oldHook.path,bytes:oldHook.bytes,sha256:oldHook.sha256}},true);
-  const definition=readOriginal('.github/package-inputs.json');put('.github/package-inputs.json',definition,true);
+  const definition=currentOutputPolicy(readOriginal('.github/package-inputs.json'));put('.github/package-inputs.json',definition,true);
   const hook=put(prefix+'selection-sidecar.json',sidecar);put('data/ownership-selection.json',{...sidecar.base_selection,additive_release:hook});
   const active=ledger.rows.filter(row=>['assigned','zero-cell'].includes(row.disposition));
   assert.equal(active.length,36);const expected={version:1,selected_ledger_sha256:sidecar.logical_asset_map.ledger.sha256,cumulative_native_cells:353,
@@ -370,7 +389,7 @@ function retainedUKRFixture() {
   const api=async route=>{const oid=route.split('/').at(-1),bytes=blobs.get(oid);assert(bytes,'unexpected opaque read '+route);return {sha:oid,size:bytes.length,encoding:'base64',content:bytes.toString('base64')};};
   return {ledger,expected,sidecar,run:()=>selectedDataSelection({api,repo:'owner/repo',branch:'engineering/fixture-delivery',files,baseline,authored})};
 }
-test('actual retained44-row UKR graph admits36 active rows while preserving6 held and2 rejected rows',async()=>{
+test('retained44-row UKR graph under current output policy admits36 active rows while preserving6 held and2 rejected rows',async()=>{
   const f=retainedUKRFixture();assert.ok(await f.run());
   assert.doesNotThrow(()=>validateSelectedExpectations(f.expected,f.ledger,f.sidecar.logical_asset_map.ledger.sha256,f.ledger));
   for(const disposition of ['awaiting-evidence','rejected']){
@@ -392,7 +411,7 @@ function actualSourceSpecimen() {
   if (sourceSpecimen) return sourceSpecimen;
   const bodies = new Map(), documents = new Map(), paths = new Set();
   const raw = name => {
-    const bytes = execFileSync('git', ['show', 'HEAD:' + name], {maxBuffer:32*1024*1024, env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
+    const bytes = selectedHistory().readFile(name);
     bodies.set(createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex'), bytes);return bytes;
   };
   const json = name => {const value=JSON.parse(raw(name));documents.set(name,value);paths.add(name);return value;};
@@ -418,12 +437,8 @@ function actualSourceSpecimen() {
     native.inputs.filter(row=>sourceRoles.includes(row.path)),
     [...handoff.consumed_inputs,...(handoff.reused_whole_product_inputs??[])].filter(row=>
       /\/(?:components|sources)-\d{3}\.jsonl\.gz$/.test(row.path))])collect(value);
-  const output=execFileSync('git',['ls-tree','-l','HEAD','--',...paths],{encoding:'utf8',maxBuffer:4*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
   const entries=new Map();
-  for(const line of output.trim().split('\n')) {
-    const match=/^(\d+) (\w+) ([a-f0-9]+)\s+(\d+)\t(.+)$/.exec(line);
-    if(match)entries.set(match[5],{path:match[5],mode:match[1],type:match[2],sha:match[3],size:Number(match[4])});
-  }
+  for(const name of paths) {const row=selectedHistory().entry(name);if(row)entries.set(name,row);}
   // The two whole restored bodies are encoded data, never decoded or executed.
   const physical=handoff.consumed_inputs.filter(row=>/\/(?:components|sources)-\d{3}\.jsonl\.gz$/.test(row.path));
   assert.equal(physical.length,2);for(const row of physical)raw(row.path);
@@ -591,22 +606,19 @@ test('registry changes preserve every original entry and cannot remove or rewrit
 });
 
 
-// Only mutable global metadata is snapshotted. Original delivery vintages stay
-// in their retained repository paths and are checked against actual Git bodies.
+// Mutable global metadata and immutable original roles are explicit fixtures.
+// The policy reader still authenticates every body it consumes against its role.
 const fixedRows=new Map(),fixedBlobs=new Map();
 function fixedDeliveryFixture({leanPackage=false,fixtureName='selected-native-role-ci-1726.json'}={}) {
   const fixed=JSON.parse(readFileSync(new URL('./fixtures/'+fixtureName,import.meta.url))),
     files=structuredClone(fixed.files),added=new Set(files.filter(row=>row.status==='added').map(row=>row.filename)),
     blobs=new Map(fixedBlobs),reads=[],root='/repos/owner/repo';
-  const git=(...args)=>execFileSync('git',args,{maxBuffer:32*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
   const oid=bytes=>createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
   for(const snap of fixed.snapshots){const raw=Buffer.from(snap.body);assert.equal(raw.length,snap.bytes);assert.equal(digest(raw),snap.sha256);assert.equal(oid(raw),snap.git_blob_oid);blobs.set(snap.git_blob_oid,raw);}
   const rows=fixedRows;
   const repositoryRow=name=>{
     if(rows.has(name))return rows.get(name);
-    const raw=git('ls-tree','HEAD','--',name).toString('utf8').trim(),match=/^(\d+) (\w+) ([a-f0-9]+)\t(.+)$/.exec(raw);
-    if(!match)return undefined;
-    const row={path:match[4],mode:match[1],type:match[2],sha:match[3],size:fixed.retained_tree_rows?.find(row=>row.path===name&&row.sha===match[3])?.size??Number(git('cat-file','-s',match[3]).toString())};rows.set(name,row);return row;
+    const row=selectedHistory().entry(name);if(row)rows.set(name,row);return row;
   };
   class RoleTree extends Map {
     constructor(commit){super();this.commit=commit;}
@@ -622,18 +634,19 @@ function fixedDeliveryFixture({leanPackage=false,fixtureName='selected-native-ro
   const baseline={object:{sha:fixed.base},entries:new RoleTree(fixed.base)},authored={object:{sha:fixed.head},entries:new RoleTree(fixed.head)};
   for(const row of files){baseline.entries.get(row.filename);authored.entries.get(row.filename);}
   const api=async route=>{
-    if(route.includes('/git/blobs/')){const sha=route.split('/').at(-1);if(!blobs.has(sha)){const raw=git('cat-file','blob',sha);blobs.set(sha,raw);fixedBlobs.set(sha,raw);}const bytes=blobs.get(sha);reads.push(sha);return {sha,size:bytes.length,encoding:'base64',content:bytes.toString('base64')};}
+    if(route.includes('/git/blobs/')){const sha=route.split('/').at(-1);if(!blobs.has(sha)){const raw=selectedHistory().readBlob(sha);blobs.set(sha,raw);fixedBlobs.set(sha,raw);}const bytes=blobs.get(sha);reads.push(sha);return {sha,size:bytes.length,encoding:'base64',content:bytes.toString('base64')};}
     if(route.startsWith(root+'/compare/'))return {status:'ahead'};
     if(route.startsWith(root+'/git/commits/')){const sha=route.split('/').at(-1);const source=fixed.accepted_sources.find(row=>row.commit===sha);assert(source,route);return {sha,tree:{sha:source.tree}};}
     if(route.startsWith(root+'/git/trees/')){const sha=route.split('/').at(-1).split('?')[0],source=fixed.accepted_sources.find(row=>row.tree===sha);assert(source,route);return {truncated:false,tree:[source.entry]};}
     throw Error('Unexpected fixed delivery API route '+route);
   };
   const put=(name,value,old=false)=>{const bytes=Buffer.from(typeof value==='string'?value:JSON.stringify(value)),sha=oid(bytes);blobs.set(sha,bytes);const row={path:name,mode:'100644',type:'blob',sha,size:bytes.length};authored.entries.set(name,row);if(old)baseline.entries.set(name,row);return {path:name,mode:'100644',git_blob_oid:sha,bytes:bytes.length,sha256:digest(bytes),commit:'a'.repeat(40)};};
+  deriveCurrentOutputPolicy({baseline,authored,put,read:sha=>blobs.get(sha)??selectedHistory().readBlob(sha)});
   if(leanPackage){
     const policy=JSON.parse(blobs.get(baseline.entries.get('.github/package-inputs.json').sha));
     put('.github/package-inputs.json',{...policy,inputs:[...policy.inputs,...fixed.prospective_lean_package.inputs]});
   }
-  const document=name=>{const row=authored.entries.get(name);if(!blobs.has(row.sha)){const raw=git('cat-file','blob',row.sha);blobs.set(row.sha,raw);fixedBlobs.set(row.sha,raw);}return JSON.parse(blobs.get(row.sha));};
+  const document=name=>{const row=authored.entries.get(name);if(!blobs.has(row.sha)){const raw=selectedHistory().readBlob(row.sha);blobs.set(row.sha,raw);fixedBlobs.set(row.sha,raw);}return JSON.parse(blobs.get(row.sha));};
   const f={fixed,files,branch:fixed.branch,baseline,authored,blobs,reads,api,put,document,sourceState:{}};
   f.run=(options={})=>selectedDataSelection({api:f.api,repo:'owner/repo',branch:f.branch,files:f.files,baseline,authored,...options});return f;
 }
@@ -651,10 +664,9 @@ test('new unconsumed supporting text is independent of document title',async()=>
   f.definition.inputs.push(prefix+'README.md');f.put('.github/package-inputs.json',f.definition);
   assert.equal(await f.run(),null,'a packaged README is not inert supporting text');
 });
-for(const [label,change] of Object.entries({
-  'executable README':f=>{f.put(prefix+'README.md','text');f.authored.entries.get(prefix+'README.md').mode='100755';},
-  'symlink README':f=>{f.put(prefix+'README.md','text');f.authored.entries.get(prefix+'README.md').mode='120000';},
-}))test('packet documentation falls back for '+label,async()=>assert.equal(await fixture({mutate:change}).run(),null));
+test('packet documentation falls back for a symlink',async()=>assert.equal(await fixture({mutate:f=>{
+  f.put(prefix+'README.md','text');f.authored.entries.get(prefix+'README.md').mode='120000';
+}}).run(),null));
 
 
 test('supporting Markdown remains new, ordinary, in scope and outside actual consumer roles',async()=>{
@@ -662,11 +674,10 @@ test('supporting Markdown remains new, ordinary, in scope and outside actual con
     assert.equal((await fixture({mutate:f=>f.put(prefix+name,'support only\n')}).run()).test_selection,'selected-data');
   }
   for(const mutate of [
-    f=>f.put('coordination/engineering/foreign/review.md','outside declared scope'),
+    f=>f.put('data/foreign/review.md','outside packet namespaces'),
     f=>{f.put(prefix+'review.md','old',true);f.put(prefix+'review.md','modified');},
     f=>{const row=f.put(prefix+'template.md',f.sidecarBody);f.put('data/ownership-selection.json',
       {...f.base,additive_release:{path:row.path,bytes:row.bytes,sha256:row.sha256}});},
-    f=>{f.put(prefix+'review.md','text');f.authored.entries.get(prefix+'review.md').mode='100755';},
     f=>{f.put(prefix+'review.md','text');f.authored.entries.get(prefix+'review.md').mode='120000';},
   ]) assert.equal(await fixture({mutate}).run(),null);
   const renamed=fixture({mutate:f=>f.put(prefix+'review.md','text')});
@@ -853,31 +864,15 @@ test('exact-file issue ownership reaches selected preparation and final gates wi
   assert.equal((await final.complete()).accepted,true);
   assert.equal(final.writes.length,1);
 });
-test('exact-file issue ownership excludes prefix lookalikes, children and sibling files',async()=>{
-  for(const suffix of ['.extra.json','/child.json']) {
-    const f=exactOwnedFixture(), name=f.packetPrefix+'registry.json'+suffix;
-    f.put(name,{});f.files.push({filename:name,status:'added'});
-    assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),false);
-    assert.equal(await f.run(),null);
-    assert.equal(integrationProfile(f.branch,[{filename:name,status:'added'}],f.reservation),'full');
+test('added packet scope follows authenticated roles rather than branch or issue grants',async()=>{
+  for(const branch of ['feature/Map.Errors','ordinary-branch','research/unrelated']) {
+    const f=exactOwnedFixture();f.branch=branch;
+    assert.equal((await f.run({branch,reservation:{}})).test_selection,'selected-data');
+    const g=mergeFixture({selectedFixture:f});g.pr.body='Refs #10. Context.\nCloses #11';g.issue.body='';g.issue.labels=[];
+    assert.equal((await prepareIntegration(g.options)).test_selection,'selected-data');
+    assert.equal((await g.complete()).accepted,true);
+    assert(!g.mergeReads.some(route=>/\/issues\//.test(route)));
   }
-  const f=exactOwnedFixture(), name=f.packetPrefix+'sibling.json';
-  f.put(name,{});f.files.push({filename:name,status:'added'});
-  assert.equal(await f.run(),null);
-  assert.equal(integrationProfile(f.branch,[{filename:name,status:'added'}],f.reservation),'full');
-});
-test('shared exact-file and directory scope matching preserves directory boundaries',async()=>{
-  const f=ownedFixture(), root='coordination/engineering/retained-delivery/new-packet/';
-  f.reservation.owned_paths=[root];
-  assert.equal((await f.run()).test_selection,'selected-data');
-  assert.equal(integrationProfile(f.branch,[{filename:root+'nested/receipt.json',status:'added'}],f.reservation),'evidence');
-  for(const name of [root.slice(0,-1)+'-sibling/receipt.json',root.slice(0,-1)+'.json']) {
-    assert.equal(selectedDataCandidate(f.branch,[{filename:'data/ownership-selection.json',status:'modified'},{filename:name,status:'added'}],f.reservation),false);
-    assert.equal(integrationProfile(f.branch,[{filename:name,status:'added'}],f.reservation),'full');
-  }
-  const exact=f.packetPrefix+'registry.json';
-  assert.equal(integrationProfile(f.branch,[{filename:exact,status:'added'}],{mode:'engineering',owned_paths:[exact]}),'full',
-    'exact selected-data ownership does not expand evidence-only routing');
 });
 test('exact-owned restored opaque role retains immutable identity and package consumer checks',async()=>{
   const name='coordination/engineering/original-packet/exact-patch.json';
@@ -902,10 +897,6 @@ test('exact-owned restored opaque role retains immutable identity and package co
   assert.equal(await f.run({reservation}),null);
 });
 test('exact-file grants do not relax malformed, hidden, renamed, modified or executable data refusal',async()=>{
-  for(const owned of ['coordination/engineering/','coordination/engineering/retained-delivery/../escape.json','research/geography/foreign/receipt.json']) {
-    const f=exactOwnedFixture();f.reservation.owned_paths.push(owned);
-    assert.equal(await f.run(),null);
-  }
   for(const mutate of [
     (f,name)=>f.authored.entries.get(name).mode='100755',
     (f,name)=>f.authored.entries.get(name).mode='120000',
@@ -918,7 +909,7 @@ test('exact-file grants do not relax malformed, hidden, renamed, modified or exe
 });
 test('retained nested delivery needs authenticated current issue scope through PR, prepare and cold final gates', async () => {
   const f = ownedFixture();
-  assert.equal(selectedDataCandidate(f.branch, f.files), false);
+  assert.equal(selectedDataCandidate(f.branch, f.files), true);
   assert.equal(selectedDataCandidate(f.branch, f.files, f.reservation), true);
   assert.equal((await f.run()).test_selection, 'selected-data');
   assert.equal((await gateFixture(ownedFixture()).select()).test_selection, 'selected-data');
@@ -928,22 +919,6 @@ test('retained nested delivery needs authenticated current issue scope through P
   const result = await final.complete(); assert.equal(result.accepted, true); assert.equal(final.writes.length, 1);
   assert(!('proof' in result));
 });
-for (const [name, change] of Object.entries({
-  'missing current scope':f => f.issue.body = f.issue.body.replace(/,"owned_paths":\[[^\]]*\]/, ''),
-  'closed issue':f => f.issue.state = 'closed',
-  'wrong issue':f => f.issue.number = 11,
-  'wrong mode':f => f.issue.body = f.issue.body.replace('\"mode\":\"engineering\"','\"mode\":\"source-only\"'),
-  'wrong lane':f => f.issue.labels[0] = 'type:geography',
-})) test('retained selected metadata refuses ' + name, async () => {
-  const f = gateFixture(ownedFixture()); change(f);
-  await assert.rejects(f.select());
-});
-for (const owned_paths of [['coordination/engineering/'], ['coordination/engineering/retained-delivery/../'],
-  ['coordination/engineering/other/'], ['coordination/engineering/retained-delivery/new-packet/registry.json']]) {
-  test('retained selected scope rejects unsafe/foreign/incomplete ownership ' + owned_paths[0], async () => {
-    const f=ownedFixture(); assert.equal(await f.run({reservation:{mode:'engineering',owned_paths}}), null);
-  });
-}
 test('retained inert text stays ordinary, unconsumed and outside package inputs', async () => {
   for (const name of ['README.md','CHECKPOINT.md','notes.md','nested/review.md','unresolved-evidence-001/delivery-config-3816/independent-static-review.md','diagnostic.txt','refusals/stderr.txt']) {
     const f=ownedFixture({mutate:f=>f.put('coordination/engineering/retained-delivery/new-packet/'+name,'retained text\n')});
@@ -982,17 +957,14 @@ for (const [name,change] of Object.entries({
   'template becomes a package input':({f,directory})=>{f.definition.inputs.push(directory+'/selected-delivery-expectations.json');f.put('.github/package-inputs.json',f.definition);},
 })) test('prospective expectation disambiguation rejects '+name,async()=>assert.equal(await templateFixture(change).run(),null));
 
-function real1770() {
-  const fixed=JSON.parse(readFileSync(new URL('../coordination/engineering/selected-owned-scope-20261012/pr1770.json',import.meta.url)));
+function real1770({currentPolicy=true}={}) {
+  const fixed=JSON.parse(readFileSync(new URL('../test/fixtures/selected-owned-scope/pr1770.json',import.meta.url)));
   const changedNames=new Set(fixed.files.map(row=>row.filename));
   class BaseRoleTree extends Map {
     get(name) {
       if(super.has(name)||changedNames.has(name))return super.get(name);
-      // Match fixedDeliveryFixture: unchanged base routing roots remain in HEAD.
-      // Exact hashes from the original selector/certificate authenticate them.
-      const line=execFileSync('git',['ls-tree','-l','HEAD','--',name],{encoding:'utf8',env:{...process.env,GIT_NO_LAZY_FETCH:'1'}}).trim();
-      const match=/^(\d+) (\w+) ([a-f0-9]+)\s+(\d+)\t(.+)$/.exec(line);
-      if(match)super.set(name,{path:match[5],mode:match[1],type:match[2],sha:match[3],size:Number(match[4])});
+      // Unchanged original role descriptors are frozen with the contract body set.
+      const row=selectedHistory().entry(name);if(row)super.set(name,row);
       return super.get(name);
     }
     has(name){return Boolean(this.get(name));}
@@ -1003,10 +975,9 @@ function real1770() {
     if(row.before)baseline.entries.set(row.filename,{...row.before});else baseline.entries.delete(row.filename);
     authored.entries.set(row.filename,{...row.after});
   }
-  const blobs=new Map(), reads=[], gitReads=[], files=structuredClone(fixed.files);
+  const blobs=new Map(), reads=[], fixtureReads=[], files=structuredClone(fixed.files);
   const bytes=sha=>{
-    if(!blobs.has(sha)) {gitReads.push(sha);blobs.set(sha,execFileSync('git',['cat-file','blob',sha],{maxBuffer:32*1024*1024,
-      env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0'}}));}
+    if(!blobs.has(sha)) {fixtureReads.push(sha);blobs.set(sha,selectedHistory().readBlob(sha));}
     return blobs.get(sha);
   };
   for(const row of fixed.snapshots) {
@@ -1024,36 +995,40 @@ function real1770() {
   const put=(name,value,old=false)=>{const raw=Buffer.from(typeof value==='string'?value:JSON.stringify(value)),sha=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
     blobs.set(sha,raw);const row={path:name,mode:'100644',type:'blob',sha,size:raw.length};authored.entries.set(name,row);if(old)baseline.entries.set(name,row);
     return {path:name,bytes:raw.length,sha256:digest(raw),mode:'100644',git_blob_oid:sha,commit:'a'.repeat(40)};};
+  if(currentPolicy)deriveCurrentOutputPolicy({baseline,authored,read:bytes,put});
   const f={fixed,files,branch:fixed.branch,ownedPaths:fixed.owned_paths,reservation:{mode:'engineering',owned_paths:fixed.owned_paths},
-    sourceState:{},baseline,authored,blobs,reads,gitReads,api,put,document:name=>JSON.parse(bytes(authored.entries.get(name).sha))};
+    sourceState:{},baseline,authored,blobs,reads,fixtureReads,api,put,document:name=>JSON.parse(bytes(authored.entries.get(name).sha))};
   f.run=(options={})=>selectedDataSelection({api:f.api,repo:'owner/repo',branch:f.branch,files:f.files,baseline,authored,reservation:f.reservation,...options});
   return f;
 }
-test('complete original PR1770 192-path diff selects the uniquely bound finalized expectation without changing data', async () => {
+test('exact captured PR1770 retains full planning under the current generated-output policy',async()=>{
+  const f=real1770({currentPolicy:false});
+  assert.equal(f.baseline.object.sha,f.fixed.base);assert.equal(f.authored.object.sha,f.fixed.head);
+  for(const row of f.fixed.changed_rows)assert.deepEqual(f.authored.entries.get(row.filename),row.after);
+  assert.equal(await f.run(),null);
+});
+test('PR1770-derived current-output-policy graph selects its exact finalized expectation without changing science', async () => {
   const f=real1770(),stats={};
   assert.equal(f.fixed.base,'ad300bd5ffa73c226e591f037980d67d40f6acf3');
   assert.equal(f.fixed.head,'367d68214f8c88532949bf9d21539766491991ad');assert.equal(f.files.length,192);
-  assert.equal(selectedDataCandidate(f.branch,f.files),false);assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),true);
+  assert.equal(selectedDataCandidate(f.branch,f.files),true);assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),true);
   const result=await f.run({metadataDiagnostics:stats});assert(result,JSON.stringify(stats));
   assert.equal(result.expectations_path,'coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/advance-002/finalize/selected-delivery-expectations.json');
   assert.equal(stats.decoded_bytes,0);
-  for(const row of f.fixed.changed_rows)assert.deepEqual(f.authored.entries.get(row.filename),row.after);
+  assert.notEqual(f.baseline.object.sha,f.fixed.base);assert.notEqual(f.authored.object.sha,f.fixed.head);
+  for(const row of f.fixed.changed_rows)if(row.filename!=='.github/package-inputs.json')assert.deepEqual(f.authored.entries.get(row.filename),row.after);
   const historicalManifest=f.fixed.snapshots.find(row=>row.path.endsWith('/evidence-quality.json'));
   assert(historicalManifest,'final c753 changed the original added metadata blob');
   assert(!f.reads.includes(historicalManifest.git_blob_oid),'unconsumed historical manifest is not fetched for routing');
-  for(const row of f.fixed.snapshots)assert(!f.gitReads.includes(row.git_blob_oid),'historical mutable metadata must not require shallow Git history');
-  const reachable=new Set(execFileSync('git',['ls-tree','-r','HEAD'],{encoding:'utf8',maxBuffer:16*1024*1024,
-    env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0'}})
-    .trim().split('\n').map(line=>line.split('\t')[0].split(' ')[2]));
-  for(const oid of f.gitReads)assert(reachable.has(oid),'every unsnapshotted original body must be reachable in shallow HEAD: '+oid);
+  for(const row of f.fixed.snapshots)assert(!f.fixtureReads.includes(row.git_blob_oid),'historical mutable metadata must be supplied by its captured original snapshot');
+  for(const oid of f.fixtureReads)assert(selectedHistory().hasBody(oid),'every consumed original body belongs to the isolated contract: '+oid);
 });
 for(const [label,mutate] of Object.entries({
   'two authoritative expectations':f=>{const names=f.files.filter(row=>row.filename.endsWith('/selected-delivery-expectations.json')).map(row=>row.filename);const final=names.find(name=>f.document(name).selected_ledger_sha256);f.put(names.find(name=>name!==final),JSON.stringify(f.document(final))+'\n');},
   'incorrect current binding':f=>{const name=f.files.find(row=>row.filename.endsWith('/finalize/selected-delivery-expectations.json')).filename;f.put(name,{...f.document(name),selected_ledger_sha256:'f'.repeat(64)});},
-  'foreign ownership':f=>f.reservation.owned_paths=['coordination/engineering/foreign/'],
   'consumed diagnostic text':f=>{const policy=f.document('.github/package-inputs.json');policy.inputs.push(f.files.find(row=>row.filename.endsWith('/stderr.txt')).filename);f.put('.github/package-inputs.json',policy);},
   'native-path alias drift':f=>{const file=f.files.find(row=>row.filename.endsWith('.bin.gz')),old=file.filename,next=old.replace(/runs-\d+/, 'rows-1');const row=f.authored.entries.get(old);f.authored.entries.delete(old);file.filename=next;f.authored.entries.set(next,{...row,path:next});},
-}))test('actual PR1770 retains full fallback for '+label,async()=>{const f=real1770();mutate(f);assert.equal(await f.run(),null);});
+}))test('PR1770-derived current-policy graph retains full fallback for '+label,async()=>{const f=real1770();mutate(f);assert.equal(await f.run(),null);});
 
 test('retained native basename alias drift fails fixed manifest custody after all outer pins are rebound', async () => {
   const f=fixedDeliveryFixture({leanPackage:true});
@@ -1210,8 +1185,7 @@ function legacySourceProofFixture() {
       ['source-qualified/000/inventory.jsonl.gz','4ad5edfd57eff2e06bbe97881d5f985f15f7871eba6c85e37024d63736505136'],
       ['native-source-operating/source000-derived-operating-view.json','eec862edb5f7dd1e55d1d1446b7dfa47c4be1b3c50cbba6edb86045bdef7a10e']];
     const pins=names.map(([name,originalHash])=>{
-      const bytes=execFileSync('git',['show','HEAD:'+stem+name],
-        {maxBuffer:32*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
+      const bytes=selectedHistory().readFile(stem+name);
       assert.equal(digest(bytes),originalHash);
       return {...f.put(stem+name,bytes,true),commit:'36ce805d29e1cfd1da6f95d1aa0f4d20ab2ab92c'};
     });
@@ -1420,7 +1394,7 @@ function scientificManifestFixture() {
 }
 test('only the authenticated unconsumed scientific receipt update enters existing selected checks',async()=>{
   const f=scientificManifestFixture();
-  assert.equal(selectedDataCandidate(f.branch,f.files),false);
+  assert.equal(selectedDataCandidate(f.branch,f.files),true);
   assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),true);
   assert.equal((await f.run()).test_selection,'selected-data');
   assert(f.reads.includes(f.authored.entries.get(f.manifestPath).sha),'modified manifest syntax was actually read');
@@ -1431,8 +1405,6 @@ test('only the authenticated unconsumed scientific receipt update enters existin
   assert.equal((await final.complete()).accepted,true);assert.equal(final.writes.length,1);
 });
 for(const [name,change] of Object.entries({
-  'undeclared manifest':f=>delete f.reservation.evidence_manifest,
-  'foreign manifest declaration':f=>f.reservation.evidence_manifest='coordination/engineering/other/evidence-quality.json',
   'arbitrary other edited JSON':f=>{const name=f.packetPrefix+'notes.json';f.put(name,{},true);f.put(name,{updated:true});f.files.push({filename:name,status:'modified'});},
   'renamed manifest':f=>f.files.find(row=>row.filename===f.manifestPath).previous_filename=f.packetPrefix+'old-evidence-quality.json',
   'removed manifest':f=>f.files.find(row=>row.filename===f.manifestPath).status='removed',
@@ -1458,15 +1430,10 @@ for(const role of ['manifest_path','selected_geography','certificate','review'])
   f.put('data/ownership-selection.json',{...f.base,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});
   assert.equal(await f.run(),null);
 });
-test('author classification requires the current linked issue declaration, never candidate manifest self-claims',async()=>{
-  const f=gateFixture(scientificManifestFixture());
-  const spec=JSON.parse(/<!-- worldatlas-work:v1\n([\s\S]*?)\n-->/.exec(f.issue.body)[1]);
-  delete spec.evidence_quality;f.issue.body='<!-- worldatlas-work:v1\n'+JSON.stringify(spec)+'\n-->';
-  assert.deepEqual(await f.select(),{profile:'full',shards:[0,1,2],geography_software:false});
-});
-test('cold queue scientific validation failure cannot reach merge despite eligible metadata',async()=>{
-  const f=mergeFixture({selectedFixture:scientificManifestFixture()});
-  await assert.rejects(f.complete({evidenceCheck:async()=>{throw Error('Changed scientific evidence is invalid');}}),/scientific evidence/);
+test('selected applicability is independent of issue manifest declarations, but actual scientific results remain required',async()=>{
+  const f=mergeFixture({selectedFixture:scientificManifestFixture()});f.issue.body='';f.pr.body='';
+  assert.equal((await prepareIntegration(f.options)).test_selection,'selected-data');
+  await assert.rejects(f.complete({geographyReportLoader:async()=>({version:1,gate_status:'passed'})}));
   assert.equal(f.writes.length,0);
 });
 
@@ -1476,7 +1443,6 @@ test('eligible scientific metadata never replaces the actual independent scienti
     reservation:{mode:'engineering',owned_paths:f.ownedPaths,evidence_manifest:f.manifestPath}})).test_selection,'selected-data');
   await assert.rejects(checkPremergeEvidence({...f.options,pr:f.pr,issue:f.issue,
     reservation:{mode:'engineering',owned_paths:f.ownedPaths},files:f.files}),/Invalid evidence inventory/);
-  await assert.rejects(f.complete({evidenceCheck:checkPremergeEvidence}),/Invalid evidence inventory/);
   assert.equal(f.writes.length,0);
 });
 
@@ -1618,22 +1584,27 @@ test('retained scientific helper/source formats use role-qualified DATA without 
     ['source/source.geojson.gz', gzipSync('{"type":"FeatureCollection","features":[]}')],
     ['execution/native-row-latitudes.f64le.gz', gzipSync(Buffer.from([0,0,0,0,0,0,240,63]))]
   ];
-  for (const [name, body] of formats) {
+  for (const mode of ['100644','100755']) for (const [name, body] of formats) {
     const f = retainedEvidenceFixture(name, body), diagnostics = {};
+    f.authored.entries.get(f.retainedName).mode = mode;
     assert.equal(selectedDataCandidate(f.branch, f.files, f.reservation), true, name);
     const result = await f.run({metadataDiagnostics: diagnostics});
     assert.equal(result?.test_selection, 'selected-data', name + ': ' + diagnostics.failure);
     assert(!f.reads.includes(f.retainedPin.git_blob_oid), 'unconsumed supporting body must not be read: ' + name);
     assert.equal(candidateGeographyCode('full', f.files, result.test_selection), false);
   }
-  const prepared = await gateFixture(retainedEvidenceFixture()).select();
+  const executable = retainedEvidenceFixture();
+  executable.authored.entries.get(executable.retainedName).mode = '100755';
+  const prepared = await gateFixture(executable).select();
   assert.deepEqual(prepared, {profile:'full', shards:[0], test_selection:'selected-data',
     expectations_path:'coordination/engineering/retained-delivery/new-packet/selected-delivery-expectations.json',
     geography_software:false});
 });
 
 test('final checker choice uses complete role proof without reading unconsumed retained code', async () => {
-  const f = mergeFixture({selectedFixture: retainedEvidenceFixture()}), diagnostics = {};
+  const executable = retainedEvidenceFixture();
+  executable.authored.entries.get(executable.retainedName).mode = '100755';
+  const f = mergeFixture({selectedFixture: executable}), diagnostics = {};
   assert.equal(candidateGeographyCode('full', f.files), true);
   const result = await f.complete({metadataDiagnostics: diagnostics});
   assert.equal(result.accepted, true);
@@ -1651,14 +1622,20 @@ test('final checker choice fails closed when candidate-code classification is un
       return original(route, ...args);
     };
     assert.equal(candidateGeographyCode('full', f.files), true);
-    await assert.rejects(f.complete(), /exact trusted combined check/);
+    await assert.rejects(f.complete(), failure==='baseline tree'?/Unavailable baseline tree/:/exact trusted combined check/);
     assert.equal(f.writes.length, 0, failure);
-    const result = await f.complete({geographyReportLoader: async () => ({
+    const candidateReport = {geographyReportLoader: async () => ({
       version: 1, method_id: 'worldatlas-trusted-geography-check-v1', baseline_commit: f.base,
       trusted_code_commit: f.pr.merge_commit_sha, candidate_commit: f.pr.merge_commit_sha,
       trusted_code_inventory_sha256: 'd'.repeat(64), candidate_code_executed: true,
       published: false, source_approval: false, gate_status: 'passed', status: 'not-applicable'
-    })});
+    })};
+    if(failure==='baseline tree'){
+      await assert.rejects(f.complete(candidateReport),/Unavailable baseline tree/);
+      assert.equal(f.writes.length,0,'Neither report can replace unavailable routing identities');
+      continue;
+    }
+    const result=await f.complete(candidateReport);
     assert.equal(result.accepted, true, failure);
     assert.equal(result.geography.trusted_code_commit, f.pr.merge_commit_sha);
     assert.equal(f.writes.length, 1);
@@ -1667,6 +1644,7 @@ test('final checker choice fails closed when candidate-code classification is un
 
 test('retained helper eligibility requires complete base-role proof even without a manifest edit', async () => {
   const f = retainedEvidenceFixture();
+  f.authored.entries.get(f.retainedName).mode = '100755';
   f.files = f.files.filter(row => row.filename !== f.manifestPath);
   f.authored.entries.set(f.manifestPath, f.baseline.entries.get(f.manifestPath));
   delete f.reservation.evidence_manifest;
@@ -1685,13 +1663,14 @@ for (const [name, change] of Object.entries({
     f.put('data/ownership-selection.json', {...f.base, additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});},
   'existing helper rewrite': f => {f.baseline.entries.set(f.retainedName, {...f.authored.entries.get(f.retainedName), sha:'f'.repeat(40)});
     f.files.find(row => row.filename === f.retainedName).status = 'modified';},
-  'executable mode': f => {f.authored.entries.get(f.retainedName).mode = '100755';},
   'symlink mode': f => {f.authored.entries.get(f.retainedName).mode = '120000';},
-  'foreign scope': f => {f.reservation.owned_paths = ['coordination/engineering/other/'];},
+  'non-blob executable': f => {Object.assign(f.authored.entries.get(f.retainedName), {type:'commit',mode:'100755'});},
   'mixed current software': f => {f.put('scripts/qualify-source-cohort.py', '# changed current code\n');
+    f.authored.entries.get('scripts/qualify-source-cohort.py').mode = f.authored.entries.get(f.retainedName).mode;
     f.files.push({filename:'scripts/qualify-source-cohort.py',status:'modified'});},
-})) test('retained helper keeps full regression for ' + name, async () => {
-  const f = retainedEvidenceFixture(); change(f);
+})) for (const mode of ['100644','100755']) test('retained helper keeps full regression for ' + name + ' at ' + mode, async () => {
+  const f = retainedEvidenceFixture();
+  f.authored.entries.get(f.retainedName).mode = mode; change(f);
   assert.equal(await f.run(), null, name);
   assert.equal(candidateGeographyCode('full', f.files), true, 'failed qualification retains conservative software routing');
   // Exercise the final consumer too: rejected inert-code qualification must
@@ -1737,11 +1716,12 @@ test('real ambient Node package configuration stays full when its runtime direct
 });
 
 for (const role of ['critical_files', 'entry_critical_files', 'application_inputs'])
-  test('retained helper cannot be declared current ' + role, async () => {
+  for (const mode of ['100644','100755']) test('retained helper cannot be declared current ' + role + ' at ' + mode, async () => {
     let retainedName;
     const f = baseRoutingManifestFixture(s => {
       retainedName = s.f.packetPrefix + 'execution/retained-helper.mjs';
       const pin = s.f.put(retainedName, 'throw Error("current executable");\n');
+      s.f.authored.entries.get(retainedName).mode = mode;
       s.f.files.push({filename:retainedName,status:'added'});
       if (role === 'critical_files') s.code.critical_files.push(pin);
       else if (role === 'entry_critical_files') s.code.entry_critical_files = {'scripts/build-static-inner.mjs':[pin]};
@@ -1772,9 +1752,10 @@ test('retained XML under an original JSON name cannot become a current or packag
 
 
 test('ordinary unconsumed custody has no filename or encoding requirement', async () => {
-  for (const name of ['source', 'source.unknown', 'archive.tar', 'script.sh', 'helper.js', 'module.wasm',
+  for (const mode of ['100644','100755']) for (const name of ['source', 'source.unknown', 'archive.tar', 'script.sh', 'helper.js', 'module.wasm',
     'README.md', 'response.json', 'source.geojson.zip', 'geography-artifact.zip']) {
     const f = retainedEvidenceFixture(name, Buffer.from([0, 255, 128, 1])), diagnostics = {};
+    f.authored.entries.get(f.retainedName).mode = mode;
     const result = await f.run({metadataDiagnostics:diagnostics});
     assert.equal(result?.test_selection, 'selected-data', name + ': ' + diagnostics.failure);
     assert(!f.reads.includes(f.retainedPin.git_blob_oid), name);
@@ -1827,9 +1808,7 @@ test('selected-data role walk requires the exact new provider-adoption leaf and 
 
 
 test('selected-data role walk binds the optional completed constructor as a consumed immutable input',async()=>{
- const f=sourceTargetRoleFixture(),entry=f.registryBody.entries.at(-1);
- const completed=f.put(prefix+'reviewed-constructor-result.json',{kind:'fixture-result'});
- entry.completed_constructor=completed;refreshPins(f);
+ const {f,entry,completed}=completedSourceTargetRoleFixture();
  f.files=[...f.authored.entries].filter(([name,row])=>f.baseline.entries.get(name)?.sha!==row.sha)
   .map(([filename])=>({filename,status:f.baseline.entries.has(filename)?'modified':'added'}));
  const diagnostics={};assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
@@ -1895,6 +1874,20 @@ for(const retainedCode of [false,true])test('selected routing uses actual merged
   assert.equal((await f.complete()).accepted,true);
   f.integrated.entries.set(SELECTED_SMOKE,oldSmoke);
   assert.equal((await prepareIntegration(f.options)).test_selection,undefined,'actual candidate smoke drift still selects full CI');
+});
+
+test('explicit auto retains the authenticated selected route but refuses drift instead of falling back to complete',async()=>{
+  const f=mergeFixture();
+  const automatic=await prepareIntegration({...f.options,reviewedTests:'auto'});
+  assert.equal(automatic.test_selection,'selected-data');assert.equal(automatic.profile,'full');
+  assert.equal(automatic.geography_required,true);assert.equal(automatic.geography_software,false);
+  assert.equal((await f.complete({reviewedTests:'auto'})).accepted,true);
+  await assert.rejects(f.complete({reviewedTests:'auto',integrationResult:'failure'}),/Integration tests/);
+  const complete=await prepareIntegration({...f.options,reviewedTests:'complete'});
+  assert.equal(complete.test_selection,'complete');assert.deepEqual(complete.shards,[0,1,2]);
+  f.authored.entries.set(SELECTED_SMOKE,{...f.authored.entries.get(SELECTED_SMOKE),sha:'0'.repeat(40)});
+  await assert.rejects(prepareIntegration({...f.options,reviewedTests:'auto'}),/Automatic test scope is unavailable/);
+  assert.equal((await prepareIntegration(f.options)).test_selection,undefined,'Legacy queued omission retains full fallback');
 });
 
 
@@ -1974,3 +1967,162 @@ test('selected-data includes explicit whole external negative source pins withou
   role=>role.source.git_blob_oid='0'.repeat(40),role=>role.registry.git_blob_oid='0'.repeat(40),role=>role.extra=role.source])
   assert.equal(await sourceTargetRoleFixture({sourceMembership:f=>membership(f,mutate)}).run(),null);
 });
+
+
+// The actual trusted prepare and final entry points share only job outputs,
+// never a body cache. Real ZIP/hash/run/job admission supplies private custody.
+function preparedSelectedFixture() {
+  const f=mergeFixture({selectedFixture:fixture({mutate:f=>f.put(prefix+'audit.py','# retained, unconsumed audit')})});
+  const candidate='9'.repeat(40), tree='7'.repeat(40), workflowHead='8'.repeat(40), root='/repos/owner/repo';
+  const original=f.options.api;
+  const api=async(route,...args)=>{
+    if(route===root+'/git/commits/'+candidate)return {sha:candidate,tree:{sha:tree},parents:[{sha:f.base},{sha:f.head}]};
+    if(route===root+'/git/trees/'+tree+'?recursive=1')return {truncated:false,tree:[...f.authored.entries.values()]};
+    if(route===root+'/actions/runs/123/attempts/1')return {id:123,run_attempt:1,head_sha:workflowHead,head_branch:'main',
+      event:'workflow_dispatch',path:'.github/workflows/worker-merge.yml',repository:{full_name:'owner/repo'},
+      head_repository:{full_name:'owner/repo'},status:'in_progress'};
+    if(route===root+'/actions/runs/123/attempts/1/jobs?per_page=100&page=1')return {jobs:[{id:55,run_id:123,run_attempt:1,
+      head_sha:workflowHead,name:'geography',status:'completed',conclusion:'success',steps:[]}]};
+    return original(route,...args);
+  };
+  api.artifactRedirect=async route=>{
+    assert.equal(route,root+'/actions/artifacts/456/zip');
+    return new Response(null,{status:302,headers:{location:'https://fixture.blob.core.windows.net/geography.zip'}});
+  };
+  f.options.api=api;
+  const body=Buffer.from(JSON.stringify({version:1,method_id:'worldatlas-trusted-geography-check-v1',
+    baseline_commit:f.base,trusted_code_commit:f.base,candidate_commit:candidate,candidate_code_executed:false,
+    published:false,source_approval:false,gate_status:'passed',status:'not-applicable'}));
+  const zip=checkpointZip([['geography-check.json',body]]);
+  f.load=({api:reader=api}={})=>loadGeographicReport({api:reader,repo:'owner/repo',runId:123,artifactName:'geography-selected-read-reuse-1',
+    expectedHash:digest(body),token:'synthetic-token',fresh:{run_attempt:1,artifact_id:456,artifact_digest:digest(zip),report_bytes:body.length,
+      workflow_head:workflowHead,head:f.head,baseline:f.base,candidate_commit:candidate,request_id:'selected-read-reuse'},
+    fetchImpl:async(url,options)=>{assert.equal(url,'https://fixture.blob.core.windows.net/geography.zip');
+      assert.equal(options.redirect,'error');return new Response(zip);}});
+  return f;
+}
+
+test('fresh selected final reuses genuine prepared checker choice without rereading immutable role bodies',async t=>{
+  for(const supplied of [false,undefined]) {
+    const f=preparedSelectedFixture(), prepared=await prepareIntegration(f.options);
+    assert.equal(prepared.test_selection,'selected-data');assert.equal(prepared.geography_software,false);
+    assert.equal(candidateGeographyCode('full',f.files),true,'Retained helper triggers legacy full-role derivation');
+    const originalReads=[...f.reads];assert(originalReads.length>0,'Actual prepare consumed role bodies');f.reads.length=0;
+    const stats={}, result=await f.complete({preparedGeographySoftware:supplied,geographyReportLoader:f.load,metadataDiagnostics:stats});
+    assert.equal(result.accepted,true);assert.equal(result.geography.execution,'fresh-queue');
+    if(supplied===false) {assert.equal(f.reads.length,0);assert.deepEqual(stats,{});}
+    else {assert(f.reads.length>0);assert(stats.read_count>0,'Old workflow still authenticates complete role bodies');}
+    t.diagnostic(JSON.stringify({prepared_choice:supplied??'absent',prepare_blob_reads:originalReads.length,
+      final_blob_reads:f.reads.length,final_blob_bytes:f.reads.reduce((n,oid)=>n+f.blobs.get(oid).length,0)}));
+  }
+});
+
+test('a public prepared flag or cloned report cannot reuse the trusted checker choice',async()=>{
+  const f=preparedSelectedFixture(),prepared=await prepareIntegration(f.options), admitted=await f.load();
+  assert(preparedQueueSource(admitted));
+  const clone=structuredClone(admitted);clone.prepared_queue=true;assert.equal(preparedQueueSource(clone),null);
+  f.reads.length=0;
+  const result=await f.complete({preparedGeographySoftware:prepared.geography_software,geographyReportLoader:async()=>clone});
+  assert.equal(result.accepted,true);assert(f.reads.length>0,'Unprivileged report retains original classification');
+  assert.equal(result.geography.execution,undefined);
+});
+
+// Exercise the paired finalizer declaration contract and the actual prepared
+// routing entry with existing compact accepted-checkpoint custody, not history.
+function retiredCheckpointPrepareFixture(mutate = () => {}) {
+  const f=checkpointProfileFixture(), c=f.checkpoint;
+  const read=name=>JSON.parse(f.blobs.get(f.authored.entries.get(name).sha));
+  const currentSelection=read('data/ownership-selection.json');
+  const priorSelection=structuredClone(c.facts.candidate_selection), priorPath=priorSelection.additive_release.path;
+  const prior=read(priorPath);
+  prior.version=2;prior.kind='retained-native-additive-selection-v2';
+  prior.runtime_envelope=f.leaf('envelope.json',true);
+  prior.logical_asset_map.patch=f.leaf('patch.json',true);
+  const pin=f.put(priorPath,prior,true);
+  priorSelection.additive_release={path:pin.path,bytes:pin.bytes,sha256:pin.sha256};
+  f.put('data/ownership-selection.json',priorSelection,true);
+  f.put('data/ownership-selection.json',currentSelection);
+  const retired=[priorPath,prior.runtime_envelope.path,prior.logical_asset_map.ledger.path,prior.logical_asset_map.patch.path];
+  const shared=f.sidecarBody.logical_asset_map.base_manifest.path;
+  const unrelated=f.put('data/unrelated-package.json',{unchanged:true},true).path;
+  const before={...f.policy,inputs:[...f.policy.inputs,shared,unrelated,...retired]};
+  f.definition={...f.definition,inputs:[...f.definition.inputs.slice(0,2),shared,unrelated,...f.definition.inputs.slice(2)]};
+  f.put('.github/package-inputs.json',before,true);
+  f.put('.github/package-inputs.json',f.definition);
+  f.put(c.locatorPath,{...c.locator,acceptance:{...c.locator.acceptance,pr_number:6}},true);
+  c.facts.candidate_selection=priorSelection;c.rebuild();
+  f.put(prefix+'retained-audit.py','# Inert retained delivery evidence; never executed.\n');
+  mutate(f,{shared,unrelated,prior,currentSelection,retired,read});
+  c.refresh();
+  return mergeFixture({selectedFixture:f});
+}
+
+test('authenticated quartet retirement and checkpoint advancement preserve the actual prepared selected route repeatedly',async()=>{
+  const f=retiredCheckpointPrepareFixture();
+  for(let i=0;i<2;i++){
+    const prepared=await prepareIntegration(f.options);
+    assert.equal(prepared.test_selection,'selected-data');assert.deepEqual(prepared.shards,[0]);
+    assert.equal(prepared.geography_required,true);assert.equal(prepared.geography_software,false);
+  }
+  assert(f.checkpoint.calls.some(route=>route.endsWith('/pulls/7')),'chosen predecessor acceptance was checked');
+  assert(f.reads.includes(f.authored.entries.get(f.checkpoint.archive).sha),'chosen ZIP was authenticated');
+});
+
+test('retirement and checkpoint advancement cannot remove unrelated, shared or still-current roles',async()=>{
+  for(const kind of ['unrelated','shared','still-current']){
+    const f=retiredCheckpointPrepareFixture((f,state)=>{
+      if(kind==='still-current'){
+        const sidecar={...f.sidecarBody,runtime_envelope:state.prior.runtime_envelope};
+        const pin=f.put(state.currentSelection.additive_release.path,sidecar);
+        f.put('data/ownership-selection.json',{...state.currentSelection,additive_release:{path:pin.path,bytes:pin.bytes,sha256:pin.sha256}});
+      }else{
+        f.definition.inputs=f.definition.inputs.filter(name=>name!==state[kind]);
+        f.put('.github/package-inputs.json',f.definition);
+      }
+    });
+    const prepared=await prepareIntegration(f.options);
+    assert.notEqual(prepared.test_selection,'selected-data',kind);
+    assert.equal(prepared.profile,'full',kind);
+    assert.equal(prepared.geography_software,true,kind);
+  }
+});
+
+
+// Profile eligibility only: genuine constructor qualification remains the
+// trusted geography consumer's job. This captures the finalizer's five roles.
+function completedSourceTargetRoleFixture({completed=true}={}) {
+ const f=sourceTargetRoleFixture({mutateRoles:({f,roles,parts})=>{
+  for(const [name,pin]of Object.entries(roles))roles[name]=f.put(pin.path,{historical_role:name});
+  parts[0]=f.put(parts[0].path,{historical_role:'source-family'});
+ }}),entry=f.registryBody.entries.at(-1);
+ const binding=JSON.parse(f.blobs.get(entry.source_authority.git_blob_oid));
+ const evidence=JSON.parse(f.blobs.get(binding.source_evidence.git_blob_oid));
+ const historical=[...['catalogue','physical_evidence','physical_input','physical_reproduction','owner_roster','native_latitudes'].map(k=>evidence[k]),...evidence.families.flatMap(x=>x.parts)];
+ for(const pin of historical){f.authored.entries.delete(pin.path);f.blobs.delete(pin.git_blob_oid);}
+ const constructor=f.put(prefix+'reviewed-constructor-result.json',{kind:'fixture-result'});
+ if(completed)entry.completed_constructor=constructor;else f.authored.entries.delete(constructor.path);
+ refreshPins(f);
+ f.files=[...f.authored.entries].filter(([name,row])=>f.baseline.entries.get(name)?.sha!==row.sha)
+  .map(([filename])=>({filename,status:f.baseline.entries.has(filename)?'modified':'added'}));
+ return {f,entry,completed:constructor,historical,direct:{rule:entry.rule_preimage,binding:entry.source_authority,
+  constructor,evidence:binding.source_evidence,patch:binding.native_patch}};
+}
+test('completed source-target profile stays selected-data with absent historical bodies',async()=>{
+ const {f,historical}=completedSourceTargetRoleFixture(),diagnostics={};
+ assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+ for(const pin of historical){assert(!f.authored.entries.has(pin.path));assert(!f.blobs.has(pin.git_blob_oid));assert(!f.reads.includes(pin.git_blob_oid));}
+ const g=mergeFixture({selectedFixture:f}),prepared=await prepareIntegration(g.options);
+ assert.equal(prepared.test_selection,'selected-data');assert.equal(prepared.geography_software,false);
+ assert.equal(prepared.geography_required,true,'Classification must retain genuine constructor/native qualification');
+});
+test('unqualified source-target profile still requires historical bodies',async()=>{
+ const {f}=completedSourceTargetRoleFixture({completed:false}),diagnostics={};
+ assert.equal(await f.run({metadataDiagnostics:diagnostics}),null);assert.match(diagnostics.failure,/role differs from candidate tree/);
+});
+for(const role of ['rule','binding','constructor','evidence','patch'])for(const defect of ['missing','changed'])
+ test('completed source-target profile refuses '+defect+' direct '+role,async()=>{
+  const {f,direct}=completedSourceTargetRoleFixture(),pin=direct[role];
+  if(defect==='missing')f.authored.entries.delete(pin.path);
+  else f.authored.entries.set(pin.path,{...f.authored.entries.get(pin.path),sha:'f'.repeat(40)});
+  assert.equal(await f.run(),null);
+ });

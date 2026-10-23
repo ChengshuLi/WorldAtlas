@@ -1,0 +1,310 @@
+{
+  "kind": "bounded-discrepant-parent-original-key-screen",
+  "baseline": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+  "source_pins": {
+    "gb:CAN:ADM1": {
+      "feature_count": 13,
+      "bytes": 26022306,
+      "sha256": "0c9e4fc56c8b9ce958960ffabd1556fbe7c3ec0deeea346a2b5b7dff05e35449"
+    },
+    "gb:CAN:ADM3": {
+      "feature_count": 5162,
+      "bytes": 28924424,
+      "sha256": "70a228935086c1bb9c30938b198cba33261fdf405658dc43540e7e1d1a18a7f9"
+    }
+  },
+  "counts": {
+    "all": 735,
+    "intended": 696,
+    "no_ADM1": 39,
+    "other_ADM1": 0
+  },
+  "targets": [
+    {
+      "id": "atlas:physical:CAN-123:NBR",
+      "owner": 6636,
+      "counts": {
+        "all": 445,
+        "intended": 431,
+        "no_ADM1": 14,
+        "other_ADM1": 0
+      },
+      "contrary": [],
+      "source_absence": [
+        {
+          "y": 94241,
+          "x": 82434,
+          "owner": 6636
+        },
+        {
+          "y": 94255,
+          "x": 82459,
+          "owner": 6636
+        },
+        {
+          "y": 94259,
+          "x": 82458,
+          "owner": 6636
+        },
+        {
+          "y": 94260,
+          "x": 82457,
+          "owner": 6636
+        },
+        {
+          "y": 94261,
+          "x": 82456,
+          "owner": 6636
+        },
+        {
+          "y": 94262,
+          "x": 82455,
+          "owner": 6636
+        },
+        {
+          "y": 94435,
+          "x": 82316,
+          "owner": 6636
+        },
+        {
+          "y": 94472,
+          "x": 82347,
+          "owner": 6636
+        },
+        {
+          "y": 94671,
+          "x": 82513,
+          "owner": 6636
+        },
+        {
+          "y": 94674,
+          "x": 82506,
+          "owner": 6636
+        },
+        {
+          "y": 94687,
+          "x": 82514,
+          "owner": 6636
+        },
+        {
+          "y": 94694,
+          "x": 82515,
+          "owner": 6636
+        },
+        {
+          "y": 94695,
+          "x": 82515,
+          "owner": 6636
+        },
+        {
+          "y": 94700,
+          "x": 82503,
+          "owner": 6636
+        }
+      ]
+    },
+    {
+      "id": "atlas:physical:CAN-132:ONT",
+      "owner": 6643,
+      "counts": {
+        "all": 290,
+        "intended": 265,
+        "no_ADM1": 25,
+        "other_ADM1": 0
+      },
+      "contrary": [],
+      "source_absence": [
+        {
+          "y": 94234,
+          "x": 76808,
+          "owner": 6643
+        },
+        {
+          "y": 94238,
+          "x": 76807,
+          "owner": 6643
+        },
+        {
+          "y": 94240,
+          "x": 76821,
+          "owner": 6643
+        },
+        {
+          "y": 94240,
+          "x": 76822,
+          "owner": 6643
+        },
+        {
+          "y": 94243,
+          "x": 76800,
+          "owner": 6643
+        },
+        {
+          "y": 94248,
+          "x": 76791,
+          "owner": 6643
+        },
+        {
+          "y": 94253,
+          "x": 76797,
+          "owner": 6643
+        },
+        {
+          "y": 94254,
+          "x": 76798,
+          "owner": 6643
+        },
+        {
+          "y": 94256,
+          "x": 76788,
+          "owner": 6643
+        },
+        {
+          "y": 94257,
+          "x": 76790,
+          "owner": 6643
+        },
+        {
+          "y": 94279,
+          "x": 76710,
+          "owner": 6643
+        },
+        {
+          "y": 94281,
+          "x": 76704,
+          "owner": 6643
+        },
+        {
+          "y": 94281,
+          "x": 76720,
+          "owner": 6643
+        },
+        {
+          "y": 94282,
+          "x": 76721,
+          "owner": 6643
+        },
+        {
+          "y": 94291,
+          "x": 76708,
+          "owner": 6643
+        },
+        {
+          "y": 94299,
+          "x": 76648,
+          "owner": 6643
+        },
+        {
+          "y": 94299,
+          "x": 76649,
+          "owner": 6643
+        },
+        {
+          "y": 94300,
+          "x": 76651,
+          "owner": 6643
+        },
+        {
+          "y": 94300,
+          "x": 76652,
+          "owner": 6643
+        },
+        {
+          "y": 94300,
+          "x": 76653,
+          "owner": 6643
+        },
+        {
+          "y": 94300,
+          "x": 76654,
+          "owner": 6643
+        },
+        {
+          "y": 94300,
+          "x": 76655,
+          "owner": 6643
+        },
+        {
+          "y": 94302,
+          "x": 76679,
+          "owner": 6643
+        },
+        {
+          "y": 94307,
+          "x": 76639,
+          "owner": 6643
+        },
+        {
+          "y": 94313,
+          "x": 76647,
+          "owner": 6643
+        }
+      ]
+    }
+  ],
+  "foreign_complete_original_contacts": [
+    {
+      "owner": 723,
+      "id": "atlas:district:CAN-3559:ONT",
+      "cells": 1,
+      "physical": false
+    },
+    {
+      "owner": 6866,
+      "id": "atlas:physical:CAN-93:ONT",
+      "cells": 2,
+      "physical": true
+    },
+    {
+      "owner": 614,
+      "id": "atlas:district:CAN-2413:QUE",
+      "cells": 4,
+      "physical": false
+    },
+    {
+      "owner": 600,
+      "id": "atlas:district:CAN-1313:NBR",
+      "cells": 2,
+      "physical": false
+    },
+    {
+      "owner": 627,
+      "id": "atlas:district:CAN-2428:QUE",
+      "cells": 14,
+      "physical": false
+    },
+    {
+      "owner": 628,
+      "id": "atlas:district:CAN-2429:QUE",
+      "cells": 12,
+      "physical": false
+    },
+    {
+      "owner": 629,
+      "id": "atlas:district:CAN-2430:QUE",
+      "cells": 6,
+      "physical": false
+    },
+    {
+      "owner": 589,
+      "id": "atlas:district:CAN-1302:NBR",
+      "cells": 11,
+      "physical": false
+    },
+    {
+      "owner": 641,
+      "id": "atlas:district:CAN-2444:QUE",
+      "cells": 1,
+      "physical": false
+    },
+    {
+      "owner": 708,
+      "id": "atlas:district:CAN-3537:ONT",
+      "cells": 2,
+      "physical": false
+    }
+  ],
+  "limits": [
+    "Exact original keys screened using Shapely only; full native confirmation remains independent. Source absence is not itself an automatic veto or evidence of legal territory."
+  ]
+}

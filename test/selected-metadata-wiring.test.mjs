@@ -7,19 +7,20 @@ import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {prepareReferenceMetadataProjection} from '../scripts/selected-reference-metadata.mjs';
 import {scientificNativeSelection} from '../src/reference-metadata.js';
-import {selectedDeliveryReference,qualifiedDeliveryReference,finalizedSelection,prepareReferenceMetadata,composeAuthorities,sourceEvidence,jsonBytes,validateDeliverySelectionTransition,finalizeDelivery} from '../scripts/prepare-delivery-handoff.mjs';
+import {selectedDeliveryReference,qualifiedDeliveryReference,finalizedSelection,prepareReferenceMetadata,composeAuthorities,sourceEvidence,jsonBytes,finalizeDelivery} from '../scripts/prepare-delivery-handoff.mjs';
 import {compactContextInputs} from '../scripts/native-ownership/compact-context-inputs.mjs';
 import {prepareCurrentSelectedAdditive} from '../scripts/package-current-additive.mjs';
 import {loadedBaseFootprintSha256,footprintValueSha256,bindAdditiveLedgerFeatures,additiveReleaseFootprintDigest} from '../src/effective-footprint.js';
 const sha=raw=>createHash('sha256').update(raw).digest('hex'),commit='a'.repeat(40);
 const plain=pin=>({path:pin.path,bytes:pin.bytes,sha256:pin.sha256});
 const rectangle=x=>({type:'Polygon',coordinates:[[[x,0],[x+1,0],[x+1,1],[x,1],[x,0]]]});
-async function fixture(t,{rosterBytes,rosterGzip=true}={}){
+async function fixture(t,{rosterBytes,rosterGzip=true,aliasSeed=false}={}){
  const root=await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(),'atlas-metadata-wiring-')));t.after(()=>fs.rm(root,{recursive:true,force:true}));
  const bodies=new Map(),pins=new Map();
  async function put(name,value){const raw=Buffer.isBuffer(value)?value:Buffer.from(JSON.stringify(value));await fs.mkdir(path.dirname(path.join(root,name)),{recursive:true});await fs.writeFile(path.join(root,name),raw);const pin={commit,path:name,mode:'100644',git_blob_oid:createHash('sha1').update('blob '+raw.length+'\0').update(raw).digest('hex'),bytes:raw.length,sha256:sha(raw)};bodies.set(pin.sha256,raw);pins.set(name,pin);return pin;}
  const reader={pin:(version,name)=>{assert.equal(version,commit);assert.ok(pins.has(name),name);return pins.get(name);},read:pin=>{assert.ok(bodies.has(pin.sha256),pin.path);return bodies.get(pin.sha256);},json:pin=>JSON.parse(reader.read(pin))};
  const original=['A','B','C'].map((id,i)=>({type:'Feature',id,pixelIndex:i+1,properties:{id,name:id,parent_id:i===2?'Q':'P',metadata:{}},geometry:rectangle(i*2)}));
+ if(aliasSeed)for(const feature of original){feature.properties.reference_owner='Recorded winner';Object.assign(feature.properties.metadata,{reference_polity:'Stale alias',reference_owner_id:'owner:Q1',reference_owner_evidence:{winner:{owner_id:'owner:Q1',name:'Recorded winner',share:.75}},semantic_review:{status:'open'}});}
  const owners=original.map(f=>({id:f.id,index:f.pixelIndex,province_id:f.properties.parent_id,province_index:f.id==='C'?2:1,bounds:[f.pixelIndex-1,0,f.pixelIndex,1]}));
  const beforeGroups=[['c','continent',null],['s','subcontinent','c'],['r','region','s'],['a','area','r'],['P','province','a'],['Q','province','a']].map(([id,level,parent_id])=>({id,name:id,level,parent_id}));
  const afterGroups=structuredClone(beforeGroups);afterGroups.at(-1).name='Current Q';
@@ -35,7 +36,9 @@ async function fixture(t,{rosterBytes,rosterGzip=true}={}){
  after.parent_id='Q';after.metadata.reference_corrections=[{id:'A',action:'reparent',current_name:'A',current_parent_id:'P',new_parent_id:'Q',rationale:'Synthetic sourced correction',evidence:[{url:'https://example.invalid/reference',title:'Synthetic reference',inspected_fact:'A belongs to Q'}]}];
  const change={location_id:'A',before_properties:before,after_properties:after};
  const receipt=await put('inputs/receipt.json',{before_sha256:beforeHierarchy.sha256,after_sha256:afterHierarchy.sha256,footprints_sha256_before:native.footprints_sha256,footprints_sha256_after:native.footprints_sha256,reference_only:true,historical_claims_transferred:false,summary:{geometry_changes:0},relationships:[],source_evidence:[{url:'https://example.invalid/reference',source_sha256:'c'.repeat(64)}],before_units:beforeGroups,retired_units:[],group_changes:[{id:'Q',before:beforeGroups.at(-1),after:afterGroups.at(-1)}],changed_location_properties:[change]});
- const beforeSource=await put('inputs/source-before.json',{type:'FeatureCollection',features:original}),afterSource=await put('inputs/source-after.json',{type:'FeatureCollection',features:currentFeatures});
+ const beforeSource=await put('data/geography/part-0.json',{type:'FeatureCollection',features:original}),afterSource=await put('inputs/source-after.json',{type:'FeatureCollection',features:currentFeatures});
+ const sourceBank=await put('inputs/original-source-map.json',{version:1,kind:'complete-world-index-with-exact-encoded-overrides',release_id:native.id,native_manifest_sha256:baseManifest.sha256,footprints_sha256:native.footprints_sha256,unchanged_files:[beforeSource],overrides:[]});
+ selection.selected_geography={version:1,kind:'complete-world-index-with-exact-encoded-overrides',...plain(sourceBank)};
  const projection=prepareReferenceMetadataProjection({selection,manifest,owners,reference:current,hierarchy:{before:beforeHierarchy,after:afterHierarchy},receipts:[receipt],source_updates:[{logical_path:'data/geography/part-0.json',before:beforeSource,after:afterSource}],read:reader.read});
  const projectionPin=await put('inputs/projection.json',projection);selection.reference_projection=plain(projectionPin);
  const registry='d'.repeat(64),addition=rectangle(1),ledger={version:1,kind:'native-additive-repair-ledger-v1',rule_sha256:registry,base_reference:current,parent_inventory:{components:1,report_sha256:'e'.repeat(64),roster_sha256:'f'.repeat(64)},scope_ids:['gap'],assigned_cells:1,rows:[{component_id:'gap',disposition:'assigned',target_id:'A',pixelIndex:1,base_geometry:original[0].geometry,base_geometry_sha256:footprintValueSha256(original[0].geometry),geometry:addition,geometry_sha256:footprintValueSha256(addition),source_receipt_sha256:'1'.repeat(64),native_cells:1}]};
@@ -82,8 +85,8 @@ test('compact current context derives receipted parents from complete projection
 test('reference-metadata preparation derives one canonical application from stock receipts and the actual current release registry',async t=>{
  const f=await fixture(t),result=prepareReferenceMetadata(f.preparationConfig,f.reader);
  assert.deepEqual(Object.keys(result.products),['reference-metadata.json']);assert.deepEqual(JSON.parse(result.products['reference-metadata.json']),f.projection);
- assert.equal(result.input_inventory.length,11);assert.ok(result.input_inventory.every(pin=>pin.whole_body_consumed&&pin.roles.length>0&&/^[a-f0-9]{40}$/.test(pin.git_blob_oid)));
- for(const name of ['data/ownership-selection.json','data/geographic-releases/current-manifest.json','data/geographic-releases/index.json','data/geographic-releases/releases-v2.json.gz','inputs/receipt.json','inputs/source-before.json','inputs/source-after.json'])assert.ok(result.input_inventory.some(pin=>pin.path===name),name);
+ assert.equal(result.input_inventory.length,12);assert.ok(result.input_inventory.every(pin=>pin.whole_body_consumed&&pin.roles.length>0&&/^[a-f0-9]{40}$/.test(pin.git_blob_oid)));
+ for(const name of ['data/ownership-selection.json','data/geographic-releases/current-manifest.json','data/geographic-releases/index.json','data/geographic-releases/releases-v2.json.gz','inputs/receipt.json','data/geography/part-0.json','inputs/source-after.json','inputs/original-source-map.json'])assert.ok(result.input_inventory.some(pin=>pin.path===name),name);
  assert.deepEqual(prepareReferenceMetadata(f.preparationConfig,f.reader),result);
 });
 
@@ -115,6 +118,31 @@ test('same owner roster admits exact large encoded/decoded bodies in both prepar
   }
   assert.deepEqual(f.reader.read(pin),original);
  }
+});
+
+test('reference preparation rejects a later identical source pin before publishing a projection',async t=>{
+ const f=await fixture(t),config=structuredClone(f.preparationConfig),before=config.source_updates[0].before;
+ // This reader returns the exact same bytes. Only issued origin custody differs.
+ before.commit='b'.repeat(40);
+ assert.deepEqual(f.reader.read(before),f.reader.read(f.preparationConfig.source_updates[0].before));
+ assert.throws(()=>prepareReferenceMetadata(config,f.reader),/does not start at the actual selected source/);
+ for(const change of [{path:'inputs/same-bytes.json'},{encoding:'gzip',decoded_bytes:before.bytes,decoded_sha256:before.sha256}]){
+  const altered=structuredClone(f.preparationConfig);Object.assign(altered.source_updates[0].before,change);
+  assert.throws(()=>prepareReferenceMetadata(altered,f.reader),/does not start at the actual selected source/);
+ }
+ assert.deepEqual(JSON.parse(prepareReferenceMetadata(f.preparationConfig,f.reader).products['reference-metadata.json']),f.projection);
+});
+
+test('reference preparation authenticates the selected source bank and refuses missing or duplicate source membership',async t=>{
+ for(const mutate of [bank=>bank.unchanged_files=[],bank=>bank.unchanged_files.push({...bank.unchanged_files[0]}),bank=>bank.native_manifest_sha256='0'.repeat(64)]){
+  const f=await fixture(t),bank=f.reader.json(f.pins.get('inputs/original-source-map.json'));mutate(bank);
+  const pin=await f.put('inputs/original-source-map.json',bank),selection={...f.selection,selected_geography:{...f.selection.selected_geography,...plain(pin)}};
+  const config={...f.preparationConfig,selector:await f.put('data/ownership-selection.json',selection)};
+  assert.throws(()=>prepareReferenceMetadata(config,f.reader),/actual selected source|Duplicate or foreign|source\/native\/release/);
+ }
+ const f=await fixture(t),pin=f.pins.get('inputs/original-source-map.json');
+ f.bodies.set(pin.sha256,Buffer.alloc(pin.bytes,32));
+ assert.throws(()=>prepareReferenceMetadata(f.preparationConfig,f.reader),/Whole reference preparation input differs/);
 });
 
 test('reference-metadata preparation rejects handwritten current identities, extra config, stale native/owner pins and incomplete source receipts',async t=>{
@@ -156,7 +184,7 @@ async function compositionFixture(t,{prior='native'}={}){
 }
 
 for(const prior of ['native','current'])test('composition bridges prior '+prior+' to M while retaining every inherited row and incoming scientific N',async t=>{
- const f=await compositionFixture(t,{prior}),products=composeAuthorities(f.config,f.reader),ledger=JSON.parse(products['selected-ledger.json']),patch=JSON.parse(products['patch.json']),wrapped=JSON.parse(products['runtime-envelope.json']),envelope=wrapped.additiveRelease;
+ const f=await compositionFixture(t,{prior}),products=await composeAuthorities(f.config,f.reader),ledger=JSON.parse(products['selected-ledger.json']),patch=JSON.parse(products['patch.json']),wrapped=JSON.parse(products['runtime-envelope.json']),envelope=wrapped.additiveRelease;
  assert.deepEqual(envelope.base_reference,f.current);assert.deepEqual(patch.base_reference,f.current);assert.equal(envelope.effective_reference.hierarchy_sha256,f.current.hierarchy_sha256);assert.deepEqual(patch.effective_reference,envelope.effective_reference);
  assert.deepEqual(ledger.rows.find(row=>row.component_id===f.priorLedger.rows[0].component_id),f.priorLedger.rows[0]);
  for(const key of ['parent_inventory','current_rebind','current_targets'])assert.deepEqual(ledger[key],f.priorLedger[key]);
@@ -164,26 +192,18 @@ for(const prior of ['native','current'])test('composition bridges prior '+prior+
  assert.equal(envelope.effective_reference.footprints_sha256,additiveReleaseFootprintDigest(f.current,bindAdditiveLedgerFeatures(f.currentFeatures,ledger,envelope,f.current)));
  const output=JSON.parse((await sourceEvidence({version:1,selector:{commit,path:'data/ownership-selection.json'},source_evidence:{version:1,kind:'source-target-native-evidence-v1'}},f.reader))['source-evidence.json']);
  assert.deepEqual(output.base_reference,f.native);assert.equal(output.native_contract.hierarchy_sha256,f.native.hierarchy_sha256);
- const mistaken=await f.incoming({scientificBase:f.current});assert.throws(()=>composeAuthorities(mistaken,f.reader),/baseline\/contract/);
+ const mistaken=await f.incoming({scientificBase:f.current});await assert.rejects(()=>composeAuthorities(mistaken,f.reader),/baseline\/contract/);
 });
 
 test('composition refuses unknown prior bases, mixed prior hierarchy, changed geometry and transferred history under coherent new pins',async t=>{
  const f=await compositionFixture(t),old=structuredClone(f.envelope);
- f.envelope.base_reference={...f.native,id:'geography:foreign'};await f.savePrior();assert.throws(()=>composeAuthorities(f.config,f.reader),/Prior cumulative reference/);
- Object.assign(f.envelope,structuredClone(old));f.envelope.effective_reference.hierarchy_sha256=f.current.hierarchy_sha256;await f.savePrior();assert.throws(()=>composeAuthorities(f.config,f.reader),/Prior cumulative reference/);
+ f.envelope.base_reference={...f.native,id:'geography:foreign'};await f.savePrior();await assert.rejects(()=>composeAuthorities(f.config,f.reader),/Prior cumulative reference/);
+ Object.assign(f.envelope,structuredClone(old));f.envelope.effective_reference.hierarchy_sha256=f.current.hierarchy_sha256;await f.savePrior();await assert.rejects(()=>composeAuthorities(f.config,f.reader),/Prior cumulative reference/);
  Object.assign(f.envelope,structuredClone(old));await f.savePrior();
  const source=JSON.parse(f.reader.read(f.projection.source_updates[0].after));source.features[0].geometry=rectangle(10);const sourcePin=await f.put('inputs/changed-after-source.json',source),projection=structuredClone(f.projection);projection.source_updates[0].after=sourcePin;await f.saveProjection(projection);
- assert.throws(()=>composeAuthorities(f.config,f.reader),/geometry/);
+ await assert.rejects(()=>composeAuthorities(f.config,f.reader),/geometry/);
  const receipt=JSON.parse(f.reader.read(f.projection.receipts[0]));receipt.historical_claims_transferred=true;const receiptPin=await f.put('inputs/transferred-receipt.json',receipt),history=structuredClone(f.projection);history.receipts[0]=receiptPin;await f.saveProjection(history);
- assert.throws(()=>composeAuthorities(f.config,f.reader),/non-metadata reference receipt/);
-});
-
-test('delivery evidence compares scientific selectors and fully qualifies a changed metadata pointer',async t=>{
- const f=await compositionFixture(t),original={selection:scientificNativeSelection(f.selection),selector:{commit},sidecar:f.sidecar},current={selection:f.selection,selector:{commit},sidecar:f.sidecar};
- validateDeliverySelectionTransition(original,current,f.reader);
- const changed={...current,selection:{...f.selection,release_id:'geography:foreign'}};assert.throws(()=>validateDeliverySelectionTransition(original,changed,f.reader),/Delivery base/);
- const receipt=JSON.parse(f.reader.read(f.projection.receipts[0]));receipt.historical_claims_transferred=true;const pin=await f.put('inputs/bad-evidence-receipt.json',receipt),projection=structuredClone(f.projection);projection.receipts[0]=pin;await f.saveProjection(projection);
- assert.throws(()=>validateDeliverySelectionTransition(original,current,f.reader),/non-metadata reference receipt/);
+ await assert.rejects(()=>composeAuthorities(f.config,f.reader),/non-metadata reference receipt/);
 });
 
 test('composition qualification passes original encoded whole source bytes to the existing projection validator',async t=>{
@@ -192,7 +212,14 @@ test('composition qualification passes original encoded whole source bytes to th
   const raw=f.reader.read(projection.source_updates[0][role]),pin=await f.put('inputs/encoded-source-'+role+'.json.gz',gzipSync(raw));
   projection.source_updates[0][role]={...pin,encoding:'gzip',decoded_bytes:raw.length,decoded_sha256:sha(raw)};
  }
- await f.saveProjection(projection);const result=composeAuthorities(f.config,f.reader);
+ await f.saveProjection(projection);
+ const acquired=new Map(),consumed=new Set(),key=pin=>pin.commit+':'+pin.path+':'+pin.sha256;
+ const read=pin=>{assert.ok(acquired.has(key(pin)),'Acquire the exact projection operand before reading: '+pin.path);consumed.add(key(pin));return f.reader.read(pin);};
+ const reader={...f.reader,read,json:pin=>JSON.parse(read(pin)),async acquire(pins){for(const pin of pins)acquired.set(key(pin),pin);}};
+ const result=await composeAuthorities(f.config,reader);
+ assert.deepEqual(result,await composeAuthorities(f.config,f.reader),'Acquisition preserves all four literal products');
+ assert.deepEqual([...acquired.keys()].sort(),[...consumed].sort(),'No extra projection or source bodies are declared');
+ for(const pin of [f.sidecar.logical_asset_map.owner_roster,projection.hierarchy.before,projection.hierarchy.after,...projection.receipts,...projection.source_updates.flatMap(update=>[update.before,update.after])])assert.ok(consumed.has(key(pin)));
  assert.deepEqual(JSON.parse(result['runtime-envelope.json']).additiveRelease.base_reference,f.current);
  assert.deepEqual(f.reader.read(f.sidecar.logical_asset_map.owner_roster),f.reader.read(f.preparationConfig.owner_roster));
 });
@@ -237,4 +264,54 @@ test('actual finalizer declares a fresh M projection and its exact seven-body ou
  await f.put('.github/package-inputs.json',{...definition,inputs:definition.inputs.filter(name=>name!==projectionPin.path)});
  await assert.rejects(prepareCurrentSelectedAdditive(args),/Undeclared current additive input/);
  assert.deepEqual(await fs.readFile(path.join(f.root,f.preparationConfig.native_manifest.path)),originalManifest);assert.deepEqual(await fs.readFile(path.join(f.root,f.preparationConfig.owner_roster.path)),originalRoster);
+});
+
+async function aliasPreparationFixture(t){
+ const f=await fixture(t,{aliasSeed:true}),config=structuredClone(f.preparationConfig);
+ const before=structuredClone(f.currentFeatures[0].properties),after=structuredClone(before);after.metadata.reference_polity=after.reference_owner;
+ const features=structuredClone(f.currentFeatures);features[0].properties=after;
+ const receipt={before_sha256:f.current.hierarchy_sha256,after_sha256:f.current.hierarchy_sha256,
+  footprints_sha256_before:f.current.footprints_sha256,footprints_sha256_after:f.current.footprints_sha256,
+  reference_only:true,historical_claims_transferred:false,summary:{geometry_changes:0},relationships:[],retired_units:[],group_changes:[],
+  before_units:f.reader.json(config.hierarchy.after),source_evidence:[{url:'https://example.invalid/recorded-winner',source_sha256:config.source_updates[0].after.sha256}],
+  changed_location_properties:[{location_id:'A',before_properties:before,after_properties:after}]};
+ const refresh=async()=>{config.receipts[1]=await f.put('inputs/alias-receipt.json',receipt);config.source_updates[0].after=await f.put('inputs/alias-source.json',{type:'FeatureCollection',features});};
+ await refresh();return {...f,config,receipt,features,refresh};
+}
+
+for(const compressed of [false,true]) test('same-M preparation binds a complete alias receipt without minting a release or losing the prior reparent: '+(compressed?'gzip':'plain'),async t=>{
+ const f=await aliasPreparationFixture(t),release=Buffer.from(f.reader.read(f.pins.get('data/geographic-releases/releases-v2.json.gz')));
+ if(compressed){
+  const raw=f.reader.read(f.config.receipts[1]),pin=await f.put('inputs/alias-receipt.json.gz',gzipSync(raw));
+  f.config.receipts[1]={...pin,encoding:'gzip',decoded_bytes:raw.length,decoded_sha256:sha(raw)};
+  for(const change of [{encoding:'unknown'},{decoded_bytes:raw.length-1},{decoded_sha256:'0'.repeat(64)},{decoded_bytes:undefined}]){
+   const config=structuredClone(f.config);Object.assign(config.receipts[1],change);assert.throws(()=>prepareReferenceMetadata(config,f.reader));
+  }
+ }
+ const prepared=prepareReferenceMetadata(f.config,f.reader),projection=JSON.parse(prepared.products['reference-metadata.json']);
+ assert.deepEqual(projection.reference,f.current);assert.deepEqual(projection.native_reference,f.native);
+ assert.deepEqual(projection.receipts,f.config.receipts);assert.equal(projection.location_changes[0].after_properties.parent_id,'Q');
+ assert.equal(projection.location_changes[0].after_properties.metadata.reference_polity,'Recorded winner');
+ assert.deepEqual(projection.location_changes[0].after_properties.metadata.reference_corrections,f.currentFeatures[0].properties.metadata.reference_corrections);
+ assert.deepEqual(f.reader.read(f.pins.get('data/geographic-releases/releases-v2.json.gz')),release);
+ assert.ok(prepared.input_inventory.some(p=>p.sha256===f.config.receipts[1].sha256&&p.whole_body_consumed));
+ // A real reparent absent from M is never exempted by the later alias receipt.
+ const value=JSON.parse((await import('node:zlib')).gunzipSync(release));value.releases.at(-1).metadata.metadata_migration_sha256={};
+ const changed=await f.put('data/geographic-releases/releases-v2.json.gz',gzipSync(Buffer.from(JSON.stringify(value))));
+ const pointer=f.reader.json(f.pins.get('data/geographic-releases/current-manifest.json'));pointer.sha256=changed.sha256;await f.put('data/geographic-releases/current-manifest.json',pointer);
+ assert.throws(()=>prepareReferenceMetadata(f.config,f.reader),/does not bind every applied metadata receipt/);
+});
+
+test('same-M alias preparation refuses coherent hidden edits, missing scope and stale receipt chains',async t=>{
+ for(const mutate of [
+  f=>{f.receipt.changed_location_properties[0].after_properties.metadata.reference_owner_evidence.winner.owner_id='owner:Q2';f.features[0].properties.metadata.reference_owner_evidence.winner.owner_id='owner:Q2';},
+  f=>{f.receipt.changed_location_properties[0].after_properties.metadata.reference_polity='Wrong';f.features[0].properties.metadata.reference_polity='Wrong';},
+  f=>{f.receipt.changed_location_properties[0].after_properties.metadata.semantic_review.status='approved';f.features[0].properties.metadata.semantic_review.status='approved';},
+  f=>{f.features[0].geometry.coordinates[0][1][0]=.25;},
+  f=>{f.features[1].properties.metadata.reference_polity='Recorded winner';},
+  f=>{f.receipt.changed_location_properties=[];},
+  f=>{f.receipt.before_sha256=f.native.hierarchy_sha256;},
+  f=>{f.receipt.changed_location_properties[0].before_properties.parent_id='P';},
+ ]){const f=await aliasPreparationFixture(t);mutate(f);await f.refresh();assert.throws(()=>prepareReferenceMetadata(f.config,f.reader));}
+ const f=await aliasPreparationFixture(t);f.config.receipts.reverse();assert.throws(()=>prepareReferenceMetadata(f.config,f.reader),/chain|Stale|original|hierarchy/);
 });

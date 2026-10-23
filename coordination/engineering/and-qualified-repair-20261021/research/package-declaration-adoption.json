@@ -1,0 +1,19 @@
+{
+  "base": "53eb39c23dc78f41cb674ac80a75b88c76b26770",
+  "prior_inputs": 248,
+  "current_inputs": 248,
+  "retired_exact_prior_cumulative_roles": [
+    "coordination/engineering/lie-qualified-repair-20261021/composition-001/patch.json",
+    "coordination/engineering/lie-qualified-repair-20261021/composition-001/runtime-envelope.json",
+    "coordination/engineering/lie-qualified-repair-20261021/composition-001/selected-ledger.json",
+    "coordination/engineering/lie-qualified-repair-20261021/selection-sidecar-001.json"
+  ],
+  "added_current_cumulative_roles": [
+    "coordination/engineering/and-qualified-repair-20261021/composition-002/patch.json",
+    "coordination/engineering/and-qualified-repair-20261021/composition-002/runtime-envelope.json",
+    "coordination/engineering/and-qualified-repair-20261021/composition-002/selected-ledger.json",
+    "coordination/engineering/and-qualified-repair-20261021/selection-sidecar-001.json"
+  ],
+  "other_fields_and_retained_order_unchanged": true,
+  "method": "Normal stock appendPackageReadPaths authenticates selected cumulative prior roles before retiring exactly superseded declarations. No historical evidence or refs deleted."
+}

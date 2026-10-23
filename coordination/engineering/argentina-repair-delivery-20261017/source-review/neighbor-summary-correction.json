@@ -1,0 +1,22 @@
+{
+  "kind": "superseded-neighbor-summary-reporting-defect",
+  "affected_vintage": "source-review/neighbor-points-001/neighbor-point-corroboration.json",
+  "affected_commit": "08b1ec0c4df",
+  "found_by": "independent source reviewer",
+  "cause": "Contact construction accessed missing defaultdict entries for every observed key, so summary len() counted empty boundary entries.",
+  "affected_reported_counts": {
+    "strict_interior_cells": 1025,
+    "boundary_contact_cells": 1025
+  },
+  "actual_counts_rederived_from_retained_contact_arrays": {
+    "strict_interior_cells": 1025,
+    "boundary_contact_cells": 0
+  },
+  "unaffected_claims": [
+    "Complete6417 whole original feature coverage",
+    "Exact1025 per-key foreign source-ID equality",
+    "All36 contact features and zero invalid original features"
+  ],
+  "remedy": "Non-mutating lookups; nonempty aggregate counts; explicit equality checks between contact arrays and per-source totals; corrected bounded run retained separately.",
+  "limit": "The old aggregate strict-interior/boundary summary is not authoritative."
+}

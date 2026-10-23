@@ -1,0 +1,95 @@
+{
+  "issue": 2462,
+  "archive": {
+    "task_path": "americas-20261017/honduras-worker-001/upstream-source-HND_ADM2.zip",
+    "upstream_repository": "wmgeolab/geoBoundaries",
+    "upstream_commit": "905b0baf5f4fb3b9ccf45293647dcacdb2b799d4",
+    "upstream_path": "sourceData/gbOpen/HND_ADM2.zip",
+    "upstream_lfs_pointer_git_blob_oid": "f8c37b041348519a8213c351c31b149a437653cf",
+    "bytes": 23978016,
+    "sha256": "4ceffd3844e8e425159c63b3fb2baf2dfc280b73a173f632caff674f9b39bb13"
+  },
+  "archive_record_ordinal": 297,
+  "original_shp_record_number": 298,
+  "source_shp_offset_bytes": 32488480,
+  "source_shp_record_bytes": 456,
+  "source_shp_record_sha256": "cc9943fbe8d68a4bce1bed7f02d98d75f06843f7c261e0801e46975aed4bc64d",
+  "source_shp_content_sha256": "3a3bdacde3f4be1d846614bc9fa07b6474cd4002b374eaa9f4f297b68d007abb",
+  "source_dbf_record_bytes": 61,
+  "source_dbf_record_sha256": "6325c4454b4624e88c74ac656a3cec7832241b80f4bc65846aed11e414b9c58c",
+  "source_dbf_fields": [
+    {
+      "name": "Name",
+      "type": "C",
+      "width": 50,
+      "decimals": 0
+    },
+    {
+      "name": "Level",
+      "type": "C",
+      "width": 10,
+      "decimals": 0
+    }
+  ],
+  "source_dbf_values": {
+    "Name": "Nueva Frontera",
+    "Level": "ADM2"
+  },
+  "source_dbf_raw_field_hex": {
+    "Name": "4e756576612046726f6e74657261202020202020202020202020202020202020202020202020202020202020202020202020",
+    "Level": "41444d32202020202020"
+  },
+  "source_record_deleted": false,
+  "source_shape_type": 5,
+  "complete_source_parts": 1,
+  "complete_source_rings": 1,
+  "complete_source_vertices_including_closure": 25,
+  "ring_starts": [
+    0
+  ],
+  "source_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.017453292519943295]]",
+  "source_prj_sha256": "98aaf3d1c0ecadf1a424a4536de261c3daf4e373697cb86c40c43b989daf52eb",
+  "extraction": {
+    "method": "Existing structural SHX/SHP/DBF ordinal reader; direct native little-endian double decoding of the complete one-part Polygon record. No thirdparty geometry parser, ring reassignment, coordinate rounding, simplification, clip, transform, repair or predicate.",
+    "all_coordinates_double_byte_roundtrip_equal": true,
+    "all_source_dbf_fields_preserved": true,
+    "raw_source_record_retained": true
+  },
+  "whole_feature": {
+    "path": "whole-original-feature.geojson",
+    "bytes": 1112,
+    "sha256": "c23d62d72390cf765495440312b5b1259cd73f9fd1c4074e4488ae62eb18904e",
+    "git_blob_oid": "e53d2390352b1863387a3dcab6278999d6a7162c",
+    "has_canonical_owner_or_fabricated_shapeID": false
+  },
+  "grant_provenance": {
+    "archive_member": "license.png",
+    "archive_member_sha256": "7e75906d563e4773bc1170f43a70ab82f011b669869d9120b18f3af350cf0487",
+    "retained_image": "americas-20261017/honduras-worker-001/upstream-member-license.png",
+    "archive_meta_member_sha256": "5f30a6f2505bffdc7744158afb0cc73be7fb250a6be705a54b239609e7271daf",
+    "retained_meta": "americas-20261017/honduras-worker-001/upstream-member-meta.txt",
+    "recorded_license": "Creative Commons Attribution4.0",
+    "provider": "ICF / Gobierno de Honduras municipal resource",
+    "resource_url": "https://datos.gob.hn/en/dataset/limites-municipales/resource/0a086bb7-1e3e-4cb0-b7d8-e21a8417dc5f",
+    "visible_resource_created_updated": "2019-08-22",
+    "limits": "Actual retained dataset-specific resource grant evidence. No present-provider confirmation, effective-boundary-date proof, provider exemption or sourcebank replacement."
+  },
+  "source_completeness_fact": {
+    "independent_peer_review": "americas-20261017/peru-worker-001/honduras-source-meaning-review-001/REVIEW.md",
+    "reported_primary": "https://temp.ine.gob.hn/wp-content/uploads/2025/02/278-Santa-Barbara-Nueva-Frontera.pdf",
+    "reported_tome": 278,
+    "reported_municipality_code": "16-28",
+    "reported_creation_year": 1997,
+    "reported_printed_page": 19,
+    "reported_pdf_page_zero_index": 18,
+    "limit": "Primary page facts independently reviewed by Peru; this worker webread returned502. The2025URLupload is not a boundaryvintage and creation1997 does not date this polygon."
+  },
+  "native_qualification": {
+    "sourcebank_overwritten": false,
+    "canonical_owner_assigned": false,
+    "predicate_or_cellcut_run": false,
+    "affected_cells": null,
+    "held_keys": null,
+    "limits": "Whole conflict original preserved; no native qualification by ignoring the omission and no guessed affected/held cells."
+  }
+}

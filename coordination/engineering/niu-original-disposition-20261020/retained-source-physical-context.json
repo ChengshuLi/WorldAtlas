@@ -1,0 +1,364 @@
+{
+  "version": 1,
+  "kind": "niu-retained-source-physical-context-v1",
+  "generated_for": "Independent original-source and physical-context inventory; not a qualification decision.",
+  "scope": {
+    "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "queue_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "package_id": "gb-NIU-ADM1--repair-evaluation",
+    "package_class": "repair-evaluation",
+    "primary_source": "gb:NIU:ADM1",
+    "source_family_index": 241,
+    "owner_index": 7126,
+    "land_cells": 116,
+    "inland_water_cells": 0,
+    "interval_segments": 50,
+    "native_block": 35,
+    "source_features": [
+      47591,
+      47592,
+      47593,
+      47597,
+      47598,
+      47599,
+      47600,
+      47602
+    ],
+    "completion_contract": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+    "qualification_question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch."
+  },
+  "original_and_observed_key_reconciliation": {
+    "observation_file": "niu-selected-owner-observation.json.gz",
+    "observation_commit": "6b4bf3ed833980d5fa565c2808363b377d493910",
+    "observation_kind": "literal-selected-owner-observation-v1",
+    "scientific_qualification": false,
+    "original_interval_rows": 50,
+    "expanded_key_count": 116,
+    "ordered_exact_key_equality": true,
+    "expanded_keys_sha256_compact_json_plus_lf": "d5118228cfaa2ba731afbafeced661179579d7cc3489ff852541a0cf4270c43b",
+    "interval_rows_sha256_compact_json_plus_lf": "07c00f5bed9729987e0d5f21e37671ebf7178f40209d6c0265d4d417a3a12838",
+    "observation_original_intervals_sha256": "684f2e5b56357552d7efe3e21b8e103473e226fac1b1f4e877f1155340c5537c",
+    "observation_query_sha256": "d5118228cfaa2ba731afbafeced661179579d7cc3489ff852541a0cf4270c43b",
+    "per_key_selected_owner_result": {
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "existing_product_overlap": false,
+      "keys": 116
+    },
+    "meaning": "This independently expands the original interval rows and checks the full ordered coordinate list against the saved observation keys. The selected-product result is not source applicability, complete competitor clearance, repair qualification, or root acceptance."
+  },
+  "source_and_lineage_context": {
+    "source_payload": {
+      "repo_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-NIU-ADM1-000.bin.gz",
+      "git_blob_oid": "0846aee08451e6c2dbe2553fb871b7e362a3f192",
+      "compressed_bytes": 3251,
+      "compressed_sha256": "396f6e10e5ab71cbb1eae927f47a518511ae1d485cc057a6eeaa97395ca8f7e3",
+      "decoded_bytes": 14444,
+      "decoded_sha256": "4bf1e8967a32d43da06c12e43bf99ea35c704aa00ffaaa821f63728335088b13",
+      "feature_count": 14,
+      "acquisition_receipt": {
+        "path": "gb-NIU-ADM1-000.bin.gz",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "0846aee08451e6c2dbe2553fb871b7e362a3f192",
+        "size": 3251,
+        "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/0846aee08451e6c2dbe2553fb871b7e362a3f192",
+        "sha256": "396f6e10e5ab71cbb1eae927f47a518511ae1d485cc057a6eeaa97395ca8f7e3",
+        "decoded_bytes": 14444,
+        "decoded_sha256": "4bf1e8967a32d43da06c12e43bf99ea35c704aa00ffaaa821f63728335088b13",
+        "feature_count": 14
+      },
+      "inspection": "Read feature properties only; geometry was not read or processed. All 14 properties have shapeGroup NIU, shapeType ADM1, blank shapeISO. The eight package-contact features match the original source roster by index, ordinal, source ID and name.",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7"
+    },
+    "catalogue": {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "niue_source_name": "Niue",
+      "boundary_source": "Pacific Data Hub",
+      "source_url": "https://pacificdata.org/data/dataset/2011_niu_phc_admin_boundaries",
+      "feature_count": 14,
+      "represented_year": 2020,
+      "boundary_license_recorded": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/NIU/ADM1/geoBoundaries-NIU-ADM1_simplified.geojson",
+      "limits": "These are retained catalogue/source declarations, not a conclusion about present source applicability, territorial authority, completeness, or legal reuse.",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7"
+    },
+    "lineage": {
+      "owner_id": "atlas:territory:NIU",
+      "owner_index": 7126,
+      "province_id": "framework:province:niue:41699e810a4a",
+      "province_index": 3290,
+      "owner_name": "Niue",
+      "location_basis_recorded": "Compact source country/territory",
+      "retained_niue_adm1_atoms": 14,
+      "all_14_roster_records_owner_indices": [
+        7126
+      ],
+      "evidence": "Original lineage.json.gz and source-feature-roster.json.gz at the pinned original queue; complete owner lineage and per-contact roster are retained in niu-disposition.json.",
+      "inputs": [
+        {
+          "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+          "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+          "git_blob_oid": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa"
+        },
+        {
+          "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+          "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+          "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26"
+        }
+      ]
+    },
+    "contact_groups_cells_and_intervals": [
+      {
+        "source_feature": 47592,
+        "name": "Toi",
+        "cells": 9,
+        "intervals": 2,
+        "original_interval_ordinals": [
+          0,
+          1
+        ],
+        "source_id": "gb:NIU:ADM1:93272968B22364225711306",
+        "source_family_index": 241,
+        "lineage_owner_indices": [
+          7126
+        ],
+        "geometry_status_recorded": "raw-native-supported"
+      },
+      {
+        "source_feature": 47593,
+        "name": "Mutalau",
+        "cells": 20,
+        "intervals": 7,
+        "original_interval_ordinals": [
+          2,
+          3,
+          4,
+          6,
+          8,
+          10,
+          18
+        ],
+        "source_id": "gb:NIU:ADM1:93272968B97328284886537",
+        "source_family_index": 241,
+        "lineage_owner_indices": [
+          7126
+        ],
+        "geometry_status_recorded": "raw-native-supported"
+      },
+      {
+        "source_feature": 47591,
+        "name": "Hikutavake",
+        "cells": 31,
+        "intervals": 10,
+        "original_interval_ordinals": [
+          5,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "source_id": "gb:NIU:ADM1:93272968B4423412382248",
+        "source_family_index": 241,
+        "lineage_owner_indices": [
+          7126
+        ],
+        "geometry_status_recorded": "raw-native-supported"
+      },
+      {
+        "source_feature": 47602,
+        "name": "Makefu",
+        "cells": 6,
+        "intervals": 6,
+        "original_interval_ordinals": [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24
+        ],
+        "source_id": "gb:NIU:ADM1:93272968B40090915564601",
+        "source_family_index": 241,
+        "lineage_owner_indices": [
+          7126
+        ],
+        "geometry_status_recorded": "raw-native-supported"
+      },
+      {
+        "source_feature": 47600,
+        "name": "Alofi South",
+        "cells": 4,
+        "intervals": 4,
+        "original_interval_ordinals": [
+          25,
+          26,
+          27,
+          28
+        ],
+        "source_id": "gb:NIU:ADM1:93272968B84066650409930",
+        "source_family_index": 241,
+        "lineage_owner_indices": [
+          7126
+        ],
+        "geometry_status_recorded": "raw-native-supported"
+      },
+      {
+        "source_feature": 47599,
+        "name": "Tamakautoga",
+        "cells": 5,
+        "intervals": 5,
+        "original_interval_ordinals": [
+          29,
+          30,
+          31,
+          32,
+          33
+        ],
+        "source_id": "gb:NIU:ADM1:93272968B40499677561204",
+        "source_family_index": 241,
+        "lineage_owner_indices": [
+          7126
+        ],
+        "geometry_status_recorded": "raw-native-supported"
+      },
+      {
+        "source_feature": 47598,
+        "name": "Avatele",
+        "cells": 24,
+        "intervals": 7,
+        "original_interval_ordinals": [
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40
+        ],
+        "source_id": "gb:NIU:ADM1:93272968B73075059072765",
+        "source_family_index": 241,
+        "lineage_owner_indices": [
+          7126
+        ],
+        "geometry_status_recorded": "raw-native-supported"
+      },
+      {
+        "source_feature": 47597,
+        "name": "Vaiea",
+        "cells": 17,
+        "intervals": 9,
+        "original_interval_ordinals": [
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49
+        ],
+        "source_id": "gb:NIU:ADM1:93272968B84240109118138",
+        "source_family_index": 241,
+        "lineage_owner_indices": [
+          7126
+        ],
+        "geometry_status_recorded": "raw-native-supported"
+      }
+    ],
+    "interpretation_limits": [
+      "The retained original source candidate row contact is not a complete competitor census.",
+      "Singleton owner lineage/contact does not prove current applicability or unique qualified source membership.",
+      "No geometry overlay, boundary comparison, present-day legal/territorial source authority, or foreign-source competitor search was performed.",
+      "No source payload coordinates/geometries were read, redistributed, or transformed."
+    ]
+  },
+  "physical_and_water_context": {
+    "block": 35,
+    "source_candidates": {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-035.json.gz",
+      "git_blob_oid": "efadb30876bf9a1604b2c2cf84534a8ebf4a1856",
+      "compressed_bytes": 254815,
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7"
+    },
+    "physical_support": {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-035.json.gz",
+      "git_blob_oid": "a97e15cd1af0e4a58f334cfe13a9a963b39067ba",
+      "compressed_bytes": 217105,
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7"
+    },
+    "inland_water_support": {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-035.json.gz",
+      "git_blob_oid": "ab4b5de28776f34acff1ccd57c89d1dc660c584e",
+      "compressed_bytes": 5076,
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7"
+    },
+    "block_scan_counts": {
+      "owner_7126_candidates": 163,
+      "owner_7126_with_any_of_8_package_features": 137,
+      "those_137_not_in_physical_support": 21,
+      "land_intersection_matching_original_package": 116,
+      "inland_water_intersection": 0,
+      "neither_physical_nor_water_in_package": 0,
+      "overlap_physical_and_water_in_package": 0
+    },
+    "separate_physical_interpretation_companion": {
+      "package_id": "gb-NIU-ADM1--physical-interpretation",
+      "source_relative_cells": 47,
+      "interval_segments": 38,
+      "land_cells": 0,
+      "inland_water_cells": 0,
+      "source_features": [
+        47593,
+        47595,
+        47596
+      ],
+      "meaning": "Distinct companion scope: 21 source-relative Mutalau cells plus 18 Liku and 8 Hakupu cells. Excluded from this repair package."
+    },
+    "global_physical_summary": {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-unassigned-summary.json",
+      "git_blob_oid": "0c934cdaf4b007a741e66d4a080890154bdae53c",
+      "limits": "Global methodology/context only; not a per-key NIU physical proof. Existing river water remains location-owned under the original contract.",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7"
+    }
+  },
+  "retained_historical_review_context": {
+    "issue_134": {
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/134",
+      "scope": "Read-only Western Polynesia source/semantic review, 24 location identities; Niue is one of the scoped territory locations. It is not this repair-evaluation package.",
+      "published_checkpoint_url": "https://github.com/ChengshuLi/WorldAtlas/issues/134#issuecomment-5970840660",
+      "published_findings": "The checkpoint reports Tonga 2021 census alignment with five mapped ADM1 features; Tuvalu 2022 census recognizes Niulakita while the 2017 eight-feature ADM1 source has no Niulakita feature; the official Niutao strategy is not statutory-jurisdiction or boundary proof. It also flags Natural Earth country/territory aggregation and missing ASM/WLF source-policy crosswalks as unresolved. The checkpoint does not state a NIU-specific current source-applicability or boundary finding.",
+      "published_followups": "#615 Niulakita crosswalk and #616 ASM/WLF source profiles; neither is an NIU repair disposition.",
+      "claim_status": "The retained issue comment records the reservation released; it does not establish the current repair package was never previously owned."
+    },
+    "pr_617": {
+      "url": "https://github.com/ChengshuLi/WorldAtlas/pull/617",
+      "merge_commit": "3d2c5cee2fa748a7eff90051088b6998c9c84968",
+      "merge_result_url": "https://github.com/ChengshuLi/WorldAtlas/pull/617#issuecomment-5970996250",
+      "retained_moderator_finding_url": "https://github.com/ChengshuLi/WorldAtlas/pull/617#issuecomment-5971078674",
+      "finding": "The baseline-extract builder inferred source paths from a missing properties.part field, thereby recording only part-0 despite reading 24 location rows; verifier did not validate baseline_files or immutable release/envelope pins, and refresh could overwrite from current HEAD alongside stale assessments/screens. Follow-up #619 requested source-path-aware frozen baseline verification.",
+      "limits": "This is an evidence-reproducibility finding, not a live-map defect or NIU repair evaluation. The moderator did not independently verify official Tonga/Tuvalu census PDFs or the unretained GSHHG archive. A post-merge audit record says the full 24-row source-semantic review remained incomplete. No NIU-specific repair or present-source applicability conclusion is established."
+    }
+  },
+  "completion_and_nonclaims": {
+    "contract_requires": "Every exact interval either a qualified additive repair to its recorded location or a documented exception; actual selected-native conservation and source/physical witness checks; existing river water remains location-owned.",
+    "currently_supported": "Original selected native observer key coverage is exact (116/116; 50/50 intervals); all current selected owners are zero, with no overlap. The retained source and block evidence supports a bounded contact and mask-context description only.",
+    "not_established": [
+      "No additive repair qualification.",
+      "No source-completeness or complete foreign-competitor/exclusion proof.",
+      "No present territorial/legal authority or license clearance.",
+      "No geospatial overlay or visual boundary witness.",
+      "No root acceptance or publication clearance."
+    ],
+    "documented_unresolved_basis": "The retained evidence gives concrete per-contact source lineage and physical mask facts while preserving current applicability, complete competitor/exclusion treatment, and repair qualification as unresolved. A source gap alone is not affirmative qualification."
+  }
+}

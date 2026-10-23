@@ -1,0 +1,68 @@
+{
+  "kind": "Independent scientific binding check, no native or final-head approval",
+  "scope_note": "Read-only evidence consolidation. No observer, geometry, physical producer, or point-membership comparison was rerun for this report.",
+  "swz_physical_receipt_assessment": {
+    "kind": "Independent read-only SWZ physical receipt and consumed-input binding check",
+    "commit": "0bc1bbb89c0428336cfba710fa1691aefe6c6904",
+    "stage_commit": "ec47bf3998bf44b50d4ed59c0a1768faea6ad6b5",
+    "producer_commit": "e447ef5fc4fcae9b8f04a6d517904cbf30b413df",
+    "stage_input": {
+      "path": "coordination/engineering/swz-qualified-repair-20261021/physical-preparation/original-stage-inputs.json",
+      "blob_oid": "f4f04330352612aa6d408f593e6a760c0818fa92",
+      "bytes": 18743,
+      "sha256": "7710b7fe818907b51b20f775dde4009c9642a3e401fcde80290c01957713b7fc",
+      "receipt_first_input_binding_exact": true
+    },
+    "program": {
+      "path": "scripts/qualify-source-cohort.py",
+      "blob_oid": "f69180b425d665a022dd18290688864674dd20a5",
+      "bytes": 43642,
+      "sha256": "abc801b9a35d20c9f0dfe3bbc9bb2cb7dc107f1758414970d9cde11380574a18",
+      "receipt_program_hash_match": true
+    },
+    "stage_geometry_binding": {
+      "selected_targets": 8,
+      "exact_features_equal_simplified_source": 8,
+      "exact_features_equal_full_source": 0,
+      "source_family": "gb:SWZ:ADM2 source payload, 2017 represented, ODbL 1.0; 53-feature simplified release; payload path coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-SWZ-ADM2-000.bin.gz; Git blob f997375cdeee1b2cb9e0246913a50807f2e165aa",
+      "meaning": "Physical receipt concerns the eight exact simplified target feature geometries staged from the retained source. It does not establish physical support for full unsimplified geometry; the separate 14-cell 8/6 contact comparison remains representation context."
+    },
+    "receipt": {
+      "path": "coordination/engineering/swz-qualified-repair-20261021/physical-001/execution-receipt.json",
+      "blob_oid": "e68356833d661d78269308349bfca1ccf27153d0",
+      "bytes": 59079,
+      "sha256": "31a5764268de2294fe00e282d57cc7a7cb36df84527e8f9cdca8e41c5839bc74",
+      "complete": true,
+      "input_count": 25,
+      "all_declared_input_git_oids_present": true,
+      "receipt_elapsed_seconds": 3.4791174580004736,
+      "support_output": {
+        "path": "coordination/engineering/swz-qualified-repair-20261021/physical-001/whole-target-support.json",
+        "blob_oid": "197ae9ae63e7b325bde2dbb95f2862daa7f0f045",
+        "bytes": 37429,
+        "sha256": "3fc9e5e06dfa1c529b186c13c8f906136adb2e24f472545ce04c9b466df4ee47",
+        "producer_elapsed_seconds": 3.478521166000064,
+        "target_count": 8,
+        "all_source_covers_candidate_true": true,
+        "all_candidate_covers_source_false": true,
+        "all_status_checked": true,
+        "all_issue_lists_empty": true,
+        "source_id_query_each": [
+          1
+        ]
+      }
+    },
+    "runtime_retry_record": {
+      "inventory": "inventory/swz-physical-runtime-rebinding.json",
+      "first_attempt": "Failed runtime identity admission before output; no physical result produced.",
+      "successful_attempt": "Bundled Python 3.12.14, NumPy 2.3.5, Shapely 2.1.2, GEOS 3.13.1. Existing runtime was not installed or modified by this check; binding notes unknown cause of changed executable hash and unchanged 201 other runtime files."
+    },
+    "interpretation": "The result supports whole-target physical coverage for the eight staged simplified candidates with no detected issues under the retained measured input. It is not a territorial/source-applicability determination, full-geometry equivalence, selected-native conservation, diagnostic or native-authority result.",
+    "operations": {
+      "read_only": true,
+      "observer_or_geometry_rerun": false,
+      "physical_producer_rerun": false,
+      "input_hydration_or_fetch": false
+    }
+  }
+}

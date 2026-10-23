@@ -501,3 +501,22 @@ test('compact preparation keeps ambiguous original geometry inline and rejects i
     const f=territorialFixture();mutation(f.config);await assert.rejects(sourceEvidence(f.config,f.reader),/territorial|Territorial/);
   }
 });
+
+
+test('final-profile source derivation consumes genuine N pins without any historical repair product', async () => {
+  const f=fixture(),issued=f.manifest.original_assets.bounds;
+  const raw=f.reader.read(f.owner_roster),pin=f.reader.add(issued.path,raw,issued.commit);
+  const owner={...pin,decoded_bytes:f.owner_roster.decoded_bytes,decoded_sha256:f.owner_roster.decoded_sha256};
+  const native={...f.sidecar.base_selection,selected_geography:{version:1,kind:'complete-world-index-with-exact-encoded-overrides',path:'data/original-source-map.json',bytes:1,sha256:'4'.repeat(64)},artifact_consumption:{}};
+  const selection={version:2,kind:'selected-final-native-bank-v2',native_selection:native,
+    prepared_bank:{path:'data/canonical-grid/current-startup/index.json',bytes:1,sha256:'5'.repeat(64)},reference:f.envelope.effective_reference};
+  f.config.selector=locator(f.reader.add('data/ownership-selection.json',selection));f.config.source_evidence.owner_roster=owner;
+  f.reader.reads.length=0;const actual=await result(f);
+  assert.deepEqual(actual.owner_roster,owner);assert.deepEqual(actual.native_contract,Object.fromEntries(contractKeys.map(k=>[k,f.manifest[k]])));
+  assert.deepEqual(actual.base_reference,f.base_reference);
+  for(const name of ['sidecar.json','runtime-envelope.json','ledger.json','patch.json'])assert(!f.reader.reads.some(p=>p.endsWith('/'+name)));
+  for(const key of ['commit','path','sha256']){const original=f.config.source_evidence.owner_roster;f.config.source_evidence.owner_roster={...original,[key]:key==='path'?'foreign.json':'0'.repeat(key==='sha256'?64:40)};
+    await assert.rejects(sourceEvidence(f.config,f.reader),/genuine original owner pin/);f.config.source_evidence.owner_roster=original;}
+  const original=f.config.source_evidence.owner_roster;f.config.source_evidence.owner_roster={...original,decoded_sha256:'0'.repeat(64)};
+  await assert.rejects(sourceEvidence(f.config,f.reader),/Decoded baseline identity differs/);
+});

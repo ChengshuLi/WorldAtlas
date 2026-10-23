@@ -115,7 +115,7 @@ export function workspaceManager(repo, {freeBytes} = {}) {
     if (missingTrees.length) throw Error(`Missing tree metadata: ${missingTrees.join(', ')}; selected inventory cannot be enumerated`);
     // Tree metadata needs no blob contents. Global -l sizing can fetch excluded
     // promisor blobs, or abort on them before sparse filtering on some Git versions.
-    const tree = git('ls-tree', '-rz', head).split('\0').filter(Boolean).map(line => {
+    const tree = git('ls-tree', '--full-tree', '-rz', head).split('\0').filter(Boolean).map(line => {
       const separator = line.indexOf('\t');
       const [mode, type, oid] = line.slice(0, separator).split(' ');
       if (separator < 0 || !/^[0-7]{6}$/.test(mode) || !/^[a-f0-9]{40,64}$/.test(oid)) throw Error('Unknown tree entry');
@@ -185,15 +185,18 @@ export function workspaceManager(repo, {freeBytes} = {}) {
   const allocate = ({worker, slot = 'work', branch, commit, profile = 'sparse', include = []}) => {
     if (!id(worker) || !['work', 'review'].includes(slot)) throw Error('Supply a safe unique worker ID and work/review slot');
     if (!['sparse', 'full'].includes(profile) || !Array.isArray(include) || !include.every(safeInclude)) throw Error('Use sparse/full profile and literal data/research/coordination paths without traversal or globs');
-    if (slot === 'work' && (!/^(engineering|geography|research)\/[a-z0-9][a-z0-9-]{0,63}$/.test(branch ?? '') || commit)) throw Error('Work needs a fresh lane branch; main is fetched by the allocator');
+    if (slot === 'work' && (typeof branch !== 'string' || !branch || branch.startsWith('-') || branch === 'main' || commit)) throw Error('Work needs a fresh branch; main is fetched by the allocator');
+    if (slot === 'work') git('check-ref-format', `refs/heads/${branch}`);
     if (slot === 'review' && (branch || !/^[a-f0-9]{40}$/.test(commit ?? ''))) throw Error('Review needs an exact detached 40-character commit');
     if (slot === 'work') {
       if (git('for-each-ref', '--format=%(refname)', `refs/heads/${branch}`).split('\n').includes(`refs/heads/${branch}`)) {
-        throw Error('Fresh lane branch already exists; choose a new branch without changing its history');
+        throw Error('Fresh branch already exists; choose a new branch without changing its history');
       }
       // Network interruption must not strand the registry lock. Freeze the
       // fetched commit before reserving; later ref movement cannot change it.
-      git('fetch', 'origin', 'main');
+      // Request metadata only even from conventional clones; selected missing
+      // blobs still need explicit acquisition before the inventory can pass.
+      git('fetch', '--no-tags', '--no-recurse-submodules', '--no-auto-maintenance', '--filter=blob:none', 'origin', 'main');
     }
     const head = slot === 'work' ? git('rev-parse', '--verify', 'origin/main').trim() : commit;
     return locked(() => {
@@ -252,15 +255,35 @@ export function workspaceManager(repo, {freeBytes} = {}) {
         throw Error('Index trust flags can hide edits; inspect materialized files and clear flags before cleanup');
       }
     }
-    if (localGit('status', '--porcelain', '--untracked-files=all') || localGit('ls-files', '--others', '--ignored', '--exclude-standard')) throw Error('Workspace contains uncommitted, untracked or ignored files; preserve unique work and remove only verified generated artifacts first');
+    if (localGit('status', '--porcelain', '--untracked-files=all')) throw Error('Workspace contains uncommitted or untracked files; preserve unique work first');
     const head = localGit('rev-parse', 'HEAD').trim();
+    const ignored = localGit('ls-files', '--others', '--ignored', '--exclude-standard', '-z').split('\0').filter(Boolean);
+    let generatedDatabase;
+    if (ignored.length) {
+      const database = '.cache/package-atlas.sqlite', receiptPath = '.cache/package-input-build.json';
+      const refuse = () => { throw Error('Workspace contains unbound or changed ignored files; preserve unique work and remove only verified generated artifacts first'); };
+      if (ignored.sort().join('\0') !== [database, receiptPath].sort().join('\0')) refuse();
+      ordinaryDirectory(path.join(entry.path, '.cache'));
+      const file = path.join(entry.path, database), receiptFile = path.join(entry.path, receiptPath);
+      const before = fs.lstatSync(file), receiptBefore = fs.lstatSync(receiptFile);
+      if (!before.isFile() || before.isSymbolicLink() || !receiptBefore.isFile() || receiptBefore.isSymbolicLink()) refuse();
+      const raw = fs.readFileSync(receiptFile), receipt = JSON.parse(raw), pin = receipt.generated_database;
+      const definition = localGit('show', `${head}:.github/package-inputs.json`);
+      if (receipt.version !== 1 || !['static','hosted','cloudflare'].includes(receipt.kind) || receipt.preflight?.passed !== true || receipt.preflight?.inputs?.head !== head
+        || receipt.preflight.input_definition_sha256 !== receipt.input_definition_sha256 || receipt.input_definition_sha256 !== createHash('sha256').update(definition).digest('hex') || !JSON.parse(definition).generated_outputs?.includes(database)
+        || !pin || Object.keys(pin).sort().join(',') !== 'bytes,git_blob_oid,path' || pin.path !== database || !Number.isSafeInteger(pin.bytes) || pin.bytes <= 0 || pin.bytes !== before.size || !/^[a-f0-9]{40}$/.test(pin.git_blob_oid ?? '')) refuse();
+      const oid = localGit('-c', 'core.bigFileThreshold=0', 'hash-object', '--no-filters', '--', database).trim();
+      const after = fs.lstatSync(file), receiptAfter = fs.lstatSync(receiptFile);
+      if (oid !== pin.git_blob_oid || ['dev','ino','size','mode','mtimeMs','ctimeMs'].some(key => before[key] !== after[key] || receiptBefore[key] !== receiptAfter[key]) || !raw.equals(fs.readFileSync(receiptFile))) refuse();
+      generatedDatabase = {...pin, producer_head: head, build_receipt_sha256: createHash('sha256').update(raw).digest('hex'), input_definition_sha256: receipt.input_definition_sha256};
+    }
     const preservedRef = `refs/worldatlas-local-recovery/${entry.token}`;
     git('update-ref', preservedRef, head);
     // Git's own dirty/in-use worktree guards remain enabled; no --force.
     git('worktree', 'remove', entry.path);
     value.entries = value.entries.filter(item => item !== entry);
     save(value);
-    return {released: true, path: entry.path, preservedRef, head};
+    return {released: true, path: entry.path, preservedRef, head, ...(generatedDatabase ? {removed_generated_database: generatedDatabase} : {})};
   });
   const check = () => ({freeBytes: availableBytes()});
   return {report, check, inspect, allocate, release};
@@ -278,7 +301,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
       else options[key] = args[index + 1];
     }
     if (action === 'allocate' && (options.slot ?? 'work') === 'work') assertAuthorWorkerIdentity(options.worker);
-    const manager = workspaceManager(process.cwd());
+    const manager = workspaceManager(path.dirname(fileURLToPath(import.meta.url)));
     if (!['report', 'check', 'inspect', 'allocate', 'release'].includes(action)) throw Error('Choose report, check, inspect, allocate or release');
     console.log(JSON.stringify(manager[action](options), null, 2));
   } catch (error) { console.error(error.message); process.exitCode = 1; }

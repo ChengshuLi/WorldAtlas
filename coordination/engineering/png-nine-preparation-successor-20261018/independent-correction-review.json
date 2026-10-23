@@ -1,0 +1,61 @@
+{
+  "kind": "independent-coordinate-custody-review",
+  "reviewer": "audit_delivery_repeated_work",
+  "reviewed_commit": "6d2282961a0da802944caf23fe28581055f62f76",
+  "reviewed_tree": "8762376c38a0a452332ef6c04624b81ab14bec22",
+  "parent": "b7dd53ee88dfacf0472401f331998ca0b2e881b4",
+  "public_commit_url": "https://github.com/ChengshuLi/WorldAtlas/commit/6d2282961a0da802944caf23fe28581055f62f76",
+  "reviewed_files": [
+    {
+      "path": "coordination/engineering/png-nine-native-applicability-correction-20261018/CORRECTION.md",
+      "git_blob_oid": "71ef6121a3ff33fe61d9181ae3f42acdd81ac251",
+      "bytes": 2132,
+      "sha256": "681b0363b0c98cb0c507958517681f575521502741c2d3072b37df8d272d5b40"
+    },
+    {
+      "path": "coordination/engineering/png-nine-native-applicability-correction-20261018/exact-native-centres-result.json",
+      "git_blob_oid": "e96b4f5f5c3772cc0d9370169727d2e420606a2d",
+      "bytes": 15741,
+      "sha256": "8099b7b2d3dadbc4868cdef6af47d82e866b67ae83cd880a62403e2fb1e4d002"
+    },
+    {
+      "path": "coordination/engineering/png-nine-native-applicability-correction-20261018/exact-native-controls-result.json",
+      "git_blob_oid": "6d1009f9dda4d174aebc7b13cd529406c6b31fc1",
+      "bytes": 1150,
+      "sha256": "eb8dc4681d6d7c391ce8a33d3620f741a15f1475c701302d3abbdc4993a0b341"
+    },
+    {
+      "path": "coordination/engineering/png-nine-native-applicability-correction-20261018/input-custody-and-correction.json",
+      "git_blob_oid": "e12121ae6cfae8cf2134bac9b0a7f7678e2cc2c1",
+      "bytes": 6907,
+      "sha256": "e9c2e2dddaadfb8306d9e5380713a11804cf430f0f9f636b8ca401fe0272ee54"
+    }
+  ],
+  "independent_checks": {
+    "public_commit_tree_parent_and_four_blob_rows": "verified via GitHub API and local body Git hashes",
+    "nine_longitudes": "each exact Fraction equals (360*x+180-180*262166)/262166",
+    "nine_latitudes": "each exact Fraction equals decoded normative binary64 row value",
+    "normative_table_decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+    "nine_original_inputs": "byte lengths, SHA-256 and Git blob OIDs verified",
+    "six_superseded_outputs": "byte lengths and SHA-256 verified unchanged",
+    "two_successor_outputs": "byte lengths and SHA-256 verified",
+    "current_native_consumer": "exact body length/SHA-256/Git OID verified against custody and formula at lines807/875/891"
+  },
+  "static_review": [
+    "exact-native-centres.py constructs rational longitude without intermediate binary64 rounding",
+    "binary64 latitude is lifted to exact Fraction",
+    "complete polygon vertex interval gives a valid separating functional for its convex hull",
+    "successor controls retain touching-or-crossing-rings refusal for the whole original multipart",
+    "old evidence is explicitly superseded rather than rewritten"
+  ],
+  "scope_limits": {
+    "full_54_predicates_independently_rerun": false,
+    "full_18_separations_independently_rerun": false,
+    "eleven_adverse_controls_independently_rerun": false,
+    "source_producer_execution": false,
+    "source_applicability_qualified": false,
+    "historical_component_closed": false,
+    "native_authority_or_acceptance_granted": false
+  },
+  "result": "PASS for corrected coordinate and custody boundary; separate source/application qualification remains required"
+}

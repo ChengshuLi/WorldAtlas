@@ -1,0 +1,1257 @@
+{
+  "purpose": "Factual retained source, ownership ancestry, physical-mask and historical source-review context for gb-SWZ-ADM2--repair-evaluation. Not a current assignment, scientific qualification, claim, or acceptance record.",
+  "package": {
+    "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "authenticated_queue_commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+    "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "queue_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "queue_bytes": 1754890,
+    "queue_sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+    "queue_url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "package_row": {
+      "package_id": "gb-SWZ-ADM2--repair-evaluation",
+      "primary_source": "gb:SWZ:ADM2",
+      "source_family_index": 312,
+      "category": "repair-evaluation",
+      "native_cells": 14,
+      "land_cells": 14,
+      "inland_water_cells": 0,
+      "source_relative_cells": 0,
+      "interval_segments": 14,
+      "owners": [
+        40983,
+        40984,
+        40991,
+        41002,
+        41003,
+        41011,
+        41016,
+        41017
+      ],
+      "source_features": [
+        56921,
+        56922,
+        56923,
+        56924,
+        56927,
+        56933,
+        56935,
+        56940,
+        56950,
+        56955,
+        56975,
+        56977
+      ],
+      "source_families": [
+        311,
+        312
+      ],
+      "native_blocks": [
+        36,
+        37
+      ],
+      "provinces": [
+        "framework:province:hhohho:11b5857c9be8",
+        "framework:province:lubombo:d4c6d5b83fc8",
+        "framework:province:manzini:e6997ed83572",
+        "framework:province:shiselweni:45345f6cac08"
+      ],
+      "location_count": 8,
+      "source_feature_count": 12,
+      "locality_count": 4,
+      "cost": {
+        "primary_source_decoded_bytes": 120065,
+        "all_required_source_decoded_bytes": 140932,
+        "primary_full_source_raster_measured_seconds": 0.102,
+        "source_interval_segments": 14,
+        "maximum_native_rows_per_execution_frame": 4096,
+        "observed_global_census_peak_rss_bytes": 884973568
+      },
+      "evidence": {
+        "selection": "ownership-binding.json",
+        "lineage": "lineage.json",
+        "territorial_source_catalogue": "retained-source-catalogue.json",
+        "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "source_features": "source-feature-roster.json",
+        "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+        "physical": "physical-unassigned-summary.json",
+        "source_domain_transform": []
+      },
+      "work": {
+        "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+        "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+        "priority": 1
+      },
+      "execution": {
+        "command": "node source-batch-intervals.mjs gb-SWZ-ADM2--repair-evaluation OUTPUT_DIRECTORY",
+        "output_columns": [
+          "y",
+          "start",
+          "end",
+          "candidate_owner_indices",
+          "source_feature_indices",
+          "physical_class"
+        ]
+      }
+    },
+    "same_queue_blob_verified_at_both_commits": true
+  },
+  "retained_owner_observation": {
+    "path": "coordination/engineering/swz-original-disposition-20261020/swz-selected-owner-observation.json.gz",
+    "commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+    "query_count": 14,
+    "query_sha256": "3c3a964f4cf25f972b2fe4b911e1101c023c5653d45840b53c6865ae74c423b9",
+    "original_intervals_sha256": "cb77d25749144f3b1c7e2b7ec26bd7d31d0e4f7dfdcdf55e1dd15e95710fbfb0",
+    "scientific_qualification": false,
+    "result": "Single stock observation recorded all 14 keys base/additive/effective owner 0 and no product overlap; this report did not rerun it.",
+    "verified_key_counts": {
+      "keys": 14,
+      "base_additive_effective_all_zero": 14,
+      "product_overlap": 0
+    }
+  },
+  "retained_input_descriptors": [
+    {
+      "commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-036.json.gz",
+      "git_blob_oid": "5f936f6e18a5e4c7b6a398c0990dee045d1cc0a3",
+      "bytes": 158514,
+      "sha256": "e65c3df7b6a015e38a88f0a1785fe6c00102476d3808b73135a2d9dd99105b64",
+      "decoded_bytes": 1183179,
+      "decoded_sha256": "f3f90123cc8f59d70f860dc2d89e72e3f343a2b4994b0427d7ae744c8037e7b2",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-036.json.gz"
+    },
+    {
+      "commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-037.json.gz",
+      "git_blob_oid": "158db3a4ae8076def67a7aa289c20e57e6c3a5b1",
+      "bytes": 96025,
+      "sha256": "3740e8b69b7f47c5c09061fd2bab50eeb2f14319638f1ab19122825cedb18d37",
+      "decoded_bytes": 750430,
+      "decoded_sha256": "7fac7b1c2f69cfb6a2c47cee154dd575f5878a5a52de69c4693eb10b509c10b4",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-037.json.gz"
+    },
+    {
+      "commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-036.json.gz",
+      "git_blob_oid": "7369c93e48d3b67a394d27e5a857612ae1e3d7e2",
+      "bytes": 148279,
+      "sha256": "11f095b9f450a01aa41e91a37e9b8db7df3e8f42b276cf7fe92f7190a9706871",
+      "decoded_bytes": 759070,
+      "decoded_sha256": "aeb67945845b6957fcb8524c7346a9235e730cc997305ada1ef89693618a27c8",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-036.json.gz"
+    },
+    {
+      "commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-037.json.gz",
+      "git_blob_oid": "1acfb0bcbd519f8781e2ad6196d1c8ba2e7dac29",
+      "bytes": 88683,
+      "sha256": "7968adeb24cacca45f6ac1d015fa88eb3b288aef86dcf10cdfe3f775d59d84c4",
+      "decoded_bytes": 459198,
+      "decoded_sha256": "1849cf4fc4c53c1ad7993ddeb57155e02e1948450b1c3cc879adb17b4d2336b7",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-037.json.gz"
+    },
+    {
+      "commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-036.json.gz",
+      "git_blob_oid": "95890a0fc5a9cb9fb6bbd8f48425a8887b043a6e",
+      "bytes": 23,
+      "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+      "decoded_bytes": 3,
+      "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-036.json.gz"
+    },
+    {
+      "commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-037.json.gz",
+      "git_blob_oid": "150081fec15e4da19c8259327209fec2c2a1d110",
+      "bytes": 4481,
+      "sha256": "2e25139f622de52715c528923b7f16952aea2fa6ab3996c2b74d77c4fd6690d7",
+      "decoded_bytes": 19082,
+      "decoded_sha256": "a65a5afbbc592cd513e8e43beea55aad166bac34a72f1c64a73611e801127cfc",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-037.json.gz"
+    },
+    {
+      "commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+      "git_blob_oid": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+      "bytes": 4404456,
+      "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz"
+    },
+    {
+      "commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "bytes": 1844315,
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz"
+    },
+    {
+      "commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json"
+    },
+    {
+      "commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/ownership-binding.json",
+      "git_blob_oid": "b9d81d18aab6d03dc701ff1337b35e53be81d0af",
+      "bytes": 3048,
+      "sha256": "b952192475435c8fbc74a84627994aff4f4e073c36c479d369554fc75251bc89",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/ownership-binding.json"
+    },
+    {
+      "commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-raster-summary.json",
+      "git_blob_oid": "e17b10b5643c1f6b0c492d02edc70a0d7afc5ee3",
+      "bytes": 110705,
+      "sha256": "2eec390eb9f9b6595bd0f3c7059b75f271dba013fbad0b3ac0c404114d48eea9",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/source-raster-summary.json"
+    },
+    {
+      "commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json",
+      "git_blob_oid": "fa1e4d101edb54b02bd1ff42a240f2f80ac65832",
+      "bytes": 120963,
+      "sha256": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json"
+    },
+    {
+      "commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-unassigned-summary.json",
+      "git_blob_oid": "0c934cdaf4b007a741e66d4a080890154bdae53c",
+      "bytes": 154672,
+      "sha256": "a82c56c1d92ff52c0b0e52c9bf329905a05bace4b6a27c12771509d419888501",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/physical-unassigned-summary.json"
+    }
+  ],
+  "interval_witness_join": [
+    {
+      "block": 36,
+      "y": 150666,
+      "start_x": 154238,
+      "end_x_exclusive": 154239,
+      "candidate_owner_indices": [
+        40983
+      ],
+      "source_feature_indices": [
+        56922,
+        56950
+      ],
+      "physical_class": "land",
+      "cell_count": 1,
+      "physical_mask_land_supported": true,
+      "inland_water_mask_supported": false,
+      "contact_features": [
+        {
+          "source_feature_index": 56922,
+          "source_id": "gb:SWZ:ADM1:75366066B12234306804593",
+          "name": "Lubombo",
+          "family_index": 311,
+          "roster_owners": []
+        },
+        {
+          "source_feature_index": 56950,
+          "source_id": "gb:SWZ:ADM2:25544865B37706944907644",
+          "name": "Inkhundla Mhlume",
+          "family_index": 312,
+          "roster_owners": [
+            40983
+          ]
+        }
+      ]
+    },
+    {
+      "block": 36,
+      "y": 150701,
+      "start_x": 153734,
+      "end_x_exclusive": 153735,
+      "candidate_owner_indices": [
+        41011
+      ],
+      "source_feature_indices": [
+        56924,
+        56940
+      ],
+      "physical_class": "land",
+      "cell_count": 1,
+      "physical_mask_land_supported": true,
+      "inland_water_mask_supported": false,
+      "contact_features": [
+        {
+          "source_feature_index": 56924,
+          "source_id": "gb:SWZ:ADM1:75366066B25905390127614",
+          "name": "Hhohho",
+          "family_index": 311,
+          "roster_owners": []
+        },
+        {
+          "source_feature_index": 56940,
+          "source_id": "gb:SWZ:ADM2:25544865B91965971492812",
+          "name": "Inkhundla Piggs Peak",
+          "family_index": 312,
+          "roster_owners": [
+            41011
+          ]
+        }
+      ]
+    },
+    {
+      "block": 36,
+      "y": 150714,
+      "start_x": 153728,
+      "end_x_exclusive": 153729,
+      "candidate_owner_indices": [
+        41011
+      ],
+      "source_feature_indices": [
+        56924,
+        56940
+      ],
+      "physical_class": "land",
+      "cell_count": 1,
+      "physical_mask_land_supported": true,
+      "inland_water_mask_supported": false,
+      "contact_features": [
+        {
+          "source_feature_index": 56924,
+          "source_id": "gb:SWZ:ADM1:75366066B25905390127614",
+          "name": "Hhohho",
+          "family_index": 311,
+          "roster_owners": []
+        },
+        {
+          "source_feature_index": 56940,
+          "source_id": "gb:SWZ:ADM2:25544865B91965971492812",
+          "name": "Inkhundla Piggs Peak",
+          "family_index": 312,
+          "roster_owners": [
+            41011
+          ]
+        }
+      ]
+    },
+    {
+      "block": 36,
+      "y": 150748,
+      "start_x": 154451,
+      "end_x_exclusive": 154452,
+      "candidate_owner_indices": [
+        41016
+      ],
+      "source_feature_indices": [
+        56922,
+        56927
+      ],
+      "physical_class": "land",
+      "cell_count": 1,
+      "physical_mask_land_supported": true,
+      "inland_water_mask_supported": false,
+      "contact_features": [
+        {
+          "source_feature_index": 56922,
+          "source_id": "gb:SWZ:ADM1:75366066B12234306804593",
+          "name": "Lubombo",
+          "family_index": 311,
+          "roster_owners": []
+        },
+        {
+          "source_feature_index": 56927,
+          "source_id": "gb:SWZ:ADM2:25544865B99062950351047",
+          "name": "Inkhundla Lomahasha",
+          "family_index": 312,
+          "roster_owners": [
+            41016
+          ]
+        }
+      ]
+    },
+    {
+      "block": 36,
+      "y": 150784,
+      "start_x": 154456,
+      "end_x_exclusive": 154457,
+      "candidate_owner_indices": [
+        41016
+      ],
+      "source_feature_indices": [
+        56922,
+        56927
+      ],
+      "physical_class": "land",
+      "cell_count": 1,
+      "physical_mask_land_supported": true,
+      "inland_water_mask_supported": false,
+      "contact_features": [
+        {
+          "source_feature_index": 56922,
+          "source_id": "gb:SWZ:ADM1:75366066B12234306804593",
+          "name": "Lubombo",
+          "family_index": 311,
+          "roster_owners": []
+        },
+        {
+          "source_feature_index": 56927,
+          "source_id": "gb:SWZ:ADM2:25544865B99062950351047",
+          "name": "Inkhundla Lomahasha",
+          "family_index": 312,
+          "roster_owners": [
+            41016
+          ]
+        }
+      ]
+    },
+    {
+      "block": 36,
+      "y": 150820,
+      "start_x": 154461,
+      "end_x_exclusive": 154462,
+      "candidate_owner_indices": [
+        41016
+      ],
+      "source_feature_indices": [
+        56922,
+        56927
+      ],
+      "physical_class": "land",
+      "cell_count": 1,
+      "physical_mask_land_supported": true,
+      "inland_water_mask_supported": false,
+      "contact_features": [
+        {
+          "source_feature_index": 56922,
+          "source_id": "gb:SWZ:ADM1:75366066B12234306804593",
+          "name": "Lubombo",
+          "family_index": 311,
+          "roster_owners": []
+        },
+        {
+          "source_feature_index": 56927,
+          "source_id": "gb:SWZ:ADM2:25544865B99062950351047",
+          "name": "Inkhundla Lomahasha",
+          "family_index": 312,
+          "roster_owners": [
+            41016
+          ]
+        }
+      ]
+    },
+    {
+      "block": 36,
+      "y": 151365,
+      "start_x": 154464,
+      "end_x_exclusive": 154465,
+      "candidate_owner_indices": [
+        41017
+      ],
+      "source_feature_indices": [
+        56922,
+        56935
+      ],
+      "physical_class": "land",
+      "cell_count": 1,
+      "physical_mask_land_supported": true,
+      "inland_water_mask_supported": false,
+      "contact_features": [
+        {
+          "source_feature_index": 56922,
+          "source_id": "gb:SWZ:ADM1:75366066B12234306804593",
+          "name": "Lubombo",
+          "family_index": 311,
+          "roster_owners": []
+        },
+        {
+          "source_feature_index": 56935,
+          "source_id": "gb:SWZ:ADM2:25544865B99429407754877",
+          "name": "Inkhundla Tikhuba",
+          "family_index": 312,
+          "roster_owners": [
+            41017
+          ]
+        }
+      ]
+    },
+    {
+      "block": 36,
+      "y": 151385,
+      "start_x": 153585,
+      "end_x_exclusive": 153586,
+      "candidate_owner_indices": [
+        40984
+      ],
+      "source_feature_indices": [
+        56923,
+        56977
+      ],
+      "physical_class": "land",
+      "cell_count": 1,
+      "physical_mask_land_supported": true,
+      "inland_water_mask_supported": false,
+      "contact_features": [
+        {
+          "source_feature_index": 56923,
+          "source_id": "gb:SWZ:ADM1:75366066B21527038718027",
+          "name": "Shiselweni",
+          "family_index": 311,
+          "roster_owners": []
+        },
+        {
+          "source_feature_index": 56977,
+          "source_id": "gb:SWZ:ADM2:25544865B4123625373150",
+          "name": "Inkhundla Gege",
+          "family_index": 312,
+          "roster_owners": [
+            40984
+          ]
+        }
+      ]
+    },
+    {
+      "block": 36,
+      "y": 151386,
+      "start_x": 153529,
+      "end_x_exclusive": 153530,
+      "candidate_owner_indices": [
+        40991
+      ],
+      "source_feature_indices": [
+        56921,
+        56975
+      ],
+      "physical_class": "land",
+      "cell_count": 1,
+      "physical_mask_land_supported": true,
+      "inland_water_mask_supported": false,
+      "contact_features": [
+        {
+          "source_feature_index": 56921,
+          "source_id": "gb:SWZ:ADM1:75366066B3567364273406",
+          "name": "Manzini",
+          "family_index": 311,
+          "roster_owners": []
+        },
+        {
+          "source_feature_index": 56975,
+          "source_id": "gb:SWZ:ADM2:25544865B616938903867",
+          "name": "Inkhundla Ngwempisi",
+          "family_index": 312,
+          "roster_owners": [
+            40991
+          ]
+        }
+      ]
+    },
+    {
+      "block": 37,
+      "y": 151698,
+      "start_x": 153813,
+      "end_x_exclusive": 153814,
+      "candidate_owner_indices": [
+        41002
+      ],
+      "source_feature_indices": [
+        56923,
+        56955
+      ],
+      "physical_class": "land",
+      "cell_count": 1,
+      "physical_mask_land_supported": true,
+      "inland_water_mask_supported": false,
+      "contact_features": [
+        {
+          "source_feature_index": 56923,
+          "source_id": "gb:SWZ:ADM1:75366066B21527038718027",
+          "name": "Shiselweni",
+          "family_index": 311,
+          "roster_owners": []
+        },
+        {
+          "source_feature_index": 56955,
+          "source_id": "gb:SWZ:ADM2:25544865B74382320525051",
+          "name": "Inkhundla Maseyisini",
+          "family_index": 312,
+          "roster_owners": [
+            41002
+          ]
+        }
+      ]
+    },
+    {
+      "block": 37,
+      "y": 151708,
+      "start_x": 153840,
+      "end_x_exclusive": 153841,
+      "candidate_owner_indices": [
+        41003
+      ],
+      "source_feature_indices": [
+        56923,
+        56933
+      ],
+      "physical_class": "land",
+      "cell_count": 1,
+      "physical_mask_land_supported": true,
+      "inland_water_mask_supported": false,
+      "contact_features": [
+        {
+          "source_feature_index": 56923,
+          "source_id": "gb:SWZ:ADM1:75366066B21527038718027",
+          "name": "Shiselweni",
+          "family_index": 311,
+          "roster_owners": []
+        },
+        {
+          "source_feature_index": 56933,
+          "source_id": "gb:SWZ:ADM2:25544865B75252057291440",
+          "name": "Inkhundla Zombodze",
+          "family_index": 312,
+          "roster_owners": [
+            41003
+          ]
+        }
+      ]
+    },
+    {
+      "block": 37,
+      "y": 151711,
+      "start_x": 153848,
+      "end_x_exclusive": 153849,
+      "candidate_owner_indices": [
+        41003
+      ],
+      "source_feature_indices": [
+        56923,
+        56933
+      ],
+      "physical_class": "land",
+      "cell_count": 1,
+      "physical_mask_land_supported": true,
+      "inland_water_mask_supported": false,
+      "contact_features": [
+        {
+          "source_feature_index": 56923,
+          "source_id": "gb:SWZ:ADM1:75366066B21527038718027",
+          "name": "Shiselweni",
+          "family_index": 311,
+          "roster_owners": []
+        },
+        {
+          "source_feature_index": 56933,
+          "source_id": "gb:SWZ:ADM2:25544865B75252057291440",
+          "name": "Inkhundla Zombodze",
+          "family_index": 312,
+          "roster_owners": [
+            41003
+          ]
+        }
+      ]
+    },
+    {
+      "block": 37,
+      "y": 151721,
+      "start_x": 153875,
+      "end_x_exclusive": 153876,
+      "candidate_owner_indices": [
+        41003
+      ],
+      "source_feature_indices": [
+        56923,
+        56933
+      ],
+      "physical_class": "land",
+      "cell_count": 1,
+      "physical_mask_land_supported": true,
+      "inland_water_mask_supported": false,
+      "contact_features": [
+        {
+          "source_feature_index": 56923,
+          "source_id": "gb:SWZ:ADM1:75366066B21527038718027",
+          "name": "Shiselweni",
+          "family_index": 311,
+          "roster_owners": []
+        },
+        {
+          "source_feature_index": 56933,
+          "source_id": "gb:SWZ:ADM2:25544865B75252057291440",
+          "name": "Inkhundla Zombodze",
+          "family_index": 312,
+          "roster_owners": [
+            41003
+          ]
+        }
+      ]
+    },
+    {
+      "block": 37,
+      "y": 151731,
+      "start_x": 153902,
+      "end_x_exclusive": 153903,
+      "candidate_owner_indices": [
+        41003
+      ],
+      "source_feature_indices": [
+        56923,
+        56933
+      ],
+      "physical_class": "land",
+      "cell_count": 1,
+      "physical_mask_land_supported": true,
+      "inland_water_mask_supported": false,
+      "contact_features": [
+        {
+          "source_feature_index": 56923,
+          "source_id": "gb:SWZ:ADM1:75366066B21527038718027",
+          "name": "Shiselweni",
+          "family_index": 311,
+          "roster_owners": []
+        },
+        {
+          "source_feature_index": 56933,
+          "source_id": "gb:SWZ:ADM2:25544865B75252057291440",
+          "name": "Inkhundla Zombodze",
+          "family_index": 312,
+          "roster_owners": [
+            41003
+          ]
+        }
+      ]
+    }
+  ],
+  "contact_groups": {
+    "ADM1": [
+      {
+        "index": 56921,
+        "source_id": "gb:SWZ:ADM1:75366066B3567364273406",
+        "name": "Manzini",
+        "owners": []
+      },
+      {
+        "index": 56922,
+        "source_id": "gb:SWZ:ADM1:75366066B12234306804593",
+        "name": "Lubombo",
+        "owners": []
+      },
+      {
+        "index": 56923,
+        "source_id": "gb:SWZ:ADM1:75366066B21527038718027",
+        "name": "Shiselweni",
+        "owners": []
+      },
+      {
+        "index": 56924,
+        "source_id": "gb:SWZ:ADM1:75366066B25905390127614",
+        "name": "Hhohho",
+        "owners": []
+      }
+    ],
+    "ADM2": [
+      {
+        "index": 56927,
+        "source_id": "gb:SWZ:ADM2:25544865B99062950351047",
+        "name": "Inkhundla Lomahasha",
+        "owners": [
+          41016
+        ]
+      },
+      {
+        "index": 56933,
+        "source_id": "gb:SWZ:ADM2:25544865B75252057291440",
+        "name": "Inkhundla Zombodze",
+        "owners": [
+          41003
+        ]
+      },
+      {
+        "index": 56935,
+        "source_id": "gb:SWZ:ADM2:25544865B99429407754877",
+        "name": "Inkhundla Tikhuba",
+        "owners": [
+          41017
+        ]
+      },
+      {
+        "index": 56940,
+        "source_id": "gb:SWZ:ADM2:25544865B91965971492812",
+        "name": "Inkhundla Piggs Peak",
+        "owners": [
+          41011
+        ]
+      },
+      {
+        "index": 56950,
+        "source_id": "gb:SWZ:ADM2:25544865B37706944907644",
+        "name": "Inkhundla Mhlume",
+        "owners": [
+          40983
+        ]
+      },
+      {
+        "index": 56955,
+        "source_id": "gb:SWZ:ADM2:25544865B74382320525051",
+        "name": "Inkhundla Maseyisini",
+        "owners": [
+          41002
+        ]
+      },
+      {
+        "index": 56975,
+        "source_id": "gb:SWZ:ADM2:25544865B616938903867",
+        "name": "Inkhundla Ngwempisi",
+        "owners": [
+          40991
+        ]
+      },
+      {
+        "index": 56977,
+        "source_id": "gb:SWZ:ADM2:25544865B4123625373150",
+        "name": "Inkhundla Gege",
+        "owners": [
+          40984
+        ]
+      }
+    ]
+  },
+  "owner_source_ancestry": [
+    {
+      "owner_index": 40983,
+      "owner_id": "gb:SWZ:ADM2:25544865B37706944907644",
+      "name": "Inkhundla Mhlume",
+      "province_id": "framework:province:lubombo:d4c6d5b83fc8",
+      "source_atom": "gb:SWZ:ADM2:25544865B37706944907644",
+      "source_feature_index": 56950,
+      "source_feature_name": "Inkhundla Mhlume"
+    },
+    {
+      "owner_index": 40984,
+      "owner_id": "gb:SWZ:ADM2:25544865B4123625373150",
+      "name": "Inkhundla Gege",
+      "province_id": "framework:province:shiselweni:45345f6cac08",
+      "source_atom": "gb:SWZ:ADM2:25544865B4123625373150",
+      "source_feature_index": 56977,
+      "source_feature_name": "Inkhundla Gege"
+    },
+    {
+      "owner_index": 40991,
+      "owner_id": "gb:SWZ:ADM2:25544865B616938903867",
+      "name": "Inkhundla Ngwempisi",
+      "province_id": "framework:province:manzini:e6997ed83572",
+      "source_atom": "gb:SWZ:ADM2:25544865B616938903867",
+      "source_feature_index": 56975,
+      "source_feature_name": "Inkhundla Ngwempisi"
+    },
+    {
+      "owner_index": 41002,
+      "owner_id": "gb:SWZ:ADM2:25544865B74382320525051",
+      "name": "Inkhundla Maseyisini",
+      "province_id": "framework:province:shiselweni:45345f6cac08",
+      "source_atom": "gb:SWZ:ADM2:25544865B74382320525051",
+      "source_feature_index": 56955,
+      "source_feature_name": "Inkhundla Maseyisini"
+    },
+    {
+      "owner_index": 41003,
+      "owner_id": "gb:SWZ:ADM2:25544865B75252057291440",
+      "name": "Inkhundla Zombodze",
+      "province_id": "framework:province:shiselweni:45345f6cac08",
+      "source_atom": "gb:SWZ:ADM2:25544865B75252057291440",
+      "source_feature_index": 56933,
+      "source_feature_name": "Inkhundla Zombodze"
+    },
+    {
+      "owner_index": 41011,
+      "owner_id": "gb:SWZ:ADM2:25544865B91965971492812",
+      "name": "Inkhundla Piggs Peak",
+      "province_id": "framework:province:hhohho:11b5857c9be8",
+      "source_atom": "gb:SWZ:ADM2:25544865B91965971492812",
+      "source_feature_index": 56940,
+      "source_feature_name": "Inkhundla Piggs Peak"
+    },
+    {
+      "owner_index": 41016,
+      "owner_id": "gb:SWZ:ADM2:25544865B99062950351047",
+      "name": "Inkhundla Lomahasha",
+      "province_id": "framework:province:lubombo:d4c6d5b83fc8",
+      "source_atom": "gb:SWZ:ADM2:25544865B99062950351047",
+      "source_feature_index": 56927,
+      "source_feature_name": "Inkhundla Lomahasha"
+    },
+    {
+      "owner_index": 41017,
+      "owner_id": "gb:SWZ:ADM2:25544865B99429407754877",
+      "name": "Inkhundla Tikhuba",
+      "province_id": "framework:province:lubombo:d4c6d5b83fc8",
+      "source_atom": "gb:SWZ:ADM2:25544865B99429407754877",
+      "source_feature_index": 56935,
+      "source_feature_name": "Inkhundla Tikhuba"
+    }
+  ],
+  "authenticated_payload_properties": {
+    "gb:SWZ:ADM1": {
+      "source_year_claim": "2017",
+      "license": "Open Data Commons Open Database License 1.0",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SWZ/ADM1/geoBoundaries-SWZ-ADM1_simplified.geojson",
+      "feature_count": 4,
+      "decoded_bytes": 20867,
+      "decoded_sha256": "09ee41e828454553928a1b472a8be6fcbf13c46988c7e57d940476425e0aa24a",
+      "payload": {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-SWZ-ADM1-000.bin.gz",
+        "git_blob_oid": "e197d6b789ad2b7b1dd4b53694688764ee95bf98",
+        "compressed_bytes": 4608,
+        "compressed_sha256": "2d9c24ca703f8140247a88685ea9433019a4109b6087fc8ea643749177299e65",
+        "decoded_sha256": "09ee41e828454553928a1b472a8be6fcbf13c46988c7e57d940476425e0aa24a",
+        "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/e197d6b789ad2b7b1dd4b53694688764ee95bf98"
+      },
+      "contact_properties": {
+        "56921": {
+          "source_id": "gb:SWZ:ADM1:75366066B3567364273406",
+          "ordinal": 0,
+          "name": "Manzini",
+          "owners": [],
+          "properties": {
+            "shapeName": "Manzini",
+            "shapeISO": "SZ-MA",
+            "shapeID": "75366066B3567364273406",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM1"
+          }
+        },
+        "56922": {
+          "source_id": "gb:SWZ:ADM1:75366066B12234306804593",
+          "ordinal": 1,
+          "name": "Lubombo",
+          "owners": [],
+          "properties": {
+            "shapeName": "Lubombo",
+            "shapeISO": "SZ-LU",
+            "shapeID": "75366066B12234306804593",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM1"
+          }
+        },
+        "56923": {
+          "source_id": "gb:SWZ:ADM1:75366066B21527038718027",
+          "ordinal": 2,
+          "name": "Shiselweni",
+          "owners": [],
+          "properties": {
+            "shapeName": "Shiselweni",
+            "shapeISO": "SZ-SH",
+            "shapeID": "75366066B21527038718027",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM1"
+          }
+        },
+        "56924": {
+          "source_id": "gb:SWZ:ADM1:75366066B25905390127614",
+          "ordinal": 3,
+          "name": "Hhohho",
+          "owners": [],
+          "properties": {
+            "shapeName": "Hhohho",
+            "shapeISO": "SZ-HH",
+            "shapeID": "75366066B25905390127614",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM1"
+          }
+        }
+      }
+    },
+    "gb:SWZ:ADM2": {
+      "source_year_claim": "2017",
+      "license": "Open Data Commons Open Database License 1.0",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SWZ/ADM2/geoBoundaries-SWZ-ADM2_simplified.geojson",
+      "feature_count": 53,
+      "decoded_bytes": 120065,
+      "decoded_sha256": "5d54a3629b8b766c061734f7fa3d04c84eab5946b62932e77d067d1b01e7749f",
+      "payload": {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-SWZ-ADM2-000.bin.gz",
+        "git_blob_oid": "f997375cdeee1b2cb9e0246913a50807f2e165aa",
+        "compressed_bytes": 28672,
+        "compressed_sha256": "c772032762fb44d63d33495747a3a21e1cece87eb96ea64faa78129a35903702",
+        "decoded_sha256": "5d54a3629b8b766c061734f7fa3d04c84eab5946b62932e77d067d1b01e7749f",
+        "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/f997375cdeee1b2cb9e0246913a50807f2e165aa"
+      },
+      "contact_properties": {
+        "56927": {
+          "source_id": "gb:SWZ:ADM2:25544865B99062950351047",
+          "ordinal": 2,
+          "name": "Inkhundla Lomahasha",
+          "owners": [
+            41016
+          ],
+          "properties": {
+            "shapeName": "Inkhundla Lomahasha",
+            "shapeISO": "",
+            "shapeID": "25544865B99062950351047",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM2"
+          }
+        },
+        "56933": {
+          "source_id": "gb:SWZ:ADM2:25544865B75252057291440",
+          "ordinal": 8,
+          "name": "Inkhundla Zombodze",
+          "owners": [
+            41003
+          ],
+          "properties": {
+            "shapeName": "Inkhundla Zombodze",
+            "shapeISO": "",
+            "shapeID": "25544865B75252057291440",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM2"
+          }
+        },
+        "56935": {
+          "source_id": "gb:SWZ:ADM2:25544865B99429407754877",
+          "ordinal": 10,
+          "name": "Inkhundla Tikhuba",
+          "owners": [
+            41017
+          ],
+          "properties": {
+            "shapeName": "Inkhundla Tikhuba",
+            "shapeISO": "",
+            "shapeID": "25544865B99429407754877",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM2"
+          }
+        },
+        "56940": {
+          "source_id": "gb:SWZ:ADM2:25544865B91965971492812",
+          "ordinal": 15,
+          "name": "Inkhundla Piggs Peak",
+          "owners": [
+            41011
+          ],
+          "properties": {
+            "shapeName": "Inkhundla Piggs Peak",
+            "shapeISO": "",
+            "shapeID": "25544865B91965971492812",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM2"
+          }
+        },
+        "56950": {
+          "source_id": "gb:SWZ:ADM2:25544865B37706944907644",
+          "ordinal": 25,
+          "name": "Inkhundla Mhlume",
+          "owners": [
+            40983
+          ],
+          "properties": {
+            "shapeName": "Inkhundla Mhlume",
+            "shapeISO": "",
+            "shapeID": "25544865B37706944907644",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM2"
+          }
+        },
+        "56955": {
+          "source_id": "gb:SWZ:ADM2:25544865B74382320525051",
+          "ordinal": 30,
+          "name": "Inkhundla Maseyisini",
+          "owners": [
+            41002
+          ],
+          "properties": {
+            "shapeName": "Inkhundla Maseyisini",
+            "shapeISO": "",
+            "shapeID": "25544865B74382320525051",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM2"
+          }
+        },
+        "56975": {
+          "source_id": "gb:SWZ:ADM2:25544865B616938903867",
+          "ordinal": 50,
+          "name": "Inkhundla Ngwempisi",
+          "owners": [
+            40991
+          ],
+          "properties": {
+            "shapeName": "Inkhundla Ngwempisi",
+            "shapeISO": "",
+            "shapeID": "25544865B616938903867",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM2"
+          }
+        },
+        "56977": {
+          "source_id": "gb:SWZ:ADM2:25544865B4123625373150",
+          "ordinal": 52,
+          "name": "Inkhundla Gege",
+          "owners": [
+            40984
+          ],
+          "properties": {
+            "shapeName": "Inkhundla Gege",
+            "shapeISO": "",
+            "shapeID": "25544865B4123625373150",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM2"
+          }
+        }
+      }
+    }
+  },
+  "historical_source_review": {
+    "issue_435": "https://github.com/ChengshuLi/WorldAtlas/issues/435",
+    "evidence_pr_965": "https://github.com/ChengshuLi/WorldAtlas/pull/965",
+    "subject_assessments_file": {
+      "path": "data/regional-review/regional-review-b9aef9289b79194e/findings/subject-assessments.jsonl",
+      "commit": "f7b45a2d491ced539ca520979e182bcec9e0e90b",
+      "git_blob_oid": "ddde21e3f38d55962040f44dd2542e1a0c914893",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/f7b45a2d491ced539ca520979e182bcec9e0e90b/data/regional-review/regional-review-b9aef9289b79194e/findings/subject-assessments.jsonl"
+    },
+    "exact_eight_subject_assessments": [
+      {
+        "source_id": "gb:SWZ:ADM2:25544865B37706944907644",
+        "name": "Inkhundla Mhlume",
+        "assessment": "correction-needed",
+        "reason_codes": [
+          "2017-source-roster-has-53-versus-conflicting-official-government-counts-of-55-and-59"
+        ],
+        "intersection_over_union": 0.9800778516716966,
+        "geometry_valid_before_repair_for_area_comparison": true
+      },
+      {
+        "source_id": "gb:SWZ:ADM2:25544865B4123625373150",
+        "name": "Inkhundla Gege",
+        "assessment": "correction-needed",
+        "reason_codes": [
+          "2017-source-roster-has-53-versus-conflicting-official-government-counts-of-55-and-59"
+        ],
+        "intersection_over_union": 0.9683433928880035,
+        "geometry_valid_before_repair_for_area_comparison": true
+      },
+      {
+        "source_id": "gb:SWZ:ADM2:25544865B616938903867",
+        "name": "Inkhundla Ngwempisi",
+        "assessment": "correction-needed",
+        "reason_codes": [
+          "2017-source-roster-has-53-versus-conflicting-official-government-counts-of-55-and-59",
+          "invalid-atlas-polygon-needs-geometry-disposition"
+        ],
+        "intersection_over_union": 0.9732910997806509,
+        "geometry_valid_before_repair_for_area_comparison": false
+      },
+      {
+        "source_id": "gb:SWZ:ADM2:25544865B74382320525051",
+        "name": "Inkhundla Maseyisini",
+        "assessment": "correction-needed",
+        "reason_codes": [
+          "2017-source-roster-has-53-versus-conflicting-official-government-counts-of-55-and-59"
+        ],
+        "intersection_over_union": 0.9603012373173205,
+        "geometry_valid_before_repair_for_area_comparison": true
+      },
+      {
+        "source_id": "gb:SWZ:ADM2:25544865B75252057291440",
+        "name": "Inkhundla Zombodze",
+        "assessment": "correction-needed",
+        "reason_codes": [
+          "2017-source-roster-has-53-versus-conflicting-official-government-counts-of-55-and-59"
+        ],
+        "intersection_over_union": 0.967816216969055,
+        "geometry_valid_before_repair_for_area_comparison": true
+      },
+      {
+        "source_id": "gb:SWZ:ADM2:25544865B91965971492812",
+        "name": "Inkhundla Piggs Peak",
+        "assessment": "correction-needed",
+        "reason_codes": [
+          "2017-source-roster-has-53-versus-conflicting-official-government-counts-of-55-and-59"
+        ],
+        "intersection_over_union": 0.9727597381503613,
+        "geometry_valid_before_repair_for_area_comparison": true
+      },
+      {
+        "source_id": "gb:SWZ:ADM2:25544865B99062950351047",
+        "name": "Inkhundla Lomahasha",
+        "assessment": "correction-needed",
+        "reason_codes": [
+          "2017-source-roster-has-53-versus-conflicting-official-government-counts-of-55-and-59",
+          "invalid-atlas-polygon-needs-geometry-disposition"
+        ],
+        "intersection_over_union": 0.9795061414639318,
+        "geometry_valid_before_repair_for_area_comparison": false
+      },
+      {
+        "source_id": "gb:SWZ:ADM2:25544865B99429407754877",
+        "name": "Inkhundla Tikhuba",
+        "assessment": "correction-needed",
+        "reason_codes": [
+          "2017-source-roster-has-53-versus-conflicting-official-government-counts-of-55-and-59",
+          "invalid-atlas-polygon-needs-geometry-disposition"
+        ],
+        "intersection_over_union": 0.990883132652263,
+        "geometry_valid_before_repair_for_area_comparison": false
+      }
+    ],
+    "issue_964": "https://github.com/ChengshuLi/WorldAtlas/issues/964",
+    "issue_964_state": "open; separate source/semantic research; no repair/import authorization",
+    "country_level_source_counts": {
+      "2017_ADM2_features": 53,
+      "official_counts_reported": [
+        55,
+        59
+      ],
+      "resolved": false
+    },
+    "country_level_historical_findings": {
+      "iou_below_0_95_count": 10,
+      "invalid_geometries_count": 6,
+      "scope": "53-country subject-review set, not cell-level attribution"
+    },
+    "exact_eight_subject_counts": {
+      "iou_below_0_95": 0,
+      "invalid_before_comparison": 3,
+      "invalid_subjects": [
+        "gb:SWZ:ADM2:25544865B616938903867",
+        "gb:SWZ:ADM2:25544865B99062950351047",
+        "gb:SWZ:ADM2:25544865B99429407754877"
+      ]
+    },
+    "interpretation_limit": "Subject-level Atlas-versus-2017-source comparisons and validity flags are historical review context, not diagnoses of these 14 raster cells."
+  },
+  "limits": [
+    "Both 2017 geoBoundaries source products are catalogue-listed ODbL 1.0; exact compressed/decoded payload hashes and full contact feature properties were authenticated.",
+    "Four contacted ADM1 features have empty direct owner vectors. Each of the eight contacted ADM2 features maps to one exact owner lineage source atom. Extra contacts are not labeled foreign; names or shared country labels alone do not prove ancestry or completeness.",
+    "All 14 retained intervals match source-candidate spans and are land-supported by physical masks, with zero inland-water overlap. This proves retained physical-mask class only, not present-day shoreline truth or territorial assignment.",
+    "Issue #964 preserves the 55-versus-59 official count conflict and prohibits tracing/redistributing the copyright-marked 2017 EBC map absent permission. No EBC content was acquired.",
+    "For the eight exact historical subject assessments, zero IoUs are below .95 and three have invalid-before-comparison flags (Ngwempisi, Lomahasha, Tikhuba). These feature-level findings are not per-cell causal evidence.",
+    "The package still requires complete competitor/territorial analysis, exact interval dispositions, and selected-native/source/physical conservation. This inventory is not qualification, prior-credit, current-assignment, or acceptance evidence.",
+    "No geometry computation, rasterization, or observer was run."
+  ],
+  "source_summary_pins": [
+    {
+      "commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-raster-summary.json",
+      "git_blob_oid": "e17b10b5643c1f6b0c492d02edc70a0d7afc5ee3",
+      "bytes": 110705,
+      "sha256": "2eec390eb9f9b6595bd0f3c7059b75f271dba013fbad0b3ac0c404114d48eea9",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/source-raster-summary.json"
+    },
+    {
+      "commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json",
+      "git_blob_oid": "fa1e4d101edb54b02bd1ff42a240f2f80ac65832",
+      "bytes": 120963,
+      "sha256": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json"
+    },
+    {
+      "commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-unassigned-summary.json",
+      "git_blob_oid": "0c934cdaf4b007a741e66d4a080890154bdae53c",
+      "bytes": 154672,
+      "sha256": "a82c56c1d92ff52c0b0e52c9bf329905a05bace4b6a27c12771509d419888501",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/physical-unassigned-summary.json"
+    }
+  ],
+  "authenticated_payload_property_scope": "Gzip and full decoded byte hashes were verified. Only `features[*].properties` were inspected, matched to roster ordinal and source ID; geometry members were not used or computed. The inspected properties contain shapeName, shapeISO, shapeID, shapeGroup and shapeType, with no explicit parent field."
+}

@@ -22,37 +22,45 @@ physical queues sit underneath it.
 
 ## Start a worker
 
-1. Read the combined queue and select a source-family session. Keep its related
+1. Select remaining work through the [existing issue lifecycle](../../../docs/ISSUE_LIFECYCLE.md#before-starting-work),
+   then use the combined queue for its original source-family scope. Keep related
    cause packages on one worker so the original source is decoded/indexed once.
-2. Use the package's extraction command with a fresh output directory. The source
-   selector needs only Node 24; the physical selector uses Python's standard
-   library. Both work after moving this directory. They check pinned input hashes.
+2. For a source/cause package, reuse a complete authenticated ownership report for
+   that exact original package. If none remains applicable, use the committed
+   [bounded ownership command](../../../docs/COVERAGE_CLASSIFICATION.md#observe-selected-ownership-without-source-geometry),
+   including its task-supplied runtime and input-acquisition contract. It derives
+   the original intervals and selected owners; no separate extractor or adjacent
+   data-file checkout is needed. Physical-only packages retain their
+   [existing Python selector](PHYSICAL-PACKAGES-README.md).
 3. Read the exact intended owner IDs, source feature IDs, locality scopes,
    competitor source families, native blocks, measured cost, question and
    completion condition. Reuse the original repository source products named by
    their catalogue; this directory does not copy the original source corpus.
-4. Before an actual additive repair, load current ownership only for this package
-   and subtract already-owned intervals from the frozen candidate intervals.
-   Record those as already completed. A prior repair never requires rebuilding
-   this global queue or repeating source research. Recheck target identity and
-   source-lineage compatibility only where the intervening selection/source change
-   actually affects this package. Preserve the original frozen provenance.
-5. For the remaining cells, check the current selected owner-zero state,
-   source-to-location authority, explicit territorial exclusions and all relevant
-   competitors. Then use the existing source-target native operator, verify
-   conservation and coordinate normal reviewed integration.
+4. Use the report's `original_package`, `original_intervals` and per-key owners to
+   preserve the complete original denominator and account for already-owned cells.
+   Rows are `[y,start,end,candidate_owner_indices,source_feature_indices,physical_class]`,
+   with exclusive ends and original source-relative classes, not current qualification.
+   Reuse the report when its exact query, selected-product and normative-grid
+   bindings and reader semantics remain valid for the intended revision. Preserve
+   its actual code/data pins; do not relabel an old receipt as a new execution.
+   An unrelated accepted commit or serializer-only change does not itself require
+   another observation. Changed relevant inputs require a bounded comparison or
+   fresh observation, not repeated unaffected source research.
+5. Follow the package's original completion condition. A proposed additive repair
+   still needs current owner-zero evidence, source-to-location authority, explicit
+   territorial exclusions, all relevant competitors and actual native conservation.
+   Where that condition expressly permits a documented exception, retain the exact
+   original keys, source/contact/physical facts, required witness checks and native
+   holds; explain the unresolved outcome for independent acceptance. Do not impose
+   positive repair qualification on a non-repair outcome, or treat documentation
+   alone as proof. An exception grants no repair credit, geographic approval or
+   import permission. Coordinate normal exact-head review and integration.
 
-Example:
-
-```sh
-node source-batch-intervals.mjs gb-GRL-ADM1--repair-evaluation /tmp/grl-candidate-work
-```
-
-Rows are `[y,start,end,candidate_owner_indices,source_feature_indices,physical_class]`.
-Columns use half-open intervals. Owner indices refer to `lineage.json.gz`; source
-indices are one-based entries in `source-feature-roster.json.gz`. An extracted
-`package.json` is written last, after its expected cell count agrees. Existing
-output directories are rejected. Extraction does not create an approved patch.
+The current standalone `source-batch-intervals.mjs` command is removed. Its pure
+extractor is shared by the ownership command, with no checkout-file fallback.
+Frozen package `execution.command` fields record historical execution; exact old
+code/input pins remain available for historical audit, not current package work.
+Physical source qualification and native repair acceptance remain separate operations.
 
 ## Use source/cause packages, not connected components
 
@@ -85,8 +93,7 @@ claims to that denominator.
 
 ## Efficient scheduling and completion
 
-The first source-backed evaluation sessions include Russia ADM2, Norway ADM2,
-Greenland ADM1 and Canada ADM3. Package costs record actual original-source decoded
+Package costs record actual original-source decoded
 bytes, complete competitor inputs, measured full-source raster seconds and sparse
 interval counts. For example, the full Russia ADM2 source pass took 12.279 seconds;
 it did not require one operation per candidate cell.
@@ -97,8 +104,9 @@ boundaries. Do not create one task per component or set arbitrary cell quotas.
 Read-only research is parallel. Repair authoring claims must have disjoint owner
 IDs and interval selectors; shared crosswalk changes coordinate all dependent
 packages. Final selected-bank changes still use the normal serialized merge path.
-Revalidate against current ownership when work is resumed; newer repairs can make
-parts of this frozen inventory stale without invalidating the retained evidence.
+Newer repairs can change ownership without invalidating retained evidence.
+Accepted documented exceptions may remain owner-zero; a zero owner does not make
+completed work available again.
 
 The largest shared-lineage concentration is Canada ADM3: a few original
 unorganized administrative regions were divided among named physical atlas

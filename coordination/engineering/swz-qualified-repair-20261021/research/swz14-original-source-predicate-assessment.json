@@ -1,0 +1,293 @@
+{
+  "kind": "Independent SWZ14 original-source contract and physical/source predicate interpretation",
+  "as_of": "2026-10-21",
+  "status": "Bounded interpretation only; not a qualification, disposition, or final-head review.",
+  "scope": {
+    "package": "gb-SWZ-ADM2--repair-evaluation",
+    "cells": 14,
+    "intervals": 14,
+    "owners": 8,
+    "land": 14,
+    "water": 0,
+    "separate_exclusions": [
+      "ADM1 location-mapping package (26 cells)",
+      "53-subject source review #964"
+    ]
+  },
+  "original_contract": {
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+    "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+    "interpretation": "Positive repair is possible when source membership at the recorded location, territorial exclusions and complete source competitors are supported; the resulting additive native patch must be zero-reassignment and pass actual selected-native conservation plus source/physical witness checks. Every interval can alternatively complete as a documented exception. Neither exception language nor this assessment makes a source gap an automatic qualification."
+  },
+  "reviewed_stock_predicates": [
+    {
+      "commit": "01fe271e2554b03675769701691fb3dc07442303",
+      "path": "src/native-grid.js",
+      "sha256": "3d20777f5896d28192e40428dd34cab89d47873a08bf073a17338c4ff97d43cd",
+      "finding": "The retained original source-contact result is pinned to this stock source. The independent reconstruction records exact-center point membership against complete retained provider-family features; 14/14 keys have one unique ADM2 match in the simplified family, with zero boundary ties. It is a source-contact result, not by itself present territorial adjudication or source-authority validation."
+    },
+    {
+      "commit": "db49dfbfe5269e23c29e30a0e9e83309a5d17f49",
+      "path": "scripts/prepare-delivery-handoff.mjs",
+      "blob_oid": "240c39a8249f10067289432dfb6bcdef806363a1",
+      "sha256": "e9ffb0b9aead4be05f1c680107d72083394e87a6149afab566039d023fbd5b64",
+      "lines": "1420-1467; 1474-1549",
+      "finding": "Source-target preparation compares each consumed target geometry to the authenticated original feature, uses complete supplied negative-family feature sets, and retains candidate/competitor witnesses. The code labels negative scope as conservative disagreement rather than legal sovereignty/applicability adjudication and keeps native source/owner/physical/geometry qualification required. Source evidence can optionally carry territorial applicability; no general current-boundary certificate is encoded as a universal gate."
+    },
+    {
+      "commit": "e447ef5fc4fcae9b8f04a6d517904cbf30b413df",
+      "path": "scripts/qualify-source-cohort.py",
+      "blob_oid": "f69180b425d665a022dd18290688864674dd20a5",
+      "sha256": "abc801b9a35d20c9f0dfe3bbc9bb2cb7dc107f1758414970d9cde11380574a18",
+      "finding": "The measured physical producer authenticates the staged whole-target source geometry and physical inputs. Its receipt reports physical support only; it does not decide territorial scope, current applicability, source ancestry, or native conservation."
+    }
+  ],
+  "retained_source_and_parent_context": {
+    "source_role_preparation": "inventory/swz14-source-role-preparation.json",
+    "source_summary": {
+      "simplified_ADM2_unique_direct_hits": 14,
+      "full_ADM2_direct_hits": 8,
+      "full_ADM2_no_contact": 6,
+      "ADM1_unique_parent_region_contacts": 14,
+      "ADM1_feature_count": 4,
+      "ADM1_direct_owner_vectors_empty": true,
+      "boundary_ties": 0,
+      "all_53_simplified_features_valid": true,
+      "all_53_full_features_valid": true,
+      "all_4_ADM1_features_valid": true,
+      "geometry_repaired_or_changed": false
+    },
+    "source_versions": {
+      "ADM2": {
+        "source": "OpenStreetMap / Wambacher",
+        "represented_year": "2017",
+        "license": "ODbL 1.0",
+        "source_data_updated": "2023-01-19",
+        "metadata": "inventory/swz-audit-handoff/extracted/primary/gb-ADM2-meta.json",
+        "properties": {
+          "feature_count": 53,
+          "bytes": 120065,
+          "sha256": "5d54a3629b8b766c061734f7fa3d04c84eab5946b62932e77d067d1b01e7749f",
+          "property_keys": [
+            "shapeGroup",
+            "shapeID",
+            "shapeISO",
+            "shapeName",
+            "shapeType"
+          ]
+        },
+        "comparison_source_properties": {
+          "feature_count": 53,
+          "bytes": 334110,
+          "sha256": "5731b27769f77d547ca6165f88357ac981477cca6b47eb84d8641cb3d09e54c0",
+          "property_keys": [
+            "shapeGroup",
+            "shapeID",
+            "shapeISO",
+            "shapeName",
+            "shapeType"
+          ]
+        },
+        "static_urls": [
+          "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SWZ/ADM2/geoBoundaries-SWZ-ADM2.geojson",
+          "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SWZ/ADM2/geoBoundaries-SWZ-ADM2_simplified.geojson"
+        ]
+      },
+      "ADM1": {
+        "source": "OpenStreetMap / Wambacher",
+        "represented_year": "2017",
+        "license": "ODbL 1.0",
+        "metadata": "inventory/swz-audit-handoff/extracted/primary/gb-ADM1-meta.json",
+        "properties": {
+          "feature_count": 4,
+          "bytes": 20867,
+          "sha256": "09ee41e828454553928a1b472a8be6fcbf13c46988c7e57d940476425e0aa24a",
+          "property_keys": [
+            "shapeGroup",
+            "shapeID",
+            "shapeISO",
+            "shapeName",
+            "shapeType"
+          ]
+        },
+        "static_urls": [
+          "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SWZ/ADM1/geoBoundaries-SWZ-ADM1.geojson",
+          "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SWZ/ADM1/geoBoundaries-SWZ-ADM1_simplified.geojson"
+        ]
+      }
+    },
+    "parent_interpretation": "The 4 ADM1 polygons provide one broad-region spatial contact for each original key. Their roster direct-owner arrays are empty. The matching owner lineage province IDs align with those region names, but the GeoJSON properties have no parent field; these contacts establish spatial/tier context, not standalone parent ancestry, ownership, territorial exclusion, or competitor completeness.",
+    "physical_receipt": "inventory/swz-physical-receipt-independent-check.json",
+    "physical_result": {
+      "target_count": 8,
+      "input_count": 25,
+      "all_source_covers_candidate": true,
+      "all_candidate_covers_source": false,
+      "all_issues_empty": true,
+      "elapsed_seconds": 3.478521166000064,
+      "scope": "eight staged source targets, each exactly equal to the retained simplified ADM2 feature; zero exactly equal to full ADM2 geometry"
+    },
+    "meaning": "All 14 keys are land and have unique direct simplified-ADM2 source contacts. Each also has one broad ADM1 spatial contact whose source-roster direct-owner list is empty; the owner province lineage agrees with the region name, but source geometries contain no explicit parent pointer. These contacts help describe tier/region context, not direct ADM2 ancestry or competitor clearance. The scoped candidate/competitor family for the original route is the complete 53-feature 2017 simplified ADM2 product consumed by the queue and physical stage; all 53 full-geometry features remain examined as representation context and are not required to replace the simplified candidate."
+  },
+  "key_level_representation_adverse_facts": {
+    "all14_simplified": "Every original key has exactly one simplified ADM2 contact matching its recorded ADM2 source ID; zero ties.",
+    "8_full_geometry": "Eight of the 14 keys also hit the exact same ADM2 feature in the full geometry. These are consistent across the two retained representations, subject to complete competitor and territorial/source applicability predicates.",
+    "six_simplified_only": [
+      {
+        "block": 36,
+        "ordinal": 1,
+        "xy": [
+          153734,
+          150701
+        ],
+        "owner": 41011,
+        "owner_name": "Inkhundla Piggs Peak",
+        "original_adm2_id": "gb:SWZ:ADM2:25544865B91965971492812",
+        "original_adm2_name": "Inkhundla Piggs Peak",
+        "simplified_direct_hits": [
+          "gb:SWZ:ADM2:25544865B91965971492812"
+        ],
+        "full_direct_hits": [],
+        "parent_names": [
+          "Hhohho"
+        ],
+        "physical_class": "land"
+      },
+      {
+        "block": 36,
+        "ordinal": 6,
+        "xy": [
+          154464,
+          151365
+        ],
+        "owner": 41017,
+        "owner_name": "Inkhundla Tikhuba",
+        "original_adm2_id": "gb:SWZ:ADM2:25544865B99429407754877",
+        "original_adm2_name": "Inkhundla Tikhuba",
+        "simplified_direct_hits": [
+          "gb:SWZ:ADM2:25544865B99429407754877"
+        ],
+        "full_direct_hits": [],
+        "parent_names": [
+          "Lubombo"
+        ],
+        "physical_class": "land"
+      },
+      {
+        "block": 36,
+        "ordinal": 7,
+        "xy": [
+          153585,
+          151385
+        ],
+        "owner": 40984,
+        "owner_name": "Inkhundla Gege",
+        "original_adm2_id": "gb:SWZ:ADM2:25544865B4123625373150",
+        "original_adm2_name": "Inkhundla Gege",
+        "simplified_direct_hits": [
+          "gb:SWZ:ADM2:25544865B4123625373150"
+        ],
+        "full_direct_hits": [],
+        "parent_names": [
+          "Shiselweni"
+        ],
+        "physical_class": "land"
+      },
+      {
+        "block": 37,
+        "ordinal": 1,
+        "xy": [
+          153840,
+          151708
+        ],
+        "owner": 41003,
+        "owner_name": "Inkhundla Zombodze",
+        "original_adm2_id": "gb:SWZ:ADM2:25544865B75252057291440",
+        "original_adm2_name": "Inkhundla Zombodze",
+        "simplified_direct_hits": [
+          "gb:SWZ:ADM2:25544865B75252057291440"
+        ],
+        "full_direct_hits": [],
+        "parent_names": [
+          "Shiselweni"
+        ],
+        "physical_class": "land"
+      },
+      {
+        "block": 37,
+        "ordinal": 2,
+        "xy": [
+          153848,
+          151711
+        ],
+        "owner": 41003,
+        "owner_name": "Inkhundla Zombodze",
+        "original_adm2_id": "gb:SWZ:ADM2:25544865B75252057291440",
+        "original_adm2_name": "Inkhundla Zombodze",
+        "simplified_direct_hits": [
+          "gb:SWZ:ADM2:25544865B75252057291440"
+        ],
+        "full_direct_hits": [],
+        "parent_names": [
+          "Shiselweni"
+        ],
+        "physical_class": "land"
+      },
+      {
+        "block": 37,
+        "ordinal": 3,
+        "xy": [
+          153875,
+          151721
+        ],
+        "owner": 41003,
+        "owner_name": "Inkhundla Zombodze",
+        "original_adm2_id": "gb:SWZ:ADM2:25544865B75252057291440",
+        "original_adm2_name": "Inkhundla Zombodze",
+        "simplified_direct_hits": [
+          "gb:SWZ:ADM2:25544865B75252057291440"
+        ],
+        "full_direct_hits": [],
+        "parent_names": [
+          "Shiselweni"
+        ],
+        "physical_class": "land"
+      }
+    ],
+    "interpretation": "The six are point-membership representation differences, not six proven wrong assignments and not six automatically qualified repairs. A positive path for any must state which authenticated 2017 product is the intended source geometry and show the actual stock source/negative evidence and selected-native conservation for that exact key. The complete source geometry family can help determine uniqueness, but feature-count or same-name evidence alone does not resolve which representation governs.",
+    "no_threshold": "The original contract has no 8-of-14 or 8/6 decision threshold. The representation split must be assessed per key using the source product actually nominated and its complete same-tier competitors."
+  },
+  "tikhuba_distinct_role_question": {
+    "key": {
+      "block": 36,
+      "ordinal": 6,
+      "xy": [
+        154464,
+        151365
+      ],
+      "owner": 41017,
+      "recorded_owner": "Inkhundla Tikhuba",
+      "source_id": "gb:SWZ:ADM2:25544865B99429407754877",
+      "parent_region_contact": "Lubombo"
+    },
+    "geometry_fact": "Tikhuba is one of the six simplified-only points; simplified feature matches, full ADM2 feature does not cover the point.",
+    "role_fact": "Retained official EBC indexed tables associate Tikhuba with Matsanjeni North as a chiefdom in 2013/2018 and again in 2023. The 2013 evidence predates the source represented year 2017. The full EBC responses were not retained and the copyright-marked map was not downloaded.",
+    "difference_from_other13": "This is an additional source-role/tier ambiguity beyond the representation issue. No corresponding conflicting named role was identified for the other 13 keys in the retained research. It does not prove a rename, parent relation, exact geometry, or alternative ownership; the Lubombo contact and lineage are broad parent-region context only.",
+    "key_specific_followup": "The eventual stock evidence must keep the Inkhundla Tikhuba source identity and the EBC chiefdom/Matsanjeni North association explicit, without silently substituting one for the other. If no lawful exact geometry/role evidence resolves the role, preserve that key-specific uncertainty."
+  },
+  "independent_decision_guidance": {
+    "can_positive_source_path_exist": "Yes, in principle: the contract does not impose a blanket latest-boundary certificate, and authenticated source membership, all same-tier competitors, explicit broader-role context, physical evidence and selected-native proof could support a positive repair for individual keys.",
+    "not_yet_supported": "The retained evidence alone does not satisfy source applicability/territorial exclusions, complete scoped competitors, and selected-native conservation for a blanket 14-key positive conclusion. The simplified/full representation differences must be addressed per key but do not automatically disqualify the simplified source. Tikhuba adds a distinct role conflict.",
+    "what_actual_upcoming_diagnostic_must_show": "For each exact key: use the complete 53-feature ORIGINAL SIMPLIFIED ADM2 family as the actual scoped candidate/competitor basis (it is the product consumed by the original queue and bound to the physical stage); report the full same-release ADM2 geometry comparison as adverse representation evidence, not as a mandatory replacement; keep the four ADM1 contacts as parent context rather than direct owners; retain any territorial/foreign negatives with bounded scope; bind physical support to the exact simplified inputs; and supply additive patch/current selected-native conservation. The provider’s complete 53-feature family proves that provider release’s roster coverage only, not completeness of a current legal roster.",
+    "not_required_by_this_contract_read": "An invented universal certificate of present official boundaries or full modern crosswalk is not a default prerequisite. The 2017 source metadata and retained original geometry may be usable if the per-key evidence and source role are adequately supported; where evidence conflicts, use the documented-exception route without claiming qualification.",
+    "no_preapproval": "This is a predicate interpretation for independent review planning, not approval of any future diagnostic, source choice, native patch, exception, or public packet."
+  },
+  "operations": {
+    "read_only": true,
+    "source_geometry_replay": false,
+    "owner_observer_rerun": false,
+    "physical_producer_rerun": false,
+    "web_search_or_timeout_retry": false
+  }
+}

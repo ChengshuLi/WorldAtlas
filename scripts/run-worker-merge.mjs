@@ -13,6 +13,11 @@ if (process.env.GITHUB_REF !== 'refs/heads/main' || !/^[-\w.]+\/[-\w.]+$/.test(r
 const number = Number(input.pr_number), phase = process.env.MERGE_PHASE;
 if (!['prepare','merge'].includes(phase) || !Number.isSafeInteger(number) || number < 1 ||
     !/^[a-f0-9]{40}$/.test(input.expected_head ?? '') || !/^[-a-zA-Z0-9]{16,100}$/.test(input.request_id ?? '')) throw Error('Invalid merge request');
+// New workflow definitions require intent before constructing any API client.
+// Already-queued older definitions lack this opt-in and retain their contract.
+if (phase === 'prepare' && process.env.REVIEWED_TESTS_REQUIRED === 'true' &&
+    (typeof input.reviewed_tests !== 'string' || !input.reviewed_tests.trim()))
+  throw Error('Required reviewed_tests: supply exact plan.request JSON, auto, or complete');
 const accounting=requestAccounting(phase);
 // Actions owns the job timeout. Bound each actual HTTP request and retry
 // through the shared client; no separate job-metadata admission is needed.
@@ -20,7 +25,7 @@ const rawAPI = githubAPI(process.env.GH_TOKEN, {onRequest: accounting.observe,
   readWaitMs: phase === 'merge' ? 61 * 60 * 1000 : 8 * 60 * 1000});
 const transport = gitBlobTransport(rawAPI, {repo, token: process.env.GH_TOKEN, directory: process.cwd(),
   onFetch: row => console.log(JSON.stringify({phase, immutable_transport: row}))});
-const api = transport.api, options = {api, repo, number, expectedHead: input.expected_head, policy: loadEvidencePolicy(),
+const api = transport.api, options = {api, repo, number, expectedHead: input.expected_head, policy: loadEvidencePolicy(), reviewedTests: input.reviewed_tests,
   integrationRequestId: input.request_id + (process.env.GITHUB_RUN_ID ? `-${process.env.GITHUB_RUN_ID}` : '')};
 let result = {accepted: false, request_id: input.request_id, pr_number: number, phase};
 try {
@@ -28,7 +33,7 @@ try {
     const state = await prepareIntegration(options);
     if (!state.replayed && !/^[a-f0-9]{40}$/.test(state.candidate_tree ?? '')) throw Error('Integration candidate tree unavailable');
     result = {...result, accepted: Boolean(state.replayed), ...(state.replayed ? {merge_commit: state.pr.merge_commit_sha} : {}), status: state.replayed ? 'already-merged' : 'testing',
-      tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head, profile: state.profile, geography_required: state.geography_required, geography_software: state.geography_software, test_selection: state.test_selection ?? 'complete', expectations_path: state.expectations_path,
+      tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head, profile: state.profile, geography_required: state.geography_required, geography_software: state.geography_software, test_selection: state.test_selection ?? 'complete', test_files: state.test_files, expectations_path: state.expectations_path,
       candidate_ref: state.candidate_ref};
     // Only validated commit/tree IDs, owned refs and literal safe sparse patterns become job outputs.
     // Queued workflow definitions can precede this ref:main producer. Only an
@@ -37,10 +42,12 @@ try {
     const checkoutOutput = process.env.CHECKOUT_PATTERNS_FORMAT === 'wrapped-base64'
       ? `checkout_patterns_base64<<CHECKOUT_BASE64\n${(checkoutPatternsBase64.match(/.{1,76}/g) ?? []).join('\n')}\nCHECKOUT_BASE64\n`
       : `checkout_patterns_base64=${checkoutPatternsBase64}\n`;
-    fs.appendFileSync(process.env.GITHUB_OUTPUT, `geography_required=${state.geography_required !== false}\ngeography_software=${state.geography_software === true}\ncandidate_ref=${state.candidate_ref ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.shards ?? (state.profile === 'full' ? [0,1,2] : [0]))}\ntest_selection=${state.test_selection ?? 'complete'}\nexpectations_path=${state.expectations_path ?? ''}\ncandidate_tree=${state.candidate_tree ?? ''}\n${checkoutOutput}`);
+    fs.appendFileSync(process.env.GITHUB_OUTPUT, `geography_required=${state.geography_required !== false}\ngeography_software=${state.geography_software === true}\ncandidate_ref=${state.candidate_ref ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.shards ?? (state.profile === 'full' ? [0,1,2] : [0]))}\ntest_selection=${state.test_selection ?? 'complete'}\ntest_files_base64=${Buffer.from(JSON.stringify(state.test_files ?? [])).toString('base64')}\nexpectations_path=${state.expectations_path ?? ''}\ncandidate_tree=${state.candidate_tree ?? ''}\n${checkoutOutput}`);
   } else {
+    const preparedChoice = process.env.PREPARED_GEOGRAPHY_SOFTWARE;
     const completed = await completeIntegration({...options, integrationResult: process.env.INTEGRATION_RESULT,
       geographyResult: process.env.GEOGRAPHY_RESULT,
+      preparedGeographySoftware: preparedChoice === 'true' ? true : preparedChoice === 'false' ? false : preparedChoice,
       geographyReportHash: process.env.GEOGRAPHY_REPORT_SHA256,
       geographyReportLoader: ({api: reportAPI = api} = {}) => loadGeographicReport({api: reportAPI, repo,
         runId: process.env.GITHUB_RUN_ID,
@@ -62,7 +69,6 @@ try {
   if (error.candidateCleanup) result.candidate_cleanup = error.candidateCleanup;
   if (error.candidateDiagnostics) result.candidate_diagnostics = error.candidateDiagnostics;
   result.status = /conflict|changes reviewed bytes|substantive review/.test(error.message) ? 'intervention-required' : 'not-merged';
-  result.retryable = /resubmit unchanged head/.test(error.message) || (quotaDelay(error)??quotaDelay(error.quotaCause))!==null;
   if((quotaDelay(error)??quotaDelay(error.quotaCause))!==null)result.quota_retry_at=new Date(Date.now()+(quotaDelay(error)??quotaDelay(error.quotaCause))).toISOString();
   // A lost merge response or canceled predecessor can still have committed.
   // Reconcile the actual PR once; never repeat the merge write here.

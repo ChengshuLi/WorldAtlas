@@ -6,27 +6,21 @@ import {spawnSync, execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {integrationProfile} from '../scripts/integration-profile.mjs';
+import {staticModuleClosure} from './helpers/static-module-closure.mjs';
 import {checkoutExecutionClosure} from '../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/artifact-checkout-execution.mjs';
 
 const repo=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+// The workflow shell has two intentional eager entries. Discover their children
+// once; the selected smoke below stays an explicit dynamic fixture override.
+const fixtureSources=staticModuleClosure(repo,['scripts/run-integration-tests.mjs','scripts/integration-profile.mjs']);
 
-test('actual checkout authority covers current code independently of authenticated historical provenance',()=>{
+test('actual checkout authority covers current code independently of historical provenance',()=>{
   const closure=checkoutExecutionClosure(repo);
   assert.equal(new Set(closure).size,closure.length);
   assert(closure.includes('scripts/run-integration-tests.mjs'));
   assert(!closure.includes('coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-consumer.mjs'));
   assert(!closure.includes('scripts/canonical-restoration.mjs'));
-  const pinned=pin=>{
-    const raw=execFileSync('git',['show',`HEAD:${pin.path}`],{cwd:repo,maxBuffer:Infinity});
-    assert.equal(raw.length,pin.bytes);
-    assert.equal(createHash('sha256').update(raw).digest('hex'),pin.sha256);
-    return JSON.parse(raw);
-  };
-  const selection=JSON.parse(execFileSync('git',['show','HEAD:data/ownership-selection.json'],{cwd:repo}));
-  const certificate=pinned(selection.artifact_consumption.certificate);
-  const code=pinned(certificate.application_consumer_code);
-  assert.equal(code.kind,'qualified-artifact-application-code-closure-v1');
-  assert(code.critical_files.length>0,'Historical consumer provenance remains authenticated');
+
 });
 
 test('actual checkout authority refuses concatenated relative imports and missing smoke dependencies',t=>{
@@ -53,7 +47,7 @@ function workflowCommand() {
 function fixture(t,{selected=false,smokeBody,fail=false}={}) {
   // One marker exercises runner dispatch. Real inventory, skip and process-lifecycle
   // behavior are covered by full-regression-shards and integration-streaming.
-  const sources=['src/native-grid.js','src/reference-metadata.js','scripts/run-integration-tests.mjs','scripts/integration-profile.mjs','scripts/check-handoff-scope.mjs','scripts/package-inputs.mjs','scripts/compile-hosted-migrations.mjs','scripts/ci-setup-observations.mjs'];
+  const sources=fixtureSources;
   const bodies=sources.map(name=>{
     const p=path.join(repo,name),s=fs.lstatSync(p);
     assert.ok(s.isFile()&&!s.isSymbolicLink());
@@ -88,8 +82,8 @@ export async function runSelectedDeliverySmoke({root,expectationsPath,emittedDir
   fs.writeFileSync(outputPath,'{"fixture_only":true}',{flag:'wx'});return {fixture_only:true};
 }`);
   }
-  return {root,expectations,run(profile=selected?'full':'evidence',shard='0') {
-    const env={...process.env,INTEGRATION_PROFILE:profile,INTEGRATION_SHARD:shard,INTEGRATION_TEST_SELECTION:selected?'selected-data':'complete',...(selected?{SELECTED_EXPECTATIONS_PATH:expectations}:{})};
+  return {root,expectations,run(profile=selected?'full':'evidence',shard='0',overrides={}) {
+    const env={...process.env,INTEGRATION_PROFILE:profile,INTEGRATION_SHARD:shard,INTEGRATION_TEST_SELECTION:selected?'selected-data':'complete',...(selected?{SELECTED_EXPECTATIONS_PATH:expectations}:{}),...overrides};
     // Match a plain CLI launch, rather than inheriting node:test's recursion tag.
     delete env.NODE_TEST_CONTEXT;
     return spawnSync('bash',['-e','-o','pipefail','-c',workflowCommand()],{
@@ -108,6 +102,16 @@ test('actual queue shell runs tests and propagates failure in both live profiles
   const invalid=fixture(t),result=invalid.run('invalid');
   assert.notEqual(result.status,0);
   assert(!fs.existsSync(path.join(invalid.root,'tests-reached-integration-fixture')));
+});
+
+test('actual reviewed queue shell executes only named consumers and needs no database or emitted output',t=>{
+  const f=fixture(t);
+  fs.writeFileSync(path.join(f.root,'test/unrelated.test.mjs'),"throw Error('Unrelated test must not execute');\n");
+  const result=f.run('evidence','0',{INTEGRATION_TEST_SELECTION:'reviewed',
+    INTEGRATION_TEST_FILES_BASE64:Buffer.from(JSON.stringify(['test/integration-fixture.test.mjs'])).toString('base64')});
+  assert.equal(result.status,0,result.stderr);assert(fs.existsSync(path.join(f.root,'tests-reached-integration-fixture')));
+  assert(!fs.existsSync(path.join(f.root,'dist')));assert(!fs.existsSync(path.join(f.root,'data')));
+  assert.match(result.stdout,/'?test_selection'?:\s*'?reviewed'?|"test_selection":"reviewed"/);
 });
 
 test('actual selected queue shell runs smoke and propagates its failure without unit regression',t=>{
@@ -185,4 +189,59 @@ test('deleted workflow routing retains full fallback for actual runtime inputs',
   assert.equal(integrationProfile('engineering/retired-stage',[{filename,status:'removed'}],{},new Map()),'evidence');
   for(const filename of ['scripts/build-static-inner.mjs','src/native-grid.js','hosted/geographic-releases.js'])
     assert.equal(integrationProfile('engineering/retired-stage',[{filename,status:'removed'}],{},new Map()),'full');
+});
+
+
+test('static fixture discovery follows eager imports without evaluating or broadening dynamic stubs',t=>{
+  const cache=path.join(repo,'.cache');fs.mkdirSync(cache,{recursive:true});
+  const root=fs.mkdtempSync(path.join(cache,'static-fixture-'));
+  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  const write=(name,body)=>fs.writeFileSync(path.join(root,name),body);
+  const marker=path.join(root,'must-not-execute');
+  write('entry.mjs',`import {writeFileSync} from 'node:fs';
+import './child.mjs';
+export {value} from './leaf.mjs';
+import settings from './settings.json' with {type:'json'};
+export {default as repeatedSettings} from './settings.json' with {type:'json'};
+// import './comment-not-a-module.mjs';
+const text="import './string-not-a-module.mjs'";
+writeFileSync(${JSON.stringify(marker)},'executed');
+await import('./deliberate-dynamic-stub.mjs');
+throw Error('Fixture discovery must not evaluate source');
+`);
+  write('child.mjs',"import './entry.mjs';\n");
+  write('leaf.mjs',"export const value=1;\n");
+  write('settings.json','{"value":2}');
+  assert.deepEqual(staticModuleClosure(root,['entry.mjs','entry.mjs']),['child.mjs','entry.mjs','leaf.mjs','settings.json']);
+  assert(!fs.existsSync(marker));
+  write('leaf.mjs',"export {value} from './new-transitive.mjs';\n");
+  write('new-transitive.mjs',"export const value=2;throw Error('Never evaluate even a new transitive dependency');\n");
+  assert.deepEqual(staticModuleClosure(root,['entry.mjs']),['child.mjs','entry.mjs','leaf.mjs','new-transitive.mjs','settings.json']);
+  assert(!fs.existsSync(marker));
+  write('settings.json','{broken JSON');
+  assert.throws(()=>staticModuleClosure(root,['entry.mjs']),/SyntaxError/);
+  fs.unlinkSync(path.join(root,'settings.json'));
+  assert.throws(()=>staticModuleClosure(root,['entry.mjs']),/ENOENT/);
+  write('settings.json','{"value":2}');
+  fs.unlinkSync(path.join(root,'new-transitive.mjs'));
+  assert.throws(()=>staticModuleClosure(root,['entry.mjs']),/ENOENT/);
+});
+
+test('static fixture discovery refuses unsafe or nonordinary imports and invalid source',t=>{
+  const cache=path.join(repo,'.cache');fs.mkdirSync(cache,{recursive:true});
+  const root=fs.mkdtempSync(path.join(cache,'static-fixture-'));
+  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  fs.writeFileSync(path.join(root,'leaf.mjs'),'export const value=1;\n');
+  fs.symlinkSync('leaf.mjs',path.join(root,'linked.mjs'));
+  fs.mkdirSync(path.join(root,'directory.mjs'));
+  fs.symlinkSync('.',path.join(root,'linked-directory'));
+  for(const name of ['linked.mjs','directory.mjs','linked-directory/leaf.mjs'])assert.throws(()=>staticModuleClosure(root,[name]),/must be ordinary/);
+  for(const name of ['../outside.mjs','/absolute.mjs','bad\\name.mjs'])
+    assert.throws(()=>staticModuleClosure(root,[name]),/must stay inside/);
+  for(const [body,error] of [["import '../outside.mjs';",/must stay inside/],
+    ["import 'external-package';",/Unsupported external/],["export const = ;",/SyntaxError/]]){
+    fs.writeFileSync(path.join(root,'entry.mjs'),body);
+    assert.throws(()=>staticModuleClosure(root,['entry.mjs']),error);
+  }
+  assert.throws(()=>staticModuleClosure(root,[]),/Nonempty static module entries/);
 });

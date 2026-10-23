@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';import path from 'node:path';import os from 'node:os';import {createHash} from 'node:crypto';import {gzipSync,gunzipSync} from 'node:zlib';
 import {stageLandCreations} from '../scripts/stage-land-creations.mjs';import {footprintHash} from '../scripts/check-prepared.mjs';
-import {validateMacroReviewProjection,resolveProjectionGeometry,retainProjectionInputs,loadProjectionPredecessors,inheritProjectionAssessments,projectAdditionalOwnerProfiles,validatePriorDashboardPins} from '../scripts/prepare-macro-review-projection.mjs';
+import {projectCurrentMemberEdges,validateCurrentMemberEdges,validateMacroReviewProjection,resolveProjectionGeometry,retainProjectionInputs,loadProjectionPredecessors,inheritProjectionAssessments,projectAdditionalOwnerProfiles,validatePriorDashboardPins} from '../scripts/prepare-macro-review-projection.mjs';
 const units=[{id:'c',name:'C',level:'continent',parent_id:null},{id:'s',name:'S',level:'subcontinent',parent_id:'c'},{id:'r',name:'R',level:'region',parent_id:'s'},{id:'a',name:'A',level:'area',parent_id:'r'},{id:'p',name:'P',level:'province',parent_id:'a'}];
 const pins={hierarchy_sha256:'a'.repeat(64),location_index_sha256:'b'.repeat(64),footprints_sha256:'c'.repeat(64)};
 test('owner-profile reuse rejects stale hierarchy, catalog and footprint pins',()=>{
@@ -120,4 +120,135 @@ test('projection predecessor loading pins both gzip layers and joins exact relea
  const broken=structuredClone(projection);broken.before_pins.footprints_sha256='0'.repeat(64);
  assert.throws(()=>loadProjectionPredecessors({data:root+'/data',projection:broken}),/pins do not join/);
  fs.appendFileSync(root+'/'+file,'changed');assert.throws(()=>loadProjectionPredecessors({data:root+'/data',projection}),/archive bytes changed/);
+});
+
+// The member-edge prerequisite consumes actual indexed part bytes and actual
+// gzip compact bytes. No source or physical evaluator is invoked.
+function memberEdgeFixture(){
+ const feature=(id,members,present=true)=>({type:'Feature',id,properties:{id,name:id,parent_id:'p',reference_owner:id==='second'?'Other':'Owner',metadata:present?{source_member_ids:members}:{}},geometry:null});
+ const indexRaw=Buffer.from(JSON.stringify({parts:['geography/part-0.json','geography/part-1.json']}));
+ const parts=[{path:'data/geography/part-0.json',mode:'100644',raw:Buffer.from(JSON.stringify({type:'FeatureCollection',features:[feature('absent',null,false),feature('null',null)]}))},
+  {path:'data/geography/part-1.json',mode:'100644',raw:Buffer.from(JSON.stringify({type:'FeatureCollection',features:[feature('second',['raw:competitor'])]}))}];
+ const projected=projectCurrentMemberEdges({indexRaw,parts}),locations=projected.locations.map(row=>({...row,owner:row.id==='second'?'Other':'Owner',status:'open'}));
+ const projection={member_edges:projected.member_edges,current_pins:{location_index_sha256:projected.member_edges.index_sha256},counts:{locations:locations.length},locations};
+ const dashboard={member_edges:structuredClone(projected.member_edges),current_pins:{...projection.current_pins},locations:locations.length,location_parts:['macro-foundation/world-review-locations-0.json.gz']};
+ const compactParts=[{path:'data/'+dashboard.location_parts[0],raw:gzipSync(Buffer.from(JSON.stringify(locations)))}];
+ return {projection,dashboard,compactParts,indexRaw,parts};
+}
+function rewriteCompact(input){input.compactParts[0].raw=gzipSync(Buffer.from(JSON.stringify(input.projection.locations)));}
+test('complete member projection preserves absent versus null and canonical-only cross-owner claims',()=>{
+ const f=memberEdgeFixture(),result=validateCurrentMemberEdges(f);
+ assert.equal(result.validated,true);assert.equal(result.locations,3);assert.equal(result.parts,2);assert.equal(result.native_absence_admission,false);
+ assert.equal(Object.hasOwn(f.projection.locations[0],'source_member_ids'),false);
+ assert.equal(f.projection.locations[1].source_member_ids,null);
+ assert.deepEqual(f.projection.locations[2].source_member_ids,['raw:competitor']);
+ const before=JSON.stringify(f.projection);validateCurrentMemberEdges(f);assert.equal(JSON.stringify(f.projection),before);
+});
+test('member projection refuses omitted canonical part and omitted sole foreign-owner seed',()=>{
+ for(const kind of ['part','seed','edge','extra-edge','null-to-absent','absent-to-null']){
+  const f=memberEdgeFixture();
+  if(kind==='part')f.parts.pop();
+  if(kind==='seed'){f.projection.locations.pop();f.projection.counts.locations--;f.dashboard.locations--;rewriteCompact(f);}
+  if(kind==='edge'){delete f.projection.locations[2].source_member_ids;rewriteCompact(f);}
+  if(kind==='extra-edge'){f.projection.locations[0].source_member_ids=['forged'];rewriteCompact(f);}
+  if(kind==='null-to-absent'){delete f.projection.locations[1].source_member_ids;rewriteCompact(f);}
+  if(kind==='absent-to-null'){f.projection.locations[0].source_member_ids=null;rewriteCompact(f);}
+  assert.throws(()=>validateCurrentMemberEdges(f),undefined,kind);
+ }
+});
+test('complete member descriptor binding refuses stale parts and coherent forged edge claims',()=>{
+ for(const kind of ['stale-body','forged-capability','missing-descriptor','extra-descriptor','wrong-mode','wrong-oid','wrong-index','reordered-parts']){
+  const f=memberEdgeFixture();
+  if(kind==='stale-body')f.parts[1].raw=Buffer.concat([f.parts[1].raw,Buffer.from('\n')]);
+  if(kind==='forged-capability'){f.projection.locations[2].source_member_ids=[];rewriteCompact(f);}
+  if(kind==='missing-descriptor')f.projection.member_edges.parts.pop();
+  if(kind==='extra-descriptor')f.projection.member_edges.parts.push({...f.projection.member_edges.parts[0]});
+  if(kind==='wrong-mode')f.parts[0].mode='100755';
+  if(kind==='wrong-oid')f.projection.member_edges.parts[0].git_blob_oid='0'.repeat(40);
+  if(kind==='wrong-index')f.indexRaw=Buffer.concat([f.indexRaw,Buffer.from('\n')]);
+  if(kind==='reordered-parts')f.parts.reverse();
+  assert.throws(()=>validateCurrentMemberEdges(f),undefined,kind);
+ }
+});
+test('member projection validates actual compact shards against complete monolithic rows',()=>{
+ for(const kind of ['missing-shard','duplicate-shard','wrong-path','compact-edge','monolithic-edge','compact-other-field','same-count-wrong-id','duplicate-id']){
+  const f=memberEdgeFixture(),rows=JSON.parse(gunzipSync(f.compactParts[0].raw));
+  if(kind==='missing-shard')f.compactParts=[];
+  if(kind==='duplicate-shard')f.compactParts.push({...f.compactParts[0]});
+  if(kind==='wrong-path')f.compactParts[0].path='data/elsewhere.json.gz';
+  if(kind==='compact-edge'){rows[2].source_member_ids=[];f.compactParts[0].raw=gzipSync(Buffer.from(JSON.stringify(rows)));}
+  if(kind==='monolithic-edge')f.projection.locations[2].source_member_ids=[];
+  if(kind==='compact-other-field'){rows[0].status='approved';f.compactParts[0].raw=gzipSync(Buffer.from(JSON.stringify(rows)));}
+  if(kind==='same-count-wrong-id'){f.projection.locations[2].id='invented';rewriteCompact(f);}
+  if(kind==='duplicate-id'){f.projection.locations[2].id='absent';rewriteCompact(f);}
+  assert.throws(()=>validateCurrentMemberEdges(f),undefined,kind);
+ }
+});
+test('literal member extraction does not silently repair malformed claims or grant absence authority',()=>{
+ for(const value of [null,[],['dup','dup'],42,{wrong:'shape'},'raw:competitor']){
+  const f=memberEdgeFixture(),part=JSON.parse(f.parts[1].raw);part.features[0].properties.metadata.source_member_ids=value;f.parts[1].raw=Buffer.from(JSON.stringify(part));
+  const result=projectCurrentMemberEdges(f);assert.deepEqual(result.locations[2].source_member_ids,value);
+  assert.equal(Object.hasOwn(result,'absence_admission'),false);
+ }
+ const f=memberEdgeFixture();delete f.projection.member_edges;assert.throws(()=>validateCurrentMemberEdges(f),/bindings/);
+ assert.equal(validateMacroReviewProjection(fixture()).validated,true);
+});
+
+test('lazy complete member extraction equals array extraction without retaining yielded raw bodies',()=>{
+ const f=memberEdgeFixture(),expected=projectCurrentMemberEdges(f),before=f.parts.map(part=>Buffer.from(part.raw));
+ function* parts(){
+  for(const part of f.parts){
+   const raw=Buffer.from(part.raw);yield {...part,raw};
+   raw.fill(0); // A consumed transport buffer may be reused by its owner.
+  }
+ }
+ assert.deepEqual(projectCurrentMemberEdges({...f,parts:parts()}),expected);
+ assert.deepEqual(validateCurrentMemberEdges({...f,parts:parts()}),validateCurrentMemberEdges(f));
+ f.parts.forEach((part,i)=>assert.deepEqual(part.raw,before[i],'caller-owned input arrays are unchanged'));
+});
+
+test('lazy member inventory must exhaust the exact index and closes on every refusal',()=>{
+ for(const kind of ['missing','extra','reordered','duplicate','wrong-mode','wrong-path','non-buffer','malformed-last','duplicate-owner']){
+  const f=memberEdgeFixture(),parts=f.parts.map(part=>({...part}));let closed=false;
+  if(kind==='missing')parts.pop();
+  if(kind==='extra')parts.push(parts[0]);
+  if(kind==='reordered')parts.reverse();
+  if(kind==='duplicate')parts[1]=parts[0];
+  if(kind==='wrong-mode')parts[1].mode='100755';
+  if(kind==='wrong-path')parts[1].path='data/geography/elsewhere.json';
+  if(kind==='non-buffer')parts[1].raw=parts[1].raw.toString();
+  if(kind==='malformed-last')parts[1].raw=Buffer.from('{');
+  if(kind==='duplicate-owner')parts[1].raw=parts[0].raw;
+  function* input(){try{yield* parts;}finally{closed=true;}}
+  assert.throws(()=>validateCurrentMemberEdges({...f,parts:input()}),undefined,kind);
+  assert.equal(closed,true,kind+' closes its owned iterator');
+ }
+});
+
+test('lazy member input failure cannot return a partial validation or skip a final part',()=>{
+ const f=memberEdgeFixture(),failure=Error('actual final part read failed');let closed=false;
+ function* parts(){try{yield f.parts[0];throw failure;}finally{closed=true;}}
+ assert.throws(()=>validateCurrentMemberEdges({...f,parts:parts()}),error=>error===failure);
+ assert.equal(closed,true);
+ for(const parts of [null,{},Promise.resolve(f.parts)])assert.throws(()=>projectCurrentMemberEdges({...f,parts}),/input bytes/);
+});
+
+test('lazy extraction consumes each raw property once and pins index bytes before advancing',()=>{
+ const f=memberEdgeFixture(),expected=projectCurrentMemberEdges(f),indexRaw=Buffer.from(f.indexRaw);let reads=0;
+ function* parts(){
+  indexRaw.fill(0);
+  for(const part of f.parts)yield {path:part.path,mode:part.mode,get raw(){reads++;return part.raw;}};
+ }
+ assert.deepEqual(projectCurrentMemberEdges({indexRaw,parts:parts()}),expected);
+ assert.equal(reads,f.parts.length);
+});
+
+test('lazy member validation preserves exact absent null malformed and duplicate claim values',()=>{
+ for(const value of [null,[],['dup','dup'],42,{wrong:'shape'},'raw:competitor']){
+  const f=memberEdgeFixture(),body=JSON.parse(f.parts[1].raw);body.features[0].properties.metadata.source_member_ids=value;
+  f.parts[1].raw=Buffer.from(JSON.stringify(body));
+  const expected=projectCurrentMemberEdges(f),parts=(function*(){yield* f.parts;})();
+  assert.deepEqual(projectCurrentMemberEdges({...f,parts}),expected);
+  assert.deepEqual(expected.locations[2].source_member_ids,value);
+ }
 });
