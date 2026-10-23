@@ -298,6 +298,7 @@ for (const [label, consumer, operand] of [
     [consumer,consumer,'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz']),
   ['rebind custody', 'test/current-rebind-product-custody.test.mjs', 'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json'],
   ['workspace bootstrap', 'test/local-workspace.test.mjs', 'docs/LOCAL_WORKSPACES.md'],
+  ['quota observation guide', 'test/github-quota.test.mjs', 'docs/MERGE_QUEUE_CLIENT.md'],
   ['regional research gate', 'test/regional-research-gate.test.mjs', 'data/research-geography-gate.json'],
   ...['test/publication-plan.test.mjs','test/package-current-additive.test.mjs'].map(consumer =>
     [consumer,consumer,'coordination/publication/cloudflare-history.json'])
@@ -322,6 +323,38 @@ for (const [label, consumer, operand] of [
   assert.throws(()=>reviewedTestPlan({...request,inputs:[...plan.inputs,'data/arbitrary.json']},context),/manual inputs/);
   const changed=new Map(entries);changed.set(operand,{...row(),sha:sha('f')});
   assert.deepEqual(reviewedTestPlan(request,{...context,entries:changed}),plan,'Select the current body, not a historical fixture copy');
+});
+
+test('reviewed quota consumer reads its current guide through actual sparse checkout', () => {
+  const consumer='test/github-quota.test.mjs',operand='docs/MERGE_QUEUE_CLIENT.md';
+  const row={sha:sha('e'),mode:'100644',type:'blob'};
+  const entries=new Map([...EXECUTION_CODE,operand,consumer,'test/fixtures/contract/input.json'].map(name=>[name,row]));
+  const request={base:sha('a'),head:sha('b'),files:[consumer]};
+  const plan=reviewedTestPlan(request,{...request,entries,files:[],definition:loadPackageInputs()});
+  assert.equal(plan.build,false);
+  const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'reviewed-quota-guide-'));
+  try {
+    const git=(args,options={})=>execFileSync('git',args,{cwd:temporary,encoding:'utf8',...options});
+    git(['init','-q']);
+    for(const name of [...staticModuleClosure(process.cwd(),[consumer]),operand,'package.json']) {
+      fs.mkdirSync(path.dirname(path.join(temporary,name)),{recursive:true});
+      fs.copyFileSync(name,path.join(temporary,name));
+    }
+    const excluded='docs/unrelated-guide.md';fs.writeFileSync(path.join(temporary,excluded),'not a reviewed operand');
+    git(['add','.']);git(['-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','current quota guide inputs']);
+    git(['sparse-checkout','set','--no-cone','--stdin'],{input:plan.checkout_patterns.join('\n')+'\n'});
+    assert.deepEqual(fs.readFileSync(path.join(temporary,operand)),fs.readFileSync(operand));
+    assert.equal(fs.existsSync(path.join(temporary,excluded)),false);
+    const args=['--test','--test-reporter=tap','--test-name-pattern=canonical native observation',consumer];
+    const env={...process.env};delete env.NODE_TEST_CONTEXT;
+    const result=spawnSync(process.execPath,args,{cwd:temporary,encoding:'utf8',env});
+    assert.equal(result.status,0,result.stdout+result.stderr);
+    assert.match(result.stdout,/canonical native observation examples/);
+    fs.unlinkSync(path.join(temporary,operand));
+    const absent=spawnSync(process.execPath,args,{cwd:temporary,encoding:'utf8',env});
+    assert.notEqual(absent.status,0,'The actual consumer must reject a missing current guide');
+    assert.match(absent.stdout+absent.stderr,/ENOENT/);
+  } finally { fs.rmSync(temporary,{recursive:true,force:true}); }
 });
 
 for (const consumer of ['test/final-bank-finalizer.test.mjs','test/selected-delivery-smoke.test.mjs','test/final-bank-checkpoint.test.mjs','test/selected-owner-observation.test.mjs'])
@@ -355,7 +388,7 @@ test(`reviewed ${consumer} materializes its normative latitude operand through a
 test('reviewed hosted consumers retain their current inputs through actual sparse materialization', () => {
   const operands=['coordination/publication/cloudflare-history.json','data/observation-registry-history/base-v1.json',
     'data/research-geography-gate.json','data/hosted-type-catalog.json','data/settlement-estimates.json',
-    'coordination/engineering/cloudflare-publication-846-20261007/registry-source.json'];
+    'coordination/engineering/cloudflare-publication-846-20261007/registry-source.json','docs/MERGE_QUEUE_CLIENT.md'];
   const consumers=['test/neon-forward-migrations.test.mjs','test/compact-membership-profile.test.mjs','test/current-postgres-recovery.test.mjs',
     'test/merge-integration.test.mjs','test/settlement-population-import.test.mjs','test/publication-cloudflare.test.mjs','test/cloudflare-access.test.mjs'];
   const row={sha:sha('e'),mode:'100644',type:'blob'};
@@ -364,12 +397,14 @@ test('reviewed hosted consumers retain their current inputs through actual spars
   const context={base:request.base,head:request.head,entries,files:[],definition:loadPackageInputs()};
   const plan=reviewedTestPlan(request,context);
   assert.equal(plan.build,false);assert.deepEqual(plan.files,consumers);
-  assert.deepEqual(plan.inputs,[...EXECUTION_CODE,operands[0],operands[5],...operands.slice(1,5)]);
+  assert.deepEqual(plan.inputs,[...EXECUTION_CODE,operands[6],operands[0],operands[5],...operands.slice(1,5)]);
   assert(plan.checkout_patterns.includes('postgres'),'PostgreSQL DDL is executing source, like drizzle');
   for(const consumer of consumers) {
-    const expected=consumer===consumers[6]?operands.slice(1,3):consumer===consumers[5]?[operands[0],operands[5]]:consumer===consumers[3]?[operands[5],...operands.slice(0,5)]:consumer===consumers[2]?[operands[0]]:consumer===consumers[1]?operands.slice(0,4):
+    const expected=consumer===consumers[6]?operands.slice(1,3):consumer===consumers[5]?[operands[0],operands[5]]:consumer===consumers[3]?[operands[6],operands[5],...operands.slice(0,5)]:consumer===consumers[2]?[operands[0]]:consumer===consumers[1]?operands.slice(0,4):
       consumer===consumers[4]?operands.slice(1,5):operands.slice(0,5);
-    assert.deepEqual(reviewedTestPlan({...request,files:[consumer]},context).inputs,[...EXECUTION_CODE,...expected]);
+    const single=reviewedTestPlan({...request,files:[consumer]},context);
+    assert.deepEqual(single.inputs,[...EXECUTION_CODE,...expected]);
+    for(const operand of expected)assert(single.checkout_patterns.includes('/'+operand));
     for(const operand of expected) {
       const absent=new Map(entries);absent.delete(operand);
       assert.throws(()=>reviewedTestPlan({...request,files:[consumer]},{...context,entries:absent}),/unavailable/);
