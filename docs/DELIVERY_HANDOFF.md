@@ -64,6 +64,17 @@ qualification input, not a browser/build product. Version-2 finalization has no
 for the next repair. Checker upgrades cannot certify their own simultaneous map
 changes; that comparison executes the accepted-main checker.
 
+In a managed non-cone sparse checkout, the finalizer derives its complete literal
+output path set from the authenticated adoption plan, not a worker-maintained
+include list. After full-set preflight it extends the existing sparse selection
+and materializes those exact preimages from Git, checking HEAD, ordinary index
+identity and worktree bytes before the normal selector-last adoption. Staged or
+edited preimages still refuse; exact interrupted resume remains supported.
+Unchanged compatibility omissions are not hydrated. Replaced current-bank members
+need not be materialized merely for deletion: their exact proven sparse index
+entries are removed after adoption, so normal staging cannot retain obsolete bank
+URLs. Unrelated index identities and flags remain untouched.
+
 The same staging, full-set preflight, exact interrupted resume and selector-last
 adoption below apply. The new expectations point to the complete current bank;
 there is no current-ledger expectation. Later final-to-final selected-data changes
@@ -237,8 +248,9 @@ node scripts/prepare-delivery-handoff.mjs finalize CONFIG .cache/delivery-handof
 
 The normal finalizer applies its authenticated write set without a separate copy
 list. Inspect and commit the resulting canonical diff in the ordinary review
-flow; it performs no Git index, commit or push operation. Publish the complete
-reviewed tree and genuine evidence ancestry, not a hand-written subset of files.
+flow. Apart from preparing the exact sparse write set and retiring the proven
+obsolete entries above, it performs no Git index mutation, commit or push operation. Publish the complete reviewed
+tree and genuine evidence ancestry, not a hand-written subset of files.
 Retain the staged bundle locally for exact `--resume`, rather than committing a
 second `finalized/` copy. Expectations have one current-ledger-bound canonical
 path under `new_prefix`.
