@@ -1,0 +1,56 @@
+{
+  "title": "Mahagi Padyere/Ituri one-key derived evidence",
+  "key": [
+    14441,
+    129432,
+    153804
+  ],
+  "owner": 14441,
+  "status": "proposal only; pending root acceptance; zero credit; native hold preserved",
+  "contents": [
+    {
+      "path": "proposal.md",
+      "bytes": 4573,
+      "sha256": "ae728c6df6161bf1f40808baaf8558e989694cf69f15565b9f6e3f5abcf27469"
+    },
+    {
+      "path": "reviewer-result.txt",
+      "bytes": 686,
+      "sha256": "1f9ca74b802b7e6e9c3243bbe4dcd3c4ece2b8613c4d30a2cbbcbfe531432182"
+    },
+    {
+      "path": "diagnostic-binding.json",
+      "bytes": 9964,
+      "sha256": "8fd4afce35dc73ced1e918c6d7005ebe237f106d0034e9b4dad28cea0eebe063"
+    }
+  ],
+  "diagnostic_scope": {
+    "full_run": {
+      "requested": 3905,
+      "supported": 2975,
+      "held": 930
+    },
+    "mahagi_target": {
+      "requested": 63,
+      "supported": 27,
+      "held": 36
+    },
+    "bound_subset": {
+      "requested": 36,
+      "supported": 0,
+      "held": 36,
+      "hold": "territorial_exclusion_cells"
+    },
+    "partition": {
+      "northern_already_accepted_cod18": 7,
+      "okoro_pending": 28,
+      "padyere_pending": 1
+    }
+  },
+  "excluded": [
+    "raw source polygons",
+    "map images",
+    "raw OSM node histories"
+  ],
+  "no_credit_or_hold_change": true
+}
