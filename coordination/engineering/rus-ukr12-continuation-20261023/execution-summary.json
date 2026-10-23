@@ -22,14 +22,23 @@
     "retry_result": "qualified_cells=7"
   },
   "remaining": [
-    "Version-2 new-evidence composition and finalization",
-    "Independent exact-public-head review",
-    "One normal stock delivery",
+    "Version-2 finalization is blocked by missing existing gh authentication for the accepted helper’s exact public object acquisition; no destination was created",
+    "Independent exact-public-head review after finalization",
+    "One normal stock delivery after review",
     "Root scientific acceptance remains separate"
   ],
   "independent_review": {
     "path": "coordination/engineering/rus-ukr12-continuation-20261023/seven-key-independent-review-20261023.json",
     "sha256": "a1c55bb713a633b4157937031eb2631e3fac5b57e9184f7898f2c61299359e03",
     "result": "all 12 pending keys effective_selected_owner=0; historical fields remain null; report scientific_qualification=false"
+  },
+  "finalization_attempt": {
+    "phase": "finalize",
+    "config": "coordination/engineering/rus-ukr12-continuation-20261023/finalize-config-001.json",
+    "command": "node scripts/prepare-delivery-handoff.mjs finalize coordination/engineering/rus-ukr12-continuation-20261023/finalize-config-001.json .cache/delivery-handoff/rus7-finalize-001",
+    "result": "failed before output publication",
+    "stderr": "no oauth token found for github.com; Geography object acquisition failed",
+    "destination_created": false,
+    "authorization_route": "No credential changes/login; no alternate route attempted"
   }
 }
