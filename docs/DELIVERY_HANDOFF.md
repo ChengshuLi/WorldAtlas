@@ -244,8 +244,9 @@ node scripts/prepare-delivery-handoff.mjs finalize CONFIG .cache/delivery-handof
 
 The normal finalizer applies its authenticated write set without a separate copy
 list. Inspect and commit the resulting canonical diff in the ordinary review
-flow; it performs no Git index, commit or push operation. Publish the complete
-reviewed tree and genuine evidence ancestry, not a hand-written subset of files.
+flow. Apart from the proven sparse retirements above, it performs no Git index
+mutation; it performs no commit or push operation. Publish the complete reviewed
+tree and genuine evidence ancestry, not a hand-written subset of files.
 Retain the staged bundle locally for exact `--resume`, rather than committing a
 second `finalized/` copy. Expectations have one current-ledger-bound canonical
 path under `new_prefix`.
