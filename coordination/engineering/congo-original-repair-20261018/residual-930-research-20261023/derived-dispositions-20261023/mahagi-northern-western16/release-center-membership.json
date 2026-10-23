@@ -1,0 +1,282 @@
+{
+  "kind": "cod-16-uganda-adm1-center-membership-archived-release-check-v1",
+  "status": "local-derived comparison only; no native disposition or credit change",
+  "scope": {
+    "northern_western_adm1_linked_original_keys": 16,
+    "padyere_key_excluded": true,
+    "membership_counts": {
+      "inside": 13,
+      "outside": 3,
+      "boundary": 0
+    },
+    "agreement_counts": {
+      "agree": 14,
+      "disagree": 2
+    }
+  },
+  "official_release": {
+    "release_id": "UGA-ADM1-2_0_0-G582",
+    "represented_year": 2017,
+    "boundary_update": "2020-01-15",
+    "metadata_url": "https://www.geoboundaries.org/data/geoBoundaries-2_0_0/UGA/ADM1/geoBoundaries-2_0_0-UGA-ADM1-metaData.json",
+    "feature_body_url": "https://www.geoboundaries.org/data/geoBoundaries-2_0_0/UGA/ADM1/geoBoundaries-2_0_0-UGA-ADM1.geojson",
+    "feature_body_bytes": 1765418,
+    "feature_body_sha256": "a297e269c40e570ebc19906527c8222d68c7b98ce1f547b38101dabafba9cac8",
+    "source_names": [
+      "OpenStreetMap",
+      "Wambacher"
+    ],
+    "license": "ODbL 1.0",
+    "feature_ids": {
+      "Northern Region": "UGA-ADM1-2_0_0-B1",
+      "Western Region": "UGA-ADM1-2_0_0-B4"
+    }
+  },
+  "center_input": {
+    "path": ".worldatlas-workspaces/746183045662994f/c8b0f9c0619e94196ab1f6e5c11e057f64c3060b1585ca68b84999448389b457/work/coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/evidence/complete-537-feature-center-overlay.json",
+    "bytes": 799945,
+    "sha256": "00fc57c3290d4d0cf1ef7df68860ac6d2c3ee82e67509d0ae2f9d1c550cdf24d",
+    "origin_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "scope": "original 930-key candidate-center overlay; only these 16 rows selected"
+  },
+  "side_input": {
+    "path": "cod-mahagi-okoro-20261023/source-side-check-20261023.local.json",
+    "bytes": 11870,
+    "sha256": "5f98bd50e1e14a185cf14795a1213069b429570264b7b3518681d4669cbdc882",
+    "method": "retained source-relative OSM side results; not legal or de facto territorial adjudication"
+  },
+  "method": "For each of the 16 original center coordinates, exact planar lon/lat ray-crossing point-in-polygon against the corresponding archived official release feature (Northern B1 or Western B4), including explicit outer-ring boundary and hole checks. No tolerance, buffering, snapping, or geometry repair. This tests center membership in the published source feature only.",
+  "results": [
+    {
+      "key": [
+        14441,
+        129380,
+        153709
+      ],
+      "region_feature": "Northern Region",
+      "geo_boundaries_feature_id": "UGA-ADM1-2_0_0-B1",
+      "osm_center_side_from_retained_check": "Uganda",
+      "osm_way_from_retained_check": 396444481,
+      "distance_to_osm_way_m_approx": 79.7,
+      "center_membership_in_archived_official_feature": "inside",
+      "osm_side_agrees_with_feature_membership": true
+    },
+    {
+      "key": [
+        14441,
+        129381,
+        153709
+      ],
+      "region_feature": "Northern Region",
+      "geo_boundaries_feature_id": "UGA-ADM1-2_0_0-B1",
+      "osm_center_side_from_retained_check": "Uganda",
+      "osm_way_from_retained_check": 396444481,
+      "distance_to_osm_way_m_approx": 88.1,
+      "center_membership_in_archived_official_feature": "inside",
+      "osm_side_agrees_with_feature_membership": true
+    },
+    {
+      "key": [
+        14441,
+        129383,
+        153710
+      ],
+      "region_feature": "Northern Region",
+      "geo_boundaries_feature_id": "UGA-ADM1-2_0_0-B1",
+      "osm_center_side_from_retained_check": "Uganda",
+      "osm_way_from_retained_check": 396444481,
+      "distance_to_osm_way_m_approx": 179.0,
+      "center_membership_in_archived_official_feature": "inside",
+      "osm_side_agrees_with_feature_membership": true
+    },
+    {
+      "key": [
+        14441,
+        129384,
+        153710
+      ],
+      "region_feature": "Northern Region",
+      "geo_boundaries_feature_id": "UGA-ADM1-2_0_0-B1",
+      "osm_center_side_from_retained_check": "Uganda",
+      "osm_way_from_retained_check": 396444481,
+      "distance_to_osm_way_m_approx": 68.8,
+      "center_membership_in_archived_official_feature": "inside",
+      "osm_side_agrees_with_feature_membership": true
+    },
+    {
+      "key": [
+        14441,
+        129387,
+        153711
+      ],
+      "region_feature": "Northern Region",
+      "geo_boundaries_feature_id": "UGA-ADM1-2_0_0-B1",
+      "osm_center_side_from_retained_check": "Uganda",
+      "osm_way_from_retained_check": 396444481,
+      "distance_to_osm_way_m_approx": 37.6,
+      "center_membership_in_archived_official_feature": "inside",
+      "osm_side_agrees_with_feature_membership": true
+    },
+    {
+      "key": [
+        14441,
+        129388,
+        153711
+      ],
+      "region_feature": "Northern Region",
+      "geo_boundaries_feature_id": "UGA-ADM1-2_0_0-B1",
+      "osm_center_side_from_retained_check": "DR Congo",
+      "osm_way_from_retained_check": 396444481,
+      "distance_to_osm_way_m_approx": 20.7,
+      "center_membership_in_archived_official_feature": "outside",
+      "osm_side_agrees_with_feature_membership": true
+    },
+    {
+      "key": [
+        14441,
+        129391,
+        153712
+      ],
+      "region_feature": "Northern Region",
+      "geo_boundaries_feature_id": "UGA-ADM1-2_0_0-B1",
+      "osm_center_side_from_retained_check": "Uganda",
+      "osm_way_from_retained_check": 396444481,
+      "distance_to_osm_way_m_approx": 4.0,
+      "center_membership_in_archived_official_feature": "inside",
+      "osm_side_agrees_with_feature_membership": true
+    },
+    {
+      "key": [
+        14462,
+        131478,
+        152687
+      ],
+      "region_feature": "Western Region",
+      "geo_boundaries_feature_id": "UGA-ADM1-2_0_0-B4",
+      "osm_center_side_from_retained_check": "DR Congo",
+      "osm_way_from_retained_check": 80914329,
+      "distance_to_osm_way_m_approx": 134.2,
+      "center_membership_in_archived_official_feature": "inside",
+      "osm_side_agrees_with_feature_membership": false
+    },
+    {
+      "key": [
+        14462,
+        131479,
+        152687
+      ],
+      "region_feature": "Western Region",
+      "geo_boundaries_feature_id": "UGA-ADM1-2_0_0-B4",
+      "osm_center_side_from_retained_check": "DR Congo",
+      "osm_way_from_retained_check": 80914329,
+      "distance_to_osm_way_m_approx": 283.1,
+      "center_membership_in_archived_official_feature": "inside",
+      "osm_side_agrees_with_feature_membership": false
+    },
+    {
+      "key": [
+        14462,
+        131576,
+        152665
+      ],
+      "region_feature": "Western Region",
+      "geo_boundaries_feature_id": "UGA-ADM1-2_0_0-B4",
+      "osm_center_side_from_retained_check": "Uganda",
+      "osm_way_from_retained_check": 80914332,
+      "distance_to_osm_way_m_approx": 3.2,
+      "center_membership_in_archived_official_feature": "inside",
+      "osm_side_agrees_with_feature_membership": true
+    },
+    {
+      "key": [
+        14462,
+        131577,
+        152665
+      ],
+      "region_feature": "Western Region",
+      "geo_boundaries_feature_id": "UGA-ADM1-2_0_0-B4",
+      "osm_center_side_from_retained_check": "Uganda",
+      "osm_way_from_retained_check": 80914332,
+      "distance_to_osm_way_m_approx": 7.0,
+      "center_membership_in_archived_official_feature": "inside",
+      "osm_side_agrees_with_feature_membership": true
+    },
+    {
+      "key": [
+        14462,
+        131650,
+        152659
+      ],
+      "region_feature": "Western Region",
+      "geo_boundaries_feature_id": "UGA-ADM1-2_0_0-B4",
+      "osm_center_side_from_retained_check": "Uganda",
+      "osm_way_from_retained_check": 942192721,
+      "distance_to_osm_way_m_approx": 60.9,
+      "center_membership_in_archived_official_feature": "inside",
+      "osm_side_agrees_with_feature_membership": true
+    },
+    {
+      "key": [
+        14462,
+        131655,
+        152660
+      ],
+      "region_feature": "Western Region",
+      "geo_boundaries_feature_id": "UGA-ADM1-2_0_0-B4",
+      "osm_center_side_from_retained_check": "DR Congo",
+      "osm_way_from_retained_check": 942192721,
+      "distance_to_osm_way_m_approx": 78.1,
+      "center_membership_in_archived_official_feature": "outside",
+      "osm_side_agrees_with_feature_membership": true
+    },
+    {
+      "key": [
+        14462,
+        131662,
+        152661
+      ],
+      "region_feature": "Western Region",
+      "geo_boundaries_feature_id": "UGA-ADM1-2_0_0-B4",
+      "osm_center_side_from_retained_check": "Uganda",
+      "osm_way_from_retained_check": 133294944,
+      "distance_to_osm_way_m_approx": 12.1,
+      "center_membership_in_archived_official_feature": "inside",
+      "osm_side_agrees_with_feature_membership": true
+    },
+    {
+      "key": [
+        14462,
+        131671,
+        152663
+      ],
+      "region_feature": "Western Region",
+      "geo_boundaries_feature_id": "UGA-ADM1-2_0_0-B4",
+      "osm_center_side_from_retained_check": "Uganda",
+      "osm_way_from_retained_check": 133294944,
+      "distance_to_osm_way_m_approx": 111.4,
+      "center_membership_in_archived_official_feature": "inside",
+      "osm_side_agrees_with_feature_membership": true
+    },
+    {
+      "key": [
+        14462,
+        131673,
+        152664
+      ],
+      "region_feature": "Western Region",
+      "geo_boundaries_feature_id": "UGA-ADM1-2_0_0-B4",
+      "osm_center_side_from_retained_check": "DR Congo",
+      "osm_way_from_retained_check": 133294944,
+      "distance_to_osm_way_m_approx": 11.6,
+      "center_membership_in_archived_official_feature": "outside",
+      "osm_side_agrees_with_feature_membership": true
+    }
+  ],
+  "interpretation": [
+    "The point-in-polygon result cross-checks how the archived 2020-updated geoBoundaries feature classifies each original center. It is source-relative membership, not an independent territorial authority or current/legal/de-facto boundary determination.",
+    "The 2020 release geometry exactly crosswalks to the pinned Northern and Western features by preserved vertices, but its exact OSM extraction snapshot is still unproven. The current OSM-tagged side test and archived polygon disagree for keys reported in the table; retain that source-side inconsistency.",
+    "These center points do not describe whole-cell footprints or satisfy/replace any distinct original competitor, physical, or native diagnostic predicate. The existing stock diagnostic was reused and not rerun. All16 rows remain held/pending; no repair, owner change, hold removal, or science credit.",
+    "The separate Padyere key is excluded and remains pending while its exact 2006 source file is still actionable.",
+    "Direct comparison of the retained current-version OSM side tags with archived release center membership agrees on14 keys and disagrees on2 Western keys: [14462,131478,152687] and [14462,131479,152687] are tagged on the OSM DR Congo side but their centers fall inside the archived Western Region feature. This is a source/lineage discrepancy to retain, not a basis to prefer either representation or change a stock hold."
+  ]
+}
