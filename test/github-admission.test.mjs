@@ -174,7 +174,8 @@ test('tree decomposition refuses wrong identity, incomplete children, unsafe ent
     ['missing parent',f=>f.payloads.get(f.route(f.shared)+'?recursive=1').tree[0].path='absent/leaf'],
     ['child identity',f=>f.payloads.get(f.route(f.shared)+'?recursive=1').sha=f.blob],
     ['cycle',f=>f.payloads.get(f.route(f.root)).tree[0].sha=f.root],
-    ['recursive ancestor cycle',f=>f.payloads.get(f.route(f.shared)+'?recursive=1').tree.push({path:'cycle',sha:f.root,type:'tree',mode:'040000'})]
+    ['recursive ancestor cycle',f=>f.payloads.get(f.route(f.shared)+'?recursive=1').tree.push({path:'cycle',sha:f.root,type:'tree',mode:'040000'})],
+    ['cached subtree ancestor cycle',f=>f.payloads.get(f.route(f.shared)+'?recursive=1').tree.push({path:'later-ancestor',sha:f.nested,type:'tree',mode:'040000'})]
   ];
   for(const [label,mutate]of cases){
     const f=truncatedTrees();mutate(f);

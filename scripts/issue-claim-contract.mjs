@@ -242,7 +242,11 @@ export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readW
   };
   const collect=async(sha,initial,ancestors)=>{
    need(!ancestors.has(sha),'Cyclic immutable tree inventory');
-   if(inventories.has(sha))return inventories.get(sha);
+   if(inventories.has(sha)){
+    const cached=inventories.get(sha);
+    for(const row of cached.values())if(row.type==='tree')need(!ancestors.has(row.sha),'Cyclic immutable tree inventory');
+    return cached;
+   }
    const response=initial??await read(match[1]+sha+'?recursive=1');
    need(response?.sha===sha&&typeof response.truncated==='boolean'&&Array.isArray(response.tree),
      'Invalid immutable tree response identity');
