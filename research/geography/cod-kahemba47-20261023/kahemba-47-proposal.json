@@ -1,0 +1,746 @@
+{
+  "kind": "cod-kahemba-47-researched-unresolved-proposal-v1",
+  "status": "proposed for root review; all 47 original keys remain pending and held",
+  "prepared_on": "2026-10-23",
+  "scope": {
+    "package_id": "gb-COD-ADM2--repair-evaluation",
+    "original_issue": 2453,
+    "full_original_cells": 3905,
+    "previously_supported_cells": 2975,
+    "accepted_researched_unresolved_at_root_before_this_proposal": 580,
+    "pending_before_this_proposal": 350,
+    "this_proposal_cells": 47,
+    "owner_id": 14485,
+    "owner_name": "Kahemba",
+    "original_class": "land",
+    "original_target": "gb:COD:ADM2:63176286B37251946319002",
+    "candidate_foreign_feature": "gb:AGO:ADM1:26408823B5362531623165",
+    "candidate_foreign_feature_name": "Lunda Norte",
+    "center_hit_count": 47,
+    "candidate_parent_cod_adm1_additional_hit_count": 1,
+    "physical_support_true": 47,
+    "inland_water_support_false": 47
+  },
+  "proposed_disposition": {
+    "type": "researched-unresolved",
+    "keys_remain_held": true,
+    "repairs": 0,
+    "owner_changes": 0,
+    "hold_removals": 0,
+    "accepted_credit": 0,
+    "package_completion": false,
+    "basis": "The exact candidate source representation now has a strong direct primary-source crosswalk to the official USCB 2019 Lunda Norte polygon. That resolves practical representation identity but does not establish transfer of attribution into the separate 2021 geoBoundaries record or decide whether the foreign candidate is territorially applicable under the original source-relative contract. The full original stock diagnostic already held these cells. The independent reviewer found no distinct reasonable public digital primary-source step likely to settle that remaining question."
+  },
+  "original_diagnostic": {
+    "path": "coordination/engineering/congo-original-repair-20261018/diagnostic-original-001/native-diagnostic.json",
+    "commit": "347f0692367a0c51a49683ff33e4a5ed9b9c7c5b",
+    "blob": "24b226726a62dd9cfbcbd3598ca34720b6ecd793",
+    "bytes": 326162,
+    "sha256": "0deb2340d65b786e61debb9df7e1b2bd1fb6cd6c8ab26311b43afdd6017965dc",
+    "whole_scope_result": "3905 requested; 2975 supported; 930 held; first failure unique-source-target-coverage",
+    "interpretation": "Existing screening only. Not rerun. It does not itself resolve source applicability or confer acceptance."
+  },
+  "primary_source_research": [
+    {
+      "source": "U.S. Census Bureau, Angola ADM1-ADM2 USCB October 2019 archive",
+      "url": "https://www2.census.gov/programs-surveys/international-programs/mapping-files/time-series/angola-adm1-adm2-uscb-oct19.zip",
+      "directory_listing": "https://www2.census.gov/programs-surveys/international-programs/mapping-files/time-series/",
+      "archive_bytes": 6042844,
+      "archive_sha256": "c700d2f72d3c32dda77a89308930443eadd79005d5cb32d674ee681dadabe4af",
+      "relevant_feature": "Angola_adm1_uscb_2019.shp; Lunda Norte (GENC AO-LNO; FIPS AO17)",
+      "metadata": "Shapefile created 2019-09-12; XML metadata 2019-10-02. Census XML says 161 source ADM2 polygons corresponded to 2016 census ADM2 except Lóvua split from Chitato, and were aligned to State Department 2018 LSIB before dissolution to 18 ADM1 provinces.",
+      "limits": "The source is an official representation of its mapped boundary product. Its LSIB alignment is not a finding about de facto control or a legal adjudication."
+    },
+    {
+      "source": "geoBoundaries pinned 2021 AGO ADM1 simplified feature body",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AGO/ADM1/geoBoundaries-AGO-ADM1_simplified.geojson",
+      "revision": "9469f09",
+      "bytes": 574816,
+      "sha256": "71796d87bc112f7969b92ca4c8beb2fa60a4e0a37c3a5e7801ee51a3e7e58c76",
+      "metadata_claim": "Represented 2021; source U.S. Census Bureau; recorded license Public Domain; feature identity gb:AGO:ADM1:26408823B5362531623165 (Lunda Norte)."
+    }
+  ],
+  "crosswalk": {
+    "method": "Compare the pinned Lunda Norte polygon ring to the official 2019 Census Lunda Norte ring by ordered vertex sequence and bounds.",
+    "result": "All 1380 unique vertices of the pinned simplified ring match the 28897-unique-vertex Census ring in one reverse cyclic subsequence; closed endpoint and bounds match.",
+    "assessment": "Strong representation-level correspondence. Not proof that geoBoundaries inherited the 2019 feature attribution, and not a territorial-applicability or full-cell test."
+  },
+  "additional_primary_reference_assessed": {
+    "source": "U.S. Department of State, Large Scale International Boundaries (LSIB), Edition 11.4",
+    "metadata_url": "https://geodata.state.gov/geonetwork/srv/api/records/3bdb81a0-c1b9-439a-a0b1-85dac30c59b2",
+    "findings": "Official metadata identifies this as the current U.S. Government policy boundary dataset; most lines within 100 meters of true position by source statement; it explicitly says its contents need not reflect de facto control and notes Angola/DRC boundary updates in this current version.",
+    "treatment": "Inspected as context, not used as a substitute for the named 2018 LSIB input or as a retroactive 2021 territorial-applicability certificate. The actual source question was the represented 2021 Census-sourced feature; the direct 2019 Census feature-level crosswalk resolves representation identity but not territorial applicability."
+  },
+  "review": {
+    "reviewer": "Existing independent reviewer brn828_reviewer; bounded follow-up on the exact 47-key source crosswalk and disposition.",
+    "conclusion": "Agrees practical representation identity is closed; provenance transfer and territorial applicability remain undecided; no further distinct reasonable public digital source step is apparent; researched-unresolved is supportable for exact 47 only with all holds retained.",
+    "limits": "No geometry or native diagnostic rerun; no legal certificate demanded.",
+    "exact_public_head_review": "Pending; reviewer will bind the final public PR head."
+  },
+  "publication_limits": {
+    "included": "Derived project-cell identifiers, source citations, hashes, diagnostic bindings and source/applicability findings only.",
+    "excluded": "No source polygons, map images, source archive bodies, raw geometries, or unrelated cell identifiers.",
+    "archive": "The official Census October 2019 ZIP was verified locally; its bytes are not redistributed in this PR."
+  },
+  "keys": [
+    {
+      "owner_id": 14485,
+      "y": 136276,
+      "x": 145299,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136419,
+      "x": 145277,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136751,
+      "x": 145203,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136752,
+      "x": 145203,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136753,
+      "x": 145203,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136754,
+      "x": 145203,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136756,
+      "x": 145203,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136900,
+      "x": 144758,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136900,
+      "x": 144760,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136901,
+      "x": 144758,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136901,
+      "x": 144759,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136901,
+      "x": 144760,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136902,
+      "x": 144759,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136902,
+      "x": 144760,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136903,
+      "x": 144759,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136903,
+      "x": 144760,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136903,
+      "x": 144761,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136921,
+      "x": 144363,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136922,
+      "x": 144366,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136922,
+      "x": 144367,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136922,
+      "x": 144368,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136922,
+      "x": 144369,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136922,
+      "x": 144370,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136922,
+      "x": 144371,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136937,
+      "x": 144412,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136937,
+      "x": 144413,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136938,
+      "x": 144414,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136938,
+      "x": 144415,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136939,
+      "x": 144416,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136939,
+      "x": 144418,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136939,
+      "x": 144419,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136939,
+      "x": 144420,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM1:28894549B46890622863620",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136940,
+      "x": 144418,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136940,
+      "x": 144419,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136940,
+      "x": 144420,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136940,
+      "x": 144421,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136940,
+      "x": 144423,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136944,
+      "x": 144455,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136945,
+      "x": 144453,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136945,
+      "x": 144454,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136946,
+      "x": 144451,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136946,
+      "x": 144452,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136960,
+      "x": 144261,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136966,
+      "x": 144260,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136967,
+      "x": 144260,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136968,
+      "x": 144259,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    },
+    {
+      "owner_id": 14485,
+      "y": 136969,
+      "x": 144259,
+      "class": "land",
+      "held": true,
+      "target_feature": "gb:COD:ADM2:63176286B37251946319002",
+      "candidate_center_contacts": [
+        "gb:AGO:ADM1:26408823B5362531623165",
+        "gb:COD:ADM2:63176286B37251946319002"
+      ],
+      "physical_support": true,
+      "inland_water_support": false
+    }
+  ]
+}
