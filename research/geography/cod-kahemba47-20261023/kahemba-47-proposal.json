@@ -29,7 +29,7 @@
     "hold_removals": 0,
     "accepted_credit": 0,
     "package_completion": false,
-    "basis": "The exact candidate source representation now has a strong direct primary-source crosswalk to the official USCB 2019 Lunda Norte polygon. That resolves practical representation identity but does not establish transfer of attribution into the separate 2021 geoBoundaries record or decide whether the foreign candidate is territorially applicable under the original source-relative contract. The full original stock diagnostic already held these cells. The independent reviewer found no distinct reasonable public digital primary-source step likely to settle that remaining question."
+    "basis": "The exact candidate source representation has a strong direct primary-source crosswalk to the official USCB 2019 Lunda Norte polygon. A retained USCB October 2024 DRC comparison places five of the 47 Kahemba centers strictly inside its DRC ADM0/current KAHEMBA ADM2 and 42 outside; all five inside keys still retain the original Lunda Norte contact and original COD target. This newer source-specific center result adds context but does not establish attribution transfer to the separate 2021 geoBoundaries record or decide territorial applicability under the original source-relative contract. The full original stock diagnostic held these cells. The independent reviewer found no qualification or clearance from this center comparison and no distinct reasonable public digital primary-source step likely to settle the remaining provenance/applicability question."
   },
   "original_diagnostic": {
     "path": "coordination/engineering/congo-original-repair-20261018/diagnostic-original-001/native-diagnostic.json",
@@ -73,9 +73,10 @@
   },
   "review": {
     "reviewer": "Existing independent reviewer brn828_reviewer; bounded follow-up on the exact 47-key source crosswalk and disposition.",
-    "conclusion": "Agrees practical representation identity is closed; provenance transfer and territorial applicability remain undecided; no further distinct reasonable public digital source step is apparent; researched-unresolved is supportable for exact 47 only with all holds retained.",
+    "conclusion": "The exact 2019 primary-source crosswalk resolves practical representation identity. The retained current-USCB comparison adds context: 5 of 47 centers are inside current DRC ADM0/current KAHEMBA ADM2 and 42 are outside, while all five inside keys retain the original Lunda Norte contact and COD target. This does not decide historical source-relative territorial applicability or provenance transfer to the separate 2021 record. The comparison grants no qualification or clearance; no distinct reasonable public digital primary-source step is apparent. A researched-unresolved proposal remains supportable for these exact 47 keys only, with every native hold retained.",
     "limits": "No geometry or native diagnostic rerun; no legal certificate demanded.",
-    "exact_public_head_review": "Pending; reviewer will bind the final public PR head."
+    "exact_public_head_review": "Pending; reviewer will bind the final public PR head.",
+    "current_uscb_42_5_assessment": "Verified against the retained derived input and exact five unchanged contact rows; no geometry rerun. Current ADM2 is context only, not an identity crosswalk."
   },
   "publication_limits": {
     "included": "Derived project-cell identifiers, source citations, hashes, diagnostic bindings and source/applicability findings only.",
@@ -742,5 +743,64 @@
       "physical_support": true,
       "inland_water_support": false
     }
-  ]
+  ],
+  "retained_current_uscb_drc_comparison": {
+    "source": "U.S. Census Bureau, Democratic Republic of the Congo ADM0/ADM2 USCB October 2024 product",
+    "archive": {
+      "url": "https://www2.census.gov/programs-surveys/international-programs/mapping-files/time-series/ep/democratic-republic-of-the-congo-adm1-adm2-uscb-oct24.zip",
+      "retrieved_utc": "2026-10-21T04:36:37.913152+00:00",
+      "http_status": 200,
+      "bytes": 8357535,
+      "sha256": "f7a9ef69f55b77a656beef308f8db482cb6bf82565fed85f5e760f35dd26b3f9"
+    },
+    "national_layer": "Democratic_Republic_of_the_Congo_adm0_uscb_2024",
+    "national_wkb_sha256": "fcfe2f0b62d110b9c1f608243e5149e2bc47e517bc8cc0435422c113eb3ca482",
+    "retained_full_contact_comparison_sha256": "397dee1ee1ad69c4b6eb5f3f5d8169a807d61a27c1d4b87996c818e3553ca58b",
+    "retained_national_comparison_sha256": "56a7f729edf25e20ab927b69668cd9f515761c6ddd760db99ac852414d89f512",
+    "observed_on": "2026-10-20",
+    "method": "Retained exact-key center comparison; no new geometry execution for this packet.",
+    "summary": {
+      "owner_id": 14485,
+      "owner_name": "Kahemba",
+      "keys": 47,
+      "strictly_inside_drc_adm0": 5,
+      "outside_drc_adm0": 42,
+      "all_original_keys_land": true,
+      "current_adm2_context_only": {
+        "fid": 2,
+        "name": "KAHEMBA",
+        "GEO_MATCH": "COD_01_03",
+        "NSO_CODE": "CD3105"
+      }
+    },
+    "inside_keys_y_x_owner": [
+      [
+        136900,
+        144758,
+        14485
+      ],
+      [
+        136901,
+        144760,
+        14485
+      ],
+      [
+        136939,
+        144420,
+        14485
+      ],
+      [
+        136940,
+        144421,
+        14485
+      ],
+      [
+        136960,
+        144261,
+        14485
+      ]
+    ],
+    "per_inside_key_context": "Each listed key is strictly inside the current USCB DRC ADM0 and contextual ADM2, while retaining the original 2019 COD target and original Lunda Norte candidate contact.",
+    "limits": "Current source-specific center comparison only. Not an identity crosswalk to the 2019 RGC target, proof of lineage/applicability for the pinned 2021 Lunda Norte feature, or native/full-cell/physical qualification. All 47 remain held and pending; no repair, owner change, hold removal, credit or package completion."
+  }
 }
