@@ -10,11 +10,14 @@ const need=(value,message)=>{if(!value)throw Error(message);};
 export const NATIVE_WORD_WINDOW=16384;
 
 export async function openNativeWordStore(chunks,pin,{directory=process.cwd()}={}) {
-  need(Number.isSafeInteger(pin.words)&&pin.words>0&&pin.decoded_bytes===pin.words*4,
+  need(Number.isSafeInteger(pin.words)&&pin.words>0&&Number.isSafeInteger(pin.decoded_bytes)&&pin.decoded_bytes===pin.words*4,
     'Incomplete shuffled native word count');
   const root=fs.mkdtempSync(path.join(directory,'worldatlas-native-'));
   const file=path.join(root,'shuffled');let fd,closed=false,windowStart=-1,window,planes=Buffer.allocUnsafe(NATIVE_WORD_WINDOW*4),words=Buffer.allocUnsafe(NATIVE_WORD_WINDOW*4);
-  const close=()=>{if(closed)return;closed=true;window=null;planes=null;words=null;windowStart=-1;if(fd!==undefined)fs.closeSync(fd);fs.rmSync(root,{recursive:true});};
+  const close=()=>{if(closed)return;closed=true;window=null;planes=null;words=null;windowStart=-1;const errors=[];
+    try{if(fd!==undefined)fs.closeSync(fd);}catch(error){errors.push(error);}
+    try{fs.rmSync(root,{recursive:true});}catch(error){errors.push(error);}if(errors.length)throw errors[0];
+  };
   try {
     const encodedHash=createHash('sha256');let encodedBytes=0,decodedBytes=0;
     const encoded=new Transform({transform(chunk,encoding,done){
@@ -51,5 +54,5 @@ export async function openNativeWordStore(chunks,pin,{directory=process.cwd()}={
         return window.readUInt32LE((index-start)*4);
       }
     });
-  }catch(error){close();throw error;}
+  }catch(error){try{close();}catch{}throw error;}
 }

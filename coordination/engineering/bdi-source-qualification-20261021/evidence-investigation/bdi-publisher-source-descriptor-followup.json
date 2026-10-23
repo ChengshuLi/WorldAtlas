@@ -1,0 +1,44 @@
+{
+  "scope": "gb-BDI-ADM2--repair-evaluation",
+  "examined_at_pacific": "2026-10-20T21:56:35.204721-07:00",
+  "queries": [
+    "site.insbu.bi Burundi 119 communes 42 zones cartographie 2025",
+    "site.geoboundaries.org BDI ADM2 2007 geoBoundaries source"
+  ],
+  "query_limits": "Search returned mostly irrelevant hits; no inference from missing results.",
+  "actual_opens": [
+    {
+      "url": "https://www.geoboundaries.org/api/current/gbOpen/BDI/ADM2/",
+      "outcome": "JSON read",
+      "boundaryID": "BDI-ADM2-21766830",
+      "boundaryYearRepresented": "2007",
+      "boundaryCanonical": "Unknown",
+      "boundarySource": "New York University Spatial Data Repository, Stanford University, Map Maker Limited",
+      "boundaryLicense": "Public Domain",
+      "licenseDetail": "License on metadata pop-up on source page",
+      "source_url": "https://geo.nyu.edu/catalog/stanford-th822mn7301",
+      "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+      "buildDate": "Dec 12, 2023",
+      "admUnitCount": 119,
+      "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BDI/ADM2/geoBoundaries-BDI-ADM2.geojson",
+      "finding": "Publisher currently exposes the exact original boundary ID and 119-unit source with explicit 2007 represented vintage. This is identity/provenance confirmation, not 2026 boundary applicability."
+    },
+    {
+      "url": "https://data.humdata.org/dataset/cod-ab-bdi",
+      "outcome": "web tool HTTP403 Forbidden; no retry or payload acquired"
+    },
+    {
+      "url": "https://geo.nyu.edu/catalog/stanford-th822mn7301",
+      "outcome": "web tool URL not accessible; no metadata body acquired"
+    },
+    {
+      "url": "https://earthworks.stanford.edu/catalog/stanford-th822mn7301",
+      "outcome": "web tool URL not accessible; no metadata body acquired"
+    }
+  ],
+  "limits": [
+    "No raw source acquisition or redistribution in this pass.",
+    "Public Domain is the publisher descriptor, not independent inspection of underlying source rights.",
+    "Not a modern-boundary equivalence or positive qualification finding."
+  ]
+}

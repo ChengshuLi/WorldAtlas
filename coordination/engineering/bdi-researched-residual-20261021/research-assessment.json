@@ -1,0 +1,146 @@
+{
+  "kind": "independent-significant-research-assessment",
+  "package": "gb-BDI-ADM2--repair-evaluation",
+  "original_scope": {
+    "cells": 583,
+    "land": 378,
+    "inland_water": 205,
+    "intervals": 433,
+    "owners": 21
+  },
+  "assessment_basis": {
+    "current_guidance_commit": "df41ad2c149e02f9c977fd4b6b089e113595d4c0",
+    "guidance_paths": [
+      "docs/ISSUE_LIFECYCLE.md",
+      "docs/AUDIT_FAILURE_PREVENTION.md"
+    ],
+    "guidance_result": "The current issue lifecycle allows genuinely unresolved completion after substantial evidence research and reasonable investigation of applicable qualification paths when a concrete blocker remains. It expressly does not require a constructor failure, arbitrary time quota, exhaustive search, or universal authority certificate. Pending investigation alone is unfinished. The audit guide says unknown research may be complete only where original acceptance permits, and source authenticity/limits remain material.",
+    "source_evidence": [
+      "source-journals/bdi-independent-applicability-assessment-20261021.md",
+      "source-journals/bdi-2014-communal-law-membership-followup.json",
+      "source-journals/bdi-official-administrative-lineage-followup-20261021.json",
+      "source-journals/bdi-enacted-law-page-review.json",
+      "source-journals/bdi-54-foreign-contact-source-followup.json",
+      "source-journals/bdi-cod-three-frontier-source-context.json",
+      "source-journals/bdi-salb-terms-access-and-publisher-reuse.json",
+      "source-journals/bdi-retained-source-physical-water-witness-join.json",
+      "source-journals/bdi-cod-boundary-study-visual-check.json"
+    ],
+    "execution_scope": "No observer, physical producer, geometry computation, or owner-selection rerun was performed for this assessment. Existing retained products and official primary-source documents were read; the UN treaty PDF pages specified below were newly rendered and visually checked.",
+    "publication_copy_note": "Source-journal references normalized to this packet; original local scratch locations are not public paths. Scientific findings unchanged. The exact-public-head review is separate."
+  },
+  "group_verdicts": [
+    {
+      "group": "Muha and Ntahangwa provenance",
+      "count": 50,
+      "subgroups": [
+        {
+          "target": "Muha",
+          "owner": 9087,
+          "cells": 41,
+          "land": 19,
+          "water": 22,
+          "feature_id": "gb:BDI:ADM2:21766830B84199363749171"
+        },
+        {
+          "target": "Ntahangwa",
+          "owner": 9089,
+          "cells": 9,
+          "land": 3,
+          "water": 6,
+          "feature_id": "gb:BDI:ADM2:21766830B87038696970617"
+        }
+      ],
+      "evidence": [
+        "Retained original 119-feature ADM2 source is catalogue-labelled Public Domain and represented in 2007; the joined owner IDs/names and all 583 original centers are retained. Center membership to the recorded feature is not proof that this vintage is applicable to the later administrative units.",
+        "Official 2018 National Development Plan paragraph 71 states Bujumbura Mairie communes were delimited/regrouped into Muha, Ntahangwa, and Mukaza. The official 2014 organic law gives old constituent communes: Muha from Kanyosha/Kinindo/Musaga; Ntahangwa from Cibitoke/Gihosha/Buterere/Kamenge/Kinama/Ngagara. INSBU's 2022 table provides old-unit and post-2015 aggregate names. These records establish a real lineage/vintage question but do not supply an exact boundary crosswalk for the retained 2007 features and cell centers.",
+        "A separate 2015 geoBoundaries gbAuthoritative BDI ADM2 metadata record identifies UN SALB and Institut Geographique de Burundi, 119 units, represented 26 March–1 May 2015, and the UN SALB Data License. The exact linked SALB terms PDF returned HTTP 403 at the official host; no retry or alternate route was attempted. This 2015 record is a relevant lead, not proof of feature-level equivalence or permission for unrestricted reuse.",
+        "The enacted 2023 law's official PDF pages were not visually accessible: official PDF routes yielded no extracted text, the CENI screenshot showed Cloudflare verification, and one certificate-verified Assembly curl timed out after 45 seconds with zero bytes. No retry was made. Search snippets are not annex-page evidence.",
+        "The attempted official 2023-law access is preserved in inventory/bdi-contract-and-provenance-followup.json and inventory/bdi-enacted-law-page-review.json: first certificate-verified Assembly PDF GET ended after 45.006 seconds with zero bytes; a later authorized request to the same URL failed to connect after 157 ms (curl exit 7, HTTP 000, zero bytes). Both attempts ended; no retry remains pending. The official CENI screenshot showed Cloudflare verification and was not bypassed. These results leave the annex unread, not disproven."
+      ],
+      "conclusion": "The 50 cells have a concrete, evidenced source-vintage/applicability obstacle after substantial official-law, planning, census, and source-record research. A genuinely unresolved disposition is supportable if these cells are kept unqualified in the final package accounting and the record names the exact unresolved predecessor/successor geometry link. The 2007 source must not be treated as positively qualified merely because its names or center contacts match. The inaccessible terms and enacted annex are explicit limits; no universal modern 42-commune crosswalk is being imposed.",
+      "most_material_remaining_witness": "A lawfully accessible official lineage or boundary source that ties the exact retained Muha/Ntahangwa source feature geometries to the post-regrouping units; where that tie cannot be established, preserve the source-applicability hold. The bounded historical/source paths tried and their outcomes are listed above; no specific untried public crosswalk is currently identified."
+    },
+    {
+      "group": "Tanzania foreign contacts",
+      "count": 51,
+      "subgroups": [
+        {
+          "foreign_feature": "Kigoma",
+          "country": "TZA",
+          "count": 9,
+          "owners": [
+            9030,
+            9067,
+            9079
+          ]
+        },
+        {
+          "foreign_feature": "Kagera",
+          "country": "TZA",
+          "count": 42,
+          "owners": [
+            9036,
+            9040,
+            9079
+          ]
+        }
+      ],
+      "evidence": [
+        "Original held keys, source feature identities, owner, physical class, retained latitude and derived center-longitude extents are keyed in inventory/bdi-54-foreign-contact-source-followup.json. All 51 are land keys; no distance-to-boundary or new geometry computation was performed.",
+        "The official UN Treaty Series Volume 54 PDF was obtained after an HTTP HEAD returned 200 and a 7,041,838-byte content length. PDF SHA256: e89a0ea710dfb3f420703a7bd42e696d48e1d4bd379dce0b3254e8670c6cbda. The complete treaty 1287 entry was visually rendered and inspected (PDF indices 238–251; the next treaty begins at 252). It contains 51 protocol clauses. Clauses 49–50 describe the Mwibu–Kagera frontier and the Kagera midstream as provisional pending survey and acceptance by the governments. The final clause (51) concerns Lake Tanganyika.",
+        "The protocol expressly refers to an accompanying map and says the map controls if it conflicts with textual description, but no map plate is reproduced in the inspected treaty entry; no scale, graticule, marker, or point-to-segment link was available in the pages inspected. Earlier attempts to access other map sources are preserved with their actual outcomes; no 403 route was retried.",
+        "A bounded official-source search was also run for `site:landsurvey.go.tz Burundi Tanzania boundary Kagera map 1924`, `site:ardhi.go.tz Burundi Tanzania boundary Kagera map survey`, `site:gov.go.tz Tanzania Burundi boundary treaty Kagera official map`, and `site:archives.tanzania.go.tz 1924 Ruanda Tanganyika frontier map`; the search returned no results. This is a documented no-result search, not evidence that no such record exists."
+      ],
+      "conclusion": "The 51 contacts have received meaningful source and treaty research. The official text identifies a relevant frontier and explicitly leaves the Kagera line provisional pending survey/acceptance, but it does not place these exact grid centers relative to the line. The treaty-referenced map is the concrete missing witness for key-level linkage. This supports a genuinely researched-unresolved disposition for these keys while preserving their territorial holds; text/feature contact alone is not proof of foreign territory or a repair qualification.",
+      "most_material_remaining_witness": "The treaty-referenced map is the concrete missing witness. Its UN Geneva archival record returned HTTP 403, and a focused search of Tanzania's official land-survey/archives/government domains returned no result. These steps do not prove the map unavailable everywhere; no specific untried official map URL was identified, so retain the 51 territorial holds rather than infer line placement."
+    },
+    {
+      "group": "Democratic Republic of the Congo foreign contacts",
+      "count": 3,
+      "subgroups": [
+        {
+          "foreign_feature": "South Kivu",
+          "feature_id": "gb:COD:ADM1:28894549B54646848790483",
+          "owner": 9001,
+          "count": 2
+        },
+        {
+          "foreign_feature": "South Kivu",
+          "feature_id": "gb:COD:ADM1:28894549B54646848790483",
+          "owner": 9047,
+          "count": 1
+        }
+      ],
+      "evidence": [
+        "Source-index reconciliation: the exact South Kivu identity `gb:COD:ADM1:28894549B54646848790483` maps to source index 18746 in inventory/bdi-source-property-identity-join.json and the consolidated original-row join (inventory/bdi-remaining-104-evidence-consolidation.json). The earlier bdi-54-foreign-contact-source-followup.json recorded 60180 for this COD feature; that copied index is incorrect. The three keys and their South Kivu identity are unchanged; use original-row index 18746 for source-vector references.",
+        "Exact key centers, owners, latitudes, and derived longitudes are in inventory/bdi-cod-three-frontier-source-context.json; all three are land-class contacts. No distances or geometry were recomputed.",
+        "The U.S. Department of State Office of the Geographer's 1965 International Boundary Study No. 48, pages 2–6, attributes the Burundi–Congo boundary to the 1910 Belgium–Germany convention and 1911 demarcation, describes the northern segment along the Rusizi/Ruzizi thalweg, and references 1936/37 and 1964 map sheets. It reports no officially known boundary dispute at that time but records unofficial claims concerning the Rusizi delta.",
+        "The study supplies historic boundary context but no surveyed coordinates for these three centers and does not identify whether any is in the claimed delta. The historical maps are named but do not produce a direct retained-key-to-thalweg witness in the evidence examined.",
+        "The exact 8-page study PDF was acquired once (261,300 bytes; SHA256 e1a58fe341544b0ec617160d0211178d8bf51ee5c0fc0383eec725cdcd979f20) and printed pages 5–7 were visually inspected. Page 5 notes a map in 1923 correspondence and three map sheets with the 1924 protocol; page 6 names 1936/1937 regional sheets and a 1964 1:500,000 series map; page 7 is end matter. These inspected pages do not contain the cited map sheets.",
+        "A bounded primary-source search used `Belgium German convention 1910 Burundi Congo boundary official treaty text`, `site:faolex.fao.org Burundi Congo boundary 1910 convention Rusizi`, `site:archives.africamuseum.be 1910 convention Congo Rwanda Urundi boundary`, and `site:treaties.un.org Burundi Congo 1910 boundary convention`. It did not surface the exact instrument; results were unrelated or cumulative treaty indices. No restricted source was retried.",
+        "The official 2023 law read failures are preserved exactly: an earlier Assembly PDF request timed out at 45.006 seconds with zero bytes; a later authorized same-target request ended after 157 ms with curl exit 7, HTTP 000, zero bytes. No retries followed. These access failures concern the law annex and do not alter the separate 1965 COD boundary study findings."
+      ],
+      "conclusion": "The exact three contacts are researched against an authoritative historical boundary study and the bounded source/lineage record. The applicable thalweg and localized delta context is a concrete adverse question, but the study cannot resolve these cell centers. A genuinely unresolved territorial disposition is supportable with the three keys still held. Do not characterize all COD contacts as sovereignty disputes or infer that these three lie in the delta.",
+      "most_material_remaining_witness": "A lawfully available demarcation/map/coordinate record sufficiently detailed to locate these three centers relative to the Rusizi thalweg and delta. The focused official query returned no exact 1910 instrument, and the 1965 study cites historical maps without providing the point-level relation; no new exact public record URL was found. Retain the three holds without claiming the contacts are necessarily disputes."
+    }
+  ],
+  "overall_conclusion": {
+    "disposition": "The remaining 104 keys have received substantive, group-specific source and boundary research and reasonable investigation of available qualification paths. The evidence supports a documented genuinely-unresolved outcome under current lifecycle guidance, provided the 50 source-applicability keys remain unqualified, the 54 existing TZA/COD territorial holds remain held, the concrete blockers above are stated, and no repair or positive territorial/source qualification is claimed.",
+    "counts": {
+      "source_provenance": 50,
+      "foreign_contacts_tza": 51,
+      "foreign_contacts_cod": 3,
+      "total_remaining": 104
+    },
+    "accounting_limit": "This conclusion is a reviewer assessment of research sufficiency and disposition factuality, not root acceptance, repair credit, removal of native holds, legal/territorial approval, or permission to republish source geometry.",
+    "preserve": [
+      "Original 583-cell package denominator, including all 205 inland-water cells.",
+      "The 54 existing native territorial holds for TZA/COD contacts; do not remove them without exact evidence. The separate 50 Muha/Ntahangwa cells are diagnostic-supported but must not be upgraded to positive qualification while their source-applicability link is unresolved.",
+      "All 104 keys' documented-unresolved status in the final package; 529 mechanical diagnostic outcomes are not thereby upgraded to qualified repairs.",
+      "Exact failed/denied access outcomes and the prohibitions on retrying or bypassing them.",
+      "The 2014/2018/2022/2007/2015 vintage and source distinctions and the treaty's provisional Kagera language.",
+      "Separate whole-target physical issue evidence; a lack of center hits does not clear those issues."
+    ]
+  }
+}

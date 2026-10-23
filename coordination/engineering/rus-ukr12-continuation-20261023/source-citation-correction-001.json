@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "kind": "retained-source-citation-correction",
+  "scope": "Citation transcription only. Historical reports remain byte-for-byte unchanged. This addendum does not amend geometry, source features, physical/native evidence, proposed keys, negative scope, selected output or scientific conclusions.",
+  "retained_evidence_container": {
+    "commit": "1d4aca5156b0c9e23d11c65b48fbadab8888b212",
+    "path": "coordination/engineering/rus-luhansk44-researched-20261021/retained-research-records.json.gz",
+    "bytes": 47189,
+    "sha256": "0d388ff9ae60d872ad74168d1a4b170a4e9415e5b85005d9220fc2c18137925b",
+    "git_blob_oid": "5f66ca3ef50c3b5d1907ff1acd7a2f80ee41034b",
+    "public_url": "https://github.com/ChengshuLi/WorldAtlas/blob/1d4aca5156b0c9e23d11c65b48fbadab8888b212/coordination/engineering/rus-luhansk44-researched-20261021/retained-research-records.json.gz",
+    "authentication": "Existing complete public-body custody retained from the PR2693 independent review; the full retained bytes and embedded records were reauthenticated locally. No new archive retrieval or geometry execution."
+  },
+  "supporting_records": [
+    {
+      "path": "luhansk44-actual-rus-archive-metadata-inspection.json",
+      "bytes": 22172,
+      "sha256": "50797a8a91dc120db64055fa9845e5f6d8a94c450b35a4a158861ec28b63e042"
+    },
+    {
+      "path": "luhansk44-upstream-source-lineage-check.json",
+      "bytes": 11910,
+      "sha256": "51334a0990b49d74286a65070c072423ef947aa3ea68b8d3469158d61db3a2d9"
+    }
+  ],
+  "actual_rus_archive": {
+    "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/sourceData/gbOpen/RUS_ADM2.zip",
+    "bytes": 50309119,
+    "sha256": "faa6461e6a85d021ac4b99ee983b3cf92fa05d4468a8ea79e2dea2615fc30aab",
+    "corroboration": "Whole-archive metadata inspection and independently retained upstream LFS pointer agree on size and SHA-256."
+  },
+  "affected_report_container": {
+    "commit": "4142d7b55a39771ca7ed719deeb96bc7d917ee1a",
+    "path": "coordination/engineering/rus-ukr12-continuation-20261023/retained-research-records.json.gz",
+    "bytes": 22306,
+    "sha256": "d948281438db4983553b8271c629082e80cae6d7c676348da9da26c73c29c359",
+    "git_blob_oid": "84497d14629dbc8c1597324b857aab0174dada68"
+  },
+  "corrections": [
+    {
+      "record": "inventory/rus-ukr61-treaty-54132/klimovsky-86500-154548-source-map-check.json",
+      "record_bytes": 7405,
+      "record_sha256": "cdf61e9b5ed201c8fe1044306b88f3acc628e433e9b10e69740d61cade9138d0",
+      "json_pointer": "/source_identity_and_geometry/full_rus_publisher_record/archive_sha256",
+      "recorded_sha256": "faa6461e6a85d021ac4b99eb983b3cf92fa05d4468a8ea79e2dea2615fc30aab",
+      "correct_sha256": "faa6461e6a85d021ac4b99ee983b3cf92fa05d4468a8ea79e2dea2615fc30aab"
+    },
+    {
+      "record": "inventory/rus-ukr61-treaty-54132/tarasovsky-five-key-source-record-and-map-review.json",
+      "record_bytes": 9594,
+      "record_sha256": "7039f0f83fa8ec246d66c6dc1bb11fe05171d3990552cf76780c1aa0559780bd",
+      "json_pointer": "/upstream_archive_record_comparison/rus_archive/sha256",
+      "recorded_sha256": "faa6461e6a85d021ac4b99eb983b3cf92fa05d4468a8ea79e2dea2615fc30aab",
+      "correct_sha256": "faa6461e6a85d021ac4b99ee983b3cf92fa05d4468a8ea79e2dea2615fc30aab"
+    }
+  ],
+  "unchanged_correct_citation": [
+    {
+      "record": "inventory/m36-35-four-sumy-archive-source-reconciliation.json",
+      "record_bytes": 5129,
+      "record_sha256": "f61451272d960587abab835c2d89e4986a6b0304328c3e46b189a358e903c02d",
+      "json_pointer": "/exact_archive_record_checks/rus_archive/sha256",
+      "recorded_sha256": "faa6461e6a85d021ac4b99ee983b3cf92fa05d4468a8ea79e2dea2615fc30aab"
+    }
+  ],
+  "preservation": {
+    "all_original_25_package_bodies_unchanged": true,
+    "finalized_data_commit": "484860990abd8238d2f299d7eb8253d84dc73cd5",
+    "finalized_bank_and_receipts_unchanged": true,
+    "archive_download_repeated": false,
+    "scientific_constructor_or_observer_repeated": false,
+    "finalizer_repeated": false
+  }
+}

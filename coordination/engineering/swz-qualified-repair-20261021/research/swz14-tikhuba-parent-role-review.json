@@ -1,0 +1,72 @@
+{
+  "kind": "SWZ14 bounded primary role evidence review; no qualification",
+  "scope": {
+    "package": "gb-SWZ-ADM2--repair-evaluation",
+    "cells": 14,
+    "focus_owner": 41017,
+    "source_feature": "gb:SWZ:ADM2:25544865B99429407754877",
+    "focus_name": "Inkhundla Tikhuba"
+  },
+  "role_evidence": [
+    {
+      "year": 2013,
+      "publisher": "Eswatini Elections and Boundaries Commission",
+      "url": "https://www.elections.org.sz/2023/wp-content/uploads/2023/08/ebc-2013-report-FINAL-edit-2.pdf",
+      "retained_finding": "Indexed official results table places Tikhuba under Matsanjeni North in the chiefdom column. This predates the source represented year 2017.",
+      "custody": "Text was returned by prior public search indexing; no full response bytes or hash retained."
+    },
+    {
+      "year": 2018,
+      "publisher": "Eswatini Elections and Boundaries Commission",
+      "url": "https://www.elections.org.sz/2023/wp-content/uploads/2023/08/2018-NATIONAL-ELECTIONS-REPORT-1.pdf",
+      "retained_finding": "Indexed regional/comparative tables retain Matsanjeni North and Tikhuba as a chiefdom and distinguish the 2013/2018 constituency rosters.",
+      "custody": "Text was returned by prior public search indexing; whole PDF retrieval had HTTP 503; no full response bytes or hash retained."
+    },
+    {
+      "year": 2023,
+      "publisher": "Eswatini Elections and Boundaries Commission",
+      "url": "https://www.elections.org.sz/2023/lubombo-bucopho/",
+      "retained_finding": "Indexed official roster lists Tikhuba under Matsanjeni North.",
+      "custody": "Text was returned by prior public search indexing; HTML retrieval had HTTP 503; no full response bytes or hash retained."
+    }
+  ],
+  "fresh_attempts": {
+    "method": "Programmatic web open on the three exact EBC URLs above, plus the retained Parliament Strategic Plan 2022–2026 PDF URL; official-domain queries for Tikhuba/Matsanjeni North.",
+    "open_outcomes": [
+      {
+        "url": "https://www.elections.org.sz/2023/wp-content/uploads/2023/08/ebc-2013-report-FINAL-edit-2.pdf",
+        "result": "web fetch timeout (400); no content opened"
+      },
+      {
+        "url": "https://www.elections.org.sz/2023/wp-content/uploads/2023/08/2018-NATIONAL-ELECTIONS-REPORT-1.pdf",
+        "result": "web fetch timeout (400); no content opened"
+      },
+      {
+        "url": "https://www.elections.org.sz/2023/lubombo-bucopho/",
+        "result": "web fetch timeout (400); no content opened"
+      },
+      {
+        "url": "https://parliament.gov.sz/about/strategy/Eswatini_Parliament_Strategic_Plan_2022-2026.pdf",
+        "result": "web fetch timeout (400); no content opened"
+      }
+    ],
+    "search_queries": [
+      "site:elections.org.sz \"Tikhuba\" \"Matsanjeni North\"",
+      "site:elections.org.sz Tikhuba constituency Matsanjeni North 2013",
+      "site:parliament.gov.sz \"Tikhuba\" \"Matsanjeni North\""
+    ],
+    "search_result": "Empty search results; this is not evidence that source text is absent.",
+    "prior_retrieval_manifest": "inventory/swz-audit-handoff/extracted/primary/dated-retrieval-manifest.json and parliament-retrieval-manifest.json; recorded HTTP 503 for EBC/gov pages/PDF and Parliament PDF."
+  },
+  "interpretation": {
+    "established": "The official material associates Tikhuba with the Matsanjeni North administrative/electoral unit at least from 2013 through 2023, and specifically categorizes it as a chiefdom in 2013 and 2018; this is earlier than the 2017 represented year of the provider geometry.",
+    "not_established": "No retrieved primary text proves the exact spatial extent or one-to-one ancestry of the 2017 geometry, nor that Tikhuba must be renamed or that the original key belongs to another geometry. The EBC map is copyright-marked and was not downloaded, traced or redistributed.",
+    "parent_ADM1": "All 14 centers have exactly one of the four ADM1 polygons as a spatial contact. Those ADM1 features have empty direct-owner vectors; retained owner province IDs agree by region. Together with distinct ADM1/ADM2 feature tiers and exact ADM2 owner source atoms, this supports explicit broader-tier context without a synthetic parent pointer. ADM1 containment is not a second direct ADM2 owner and by itself does not satisfy territorial exclusions or complete competitor analysis.",
+    "finite_followup": "Use the complete original ADM2 family, four ADM1 regions and owner/province lineage in the stock source-evidence/native diagnostic. Keep Tikhuba role discrepancy explicit and evaluate the direct exact-key result. The restricted EBC map route remains unavailable; no new evidence path was invented."
+  },
+  "restrictions": {
+    "copyright_map": "Not acquired or redistributed.",
+    "observer_or_geometry_replay": false,
+    "candidate_authoring": false
+  }
+}

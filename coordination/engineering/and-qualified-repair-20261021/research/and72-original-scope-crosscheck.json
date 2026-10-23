@@ -1,0 +1,233 @@
+{
+  "kind": "and72-original-scope-crosscheck",
+  "allocation_base": "53eb39c23dc78f41cb674ac80a75b88c76b26770",
+  "reviewer_worker_id": "01a15a0e-9f15-70f9-9391-bfaf7502a007",
+  "inputs": {
+    "queue_commit": "53eb39c23dc78f41cb674ac80a75b88c76b26770",
+    "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "queue_blob": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "queue_sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+    "candidate_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-023.json.gz",
+    "candidate_blob": "d02153e8510a9d29bcb7629cc69a6354518f5124",
+    "candidate_compressed_bytes": 681528,
+    "candidate_sha256": "228d2bb7727267ddeba240017f9eb1c737e91da7fa8982018b230602b1d81d2b",
+    "candidate_decoded_bytes": 4741752,
+    "candidate_decoded_sha256": "b52449c923776ec65ba282e5eeecd93b5570ba1aa161836abda21d9775137982",
+    "source_roster_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+    "source_roster_blob": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+    "lineage_path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+    "lineage_blob": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa"
+  },
+  "queue_row_match": {
+    "repair_row_matches_handoff_exactly": true,
+    "source_conflict_row_matches_handoff_exactly": true,
+    "repair_row": {
+      "package_id": "gb-AND-ADM1--repair-evaluation",
+      "native_cells": 72,
+      "land_cells": 72,
+      "inland_water_cells": 0,
+      "interval_segments": 15,
+      "owners": [
+        7109
+      ],
+      "source_features": [
+        661,
+        662,
+        663,
+        665,
+        666,
+        23686
+      ],
+      "source_families": [
+        6,
+        103
+      ],
+      "native_blocks": [
+        23
+      ]
+    },
+    "separate_source_conflict_row": {
+      "package_id": "gb-AND-ADM1--source-conflict",
+      "native_cells": 9,
+      "land_cells": 9,
+      "inland_water_cells": 0,
+      "interval_segments": 5,
+      "owners": [
+        867,
+        7109,
+        20040
+      ],
+      "source_features": [
+        661,
+        663,
+        23654,
+        23686,
+        26229,
+        33040,
+        33054,
+        33172
+      ],
+      "source_families": [
+        6,
+        102,
+        103,
+        104,
+        114,
+        115,
+        116
+      ],
+      "native_blocks": [
+        23
+      ]
+    }
+  },
+  "candidate_key_reconstruction": {
+    "selection_rule": "From the original block-023 source-candidate runs, expand only runs with singleton owner vector [7109].",
+    "repair_keys": 72,
+    "repair_distinct_keys": 72,
+    "repair_intervals": 15,
+    "source_conflict_check_rule": "From the same original candidate block, expand non-singleton runs containing 7109 whose owner vectors are subsets of the exact source-conflict package owner set.",
+    "conflict_keys": 9,
+    "conflict_distinct_keys": 9,
+    "conflict_intervals": 5,
+    "repair_conflict_intersection": 0,
+    "full_geometry_misses_present_in_repair_keys": 6,
+    "full_geometry_miss_keys": [
+      [
+        96682,
+        132192
+      ],
+      [
+        96825,
+        132338
+      ],
+      [
+        96891,
+        132155
+      ],
+      [
+        96891,
+        132156
+      ],
+      [
+        96891,
+        132157
+      ],
+      [
+        96891,
+        132158
+      ]
+    ],
+    "foreign_lleida_key_present_in_repair_keys": true,
+    "foreign_lleida_key": {
+      "y": 96891,
+      "x": 132142,
+      "feature": "gb:ESP:ADM2:93216281B77878961012946"
+    }
+  },
+  "roster_and_lineage": {
+    "original_contact_indices_checked": [
+      661,
+      662,
+      663,
+      664,
+      665,
+      666,
+      667,
+      23686
+    ],
+    "contact_rows": [
+      {
+        "source_index": 661,
+        "family_index": 6,
+        "source_id": "gb:AND:ADM1:23515209B82836637605816",
+        "owners": [
+          7109
+        ],
+        "name": "Sant Julia de Loria"
+      },
+      {
+        "source_index": 662,
+        "family_index": 6,
+        "source_id": "gb:AND:ADM1:23515209B25074230340039",
+        "owners": [
+          7109
+        ],
+        "name": "Canillo"
+      },
+      {
+        "source_index": 663,
+        "family_index": 6,
+        "source_id": "gb:AND:ADM1:23515209B96881004874456",
+        "owners": [
+          7109
+        ],
+        "name": "Ordino"
+      },
+      {
+        "source_index": 664,
+        "family_index": 6,
+        "source_id": "gb:AND:ADM1:23515209B12259378502884",
+        "owners": [
+          7109
+        ],
+        "name": "La Massana"
+      },
+      {
+        "source_index": 665,
+        "family_index": 6,
+        "source_id": "gb:AND:ADM1:23515209B87138494217820",
+        "owners": [
+          7109
+        ],
+        "name": "Encamp"
+      },
+      {
+        "source_index": 666,
+        "family_index": 6,
+        "source_id": "gb:AND:ADM1:23515209B43580600008856",
+        "owners": [
+          7109
+        ],
+        "name": "Escaldes-Engordany"
+      },
+      {
+        "source_index": 667,
+        "family_index": 6,
+        "source_id": "gb:AND:ADM1:23515209B24107209170284",
+        "owners": [
+          7109
+        ],
+        "name": "Andorra la Vella"
+      },
+      {
+        "source_index": 23686,
+        "family_index": 103,
+        "source_id": "gb:ESP:ADM2:93216281B77878961012946",
+        "owners": [],
+        "name": "Lleida"
+      }
+    ],
+    "canonical_owner": {
+      "id": "atlas:territory:AND",
+      "index": 7109,
+      "source_atoms": [
+        "gb:AND:ADM1:23515209B12259378502884",
+        "gb:AND:ADM1:23515209B24107209170284",
+        "gb:AND:ADM1:23515209B25074230340039",
+        "gb:AND:ADM1:23515209B43580600008856",
+        "gb:AND:ADM1:23515209B82836637605816",
+        "gb:AND:ADM1:23515209B87138494217820",
+        "gb:AND:ADM1:23515209B96881004874456"
+      ]
+    },
+    "canonical_seven_member_set_equals_lineage_source_atoms": true,
+    "allocation_base_lineage_owner_count": 7
+  },
+  "result": "No exact identity/count/contract mismatch found. The exact72 singleton-owner repair keys are disjoint from the separate nine-key AND source-conflict set. All six same-release full-source misses and the Lleida dual-contact key are still included in the full72 request. This is an inventory/binding check, not an owner observation, source/physical qualification or acceptance decision.",
+  "limits": [
+    "No geometry was recomputed.",
+    "No observer, scanner, physical producer or native diagnostic was run.",
+    "Current owner state, scientific qualification and root acceptance are not determined here."
+  ]
+}

@@ -1,0 +1,225 @@
+{
+  "kind": "rus-opposite-side-872-source-applicability-review",
+  "version": 1,
+  "status": "Read-only interpretation of retained original tuples and previously examined primary context; no new geometry, observer, owner scan, or qualification run.",
+  "scope": {
+    "original_package": "gb-RUS-ADM2--repair-evaluation",
+    "partition": "CHN_opposite_side_872_preserved",
+    "keys": 872,
+    "owners": 32,
+    "land": 793,
+    "inland_water": 79,
+    "all_native_regional_relation_values": {
+      "outside": 872
+    },
+    "distance_strata": {
+      "at_most_100m_not_a_cutoff": 667,
+      "over_100m_not_a_cutoff": 205
+    },
+    "distance_min_m": 0.028732426169931942,
+    "distance_max_m": 2485.3489790696053,
+    "note": "Distances and side tags are retained comparison outputs; this review did not recompute geometry or use a distance cutoff."
+  },
+  "source_identity": {
+    "CHN_family": "gb:CHN:ADM1",
+    "feature_count": 4,
+    "feature_contact_counts": {
+      "gb:CHN:ADM1:43563684B55920014778896": {
+        "keys": 734,
+        "owners": 25,
+        "target_negative_binding_pairs": 25,
+        "land": 655,
+        "water": 79
+      },
+      "gb:CHN:ADM1:43563684B95381459098578": {
+        "keys": 87,
+        "owners": 6,
+        "target_negative_binding_pairs": 6,
+        "land": 87,
+        "water": 0
+      },
+      "gb:CHN:ADM1:43563684B50492231896073": {
+        "keys": 16,
+        "owners": 1,
+        "target_negative_binding_pairs": 1,
+        "land": 16,
+        "water": 0
+      },
+      "gb:CHN:ADM1:43563684B3982601277390": {
+        "keys": 35,
+        "owners": 1,
+        "target_negative_binding_pairs": 1,
+        "land": 35,
+        "water": 0
+      }
+    },
+    "distinct_owner_feature_negative_pairs": 33,
+    "RUS_positive_source": "Original source scope names RUS ADM2 owner/target identities from a 2017 represented-year OpenStreetMap/Wambacher source; source data update 2023. These exact keys retain their original RUS owner attribution, but opposite-side context is adverse to that attribution."
+  },
+  "why_8108_interpretation_does_not_transfer": {
+    "8108_reason": "The earlier contextual proposal was limited to keys on the side of the complete retained LSIB 11.4 CHN-RUS line identified as Russia-facing by two retained State WorldPolygons anchors, and supported by bilateral 2008/2024 context.",
+    "872_result": "Every one of these 872 keys is tagged outside that Russia-facing side in the retained regional comparison; the 872 are not line-boundary cases. The retained interpretation cannot be extended merely because they contact the same CHN ADM1 source family. This creates a source-specific contradiction requiring separate per-key evidence, not a reason to relabel the keys automatically.",
+    "strata": "667 are within the retained <=100m descriptive stratum and 205 farther; the far group reaches 2,485.35m. This is not a positional-accuracy threshold and does not settle either group.",
+    "class_context": "79 are inland-water labels; the remainder are land. River/island-specific demarcation context may matter for those 79 and must be sourced rather than inferred."
+  },
+  "retained_primary_context": {
+    "CHN_source": "Retained metadata identifies a 2019 represented-year CHN ADM1, released Public Domain, derived from an illustrative Wikimedia blank-province map; source-data update 2023. The retained XML/source description does not provide a surveyed border accuracy guarantee.",
+    "RUS_source": "Retained metadata identifies 2017 represented-year RUS ADM2, ODbL 1.0, OpenStreetMap/Wambacher, source-data update March 2023. This is not an independently confirmed current legal-administration register.",
+    "LSIB": "Retained official US State Department LSIB 11.4 complete CHN-RUS line has attributes ID 43bcf969-bbbc-4684-aca3-ee6df428c1b4, countries CHINA/RUSSIA, rank 1, status International Boundary. Retained side relation is contextual US product evidence, not universal sovereignty authority; typical accuracy wording is not a blanket guarantee.",
+    "bilateral_records": [
+      "PRC MFA 22 July 2008 report says a supplemental descriptive protocol for the eastern-boundary annex was signed; it describes demarcation but does not supply segment-by-segment cell coordinates in the retained page.",
+      "PRC MFA 14 October 2008 briefing says exchange of notes confirmed the protocol and annex entered into force that day and mentions marker unveiling; the retained page does not bind these 872 keys to a specific marker/segment.",
+      "PRC MFA 21 June 2024 boundary committee statement describes the border as clear and stable and records the committee mechanism; it is not a key- or segment-specific coordinate validation."
+    ]
+  },
+  "next_lawful_evidence_step": {
+    "step": "Use the specifically identified official documentary leads: seek a public copy/catalogue entry for the joint-inspection protocol, attached maps and boundary-marker register described in the PRC 2016 joint statement, and/or the 2008 eastern-section supplementary descriptive protocol annex. If found, bind its named sectors/markers to the four exact CHN ADM1 contact groups and the 79 water-labelled keys; prioritize the 205 farther-than-100m descriptive stratum while preserving all 872 as held pending evidence.",
+    "reason": "The 2016 official statement establishes that maps and a marker register were produced and identifies the relevant 2008 segment, but its public page does not contain the attachments or a tuple-to-sector link. The next step is now a specific document retrieval/catalogue check, not a speculative broad map search.",
+    "scope_limit": "This is a finite segment-level follow-up, not a universal modern-boundary certificate, a demand for a new world geometry corpus, or a promise that an annex exists or will resolve every key."
+  },
+  "sources_actually_read": {
+    "tuple_path": "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/RUS9451-portable-exact-source-key-tuples.json",
+    "regional_side_path": "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/RUS8980-LSIB-exact-native-regional-sides.json",
+    "independent_context_assessment": "inventory/rus-8108-contextual-applicability-independent-review.json",
+    "retained_metadata_and_primary_paths": [
+      "primary/CHN-source-meta.txt",
+      "primary/RUS-ADM2-current-metadata.json",
+      "primary/CHN-ADM1-current-metadata.json",
+      "primary/MFA-CHN-demarcation-2008.html",
+      "primary/MFA-CHN-entry-into-force-2008.html",
+      "primary/MFA-CHN-RUS-joint-border-committee-2024.html"
+    ],
+    "primary_urls": [
+      "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CHN/ADM1/geoBoundaries-CHN-ADM1_simplified.geojson",
+      "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/RUS/ADM2/geoBoundaries-RUS-ADM2_simplified.geojson",
+      "https://data.geodata.state.gov/LSIB.gpkg",
+      "https://www.fmprc.gov.cn/gjhdq_676201/gj_676203/oz_678770/1206_679110/xgxw_679116/200807/t20080722_9336208.shtml",
+      "https://bb.china-embassy.gov.cn/chn/fyrth/200810/t20081014_3920413.htm",
+      "https://www.fmprc.gov.cn/wjb_673085/zzjg_673183/bjhysws_674671/xgxw_674673/202406/t20240621_11439760.shtml"
+    ]
+  },
+  "limits": [
+    "No values in the 872-key set are promoted or treated as resolved.",
+    "The 8 MNG point contacts are in a separate 471-key other-family lane and are not included here.",
+    "No sovereignty, territorial status, legal ownership, or current administrative boundary conclusion is made.",
+    "No new geometry, nearest-distance, physical, owner, diagnostic, or constructor computation was performed."
+  ],
+  "protocol_annex_search": {
+    "performed": true,
+    "retained_archive_check": {
+      "handoff_files_examined": [
+        "primary/MFA-CHN-demarcation-2008.html",
+        "primary/MFA-CHN-entry-into-force-2008.html",
+        "primary/MFA-CHN-RUS-joint-border-committee-2024.html"
+      ],
+      "result": "The retained pages establish signing/entry into force/ongoing bilateral mechanism but contain no attached protocol annex, marker register, segment schedule, or map body that can bind the 872 tuples to named sectors."
+    },
+    "focused_official_queries": [
+      "site:gov.cn 中俄国界 东段 补充议定书 附件 2008 勘界",
+      "site:fmprc.gov.cn 中俄国界东段 补充议定书 附图 2008",
+      "site:pravo.gov.ru российско-китайской границы восточной части дополнительного протокола 2008",
+      "site:publication.pravo.gov.ru российско-китайской государственной границы восточной части протокол 2008",
+      "site:gov.cn \"中俄国界第一次联合检查成果的议定书\" 附图 2017",
+      "site:fmprc.gov.cn \"中俄国界第一次联合检查成果的议定书\" 附图",
+      "site:mid.ru \"2008\" \"восточной части российско-китайской границы\" протокол карта",
+      "site:publication.pravo.gov.ru \"Китайской Народной Республикой\" \"границы\" \"восточной части\" протокол",
+      "site:mid.ru \"Дополнительный описательный протокол\" \"восточной части\" Китай 2008 карта",
+      "site:mid.ru \"Протокол о результатах первой совместной проверки\" российско-китайской границы карта приложение"
+    ],
+    "official_results_opened": [
+      {
+        "url": "https://losangeles.china-consulate.gov.cn/zgxw/201611/t20161108_5092473.htm",
+        "title": "2016 joint statement on completion of the first joint inspection of the China-Russia state boundary",
+        "status": "opened and read in the web result",
+        "finding": "The statement says the parties completed drafting the joint-inspection protocol and produced attached maps; it also names an island/sandbar attribution list and a boundary-marker register among associated documents. It says those materials, after entry into force, supplement earlier 1999 descriptions/maps and the 2002 supplement. It identifies the 2004 supplement and the 2008-07-21 eastern-section supplementary descriptive protocol as relevant inspection segments. The page does not expose the underlying maps, list, register, or 872-key/sector correspondence."
+      },
+      {
+        "url": "https://saintpetersburg.china-consulate.gov.cn/zt_1/zgwj/200912/t20091207_4204206.htm",
+        "title": "PRC official year review",
+        "status": "opened and read in the web result",
+        "finding": "Records that exchange of notes on 2008-10-14 confirmed the 2008 eastern-section supplementary descriptive protocol and annex entered into force. It does not provide the annex contents or segment-level key relation."
+      },
+      {
+        "url": "https://www.gov.cn/xxgk/pub/govpublic/mrlm/200803/t20080328_31956.html",
+        "title": "PRC State Council approval concerning the China-Russia border management agreement",
+        "status": "search result surfaced official page and an informative snippet; exact-page open returned HTTP 403",
+        "result": "No retry or alternate-host retrieval was attempted. Treat the denied exact-page open as a bounded access limit, not proof that no annex exists."
+      },
+      {
+        "url": "https://mid.ru/ru/foreign_policy/news/1537855/",
+        "title": "Russian MFA joint statement on the first joint inspection",
+        "status": "search result identified the official record; exact-page open returned 502 Bad Gateway",
+        "result": "Transient fetch failure; no retry was attempted. No attachment or map content was obtained."
+      },
+      {
+        "url": "https://mid.ru/ru/foreign_policy/international_contracts/international_contracts/2_contract/45912/",
+        "title": "Russian MFA list of bilateral international treaties",
+        "status": "search snippet described categories of joint inspection documents; exact-page open returned 502 Bad Gateway",
+        "result": "Search-result snippet describes joint-inspection document categories including boundary-line protocols, maps, marker protocols and coordinate catalogues. The exact same public URL was opened once more after the initial 502 and again returned HTTP 502 Bad Gateway. No list body or attachment was verified. This remains a transient fetch failure, not an access-control denial."
+      },
+      {
+        "url": "https://beijing.mid.ru/ru/media-centre/biblioteka/ofitsialnye_dokumenty/",
+        "title": "Russian Embassy official documents index",
+        "status": "search result surfaced the first-joint-inspection declaration; exact-page open returned 502 Bad Gateway",
+        "result": "No index entries or linked annexes verified."
+      },
+      {
+        "url": "https://www.mfa.gov.cn/web/wjb_673085/zzjg_673183/bjhysws_674671/bhgjty/ldbjglty/202303/P020230320543772272098.pdf",
+        "title": "PRC-Russia agreement on management of the state boundary (official MFA PDF, 28 pages)",
+        "status": "opened/read, text extracted",
+        "finding": "The agreement was signed in Beijing on 9 November 2006 (closing text, page 15). Article 53 says it takes effect 30 days after the last written notice, but the body does not give that notice date, so this PDF alone does not establish the actual effective date. Its preamble says it replaces the agreement signed 27 May 1994. Page 1, Article 2 lists the 14 October 2004 eastern-boundary supplementary agreement among delimitation instruments. Pages 1–2, Articles 3 and 7(4) state the role of effective joint-inspection protocols as supplements to demarcation documents; no sector/marker values or tuple correspondence are given."
+      }
+    ],
+    "implication": "The Sapporo official communiqué is the clearest public catalogue-like record encountered: it names the signed 2016 inspection protocol, but its attachment section is blank. The 2016 statement identifies maps and marker registers as produced; the opened pages do not expose them. No defensible 872-key-to-sector/marker linkage follows from these records.",
+    "second_focused_catalogue_search": {
+      "queries": [
+        "site:gov.cn \"中俄国界第一次联合检查\" \"议定书\" 附件 地图 界桩名录",
+        "site:mfa.gov.cn \"中俄国界第一次联合检查成果的议定书\" 地图 界桩",
+        "site:mid.ru \"первая совместная проверка российско-китайской государственной границы\" протокол карты каталог пограничных знаков",
+        "site:mid.ru \"Дополнительный описательный протокол о восточном участке российско-китайской границы\" приложение карта",
+        "\"Протокол о результатах первой совместной проверки российско-китайской государственной границы\"",
+        "\"Протокол-описание линии российско-китайской государственной границы\" \"карты\"",
+        "\"中俄国界第一次联合检查成果议定书\" 地图 附件 2016",
+        "\"中俄国界东段补充议定书\" 附图 坐标 2008"
+      ],
+      "search_discoveries": [
+        {
+          "url": "https://www.mid.ru/ru/foreign_policy/international_contracts/international_contracts/2_contract/45912/",
+          "title": "Russian MFA bilateral treaty list",
+          "result": "Official search result snippet describes joint-inspection documentation categories including boundary-line protocols, boundary maps, boundary-marker protocols, and coordinate catalogues. Exact-page open returned 502 Bad Gateway; no list body, attachment, or specific 2016/RUS-China record was verified."
+        },
+        {
+          "url": "https://www.mid.ru/ru/maps/cn/1601446/",
+          "title": "Russian MFA China relations/border document page",
+          "result": "Official search result snippet refers to the 2004 additional eastern-boundary agreement. Exact-page open returned 502 Bad Gateway; no linked maps or protocol copy was verified."
+        },
+        {
+          "url": "https://www.scio.gov.cn/xwfb/gwyxwbgsxwfbh/wqfbh_2284/2017n_8019/2017n01y11r/wjxgzc_8050/202207/t20220715_198252.html",
+          "title": "SCIO-hosted 2016 China-Russia joint-inspection statement",
+          "result": "Search result surfaced the statement; its text matches the previously opened PRC consulate publication that says the joint inspection produced attached maps, island/sandbar attribution list, and marker register. Exact SCIO page open returned no readable page content; it did not expose attachments."
+        },
+        {
+          "url": "https://www.mfa.gov.cn/web/wjb_673085/zzjg_673183/bjhysws_674671/bhgjty/ldbjglty/202303/P020230320543772272098.pdf",
+          "title": "PRC-Russia agreement on management of the state boundary (official MFA PDF, 28 pages)",
+          "status": "opened/read, text extracted",
+          "finding": "Page 1, Article 2 lists the 2004 eastern-boundary supplementary agreement among the delimitation instruments. Pages 1–2, Articles 3 and 7 state that field demarcation uses listed demarcation documents and later effective joint-inspection protocols; Article 7(4), page 2, says each effective joint-inspection protocol becomes a supplement to demarcation documents. This confirms the documentary role of the 2016 inspection protocol but gives no sector/marker values or tuple correspondence."
+        }
+      ],
+      "access_and_scope": "Search-result snippets are recorded as such; a result card is not treated as an opened protocol. Russian MID pages returned 502 on explicit opens; the exact treaty-index URL was retried once normally and returned 502 again. This is a transient server-read limitation, not an access-control denial. The SCIO page returned no readable content, but the previously opened PRC consulate statement provides the substantive 2016 finding. No file or map attachment was downloaded. No alternate transfer route, access-control bypass, or retry of the HTTP 403 gov.cn page was attempted."
+    },
+    "new_opened_result": [
+      {
+        "url": "https://sapporo.china-consulate.gov.cn/zgyw/201611/t20161108_5256069.htm",
+        "title": "PRC-Russia 21st regular meeting joint communiqué (full text), PRC Consulate-General in Sapporo",
+        "status": "opened and read in web result",
+        "finding": "The 2016-11-07 communiqué explicitly lists the signed Protocol on the Results of the First Joint Inspection of the China-Russia Boundary among that meeting’s documents (page lines 5 and 8). The page ends with a bare “附件” heading and no attached protocol/map/register content (lines 9–10). This is an official public catalogue-like identification of the protocol, but does not provide its contents or sector linkage."
+      }
+    ],
+    "same_url_retry": {
+      "url": "https://www.mid.ru/ru/foreign_policy/international_contracts/international_contracts/2_contract/45912/",
+      "result": "A second ordinary exact-URL read returned HTTP 502 Bad Gateway again; no content was retrieved.",
+      "classification": "Transient server-read failure; not a policy/access-control denial.",
+      "scope": "No alternate route used; no retry of the distinct gov.cn HTTP 403 page."
+    }
+  }
+}

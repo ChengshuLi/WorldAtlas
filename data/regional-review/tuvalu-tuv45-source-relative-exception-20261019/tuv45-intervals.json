@@ -1,0 +1,54 @@
+{
+  "schema": "worldatlas.tuv45.original-interval-disposition.v1",
+  "original_key": "gb-TUV-ADM1--repair-evaluation",
+  "source_package_snapshot_commit": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "source_package_queue_git_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+  "scope": {
+    "native_cells": 45,
+    "land_cells": 45,
+    "inland_water_cells": 0,
+    "interval_segments": 16,
+    "source_relative_cells_in_original_package": 0,
+    "excluded_same-block_source_relative_cells": 101,
+    "excluded_related_crosswalk": "issue-615 Niulakita-specific evidence"
+  },
+  "row_schema": ["y", "x_start_inclusive", "x_end_exclusive", "owner_id", "source_feature_index", "physical_class"],
+  "intervals": [
+    [136377,260097,260100,43467,59796,"land"],
+    [136378,260097,260098,43467,59796,"land"],
+    [136544,261210,261211,43466,59797,"land"],
+    [136545,261208,261212,43466,59797,"land"],
+    [136546,261209,261214,43466,59797,"land"],
+    [136547,261210,261215,43466,59797,"land"],
+    [136548,261210,261216,43466,59797,"land"],
+    [136549,261210,261216,43466,59797,"land"],
+    [136550,261213,261217,43466,59797,"land"],
+    [136551,261215,261217,43466,59797,"land"],
+    [136973,260982,260983,43461,59798,"land"],
+    [136977,260982,260983,43461,59798,"land"],
+    [136978,260982,260983,43461,59798,"land"],
+    [136979,260982,260984,43461,59798,"land"],
+    [136980,260982,260984,43461,59798,"land"],
+    [136981,260983,260984,43461,59798,"land"]
+  ],
+  "owner_tally_cells": {"43467_Nui":4,"43466_Vaitupu":33,"43461_Nukufetau":8},
+  "selected_owner_result": {
+    "main_commit": "2b569815a7e37c5797586092688122d9b5d749b0",
+    "base_owner_cells": 0,
+    "selected_patch_owner_cells": 0,
+    "effective_owner_cells": 0,
+    "accepted_repair_cells": 0,
+    "unassigned_cells": 45,
+    "result_source": "independent conservation_check exact-interval rerun; all selector/base/patch pins matched this commit"
+  },
+  "disposition": {
+    "status": "proposed_unresolved_source_applicability_exception",
+    "accepted": false,
+    "proposed_exception_cells": 45,
+    "remaining_held_cells": 45,
+    "repair_credit_cells": 0,
+    "owner_or_geometry_change": false,
+    "legal_or_sovereignty_claim": false,
+    "limitation": "Retained source identity/name joins are supported, but no exact-interval geometric join and no current-vintage applicability witness is supplied for these 45 cells."
+  }
+}

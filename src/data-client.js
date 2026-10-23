@@ -1,3 +1,4 @@
+import {readOwnerLabels} from './owner-labels.js';
 import {hydrateMapSnapshotPage} from './map-snapshot-format.js';
 import {loadHostedTemporalGeography} from './hosted-temporal-client.js';
 import {mergeHostedTemporalHistory} from './hosted-temporal-geography.js';
@@ -11,7 +12,7 @@ import {loadCoverageClassification} from './coverage-classification.js';
 import {loadOwnershipAssets} from './ownership-assets.js';
 import {loadNativeLatitudes} from './native-latitudes.js';
 import {NATIVE_METHOD} from './ownership-method.js';
-import {additiveBaseReference,nativeReferenceForData,loadAdditiveNativePatch,loadedBaseFootprintSha256,additiveReleaseFootprintDigest,footprintValueSha256} from './effective-footprint.js';
+import {additiveBaseReference,nativeReferenceForData,loadPreparedNativeContext,loadedBaseFootprintSha256,additiveReleaseFootprintDigest,finishedReleaseFootprintDigest,footprintValueSha256} from './effective-footprint.js';
 import { validYear } from './model.js';
 import { validateHierarchy } from './hierarchy.js';
 
@@ -104,7 +105,7 @@ async function loadHostedSnapshotPages(year,examples,signal){
  const attributes=[],names=[],retirements=[];let cursor='',revision=null,limit=4096,temporalPages;const cursors=new Set();
  try{
  while(true){
-  const params=new URLSearchParams({year:String(year),examples:String(Number(examples)),limit:String(limit),evidence_only:'1',include_temporal:String(Number(datedGeographySupported))});if(cursor)params.set('cursor',cursor);
+  const params=new URLSearchParams({year:String(year),examples:String(Number(examples)),limit:String(limit),evidence_only:'1',include_temporal:String(Number(datedGeographySupported)),...(datedGeographySupported?{release_id:expectedGeography.release_id}:{})});if(cursor)params.set('cursor',cursor);
   const response=await fetch('/api/map/snapshot?'+params,{signal});
   if(!response.ok){const error=await response.json().catch(()=>({}));if(response.status===400&&limit>1000&&error.error==='Map entity page limit must be between 1 and 1000'){limit=1000;continue;}if(response.status===409&&error.retryable)throw new ContentRevisionError();if(response.status===413&&error.retryable&&limit>1){limit=Math.max(1,Math.min(limit-1,Number.isInteger(error.suggested_limit)?error.suggested_limit:Math.floor(limit/2)));continue;}throw Error(`Atlas data unavailable (${response.status})`);}
   const raw=await response.json(),page=hydrateMapSnapshotPage(raw);
@@ -190,6 +191,9 @@ export async function loadGeography(initialSelection) {
   preparedEvidenceIndexRequest=null;preparedEvidenceRequests=new Map();
   const data=await readJSON(staticAtlas ? './atlas-geography.json' : '/api/geography');
   if(generation!==geographyGeneration)throw new DOMException('Geography superseded','AbortError');
+  // Older immutable packages may lack the generated replica. Keep their map
+  // browsable, but never revive unverified source aliases as display names.
+  data.ownerLabels=data.ownerLabels===undefined?new Map():readOwnerLabels(data.ownerLabels);
   const baseReference=additiveBaseReference(data),nativeReference=nativeReferenceForData(data);
   referenceAttributeBundle=data.referenceAttributes??null;
   referenceAttributeFootprints=baseReference?.footprints_sha256??data.preparedEvidence?.footprints_sha256;
@@ -203,10 +207,11 @@ export async function loadGeography(initialSelection) {
   // Queue ownership rows before the catalog fan-out so decoding can overlap it.
   // Every required stream still completes before this generation is exposed.
   const nativeSelected=data.pixelMap?.method===NATIVE_METHOD;
-  const nativeOptions=nativeSelected?{requireNative:true,expectedReference:nativeReference}:{};
+  const nativeOptions=nativeSelected?{requireNative:true,expectedReference:data.preparedOwnership?data.reference_release:nativeReference}:{};
+  const numericalManifest=data.preparedOwnership?.native_pixel_map??data.pixelMap;
   const ownershipInput=data.parts&&data.pixelMap?loadOwnershipAssets(data.pixelMap,fetch,nativeOptions):null;
-  const latitudeInput=nativeSelected?loadNativeLatitudes(data.pixelMap,nativeReference):null;
-  const coverageRequest=data.coverageClassification?loadCoverageClassification(data.coverageClassification,{...nativeReference,release_id:nativeReference?.id,canonical_grid_sha256:data.pixelMap?.canonical_grid_sha256,size:data.pixelMap?.size,coordinateBits:data.pixelMap?.coordinateBits}):null;
+  const latitudeInput=nativeSelected?loadNativeLatitudes(numericalManifest,nativeReference):null;
+  const coverageRequest=data.coverageClassification?loadCoverageClassification(data.coverageClassification,{...nativeReference,release_id:nativeReference?.id,canonical_grid_sha256:numericalManifest?.canonical_grid_sha256,size:data.pixelMap?.size,coordinateBits:data.pixelMap?.coordinateBits}):null;
   const coverageInput=nativeSelected?coverageRequest:coverageRequest?.catch(()=>null);
   // Fetch one pinned initial evidence selection while complete geography loads.
   // It is consumed only for that same year/examples pair, never another visit.
@@ -236,7 +241,7 @@ export async function loadGeography(initialSelection) {
    if(features){
     // Native rendering authenticates the original bank and complete owner roster.
     // Complete polygon geometry is admitted only when a geometry consumer asks.
-    ownership=await loadAdditiveNativePatch(data,features,ownership);
+    ownership=await loadPreparedNativeContext(data,features,ownership);
     if(generation!==geographyGeneration)throw new DOMException('Geography superseded','AbortError');
     data.features=features;data.ownership=ownership;
    }
@@ -274,10 +279,11 @@ export async function loadSnapshot(year, examples, signal) {
 }
 
 export async function ensureGeometry(data,signal){
-  if(!data.geometryParts){if(data.additiveRelease&&data.features.some(f=>!f.geometry))throw Error('Additive release requires complete original geometry transport');return;}
+  const final=data.preparedOwnership?.version===3,corrected=final||data.additiveRelease!==undefined;
+  if(!data.geometryParts){if(corrected&&data.features.some(f=>!f.geometry))throw Error('Additive release requires complete original geometry transport');return;}
   data.geometryRequest ||= Promise.all(data.geometryParts.map(p=>readJSON(`./${p}`))).then(parts=>{
     const rows=parts.flat();
-    if(data.additiveRelease){
+    if(corrected){
       const ids=new Set(data.features.map(f=>f.id));
       if(ids.size!==data.features.length||rows.length!==ids.size||new Set(rows.map(f=>f.id)).size!==rows.length
         ||rows.some(f=>!ids.has(f.id)||!f.geometry))throw Error('Incomplete/duplicate/foreign additive base geometry transport');
@@ -286,11 +292,14 @@ export async function ensureGeometry(data,signal){
   }).catch(error=>{data.geometryRequest=null;throw error;});
   const geometries=await data.geometryRequest;signal?.throwIfAborted();
   const loaded=data.features.map(f=>({...f,geometry:geometries.get(f.id)}));
-  if(data.additiveRelease){
+  if(corrected){
     const reference=additiveBaseReference(data);
     if(loadedBaseFootprintSha256(loaded)!==reference.footprints_sha256)throw Error('Complete original additive base geometry checksum differs');
-    for(const f of loaded)if(f.additiveFootprint&&footprintValueSha256(f.geometry)!==f.additiveFootprint.base_geometry_sha256)throw Error('Selected additive target base geometry differs');
-    if(additiveReleaseFootprintDigest(reference,loaded)!==data.reference_release.footprints_sha256)throw Error('Additive geometry effective domain differs');
+    for(const f of loaded){
+      const expected=final?f.finishedFootprint?.reference_geometry_sha256:f.additiveFootprint?.base_geometry_sha256;
+      if(expected!==undefined&&footprintValueSha256(f.geometry)!==expected)throw Error('Selected effective target reference geometry differs');
+    }
+    if((final?finishedReleaseFootprintDigest:additiveReleaseFootprintDigest)(reference,loaded)!==data.reference_release.footprints_sha256)throw Error('Effective geometry domain differs');
   }
   for(let i=0;i<loaded.length;i++)data.features[i].geometry=loaded[i].geometry;
 }

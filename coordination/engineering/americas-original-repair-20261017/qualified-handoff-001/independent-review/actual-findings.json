@@ -1,0 +1,799 @@
+{
+  "review": "Exact original-to-held/supported/actual-constructor reconciliation without native or physical replay",
+  "input_commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+  "total_original_cells": 66919,
+  "total_qualified_cells": 63035,
+  "total_held_cells": 3884,
+  "total_qualified_targets": 366,
+  "actual_exit0_calls": 5,
+  "accepted_cells": 0,
+  "current_owner_zero_proven": false,
+  "countries": [
+    {
+      "country": "MEX",
+      "original_cells": 24208,
+      "qualified_cells": 24092,
+      "held_cells": 116,
+      "original_targets": 158,
+      "qualified_targets": 157,
+      "wholly_held_targets": 1,
+      "class_counts": {
+        "original": {
+          "land": 24202,
+          "inland-water": 6
+        },
+        "qualified": {
+          "land": 24087,
+          "inland-water": 5
+        },
+        "held": {
+          "land": 115,
+          "inland-water": 1
+        }
+      },
+      "held_reason": "territorial_exclusion_cells",
+      "retained_foreign_families": [
+        "gb:BLZ:ADM1",
+        "gb:GTM:ADM1",
+        "gb:GTM:ADM2",
+        "gb:USA:ADM1",
+        "gb:USA:ADM2"
+      ],
+      "retained_surviving_target_negative_constraints": 131,
+      "constructor_result_sha256": "a508e84bb2c44debe935cae2cbfacbf0efd58e26837fef48ad2f569db690e4c5",
+      "source_evidence_pin": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/mex/source-evidence.json",
+        "mode": "100644",
+        "git_blob_oid": "6b38e71249f7a8b59e566db55e8a4abdd5f3fc68",
+        "bytes": 985280,
+        "sha256": "13d7011ad126185f47963a09b81679eeec05d131fbe38bdf965a502969837e80"
+      },
+      "patch_pin": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/mex/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "dad846789b82273294b087768ad9a8f71274c82e",
+        "bytes": 377251,
+        "sha256": "f8e9e677ed94faef0cce2eeadae9ba6c83f40a4b1ea469cbdb426768401b855d"
+      },
+      "actual_exit": 0
+    },
+    {
+      "country": "ECU",
+      "original_cells": 13969,
+      "qualified_cells": 13387,
+      "held_cells": 582,
+      "original_targets": 58,
+      "qualified_targets": 51,
+      "wholly_held_targets": 7,
+      "class_counts": {
+        "original": {
+          "land": 13966,
+          "inland-water": 3
+        },
+        "qualified": {
+          "land": 13384,
+          "inland-water": 3
+        },
+        "held": {
+          "land": 582,
+          "inland-water": 0
+        }
+      },
+      "held_reason": "territorial_exclusion_cells",
+      "retained_foreign_families": [
+        "gb:COL:ADM1",
+        "gb:COL:ADM2",
+        "gb:PER:ADM1",
+        "gb:PER:ADM2"
+      ],
+      "retained_surviving_target_negative_constraints": 111,
+      "constructor_result_sha256": "135f6037be17457b1771a97efaa42d6e559a81910e1dd68352d75ac64f355a12",
+      "source_evidence_pin": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/ecu/source-evidence.json",
+        "mode": "100644",
+        "git_blob_oid": "e3a564caffe1ac708051f1b27d1c510fb62b19a5",
+        "bytes": 427066,
+        "sha256": "32d12aba86735c36b0e3de63cdc35e955e40184997d85ccdaf21adfea0f509d4"
+      },
+      "patch_pin": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/ecu/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "a3430c2e66f6b92cc712e939a36d7af25f9cf6fe",
+        "bytes": 147267,
+        "sha256": "0592beedc90f2cfe4c3fd6457933c7915ff832a320d12ad222e7ac65f998d1fb"
+      },
+      "actual_exit": 0
+    },
+    {
+      "country": "BOL",
+      "original_cells": 11311,
+      "qualified_cells": 10404,
+      "held_cells": 907,
+      "original_targets": 37,
+      "qualified_targets": 34,
+      "wholly_held_targets": 3,
+      "class_counts": {
+        "original": {
+          "land": 9974,
+          "inland-water": 1337
+        },
+        "qualified": {
+          "land": 9067,
+          "inland-water": 1337
+        },
+        "held": {
+          "land": 907,
+          "inland-water": 0
+        }
+      },
+      "held_reason": "territorial_exclusion_cells",
+      "retained_foreign_families": [
+        "gb:ARG:ADM1",
+        "gb:ARG:ADM2",
+        "gb:BRA:ADM1",
+        "gb:BRA:ADM2",
+        "gb:CHL:ADM1",
+        "gb:CHL:ADM2",
+        "gb:CHL:ADM3",
+        "gb:PER:ADM1",
+        "gb:PER:ADM2",
+        "gb:PRY:ADM1",
+        "gb:PRY:ADM2"
+      ],
+      "retained_surviving_target_negative_constraints": 150,
+      "constructor_result_sha256": "ee5e9afb02c515939ac7de31cbcea7ac53a56e495f6efd853f790fc82bc64e3a",
+      "source_evidence_pin": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/bol/source-evidence.json",
+        "mode": "100644",
+        "git_blob_oid": "6d32b3b7c0bfa9dc4e1b56375da32d1c4371b974",
+        "bytes": 439629,
+        "sha256": "a22ebb764a6089c9e33341b6f676896eb38aa7c25f62d04937d6ca211e46a951"
+      },
+      "patch_pin": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/bol/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "cff6d5222122fb6cca7d2eb5d244c600a81ab610",
+        "bytes": 124455,
+        "sha256": "c0e4e9bb6e907992f428057e20272e269aba7ec1a9fe0cb74c344d1916a47c2b"
+      },
+      "actual_exit": 0
+    },
+    {
+      "country": "PER",
+      "original_cells": 10371,
+      "qualified_cells": 8922,
+      "held_cells": 1449,
+      "original_targets": 55,
+      "qualified_targets": 55,
+      "wholly_held_targets": 0,
+      "class_counts": {
+        "original": {
+          "land": 8163,
+          "inland-water": 2208
+        },
+        "qualified": {
+          "land": 6714,
+          "inland-water": 2208
+        },
+        "held": {
+          "land": 1449,
+          "inland-water": 0
+        }
+      },
+      "held_reason": "territorial_exclusion_cells",
+      "retained_foreign_families": [
+        "gb:BOL:ADM1",
+        "gb:BOL:ADM2",
+        "gb:BRA:ADM1",
+        "gb:BRA:ADM2",
+        "gb:CHL:ADM1",
+        "gb:CHL:ADM2",
+        "gb:CHL:ADM3",
+        "gb:COL:ADM1",
+        "gb:COL:ADM2",
+        "gb:ECU:ADM1",
+        "gb:ECU:ADM2"
+      ],
+      "retained_surviving_target_negative_constraints": 182,
+      "constructor_result_sha256": "54572467848b9422089cc47844229b235cf98bb7cc2ae7c4e4435e62cdfaba24",
+      "source_evidence_pin": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/per/source-evidence.json",
+        "mode": "100644",
+        "git_blob_oid": "a39d3a74d2ab7e15348a9d70f5f2b979ab6ff1ca",
+        "bytes": 562209,
+        "sha256": "cfc557ecb253215add565159fc74754b49bd2b6d9e268156383eb1a98e957a7b"
+      },
+      "patch_pin": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/per/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "d22e667c03d96d69adfaf958e452f629769c0230",
+        "bytes": 137297,
+        "sha256": "f0b7af632e4b27d025e8df66edba6acbe6ef03650cf8b09029a482544ef2a1f7"
+      },
+      "actual_exit": 0
+    },
+    {
+      "country": "COL",
+      "original_cells": 7060,
+      "qualified_cells": 6230,
+      "held_cells": 830,
+      "original_targets": 81,
+      "qualified_targets": 69,
+      "wholly_held_targets": 12,
+      "class_counts": {
+        "original": {
+          "land": 7060,
+          "inland-water": 0
+        },
+        "qualified": {
+          "land": 6230,
+          "inland-water": 0
+        },
+        "held": {
+          "land": 830,
+          "inland-water": 0
+        }
+      },
+      "held_reason": "territorial_exclusion_cells",
+      "retained_foreign_families": [
+        "gb:BRA:ADM1",
+        "gb:BRA:ADM2",
+        "gb:ECU:ADM1",
+        "gb:ECU:ADM2",
+        "gb:PAN:ADM1",
+        "gb:PAN:ADM2",
+        "gb:PER:ADM1",
+        "gb:PER:ADM2",
+        "gb:VEN:ADM1",
+        "gb:VEN:ADM2"
+      ],
+      "retained_surviving_target_negative_constraints": 123,
+      "constructor_result_sha256": "a438fb363bb15590a9d897a0e08b7b2e117e3cb57faa81fd05f2cdc018ea3bdc",
+      "source_evidence_pin": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/col/source-evidence.json",
+        "mode": "100644",
+        "git_blob_oid": "caae900c73f6ded37de5000dd41fbfce089360e0",
+        "bytes": 362007,
+        "sha256": "14fa2d398a5f9750687584466e295c95d26b926855a9897f307c56edf7c90f6a"
+      },
+      "patch_pin": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/col/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "1f31d98b8e495c57e2c987a8a4acd373c2eb251d",
+        "bytes": 105027,
+        "sha256": "59cea096b8a7535516b98e91fcab01b6e37d14d0503e528f72277e5e8a51239d"
+      },
+      "actual_exit": 0
+    }
+  ],
+  "independent_read_pins": [
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/five-country-physical-001/source-stage-001/original-stage-inputs.json",
+      "mode": "100644",
+      "git_blob_oid": "e8a3c7ae7384190a9a3c3524da1ef98f62c391c7",
+      "bytes": 8357836,
+      "sha256": "20703286b02761499790a8e219edc570862a47355d123ccb685acc8ae92d4091"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/mex/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "6b38e71249f7a8b59e566db55e8a4abdd5f3fc68",
+      "bytes": 985280,
+      "sha256": "13d7011ad126185f47963a09b81679eeec05d131fbe38bdf965a502969837e80"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/mex/native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "dad846789b82273294b087768ad9a8f71274c82e",
+      "bytes": 377251,
+      "sha256": "f8e9e677ed94faef0cce2eeadae9ba6c83f40a4b1ea469cbdb426768401b855d"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/mex/original-scope-partition.json",
+      "mode": "100644",
+      "git_blob_oid": "fd40d7644b51655d34505bb20956d43a3c6b6019",
+      "bytes": 13317,
+      "sha256": "15999f70b94c431dfe7997aea66f0a457a9f93df896e0f34cec0a5701c3bb54b"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/mex/held-original.json",
+      "mode": "100644",
+      "git_blob_oid": "8bd009b830c3052910d9ff7d5151e8657b1a8ed7",
+      "bytes": 6735,
+      "sha256": "71078f03648a2d6cedbbba78cdea955809c0792dedba2f766e53560f234e23d9"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/mex/preparation.json",
+      "mode": "100644",
+      "git_blob_oid": "b1627b07e8f244bf1b256c8803cd29649ae097f2",
+      "bytes": 613,
+      "sha256": "a1525886f5937a0dded88968618e371e08fa6b0fab2b68955fb3295705ab2cfc"
+    },
+    {
+      "commit": "b6900b2fe487f3971045b63fb51c39dd30e013f3",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-source-evidence-001/mex/native-requested-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "e49cbe03b13636fc14979d4f2cbf4ed1ff3cb597",
+      "bytes": 378505,
+      "sha256": "b104bb2d49b3a9bb6170cfbd6932e507f3688ed2610f51fb1604a4a51f166fe5"
+    },
+    {
+      "commit": "049a96969256c7a954b0d0d8b0b6f3a6a85ced87",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-diagnostics-001/mex/native-diagnostic.json",
+      "mode": "100644",
+      "git_blob_oid": "567c0181d290a9c1eb40bb70671216bf71b7ef83",
+      "bytes": 1334735,
+      "sha256": "a76738415f9c820d90be80f210afae8f6d25a74cad0d17785582d2436fdbe1e3"
+    },
+    {
+      "commit": "b6900b2fe487f3971045b63fb51c39dd30e013f3",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-source-evidence-001/mex/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "ff5b85926dab8633365fddf2165f3b11009c78e5",
+      "bytes": 990197,
+      "sha256": "dadfb6424a86a1e9dc7f562020c84d4dadc0c052663963bf861dd23d3a9dce07"
+    },
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/mex/original-scope-001/block-025.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "a8e69e8cb59e3bdf0295f9ccf39bc923b5a7207a",
+      "bytes": 963,
+      "sha256": "4373aeb241765cd1a8ea2455a97d4a388716b23839342bec2010bc1a6e008183",
+      "decoded_bytes": 7992,
+      "decoded_sha256": "db20a964bf6467e499fcceba6c300d5d8c5844c7007a325d457722385fd412d6"
+    },
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/mex/original-scope-001/block-026.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "af21051cae98598339266ba7ae295c458d6f3fa5",
+      "bytes": 31897,
+      "sha256": "14d8ac2d7438423ed9c88776dac95d1b2ae2a9f17a1d71c96f127720de782592",
+      "decoded_bytes": 258190,
+      "decoded_sha256": "8fc3d93a9da6bd76d666042e038d4caf1ff513766df6df7c5641a5072f18b027"
+    },
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/mex/original-scope-001/block-027.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "23bf7dba67c386e74d3df22767e60b28262ea14b",
+      "bytes": 16451,
+      "sha256": "1af1fc79d10b18b256c945ef7efe87c29ad8005ee24220622483e2df4755fd0a",
+      "decoded_bytes": 131878,
+      "decoded_sha256": "b588124892ccd16ec7ea8d52fa1c3eb1779b9438ba49f9ffd4258c7905069459"
+    },
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/mex/original-scope-001/block-028.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "4ee13b67ec85bce3569cf3ee3c825d2915bd1cf8",
+      "bytes": 24173,
+      "sha256": "bbcf9b1bf09f9c89c1b9db0d423f888bf96ef342862ccca363de07b5bd3ffcd7",
+      "decoded_bytes": 186692,
+      "decoded_sha256": "9f19a34773898fd3f3bf501c970f9607503384ac664d0a3954099b8795e28a4c"
+    },
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/mex/original-scope-001/block-029.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "f0ac7e9cc3c738b255e8616f7d8529cac5cfbf9e",
+      "bytes": 3166,
+      "sha256": "859bf12d8e7260dc3111eec4da891003b296b849b0b962d5c82db579add1cb61",
+      "decoded_bytes": 21204,
+      "decoded_sha256": "a5bdcfdbd0599d9b70d10e7f95e374319102833c29888aaa0091357fefeaa9dd"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/ecu/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "e3a564caffe1ac708051f1b27d1c510fb62b19a5",
+      "bytes": 427066,
+      "sha256": "32d12aba86735c36b0e3de63cdc35e955e40184997d85ccdaf21adfea0f509d4"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/ecu/native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "a3430c2e66f6b92cc712e939a36d7af25f9cf6fe",
+      "bytes": 147267,
+      "sha256": "0592beedc90f2cfe4c3fd6457933c7915ff832a320d12ad222e7ac65f998d1fb"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/ecu/original-scope-partition.json",
+      "mode": "100644",
+      "git_blob_oid": "01015cef41284d02c80ff6b6cec10d7dc36c935e",
+      "bytes": 6107,
+      "sha256": "fcaa89fde13dafa9df60495d10168224cbced5c9dec19c0f5def14288f198f7a"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/ecu/held-original.json",
+      "mode": "100644",
+      "git_blob_oid": "046110e9fcd3ec65daaaca0d71ad96c1182d1058",
+      "bytes": 21441,
+      "sha256": "8e04477375dbba37810841a9fb591e72a6351701ef805dbf28756e1c767345b3"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/ecu/preparation.json",
+      "mode": "100644",
+      "git_blob_oid": "91dab87bdf66f5c38ba5ff296e255a5c1fd12fba",
+      "bytes": 613,
+      "sha256": "d7c5092ab791f782e50e5ad561563f99b2da23405c692cca8855cd71e6df6a35"
+    },
+    {
+      "commit": "b6900b2fe487f3971045b63fb51c39dd30e013f3",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-source-evidence-001/ecu/native-requested-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "cbd2937ba23f623404462dfdef295f2eda632a4c",
+      "bytes": 156117,
+      "sha256": "c02d48133455036e1f774673ec339f3dd6fbf570673ac04c5ef5a0a9424e2cb1"
+    },
+    {
+      "commit": "049a96969256c7a954b0d0d8b0b6f3a6a85ced87",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-diagnostics-001/ecu/native-diagnostic.json",
+      "mode": "100644",
+      "git_blob_oid": "46ddc6a3cd3601a529016e89491eeef78dc3245b",
+      "bytes": 568539,
+      "sha256": "5e7deab63ea3418405ef40772e3b9955483dfaa84e126dfd07b23fcbccc11c25"
+    },
+    {
+      "commit": "b6900b2fe487f3971045b63fb51c39dd30e013f3",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-source-evidence-001/ecu/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "80c79ee70e2ff933c88a5f08694a049858e48375",
+      "bytes": 469689,
+      "sha256": "077450624ac909fa09c3a0be4cb51d1a75d33190e36bb5a21d26be91d8b3e558"
+    },
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/ecu/original-scope-001/block-031.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "7f3fec4cad9b087c36063ae09588724604a88de9",
+      "bytes": 6485,
+      "sha256": "bda7a36face1f4eedcd1711eb4b9c4d5183d351cfd176aa1759406e78b667041",
+      "decoded_bytes": 55378,
+      "decoded_sha256": "54d6bdf5de67cb9a45db3922ddf03e58e274df8cecfa54b59ae48dfb62880e33"
+    },
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/ecu/original-scope-001/block-032.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "f8185d71af86acf72fb203cbb7ca45064d2bcc1e",
+      "bytes": 25613,
+      "sha256": "06b343b7f45adf3de78249b0583c7bee927b5708dc88a1cb6cab3aee3496d0f0",
+      "decoded_bytes": 209920,
+      "decoded_sha256": "f4ff39df6d11602e5fab1f97d6d34132e9373d8c718f8978da0e8d47e94620d6"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/bol/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "6d32b3b7c0bfa9dc4e1b56375da32d1c4371b974",
+      "bytes": 439629,
+      "sha256": "a22ebb764a6089c9e33341b6f676896eb38aa7c25f62d04937d6ca211e46a951"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/bol/native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "cff6d5222122fb6cca7d2eb5d244c600a81ab610",
+      "bytes": 124455,
+      "sha256": "c0e4e9bb6e907992f428057e20272e269aba7ec1a9fe0cb74c344d1916a47c2b"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/bol/original-scope-partition.json",
+      "mode": "100644",
+      "git_blob_oid": "e42b02e93add6465d1a0a929e3120de2eebb5c25",
+      "bytes": 4616,
+      "sha256": "eda67c4961de79367206f239fd875971741c199707ab1a700df631a933faf4af"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/bol/held-original.json",
+      "mode": "100644",
+      "git_blob_oid": "0a3e49335e5849679aa90a6d39c54ec3e18bf59d",
+      "bytes": 31611,
+      "sha256": "57d3e302cd941235f281d8b768a7495058c6045e6d3d380b037b68d0a91f2d80"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/bol/preparation.json",
+      "mode": "100644",
+      "git_blob_oid": "dd904ae42cedab901481dee31bbb6055f30487a9",
+      "bytes": 613,
+      "sha256": "a58e90f8c982f55d28b51f0ea842e9b63b57c41c0d7515b75399fa9eb9efe9a8"
+    },
+    {
+      "commit": "b6900b2fe487f3971045b63fb51c39dd30e013f3",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-source-evidence-001/bol/native-requested-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "562f04ba2898f481e579b3690901b51b0883a5e7",
+      "bytes": 139997,
+      "sha256": "9e52b1d5ba4c9a8c24ed06cb70e343d559ae52b3a442458acadc9fa3cd4075a3"
+    },
+    {
+      "commit": "049a96969256c7a954b0d0d8b0b6f3a6a85ced87",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-diagnostics-001/bol/native-diagnostic.json",
+      "mode": "100644",
+      "git_blob_oid": "03ba25d2a804311d9658bc43f6b9419f81e79757",
+      "bytes": 505323,
+      "sha256": "aad8aa39fe42bf4f92ce9f5c264be157afa3d865d9e0ed4a97572b1288dccc5b"
+    },
+    {
+      "commit": "b6900b2fe487f3971045b63fb51c39dd30e013f3",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-source-evidence-001/bol/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "88ce7654c9c611b97621d5fef35510f566cf8aac",
+      "bytes": 489069,
+      "sha256": "aba320bf5712fd4f05db222a95bec87697fbb7dec42b77291906a7ddfd730614"
+    },
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/bol/original-scope-001/block-033.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "600b12e8a59aa145101c8702a0f87ea878630b7f",
+      "bytes": 3592,
+      "sha256": "100ad534145ce4c8069177ea8bf896c9bc8c789fa29ff248aa5bcea7bad9ace8",
+      "decoded_bytes": 27110,
+      "decoded_sha256": "046c678995e162f07998b1f526926c07c700a693313336a1266136639c6462e0"
+    },
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/bol/original-scope-001/block-034.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "67f26f670674966655fb72bb456df00cceceda66",
+      "bytes": 7639,
+      "sha256": "48493ff5fd086c2187464db3bd4b90608c9d4b8a83939dd0e09d640b2bb2f126",
+      "decoded_bytes": 63697,
+      "decoded_sha256": "c1c7e8ec54a908e0a9ac3b501afab358fcf5c429d88af3027781a7fe65d1283f"
+    },
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/bol/original-scope-001/block-035.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "c05095db5c55220eb285a9f585b756883b398be4",
+      "bytes": 14321,
+      "sha256": "ed71995d5db1a37c5ececefc3f8f6684aeb25c47b10c8a290c35b2e1403d7cbf",
+      "decoded_bytes": 121434,
+      "decoded_sha256": "783f3a78952f6d98179600431f2a36c3a4c16e5725ad2aa4c3a634e27f7b6b84"
+    },
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/bol/original-scope-001/block-036.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "a11990231930a4fbaaac7f569d28b092c382f340",
+      "bytes": 709,
+      "sha256": "9c1ce27951a74a4fb95040db2386bcaacef821866edb6b3f05b7c737c91baaa5",
+      "decoded_bytes": 5318,
+      "decoded_sha256": "626edb5445caf1de0f52e9e0bb95d6f760d6cb18d4eda1da7eb023e97e2127c3"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/per/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "a39d3a74d2ab7e15348a9d70f5f2b979ab6ff1ca",
+      "bytes": 562209,
+      "sha256": "cfc557ecb253215add565159fc74754b49bd2b6d9e268156383eb1a98e957a7b"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/per/native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "d22e667c03d96d69adfaf958e452f629769c0230",
+      "bytes": 137297,
+      "sha256": "f0b7af632e4b27d025e8df66edba6acbe6ef03650cf8b09029a482544ef2a1f7"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/per/original-scope-partition.json",
+      "mode": "100644",
+      "git_blob_oid": "0a9b4a90ed2ace77a17311650aaee8590378e0e2",
+      "bytes": 5930,
+      "sha256": "1b7989e358094a71b40ccc7188f317004d8cebdb7aca3999910bf11378a9be05"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/per/held-original.json",
+      "mode": "100644",
+      "git_blob_oid": "88a27bbf64978cd8dca3006202c4ce621201ab62",
+      "bytes": 44303,
+      "sha256": "407ee653bb640d87add97572899d61ea17e159632e533a2b212c9341b3644746"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/per/preparation.json",
+      "mode": "100644",
+      "git_blob_oid": "bebb0d6d51bf47f6f57d8e7a3d3121cbb65412a5",
+      "bytes": 613,
+      "sha256": "1021294d31b6a5791264fe4675a64b73d936e9841a8e8bc6ec55726fd0dda1da"
+    },
+    {
+      "commit": "b6900b2fe487f3971045b63fb51c39dd30e013f3",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-source-evidence-001/per/native-requested-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "d3c8ed57a0f22a64858fe2fd84afe5279a1f0406",
+      "bytes": 157603,
+      "sha256": "8b977b34753cfd4316caf51953aaab71047682c2652e308e2117909f614ddc8d"
+    },
+    {
+      "commit": "049a96969256c7a954b0d0d8b0b6f3a6a85ced87",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-diagnostics-001/per/native-diagnostic.json",
+      "mode": "100644",
+      "git_blob_oid": "ef800a76ecb639f40c618d4cd51cb609b6228e04",
+      "bytes": 566896,
+      "sha256": "a1a8e3527ddbf1be66e5f93fe6044f0bc65628ee57276caaf04732372e1783cd"
+    },
+    {
+      "commit": "b6900b2fe487f3971045b63fb51c39dd30e013f3",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-source-evidence-001/per/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "acc33dcc360384d6969b945404e36558d6e58952",
+      "bytes": 596265,
+      "sha256": "89ef0cfcb5349b91e3cc1978e9490e20b5d92324d9e34666016a92b5ac4f14be"
+    },
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/per/original-scope-001/block-032.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "52ca153b3745611353a0a1d53df0c255840a571c",
+      "bytes": 5877,
+      "sha256": "b7b69347b58ffaf96eea8146ae10b6c18fa9d08db51f3e41308a80abc988796f",
+      "decoded_bytes": 45952,
+      "decoded_sha256": "9db715b44f4f90ee58cf7c5a944925bcac6cd5f582d33c61ccd3bb5c9659faa4"
+    },
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/per/original-scope-001/block-033.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "a070f528e5add31e15d3b225c1df66689591c90c",
+      "bytes": 7482,
+      "sha256": "fb0d45557494bcb3e40747cc5033b8b9ef29161768d4d5161cc6fc494c0062ed",
+      "decoded_bytes": 59084,
+      "decoded_sha256": "909f73cbd679b6aee400051b7e12bd44e4ef65618af7565fe9b4397287630cba"
+    },
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/per/original-scope-001/block-034.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "79db2b89c5373d69078e2ac1face1d15f2606dd4",
+      "bytes": 13869,
+      "sha256": "5a7e179c407b0347a6bed8fe1378bd98f3d6da03e2a7504652c8e44c6a0a5c1b",
+      "decoded_bytes": 118528,
+      "decoded_sha256": "1bf1940133a18095b7980f4c0d770a38556554507cfa9216eb550996105c637c"
+    },
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/per/original-scope-001/block-035.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "60be1338ab6777dcd9ad4ac4799da8dc2da4d981",
+      "bytes": 1489,
+      "sha256": "8437749b26455c0bf1d57ff536df9567921a2fb740fd40ce7881418bf69f8990",
+      "decoded_bytes": 11132,
+      "decoded_sha256": "d3ea3c3878f6235093bd762c1b0f93b53cd2b2711bef3524d51e0e1d9a90fdf6"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/col/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "caae900c73f6ded37de5000dd41fbfce089360e0",
+      "bytes": 362007,
+      "sha256": "14fa2d398a5f9750687584466e295c95d26b926855a9897f307c56edf7c90f6a"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/col/native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "1f31d98b8e495c57e2c987a8a4acd373c2eb251d",
+      "bytes": 105027,
+      "sha256": "59cea096b8a7535516b98e91fcab01b6e37d14d0503e528f72277e5e8a51239d"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/col/original-scope-partition.json",
+      "mode": "100644",
+      "git_blob_oid": "b0461e43e1aa88594bbb7b15ff45607aabc95fbb",
+      "bytes": 7743,
+      "sha256": "51f3ddd5681d547b6b840892047ca5bdfa91ed8022a5c8914c6c94cce357aa2d"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/col/held-original.json",
+      "mode": "100644",
+      "git_blob_oid": "176175be9f2778037ade78a092d3e87f2388a0bb",
+      "bytes": 31311,
+      "sha256": "c7d5c23ecb00c6a121da73b89e77eef8b10eb8d70f96a6b019623f0183d922fb"
+    },
+    {
+      "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/col/preparation.json",
+      "mode": "100644",
+      "git_blob_oid": "304b55944f8f8c76ded3a66647befd61e487b159",
+      "bytes": 613,
+      "sha256": "c3d06e97774a4d1838d7aac0a1e40e2b17501124ea05535ab7932097ad5d0222"
+    },
+    {
+      "commit": "b6900b2fe487f3971045b63fb51c39dd30e013f3",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-source-evidence-001/col/native-requested-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "77fbe993046e4d681c437f45ba4e8005443a94b2",
+      "bytes": 120225,
+      "sha256": "08c0142584829c6f757a925f82e91a6534f496f9955855b118b9e3b842760665"
+    },
+    {
+      "commit": "049a96969256c7a954b0d0d8b0b6f3a6a85ced87",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-diagnostics-001/col/native-diagnostic.json",
+      "mode": "100644",
+      "git_blob_oid": "90a6ac49967aacb1941484e4e9ff33368be3037e",
+      "bytes": 427963,
+      "sha256": "52605c44ae1632e5b681e0a09e18ee187bcbd04e177a2ba10eda6d5a96396721"
+    },
+    {
+      "commit": "b6900b2fe487f3971045b63fb51c39dd30e013f3",
+      "path": "coordination/engineering/americas-original-repair-20261017/country-source-evidence-001/col/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "d2ce3025dd113e32619f3e6e684e467b98772c28",
+      "bytes": 444697,
+      "sha256": "f4c061ce6fac5acb3ed2209daff5070fe811c7c9f0bcf330d83f798e04bd1dae"
+    },
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/col/original-scope-001/block-029.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "d5f90119ab2202e0e1df8f7c821cc1fd23209545",
+      "bytes": 3926,
+      "sha256": "90da08e278518d68ce1b5eafd11e4c27999c1b0751a59151c932e5580280f2f7",
+      "decoded_bytes": 29872,
+      "decoded_sha256": "dbfccdbb6b6a481c6f2643c23ca2390ddabe9fee0a0f8aa58ea9cbfc3a270b40"
+    },
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/col/original-scope-001/block-030.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "a5826387dbe23db92be3e52b3e10edd452efc3f9",
+      "bytes": 8396,
+      "sha256": "939dcd580cc2a86a048b8ac35952e5d2fee7d229e958b6b51c5ed761e6bb24f5",
+      "decoded_bytes": 66952,
+      "decoded_sha256": "d27ff5cf98b4ff36b729888fcc1c90575e639a818bc4bbccf14d2414b94fa174"
+    },
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/col/original-scope-001/block-031.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "cc4b821ddf09b2aaad305f312fcab6462d25bc85",
+      "bytes": 8718,
+      "sha256": "f2b634f8eb204fceb8af3a0cebb5059b041b50b6022ae822676c09f50faac959",
+      "decoded_bytes": 71844,
+      "decoded_sha256": "97b73368d3f83353f2ac1ebe372a77c04960d74cbe744d5899aa2b08b3070698"
+    },
+    {
+      "commit": "29e570dee104b096535f2388e240c119c8517012",
+      "path": "coordination/engineering/americas-original-repair-20261017/col/original-scope-001/block-032.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "948b3fd7c958ae6455b5070735e77e6545b3721e",
+      "bytes": 769,
+      "sha256": "758b2a6a7d6599c85b8e7295015ae009a878cecdc2bd8ca8cc53d3e62d649287",
+      "decoded_bytes": 6484,
+      "decoded_sha256": "8b711dae6fda9cfa58b9a384e9ac0fecf1a831972e57a5c26458c66c8940232b"
+    }
+  ]
+}

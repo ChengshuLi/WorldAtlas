@@ -1,0 +1,270 @@
+{
+  "kind": "mudzi-single-key-source-geometry-diagnostic-v2",
+  "status": "geometry-only diagnostic; original 121-key held dispositions unchanged; no accepted unresolved credit, contact attribution, clearance, source qualification, sovereignty, or legal boundary conclusion",
+  "accepted_main_target_context": "1a137b1b2e8d5d655412c242a5950f3d39e95bbb",
+  "held_original_input": {
+    "commit": "b7dd53ee88dfacf0472401f331998ca0b2e881b4",
+    "path": "coordination/engineering/zimbabwe-original-repair-20261018/supported-inputs-001/held-original.json",
+    "git_blob_oid": "5844d98d4cd87746b261bdfdf6b99ff5be1a2c36",
+    "bytes": 7781,
+    "sha256": "b2666f66632b8376e7da124bc22a6046cab523340a21f9e61989bfbd2b95934d",
+    "held_key_count": 121,
+    "key_owner_class_exact_match": {
+      "x": 155110,
+      "y": 143832,
+      "owner_pixelIndex": 49532,
+      "class": "territorial_exclusion_cells"
+    }
+  },
+  "source_witness_input": {
+    "commit": "cb4218ef30a37ea98d163272353d6b0aa8f1aab2",
+    "path": "coordination/engineering/zimbabwe-original-repair-20261018/source-evidence-001/source-evidence.json",
+    "git_blob_oid": "315842f9ef2fc95542383fb275f954e6eb73dbd9",
+    "bytes": 189362,
+    "sha256": "ffca69088ba28dbaa893198358e3a4332232ab3026defcce8339275b01daa0b2",
+    "mudzi_target_id": "gb:ZWE:ADM2:62879985B77595643638308",
+    "target_contact_list_equals_feature_bindings": true,
+    "exact_pinned_target_contact_tuples": [
+      {
+        "source_id": "gb:MOZ:ADM1:27363107B35306436132920",
+        "feature_ordinal": 5,
+        "negative_ordinal": 0,
+        "geometry_sha256": "a544430ab0270181f3111dbf53d7d5afc7eb90ecea53854d5d3216238d3715dd"
+      },
+      {
+        "source_id": "gb:MOZ:ADM1:27363107B76405592745796",
+        "feature_ordinal": 8,
+        "negative_ordinal": 1,
+        "geometry_sha256": "29b235fa77e3b8aab38b5799a247c88e66b156d654382ce993f1974ebea2ba24"
+      },
+      {
+        "source_id": "gb:MOZ:ADM2:85939544B78941967379031",
+        "feature_ordinal": 5,
+        "negative_ordinal": 2,
+        "geometry_sha256": "8a547e39bb13382ebbdcefdf467a0beffd46834f2950d71d8cc84603db84ffad"
+      },
+      {
+        "source_id": "gb:MOZ:ADM2:85939544B96154885816761",
+        "feature_ordinal": 11,
+        "negative_ordinal": 3,
+        "geometry_sha256": "2fb22c5b409b5f2d0501e6616f115ad544ad0e5289decefe56b67a739ad1b9a2"
+      }
+    ]
+  },
+  "source_payload_pins": {
+    "gb:MOZ:ADM1:27363107B35306436132920": {
+      "source_family": "gb:MOZ:ADM1",
+      "commit": "21984e9ec4ec7370bc807e2da23cea2228747698",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MOZ-ADM1-000.bin.gz",
+      "git_blob_oid": "e2c05beef29d5cee0b7c14f6a3e202a230ec17dd",
+      "compressed_bytes": 84089,
+      "compressed_sha256": "2c357ab05635c8ff5733a3f987cee4892d1be5a21b146f20f3d0fff666da1492",
+      "decoded_bytes": 265588,
+      "decoded_sha256": "453908a723bc988d958aa5c22a053391b30d0edbcb89f087650071940a528fd7"
+    },
+    "gb:MOZ:ADM1:27363107B76405592745796": {
+      "source_family": "gb:MOZ:ADM1",
+      "commit": "21984e9ec4ec7370bc807e2da23cea2228747698",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MOZ-ADM1-000.bin.gz",
+      "git_blob_oid": "e2c05beef29d5cee0b7c14f6a3e202a230ec17dd",
+      "compressed_bytes": 84089,
+      "compressed_sha256": "2c357ab05635c8ff5733a3f987cee4892d1be5a21b146f20f3d0fff666da1492",
+      "decoded_bytes": 265588,
+      "decoded_sha256": "453908a723bc988d958aa5c22a053391b30d0edbcb89f087650071940a528fd7"
+    },
+    "gb:MOZ:ADM2:85939544B78941967379031": {
+      "source_family": "gb:MOZ:ADM2",
+      "commit": "21984e9ec4ec7370bc807e2da23cea2228747698",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MOZ-ADM2-000.bin.gz",
+      "git_blob_oid": "3b4d9a7d0f5001dc0de5ba14a2f7f4acfb14aa7c",
+      "compressed_bytes": 827288,
+      "compressed_sha256": "496411fecd431fc3461e3b62d766de3998195a15d57d47b35e183927e52f5f79",
+      "decoded_bytes": 2565929,
+      "decoded_sha256": "c50d41139d653bb03889cdf383d72a3cf851b5b576f406dfb0bc3a1b70de2bb9"
+    },
+    "gb:MOZ:ADM2:85939544B96154885816761": {
+      "source_family": "gb:MOZ:ADM2",
+      "commit": "21984e9ec4ec7370bc807e2da23cea2228747698",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MOZ-ADM2-000.bin.gz",
+      "git_blob_oid": "3b4d9a7d0f5001dc0de5ba14a2f7f4acfb14aa7c",
+      "compressed_bytes": 827288,
+      "compressed_sha256": "496411fecd431fc3461e3b62d766de3998195a15d57d47b35e183927e52f5f79",
+      "decoded_bytes": 2565929,
+      "decoded_sha256": "c50d41139d653bb03889cdf383d72a3cf851b5b576f406dfb0bc3a1b70de2bb9"
+    }
+  },
+  "grid_transform_source": {
+    "path": "src/native-grid.js",
+    "local_checkout_head": "e760d68ff48a679b08f6fbf0581d1035de35105d",
+    "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663",
+    "declared_method": "native-linear-evenodd-first-owner-v1",
+    "read_and_hash_verified": true,
+    "accepted_main_code_identity_verified": false,
+    "limitation": "The available local checkout is stale e760d68; its source file is content-pinned for reproducibility only and is not asserted to be the implementation at accepted main 1a137. No remote fetch or helper call was made."
+  },
+  "grid_coordinate_contract": {
+    "method": "native-linear-evenodd-first-owner-v1",
+    "size": 262166,
+    "coordinateBits": 19,
+    "latitude_table": {
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "decoded_bytes": 2097328,
+      "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+      "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53"
+    },
+    "queried_row_latitude_degrees": -17.24106205632461,
+    "cell_center_longitude_degrees": 32.99398091285674,
+    "formula": "lon=360*(x+0.5)/size-180; lat is exact pinned native_latitudes[y] f64le. Column transform is size*(lon+180)/360-0.5; exact crossings use ceil and paired intervals.",
+    "scope": "one Mudzi key; no ownership-grid lookup or base/additive/effective owner decomposition"
+  },
+  "candidate_geometry_results": [
+    {
+      "source_id": "gb:MOZ:ADM1:27363107B35306436132920",
+      "shape_id": "27363107B35306436132920",
+      "shape_name": "Manica",
+      "source_feature_ordinal_zero_based": 5,
+      "source_array_index": 5,
+      "negative_ordinal": 0,
+      "witness_geometry_sha256": "a544430ab0270181f3111dbf53d7d5afc7eb90ecea53854d5d3216238d3715dd",
+      "actual_pinned_geometry_sha256": "a544430ab0270181f3111dbf53d7d5afc7eb90ecea53854d5d3216238d3715dd",
+      "geometry_hash_matches_witness": true,
+      "geometry_type": "Polygon",
+      "polygon_count": 1,
+      "geometry_only_point_test": "outside",
+      "inside_any_polygon": false,
+      "boundary_ties": [],
+      "polygon_scan_results": [
+        {
+          "thresholds": [
+            155171,
+            156005
+          ],
+          "inside_intervals_half_open": [
+            [
+              155171,
+              156005
+            ]
+          ],
+          "inside": false,
+          "boundary_ties": []
+        }
+      ],
+      "interpretation": "single held Mudzi grid key only; no source/legal qualification or cell disposition"
+    },
+    {
+      "source_id": "gb:MOZ:ADM1:27363107B76405592745796",
+      "shape_id": "27363107B76405592745796",
+      "shape_name": "Tete",
+      "source_feature_ordinal_zero_based": 8,
+      "source_array_index": 8,
+      "negative_ordinal": 1,
+      "witness_geometry_sha256": "29b235fa77e3b8aab38b5799a247c88e66b156d654382ce993f1974ebea2ba24",
+      "actual_pinned_geometry_sha256": "78065b8510eb459a8ffd4c2e3941973085e6d3c4b75918c7e28aa212e643fa49",
+      "geometry_hash_matches_witness": false,
+      "geometry_type": "Polygon",
+      "polygon_count": 1,
+      "geometry_only_point_test": "inside",
+      "inside_any_polygon": true,
+      "boundary_ties": [],
+      "polygon_scan_results": [
+        {
+          "thresholds": [
+            155110,
+            155171,
+            156540,
+            156787
+          ],
+          "inside_intervals_half_open": [
+            [
+              155110,
+              155171
+            ],
+            [
+              156540,
+              156787
+            ]
+          ],
+          "inside": true,
+          "boundary_ties": []
+        }
+      ],
+      "interpretation": "single held Mudzi grid key only; no source/legal qualification or cell disposition"
+    },
+    {
+      "source_id": "gb:MOZ:ADM2:85939544B78941967379031",
+      "shape_id": "85939544B78941967379031",
+      "shape_name": "Barue",
+      "source_feature_ordinal_zero_based": 5,
+      "source_array_index": 5,
+      "negative_ordinal": 2,
+      "witness_geometry_sha256": "8a547e39bb13382ebbdcefdf467a0beffd46834f2950d71d8cc84603db84ffad",
+      "actual_pinned_geometry_sha256": "8a547e39bb13382ebbdcefdf467a0beffd46834f2950d71d8cc84603db84ffad",
+      "geometry_hash_matches_witness": true,
+      "geometry_type": "Polygon",
+      "polygon_count": 1,
+      "geometry_only_point_test": "outside",
+      "inside_any_polygon": false,
+      "boundary_ties": [],
+      "polygon_scan_results": [
+        {
+          "thresholds": [
+            155178,
+            155181
+          ],
+          "inside_intervals_half_open": [
+            [
+              155178,
+              155181
+            ]
+          ],
+          "inside": false,
+          "boundary_ties": []
+        }
+      ],
+      "interpretation": "single held Mudzi grid key only; no source/legal qualification or cell disposition"
+    },
+    {
+      "source_id": "gb:MOZ:ADM2:85939544B96154885816761",
+      "shape_id": "85939544B96154885816761",
+      "shape_name": "Changara",
+      "source_feature_ordinal_zero_based": 11,
+      "source_array_index": 11,
+      "negative_ordinal": 3,
+      "witness_geometry_sha256": "2fb22c5b409b5f2d0501e6616f115ad544ad0e5289decefe56b67a739ad1b9a2",
+      "actual_pinned_geometry_sha256": "2fb22c5b409b5f2d0501e6616f115ad544ad0e5289decefe56b67a739ad1b9a2",
+      "geometry_hash_matches_witness": true,
+      "geometry_type": "Polygon",
+      "polygon_count": 1,
+      "geometry_only_point_test": "outside",
+      "inside_any_polygon": false,
+      "boundary_ties": [],
+      "polygon_scan_results": [
+        {
+          "thresholds": [
+            155111,
+            155178
+          ],
+          "inside_intervals_half_open": [
+            [
+              155111,
+              155178
+            ]
+          ],
+          "inside": false,
+          "boundary_ties": []
+        }
+      ],
+      "interpretation": "single held Mudzi grid key only; no source/legal qualification or cell disposition"
+    }
+  ],
+  "conclusion": "Three contact geometries whose hashes match the pinned Mudzi witness are outside at this exact key. The only inside result is the pinned Tete feature whose geometry hash differs from the witness fingerprint. Therefore the witness does not support verified point-contact attribution for this key; preserve the hold.",
+  "preservation": {
+    "held_keys_changed": 0,
+    "accepted_credit_added": 0,
+    "clearance_claimed": false,
+    "disposition": "preserve held"
+  }
+}

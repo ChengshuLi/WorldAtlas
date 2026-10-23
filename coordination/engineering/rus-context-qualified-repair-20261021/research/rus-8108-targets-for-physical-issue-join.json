@@ -1,0 +1,1182 @@
+{
+  "version": 1,
+  "purpose": "Exact precomputed target list and stock physical/source evidence join keys for the proposed 8,108-cell contextual RUS subset. This is not a physical re-evaluation or qualification.",
+  "scope": {
+    "proposed_keys": 8108,
+    "targets": 32,
+    "land": 7971,
+    "inland_water": 137
+  },
+  "join_key": "Match target records in the authenticated whole-target physical receipt by both pixelIndex and target_id/source ID; then report its target issue records without suppressing or reclassifying them. Check the stage consumed geometry and whole-target-support receipt hashes before using the rows.",
+  "physical_receipt_expected": {
+    "bytes": 54074211,
+    "commit": "d41ba96f505fe507773cb1a23aab558941ee5a9c",
+    "git_blob_oid": "68cdef5a025eb092990571c2181c736ae76e4eec",
+    "mode": "100644",
+    "path": "coordination/engineering/russia-repair-delivery-20261017/physical-001/whole-target-support.json",
+    "sha256": "38c8d148dbc33bab7fc94e2c7931b9a2ca757ff04d90191f08fa2506a6fc1a8c"
+  },
+  "physical_input_expected": {
+    "bytes": 8429060,
+    "commit": "d41ba96f505fe507773cb1a23aab558941ee5a9c",
+    "git_blob_oid": "f3f1543e7cefbe7999ad012c3814b33c17aecb06",
+    "mode": "100644",
+    "path": "coordination/engineering/russia-repair-delivery-20261017/source-stage/original-stage-inputs.json",
+    "sha256": "bd2437c224dcab11a9a14c91759a79e02e7aee2ddad22039d762c90d932c27c8"
+  },
+  "existing_physical_summary": {
+    "targets": 334,
+    "whole_targets_with_issues": 140,
+    "whole_targets_without_issues": 194,
+    "issue_records": 236,
+    "reasons": {
+      "contradictory_land_water_support": 124,
+      "missing_reconstruction": 24,
+      "extra_reconstruction": 38,
+      "L2-outside-L1": 43,
+      "L3-outside-L2": 7
+    },
+    "query_offsets": {
+      "0": 31072,
+      "-360": 5
+    },
+    "complete_original_physical_output_sha256": "38c8d148dbc33bab7fc94e2c7931b9a2ca757ff04d90191f08fa2506a6fc1a8c"
+  },
+  "targets": [
+    {
+      "pixelIndex": 37052,
+      "target_id": "gb:RUS:ADM2:50074027B11056050899621",
+      "owner_name": "Kosh-Agachsky Rayon",
+      "proposed_key_count": 64,
+      "land_keys": 64,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B50492231896073",
+          "name": "Xinjiang Uyghur Autonomous Region",
+          "complete_family_feature_ordinal_1based": 29,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 64
+        }
+      ]
+    },
+    {
+      "pixelIndex": 37101,
+      "target_id": "gb:RUS:ADM2:50074027B13114681801765",
+      "owner_name": "Skovorodinsky District",
+      "proposed_key_count": 520,
+      "land_keys": 520,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            1
+          ],
+          "contact_keys": 520
+        }
+      ]
+    },
+    {
+      "pixelIndex": 37111,
+      "target_id": "gb:RUS:ADM2:50074027B13558455717271",
+      "owner_name": "Blagoveshchensky District",
+      "proposed_key_count": 263,
+      "land_keys": 263,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 263
+        }
+      ]
+    },
+    {
+      "pixelIndex": 37167,
+      "target_id": "gb:RUS:ADM2:50074027B15761543307374",
+      "owner_name": "Khasansky District",
+      "proposed_key_count": 444,
+      "land_keys": 444,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B3982601277390",
+          "name": "Jilin Province",
+          "complete_family_feature_ordinal_1based": 28,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 437
+        },
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            1
+          ],
+          "contact_keys": 7
+        }
+      ]
+    },
+    {
+      "pixelIndex": 37235,
+      "target_id": "gb:RUS:ADM2:50074027B18064199701976",
+      "owner_name": "Birobidzhansky District",
+      "proposed_key_count": 49,
+      "land_keys": 0,
+      "inland_water_keys": 49,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 49
+        }
+      ]
+    },
+    {
+      "pixelIndex": 37271,
+      "target_id": "gb:RUS:ADM2:50074027B19185058252844",
+      "owner_name": "imeni Lazo Rayon",
+      "proposed_key_count": 134,
+      "land_keys": 134,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 134
+        }
+      ]
+    },
+    {
+      "pixelIndex": 37278,
+      "target_id": "gb:RUS:ADM2:50074027B1949274339631",
+      "owner_name": "Zabaykalsky District",
+      "proposed_key_count": 14,
+      "land_keys": 14,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B95381459098578",
+          "name": "Inner Mongolia Autonomous Region",
+          "complete_family_feature_ordinal_1based": 30,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 14
+        }
+      ]
+    },
+    {
+      "pixelIndex": 37345,
+      "target_id": "gb:RUS:ADM2:50074027B22004389566857",
+      "owner_name": "Khankaysky District",
+      "proposed_key_count": 214,
+      "land_keys": 214,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 214
+        }
+      ]
+    },
+    {
+      "pixelIndex": 37355,
+      "target_id": "gb:RUS:ADM2:50074027B22497972741045",
+      "owner_name": "Лесозаводский городской ок",
+      "proposed_key_count": 839,
+      "land_keys": 839,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 839
+        }
+      ]
+    },
+    {
+      "pixelIndex": 37624,
+      "target_id": "gb:RUS:ADM2:50074027B32863300227960",
+      "owner_name": "Tambovsky District",
+      "proposed_key_count": 52,
+      "land_keys": 52,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 52
+        }
+      ]
+    },
+    {
+      "pixelIndex": 37632,
+      "target_id": "gb:RUS:ADM2:50074027B33126296618922",
+      "owner_name": "Pozharsky District",
+      "proposed_key_count": 272,
+      "land_keys": 272,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 272
+        }
+      ]
+    },
+    {
+      "pixelIndex": 37646,
+      "target_id": "gb:RUS:ADM2:50074027B33926607160791",
+      "owner_name": "Уссурийский городской окру",
+      "proposed_key_count": 527,
+      "land_keys": 527,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            1
+          ],
+          "contact_keys": 527
+        }
+      ]
+    },
+    {
+      "pixelIndex": 37676,
+      "target_id": "gb:RUS:ADM2:50074027B34733261690727",
+      "owner_name": "Пограничный район",
+      "proposed_key_count": 289,
+      "land_keys": 289,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            1
+          ],
+          "contact_keys": 289
+        }
+      ]
+    },
+    {
+      "pixelIndex": 37716,
+      "target_id": "gb:RUS:ADM2:50074027B3666508019566",
+      "owner_name": "Obluchensky District",
+      "proposed_key_count": 75,
+      "land_keys": 75,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 75
+        }
+      ]
+    },
+    {
+      "pixelIndex": 37760,
+      "target_id": "gb:RUS:ADM2:50074027B38279427309518",
+      "owner_name": "Vyazemsky Rayon",
+      "proposed_key_count": 234,
+      "land_keys": 234,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 234
+        }
+      ]
+    },
+    {
+      "pixelIndex": 37780,
+      "target_id": "gb:RUS:ADM2:50074027B38981942782180",
+      "owner_name": "Gazimuro-Zavodsky District",
+      "proposed_key_count": 77,
+      "land_keys": 77,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B95381459098578",
+          "name": "Inner Mongolia Autonomous Region",
+          "complete_family_feature_ordinal_1based": 30,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 77
+        }
+      ]
+    },
+    {
+      "pixelIndex": 37878,
+      "target_id": "gb:RUS:ADM2:50074027B42733914964900",
+      "owner_name": "Oktyabrsky District",
+      "proposed_key_count": 147,
+      "land_keys": 80,
+      "inland_water_keys": 67,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 147
+        }
+      ]
+    },
+    {
+      "pixelIndex": 37963,
+      "target_id": "gb:RUS:ADM2:50074027B46082532996443",
+      "owner_name": "Arkharinsky District",
+      "proposed_key_count": 248,
+      "land_keys": 248,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 248
+        }
+      ]
+    },
+    {
+      "pixelIndex": 38006,
+      "target_id": "gb:RUS:ADM2:50074027B48263627343832",
+      "owner_name": "Кировский район",
+      "proposed_key_count": 122,
+      "land_keys": 122,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 122
+        }
+      ]
+    },
+    {
+      "pixelIndex": 38037,
+      "target_id": "gb:RUS:ADM2:50074027B49850892466546",
+      "owner_name": "Konstantinovsky District",
+      "proposed_key_count": 91,
+      "land_keys": 91,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 91
+        }
+      ]
+    },
+    {
+      "pixelIndex": 38104,
+      "target_id": "gb:RUS:ADM2:50074027B52464361757597",
+      "owner_name": "Spassky District",
+      "proposed_key_count": 62,
+      "land_keys": 62,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 62
+        }
+      ]
+    },
+    {
+      "pixelIndex": 38109,
+      "target_id": "gb:RUS:ADM2:50074027B52585131638206",
+      "owner_name": "Magdagachinsky District",
+      "proposed_key_count": 1007,
+      "land_keys": 1007,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            1
+          ],
+          "contact_keys": 1007
+        }
+      ]
+    },
+    {
+      "pixelIndex": 38195,
+      "target_id": "gb:RUS:ADM2:50074027B55786266429174",
+      "owner_name": "Mikhaylovsky District",
+      "proposed_key_count": 137,
+      "land_keys": 137,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 137
+        }
+      ]
+    },
+    {
+      "pixelIndex": 38256,
+      "target_id": "gb:RUS:ADM2:50074027B57903229029345",
+      "owner_name": "Leninsky District",
+      "proposed_key_count": 21,
+      "land_keys": 0,
+      "inland_water_keys": 21,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 21
+        }
+      ]
+    },
+    {
+      "pixelIndex": 38266,
+      "target_id": "gb:RUS:ADM2:50074027B58237762818486",
+      "owner_name": "Svobodnensky District",
+      "proposed_key_count": 56,
+      "land_keys": 56,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 56
+        }
+      ]
+    },
+    {
+      "pixelIndex": 38426,
+      "target_id": "gb:RUS:ADM2:50074027B6450887110855",
+      "owner_name": "Mogochinsky District",
+      "proposed_key_count": 482,
+      "land_keys": 482,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            1
+          ],
+          "contact_keys": 171
+        },
+        {
+          "source_id": "gb:CHN:ADM1:43563684B95381459098578",
+          "name": "Inner Mongolia Autonomous Region",
+          "complete_family_feature_ordinal_1based": 30,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 311
+        }
+      ]
+    },
+    {
+      "pixelIndex": 38550,
+      "target_id": "gb:RUS:ADM2:50074027B69125687542481",
+      "owner_name": "Bikinsky Rayon",
+      "proposed_key_count": 186,
+      "land_keys": 186,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 186
+        }
+      ]
+    },
+    {
+      "pixelIndex": 38590,
+      "target_id": "gb:RUS:ADM2:50074027B71338417410099",
+      "owner_name": "Oktyabrsky District",
+      "proposed_key_count": 253,
+      "land_keys": 253,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            1
+          ],
+          "contact_keys": 253
+        }
+      ]
+    },
+    {
+      "pixelIndex": 38730,
+      "target_id": "gb:RUS:ADM2:50074027B76781633158797",
+      "owner_name": "Dalnerechensky District",
+      "proposed_key_count": 482,
+      "land_keys": 482,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 482
+        }
+      ]
+    },
+    {
+      "pixelIndex": 38796,
+      "target_id": "gb:RUS:ADM2:50074027B79971887964789",
+      "owner_name": "Krasnokamensky District",
+      "proposed_key_count": 328,
+      "land_keys": 328,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B95381459098578",
+          "name": "Inner Mongolia Autonomous Region",
+          "complete_family_feature_ordinal_1based": 30,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 328
+        }
+      ]
+    },
+    {
+      "pixelIndex": 39030,
+      "target_id": "gb:RUS:ADM2:50074027B88724749460683",
+      "owner_name": "Shimanovsky District",
+      "proposed_key_count": 367,
+      "land_keys": 367,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B55920014778896",
+          "name": "Heilongjiang Province",
+          "complete_family_feature_ordinal_1based": 31,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 367
+        }
+      ]
+    },
+    {
+      "pixelIndex": 39071,
+      "target_id": "gb:RUS:ADM2:50074027B90632265551754",
+      "owner_name": "Priargunsky District",
+      "proposed_key_count": 52,
+      "land_keys": 52,
+      "inland_water_keys": 0,
+      "chn_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B95381459098578",
+          "name": "Inner Mongolia Autonomous Region",
+          "complete_family_feature_ordinal_1based": 30,
+          "target_negative_ordinals_0based": [
+            0
+          ],
+          "contact_keys": 52
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "The 236 adverse physical issue records across 140 targets are aggregate context only until the target-level receipt is joined.",
+    "No source, physical, observer, or native qualification work was rerun. Preserve all physical issue records, including those on the proposed target set.",
+    "The exact physical stage and whole-target receipt have now been authenticated and joined to all 32 proposed target IDs. The join is target-level only; no issue-geometry-to-native-key spatial calculation was performed."
+  ],
+  "actual_physical_issue_join": {
+    "method": "Read-only exact Git blobs were streamed to JSON parsers from the already acquired owned store; no full-file copy, producer, geometry operation, owner observer or diagnostic was run. Physical result target IDs were joined to the exact original source-stage target IDs, then to the 32 exact target IDs in the retained key tuples; pixelIndex and owner_id were checked against each exact queue target record.",
+    "physical_result_pin": {
+      "commit": "d41ba96f505fe507773cb1a23aab558941ee5a9c",
+      "path": "coordination/engineering/russia-repair-delivery-20261017/physical-001/whole-target-support.json",
+      "git_blob_oid": "68cdef5a025eb092990571c2181c736ae76e4eec",
+      "bytes": 54074211,
+      "sha256": "38c8d148dbc33bab7fc94e2c7931b9a2ca757ff04d90191f08fa2506a6fc1a8c"
+    },
+    "source_stage_pin": {
+      "commit": "d41ba96f505fe507773cb1a23aab558941ee5a9c",
+      "path": "coordination/engineering/russia-repair-delivery-20261017/source-stage/original-stage-inputs.json",
+      "git_blob_oid": "f3f1543e7cefbe7999ad012c3814b33c17aecb06",
+      "bytes": 8429060,
+      "sha256": "bd2437c224dcab11a9a14c91759a79e02e7aee2ddad22039d762c90d932c27c8"
+    },
+    "producer_evidence": {
+      "source_member_name": "gshhs_f.b",
+      "source_member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+      "source_member_bytes": 95809336,
+      "source_member_geometry_operations": false,
+      "runtime": {
+        "shapely": "2.1.2",
+        "geos": "3.13.1"
+      },
+      "elapsed_seconds": 132.0138084340142
+    },
+    "counts": {
+      "target_records_in_receipt": 334,
+      "target_records_in_stage": 334,
+      "unique_target_ids_in_both": 334,
+      "all_stage_and_receipt_ids_equal": true,
+      "candidate_targets_joined": 32,
+      "candidate_cells": 8108,
+      "candidate_land": 7971,
+      "candidate_inland_water": 137,
+      "candidate_targets_with_any_whole_target_issue": 6,
+      "candidate_target_issue_records": 10,
+      "candidate_cells_in_targets_with_issue_records": 937,
+      "candidate_land_in_targets_with_issue_records": 800,
+      "candidate_water_in_targets_with_issue_records": 137,
+      "candidate_cells_in_targets_with_no_issue_records": 7171,
+      "issue_category_totals": {
+        "L2-outside-L1": 3,
+        "extra_reconstruction": 1,
+        "contradictory_land_water_support": 6
+      }
+    },
+    "targets_with_original_physical_issues": [
+      {
+        "target_id": "gb:RUS:ADM2:50074027B15761543307374",
+        "pixelIndex": 37167,
+        "owner_name": "Khasansky District",
+        "candidate_keys": 444,
+        "land_keys": 444,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 1,
+        "whole_target_issue_categories": {
+          "contradictory_land_water_support": 1
+        },
+        "physical_target_source_query_relation_count": 47
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B18064199701976",
+        "pixelIndex": 37235,
+        "owner_name": "Birobidzhansky District",
+        "candidate_keys": 49,
+        "land_keys": 0,
+        "inland_water_keys": 49,
+        "whole_target_issue_record_count": 2,
+        "whole_target_issue_categories": {
+          "L2-outside-L1": 1,
+          "contradictory_land_water_support": 1
+        },
+        "physical_target_source_query_relation_count": 3
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B22004389566857",
+        "pixelIndex": 37345,
+        "owner_name": "Khankaysky District",
+        "candidate_keys": 214,
+        "land_keys": 214,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 2,
+        "whole_target_issue_categories": {
+          "L2-outside-L1": 1,
+          "contradictory_land_water_support": 1
+        },
+        "physical_target_source_query_relation_count": 2
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B42733914964900",
+        "pixelIndex": 37878,
+        "owner_name": "Oktyabrsky District",
+        "candidate_keys": 147,
+        "land_keys": 80,
+        "inland_water_keys": 67,
+        "whole_target_issue_record_count": 2,
+        "whole_target_issue_categories": {
+          "L2-outside-L1": 1,
+          "contradictory_land_water_support": 1
+        },
+        "physical_target_source_query_relation_count": 2
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B52464361757597",
+        "pixelIndex": 38104,
+        "owner_name": "Spassky District",
+        "candidate_keys": 62,
+        "land_keys": 62,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 1,
+        "whole_target_issue_categories": {
+          "contradictory_land_water_support": 1
+        },
+        "physical_target_source_query_relation_count": 2
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B57903229029345",
+        "pixelIndex": 38256,
+        "owner_name": "Leninsky District",
+        "candidate_keys": 21,
+        "land_keys": 0,
+        "inland_water_keys": 21,
+        "whole_target_issue_record_count": 2,
+        "whole_target_issue_categories": {
+          "contradictory_land_water_support": 1,
+          "extra_reconstruction": 1
+        },
+        "physical_target_source_query_relation_count": 3
+      }
+    ],
+    "all_32_target_rows": [
+      {
+        "target_id": "gb:RUS:ADM2:50074027B11056050899621",
+        "pixelIndex": 37052,
+        "owner_name": "Kosh-Agachsky Rayon",
+        "candidate_keys": 64,
+        "land_keys": 64,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 1
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B13114681801765",
+        "pixelIndex": 37101,
+        "owner_name": "Skovorodinsky District",
+        "candidate_keys": 520,
+        "land_keys": 520,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 1
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B13558455717271",
+        "pixelIndex": 37111,
+        "owner_name": "Blagoveshchensky District",
+        "candidate_keys": 263,
+        "land_keys": 263,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 1
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B15761543307374",
+        "pixelIndex": 37167,
+        "owner_name": "Khasansky District",
+        "candidate_keys": 444,
+        "land_keys": 444,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 1,
+        "whole_target_issue_categories": {
+          "contradictory_land_water_support": 1
+        },
+        "physical_target_source_query_relation_count": 47
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B18064199701976",
+        "pixelIndex": 37235,
+        "owner_name": "Birobidzhansky District",
+        "candidate_keys": 49,
+        "land_keys": 0,
+        "inland_water_keys": 49,
+        "whole_target_issue_record_count": 2,
+        "whole_target_issue_categories": {
+          "L2-outside-L1": 1,
+          "contradictory_land_water_support": 1
+        },
+        "physical_target_source_query_relation_count": 3
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B19185058252844",
+        "pixelIndex": 37271,
+        "owner_name": "imeni Lazo Rayon",
+        "candidate_keys": 134,
+        "land_keys": 134,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 7
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B1949274339631",
+        "pixelIndex": 37278,
+        "owner_name": "Zabaykalsky District",
+        "candidate_keys": 14,
+        "land_keys": 14,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 3
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B22004389566857",
+        "pixelIndex": 37345,
+        "owner_name": "Khankaysky District",
+        "candidate_keys": 214,
+        "land_keys": 214,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 2,
+        "whole_target_issue_categories": {
+          "L2-outside-L1": 1,
+          "contradictory_land_water_support": 1
+        },
+        "physical_target_source_query_relation_count": 2
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B22497972741045",
+        "pixelIndex": 37355,
+        "owner_name": "Лесозаводский городской ок",
+        "candidate_keys": 839,
+        "land_keys": 839,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 1
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B32863300227960",
+        "pixelIndex": 37624,
+        "owner_name": "Tambovsky District",
+        "candidate_keys": 52,
+        "land_keys": 52,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 1
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B33126296618922",
+        "pixelIndex": 37632,
+        "owner_name": "Pozharsky District",
+        "candidate_keys": 272,
+        "land_keys": 272,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 2
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B33926607160791",
+        "pixelIndex": 37646,
+        "owner_name": "Уссурийский городской окру",
+        "candidate_keys": 527,
+        "land_keys": 527,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 1
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B34733261690727",
+        "pixelIndex": 37676,
+        "owner_name": "Пограничный район",
+        "candidate_keys": 289,
+        "land_keys": 289,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 1
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B3666508019566",
+        "pixelIndex": 37716,
+        "owner_name": "Obluchensky District",
+        "candidate_keys": 75,
+        "land_keys": 75,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 2
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B38279427309518",
+        "pixelIndex": 37760,
+        "owner_name": "Vyazemsky Rayon",
+        "candidate_keys": 234,
+        "land_keys": 234,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 2
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B38981942782180",
+        "pixelIndex": 37780,
+        "owner_name": "Gazimuro-Zavodsky District",
+        "candidate_keys": 77,
+        "land_keys": 77,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 1
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B42733914964900",
+        "pixelIndex": 37878,
+        "owner_name": "Oktyabrsky District",
+        "candidate_keys": 147,
+        "land_keys": 80,
+        "inland_water_keys": 67,
+        "whole_target_issue_record_count": 2,
+        "whole_target_issue_categories": {
+          "L2-outside-L1": 1,
+          "contradictory_land_water_support": 1
+        },
+        "physical_target_source_query_relation_count": 2
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B46082532996443",
+        "pixelIndex": 37963,
+        "owner_name": "Arkharinsky District",
+        "candidate_keys": 248,
+        "land_keys": 248,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 2
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B48263627343832",
+        "pixelIndex": 38006,
+        "owner_name": "Кировский район",
+        "candidate_keys": 122,
+        "land_keys": 122,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 1
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B49850892466546",
+        "pixelIndex": 38037,
+        "owner_name": "Konstantinovsky District",
+        "candidate_keys": 91,
+        "land_keys": 91,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 1
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B52464361757597",
+        "pixelIndex": 38104,
+        "owner_name": "Spassky District",
+        "candidate_keys": 62,
+        "land_keys": 62,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 1,
+        "whole_target_issue_categories": {
+          "contradictory_land_water_support": 1
+        },
+        "physical_target_source_query_relation_count": 2
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B52585131638206",
+        "pixelIndex": 38109,
+        "owner_name": "Magdagachinsky District",
+        "candidate_keys": 1007,
+        "land_keys": 1007,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 1
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B55786266429174",
+        "pixelIndex": 38195,
+        "owner_name": "Mikhaylovsky District",
+        "candidate_keys": 137,
+        "land_keys": 137,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 1
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B57903229029345",
+        "pixelIndex": 38256,
+        "owner_name": "Leninsky District",
+        "candidate_keys": 21,
+        "land_keys": 0,
+        "inland_water_keys": 21,
+        "whole_target_issue_record_count": 2,
+        "whole_target_issue_categories": {
+          "contradictory_land_water_support": 1,
+          "extra_reconstruction": 1
+        },
+        "physical_target_source_query_relation_count": 3
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B58237762818486",
+        "pixelIndex": 38266,
+        "owner_name": "Svobodnensky District",
+        "candidate_keys": 56,
+        "land_keys": 56,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 1
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B6450887110855",
+        "pixelIndex": 38426,
+        "owner_name": "Mogochinsky District",
+        "candidate_keys": 482,
+        "land_keys": 482,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 1
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B69125687542481",
+        "pixelIndex": 38550,
+        "owner_name": "Bikinsky Rayon",
+        "candidate_keys": 186,
+        "land_keys": 186,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 2
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B71338417410099",
+        "pixelIndex": 38590,
+        "owner_name": "Oktyabrsky District",
+        "candidate_keys": 253,
+        "land_keys": 253,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 1
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B76781633158797",
+        "pixelIndex": 38730,
+        "owner_name": "Dalnerechensky District",
+        "candidate_keys": 482,
+        "land_keys": 482,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 1
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B79971887964789",
+        "pixelIndex": 38796,
+        "owner_name": "Krasnokamensky District",
+        "candidate_keys": 328,
+        "land_keys": 328,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 1
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B88724749460683",
+        "pixelIndex": 39030,
+        "owner_name": "Shimanovsky District",
+        "candidate_keys": 367,
+        "land_keys": 367,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 1
+      },
+      {
+        "target_id": "gb:RUS:ADM2:50074027B90632265551754",
+        "pixelIndex": 39071,
+        "owner_name": "Priargunsky District",
+        "candidate_keys": 52,
+        "land_keys": 52,
+        "inland_water_keys": 0,
+        "whole_target_issue_record_count": 0,
+        "whole_target_issue_categories": {},
+        "physical_target_source_query_relation_count": 1
+      }
+    ],
+    "interpretation": "These are physical findings attached to whole consumed target geometry, not an exact per-native-key intersection report. Six of the 32 candidate targets have 10 total retained issue records. Those target records contain 937 candidate keys (800 land, 137 inland-water); all 137 candidate water keys lie in targets with at least one physical issue record. The other 26 targets (7,171 candidate land keys) have no physical issue record in this receipt. Do not treat every key in an affected target as automatically invalid; also do not claim the 937 are individually physically clear. The source-evidence/native qualification path must preserve every issue and decide any exact-key impact under its admitted predicates."
+  }
+}

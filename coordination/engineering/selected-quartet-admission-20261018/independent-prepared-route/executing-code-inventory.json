@@ -1,0 +1,2264 @@
+[
+  {
+    "path": "package.json",
+    "git_blob_oid": "318d842ee999da746956968c9d7e58f9e00cb9e4",
+    "bytes": 1417,
+    "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+  },
+  {
+    "path": "scripts/accepted-selected-checkpoint.mjs",
+    "git_blob_oid": "577356be0bc9a4fa1cb705e4b8625a6de47b5d74",
+    "bytes": 9835,
+    "sha256": "b77389a1c6ddfadc4cd5ab5ddae37c5540cc889f5114e33b94783ddf01b2a67f"
+  },
+  {
+    "path": "scripts/additive-gap-repair.mjs",
+    "git_blob_oid": "15bd8fcd4a4ed8df8f759253f8040aff7fe1882f",
+    "bytes": 182470,
+    "sha256": "0bd47a5c39b8431a869577149fc771f3f613c9fd181670f3b517c6d404c81c25"
+  },
+  {
+    "path": "scripts/administrative.py",
+    "git_blob_oid": "cdc5e1bfdd0cdd95d473228d81737722f2a5a706",
+    "bytes": 12313,
+    "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22"
+  },
+  {
+    "path": "scripts/apply-geographic-decisions.py",
+    "git_blob_oid": "033240e79c1c9ce06dce72a0f887c109ef813bb8",
+    "bytes": 13530,
+    "sha256": "c5d1c7a1b118742f116d7bc647bc6974942901348a046b77c865f434d9bd1eab"
+  },
+  {
+    "path": "scripts/apply-hierarchy-correction-stage.mjs",
+    "git_blob_oid": "dd8db14bbea36c507a3ca1de1d0b2e7457f80c7e",
+    "bytes": 2364,
+    "sha256": "26b25171216c47bbd3224f99e1467474b8f6e1ae7da5be300ef2c99372e71888"
+  },
+  {
+    "path": "scripts/apply-macro-boundary-decisions.py",
+    "git_blob_oid": "c66776575a47ca01d6c4a30c3be617a9663e1996",
+    "bytes": 13261,
+    "sha256": "f0958efa03c5416038e5c8fc234b8d6e37407359c615650bd9cc5d680e539a85"
+  },
+  {
+    "path": "scripts/apply-macro-review.py",
+    "git_blob_oid": "e5f9f55c2e62791ba7a206c882f0a75f09f67034",
+    "bytes": 22347,
+    "sha256": "28f07b0005b2ae2a390cd8e013c45a5000ab29824bfa832718e77f09a147d803"
+  },
+  {
+    "path": "scripts/apply-source-territory-repairs.py",
+    "git_blob_oid": "69dea9ef7d17abe6ae75b883da79adf03bd89623",
+    "bytes": 22456,
+    "sha256": "246982c22b29a62dd0481bfb81e743ab8c4ece722850ff94d05c67dce6aa499c"
+  },
+  {
+    "path": "scripts/assemble-selected-package.mjs",
+    "git_blob_oid": "a14985bb9354aa88631ddebe93242e74d652e529",
+    "bytes": 29266,
+    "sha256": "1d9593bc9905e60ab465c3b0bb4b5f26081da6e7de6e395aa6af203812dd8dd8"
+  },
+  {
+    "path": "scripts/assess-geographic-release-capacity.py",
+    "git_blob_oid": "71fa948f9d2db955340bcab3dd5999db1fb2c3ed",
+    "bytes": 7898,
+    "sha256": "46db71382c7df6923cae3f35eee9e949536485fe5755c6591d029ac7b57e3640"
+  },
+  {
+    "path": "scripts/attribute-sources.py",
+    "git_blob_oid": "0f552918cb8112ca2c6435e31a3da43c1b76a67c",
+    "bytes": 1189,
+    "sha256": "24f85736723fcf98770c8f18662b0abaa4ad3e25ac280e3dbc3f374279d12838"
+  },
+  {
+    "path": "scripts/audit-africa-semantic-followup.py",
+    "git_blob_oid": "cbf404dce7e092b205647e4c5cbd166d706aff11",
+    "bytes": 46779,
+    "sha256": "3d95adf42a2065f1cedfa45c9ea34cf93d7163a77a65d2e87eea072812ba9abc"
+  },
+  {
+    "path": "scripts/audit-americas-semantic-followup.py",
+    "git_blob_oid": "093cca4f1cc0639c31ad3b1ad51bd0dba4737e41",
+    "bytes": 51609,
+    "sha256": "5c77fd4e06cfa60c4ecf04f6efca26b8244e277f024a4eb6ce382947bcc3821e"
+  },
+  {
+    "path": "scripts/audit-asia-oceania-semantic-followup.py",
+    "git_blob_oid": "b7a8d9f17d098500a8886998f3779b26e76ef26d",
+    "bytes": 40427,
+    "sha256": "d9a4e76aaf904056256b09f0bc7a63f5d758eb89d46e97bfd2d4213b5b7b6fe5"
+  },
+  {
+    "path": "scripts/audit-canonical-rows.mjs",
+    "git_blob_oid": "6c1827ee8f1a1c75f48c35f428a86d6fee483f1b",
+    "bytes": 8656,
+    "sha256": "16f6cc0100fe0dd62df8c3191ca3e4b25abec90aa8e2d59786b1025bef2aa048"
+  },
+  {
+    "path": "scripts/audit-canonical-world.mjs",
+    "git_blob_oid": "d0d31975b238b8e2cda85a5974ad7ab6ce9b3374",
+    "bytes": 3264,
+    "sha256": "749908f7baf559ba1460e9841aae791b1283a740cc95772241aeafc338f22f75"
+  },
+  {
+    "path": "scripts/audit-category-palette.mjs",
+    "git_blob_oid": "3232bd951e654ad517ee94a7742e62e4ddeb6a5b",
+    "bytes": 7116,
+    "sha256": "983213ad3dd42fd6110f106a434739aefb94d9c3a14ae47d210ccb343e589b7e"
+  },
+  {
+    "path": "scripts/audit-europe-semantic-followup.py",
+    "git_blob_oid": "f0ed01313542b9f0b6baeef2a022749bc6a6e30b",
+    "bytes": 36680,
+    "sha256": "870c3532a491bb4b2f1246d596f1f08355c35fad17c31a1f1305cafa269b70ed"
+  },
+  {
+    "path": "scripts/audit-geographic-gaps.py",
+    "git_blob_oid": "0c02caebe4f5eebad7f0adf4e8a29b8feb622555",
+    "bytes": 13954,
+    "sha256": "94a00cd246aa7b2ec375d459c46c5a046603b67932ac9dc24011c9f1091d51ee"
+  },
+  {
+    "path": "scripts/audit-geographic-migrations.py",
+    "git_blob_oid": "12361d445d413b62fb236ec2c542c033d5aa05a4",
+    "bytes": 22255,
+    "sha256": "87d0105b73191d5f00c60565f144d1b508a1efc81d6f2808f7f2bcc539111672"
+  },
+  {
+    "path": "scripts/audit-granularity.py",
+    "git_blob_oid": "d4f28aa7bb4b5cfcb1781f88db99d86ff57741dd",
+    "bytes": 11943,
+    "sha256": "841e0abb21acc4c97afd1c7708ff73b9c8698e98a64e83f3999fac3d3aebcd76"
+  },
+  {
+    "path": "scripts/audit-grid-intervals.mjs",
+    "git_blob_oid": "78fcf8ab2ef8c7b67652e18a43654c6b4dcdd094",
+    "bytes": 6777,
+    "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+  },
+  {
+    "path": "scripts/audit-grid-resolutions.mjs",
+    "git_blob_oid": "f59e7ebd2fb42b4ba5321ceec042d0cdd1107b04",
+    "bytes": 24443,
+    "sha256": "c0f595cb3ae1777d34f06620b8ecdb33e9e429c8933948b024eef1f41a3200c5"
+  },
+  {
+    "path": "scripts/audit-macro-boundaries.py",
+    "git_blob_oid": "4ef796f8d6397f734209bf6de908090efc67779f",
+    "bytes": 5585,
+    "sha256": "df9b89cfaaa6629d4fb3bc80017af4140a6d92cdbe9b1581eb8c98b6e3afda88"
+  },
+  {
+    "path": "scripts/audit-native-grid.mjs",
+    "git_blob_oid": "26e432eafa20faf55473cbc4def238ea9a337cdd",
+    "bytes": 10107,
+    "sha256": "c3958a6267b6fe7f7f6fd9026f27f56065f803af29ce10467f5c442351220891"
+  },
+  {
+    "path": "scripts/audit-native-topology.py",
+    "git_blob_oid": "702df9bc8f5bbea5813f8fdaa5334ff42e97c993",
+    "bytes": 6689,
+    "sha256": "3462cafad25b1257f200f0416e2d9b6f4c5d41ea1a77810b9c4f1b58c00e93ae"
+  },
+  {
+    "path": "scripts/audit-palette-all-times.py",
+    "git_blob_oid": "19cc05f67a60870b4e38bb518c46bdda4541d813",
+    "bytes": 5883,
+    "sha256": "c2efafbcc5458f3495fe7e8c4178772c2c4089dc0789502bf6b9f5d033408456"
+  },
+  {
+    "path": "scripts/audit-palette-inputs.py",
+    "git_blob_oid": "0621664954e507e75fee7d05ab6e8188fe74b99e",
+    "bytes": 5068,
+    "sha256": "7f6d513243e66dc6223c2ac96f3e18404e52bbde41197aa0375b4984f0c792d2"
+  },
+  {
+    "path": "scripts/audit-palette-raster.mjs",
+    "git_blob_oid": "444abbfad65b0cea850440abcb0cdc3213c1864f",
+    "bytes": 2136,
+    "sha256": "1f8e8a8dd174caf74104b3cf7290de8aa2b497ec8e1c98ff55e866ed7e731212"
+  },
+  {
+    "path": "scripts/audit-physical-gaps.py",
+    "git_blob_oid": "867c81ab6ddef77144ae32d5c711dd27be7e0be7",
+    "bytes": 9773,
+    "sha256": "7656263b33f222942f709c3b9671c344dd5350cafd2726423c6632b38a667f07"
+  },
+  {
+    "path": "scripts/audit-pixels.mjs",
+    "git_blob_oid": "6cd9ac4b15f0f4a6b885c49ef1eaf9d00b7cc37f",
+    "bytes": 2067,
+    "sha256": "a816c26afb82f7d5000648c32ee3fae5910762dfe2de31966bac53d812d1896e"
+  },
+  {
+    "path": "scripts/audit-shared-category-modes.mjs",
+    "git_blob_oid": "4504f66c21fd2eddacf870c1f7929bb6e7939fe4",
+    "bytes": 4307,
+    "sha256": "d69b58c1ce005c4ac2a32536530c8d7d95073a3ce3d7a91468ddde04c06efc4f"
+  },
+  {
+    "path": "scripts/audit-source-territory-splits.py",
+    "git_blob_oid": "75ebcd1ff16eb7218fa311adc35bb38af585b95a",
+    "bytes": 31285,
+    "sha256": "612333e7c4b82043f89994054b0be66328c071819cc7de8044d3730797366a17"
+  },
+  {
+    "path": "scripts/benchmark-compact-membership-profile.mjs",
+    "git_blob_oid": "24339600bcec93589f96b5ed3b51d7439afd7727",
+    "bytes": 8870,
+    "sha256": "80aed78d8877a56bf14f94b99bbcb1246add1337e3b08dc2fbf56671c8b36c0b"
+  },
+  {
+    "path": "scripts/benchmark-live-year-switch.mjs",
+    "git_blob_oid": "77e4963a28b2442d0ac4cfc955c1e49056a169ac",
+    "bytes": 9410,
+    "sha256": "f8d1d695a9b122002d6aaa48d5d3bf99a0a17a0bb93aea1e83bc2012b71c9207"
+  },
+  {
+    "path": "scripts/benchmark-membership-storage.mjs",
+    "git_blob_oid": "3e05639343da6461f7398f1e4d97793069e48c4e",
+    "bytes": 24414,
+    "sha256": "13d786079c0bb68ea2165ffac39f291f05f9366be62fc6356ef8e188201437c3"
+  },
+  {
+    "path": "scripts/benchmark-wheel-zoom.mjs",
+    "git_blob_oid": "b6664c72c1dfa09be3a744f6531d13c5057ee04d",
+    "bytes": 7906,
+    "sha256": "576072d674d8be7aa79dd64f95a648ce234833d74dbc29a4210521cb74363ea4"
+  },
+  {
+    "path": "scripts/bootstrap-geographic-release.mjs",
+    "git_blob_oid": "6aca59f8abed3900cd1b07a8732caf4c6016a7e9",
+    "bytes": 13130,
+    "sha256": "e1b222aa1644c6fc5141ae51fc06f0675a948b63d40bcb5174dcd011818801b8"
+  },
+  {
+    "path": "scripts/bootstrap-hosted.mjs",
+    "git_blob_oid": "222aaa37de71f16b4a4a48ca597318cc9ba1bc4d",
+    "bytes": 5263,
+    "sha256": "d2338f1164937ae2408d830f54020766b7582d179b0f371d5d44c95e0c98d282"
+  },
+  {
+    "path": "scripts/bootstrap-prepared-evidence.mjs",
+    "git_blob_oid": "df3c99e97b6dc6bd2a3da2652b8531919893e74a",
+    "bytes": 4686,
+    "sha256": "3db152e9305315032b13bdd038c71b9f20c621e58dd51bbb02dc504e2f5938d4"
+  },
+  {
+    "path": "scripts/boundary-version-hash.py",
+    "git_blob_oid": "8dda3929ca08464172513ceba73a4e03885ba926",
+    "bytes": 2344,
+    "sha256": "9fc84b52b008ebd2b5c34f23f555c39f5ec1180f0d2d619fbaa671f1e6696dbd"
+  },
+  {
+    "path": "scripts/build-category-palette.mjs",
+    "git_blob_oid": "698f8f56d96a7aac62898a29f453be5aff2c3c01",
+    "bytes": 3914,
+    "sha256": "5c270bf01cbdf569ce0f2714ad21a27f554e7ea28773f91637c297273649ec30"
+  },
+  {
+    "path": "scripts/build-cloudflare-inner.mjs",
+    "git_blob_oid": "c5fc03f63ccc1710789548065988efbd5e674d17",
+    "bytes": 2016,
+    "sha256": "4d0c0bf75efd6b4cb22bc2522473993b24c7b06274058b8c479d306f14144b3f"
+  },
+  {
+    "path": "scripts/build-cloudflare.mjs",
+    "git_blob_oid": "025a78e2c1075bbf4994f0e85a503bc75ba5b5a0",
+    "bytes": 312,
+    "sha256": "bb77e1416afb93611e91cbe169acba063852139f8fccbc9fecb8a3317f194d11"
+  },
+  {
+    "path": "scripts/build-global-macro-policy.py",
+    "git_blob_oid": "8c5315a30563313e217551e385319ea043e90ce9",
+    "bytes": 11673,
+    "sha256": "d7f488dd112003d483fae89fe7cf70ffdb277f528a743dcae65a2db2f97efc9f"
+  },
+  {
+    "path": "scripts/build-hosted-inner.mjs",
+    "git_blob_oid": "4edcda4c75c6546cea4c38659797ec9ebf1b9a7a",
+    "bytes": 2498,
+    "sha256": "fb554ed350b45642e048c234d6907c8f9fc7683f36636f08739aa375875097aa"
+  },
+  {
+    "path": "scripts/build-hosted.mjs",
+    "git_blob_oid": "1ad5f5e9800f6bfb50d9f4491c9772f806c530cb",
+    "bytes": 86,
+    "sha256": "35b99f851756322aaa95a9f6d21b7c93c6edfeeb9253ad259554819bbdcd89b3"
+  },
+  {
+    "path": "scripts/build-physical-gap-components.py",
+    "git_blob_oid": "a78bd601a1bb275485a4956c730f76ef531b7136",
+    "bytes": 10793,
+    "sha256": "a80dd384ccb0176d06d39af36c9cee7effaf2535a2aedf067cc9988e2751ea4c"
+  },
+  {
+    "path": "scripts/build-physical-gap-priorities.py",
+    "git_blob_oid": "e683c2aab24b9eca27179ecca367e5ba195a8e1d",
+    "bytes": 16410,
+    "sha256": "bac8f2777178ca14b6db624ad58a41975d296c9931d747842c4b76971d36bc19"
+  },
+  {
+    "path": "scripts/build-static-inner.mjs",
+    "git_blob_oid": "25c88479bb537cb390dc4e3126f1fd96ffaa58a7",
+    "bytes": 18701,
+    "sha256": "2b7e4d949eef266f33e601085c92a9c29137aa344a2376259f96b028beeb1cac"
+  },
+  {
+    "path": "scripts/build-static.mjs",
+    "git_blob_oid": "884e00907f470229aa8454e6387598f4637772dc",
+    "bytes": 86,
+    "sha256": "e74f685f89313b2129ad2dd194adb13d65b86ceb00df67e58bb3e3a8f6a82c24"
+  },
+  {
+    "path": "scripts/build-worldwide-contexts.py",
+    "git_blob_oid": "f4cbb1844b9067af906b973c81b2a9d3e9ad1bcd",
+    "bytes": 15842,
+    "sha256": "28a0a62d3784260d38fbea3222a025113badcb549046a197e8ef4d056d93a7ca"
+  },
+  {
+    "path": "scripts/build-worldwide-current-native.py",
+    "git_blob_oid": "4e34aaebcb8624b463d43e549fc6277fc7893bfd",
+    "bytes": 19798,
+    "sha256": "00e510e2f54bca55f8a439680772ab99c1db5abba41ca1f727bbd9d96c01889b"
+  },
+  {
+    "path": "scripts/build-worldwide-native-batches.py",
+    "git_blob_oid": "59648a1f865317555ab7b196632ef76edbc2d775",
+    "bytes": 28222,
+    "sha256": "e9cde3540a29cedcd572ad9375dc6fc41389083d75250da8286993a943d34d2e"
+  },
+  {
+    "path": "scripts/canonical-restoration.mjs",
+    "git_blob_oid": "76fd89b6f21fbef4d4a04a54b8c0d2053464b2a4",
+    "bytes": 24957,
+    "sha256": "6b0ea051dbe19d3d3f22d510ddcced6d94adacad0800aa0ce6083f238b7f6d18"
+  },
+  {
+    "path": "scripts/check-effective-geographic-regression.mjs",
+    "git_blob_oid": "ede85b72423e347bf15d30567ac22c643c423c69",
+    "bytes": 97109,
+    "sha256": "136e49006c84a35ea4e06d79bc1d2d222bd73343717694f8d5718937f76b816c"
+  },
+  {
+    "path": "scripts/check-geographic-adjudications.mjs",
+    "git_blob_oid": "34afcc4d31a2c59d6e7c1761aa02376230b84f4b",
+    "bytes": 2935,
+    "sha256": "95cb4c2e78f9e8cbb1a02ce10197b6d1bb07000cfdbcdd21a51cc11156f25b79"
+  },
+  {
+    "path": "scripts/check-geographic-regression.py",
+    "git_blob_oid": "aa618086d8f020b5d098088298a0f8afd4cacd92",
+    "bytes": 15589,
+    "sha256": "07057a490035ac5376868b0ce8258c2e64917779830498ec311278df1340f75b"
+  },
+  {
+    "path": "scripts/check-handoff-scope.mjs",
+    "git_blob_oid": "7959c40afd55a3263d196aaa9e85b0600d3d8066",
+    "bytes": 4959,
+    "sha256": "aee4c211b332d5726a8009ad3115e0626d3135ba89adae3885199261a335e47e"
+  },
+  {
+    "path": "scripts/check-hierarchy-install-controls.mjs",
+    "git_blob_oid": "a268830157742ace1d499457a3cf6eb67765b3ee",
+    "bytes": 2210,
+    "sha256": "4f0368dafa3a2c489d2db5984bbdb2e14af1cdd0a632b3b7a78839b95e781739"
+  },
+  {
+    "path": "scripts/check-macro-foundation.mjs",
+    "git_blob_oid": "a21a0fae96d8e9b6215748599445d9b5d7170653",
+    "bytes": 10959,
+    "sha256": "24d368ab9fa2c3ff00a68cd9a873ef2ae8a6ae4e5611b5a5fc781fbb1cf713d8"
+  },
+  {
+    "path": "scripts/check-oceania-land-restoration.mjs",
+    "git_blob_oid": "aa58cd2dc0900d722d35fbb64805f0d1e1259fea",
+    "bytes": 5094,
+    "sha256": "b04b57357463f33d2de736e776238f3d253b08727d7bde23af85b7e06c3b0258"
+  },
+  {
+    "path": "scripts/check-prepared.mjs",
+    "git_blob_oid": "238d7a7526a4fc6e2b2e55ff8a56916e57ea1938",
+    "bytes": 3133,
+    "sha256": "66926416887b1e3a69962837a9e10ff322dc061f6f1a70be4624edb3583c5242"
+  },
+  {
+    "path": "scripts/check-unchanged-selected-geography.mjs",
+    "git_blob_oid": "a13ad4106fd772f1f12bd3da253474787eb0c334",
+    "bytes": 22586,
+    "sha256": "0342b6c692ae031bfef2d05161aa5ee15c06a04926437fc976f57327638923e0"
+  },
+  {
+    "path": "scripts/check-wheel-measurement.mjs",
+    "git_blob_oid": "6be45ad71d64bb10903058b7c6f2dd0d01d9205d",
+    "bytes": 1465,
+    "sha256": "9ee378072e894f04c365d312cf1e31fffb9fa13ca7d4f5033ec60dad64c3b914"
+  },
+  {
+    "path": "scripts/ci-setup-observations.mjs",
+    "git_blob_oid": "56bb857b36f1aaa3076754d0dec4902a3ec0bc53",
+    "bytes": 1997,
+    "sha256": "2aa2f144a90dc13d264201e7b83c83cb399358ee683e7e44c544e7c8d4eb3672"
+  },
+  {
+    "path": "scripts/clean-local-source.py",
+    "git_blob_oid": "6c1fe12b098e8e2668e80ede2204aefa9672a1c5",
+    "bytes": 1159,
+    "sha256": "bf40ef23ebfc1b786625d7ed0ea4ad81f6f249bdf0ed22dff03010d8701dc953"
+  },
+  {
+    "path": "scripts/compact-membership-storage.mjs",
+    "git_blob_oid": "7474fa6e0997e4989a1e0346d10cff2dd377be78",
+    "bytes": 9350,
+    "sha256": "4ce43a16c639fe2e14176de73542f200dd57fe9b364f4601cdcc5da3d2c0e475"
+  },
+  {
+    "path": "scripts/compact-ownership.py",
+    "git_blob_oid": "efb46011b54e0fae6b7c64eda6e2ffa3eb8b68cf",
+    "bytes": 2213,
+    "sha256": "6a56f868e9eb23f44c5c9339f4e5b5bfa3b23ab43642a658c9b08380ceb318ba"
+  },
+  {
+    "path": "scripts/compact-recovery-profile.mjs",
+    "git_blob_oid": "63c8067007e578db625ad44bda4eb7f4894ddc01",
+    "bytes": 8849,
+    "sha256": "fdb179807cf3ced1fe9fcaca4f83a0fd1016118b00785f3ba91f54c1713d3b37"
+  },
+  {
+    "path": "scripts/compact-reference-attributes.py",
+    "git_blob_oid": "a160ea232a5d583ab32b09041e1ccf068f8984b9",
+    "bytes": 1722,
+    "sha256": "7cd10edea45a95de73b87d99b7ad5dad1da60b324828c5fd64a2f212f4ae0587"
+  },
+  {
+    "path": "scripts/compile-environment-classification-guards.mjs",
+    "git_blob_oid": "4ca0b3162bb7652da9077d85d3ee782807f5d5b0",
+    "bytes": 5107,
+    "sha256": "d98d1cc9bb8096e8856b115c586d34a863c87ca41af8d60f90e2261dce7f44f5"
+  },
+  {
+    "path": "scripts/compile-hosted-migrations.mjs",
+    "git_blob_oid": "beabb64e646128a5d622d2226bc41ae124a6ef9b",
+    "bytes": 3623,
+    "sha256": "9dde285ef025b87581e2c83dbc3e43fea8b3ce61ebfdfc68d16dd64154584f4b"
+  },
+  {
+    "path": "scripts/complete-city-cores.py",
+    "git_blob_oid": "55649384925e8b360e6562069046545d52219e95",
+    "bytes": 4341,
+    "sha256": "8b7683fd762a5787dcfece5c8d7c2dd078a2274d958d0104a205d1b96c80ce7c"
+  },
+  {
+    "path": "scripts/complete-coverage.py",
+    "git_blob_oid": "adbdbe2a3b0de8e4646e7b1fa1e1b58b32f1f3b1",
+    "bytes": 7222,
+    "sha256": "40e1a2c2945bb1b03d74e21db0285c6bb81dd95d2e1a6fc8e0a9d253f6dbb5f5"
+  },
+  {
+    "path": "scripts/complete-hierarchy.py",
+    "git_blob_oid": "7f05eb2dc9c40dc65946b3d5316726ce02188b15",
+    "bytes": 9754,
+    "sha256": "10feb1732fef87da87847a5bbba757c76aac207ba96a76e4403cd66f529c6f2d"
+  },
+  {
+    "path": "scripts/complete-ownership-candidates.py",
+    "git_blob_oid": "d3bb284b2d32d00e09ff626c18e1f5637eb61c60",
+    "bytes": 3277,
+    "sha256": "bd2ec03428a07b3ba1dfab121a6f702ec7e6c73d65245e98c5b757c7d29dee94"
+  },
+  {
+    "path": "scripts/complete-taiwan-cities.py",
+    "git_blob_oid": "f6e94f182642eb74bb5ea317f1063a48c4ddc48e",
+    "bytes": 4370,
+    "sha256": "9cc449b2b730e301ac88741e1149d15d22c594365ae3644d3b5745e3367ef3c7"
+  },
+  {
+    "path": "scripts/compose-macro-install-proof.py",
+    "git_blob_oid": "1e2c96aab74e3c1e88efec5700da02434283f0c9",
+    "bytes": 4505,
+    "sha256": "8ac556b82dc6e593bcabaf8a71de71d0bd5a8d1ef516aa882c4fe55218b8135a"
+  },
+  {
+    "path": "scripts/compose-macro-restoration.py",
+    "git_blob_oid": "04c1c79269c70e7104219244259c83a559820d61",
+    "bytes": 13393,
+    "sha256": "668252221242b5d9822fbf7ab57d757dd9eb1d1254b49dc5d4104f554dad847b"
+  },
+  {
+    "path": "scripts/consolidate-fragments.py",
+    "git_blob_oid": "f59ce8001ed0cf4b1e2c7e6c5e4c01f4eae645c8",
+    "bytes": 6301,
+    "sha256": "9af8ce77f93c712c21878f48297427230706f03433b57ae31255879eea69ea36"
+  },
+  {
+    "path": "scripts/credential-envelope.mjs",
+    "git_blob_oid": "3688decd76eed6173cec4b8f60c1e72ab5054c57",
+    "bytes": 12177,
+    "sha256": "9b5257009a1ff60d0150c1d9827b70aa36302790416273a42d6c18901c964761"
+  },
+  {
+    "path": "scripts/current-postgres-recovery.mjs",
+    "git_blob_oid": "5956b9a60ffb54700027321e8d5c11bc733578a3",
+    "bytes": 48636,
+    "sha256": "3adc3c22acfde4da6e9ed31d068fc03002cb7675faa1850e54ae009d8954681e"
+  },
+  {
+    "path": "scripts/delivery-handoff-advance.mjs",
+    "git_blob_oid": "b456f162ec4a153666cdfec23c88badf9ac3c20e",
+    "bytes": 21490,
+    "sha256": "ffc72039bc753a4a8457e54cbba8cec91c610663b6053ec8f355bc9a676261ce"
+  },
+  {
+    "path": "scripts/deployment-budget.mjs",
+    "git_blob_oid": "ebf89b2696126d50ee6f84e70a1d2dca96f9cd14",
+    "bytes": 12026,
+    "sha256": "c6e6464812cf24b50a8f63c449c4dc914db9004bd17f2f3f9bf688d0844bf65f"
+  },
+  {
+    "path": "scripts/diagnose-geographic-water.py",
+    "git_blob_oid": "2f73dc30eac2b19cd7b7239b6ceeed58fc800a2c",
+    "bytes": 7075,
+    "sha256": "a5176f1a63d851e22481debed439c1100cb612d4f08bc597f332298850699014"
+  },
+  {
+    "path": "scripts/diagnose-map-cell.mjs",
+    "git_blob_oid": "a97176ed437315c718e1711dad390ff294e28c95",
+    "bytes": 19528,
+    "sha256": "820105f4a820b3174e404914a2eb9cd1be9d0a1383757cebeb2ea6caf805fa6a"
+  },
+  {
+    "path": "scripts/ellipsoidal_area.py",
+    "git_blob_oid": "518dcaada9e94907d7d886636dcbf928bd0788fa",
+    "bytes": 1953,
+    "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+  },
+  {
+    "path": "scripts/evidence-policy.mjs",
+    "git_blob_oid": "b8d0468592c1c5f30dd1415a223f03bde98d0e2c",
+    "bytes": 2483,
+    "sha256": "684ad01c51c0626bafe4715c9ab5b46eeb901ee54bc9dcb6f439ef505f0f55b2"
+  },
+  {
+    "path": "scripts/evidence-quality.mjs",
+    "git_blob_oid": "2c15ca2082e2f845fd6f7d3f316ee0b62174b159",
+    "bytes": 34050,
+    "sha256": "d9749a72d15a5f248cd222260213990a2075321476822668068bd2ef3a0964cd"
+  },
+  {
+    "path": "scripts/evidence/captured-byte-patch.mjs",
+    "git_blob_oid": "41b629da55ae62e3383e6819d8fc892ca4d3966e",
+    "bytes": 6820,
+    "sha256": "1af7fd39337218d6a85eb227dbc88b8854196d78147d4b717018827488ac4a5b"
+  },
+  {
+    "path": "scripts/evidence/contracts.py",
+    "git_blob_oid": "40097ff288018a841bba31989196f3f37e708b65",
+    "bytes": 3445,
+    "sha256": "6473265fe8683004fe091084145957604f2e45d7d143505c69f8099c48467802"
+  },
+  {
+    "path": "scripts/evidence/encode-json.mjs",
+    "git_blob_oid": "2aa6c4fe8796c0684ea4eaf00295b1e48e494def",
+    "bytes": 725,
+    "sha256": "a1d7a70c9c3759f9269ea35c5fb0ed12377de52cf0993e0be3183efe1747f73a"
+  },
+  {
+    "path": "scripts/evidence/exact_predicates.py",
+    "git_blob_oid": "41d5c7f48fad761f492bc7966c0e4c014bc0662f",
+    "bytes": 20175,
+    "sha256": "65f61ac4211a53ac5ec7d576912101fff0638801521e1d848c1c95d567a63dac"
+  },
+  {
+    "path": "scripts/evidence/geometry.py",
+    "git_blob_oid": "f1c2f3206bc5698201441a775b8bf8560977368d",
+    "bytes": 8846,
+    "sha256": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9"
+  },
+  {
+    "path": "scripts/evidence/immutable.py",
+    "git_blob_oid": "e28ceecd2c2155e6dd8dc7eecab3541a845cb874",
+    "bytes": 16750,
+    "sha256": "8c7e232eb5a8a4ba83dde928c5aec3de6053143691dac40b1896262b48ceef7e"
+  },
+  {
+    "path": "scripts/evidence/prepare.py",
+    "git_blob_oid": "e2c7dbd5f0f8049f7756f68d72c1f288e777ccbc",
+    "bytes": 2210,
+    "sha256": "7659fcfe8dddc7995561589ec2a118da565028b095e5c2a36b35f7dc900b33fc"
+  },
+  {
+    "path": "scripts/evidence/restore-whole-image.mjs",
+    "git_blob_oid": "26cf93e4c03207bd8ce7c9582040c0f2022967cb",
+    "bytes": 5598,
+    "sha256": "c8d53d89b6cd9b9ee9c169360c5cbc2dab9494cf386e58793f26470dabdea8d2"
+  },
+  {
+    "path": "scripts/exact-source-diagnostic.py",
+    "git_blob_oid": "8de8ca12ca756e15213cbbfd15817261bfcb113d",
+    "bytes": 2852,
+    "sha256": "1c7803c9fe5fd2c865f09280d38b1c9bc902fb483f1b9e9a2033de516f9993d2"
+  },
+  {
+    "path": "scripts/export-hosted-storage-v2.mjs",
+    "git_blob_oid": "5b130cd40affb3ca39424928f97bfae1f4b95cdf",
+    "bytes": 15822,
+    "sha256": "7d55f1c62bb505aa00c45b4581acda8e5df271458db1ab9fddf81e6a02617772"
+  },
+  {
+    "path": "scripts/export-hosted-storage-v3.mjs",
+    "git_blob_oid": "99f2c73464d20b87844f3a7bc4556e2036e2636e",
+    "bytes": 15673,
+    "sha256": "42d79c38cf21bd388b832875ad485b1b848ba32e5365dd355103fd5a510a5f48"
+  },
+  {
+    "path": "scripts/export-hosted-storage-v4.mjs",
+    "git_blob_oid": "f10366b81ee2aa7bd17a5f0bb6b8b0e36ddf4b08",
+    "bytes": 15991,
+    "sha256": "6d7ba3058096d78742f2d3fba3c5f527b81dd58838d39774b53473db5a63f68f"
+  },
+  {
+    "path": "scripts/export-hosted-storage.mjs",
+    "git_blob_oid": "76e2c5c47be7329472d1dc5ca9b3b311394ef3f2",
+    "bytes": 14734,
+    "sha256": "02af690647cd286e66430e9820a28e271c6fe9f978a9083e94bc310565a7e5e0"
+  },
+  {
+    "path": "scripts/external-source-quality.py",
+    "git_blob_oid": "021090431eb2e1bffea03c6c2b813ffcdbf97fdc",
+    "bytes": 1924,
+    "sha256": "35f7e09e58e558213492492c920b707eec437ea52df88af777c4e281f47fd57b"
+  },
+  {
+    "path": "scripts/extract-package-output.py",
+    "git_blob_oid": "269de00c50f1ce34eca7973cf55475c74e86ea3a",
+    "bytes": 8752,
+    "sha256": "59a776fdec689d80ac58fd477843df40e029a1e12a5a081ac201dcb2254eb0c3"
+  },
+  {
+    "path": "scripts/finalize-geography.py",
+    "git_blob_oid": "f12bed86a6b7950fa762e61355b0907689d92548",
+    "bytes": 5626,
+    "sha256": "6e0ed4c701c38c1aa753c28504076962d71f03265cef755f095087a4819ea224"
+  },
+  {
+    "path": "scripts/framework-sources.py",
+    "git_blob_oid": "1ab4412a10d1b1d70c94e70d3eb2d8a0e61340f0",
+    "bytes": 434,
+    "sha256": "e3c370fb112c5360d88f6866f63cfe5c340b0448fe560eb7fff2f9995f3db35b"
+  },
+  {
+    "path": "scripts/geographic-adjudication-api.mjs",
+    "git_blob_oid": "4baacad69fb2c7743c3aa33829b8fe96ccff6de0",
+    "bytes": 11930,
+    "sha256": "22d49b72b70a41d6035f151276e6ca6579bfddc42b644cc410e27b54f303d13c"
+  },
+  {
+    "path": "scripts/geographic-regions.py",
+    "git_blob_oid": "4a7116246916823fd2d67c97c10ae6dbfc6ad25c",
+    "bytes": 7804,
+    "sha256": "627fb2759f10cbcfb64a29b773b689fcd8787e0edd602e350896d9ceaa738e10"
+  },
+  {
+    "path": "scripts/geographic-release-admission.mjs",
+    "git_blob_oid": "55ce8645da3c8e567884d9bb3f9b0092e122297c",
+    "bytes": 12806,
+    "sha256": "27fb447b67cfb8b700491298a1244036ddb32db2b009da27e84676327251e1ea"
+  },
+  {
+    "path": "scripts/geographic-report-artifact.mjs",
+    "git_blob_oid": "7f98210cbde06710b099a13d3b54c3d2321f3090",
+    "bytes": 23511,
+    "sha256": "5ce3dcb6e3048f96ed8decd36be3cf36b01cd55f26606e479b74641ed358095e"
+  },
+  {
+    "path": "scripts/geographic_adjudication.py",
+    "git_blob_oid": "3d0e56f1d398ada998709c06f880c18b64367b76",
+    "bytes": 11758,
+    "sha256": "f5347aa32b4d0caf137b8d2f7308bf9946fbd857776c8516812255223d1f5ada"
+  },
+  {
+    "path": "scripts/geographic_checkpoint_products.py",
+    "git_blob_oid": "10ca8af99e286798e28871907935aa9e27fd52ce",
+    "bytes": 6191,
+    "sha256": "d7d3a19233ae2b1b5b94d9226f4420d241b3dfbbebc825f56bad3b2a86838152"
+  },
+  {
+    "path": "scripts/geographic_components.py",
+    "git_blob_oid": "6bd74dd0e7061f9ac8a91baf6bf51d86d0b15caa",
+    "bytes": 7096,
+    "sha256": "f2c47489d3f618175fd60570d6287f91b6bad1e05529d37208c1d96d63f38439"
+  },
+  {
+    "path": "scripts/geographic_grid.py",
+    "git_blob_oid": "7a92e33765c5f353d7ee5c3ef97685839636abd8",
+    "bytes": 10751,
+    "sha256": "74b3f06feedf9c10d1626e11378f1ec4ab92b283e05d1ffd510e90f8c2df7fdf"
+  },
+  {
+    "path": "scripts/geographic_water.py",
+    "git_blob_oid": "08a720fb72c274c483c9e62269289466800d7413",
+    "bytes": 7089,
+    "sha256": "a0d6eef448346bf660aa3b76e2cc05b31c20bd231f6f2ff5df54acc1941aeb36"
+  },
+  {
+    "path": "scripts/geography-prefetch.mjs",
+    "git_blob_oid": "b7207c13f81980e97a8cdc8d2b292722398262c1",
+    "bytes": 13104,
+    "sha256": "9be7623e6d9fdb3e4e7493615b44cab5f003912367efa5c85bb67556f070cb1a"
+  },
+  {
+    "path": "scripts/geography-routing-metadata.mjs",
+    "git_blob_oid": "64e980c7508ae1e645a2bdb366d7719b46c5d9ed",
+    "bytes": 4974,
+    "sha256": "bcd06c343e44080937ccfc113dd63114e13b51c65f7d77c5ff4030da1c5551d1"
+  },
+  {
+    "path": "scripts/git-blob-transport.mjs",
+    "git_blob_oid": "aed0d2e39de067759247f8b01d1b6eb8e3198b8d",
+    "bytes": 3802,
+    "sha256": "ab68e6a425cfb7ec7630d0bdc97cca31d5dde0a86eae9d818d63643c4463e3f2"
+  },
+  {
+    "path": "scripts/github-quota.mjs",
+    "git_blob_oid": "9195175b7988745c36be5cd4115a0be24c2dda31",
+    "bytes": 2714,
+    "sha256": "2a23940cf1d408c490df4405f7da8cb4dca4c9572a5a0611783a2d1c677c4e00"
+  },
+  {
+    "path": "scripts/github-snapshots.mjs",
+    "git_blob_oid": "77e10cc1dbad90d27312fbf1b9582326d74af8f0",
+    "bytes": 1595,
+    "sha256": "eaf2ca029adae4319ff6b0f1ce9ba75b7f965aeeab7fa7fe72548fa888f22afe"
+  },
+  {
+    "path": "scripts/group-visible-repairs.mjs",
+    "git_blob_oid": "80c4c6aca1e1bd1164a8e1f830a1187432b4be61",
+    "bytes": 7835,
+    "sha256": "6a004883dc3d0665cc436e7bb64bdfe5a1ce11ef8e7112871f06b0637be1500e"
+  },
+  {
+    "path": "scripts/immutable-git-blobs.mjs",
+    "git_blob_oid": "94decf582c7f83a015f907243db6a7c39fe95538",
+    "bytes": 3437,
+    "sha256": "3adbf65085fcd3c04302440695ce661488db5a187b1e15e6d45cf5848dfa8da9"
+  },
+  {
+    "path": "scripts/import-research-bundle.mjs",
+    "git_blob_oid": "600abea9d367e3cdfbf05cdde8593fc2ff364f29",
+    "bytes": 11979,
+    "sha256": "308005912c3b6139573fe999986bcb39865bfbbab96d8c7634627de4fa67188c"
+  },
+  {
+    "path": "scripts/import.mjs",
+    "git_blob_oid": "882b318ff159ec9f3dda75ce8aeaa620ff8319a8",
+    "bytes": 531,
+    "sha256": "fc7cb7537980f062e466b3e96cfcabbb489ea0df4ce34410506ce7e499de0da0"
+  },
+  {
+    "path": "scripts/install-category-palette.mjs",
+    "git_blob_oid": "d6cd1751a3866c83d6666c5a99d11dd804b9d234",
+    "bytes": 2625,
+    "sha256": "feccd07b1eaeca7c3e8fafac2d2efdcdc22514ee6e49fdccc363cace1aa0092c"
+  },
+  {
+    "path": "scripts/install-macro-reference.mjs",
+    "git_blob_oid": "a295ebc16e3c713761f8b601a7728ebfeef88d36",
+    "bytes": 38512,
+    "sha256": "8b9742aea9c1d2b53c6fd4a6604e6f8f755eb190c7a93a0f4e9817f33729026f"
+  },
+  {
+    "path": "scripts/install-reviewed-geography.mjs",
+    "git_blob_oid": "348850b51104671e6cf89a933c98de5a0f038724",
+    "bytes": 30214,
+    "sha256": "43e324e5c95c84e694298d4f19b228e073ec2b7365b1b4289ce030cbef859104"
+  },
+  {
+    "path": "scripts/integration-profile.mjs",
+    "git_blob_oid": "09f213aa624a85620412e6b72b52542913d2a77d",
+    "bytes": 72588,
+    "sha256": "b09c7e89fd7d29b250cd2b5eda3e5c516e2ca833d2d7cac3ca38e37bce209c51"
+  },
+  {
+    "path": "scripts/integration-proof.mjs",
+    "git_blob_oid": "078c4ba55dff74b5cbb53c89893a00b126d58700",
+    "bytes": 889,
+    "sha256": "f08e03c81efa756d36126812cfe415118cace433a1477cc25fdb60def19572ec"
+  },
+  {
+    "path": "scripts/issue-claim-contract.mjs",
+    "git_blob_oid": "428ee19791cb201687161d8f8a9ece8eb7d0e0f0",
+    "bytes": 18219,
+    "sha256": "0001f95bedbf4cbdf4f8a55bcf0980679a57fc0d64b5a9bb60436c1689f154d8"
+  },
+  {
+    "path": "scripts/local-workspace.mjs",
+    "git_blob_oid": "d62fe11bc681e1cb54e6b677b097982e3cd2a5d4",
+    "bytes": 18662,
+    "sha256": "8dc16e3b4ee133ab529f034d3a8d6cbad615bbd89ae0ab018c4f481702710314"
+  },
+  {
+    "path": "scripts/lossless_audit_inputs.py",
+    "git_blob_oid": "24fd46a5373e73e02cd287c02f25151569824c5c",
+    "bytes": 8952,
+    "sha256": "bda4d915654736af8dca980bf7310dedc6371a67467631ddd50538c7b791c3cd"
+  },
+  {
+    "path": "scripts/macro_policy_provenance.py",
+    "git_blob_oid": "1843fe6edc2c84430817e49c69320d0e47ba7347",
+    "bytes": 2492,
+    "sha256": "69c8c85a34d8c66275ffbbb894aeb66282354c0d2a6ba6d8136859803d0c78cf"
+  },
+  {
+    "path": "scripts/majority.py",
+    "git_blob_oid": "859b8e877f3a4199b848fbcf0949d9c3c10d8422",
+    "bytes": 3114,
+    "sha256": "59046aa90ee824e1a132ba58c831f46bab46e3ac21eba46e77aa80f38802c405"
+  },
+  {
+    "path": "scripts/map-color-neighbors.mjs",
+    "git_blob_oid": "78f5b6f28faadcf47aa72ccd5a209b4638acf806",
+    "bytes": 2568,
+    "sha256": "ce91d6e5c6ec5a91f77cc054d23d11d9bc030c0808b25763fef740ca7df17f42"
+  },
+  {
+    "path": "scripts/measure-neon-storage.mjs",
+    "git_blob_oid": "866d3fdde8d33127739fa35c72c9f32e6a089b75",
+    "bytes": 13399,
+    "sha256": "5a9b2f994ba1424a66ff9848ba86941a14ea0a270154f0a13486ebb3ae200b7d"
+  },
+  {
+    "path": "scripts/merge-integration.mjs",
+    "git_blob_oid": "ecc4262d93ab7bbba6a6f907334118d3945009d3",
+    "bytes": 27416,
+    "sha256": "4741fe41f45611333e08840fafd23af9c6dfb641c650b9733eb09140152783a0"
+  },
+  {
+    "path": "scripts/merge-reference-attributes.py",
+    "git_blob_oid": "79cf65afef791110da9399ff3a1856d53630fad5",
+    "bytes": 2193,
+    "sha256": "fbc92a78a92c45bf516962a5c65c8c80817820a95dd15f06766c33b2ffb92be5"
+  },
+  {
+    "path": "scripts/migrate-site-r2.mjs",
+    "git_blob_oid": "4f6a3344c275fc194665598c7e81e8d74081f94f",
+    "bytes": 2542,
+    "sha256": "16d1ceb813a192a86ea5b56fd5226033c9845f9ee7f725dc3f25629eb3e65822"
+  },
+  {
+    "path": "scripts/native-grid-inputs.mjs",
+    "git_blob_oid": "cacc47567983b87db1a07ded8d6807716cd71d35",
+    "bytes": 6058,
+    "sha256": "864bbc7cd2c4b4e809ff4e74aed25c76a35bdc74b5c5b6722a04471e16d5d492"
+  },
+  {
+    "path": "scripts/native-ownership/chained-build-context.mjs",
+    "git_blob_oid": "9e00578dbf79431d3a33724ad010505ce56a01c6",
+    "bytes": 25608,
+    "sha256": "4b385a74c2d13cfee7c81cbe22204e299ddcaaf83812f2e27b9ecbf0de715a2f"
+  },
+  {
+    "path": "scripts/native-ownership/compact-context-inputs.mjs",
+    "git_blob_oid": "86985fa838f2b84bdbdd932804593e95d094f93f",
+    "bytes": 2980,
+    "sha256": "91f9efc5675dbd172f7e800cce7121d9b70525c813c15ffb20a2a726b05e5e25"
+  },
+  {
+    "path": "scripts/native-ownership/compile-native-ownership.mjs",
+    "git_blob_oid": "cafd0a7efa72b682a46ece67a654d191b029ef9c",
+    "bytes": 4472,
+    "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+  },
+  {
+    "path": "scripts/native-ownership/native-candidate-manifest.mjs",
+    "git_blob_oid": "fef0eae656349609d31efb985b18a0c87179c140",
+    "bytes": 5797,
+    "sha256": "81340fdb57b5d3347f016cd282dbb2fa7ee72fe07bf699e9bf63a37cd975e458"
+  },
+  {
+    "path": "scripts/native-ownership/native-only-inputs.mjs",
+    "git_blob_oid": "f28ab2083d53f0045a59f0b672ab8ed8afecd423",
+    "bytes": 6682,
+    "sha256": "a007c8400f965724672024403bf9651a621cc33f06daa1c40bf28379faf758f5"
+  },
+  {
+    "path": "scripts/native-ownership/native-preparation-guards.mjs",
+    "git_blob_oid": "0321ca82c6baa7cd34339999e513310c3519d1e2",
+    "bytes": 5177,
+    "sha256": "1c34cda6398b33d9459c119caf5a3c037563ce584af1d2f71b68610e9b6c0fac"
+  },
+  {
+    "path": "scripts/native-ownership/native-topology-binding.mjs",
+    "git_blob_oid": "e7ac2df0ca32ce087b3e202f30b9804bbb00ddd6",
+    "bytes": 4625,
+    "sha256": "708f6441ff0a7896758602d99cb12dde0bff1004e1c34ea32d4b323a69846cc2"
+  },
+  {
+    "path": "scripts/native-ownership/prepare-context-inputs.mjs",
+    "git_blob_oid": "42eaa7bdf41fcb06cdf5b1031313de9b6254763a",
+    "bytes": 3852,
+    "sha256": "62c025d16987685277d0cf6cb4a414dc41bcbdc7d0bda5e5e3ba56a379835db8"
+  },
+  {
+    "path": "scripts/native-ownership/prepare-native-candidate.mjs",
+    "git_blob_oid": "bd7e2b3c44465a7fbddd04c51432a42a1047e91f",
+    "bytes": 7281,
+    "sha256": "ac6fb45fc45bbc640a72f97e3fd0fbb26dad6f7c8b00f0c5a0c9dea0168c58f6"
+  },
+  {
+    "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+    "git_blob_oid": "c4691d26711101f084a56c82ebd4d0ac3eb0e183",
+    "bytes": 1734,
+    "sha256": "b7955acc5ac135a4714a3666022a88425a0df7e4986b7732b6b4e109e3788db6"
+  },
+  {
+    "path": "scripts/native-ownership/require-verified-selection.mjs",
+    "git_blob_oid": "2b684c9c54dec28426a24511949cbae3d37b8089",
+    "bytes": 4274,
+    "sha256": "a7b0c60aeb705b39e650112cb9a968d5536eec5872493057d6f71a60ebccbfc1"
+  },
+  {
+    "path": "scripts/native-ownership/validate-build-context-stage.mjs",
+    "git_blob_oid": "d19120dcc80d971affa734053083b07715d865ff",
+    "bytes": 9509,
+    "sha256": "eb5c42d9e79a9da249193a1c7cc2fb22e939b031fd7663ad410595ca0233a515"
+  },
+  {
+    "path": "scripts/native-ownership/validate-context-input-stage.mjs",
+    "git_blob_oid": "a5ef6145a4e891eca6ae19589deb4d63b2331ca3",
+    "bytes": 10323,
+    "sha256": "2a42f038b612653b8bf7ad3984a5b54c6a0b78cf5857e9cdf8fce64fc660aad8"
+  },
+  {
+    "path": "scripts/native-ownership/validate-context-migration.mjs",
+    "git_blob_oid": "8937fb3ea5924009e3de4616d34c3cc3225da138",
+    "bytes": 5078,
+    "sha256": "34c94e25f8d17f424e82511ecaf85c4f1c0449579f90b218aba264a69b6c2bf0"
+  },
+  {
+    "path": "scripts/native-ownership/verified-candidates.json",
+    "git_blob_oid": "adcbc4ffdd7b0d443371f959a6e3f31fed148178",
+    "bytes": 1810,
+    "sha256": "080a481b71383bd6ba3388ad9b26138b25fced628a61830c3bb02a933562e40a"
+  },
+  {
+    "path": "scripts/native-ownership/verify-context-inputs.mjs",
+    "git_blob_oid": "fe4254fd4ec83846aa420fd9f5be7b9f6977807e",
+    "bytes": 4109,
+    "sha256": "c92c4c04a38fb4ba456e8475ed753b5c2cf06cf8599f0bf503608f2d5c27124f"
+  },
+  {
+    "path": "scripts/native-ownership/verify-native-candidate.mjs",
+    "git_blob_oid": "7a9ca14a8824377eedc86887eba023766d39d369",
+    "bytes": 8268,
+    "sha256": "053c0c964e56c894f9e21e5a509f76faad65eb68356274538683198885f5b94d"
+  },
+  {
+    "path": "scripts/native-patch-store.mjs",
+    "git_blob_oid": "f791746a6dc4b4442db38d48ef1149f37a6352e0",
+    "bytes": 22185,
+    "sha256": "1fd3b87cff30b88c1ae2c40fab6fb4fa63382d04c556194fd44b6acecc9d3325"
+  },
+  {
+    "path": "scripts/native-word-store.mjs",
+    "git_blob_oid": "2a37f04a29093456afeefdaeaa27d13966a68620",
+    "bytes": 3198,
+    "sha256": "278fbf2c964ac892c69924a0afaa49fcac37c8bf617cd847ec40521952c0a3eb"
+  },
+  {
+    "path": "scripts/neon-forward-migrations.mjs",
+    "git_blob_oid": "9b2759c4d2e3a1d211647504a84e7e0244003992",
+    "bytes": 34890,
+    "sha256": "3df73fbf3107762fb0a1b692c4bff61e57bc7dd55b2433d2f642585cb64e2b9b"
+  },
+  {
+    "path": "scripts/neon-storage-migration.mjs",
+    "git_blob_oid": "6f7bb4d3615baa6dcb72210d1a5715dc697a0cbd",
+    "bytes": 2869,
+    "sha256": "708d309fe83a69ef036caa9adad98c12693cedd844a2dbf162d69cbea6b36416"
+  },
+  {
+    "path": "scripts/normalize-reference-attributes.py",
+    "git_blob_oid": "f57ac92113e098a6bfddfd9ed7adf9a952912297",
+    "bytes": 1332,
+    "sha256": "76b75ec3e261e66ae38e29519f239cfb36d0fbe9cc2add7a113e297ea25fc70f"
+  },
+  {
+    "path": "scripts/package-build.mjs",
+    "git_blob_oid": "e037ea75488470cb83811372aa9cd01251d31015",
+    "bytes": 27001,
+    "sha256": "bee023f0a445f622637021b03cd5cddfeb17c68083ef5c2b9f1668a772082337"
+  },
+  {
+    "path": "scripts/package-current-additive.mjs",
+    "git_blob_oid": "170805fb436596427ef00d1bae6b2204bb6f6534",
+    "bytes": 9656,
+    "sha256": "a6562f32fb098117b81abbbce0e385977734f4b012753eed0be0c9e17eae91c6"
+  },
+  {
+    "path": "scripts/package-inputs.mjs",
+    "git_blob_oid": "c37b9d76917fc6960e2b6bfd039f4d420f6bee75",
+    "bytes": 15760,
+    "sha256": "039a29e738da456a1d482e57eb940103b5c207dc2a7629f5d2b4cbc3d598f696"
+  },
+  {
+    "path": "scripts/package-native-latitudes.mjs",
+    "git_blob_oid": "7ca20220f5bcf0303a15bdf0c2d51d760716afb0",
+    "bytes": 1886,
+    "sha256": "23f3041729bcd7a2c2de57422cb98b861fa7d053a35268f9d47328350a8294fa"
+  },
+  {
+    "path": "scripts/package-output-artifact.mjs",
+    "git_blob_oid": "23237ae930a4c14466de689aca3ba67b6def3ff7",
+    "bytes": 18231,
+    "sha256": "dc9aba77880fd9d54de27b4add74537643dc927617a9f9bb48acfcaec390da92"
+  },
+  {
+    "path": "scripts/package-ownership-history.mjs",
+    "git_blob_oid": "c3e3d7e89a46bdbe6620bad62410e9b5e0be4240",
+    "bytes": 5904,
+    "sha256": "e1c93bc99d5003d6b9a08e00cebef4faab12dd1351077ed098876450227a0fb1"
+  },
+  {
+    "path": "scripts/package-python-runtime.py",
+    "git_blob_oid": "ff46f1e6bfc8a3c71a8371823b04e716e9e30f18",
+    "bytes": 9928,
+    "sha256": "ebb7bc65271ec21a52bfb088aacbe2860a6a35d330de0ff0fe63d6afa2e9cae4"
+  },
+  {
+    "path": "scripts/package-reference-bundle.mjs",
+    "git_blob_oid": "094dd21be93b679b13c2dda2913ce2666b42aaa2",
+    "bytes": 2555,
+    "sha256": "731167e950bac138f00d3a2090e45e1e5eb860f3cc1832737496aaba4feee96f"
+  },
+  {
+    "path": "scripts/package-startup-ownership.mjs",
+    "git_blob_oid": "cb13d901883e49c9992dd64919546480f934faec",
+    "bytes": 9361,
+    "sha256": "be4132f5fc2b4efcdac7a6cec8b4833a4b5722764b12c62baa3e5087f8c75bb6"
+  },
+  {
+    "path": "scripts/physical_component_contacts.py",
+    "git_blob_oid": "ad29482708971bf11e559a6d761a1d3b1b048326",
+    "bytes": 1652,
+    "sha256": "2d7be839084ca4929980abadd7a618acc6b77d8ac8f02a58582c44c8161664f2"
+  },
+  {
+    "path": "scripts/physical_component_custody.py",
+    "git_blob_oid": "0e28f2560311fb6ac0d045416f63aabfa10bb6ad",
+    "bytes": 11415,
+    "sha256": "2ebc4c0b57879649a736eddceb01308435062e0a2e0f2447d211d42b511bbc5a"
+  },
+  {
+    "path": "scripts/physical_gap_audit.py",
+    "git_blob_oid": "02679463b2e8587594dce88f107ca0169cbd058e",
+    "bytes": 11971,
+    "sha256": "d0854276b311354160cc8b4ceaae052857bb102f4dd2e61ddaa2de0f8482819d"
+  },
+  {
+    "path": "scripts/physical_gap_crosswalk.py",
+    "git_blob_oid": "fd3cb2878347c15a748102358ef963e57107e1cd",
+    "bytes": 8799,
+    "sha256": "0e9cb04cecdab62fed2e9102340b87926224916b02e929049f279110cf9d180f"
+  },
+  {
+    "path": "scripts/physical_gap_priority.py",
+    "git_blob_oid": "9cbb054b78930bf9ff5411648d68d5362e781b1b",
+    "bytes": 17403,
+    "sha256": "26ff1467cef85a0a30c21334ad9c2a6be4a0d635bae50ca4940086853773ab28"
+  },
+  {
+    "path": "scripts/physical_gap_successor.py",
+    "git_blob_oid": "930e15e90b488aaf71a6a15fff3e9703cb08c3dd",
+    "bytes": 3143,
+    "sha256": "9ec7b27e3c9fe3a9d1ec3788f89a9071ccf0d939c2d6ed760d23b50591c1c0a6"
+  },
+  {
+    "path": "scripts/premerge-evidence.mjs",
+    "git_blob_oid": "9eb49ca40d1d293bf2798c93d574fc98e200b345",
+    "bytes": 22795,
+    "sha256": "5ab4fadefe51fa67c506a88e2cef974b41aa56c3b48334ea91646718aa899f9d"
+  },
+  {
+    "path": "scripts/prepare-compact-membership-pins.mjs",
+    "git_blob_oid": "8722c300c4135e6a322361556fd0ed2a4ed44187",
+    "bytes": 1720,
+    "sha256": "dc6274eb5d6e4d4e5a226eb205390db2ce0c9beffcffa26b365c663d1289ecb7"
+  },
+  {
+    "path": "scripts/prepare-coverage-classification.py",
+    "git_blob_oid": "df1ac66c984e7e3152568232d21a0bf0e6adc78c",
+    "bytes": 11340,
+    "sha256": "7765ae6476dca636690143c0db2b98ecfea3106a7f1a1bc0b5d92261eecbe1e3"
+  },
+  {
+    "path": "scripts/prepare-dated-reference-names.py",
+    "git_blob_oid": "9296a07e951ae9d7f235a27eef7d39c9e77f3dd3",
+    "bytes": 11563,
+    "sha256": "c5eeb81fc0fc8973612e3929fdc1a1a0cbbd43ffca40b61feb406f8dd09c4b7e"
+  },
+  {
+    "path": "scripts/prepare-delivery-handoff.mjs",
+    "git_blob_oid": "21514ed1712620c00d2e64d9a673b07defadecd7",
+    "bytes": 125035,
+    "sha256": "ade9118cbd7b3e619984c21c06436402a46b2e339f8f70220b0a33ee88929196"
+  },
+  {
+    "path": "scripts/prepare-demographic-evidence.py",
+    "git_blob_oid": "76807ee920190416111152988169f2d800fdcff4",
+    "bytes": 17660,
+    "sha256": "408a44694ffececfd9996a2d344c9507e7907c61fce9125a296bfbc038687994"
+  },
+  {
+    "path": "scripts/prepare-europe-source-policy-corrections.py",
+    "git_blob_oid": "7aba90c650e9c90dd4b788442f8e51231537dd5a",
+    "bytes": 17234,
+    "sha256": "55a41654f3a465fcd7f6979fb926d7258ba58577c657700672d18f16748e5582"
+  },
+  {
+    "path": "scripts/prepare-evidence-bundle.mjs",
+    "git_blob_oid": "88a1fbf21581d6902c2e94f5fa558b84d66a318c",
+    "bytes": 11808,
+    "sha256": "1cc653304831b72fd484c4099f89f4fdcb2c9e5459aec34c85627cdc6c83d4ed"
+  },
+  {
+    "path": "scripts/prepare-geographic-release.mjs",
+    "git_blob_oid": "3a6fe07a48522848926ffd08f3f867c4fb8e9e16",
+    "bytes": 37121,
+    "sha256": "c627376303fcf5698865c669651ae6ad2e9b6a58f34c2db040b1b84732b53fa9"
+  },
+  {
+    "path": "scripts/prepare-ghsl-population.py",
+    "git_blob_oid": "cf9dcd0d40c2e50270bd52e61d76c4dee593063d",
+    "bytes": 29830,
+    "sha256": "09ac82f76e490e6695d3cf56b49eb1cb8b0e10f6060905ef426889ef5ef243cb"
+  },
+  {
+    "path": "scripts/prepare-global-macro-geography.py",
+    "git_blob_oid": "6db60716be7014dfd93d69a660d668e5734749c0",
+    "bytes": 18188,
+    "sha256": "ef433f02ada35b7ee4e826d5ede6d711de5d5fc5bda2cb45ebbb2baf738a6377"
+  },
+  {
+    "path": "scripts/prepare-hierarchy-correction-install.mjs",
+    "git_blob_oid": "8d65818337f08e19224fc2a5601ebe268a38605b",
+    "bytes": 1769,
+    "sha256": "e2da4fcc536f6dc0e9a5f993c0253af6aba60f7bf795bc96aefb610dc4b79413"
+  },
+  {
+    "path": "scripts/prepare-hierarchy-correction-release.mjs",
+    "git_blob_oid": "59c454613d91e5e9db41296a5d54034a48518e69",
+    "bytes": 6034,
+    "sha256": "23edde7bce2bd14d0561cd8a7ed688c20814008ee2676b26acbaba86d8fa7e10"
+  },
+  {
+    "path": "scripts/prepare-hierarchy-install-evidence.mjs",
+    "git_blob_oid": "7b298457b51f8e142b668967fc4a635da687c134",
+    "bytes": 7809,
+    "sha256": "d1a1d06756762dee25c9f34dbdf1453906fde04a1da52fb77ccee423e746c57c"
+  },
+  {
+    "path": "scripts/prepare-history.mjs",
+    "git_blob_oid": "930cafeb86d3551004ae7304f7f27e68f0103e4e",
+    "bytes": 3169,
+    "sha256": "42834bbc0ad5f50daa7bf176fecbda389931a5b95acca67c0d87cc07d796c1a6"
+  },
+  {
+    "path": "scripts/prepare-hosted-catalog.mjs",
+    "git_blob_oid": "ae228f8d96e825cf2263463cba5293cb8c80a479",
+    "bytes": 5380,
+    "sha256": "a22f5c7e34304976caa09c1da19ef549e6240739c24fef54c86081cda23a9e36"
+  },
+  {
+    "path": "scripts/prepare-macro-boundary-decisions.py",
+    "git_blob_oid": "2db4598ce34c7ecbf4ba0f40ceec768286c2dc78",
+    "bytes": 31678,
+    "sha256": "0ce46061fa9732970010ba3b103de2bad92f5a81bcc52c321b489ad989056bc4"
+  },
+  {
+    "path": "scripts/prepare-macro-envelopes.py",
+    "git_blob_oid": "ecc93ac23df90296d26748939e754cb3dea62cd5",
+    "bytes": 10457,
+    "sha256": "75860e8734a0b27d59f66d50b2aa32cb196a48ff02079cecd1b9a2c2176de9b0"
+  },
+  {
+    "path": "scripts/prepare-macro-restoration-proofs.mjs",
+    "git_blob_oid": "d5af164f7b633f092002a7e11eb9b01cbe226e2e",
+    "bytes": 7001,
+    "sha256": "e708f18ee6744228eb21c37dc003af053cfc02322bd1e695ddbb8b5ae42d856d"
+  },
+  {
+    "path": "scripts/prepare-macro-review-projection.mjs",
+    "git_blob_oid": "a4d4116eb5a582c1fdabf39fd9b7354a18f4b3f8",
+    "bytes": 32863,
+    "sha256": "dec5cab8b99bbc9f9fa600cec6ba5808d1a57bf5df74295e9c3cf2b35e4ac9e9"
+  },
+  {
+    "path": "scripts/prepare-namibia-source-annotations.py",
+    "git_blob_oid": "2c061305b12f8d5db999578dc95545eece0fbe53",
+    "bytes": 11517,
+    "sha256": "252de61a36360b4187838c1f09f97fa81957c30f2d422e96b9cbc833da5611b8"
+  },
+  {
+    "path": "scripts/prepare-oceania-land-restoration.mjs",
+    "git_blob_oid": "922552f81980167b6cb52373beac3db19f515d5f",
+    "bytes": 13716,
+    "sha256": "525b1a3aaff662795b5841d9e75cdcf833709ce75b67da0b1689bb76530b4d45"
+  },
+  {
+    "path": "scripts/prepare-ownership-incremental.py",
+    "git_blob_oid": "63801a19442e78c5586a7918268ae380b0be410a",
+    "bytes": 28797,
+    "sha256": "31ea705a96a09ed3a2ced8081434c4d2b25557c14c473c6bd77adf29704047e9"
+  },
+  {
+    "path": "scripts/prepare-ownership-runtime.py",
+    "git_blob_oid": "dedb19224b7785ad5080537d6c61c3a8e7489cf6",
+    "bytes": 7405,
+    "sha256": "e4a701e6983740c661552d5a483cbf2bfc9e7d7b41a40e5c055e6a7608c166bb"
+  },
+  {
+    "path": "scripts/prepare-ownership.py",
+    "git_blob_oid": "93d7a5fc759fe854521bdecc0b74188a78a9f2c2",
+    "bytes": 10453,
+    "sha256": "46fa8af5dff2ecd45a7c40648a586250a62499f5531c95da6f35e0c0ceeb6be6"
+  },
+  {
+    "path": "scripts/prepare-reference-attributes.py",
+    "git_blob_oid": "227b26da8eb7d2990c508686efd138d9100a6bdd",
+    "bytes": 7337,
+    "sha256": "c8c6d07ef35fba885aee82cdd94cc843391cceb93cf8b33b28ff81276ad0bbf0"
+  },
+  {
+    "path": "scripts/prepare-reference-hierarchy-corrections.py",
+    "git_blob_oid": "9c4ffce31216dbeed6b49ae50f5d72211e1c00b8",
+    "bytes": 19491,
+    "sha256": "4ac76d5d409eb12188a922e98f17faff7f9ef4e065b2b115a2fb79716946473c"
+  },
+  {
+    "path": "scripts/prepare-reference-incremental.py",
+    "git_blob_oid": "3b661396721115598599b4037e4669044b960f9c",
+    "bytes": 19226,
+    "sha256": "6ce34552eb53fa952d17c999149caa7c3079f259a51e6d05b248c6b49a8dc7db"
+  },
+  {
+    "path": "scripts/prepare-reference-macro-binding.mjs",
+    "git_blob_oid": "4d6132ff485788639adfb8d4f06047bc8cafca38",
+    "bytes": 11715,
+    "sha256": "815003fcce780a1216bd7964063d70956af8cfe3dee8be7500c005af83156f33"
+  },
+  {
+    "path": "scripts/prepare-research-bundle.mjs",
+    "git_blob_oid": "90f0779147ad53e62782f8731abc537c2370580f",
+    "bytes": 17234,
+    "sha256": "354a4a2eee87b159fe90a0e02f638ba8b8eb478289818aceb3fe54419d67619b"
+  },
+  {
+    "path": "scripts/prepare-settlements.py",
+    "git_blob_oid": "78ebd15dbd66796a1e0fd6304da937878b922103",
+    "bytes": 2317,
+    "sha256": "a743c6e68009dd20ee56f4940da475908373e02eb64e7eabde18ee816df97bb4"
+  },
+  {
+    "path": "scripts/prepare-site-r2-export.mjs",
+    "git_blob_oid": "b29c60b43998171a8d5c3f4507585f889c9f3df1",
+    "bytes": 4171,
+    "sha256": "d67c4485bdbc07108584b737dd49775e1fb7f88b4bcacce0fff59edeface7c2c"
+  },
+  {
+    "path": "scripts/prepare-source-policy-summary.py",
+    "git_blob_oid": "a206bd35e1fb3079328d475be847e115e7302789",
+    "bytes": 3829,
+    "sha256": "e8affdd48938a53e6a43c126abe41dd88d16350ee4a6aed2036c87d6d05539c6"
+  },
+  {
+    "path": "scripts/prepare-startup-ownership.mjs",
+    "git_blob_oid": "269c20177da47b34774f92eb3af142844b5f52e7",
+    "bytes": 11306,
+    "sha256": "29eecbacd7ca0dc29e88c1196a727707cf66cf7ffb5eed2086648d57f4e4cff2"
+  },
+  {
+    "path": "scripts/prepare-topography.py",
+    "git_blob_oid": "4279b8504c06f12471a6879749add197ac3a55dd",
+    "bytes": 9103,
+    "sha256": "7ede54bcab629331d125439dcfc661dc5d5229e8a9441a59d4ecbfa1cdd45553"
+  },
+  {
+    "path": "scripts/prepare.mjs",
+    "git_blob_oid": "65d9e2f910b290628b1d26d91864a6bbfca9f324",
+    "bytes": 4376,
+    "sha256": "3a934b9236b2c8dd70b8aafed61c1b5528663366e4fc5df127a5841b501c0bfd"
+  },
+  {
+    "path": "scripts/preview-wheel-zoom.mjs",
+    "git_blob_oid": "e10519b433cc23ef623436879ca5caa37206bde4",
+    "bytes": 1356,
+    "sha256": "7f3275fb19e700d79165879b679ea649fc279ac813f6e80fce4949a1e143e9c4"
+  },
+  {
+    "path": "scripts/provision-postgres-runtime-role.mjs",
+    "git_blob_oid": "d0c662af6ecc6e083ab1f2177033d3087ef9fa24",
+    "bytes": 10337,
+    "sha256": "c6347c49f82286c77ae9edb3cc069d5c133ecefb48312ca361c5f62af55cd329"
+  },
+  {
+    "path": "scripts/publication-cloudflare.mjs",
+    "git_blob_oid": "80750bbf3c9bdfcac8088130e4a96b18d8911855",
+    "bytes": 11094,
+    "sha256": "6d6bf9943fbe4ad1ad13a03d6c9fc07131e89b3b1b351fb1e463175218aeff9a"
+  },
+  {
+    "path": "scripts/publication-plan.mjs",
+    "git_blob_oid": "18981c9bfb5e83c92a1306f7a02f63ce98618ea7",
+    "bytes": 13564,
+    "sha256": "0657dcc078ac4e44d859e39cc04ad79864df0fa07acb226a55f01d9049458111"
+  },
+  {
+    "path": "scripts/qualify-source-cohort.py",
+    "git_blob_oid": "f69180b425d665a022dd18290688864674dd20a5",
+    "bytes": 43642,
+    "sha256": "abc801b9a35d20c9f0dfe3bbc9bb2cb7dc107f1758414970d9cde11380574a18"
+  },
+  {
+    "path": "scripts/r2-migration-http.mjs",
+    "git_blob_oid": "81347be5c5d448d64155d199608780a1b134e134",
+    "bytes": 1987,
+    "sha256": "8e8b3679de0d150970991b369b5cae2be003574b04a48bfe51115da03dfbd169"
+  },
+  {
+    "path": "scripts/r2-reconcile.mjs",
+    "git_blob_oid": "0e9ec8413b5b8ffccbce80a3d188fc0bb2299e78",
+    "bytes": 8771,
+    "sha256": "ca20723fa712ea6061f638f1b3bbc1506edf90b993e3749781624260ac5eb995"
+  },
+  {
+    "path": "scripts/read-geographic-release-manifest.mjs",
+    "git_blob_oid": "740284b35c0eef1d4b001d648fedbe138cd23de9",
+    "bytes": 3978,
+    "sha256": "9fddf4a6486a05d85558d19e4937e4da0955844b2156c016cfaec6d6cf2e0486"
+  },
+  {
+    "path": "scripts/read-prepared-evidence-bundle.mjs",
+    "git_blob_oid": "ab89c52546d01846b61ecfdcce88e993d07793cb",
+    "bytes": 1749,
+    "sha256": "327890c1c1fd6f8dbc96905c8759b5eef91874eb4d513da1f98630997c16ea8f"
+  },
+  {
+    "path": "scripts/rebase-reference-hierarchy.py",
+    "git_blob_oid": "a9d29e7cc0d32edd56182e0774c84b93fec0558f",
+    "bytes": 14820,
+    "sha256": "c6d70eed483cdefd623f83f3823759b66279d9592268df39195df08b814dba4c"
+  },
+  {
+    "path": "scripts/rebind-coverage-manifest.mjs",
+    "git_blob_oid": "f105ad0e2c2bdc414a7c4afdc3ab294e4673d0bc",
+    "bytes": 5109,
+    "sha256": "ae3e018d202993df3a200f01d986cc8a90b548b6ab47d8d34b4b8be35d65a043"
+  },
+  {
+    "path": "scripts/rebuild-framework.py",
+    "git_blob_oid": "bb43f8d912308cd8238742dd0d0f8f901898a3a5",
+    "bytes": 16322,
+    "sha256": "203b95f04ecd52d101c15e8e961050bb87a1bbe8e10ef0cc7f73a6b0950b33f5"
+  },
+  {
+    "path": "scripts/recheck-vegetation.py",
+    "git_blob_oid": "ee01dc164b62f7a76e2726b047300d967754e8c6",
+    "bytes": 14208,
+    "sha256": "de561a964ed228032b0643280eef18ca7f29b811765a3ba5178865572f6c0f55"
+  },
+  {
+    "path": "scripts/recompute-ownership-areas.py",
+    "git_blob_oid": "b52c709a44b5ffef8273935b4909c48ff58b394e",
+    "bytes": 5299,
+    "sha256": "3f061cd76be4cd52a603de4b67feb7d977d16f40d16d62f13263039a1c8ef8d0"
+  },
+  {
+    "path": "scripts/reconcile-border-parents.py",
+    "git_blob_oid": "113dffaf2094bdc84c5cd9d6700e90ffce2f02fb",
+    "bytes": 4837,
+    "sha256": "924593286235a70766cdea123bb1909a8775aa56e2016f3d2ba3de768ebe830e"
+  },
+  {
+    "path": "scripts/reconcile-regional-membership.py",
+    "git_blob_oid": "7578443062ffeb550e696b729977374d83862644",
+    "bytes": 7866,
+    "sha256": "b85206e4036b745b1160df996be5d682a77062ec684712b4dabe1c2fb7916677"
+  },
+  {
+    "path": "scripts/reconcile-topology.py",
+    "git_blob_oid": "1573b3a7814f903196b17c0c1ea34f10f5745669",
+    "bytes": 8419,
+    "sha256": "1739883a9ada57e346f12c009beb4c14091429e810ec7cc77f8b01e8bd3ae763"
+  },
+  {
+    "path": "scripts/recover-ownership-candidates.py",
+    "git_blob_oid": "8d66f3921e294819a5bf4652dd7876202a5dd4f0",
+    "bytes": 6536,
+    "sha256": "e2da92847d7956fdd26b26a900ad31a8e88d113458365612a70a3b279caca675"
+  },
+  {
+    "path": "scripts/recovery-backup-envelope.mjs",
+    "git_blob_oid": "7e28def6098aa6d6238f0a957c3d75e19212fd17",
+    "bytes": 7201,
+    "sha256": "5dac56840cb0cc1760648299a6193f49d9bbff240caa264f8ccb12d223ad5e19"
+  },
+  {
+    "path": "scripts/reference-polities.py",
+    "git_blob_oid": "b3799f66f957ba7ce666d6853243a134212468b3",
+    "bytes": 2555,
+    "sha256": "b833689df87ad85a5b5d7b7be057452f171878c395e599a551f89b74eb2477d2"
+  },
+  {
+    "path": "scripts/refine-geographic-components.py",
+    "git_blob_oid": "2a4bb0ecd571b94a7f16905af2407769f40f9e08",
+    "bytes": 7902,
+    "sha256": "f6d77667ff76fe0cd2e9aa1354c3a19e2d1f67ab400f13749d66ebdcbd26f75b"
+  },
+  {
+    "path": "scripts/refine-global-locations.py",
+    "git_blob_oid": "4cfc439cd968ea94bb20ecf4341e7572e1bed251",
+    "bytes": 10261,
+    "sha256": "c2cb774a02440bdad43a43555f12954305696112569ed46f177cb5e8ec6e5e73"
+  },
+  {
+    "path": "scripts/refine-italy-framework.py",
+    "git_blob_oid": "58faaa5435020ae693580b669a8967a3d47bc3f2",
+    "bytes": 4971,
+    "sha256": "cea33626cb4227b48423545584da06abccd5dcc7ae0e76aaedf69cd7916aef42"
+  },
+  {
+    "path": "scripts/refine-ownership-threshold.py",
+    "git_blob_oid": "f6fdaf11c87c27ed2c87b054432bcb7eb2c9cfae",
+    "bytes": 10034,
+    "sha256": "d92a0f0cf803c3543e28825df438be589980b444c8c2ea69f014da3d465e9a20"
+  },
+  {
+    "path": "scripts/refine-remote.py",
+    "git_blob_oid": "c5db9115604b6c82318a68ca008df7a21688bc93",
+    "bytes": 7440,
+    "sha256": "6a6a5258328aa1153d567d9a98b90339421700d491f36fbdca216d3e0cbc2726"
+  },
+  {
+    "path": "scripts/refresh-angola.py",
+    "git_blob_oid": "c4d0eabfcc4a5a0a1f021880583d5f6c5456b2b0",
+    "bytes": 4136,
+    "sha256": "e8e6821608727150396b9e90407310ce28628eb702821e4e0c052fe37d7863ae"
+  },
+  {
+    "path": "scripts/repair-geometries.py",
+    "git_blob_oid": "cc9bdd5a760340ba68481669c44e57681e21bf22",
+    "bytes": 1265,
+    "sha256": "dcd76fa5d2745eb5ae914e8eb90bd34fbd3d09df5dd1aa2024df7b235dcdd027"
+  },
+  {
+    "path": "scripts/repair-supplement-source-hints.py",
+    "git_blob_oid": "26bea5f64d66797a406160f0da1a0f15d8e3de41",
+    "bytes": 8273,
+    "sha256": "0722dec7c8faa6abb490eb47660d67c0f44ca47ff8368cf247ad1d9ba4e13812"
+  },
+  {
+    "path": "scripts/requirements.txt",
+    "git_blob_oid": "03d6944a05ee9e77677f923da3f7ecd4957bb42d",
+    "bytes": 58,
+    "sha256": "a911b499659c266373447ffef081b16be803c5b5b2cd22889cc5c7a22811c0ae"
+  },
+  {
+    "path": "scripts/research-import-gate.mjs",
+    "git_blob_oid": "85387d9f8647c0d4374f1d1d43e02797c471fd7e",
+    "bytes": 335,
+    "sha256": "0079ee16f5cf1068a09be8d5b416ed6a22e33c33b0605b203cc213f4f6198905"
+  },
+  {
+    "path": "scripts/restore-geographic-repair-stage.py",
+    "git_blob_oid": "7a8ae9a597951cb130d2f48c1d51a3fd3c66d2fa",
+    "bytes": 3206,
+    "sha256": "b2c147e953a2b84a3dc51071243fb2d29f444a8abd81c04ed88d22000760b144"
+  },
+  {
+    "path": "scripts/restore-postgres-storage-v2.mjs",
+    "git_blob_oid": "ad432bf019726a28159da3c1f24da9191ef773f9",
+    "bytes": 20543,
+    "sha256": "44dd22f2887fd63f6360e7edab747771a14d805d4b213629c93ea8ca13bb1e32"
+  },
+  {
+    "path": "scripts/restore-postgres-storage-v3.mjs",
+    "git_blob_oid": "0722f5237a03123258f4403e02908b26c00dd9f5",
+    "bytes": 20625,
+    "sha256": "51098fe5e9f042dabdabf05cf60e5c25bdeb32b02031dd3e38dfaf490611bd30"
+  },
+  {
+    "path": "scripts/restore-postgres-storage-v4.mjs",
+    "git_blob_oid": "5a4480b4d3f689b38c86445892a3dfe9876dd229",
+    "bytes": 21406,
+    "sha256": "87869e497b357d3dd753700b119aa25c8540704b340b2b9538e8324293f4f1af"
+  },
+  {
+    "path": "scripts/restore-postgres-storage.mjs",
+    "git_blob_oid": "2effd4de9f28058a8793c0148f9f26b21151da42",
+    "bytes": 18230,
+    "sha256": "386fbdce043766d50c3025283904188e580f428a25aa3334c529c608a985c0dc"
+  },
+  {
+    "path": "scripts/restore-reviewed-geography.py",
+    "git_blob_oid": "601950352fb9d390d91106912bc7092ed33cd982",
+    "bytes": 8771,
+    "sha256": "c1f79ef00c58d57da97b0b25e465a7aa0d12cffbc3fa87b6edd5889838f5af1b"
+  },
+  {
+    "path": "scripts/retain-physical-audit-code.py",
+    "git_blob_oid": "db1b35bfe8fc817f5db3ae5278af23a9fa3d4250",
+    "bytes": 2927,
+    "sha256": "be86a40744c182adf26a5d75f45f54bea2c963d1174b101fd9511e023cc83917"
+  },
+  {
+    "path": "scripts/revalidate-prepared-evidence.mjs",
+    "git_blob_oid": "c7f3e3ed81915b56fb3a2b437e1260d75d882eeb",
+    "bytes": 8035,
+    "sha256": "8d189cfd2bcd720a5cbe0115006920088c4a21a325940e048a9c6ae72f9a8b77"
+  },
+  {
+    "path": "scripts/review-framework.py",
+    "git_blob_oid": "a2c448f0f10ee5a7b343e5fd75df44e659120d65",
+    "bytes": 4317,
+    "sha256": "1aabb78195ed6d7a3d202ef6e9075ad943f76c390a6d0af912a555e308d0bc24"
+  },
+  {
+    "path": "scripts/review-global-semantic-closure.py",
+    "git_blob_oid": "19f220c4473abb1b071d830c0a44ddf5d4003b24",
+    "bytes": 22907,
+    "sha256": "8ec2d6b38733c24c7fbd0c0a4d744d546acdbf5bd82845256ff325d79fd54ca5"
+  },
+  {
+    "path": "scripts/review-granularity-global.py",
+    "git_blob_oid": "43c79bc0d5a5291d6acf28e2e84dca9d30467163",
+    "bytes": 18789,
+    "sha256": "f227f6dfeb4337df1f3711cb1a68ed48dfe8a1054256c407698954e8f616b1cc"
+  },
+  {
+    "path": "scripts/review-namibia-source.py",
+    "git_blob_oid": "60512359816672517d58d9e231c27fdbd982be9c",
+    "bytes": 12889,
+    "sha256": "d0d90dd232595788423efbdf0b33f405a6d78000fd7be389b42554f4f77c53eb"
+  },
+  {
+    "path": "scripts/review-world.py",
+    "git_blob_oid": "7d269cb8909b09e26d5abfc84528da90a22ebfb3",
+    "bytes": 13920,
+    "sha256": "6c2ad1096f8190d8a39550fc407456e2594d5b3e31b79a5133eb16b893aca0b4"
+  },
+  {
+    "path": "scripts/run-geographic-check.py",
+    "git_blob_oid": "aa34cb268a3b826ef74601a69852b86bb5b49782",
+    "bytes": 30910,
+    "sha256": "aa45ab9676bd9dca6f156f3d483f4a4cd3874e5710f2e7c6fbbf0c052fb0a2da"
+  },
+  {
+    "path": "scripts/run-integration-tests.mjs",
+    "git_blob_oid": "2df58c6dbbb21bb0558a3c8e26aeb81dd75f5e27",
+    "bytes": 20213,
+    "sha256": "2074aa60865ac82ddaf4cc03f69f1602ace16ba2cdd033e1a70066f289bee748"
+  },
+  {
+    "path": "scripts/run-issue-claim.mjs",
+    "git_blob_oid": "c0e09ce1ea1dafb0acf968d0d872db75576bad18",
+    "bytes": 5577,
+    "sha256": "c8555660b51fb59c366193459b20d433d4088bcd41d75636d58c3db13e7ba7d1"
+  },
+  {
+    "path": "scripts/run-worker-merge.mjs",
+    "git_blob_oid": "6ea09b372f4b834f955b1d0138d0d399b54b1479",
+    "bytes": 8246,
+    "sha256": "faa6963b2268668c0fce84e5a7ea2a2e1f8ce0788163ec1058e8d7f21c265e6a"
+  },
+  {
+    "path": "scripts/select-build-ownership.mjs",
+    "git_blob_oid": "72a184e948f72ef75a894688c65f5a1281124c23",
+    "bytes": 7119,
+    "sha256": "06268a242b782f86a07a7a3aec653c2648226dbcdfab4a062b96d7dbfd0a01c9"
+  },
+  {
+    "path": "scripts/selected-checkpoint-native.mjs",
+    "git_blob_oid": "77f952b11c6c7d6da4a7ee443435a3c047f992fe",
+    "bytes": 10671,
+    "sha256": "bc5e5550d3a6cf62bb856ac01c0d9bfe0f7bf92eecfa39dc65d1a0607768c6b0"
+  },
+  {
+    "path": "scripts/selected-delivery-smoke.mjs",
+    "git_blob_oid": "05f0be76cc98bc7e11243fdcaf5d9acf85f4c6bc",
+    "bytes": 18896,
+    "sha256": "491e06cfdf76a114127f6975fba9ce431d49e3cd0bbc91d2261aedc2049a0c03"
+  },
+  {
+    "path": "scripts/selected-package-bootstrap.py",
+    "git_blob_oid": "7d026728c7f4ef50c127580ba732ab4b46a769bb",
+    "bytes": 9777,
+    "sha256": "0fc61426bcaf74f43bc551936016f5826eb682112a799ab4051c1ac394baafc2"
+  },
+  {
+    "path": "scripts/selected-reference-metadata.mjs",
+    "git_blob_oid": "38c941e96aee6a0cc62615b7d797e51439570c42",
+    "bytes": 10403,
+    "sha256": "369352d4b78a862fd79ea88bcc6420fbec9ea8d80348dd2d3b6a122dc5dd2a5d"
+  },
+  {
+    "path": "scripts/semantic-locations.py",
+    "git_blob_oid": "b2daf4c21d1b41057e9326c34c6e3fb66ff836ed",
+    "bytes": 36266,
+    "sha256": "ac18022fa1c881bdbedc590f150a501ad23d52ba86cb47c5a005643012f1ad1a"
+  },
+  {
+    "path": "scripts/semantic-sources.py",
+    "git_blob_oid": "455020db27a57d2063685e8bce810a2c0939a4b4",
+    "bytes": 1183,
+    "sha256": "7bb5f8ad5954502a8d6f7e5cb4bf0daffc05c853d0bce9ecca18514932d99a2a"
+  },
+  {
+    "path": "scripts/source_policy_corrections.py",
+    "git_blob_oid": "2e7ecefa86c6b3077ea392331894c03f9d7e3d55",
+    "bytes": 1952,
+    "sha256": "8a2c82f075d3d3b65d3233607524aae4539815e9b38f77f490c3c6b312dabffc"
+  },
+  {
+    "path": "scripts/stage-canonical-grid.mjs",
+    "git_blob_oid": "ca9e5ee69cbaa0a61faa00108353479bf4737f15",
+    "bytes": 4088,
+    "sha256": "9ddb37b4555a4f0519e0c1e1dc534522d23ead7bf033678a579c493aed848d20"
+  },
+  {
+    "path": "scripts/stage-land-creations.mjs",
+    "git_blob_oid": "911cc248ce73ecad76c3a89dedcdb0249378bead",
+    "bytes": 5239,
+    "sha256": "0053c5e090dccc5c65d43d14881087a8e52ce51385abf7a23e6c98aa45f654f6"
+  },
+  {
+    "path": "scripts/stage-namibia-repair.py",
+    "git_blob_oid": "5c00384ad2dbe70dd08c05263f3425ff915fcc26",
+    "bytes": 29865,
+    "sha256": "fcd211566d5e5c007c6e04ea6b427c30cd74a507a96f4bdcb586ede3cca3e328"
+  },
+  {
+    "path": "scripts/stage-site-migrations.mjs",
+    "git_blob_oid": "5882f23d867670825db8a3572f0cecd835dc5703",
+    "bytes": 6622,
+    "sha256": "5f03c736cdcfdbcd1591ab2d3f244fb45f9fe3218f4fd99e91422d356f68ba45"
+  },
+  {
+    "path": "scripts/stamp-prepared.mjs",
+    "git_blob_oid": "74f922b6e7fd964e78fb0921a2db7b11a96a1f49",
+    "bytes": 794,
+    "sha256": "88075b363124d42bf9b6aa01994dd3fc6d05617b43c0f997c007990c6adb0bcc"
+  },
+  {
+    "path": "scripts/storage-checkpoint.mjs",
+    "git_blob_oid": "5eefaef15cee3e3ec756e5326a3811e2934f8e22",
+    "bytes": 16517,
+    "sha256": "d006c51ca9074af056c0c95e369868104fb27a07c3e96ab461370674c1291f8c"
+  },
+  {
+    "path": "scripts/test-current-postgres-recovery-native.mjs",
+    "git_blob_oid": "ffa8a2f5bc63f5f84994f619f4c558cd80911d91",
+    "bytes": 18512,
+    "sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+  },
+  {
+    "path": "scripts/triage-geographic-grid.py",
+    "git_blob_oid": "149dcf78c0adc8a73e762871ba9961af0de041c6",
+    "bytes": 16052,
+    "sha256": "ba1d29868bf372782ade1ebb1335c8e90f9a0be2058db04158ad4c51755123c5"
+  },
+  {
+    "path": "scripts/upload-research-media.mjs",
+    "git_blob_oid": "a06b80c9c6073dd8ee1334a7519f87595fb3d5c1",
+    "bytes": 18669,
+    "sha256": "033ebc17bd0e832f79e7481b4f4697b45c7b7cd2d7c8c6a99a55b415116793c3"
+  },
+  {
+    "path": "scripts/validate-evidence-partition-review.mjs",
+    "git_blob_oid": "5d3766b5f0962c84d446586574252817833809ca",
+    "bytes": 6812,
+    "sha256": "c7bdb6a2668d4e56f066921fa901c5333e3869c08d906cfef4089a3de49fc413"
+  },
+  {
+    "path": "scripts/validate-evidence-partitions.mjs",
+    "git_blob_oid": "5d52a89581feb501f9fe9f0f20c80b7fac2ed8af",
+    "bytes": 8962,
+    "sha256": "281652a61715ab7e50a3798d46b74b9d190fdee867902e7635234a2f7c540b70"
+  },
+  {
+    "path": "scripts/validate-evidence-revalidation-chain.mjs",
+    "git_blob_oid": "a5eea7ffe4399b877545fd132df40ae3f9a03590",
+    "bytes": 3361,
+    "sha256": "fe1ad3a39339b674b647b9ad30a3e21cf0a2224b0062c400ec64011c3233fca7"
+  },
+  {
+    "path": "scripts/validate-land-creations.py",
+    "git_blob_oid": "758b81fd5e0c2b604de3cea8609cf3ad9b4859fe",
+    "bytes": 6560,
+    "sha256": "664ee9e093d5b6fa8785e8e661772855d69f1b90b57e12188f0bf6ca6eafa4be"
+  },
+  {
+    "path": "scripts/validate-macro-restoration.py",
+    "git_blob_oid": "6c8451c346b731e0afd85cf409d0bc1fa723a227",
+    "bytes": 5641,
+    "sha256": "3aa80f0486baac710c1659a69bef42c1df4d7213b21bb0a7ad8105ffd8611ae0"
+  },
+  {
+    "path": "scripts/validate-oceania-land-restoration.py",
+    "git_blob_oid": "0dbf022b060b53039bb95481e5f4b2c52bf6fb6c",
+    "bytes": 1550,
+    "sha256": "131d1d8757e1923cac8c94b270dc65e2b8dea5ff3f9e762c33801054bcae2426"
+  },
+  {
+    "path": "scripts/validate-ownership-runtime.py",
+    "git_blob_oid": "8ed92aded8157bb8316a4cb43a274c9ec8b2b6d0",
+    "bytes": 5101,
+    "sha256": "118b907d2aec2edc4333987da91f4830e31bf377390ed1a89c67e913ee7b74e1"
+  },
+  {
+    "path": "scripts/validate-physical-audit-evidence.py",
+    "git_blob_oid": "694b2d8492c53f7b06da242a1c56b7b197c55eed",
+    "bytes": 18386,
+    "sha256": "3e742b3ad094db2f36e0e8b9944e01d3e00698de07a1359a7c4231130a2256cf"
+  },
+  {
+    "path": "scripts/validate-physical-component-evidence.py",
+    "git_blob_oid": "67ed9f2b0f921210191b0312e68511de7b9b93e5",
+    "bytes": 18306,
+    "sha256": "86219dc9dc38bbc1edb772912aa79662a4e336dbc9c039283052b7e48b9e87f4"
+  },
+  {
+    "path": "scripts/validate-physical-gap-priorities.py",
+    "git_blob_oid": "ce1255c46e5e50cab10d4bf837d69f88e5d60114",
+    "bytes": 14434,
+    "sha256": "ea8961692e93e638fc1c5445383acdfecc5ac9c87dfb207683b26d708bfff008"
+  },
+  {
+    "path": "scripts/validate-prepared.mjs",
+    "git_blob_oid": "2da87d2d1b311408dd5bf6df0658a7f478530be2",
+    "bytes": 5391,
+    "sha256": "13cdf9d255f62b37f29eba330b7089b132b6c863fdd6fb4f36bb59458a78911c"
+  },
+  {
+    "path": "scripts/validate-semantic-followup.mjs",
+    "git_blob_oid": "dc4df789afa35b0db2677ffc500cad0f3718f331",
+    "bytes": 34422,
+    "sha256": "6fe84c3287112697f905259d7f16b6cfd51e6dceeea143262a48e3fbbfda3e64"
+  },
+  {
+    "path": "scripts/validate-structure.mjs",
+    "git_blob_oid": "4c5f77e75c7c0ff93e0f65cafe23e2252c1c411d",
+    "bytes": 2224,
+    "sha256": "80f266fc7ed55a5f2c8963c9a4c0c6619f15606f10190b380323ba7087282372"
+  },
+  {
+    "path": "scripts/verify-category-browser.mjs",
+    "git_blob_oid": "29fce0a20b09060ae7fa9187ebbd164669ccc585",
+    "bytes": 7951,
+    "sha256": "79f9ae02b2cd24e794e232b0c8b66e1d3a9f3220dabc64cfb85a55e8f0dd2a86"
+  },
+  {
+    "path": "scripts/verify-compact-membership-runtime.mjs",
+    "git_blob_oid": "37e74910aab89c3a45c87f731578fc8639ab95b8",
+    "bytes": 966,
+    "sha256": "f39ebccdd967140e5148d4ffe1190ed5c854999d5a1fff0be26efd0ea863e0c4"
+  },
+  {
+    "path": "scripts/verify-geography-import-pin.mjs",
+    "git_blob_oid": "284294ca5dc6d106f746a3ea1897cd939bbbdfb5",
+    "bytes": 9680,
+    "sha256": "7ea41cb41df26fa5be73f7d745ed42ba50f8d5c93f9294377c1d7844da0ebc3c"
+  },
+  {
+    "path": "scripts/verify-hierarchy-install-baseline.py",
+    "git_blob_oid": "1d0db66b351d319d5c7054aba22cbb236a053fcb",
+    "bytes": 2083,
+    "sha256": "8892bda91cbfc26065fe1ee1fed1676d8fd52893db41f56c04bc997f3cc3571c"
+  },
+  {
+    "path": "scripts/verify-hierarchy-install-generation.mjs",
+    "git_blob_oid": "86819c0d72a0043fe8c3724d7c587a6ba49a0f53",
+    "bytes": 2307,
+    "sha256": "ec67a6d62c14c9bd552193d467f055dba4776d06718a0abb222807c68e0d57d5"
+  },
+  {
+    "path": "scripts/verify-hosted-local.mjs",
+    "git_blob_oid": "68a7b586ced59383e3cbe48c6469f4c1628b855e",
+    "bytes": 7201,
+    "sha256": "56a02bacdaf6ed1e3814a56d6689e98feb0e8d1207c84e6c06938a569673802d"
+  },
+  {
+    "path": "scripts/verify-hosted-published.mjs",
+    "git_blob_oid": "e8be1af739e3310ce4897b9cfc50817c46b057da",
+    "bytes": 6049,
+    "sha256": "303f78e224c732a36d8711a6fc25042e5532abcdc203027929586d93e9f1ac03"
+  },
+  {
+    "path": "scripts/verify-live-capacity.mjs",
+    "git_blob_oid": "814c046888796d44453171bd5f88daa269410a46",
+    "bytes": 5933,
+    "sha256": "6f67e815eea8d1007f79c2d19c5b4c48e6e71bd7cf98a5e2a23e61907ce529eb"
+  },
+  {
+    "path": "scripts/verify-live-neon-browser.mjs",
+    "git_blob_oid": "0e0506774d57eb500925a4917f5ec5df44bd14e8",
+    "bytes": 5845,
+    "sha256": "fe4d6a2a65b16058bc4a40d75cccb7df2e8451212b0c70b79642b86b83c31845"
+  },
+  {
+    "path": "scripts/verify-live-palette.mjs",
+    "git_blob_oid": "8c384ee6a5885f465828b9d18f53d2fb06a82152",
+    "bytes": 8163,
+    "sha256": "6be6448540310074de1888c241ee9775466d90d6053a232a22846d090bc2d24b"
+  },
+  {
+    "path": "scripts/verify-live-year-switch-faults.mjs",
+    "git_blob_oid": "f68fcd7beb965cd5d082052125a0f6bb7e06ffd2",
+    "bytes": 7169,
+    "sha256": "facb6d75c9d771512d59bd4124793ebd83f959fe8c79057fcc0921c5ce8d8a6c"
+  },
+  {
+    "path": "scripts/verify-macro-envelopes.py",
+    "git_blob_oid": "f185c5e89535b3650f0307f6522d600e296df385",
+    "bytes": 5294,
+    "sha256": "db6d5763b66a40534c2b0ae113357453c03d29834a09ed448b47f8896f5de593"
+  },
+  {
+    "path": "scripts/verify-neon-capacity.mjs",
+    "git_blob_oid": "d1e2d5f927f89caf275722f0d8c959c39e028de9",
+    "bytes": 6932,
+    "sha256": "23d0eaac96302cd4bd04d0f4c5a0a6f7b5555ac7bb9fbd6e24adec95c27e5b94"
+  },
+  {
+    "path": "scripts/verify-neon-project.mjs",
+    "git_blob_oid": "42bba5fe8f6b42f421c66311e4f617e8465581d2",
+    "bytes": 7376,
+    "sha256": "2043839debb466c6f16bbb89c9aedccb669d3796e90f5aeea816fd8c087e1b9a"
+  },
+  {
+    "path": "scripts/verify-neon-site.mjs",
+    "git_blob_oid": "ae502a1d614bf509e924c37b89790e0890c9c8e6",
+    "bytes": 3797,
+    "sha256": "b3ae62f633f38d73b80536ae16158870d3d02804b7c6877a39027e88e2a0c7f0"
+  },
+  {
+    "path": "scripts/verify-neon-sql.mjs",
+    "git_blob_oid": "9f4e24760c15e3b8bd473111f3f986754f02d980",
+    "bytes": 19113,
+    "sha256": "899161d1ddc9c68088aa51884a30cca5ed2440b81a738e2a229adf44a950c4aa"
+  },
+  {
+    "path": "scripts/verify-postgres-schema.mjs",
+    "git_blob_oid": "9e6b1bc0e13d81ade3d61ba14381d0f93e6c7038",
+    "bytes": 6163,
+    "sha256": "3fbf8757a0712e794c55aafc06bad826c76cdbee533c8011f8bc1151137ed1a3"
+  },
+  {
+    "path": "scripts/verify-research-service.mjs",
+    "git_blob_oid": "68ea95f70884da0258497650153a72f70b63aee5",
+    "bytes": 3011,
+    "sha256": "5114a1e8c9108cc04880ee85ea211da9a67719ebdfdb65d6958742104194f7c5"
+  },
+  {
+    "path": "scripts/verify-retained-object-recovery.mjs",
+    "git_blob_oid": "28d64b5ff9551a6b9a2a46c56e6ddff037183150",
+    "bytes": 12518,
+    "sha256": "b188f55215ff721e6108260c0d719f806ab37237f4999994a2bea4180812922f"
+  },
+  {
+    "path": "scripts/verify-wheel-app.mjs",
+    "git_blob_oid": "66db1568379b741da48f25c0aa62b5ca1b14497b",
+    "bytes": 4389,
+    "sha256": "a2ee6c209b3c38ff67cc91947d965cc1bead4147901a06a0b17bad09d9654ec3"
+  },
+  {
+    "path": "scripts/wheel-measurement.mjs",
+    "git_blob_oid": "7bed9a278ce640b5c19164018311ae2937875452",
+    "bytes": 721,
+    "sha256": "764f1c3001e81a1ea2bf8013b85f0e3a01b19cbf49f7474589bc30d6d6bf0508"
+  },
+  {
+    "path": "scripts/worker-identity.mjs",
+    "git_blob_oid": "8eb2279bc91a62962cacee263f570b99ef99375b",
+    "bytes": 548,
+    "sha256": "e31ef3d286c3250f7f69e23f455edd896cfa96b8eb6438026aa4374da57128bd"
+  },
+  {
+    "path": "scripts/worker-result.mjs",
+    "git_blob_oid": "b2b414668ed1b4ff059237263fe2f4f8874be180",
+    "bytes": 1913,
+    "sha256": "21757f7bebf64513389c0bb97e9f79f556f145bafbb4ceae9d4889e68a43883f"
+  },
+  {
+    "path": "scripts/worldwide_gap_inventory.py",
+    "git_blob_oid": "45bf8324bd8775da08fc91acce6fd7c07012c169",
+    "bytes": 12655,
+    "sha256": "ee08816a23ff681f91c18c7d82c63ac7e32cbb69a46164ee5c605f72d1c51508"
+  },
+  {
+    "path": "scripts/worldwide_gap_operational_batches.py",
+    "git_blob_oid": "8fe5335352f1ca2f1cc66c2c4bc8bfff97032143",
+    "bytes": 4786,
+    "sha256": "73a745fc5f34beb2dfd60cbab1db57b19c76152d6617eef086ea6c55659e7574"
+  },
+  {
+    "path": "scripts/worldwide_gap_source_context.py",
+    "git_blob_oid": "d9a530dfb7f1e9a797cab1745e55fe5d5321477c",
+    "bytes": 8278,
+    "sha256": "96ccd74059cfdb53ae1b92be596fe4a95c3c438596a208af43c4e995e428800b"
+  },
+  {
+    "path": "scripts/worldwide_gap_successor.py",
+    "git_blob_oid": "d4a0dd6b4b225619f367b119d03bacfec0bb22dc",
+    "bytes": 30481,
+    "sha256": "13da93f262d5fef68685d0cdc172ca568b836843cca833028f218da28a9031e1"
+  },
+  {
+    "path": "scripts/worldwide_native_observations.py",
+    "git_blob_oid": "e31db84e0d32780e4846a847ad5f8cd2f67983b7",
+    "bytes": 5066,
+    "sha256": "d5a39653af4d2f238ee9fc4064eb9776c5288633c3c3e25e236cbf5865042f9a"
+  },
+  {
+    "path": "src/attributes.js",
+    "git_blob_oid": "aa11e038189270aed132e1d1a206fcf84ef6bac2",
+    "bytes": 7868,
+    "sha256": "3b46c712e461c67338a28cb6d8bf90bddb1b07f7084f5f3bc26d7b04b1954ec8"
+  },
+  {
+    "path": "src/category-palette.js",
+    "git_blob_oid": "fb814163ba0aab841a0affd1a47f5539a964566b",
+    "bytes": 82979,
+    "sha256": "c449f2087075c9e03a25a26449154ac874c54a3285cf0d3df068c8cf6afd43b2"
+  },
+  {
+    "path": "src/category-presentation.js",
+    "git_blob_oid": "c6878c27faa3fdf047d19bdf366a4c09e036e696",
+    "bytes": 497,
+    "sha256": "6314e187b76683e7a281e028cd77bbd5a6a2d585baa1d09c47b3b54649b7da7b"
+  },
+  {
+    "path": "src/color-perception.js",
+    "git_blob_oid": "467f5f8b2b8e5b3a3289a8221e68ad6f2ec2f7f2",
+    "bytes": 2835,
+    "sha256": "744b7177543a53315341cffa3227937e50575a4260cc0957c91f680ba276907a"
+  },
+  {
+    "path": "src/coverage-classification.js",
+    "git_blob_oid": "aabb3b0f48b0be011342e16920a45d9d23525a1a",
+    "bytes": 7378,
+    "sha256": "469e64633f322c0610193f284ece49aea0671384a635a708fa27d69d1047b4c4"
+  },
+  {
+    "path": "src/coverage-scope.js",
+    "git_blob_oid": "fbeb41fd03e8a33545d11fb27e58402cda29d1f9",
+    "bytes": 1309,
+    "sha256": "3fa2b6eaf17dbfa4ee8cab454517163764749e8606c90857d01305d1eea3a450"
+  },
+  {
+    "path": "src/coverage.js",
+    "git_blob_oid": "098372cb72ea0a975b0354c80fd925e9883b111c",
+    "bytes": 16838,
+    "sha256": "75fba78de4aa95f1007077e400840c5ee2118cac47327f4f4c368bd1e1a5aa63"
+  },
+  {
+    "path": "src/data-client.js",
+    "git_blob_oid": "1af001ae05b9b0b22d21569e26c67e25047e448c",
+    "bytes": 22365,
+    "sha256": "f349bf279f38fd712467cc4fa85a5631fb989596e1fd7e6d7ec6ddb0a0b3dedc"
+  },
+  {
+    "path": "src/derived-records.js",
+    "git_blob_oid": "2d64349a3ad705d8498632afc9e3d02e4d3e8554",
+    "bytes": 1514,
+    "sha256": "cbe63065128772c3e853dddf0882795e364f5ffe243a3a6cd256e814ee7d7935"
+  },
+  {
+    "path": "src/effective-footprint.js",
+    "git_blob_oid": "08b2ed3dca0f70b87739d1cc1594255fb6f78626",
+    "bytes": 53798,
+    "sha256": "ad1ce25a64dafd96434243a3ab7df9ec09edfd0db710b66f31db23d40d620445"
+  },
+  {
+    "path": "src/environment-classifications.js",
+    "git_blob_oid": "1bc6cfa8165b144cacfc6de73d552990d7e64d80",
+    "bytes": 5340,
+    "sha256": "d589aa3aa91831f0d1d2b5a21e161270ba44e86ef90dea23110a761510074970"
+  },
+  {
+    "path": "src/evidence-priority.js",
+    "git_blob_oid": "6ea549085e326f00fa1ccb89d32d568d0a2dabde",
+    "bytes": 441,
+    "sha256": "9e98e8c403d3a8068d286dbac160dc6126331d91958b7801b55ad9ecefa2244c"
+  },
+  {
+    "path": "src/geometry.js",
+    "git_blob_oid": "4aa28b103340899e6653ac66c19f32886814605b",
+    "bytes": 922,
+    "sha256": "e25af44275ae19418d0b49ae4501699a76dd0e99969d2782ed574724430bdf48"
+  },
+  {
+    "path": "src/hierarchy.js",
+    "git_blob_oid": "3407175d6cc69b8f99e3da03b3aa75c88525e262",
+    "bytes": 606,
+    "sha256": "ed44925555b30f8724b403f453d26575d0777c027b9160f559107a0a8f5126cb"
+  },
+  {
+    "path": "src/hosted-temporal-client.js",
+    "git_blob_oid": "5e4e237ab673803c6f65a6571dfc885aa213924a",
+    "bytes": 9129,
+    "sha256": "95b4df340f72e3d8691c1903ec9c89a6261096e5b69be623ed4e38dfd824204b"
+  },
+  {
+    "path": "src/hosted-temporal-geography.js",
+    "git_blob_oid": "e6306b0b3f711564c8d638e1f0ac476e4b74c513",
+    "bytes": 14295,
+    "sha256": "d98f8a73368753d345cda95a6b866d647e67c8b071d18c5cd78f876ac84694f4"
+  },
+  {
+    "path": "src/import-records.js",
+    "git_blob_oid": "02969206410bce43f2275d7fd2604932d1de1440",
+    "bytes": 12266,
+    "sha256": "636821c66c71c415f6659d51fa93dbb7eefcfd21a911eb059dfba1ceb9f5d194"
+  },
+  {
+    "path": "src/json-contract.js",
+    "git_blob_oid": "6cb81b458242f33fa6915b77d7c8c29f2b41f085",
+    "bytes": 1974,
+    "sha256": "b29783ac8f9937d82f43a30ee6b18b910f60c2da57e2cd0d59b81d86a7d212f2"
+  },
+  {
+    "path": "src/main.js",
+    "git_blob_oid": "1c10e12a7bf0690eef198b2203d75c9a6d38e537",
+    "bytes": 38290,
+    "sha256": "d6d8c5fd2c120d633522dafdb74b488b104c05b6c851066ec6e38bbed1740b7e"
+  },
+  {
+    "path": "src/map-cell-diagnosis.js",
+    "git_blob_oid": "8708bdc394662e0e94ff33bca8a9707ac401f91f",
+    "bytes": 4904,
+    "sha256": "9df4b2b9db78a8c20179ba7b0029db28230286c44ffd8fec076d926aa485dc06"
+  },
+  {
+    "path": "src/map-snapshot-format.js",
+    "git_blob_oid": "687e2327c37c43c2d32a82f51ceedf219c53c0e7",
+    "bytes": 4737,
+    "sha256": "2f29f4ffc874c2ade56ed7b53a581aa97ca6753351f65f0dd62c4512d69c50ab"
+  },
+  {
+    "path": "src/model.js",
+    "git_blob_oid": "b742ff4778deb48200007150c77b1f533f8bec41",
+    "bytes": 2822,
+    "sha256": "6cf64270d9c912b09aa93c60a14d058b4482c52e5ffa31d55fdcef026bea3dcc"
+  },
+  {
+    "path": "src/native-context-client.js",
+    "git_blob_oid": "272bf3abb9292de294f39b052a163164e5f6d207",
+    "bytes": 2440,
+    "sha256": "eb6d41a97a85bf14fa990120f23b2373212ece69ef25f8b075557de11cf54eb8"
+  },
+  {
+    "path": "src/native-context-worker.js",
+    "git_blob_oid": "65a36cdaf095c102c584212cdbf3e83b30277a10",
+    "bytes": 1126,
+    "sha256": "2345fd25048cc5720d6f61d62c2daad220cb558eafbb369595cab8e39fb92477"
+  },
+  {
+    "path": "src/native-grid.js",
+    "git_blob_oid": "3e1d3e7e6012b5b571345caad029ab7d124c07fd",
+    "bytes": 50250,
+    "sha256": "66b453bbb2e001b9ff56bd754d55087f5919845dceeefd886016494cefa1d3e0"
+  },
+  {
+    "path": "src/native-latitudes.js",
+    "git_blob_oid": "e19642077a3fc210e43765ab376b2fd0bd1012d6",
+    "bytes": 2769,
+    "sha256": "fdfb69c76d76a3f1fbf1f03256e24d333e55c68afff3a539e3ba1acd3bb9b37c"
+  },
+  {
+    "path": "src/native-location-context.js",
+    "git_blob_oid": "70e4e06c2b32d9cca4118c5f936199c305c22a9c",
+    "bytes": 10731,
+    "sha256": "628dd7878da234eaa6460cc584f2762daba286642f63402647836140d722e1c5"
+  },
+  {
+    "path": "src/native-runtime.js",
+    "git_blob_oid": "9c0dfe06f9485c5328e0056e79efa0e690d9c6f3",
+    "bytes": 1882,
+    "sha256": "be1ab8132f2979a3b20c9e57b9dfc83a85c975da0b8757e6598d359e722792ed"
+  },
+  {
+    "path": "src/native-source-digest.js",
+    "git_blob_oid": "a44713a506f743678203e67186cfbd0fea5e6d74",
+    "bytes": 2285,
+    "sha256": "5e1ef33dd195ba2df2d336c8ee48f388d5ca9b4e1a15308fbcb37d6ccea07172"
+  },
+  {
+    "path": "src/observation-modules.js",
+    "git_blob_oid": "7b629c55e59f5bb9901677307ddaef1d0befd52a",
+    "bytes": 2502,
+    "sha256": "4555be0c82b07668d614d05e766f0b213b3e43694c4e4126ecdf48c3dfe394d2"
+  },
+  {
+    "path": "src/observation-registry.js",
+    "git_blob_oid": "424c23eadc4e38d4a2fde66e5f4099ba775d2c9b",
+    "bytes": 8380,
+    "sha256": "9718be6c2668e7889d418c45475f179046ebed318bf7fd2a7c776a832e21a80b"
+  },
+  {
+    "path": "src/ownership-assets.js",
+    "git_blob_oid": "f574fab74d46576c4ef835ec22b2e2d0fd42f5c3",
+    "bytes": 4437,
+    "sha256": "7bc1938dbc3b1215a2c1a378c1bc4f85ee191a9d5c6779db91549e3d2b34dcba"
+  },
+  {
+    "path": "src/ownership-codec.js",
+    "git_blob_oid": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+    "bytes": 2948,
+    "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+  },
+  {
+    "path": "src/ownership-method.js",
+    "git_blob_oid": "839abe54e65a98d7be47f7e6d8d58eda0b5a7abe",
+    "bytes": 3126,
+    "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df"
+  },
+  {
+    "path": "src/pixel-canvas-layer.js",
+    "git_blob_oid": "49f6524ccab93996ad65273bda9280db4ebb2f2e",
+    "bytes": 12324,
+    "sha256": "adaf30f744095c1cb512ab69cd1435dc6d2df2e77563d9ba5d912164b513f23f"
+  },
+  {
+    "path": "src/pixel-gpu-worker.js",
+    "git_blob_oid": "bd3eb36d143330d2b4c44338813c5455512b2423",
+    "bytes": 395,
+    "sha256": "2779ed2b94635270fdd025cfba1e2b53fb2412ead99008d00f22b8710543b9f6"
+  },
+  {
+    "path": "src/pixel-gpu.js",
+    "git_blob_oid": "41151af9f2f85678064ec5e9a739226e03bb905a",
+    "bytes": 8734,
+    "sha256": "3c1bac4ee42f3962cf6dc1b69b6ce0f0f1b4315618fb52447865a348d9a118f2"
+  },
+  {
+    "path": "src/pixel-grid.js",
+    "git_blob_oid": "008aaf69e65105029e64e09317b8f9aa4df1f352",
+    "bytes": 3699,
+    "sha256": "ad31039b651e157480eaf0053787b119bdab4b9a2a699e5f6a05d396736c7595"
+  },
+  {
+    "path": "src/pixel-layer.js",
+    "git_blob_oid": "23b741c22af5de49fb3c2423847468aef412b670",
+    "bytes": 7903,
+    "sha256": "b1ea68b44c18bca339e9a79e9bd1a1bd82b0795d135597a80e2a92fad1090e21"
+  },
+  {
+    "path": "src/pixel-metadata.js",
+    "git_blob_oid": "d7c94a791d4ea7f12e28960e506b1ccb4163ff98",
+    "bytes": 1865,
+    "sha256": "7fb6041b5ef9dd8f862d19f34d8a75adae726bc23d4790cb7ae580560589547f"
+  },
+  {
+    "path": "src/pixel-ownership.js",
+    "git_blob_oid": "de88d87bea5ddca72c5816b1356ab18b9795f985",
+    "bytes": 6134,
+    "sha256": "da8e0b4f05e5ce390b47713030bffeefb7ea0df2700f7c358a9ebe77fe92586f"
+  },
+  {
+    "path": "src/pixel-worker.js",
+    "git_blob_oid": "6116f40ee691234694531b56a8f6061939758f2e",
+    "bytes": 1047,
+    "sha256": "473717f97835b0fbd2d73320785319f019076c197f22aad71cac002c8c27d158"
+  },
+  {
+    "path": "src/prepared-evidence.js",
+    "git_blob_oid": "30b219d288d09c2f6bb866477788119476fbb989",
+    "bytes": 7572,
+    "sha256": "12ad4e797603270958b9997a743a0a4531d65caf73f39e8a8055a33d38774e21"
+  },
+  {
+    "path": "src/reference-bundle.js",
+    "git_blob_oid": "6855bd8725b48e36fdec66c5d479b0956ed6900f",
+    "bytes": 3052,
+    "sha256": "b3148ddf76b9dbd1ee930cfa07aca85dcf1c378d7e5cdec67d4461597709e56d"
+  },
+  {
+    "path": "src/reference-context.js",
+    "git_blob_oid": "d4a9ef87915a19114175c54b3456c11e8ecf5bc7",
+    "bytes": 1885,
+    "sha256": "977ea774cdaf55894ad31adf4b7b2f5edaff717b60634f5d933b855476dbde7d"
+  },
+  {
+    "path": "src/reference-metadata.js",
+    "git_blob_oid": "7db5ba2883a6d8542f830b25e54d96c7d837a187",
+    "bytes": 25758,
+    "sha256": "15130cb6bb9cd0cb32879de01ca13d8e8d96490cce6fc2640e5e406bcfc6cf02"
+  },
+  {
+    "path": "src/reference-records.js",
+    "git_blob_oid": "2130e7a42ac5d3fc7754320ac6ff5792e0d13ba0",
+    "bytes": 906,
+    "sha256": "1e2348d1447d33c8f65bafc1e37147d8e8346d4c765793ccd30ea13e8929e478"
+  },
+  {
+    "path": "src/regional-import-gate.js",
+    "git_blob_oid": "b6eabfb3da75ad8d0aa3ff6a5c7a0493773f0ead",
+    "bytes": 7292,
+    "sha256": "83215f326c85b6f95c21f5560c7f0477c581b1e37a1a4f52de4ef39741dabf7d"
+  },
+  {
+    "path": "src/runtime-ownership.js",
+    "git_blob_oid": "e4dc53b6a509b2ac0a83d900e36aa5d8ea363b26",
+    "bytes": 1198,
+    "sha256": "190f60c6d7402570901424a80b08bb2527f4785a590c7e4e2fd5fd51a82a7979"
+  },
+  {
+    "path": "src/source-policy-corrections.js",
+    "git_blob_oid": "37d8f0e82b50bfd5c6df03da0b4cf009f450df1b",
+    "bytes": 5550,
+    "sha256": "002c182666cc6a76e093cd946e67a3983a3d7dc07d50e654933299439e7d23c0"
+  },
+  {
+    "path": "src/style.css",
+    "git_blob_oid": "d8a940c5f51685f8e3cce9566b616daba456ab48",
+    "bytes": 16086,
+    "sha256": "521732f6c73f093310ba72dada0398d8993efbe0f8ac03e6dd9ef5944ba98687"
+  },
+  {
+    "path": "src/temporal.js",
+    "git_blob_oid": "2fe09b9dca486de9e79b6a6f13e35359e56dc56d",
+    "bytes": 2780,
+    "sha256": "5e62a4a91a1715d5204b46ce8db5ea6347e763fd31c79986465f976265a89481"
+  },
+  {
+    "path": "src/typed-client.js",
+    "git_blob_oid": "4547ef490ba2c37555f3ea95640a449e0fde7dbb",
+    "bytes": 6863,
+    "sha256": "1d3feaca8daa01a7ae4c1024aeb600955ef4d0466aee39042615922f472c517e"
+  },
+  {
+    "path": "src/typed-derivations.js",
+    "git_blob_oid": "979ddde9b36d4c382e31a624b64e4c055887a287",
+    "bytes": 2134,
+    "sha256": "4d90e7f568573fcb290234325d0a48e82b3f7ab74c95b29448760dcf92591508"
+  },
+  {
+    "path": "src/typed-observations.js",
+    "git_blob_oid": "df6744823835e1a12e30021d44d197c0f641ec82",
+    "bytes": 11955,
+    "sha256": "6a01bbb7d06884cf1e2610b3d38be000be907d3b4d826b5f6977461a26e50153"
+  },
+  {
+    "path": "src/typed-snapshot.js",
+    "git_blob_oid": "c903360938a1680a2483a9fc0a3fd85c6e221e0a",
+    "bytes": 7556,
+    "sha256": "e19062ac4e747636fb983707dbc0c6bfdb9b408bb6dbc064e20abbf9e2bb35ca"
+  },
+  {
+    "path": "src/wheel-zoom.js",
+    "git_blob_oid": "2c239820464c97afa8d27f1b652cb83e599e40b0",
+    "bytes": 3116,
+    "sha256": "65d8fb02a6beb04a9e917d962f240bca48daa2872a8417260dd5d1c04a247f19"
+  }
+]

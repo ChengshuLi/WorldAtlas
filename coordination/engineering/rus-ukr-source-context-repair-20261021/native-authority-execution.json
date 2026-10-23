@@ -1,0 +1,19 @@
+{
+  "code_commit": "a7fac19697f960a463aad4f25c5af34fe47f19c8",
+  "stdout": {
+    "destination": "coordination/engineering/rus-ukr-source-context-repair-20261021/native-authority-001",
+    "resumed": false,
+    "binding": {
+      "phase": "native-authority",
+      "config_sha256": "ae22f31fabd6684191ca74daa2d25ea664daac8f90be01b6e9dd25576e9e118a"
+    },
+    "observation": {
+      "elapsed_seconds": 5.938027459000001,
+      "qualified_cells": 4,
+      "limits": [
+        "Original source/physical producers are not replayed.",
+        "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+      ]
+    }
+  }
+}

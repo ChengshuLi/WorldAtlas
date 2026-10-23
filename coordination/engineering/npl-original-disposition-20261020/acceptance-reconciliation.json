@@ -1,0 +1,1626 @@
+{
+  "kind": "original-key-prior-overlap-investigation",
+  "target_package": "gb-NPL-ADM2--repair-evaluation",
+  "queue": {
+    "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "row_index_zero_based": 182,
+    "scope": {
+      "native_cells": 334,
+      "land_cells": 334,
+      "inland_water_cells": 0,
+      "intervals": 229,
+      "owners": 31,
+      "blocks": [
+        26,
+        27
+      ],
+      "source_features": 43,
+      "separate_NPL_source_conflict_and_ADM1_mapping": true
+    }
+  },
+  "method": "Read-only implementation of the pinned stock packageIntervals/segments selection rules from commit 718cb8c3911f43739e50dfd1d423938c5c1e8b42, applied to the exact original queue and retained source-candidate, physical-support and inland-water-support masks. No selected-owner observer, geometry, source payload, or source acquisition.",
+  "inputs": [
+    {
+      "block": 26,
+      "source": {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-026.json.gz",
+        "git_blob_oid": "9c1dc50879a40f6e24a996e761b913fca8dbda61",
+        "expected_blob_oid": "9c1dc50879a40f6e24a996e761b913fca8dbda61",
+        "compressed_bytes": 440574,
+        "decoded_bytes": 3101061,
+        "compressed_sha256": "fc85e70b9caef53bb4a34d0df4c617bd0046aed029eca3b14eb8cea52e9e9707",
+        "expected_compressed_sha256": "fc85e70b9caef53bb4a34d0df4c617bd0046aed029eca3b14eb8cea52e9e9707",
+        "decoded_sha256": "a2236fe7b0201747775622957f215398076fa2698ac3e8cc725b638ea94edce3",
+        "expected_decoded_sha256": "a2236fe7b0201747775622957f215398076fa2698ac3e8cc725b638ea94edce3"
+      },
+      "physical": {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-026.json.gz",
+        "git_blob_oid": "355559350599390e256bd1180bcfaf6723504068",
+        "expected_blob_oid": "355559350599390e256bd1180bcfaf6723504068",
+        "compressed_bytes": 390394,
+        "decoded_bytes": 1862642,
+        "compressed_sha256": "8c263a02fe617bcd4844473c9237a8868c134860649022b7ad2e2b7371584fa2",
+        "expected_compressed_sha256": "8c263a02fe617bcd4844473c9237a8868c134860649022b7ad2e2b7371584fa2",
+        "decoded_sha256": "d4ea09c93e2790a9304a6f1864225ce3d0199d952e6211be4bba2dd4a458430b",
+        "expected_decoded_sha256": "d4ea09c93e2790a9304a6f1864225ce3d0199d952e6211be4bba2dd4a458430b"
+      },
+      "water": {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-026.json.gz",
+        "git_blob_oid": "cf49a65b32bbd2ab296e873a72da981ae6cc44a6",
+        "expected_blob_oid": "cf49a65b32bbd2ab296e873a72da981ae6cc44a6",
+        "compressed_bytes": 4376,
+        "decoded_bytes": 31228,
+        "compressed_sha256": "703c18aee9e56cd3635eff1d4c8a4998bdf61497965883c27e41717b426edf16",
+        "expected_compressed_sha256": "703c18aee9e56cd3635eff1d4c8a4998bdf61497965883c27e41717b426edf16",
+        "decoded_sha256": "468ba76e47d059c05112e8652b8f26cd577b4aabe7a68656d695a4474046f2ab",
+        "expected_decoded_sha256": "468ba76e47d059c05112e8652b8f26cd577b4aabe7a68656d695a4474046f2ab"
+      }
+    },
+    {
+      "block": 27,
+      "source": {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-027.json.gz",
+        "git_blob_oid": "3236b54ab1b49b184a2fbe8593fb87a018e78420",
+        "expected_blob_oid": "3236b54ab1b49b184a2fbe8593fb87a018e78420",
+        "compressed_bytes": 658909,
+        "decoded_bytes": 5022444,
+        "compressed_sha256": "3ef85aa6a7bc9235fffe06a46bea69bfffa9fcb9d13aeb32a364b16191efb696",
+        "expected_compressed_sha256": "3ef85aa6a7bc9235fffe06a46bea69bfffa9fcb9d13aeb32a364b16191efb696",
+        "decoded_sha256": "7f1751b5c741ffed290a3553a8ee86410ba2f42dda0681d9acf954ad719d2a22",
+        "expected_decoded_sha256": "7f1751b5c741ffed290a3553a8ee86410ba2f42dda0681d9acf954ad719d2a22"
+      },
+      "physical": {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-027.json.gz",
+        "git_blob_oid": "c057e75fe5dec634ace87f59631dc02eca380033",
+        "expected_blob_oid": "c057e75fe5dec634ace87f59631dc02eca380033",
+        "compressed_bytes": 502097,
+        "decoded_bytes": 2488924,
+        "compressed_sha256": "bd038c98361e9d2ee6187765ceb7d91b6bb174114f5dfccd7b92c376839c1eea",
+        "expected_compressed_sha256": "bd038c98361e9d2ee6187765ceb7d91b6bb174114f5dfccd7b92c376839c1eea",
+        "decoded_sha256": "bbae9fd5766c25ab46c02fda90f2bc788e81eb4eca3b419591866ab43ba98b61",
+        "expected_decoded_sha256": "bbae9fd5766c25ab46c02fda90f2bc788e81eb4eca3b419591866ab43ba98b61"
+      },
+      "water": {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-027.json.gz",
+        "git_blob_oid": "5d11ca716f75ca9a6ac27031d114bb4a752d1375",
+        "expected_blob_oid": "5d11ca716f75ca9a6ac27031d114bb4a752d1375",
+        "compressed_bytes": 14381,
+        "decoded_bytes": 92288,
+        "compressed_sha256": "2280371346676eac0ca982c040504a9dcba640cf66c5c2c3d1385de44cb3767a",
+        "expected_compressed_sha256": "2280371346676eac0ca982c040504a9dcba640cf66c5c2c3d1385de44cb3767a",
+        "decoded_sha256": "2d251bfcf589c0db7d02be77ac011b25e509bb910e7811532f20aa75a33720f4",
+        "expected_decoded_sha256": "2d251bfcf589c0db7d02be77ac011b25e509bb910e7811532f20aa75a33720f4"
+      }
+    }
+  ],
+  "source_roster": {
+    "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+    "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+    "compressed_bytes": 1844315,
+    "decoded_bytes": 13496995,
+    "feature_count": 73567,
+    "metadata_only": true
+  },
+  "derived": {
+    "interval_count": 229,
+    "cell_count": 334,
+    "keys_yx": [
+      [
+        107845,
+        190494
+      ],
+      [
+        107983,
+        190108
+      ],
+      [
+        108024,
+        190947
+      ],
+      [
+        108025,
+        190285
+      ],
+      [
+        108032,
+        190945
+      ],
+      [
+        108038,
+        190277
+      ],
+      [
+        108427,
+        189627
+      ],
+      [
+        108427,
+        189628
+      ],
+      [
+        108428,
+        189628
+      ],
+      [
+        108428,
+        189629
+      ],
+      [
+        108429,
+        189629
+      ],
+      [
+        108429,
+        189630
+      ],
+      [
+        108430,
+        189630
+      ],
+      [
+        108430,
+        189631
+      ],
+      [
+        108431,
+        189631
+      ],
+      [
+        108431,
+        189632
+      ],
+      [
+        108432,
+        189633
+      ],
+      [
+        108645,
+        189520
+      ],
+      [
+        108653,
+        189531
+      ],
+      [
+        108741,
+        189574
+      ],
+      [
+        108852,
+        189536
+      ],
+      [
+        108859,
+        189539
+      ],
+      [
+        108950,
+        192386
+      ],
+      [
+        109266,
+        189774
+      ],
+      [
+        109286,
+        193110
+      ],
+      [
+        109318,
+        193110
+      ],
+      [
+        109333,
+        193106
+      ],
+      [
+        109341,
+        189853
+      ],
+      [
+        109393,
+        189934
+      ],
+      [
+        109417,
+        190005
+      ],
+      [
+        109423,
+        190004
+      ],
+      [
+        109429,
+        190003
+      ],
+      [
+        109551,
+        193352
+      ],
+      [
+        109553,
+        193060
+      ],
+      [
+        109563,
+        193380
+      ],
+      [
+        109565,
+        193381
+      ],
+      [
+        109568,
+        193383
+      ],
+      [
+        109570,
+        193384
+      ],
+      [
+        109571,
+        193385
+      ],
+      [
+        109573,
+        193386
+      ],
+      [
+        109574,
+        193387
+      ],
+      [
+        109575,
+        193219
+      ],
+      [
+        109575,
+        193387
+      ],
+      [
+        109576,
+        193142
+      ],
+      [
+        109576,
+        193388
+      ],
+      [
+        109577,
+        193388
+      ],
+      [
+        109578,
+        193143
+      ],
+      [
+        109578,
+        193389
+      ],
+      [
+        109579,
+        193390
+      ],
+      [
+        109580,
+        193390
+      ],
+      [
+        109581,
+        193391
+      ],
+      [
+        109582,
+        193391
+      ],
+      [
+        109582,
+        193392
+      ],
+      [
+        109583,
+        193392
+      ],
+      [
+        109584,
+        193392
+      ],
+      [
+        109584,
+        193393
+      ],
+      [
+        109585,
+        193393
+      ],
+      [
+        109586,
+        193394
+      ],
+      [
+        109587,
+        193394
+      ],
+      [
+        109588,
+        193395
+      ],
+      [
+        109589,
+        193395
+      ],
+      [
+        109590,
+        193396
+      ],
+      [
+        109591,
+        193396
+      ],
+      [
+        109591,
+        193397
+      ],
+      [
+        109592,
+        193397
+      ],
+      [
+        109593,
+        193398
+      ],
+      [
+        109594,
+        193398
+      ],
+      [
+        109595,
+        193399
+      ],
+      [
+        109596,
+        193399
+      ],
+      [
+        109597,
+        193400
+      ],
+      [
+        109598,
+        193400
+      ],
+      [
+        109599,
+        193401
+      ],
+      [
+        109601,
+        193402
+      ],
+      [
+        109603,
+        193403
+      ],
+      [
+        109845,
+        193646
+      ],
+      [
+        109852,
+        194351
+      ],
+      [
+        109854,
+        194356
+      ],
+      [
+        109857,
+        193914
+      ],
+      [
+        109859,
+        193917
+      ],
+      [
+        109860,
+        193919
+      ],
+      [
+        109861,
+        193920
+      ],
+      [
+        109861,
+        193921
+      ],
+      [
+        109862,
+        193922
+      ],
+      [
+        109862,
+        193961
+      ],
+      [
+        109863,
+        193924
+      ],
+      [
+        109864,
+        193925
+      ],
+      [
+        109864,
+        193926
+      ],
+      [
+        109865,
+        193927
+      ],
+      [
+        109865,
+        193928
+      ],
+      [
+        109866,
+        193928
+      ],
+      [
+        109866,
+        193929
+      ],
+      [
+        109867,
+        193930
+      ],
+      [
+        109867,
+        193931
+      ],
+      [
+        109868,
+        193931
+      ],
+      [
+        109868,
+        193932
+      ],
+      [
+        109869,
+        193933
+      ],
+      [
+        109870,
+        193934
+      ],
+      [
+        109870,
+        193935
+      ],
+      [
+        109871,
+        193936
+      ],
+      [
+        109873,
+        193939
+      ],
+      [
+        109875,
+        190783
+      ],
+      [
+        109875,
+        193942
+      ],
+      [
+        109879,
+        190762
+      ],
+      [
+        109887,
+        194019
+      ],
+      [
+        109892,
+        190658
+      ],
+      [
+        109908,
+        190691
+      ],
+      [
+        109961,
+        195023
+      ],
+      [
+        109963,
+        194521
+      ],
+      [
+        110014,
+        195258
+      ],
+      [
+        110058,
+        191196
+      ],
+      [
+        110099,
+        195215
+      ],
+      [
+        110107,
+        195204
+      ],
+      [
+        110215,
+        192337
+      ],
+      [
+        110227,
+        192275
+      ],
+      [
+        110228,
+        192275
+      ],
+      [
+        110230,
+        192274
+      ],
+      [
+        110231,
+        192274
+      ],
+      [
+        110233,
+        192273
+      ],
+      [
+        110234,
+        192273
+      ],
+      [
+        110235,
+        192272
+      ],
+      [
+        110236,
+        192272
+      ],
+      [
+        110237,
+        192272
+      ],
+      [
+        110238,
+        192271
+      ],
+      [
+        110239,
+        192271
+      ],
+      [
+        110240,
+        192270
+      ],
+      [
+        110241,
+        192270
+      ],
+      [
+        110243,
+        192269
+      ],
+      [
+        110254,
+        192379
+      ],
+      [
+        110254,
+        192380
+      ],
+      [
+        110254,
+        192381
+      ],
+      [
+        110254,
+        192382
+      ],
+      [
+        110254,
+        192383
+      ],
+      [
+        110254,
+        192384
+      ],
+      [
+        110254,
+        192385
+      ],
+      [
+        110254,
+        192386
+      ],
+      [
+        110254,
+        192387
+      ],
+      [
+        110254,
+        192388
+      ],
+      [
+        110254,
+        192389
+      ],
+      [
+        110254,
+        192390
+      ],
+      [
+        110254,
+        192391
+      ],
+      [
+        110254,
+        192392
+      ],
+      [
+        110255,
+        192380
+      ],
+      [
+        110255,
+        192381
+      ],
+      [
+        110255,
+        192382
+      ],
+      [
+        110255,
+        192383
+      ],
+      [
+        110255,
+        192384
+      ],
+      [
+        110255,
+        192385
+      ],
+      [
+        110255,
+        192386
+      ],
+      [
+        110255,
+        192387
+      ],
+      [
+        110255,
+        192388
+      ],
+      [
+        110255,
+        192389
+      ],
+      [
+        110255,
+        192390
+      ],
+      [
+        110255,
+        192391
+      ],
+      [
+        110256,
+        192381
+      ],
+      [
+        110256,
+        192382
+      ],
+      [
+        110256,
+        192383
+      ],
+      [
+        110256,
+        192384
+      ],
+      [
+        110256,
+        192385
+      ],
+      [
+        110256,
+        192386
+      ],
+      [
+        110256,
+        192387
+      ],
+      [
+        110256,
+        192388
+      ],
+      [
+        110256,
+        192389
+      ],
+      [
+        110256,
+        192390
+      ],
+      [
+        110257,
+        192382
+      ],
+      [
+        110257,
+        192383
+      ],
+      [
+        110257,
+        192384
+      ],
+      [
+        110257,
+        192385
+      ],
+      [
+        110257,
+        192386
+      ],
+      [
+        110257,
+        192387
+      ],
+      [
+        110257,
+        192388
+      ],
+      [
+        110257,
+        192389
+      ],
+      [
+        110258,
+        192383
+      ],
+      [
+        110258,
+        192384
+      ],
+      [
+        110258,
+        192385
+      ],
+      [
+        110258,
+        192386
+      ],
+      [
+        110258,
+        192387
+      ],
+      [
+        110258,
+        192388
+      ],
+      [
+        110259,
+        192384
+      ],
+      [
+        110259,
+        192385
+      ],
+      [
+        110259,
+        192386
+      ],
+      [
+        110259,
+        192387
+      ],
+      [
+        110259,
+        192388
+      ],
+      [
+        110260,
+        192385
+      ],
+      [
+        110260,
+        192386
+      ],
+      [
+        110260,
+        192387
+      ],
+      [
+        110283,
+        192121
+      ],
+      [
+        110286,
+        192811
+      ],
+      [
+        110294,
+        192838
+      ],
+      [
+        110313,
+        195170
+      ],
+      [
+        110314,
+        195170
+      ],
+      [
+        110315,
+        195170
+      ],
+      [
+        110316,
+        195170
+      ],
+      [
+        110317,
+        192536
+      ],
+      [
+        110317,
+        195170
+      ],
+      [
+        110318,
+        195170
+      ],
+      [
+        110319,
+        195170
+      ],
+      [
+        110320,
+        195170
+      ],
+      [
+        110321,
+        195170
+      ],
+      [
+        110322,
+        195170
+      ],
+      [
+        110323,
+        195170
+      ],
+      [
+        110324,
+        195170
+      ],
+      [
+        110325,
+        195170
+      ],
+      [
+        110326,
+        195170
+      ],
+      [
+        110327,
+        195170
+      ],
+      [
+        110328,
+        195170
+      ],
+      [
+        110329,
+        195170
+      ],
+      [
+        110330,
+        195170
+      ],
+      [
+        110331,
+        195170
+      ],
+      [
+        110332,
+        195170
+      ],
+      [
+        110333,
+        195170
+      ],
+      [
+        110334,
+        195170
+      ],
+      [
+        110338,
+        192638
+      ],
+      [
+        110338,
+        192648
+      ],
+      [
+        110338,
+        192975
+      ],
+      [
+        110349,
+        195183
+      ],
+      [
+        110358,
+        193021
+      ],
+      [
+        110360,
+        193020
+      ],
+      [
+        110361,
+        193020
+      ],
+      [
+        110362,
+        193019
+      ],
+      [
+        110362,
+        193020
+      ],
+      [
+        110363,
+        193019
+      ],
+      [
+        110363,
+        193020
+      ],
+      [
+        110368,
+        193024
+      ],
+      [
+        110369,
+        193026
+      ],
+      [
+        110370,
+        193028
+      ],
+      [
+        110371,
+        193029
+      ],
+      [
+        110371,
+        193030
+      ],
+      [
+        110372,
+        193031
+      ],
+      [
+        110372,
+        193032
+      ],
+      [
+        110373,
+        193033
+      ],
+      [
+        110374,
+        193034
+      ],
+      [
+        110374,
+        193035
+      ],
+      [
+        110375,
+        193036
+      ],
+      [
+        110375,
+        193037
+      ],
+      [
+        110376,
+        193038
+      ],
+      [
+        110376,
+        193039
+      ],
+      [
+        110377,
+        193040
+      ],
+      [
+        110377,
+        193041
+      ],
+      [
+        110378,
+        193042
+      ],
+      [
+        110378,
+        193043
+      ],
+      [
+        110379,
+        193044
+      ],
+      [
+        110379,
+        193045
+      ],
+      [
+        110380,
+        193046
+      ],
+      [
+        110380,
+        193047
+      ],
+      [
+        110381,
+        193048
+      ],
+      [
+        110382,
+        193050
+      ],
+      [
+        110383,
+        193052
+      ],
+      [
+        110384,
+        193054
+      ],
+      [
+        110389,
+        193060
+      ],
+      [
+        110488,
+        192943
+      ],
+      [
+        110496,
+        192941
+      ],
+      [
+        110550,
+        195151
+      ],
+      [
+        110614,
+        192896
+      ],
+      [
+        110628,
+        192896
+      ],
+      [
+        110664,
+        192904
+      ],
+      [
+        110664,
+        192905
+      ],
+      [
+        110664,
+        192906
+      ],
+      [
+        110664,
+        192907
+      ],
+      [
+        110664,
+        192908
+      ],
+      [
+        110665,
+        192918
+      ],
+      [
+        110665,
+        192919
+      ],
+      [
+        110665,
+        192920
+      ],
+      [
+        110665,
+        192921
+      ],
+      [
+        110665,
+        192922
+      ],
+      [
+        110665,
+        192923
+      ],
+      [
+        110665,
+        192924
+      ],
+      [
+        110665,
+        192925
+      ],
+      [
+        110665,
+        192926
+      ],
+      [
+        110665,
+        192927
+      ],
+      [
+        110665,
+        192928
+      ],
+      [
+        110665,
+        192929
+      ],
+      [
+        110665,
+        192930
+      ],
+      [
+        110665,
+        192931
+      ],
+      [
+        110665,
+        192932
+      ],
+      [
+        110669,
+        192946
+      ],
+      [
+        110734,
+        193066
+      ],
+      [
+        110735,
+        193065
+      ],
+      [
+        110736,
+        193064
+      ],
+      [
+        110737,
+        193063
+      ],
+      [
+        110738,
+        193062
+      ],
+      [
+        110739,
+        193061
+      ],
+      [
+        110740,
+        193060
+      ],
+      [
+        110741,
+        193059
+      ],
+      [
+        110742,
+        193058
+      ],
+      [
+        110743,
+        193057
+      ],
+      [
+        110744,
+        193056
+      ],
+      [
+        110756,
+        193106
+      ],
+      [
+        110818,
+        195276
+      ],
+      [
+        110819,
+        193248
+      ],
+      [
+        110840,
+        195274
+      ],
+      [
+        110866,
+        195269
+      ],
+      [
+        110912,
+        193701
+      ],
+      [
+        110913,
+        193721
+      ],
+      [
+        110917,
+        193736
+      ],
+      [
+        110918,
+        193688
+      ],
+      [
+        110921,
+        193751
+      ],
+      [
+        110924,
+        193675
+      ],
+      [
+        110930,
+        193662
+      ],
+      [
+        110947,
+        193789
+      ],
+      [
+        110958,
+        193951
+      ],
+      [
+        110968,
+        195239
+      ],
+      [
+        110970,
+        195238
+      ],
+      [
+        110990,
+        194010
+      ],
+      [
+        111009,
+        194064
+      ],
+      [
+        111033,
+        194369
+      ],
+      [
+        111078,
+        194321
+      ],
+      [
+        111085,
+        194246
+      ],
+      [
+        111086,
+        194250
+      ],
+      [
+        111087,
+        194254
+      ],
+      [
+        111087,
+        194255
+      ],
+      [
+        111088,
+        194258
+      ],
+      [
+        111088,
+        194259
+      ],
+      [
+        111089,
+        194262
+      ],
+      [
+        111089,
+        194263
+      ],
+      [
+        111089,
+        194264
+      ],
+      [
+        111090,
+        194266
+      ],
+      [
+        111090,
+        194267
+      ],
+      [
+        111090,
+        194268
+      ],
+      [
+        111090,
+        194269
+      ],
+      [
+        111091,
+        194273
+      ],
+      [
+        111092,
+        194276
+      ],
+      [
+        111092,
+        194277
+      ],
+      [
+        111092,
+        194278
+      ],
+      [
+        111093,
+        194281
+      ],
+      [
+        111093,
+        194282
+      ],
+      [
+        111094,
+        194286
+      ],
+      [
+        111094,
+        194287
+      ],
+      [
+        111095,
+        194291
+      ],
+      [
+        111095,
+        194292
+      ],
+      [
+        111096,
+        194296
+      ],
+      [
+        111097,
+        194301
+      ],
+      [
+        111097,
+        194306
+      ],
+      [
+        111109,
+        194949
+      ],
+      [
+        111121,
+        194596
+      ]
+    ],
+    "canonical_sorted_yx_sha256": "d3cc814f0d114855a33a63e17198d7ea0160196532c3a5780fd8349ca48d7d4b",
+    "interval_rows_sha256": "13f03b1a87946d9645c1981df0e860f4bf9392f47e128b0a3cad31daaa0111f5",
+    "physical_classes": [
+      "land"
+    ],
+    "blocks": {
+      "26": 252,
+      "27": 82
+    }
+  },
+  "prior_reconciliation": {
+    "source": "Direct immutable public PSE packet body; local inventory mirror was checked set-for-set equal to the public arrays.",
+    "prior_set_count": 15,
+    "prior_union_size": 56352,
+    "prior_union_expected": 56352,
+    "prior_union_sha256": "a88e4faa57150ad90493fd8faf569f9a2450bed91f2069f9b6ebfd1b3db5d549",
+    "accepted_pse_size": 427,
+    "accepted_pse_sha256": "adec7fe88109ff30a5fe38e69899801e2987a72af3d8ca0aa1a96e5674784bdc",
+    "combined_size": 56779,
+    "overlap_prior_union": 0,
+    "overlap_accepted_pse": 0,
+    "overlap_combined": 0,
+    "residual_against_examined_union": 334,
+    "limit": "Bounded exact key comparison only. The prior set includes mixed exception/held keys and root-accepted documented-unresolved packages, which are not repair credit. It does not prove global zero prior credit or confer NPL ownership/assignment. KNA is excluded.",
+    "public_prior_body": {
+      "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+      "path": "coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+      "git_blob_oid": "1c56ef45f503344a3dba5edbefc485e7ad202ca1",
+      "encoded_bytes": 358029,
+      "encoded_sha256": "8b2f21475c5146af6097ef1ae2a22e4cb48c1a67b8ba9a6e4bae884ab6f165f8",
+      "decoded_bytes": 5824775,
+      "decoded_sha256": "927b82b18ce12872adce326994eae3d5527105cb55dd18b9aac87e2565d69c26",
+      "prior_union_keysets": "#/prior_set_keysets_yx",
+      "accepted_pse_keyset": "#/current_selected_owner_observation/original_keys_yx",
+      "accepted_pse_receipt": "https://github.com/ChengshuLi/WorldAtlas/pull/2607#issuecomment-6304001433",
+      "local_mirror_set_names_match": true,
+      "local_mirror_all_15_sets_exact_match": true
+    },
+    "prior_set_manifest": [
+      {
+        "name": "mixed 17 exception/held partitions",
+        "key_count": 2147,
+        "classification": "mixed exception and held records; key overlap only, not accepted repair credit"
+      },
+      {
+        "name": "gb-PAN-ADM2--repair-evaluation",
+        "key_count": 22669,
+        "classification": "root-accepted documented disposition packet; not repair credit"
+      },
+      {
+        "name": "gb-BRA-ADM2--repair-evaluation",
+        "key_count": 24525,
+        "classification": "root-accepted documented disposition packet; not repair credit"
+      },
+      {
+        "name": "gb-TGO-ADM2--repair-evaluation",
+        "key_count": 509,
+        "classification": "root-accepted documented disposition packet; not repair credit"
+      },
+      {
+        "name": "gb-SOM-ADM2--repair-evaluation",
+        "key_count": 2247,
+        "classification": "root-accepted documented disposition packet; not repair credit"
+      },
+      {
+        "name": "gb-MDA-ADM1--repair-evaluation",
+        "key_count": 1986,
+        "classification": "root-accepted documented disposition packet; not repair credit"
+      },
+      {
+        "name": "gb-NRU-ADM1--repair-evaluation",
+        "key_count": 13,
+        "classification": "root-accepted documented disposition packet; not repair credit"
+      },
+      {
+        "name": "gb-SWZ-ADM2--repair-evaluation",
+        "key_count": 14,
+        "classification": "root-accepted documented disposition packet; not repair credit"
+      },
+      {
+        "name": "legacy accepted patch",
+        "key_count": 1306,
+        "classification": "accepted legacy repair patch"
+      },
+      {
+        "name": "gb-AND-ADM1--repair-evaluation",
+        "key_count": 72,
+        "classification": "root-accepted documented-unresolved; no repair credit"
+      },
+      {
+        "name": "gb-NIU-ADM1--repair-evaluation",
+        "key_count": 116,
+        "classification": "root-accepted documented-unresolved; no repair credit"
+      },
+      {
+        "name": "gb-GUM-ADM2--repair-evaluation",
+        "key_count": 139,
+        "classification": "root-accepted documented-unresolved; no repair credit"
+      },
+      {
+        "name": "gb-LIE-ADM1--repair-evaluation",
+        "key_count": 148,
+        "classification": "root-accepted documented-unresolved; no repair credit"
+      },
+      {
+        "name": "gb-MNP-ADM2--repair-evaluation",
+        "key_count": 205,
+        "classification": "root-accepted documented-unresolved; no repair credit"
+      },
+      {
+        "name": "gb-BTN-ADM1--repair-evaluation",
+        "key_count": 256,
+        "classification": "root-accepted documented-unresolved; not repair credit"
+      }
+    ],
+    "combined_sha256": "aefa8199392d97b56281c9d4725244f6ca78112dc8f58d0f3bdf6d8377aba9f8"
+  },
+  "unknowns": [
+    "No NPL acceptance/disposition is inferred from this key-only comparison.",
+    "Current source applicability, complete per-key competitor mapping and positive qualification were not evaluated here.",
+    "KNA is excluded from the prior union as explicitly instructed; its delivery is not treated as accepted credit.",
+    "The complete observation is a packet member; the linked execution commit identifies its code/input vintage, not the generated result itself."
+  ],
+  "current_observation": {
+    "kind": "single-stock-selected-owner-observation-reconciled-to-original-key-and-retained-witness-join",
+    "result_bytes": 93371,
+    "result_sha256": "a7f3c76184546f44398f2e28be3537da7c265fa49054fcd675a243968120d240",
+    "execution_commit": "775f0a1eddf8964b81d217d01a801c2b338db9c6",
+    "execution_commit_public_url": "https://github.com/ChengshuLi/WorldAtlas/commit/775f0a1eddf8964b81d217d01a801c2b338db9c6",
+    "query_count": 334,
+    "query_sha256": "bb3c64e6670159a89072921ddeb6b30fdabcc64a6a88f7c35a8a85b16c2fb6e6",
+    "exact_keyset_match_to_independent_original": true,
+    "original_keys": 334,
+    "interval_count": 229,
+    "interval_rows_match_retained_witness_join": true,
+    "interval_fields_checked": [
+      "block",
+      "y",
+      "start",
+      "end_exclusive",
+      "cell_count",
+      "owner_indices",
+      "source_feature_indices"
+    ],
+    "blocks": {
+      "26": 252,
+      "27": 82
+    },
+    "all_land": true,
+    "retained_witness_join": {
+      "queried_keys": 334,
+      "joined_intervals": 229,
+      "source_candidate_run_coverage_gaps": 0,
+      "physical_support_cells": 334,
+      "physical_support_gaps": 0,
+      "inland_water_overlap_cells": 0,
+      "packet_path": "retained-source-physical-context.json#/retained_witness"
+    },
+    "owner_fields": {
+      "base_owner_nonzero": 0,
+      "accepted_additive_owner_nonzero": 0,
+      "effective_selected_owner_nonzero": 0,
+      "existing_product_overlap_true": 0
+    },
+    "consumed_input_count": 41,
+    "fetched_objects": 0,
+    "fetched_bytes": 0,
+    "limits": [
+      "Selected-product observation only; not a source-applicability or repair qualification decision.",
+      "The complete generated observation is included in this packet as npl-selected-owner-observation.json.gz; result_bytes/result_sha256 bind its decoded body. The execution-code commit remains distinct from the generated result."
+    ],
+    "packet_result_path": "npl-selected-owner-observation.json.gz"
+  },
+  "public_references": {
+    "original_queue": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "source_roster": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+    "pse_prior_body": "https://github.com/ChengshuLi/WorldAtlas/blob/718cb8c3911f43739e50dfd1d423938c5c1e8b42/coordination/engineering/pse-original-disposition-20261020/acceptance-reconciliation.json.gz",
+    "pse_acceptance_receipt": "https://github.com/ChengshuLi/WorldAtlas/pull/2607#issuecomment-6304001433"
+  }
+}

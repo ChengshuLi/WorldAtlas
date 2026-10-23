@@ -10,9 +10,9 @@ on:
         type: string
         required: true
       reviewed_tests:
-        description: 'Optional exact reviewed test/fixture roster: JSON {base,head,files,inputs}; omitted uses normal regression'
+        description: 'Exact plan.request JSON, auto for proven automatic routing, or complete for the full suite'
         type: string
-        required: false
+        required: true
       request_id:
         type: string
         required: true
@@ -71,6 +71,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           MERGE_PHASE: prepare
           CHECKOUT_PATTERNS_FORMAT: wrapped-base64
+          REVIEWED_TESTS_REQUIRED: 'true'
         run: node scripts/run-worker-merge.mjs
   geography:
     needs: prepare
@@ -281,10 +282,10 @@ jobs:
           PACKAGE_BOOTSTRAP
       # The focused delivery tests import @noble/hashes and exercise tiny
       # source/physical CLI fixtures with NumPy/Shapely. Keep their real runtime.
+      # Only trusted automatic inert packets use the dependency-free consumers;
+      # explicit reviewed requests and all broader routes retain installation.
       - run: npm ci --no-audit --no-fund
-        if: needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence'
-      - run: python -m pip install -r requirements.txt
-        if: needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence'
+        if: (needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence') && !(needs.prepare.outputs.profile == 'evidence' && needs.prepare.outputs.test_selection == 'reviewed' && (inputs.reviewed_tests == 'auto' || inputs.reviewed_tests == ''))
       - name: Assemble unchanged base with current selected output
         id: assembly
         if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && needs.prepare.outputs.test_selection == 'selected-data'
@@ -315,6 +316,10 @@ jobs:
           assert len(body) == blob['size'] and hashlib.sha1(('blob ' + str(len(body)) + '\0').encode() + body).hexdigest() == blob['sha']
           exec(compile(body, '<authenticated selected package bootstrap>', 'exec'), {'__name__':'__main__'})
           PACKAGE_BOOTSTRAP
+      # Retained assembly uses Node and isolated Python standard-library extraction.
+      # Keep scientific dependencies for fallback builds and ordinary regressions.
+      - run: python -m pip install -r requirements.txt
+        if: (needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence') && steps.assembly.outputs.assembled != 'true' && !(needs.prepare.outputs.profile == 'evidence' && needs.prepare.outputs.test_selection == 'reviewed' && (inputs.reviewed_tests == 'auto' || inputs.reviewed_tests == ''))
       - name: Snapshot original final-worker package inputs
         if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'
         run: node scripts/package-output-artifact.mjs --snapshot
@@ -324,6 +329,22 @@ jobs:
       - name: Inventory original final-worker package output
         if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'
         run: node scripts/package-output-artifact.mjs
+      # Preserve the successful build before later tests can fail or mutate it.
+      # Retention alone grants no test, reuse or merge acceptance.
+      - name: Retain original final-worker package output
+        if: success() && needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cloudflare-package-output-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            dist/client/
+            dist/cloudflare/
+            .cache/package-output-manifest.json
+            .cache/package-input-build.json
+          include-hidden-files: true
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30
       - name: Install browser dependencies only for tests that use Playwright
         if: needs.prepare.outputs.test_selection != 'selected-data'
         env:
@@ -353,20 +374,6 @@ jobs:
           elif test "$INTEGRATION_TEST_SELECTION" != selected-data; then
             node scripts/run-integration-tests.mjs
           fi
-      - name: Retain original final-worker package output
-        if: success() && needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: cloudflare-package-output-${{ github.run_id }}-${{ github.run_attempt }}
-          path: |
-            dist/client/
-            dist/cloudflare/
-            .cache/package-output-manifest.json
-            .cache/package-input-build.json
-          include-hidden-files: true
-          if-no-files-found: error
-          compression-level: 0
-          retention-days: 30
       - name: Retain selected delivery smoke
         if: always() && needs.prepare.outputs.profile == 'full' && matrix.shard == 0
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

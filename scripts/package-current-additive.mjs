@@ -7,16 +7,17 @@ import {gunzipSync,gzipSync} from 'node:zlib';
 import {isDeepStrictEqual} from 'node:util';
 import {containsPackagePath,loadPackageInputs,safePackagePath} from './package-inputs.mjs';
 import {decodedAdditiveAssetIdentity,additiveBaseReference,bindAdditiveLedgerFeatures,verifyAdditiveLedgerSelection,additiveReleaseFootprintDigest,validateAdditivePatchFormat} from '../src/effective-footprint.js';
-import {scientificNativeSelection,validateReferenceMetadataHeader,projectReferenceOwners,assertAppliedReferenceProperties} from '../src/reference-metadata.js';
+import {finalBankSelection,scientificNativeSelection,validateReferenceMetadataHeader,projectReferenceOwners,assertAppliedReferenceProperties} from '../src/reference-metadata.js';
 
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const need=(ok,message)=>{if(!ok)throw Error(message);};
-export async function prepareCurrentSelectedAdditive({root,selectedGrid,geographicRelease,features,referenceRevision}) {
+export async function readCurrentSelectedAdditive({root,selectedGrid,geographicRelease,referenceRevision}) {
   root=await fs.realpath(root);
   const selectionFile=path.join(root,'data/ownership-selection.json'),selectionStat=await fs.lstat(selectionFile);
   need(selectionStat.isFile()&&await fs.realpath(selectionFile)===selectionFile,'Current selection must be ordinary');
-  const selection=JSON.parse(await fs.readFile(selectionFile));
-  if(selection.additive_release===undefined)return null;
+  const selectionBytes=await fs.readFile(selectionFile),selection=JSON.parse(selectionBytes);
+  const finalBank=finalBankSelection(selection);
+  if(!finalBank&&selection.additive_release===undefined)return null;
   const definition=loadPackageInputs(root),inputInventory=[];
   async function read(pin){
     need(pin&&safePackagePath(pin.path)&&!pin.path.endsWith('/')&&containsPackagePath(definition.inputs,pin.path),'Undeclared current additive input');
@@ -30,10 +31,6 @@ export async function prepareCurrentSelectedAdditive({root,selectedGrid,geograph
     inputInventory.push({...pin,mode:(stat.mode&0o111)?'100755':'100644',git_blob_oid:oid,bytes:raw.length,sha256:sha(raw),whole_body_consumed:true});
     return raw;
   }
-  const sidecar=JSON.parse(await read(selection.additive_release));
-  need(sidecar.version===2&&sidecar.kind==='retained-native-additive-selection-v2','Unsupported current additive selection');
-  const baseSelection=scientificNativeSelection(selection);
-  need(isDeepStrictEqual(sidecar.base_selection,baseSelection),'Current additive selection belongs to a different native base');
   let projection,referenceMetadata,projectionAsset;
   if(selection.reference_projection!==undefined){
     // Preparation authenticated the receipt/source closure. Ordinary packaging
@@ -47,11 +44,44 @@ export async function prepareCurrentSelectedAdditive({root,selectedGrid,geograph
     referenceMetadata={version:1,asset,native_reference:native,reference,...(referenceRevision!==undefined?{application_reference_revision:referenceRevision}:{})};
     projectionAsset={path:asset.path,raw};
   }
+  if(finalBank){
+    const index=JSON.parse(await read(finalBank)),proof=index.preparedOwnership;
+    need(index.version===3&&proof?.version===3&&index.additiveRelease===undefined,
+      'Final selection requires its complete final-bank profile');
+    const base=additiveBaseReference({preparedOwnership:proof,reference_release:selection.reference,pixelMap:index.pixelMap});
+    need(isDeepStrictEqual(base,Object.fromEntries(['id','footprints_sha256','hierarchy_sha256'].map(key=>[key,geographicRelease[key]])))
+      &&proof.native_manifest_sha256===selectedGrid.sha256&&scientificNativeSelection(selection).sha256===selectedGrid.sha256
+      &&isDeepStrictEqual(proof.effective_reference,selection.reference)
+      &&isDeepStrictEqual(index.referenceMetadata,referenceMetadata?Object.fromEntries(Object.entries(referenceMetadata).filter(([key])=>key!=='application_reference_revision')):undefined),
+      'Final bank differs from selected native/content/reference metadata');
+    return {selection,selectionBytes,finalBank,base,projection,projectionAsset,referenceMetadata,inputInventory,read,
+      reference_release:selection.reference,
+      async publish(destination){if(projectionAsset){await fs.mkdir(path.join(destination,'reference-metadata'),{recursive:true});
+        await fs.writeFile(path.join(destination,projectionAsset.path),projectionAsset.raw,{flag:'wx'});}}};
+  }
+  const sidecar=JSON.parse(await read(selection.additive_release));
+  need(sidecar.version===2&&sidecar.kind==='retained-native-additive-selection-v2','Unsupported current additive selection');
+  const baseSelection=scientificNativeSelection(selection);
+  need(isDeepStrictEqual(sidecar.base_selection,baseSelection),'Current additive selection belongs to a different native base');
   const wrapped=JSON.parse(await read(sidecar.runtime_envelope)),envelope=wrapped.additiveRelease??wrapped;
   const base=additiveBaseReference({additiveRelease:envelope,reference_release:envelope.effective_reference});
   need(isDeepStrictEqual(base,Object.fromEntries(['id','footprints_sha256','hierarchy_sha256'].map(key=>[key,geographicRelease[key]])))&&envelope.effective_reference.hierarchy_sha256===base.hierarchy_sha256,'Current additive reference differs from selected base');
   need(selection.sha256===selectedGrid.sha256&&selection.release_id===(referenceMetadata?.native_reference.id??geographicRelease.id),'Current additive native selection differs');
   need(Object.keys(sidecar.logical_asset_map??{}).sort().join(',')==='base_manifest,ledger,owner_roster,patch','Incomplete current additive asset roster');
+  return {selection,selectionBytes,sidecar,envelope,base,projection,projectionAsset,referenceMetadata,
+    inputInventory,read,reference_release:envelope.effective_reference,additiveRelease:envelope,
+    async publish(destination){if(projectionAsset){await fs.mkdir(path.join(destination,'reference-metadata'),{recursive:true});
+      await fs.writeFile(path.join(destination,projectionAsset.path),projectionAsset.raw,{flag:'wx'});}}};
+}
+
+// Scientific/current-product parity still consumes the complete accepted source
+// products. Ordinary website packaging uses only the pinned header above and
+// the already-prepared final bank, not this former runtime transport builder.
+export async function prepareCurrentSelectedAdditive(options) {
+  const selected=await readCurrentSelectedAdditive(options);if(!selected)return null;
+  need(!selected.finalBank,'Final-bank packaging does not reconstruct historical repairs');
+  const {selection,sidecar,envelope,base,projection,projectionAsset,referenceMetadata,inputInventory,read}=selected;
+  const {selectedGrid,features,referenceRevision}=options;
   const assets=projectionAsset?[projectionAsset]:[],decoded={},bodies={};
   for(const role of ['base_manifest','ledger','owner_roster','patch']){
     const pin=sidecar.logical_asset_map[role],logical=envelope[role];

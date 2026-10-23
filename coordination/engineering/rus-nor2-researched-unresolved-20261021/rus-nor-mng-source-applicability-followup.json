@@ -1,0 +1,345 @@
+{
+  "title": "Bounded RUS NOR and MNG contact source-applicability follow-up",
+  "status": "Read-only source and contract assessment. No RUS keys, ownership, physical evidence, native holds, accepted credit, or selection changed.",
+  "scope": {
+    "source": "inventory/rus-other-contact-471-key-and-family-index.json",
+    "source_sha256": "b9a968677ce39d4d03f9fc0b61997d92a21d45f2b20fec7cb017510ae8d32d23",
+    "examined_contact_keys": 10,
+    "nor_keys": 2,
+    "mng_keys": 8,
+    "larger_471_partition_unchanged": true
+  },
+  "original_contacts": {
+    "nor": [
+      {
+        "x": 152972,
+        "y": 59849,
+        "owner": "gb:RUS:ADM2:50074027B59329255842991",
+        "owner_name": "Petsamo District",
+        "source": "gb:NOR:ADM1:71437522B84427958303197",
+        "source_name": "Troms og Finnmark",
+        "source_ordinal_1based": 10
+      },
+      {
+        "x": 152965,
+        "y": 59862,
+        "owner": "gb:RUS:ADM2:50074027B59329255842991",
+        "owner_name": "Petsamo District",
+        "source": "gb:NOR:ADM1:71437522B84427958303197",
+        "source_name": "Troms og Finnmark",
+        "source_ordinal_1based": 10
+      }
+    ],
+    "mng": [
+      {
+        "x": 206218,
+        "y": 88538,
+        "owner": "gb:RUS:ADM2:50074027B68324499400164",
+        "owner_name": "Zakamensky Rayon",
+        "source": "gb:MNG:ADM1:14279143B49613281560709",
+        "source_name": "Bulgan",
+        "source_ordinal_1based": 4
+      },
+      {
+        "x": 213846,
+        "y": 88914,
+        "owner": "gb:RUS:ADM2:50074027B8579713719118",
+        "owner_name": "Akshinsky District",
+        "source": "gb:MNG:ADM1:14279143B35762276870520",
+        "source_name": "Dornod",
+        "source_ordinal_1based": 17
+      },
+      {
+        "x": 213845,
+        "y": 88915,
+        "owner": "gb:RUS:ADM2:50074027B8579713719118",
+        "owner_name": "Akshinsky District",
+        "source": "gb:MNG:ADM1:14279143B35762276870520",
+        "source_name": "Dornod",
+        "source_ordinal_1based": 17
+      },
+      {
+        "x": 213844,
+        "y": 88916,
+        "owner": "gb:RUS:ADM2:50074027B8579713719118",
+        "owner_name": "Akshinsky District",
+        "source": "gb:MNG:ADM1:14279143B35762276870520",
+        "source_name": "Dornod",
+        "source_ordinal_1based": 17
+      },
+      {
+        "x": 213843,
+        "y": 88917,
+        "owner": "gb:RUS:ADM2:50074027B8579713719118",
+        "owner_name": "Akshinsky District",
+        "source": "gb:MNG:ADM1:14279143B35762276870520",
+        "source_name": "Dornod",
+        "source_ordinal_1based": 17
+      },
+      {
+        "x": 201818,
+        "y": 89149,
+        "owner": "gb:RUS:ADM2:50074027B33807030271571",
+        "owner_name": "Erzinsky Kozhuun",
+        "source": "gb:MNG:ADM1:14279143B20985490361275",
+        "source_name": "Hovsgel",
+        "source_ordinal_1based": 19
+      },
+      {
+        "x": 195959,
+        "y": 89490,
+        "owner": "gb:RUS:ADM2:50074027B11056050899621",
+        "owner_name": "Kosh-Agachsky Rayon",
+        "source": "gb:MNG:ADM1:14279143B7284431230829",
+        "source_name": "Bayan-Ölgii",
+        "source_ordinal_1based": 20
+      },
+      {
+        "x": 195956,
+        "y": 89491,
+        "owner": "gb:RUS:ADM2:50074027B11056050899621",
+        "owner_name": "Kosh-Agachsky Rayon",
+        "source": "gb:MNG:ADM1:14279143B7284431230829",
+        "source_name": "Bayan-Ölgii",
+        "source_ordinal_1based": 20
+      }
+    ]
+  },
+  "retained_source_facts": {
+    "nor": {
+      "source_catalogue": "inventory/rus-other-family-primary-followup.json",
+      "source_boundary_id": "NOR-ADM1-71437522",
+      "represented": "2022",
+      "source": "Kartverket",
+      "license": "CC BY 4.0",
+      "feature_count": 11,
+      "decoded_sha256": "a24bd867e42c8f2d7bdd07e723594f2d55736d50de8cf1e92062ae443a0f0f72",
+      "existing_current_point_lookup": "inventory/rus-nor-current-kartverket-point-lookup.json",
+      "lookup_summary": "At current reference date 2026-01-01, one exact point returned Finnmark/Sør-Varanger; the other returned HTTP 404 'Ingen treff'. This is not a comparison with the retained 2022 geometry."
+    },
+    "mng": {
+      "source_catalogue": "inventory/rus-other-family-primary-followup.json",
+      "source_boundary_id": "MNG-ADM1-14279143",
+      "represented": "2017",
+      "source": "OpenStreetMap, Wambacher",
+      "license": "ODbL 1.0",
+      "source_information_updated": "2023-01-19",
+      "build_date": "2023-12-12",
+      "feature_count": 22,
+      "decoded_sha256": "4e692ea5cff967b716e59975768d1560ade8c9844fbe6831bd4d9e6a7123f7aa",
+      "lineage_report": "inventory/rus-mng-osm-source-lineage-metadata.json",
+      "geometry_and_native_join": "inventory/rus-mng-source-geometry-canonical-comparison.json",
+      "lineage_limit": "The retained geoBoundaries rows expose shapeName, shapeISO, shapeID, shapeGroup and shapeType, but no OSM relation identifiers or per-feature capture dates. The shapeIDs are geoBoundaries identifiers, not OSM relation IDs."
+    }
+  },
+  "new_primary_sources_examined": [
+    {
+      "jurisdiction": "Norway",
+      "url": "https://www.kartverket.no/til-lands/kommunereform/regionsendringer-2024",
+      "publisher": "Kartverket",
+      "observed": "Troms og Finnmark was split into Troms and Finnmark effective 2024-01-01. The page was last updated 2023-06-02.",
+      "scope_limit": "Establishes later administrative reorganization, not either exact point's position relative to the original 2022 polygon."
+    },
+    {
+      "jurisdiction": "Norway",
+      "url": "https://www.kartverket.no/til-lands/kommunereform/endringskart-2024",
+      "publisher": "Kartverket",
+      "observed": "Confirms the same county split and links an illustrative map at https://www.kartverket.no/globalassets/til-lands/kommunereform/troms-finnmark-2024.jpg.",
+      "scope_limit": "The illustration is not a historical 2022 geospatial record or exact contact-key test."
+    },
+    {
+      "jurisdiction": "Norway",
+      "url": "https://data.norge.no/nb/datasets/8aa07439-e295-3e11-8ee5-141cf03d7bd5/administrative-enheter-fylker",
+      "publisher": "Kartverket / Data Norge",
+      "observed": "The current county dataset is a cadastre-derived digital division with reference date 2026-01-01; CC BY 4.0. The page recommends the historical-versions WMS for historical data.",
+      "scope_limit": "Current data cannot stand in for the 2022 source vintage."
+    },
+    {
+      "jurisdiction": "Norway",
+      "url": "https://data.norge.no/en/datasets/13ea4d17-4d51-33e3-a950-200dacbdc647/administrative-enheter-historiske-versjoner",
+      "publisher": "Kartverket / Data Norge",
+      "observed": "The described series contains historical county and municipal versions, derived from the cadastre; CC BY 4.0. It exposes a GeoJSON distribution through Geonorge at metadata UUID 9bc064e3-6c34-4c3a-8421-00290052e9c0 and identifies the historical WMS endpoint https://wms.geonorge.no/skwms1/wms.adm_enheter_historisk?service=WMS&request=GetCapabilities.",
+      "scope_limit": "Dataset metadata states first issued/last updated 2020-07-10 and does not enumerate here whether a 2022 Troms og Finnmark version is available. It offers a concrete official next step, not proof of version availability or geometry equivalence."
+    },
+    {
+      "jurisdiction": "Mongolia",
+      "url": "https://legalinfo.mn/en/edtl/16532180497951",
+      "publisher": "Mongolian legal information system; Constitution",
+      "observed": "Articles 57-58 describe aimags and soums and state that boundaries of aimags, the capital, soums and districts are approved by the State Great Khural on Government submission.",
+      "scope_limit": "Establishes unit structure and approval mechanism, not the four exact contact geometries or a particular OSM source revision."
+    },
+    {
+      "jurisdiction": "Mongolia",
+      "url": "https://legalinfo.mn/en/edtl/16231130572841",
+      "publisher": "Mongolian legal information system; Law on Administrative and Territorial Units and Their Governance",
+      "observed": "The page labels its English text an unofficial SRBM translation. Articles 13-14 describe the process and authority for changing aimag/soum/district units and boundaries, with State Great Khural approval on Government submission.",
+      "scope_limit": "Framework law, not an individual source polygon or key-level boundary record."
+    },
+    {
+      "jurisdiction": "Mongolia",
+      "url": "https://legalinfo.mn/mn/detail?lawId=203100",
+      "publisher": "Mongolian Parliament / legalinfo",
+      "observed": "The 1994 State Great Khural Resolution 34 annex text gives the Khankh soum boundary in Khovsgol Aimag and starts at state-border marker 2988.0 before describing named ridges, streams, and Lake Khovsgol.",
+      "scope_limit": "This is a concrete official boundary description for Khankh, but no retained evidence places the Hovsgel contact key in Khankh; it cannot be generalized to that exact contact or to the four aimags."
+    },
+    {
+      "jurisdiction": "Norway",
+      "url": "https://wms.geonorge.no/skwms1/wms.adm_enheter_historisk?service=WMS&request=GetCapabilities",
+      "publisher": "Kartverket / Geonorge historical administrative-units WMS",
+      "opened": true,
+      "retrieval": {
+        "http_status": 200,
+        "content_type": "text/xml; charset=UTF-8",
+        "bytes": 38020,
+        "sha256": "cfd2da187762ac157577c0dc94dea5e88a0aab6dd74021956465f1f4b0f72954"
+      },
+      "observed": "Parsed the official WMS 1.3.0 capabilities XML. It exposes queryable fylker_2021 and fylker_2023 layers (also 2017–2020, 2024 and 2025), but no fylker_2022 layer. The 2021 and 2023 layers both identify fylkesnummer 54 as Troms og Finnmark.",
+      "scope_limit": "These adjacent-year layers do not prove exact 2022 geometry. The service offers no explicit 2022 layer in this capabilities document."
+    },
+    {
+      "jurisdiction": "Norway",
+      "url": "https://kartkatalog.geonorge.no/metadata/uuid/9bc064e3-6c34-4c3a-8421-00290052e9c0",
+      "publisher": "Geonorge / Kartverket metadata catalogue",
+      "retrieval": {
+        "http_status": 200,
+        "bytes": 4665,
+        "content_type": "text/html"
+      },
+      "observed": "The direct metadata page returned a JavaScript-required shell, not the machine-readable metadata payload.",
+      "scope_limit": "No distribution/version data could be extracted from this shell; this was not a download or an access denial."
+    },
+    {
+      "jurisdiction": "Norway",
+      "url": "https://www.geonorge.no/geonetwork/srv/nor/xml_iso19139?uuid=9bc064e3-6c34-4c3a-8421-00290052e9c0",
+      "publisher": "Kartverket / Geonorge ISO 19139 record",
+      "retrieval": {
+        "http_status": 200,
+        "bytes": 50703,
+        "content_type": "application/xml;charset=UTF-8",
+        "sha256": "86a74099dd3c9a95453358a2a6bafe14a494ded715f1a88f6d6c11bd367a4a45"
+      },
+      "observed": "The record identifies the series as admenheter_historisk and lists its historical-version description. All six format distribution URLs point to https://nedlasting.geonorge.no/api/capabilities/; it does not expose a direct downloadable 2022 file URL. Dates in the record include the series metadata dates but do not identify a 2022 feature snapshot.",
+      "scope_limit": "The metadata confirms an official distribution route but not availability of a specific 2022 file/version."
+    }
+  ],
+  "bounded_access_results": [
+    {
+      "target": "Kartverket historical WMS capabilities",
+      "url": "https://wms.geonorge.no/skwms1/wms.adm_enheter_historisk?service=WMS&request=GetCapabilities",
+      "result": "web page reader did not support text/xml; a prior ordinary command-line read failed at sandbox DNS resolution. No data transfer or geometry comparison completed.",
+      "classification": "Transport/content-reader limitation, not a policy denial."
+    },
+    {
+      "target": "Geonorge historical GeoJSON distribution",
+      "url": "https://kartkatalog.geonorge.no/metadata/uuid/9bc064e3-6c34-4c3a-8421-00290052e9c0",
+      "result": "The Data Norge catalogue identifies this as a cart-based download and gives no direct download URL. The exact 2022 feature/version was not retrieved.",
+      "classification": "Not attempted beyond the catalogue read; no access denial."
+    },
+    {
+      "target": "Coarse-map-pixel WMS GetFeatureInfo queries for the two retained Norway contact coordinates",
+      "url": "https://wms.geonorge.no/skwms1/wms.adm_enheter_historisk",
+      "method": "Four WMS 1.3.0 GetFeatureInfo requests against queryable fylker_2021 and fylker_2023, EPSG:4258, BBOX 69.42,30.03,69.45,30.08 (lat/lon axis order), 100x100 image. The retained coordinates were mapped to I/J indices 56/33 and 37/54. These are quantized pixel queries, not mathematical point-in-polygon tests.",
+      "results": [
+        {
+          "tuple": {
+            "x": 152972,
+            "y": 59849
+          },
+          "coordinate": {
+            "latitude": 69.43996822160625,
+            "longitude": 30.058131107771402
+          },
+          "pixels": {
+            "i": 56,
+            "j": 33
+          },
+          "fylker_2021": "Search returned no results",
+          "fylker_2023": "Search returned no results"
+        },
+        {
+          "tuple": {
+            "x": 152965,
+            "y": 59862
+          },
+          "coordinate": {
+            "latitude": 69.4336981394968,
+            "longitude": 30.048518877352535
+          },
+          "pixels": {
+            "i": 37,
+            "j": 54
+          },
+          "fylker_2021": {
+            "name": "Troms og Finnmark",
+            "fylkesnummer": "54"
+          },
+          "fylker_2023": {
+            "name": "Troms og Finnmark",
+            "fylkesnummer": "54"
+          }
+        }
+      ],
+      "limit": "These are WMS feature-info lookups at image pixels selected from the retained coordinates, not a vector polygon replay. The reported pixel result does not prove exact point-in-polygon membership.",
+      "pixel_footprint_approximation_at_lat_69_44": "Each pixel spans about 0.0005 degrees longitude by 0.0003 degrees latitude (approximately 20 m east-west by 33 m north-south at this latitude); location within the selected pixel is uncertain by up to about half that in each axis. WMS feature-info output is not exact polygon exclusion."
+    },
+    {
+      "target": "Small centered-pixel historical WMS follow-up for exact retained Norway points",
+      "url": "https://wms.geonorge.no/skwms1/wms.adm_enheter_historisk",
+      "method": "Four WMS 1.3.0 GetFeatureInfo requests against fylker_2021/fylker_2023, EPSG:4258, each 101x101 image with a BBOX centered on the retained point and ±0.00001 degrees in each coordinate; queried the middle pixel I=50,J=50. Each pixel is ~1.98e-7 degrees wide/high, about 2 cm north-south and under 1 cm east-west at these locations, before source/service positional limitations.",
+      "results": [
+        {
+          "tuple": {
+            "x": 152972,
+            "y": 59849
+          },
+          "coordinate": {
+            "latitude": 69.43996822160625,
+            "longitude": 30.058131107771402
+          },
+          "layers": {
+            "fylker_2021": "Search returned no results",
+            "fylker_2023": "Search returned no results"
+          }
+        },
+        {
+          "tuple": {
+            "x": 152965,
+            "y": 59862
+          },
+          "coordinate": {
+            "latitude": 69.4336981394968,
+            "longitude": 30.048518877352535
+          },
+          "layers": {
+            "fylker_2021": {
+              "name": "Troms og Finnmark",
+              "fylkesnummer": "54"
+            },
+            "fylker_2023": {
+              "name": "Troms og Finnmark",
+              "fylkesnummer": "54"
+            }
+          }
+        }
+      ],
+      "interpretation_limit": "The tiny centered pixel makes image-pixel quantization very small, but it remains a WMS image-pixel lookup, not an independent vector geometry test or exact polygon-exclusion proof."
+    },
+    {
+      "target": "Geonorge download API capabilities link from historical-series ISO metadata",
+      "url": "https://nedlasting.geonorge.no/api/capabilities/",
+      "result": "HTTP 200 returned a 5,625-byte HTML not-found page, not an API schema or dataset. No cart, credentials, terms acceptance, or data download was initiated.",
+      "classification": "The linked API path as recorded is stale/unavailable at that URL; this is a 404 page, not an access denial. No alternate route was tried."
+    }
+  ],
+  "assessment": {
+    "nor": "The exact historical-service follow-up materially sharpens source applicability. The official capabilities document has queryable fylker_2021 and fylker_2023 layers but no fylker_2022. With the coarse 100x100 map, the selected pixel corresponding to one retained coordinate returned Troms og Finnmark and the other returned no feature. I then queried tiny 101x101 BBOXes centered on each retained coordinate; the same contrast persisted in both bracketing layers. This reduces click-pixel quantization to a very small footprint, but is still a WMS image-pixel lookup, not a vector point-in-polygon proof. The retained original contact rows do not document whether their contact predicate used center membership, raster-cell intersection, or another native rule, so no mechanism is inferred for the discrepancy. The retained original contact rows do not document whether their contact predicate used center membership, raster-cell intersection, or another native rule, so no mechanism is inferred for the discrepancy. Together with the current 2026 API (same one match, one no-match), this is a concrete asymmetric source-applicability signal: the second key is supported as Troms og Finnmark by both historical service layers, whereas the first remains anomalous. The 2022 historical layer itself is absent from the published layer list. The official ISO metadata points to Geonorge download, but the direct metadata page is a JS shell and the recorded capabilities URL returns a 404 HTML page; no cart or alternative download route was used. A finite next step remains to determine whether the official Geonorge historical series offers a 2022 snapshot through its documented catalogue distribution. Until then neither the current API nor bracketing WMS layers decide exact 2022 geometry or the first key’s status; do not equate a no-hit pixel with polygon exclusion or a legal boundary conclusion.",
+    "mng": "The retained 2017 OSM/Wambacher family has exact source identities, names and four retained province contacts. The official Ministry ESMF already says Khovsgol is northernmost and borders Russia; the Constitution and administrative-units law confirm aimags are formal territorial units with legislated boundaries. The official 1994 Khankh annex is relevant regional context, but does not identify the Hovsgel contact key or establish its exact relation to that soum boundary; it also cannot validate the other three feature contacts. No actual contradiction, source change or lineage mismatch was found. These sources support the source's administrative role at coarse tier, but do not make individual cross-border cell contacts positive repairs. There is no basis to adopt all eight as repair solely from names, nor to deem them unresolved merely because the 2017 source lacks OSM relation IDs. Preserve all eight as contact evidence pending the original contract's per-key disposition; if exact boundary membership is material, the bounded next witness is the relevant official State Great Khural / Government aimag-soum boundary schedule or map for the four corresponding contact locations, tied to the exact source vintage. The currently inspected 1994 Khankh annex does not supply that join."
+  },
+  "limitations": [
+    "No geometry, physical support, owner observation, or diagnostic was rerun.",
+    "No legal sovereignty conclusion is made from names or polygons.",
+    "NOR source and MNG source licenses are retained as provenance facts, not as a claim that every downstream right or attribution obligation is independently cleared.",
+    "The MNG 2020 law is an unofficial English translation; the legalinfo Mongolian text was not independently translated here."
+  ],
+  "nor_retrieval_evidence": "inventory/rus-nor2-primary-retrieval-evidence/manifest.json"
+}

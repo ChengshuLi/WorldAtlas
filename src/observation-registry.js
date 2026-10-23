@@ -14,6 +14,7 @@ const field = (id, subject_kinds, value_type, definition, extra = {}) => ({id, s
 export const atlasObservationModule = freeze({
   id: 'atlas', version: 1,
   types: [
+    type('settlement', 'Existing named settlement identity; its population is not a territorial location total.'),
     type('location', 'Existing indivisible territorial polygon identity.'),
     type('polity', 'Political entity; government belongs here, not to each owned location.'),
     type('government-class', 'Controlled primary government vocabulary identity; not an assignment.'),
@@ -94,6 +95,7 @@ export function createObservationRegistry(modules = []) {
   }
   for (const definition of Object.values(result.fields)) {
     if (!kinds(definition.subject_kinds, result.types) || !['number', 'identity', 'identity-list', 'boolean'].includes(definition.value_type)) throw Error('Invalid field subject or value type');
+    if (definition.geography_scope != null && !['territorial', 'identity'].includes(definition.geography_scope)) throw Error('Invalid field geography scope');
     if (definition.value_type === 'number') {
       if (!Object.hasOwn(result.metrics, definition.metric_id)) throw Error('Numeric field requires a registered metric');
     } else if (definition.metric_id != null) throw Error('Only numeric fields reference metrics');

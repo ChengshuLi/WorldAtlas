@@ -1,0 +1,23 @@
+{
+  "attempts": [
+    {
+      "config": ".cache/delivery-handoff/bdi-compose-001.json",
+      "exit": 1,
+      "reason": "Committed modern constructor scope/rule/patch differs",
+      "correction": "Exact original native_patch pin retained from constructor original-rule-preimage; no operand bytes changed."
+    },
+    {
+      "config": ".cache/delivery-handoff/bdi-compose-001-bound.json",
+      "exit": 0,
+      "receipt": {
+        "destination": "coordination/engineering/bdi-source-qualification-20261021/composition-001",
+        "resumed": false,
+        "binding": {
+          "phase": "compose",
+          "config_sha256": "92ede50e333b452501c8276d6f4c935ec761cbc7165003318a7be1d48cae06db"
+        }
+      }
+    }
+  ],
+  "scientific_limit": "Composition is not selected-native consumer execution or acceptance."
+}

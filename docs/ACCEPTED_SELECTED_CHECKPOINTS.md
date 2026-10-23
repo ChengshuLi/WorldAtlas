@@ -27,6 +27,31 @@ between the Python wrapper and a new Node child. Releasing it expires access.
 Original predecessor acceptance remains lineage; it is not a request to reacquire
 or rerun historical science.
 
+## Final-bank authority profile
+
+The versioned existing checkpoint can bind selector-v2's complete index-v3 final
+bank/context instead of cumulative repair products. Initial adoption authenticates
+the actual accepted predecessor's exact words and deterministic finished-footprint
+conversion. Its compact authority list is derived from the complete accepted
+registry: unique sorted authority SHA plus the complete canonical entry digest,
+including any completed constructor. Later transitions retain every prior pair
+exactly and reject a repeated authority SHA even if its completion pin changes.
+Only the existing privately qualified new native append can add pairs/cells.
+
+The shared comparison checks every unchanged word/context value, exact new
+unassigned-before intervals/qualified owners, fixed compatibility URLs and current
+reference metadata. Lazy untouched reference geometry stays lazy; a newly touched
+owner must match its retained original geometry hash. Metadata-only projection
+updates remain distinct from new positive cell authorities. Old authority bodies
+and cumulative ledgers remain historical evidence, not normal final-bank inputs.
+
+Candidate-code cold reports use the same exhaustive comparison, identify their
+actual executing code, and cannot issue or retain accepted checkpoint authority.
+This route is credential-free: anonymous read-only custody metadata plus the exact
+retained artifact, with no authenticated Actions-download fallback. Ordinary
+accepted-code joint issuance still requires its existing authenticated custody.
+A malformed or downgraded current profile cannot choose legacy replay.
+
 ## Authenticated artifact
 
 `geography-check.json` remains the authenticated root, including the actual native
@@ -175,3 +200,242 @@ metadata reference, while appended native intervals still undergo the existing
 owner-zero, overlap and conservation checks. This reuses accepted qualification;
 it does not turn a cold candidate-code report into an accepted checkpoint artifact
 or claim that historical scientific predicates ran again.
+
+## Finalizer adoption of a chosen checkpoint
+
+The `finalize` handoff config may supply `accepted_checkpoint: {commit, path}`
+pointing to the committed `selected-checkpoint.json` emitted by the acquisition
+helper. Its exact retained ZIP must be committed at the locator's recorded path.
+The finalizer reauthenticates the actual accepted PR, merge/tested trees, original
+job and archive using the existing private acquisition API. The archive's
+`derived-facts.json` must name the prior `config.selector` selection and the
+accepted tested candidate. The newly emitted selection cannot accept itself.
+
+When supplied, the exact chosen locator becomes a `selected-checkpoint.json`
+product bound by the ordinary preparation receipt. The finalize CLI also adopts
+those bytes automatically at `data/selected-checkpoint.json`; there is no manual
+canonical-copy step. Before publication and again before atomic adoption it
+requires the existing canonical file to equal the selector commit's original
+file (or, for an identical `--resume`, the chosen output). Unexpected local edits,
+links and incompatible checkpoints fail. If interrupted after batch publication,
+`--resume` verifies every completed product and finishes canonical adoption.
+
+The operand is optional. Existing deliveries can retain an authenticated compatible
+checkpoint; age alone neither invalidates it nor requires a new acquisition.
+Supplying an incompatible chosen checkpoint is an error, not a cold fallback.
+The retained archive stays in batch custody outside package-consumed roles.
+Existing selected-data classification and joint-entry scientific admission still
+check the actual candidate's canonical locator and accepted lineage.
+
+### Accepted coordinate result reuse
+
+Hosted accepted checkpoint admission authenticates the complete archived
+certificate and its publication hashes, supported schema, successful original
+native report, accepted execution lineage and code, actual selector, live
+ledger/registry/patch/manifest, reader routes and current policy. It does not
+repeat the certificate's owner-by-primitive scientific computation.
+
+This relies on the producing code, not on the native success label alone.
+`selected-joint-entry.mjs` publishes only the certificate obtained from the
+private `authenticateTransition` capability. At the cold or trusted-catalogue
+seed boundary, `coordinateCheck` establishes complete owner/index/source and
+effective-primitive identities. `qualifyTransition` preserves that baseline;
+its private coordinate delta rejects changed old primitives and checks every new
+primitive's owner index and base geometry before recomputing changed effective
+hashes. Metadata projection checks every stable owner/index and each changed
+source feature. The producer then binds that exact candidate certificate in its
+facts and publication after the native comparison succeeds. Repeated deliveries
+preserve this invariant inductively.
+
+A trusted catalogue seed still runs the full coordinate check because it is not
+an authenticated hosted accepted artifact. A fixture which corrupts an owner
+index and then invents a fresh successful accepted job, publication and receipt
+crosses the accepted-result trust boundary; that negative belongs at seed/cold
+admission or producer construction. Tampering with the actual accepted bytes,
+unsupported schemas, changed live inputs, changed executing code or incompatible
+policy/selector remain admission failures. No caller-controlled skip option is
+provided.
+
+The retained South Africa PR #2427 artifact provides a historical check of this
+contract: its original executing commit
+`2013eb75fdaa4fdd7de311da09a5c0bd1fbf4f28` binds checkpoint code SHA256
+`7f12b9fde333a0c17509f573fd92f507047912590faea57d6ca2b1c1e95f43f9`
+and joint-entry SHA256
+`bfe424cbe10dceb86469659f9bba9d7236133330981ca21e230a4e6e79d038d1`.
+Those immutable bodies already implement the same owner/index preservation,
+per-addition validation, effective-hash derivation and private publication path.
+
+### Validated checkpoint projections
+
+The private `checkpointAdditions` projection receives fully validated rows from
+`readSelection`, or the equivalent privately reconstructed hosted accepted view.
+`readSelection` authenticates the selected products and calls
+`normaliseRetainedRepairLedger`, which checks each native component's complete
+schema, base geometry/hash, owner, custody, interval ordering/count and bounds.
+Projection dispatch therefore uses the validated representation tag instead of
+repeating that entire validation for every iteration or ordinal lookup. All three
+callers (cold qualification, accepted-derived admission and candidate transition)
+follow this boundary; no caller-supplied index or projection callback enters it.
+
+Rows remain source-backed and are freshly read on access. No geometry or result
+cache survives store closure. The exported `deriveCoordinateDelta` still validates
+arbitrary input components, and current-owner, old-row preservation, certificate,
+source-authority and route checks remain separate requirements. Real admitted
+projection controls reject interval rereads during projection alone, retain exact
+values and closure refusal, and malformed committed ledgers fail normalization.
+
+### Accepted ledger and rebind reuse
+
+Hosted admission first authenticates the private accepted archive, successful
+trusted producer/native result, complete live ledger/registry/patch/manifest
+hashes, selector, policy eligibility and scientific routes. Only then does it
+reconstruct the original normalized row cursor. The producing
+`qualifyTransition` called the full ledger normalizer before publishing its
+private transition; `selected-joint-entry` can publish only that genuine
+transition after native success. This existing producer invariant supplies the
+validated representation used by `checkpointAdditions`. Rechecking every old
+polygon, component interval and row count adds no new proof for identical
+accepted bytes.
+
+Whole-body hashing, parsing and invocation-local storage remain. Cheap original
+authority-binding reads still establish native/legacy classification; constructor
+presence is not used as a substitute. Cold/catalogue seeds and every candidate
+transition still normalize their entire ledger. They cannot inherit validation
+from a caller flag, fabricated handle, stale archive or changed body. The public
+delta validator and complete old-row preservation remain unchanged.
+
+An accepted rebind retains its complete original certificate and all literal
+product pins. Current consumers need its request and facts, so hosted admission
+reads those operands only. The historical result, publication and operating
+bodies remain provenance and route-bound, without being reopened. Cold seeds
+and genuinely changed rebinds still read and validate all five product bodies.
+No historical scientific result is regenerated or relabelled as a new execution.
+
+### Qualified delta projection and the public boundary
+
+After full candidate ledger normalization and source-authority/patch/rebind
+qualification, the private delta uses validated native representation tags rather
+than repeating native component validation for every cumulative row and new bound.
+Duplicate identities, old projected-addition equality, current target/index/base
+bindings, legacy geometry checks and exact effective hashes remain. In particular,
+raw old-row equality cannot replace projected equality after a changed rebind.
+
+The exported pure `deriveCoordinateDelta` still performs full component validation.
+It snapshots only each sequence's outer iterated row references, then uses that
+view for every lookup. A caller-controlled `.at()` or `entryAt` cannot substitute
+a different primitive into the validated owner's bounds or hash. Declared counts
+remain enforced; nested geometry and intervals retain their borrowed lifetime
+guards. No public trust option, persistent cache or new capability is introduced.
+
+
+### Exact qualified rows before candidate normalization
+
+Candidate admission still authenticates and parses the complete current products.
+Its private ledger admission checks the whole original scope, ordering and
+all dispositions, then proves canonical equality of old raw rows and unchanged
+whole authority entries against the genuine live baseline. Only rows satisfying
+both identities reuse their already-established intrinsic semantics. Every new or
+changed row receives the unchanged full public normalizer through a lazy residual
+row/scope view; the complete current registry and v2 ledger binding are still
+validated. The full normalized index borrows the candidate store, not a cache of
+old geometry. No public skip option or new serialized authority is introduced.
+
+Old-row and old-authority preservation demands stay after existing native-base
+and scientific-route eligibility. Thus a valid changed old row is still rejected
+for an otherwise eligible candidate, while an unsupported base preserves its
+candidate-only cold fallback. Invalid new/changed rows still refuse before that
+fallback. For a multiply malformed private candidate, the complete structural
+scan may report a later scope/disposition error before an earlier geometry error;
+both versions refuse. Public and cold/seed normalization remain unchanged.
+
+Appended source qualification, exact original literals, patch union/disjointness,
+current owner/target bindings, effective-reference digests, changed-rebind proof
+and old projected-addition equality all remain required. Raw row identity alone
+cannot approve changed projected legacy geometry. Baseline and successor handles
+retain private invocation ownership; failed admission releases new stores while
+leaving the baseline usable, and session release invalidates borrowed access.
+
+For the retained seven-package transition this removes deep normalization of
+5,180 old native and 93 old legacy effective rows. The 565 new native components
+remain fully validated. The removed native pass covers 1,210,251 intervals and
+527,088 base vertices (strict geometry plus canonical base hashing); parsing and
+required whole-value equality/digests remain. These are static invocation and
+cardinality counts, not measured time or memory savings.
+
+
+### Reuse only the admitted private product digest
+
+Derived checkpoint admission retains the complete canonical ledger/patch binding
+comparison. The native store already computes those canonical digests while
+admitting the whole authenticated body. A private invocation-local association
+binds each frozen selected product view to that same live store, so recovering its
+digest does not traverse every coordinate and interval again. This is not a raw
+wire SHA substitution: whitespace, duplicate keys, numeric spelling and gzip
+transport retain their separate whole-byte authentication and parsed semantics.
+
+No caller-supplied digest or public value hash is trusted. New admissions still
+parse and authenticate complete bodies, and changed/missing bindings refuse.
+The association cannot outlive checkpoint release; failed candidates release only
+their own stores. Public hashes still traverse their actual input and borrowed
+cursors still refuse after their store closes. Catalogue seeds keep all existing
+semantic qualification. Producer output bindings remain unchanged.
+
+A bounded observation on the retained accepted #2445 baseline attributed 8.431
+seconds to these two repeated canonical traversals (83,779,731 bytes) inside a
+29.975-second admission on the accepted preimage. Hash instrumentation adds
+observational overhead; this is not a paired speedup or an end-to-end estimate.
+The parser's required canonical pass, native Float64 coordinates, edges/crossings,
+retained metadata and exact output remain distinct size-dependent terms.
+
+### Chunk-local native interval ingestion
+
+A complete unsigned-decimal uint32 interval triple and its following delimiter
+already present in the input's owned byte chunk can write the existing 12-byte
+record directly. Its synchronous array visitor avoids a temporary three-element
+JSON array, a tuple string and per-run promise dispatch. Overflow, signed zero,
+exponents, decimal spellings, malformed tokens and chunk splits leave the parser
+cursor untouched for the existing complete JSON grammar. Native domain errors
+remain deferred until the final duplicate field wins; malformed syntax cannot be
+erased by a later duplicate. Property names, strings and other metadata keep their
+original parser. Producer-owned chunks are still snapshotted before use.
+
+This changes neither storage format nor authority. Complete raw byte/hash
+verification, required canonical passes, row order and owner bounds, ordinary
+scratch cleanup and borrowed-store lifetimes remain. A bounded genuine control
+with 64 rows and 448 additional local triples observed 448 fewer parsed arrays,
+448 fewer tuple-string conversions and 4,480 fewer promise initializations;
+those are allocation-event counts, not retained-byte or peak-memory savings.
+
+One parser-only observation on accepted preimage `4d87bbff` admitted the retained
+55,093,578-byte ledger and 28,686,153-byte patch in 20.731 seconds. Separately
+measured canonical work accounted for 6.962 seconds; the 13.766-second residual
+combines parsing, spooling and local Git transport. Instrumentation adds overhead,
+and that residual is neither pure parser time nor a promised speedup. Both stores
+retain disk-backed records and metadata; native Float64 geometry, edges/crossings,
+current output and other eager inputs remain separate size-dependent terms.
+
+### Private admitted component equality
+
+The cumulative ledger parser already authenticates the complete input and records
+an exact canonical SHA-256 for each component. Checkpoint admission now binds that
+identity to each exact immutable component view in its private invocation session.
+The old-row equality pass in transition normalization compares only these admitted
+identities. A public digest field, another session, or an expired store cannot
+supply this proof. A missing or changed row retains the existing full residual
+normalization and append-only refusal; candidate body admission, authority and
+route checks, and native comparison remain required.
+
+A bounded observation on the authentic retained 2445 ledger (5,281 components)
+measured the exact `valueSha` equality pass at 13.993 seconds and 1,271,006 reads,
+versus 14.86 milliseconds and 5,292 component-descriptor reads for the already
+admitted identities. Both passes agreed on every complete component. This is an
+isolated equality-pass observation, not a whole qualification speedup claim.
+
+### Preserve buffered writes at an unchanged logical end
+
+The private native-store writer skips `reset(position)` only when `position`
+already equals its complete logical end, including pending buffered bytes. This
+is the first `runs` field of an ordinary row. Pending bytes still flush at the
+existing capacity, canonical-readback and final-admission boundaries. A genuine
+duplicate-key rewind still flushes and truncates, with the original write-error
+and cleanup behavior. This changes neither stored formats nor admitted identities.

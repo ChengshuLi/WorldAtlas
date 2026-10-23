@@ -6,7 +6,7 @@ import {assertJSONData} from '../src/json-contract.js';
 import {observationContract,observationDigest,registryForDigest} from '../src/observation-modules.js';
 import {canonicalTypedJSON,decodeTypedRow,normalizeTypedEvidence,normalizeTypedRetirement} from '../src/typed-snapshot.js';
 import {assertResearchBundleApproved} from '../src/regional-import-gate.js';
-import {derivationInputIds,validateTypedDerivations,validateTypedGeography} from '../src/typed-derivations.js';
+import {derivationInputIds,validateTypedDerivations,validateTypedGeography,typedRequiresGeography} from '../src/typed-derivations.js';
 import researchGate from '../data/research-geography-gate.json' with {type:'json'};
 
 const definitions={observations:storage.typed_observations,feature_links:storage.typed_feature_links,retirements:storage.typed_retirements};
@@ -99,7 +99,7 @@ async function importTypedBatchCore(db,payload,{gate=researchGate}={}){
  const prior=await db.prepare('SELECT * FROM atlas_ingestions WHERE id=?').bind(id).first();
  if(prior){if(prior.fingerprint!==fingerprint)fail('Ingestion ID identifies different typed evidence or context',409);const counts=JSON.parse(prior.counts);return {version:1,ingestion_id:id,duplicate:true,counts:publicCounts(counts),registry_sha256:counts._typed_registry_sha256,expected_geography:counts._expected_geography,revision:await revision(db)};}
  if(payload.registry_sha256!==contract.registry_sha256)fail('New typed imports must pin the current controlled registry',409);
- const pins=geographyPins(payload.expected_geography),collections={};
+ const collections={};
  for(const key of Object.keys(definitions)){
   const values=payload[key]??[];if(!Array.isArray(values))fail('Typed collections must be arrays');
   for(const row of values){text(row?.id,'typed identity');text(row?.source_id,'source identity');}
@@ -117,12 +117,16 @@ async function importTypedBatchCore(db,payload,{gate=researchGate}={}){
  for(const input of collections.retirements)normalized.retirements.push(normalizeTypedRetirement(input,allClaims));
  const expectedPins=await typedSourcePins(context.rawSources);
  if(!Array.isArray(payload.source_pins)||payload.source_pins.length!==expectedPins.length||new Set(payload.source_pins.map(row=>row?.id)).size!==expectedPins.length||expectedPins.some(expected=>!payload.source_pins.some(row=>row?.id===expected.id&&row.sha256===expected.sha256)))fail('Typed import must pin original source catalog bytes',409);
- const factualSubjects=new Set(validateTypedDerivations([...normalized.observations,...normalized.feature_links,...context.retained.observations,...context.retained.feature_links],new Map([...context.derivations].map(([id,input])=>[id,input.row])),context.sources));
- for(const collection of ['observations','feature_links'])for(const row of normalized[collection])if(!row.is_example){const ids=collection==='observations'?[row.subject_id]:[row.source_entity_id,row.target_entity_id];ids.forEach(id=>factualSubjects.add(id));}
- for(const row of normalized.retirements){const target=allClaims[row.collection].find(target=>target.id===row.target_id);if(target.is_example&&!payload.examples)fail('Example retirement requires explicit batch opt-in');if(!target.is_example){const ids=row.collection==='observations'?[target.subject_id]:[target.source_entity_id,target.target_entity_id];ids.forEach(id=>factualSubjects.add(id));}}
+ const roots=[...normalized.observations,...normalized.feature_links,...context.retained.observations,...context.retained.feature_links];
+ validateTypedDerivations(roots,new Map([...context.derivations].map(([id,input])=>[id,input.row])),context.sources);
+ for(const row of normalized.retirements){const target=allClaims[row.collection].find(target=>target.id===row.target_id);if(target.is_example&&!payload.examples)fail('Example retirement requires explicit batch opt-in');}
+ const geographyDependent=[...roots,...[...context.derivations.values()].map(input=>input.row)].filter(row=>typedRequiresGeography(row,contract.registries));
+ const territorial=geographyDependent.filter(row=>!row.is_example);
+ const pins=geographyDependent.length||payload.expected_geography!=null?geographyPins(payload.expected_geography):null;
+ const factualSubjects=new Set(territorial.flatMap(row=>row.subject_id?[row.subject_id]:row.location_id?[row.location_id]:[row.source_entity_id,row.target_entity_id]));
  if(factualSubjects.size){if(gate.version!==2)fail('Typed factual imports require complete regional certificates',409);try{assertResearchBundleApproved(gate,pins,{regionIds:payload.region_ids,subjectIds:[...factualSubjects]});}catch(error){fail(error.message,409);}}
- validateTypedGeography([...normalized.observations,...normalized.feature_links,...normalized.retirements.map(row=>allClaims[row.collection].find(target=>target.id===row.target_id)),...[...context.derivations.values()].map(input=>input.row)],pins);
- const statements=[geographyGuard(db,pins,id,fingerprint)],counts={};
+ validateTypedGeography(territorial,pins,contract.registries);
+ const statements=pins?[geographyGuard(db,pins,id,fingerprint)]:[],counts={};
  for(const collection of ['retirements','observations','feature_links']){counts[collection]=normalized[collection].length;for(const row of normalized[collection])statements.push(insert(db,collection,stored(collection,row)));}
  statements.push(db.prepare('INSERT OR IGNORE INTO atlas_ingestions(id,fingerprint,counts,created_at) VALUES(?,?,?,?)').bind(id,fingerprint,canonicalTypedJSON({...counts,_typed_registry_sha256:contract.registry_sha256,_expected_geography:pins}),Date.now()));
  try{const result=await db.batch(statements);return {version:1,ingestion_id:id,duplicate:result.at(-1)?.meta?.changes===0,counts,registry_sha256:contract.registry_sha256,expected_geography:pins,revision:await revision(db)};}
@@ -152,7 +156,7 @@ async function typedSnapshotPageCore(db,year,{stream='observations',examples=fal
  else for(let i=0;i<selected.length;i++)selected[i]=normalizeTypedRetirement(selected[i],{sources:context.sources,...context.retained},{requireReplacement:false});
  validateTypedDerivations(stream==='retirements'?[...context.retained.observations,...context.retained.feature_links]:selected,new Map([...context.derivations].map(([id,input])=>[id,input.row])),context.sources);
  const published=await db.prepare("SELECT id release_id,hierarchy_sha256,footprints_sha256 FROM atlas_geographic_releases WHERE status='published' ORDER BY version DESC LIMIT 1").first();
- try{validateTypedGeography([...context.retained.observations,...context.retained.feature_links,...(stream==='retirements'?[]:selected),...[...context.derivations.values()].map(input=>input.row)],published);}catch{fail('Retained typed territory requires reviewed revalidation; original evidence is preserved',503);}
+ try{validateTypedGeography([...context.retained.observations,...context.retained.feature_links,...(stream==='retirements'?[]:selected),...[...context.derivations.values()].map(input=>input.row)],published,contract.registries);}catch{fail('Retained typed territory requires reviewed revalidation; original evidence is preserved',503);}
  const afterMarker=await exportStorageMarkerV3(db);if(marker.fingerprint!==afterMarker.fingerprint)fail('Typed evidence changed during loading; restart all streams',409);
  const result={version:1,year,stream,examples:enabled,geography_pins:published,registry_sha256:contract.registry_sha256,fingerprint:marker.fingerprint,revision:marker.revision,total,rows:selected,derivation_inputs:[...context.derivations.values()].map(input=>({kind:input.typed?'typed':'legacy',row:input.row})),sources:context.sources,entities:context.entities,source_pins:await typedSourcePins(context.rawSources),next_cursor:found.length>limit?encodeCursor({version:1,year,stream,examples:enabled,after:selected.at(-1).id,fingerprint:marker.fingerprint,registry_sha256:contract.registry_sha256}):null};
  if(new TextEncoder().encode(JSON.stringify(result)).length>8*1024*1024){const error=new RecordError('Typed snapshot page exceeds8 MiB; retry a smaller limit',413);error.retryable=true;error.suggested_limit=Math.max(1,Math.floor(limit/2));throw error;}return result;

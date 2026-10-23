@@ -58,6 +58,50 @@ test('packed replacements preserve every native word against an independent cell
  assert.equal(applyAdditiveNativePatch(actual,patch,options),actual);
 });
 
+test('packed merge preserves seam endpoints, maximum owner bits and two-sided equal-owner coalescing',()=>{
+ const {base,patch,options}=fixture(),size=base.size,high=2**26-1;
+ options.features[1].pixelIndex=high;
+ options.features[1].additiveFootprint={...structuredClone(options.features[0].additiveFootprint),
+  base_geometry_sha256:hash(options.features[1].geometry)};
+ const rows=Array(size).fill(new Uint32Array());
+ rows[0]=Uint32Array.from([0,1,high,5,7,1,size-2,size-1,high]);
+ rows[size-1]=Uint32Array.from([1,3,high,4,6,1,7,9,high]);
+ Object.assign(base,packOwnership({size,rows}));
+ base.reference_owner_sha256=createHash('sha256').update(JSON.stringify(options.features.map(f=>[f.pixelIndex,f.id]))).digest('hex');
+ patch.rows=[{y:0,runs:[[1,5,high],[7,8,1],[size-1,size,high]]},
+  {y:1,runs:[[0,size,1]]},{y:size-1,runs:[[0,1,high],[3,4,1],[6,7,1],[9,10,high]]}];
+ const expectedRows=Array(size).fill(new Uint32Array());
+ expectedRows[0]=Uint32Array.from([0,5,high,5,8,1,size-2,size,high]);
+ expectedRows[1]=Uint32Array.from([0,size,1]);
+ expectedRows[size-1]=Uint32Array.from([0,3,high,3,7,1,7,10,high]);
+ const expected=packOwnership({size,rows:expectedRows}),beforeRows=base.rows.slice(),beforeRuns=base.runs.slice(),beforePatch=JSON.stringify(patch);
+ const actual=applyAdditiveNativePatch(base,patch,options);
+ assert.deepEqual(actual.rows,expected.rows);assert.deepEqual(actual.runs,expected.runs);
+ assert.equal(actual.additive_added_cells,size+10);assert.deepEqual(base.rows,beforeRows);assert.deepEqual(base.runs,beforeRuns);assert.equal(JSON.stringify(patch),beforePatch);
+});
+
+test('packed merge refuses malformed base rows and later overlap without mutating either input',()=>{
+ const cases=[
+  [f=>f.base.rows[7]=f.base.runs.length,/Incomplete base native row/],
+  [f=>f.base.runs[0]=3,/Invalid\/foreign base ownership run/],
+  [f=>f.base.runs[1]=2**19,/Invalid\/foreign base ownership run/],
+  [f=>f.base.runs[2]=2**19+2,/Invalid\/foreign base ownership run/],
+  [f=>f.base.runs[3]=f.base.size,/Invalid\/foreign base ownership run/],
+  [f=>f.patch.rows[0].runs=[[3,5,1],[7,9,1]],/replace an assigned cell/],
+  [f=>f.patch.rows[0].runs=[[7,8,1],[3,5,1]],/Conflicting or foreign current additive run/],
+  [f=>f.patch.rows[0].runs=[[3,3,1]],/Conflicting or foreign current additive run/],
+  [f=>f.patch.rows[0].runs=[[3,f.base.size+1,1]],/Conflicting or foreign current additive run/],
+  [f=>f.patch.rows[0].runs=[[3,5,2**26]],/Conflicting or foreign current additive run/],
+  [f=>f.patch.rows[0].runs=[[3,5.5,1]],/Conflicting or foreign current additive run/],
+  [f=>f.patch.rows.push({...f.patch.rows[0]}),/Duplicate\/unordered\/outside native patch row/]
+ ];
+ for(const [edit,error] of cases){
+  const f=fixture();edit(f);const rows=f.base.rows.slice(),runs=f.base.runs.slice(),patch=JSON.stringify(f.patch);
+  assert.throws(()=>applyAdditiveNativePatch(f.base,f.patch,f.options),error);
+  assert.deepEqual(f.base.rows,rows);assert.deepEqual(f.base.runs,runs);assert.equal(JSON.stringify(f.patch),patch);
+ }
+});
+
 test('assigned cells, conflicts, foreign owner, stale baseline and rule rebind reject without changing base',()=>{
  for(const alter of [p=>p.rows[0].runs=[[2,4,1]],p=>p.rows[0].runs=[[8,9,1]],p=>p.rows[0].runs=[[3,6,1],[5,7,2]],p=>p.rows[0].runs=[[3,5,3]],p=>p.base_reference.footprints_sha256='0'.repeat(64),p=>p.rule_sha256='0'.repeat(64),p=>p.rows.push(p.rows[0])]){
   const {base,patch,options}=fixture(),before=base.runs.slice();alter(patch);assert.throws(()=>applyAdditiveNativePatch(base,patch,options));assert.deepEqual(base.runs,before);
@@ -98,19 +142,20 @@ test('real bounded asset load authenticates whole patch and complete effective d
  const latRaw=fs.readFileSync('coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz');
  const latitude={root:'repository',role:'immutable-normative-rule-input',path:'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz',commit:'1'.repeat(40),bytes:latRaw.length,sha256:createHash('sha256').update(latRaw).digest('hex'),decoded_bytes:262166*8,decoded_sha256:'66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23',transport_path:'native-v1/native-row-latitudes.f64le.gz'};
  const transports=new Map(),parts=['rows','runs'].map(kind=>{
-  const words=base[kind],body=gzipSync(shuffleOwnershipBytes(words)),path='ownership/'+kind+'.gz';transports.set('./'+path,body);
+  const words=base[kind],body=gzipSync(shuffleOwnershipBytes(words)),path='native-v1/ownership/'+kind+'-0.bin.gz';transports.set('./'+path,body);
   return {kind,offset:0,words:words.length,path,encoding:'byte-shuffle',sha256:createHash('sha256').update(body).digest('hex'),decoded_sha256:createHash('sha256').update(new Uint8Array(words.buffer)).digest('hex')};
  });
  const units=['province','area','region','subcontinent','continent'].map((level,i)=>({id:level,level,parent_id:i===4?null:['area','region','subcontinent','continent'][i]}));
  const normalFeatures=options.features.map(({additiveFootprint,...f})=>({...f,properties:{...f.properties,id:f.id,parent_id:'province'}}));
  const normalRoster=Buffer.from(JSON.stringify(normalFeatures.map(f=>({id:f.id,index:f.pixelIndex,province_id:'province',bounds:[0,0,3,3]})))),normalRosterEncoded=gzipSync(normalRoster);
- const normalManifest=Buffer.from(JSON.stringify({...JSON.parse(manifestRaw),original_assets:{bounds:{sha256:createHash('sha256').update(normalRosterEncoded).digest('hex')}}}));
+ const normalManifest=Buffer.from(JSON.stringify({...JSON.parse(manifestRaw),version:2,runWords:base.runs.length,parts,native_latitudes:latitude,original_assets:{bounds:{sha256:createHash('sha256').update(normalRosterEncoded).digest('hex')}}}));
  const normalData={...structuredClone(data),units,temporal:{links:[],history:[]},parts:['geography/catalog.json'],geometryParts:['geography/geometries.json'],pixelMap:{...data.pixelMap,...options.baseReference,geographic_release:options.baseReference.id,version:2,size:262166,coordinateBits:19,method:base.method,runWords:base.runs.length,native_latitudes:latitude,parts,canonical_grid_sha256:createHash('sha256').update(normalManifest).digest('hex')}};
  normalData.additiveRelease.base_manifest=asset('additive-repairs/base-native-manifest.json',normalManifest);
  normalData.additiveRelease.owner_roster={...asset('additive-repairs/owners1.json.gz',normalRosterEncoded),encoding:'gzip',decoded_bytes:normalRoster.length,decoded_sha256:createHash('sha256').update(normalRoster).digest('hex')};
  transports.set('./native-v1/native-row-latitudes.f64le.gz',latRaw);
  transports.set('./geography/catalog.json',Buffer.from(JSON.stringify(normalFeatures.map(f=>({...f,geometry:null})))));
  transports.set('./geography/geometries.json',Buffer.from(JSON.stringify(normalFeatures.map(f=>({id:f.id,geometry:f.geometry})))))
+ await prepareBrowserFixture({data:normalData,features:normalFeatures,transports,fetcher:async p=>transports.has(p)?new Response(transports.get(p)):p.includes('base-native-manifest')?new Response(normalManifest):p.includes('owners1')?new Response(normalRosterEncoded):fetcher(p)});
  const server=await createServer({configFile:false,server:{middlewareMode:true,watch:null},define:{'import.meta.env.VITE_STATIC_ATLAS':'"true"','import.meta.env.VITE_HOSTED_DATABASE':'"false"'}}),oldFetch=globalThis.fetch;
  try{
   globalThis.fetch=async path=>path==='./atlas-geography.json'?new Response(JSON.stringify(normalData)):transports.has(path)?new Response(transports.get(path)):path.includes('base-native-manifest')?new Response(normalManifest):path.includes('owners1')?new Response(normalRosterEncoded):fetcher(path);
@@ -231,6 +276,57 @@ test('actual shared thirteen-case batch draws and picks all134 new cells with co
 // Synthetic source-backed metadata correction, full canonical row dimensions.
 // Real loading, picking and sampling exercise the N (native), M (metadata) and
 // E (additive) bindings; this fixture makes no real-world scientific claim.
+async function prepareBrowserFixture({data,features,transports,fetcher}){
+ const fs=await import('node:fs/promises'),os=await import('node:os'),path=await import('node:path');
+ const {packageStartupOwnership,packagePreparedStartupOwnership}=await import('../scripts/package-startup-ownership.mjs');
+ const {prepareSelectedStartupOwnership}=await import('../scripts/prepare-startup-ownership.mjs');
+ const {scientificNativeSelection}=await import('../src/reference-metadata.js');
+ const root=await fs.mkdtemp(path.join(os.tmpdir(),'atlas-prepared-final-'));
+ const sha=raw=>createHash('sha256').update(raw).digest('hex'),raws=new Map();
+ const pin=(name,raw,extra={})=>{const p={commit:'1'.repeat(40),path:name,mode:'100644',git_blob_oid:createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex'),bytes:raw.length,sha256:sha(raw),...extra};raws.set(name,raw);return p;};
+ const write=async(root,name,raw)=>{await fs.mkdir(path.dirname(path.join(root,name)),{recursive:true});await fs.writeFile(path.join(root,name),raw,{flag:'wx'});};
+ try{
+  const assets={};
+  for(const role of ['base_manifest','owner_roster','ledger','patch']){
+   const a=data.additiveRelease[role],raw=Buffer.from(await (await fetcher('./'+a.path)).arrayBuffer());
+   assets[role]=pin(`coordination/fixture/${role}.json`,raw,a.encoding?{encoding:a.encoding,decoded_bytes:a.decoded_bytes,decoded_sha256:a.decoded_sha256}:{});
+  }
+  const manifest=JSON.parse(raws.get(assets.base_manifest.path));
+  const nativeSource=path.join(root,'source'),bank=path.join(root,'bank'),prefix='ownership-vintages/'+assets.base_manifest.sha256+'/';
+  for(const part of manifest.parts)await write(nativeSource,part.path,Buffer.from(await (await fetcher('./'+part.path)).arrayBuffer()));
+  const native=await packageStartupOwnership({manifest,source:nativeSource,destination:path.join(bank,prefix)});
+  for(const part of manifest.parts.filter(p=>p.kind==='rows'))await write(bank,part.path,await fs.readFile(path.join(nativeSource,part.path)));
+  await write(bank,'native-v1/native-row-latitudes.f64le.gz',transports.get('./native-v1/native-row-latitudes.f64le.gz'));
+  const nativePixelMap={...native.pixelMap,canonical_grid_sha256:assets.base_manifest.sha256,
+    native_latitudes:{...manifest.native_latitudes,transport_path:'native-v1/native-row-latitudes.f64le.gz'},
+    parts:native.pixelMap.parts.map(p=>p.kind==='rows'?p:{...p,path:prefix+p.path})};
+  let selection={version:1,method:manifest.method,manifest_path:'data/native.json',sha256:assets.base_manifest.sha256,release_id:manifest.geographic_release};
+  if(data.referenceMetadata){
+   const raw=Buffer.from(await(await fetcher('./'+data.referenceMetadata.asset.path)).arrayBuffer()),projection=JSON.parse(raw);
+   selection={...projection.native_selection,reference_projection:pin('coordination/fixture/projection.json',raw)};
+  }
+  const sidecar={version:2,kind:'retained-native-additive-selection-v2',base_selection:scientificNativeSelection(selection),
+   runtime_envelope:pin('coordination/fixture/envelope.json',Buffer.from(JSON.stringify(data.additiveRelease))),logical_asset_map:assets};
+  selection.additive_release=pin('coordination/fixture/sidecar.json',Buffer.from(JSON.stringify(sidecar)));
+  const selectionBytes=Buffer.from(JSON.stringify(selection));
+  const index=await prepareSelectedStartupOwnership({selectionBytes,manifest,previous:{version:1,pixelMap:nativePixelMap,files:await inventory()},readNative:name=>fs.readFile(path.join(bank,name)),
+   readPin:p=>raws.get(p.path),destination:bank});
+  async function inventory(relative=''){
+   const rows=[];for(const e of await fs.readdir(path.join(bank,relative),{withFileTypes:true})){
+    const name=relative?relative+'/'+e.name:e.name;
+    if(e.isDirectory())rows.push(...await inventory(name));else{const raw=await fs.readFile(path.join(bank,name));rows.push({path:name,bytes:raw.length,sha256:sha(raw)});}
+   }return rows.sort((a,b)=>a.path.localeCompare(b.path));
+  }
+  index.files=await inventory();await write(bank,'index.json',Buffer.from(JSON.stringify(index)));
+  const selected={selectionBytes,envelope:data.additiveRelease,base:data.additiveRelease.base_reference,referenceMetadata:data.referenceMetadata};
+  const destination=path.join(root,'published');
+  const copied=await packagePreparedStartupOwnership({manifest,manifestSha:selection.sha256,source:bank,destination,selected,features});
+  for(const p of index.files)transports.set('./'+p.path,await fs.readFile(path.join(destination,p.path)));
+  Object.assign(data,copied);
+  return {index,manifest,selection,selected,bankBodies:new Map(await Promise.all(index.files.map(async pin=>[pin.path,await fs.readFile(path.join(bank,pin.path))])))};
+ }finally{await fs.rm(root,{recursive:true,force:true});}
+}
+
 async function metadataRuntimeFixture({ledgerBytes,rosterBytes}={}){
  const {default:fs}=await import('node:fs'),{shuffleOwnershipBytes}=await import('../src/ownership-codec.js');
  const sha=body=>createHash('sha256').update(body).digest('hex'),json=value=>Buffer.from(JSON.stringify(value)+'\n');
@@ -255,11 +351,14 @@ async function metadataRuntimeFixture({ledgerBytes,rosterBytes}={}){
  const rows=Array(262166).fill(new Uint32Array());rows[3]=Uint32Array.from([1,3,1,8,10,2]);rows[4]=Uint32Array.from([7,8,3]);
  const base={...packOwnership({size:rows.length,rows}),method:'native-linear-evenodd-first-owner-v1',geographic_release:native.id,footprints_sha256:native.footprints_sha256,hierarchy_sha256:native.hierarchy_sha256};
  const transports=new Map(),put=(path,body)=>{transports.set('./'+path,body);return asset(path,body);};
- const parts=['rows','runs'].map(kind=>{const words=base[kind],body=gzipSync(shuffleOwnershipBytes(words));return {...put('ownership/'+kind+'.bin.gz',body),kind,offset:0,words:words.length,encoding:'byte-shuffle',decoded_sha256:sha(new Uint8Array(words.buffer))};});
+ const parts=['rows','runs'].map(kind=>{const words=base[kind],body=gzipSync(shuffleOwnershipBytes(words));return {...put('native-v1/ownership/'+kind+'-0.bin.gz',body),kind,offset:0,words:words.length,encoding:'byte-shuffle',decoded_sha256:sha(new Uint8Array(words.buffer))};});
  const owners=originalFeatures.map(f=>({id:f.id,index:f.pixelIndex,province_id:f.properties.parent_id,province_index:f.properties.parent_id==='new'?1:2,bounds:[0,0,10,10]}));
  const rosterBody=json(owners),roster=rosterBytes===undefined?rosterBody:Buffer.concat([rosterBody,Buffer.alloc(rosterBytes-rosterBody.length,0x20)]);
  const rosterAsset={...put('additive-repairs/owners.json.gz',gzipSync(roster)),encoding:'gzip',decoded_bytes:roster.length,decoded_sha256:sha(roster)};
- const manifest={geographic_release:native.id,footprints_sha256:native.footprints_sha256,hierarchy_sha256:native.hierarchy_sha256,method:base.method,size:base.size,coordinateBits:base.coordinateBits,parts,original_assets:{bounds:{sha256:rosterAsset.sha256}}};
+ const latRaw=fs.readFileSync('coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz');
+ put('native-v1/native-row-latitudes.f64le.gz',latRaw);
+ const native_latitudes={root:'repository',role:'immutable-normative-rule-input',path:'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz',commit:'1'.repeat(40),bytes:latRaw.length,sha256:sha(latRaw),decoded_bytes:base.size*8,decoded_sha256:'66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23',transport_path:'native-v1/native-row-latitudes.f64le.gz'};
+ const manifest={version:2,runWords:base.runs.length,native_latitudes,geographic_release:native.id,footprints_sha256:native.footprints_sha256,hierarchy_sha256:native.hierarchy_sha256,method:base.method,size:base.size,coordinateBits:base.coordinateBits,parts,original_assets:{bounds:{sha256:rosterAsset.sha256}}};
  const manifestAsset=put('additive-repairs/base-manifest.json',json(manifest));
  const selection={version:1,method:base.method,manifest_path:'data/native.json',sha256:manifestAsset.sha256,release_id:native.id,artifact_consumption:{certificate:{original:'retained'},review:{original:'retained'}}};
  const projection=prepareReferenceMetadataProjection({selection,manifest,owners,reference,hierarchy,receipts:[receipt],source_updates,read:p=>bodies.get(p.commit+':'+p.path)});
@@ -271,9 +370,6 @@ async function metadataRuntimeFixture({ledgerBytes,rosterBytes}={}){
  effectiveFeatures[0].additiveFootprint={version:2,kind:'retained-base-plus-additions',baseline_release_sha256:reference.footprints_sha256,base_geometry_sha256:component.base_geometry_sha256,ledger_sha256:ledgerAsset.sha256,authority_registry_sha256:ledger.authority_registry_sha256,components:[component]};
  const effective={...reference,id:'geography:current-effective',footprints_sha256:additiveReleaseFootprintDigest(reference,effectiveFeatures)};
  const patch={version:2,kind:'unassigned-native-cells-v1',base_reference:reference,effective_reference:effective,ledger_sha256:ledgerAsset.sha256,authority_registry_sha256:ledger.authority_registry_sha256,rows:[{y:3,runs:[[3,5,1]]}]};
- const latRaw=fs.readFileSync('coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz');
- put('native-v1/native-row-latitudes.f64le.gz',latRaw);
- const native_latitudes={root:'repository',role:'immutable-normative-rule-input',path:'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz',commit:'1'.repeat(40),bytes:latRaw.length,sha256:sha(latRaw),decoded_bytes:base.size*8,decoded_sha256:'66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23',transport_path:'native-v1/native-row-latitudes.f64le.gz'};
  const physicalRows=Array(base.size).fill(new Uint32Array());physicalRows[3]=Uint32Array.from([0,12,1]);
  const physical=packOwnership({size:base.size,rows:physicalRows});
  const coverageParts=['rows','runs'].map(kind=>{const words=physical[kind],body=gzipSync(shuffleOwnershipBytes(words));return {...put('coverage-classification/'+kind+'-0.bin.gz',body),kind,offset:0,words:words.length,encoding:'byte-shuffle',compressed_bytes:body.length,decoded_sha256:sha(new Uint8Array(words.buffer))};});
@@ -287,7 +383,7 @@ async function metadataRuntimeFixture({ledgerBytes,rosterBytes}={}){
   fetcher:async path=>{assert.ok(transports.has(path),'Unexpected fixture read: '+path);return new Response(transports.get(path));}};
 }
 
-test('real geography entry keeps native words, latitudes and physical coverage at N while projecting catalog parents to M and adding E',async()=>{
+test('real prepared geography serves final E words, with N latitude/physical rules and complete M parents',async()=>{
  const f=await metadataRuntimeFixture(),{createServer}=await import('vite'),oldFetch=globalThis.fetch;
  const server=await createServer({configFile:false,server:{middlewareMode:true,watch:null},define:{'import.meta.env.VITE_STATIC_ATLAS':'"true"','import.meta.env.VITE_HOSTED_DATABASE':'"false"'}});
  try{
@@ -296,9 +392,12 @@ test('real geography entry keeps native words, latitudes and physical coverage a
   const direct=await loadAdditiveNativePatch(f.data,directFeatures,f.base,{fetcher:f.fetcher});
   assert.notEqual(direct,f.base);assert.deepEqual(f.base,before);
   for(let y=3;y<=4;y++)for(let x=0;x<12;x++){const old=pickOwnership(before,x,y);if(old)assert.equal(pickOwnership(direct,x,y),old);}
+  await prepareBrowserFixture({data:f.data,features:f.currentFeatures,transports:f.transports,fetcher:f.fetcher});
+  const preparedFetch=globalThis.fetch;globalThis.fetch=async p=>{assert.ok(!p.startsWith('./additive-repairs/'),'Browser must not fetch or replay scientific repair products');return preparedFetch(p);};
   const client=await server.ssrLoadModule('/src/data-client.js'),loaded=await client.loadGeography();
   assert.deepEqual(nativeReferenceForData(loaded),f.native);assert.deepEqual(additiveBaseReference(loaded),f.reference);
-  assert.equal(loaded.pixelMap.geographic_release,f.native.id);assert.equal(loaded.pixelMap.hierarchy_sha256,f.native.hierarchy_sha256);
+  assert.equal(loaded.pixelMap.geographic_release,f.effective.id);assert.equal(loaded.pixelMap.hierarchy_sha256,f.reference.hierarchy_sha256);
+  assert.equal(loaded.preparedOwnership.native_pixel_map.geographic_release,f.native.id);assert.equal(loaded.preparedOwnership.native_pixel_map.hierarchy_sha256,f.native.hierarchy_sha256);
   assert.equal(loaded.coverage.manifest.release_id,f.native.id);assert.equal(loaded.coverage.manifest.hierarchy_sha256,f.native.hierarchy_sha256);
   assert.equal(loaded.nativeLatitudes.length,262166);assert.equal(geometryReads,0);
   assert.deepEqual(loaded.features.map(row=>row.properties.parent_id),['new','old','new']);
@@ -314,6 +413,52 @@ test('real geography entry keeps native words, latitudes and physical coverage a
   assert.deepEqual(loaded.features.map(({id,geometry})=>({id,geometry})),f.originalFeatures.map(({id,geometry})=>({id,geometry})));
   assert.equal(loaded.additiveRelease.version,2);assert.deepEqual(Object.keys(loaded.additiveRelease).sort(),['version','kind','base_reference','effective_reference','base_manifest','owner_roster','ledger','patch'].sort());
  }finally{globalThis.fetch=oldFetch;await server.close();}
+});
+
+
+test('finished bank copier rejects stale selection, N/M/E swaps, changed words, latitude and effective context before export',async t=>{
+ const f=await metadataRuntimeFixture(),prepared=await prepareBrowserFixture({data:f.data,features:f.currentFeatures,transports:f.transports,fetcher:f.fetcher});
+ const {default:fs}=await import('node:fs/promises'),{default:os}=await import('node:os'),{default:path}=await import('node:path');
+ const {packagePreparedStartupOwnership}=await import('../scripts/package-startup-ownership.mjs');
+ const root=await fs.mkdtemp(path.join(os.tmpdir(),'finished-bank-adverse-'));t.after(()=>fs.rm(root,{recursive:true,force:true}));
+ const sha=raw=>createHash('sha256').update(raw).digest('hex');
+ const repinContext=(state,edit)=>{const old=state.index.preparedOwnership.context_parts[0],rows=JSON.parse(gunzipSync(state.bodies.get(old.path)));edit(rows);
+  const raw=Buffer.from(JSON.stringify(rows)),body=gzipSync(raw,{level:9}),pin={...old,path:`geography/effective-context-${sha(body)}.json.gz`,bytes:body.length,sha256:sha(body),decoded_bytes:raw.length,decoded_sha256:sha(raw)};
+  state.bodies.delete(old.path);state.bodies.set(pin.path,body);state.index.files=state.index.files.filter(p=>p.path!==old.path);state.index.files.push({path:pin.path,bytes:pin.bytes,sha256:pin.sha256});state.index.preparedOwnership.context_parts[0]=pin;};
+ const cases=[
+  x=>x.selected.selectionBytes=Buffer.concat([x.selected.selectionBytes,Buffer.from(' ')]),
+  x=>x.index.preparedOwnership.base_reference=x.index.preparedOwnership.effective_reference,
+  x=>x.index.preparedOwnership.effective_reference=x.index.preparedOwnership.base_reference,
+  x=>x.index.preparedOwnership.native_pixel_map.geographic_release=x.index.release_id,
+  x=>x.index.pixelMap.canonical_grid_sha256=x.index.native_manifest_sha256,
+  x=>x.index.pixelMap.parts.push(x.index.pixelMap.parts[0]),
+  x=>x.index.pixelMap.native_latitudes.decoded_sha256='0'.repeat(64),
+  x=>{const pin=x.index.pixelMap.parts.find(p=>p.kind==='runs'),raw=Buffer.from(x.bodies.get(pin.path));raw[raw.length-1]^=1;x.bodies.set(pin.path,raw);},
+  x=>{const pin=x.index.preparedOwnership.native_pixel_map.native_latitudes,raw=Buffer.from(x.bodies.get(pin.transport_path));raw[raw.length-1]^=1;x.bodies.set(pin.transport_path,raw);},
+  x=>repinContext(x,rows=>rows[1].properties.parent_id='foreign'),
+  x=>repinContext(x,rows=>rows[0].geometry.coordinates[0][0][0]+=1),
+  x=>repinContext(x,rows=>{const component=rows[0].additiveFootprint.components[0];component.geometry.coordinates[0][1][0]+=.125;component.geometry_sha256=hash(component.geometry);}),
+ ];
+ for(const [i,edit]of cases.entries()){
+  const state={index:structuredClone(prepared.index),selected:{...prepared.selected,selectionBytes:Buffer.from(prepared.selected.selectionBytes)},bodies:new Map(prepared.bankBodies)};edit(state);
+  const source=path.join(root,'source-'+i),destination=path.join(root,'output-'+i);await fs.mkdir(source);
+  for(const [name,body]of state.bodies){await fs.mkdir(path.dirname(path.join(source,name)),{recursive:true});await fs.writeFile(path.join(source,name),body);}
+  await fs.writeFile(path.join(source,'index.json'),JSON.stringify(state.index));
+  const before=structuredClone(f.currentFeatures);
+  await assert.rejects(packagePreparedStartupOwnership({manifest:prepared.manifest,manifestSha:prepared.selection.sha256,source,destination,selected:state.selected,features:f.currentFeatures}),/prepared|Prepared|Final|native|Native|effective|geometry|source|Source|Original/);
+  assert.deepEqual(f.currentFeatures,before);await assert.rejects(fs.lstat(destination),{code:'ENOENT'});
+ }
+});
+
+test('prepared browser provenance refuses an old-bank fallback and rebound ledger without fetching repair operands',async()=>{
+ const f=await metadataRuntimeFixture();await prepareBrowserFixture({data:f.data,features:f.currentFeatures,transports:f.transports,fetcher:f.fetcher});
+ const {loadPreparedNativeContext}=await import('../src/effective-footprint.js'),{loadOwnershipAssets}=await import('../src/ownership-assets.js');
+ const ownership=await loadOwnershipAssets(f.data.pixelMap,f.fetcher,{requireNative:true,expectedReference:f.data.reference_release});
+ for(const change of [d=>delete d.preparedOwnership,d=>d.preparedOwnership.additive_ledger_sha256='0'.repeat(64),d=>d.preparedOwnership.additive_patch_sha256='invalid']){
+  const data=structuredClone(f.data),features=structuredClone(f.currentFeatures);change(data);const before=structuredClone(features);
+  await assert.rejects(loadPreparedNativeContext(data,features,ownership,{fetcher:async p=>{assert.ok(!p.startsWith('./additive-repairs/'));return f.fetcher(p);}}),/prepared|Prepared/);
+  assert.deepEqual(features,before);
+ }
 });
 
 test('metadata runtime rejects malformed transport, unbound projection and every stale or unrelated owner parent',async()=>{
@@ -369,6 +514,7 @@ test('actual native and geography loaders retain generated defaults and reject s
  assert.equal(pickOwnership(output,3,3),1);assert.deepEqual(f.base,before);
  assert.deepEqual(features[0].properties,generated[0].properties);assert.equal(features[0].properties.metadata.reference_corrections.length,1);
  f.transports.set('./geography/catalog.json',f.json(generated.map(feature=>({...feature,geometry:null}))));
+ await prepareBrowserFixture({data:f.data,features:generated,transports:f.transports,fetcher:f.fetcher});
  const server=await createServer({configFile:false,server:{middlewareMode:true,watch:null},define:{'import.meta.env.VITE_STATIC_ATLAS':'"true"','import.meta.env.VITE_HOSTED_DATABASE':'"false"'}});
  try{
   globalThis.fetch=async path=>path==='./atlas-geography.json'?new Response(f.json(f.data)):f.fetcher(path);
@@ -414,12 +560,15 @@ test('streamed additive consumer accepts exact 34920857-byte ledger and decoded 
  assert.equal(pickOwnership(output,3,3),1);assert.deepEqual([...samplePackedOwnership(output,{x:3,y:3,width:1,height:1})],[1]);
  assert.deepEqual(f.base.rows,baseRows);assert.deepEqual(f.base.runs,baseRuns);
  const {createServer}=await import('vite'),oldFetch=globalThis.fetch;
+ const scientificData=f.data;f.data=structuredClone(f.data);
+ await prepareBrowserFixture({data:f.data,features:f.currentFeatures,transports:f.transports,fetcher:f.fetcher});
  const server=await createServer({configFile:false,server:{middlewareMode:true,watch:null},define:{'import.meta.env.VITE_STATIC_ATLAS':'"true"','import.meta.env.VITE_HOSTED_DATABASE':'"false"'}});
  try{
   globalThis.fetch=async name=>name==='./atlas-geography.json'?new Response(f.json(f.data)):f.fetcher(name);
   const client=await server.ssrLoadModule('/src/data-client.js'),loaded=await client.loadGeography();
   assert.equal(loaded.ownership.additive_added_cells,2);assert.equal(pickOwnership(loaded.ownership,3,3),1);
  }finally{globalThis.fetch=oldFetch;await server.close();}
+ f.data=scientificData;
  const key='./'+f.data.additiveRelease.ledger.path,raw=f.transports.get(key);
  assert.equal(raw.length,34920857);
  for(const [body,error] of [[raw.subarray(0,-1),/Incomplete Native ledger/],[Buffer.concat([raw,Buffer.from(' ')]),/exceeds declared whole bytes/]]){
@@ -470,6 +619,7 @@ test('gzip ledger and patch preserve complete native words and science identitie
  assert.equal(encoded.additive_ledger_sha256,originalLedger);assert.equal(features[0].additiveFootprint.ledger_sha256,originalLedger);
  assert.equal(additiveReleaseFootprintDigest(f.reference,features),f.effective.footprints_sha256);
  const {createServer}=await import('vite'),oldFetch=globalThis.fetch;
+ await prepareBrowserFixture({data:f.data,features:f.currentFeatures,transports:f.transports,fetcher:f.fetcher});
  const server=await createServer({configFile:false,server:{middlewareMode:true,watch:null},define:{'import.meta.env.VITE_STATIC_ATLAS':'"true"','import.meta.env.VITE_HOSTED_DATABASE':'"false"'}});
  try{
   globalThis.fetch=async name=>name==='./atlas-geography.json'?new Response(f.json(f.data)):f.fetcher(name);

@@ -5,6 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {integrationTestFiles} from '../scripts/run-integration-tests.mjs';
+import {workspaceManager} from '../scripts/local-workspace.mjs';
 import {selectedDataCheckoutPatterns, fullCheckoutPatterns} from '../scripts/package-inputs.mjs';
 
 const expectations = 'coordination/engineering/current/selected-delivery-expectations.json';
@@ -48,18 +49,20 @@ function checkout(patterns, filenames = names) {
 test('stock non-cone checkout retains exact selected roles and executable helpers without opaque siblings',()=>{
   const retained=checkout(selectedDataCheckoutPatterns(definition,entries(),expectations));
   assert.deepEqual(retained.sort(), ['README.md','.github/package-inputs.json',expectations,
-    ...definition.inputs.slice(1),...definition.verification_paths,
+    ...definition.inputs.slice(1),
     'coordination/engineering/unconsumed/helper.py','coordination/engineering/unconsumed/package.json',
     'coordination/engineering/unconsumed/executable.bin'].sort());
 });
 
 for (const namespace of ['research/geography/','coordination/engineering/','data/']) {
-  for (const role of ['inputs','verification_paths']) test(`stock selection preserves declared ${namespace} ancestor in ${role}`,()=>{
+  for (const role of ['inputs','verification_paths']) test(`stock selection ${role==='inputs'?'preserves':'ignores verification-only'} ${namespace} ancestor in ${role}`,()=>{
     const prefix=namespace.split('/')[0]+'/';
     const policy={...definition,[role]:[...definition[role].filter(name=>!name.startsWith(prefix)),prefix]};
     if(role==='inputs')policy.inputs=policy.inputs.filter(name=>!name.startsWith(prefix)||name===prefix);
     const retained=checkout(selectedDataCheckoutPatterns(policy,entries(),expectations));
-    for(const name of names.filter(name=>name.startsWith(namespace)))assert(retained.includes(name),name);
+    if(role==='inputs')for(const name of names.filter(name=>name.startsWith(namespace)))assert(retained.includes(name),name);
+    else assert.deepEqual(retained,checkout(selectedDataCheckoutPatterns(definition,entries(),expectations)),
+      'A verification-only ancestor does not expand selected execution inputs');
   });
 }
 
@@ -72,7 +75,8 @@ const archives = [
   'coordination/engineering/complete-numeric-closure-diagnosis-20261007/'
 ];
 const archiveFiles = archives.flatMap(prefix => [prefix+'body.json', prefix+'nested/body.bin',
-  prefix+'historical-helper.py', prefix.slice(0,-1)+'-retained/body.json']);
+  ...['root.py','nested/deep/helper.mjs','nested/helper.js','nested/helper.cjs','nested/runner.sh','nested/package.json'].map(name=>prefix+name),
+  prefix.slice(0,-1)+'-retained/body.json']);
 const sourceOnly = ['data/regional-review/','research/campaigns/'];
 const declaredResearch = [...definition.inputs, ...definition.verification_paths].filter(name=>name.startsWith('research/geography/'));
 const requiredResearch = name => !name.startsWith('research/geography/') || declaredResearch.includes(name);
@@ -80,7 +84,22 @@ const requiredResearch = name => !name.startsWith('research/geography/') || decl
 test('complete stock checkout omits archive bulk while retaining exact declared research fixtures',()=>{
   const files=[...names,...archiveFiles], patterns=fullCheckoutPatterns(definition);
   const retained=checkout(patterns,files);
-  assert.deepEqual(retained.sort(),files.filter(name=>requiredResearch(name)&&![...sourceOnly,...archives].some(prefix=>name.startsWith(prefix))).sort());
+  const code=name=>/\.(?:mjs|js|cjs|py|sh)$/.test(name)||name.endsWith('/package.json');
+  assert.deepEqual(retained.sort(),files.filter(name=>requiredResearch(name)&&!sourceOnly.some(prefix=>name.startsWith(prefix))
+    &&(!archives.some(prefix=>name.startsWith(prefix))||code(name))).sort());
+});
+
+test('complete checkout preserves the actual allocator engineering inventory consumed by cold entry controls',()=>{
+  const source=path.resolve(import.meta.dirname,'..');
+  const head=execFileSync('git',['--no-lazy-fetch','-C',source,'rev-parse','HEAD'],{encoding:'utf8',env:{...process.env,GIT_NO_LAZY_FETCH:'1'}}).trim();
+  const required=workspaceManager(source).inspect({commit:head}).inputs
+    .map(row=>row.path).filter(name=>name.startsWith('coordination/engineering/'));
+  assert(required.length>0);
+  assert(required.some(name=>archives.some(prefix=>name.startsWith(prefix))),'Control must include code inside a pruned archive');
+  const opaque=archives.flatMap(prefix=>[prefix+'unconsumed.json',prefix+'nested/opaque.bin']);
+  const retained=new Set(checkout(fullCheckoutPatterns(definition),[...required,...opaque]));
+  for(const name of required)assert(retained.has(name),name);
+  for(const name of opaque)assert(!retained.has(name),name);
 });
 
 for(const role of ['inputs','verification_paths']) {

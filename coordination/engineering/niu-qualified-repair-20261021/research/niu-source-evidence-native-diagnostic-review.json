@@ -1,0 +1,141 @@
+{
+  "kind": "niu-independent-source-evidence-native-diagnostic-review-v1",
+  "scope": {
+    "package": "gb-NIU-ADM1--repair-evaluation",
+    "original_cells": 116,
+    "original_intervals": 50,
+    "owner": 7126,
+    "physical_companion_cells": 47,
+    "companion_excluded": true
+  },
+  "actual_review": {
+    "read_only": true,
+    "source_evidence_rerun": false,
+    "native_diagnostic_rerun": false,
+    "physical_rerun": false,
+    "observer_rerun": false
+  },
+  "source_evidence": {
+    "commit": "bc69d09bb527e87c201c29563834b91e7fbffb29",
+    "path": "coordination/engineering/niu-qualified-repair-20261021/source-evidence-001/source-evidence.json",
+    "bytes": 33363,
+    "sha256": "b436245714c5b0866679b20bcc99d01ef6dcbe835e3176840030129e254e2651",
+    "git_blob_oid": "7bd551bbff10e758c82b97ff1ce833bfa372480f",
+    "kind": "source-target-native-evidence-v1",
+    "catalogue_commit": "e9e4eb5afd7c5ed1ed1871e44996da8b10a37802",
+    "source_payload": {
+      "bytes": 3251,
+      "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+      "decoded_bytes": 14444,
+      "decoded_sha256": "4bf1e8967a32d43da06c12e43bf99ea35c704aa00ffaaa821f63728335088b13",
+      "git_blob_oid": "0846aee08451e6c2dbe2553fb871b7e362a3f192",
+      "mode": "100644",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-NIU-ADM1-000.bin.gz",
+      "sha256": "396f6e10e5ab71cbb1eae927f47a518511ae1d485cc057a6eeaa97395ca8f7e3"
+    },
+    "source_family_count": 1,
+    "source_family_ids": [
+      "gb:NIU:ADM1"
+    ],
+    "target_source_member_count": 8,
+    "source_membership": {
+      "index": {
+        "bytes": 944,
+        "commit": "e9e4eb5afd7c5ed1ed1871e44996da8b10a37802",
+        "git_blob_oid": "d4ca1f07f7f504484461007919f90af5c5732b61",
+        "mode": "100644",
+        "path": "data/world-index.json",
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+      },
+      "lineage": {
+        "bytes": 6091596,
+        "commit": "e9e4eb5afd7c5ed1ed1871e44996da8b10a37802",
+        "git_blob_oid": "db3e1ec83d764bc8183caa4779a94b3ad1db0456",
+        "mode": "100644",
+        "path": "data/semantic-report.json",
+        "sha256": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831"
+      },
+      "parts": [
+        {
+          "bytes": 6613963,
+          "commit": "e9e4eb5afd7c5ed1ed1871e44996da8b10a37802",
+          "git_blob_oid": "a9e03cb07194a73f643af85d1e6db94abe3b5fc9",
+          "mode": "100644",
+          "path": "data/geography/part-28.json",
+          "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+        }
+      ]
+    },
+    "physical_evidence_pin": {
+      "bytes": 30293,
+      "commit": "e96d95a3b4337e6f26b272eefdd6ed36bc4fd434",
+      "git_blob_oid": "d3035c59f2ab2ebde149ff6c6d5a6813c407182e",
+      "mode": "100644",
+      "path": "coordination/engineering/niu-qualified-repair-20261021/physical-001/whole-target-support.json",
+      "sha256": "d24e65b4e0ab93bff9591dfebacc5445c5238cdca61c953d078460d132b2a4b5"
+    },
+    "native_contract": {
+      "coordinateBits": 19,
+      "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "method": "native-linear-evenodd-first-owner-v1",
+      "native_latitudes": {
+        "bytes": 1851757,
+        "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+        "decoded_bytes": 2097328,
+        "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "role": "immutable-normative-rule-input",
+        "root": "repository",
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147"
+      },
+      "original_assets": {
+        "bounds": {
+          "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+          "path": "data/canonical-grid/bounds.json.gz",
+          "role": "original-identity-parent-camera-context",
+          "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f"
+        },
+        "province_membership": {
+          "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+          "path": "data/canonical-grid/province-membership.bin.gz",
+          "role": "original-identity-crosswalk",
+          "sha256": "01f42b69ca969090d10c42d6a1311215a19ce436b0f3e720f7f873f4a18f90da"
+        }
+      },
+      "size": 262166
+    },
+    "interpretation": "Binds the original 14-feature NIU ADM1 source family and eight contacted package source members to canonical atlas:territory:NIU/owner 7126, physical receipt and native-rule inputs. The bounded candidate screen found no foreign-family raster candidates at the padded raster envelope; it does not prove whole-polygon foreign absence."
+  },
+  "native_diagnostic": {
+    "commit": "995e952c9",
+    "path": "coordination/engineering/niu-qualified-repair-20261021/native-diagnostic-001/native-diagnostic.json",
+    "bytes": 8784,
+    "sha256": "30c3783da47019701659993984beaab3acead331e86abb7f2f5eb866d5657af6",
+    "requested_cells": 116,
+    "supported_cells": 116,
+    "held_cells": 0,
+    "first_failure": null,
+    "requested_rows_count": 46,
+    "supported_rows_count": 46,
+    "patch_rows_count": 46,
+    "patch_cells": 116,
+    "requested_rows_equal_original_native_patch": true,
+    "supported_rows_equal_original_native_patch": true,
+    "owner_indices": [
+      7126
+    ],
+    "rule_sha256": "e1d7f0e1edaaa97959282b68744f12fff8827dae153a5cdfd426875007018851",
+    "status_limit": "Native diagnostic only. It is not the stock native-authority constructor result, source clearance, current ownership, acceptance, or root credit."
+  },
+  "scientific_assessment": {
+    "original_source_basis": "The exact original contract names the simplified NIU ADM1 source payload: PDH 2011 census-village boundary dataset; geoBoundaries records represented year 2020 and CC BY 4.0. Retained official statistical evidence keeps the same 14 village names in 2022; it does not certify exact boundaries. The separate same-release full representation has 15 noncontacts for original simplified-cell keys; preserve as material representation sensitivity, not an automatic replacement/veto or a per-key proof of wrong assignment.",
+    "physical_evidence": "Six of eight contacted original source targets have no physical issues. Mutalau and Vaiea have extra_reconstruction residuals; keep these adverse results visible. The 116/116 native diagnostic does not resolve physical residual polygons.",
+    "positive_path": "Under the original repair contract, a positive route remains supported for further native-authority evaluation against the exact original source and owner, without imposing a universal modern-authority certificate or undocumented tolerance requirement. The successful diagnostic is a consistency screen only.",
+    "specific_remaining_limits": [
+      "Preserve all 15 simplified/full noncontacts and do not claim that the physical or native diagnostic resolves variant applicability.",
+      "Carry Mutalau and Vaiea extra_reconstruction residuals into any final authority/review outcome; the diagnostic does not establish that those residual polygons are irrelevant to all target cells.",
+      "The competitor check is a bounded raster candidate shortlist plus the complete 14-feature NIU family; it is not proof of complete whole-polygon foreign-source absence.",
+      "Do not claim native authority, selected-owner conservation, legal territorial authority, current boundary accuracy, acceptance, repair credit or hold removal from this diagnostic."
+    ]
+  }
+}

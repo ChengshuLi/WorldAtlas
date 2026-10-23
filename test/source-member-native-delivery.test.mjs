@@ -2,10 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
+import fs from 'node:fs';
 import {deriveSourceTargetNativeDelta,nativeRowLatitudes,nativePolygonIntervals,polygonParts} from '../src/native-grid.js';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
-import {constructOriginalAuthority} from '../scripts/delivery-handoff-advance.mjs';
-import {diagnoseSourceTargetNativeAuthority,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {constructOriginalAuthority,constructOriginalAuthorityStored} from '../scripts/delivery-handoff-advance.mjs';
+import {diagnoseSourceTargetNativeAuthority,qualifySourceTargetNativeAuthority,qualifySourceTargetNativeAuthorityStored,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const rectangle=(left,right,bottom=-40,top=40)=>({type:'Polygon',coordinates:[[[left,bottom],[right,bottom],[right,top],[left,top],[left,bottom]]]});
 const feature=(id,pixelIndex,geometry,target_id)=>({id,pixelIndex,geometry,...(target_id?{target_id}:{})});
@@ -54,12 +55,27 @@ function constructorFixture(change=()=>{}){
     proposed:{rows:[{y:size/2,runs:[[Math.floor(size/2-.02/360*size),Math.floor(size/2-.02/360*size)+1,1]]}]},
     membership:true};
   change(state);
-  const files=new Map(),byBlob=new Map();
+  const files=new Map(),byBlob=new Map(),originFiles=new Map(),reads=[];
   const put=(name,value)=>{
     const raw=Buffer.isBuffer(value)?value:Buffer.from(JSON.stringify(value));
     const pin={commit:version,path:name,mode:'100644',git_blob_oid:blob(raw),bytes:raw.length,sha256:digest(raw)};
     files.set(name,{raw,pin});byBlob.set(pin.git_blob_oid,raw);return pin;
   };
+  // Reuse real registered certificate/review/bank bodies. Only immutable Git
+  // transport maps the selected origin to this miniature semantic-report tree.
+  let originCommit;
+  if(state.originLineage){
+    const directory='test/fixtures/artifact-authority/authority-121149/';
+    for(const p of JSON.parse(fs.readFileSync(directory+'original-inputs.json')).pins){
+      const raw=fs.readFileSync(directory+p.copy);assert.equal(digest(raw),p.sha256);put(p.path,raw);
+    }
+    const selection=JSON.parse(files.get('data/ownership-selection.json').raw);
+    const bank=JSON.parse(files.get(selection.selected_geography.path).raw);originCommit=bank.world_index.commit;
+    const raw=Buffer.from(JSON.stringify(state.originLineage));
+    const pin={commit:originCommit,path:'data/semantic-report.json',mode:'100644',git_blob_oid:blob(raw),bytes:raw.length,sha256:digest(raw)};
+    originFiles.set(pin.path,{raw,pin});byBlob.set(pin.git_blob_oid,raw);
+    state.changeAuthority?.({files,put,selection,bank,originFiles});
+  }
   const source=put('original-source.json',collection(state.originals)),roster=put('owners.json',state.roster);
   const physical=put('physical.json',state.physical),measured=put('measured.json',state.measured);
   const extraSources=(state.extraFamilies??[]).map(f=>({...f,pin:put(f.source_id+'.json',collection(f.features))}));
@@ -88,6 +104,7 @@ function constructorFixture(change=()=>{}){
       atoms:state.external.atoms??[{source_id:'TST-1',feature_ordinal:0,geometry_sha256:valueSha(state.external.features[0].geometry)}]};
     state.external.mutate?.(membership.negative_natural_earth);
   }
+  Object.assign(membership,state.membershipExtra);
   const evidence=put('source-evidence.json',{version:1,kind:'source-target-native-evidence-v1',catalogue,
     owner_roster:roster,physical_evidence:physical,physical_input:measured,physical_reproduction:put('physical.py',Buffer.from('# retained fixture')),
     native_latitudes:nativeLatitudes,native_contract:{size,native_latitudes:nativeLatitudes,original_assets:{bounds:{sha256:roster.sha256}}},
@@ -96,10 +113,12 @@ function constructorFixture(change=()=>{}){
     ...(state.membership?{source_membership:membership}:{})});
   const patch=put('patch.json',state.proposed);
   class FixtureReader extends ImmutableReader{
+    async *stream(name,options){yield this.read(name,options);}
     git(...args){
       if(args[0]==='ls-tree'){
-        const name=args.at(-1),entry=files.get(name);assert.ok(entry,name);
-        return Buffer.from(`100644 blob ${entry.pin.git_blob_oid}\t${name}\0`);
+        const name=args.at(-1),at=args[2],entry=(at===originCommit?originFiles:files).get(name);
+        reads.push({commit:at,path:name});if(!entry)return Buffer.alloc(0);
+        return Buffer.from(`${entry.pin.mode} blob ${entry.pin.git_blob_oid}\t${name}\0`);
       }
       if(args[0]==='cat-file'&&args[1]==='-e')return Buffer.alloc(0);
       if(args[0]==='cat-file'&&args[1]==='-s')return Buffer.from(String(byBlob.get(args[2]).length));
@@ -112,7 +131,7 @@ function constructorFixture(change=()=>{}){
   const binding={version:1,kind:'source-target-native-custody-v1',source_evidence:evidence,native_patch:patch};
   const preimage={...binding,kind:'source-target-native-rule-v1'};
   return {run:()=>constructOriginalAuthority(reader(),locators),
-    diagnose:()=>diagnoseSourceTargetNativeAuthority(reader(),preimage,binding),files,byBlob,membership,reader,state};
+    locators,preimage,binding,diagnose:()=>diagnoseSourceTargetNativeAuthority(reader(),preimage,binding),files,byBlob,membership,reader,state,reads,originCommit};
 }
 test('actual constructor joins original member evidence into one accepted owner ledger',()=>{
   const fixture=constructorFixture(),result=fixture.run();
@@ -163,7 +182,7 @@ test('actual constructor retains the direct-owner evidence route without members
   });
   assert.equal(fixture.run().ledger_rows[0].target_id,c);
 });
-for(const [name,change,pattern]of [
+const sourceMemberRejections=[
   ['missing sibling from whole original product',s=>s.originals.splice(1,1),/complete source aggregation member/],
   ['duplicate original source ID',s=>s.originals.push(s.originals[0]),/original source feature identity/],
   ['omitted competing lineage owner',s=>s.lineage.changes.push({id:'other-city',replaces:[a]}),/ambiguous accepted source membership/],
@@ -180,7 +199,8 @@ for(const [name,change,pattern]of [
   ['wrong measured accepted ID',s=>s.measured[0].selected.id='other-city',/measured whole inputs/],
   ['duplicated physical member result',s=>s.physical.results.push(s.physical.results[0]),/duplicate physical source member/],
   ['duplicated measured member input',s=>s.measured.push(s.measured[0]),/measured whole inputs/],
-])test('actual constructor rejects '+name+' after coherent input rehashing',()=>{
+];
+for(const [name,change,pattern]of sourceMemberRejections)test('actual constructor rejects '+name+' after coherent input rehashing',()=>{
   assert.throws(()=>constructorFixture(change).run(),pattern);
 });
 test('actual constructor does not apply oversized member A support to unmeasured member B',()=>{
@@ -450,6 +470,60 @@ for(const transitive of [false,true])test('complete '+(transitive?'transitive':'
  assert.deepEqual(f.state.physical.results.map(x=>x.target),[c]);
  assert.equal(diagnostic.supported_cells,1);assert.equal(diagnostic.held_cells,0);
 });
+function anchoredCompetitorFixture(change=()=>{}){
+ return complexCompetitorFixture(state=>{
+  state.lineage.changes[2].source='https://example.org/independent-original-provider';
+  state.originLineage=structuredClone(state.lineage);change(state);
+ },true);
+}
+test('registered selected-origin lineage admits cross-provider negatives, never positive geometry',async()=>{
+ const f=anchoredCompetitorFixture(),result=f.run(),diagnostic=f.diagnose();
+ assert.equal(result.ledger_rows[0].target_id,c);assert.equal(result.ledger_rows[0].native_cells,1);
+ assert.deepEqual(result.split_source_competitors.map(x=>x.source_id),[a,b]);
+ assert.deepEqual(diagnostic.split_source_competitors,result.split_source_competitors);
+ const owned=await constructOriginalAuthorityStored(f.reader(),f.locators);
+ try{assert.deepEqual(owned.result.split_source_competitors,result.split_source_competitors);}finally{owned.close();}
+ assert.equal(f.reads.filter(x=>x.commit===f.originCommit&&x.path==='data/semantic-report.json').length,3,
+  'One origin-tree binding per evaluator, not per original atom or descendant');
+});
+for(const [name,change,pattern]of [
+ ['missing registered selection',s=>s.changeAuthority=({files})=>files.delete('data/ownership-selection.json'),/missing registered selected origin/],
+ ['missing certificate authority',s=>s.changeAuthority=({put,selection})=>{delete selection.artifact_consumption;put('data/ownership-selection.json',selection);},/missing registered selected origin/],
+ ['caller-supplied origin',s=>s.membershipExtra={origin_commit:'b'.repeat(40)},/Incomplete accepted source membership/],
+ ['candidate operation history',s=>s.membershipExtra={operation_stages:[{commit:'b'.repeat(40),path:'fabricated-stage.json'}]},/Incomplete accepted source membership/],
+ ['origin mode mismatch',s=>s.changeAuthority=({originFiles})=>{originFiles.get('data/semantic-report.json').pin.mode='100755';},/lineage differs from independently selected origin/],
+ ['unregistered review',s=>s.changeAuthority=({put,selection})=>{selection.artifact_consumption.review.sha256='0'.repeat(64);put('data/ownership-selection.json',selection);},/independently registered/],
+ ['retired review',s=>s.changeAuthority=({put,selection})=>{selection.artifact_consumption.review.sha256='79024f6fd9335b0ad9da0ed936f5eabc600188f6176d9f953ceb006946626dbd';put('data/ownership-selection.json',selection);},/Historical artifact authority/],
+ ['forged origin bank',s=>s.changeAuthority=({put,selection,bank})=>{bank.world_index.commit='b'.repeat(40);const p=put(selection.selected_geography.path,bank);selection.selected_geography.bytes=p.bytes;selection.selected_geography.sha256=p.sha256;put('data/ownership-selection.json',selection);},/Selected source\/policy/],
+ ['altered bank body',s=>s.changeAuthority=({put,selection,bank})=>{bank.world_index.commit='b'.repeat(40);put(selection.selected_geography.path,bank);},/Whole immutable input|size differs/],
+ ['missing original tree body',s=>s.changeAuthority=({originFiles})=>originFiles.clear(),/whole ordinary Git input/],
+ ['candidate-imported intermediate',s=>s.lineage.changes[2].source='https://candidate.example/fabricated',/lineage differs from independently selected origin/],
+ ['candidate-imported edge',s=>s.lineage.changes[2].replaces=[a],/lineage differs from independently selected origin/],
+ ['canonical parent mismatch',s=>s.accepted.features[0].properties.parent_id='foreign-parent',/parent or source identity/],
+ ['missing reverse member',s=>{s.lineage.changes.pop();s.originLineage=structuredClone(s.lineage);},/complex/],
+ ['missing cohort member',s=>s.cohort.rows.pop(),/cohort/],
+ ['duplicate origin intermediate',s=>{s.lineage.changes.push({...s.lineage.changes[2]});s.originLineage=structuredClone(s.lineage);},/complex/],
+])test('selected-origin negative ancestry rejects '+name+' after coherent candidate repinning',()=>{
+ const f=anchoredCompetitorFixture(change);assert.throws(()=>f.run(),pattern);assert.throws(()=>f.diagnose(),pattern);
+});
+for(const [name,geometry,reason]of [
+ ['interior',()=>rectangle(.04,.06,-.02,.02),'territorial_exclusion_cells'],
+ ['boundary',()=>rectangle(.04,.06,latitudes[size/2],.02),'boundary_cells'],
+])test('anchored cross-provider '+name+' still vetoes the complete raw original',()=>{
+ const f=anchoredCompetitorFixture(s=>{s.originals[0].geometry=geometry();});
+ assert.throws(()=>f.run(),/lack unique source-target coverage/);
+ const result=f.diagnose();assert.equal(result.supported_cells,0);assert.equal(result.held_cells,1);
+ assert.equal(result.decision_rows[0].runs[0][3],reason);
+});
+test('anchored cross-provider ancestry cannot qualify an original atom positively',()=>{
+ const f=anchoredCompetitorFixture(s=>{
+  const geometry=s.originals[0].geometry,selected=s.accepted.features[0].geometry;
+  s.targets=[{id:a,target_id:'city',pixelIndex:1,source_family:family,base_geometry:selected,coverage_classes:['mapped_land_support']}];
+  s.measured=[{target:a,consumed:{geometry},selected:{id:'city',geometry:selected}}];
+  s.physical.results=[{target:a,issues:[],support:{mapped_land_support:geometry}}];s.proposed.rows[0].runs[0][2]=1;
+ });
+ assert.throws(()=>f.run(),/ambiguous accepted source membership/);
+});
 test('one descendant with shared complete source atoms remains a negative rather than an inferred positive owner',()=>{
  const f=complexCompetitorFixture(s=>{
   s.lineage.changes[1].replaces=[b];s.accepted.features[1].properties.metadata.source_member_ids=[b];
@@ -637,4 +711,130 @@ test('authenticated external whole original veto also covers targets in another 
  assert.throws(()=>f.run(),/lack unique source-target coverage/);
  const d=f.diagnose();assert.equal(d.supported_cells,1);assert.equal(d.held_cells,1);
  assert.deepEqual(d.decision_rows.map(row=>row.runs[0].slice(2)),[[2,'assigned_cells'],[4,'territorial_exclusion_cells']]);
+});
+
+for(const large of [false,true])test('stored source acquisition preserves genuine complete proof and owned lifetime '+large,async()=>{
+ const fs=await import('node:fs'),os=await import('node:os'),path=await import('node:path');
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'source-acquisition-test-'));
+ const fixture=constructorFixture(state=>{if(large)for(const feature of state.originals){
+  const ring=feature.geometry.coordinates[0],dense=[];
+  for(let i=1;i<ring.length;i++)for(let n=0;n<20;n++)dense.push(ring[i-1].map((v,j)=>v+(ring[i][j]-v)*n/20));
+  dense.push([...ring[0]]);ring.splice(0,ring.length,...dense);
+ }});
+ let stored;try{
+  const eager=qualifySourceTargetNativeAuthority(fixture.reader(),fixture.preimage,fixture.binding);
+  stored=await qualifySourceTargetNativeAuthorityStored(fixture.reader(),fixture.preimage,fixture.binding,{directory});
+  assert.equal(valueSha(stored.proof),valueSha(eager));assert.ok(fs.readdirSync(directory).length>0);
+  if(large){const ring=stored.proof.original_ledger.rows[0].base_geometry.coordinates[0][0];
+   assert.equal(Array.isArray(ring),false);assert.equal(ring.length,81);
+   stored.close();assert.throws(()=>valueSha(stored.proof),/closed/);
+  }
+ }finally{stored?.close();assert.deepEqual(fs.readdirSync(directory),[]);fs.rmSync(directory,{recursive:true});}
+});
+
+test('stored source acquisition preserves every read failure and closes all prior stores',async()=>{
+ const fs=await import('node:fs'),os=await import('node:os'),path=await import('node:path');
+ const fixture=constructorFixture(),baseline=fixture.reader(),order=[],read=baseline.read;
+ baseline.read=function(name,options){order.push(name);return Reflect.apply(read,this,[name,options]);};
+ qualifySourceTargetNativeAuthority(baseline,fixture.preimage,fixture.binding);
+ for(let stop=0;stop<order.length;stop++)for(const sentinel of [Error('acquisition stage '+stop),undefined,null,false,0]){
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'source-failure-'));
+  const make=()=>{const reader=fixture.reader(),seen=[],original=reader.read;reader.read=function(name,options){
+   seen.push(name);if(seen.length===stop+1)throw sentinel;return Reflect.apply(original,this,[name,options]);};return {reader,seen};};
+  const eager=make(),stored=make();
+  try{assert.throws(()=>qualifySourceTargetNativeAuthority(eager.reader,fixture.preimage,fixture.binding),error=>error===sentinel);
+   await assert.rejects(qualifySourceTargetNativeAuthorityStored(stored.reader,fixture.preimage,fixture.binding,{directory}),error=>error===sentinel);
+   assert.deepEqual(stored.seen,eager.seen);assert.deepEqual(fs.readdirSync(directory),[]);
+  }finally{fs.rmSync(directory,{recursive:true});}
+ }
+});
+
+test('stored original constructor preserves output through its explicit lifetime',async()=>{
+ const fs=await import('node:fs'),os=await import('node:os'),path=await import('node:path');
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'constructor-storage-')),fixture=constructorFixture();let owned;
+ try{owned=await constructOriginalAuthorityStored(fixture.reader(),fixture.locators,{directory});
+  assert.equal(valueSha({...owned.result,products:Object.fromEntries(Object.entries(owned.result.products).map(([k,v])=>[k,v.toString()]))}),
+   valueSha({...fixture.run(),products:Object.fromEntries(Object.entries(fixture.run().products).map(([k,v])=>[k,v.toString()]))}));
+ }finally{owned?.close();assert.deepEqual(fs.readdirSync(directory),[]);fs.rmSync(directory,{recursive:true});}
+});
+
+for(const [name,change]of sourceMemberRejections)test('stored acquisition preserves exact eager refusal: '+name,async()=>{
+ const fs=await import('node:fs'),os=await import('node:os'),path=await import('node:path'),fixture=constructorFixture(change);
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'source-refusal-parity-'));let expected;
+ try{qualifySourceTargetNativeAuthority(fixture.reader(),fixture.preimage,fixture.binding);}catch(error){expected=error;}
+ assert.ok(expected,'Eager control must genuinely refuse');
+ try{await assert.rejects(qualifySourceTargetNativeAuthorityStored(fixture.reader(),fixture.preimage,fixture.binding,{directory}),
+  error=>error.constructor===expected.constructor&&error.message===expected.message&&error.code===expected.code);
+  assert.deepEqual(fs.readdirSync(directory),[]);
+ }finally{fs.rmSync(directory,{recursive:true});}
+});
+for(const mode of ['gzip','decoded hash','zero decoded length','gzip CRC','syntax'])test('stored acquisition preserves authenticated '+mode+' boundary',async()=>{
+ const fs=await import('node:fs'),os=await import('node:os'),path=await import('node:path'),fixture=constructorFixture();
+ const entry=fixture.files.get('source-evidence.json'),decoded=entry.raw;
+ let raw=mode==='syntax'?Buffer.from('{"bad":}'):gzipSync(decoded);
+ if(mode==='gzip CRC'){raw=Buffer.from(raw);raw[raw.length-8]^=1;}
+ Object.assign(entry.pin,{bytes:raw.length,sha256:digest(raw),git_blob_oid:blob(raw)});
+ if(mode!=='syntax')Object.assign(entry.pin,{decoded_bytes:mode==='zero decoded length'?0:decoded.length,
+  decoded_sha256:mode==='decoded hash'?'0'.repeat(64):digest(decoded)});
+ entry.raw=raw;fixture.byBlob.set(entry.pin.git_blob_oid,raw);
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'source-wire-parity-'));let expected,proof,owned;
+ try{proof=qualifySourceTargetNativeAuthority(fixture.reader(),fixture.preimage,fixture.binding);}catch(error){expected=error;}
+ try{
+  if(expected)await assert.rejects(qualifySourceTargetNativeAuthorityStored(fixture.reader(),fixture.preimage,fixture.binding,{directory}),error=>
+   error.constructor===expected.constructor&&error.code===expected.code&&(mode==='syntax'||error.message===expected.message));
+  else{owned=await qualifySourceTargetNativeAuthorityStored(fixture.reader(),fixture.preimage,fixture.binding,{directory});assert.equal(valueSha(owned.proof),valueSha(proof));}
+ }finally{owned?.close();assert.deepEqual(fs.readdirSync(directory),[]);fs.rmSync(directory,{recursive:true});}
+ // Incremental JSON syntax diagnostics differ in wording/offset; scientific
+ // refusal strings and whole input/hash/decode error precedence remain exact.
+});
+
+for(const shape of ['MultiPolygon','hole'])test('target-local bounds reuse preserves complete member proof for '+shape,async()=>{
+ const fs=await import('node:fs'),os=await import('node:os'),path=await import('node:path');
+ const fixture=constructorFixture(state=>{
+  for(const result of state.physical.results){const geometry=result.support.mapped_land_support;
+   if(shape==='MultiPolygon')result.support.mapped_land_support={type:'MultiPolygon',coordinates:[geometry.coordinates]};
+  }
+  if(shape==='hole')state.physical.results[0].support.mapped_land_support={type:'Polygon',coordinates:[
+   state.physical.results[0].support.mapped_land_support.coordinates[0],[[0,.005],[.002,.005],[.002,.01],[0,.01],[0,.005]]
+  ]};
+ });
+ const baseline=constructorFixture().run(),eager=fixture.run();
+ assert.deepEqual(eager.ledger_rows.map(row=>row.native_rows),baseline.ledger_rows.map(row=>row.native_rows));
+ assert.deepEqual(eager.ledger_rows.map(row=>row.base_geometry_sha256),baseline.ledger_rows.map(row=>row.base_geometry_sha256));
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'target-facts-'));let owned;
+ try{owned=await qualifySourceTargetNativeAuthorityStored(fixture.reader(),fixture.preimage,fixture.binding,{directory});
+  assert.equal(valueSha(owned.proof),valueSha(qualifySourceTargetNativeAuthority(fixture.reader(),fixture.preimage,fixture.binding)));
+ }finally{owned?.close();assert.deepEqual(fs.readdirSync(directory),[]);fs.rmSync(directory,{recursive:true});}
+});
+
+for(const first of [undefined,null,false,0])test('stored authority owner closes all stores while retaining first falsy cleanup: '+String(first),async()=>{
+ const fs=(await import('node:fs')).default,os=await import('node:os'),path=await import('node:path');
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'source-owner-cleanup-')),fixture=constructorFixture(),original=fs.closeSync;let owned,closes=0;
+ try{owned=await qualifySourceTargetNativeAuthorityStored(fixture.reader(),fixture.preimage,fixture.binding,{directory});
+  fs.closeSync=fd=>{original(fd);if(++closes===1)throw first;throw Error('later cleanup');};
+  let failed=false;try{owned.close();}catch(error){failed=true;assert.equal(error,first);}assert(failed);assert(closes>1);assert.deepEqual(fs.readdirSync(directory),[]);
+ }finally{fs.closeSync=original;owned?.close();fs.rmSync(directory,{recursive:true});}
+});
+
+// Physical coverage may spill its outer polygon roster without changing any
+// source member or requested cell. Both actual constructors consume these pins.
+for(const count of [31,32,33])test('owned constructor preserves spilled physical coverage polygon roster '+count,async()=>{
+ const fs=await import('node:fs'),os=await import('node:os'),path=await import('node:path');
+ const fixture=constructorFixture(state=>{
+  for(const result of state.physical.results){
+   const original=result.support.mapped_land_support,ring=original.coordinates[0];
+   const left=ring[0][0],right=ring[1][0],bottom=ring[0][1],top=ring[2][1];
+   // Disjoint horizontal strips: the selected centre at latitude near zero is
+   // retained in the first strip; the remaining strips lie strictly north.
+   const polygons=[rectangle(left,right,bottom,.001).coordinates];
+   for(let i=1;i<count;i++){const lo=.002+(top-.002)*(i-1)/(count-1),hi=lo+(top-.002)/(count-1)*.8;
+    polygons.push(rectangle(left,right,lo,hi).coordinates);}
+   result.support.mapped_land_support={type:'MultiPolygon',coordinates:polygons};
+  }
+ });
+ const eager=fixture.run(),directory=fs.mkdtempSync(path.join(os.tmpdir(),'coverage-roster-'));let owned;
+ const literal=result=>({...result,products:Object.fromEntries(Object.entries(result.products).map(([key,value])=>[key,value.toString()]))});
+ try{owned=await constructOriginalAuthorityStored(fixture.reader(),fixture.locators,{directory});
+  assert.equal(valueSha(literal(owned.result)),valueSha(literal(eager)));assert.equal(eager.ledger_rows[0].native_cells,1);
+ }finally{owned?.close();assert.deepEqual(fs.readdirSync(directory),[]);fs.rmSync(directory,{recursive:true});}
 });

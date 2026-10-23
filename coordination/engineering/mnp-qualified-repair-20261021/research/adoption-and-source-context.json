@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "package_id": "gb-MNP-ADM2--repair-evaluation",
+  "decisions": {
+    "usa_adm1_parent": "For the explicitly enumerated original MNP repair keys, treat the original gb:USA:ADM1:66186276B16791499040259 geometry as contextual parent-jurisdiction evidence. Its exact name and US-MP identifier identify the Commonwealth of the Northern Mariana Islands; official Census 2018 and 2021 records identify state-equivalent 69 and the separate target municipalities. It is not a distinct competing target municipality or an instruction to assign these cells to another native owner. This decision is limited to the recorded original contacts and retains the complete original negative geometry; it makes no polygon-equality, sovereignty, or whole-source clearance claim. Positive original MNP membership, physical checks, native predicates and independent review remain required.",
+    "usa_adm2_northern_islands": "For only the explicitly enumerated Northern Islands original repair keys, treat original gb:USA:ADM2:52423323B84565222808084 as contextual evidence of the same Northern Islands Municipality identity. Official Census 2018 and 2021 responses identify state 69, county 085, GEOID 69085 and COUNTYNS 01805245, with BASENAME exactly matching the original MNP Northern Islands feature. This exact administrative identity corroboration supports contextual treatment of this operand, not reassignment or omission of its complete original geometry. It does not assert polygon equality across sources or vintages, resolve the separate full-source differences, or grant legal authority. All other scientific/native predicates remain required."
+  },
+  "evidence": [
+    "census-hierarchy-identity-join.json",
+    "primary/census-county2018-mnp.json",
+    "primary/census-county2021-mnp.json",
+    "primary/census-state2018-mnp.json",
+    "exact-foreign-operands.json"
+  ],
+  "limits": [
+    "353 raw USA incidences overlap across 205 distinct original keys.",
+    "Three full-MNP source misses remain adverse, not an automatic 202/3 partition.",
+    "Saipan and the 31-cell physical companion are excluded.",
+    "Native qualifier must retain and authenticate complete negative source operands and exact contextual contact keys."
+  ]
+}

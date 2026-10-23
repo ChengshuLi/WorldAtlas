@@ -1,0 +1,69 @@
+{
+  "scope": "Bounded official-source search for enacted 2014-2015 administrative instruments and identity continuity of Bugarama, Muhuta, Muha, and Ntahangwa; no geometry, observer, physical, or native-diagnostic work performed.",
+  "sources_opened": [
+    {
+      "title": "Loi n°1/10 du 26 mars 2015 portant création de la Province de Rumonge et délimitation des Provinces de Bujumbura, Bururi et Rumonge",
+      "url": "https://faolex.fao.org/docs/pdf/Bur162997.pdf",
+      "source_character": "Promulgated text headed République du Burundi / Cabinet du Président, read through FAOLEX-hosted PDF extraction (3 pages). The PDF's OCR heading is noisy, but its title, articles, and closing date consistently identify law 1/10 of 26 March 2015.",
+      "read_status": "Opened and read extracted text across all three pages, especially page index 1, Articles 1–5. One subsequent normal network GET succeeded; the retained file is inventory/bdi-law-1-10-2015.pdf, 88,657 bytes, SHA256 07197f33c7d380a8cd4274659c3e3bf06f6e582f196ee215db73b89ea018cb6f.",
+      "specific_text": [
+        "Article 2 lists Commune de Bugarama and Commune de Muhuta among five communes constituting Rumonge Province.",
+        "Article 2 says: Ces communes gardent leurs délimitations actuelles.",
+        "Articles 4 and 6 similarly state that communes in Bujumbura and Bururi keep their current delimitations.",
+        "Article 9 says the law enters into force on promulgation; closing line gives 26 March 2015."
+      ],
+      "implication_limit": "This enacted instrument removes the specific claim that the March 2015 provincial transfer itself redrew Bugarama or Muhuta commune limits: it expressly preserves their then-current limits. It does not establish the capture date of the 2007-labeled geospatial features, prove that the retained geometry depicts those limits, or establish any 2023/current sub-commune membership. Thus it materially strengthens historical identity continuity for Bugarama/Muhuta, but does not alone qualify their retained geometries or clear all 31 affected keys."
+    },
+    {
+      "title": "Plan National de Développement du Burundi 2018-2027",
+      "url": "https://www.presidence.gov.bi/wp-content/uploads/2018/08/PND-Burundi-2018-2027-Version-Finale.pdf",
+      "location": "Section 3.1, extracted PDF page index 42 (printed page 43), paragraph 71; search result checked against the actual opened PDF text.",
+      "specific_text": "The plan describes administrative redistricting as leading to creation of Rumonge Province and delimitation/regrouping of Bujumbura Mairie communes into Muha, Ntahangwa, and Mukaza.",
+      "implication_limit": "Official government planning text corroborates that a regrouping occurred, but supplies no old-to-new neighborhood, locality, or polygon membership table and no dated geographic boundary source."
+    },
+    {
+      "title": "Loi n°1/33 du 28 novembre 2014 portant révision de la Loi n°1/02 du 25 janvier 2010 portant organisation de l’administration communale",
+      "url": "https://presidence.gov.bi/2014/11/loi-n133-du-28-novembre-2014-portant-revision-de-la-loi-n102-du-25-janvier-2010-portant-organisation-de-ladministration-communale/",
+      "source_character": "Official Presidency page dates and lists the promulgated law; embedded downloadable documents are listed, but their text was not examined in this pass.",
+      "implication_limit": "The official listing establishes an enacted communal-administration revision and date, not the required exact boundary or predecessor-feature crosswalk."
+    },
+    {
+      "title": "Décret n°100/0126 du 23 juin 2016 portant création des tribunaux de Grande Instance de Muha, Mukaza, Ntahangwa et leurs parquets en Mairie de Bujumbura",
+      "url": "https://presidence.gov.bi/2016/06/decret-n100-0126-du-23-juin-2016-portant-creation-des-tribunaux-de-grande-instance-de-muha-mukaza-ntahangwa-et-leurs-parquets-en-mairie-de-bujumbura/",
+      "specific_text": "Presidency page identifies the 2016 decree and the named municipal jurisdictions.",
+      "implication_limit": "Confirms official use of these commune names by 2016, not their detailed geographic lineage or the source date of the retained boundary geometry."
+    },
+    {
+      "title": "Projet de loi organique portant délimitation des provinces (exposé des motifs), 2022",
+      "url": "https://www.senat.bi/wp-content/uploads/2022/11/PROJET-DE-LOI-ORGANIQUE-PORTANT-DELIMITATION-DES-PROVINCES-Expose-des-motifs-1-60.pdf",
+      "status": "Draft/explanatory document, not enacted law.",
+      "specific_text": "Search excerpt says Bugarama and Muhuta were in former Bujumbura Province before March 2015 and transferred to Rumonge.",
+      "implication_limit": "Corroborative draft only; not relied on as enacted legal authority."
+    }
+  ],
+  "queries_performed": [
+    "Official-domain searches for Burundi decrees/laws dated 2014-2015 mentioning Bugarama, Muhuta, Muha, Ntahangwa, Rumonge, and administrative delimitation.",
+    "Exact-title searches for Loi n°1/10 du 26 mars 2015 and Loi n°1/33 du 28 novembre 2014.",
+    "Opened the official Presidency PND PDF and used text search for Muha, Ntahangwa, delimitation, and 2014.",
+    "Opened the official Presidency page for Loi n°1/33; its embedded 13,480,065-byte law PDF exceeded the web reader's size limit. A separate linked 31-page communal-law scan exposed only generic page headings, not relevant boundary clauses."
+  ],
+  "remaining_evidence_needed": [
+    "For Bugarama (19 water keys) and Muhuta (12 land keys): the 2015 law confirms each named commune's limits were retained at the provincial transfer. The remaining source-specific question is whether the 2007-labeled retained feature geometry is in fact the same feature/boundary version referred to by that law and how the 2023 enacted reorganization treated the historical feature identities; the 2015 law itself contains no map or capture/revision metadata.",
+    "For Muha and Ntahangwa: the enacted 2014/2015 instrument or official administrative record/map listing the predecessor localities or boundaries assigned to each new commune, joined to the original retained feature identities/geometries. PND paragraph 71 names the regrouping but not its exact membership.",
+    "For all four: evidence tying the source's 2007 metadata label to actual feature capture/revision dates and boundary identity; names alone do not resolve source-vintage applicability."
+  ],
+  "original_contract_assessment": {
+    "contract_predicates": [
+      "Qualify unique current-location source membership, retained territorial exclusions, and complete source competitors.",
+      "Derive and verify a zero-reassignment additive native patch to the recorded location."
+    ],
+    "interpretation": "No separate predicate was found requiring every stable Atlas location ID to remain a top-level commune in the 2023 administrative hierarchy. For the 31 Bugarama/Muhuta keys, retained records identify exact source features Bugarama 21766830B31049489476840 -> owner 9019 (19 inland-water cells) and Muhuta 21766830B14140898215143 -> owner 8990 (12 land cells); both source-owner and reverse-lineage vectors match. The three frozen block-32 witness masks report the same source and physical class as those stable recorded targets; all 31 were within the previously computed 529 diagnostic-supported keys and outside the 54 held-key set. The 2015 law is positive evidence that their commune boundaries were retained during the province transfer. It does not prove the represented-year-2007 feature geometry is the precise boundary version referred to in 2015; however, this capture-date uncertainty is not more specific for these 31 cells than for the 448 already prepared for native authority. No distinct transfer-as-redraw predicate remains for these 31. They may proceed to the ordinary stable-location/constructor checks as a bounded candidate subset; this is not an automatic qualification, acceptance, or authorization to alter frozen PR 2654.",
+    "status": "Research finding only. No constructor, owner observation, physical run, or native diagnostic was rerun; frozen PR 2654 and its 135 held keys remain unchanged."
+  },
+  "prohibitions_observed": [
+    "No browser interaction.",
+    "No access to the previously blocked Stanford catalogue route.",
+    "No retry of the zero-byte Assembly PDF transfer.",
+    "No geometry or observer/physical/native diagnostic rerun."
+  ]
+}

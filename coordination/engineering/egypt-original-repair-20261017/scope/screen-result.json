@@ -1,0 +1,68 @@
+{
+  "package_id": "gb-EGY-ADM2--repair-evaluation",
+  "original_cells": 19065,
+  "original_intervals": 8684,
+  "original_owners": 167,
+  "complete_source_atoms": 231,
+  "complete_source_families": [
+    "gb:EGY:ADM2"
+  ],
+  "physical_classes": {
+    "land": 18591,
+    "inland-water": 474
+  },
+  "accepted_main": "21984e9ec4ec7370bc807e2da23cea2228747698",
+  "accepted_patch": {
+    "bytes": 28521034,
+    "commit": "7713412453b95bec3660d2c3019f28d198339037",
+    "git_blob_oid": "f830a94cf6cbb932d60103380d2cf743b9441e24",
+    "mode": "100644",
+    "path": "coordination/engineering/sweden-germany-spain-selected-delivery-20261017/composition-001/patch.json",
+    "sha256": "3488ab3e9e5428e940c55d9c5f3582ee9a20d1f790d0d2ebd43a2790e880fb1b"
+  },
+  "accepted_patch_transport": "github-api-only-no-git-import",
+  "accepted_coordinate_overlap": 0,
+  "accepted_owner_intersection": [],
+  "accepted_overlap_rows": [],
+  "named_other_package_owner_intersections": {
+    "gb-BRA-ADM2--repair-evaluation": [],
+    "gb-ZAF-ADM3--repair-evaluation": [],
+    "gb-POL-ADM2--repair-evaluation": [],
+    "gb-SWE-ADM2--repair-evaluation": [],
+    "gb-DEU-ADM3--repair-evaluation": [],
+    "gb-ESP-ADM3--repair-evaluation": [],
+    "gb-AGO-ADM2--repair-evaluation": [],
+    "gb-TZA-ADM2--repair-evaluation": []
+  },
+  "status": "Screening only, not claimed or qualified; no scientific/source/native producer executed.",
+  "limits": [
+    "Owner disjointness from other packages does not itself establish spatial nonoverlap.",
+    "Actual selected current-owner-zero, source/physical/foreign/native checks remain unrun.",
+    "Historical source rights do not approve current sovereignty or legal boundaries; all original territorial contacts must remain."
+  ],
+  "source_rights_screen": {
+    "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "archive_bytes": 2760643,
+    "archive_sha256": "8d3a916fc8ffeca22c8cbe9799ef74c0a95330ba13c1cdbc8e7464ef5f8a8c3b",
+    "historical_source": "CAPMAS, OCHA ROMENA/HDX",
+    "represented_year": "2020",
+    "historical_license_declaration": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "license_screenshot_inspected": true,
+    "prj": "GCS_WGS_1984, longitude/latitude degrees",
+    "historical_hdx_updated": "1 December 2020",
+    "historical_hdx_dataset_date_range": "August 14, 2017–February 28, 2021",
+    "source_name_warning": "Historical screenshot states23 English names map to multiple Arabic names; no1:1 name join. Use exact source IDs and original atoms.",
+    "limits": [
+      "Historical public rights/attribution evidence; no current legal-border certification.",
+      "Whole original simplified source body is not asserted vertex-identical to the archived shapefile.",
+      "All Libya/Sudan/Israel or other territorial contacts remain scientific obligations, not inferred permissions.",
+      "No package claim, source production, physical/native qualification or selected-state change."
+    ]
+  },
+  "live_claim_screen": {
+    "open_issues_inspected": 876,
+    "open_prs_inspected": 95,
+    "exact_EGY_original_package_matches": [],
+    "note": "API snapshot screened only; repeat live claim/accepted checks before an actual author claim."
+  }
+}

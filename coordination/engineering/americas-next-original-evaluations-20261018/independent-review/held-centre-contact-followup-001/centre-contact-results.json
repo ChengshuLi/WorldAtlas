@@ -1,0 +1,494 @@
+{
+  "method": "native-linear-evenodd-first-owner-v1",
+  "size": 262166,
+  "latitude_bytes": 2097328,
+  "results": [
+    {
+      "country": "HND",
+      "owner": 21659,
+      "target": "gb:HND:ADM2:27666195B20976347050961",
+      "cell": {
+        "y": 119783,
+        "x": 66489,
+        "longitude": -88.69822936612681,
+        "latitude": 15.329951489035457
+      },
+      "positive": {
+        "relation": "interior",
+        "ties": []
+      },
+      "derived_base_geometry_contact": {
+        "relation": "outside",
+        "ties": []
+      },
+      "positive_geometry_sha256": "4805002251923000b98a15fd940d57d5250251e6a62174a4ff6561e2af36b2a6",
+      "derived_base_geometry_sha256": "0b2cc0b78ab4a6ee96e2945f37f5dd860b08964ed97c41a898e9c5d067c3b111",
+      "positive_source": {
+        "source_id": "gb:HND:ADM2:27666195B20976347050961",
+        "name": "Macuelizo",
+        "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-HND-ADM2-000.bin.gz",
+        "feature_ordinal": 255,
+        "stored_encoding": "gzip",
+        "stored_bytes": 436647,
+        "decoded_bytes": 1289230,
+        "stored_sha256": "ad30028b6986baa7b4ee1e6c057dfe1f19037646fdd80ce5b2f92673ed448d2f",
+        "decoded_sha256": "97ce3b0fdc6fe8a9b206dcedfd61ed209dc5e69c5e55834ee38a4d09d55a81e5",
+        "source_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+        "source_git_blob_oid": "0b60c7a309f52070f2282d8e389cb9d7a8391e23"
+      },
+      "exclusions": [
+        {
+          "source_index": 0,
+          "source_id": "inline-archive-only",
+          "geometry_sha256": "5aa0fb23fd82a5726b5710a8ec3d1cc002ba282e32f62ff625b28efe8787737a",
+          "relation": {
+            "relation": "interior",
+            "ties": []
+          },
+          "source_path": "coordination/engineering/americas-next-original-evaluations-20261018/hnd/source-stage-001/whole-archive-299-record-custody.json",
+          "source_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+          "source_git_blob_oid": "d6e0bae39cd71e924059ecbb8214dc1ef8fe10e5",
+          "source_role": "custody index for the complete archived HND source; the diagnostic retains the inline geometry hash separately"
+        },
+        {
+          "negative_ordinal": 1,
+          "source_id": "gb:GTM:ADM1:53557124B93889796431495",
+          "feature_ordinal": 9,
+          "feature_id": "53557124B93889796431495",
+          "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-GTM-ADM1-000.bin.gz",
+          "stored_encoding": "gzip",
+          "stored_bytes": 93002,
+          "decoded_bytes": 318584,
+          "stored_sha256": "41b74210c360e4f9e66b52947d0375117a93603a700ab6b7735e015f3f4c8967",
+          "decoded_sha256": "7f84a4e2a8773953af1c602c67f27457b093e3cfc6ab21052446b172b71d7628",
+          "geometry_sha256": "bb47737cdfc5adb614155d11db07a01116bc793b7b03047dfe017ca60363ac56",
+          "relation": {
+            "relation": "outside",
+            "ties": []
+          },
+          "source_commit": "601852e911478b90762edb7b9d80985786f95d43",
+          "source_git_blob_oid": "83ac278710c16878b1ac7c86855d6165838e7036"
+        },
+        {
+          "negative_ordinal": 2,
+          "source_id": "gb:GTM:ADM2:79465075B97649712901036",
+          "feature_ordinal": 124,
+          "feature_id": "79465075B97649712901036",
+          "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-GTM-ADM2-000.bin.gz",
+          "stored_encoding": "gzip",
+          "stored_bytes": 354047,
+          "decoded_bytes": 1162585,
+          "stored_sha256": "d5ae121fc1f7f4014a9bb2c2b0b361ffc9e09b28482facd9d41e0f7b67401afe",
+          "decoded_sha256": "04ec4cacdc6c1aa01b4e67ccea28fe4b8f9fa758047a6c7d666668171e95eb94",
+          "geometry_sha256": "51d124b83672a706fc05d38ecd787839ebb58e3a1d2dcdbf79be6d9937384ef2",
+          "relation": {
+            "relation": "outside",
+            "ties": []
+          },
+          "source_commit": "601852e911478b90762edb7b9d80985786f95d43",
+          "source_git_blob_oid": "afc4c4425485fa21bed068e8065b9748d6d2de8d"
+        }
+      ],
+      "source_evidence_commit": "601852e911478b90762edb7b9d80985786f95d43",
+      "diagnostic_rule_sha256": "c9bc844fde63b9c5b216fe8549f0098bac041799907889cdb36f047425635f09",
+      "limitations": "Centre contact under the authenticated existing native scan rule only; the embedded target base geometry is a derived simplified representation and is reported separately from the exact pinned complete source feature. Not a legal, ownership, boundary, or hold-disposition conclusion."
+    },
+    {
+      "country": "NIC",
+      "owner": 32414,
+      "target": "gb:NIC:ADM2:1004716B68120786846316",
+      "cell": {
+        "y": 120892,
+        "x": 68584,
+        "longitude": -85.82142611932898,
+        "latitude": 13.856273705086496
+      },
+      "positive": {
+        "relation": "interior",
+        "ties": []
+      },
+      "derived_base_geometry_contact": {
+        "relation": "outside",
+        "ties": []
+      },
+      "positive_geometry_sha256": "516d9f35db4d9ce3319fef104daa1b7db67fcd7c66ddaf1d30175ff4c3383767",
+      "derived_base_geometry_sha256": "18503f81ebd38de8ae5f4dbe243e15511eb2e278c80433f00289509e1eacc739",
+      "positive_source": {
+        "source_id": "gb:NIC:ADM2:1004716B68120786846316",
+        "name": "Municipio Murra",
+        "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-NIC-ADM2-000.bin.gz",
+        "feature_ordinal": 48,
+        "stored_encoding": "gzip",
+        "stored_bytes": 221403,
+        "decoded_bytes": 950594,
+        "stored_sha256": "6b80f685cbb78767f4b49d1d206a42c9e65463fd9dea8f9df662aa7faf8b0127",
+        "decoded_sha256": "2a77bdfd3fc8917d0fb38128ea64413cb920f3a6b8cf09f9366182336120058d",
+        "source_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+        "source_git_blob_oid": "290fc289e317b77a1dd2b850001eb4f792510a27"
+      },
+      "exclusions": [
+        {
+          "negative_ordinal": 0,
+          "source_id": "gb:HND:ADM1:10453824B59135534570849",
+          "feature_ordinal": 4,
+          "feature_id": "10453824B59135534570849",
+          "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-HND-ADM1-000.bin.gz",
+          "stored_encoding": "gzip",
+          "stored_bytes": 91392,
+          "decoded_bytes": 307064,
+          "stored_sha256": "a1db7ff9e762eed69c4f0ce654083549e163f04e93c7932941fc7e2de31bd6bf",
+          "decoded_sha256": "f58a4e14721b7d6356d082f995350457c8a0df5b329efa1f7fb778f1cfd7e666",
+          "geometry_sha256": "3185cd1bad87f08ec0ed3a539fe2143513276475407a12793f7601386b7487f6",
+          "relation": {
+            "relation": "interior",
+            "ties": []
+          },
+          "source_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+          "source_git_blob_oid": "961e3bfaa9c1ed1e8cf50a901658b448b200f4ce"
+        },
+        {
+          "negative_ordinal": 1,
+          "source_id": "gb:HND:ADM2:27666195B23836678424083",
+          "feature_ordinal": 108,
+          "feature_id": "27666195B23836678424083",
+          "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-HND-ADM2-000.bin.gz",
+          "stored_encoding": "gzip",
+          "stored_bytes": 436647,
+          "decoded_bytes": 1289230,
+          "stored_sha256": "ad30028b6986baa7b4ee1e6c057dfe1f19037646fdd80ce5b2f92673ed448d2f",
+          "decoded_sha256": "97ce3b0fdc6fe8a9b206dcedfd61ed209dc5e69c5e55834ee38a4d09d55a81e5",
+          "geometry_sha256": "22d752ad1038aef44cf42c247d4cb69aff4498800025a9f6fdc9b374d69b2ab8",
+          "relation": {
+            "relation": "outside",
+            "ties": []
+          },
+          "source_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+          "source_git_blob_oid": "0b60c7a309f52070f2282d8e389cb9d7a8391e23"
+        }
+      ],
+      "source_evidence_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+      "diagnostic_rule_sha256": "0927dcd18309405fd84a60d7ab9c0a445a3b7e00bf8b59c6de966c4893bd2b92",
+      "limitations": "Centre contact under the authenticated existing native scan rule only; the embedded target base geometry is a derived simplified representation and is reported separately from the exact pinned complete source feature. Not a legal, ownership, boundary, or hold-disposition conclusion."
+    },
+    {
+      "country": "NIC",
+      "owner": 32428,
+      "target": "gb:NIC:ADM2:1004716B76724333569498",
+      "cell": {
+        "y": 122918,
+        "x": 68704,
+        "longitude": -85.65664502643364,
+        "latitude": 11.140427323633512
+      },
+      "positive": {
+        "relation": "interior",
+        "ties": []
+      },
+      "derived_base_geometry_contact": {
+        "relation": "outside",
+        "ties": []
+      },
+      "positive_geometry_sha256": "8fa1037c360ce371dffd35e4237364be8af1eb887efa67fdb4249d1ae5cfa730",
+      "derived_base_geometry_sha256": "cec4fdf664ce9558b6b6d654fe6ac1f51208a31e35fe55c8a7835fee7f973ba4",
+      "positive_source": {
+        "source_id": "gb:NIC:ADM2:1004716B76724333569498",
+        "name": "San Juan del Sur (Municipio)",
+        "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-NIC-ADM2-000.bin.gz",
+        "feature_ordinal": 72,
+        "stored_encoding": "gzip",
+        "stored_bytes": 221403,
+        "decoded_bytes": 950594,
+        "stored_sha256": "6b80f685cbb78767f4b49d1d206a42c9e65463fd9dea8f9df662aa7faf8b0127",
+        "decoded_sha256": "2a77bdfd3fc8917d0fb38128ea64413cb920f3a6b8cf09f9366182336120058d",
+        "source_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+        "source_git_blob_oid": "290fc289e317b77a1dd2b850001eb4f792510a27"
+      },
+      "exclusions": [
+        {
+          "negative_ordinal": 0,
+          "source_id": "gb:CRI:ADM1:80129987B99098477815223",
+          "feature_ordinal": 1,
+          "feature_id": "80129987B99098477815223",
+          "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CRI-ADM1-000.bin.gz",
+          "stored_encoding": "gzip",
+          "stored_bytes": 48784,
+          "decoded_bytes": 159240,
+          "stored_sha256": "1b093f52dad8ff9539e999dbb73eca8b2c5c052b3819a46523ebf3a504910d51",
+          "decoded_sha256": "1783b0d18e41b312fd32bf8df279a7103f5c3a6d0465952838782fb75eb9bcd4",
+          "geometry_sha256": "5de91e4bb667b83bbdc8b5501e3a6d09b922eaa4f881ab2ddfec28e538f081a2",
+          "relation": {
+            "relation": "interior",
+            "ties": []
+          },
+          "source_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+          "source_git_blob_oid": "ba89f15e968ed76b607744772d935254e8169b8e"
+        },
+        {
+          "negative_ordinal": 1,
+          "source_id": "gb:CRI:ADM2:36466004B52146458356886",
+          "feature_ordinal": 73,
+          "feature_id": "36466004B52146458356886",
+          "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CRI-ADM2-000.bin.gz",
+          "stored_encoding": "uncompressed-materialization",
+          "stored_bytes": 3134364,
+          "decoded_bytes": 3134364,
+          "stored_sha256": "3aefbfb2c8b6c5bfe4e46449ee98a1b2248cccf12187e76215a76173a2d8f5e0",
+          "decoded_sha256": "3aefbfb2c8b6c5bfe4e46449ee98a1b2248cccf12187e76215a76173a2d8f5e0",
+          "geometry_sha256": "6d470fba33abac013aafcc653fd75716a940064b1eb8ca177a217f26a6652938",
+          "relation": {
+            "relation": "outside",
+            "ties": []
+          },
+          "source_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+          "source_git_blob_oid": "cef50b3ab567dc6beea8e458241d8e5315121880"
+        }
+      ],
+      "source_evidence_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+      "diagnostic_rule_sha256": "0927dcd18309405fd84a60d7ab9c0a445a3b7e00bf8b59c6de966c4893bd2b92",
+      "limitations": "Centre contact under the authenticated existing native scan rule only; the embedded target base geometry is a derived simplified representation and is reported separately from the exact pinned complete source feature. Not a legal, ownership, boundary, or hold-disposition conclusion."
+    },
+    {
+      "country": "NIC",
+      "owner": 32367,
+      "target": "gb:NIC:ADM2:1004716B39887866574539",
+      "cell": {
+        "y": 123084,
+        "x": 69687,
+        "longitude": -84.30681324046597,
+        "latitude": 10.916690037036531
+      },
+      "positive": {
+        "relation": "interior",
+        "ties": []
+      },
+      "derived_base_geometry_contact": {
+        "relation": "outside",
+        "ties": []
+      },
+      "positive_geometry_sha256": "6746c63fd9ebc0f26d165e55c534cacf253d8e710ba7474ca779b3867905d855",
+      "derived_base_geometry_sha256": "598d50a56b778efa636cc894fb99958de18bc70185e60d5d7cebeef50453481d",
+      "positive_source": {
+        "source_id": "gb:NIC:ADM2:1004716B39887866574539",
+        "name": "El Castillo (Municipio)",
+        "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-NIC-ADM2-000.bin.gz",
+        "feature_ordinal": 151,
+        "stored_encoding": "gzip",
+        "stored_bytes": 221403,
+        "decoded_bytes": 950594,
+        "stored_sha256": "6b80f685cbb78767f4b49d1d206a42c9e65463fd9dea8f9df662aa7faf8b0127",
+        "decoded_sha256": "2a77bdfd3fc8917d0fb38128ea64413cb920f3a6b8cf09f9366182336120058d",
+        "source_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+        "source_git_blob_oid": "290fc289e317b77a1dd2b850001eb4f792510a27"
+      },
+      "exclusions": [
+        {
+          "negative_ordinal": 0,
+          "source_id": "gb:CRI:ADM1:80129987B30917059240714",
+          "feature_ordinal": 0,
+          "feature_id": "80129987B30917059240714",
+          "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CRI-ADM1-000.bin.gz",
+          "stored_encoding": "gzip",
+          "stored_bytes": 48784,
+          "decoded_bytes": 159240,
+          "stored_sha256": "1b093f52dad8ff9539e999dbb73eca8b2c5c052b3819a46523ebf3a504910d51",
+          "decoded_sha256": "1783b0d18e41b312fd32bf8df279a7103f5c3a6d0465952838782fb75eb9bcd4",
+          "geometry_sha256": "d767710300dbe30941ed8025c991a2bcd1a44f38d502908f15593bf61d4c52bc",
+          "relation": {
+            "relation": "outside",
+            "ties": []
+          },
+          "source_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+          "source_git_blob_oid": "ba89f15e968ed76b607744772d935254e8169b8e"
+        },
+        {
+          "negative_ordinal": 1,
+          "source_id": "gb:CRI:ADM1:80129987B16009817839121",
+          "feature_ordinal": 2,
+          "feature_id": "80129987B16009817839121",
+          "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CRI-ADM1-000.bin.gz",
+          "stored_encoding": "gzip",
+          "stored_bytes": 48784,
+          "decoded_bytes": 159240,
+          "stored_sha256": "1b093f52dad8ff9539e999dbb73eca8b2c5c052b3819a46523ebf3a504910d51",
+          "decoded_sha256": "1783b0d18e41b312fd32bf8df279a7103f5c3a6d0465952838782fb75eb9bcd4",
+          "geometry_sha256": "30d6cc345318f171e8a08489688de2c91037b68f0dc485abf69dc4a586257961",
+          "relation": {
+            "relation": "interior",
+            "ties": []
+          },
+          "source_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+          "source_git_blob_oid": "ba89f15e968ed76b607744772d935254e8169b8e"
+        },
+        {
+          "negative_ordinal": 2,
+          "source_id": "gb:CRI:ADM2:36466004B54791236061025",
+          "feature_ordinal": 47,
+          "feature_id": "36466004B54791236061025",
+          "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CRI-ADM2-000.bin.gz",
+          "stored_encoding": "uncompressed-materialization",
+          "stored_bytes": 3134364,
+          "decoded_bytes": 3134364,
+          "stored_sha256": "3aefbfb2c8b6c5bfe4e46449ee98a1b2248cccf12187e76215a76173a2d8f5e0",
+          "decoded_sha256": "3aefbfb2c8b6c5bfe4e46449ee98a1b2248cccf12187e76215a76173a2d8f5e0",
+          "geometry_sha256": "0bfe8c187ef257decffa7d2679a1c1ad75e8a691290fc2e5e2ede010cdd69ab8",
+          "relation": {
+            "relation": "outside",
+            "ties": []
+          },
+          "source_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+          "source_git_blob_oid": "cef50b3ab567dc6beea8e458241d8e5315121880"
+        },
+        {
+          "negative_ordinal": 3,
+          "source_id": "gb:CRI:ADM2:36466004B93009353653886",
+          "feature_ordinal": 64,
+          "feature_id": "36466004B93009353653886",
+          "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CRI-ADM2-000.bin.gz",
+          "stored_encoding": "uncompressed-materialization",
+          "stored_bytes": 3134364,
+          "decoded_bytes": 3134364,
+          "stored_sha256": "3aefbfb2c8b6c5bfe4e46449ee98a1b2248cccf12187e76215a76173a2d8f5e0",
+          "decoded_sha256": "3aefbfb2c8b6c5bfe4e46449ee98a1b2248cccf12187e76215a76173a2d8f5e0",
+          "geometry_sha256": "ac7a14a0404ff248eec605057e626588ddaa4858e072cac269230782d6b29436",
+          "relation": {
+            "relation": "outside",
+            "ties": []
+          },
+          "source_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+          "source_git_blob_oid": "cef50b3ab567dc6beea8e458241d8e5315121880"
+        },
+        {
+          "negative_ordinal": 4,
+          "source_id": "gb:CRI:ADM2:36466004B82753262426654",
+          "feature_ordinal": 65,
+          "feature_id": "36466004B82753262426654",
+          "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CRI-ADM2-000.bin.gz",
+          "stored_encoding": "uncompressed-materialization",
+          "stored_bytes": 3134364,
+          "decoded_bytes": 3134364,
+          "stored_sha256": "3aefbfb2c8b6c5bfe4e46449ee98a1b2248cccf12187e76215a76173a2d8f5e0",
+          "decoded_sha256": "3aefbfb2c8b6c5bfe4e46449ee98a1b2248cccf12187e76215a76173a2d8f5e0",
+          "geometry_sha256": "e75a1213c3089e0dfbb45945e808460da67c6de72128ee37923dace901ac1abd",
+          "relation": {
+            "relation": "outside",
+            "ties": []
+          },
+          "source_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+          "source_git_blob_oid": "cef50b3ab567dc6beea8e458241d8e5315121880"
+        }
+      ],
+      "source_evidence_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+      "diagnostic_rule_sha256": "0927dcd18309405fd84a60d7ab9c0a445a3b7e00bf8b59c6de966c4893bd2b92",
+      "limitations": "Centre contact under the authenticated existing native scan rule only; the embedded target base geometry is a derived simplified representation and is reported separately from the exact pinned complete source feature. Not a legal, ownership, boundary, or hold-disposition conclusion."
+    }
+  ],
+  "evidence_pins": {
+    "accepted_source_evidence": [
+      {
+        "role": "HND source evidence",
+        "commit": "8c192828cf81a554176efdead967acb9b05ac79e",
+        "path": "coordination/engineering/americas-next-original-evaluations-20261018/hnd/source-evidence-001/source-evidence.json"
+      },
+      {
+        "role": "NIC source evidence",
+        "commit": "8c192828cf81a554176efdead967acb9b05ac79e",
+        "path": "coordination/engineering/americas-next-original-evaluations-20261018/nic/source-evidence-001/source-evidence.json"
+      }
+    ],
+    "source_corpus": {
+      "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    "native_helper": {
+      "commit": "07c74ff101d4ab5e679255ed85c402356aa54a42",
+      "path": "src/native-grid.js",
+      "git_blob_oid": "3e1d3e7e6012b5b571345caad029ab7d124c07fd",
+      "sha256": "66b453bbb2e001b9ff56bd754d55087f5919845dceeefd886016494cefa1d3e0"
+    },
+    "source_families": {
+      "gb:HND:ADM1": {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-HND-ADM1-000.bin.gz",
+        "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+        "git_blob_oid": "961e3bfaa9c1ed1e8cf50a901658b448b200f4ce",
+        "bytes": 91392,
+        "sha256": "a1db7ff9e762eed69c4f0ce654083549e163f04e93c7932941fc7e2de31bd6bf",
+        "decoded_bytes": 307064,
+        "decoded_sha256": "f58a4e14721b7d6356d082f995350457c8a0df5b329efa1f7fb778f1cfd7e666"
+      },
+      "gb:HND:ADM2": {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-HND-ADM2-000.bin.gz",
+        "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+        "git_blob_oid": "0b60c7a309f52070f2282d8e389cb9d7a8391e23",
+        "bytes": 436647,
+        "sha256": "ad30028b6986baa7b4ee1e6c057dfe1f19037646fdd80ce5b2f92673ed448d2f",
+        "decoded_bytes": 1289230,
+        "decoded_sha256": "97ce3b0fdc6fe8a9b206dcedfd61ed209dc5e69c5e55834ee38a4d09d55a81e5"
+      },
+      "gb:NIC:ADM1": {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-NIC-ADM1-000.bin.gz",
+        "commit": "601852e911478b90762edb7b9d80985786f95d43",
+        "git_blob_oid": "62d2a607335abf50cfeedd310aa348ba2a5f86b6",
+        "bytes": 95778,
+        "sha256": "0a5f8c7c020c419527506511a3a36e91e39399a4fe9fbd817a621ea5b27194a8",
+        "decoded_bytes": 337322,
+        "decoded_sha256": "720254f5a74bfef3ba0348b2abf1caf25ef33fed74c6d3d1e4e52a8e013a828d"
+      },
+      "gb:NIC:ADM2": {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-NIC-ADM2-000.bin.gz",
+        "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+        "git_blob_oid": "290fc289e317b77a1dd2b850001eb4f792510a27",
+        "bytes": 221403,
+        "sha256": "6b80f685cbb78767f4b49d1d206a42c9e65463fd9dea8f9df662aa7faf8b0127",
+        "decoded_bytes": 950594,
+        "decoded_sha256": "2a77bdfd3fc8917d0fb38128ea64413cb920f3a6b8cf09f9366182336120058d"
+      },
+      "gb:GTM:ADM1": {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-GTM-ADM1-000.bin.gz",
+        "commit": "601852e911478b90762edb7b9d80985786f95d43",
+        "git_blob_oid": "83ac278710c16878b1ac7c86855d6165838e7036",
+        "bytes": 93002,
+        "sha256": "41b74210c360e4f9e66b52947d0375117a93603a700ab6b7735e015f3f4c8967",
+        "decoded_bytes": 318584,
+        "decoded_sha256": "7f84a4e2a8773953af1c602c67f27457b093e3cfc6ab21052446b172b71d7628"
+      },
+      "gb:GTM:ADM2": {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-GTM-ADM2-000.bin.gz",
+        "commit": "601852e911478b90762edb7b9d80985786f95d43",
+        "git_blob_oid": "afc4c4425485fa21bed068e8065b9748d6d2de8d",
+        "bytes": 354047,
+        "sha256": "d5ae121fc1f7f4014a9bb2c2b0b361ffc9e09b28482facd9d41e0f7b67401afe",
+        "decoded_bytes": 1162585,
+        "decoded_sha256": "04ec4cacdc6c1aa01b4e67ccea28fe4b8f9fa758047a6c7d666668171e95eb94"
+      },
+      "gb:CRI:ADM1": {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CRI-ADM1-000.bin.gz",
+        "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+        "git_blob_oid": "ba89f15e968ed76b607744772d935254e8169b8e",
+        "bytes": 48784,
+        "sha256": "1b093f52dad8ff9539e999dbb73eca8b2c5c052b3819a46523ebf3a504910d51",
+        "decoded_bytes": 159240,
+        "decoded_sha256": "1783b0d18e41b312fd32bf8df279a7103f5c3a6d0465952838782fb75eb9bcd4"
+      },
+      "gb:CRI:ADM2": {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CRI-ADM2-000.bin.gz",
+        "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+        "git_blob_oid": "cef50b3ab567dc6beea8e458241d8e5315121880",
+        "bytes": 1080651,
+        "sha256": "8067fd53156cbafed174d4c138cc107667999c0cc1efe2a4518c6c860d825900",
+        "decoded_bytes": 3134364,
+        "decoded_sha256": "3aefbfb2c8b6c5bfe4e46449ee98a1b2248cccf12187e76215a76173a2d8f5e0"
+      }
+    },
+    "inline_archive_reference": {
+      "path": "coordination/engineering/americas-next-original-evaluations-20261018/hnd/source-stage-001/whole-archive-299-record-custody.json",
+      "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+      "git_blob_oid": "d6e0bae39cd71e924059ecbb8214dc1ef8fe10e5",
+      "bytes": 182362,
+      "sha256": "e5c91bd3ad55fb65468439b90e3a499c332890423ace57d70ef92a8b4474f419",
+      "role": "custody index for the complete archived HND source; the diagnostic retains the inline geometry hash separately"
+    },
+    "original_unsanitized_result_sha256": "725b7c2715f81d7518b2abbe528477b9457e7bc525fe7886bbaf0758f4313651",
+    "sanitization": "Only private/task-local path strings were replaced by exact repository-relative evidence locators; numeric results and geometry hashes are unchanged."
+  }
+}

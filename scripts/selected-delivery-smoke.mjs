@@ -9,7 +9,9 @@ import {repairComponentKey} from '../src/native-grid.js';
 import {repositoryReader, sha256} from './evidence-quality.mjs';
 import {loadOwnershipAssets} from '../src/ownership-assets.js';
 import {additiveBaseReference, decodedAdditiveAssetIdentity, loadAdditiveNativePatch, effectivePrimitiveGeometries, footprintValueSha256,
-  verifyAdditiveLedgerSelection, nativeOnlyComponent} from '../src/effective-footprint.js';
+  verifyAdditiveLedgerSelection, nativeOnlyComponent, loadPreparedNativeContext, nativeReferenceForData} from '../src/effective-footprint.js';
+import {scientificNativeSelection,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
+import {readPreparedFinalOwnership} from './package-startup-ownership.mjs';
 import {ownershipRun, pickOwnership, samplePackedOwnership} from '../src/pixel-ownership.js';
 
 const hash = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
@@ -24,6 +26,7 @@ function uniqueStrings(values, label) {
 }
 
 export function validateDeliveryExpectations(value) {
+  if(value?.version===2){exactKeys(value,['version','kind','bank','reference'],'Final bank expectations');assert.equal(value.kind,'selected-final-bank-consumer-v2');assert(value.bank&&hash(value.bank.sha256)&&Number.isSafeInteger(value.bank.bytes)&&value.bank.bytes>0);return value;}
   exactKeys(value, ['version', 'selected_ledger_sha256', 'cumulative_native_cells', 'cohorts'], 'Expectations');
   assert.equal(value.version, 1, 'Unsupported expectations version');
   assert(hash(value.selected_ledger_sha256), 'Missing selected ledger hash');
@@ -200,6 +203,7 @@ export async function checkEmittedSelectedDelivery({root = process.cwd(), emitte
     return JSON.parse(body);
   };
   const selection = JSON.parse(read('root', 'data/ownership-selection.json'));
+  if(selection.version===2)return checkFinalBankEmitted({selection,expectations,read,inputs});
   const sidecar = whole('root', selection.additive_release);
   const wrapped = whole('root', sidecar.runtime_envelope),source=wrapped.additiveRelease??wrapped;
   const atlas = JSON.parse(read('emitted', 'atlas-geography.json')),envelope=atlas.additiveRelease;
@@ -217,23 +221,43 @@ export async function checkEmittedSelectedDelivery({root = process.cwd(), emitte
     }
   }
   if (expectations !== undefined) assert.equal(decodedAdditiveAssetIdentity(envelope.ledger).sha256, expectations.selected_ledger_sha256, 'Wrong selected ledger hash');
-  const ledger = whole('emitted', envelope.ledger), patch = whole('emitted', envelope.patch);
+  const final=atlas.preparedOwnership!==undefined;
+  if(final)assert.equal(atlas.preparedOwnership.version,2,'Unsupported prepared final bank');
+  const logical=final?{}:null;
+  if(final)for(const role of ['base_manifest','ledger','owner_roster','patch']) {
+    const pin=sidecar.logical_asset_map?.[role],asset=source[role];
+    assert(pin,'Missing original scientific asset pin: '+role);
+    assert(pin.bytes===asset.bytes&&pin.sha256===asset.sha256
+      &&(pin.decoded_bytes??pin.bytes)===(asset.decoded_bytes??asset.bytes)
+      &&(pin.decoded_sha256??pin.sha256)===(asset.decoded_sha256??asset.sha256),
+      'Original scientific identity differs: '+role);
+    // Git pins bind physical bytes; only the authenticated envelope owns decoding.
+    logical[role]={...pin,encoding:asset.encoding};
+  }
+  const ledger = whole(final?'root':'emitted', final?logical.ledger:envelope.ledger), patch = whole(final?'root':'emitted', final?logical.patch:envelope.patch);
   const assets = new Map(), nativeParts = new Set(atlas.pixelMap?.method === 'native-linear-evenodd-first-owner-v1'
     ? (atlas.pixelMap.parts ?? []).map(part => part.path) : []);
-  for (const descriptor of [...(atlas.pixelMap?.parts ?? []), envelope.ledger, envelope.patch,
-    envelope.owner_roster, envelope.base_manifest, ...(atlas.referenceMetadata?[atlas.referenceMetadata.asset]:[])]) {
-    assert(descriptor && !assets.has(descriptor.path), 'Missing/duplicate emitted asset path');
+  const original=final?{...atlas,pixelMap:atlas.preparedOwnership.native_pixel_map}:atlas;
+  if(final)delete original.preparedOwnership;
+  const scientific=new Map(final?['base_manifest','ledger','owner_roster','patch'].map(role=>[source[role].path,logical[role]]):[]);
+  for (const descriptor of [...(atlas.pixelMap?.parts ?? []), ...(final?original.pixelMap.parts:[]),
+    ...(final?atlas.preparedOwnership.context_parts:[envelope.ledger,envelope.patch,envelope.owner_roster,envelope.base_manifest]),
+    ...(atlas.referenceMetadata?[atlas.referenceMetadata.asset]:[])]) {
+    assert(descriptor, 'Missing emitted asset path');
+    if(assets.has(descriptor.path)){assert.deepEqual(assets.get(descriptor.path),descriptor,'Conflicting emitted asset path');continue;}
     assets.set(descriptor.path, descriptor);
   }
   const fetcher = async name => {
     assert(typeof name === 'string', 'Invalid asset fetch path');
     const relative = name.startsWith('./') ? name.slice(2) : name;
+    if(scientific.has(relative)){const pin=scientific.get(relative);return new Response(read('root',pin.path,pin));}
     const descriptor = assets.get(relative);
     assert(descriptor, `Unlisted emitted asset: ${relative}`);
     const bytes = read('emitted', relative, descriptor, {nativePart: nativeParts.has(relative)});
     return new Response(bytes, {status: 200, headers: {'Content-Length': String(bytes.length)}});
   };
-  const base = await loadOwnershipAssets(atlas.pixelMap, fetcher);
+  for(const part of original.pixelMap?.parts??[])nativeParts.add(part.path);
+  const base = await loadOwnershipAssets(original.pixelMap, fetcher,final?{requireNative:true,expectedReference:nativeReferenceForData(original)}:{});
   const beforeControls = selectedStableOwnerControls(base, patch);
   uniqueStrings(atlas.parts, 'emitted feature parts');
   const features = atlas.parts.flatMap(name => {
@@ -243,11 +267,70 @@ export async function checkEmittedSelectedDelivery({root = process.cwd(), emitte
     assert(Array.isArray(rows) && rows.length > 0, 'Missing emitted feature records');
     return rows;
   });
-  const effective = await loadAdditiveNativePatch(atlas, features, base, {fetcher});
+  let effective;
+  if(final){
+    const expectedFeatures=structuredClone(features);
+    const expected=await loadAdditiveNativePatch(original,expectedFeatures,base,{fetcher});
+    const emitted=await loadOwnershipAssets(atlas.pixelMap,fetcher,{requireNative:true,expectedReference:atlas.reference_release});
+    effective=await loadPreparedNativeContext(atlas,features,emitted,{fetcher});
+    // E is now a committed operand, so sampled stable cells are not sufficient:
+    // preserve every old/held word against the existing scientific consumer.
+    for(const key of ['rows','runs'])assert(Buffer.from(effective[key].buffer,effective[key].byteOffset,effective[key].byteLength)
+      .equals(Buffer.from(expected[key].buffer,expected[key].byteOffset,expected[key].byteLength)),'Complete emitted '+key+' differ from accepted native composition');
+    assert.deepEqual(features,expectedFeatures,'Complete emitted effective context differs');
+    for(const key of ['additive_patch_sha256','additive_ledger_sha256','additive_added_cells','reference_owner_sha256',
+      'reference_owner_source_sha256','effective_footprint_domain','additive_authority_registry_sha256','additive_rule_sha256'])
+      assert.deepEqual(effective[key],expected[key],'Emitted provenance differs: '+key);
+  }else effective=await loadAdditiveNativePatch(atlas,features,base,{fetcher});
   const report = (expectations === undefined ? verifyEmittedDelivery : verifySelectedDelivery)({expectations, ledger, ledgerSha256: decodedAdditiveAssetIdentity(envelope.ledger).sha256,
     patch, patchSha256: decodedAdditiveAssetIdentity(envelope.patch).sha256, features, base, effective, beforeControls});
   report.inputs = [...inputs.values()].sort((a, b) => `${a.scope}:${a.path}`.localeCompare(`${b.scope}:${b.path}`));
   return report;
+}
+
+// Current publication is parity against the accepted whole final bank. Source
+// qualification is the existing selected-joint transition, not historical replay.
+async function checkFinalBankEmitted({selection,expectations,read,inputs}) {
+  const native=scientificNativeSelection(selection),manifestRaw=read('root',native.manifest_path);
+  assert.equal(sha256(manifestRaw),native.sha256,'Original native manifest differs');
+  const manifest=JSON.parse(manifestRaw),indexRaw=read('root',selection.prepared_bank.path,selection.prepared_bank),index=JSON.parse(indexRaw);
+  let base=originalNativeReference(manifest),referenceMetadata;
+  if(selection.reference_projection){const raw=read('root',selection.reference_projection.path,selection.reference_projection),projection=JSON.parse(raw);
+    const references=validateReferenceMetadataHeader(projection,{selection,manifest});base=references.reference;
+    referenceMetadata={version:1,asset:{path:'reference-metadata/current.json',bytes:raw.length,sha256:sha256(raw)},native_reference:references.native,reference:base};}
+  assert.deepEqual(index.referenceMetadata,referenceMetadata,'Final bank projection identity differs');
+  const atlas=JSON.parse(read('emitted','atlas-geography.json'));
+  assert.equal(atlas.additiveRelease,undefined,'Final map cannot retain a historical repair envelope');
+  assert.deepEqual(atlas.pixelMap,index.pixelMap,'Emitted final words descriptor differs');
+  assert.deepEqual(atlas.preparedOwnership,index.preparedOwnership,'Emitted final context descriptor differs');
+  assert.deepEqual(atlas.reference_release,selection.reference,'Emitted final identity differs');
+  assert.deepEqual(atlas.referenceMetadata?Object.fromEntries(Object.entries(atlas.referenceMetadata).filter(([key])=>key!=='application_reference_revision')):undefined,referenceMetadata);
+  assert.deepEqual(additiveBaseReference(atlas),base,'Emitted content reference differs');
+  if(expectations!==undefined){validateDeliveryExpectations(expectations);assert.equal(expectations.version,2,'Historical repair expectations cannot admit a final bank');
+    assert.deepEqual(expectations.bank,selection.prepared_bank);assert.deepEqual(expectations.reference,selection.reference);}
+  uniqueStrings(atlas.parts,'emitted feature parts');
+  const features=atlas.parts.flatMap(name=>{const raw=read('emitted',name),rows=JSON.parse(name.endsWith('.gz')?gunzipSync(raw,{maxOutputLength:32*1024*1024}):raw);assert(Array.isArray(rows)&&rows.length);return rows;});
+  const prefix='data/canonical-grid/current-startup/',pins=new Map(index.files.map(pin=>[pin.path,pin]));
+  // Every fixed compatibility URL and current operand must be the actual committed body.
+  for(const pin of index.files){read('root',prefix+pin.path,{...pin,path:prefix+pin.path});read('emitted',pin.path,pin);}
+  if(referenceMetadata)read('emitted',referenceMetadata.asset.path,referenceMetadata.asset);
+  const expected=await readPreparedFinalOwnership({indexRaw,manifest,manifestSha:native.sha256,
+    selected:{finalBank:selection.prepared_bank,reference_release:selection.reference,base,referenceMetadata:atlas.referenceMetadata},features:structuredClone(features),
+    read:pin=>read('root',prefix+pin.path,{...pin,path:prefix+pin.path})});
+  const fetcher=async name=>{const relative=String(name).replace(/^\.\//,'');const pin=pins.get(relative);assert(pin,'Unlisted emitted final bank operand');return new Response(read('emitted',relative,pin));};
+  const words=await loadOwnershipAssets(atlas.pixelMap,fetcher,{requireNative:true,expectedReference:selection.reference});
+  const effective=await loadPreparedNativeContext(atlas,features,words,{fetcher});
+  assert.deepEqual(effective.rows,expected.ownership.rows,'Every emitted final row word equals its accepted bank');
+  assert.deepEqual(effective.runs,expected.ownership.runs,'Every emitted final run word equals its accepted bank');
+  assert.deepEqual(features,expected.features,'Complete emitted finished context differs');
+  let controls=0;
+  for(let y=0;y<effective.size;y++)if(effective.rows[y*2+1]){const run=ownershipRun(expected.ownership,expected.ownership.rows[y*2]);
+    assert.equal(pickOwnership(effective,run.start,y),run.id);assert.equal(samplePackedOwnership(effective,{x:run.start,y,width:1,height:1})[0],run.id);controls++;}
+  assert(controls>0,'Missing occupied final owner controls');
+  return {version:2,kind:'actual-emitted-final-bank-consumer',passed:true,bank:selection.prepared_bank,reference:selection.reference,
+    feature_count:features.length,complete_row_words:effective.rows.length,complete_run_words:effective.runs.length,
+    occupied_controls_picked_and_sampled:controls,inputs:[...inputs.values()].sort((a,b)=>`${a.scope}:${a.path}`.localeCompare(`${b.scope}:${b.path}`)),
+    limitation:'Whole accepted bank/context publication parity plus real picker/sampler controls. No historical repair replay, new science qualification or browser GPU claim.'};
 }
 
 export async function runSelectedDeliverySmoke({expectationsPath, outputPath, ...options}) {

@@ -1,3 +1,4 @@
+import {canonicalValue,effectivePrimitiveGeometries,finishedReleaseFootprintDigest,additiveReleaseFootprintDigest} from './native-grid.js';
 // Reference metadata is applied separately from the immutable native source.
 // These projections confer no source, boundary, history or publication authority.
 // Callers authenticate the existing correction receipt and complete input bytes.
@@ -38,9 +39,51 @@ export function originalNativeReference(manifest) {
 // A metadata application pointer is not a new native/scientific selection.
 // Original source, artifact authority, native words and rebind evidence retain
 // their original identities. Applicability of the pointer is checked separately.
-export function scientificNativeSelection(selection) {
+export function finalBankSelection(selection) {
   need(selection && typeof selection === 'object' && !Array.isArray(selection),
-    'Complete original native selection required');
+    'Complete selected ownership required');
+  if (selection.version === 1) {
+    need(!['kind','native_selection','prepared_bank','reference','change_evidence'].some(key=>Object.hasOwn(selection,key)),
+      'Malformed legacy ownership selection');
+    return null; // Explicit historical profile only, never a downgraded final bank.
+  }
+  const fields = ['version', 'kind', 'native_selection', 'prepared_bank', 'reference',
+    ...(Object.hasOwn(selection, 'reference_projection') ? ['reference_projection'] : []),
+    ...(Object.hasOwn(selection, 'change_evidence') ? ['change_evidence'] : [])];
+  need(selection.version === 2 && selection.kind === 'selected-final-native-bank-v2'
+    && keys(selection, fields), 'Unsupported final ownership selection');
+  const native = selection.native_selection, bank = selection.prepared_bank;
+  need(keys(native, ['version', 'method', 'manifest_path', 'sha256', 'release_id',
+    'selected_geography', ...(Object.hasOwn(native ?? {}, 'artifact_consumption') ? ['artifact_consumption'] : [])]) && native.version === 1
+    && native.method === 'native-linear-evenodd-first-owner-v1'
+    && typeof native.manifest_path === 'string' && /^[A-Za-z0-9_./-]+\.json$/.test(native.manifest_path)
+    && native.manifest_path.split('/').every(part => part && part !== '.' && part !== '..')
+    && hash(native.sha256) && typeof native.release_id === 'string' && native.release_id.startsWith('geography:')
+    && native.selected_geography?.kind === 'complete-world-index-with-exact-encoded-overrides'
+    && (!Object.hasOwn(native, 'artifact_consumption') || native.artifact_consumption && typeof native.artifact_consumption === 'object'),
+    'Final ownership lost its original scientific selection');
+  need(keys(bank, ['path', 'bytes', 'sha256'])
+    && bank.path === 'data/canonical-grid/current-startup/index.json'
+    && Number.isSafeInteger(bank.bytes) && bank.bytes > 0 && bank.bytes <= 32 * 1024 * 1024
+    && hash(bank.sha256) && reference(selection.reference), 'Incomplete selected final bank');
+  if (Object.hasOwn(selection, 'reference_projection')) {
+    const pin = selection.reference_projection;
+    need(keys(pin, ['path', 'bytes', 'sha256']) && typeof pin.path === 'string'
+      && /^[A-Za-z0-9_./-]+$/.test(pin.path)
+      && pin.path.split('/').every(part => part && part !== '.' && part !== '..')
+      && Number.isSafeInteger(pin.bytes) && pin.bytes > 0 && hash(pin.sha256),
+      'Incomplete selected final-bank reference_projection');
+  }
+  if (Object.hasOwn(selection, 'change_evidence'))
+    need(ordinaryPin(selection.change_evidence), 'Incomplete selected final-bank change_evidence');
+  // This is structural admission, not acceptance or scientific qualification.
+  // The actual reader authenticates the index and every consumed body; the
+  // existing private checkpoint qualifies differences against accepted main.
+  return bank;
+}
+
+export function scientificNativeSelection(selection) {
+  if (finalBankSelection(selection)) return selection.native_selection;
   const {additive_release, reference_projection, ...native} = selection;
   return native;
 }
@@ -92,6 +135,39 @@ export function validateReferenceMetadataHeader(projection, {selection, manifest
   return {native, reference: projection.reference};
 }
 
+// A stale display alias may be synchronized only to its unchanged, recorded
+// reference winner. This is not a new winner, political decision or history.
+function referenceAliasMatchesWinner(before, after) {
+  const old = before?.metadata, next = after?.metadata;
+  const winner = old?.reference_owner_evidence?.winner;
+  return text(old?.reference_polity) && text(before.reference_owner)
+    && old.reference_polity !== before.reference_owner
+    && next?.reference_polity === before.reference_owner
+    && after.reference_owner === before.reference_owner
+    && text(old.reference_owner_id) && winner?.owner_id === old.reference_owner_id
+    && winner.name === before.reference_owner
+    && next.reference_owner_id === old.reference_owner_id
+    && same(next.reference_owner_evidence, old.reference_owner_evidence);
+}
+
+export function isReferenceAliasCorrection(before, after) {
+  return referenceAliasMatchesWinner(before, after)
+    && same({...before, metadata: {...before.metadata, reference_polity: after.metadata.reference_polity}}, after);
+}
+
+// Call only after complete receipt/source validation. The receipt remains whole
+// pinned in the projection; only a real release-membership change needs an M pin.
+export function isReferenceAliasReceipt(receipt) {
+  return hash(receipt.before_sha256) && receipt.before_sha256 === receipt.after_sha256
+    && hash(receipt.footprints_sha256_before) && receipt.footprints_sha256_before === receipt.footprints_sha256_after
+    && receipt.reference_only === true && receipt.historical_claims_transferred === false
+    && receipt.summary?.geometry_changes === 0
+    && ['group_changes', 'retired_units', 'relationships'].every(key => Array.isArray(receipt[key]) && receipt[key].length === 0)
+    && Array.isArray(receipt.changed_location_properties) && receipt.changed_location_properties.length > 0
+    && receipt.changed_location_properties.every(change => change.location_id === change.before_properties?.id
+      && isReferenceAliasCorrection(change.before_properties, change.after_properties));
+}
+
 // apply-geographic-decisions.py retains the original fallback/overlap metadata
 // and appends an explicit correction. Permit only that exact append-only shape;
 // ignoring all metadata would hide a source/name/identity or prior-history edit.
@@ -105,11 +181,12 @@ export function assertReferenceOnlyLocationChange(before, after) {
     && corrections.length >= oldCorrections.length
     && same(oldCorrections, corrections.slice(0, oldCorrections.length)),
   'Reference correction history must retain the exact original prefix');
+  const alias = referenceAliasMatchesWinner(before, after);
   const withoutAppliedParent = properties => {
     const result = {...properties, parent_id: null};
     if (Object.hasOwn(properties, 'metadata')) {
       const {reference_corrections, ...retained} = properties.metadata;
-      result.metadata = retained;
+      result.metadata = alias ? {...retained, reference_polity: after.metadata.reference_polity} : retained;
     }
     return result;
   };
@@ -316,4 +393,166 @@ export function validateMetadataRelationships({beforeGroups,beforeLocations,befo
  for(const pair of pairs.filter(pair=>['merge','split'].includes(pair.change_type))){const parent=beforeGroups.get(pair.old_entity_id).parent_id;if(!metadataEqualIds(beforeMembers.get(parent),afterMembers.get(parent)))throw Error('Metadata merge/split changes its containing parent footprint');}
 
  return pairs;
+}
+
+const hex=/^[a-f0-9]{64}$/;
+function require(value,message){if(!value)throw Error(message);}
+function exactKeys(value,fields,name){require(keys(value,fields),name+' has missing/foreign fields');}
+export function finalBankReference(proof, pixelMap, footprintsSha256,hashValue) {
+  require(typeof hashValue==='function','Explicit canonical footprint hash required');
+  require(hex.test(footprintsSha256) && hex.test(proof?.native_manifest_sha256)
+    && hex.test(proof?.reference_owner_sha256) && hex.test(proof?.rows_sha256) && hex.test(proof?.runs_word_stream_sha256)
+    && Number.isSafeInteger(proof.owners) && proof.owners > 0
+    && pixelMap?.version === 2 && pixelMap.method === 'native-linear-evenodd-first-owner-v1'
+    && pixelMap.size === 262166 && pixelMap.coordinateBits === 19
+    && Number.isSafeInteger(pixelMap.runWords) && pixelMap.runWords >= 0 && pixelMap.runWords % 2 === 0,
+    'Incomplete final bank identity');
+  const streams = [];
+  require(Array.isArray(pixelMap.parts) && pixelMap.parts.length > 0, 'Missing final word descriptors');
+  for (const kind of ['rows','runs']) {
+    let offset = 0;
+    for (const part of pixelMap.parts.filter(part=>part.kind===kind)) {
+      require(part.offset === offset && Number.isSafeInteger(part.words) && part.words > 0
+        && hex.test(part.decoded_sha256), 'Incomplete final word identity');
+      streams.push({kind,offset,words:part.words,sha256:part.decoded_sha256}); offset += part.words;
+    }
+    require(offset === (kind === 'rows' ? pixelMap.size * 2 : pixelMap.runWords), 'Incomplete final word extent');
+  }
+  require(streams.length === pixelMap.parts.length, 'Foreign final word kind');
+  let offset = 0;
+  require(Array.isArray(proof.context_parts) && proof.context_parts.length > 0, 'Missing final context identity');
+  const context = proof.context_parts.map(part=>{
+    require(part.offset === offset && Number.isSafeInteger(part.features) && part.features > 0
+      && hex.test(part.decoded_sha256), 'Incomplete final context identity');
+    offset += part.features; return {offset:part.offset,features:part.features,sha256:part.decoded_sha256};
+  });
+  require(offset === proof.owners, 'Incomplete final context extent');
+  const value = {domain:'worldatlas-selected-final-native-bank:v1',native_manifest_sha256:proof.native_manifest_sha256,
+    base_reference:proof.base_reference,footprints_sha256:footprintsSha256,
+    dimensions:{version:pixelMap.version,method:pixelMap.method,size:pixelMap.size,coordinateBits:pixelMap.coordinateBits,runWords:pixelMap.runWords},
+    owners:proof.owners,reference_owner_sha256:proof.reference_owner_sha256,
+    rows_sha256:proof.rows_sha256,runs_word_stream_sha256:proof.runs_word_stream_sha256,streams,context};
+  return {id:'geography:final:'+hashValue(value),footprints_sha256:footprintsSha256,
+    hierarchy_sha256:proof.base_reference.hierarchy_sha256};
+}
+
+export function additiveBaseReference(data,hashValue) {
+  require(typeof hashValue==='function','Explicit canonical footprint hash required');
+  const final = data.preparedOwnership?.version === 3;
+  if (final) {
+    const proof = data.preparedOwnership;
+    exactKeys(proof, ['version','kind','native_manifest_sha256','native_pixel_map','base_reference',
+      'effective_reference','context_parts','owners','reference_owner_sha256','rows_sha256','runs_word_stream_sha256',
+      'effective_footprint_domain'], 'Final prepared ownership');
+    require(data.additiveRelease === undefined && proof.kind === 'prepared-final-native-bank-v3'
+      && proof.effective_footprint_domain === 'worldatlas-final-native-footprints:v1'
+      && [proof.native_manifest_sha256,proof.reference_owner_sha256,proof.rows_sha256,proof.runs_word_stream_sha256].every(value=>hex.test(value)),
+      'Mixed or incomplete final ownership profile');
+    for (const reference of [proof.base_reference, proof.effective_reference]) {
+      exactKeys(reference, ['id','footprints_sha256','hierarchy_sha256'], 'Final ownership reference');
+      require(typeof reference.id === 'string' && reference.id.startsWith('geography:')
+        && hex.test(reference.footprints_sha256) && hex.test(reference.hierarchy_sha256), 'Incomplete final ownership reference');
+    }
+    require(JSON.stringify(canonicalValue(proof.effective_reference)) === JSON.stringify(canonicalValue(data.reference_release))
+      && proof.base_reference.hierarchy_sha256 === proof.effective_reference.hierarchy_sha256,
+      'Selected final ownership reference differs');
+    require(JSON.stringify(canonicalValue(finalBankReference(proof,data.pixelMap,proof.effective_reference.footprints_sha256,hashValue)))
+      === JSON.stringify(canonicalValue(proof.effective_reference)), 'Final bank identity differs from its complete words/context');
+    return proof.base_reference;
+  }
+  if(data.additiveRelease===undefined)return data.reference_release;
+  const release=data.additiveRelease;
+  exactKeys(release,['version','kind','base_reference','effective_reference','patch','ledger','owner_roster','base_manifest'],'Additive release');
+  require((release.version===1&&release.kind==='retained-native-base-plus-delta-v1')
+    ||(release.version===2&&release.kind==='retained-native-base-plus-delta-v2'),'Unsupported additive release');
+  require(JSON.stringify(canonicalValue(release.effective_reference))===JSON.stringify(canonicalValue(data.reference_release)),'Selected additive reference mismatch');
+  // Whole descriptors bound consumption, not an unrelated fixed file-size cap.
+  // Packaging and streamed readers authenticate exact lengths/hashes; actual
+  // allocation, decoding and JSON runtime failures remain fatal.
+  for(const role of ['patch','ledger','owner_roster','base_manifest']){
+    const asset=release[role],encoded=role==='owner_roster'||(role!=='base_manifest'&&asset?.encoding!==undefined);
+    exactKeys(asset,encoded?['path','bytes','sha256','encoding','decoded_bytes','decoded_sha256']:['path','bytes','sha256'],'Native additive asset');
+    if(encoded)require(asset.encoding==='gzip'&&Number.isSafeInteger(asset.decoded_bytes)&&asset.decoded_bytes>0&&hex.test(asset.decoded_sha256),'Incomplete whole decoded native additive asset');
+    require(/^additive-repairs\/[a-zA-Z0-9_-]+\.json(?:\.gz)?$/.test(asset.path)&&Number.isSafeInteger(asset.bytes)
+      &&asset.bytes>0&&hex.test(asset.sha256),'Unsafe native additive asset');
+  }
+  require(new Set([release.patch.path,release.ledger.path,release.owner_roster.path,release.base_manifest.path]).size===4,'Duplicate native additive assets');
+  return release.base_reference;
+}
+
+export function nativeReferenceForData(data,hashValue) {
+  require(typeof hashValue==='function','Explicit canonical footprint hash required');
+  const current=additiveBaseReference(data,hashValue),metadata=data.referenceMetadata;
+  if(metadata===undefined){
+    if(data.preparedOwnership){require(JSON.stringify(canonicalValue(originalNativeReference(data.preparedOwnership.native_pixel_map)))===JSON.stringify(canonicalValue(current)),'Prepared native/content reference differs');}
+    return current;
+  }
+  require(data.additiveRelease!==undefined||data.preparedOwnership?.version===3,'Reference metadata requires an explicit selected native asset closure');
+  exactKeys(metadata,['version','asset','native_reference','reference',...(Object.hasOwn(metadata,'application_reference_revision')?['application_reference_revision']:[])],'Reference metadata');
+  require(metadata.application_reference_revision===undefined||hex.test(metadata.application_reference_revision),'Invalid application reference revision');
+  require(metadata.version===1,'Unsupported reference metadata');
+  exactKeys(metadata.asset,['path','bytes','sha256'],'Reference metadata asset');
+  require(metadata.asset.path==='reference-metadata/current.json'&&Number.isSafeInteger(metadata.asset.bytes)
+    &&metadata.asset.bytes>0&&metadata.asset.bytes<=32*1024*1024&&hex.test(metadata.asset.sha256),
+  'Unsafe/oversized reference metadata asset');
+  for(const reference of [metadata.native_reference,metadata.reference]){
+    exactKeys(reference,['id','footprints_sha256','hierarchy_sha256'],'Reference metadata reference');
+    require(typeof reference.id==='string'&&reference.id.startsWith('geography:')
+      &&hex.test(reference.footprints_sha256)&&hex.test(reference.hierarchy_sha256),'Incomplete reference metadata reference');
+  }
+  const same=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+  require(same(metadata.reference,current)&&same(metadata.native_reference,originalNativeReference(data.preparedOwnership?.native_pixel_map??data.pixelMap)),
+    'Reference metadata differs from the current or original native reference');
+  require(metadata.reference.footprints_sha256===metadata.native_reference.footprints_sha256
+    &&metadata.reference.hierarchy_sha256!==metadata.native_reference.hierarchy_sha256
+    &&metadata.reference.id!==metadata.native_reference.id,'Reference metadata changes native footprints or lacks a hierarchy transition');
+  return metadata.native_reference;
+}
+
+export function bindPreparedNativeFeatures(data,features,parts,hashValue,hashBytes) {
+  require(typeof hashValue==='function','Explicit canonical footprint hash required');
+  const proof=data.preparedOwnership,same=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+  require([2,3].includes(proof?.version)&&features.length===proof.owners&&parts.length===proof.context_parts.length,'Incomplete prepared feature context');
+  const final=proof.version===3;
+  const byId=new Map(features.map(f=>[f.id,f])),seen=new Set(),indices=new Set(),prepared=new Map();
+  require(byId.size===features.length,'Duplicate prepared current feature');
+  for(let part=0;part<parts.length;part++){
+    require(Array.isArray(parts[part])&&parts[part].length===proof.context_parts[part].features,'Prepared context count differs');
+    for(const context of parts[part]){
+      const current=byId.get(context.id);
+      require(current&&!seen.has(context.id)&&context.properties?.id===context.id
+        &&context.properties.parent_id===current.properties?.parent_id&&context.pixelIndex===current.pixelIndex
+        &&Number.isSafeInteger(context.pixelIndex)&&context.pixelIndex>0&&!indices.has(context.pixelIndex)
+        &&Array.isArray(context.gridBounds)&&context.gridBounds.length===4&&context.gridBounds.every(Number.isFinite),
+        'Prepared current owner, parent or bounds differ');
+      seen.add(context.id);indices.add(context.pixelIndex);
+      if(Object.keys(context.properties).length>2)assertAppliedReferenceProperties(current.properties,context.properties,
+        {referenceRevision:data.referenceMetadata?.application_reference_revision});
+      const next={...current,gridBounds:[...context.gridBounds]};
+      if(context.geometry!==null){
+        require(current.geometry==null||same(current.geometry,context.geometry),'Prepared base geometry differs');
+        next.geometry=context.geometry;
+      }
+      if(final){
+        exactKeys(context,['id','pixelIndex','geometry','properties','gridBounds',
+          ...(Object.hasOwn(context,'finishedFootprint')?['finishedFootprint']:[])],'Finished feature context');
+        require(!Object.hasOwn(current,'additiveFootprint'),'Final context cannot inherit historical repair components');
+        if(Object.hasOwn(context,'finishedFootprint')){
+          require(!Object.hasOwn(current,'finishedFootprint')||same(current.finishedFootprint,context.finishedFootprint),'Prepared finished footprint differs');
+          next.finishedFootprint=context.finishedFootprint;effectivePrimitiveGeometries(next,hashValue);
+        }else require(!Object.hasOwn(current,'finishedFootprint'),'Prepared final context omitted finished footprint');
+      }else if(Object.hasOwn(context,'additiveFootprint')){
+        require(!Object.hasOwn(current,'additiveFootprint')||same(current.additiveFootprint,context.additiveFootprint),'Prepared effective footprint differs');
+        next.additiveFootprint=context.additiveFootprint;effectivePrimitiveGeometries(next,hashValue);
+      }
+      prepared.set(context.id,next);
+    }
+  }
+  const mapping=features.map(f=>[f.pixelIndex,f.id]).sort((a,b)=>a[0]-b[0]);
+  require(typeof hashBytes==='function','Explicit ownership byte hash required');
+  const ownerDigest=hashBytes(new TextEncoder().encode(JSON.stringify(mapping)));
+  require(ownerDigest===proof.reference_owner_sha256,'Prepared complete owner roster differs');
+  const result=features.map(feature=>prepared.get(feature.id));
+  require((final?finishedReleaseFootprintDigest: additiveReleaseFootprintDigest)(proof.base_reference,result,hashValue)===proof.effective_reference?.footprints_sha256,'Prepared effective footprint digest differs');
+  return result;
 }

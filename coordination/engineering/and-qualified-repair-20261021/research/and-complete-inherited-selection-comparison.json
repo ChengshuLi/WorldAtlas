@@ -1,0 +1,18 @@
+{
+  "base": "53eb39c23dc78f41cb674ac80a75b88c76b26770",
+  "composition_commit": "0a1dabb21bdb5eb9fd2826f89c0deaf9d33b3cef",
+  "prior_ledger_rows": 7008,
+  "current_ledger_rows": 7009,
+  "prior_scope_entries": 7008,
+  "current_scope_entries": 7009,
+  "all_inherited_ledger_rows_unchanged_with_multiplicity": true,
+  "added_component_id": "source-target:71ac6072da01ffade978f1b746f737e468eebeece5af619e3bab15a80465e56d",
+  "prior_patch_cells": 6336358,
+  "current_patch_cells": 6336429,
+  "exact_added_cells": 71,
+  "all_prior_patch_intervals_and_owners_preserved": true,
+  "method": "Compare every inherited ledger row by complete serialized-body SHA-256 with multiplicity; subtract only the independently bound 71-key supported patch from current cumulative rows and compare all remaining normalized intervals/owners to the actual LIE-inclusive base.",
+  "limits": [
+    "Read-only comparison of committed/staged outputs, not a repeated native observer, constructor, geography check or final hosted consumer."
+  ]
+}

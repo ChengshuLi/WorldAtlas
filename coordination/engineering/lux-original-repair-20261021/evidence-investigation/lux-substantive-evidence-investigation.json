@@ -1,0 +1,287 @@
+{
+  "package_id": "gb-LUX-ADM1--repair-evaluation",
+  "status": "investigation pending; no completed-unresolved or repair credit",
+  "as_of": "2026-10-20 America/Los_Angeles",
+  "prior_attempt_audit": {
+    "inspected": [
+      "lux-exact-input-acquisition.json",
+      "lux-retained-source-physical-water-witness-join.json",
+      "lux-source-property-identity-join.json",
+      "lux-observation-execution.json",
+      "lux-author-verification.json"
+    ],
+    "retained_work": "Exact source body/property identities, original source/physical mask joins and stock owner observation. No substantive external source applicability searches or actual positive native-constructor attempt were located in these pre-correction LUX records. This finding is bounded to inspected records.",
+    "not_equivalent_to_failed_qualification": [
+      "owner-zero observation",
+      "generic rights/authority limitations",
+      "contract exception alternative",
+      "inert packet tests"
+    ]
+  },
+  "research_actions": [
+    {
+      "question": "Does the declared 2017 source administrative level correspond to Luxembourg cantons?",
+      "url": "https://statistiques.public.lu/dam-assets/catalogue-publications/luxembourg-en-chiffres/2017/luxembourg-chiffres-17-en.pdf",
+      "result": "STATEC 2017 publication printed page5 lists twelve cantons. Supports vintage-specific administrative taxonomy, not individual source polygon precision."
+    },
+    {
+      "question": "What is the actual pinned geoBoundaries source, rather than global site license?",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/LUX/ADM1/geoBoundaries-LUX-ADM1-metaData.json",
+      "bytes": 853,
+      "sha256": "5e90995eea8bd403933aa01c24258343811ca420de7bd4edd35e40b36f88bef5",
+      "result": {
+        "boundaryID": "LUX-ADM1-76397094",
+        "boundaryISO": "LUX",
+        "boundaryYear": "2017",
+        "boundaryType": "ADM1",
+        "boundarySource": "OpenStreetMap, Wambacher",
+        "boundaryCanonical": "",
+        "boundaryLicense": "Open Data Commons Open Database License 1.0",
+        "licenseDetail": "Open Data Commons Open Database License 1.0",
+        "licenseSource": "https//www.openstreetmap.org/copyright",
+        "boundarySourceURL": "https//wambachers-osm.website/boundaries/",
+        "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+        "buildDate": "Dec 12, 2023",
+        "admUnitCount": "12",
+        "meanVertices": "5914.0",
+        "minVertices": "3635",
+        "maxVertices": "11046",
+        "meanPerimeterLengthKM": "135.76522691916836",
+        "maxPerimeterLengthKM": "196.96112264870533",
+        "minPerimeterLengthKM": "75.27252877337448",
+        "meanAreaSqKM": "216.08329973438163",
+        "minAreaSqKM": "78.4261127214714",
+        "maxAreaSqKM": "343.239819981984"
+      },
+      "access_history": "raw.githubusercontent.com returned authenticated Git LFS pointer; web media open was unavailable; ordinary urllib read fetched exact853byte body and matched pointer SHA256. No policy denial."
+    },
+    {
+      "question": "Is there a lawful primary cartographic comparator?",
+      "url": "https://data.public.lu/en/datasets/limites-administratives-du-grand-duche-de-luxembourg/",
+      "result": "ACT official cadastre dataset provides cantons and national boundaries, current listing CC0. Exact October5 2026 limadmin-shp.zip URL discovered; no bulk file acquired or geometry operation run."
+    },
+    {
+      "question": "Is there a compact canton comparator?",
+      "url": "https://data.public.lu/en/datasets/cantons-in-luxembourg-2026/",
+      "result": "SIG-GR ministry dataset credits ACT; January21 2026 canton GeoJSON451.2KB, CC BY4.0. Identified a bounded future comparison route; not yet acquired or adopted as source."
+    },
+    {
+      "question": "What concrete territorial context affects foreign contacts?",
+      "url": "https://act.public.lu/fr/parcelles-residences/mensuration-officielle/limites-etat.html",
+      "result": "ACT documents Belgium boundary convention and shared German-Luxembourg riverbeds for Our, Sure and Moselle. It does not locate our one German-contact key; do not infer that key lies in condominium from names or masked land alone."
+    },
+    {
+      "question": "What does upstream OSM license explicitly permit/require?",
+      "url": "https://www.openstreetmap.org/copyright",
+      "result": "OSMF states ODbL reuse with attribution and share-alike terms. A generic lack-of-permission statement is not evidence of forbidden use. Preserve original product attribution and assess actual output obligations."
+    }
+  ],
+  "retained_contact_partitions": {
+    "LUX contacts only": {
+      "cells": 598,
+      "intervals": 196
+    },
+    "Belgian contact": {
+      "cells": 25,
+      "intervals": 17
+    },
+    "German contacts": {
+      "cells": 1,
+      "intervals": 1
+    }
+  },
+  "german_contact_key": {
+    "x": 135686,
+    "y": 89084,
+    "latitude": 49.847702664091564
+  },
+  "positive_path": {
+    "first_partition": "598 keys/196 intervals have only LUX contacts in retained source vectors.25keys/17intervals include Belgium;1key/1interval includes Germany. These are investigation partitions, not supported/held decisions.",
+    "stock_procedure": "Current docs/DELIVERY_HANDOFF.md source-evidence then native-diagnostic/native-authority use complete physical/source evidence and exact patch. Original accepted source aggregation can use semantic-report/world-index/whole containing parts; no universal current official certificate is specified.",
+    "missing_concrete_operands": "Whole-target physical producer results/receipts and canonical owner aggregation parts have not yet been authenticated for LUX. Queue physical masks are not those results.",
+    "next_feasible_routes": [
+      "Authenticate exact canonical semantic member lineage and containing owner part for7122.",
+      "Locate existing whole-target physical results before any necessary first bounded producer execution.",
+      "Use official cadastral boundary/condominium data to resolve exact26foreign-contact cells; do not assign from names.",
+      "Retain full624original request through stock native diagnostic, preserving partial supported/held split if actual predicates establish one."
+    ]
+  },
+  "limits": [
+    "No actual positive native constructor/diagnostic has executed in this investigation yet.",
+    "No geometry or source restriction was bypassed.",
+    "Searches found feasible routes; evidence exhaustion has not been established.",
+    "Root issue2649 controls pending audit; prior historical receipts remain unchanged."
+  ],
+  "root_audit_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/2649",
+  "official_condominium_actual_comparison": {
+    "kind": "independent-official-condominium-point-comparison",
+    "status": "diagnostic only, no source adoption or native qualification",
+    "source": {
+      "resource": {
+        "checksum": {
+          "type": "md5",
+          "value": "d377bc38e5a5d07c8994663f903e27b4"
+        },
+        "created_at": "2019-06-12T12:45:38.241000+00:00",
+        "description": null,
+        "extras": {
+          "analysis:checksum": "c860e919d9bf1dee701ab41ec1fda9680bdceb8f",
+          "analysis:content-length": 445068,
+          "analysis:last-modified-at": "2025-04-01T13:26:33+00:00",
+          "analysis:last-modified-detection": "last-modified-header",
+          "analysis:mime-type": "text/xml",
+          "check:count-availability": 51,
+          "check:date": "2025-07-23T01:56:44.145028+00:00",
+          "check:headers:content-length": 445068,
+          "check:headers:content-type": "application/gml+xml",
+          "check:status": 200,
+          "check:timeout": false,
+          "check:url": "https://download.data.public.lu/resources/inspire-annex-i-theme-administrative-units-condominium-2/20220228-101751/au.condominium.gml"
+        },
+        "filesize": 445282,
+        "filetype": "file",
+        "format": "gml",
+        "harvest": null,
+        "id": "95b1dea1-2891-417b-8865-0584bf393cfc",
+        "internal": {
+          "created_at_internal": "2019-06-12T12:45:38.241000+00:00",
+          "last_modified_internal": "2026-10-16T13:56:54+00:00"
+        },
+        "last_modified": "2026-10-16T13:56:54+00:00",
+        "latest": "https://data.public.lu/fr/datasets/r/95b1dea1-2891-417b-8865-0584bf393cfc",
+        "metrics": {
+          "views": 2
+        },
+        "mime": "application/octet-stream",
+        "preview_url": null,
+        "schema": {
+          "name": null,
+          "url": null,
+          "version": null
+        },
+        "title": "au.condominium.gml",
+        "type": "other",
+        "url": "https://download.data.public.lu/resources/inspire-annex-i-theme-administrative-units-condominium-2/20261016-135653/au.condominium.gml"
+      },
+      "license": "cc-zero",
+      "bytes": 445282,
+      "sha256": "b3551986f223483f458bcb16d6a98055afa928f658b0e92fd4b68cc43cbfc59d",
+      "root": "{http://www.opengis.net/gml/3.2}FeatureCollection",
+      "coordinate_reference_systems": [
+        "http://www.opengis.net/def/crs/EPSG/0/3035"
+      ],
+      "tag_counts": {
+        "FeatureCollection": 1,
+        "boundedBy": 1,
+        "Envelope": 1,
+        "lowerCorner": 1,
+        "upperCorner": 1,
+        "featureMember": 2,
+        "Condominium": 2,
+        "description": 2,
+        "identifier": 2,
+        "inspireId": 2,
+        "Identifier": 2,
+        "localId": 2,
+        "namespace": 2,
+        "geometry": 2,
+        "MultiSurface": 2,
+        "surfaceMember": 2,
+        "Surface": 2,
+        "patches": 2,
+        "PolygonPatch": 2,
+        "exterior": 2,
+        "LinearRing": 2,
+        "posList": 2,
+        "beginLifespanVersion": 2,
+        "admUnit": 2
+      },
+      "retrieval_failures": [
+        "Python3.7 TLS certificate trust failed, no TLS bypass",
+        "CachedJune10 GMLURL returned404 with normal systemcurl",
+        "Live officialmetadataresolved October16resource, checksumverified"
+      ]
+    },
+    "runtime": {
+      "pyproj": "3.7.2",
+      "proj": "9.5.1",
+      "shapely": "2.1.2"
+    },
+    "transform": {
+      "description": "unavailable until proj_trans is called",
+      "accuracy_metres": -1.0,
+      "source_crs": "EPSG:4326",
+      "target_crs": "EPSG:3035",
+      "gml_axis_order": "northing,easting",
+      "test_axis_order": "easting,northing",
+      "actual_operation_description": "axis order change (2D) + Inverse of ETRS89 to WGS 84 (1) + Europe Equal Area 2001 + axis order change (2D)",
+      "actual_operation_accuracy_metres": 1.0,
+      "actual_operation_definition": "proj=pipeline step proj=unitconvert xy_in=deg xy_out=rad step proj=laea lat_0=52 lon_0=10 x_0=4321000 y_0=3210000 ellps=GRS80"
+    },
+    "results": [
+      {
+        "key_yx": [
+          89084,
+          135686
+        ],
+        "native_latitude": 49.847702664091564,
+        "native_longitude_rational": [
+          828630,
+          131083
+        ],
+        "longitude_float_for_projection": 6.321414676197524,
+        "projected_easting_northing": [
+          4056520.327839493,
+          2977199.403980334
+        ],
+        "comparisons": [
+          {
+            "gml_id": "CO.0",
+            "covers": false,
+            "distance_metres": 26.77821572339074,
+            "boundary_distance_metres": 26.77821572339074,
+            "vertices": 8303
+          },
+          {
+            "gml_id": "CO.1",
+            "covers": false,
+            "distance_metres": 14280.784540336692,
+            "boundary_distance_metres": 14280.784540336692,
+            "vertices": 3638
+          }
+        ]
+      }
+    ],
+    "limits": [
+      "One exact original German-contact key only; remaining original keys preserved.",
+      "Normative latitude reused from single observation; exact rational longitude retained but converted to binary64 for CRS transform.",
+      "Current 2026 cadastral product is an independent comparator, not adoption or proof of 2017 source accuracy.",
+      "Publisher says geometry aligned with Luxembourg units, not Germany.",
+      "No owner change, physical/native authority or completed unresolved outcome."
+    ]
+  },
+  "public_progress_url": "https://github.com/ChengshuLi/WorldAtlas/issues/2643#issuecomment-6306705363",
+  "official_canton_per_key_correction": {
+    "source_result": "inventory/lux-official-canton-2026-exact-comparison.json",
+    "inside_total": 599,
+    "outside_total": 25,
+    "inside_partitions": {
+      "LUX_only": 573,
+      "BEL_LUX": 25,
+      "DEU_LUX": 1
+    },
+    "outside_partitions": {
+      "LUX_only": 25
+    },
+    "correction": "Earlier verbal report incorrectly associated the25 outside keys with25 Belgian contacts. Direct per-key join shows disjoint sets. Worker cause confirmation pending; no qualification based on either grouping.",
+    "distance_result": "inventory/lux-outside-canton-distance-diagnostic.json"
+  },
+  "current_aggregation_membership_witness": {
+    "result": "inventory/lux-current-aggregation-membership-join.json",
+    "canonical_part": "data/geography/part-28.json",
+    "canonical_commit": "5c1919dd1c7e89618398454220b57edf0fa388d2",
+    "canonical_blob": "a9e03cb07194a73f643af85d1e6db94abe3b5fc9",
+    "exact_family_members": 12,
+    "same_in_canonical_metadata_and_semantic_replaces": true
+  }
+}

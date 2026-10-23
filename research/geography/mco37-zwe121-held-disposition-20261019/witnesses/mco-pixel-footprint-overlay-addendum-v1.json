@@ -1,0 +1,1238 @@
+{
+  "accepted_main_commit": "1a137b1b2e8d5d655412c242a5950f3d39e95bbb",
+  "algorithm": {
+    "boundary": "Closed-footprint boundary intersection means any source polygon boundary segment intersects the closed footprint; the separate enters-interior flag excludes mere edge/corner tangency.",
+    "cell_footprint": "Closed axis-aligned EPSG:3857 square projected to CRS84. West/east longitude edges are -180+360*x/N and -180+360*(x+1)/N. North/south latitude edges are atan(sinh(pi*(1-2*y/N)))*180/pi and the same formula at y+1; y increases downward.",
+    "measurement_limit": "Planar topological classification in CRS84 coordinate space; no geodesic area or overlap-area magnitude is computed.",
+    "overlay": "Python binary64; polygon-vs-rectangle segment clipping (Liang-Barsky), even-odd point-in-ring tests, no epsilon or snapping. Positive-area overlap is reported if a corner lies inside, a polygon boundary enters the footprint interior, or a polygon vertex lies strictly inside; full containment requires all corners inside/on and no polygon boundary enters the interior."
+  },
+  "inputs": {
+    "grid_transform": {
+      "coordinate_bits": 19,
+      "git_blob_sha1": "4bbbb83d6d7220b9ffafef3bfa240487fda7427b",
+      "method": "native-linear-evenodd-first-owner-v1",
+      "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas/data/native-ownership/repaired-v7/manifest.json",
+      "sha256": "70204c43deefd1af97c898f120d3638d4b8a3953445df37036d5771a54d718cc",
+      "size": 262166
+    },
+    "owner_helper_vector": {
+      "count": 37,
+      "path": "mco-selected-owner-input-vector-v1.json",
+      "sha256": "a33ce346f7a9b564048c75ea5fedad7cc5184d7c936ac36bc1ee8958797102a2"
+    },
+    "source_polygon": {
+      "compressed_sha256": "1135297a3146d4e445dd6090f5a4812df9ea36249e21bf997b8fa53b6c4d3a23",
+      "crs": "urn:ogc:def:crs:OGC:1.3:CRS84",
+      "decoded_sha256": "51a7b2da1c91213c6dc3b17675ddf0531cde50546fdc583b5aa568755e7e43d2",
+      "geometry_type": "Polygon",
+      "license": "ODbL 1.0",
+      "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas/coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MCO-ADM1-000.bin.gz",
+      "product": "2017 OSM/Wambacher geoBoundaries ADM1",
+      "ring_count": 1,
+      "shape_id": "64170238B96397749018979",
+      "source_identity": "gb:MCO:ADM1"
+    }
+  },
+  "interpretation_limits": [
+    "No legal-boundary or sovereignty claim.",
+    "Geometry overlap is not source qualification, native ownership, accepted repair fitness, or map credit.",
+    "No owner API call was made; no accepted owner tuples are inferred.",
+    "All original holds remain unchanged."
+  ],
+  "results": [
+    {
+      "corner_relations": [
+        "outside",
+        "inside",
+        "inside",
+        "outside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.435746816902281,
+          43.75028583829997
+        ],
+        [
+          7.437119992676401,
+          43.75028583829997
+        ],
+        [
+          7.437119992676401,
+          43.751277758035826
+        ],
+        [
+          7.435746816902281,
+          43.751277758035826
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": false,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": true,
+      "source_polygon_boundary_intersects_closed_footprint": true,
+      "x": 136498,
+      "y": 95580
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.437119992676401,
+          43.75028583829997
+        ],
+        [
+          7.43849316845052,
+          43.75028583829997
+        ],
+        [
+          7.43849316845052,
+          43.751277758035826
+        ],
+        [
+          7.437119992676401,
+          43.751277758035826
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136499,
+      "y": 95580
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "outside",
+        "outside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.434373641128133,
+          43.749293902124705
+        ],
+        [
+          7.435746816902281,
+          43.749293902124705
+        ],
+        [
+          7.435746816902281,
+          43.75028583829997
+        ],
+        [
+          7.434373641128133,
+          43.75028583829997
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": false,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": true,
+      "source_polygon_boundary_intersects_closed_footprint": true,
+      "x": 136497,
+      "y": 95581
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "outside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.435746816902281,
+          43.749293902124705
+        ],
+        [
+          7.437119992676401,
+          43.749293902124705
+        ],
+        [
+          7.437119992676401,
+          43.75028583829997
+        ],
+        [
+          7.435746816902281,
+          43.75028583829997
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": false,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": true,
+      "source_polygon_boundary_intersects_closed_footprint": true,
+      "x": 136498,
+      "y": 95581
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.437119992676401,
+          43.749293902124705
+        ],
+        [
+          7.43849316845052,
+          43.749293902124705
+        ],
+        [
+          7.43849316845052,
+          43.75028583829997
+        ],
+        [
+          7.437119992676401,
+          43.75028583829997
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136499,
+      "y": 95581
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "outside",
+        "outside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.430254113805745,
+          43.74830194951006
+        ],
+        [
+          7.431627289579893,
+          43.74830194951006
+        ],
+        [
+          7.431627289579893,
+          43.749293902124705
+        ],
+        [
+          7.430254113805745,
+          43.749293902124705
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": false,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": true,
+      "source_polygon_boundary_intersects_closed_footprint": true,
+      "x": 136494,
+      "y": 95582
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "outside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.431627289579893,
+          43.74830194951006
+        ],
+        [
+          7.433000465354013,
+          43.74830194951006
+        ],
+        [
+          7.433000465354013,
+          43.749293902124705
+        ],
+        [
+          7.431627289579893,
+          43.749293902124705
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": false,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": true,
+      "source_polygon_boundary_intersects_closed_footprint": true,
+      "x": 136495,
+      "y": 95582
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.433000465354013,
+          43.74830194951006
+        ],
+        [
+          7.434373641128133,
+          43.74830194951006
+        ],
+        [
+          7.434373641128133,
+          43.749293902124705
+        ],
+        [
+          7.433000465354013,
+          43.749293902124705
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136496,
+      "y": 95582
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.434373641128133,
+          43.74830194951006
+        ],
+        [
+          7.435746816902281,
+          43.74830194951006
+        ],
+        [
+          7.435746816902281,
+          43.749293902124705
+        ],
+        [
+          7.434373641128133,
+          43.749293902124705
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136497,
+      "y": 95582
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.435746816902281,
+          43.74830194951006
+        ],
+        [
+          7.437119992676401,
+          43.74830194951006
+        ],
+        [
+          7.437119992676401,
+          43.749293902124705
+        ],
+        [
+          7.435746816902281,
+          43.749293902124705
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136498,
+      "y": 95582
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.437119992676401,
+          43.74830194951006
+        ],
+        [
+          7.43849316845052,
+          43.74830194951006
+        ],
+        [
+          7.43849316845052,
+          43.749293902124705
+        ],
+        [
+          7.437119992676401,
+          43.749293902124705
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136499,
+      "y": 95582
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.430254113805745,
+          43.74730998045604
+        ],
+        [
+          7.431627289579893,
+          43.74730998045604
+        ],
+        [
+          7.431627289579893,
+          43.74830194951006
+        ],
+        [
+          7.430254113805745,
+          43.74830194951006
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136494,
+      "y": 95583
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "outside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.428880938031625,
+          43.74631799496269
+        ],
+        [
+          7.430254113805745,
+          43.74631799496269
+        ],
+        [
+          7.430254113805745,
+          43.74730998045604
+        ],
+        [
+          7.428880938031625,
+          43.74730998045604
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": false,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": true,
+      "source_polygon_boundary_intersects_closed_footprint": true,
+      "x": 136493,
+      "y": 95584
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.428880938031625,
+          43.74532599303002
+        ],
+        [
+          7.430254113805745,
+          43.74532599303002
+        ],
+        [
+          7.430254113805745,
+          43.74631799496269
+        ],
+        [
+          7.428880938031625,
+          43.74631799496269
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136493,
+      "y": 95585
+    },
+    {
+      "corner_relations": [
+        "outside",
+        "inside",
+        "inside",
+        "outside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.427507762257505,
+          43.74433397465807
+        ],
+        [
+          7.428880938031625,
+          43.74433397465807
+        ],
+        [
+          7.428880938031625,
+          43.74532599303002
+        ],
+        [
+          7.427507762257505,
+          43.74532599303002
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": false,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": true,
+      "source_polygon_boundary_intersects_closed_footprint": true,
+      "x": 136492,
+      "y": 95586
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.428880938031625,
+          43.74433397465807
+        ],
+        [
+          7.430254113805745,
+          43.74433397465807
+        ],
+        [
+          7.430254113805745,
+          43.74532599303002
+        ],
+        [
+          7.428880938031625,
+          43.74532599303002
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136493,
+      "y": 95586
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "outside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.427507762257505,
+          43.74334193984686
+        ],
+        [
+          7.428880938031625,
+          43.74334193984686
+        ],
+        [
+          7.428880938031625,
+          43.74433397465807
+        ],
+        [
+          7.427507762257505,
+          43.74433397465807
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": false,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": true,
+      "source_polygon_boundary_intersects_closed_footprint": true,
+      "x": 136492,
+      "y": 95587
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.428880938031625,
+          43.74334193984686
+        ],
+        [
+          7.430254113805745,
+          43.74334193984686
+        ],
+        [
+          7.430254113805745,
+          43.74433397465807
+        ],
+        [
+          7.428880938031625,
+          43.74433397465807
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136493,
+      "y": 95587
+    },
+    {
+      "corner_relations": [
+        "outside",
+        "inside",
+        "inside",
+        "outside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.426134586483386,
+          43.74234988859641
+        ],
+        [
+          7.427507762257505,
+          43.74234988859641
+        ],
+        [
+          7.427507762257505,
+          43.74334193984686
+        ],
+        [
+          7.426134586483386,
+          43.74334193984686
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": false,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": true,
+      "source_polygon_boundary_intersects_closed_footprint": true,
+      "x": 136491,
+      "y": 95588
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.427507762257505,
+          43.74234988859641
+        ],
+        [
+          7.428880938031625,
+          43.74234988859641
+        ],
+        [
+          7.428880938031625,
+          43.74334193984686
+        ],
+        [
+          7.427507762257505,
+          43.74334193984686
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136492,
+      "y": 95588
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.428880938031625,
+          43.74234988859641
+        ],
+        [
+          7.430254113805745,
+          43.74234988859641
+        ],
+        [
+          7.430254113805745,
+          43.74334193984686
+        ],
+        [
+          7.428880938031625,
+          43.74334193984686
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136493,
+      "y": 95588
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "outside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.426134586483386,
+          43.74135782090674
+        ],
+        [
+          7.427507762257505,
+          43.74135782090674
+        ],
+        [
+          7.427507762257505,
+          43.74234988859641
+        ],
+        [
+          7.426134586483386,
+          43.74234988859641
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": false,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": true,
+      "source_polygon_boundary_intersects_closed_footprint": true,
+      "x": 136491,
+      "y": 95589
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.427507762257505,
+          43.74135782090674
+        ],
+        [
+          7.428880938031625,
+          43.74135782090674
+        ],
+        [
+          7.428880938031625,
+          43.74234988859641
+        ],
+        [
+          7.427507762257505,
+          43.74234988859641
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136492,
+      "y": 95589
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.428880938031625,
+          43.74135782090674
+        ],
+        [
+          7.430254113805745,
+          43.74135782090674
+        ],
+        [
+          7.430254113805745,
+          43.74234988859641
+        ],
+        [
+          7.428880938031625,
+          43.74234988859641
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136493,
+      "y": 95589
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "outside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.422015059160998,
+          43.740365736777896
+        ],
+        [
+          7.423388234935118,
+          43.740365736777896
+        ],
+        [
+          7.423388234935118,
+          43.74135782090674
+        ],
+        [
+          7.422015059160998,
+          43.74135782090674
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": false,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": true,
+      "source_polygon_boundary_intersects_closed_footprint": true,
+      "x": 136488,
+      "y": 95590
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.423388234935118,
+          43.740365736777896
+        ],
+        [
+          7.4247614107092375,
+          43.740365736777896
+        ],
+        [
+          7.4247614107092375,
+          43.74135782090674
+        ],
+        [
+          7.423388234935118,
+          43.74135782090674
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136489,
+      "y": 95590
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.4247614107092375,
+          43.740365736777896
+        ],
+        [
+          7.426134586483386,
+          43.740365736777896
+        ],
+        [
+          7.426134586483386,
+          43.74135782090674
+        ],
+        [
+          7.4247614107092375,
+          43.74135782090674
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136490,
+      "y": 95590
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.426134586483386,
+          43.740365736777896
+        ],
+        [
+          7.427507762257505,
+          43.740365736777896
+        ],
+        [
+          7.427507762257505,
+          43.74135782090674
+        ],
+        [
+          7.426134586483386,
+          43.74135782090674
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136491,
+      "y": 95590
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.427507762257505,
+          43.740365736777896
+        ],
+        [
+          7.428880938031625,
+          43.740365736777896
+        ],
+        [
+          7.428880938031625,
+          43.74135782090674
+        ],
+        [
+          7.427507762257505,
+          43.74135782090674
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136492,
+      "y": 95590
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.422015059160998,
+          43.73937363620989
+        ],
+        [
+          7.423388234935118,
+          43.73937363620989
+        ],
+        [
+          7.423388234935118,
+          43.740365736777896
+        ],
+        [
+          7.422015059160998,
+          43.740365736777896
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136488,
+      "y": 95591
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.423388234935118,
+          43.73937363620989
+        ],
+        [
+          7.4247614107092375,
+          43.73937363620989
+        ],
+        [
+          7.4247614107092375,
+          43.740365736777896
+        ],
+        [
+          7.423388234935118,
+          43.740365736777896
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136489,
+      "y": 95591
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.4247614107092375,
+          43.73937363620989
+        ],
+        [
+          7.426134586483386,
+          43.73937363620989
+        ],
+        [
+          7.426134586483386,
+          43.740365736777896
+        ],
+        [
+          7.4247614107092375,
+          43.740365736777896
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136490,
+      "y": 95591
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.426134586483386,
+          43.73937363620989
+        ],
+        [
+          7.427507762257505,
+          43.73937363620989
+        ],
+        [
+          7.427507762257505,
+          43.740365736777896
+        ],
+        [
+          7.426134586483386,
+          43.740365736777896
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136491,
+      "y": 95591
+    },
+    {
+      "corner_relations": [
+        "outside",
+        "outside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.423388234935118,
+          43.736397235871124
+        ],
+        [
+          7.4247614107092375,
+          43.736397235871124
+        ],
+        [
+          7.4247614107092375,
+          43.73738938575647
+        ],
+        [
+          7.423388234935118,
+          43.73738938575647
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": false,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": true,
+      "source_polygon_boundary_intersects_closed_footprint": true,
+      "x": 136489,
+      "y": 95594
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "outside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.423388234935118,
+          43.73242847193934
+        ],
+        [
+          7.4247614107092375,
+          43.73242847193934
+        ],
+        [
+          7.4247614107092375,
+          43.73342068758079
+        ],
+        [
+          7.423388234935118,
+          43.73342068758079
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": false,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": true,
+      "source_polygon_boundary_intersects_closed_footprint": true,
+      "x": 136489,
+      "y": 95598
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "outside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.4247614107092375,
+          43.73242847193934
+        ],
+        [
+          7.426134586483386,
+          43.73242847193934
+        ],
+        [
+          7.426134586483386,
+          43.73342068758079
+        ],
+        [
+          7.4247614107092375,
+          43.73342068758079
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": false,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": true,
+      "source_polygon_boundary_intersects_closed_footprint": true,
+      "x": 136490,
+      "y": 95598
+    },
+    {
+      "corner_relations": [
+        "inside",
+        "inside",
+        "inside",
+        "inside"
+      ],
+      "footprint_corners_lonlat": [
+        [
+          7.423388234935118,
+          43.73143623985894
+        ],
+        [
+          7.4247614107092375,
+          43.73143623985894
+        ],
+        [
+          7.4247614107092375,
+          43.73242847193934
+        ],
+        [
+          7.423388234935118,
+          43.73242847193934
+        ]
+      ],
+      "footprint_fully_contained_in_polygon": true,
+      "positive_area_overlap_with_polygon": true,
+      "source_polygon_boundary_enters_footprint_interior": false,
+      "source_polygon_boundary_intersects_closed_footprint": false,
+      "x": 136489,
+      "y": 95599
+    }
+  ],
+  "schema": "worldatlas.mco-pixel-footprint-source-overlay-geometry-only.v1",
+  "scope": "Geometry-only overlay of the 37 exact native-grid cell footprints against one pinned Monaco source polygon.",
+  "summary": {
+    "footprints": 37,
+    "fully_contained": 23,
+    "no_positive_area_overlap": 0,
+    "partial_overlap": 14,
+    "polygon_boundary_intersects_closed_footprint": 14,
+    "positive_area_overlap": 37
+  }
+}

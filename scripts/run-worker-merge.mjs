@@ -13,6 +13,11 @@ if (process.env.GITHUB_REF !== 'refs/heads/main' || !/^[-\w.]+\/[-\w.]+$/.test(r
 const number = Number(input.pr_number), phase = process.env.MERGE_PHASE;
 if (!['prepare','merge'].includes(phase) || !Number.isSafeInteger(number) || number < 1 ||
     !/^[a-f0-9]{40}$/.test(input.expected_head ?? '') || !/^[-a-zA-Z0-9]{16,100}$/.test(input.request_id ?? '')) throw Error('Invalid merge request');
+// New workflow definitions require intent before constructing any API client.
+// Already-queued older definitions lack this opt-in and retain their contract.
+if (phase === 'prepare' && process.env.REVIEWED_TESTS_REQUIRED === 'true' &&
+    (typeof input.reviewed_tests !== 'string' || !input.reviewed_tests.trim()))
+  throw Error('Required reviewed_tests: supply exact plan.request JSON, auto, or complete');
 const accounting=requestAccounting(phase);
 // Actions owns the job timeout. Bound each actual HTTP request and retry
 // through the shared client; no separate job-metadata admission is needed.
@@ -64,7 +69,6 @@ try {
   if (error.candidateCleanup) result.candidate_cleanup = error.candidateCleanup;
   if (error.candidateDiagnostics) result.candidate_diagnostics = error.candidateDiagnostics;
   result.status = /conflict|changes reviewed bytes|substantive review/.test(error.message) ? 'intervention-required' : 'not-merged';
-  result.retryable = /resubmit unchanged head/.test(error.message) || (quotaDelay(error)??quotaDelay(error.quotaCause))!==null;
   if((quotaDelay(error)??quotaDelay(error.quotaCause))!==null)result.quota_retry_at=new Date(Date.now()+(quotaDelay(error)??quotaDelay(error.quotaCause))).toISOString();
   // A lost merge response or canceled predecessor can still have committed.
   // Reconcile the actual PR once; never repeat the merge write here.

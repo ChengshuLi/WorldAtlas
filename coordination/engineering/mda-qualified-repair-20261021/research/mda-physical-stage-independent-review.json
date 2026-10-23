@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "kind": "independent MDA physical-stage input identity and coverage check",
+  "package_id": "gb-MDA-ADM1--repair-evaluation",
+  "stage_path": "inventory/mda-physical-preparation/original-stage-inputs.json",
+  "stage_bytes": 192286,
+  "stage_sha256": "dd49cdbe36f7db09c47145d8f37065262947cd8352b604b351f7f7488e57e5ec",
+  "original_scope": {
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "cells": 1986,
+    "land": 1986,
+    "water": 0,
+    "intervals": 539,
+    "owners": 16
+  },
+  "candidate_and_complement": {
+    "candidate_MDA_only_unique_source_matches": 1853,
+    "adverse_complement": 133,
+    "adverse_partition": {
+      "MDA_UKR_matched": 46,
+      "MDA_only_nonmatch": 65,
+      "UKR_contact_nonmatch": 22
+    }
+  },
+  "stage_summary": {
+    "rows": 18,
+    "unique_target_ids": 18,
+    "MDA_positive_source_features": 16,
+    "UKR_contact_context_features": 2,
+    "all_rows_in_frozen_queue_source_feature_order": true,
+    "all_consumed_features_exactly_equal_to_full_authenticated_archived_source_features": true,
+    "canonical_current_target_binding_included": false
+  },
+  "source_family_pins": [
+    {
+      "family": "MDA",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MDA-ADM1-000.bin.gz",
+      "blob_oid": "82738c7c084a39168cfc6e7f9cc455753a5ee100",
+      "encoded_bytes": 74109,
+      "encoded_sha256": "9e28a612d0c3d7b0c8483d2078e9ba3dc844416b56725a29576816373ab91d03",
+      "decoded_bytes": 317753,
+      "decoded_sha256": "b9f85b5b94d053cd3fc7f60d9823ec2ba9cd37b780f4935a778203d67cb5f523",
+      "feature_count": 37
+    },
+    {
+      "family": "UKR",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-UKR-ADM1-000.bin.gz",
+      "blob_oid": "c312a11650e4cde33bdeb047649c9f730b3a4433",
+      "encoded_bytes": 248309,
+      "encoded_sha256": "4c3791c4904b62ede78e6e6ba461f1b987ce80baf281284395aeed33df2a3908",
+      "decoded_bytes": 761290,
+      "decoded_sha256": "4a5947e7497574d51f93255dfa7e03dce0c7acf6ecee52d25773a5205854a399",
+      "feature_count": 27
+    }
+  ],
+  "whole_target_operand_check": {
+    "source_geometry_is_full_original_feature": true,
+    "no_clipping_or_reserialization_detected_in_stage": true,
+    "rows_are_physical_context_for_every_original_source_feature_in_scope": true,
+    "all_1986_original_keys_remain_in_physical_run_denominator": true,
+    "physical_support_and_water_masks": {
+      "physical_support": {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-022.json.gz",
+        "git_blob_oid": "6473fa0629f974d76909d8d5db126ab6fea02cfd",
+        "encoded_bytes": 552211,
+        "decoded_bytes": 2370722,
+        "decoded_sha256": "815ab60ec3bfbda0c2734bc4d4f96b384dbee468abca4e5f4ac0dcbf04d04fbb"
+      },
+      "inland_water_support": {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-022.json.gz",
+        "git_blob_oid": "81411b27437b95b18314fbeb8c7e6a40f0e51c94",
+        "encoded_bytes": 120031,
+        "decoded_bytes": 550270,
+        "decoded_sha256": "8e24dc8a720d6e71dd546dc3cf627d37c90afd4fc76ebeb1afc15512e2a6a891"
+      }
+    },
+    "shared_stock_operand_count": 24,
+    "shared_stock_runtime_source": "Readiness identifies a retained LIE stock physical config; final admitted config/runtime hashes remain to be independently checked after MDA stage binding."
+  },
+  "not_established": [
+    "No physical producer has yet run.",
+    "No stage-to-current-canonical target geometry join is claimed; readiness identifies that as a separate downstream source-evidence join.",
+    "No native diagnostic or authority result exists.",
+    "The archived 2020 source supports only the source-specific candidate interpretation; it does not prove current legal/cadastral accuracy.",
+    "The 133 adverse keys are not removed or reclassified."
+  ],
+  "stage_rows": [
+    {
+      "family": "mda",
+      "target": "gb:MDA:ADM1:25212430B51059014460141",
+      "shapeName": "Cahul",
+      "source_shapeID": "25212430B51059014460141",
+      "whole_feature_equal_to_archived_body": true
+    },
+    {
+      "family": "mda",
+      "target": "gb:MDA:ADM1:25212430B55748044124793",
+      "shapeName": "Gagauzia",
+      "source_shapeID": "25212430B55748044124793",
+      "whole_feature_equal_to_archived_body": true
+    },
+    {
+      "family": "mda",
+      "target": "gb:MDA:ADM1:25212430B43456438192105",
+      "shapeName": "Taraclia",
+      "source_shapeID": "25212430B43456438192105",
+      "whole_feature_equal_to_archived_body": true
+    },
+    {
+      "family": "mda",
+      "target": "gb:MDA:ADM1:25212430B81482951983667",
+      "shapeName": "Cantemir",
+      "source_shapeID": "25212430B81482951983667",
+      "whole_feature_equal_to_archived_body": true
+    },
+    {
+      "family": "mda",
+      "target": "gb:MDA:ADM1:25212430B269818099865",
+      "shapeName": "Leova",
+      "source_shapeID": "25212430B269818099865",
+      "whole_feature_equal_to_archived_body": true
+    },
+    {
+      "family": "mda",
+      "target": "gb:MDA:ADM1:25212430B51243918943413",
+      "shapeName": "Cimislia",
+      "source_shapeID": "25212430B51243918943413",
+      "whole_feature_equal_to_archived_body": true
+    },
+    {
+      "family": "mda",
+      "target": "gb:MDA:ADM1:25212430B10989766506063",
+      "shapeName": "Stefan Voda",
+      "source_shapeID": "25212430B10989766506063",
+      "whole_feature_equal_to_archived_body": true
+    },
+    {
+      "family": "mda",
+      "target": "gb:MDA:ADM1:25212430B31479954216778",
+      "shapeName": "Causeni",
+      "source_shapeID": "25212430B31479954216778",
+      "whole_feature_equal_to_archived_body": true
+    },
+    {
+      "family": "mda",
+      "target": "gb:MDA:ADM1:25212430B73317679220215",
+      "shapeName": "Hincesti",
+      "source_shapeID": "25212430B73317679220215",
+      "whole_feature_equal_to_archived_body": true
+    },
+    {
+      "family": "mda",
+      "target": "gb:MDA:ADM1:25212430B5738533784066",
+      "shapeName": "Nisporeni",
+      "source_shapeID": "25212430B5738533784066",
+      "whole_feature_equal_to_archived_body": true
+    },
+    {
+      "family": "mda",
+      "target": "gb:MDA:ADM1:25212430B23943377724140",
+      "shapeName": "Ungheni",
+      "source_shapeID": "25212430B23943377724140",
+      "whole_feature_equal_to_archived_body": true
+    },
+    {
+      "family": "mda",
+      "target": "gb:MDA:ADM1:25212430B22111314945643",
+      "shapeName": "Transnistria",
+      "source_shapeID": "25212430B22111314945643",
+      "whole_feature_equal_to_archived_body": true
+    },
+    {
+      "family": "mda",
+      "target": "gb:MDA:ADM1:25212430B61222791146584",
+      "shapeName": "Falesti",
+      "source_shapeID": "25212430B61222791146584",
+      "whole_feature_equal_to_archived_body": true
+    },
+    {
+      "family": "mda",
+      "target": "gb:MDA:ADM1:25212430B89307550133505",
+      "shapeName": "Glodeni",
+      "source_shapeID": "25212430B89307550133505",
+      "whole_feature_equal_to_archived_body": true
+    },
+    {
+      "family": "mda",
+      "target": "gb:MDA:ADM1:25212430B65458906379390",
+      "shapeName": "Edinet",
+      "source_shapeID": "25212430B65458906379390",
+      "whole_feature_equal_to_archived_body": true
+    },
+    {
+      "family": "mda",
+      "target": "gb:MDA:ADM1:25212430B70903588336793",
+      "shapeName": "Soroca",
+      "source_shapeID": "25212430B70903588336793",
+      "whole_feature_equal_to_archived_body": true
+    },
+    {
+      "family": "ukr",
+      "target": "gb:UKR:ADM1:14850775B53240635394722",
+      "shapeName": "Odessa Oblast",
+      "source_shapeID": "14850775B53240635394722",
+      "whole_feature_equal_to_archived_body": true
+    },
+    {
+      "family": "ukr",
+      "target": "gb:UKR:ADM1:14850775B93300237551625",
+      "shapeName": "Vinnytsia Oblast",
+      "source_shapeID": "14850775B93300237551625",
+      "whole_feature_equal_to_archived_body": true
+    }
+  ],
+  "review_conclusion": "The prepared 18-row stage is correctly bound to the exact 16 MDA source features and two UKR contact features in the original queue, with complete untouched feature geometry from the authenticated source archives. It is technically appropriate as the bounded full-target physical input over the full 1,986 original scope, subject to verification of the final admitted stock config/runtime and produced report. This review does not execute the producer or qualify the 1,853 candidate."
+}

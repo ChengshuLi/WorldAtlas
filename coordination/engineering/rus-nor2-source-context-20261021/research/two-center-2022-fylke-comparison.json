@@ -1,0 +1,101 @@
+{
+  "method": "Streamed the exact 2022 GML and tested only the two pre-existing native center coordinates against each of the complete 11 Fylke polygons. EPSG:25833 GRS80 UTM forward formula, even-odd point-in-ring, polygon patch union with interiors excluded. No geometry was repaired, simplified, or redistributed.",
+  "source": {
+    "url": "https://nedlasting.geonorge.no/geonorge/Basisdata/Fylker2022/GML/Basisdata_0000_Norge_25833_Fylker2022_GML.zip",
+    "zip_bytes": 3425371,
+    "zip_sha256": "0162fff92a3354104a5e5380c82836ab50d4f8353de1a2d28f75d8a345746ad7",
+    "member": "Basisdata_0000_Norge_25833_Fylker2022_GML.gml",
+    "decoded_bytes": 37491789,
+    "feature_counts_by_type": {
+      "AvtaltAvgrensningslinje": 9,
+      "Fylke": 11,
+      "Fylkesgrense": 18892,
+      "Grunnlinje": 80,
+      "Riksgrense": 237,
+      "Territorialgrense": 93
+    },
+    "fylke_feature_count": 11,
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "license_and_terms_limit": "The feed says rights=Kartverket; Kartverket's general free-product terms state CC BY 4.0 and attribution, but the dataset-specific Data Norge record page returned HTTP 404 and was not independently read."
+  },
+  "tested_points": [
+    {
+      "native_key_xy": [
+        152965,
+        59862
+      ],
+      "retained_center_lon_lat": [
+        30.048518877352535,
+        69.4336981394968
+      ],
+      "transformed_center_epsg25833_metres": [
+        1084844.5322013227,
+        7775150.282410879
+      ],
+      "matching_2022_fylke_features": [
+        {
+          "fylkesnummer": [
+            "54"
+          ],
+          "fylkesnavn": [
+            "Troms og Finnmark nor 1",
+            "Romsa ja Finnmárku sme 2",
+            "Tromssa ja Finmarkku fkv 3"
+          ],
+          "local_id": "545cbfe3-2f34-4792-a9e9-135375accefd",
+          "gml_id": "id923ec8b1-22ae-4c8c-a1c5-9f12f026966c",
+          "polygon_coordinate_structure_sha256": "f7b4870a8218505b267127e35ee33c0110b2fb1fba26497d57d28bf5081d49ef"
+        }
+      ],
+      "nearest_2022_fylke_boundary_distance_m": 51.034476506651856,
+      "nearest_boundary_feature": {
+        "fylkesnummer": [
+          "54"
+        ],
+        "fylkesnavn": [
+          "Troms og Finnmark nor 1",
+          "Romsa ja Finnmárku sme 2",
+          "Tromssa ja Finmarkku fkv 3"
+        ],
+        "local_id": "545cbfe3-2f34-4792-a9e9-135375accefd",
+        "gml_id": "id923ec8b1-22ae-4c8c-a1c5-9f12f026966c",
+        "polygon_coordinate_structure_sha256": "f7b4870a8218505b267127e35ee33c0110b2fb1fba26497d57d28bf5081d49ef"
+      }
+    },
+    {
+      "native_key_xy": [
+        152972,
+        59849
+      ],
+      "retained_center_lon_lat": [
+        30.058131107771402,
+        69.43996822160625
+      ],
+      "transformed_center_epsg25833_metres": [
+        1085040.0010330724,
+        7775923.530136618
+      ],
+      "matching_2022_fylke_features": [],
+      "nearest_2022_fylke_boundary_distance_m": 27.553042234129784,
+      "nearest_boundary_feature": {
+        "fylkesnummer": [
+          "54"
+        ],
+        "fylkesnavn": [
+          "Troms og Finnmark nor 1",
+          "Romsa ja Finnmárku sme 2",
+          "Tromssa ja Finmarkku fkv 3"
+        ],
+        "local_id": "545cbfe3-2f34-4792-a9e9-135375accefd",
+        "gml_id": "id923ec8b1-22ae-4c8c-a1c5-9f12f026966c",
+        "polygon_coordinate_structure_sha256": "f7b4870a8218505b267127e35ee33c0110b2fb1fba26497d57d28bf5081d49ef"
+      }
+    }
+  ],
+  "limits": [
+    "Point-in-polygon results are geometric comparisons to this 2022 source, not legal or sovereign determinations.",
+    "Boundary distances are computed from transformed centers with a local GRS80 UTM formula and are not stated source accuracy; no independent CRS library was installed.",
+    "The comparison does not establish other territorial/physical predicates or authorize a native assignment.",
+    "Original 2022 geoBoundaries source was the simplified Kartverket-derived product, distinct from this full official Kartverket GML extraction."
+  ]
+}

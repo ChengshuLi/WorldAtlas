@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "original_package": "gb-RUS-ADM2--repair-evaluation",
+  "full_original_cells": 2566967,
+  "pending_root_count": 12,
+  "candidate_requested": 7,
+  "diagnostic_supported": 7,
+  "diagnostic_held": 0,
+  "constructor_qualified": 7,
+  "separate_adverse_keys": 5,
+  "root_credit_requested": false,
+  "current_owner_zero_established": true,
+  "selected_final_bank_changed": false,
+  "physical_producer_repeated": false,
+  "owner_observation_repeated": false,
+  "input_commit": "230db563a919a17808c65f6227a9dde495c80f02",
+  "accepted_code_baseline": "9e3637776d2593f0a024adee41a19e319e3b6385",
+  "authority_initial_failure": {
+    "result": "Nonordinary native scratch directory",
+    "output_destination_existed_after_failure": false,
+    "correction": "Use existing ordinary task-native-scratch via TMPDIR; no code changes or weakened guard",
+    "retry_result": "qualified_cells=7"
+  },
+  "remaining": [
+    "Version-2 finalization is blocked by missing existing gh authentication for the accepted helper’s exact public object acquisition; no destination was created",
+    "Independent exact-public-head review after finalization",
+    "One normal stock delivery after review",
+    "Root scientific acceptance remains separate"
+  ],
+  "independent_review": {
+    "path": "coordination/engineering/rus-ukr12-continuation-20261023/seven-key-independent-review-20261023.json",
+    "sha256": "a1c55bb713a633b4157937031eb2631e3fac5b57e9184f7898f2c61299359e03",
+    "result": "all 12 pending keys effective_selected_owner=0; historical fields remain null; report scientific_qualification=false"
+  },
+  "finalization_attempt": {
+    "phase": "finalize",
+    "config": "coordination/engineering/rus-ukr12-continuation-20261023/finalize-config-001.json",
+    "command": "node scripts/prepare-delivery-handoff.mjs finalize coordination/engineering/rus-ukr12-continuation-20261023/finalize-config-001.json .cache/delivery-handoff/rus7-finalize-001",
+    "result": "failed before output publication",
+    "stderr": "no oauth token found for github.com; Geography object acquisition failed",
+    "destination_created": false,
+    "authorization_route": "No credential changes/login; no alternate route attempted",
+    "cli": {
+      "executable": "/usr/local/bin/gh",
+      "config_dir_env": "GH_CONFIG_DIR unset (default CLI configuration)",
+      "account": "ChengshuLi (active default account; stored credential reported invalid)",
+      "same_repository_remote": "https://github.com/ChengshuLi/WorldAtlas.git"
+    },
+    "missing_object_inventory": {
+      "path": "coordination/engineering/rus-ukr12-continuation-20261023/finalize-001/missing-object-manifest.json",
+      "missing_blobs": 71,
+      "missing_bytes": 137418243,
+      "manifest_sha256": "6ecaf9b40fe37fbae37cb6c2d5fc380eee24271d64e6b28bc8920c0358b4c0ac",
+      "target_commit": "9e3637776d2593f0a024adee41a19e319e3b6385",
+      "target_repo": "ChengshuLi/WorldAtlas",
+      "fetch_not_executed": true
+    }
+  }
+}

@@ -1,0 +1,840 @@
+{
+  "version": 1,
+  "kind": "dji-complete-source-identity-parent-context-join-v1",
+  "repository_commit": "261e709ac9e1837b3399537f9f53cfa6550e3a01",
+  "queue_internal_baseline": {
+    "source_package_queue_current_commit": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+    "lineage_current_commit": "a61b6f9e7f88b1da380e3a834f89d7509132ed71"
+  },
+  "package_id": "gb-DJI-ADM2--repair-evaluation",
+  "denominator": {
+    "land_cells": 683,
+    "interval_segments": 394,
+    "target_owners": 9,
+    "all_ADM1_source_features": 6,
+    "all_ADM2_source_features": 11
+  },
+  "targets": [
+    {
+      "target_owner_index": 16531,
+      "target_location": {
+        "id": "gb:DJI:ADM2:41766387B13463549189785",
+        "name": "Tadjourah",
+        "source_id": "gb:DJI:ADM2",
+        "source_atoms": [
+          "gb:DJI:ADM2:41766387B13463549189785"
+        ],
+        "province_index": 4464,
+        "province_id": "framework:province:tadjourah:1f45cfb67fdb"
+      },
+      "source_feature_join": {
+        "source_id": "gb:DJI:ADM2:41766387B13463549189785",
+        "family": "gb:DJI:ADM2",
+        "source_index": 21044,
+        "family_index": 88,
+        "ordinal": 5,
+        "shapeID": "41766387B13463549189785",
+        "shapeName": "Tadjourah",
+        "whole_family_artifact": "dji-adm2-source-features.geojson",
+        "join_basis": "exact lineage source_atoms = roster source_id = family prefix + Feature.properties.shapeID"
+      },
+      "parent_context_join": {
+        "province_id": "framework:province:tadjourah:1f45cfb67fdb",
+        "province_index": 4464,
+        "parent_slug_from_id": "tadjourah",
+        "matching_adm1_source_ids": [
+          "gb:DJI:ADM1:25444519B6046592555533"
+        ],
+        "join_basis": "parent id/index from lineage; ADM1 candidates by normalized shapeName-to-province-id slug equality only",
+        "source_adm2_explicit_parent_property": false
+      },
+      "qualification": "identity/context join only; source applicability, authority and physical support unresolved"
+    },
+    {
+      "target_owner_index": 16532,
+      "target_location": {
+        "id": "gb:DJI:ADM2:41766387B22586556456338",
+        "name": "Dorra",
+        "source_id": "gb:DJI:ADM2",
+        "source_atoms": [
+          "gb:DJI:ADM2:41766387B22586556456338"
+        ],
+        "province_index": 4464,
+        "province_id": "framework:province:tadjourah:1f45cfb67fdb"
+      },
+      "source_feature_join": {
+        "source_id": "gb:DJI:ADM2:41766387B22586556456338",
+        "family": "gb:DJI:ADM2",
+        "source_index": 21040,
+        "family_index": 88,
+        "ordinal": 1,
+        "shapeID": "41766387B22586556456338",
+        "shapeName": "Dorra",
+        "whole_family_artifact": "dji-adm2-source-features.geojson",
+        "join_basis": "exact lineage source_atoms = roster source_id = family prefix + Feature.properties.shapeID"
+      },
+      "parent_context_join": {
+        "province_id": "framework:province:tadjourah:1f45cfb67fdb",
+        "province_index": 4464,
+        "parent_slug_from_id": "tadjourah",
+        "matching_adm1_source_ids": [
+          "gb:DJI:ADM1:25444519B6046592555533"
+        ],
+        "join_basis": "parent id/index from lineage; ADM1 candidates by normalized shapeName-to-province-id slug equality only",
+        "source_adm2_explicit_parent_property": false
+      },
+      "qualification": "identity/context join only; source applicability, authority and physical support unresolved"
+    },
+    {
+      "target_owner_index": 16533,
+      "target_location": {
+        "id": "gb:DJI:ADM2:41766387B51204577272085",
+        "name": "Obock",
+        "source_id": "gb:DJI:ADM2",
+        "source_atoms": [
+          "gb:DJI:ADM2:41766387B51204577272085"
+        ],
+        "province_index": 3447,
+        "province_id": "framework:province:obock:0bfea9b54a2f"
+      },
+      "source_feature_join": {
+        "source_id": "gb:DJI:ADM2:41766387B51204577272085",
+        "family": "gb:DJI:ADM2",
+        "source_index": 21041,
+        "family_index": 88,
+        "ordinal": 2,
+        "shapeID": "41766387B51204577272085",
+        "shapeName": "Obock",
+        "whole_family_artifact": "dji-adm2-source-features.geojson",
+        "join_basis": "exact lineage source_atoms = roster source_id = family prefix + Feature.properties.shapeID"
+      },
+      "parent_context_join": {
+        "province_id": "framework:province:obock:0bfea9b54a2f",
+        "province_index": 3447,
+        "parent_slug_from_id": "obock",
+        "matching_adm1_source_ids": [
+          "gb:DJI:ADM1:25444519B8926294731251"
+        ],
+        "join_basis": "parent id/index from lineage; ADM1 candidates by normalized shapeName-to-province-id slug equality only",
+        "source_adm2_explicit_parent_property": false
+      },
+      "qualification": "identity/context join only; source applicability, authority and physical support unresolved"
+    },
+    {
+      "target_owner_index": 16536,
+      "target_location": {
+        "id": "gb:DJI:ADM2:41766387B73347270872705",
+        "name": "As Eyla",
+        "source_id": "gb:DJI:ADM2",
+        "source_atoms": [
+          "gb:DJI:ADM2:41766387B73347270872705"
+        ],
+        "province_index": 1518,
+        "province_id": "framework:province:dikhil:243fa3eab41a"
+      },
+      "source_feature_join": {
+        "source_id": "gb:DJI:ADM2:41766387B73347270872705",
+        "family": "gb:DJI:ADM2",
+        "source_index": 21049,
+        "family_index": 88,
+        "ordinal": 10,
+        "shapeID": "41766387B73347270872705",
+        "shapeName": "As Eyla",
+        "whole_family_artifact": "dji-adm2-source-features.geojson",
+        "join_basis": "exact lineage source_atoms = roster source_id = family prefix + Feature.properties.shapeID"
+      },
+      "parent_context_join": {
+        "province_id": "framework:province:dikhil:243fa3eab41a",
+        "province_index": 1518,
+        "parent_slug_from_id": "dikhil",
+        "matching_adm1_source_ids": [
+          "gb:DJI:ADM1:25444519B52373268249817"
+        ],
+        "join_basis": "parent id/index from lineage; ADM1 candidates by normalized shapeName-to-province-id slug equality only",
+        "source_adm2_explicit_parent_property": false
+      },
+      "qualification": "identity/context join only; source applicability, authority and physical support unresolved"
+    },
+    {
+      "target_owner_index": 16537,
+      "target_location": {
+        "id": "gb:DJI:ADM2:41766387B74076707162819",
+        "name": "YobokiI",
+        "source_id": "gb:DJI:ADM2",
+        "source_atoms": [
+          "gb:DJI:ADM2:41766387B74076707162819"
+        ],
+        "province_index": 1518,
+        "province_id": "framework:province:dikhil:243fa3eab41a"
+      },
+      "source_feature_join": {
+        "source_id": "gb:DJI:ADM2:41766387B74076707162819",
+        "family": "gb:DJI:ADM2",
+        "source_index": 21045,
+        "family_index": 88,
+        "ordinal": 6,
+        "shapeID": "41766387B74076707162819",
+        "shapeName": "YobokiI",
+        "whole_family_artifact": "dji-adm2-source-features.geojson",
+        "join_basis": "exact lineage source_atoms = roster source_id = family prefix + Feature.properties.shapeID"
+      },
+      "parent_context_join": {
+        "province_id": "framework:province:dikhil:243fa3eab41a",
+        "province_index": 1518,
+        "parent_slug_from_id": "dikhil",
+        "matching_adm1_source_ids": [
+          "gb:DJI:ADM1:25444519B52373268249817"
+        ],
+        "join_basis": "parent id/index from lineage; ADM1 candidates by normalized shapeName-to-province-id slug equality only",
+        "source_adm2_explicit_parent_property": false
+      },
+      "qualification": "identity/context join only; source applicability, authority and physical support unresolved"
+    },
+    {
+      "target_owner_index": 16538,
+      "target_location": {
+        "id": "gb:DJI:ADM2:41766387B83981523687012",
+        "name": "Djibouti",
+        "source_id": "gb:DJI:ADM2",
+        "source_atoms": [
+          "gb:DJI:ADM2:41766387B83981523687012"
+        ],
+        "province_index": 658,
+        "province_id": "framework:province:arta:7af99b906662"
+      },
+      "source_feature_join": {
+        "source_id": "gb:DJI:ADM2:41766387B83981523687012",
+        "family": "gb:DJI:ADM2",
+        "source_index": 21046,
+        "family_index": 88,
+        "ordinal": 7,
+        "shapeID": "41766387B83981523687012",
+        "shapeName": "Djibouti",
+        "whole_family_artifact": "dji-adm2-source-features.geojson",
+        "join_basis": "exact lineage source_atoms = roster source_id = family prefix + Feature.properties.shapeID"
+      },
+      "parent_context_join": {
+        "province_id": "framework:province:arta:7af99b906662",
+        "province_index": 658,
+        "parent_slug_from_id": "arta",
+        "matching_adm1_source_ids": [
+          "gb:DJI:ADM1:25444519B1274960689098"
+        ],
+        "join_basis": "parent id/index from lineage; ADM1 candidates by normalized shapeName-to-province-id slug equality only",
+        "source_adm2_explicit_parent_property": false
+      },
+      "qualification": "identity/context join only; source applicability, authority and physical support unresolved"
+    },
+    {
+      "target_owner_index": 16539,
+      "target_location": {
+        "id": "gb:DJI:ADM2:41766387B9467441741428",
+        "name": "Dilkhil",
+        "source_id": "gb:DJI:ADM2",
+        "source_atoms": [
+          "gb:DJI:ADM2:41766387B9467441741428"
+        ],
+        "province_index": 1518,
+        "province_id": "framework:province:dikhil:243fa3eab41a"
+      },
+      "source_feature_join": {
+        "source_id": "gb:DJI:ADM2:41766387B9467441741428",
+        "family": "gb:DJI:ADM2",
+        "source_index": 21047,
+        "family_index": 88,
+        "ordinal": 8,
+        "shapeID": "41766387B9467441741428",
+        "shapeName": "Dilkhil",
+        "whole_family_artifact": "dji-adm2-source-features.geojson",
+        "join_basis": "exact lineage source_atoms = roster source_id = family prefix + Feature.properties.shapeID"
+      },
+      "parent_context_join": {
+        "province_id": "framework:province:dikhil:243fa3eab41a",
+        "province_index": 1518,
+        "parent_slug_from_id": "dikhil",
+        "matching_adm1_source_ids": [
+          "gb:DJI:ADM1:25444519B52373268249817"
+        ],
+        "join_basis": "parent id/index from lineage; ADM1 candidates by normalized shapeName-to-province-id slug equality only",
+        "source_adm2_explicit_parent_property": false
+      },
+      "qualification": "identity/context join only; source applicability, authority and physical support unresolved"
+    },
+    {
+      "target_owner_index": 16540,
+      "target_location": {
+        "id": "gb:DJI:ADM2:41766387B97155389424645",
+        "name": "Balha",
+        "source_id": "gb:DJI:ADM2",
+        "source_atoms": [
+          "gb:DJI:ADM2:41766387B97155389424645"
+        ],
+        "province_index": 4464,
+        "province_id": "framework:province:tadjourah:1f45cfb67fdb"
+      },
+      "source_feature_join": {
+        "source_id": "gb:DJI:ADM2:41766387B97155389424645",
+        "family": "gb:DJI:ADM2",
+        "source_index": 21043,
+        "family_index": 88,
+        "ordinal": 4,
+        "shapeID": "41766387B97155389424645",
+        "shapeName": "Balha",
+        "whole_family_artifact": "dji-adm2-source-features.geojson",
+        "join_basis": "exact lineage source_atoms = roster source_id = family prefix + Feature.properties.shapeID"
+      },
+      "parent_context_join": {
+        "province_id": "framework:province:tadjourah:1f45cfb67fdb",
+        "province_index": 4464,
+        "parent_slug_from_id": "tadjourah",
+        "matching_adm1_source_ids": [
+          "gb:DJI:ADM1:25444519B6046592555533"
+        ],
+        "join_basis": "parent id/index from lineage; ADM1 candidates by normalized shapeName-to-province-id slug equality only",
+        "source_adm2_explicit_parent_property": false
+      },
+      "qualification": "identity/context join only; source applicability, authority and physical support unresolved"
+    },
+    {
+      "target_owner_index": 16541,
+      "target_location": {
+        "id": "gb:DJI:ADM2:41766387B98599288227121",
+        "name": "Alaili Dadda",
+        "source_id": "gb:DJI:ADM2",
+        "source_atoms": [
+          "gb:DJI:ADM2:41766387B98599288227121"
+        ],
+        "province_index": 3447,
+        "province_id": "framework:province:obock:0bfea9b54a2f"
+      },
+      "source_feature_join": {
+        "source_id": "gb:DJI:ADM2:41766387B98599288227121",
+        "family": "gb:DJI:ADM2",
+        "source_index": 21039,
+        "family_index": 88,
+        "ordinal": 0,
+        "shapeID": "41766387B98599288227121",
+        "shapeName": "Alaili Dadda",
+        "whole_family_artifact": "dji-adm2-source-features.geojson",
+        "join_basis": "exact lineage source_atoms = roster source_id = family prefix + Feature.properties.shapeID"
+      },
+      "parent_context_join": {
+        "province_id": "framework:province:obock:0bfea9b54a2f",
+        "province_index": 3447,
+        "parent_slug_from_id": "obock",
+        "matching_adm1_source_ids": [
+          "gb:DJI:ADM1:25444519B8926294731251"
+        ],
+        "join_basis": "parent id/index from lineage; ADM1 candidates by normalized shapeName-to-province-id slug equality only",
+        "source_adm2_explicit_parent_property": false
+      },
+      "qualification": "identity/context join only; source applicability, authority and physical support unresolved"
+    }
+  ],
+  "distinct_parent_id_refs": [
+    {
+      "parent_id": "framework:province:tadjourah:1f45cfb67fdb",
+      "province_index": 4464,
+      "parent_slug_from_id": "tadjourah",
+      "member_target_indices": [
+        16531,
+        16532,
+        16540
+      ]
+    },
+    {
+      "parent_id": "framework:province:obock:0bfea9b54a2f",
+      "province_index": 3447,
+      "parent_slug_from_id": "obock",
+      "member_target_indices": [
+        16533,
+        16541
+      ]
+    },
+    {
+      "parent_id": "framework:province:dikhil:243fa3eab41a",
+      "province_index": 1518,
+      "parent_slug_from_id": "dikhil",
+      "member_target_indices": [
+        16536,
+        16537,
+        16539
+      ]
+    },
+    {
+      "parent_id": "framework:province:arta:7af99b906662",
+      "province_index": 658,
+      "parent_slug_from_id": "arta",
+      "member_target_indices": [
+        16538
+      ]
+    }
+  ],
+  "complete_source_family_roster": [
+    {
+      "source_id": "gb:DJI:ADM1:25444519B7681288134121",
+      "family": "gb:DJI:ADM1",
+      "source_index": 21033,
+      "family_index": 87,
+      "ordinal": 0,
+      "shapeID": "25444519B7681288134121",
+      "shapeName": "Ali Sabieh",
+      "selected_owner_indices": [],
+      "package_target_owner_indices": [],
+      "role": "complete_ADM1_context",
+      "potential_parent_context_for": []
+    },
+    {
+      "source_id": "gb:DJI:ADM1:25444519B1274960689098",
+      "family": "gb:DJI:ADM1",
+      "source_index": 21034,
+      "family_index": 87,
+      "ordinal": 1,
+      "shapeID": "25444519B1274960689098",
+      "shapeName": "Arta",
+      "selected_owner_indices": [],
+      "package_target_owner_indices": [],
+      "role": "complete_ADM1_context",
+      "potential_parent_context_for": [
+        16538
+      ]
+    },
+    {
+      "source_id": "gb:DJI:ADM1:25444519B52373268249817",
+      "family": "gb:DJI:ADM1",
+      "source_index": 21035,
+      "family_index": 87,
+      "ordinal": 2,
+      "shapeID": "25444519B52373268249817",
+      "shapeName": "Dikhil",
+      "selected_owner_indices": [],
+      "package_target_owner_indices": [],
+      "role": "complete_ADM1_context",
+      "potential_parent_context_for": [
+        16536,
+        16537,
+        16539
+      ]
+    },
+    {
+      "source_id": "gb:DJI:ADM1:25444519B6046592555533",
+      "family": "gb:DJI:ADM1",
+      "source_index": 21036,
+      "family_index": 87,
+      "ordinal": 3,
+      "shapeID": "25444519B6046592555533",
+      "shapeName": "Tadjourah",
+      "selected_owner_indices": [],
+      "package_target_owner_indices": [],
+      "role": "complete_ADM1_context",
+      "potential_parent_context_for": [
+        16531,
+        16532,
+        16540
+      ]
+    },
+    {
+      "source_id": "gb:DJI:ADM1:25444519B8926294731251",
+      "family": "gb:DJI:ADM1",
+      "source_index": 21037,
+      "family_index": 87,
+      "ordinal": 4,
+      "shapeID": "25444519B8926294731251",
+      "shapeName": "Obock",
+      "selected_owner_indices": [],
+      "package_target_owner_indices": [],
+      "role": "complete_ADM1_context",
+      "potential_parent_context_for": [
+        16533,
+        16541
+      ]
+    },
+    {
+      "source_id": "gb:DJI:ADM1:25444519B34443348585704",
+      "family": "gb:DJI:ADM1",
+      "source_index": 21038,
+      "family_index": 87,
+      "ordinal": 5,
+      "shapeID": "25444519B34443348585704",
+      "shapeName": "Djibouti",
+      "selected_owner_indices": [],
+      "package_target_owner_indices": [],
+      "role": "complete_ADM1_context",
+      "potential_parent_context_for": []
+    },
+    {
+      "source_id": "gb:DJI:ADM2:41766387B98599288227121",
+      "family": "gb:DJI:ADM2",
+      "source_index": 21039,
+      "family_index": 88,
+      "ordinal": 0,
+      "shapeID": "41766387B98599288227121",
+      "shapeName": "Alaili Dadda",
+      "selected_owner_indices": [
+        16541
+      ],
+      "package_target_owner_indices": [
+        16541
+      ],
+      "role": "ADM2_positive_family_roster_member",
+      "potential_parent_context_for": []
+    },
+    {
+      "source_id": "gb:DJI:ADM2:41766387B22586556456338",
+      "family": "gb:DJI:ADM2",
+      "source_index": 21040,
+      "family_index": 88,
+      "ordinal": 1,
+      "shapeID": "41766387B22586556456338",
+      "shapeName": "Dorra",
+      "selected_owner_indices": [
+        16532
+      ],
+      "package_target_owner_indices": [
+        16532
+      ],
+      "role": "ADM2_positive_family_roster_member",
+      "potential_parent_context_for": []
+    },
+    {
+      "source_id": "gb:DJI:ADM2:41766387B51204577272085",
+      "family": "gb:DJI:ADM2",
+      "source_index": 21041,
+      "family_index": 88,
+      "ordinal": 2,
+      "shapeID": "41766387B51204577272085",
+      "shapeName": "Obock",
+      "selected_owner_indices": [
+        16533
+      ],
+      "package_target_owner_indices": [
+        16533
+      ],
+      "role": "ADM2_positive_family_roster_member",
+      "potential_parent_context_for": []
+    },
+    {
+      "source_id": "gb:DJI:ADM2:41766387B54529132802745",
+      "family": "gb:DJI:ADM2",
+      "source_index": 21042,
+      "family_index": 88,
+      "ordinal": 3,
+      "shapeID": "41766387B54529132802745",
+      "shapeName": "Randa",
+      "selected_owner_indices": [
+        16534
+      ],
+      "package_target_owner_indices": [],
+      "role": "ADM2_non_target_competitor_context",
+      "potential_parent_context_for": []
+    },
+    {
+      "source_id": "gb:DJI:ADM2:41766387B97155389424645",
+      "family": "gb:DJI:ADM2",
+      "source_index": 21043,
+      "family_index": 88,
+      "ordinal": 4,
+      "shapeID": "41766387B97155389424645",
+      "shapeName": "Balha",
+      "selected_owner_indices": [
+        16540
+      ],
+      "package_target_owner_indices": [
+        16540
+      ],
+      "role": "ADM2_positive_family_roster_member",
+      "potential_parent_context_for": []
+    },
+    {
+      "source_id": "gb:DJI:ADM2:41766387B13463549189785",
+      "family": "gb:DJI:ADM2",
+      "source_index": 21044,
+      "family_index": 88,
+      "ordinal": 5,
+      "shapeID": "41766387B13463549189785",
+      "shapeName": "Tadjourah",
+      "selected_owner_indices": [
+        16531
+      ],
+      "package_target_owner_indices": [
+        16531
+      ],
+      "role": "ADM2_positive_family_roster_member",
+      "potential_parent_context_for": []
+    },
+    {
+      "source_id": "gb:DJI:ADM2:41766387B74076707162819",
+      "family": "gb:DJI:ADM2",
+      "source_index": 21045,
+      "family_index": 88,
+      "ordinal": 6,
+      "shapeID": "41766387B74076707162819",
+      "shapeName": "YobokiI",
+      "selected_owner_indices": [
+        16537
+      ],
+      "package_target_owner_indices": [
+        16537
+      ],
+      "role": "ADM2_positive_family_roster_member",
+      "potential_parent_context_for": []
+    },
+    {
+      "source_id": "gb:DJI:ADM2:41766387B83981523687012",
+      "family": "gb:DJI:ADM2",
+      "source_index": 21046,
+      "family_index": 88,
+      "ordinal": 7,
+      "shapeID": "41766387B83981523687012",
+      "shapeName": "Djibouti",
+      "selected_owner_indices": [
+        16538
+      ],
+      "package_target_owner_indices": [
+        16538
+      ],
+      "role": "ADM2_positive_family_roster_member",
+      "potential_parent_context_for": []
+    },
+    {
+      "source_id": "gb:DJI:ADM2:41766387B9467441741428",
+      "family": "gb:DJI:ADM2",
+      "source_index": 21047,
+      "family_index": 88,
+      "ordinal": 8,
+      "shapeID": "41766387B9467441741428",
+      "shapeName": "Dilkhil",
+      "selected_owner_indices": [
+        16539
+      ],
+      "package_target_owner_indices": [
+        16539
+      ],
+      "role": "ADM2_positive_family_roster_member",
+      "potential_parent_context_for": []
+    },
+    {
+      "source_id": "gb:DJI:ADM2:41766387B65421474667097",
+      "family": "gb:DJI:ADM2",
+      "source_index": 21048,
+      "family_index": 88,
+      "ordinal": 9,
+      "shapeID": "41766387B65421474667097",
+      "shapeName": "Ali Sabeh",
+      "selected_owner_indices": [
+        16535
+      ],
+      "package_target_owner_indices": [],
+      "role": "ADM2_non_target_competitor_context",
+      "potential_parent_context_for": []
+    },
+    {
+      "source_id": "gb:DJI:ADM2:41766387B73347270872705",
+      "family": "gb:DJI:ADM2",
+      "source_index": 21049,
+      "family_index": 88,
+      "ordinal": 10,
+      "shapeID": "41766387B73347270872705",
+      "shapeName": "As Eyla",
+      "selected_owner_indices": [
+        16536
+      ],
+      "package_target_owner_indices": [
+        16536
+      ],
+      "role": "ADM2_positive_family_roster_member",
+      "potential_parent_context_for": []
+    }
+  ],
+  "complete_source_families": [
+    {
+      "family": "gb:DJI:ADM1",
+      "source_feature_count": 6,
+      "original_decoded_bytes": 14037,
+      "original_decoded_sha256": "8efa9ba614e219c8b8d02939bea559b2bd0aaa848c89cd0204d11a3c638f8bd2",
+      "retained_catalogue_record": {
+        "advertised_feature_count": 6,
+        "cohort": "administrative-registry",
+        "feature_count": 6,
+        "key": "gb:DJI:ADM1",
+        "metadata_sha256": "0aaf6193cdcddbf42867e5a15ee7eab5538b3b1ca02261d36aa5708a4ee65a3e",
+        "original_bytes": 14037,
+        "original_metadata_file": "data/administrative-sources.json",
+        "original_sha256": "8efa9ba614e219c8b8d02939bea559b2bd0aaa848c89cd0204d11a3c638f8bd2",
+        "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+        "parts": [
+          {
+            "bytes": 4939,
+            "hash_kind": "file-bytes",
+            "offset": 0,
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-DJI-ADM1-000.bin.gz",
+            "sha256": "696fad95a4ad0ac686d745bf584db49438384bad127190a979b6c7a358a61663",
+            "uncompressed_bytes": 14037,
+            "uncompressed_sha256": "8efa9ba614e219c8b8d02939bea559b2bd0aaa848c89cd0204d11a3c638f8bd2"
+          }
+        ],
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/DJI/ADM1/geoBoundaries-DJI-ADM1_simplified.geojson",
+        "recorded_license": "Public Domain",
+        "source_represented_year_claim": "2021"
+      },
+      "compressed_payload_pin": {
+        "commit": "261e709ac9e1837b3399537f9f53cfa6550e3a01",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-DJI-ADM1-000.bin.gz",
+        "mode": "100644",
+        "git_blob_oid": "54b0480a3107bd9c863093adff322afdee7bff02",
+        "bytes": 4939,
+        "sha256": "696fad95a4ad0ac686d745bf584db49438384bad127190a979b6c7a358a61663"
+      },
+      "verbatim_featurecollection_artifact": {
+        "path": "dji-adm1-source-features.geojson",
+        "bytes": 14037,
+        "sha256": "8efa9ba614e219c8b8d02939bea559b2bd0aaa848c89cd0204d11a3c638f8bd2"
+      }
+    },
+    {
+      "family": "gb:DJI:ADM2",
+      "source_feature_count": 11,
+      "original_decoded_bytes": 30357,
+      "original_decoded_sha256": "e32ff52ad478a8713bb59417b10060499090aab1509aecdc458150b8a4d598b7",
+      "retained_catalogue_record": {
+        "advertised_feature_count": 11,
+        "cohort": "administrative-registry",
+        "feature_count": 11,
+        "key": "gb:DJI:ADM2",
+        "metadata_sha256": "471570611a73d6f7fb2840d00ed1589968e8676a21700366085c0db61563d24e",
+        "original_bytes": 30357,
+        "original_metadata_file": "data/administrative-sources.json",
+        "original_sha256": "e32ff52ad478a8713bb59417b10060499090aab1509aecdc458150b8a4d598b7",
+        "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+        "parts": [
+          {
+            "bytes": 10036,
+            "hash_kind": "file-bytes",
+            "offset": 0,
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-DJI-ADM2-000.bin.gz",
+            "sha256": "55432417a363e2aeb1c59bd5735ded27bb2b6d60d10c24fa9ba98d767a46d3f4",
+            "uncompressed_bytes": 30357,
+            "uncompressed_sha256": "e32ff52ad478a8713bb59417b10060499090aab1509aecdc458150b8a4d598b7"
+          }
+        ],
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/DJI/ADM2/geoBoundaries-DJI-ADM2_simplified.geojson",
+        "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+        "source_represented_year_claim": "2020"
+      },
+      "compressed_payload_pin": {
+        "commit": "261e709ac9e1837b3399537f9f53cfa6550e3a01",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-DJI-ADM2-000.bin.gz",
+        "mode": "100644",
+        "git_blob_oid": "49d40565b225d8bda7536f3ba1af64eceda2f4ae",
+        "bytes": 10036,
+        "sha256": "55432417a363e2aeb1c59bd5735ded27bb2b6d60d10c24fa9ba98d767a46d3f4"
+      },
+      "verbatim_featurecollection_artifact": {
+        "path": "dji-adm2-source-features.geojson",
+        "bytes": 30357,
+        "sha256": "e32ff52ad478a8713bb59417b10060499090aab1509aecdc458150b8a4d598b7"
+      }
+    }
+  ],
+  "source_evidence_family_roles": {
+    "positive_family": [
+      "gb:DJI:ADM2"
+    ],
+    "context_family": [
+      "gb:DJI:ADM1"
+    ],
+    "context_note": "Keep the entire ADM1 family as contextual evidence; do not mark it a negative witness/veto unless a later exact scientific applicability finding supports that use."
+  },
+  "non_target_adm2_owners": [
+    16534,
+    16535
+  ],
+  "owner_observation": {
+    "path": "../selected-owner-observation-v1.json",
+    "commit": "261e709ac9e1837b3399537f9f53cfa6550e3a01",
+    "query_count": 683,
+    "base_owner_zero_count": 683,
+    "accepted_additive_owner_zero_count": 683,
+    "effective_owner_zero_count": 683,
+    "scientific_qualification": false
+  },
+  "pins": [
+    {
+      "commit": "261e709ac9e1837b3399537f9f53cfa6550e3a01",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "mode": "100644",
+      "git_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+      "bytes": 1754890,
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8"
+    },
+    {
+      "commit": "261e709ac9e1837b3399537f9f53cfa6550e3a01",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "bytes": 1844315,
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa"
+    },
+    {
+      "commit": "261e709ac9e1837b3399537f9f53cfa6550e3a01",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+      "bytes": 4404456,
+      "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4"
+    },
+    {
+      "commit": "261e709ac9e1837b3399537f9f53cfa6550e3a01",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+      "mode": "100644",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    {
+      "commit": "261e709ac9e1837b3399537f9f53cfa6550e3a01",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/ownership-binding.json",
+      "mode": "100644",
+      "git_blob_oid": "b9d81d18aab6d03dc701ff1337b35e53be81d0af",
+      "bytes": 3048,
+      "sha256": "b952192475435c8fbc74a84627994aff4f4e073c36c479d369554fc75251bc89"
+    },
+    {
+      "commit": "261e709ac9e1837b3399537f9f53cfa6550e3a01",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/normalized-source-seams.json",
+      "mode": "100644",
+      "git_blob_oid": "e22b6270aaf9c27dd3d21381d757b6c34ab81d7b",
+      "bytes": 156199,
+      "sha256": "0e74bb81ae45ae9913ee5d43afd303fa33a4b7da8b06e4e6f1cd4419ecd264b4"
+    },
+    {
+      "commit": "261e709ac9e1837b3399537f9f53cfa6550e3a01",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "mode": "100644",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    {
+      "path": "coordination/engineering/djibouti-original-repair-20261019/source-batch-intervals-v1/package.json",
+      "status": "generated local output to be committed in this change",
+      "bytes": 2505,
+      "sha256": "7887bf68546d31879555a5897fd3cf75cc34eb5caa7d6b5848f741205d7f2350"
+    },
+    {
+      "path": "coordination/engineering/djibouti-original-repair-20261019/selected-owner-observation-v1.json",
+      "status": "generated local output to be committed in this change",
+      "bytes": 270827,
+      "sha256": "424ec24b932c98592de6419bd5d9dce7b03fe48b05e9a0e900b3f5da2db5b1dc"
+    }
+  ],
+  "limits": [
+    "The two source FeatureCollections are copied verbatim after decompression; their uncompressed SHA256 values match the retained catalogue originals.",
+    "No spatial predicate, geometry transformation, clipping, or physical operation was performed.",
+    "ADM2 targets are direct identity joins only. ADM2 source Feature properties do not expose parent IDs; ADM1 context candidates are name/slug matches against queue lineage province IDs, not proof of a parent relationship.",
+    "All six ADM1 and eleven ADM2 features and all roster owner lists are retained. The non-target ADM2 owners 16534 and 16535 remain explicit.",
+    "Feature identity, source vintage/license, and owner-zero observation do not establish current applicability, legal authority, or physical support. No accepted or proposed repair credit is claimed."
+  ]
+}

@@ -2,7 +2,7 @@
 
 M geography, N engineering and P history-research chats may work in isolated checkouts. GitHub Issues remains the work record. Before implementation, comment with the worker ID, branch, bounded scope and planned checks. The parent coordinates overlapping work. Threads sharing a GitHub account still use distinct worker IDs; a comment is coordination, not security isolation.
 
-Read [LOCAL_WORKSPACES.md](LOCAL_WORKSPACES.md). Allocate isolated checkouts through `scripts/local-workspace.mjs`; keep bounded work/review slots, include exact required sparse inputs, check storage before generation/installations, and release finished slots after preserving unique work. Do not retain a full checkout per task or review revision. Existing chats must refresh their saved instructions.
+Read [LOCAL_WORKSPACES.md](LOCAL_WORKSPACES.md). Allocate isolated checkouts through `scripts/local-workspace.mjs`; keep bounded work/review slots, include exact required sparse inputs, and release finished slots after preserving unique work. Do not retain a full checkout per task or review revision. Existing chats must refresh their saved instructions.
 
 ## Chat identity
 
@@ -108,9 +108,10 @@ global serialization across every historical writer.
 
 For an authorized live reservation, use native `gh workflow run issue-claims.yml`
 with the documented issue, worker, branch, action, claim ID, request ID and live-work
-inputs. Observe the exact run using `gh run view` / `gh run watch`, then read back
-its canonical bot comment and operation state. Preserve the original IDs when
-reconciling an uncertain dispatch; never infer acceptance from a queued run or
+inputs. Follow the existing [bounded observation guidance](MERGE_QUEUE_CLIENT.md#find-the-execution-and-inspect-its-outcome):
+use one cached exact-run observer or one interactive watch with an explicit interval
+of at least 60 seconds. Then read back its canonical bot comment and operation state.
+Preserve the original IDs when reconciling an uncertain dispatch; never infer acceptance from a queued run or
 blindly redispatch a mutation. Only the holder can renew/release. An open PR or
 live operation blocks release/rotation; expiry never permits takeover or proves
 cleanup. Recovery still requires explicit approval and preservation of earlier
@@ -121,21 +122,25 @@ work. Historical comments and receipts remain immutable records.
 Each coherent PR targets main. Issue links and GitHub closure keywords are optional,
 with no custom syntax or one-issue limit. Close only completed acceptance. The
 submitting operator verifies substantive distinct-worker review of the exact head.
-All workers submit merges through:
+Workers sharing one GitHub account still obtain review from a genuinely distinct
+worker. Submit that worker's substantive exact-head review as `COMMENT`, not a
+self-`APPROVE` attempt. The existing operator-reviewed comment route is sufficient;
+no extra account, approval layer or machine review receipt is needed. For example:
 
 ```sh
-gh workflow run worker-merge.yml --repo ChengshuLi/WorldAtlas --ref main \
-  -f pr_number=PR-NUMBER -f expected_head=VERIFIED-HEAD-SHA \
-  -f request_id=UNIQUE-REQUEST-ID
+gh api --method POST repos/ChengshuLi/WorldAtlas/pulls/PR-NUMBER/reviews \
+  -f commit_id=EXACT_REVIEWED_HEAD -f event=COMMENT \
+  -f body='Distinct worker ID; exact head; inspected scope; actual checks and limits; findings.'
 ```
 
-Use a fresh 16–100 character request ID containing only ASCII letters, digits and
-hyphens. Record it before dispatch, identify the exact matching Actions run with
-`gh run list`, then inspect or watch that numeric run ID. The native Actions queue
-holds the entire preparation, isolated candidate tests and final merge lifecycle
-in the top-level `worldatlas-main-integrate` concurrency group. The workflow uses
-`queue: max` and does not cancel an in-progress merge when another arrives.
-Research, PR checks and independent review remain parallel.
+Read back the returned review's commit and the current PR head. A different head or
+unresolved substantive objection requires renewed relevant review, not another
+identity or a blind retry. A comment does not create scientific approval or make an
+author their own independent reviewer.
+
+Submit, find, observe and recover native merge executions through the single
+[merge queue client procedure](MERGE_QUEUE_CLIENT.md). Research, PR checks and
+independent review can continue while Actions holds pending runs.
 
 The queue validates the exact reviewed head, current checks and current main,
 then creates one owned disposable candidate branch and asks GitHub to merge the
@@ -169,7 +174,7 @@ resource without deleting a collision. Canceled
 jobs may leave an owned ref and require cleanup, never blind deletion or proof of
 merge. Candidate tests still check out immutable SHAs with read-only permissions.
 
-Base-dependent evidence still needs refresh: a metric labeled current must match the actual PR-base vintage, and original-file receipts must match actual base bytes. Disjoint main changes with unchanged scoped inputs can reuse review; fresh global measurements or changes to the reviewed inputs cannot. Preserve the earlier evidence, refresh in a new vintage, and obtain exact-head review when needed. The final queue selects checks by every changed and renamed path. Code, workflow, schema and core-data changes run the complete unit suite across three parallel shards, plus one hosted package build. Isolated geography/history campaign evidence and engineering-owned receipts or Markdown/text docs run the final focused ownership/evidence/review/invariant suite, without rebuilding the unchanged application. Both profiles run in isolated read-only jobs without secrets or persistent checkout credentials. They retain exact candidate and actual scientific-consumer checks; a renamed runtime file cannot evade full regression. Prepare/final jobs execute only fresh trusted main code. Tests are bounded to35minutes, trusted jobs to10minutes each; unfinished heads fail preflight rather than holding the slot for worker action.
+Base-dependent evidence still needs refresh: a metric labeled current must match the actual PR-base vintage, and original-file receipts must match actual base bytes. Disjoint main changes with unchanged scoped inputs can reuse review; fresh global measurements or changes to the reviewed inputs cannot. Preserve the earlier evidence, refresh in a new vintage, and obtain exact-head review when needed. The final queue selects checks by every changed and renamed path. An explicit complete request runs the complete unit suite across three parallel shards, plus one hosted package build. The reviewed-consumer and authenticated automatic routes below retain their applicable checks without silently expanding to complete regression. Isolated geography/history campaign evidence and engineering-owned receipts or Markdown/text docs can use their applicable focused consumers without rebuilding the unchanged application. Both profiles run in isolated read-only jobs without secrets or persistent checkout credentials. They retain exact candidate and actual scientific-consumer checks; a renamed runtime file cannot evade full regression. Prepare/final jobs execute only fresh trusted main code. Tests are bounded to35minutes, trusted jobs to10minutes each; unfinished heads fail preflight rather than holding the slot for worker action.
 
 The full runner keeps packaged-asset checks on the build job and the expensive local model/migration file on a separate job. Measured database-neighbor suites use the otherwise lighter job; the remaining discovered files retain deterministic assignment. Every file still runs exactly once. Named placement is a scheduling choice, not a runtime guarantee; compare actual complete workflow times rather than summed TAP durations.
 
@@ -334,25 +339,9 @@ now owns queueing, while the existing top-level concurrency group still holds th
 complete candidate/test/final lifecycle to prevent cooperating merges from
 invalidating one another's tested base.
 
-Submit `worker-merge.yml` directly on main with the exact reviewed head and a fresh
-request ID. `queue: max` retains up to 100 pending executions; excess executions
-can be cancelled. There is no separate scheduler, registration comment, FIFO
-ticket, dispatch-attempt ledger, completion wake or automatic recovery daemon.
-Provider ordering, queue limits and runner availability remain external controls,
-not an application-level availability guarantee. No queue-capacity engine is
-introduced; existing per-run API quota and deadline guards remain mandatory.
-
-Record the matching run ID/URL and use `gh run list`, `gh run view` and
-`gh run watch` to inspect it. Preserve failure diagnostics and result receipts,
-then independently verify actual PR merged state, exact head and squash commit.
-An interrupted local wait does not end a workflow. An uncertain dispatch, missing
-run on a bounded history page, pending state or missing receipt never authorizes a
-blind duplicate. After a settled failed/cancelled execution, reconcile the PR and
-all earlier unresolved executions. With successful preparation and unchanged
-reviewed head/tested main, address the cause and rerun failed jobs of that same
-execution; successful original jobs need no repetition. Failed preparation or a
-changed base requires a fresh request. Changed reviewed bytes require new
-substantive review. See [MERGE_QUEUE_CLIENT.md](MERGE_QUEUE_CLIENT.md).
+Use [MERGE_QUEUE_CLIENT.md](MERGE_QUEUE_CLIENT.md) for submission, run discovery,
+observation and recovery. Provider ordering, queue limits and runner availability
+remain external controls, not an application-level availability guarantee.
 
 ### Migrate existing requests safely
 
@@ -618,7 +607,7 @@ budget check. Normal main pushes do not schedule a separate legacy Site build.
 
 ### Run the reviewed consumers
 
-The existing merge dispatch accepts an optional `reviewed_tests` JSON object with
+The existing merge dispatch requires `reviewed_tests`: normally the planner's JSON object with
 `base`, `head` and `files`. The first two fields are exact 40-character accepted-main
 and reviewed-head commits. `files` is the nonempty list of actual `test/*.test.mjs`
 consumers identified during review. There is no author-maintained transitive input
@@ -642,8 +631,11 @@ an execution argument, not source authority or proof that a test roster is compl
 Preparation and final admission validate the same immutable pair and ordinary
 candidate paths. Stale base/head, missing executing-policy inputs, missing fixture roots, escaping paths and
 symlinks fail clearly. Re-review the actual new pair before updating a stale
-request. With no argument, existing automatic routing and its conservative
-complete-regression fallback remain available.
+request. The explicit `auto` value uses only the existing proven inert-packet or
+selected-data route, refusing unsupported scope instead of silently expanding it.
+The explicit `complete` value requests the full suite and package build.
+Only already-queued older workflow definitions retain omitted-input compatibility;
+new requests follow the required-input command in `MERGE_QUEUE_CLIENT.md`.
 
 A reviewed list uses one isolated regression worker and acquires only its code
 and fixture inputs. It does not change geography applicability, trusted checker

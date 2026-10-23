@@ -1,0 +1,27 @@
+{
+  "status": "unexecuted-awaiting-independent-review",
+  "files": [
+    {
+      "path": "derive-four-scope-applicability.mjs",
+      "bytes": 22861,
+      "sha256": "207c3112484a7cd3346c3318618a10c44748dad2b9650fc450f5d97f27b798ad"
+    },
+    {
+      "path": "adapter-config.json",
+      "bytes": 185231,
+      "sha256": "8f025089a2543aee13e083e44d0db889dad1568d620a2f202c3d31850ca079e9"
+    },
+    {
+      "path": "scope-preparation.json",
+      "bytes": 1731,
+      "sha256": "1b617dde95150fcd8c91f92fa2c04bb1550390cde0473a60d4e5382e61a0e353"
+    },
+    {
+      "path": "EQUIVALENCE-AND-LIMITS.md",
+      "bytes": 9199,
+      "sha256": "9ab934331caf187b3a3d2e25d64c754ace0ad51d7cea80ea8121ce921cd75925"
+    }
+  ],
+  "syntax_check": "Node24 --check exit0; no driver import or execution",
+  "actual_applicability_result": null
+}

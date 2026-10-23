@@ -1,3 +1,4 @@
+import {omitFixtureObjects} from './helpers/git-object-fixture.mjs';
 import {nativeLiteral} from './helpers/native-literal.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -472,7 +473,7 @@ test('scalar availability rechecks a remote-only original after explicit acquisi
 
 for(const populated of [true,false])test('scalar actual body acquisition remains '+(populated?'authenticated':'a failure, never an alias fallback'),async t=>{
  const f=await trustedFixture(t),p=f.pin('data/source.json',f.selected),expected=f.git('show',p.commit+':'+p.path),s=scalarPromisor(f,{populated});
- fs.unlinkSync(path.join(f.root,'.git','objects',p.git_blob_oid.slice(0,2),p.git_blob_oid.slice(2)));
+ omitFixtureObjects(t,f.root,[p.git_blob_oid]);
  if(populated){assert.deepEqual(s.readSource(p),expected);assert.throws(()=>s.readSource({...p,sha256:'0'.repeat(64)}),/Whole immutable input differs/);}
  else assert.throws(()=>s.readSource(p),/Command failed|Require whole ordinary/);
  assert.match(s.tracing(),remoteAttempt);
@@ -482,7 +483,7 @@ test('complete checkpoint qualification uses exact rebind aliases without implic
  const f=await trustedFixture(t),certificate=f.ledger.current_rebind,body=JSON.parse(f.git('show',certificate.commit+':'+certificate.path));
  const commits=new Set([certificate.commit,...['request','facts','publication','operating','result'].map(k=>body[k].commit)]);
  const s=scalarPromisor(f);
- for(const commit of commits)fs.unlinkSync(path.join(f.root,'.git','objects',commit.slice(0,2),commit.slice(2)));
+ omitFixtureObjects(t,f.root,[...commits]);
  const result=(await f.api.qualifyCheckpoint({reader:s.reader()}));
  assert.equal(result.available,true);assert.equal(result.state.ledger.rows.length,2);
  assert.deepEqual(nativeLiteral(f.api.projectNativeRows({state:result.state,rows:[1]}).rows),[{y:1,runs:[[0,1,2]]}]);
@@ -524,11 +525,13 @@ function miniatureInventory(root,prefix=''){
 }
 const miniatureBytes=inventory=>inventory.map(({device,inode,...file})=>file);
 
-for(const options of [{},{nativeAppend:true}])test(`miniature seed copies isolate all files and mutable state ${JSON.stringify(options)}`,async t=>{
+for(const options of [{},{nativeAppend:true}])for(const packed of [false,true])test(`miniature seed copies isolate all files and mutable state ${JSON.stringify(options)}, packed=${packed}`,async t=>{
  const [a,b]=await Promise.all([trustedFixture(t,options),trustedFixture(t,options)]);
+ if(packed)for(const f of [a,b])f.git('repack','-ad');
  const original=miniatureInventory(a.root),other=miniatureInventory(b.root);
  assert.deepEqual(miniatureBytes(original),miniatureBytes(other));
- assert.ok(original.some(file=>/^\.git\/objects\/[a-f0-9]{2}\/[a-f0-9]{38}$/.test(file.name)));
+ const object=original.find(file=>/^\.git\/objects\/(?:[a-f0-9]{2}\/[a-f0-9]{38}|pack\/pack-[a-f0-9]{40}\.pack)$/.test(file.name));
+ assert.ok(object,'Copied Git object body exists in loose or packed storage');
  assert.equal(fs.existsSync(path.join(a.root,'.git/objects/info/alternates')),false);
  for(let i=0;i<original.length;i++)
   assert.notEqual(`${original[i].device}:${original[i].inode}`,`${other[i].device}:${other[i].inode}`,original[i].name);
@@ -547,12 +550,13 @@ for(const options of [{},{nativeAppend:true}])test(`miniature seed copies isolat
  const originalData=structuredClone(Object.fromEntries(['ledger','patch','sidecar','envelope','selection','rootRow','manifest','features','registry'].map(key=>[key,b[key]])));
  a.features[0].properties.id='only the first consumer';a.ledger.rows[0].target_id='wrong owner';
  a.rootRow.certificate.decoded_sha256='0'.repeat(64);a.manifest.parts[0].sha256='0'.repeat(64);
- const object=original.find(file=>/^\.git\/objects\/[a-f0-9]{2}\/[a-f0-9]{38}$/.test(file.name));
  fs.chmodSync(path.join(a.root,object.name),0o644);
  fs.writeFileSync(path.join(a.root,object.name),'corrupt only the first object');
  fs.appendFileSync(path.join(a.root,'.git/config'),'\n# first consumer only\n');
  a.save('data/source.json',{changed:'first consumer only'});
- const c=await trustedFixture(t,options),third=miniatureInventory(c.root);
+ const c=await trustedFixture(t,options);
+ if(packed)c.git('repack','-ad');
+ const third=miniatureInventory(c.root);
  assert.deepEqual(miniatureBytes(miniatureInventory(b.root)),miniatureBytes(other));
  assert.deepEqual(miniatureBytes(third),miniatureBytes(original),'The private seed remains pristine');
  for(let i=0;i<third.length;i++)
@@ -781,7 +785,10 @@ for(const count of [3,16,64])test('genuine completed source/owner/component grow
   ...Array.from({length:count-3},(_,i)=>feature('D'+String(i).padStart(3,'0'),10+i))];
  const f=await trustedFixture(t,{nativeAppend:true,sourceFeatures}),baseline=await f.api.qualifyCheckpoint({reader:f.reader});
  assert.equal(baseline.state.certificate.entries.length,count);
+ const pin=f.pin;let physicalPinReads=0;
+ f.pin=(name,...args)=>{if(name==='appended/physical.json')physicalPinReads++;return pin(name,...args);};
  const next=await appendNativeAuthority(f,{completedConstructor:true,targetOwners:Array.from({length:count},(_,i)=>i)});
+ assert.equal(physicalPinReads,1,'One immutable physical descriptor serves every target');
  assert.equal(next.proof.source_rows.length,count);
  const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
  const transition=await f.api.qualifyTransition({state:baseline.state,reader});
@@ -805,6 +812,62 @@ test('genuine larger source geometry is reflected in certificate and original co
 import {createHash} from 'node:crypto';
 import {nativeSequence} from '../src/native-grid.js';
 import {deriveCoordinateDelta as eagerCoordinateDelta} from './fixtures/coordinate-delta-eager.mjs';
+for(const kind of ['array','sequence'])test('public coordinate delta binds '+kind+' lookup to validated iteration',()=>{
+ const {certificate}=fixtures(),good=addition('good','A',1,certificate.entries[0][7],1.05),
+  other=addition('other','B',2,certificate.entries[1][7],10);
+ let lookups=0;
+ const additions=kind==='array'?[good]:nativeSequence(1,function*(){yield good;},{entryAt:()=>{lookups++;return other;}});
+ if(kind==='array')Object.defineProperty(additions,'at',{value:()=>{lookups++;return other;}});
+ const inputs={certificate,oldAdditions:[],additions,selection:{next:true}};
+ assert.deepEqual(deriveCoordinateDelta(inputs),eagerCoordinateDelta({...inputs,additions:[good]}));
+ assert.equal(lookups,0,'Untrusted random access must not replace the iterated row');
+});
+test('public coordinate delta binds old additions to one iterated view',()=>{
+ const {certificate}=fixtures(),old=addition('old','A',1,certificate.entries[0][7],.3),
+  other=addition('other','B',2,certificate.entries[1][7],10);
+ let iterations=0,lookups=0;
+ const oldAdditions=nativeSequence(1,function*(){yield ++iterations===1?old:other;},
+  {entryAt:()=>{lookups++;return other;}});
+ const inputs={certificate,oldAdditions,additions:[old],selection:{next:true}};
+ assert.deepEqual(deriveCoordinateDelta(inputs),eagerCoordinateDelta({...inputs,oldAdditions:[old]}));
+ assert.equal(iterations,1);assert.equal(lookups,0);
+});
+for(const kind of ['array','sequence'])for(const count of [0,2])
+test('public coordinate delta refuses '+kind+' iterator count '+count+' for declared length one',()=>{
+ const {certificate}=fixtures(),row=addition('one','A',1,certificate.entries[0][7],.3);
+ const entries=function*(){for(let i=0;i<count;i++)yield {...row,component_id:'component-'+i};};
+ const additions=kind==='array'?[row]:nativeSequence(1,entries,{entryAt:()=>row});
+ if(kind==='array')Object.defineProperty(additions,Symbol.iterator,{value:entries});
+ assert.throws(()=>deriveCoordinateDelta({certificate,oldAdditions:[],additions,selection:{}}),
+  /Duplicate complete primitive identity|Native sequence (omitted declared entries|exceeds declared count)/);
+});
+test('qualified coordinate delta consumes normalized native semantics without replay',async t=>{
+ const f=await trustedFixture(t,{nativeAppend:true}),baseline=await f.api.qualifyCheckpoint({reader:f.reader});
+ const next=await appendNativeAuthority(f,{completedConstructor:true});
+ const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
+ const open=fs.openSync,read=fs.readSync,intervals=new Set();let normalizedReads=0;
+ fs.openSync=function(name,...args){const fd=open.call(this,name,...args);if(String(name).endsWith('/runs.bin'))intervals.add(fd);return fd;};
+ fs.readSync=function(fd,...args){
+  if(intervals.has(fd)){
+   const stack=new Error().stack;
+   if(stack.includes('nativeOnlyComponent')){
+    assert(!/coordinateDelta|deriveCoordinateDelta|deriveQualifiedCoordinateDelta/.test(stack),
+     'Qualified coordinate projection replayed native component validation');
+    if(stack.includes('normaliseRetainedRepairLedger'))normalizedReads++;
+   }
+  }
+  return read.call(this,fd,...args);
+ };
+ try {
+  const transition=await f.api.qualifyTransition({state:baseline.state,reader});assert.equal(transition.available,true);
+  assert(normalizedReads>0,'The actual candidate normalizer must still read and validate native intervals');
+  const expected=eagerCoordinateDelta({certificate:baseline.state.certificate,
+   oldAdditions:nativeLiteral(baseline.state.additions),additions:nativeLiteral(transition.candidate.additions),
+   selection:transition.candidate.selection});
+  assert.deepEqual(transition.candidate.certificate,expected.certificate);
+  assert.deepEqual(transition.changedIds,expected.changedIds);
+ } finally {fs.openSync=open;fs.readSync=read;f.api.releaseCheckpoint(baseline.state);}
+});
 test('indexed coordinate grouping preserves exact eager values, ordering and refusal messages',()=>{
  assert.equal(createHash('sha256').update(fs.readFileSync(new URL('./fixtures/coordinate-delta-eager.mjs',import.meta.url))).digest('hex'),
   'c98d006cde4f2eb6d323c899b530413b59fb1f6ead4337c436c962f0ffb31f89');
@@ -832,4 +895,348 @@ test('coordinate grouping reads indexed additions proportionally to components r
  const additions=nativeSequence(values.length,function*(){for(const value of values){visits++;yield value;}},{entryAt:i=>{visits++;return values[i];}});
  const result=deriveCoordinateDelta({certificate,oldAdditions:[],additions,selection:{}});
  assert.deepEqual(result.changedIds,features.map(f=>f.id));assert(visits<=8*values.length,'repeated complete addition scans: '+visits);
+});
+
+
+test('validated private projections retain lazy intervals and refuse reads after release',async t=>{
+ const f=await trustedFixture(t,{nativeAppend:true});
+ const open=fs.openSync,read=fs.readSync,intervals=new Set();
+ fs.openSync=function(name,...args){const fd=open.call(this,name,...args);if(String(name).endsWith('/runs.bin'))intervals.add(fd);return fd;};
+ let state;
+ try {
+  state=(await f.api.qualifyCheckpoint({reader:f.reader})).state;
+  const next=await appendNativeAuthority(f,{completedConstructor:true});
+  const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
+  const transition=await f.api.qualifyTransition({state,reader});assert.equal(transition.available,true);
+  const additions=transition.candidate.additions,expected=nativeLiteral(additions);
+  assert(intervals.size>0,'The real store interval descriptors were observed');
+  fs.readSync=function(fd,...args){assert(!intervals.has(fd),'Projection must not replay already validated native intervals');return read.call(this,fd,...args);};
+  for(let pass=0;pass<2;pass++){
+   assert.deepEqual([...additions].map(p=>p.component_id),expected.map(p=>p.component_id));
+   for(let i=0;i<additions.length;i++)assert.equal(additions.at(i).component_id,expected[i].component_id);
+  }
+  fs.readSync=read;
+  assert.deepEqual(nativeLiteral(additions),expected);
+  f.api.releaseCheckpoint(state);state=null;
+  assert.throws(()=>additions.at(-1),/closed|expired/i);
+  assert.throws(()=>[...additions],/closed|expired/i);
+ } finally {fs.openSync=open;fs.readSync=read;if(state)f.api.releaseCheckpoint(state);}
+});
+
+for(const [name,mutate,expected] of [
+ ['base hash',p=>p.base_geometry_sha256='0'.repeat(64),/current base changed/i],
+ ['interval owner',p=>{p.native_rows=nativeLiteral(p.native_rows);p.native_rows[0].runs[0][2]=2;},/native component interval/i],
+ ['cell count',p=>p.native_cells++,/cell count/i],
+ ['bounds',p=>p.native_bounds=[-181,0,1,1],/component bounds/i],
+ ['extra fields',p=>p.unvalidated=true,/foreign fields/i]
+])test('unnormalized native '+name+' cannot reach the private projection',async t=>{
+ const f=await trustedFixture(t,{nativeAppend:true}),{state}=await f.api.qualifyCheckpoint({reader:f.reader});
+ try {
+  const next=await appendNativeAuthority(f,{completedConstructor:true,mutateLedger:ledger=>mutate(ledger.rows.find(p=>p.representation==='native-cells'))});
+  const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
+  await assert.rejects(f.api.qualifyTransition({state,reader}),expected);
+ } finally {f.api.releaseCheckpoint(state);}
+});
+
+test('genuine dense-ring source survives completed authority and numerical comparison through coordinate cursors',async t=>{
+ const sourceFeatures=[feature('A',0),feature('B',1),feature('C',5)],ring=[];
+ const corners=[[0,0],[.8,0],[.8,.8],[0,.8]];
+ for(let edge=0;edge<4;edge++)for(let i=0;i<128;i++){
+  const a=corners[edge],b=corners[(edge+1)%4],q=i/128;ring.push([a[0]+(b[0]-a[0])*q,a[1]+(b[1]-a[1])*q]);
+ }ring.push(ring[0]);sourceFeatures[0].geometry={type:'Polygon',coordinates:[ring]};
+ const f=await trustedFixture(t,{nativeAppend:true,sourceFeatures}),baseline=await f.api.qualifyCheckpoint({reader:f.reader});
+ assert.equal(baseline.available,true);
+ const next=await appendNativeAuthority(f,{completedConstructor:true});
+ const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
+ const transition=await f.api.qualifyTransition({state:baseline.state,reader});assert.equal(transition.available,true);
+ assert.deepEqual(nativeLiteral(transition.candidate.patch.rows),next.patch.rows);
+ assert.deepEqual(nativeLiteral(transition.candidate.ledger),next.ledger);
+ fs.writeFileSync(path.join(f.root,'scripts/selected-checkpoint-native.mjs'),fs.readFileSync('scripts/selected-checkpoint-native.mjs'));
+ const consumer=await import(pathToFileURL(path.join(f.root,'scripts/selected-checkpoint-native.mjs')));
+ const numerical=await consumer.compareSelectedCheckpointNative({transition});assert.equal(numerical.status,'no-new-native-loss');
+});
+
+test('legacy custody admits ignored nonfinite metadata and validates only consumed authority fields',async t=>{
+ const f=await trustedFixture(t),original=JSON.parse(fs.readFileSync(path.join(f.root,'accepted/custody.json')));
+ const retained=original.complete_cold_custody[0];
+ // Force both the record roster and its ignored nested coordinates across the
+ // spill boundary. Earlier records are authentic JSON but are not selected.
+ const ignored=Array.from({length:40},(_,i)=>({facts:{selected_commit:String(i)},coordinates:Array(40).fill(Infinity)}));
+ const text=JSON.stringify({...original,complete_cold_custody:[...ignored,retained]}).replaceAll('null','1e400');
+ assert.equal(JSON.parse(text).complete_cold_custody[0].coordinates[0],Infinity);
+ f.save('accepted/custody.json',Buffer.from(text));const version=f.commit();f.rootRow.custody=f.pin('accepted/custody.json',version);
+ f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[f.rootRow]});f.commit();
+ const result=await f.api.qualifyCheckpoint({reader:f.reader});assert.equal(result.available,true);
+ assert.deepEqual(nativeLiteral(result.state.ledger),f.ledger);
+});
+
+test('legacy custody keeps malformed syntax ahead of later detached-authority validation',async t=>{
+ const f=await trustedFixture(t),text='{"complete_cold_custody":[],"ignored":[1,]}';
+ assert.throws(()=>JSON.parse(text),SyntaxError);
+ f.save('accepted/custody.json',Buffer.from(text));const version=f.commit();f.rootRow.custody=f.pin('accepted/custody.json',version);
+ f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[f.rootRow]});f.commit();
+ await assert.rejects(f.api.qualifyCheckpoint({reader:f.reader}),SyntaxError);
+});
+
+for(const mode of ['valid','footer','inflate','decoded hash','syntax','syntax and decoded hash'])test('legacy gzip custody preserves authenticated refusal order: '+mode,async t=>{
+ const {gzipSync,gunzipSync}=await import('node:zlib');const {createHash}=await import('node:crypto');
+ const digest=bytes=>createHash('sha256').update(bytes).digest('hex');const f=await trustedFixture(t);
+ const os=await import('node:os'),spills=()=>fs.readdirSync(os.tmpdir()).filter(name=>name.startsWith('checkpoint-custody-')).sort();
+ const before=spills();t.after(()=>assert.deepEqual(spills(),before));
+ const body=mode.startsWith('syntax')?Buffer.from('{"complete_cold_custody":[]} trailing'):fs.readFileSync(path.join(f.root,'accepted/custody.json'));
+ const encoded=gzipSync(body);
+ if(mode==='footer')encoded.writeUInt32LE(body.length+1,encoded.length-4);
+ if(mode==='inflate')encoded[0]=0;
+ f.save('accepted/custody.json.gz',encoded);const version=f.commit();
+ f.rootRow.custody={...f.pin('accepted/custody.json.gz',version),decoded_bytes:body.length,decoded_sha256:mode.includes('decoded hash')?'0'.repeat(64):digest(body)};
+ f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[f.rootRow]});f.commit();
+ if(mode==='valid'){assert.equal((await f.api.qualifyCheckpoint({reader:f.reader})).available,true);return;}
+ const eager=()=>{
+  assert(encoded.length>=18&&encoded.readUInt32LE(encoded.length-4)===body.length,'Checkpoint gzip declared size differs before inflate');
+  const decoded=gunzipSync(encoded,{maxOutputLength:body.length});
+  assert(decoded.length===body.length&&digest(decoded)===f.rootRow.custody.decoded_sha256,'Checkpoint whole decoded output is corrupt');
+  return JSON.parse(decoded);
+ };
+ let expected;try{eager();}catch(error){expected=error;}assert(expected);
+ await assert.rejects(f.api.qualifyCheckpoint({reader:f.reader}),error=>mode==='syntax'?error instanceof SyntaxError:error.message===expected.message);
+});
+
+test('changed rebind traverses stored canonical request and result without whole JSON reconstruction',async t=>{
+ const {valueBytes,normaliseRetainedRepairLedger}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs');
+ const sourceFeatures=[feature('A',0),feature('B',1),feature('C',5)];
+ const ring=Array.from({length:32},(_,i)=>[.1+.1*Math.cos(i*Math.PI/16),.1+.1*Math.sin(i*Math.PI/16)]);ring.push(ring[0]);
+ sourceFeatures[0].geometry={type:'Polygon',coordinates:[ring]};
+ const f=await trustedFixture(t,{sourceFeatures}),{state}=await f.api.qualifyCheckpoint({reader:f.reader});
+ const old=f.ledger.current_rebind,certificate=JSON.parse(f.git('show',old.commit+':'+old.path));
+ const expectedBodies=new Set(['request','result'].map(name=>{
+  const pin=certificate[name];return f.git('show',pin.commit+':'+pin.path).toString();
+ }));
+ // A new authenticated certificate locator forces the genuine changed-rebind
+ // route, while every original source/native operand remains unchanged.
+ f.save('changed-rebind/certificate.json',certificate);const c=f.commit();
+ const ledger={...f.ledger,current_rebind:f.pin('changed-rebind/certificate.json',c)};
+ f.save('changed-rebind/ledger.json',ledger);const l=f.commit(),ledgerPin=f.pin('changed-rebind/ledger.json',l);
+ const effective={...f.envelope.effective_reference,footprints_sha256:valueSha({domain:'worldatlas-effective-native-footprints:v2',
+  base_reference:f.envelope.base_reference,authority_registry_sha256:valueSha(f.registry),ledger_sha256:ledgerPin.sha256,
+  components:[...normaliseRetainedRepairLedger(ledger,f.registry).rows.values()]})};
+ f.save('changed-rebind/patch.json',{...f.patch,ledger_sha256:ledgerPin.sha256,effective_reference:effective});const p=f.commit();
+ const assets={...f.sidecar.logical_asset_map,ledger:ledgerPin,patch:f.pin('changed-rebind/patch.json',p)};
+ f.save('changed-rebind/envelope.json',{...f.envelope,...assets,effective_reference:effective});const e=f.commit();
+ f.save('changed-rebind/sidecar.json',{...f.sidecar,logical_asset_map:assets,runtime_envelope:f.pin('changed-rebind/envelope.json',e)});const s=f.commit(),side=f.pin('changed-rebind/sidecar.json',s);
+ f.save('data/ownership-selection.json',{...f.selection,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});
+ const reader=new f.native.ImmutableReader(f.root,f.commit(),{invocation:f.reader.invocation}),stream=reader.stream.bind(reader),streamed=[];
+ reader.stream=function(name,...args){streamed.push(name);return stream(name,...args);};
+ const from=Buffer.from,materialized=[];
+ Buffer.from=function(value,...args){if(typeof value==='string'&&expectedBodies.has(value))materialized.push(Buffer.byteLength(value));return from(value,...args);};
+ try{
+  // Accepted fixture products are intentionally a minimal historical shape.
+  // Their complete byte checks must pass before the unchanged schema refusal.
+  await assert.rejects(f.api.qualifyTransition({state,reader}),/^Error: Unknown current producer request$/);
+ }finally{Buffer.from=from;}
+ t.diagnostic('Complete producer Buffer allocations: '+JSON.stringify(materialized));
+ assert.deepEqual(materialized,[],'Count-only validation must not recreate either whole producer Buffer');
+ for(const name of ['request','result'])assert.ok(streamed.includes(certificate[name].path),name+' must use genuine stored admission');
+ assert.deepEqual(valueBytes(nativeLiteral(state.ledger)),valueBytes(f.ledger));
+ f.api.releaseCheckpoint(state);
+});
+
+
+// Establish an old native component through the genuine source/transition path.
+// The initial trusted fixture deliberately contains legacy and held rows too.
+async function qualifiedNativeLedger(t){
+ const f=await trustedFixture(t,{nativeAppend:true}),initial=(await f.api.qualifyCheckpoint({reader:f.reader})).state;
+ const first=await appendNativeAuthority(f,{completedConstructor:true,name:'prior-native'});
+ const reader=new f.native.ImmutableReader(f.root,first.candidate,{invocation:f.reader.invocation});
+ const transition=await f.api.qualifyTransition({state:initial,reader});assert.equal(transition.available,true);
+ Object.assign(f,first);return {f,initial,state:transition.candidate};
+}
+function traceLedgerNormalization(){
+ const open=fs.openSync,read=fs.readSync,mkdir=fs.mkdtempSync,files=new Map(),owners=[],metadata=[],scratch=[];
+ fs.openSync=function(name,...args){const fd=open.call(this,name,...args);files.set(fd,String(name));return fd;};
+ fs.readSync=function(fd,buffer,...args){
+  const stack=new Error().stack,n=read.call(this,fd,buffer,...args);
+  if(files.get(fd)?.endsWith('/runs.bin')&&stack.includes('nativeOnlyComponent')
+    &&stack.includes('normaliseRetainedRepairLedger')){
+   const offset=typeof args[0]==='number'?args[0]:0;
+   for(let at=offset;at<offset+n;at+=12)owners.push(buffer.readUInt32LE(at+8));
+  }
+  if(files.get(fd)?.endsWith('/metadata.bin')&&stack.includes('normaliseRetainedRepairLedger')
+    &&n===buffer.length)metadata.push(JSON.parse(buffer)[0].component_id);
+  return n;
+ };
+ fs.mkdtempSync=function(prefix,...args){const name=mkdir.call(this,prefix,...args);
+  if(String(prefix).includes('native-intervals-'))scratch.push(name);return name;};
+ return {owners,metadata,scratch,restore(){fs.openSync=open;fs.readSync=read;fs.mkdtempSync=mkdir;}};
+}
+function repinNativeRegistry(f,registry,ledger=f.ledger){
+ f.save('candidate/registry.json',registry);const commit=f.commit();
+ return candidateProducts({...f,sidecar:{...f.sidecar,authority_registry:f.pin('candidate/registry.json',commit)},
+  patch:{...f.patch,authority_registry_sha256:valueSha(registry)}},
+  {ledger:{...ledger,authority_registry_sha256:valueSha(registry)}});
+}
+function changeCandidateBase(f){
+ const sidecar=JSON.parse(fs.readFileSync(path.join(f.root,'candidate/sidecar.json')));
+ sidecar.base_selection.release_id='geography:unsupported-next-base';
+ f.save('candidate/sidecar.json',sidecar);const at=f.commit(),pin=f.pin('candidate/sidecar.json',at);
+ f.save('data/ownership-selection.json',{...f.selection,release_id:sidecar.base_selection.release_id,
+  additive_release:{path:pin.path,bytes:pin.bytes,sha256:pin.sha256}});return f.commit();
+}
+
+test('private ledger admission reuses only exact old rows and deeply validates the appended row',async t=>{
+ const {f,initial,state}=await qualifiedNativeLedger(t);
+ const next=await appendNativeAuthority(f,{completedConstructor:true,name:'next-native',owner:1,
+  mutatePatch:patch=>{patch.rows=mergeCompletedNativePatches(patch.rows.map(row=>({rows:[row]})),f.manifest.size);}});
+ const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation}),trace=traceLedgerNormalization();
+ try {
+  const transition=await f.api.qualifyTransition({state,reader});assert.equal(transition.available,true);
+  assert(trace.owners.includes(2),'The genuinely new native component must receive deep normalization');
+  assert(!trace.owners.includes(1),'The exact qualified old component must not replay deep normalization');
+  assert(trace.metadata.length>0);
+  assert.deepEqual([...new Set(trace.metadata)],[next.proof.original_ledger.rows[0].component_id],
+   'Residual normalization must not rescan old component metadata');
+  const expected=eagerCoordinateDelta({certificate:state.certificate,oldAdditions:nativeLiteral(state.additions),
+   additions:nativeLiteral(transition.candidate.additions),selection:transition.candidate.selection});
+  assert.deepEqual(transition.candidate.certificate,expected.certificate);
+  assert.deepEqual(transition.changedIds,expected.changedIds);
+  assert.deepEqual(nativeLiteral(transition.candidate.ledger),next.ledger);
+ } finally {trace.restore();f.api.releaseCheckpoint(initial);}
+});
+for(const [name,mutate,expected] of [
+ ['valid changed receipt',row=>row.source_receipt_sha256='0'.repeat(64),/Old complete ledger/],
+ ['changed interval owner',row=>row.native_rows[0].runs[0][2]=2,/native component interval/i],
+ ['changed cell count',row=>row.native_cells++,/cell count/i],
+ ['changed base hash',row=>row.base_geometry_sha256='0'.repeat(64),/current base changed/i]
+])test('private ledger admission fully checks old row with '+name,async t=>{
+ const {f,initial,state}=await qualifiedNativeLedger(t),ledger=structuredClone(f.ledger);
+ mutate(ledger.rows.find(row=>row.representation==='native-cells'));
+ const candidate=candidateProducts(f,{ledger}),reader=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation});
+ const trace=traceLedgerNormalization();
+ try {
+  await assert.rejects(f.api.qualifyTransition({state,reader}),expected);
+  if(name!=='changed base hash')assert(trace.owners.length>0,'Changed old intervals must reach the full normalizer');
+  assert(trace.scratch.length>0);assert(trace.scratch.every(name=>!fs.existsSync(name)),'Failed candidate stores must close');
+  assert.deepEqual(nativeLiteral(state.ledger),f.ledger,'The baseline stays intact after failed candidate admission');
+ } finally {trace.restore();f.api.releaseCheckpoint(initial);}
+});
+test('private ledger admission does not reuse a row under a changed completed constructor authority',async t=>{
+ const {f,initial,state}=await qualifiedNativeLedger(t),registry=structuredClone(f.registry);
+ const entry=registry.entries.find(entry=>entry.completed_constructor),prior=entry.authority_sha256;
+ entry.completed_constructor.commit=f.candidate;
+ const {authority_sha256,completed_constructor,...identity}=entry;
+ assert.equal(valueSha(identity),prior,'Completed constructor changes do not alter the authority ID');
+ const candidate=repinNativeRegistry(f,registry),reader=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation});
+ const trace=traceLedgerNormalization();
+ try {
+  await assert.rejects(f.api.qualifyTransition({state,reader}),/Old original authority/);
+  assert(trace.owners.includes(1),'An equal raw row under a changed authority still receives full normalization');
+  assert(trace.scratch.every(name=>!fs.existsSync(name)));
+ } finally {trace.restore();f.api.releaseCheckpoint(initial);}
+});
+for(const invalid of [false,true])test('private ledger admission preserves unsupported-base fallback with changed old row, invalid='+invalid,async t=>{
+ const {f,initial,state}=await qualifiedNativeLedger(t),ledger=structuredClone(f.ledger),row=ledger.rows.find(row=>row.representation==='native-cells');
+ if(invalid)row.native_cells++;else row.source_receipt_sha256='0'.repeat(64);
+ candidateProducts(f,{ledger});const candidate=changeCandidateBase(f);
+ const reader=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation}),trace=traceLedgerNormalization();
+ try {
+  if(invalid)await assert.rejects(f.api.qualifyTransition({state,reader}),/cell count/i);
+  else {const result=await f.api.qualifyTransition({state,reader});
+   assert.equal(result.available,false);assert.equal(result.cold,'candidate');assert.strictEqual(result.baseline,state);
+   assert.match(result.reason,/native\/source\/domain\/owner base changed/);}
+  assert(trace.owners.includes(1),'Changed rows are checked before cold-base eligibility');
+  assert(trace.scratch.every(name=>!fs.existsSync(name)));
+  assert.deepEqual(nativeLiteral(state.ledger),f.ledger);
+ } finally {trace.restore();f.api.releaseCheckpoint(initial);}
+});
+for(const [name,mutate,expected] of [
+ ['scope alignment',ledger=>{ledger.scope_ids[0]='different';},/Foreign\/duplicate\/unordered component/],
+ ['scope length',ledger=>{ledger.scope_ids.pop();},/Incomplete complete ledger scope/],
+ ['ledger header',ledger=>{ledger.kind='unknown-ledger';},/Unsupported or unbound versioned repair ledger/],
+ ['held disposition',ledger=>{ledger.rows.find(row=>row.disposition==='rejected').disposition='invented';},/Unknown original ledger disposition/],
+ ['duplicate old identity',ledger=>{ledger.rows.splice(1,0,structuredClone(ledger.rows[0]));ledger.scope_ids.splice(1,0,ledger.scope_ids[0]);},/Foreign\/duplicate\/unordered component/],
+ ['removed held row',ledger=>{ledger.rows=ledger.rows.filter(row=>row.disposition!=='rejected');ledger.scope_ids=ledger.rows.map(row=>row.component_id);},/Old complete ledger/]
+])test('private ledger admission retains whole-ledger '+name,async t=>{
+ const f=await trustedFixture(t),{state}=await f.api.qualifyCheckpoint({reader:f.reader}),ledger=structuredClone(f.ledger);mutate(ledger);
+ const candidate=candidateProducts(f,{ledger}),reader=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation});
+ try {await assert.rejects(f.api.qualifyTransition({state,reader}),expected);
+  assert.deepEqual(nativeLiteral(state.ledger),f.ledger);
+ } finally {f.api.releaseCheckpoint(state);}
+});
+test('private ledger admission refuses mixed early geometry and later scope errors with complete cleanup',async t=>{
+ const {f,initial,state}=await qualifiedNativeLedger(t),ledger=structuredClone(f.ledger);
+ ledger.rows.find(row=>row.representation==='native-cells').base_geometry.coordinates[0].at(-1)[0]+=.01;
+ ledger.rows.push({component_id:'zzz-held',disposition:'rejected',reason:'later malformed scope'});ledger.scope_ids.push('different');
+ const candidate=candidateProducts(f,{ledger}),reader=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation});
+ const trace=traceLedgerNormalization();
+ try {
+  // The complete structural scan may report the later scope error first. The
+  // old full normalizer reports the earlier geometry error; both must refuse.
+  await assert.rejects(f.api.qualifyTransition({state,reader}),error=>{
+   assert.match(error.message,/Unclosed footprint ring|Foreign\/duplicate\/unordered component/);
+   t.diagnostic(error.message);return true;});
+  assert(trace.scratch.length>0);assert(trace.scratch.every(name=>!fs.existsSync(name)));
+  assert.deepEqual(nativeLiteral(state.ledger),f.ledger);
+ } finally {trace.restore();f.api.releaseCheckpoint(initial);}
+});
+test('private ledger admission owns row views and keeps genuine state lifetime',async t=>{
+ const {f,initial,state}=await qualifiedNativeLedger(t);
+ const borrowed=state.ledger.rows.at(-1),run=borrowed.native_rows.at(0).runs.at(0);
+ run[2]=2;assert.equal(run[2],2,'Returned interval tuples are caller-owned values');
+ assert.throws(()=>{borrowed.base_geometry.coordinates[0][0][0]=90;},TypeError);
+ assert.deepEqual(nativeLiteral(state.ledger),f.ledger,'Public parsed row mutations cannot alter the private store');
+ const reader=new f.native.ImmutableReader(f.root,f.candidate,{invocation:f.reader.invocation});
+ await assert.rejects(f.api.qualifyTransition({state:{...state},reader}),/private qualified/);
+ await assert.rejects(f.api.qualifyTransition({state,reader:new f.native.ImmutableReader(f.root,f.candidate)}),/Foreign or expired/);
+ const trace=traceLedgerNormalization();let additions;
+ try {
+  const result=await f.api.qualifyTransition({state,reader});assert.equal(result.available,true);additions=result.candidate.additions;
+  assert.deepEqual(trace.owners,[],'A wholly unchanged candidate needs no native deep normalization');
+  assert.deepEqual(result.candidate.certificate,state.certificate);
+ } finally {trace.restore();f.api.releaseCheckpoint(initial);}
+ assert.throws(()=>additions.at(-1),/closed|expired/i);
+ await assert.rejects(f.api.qualifyTransition({state,reader}),/private qualified/);
+});
+
+for(const [name,mutate,expected] of [
+ ['kind',registry=>registry.kind='unknown-registry',/Missing explicit retained authority registry/],
+ ['duplicate entry',registry=>registry.entries.push(structuredClone(registry.entries[0])),/Foreign\/duplicate\/unordered authority entry/]
+])test('private ledger admission fully validates current registry '+name+' even with no new rows',async t=>{
+ const f=await trustedFixture(t),{state}=await f.api.qualifyCheckpoint({reader:f.reader}),registry=structuredClone(f.registry);mutate(registry);
+ const candidate=repinNativeRegistry(f,registry),reader=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation});
+ try {await assert.rejects(f.api.qualifyTransition({state,reader}),expected);
+  assert.deepEqual(nativeLiteral(state.ledger),f.ledger);
+ } finally {f.api.releaseCheckpoint(state);}
+});
+
+
+test('private admitted component equality does not reread native intervals to rehash old rows',async t=>{
+ const {f,initial,state}=await qualifiedNativeLedger(t);
+ const candidate=candidateProducts(f),reader=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation});
+ const read=fs.readSync,limit=Error.stackTraceLimit;let repeatedReads=0;
+ Error.stackTraceLimit=60;
+ fs.readSync=function(...args){
+  const stack=new Error().stack;
+  if(stack.includes('normaliseTransitionSelection')&&stack.includes('canonicalDigest')
+    &&stack.includes('at intervals'))repeatedReads++;
+  return Reflect.apply(read,this,args);
+ };
+ try{
+  const transition=await f.api.qualifyTransition({state,reader});assert.equal(transition.available,true);
+  assert.deepEqual(nativeLiteral(transition.candidate.ledger),f.ledger);
+  assert.equal(repeatedReads,0,'Old row equality must use the exact private admitted component digest');
+ }finally{fs.readSync=read;Error.stackTraceLimit=limit;f.api.releaseCheckpoint(initial);}
+});
+
+test('private component identities reject public digest claims and foreign or expired sessions',async t=>{
+ const {f,initial,state}=await qualifiedNativeLedger(t),ledger=structuredClone(f.ledger);
+ const row=ledger.rows.find(row=>row.representation==='native-cells');
+ const oldDigest=valueSha(row);row.source_receipt_sha256='0'.repeat(64);row.canonical_sha256=oldDigest;
+ const candidate=candidateProducts(f,{ledger});
+ const reader=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation});
+ try{
+  await assert.rejects(f.api.qualifyTransition({state,reader}),/Native source-target component has missing\/foreign fields/);
+  assert.deepEqual(nativeLiteral(state.ledger),f.ledger,'Rejected digest claims cannot alter baseline stores');
+  const foreign=new f.native.ImmutableReader(f.root,candidate);
+  await assert.rejects(f.api.qualifyTransition({state,reader:foreign}),/Foreign or expired checkpoint invocation/);
+ }finally{f.api.releaseCheckpoint(initial);}
+ await assert.rejects(f.api.qualifyTransition({state,reader}),/Missing private qualified selected checkpoint/);
 });

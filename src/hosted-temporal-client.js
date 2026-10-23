@@ -45,7 +45,7 @@ export async function loadHostedTemporalGeography({apiGet,year,examples=false,ex
    let cursor='',pageLimit=limit;const cursors=new Set();
    for(;;){
     cancelled(controller.signal);if(++pages>maxPages)invalid('page-budget-exceeded');
-    const params=new URLSearchParams({year:String(year),examples:String(Number(examples)),stream:kind,cursor,limit:String(pageLimit)});let page;
+    const params=new URLSearchParams({year:String(year),examples:String(Number(examples)),stream:kind,cursor,limit:String(pageLimit),release_id:pins.release_id});let page;
     try{page=await abortable(()=>apiGet('/api/geography/temporal/snapshot?'+params,{signal:controller.signal}),controller.signal);}
     catch(error){
      cancelled(signal);

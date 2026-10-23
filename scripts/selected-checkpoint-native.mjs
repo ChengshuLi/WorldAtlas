@@ -85,8 +85,22 @@ export async function compareNativeAdditiveIntervals(runs,{y,before,after,size,o
 // The joint launcher qualifies both states in one invocation and owns release.
 // Authentication stays in the shared projector, including the zero-row path.
 export async function compareSelectedCheckpointNative({transition}) {
-  const {authenticateTransition,visitNativeIntervals,projectVisibilityLatitudes}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs');
+  const {authenticateTransition,visitNativeIntervals,projectVisibilityLatitudes,finalBankComparison}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs');
   const {baseline,candidate,changedNativeRows}=authenticateTransition({transition});
+  if(candidate.version===2){
+    const proof=finalBankComparison({transition});
+    return {version:1,method:'selected-native-owner-conservation-v1',status:'no-new-native-loss',
+      repair_visibility:{new_components:proof.witnesses.length,witnesses:proof.witnesses},
+      baseline_selection:baseline.selection,candidate_selection:candidate.selection,
+      affected_rows:changedNativeRows.length,lost_or_reassigned_cells:0,intervals:[],
+      native_row_scope:{proof:'complete-accepted-final-bank-and-qualified-new-intervals',
+        compared_rows:candidate.manifest.size,changed_rows:changedNativeRows,
+        representation_migration:proof.migration,added_cells:proof.addedCells},
+      checkpoint_custody:{baseline_checkpoint:baseline.accepted_execution,
+        accepted_bank:proof.baselineIndex,candidate_bank:proof.candidateIndex},candidate_code_executed:false,
+      limits:['The same private transition exhaustively compares every final word and context value against accepted E plus newly qualified native intervals.',
+        'Original physical/source authority is retained; this is not sub-cell polygon coverage or approval of unsupported source changes.']};
+  }
   const visibilityCandidates=newVisibleRepairCandidates(baseline.additions,candidate.additions);
   const size=baseline.manifest.size,oldEntries=baseline.certificate.entries,newEntries=candidate.certificate.entries;
   demand(size===candidate.manifest.size&&oldEntries.length===newEntries.length,'Checkpoint native domain or complete owner roster differs');
@@ -120,7 +134,25 @@ export async function compareSelectedCheckpointNative({transition}) {
     for(const loss of part.intervals)result.intervals.push(loss);
     demand(Number.isSafeInteger(result.lost_or_reassigned_cells),'Native loss count exceeds exact integer domain');
   }});
-  if(visibilityCandidates.length&&expected.length){
+  // qualifyTransition binds every new native component to the exact appended
+  // patch union and rejects ANY overlap with the old cumulative patch, including
+  // same-owner overlap. The complete base scan above establishes current
+  // owner-zero. Therefore each new native component's first cell is already its
+  // deterministic 0 -> owner witness; searching all row batches repeats proof.
+  let hasPolygons=false,ordinal=0;
+  for(const item of visibilityCandidates){
+    const index=ordinal++;
+    if(item.representation!=='native-cells'){hasPolygons=true;continue;}
+    demand(!result.intervals.length&&result.lost_or_reassigned_cells===0,
+      'Qualified native append lost or reassigned map cells');
+    const row=item.native_rows.at(0),run=row?.runs.at(0);
+    demand(run,'New gap repair has no actual changed map-cell witness');
+    visibilityWitnesses[index]={component_id:item.component_id,
+      ...(item.authority_sha256?{authority_sha256:item.authority_sha256}:{}),
+      native_rows_sha256:visibilityDigest(item.native_rows),x:run[0],y:row.y,
+      previous_owner:0,candidate_owner:run[2]};
+  }
+  if(hasPolygons&&expected.length){
     const latitudes=projectVisibilityLatitudes({state:candidate});
     // Base intervals have already been validated and need not be visited again.
     // These small batches contain references to patch rows, never copied runs.
@@ -133,8 +165,7 @@ export async function compareSelectedCheckpointNative({transition}) {
         pending=[];indices=[];
       };
       for(const item of visibilityCandidates){
-        if(!visibilityWitnesses[i]&&(item.representation!=='native-cells'
-          ||item.native_rows.at(0).y<=rows.at(-1)&&item.native_rows.at(-1).y>=rows[0])){
+        if(!visibilityWitnesses[i]){
           pending.push(item);indices.push(i);if(pending.length===16)visit();
         }i++;
       }

@@ -9,7 +9,7 @@ import {createHash} from 'node:crypto';
 import {authenticateOriginalPackageOutput, requireOriginalPackageOutput,
   requirePackageAssemblyExecution, issuePackageAssemblyExecution} from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
 import {requireCurrentPackageAssembly, integrationTestFiles} from '../scripts/run-integration-tests.mjs';
-import {createPackageAssemblyScratch,packageAssemblyInvocation,findOriginalPackage,acceptedSelectedPackageInputs,readOriginalPackageGeography} from '../scripts/assemble-selected-package.mjs';
+import {createPackageAssemblyScratch,packageAssemblyInvocation,packageAssemblyAPI,findOriginalPackage,acceptedSelectedPackageInputs,readOriginalPackageGeography} from '../scripts/assemble-selected-package.mjs';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {inspectPackageNodeRuntime,inspectPackageRuntime} from '../scripts/package-build.mjs';
 import {loadPackageInputs} from '../scripts/package-inputs.mjs';
@@ -58,11 +58,11 @@ function original(t,{worker=false,bodies:extraBodies={}}={}){
     if(route.endsWith('/attempts/2'))return run;
     if(route.endsWith('/jobs/29'))return job;
     if(route.endsWith('/artifacts/41'))return artifact;
-    if(route.includes('/git/commits/'))return {tree:{sha:'e'.repeat(40)}};
-    if(route.endsWith('/git/trees/'+'e'.repeat(40)))return {tree:[{path:'.github',type:'tree',mode:'040000',sha:'6'.repeat(40)}],truncated:false};
-    if(route.endsWith('/git/trees/'+'6'.repeat(40)))return {tree:[{path:'workflows',type:'tree',mode:'040000',sha:'7'.repeat(40)}],truncated:false};
-    if(route.endsWith('/git/trees/'+'7'.repeat(40)))return {tree:[{...workflow,path:path.posix.basename(workflow.path)}],truncated:false};
-    if(route.includes('/git/trees/'))return {tree:[workflow],truncated:false};
+    if(route.includes('/git/commits/'))return {sha:route.split('/').at(-1),tree:{sha:'e'.repeat(40)}};
+    if(route.endsWith('/git/trees/'+'e'.repeat(40)))return {sha:'e'.repeat(40),tree:[{path:'.github',type:'tree',mode:'040000',sha:'6'.repeat(40)}],truncated:false};
+    if(route.endsWith('/git/trees/'+'6'.repeat(40)))return {sha:'6'.repeat(40),tree:[{path:'workflows',type:'tree',mode:'040000',sha:'7'.repeat(40)}],truncated:false};
+    if(route.endsWith('/git/trees/'+'7'.repeat(40)))return {sha:'7'.repeat(40),tree:[{...workflow,path:path.posix.basename(workflow.path)}],truncated:false};
+    if(route.includes('/git/trees/'))return {sha:route.split('/').at(-1).split('?')[0],tree:[workflow],truncated:false};
     throw Error('Unexpected mocked authority route: '+route);
   };
   api.jobLogRedirect=async()=>new Response(null,{status:302,headers:{location:'https://fixture.blob.core.windows.net/job-log'}});
@@ -336,8 +336,9 @@ for(const queueOnly of [false,true])test('private assembly admission uses actual
   await assert.rejects(authenticate(legacy),/Actual executed producer workflow/);
 });
 
-function originalDiscovery(t,{worker=false,queueOnly=false}={}){
-  const f=original(t,{worker}),s=sourceFixture(f,{author:!queueOnly}),before=s.snapshot(),repo=f.repo;
+function originalDiscovery(t,{worker=false,queueOnly=false,configure}={}){
+  const f=original(t,{worker}),s=sourceFixture(f,{author:!queueOnly});configure?.(s);
+  const before=s.snapshot(),repo=f.repo;
   const rows=s.git('ls-tree','-rlz','HEAD').split('\0').filter(Boolean).map(line=>{
     const [metadata,name]=line.split('\t'),[mode,type,oid,size]=metadata.trim().split(/\s+/);
     return {path:name,mode,type,sha:oid,size:Number(size)};
@@ -353,8 +354,13 @@ function originalDiscovery(t,{worker=false,queueOnly=false}={}){
     calls.push(route);
     if(route.includes('/actions/workflows/'))return {workflow_runs:route.includes(worker?'worker-merge.yml':'merge-integration-checks.yml')?[f.run]:[]};
     if(route.endsWith('/actions/runs/17'))return f.run;
-    if(route===`/repos/${repo}/git/commits/${sourceHead}`)return {tree:{sha:before.tree}};
-    if(route===`/repos/${repo}/git/trees/${before.tree}?recursive=1`)return {tree:rows,truncated:false};
+    if(route===`/repos/${repo}/git/commits/${sourceHead}`)return {sha:sourceHead,tree:{sha:before.tree}};
+    const tree=/\/git\/trees\/([a-f0-9]{40})(\?recursive=1)?$/.exec(route);
+    if(tree&&!['e','6','7'].some(value=>tree[1]===value.repeat(40))){
+      const treeRows=s.git('ls-tree',...(tree[2]?['-r']:[]),'-lz',tree[1]).split('\0').filter(Boolean).map(line=>{
+        const [metadata,path]=line.split('\t'),[mode,type,sha,size]=metadata.trim().split(/\s+/);return {path,mode,type,sha,...(type==='blob'?{size:Number(size)}:{})};
+      });return {sha:tree[1],tree:treeRows,truncated:false};
+    }
     if(route.includes('/contents/.github/package-inputs.json')){assert(route.endsWith(sourceHead));const row=rows.find(r=>r.path==='.github/package-inputs.json');return {...blob(definitionRaw),...row,type:'file'};}
     if(route.includes('/git/blobs/'))return blob(selectionRaw);
     if(route.includes('/attempts/2/jobs'))return {jobs:[f.job]};
@@ -410,6 +416,85 @@ for(const worker of [false,true])test('real GitHub adapter discovers and authent
   assert.equal(downloads,priorDownloads);
 });
 
+test('discovery never requests unrelated repository trees while retaining complete declared directory inputs',async t=>{
+  const f=originalDiscovery(t,{configure:s=>{
+    const definition=s.snapshot().definition;definition.inputs.push('public/');
+    s.write('.github/package-inputs.json',definition);s.write('public/a.txt','asset');
+    s.write('public/nested/b.txt','nested asset');s.write('research/unrelated/large.json','unconsumed history');
+    s.write('unrelated non-ASCII é.txt','Not a declared package input');s.commit();
+  }}),oldFetch=globalThis.fetch,oldWarn=console.warn;
+  t.after(()=>{globalThis.fetch=oldFetch;console.warn=oldWarn;});globalThis.fetch=async()=>new Response(f.log());console.warn=()=>{};
+  const calls=[],baseAPI=f.api,rootTree=f.before.tree,publicTree=f.s.git('rev-parse',f.sourceHead+':public');
+  const api=async route=>{
+    calls.push(route);
+    if(route===`/repos/${f.repo}/git/trees/${rootTree}?recursive=1`)throw Error('Unrelated whole-repository metadata unavailable (HTTP 500)');
+    return baseAPI(route);
+  };api.jobLogRedirect=baseAPI.jobLogRedirect;
+  const found=await findOriginalPackage({api,repo:f.repo,current:f.before,originalRunId:17});
+  assert.equal(found?.origin.head,f.sourceHead,'Unneeded repository metadata must not force a full build');
+  assert.deepEqual(found.source.files,f.before.files,'Every declared directory member remains independently inventoried');
+  assert(!calls.includes(`/repos/${f.repo}/git/trees/${rootTree}?recursive=1`));
+  assert(calls.includes(`/repos/${f.repo}/git/trees/${publicTree}?recursive=1`));
+  assert(!calls.some(route=>route.includes(f.s.git('rev-parse',f.sourceHead+':research'))));
+});
+
+test('actual assembly transport recovers one transient metadata failure inside the existing read policy',async t=>{
+  const f=originalDiscovery(t,{worker:true}),oldFetch=globalThis.fetch,oldWarn=console.warn;
+  t.after(()=>{globalThis.fetch=oldFetch;console.warn=oldWarn;});globalThis.fetch=async()=>new Response(f.log());console.warn=()=>{};
+  let failures=0,time=0;const calls=[],waits=[];
+  const api=packageAssemblyAPI('fixture-token',{now:()=>time,sleep:async ms=>{waits.push(ms);time+=ms;},fetchImpl:async url=>{
+    const route=new URL(url).pathname+new URL(url).search;calls.push(route);
+    if(route.endsWith('/jobs/29/logs'))return new Response(null,{status:302,headers:{location:'https://fixture.blob.core.windows.net/job-log'}});
+    if(route.includes('/git/trees/')&&failures++===0)return Response.json({message:'Temporary metadata failure'},{status:500});
+    return Response.json(await f.api(route));
+  }});
+  const found=await findOriginalPackage({api,repo:f.repo,current:f.before,originalRunId:17});
+  assert.equal(found?.origin.head,f.sourceHead,'A transient metadata response must not discard an otherwise valid original');
+  assert.deepEqual(waits,[1000]);
+  const firstTree=calls.find(route=>route.includes('/git/trees/'));
+  assert.equal(calls.filter(route=>route===firstTree).length,2);
+});
+
+test('scoped metadata retains truncation, identity, ancestor and complete directory refusal',async t=>{
+  const f=originalDiscovery(t,{configure:s=>{
+    const definition=s.snapshot().definition;definition.inputs.push('public/','optional/absent.txt');definition.optional_inputs.push('optional/absent.txt');
+    s.write('.github/package-inputs.json',definition);s.write('public/a.txt','asset');s.write('public/nested/b.txt','nested asset');s.commit();
+  }}),oldFetch=globalThis.fetch,oldWarn=console.warn;
+  t.after(()=>{globalThis.fetch=oldFetch;console.warn=oldWarn;});globalThis.fetch=async()=>new Response(f.log());console.warn=()=>{};
+  const baseAPI=f.api,publicTree=f.s.git('rev-parse',f.sourceHead+':public');let mutate=value=>value;
+  const api=async route=>{const value=await baseAPI(route);return route.includes('/git/trees/')?mutate(structuredClone(value),route):value;};
+  api.jobLogRedirect=baseAPI.jobLogRedirect;
+  const discover=()=>findOriginalPackage({api,repo:f.repo,current:f.s.snapshot(),originalRunId:17});
+  assert.equal((await discover()).origin.head,f.sourceHead,'An authenticated absent optional leaf is permitted');
+  for(const change of [
+    value=>({...value,truncated:true}),value=>({...value,sha:'0'.repeat(40)}),
+    value=>({...value,tree:[...value.tree,value.tree[0]]}),
+    value=>({...value,tree:value.tree.map(row=>row.path==='public'?{...row,type:'blob',mode:'120000'}:row)}),
+    value=>({...value,tree:value.tree.map(row=>row.path==='scripts'?{...row,type:'blob',mode:'120000'}:row)}),
+    (value,route)=>route.endsWith(publicTree+'?recursive=1')?{...value,tree:value.tree.filter(row=>row.path!=='nested/b.txt')}:value,
+  ]){mutate=change;assert.equal(await discover(),null);}
+  mutate=value=>value;
+  f.s.write('public/new.txt','new input');f.s.commit();assert.equal(await discover(),null,'A new declared directory member is still an input change');
+  fs.unlinkSync(path.join(f.root,'public/new.txt'));f.s.commit();
+  f.s.write('optional/absent.txt','formerly absent input');f.s.commit();assert.equal(await discover(),null,'Optional absence cannot authorize a new present input');
+});
+
+for(const [name,status,expected]of [['exhausted transient',500,3],['ordinary denial',403,1],['ordinary absence',404,1],['unsupported server failure',501,1],['transport ambiguity',null,1]]){
+  test('assembly transport preserves '+name+' fallback and bounded attempts',async t=>{
+    const f=originalDiscovery(t,{worker:true}),oldFetch=globalThis.fetch,oldWarn=console.warn;
+    t.after(()=>{globalThis.fetch=oldFetch;console.warn=oldWarn;});globalThis.fetch=async()=>new Response(f.log());console.warn=()=>{};
+    let count=0,time=0;const waits=[];
+    const api=packageAssemblyAPI('fixture-token',{now:()=>time,sleep:async ms=>{waits.push(ms);time+=ms;},fetchImpl:async url=>{
+      const route=new URL(url).pathname+new URL(url).search;
+      if(route.endsWith('/jobs/29/logs'))return new Response(null,{status:302,headers:{location:'https://fixture.blob.core.windows.net/job-log'}});
+      if(route.includes('/git/trees/')){count++;if(status===null)throw Error('Uncertain transport');return Response.json({message:'Metadata unavailable'},{status});}
+      return Response.json(await f.api(route));
+    }});
+    assert.equal(await findOriginalPackage({api,repo:f.repo,current:f.before,originalRunId:17}),null);
+    assert.equal(count,expected);assert.deepEqual(waits,expected===3?[1000,2000]:[]);
+  });
+}
+
 test('original discovery ignores observer trees but refuses changed build inputs and workflow',async t=>{
   const f=originalDiscovery(t),old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
   globalThis.fetch=async()=>new Response(f.log());
@@ -436,35 +521,36 @@ test('discovery reuses only its authenticated identical base tree and retains ex
     calls.push(route);
     const commit=/\/git\/commits\/([a-f0-9]{40})$/.exec(route);
     if(commit)return {sha:missingCommit&&commit[1]===trustedBase?undefined:(wrongCommit&&commit[1]===trustedBase||wrongOriginal&&commit[1]===f.sourceHead)?'0'.repeat(40):commit[1],tree:{sha:f.s.git('rev-parse',commit[1]+'^{tree}')}};
-    const tree=/\/git\/trees\/([a-f0-9]{40})\?recursive=1$/.exec(route);
+    const tree=/\/git\/trees\/([a-f0-9]{40})(\?recursive=1)?$/.exec(route);
     if(tree){
-      const rows=f.s.git('ls-tree','-rlz',tree[1]).split('\0').filter(Boolean).map(line=>{
+      const rows=f.s.git('ls-tree',...(tree[2]?['-r']:[]),'-lz',tree[1]).split('\0').filter(Boolean).map(line=>{
         const [metadata,path]=line.split('\t'),[mode,type,sha,size]=metadata.trim().split(/\s+/);return {path,mode,type,sha,size:Number(size)};
-      });return {tree:rows,truncated:truncate};
+      });return {sha:tree[1],tree:rows,truncated:truncate};
     }
     return baseAPI(route);
   };
   api.jobLogRedirect=baseAPI.jobLogRedirect;
   const discover=()=>findOriginalPackage({api,repo:f.repo,current:f.s.snapshot(),originalRunId:17,trustedBase});
   const recursive=()=>calls.filter(route=>route.includes('/git/trees/')&&route.endsWith('?recursive=1'));
+  const treeCalls=sha=>calls.filter(route=>route===`/repos/${f.repo}/git/trees/${sha}`);
   assert.notEqual(trustedBase,f.sourceHead);
   const found=await discover();
   assert.equal(found.origin.head,f.sourceHead);assert.equal(found.source.head,f.sourceHead);
   assert.equal(found.accepted_selected_inputs.commit,trustedBase);
   assert.equal(calls.filter(route=>route.endsWith('/git/commits/'+trustedBase)).length,1);
   assert.equal(calls.filter(route=>route.endsWith('/git/commits/'+f.sourceHead)).length,1);
-  assert.deepEqual(recursive(),[`/repos/${f.repo}/git/trees/${f.before.tree}?recursive=1`]);
+  assert.deepEqual(recursive(),[]);assert.equal(treeCalls(f.before.tree).length,1);
   const builder=found.accepted_selected_inputs.files.find(row=>row.path==='scripts/builder.mjs');
   assert.equal(builder.oid,f.rows.find(row=>row.path===builder.path).sha);
   calls.length=0;truncate=true;assert.equal(await discover(),null);truncate=false;
-  wrongCommit=true;await assert.rejects(discover(),/Trusted selected base commit differs/);wrongCommit=false;
-  missingCommit=true;await assert.rejects(discover(),/Trusted selected base commit differs/);missingCommit=false;
+  wrongCommit=true;await assert.rejects(discover(),/Package metadata commit differs/);wrongCommit=false;
+  missingCommit=true;await assert.rejects(discover(),/Package metadata commit differs/);missingCommit=false;
   wrongOriginal=true;assert.equal(await discover(),null);wrongOriginal=false;
   f.s.write('README.md','A different accepted tree with unchanged package inputs');f.s.commit();
   trustedBase=f.s.git('rev-parse','HEAD');calls.length=0;
   assert.equal((await discover()).origin.head,f.sourceHead);
-  assert.deepEqual(recursive(),[`/repos/${f.repo}/git/trees/${f.before.tree}?recursive=1`,
-    `/repos/${f.repo}/git/trees/${f.s.git('rev-parse',trustedBase+'^{tree}')}?recursive=1`]);
+  assert.deepEqual(recursive(),[]);assert.equal(treeCalls(f.before.tree).length,1);
+  assert.equal(treeCalls(f.s.git('rev-parse',trustedBase+'^{tree}')).length,1);
   for(const name of ['scripts/builder.mjs','.github/workflows/worker-merge.yml']){
     const original=fs.readFileSync(path.join(f.root,name),'utf8');f.s.write(name,'changed');f.s.commit();
     assert.equal(await discover(),null,'Tree reuse must not hide changed '+name);
@@ -521,6 +607,28 @@ test('final-worker original binds candidate source separately from successful pr
   assert.equal(requireOriginalPackageOutput(token).manifest.source.head,f.origin.head);
   assert.equal(requireOriginalPackageOutput(token).origin.workflow_head,f.run.head_sha);
   assert.throws(()=>requireOriginalPackageOutput(structuredClone(token)),/Privately authenticated/);
+});
+
+test('early original archive retention still requires successful producer tests and complete ordered phases',async t=>{
+ const old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
+ const early=()=>{const f=original(t,{worker:true}),steps=f.job.steps;
+  f.job.steps=[steps[0],steps[1],steps[2],steps[4],steps[3]].map((step,index)=>({...step,number:index+1}));
+  return f;};
+ const valid=early();globalThis.fetch=async()=>new Response(valid.log());
+ assert.equal(requireOriginalPackageOutput(await authenticateOriginalPackageOutput(valid)).origin.head,valid.origin.head);
+ const cases=[
+  f=>{f.job.conclusion='failure';},
+  f=>{f.job.conclusion='cancelled';},
+  f=>{f.job.status='in_progress';},
+  ...['Snapshot','Build','Inventory','Retain','Test'].flatMap(prefix=>['failure','skipped','cancelled'].map(conclusion=>
+   f=>{f.job.steps.find(row=>row.name.startsWith(prefix)).conclusion=conclusion;})),
+  f=>{f.job.steps.find(row=>row.name.startsWith('Retain')).number=2;},
+  f=>{f.job.steps.find(row=>row.name.startsWith('Test')).number=3;},
+  f=>{for(const row of f.job.steps)if(row.number>=4)row.number++;},
+  f=>{f.job.steps.push({...f.job.steps[3]});},
+ ];
+ for(const mutate of cases){const f=early();mutate(f);globalThis.fetch=async()=>new Response(f.log());
+  await assert.rejects(authenticateOriginalPackageOutput(f));}
 });
 
 test('actual current queue step roster admits an original donor without historical readback',async t=>{
@@ -620,13 +728,13 @@ test('PR discovery checks actual merge-ref workflow bytes even when source and r
   const baseAPI=f.api;
   const api=async route=>{
     const commit=/\/git\/commits\/([a-f0-9]{40})$/.exec(route);
-    if(commit)return {tree:{sha:f.s.git('rev-parse',commit[1]+'^{tree}')}};
+    if(commit)return {sha:commit[1],tree:{sha:f.s.git('rev-parse',commit[1]+'^{tree}')}};
     const tree=/\/git\/trees\/([a-f0-9]{40})(\?recursive=1)?$/.exec(route);
     if(tree){
       const rows=f.s.git('ls-tree',...(tree[2]?['-r']:[]),'-lz',tree[1]).split('\0').filter(Boolean).map(line=>{
         const [meta,name]=line.split('\t'),[mode,type,sha,size]=meta.trim().split(/\s+/);return {path:name,mode,type,sha,size:Number(size)};
       });
-      return {tree:rows,truncated:false};
+      return {sha:tree[1],tree:rows,truncated:false};
     }
     return baseAPI(route);
   };
@@ -693,7 +801,7 @@ test('discovery and actual private execution admit data leaves and a later accep
 
 // A small real current-product fixture. It exercises the same consumer after
 // private original-output admission, without any scientific custody inputs.
-async function currentProductFixture(t,{changeCatalog=()=>{},changeGeometry=()=>{},reference=false,sourceRevision=false,priorGzip=false}={}) {
+async function currentProductFixture(t,{changeCatalog=()=>{},changeGeometry=()=>{},reference=false,sourceRevision=false,priorGzip=false,nativePrepared=false,finalProfile=false}={}) {
   const {gzipSync}=await import('node:zlib');
   const {footprintHash}=await import('../scripts/check-prepared.mjs');
   const {footprintValueSha256,additiveReleaseFootprintDigest}=await import('../src/effective-footprint.js');
@@ -706,8 +814,25 @@ async function currentProductFixture(t,{changeCatalog=()=>{},changeGeometry=()=>
   const base={id:'geography:base',footprints_sha256:footprintHash([feature]),hierarchy_sha256:'a'.repeat(64)};
   const native=reference?{...base,id:'geography:native',hierarchy_sha256:'9'.repeat(64)}:base;
   const rosterRaw=Buffer.from(JSON.stringify([{id:feature.id,index:1,province_id:reference?'old-parent':'parent',bounds:[0,0,1,1]}])),bounds=gzipSync(rosterRaw);
-  const manifestRaw=Buffer.from(JSON.stringify({size:262166,geographic_release:native.id,footprints_sha256:native.footprints_sha256,
-    hierarchy_sha256:native.hierarchy_sha256,original_assets:{bounds:{sha256:sha(bounds)}}}));
+  const manifest={size:262166,geographic_release:native.id,footprints_sha256:native.footprints_sha256,
+    hierarchy_sha256:native.hierarchy_sha256,original_assets:{bounds:{sha256:sha(bounds)}}};
+  let nativeSource;
+  if(nativePrepared){
+    nativeSource=fs.mkdtempSync(path.join(os.tmpdir(),'original-native-words-'));t.after(()=>fs.rmSync(nativeSource,{recursive:true,force:true}));
+    const {shuffleOwnershipBytes}=await import('../src/ownership-codec.js');
+    const rows=new Uint32Array(manifest.size*2);rows[1]=1;for(let y=1;y<manifest.size;y++)rows[y*2]=1;
+    const runs=Uint32Array.from([1,1]);
+    Object.assign(manifest,{version:2,method:'native-linear-evenodd-first-owner-v1',coordinateBits:19,runWords:runs.length,
+      parts:[['rows',rows],['runs',runs]].map(([kind,words])=>{
+        const raw=gzipSync(shuffleOwnershipBytes(words)),name='native-v1/ownership/'+kind+'-0.bin.gz';
+        fs.mkdirSync(path.dirname(path.join(nativeSource,name)),{recursive:true});fs.writeFileSync(path.join(nativeSource,name),raw);
+        return {kind,path:name,offset:0,words:words.length,encoding:'byte-shuffle',bytes:raw.length,sha256:sha(raw),decoded_sha256:sha(Buffer.from(words.buffer))};
+      })});
+    const name='coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz';
+    const raw=fs.readFileSync(fileURLToPath(new URL('../'+name,import.meta.url)));
+    manifest.native_latitudes={commit:'a'.repeat(40),path:name,root:'repository',role:'immutable-normative-rule-input',bytes:raw.length,sha256:sha(raw),decoded_bytes:gunzipSync(raw).length,decoded_sha256:sha(gunzipSync(raw))};
+  }
+  const manifestRaw=Buffer.from(JSON.stringify(manifest));
   const ledger={version:1,kind:'native-additive-repair-ledger-v1',rule_sha256:'b'.repeat(64),base_reference:base,
     parent_inventory:{components:1,report_sha256:'c'.repeat(64),roster_sha256:'d'.repeat(64)},scope_ids:['gap'],assigned_cells:2,
     rows:[{component_id:'gap',disposition:'assigned',target_id:'owner',pixelIndex:1,base_geometry:feature.geometry,
@@ -731,6 +856,12 @@ async function currentProductFixture(t,{changeCatalog=()=>{},changeGeometry=()=>
   t.after(()=>fs.rmSync(currentRoot,{recursive:true,force:true}));
   const files=new Map(Object.entries(bodies).map(([role,raw])=>[prefix+names[role],raw]));
   const selection={version:1,method:'native-linear-evenodd-first-owner-v1',release_id:native.id,manifest_path:prefix+'base.json',sha256:sha(manifestRaw)};
+  if(finalProfile){
+    const sourcePath=prefix+'source.json',sourceRaw=Buffer.from(JSON.stringify([feature])),mapPath=prefix+'selected-geography.json';
+    const mapRaw=Buffer.from(JSON.stringify({version:1,kind:'complete-world-index-with-exact-encoded-overrides',sources:[pin(sourcePath,sourceRaw)]}));
+    files.set(sourcePath,sourceRaw);files.set(mapPath,mapRaw);
+    selection.selected_geography={version:1,kind:'complete-world-index-with-exact-encoded-overrides',...pin(mapPath,mapRaw)};
+  }
   const envelopeRaw=Buffer.from(JSON.stringify(envelope));files.set(prefix+'envelope.json',envelopeRaw);
   const sidecar={version:2,kind:'retained-native-additive-selection-v2',base_selection:selection,
     runtime_envelope:pin(prefix+'envelope.json',envelopeRaw),logical_asset_map:Object.fromEntries(Object.entries(bodies).map(([role,raw])=>[role,
@@ -786,7 +917,7 @@ async function currentProductFixture(t,{changeCatalog=()=>{},changeGeometry=()=>
   f.manifestRaw=Buffer.from(JSON.stringify(captured)+'\n');
   f.receipt.package_output_manifest_sha256=sha(f.manifestRaw);f.receipt.package_output_manifest_bytes=f.manifestRaw.length;
   const originalToken=await authenticateOriginalPackageOutput(f);
-  return {f,currentRoot,originalToken,files,sidecar,currentSelection,feature,bodies,envelope,priorBodies,priorEnvelope,priorSourceBodies,priorSourceEnvelope,projection,projectionRaw,referenceRevision};
+  return {f,currentRoot,originalToken,files,sidecar,currentSelection,feature,bodies,envelope,priorBodies,priorEnvelope,priorSourceBodies,priorSourceEnvelope,projection,projectionRaw,referenceRevision,nativeSource};
 }
 
 test('shared current consumer publishes authenticated original context with historical custody entirely cold',async t=>{
@@ -906,13 +1037,13 @@ test('original reference metadata refuses coherent source, native, revision and 
 });
 
 
-for(const priorGzip of [false,true])test('actual '+(priorGzip?'gzip':'plain')+' retained assembly preserves invariants and emits current gzip',async t=>{
+for(const [priorGzip,retirement,finalProfile] of [[false,false],[true,false],[true,true],[false,false,true]])test('actual '+(priorGzip?'gzip':'plain')+(retirement?' retired-input':'')+(finalProfile?' final-profile':'')+' retained assembly preserves invariants and copies the final current bank',async t=>{
   if(process.execArgv.length||process.env.NODE_OPTIONS?.trim()||process.env.NODE_PATH?.trim()){
     execFileSync(process.execPath,[new URL(import.meta.url).pathname,t.name],{env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',NODE_TEST_CONTEXT:undefined},encoding:'utf8'});return;
   }
   const oldFetch=globalThis.fetch,oldEntry=process.argv[1];
   t.after(()=>{globalThis.fetch=oldFetch;process.argv[1]=oldEntry;});
-  const f=await currentProductFixture(t,{reference:true,priorGzip}),directory=f.currentRoot;
+  const f=await currentProductFixture(t,{reference:true,priorGzip,nativePrepared:true,finalProfile}),directory=f.currentRoot;
   const sourceRoot=fileURLToPath(new URL('../',import.meta.url)),copied=new Set();
   const write=(name,raw)=>{fs.mkdirSync(path.dirname(path.join(directory,name)),{recursive:true});fs.writeFileSync(path.join(directory,name),raw);};
   const copy=name=>{
@@ -925,7 +1056,7 @@ for(const priorGzip of [false,true])test('actual '+(priorGzip?'gzip':'plain')+' 
   fs.symlinkSync(fs.realpathSync(path.join(sourceRoot,'node_modules')),path.join(directory,'node_modules'),'dir');
   write('.gitignore','node_modules/\n.cache/\ndist/\n');
   for(const name of ['merge-integration-checks.yml','worker-merge.yml'])write('.github/workflows/'+name,'unchanged original producer');
-  const pin=(name,raw)=>({path:name,bytes:raw.length,sha256:sha(raw)}),prefix='coordination/engineering/prior-fixture/';
+  const pin=(name,raw)=>({path:name,bytes:raw.length,sha256:sha(raw),...(retirement?{mode:'100644',git_blob_oid:createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')}:{})}),prefix='coordination/engineering/prior-fixture/';
   const priorMap={};
   for(const [role,raw]of Object.entries(f.priorSourceBodies)){
     const name=prefix+path.posix.basename(f.priorSourceEnvelope[role].path);write(name,raw);
@@ -934,8 +1065,65 @@ for(const priorGzip of [false,true])test('actual '+(priorGzip?'gzip':'plain')+' 
   const priorEnvelopeRaw=Buffer.from(JSON.stringify(f.priorSourceEnvelope)),priorEnvelopePin=pin(prefix+'envelope.json',priorEnvelopeRaw);write(priorEnvelopePin.path,priorEnvelopeRaw);
   const priorSidecar={...f.sidecar,runtime_envelope:priorEnvelopePin,logical_asset_map:priorMap},priorSidecarRaw=Buffer.from(JSON.stringify(priorSidecar));
   const priorPin=pin(prefix+'sidecar.json',priorSidecarRaw);write(priorPin.path,priorSidecarRaw);
-  const priorSelection={...f.currentSelection,additive_release:priorPin};write('data/ownership-selection.json',JSON.stringify(priorSelection));
-  const definition=loadPackageInputs(directory);definition.inputs.push(...copied,prefix);
+  let priorSelection={...f.currentSelection,additive_release:priorPin};write('data/ownership-selection.json',JSON.stringify(priorSelection));
+  const retired=[priorPin.path,priorEnvelopePin.path,priorMap.ledger.path,priorMap.patch.path];
+  const bankPrefix='data/canonical-grid/current-startup/',bank=path.join(directory,bankPrefix);
+  const {packageStartupOwnership,packagePreparedStartupOwnership,readPreparedFinalOwnership}=await import('../scripts/package-startup-ownership.mjs');
+  const {prepareSelectedStartupOwnership,prepareFinalBankStartupOwnership}=await import('../scripts/prepare-startup-ownership.mjs');
+  const {finishEffectiveFootprint}=await import('../src/effective-footprint.js'),{scientificNativeSelection}=await import('../src/reference-metadata.js');
+  const nativeManifest=JSON.parse(f.bodies.base_manifest),nativeSha=sha(f.bodies.base_manifest),nativePrefix='ownership-vintages/'+nativeSha+'/';
+  const encoded=await packageStartupOwnership({manifest:nativeManifest,source:f.nativeSource,destination:path.join(bank,nativePrefix)});
+  for(const pin of nativeManifest.parts.filter(p=>p.kind==='rows'))write(bankPrefix+pin.path,fs.readFileSync(path.join(f.nativeSource,pin.path)));
+  write(bankPrefix+'native-v1/native-row-latitudes.f64le.gz',fs.readFileSync(path.join(sourceRoot,nativeManifest.native_latitudes.path)));
+  const inventory=(root,relative='')=>fs.readdirSync(path.join(root,relative),{withFileTypes:true}).flatMap(e=>{
+    const name=relative+e.name;if(e.isDirectory())return inventory(root,name+'/');
+    const raw=fs.readFileSync(path.join(root,name));return [{path:name,bytes:raw.length,sha256:sha(raw)}];
+  }).sort((a,b)=>a.path.localeCompare(b.path));
+  let previous={version:1,pixelMap:{...encoded.pixelMap,canonical_grid_sha256:nativeSha,
+    native_latitudes:{...nativeManifest.native_latitudes,transport_path:'native-v1/native-row-latitudes.f64le.gz'},
+    parts:encoded.pixelMap.parts.map(p=>p.kind==='rows'?p:{...p,path:nativePrefix+p.path})},files:inventory(bank)};
+  const prepare=async(selection,envelope,sidecar)=>{
+    const temporary=fs.mkdtempSync(path.join(directory,'.prepared-'));
+    try{
+      let selectionBytes=Buffer.from(JSON.stringify(selection));
+      let index=await prepareSelectedStartupOwnership({selectionBytes,manifest:nativeManifest,previous,
+        readNative:name=>fs.readFileSync(path.join(bank,name)),readPin:p=>fs.readFileSync(path.join(directory,p.path)),destination:temporary});
+      for(const pin of index.compatibility_files){const name=path.join(temporary,pin.path);fs.mkdirSync(path.dirname(name),{recursive:true});fs.copyFileSync(path.join(bank,pin.path),name);}
+      index.files=inventory(temporary);previous=index;
+      const referenceMetadata=JSON.parse(fs.readFileSync(path.join(f.f.root,'dist/client/atlas-geography.json'))).referenceMetadata;
+      let selected={selection,selectionBytes,sidecar,envelope,base:envelope.base_reference,referenceMetadata};
+      if(finalProfile){
+        // Fixture-only conversion creates a genuine original v3 full capture;
+        // the actual assembly below receives only final-profile inputs.
+        const loaded=await readPreparedFinalOwnership({indexRaw:Buffer.from(JSON.stringify(index)),manifest:nativeManifest,manifestSha:nativeSha,
+          selected,features:[f.feature],read:p=>fs.readFileSync(path.join(temporary,p.path))});
+        const finished=fs.mkdtempSync(path.join(directory,'.finished-'));
+        index=await prepareFinalBankStartupOwnership({manifest:nativeManifest,manifestSha:nativeSha,previous:index,
+          features:loaded.features.map(feature=>finishEffectiveFootprint(feature)),ownership:loaded.ownership,
+          baseReference:previous.preparedOwnership.base_reference,referenceMetadata:index.referenceMetadata,destination:finished});
+        for(const pin of index.compatibility_files){const target=path.join(finished,pin.path);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(path.join(temporary,pin.path),target);}
+        index.files=inventory(finished);fs.rmSync(temporary,{recursive:true});fs.renameSync(finished,temporary);
+        const raw=Buffer.from(JSON.stringify(index));selection={version:2,kind:'selected-final-native-bank-v2',native_selection:scientificNativeSelection(selection),
+          ...(selection.reference_projection?{reference_projection:selection.reference_projection}:{}),
+          prepared_bank:{path:bankPrefix+'index.json',bytes:raw.length,sha256:sha(raw)},reference:index.preparedOwnership.effective_reference};
+        selectionBytes=Buffer.from(JSON.stringify(selection));selected={selection,selectionBytes,base:index.preparedOwnership.base_reference,referenceMetadata,finalBank:selection.prepared_bank,reference_release:selection.reference};
+      }
+      fs.writeFileSync(path.join(temporary,'index.json'),JSON.stringify(index));
+      fs.rmSync(bank,{recursive:true});fs.renameSync(temporary,bank);
+      return {index,selected};
+    }finally{fs.rmSync(temporary,{recursive:true,force:true});}
+  };
+  const priorPrepared=await prepare(priorSelection,f.priorSourceEnvelope,priorSidecar);
+  priorSelection=priorPrepared.selected.selection;write('data/ownership-selection.json',JSON.stringify(priorSelection));
+  const priorOutput=path.join(f.f.root,'dist/client');
+  const packed=await packagePreparedStartupOwnership({manifest:nativeManifest,manifestSha:nativeSha,source:bank,destination:priorOutput,
+    selected:priorPrepared.selected,features:[f.feature]});
+  fs.rmSync(path.join(priorOutput,'additive-repairs'),{recursive:true});
+  const oldAtlas=JSON.parse(fs.readFileSync(path.join(priorOutput,'atlas-geography.json')));
+  Object.assign(oldAtlas,{pixelMap:packed.pixelMap,preparedOwnership:packed.preparedOwnership,additiveRelease:f.priorSourceEnvelope});
+  if(finalProfile){delete oldAtlas.additiveRelease;oldAtlas.reference_release=priorSelection.reference;}
+  fs.writeFileSync(path.join(priorOutput,'atlas-geography.json'),JSON.stringify(oldAtlas));
+  const definition=loadPackageInputs(directory);definition.inputs.push(bankPrefix,...copied,...(retirement?[...Object.values(priorMap).map(pin=>pin.path),priorEnvelopePin.path,priorPin.path]:[prefix]));
   write('.github/package-inputs.json',JSON.stringify(definition));
   const git=(...args)=>execFileSync('git',['-C',directory,...args],{encoding:'utf8'}).trim();
   git('init','-q');const commit=()=>{git('add','.');git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','fixture');};commit();
@@ -943,6 +1131,7 @@ for(const priorGzip of [false,true])test('actual '+(priorGzip?'gzip':'plain')+' 
     input_definition_sha256:sha(fs.readFileSync(path.join(directory,'.github/package-inputs.json'))),
     files:committedPackageInputs(directory,definition),producer:committedPackageProducer(directory)};
   const manifest=JSON.parse(f.f.manifestRaw),{packageBuildConfiguration}=await import('../scripts/package-output-artifact.mjs');
+  manifest.output.files=inventory(path.join(f.f.root,'dist')).map(p=>({...p,path:'dist/'+p.path}));manifest.output.bytes=manifest.output.files.reduce((n,p)=>n+p.bytes,0);
   manifest.source=source;manifest.runtime={node:process.version,platform:process.platform,arch:process.arch,dependencies:sha(fs.readFileSync(path.join(directory,'package-lock.json')))};
   manifest.configuration=packageBuildConfiguration();
   const receipt=Buffer.from(JSON.stringify({version:1,kind:'cloudflare',preflight:{passed:true}}));
@@ -971,7 +1160,7 @@ with zipfile.ZipFile(sys.argv[2],'w',zipfile.ZIP_DEFLATED) as z:
     const commit=/\/git\/commits\/([a-f0-9]{40})$/.exec(route);
     if(commit)return {sha:commit[1],tree:{sha:git('rev-parse',commit[1]+'^{tree}')}};
     const tree=/\/git\/trees\/([a-f0-9]{40})(\?recursive=1)?$/.exec(route);
-    if(tree)return {truncated:false,tree:git('ls-tree',...(tree[2]?['-r']:[]),'-lz',tree[1]).split('\0').filter(Boolean).map(line=>{
+    if(tree)return {sha:tree[1],truncated:false,tree:git('ls-tree',...(tree[2]?['-r']:[]),'-lz',tree[1]).split('\0').filter(Boolean).map(line=>{
       const [meta,path]=line.split('\t'),[mode,type,sha,size]=meta.trim().split(/\s+/);return {path,mode,type,sha,size:Number(size)};
     })};
     const content=/\/contents\/(.+)\?ref=([a-f0-9]{40})$/.exec(route),blob=/\/git\/blobs\/([a-f0-9]{40})$/.exec(route);
@@ -981,42 +1170,76 @@ with zipfile.ZipFile(sys.argv[2],'w',zipfile.ZIP_DEFLATED) as z:
   };api.jobLogRedirect=f.f.api.jobLogRedirect;
   let downloads=0;api.artifactRedirect=async()=>{downloads++;return new Response(null,{status:302,headers:{location:'https://fixture.blob.core.windows.net/original.zip'}});};
   globalThis.fetch=async url=>new Response(String(url).endsWith('/original.zip')?archive:f.f.log());
-  write('data/ownership-selection.json',JSON.stringify(f.currentSelection));commit();
+  if(retirement){const next=structuredClone(definition);next.inputs=next.inputs.filter(name=>!retired.includes(name));write('.github/package-inputs.json',JSON.stringify(next));}
+  write('data/ownership-selection.json',JSON.stringify(f.currentSelection));
+  const currentPrepared=await prepare(f.currentSelection,f.envelope,f.sidecar);
+  f.currentSelection=currentPrepared.selected.selection;write('data/ownership-selection.json',JSON.stringify(f.currentSelection));commit();
+  if(finalProfile){
+    const {admitPackageInputTransition}=await import('../scripts/package-inputs.mjs'),currentDefinition=loadPackageInputs(directory);
+    const current={head:git('rev-parse','HEAD'),definition:currentDefinition,selection:f.currentSelection,
+      files:committedPackageInputs(directory,currentDefinition),producer:committedPackageProducer(directory)};
+    const original=name=>execFileSync('git',['-C',directory,'show',source.head+':'+name]);
+    admitPackageInputTransition(source,current,{preparedStartup:{beforeIndex:original(bankPrefix+'index.json'),afterIndex:fs.readFileSync(path.join(bank,'index.json')),
+      beforeSelection:original('data/ownership-selection.json'),afterSelection:fs.readFileSync(path.join(directory,'data/ownership-selection.json'))}});
+  }
   const entry=path.join(directory,'scripts/assemble-selected-package.mjs'),{assembleSelectedPackage}=await import(pathToFileURL(entry));process.argv[1]=entry;
   const assemble=()=>assembleSelectedPackage({api,repo:f.f.repo,expectedHead:git('rev-parse','HEAD'),originalRunId:17});
-  const result=await assemble();assert.equal(result.assembled,true);assert.equal(downloads,1);
-  assert.equal(result.current_additive_assets,4);
-  const changed=new Set(['dist/client/atlas-geography.json',...Object.values(f.priorEnvelope).filter(pin=>pin?.path).map(pin=>'dist/client/'+pin.path)]);
+  const result=await assemble();assert.equal(result.assembled,true,JSON.stringify(result));assert.equal(downloads,1);
+  assert.equal(result.current_prepared_assets,currentPrepared.index.files.length);
+  if(retirement){
+    const receipt=JSON.parse(fs.readFileSync(path.join(directory,'.cache/package-input-build.json')));
+    assert.deepEqual([...receipt.assembly.transition.removed_selected_inputs].sort(),[...retired].sort());
+    // Discovery, private execution issuance and final output admission must use
+    // the same original selector-bound bytes, never a caller's retirement flag.
+    const currentDefinition=loadPackageInputs(directory),current={head:git('rev-parse','HEAD'),
+      definition:currentDefinition,selection:f.currentSelection,files:committedPackageInputs(directory,currentDefinition),
+      producer:committedPackageProducer(directory)};
+    const found=await findOriginalPackage({api,repo:f.f.repo,current,originalRunId:17});
+    assert.deepEqual(found.priorSidecarRaw,priorSidecarRaw);
+    const authority=await import(pathToFileURL(path.join(directory,'coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs')));
+    const original=await authority.authenticateOriginalPackageOutput({api,repo:f.f.repo,origin:found.origin,root:f.f.root,manifestRaw:f.f.manifestRaw});
+    const stage=fs.mkdtempSync(path.join(directory,'.cache/proof-'));
+    const issue=priorSidecarRaw=>authority.issuePackageAssemblyExecution({original,source:directory,stage,executingRoot:directory,priorSidecarRaw,preparedStartup:found.preparedStartup});
+    assert.throws(()=>issue(undefined),/Authenticated prior cumulative|authenticated prior cumulative/);
+    const corrupt=Buffer.from(priorSidecarRaw);corrupt[corrupt.length-1]^=1;
+    assert.throws(()=>issue(corrupt),/Authenticated prior cumulative|authenticated prior cumulative/);
+    assert.equal(authority.requirePackageAssemblyExecution(issue(found.priorSidecarRaw)).source_commit,current.head);
+  }
+  const fixed=new Set(priorPrepared.index.compatibility_files.map(p=>p.path));
+  const changed=new Set(['dist/client/atlas-geography.json',...[...priorPrepared.index.pixelMap.parts,...priorPrepared.index.preparedOwnership.context_parts].filter(p=>!fixed.has(p.path)).map(p=>'dist/client/'+p.path)]);
   for(const output of manifest.output.files)if(!changed.has(output.path)){
     const raw=fs.readFileSync(path.join(directory,output.path));assert.equal(raw.length,output.bytes);assert.equal(sha(raw),output.sha256,output.path);
   }
   const atlas=JSON.parse(fs.readFileSync(path.join(directory,'dist/client/atlas-geography.json')));
   assert.deepEqual(atlas.referenceMetadata,JSON.parse(fs.readFileSync(path.join(f.f.root,'dist/client/atlas-geography.json'))).referenceMetadata);
-  assert.deepEqual(atlas.reference_release,f.envelope.effective_reference);
-  for(const [role,raw]of Object.entries(f.bodies)){const actual=fs.readFileSync(path.join(directory,'dist/client',atlas.additiveRelease[role].path));assert.deepEqual(['ledger','patch'].includes(role)?gunzipSync(actual):actual,raw);}
+  assert.deepEqual(atlas.reference_release,finalProfile?currentPrepared.index.preparedOwnership.effective_reference:f.envelope.effective_reference);
+  assert.deepEqual(atlas.pixelMap,currentPrepared.index.pixelMap);assert.deepEqual(atlas.preparedOwnership,currentPrepared.index.preparedOwnership);
+  assert.equal(fs.existsSync(path.join(directory,'dist/client/additive-repairs')),false,'No served patch replay operands');
+  for(const pin of currentPrepared.index.files)assert.equal(sha(fs.readFileSync(path.join(directory,'dist/client',pin.path))),pin.sha256);
+  for(const pin of priorPrepared.index.files)if(!currentPrepared.index.files.some(p=>p.path===pin.path))assert.equal(fs.existsSync(path.join(directory,'dist/client',pin.path)),false,'Inactive v2 output is retired');
   const published=sha(fs.readFileSync(path.join(directory,'dist/client/atlas-geography.json')));
   // A later mutable staging write is still checked against the original whole
   // output inventory. Identical metadata is never added to the mutable set.
-  const writeFile=fs.promises.writeFile;
-  fs.promises.writeFile=async function(file,...args){
-    const result=await writeFile.call(this,file,...args);
-    if(String(file).endsWith('/assembly/dist/reference-metadata/current.json'))fs.appendFileSync(file,' ');
+  const writeFile=fs.writeFileSync;
+  fs.writeFileSync=function(file,...args){
+    const result=writeFile.call(this,file,...args);
+    if(String(file).endsWith('/assembly/dist/atlas-geography.json'))fs.appendFileSync(path.join(path.dirname(file),'reference-metadata/current.json'),' ');
     return result;
   };
   try{await assert.rejects(assemble(),/Invariant output changed during assembly/);}
-  finally{fs.promises.writeFile=writeFile;}
+  finally{fs.writeFileSync=writeFile;}
   assert.equal(downloads,2);
   assert.equal(sha(fs.readFileSync(path.join(directory,'dist/client/atlas-geography.json'))),published,'Failed staging preserves the previous publication');
   // The actual assembly caller checks new static output before publication.
-  fs.promises.writeFile=async function(file,...args){
-    const result=await writeFile.call(this,file,...args);
-    if(String(file).endsWith('/assembly/dist/reference-metadata/current.json')){
+  fs.writeFileSync=function(file,...args){
+    const result=writeFile.call(this,file,...args);
+    if(String(file).endsWith('/assembly/dist/atlas-geography.json')){
       const over=path.join(path.dirname(file),'oversize.bin'),fd=fs.openSync(over,'w');fs.ftruncateSync(fd,26214401);fs.closeSync(fd);
     }
     return result;
   };
   try{await assert.rejects(assemble(),/Cloudflare static asset exceeds 25 MiB/);}
-  finally{fs.promises.writeFile=writeFile;}
+  finally{fs.writeFileSync=writeFile;}
   assert.equal(downloads,3);
   assert.equal(sha(fs.readFileSync(path.join(directory,'dist/client/atlas-geography.json'))),published,'Oversized staging preserves the previous publication');
   for(const mutation of [selection=>selection.reference_projection.sha256='f'.repeat(64),selection=>delete selection.reference_projection,
@@ -1028,6 +1251,51 @@ with zipfile.ZipFile(sys.argv[2],'w',zipfile.ZIP_DEFLATED) as z:
   write('data/ownership-selection.json',JSON.stringify(f.currentSelection));
   fs.appendFileSync(path.join(directory,f.currentSelection.reference_projection.path),' ');commit();
   assert.equal((await assemble()).assembled,false);assert.equal(downloads,3,'Changed projection body remains an invariant source refusal');
+});
+
+
+
+test('authenticated changed producer contract reaches discovery, transition and private issuance without a waiver',async t=>{
+  if(process.execArgv.length||process.env.NODE_OPTIONS?.trim()||process.env.NODE_PATH?.trim()){
+    execFileSync(process.execPath,[new URL(import.meta.url).pathname,t.name],{env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',NODE_TEST_CONTEXT:undefined},encoding:'utf8'});return;
+  }
+  const fixture=new URL('./fixtures/package-producer-contract/',import.meta.url);
+  const originalWorkflow=fs.readFileSync(new URL('original-workflow.yml',fixture),'utf8');
+  const currentWorkflow=fs.readFileSync(new URL('current-workflow.yml',fixture),'utf8');
+  const f=originalDiscovery(t,{worker:true,queueOnly:true,configure:s=>{s.write('.github/workflows/worker-merge.yml',originalWorkflow);s.commit();}});
+  f.origin.workflow_head=f.run.head_sha=f.job.head_sha=f.artifact.workflow_run.head_sha=f.receipt.executed_workflow.sha=f.sourceHead;
+  f.job.steps.unshift({name:'Run python -m pip install -r requirements.txt',status:'completed',conclusion:'success'});
+  f.job.steps.forEach((step,i)=>step.number=i+1);
+  const manifest=JSON.parse(f.manifestRaw);manifest.source=f.before;
+  f.manifestRaw=Buffer.from(JSON.stringify(manifest)+'\n');
+  f.receipt.package_output_manifest_sha256=sha(f.manifestRaw);f.receipt.package_output_manifest_bytes=f.manifestRaw.length;
+  const oldFetch=globalThis.fetch,oldEntry=process.argv[1],oldWarn=console.warn;
+  t.after(()=>{globalThis.fetch=oldFetch;process.argv[1]=oldEntry;console.warn=oldWarn;});
+  globalThis.fetch=async()=>new Response(f.log());console.warn=()=>{};
+  const baseAPI=f.api,api=async route=>{
+    const commit=/\/git\/commits\/([a-f0-9]{40})$/.exec(route);
+    if(commit&&commit[1]!==f.origin.workflow_head)return {sha:commit[1],tree:{sha:f.s.git('rev-parse',commit[1]+'^{tree}')}};
+    const blob=/\/git\/blobs\/([a-f0-9]{40})$/.exec(route);
+    if(blob)return {encoding:'base64',content:execFileSync('git',['-C',f.root,'cat-file','blob',blob[1]]).toString('base64')};
+    return baseAPI(route);
+  };api.jobLogRedirect=baseAPI.jobLogRedirect;
+  const token=await authenticateOriginalPackageOutput({...f,api});
+  f.s.write('.github/workflows/worker-merge.yml',currentWorkflow);f.s.commit();
+  const current=f.s.snapshot(),discover=()=>findOriginalPackage({api,repo:f.repo,current,originalRunId:17});
+  const found=await discover();assert.equal(found?.origin.head,f.sourceHead);
+  assert.deepEqual(found.producerWorkflows,{original:originalWorkflow,current:currentWorkflow});
+  for(const preliminary of [true,false])assert.doesNotThrow(()=>admitPackageInputTransition(f.before,current,{producerWorkflows:found.producerWorkflows,preliminary}));
+  const stage=fs.mkdtempSync(path.join(f.root,'stage-'));process.argv[1]=path.join(f.root,'scripts/assemble-selected-package.mjs');
+  const issue=(original,producerWorkflows)=>issuePackageAssemblyExecution({original,source:f.root,stage,executingRoot:f.root,producerWorkflows});
+  assert.doesNotThrow(()=>requirePackageAssemblyExecution(issue(token,found.producerWorkflows)));
+  for(const claimed of [undefined,{sha256:'claimed-compatible'},{original:currentWorkflow,current:currentWorkflow}])
+    assert.throws(()=>issue(token,claimed),/workflow bodies|immutable identity/);
+  f.job.steps[0].conclusion='skipped';
+  assert.equal(await discover(),null,'Successful capture cannot hide a skipped dependency prerequisite');
+  const skipped=await authenticateOriginalPackageOutput({...f,api});
+  assert.throws(()=>issue(skipped,found.producerWorkflows),/prerequisite/);
+  assert.doesNotThrow(()=>requirePackageAssemblyExecution(issue(token,found.producerWorkflows)),'Private authenticated job snapshot is not mutable through the API fixture');
+  assert.equal(fs.existsSync(path.join(stage,'dist')),false,'Admission alone does not publish output');
 });
 
 if(probeName&&!probeRegistered)throw Error('Unknown private assembly probe: '+probeName);

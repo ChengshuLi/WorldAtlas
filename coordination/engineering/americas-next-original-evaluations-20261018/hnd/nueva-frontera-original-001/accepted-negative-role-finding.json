@@ -1,0 +1,106 @@
+{
+  "accepted_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+  "result": "Existing inline territorial-negative geometry role can carry the omitted same-country original conservatively without a canonical owner or sourcebank overwrite. No negative has been applied and no native result has been produced.",
+  "exact_field": "source_evidence.targets[*].territorial_exclusions[*] = complete Polygon or MultiPolygon geometry",
+  "producer_precedent": {
+    "path": "scripts/prepare-delivery-handoff.mjs",
+    "function": "sourceEvidence / sourceTerritorialExclusions",
+    "lines": [
+      1297,
+      1299,
+      1308,
+      1312,
+      1404,
+      1405
+    ],
+    "actual_behavior": [
+      "sourceEvidence preserves caller-supplied ordinary source evidence when binding accepted baseline pins.",
+      "sourceTerritorialExclusions starts with every prior inline target.territorial_exclusions geometry and appends whole original negative families.",
+      "Compact mode leaves an inline geometry literal if it does not match exactly one original catalogued negative feature."
+    ]
+  },
+  "consumer_precedent": {
+    "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+    "function": "qualifySourceTargetNativeAuthority",
+    "lines": [
+      1520,
+      1521,
+      1717,
+      1718,
+      1719
+    ],
+    "actual_behavior": "Literal Polygon/MultiPolygon negatives remain unchanged, then become negative geometries scoped to an existing positive target id/pixelIndex; they do not assign an owner to the negative source."
+  },
+  "native_effect_contract": {
+    "path": "src/native-grid.js",
+    "function": "deriveSourceTargetNativeDelta",
+    "lines": [
+      382,
+      554
+    ],
+    "actual_behavior": "Existing positive target association is required. Interior territorial contacts retain territorial_exclusion_cells; boundary contacts remain boundary_cells. This is contract inspection, not an executed NuevaFrontera result."
+  },
+  "accepted_test_precedent": {
+    "path": "test/source-target-native-diagnostic.test.mjs",
+    "fixture": "negativeReferenceFixture",
+    "lines": [
+      549,
+      556,
+      567,
+      571,
+      584,
+      585
+    ],
+    "test_title": "complete original references preserve genuine native interior, boundary and supported decisions",
+    "actual_scope": "Accepted fixture compares literal versus referenced complete negative geometries, including detached rings and ownerless negative source records. Tests were inspected, not rerun; no exact completed NuevaFrontera production precedent is claimed."
+  },
+  "not_eligible_routes": [
+    {
+      "field": "territorial_exclusion_families / territorial_exclusion_sources",
+      "reason": "Builder and consumer require an exact whole original catalogue family and forbid the positive family as a compact negative family. NuevaFrontera is absent from the frozen298feature HNDADM2 source and has no shapeID/canonical owner. Do not fabricate a family, source index or shapeID."
+    },
+    {
+      "field": "source_membership.negative_natural_earth",
+      "reason": "Closed specifically to accepted NaturalEarth whole-source registry and original atoms; not an arbitrary HNDarchive source."
+    },
+    {
+      "field": "source-target-native-evidence-v3 / revised_source_adoption / adopted_provider_families",
+      "reason": "Separate adopted source authority pathways, not a conservative omittedrecord transport or permission to replace the retained298family."
+    },
+    {
+      "field": "territorial_applicability",
+      "reason": "Requires genuine adopted exact-cell contextual interpretations and source provenance; it can relax a veto and is not needed or justified to ignore this known omission."
+    }
+  ],
+  "remaining_bindings": [
+    "Main immutable whole feature/source archive/grant custody checkpoint and independent actual source-meaning adoption.",
+    "Copy only this exact whole geometry through the existing literal territorial_exclusions role; preserve the originalFeature properties/provenance beside it. A conservative all47target operand does not guess affected native keys.",
+    "Execute the existing native diagnostic/qualification only after actual inputs are immutable and Main schedules it; retain computed contacts/holds.",
+    "First47pair wholephysical diagnostic remains distinct and supplies no complete/exclusive source or native qualification."
+  ],
+  "unknown_affected_cells": null,
+  "unknown_held_keys": null,
+  "new_operator_or_provider_exemption": false,
+  "code_pins": [
+    {
+      "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+      "path": "scripts/prepare-delivery-handoff.mjs",
+      "git_blob_oid": "e9f77b434670cb7ddc77048acf7c5782df176438"
+    },
+    {
+      "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "git_blob_oid": "373e43b664ad0138396a2fc1a161e91553b7c404"
+    },
+    {
+      "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+      "path": "src/native-grid.js",
+      "git_blob_oid": "3e1d3e7e6012b5b571345caad029ab7d124c07fd"
+    },
+    {
+      "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+      "path": "test/source-target-native-diagnostic.test.mjs",
+      "git_blob_oid": "27db03250cab3b70400c09c25ed8444636571711"
+    }
+  ]
+}

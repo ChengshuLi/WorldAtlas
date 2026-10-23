@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "kind": "mnp205-actual-source-native-assessment",
+  "reviewer_id": "01a15a0e-9f15-70f9-9391-bfaf7502a007",
+  "status": "actual generated source evidence, native diagnostic, physical receipt, and native authority inspected; no public-head review or root acceptance implied",
+  "scope": {
+    "package_id": "gb-MNP-ADM2--repair-evaluation",
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "scope_file": "coordination/engineering/mnp-qualified-repair-20261021/original-claim-scope.json",
+    "scope_commit": "f9bef01154b4ee944122dda1f3334051355b2f4f",
+    "cells": 205,
+    "intervals": 83,
+    "owners": {"30767": 11, "30769": 5, "30770": 189},
+    "excluded": ["Saipan owner 30768", "separate 31-cell physical-interpretation companion", "regional source review #383"]
+  },
+  "artifacts": {
+    "baseline_source_evidence": {
+      "commit": "b96935ddde7f0b0c7eab5ef16570e10351b93b10",
+      "path": "coordination/engineering/mnp-qualified-repair-20261021/source-baseline-001/source-evidence.json",
+      "sha256": "369bbf3fe38427700d3a0be373bcf0ee01db6dcdd5ea75ef03e1da7bbb3b552a"
+    },
+    "baseline_territorial_provenance": {
+      "path": "coordination/engineering/mnp-qualified-repair-20261021/source-baseline-001/territorial-exclusion-provenance.json",
+      "sha256": "2dab9698db1cdf2bdeb3bd07ca2f8647221a2e968c7e51395b6cff846c180e58"
+    },
+    "context_object": {
+      "commit": "acf3fcbe3c989e255e685458957dab2d43af740c",
+      "path": "coordination/engineering/mnp-qualified-repair-20261021/source-preparation/territorial-applicability.json",
+      "sha256": "76ed9898ca11c035aeeda3126db5bd0ee6aa6b890e9e8065e6ebaa4ae2a8b4af",
+      "records": 353
+    },
+    "final_source_evidence": {
+      "commit": "8d75cfacc0a083081a694dd246acab6fa59180ed",
+      "path": "coordination/engineering/mnp-qualified-repair-20261021/source-evidence-001/source-evidence.json",
+      "git_blob_oid": "c99aeec5cb39f79e33e9214a533dee90fa99fea3",
+      "bytes": 22330,
+      "sha256": "850f785f7c55678b1ab372736dde2ba91f9b90a8064a1b9702aa4125bd4c407f"
+    },
+    "final_territorial_provenance": {
+      "path": "coordination/engineering/mnp-qualified-repair-20261021/source-evidence-001/territorial-exclusion-provenance.json",
+      "sha256": "2dab9698db1cdf2bdeb3bd07ca2f8647221a2e968c7e51395b6cff846c180e58"
+    },
+    "native_diagnostic": {
+      "commit": "f46c5e15949432684507dda322286b6751eb1dd8",
+      "path": "coordination/engineering/mnp-qualified-repair-20261021/native-diagnostic-001/native-diagnostic.json",
+      "sha256": "f937db34573065642d27ab61b7f1078183e79c894f84b7a38f550147457d4cba",
+      "requested": 205,
+      "supported": 205,
+      "held": 0,
+      "held_rows": 0,
+      "decision_rows": 67,
+      "territorial_contact_rows": 353
+    },
+    "source_evidence_preparation_binding": {
+      "path": "coordination/engineering/mnp-qualified-repair-20261021/source-evidence-001/preparation.json",
+      "config_sha256": "3b413654e539d1132140b888e45eed3a7f6a9bca061bef0288337ccd06134852"
+    },
+    "native_diagnostic_preparation_binding": {
+      "path": "coordination/engineering/mnp-qualified-repair-20261021/native-diagnostic-001/preparation.json",
+      "config_sha256": "1d1cf8fb1ceaca82eda917219782ebb5f4c816ef8f3aa5021a58ce0bed6e2e4f"
+    },
+    "native_authority_preparation_binding": {
+      "path": "coordination/engineering/mnp-qualified-repair-20261021/native-authority-001/preparation.json",
+      "config_sha256": "1d1cf8fb1ceaca82eda917219782ebb5f4c816ef8f3aa5021a58ce0bed6e2e4f"
+    },
+    "physical_support": {
+      "commit": "0e7ea3e7e363eefd300bed90feccbef2cac07e1d",
+      "path": "coordination/engineering/mnp-qualified-repair-20261021/physical-001/whole-target-support.json",
+      "git_blob_oid": "ecb15685085888234e88d147e245987f634d488b",
+      "bytes": 162259,
+      "sha256": "452ccc1d92479c5d595395813cb0430947a47cd0750ee4cb3eef4739e890df3a"
+    },
+    "native_authority": {
+      "commit": "0fe05f0a7da0c5e0504bff0e5b32df85139fe8ae",
+      "path": "coordination/engineering/mnp-qualified-repair-20261021/native-authority-001/constructor-result.json",
+      "sha256": "efdf666086cf1f9d54438ffd2d5684a1c319c50bac65140774a5a9e742d5a0b8",
+      "ledger_rows": 3,
+      "qualified_cells": 205,
+      "dispositions": {"assigned": 3}
+    }
+  },
+  "verified_joins": {
+    "original_key_partition": "Expanded requested and supported native diagnostic rows both equal the exact 205 key set in original-claim-scope.json; no missing or extra coordinate-owner tuples.",
+    "contact_records": {
+      "expected_pairs_from_exact_original_scope": 353,
+      "generated_context_records": 353,
+      "unique_original_keys_referenced": 205,
+      "missing_pairs": 0,
+      "extra_pairs": 0,
+      "record_checks": [
+        "Each record scope pointer resolves to the exact original-claim-scope.json /exact_keys/N record and matches its y, x, original owner, target ID, and original positive source ID.",
+        "Each foreign family, feature ID, feature ordinal, geometry pointer and geometry SHA256 matches that exact key's original_foreign_contacts tuple.",
+        "Each negative_ordinal resolves in the final generated target evidence to the corresponding full-family source ID, feature ordinal, and geometry SHA256.",
+        "The native constructor's 353 territorial_contacts match the 353 authored contextual records on source ID, target ID, owner, x/y, negative ordinal, and geometry SHA256; there are no extra or missing contacts."
+      ]
+    },
+    "target_and_negative_preservation": {
+      "baseline_and_final_target_arrays_equal": true,
+      "positive_family": "Complete original four-feature gb:MNP:ADM2 family; the three requested canonical targets remain unchanged and Saipan remains outside the request.",
+      "complete_negative_families": [
+        {"family": "gb:USA:ADM1", "feature_count": 56, "parts": 1, "decoded_sha256": "9d7a32244a5c3c2868d039355db2fdd9eb903ef255cfda128decd20bedc0dfbe"},
+        {"family": "gb:USA:ADM2", "feature_count": 3233, "parts": 1, "decoded_sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a"}
+      ],
+      "per_target_generated_negative_operands": [
+        {"owner": 30767, "target": "gb:MNP:ADM2:39175420B24162802066299", "count": 2, "negative_ordinals": [0, 1]},
+        {"owner": 30769, "target": "gb:MNP:ADM2:39175420B64217482742742", "count": 2, "negative_ordinals": [0, 1]},
+        {"owner": 30770, "target": "gb:MNP:ADM2:39175420B77088391070908", "count": 2, "negative_ordinals": [0, 1]}
+      ]
+    },
+    "actual_observed_contact_counts": {"USA_ADM1": 203, "USA_ADM2": 150, "unique_keys": 205}
+  },
+  "retained_adverse_evidence": {
+    "physical": {
+      "Tinian": "No recorded physical issue.",
+      "Rota": "No recorded physical issue.",
+      "Northern Islands": "Whole-target contradictory_land_water_support remains in the five-segment MultiLineString. It is preserved; the successful 205-key diagnostic does not mean this whole-target issue disappeared."
+    },
+    "same_release_full_source_misses": {
+      "matched": 202,
+      "missed": 3,
+      "keys": [
+        {"block": 28, "interval_ordinal": 50, "y": 117643, "x": 237229, "owner": 30770, "target": "gb:MNP:ADM2:39175420B77088391070908"},
+        {"block": 29, "interval_ordinal": 65, "y": 119016, "x": 237142, "owner": 30770, "target": "gb:MNP:ADM2:39175420B77088391070908"},
+        {"block": 29, "interval_ordinal": 66, "y": 119017, "x": 237142, "owner": 30770, "target": "gb:MNP:ADM2:39175420B77088391070908"}
+      ],
+      "interpretation": "All 205 keys uniquely match the original simplified MNP source; the three full same-release source misses remain explicit representation-sensitive adverse evidence. The diagnostic and constructor passed the stock native predicates for all 205; this does not erase or independently explain the three misses."
+    },
+    "census_context": "The two exact official Census 2018/2021 identity joins support only the bounded parent/state-69 and same-entity Northern Islands contexts in adoption-and-source-context.json. They do not prove polygon equality, confer legal authority, or remove whole-family negatives."
+  },
+  "assessment": {
+    "native_authority_blocker": "No technical/source-join blocker was found to normal stock native authority for the exact 205 requested cells: the complete original MNP positive family, exact canonical targets, three-owner patch, generated family negatives, and 353 narrow context records are bound; diagnostic supports exactly the original 205 keys and the constructor emits three assigned target rows totaling 205.",
+    "qualifications": "This is a review of the observed stock result, not a claim that the Northern Islands physical issue or three full-source differences are absent, not a positive legal boundary finding, and not root acceptance. Keep these adverse facts visible in final public evidence and keep current-owner conservation/hosted delivery checks separate.",
+    "replay": "No observer, source, physical, native diagnostic, or native authority producer was rerun by this reviewer."
+  }
+}

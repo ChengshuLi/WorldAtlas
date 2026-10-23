@@ -1,0 +1,36 @@
+{
+  "code_commit": "39101ed2425e756b66ef1851219cab5a740d7100",
+  "phase": "native-diagnostic",
+  "stdout": {
+    "destination": "coordination/engineering/rus-ukr-source-context-repair-20261021/native-diagnostic-001",
+    "resumed": false,
+    "binding": {
+      "phase": "native-diagnostic",
+      "config_sha256": "9aa71db33bb1bbefbbe107c7211f7805f7aeb81c60b1e99acdb5c5f35fa76fab"
+    },
+    "observation": {
+      "elapsed_seconds": 6.035787292,
+      "requested_cells": 9451,
+      "supported_cells": 4,
+      "held_cells": 9447,
+      "limits": [
+        "Original source/physical producers are not replayed.",
+        "Diagnostic screening produces no authority, current-owner-zero or selected-output acceptance."
+      ]
+    }
+  },
+  "first_attempt": "Succeeded on first diagnostic execution. Original request pin mismatch was corrected before this operation.",
+  "source_acquisition": {
+    "status": "authenticated public full request; no longer confused with held patch",
+    "commit": "23784430fdb0f24d36827d3069b3621cb3231b16",
+    "path": "coordination/engineering/russia-repair-delivery-20261017/source-stage/native-patch.json",
+    "bytes": 8980728,
+    "sha256": "0e89b12468441a137ad63f83c33b1a47d5ed79cd09c4e9d4952089df266bcd54",
+    "git_blob_oid": "974b2149a016b74930e8be328cccbcc0d0f03918",
+    "first_attempt": "2 MB bounded read hit assertion; no scientific execution or object insertion",
+    "inspection": "Second exact-body read confirmed Git OID and actual full 2,566,967-cell request; held patch already present under distinct authenticated pin",
+    "native_request_used": "c6720857e7ad3530ca44a542d96ea9edb9eca77b:coordination/engineering/rus-context-qualified-repair-20261021/research/original-held-native-patch.json"
+  },
+  "original_owner_observation_repeated": false,
+  "physical_producer_repeated": false
+}

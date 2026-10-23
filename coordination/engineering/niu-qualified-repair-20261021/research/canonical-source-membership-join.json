@@ -1,0 +1,41 @@
+{
+  "kind": "niu-original-to-canonical-owner-join-not-qualification",
+  "source_owner_index": 7126,
+  "selected_target_id": "atlas:territory:NIU",
+  "source_atom_count": 14,
+  "requested_contact_count": 8,
+  "requested_cell_count": 116,
+  "requested_interval_count": 50,
+  "one_step_aggregation": "Existing original-members-of-accepted-source-aggregations route. Source targets retain original gb IDs, target_id atlas:territory:NIU and pixelIndex 7126 with exact current canonical base geometry. Include the complete 14-member family. No village-to-new-Location reassignment.",
+  "canonical_feature": {
+    "local_path": "inventory/niu116-operand-preparation/accepted-canonical-target-feature.json",
+    "sha256": "8e8ba9595a862a82de78e30919293afeebd2a6099ba23d1e74d5a37bd4d91d97",
+    "feature_id": "atlas:territory:NIU",
+    "canonical_pin": {
+      "commit": "01fe271e2554b03675769701691fb3dc07442303",
+      "path": "data/geography/part-28.json",
+      "mode": "100644",
+      "git_blob_oid": "a9e03cb07194a73f643af85d1e6db94abe3b5fc9",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    }
+  },
+  "source_membership_file": {
+    "local_path": "inventory/niu116-operand-preparation/source-family-membership.json",
+    "sha256": "a9c74c096ed5fb83aa37405b69ad5eefb4c7c95d041ca05e45c76be3e6abc4e6"
+  },
+  "no_reassignment": true,
+  "companion_excluded": {
+    "package_id": "gb-NIU-ADM1--physical-interpretation",
+    "source_relative_cells": 47,
+    "interval_segments": 38,
+    "land_cells": 0,
+    "inland_water_cells": 0,
+    "source_features": [
+      47593,
+      47595,
+      47596
+    ],
+    "meaning": "Distinct companion scope: 21 source-relative Mutalau cells plus 18 Liku and 8 Hakupu cells. Excluded from this repair package."
+  }
+}

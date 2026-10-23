@@ -1,3 +1,6 @@
+import {readOwnerLabels} from '../src/owner-labels.js';
+import {resolveTemporal} from '../src/temporal.js';
+import {mergePreparedEvidence} from '../src/prepared-evidence.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -23,7 +26,7 @@ test('PostgreSQL evidence-only map pages retain retirement-only subjects without
  const first=hydrateMapSnapshotPage(await mapSnapshotPage(db,1000,{evidenceOnly:true,limit:1}));assert.deepEqual(first.entities.map(e=>e.id),['location']);assert.equal(first.records.length,0);assert.equal(first.retirements[0].target_id,'withdrawn-only');assert.equal(first.next_cursor,'location');
  const last=hydrateMapSnapshotPage(await mapSnapshotPage(db,1000,{evidenceOnly:true,limit:1,cursor:first.next_cursor}));assert.deepEqual(last.entities.map(e=>e.id),['region']);assert.equal(last.names[0].value,'Dated region');assert.equal(last.next_cursor,null);
  const empty=await mapSnapshotPage(db,1100,{evidenceOnly:true});assert.deepEqual(empty.entities,[]);assert.equal(empty.next_cursor,null);
- assert.equal((await mapSnapshotPage(db,1000)).entities.length,6);
+ assert.equal((await mapSnapshotPage(db,1000)).entities.length,7);
 }));
 class FrozenD1 {
  constructor(){this.sqlite=new DatabaseSync(':memory:');this.sqlite.exec('PRAGMA foreign_keys=ON');for(const file of fs.readdirSync(new URL('../drizzle/',import.meta.url)).filter(file=>file.endsWith('.sql')).sort())this.sqlite.exec(fs.readFileSync(new URL(`../drizzle/${file}`,import.meta.url),'utf8'));}
@@ -65,7 +68,7 @@ test('PostgreSQL catalogs/graph/media paging and compact map use actual hosted S
  await importBatch(db,{entities:[{id:'person',kind:'person',name:'Historical person'}],records:[record('pop','population',42),record('owner','owner','owner A',{category_id:'owner:a'})],relationships:[{id:'association',source_entity_id:'person',target_entity_id:'location',relationship_type:'associated_with',source_id:'history',valid_from:1000,valid_to:1100}],names:[{id:'location-name',entity_id:'location',name:'Dated location',source_id:'history',valid_from:1000,valid_to:1100}]});
  assert.equal((await catalogPage(db,'sources',{q:'history'})).records[0].id,'history');assert.equal((await catalogPage(db,'categories',{kind:'owner'})).records[0].id,'owner:a');assert.equal((await catalogPage(db,'entities',{kind:'location'})).records[0].id,'location');assert.equal((await entityRelationshipsPage(db,'location',1000)).records[0].source_entity_id,'person');assert.equal((await entityRelationshipsPage(db,'location',1100)).records.length,0);
  const sha='c'.repeat(64);await registerMedia(db,{id:'media',object_key:`media/${sha}`,sha256:sha,bytes:42,mime:'audio/wav',name:'Isolated sound',license:'CC0',attribution:'Test-only',source_id:'history'});await importBatch(db,{media_links:[{id:'media-link',media_id:'media',entity_id:'location',role:'reference-audio',source_id:'history'}]});assert.equal((await entityMediaPage(db,'location',1000)).records[0].sha256,sha);
- const compact=hydrateMapSnapshotPage(await mapSnapshotPage(db,1000,{limit:1000})),full=(await attributesAt(db,1000)).records;assert.equal(compact.entities.length,6);assert.equal(compact.names[0].value,'Dated location');assert.deepEqual(resolveAttributes([{id:'location',properties:{}}],1000,{records:compact.records}),resolveAttributes([{id:'location',properties:{}}],1000,{records:full}));
+ const compact=hydrateMapSnapshotPage(await mapSnapshotPage(db,1000,{limit:1000})),full=(await attributesAt(db,1000)).records;assert.equal(compact.entities.length,7);assert.equal(compact.names[0].value,'Dated location');assert.deepEqual(resolveAttributes([{id:'location',properties:{}}],1000,{records:compact.records}),resolveAttributes([{id:'location',properties:{}}],1000,{records:full}));
 }));
 test('PostgreSQL stages and publishes complete pinned reference geography without mutating registry/evidence',withFixture(async({db,engine})=>{
  const extra=Array.from({length:5},(_,continent)=>tiers.map((kind,index)=>({id:`${kind}-${continent}`,kind,name:`Test-only ${kind} ${continent}`,parent_id:index?`${tiers[index-1]}-${continent}`:null}))).flat();await importBatch(db,{entities:extra});
@@ -103,3 +106,51 @@ test('PostgreSQL geographic transaction guards reject unpublished/stale hashes a
  const current={...pin,release_id:second.id};await assert.rejects(importBatch(db,{expected_geography:{...current,footprints_sha256:'c'.repeat(64)},sources:[source('hash-mismatch')]}),error=>error.status===409);
  assert.deepEqual((await importBatch(db,{expected_geography:current,sources:[source('fresh-pinned-source')]})).expected_geography,current);
 }));
+
+test('actual PostgreSQL and SQLite share canonical owner names, map paging and name withdrawals',async()=>{
+ const pg=await createLocalPostgres(),sqlite=new FrozenD1();
+ try{
+  const input=[JSON.parse(fs.readFileSync(new URL('../data/hosted-type-catalog.json',import.meta.url))),
+   {sources:[source()],entities:tiers.map((kind,i)=>({id:kind,kind,name:`Original ${kind}`,parent_id:i?tiers[i-1]:null})),categories:[{id:'owner:a',kind:'owner',name:'Canonical owner',source_id:'history'}]},
+   {records:[record('owner-source','owner','Retained source wording',{category_id:'owner:a'})],names:[
+    {id:'owner-en',entity_id:'owner:a',name:'Preferred dated owner',language:'en',valid_from:1000,valid_to:1100,source_id:'history'},
+    {id:'owner-und',entity_id:'owner:a',name:'Alternative dated owner',language:'und',valid_from:1000,valid_to:1100,source_id:'history'},
+    {id:'location-en',entity_id:'location',name:'Location name is not its owner',language:'en',valid_from:1000,valid_to:1100,source_id:'history'}]}];
+  const reference={id:'fixture-capture',hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64)};
+  const labels=readOwnerLabels({version:1,kind:'neon-owner-label-replica-v1',revision:1,capture_reference:reference,owners:[{id:'owner:a',kind:'owner',name:'Canonical owner',source_id:'history'}]});
+  const features=[{id:'location',properties:{reference_owner:'Wrong source alias',metadata:{reference_owner_id:'owner:a'}}}];
+  const resolve=(page,history=page.names)=>{
+   const temporal=resolveTemporal({units:[],features,temporal:{entities:page.entities.map(e=>({...e,name:e.id})),links:[],history}},1000,true);
+   return resolveAttributes(features,1000,{records:page.records,ownerLabels:labels,temporal}).get('location');
+  };
+  const outcomes=[];
+  for(const db of [pg.db,sqlite]){
+   for(const batch of input)await importBatch(db,batch);
+   const page=hydrateMapSnapshotPage(await mapSnapshotPage(db,1000,{evidenceOnly:true}));
+   assert.ok(page.entities.some(e=>e.id==='owner:a'&&e.kind==='polity'));
+   assert.equal(resolve(page).owner,'Preferred dated owner');
+   const wholeNames=(await namesAt(db,1000,{mapOnly:true})).records;
+   assert.equal(resolve(page,wholeNames).owner,'Preferred dated owner');
+   assert.equal((await entityProfile(db,'owner:a',1000)).display_name,'Preferred dated owner');
+   assert.equal(page.records[0].value,'Retained source wording','Resolving a label does not rewrite its original claim');
+   const ids=[];let cursor='';do{const next=hydrateMapSnapshotPage(await mapSnapshotPage(db,1000,{evidenceOnly:true,limit:1,cursor}));ids.push(...next.entities.map(e=>e.id));cursor=next.next_cursor??'';}while(cursor);
+   assert.deepEqual(ids,['location','owner:a']);
+   await importBatch(db,{retirements:['owner-en','owner-und'].map(id=>({id:`retire:${id}`,collection:'names',target_id:id,source_id:'history',reason:'Fixture withdrawal'}))});
+   const withdrawn=hydrateMapSnapshotPage(await mapSnapshotPage(db,1000,{evidenceOnly:true}));
+   const retirements=(await retirementsAt(db,1000,{mapOnly:true})).records;
+   assert.deepEqual(retirements.map(r=>r.target_id).sort(),['owner-en','owner-und']);
+   const merged=mergePreparedEvidence(withdrawn.records,withdrawn.names,{records:page.records,names:page.names},{retirements:withdrawn.retirements});
+   assert.ok(!merged.names.some(n=>n.entity_id==='owner:a'),'A withdrawn prepared name cannot return');
+   assert.equal(resolve({...withdrawn,...merged}).owner,'Canonical owner');
+   assert.equal(resolve({...withdrawn,...merged}).category_ids.owner,'owner:a');
+   assert.equal((await entityProfile(db,'owner:a',1000)).display_name,null);
+   await importBatch(db,{retirements:[retirement('retire-owner-source','owner-source')],records:[record('owner-unknown','owner',null,{status:'unknown'})]});
+   const unknown=hydrateMapSnapshotPage(await mapSnapshotPage(db,1000,{evidenceOnly:true}));
+   assert.equal(resolve(unknown).owner,null);assert.equal(resolve(unknown).category_ids.owner,null);
+   outcomes.push({entities:page.entities,names:page.names,records:page.records,withdrawals:[...withdrawn.retirements].sort((a,b)=>a.id.localeCompare(b.id)),unknown:resolve(unknown)});
+  }
+  assert.deepEqual(outcomes[0],outcomes[1]);
+  assert.equal((await pg.engine.query("SELECT value FROM atlas_attribute_records WHERE id='owner-source'")).rows[0].value,'"Retained source wording"');
+  assert.equal(sqlite.sqlite.prepare("SELECT value FROM atlas_attribute_records WHERE id='owner-source'").get().value,'"Retained source wording"');
+ }finally{await pg.close();sqlite.sqlite.close();}
+});

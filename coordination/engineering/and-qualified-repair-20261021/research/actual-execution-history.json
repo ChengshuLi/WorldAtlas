@@ -1,0 +1,54 @@
+{
+  "code_commit": "53eb39c23dc78f41cb674ac80a75b88c76b26770",
+  "physical_executions": 1,
+  "completed_native_diagnostics": 1,
+  "completed_native_constructors": 1,
+  "source_evidence_preparations": 1,
+  "physical": {
+    "stage_commit": "d832138b55a80fdf4b7edd585a17a2d316de5a57",
+    "result_commit": "36a0fe3f23b552ddcd4fdfdf7c11ab4ac6c4e18d",
+    "whole_targets": 7,
+    "inputs": 25
+  },
+  "native_diagnostic": {
+    "source_commit": "0708d5f1ad50a9e5c87b7a1f4f47c4e18d335fc0",
+    "result_commit": "8deb3ba79a8c2e3ba8e10b2636699feee1f673e9",
+    "elapsed_seconds": 1.193936792,
+    "requested_cells": 72,
+    "supported_cells": 71,
+    "held_cells": 1,
+    "held_key": [
+      96891,
+      132142
+    ],
+    "reason": "territorial_exclusion_cells"
+  },
+  "native_authority": {
+    "input_commit": "9dcf0358fe2e4657abd5385c8f43a800d6c0b800",
+    "elapsed_seconds": 3.489863917,
+    "qualified_cells": 71
+  },
+  "limits": [
+    "No original owner observer or retained source scanner was repeated.",
+    "No current-owner-zero, selected-output acceptance or package completion is claimed by these preparatory/qualification results.",
+    "One original foreign-contact key remains pending with its native hold; no unresolved-completion claim is made."
+  ],
+  "composition": {
+    "failed_admission": {
+      "error": "Committed modern constructor scope/rule/patch differs",
+      "output_created": false,
+      "reason": "Unchanged native patch was repinned at a later commit instead of preserving the exact constructor-bound descriptor."
+    },
+    "successful_commit": "0a1dabb21bdb5eb9fd2826f89c0deaf9d33b3cef",
+    "correction": "Use literal authority-binding.native_patch, preserving all scientific inputs and native output."
+  },
+  "finalize": {
+    "failed_admission": {
+      "error": "Supply an exact commit/path locator, without handwritten derived descriptors",
+      "output_created": false,
+      "reason": "Compact finalize rebind requires only commit and path, not the full derived descriptor."
+    },
+    "successful_phase": "finalize-002",
+    "correction": "Use exact existing rebind commit/path; no science or successful composition was repeated."
+  }
+}

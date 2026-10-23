@@ -1,0 +1,671 @@
+{
+  "kind": "worldatlas-hti411-cloud-audit-transfer-manifest-v1",
+  "issue": "ChengshuLi/WorldAtlas#2460",
+  "prepared_date_utc": "2026-10-19",
+  "purpose": "Finite amendment of the shared HTI411 witness and custody manifest for a conditional documented-unresolved request; no publication or acceptance action.",
+  "existing_library_handoff": {
+    "library_file_id": "libfile_f4ae884e0840819197ada88e2f287145",
+    "file_id": "file_000000000ebc81f4a9cc7d56bdaee693",
+    "filename": "worldatlas-HTI411-retained-disposition-handoff-20261019.json",
+    "bytes": 148702,
+    "sha256": "75f75dfa2c31c2431ac32746c0a9da1f6debb63ccaee7e0727cd19f0715fb10b",
+    "action": "Reuse existing Library item; do not duplicate."
+  },
+  "scope": {
+    "package": "gb-HTI-ADM2--repair-evaluation",
+    "original_cells": {
+      "land": 4082,
+      "water": 0
+    },
+    "original_intervals": 1741,
+    "original_owners": 37,
+    "original_source_contacts": 52,
+    "prior_accepted_outcomes": 3671,
+    "residual_held_keys": 411,
+    "compact_held_run_serializations": 213,
+    "counting_rule": "Original denominator remains 1,741 intervals. 213 is both the compact held-run serialization count and independently verified complete touched original source-set interval rows; equality is membership-verified, not assumed.",
+    "complete_touched_original_source_set_intervals": 213
+  },
+  "disjoint_reviewed_partitions": [
+    {
+      "id": "A",
+      "keys": 190,
+      "original_intervals": 92,
+      "owners": [
+        22478,
+        22496,
+        22501
+      ],
+      "review": "passed exact-head independent review; 190 keys / 92 intervals; zero credit"
+    },
+    {
+      "id": "B",
+      "keys": 221,
+      "original_intervals": 121,
+      "owners": [
+        22492,
+        22500,
+        22506,
+        22511
+      ],
+      "review": "passed exact-head independent review; 221 keys / 121 intervals; zero credit"
+    }
+  ],
+  "reconciliation": {
+    "union_keys": 411,
+    "intersection_keys": 0,
+    "missing": 0,
+    "extra": 0,
+    "all_source_contact_indices_checked_against_52_entry_roster": "0 mismatches",
+    "complete_touched_original_source_set_intervals": 213,
+    "original_interval_rows_with_both_accepted_and_held_keys": 0,
+    "exact_original_block_match_to_previously_verified_owner_receipt": true,
+    "all_411_per_key_original_source_sets_and_classes_match": true
+  },
+  "disposition": {
+    "proposals": "conditional documented-unresolved acceptance request for exactly 411 held keys across 213 complete touched original source-set intervals (A=190, B=221)",
+    "new_accepted_credit": 0,
+    "prior_3671": "preserved, not recounted",
+    "per_key_dom_operand_attribution": "not asserted; negative-union diagnostic does not identify constituent operands",
+    "condition_for_credit": "actual new credit remains 0 until public exact-head final review, durable evidence delivery, and explicit root acceptance",
+    "source_applicability_contact_question": "remains explicit and unresolved; no per-key DOM operand attribution"
+  },
+  "main_and_observation": {
+    "historical_handoff_accepted_main": "d9bb148ef9ce4ff94e79f1263ad066ce39740f31",
+    "accepted_main": "962811940c1aa62ed432ccf8c81c062d3a136a7c",
+    "owner_observation": {
+      "status": "complete",
+      "route": "cloud engineering existing permitted read-only route",
+      "receipt_path": "cloud-receipt-96281194/gb-HTI-ADM2--repair-evaluation.json",
+      "bytes": 1530220,
+      "sha256": "868988b0cc886cab5e590416cd5762661710bfefdcf6eff8f8969fce07783ce5",
+      "commit": "962811940c1aa62ed432ccf8c81c062d3a136a7c",
+      "code_commit": "5ce900d7a015d9519ce11724c7101f771ddbf7a3",
+      "query_count": 4082,
+      "duplicate_local_observer": "not run"
+    },
+    "independent_audit": {
+      "result": "PASS",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/pull/2536#issuecomment-6274884215",
+      "verified": "4,082 queried cells; 1,741 original intervals; 3,671 original-target-owner matches; 411 zero base/patch/effective owners; zero overlap; zero wrong-target results"
+    },
+    "limits": "Owner observation/audit adds no accepted or repair credit; 411 remain held, with the source applicability/contact question unresolved."
+  },
+  "uploaded_files": [
+    {
+      "filename": "worldatlas-HTI411-residual-A-disposition-proposal-draft.json",
+      "relative_path": "worldatlas-HTI411-residual-A-disposition-proposal-draft.json",
+      "bytes": 354154,
+      "sha256": "11573872be022f14e02941c4552e69d0e2e78efacd6c44a7e46683e6336b2164",
+      "library_artifact_type": "other",
+      "library_file_id": "libfile_fd0daa0c44b08191a63189a94ee0eef6",
+      "file_id": "file_000000008e3c81f5bcf7cf8778944450",
+      "status": "durably replaced in Library as version 1",
+      "prior_versions": [
+        {
+          "file_id": "file_00000000834081f688c121193213f4d3",
+          "bytes": 354210,
+          "sha256": "84a527471746cbf16d7ab30fb90eb21b781cfb3b4e83b5d846a90b6f1fb1eb14",
+          "status": "superseded by durable Library version 1; retained as history",
+          "version_id": "0"
+        }
+      ],
+      "version_id": "1"
+    },
+    {
+      "filename": "B-author-proposed-dispositions.json",
+      "relative_path": "B-author-proposed-dispositions.json",
+      "bytes": 860994,
+      "sha256": "b83817ba1268a17783149d2b146734a93fbe40647e0353eaad84e87666066003",
+      "library_artifact_type": "other",
+      "library_file_id": "libfile_4bd00d2c92188191b41052358d4267d7",
+      "file_id": "file_00000000f82081f5aebe7c21427567f0",
+      "status": "durably replaced in Library as version 2",
+      "prior_versions": [
+        {
+          "file_id": "file_0000000022a481fdbe4fc3e26d58c05d",
+          "bytes": 860475,
+          "sha256": "dcd3afd5a3f864d45e394eb2d3d8a1d0607d7a8f92a1be58601498d37454553b",
+          "status": "superseded by durable Library version 1; retained as history",
+          "version_id": "0"
+        },
+        {
+          "file_id": "file_00000000e87482308027e69968734a2b",
+          "version_id": "1",
+          "bytes": 860952,
+          "sha256": "d3c5748c7f52281818d6b6a5b3d1a0cc56fa4ea6a42516741578a1213ee3d3df",
+          "status": "superseded by durable Library version 2; retained as history"
+        }
+      ],
+      "version_id": "2"
+    },
+    {
+      "filename": "B-author-README.md",
+      "relative_path": "B-author-README.md",
+      "bytes": 4547,
+      "sha256": "c07a2f16123333a74777cefac7fd7f64bd71fb29d995afe1f1824e969d2bd269",
+      "library_artifact_type": "other",
+      "library_file_id": "libfile_65c4128b0ab08191b7a14d4f444e283a",
+      "file_id": "file_000000004b6081f5b2a3579887fdfc94",
+      "status": "durably replaced in Library as version 2",
+      "prior_versions": [
+        {
+          "file_id": "file_00000000eb1081fdaf834b7cb8a03711",
+          "bytes": 4215,
+          "sha256": "85c9e34b46a9c7baa47b61f8927783eaab5f11c345d3da949226efe33f009a2b",
+          "status": "superseded by durable Library version 1; retained as history",
+          "version_id": "0"
+        },
+        {
+          "file_id": "file_000000000adc81fdadef484d072cec8e",
+          "version_id": "1",
+          "bytes": 4506,
+          "sha256": "205a173a086e70b9948a0c366d574d74e8a7fc2849bca12737b8ef688fffb16d",
+          "status": "superseded by durable Library version 2; retained as history"
+        }
+      ],
+      "version_id": "2"
+    },
+    {
+      "filename": "shared-witness-draft-20261019.md",
+      "relative_path": "shared-witness-draft-20261019.md",
+      "bytes": 11937,
+      "sha256": "51bb0800203d4433850183c2fb708ad9705402cbc9ff02c2a2b24364754bbdaa",
+      "library_artifact_type": "other",
+      "library_file_id": "libfile_9c2802283e108191986ab0829a82c551",
+      "file_id": "file_0000000068bc81fd94051f3057ebf5f2",
+      "status": "durably replaced in Library as version 1",
+      "prior_versions": [
+        {
+          "file_id": "file_00000000d83481f595ae7e6a4e009777",
+          "bytes": 7585,
+          "sha256": "04c5dd9a33a8c9444bbf4826cd9a2707ee968a8280a05f3090b9784c4222bef7",
+          "status": "superseded by durable Library version 1; retained as history",
+          "version_id": "0"
+        }
+      ],
+      "version_id": "1"
+    },
+    {
+      "filename": "block-028.json.gz",
+      "relative_path": "retained-inputs/block-028.json.gz",
+      "bytes": 10906,
+      "sha256": "165b7a46a0a8fe3709ac9b2f05b9ae9e7961131e9ccded76c94676487c0ff080",
+      "library_artifact_type": "other",
+      "library_file_id": "libfile_7522edd64900819197f98178310621dd",
+      "file_id": "file_00000000819881f6b413dad79b39d281"
+    }
+  ],
+  "retained_remote_witness_pins": {
+    "witness_pins": {
+      "original_inputs": {
+        "native_patch": {
+          "bytes": 55775,
+          "commit": "e38e3488de52e6ef299157f7dc736398a1b9ca1f",
+          "git_blob_oid": "3feda471e26c52530c0a3316b6c977ec45a5008c",
+          "mode": "100644",
+          "path": "coordination/engineering/americas-next-original-evaluations-20261018/hti/source-stage-001/original-native-request.json",
+          "sha256": "35c25a762e5623adbb5254c2158c2d374e2a4ef45ec43b6505050fdbd0580b06"
+        },
+        "source_evidence": {
+          "bytes": 85554,
+          "commit": "8c192828cf81a554176efdead967acb9b05ac79e",
+          "git_blob_oid": "874ed8619a25b30824706d3cdc72db5e049f118f",
+          "mode": "100644",
+          "path": "coordination/engineering/americas-next-original-evaluations-20261018/hti/source-evidence-001/source-evidence.json",
+          "sha256": "8e12d2f514144f089c4e59ec42ff2a55632ff65b4f5ab0398673878d9db7e664"
+        }
+      },
+      "native_diagnostic": {
+        "bytes": 204661,
+        "commit": "a39c8a88c5156b97a2a136d6ab0499b05759969c",
+        "git_blob_oid": "e22fcf12b4c4f998cdeeede43a699fc01e53e4a3",
+        "mode": "100644",
+        "path": "coordination/engineering/americas-next-original-evaluations-20261018/hti/native-diagnostic-001/native-diagnostic.json",
+        "sha256": "3fca6e81668aedb4a9427e7054579a73a0788cef6dfab6d394fa4fbaf7072df3"
+      },
+      "physical_evidence": {
+        "commit": "f4da746a48e4db574ded6107b17cf780f985a7a2",
+        "path": "coordination/engineering/americas-next-original-evaluations-20261018/physical140-001/whole-target-support.json",
+        "mode": "100644",
+        "git_blob_oid": "b3c836a71a6fdb4122ecd367053380c543b7446e",
+        "bytes": 7060799,
+        "sha256": "a2c6bf195a6fdaf3555c09ffefa55bc4e312106438a02c306063c6a64ffe327c"
+      },
+      "physical_input": {
+        "commit": "e38e3488de52e6ef299157f7dc736398a1b9ca1f",
+        "path": "coordination/engineering/americas-next-original-evaluations-20261018/combined-original-stage-inputs.json",
+        "mode": "100644",
+        "git_blob_oid": "40be9e647ae7f4e04813545e786bd00217a34c6d",
+        "bytes": 2598816,
+        "sha256": "9a2e8d08e3f999b18c078055e9507c2142a51615ebfc7ea0ae6ef924c432fa04"
+      },
+      "physical_reproduction": {
+        "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+        "path": "scripts/qualify-source-cohort.py",
+        "mode": "100644",
+        "git_blob_oid": "f69180b425d665a022dd18290688864674dd20a5",
+        "bytes": 43642,
+        "sha256": "abc801b9a35d20c9f0dfe3bbc9bb2cb7dc107f1758414970d9cde11380574a18"
+      },
+      "source_catalogue": {
+        "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "mode": "100644",
+        "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+      },
+      "native_contract": {
+        "coordinateBits": 19,
+        "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "method": "native-linear-evenodd-first-owner-v1",
+        "native_latitudes": {
+          "bytes": 1851757,
+          "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+          "decoded_bytes": 2097328,
+          "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+          "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+          "role": "immutable-normative-rule-input",
+          "root": "repository",
+          "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147"
+        },
+        "original_assets": {
+          "bounds": {
+            "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+            "path": "data/canonical-grid/bounds.json.gz",
+            "role": "original-identity-parent-camera-context",
+            "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f"
+          },
+          "province_membership": {
+            "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+            "path": "data/canonical-grid/province-membership.bin.gz",
+            "role": "original-identity-crosswalk",
+            "sha256": "01f42b69ca969090d10c42d6a1311215a19ce436b0f3e720f7f873f4a18f90da"
+          }
+        },
+        "size": 262166
+      }
+    },
+    "independently_authenticated_retained_body_pins": [
+      {
+        "path": "coordination/engineering/americas-next-original-evaluations-20261018/hti/supported-inputs-001/held-original.json",
+        "git_blob_oid": "c676b9e37c6638d6b5d57b3b7e8cc753474d9876",
+        "bytes": 15215,
+        "sha256": "d7a98dbed323b9e5ed22738b31b601667d9d11a42e4790ec847960b0db46c35a",
+        "commit": "a0acb80c8c1238ea55b8c1db6fbad409dd6b3f28"
+      },
+      {
+        "path": "coordination/engineering/americas-next-original-evaluations-20261018/hti/supported-inputs-001/original-scope-partition.json",
+        "git_blob_oid": "100264d6b93431893cb10fc570469f1f5ac8b479",
+        "bytes": 4622,
+        "sha256": "46773a8bd9010e4c59cae68ec600b6e1c4480ee70f901071456dce092882a47b",
+        "commit": "a0acb80c8c1238ea55b8c1db6fbad409dd6b3f28"
+      },
+      {
+        "path": "coordination/engineering/americas-next-original-evaluations-20261018/hti/source-evidence-001/preparation.json",
+        "git_blob_oid": "ac50cf390f1e7322140859be302e33e128d5b579",
+        "bytes": 395,
+        "sha256": "6e4a74d290f87968a5b28a7a2dcc2f0d9584144f582e599a2fda46c2a5346fdb",
+        "commit": "a0acb80c8c1238ea55b8c1db6fbad409dd6b3f28"
+      },
+      {
+        "path": "coordination/engineering/americas-next-original-evaluations-20261018/hti/native-diagnostic-001/preparation.json",
+        "git_blob_oid": "9bec767bfdff6b70977e4a1a7854ee5df276cee3",
+        "bytes": 267,
+        "sha256": "ac9cb42f81dee107c3d5b42c14f6b3c29226f8c4e40fed23d797ebf8a4a4422e",
+        "commit": "a0acb80c8c1238ea55b8c1db6fbad409dd6b3f28"
+      },
+      {
+        "path": "coordination/engineering/americas-next-original-evaluations-20261018/original-scope-and-first-physical-receipt.json",
+        "git_blob_oid": "4792774058fcf5c0c6a614c9315356532ecbad6d",
+        "bytes": 6844,
+        "sha256": "a9bf5a442912d40698e14058b437a05f624d7b62960748dd20a26a6a9c92f953",
+        "commit": "a0acb80c8c1238ea55b8c1db6fbad409dd6b3f28"
+      },
+      {
+        "path": "coordination/engineering/americas-next-original-evaluations-20261018/hti/source-stage-001/SOURCE-NOTICE.md",
+        "git_blob_oid": "68c4495a191030b3e01d58caa6973aefacfb4f4e",
+        "bytes": 2508,
+        "sha256": "7b06e8ae88bf2f03d4e2551357e3dd75241362ba72ede247af0fb8f97e719057",
+        "commit": "a0acb80c8c1238ea55b8c1db6fbad409dd6b3f28"
+      },
+      {
+        "commit": "a0acb80c8c1238ea55b8c1db6fbad409dd6b3f28",
+        "path": "coordination/engineering/americas-next-original-evaluations-20261018/hti/source-stage-001/original-contact-roster.json",
+        "git_blob_oid": "5fa6b6419ce45d9b6e0def27ee71326c9ccb7c24",
+        "bytes": 399958,
+        "sha256": "ae730885c6c22417d11b0f5c5a6be5822a02de1dbb81b003f00fab45e4d4f781"
+      },
+      {
+        "commit": "a0acb80c8c1238ea55b8c1db6fbad409dd6b3f28",
+        "path": "coordination/engineering/americas-next-original-evaluations-20261018/hti/source-evidence-001/territorial-exclusion-provenance.json",
+        "git_blob_oid": "ce3a2d531eef5715d2ca988290bc33b5b54ab39a",
+        "bytes": 273744,
+        "sha256": "7f5a06173cde69b48db2839846326f6b4c8c6d4556eb9286f2fb1435a6916d4a"
+      },
+      {
+        "commit": "a0acb80c8c1238ea55b8c1db6fbad409dd6b3f28",
+        "path": "coordination/engineering/americas-next-original-evaluations-20261018/hti/native-diagnostic-001/native-diagnostic.json",
+        "git_blob_oid": "e22fcf12b4c4f998cdeeede43a699fc01e53e4a3",
+        "bytes": 204661,
+        "sha256": "3fca6e81668aedb4a9427e7054579a73a0788cef6dfab6d394fa4fbaf7072df3"
+      }
+    ],
+    "source_and_semantic_limits": [
+      "HTI original ADM2 and ADM1: represented2017 OSM/Wambacher, ODbL1.0, exact snapshot/extraction dates unknown. Keep OSM attribution, Wambacher/geoBoundaries provenance, source-specific notices and machine-readable complete alterations offer. Generic geoBoundaries CC BY4 does not replace underlying obligations.",
+      "DOM ADM1 foreign context is separately represented2022 Natural Earth/Public Domain. DOM ADM2 provenance remains source-specific in complete corpus/catalogue; do not relabel all DOM operands as the ADM1 product.",
+      "Raw consumed geometry versus canonical display geometry and provider blank/Unknown role versus canonical Arrondissement remain distinct. Do not infer contemporary sovereignty from contacts, admin polygons or successful native construction.",
+      "Five previously reconciled display records account for523 originals:242 accepted supported and281 held; Vallières22 and Belle-Anse108 are the other130 holds. All37 original semantic records remain.",
+      "No positive repairs are promised by this handoff. The finite deliverable is original-contract documented-unresolved review of411 existing holds; accepted3671 is never counted again."
+    ],
+    "transfer_note": "Remote witness bodies remain available at their immutable commit/path/blob/hash pins in the existing handoff; no new source/geometry bodies were fetched or replayed. Existing Library handoff, raw receipt, and compact review are referenced above."
+  },
+  "audit_limits": [
+    "No new geometry or source producer was run.",
+    "The physical report body is not duplicated locally; the immutable repository blob, commit, path, byte count, and SHA-256 are pinned in the shared witness and handoff.",
+    "This packet does not assert package completion, accepted exception credit, source qualification, or legal/current-boundary conclusions."
+  ],
+  "existing_library_review": {
+    "library_file_id": "libfile_9b3ac16e7a408191a7498a8accda8cd9",
+    "file_id": "file_00000000597c820c8454b0b90dada842",
+    "filename": "worldatlas-HTI4082-independent-observation-review-20261019.json",
+    "bytes": 2334,
+    "sha256": "1dd7754ffd4e7bdfdd1e5e6d970da75917daf95aab0f3f9c9f1c8373bd7d0ac7",
+    "role": "Compact independent audit record; reuse existing item."
+  },
+  "current_author_artifacts": [
+    {
+      "label": "A proposal",
+      "filename": "worldatlas-HTI411-residual-A-disposition-proposal-draft.json",
+      "relative_path": "worldatlas-HTI411-residual-A-disposition-proposal-draft.json",
+      "existing_library_file_id": "libfile_fd0daa0c44b08191a63189a94ee0eef6",
+      "existing_library_backing_file_id": "file_000000008e3c81f5bcf7cf8778944450",
+      "bytes": 354154,
+      "sha256": "11573872be022f14e02941c4552e69d0e2e78efacd6c44a7e46683e6336b2164",
+      "new_version_status": "uploaded; durable Library version 1",
+      "library_file_id": "libfile_fd0daa0c44b08191a63189a94ee0eef6",
+      "file_id": "file_000000008e3c81f5bcf7cf8778944450",
+      "version_id": "1",
+      "prior_backing_file_id": "file_00000000834081f688c121193213f4d3"
+    },
+    {
+      "label": "B proposal",
+      "filename": "B-author-proposed-dispositions.json",
+      "relative_path": "B-author-proposed-dispositions.json",
+      "existing_library_file_id": "libfile_4bd00d2c92188191b41052358d4267d7",
+      "existing_library_backing_file_id": "file_00000000f82081f5aebe7c21427567f0",
+      "bytes": 860994,
+      "sha256": "b83817ba1268a17783149d2b146734a93fbe40647e0353eaad84e87666066003",
+      "new_version_status": "uploaded; durable Library version 2",
+      "library_file_id": "libfile_4bd00d2c92188191b41052358d4267d7",
+      "file_id": "file_00000000f82081f5aebe7c21427567f0",
+      "version_id": "2",
+      "prior_backing_file_id": "file_00000000e87482308027e69968734a2b",
+      "prior_versions": [
+        {
+          "file_id": "file_0000000022a481fdbe4fc3e26d58c05d",
+          "version_id": "0",
+          "bytes": 860475,
+          "sha256": "dcd3afd5a3f864d45e394eb2d3d8a1d0607d7a8f92a1be58601498d37454553b",
+          "status": "superseded by durable Library version 1; retained as history"
+        },
+        {
+          "file_id": "file_00000000e87482308027e69968734a2b",
+          "version_id": "1",
+          "bytes": 860952,
+          "sha256": "d3c5748c7f52281818d6b6a5b3d1a0cc56fa4ea6a42516741578a1213ee3d3df",
+          "status": "superseded by durable Library version 2; retained as history"
+        }
+      ]
+    },
+    {
+      "label": "B README",
+      "filename": "B-author-README.md",
+      "relative_path": "B-author-README.md",
+      "existing_library_file_id": "libfile_65c4128b0ab08191b7a14d4f444e283a",
+      "existing_library_backing_file_id": "file_000000004b6081f5b2a3579887fdfc94",
+      "bytes": 4547,
+      "sha256": "c07a2f16123333a74777cefac7fd7f64bd71fb29d995afe1f1824e969d2bd269",
+      "new_version_status": "uploaded; durable Library version 2",
+      "library_file_id": "libfile_65c4128b0ab08191b7a14d4f444e283a",
+      "file_id": "file_000000004b6081f5b2a3579887fdfc94",
+      "version_id": "2",
+      "prior_backing_file_id": "file_000000000adc81fdadef484d072cec8e",
+      "prior_versions": [
+        {
+          "file_id": "file_00000000eb1081fdaf834b7cb8a03711",
+          "version_id": "0",
+          "bytes": 4215,
+          "sha256": "85c9e34b46a9c7baa47b61f8927783eaab5f11c345d3da949226efe33f009a2b",
+          "status": "superseded by durable Library version 1; retained as history"
+        },
+        {
+          "file_id": "file_000000000adc81fdadef484d072cec8e",
+          "version_id": "1",
+          "bytes": 4506,
+          "sha256": "205a173a086e70b9948a0c366d574d74e8a7fc2849bca12737b8ef688fffb16d",
+          "status": "superseded by durable Library version 2; retained as history"
+        }
+      ]
+    },
+    {
+      "label": "Shared witness",
+      "filename": "shared-witness-draft-20261019.md",
+      "relative_path": "shared-witness-draft-20261019.md",
+      "existing_library_file_id": "libfile_9c2802283e108191986ab0829a82c551",
+      "existing_library_backing_file_id": "file_0000000068bc81fd94051f3057ebf5f2",
+      "bytes": 11937,
+      "sha256": "51bb0800203d4433850183c2fb708ad9705402cbc9ff02c2a2b24364754bbdaa",
+      "new_version_status": "uploaded; durable Library version 1",
+      "library_file_id": "libfile_9c2802283e108191986ab0829a82c551",
+      "file_id": "file_0000000068bc81fd94051f3057ebf5f2",
+      "version_id": "1",
+      "prior_backing_file_id": "file_00000000d83481f595ae7e6a4e009777"
+    }
+  ],
+  "existing_library_receipt": {
+    "library_file_id": "libfile_6f9c2b8a04348191bdbe265aec5be8d0",
+    "file_id": "file_00000000d7dc81fdae7f34ef856ca12f",
+    "filename": "gb-HTI-ADM2--repair-evaluation.json",
+    "bytes": 1530220,
+    "sha256": "868988b0cc886cab5e590416cd5762661710bfefdcf6eff8f8969fce07783ce5",
+    "action": "Reuse the existing exact raw receipt; do not upload a duplicate."
+  },
+  "independent_review_status": {
+    "A": "prior local version passed exact immutable SHA-256 84a527471746cbf16d7ab30fb90eb21b781cfb3b4e83b5d846a90b6f1fb1eb14; current local hash differs and awaits final review",
+    "B": "prior local version passed exact immutable SHA-256 dcd3afd5a3f864d45e394eb2d3d8a1d0607d7a8f92a1be58601498d37454553b; current local hash differs and awaits final review",
+    "B_readme": "prior local version passed exact immutable SHA-256 85c9e34b46a9c7baa47b61f8927783eaab5f11c345d3da949226efe33f009a2b; current local hash differs and awaits final review",
+    "shared_witness": "prior local version passed exact immutable SHA-256 04c5dd9a33a8c9444bbf4826cd9a2707ee968a8280a05f3090b9784c4222bef7; current amended local hash differs and awaits final review",
+    "shared_witness_prior_version": "passed exact immutable SHA-256 04c5dd9a33a8c9444bbf4826cd9a2707ee968a8280a05f3090b9784c4222bef7; current amendment hash is listed under current_author_artifacts and pending final review",
+    "current_local_shared_witness": "pending final exact-public-head review after amendment",
+    "A_prior_version": "passed exact immutable SHA-256 84a527471746cbf16d7ab30fb90eb21b781cfb3b4e83b5d846a90b6f1fb1eb14; current local version hash is listed under current_author_artifacts and pending final review",
+    "B_prior_version": "passed exact immutable SHA-256 dcd3afd5a3f864d45e394eb2d3d8a1d0607d7a8f92a1be58601498d37454553b; current local version hash is listed under current_author_artifacts and pending final review",
+    "B_readme_prior_version": "passed exact immutable SHA-256 85c9e34b46a9c7baa47b61f8927783eaab5f11c345d3da949226efe33f009a2b; current local version hash is listed under current_author_artifacts and pending final review",
+    "current_local_author_versions": "pending final exact-public-head review after this finite amendment"
+  },
+  "transfer_status": "A proposal and shared witness remain durable Library version 1; B proposal and B README are durable Library version 2. Prior versions remain in uploaded_files[].prior_versions. Other Library items and content are unchanged. Manifest local copy awaits exact re-review and replacement.",
+  "library_delivery": {
+    "status": "all six new items succeeded; existing handoff, raw receipt, and compact review reused",
+    "new_items": {
+      "worldatlas-HTI411-residual-A-disposition-proposal-draft.json": {
+        "library_file_id": "libfile_fd0daa0c44b08191a63189a94ee0eef6",
+        "file_id": "file_00000000834081f688c121193213f4d3"
+      },
+      "B-author-proposed-dispositions.json": {
+        "library_file_id": "libfile_4bd00d2c92188191b41052358d4267d7",
+        "file_id": "file_0000000022a481fdbe4fc3e26d58c05d"
+      },
+      "B-author-README.md": {
+        "library_file_id": "libfile_65c4128b0ab08191b7a14d4f444e283a",
+        "file_id": "file_00000000eb1081fdaf834b7cb8a03711"
+      },
+      "shared-witness-draft-20261019.md": {
+        "library_file_id": "libfile_9c2802283e108191986ab0829a82c551",
+        "file_id": "file_00000000d83481f595ae7e6a4e009777"
+      },
+      "block-028.json.gz": {
+        "library_file_id": "libfile_7522edd64900819197f98178310621dd",
+        "file_id": "file_00000000819881f6b413dad79b39d281"
+      }
+    },
+    "manifest_item": {
+      "library_file_id": "libfile_2db2b10a06208191ab2f3008ee2a6948",
+      "file_id": "file_000000008a8481fd89b810a82110fb30",
+      "version_before_replacement": 0
+    },
+    "artifact_types": "The Library create operation stored all six new items as artifact_type=other; MIME type is inferred from each filename.",
+    "prior_manifest_version": "Version 0 was the first upload; this revision records the successful item IDs and actual artifact types."
+  },
+  "amendment_evidence": {
+    "plan": {
+      "filename": "HTI411-finite-final-amendment-plan.json",
+      "relative_path": "../hti411-amendment-20261019/HTI411-finite-final-amendment-plan.json",
+      "bytes": 10159,
+      "sha256": "9ff860a824ce08355b90ef930985740e7992c84283df89cc85ffe867fcdab37c",
+      "existing_library_file_id": "libfile_497e5eab78408191b8d9587670b25bf8",
+      "existing_library_backing_file_id": "file_00000000252081f59b90389a123eac2f",
+      "existing_library_metadata_size_bytes": 10159,
+      "local_version_status": "existing Library record identified; local artifact version not uploaded"
+    },
+    "crossjoin_physical_review": {
+      "filename": "HTI411-crossjoin-physical-review.json",
+      "relative_path": "../hti411-amendment-20261019/HTI411-crossjoin-physical-review.json",
+      "bytes": 21422,
+      "sha256": "1cc4015e43996b44d896ef40c33849e3b855fe4de6d425ad3c7c4dfe87ce1cd4",
+      "existing_library_file_id": "libfile_fbf1c12125888191827f5177ee3783af",
+      "existing_library_backing_file_id": "file_0000000025b081f49f7a641d7fdea517",
+      "existing_library_metadata_size_bytes": 21422,
+      "local_version_status": "existing Library record identified; local artifact version not uploaded",
+      "crossjoin_result": {
+        "original_cells": 4082,
+        "original_intervals": 1741,
+        "original_owners": 37,
+        "original_contacts": 52,
+        "prior_accepted": 3671,
+        "A_keys": 190,
+        "A_original_interval_rows": 92,
+        "B_keys": 221,
+        "B_original_interval_rows": 121,
+        "union": 411,
+        "intersection": 0,
+        "complete_touched_original_source_set_interval_rows": 213,
+        "no_interval_mixes_accepted_and_held": true,
+        "per_key_original_classes_and_source_sets_match": true
+      },
+      "physical_report_pin": {
+        "commit": "f4da746a48e4db574ded6107b17cf780f985a7a2",
+        "path": "coordination/engineering/americas-next-original-evaluations-20261018/physical140-001/whole-target-support.json",
+        "git_blob_oid": "b3c836a71a6fdb4122ecd367053380c543b7446e",
+        "bytes": 7060799,
+        "sha256": "a2c6bf195a6fdaf3555c09ffefa55bc4e312106438a02c306063c6a64ffe327c"
+      }
+    }
+  },
+  "local_amendment_delivery": {
+    "status": "A proposal and shared witness durably stored as Library v1; B proposal and README durably stored as Library v2; manifest local copy awaits exact re-review and replacement",
+    "witness": {
+      "bytes": 11937,
+      "sha256": "51bb0800203d4433850183c2fb708ad9705402cbc9ff02c2a2b24364754bbdaa",
+      "library_file_id": "libfile_9c2802283e108191986ab0829a82c551",
+      "file_id": "file_0000000068bc81fd94051f3057ebf5f2",
+      "version_id": "1"
+    },
+    "amendment_plan": {
+      "bytes": 10159,
+      "sha256": "9ff860a824ce08355b90ef930985740e7992c84283df89cc85ffe867fcdab37c"
+    },
+    "crossjoin_physical_review": {
+      "bytes": 21422,
+      "sha256": "1cc4015e43996b44d896ef40c33849e3b855fe4de6d425ad3c7c4dfe87ce1cd4"
+    },
+    "public_final_review": "pending",
+    "durable_public_delivery": "pending",
+    "root_acceptance": "pending",
+    "actual_new_credit": 0,
+    "manifest_upload": "not uploaded"
+  },
+  "amendment_input_hash_relation": {
+    "plan_verified_input_identities_preserved": {
+      "A": {
+        "bytes": 354210,
+        "sha256": "84a527471746cbf16d7ab30fb90eb21b781cfb3b4e83b5d846a90b6f1fb1eb14"
+      },
+      "B": {
+        "bytes": 860475,
+        "sha256": "dcd3afd5a3f864d45e394eb2d3d8a1d0607d7a8f92a1be58601498d37454553b"
+      },
+      "manifest_v1": {
+        "bytes": 19126,
+        "sha256": "d3a69fff78a64c24e19ee96f5c52ba5024aa7ebe0b5e49aafb02b3c398fef417"
+      }
+    },
+    "current_local_author_hashes": {
+      "A": {
+        "bytes": 354154,
+        "sha256": "11573872be022f14e02941c4552e69d0e2e78efacd6c44a7e46683e6336b2164"
+      },
+      "B": {
+        "bytes": 860952,
+        "sha256": "d3c5748c7f52281818d6b6a5b3d1a0cc56fa4ea6a42516741578a1213ee3d3df"
+      },
+      "B_README": {
+        "bytes": 4506,
+        "sha256": "205a173a086e70b9948a0c366d574d74e8a7fc2849bca12737b8ef688fffb16d"
+      }
+    },
+    "note": "The local A/B/README files now have hashes distinct from the earlier plan input identities and stored Library versions. Manifest records current local bytes/hashes; these amendment versions are not uploaded and are pending final review."
+  },
+  "library_version_replacements": [
+    {
+      "filename": "worldatlas-HTI411-residual-A-disposition-proposal-draft.json",
+      "library_file_id": "libfile_fd0daa0c44b08191a63189a94ee0eef6",
+      "file_id": "file_000000008e3c81f5bcf7cf8778944450",
+      "version_id": "1",
+      "bytes": 354154,
+      "sha256": "11573872be022f14e02941c4552e69d0e2e78efacd6c44a7e46683e6336b2164",
+      "status": "durable"
+    },
+    {
+      "filename": "B-author-proposed-dispositions.json",
+      "library_file_id": "libfile_4bd00d2c92188191b41052358d4267d7",
+      "file_id": "file_00000000f82081f5aebe7c21427567f0",
+      "version_id": "2",
+      "bytes": 860994,
+      "sha256": "b83817ba1268a17783149d2b146734a93fbe40647e0353eaad84e87666066003",
+      "status": "durable",
+      "prior_version": {
+        "file_id": "file_00000000e87482308027e69968734a2b",
+        "version_id": "1",
+        "bytes": 860952,
+        "sha256": "d3c5748c7f52281818d6b6a5b3d1a0cc56fa4ea6a42516741578a1213ee3d3df",
+        "status": "durable"
+      }
+    },
+    {
+      "filename": "B-author-README.md",
+      "library_file_id": "libfile_65c4128b0ab08191b7a14d4f444e283a",
+      "file_id": "file_000000004b6081f5b2a3579887fdfc94",
+      "version_id": "2",
+      "bytes": 4547,
+      "sha256": "c07a2f16123333a74777cefac7fd7f64bd71fb29d995afe1f1824e969d2bd269",
+      "status": "durable",
+      "prior_version": {
+        "file_id": "file_000000000adc81fdadef484d072cec8e",
+        "version_id": "1",
+        "bytes": 4506,
+        "sha256": "205a173a086e70b9948a0c366d574d74e8a7fc2849bca12737b8ef688fffb16d",
+        "status": "durable"
+      }
+    },
+    {
+      "filename": "shared-witness-draft-20261019.md",
+      "library_file_id": "libfile_9c2802283e108191986ab0829a82c551",
+      "file_id": "file_0000000068bc81fd94051f3057ebf5f2",
+      "version_id": "1",
+      "bytes": 11937,
+      "sha256": "51bb0800203d4433850183c2fb708ad9705402cbc9ff02c2a2b24364754bbdaa",
+      "status": "durable"
+    }
+  ]
+}

@@ -48,6 +48,9 @@ test('negative control: old geographic sparse tree omits mandatory coordinator b
   assert.match(result.stderr, /selected-geography-effective-prevention-20261009/);
 });
 
+// Workflow declarations are still asserted separately. Only identical positive
+// import probes share results; geography and negative probes remain independent.
+const declaredCheckoutResults = new Map();
 for (const workflow of workflows) {
   test(`${workflow}: actual sparse declarations include trusted module dependencies`, () => {
     const source = fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8');
@@ -56,7 +59,9 @@ for (const workflow of workflows) {
     const checkouts=blocks.map(block=>block[1].trim().split('\n').map(row=>row.trim()))
       .filter(rows=>rows.join('\n')!=='/*\n!/*/'); // Root-only bootstrap is expanded by the tested stdin step.
     for (const directories of checkouts) {
-      const result = probe(directories);
+      const key = JSON.stringify(directories);
+      if (!declaredCheckoutResults.has(key)) declaredCheckoutResults.set(key, probe(directories));
+      const result = declaredCheckoutResults.get(key);
       assert.equal(result.status, 0, result.stderr);
     }
   });
@@ -97,11 +102,12 @@ function queueWorkflow() {
 }
 function workflowCondition(expression, context, {success=true,cancelled=false}={}) {
   if(expression&&!/\b(?:always|success|failure|cancelled)\(/.test(expression)&&!success)return false;
-  return expression?Boolean(new Function('needs','github','matrix','steps','always','cancelled','success','failure',
-    `return (${expression});`)(context.needs,context.github,context.matrix,context.steps??{},()=>true,()=>cancelled,()=>success,()=>!success)):success;
+  return expression?Boolean(new Function('needs','github','matrix','steps','inputs','always','cancelled','success','failure',
+    `return (${expression});`)(context.needs,context.github,context.matrix,context.steps??{},context.inputs??{},()=>true,()=>cancelled,()=>success,()=>!success)):success;
 }
-function queueContext({profile='full',selection='complete'}={}){
+function queueContext({profile='full',selection='complete',reviewedTests=''}={}){
  return {needs:{prepare:{outputs:{profile,test_selection:selection}}},matrix:{shard:0},
+   inputs:{reviewed_tests:reviewedTests},
    steps:{assembly:{outputs:{assembled:'false'}}}};
 }
 function packageStep(job,name){const found=job.steps.filter(step=>step.name===name);assert.equal(found.length,1,name);return found[0];}
@@ -198,10 +204,23 @@ for (const workflow of ['worker-merge.yml']) {
 
 test('focused delivery tests receive their real Node/Python runtime without an atlas build', () => {
   const {source,integration}=queueWorkflow();
+  const manual=JSON.stringify({base:'a'.repeat(40),head:'b'.repeat(40),files:[
+    'test/evidence-quality.test.mjs','test/premerge-evidence.test.mjs','test/engineering-owned-scope-routing.test.mjs']});
   for(const command of ['npm ci --no-audit --no-fund','python -m pip install -r requirements.txt']) {
     const steps=integration.steps.filter(step=>step.text.includes('run: '+command));
     assert.equal(steps.length,1,command);
     for(const profile of ['full','evidence'])assert.equal(workflowCondition(steps[0].condition,queueContext({profile})),true);
+    // Actions represents an omitted optional string input as empty. Only the
+    // automatic inert prepare branch can emit evidence/reviewed in that case.
+    for(const reviewedTests of [undefined,''])assert.equal(workflowCondition(steps[0].condition,
+      queueContext({profile:'evidence',selection:'reviewed',reviewedTests})),false);
+    for(const [profile,selection,reviewedTests] of [
+      ['evidence','reviewed',manual],
+      ['evidence','complete',''],['evidence','unknown',''],['evidence',null,''],
+      ['full','reviewed',''],['full','complete',''],['full','selected-data','']
+    ])assert.equal(workflowCondition(steps[0].condition,queueContext({profile,selection,reviewedTests})),true);
+    const old=queueContext({profile:'evidence'});delete old.needs.prepare.outputs.test_selection;
+    assert.equal(workflowCondition(steps[0].condition,old),true,'Older or missing selection output cannot opt out');
     assert.equal(workflowCondition(steps[0].condition,queueContext({profile:'unknown'})),false);
     assert.equal(workflowCondition(steps[0].condition,queueContext({profile:'evidence'}),{success:false}),false);
   }
@@ -344,3 +363,31 @@ for(const kind of ['invalid-base64','truncated-base64','foreign-whitespace','wro
     }finally{fs.rmSync(f.directory,{recursive:true,force:true});}
   });
 }
+
+
+test('scientific Python install follows assembly and runs only for fallback or ordinary regressions',()=>{
+ const {integration}=queueWorkflow();
+ const installs=integration.steps.filter(step=>step.text.includes('run: python -m pip install -r requirements.txt'));
+ assert.equal(installs.length,1,'One existing pinned requirements install, without a parallel fallback installer');
+ const install=installs[0],assembly=packageStep(integration,'Assemble unchanged base with current selected output');
+ const snapshot=packageStep(integration,'Snapshot original final-worker package inputs');
+ const npm=integration.steps.find(step=>step.text.includes('run: npm ci --no-audit --no-fund'));assert(npm);
+ const python=integration.steps.find(step=>step.text.includes('uses: actions/setup-python@'));assert(python);
+ const order=[python,npm,assembly,install,snapshot].map(step=>integration.steps.indexOf(step));
+ assert.deepEqual(order,[...order].sort((a,b)=>a-b));
+ for(const [profile,selection,shard,assembled,expected] of [
+  ['full','selected-data',0,'true',false],['full','selected-data',0,'false',true],
+  ['full','selected-data',0,'',true],['full','complete',0,'',true],
+  ['full','complete',1,'',true],['full','complete',2,'',true],
+  ['full','reviewed',0,'',true],['evidence','reviewed',0,'',true],
+  ['evidence','complete',0,'',true],['unknown','complete',0,'',false]]){
+  const context=queueContext({profile,selection,reviewedTests:selection==='reviewed'?'{"files":["test/premerge-evidence.test.mjs"]}':''});context.matrix.shard=shard;
+  context.steps.assembly.outputs.assembled=assembled;
+  assert.equal(workflowCondition(install.condition,context),expected,JSON.stringify({profile,selection,shard,assembled}));
+  assert.equal(workflowCondition(install.condition,context,{success:false}),false,'No install after failed assembly or earlier setup');
+  if(selection!=='selected-data')assert.equal(workflowCondition(assembly.condition,context),false,'Ordinary regressions cannot issue an assembled result');
+ }
+ const source=fs.readFileSync(path.join(root,'scripts/assemble-selected-package.mjs'),'utf8');
+ assert.match(source,/inspectPackageNodeRuntime/);assert.doesNotMatch(source,/inspectPackageRuntime/);
+ assert.match(source,/pythonArgs=\['-I','-S','-B'/,'Archive extraction excludes site packages');
+});

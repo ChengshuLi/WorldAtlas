@@ -18,7 +18,7 @@ GitHub Issues is the single source of truth for TODOs, current status and work h
 
 Geography researchers use `docs/GEOGRAPHY_HANDOFF.md` and `docs/prompts/GEOGRAPHY.txt`, label `type:geography`, branch `geography/<job-id>`, and the issue's exact evidence ownership prefixes. They do not execute migrations, update shared geography, perform live imports or publish. The existing table's engineering geographic releases and historical content responsibilities remain distinct.
 
-Read [LOCAL_WORKSPACES.md](LOCAL_WORKSPACES.md). Allocate isolated checkouts through `scripts/local-workspace.mjs`; keep bounded work/review slots, include exact required sparse inputs, check storage before generation/installations, and release finished slots after preserving unique work. Do not retain a full checkout per task or review revision. Existing chats must refresh their saved instructions.
+Read [LOCAL_WORKSPACES.md](LOCAL_WORKSPACES.md). Allocate isolated checkouts through `scripts/local-workspace.mjs`; keep bounded work/review slots, include exact required sparse inputs, and release finished slots after preserving unique work. Do not retain a full checkout per task or review revision. Existing chats must refresh their saved instructions.
 
 ## Issue workflow and incremental PRs
 

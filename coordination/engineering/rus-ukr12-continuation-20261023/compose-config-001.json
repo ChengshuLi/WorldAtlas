@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "selector": {
+    "commit": "9e3637776d2593f0a024adee41a19e319e3b6385",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "90cf8f9e9354f9d95cecd1a53db6306676914864",
+    "bytes": 1928,
+    "sha256": "841e39b1f0b70b87330cbdbc2890aaeb889de3c2da0e01183fbf486c280f1bd2"
+  },
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "a0eaf9a960e67a64871e45c5619d9ab252dd5be3",
+        "path": "coordination/engineering/rus-ukr12-continuation-20261023/native-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "1c279933e41f5a2550587ac30bda9c5b9d013399",
+        "bytes": 691,
+        "sha256": "be10535eeab818573bb851176670245a463236208242e1d5be3b471b9d3720ee"
+      },
+      "source_authority": {
+        "commit": "a0eaf9a960e67a64871e45c5619d9ab252dd5be3",
+        "path": "coordination/engineering/rus-ukr12-continuation-20261023/native-authority-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "df15ca987ab6a4b9316200fe223ba27898a98963",
+        "bytes": 694,
+        "sha256": "61e350d052594b8dc49084170410f93ccd81794e2897aa139df44781a3e49069"
+      },
+      "ledger": {
+        "commit": "a0eaf9a960e67a64871e45c5619d9ab252dd5be3",
+        "path": "coordination/engineering/rus-ukr12-continuation-20261023/native-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "b35116e4e4702e66b7a97468c4c29dc709e3d36c",
+        "bytes": 13681,
+        "sha256": "bd56a93e444a3805f7a1fa1b0fd116e2e66ad1223cbd9a12641011d0f654f796"
+      },
+      "native_patch": {
+        "commit": "230db563a919a17808c65f6227a9dde495c80f02",
+        "path": "coordination/engineering/rus-ukr12-continuation-20261023/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "f3e1f1dee9228606c3bf831109670c0846f0bd65",
+        "bytes": 654,
+        "sha256": "41687332106deff91d4fd44cf9660806bc697048cfa658dc0793a0cfad808f3b"
+      }
+    }
+  ]
+}

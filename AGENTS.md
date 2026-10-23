@@ -21,7 +21,7 @@ Use the current chat’s exact `CODEX_THREAD_ID` for new author work, stable acr
 
 ## Local storage
 
-Read [LOCAL_WORKSPACES.md](docs/LOCAL_WORKSPACES.md) before allocating local author/reviewer checkouts. Use the shared `scripts/local-workspace.mjs` allocator, sparse scopes and storage checks; release completed slots after preserving work. Fresh branches must not accumulate full dataset copies.
+Read [LOCAL_WORKSPACES.md](docs/LOCAL_WORKSPACES.md) before allocating local author/reviewer checkouts. Use the shared `scripts/local-workspace.mjs` allocator, sparse scopes and storage checks; release completed slots after preserving work. Fresh branches must not accumulate full dataset copies. Final author/reviewer handoffs must state the actual local cleanup outcome under that guide, including the reason and next action for any retained or blocked cleanup.
 
 ## Delivery priority
 

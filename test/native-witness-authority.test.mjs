@@ -165,7 +165,26 @@ for(const [name,change,pattern]of [
 ])test('actual constructor refuses '+name+' with zero contacts',()=>assert.throws(()=>constructorFixture(s=>{exactBoundaryTarget(s);change(conflict(s,'contradictory_land_water_support',off));}).run(),pattern));
 test('present unknown issue-free query cannot use legacy fast return',()=>assert.throws(()=>constructorFixture(s=>{query(s.physical.results[0]).query_relations[0].status='unknown';}).run(),/Unknown or missing/));
 test('source coverage takes precedence when both covers predicates are true',()=>assert.equal(constructorFixture(s=>query(s.physical.results[0]).query_relations[0].candidate_covers_source=true).run().ledger_rows[0].native_cells,1));
-test('same-owner sibling line veto applies through clean member coverage',()=>assert.throws(()=>constructorFixture(s=>conflict(s,'contradictory_land_water_support',{type:'LineString',coordinates:[[-.03,latitude],[0,latitude]]},1)).run(),/intersect a physical reconstruction residual or conflict witness/));
+for(const binding of ['omitted','first','second','both'])test('same-owner sibling '+binding+' class binding retains complete owner coverage and veto',()=>{
+ const setup=s=>{
+  s.proposed.rows[0].runs[0][1]++;
+  const rows=s.proposed.rows.map(row=>({y:row.y,runs:row.runs.map(([start,end])=>[start,end,'mapped_land_support'])}));
+  for(const [i,target]of s.targets.entries())if(binding==='both'||binding===(i?'second':'first'))target.coverage_rows=structuredClone(rows);
+ };
+ const f=constructorFixture(setup);assert.equal(f.state.targets.length,2);assert.equal(f.run().ledger_rows[0].native_cells,2);
+ assert.throws(()=>constructorFixture(s=>{setup(s);conflict(s,'contradictory_land_water_support',{type:'LineString',coordinates:[[-.03,latitude],[0,latitude]]},1);}).run(),/intersect a physical reconstruction residual or conflict witness/);
+});
+for(const defect of ['partial','conflicting','extra-cell'])test('same-owner sibling '+defect+' class binding refuses rather than combining inputs',()=>{
+ const f=constructorFixture(s=>{
+  s.proposed.rows[0].runs[0][1]++;
+  const rows=s.proposed.rows.map(row=>({y:row.y,runs:row.runs.map(([start,end])=>[start,end,'mapped_land_support'])}));
+  s.targets[0].coverage_rows=structuredClone(rows);s.targets[1].coverage_rows=structuredClone(rows);
+  const run=s.targets[1].coverage_rows[0].runs[0];
+  if(defect==='partial')run[1]--;
+  if(defect==='conflicting')run[2]='mapped_inland_water_support';
+  if(defect==='extra-cell')run[1]++;
+ });assert.throws(()=>f.run(),defect==='conflicting'?/Conflicting sibling native coverage class bindings/:/differ from complete requested owner cells/);
+});
 test('different owner witness cannot veto requested clean owner',()=>{const f=constructorFixture(s=>{const g=s.originals[2].geometry;s.targets.push({id:c,pixelIndex:2,source_family:family,base_geometry:g,coverage_classes:['mapped_land_support'],territorial_exclusions:[]});s.physical.results.push({target:c,issues:[],support:{mapped_land_support:g}});s.measured.push({target:c,consumed:{geometry:g},selected:{id:c,geometry:g}});const xx=Math.floor(size/2+.05/360*size);s.proposed.rows[0].runs.push([xx,xx+1,2]);conflict(s,'contradictory_land_water_support',{type:'LineString',coordinates:[[-.03,latitude],[0,latitude]]},2);});assert.equal(f.run().ledger_rows.length,2);});
 for(const mode of ['source','coverage','territory','outside'])test('new conflict route retains independent '+mode+' exclusion',()=>{const f=constructorFixture(s=>{exactBoundaryTarget(s);const r=conflict(s,'contradictory_land_water_support',off);if(mode==='source'){s.originals[2].geometry=rectangle(-89.99,-89.97,-.02,.02);s.measured[0].consumed.geometry=s.originals[2].geometry;}if(mode==='coverage')r.support.mapped_land_support=rectangle(-89.99,-89.97,-.02,.02);if(mode==='territory')s.targets[0].territorial_exclusions=[rectangle(-90.01,-89.99,-.01,.01)];if(mode.endsWith('outside'))r.support.outside_mapped_L1_context=rectangle(-90.01,-89.99,-.01,.01);});assert.throws(()=>f.run(),/lack unique source-target coverage|intersect a physical reconstruction residual or conflict witness/);});
 function waterSetup(s){exactBoundaryTarget(s);const r=withResiduals(s,[]);r.support.mapped_inland_water_support=r.support.mapped_land_support;r.support.mapped_land_support=rectangle(-89.99,-89.98,-.02,.02);s.targets[0].coverage_classes=['mapped_land_support','mapped_inland_water_support'];s.targets[0].coverage_rows=[{y,runs:[[x,x+1,'mapped_inland_water_support']]}];}

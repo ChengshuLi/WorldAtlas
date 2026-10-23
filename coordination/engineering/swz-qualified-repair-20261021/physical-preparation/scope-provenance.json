@@ -1,0 +1,550 @@
+{
+  "version": 1,
+  "kind": "original eight-target physical input selection; no physical results yet",
+  "package_id": "gb-SWZ-ADM2--repair-evaluation",
+  "original_queue": {
+    "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "authenticated_queue_commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+    "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "queue_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "queue_bytes": 1754890,
+    "queue_sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+    "queue_url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "package_row": {
+      "package_id": "gb-SWZ-ADM2--repair-evaluation",
+      "primary_source": "gb:SWZ:ADM2",
+      "source_family_index": 312,
+      "category": "repair-evaluation",
+      "native_cells": 14,
+      "land_cells": 14,
+      "inland_water_cells": 0,
+      "source_relative_cells": 0,
+      "interval_segments": 14,
+      "owners": [
+        40983,
+        40984,
+        40991,
+        41002,
+        41003,
+        41011,
+        41016,
+        41017
+      ],
+      "source_features": [
+        56921,
+        56922,
+        56923,
+        56924,
+        56927,
+        56933,
+        56935,
+        56940,
+        56950,
+        56955,
+        56975,
+        56977
+      ],
+      "source_families": [
+        311,
+        312
+      ],
+      "native_blocks": [
+        36,
+        37
+      ],
+      "provinces": [
+        "framework:province:hhohho:11b5857c9be8",
+        "framework:province:lubombo:d4c6d5b83fc8",
+        "framework:province:manzini:e6997ed83572",
+        "framework:province:shiselweni:45345f6cac08"
+      ],
+      "location_count": 8,
+      "source_feature_count": 12,
+      "locality_count": 4,
+      "cost": {
+        "primary_source_decoded_bytes": 120065,
+        "all_required_source_decoded_bytes": 140932,
+        "primary_full_source_raster_measured_seconds": 0.102,
+        "source_interval_segments": 14,
+        "maximum_native_rows_per_execution_frame": 4096,
+        "observed_global_census_peak_rss_bytes": 884973568
+      },
+      "evidence": {
+        "selection": "ownership-binding.json",
+        "lineage": "lineage.json",
+        "territorial_source_catalogue": "retained-source-catalogue.json",
+        "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "source_features": "source-feature-roster.json",
+        "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+        "physical": "physical-unassigned-summary.json",
+        "source_domain_transform": []
+      },
+      "work": {
+        "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+        "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+        "priority": 1
+      },
+      "execution": {
+        "command": "node source-batch-intervals.mjs gb-SWZ-ADM2--repair-evaluation OUTPUT_DIRECTORY",
+        "output_columns": [
+          "y",
+          "start",
+          "end",
+          "candidate_owner_indices",
+          "source_feature_indices",
+          "physical_class"
+        ]
+      }
+    },
+    "same_queue_blob_verified_at_both_commits": true
+  },
+  "original_rows": [
+    [
+      36,
+      0,
+      150666,
+      154238,
+      154239,
+      [
+        40983
+      ],
+      [
+        56922,
+        56950
+      ],
+      "land",
+      "SWZ-40983"
+    ],
+    [
+      36,
+      1,
+      150701,
+      153734,
+      153735,
+      [
+        41011
+      ],
+      [
+        56924,
+        56940
+      ],
+      "land",
+      "SWZ-41011"
+    ],
+    [
+      36,
+      2,
+      150714,
+      153728,
+      153729,
+      [
+        41011
+      ],
+      [
+        56924,
+        56940
+      ],
+      "land",
+      "SWZ-41011"
+    ],
+    [
+      36,
+      3,
+      150748,
+      154451,
+      154452,
+      [
+        41016
+      ],
+      [
+        56922,
+        56927
+      ],
+      "land",
+      "SWZ-41016"
+    ],
+    [
+      36,
+      4,
+      150784,
+      154456,
+      154457,
+      [
+        41016
+      ],
+      [
+        56922,
+        56927
+      ],
+      "land",
+      "SWZ-41016"
+    ],
+    [
+      36,
+      5,
+      150820,
+      154461,
+      154462,
+      [
+        41016
+      ],
+      [
+        56922,
+        56927
+      ],
+      "land",
+      "SWZ-41016"
+    ],
+    [
+      36,
+      6,
+      151365,
+      154464,
+      154465,
+      [
+        41017
+      ],
+      [
+        56922,
+        56935
+      ],
+      "land",
+      "SWZ-41017"
+    ],
+    [
+      36,
+      7,
+      151385,
+      153585,
+      153586,
+      [
+        40984
+      ],
+      [
+        56923,
+        56977
+      ],
+      "land",
+      "SWZ-40984"
+    ],
+    [
+      36,
+      8,
+      151386,
+      153529,
+      153530,
+      [
+        40991
+      ],
+      [
+        56921,
+        56975
+      ],
+      "land",
+      "SWZ-40991"
+    ],
+    [
+      37,
+      0,
+      151698,
+      153813,
+      153814,
+      [
+        41002
+      ],
+      [
+        56923,
+        56955
+      ],
+      "land",
+      "SWZ-41002"
+    ],
+    [
+      37,
+      1,
+      151708,
+      153840,
+      153841,
+      [
+        41003
+      ],
+      [
+        56923,
+        56933
+      ],
+      "land",
+      "SWZ-41003"
+    ],
+    [
+      37,
+      2,
+      151711,
+      153848,
+      153849,
+      [
+        41003
+      ],
+      [
+        56923,
+        56933
+      ],
+      "land",
+      "SWZ-41003"
+    ],
+    [
+      37,
+      3,
+      151721,
+      153875,
+      153876,
+      [
+        41003
+      ],
+      [
+        56923,
+        56933
+      ],
+      "land",
+      "SWZ-41003"
+    ],
+    [
+      37,
+      4,
+      151731,
+      153902,
+      153903,
+      [
+        41003
+      ],
+      [
+        56923,
+        56933
+      ],
+      "land",
+      "SWZ-41003"
+    ]
+  ],
+  "source_pins": {
+    "gb:SWZ:ADM1": {
+      "source_year_claim": "2017",
+      "license": "Open Data Commons Open Database License 1.0",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SWZ/ADM1/geoBoundaries-SWZ-ADM1_simplified.geojson",
+      "feature_count": 4,
+      "decoded_bytes": 20867,
+      "decoded_sha256": "09ee41e828454553928a1b472a8be6fcbf13c46988c7e57d940476425e0aa24a",
+      "payload": {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-SWZ-ADM1-000.bin.gz",
+        "git_blob_oid": "e197d6b789ad2b7b1dd4b53694688764ee95bf98",
+        "compressed_bytes": 4608,
+        "compressed_sha256": "2d9c24ca703f8140247a88685ea9433019a4109b6087fc8ea643749177299e65",
+        "decoded_sha256": "09ee41e828454553928a1b472a8be6fcbf13c46988c7e57d940476425e0aa24a",
+        "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/e197d6b789ad2b7b1dd4b53694688764ee95bf98"
+      },
+      "contact_properties": {
+        "56921": {
+          "source_id": "gb:SWZ:ADM1:75366066B3567364273406",
+          "ordinal": 0,
+          "name": "Manzini",
+          "owners": [],
+          "properties": {
+            "shapeName": "Manzini",
+            "shapeISO": "SZ-MA",
+            "shapeID": "75366066B3567364273406",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM1"
+          }
+        },
+        "56922": {
+          "source_id": "gb:SWZ:ADM1:75366066B12234306804593",
+          "ordinal": 1,
+          "name": "Lubombo",
+          "owners": [],
+          "properties": {
+            "shapeName": "Lubombo",
+            "shapeISO": "SZ-LU",
+            "shapeID": "75366066B12234306804593",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM1"
+          }
+        },
+        "56923": {
+          "source_id": "gb:SWZ:ADM1:75366066B21527038718027",
+          "ordinal": 2,
+          "name": "Shiselweni",
+          "owners": [],
+          "properties": {
+            "shapeName": "Shiselweni",
+            "shapeISO": "SZ-SH",
+            "shapeID": "75366066B21527038718027",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM1"
+          }
+        },
+        "56924": {
+          "source_id": "gb:SWZ:ADM1:75366066B25905390127614",
+          "ordinal": 3,
+          "name": "Hhohho",
+          "owners": [],
+          "properties": {
+            "shapeName": "Hhohho",
+            "shapeISO": "SZ-HH",
+            "shapeID": "75366066B25905390127614",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM1"
+          }
+        }
+      }
+    },
+    "gb:SWZ:ADM2": {
+      "source_year_claim": "2017",
+      "license": "Open Data Commons Open Database License 1.0",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SWZ/ADM2/geoBoundaries-SWZ-ADM2_simplified.geojson",
+      "feature_count": 53,
+      "decoded_bytes": 120065,
+      "decoded_sha256": "5d54a3629b8b766c061734f7fa3d04c84eab5946b62932e77d067d1b01e7749f",
+      "payload": {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-SWZ-ADM2-000.bin.gz",
+        "git_blob_oid": "f997375cdeee1b2cb9e0246913a50807f2e165aa",
+        "compressed_bytes": 28672,
+        "compressed_sha256": "c772032762fb44d63d33495747a3a21e1cece87eb96ea64faa78129a35903702",
+        "decoded_sha256": "5d54a3629b8b766c061734f7fa3d04c84eab5946b62932e77d067d1b01e7749f",
+        "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/f997375cdeee1b2cb9e0246913a50807f2e165aa"
+      },
+      "contact_properties": {
+        "56927": {
+          "source_id": "gb:SWZ:ADM2:25544865B99062950351047",
+          "ordinal": 2,
+          "name": "Inkhundla Lomahasha",
+          "owners": [
+            41016
+          ],
+          "properties": {
+            "shapeName": "Inkhundla Lomahasha",
+            "shapeISO": "",
+            "shapeID": "25544865B99062950351047",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM2"
+          }
+        },
+        "56933": {
+          "source_id": "gb:SWZ:ADM2:25544865B75252057291440",
+          "ordinal": 8,
+          "name": "Inkhundla Zombodze",
+          "owners": [
+            41003
+          ],
+          "properties": {
+            "shapeName": "Inkhundla Zombodze",
+            "shapeISO": "",
+            "shapeID": "25544865B75252057291440",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM2"
+          }
+        },
+        "56935": {
+          "source_id": "gb:SWZ:ADM2:25544865B99429407754877",
+          "ordinal": 10,
+          "name": "Inkhundla Tikhuba",
+          "owners": [
+            41017
+          ],
+          "properties": {
+            "shapeName": "Inkhundla Tikhuba",
+            "shapeISO": "",
+            "shapeID": "25544865B99429407754877",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM2"
+          }
+        },
+        "56940": {
+          "source_id": "gb:SWZ:ADM2:25544865B91965971492812",
+          "ordinal": 15,
+          "name": "Inkhundla Piggs Peak",
+          "owners": [
+            41011
+          ],
+          "properties": {
+            "shapeName": "Inkhundla Piggs Peak",
+            "shapeISO": "",
+            "shapeID": "25544865B91965971492812",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM2"
+          }
+        },
+        "56950": {
+          "source_id": "gb:SWZ:ADM2:25544865B37706944907644",
+          "ordinal": 25,
+          "name": "Inkhundla Mhlume",
+          "owners": [
+            40983
+          ],
+          "properties": {
+            "shapeName": "Inkhundla Mhlume",
+            "shapeISO": "",
+            "shapeID": "25544865B37706944907644",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM2"
+          }
+        },
+        "56955": {
+          "source_id": "gb:SWZ:ADM2:25544865B74382320525051",
+          "ordinal": 30,
+          "name": "Inkhundla Maseyisini",
+          "owners": [
+            41002
+          ],
+          "properties": {
+            "shapeName": "Inkhundla Maseyisini",
+            "shapeISO": "",
+            "shapeID": "25544865B74382320525051",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM2"
+          }
+        },
+        "56975": {
+          "source_id": "gb:SWZ:ADM2:25544865B616938903867",
+          "ordinal": 50,
+          "name": "Inkhundla Ngwempisi",
+          "owners": [
+            40991
+          ],
+          "properties": {
+            "shapeName": "Inkhundla Ngwempisi",
+            "shapeISO": "",
+            "shapeID": "25544865B616938903867",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM2"
+          }
+        },
+        "56977": {
+          "source_id": "gb:SWZ:ADM2:25544865B4123625373150",
+          "ordinal": 52,
+          "name": "Inkhundla Gege",
+          "owners": [
+            40984
+          ],
+          "properties": {
+            "shapeName": "Inkhundla Gege",
+            "shapeISO": "",
+            "shapeID": "25544865B4123625373150",
+            "shapeGroup": "SWZ",
+            "shapeType": "ADM2"
+          }
+        }
+      }
+    }
+  },
+  "target_ids": [
+    "gb:SWZ:ADM2:25544865B37706944907644",
+    "gb:SWZ:ADM2:25544865B4123625373150",
+    "gb:SWZ:ADM2:25544865B616938903867",
+    "gb:SWZ:ADM2:25544865B74382320525051",
+    "gb:SWZ:ADM2:25544865B75252057291440",
+    "gb:SWZ:ADM2:25544865B91965971492812",
+    "gb:SWZ:ADM2:25544865B99062950351047",
+    "gb:SWZ:ADM2:25544865B99429407754877"
+  ],
+  "input_bytes": 18743,
+  "input_sha256": "7710b7fe818907b51b20f775dde4009c9642a3e401fcde80290c01957713b7fc",
+  "source_terms": "2017 OSM/Wambacher, Open Data Commons Open Database License 1.0; no EBC map copied. Full and simplified are retained valid representations; the full-source 8/6 comparison is adverse context, not a repair partition."
+}

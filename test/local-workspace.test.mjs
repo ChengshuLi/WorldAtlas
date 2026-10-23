@@ -29,6 +29,51 @@ function fixture(t, overrides = {}) {
   return {repo, git, manager, head, temporary};
 }
 
+function cliHelper(repo, directory = path.join(repo, '.git', 'worldatlas-helper-test')) {
+  fs.mkdirSync(directory, {recursive: true});
+  for (const name of ['local-workspace.mjs', 'worker-identity.mjs'])
+    fs.writeFileSync(path.join(directory, name), fs.readFileSync(new URL('../scripts/' + name, import.meta.url)));
+  return path.join(directory, 'local-workspace.mjs');
+}
+
+test('allocator CLI binds its helper Git store, never an unrelated or missing cwd repository', t => {
+  const intended = fixture(t), ambient = fixture(t);
+  fs.writeFileSync(path.join(intended.repo, 'README.md'), 'intended repository only');
+  intended.git('add', 'README.md'); intended.git('commit', '-m', 'distinct intended commit');
+  intended.head = intended.git('rev-parse', 'HEAD').trim();
+  const registry = intended.manager.report().registry;
+  const before = ambient.git('show-ref');
+  for (const directory of [path.join(intended.repo, 'scripts'), path.join(intended.repo, '.git', 'worldatlas-helper-test')]) {
+    const helper = cliHelper(intended.repo, directory);
+    for (const cwd of [ambient.repo, ambient.temporary]) {
+      const run = (...args) => JSON.parse(execFileSync(process.execPath, [helper, ...args], {cwd, encoding: 'utf8'}));
+      assert.equal(run('report').registry, registry);
+      assert.ok(Number.isFinite(run('check').freeBytes));
+      assert.deepEqual(run('inspect', '--commit', intended.head), intended.manager.inspect({commit: intended.head}));
+    }
+  }
+  const helper = cliHelper(intended.repo);
+  const allocate = spawnSync(process.execPath, [helper, 'allocate', '--worker', 'independent-fixture-review',
+    '--slot', 'review', '--commit', intended.head], {cwd: ambient.repo, encoding: 'utf8'});
+  assert.equal(allocate.status, 0, allocate.stderr);
+  const entry = JSON.parse(allocate.stdout);
+  assert.equal(entry.head, intended.head);
+  assert.ok(entry.path.startsWith(intended.manager.report().root + path.sep));
+  const released = JSON.parse(execFileSync(process.execPath, [helper, 'release', '--worker', entry.worker,
+    '--slot', entry.slot, '--token', entry.token], {cwd: ambient.repo, encoding: 'utf8'}));
+  assert.equal(released.released, true);
+  assert.equal(intended.git('rev-parse', released.preservedRef).trim(), intended.head);
+  // A relocated executable outside a Git store must refuse, not fall back to cwd.
+  const outside = cliHelper(intended.repo, path.join(intended.temporary, 'unbound-helper'));
+  const refused = spawnSync(process.execPath, [outside, 'report'], {cwd: ambient.repo, encoding: 'utf8'});
+  assert.notEqual(refused.status, 0);
+  assert.match(refused.stderr, /not a git repository/);
+  assert.equal(refused.stdout, '');
+  assert.equal(ambient.git('show-ref'), before);
+  assert.deepEqual(intended.manager.report().entries, []);
+  assert.ok(!fs.existsSync(ambient.manager.report().registry));
+});
+
 test('ordinary branch names need only Git validity and fresh isolated ownership', t => {
   const {manager}=fixture(t);
   const entry=manager.allocate({worker:'worker-one',branch:'feature/Map.Errors_2026'});
@@ -106,32 +151,45 @@ test('sparse inspection and checkout share the engineering code-only selection',
 
 test('cold stock delivery and selected-check entries resolve imports before ordinary input refusal', t => {
   const {repo, git, manager} = fixture(t);
-  // Real entry/helper bytes, not substitute implementations or a dependency parser.
-  const files = ['scripts/prepare-delivery-handoff.mjs', 'scripts/delivery-handoff-advance.mjs',
-    'scripts/check-effective-geographic-regression.mjs', 'scripts/evidence-quality.mjs',
-    'scripts/selected-reference-metadata.mjs','src/reference-metadata.js',
-    'scripts/geography-prefetch.mjs', 'scripts/native-ownership/native-preparation-guards.mjs',
-    'scripts/package-inputs.mjs', 'scripts/run-geographic-check.py', 'src/native-grid.js', 'src/ownership-codec.js',
-    'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
-    'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs'];
-  for (const name of files) {
+  // Use the stock current code inventory, not a second maintained import list.
+  // Copy JavaScript and the checker's Python sources, without scientific inputs
+  // or installed modules. Both languages are in the focused CI code checkout.
+  const source = path.resolve(import.meta.dirname, '..');
+  const head = execFileSync('git', ['--no-lazy-fetch', '-C', source, 'rev-parse', 'HEAD'],
+    {encoding: 'utf8', env: {...process.env, GIT_NO_LAZY_FETCH: '1'}}).trim();
+  const files = workspaceManager(source).inspect({commit: head}).inputs
+    .filter(({path: name}) => /\.(?:mjs|js|cjs|py)$/.test(name));
+  for (const {path: name} of files) {
     fs.mkdirSync(path.dirname(path.join(repo, name)), {recursive: true});
     fs.writeFileSync(path.join(repo, name), fs.readFileSync(new URL('../' + name, import.meta.url)));
   }
   fs.writeFileSync(path.join(repo, 'package.json'), '{"type":"module"}');
   git('add', '.'); git('commit', '-m', 'actual stock entry fixture');
   const entry = manager.allocate({worker: 'stock-entry', slot: 'review', commit: git('rev-parse', 'HEAD').trim()});
+  const run = name => spawnSync(process.execPath, [name], {cwd: entry.path, encoding: 'utf8', timeout: 10000,
+    env: {PATH: process.env.PATH, HOME: repo, GIT_NO_LAZY_FETCH: '1'}});
   for (const [name, expected] of [['scripts/prepare-delivery-handoff.mjs', /Use prepare-delivery-handoff\.mjs/],
-    ['scripts/check-effective-geographic-regression.mjs', /Require immutable input commit/]]) {
-    const result = spawnSync(process.execPath, [name], {cwd: entry.path, encoding: 'utf8', timeout: 10000,
-      env: {PATH: process.env.PATH, HOME: repo, GIT_NO_LAZY_FETCH: '1'}});
+    ['scripts/check-effective-geographic-regression.mjs', /Use python -I -B scripts\/run-geographic-check\.py/]]) {
+    const result = run(name);
     assert.equal(result.error, undefined);
     assert.equal(result.status, 1, result.stderr);
     assert.match(result.stderr, expected);
     assert.doesNotMatch(result.stderr, /ERR_MODULE_NOT_FOUND|Cannot find module/);
   }
+  // Removing a genuinely imported helper must fail before the ordinary guard.
+  const helper = path.join(entry.path, 'scripts/native-patch-store.mjs'), bytes = fs.readFileSync(helper);
+  fs.unlinkSync(helper);
+  try {
+    const result = run('scripts/prepare-delivery-handoff.mjs');
+    assert.equal(result.error, undefined);
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /ERR_MODULE_NOT_FOUND/);
+    assert.match(result.stderr, /native-patch-store\.mjs/);
+    assert.doesNotMatch(result.stderr, /Use prepare-delivery-handoff\.mjs/);
+  } finally { fs.writeFileSync(helper, bytes); }
   assert.ok(!fs.existsSync(path.join(entry.path, 'data')));
   assert.ok(!fs.existsSync(path.join(entry.path, '.cache')));
+  assert.ok(!fs.existsSync(path.join(entry.path, 'node_modules')));
   manager.release({worker: 'stock-entry', slot: 'review', token: entry.token});
 });
 
@@ -171,7 +229,7 @@ test('small work and review checkouts need no fixed free-space floor or reservat
 
 test('removed reserve CLI option is rejected before any slot or branch mutation', t => {
   const {repo, git, manager, head} = fixture(t);
-  const result = spawnSync(process.execPath, [new URL('../scripts/local-workspace.mjs', import.meta.url).pathname,
+  const result = spawnSync(process.execPath, [cliHelper(repo),
     'allocate', '--worker', 'legacy-options', '--slot', 'review', '--commit', head, '--reserve-gib', '1'],
   {cwd: repo, encoding: 'utf8'});
   assert.equal(result.status, 1);
@@ -343,13 +401,52 @@ test('an existing branch fails before fetching or reserving and preserves its hi
   manager.release({worker: 'one', token: entry.token});
 });
 
+test('author refresh does not acquire new excluded blobs in a conventional clone', t => {
+  const source = fixture(t);
+  source.git('config', 'uploadpack.allowFilter', 'true');
+  const repo = path.join(source.temporary, 'conventional');
+  execFileSync('git', ['clone', '--no-checkout', pathToFileURL(source.repo).href, repo], {stdio: 'pipe'});
+  const git = (...args) => execFileSync('git', ['-C', repo, ...args], {
+    encoding: 'utf8', stdio: 'pipe', env: {...process.env, GIT_NO_LAZY_FETCH: '1'}
+  });
+  assert.equal(spawnSync('git', ['-C', repo, 'config', '--get', 'remote.origin.promisor']).status, 1);
+  const name = 'data/other/new-archive.bin';
+  fs.writeFileSync(path.join(source.repo, name), Buffer.alloc(1024 * 1024, 7));
+  source.git('add', name); source.git('commit', '-m', 'new unselected archive');
+  const head = source.git('rev-parse', 'HEAD').trim(), oid = source.git('rev-parse', `HEAD:${name}`).trim();
+  const manager = workspaceManager(repo);
+  const entry = manager.allocate({worker: 'conventional', branch: 'engineering/filtered-refresh'});
+  assert.equal(entry.head, head);
+  assert.equal(git('rev-parse', 'origin/main').trim(), head);
+  assert.equal(fs.readFileSync(path.join(entry.path, 'README.md'), 'utf8'), 'root');
+  assert.ok(!fs.existsSync(path.join(entry.path, name)));
+  // Probe absence without triggering a promisor fetch, including on older Git.
+  const available = execFileSync('git', ['-C', repo, '-c', 'core.commitGraph=false', 'rev-list', '--objects',
+    '--filter=tree:0', '--missing=print', '--ignore-missing', '--no-walk=unsorted', '--no-object-names', '--stdin'], {
+    input: oid + '\n', encoding: 'utf8', env: {...process.env, GIT_NO_LAZY_FETCH: '1'}
+  });
+  assert.equal(available, '', 'main refresh must not acquire the unselected archive');
+  manager.release({worker: 'conventional', token: entry.token});
+
+  // A later selected edit is not silently hydrated: keep the existing explicit
+  // missing-input refusal before a branch or slot can be created.
+  fs.writeFileSync(path.join(source.repo, 'README.md'), 'changed selected input');
+  source.git('add', 'README.md'); source.git('commit', '-m', 'new required blob');
+  const latest = source.git('rev-parse', 'HEAD').trim(), required = source.git('rev-parse', 'HEAD:README.md').trim();
+  assert.throws(() => manager.allocate({worker: 'conventional', branch: 'engineering/missing-selected'}), /selected blobs must be available locally/);
+  assert.equal(git('rev-parse', 'origin/main').trim(), latest);
+  assert.deepEqual(manager.inspect({commit: latest}).missing, [{oid: required, paths: ['README.md']}]);
+  assert.deepEqual(manager.report().entries, []);
+  assert.equal(git('for-each-ref', '--format=%(refname)', 'refs/heads/engineering/missing-selected'), '');
+});
+
 test('failed fetch never acquires a registry lock and keeps other workers intact', t => {
   const {manager, head} = fixture(t);
   const existing = manager.allocate({worker: 'existing', slot: 'review', commit: head});
   const {registry} = manager.report(), before = fs.readFileSync(path.join(registry, 'state.json'));
   const execute = childProcess.execFileSync;
   t.mock.method(childProcess, 'execFileSync', (command, args, ...options) => {
-    if (command === 'git' && args.slice(2).join(' ') === 'fetch origin main') {
+    if (command === 'git' && args.slice(2).join(' ') === 'fetch --no-tags --no-recurse-submodules --no-auto-maintenance --filter=blob:none origin main') {
       assert.ok(!fs.existsSync(path.join(registry, 'lock')));
       throw Error('interrupted fetch');
     }
@@ -370,7 +467,7 @@ test('hard process interruption during fetch leaves no allocator lock or reserva
     import {workspaceManager} from ${JSON.stringify(moduleURL)};
     const execute=cp.execFileSync;
     cp.execFileSync=(command,args,...options)=>{
-      if(command==='git'&&args.slice(2).join(' ')==='fetch origin main'){
+      if(command==='git'&&args.slice(2).join(' ')==='fetch --no-tags --no-recurse-submodules --no-auto-maintenance --filter=blob:none origin main'){
         fs.writeFileSync(${JSON.stringify(path.join(repo, 'fetch-started'))},'started');process.kill(process.pid,'SIGTERM');
       }
       return execute(command,args,...options);
@@ -584,11 +681,11 @@ function partialFixture(t, missing, {packSource = false, configureSource} = {}) 
   const checkUnfetched = (allowMainFetch = false) => {
     let log = fs.readFileSync(trace, 'utf8');
     if (allowMainFetch) {
-      assert.equal(log.match(/built-in: git fetch origin main/g)?.length, 1, 'only the ordinary main refresh is allowed');
-      log = log.split('\n').filter(line => !line.includes('built-in: git fetch origin main')).join('\n');
+      assert.equal(log.match(/built-in: git fetch --no-tags --no-recurse-submodules --no-auto-maintenance --filter=blob:none origin main/g)?.length, 1, 'only the ordinary main refresh is allowed');
+      log = log.split('\n').filter(line => !line.includes('built-in: git fetch --no-tags --no-recurse-submodules --no-auto-maintenance --filter=blob:none origin main')).join('\n');
     }
     assert.doesNotMatch(log, /(?:built-in: git|run_command:) .*fetch/);
-    assert.match(log, /ls-tree -rz/);
+    assert.match(log, /ls-tree --full-tree -rz/);
     assert.doesNotMatch(log, /ls-tree -rlz/);
     assert.deepEqual(objectState(), objects, 'sizing/checkout must not hydrate an excluded or missing blob');
     const response = execFileSync('git', ['-C', repo, '-c', 'core.commitGraph=false', 'rev-list', '--objects',
@@ -773,7 +870,7 @@ test('full promisor inspection includes excluded missing inputs and CLI exposes 
   const result = JSON.parse(run({profile: 'full'}, 'inspect'));
   assert.equal(result.selectedBytes, null);
   assert.deepEqual(result.missing.flatMap(row => row.paths), ['data/other/large.json']);
-  const cli = execFileSync(process.execPath, [new URL('../scripts/local-workspace.mjs', import.meta.url).pathname,
+  const cli = execFileSync(process.execPath, [cliHelper(repo),
     'inspect', '--commit', head, '--profile', 'full'], {
     cwd: repo, encoding: 'utf8', env: {...process.env, GIT_NO_LAZY_FETCH: '0'}
   });
@@ -863,7 +960,7 @@ test('unavailable exact commit fails without fetching or claiming a complete sel
   removeFixtureObject(repo, git, head);
   const trace = path.join(repo, 'commit-inspection.trace');
   const before = fs.readdirSync(path.join(repo, '.git/objects'), {recursive: true}).sort();
-  const result = spawnSync(process.execPath, [new URL('../scripts/local-workspace.mjs', import.meta.url).pathname,
+  const result = spawnSync(process.execPath, [cliHelper(repo),
     'inspect', '--commit', head], {cwd: repo, encoding: 'utf8', env: {...process.env, GIT_NO_LAZY_FETCH: '0', GIT_TRACE: trace}});
   assert.equal(result.status, 1);
   assert.equal(result.stdout, '');
@@ -914,7 +1011,7 @@ test('missing root and descendant tree metadata are classified before any blob s
     const trace = path.join(repo, 'tree-inspection.trace');
     const refs = git('show-ref');
     const before = fs.readdirSync(path.join(repo, '.git/objects'), {recursive: true}).sort();
-    const result = spawnSync(process.execPath, [new URL('../scripts/local-workspace.mjs', import.meta.url).pathname,
+    const result = spawnSync(process.execPath, [cliHelper(repo),
       'inspect', '--commit', head], {cwd: repo, encoding: 'utf8', env: {...process.env, GIT_NO_LAZY_FETCH: '0', GIT_TRACE: trace}});
     assert.equal(result.status, 1);
     assert.equal(result.stdout, '');
@@ -990,8 +1087,9 @@ test('coordinated exact-OID acquisition imports only inspected missing required 
   manager.release({worker: 'partial', slot: 'review', token: entry.token});
 });
 
-test('documented pinned bootstrap executes both accepted helpers and preserves stale working files', t => {
+test('documented pinned bootstrap binds its task repository and preserves stale working files', t => {
   const {repo, git, manager} = fixture(t);
+  const ambient = fixture(t);
   const helper = fs.readFileSync(new URL('../scripts/local-workspace.mjs', import.meta.url));
   const identity = fs.readFileSync(new URL('../scripts/worker-identity.mjs', import.meta.url));
   fs.writeFileSync(path.join(repo, 'scripts/local-workspace.mjs'), helper);
@@ -1006,8 +1104,8 @@ test('documented pinned bootstrap executes both accepted helpers and preserves s
   const refs = git('show-ref');
   const docs = fs.readFileSync(new URL('../docs/LOCAL_WORKSPACES.md', import.meta.url), 'utf8');
   const bootstrap = docs.split("<<'PYTHON'\n")[1].split('\nPYTHON')[0];
-  const run = () => execFileSync('python3', ['-', head, 'inspect', '--commit', head, '--include', 'data/one.json'], {
-    cwd: repo, input: bootstrap, encoding: 'utf8', stdio: 'pipe', env: {...process.env, GIT_NO_LAZY_FETCH: '1'}
+  const run = () => execFileSync('python3', ['-', repo, head, 'inspect', '--commit', head, '--include', 'data/one.json'], {
+    cwd: ambient.repo, input: bootstrap, encoding: 'utf8', stdio: 'pipe', env: {...process.env, GIT_NO_LAZY_FETCH: '1'}
   });
   const result = JSON.parse(run());
   assert.deepEqual(result, manager.inspect({commit: head, include: ['data/one.json']}));
@@ -1031,7 +1129,7 @@ test('documented bootstrap refuses an absent promisor helper without an old-Git 
   const bootstrap = docs.split("<<'PYTHON'\n")[1].split('\nPYTHON')[0];
   const refs = git('show-ref');
   const before = fs.readdirSync(path.join(repo, '.git/objects'), {recursive: true}).sort();
-  assert.throws(() => execFileSync('python3', ['-', head, 'inspect', '--commit', head], {
+  assert.throws(() => execFileSync('python3', ['-', repo, head, 'inspect', '--commit', head], {
     cwd: repo, input: bootstrap, encoding: 'utf8', stdio: 'pipe', env: {...process.env, GIT_NO_LAZY_FETCH: '0', GIT_TRACE: trace}
   }), error => {
     assert.equal(error.stdout, '');
@@ -1085,7 +1183,7 @@ test('complete documented shell bootstrap refuses failed refresh instead of exec
   const docs = fs.readFileSync(new URL('../docs/LOCAL_WORKSPACES.md', import.meta.url), 'utf8');
   const block = docs.split('## Refresh a stale checkout without changing its files')[1].split('```sh\n')[1].split('\n```')[0]
     .replace('data/YOUR-REQUIRED-PATH', 'data/one.json');
-  assert.throws(() => execFileSync('bash', ['-c', block], {cwd: repo, encoding: 'utf8', stdio: 'pipe'}), error => {
+  assert.throws(() => execFileSync('bash', ['-c', block], {cwd: repo, encoding: 'utf8', stdio: 'pipe', env: {...process.env, TASK_REPO: repo}}), error => {
     assert.doesNotMatch(error.stdout, /inputCount|selectedBytes/);
     assert.match(error.stderr, /does not appear to be a git repository/);
     return error.status !== 0;
@@ -1095,13 +1193,13 @@ test('complete documented shell bootstrap refuses failed refresh instead of exec
   assert.ok(!fs.readdirSync(path.join(repo, '.git')).some(name => name.startsWith('worldatlas-helper-')));
   git('remote', 'set-url', 'origin', repo);
   git('config', 'uploadpack.allowFilter', 'true');
-  const result = JSON.parse(execFileSync('bash', ['-c', block], {cwd: repo, encoding: 'utf8', stdio: 'pipe'}));
+  const result = JSON.parse(execFileSync('bash', ['-c', block], {cwd: repo, encoding: 'utf8', stdio: 'pipe', env: {...process.env, TASK_REPO: repo}}));
   assert.equal(result.head, head);
   assert.ok(result.inputs.some(row => row.path === 'data/one.json'));
   assert.ok(!fs.readdirSync(path.join(repo, '.git')).some(name => name.startsWith('worldatlas-helper-')));
   git('config', '--unset-all', 'remote.origin.fetch');
   git('update-ref', '-d', 'refs/remotes/origin/main');
-  assert.throws(() => execFileSync('bash', ['-c', block], {cwd: repo, encoding: 'utf8', stdio: 'pipe'}), error => {
+  assert.throws(() => execFileSync('bash', ['-c', block], {cwd: repo, encoding: 'utf8', stdio: 'pipe', env: {...process.env, TASK_REPO: repo}}), error => {
     assert.doesNotMatch(error.stdout, /inputCount|selectedBytes/);
     assert.match(error.stderr, /Needed a single revision/);
     return error.status !== 0;

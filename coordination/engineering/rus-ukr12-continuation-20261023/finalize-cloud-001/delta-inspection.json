@@ -1,0 +1,252 @@
+{
+  "version": 1,
+  "kind": "retained-finalization-delta-inspection",
+  "accepted_code_and_before": "9e3637776d2593f0a024adee41a19e319e3b6385",
+  "input_head": "4142d7b55a39771ca7ed719deeb96bc7d917ee1a",
+  "finalizer_config_sha256": "98ba3576d04ac97493af4b3b08a6bbfcd8acb8e514135d5b011eada88fcba5bf",
+  "requested_keys": [
+    [
+      86172,
+      155617,
+      38470
+    ],
+    [
+      86172,
+      155618,
+      38470
+    ],
+    [
+      86172,
+      155619,
+      38470
+    ],
+    [
+      86500,
+      154548,
+      37091
+    ],
+    [
+      90451,
+      159971,
+      37096
+    ],
+    [
+      90453,
+      159970,
+      37096
+    ],
+    [
+      90456,
+      159969,
+      37096
+    ]
+  ],
+  "actual_added_keys": [
+    [
+      86172,
+      155617,
+      38470
+    ],
+    [
+      86172,
+      155618,
+      38470
+    ],
+    [
+      86172,
+      155619,
+      38470
+    ],
+    [
+      86500,
+      154548,
+      37091
+    ],
+    [
+      90451,
+      159971,
+      37096
+    ],
+    [
+      90453,
+      159970,
+      37096
+    ],
+    [
+      90456,
+      159969,
+      37096
+    ]
+  ],
+  "adverse_keys_unchanged": [
+    [
+      86172,
+      155620,
+      38470
+    ],
+    [
+      90458,
+      159968,
+      37096
+    ],
+    [
+      90460,
+      159967,
+      37096
+    ],
+    [
+      90986,
+      160137,
+      37630
+    ],
+    [
+      90988,
+      160134,
+      37630
+    ]
+  ],
+  "bank": {
+    "files": 79,
+    "whole_file_hashes_verified": 79,
+    "unchanged_whole_pins": 75,
+    "compatibility_pins_unchanged": 30,
+    "changed_run_chunks": [
+      {
+        "before": {
+          "decoded_sha256": "d6c88feb0d11cdcc1f4050541e2d9fc4393956818dfeab18e0d248c6a03afcb1",
+          "encoding": "byte-shuffle",
+          "kind": "runs",
+          "offset": 12582912,
+          "path": "ownership-vintages/0b802e8990dbef5d3250e21cae6a5fd53b90737d3ac25b3742f19f52e9ae96cf/native-v1/ownership/startup-runs-12582912.bin.gz",
+          "sha256": "0b802e8990dbef5d3250e21cae6a5fd53b90737d3ac25b3742f19f52e9ae96cf",
+          "words": 4194304
+        },
+        "after": {
+          "decoded_sha256": "10e62bce4e58b43e6de1a44f405ae9c57da5cb6539662834a228398e06e081a4",
+          "encoding": "byte-shuffle",
+          "kind": "runs",
+          "offset": 12582912,
+          "path": "ownership-vintages/0d4296e3f62fc930632848e1f15e9ca453a8020ea050c6c8e76f62084a8a6b58/native-v1/ownership/startup-runs-12582912.bin.gz",
+          "sha256": "0d4296e3f62fc930632848e1f15e9ca453a8020ea050c6c8e76f62084a8a6b58",
+          "words": 4194304
+        },
+        "changed_word_count": 2
+      },
+      {
+        "before": {
+          "decoded_sha256": "c87950400599f814a1abe9ecc582f7faa4b6e0ac5b2dc154b96062ee0db48b6a",
+          "encoding": "byte-shuffle",
+          "kind": "runs",
+          "offset": 16777216,
+          "path": "ownership-vintages/af9b94fabe7cfb2c47ed04f97be432a52bee3aa7761c459f2a73d064a21b9ae0/native-v1/ownership/startup-runs-16777216.bin.gz",
+          "sha256": "af9b94fabe7cfb2c47ed04f97be432a52bee3aa7761c459f2a73d064a21b9ae0",
+          "words": 4194304
+        },
+        "after": {
+          "decoded_sha256": "d6dbc9a0213d01ce3e4a8f08538bbd678c8f091ece47e08935256b7e3cafb3b0",
+          "encoding": "byte-shuffle",
+          "kind": "runs",
+          "offset": 16777216,
+          "path": "ownership-vintages/fa64da26cfc19550b8cf90e443cfe1d144265ea8eabee6827033f20e43965fa8/native-v1/ownership/startup-runs-16777216.bin.gz",
+          "sha256": "fa64da26cfc19550b8cf90e443cfe1d144265ea8eabee6827033f20e43965fa8",
+          "words": 4194304
+        },
+        "changed_word_count": 3
+      }
+    ],
+    "changed_word_count": 5,
+    "changed_global_word_offsets": [
+      14902029,
+      15161267,
+      18132324,
+      18133934,
+      18136380
+    ],
+    "rows_unchanged": true,
+    "run_word_count_unchanged": 58331652,
+    "changed_context_owners": [
+      {
+        "id": "gb:RUS:ADM2:50074027B12942583135720",
+        "pixelIndex": 37091,
+        "only_changed_field": "finishedFootprint.native_rows",
+        "added_keys": [
+          [
+            86500,
+            154548,
+            37091
+          ]
+        ]
+      },
+      {
+        "id": "gb:RUS:ADM2:50074027B13034578172477",
+        "pixelIndex": 37096,
+        "only_changed_field": "finishedFootprint.native_rows",
+        "added_keys": [
+          [
+            90451,
+            159971,
+            37096
+          ],
+          [
+            90453,
+            159970,
+            37096
+          ],
+          [
+            90456,
+            159969,
+            37096
+          ]
+        ]
+      },
+      {
+        "id": "gb:RUS:ADM2:50074027B66126711442497",
+        "pixelIndex": 38470,
+        "only_changed_field": "finishedFootprint.native_rows",
+        "added_keys": [
+          [
+            86172,
+            155617,
+            38470
+          ],
+          [
+            86172,
+            155618,
+            38470
+          ],
+          [
+            86172,
+            155619,
+            38470
+          ]
+        ]
+      }
+    ],
+    "unchanged_context_owners": 49622
+  },
+  "native_selection_unchanged": true,
+  "reference_projection_unchanged": true,
+  "content_reference_unchanged": {
+    "footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+    "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+    "id": "geography:review:211cb423e8c3bdcb3cbe88a4327fbd47eb10ccb61cd0ca4b884ed376564e7718"
+  },
+  "package_input_bytes_unchanged": true,
+  "package_declarations": 222,
+  "before_effective_reference": {
+    "footprints_sha256": "3c2973b0ff925714c3ba31b2bfcf062701b151f646ee546973a4ad246517979b",
+    "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+    "id": "geography:final:3e149ee7806c49ab8dba5a661239b6d525aa0675a28c75dc7e401a4cb4fed1fb"
+  },
+  "proposed_effective_reference": {
+    "footprints_sha256": "29750a36e5839c4962311c586be3d1da40fde86d8a40664c56a4ae9f737dbdb9",
+    "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+    "id": "geography:final:18c57608f61285ba23aef91acad80c73814675f7099772ac71b8718c4a916c7b"
+  },
+  "scientific_qualification": false,
+  "limits": [
+    "Artifact-only before/after inspection, not a repeated observer, source constructor, or build.",
+    "All original proposal and independent packet bytes remain unchanged.",
+    "Independent scientific/exact-public-head review and accepted-code joint qualification remain pending; no repair credit or production operation."
+  ]
+}

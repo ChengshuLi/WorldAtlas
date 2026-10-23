@@ -153,7 +153,11 @@ function scanNativePolygonIntervals(index,{size,rowStart,rowEnd,latitudes},longi
       let next=0,active=[];
       for(let y=edges[0]?.first??rowEnd;y<rowEnd&&(active.length||next<edges.length);y++){
         active=active.filter(edge=>edge.end>y);
-        while(next<edges.length&&edges[next].first===y){const edge=edges[next++];prepareEdge(edge);active.push(edge);}
+        while(next<edges.length&&edges[next].first===y){
+          // The monotone cursor never revisits a consumed slot. Transfer its
+          // ownership to active so expiration releases the entire edge/cache.
+          const edge=edges[next];edges[next++]=null;prepareEdge(edge);active.push(edge);
+        }
         const latitude=binary(latitudes[y]),columns=[];
         for(const edge of active){
           const hit=crossing(edge,latitude,size);columns.push(hit.column);
@@ -183,6 +187,8 @@ function scanNativePolygonIntervals(index,{size,rowStart,rowEnd,latitudes},longi
 // never as a general periodic-coordinate or approximate-geometry allowance.
 // Comparison covers the complete latitude extent, all native columns and all
 // exact boundary ties. Matching candidate cells alone would be insufficient.
+const mapGeometryArray=(values,visit)=>Array.isArray(values)?values.map(visit):Array.from(values,visit);
+
 export function verifyNativeSeamView(original,view,{size,latitudes}) {
   if(!Number.isSafeInteger(size)||size<2||size>2**31||latitudes?.length!==size)
     throw Error('Require explicit latitude table and valid canonical seam lattice');
@@ -194,11 +200,11 @@ export function verifyNativeSeamView(original,view,{size,latitudes}) {
     if(!geometry||!['Polygon','MultiPolygon'].includes(geometry.type))
       throw Error('Canonical seam view requires whole polygon geometry');
     const polygons=geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;
-    if(!Array.isArray(polygons)||!polygons.length)throw Error('Empty canonical seam view');
-    return [{index:1,polygons:polygons.map(polygon=>{
-      if(!Array.isArray(polygon)||!polygon.length)throw Error('Missing canonical seam rings');
-      return polygon.map(ring=>{
-        if(!Array.isArray(ring))throw Error('Missing canonical seam ring');
+    if(!isNativeSequence(polygons)||!polygons.length)throw Error('Empty canonical seam view');
+    return [{index:1,polygons:mapGeometryArray(polygons,polygon=>{
+      if(!isNativeSequence(polygon)||!polygon.length)throw Error('Missing canonical seam rings');
+      return mapGeometryArray(polygon,ring=>{
+        if(!isNativeSequence(ring))throw Error('Missing canonical seam ring');
         for(const point of ring){
           if(!Array.isArray(point)||point.length!==2||!point.every(Number.isFinite)
             ||Math.abs(point[0])>(originalFrame?limit:180)||Math.abs(point[1])>90)
@@ -206,7 +212,7 @@ export function verifyNativeSeamView(original,view,{size,latitudes}) {
           if(originalFrame&&Math.abs(point[0])>180)overruns++;
           south=Math.min(south,point[1]);north=Math.max(north,point[1]);
         }
-        return Float64Array.from(ring.flat());
+        const values=new Float64Array(ring.length*2);let i=0;for(const point of ring)values.set(point,i++*2);return values;
       });
     })}];
   }
@@ -253,17 +259,18 @@ export function nativeRuntimeIndex(features) {
     ids.add(feature.id);owners.add(owner);
     if (!['Polygon','MultiPolygon'].includes(geometry?.type)) throw Error('Original native geometry required');
     const polygons=geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;
-    if (!Array.isArray(polygons) || !polygons.length) throw Error('Original native polygons required');
-    return {index:owner,polygons:polygons.map(polygon=>{
-      if (!Array.isArray(polygon) || !polygon.length) throw Error('Original native rings required');
-      return polygon.map(ring=>{
-        if (!Array.isArray(ring) || ring.length<4) throw Error('Original native closed ring required');
+    if (!isNativeSequence(polygons) || !polygons.length) throw Error('Original native polygons required');
+    return {index:owner,polygons:mapGeometryArray(polygons,polygon=>{
+      if (!isNativeSequence(polygon) || !polygon.length) throw Error('Original native rings required');
+      return mapGeometryArray(polygon,ring=>{
+        if (!isNativeSequence(ring) || ring.length<4) throw Error('Original native closed ring required');
         const result=new Float64Array(ring.length*2);
-        ring.forEach((point,i)=>{
+        const visit=(point,i)=>{
           if (!Array.isArray(point) || point.length!==2 || !point.every(Number.isFinite) ||
               Math.abs(point[0])>180 || Math.abs(point[1])>90) throw Error('Original lon/lat coordinates required');
           result.set(point,i*2);
-        });
+        };
+        if(Array.isArray(ring))ring.forEach(visit);else{let i=0;for(const point of ring)visit(point,i++);}
         if (result[0]!==result.at(-2) || result[1]!==result.at(-1)) throw Error('Original native closed ring required');
         return result;
       });
@@ -280,17 +287,48 @@ export function polygonParts(geometry) {
   require(geometry && ['Polygon', 'MultiPolygon'].includes(geometry.type), 'Unsupported original native geometry / footprint primitive');
   exactKeys(geometry, ['type', 'coordinates'], 'Primitive geometry');
   const polygons = geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.coordinates;
-  require(Array.isArray(polygons) && polygons.length > 0, 'Missing footprint polygons');
+  require(isNativeSequence(polygons) && polygons.length > 0, 'Missing footprint polygons');
   for (const polygon of polygons) {
-    require(Array.isArray(polygon) && polygon.length > 0, 'Missing footprint rings');
+    require(isNativeSequence(polygon) && polygon.length > 0, 'Missing footprint rings');
     for (const ring of polygon) {
-      require(Array.isArray(ring) && ring.length >= 4, 'Incomplete footprint ring');
-      for (const point of ring) require(Array.isArray(point) && point.length === 2 && point.every(Number.isFinite)
-        && Math.abs(point[0]) <= 180 && Math.abs(point[1]) <= 90, 'Invalid native footprint coordinate');
-      require(ring[0][0] === ring.at(-1)[0] && ring[0][1] === ring.at(-1)[1], 'Unclosed footprint ring');
+      require(isNativeSequence(ring) && ring.length >= 4, 'Incomplete footprint ring');
+      let first,last;for (const point of ring) {first??=point;last=point;require(Array.isArray(point) && point.length === 2 && point.every(Number.isFinite)
+        && Math.abs(point[0]) <= 180 && Math.abs(point[1]) <= 90, 'Invalid native footprint coordinate');}
+      require(first[0] === last[0] && first[1] === last[1], 'Unclosed footprint ring');
     }
   }
   return polygons;
+}
+// Coverage admits each original geometry while making the numerical rings the
+// scanner already needs. Group only those rings: grouping raw coordinates first
+// would require a separate strict walk before nativeRuntimeIndex's conversion.
+function coverageRuntimeIndex(features) {
+  const grouped=new Map();
+  for(const {id,pixelIndex,geometry} of features){
+    require(geometry && ['Polygon','MultiPolygon'].includes(geometry.type), 'Unsupported original native geometry / footprint primitive');
+    exactKeys(geometry,['type','coordinates'],'Primitive geometry');
+    const polygons=geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;
+    require(isNativeSequence(polygons) && polygons.length>0,'Missing footprint polygons');
+    const item=grouped.get(id)??{index:pixelIndex,polygons:[]};
+    for(const polygon of polygons){
+      require(isNativeSequence(polygon) && polygon.length>0,'Missing footprint rings');
+      const rings=[];
+      for(const ring of polygon){
+        require(isNativeSequence(ring) && ring.length>=4,'Incomplete footprint ring');
+        const result=new Float64Array(ring.length*2);let offset=0;
+        for(const point of ring){
+          require(Array.isArray(point) && point.length===2 && point.every(Number.isFinite)
+            && Math.abs(point[0])<=180 && Math.abs(point[1])<=90,'Invalid native footprint coordinate');
+          result.set(point,offset);offset+=2;
+        }
+        require(result[0]===result.at(-2) && result[1]===result.at(-1),'Unclosed footprint ring');
+        rings.push(result);
+      }
+      item.polygons.push(rings);
+    }
+    grouped.set(id,item);
+  }
+  return [...grouped.values()].sort((a,b)=>a.index-b.index);
 }
 // Component labels belong to their original authority; repeated labels do not
 // rename or merge the independently qualified original rows.
@@ -429,15 +467,7 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
   const options = {size, latitudes, rowStart, rowEnd};
   const scan = (features, masks = false) => {
     if (!features.length) return {rows:new Map(),ties:[]};
-    if (masks) {
-      const grouped=new Map();
-      for (const feature of features) {
-        const item=grouped.get(feature.id)??{id:feature.id,pixelIndex:feature.pixelIndex,geometry:{type:'MultiPolygon',coordinates:[]}};
-        item.geometry.coordinates.push(...polygonParts(feature.geometry)); grouped.set(feature.id,item);
-      }
-      features=[...grouped.values()];
-    }
-    return nativePolygonIntervals(nativeRuntimeIndex(features),options);
+    return nativePolygonIntervals(masks?coverageRuntimeIndex(features):nativeRuntimeIndex(features),options);
   };
   // Internal scan ordinals preserve each original member's geometry and holes.
   // Ownership below unions their accepted owners, while coverage must still meet
@@ -699,28 +729,44 @@ function requestedIndex(requestedRows, size, latitudes) {
 // Validate every supplied primitive before any stock scan or predicate work.
 // Empty top-level coordinates of a recognized type are explicit empty witnesses;
 // empty members inside a nonempty multi-primitive are rejected rather than dropped.
-function primitives(geometry) {
+function coordinateArray(value,name){return Array.isArray(value)?denseArray(value,name):(require(isNativeSequence(value),`${name} must be an array`),value);}
+function primitives(geometry, retain = true) {
   const polygons = [], segments = [], points = [], stack = [{value: geometry}];
   const activeCollections = new WeakSet();
-  let parts = 0, vertices = 0;
+  let parts = 0, vertices = 0, polygonCount = 0, segmentCount = 0, pointCount = 0;
+  // The same traversal validates both routes. Only the numerical consumer needs
+  // flattened polygons and retained point/segment graphs.
+  function visit(values, callback) {
+    if (retain) return mapGeometryArray(values, callback);
+    if (Array.isArray(values)) {
+      const length = values.length;
+      for (let i = 0; i < length; i++) if (i in values) callback(values[i], i);
+    } else for (const value of values) callback(value);
+  }
+  function addPoint(value) { const p = point(value); pointCount++; if (retain) points.push(p); }
   function point(value) { vertices++; return position(value); }
   function line(value) {
-    denseArray(value, 'Line positions');
+    coordinateArray(value, 'Line positions');
     require(value.length >= 2, 'Incomplete line witness');
-    const positions = value.map(point);
-    for (let i = 1; i < positions.length; i++) segments.push([positions[i - 1], positions[i]]);
+    let count = 0;
+    const positions = visit(value, value => { count++; return point(value); });
+    segmentCount += count - 1;
+    if (retain) for (let i = 1; i < positions.length; i++) segments.push([positions[i - 1], positions[i]]);
   }
   function polygon(value) {
-    denseArray(value, 'Polygon rings');
+    coordinateArray(value, 'Polygon rings');
     require(value.length > 0, 'Missing polygon rings');
-    const rings = value.map(ring => {
-      denseArray(ring, 'Ring positions');
+    const rings = visit(value, ring => {
+      coordinateArray(ring, 'Ring positions');
       require(ring.length >= 4, 'Incomplete footprint ring in witness polygon');
-      const positions = ring.map(point), first = positions[0], last = positions.at(-1);
+      let first, last;
+      const positions = visit(ring, value => {
+        const p = point(value); first ??= p; last = p; return p;
+      });
       require(first[0] === last[0] && first[1] === last[1], 'Unclosed polygon witness');
-      return positions.flat();
+      return retain ? positions.flat() : undefined;
     });
-    polygons.push(rings);
+    polygonCount++; if (retain) polygons.push(rings);
   }
   while (stack.length) {
     const frame = stack.pop(), value = frame.value;
@@ -739,16 +785,16 @@ function primitives(geometry) {
     }
     require(['Point', 'MultiPoint', 'LineString', 'MultiLineString', 'Polygon', 'MultiPolygon'].includes(value.type), 'Unknown witness primitive');
     exactKeys(value, ['type', 'coordinates'], 'Witness geometry');
-    const coords = denseArray(value.coordinates, 'Witness coordinates');
+    const coords = coordinateArray(value.coordinates, 'Witness coordinates');
     if (coords.length === 0) continue;
-    if (value.type === 'Point') points.push(point(coords));
-    else if (value.type === 'MultiPoint') for (const member of coords) points.push(point(member));
+    if (value.type === 'Point') addPoint(coords);
+    else if (value.type === 'MultiPoint') for (const member of coords) addPoint(member);
     else if (value.type === 'LineString') line(coords);
     else if (value.type === 'MultiLineString') for (const member of coords) line(member);
     else if (value.type === 'Polygon') polygon(coords);
     else for (const member of coords) polygon(member);
   }
-  return {polygons, segments, points, parts, vertices};
+  return {polygons, segments, points, parts, vertices, polygonCount, segmentCount, pointCount};
 }
 
 /**
@@ -855,11 +901,341 @@ function witnessCellEffects(geometry, {size, latitudes, requestedRows, nativePol
 
 // Validation retains every recognized primitive, including empty and mixed parts.
 function validateWitnessGeometry(geometry) {
-  const p = primitives(geometry);
-  return {parts:p.parts, vertices:p.vertices, polygons:p.polygons.length,
-    segments:p.segments.length, points:p.points.length,
-    empty:p.polygons.length+p.segments.length+p.points.length===0};
+  const p = primitives(geometry, false);
+  return {parts:p.parts, vertices:p.vertices, polygons:p.polygonCount,
+    segments:p.segmentCount, points:p.pointCount,
+    empty:p.polygonCount+p.segmentCount+p.pointCount===0};
 }
 
 return {witnessCellEffects, validateWitnessGeometry};
 })();
+
+// Shared finished representation arithmetic. Hash callbacks authenticate values,
+// not scientific authority; callers retain their existing admission boundary.
+export const EFFECTIVE_FOOTPRINT_KIND='retained-base-plus-additions';
+export const FINISHED_FOOTPRINT_KIND='complete-native-footprint-v1';
+export function canonicalValue(value) {
+  if (Array.isArray(value)) return value.map(canonicalValue);
+  if (value && typeof value === 'object') {
+    const out = Object.create(null);
+    for (const key of Object.keys(value).sort()) out[key] = canonicalValue(value[key]);
+    return out;
+  }
+  require(value !== undefined && (typeof value !== 'number' || Number.isFinite(value)), 'Nonfinite or missing footprint value');
+  return value;
+}
+
+export function finishedPrimitiveGeometries(feature,hashValue) {
+  require(typeof hashValue==='function','Explicit canonical footprint hash required');
+  require(feature && typeof feature.id === 'string' && feature.id
+    && Number.isSafeInteger(feature.pixelIndex) && feature.pixelIndex > 0 && feature.pixelIndex < 2 ** 26
+    && !Object.hasOwn(feature, 'additiveFootprint'), 'Mixed or unidentified finished footprint');
+  const value = feature.finishedFootprint;
+  exactKeys(value, ['version', 'kind', 'reference_geometry_sha256', 'geometry', 'native_rows', 'native_bounds'], 'Finished footprint');
+  require(value.version === 1 && value.kind === FINISHED_FOOTPRINT_KIND
+    && hex.test(value.reference_geometry_sha256), 'Unsupported finished footprint');
+  polygonParts(feature.geometry);
+  require(hashValue(feature.geometry) === value.reference_geometry_sha256,
+    'Finished footprint reference geometry changed');
+  polygonParts(value.geometry);
+  require(Array.isArray(value.native_rows), 'Missing finished native coverage');
+  let previousY = -1;
+  for (const row of value.native_rows) {
+    exactKeys(row, ['y', 'runs'], 'Finished native row');
+    require(Number.isSafeInteger(row.y) && row.y > previousY && row.y < 262166
+      && Array.isArray(row.runs) && row.runs.length > 0, 'Invalid finished native row');
+    previousY = row.y;
+    let previousEnd = -1;
+    for (const run of row.runs) {
+      require(Array.isArray(run) && run.length === 2 && run.every(Number.isSafeInteger)
+        && run[0] >= 0 && run[0] > previousEnd && run[1] > run[0] && run[1] <= 262166,
+        'Unordered or uncoalesced finished native intervals');
+      previousEnd = run[1];
+    }
+  }
+  require(value.native_rows.length === 0 ? value.native_bounds === null
+    : Array.isArray(value.native_bounds) && value.native_bounds.length === 4
+      && value.native_bounds.every(Number.isFinite)
+      && value.native_bounds[0] >= -180 && value.native_bounds[2] <= 180
+      && value.native_bounds[1] >= -90 && value.native_bounds[3] <= 90
+      && value.native_bounds[0] <= value.native_bounds[2] && value.native_bounds[1] <= value.native_bounds[3],
+    'Invalid finished native bounds');
+  return [value.geometry];
+}
+
+function unionFinishedRows(byRow) {
+  return [...byRow].sort((a, b) => a[0] - b[0]).map(([y, runs]) => {
+    const merged = [];
+    for (const run of runs.sort((a, b) => a[0] - b[0] || a[1] - b[1])) {
+      const prior = merged.at(-1);
+      if (prior && run[0] <= prior[1]) prior[1] = Math.max(prior[1], run[1]); else merged.push(run);
+    }
+    return {y, runs: merged};
+  });
+}
+
+export function finishEffectiveFootprint(feature,hashValue) {
+  require(typeof hashValue==='function','Explicit canonical footprint hash required');
+  if (Object.hasOwn(feature, 'finishedFootprint')) {finishedPrimitiveGeometries(feature,hashValue); return feature;}
+  if (!Object.hasOwn(feature, 'additiveFootprint')) return feature;
+  const geometries = effectivePrimitiveGeometries(feature,hashValue), byRow = new Map();
+  const bounds = [Infinity, Infinity, -Infinity, -Infinity];
+  for (const component of feature.additiveFootprint.components ?? []) if (nativeOnlyComponent(component,hashValue)) {
+    for (let i = 0; i < 2; i++) {bounds[i] = Math.min(bounds[i], component.native_bounds[i]); bounds[i + 2] = Math.max(bounds[i + 2], component.native_bounds[i + 2]);}
+    for (const row of component.native_rows) {
+      const runs = byRow.get(row.y) ?? []; runs.push(...row.runs.map(([start, end]) => [start, end])); byRow.set(row.y, runs);
+    }
+  }
+  const native_rows = unionFinishedRows(byRow);
+  const {additiveFootprint, ...retained} = feature;
+  const result = {...retained, finishedFootprint: {version: 1, kind: FINISHED_FOOTPRINT_KIND,
+    reference_geometry_sha256: hashValue(feature.geometry),
+    geometry: {type: 'MultiPolygon', coordinates: geometries.flatMap(polygonParts)},
+    native_rows, native_bounds: native_rows.length ? bounds : null}};
+  finishedPrimitiveGeometries(result,hashValue);
+  return result;
+}
+
+export function extendFinishedNativeFootprint(feature,components,hashValue) {
+  require(typeof hashValue==='function','Explicit canonical footprint hash required');
+  require(Array.isArray(components),'Missing new native component scope');
+  const original=finishEffectiveFootprint(feature,hashValue);
+  if(!components.length)return original;
+  const prior=original.finishedFootprint;
+  const byRow=new Map((prior?.native_rows??[]).map(row=>[row.y,row.runs.map(run=>[...run])]));
+  const bounds=prior?.native_bounds?[...prior.native_bounds]:[Infinity,Infinity,-Infinity,-Infinity];
+  for(const component of components){
+    require(nativeOnlyComponent(component,hashValue)&&component.target_id===feature.id&&component.pixelIndex===feature.pixelIndex
+      &&component.base_geometry_sha256===hashValue(feature.geometry),
+      'New native component differs from finished owner/reference geometry');
+    for(let i=0;i<2;i++){bounds[i]=Math.min(bounds[i],component.native_bounds[i]);bounds[i+2]=Math.max(bounds[i+2],component.native_bounds[i+2]);}
+    for(const row of component.native_rows){const runs=byRow.get(row.y)??[];
+      runs.push(...Array.from(row.runs,([start,end])=>[start,end]));byRow.set(row.y,runs);}
+  }
+  const result={...original,finishedFootprint:{version:1,kind:FINISHED_FOOTPRINT_KIND,
+    reference_geometry_sha256:hashValue(feature.geometry),
+    geometry:prior?.geometry??{type:'MultiPolygon',coordinates:polygonParts(feature.geometry)},
+    native_rows:unionFinishedRows(byRow),native_bounds:bounds}};
+  finishedPrimitiveGeometries(result,hashValue);return result;
+}
+
+export function finishedReleaseFootprintDigest(baseReference, features,hashValue) {
+  require(typeof hashValue==='function','Explicit canonical footprint hash required');
+  exactKeys(baseReference, ['id', 'footprints_sha256', 'hierarchy_sha256'], 'Finished footprint base reference');
+  require(typeof baseReference.id === 'string' && baseReference.id.startsWith('geography:')
+    && hex.test(baseReference.footprints_sha256) && hex.test(baseReference.hierarchy_sha256), 'Incomplete finished footprint base');
+  const ids = new Set(), owners = new Set(), finished = [];
+  for (const feature of features) {
+    require(typeof feature.id === 'string' && feature.id && !ids.has(feature.id)
+      && Number.isSafeInteger(feature.pixelIndex) && feature.pixelIndex > 0 && !owners.has(feature.pixelIndex)
+      && !Object.hasOwn(feature, 'additiveFootprint'), 'Mixed or duplicate finished owner context');
+    ids.add(feature.id); owners.add(feature.pixelIndex);
+    if (Object.hasOwn(feature, 'finishedFootprint')) {
+      finishedPrimitiveGeometries(feature,hashValue);
+      finished.push({id: feature.id, pixelIndex: feature.pixelIndex, footprint: feature.finishedFootprint});
+    }
+  }
+  return hashValue({domain: 'worldatlas-final-native-footprints:v1', base_reference: baseReference,
+    footprints: finished.sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0)});
+}
+
+export function effectivePrimitiveGeometries(feature,hashValue) {
+  require(typeof hashValue==='function','Explicit canonical footprint hash required');
+  if (Object.hasOwn(feature ?? {}, 'finishedFootprint')) return finishedPrimitiveGeometries(feature,hashValue);
+  if (feature?.additiveFootprint?.version === 2) return versionedPrimitiveGeometries(feature,hashValue);
+  require(feature && typeof feature.id === 'string' && feature.id, 'Missing effective footprint identity');
+  polygonParts(feature.geometry);
+  if (!Object.hasOwn(feature, 'additiveFootprint')) return [feature.geometry];
+  const value = feature.additiveFootprint;
+  exactKeys(value, ['version', 'kind', 'baseline_release_sha256', 'base_geometry_sha256', 'ledger_sha256', 'rule_sha256', 'additions'], 'Additive footprint');
+  require(value.version === 1 && value.kind === EFFECTIVE_FOOTPRINT_KIND, 'Unsupported effective footprint version');
+  for (const key of ['baseline_release_sha256', 'base_geometry_sha256', 'ledger_sha256', 'rule_sha256'])
+    require(hex.test(value[key] ?? ''), 'Missing complete effective footprint binding: ' + key);
+  require(value.base_geometry_sha256 === hashValue(feature.geometry), 'Retained base geometry changed');
+  require(Array.isArray(value.additions) && value.additions.length > 0, 'Empty additive footprint');
+  const ids = new Set(), output = [feature.geometry];
+  let previous = '';
+  for (const addition of value.additions) {
+    exactKeys(addition, ['component_id', 'geometry', 'geometry_sha256', 'source_receipt_sha256'], 'Footprint addition');
+    require(typeof addition.component_id === 'string' && addition.component_id && !ids.has(addition.component_id)
+      && addition.component_id > previous, 'Duplicate/unordered addition identity');
+    ids.add(addition.component_id); previous = addition.component_id;
+    require(hex.test(addition.geometry_sha256 ?? '') && hex.test(addition.source_receipt_sha256 ?? ''), 'Missing whole addition/source binding');
+    polygonParts(addition.geometry);
+    require(hashValue(addition.geometry) === addition.geometry_sha256, 'Complete addition pointset changed');
+    output.push(addition.geometry);
+  }
+  return output;
+}
+
+export function effectiveFootprintValue(feature,hashValue) {
+  require(typeof hashValue==='function','Explicit canonical footprint hash required');
+  if (Object.hasOwn(feature ?? {}, 'finishedFootprint')) {
+    finishedPrimitiveGeometries(feature,hashValue);
+    return {version: 1, kind: FINISHED_FOOTPRINT_KIND, reference: feature.geometry, finished: feature.finishedFootprint};
+  }
+  if (feature?.additiveFootprint?.version === 2) {
+    versionedPrimitiveGeometries(feature,hashValue);
+    return {version: 2, kind: EFFECTIVE_FOOTPRINT_KIND, base: feature.geometry, additive: feature.additiveFootprint};
+  }
+  effectivePrimitiveGeometries(feature,hashValue);
+  return Object.hasOwn(feature, 'additiveFootprint')
+    ? {version: 1, kind: EFFECTIVE_FOOTPRINT_KIND, base: feature.geometry, additive: feature.additiveFootprint}
+    : feature.geometry;
+}
+
+export function versionedPrimitiveGeometries(feature,hashValue) {
+  require(typeof hashValue==='function','Explicit canonical footprint hash required');
+  require(feature && typeof feature.id === 'string' && feature.id && Number.isSafeInteger(feature.pixelIndex) && feature.pixelIndex > 0,
+    'Missing versioned effective owner identity');
+  polygonParts(feature.geometry);
+  const value=feature.additiveFootprint;
+  exactKeys(value,['version','kind','baseline_release_sha256','base_geometry_sha256','ledger_sha256','authority_registry_sha256','components'],'Versioned additive footprint');
+  require(value.version===2 && value.kind===EFFECTIVE_FOOTPRINT_KIND,'Unsupported versioned footprint');
+  for(const key of ['baseline_release_sha256','base_geometry_sha256','ledger_sha256','authority_registry_sha256'])
+    require(hex.test(value[key]??''),'Missing versioned footprint binding: '+key);
+  require(value.base_geometry_sha256===hashValue(feature.geometry),'Current retained base changed');
+  require(Array.isArray(value.components)&&value.components.length>0,'Missing complete original components');
+  let previous;const output=[feature.geometry];
+  for(const row of value.components){
+    if (nativeOnlyComponent(row,hashValue)) {
+      require((!previous || compareRepairComponents(previous,row)<0) && row.target_id === feature.id && row.pixelIndex === feature.pixelIndex,
+        'Foreign or unordered native component'); previous = row; continue;
+    }
+    const componentKeys=['base_geometry','base_geometry_sha256','component_id','disposition','geometry','geometry_sha256','native_cells','pixelIndex','source_receipt_sha256','target_id','authority_sha256','rule_sha256'];
+    const scoped=Object.hasOwn(row,'geometry_scope'),partial=row.geometry_scope==='supported-fragment';
+    exactKeys(row,scoped?[...componentKeys,'geometry_scope','whole_gap_completion',...(partial?['original_candidate','original_remainder']:[])]:componentKeys,'Original authority component');
+    if(scoped)require(['full-component','supported-fragment'].includes(row.geometry_scope)&&row.whole_gap_completion===false,'False whole-gap completion / unsupported component scope');
+    if(partial){
+      exactKeys(row.original_candidate,['type','id','properties','geometry'],'Original whole candidate');
+      require(row.original_candidate.type==='Feature'&&row.original_candidate.id===row.component_id
+        &&row.original_candidate.properties&&typeof row.original_candidate.properties==='object'&&!Array.isArray(row.original_candidate.properties),'Foreign original whole candidate');
+      polygonParts(row.original_candidate.geometry);
+      const remainder=row.original_remainder;
+      // Original NCL operations retain a four-field residual; its whole
+      // pointset is retained in the authenticated selected ledger.
+      const originalNcl=Object.hasOwn(remainder,'area_degree2');
+      exactKeys(remainder,originalNcl?['area_degree2','geometry','geometry_type','is_empty']:
+        ['geometry','geometry_sha256','geometry_type','is_empty','is_valid','planar_area_coordinate_units_squared','planar_length_coordinate_units'],'Original partial remainder');
+      require(remainder.is_empty===false&&remainder.geometry_type===remainder.geometry?.type,'Missing/nonpositive original remainder');
+      if(originalNcl)require(/^NCL-[0-9]+$/.test(row.target_id)
+        &&Number.isFinite(remainder.area_degree2)&&remainder.area_degree2>0,'Foreign/nonpositive original NCL remainder');
+      else require(remainder.is_valid===true
+        &&Number.isFinite(remainder.planar_area_coordinate_units_squared)&&remainder.planar_area_coordinate_units_squared>0
+        &&Number.isFinite(remainder.planar_length_coordinate_units)&&remainder.planar_length_coordinate_units>0,'Missing/nonpositive original remainder');
+      polygonParts(remainder.geometry);
+      if(!originalNcl)require(hex.test(remainder.geometry_sha256??'')&&hashValue(remainder.geometry)===remainder.geometry_sha256,'Original remainder pointsets changed');
+      require(hashValue(row.original_candidate.geometry)!==row.geometry_sha256,'Whole original candidate relabelled as supported fragment');
+    }
+    require(typeof row.component_id==='string'&&row.component_id&&(!previous||compareRepairComponents(previous,row)<0)&&row.target_id===feature.id&&row.pixelIndex===feature.pixelIndex,'Foreign/duplicate/unordered component owner');
+    previous=row;
+    for(const key of ['base_geometry_sha256','geometry_sha256','source_receipt_sha256','authority_sha256','rule_sha256'])
+      require(hex.test(row[key]??''),'Incomplete original component authority: '+key);
+    require(Number.isSafeInteger(row.native_cells)&&(['assigned','zero-cell'].includes(row.disposition))
+      &&(row.disposition==='assigned'?row.native_cells>0:row.native_cells===0),'False original native contribution');
+    polygonParts(row.base_geometry);polygonParts(row.geometry);
+    require(hashValue(row.base_geometry)===row.base_geometry_sha256&&hashValue(row.geometry)===row.geometry_sha256,'Original complete component pointsets changed');
+    output.push(row.geometry);
+  }
+  return output;
+}
+
+export function additiveReleaseFootprintDigest(baseReference,features,hashValue) {
+  require(typeof hashValue==='function','Explicit canonical footprint hash required');
+  if (features.some(feature => feature?.additiveFootprint?.version === 2)) return versionedReleaseFootprintDigest(baseReference,features,hashValue);
+  exactKeys(baseReference,['id','footprints_sha256','hierarchy_sha256'],'Additive base reference');
+  require(hex.test(baseReference.footprints_sha256)&&hex.test(baseReference.hierarchy_sha256)&&baseReference.id.startsWith('geography:'),'Incomplete additive digest base');
+  const additions=features.filter(feature=>Object.hasOwn(feature,'additiveFootprint')).sort((a,b)=>a.id<b.id?-1:a.id>b.id?1:0);
+  require(additions.length>0,'Explicit additive digest requires complete additions');
+  const ids=new Set(),owners=new Set();let ledger,rule;
+  for(const feature of additions) {
+    effectivePrimitiveGeometries(feature,hashValue);
+    require(!ids.has(feature.id)&&Number.isInteger(feature.pixelIndex)&&feature.pixelIndex>0&&feature.pixelIndex<2**26&&!owners.has(feature.pixelIndex),'Duplicate/missing additive digest owner/identity');
+    ids.add(feature.id);owners.add(feature.pixelIndex);
+    const value=feature.additiveFootprint;
+    require(value.baseline_release_sha256===baseReference.footprints_sha256,'Stale additive digest baseline');
+    if(ledger===undefined){ledger=value.ledger_sha256;rule=value.rule_sha256;}
+    require(value.ledger_sha256===ledger&&value.rule_sha256===rule,'Incomplete mixed-rule/ledger additive digest');
+  }
+  return hashValue({domain:'worldatlas-effective-native-footprints:v1',base_reference:baseReference,
+    additions:additions.map(feature=>({id:feature.id,pixelIndex:feature.pixelIndex,footprint:feature.additiveFootprint}))});
+}
+
+export function versionedReleaseFootprintDigest(baseReference,features,hashValue) {
+  require(typeof hashValue==='function','Explicit canonical footprint hash required');
+  exactKeys(baseReference,['id','footprints_sha256','hierarchy_sha256'],'Versioned base reference');
+  require(typeof baseReference.id==='string'&&baseReference.id.startsWith('geography:')&&hex.test(baseReference.footprints_sha256)&&hex.test(baseReference.hierarchy_sha256),'Incomplete versioned base reference');
+  const selected=features.filter(feature=>Object.hasOwn(feature,'additiveFootprint'));
+  require(selected.length>0,'Missing versioned components');
+  const owners=new Set(),ids=new Set(),components=new Map();let ledger,registry;
+  for(const feature of selected){
+    require(feature.additiveFootprint.version===2,'Mixed original/versioned effective footprint domain');
+    versionedPrimitiveGeometries(feature,hashValue);
+    require(!ids.has(feature.id)&&!owners.has(feature.pixelIndex),'Duplicate effective target/owner');ids.add(feature.id);owners.add(feature.pixelIndex);
+    const value=feature.additiveFootprint;
+    require(value.baseline_release_sha256===baseReference.footprints_sha256,'Stale versioned base');
+    if(ledger===undefined){ledger=value.ledger_sha256;registry=value.authority_registry_sha256;}
+    require(value.ledger_sha256===ledger&&value.authority_registry_sha256===registry,'Mixed complete ledger/authority registry');
+    for(const row of value.components){require(!components.has(repairComponentKey(row)),'Duplicate component across owners');components.set(repairComponentKey(row),row);}
+  }
+  return hashValue({domain:'worldatlas-effective-native-footprints:v2',base_reference:baseReference,
+    authority_registry_sha256:registry,ledger_sha256:ledger,
+    components:[...components.values()].sort(compareRepairComponents)});
+}
+
+export function mergeUnassignedNativeIntervals(base,additions,{owners,allowed}={}) {
+  require(base?.version===2&&base.method==='native-linear-evenodd-first-owner-v1'&&base.size===262166&&base.coordinateBits===19
+    &&base.rows instanceof Uint32Array&&base.rows.length===base.size*2&&base.runs instanceof Uint32Array&&base.runs.length%2===0,
+    'Native interval merge requires complete ownership words');
+  require(Array.isArray(additions)&&owners instanceof Set&&owners.size>0&&allowed instanceof Set
+    &&[...owners].every(owner=>Number.isSafeInteger(owner)&&owner>0&&owner<2**26)
+    &&[...allowed].every(owner=>owners.has(owner)),'Complete native interval owner scope required');
+  const replacements=new Map();let previousY=-1,addedCells=0;
+  const bits=19,mask=2**bits-1,ownerBase=2**(32-bits);
+  for(const row of additions) {
+    exactKeys(row,['y','runs'],'Native patch row');
+    require(Number.isInteger(row.y)&&row.y>previousY&&row.y>=0&&row.y<base.size&&Array.isArray(row.runs)&&row.runs.length>0,'Duplicate/unordered/outside native patch row');previousY=row.y;
+    const start=base.rows[row.y*2],count=base.rows[row.y*2+1];
+    require(start+count<=base.runs.length/2,'Incomplete base native row');
+    let previousEnd=0;
+    for(let i=0;i<count;i++){
+      const a=base.runs[(start+i)*2],b=base.runs[(start+i)*2+1],end=(b&mask)+1,owner=(a>>>bits)+(b>>>bits)*ownerBase;
+      require((a&mask)>=previousEnd&&end>(a&mask)&&end<=base.size&&owners.has(owner),'Invalid/foreign base ownership run');previousEnd=end;
+    }
+    previousEnd=0;let occupied=0;
+    for(const run of row.runs) {
+      require(Array.isArray(run)&&run.length===3&&run.every(Number.isInteger)&&run[0]>=previousEnd&&run[1]>run[0]&&run[1]<=base.size&&allowed.has(run[2]),'Conflicting/unordered/foreign native addition');previousEnd=run[1];
+      while(occupied<count&&(base.runs[(start+occupied)*2+1]&mask)+1<=run[0])occupied++;
+      require(occupied===count||(base.runs[(start+occupied)*2]&mask)>=run[1],'Native additive patch would replace an assigned cell');
+      addedCells+=run[1]-run[0];
+    }
+    // Both streams are ordered and disjoint. Merge directly into packed words,
+    // without old/combined/sorted/merged JS triples for every affected base run.
+    const packed=new Uint32Array((count+row.runs.length)*2);let old=0,added=0,words=0,lastEnd=0,lastOwner=0;
+    while(old<count||added<row.runs.length){
+      let begin,end,owner;
+      if(added===row.runs.length||old<count&&(base.runs[(start+old)*2]&mask)<=row.runs[added][0]){
+        const a=base.runs[(start+old)*2],b=base.runs[(start+old)*2+1];old++;
+        begin=a&mask;end=(b&mask)+1;owner=(a>>>bits)+(b>>>bits)*ownerBase;
+      }else [begin,end,owner]=row.runs[added++];
+      if(words&&begin===lastEnd&&owner===lastOwner)packed[words-1]=Math.floor(owner/ownerBase)*2**bits+end-1;
+      else{packed[words++]=owner%ownerBase*2**bits+begin;packed[words++]=Math.floor(owner/ownerBase)*2**bits+end-1;}
+      lastEnd=end;lastOwner=owner;
+    }
+    replacements.set(row.y,packed.subarray(0,words));
+  }
+  const count=base.runs.length/2+[...replacements].reduce((n,[y,runs])=>n+runs.length/2-base.rows[y*2+1],0);
+  require(Number.isSafeInteger(count)&&count>=0,'Invalid native additive output count');
+  const rows=new Uint32Array(base.rows.length),runs=new Uint32Array(count*2);let cursor=0;
+  for(let y=0;y<base.size;y++) {
+    const offset=base.rows[y*2],length=base.rows[y*2+1];
+    require(offset===(y?base.rows[(y-1)*2]+base.rows[(y-1)*2+1]:0)&&offset+length<=base.runs.length/2,'Incomplete/unreferenced base ownership');
+    rows[y*2]=cursor;
+    if(replacements.has(y)) {
+      const replacement=replacements.get(y);rows[y*2+1]=replacement.length/2;
+      runs.set(replacement,cursor*2);cursor+=replacement.length/2;
+    }else{rows[y*2+1]=length;runs.set(base.runs.subarray(offset*2,(offset+length)*2),cursor*2);cursor+=length;}
+  }
+  require(base.rows.at(-2)+base.rows.at(-1)===base.runs.length/2&&cursor===count,'Unreferenced native base/output runs');
+  return {rows,runs,addedCells};
+}

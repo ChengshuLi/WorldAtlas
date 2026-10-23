@@ -1,0 +1,78 @@
+{
+  "kind": "niu-physical-residual-exact-key-attribution-v1",
+  "scope": {
+    "package": "gb-NIU-ADM1--repair-evaluation",
+    "requested_cells": 116,
+    "intervals": 50,
+    "owner": 7126,
+    "separate_physical_companion_cells": 47
+  },
+  "method": {
+    "review_type": "read-only inspection of the already executed stock native diagnostic and its exact stock residual-veto code path",
+    "no_producer_or_diagnostic_rerun": true,
+    "stock_code": {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "same_git_blob_at": "source-evidence commit bc69d09bb527e87c201c29563834b91e7fbffb29; native-diagnostic commit 995e952c9; current worktree HEAD b62876285dec3990759a45249cc91daec29c63ac",
+      "git_blob_oid": "b56641a48e2c5456999c2ea60dd68d8404a10cd1",
+      "sha256": "024e8d498d4567ad0d50f24afcf3729a38008bfaa5f717704f890b1e2f44a4ff",
+      "bytes": 235054,
+      "relevant_path": "residualsByOwner collects physical reconstruction residual pointsets per selected owner; witnessCellEffects applies nativePolygonIntervals to requested rows; diagnostic emits physical-reconstruction-residual-or-conflict when hit (source lines 1497-1504, 1842-1855, 1931-1947)."
+    }
+  },
+  "physical_receipt": {
+    "commit": "e96d95a3b4337e6f26b272eefdd6ed36bc4fd434",
+    "path": "coordination/engineering/niu-qualified-repair-20261021/physical-001/whole-target-support.json",
+    "sha256": "d24e65b4e0ab93bff9591dfebacc5445c5238cdca61c953d078460d132b2a4b5",
+    "issue_target_results": [
+      {
+        "source_id": "gb:NIU:ADM1:93272968B97328284886537",
+        "name": "Mutalau",
+        "issue": "extra_reconstruction",
+        "geometry_type": "Polygon",
+        "original_contact_keys": 20
+      },
+      {
+        "source_id": "gb:NIU:ADM1:93272968B84240109118138",
+        "name": "Vaiea",
+        "issue": "extra_reconstruction",
+        "geometry_type": "MultiPolygon",
+        "original_contact_keys": 17
+      }
+    ],
+    "other_six_targets_issue_free": true
+  },
+  "native_diagnostic": {
+    "commit": "995e952c9",
+    "path": "coordination/engineering/niu-qualified-repair-20261021/native-diagnostic-001/native-diagnostic.json",
+    "bytes": 8784,
+    "sha256": "30c3783da47019701659993984beaab3acead331e86abb7f2f5eb866d5657af6",
+    "requested_cells": 116,
+    "supported_cells": 116,
+    "held_cells": 0,
+    "decision_reason_span_counts": {
+      "assigned_cells": 50
+    },
+    "decision_reason_cell_counts": {
+      "assigned_cells": 116
+    },
+    "residual_veto_reason_present": false,
+    "all_116_original_centers_avoided_physical_residual_veto": true,
+    "request_equals_original_patch": true,
+    "support_equals_original_patch": true,
+    "first_failure": null,
+    "native_rule_sha256": "e1d7f0e1edaaa97959282b68744f12fff8827dae153a5cdfd426875007018851",
+    "source_contact_key_scope": {
+      "source_contact_scan_path": "inventory/niu-audit-handoff/extracted/source-contact-results.json",
+      "sha256": "feab5aad8385ffd8f8a41baff7b6257ac5831938c0caf2a176989c65f50ffeb6",
+      "source_member": "gb-original.geojson",
+      "Mutalau_keys": 20,
+      "Vaiea_keys": 17,
+      "their_combined_keys": 37,
+      "interpretation": "These original source-contact keys are included in the exact 116-key diagnostic request; none of the full request emitted a residual-veto reason."
+    }
+  },
+  "conclusion": {
+    "exact_result": "The executed stock diagnostic classified all 116 requested NIU centers as assigned_cells (50 interval spans), with no physical-reconstruction-residual-or-conflict cells. Thus none of the original 116 native centers intersects the stock-vetoed residual pointsets from the Mutalau and Vaiea physical results under the exact retained native latitude table and native polygon interval semantics.",
+    "scope_limit": "This is exact point-to-residual-veto attribution for the original requested centers. It does not erase either whole-target physical residual, resolve full-versus-simplified representation sensitivity, prove foreign whole-polygon competitor absence, establish current legal/source authority, or itself qualify/accept a repair. The native-authority constructor result remains a separate operation."
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "kind": "adopted-native-territorial-applicability-v1",
+  "provenance": [
+    {
+      "id": "original-ukr-adm1",
+      "role": "original-source",
+      "parts": [
+        {
+          "bytes": 248309,
+          "commit": "9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c",
+          "decoded_bytes": 761290,
+          "decoded_sha256": "4a5947e7497574d51f93255dfa7e03dce0c7acf6ecee52d25773a5205854a399",
+          "git_blob_oid": "c312a11650e4cde33bdeb047649c9f730b3a4433",
+          "mode": "100644",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-UKR-ADM1-000.bin.gz",
+          "sha256": "4c3791c4904b62ede78e6e6ba461f1b987ce80baf281284395aeed33df2a3908"
+        }
+      ]
+    },
+    {
+      "id": "four-key-decision",
+      "role": "adoption",
+      "pin": {
+        "commit": "a22492aea485d2bdf5d752331f13deb09940eefb",
+        "path": "coordination/engineering/rus-ukr-source-context-repair-20261021/source-applicability-decision.json",
+        "mode": "100644",
+        "git_blob_oid": "e7e8b1c0465959564f6f6f4b460d3bf51ab66bd2",
+        "bytes": 7138,
+        "sha256": "b2db9ea1030d07c158fc6ed43f0eb85f69b3d2c387f2e75b89f22b7a753d1b2e"
+      }
+    },
+    {
+      "id": "four-key-scope",
+      "role": "scope",
+      "pin": {
+        "commit": "a22492aea485d2bdf5d752331f13deb09940eefb",
+        "path": "coordination/engineering/rus-ukr-source-context-repair-20261021/exact-original-scope.json",
+        "mode": "100644",
+        "git_blob_oid": "ba8ef4b511ae8c105d293d900a53af19f1d94537",
+        "bytes": 7189,
+        "sha256": "50276c5beddcc633a52465563322b05fa132f40486eeacb009946557344f511d"
+      }
+    }
+  ],
+  "records": [
+    {
+      "role": "contextual",
+      "source_id": "gb:RUS:ADM2:50074027B12942583135720",
+      "target_id": "gb:RUS:ADM2:50074027B12942583135720",
+      "pixelIndex": 37091,
+      "x": 154700,
+      "y": 86213,
+      "negative_ordinal": 0,
+      "geometry_sha256": "174d29c53ad128a3393370b4f56c1e4bb546cb54af18259253d39eee9e212b22",
+      "original_source": {
+        "id": "original-ukr-adm1",
+        "pointer": "/features/5/geometry"
+      },
+      "adoption": {
+        "id": "four-key-decision",
+        "pointer": "/statements/0/statement"
+      },
+      "scope": {
+        "id": "four-key-scope",
+        "pointer": "/rows/0",
+        "owner_pointer": "/original_owner"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:RUS:ADM2:50074027B12942583135720",
+      "target_id": "gb:RUS:ADM2:50074027B12942583135720",
+      "pixelIndex": 37091,
+      "x": 154701,
+      "y": 86214,
+      "negative_ordinal": 0,
+      "geometry_sha256": "174d29c53ad128a3393370b4f56c1e4bb546cb54af18259253d39eee9e212b22",
+      "original_source": {
+        "id": "original-ukr-adm1",
+        "pointer": "/features/5/geometry"
+      },
+      "adoption": {
+        "id": "four-key-decision",
+        "pointer": "/statements/1/statement"
+      },
+      "scope": {
+        "id": "four-key-scope",
+        "pointer": "/rows/1",
+        "owner_pointer": "/original_owner"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:RUS:ADM2:50074027B12942583135720",
+      "target_id": "gb:RUS:ADM2:50074027B12942583135720",
+      "pixelIndex": 37091,
+      "x": 154341,
+      "y": 86497,
+      "negative_ordinal": 0,
+      "geometry_sha256": "174d29c53ad128a3393370b4f56c1e4bb546cb54af18259253d39eee9e212b22",
+      "original_source": {
+        "id": "original-ukr-adm1",
+        "pointer": "/features/5/geometry"
+      },
+      "adoption": {
+        "id": "four-key-decision",
+        "pointer": "/statements/2/statement"
+      },
+      "scope": {
+        "id": "four-key-scope",
+        "pointer": "/rows/2",
+        "owner_pointer": "/original_owner"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:RUS:ADM2:50074027B64075323117418",
+      "target_id": "gb:RUS:ADM2:50074027B64075323117418",
+      "pixelIndex": 38408,
+      "x": 156723,
+      "y": 87712,
+      "negative_ordinal": 0,
+      "geometry_sha256": "16891896478d1906358ca11e193deb30eace6532028a31a4ef69a4c2e4a04d5d",
+      "original_source": {
+        "id": "original-ukr-adm1",
+        "pointer": "/features/6/geometry"
+      },
+      "adoption": {
+        "id": "four-key-decision",
+        "pointer": "/statements/3/statement"
+      },
+      "scope": {
+        "id": "four-key-scope",
+        "pointer": "/rows/3",
+        "owner_pointer": "/original_owner"
+      }
+    }
+  ]
+}

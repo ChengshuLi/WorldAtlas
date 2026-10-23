@@ -1,0 +1,169 @@
+{
+  "version": 1,
+  "kind": "lux-act-official-boundary-adverse-point-comparison",
+  "as_of": "2026-10-21",
+  "package_id": "gb-LUX-ADM1--repair-evaluation",
+  "source_file": {
+    "url": "https://download.data.public.lu/resources/limites-administratives-du-grand-duche-de-luxembourg/20261005-030016/limadmin.geojson",
+    "publisher_page": "https://data.public.lu/fr/datasets/limites-administratives-du-grand-duche-de-luxembourg/",
+    "publisher": "Administration du cadastre et de la topographie (ACT)",
+    "dataset_last_updated": "2026-10-05",
+    "publisher_md5": "b7efcb9fac2d724fe493e32713ff3977",
+    "downloaded_bytes": 1207257,
+    "downloaded_md5": "b7efcb9fac2d724fe493e32713ff3977",
+    "downloaded_sha256": "6c3128de3763704397d9a7c44ea04d952fd467fc88a368e2d188c236cbfbae83",
+    "http_content_type": "application/geo+json",
+    "license": "CC0",
+    "description": "ACT says vectors are derived from the PCN and include administrative cantons and national boundaries. The dataset has no stated temporal coverage or positional accuracy field.",
+    "container_layers": {
+      "cantons": 12,
+      "communes": 100,
+      "districts": 3,
+      "pays": 1
+    },
+    "geojson_crs_member": false,
+    "coordinate_sample_interpreted_as": "longitude, latitude in decimal degrees; the separately published shapefile is identified as LUREF / EPSG:2169"
+  },
+  "method": {
+    "predicate": "Shapely covers(Point(longitude, latitude)) against all 12 ACT canton geometries and the single ACT pays/national geometry",
+    "point_source": "All 624 original native selected-owner observation rows in inventory/lux-selected-owner-observation.json; use the retained exact row latitude and native-grid x-to-longitude formula (size=262166) from the execution-pinned grid implementation.",
+    "group_source": "Source-contact groups and prior canton membership from inventory/lux-source-contact-investigation-partitions.json and inventory/lux-official-canton-2026-exact-comparison.json.",
+    "code_pin": {
+      "commit": "c107b2053841498763d92a38da3924b3fa04b077",
+      "path": "src/native-grid.js",
+      "git_blob_oid": "add4cef02bb5a790f22a9078fdf9bd51679059d3",
+      "sha256": "3d20777f5896d28192e40428dd34cab89d47873a08bf073a17338c4ff97d43cd"
+    },
+    "not_performed": [
+      "No reprojection",
+      "No distance calculation",
+      "No polygon edit",
+      "No observer, native constructor, or full geometry replay"
+    ]
+  },
+  "results": {
+    "all_original_keys": {
+      "count": 624,
+      "covered_by_act_canton_union": 594,
+      "outside_act_canton_union": 30,
+      "covered_by_act_national_polygon": 594,
+      "outside_act_national_polygon": 30,
+      "act_canton_counts": {
+        "Clervaux": 102,
+        "Redange": 4,
+        "Echternach": 174,
+        "Vianden": 3,
+        "Diekirch": 96,
+        "Grevenmacher": 29,
+        "Capellen": 11,
+        "Esch-sur-Alzette": 174,
+        "Remich": 1
+      },
+      "multiple_canton_coverage": 0
+    },
+    "26_foreign_contact_keys": {
+      "count": 26,
+      "covered_by_act_canton_union": 26,
+      "covered_by_act_national_polygon": 26,
+      "outside_act_national_polygon": 0,
+      "act_canton_counts": {
+        "Clervaux": 22,
+        "Redange": 3,
+        "Echternach": 1
+      }
+    },
+    "25_keys_outside_prior_SIG_GR_2026_canton_union": {
+      "count": 25,
+      "act_canton_covered": 0,
+      "act_national_polygon_covered": 0,
+      "prior_comparison_file": "inventory/lux-official-canton-2026-exact-comparison.json"
+    },
+    "additional_ACT_vs_SIG_GR_disagreement": {
+      "count": 5,
+      "source_partition": "LUX-only",
+      "prior_SIG_GR_canton_membership": "inside",
+      "ACT_canton_and_national_polygon_membership": "outside",
+      "keys_xy_canton": [
+        [
+          135544,
+          88856,
+          "Clervaux"
+        ],
+        [
+          135545,
+          88858,
+          "Clervaux"
+        ],
+        [
+          135563,
+          88922,
+          "Clervaux"
+        ],
+        [
+          135584,
+          88965,
+          "Vianden"
+        ],
+        [
+          135632,
+          89031,
+          "Diekirch"
+        ]
+      ]
+    },
+    "ACT_only_counts_for_all_598_LUX_only_source_contacts": {
+      "covered_by_act_canton_union": 568,
+      "outside_act_canton_union": 30,
+      "covered_by_act_national_polygon": 568,
+      "outside_act_national_polygon": 30
+    }
+  },
+  "interpretation_and_limits": [
+    "The 25 previously identified points outside the SIG-GR 2026 canton union are also outside the ACT 2026 canton union and ACT national polygon in this point comparison.",
+    "The ACT comparison adds five further LUX-only points that were inside a SIG-GR canton but outside the ACT canton union and ACT national outline. Thus the two contemporary representations differ in both extent and membership for this package.",
+    "All 26 foreign-contact points fall inside ACT canton and national polygons. This point-in-polygon result does not resolve source attribution, international boundary status, condominium treatment, rights, or a legal territorial claim.",
+    "The ACT dataset is a current PCN-derived representation; its refresh date is not a declared observation date, temporal coverage, legal adjudication, or accuracy statement. It does not establish that the 2017 GeoBoundaries layer was adopted, superseded, obsolete, or wrong.",
+    "The ACT national outline and its cantons are generalized administrative datasets. The discrepancy warrants retaining the exact groups and asking a bounded source-applicability question; it is not itself proof of territorial transfer or a per-key causal explanation.",
+    "The distinct Belgian transfer target remains stopped after the recorded failed/uncertain attempt and ERR_BLOCKED_BY_CLIENT; no retry, alternate route, or transfer occurred. See inventory/lux-belgian-download-attempt.json and inventory/lux-active-primary-source-vintage-evidence.json."
+  ],
+  "earlier_inventory_correction": {
+    "file": "inventory/lux-active-primary-source-vintage-evidence.json",
+    "package_id_verified": "gb-LUX-ADM1--repair-evaluation",
+    "earlier_statement_was_true_at_time": "The initial source inventory had not downloaded the ACT GeoJSON.",
+    "followup": "The exact public ACT GeoJSON was later downloaded and compared under this bounded followup. The earlier initial-phase statement should not be read as the current cumulative operation state.",
+    "belgian_transfer_retry": false
+  },
+  "execution_provenance": {
+    "local_act_input_path": "/tmp/lux-act-limadmin-20261005.geojson",
+    "local_act_input_bytes": 1207257,
+    "local_act_input_md5": "b7efcb9fac2d724fe493e32713ff3977",
+    "local_act_input_sha256": "6c3128de3763704397d9a7c44ea04d952fd467fc88a368e2d188c236cbfbae83",
+    "runtime": {
+      "python": "3.12.14 (bundled isolated venv, -I)",
+      "shapely": "2.1.2"
+    },
+    "invocation": "native-scratch/worldatlas-physical-venv/bin/python -I inventory/lux-act-boundary-membership-check.py",
+    "point_latitude_input": {
+      "path": "inventory/lux-selected-owner-observation.json",
+      "one_latitude_per_original_key": true,
+      "source_commit": "c107b2053841498763d92a38da3924b3fa04b077",
+      "source_path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "source_git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "source_sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "whole_body_consumed_by_original_observer": true
+    },
+    "longitude_formula_source": {
+      "commit": "c107b2053841498763d92a38da3924b3fa04b077",
+      "path": "src/native-grid.js",
+      "git_blob_oid": "add4cef02bb5a790f22a9078fdf9bd51679059d3",
+      "sha256": "3d20777f5896d28192e40428dd34cab89d47873a08bf073a17338c4ff97d43cd",
+      "formula_reused": "(360*x + 180 - 180*size)/size, size=262166",
+      "code_executed_in_this_comparison": false
+    },
+    "comparison_script": {
+      "path": "inventory/lux-act-boundary-membership-check.py",
+      "method": "parse ACT GeoJSON; Shapely covers() for cell-center Points against every ACT canton and the ACT pays polygon; compare counts against retained partitions and SIG-GR per-key membership",
+      "no_observer_or_native_constructor_rerun": true
+    }
+  }
+}

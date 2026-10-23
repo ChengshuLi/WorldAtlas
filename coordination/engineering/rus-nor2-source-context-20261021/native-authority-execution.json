@@ -1,0 +1,19 @@
+{
+  "code_commit": "2c16d5a4b96fe81e86815cb2319822157878b008",
+  "stdout": {
+    "destination": "coordination/engineering/rus-nor2-source-context-20261021/native-authority-001",
+    "resumed": false,
+    "binding": {
+      "phase": "native-authority",
+      "config_sha256": "d9db87436198efd7eb2bd3d82949534d2cc121018f6af5fd1d8bd78467e43abd"
+    },
+    "observation": {
+      "elapsed_seconds": 6.240105167,
+      "qualified_cells": 1,
+      "limits": [
+        "Original source/physical producers are not replayed.",
+        "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+      ]
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "original_owner": 5790,
+  "original_cells": 118,
+  "physical_classes": {
+    "mapped_land_support": 118
+  },
+  "source_member_cells": {
+    "660": 93,
+    "659": 25
+  },
+  "source_members": [
+    "gb:ALB:ADM2:67620474B72762453157270",
+    "gb:ALB:ADM2:67620474B93518338354482"
+  ],
+  "canonical_id": "atlas:multipart:dc5ed8bdd4d5621796cd",
+  "canonical_geometry_type": "MultiPolygon",
+  "canonical_parts": 2,
+  "patch_rows": 30,
+  "nonoverlap_prior_direct397": true,
+  "four_adverse_excluded": true,
+  "source_part_pin": {
+    "path": "data/geography/part-29.json",
+    "commit": "be3b7475e01b9c7a321948acc75c293d649c1457",
+    "mode": "100644",
+    "git_blob_oid": "b2375382c8e41ea4a6d11dd4337f5d73e424a879",
+    "bytes": 12932719,
+    "sha256": "723d16eb63b7f2dcd8260a516eac6571a7ef1eaaf9bff3c926e0c63235b98fd3"
+  },
+  "limits": [
+    "Preparation only; no physical producer, owner observer or native diagnostic rerun.",
+    "Existing whole-target physical result and original source stages are reused under exact pins.",
+    "One complete owner-wide coverage_rows binding is supplied on one sibling; no partial sibling bindings are unioned."
+  ]
+}

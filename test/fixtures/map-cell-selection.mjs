@@ -36,6 +36,7 @@ export function mapCellSelectionFixture(t) {
   const plain = (name, value) => { const raw = write(name, value); return {path: name, bytes: raw.length, sha256: sha(raw)}; };
   const owners = ['A', 'B', 'C'].map((id, i) => ({id, index: i + 1, province_id: i === 2 ? 'Q' : 'P', province_index: i === 2 ? 2 : 1, bounds: [i * 4, -1, i * 4 + 1, 1]}));
   const features = owners.map((o, i) => ({type: 'Feature', id: o.id, properties: {id: o.id, name: 'Source ' + o.id, parent_id: o.province_id, metadata: {reference_year: 2024, source_url: 'https://example.invalid/source'}}, geometry: rectangle(i * 4)}));
+  for(const feature of features){feature.properties.reference_owner='Recorded winner';Object.assign(feature.properties.metadata,{reference_polity:'Stale alias',reference_owner_id:'owner:Q1',reference_owner_evidence:{winner:{owner_id:'owner:Q1',name:'Recorded winner',share:.75}},semantic_review:{status:'open'}});}
   const units = [['c', 'continent', null], ['s', 'subcontinent', 'c'], ['r', 'region', 's'], ['a', 'area', 'r'], ['P', 'province', 'a'], ['Q', 'province', 'a']].map(([id, level, parent_id]) => ({id, name: id, level, parent_id}));
   const afterUnits = structuredClone(units); afterUnits.at(-1).name = 'Current Q';
   write('data/world-index.json', {parts: ['geography/fixture.json']}); write('data/administrative-sources.json', {});

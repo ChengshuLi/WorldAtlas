@@ -117,6 +117,7 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  const codeBase='coordination/engineering/eastern-two-gap-repair-native-20261007/current-consumer-code';
  const codeIndexRaw=ordinary(codeBase+'/index.json','candidate');
  assert.equal(sha(codeIndexRaw),'de4a8f7aac3380fc7c5f1cc06ac9bbf0d170c0921d7ef72d5e46187439a80be9');
+ const codeIndex=JSON.parse(codeIndexRaw);
  for(const pin of codeIndex.parts)read({path:codeBase+'/'+pin.path,bytes:pin.bytes,sha256:pin.sha256});
  const codeParent=path.join(root,'.cache');fs.mkdirSync(codeParent,{recursive:true});assert.equal(fs.realpathSync(codeParent),codeParent);
  const codeTemporary=fs.mkdtempSync(path.join(codeParent,'context-authored-code-'));

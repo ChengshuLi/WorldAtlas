@@ -1,6 +1,7 @@
 // Privileged merge jobs authenticate complete bytes without extracting archives.
 import {inflateRawSync, gunzipSync, crc32} from 'node:zlib';
 import {createHash} from 'node:crypto';
+import {isDeepStrictEqual} from 'node:util';
 import {githubAPI, githubPages} from './issue-claim-contract.mjs';
 import {successfulGeographyJob, WORKFLOW_PATH, QUEUE_WORKFLOW_PATH} from './integration-proof.mjs';
 
@@ -218,9 +219,9 @@ async function downloadRedirect(response, fetchImpl, maximum) {
   } catch { throw Error('Geographic report delivery failed or exceeded bounded archive budget'); }
 }
 
-// Only the originating attempt named by an already authenticated job receipt is
-// inspected. A failed/cancelled code attempt can contain successful geography; its
-// actual unique geography job and all required steps must still be successful.
+// Authenticate the exact originating attempt and its unique successful job.
+// Queue aggregate/step projections do not establish producer readiness; the job
+// must be completed/successful even when the enclosing attempt failed/cancelled.
 async function readGeographyOriginJob({api, repo, number, source}) {
   const route = `/repos/${repo}/actions/runs/${source.run_id}/attempts/${source.run_attempt}`;
   const run = await api(route);
@@ -229,7 +230,7 @@ async function readGeographyOriginJob({api, repo, number, source}) {
   need(run.id === source.run_id && run.run_attempt === source.run_attempt && run.head_sha === workflowHead &&
     run.event === (queue ? 'workflow_dispatch' : 'pull_request') && run.path === (queue ? QUEUE_WORKFLOW_PATH : WORKFLOW_PATH) &&
     run.repository?.full_name === repo && run.head_repository?.full_name === repo &&
-    (queue ? ['in_progress', 'completed'].includes(run.status) : run.status === 'completed') &&
+    (queue || run.status === 'completed') &&
     (queue || Array.isArray(run.pull_requests) && (!run.pull_requests.length ||
       run.pull_requests.some(pr => pr.number === number && pr.head?.sha === source.head))),
     'Original geographic run identity or state changed');
@@ -265,7 +266,7 @@ export async function validateGeographyOrigin(options) {
 
 export async function loadGeographicReport({api, repo, runId, artifactName, expectedHash, source, fresh, retainedArchive, token, fetchImpl = fetch, onRequest = () => {}}) {
   need(/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') && /^[1-9]\d*$/.test(String(runId)) &&
-    hash(expectedHash) && token && (source || fresh), 'Missing trusted geographic artifact outputs');
+    hash(expectedHash) && (token || !fresh && typeof retainedArchive === 'function') && (source || fresh), 'Missing trusted geographic artifact outputs');
   if (fresh) {
     const originAttempt = Number(artifactName?.split('-').at(-1));
     need(!source && positive(fresh.run_attempt) && positive(fresh.artifact_id) &&
@@ -302,6 +303,7 @@ export async function loadGeographicReport({api, repo, runId, artifactName, expe
     }
   }
   if (bytes == null) {
+    need(token, 'Credential-free checkpoint requires its exact retained geographic archive');
     // The fixed API host receives credentials; exact-ID signed delivery does
     // not. Permission, expiry and transport errors propagate without guessing
     // whether a missing remote object means access was denied.
@@ -339,16 +341,29 @@ export function checkGeographicReport(geography, baseline, candidate, codeCommit
       proof.science_reexecuted === false && proof.source_approval === false && proof.published === false,
       'Unchanged geography applicability does not bind actual executing code and data');
   }
-  const nativePass = geography.status === 'no-new-native-loss' && geography.validation_scope === 'selected-native-map-cells'
-    && geography.selected_native_report?.status === 'no-new-native-loss'
-    && geography.selected_native_report.method === 'selected-native-owner-conservation-v1'
-    && geography.selected_native_report.candidate_code_executed === false
-    && geography.selected_native_report.lost_or_reassigned_cells === 0
-    && Array.isArray(geography.selected_native_report.intervals) && geography.selected_native_report.intervals.length === 0;
-  const ordinaryPass = nativePass || ['not-applicable', 'no-footprint-change', 'no-new-regression'].includes(geography.status);
+  const native = geography.selected_native_report;
+  const selectedNative = Object.hasOwn(geography, 'selected_native_report') || geography.validation_scope === 'selected-native-map-cells';
+  const finalProfile = native?.candidate_selection?.version === 2;
+  const bank = native?.candidate_selection?.prepared_bank, scope = native?.native_row_scope;
+  const unchangedFinal = codeCommit !== baseline && finalProfile && bank && typeof bank.path === 'string' && bank.path.length > 0
+    && positive(bank.bytes) && hash(bank.sha256)
+    && isDeepStrictEqual(native.baseline_selection, native.candidate_selection)
+    && isDeepStrictEqual(native.checkpoint_custody?.accepted_bank, bank) && isDeepStrictEqual(native.checkpoint_custody?.candidate_bank, bank)
+    && scope?.proof === 'complete-accepted-final-bank-and-qualified-new-intervals' && scope.representation_migration === false
+    && Array.isArray(scope.changed_rows) && scope.changed_rows.length === 0 && scope.added_cells === 0
+    && positive(scope.compared_rows) && native.affected_rows === 0;
+  const nativePass = (geography.status === 'no-new-native-loss' || geography.status === 'no-footprint-change' && unchangedFinal)
+    && geography.validation_scope === 'selected-native-map-cells' && geography.regressions === 0
+    && native?.status === 'no-new-native-loss' && native.method === 'selected-native-owner-conservation-v1'
+    && native.candidate_code_executed === (finalProfile && codeCommit !== baseline)
+    && (!finalProfile || native.candidate_selection.kind === 'selected-final-native-bank-v2')
+    && native.lost_or_reassigned_cells === 0 && Array.isArray(native.intervals) && native.intervals.length === 0;
+  const ordinaryPass = ['not-applicable', 'no-footprint-change', 'no-new-regression'].includes(geography.status);
   const waterPass = geography.status === 'regressions-found' &&
     geography.adjudication?.status === 'all-findings-supported-and-reviewed' &&
     geography.adjudication.unresolved_findings === 0;
-  need(ordinaryPass || waterPass, 'Combined geographic findings remain unresolved');
+  // A selected-native result cannot use generic success or water adjudication
+  // to evade its own conservation and actual-execution checks.
+  need(selectedNative ? nativePass : ordinaryPass || waterPass, 'Combined geographic findings remain unresolved');
   return waterPass;
 }

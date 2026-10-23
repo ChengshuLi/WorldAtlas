@@ -5,7 +5,7 @@ import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {isDeepStrictEqual as same} from 'node:util';
 import {assertReferenceOnlyFeatureChange,assertReferenceOnlyLocationChange,projectReferenceOwners,
-  originalNativeReference,scientificNativeSelection,validateReferenceMetadataHeader,validateMetadataRelationships} from '../src/reference-metadata.js';
+  originalNativeReference,scientificNativeSelection,validateReferenceMetadataHeader,validateMetadataRelationships,isReferenceAliasReceipt} from '../src/reference-metadata.js';
 
 const sha = raw => createHash('sha256').update(raw).digest('hex');
 const need = (value, message) => { if (!value) throw Error(message); };
@@ -41,6 +41,8 @@ function reader(read) {
   };
 }
 
+export {reader as referenceMetadataReader};
+
 function unitMap(rows) {
   need(Array.isArray(rows) && rows.length > 0 && rows.every(row => typeof row.id === 'string'),
     'Complete reference hierarchy required');
@@ -75,7 +77,7 @@ function groupChanges(before, after) {
     .map(id => ({id, before: before.get(id) ?? null, after: after.get(id) ?? null})));
 }
 
-export function prepareReferenceMetadataProjection({selection, manifest, owners, reference, hierarchy, receipts, source_updates, read}) {
+export function prepareReferenceMetadataProjection({selection, manifest, owners, reference, hierarchy, receipts, source_updates, read, originalSources}) {
   const json = reader(read), before = unitMap(json(hierarchy.before)), after = unitMap(json(hierarchy.after));
   const values = receipts.map(json);
   const projection = {version: 1, kind: 'native-reference-metadata-projection-v1',
@@ -83,7 +85,7 @@ export function prepareReferenceMetadataProjection({selection, manifest, owners,
     original_owner_roster_sha256: manifest.original_assets?.bounds?.sha256, hierarchy, receipts, source_updates,
     location_changes: collapsedLocations(values), group_changes: groupChanges(before, after),
     provinces: [...after.values()].filter(row => row.level === 'province').map(row => row.id).sort()};
-  validateReferenceMetadataProjection({projection, selection, manifest, owners, read});
+  validateReferenceMetadataProjection({projection, selection, manifest, owners, read, originalSources});
   return projection;
 }
 
@@ -153,5 +155,6 @@ export function validateReferenceMetadataProjection({projection, selection, mani
   }
   need(seenChanges.size === byChange.size, 'Reference projection omits an actually changed whole source');
   return {projection, nativeReference: references.native, reference: references.reference,
-    owners: projectedOwners, units: [...finalUnits.values()], sourceUpdates: updates};
+    owners: projectedOwners, units: [...finalUnits.values()], sourceUpdates: updates,
+    releaseReceipts: projection.receipts.filter((pin, i) => !isReferenceAliasReceipt(changes[i]))};
 }

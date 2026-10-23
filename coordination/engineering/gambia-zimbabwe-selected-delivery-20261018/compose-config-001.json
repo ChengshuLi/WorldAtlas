@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "selector": {
+    "commit": "672112d7100c40d70b20ad21568af86e63b28933",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "b204ec393d39c583cd1804b2d0a865f76fbdaf01",
+    "bytes": 1845,
+    "sha256": "d722163c0ca930e089944757d29c4a25a759f5e48f5748e0f05bb8c1f1e55ec6"
+  },
+  "effective_release_id": "geography:gambia-zimbabwe-selected-delivery-20261018",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "01cb8e68c14883664922ac83cf15f3b5cbad5587",
+        "path": "coordination/engineering/gambia-original-repair-20261018/native-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "97f55f4864622cd26811881b10bdbc565e3a6672",
+        "bytes": 742,
+        "sha256": "d9807385f3a13324f6c74c2e6b83b65ba8dc435f08963eb4a45c0e2d1a150edd"
+      },
+      "source_authority": {
+        "commit": "01cb8e68c14883664922ac83cf15f3b5cbad5587",
+        "path": "coordination/engineering/gambia-original-repair-20261018/native-authority-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "4f8c9f79111567d6e175fd3cf98ee4365b6314dd",
+        "bytes": 745,
+        "sha256": "933351777f4745a919582a1c3317da52ff9364a0a889e9d165590429a8fca8ac"
+      },
+      "ledger": {
+        "commit": "01cb8e68c14883664922ac83cf15f3b5cbad5587",
+        "path": "coordination/engineering/gambia-original-repair-20261018/native-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "61da51228a70f73d458b868350e9847a25532535",
+        "bytes": 96171,
+        "sha256": "735b45b42779f1a8bba447930519d1a237eb52d7cb05cdcc6dabf4968ce378d6"
+      },
+      "native_patch": {
+        "bytes": 34717,
+        "commit": "343543defc6b5893f0113ba60432e2111a02a51b",
+        "git_blob_oid": "2840eff62d2f4410ada13e1f716b4b259531d106",
+        "mode": "100644",
+        "path": "coordination/engineering/gambia-original-repair-20261018/native-request-001/native-requested-patch.json",
+        "sha256": "23b508f48d980ce253c4bb75a9bd5a8de6e8e62837612566f2a0fb3957fd5063"
+      }
+    },
+    {
+      "rule_preimage": {
+        "commit": "9f9a54313207c3e2c1b5370d3259440f1a867638",
+        "path": "coordination/engineering/zimbabwe-original-repair-20261018/native-authority-supported-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "7827913337dc3408bd2470427ca5b74372f3ea4a",
+        "bytes": 739,
+        "sha256": "6a515016e10fa64f8bec9f2b429760c828a1c016478b33bfc7e0f11fdc68bfd1"
+      },
+      "source_authority": {
+        "commit": "9f9a54313207c3e2c1b5370d3259440f1a867638",
+        "path": "coordination/engineering/zimbabwe-original-repair-20261018/native-authority-supported-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "0ca43f096063255ffc240caf85c7828738d39a3f",
+        "bytes": 742,
+        "sha256": "4fb20804f06d31547c8063d23bc10b8611664f880e47eeff9519e1767d2b2583"
+      },
+      "ledger": {
+        "commit": "9f9a54313207c3e2c1b5370d3259440f1a867638",
+        "path": "coordination/engineering/zimbabwe-original-repair-20261018/native-authority-supported-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "b74ab65ef6647dd01794ef0faa5c78e9fa7efb55",
+        "bytes": 130243,
+        "sha256": "1247dff89180f53e03bec2f1cbea59f851109b1bfceccc545e7e99a9e76ba9b9"
+      },
+      "native_patch": {
+        "commit": "6d9fa5542b9adcb95fe3be5eb4d20e5fd5de3a8b",
+        "path": "coordination/engineering/zimbabwe-original-repair-20261018/supported-inputs-001/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "700e45909f03cea42efd921c3cb3b11d1d457eaa",
+        "bytes": 41305,
+        "sha256": "10e9603e84593f4f6de29bc32311cf63b89190150a5ddc39d045dfaa2c0f01d3"
+      }
+    }
+  ]
+}

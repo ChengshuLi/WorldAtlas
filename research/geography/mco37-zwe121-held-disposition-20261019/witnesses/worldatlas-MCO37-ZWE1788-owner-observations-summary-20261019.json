@@ -1,0 +1,98 @@
+{
+  "observations": [
+    {
+      "package_id": "gb-MCO-ADM1--repair-evaluation",
+      "data_commit": "3eae98eca8f9840401f23dbe7a34efd4ac763668",
+      "code_commit": "175e6e5a35586be8b8378bddedfe2a67eed7ac6d",
+      "artifact": "/workspace/scratch/127991fc8b8e/package-owner-observations-3eae98e/gb-MCO-ADM1--repair-evaluation.json",
+      "artifact_bytes": 34748,
+      "artifact_sha256": "04b0780ca7f25624fb891d1cdc9f44bf41130a184e5e50bf5cd7ad54591dbac5",
+      "query_count": 37,
+      "original_intervals": 15,
+      "original_owners": 1,
+      "query_sha256": "cda8e367d83c0c0591a9c11a6d4924e86d6e947bf5b92d95c88abdc6bfd4b4dd",
+      "original_intervals_sha256": "7503764eef10e3e846e8db19d73b61fde3161006816b9ea42985260a9ab56e30",
+      "counts": {
+        "base_owner": 0,
+        "accepted_additive_owner": 0,
+        "effective_selected_owner": 0,
+        "existing_product_overlap": 0,
+        "unowned": 37,
+        "owned_to_original_target": 0,
+        "nonzero_wrong_target": 0
+      },
+      "scientific_qualification": false,
+      "whole_consumed_input_count": 36,
+      "whole_consumed_encoded_bytes": 63229706,
+      "execution_code_count": 13,
+      "run": {
+        "command": [
+          "node",
+          "scripts/observe-selected-owners.mjs",
+          "--repo",
+          "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/00ea0af393560806a40a3afe4a73936ad68205d8dfd9001f0807b9334511f129/work",
+          "--commit",
+          "3eae98eca8f9840401f23dbe7a34efd4ac763668",
+          "--package",
+          "gb-MCO-ADM1--repair-evaluation",
+          "--out",
+          "/workspace/scratch/127991fc8b8e/package-owner-observations-3eae98e/gb-MCO-ADM1--repair-evaluation.json"
+        ],
+        "cwd": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/00ea0af393560806a40a3afe4a73936ad68205d8dfd9001f0807b9334511f129/work",
+        "returncode": 0,
+        "elapsed_seconds": 4.627806108001096,
+        "max_rss_kib": 476268
+      }
+    },
+    {
+      "package_id": "gb-ZWE-ADM2--repair-evaluation",
+      "data_commit": "3eae98eca8f9840401f23dbe7a34efd4ac763668",
+      "code_commit": "175e6e5a35586be8b8378bddedfe2a67eed7ac6d",
+      "artifact": "/workspace/scratch/127991fc8b8e/package-owner-observations-3eae98e/gb-ZWE-ADM2--repair-evaluation.json",
+      "artifact_bytes": 758842,
+      "artifact_sha256": "dd5265a53204ee2059a481c4b739b9bf3d232ee7015952bd4262ffd2776c05f8",
+      "query_count": 1788,
+      "original_intervals": 1090,
+      "original_owners": 20,
+      "query_sha256": "d97da91ae1e3721e143a1e7bc7379981d0bf9d73412b3c9d76c84ea97b2916e1",
+      "original_intervals_sha256": "5abc381597d49262416f40ee6795efcfd673811efb6eced2a65ef96d0198f258",
+      "counts": {
+        "base_owner": 0,
+        "accepted_additive_owner": 1667,
+        "effective_selected_owner": 1667,
+        "existing_product_overlap": 0,
+        "unowned": 121,
+        "owned_to_original_target": 1667,
+        "nonzero_wrong_target": 0
+      },
+      "scientific_qualification": false,
+      "whole_consumed_input_count": 44,
+      "whole_consumed_encoded_bytes": 87708358,
+      "execution_code_count": 13,
+      "run": {
+        "command": [
+          "node",
+          "scripts/observe-selected-owners.mjs",
+          "--repo",
+          "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/00ea0af393560806a40a3afe4a73936ad68205d8dfd9001f0807b9334511f129/work",
+          "--commit",
+          "3eae98eca8f9840401f23dbe7a34efd4ac763668",
+          "--package",
+          "gb-ZWE-ADM2--repair-evaluation",
+          "--out",
+          "/workspace/scratch/127991fc8b8e/package-owner-observations-3eae98e/gb-ZWE-ADM2--repair-evaluation.json"
+        ],
+        "cwd": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/00ea0af393560806a40a3afe4a73936ad68205d8dfd9001f0807b9334511f129/work",
+        "returncode": 0,
+        "elapsed_seconds": 5.406445573004021,
+        "max_rss_kib": 470284
+      }
+    }
+  ],
+  "limits": [
+    "Literal ownership/latitude observation only; no ledger body reread, scientific source/physical qualification, repair acceptance or credit.",
+    "Input byte totals are complete consumed body sizes, not network wire bytes.",
+    "No new allocation, author branch change, cleanup or scientific geometry acquisition."
+  ],
+  "initial_launch_note": "The initial MCO shell launch did not execute the observer because optional /usr/bin/time was absent and the preliminary fetch used a wrong relative directory. Corrected the directory and used existing Python timing without installing anything. Actual unchanged observer invocations both passed."
+}

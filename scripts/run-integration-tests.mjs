@@ -33,6 +33,30 @@ const NATIVE_REGRESSION_INPUTS = [
     // The compact evidence-controls wrapper uses synthetic predicates instead.
     '8f6dc184d1a41b634cec4759bb57b3cc04dd980a',
     '6ed6406f9fad4c7c468b06a376346b216cb50db7'
+  ]},
+  {tests:['test/original-repair-exception-controls.test.mjs'],commits:[
+    'cd1886f20f34abdcafe7c327ae0ee768ce5d47ae',
+    'e17dba85347a4a31ccb9ecdaa4c7a20b6b950c8d',
+    '32d819ddc9333ff025584665665c963822dfcead'
+  ]},
+  {tests:['test/held-cell-exception-evidence-controls.test.mjs'],commits:[
+    '427cf5eb2d5004b0b65ffc34bf33d7fbbb6e44bc',
+    'b991e2295c50a64e49d4f92c76c37bd95c869b63',
+    '5b32388df0501b013ac9a3ba97864932db493d59',
+    '252f2aa1e6309b6990985dec73611d6df0e11c70',
+    'f988605570667858062905c04c31231564882d11',
+    '21984e9ec4ec7370bc807e2da23cea2228747698',
+    '07c74ff101d4ab5e679255ed85c402356aa54a42'
+  ]},
+
+  {tests:['test/held-row-contact-reconstruction-controls.test.mjs'],commits:["252f2aa1e6309b6990985dec73611d6df0e11c70","601852e911478b90762edb7b9d80985786f95d43","8c192828cf81a554176efdead967acb9b05ac79e","6a6358d232df09ef4561073f8727b2892d5413ea","e38e3488de52e6ef299157f7dc736398a1b9ca1f","2d1fc6f430e756498908bf2c4e267356a13f5cc7"]},
+  {tests:['test/sierra-leone-physical-review-controls.test.mjs'],commits:[
+    '21984e9ec4ec7370bc807e2da23cea2228747698',
+    'a6da25fcc78819b8e88ec2040a934039aefc5f97',
+    '597f45d79fb84e222637c3390cb93c11377474af',
+    '31ced2c0b64292cbdfeb3bcf7beffeb0410b76be',
+    '5b32388df0501b013ac9a3ba97864932db493d59',
+    '58ae8c238f4b170fdf887a0f0c5b2da1dff97ca4'
   ]}
 ];
 export const NATIVE_REGRESSION_COMMITS = [...new Set(NATIVE_REGRESSION_INPUTS.flatMap(group=>group.commits))];
@@ -69,10 +93,23 @@ function nativeRegressionBodies(files,readFile) {
       }
     }
   }
+  if(has('original-repair-exception-controls'))pins.push(...read('test/fixtures/original-repair-exceptions/historical-input-pins.json').inputs);
+  if(has('held-cell-exception-evidence-controls')){
+    pins.push(...read('test/fixtures/held-cell-exceptions/historical-input-pins.json').inputs);
+  }
+  if(has('sierra-leone-physical-review-controls')){
+    const root='test/fixtures/sle-physical-review/';
+    pins.push(...Object.values(read(root+'input-pins.json').inputs));
+  }
+  if(has('held-row-contact-reconstruction-controls')){
+    const inputs=read('test/fixtures/held-row-contact/input-locators.json');
+    pins.push(...inputs.source_and_evidence_inputs,...inputs.original_extraction_inputs,inputs.helper,inputs.latitudes);
+  }
   return pins;
 }
 export function prepareNativeRegressionInputs(profile,{files,exists=fs.existsSync,readFile=fs.readFileSync,run=spawnSync}={}) {
-  if(profile!=='full'||!exists('scripts/native-ownership/validate-context-input-stage.mjs'))return {applicable:false,fetched:[]};
+  const retainedEvidenceControls=Array.isArray(files)&&files.some(file=>['test/sierra-leone-physical-review-controls.test.mjs','test/original-repair-exception-controls.test.mjs','test/held-cell-exception-evidence-controls.test.mjs','test/held-row-contact-reconstruction-controls.test.mjs'].includes(file))===true;
+  if((profile!=='full'&&!retainedEvidenceControls)||!exists('scripts/native-ownership/validate-context-input-stage.mjs'))return {applicable:false,fetched:[]};
   if(files!==undefined&&(!Array.isArray(files)||!files.length||files.some(name=>typeof name!=='string'||!/^test\/[A-Za-z0-9_.-]+\.test\.mjs$/.test(name)||!exists(name))))
     throw Error('Actual regression file roster required');
   // Unscoped callers retain every remaining regression dependency and their
@@ -190,12 +227,14 @@ const FOCUSED_TEST_FAMILIES = [
   'geographic-(?:checkpoint-products|regression)', 'geography-prefetch',
   'immutable-reader-read', 'installed-runtime-identity', 'map-cell-diagnosis',
   'native-(?:additions-order|checkpoint-consumer|word-store|stream-custody|interval-stream|interval-projection)', 'canonical-value-hash', 'parallel-geography-comparison',
-  'qualification-exclusion-prefilter', 'selected-checkpoint',
+  'selected-native-witness',
+  'qualification-exclusion-prefilter', 'selected-checkpoint', 'final-bank-(?:checkpoint|finalizer)',
   'selected-joint-(?:check|entry|package-boundary)', 'selected-metadata-wiring',
   'source-target-native-diagnostic', 'supported-programs', 'trusted-geography-check',
   'unchanged-selected-geography', 'visible-gap-eligibility',
   'native-(?:authority-entry|diagnostic-entry|witness-authority|regression-inputs)',
-  'physical-source-retention', 'revised-source-native', 'dated-centre-authority', 'full-regression-shards'
+  'physical-source-retention', 'revised-source-native', 'dated-centre-authority', 'full-regression-shards',
+  'sierra-leone-physical-review-controls', 'held-cell-exception-evidence-controls', 'held-row-contact-reconstruction-controls'
 ];
 const focusedTest = new RegExp('^test/(?:' + FOCUSED_TEST_FAMILIES.join('|') + ')\\.test\\.(?:mjs|py)$');
 // This shared fixture has only focused consumers; reuse their ordinary-file

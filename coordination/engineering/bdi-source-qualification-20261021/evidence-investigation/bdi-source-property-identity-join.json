@@ -1,0 +1,2788 @@
+{
+  "version": 1,
+  "kind": "bdi-source-property-identity-join",
+  "package_id": "gb-BDI-ADM2--repair-evaluation",
+  "source_inputs": [
+    {
+      "source_key": "gb:BDI:ADM1",
+      "family_index": 19,
+      "catalogue_record": {
+        "advertised_feature_count": 18,
+        "cohort": "administrative-registry",
+        "feature_count": 18,
+        "key": "gb:BDI:ADM1",
+        "metadata_sha256": "d69136daf1ce79190233e5fe1f4f178d74b2d6e517dd4545766d72d01000b7ba",
+        "original_bytes": 138787,
+        "original_metadata_file": "data/administrative-sources.json",
+        "original_sha256": "2e134d7b93d0c55c490afe45c7ff0a6ca6d78e6e841264d5119420caacdbf32b",
+        "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+        "parts": [
+          {
+            "bytes": 43830,
+            "hash_kind": "file-bytes",
+            "offset": 0,
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BDI-ADM1-000.bin.gz",
+            "sha256": "39eb94814dc7a41afeefb836648d7c971b1caed1c794bfc72b21eb253d00fe43",
+            "uncompressed_bytes": 138787,
+            "uncompressed_sha256": "2e134d7b93d0c55c490afe45c7ff0a6ca6d78e6e841264d5119420caacdbf32b"
+          }
+        ],
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BDI/ADM1/geoBoundaries-BDI-ADM1_simplified.geojson",
+        "recorded_license": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+        "source_represented_year_claim": "2014"
+      },
+      "descriptor": {
+        "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+        "tree": "78f85570b9a542fbb2c01131138ab0e69147cca9",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BDI-ADM1-000.bin.gz",
+        "blob": "53033c106d2b841c040c73a4dfa6359c24a651c8",
+        "compressed_bytes": 43830,
+        "compressed_sha256": "39eb94814dc7a41afeefb836648d7c971b1caed1c794bfc72b21eb253d00fe43",
+        "decoded_bytes": 138787,
+        "decoded_sha256": "2e134d7b93d0c55c490afe45c7ff0a6ca6d78e6e841264d5119420caacdbf32b",
+        "feature_count": 18
+      },
+      "contact_source_indices": [
+        2022,
+        2025,
+        2026,
+        2028,
+        2030,
+        2032,
+        2034,
+        2035,
+        2038
+      ],
+      "contact_feature_ordinals": [
+        1,
+        4,
+        5,
+        7,
+        9,
+        11,
+        13,
+        14,
+        17
+      ],
+      "contact_count": 9,
+      "noncontact_corpus_feature_count": 9
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "family_index": 20,
+      "catalogue_record": {
+        "advertised_feature_count": 119,
+        "cohort": "administrative-registry",
+        "feature_count": 119,
+        "key": "gb:BDI:ADM2",
+        "metadata_sha256": "de2bb9c370b9fbbd6f8d3ef0ed824e1489675fc27fab5a034ade9c90f67164ad",
+        "original_bytes": 350000,
+        "original_metadata_file": "data/administrative-sources.json",
+        "original_sha256": "b90f58bf70724da30e8fd2fc5e89ea68ce2139e88dade8722fd85d20f92b15c2",
+        "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+        "parts": [
+          {
+            "bytes": 85146,
+            "hash_kind": "file-bytes",
+            "offset": 0,
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BDI-ADM2-000.bin.gz",
+            "sha256": "521c5c2318763d957a1b164ca1f41e540965c0f5db06e0974b247a0f3f203c0e",
+            "uncompressed_bytes": 350000,
+            "uncompressed_sha256": "b90f58bf70724da30e8fd2fc5e89ea68ce2139e88dade8722fd85d20f92b15c2"
+          }
+        ],
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BDI/ADM2/geoBoundaries-BDI-ADM2_simplified.geojson",
+        "recorded_license": "Public Domain",
+        "source_represented_year_claim": "2007"
+      },
+      "descriptor": {
+        "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+        "tree": "78f85570b9a542fbb2c01131138ab0e69147cca9",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BDI-ADM2-000.bin.gz",
+        "blob": "2443da0c46ca3884e36a0c8ab5a3dca9678cb332",
+        "compressed_bytes": 85146,
+        "compressed_sha256": "521c5c2318763d957a1b164ca1f41e540965c0f5db06e0974b247a0f3f203c0e",
+        "decoded_bytes": 350000,
+        "decoded_sha256": "b90f58bf70724da30e8fd2fc5e89ea68ce2139e88dade8722fd85d20f92b15c2",
+        "feature_count": 119
+      },
+      "contact_source_indices": [
+        2042,
+        2043,
+        2046,
+        2047,
+        2128,
+        2130,
+        2131,
+        2132,
+        2133,
+        2134,
+        2135,
+        2136,
+        2140,
+        2141,
+        2142,
+        2143,
+        2144,
+        2147,
+        2148,
+        2154,
+        2156
+      ],
+      "contact_feature_ordinals": [
+        3,
+        4,
+        7,
+        8,
+        89,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        101,
+        102,
+        103,
+        104,
+        105,
+        108,
+        109,
+        115,
+        117
+      ],
+      "contact_count": 21,
+      "noncontact_corpus_feature_count": 98
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "family_index": 69,
+      "catalogue_record": {
+        "advertised_feature_count": 26,
+        "cohort": "administrative-registry",
+        "feature_count": 26,
+        "key": "gb:COD:ADM1",
+        "metadata_sha256": "8d35ea720eb2d29e2bda664b5ecbb89ed14fb65d50fb48229f1f3ab5a87afcad",
+        "original_bytes": 1153436,
+        "original_metadata_file": "data/administrative-sources.json",
+        "original_sha256": "bf6096f1c16f2632be9c4d4c0305276024fd5b3f3b9b3e635b2e2018d02f0331",
+        "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+        "parts": [
+          {
+            "bytes": 378900,
+            "hash_kind": "file-bytes",
+            "offset": 0,
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-COD-ADM1-000.bin.gz",
+            "sha256": "a2e524c39c94b065d6ae76ca335730ef716d6378c050f1d11c15a1a40fe8b584",
+            "uncompressed_bytes": 1153436,
+            "uncompressed_sha256": "bf6096f1c16f2632be9c4d4c0305276024fd5b3f3b9b3e635b2e2018d02f0331"
+          }
+        ],
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM1/geoBoundaries-COD-ADM1_simplified.geojson",
+        "recorded_license": "Open Data Commons Open Database License 1.0",
+        "source_represented_year_claim": "2017"
+      },
+      "descriptor": {
+        "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+        "tree": "78f85570b9a542fbb2c01131138ab0e69147cca9",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-COD-ADM1-000.bin.gz",
+        "blob": "9c044aab8159821ba629020dee2e787388d20b52",
+        "compressed_bytes": 378900,
+        "compressed_sha256": "a2e524c39c94b065d6ae76ca335730ef716d6378c050f1d11c15a1a40fe8b584",
+        "decoded_bytes": 1153436,
+        "decoded_sha256": "bf6096f1c16f2632be9c4d4c0305276024fd5b3f3b9b3e635b2e2018d02f0331",
+        "feature_count": 26
+      },
+      "contact_source_indices": [
+        18746
+      ],
+      "contact_feature_ordinals": [
+        19
+      ],
+      "contact_count": 1,
+      "noncontact_corpus_feature_count": 25
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "family_index": 338,
+      "catalogue_record": {
+        "advertised_feature_count": 30,
+        "cohort": "administrative-registry",
+        "feature_count": 30,
+        "key": "gb:TZA:ADM1",
+        "metadata_sha256": "1a7fa9cdb5ac1df4e3e3b196d2fe352cec47c8e29488e86b780a02ef8afbc834",
+        "original_bytes": 426148,
+        "original_metadata_file": "data/administrative-sources.json",
+        "original_sha256": "8b84f3f0a9e6e16322b777a5bba90c8e33c5e93c0dcb03ef1d3f6332036d066f",
+        "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+        "parts": [
+          {
+            "bytes": 131832,
+            "hash_kind": "file-bytes",
+            "offset": 0,
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-TZA-ADM1-000.bin.gz",
+            "sha256": "1594bd12d18f550af5eb9c0c7130d71ce57c400018070ef27b04db61f1a77f13",
+            "uncompressed_bytes": 426148,
+            "uncompressed_sha256": "8b84f3f0a9e6e16322b777a5bba90c8e33c5e93c0dcb03ef1d3f6332036d066f"
+          }
+        ],
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TZA/ADM1/geoBoundaries-TZA-ADM1_simplified.geojson",
+        "recorded_license": "Open Data Commons Open Database License 1.0",
+        "source_represented_year_claim": "2015"
+      },
+      "descriptor": {
+        "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+        "tree": "78f85570b9a542fbb2c01131138ab0e69147cca9",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-TZA-ADM1-000.bin.gz",
+        "blob": "3c5016cc626f36fb17f6fa269b629317efcbe396",
+        "compressed_bytes": 131832,
+        "compressed_sha256": "1594bd12d18f550af5eb9c0c7130d71ce57c400018070ef27b04db61f1a77f13",
+        "decoded_bytes": 426148,
+        "decoded_sha256": "8b84f3f0a9e6e16322b777a5bba90c8e33c5e93c0dcb03ef1d3f6332036d066f",
+        "feature_count": 30
+      },
+      "contact_source_indices": [
+        60195,
+        60207
+      ],
+      "contact_feature_ordinals": [
+        4,
+        16
+      ],
+      "contact_count": 2,
+      "noncontact_corpus_feature_count": 28
+    }
+  ],
+  "roster_and_lineage": {
+    "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "tree": "9954105d964a6239c5721d4909881da7b1f558d4",
+    "roster_blob": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+    "roster_compressed_bytes": 1844315,
+    "roster_compressed_sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa",
+    "roster_decoded_bytes": 13496995,
+    "roster_decoded_sha256": "7fa99cbf064121e0130b66758c212ae22b2a7be5649f2e250e9cda89a9bd595e",
+    "lineage_blob": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+    "lineage_compressed_bytes": 4404456,
+    "lineage_compressed_sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4",
+    "lineage_decoded_bytes": 22336586,
+    "lineage_decoded_sha256": "607372a1af11bebf58c24aa15bdfae1999fafc532bb65ab7d822c0c20b57a435",
+    "all_contact_owner_arrays_match_reverse_lineage": true
+  },
+  "candidate_contacts": [
+    {
+      "source_index": 2022,
+      "source_id": "gb:BDI:ADM1:87207978B16018837471159",
+      "family_index": 19,
+      "ordinal": 1,
+      "roster_name": "Kirundo",
+      "owner_indices": [],
+      "lineage_reverse_owner_indices": [],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Kirundo",
+        "shapeISO": "BI-KI",
+        "shapeID": "87207978B16018837471159",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM1"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2025,
+      "source_id": "gb:BDI:ADM1:87207978B35376687740120",
+      "family_index": 19,
+      "ordinal": 4,
+      "roster_name": "Makamba",
+      "owner_indices": [],
+      "lineage_reverse_owner_indices": [],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Makamba",
+        "shapeISO": "BI-MA",
+        "shapeID": "87207978B35376687740120",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM1"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2026,
+      "source_id": "gb:BDI:ADM1:87207978B60452886876050",
+      "family_index": 19,
+      "ordinal": 5,
+      "roster_name": "Rutana",
+      "owner_indices": [],
+      "lineage_reverse_owner_indices": [],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Rutana",
+        "shapeISO": "BI-RT",
+        "shapeID": "87207978B60452886876050",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM1"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2028,
+      "source_id": "gb:BDI:ADM1:87207978B60812330206497",
+      "family_index": 19,
+      "ordinal": 7,
+      "roster_name": "Cankuzo",
+      "owner_indices": [],
+      "lineage_reverse_owner_indices": [],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Cankuzo",
+        "shapeISO": "BI-CA",
+        "shapeID": "87207978B60812330206497",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM1"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2030,
+      "source_id": "gb:BDI:ADM1:87207978B68487327478732",
+      "family_index": 19,
+      "ordinal": 9,
+      "roster_name": "Cibitoke",
+      "owner_indices": [],
+      "lineage_reverse_owner_indices": [],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Cibitoke",
+        "shapeISO": "BI-CI",
+        "shapeID": "87207978B68487327478732",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM1"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2032,
+      "source_id": "gb:BDI:ADM1:87207978B36636371084075",
+      "family_index": 19,
+      "ordinal": 11,
+      "roster_name": "Bubanza",
+      "owner_indices": [],
+      "lineage_reverse_owner_indices": [],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Bubanza",
+        "shapeISO": "BI-BB",
+        "shapeID": "87207978B36636371084075",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM1"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2034,
+      "source_id": "gb:BDI:ADM1:87207978B39611815861631",
+      "family_index": 19,
+      "ordinal": 13,
+      "roster_name": "Bujumbura Rural",
+      "owner_indices": [],
+      "lineage_reverse_owner_indices": [],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Bujumbura Rural",
+        "shapeISO": "BI-BL",
+        "shapeID": "87207978B39611815861631",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM1"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2035,
+      "source_id": "gb:BDI:ADM1:87207978B47636051590360",
+      "family_index": 19,
+      "ordinal": 14,
+      "roster_name": "Bujumbura Mairie",
+      "owner_indices": [],
+      "lineage_reverse_owner_indices": [],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Bujumbura Mairie",
+        "shapeISO": "BI-BM",
+        "shapeID": "87207978B47636051590360",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM1"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2038,
+      "source_id": "gb:BDI:ADM1:87207978B49849916836933",
+      "family_index": 19,
+      "ordinal": 17,
+      "roster_name": "Rumonge",
+      "owner_indices": [],
+      "lineage_reverse_owner_indices": [],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Rumonge",
+        "shapeISO": "BI-RM",
+        "shapeID": "87207978B49849916836933",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM1"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2042,
+      "source_id": "gb:BDI:ADM2:21766830B31049489476840",
+      "family_index": 20,
+      "ordinal": 3,
+      "roster_name": "Bugarama",
+      "owner_indices": [
+        9019
+      ],
+      "lineage_reverse_owner_indices": [
+        9019
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Bugarama",
+        "shapeISO": "",
+        "shapeID": "21766830B31049489476840",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2043,
+      "source_id": "gb:BDI:ADM2:21766830B32777890626704",
+      "family_index": 20,
+      "ordinal": 4,
+      "roster_name": "Rumonge",
+      "owner_indices": [
+        9021
+      ],
+      "lineage_reverse_owner_indices": [
+        9021
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Rumonge",
+        "shapeISO": "",
+        "shapeID": "21766830B32777890626704",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2046,
+      "source_id": "gb:BDI:ADM2:21766830B36835382033084",
+      "family_index": 20,
+      "ordinal": 7,
+      "roster_name": "Kabezi",
+      "owner_indices": [
+        9028
+      ],
+      "lineage_reverse_owner_indices": [
+        9028
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Kabezi",
+        "shapeISO": "",
+        "shapeID": "21766830B36835382033084",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2047,
+      "source_id": "gb:BDI:ADM2:21766830B14140898215143",
+      "family_index": 20,
+      "ordinal": 8,
+      "roster_name": "Muhuta",
+      "owner_indices": [
+        8990
+      ],
+      "lineage_reverse_owner_indices": [
+        8990
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Muhuta",
+        "shapeISO": "",
+        "shapeID": "21766830B14140898215143",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2128,
+      "source_id": "gb:BDI:ADM2:21766830B12025098844752",
+      "family_index": 20,
+      "ordinal": 89,
+      "roster_name": "Mabayi",
+      "owner_indices": [
+        8987
+      ],
+      "lineage_reverse_owner_indices": [
+        8987
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Mabayi",
+        "shapeISO": "",
+        "shapeID": "21766830B12025098844752",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2130,
+      "source_id": "gb:BDI:ADM2:21766830B51540876931984",
+      "family_index": 20,
+      "ordinal": 91,
+      "roster_name": "Rugombo",
+      "owner_indices": [
+        9047
+      ],
+      "lineage_reverse_owner_indices": [
+        9047
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Rugombo",
+        "shapeISO": "",
+        "shapeID": "21766830B51540876931984",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2131,
+      "source_id": "gb:BDI:ADM2:21766830B2147150443328",
+      "family_index": 20,
+      "ordinal": 92,
+      "roster_name": "Buganda",
+      "owner_indices": [
+        9001
+      ],
+      "lineage_reverse_owner_indices": [
+        9001
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Buganda",
+        "shapeISO": "",
+        "shapeID": "21766830B2147150443328",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2132,
+      "source_id": "gb:BDI:ADM2:21766830B78591112120307",
+      "family_index": 20,
+      "ordinal": 93,
+      "roster_name": "Gihanga",
+      "owner_indices": [
+        9078
+      ],
+      "lineage_reverse_owner_indices": [
+        9078
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Gihanga",
+        "shapeISO": "",
+        "shapeID": "21766830B78591112120307",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2133,
+      "source_id": "gb:BDI:ADM2:21766830B6345718789328",
+      "family_index": 20,
+      "ordinal": 94,
+      "roster_name": "Mutimbuzi",
+      "owner_indices": [
+        9057
+      ],
+      "lineage_reverse_owner_indices": [
+        9057
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Mutimbuzi",
+        "shapeISO": "",
+        "shapeID": "21766830B6345718789328",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2134,
+      "source_id": "gb:BDI:ADM2:21766830B74257208244788",
+      "family_index": 20,
+      "ordinal": 95,
+      "roster_name": "Nyanza-Lac",
+      "owner_indices": [
+        9072
+      ],
+      "lineage_reverse_owner_indices": [
+        9072
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Nyanza-Lac",
+        "shapeISO": "",
+        "shapeID": "21766830B74257208244788",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2135,
+      "source_id": "gb:BDI:ADM2:21766830B71257741300393",
+      "family_index": 20,
+      "ordinal": 96,
+      "roster_name": "Mabanda",
+      "owner_indices": [
+        9067
+      ],
+      "lineage_reverse_owner_indices": [
+        9067
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Mabanda",
+        "shapeISO": "",
+        "shapeID": "21766830B71257741300393",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2136,
+      "source_id": "gb:BDI:ADM2:21766830B38172137244003",
+      "family_index": 20,
+      "ordinal": 97,
+      "roster_name": "Giharo",
+      "owner_indices": [
+        9030
+      ],
+      "lineage_reverse_owner_indices": [
+        9030
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Giharo",
+        "shapeISO": "",
+        "shapeID": "21766830B38172137244003",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2140,
+      "source_id": "gb:BDI:ADM2:21766830B1729082638594",
+      "family_index": 20,
+      "ordinal": 101,
+      "roster_name": "Gisagara",
+      "owner_indices": [
+        8994
+      ],
+      "lineage_reverse_owner_indices": [
+        8994
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Gisagara",
+        "shapeISO": "",
+        "shapeID": "21766830B1729082638594",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2141,
+      "source_id": "gb:BDI:ADM2:21766830B80223800900582",
+      "family_index": 20,
+      "ordinal": 102,
+      "roster_name": "Mishiha",
+      "owner_indices": [
+        9079
+      ],
+      "lineage_reverse_owner_indices": [
+        9079
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Mishiha",
+        "shapeISO": "",
+        "shapeID": "21766830B80223800900582",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2142,
+      "source_id": "gb:BDI:ADM2:21766830B44986812705529",
+      "family_index": 20,
+      "ordinal": 103,
+      "roster_name": "Kigamba",
+      "owner_indices": [
+        9040
+      ],
+      "lineage_reverse_owner_indices": [
+        9040
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Kigamba",
+        "shapeISO": "",
+        "shapeID": "21766830B44986812705529",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2143,
+      "source_id": "gb:BDI:ADM2:21766830B3809417619483",
+      "family_index": 20,
+      "ordinal": 104,
+      "roster_name": "Buhinyuza",
+      "owner_indices": [
+        9029
+      ],
+      "lineage_reverse_owner_indices": [
+        9029
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Buhinyuza",
+        "shapeISO": "",
+        "shapeID": "21766830B3809417619483",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2144,
+      "source_id": "gb:BDI:ADM2:21766830B41528201457160",
+      "family_index": 20,
+      "ordinal": 105,
+      "roster_name": "Muyinga",
+      "owner_indices": [
+        9036
+      ],
+      "lineage_reverse_owner_indices": [
+        9036
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Muyinga",
+        "shapeISO": "",
+        "shapeID": "21766830B41528201457160",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2147,
+      "source_id": "gb:BDI:ADM2:21766830B78190696569930",
+      "family_index": 20,
+      "ordinal": 108,
+      "roster_name": "Busoni",
+      "owner_indices": [
+        9077
+      ],
+      "lineage_reverse_owner_indices": [
+        9077
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Busoni",
+        "shapeISO": "",
+        "shapeID": "21766830B78190696569930",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2148,
+      "source_id": "gb:BDI:ADM2:21766830B53810177315638",
+      "family_index": 20,
+      "ordinal": 109,
+      "roster_name": "Bugabira",
+      "owner_indices": [
+        9050
+      ],
+      "lineage_reverse_owner_indices": [
+        9050
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Bugabira",
+        "shapeISO": "",
+        "shapeID": "21766830B53810177315638",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2154,
+      "source_id": "gb:BDI:ADM2:21766830B84199363749171",
+      "family_index": 20,
+      "ordinal": 115,
+      "roster_name": "Muha",
+      "owner_indices": [
+        9087
+      ],
+      "lineage_reverse_owner_indices": [
+        9087
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Muha",
+        "shapeISO": "",
+        "shapeID": "21766830B84199363749171",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 2156,
+      "source_id": "gb:BDI:ADM2:21766830B87038696970617",
+      "family_index": 20,
+      "ordinal": 117,
+      "roster_name": "Ntahangwa",
+      "owner_indices": [
+        9089
+      ],
+      "lineage_reverse_owner_indices": [
+        9089
+      ],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Ntahangwa",
+        "shapeISO": "",
+        "shapeID": "21766830B87038696970617",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 18746,
+      "source_id": "gb:COD:ADM1:28894549B54646848790483",
+      "family_index": 69,
+      "ordinal": 19,
+      "roster_name": "South Kivu",
+      "owner_indices": [],
+      "lineage_reverse_owner_indices": [],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "South Kivu",
+        "shapeISO": "CD-SK",
+        "shapeID": "28894549B54646848790483",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 60195,
+      "source_id": "gb:TZA:ADM1:36957248B48065738140082",
+      "family_index": 338,
+      "ordinal": 4,
+      "roster_name": "Kagera",
+      "owner_indices": [],
+      "lineage_reverse_owner_indices": [],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Kagera",
+        "shapeISO": "TZ-05",
+        "shapeID": "36957248B48065738140082",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    },
+    {
+      "source_index": 60207,
+      "source_id": "gb:TZA:ADM1:36957248B11692782910073",
+      "family_index": 338,
+      "ordinal": 16,
+      "roster_name": "Kigoma",
+      "owner_indices": [],
+      "lineage_reverse_owner_indices": [],
+      "owner_roster_lineage_match": true,
+      "source_properties": {
+        "shapeName": "Kigoma",
+        "shapeISO": "TZ-08",
+        "shapeID": "36957248B11692782910073",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      },
+      "geometry_status_metadata": "raw-native-supported"
+    }
+  ],
+  "catalogue_corpus_features_not_in_package_contact_vector": [
+    {
+      "source_key": "gb:BDI:ADM1",
+      "ordinal": 0,
+      "properties": {
+        "shapeName": "Gitega",
+        "shapeISO": "BI-GI",
+        "shapeID": "87207978B95213924600823",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM1",
+      "ordinal": 2,
+      "properties": {
+        "shapeName": "Muyinga",
+        "shapeISO": "BI-MY",
+        "shapeID": "87207978B26491438187770",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM1",
+      "ordinal": 3,
+      "properties": {
+        "shapeName": "Ngozi",
+        "shapeISO": "BI-NG",
+        "shapeID": "87207978B61642532121810",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM1",
+      "ordinal": 6,
+      "properties": {
+        "shapeName": "Ruyigi",
+        "shapeISO": "BI-RY",
+        "shapeID": "87207978B85164203636576",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM1",
+      "ordinal": 8,
+      "properties": {
+        "shapeName": "Karuzi",
+        "shapeISO": "BI-KR",
+        "shapeID": "87207978B19413274687877",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM1",
+      "ordinal": 10,
+      "properties": {
+        "shapeName": "Kayanza",
+        "shapeISO": "BI-KY",
+        "shapeID": "87207978B90339845453995",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM1",
+      "ordinal": 12,
+      "properties": {
+        "shapeName": "Muramvya",
+        "shapeISO": "BI-MU",
+        "shapeID": "87207978B78895752231307",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM1",
+      "ordinal": 15,
+      "properties": {
+        "shapeName": "Bururi",
+        "shapeISO": "BI-BR",
+        "shapeID": "87207978B31722215463268",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM1",
+      "ordinal": 16,
+      "properties": {
+        "shapeName": "Mwaro",
+        "shapeISO": "BI-MW",
+        "shapeID": "87207978B17615748265547",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 0,
+      "properties": {
+        "shapeName": "Ryansoro",
+        "shapeISO": "",
+        "shapeID": "21766830B51581455705264",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 1,
+      "properties": {
+        "shapeName": "Ndava",
+        "shapeISO": "",
+        "shapeID": "21766830B24037016071048",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 2,
+      "properties": {
+        "shapeName": "Buyengero",
+        "shapeISO": "",
+        "shapeID": "21766830B72694279365930",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 5,
+      "properties": {
+        "shapeName": "Burambi",
+        "shapeISO": "",
+        "shapeID": "21766830B13270332643198",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 6,
+      "properties": {
+        "shapeName": "Kanyosha1",
+        "shapeISO": "",
+        "shapeID": "21766830B91002704780807",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 9,
+      "properties": {
+        "shapeName": "Mukike",
+        "shapeISO": "",
+        "shapeID": "21766830B24780978451442",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 10,
+      "properties": {
+        "shapeName": "Mutambu",
+        "shapeISO": "",
+        "shapeID": "21766830B26172674635426",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 11,
+      "properties": {
+        "shapeName": "Nyabiraba",
+        "shapeISO": "",
+        "shapeID": "21766830B65855218165696",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 12,
+      "properties": {
+        "shapeName": "Bururi",
+        "shapeISO": "",
+        "shapeID": "21766830B40262547233983",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 13,
+      "properties": {
+        "shapeName": "Vugizo",
+        "shapeISO": "",
+        "shapeID": "21766830B72373703869549",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 14,
+      "properties": {
+        "shapeName": "Vyanda",
+        "shapeISO": "",
+        "shapeID": "21766830B58261819569057",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 15,
+      "properties": {
+        "shapeName": "Rusaka",
+        "shapeISO": "",
+        "shapeID": "21766830B4360406366219",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 16,
+      "properties": {
+        "shapeName": "Mugamba",
+        "shapeISO": "",
+        "shapeID": "21766830B94080264403798",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 17,
+      "properties": {
+        "shapeName": "Songa",
+        "shapeISO": "",
+        "shapeID": "21766830B2637956321101",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 18,
+      "properties": {
+        "shapeName": "Mugongoman",
+        "shapeISO": "",
+        "shapeID": "21766830B4857646374703",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 19,
+      "properties": {
+        "shapeName": "Gisozi",
+        "shapeISO": "",
+        "shapeID": "21766830B19333977175167",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 20,
+      "properties": {
+        "shapeName": "Bisoro",
+        "shapeISO": "",
+        "shapeID": "21766830B89840065497772",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 21,
+      "properties": {
+        "shapeName": "Matana",
+        "shapeISO": "",
+        "shapeID": "21766830B18921295675400",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 22,
+      "properties": {
+        "shapeName": "Kayokwe",
+        "shapeISO": "",
+        "shapeID": "21766830B55907977289604",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 23,
+      "properties": {
+        "shapeName": "Mpanda",
+        "shapeISO": "",
+        "shapeID": "21766830B27994781295310",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 24,
+      "properties": {
+        "shapeName": "Murwi",
+        "shapeISO": "",
+        "shapeID": "21766830B66237815735217",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 25,
+      "properties": {
+        "shapeName": "Bubanza",
+        "shapeISO": "",
+        "shapeID": "21766830B70249907645493",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 26,
+      "properties": {
+        "shapeName": "Rango",
+        "shapeISO": "",
+        "shapeID": "21766830B52252554978419",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 27,
+      "properties": {
+        "shapeName": "Bukeye",
+        "shapeISO": "",
+        "shapeID": "21766830B89600323039153",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 28,
+      "properties": {
+        "shapeName": "Muramvya",
+        "shapeISO": "",
+        "shapeID": "21766830B75311935252649",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 29,
+      "properties": {
+        "shapeName": "Isale",
+        "shapeISO": "",
+        "shapeID": "21766830B17268150669588",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 30,
+      "properties": {
+        "shapeName": "Rugazi",
+        "shapeISO": "",
+        "shapeID": "21766830B29868880431968",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 31,
+      "properties": {
+        "shapeName": "Mubimbi",
+        "shapeISO": "",
+        "shapeID": "21766830B38784521668340",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 32,
+      "properties": {
+        "shapeName": "Rutegama",
+        "shapeISO": "",
+        "shapeID": "21766830B72733606015225",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 33,
+      "properties": {
+        "shapeName": "Kiganda",
+        "shapeISO": "",
+        "shapeID": "21766830B86275018260755",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 34,
+      "properties": {
+        "shapeName": "Mbuye",
+        "shapeISO": "",
+        "shapeID": "21766830B36103898428570",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 35,
+      "properties": {
+        "shapeName": "Gahombo",
+        "shapeISO": "",
+        "shapeID": "21766830B38836808291040",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 36,
+      "properties": {
+        "shapeName": "Gatara",
+        "shapeISO": "",
+        "shapeID": "21766830B25707783862584",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 37,
+      "properties": {
+        "shapeName": "Butaganzwa",
+        "shapeISO": "",
+        "shapeID": "21766830B87758575998638",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 38,
+      "properties": {
+        "shapeName": "Kayanza",
+        "shapeISO": "",
+        "shapeID": "21766830B84106347559317",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 39,
+      "properties": {
+        "shapeName": "Bugendana",
+        "shapeISO": "",
+        "shapeID": "21766830B71062038912102",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 40,
+      "properties": {
+        "shapeName": "Musongati",
+        "shapeISO": "",
+        "shapeID": "21766830B89324425383518",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 41,
+      "properties": {
+        "shapeName": "Rutana",
+        "shapeISO": "",
+        "shapeID": "21766830B95746888860763",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 42,
+      "properties": {
+        "shapeName": "Gitanga",
+        "shapeISO": "",
+        "shapeID": "21766830B87895722039818",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 43,
+      "properties": {
+        "shapeName": "Makamba",
+        "shapeISO": "",
+        "shapeID": "21766830B66939921424101",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 44,
+      "properties": {
+        "shapeName": "Rutovu",
+        "shapeISO": "",
+        "shapeID": "21766830B25905143515438",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 45,
+      "properties": {
+        "shapeName": "Buraza",
+        "shapeISO": "",
+        "shapeID": "21766830B3303123993236",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 46,
+      "properties": {
+        "shapeName": "Nyanrusang",
+        "shapeISO": "",
+        "shapeID": "21766830B73562224956549",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 47,
+      "properties": {
+        "shapeName": "Gishubi",
+        "shapeISO": "",
+        "shapeID": "21766830B32665034860455",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 48,
+      "properties": {
+        "shapeName": "Nyabihanga",
+        "shapeISO": "",
+        "shapeID": "21766830B17486429962760",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 49,
+      "properties": {
+        "shapeName": "Giheta",
+        "shapeISO": "",
+        "shapeID": "21766830B76485672774701",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 50,
+      "properties": {
+        "shapeName": "Itaba",
+        "shapeISO": "",
+        "shapeID": "21766830B81399712036677",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 51,
+      "properties": {
+        "shapeName": "Bukirasazi",
+        "shapeISO": "",
+        "shapeID": "21766830B80629459024639",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 52,
+      "properties": {
+        "shapeName": "Gitega",
+        "shapeISO": "",
+        "shapeID": "21766830B69591063381574",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 53,
+      "properties": {
+        "shapeName": "Makebuko",
+        "shapeISO": "",
+        "shapeID": "21766830B15811078155518",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 54,
+      "properties": {
+        "shapeName": "Butaganzwa",
+        "shapeISO": "",
+        "shapeID": "21766830B11414555561270",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 55,
+      "properties": {
+        "shapeName": "Mpinga-Kay",
+        "shapeISO": "",
+        "shapeID": "21766830B77564167498805",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 56,
+      "properties": {
+        "shapeName": "Nyabitsind",
+        "shapeISO": "",
+        "shapeID": "21766830B24825002042526",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 57,
+      "properties": {
+        "shapeName": "Ruyigi",
+        "shapeISO": "",
+        "shapeID": "21766830B17506602240665",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 58,
+      "properties": {
+        "shapeName": "Shombo",
+        "shapeISO": "",
+        "shapeID": "21766830B50673772074896",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 59,
+      "properties": {
+        "shapeName": "Butezi",
+        "shapeISO": "",
+        "shapeID": "21766830B26044748371423",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 60,
+      "properties": {
+        "shapeName": "Nyabikere",
+        "shapeISO": "",
+        "shapeID": "21766830B35176009375128",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 61,
+      "properties": {
+        "shapeName": "Bweru",
+        "shapeISO": "",
+        "shapeID": "21766830B39870041079987",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 62,
+      "properties": {
+        "shapeName": "Gitaramuka",
+        "shapeISO": "",
+        "shapeID": "21766830B2211499884350",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 63,
+      "properties": {
+        "shapeName": "Gashikanwa",
+        "shapeISO": "",
+        "shapeID": "21766830B95738875058381",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 64,
+      "properties": {
+        "shapeName": "Mutaho",
+        "shapeISO": "",
+        "shapeID": "21766830B29011409096617",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 65,
+      "properties": {
+        "shapeName": "Muhanga",
+        "shapeISO": "",
+        "shapeID": "21766830B24961695434412",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 66,
+      "properties": {
+        "shapeName": "Ngozi",
+        "shapeISO": "",
+        "shapeID": "21766830B35301506436742",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 67,
+      "properties": {
+        "shapeName": "Bugenyuzi",
+        "shapeISO": "",
+        "shapeID": "21766830B66626516446695",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 68,
+      "properties": {
+        "shapeName": "Gihogazi",
+        "shapeISO": "",
+        "shapeID": "21766830B47881609362439",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 69,
+      "properties": {
+        "shapeName": "Ruhororo",
+        "shapeISO": "",
+        "shapeID": "21766830B83078145904206",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 70,
+      "properties": {
+        "shapeName": "Tangara",
+        "shapeISO": "",
+        "shapeID": "21766830B4667325104587",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 71,
+      "properties": {
+        "shapeName": "Vumbi",
+        "shapeISO": "",
+        "shapeID": "21766830B60116589238707",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 72,
+      "properties": {
+        "shapeName": "Kiremba",
+        "shapeISO": "",
+        "shapeID": "21766830B44237759334809",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 73,
+      "properties": {
+        "shapeName": "Kirundo",
+        "shapeISO": "",
+        "shapeID": "21766830B26549611972725",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 74,
+      "properties": {
+        "shapeName": "Cankuzo",
+        "shapeISO": "",
+        "shapeID": "21766830B23756713917278",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 75,
+      "properties": {
+        "shapeName": "Mutumba",
+        "shapeISO": "",
+        "shapeID": "21766830B82901968055666",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 76,
+      "properties": {
+        "shapeName": "Buhiga",
+        "shapeISO": "",
+        "shapeID": "21766830B23511682723630",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 77,
+      "properties": {
+        "shapeName": "Mwakiro",
+        "shapeISO": "",
+        "shapeID": "21766830B10181595189520",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 78,
+      "properties": {
+        "shapeName": "Gasorwe",
+        "shapeISO": "",
+        "shapeID": "21766830B82611116745094",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 79,
+      "properties": {
+        "shapeName": "Gashoho",
+        "shapeISO": "",
+        "shapeID": "21766830B49899566949034",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 80,
+      "properties": {
+        "shapeName": "Gitobe",
+        "shapeISO": "",
+        "shapeID": "21766830B58356129382648",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 81,
+      "properties": {
+        "shapeName": "Bwambarang",
+        "shapeISO": "",
+        "shapeID": "21766830B10882929904233",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 82,
+      "properties": {
+        "shapeName": "Ntega",
+        "shapeISO": "",
+        "shapeID": "21766830B46224156448041",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 83,
+      "properties": {
+        "shapeName": "Marangara",
+        "shapeISO": "",
+        "shapeID": "21766830B34593389282909",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 84,
+      "properties": {
+        "shapeName": "Nyamurenza",
+        "shapeISO": "",
+        "shapeID": "21766830B14713025325915",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 85,
+      "properties": {
+        "shapeName": "Mwumba",
+        "shapeISO": "",
+        "shapeID": "21766830B13058774962077",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 86,
+      "properties": {
+        "shapeName": "Busiga",
+        "shapeISO": "",
+        "shapeID": "21766830B1882461017579",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 87,
+      "properties": {
+        "shapeName": "Kabarore",
+        "shapeISO": "",
+        "shapeID": "21766830B63780958565723",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 88,
+      "properties": {
+        "shapeName": "Bukinanyan",
+        "shapeISO": "",
+        "shapeID": "21766830B75549003528399",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 90,
+      "properties": {
+        "shapeName": "Mugina",
+        "shapeISO": "",
+        "shapeID": "21766830B421358417112",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 98,
+      "properties": {
+        "shapeName": "Kinyinya",
+        "shapeISO": "",
+        "shapeID": "21766830B54937037916307",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 99,
+      "properties": {
+        "shapeName": "Gisuru",
+        "shapeISO": "",
+        "shapeID": "21766830B39450952647031",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 100,
+      "properties": {
+        "shapeName": "Cendajuru",
+        "shapeISO": "",
+        "shapeID": "21766830B5675183686685",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 106,
+      "properties": {
+        "shapeName": "Butihinda",
+        "shapeISO": "",
+        "shapeID": "21766830B20307269846045",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 107,
+      "properties": {
+        "shapeName": "Giteranyi",
+        "shapeISO": "",
+        "shapeID": "21766830B83765633898760",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 110,
+      "properties": {
+        "shapeName": "Kayogoro",
+        "shapeISO": "",
+        "shapeID": "21766830B93103585159294",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 111,
+      "properties": {
+        "shapeName": "Bukemba",
+        "shapeISO": "",
+        "shapeID": "21766830B33206260721673",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 112,
+      "properties": {
+        "shapeName": "Matongo",
+        "shapeISO": "",
+        "shapeID": "21766830B70902227945627",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 113,
+      "properties": {
+        "shapeName": "Muruta",
+        "shapeISO": "",
+        "shapeID": "21766830B99657937177591",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 114,
+      "properties": {
+        "shapeName": "Musigati",
+        "shapeISO": "",
+        "shapeID": "21766830B9951429704486",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 116,
+      "properties": {
+        "shapeName": "Mukaza",
+        "shapeISO": "",
+        "shapeID": "21766830B10562197966638",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "ordinal": 118,
+      "properties": {
+        "shapeName": "Kibago",
+        "shapeISO": "",
+        "shapeID": "21766830B23200126988104",
+        "shapeGroup": "BDI",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 0,
+      "properties": {
+        "shapeName": "Upper Uele",
+        "shapeISO": "CD-HU",
+        "shapeID": "28894549B55881681467015",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 1,
+      "properties": {
+        "shapeName": "Ituri",
+        "shapeISO": "CD-IT",
+        "shapeID": "28894549B71118016098951",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 2,
+      "properties": {
+        "shapeName": "Tshopo",
+        "shapeISO": "CD-TO",
+        "shapeID": "28894549B99726016901645",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 3,
+      "properties": {
+        "shapeName": "Lower Uele",
+        "shapeISO": "CD-BU",
+        "shapeID": "28894549B47695765788779",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 4,
+      "properties": {
+        "shapeName": "Mongala",
+        "shapeISO": "CD-MO",
+        "shapeID": "28894549B51646896581942",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 5,
+      "properties": {
+        "shapeName": "Nord-Ubangi",
+        "shapeISO": "CD-NU",
+        "shapeID": "28894549B30663222433478",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 6,
+      "properties": {
+        "shapeName": "Tshuapa",
+        "shapeISO": "CD-TU",
+        "shapeID": "28894549B79800095019512",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 7,
+      "properties": {
+        "shapeName": "Équateur",
+        "shapeISO": "CD-EQ",
+        "shapeID": "28894549B37294008176905",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 8,
+      "properties": {
+        "shapeName": "Haut-Katanga",
+        "shapeISO": "CD-HK",
+        "shapeID": "28894549B50925261891635",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 9,
+      "properties": {
+        "shapeName": "Haut-Lomami",
+        "shapeISO": "CD-HL",
+        "shapeID": "28894549B30623489313038",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 10,
+      "properties": {
+        "shapeName": "Kongo-Central",
+        "shapeISO": "CD-BC",
+        "shapeID": "28894549B38138050967839",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 11,
+      "properties": {
+        "shapeName": "Kwango",
+        "shapeISO": "CD-KG",
+        "shapeID": "28894549B46890622863620",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 12,
+      "properties": {
+        "shapeName": "Sankuru",
+        "shapeISO": "CD-SA",
+        "shapeID": "28894549B87845660721216",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 13,
+      "properties": {
+        "shapeName": "Sud-Ubangi",
+        "shapeISO": "CD-SU",
+        "shapeID": "28894549B79448475719999",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 14,
+      "properties": {
+        "shapeName": "Tanganyika",
+        "shapeISO": "CD-TA",
+        "shapeID": "28894549B79924508589254",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 15,
+      "properties": {
+        "shapeName": "Kasai",
+        "shapeISO": "CD-KS",
+        "shapeID": "28894549B67590087528803",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 16,
+      "properties": {
+        "shapeName": "Kasai-Oriental",
+        "shapeISO": "CD-KE",
+        "shapeID": "28894549B87743923989415",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 17,
+      "properties": {
+        "shapeName": "Maniema",
+        "shapeISO": "CD-MA",
+        "shapeID": "28894549B38684068732321",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 18,
+      "properties": {
+        "shapeName": "North Kivu",
+        "shapeISO": "CD-NK",
+        "shapeID": "28894549B19306184040235",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 20,
+      "properties": {
+        "shapeName": "Central Kasai",
+        "shapeISO": "CD-KC",
+        "shapeID": "28894549B61915221715888",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 21,
+      "properties": {
+        "shapeName": "Lomami",
+        "shapeISO": "CD-LO",
+        "shapeID": "28894549B21546057795066",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 22,
+      "properties": {
+        "shapeName": "Lualaba",
+        "shapeISO": "CD-LU",
+        "shapeID": "28894549B83017556697567",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 23,
+      "properties": {
+        "shapeName": "Kinshasa",
+        "shapeISO": "CD-KN",
+        "shapeID": "28894549B68389240291046",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 24,
+      "properties": {
+        "shapeName": "Kwilu",
+        "shapeISO": "CD-KL",
+        "shapeID": "28894549B48772399836497",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "ordinal": 25,
+      "properties": {
+        "shapeName": "Mai-Ndombe",
+        "shapeISO": "CD-MN",
+        "shapeID": "28894549B55201873792787",
+        "shapeGroup": "COD",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 0,
+      "properties": {
+        "shapeName": "Kilimanjaro",
+        "shapeISO": "TZ-09",
+        "shapeID": "36957248B55328686942733",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 1,
+      "properties": {
+        "shapeName": "Mara",
+        "shapeISO": "TZ-13",
+        "shapeID": "36957248B94562559517692",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 2,
+      "properties": {
+        "shapeName": "Manyara",
+        "shapeISO": "TZ-26",
+        "shapeID": "36957248B99133684808243",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 3,
+      "properties": {
+        "shapeName": "Arusha",
+        "shapeISO": "TZ-01",
+        "shapeID": "36957248B12876867554617",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 5,
+      "properties": {
+        "shapeName": "Mbeya",
+        "shapeISO": "TZ-14",
+        "shapeID": "36957248B75876472342648",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 6,
+      "properties": {
+        "shapeName": "Singida",
+        "shapeISO": "TZ-23",
+        "shapeID": "36957248B4897898165843",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 7,
+      "properties": {
+        "shapeName": "Mtwara",
+        "shapeISO": "TZ-17",
+        "shapeID": "36957248B12364491601158",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 8,
+      "properties": {
+        "shapeName": "Iringa",
+        "shapeISO": "TZ-04",
+        "shapeID": "36957248B77241623821364",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 9,
+      "properties": {
+        "shapeName": "Dar es Salaam",
+        "shapeISO": "TZ-02",
+        "shapeID": "36957248B2633782293100",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 10,
+      "properties": {
+        "shapeName": "Lindi",
+        "shapeISO": "TZ-12",
+        "shapeID": "36957248B69769580879919",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 11,
+      "properties": {
+        "shapeName": "Tabora",
+        "shapeISO": "TZ-24",
+        "shapeID": "36957248B64143865471040",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 12,
+      "properties": {
+        "shapeName": "Pwani",
+        "shapeISO": "TZ-19",
+        "shapeID": "36957248B83801093286412",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 13,
+      "properties": {
+        "shapeName": "Ruvuma",
+        "shapeISO": "TZ-21",
+        "shapeID": "36957248B86098654739756",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 14,
+      "properties": {
+        "shapeName": "Morogoro",
+        "shapeISO": "TZ-16",
+        "shapeID": "36957248B51202481578817",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 15,
+      "properties": {
+        "shapeName": "Rukwa",
+        "shapeISO": "TZ-20",
+        "shapeID": "36957248B68200678446738",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 17,
+      "properties": {
+        "shapeName": "Tanga",
+        "shapeISO": "TZ-25",
+        "shapeID": "36957248B96174950507772",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 18,
+      "properties": {
+        "shapeName": "Dodoma",
+        "shapeISO": "TZ-03",
+        "shapeID": "36957248B94171853380228",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 19,
+      "properties": {
+        "shapeName": "Zanzibar South & Central",
+        "shapeISO": "TZ-11",
+        "shapeID": "36957248B39816127207897",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 20,
+      "properties": {
+        "shapeName": "North Pemba",
+        "shapeISO": "TZ-06",
+        "shapeID": "36957248B13188202009922",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 21,
+      "properties": {
+        "shapeName": "Zanzibar North",
+        "shapeISO": "TZ-07",
+        "shapeID": "36957248B81638677744414",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 22,
+      "properties": {
+        "shapeName": "Zanzibar Urban/West",
+        "shapeISO": "TZ-15",
+        "shapeID": "36957248B66874645654546",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 23,
+      "properties": {
+        "shapeName": "South Pemba",
+        "shapeISO": "TZ-10",
+        "shapeID": "36957248B25003810903493",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 24,
+      "properties": {
+        "shapeName": "Katavi",
+        "shapeISO": "TZ-28",
+        "shapeID": "36957248B34051677343112",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 25,
+      "properties": {
+        "shapeName": "Njombe",
+        "shapeISO": "TZ-29",
+        "shapeID": "36957248B16645806994912",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 26,
+      "properties": {
+        "shapeName": "Geita",
+        "shapeISO": "TZ-27",
+        "shapeID": "36957248B67527021942185",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 27,
+      "properties": {
+        "shapeName": "Simiyu",
+        "shapeISO": "TZ-30",
+        "shapeID": "36957248B66492463379082",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 28,
+      "properties": {
+        "shapeName": "Mwanza",
+        "shapeISO": "TZ-18",
+        "shapeID": "36957248B97200142584881",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "ordinal": 29,
+      "properties": {
+        "shapeName": "Shinyanga",
+        "shapeISO": "TZ-22",
+        "shapeID": "36957248B79115240070229",
+        "shapeGroup": "TZA",
+        "shapeType": "ADM1"
+      }
+    }
+  ],
+  "summary": {
+    "contact_features": 33,
+    "contact_family_counts": {
+      "19": 9,
+      "20": 21,
+      "69": 1,
+      "338": 2
+    },
+    "direct_owner_tagged_bdi_adm2_features": 21,
+    "ownerless_bdi_adm1_features": 9,
+    "ownerless_cod_adm1_features": 1,
+    "ownerless_tza_adm1_features": 2,
+    "catalogue_corpus_feature_counts": {
+      "gb:BDI:ADM1": 18,
+      "gb:BDI:ADM2": 119,
+      "gb:COD:ADM1": 26,
+      "gb:TZA:ADM1": 30
+    },
+    "catalogue_corpus_noncontact_counts": {
+      "gb:BDI:ADM1": 9,
+      "gb:BDI:ADM2": 98,
+      "gb:COD:ADM1": 25,
+      "gb:TZA:ADM1": 28
+    }
+  },
+  "source_terms_and_vintages": [
+    {
+      "source_key": "gb:BDI:ADM1",
+      "recorded_license": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+      "source_represented_year_claim": "2014",
+      "feature_count": 18,
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BDI/ADM1/geoBoundaries-BDI-ADM1_simplified.geojson",
+      "original_sha256": "2e134d7b93d0c55c490afe45c7ff0a6ca6d78e6e841264d5119420caacdbf32b",
+      "metadata_sha256": "d69136daf1ce79190233e5fe1f4f178d74b2d6e517dd4545766d72d01000b7ba"
+    },
+    {
+      "source_key": "gb:BDI:ADM2",
+      "recorded_license": "Public Domain",
+      "source_represented_year_claim": "2007",
+      "feature_count": 119,
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BDI/ADM2/geoBoundaries-BDI-ADM2_simplified.geojson",
+      "original_sha256": "b90f58bf70724da30e8fd2fc5e89ea68ce2139e88dade8722fd85d20f92b15c2",
+      "metadata_sha256": "de2bb9c370b9fbbd6f8d3ef0ed824e1489675fc27fab5a034ade9c90f67164ad"
+    },
+    {
+      "source_key": "gb:COD:ADM1",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "source_represented_year_claim": "2017",
+      "feature_count": 26,
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM1/geoBoundaries-COD-ADM1_simplified.geojson",
+      "original_sha256": "bf6096f1c16f2632be9c4d4c0305276024fd5b3f3b9b3e635b2e2018d02f0331",
+      "metadata_sha256": "8d35ea720eb2d29e2bda664b5ecbb89ed14fb65d50fb48229f1f3ab5a87afcad"
+    },
+    {
+      "source_key": "gb:TZA:ADM1",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "source_represented_year_claim": "2015",
+      "feature_count": 30,
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TZA/ADM1/geoBoundaries-TZA-ADM1_simplified.geojson",
+      "original_sha256": "8b84f3f0a9e6e16322b777a5bba90c8e33c5e93c0dcb03ef1d3f6332036d066f",
+      "metadata_sha256": "1a7fa9cdb5ac1df4e3e3b196d2fe352cec47c8e29488e86b780a02ef8afbc834"
+    }
+  ],
+  "limits": [
+    "The four complete source payloads were authenticated by the author acquisition record, decompressed, and parsed as JSON. This join accessed only properties members for contact and omitted feature identities; parsing the full JSON materialized geometry objects but no geometry values were read, evaluated, transformed, or published.",
+    "Roster owner arrays and lineage reverse associations are retained index facts and match for all 33 contacts; they do not establish political authority or per-cell causal attribution.",
+    "The 21 direct owner-tagged contacts are BDI ADM2 features. The nine BDI ADM1, one COD ADM1, and two TZA ADM1 contacts have no direct owners in the retained roster/lineage. Their names/source membership do not alone decide territorial authority or competing current-location qualification.",
+    "The listed noncontact raw corpus features are absent from this repair package contact vector; that does not establish that they have no spatial overlap or are irrelevant to complete-source qualification.",
+    "Recorded licenses and represented-year values are catalogue claims, not independent current rights or source-fitness findings. No legal or territorial clearance is inferred."
+  ]
+}
