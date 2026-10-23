@@ -1,6 +1,6 @@
 # Lunda Sul center-conflict slice: 115 original COD keys
 
-This is a bounded evidence-preparation lane within the original `gb-COD-ADM2--repair-evaluation` scope. The parent scope has 3,905 original cells; previous evidence proposals cover 116 Irumu/Kimvula keys and 105 Kinkiizi/Rutshuru keys. This slice contains 115 additional original land keys: 88 Sandoa cells (owner 14464) and 27 Kapanga cells (owner 14492). The remaining 594 cells stay separate and pending. This packet carries no science credit and removes no hold.
+This is a bounded evidence-preparation lane within the original `gb-COD-ADM2--repair-evaluation` scope. The parent scope has 3,905 original cells; previous evidence proposals cover 116 Irumu/Kimvula keys and 105 Kinkiizi/Rutshuru keys. This slice contains 115 additional original land keys: 88 Sandoa cells (owner 14464) and 27 Kapanga cells (owner 14492). At the time this Lunda Sul slice was prepared, 594 cells remained outside its 115-key proposal, pending in separate strata. Subsequent Aru 9-key and Dilolo 93-key proposals are documented separately; the current packet-wide remainder is tracked in the PR body. This packet carries no science credit and removes no hold.
 
 ## Exact evidence bindings
 
