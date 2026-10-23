@@ -422,8 +422,8 @@ node scripts/prepare-delivery-handoff.mjs materialize CONFIG DESTINATION --resum
 
 Its config contains `version: 1`, `recipe_index: {commit, path}` for the saved
 `recipe-index.json`. It authenticates that whole index and the encoded/decoded
-inputs and unique physical placements. Use the normal shared Git import/storage
-window for actual acquisition. The existing exact-object prefetch importer retrieves missing
+inputs and unique physical placements. Retain actual storage/operation sizing
+and exact-byte checks for acquisition. The existing exact-object prefetch importer retrieves missing
 Git bodies once, consulting the existing `gh auth token` login ephemerally only
 when a cold fetch occurs. Tokens are not persisted or printed; warm verification
 needs no login lookup. Tracked source paths are never written. Only declared aliases
