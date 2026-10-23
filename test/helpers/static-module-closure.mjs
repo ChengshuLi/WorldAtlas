@@ -1,5 +1,6 @@
 // Test-fixture discovery only. Parse eager ESM imports without linking/evaluating
-// source; dynamic imports and non-module operands remain explicit fixture roles.
+// source. Static JSON modules are validated leaves; dynamic imports and other
+// non-module operands remain explicit fixture roles.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -27,7 +28,9 @@ if(process.argv[1]&&path.resolve(process.argv[1])===self) {
     const file=path.join(root,name);
     assert(fs.lstatSync(file).isFile()&&fs.realpathSync(file)===file,'Static fixture source must be ordinary');
     seen.add(name);
-    const module=new vm.SourceTextModule(fs.readFileSync(file,'utf8'));
+    const source=fs.readFileSync(file,'utf8');
+    if(name.endsWith('.json')){JSON.parse(source);continue;}
+    const module=new vm.SourceTextModule(source);
     for(const specifier of module.dependencySpecifiers) {
       if(specifier.startsWith('./')||specifier.startsWith('../'))pending.push(path.posix.normalize(path.posix.join(path.posix.dirname(name),specifier)));
       else assert(specifier.startsWith('node:'),'Unsupported external static fixture import: '+specifier);
