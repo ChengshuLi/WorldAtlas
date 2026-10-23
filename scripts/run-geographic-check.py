@@ -317,7 +317,7 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
         report['execution_limits'] = [
             'Candidate checker code executed against distinct baseline and candidate data; authenticated accepted-state input may be read, but no new checkpoint authority is issued.',
             'Authenticated source adjudication remains baseline-only; deliver checker upgrades separately from data corrections that require it.',
-            'Nested child receipts retain their legacy candidate_code_executed=false marker verbatim. That marker is not evidence that candidate checker code was absent; this report binds actual executing code.']
+            'Historical child receipts retain their legacy candidate_code_executed=false marker; final-bank children bind actual execution. Neither format grants accepted-checkpoint issuance under candidate code.']
     if before == after and baseline != candidate:
         with stage_timing('unchanged-selected-inputs'):
             applicability = unchanged_selected_inputs(repo, baseline, candidate, code_commit=code_commit)
@@ -361,6 +361,7 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
         expected_child_software = software if final_profile else False
         if (native.get('method') != 'selected-native-owner-conservation-v1'
                 or native.get('candidate_code_executed') is not expected_child_software
+                or (final_profile and native['candidate_selection'].get('kind') != 'selected-final-native-bank-v2')
                 or native.get('status') not in ['native-regressions-found', 'no-new-native-loss']):
             raise ValueError('Selected map comparison lacks a completed native result')
         report['selected_native_report'] = native
@@ -368,11 +369,27 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
             return {**report, 'status': 'native-regressions-found',
                     'regressions': len(native['intervals']),
                     'limits': ['Existing owner loss/reassignment has no automatic water or political exception. Unsupported native scope requires an explicit migration.']}
-        if native.get('lost_or_reassigned_cells') != 0 or native.get('intervals') != []:
+        if type(native.get('lost_or_reassigned_cells')) is not int or native['lost_or_reassigned_cells'] != 0 or native.get('intervals') != []:
             raise ValueError('Successful native comparison contradicts conservation results')
         if joint is not None and joint.get('checkpoint') is not None:
             report['checkpoint'] = joint['checkpoint']
-        return {**report, 'status':'no-new-native-loss', 'regressions':0,
+        # An identical admitted final bank includes all words AND finished context.
+        # Preserve this existing summary category for older merge readers without
+        # rewriting the child's truthful execution marker or skipping comparison.
+        bank = (native.get('candidate_selection') or {}).get('prepared_bank')
+        custody, scope = native.get('checkpoint_custody') or {}, native.get('native_row_scope') or {}
+        unchanged_final = (software and final_profile and isinstance(bank, dict)
+            and isinstance(bank.get('path'), str) and bool(bank['path'])
+            and type(bank.get('bytes')) is int and bank['bytes'] > 0
+            and isinstance(bank.get('sha256'), str) and re.fullmatch('[a-f0-9]{64}', bank['sha256'])
+            and native.get('baseline_selection') == native.get('candidate_selection')
+            and custody.get('accepted_bank') == bank == custody.get('candidate_bank')
+            and scope.get('proof') == 'complete-accepted-final-bank-and-qualified-new-intervals'
+            and scope.get('representation_migration') is False
+            and scope.get('changed_rows') == [] and type(scope.get('added_cells')) is int and scope['added_cells'] == 0
+            and type(scope.get('compared_rows')) is int and scope['compared_rows'] > 0
+            and type(native.get('affected_rows')) is int and native['affected_rows'] == 0)
+        return {**report, 'status':'no-footprint-change' if unchanged_final else 'no-new-native-loss', 'regressions':0,
                 'validation_scope':'selected-native-map-cells',
                 'limits':['Selected map-cell conservation and source-qualified visible additions were checked. Continuous polygon overlap is outside map-cell repair scope.',
                           'This does not approve a new grid, ownership identity migration or unsupported source methodology.']}
