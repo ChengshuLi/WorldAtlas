@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {execFileSync} from 'node:child_process';
+import {execFileSync, spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {createAcquisition, prefetchSelectedGeography, githubTree} from '../scripts/geography-prefetch.mjs';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
@@ -76,6 +76,140 @@ function fixture() {
   return {directory, origin, destination, baseline, candidate, maps, bodies, batches, git, acquisition, bankFiles, commit, importMetadata, execute,
     close() { fs.rmSync(directory, {recursive: true, force: true}); }};
 }
+
+// Exercise the default subprocess route, including real Git's helper launches.
+// Only the repository URL is redirected inside this selected test installation.
+function relocatedGitFixture(f) {
+  const selected = process.env.PATH.split(path.delimiter).map(p => path.join(p, 'git')).find(p => fs.existsSync(p));
+  const realGit = fs.realpathSync(selected), realHelpers = fs.realpathSync(execFileSync(realGit, ['--exec-path']).toString().trim());
+  const prefix = path.join(f.directory, 'relocated');
+  fs.mkdirSync(path.join(prefix, 'bin'), {recursive: true}); fs.mkdirSync(path.join(prefix, 'libexec', 'git-core'), {recursive: true});
+  const bin = fs.realpathSync(path.join(prefix, 'bin')), helpers = fs.realpathSync(path.join(prefix, 'libexec', 'git-core'));
+  for (const name of fs.readdirSync(realHelpers)) fs.symlinkSync(path.join(realHelpers, name), path.join(helpers, name));
+  const log = path.join(f.directory, 'runtime-launches.jsonl'), executable = path.join(bin, 'git');
+  fs.writeFileSync(executable, `#!${process.execPath}
+import fs from 'node:fs';
+import {spawnSync} from 'node:child_process';
+const args = process.argv.slice(2), env = process.env;
+if (env.GIT_EXEC_PATH !== ${JSON.stringify(helpers)}) throw Error('Selected helper directory was lost');
+if (env.GIT_NO_LAZY_FETCH !== '1' || env.GIT_NO_REPLACE_OBJECTS !== '1'
+  || env.GIT_CONFIG_NOSYSTEM !== '1' || env.GIT_CONFIG_GLOBAL !== '/dev/null'
+  || env.GIT_TERMINAL_PROMPT !== '0' || env.GIT_CONFIG_COUNT !== '3'
+  || env.GIT_CONFIG_KEY_0 !== 'core.hooksPath' || env.GIT_CONFIG_VALUE_0 !== '/dev/null'
+  || env.GIT_CONFIG_KEY_1 !== 'credential.helper' || env.GIT_CONFIG_VALUE_1 !== ''
+  || env.GIT_CONFIG_KEY_2 !== 'http.https://github.com/.extraheader'
+  || env.GIT_CONFIG_VALUE_2 !== ${JSON.stringify('AUTHORIZATION: basic ' + Buffer.from('x-access-token:fixture-secret').toString('base64'))}
+  || ['GIT_DIR','GIT_WORK_TREE','GIT_INDEX_FILE','GIT_OBJECT_DIRECTORY','GIT_ALTERNATE_OBJECT_DIRECTORIES',
+      'GIT_CONFIG_SYSTEM','GIT_CONFIG_PARAMETERS','GIT_CONFIG_KEY_9','GIT_CONFIG_VALUE_9','GIT_TEMPLATE_DIR','GIT_SSH_COMMAND'].some(k => env[k] !== undefined))
+  throw Error('Acquisition environment isolation changed');
+fs.appendFileSync(${JSON.stringify(log)}, JSON.stringify(args) + '\\n');
+const result = spawnSync(${JSON.stringify(realGit)}, args.map(a => a === 'https://github.com/ChengshuLi/WorldAtlas.git' ? ${JSON.stringify(f.origin)} : a),
+  {stdio: 'inherit', env});
+process.exit(result.status ?? 1);
+`, {mode: 0o755});
+  return {bin, helpers, executable, launches: () => fs.existsSync(log) ? fs.readFileSync(log, 'utf8').trim().split('\n').map(JSON.parse) : []};
+}
+
+function withEnvironment(values, action) {
+  const saved = Object.fromEntries(Object.keys(values).map(key => [key, process.env[key]]));
+  for (const [key, value] of Object.entries(values)) if (value === undefined) delete process.env[key]; else process.env[key] = value;
+  return Promise.resolve().then(action).finally(() => {
+    for (const [key, value] of Object.entries(saved)) if (value === undefined) delete process.env[key]; else process.env[key] = value;
+  });
+}
+
+test('default acquisition captures the relocated Git/helper pair while scrubbing unrelated Git overrides', async () => {
+  const f = fixture(), runtime = relocatedGitFixture(f);
+  try {
+    const launcher = path.join(f.directory, 'launcher'), poison = path.join(f.directory, 'unselected-git');
+    fs.mkdirSync(launcher); fs.symlinkSync(runtime.executable, path.join(launcher, 'git'));
+    fs.writeFileSync(poison, '#!/bin/sh\nexit 93\n', {mode: 0o755});
+    await withEnvironment({PATH: launcher + path.delimiter + process.env.PATH, GIT_EXEC_PATH: runtime.helpers,
+      GIT_DIR: '/unrelated', GIT_WORK_TREE: '/unrelated', GIT_INDEX_FILE: '/unrelated', GIT_OBJECT_DIRECTORY: '/unrelated',
+      GIT_ALTERNATE_OBJECT_DIRECTORIES: '/unrelated', GIT_CONFIG_SYSTEM: '/unrelated', GIT_CONFIG_GLOBAL: '/unrelated',
+      GIT_CONFIG_PARAMETERS: 'untrusted', GIT_CONFIG_COUNT: '10', GIT_CONFIG_KEY_9: 'credential.helper', GIT_CONFIG_VALUE_9: 'untrusted',
+      GIT_TEMPLATE_DIR: '/unrelated', GIT_SSH_COMMAND: 'untrusted', GIT_NO_LAZY_FETCH: '0', GIT_NO_REPLACE_OBJECTS: '0'}, async () => {
+      const a = createAcquisition({repo: f.destination, token: 'fixture-secret',
+        loadTree: async root => [...f.maps.values()].find(value => value.sha === root)});
+      // Selection is invocation-local and captured, not re-resolved from later PATH/env.
+      fs.unlinkSync(path.join(launcher, 'git')); fs.symlinkSync(poison, path.join(launcher, 'git'));
+      process.env.PATH = '/unrelated'; process.env.GIT_EXEC_PATH = '/unrelated';
+      const report = await prefetchSelectedGeography(a, f.baseline, f.candidate);
+      assert.equal(report.status, 'scoped-prefetch-completed');
+      assert(report.fetched_objects > 0); assert(runtime.launches().some(args => args.includes('fetch')));
+      for (const [oid, body] of f.bodies) assert.deepEqual(f.git(f.destination, ['cat-file', 'blob', oid]), body);
+    });
+  } finally { f.close(); }
+});
+
+test('default acquisition rejects foreign, escaped and non-directory helper overrides before execution', async () => {
+  const f = fixture(), runtime = relocatedGitFixture(f);
+  try {
+    const foreign = path.join(f.directory, 'foreign'), helper = path.join(foreign, 'libexec', 'git-core');
+    fs.mkdirSync(helper, {recursive: true}); fs.mkdirSync(path.join(foreign, 'bin'));
+    fs.symlinkSync(runtime.executable, path.join(foreign, 'bin', 'git'));
+    const alias = path.join(f.directory, 'helper-alias'); fs.symlinkSync(helper, alias);
+    for (const override of [helper, alias, runtime.executable, path.join(f.directory, 'missing')]) {
+      await withEnvironment({PATH: runtime.bin + path.delimiter + process.env.PATH, GIT_EXEC_PATH: override}, () => {
+        assert.throws(() => createAcquisition({repo: f.destination}), /selected installation|ENOENT/);
+      });
+    }
+    fs.renameSync(runtime.helpers, runtime.helpers + '-retained'); fs.symlinkSync(helper, runtime.helpers);
+    await withEnvironment({PATH: runtime.bin + path.delimiter + process.env.PATH, GIT_EXEC_PATH: runtime.helpers}, () => {
+      assert.throws(() => createAcquisition({repo: f.destination}), /selected installation/);
+    });
+    assert.deepEqual(runtime.launches(), []);
+  } finally { f.close(); }
+});
+
+test('explicit acquisition adapters retain their own runtime and do not inherit ambient helper overrides', async () => {
+  const f = fixture();
+  try {
+    await withEnvironment({GIT_EXEC_PATH: path.join(f.directory, 'foreign-helpers')}, async () => {
+      const a = f.acquisition({execute(command, args, options) {
+        assert.equal(command, 'git'); assert.equal(options.env.GIT_EXEC_PATH, undefined);
+        return f.execute(command, args, options);
+      }});
+      assert.equal((await prefetchSelectedGeography(a, f.baseline, f.candidate)).status, 'scoped-prefetch-completed');
+    });
+  } finally { f.close(); }
+});
+
+test('direct prefetch CLI retains the selected helper path through exact cold acquisition', () => {
+  const f = fixture(), runtime = relocatedGitFixture(f);
+  try {
+    const preload = path.join(f.directory, 'metadata.mjs');
+    fs.writeFileSync(preload, `const maps = ${JSON.stringify([...f.maps.values()])};
+globalThis.fetch = async url => {
+  const row = maps.find(value => url === 'https://api.github.com/repos/ChengshuLi/WorldAtlas/git/trees/' + value.sha + '?recursive=1');
+  if (!row) throw Error('Undeclared fixture metadata route');
+  return {ok: true, json: async () => row};
+};\n`);
+    const output = spawnSync(process.execPath, ['--import', preload,
+      new URL('../scripts/geography-prefetch.mjs', import.meta.url).pathname, f.destination, f.baseline, f.candidate],
+    {env: {...process.env, PATH: runtime.bin + path.delimiter + process.env.PATH, GIT_EXEC_PATH: runtime.helpers,
+      GH_TOKEN: 'fixture-secret'}, stdio: ['ignore', 'pipe', 'pipe']});
+    assert.equal(output.status, 0, String(output.stdout) + String(output.stderr));
+    const report = JSON.parse(output.stdout);
+    assert.equal(report.status, 'scoped-prefetch-completed'); assert(report.fetched_objects > 0);
+    assert(runtime.launches().some(args => args.includes('fetch')));
+  } finally { f.close(); }
+});
+
+test('default packaged Git without a helper override retains normal local acquisition', async () => {
+  const f = fixture();
+  try {
+    // The supported Linux/macOS package launcher owns its normal helper resolution.
+    assert(fs.statSync('/usr/bin/git').isFile());
+    for (const body of f.bodies.values()) f.git(f.destination, ['hash-object', '-w', '--stdin'], body);
+    await withEnvironment({PATH: '/usr/bin:/bin', GIT_EXEC_PATH: undefined}, async () => {
+      const a = createAcquisition({repo: f.destination, token: '',
+        loadTree: async root => [...f.maps.values()].find(value => value.sha === root)});
+      const report = await prefetchSelectedGeography(a, f.baseline, f.candidate);
+      assert.equal(report.status, 'scoped-prefetch-completed'); assert.equal(report.fetched_objects, 0);
+    });
+  } finally { f.close(); }
+});
 
 test('GitHub commit-valued envelopes require requesting the exact local root tree', async () => {
   const f = fixture(); try {
