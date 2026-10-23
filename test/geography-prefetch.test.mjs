@@ -419,6 +419,51 @@ test('cold routing acquisition supplies exact objects and authenticates tree met
   } finally { f.close(); }
 });
 
+test('cold routing acquisition completes a truncated recursive inventory from exact child trees', async () => {
+  const f = fixture(); try {
+    const raw = 'nested routing body', head = f.commit({'nested/routing.json': raw}); f.importMetadata();
+    const metadata = f.maps.get(head), pin = {commit: head, path: 'nested/routing.json',
+      mode: metadata.tree[0].mode, git_blob_oid: metadata.tree[0].sha};
+    const root = metadata.sha, rootTree = f.git(f.origin, ['rev-parse', head + '^{tree}']).toString().trim();
+    const nested = f.git(f.origin, ['rev-parse', head + ':nested']).toString().trim();
+    const childRow = metadata.tree[0];
+    const a = createRoutingMetadataAcquisition({repo: f.destination, baseline: head, execute: f.execute, token: '',
+      loadTree: async (sha, recursive) => {
+        if (sha === rootTree && recursive) return {sha, truncated: true, tree: [{path: 'partial'}]};
+        if (sha === rootTree) return {sha, truncated: false, tree: [{path: 'nested', type: 'tree', mode: '040000', sha: nested}]};
+        if (sha === nested && recursive) return {sha, truncated: false, tree: [{...childRow, path: 'routing.json'}]};
+        assert.fail(`Unexpected tree request ${sha} recursive=${recursive}`);
+      }});
+    await a.acquire(pin, {bytes: Buffer.byteLength(raw), sha256: digest(raw)});
+    assert.equal(f.git(f.destination, ['cat-file', 'blob', pin.git_blob_oid]).toString(), raw);
+    assert.equal(a.summary().tree_metadata_requests, 3);
+    assert.equal(a.summary().fetched_objects, 1);
+  } finally { f.close(); }
+});
+
+test('truncated routing inventory rejects mismatched child identity and duplicate direct paths', async () => {
+  const f = fixture(); try {
+    const raw = 'nested routing body', head = f.commit({'nested/routing.json': raw}); f.importMetadata();
+    const metadata = f.maps.get(head), pin = {commit: head, path: 'nested/routing.json',
+      mode: metadata.tree[0].mode, git_blob_oid: metadata.tree[0].sha};
+    const root = f.git(f.origin, ['rev-parse', head + '^{tree}']).toString().trim();
+    const nested = f.git(f.origin, ['rev-parse', head + ':nested']).toString().trim();
+    const direct = {path: 'nested', type: 'tree', mode: '040000', sha: nested};
+    for (const variant of ['wrong-child-sha', 'duplicate-direct-path']) {
+      const a = createRoutingMetadataAcquisition({repo: f.destination, baseline: head, execute: f.execute, token: '',
+        loadTree: async (sha, recursive) => {
+          if (sha === root && recursive) return {sha, truncated: true, tree: []};
+          if (sha === root) return {sha, truncated: false, tree: variant === 'duplicate-direct-path' ? [direct, direct] : [direct]};
+          assert.equal(sha, nested); assert.equal(recursive, true);
+          return {sha: variant === 'wrong-child-sha' ? 'f'.repeat(40) : sha, truncated: false, tree: []};
+        }});
+      await assert.rejects(a.acquire(pin, {bytes: Buffer.byteLength(raw), sha256: digest(raw)}),
+        variant === 'wrong-child-sha' ? /routing-metadata-invalid-tree-response/ : /routing-metadata-invalid-direct-tree-entry/);
+      assert.equal(a.summary().fetched_objects, 0);
+    }
+  } finally { f.close(); }
+});
+
 // No alternates or historical checkout: start with an empty object store, then
 // exercise the same private native commit transport and authenticated tree cache as CI.
 function originFixture() {

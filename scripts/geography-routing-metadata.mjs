@@ -19,17 +19,60 @@ export function createRoutingMetadataAcquisition({repo, baseline, execute = exec
   };
   const trees = new Map(), planned = new Map(); let index;
   const stats = {tree_metadata_bytes: 0, tree_metadata_requests: 0, discovery_batches: 0};
+  function validEntry(row, recursive) {
+    const parts = typeof row?.path === 'string' ? row.path.split('/') : [];
+    const safeParts = parts.length > 0 && parts.every(part => part && part !== '.' && part !== '..'
+      && !/[\x00-\x1f\x7f\\]/.test(part));
+    return safeParts && (recursive || parts.length === 1) && oid(row.sha)
+      && (row.type === 'tree' && row.mode === '040000'
+        || row.type === 'commit' && row.mode === '160000'
+        || row.type === 'blob' && ['100644', '100755', '120000'].includes(row.mode)
+          && Number.isSafeInteger(row.size) && row.size >= 0);
+  }
+  async function loadCompleteTree(root, recursive, ancestors = new Set()) {
+    demand(!ancestors.has(root), 'routing-metadata-cyclic-tree');
+    const value = await loadTree(root, recursive);
+    const size = Buffer.byteLength(JSON.stringify(value));
+    stats.tree_metadata_bytes += size; stats.tree_metadata_requests++;
+    demand(value && value.sha === root && Array.isArray(value.tree), 'routing-metadata-invalid-tree-response');
+    if (value.truncated !== true) {
+      demand(value.truncated === false && value.tree.every(row => validEntry(row, recursive)), 'routing-metadata-invalid-tree-response');
+      return value.tree;
+    }
+    demand(recursive, 'routing-metadata-invalid-tree-response');
+    // GitHub may truncate a recursive tree inventory even when each direct
+    // directory listing is complete. Discard the partial recursive rows and
+    // rebuild the exact inventory from immutable child tree IDs.
+    const direct = await loadTree(root, false);
+    const directSize = Buffer.byteLength(JSON.stringify(direct));
+    stats.tree_metadata_bytes += directSize; stats.tree_metadata_requests++;
+    demand(direct && direct.sha === root && direct.truncated === false && Array.isArray(direct.tree)
+      && direct.tree.every(row => validEntry(row, false)),
+      'routing-metadata-incomplete-direct-tree-response');
+    const entries = new Map(), nextAncestors = new Set(ancestors); nextAncestors.add(root);
+    for (const row of direct.tree) {
+      demand(!entries.has(row.path), 'routing-metadata-invalid-direct-tree-entry');
+      entries.set(row.path, row);
+    }
+    for (const row of direct.tree) if (row.type === 'tree') {
+      demand(oid(row.sha), 'routing-metadata-invalid-child-tree');
+      const childRows = await loadCompleteTree(row.sha, true, nextAncestors);
+      for (const child of childRows) {
+        const name = row.path + '/' + child.path;
+        demand(!entries.has(name), 'routing-metadata-duplicate-expanded-tree-path');
+        entries.set(name, {...child, path: name});
+      }
+    }
+    return [...entries.values()].sort((a, b) => a.path < b.path ? -1 : a.path > b.path ? 1 : 0);
+  }
   function tree(root, recursive) {
     demand(oid(root), 'routing-metadata-invalid-tree');
     const key = root + ':' + recursive;
     if (!trees.has(key)) {
       trees.set(key, (async () => {
-        const value = await loadTree(root, recursive);
-        const size = Buffer.byteLength(JSON.stringify(value));
-        stats.tree_metadata_bytes += size; stats.tree_metadata_requests++;
-        demand(value && !value.truncated && value.sha === root && Array.isArray(value.tree)
-          && new Set(value.tree.map(row => row.path)).size === value.tree.length, 'routing-metadata-invalid-tree-response');
-        return value.tree;
+        const rows = await loadCompleteTree(root, recursive);
+        demand(new Set(rows.map(row => row.path)).size === rows.length, 'routing-metadata-invalid-tree-response');
+        return rows;
       })());
     }
     return trees.get(key);
