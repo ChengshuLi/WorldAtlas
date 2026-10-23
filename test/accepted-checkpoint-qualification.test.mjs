@@ -431,6 +431,7 @@ async function acquire(f,mutate,{merged=f.trusted,tree=f.git('rev-parse',f.trust
     'Checkout trusted geographic checker','Install trusted geographic dependencies','Check exact combined geography with trusted baseline code',
     'Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02'].map(name=>({name,status:'completed',conclusion:'success'}))};
   const api=async route=>{
+    if(route==='/repos/owner/repo/issues')return [];
     if(route.endsWith('/comments?per_page=100&page=1'))return [{id:11,user:{login:'github-actions[bot]'},body:renderWorkerResult('merge',receipt)}];
     if(route.endsWith('/pulls/7'))return {number:7,merged:true,head:{sha:head,repo:{full_name:'owner/repo'}},base:{ref:'main',repo:{full_name:'owner/repo'}},merge_commit_sha:merged};
     if(route.endsWith('/attempts/2'))return run;
@@ -1190,9 +1191,12 @@ test('final-bank software cold report reuses comparison without checkpoint issua
    assert(!url.pathname.endsWith('/zip'),'No authenticated artifact fallback');
    return new Response(JSON.stringify(await a.fixture.api(url.pathname+url.search)),{headers:{'content-type':'application/json'}});
  };
+ const publicFetch=globalThis.fetch;
  for(const key of keys)delete process.env[key];process.env.GITHUB_REPOSITORY='owner/repo';
  try{
-   const publicApi=f.transport.acceptedCheckpointAPI(undefined,{publicReadOnly:true});
+   const publicApi=f.transport.acceptedCheckpointAPI(undefined,{publicReadOnly:true,fetchImpl:globalThis.fetch});
+   const publicMetadata=await publicApi('/repos/owner/repo/issues','GET');
+   assert.deepEqual(publicMetadata,await a.fixture.api('/repos/owner/repo/issues'));
    await assert.rejects(()=>publicApi('/repos/owner/repo/issues','POST',{}),/metadata GET only/);
    await assert.rejects(()=>publicApi.artifactRedirect('/repos/owner/repo/actions/artifacts/56/zip'),/metadata GET only/);
    assert.throws(()=>f.transport.acceptedCheckpointAPI('fixture',{publicReadOnly:true}),/cannot carry credentials/);
@@ -1207,7 +1211,9 @@ test('final-bank software cold report reuses comparison without checkpoint issua
    assert.equal(report.derived_checkpoint,undefined);assert.equal(report.checkpoint,undefined);
    assert(report.execution_code_inventory.some(p=>p.path.endsWith('selected-checkpoint.mjs')));
    assert(report.execution_code_inventory.some(p=>p.path===codePath&&p.sha256===sha(fs.readFileSync(path.join(f.root,codePath)))));
-   assert(requests.length>0,'Accepted input was authenticated through the existing transport');
+   assert.equal(requests.length,1,'The public-only final-bank path performs only the explicit metadata GET');
+   assert.equal(new URL(requests[0]).pathname,'/repos/owner/repo/issues');
+   globalThis.fetch=previous.fetch;
    assert.deepEqual(f.git('status','--porcelain').toString().trim(),'','Report-only comparison writes no checkpoint products');
    const raw=path.join(f.root,'fixture-native-report.json');fs.writeFileSync(raw,JSON.stringify(report));
    const driver="import importlib.util,json,pathlib,sys,io,contextlib\nrepo=pathlib.Path(sys.argv[1]);baseline,candidate,raw,out=sys.argv[2:];s=importlib.util.spec_from_file_location('wrapper',repo/'scripts/run-geographic-check.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)\noriginal=m.subprocess.check_output\ndef transport(command,*args,**kwargs):\n if '--input-type=module' in command:return pathlib.Path(raw).read_bytes()\n return original(command,*args,**kwargs)\nm.subprocess.check_output=transport\nm.unchanged_selected_inputs=lambda *args,**kwargs:None\nsys.argv=['run-geographic-check.py','--repo',str(repo),'--baseline',baseline,'--candidate',candidate,'--code-commit',candidate,'--out',out]\nwith contextlib.redirect_stdout(io.StringIO()):result=m.main()\nassert result==0\nprint(pathlib.Path(out).read_text())";
@@ -1217,6 +1223,10 @@ test('final-bank software cold report reuses comparison without checkpoint issua
    fs.writeFileSync(raw,JSON.stringify({...report,candidate_code_executed:false}));
    assert.throws(enclosing,/lacks a completed native result/,'The real wrapper refuses a false candidate-code child claim');
    f.save('data/selected-checkpoint.json',a.fixture.locator);const missingArchive=f.commit();
-   await assert.rejects(()=>native.inspectSelectedAcquired(f.root,f.trusted,missingArchive),/requires its authenticated accepted checkpoint/);
+   const finalWithoutLegacyLocator=await native.inspectSelectedAcquired(f.root,f.trusted,missingArchive,{fetchImpl:publicFetch});
+   assert.equal(finalWithoutLegacyLocator.status,'no-new-native-loss',
+     'A v2 final-bank comparison reads the accepted final selection directly, independent of the legacy locator/archive');
+   assert.equal(finalWithoutLegacyLocator.candidate_code_executed,true);
+   assert.equal(finalWithoutLegacyLocator.checkpoint,undefined,'A software-only final-bank comparison does not issue a checkpoint');
  }finally{globalThis.fetch=previous.fetch;for(const [key,value]of Object.entries(previous.environment)){if(value===undefined)delete process.env[key];else process.env[key]=value;}}
 });
