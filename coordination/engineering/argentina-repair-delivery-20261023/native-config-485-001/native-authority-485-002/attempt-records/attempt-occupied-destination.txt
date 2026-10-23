@@ -1,0 +1,4 @@
+Command: node scripts/prepare-delivery-handoff.mjs native-authority .cache/delivery-handoff/arg-485-native-authority-002.json .cache/delivery-handoff/native-scratch-485-001/native-authority-485-002
+Exit: 1
+Output: Occupied destination; use explicit --resume to verify an identical completed phase
+Cause: destination directory was created during lstat validation before invocation; constructor did not start.
