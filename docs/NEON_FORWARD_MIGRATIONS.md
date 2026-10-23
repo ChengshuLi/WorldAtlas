@@ -125,7 +125,7 @@ Keep the original top-level checkpoint/source fields and authenticated baseline 
 
 Inside the existing owner lock and atomic transaction, the installer reads the actual current compact inventory and compares it with the reviewed pin. It applies only the missing canonical V3 DDL and necessary typed-table grants. The only accepted delta is three empty typed tables, their known catalog/functions/permissions, and one new immutable migration row. Every inherited logical collection, original registry row, compact physical row, dictionary key/sequence, ingestion sequence, database/default ACL and inherited function/table/sequence permission remains exact. Unknown profiles, data drift, modified registry rows, extra access and unreviewed DDL refuse and roll back. Repeating the same operation after a successful commit verifies a no-op; a new base3 recovery pin can independently verify the resulting state.
 
-Issue #2696's historical settlement import requires the explicitly scoped owner operation below. Accepting this repository support neither authorizes nor performs a production migration, import, publisher contact or deployment. The standing #907 publication hold remains. Before requesting an owner window, prepare the exact reviewed current recovery/maintenance pins, unchanged historical proof, migration hashes, narrow grant delta, rehearsal/readback results and the separately scoped import/parity package. A stale or missing current pin is a real blocker, not permission to reset production or invent a new baseline.
+Issue #2696's settlement-population import is cancelled. The 9,301 estimates remain Git source evidence, not verified location populations or a production import objective. This workflow does not accept a `settlement_import` declaration. The unrelated reviewed forward-schema and active geographic synchronization paths retain their existing authorization, preservation and retry boundaries.
 
 ## Local validation
 
@@ -136,47 +136,19 @@ The grown-state tests execute the real installer and recovery inventory against 
 The same-job test uses an in-process native-capture/provider fixture but executes the actual forward service and PostgreSQL SQL twice, including a fresh base3 verification. It checks preserved rows/registry/ACLs, no archive request, genuine workflow identity, exact operation/window binding, changed-window refusal and private upload boundaries. It is not a native Docker dump/restore or production execution receipt.
 
 
-## Exact historical settlement service import
+## Retired settlement production route
 
-A reviewed current-native operation may additionally declare `settlement_import`
-with exactly `input_sha256` and `manifest_sha256`. The first must bind the unchanged
-`data/settlement-estimates.json` source; the second pins the deterministic bundle
-from the accepted compiler. For the final lossless metadata contract this bundle
-is `da0a886f662ff9c80343ee92c347c50ce16718fd216add3f3d9669e6a62a1c80`.
-The earlier pre-final bundle omitted `language`/`name_role` metadata and must not
-be substituted. The whole-operation publisher window covers this declaration.
-All three migrations and a fresh current native capture are required. An ordinary
-forward operation without the declaration imports nothing, and verify-only never
-invokes a database import even when the declaration is present.
+The cancelled owner settlement helper and its private-database research-bundle
+adapter have been removed. A forward operation containing `settlement_import`,
+including a false or null value, refuses before native capture, provider requests
+or owner database access. The generic research importer likewise rejects its
+retired `database`, `target` and `manifestSHA` options rather than silently
+switching transports.
 
-After V3 verification, the same owner job invokes `importResearchBundle` through
-`createPostgresDatabase` and the unchanged `importBatch`/`importTypedBatch` services.
-The 48 exact ingestion IDs, source/subject/registry/date checks, immutable guards,
-receipt validation and ingestion advisory lock remain authoritative. Transactions
-honor the service's ReadCommitted boundary; no private HTTP endpoint, fake bearer
-token, application credential, role impersonation or membership is introduced.
-The public Cloudflare Worker remains read-only. This is owner maintenance, not
-proof of a public API write or a website deployment.
-
-The runner verifies all 582 retained settlement identities before importing and
-runs the existing two-way 9,301-row field/source/contract parity query afterward.
-It retains only sanitized batch receipts under the existing forward artifact.
-Derived payloads are prepared from the immutable Git source in temporary private
-files, not uploaded alongside receipts. Every resume checks the original IDs
-against actual server receipts, including those already present in a local ledger.
-A lost response after commit therefore resolves to the same fingerprint and does
-not authorize a new ID. The schema transaction and each import batch commit
-separately: a later error does not roll back earlier successful batches. Reconcile
-actual receipts and obtain the applicable fresh owner operation/window before
-continuing; do not replay a stale migration or clear existing data.
-
-Local proof executes the actual services and PostgreSQL transactions on grown
-compact state, including a committed-but-lost-response interruption, complete
-idempotent replay, unchanged non-campaign inventories/ACLs, exact parity, and
-verify-only with zero import calls. Provider/native Docker behavior remains the
-separately disclosed fixture, not a production rehearsal. The future production
-backup, narrow V3 grants and exact import still need their applicable action-time
-authorization; this code does not lift the #907 hold.
+The original 9,301 estimates, source hashes, typed contracts, historical parity
+queries and Git history remain intact. Generic research HTTP import and dry-run
+support are separate, unchanged capabilities; they do not authorize the cancelled
+settlement import. Active geography synchronization below remains unchanged.
 
 
 ## Ordered geographic publication, without schema or settlement work

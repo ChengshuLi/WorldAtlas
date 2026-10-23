@@ -12,7 +12,7 @@ import {createLocalPostgres} from '../scripts/verify-postgres-schema.mjs';
 import {PGlite} from '@electric-sql/pglite';
 import {importTypedBatch,typedSourcePins} from '../hosted/typed-observations.js';
 import {observationContract} from '../src/observation-modules.js';
-import {PostgresAdapterError,createPostgresDatabase} from '../hosted/postgres-adapter.js';
+import {createPostgresDatabase} from '../hosted/postgres-adapter.js';
 import {rehearseCompactMembershipStorage} from '../scripts/compact-membership-storage.mjs';
 import {exportStorageMarkerV4} from '../hosted/storage-export-v4.js';
 import {readRecoveryInventory,assertCurrentInventory,assertRestoredInventory,authenticateRecoveryWindow} from '../scripts/current-postgres-recovery.mjs';
@@ -22,9 +22,7 @@ import {importBatch} from '../hosted/records.js';
 import {exportStorageMarker,exportStoragePage,storageExportCollections,storageExportColumns} from '../hosted/storage-export.js';
 import {restorePostgresStorage} from '../scripts/restore-postgres-storage.mjs';
 import {provisionPostgresRuntimeRole} from '../scripts/provision-postgres-runtime-role.mjs';
-import {prepareResearchBundle} from '../scripts/prepare-research-bundle.mjs';
-import {readResearchBundle,importResearchBundle} from '../scripts/import-research-bundle.mjs';
-import {prepareForwardGeography,publishForwardGeography,authenticateGeographicWindow,importForwardSettlementBundle,authenticateForwardBaseline,applyPostgresForwardMigrations,forwardMigrationDefinitions,validateForwardOperation,validateForwardMaintenance,runNeonForwardMigrations,verifyForwardRuntimeRole,readForwardCurrentSource,assertForwardCurrentPreserved} from '../scripts/neon-forward-migrations.mjs';
+import {prepareForwardGeography,publishForwardGeography,authenticateGeographicWindow,authenticateForwardBaseline,applyPostgresForwardMigrations,forwardMigrationDefinitions,validateForwardOperation,validateForwardMaintenance,runNeonForwardMigrations,verifyForwardRuntimeRole,readForwardCurrentSource,assertForwardCurrentPreserved} from '../scripts/neon-forward-migrations.mjs';
 const root=path.resolve(new URL('..',import.meta.url).pathname),hash=value=>createHash('sha256').update(value).digest('hex');
 const migration={...forwardMigrationDefinitions[0],sha256:hash(fs.readFileSync(new URL('../postgres/migrations/0001_temporal_geography.sql',import.meta.url)))};
 async function fixture({currentOwner=false}={}){
@@ -325,6 +323,15 @@ test('same-job native capture fixture keeps inventory private while actual Postg
    fs.writeFileSync(path.join(options.output,'source-inventory.json'),JSON.stringify(inventory));fs.writeFileSync(path.join(options.output,'public-receipts/receipt.json'),JSON.stringify(receipt));return receipt;
   };
   const args={root:directory,operationFile,env,fetchImpl,recoveryImpl,ownerDriverFactory:async()=>{ownerCalls++;return {...f.owner,close:async()=>{}};}};
+  const priorRequests=requests.length;
+  for(const mode of ['rehearsal','production','verify-only'])for(const value of [null,false,{}]){
+   operation.settlement_import=value;refresh();
+   const refused=await runNeonForwardMigrations({...args,mode,output:'retired-'+mode+'-'+String(value)});
+   assert.equal(requests.length,priorRequests,'Retired import refuses before GitHub or provider requests');
+   assert.equal(captureCalls,0,'Retired import never starts native capture');assert.equal(ownerCalls,0,'Retired import never opens the owner database');
+   assert.equal(refused.status,'failed');assert.equal(refused.error_code,'settlement-import-retired');
+  }
+  delete operation.settlement_import;refresh();
   const failed=await runNeonForwardMigrations({...args,mode:'production',output:'capture-failed.json',recoveryImpl:async()=>({status:'failed'})});assert.equal(failed.status,'failed');assert.equal(failed.error_code,'same-job-native-recovery-required');assert.equal(ownerCalls,0);
   const wrongHead=await runNeonForwardMigrations({...args,mode:'production',output:'capture-other-head.json',recoveryImpl:async options=>{const receipt=await recoveryImpl(options);return {...receipt,github:{...receipt.github,head:'0'.repeat(40)}};}});assert.equal(wrongHead.status,'failed');assert.equal(wrongHead.error_code,'same-job-native-recovery-required');assert.equal(ownerCalls,0);
   const capturePath=path.join(directory,'data/validation/current-postgres-recovery');fs.renameSync(capturePath,capturePath+'-rejected-head');captureCalls=0;
@@ -333,59 +340,10 @@ test('same-job native capture fixture keeps inventory private while actual Postg
   const privatePath=path.join(directory,'data/validation/current-postgres-recovery/source-inventory.json');assert(fs.existsSync(privatePath));assert(!fs.existsSync(path.join(directory,'data/validation/current-postgres-recovery/public-receipts/source-inventory.json')));assert(!JSON.stringify(first).includes('owner_registry":'));
   // A fresh hosted job has a fresh private directory and freshly reviewed current pin.
   fs.renameSync(path.dirname(privatePath),path.dirname(privatePath)+'-retained');env.GITHUB_RUN_ID='203';env.WINDOW_COMMENT_ID='124';window.source_marker={...await exportStorageMarkerV4(f.pg.db),read_only:true};refresh();
-  // The exact optional import is present, but verify-only cannot insert even
-  // though these subjects intentionally do not exist in this isolated database.
-  for(const file of ['data/settlement-estimates.json','postgres/settlement-identity-parity.sql','postgres/settlement-population-parity.sql']){fs.mkdirSync(path.dirname(path.join(directory,file)),{recursive:true});fs.copyFileSync(path.join(root,file),path.join(directory,file));}
-  operation.settlement_import={input_sha256:'8c7cb39cfce591b87eedeb0eddfbd21e0cabdce6a53d39023409e633e617ce0d',manifest_sha256:'da0a886f662ff9c80343ee92c347c50ce16718fd216add3f3d9669e6a62a1c80'};refresh();
-  const second=await runNeonForwardMigrations({...args,mode:'verify-only'});assert.equal(second.status,'verified',JSON.stringify(second));assert.equal(second.settlement_import?.database_writes,0);assert.equal(second.settlement_import?.dry_run,true);assert(second.forward.migrations.every(m=>m.status==='already-applied'));assert.deepEqual(await readRecoveryInventory(f.query,{profile:compactRecoveryProfileV3}),after);
+  const second=await runNeonForwardMigrations({...args,mode:'verify-only'});assert.equal(second.status,'verified',JSON.stringify(second));assert.equal(second.settlement_import,undefined);assert(second.forward.migrations.every(m=>m.status==='already-applied'));assert.deepEqual(await readRecoveryInventory(f.query,{profile:compactRecoveryProfileV3}),after);
   assert.equal(requests.filter(url=>url.includes('/actions/artifacts/')).length,0);
   const workflow=fs.readFileSync(path.join(root,'.github/workflows/neon-forward-migrations.yml'),'utf8');assert.match(workflow,/WINDOW_COMMENT_ID: \$\{\{ inputs.window_comment_id \}\}/);assert.match(workflow,/path: data\/validation\/current-postgres-recovery\/public-receipts\//);assert(!workflow.includes('path: data/validation/current-postgres-recovery/\n'));
   t.diagnostic(JSON.stringify({sql_engine:(await f.owner.query('SELECT version() version')).rows[0].version,native_capture:'in-process fixture only, not Docker',actual_forward_transactions:2,private_inventory_not_uploaded:true}));
- }finally{await f.close();fs.rmSync(directory,{recursive:true,force:true});}
-});
-
-
-test('private owner service imports the same 48 frozen settlement IDs, reconciles a committed lost response and preserves grown compact facts and access',async t=>{
- const f=await grownCompactFixture(),directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-owner-settlement-test-'));
- try{
-  await applyPostgresForwardMigrations({...f.options,currentSource:f.currentSource});
-  const original=fs.readFileSync(path.join(root,'data/settlement-estimates.json')),input=JSON.parse(original),parents=[...new Set(input.entities.map(e=>e.parent_id))].map(id=>({id,kind:'location',name:'Isolated retained parent identity',parent_id:'grown:0:province'}));
-  for(const values of [parents,input.entities.slice(0,-1).map(({id,kind,name,parent_id})=>({id,kind,name,parent_id}))])for(let i=0;i<values.length;i+=200)await importBatch(f.pg.db,{entities:values.slice(i,i+200)});
-
-  const operation={settlement_import:{input_sha256:hash(original),manifest_sha256:'da0a886f662ff9c80343ee92c347c50ce16718fd216add3f3d9669e6a62a1c80'}},target='br-summer-butterfly-ar8qikk5',ledgerFile=path.join(directory,'receipts.json');let committed=0,loseResponse=true;
-  const driver={query:(sql,params)=>f.owner.query(sql,params),async runTransaction(callback,options){
-   assert(['ReadCommitted','Serializable'].includes(options?.isolationLevel));let locked=false;
-   const result=await f.pg.engine.transaction(async tx=>{
-    await tx.query('SET TRANSACTION ISOLATION LEVEL '+(options.isolationLevel==='ReadCommitted'?'READ COMMITTED':'SERIALIZABLE'));
-    return callback({query:async(sql,params)=>{if(sql==='SELECT pg_advisory_xact_lock(807245315,1)'){locked=true;assert.equal((await tx.query('SHOW transaction_isolation')).rows[0].transaction_isolation,'read committed','Actual ingestion takes a fresh following snapshot');}return tx.query(sql,params);}});
-   });
-   if(locked){committed++;if(loseResponse&&committed===8){loseResponse=false;throw new PostgresAdapterError('Lost committed fixture response',{status:503,retryable:true,commitStatus:'unknown'});}}return result;
-  }};
-  const args={driver,operation,root,target,ledgerFile};
-  const untouched={query:()=>{throw Error('No database call is allowed');},runTransaction:()=>{throw Error('No transaction is allowed');}};
-  assert.equal((await importForwardSettlementBundle({...args,driver:untouched,verifyOnly:true})).database_writes,0);assert(!fs.existsSync(ledgerFile));
-  await assert.rejects(importForwardSettlementBundle({...args,driver:untouched,operation:{settlement_import:{...operation.settlement_import,input_sha256:'a'.repeat(64)}}}),/exact-reviewed-settlement-source/);
-  await assert.rejects(importForwardSettlementBundle({...args,driver:untouched,operation:{settlement_import:{...operation.settlement_import,manifest_sha256:'a'.repeat(64)}}}),/manifest-mismatch/);
-  await assert.rejects(importForwardSettlementBundle(args),/settlement-identity-parity-required/);assert.equal(committed,0,'Missing identity refuses before the first source import');assert(!fs.existsSync(ledgerFile));
-  const {id,kind,name,parent_id}=input.entities.at(-1);await importBatch(f.pg.db,{entities:[{id,kind,name,parent_id}]});
-  const before=await readRecoveryInventory(f.query,{profile:compactRecoveryProfileV3}),retainedSources=(await f.owner.query('SELECT * FROM atlas_sources ORDER BY id')).rows,retainedIngestions=(await f.owner.query('SELECT * FROM atlas_ingestions ORDER BY rowid')).rows;
-  await assert.rejects(importForwardSettlementBundle(args),/Typed import outcome is unknown/);assert.equal(committed,8);assert.equal(JSON.parse(fs.readFileSync(ledgerFile)).batches.length,7);
-  const result=await importForwardSettlementBundle(args);assert.equal(result.committed_batches,48);assert.equal(committed,48,'The committed lost response is resolved by the original ingestion ID, not another insertion');
-  assert.deepEqual(result.parity,{expected_rows:9301,actual_rows:9301,distinct_subjects:582,missing_or_changed:0,extra_or_changed:0,contract_mismatches:0,source_mismatches:0,unexpected_retirements:0});
-  const after=await readRecoveryInventory(f.query,{profile:compactRecoveryProfileV3});
-  for(const name of Object.keys(before.collections))if(!['sources','ingestions','typed_observations'].includes(name))assert.deepEqual(after.collections[name],before.collections[name],name);
-  for(const key of ['identity','owner_registry','permissions','column_permissions','function_permissions','database_acl','default_acls','sequence_permissions'])assert.deepEqual(after[key],before[key],key);
-  assert.deepEqual(after.compact_storage.physical,before.compact_storage.physical);assert.deepEqual(after.compact_storage.sequences,before.compact_storage.sequences);
-  assert.deepEqual((await f.owner.query('SELECT * FROM atlas_sources WHERE id=ANY($1::text[]) ORDER BY id',[retainedSources.map(r=>r.id)])).rows,retainedSources);
-  assert.deepEqual((await f.owner.query('SELECT * FROM atlas_ingestions WHERE rowid<=$1 ORDER BY rowid',[retainedIngestions.at(-1).rowid])).rows,retainedIngestions);
-  assert.equal(after.collections.ingestions.count,before.collections.ingestions.count+48);assert.equal(after.collections.sources.count,before.collections.sources.count+1);
-  const replay=await importForwardSettlementBundle(args);assert.deepEqual(replay.parity,result.parity);assert.equal(committed,48);assert.deepEqual(await readRecoveryInventory(f.query,{profile:compactRecoveryProfileV3}),after);
-  prepareResearchBundle({input:path.join(root,'data/settlement-estimates.json'),output:path.join(directory,'bundle')});const bundle=readResearchBundle(path.join(directory,'bundle')),ledger=JSON.parse(fs.readFileSync(ledgerFile));
-  assert.equal(ledger.transport,'private-postgres-service');assert.equal(ledger.target,`weathered-lab-37571695/${target}/neondb`);assert.equal(ledger.origin,null);assert(ledger.batches.every(r=>r.duplicate));assert.deepEqual(ledger.batches.map(r=>r.ingestion_id),bundle.batches.map(b=>b.part.ingestion_id));assert(ledger.batches.every(r=>r.request_ingestion_id===r.ingestion_id));assert(!JSON.stringify(ledger).includes('previous_unpinned_receipt'));
-  for(const changed of [{origin:'https://example.org'},{token:'not-a-service-credential'},{manifestSHA:'f'.repeat(64)},{target:'wrong-project/br-example/neondb'},{request:()=>{throw Error('No network');}}])await assert.rejects(importResearchBundle({directory:path.join(directory,'bundle'),database:f.pg.db,target:ledger.target,manifestSHA:bundle.manifest_sha256,...changed}),/Private service import/);
-  const firstTyped=JSON.parse(bundle.batches[1].raw);await importTypedBatch(f.pg.db,{version:1,registry_sha256:firstTyped.registry_sha256,source_pins:firstTyped.source_pins,retirements:[{id:'fixture-retained-settlement-withdrawal',collection:'observations',target_id:firstTyped.observations[0].id,source_id:firstTyped.observations[0].source_id,reason:'Test-only retained withdrawal must not be silently repaired by replay'}]});
-  const withdrawn=await readRecoveryInventory(f.query,{profile:compactRecoveryProfileV3});await assert.rejects(importForwardSettlementBundle(args),/settlement-population-parity-required/);assert.equal(committed,48);assert.deepEqual(await readRecoveryInventory(f.query,{profile:compactRecoveryProfileV3}),withdrawn,'Parity refusal does not remove an existing withdrawal or change any fact');
-  t.diagnostic(JSON.stringify({engine:(await f.owner.query('SELECT version() version')).rows[0].version,transport:'actual service and PostgreSQL, no HTTP',campaign_committed_transactions:committed,original_ingestion_ids:48,private_role:'neondb_owner without role changes',parity:result.parity}));
  }finally{await f.close();fs.rmSync(directory,{recursive:true,force:true});}
 });
 
