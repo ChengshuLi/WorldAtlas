@@ -1,0 +1,71 @@
+{
+  "kind": "cod-residual-930-uganda-2006-district-line-overlay-v1",
+  "status": "context-only-no-key-disposition",
+  "source_archive_bytes": 1646436,
+  "source_archive_sha256": "be2f3ed89101fd68a909f20bc69fc1f097fcb203254ce06ad584588bf4284de5",
+  "source_feature_count": 5767,
+  "county_source_archive_bytes": 8325415,
+  "county_source_archive_sha256": "9857cf0088b578beccea29c467f9e1a1224b6341ebe944320c975cb9ca984921",
+  "county_polygon_count": 164,
+  "target_id": "gb:COD:ADM2:63176286B75372177576839",
+  "owner_id": 14568,
+  "target_center_count": 112,
+  "nearest_line_records": [
+    {
+      "zero_based_index": 5487,
+      "shapefile_record_number": 5488,
+      "centers": 112
+    }
+  ],
+  "nearest_record_adjacency": [
+    {
+      "left_fid": -1,
+      "right_fid": 61,
+      "centers": 112
+    }
+  ],
+  "nearest_segment_side_counts": {
+    "left": 50,
+    "right": 62
+  },
+  "nearest_line_distance_m": {
+    "minimum": 1.248,
+    "median": 114.737,
+    "maximum": 449.229
+  },
+  "cross_source_center_join": [
+    {
+      "wri_line_side": "left",
+      "ubos_county_2006": "outside_all_counties",
+      "ubos_district_2006": "outside_all_counties",
+      "centers": 50
+    },
+    {
+      "wri_line_side": "right",
+      "ubos_county_2006": "BUGHENDERA",
+      "ubos_district_2006": "BUNDIBUGYO",
+      "centers": 1
+    },
+    {
+      "wri_line_side": "right",
+      "ubos_county_2006": "BWAMBA",
+      "ubos_district_2006": "BUNDIBUGYO",
+      "centers": 30
+    },
+    {
+      "wri_line_side": "right",
+      "ubos_county_2006": "NTOROKO",
+      "ubos_district_2006": "BUNDIBUGYO",
+      "centers": 31
+    }
+  ],
+  "fid_identity_assessment": "A bounded spatial join maps the 62 right-side centers (RIGHT_FID=61) to UBOS 2006 counties Ntoroko (31), Bughendera (1), and Bwamba (30); all three UBOS rows name DNAME_2006=BUNDIBUGYO. The other 50 centers are left of the WRI line with LEFT_FID=-1 and fall outside all 164 UBOS counties. This supports identifying FID 61 as Bundibugyo for this local overlap, but is not a direct WRI FID-to-name table or a legal boundary determination.",
+  "method": "Parsed WRI polyline/DBF records; projected WGS84 coordinates to UTM zone 36N with the retained UBOS .prj false northing; selected nearest segment by Euclidean distance and assigned side by directed-segment cross product. Only aggregate counts and distances are emitted.",
+  "limits": [
+    "WRI records contain numeric LEFT_FID/RIGHT_FID values but no district names in the shipped DBF.",
+    "The name association uses an independently pinned UBOS 2006 county spatial join and is limited to the inspected Irumu area.",
+    "The WRI metadata disclaims accuracy warranties and says the data are not for litigation.",
+    "Nearest-line side is not reconstructed into a polygon and does not establish territorial or legal applicability.",
+    "This does not resolve the 2006 source discrepancy, the later selected COD geometry disagreement, whole-cell qualification, or the full 930-key disposition."
+  ]
+}

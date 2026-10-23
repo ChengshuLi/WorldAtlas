@@ -29,7 +29,53 @@
   "review": {
     "inspection": "Archive entries, .prj, and embedded .shp.xml were examined. No source geometry is included in this evidence packet.",
     "applicability_limit": "This is district-level polyline data, not county-level polygon geometry. It cannot determine the original 112 Irumu residual keys' county containment, validate the UBOS county archive projection, or determine territorial applicability.",
-    "method_limit": "No polygon reconstruction or per-key linework overlay was performed.",
     "effect": "Adds contemporaneous UBOS/WRI source context only; no repair, disposition, hold, owner, credit, or denominator changes."
+  },
+  "overlay_result": {
+    "evidence_file": "uganda-2006-district-line-overlay-112.json",
+    "target_centers": 112,
+    "nearest_line_record_zero_based_index": 5487,
+    "nearest_line_record_number": 5488,
+    "record_attributes": {
+      "LEFT_FID": -1,
+      "RIGHT_FID": 61
+    },
+    "directed_segment_side_counts": {
+      "left": 50,
+      "right": 62
+    },
+    "distance_meters_min_median_max": [
+      1.248,
+      114.737,
+      449.229
+    ],
+    "method_limit": "The line/side check uses only the nearest directed segment and its numeric adjacency fields; it does not reconstruct polygons or identify FID 61 by name. See the linked evidence file for full method and limits.",
+    "cross_source_center_join": [
+      {
+        "wri_line_side": "left",
+        "ubos_county_2006": "outside_all_counties",
+        "ubos_district_2006": "outside_all_counties",
+        "centers": 50
+      },
+      {
+        "wri_line_side": "right",
+        "ubos_county_2006": "NTOROKO",
+        "ubos_district_2006": "BUNDIBUGYO",
+        "centers": 31
+      },
+      {
+        "wri_line_side": "right",
+        "ubos_county_2006": "BUGHENDERA",
+        "ubos_district_2006": "BUNDIBUGYO",
+        "centers": 1
+      },
+      {
+        "wri_line_side": "right",
+        "ubos_county_2006": "BWAMBA",
+        "ubos_district_2006": "BUNDIBUGYO",
+        "centers": 30
+      }
+    ],
+    "fid_identity_assessment": "No direct WRI FID-to-name table is present in the shipped archive. For these 112 centers, all 62 on the RIGHT_FID=61 side fall in UBOS 2006 counties whose DNAME_2006 is BUNDIBUGYO; all 50 on the LEFT_FID=-1 side fall outside the 164 UBOS counties. This supports identifying FID 61 as Bundibugyo for this local overlap, but is not a direct attribute crosswalk or legal boundary determination."
   }
 }
