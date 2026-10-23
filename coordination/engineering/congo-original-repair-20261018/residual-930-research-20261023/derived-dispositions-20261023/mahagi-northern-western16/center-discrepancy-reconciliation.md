@@ -11,16 +11,16 @@ The apparent contradiction is explained by comparing two different representatio
 - Original 9469f09 UGA ADM1 source family: decoded GeoJSON is 258,114 bytes, SHA-256 `75e5442c33f7023bcd2d7d72928835723b557c1a9523f3b4c9afe36d0e73af93`; compressed body is 85,208 bytes, SHA-256 `3e0dc23da310870739bc742483875a3e9a9b1614d46d9a67c77aac6ccb427425`. The retained manifest identifies 4 features, represented year 2017, ODbL 1.0, and the exact source URL/commit.
 - Northern Region: original feature ID `17295835B80141219017784`, feature `Polygon` with 1,623 closed / 1,622 distinct exterior vertices; canonical compact-JSON geometry SHA-256 `8cecf5bb4fdb5eb5f37d8cc2f4e3e63e47aff03e1c4020857558ffff569978da`. Crosswalk counterpart is archived release shape ID `UGA-ADM1-2_0_0-B1`, whose full exterior has 13,135 closed vertices.
 - Western Region: original feature ID `17295835B91329899113986`, feature `Polygon` with 2,276 closed / 2,275 distinct exterior vertices; canonical compact-JSON geometry SHA-256 `50ae8618aef7edae76f409de087fd8c1bd7c4a271b1a0119ae97db0df14d3a9c`. Crosswalk counterpart is archived release shape ID `UGA-ADM1-2_0_0-B4`, whose full exterior has 24,629 closed vertices.
-- Both feature bodies declare `urn:ogc:def:crs:OGC:1.3:CRS84`; coordinates are `[longitude, latitude]`. The retained overlay and archived-release membership artifact carry the same exact coordinates for each key below.
+- Both feature bodies declare `urn:ogc:def:crs:OGC:1.3:CRS84`; the point-in-feature comparison uses the same original grid-center inputs for both representations.
 - Archived release GeoJSON body: 1,765,418 bytes, SHA-256 `a297e269c40e570ebc19906527c8222d68c7b98ce1f547b38101dabafba9cac8`; metadata identifies release `UGA-ADM1-2_0_0-G582`, source names OpenStreetMap/Wambacher, year 2017, update 2020-01-15, ODbL 1.0.
 
 ## Reproduced three results
 
-| Original key | Center `[lon,lat]` | Pinned simplified source feature | Archived full-release feature |
+| Original key | Pinned simplified source feature | Archived full-release feature |
 |---|---|---|---|
-| `[14441,129388,153711]` | `[31.072908004851882,2.3262070155770944]` | Northern `17295835B80141219017784`: inside | B1: outside |
-| `[14462,131655,152660]` | `[29.629700266243532,-0.7861184653021305]` | Western `17295835B91329899113986`: inside | B4: outside |
-| `[14462,131673,152664]` | `[29.63519296934004,-0.810833228886297]` | Western `17295835B91329899113986`: inside | B4: outside |
+| `[14441,129388,153711]` | Northern `17295835B80141219017784`: inside | B1: outside |
+| `[14462,131655,152660]` | Western `17295835B91329899113986`: inside | B4: outside |
+| `[14462,131673,152664]` | Western `17295835B91329899113986`: inside | B4: outside |
 
 The original matrix field `center_hit_count` means candidate center-point memberships in the retained family geometry, not grid-cell polygon intersection. The full-family overlay identifies the same values under `recorded_candidate_center_hits` / `full_537_feature_center_hits`; its limits explicitly say center-point comparison only. Thus the original matrix's three UGA hits are correct for the pinned simplified source features. The official-release artifact's three outside results are also correct for its dense release features. The prior shorthand that described the features as if the geometries were identical was inaccurate: the evidence supports exact ordered vertex retention during simplification, not geometric identity.
 

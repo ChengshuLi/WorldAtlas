@@ -16,20 +16,6 @@
       "bytes": 799945,
       "sha256": "00fc57c3290d4d0cf1ef7df68860ac6d2c3ee82e67509d0ae2f9d1c550cdf24d"
     },
-    "padyere_feature_body": {
-      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM2/geoBoundaries-UGA-ADM2_simplified.geojson",
-      "bytes": 1021800,
-      "sha256": "0a13e10b3bc6beeb02db4502c7f29a2ebbbb681a932307ccba4cd53e994feac7",
-      "feature_id": "47994165B98583791721874",
-      "source_metadata": "geoBoundaries, Wikimedia Commons; represented 2006; Public Domain; source URL field is only generic commons.wikimedia.org/wiki/File"
-    },
-    "ituri_feature_body": {
-      "commit": "923e9c210b59836e069c182d68daf85439096381",
-      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-COD-ADM1-000.bin.gz",
-      "bytes": 378900,
-      "sha256": "a2e524c39c94b065d6ae76ca335730ef716d6378c050f1d11c15a1a40fe8b584",
-      "feature_id": "28894549B71118016098951"
-    },
     "stock_diagnostic": {
       "commit": "347f0692367a0c51a49683ff33e4a5ed9b9c7c5b",
       "path": "coordination/engineering/congo-original-repair-20261018/diagnostic-original-001/native-diagnostic.json",
@@ -45,8 +31,6 @@
     "limits": [
       "OSM left/right tags are OSM source attribution and are not a legal ruling or proof of de facto control.",
       "This classifies original centers only, not full cell footprints or all physical contacts.",
-      "The geoBoundaries represented-year claim (2017 for ADM1, 2006 for Padyere) is not the same as the selected later OSM relation snapshot; exact Wambacher export snapshot remains unproven.",
-      "Padyere metadata names Wikimedia Commons generically; no exact Commons source file was identified.",
       "The original native diagnostic's held rows are unchanged; no science credit, repair, owner change, hold removal, or acceptance is claimed."
     ]
   },
@@ -111,25 +95,6 @@
         "admin_level": "2",
         "border_type": "nation",
         "waterway": "river",
-        "source": "Large Scale International Boundary (US DoS/INR/GGI)"
-      }
-    },
-    {
-      "relation": "https://api.openstreetmap.org/api/0.6/relation/192818/141",
-      "relation_version": 141,
-      "timestamp": "2022-12-03T16:32:19Z",
-      "relation_role": "DRC Ituri Province",
-      "member_way": "https://api.openstreetmap.org/api/0.6/way/947378597/1",
-      "member_role": "outer",
-      "way_timestamp": "2021-05-26T16:14:23Z",
-      "way_tags": {
-        "boundary": "administrative",
-        "admin_level": "2",
-        "border_type": "nation",
-        "left:country": "DR Congo",
-        "left:province": "Ituri",
-        "right:country": "Uganda",
-        "right:region": "Northern",
         "source": "Large Scale International Boundary (US DoS/INR/GGI)"
       }
     }
@@ -211,26 +176,6 @@
       "osm_way": 396444481,
       "center_side": "Uganda",
       "distance_m_approx": 4.0
-    },
-    {
-      "key": [
-        14441,
-        129432,
-        153804
-      ],
-      "contact": "Uganda Padyere / COD Ituri",
-      "osm_way": 947378597,
-      "center_side": "Uganda",
-      "distance_m_approx": 253.2,
-      "inside_pinned_source_candidates": [
-        "Uganda Padyere",
-        "COD Ituri"
-      ],
-      "center_to_candidate_polygon_boundary_m_approx": {
-        "Padyere": 49.5,
-        "Ituri": 287.0
-      },
-      "note": "Padyere source feature has no identified underlying Wikimedia Commons file; OSM side is source-relative and does not decide legal applicability."
     },
     {
       "key": [
@@ -332,6 +277,6 @@
       "distance_m_approx": 11.6
     }
   ],
-  "interpretation": "For the 16 relation-linked ADM1 contacts, the exact versioned OSM member-way direction and left/right country tags place 11 original centers on the Uganda-tagged side and 5 on the DR Congo-tagged side (Northern: 6/1; Western: 5/4). The separate Padyere/Ituri center is also on the Uganda-tagged side, giving 12 Uganda-tagged and 5 DR Congo-tagged centers across all 17 contacts. These are source-relative center classifications only, based on approximate center-to-line distances; they do not establish legal territory, whole-cell location, exact geoBoundaries/Wambacher export lineage, or a uniform disposition. All original stock holds remain unchanged.",
-  "next_step": "The specific underlying Commons source file for Padyere is not named by the pinned metadata and a bounded Commons API search returned no Padyere boundary map. The immediate source-relative evidence shows this key is within both pinned Padyere and Ituri features, while the later OSM-tagged national way puts its center on the Uganda side. The remaining reasonable step is identify and inspect the exact historical Commons source or retain this source disagreement for reviewer/root disposition; no alternate access route, legal assertion, or automatic repair/unresolved credit is claimed."
+  "interpretation": "For the 16 relation-linked ADM1 contacts, exact versioned OSM member-way direction and left/right country tags place 11 original centers on the Uganda-tagged side and 5 on the DR Congo-tagged side (Northern: 6/1; Western: 5/4). These are source-relative center classifications only, based on approximate center-to-line distances; they do not establish legal territory, whole-cell location, exact geoBoundaries/Wambacher export lineage, or a uniform disposition. All original stock holds remain unchanged.",
+  "next_step": "The bounded source-relative checks and original stock diagnostic do not decide which source representation governs the original contract or establish territorial applicability. Retain all 16 native holds for independent/root disposition; no alternate access route, legal assertion, or automatic repair/unresolved credit is claimed."
 }
