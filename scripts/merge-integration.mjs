@@ -236,7 +236,8 @@ export function reviewedTestPlan(request, {base, head, entries, files, definitio
   const inputs = [...EXECUTION_CODE];
   // These consumers read current declared policy, not historical fixture copies.
   for (const [consumer, operand] of [
-    ...['test/final-bank-finalizer.test.mjs', 'test/selected-delivery-smoke.test.mjs', 'test/final-bank-checkpoint.test.mjs', 'test/selected-owner-observation.test.mjs'].map(consumer =>
+    ...['test/final-bank-finalizer.test.mjs', 'test/selected-delivery-smoke.test.mjs', 'test/final-bank-checkpoint.test.mjs', 'test/selected-owner-observation.test.mjs',
+      'test/accepted-checkpoint-qualification.test.mjs'].map(consumer =>
       [consumer, 'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz']),
     ['test/current-rebind-product-custody.test.mjs', 'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json'],
     ['test/local-workspace.test.mjs', 'docs/LOCAL_WORKSPACES.md'],
