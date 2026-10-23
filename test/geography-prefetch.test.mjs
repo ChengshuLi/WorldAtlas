@@ -419,6 +419,40 @@ test('cold routing acquisition supplies exact objects and authenticates tree met
   } finally { f.close(); }
 });
 
+test('GitHub tree reader completes a truncated recursive routing tree before admission', async t => {
+  const originalFetch = globalThis.fetch;
+  const originalToken = process.env.GH_TOKEN;
+  delete process.env.GH_TOKEN;
+  const root = 'a'.repeat(40), child = 'b'.repeat(40), blob = 'c'.repeat(40);
+  const requests = [];
+  const rows = {
+    [`/repos/ChengshuLi/WorldAtlas/git/trees/${root}?recursive=1`]:
+      {sha: root, truncated: true, tree: [{path: 'nested', mode: '040000', type: 'tree', sha: child}]},
+    [`/repos/ChengshuLi/WorldAtlas/git/trees/${root}`]:
+      {sha: root, truncated: false, tree: [{path: 'nested', mode: '040000', type: 'tree', sha: child}]},
+    [`/repos/ChengshuLi/WorldAtlas/git/trees/${child}?recursive=1`]:
+      {sha: child, truncated: false, tree: [{path: 'routing.json', mode: '100644', type: 'blob', sha: blob, size: 24}]}
+  };
+  globalThis.fetch = async url => {
+    const locator = new URL(url).pathname + new URL(url).search;
+    requests.push(locator);
+    assert(rows[locator], `unexpected tree request ${locator}`);
+    return new Response(JSON.stringify(rows[locator]), {status: 200,
+      headers: {'content-type': 'application/json', etag: `"${requests.length}"`}});
+  };
+  t.after(() => {
+    globalThis.fetch = originalFetch;
+    if (originalToken === undefined) delete process.env.GH_TOKEN;
+    else process.env.GH_TOKEN = originalToken;
+  });
+  const tree = await githubTree(root, true);
+  assert.equal(tree.sha, root);
+  assert.equal(tree.truncated, false);
+  assert.deepEqual(tree.tree.map(row => row.path), ['nested', 'nested/routing.json']);
+  assert.equal(new Set(tree.tree.map(row => row.path)).size, tree.tree.length);
+  assert.equal(requests.length, 3);
+});
+
 // No alternates or historical checkout: start with an empty object store, then
 // exercise the same private native commit transport and authenticated tree cache as CI.
 function originFixture() {
