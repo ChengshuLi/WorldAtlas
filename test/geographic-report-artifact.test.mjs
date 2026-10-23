@@ -744,3 +744,28 @@ test('final-bank software reports retain truthful execution and strict native pr
   assert.equal(check(legacy),false,'Historical child markers retain their original meaning under software execution');
   assert.throws(()=>check({...legacy,selected_native_report:{...legacy.selected_native_report,candidate_code_executed:true}}),/findings remain unresolved/);
 });
+
+test('accepted final-map transition reports preserve withdrawals and transfers without claiming zero loss',()=>{
+  const baseline='a'.repeat(40),candidate='b'.repeat(40),old={path:'bank.json',bytes:100,sha256:'c'.repeat(64)},next={...old,sha256:'d'.repeat(64)};
+  const changes=[{row:1,start:2,end:5,previous_owner:'A',candidate_owner:null},{row:2,start:3,end:4,previous_owner:'A',candidate_owner:'B'},
+    {row:3,start:4,end:6,previous_owner:null,candidate_owner:'B'}];
+  const native={method:'selected-native-owner-conservation-v1',status:'validated-native-map-transition',candidate_code_executed:false,
+    baseline_selection:{version:2,kind:'selected-final-native-bank-v2',prepared_bank:old},candidate_selection:{version:2,kind:'selected-final-native-bank-v2',prepared_bank:next},
+    checkpoint_custody:{baseline_commit:baseline,accepted_bank:old,candidate_bank:next},changes,intervals:changes.slice(0,2),
+    added_cells:2,removed_cells:3,reassigned_cells:1,lost_or_reassigned_cells:4,affected_rows:3,
+    native_row_scope:{compared_rows:8,changed_rows:[1,2,3],added_cells:2,representation_migration:false}};
+  const report={version:1,method_id:'worldatlas-trusted-geography-check-v1',baseline_commit:baseline,candidate_commit:candidate,
+    trusted_code_commit:baseline,candidate_code_executed:false,published:false,source_approval:false,gate_status:'passed',
+    status:native.status,regressions:0,validation_scope:'selected-native-map-cells',selected_native_report:native};
+  const check=r=>checkGeographicReport(r,baseline,candidate);assert.equal(check(report),false);
+  for(const mutate of [r=>r.status='no-new-native-loss',r=>r.regressions=1,r=>r.selected_native_report.removed_cells=0,
+    r=>r.selected_native_report.lost_or_reassigned_cells=0,r=>r.selected_native_report.intervals=[],
+    r=>r.selected_native_report.checkpoint_custody.baseline_commit=candidate,r=>r.selected_native_report.native_row_scope.changed_rows=[1],
+    r=>r.selected_native_report.changes.push({...changes[0]}),r=>r.selected_native_report.changes[0].candidate_owner='A',
+    r=>r.selected_native_report.candidate_selection.version=1,r=>r.selected_native_report.candidate_code_executed=true]){
+    const altered=structuredClone(report);mutate(altered);assert.throws(()=>check(altered),/findings remain unresolved/);
+  }
+  const software={...report,trusted_code_commit:candidate,candidate_code_executed:true,trusted_code_inventory_sha256:'e'.repeat(64),
+    selected_native_report:{...native,candidate_code_executed:true}};
+  assert.throws(()=>checkGeographicReport(software,baseline,candidate,candidate),/findings remain unresolved/,'Changed science requires accepted checker code');
+});

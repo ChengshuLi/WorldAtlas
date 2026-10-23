@@ -322,6 +322,28 @@ export async function loadGeographicReport({api, repo, runId, artifactName, expe
   return report;
 }
 
+function finalTransitionAccounting(native,baseline) {
+  const scope=native?.native_row_scope,custody=native?.checkpoint_custody,changes=native?.changes,size=scope?.compared_rows;
+  if(!positive(size)||!Array.isArray(changes)||!changes.length||custody?.baseline_commit!==baseline
+    ||!isDeepStrictEqual(custody.accepted_bank,native.baseline_selection?.prepared_bank)
+    ||!isDeepStrictEqual(custody.candidate_bank,native.candidate_selection?.prepared_bank)
+    ||scope.representation_migration!==false)return false;
+  if(![custody.accepted_bank,custody.candidate_bank].every(p=>p&&typeof p.path==='string'&&p.path.length>0&&positive(p.bytes)&&hash(p.sha256)))return false;
+  const totals=[0,0,0];let y=-1,end=-1;
+  for(const p of changes){
+    if(!p||Object.keys(p).sort().join()!=='candidate_owner,end,previous_owner,row,start'
+      ||![p.row,p.start,p.end].every(Number.isSafeInteger)||p.row<0||p.row>=size||p.start<0||p.start>=p.end||p.end>size
+      ||p.row<y||p.row===y&&p.start<end||p.previous_owner===p.candidate_owner
+      ||[p.previous_owner,p.candidate_owner].some(v=>v!==null&&(typeof v!=='string'||!v)))return false;
+    y=p.row;end=p.end;totals[p.previous_owner===null?0:p.candidate_owner===null?1:2]+=p.end-p.start;
+  }
+  const rows=[...new Set(changes.map(p=>p.row))];
+  return ['added_cells','removed_cells','reassigned_cells'].every((key,i)=>native[key]===totals[i])
+    &&totals[1]+totals[2]>0&&native.lost_or_reassigned_cells===totals[1]+totals[2]
+    &&isDeepStrictEqual(native.intervals,changes.filter(p=>p.previous_owner!==null))
+    &&isDeepStrictEqual(scope.changed_rows,rows)&&native.affected_rows===rows.length&&scope.added_cells===totals[0];
+}
+
 export function checkGeographicReport(geography, baseline, candidate, codeCommit = baseline) {
   need(codeCommit === baseline || codeCommit === candidate, 'Unsupported geographic checker code commit');
   need(geography?.version === 1 && geography.method_id === 'worldatlas-trusted-geography-check-v1' &&
@@ -358,12 +380,17 @@ export function checkGeographicReport(geography, baseline, candidate, codeCommit
     && native.candidate_code_executed === (finalProfile && codeCommit !== baseline)
     && (!finalProfile || native.candidate_selection.kind === 'selected-final-native-bank-v2')
     && native.lost_or_reassigned_cells === 0 && Array.isArray(native.intervals) && native.intervals.length === 0;
+  const transitionPass = geography.status==='validated-native-map-transition'&&geography.regressions===0
+    &&geography.validation_scope==='selected-native-map-cells'&&codeCommit===baseline&&finalProfile
+    &&native.candidate_selection.kind==='selected-final-native-bank-v2'
+    &&native.method==='selected-native-owner-conservation-v1'&&native.status===geography.status
+    &&native.candidate_code_executed===false&&finalTransitionAccounting(native,baseline);
   const ordinaryPass = ['not-applicable', 'no-footprint-change', 'no-new-regression'].includes(geography.status);
   const waterPass = geography.status === 'regressions-found' &&
     geography.adjudication?.status === 'all-findings-supported-and-reviewed' &&
     geography.adjudication.unresolved_findings === 0;
   // A selected-native result cannot use generic success or water adjudication
   // to evade its own conservation and actual-execution checks.
-  need(selectedNative ? nativePass : ordinaryPass || waterPass, 'Combined geographic findings remain unresolved');
+  need(selectedNative ? nativePass || transitionPass : ordinaryPass || waterPass, 'Combined geographic findings remain unresolved');
   return waterPass;
 }

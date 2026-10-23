@@ -31,19 +31,37 @@ finished geometry/interval context explicit and issuing a truthful new E identit
 Normal accepted-code joint validation, not the producer, admits the conversion.
 The first migration requires a new full package capture.
 
-For a later new native addition, version-2 `compose` takes the accepted selector
-and only the newly reviewed authorities' complete rule/binding/constructor/patch
-pins. It produces a new-evidence registry, not another cumulative ledger. Supply
-its whole pin as `change_evidence` to version-2 `finalize`. An unchanged hook is
-already accepted and contributes no new authorities. Legacy new-positive
-append/rebind methods are explicitly unsupported in this profile, not rerouted
-through an old selector. Existing reference-metadata preparation remains available;
-its complete new projection pin may be supplied as `reference_projection` without
-new cell authorities. Original N/source-contract changes require their genuine
-separate path, not an append exemption.
+For later edits, the accepted current-E bank and proposed complete bank are the
+map authorities. The same comparison covers additions, owner corrections and
+withdrawals of explicit finished native-overlay cells. Original polygon-derived
+or N-owned cells retain their existing migration path. It derives the exact changed cells from their decoded words and
+requires the same symmetric change in finished native context. Original polygon
+coverage/order, owner identity, N/M and unrelated context remain unchanged except
+through their existing explicit metadata/migration paths. Withdrawals are reported
+as withdrawals, not zero loss; their scientific rationale belongs in substantive
+exact-head review. They need no fabricated positive constructor.
 
-Preparation reads the accepted current-E words and finished context, applies only
-the proposed new intervals and emits their complete next bank/context. Unchanged
+Newly positive destinations still require the complete original source/target,
+physical-method and assigned/held proof through the existing native constructor.
+Version-2 `compose` takes only that proposal's complete rule/binding/constructor/
+patch pins and produces `change_evidence`, not a cumulative ledger. The validator
+joins its complete assigned scope to actual positive destinations, including owner
+transfers. It does not replay old repair hooks to reconstruct the current map.
+An unused/restored hook is provenance, not an instruction to append cells.
+
+The existing addition convenience remains: supply the new whole `change_evidence`
+pin to version-2 `finalize` to prepare the next complete bank. For an already
+prepared correction or withdrawal, instead supply `proposed_selector: {commit,
+path: "data/ownership-selection.json"}` alongside the actual accepted `selector`
+and `package_inputs`. The finalizer authenticates that complete proposed bank and
+uses the same canonical emitter and selector-last writer, without old repair
+qualification or a separate rollback workflow. The proposal already carries its
+source-evidence hook; do not also supply `change_evidence` or `reference_projection`.
+Existing reference-metadata-only preparation remains supported through its complete
+`reference_projection` pin. N/source-contract or polygon changes retain their
+existing explicit separate path, not an exemption for map-cell edits.
+
+Preparation consumes the complete final words and finished context. Unchanged
 compatibility-only members keep their complete accepted index pins and ordinary
 Git tree and index identities; only genuine sparse copies may remain absent
 instead of being fetched and rewritten. Any materialized compatibility file must
@@ -53,9 +71,9 @@ This avoids compatibility hydration, not the complete current-E/context read and
 whole-stream/footprint hash recomputation. A small key change is not a bounded-row
 finalization, and later complete packaging still requires its actual declared
 inputs. The ordinary joint consumer separately
-qualifies new evidence and exhaustively checks all changed and unchanged cells
+qualifies actual positive destinations and exhaustively checks all changed and unchanged cells
 and context against the immutable accepted main pinned by the queue. It reads
-only the newly proposed authority, not a history of accepted repairs. The next
+only applicable positive evidence, never a history of accepted repairs. Pure withdrawals read no positive registry. The next
 accepted main is automatically the next baseline; no checkpoint locator, artifact
 download, prior-authority ledger or manual promotion is part of this path. No public preparation result is a
 scientific capability. Historical evidence remains in Git; `change_evidence` is a

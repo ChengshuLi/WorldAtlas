@@ -184,6 +184,40 @@ def checkpoint_products_module(repo):
     return module
 
 
+def valid_final_transition(native, baseline):
+    scope, custody = native.get('native_row_scope') or {}, native.get('checkpoint_custody') or {}
+    changes, intervals = native.get('changes'), native.get('intervals')
+    size = scope.get('compared_rows')
+    if (type(size) is not int or size < 1 or not isinstance(changes, list) or not changes
+            or custody.get('baseline_commit') != baseline
+            or custody.get('accepted_bank') != (native.get('baseline_selection') or {}).get('prepared_bank')
+            or custody.get('candidate_bank') != (native.get('candidate_selection') or {}).get('prepared_bank')
+            or scope.get('representation_migration') is not False):
+        return False
+    if not all(isinstance(p, dict) and isinstance(p.get('path'), str) and p['path']
+               and type(p.get('bytes')) is int and p['bytes'] > 0 and isinstance(p.get('sha256'), str)
+               and re.fullmatch('[a-f0-9]{64}', p['sha256']) for p in [custody.get('accepted_bank'), custody.get('candidate_bank')]):
+        return False
+    totals = [0, 0, 0]
+    previous = (-1, -1)
+    for row in changes:
+        if (not isinstance(row, dict) or set(row) != {'row', 'start', 'end', 'previous_owner', 'candidate_owner'}
+                or any(type(row.get(k)) is not int for k in ['row', 'start', 'end'])
+                or not 0 <= row['row'] < size or not 0 <= row['start'] < row['end'] <= size
+                or row['row'] < previous[0] or row['row'] == previous[0] and row['start'] < previous[1]
+                or row['previous_owner'] == row['candidate_owner']
+                or any(v is not None and (not isinstance(v, str) or not v) for v in [row['previous_owner'], row['candidate_owner']])):
+            return False
+        previous = (row['row'], row['end'])
+        totals[0 if row['previous_owner'] is None else 1 if row['candidate_owner'] is None else 2] += row['end'] - row['start']
+    rows = sorted({p['row'] for p in changes})
+    return (all(type(native.get(k)) is int and native[k] == v for k, v in zip(['added_cells', 'removed_cells', 'reassigned_cells'], totals))
+            and totals[1] + totals[2] > 0 and native.get('lost_or_reassigned_cells') == totals[1] + totals[2]
+            and intervals == [p for p in changes if p['previous_owner'] is not None]
+            and scope.get('changed_rows') == rows and native.get('affected_rows') == len(rows)
+            and scope.get('added_cells') == totals[0])
+
+
 def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destination=None):
     products = checkpoint_products_module(repo) if checkpoint_destination is not None else None
     if products is not None:
@@ -207,11 +241,11 @@ def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destin
         if issued.get('mode') not in ['authenticated-checkpoint-append-v1', 'accepted-final-map-comparison-v1'] or not isinstance(issued.get('native'), dict):
             raise ValueError('Joint selected comparison did not complete native validation')
         native = issued['native']
-        if native.get('method') != 'selected-native-owner-conservation-v1' or native.get('candidate_code_executed') is not False or native.get('status') not in ['native-regressions-found', 'no-new-native-loss']:
+        if native.get('method') != 'selected-native-owner-conservation-v1' or native.get('candidate_code_executed') is not False or native.get('status') not in ['native-regressions-found', 'no-new-native-loss', 'validated-native-map-transition']:
             raise ValueError('Joint native comparison result is incomplete')
         if native['status'] == 'native-regressions-found':
             return issued
-        if native.get('lost_or_reassigned_cells') != 0 or native.get('intervals') != []:
+        if native['status'] == 'no-new-native-loss' and (native.get('lost_or_reassigned_cells') != 0 or native.get('intervals') != []):
             raise ValueError('Successful native comparison contradicts conservation results')
         if checkpoint_destination is not None and issued.get('mode') == 'authenticated-checkpoint-append-v1':
             with stage_timing('selected-checkpoint-retention'):
@@ -361,14 +395,20 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
         if (native.get('method') != 'selected-native-owner-conservation-v1'
                 or native.get('candidate_code_executed') is not expected_child_software
                 or (final_profile and native['candidate_selection'].get('kind') != 'selected-final-native-bank-v2')
-                or native.get('status') not in ['native-regressions-found', 'no-new-native-loss']):
+                or native.get('status') not in ['native-regressions-found', 'no-new-native-loss', 'validated-native-map-transition']):
             raise ValueError('Selected map comparison lacks a completed native result')
         report['selected_native_report'] = native
         if native['status'] == 'native-regressions-found':
             return {**report, 'status': 'native-regressions-found',
                     'regressions': len(native['intervals']),
                     'limits': ['Existing owner loss/reassignment has no automatic water or political exception. Unsupported native scope requires an explicit migration.']}
-        if type(native.get('lost_or_reassigned_cells')) is not int or native['lost_or_reassigned_cells'] != 0 or native.get('intervals') != []:
+        transition = native['status'] == 'validated-native-map-transition'
+        if transition:
+            # Only accepted code can admit a changed scientific map. The report
+            # retains actual removals/transfers, rather than calling them no loss.
+            if software or not final_profile or not valid_final_transition(native, baseline):
+                raise ValueError('Final map transition lacks exact accepted comparison')
+        elif type(native.get('lost_or_reassigned_cells')) is not int or native['lost_or_reassigned_cells'] != 0 or native.get('intervals') != []:
             raise ValueError('Successful native comparison contradicts conservation results')
         if joint is not None and joint.get('checkpoint') is not None:
             report['checkpoint'] = joint['checkpoint']
@@ -388,9 +428,9 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
             and scope.get('changed_rows') == [] and type(scope.get('added_cells')) is int and scope['added_cells'] == 0
             and type(scope.get('compared_rows')) is int and scope['compared_rows'] > 0
             and type(native.get('affected_rows')) is int and native['affected_rows'] == 0)
-        return {**report, 'status':'no-footprint-change' if unchanged_final else 'no-new-native-loss', 'regressions':0,
+        return {**report, 'status':'validated-native-map-transition' if transition else 'no-footprint-change' if unchanged_final else 'no-new-native-loss', 'regressions':0,
                 'validation_scope':'selected-native-map-cells',
-                'limits':['Selected map-cell conservation and source-qualified visible additions were checked. Continuous polygon overlap is outside map-cell repair scope.',
+                'limits':['Complete before/after map cells and finished context were compared; newly positive destinations were source-qualified. Continuous polygon overlap is outside map-cell repair scope.',
                           'This does not approve a new grid, ownership identity migration or unsupported source methodology.']}
     if before == after:
         return {**report, 'status': 'not-applicable', 'regressions': None,
@@ -523,7 +563,7 @@ def main():
         checkpoint_destination=None if software else args.out.absolute().parent)
     if not software:
         result = apply_adjudications(repo, args.candidate, result)
-    passed = result['status'] in ['not-applicable', 'no-footprint-change', 'no-new-regression', 'no-new-native-loss'] or (
+    passed = result['status'] in ['not-applicable', 'no-footprint-change', 'no-new-regression', 'no-new-native-loss', 'validated-native-map-transition'] or (
         result.get('adjudication', {}).get('status') == 'all-findings-supported-and-reviewed')
     result['gate_status'] = 'passed' if passed else 'blocked'
     raw = (json.dumps(result, sort_keys=True, separators=(',', ':'), allow_nan=False) + '\n').encode()

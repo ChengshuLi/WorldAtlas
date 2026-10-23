@@ -14,7 +14,7 @@ import {createAcquisition, githubTree} from './geography-prefetch.mjs';
 import {acquireFinalizationCheckpoint, finalizationCheckpointBytes, admitCanonicalOutputs} from './delivery-checkpoint-finalization.mjs';
 import {releaseAcceptedCheckpoint, ACCEPTED_CHECKPOINT_LOCATOR} from './accepted-selected-checkpoint.mjs';
 import {repairComponentKey, compareRepairComponents, nativeOnlyComponent} from '../src/native-grid.js';
-import {scientificNativeSelection,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
+import {finalBankSelection,scientificNativeSelection,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
 import {prepareReferenceMetadataProjection,validateReferenceMetadataProjection,referenceMetadataReader} from './selected-reference-metadata.mjs';
 import {isReferenceAliasReceipt} from '../src/reference-metadata.js';
 import {ImmutableReader,readSelectedGeometryBank} from './check-effective-geographic-regression.mjs';
@@ -1129,7 +1129,7 @@ const finalizedAdoptions = new WeakMap();
 // qualifier. The ordinary accepted-code transition independently admits the new
 // authority scope and compares every before/after word and context value.
 function finalizeFinalBankDelivery(config, reader) {
-  need(config.version===2 && Object.keys(config).every(key=>['version','selector','package_inputs','change_evidence','reference_projection'].includes(key)),
+  need(config.version===2 && Object.keys(config).every(key=>['version','selector','package_inputs','change_evidence','reference_projection','proposed_selector'].includes(key)),
     'Exact final-bank preparation config required');
   const selector=locate(reader,config.selector),packageInputs=locate(reader,config.package_inputs);
   need(selector.path==='data/ownership-selection.json'&&packageInputs.path==='.github/package-inputs.json', 'Canonical final-bank inputs required');
@@ -1138,6 +1138,11 @@ function finalizeFinalBankDelivery(config, reader) {
   need(selection.version===2||selection.version===1&&selection.additive_release, 'Final preparation requires an existing accepted final bank');
   need(selection.version===2||config.change_evidence===undefined&&config.reference_projection===undefined,
     'Representation migration cannot change scientific or reference inputs');
+  if(config.proposed_selector){
+    need(selection.version===2&&!config.change_evidence&&!config.reference_projection,
+      'A proposed final bank already carries its complete change/reference selection');
+    need(locate(reader,config.proposed_selector).path==='data/ownership-selection.json','Canonical proposed selector required');
+  }
   const originalPackage=reader.read(packageInputs);validatePackageInputs(JSON.parse(originalPackage));
   const outputs={'ownership-selection.json':raw,'package-inputs.json':originalPackage};
   const adoption=new Map();
@@ -1226,6 +1231,34 @@ async function prepareProposedFinalBank({plan,selection,manifest,previous,origin
     reference_release:selection.reference,base:previous.preparedOwnership.base_reference,referenceMetadata};
   const before=await readPreparedFinalOwnership({indexRaw:originalIndex,manifest,manifestSha:native.sha256,selected,
     ownerCount:previous.preparedOwnership.owners,read:pin=>{need(originalBodies.has(pin.path),'Missing accepted final body');return originalBodies.get(pin.path);}});
+  // Adopt an already prepared current-state proposal through the same writer.
+  // The queue compares the complete before/after maps; preparation does not
+  // grant scientific authority or reconstruct a correction from old repairs.
+  if(config.proposed_selector){
+    const pin=locate(reader,config.proposed_selector),raw=reader.read(pin),proposed=JSON.parse(raw);
+    need(finalBankSelection(proposed)&&same(scientificNativeSelection(proposed),native)
+      &&same(proposed.reference_projection,selection.reference_projection),
+      'Proposed final bank changed the native/reference selection');
+    const root=path.posix.dirname(proposed.prepared_bank.path);
+    const read=async(pointer)=>{
+      const request={...pointer,commit:pin.commit,mode:'100644'};
+      await reader.acquire?.([request]);
+      const physical=reader.pin(pin.commit,pointer.path);
+      need(physical.bytes===pointer.bytes&&physical.sha256===pointer.sha256,'Proposed final body differs from its complete pin');
+      return reader.read(physical);
+    };
+    const indexRaw=await read(proposed.prepared_bank),index=JSON.parse(indexRaw);
+    need(same(index.compatibility_files,previous.compatibility_files),'Proposed final bank changed fixed compatibility');
+    const proposedBank=await readPreparedFinalOwnership({indexRaw,manifest,manifestSha:native.sha256,
+      selected:{finalBank:proposed.prepared_bank,base:before.index.preparedOwnership.base_reference,
+        reference_release:proposed.reference,referenceMetadata},ownerCount:before.features.length,
+      read:p=>read({...p,path:root+'/'+p.path})});
+    const prepared=await prepareFinalBankStartupOwnership({manifest,manifestSha:native.sha256,previous,
+      ownership:proposedBank.ownership,features:proposedBank.features,
+      baseReference:before.index.preparedOwnership.base_reference,referenceMetadata,destination});
+    const {prepared_bank,reference,...retained}=proposed;plan.proposedSelection=retained;
+    return prepared;
+  }
   let projection=originalProjection,reference=before.index.preparedOwnership.base_reference;
   if(config.reference_projection){
     const raw=readPin(config.reference_projection);projection=JSON.parse(raw);
