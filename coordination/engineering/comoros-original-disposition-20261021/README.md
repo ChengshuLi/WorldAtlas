@@ -1,23 +1,21 @@
-# Comoros ADM1 repair-evaluation proposal
+# Comoros bounded native repair proposal
 
-This packet records a proposed documented-unresolved disposition for the frozen original package `gb-COM-ADM1--repair-evaluation`. It is evidence for review, not an accepted exception, repair, or package closure.
+This branch advances the reviewed 485-cell candidate from the original package `gb-COM-ADM1--repair-evaluation` through the accepted final-bank v2 route. It is a proposal only. It does not claim root acceptance, accepted credit, current legal authority, OCHA license compliance, or removal of any other hold.
 
-## Exact scope and observation
+## Original scope and candidate split
 
-At data commit `5b62953dba6439566e8f243a648ceee41aaeb194`, the pinned original queue object identifies 571 native keys in 296 intervals, all classified as land, with source family 75, block 034, candidate owner 7114, and source feature indices 20155–20157. The stock full-package selected-owner observation covers all 571 keys. Each has base owner 0, accepted additive owner 0, effective selected owner 0, null selected owner ID, and no existing-product overlap. These are selected-product state observations only.
+The frozen original scope is 571 land-native keys in 296 intervals, family 75, block 034, candidate owner 7114, and source feature indices 20155–20157. The retained key-level decision packet partitions this scope into 485 proposed candidate keys and 86 separately held keys. The 86 remain excluded: 54 OCHA-adverse keys and 32 OCHA-concordant keys without the retained mapped-land center-support hit. No prior accepted-key overlap is inferred; it remains unknown.
 
-- Observation: `evidence/selected-owner-observation.json` (134,087 bytes; SHA-256 `2734c3b99b57cef6019a7df09f083e0058858d1afc46fb2ee77691c3bcde3994`).
-- Per-key/interval proposal and source/physical joins: `proposed-dispositions-v2.json` (1,625,196 bytes; SHA-256 `71ee00c302f38fe64941498964ab88872e9f08a13e13d74e1af7d9690cbe5792`).
-- The proposal pins the queue, selection, source roster/census, block-034 candidate and physical/water evidence, source catalogue, original source payload, and relevant code inputs.
+The existing constructor result and patch contain exactly 485 cells for the three original COM source members. The retained source and physical joins bind the same source vectors and target members. The full original 571-key denominator and historical observations are preserved in `proposed-dispositions-v2.json` and `evidence/selected-owner-observation.json`; the observation is historical and is not asserted as the current final-bank state.
 
-## Source, candidate, and physical joins
+## Applicability and evidence limits
 
-Each proposed key is bound to exactly one raw block-034 source-candidate run, then to the retained source-feature roster and original source payload properties. The matched runs name three Comoros ADM1 features: Moheli (221 keys / 94 intervals), Anjouan (178 / 93), and Grande Comore (172 / 109). The source catalogue records a represented-year claim of 2017 and an ODbL 1.0 license label. Those catalogue labels do not establish cell-level applicability, rights compliance, or authority.
+The frozen target is the undated modern compact `atlas:territory:COM` aggregate listing the three original island members. The original contract uses native-cell centers. The retained source catalog represents the source year as 2017; its 2023 update/build dates do not independently prove a 2017 capture. No new 2017 shoreline, commune-boundary, or whole-cell-footprint certificate is imposed. The existing whole-target physical discrepancies are preserved as context; the exact 485-cell candidate remains bounded by its retained center and physical/source joins.
 
-The block-034 retained physical-support and inland-water-support runs were joined against every exact key: 571 have land support and zero have inland-water support. These are retained grid evidence labels, not present-day physical or legal determinations. No foreign feature appears in the matched candidate runs, but the retained candidate rows are not a complete competitor/contact audit; completeness of foreign competitors remains unresolved.
+The finite retained France ADM1/ADM2/ADM3 pair matrices report zero intersections for the pinned products. The later IGN 2021 Mayotte layer is dated, disjoint negative context only. The OCHA COD-AB comparison is non-operative comparator context: its license was not verified, and OCHA geometry is not redistributed in this branch. No open-world or legally exhaustive source-universe claim is made.
 
-## Proposed status and limits
+## Current selection transition
 
-All 296 intervals and all 571 keys are proposed as unresolved exceptions under the original queue clause that each interval be either a qualified additive repair or a documented exception, with selected-native conservation and source/physical witness checks. Every proposed row remains unaccepted and held. Repair qualification is false; accepted exceptions, accepted repairs, owner changes, and new accepted credit are all zero. Historical accepted-key overlap is unknown and has not been inferred from package exclusion.
+`compose-config-current-v2.json` pins the exact accepted selector at `c8a7e746356bc957265ce5ea007179edbce317e7` and the previously reviewed COM rule, custody binding, constructor, and patch. `composition-001/authority-registry.json` is the new-only authority operand. The next documented finalizer step binds this operand to the same current selector and package-inputs snapshot. It must preserve the whole accepted current bank and produce exact current-E output; stale cumulative ledgers from the closed earlier PR are not reused.
 
-Unresolved questions include whether this retained 2017 source geometry applies to the selected location for the relevant period, whether the competitor/contact record is complete, and what dated evidence and rights/authority conditions support any positive qualification. The packet makes no sovereignty, current-boundary, rights-compliance, or package-closure claim.
+The 485 cells remain proposed until the normal current-bank consumer, exact public-head independent review, and required stock delivery complete. No observation or scientific producer was rerun for this transition. The 86 held keys and all adverse evidence remain intact.
