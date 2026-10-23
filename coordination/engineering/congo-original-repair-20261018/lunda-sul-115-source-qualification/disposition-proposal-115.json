@@ -1,0 +1,124 @@
+{
+  "kind": "cod-original-researched-unresolved-proposal-v1",
+  "status": "proposal-only; root acceptance and credit are not recorded",
+  "original_issue": 2453,
+  "original_package": "gb-COD-ADM2--repair-evaluation",
+  "original_scope": {
+    "cells": 3905,
+    "intervals": 2323,
+    "owners": 50,
+    "previously_supported_outcomes": 2975,
+    "residual_cells_before_followups": 930
+  },
+  "proposed_disposition": {
+    "type": "researched-unresolved",
+    "cells": 115,
+    "repair_cells": 0,
+    "owner_changes": 0,
+    "hold_removals": 0,
+    "all_keys_remain_held": true,
+    "package_completion": false,
+    "accepted_credit": 0
+  },
+  "strata": [
+    {
+      "target": "gb:COD:ADM2:63176286B26674316015082",
+      "name": "Sandoa",
+      "owner_index": 14464,
+      "cells": 88,
+      "class": "land"
+    },
+    {
+      "target": "gb:COD:ADM2:63176286B41140464701712",
+      "name": "Kapanga",
+      "owner_index": 14492,
+      "cells": 27,
+      "class": "land"
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "source_id": "gb:AGO:ADM1:26408823B58820355179323",
+      "name": "Lunda Sul",
+      "recorded_vintage": 2021,
+      "recorded_source": "U.S. Census Bureau",
+      "recorded_license": "Public Domain",
+      "exact_2021_source_release_or_crosswalk": "not identified"
+    },
+    "key_binding": {
+      "input_binding_path": "coordination/engineering/congo-original-repair-20261018/lunda-sul-115-source-qualification/input-binding.json",
+      "matrix_path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/evidence/930-key-center-conflict-matrix.json",
+      "matrix_sha256": "1b3805a65d528b24d9327bd4c13f1e0b4a8cc0ef908addd728dc2482ff986174",
+      "physical_membership_join_path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/evidence/frozen-physical-mask-membership-join.json",
+      "physical_membership_join_sha256": "d73a0d7f0d3e3c83d2ed2b4da5387ff3336204d47931be052bbe844f339e8ef5",
+      "all_115_original_vector_members": true,
+      "all_115_physical_support": true,
+      "all_115_inland_water_support": false,
+      "also_center_hit_COD_Lualaba": 23
+    },
+    "source_research": [
+      {
+        "source": "https://www2.census.gov/programs-surveys/international-programs/mapping-files/time-series/Angola-Namibia-Technical-Document.pdf",
+        "content_examined": "Official 2024 Demobase technical document; it says the study acquired subnational boundaries from HDX (2024a/b) and aligned international borders to LSIB.",
+        "result": "2024 lineage does not identify the pinned 2021 feature's release or applicability."
+      },
+      {
+        "source": "https://censo2024.ine.gov.ao/Relatorio_Provincial_Lunda_Sul_Censo2024.pdf",
+        "content_examined": "Official 189-page INE Lunda Sul 2024 census report; title and map-index pages examined, including maps under Law 14/24.",
+        "result": "Establishes 2024 census and administrative context, not provenance or applicability of the 2021 feature."
+      },
+      {
+        "source": "coordination/engineering/congo-original-repair-20261018/kimvula-source-target-diagnostic-001/README.md",
+        "content_examined": "Earlier reviewed same-family primary-source checks of Census archive and Angola products, including 2019 and 2024 offerings and 2016 general metadata.",
+        "result": "No exact 2021 Angola ADM1 source file or feature crosswalk was identified; adjacent product lineages do not establish this feature's provenance."
+      }
+    ],
+    "complete_negative_source_families": 20,
+    "source_evidence_path": "coordination/engineering/congo-original-repair-20261018/lunda-sul-115-source-qualification/source-evidence-generated/source-evidence.json",
+    "source_evidence_sha256": "6508cd1d13034556d5c485192dfe875a9e867f5a55dcf205bb32d75b12fe4b51"
+  },
+  "qualification": {
+    "diagnostic_config_path": "coordination/engineering/congo-original-repair-20261018/lunda-sul-115-source-qualification/native-diagnostic-config.json",
+    "diagnostic_config_sha256": "5073ec20815c14a854d62307557a7d61e7a39961635522149ee4259fcdb952ee",
+    "diagnostic_path": "coordination/engineering/congo-original-repair-20261018/lunda-sul-115-source-qualification/native-diagnostic-generated/native-diagnostic.json",
+    "diagnostic_sha256": "f5c4750c20f2005e7952636ecf3cc3312f3d19a35d7a972dc306d6a6932ceeb7",
+    "requested": 115,
+    "supported": 0,
+    "held": 115,
+    "held_reason": "territorial_exclusion_cells",
+    "first_failure": {
+      "predicate": "unique-source-target-coverage",
+      "y": 137364,
+      "x_start": 147052,
+      "x_end_exclusive": 147056,
+      "owner_index": 14492
+    },
+    "constructor": {
+      "command": "node scripts/prepare-delivery-handoff.mjs native-authority <native-diagnostic-config.json> <native-authority-generated>",
+      "executing_head": "d67f4fe0552b94d534015eef4aefafee525dedf8",
+      "exit_code": 1,
+      "stderr": "Proposed native cells lack unique source-target coverage",
+      "output_emitted": false
+    }
+  },
+  "independent_review": {
+    "reviewer": "existing independent reviewer",
+    "result": "Supports this bounded researched-unresolved proposal; complete competitor inputs, source applicability uncertainty, diagnostic and constructor refusal were reviewed.",
+    "remaining_decision_relevant_evidence_if_later_available": "An exact 2021 Census source release or feature crosswalk may resolve the unresolved lineage/applicability; no presently identified lawful acquisition route remains in the examined evidence.",
+    "no_positive_qualification": true
+  },
+  "scope_separation": {
+    "previously_published_116_key_proposal_unchanged": true,
+    "previously_published_105_key_proposal_unchanged": true,
+    "remaining_cells_from_prior_709_residual": 594,
+    "remaining_cells_status": "pending; excluded from this proposal",
+    "original_denominator_or_previous_outcomes_changed": false
+  },
+  "limitations": [
+    "Center overlap is conflict evidence, not whole-cell or territorial proof.",
+    "No current legal-boundary certificate or source applicability conclusion is claimed.",
+    "All native holds remain; no repair or owner change is proposed.",
+    "The 23 Lualaba center hits and all 20 negative source families remain retained as context.",
+    "Root alone records acceptance and unified science credit."
+  ]
+}
