@@ -1,0 +1,116 @@
+{
+  "kind": "bounded official source-context examination",
+  "package_id": "gb-MDA-ADM1--repair-evaluation",
+  "original_scope": {
+    "cells": 1986,
+    "intervals": 539,
+    "owners": 16,
+    "remaining_cells": 133,
+    "remaining_original_holds": "unchanged"
+  },
+  "relevant_residual_stratum": {
+    "target": "Taraclia",
+    "original_source_id": "gb:MDA:ADM1:25212430B43456438192105",
+    "iso": "MD-TA",
+    "mda_source_match_and_ukr_contact_keys": 5,
+    "other_taraclia_residual_keys_in_cross_tab": 0
+  },
+  "primary_source_examined": {
+    "publisher": "Moldova Energy Projects Implementation Unit (MEPIU)",
+    "title": "Environmental and Social Impact Assessment / Environmental and Social Management Plan for the 400 kV OHTL Vulcanesti–Chisinau project, specific for Taraclia District",
+    "report_date": "December 2023",
+    "url": "https://www.ucipe.gov.md/sites/default/files/2025-08/final-report-esia-esmp-for-400-kv-ohtl-vulcanesti-chisinau-specific-for-taraclia-district-december-2023.pdf",
+    "inspection": "Web-accessible text extraction; printed pages 58–59. No PDF map image or geometry was examined.",
+    "facts": [
+      "Describes Taraclia as a Moldovan administrative district consisting of 26 localities in 15 level-I administrative units.",
+      "States that the district borders Gagauzia, Cahul and Ukraine's Odessa region.",
+      "Describes northern and southern separated parts of the district.",
+      "Cites Law 764/2001 on the administrative-territorial organization of Moldova."
+    ],
+    "interpretation": "Supports regional adjacency context for the five Taraclia cells in the retained MDA-source-match/UKR-contact stratum. It does not locate those cells, identify their membership in the exact archived MDA source feature, provide versioned boundary geometry, or resolve the 2020 source applicability question. It qualifies no cell."
+  },
+  "additional_law_source_attempt": {
+    "source": "Official Moldova legislation portal, Law 764/2001",
+    "report_citation_url": "https://www.legis.md/cautare/getResults?doc_id=138831&lang=ro#",
+    "text_url": "https://www.legis.md/cautare/getResults?doc_id=62962&lang=ro",
+    "pdf_url": "https://www.legis.md/cautare/downloadpdf/62950",
+    "result": "All three distinct official listing/text/PDF URLs were opened through the available web reader and returned HTTP 403. The official-site search index provides only a short result snippet; the document body was not obtained.",
+    "limit": "No alternate transport or route was used; this records only those attempted reads and does not establish global unavailability. The indexed synopsis is not treated as a verified reading of the law."
+  },
+  "cited_district_record_attempt": {
+    "source": "Taraclia district passport page cited as source 31 in the MEPIU report",
+    "url": "https://raiontaraclia.md/pasport-rajona/",
+    "result": "The available web reader returned a Cloudflare verification interstitial ('Please wait while your request is being verified...') and no document content.",
+    "action": "Stopped at the interstitial. No browser interaction, direct HTTP retry, alternate route, or challenge bypass was attempted."
+  },
+  "official_gis_portal_lead": {
+    "publisher": "National Bureau of Statistics of the Republic of Moldova",
+    "announcement_url": "https://statistica.gov.md/ro/bns-lanseaza-oficial-portalul-geostatistica-12_62688.html",
+    "portal_url": "https://geo.statistica.md/",
+    "announcement_date": "2026-10-20",
+    "announcement_facts": [
+      "The BNS says the official GeoStatistica portal supports mapped statistical data at several territorial levels, including districts, communes, and localities.",
+      "The announcement says the portal currently exposes 2024 population-and-housing-census cartographic layers and that some datasets may be downloaded; additional datasets and periods are planned.",
+      "The announcement does not identify the exact layer names, boundary vintage, feature IDs, or download endpoints relevant to the 2020 MDA source."
+    ],
+    "attempts_and_status": [
+      "The web reader opened the portal shell but returned no readable application content; robots.txt and sitemap.xml were also inaccessible through that reader.",
+      "An initial bounded local request failed before HTTP response with DNS resolution error. After explicit network-enabled execution, DNS resolved and the official portal returned HTTP 200; the public REST catalogue and exact BNS FeatureServer metadata/attribute query were read through ordinary unauthenticated routes."
+    ],
+    "interpretation": "This is an examined official 2026 BNS administrative layer with a Taraclia district code/name and mostly matching 37-feature nomenclature, but its published metadata does not identify source lineage or a temporal validity date for the polygons. The item-level license and accessInformation fields are blank; although the Hub site item states CC BY 4.0, that does not substitute for dataset-specific terms. No geometry or cell-level comparison was performed, and no raw service data is redistributed. The source could provide current administrative context but does not establish lineage to the consumed 2020 MDA source or resolve any residual contact. Keep all 133 pending while any justified, lawful source-specific comparison is assessed.",
+    "portal_and_catalogue_examined": {
+      "homepage_http_status": 200,
+      "homepage_bytes": 86053,
+      "hub_site_item_id": "2801797e1cf04bc6a7acd4158e84411f",
+      "hub_site_owner": "statistica_moldovei",
+      "organization_id": "Pqa2pBN0HSNd7QdR",
+      "hub_site_license_info": "CC BY 4.0",
+      "catalogue_route": "Public ArcGIS REST search restricted to the BNS organization and Feature Service items; 279 service metadata entries returned across three pages.",
+      "selected_service": {
+        "title": "raioane",
+        "item_id": "f16603049f434617916eb59451048538",
+        "owner": "statistica_moldovei",
+        "feature_service_url": "https://services-eu1.arcgis.com/Pqa2pBN0HSNd7QdR/arcgis/rest/services/raioane/FeatureServer",
+        "service_item_license_info": "empty",
+        "service_item_access_information": "empty",
+        "layer_name": "raioane",
+        "geometry_type": "polygon",
+        "spatial_reference": "WKID 4026 (MOLDREF99_Moldova_TM)",
+        "feature_count": 37,
+        "layer_metadata_create_date": "2026-03-23",
+        "layer_metadata_sync_and_modification_date": "2026-09-04",
+        "layer_metadata_lineage_or_source_citation": "none present in the examined metadata XML",
+        "taraclia_attributes": {
+          "lau1_codst": "87",
+          "lau1_name_ro": "Taraclia",
+          "lau1_name_en": "Taraclia",
+          "lau1_type": "Raion"
+        }
+      },
+      "comparison_to_retained_2020_feature_names": {
+        "old_archive_features": 37,
+        "BNS_features": 37,
+        "exact_case_sensitive_name_matches": 34,
+        "matches_after_case_folding": 36,
+        "capitalization_only_differences": [
+          "RIscani / Riscani",
+          "SIngerei / Singerei"
+        ],
+        "archive_only_name": "Transnistria",
+        "BNS_only_name": "Unitatile administrativ-teritoriale din stânga Nistrului"
+      },
+      "attribute_query": "All 37 rows queried with returnGeometry=false; no polygons, coordinates, or feature geometries were requested or examined."
+    }
+  },
+  "independent_review": {
+    "reviewer": "/root/rus12_review",
+    "result": "Confirmed the five Taraclia keys are in the MDA-match/UKR-contact group and that the report establishes contextual adjacency only, not exact source applicability.",
+    "remaining_reasonable_step": "The cited district passport may provide further source-specific identity or version context, but its page returned a verification interstitial and was not examined. The BNS GeoStatistica catalogue now identifies a public polygon layer with Taraclia code 87, but the layer metadata gives no source lineage or polygon vintage and the service item has no dataset-specific license text. Any further use should first resolve whether a permitted, source-relevant comparison could change the original source-applicability finding; no geometry was downloaded or compared. The currently examined metadata and report do not link the five original contacts to a versioned source boundary."
+  },
+  "restrictions_and_disposition": [
+    "No raw coordinates or geometry are included.",
+    "No new geometry or physical producer, owner observation, or source comparison was run.",
+    "No access denial was bypassed, no terms accepted, and no external contact made.",
+    "All 133 residual cells remain pending; no repairs, unresolved completions, hold removals, or package completion are claimed."
+  ]
+}

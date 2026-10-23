@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "kind": "mda-exact-source-evidence-pin-compatibility-check",
+  "candidate_cells": 65,
+  "candidate_owners": 7,
+  "accepted_source_evidence": {
+    "commit": "0e50bd281afec27ce32fac8dcb4dfe2401f94b6c",
+    "path": "coordination/engineering/mda-qualified-repair-20261021/source-evidence-001/source-evidence.json",
+    "git_blob_oid": "879b97cb80a00f4bb643737519c1045caef287cd",
+    "bytes": 96746,
+    "sha256": "2161baa146d302810c7c9202c75739a9f2e00cd1a547c53359329f207e3c9489",
+    "target_count": 16
+  },
+  "comparison": {
+    "matching_target_geometries": 7,
+    "candidate_target_pixels": [
+      27304,
+      27306,
+      27309,
+      27311,
+      27323,
+      27331,
+      27337
+    ],
+    "note": "The accepted body contains the exact seven base_geometry values, plus nine other source targets. All seven candidate owner/pixel IDs map to exactly those seven target records. The seven accepted coverage_rows are broader than the current 65-key subset."
+  },
+  "stock_constructor_probe": {
+    "command": "node scripts/prepare-delivery-handoff.mjs native-authority <config> <destination>",
+    "accepted_source_evidence_pin": true,
+    "native_patch_pin": {
+      "commit": "63b7c843d301cbb333a8dc0d17c35fc80fa68293",
+      "path": "coordination/engineering/mda-residual-133-research-20261023/preparation/positive65-001/native-patch.json"
+    },
+    "result": "failed before output creation",
+    "exact_error": "Native coverage classes differ from complete requested owner cells",
+    "interpretation": "The complete accepted 16-target evidence body is not a drop-in pin for the narrowed 65-key coverage rows under the current stock constructor contract."
+  },
+  "stock_constructor_result": {
+    "source_evidence_pin": {
+      "commit": "d0b1e01c0ef53e7fe30b58346c03b644602a26ee",
+      "path": "coordination/engineering/mda-residual-133-research-20261023/preparation/positive65-001/source-evidence.json"
+    },
+    "native_patch_pin": {
+      "commit": "d0b1e01c0ef53e7fe30b58346c03b644602a26ee",
+      "path": "coordination/engineering/mda-residual-133-research-20261023/preparation/positive65-001/native-patch.json"
+    },
+    "result_path": "coordination/engineering/mda-residual-133-research-20261023/preparation/positive65-001/native-authority-002/constructor-result.json",
+    "result": "qualified_cells=65",
+    "limits": [
+      "Original source/physical producers were not replayed.",
+      "Constructor qualification is not current-owner-zero or final selected-output acceptance."
+    ]
+  },
+  "source": {
+    "provider": "UNHCR/OCHA FISS",
+    "represented_year": 2020,
+    "license": "CC BY 3.0 IGO",
+    "consumed_geoboundaries_release_commit": "9469f09"
+  },
+  "publication": {
+    "raw_source_geometry_already_public_in_accepted_source_evidence": true,
+    "no_unrelated_source_data_or_full_archive_republished": true
+  }
+}

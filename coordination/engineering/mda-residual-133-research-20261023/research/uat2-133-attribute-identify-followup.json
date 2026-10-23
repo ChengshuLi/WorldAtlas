@@ -1,0 +1,2660 @@
+{
+  "kind": "mda_133_current_uat2_attribute_only_identify",
+  "date_utc": "2026-10-23",
+  "status": "bounded current-service evidence; no disposition, owner, hold, qualification, repair, or acceptance change",
+  "query": {
+    "endpoint": "https://map.cadastru.md/geoserver/ows",
+    "service": "WMS 1.3.0 GetFeatureInfo",
+    "layer": "w_rsuat:mv_uat1",
+    "crs": "CRS:84 (longitude, latitude)",
+    "bbox": "center +/-0.0002 degrees on each axis",
+    "width_height": [
+      3,
+      3
+    ],
+    "pixel": [
+      1,
+      1
+    ],
+    "info_format": "text/plain",
+    "feature_count": 5,
+    "pace": "one sequential request per exact held center with 1.0 second delay",
+    "requests": 133,
+    "http_200": 133,
+    "auth_or_access_denials": 0,
+    "geometry_retained": false,
+    "response_handling": "The in-memory text/plain response was reduced to selected non-geometric identification attributes (feature IDs, names, location type, CUATM and parent codes); response bodies were discarded. Geometry arrays and extents were not retained."
+  },
+  "query_window": {
+    "center_pixel_approx_width_m_range": [
+      9.89,
+      10.4
+    ],
+    "center_pixel_approx_height_m": 14.83,
+    "note": "The GetFeatureInfo center pixel represents roughly 10 x 15 m at these latitudes; service metadata states 10–20 m precision. This pixel/precision scale is comparable to the measured MDA full-versus-simplified boundary offsets, not a tighter survey tolerance."
+  },
+  "official_service_binding": {
+    "catalogue_research_file": "research/official-uat2-cadastral-catalogue-20261023.json",
+    "catalogue_research_sha256": "0167547853dee1b8cbc84547fdcda05ae784b17c1fe95fc025441fd6a88add8a",
+    "view_service_record_uuid": "68559473-2964-486c-bac8-0adfb71d6056",
+    "service_metadata_revision": "2026-10-09",
+    "conditions": "service metadata states no fee/access constraint; underlying dataset reuse conditions remain unknown",
+    "dataset_lineage": "initial cartography 2002–2005, updates since 2014 from boundary-establishment files; no per-feature validity date/exact 2020 snapshot/source link to consumed geoBoundaries release"
+  },
+  "source_key_groups": {
+    "mda_match_ukr_contact": {
+      "keys_file": "inventory/mda-research-handoff/unpacked/keys-upstream-matched-UKR-contact.json",
+      "keys": 46
+    },
+    "mda_nonmatch_only": {
+      "keys_file": "inventory/mda-research-handoff/unpacked/keys-upstream-nonmatch-MDA-only.json",
+      "keys": 65
+    },
+    "mda_nonmatch_ukr_contact": {
+      "keys_file": "inventory/mda-research-handoff/unpacked/keys-upstream-nonmatch-UKR-contact.json",
+      "keys": 22
+    }
+  },
+  "results_by_stratum": {
+    "mda_match_ukr_contact": {
+      "queried": 46,
+      "feature_returned": 40,
+      "returned_target_name": 40,
+      "conflicting_name": 0,
+      "no_feature": 6
+    },
+    "mda_nonmatch_only": {
+      "queried": 65,
+      "feature_returned": 60,
+      "returned_target_name": 60,
+      "conflicting_name": 0,
+      "no_feature": 5
+    },
+    "mda_nonmatch_ukr_contact": {
+      "queried": 22,
+      "feature_returned": 8,
+      "returned_target_name": 8,
+      "conflicting_name": 0,
+      "no_feature": 14
+    }
+  },
+  "returned_current_attributes_by_stratum": {
+    "mda_match_ukr_contact": {
+      "Soroca|CUATM 7800": 2,
+      "Ștefan Vodă|CUATM 8500": 21,
+      "Căușeni|CUATM 2700": 6,
+      "Găgăuzia|CUATM 9600": 1,
+      "Taraclia|CUATM 8700": 5,
+      "Cahul|CUATM 1700": 5
+    },
+    "mda_nonmatch_only": {
+      "Edineț|CUATM 4100": 2,
+      "Leova|CUATM 5700": 1,
+      "Ștefan Vodă|CUATM 8500": 37,
+      "Căușeni|CUATM 2700": 3,
+      "Cantemir|CUATM 2100": 12,
+      "Cahul|CUATM 1700": 5
+    },
+    "mda_nonmatch_ukr_contact": {
+      "Soroca|CUATM 7800": 1,
+      "Cimișlia|CUATM 2900": 1,
+      "Căușeni|CUATM 2700": 1,
+      "Ștefan Vodă|CUATM 8500": 1,
+      "Găgăuzia|CUATM 9600": 2,
+      "Cahul|CUATM 1700": 2
+    }
+  },
+  "no_feature_keys": [
+    {
+      "x": 152357,
+      "y": 91306,
+      "target": "Transnistria",
+      "stratum": "mda_match_ukr_contact"
+    },
+    {
+      "x": 152313,
+      "y": 91666,
+      "target": "Transnistria",
+      "stratum": "mda_match_ukr_contact"
+    },
+    {
+      "x": 152636,
+      "y": 91924,
+      "target": "Transnistria",
+      "stratum": "mda_match_ukr_contact"
+    },
+    {
+      "x": 152888,
+      "y": 92426,
+      "target": "Transnistria",
+      "stratum": "mda_match_ukr_contact"
+    },
+    {
+      "x": 152888,
+      "y": 92427,
+      "target": "Transnistria",
+      "stratum": "mda_match_ukr_contact"
+    },
+    {
+      "x": 152887,
+      "y": 92650,
+      "target": "Transnistria",
+      "stratum": "mda_match_ukr_contact"
+    },
+    {
+      "x": 152236,
+      "y": 91193,
+      "target": "Transnistria",
+      "stratum": "mda_nonmatch_only"
+    },
+    {
+      "x": 152226,
+      "y": 91194,
+      "target": "Transnistria",
+      "stratum": "mda_nonmatch_only"
+    },
+    {
+      "x": 152889,
+      "y": 92678,
+      "target": "Transnistria",
+      "stratum": "mda_nonmatch_only"
+    },
+    {
+      "x": 152891,
+      "y": 92679,
+      "target": "Transnistria",
+      "stratum": "mda_nonmatch_only"
+    },
+    {
+      "x": 151622,
+      "y": 92892,
+      "target": "Cantemir",
+      "stratum": "mda_nonmatch_only"
+    },
+    {
+      "x": 151747,
+      "y": 90948,
+      "target": "Soroca",
+      "stratum": "mda_nonmatch_ukr_contact"
+    },
+    {
+      "x": 151746,
+      "y": 90949,
+      "target": "Soroca",
+      "stratum": "mda_nonmatch_ukr_contact"
+    },
+    {
+      "x": 151736,
+      "y": 90974,
+      "target": "Soroca",
+      "stratum": "mda_nonmatch_ukr_contact"
+    },
+    {
+      "x": 152375,
+      "y": 91280,
+      "target": "Transnistria",
+      "stratum": "mda_nonmatch_ukr_contact"
+    },
+    {
+      "x": 152374,
+      "y": 91282,
+      "target": "Transnistria",
+      "stratum": "mda_nonmatch_ukr_contact"
+    },
+    {
+      "x": 152356,
+      "y": 91308,
+      "target": "Transnistria",
+      "stratum": "mda_nonmatch_ukr_contact"
+    },
+    {
+      "x": 152355,
+      "y": 91309,
+      "target": "Transnistria",
+      "stratum": "mda_nonmatch_ukr_contact"
+    },
+    {
+      "x": 152353,
+      "y": 91312,
+      "target": "Transnistria",
+      "stratum": "mda_nonmatch_ukr_contact"
+    },
+    {
+      "x": 152613,
+      "y": 92108,
+      "target": "Transnistria",
+      "stratum": "mda_nonmatch_ukr_contact"
+    },
+    {
+      "x": 152888,
+      "y": 92673,
+      "target": "Transnistria",
+      "stratum": "mda_nonmatch_ukr_contact"
+    },
+    {
+      "x": 152888,
+      "y": 92674,
+      "target": "Transnistria",
+      "stratum": "mda_nonmatch_ukr_contact"
+    },
+    {
+      "x": 152891,
+      "y": 92677,
+      "target": "Transnistria",
+      "stratum": "mda_nonmatch_ukr_contact"
+    },
+    {
+      "x": 152890,
+      "y": 92681,
+      "target": "Transnistria",
+      "stratum": "mda_nonmatch_ukr_contact"
+    },
+    {
+      "x": 152890,
+      "y": 92682,
+      "target": "Transnistria",
+      "stratum": "mda_nonmatch_ukr_contact"
+    }
+  ],
+  "name_conflicts": [],
+  "records": [
+    {
+      "x": 151750,
+      "y": 90944,
+      "target": "Soroca",
+      "interval_ordinal": 1,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2027",
+          "uat1_name": "r-nul Soroca",
+          "loc_type_ename": "District",
+          "gname": "Soroca",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "7800"
+        }
+      ]
+    },
+    {
+      "x": 151744,
+      "y": 90952,
+      "target": "Soroca",
+      "interval_ordinal": 11,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2027",
+          "uat1_name": "r-nul Soroca",
+          "loc_type_ename": "District",
+          "gname": "Soroca",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "7800"
+        }
+      ]
+    },
+    {
+      "x": 152357,
+      "y": 91306,
+      "target": "Transnistria",
+      "interval_ordinal": 51,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152313,
+      "y": 91666,
+      "target": "Transnistria",
+      "interval_ordinal": 58,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152636,
+      "y": 91924,
+      "target": "Transnistria",
+      "interval_ordinal": 94,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152888,
+      "y": 92426,
+      "target": "Transnistria",
+      "interval_ordinal": 146,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152888,
+      "y": 92427,
+      "target": "Transnistria",
+      "interval_ordinal": 147,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152887,
+      "y": 92650,
+      "target": "Transnistria",
+      "interval_ordinal": 148,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152909,
+      "y": 92740,
+      "target": "Stefan Voda",
+      "interval_ordinal": 204,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152447,
+      "y": 92761,
+      "target": "Causeni",
+      "interval_ordinal": 270,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2008",
+          "uat1_name": "r-nul Căușeni",
+          "loc_type_ename": "District",
+          "gname": "Căușeni",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2700"
+        }
+      ]
+    },
+    {
+      "x": 152446,
+      "y": 92762,
+      "target": "Causeni",
+      "interval_ordinal": 272,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2008",
+          "uat1_name": "r-nul Căușeni",
+          "loc_type_ename": "District",
+          "gname": "Căușeni",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2700"
+        }
+      ]
+    },
+    {
+      "x": 152426,
+      "y": 92779,
+      "target": "Causeni",
+      "interval_ordinal": 288,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2008",
+          "uat1_name": "r-nul Căușeni",
+          "loc_type_ename": "District",
+          "gname": "Căușeni",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2700"
+        }
+      ]
+    },
+    {
+      "x": 152430,
+      "y": 92789,
+      "target": "Causeni",
+      "interval_ordinal": 310,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2008",
+          "uat1_name": "r-nul Căușeni",
+          "loc_type_ename": "District",
+          "gname": "Căușeni",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2700"
+        }
+      ]
+    },
+    {
+      "x": 152736,
+      "y": 92804,
+      "target": "Stefan Voda",
+      "interval_ordinal": 341,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152697,
+      "y": 92811,
+      "target": "Stefan Voda",
+      "interval_ordinal": 352,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 153044,
+      "y": 92817,
+      "target": "Stefan Voda",
+      "interval_ordinal": 375,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 153039,
+      "y": 92818,
+      "target": "Stefan Voda",
+      "interval_ordinal": 379,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 153039,
+      "y": 92819,
+      "target": "Stefan Voda",
+      "interval_ordinal": 383,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152421,
+      "y": 92836,
+      "target": "Causeni",
+      "interval_ordinal": 411,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2008",
+          "uat1_name": "r-nul Căușeni",
+          "loc_type_ename": "District",
+          "gname": "Căușeni",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2700"
+        }
+      ]
+    },
+    {
+      "x": 152422,
+      "y": 92838,
+      "target": "Causeni",
+      "interval_ordinal": 415,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2008",
+          "uat1_name": "r-nul Căușeni",
+          "loc_type_ename": "District",
+          "gname": "Căușeni",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2700"
+        }
+      ]
+    },
+    {
+      "x": 153030,
+      "y": 92845,
+      "target": "Stefan Voda",
+      "interval_ordinal": 416,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152889,
+      "y": 92849,
+      "target": "Stefan Voda",
+      "interval_ordinal": 418,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152891,
+      "y": 92850,
+      "target": "Stefan Voda",
+      "interval_ordinal": 420,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152893,
+      "y": 92851,
+      "target": "Stefan Voda",
+      "interval_ordinal": 422,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152895,
+      "y": 92852,
+      "target": "Stefan Voda",
+      "interval_ordinal": 424,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152897,
+      "y": 92853,
+      "target": "Stefan Voda",
+      "interval_ordinal": 426,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152898,
+      "y": 92853,
+      "target": "Stefan Voda",
+      "interval_ordinal": 426,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152900,
+      "y": 92854,
+      "target": "Stefan Voda",
+      "interval_ordinal": 427,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152902,
+      "y": 92855,
+      "target": "Stefan Voda",
+      "interval_ordinal": 428,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152904,
+      "y": 92856,
+      "target": "Stefan Voda",
+      "interval_ordinal": 429,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152906,
+      "y": 92857,
+      "target": "Stefan Voda",
+      "interval_ordinal": 430,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152908,
+      "y": 92858,
+      "target": "Stefan Voda",
+      "interval_ordinal": 431,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152910,
+      "y": 92859,
+      "target": "Stefan Voda",
+      "interval_ordinal": 432,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152912,
+      "y": 92860,
+      "target": "Stefan Voda",
+      "interval_ordinal": 433,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152946,
+      "y": 92865,
+      "target": "Stefan Voda",
+      "interval_ordinal": 435,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152116,
+      "y": 93281,
+      "target": "Gagauzia",
+      "interval_ordinal": 482,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2037",
+          "uat1_name": "UTA Găgăuzia",
+          "loc_type_ename": "Autonomy - territorial formation",
+          "gname": "Găgăuzia",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "9600"
+        }
+      ]
+    },
+    {
+      "x": 152041,
+      "y": 93309,
+      "target": "Taraclia",
+      "interval_ordinal": 494,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2031",
+          "uat1_name": "r-nul Taraclia",
+          "loc_type_ename": "District",
+          "gname": "Taraclia",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8700"
+        }
+      ]
+    },
+    {
+      "x": 151905,
+      "y": 93533,
+      "target": "Taraclia",
+      "interval_ordinal": 505,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2031",
+          "uat1_name": "r-nul Taraclia",
+          "loc_type_ename": "District",
+          "gname": "Taraclia",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8700"
+        }
+      ]
+    },
+    {
+      "x": 151906,
+      "y": 93545,
+      "target": "Taraclia",
+      "interval_ordinal": 513,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2031",
+          "uat1_name": "r-nul Taraclia",
+          "loc_type_ename": "District",
+          "gname": "Taraclia",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8700"
+        }
+      ]
+    },
+    {
+      "x": 151905,
+      "y": 93547,
+      "target": "Taraclia",
+      "interval_ordinal": 518,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2031",
+          "uat1_name": "r-nul Taraclia",
+          "loc_type_ename": "District",
+          "gname": "Taraclia",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8700"
+        }
+      ]
+    },
+    {
+      "x": 151904,
+      "y": 93548,
+      "target": "Taraclia",
+      "interval_ordinal": 519,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2031",
+          "uat1_name": "r-nul Taraclia",
+          "loc_type_ename": "District",
+          "gname": "Taraclia",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8700"
+        }
+      ]
+    },
+    {
+      "x": 151646,
+      "y": 93795,
+      "target": "Cahul",
+      "interval_ordinal": 528,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2005",
+          "uat1_name": "r-nul Cahul",
+          "loc_type_ename": "District",
+          "gname": "Cahul",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "1700"
+        }
+      ]
+    },
+    {
+      "x": 151637,
+      "y": 93809,
+      "target": "Cahul",
+      "interval_ordinal": 531,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2005",
+          "uat1_name": "r-nul Cahul",
+          "loc_type_ename": "District",
+          "gname": "Cahul",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "1700"
+        }
+      ]
+    },
+    {
+      "x": 151630,
+      "y": 93820,
+      "target": "Cahul",
+      "interval_ordinal": 535,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2005",
+          "uat1_name": "r-nul Cahul",
+          "loc_type_ename": "District",
+          "gname": "Cahul",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "1700"
+        }
+      ]
+    },
+    {
+      "x": 151629,
+      "y": 93822,
+      "target": "Cahul",
+      "interval_ordinal": 536,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2005",
+          "uat1_name": "r-nul Cahul",
+          "loc_type_ename": "District",
+          "gname": "Cahul",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "1700"
+        }
+      ]
+    },
+    {
+      "x": 151629,
+      "y": 93823,
+      "target": "Cahul",
+      "interval_ordinal": 538,
+      "stratum": "mda_match_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2005",
+          "uat1_name": "r-nul Cahul",
+          "loc_type_ename": "District",
+          "gname": "Cahul",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "1700"
+        }
+      ]
+    },
+    {
+      "x": 150838,
+      "y": 91116,
+      "target": "Edinet",
+      "interval_ordinal": 35,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2014",
+          "uat1_name": "r-nul Edineț",
+          "loc_type_ename": "District",
+          "gname": "Edineț",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "4100"
+        }
+      ]
+    },
+    {
+      "x": 150847,
+      "y": 91141,
+      "target": "Edinet",
+      "interval_ordinal": 37,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2014",
+          "uat1_name": "r-nul Edineț",
+          "loc_type_ename": "District",
+          "gname": "Edineț",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "4100"
+        }
+      ]
+    },
+    {
+      "x": 152236,
+      "y": 91193,
+      "target": "Transnistria",
+      "interval_ordinal": 40,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152226,
+      "y": 91194,
+      "target": "Transnistria",
+      "interval_ordinal": 41,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152889,
+      "y": 92678,
+      "target": "Transnistria",
+      "interval_ordinal": 157,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152891,
+      "y": 92679,
+      "target": "Transnistria",
+      "interval_ordinal": 158,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 151634,
+      "y": 92705,
+      "target": "Leova",
+      "interval_ordinal": 165,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2020",
+          "uat1_name": "r-nul Leova",
+          "loc_type_ename": "District",
+          "gname": "Leova",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "5700"
+        }
+      ]
+    },
+    {
+      "x": 152874,
+      "y": 92735,
+      "target": "Stefan Voda",
+      "interval_ordinal": 184,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152874,
+      "y": 92738,
+      "target": "Stefan Voda",
+      "interval_ordinal": 193,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152875,
+      "y": 92739,
+      "target": "Stefan Voda",
+      "interval_ordinal": 197,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152878,
+      "y": 92740,
+      "target": "Stefan Voda",
+      "interval_ordinal": 201,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152897,
+      "y": 92741,
+      "target": "Stefan Voda",
+      "interval_ordinal": 208,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152900,
+      "y": 92742,
+      "target": "Stefan Voda",
+      "interval_ordinal": 213,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152917,
+      "y": 92743,
+      "target": "Stefan Voda",
+      "interval_ordinal": 219,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152899,
+      "y": 92744,
+      "target": "Stefan Voda",
+      "interval_ordinal": 222,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152921,
+      "y": 92745,
+      "target": "Stefan Voda",
+      "interval_ordinal": 228,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152882,
+      "y": 92746,
+      "target": "Stefan Voda",
+      "interval_ordinal": 230,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152892,
+      "y": 92746,
+      "target": "Stefan Voda",
+      "interval_ordinal": 231,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152898,
+      "y": 92746,
+      "target": "Stefan Voda",
+      "interval_ordinal": 231,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152920,
+      "y": 92747,
+      "target": "Stefan Voda",
+      "interval_ordinal": 238,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152883,
+      "y": 92748,
+      "target": "Stefan Voda",
+      "interval_ordinal": 241,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152887,
+      "y": 92748,
+      "target": "Stefan Voda",
+      "interval_ordinal": 242,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152444,
+      "y": 92750,
+      "target": "Causeni",
+      "interval_ordinal": 248,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2008",
+          "uat1_name": "r-nul Căușeni",
+          "loc_type_ename": "District",
+          "gname": "Căușeni",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2700"
+        }
+      ]
+    },
+    {
+      "x": 152902,
+      "y": 92751,
+      "target": "Stefan Voda",
+      "interval_ordinal": 253,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152926,
+      "y": 92751,
+      "target": "Stefan Voda",
+      "interval_ordinal": 254,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152925,
+      "y": 92752,
+      "target": "Stefan Voda",
+      "interval_ordinal": 256,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152445,
+      "y": 92753,
+      "target": "Causeni",
+      "interval_ordinal": 258,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2008",
+          "uat1_name": "r-nul Căușeni",
+          "loc_type_ename": "District",
+          "gname": "Căușeni",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2700"
+        }
+      ]
+    },
+    {
+      "x": 152924,
+      "y": 92753,
+      "target": "Stefan Voda",
+      "interval_ordinal": 259,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152923,
+      "y": 92754,
+      "target": "Stefan Voda",
+      "interval_ordinal": 261,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152446,
+      "y": 92756,
+      "target": "Causeni",
+      "interval_ordinal": 264,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2008",
+          "uat1_name": "r-nul Căușeni",
+          "loc_type_ename": "District",
+          "gname": "Căușeni",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2700"
+        }
+      ]
+    },
+    {
+      "x": 152926,
+      "y": 92770,
+      "target": "Stefan Voda",
+      "interval_ordinal": 273,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152927,
+      "y": 92771,
+      "target": "Stefan Voda",
+      "interval_ordinal": 274,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152960,
+      "y": 92802,
+      "target": "Stefan Voda",
+      "interval_ordinal": 336,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152946,
+      "y": 92803,
+      "target": "Stefan Voda",
+      "interval_ordinal": 337,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152948,
+      "y": 92803,
+      "target": "Stefan Voda",
+      "interval_ordinal": 338,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152949,
+      "y": 92803,
+      "target": "Stefan Voda",
+      "interval_ordinal": 338,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 153001,
+      "y": 92815,
+      "target": "Stefan Voda",
+      "interval_ordinal": 366,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 153001,
+      "y": 92816,
+      "target": "Stefan Voda",
+      "interval_ordinal": 369,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 153005,
+      "y": 92816,
+      "target": "Stefan Voda",
+      "interval_ordinal": 369,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 153001,
+      "y": 92817,
+      "target": "Stefan Voda",
+      "interval_ordinal": 372,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 153001,
+      "y": 92818,
+      "target": "Stefan Voda",
+      "interval_ordinal": 377,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152996,
+      "y": 92819,
+      "target": "Stefan Voda",
+      "interval_ordinal": 381,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 153022,
+      "y": 92823,
+      "target": "Stefan Voda",
+      "interval_ordinal": 392,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 153023,
+      "y": 92824,
+      "target": "Stefan Voda",
+      "interval_ordinal": 394,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 153024,
+      "y": 92825,
+      "target": "Stefan Voda",
+      "interval_ordinal": 396,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 153025,
+      "y": 92826,
+      "target": "Stefan Voda",
+      "interval_ordinal": 398,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 153026,
+      "y": 92827,
+      "target": "Stefan Voda",
+      "interval_ordinal": 400,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 151624,
+      "y": 92891,
+      "target": "Cantemir",
+      "interval_ordinal": 436,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2006",
+          "uat1_name": "r-nul Cantemir",
+          "loc_type_ename": "District",
+          "gname": "Cantemir",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2100"
+        }
+      ]
+    },
+    {
+      "x": 151622,
+      "y": 92892,
+      "target": "Cantemir",
+      "interval_ordinal": 437,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 151623,
+      "y": 92892,
+      "target": "Cantemir",
+      "interval_ordinal": 437,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2006",
+          "uat1_name": "r-nul Cantemir",
+          "loc_type_ename": "District",
+          "gname": "Cantemir",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2100"
+        }
+      ]
+    },
+    {
+      "x": 151620,
+      "y": 92893,
+      "target": "Cantemir",
+      "interval_ordinal": 438,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2006",
+          "uat1_name": "r-nul Cantemir",
+          "loc_type_ename": "District",
+          "gname": "Cantemir",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2100"
+        }
+      ]
+    },
+    {
+      "x": 151611,
+      "y": 92900,
+      "target": "Cantemir",
+      "interval_ordinal": 445,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2006",
+          "uat1_name": "r-nul Cantemir",
+          "loc_type_ename": "District",
+          "gname": "Cantemir",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2100"
+        }
+      ]
+    },
+    {
+      "x": 151612,
+      "y": 92900,
+      "target": "Cantemir",
+      "interval_ordinal": 445,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2006",
+          "uat1_name": "r-nul Cantemir",
+          "loc_type_ename": "District",
+          "gname": "Cantemir",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2100"
+        }
+      ]
+    },
+    {
+      "x": 151622,
+      "y": 92931,
+      "target": "Cantemir",
+      "interval_ordinal": 450,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2006",
+          "uat1_name": "r-nul Cantemir",
+          "loc_type_ename": "District",
+          "gname": "Cantemir",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2100"
+        }
+      ]
+    },
+    {
+      "x": 151600,
+      "y": 92964,
+      "target": "Cantemir",
+      "interval_ordinal": 463,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2006",
+          "uat1_name": "r-nul Cantemir",
+          "loc_type_ename": "District",
+          "gname": "Cantemir",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2100"
+        }
+      ]
+    },
+    {
+      "x": 151601,
+      "y": 92965,
+      "target": "Cantemir",
+      "interval_ordinal": 465,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2006",
+          "uat1_name": "r-nul Cantemir",
+          "loc_type_ename": "District",
+          "gname": "Cantemir",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2100"
+        }
+      ]
+    },
+    {
+      "x": 151602,
+      "y": 92966,
+      "target": "Cantemir",
+      "interval_ordinal": 467,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2006",
+          "uat1_name": "r-nul Cantemir",
+          "loc_type_ename": "District",
+          "gname": "Cantemir",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2100"
+        }
+      ]
+    },
+    {
+      "x": 151603,
+      "y": 92967,
+      "target": "Cantemir",
+      "interval_ordinal": 469,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2006",
+          "uat1_name": "r-nul Cantemir",
+          "loc_type_ename": "District",
+          "gname": "Cantemir",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2100"
+        }
+      ]
+    },
+    {
+      "x": 151604,
+      "y": 92968,
+      "target": "Cantemir",
+      "interval_ordinal": 471,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2006",
+          "uat1_name": "r-nul Cantemir",
+          "loc_type_ename": "District",
+          "gname": "Cantemir",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2100"
+        }
+      ]
+    },
+    {
+      "x": 151592,
+      "y": 92972,
+      "target": "Cantemir",
+      "interval_ordinal": 477,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2006",
+          "uat1_name": "r-nul Cantemir",
+          "loc_type_ename": "District",
+          "gname": "Cantemir",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2100"
+        }
+      ]
+    },
+    {
+      "x": 151543,
+      "y": 93252,
+      "target": "Cahul",
+      "interval_ordinal": 480,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2005",
+          "uat1_name": "r-nul Cahul",
+          "loc_type_ename": "District",
+          "gname": "Cahul",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "1700"
+        }
+      ]
+    },
+    {
+      "x": 151866,
+      "y": 93546,
+      "target": "Cahul",
+      "interval_ordinal": 514,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2005",
+          "uat1_name": "r-nul Cahul",
+          "loc_type_ename": "District",
+          "gname": "Cahul",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "1700"
+        }
+      ]
+    },
+    {
+      "x": 151867,
+      "y": 93546,
+      "target": "Cahul",
+      "interval_ordinal": 514,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2005",
+          "uat1_name": "r-nul Cahul",
+          "loc_type_ename": "District",
+          "gname": "Cahul",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "1700"
+        }
+      ]
+    },
+    {
+      "x": 151862,
+      "y": 93675,
+      "target": "Cahul",
+      "interval_ordinal": 521,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2005",
+          "uat1_name": "r-nul Cahul",
+          "loc_type_ename": "District",
+          "gname": "Cahul",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "1700"
+        }
+      ]
+    },
+    {
+      "x": 151653,
+      "y": 93784,
+      "target": "Cahul",
+      "interval_ordinal": 527,
+      "stratum": "mda_nonmatch_only",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2005",
+          "uat1_name": "r-nul Cahul",
+          "loc_type_ename": "District",
+          "gname": "Cahul",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "1700"
+        }
+      ]
+    },
+    {
+      "x": 151747,
+      "y": 90948,
+      "target": "Soroca",
+      "interval_ordinal": 5,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 151746,
+      "y": 90949,
+      "target": "Soroca",
+      "interval_ordinal": 7,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 151737,
+      "y": 90972,
+      "target": "Soroca",
+      "interval_ordinal": 26,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2027",
+          "uat1_name": "r-nul Soroca",
+          "loc_type_ename": "District",
+          "gname": "Soroca",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "7800"
+        }
+      ]
+    },
+    {
+      "x": 151736,
+      "y": 90974,
+      "target": "Soroca",
+      "interval_ordinal": 27,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152375,
+      "y": 91280,
+      "target": "Transnistria",
+      "interval_ordinal": 44,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152374,
+      "y": 91282,
+      "target": "Transnistria",
+      "interval_ordinal": 45,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152356,
+      "y": 91308,
+      "target": "Transnistria",
+      "interval_ordinal": 52,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152355,
+      "y": 91309,
+      "target": "Transnistria",
+      "interval_ordinal": 53,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152353,
+      "y": 91312,
+      "target": "Transnistria",
+      "interval_ordinal": 54,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152613,
+      "y": 92108,
+      "target": "Transnistria",
+      "interval_ordinal": 113,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152888,
+      "y": 92673,
+      "target": "Transnistria",
+      "interval_ordinal": 154,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152888,
+      "y": 92674,
+      "target": "Transnistria",
+      "interval_ordinal": 155,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152891,
+      "y": 92677,
+      "target": "Transnistria",
+      "interval_ordinal": 156,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152890,
+      "y": 92681,
+      "target": "Transnistria",
+      "interval_ordinal": 160,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152890,
+      "y": 92682,
+      "target": "Transnistria",
+      "interval_ordinal": 161,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": []
+    },
+    {
+      "x": 152195,
+      "y": 92753,
+      "target": "Cimislia",
+      "interval_ordinal": 257,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2009",
+          "uat1_name": "r-nul Cimișlia",
+          "loc_type_ename": "District",
+          "gname": "Cimișlia",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2900"
+        }
+      ]
+    },
+    {
+      "x": 152429,
+      "y": 92787,
+      "target": "Causeni",
+      "interval_ordinal": 305,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2008",
+          "uat1_name": "r-nul Căușeni",
+          "loc_type_ename": "District",
+          "gname": "Căușeni",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "2700"
+        }
+      ]
+    },
+    {
+      "x": 152730,
+      "y": 92812,
+      "target": "Stefan Voda",
+      "interval_ordinal": 356,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2030",
+          "uat1_name": "r-nul Ștefan Vodă",
+          "loc_type_ename": "District",
+          "gname": "Ștefan Vodă",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "8500"
+        }
+      ]
+    },
+    {
+      "x": 152094,
+      "y": 93286,
+      "target": "Gagauzia",
+      "interval_ordinal": 483,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2037",
+          "uat1_name": "UTA Găgăuzia",
+          "loc_type_ename": "Autonomy - territorial formation",
+          "gname": "Găgăuzia",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "9600"
+        }
+      ]
+    },
+    {
+      "x": 151691,
+      "y": 93745,
+      "target": "Cahul",
+      "interval_ordinal": 524,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2005",
+          "uat1_name": "r-nul Cahul",
+          "loc_type_ename": "District",
+          "gname": "Cahul",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "1700"
+        }
+      ]
+    },
+    {
+      "x": 151714,
+      "y": 93749,
+      "target": "Gagauzia",
+      "interval_ordinal": 525,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2037",
+          "uat1_name": "UTA Găgăuzia",
+          "loc_type_ename": "Autonomy - territorial formation",
+          "gname": "Găgăuzia",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "9600"
+        }
+      ]
+    },
+    {
+      "x": 151682,
+      "y": 93753,
+      "target": "Cahul",
+      "interval_ordinal": 526,
+      "stratum": "mda_nonmatch_ukr_contact",
+      "http": 200,
+      "attributes": [
+        {
+          "ido": "2005",
+          "uat1_name": "r-nul Cahul",
+          "loc_type_ename": "District",
+          "gname": "Cahul",
+          "uplevelid": "1",
+          "upioid": "2001",
+          "id_codeso": "2028",
+          "cuatm": "1700"
+        }
+      ]
+    }
+  ],
+  "decision_assessment": {
+    "what_it_adds": "For 108/133 centers, the current service identifies an MDA UAT whose normalized name matches the original target name; it supplies independent current name/location corroboration for those centers. For 25 centers it returns no feature; 20 of these are among the 68 UKR-contact group, and 5 among the 65 MDA-only group. No returned current name contradicts the original target.",
+    "what_it_does_not_resolve": "The service is revised in 2026 and says boundaries are updated since 2014, but gives no per-feature valid-time or linkage to the consumed 2020 MDA source. GetFeatureInfo returns attributes at a roughly 10x15m pixel, not an inspectable boundary; the stated 10–20m service precision is comparable to the 65-key source-version offsets. It therefore cannot distinguish which 2020 MDA representation governs, establish exact side-of-boundary for near-edge points, or resolve UKR/MDA source applicability. No-feature is not negative membership because service coverage/representation is unknown for those locations.",
+    "conclusion": "Useful bounded current-label corroboration, but not sufficient to close or reclassify the source-version or cross-source groups. Keep unresolved questions per key/class; do not convert the absence of exact 2020 lineage into a blanket extra requirement."
+  },
+  "limits": [
+    "This is current administrative service evidence, not a reconstruction of the consumed 2020 MDA or UKR source.",
+    "The service does not expose cell-specific boundary validity or a source link to the consumed MDA release.",
+    "The query uses the center pixel and no extra geographic tolerance/buffer; the pixel footprint itself is approximately 10 x 15 m.",
+    "The 25 no-feature results show only that the service returned no queried feature; they do not establish absence from the administrative territory.",
+    "No geometry or raw response body is retained or published.",
+    "All 133 original pending cells, original interval/owner denominators, and holds remain unchanged."
+  ]
+}

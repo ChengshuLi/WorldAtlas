@@ -1,0 +1,382 @@
+{
+  "version": 1,
+  "kind": "mda-exact-65-residual-constructor-input-derivation-v1",
+  "package_id": "gb-MDA-ADM1--repair-evaluation",
+  "scope": {
+    "original_cells": 1986,
+    "intervals": 539,
+    "owners": 16,
+    "candidate_cells": 65,
+    "candidate_owners": 7,
+    "physical_class": "land"
+  },
+  "inputs": {
+    "source_evidence": {
+      "commit": "ef25752e90dc1b8ebc762022ad61c8184a1533c5",
+      "path": "coordination/engineering/mda-qualified-repair-20261021/source-evidence-001/source-evidence.json",
+      "sha256": "2161baa146d302810c7c9202c75739a9f2e00cd1a547c53359329f207e3c9489"
+    },
+    "original_native_patch": {
+      "commit": "ef25752e90dc1b8ebc762022ad61c8184a1533c5",
+      "path": "coordination/engineering/mda-qualified-repair-20261021/native-preparation/requested-native-patch.json",
+      "sha256": "1046bd1fbb2a42b257f628880a7d6ae868be097b1b876c67979b04978b09a075"
+    },
+    "native_diagnostic": {
+      "commit": "fc071b2df41a627af1cb138746150f11b2c1b4ca",
+      "path": "coordination/engineering/mda-qualified-repair-20261021/native-diagnostic-001/native-diagnostic.json",
+      "sha256": "5deb1f69adbdb44102bb2feb2ff6b4f3a278bc3df4e2f7170f9377bb8ddc2a88"
+    },
+    "candidate_proposal": "coordination/engineering/mda-residual-133-research-20261023/research/mda-133-disposition-proposal.json",
+    "candidate_proposal_sha256": "f60370c13e5d4d9c3ec404436dd4c714e12689da3587d8bdd2d90ba9103dc317",
+    "selected_owner_observation": {
+      "commit": "0e50bd281afec27ce32fac8dcb4dfe2401f94b6c",
+      "code_commit": "008cd5c3932ed9ffd9df55487017a7ddd2fbe8d0",
+      "path": "coordination/engineering/mda-residual-133-research-20261023/research/selected-owner-observation-001.json",
+      "sha256": "10ffd1252b16affd02cd0074e7208dad8fe47dd4d0543d2e1133080f3e95e4a5"
+    }
+  },
+  "method": "Select the exact 65 proposed (x,y,original owner) tuples; verify each occurs in original native patch and in retained diagnostic decision_rows with assigned_cells; filter the authenticated original source-evidence coverage_rows to the same tuples, preserving target geometries, complete source-family pins, negatives, physical-input/evidence pins and original contract references. No geometry/source/physical/native observation was rerun.",
+  "result": {
+    "requested_cells": 1986,
+    "diagnostic_supported_cells": 1918,
+    "diagnostic_held_cells": 68,
+    "candidate_cells": 65,
+    "candidate_supported": 65,
+    "candidate_land": 65,
+    "coverage_key_match": true,
+    "candidate_excluded_from_prior_1853_patch": true,
+    "targets": 7,
+    "candidate_keys": [
+      [
+        150838,
+        91116,
+        27331
+      ],
+      [
+        150847,
+        91141,
+        27331
+      ],
+      [
+        152236,
+        91193,
+        27306
+      ],
+      [
+        152226,
+        91194,
+        27306
+      ],
+      [
+        152889,
+        92678,
+        27306
+      ],
+      [
+        152891,
+        92679,
+        27306
+      ],
+      [
+        151634,
+        92705,
+        27309
+      ],
+      [
+        152874,
+        92735,
+        27304
+      ],
+      [
+        152874,
+        92738,
+        27304
+      ],
+      [
+        152875,
+        92739,
+        27304
+      ],
+      [
+        152878,
+        92740,
+        27304
+      ],
+      [
+        152897,
+        92741,
+        27304
+      ],
+      [
+        152900,
+        92742,
+        27304
+      ],
+      [
+        152917,
+        92743,
+        27304
+      ],
+      [
+        152899,
+        92744,
+        27304
+      ],
+      [
+        152921,
+        92745,
+        27304
+      ],
+      [
+        152882,
+        92746,
+        27304
+      ],
+      [
+        152892,
+        92746,
+        27304
+      ],
+      [
+        152898,
+        92746,
+        27304
+      ],
+      [
+        152920,
+        92747,
+        27304
+      ],
+      [
+        152883,
+        92748,
+        27304
+      ],
+      [
+        152887,
+        92748,
+        27304
+      ],
+      [
+        152444,
+        92750,
+        27311
+      ],
+      [
+        152902,
+        92751,
+        27304
+      ],
+      [
+        152926,
+        92751,
+        27304
+      ],
+      [
+        152925,
+        92752,
+        27304
+      ],
+      [
+        152445,
+        92753,
+        27311
+      ],
+      [
+        152924,
+        92753,
+        27304
+      ],
+      [
+        152923,
+        92754,
+        27304
+      ],
+      [
+        152446,
+        92756,
+        27311
+      ],
+      [
+        152926,
+        92770,
+        27304
+      ],
+      [
+        152927,
+        92771,
+        27304
+      ],
+      [
+        152960,
+        92802,
+        27304
+      ],
+      [
+        152946,
+        92803,
+        27304
+      ],
+      [
+        152948,
+        92803,
+        27304
+      ],
+      [
+        152949,
+        92803,
+        27304
+      ],
+      [
+        153001,
+        92815,
+        27304
+      ],
+      [
+        153001,
+        92816,
+        27304
+      ],
+      [
+        153005,
+        92816,
+        27304
+      ],
+      [
+        153001,
+        92817,
+        27304
+      ],
+      [
+        153001,
+        92818,
+        27304
+      ],
+      [
+        152996,
+        92819,
+        27304
+      ],
+      [
+        153022,
+        92823,
+        27304
+      ],
+      [
+        153023,
+        92824,
+        27304
+      ],
+      [
+        153024,
+        92825,
+        27304
+      ],
+      [
+        153025,
+        92826,
+        27304
+      ],
+      [
+        153026,
+        92827,
+        27304
+      ],
+      [
+        151624,
+        92891,
+        27337
+      ],
+      [
+        151622,
+        92892,
+        27337
+      ],
+      [
+        151623,
+        92892,
+        27337
+      ],
+      [
+        151620,
+        92893,
+        27337
+      ],
+      [
+        151611,
+        92900,
+        27337
+      ],
+      [
+        151612,
+        92900,
+        27337
+      ],
+      [
+        151622,
+        92931,
+        27337
+      ],
+      [
+        151600,
+        92964,
+        27337
+      ],
+      [
+        151601,
+        92965,
+        27337
+      ],
+      [
+        151602,
+        92966,
+        27337
+      ],
+      [
+        151603,
+        92967,
+        27337
+      ],
+      [
+        151604,
+        92968,
+        27337
+      ],
+      [
+        151592,
+        92972,
+        27337
+      ],
+      [
+        151543,
+        93252,
+        27323
+      ],
+      [
+        151866,
+        93546,
+        27323
+      ],
+      [
+        151867,
+        93546,
+        27323
+      ],
+      [
+        151862,
+        93675,
+        27323
+      ],
+      [
+        151653,
+        93784,
+        27323
+      ]
+    ]
+  },
+  "limitations": [
+    "Derived inputs are local and include source coordinate-bearing geometry; do not publish or upload without an authorized data-safe representation.",
+    "This is only preparation; stock source-target native constructor, independent review, final selected-output checks, delivery and root accounting remain.",
+    "Current owner observation verifies owner-zero at DATA commit 0e50bd2; it does not itself qualify repairs or future-main state."
+  ]
+}
