@@ -1,6 +1,6 @@
 ## Bounded historical OSM relation reconstruction addendum (2026-10-23)
 
-This follow-up corrects the earlier route-limitation summary. The prior relation-version `/full` request returning HTTP 404 and the first Overpass endpoint returning HTTP 406 were responses from those specific routes, not access denials and not evidence that historical reconstruction was unavailable. The same bounded query succeeded at the official `lz4.overpass-api.de` Overpass instance (HTTP 200). No alternate route was used to bypass a denial; none occurred.
+This follow-up corrects the earlier route-limitation summary. The prior relation-version `/full` request returning HTTP 404 and the first Overpass endpoint returning HTTP 406 were responses from those specific routes, not access denials and not evidence that historical reconstruction was unavailable. The same bounded query succeeded at the public `lz4.overpass-api.de` Overpass instance (HTTP 200). No alternate route was used to bypass a denial; none occurred.
 
 The query requested only relations 1241910, 1526041, and 1517228 and their descendants at the historical date 2017-12-31T23:59:59Z:
 
@@ -11,7 +11,7 @@ relation(id:1241910,1526041,1517228);
 out meta geom;
 ```
 
-The 3,361,947-byte response had SHA-256 `073c9a78b33b9576a0e6ca0f88146df785c84448bfbdd20989afb8b5d4c49aa`. It contained 9,231 elements. The retained RUS archive is `RUS_ADM2-faa6461e-source.zip`, 50,309,119 bytes, SHA-256 `faa6461e6a85d021ac4b99ee983b3cf92fa05d4468a8ea79e2dea2615fc30aab`; its metadata calls the boundary representative year 2017 and identifies OpenStreetMap/Wambacher, but does not specify an extraction date. OSM data attribution: © OpenStreetMap contributors, [ODbL 1.0](https://www.openstreetmap.org/copyright).
+The 3,361,947-byte response had SHA-256 `073c9a78b33b9576a0e6ca0f88146df785c84448bfbdd20989afb8b5d4c49aa` when checked locally by the author. The raw response is retained locally, not published; the reviewer could not independently recompute this response hash. It contained 9,231 elements. The retained RUS archive is `RUS_ADM2-faa6461e-source.zip`, 50,309,119 bytes, SHA-256 `faa6461e6a85d021ac4b99ee983b3cf92fa05d4468a8ea79e2dea2615fc30aab`; its metadata calls the boundary representative year 2017 and identifies OpenStreetMap/Wambacher, but does not specify an extraction date. OSM data attribution: © OpenStreetMap contributors, [ODbL 1.0](https://www.openstreetmap.org/copyright).
 
 We compared the exact DBF feature IDs and SHP coordinate vertices with the date-bounded member-way geometries, using standard-library parsing only:
 
