@@ -1,0 +1,334 @@
+{
+  "kind": "cod-mahagi-northern-western16-stock-and-source-screen-excerpt-v1",
+  "status": "derived exact-key evidence; no scientific rerun",
+  "scope": {
+    "original_issue": 2453,
+    "original_residual_denominator": 930,
+    "keys": 16,
+    "partition": {
+      "mahagi_okoro": 7,
+      "rutshuru_western": 9
+    }
+  },
+  "whole_original_stock_screen": {
+    "requested_cells": 3905,
+    "supported_cells": 2975,
+    "held_cells": 930,
+    "exit_code": 0,
+    "authority_emitted": false,
+    "terminal_path": "coordination/engineering/congo-original-repair-20261018/execution/diagnostic-original-001/terminal.json",
+    "terminal_sha256": "b934ee210f94d0ad775831b6b53ea1e813d1a885d045dae447ae153cce48c81e",
+    "note": "The full-screen terminal is a whole-request aggregate. This packet does not claim that it exposes an individual native decision row for each of these 16 keys."
+  },
+  "mahagi_seven_diagnostic_binding": {
+    "source_binding_sha256": "c356dfef6381db832cccf48ab23b6137768fe5fe8b157549063fb748ef788650",
+    "diagnostic_path": "coordination/engineering/congo-original-repair-20261018/diagnostic-original-001/native-diagnostic.json",
+    "diagnostic_sha256": "0deb2340d65b786e61debb9df7e1b2bd1fb6cd6c8ab26311b43afdd6017965dc",
+    "observation_commit": "347f0692367a0c51a49683ff33e4a5ed9b9c7c5b",
+    "exact_key_results": [
+      {
+        "candidate_okoro_center_hit": false,
+        "held": true,
+        "key": [
+          14441,
+          129380,
+          153709
+        ],
+        "original_target_coverage": "mapped_land_support",
+        "stock_native_decision": "territorial_exclusion_cells",
+        "supported": false,
+        "ubos_2006_county_hits": [
+          "PADYERE"
+        ]
+      },
+      {
+        "candidate_okoro_center_hit": false,
+        "held": true,
+        "key": [
+          14441,
+          129381,
+          153709
+        ],
+        "original_target_coverage": "mapped_land_support",
+        "stock_native_decision": "territorial_exclusion_cells",
+        "supported": false,
+        "ubos_2006_county_hits": [
+          "PADYERE"
+        ]
+      },
+      {
+        "candidate_okoro_center_hit": false,
+        "held": true,
+        "key": [
+          14441,
+          129383,
+          153710
+        ],
+        "original_target_coverage": "mapped_land_support",
+        "stock_native_decision": "territorial_exclusion_cells",
+        "supported": false,
+        "ubos_2006_county_hits": [
+          "PADYERE"
+        ]
+      },
+      {
+        "candidate_okoro_center_hit": false,
+        "held": true,
+        "key": [
+          14441,
+          129384,
+          153710
+        ],
+        "original_target_coverage": "mapped_land_support",
+        "stock_native_decision": "territorial_exclusion_cells",
+        "supported": false,
+        "ubos_2006_county_hits": [
+          "PADYERE"
+        ]
+      },
+      {
+        "candidate_okoro_center_hit": false,
+        "held": true,
+        "key": [
+          14441,
+          129387,
+          153711
+        ],
+        "original_target_coverage": "mapped_land_support",
+        "stock_native_decision": "territorial_exclusion_cells",
+        "supported": false,
+        "ubos_2006_county_hits": [
+          "PADYERE"
+        ]
+      },
+      {
+        "candidate_okoro_center_hit": false,
+        "held": true,
+        "key": [
+          14441,
+          129388,
+          153711
+        ],
+        "original_target_coverage": "mapped_land_support",
+        "stock_native_decision": "territorial_exclusion_cells",
+        "supported": false,
+        "ubos_2006_county_hits": []
+      },
+      {
+        "candidate_okoro_center_hit": false,
+        "held": true,
+        "key": [
+          14441,
+          129391,
+          153712
+        ],
+        "original_target_coverage": "mapped_land_support",
+        "stock_native_decision": "territorial_exclusion_cells",
+        "supported": false,
+        "ubos_2006_county_hits": []
+      }
+    ]
+  },
+  "rutshuru_nine_original_source_matrix_excerpt": {
+    "source_matrix_path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/evidence/930-key-center-conflict-matrix.json",
+    "source_matrix_sha256": "1b3805a65d528b24d9327bd4c13f1e0b4a8cc0ef908addd728dc2482ff986174",
+    "rows": [
+      {
+        "key": [
+          14462,
+          131478,
+          152687
+        ],
+        "original_target": "gb:COD:ADM2:63176286B25642850349509",
+        "assessment": "pending; center overlap is source-conflict evidence, not territorial applicability or full-cell qualification",
+        "center_hit_count": 2,
+        "foreign_family_center_hit_count": 1,
+        "inside_center_candidates": [
+          {
+            "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+            "name": "Western Region",
+            "family_key": "gb:UGA:ADM1",
+            "represented_year_claim": "2017",
+            "license": "Open Data Commons Open Database License 1.0",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1_simplified.geojson"
+          }
+        ]
+      },
+      {
+        "key": [
+          14462,
+          131479,
+          152687
+        ],
+        "original_target": "gb:COD:ADM2:63176286B25642850349509",
+        "assessment": "pending; center overlap is source-conflict evidence, not territorial applicability or full-cell qualification",
+        "center_hit_count": 2,
+        "foreign_family_center_hit_count": 1,
+        "inside_center_candidates": [
+          {
+            "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+            "name": "Western Region",
+            "family_key": "gb:UGA:ADM1",
+            "represented_year_claim": "2017",
+            "license": "Open Data Commons Open Database License 1.0",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1_simplified.geojson"
+          }
+        ]
+      },
+      {
+        "key": [
+          14462,
+          131576,
+          152665
+        ],
+        "original_target": "gb:COD:ADM2:63176286B25642850349509",
+        "assessment": "pending; center overlap is source-conflict evidence, not territorial applicability or full-cell qualification",
+        "center_hit_count": 2,
+        "foreign_family_center_hit_count": 1,
+        "inside_center_candidates": [
+          {
+            "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+            "name": "Western Region",
+            "family_key": "gb:UGA:ADM1",
+            "represented_year_claim": "2017",
+            "license": "Open Data Commons Open Database License 1.0",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1_simplified.geojson"
+          }
+        ]
+      },
+      {
+        "key": [
+          14462,
+          131577,
+          152665
+        ],
+        "original_target": "gb:COD:ADM2:63176286B25642850349509",
+        "assessment": "pending; center overlap is source-conflict evidence, not territorial applicability or full-cell qualification",
+        "center_hit_count": 2,
+        "foreign_family_center_hit_count": 1,
+        "inside_center_candidates": [
+          {
+            "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+            "name": "Western Region",
+            "family_key": "gb:UGA:ADM1",
+            "represented_year_claim": "2017",
+            "license": "Open Data Commons Open Database License 1.0",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1_simplified.geojson"
+          }
+        ]
+      },
+      {
+        "key": [
+          14462,
+          131650,
+          152659
+        ],
+        "original_target": "gb:COD:ADM2:63176286B25642850349509",
+        "assessment": "pending; center overlap is source-conflict evidence, not territorial applicability or full-cell qualification",
+        "center_hit_count": 2,
+        "foreign_family_center_hit_count": 1,
+        "inside_center_candidates": [
+          {
+            "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+            "name": "Western Region",
+            "family_key": "gb:UGA:ADM1",
+            "represented_year_claim": "2017",
+            "license": "Open Data Commons Open Database License 1.0",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1_simplified.geojson"
+          }
+        ]
+      },
+      {
+        "key": [
+          14462,
+          131655,
+          152660
+        ],
+        "original_target": "gb:COD:ADM2:63176286B25642850349509",
+        "assessment": "pending; center overlap is source-conflict evidence, not territorial applicability or full-cell qualification",
+        "center_hit_count": 2,
+        "foreign_family_center_hit_count": 1,
+        "inside_center_candidates": [
+          {
+            "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+            "name": "Western Region",
+            "family_key": "gb:UGA:ADM1",
+            "represented_year_claim": "2017",
+            "license": "Open Data Commons Open Database License 1.0",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1_simplified.geojson"
+          }
+        ]
+      },
+      {
+        "key": [
+          14462,
+          131662,
+          152661
+        ],
+        "original_target": "gb:COD:ADM2:63176286B25642850349509",
+        "assessment": "pending; center overlap is source-conflict evidence, not territorial applicability or full-cell qualification",
+        "center_hit_count": 2,
+        "foreign_family_center_hit_count": 1,
+        "inside_center_candidates": [
+          {
+            "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+            "name": "Western Region",
+            "family_key": "gb:UGA:ADM1",
+            "represented_year_claim": "2017",
+            "license": "Open Data Commons Open Database License 1.0",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1_simplified.geojson"
+          }
+        ]
+      },
+      {
+        "key": [
+          14462,
+          131671,
+          152663
+        ],
+        "original_target": "gb:COD:ADM2:63176286B25642850349509",
+        "assessment": "pending; center overlap is source-conflict evidence, not territorial applicability or full-cell qualification",
+        "center_hit_count": 2,
+        "foreign_family_center_hit_count": 1,
+        "inside_center_candidates": [
+          {
+            "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+            "name": "Western Region",
+            "family_key": "gb:UGA:ADM1",
+            "represented_year_claim": "2017",
+            "license": "Open Data Commons Open Database License 1.0",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1_simplified.geojson"
+          }
+        ]
+      },
+      {
+        "key": [
+          14462,
+          131673,
+          152664
+        ],
+        "original_target": "gb:COD:ADM2:63176286B25642850349509",
+        "assessment": "pending; center overlap is source-conflict evidence, not territorial applicability or full-cell qualification",
+        "center_hit_count": 2,
+        "foreign_family_center_hit_count": 1,
+        "inside_center_candidates": [
+          {
+            "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+            "name": "Western Region",
+            "family_key": "gb:UGA:ADM1",
+            "represented_year_claim": "2017",
+            "license": "Open Data Commons Open Database License 1.0",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1_simplified.geojson"
+          }
+        ]
+      }
+    ]
+  },
+  "limitations": [
+    "The original matrix reports center-overlap contacts, not legal/de-facto territorial applicability.",
+    "The whole original stock-screen output remains adverse and the 16 native holds stay in force.",
+    "Per-key exact native diagnostic details are published only for the seven Mahagi rows whose binding is in the retained source record.",
+    "No raw geometry, direct center coordinates, or out-of-scope source-matrix rows are included.",
+    "No repair, owner change, hold removal, acceptance, package completion, or science credit is claimed."
+  ]
+}

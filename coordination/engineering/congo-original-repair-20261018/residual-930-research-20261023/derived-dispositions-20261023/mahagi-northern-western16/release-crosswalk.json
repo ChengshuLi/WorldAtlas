@@ -1,0 +1,64 @@
+{
+  "kind": "cod-uganda-adm1-geo-boundaries-release-crosswalk-v1",
+  "status": "local-derived-source-crosswalk-only-no-native-rerun-no-disposition-change",
+  "official_release": {
+    "metadata_url": "https://www.geoboundaries.org/data/geoBoundaries-2_0_0/UGA/ADM1/geoBoundaries-2_0_0-UGA-ADM1-metaData.json",
+    "metadata_bytes": 586,
+    "metadata_sha256": "7128f97bdb4a5add7427422530c2c57a7b6f64e29c289c47a2c8a21f0ef294b9",
+    "metadata": {
+      "boundaryID": "UGA-ADM1-2_0_0-G582",
+      "boundaryISO": "UGA",
+      "boundaryYear": 2017,
+      "boundaryType": "ADM1",
+      "boundarySource1": "OpenStreetMap",
+      "boundarySource2": "Wambacher",
+      "boundaryLicense": "Open Data Commons Open Database License 1.0",
+      "boundaryUpdate": "2020-01-15",
+      "boundarySourceURL": "https://wambachers-osm.website/boundaries/",
+      "downloadURL": "https://geoboundaries.org/data/geoBoundariesRelease_2_0_0/UGA/ADM1/geoBoundariesRelease_2_0_0-UGA-ADM1-all.zip"
+    },
+    "feature_body_url": "https://www.geoboundaries.org/data/geoBoundaries-2_0_0/UGA/ADM1/geoBoundaries-2_0_0-UGA-ADM1.geojson",
+    "feature_body_bytes": 1765418,
+    "feature_body_sha256": "a297e269c40e570ebc19906527c8222d68c7b98ce1f547b38101dabafba9cac8"
+  },
+  "pinned_comparison_body": {
+    "commit": "923e9c210b59836e069c182d68daf85439096381",
+    "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-UGA-ADM1-000.bin.gz",
+    "git_blob": "213c2301f14c296a40310030256a7b9d496c3afb",
+    "compressed_bytes": 85208,
+    "compressed_sha256": "3e0dc23da310870739bc742483875a3e9a9b1614d46d9a67c77aac6ccb427425",
+    "decoded_bytes": 258114,
+    "decoded_sha256": "75e5442c33f7023bcd2d7d72928835723b557c1a9523f3b4c9afe36d0e73af93"
+  },
+  "feature_crosswalks": [
+    {
+      "name": "Northern Region",
+      "iso": "UG-N",
+      "archived_geo_boundaries_shape_id": "UGA-ADM1-2_0_0-B1",
+      "pinned_feature_id": "17295835B80141219017784",
+      "archive_ring_vertex_count_including_closure": 13135,
+      "pinned_ring_vertex_count_including_closure": 1623,
+      "pinned_distinct_vertices_found_in_archive_in_cyclic_order": 1622,
+      "all_pinned_ring_vertices_are_an_exact_cyclic_ordered_subsequence": true
+    },
+    {
+      "name": "Western Region",
+      "iso": "UG-W",
+      "archived_geo_boundaries_shape_id": "UGA-ADM1-2_0_0-B4",
+      "pinned_feature_id": "17295835B91329899113986",
+      "archive_ring_vertex_count_including_closure": 24629,
+      "pinned_ring_vertex_count_including_closure": 2276,
+      "pinned_distinct_vertices_found_in_archive_in_cyclic_order": 2275,
+      "all_pinned_ring_vertices_are_an_exact_cyclic_ordered_subsequence": true
+    }
+  ],
+  "method": "Matched features on exact name and ISO, then compared each pinned Polygon exterior ring against the corresponding official release MultiPolygon ring. The pinned closed ring's distinct coordinates match an exact ordered subsequence of the official full ring under cyclic start and reversed ring winding. No spatial tolerance or geometry repair was used.",
+  "interpretation": [
+    "This directly identifies the pinned Northern and Western feature geometries as exact vertex-preserving simplifications of the corresponding official geoBoundaries 2_0_0 release geometries, whose release metadata names OpenStreetMap and Wambacher, represented year 2017, and update date 2020-01-15.",
+    "The source release record and geometry match close the feature-to-geoBoundaries-release crosswalk for the 16 ADM1-linked center contacts.",
+    "The release metadata does not identify a particular Wambacher extraction timestamp or OSM relation version. The geometry match therefore does not prove which relation versions were used upstream. A separate relation-history check finds plausible pre-update Northern v19 and Western v43 objects; see osm-relation-history-boundary-update-2020.local.json.",
+    "This provenance crosswalk does not decide territorial/legal applicability, full-cell coverage, or the per-key original contract predicates. Retained OSM left/right center-side results remain source-relative; LSIB is proximity-only.",
+    "The separately sourced Padyere/Ituri key is not covered by this ADM1 release crosswalk and remains pending.",
+    "No source geometry is included in this derived artifact; raw release geometry remains local. No native diagnostic was rerun, no original row or hold changed, and no credit is claimed."
+  ]
+}
