@@ -67,7 +67,12 @@ for(const [owner, byY] of counts){
 }
 patchRows.sort((a,b)=>a.y-b.y||a.runs[0][0]-b.runs[0][0]);
 const sourceEvidence = structuredClone(template);
-delete sourceEvidence.base_reference; delete sourceEvidence.native_contract; delete sourceEvidence.native_latitudes; delete sourceEvidence.owner_roster; delete sourceEvidence.territorial_exclusion_sources;
+delete sourceEvidence.base_reference; delete sourceEvidence.native_contract; delete sourceEvidence.native_latitudes; delete sourceEvidence.territorial_exclusion_sources;
+const currentSelection = reader.json(reader.pin(head, 'data/ownership-selection.json'));
+const currentManifestPin = reader.pin(head, currentSelection.native_selection.manifest_path);
+const currentManifest = reader.json(currentManifestPin);
+sourceEvidence.owner_roster = currentManifest.original_assets?.bounds;
+if (!sourceEvidence.owner_roster) throw new Error('Selected manifest has no original owner-roster pin');
 sourceEvidence.targets = targets;
 const config = {version:1, selector:{commit:head,path:'data/ownership-selection.json'}, compact_territorial_exclusions:true,
   territorial_exclusion_families:familyParts.map(f=>f.source_id), source_evidence:sourceEvidence};
