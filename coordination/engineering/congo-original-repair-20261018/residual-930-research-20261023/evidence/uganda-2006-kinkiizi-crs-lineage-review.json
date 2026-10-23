@@ -1,0 +1,98 @@
+{
+  "kind": "cod-residual-930-uganda-2006-kinkiizi-crs-lineage-review-v1",
+  "status": "research-only; 105 original keys remain pending; no disposition or credit",
+  "scope": {
+    "package_id": "gb-COD-ADM2--repair-evaluation",
+    "original_cells": 3905,
+    "residual_cells": 930,
+    "this_stratum_cells": 105,
+    "owner_index": 14462,
+    "target_source_id": "gb:COD:ADM2:63176286B25642850349509",
+    "target_name": "Rutshuru",
+    "candidate_source_id": "gb:UGA:ADM2:47994165B13656364891086",
+    "candidate_name": "Kinkiizi",
+    "other_930_strata_excluded": {
+      "Irumu": 112,
+      "Kimvula": 4,
+      "other_residuals": 709
+    }
+  },
+  "registered_candidate": {
+    "family": "gb:UGA:ADM2",
+    "represented_year_claim": "2006",
+    "recorded_license": "Public Domain",
+    "recorded_boundary_source": "geoBoundaries, Wikimedia Commons",
+    "consumed_simplified_geometry_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM2/geoBoundaries-UGA-ADM2_simplified.geojson",
+    "decoded_family_bytes": 1021800,
+    "decoded_family_sha256": "0a13e10b3bc6beeb02db4502c7f29a2ebbbb681a932307ccba4cd53e994feac7",
+    "catalogue_metadata_sha256": "c5512853c1d9c3047ad049f3c69464250bb784c2c9672d3d6eede58b23f0c41e"
+  },
+  "official_comparator": {
+    "title": "County Boundaries: Uganda, 2006",
+    "publisher": "Uganda Bureau of Statistics",
+    "catalogue_record": "https://geodata-cdn.lib.utexas.edu/catalog/stanford-sv534fc7879",
+    "catalogue_temporal_coverage": "2006",
+    "catalogue_level": "Level 4 / ADM4 county polygons",
+    "catalogue_rights": "Public domain",
+    "catalogue_coordinate_statement": "WGS84 is stated for web display; downloadable data are stated to use the native coordinate system/projection.",
+    "archive_bytes": 8325415,
+    "archive_sha256": "9857cf0088b578beccea29c467f9e1a1224b6341ebe944320c975cb9ca984921",
+    "archive_local_path_at_inspection": "/tmp/ubos-uganda-county-2006-sv534fc7879.zip",
+    "archive_contents_inspected": [
+      {
+        "path": "Uganda_county2006.prj",
+        "bytes": 406,
+        "sha256": "ffa7a399d2c8905c2ca78883ccf6aea30aa298d7f251380bbedb766990927405",
+        "declares": "WGS_1984_UTM_Zone_36N; central meridian 33 degrees; scale factor 0.9996; false easting 500000 m; custom false northing 200000 m"
+      },
+      {
+        "path": "Uganda_county2006.shp.xml",
+        "bytes": 203336,
+        "sha256": "24ed22dacb9afa8ec06d0a9f679bc0c95e9b63b50c524c699a7b6ead8f3fece3",
+        "declares": "coordRef projcsn WGS_1984_UTM_Zone_36S and embedded peXml WGS_1984_UTM_Zone_36S / EPSG:32736 / false northing 10000000 m; its process lineage separately records Project output WGS_1984_UTM_Zone_36N with false northing 200000 m and an input reference with false northing 10000000 m",
+        "also_records": "data creation 2009-01-20; embedded metadata sync/update 2014-10-21; 164 county geometries"
+      },
+      {
+        "path": "Uganda_county2006-iso19139.xml",
+        "bytes": 26802,
+        "sha256": "6a0b08ba8c65511cec58243e1240b94696cac77f847479d303ff5cfe061e3aa7",
+        "declares": "EPSG:32736 and temporal extent 2006-01-01 through 2006-12-31; its geographic extent is longitude 3.000038–62.999932 and latitude -89.693015 to -83.128945, inconsistent with the Uganda dataset description and county-coordinate extent"
+      },
+      {
+        "path": "Uganda_county2006-iso19110.xml",
+        "bytes": 8631,
+        "sha256": "306c8cd4fddc2f4863692946f1814c5dc4d76aaf0f6fbb1bea55506ea88a2d22",
+        "declares": "Feature catalogue title County Boundaries: Uganda, 2006; producer Uganda Bureau of Statistics; version number unknown; version date 2012"
+      },
+      {
+        "path": "Uganda_county2006.shp",
+        "bytes": 4776592,
+        "sha256": "d56f579b9a21798c0e21947c312f263e9c36e55b9150c4d686a260418544ce95",
+        "declares": "Shapefile header bounds easting 118484.040424–722525.5 m and northing 36309.76025–668071 m"
+      },
+      {
+        "path": "Uganda_county2006.dbf",
+        "bytes": 21186,
+        "sha256": "9af5b47e9187b9363e3046e30816b2393c9849be6bd35509f8e5d62b5b8a82e1",
+        "declares": "Record 155 has C_06_ID 4.14, DNAME_2006 KANUNGU, CNAME_2006 KINKIIZI, D_06_ID 4.1, COUNTRY UGANDA"
+      }
+    ]
+  },
+  "crosswalk_reused": {
+    "path": "evidence/uganda-2006-kinkiizi-center-crosswalk-105.json",
+    "sha256": "30b48df7466fecc9ea085606ace1fff1248cd0efffe06fc8a2d90b656193a506",
+    "result": {
+      "candidate_centers": 105,
+      "inside_official_2006_kinkiizi": 64,
+      "outside_all_164_official_counties": 41,
+      "inside_other_official_county": 0
+    }
+  },
+  "assessment": {
+    "what_this_resolves": "The downloaded comparator is specifically a UBOS 2006 County / Level 4 product, and its KINKIIZI feature is explicitly labeled as a Kanungu County, Uganda feature in its DBF. The registered geoBoundaries feature is a distinct 2006 Kinkiizi candidate with its own OSM/Wikimedia source attribution. The independent UBOS comparison reproduces a 64-key spatial association under the embedded .prj projection.",
+    "crs_assessment": "The archive is internally inconsistent: .prj and ArcGIS processing lineage support custom UTM 36N with 200000 m false northing for the stored shapefile, while ArcGIS coordinate-reference fields and ISO19139 say UTM 36S / EPSG:32736. The ISO geographic bounding box is also incompatible with the described Uganda coverage and the stored shape bounds. The native-catalog record does not name a specific native CRS. The file-level evidence makes the .prj interpretation the best-supported reading for this overlay, but does not fully authenticate the producer's intended CRS/version or erase the contradictory metadata.",
+    "what_remains_unresolved": "Neither same represented year nor the official UBOS comparison proves that this separate county polygon applies as a territorial exclusion to the original 2019 RGC/OCHA Rutshuru target. The 41 outside all UBOS polygons are not clearance evidence. No whole-cell physical qualification or original source/native diagnostic was run for these 105 keys.",
+    "disposition": "All 105 remain pending and held. No repair, owner change, hold removal, package completion, or accepted science credit is proposed by this CRS/provenance review.",
+    "next_reasonable_step": "Use the exact UBOS feature identification/geometry version evidence alongside the original 2019 competitor operands and original #2453 contract to determine whether the 2006 Ugandan county feature is an applicable contextual competitor for any exact COD key; do not infer a legal sovereignty finding or a positive repair from center overlap. If that contextual test is insufficient, perform the original stock physical/source/native qualification only where the original contract and admissible evidence support it; retain adverse or missing-coverage keys held."
+  }
+}

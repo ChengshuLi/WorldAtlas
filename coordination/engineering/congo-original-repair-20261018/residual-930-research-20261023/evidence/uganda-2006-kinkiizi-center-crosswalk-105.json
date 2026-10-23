@@ -1,0 +1,3837 @@
+{
+  "kind": "cod-residual-930-uganda-2006-kinkiizi-105-center-crosswalk-v1",
+  "status": "research-only; all 105 keys pending; no disposition or credit",
+  "scope": {
+    "package_id": "gb-COD-ADM2--repair-evaluation",
+    "original_cells": 3905,
+    "residual_cells": 930,
+    "separately_excluded_proposals": {
+      "irumu": 112,
+      "kimvula": 4
+    },
+    "this_stratum_cells": 105,
+    "remaining_other_residual_cells": 709,
+    "owner_index": 14462,
+    "target_id": "gb:COD:ADM2:63176286B25642850349509",
+    "target_name": "Rutshuru",
+    "class": "land"
+  },
+  "competing_registered_feature": {
+    "family_key": "gb:UGA:ADM2",
+    "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+    "name": "Kinkiizi",
+    "represented_year_claim": "2006",
+    "recorded_license": "Public Domain",
+    "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM2/geoBoundaries-UGA-ADM2_simplified.geojson"
+  },
+  "official_comparator": {
+    "title": "County Boundaries: Uganda, 2006",
+    "creator": "Uganda Bureau of Statistics",
+    "publisher": "Uganda Bureau of Statistics",
+    "level": "4 / ADM4",
+    "temporal_coverage": "2006",
+    "recorded_rights": "Public domain",
+    "record": "https://geodata-cdn.lib.utexas.edu/catalog/stanford-sv534fc7879",
+    "archive_bytes": 8325415,
+    "archive_sha256": "9857cf0088b578beccea29c467f9e1a1224b6341ebe944320c975cb9ca984921",
+    "polygon_count": 164,
+    "raw_geometry_published": false
+  },
+  "inputs": {
+    "conflict_matrix_path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/evidence/930-key-center-conflict-matrix.json",
+    "conflict_matrix_bytes": 1977447,
+    "conflict_matrix_sha256": "1b3805a65d528b24d9327bd4c13f1e0b4a8cc0ef908addd728dc2482ff986174",
+    "center_overlay_path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/evidence/complete-537-feature-center-overlay.json",
+    "center_overlay_bytes": 799945,
+    "center_overlay_sha256": "00fc57c3290d4d0cf1ef7df68860ac6d2c3ee82e67509d0ae2f9d1c550cdf24d",
+    "ubos_archive_local_path": "/tmp/ubos-uganda-county-2006-sv534fc7879.zip",
+    "ubos_archive_bytes": 8325415,
+    "ubos_archive_sha256": "9857cf0088b578beccea29c467f9e1a1224b6341ebe944320c975cb9ca984921"
+  },
+  "method": {
+    "parser": "existing reproduce_uganda_2006_county_center_overlay.py standard-library shapefile/dbf and ray-crossing routines",
+    "coordinate_source": "already-retained complete-537-feature-center-overlay.json; no coordinates copied into this output",
+    "projection": "embedded .prj WGS84 UTM Zone 36N; central meridian 33 degrees; k=0.9996; false easting 500000m; custom false northing 200000m",
+    "test": "point-in-polygon for each of the 105 registered Kinkiizi center-contact keys against all 164 UBOS county polygons",
+    "ties": "none"
+  },
+  "aggregate": {
+    "keys": 105,
+    "ubos_2006_kinkiizi": 64,
+    "outside_all_164_ubos_counties": 41,
+    "inside_other_ubos_county_or_counties": 0,
+    "ubos_label_counts": {
+      "KINKIIZI": 64
+    }
+  },
+  "limits": [
+    "The UBOS archive has conflicting ISO/ESRI projection metadata; this comparison follows only the embedded .prj definition.",
+    "This compares recorded cell centers, not whole cells or physical support.",
+    "The official UBOS 2006 county dataset is a distinct product; same name/year and polygon containment do not prove source equivalence or territorial applicability.",
+    "No legal/current ownership finding, source clearance, repair, hold removal, package completion, or acceptance is inferred.",
+    "All 105 keys remain pending pending source-specific review; the 116 Irumu/Kimvula proposal keys and other 709 residual keys remain separate."
+  ],
+  "rows": [
+    {
+      "key": [
+        14462,
+        131408,
+        152698
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131408,
+        152699
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131409,
+        152698
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131409,
+        152699
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131410,
+        152698
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131410,
+        152699
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131411,
+        152698
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131411,
+        152699
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131412,
+        152698
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131412,
+        152699
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131413,
+        152699
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131414,
+        152699
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131415,
+        152699
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131416,
+        152699
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131429,
+        152696
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131432,
+        152695
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131435,
+        152694
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131438,
+        152693
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131440,
+        152692
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131441,
+        152692
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131442,
+        152692
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131442,
+        152693
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131442,
+        152694
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131443,
+        152691
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131443,
+        152692
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131443,
+        152693
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131443,
+        152694
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131444,
+        152691
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131444,
+        152692
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131444,
+        152693
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131444,
+        152694
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131445,
+        152691
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131445,
+        152692
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131445,
+        152693
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131446,
+        152691
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131446,
+        152692
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131447,
+        152691
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131447,
+        152692
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131448,
+        152691
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131487,
+        152691
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131488,
+        152691
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131488,
+        152692
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131488,
+        152693
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131489,
+        152692
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131489,
+        152693
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131490,
+        152693
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131490,
+        152694
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131491,
+        152693
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131491,
+        152694
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131491,
+        152695
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131492,
+        152694
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131492,
+        152695
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131493,
+        152695
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131493,
+        152696
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131494,
+        152695
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131494,
+        152696
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131495,
+        152696
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131513,
+        152685
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131514,
+        152683
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131514,
+        152684
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131515,
+        152681
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131515,
+        152682
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131516,
+        152679
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131516,
+        152680
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131539,
+        152681
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131540,
+        152681
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131542,
+        152680
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131627,
+        152661
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131628,
+        152661
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131629,
+        152660
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131629,
+        152661
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131630,
+        152660
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131635,
+        152660
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131636,
+        152660
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131638,
+        152660
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131640,
+        152660
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131641,
+        152660
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131642,
+        152660
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131642,
+        152661
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131643,
+        152660
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131644,
+        152660
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131644,
+        152661
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131645,
+        152660
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131645,
+        152661
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131646,
+        152660
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131647,
+        152660
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131680,
+        152667
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131691,
+        152667
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131712,
+        152659
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131713,
+        152659
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131714,
+        152660
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131717,
+        152660
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131725,
+        152661
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131751,
+        152631
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131755,
+        152632
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131756,
+        152632
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131760,
+        152633
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": []
+    },
+    {
+      "key": [
+        14462,
+        131761,
+        152633
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM1",
+          "source_id": "gb:COD:ADM1:28894549B19306184040235",
+          "name": "North Kivu",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131762,
+        152634
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131763,
+        152634
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131764,
+        152634
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131765,
+        152634
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131766,
+        152634
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131767,
+        152634
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    },
+    {
+      "key": [
+        14462,
+        131792,
+        152638
+      ],
+      "original_class": "land",
+      "original_cod_target": "gb:COD:ADM2:63176286B25642850349509",
+      "original_cod_target_name": "Rutshuru",
+      "original_cod_target_source_index": 18920,
+      "registered_center_hits": [
+        {
+          "family_key": "gb:COD:ADM2",
+          "source_id": "gb:COD:ADM2:63176286B25642850349509",
+          "name": "Rutshuru",
+          "represented_year_claim": "2019",
+          "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+        },
+        {
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "represented_year_claim": "2017",
+          "recorded_license": "Open Data Commons Open Database License 1.0"
+        },
+        {
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+          "name": "Kinkiizi",
+          "represented_year_claim": "2006",
+          "recorded_license": "Public Domain"
+        }
+      ],
+      "ubos_2006_county_center_hits": [
+        "KINKIIZI"
+      ]
+    }
+  ]
+}
