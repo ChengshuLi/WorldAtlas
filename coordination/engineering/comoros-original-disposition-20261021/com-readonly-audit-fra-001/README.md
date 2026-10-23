@@ -1,0 +1,53 @@
+# Bounded FRA–COM source-family contact check
+
+This local audit compares the exact three retained GeoBoundaries `gb:COM:ADM1` source geometries (roster indices 20155–20157) against all features in two catalogued France products: product 114 `gb:FRA:ADM1` (13 features) and product 115 `gb:FRA:ADM2` (96 features). It emits the full 327-pair matrix in `pair-matrix.json` using `compare-fra-com-source-pairs.py`.
+
+## Reproduction and result
+
+Run from the repository worktree with Python 3 and Shapely available:
+
+```sh
+GIT_NO_LAZY_FETCH=1 GIT_NO_REPLACE_OBJECTS=1 python3 coordination/engineering/comoros-original-disposition-20261021/com-readonly-audit-fra-001/compare-fra-com-source-pairs.py
+```
+
+The script reads the exact pinned Git blobs with `git cat-file`, checks compressed and decoded sizes/SHA-256 values, checks the frozen feature-roster body, and refuses to overwrite its output. It applies Shapely `geometry.intersects` to GeoJSON x/y coordinates as longitude/latitude without reprojection. Boundary touch counts as contact; areas are square degrees, not ground areas.
+
+Observed result: 39 FRA ADM1 × COM pairs and 288 FRA ADM2 × COM pairs; **0 intersections, 327 disjoint pairs**. COM features are Moheli (source index 20155; shapeID `22816118B12510721755829`), Anjouan (20156; `22816118B92166148047088`), and Grande Comore (20157; `22816118B95538827312271`). The checked FRA products report represented-year claim 2022 and Etalab Open License 2.0 in the retained catalogue. This is a finite disjointness result for those exact products only; it is not a census of all possible neighboring sources or a legal/applicability finding.
+
+Artifact pins:
+
+- Script: 10,398 bytes; SHA-256 `e19f6b34d45f03ba47a469d9a0edff9d2df7359bbb17179ad2909dedfa34e024`.
+- Matrix: 404,044 bytes; SHA-256 `cf61d9e8d3561428e38e2abeebacc79c203e367dd41687d4cd60fae0d437cdce`.
+- Frozen source-feature roster: `coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz`, blob `e6e380ec13cd4bcc1d24399a76bfa85ca5805b26`, 1,844,315 bytes, SHA-256 `87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa`; decoded 13,496,995 bytes, SHA-256 `7fa99cbf064121e0130b66758c212ae22b2a7be5649f2e250e9cda89a9bd595e`.
+- Source catalogue: at data commit `d5536e8d90964b21472c3f451653a3a10b821d42`, `coordination/engineering/original-geography-source-corpus-20261006/catalogue.json`, blob `09afab19371f0814da61e79e5f310c5fb2405b6d`, 403,376 bytes, SHA-256 `d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9` (verified by `git rev-parse <commit>:<path>` and `git cat-file -s <blob>`).
+- COM payload: blob `c4aa995111981aa357bd92d7abda5ebc05a597b7`, 6,657 compressed bytes, SHA-256 `f633614d301e515200a4b6584b63546c87d9b7487054526fe613abd6dc2628bf`; decoded 20,726 bytes, SHA-256 `051ee00ddb7f7ccd7ad74890649dae58e3ce15ff1119c71be376ce6a5ba1d9fe`.
+- FRA ADM1 payload: blob `a4d22a51b1a1fd049b9e73a594246d84cf7b1110`, 662,496 compressed bytes, SHA-256 `51d0d2a09912c98f00e0e8c5b07826ae77cf5319fbe5092feeaefa22573b10d6`; decoded 1,674,230 bytes, SHA-256 `7dc61e5c7e4c81f5fa10d339e6a5bc8428f1346f43f4426d9d165d2e44fc3a7e`.
+- FRA ADM2 payload: blob `4ccb4ef716c8fcc42267185ae3e36019c4ad81ff`, 1,527,070 compressed bytes, SHA-256 `55a2dc8988290c4b800fb5ad9c35a7d55c65743f7610d0ebf6ab1f7f20de8660`; decoded 3,840,223 bytes, SHA-256 `a14ed131c86c802e5d546c7cbeccbd4daebc94a66fea413f563935a53504f251`.
+
+## Contract context and remaining evidence
+
+The frozen original package is `gb-COM-ADM1--repair-evaluation`, queue commit `5b62953dba6439566e8f243a648ceee41aaeb194`, queue file `coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json`, blob `9c9a9bc83627afd3e8435ff4009e39530543bf54`, 1,754,890 bytes, SHA-256 `78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8`. It specifies 571 land cells / 296 intervals, owner 7114, block 34, source features 20155–20157. The contract asks to qualify unique current-location source membership, retained territorial exclusions and complete source competitors, then derive and verify a zero-reassignment additive patch; every interval must end as a qualified additive repair or documented exception, with selected-native conservation and source/physical witnesses.
+
+For the 485-key screened candidate, retained block-034 runs report only the three COM source features and owner 7114 (571-key retained-corpus candidate result), and the physical-003 GSHHG product supplies whole-target physical contacts, not administrative competitors or per-cell applicability. The 485 set is specifically OCHA-concordant plus GSHHG mapped-land center-hit; the other 86 remain held: 54 OCHA-adverse and 32 concordant without that center-hit. This pair matrix adds a finite foreign-family check for France ADM1/ADM2; it finds no intersection, but does not by itself establish complete competitor coverage, territorial exclusions/applicability, legal authority, rights compliance, or per-cell physical qualification. No additive patch or selected-native conservation result is asserted here. The historical COM proposal remains unaccepted and claims zero new credit.
+
+Additional retained operand pins used by that bounded COM audit:
+
+- Block-034 source-candidate runs: `coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-034.json.gz`, blob `8f9fd6a445d02d67ec6aa130ee7b06d904f84c48`, 360,842 bytes, SHA-256 `3b0256943972951dce2a3fc3c6c4d0c19b0c88e33a0c0870c1ebd130303ed68d`.
+- Block-034 physical support: `.../physical-support-block-034.json.gz`, blob `7128c4c4c2709f327e42584448fb14797801fbbf`, 306,738 bytes, SHA-256 `05e067f8e532302cf5f94a8565fd5dfc231ac0214ff5710d51745315fe568840`.
+- Block-034 inland-water support: `.../inland-water-support-block-034.json.gz`, blob `6675dece48ee7bca2d4041c5492d992f36c47460`, 21,621 bytes, SHA-256 `13c944a3fca94c97a565ce2af6e0f5e4ec6f8e422dda9b9dab6968b1414e92e4`.
+- Whole-target physical diagnostic: `coordination/engineering/comoros-original-disposition-20261021/evidence/physical-003/whole-target-support.json`, 197,027 bytes, SHA-256 `55fa33003f115dae3bf9f397403000e8ffead4c83a6e80a7622881a67ac83b8b`. Its GSHHG level-1 intersections are physical coast-contact observations; records carry no administrative names and do not identify territorial competitors. The source/physical evidence supports retained source and indexed-grid class context, but a per-key territorial-exclusion/applicability decision and complete applicable competitor set are not evidenced here.
+
+## Registered-catalogue and exact candidate-vector scope
+
+The same pinned catalogue contains 368 products and no `gb:MYT:ADM1` product. The retained block-034 scan has 4,096 scanline records. An exact join of the proposal’s 571 `(x,y)` keys to the block-034 half-open run vectors found one and only one run per key; all 571 owner/source vectors matched exactly, with zero duplicate/missing/mismatched keys. The union is owner 7114 and source indices 20155 (Moheli), 20156 (Anjouan), 20157 (Grande Comore), all in source family 75. Reproduction is `verify-catalogue-and-block034-scope.py`; its pinned inputs include proposal v2 (1,625,196 bytes, SHA-256 `71ee00c302f38fe64941498964ab88872e9f08a13e13d74e1af7d9690cbe5792`), block-034 source candidates (above), roster (above), and catalogue (above). Result `catalogue-block034-scope.json` is 3,671 bytes, SHA-256 `c3b8e8933d2809bd39032e0516fa66e09fb4bd7935e86dc7426f7685eb57ade1`; verifier script is 5,421 bytes, SHA-256 `a4401c7238e6ba346c39fb09dc525c9c0f98910b937d7fd8be632a9f9843cff1`.
+
+The finite France-family comparison now covers catalogued ADM1/ADM2/ADM3 products: indices 114/115/116, with 13/96/320 features respectively, each represented-year claim 2022 and recorded Etalab Open License 2.0. The existing `pair-matrix.json` remains the original ADM1+ADM2 result (327 pairs, 0 intersections; 404,044 bytes, SHA-256 `cf61d9e8d3561428e38e2abeebacc79c203e367dd41687d4cd60fae0d437cdce`). ADM3 is separately reported in `fra-adm3-com-pair-matrix.json` (960 pairs, 0 intersections; 1,246,192 bytes, SHA-256 `f9d1051bb06a5a16b97e0f7e01e5a92f20cab8dfd47a44ca7df2a3f68a45ee84`) with its separate producer `compare-fra-adm3-com-source-pairs.py` (5,580 bytes, SHA-256 `551f40f606f2958913c021c5e42bf0f211f7232512cb5759da6c67245379b224`). The ADM3 decoded feature bounds are entirely in the European extent (longitude −5.1413 to 9.5601; latitude 41.3339 to 51.0890), disjoint from the three COM source geometries (43.2287–44.5407°E, 11.3656–12.423°S); none of the 320 names contains “Mayotte.” This explains why the registered FRA ADM3 payload does not add an intersection for this target. The previously retained 2021 IGN Mayotte record is dated, geographically disjoint negative context; it is not a `gb:MYT` product in this catalogue and does not establish an exhaustive/current competitor universe.
+
+The combined matrix files are useful audit inputs and should travel with any portable copy of this local scope note, but their results remain finite, geometry-only exclusions. The full 368-product catalogue plus exact block-034 vectors establish the scope of retained catalogue candidates observed for these 571 keys; they do not prove that every legally or temporally relevant external source is registered in that catalogue. Thus they do not close the contract’s applicability, territorial-exclusion, complete-competitor, additive-patch, or selected-native-conservation requirements.
+
+
+## Superseding bounded-contract clarification (2026-10-21)
+
+The historical statements above that the FRA matrices alone do not establish complete competitors and that source applicability remains unresolved predate the v4 contract/custody reconciliation. Preserve those statements as the historical scope of this pairwise audit. For the current 485-key decision, the complete block-034 source vectors, v4 per-key source/physical rows, candidate partition and stock `native-authority-003` result match exactly under the original center-based contract. The finite matrices here and `fra-adm3-com-pair-matrix.json` add the specified registered FRA products; all 1,287 pair rows are disjoint. The bounded result does not claim an exhaustive universe of unregistered sources, legal status or current sovereignty.
+
+The selected 485-key candidate remains distinct from the 86 held keys: 54 OCHA-adverse and 32 concordant without a mapped-land center hit. OCHA is comparator context; IGN 2021 is dated, disjoint negative context. This note does not claim acceptance or new credit and does not require a full-cell footprint or a separate sovereignty certificate.

@@ -1,9 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import {githubAPI} from '../scripts/issue-claim-contract.mjs';
 import {quotaDelay,requestAccounting} from '../scripts/github-quota.mjs';
 const response=(status,remaining='0',extra={})=>new Response(JSON.stringify({message:status===403?'rate limit exceeded':'ok'}),{status,headers:{'x-ratelimit-limit':'1000','x-ratelimit-remaining':remaining,'x-ratelimit-reset':'100','x-ratelimit-resource':'core',...extra}});
 async function mocked(run,fn){const old=globalThis.fetch;globalThis.fetch=run;try{await fn();}finally{globalThis.fetch=old;}}
+test('canonical native observation examples retain bounded requests and fresh merge authority',()=>{
+ const guide=fs.readFileSync(new URL('../docs/MERGE_QUEUE_CLIENT.md',import.meta.url),'utf8');
+ assert.match(guide,/gh api --cache 60s repos\/ChengshuLi\/WorldAtlas\/actions\/runs\/RUN-ID/);
+ assert.match(guide,/gh api repos\/ChengshuLi\/WorldAtlas\/pulls\/PR-NUMBER/);
+ const watches=[...guide.matchAll(/gh run watch RUN-ID[^\n\x60]*/g)].map(row=>row[0]);
+ assert(watches.length>0);
+ const bounded=command=>/--interval\s+(\d+)/.exec(command)?.[1]>=60;
+ for(const command of watches)assert(bounded(command),'Native watch example must not restore fast default polling');
+ assert.equal(bounded('gh run watch RUN-ID --exit-status'),false);
+ assert.equal(bounded('gh run watch RUN-ID --interval 3 --exit-status'),false);
+});
 test('quota retry only retries an explicit read rejection, and accounts every attempt',async()=>{
  let calls=0,time=99000;const accounting=requestAccounting('prepare');
  await mocked(async()=>response(++calls===1?403:200,calls===1?'0':'999'),async()=>{
@@ -92,9 +104,47 @@ test('actual read quota rejection honors secondary retry-after within its finite
   await api('/repos/a/b/pulls/1');assert.equal(time,3000);assert.equal(calls,2);
  });
 });
+for(const status of [403,429])test(`HTTP${status} honors the later of exhausted primary reset and secondary retry-after`,async()=>{
+ for(const [reset,retryAfter,expected] of [['300','2',301000],['2','300',301000]]){
+  let time=0,calls=0;const accounting=requestAccounting('merge');
+  await mocked(async()=>{
+   calls++;
+   if(calls>1)assert(time>=expected,'No HTTP retry before both provider delays elapse');
+   return response(calls===1?status:200,calls===1?'0':'999',
+    calls===1?{'x-ratelimit-reset':reset,'retry-after':retryAfter}:{});
+  },async()=>{
+   const api=githubAPI('private',{now:()=>time,sleep:async ms=>{time+=ms;},
+    readWaitMs:400000,deadlineRemaining:()=>400000-time,onRequest:accounting.observe});
+   await api('/repos/a/b/pulls/1');assert.equal(calls,2);assert.equal(time,expected);
+   assert.equal(accounting.receipt().actual_http_attempts,2);
+  });
+ }
+});
+test('a short retry-after cannot admit a primary reset beyond the phase or job allowance',async()=>{
+ for(const options of [{readWaitMs:10000},{readWaitMs:400000,deadlineRemaining:()=>60000}]){
+  let calls=0;
+  await mocked(async()=>{calls++;return response(403,'0',{'x-ratelimit-reset':'300','retry-after':'2'});},async()=>{
+   const api=githubAPI('private',{...options,now:()=>0,sleep:async()=>assert.fail('Combined provider delay is not admitted')});
+   await assert.rejects(api('/repos/a/b/pulls/1'),error=>error.github?.rate_remaining==='0');
+   assert.equal(calls,1);
+  });
+ }
+});
+test('overlapping rate signals do not authorize retries of writes or body-bearing reads',async()=>{
+ for(const [method,body]of [['POST',{}],['PUT',{}],['PATCH',{}],['DELETE',undefined],['GET',{}]]){
+  let calls=0;
+  await mocked(async()=>{calls++;return response(429,'0',{'x-ratelimit-reset':'300','retry-after':'2'});},async()=>{
+   const api=githubAPI('private',{readWaitMs:400000,now:()=>0,sleep:async()=>assert.fail('Must not retry this request')});
+   await assert.rejects(api('/repos/a/b/pulls/1',method,body));assert.equal(calls,1);
+  });
+ }
+});
 test('quota classifier rejects malformed or irrelevant error metadata',()=>{
  assert.equal(quotaDelay({github:{http_status:404,rate_remaining:'0',rate_reset:'100'}}),null);
  assert.equal(quotaDelay({github:{http_status:403,retry_after:'bogus'}}),null);
+ assert.equal(quotaDelay({github:{http_status:403,rate_remaining:'0',rate_reset:'100',retry_after:'bogus'}},0),101000);
+ assert.equal(quotaDelay({github:{http_status:403,rate_remaining:'1',rate_reset:'300',retry_after:'2'}},0),3000);
+ assert.equal(quotaDelay({github:{http_status:403,rate_remaining:'0',rate_reset:'bogus',retry_after:'2'}},0),3000);
 });
 test('deadline refuses a quota wait that cannot fit one complete HTTP attempt',async()=>{
  let calls=0,time=99000;

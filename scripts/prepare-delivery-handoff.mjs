@@ -1128,8 +1128,8 @@ const finalizedAdoptions = new WeakMap();
 // Final-profile preparation is deterministic current-bank editing, not a second
 // qualifier. The ordinary accepted-code transition independently admits the new
 // authority scope and compares every before/after word and context value.
-function finalizeFinalBankDelivery(config, reader, checkpoint) {
-  need(config.version===2 && Object.keys(config).every(key=>['version','selector','package_inputs','change_evidence','reference_projection','accepted_checkpoint'].includes(key)),
+function finalizeFinalBankDelivery(config, reader) {
+  need(config.version===2 && Object.keys(config).every(key=>['version','selector','package_inputs','change_evidence','reference_projection'].includes(key)),
     'Exact final-bank preparation config required');
   const selector=locate(reader,config.selector),packageInputs=locate(reader,config.package_inputs);
   need(selector.path==='data/ownership-selection.json'&&packageInputs.path==='.github/package-inputs.json', 'Canonical final-bank inputs required');
@@ -1139,7 +1139,7 @@ function finalizeFinalBankDelivery(config, reader, checkpoint) {
   need(selection.version===2||config.change_evidence===undefined&&config.reference_projection===undefined,
     'Representation migration cannot change scientific or reference inputs');
   const originalPackage=reader.read(packageInputs);validatePackageInputs(JSON.parse(originalPackage));
-  const outputs={'ownership-selection.json':raw,'package-inputs.json':originalPackage,...(checkpoint?{'selected-checkpoint.json':checkpoint}:{})};
+  const outputs={'ownership-selection.json':raw,'package-inputs.json':originalPackage};
   const adoption=new Map();
   const add=(name,bytes,previous,kind)=>{
     need(safe(name)&&Buffer.isBuffer(bytes)&&!adoption.has(name),'Distinct ordinary final-bank roles required');
@@ -1148,11 +1148,6 @@ function finalizeFinalBankDelivery(config, reader, checkpoint) {
   for(const pin of [config.change_evidence,config.reference_projection].filter(Boolean)) {
     need(pin.commit&&pin.mode==='100644'&&hex(pin.git_blob_oid,40),'Complete issued final input pin required');
     add(pin.path,reader.read(pin),reader.hasPath(selector.commit,pin.path)?reader.read(reader.pin(selector.commit,pin.path)):undefined,'input');
-  }
-  if(checkpoint){
-    const chosen=locate(reader,config.accepted_checkpoint),archive=locate(reader,{commit:chosen.commit,path:JSON.parse(checkpoint).retained_artifact.path});
-    const bytes=reader.read(archive);add(archive.path,bytes,bytes,'input');
-    add(ACCEPTED_CHECKPOINT_LOCATOR,checkpoint,reader.hasPath(selector.commit,ACCEPTED_CHECKPOINT_LOCATOR)?reader.read(reader.pin(selector.commit,ACCEPTED_CHECKPOINT_LOCATOR)):undefined,'canonical');
   }
   add(packageInputs.path,originalPackage,originalPackage,'canonical');add(selector.path,raw,raw,'canonical');
   finalizedAdoptions.set(outputs,{reader,selector,package_inputs:packageInputs,adoption:[...adoption.values()],startupRequired:true,finalProfile:config,
@@ -1264,8 +1259,8 @@ async function prepareProposedFinalBank({plan,selection,manifest,previous,origin
 
 
 export function finalizeDelivery(config, reader, {acceptedCheckpoint} = {}) {
+  if(config.version===2)return finalizeFinalBankDelivery(config,reader);
   const checkpoint = finalizationCheckpointBytes(config, reader, acceptedCheckpoint);
-  if(config.version===2)return finalizeFinalBankDelivery(config,reader,checkpoint);
   config = resolveFinalizeConfig(config, reader);
   // The cumulative route uses one exact selected ledger in several roles.
   // Authenticate it once here; this snapshot cannot survive another invocation.
@@ -2200,9 +2195,9 @@ async function main(args) {
   if (phase === 'compose') outputs = await composeAuthorities(config, reader);
   if (phase === 'package') outputs = packageProjection(config, reader);
   if (phase === 'finalize') {
-    const token = config.accepted_checkpoint ? process.env.GH_TOKEN ?? execFileSync('gh', ['auth', 'token'],
+    const token = config.version!==2&&config.accepted_checkpoint ? process.env.GH_TOKEN ?? execFileSync('gh', ['auth', 'token'],
       {encoding: 'utf8', timeout: 20000, maxBuffer: 16384}).trim() : undefined;
-    const handle = await acquireFinalizationCheckpoint(config, reader, {token});
+    const handle = config.version===2 ? undefined : await acquireFinalizationCheckpoint(config, reader, {token});
     try { outputs = finalizeDelivery(config, reader, {acceptedCheckpoint: handle}); }
     finally { if (handle) releaseAcceptedCheckpoint(handle); }
     await prepareFinalizedStartupOwnership(outputs);

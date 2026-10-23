@@ -10,7 +10,7 @@ import {gzipSync} from 'node:zlib';
 const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
 const P = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
 export const JOINT_CODE = Object.freeze([
-  'scripts/run-geographic-check.py', 'scripts/geography-prefetch.mjs',
+  'scripts/run-geographic-check.py', 'scripts/geography-prefetch.mjs', 'scripts/geography-routing-metadata.mjs',
   'scripts/package-startup-ownership.mjs','src/ownership-assets.js','src/ownership-method.js',
   'scripts/native-word-store.mjs','scripts/native-patch-store.mjs', 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',
   'src/native-grid.js', 'src/ownership-codec.js',
@@ -90,7 +90,7 @@ function executionGuard(repo, trusted) {
   });
 }
 
-async function withSelectedComparison({repo,baseline,candidate,startup,phaseComplete,publicAccepted=false},consume) {
+async function withSelectedComparison({repo,baseline,candidate,startup,phaseComplete,publicAccepted=false,trusted},consume) {
   const {compareSelectedCheckpointNative} = await import('../../../scripts/selected-checkpoint-native.mjs');
   const checkpoint = await import('./selected-checkpoint.mjs');
   const {valueBytes, valueSha} = await import('./selected-neighbor-prevention.mjs');
@@ -111,10 +111,43 @@ async function withSelectedComparison({repo,baseline,candidate,startup,phaseComp
     for (const p of pins) { declaredPin=p; rows.push(await acquisition.pin(reader.version,p)); }
     acquisition.acquire(rows);
   };
+  // Reuse the existing explicit metadata transport only for genuinely missing
+  // headers. Warm inputs cause no remote metadata request or archive discovery.
+  let metadata;
+  const acquireMetadata=async(reader,pins)=>{
+    for(const p of pins){
+      const route=reader.treeRoute(p.path),match=/^100644 blob ([a-f0-9]{40})\t/.exec(route);
+      demand(match,'Missing ordinary selected metadata: '+p.path);
+      const status=reader.gitBatch(['--no-lazy-fetch','cat-file','--batch-check=%(objectname) %(objecttype) %(objectsize)'],match[1]+'\n',128).toString();
+      if(status===match[1]+' missing\n'){
+        const {createRoutingMetadataAcquisition}=await import('../../../scripts/geography-routing-metadata.mjs');
+        metadata??=createRoutingMetadataAcquisition({repo,baseline,execute:(_command,args,options)=>execFileSync(beforeReader.gitExecutable,args,
+          {...options,env:{...options.env,GIT_EXEC_PATH:startup.gitExecPath}})});
+        await metadata.acquire({commit:reader.version,path:p.path},p);
+      }
+    }
+  };
+  await acquireMetadata(beforeReader,[{path:'data/ownership-selection.json'}]);
+  await acquireMetadata(afterReader,[{path:'data/ownership-selection.json'}]);
   let state, acceptedHandle;
-  const accepted = await import('../../../scripts/accepted-selected-checkpoint.mjs');
   const transportInputs = [];
   phaseComplete('trusted-startup');
+  if(beforeReader.json('data/ownership-selection.json').version===2){
+    demand(trusted===undefined||trusted===baseline,'Final-map acceptance must execute the accepted baseline checker');
+    for(const reader of [beforeReader,afterReader]){
+      const selection=reader.json('data/ownership-selection.json');
+      const {scientificNativeSelection,finalBankSelection}=await import('../../../src/reference-metadata.js');
+      const native=scientificNativeSelection(selection),bank=finalBankSelection(selection);
+      demand(bank,'Accepted final bank cannot downgrade to historical replay');
+      await acquireMetadata(reader,[{path:native.manifest_path,sha256:native.sha256},bank,
+        ...(selection.reference_projection?[selection.reference_projection]:[])]);
+    }
+    const nativeReport=await checkpoint.compareAcceptedFinalBank({beforeReader,afterReader,acquireAuthorityInputs,acquireMetadataInputs:acquireMetadata});
+    phaseComplete('native-comparison');
+    return consume({direct:true,nativeReport});
+  }
+  // Historical selectors retain their historical migration reader only.
+  const accepted = await import('../../../scripts/accepted-selected-checkpoint.mjs');
   try {
     const locatorInput = checkpointTransportInput(afterReader, accepted.ACCEPTED_CHECKPOINT_LOCATOR);
     transportInputs.push(locatorInput.pin);
@@ -175,15 +208,14 @@ function coldDecision(decision) {
 // acceptance product, and an unavailable current final state never replays v1.
 export async function inspectSelectedFinalBank(repo,baseline,candidate,startup) {
   const answer=await withSelectedComparison({repo,baseline,candidate,startup,phaseComplete:()=>{},publicAccepted:true},
-    async ({transition,nativeReport,checkpoint})=>{
-      const genuine=checkpoint.authenticateTransition({transition});
-      demand(genuine.candidate.version===2,'Current final-bank report cannot downgrade to historical replay');
+    async ({direct,transition,nativeReport,checkpoint})=>{
+      demand(direct||checkpoint.authenticateTransition({transition}).candidate.version===2,'Current final-bank report cannot downgrade to historical replay');
       return {...nativeReport,candidate_code_executed:startup.beforeReader.git('-C',ROOT,'rev-parse','HEAD').toString().trim()!==baseline,
         runtime:startup.runtime,caller_runtime:startup.callerRuntime,
         execution_runtimes:startup.identities,execution_code_inventory:startup.executionCode};
     });
   demand(answer?.method==='selected-native-owner-conservation-v1',
-    'Current final ownership requires its authenticated accepted checkpoint: '+(answer?.reuse_unavailable?.reason??'comparison unavailable'));
+    'Current final ownership requires its accepted main comparison: '+(answer?.reuse_unavailable?.reason??'comparison unavailable'));
   return answer;
 }
 
@@ -200,7 +232,11 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
   const native = await import('../../../scripts/check-effective-geographic-regression.mjs');
   const startup = native.selectedBootstrap(repo, baseline, candidate, {parentRuntimePath});
   const {beforeReader,afterReader}=startup;
-  return withSelectedComparison({repo,baseline,candidate,startup,phaseComplete},async({transition,nativeReport,checkpoint,transportInputs,valueBytes,valueSha})=>{
+  return withSelectedComparison({repo,baseline,candidate,startup,phaseComplete,trusted},async({direct,transition,nativeReport,checkpoint,transportInputs,valueBytes,valueSha})=>{
+    if(direct){
+      executionGuard(repo,trusted);
+      return result(nativeReport,null,'accepted-final-map-comparison-v1');
+    }
     if(nativeReport.status==='native-regressions-found')return result(nativeReport,null);
     // Native comparison is the selected-map acceptance boundary. Do not build
     // or compare continuous polygon operands, including on no-change runs.
@@ -249,8 +285,8 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
     phaseComplete('checkpoint-output');
     return result(nativeReport, derivedPublication);
   });
-  function result(nativeReport, derivedCheckpoint) {
-    return {version:1, kind:'trusted-selected-joint-comparison-v1', mode:'authenticated-checkpoint-append-v1',
+  function result(nativeReport, derivedCheckpoint, mode='authenticated-checkpoint-append-v1') {
+    return {version:1, kind:'trusted-selected-joint-comparison-v1', mode,
       native:{...nativeReport, runtime:startup.runtime, caller_runtime:startup.callerRuntime,
         execution_runtimes:startup.identities, execution_code_inventory:code}, derived_checkpoint:derivedCheckpoint,
       candidate_code_executed:false};

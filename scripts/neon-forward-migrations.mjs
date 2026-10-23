@@ -3,9 +3,7 @@ import path from 'node:path';
 import os from 'node:os';
 import {createHash,randomUUID} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
-import {createPostgresDatabase,createNeonDatabase} from '../hosted/postgres-adapter.js';
-import {prepareResearchBundle,settlementEstimateSource,typedResearchEndpoint} from './prepare-research-bundle.mjs';
-import {readResearchBundle,importResearchBundle} from './import-research-bundle.mjs';
+import {createNeonDatabase} from '../hosted/postgres-adapter.js';
 import {Client,neonConfig} from '@neondatabase/serverless';
 import {postgresTables} from './verify-postgres-schema.mjs';
 import {productionBranchId,schemaTransactionStatements} from './verify-neon-sql.mjs';
@@ -46,6 +44,7 @@ const rows=async(driver,query,params=[])=>{const result=await driver.query(query
 const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 function repoFile(root,relative,max=262144){if(typeof relative!=='string'||!relative||path.isAbsolute(relative)||relative.includes('\\')||relative.split('/').some(part=>!part||part==='.'||part==='..'))fail('unsafe-reviewed-path');let current=fs.realpathSync(root);for(const part of relative.split('/')){current=path.join(current,part);if(fs.lstatSync(current).isSymbolicLink())fail('reviewed-symlink-refused');}const stat=fs.statSync(current);if(!stat.isFile()||stat.size<1||stat.size>max)fail('invalid-reviewed-file-size');return fs.readFileSync(current);}
 export function validateForwardOperation(operation,{mode='rehearsal',root=process.cwd()}={}){
+ if(object(operation)&&Object.hasOwn(operation,'settlement_import'))fail('settlement-import-retired');
  if(!['rehearsal','production','verify-only'].includes(mode)||!object(operation)||operation.version!==1||operation.project_id!==expectedNeonProjectId||operation.production_branch_id!==productionBranchId||operation.core_schema_sha256!==coreSHA||!['checkpoint_sha256','source_manifest_sha256','source_snapshot_fingerprint'].every(key=>validHash(operation[key]))||!Number.isSafeInteger(operation.source_revision)||operation.source_revision<0||!/^data\/storage-checkpoints\/[a-zA-Z0-9._/-]+$/.test(operation.checkpoint_directory??'')||!['d1','postgres'].includes(operation.site_backend))fail('invalid-reviewed-forward-operation');
  let origin;try{origin=new URL(operation.site_origin);}catch{fail('invalid-source-site-origin');}if(origin.protocol!=='https:'||origin.origin!==operation.site_origin||origin.username||origin.password)fail('invalid-source-site-origin');
  if(hash(repoFile(root,'postgres/schema.sql',1024*1024))!==coreSHA||hash(repoFile(root,operation.checkpoint_directory+'/checkpoint.json',32*1024*1024))!==operation.checkpoint_sha256)fail('reviewed-core-or-checkpoint-hash-mismatch');
@@ -56,7 +55,6 @@ export function validateForwardOperation(operation,{mode='rehearsal',root=proces
   if(operation.current_source)readForwardCurrentSource(operation,{root});
   validateForwardMaintenance(operation,{root});
  }
- if(operation.settlement_import){reviewedSettlementImport(operation,{root});if(operation.current_source!=='capture-current-native'||operation.site_backend!=='postgres'||operation.migrations.length!==3)fail('current-native-v3-required-for-settlement-import');}
  if(mode==='production'&&operation.production_acknowledgement!=='apply-reviewed-forward-migrations-after-verified-baseline')fail('explicit-forward-production-acknowledgement-required');return operation;
 }
 export function validateForwardMaintenance(operation,{root=process.cwd(),now=Date.now()}={}){
@@ -171,29 +169,6 @@ export async function applyPostgresForwardMigrations({driver,sourceDirectory,mig
   commitStatus='commit-attempted';return {version:1,status:'verified',read_only:verifyOnly,core_schema_sha256:coreSHA,...(currentSource?{current_inventory_sha256:currentSource.inventory_sha256}:{source_manifest_sha256:snapshot.manifest_sha256}),source_snapshot_fingerprint:sourceFingerprint,source_revision:currentSource?.marker.revision??snapshot.revision,...(currentSource?{current_source_preserved:true,current_recovery_receipt_sha256:currentSource.receipt_sha256,storage_profile:compactRecoveryProfileV3}:{} ),migrations:applied,original_collections:preserved.collections,original_json_bytes_preserved:true,original_sequence_preserved:true,base_guards_sha256:guardHash,core_functions_sha256:functionsBefore,runtime,storage_export_version:definitions.some(item=>item.id==='0003_typed_observations')?3:2,atlas_fact_tables:postgresTables.length+definitions.reduce((sum,item)=>sum+item.tables.length,0),registry_table:forwardRegistryTable,registry_owner_only:true};
  });commitStatus='committed';return {...result,commit_status:'committed'};}catch(error){const safe=new ForwardError(error instanceof ForwardError?error.code:'forward-transaction-failed');safe.commit_status=commitStatus==='commit-attempted'?'unknown':'rolled-back-or-not-started';if(/^[A-Z0-9]{5}$/.test(error.code??''))safe.sqlstate=error.code;throw safe;}
 }
-function reviewedSettlementImport(operation,{root}){
- const pin=operation.settlement_import;
- if(!object(pin)||Object.keys(pin).sort().join(',')!=='input_sha256,manifest_sha256'||!validHash(pin.manifest_sha256)||pin.input_sha256!=='8c7cb39cfce591b87eedeb0eddfbd21e0cabdce6a53d39023409e633e617ce0d'||hash(repoFile(root,'data/settlement-estimates.json',4*1024*1024))!==pin.input_sha256)fail('exact-reviewed-settlement-source-required');
- return pin;
-}
-/** Owner invocation of the same validated ingestion services, not public HTTP.
- * Each original ID is reconciled on resume; no new credential or role is used. */
-export async function importForwardSettlementBundle({driver,operation,root=process.cwd(),target,ledgerFile,verifyOnly=false,onProgress}){
- const pin=reviewedSettlementImport(operation,{root}),temporary=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-forward-settlement-')),directory=path.join(temporary,'bundle');
- try{
-  prepareResearchBundle({input:path.join(root,'data/settlement-estimates.json'),output:directory});const bundle=readResearchBundle(directory);
-  if(bundle.manifest_sha256!==pin.manifest_sha256)fail('reviewed-settlement-manifest-mismatch');
-  const database=createPostgresDatabase({query:(sql,params)=>driver.query(sql,params),transaction:(batch,options)=>driver.runTransaction(async tx=>{const results=[];for(const item of batch)results.push(await tx.query(item.query,item.params));return results;},{isolationLevel:options.isolationLevel})});
-  const args={directory,database,target:`${expectedNeonProjectId}/${target}/neondb`,manifestSHA:pin.manifest_sha256,ledgerFile,onProgress};
-  if(verifyOnly)return {...await importResearchBundle({...args,dryRun:true}),transport:'private-postgres-service',database_writes:0};
-  const original=repoFile(root,'data/settlement-estimates.json',4*1024*1024).toString(),identity=(await rows(driver,repoFile(root,'postgres/settlement-identity-parity.sql').toString(),[original]))[0]?.jsonb_build_object;
-  if(!identity||identity.expected_subjects!==582||identity.actual_subjects!==582||['missing_or_changed','extra_or_changed','wrong_example_or_active','missing_or_wrong_parent_kind'].some(key=>identity[key]!==0))fail('settlement-identity-parity-required');
-  const imported=await importResearchBundle(args),registry=JSON.parse(bundle.batches.find(b=>b.part.endpoint===typedResearchEndpoint).raw).registry_sha256;
-  const parity=(await rows(driver,repoFile(root,'postgres/settlement-population-parity.sql').toString(),[original,settlementEstimateSource.id,registry,JSON.stringify(settlementEstimateSource)]))[0]?.parity;
-  if(!parity||parity.expected_rows!==9301||parity.actual_rows!==9301||parity.distinct_subjects!==582||Object.entries(parity).some(([key,value])=>!['expected_rows','actual_rows','distinct_subjects'].includes(key)&&value!==0))fail('settlement-population-parity-required');
-  return {transport:imported.transport,target:imported.target,manifest_sha256:pin.manifest_sha256,source_input_sha256:pin.input_sha256,registry_sha256:registry,committed_batches:imported.committed_batches,counts:imported.counts,identity:Object.fromEntries(Object.entries(identity).filter(([key])=>!key.endsWith('_details'))),parity};
- }finally{fs.rmSync(temporary,{recursive:true,force:true});}
-}
 /** This append-only operation uses the existing geographic services, not the
  * historical copy/DDL or settlement operation. The complete input plan is
  * authenticated before requesting an owner connection. */
@@ -277,10 +252,9 @@ export async function runNeonForwardMigrations({mode='rehearsal',operationFile='
   receipt.target_branch_id=target;
   if(geography){stage='existing-geographic-services';receipt.geography=await publishForwardGeography({...geographicInputs,database:serviceDatabaseFactory(uri.href),authorize:checkSite,beforeBatch:()=>{if(Date.parse(receipt.window.expires_at)<=Date.now())fail('geographic-publication-window-expired');}});}
   else{stage='atomic-forward-contract';receipt.forward=await applyPostgresForwardMigrations({driver:owner,sourceDirectory:source,migrations:operation.migrations,root,baselineTriggerHash:baseline.restore.trigger_inventory_sha256,verifyOnly:mode==='verify-only',currentSource});await checkSite();
-  if(operation.settlement_import){stage='reviewed-settlement-service-import';receipt.settlement_import=await importForwardSettlementBundle({driver:owner,operation,root,target,ledgerFile:path.resolve(root,output,'settlement-import-receipts.json'),verifyOnly:mode==='verify-only'});await checkSite();}
   }
   receipt.status='verified';
  }catch(error){receipt.status='failed';receipt.failure_stage=stage;receipt.error_code=error instanceof ForwardError?error.code:stage+'-failed';if(stage==='existing-geographic-services')receipt.commit_status='reconcile-original-ingestion-ids';if(error.commit_status)receipt.commit_status=error.commit_status;if(error.sqlstate)receipt.sqlstate=error.sqlstate;}
- finally{if(owner)try{await owner.close();}catch{receipt.status='failed';receipt.owner_close_failed=true;}if(created)try{if(created===productionBranchId||!branchId(created))fail('unsafe-forward-cleanup');await api('DELETE','/branches/'+created);receipt.cleanup_status='deleted';}catch{receipt.status='failed';receipt.cleanup_status='failed';receipt.retained_validation_branch_id=created;}if(temporary)fs.rmSync(temporary,{recursive:true,force:true});receipt.management_requests=requests;receipt.completed_at_utc=new Date().toISOString();receipt.limitations=mode.startsWith('geography-')?['Only the pinned geographic source/release append is enabled. No DDL, grants, settlement import, website deployment or credential change.','Published release finalization authenticates whole rows. A failed or lost response requires exact service/ingestion reconciliation, not a replacement ID.']:['Forward DDL and only an explicitly hash-pinned settlement service import; no Site publication, credential rotation or media transfer.','Runtime effective permissions checked by owner; this workflow does not obtain or test the existing private application password.','Private Site maintenance is a fresh hash-pinned root attestation; this runner does not independently access the private Site.','Keep Site read-only until root verifies compatible publication and the resulting storage contract.'];save();}return receipt;
+ finally{if(owner)try{await owner.close();}catch{receipt.status='failed';receipt.owner_close_failed=true;}if(created)try{if(created===productionBranchId||!branchId(created))fail('unsafe-forward-cleanup');await api('DELETE','/branches/'+created);receipt.cleanup_status='deleted';}catch{receipt.status='failed';receipt.cleanup_status='failed';receipt.retained_validation_branch_id=created;}if(temporary)fs.rmSync(temporary,{recursive:true,force:true});receipt.management_requests=requests;receipt.completed_at_utc=new Date().toISOString();receipt.limitations=mode.startsWith('geography-')?['Only the pinned geographic source/release append is enabled. No DDL, grants, settlement import, website deployment or credential change.','Published release finalization authenticates whole rows. A failed or lost response requires exact service/ingestion reconciliation, not a replacement ID.']:['Forward DDL only; no settlement import, Site publication, credential rotation or media transfer.','Runtime effective permissions checked by owner; this workflow does not obtain or test the existing private application password.','Private Site maintenance is a fresh hash-pinned root attestation; this runner does not independently access the private Site.','Keep Site read-only until root verifies compatible publication and the resulting storage contract.'];save();}return receipt;
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){try{const[mode='rehearsal',operationFile='.github/operations/neon-forward-rehearsal.json',...extra]=process.argv.slice(2);if(extra.length)fail('invalid-forward-cli-arguments');const receipt=await runNeonForwardMigrations({mode,operationFile});console.log(JSON.stringify(receipt));if(!['verified','skipped'].includes(receipt.status))process.exitCode=1;}catch{console.error(JSON.stringify({status:'failed',error_code:'sanitized-forward-receipt-unavailable',credentials_logged:false}));process.exitCode=1;}}

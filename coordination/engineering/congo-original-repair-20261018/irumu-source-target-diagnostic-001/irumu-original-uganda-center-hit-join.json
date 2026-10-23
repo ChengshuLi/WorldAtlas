@@ -1,0 +1,2731 @@
+{
+  "version": 1,
+  "kind": "cod-irumu-112-original-uganda-center-hit-join-v1",
+  "status": "authenticated prior center overlay joined to exact Irumu original residual keys; no new geometry calculation",
+  "scope": {
+    "package_id": "gb-COD-ADM2--repair-evaluation",
+    "issue": 2453,
+    "owner_id": 14568,
+    "target_source_id": "gb:COD:ADM2:63176286B75372177576839",
+    "keys": 112,
+    "other_original_residual_keys": 818,
+    "classes": {
+      "land": 112
+    }
+  },
+  "pins": {
+    "original_partition_b": {
+      "path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/evidence/original-residual-partition-b.json",
+      "bytes": 441665,
+      "sha256": "728335168e0003aacb1538b8c3d10799d984a2319d3ffe2a09c9cd274643f735"
+    },
+    "prior_complete_center_overlay": {
+      "path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/evidence/complete-537-feature-center-overlay.json",
+      "bytes": 799945,
+      "sha256": "00fc57c3290d4d0cf1ef7df68860ac6d2c3ee82e67509d0ae2f9d1c550cdf24d",
+      "pins": {
+        "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "source_catalogue_blob": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+        "source_catalogue_join_sha256": "76fc0b276e57e3838485d58bf3fbd188464dd31334d58204867a61022c5bdc67",
+        "source_body_manifest_sha256": "912ac9d8cad6f44be5208b3ed9fd49448f0b8dab3d1253a8852564593180b7e6",
+        "candidate_center_overlay_sha256": "9815749d9534bf68139342f9c20b7e12cfd4cbbe87f0e1dbd30561b03141425e",
+        "provenance_matrix_sha256": "52ff1bb5c53d559e4dc7b77aaf0a321d980163b090ec300f1aa8fb890b8a5a46"
+      }
+    },
+    "source_feature_identity_summary": {
+      "path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/evidence/source-feature-identity-summary-71.json",
+      "bytes": 15337,
+      "sha256": "4655fd0058b71fb9225e53dfd2ba7c5407637ca5ab325c8ce72b220d95c30b4a",
+      "pins": {
+        "partition_a_review_sha256": "769a1f230ce59525ee7f0469be199b613557999a43445531e76e600b5c0dc7f9",
+        "partition_a_roster_join_sha256": "cbf885d27611385dc88015c669b22761428423c27fc9c77cebb2a0d46a19807d",
+        "partition_b_review_sha256": "ef2559b851fb99cdd2cc0ea41ccadcf567aaa134327839d5fdc5f942bf2c065e",
+        "source_feature_roster_blob": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+        "source_feature_roster_bytes": 1844315,
+        "source_feature_roster_sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa"
+      }
+    },
+    "native_diagnostic": {
+      "commit": "9e2c9b4ee687e91dc8e05721a50e01c77746a9c3",
+      "path": "coordination/engineering/congo-original-repair-20261018/irumu-source-target-diagnostic-001/native-diagnostic.json",
+      "sha256": "c602f5a214591f4819885cef8e32d99cede7b8f5b358ca75069e26b0b2dc0856"
+    }
+  },
+  "result": {
+    "keys_with_at_least_one_recorded_original_UGA_feature_center_hit": 112,
+    "center_hit_incidences_by_source_id": {
+      "gb:UGA:ADM1:17295835B91329899113986": 28,
+      "gb:UGA:ADM2:47994165B11452154134589": 46,
+      "gb:UGA:ADM2:47994165B6683335913560": 66
+    },
+    "distinct_hit_sets": [
+      {
+        "source_ids": [
+          "gb:UGA:ADM1:17295835B91329899113986",
+          "gb:UGA:ADM2:47994165B11452154134589"
+        ],
+        "keys": 11
+      },
+      {
+        "source_ids": [
+          "gb:UGA:ADM1:17295835B91329899113986",
+          "gb:UGA:ADM2:47994165B6683335913560"
+        ],
+        "keys": 17
+      },
+      {
+        "source_ids": [
+          "gb:UGA:ADM2:47994165B11452154134589"
+        ],
+        "keys": 35
+      },
+      {
+        "source_ids": [
+          "gb:UGA:ADM2:47994165B6683335913560"
+        ],
+        "keys": 49
+      }
+    ]
+  },
+  "limits": [
+    "The center hits are from the previously authenticated 537-feature center overlay and exact retained original coordinates; this file only joins its rows to the 112 Irumu residual keys.",
+    "These original-feature center hits are evidence of registered competing source coverage, not legal territorial authority, source applicability, whole-cell intersection, or an eligibility ruling.",
+    "The independent WRI/UBOS 2006 line/county comparison is contextual and provisional; its projection-metadata conflict remains.",
+    "All 112 remain held by stock native diagnostic (0 supported/112 held); the other 818 original residuals remain distinct and pending.",
+    "No ownership change, patch, hold removal, acceptance or science credit is claimed."
+  ],
+  "rows": [
+    {
+      "owner_id": 14568,
+      "y": 130213,
+      "x": 153221,
+      "center_lon_lat": [
+        30.400051875529243,
+        1.193889929684474
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130351,
+      "x": 153093,
+      "center_lon_lat": [
+        30.22428537644089,
+        1.0044266280486294
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130352,
+      "x": 153093,
+      "center_lon_lat": [
+        30.22428537644089,
+        1.0030536629831786
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130353,
+      "x": 153093,
+      "center_lon_lat": [
+        30.22428537644089,
+        1.0016806973417016
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130354,
+      "x": 153093,
+      "center_lon_lat": [
+        30.22428537644089,
+        1.000307731124986
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130354,
+      "x": 153094,
+      "center_lon_lat": [
+        30.22565855221501,
+        1.000307731124986
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130355,
+      "x": 153093,
+      "center_lon_lat": [
+        30.22428537644089,
+        0.9989347643338201
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130355,
+      "x": 153094,
+      "center_lon_lat": [
+        30.22565855221501,
+        0.9989347643338201
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130356,
+      "x": 153093,
+      "center_lon_lat": [
+        30.22428537644089,
+        0.9975617969689924
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130357,
+      "x": 153093,
+      "center_lon_lat": [
+        30.22428537644089,
+        0.9961888290313107
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130359,
+      "x": 153092,
+      "center_lon_lat": [
+        30.22291220066674,
+        0.9934428914404381
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130366,
+      "x": 153085,
+      "center_lon_lat": [
+        30.213299970247846,
+        0.9838320919427136
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130367,
+      "x": 153084,
+      "center_lon_lat": [
+        30.211926794473726,
+        0.9824591183196208
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130368,
+      "x": 153082,
+      "center_lon_lat": [
+        30.209180442925486,
+        0.981086144132324
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130368,
+      "x": 153083,
+      "center_lon_lat": [
+        30.210553618699606,
+        0.981086144132324
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130368,
+      "x": 153084,
+      "center_lon_lat": [
+        30.211926794473726,
+        0.981086144132324
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130369,
+      "x": 153081,
+      "center_lon_lat": [
+        30.20780726715134,
+        0.979713169381611
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130369,
+      "x": 153082,
+      "center_lon_lat": [
+        30.209180442925486,
+        0.979713169381611
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130369,
+      "x": 153083,
+      "center_lon_lat": [
+        30.210553618699606,
+        0.979713169381611
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130370,
+      "x": 153080,
+      "center_lon_lat": [
+        30.20643409137722,
+        0.9783401940682702
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130370,
+      "x": 153081,
+      "center_lon_lat": [
+        30.20780726715134,
+        0.9783401940682702
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130370,
+      "x": 153082,
+      "center_lon_lat": [
+        30.209180442925486,
+        0.9783401940682702
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130371,
+      "x": 153079,
+      "center_lon_lat": [
+        30.2050609156031,
+        0.9769672181930894
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130371,
+      "x": 153080,
+      "center_lon_lat": [
+        30.20643409137722,
+        0.9769672181930894
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130371,
+      "x": 153081,
+      "center_lon_lat": [
+        30.20780726715134,
+        0.9769672181930894
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130372,
+      "x": 153078,
+      "center_lon_lat": [
+        30.20368773982895,
+        0.9755942417568572
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130372,
+      "x": 153079,
+      "center_lon_lat": [
+        30.2050609156031,
+        0.9755942417568572
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130373,
+      "x": 153077,
+      "center_lon_lat": [
+        30.20231456405483,
+        0.9742212647603613
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130387,
+      "x": 153070,
+      "center_lon_lat": [
+        30.192702333635935,
+        0.9549995284231564
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130388,
+      "x": 153068,
+      "center_lon_lat": [
+        30.189955982087696,
+        0.9536265431172899
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130388,
+      "x": 153069,
+      "center_lon_lat": [
+        30.191329157861816,
+        0.9536265431172899
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130389,
+      "x": 153067,
+      "center_lon_lat": [
+        30.188582806313548,
+        0.9522535572637714
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130389,
+      "x": 153068,
+      "center_lon_lat": [
+        30.189955982087696,
+        0.9522535572637714
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130389,
+      "x": 153069,
+      "center_lon_lat": [
+        30.191329157861816,
+        0.9522535572637714
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130390,
+      "x": 153066,
+      "center_lon_lat": [
+        30.187209630539428,
+        0.9508805708633882
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130390,
+      "x": 153067,
+      "center_lon_lat": [
+        30.188582806313548,
+        0.9508805708633882
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130390,
+      "x": 153068,
+      "center_lon_lat": [
+        30.189955982087696,
+        0.9508805708633882
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130391,
+      "x": 153064,
+      "center_lon_lat": [
+        30.18446327899116,
+        0.9495075839169287
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130391,
+      "x": 153065,
+      "center_lon_lat": [
+        30.185836454765308,
+        0.9495075839169287
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130414,
+      "x": 153055,
+      "center_lon_lat": [
+        30.172104697024025,
+        0.9179287352442301
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130415,
+      "x": 153054,
+      "center_lon_lat": [
+        30.170731521249905,
+        0.9165557354284052
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130416,
+      "x": 153053,
+      "center_lon_lat": [
+        30.169358345475757,
+        0.9151827350862095
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130416,
+      "x": 153054,
+      "center_lon_lat": [
+        30.170731521249905,
+        0.9151827350862095
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130417,
+      "x": 153052,
+      "center_lon_lat": [
+        30.167985169701637,
+        0.9138097342184309
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130419,
+      "x": 153049,
+      "center_lon_lat": [
+        30.16386564237925,
+        0.9110637309092794
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130419,
+      "x": 153050,
+      "center_lon_lat": [
+        30.165238818153398,
+        0.9110637309092794
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130420,
+      "x": 153048,
+      "center_lon_lat": [
+        30.16249246660513,
+        0.9096907284694828
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130420,
+      "x": 153049,
+      "center_lon_lat": [
+        30.16386564237925,
+        0.9096907284694828
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130420,
+      "x": 153050,
+      "center_lon_lat": [
+        30.165238818153398,
+        0.9096907284694828
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130421,
+      "x": 153047,
+      "center_lon_lat": [
+        30.16111929083101,
+        0.9083177255072562
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130421,
+      "x": 153048,
+      "center_lon_lat": [
+        30.16249246660513,
+        0.9083177255072562
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130421,
+      "x": 153049,
+      "center_lon_lat": [
+        30.16386564237925,
+        0.9083177255072562
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130422,
+      "x": 153046,
+      "center_lon_lat": [
+        30.159746115056862,
+        0.9069447220233887
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130422,
+      "x": 153047,
+      "center_lon_lat": [
+        30.16111929083101,
+        0.9069447220233887
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130422,
+      "x": 153048,
+      "center_lon_lat": [
+        30.16249246660513,
+        0.9069447220233887
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130422,
+      "x": 153049,
+      "center_lon_lat": [
+        30.16386564237925,
+        0.9069447220233887
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130423,
+      "x": 153045,
+      "center_lon_lat": [
+        30.158372939282742,
+        0.9055717180186682
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130423,
+      "x": 153046,
+      "center_lon_lat": [
+        30.159746115056862,
+        0.9055717180186682
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130423,
+      "x": 153047,
+      "center_lon_lat": [
+        30.16111929083101,
+        0.9055717180186682
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130423,
+      "x": 153048,
+      "center_lon_lat": [
+        30.16249246660513,
+        0.9055717180186682
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130424,
+      "x": 153044,
+      "center_lon_lat": [
+        30.156999763508622,
+        0.9041987134938824
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130424,
+      "x": 153045,
+      "center_lon_lat": [
+        30.158372939282742,
+        0.9041987134938824
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130424,
+      "x": 153046,
+      "center_lon_lat": [
+        30.159746115056862,
+        0.9041987134938824
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130424,
+      "x": 153047,
+      "center_lon_lat": [
+        30.16111929083101,
+        0.9041987134938824
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130425,
+      "x": 153043,
+      "center_lon_lat": [
+        30.155626587734503,
+        0.9028257084498201
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130425,
+      "x": 153044,
+      "center_lon_lat": [
+        30.156999763508622,
+        0.9028257084498201
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60496,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B6683335913560",
+          "name": "Ntoroko",
+          "ordinal": 101,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130431,
+      "x": 153013,
+      "center_lon_lat": [
+        30.114431314510654,
+        0.8945876673247996
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130432,
+      "x": 153011,
+      "center_lon_lat": [
+        30.111684962962386,
+        0.8932146586678716
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130432,
+      "x": 153012,
+      "center_lon_lat": [
+        30.113058138736534,
+        0.8932146586678716
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130452,
+      "x": 152952,
+      "center_lon_lat": [
+        30.030667592288864,
+        0.8657543788538883
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130453,
+      "x": 152950,
+      "center_lon_lat": [
+        30.027921240740596,
+        0.8643813595901146
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130453,
+      "x": 152951,
+      "center_lon_lat": [
+        30.029294416514716,
+        0.8643813595901146
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130454,
+      "x": 152947,
+      "center_lon_lat": [
+        30.02380171341821,
+        0.8630083398299241
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130454,
+      "x": 152948,
+      "center_lon_lat": [
+        30.025174889192357,
+        0.8630083398299241
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130454,
+      "x": 152949,
+      "center_lon_lat": [
+        30.026548064966477,
+        0.8630083398299241
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130454,
+      "x": 152950,
+      "center_lon_lat": [
+        30.027921240740596,
+        0.8630083398299241
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130455,
+      "x": 152945,
+      "center_lon_lat": [
+        30.02105536186997,
+        0.8616353195741251
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130455,
+      "x": 152946,
+      "center_lon_lat": [
+        30.02242853764409,
+        0.8616353195741251
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130455,
+      "x": 152947,
+      "center_lon_lat": [
+        30.02380171341821,
+        0.8616353195741251
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130455,
+      "x": 152948,
+      "center_lon_lat": [
+        30.025174889192357,
+        0.8616353195741251
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130455,
+      "x": 152949,
+      "center_lon_lat": [
+        30.026548064966477,
+        0.8616353195741251
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130456,
+      "x": 152943,
+      "center_lon_lat": [
+        30.0183090103217,
+        0.8602622988234658
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130457,
+      "x": 152941,
+      "center_lon_lat": [
+        30.01556265877346,
+        0.8588892775787548
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130457,
+      "x": 152942,
+      "center_lon_lat": [
+        30.01693583454758,
+        0.8588892775787548
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130457,
+      "x": 152943,
+      "center_lon_lat": [
+        30.0183090103217,
+        0.8588892775787548
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130458,
+      "x": 152940,
+      "center_lon_lat": [
+        30.014189482999313,
+        0.85751625584078
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130458,
+      "x": 152941,
+      "center_lon_lat": [
+        30.01556265877346,
+        0.85751625584078
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130458,
+      "x": 152942,
+      "center_lon_lat": [
+        30.01693583454758,
+        0.85751625584078
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130459,
+      "x": 152938,
+      "center_lon_lat": [
+        30.011443131451074,
+        0.8561432336103296
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130459,
+      "x": 152939,
+      "center_lon_lat": [
+        30.012816307225194,
+        0.8561432336103296
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130459,
+      "x": 152940,
+      "center_lon_lat": [
+        30.014189482999313,
+        0.8561432336103296
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130459,
+      "x": 152941,
+      "center_lon_lat": [
+        30.01556265877346,
+        0.8561432336103296
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130460,
+      "x": 152936,
+      "center_lon_lat": [
+        30.008696779902806,
+        0.8547702108881923
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130460,
+      "x": 152937,
+      "center_lon_lat": [
+        30.010069955676926,
+        0.8547702108881923
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130460,
+      "x": 152938,
+      "center_lon_lat": [
+        30.011443131451074,
+        0.8547702108881923
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130460,
+      "x": 152939,
+      "center_lon_lat": [
+        30.012816307225194,
+        0.8547702108881923
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130460,
+      "x": 152940,
+      "center_lon_lat": [
+        30.014189482999313,
+        0.8547702108881923
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130460,
+      "x": 152941,
+      "center_lon_lat": [
+        30.01556265877346,
+        0.8547702108881923
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130462,
+      "x": 152933,
+      "center_lon_lat": [
+        30.004577252580418,
+        0.8520241639720099
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130463,
+      "x": 152931,
+      "center_lon_lat": [
+        30.00183090103218,
+        0.8506511397795412
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130464,
+      "x": 152930,
+      "center_lon_lat": [
+        30.00045772525803,
+        0.8492781150985387
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130465,
+      "x": 152928,
+      "center_lon_lat": [
+        29.99771137370979,
+        0.8479050899297906
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130465,
+      "x": 152929,
+      "center_lon_lat": [
+        29.99908454948391,
+        0.8479050899297906
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130466,
+      "x": 152926,
+      "center_lon_lat": [
+        29.994965022161523,
+        0.8465320642740853
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130466,
+      "x": 152927,
+      "center_lon_lat": [
+        29.99633819793567,
+        0.8465320642740853
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130466,
+      "x": 152928,
+      "center_lon_lat": [
+        29.99771137370979,
+        0.8465320642740853
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130466,
+      "x": 152929,
+      "center_lon_lat": [
+        29.99908454948391,
+        0.8465320642740853
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130467,
+      "x": 152925,
+      "center_lon_lat": [
+        29.993591846387403,
+        0.845159038132211
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130467,
+      "x": 152926,
+      "center_lon_lat": [
+        29.994965022161523,
+        0.845159038132211
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130467,
+      "x": 152927,
+      "center_lon_lat": [
+        29.99633819793567,
+        0.845159038132211
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130467,
+      "x": 152928,
+      "center_lon_lat": [
+        29.99771137370979,
+        0.845159038132211
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60394,
+          "family_index": 340,
+          "family_key": "gb:UGA:ADM1",
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986",
+          "name": "Western Region",
+          "ordinal": 3,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        },
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    },
+    {
+      "owner_id": 14568,
+      "y": 130472,
+      "x": 152921,
+      "center_lon_lat": [
+        29.988099143290896,
+        0.8382939001578965
+      ],
+      "uga_center_hits": [
+        {
+          "source_index": 60495,
+          "family_index": 341,
+          "family_key": "gb:UGA:ADM2",
+          "source_id": "gb:UGA:ADM2:47994165B11452154134589",
+          "name": "Bughendra",
+          "ordinal": 100,
+          "geometry_status": "raw-native-supported",
+          "center_status": "inside"
+        }
+      ]
+    }
+  ]
+}

@@ -39,6 +39,20 @@ test('parent entities precede child entities and atomic correction groups stay t
 test('dry-run rejects tampering and performs zero network requests',async()=>{
  const f=fixture({sources:[source],records:[claim('test')]});try{f.build();const result=await importResearchBundle({directory:f.output,origin:'https://example.org/',dryRun:true,request:()=>{throw Error('Must not request');}});assert.equal(result.network_requests,0);const part=readResearchBundle(f.output).manifest.batches[0];fs.appendFileSync(path.join(f.output,part.path),' ');await assert.rejects(importResearchBundle({directory:f.output,origin:'https://example.org/',dryRun:true}),/bytes changed/);}finally{f.close();}
 });
+test('retired private database options refuse before input, network or database access',async()=>{
+ const f=fixture({sources:[source],records:[claim('test')]});let calls=0;
+ const unexpected=()=>{calls++;throw Error('Retired transport must not run');};
+ try{
+  for(const extra of [{database:{prepare:unexpected,batch:unexpected}},{target:'weathered-lab-37571695/br-fixture/neondb'},{manifestSHA:'a'.repeat(64)},{database:null},{target:null},{manifestSHA:null}]){
+   await assert.rejects(importResearchBundle({directory:f.output,origin:'https://example.org',token:'fixture-only',request:unexpected,...extra}),/Private database research import is retired/);
+   assert.equal(calls,0);assert(!fs.existsSync(f.output),'Refusal does not read or create a prepared bundle');
+  }
+  f.build();
+  await assert.rejects(importResearchBundle({directory:f.output,origin:'https://example.org',token:'fixture-only',request:unexpected,database:null}),/Private database research import is retired/);
+  assert.equal(calls,0,'A valid bundle cannot silently switch the retired database route to HTTP');
+  assert(!fs.existsSync(path.join(f.output,'import-receipts.json')));
+ }finally{f.close();}
+});
 test('import refuses mismatched geography before writes and rejects unsafe origins',async()=>{
  const f=fixture({sources:[source],records:[claim('test')]});try{f.build();let writes=0;await assert.rejects(importResearchBundle({directory:f.output,origin:'https://example.org/',token:'private-token',request:async(url,init)=>{if(init.method)writes++;return Response.json({...release,id:'other'});}}),/does not match/);assert.equal(writes,0);for(const origin of ['http://example.org/','https://user:password@example.org/','https://example.org/path'])await assert.rejects(importResearchBundle({directory:f.output,origin,dryRun:true}),/HTTPS/);}finally{f.close();}
 });

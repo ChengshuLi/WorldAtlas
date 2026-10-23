@@ -108,9 +108,10 @@ global serialization across every historical writer.
 
 For an authorized live reservation, use native `gh workflow run issue-claims.yml`
 with the documented issue, worker, branch, action, claim ID, request ID and live-work
-inputs. Observe the exact run using `gh run view` / `gh run watch`, then read back
-its canonical bot comment and operation state. Preserve the original IDs when
-reconciling an uncertain dispatch; never infer acceptance from a queued run or
+inputs. Follow the existing [bounded observation guidance](MERGE_QUEUE_CLIENT.md#find-the-execution-and-inspect-its-outcome):
+use one cached exact-run observer or one interactive watch with an explicit interval
+of at least 60 seconds. Then read back its canonical bot comment and operation state.
+Preserve the original IDs when reconciling an uncertain dispatch; never infer acceptance from a queued run or
 blindly redispatch a mutation. Only the holder can renew/release. An open PR or
 live operation blocks release/rotation; expiry never permits takeover or proves
 cleanup. Recovery still requires explicit approval and preservation of earlier
@@ -173,7 +174,7 @@ resource without deleting a collision. Canceled
 jobs may leave an owned ref and require cleanup, never blind deletion or proof of
 merge. Candidate tests still check out immutable SHAs with read-only permissions.
 
-Base-dependent evidence still needs refresh: a metric labeled current must match the actual PR-base vintage, and original-file receipts must match actual base bytes. Disjoint main changes with unchanged scoped inputs can reuse review; fresh global measurements or changes to the reviewed inputs cannot. Preserve the earlier evidence, refresh in a new vintage, and obtain exact-head review when needed. The final queue selects checks by every changed and renamed path. Code, workflow, schema and core-data changes run the complete unit suite across three parallel shards, plus one hosted package build. Isolated geography/history campaign evidence and engineering-owned receipts or Markdown/text docs run the final focused ownership/evidence/review/invariant suite, without rebuilding the unchanged application. Both profiles run in isolated read-only jobs without secrets or persistent checkout credentials. They retain exact candidate and actual scientific-consumer checks; a renamed runtime file cannot evade full regression. Prepare/final jobs execute only fresh trusted main code. Tests are bounded to35minutes, trusted jobs to10minutes each; unfinished heads fail preflight rather than holding the slot for worker action.
+Base-dependent evidence still needs refresh: a metric labeled current must match the actual PR-base vintage, and original-file receipts must match actual base bytes. Disjoint main changes with unchanged scoped inputs can reuse review; fresh global measurements or changes to the reviewed inputs cannot. Preserve the earlier evidence, refresh in a new vintage, and obtain exact-head review when needed. The final queue selects checks by every changed and renamed path. An explicit complete request runs the complete unit suite across three parallel shards, plus one hosted package build. The reviewed-consumer and authenticated automatic routes below retain their applicable checks without silently expanding to complete regression. Isolated geography/history campaign evidence and engineering-owned receipts or Markdown/text docs can use their applicable focused consumers without rebuilding the unchanged application. Both profiles run in isolated read-only jobs without secrets or persistent checkout credentials. They retain exact candidate and actual scientific-consumer checks; a renamed runtime file cannot evade full regression. Prepare/final jobs execute only fresh trusted main code. Tests are bounded to35minutes, trusted jobs to10minutes each; unfinished heads fail preflight rather than holding the slot for worker action.
 
 The full runner keeps packaged-asset checks on the build job and the expensive local model/migration file on a separate job. Measured database-neighbor suites use the otherwise lighter job; the remaining discovered files retain deterministic assignment. Every file still runs exactly once. Named placement is a scheduling choice, not a runtime guarantee; compare actual complete workflow times rather than summed TAP durations.
 
@@ -606,7 +607,7 @@ budget check. Normal main pushes do not schedule a separate legacy Site build.
 
 ### Run the reviewed consumers
 
-The existing merge dispatch accepts an optional `reviewed_tests` JSON object with
+The existing merge dispatch requires `reviewed_tests`: normally the planner's JSON object with
 `base`, `head` and `files`. The first two fields are exact 40-character accepted-main
 and reviewed-head commits. `files` is the nonempty list of actual `test/*.test.mjs`
 consumers identified during review. There is no author-maintained transitive input
@@ -630,8 +631,11 @@ an execution argument, not source authority or proof that a test roster is compl
 Preparation and final admission validate the same immutable pair and ordinary
 candidate paths. Stale base/head, missing executing-policy inputs, missing fixture roots, escaping paths and
 symlinks fail clearly. Re-review the actual new pair before updating a stale
-request. With no argument, existing automatic routing and its conservative
-complete-regression fallback remain available.
+request. The explicit `auto` value uses only the existing proven inert-packet or
+selected-data route, refusing unsupported scope instead of silently expanding it.
+The explicit `complete` value requests the full suite and package build.
+Only already-queued older workflow definitions retain omitted-input compatibility;
+new requests follow the required-input command in `MERGE_QUEUE_CLIENT.md`.
 
 A reviewed list uses one isolated regression worker and acquires only its code
 and fixture inputs. It does not change geography applicability, trusted checker
