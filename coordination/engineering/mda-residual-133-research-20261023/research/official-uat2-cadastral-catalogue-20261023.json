@@ -1,0 +1,78 @@
+{
+  "status": "official metadata plus three bounded current-service point-identify observations; no geometry was retained or published",
+  "retrieved_utc": "2026-10-23T06:41:08Z/2026-10-23T06:43:21Z",
+  "catalogue": {
+    "portal": "https://geoportalinds.gov.md/en/geoportalhome-2/",
+    "portal_description": "technical platform to discover, view and exchange spatial data within Moldovan NSDI",
+    "search_api": "https://geoportalinds.gov.md/geonetwork/srv/api/search/records/_search?bucket=metadata",
+    "method": "POST",
+    "search": "+anytext:UAT",
+    "search_result_count": 12,
+    "note": "The first POST omitted bucket=metadata and returned an empty HTTP 400. A corrected metadata-only POST succeeded. The required parameter was confirmed from the official GeoNetwork API documentation."
+  },
+  "dataset_record": {
+    "uuid": "b4bd4737-55ed-4b7b-89c7-91a08dab2a1d",
+    "url": "https://geoportalinds.gov.md/geonetwork/srv/api/records/b4bd4737-55ed-4b7b-89c7-91a08dab2a1d",
+    "title": "UAT II (raion, municipiu, UTA)",
+    "record_publication_date": "2012-01-27T09:00:00+03:00",
+    "metadata_revision": "2026-10-09T08:00:00+00:00",
+    "lineage_statement": "Initially created 2002–2005 from cartographic materials then available, stated precision 10–20 m; updates performed since 2014 following cadastral boundary-establishment works under Government Decision 1518/2003 and AGCC instruction dated 2016-09-05; updates as needed from boundary-establishment files.",
+    "conditions": "Metadata marks access/use conditions unknown.",
+    "distribution": "A public institutional webpage is listed; no direct dataset-download URL is recorded.",
+    "missing_for_original_source_linkage": [
+      "No boundary-validity date or exact 2020 snapshot is stated.",
+      "No source link to the consumed geoBoundaries 2020 MDA feature is stated.",
+      "No mapping to the 133 pending cells is stated."
+    ],
+    "response_bytes": 23201,
+    "response_sha256": "9e2c2543d43152c44481062ef0bb047b6e263d3f127f11c1ecfed9c5a3666aa1"
+  },
+  "view_service_record": {
+    "uuid": "68559473-2964-486c-bac8-0adfb71d6056",
+    "url": "https://geoportalinds.gov.md/geonetwork/srv/api/records/68559473-2964-486c-bac8-0adfb71d6056",
+    "title": "Serviciu de vizualizare UAT II (raion, municipiu, UTA)",
+    "service": "WMS 1.1.0; EPSG:4026",
+    "layer": "w_rsuat:mv_uat1",
+    "description": "named polygon boundaries for districts, Chișinău, Bălți and Găgăuzia",
+    "creation_date": "2016-05-31T08:00:00",
+    "publication_date": "2004-01-01T08:00:00+00:00",
+    "revision_date": "2026-10-09T10:00:00+00:00",
+    "service_conditions": "Service metadata does not specify a fee or access constraint; this does not resolve underlying dataset reuse rights, which remain marked unknown.",
+    "getcapabilities_url": "https://map.cadastru.md/geoserver/ows?service=wms&version=1.3.0&request=GetCapabilities",
+    "capabilities_observation": "Returned HTTP 200, WMS 1.3.0; layer is queryable and server advertises GetMap and GetFeatureInfo. Three GetFeatureInfo requests were later made in text/plain format for representative existing cell centers; no GetMap or bulk request was made.",
+    "record_response_bytes": 21884,
+    "record_response_sha256": "db336666cb19ad53c49c8b3a38ad046b2e11ecd4abd1e47ce8f7ada842420f6a",
+    "capabilities_response_bytes": 264946,
+    "capabilities_response_sha256": "7cbb231ce4b52f7cfb306d7e08857fd6367fa7a9328f7c851ce4186a74e3ba29"
+  },
+  "bounded_current_service_identify": {
+    "retrieved_utc": "2026-10-23T06:50Z",
+    "endpoint": "https://map.cadastru.md/geoserver/ows",
+    "request": "WMS 1.3.0 GetFeatureInfo; layer and query_layers w_rsuat:mv_uat1; CRS:84; 3x3 pixel request centered at I=1,J=1; bbox +/-0.0002 degrees around each existing source-cell center; INFO_FORMAT=text/plain; FEATURE_COUNT=5.",
+    "observations": [
+      {
+        "residual_stratum": "MDA archived-source match plus UKR contact",
+        "center_lon_lat": [28.779704462058, 45.961012175639],
+        "current_service_attributes": {"ido": 2031, "uat1_name": "r-nul Taraclia", "gname": "Taraclia", "loc_type_ename": "District", "cuatm": "8700"},
+        "result": "One current UAT II feature identified. This is a current-service label/identity observation, not evidence for the consumed 2020 feature's source vintage or geometry."
+      },
+      {
+        "residual_stratum": "MDA-only archived-source nonmatch",
+        "center_lon_lat": [29.923559881907, 46.506221012122],
+        "current_service_attributes": {"ido": 2030, "uat1_name": "r-nul Ștefan Vodă", "gname": "Ștefan Vodă", "loc_type_ename": "District", "cuatm": "8500"},
+        "result": "One current UAT II feature identified. A current label match does not establish whether this residual center belongs to the historical source feature or why the retained archive differs."
+      },
+      {
+        "residual_stratum": "UKR contact outside archived MDA source",
+        "center_lon_lat": [29.238345170617, 47.863999971364],
+        "current_service_attributes": null,
+        "result": "No current service feature was returned for this point. This does not distinguish omission, service coverage, or a historical source exclusion and cannot disposition the wider Transnistria group."
+      }
+    ],
+    "response_handling": "Python's TLS validation failed locally before reaching the service. System curl with normal certificate verification succeeded. An initial application/json GetFeatureInfo response included full feature geometry; it was not saved or redistributed. Subsequent bounded requests used text/plain, which returned selected attributes and a geometry summary only; no coordinate arrays were retained.",
+    "scope_limit": "Three representative samples only. No bulk extraction, GetMap, WFS, downloaded dataset, or full 133-cell query."
+  },
+  "additional_limit": "The 2025 INDS monitoring table lists view service availability for administrative unit levels I/II but no WFS or file-based download. The ordinary cadastral viewer URL returned a region/country-unavailable response; no alternate route was used.",
+  "disposition": "Current-service identify results give limited corroboration for the Taraclia and Ștefan Vodă labels and no feature at one Transnistria sample point. They do not establish the 2020 snapshot, source-feature identity, current-to-2020 geometry equivalence, or per-cell applicability. The three heterogeneous samples cannot classify the 133 residuals. No MDA cell, owner, hold, qualification, repair, or credit changed.",
+  "privacy": "Raw metadata responses are not copied here because they include named contact details. Raw WMS feature geometry was not retained or published; only three bounded current-layer attributes and the no-feature response are recorded."
+}

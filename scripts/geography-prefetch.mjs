@@ -12,7 +12,7 @@ const sha256 = body => createHash('sha256').update(body).digest('hex');
 const safe = value => typeof value === 'string' && value && !value.includes('\\') && !value.includes('\0') && !path.posix.isAbsolute(value) && value.split('/').every(p => p && p !== '.' && p !== '..');
 const requireValue = (value, message) => { if (!value) throw Error(message); };
 
-export function createAcquisition({repo, loadTree, loadDescriptor, loadCommit, execute = execFileSync, token = process.env.GH_TOKEN}) {
+export function createAcquisition({repo, loadTree, loadDescriptor, execute = execFileSync, token = process.env.GH_TOKEN}) {
   const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('GIT_')));
   Object.assign(env, {GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0',
     GIT_CONFIG_COUNT: token ? '3' : '2', GIT_CONFIG_KEY_0: 'core.hooksPath', GIT_CONFIG_VALUE_0: '/dev/null',
@@ -36,7 +36,7 @@ export function createAcquisition({repo, loadTree, loadDescriptor, loadCommit, e
   async function originObject(id, type) {
     requireValue(oid(id) && ['commit', 'tree'].includes(type), 'Invalid immutable origin metadata');
     if (!originObjects.has(id)) {
-      let declaredRoot, raw, directory = repo, owned;
+      let raw, directory = repo, owned;
       try {
         // --missing prevents implicit lazy acquisition even on older Git versions.
         // No ancestry traversal: the only requested root is this exact object.
@@ -44,36 +44,20 @@ export function createAcquisition({repo, loadTree, loadDescriptor, loadCommit, e
           '--missing=print', '--ignore-missing', '--no-walk=unsorted', '--no-object-names', '--stdin'], id + '\n', 42).toString().trim();
         if (present !== id) {
           requireValue(present === '' || present === '?' + id, 'Invalid local origin metadata inventory');
-          if (type === 'commit') {
-            // The optional proof must not expose a partial origin to subsequent
-            // scientific readers. Authenticate native bytes in an owned store,
-            // then discard it without changing caller objects or shallow state.
-            const declared = await loadCommit(id);
-            requireValue(declared?.sha === id && oid(declared.tree?.sha), 'Wrong immutable origin commit metadata');
-            declaredRoot = declared.tree.sha;
-            directory = owned = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-routing-origin-'));
-            git(['init', '--bare', '--template='], undefined, undefined, directory);
+          // Native commits and trees use the same exact-object transport. The
+          // owned store contains only this one object, never a partial producer
+          // in the caller's repository. Its native hash is the root of trust.
+          directory = owned = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-routing-origin-'));
+          git(['init', '--bare', '--template='], undefined, undefined, directory);
+          try {
             git(['-c', 'fetch.negotiationAlgorithm=noop', 'fetch', '--no-tags', '--no-write-fetch-head',
-              '--no-recurse-submodules', '--no-auto-maintenance', '--filter=tree:0', '--depth=1',
+              '--no-recurse-submodules', '--no-auto-maintenance', '--filter=tree:0', ...(type === 'commit' ? ['--depth=1'] : []),
               '--stdin', 'https://github.com/' + repository + '.git'], id + '\n', undefined, directory);
-            stats.origin_metadata_fetches++;
-            requireValue(git(['cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype)'],
-              undefined, 48, directory).toString() === id + ' commit\n', 'Unexpected private origin objects');
-          } else {
-            // Reconstruct and authenticate one complete nonrecursive tree. Its
-            // rows stay private; neither the tree nor any child is imported.
-            const value = await loadTree(id, false);
-            requireValue(value?.sha === id && !value.truncated && Array.isArray(value.tree)
-              && new Set(value.tree.map(row => row.path)).size === value.tree.length, 'Wrong immutable origin tree metadata');
-            const modes = {'040000': 'tree', '100644': 'blob', '100755': 'blob', '120000': 'blob', '160000': 'commit'};
-            const chunks = value.tree.map(row => {
-              requireValue(Object.hasOwn(modes, row.mode) && modes[row.mode] === row.type && oid(row.sha)
-                && typeof row.path === 'string' && row.path && !['.', '..'].includes(row.path)
-                && !row.path.includes('\0') && !row.path.includes('/'), 'Malformed immutable origin tree entry');
-              return Buffer.concat([Buffer.from(`${row.mode === '040000' ? '40000' : row.mode} ${row.path}\0`), Buffer.from(row.sha, 'hex')]);
-            });
-            raw = Buffer.concat(chunks);
-          }
+          } catch { throw Error('Immutable origin object fetch failed: ' + type + ' ' + id); }
+          stats.origin_metadata_fetches++;
+          const expected = id + ' ' + type + '\n';
+          requireValue(git(['cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype)'],
+            undefined, Buffer.byteLength(expected), directory).toString() === expected, 'Unexpected private origin objects');
         }
         if (raw === undefined) {
           const status = git(['cat-file', '--batch-check=%(objectname) %(objecttype) %(objectsize)'], id + '\n', 80, directory).toString().trim().split(' ');
@@ -87,7 +71,6 @@ export function createAcquisition({repo, loadTree, loadDescriptor, loadCommit, e
           'Wrong immutable origin metadata identity');
         const root = type === 'commit' ? raw.toString().match(/^tree ([a-f0-9]{40})\n/)?.[1] : undefined;
         requireValue(type !== 'commit' || oid(root), 'Invalid immutable origin root tree');
-        requireValue(declaredRoot === undefined || root === declaredRoot, 'Wrong immutable origin root tree');
         const entries = new Map();
         if (type === 'tree') for (let offset = 0; offset < raw.length;) {
           const space = raw.indexOf(32, offset), nul = raw.indexOf(0, space + 1), mode = raw.subarray(offset, space).toString();
@@ -220,7 +203,7 @@ export function createAcquisition({repo, loadTree, loadDescriptor, loadCommit, e
     acquire([row]);
     return JSON.parse(body(row));
   }
-  return {tree, descriptor, pin, acquire, json, resolvePath, stats};
+  return {tree, descriptor, pin, acquire, body, json, resolvePath, stats};
 }
 
 export async function prefetchSelectedGeography(acquisition, baseline, candidate) {
@@ -269,20 +252,93 @@ export async function prefetchSelectedGeography(acquisition, baseline, candidate
     limits: ['No scientific or full dependency-closure claim. Deeper historical authority/rebind inputs and unknown formats retain the unchanged checker acquisition.']};
 }
 
-export async function githubCommit(version) {
-  return githubMetadata(`commits/${version}`);
-}
+
 
 export async function githubTree(version, recursive = true) {
-  return githubMetadata(`trees/${version}${recursive ? '?recursive=1' : ''}`);
+  const value = await githubMetadata(`trees/${version}${recursive ? '?recursive=1' : ''}`);
+  if (!recursive || value?.truncated !== true) return value;
+  return completeTruncatedTree(version, value);
+}
+
+// GitHub caps recursive tree responses. Discard a truncated response's partial
+// rows, then rebuild the exact complete inventory from direct child trees.
+async function completeTruncatedTree(root, initial) {
+  const inventories = new Map(), oid = value => /^[a-f0-9]{40}$/.test(value ?? '');
+  const need = (condition, message) => { if (!condition) throw Error(message); };
+  const checkedRows = (response, sha, recursive) => {
+    need(response?.sha === sha && typeof response.truncated === 'boolean' && Array.isArray(response.tree),
+      'Invalid immutable tree response identity');
+    const rows = new Map();
+    for (const row of response.tree) {
+      const parts = typeof row.path === 'string' ? row.path.split('/') : [];
+      need(parts.length > 0 && parts.every(part => part && part !== '.' && part !== '..' && !/[\x00-\x1f\x7f\\]/.test(part)) &&
+        (recursive || parts.length === 1) && oid(row.sha) && !rows.has(row.path) &&
+        (row.type === 'tree' && row.mode === '040000' || row.type === 'commit' && row.mode === '160000' ||
+          row.type === 'blob' && ['100644','100755','120000'].includes(row.mode) && Number.isSafeInteger(row.size) && row.size >= 0),
+      'Invalid or duplicate immutable tree entry');
+      rows.set(row.path, row);
+    }
+    if (recursive) for (const [name, row] of rows) {
+      if (row.type === 'tree') need(row.sha !== sha, 'Cyclic immutable tree inventory');
+      for (let at = name.indexOf('/'); at >= 0; at = name.indexOf('/', at + 1)) {
+        const parent = rows.get(name.slice(0, at));
+        need(parent?.type === 'tree', 'Incomplete immutable tree parent inventory');
+        if (row.type === 'tree') need(row.sha !== parent.sha, 'Cyclic immutable tree inventory');
+      }
+    }
+    return rows;
+  };
+  const collect = async (sha, response, ancestors) => {
+    need(!ancestors.has(sha), 'Cyclic immutable tree inventory');
+    if (inventories.has(sha)) {
+      const cached = inventories.get(sha);
+      for (const row of cached.values()) if (row.type === 'tree') need(!ancestors.has(row.sha), 'Cyclic immutable tree inventory');
+      return cached;
+    }
+    response ??= await githubMetadata(`trees/${sha}?recursive=1`);
+    need(response?.sha === sha && typeof response.truncated === 'boolean' && Array.isArray(response.tree),
+      'Invalid immutable tree response identity');
+    let rows;
+    if (!response.truncated) {
+      rows = checkedRows(response, sha, true);
+      for (const row of rows.values()) if (row.type === 'tree')
+        need(!ancestors.has(row.sha), 'Cyclic immutable tree inventory');
+    }
+    else {
+      const direct = await githubMetadata(`trees/${sha}`);
+      need(direct?.truncated === false, 'Incomplete direct immutable tree inventory');
+      rows = checkedRows(direct, sha, false);
+      const next = new Set([...ancestors, sha]);
+      for (const row of [...rows.values()]) if (row.type === 'tree') {
+        for (const [relative, child] of await collect(row.sha, undefined, next)) {
+          const name = row.path + '/' + relative;
+          need(!rows.has(name), 'Duplicate expanded immutable tree path');
+          rows.set(name, {...child, path: name});
+        }
+      }
+    }
+    inventories.set(sha, rows);
+    return rows;
+  };
+  const entries = await collect(root, initial, new Set());
+  return {...initial, tree: [...entries.values()].sort((a, b) => a.path < b.path ? -1 : a.path > b.path ? 1 : 0), truncated: false};
 }
 
 async function githubMetadata(locator) {
   const headers = {'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'};
   if (process.env.GH_TOKEN) headers.Authorization = 'Bearer ' + process.env.GH_TOKEN;
-  const response = await fetch(`https://api.github.com/repos/${repository}/git/${locator}`, {headers, signal: AbortSignal.timeout(60000)});
-  requireValue(response.ok, 'Geography tree metadata unavailable');
-  return response.json();
+  // Retry only an interrupted read of this same immutable metadata object.
+  // A response, parse refusal or any other transport error remains terminal.
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const response = await fetch(`https://api.github.com/repos/${repository}/git/${locator}`, {headers, signal: AbortSignal.timeout(60000)});
+      requireValue(response.ok, `Geography tree metadata unavailable (${locator}; HTTP ${response.status})`);
+      return await response.json();
+    } catch (error) {
+      if (error?.cause?.code !== 'UND_ERR_SOCKET') throw error;
+      if (attempt === 1) throw Error(`Geography metadata transport unavailable (${locator}; UND_ERR_SOCKET)`);
+    }
+  }
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

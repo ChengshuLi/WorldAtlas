@@ -1,0 +1,81 @@
+{
+  "title": "Bounded current Kartverket point lookup for the two retained Norway ADM1 contact cells",
+  "status": "Completed point lookup against the current official public administrative-unit API; this is present-day context, not a historical polygon comparison or repair qualification.",
+  "scope": {
+    "original_family": "gb:NOR:ADM1",
+    "original_source_id": "gb:NOR:ADM1:71437522B84427958303197",
+    "original_source_name": "Troms og Finnmark",
+    "retained_feature_rows": 2,
+    "owner_id": "gb:RUS:ADM2:50074027B59329255842991",
+    "owner_name": "Petsamo District",
+    "class": "mapped_land_support",
+    "tuple_source": {
+      "path": "inventory/rus-other-contact-471-key-and-family-index.json",
+      "sha256": "b9a968677ce39d4d03f9fc0b61997d92a21d45f2b20fec7cb017510ae8d32d23"
+    }
+  },
+  "coordinate_binding": {
+    "latitude_source": "Original native-row-latitudes.f64le.gz retained code operand; uncompressed little-endian float64 row array indexed by y.",
+    "latitude_table_uncompressed_bytes": 2097328,
+    "latitude_table_uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+    "longitude_formula": "((x + 0.5) / 262166 * 360) - 180, preserving the native raster center convention.",
+    "crs_interpretation": "Supplied to Kartverket point API as SRID 4258 (ETRS89 geographic coordinates). No coordinate transform was performed in this lookup."
+  },
+  "official_service": {
+    "dataset_url": "https://data.norge.no/nb/datasets/8aa07439-e295-3e11-8ee5-141cf03d7bd5/administrative-enheter-fylker",
+    "publisher": "Kartverket, Norwegian Mapping Authority",
+    "observed_dataset_metadata": "Data page identifies the registered county boundaries as current administrative units with reference date 1 January 2026 and CC BY 4.0 terms.",
+    "api_spec_url": "https://ws.geonorge.no/kommuneinfo/v1/static/openapi_doc.json",
+    "api_spec_observation": "OpenAPI declares GET /punkt with required nord (latitude), ost (longitude), and koordsys (SRID), response containing county and municipality; its server is https://api.kartverket.no/kommuneinfo/v1.",
+    "api_spec_terms": "The service description says no login/authorization is required; data page lists CC BY 4.0."
+  },
+  "queries": [
+    {
+      "tuple": {
+        "x": 152972,
+        "y": 59849
+      },
+      "coordinate": {
+        "latitude": 69.43996822160625,
+        "longitude": 30.058131107771402
+      },
+      "request_url": "https://api.kartverket.no/kommuneinfo/v1/punkt?nord=69.43996822160625&ost=30.058131107771402&koordsys=4258",
+      "response_time_utc": "2026-10-21T13:44:50Z",
+      "http_status": 404,
+      "response_body": "<!doctype html><html lang=en><title>404 Not Found</title><h1>Not Found</h1><p>Ingen treff, sjekk parameterene.</p>",
+      "finding": "The service returned no county or municipality match for this point.",
+      "limit": "This is an API no-match result, not an independently computed point-in-polygon result and not evidence of the point’s legal or sovereign status."
+    },
+    {
+      "tuple": {
+        "x": 152965,
+        "y": 59862
+      },
+      "coordinate": {
+        "latitude": 69.4336981394968,
+        "longitude": 30.048518877352535
+      },
+      "request_url": "https://api.kartverket.no/kommuneinfo/v1/punkt?nord=69.4336981394968&ost=30.048518877352535&koordsys=4258",
+      "response_time_utc": "2026-10-21T13:45:05Z",
+      "http_status": 200,
+      "response_json": {
+        "fylkesnavn": "Finnmark",
+        "fylkesnummer": "56",
+        "kommunenavn": "Sør-Varanger",
+        "kommunenummer": "5605"
+      },
+      "finding": "The current official service identifies this point with Finnmark county and Sør-Varanger municipality."
+    }
+  ],
+  "interpretation": {
+    "historical_context": "Kartverket’s 2024 change page states Troms og Finnmark split into Troms and Finnmark effective 1 January 2024.",
+    "bounded_result": "The two retained points do not share one API outcome: one is currently indexed to Finnmark/Sør-Varanger; the other receives no result. This is a concrete, within-feature difference relevant to the 2024 split.",
+    "not_established": [
+      "The old source feature’s exact boundary geometry or vintage beyond its retained metadata.",
+      "Whether the no-match point lies outside Norway, is a service coverage gap, or has another cause.",
+      "A geometric comparison with the 2022 Troms og Finnmark source polygon.",
+      "Repair qualification or any change to the frozen RUS held set."
+    ],
+    "next_finite_option": "If the historical/current geometric relation is needed, retrieve only the official county geometry for Finnmark and, if necessary, the adjacent current county through the already documented Kartverket service, then compare the two retained centers with explicit CRS and boundary-tie handling. The point API alone is insufficient for the no-match point."
+  }
+}

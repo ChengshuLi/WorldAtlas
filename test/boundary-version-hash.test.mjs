@@ -48,5 +48,5 @@ test('changed footprints invalidate cached values while direct evidence can stil
  const features=[{id:'affected',properties:{}}];
  const direct={id:'direct',location_id:'affected',attribute:'owner',value:'Direct polity',category_id:'owner:direct',method:'direct',valid_from:1000,valid_to:1100,source:'Direct evidence'};
  assert.equal(resolveAttributes(features,1000,{records:invalidated,states:[]}).get('affected').owner,null);
- assert.equal(resolveAttributes(features,1000,{records:[...invalidated,direct],states:[]}).get('affected').owner,'Direct polity');
+ assert.equal(resolveAttributes(features,1000,{records:[...invalidated,direct],states:[],ownerLabels:new Map([['owner:direct',{name:'Direct polity'}]])}).get('affected').owner,'Direct polity');
 });

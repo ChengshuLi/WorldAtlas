@@ -6,9 +6,12 @@ import path from 'node:path';
 import {execFileSync, spawnSync} from 'node:child_process';
 import {gzipSync, gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
+import {finalBankReference} from '../src/reference-metadata.js';
+import {ownershipMetadata} from '../src/ownership-method.js';
 import {staticModuleClosure} from './helpers/static-module-closure.mjs';
 import {shuffledChunks} from './fixtures/native-word-store.mjs';
 import {nativeAuthority, pinReader} from '../scripts/prepare-delivery-handoff.mjs';
+import {canonicalNativeJsonChunks, writeNativeByteChunks} from '../scripts/native-patch-store.mjs';
 import {valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const sha = raw => createHash('sha256').update(raw).digest('hex');
@@ -17,6 +20,13 @@ const queueRoot = 'coordination/engineering/global-current-cell-work-queue-20261
 const packageId = 'gb-TST-ADM2--repair-evaluation';
 const sources = staticModuleClosure(process.cwd(), [command]);
 const keys = [{x: 0, y: 0}, {x: 2, y: 0}, {x: 3, y: 0}, {x: 1, y: 1}, {x: 1, y: 2}];
+const gitHelperArgv = [
+  ['pack-objects', '--revs', '--thin', '--stdout', '--delta-base-offset'],
+  ['rev-list', '--objects', '--stdin', '--not', '--exclude-hidden=fetch', '--all', '--quiet', '--alternate-refs'],
+];
+const exactGitHelper = args =>
+  gitHelperArgv.some(expected => JSON.stringify(args) === JSON.stringify(expected)) ||
+  (args.length === 5 && args[0] === 'index-pack' && args[1] === '--stdin' && args[2] === '--fix-thin' && args[3] === '--promisor' && /^--pack_header=2,[1-9][0-9]*$/.test(args[4]));
 function fixture({missingOrigins = false, changeManifest, changePatch, changeSide, changeOwners, changeArrays, changeQueue, changeOriginalGrid, splitCandidates = false, multiBlock = false} = {}) {
   const repo = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'owner-observation-')));
   const git = (...args) => execFileSync('git', ['-C', repo, ...args], {stdio: ['ignore', 'pipe', 'pipe']}).toString().trim();
@@ -143,6 +153,109 @@ function fixture({missingOrigins = false, changeManifest, changePatch, changeSid
   return {repo, git, write, commit, pin, head, manifest, selection, side, run, cleanup: () => fs.rmSync(repo, {recursive: true})};
 }
 
+// Actual final-profile dimensions and normative bytes, but only five synthetic
+// requested cells. No source science, full bank, or production geometry is run.
+function finalFixture() {
+  const f = fixture(), root = 'data/canonical-grid/current-startup';
+  const latitudePath = 'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz';
+  const latitudeRaw = fs.readFileSync(latitudePath), latitudeDecoded = gunzipSync(latitudeRaw);
+  f.write(latitudePath, latitudeRaw);
+  const owners = [{index: 1, id: 'owner-A'}, {index: 2, id: 'owner-B'}];
+  const ownerRaw = gzipSync(Buffer.from(JSON.stringify(owners)));
+  f.write('inputs/owners.gz', ownerRaw);
+  const origin = f.commit(), size = 262166, bits = 19;
+  const reference = {id: 'geography:fixture-native', footprints_sha256: 'b'.repeat(64), hierarchy_sha256: 'c'.repeat(64)};
+  const encode = (kind, values, offset, prefix) => {
+    const raw = Buffer.alloc(values.length * 4); values.forEach((v, i) => raw.writeUInt32LE(v, i * 4));
+    const encoded = gzipSync(Buffer.concat([...shuffledChunks(values.length, {value: n => values[n]})]));
+    const name = `${prefix}/${kind}-${offset}.bin.gz`; f.write(root + '/' + name, encoded);
+    return {path: name, kind, offset, words: values.length, bytes: encoded.length, sha256: sha(encoded),
+      decoded_bytes: raw.length, decoded_sha256: sha(raw), encoding: 'byte-shuffle'};
+  };
+  const rows = counts => {
+    let cursor = 0;
+    return Array.from({length: size * 2}, (_, i) => i % 2 ? (cursor += counts[i >> 1] ?? 0, counts[i >> 1] ?? 0) : cursor);
+  };
+  const oldRows = encode('rows', rows([1, 1, 0, 1]), 0, 'native-v1/ownership');
+  const oldRuns = encode('runs', [2 ** bits, 1, 2 * 2 ** bits + 1, 1, 2 ** bits + 3, 3], 0, 'original');
+  const manifest = {...f.manifest, size, coordinateBits: bits, geographic_release: reference.id,
+    hierarchy_sha256: reference.hierarchy_sha256, footprints_sha256: reference.footprints_sha256,
+    parts: [oldRows, oldRuns], runWords: 6,
+    bounds: {path: 'owners.gz', sha256: sha(ownerRaw)},
+    original_assets: {bounds: {commit: origin, path: 'inputs/owners.gz', sha256: sha(ownerRaw), role: 'original-identity-parent-camera-context'}},
+    native_latitudes: {root: 'repository', role: 'immutable-normative-rule-input', commit: origin, path: latitudePath,
+      bytes: latitudeRaw.length, sha256: sha(latitudeRaw), decoded_bytes: latitudeDecoded.length, decoded_sha256: sha(latitudeDecoded)}};
+  const manifestRaw = f.write('inputs/native/manifest.json', manifest), manifestSha = sha(manifestRaw);
+  const native = {version: 1, method: manifest.method, release_id: reference.id, manifest_path: 'inputs/native/manifest.json', sha256: manifestSha,
+    selected_geography: {kind: 'complete-world-index-with-exact-encoded-overrides', path: 'absent-scientific-bank.json'}};
+  const remap = p => {
+    const raw = fs.readFileSync(path.join(f.repo, root, p.path));
+    const name = p.kind === 'rows' ? p.path : 'ownership-vintages/' + manifestSha + '/native-v1/ownership/runs-0.bin.gz';
+    f.write(root + '/' + name, raw); return {...p, path: name};
+  };
+  const nativeParts = manifest.parts.map(remap), latitudeTransport = 'native-v1/native-row-latitudes.f64le.gz';
+  f.write(root + '/' + latitudeTransport, latitudeRaw);
+  const nativeMap = {...ownershipMetadata(manifest), canonical_grid_sha256: manifestSha, parts: nativeParts,
+    native_latitudes: {...manifest.native_latitudes, transport_path: latitudeTransport}};
+  const finalRuns = [2 * 2 ** bits, 0, 2 ** bits + 2, 2, 2 * 2 ** bits + 1, 1, 2 ** bits + 1, 1];
+  const parts = [encode('rows', rows([2, 1, 1, 1]), 0, 'final'), encode('runs', finalRuns, 0, 'final'),
+    encode('runs', [2 ** bits + 3, 3], finalRuns.length, 'final')];
+  const ownerHash = sha(Buffer.from(JSON.stringify(owners.map(o => [o.index, o.id]))));
+  const contextBody = Buffer.from(JSON.stringify(owners.map(o => ({...o, fixtureContext: true}))));
+  const contextRaw = gzipSync(contextBody), context = {path: 'geography/effective-context-' + sha(contextRaw) + '.json.gz',
+    bytes: contextRaw.length, sha256: sha(contextRaw), encoding: 'gzip', decoded_bytes: contextBody.length,
+    decoded_sha256: sha(contextBody), offset: 0, features: owners.length};
+  f.write(root + '/' + context.path, contextRaw);
+  const runBytes = Buffer.alloc((finalRuns.length + 2) * 4);
+  [...finalRuns, 2 ** bits + 3, 3].forEach((v, i) => runBytes.writeUInt32LE(v, i * 4));
+  const proof = {version: 3, kind: 'prepared-final-native-bank-v3', native_manifest_sha256: manifestSha,
+    native_pixel_map: nativeMap, base_reference: reference, effective_reference: reference, context_parts: [context],
+    owners: owners.length, reference_owner_sha256: ownerHash, rows_sha256: parts[0].decoded_sha256,
+    runs_word_stream_sha256: sha(runBytes), effective_footprint_domain: 'worldatlas-final-native-footprints:v1'};
+  const pixelMap = {...nativeMap, parts, runWords: finalRuns.length + 2, reference_owner_sha256: ownerHash}; delete pixelMap.canonical_grid_sha256;
+  const effective = finalBankReference(proof, pixelMap, 'd'.repeat(64), valueSha); proof.effective_reference = effective;
+  Object.assign(pixelMap, {geographic_release: effective.id, footprints_sha256: effective.footprints_sha256, hierarchy_sha256: effective.hierarchy_sha256});
+  const filePin = p => ({path: p.path, bytes: p.bytes, sha256: p.sha256});
+  const compatibility = [...nativeParts.map(filePin), {path: latitudeTransport, bytes: latitudeRaw.length, sha256: sha(latitudeRaw)}];
+  const index = {version: 3, native_manifest_sha256: manifestSha, release_id: effective.id, footprints_sha256: effective.footprints_sha256,
+    hierarchy_sha256: effective.hierarchy_sha256, pixelMap, preparedOwnership: proof, compatibility_files: compatibility,
+    files: [...compatibility, ...parts.map(filePin), filePin(context)]};
+  const indexRaw = f.write(root + '/index.json', index);
+  const selection = {version: 2, kind: 'selected-final-native-bank-v2', native_selection: native,
+    prepared_bank: {path: root + '/index.json', bytes: indexRaw.length, sha256: sha(indexRaw)}, reference: effective};
+  f.write('data/ownership-selection.json', selection);
+  const originalGrid = {size, selection: {method: manifest.method}, native_latitudes: {decoded_bytes: latitudeDecoded.length, decoded_sha256: sha(latitudeDecoded)}};
+  const gridRaw = f.write(queueRoot + '/ownership-binding.json', originalGrid);
+  const queue = JSON.parse(fs.readFileSync(path.join(f.repo, queueRoot, 'source-package-queue.json')));
+  queue.input_sha256['ownership-binding.json'] = sha(gridRaw); f.write(queueRoot + '/source-package-queue.json', queue);
+  // Historical cumulative products are deliberately absent at this final head.
+  for (const name of ['inputs/patch.json', 'inputs/sidecar.json', 'inputs/envelope.json', 'inputs/registry.json']) fs.unlinkSync(path.join(f.repo, name));
+  f.commit();
+  return {...f, finalIndex: index, finalSelection: selection, finalRoot: root};
+}
+
+test('documented package CLI reads final E directly with honest absent historical columns', () => {
+  const f = finalFixture(); try {
+    const r = f.run(); assert.equal(r.status, 0, r.stderr);
+    assert.equal(r.report.kind, 'literal-selected-owner-observation-v2'); assert.equal(r.report.version, 2); assert.equal(r.report.ownership_profile, 'selected-final-native-bank-v2');
+    assert.deepEqual(r.report.final_bank_pin, f.finalSelection.prepared_bank);
+    assert.deepEqual(r.report.selected_reference, f.finalSelection.reference);
+    assert.deepEqual(r.report.keys.map(k => [k.effective_selected_owner, k.owner_id]),
+      [[2, 'owner-B'], [1, 'owner-A'], [0, null], [2, 'owner-B'], [1, 'owner-A']]);
+    assert.ok(r.report.keys.every(k => k.base_owner === null && k.accepted_additive_owner === null && k.existing_product_overlap === null));
+    assert.equal(r.report.patch_pin, undefined); assert.equal(r.report.query_count, keys.length);
+    assert.equal(r.report.query_sha256, sha(Buffer.from(JSON.stringify(keys) + '\n')));
+    assert.equal(r.report.run_members.length, 1);
+    const consumed = r.report.consumed_inputs.map(p => p.path);
+    assert.ok(consumed.includes(f.finalRoot + '/' + f.finalIndex.pixelMap.parts[1].path));
+    for (const name of [f.finalIndex.pixelMap.parts[2].path, ...f.finalIndex.preparedOwnership.context_parts.map(p => p.path)])
+      assert.ok(!consumed.includes(f.finalRoot + '/' + name), 'Unrequested final member was read: ' + name);
+    assert.ok(!consumed.some(p => /^inputs\/(patch|sidecar|envelope|registry|bank)/.test(p)));
+    for (const name of ['scripts/package-startup-ownership.mjs', 'src/ownership-assets.js', 'src/ownership-method.js'])
+      assert.ok(r.report.execution_code.some(p => p.path === name), 'New executed dependency is not bound: ' + name);
+  } finally { f.cleanup(); }
+});
+
 test('literal ownership entrypoint needs no geometry or qualification inputs and binds exact keys, head and latitude', () => {
   const f = fixture(); try {
     const r = f.run(); assert.equal(r.status, 0, r.stderr);
@@ -158,6 +271,76 @@ test('literal ownership entrypoint needs no geometry or qualification inputs and
     assert.equal(r.report.original_package.package_id, packageId);
     assert.equal(r.report.original_package.native_cells, 5);
     assert.match(r.report.limits.join(' '), /not source applicability, a package qualification certificate or complete repair acceptance/);
+    assert.equal(fs.readFileSync(r.output, 'utf8'), [...canonicalNativeJsonChunks(r.report)].join(''),
+      'Published bytes use the shared canonical native JSON representation');
+  } finally { f.cleanup(); }
+});
+
+test('canonical native JSON writer streams a large selected-owner key array with valid exact bytes', () => {
+  const directory = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'owner-observation-large-json-')));
+  const output = path.join(directory, 'large.json'), report = {keys: Array.from({length: 50000}, (_, x) => ({x, y: 17, owner: 0}))};
+  let fd;
+  try {
+    fd = fs.openSync(output, 'wx');
+    const written = writeNativeByteChunks(fd, canonicalNativeJsonChunks(report));
+    fs.fsyncSync(fd); fs.closeSync(fd); fd = undefined;
+    const bytes = fs.readFileSync(output);
+    assert.ok(written.bytes > 1024 * 1024, 'Fixture crosses the writer buffer boundary');
+    assert.equal(bytes.length, written.bytes);
+    assert.equal(sha(bytes), written.sha256);
+    const parsed = JSON.parse(bytes);
+    assert.equal(parsed.keys.length, report.keys.length);
+    assert.deepEqual(parsed.keys[0], report.keys[0]);
+    assert.deepEqual(parsed.keys.at(-1), report.keys.at(-1));
+  } finally {
+    if (fd !== undefined) fs.closeSync(fd);
+    fs.rmSync(directory, {recursive: true});
+  }
+});
+
+test('CLI traverses the observation instead of stringifying it as one report object', () => {
+  const f = fixture(); try {
+    const preload = path.join(f.repo, 'reject-whole-report-json.mjs');
+    fs.writeFileSync(preload, `
+const stringify = JSON.stringify;
+JSON.stringify = function(value, ...args) {
+  if (value?.kind === 'literal-selected-owner-observation-v1' && Array.isArray(value.keys))
+    throw Error('whole observation JSON.stringify forbidden');
+  return stringify.call(this, value, ...args);
+};
+`);
+    const r = f.run({nodeArgs: ['--import', preload]});
+    assert.equal(r.status, 0, r.stderr);
+    assert.equal(r.report.query_count, keys.length);
+    assert.equal(r.report.keys.length, keys.length);
+  } finally { f.cleanup(); }
+});
+
+test('failed staged observation write leaves no final receipt or temporary directory', () => {
+  const f = fixture(); try {
+    const preload = path.join(f.repo, 'fail-observation-write.mjs');
+    fs.writeFileSync(preload, `
+import fs from 'node:fs';
+import path from 'node:path';
+const open = fs.openSync.bind(fs), write = fs.writeSync.bind(fs);
+let target, writes = 0;
+fs.openSync = (file, ...args) => {
+  const fd = open(file, ...args);
+  if (typeof file === 'string' && path.basename(file) === 'observation.json' &&
+      path.basename(path.dirname(file)).startsWith('.owner-observation-')) target = fd;
+  return fd;
+};
+fs.writeSync = (fd, buffer, offset, length, position) => {
+  if (fd !== target) return write(fd, buffer, offset, length, position);
+  if (++writes > 1) throw Error('forced staged write failure');
+  return write(fd, buffer, offset, Math.max(1, Math.floor(length / 2)), position);
+};
+`);
+    const r = f.run({nodeArgs: ['--import', preload]});
+    assert.notEqual(r.status, 0);
+    assert.match(r.stderr, /forced staged write failure/);
+    assert.equal(fs.existsSync(r.output), false);
+    assert.equal(fs.readdirSync(f.repo).some(name => name.startsWith('.owner-observation-')), false);
   } finally { f.cleanup(); }
 });
 
@@ -313,12 +496,13 @@ test('original queue grid identity is joined before native body reads, not the c
 
 // Genuine cold Git objects, not missing working-tree copies. Only committed code,
 // commit/tree metadata and the test transport are installed before the CLI runs.
-function coldFixture({splitCandidates = false} = {}) {
-  const f = fixture({multiBlock: !splitCandidates, splitCandidates}), root = path.join(f.repo, 'cold'), bin = path.join(f.repo, 'bin');
+function coldFixture({splitCandidates = false, gitFilenameAlias = false, helperEscape, finalBank = false} = {}) {
+  const f = finalBank ? finalFixture() : fixture({multiBlock: !splitCandidates, splitCandidates}), root = path.join(f.repo, 'cold'), bin = path.join(f.repo, 'bin');
   const forbidden = ['data/world-index.json', 'inputs/source-geometries.json', 'inputs/certificate.json', 'inputs/ledger.json'];
   for (const name of forbidden) f.write(name, {forbidden: name});
   const head = f.commit(), objects = f.git('cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype)').split('\n').map(s => s.split(' '));
   const realGit = execFileSync('which', ['git'], {encoding: 'utf8'}).trim();
+  const realGitExecPath = execFileSync(realGit, ['--exec-path'], {encoding: 'utf8'}).trim();
   const git = (args, input) => execFileSync(realGit, ['-C', root, ...args], {input, stdio: ['pipe', 'pipe', 'pipe']});
   fs.mkdirSync(root); fs.mkdirSync(bin); git(['init']);
   for (const [oid, kind] of objects.filter(([, kind]) => kind !== 'blob')) {
@@ -335,14 +519,56 @@ function coldFixture({splitCandidates = false} = {}) {
   const log = path.join(f.repo, 'fetches.jsonl'), preload = path.join(f.repo, 'metadata.mjs');
   const implementation = path.join(bin, 'implementation'), launchLog = path.join(f.repo, 'git-launches.jsonl');
   fs.mkdirSync(path.join(implementation, 'bin'), {recursive: true});
+  const helperExecPath = path.join(implementation, 'libexec', 'git-core');
+  fs.mkdirSync(helperExecPath, {recursive: true});
+  for (const command of ['pack-objects', 'rev-list', 'index-pack']) {
+    fs.writeFileSync(path.join(helperExecPath, 'git-' + command), `#!${process.execPath}
+import fs from 'node:fs';
+import {spawnSync} from 'node:child_process';
+const command = ${JSON.stringify(command)}, args = process.argv.slice(2), invocation = [command, ...args];
+const gitHelperArgv = ${JSON.stringify(gitHelperArgv)};
+const exactGitHelper = ${exactGitHelper.toString()};
+fs.appendFileSync(${JSON.stringify(launchLog)}, JSON.stringify(invocation) + '\\n');
+if (!exactGitHelper(invocation)) throw Error('Unexpected Git helper invocation: ' + JSON.stringify(invocation));
+const target = ${JSON.stringify(realGitExecPath)} + '/git-' + command;
+const r = spawnSync(target, args, {stdio: 'inherit', env: process.env});
+process.exit(r.status ?? 1);
+`, {mode: 0o755});
+  }
+  let reportedHelperPath = helperExecPath;
+  if (helperEscape) {
+    const unrelated = path.join(bin, 'unrelated');
+    reportedHelperPath = path.join(unrelated, 'libexec', 'git-core');
+    fs.mkdirSync(reportedHelperPath, {recursive: true});
+    if (helperEscape === 'file') {
+      fs.mkdirSync(path.join(unrelated, 'bin'));
+      fs.symlinkSync(path.join(implementation, 'bin', 'git'), path.join(unrelated, 'bin', 'git'));
+    } else {
+      assert.equal(helperEscape, 'directory');
+      fs.symlinkSync(path.join(implementation, 'bin'), path.join(unrelated, 'bin'));
+    }
+  }
   // The PATH launcher resolves an implementation but cannot serve as that implementation.
-  // A second PATH lookup during acquisition must fail rather than silently use the shim.
+  // Resolve the implementation once; internal helpers are observed through GIT_EXEC_PATH
+  // because newer Git versions bypass PATH when launching them.
   fs.writeFileSync(path.join(bin, 'git'), `#!${process.execPath}
 import fs from 'node:fs';
+import {spawnSync} from 'node:child_process';
 const args = process.argv.slice(2);
+const gitHelperArgv = ${JSON.stringify(gitHelperArgv)};
+const exactGitHelper = ${exactGitHelper.toString()};
 fs.appendFileSync(${JSON.stringify(launchLog)}, JSON.stringify(args) + '\\n');
-if (args.length !== 1 || args[0] !== '--exec-path') throw Error('Git launch shim selected again');
-process.stdout.write(${JSON.stringify(path.join(implementation, 'libexec', 'git-core'))} + '\\n');
+if (args.length === 1 && args[0] === '--exec-path') {
+  process.stdout.write(${JSON.stringify(reportedHelperPath)} + '\\n');
+  process.exit(0);
+}
+const helper = exactGitHelper(args) ? args : null;
+if (helper) {
+  const env = {...process.env, GIT_EXEC_PATH: ${JSON.stringify(helperExecPath)}};
+  const r = spawnSync(${JSON.stringify(realGit)}, args, {stdio: 'inherit', env});
+  process.exit(r.status ?? 1);
+}
+throw Error('Unexpected Git launcher invocation: ' + JSON.stringify(args));
 `, {mode: 0o755});
   const setup = {origin: f.repo, realGit, log, metadataLog: path.join(f.repo, 'metadata-requests.jsonl')};
   const transport = path.join(implementation, 'transport.mjs');
@@ -353,10 +579,19 @@ for arg do
 done
 exec ${JSON.stringify(realGit)} "$@"
 `, {mode: 0o755});
+  if (gitFilenameAlias) {
+    fs.renameSync(path.join(implementation, 'bin', 'git'), path.join(implementation, 'bin', 'git-fixture'));
+    fs.symlinkSync('git-fixture', path.join(implementation, 'bin', 'git'));
+  }
   fs.writeFileSync(transport, `#!${process.execPath}
 import fs from 'node:fs';
 import {spawnSync} from 'node:child_process';
 const s = ${JSON.stringify(setup)}, args = process.argv.slice(2), input = fs.readFileSync(0);
+if (process.env.GIT_EXEC_PATH !== ${JSON.stringify(helperExecPath)}) throw Error('Selected helper directory was not forwarded');
+if (process.env.GIT_DIR !== undefined || process.env.GIT_WORK_TREE !== undefined
+  || process.env.GIT_CONFIG_NOSYSTEM !== '1' || process.env.GIT_CONFIG_GLOBAL !== '/dev/null'
+  || process.env.GIT_CONFIG_KEY_0 !== 'core.hooksPath' || process.env.GIT_CONFIG_VALUE_0 !== '/dev/null'
+  || process.env.GIT_CONFIG_KEY_1 !== 'credential.helper' || process.env.GIT_CONFIG_VALUE_1 !== '') throw Error('Acquisition isolation changed');
 if (args.includes('fetch')) {
   if (!['https://github.com/ChengshuLi/WorldAtlas.git','--stdin','--filter=blob:none','--no-auto-maintenance','--no-tags','--no-write-fetch-head','--no-recurse-submodules','fetch.negotiationAlgorithm=noop'].every(flag => args.includes(flag)) || process.env.GIT_NO_LAZY_FETCH !== '1' || process.env.GIT_NO_REPLACE_OBJECTS !== '1') throw Error('Unbounded transport');
   fs.appendFileSync(s.log, JSON.stringify(input.toString().trim().split('\\n')) + '\\n');
@@ -388,14 +623,46 @@ globalThis.fetch = async url => {
     env: {PATH: bin + path.delimiter + process.env.PATH, ...options?.env}});
   return {...f, root, head, codeOids, forbidden, gitCold: git, inventory, batches, run,
     launches: () => fs.existsSync(launchLog) ? fs.readFileSync(launchLog, 'utf8').trim().split('\n').map(JSON.parse) : [],
+    launcher: path.join(bin, 'git'),
     metadataRequests: () => fs.existsSync(setup.metadataLog) ? fs.readFileSync(setup.metadataLog, 'utf8') : ''};
 }
+
+
+test('cold Git launcher rejects an unrecognized invocation', () => {
+  const f = coldFixture(); try {
+    const r = spawnSync(f.launcher, ['unexpected-command'], {encoding: 'utf8', env: process.env});
+    assert.notEqual(r.status, 0);
+    assert.match(r.stderr, /Unexpected Git launcher invocation/);
+    assert.deepEqual(f.launches(), [['unexpected-command']]);
+  } finally { f.cleanup(); }
+});
+
+for (const helperEscape of ['file', 'directory']) test('unrelated Git helper prefix cannot borrow the selected implementation through a ' + helperEscape + ' symlink', () => {
+  const f = coldFixture({helperEscape}); try {
+    const before = f.inventory(), r = f.run();
+    assert.notEqual(r.status, 0); assert.match(r.stderr, /Selected Git helpers do not share the implementation installation/);
+    assert.equal(fs.existsSync(r.output), false); assert.deepEqual(f.inventory(), before);
+    assert.deepEqual(f.batches(), []); assert.equal(f.metadataRequests(), '');
+  } finally { f.cleanup(); }
+});
+
+test('a selected Git filename alias within the same installation keeps cold acquisition working', () => {
+  const f = coldFixture({gitFilenameAlias: true}); try {
+    const r = f.run(); assert.equal(r.status, 0, r.stderr);
+    assert.equal(r.report.query_count, 5); assert.deepEqual(r.report.keys.map(({x,y}) => ({x,y})), keys);
+    assert(f.batches().length > 0);
+  } finally { f.cleanup(); }
+});
 
 for (const splitCandidates of [false, true]) test('one cold ' + (splitCandidates ? 'split-member' : 'multiblock') + ' command acquires exactly its original and native inputs; warm reuse fetches nothing', t => {
   const f = coldFixture({splitCandidates}); try {
     assert.deepEqual(new Set(f.inventory().filter(([, kind]) => kind === 'blob').map(([oid]) => oid)), f.codeOids);
     const r = f.run();
-    assert.deepEqual(f.launches(), [['--exec-path']], 'only bootstrap resolves the Git implementation');
+    assert.deepEqual(f.launches().filter(args => args.length === 1 && args[0] === '--exec-path'), [['--exec-path']], 'cold bootstrap resolves the implementation once');
+    const helpers = f.launches().filter(args => !(args.length === 1 && args[0] === '--exec-path'));
+    assert(helpers.length > 0, 'cold fetch exercises internal Git helpers');
+    assert(helpers.every(exactGitHelper), 'only exact supported Git helper argv is passed through');
+    const coldHelperCalls = [...helpers];
     assert.equal(r.status, 0, r.stderr);
     assert.equal(r.report.query_count, 5); assert.deepEqual(r.report.keys.map(({x,y}) => ({x,y})), keys);
     assert.deepEqual(r.report.original_intervals.map(b => b.block), splitCandidates ? [0] : [0, 1]);
@@ -423,7 +690,8 @@ for (const splitCandidates of [false, true]) test('one cold ' + (splitCandidates
     assert.equal(r.report.acquisition.complete_scientific_closure, false);
     t.diagnostic(JSON.stringify({variant: splitCandidates ? 'split' : 'multiblock', acquired_objects: expected.size, declared_blob_bytes: declaredBytes, fetch_batches: f.batches().length}));
     const prior = f.batches().length, metadata = f.metadataRequests(), warm = f.run(); assert.equal(warm.status, 0, warm.stderr);
-    assert.deepEqual(f.launches(), [['--exec-path'], ['--exec-path']], 'warm acquisition also reuses resolved Git');
+    assert.deepEqual(f.launches().filter(args => args.length === 1 && args[0] === '--exec-path'), [['--exec-path'], ['--exec-path']], 'warm acquisition also reuses resolved Git');
+    assert.deepEqual(f.launches().filter(args => !(args.length === 1 && args[0] === '--exec-path')), coldHelperCalls, 'warm reuse invokes no additional Git helpers');
     assert.equal(warm.report.acquisition.fetched_objects, 0); assert.equal(warm.report.acquisition.fetched_bytes, 0);
     assert.equal(f.batches().length, prior); assert.equal(f.metadataRequests(), metadata); assert.deepEqual(warm.report.keys, r.report.keys);
     assert.deepEqual(warm.report.original_intervals, r.report.original_intervals);
@@ -449,13 +717,66 @@ test('a partial acquisition failure leaves no receipt and an ordinary retry reus
   const f = coldFixture(); try {
     const failed = f.run({env: {OBSERVATION_TEST_FAIL_FETCH:'2'}});
     assert.notEqual(failed.status, 0); assert.match(failed.stderr, /Geography object acquisition failed/);
+    assert.deepEqual(f.launches().filter(args => args.length === 1 && args[0] === '--exec-path'), [['--exec-path']], 'partial run resolves the implementation once');
+    assert(f.launches().filter(args => !(args.length === 1 && args[0] === '--exec-path')).every(exactGitHelper), 'partial run rejects launcher drift');
+    assert.equal(f.batches().length, 2, 'the second transport attempt is the injected failure');
     assert.equal(fs.existsSync(failed.output), false);
     const retained = f.inventory().filter(([oid,kind]) => kind === 'blob' && !f.codeOids.has(oid)).map(([oid]) => oid);
     assert.deepEqual(retained, [f.git('rev-parse', f.head + ':data/ownership-selection.json')]);
     const prior = f.batches().length, resumed = f.run(); assert.equal(resumed.status, 0, resumed.stderr);
+    assert.deepEqual(f.launches().filter(args => args.length === 1 && args[0] === '--exec-path'), [['--exec-path'], ['--exec-path']], 'retry reuses the resolved implementation');
+    assert(f.launches().filter(args => !(args.length === 1 && args[0] === '--exec-path')).every(exactGitHelper), 'retry keeps rejecting launcher drift');
     assert.equal(resumed.report.query_count, 5);
     assert(!f.batches().slice(prior).flat().some(oid => retained.includes(oid)));
     assert.equal(resumed.report.acquisition.fetched_objects,
       f.inventory().filter(([oid,kind]) => kind === 'blob' && !f.codeOids.has(oid)).length - retained.length);
+  } finally { f.cleanup(); }
+});
+
+
+for (const [label, mutate, expected] of [
+  ['selector shape', f => { f.finalSelection.additive_release = {path: 'inputs/sidecar.json'}; f.write('data/ownership-selection.json', f.finalSelection); }, /Unsupported final ownership selection/],
+  ['selected index bytes', f => { f.write(f.finalRoot + '/index.json', {...f.finalIndex, changed: true}); }, /differs|mismatch/],
+  ['required encoded member', f => { f.write(f.finalRoot + '/' + f.finalIndex.pixelMap.parts[1].path, Buffer.from('changed complete member')); }, /differs|mismatch/],
+  ['original owner body', f => { f.write('inputs/owners.gz', gzipSync(Buffer.from('[{"index":1,"id":"different"}]'))); }, /differs|mismatch/],
+  ['coherently bound wrong owner mapping', f => { f.finalIndex.preparedOwnership.reference_owner_sha256 = 'e'.repeat(64); repinFinal(f); }, /Final bank owner mapping differs/],
+  ['coherently bound wrong decoded words', f => { f.finalIndex.pixelMap.parts[1].decoded_sha256 = 'e'.repeat(64); repinFinal(f); }, /Whole native canonical words differ/],
+  ['incomplete row stream', f => { f.finalIndex.pixelMap.parts[0].words -= 2; const raw=f.write(f.finalRoot + '/index.json',f.finalIndex); f.finalSelection.prepared_bank.bytes=raw.length; f.finalSelection.prepared_bank.sha256=sha(raw); f.write('data/ownership-selection.json',f.finalSelection); }, /Incomplete final word extent/],
+  ['unselected metadata projection', f => { f.finalIndex.referenceMetadata = {invented: true}; repinFinal(f); }, /Final bank reference metadata differs/],
+]) test('final package observation refuses ' + label + ' without publishing', () => {
+  const f = finalFixture(); try {
+    mutate(f); f.commit(); const r = f.run();
+    assert.notEqual(r.status, 0, label); assert.match(r.stderr, expected); assert.equal(fs.existsSync(r.output), false);
+  } finally { f.cleanup(); }
+});
+
+function repinFinal(f) {
+  const index = f.finalIndex, proof = index.preparedOwnership;
+  const effective = finalBankReference(proof, index.pixelMap, proof.effective_reference.footprints_sha256, valueSha);
+  proof.effective_reference = effective;
+  Object.assign(index.pixelMap, {geographic_release: effective.id, footprints_sha256: effective.footprints_sha256, hierarchy_sha256: effective.hierarchy_sha256});
+  Object.assign(index, {release_id: effective.id, footprints_sha256: effective.footprints_sha256, hierarchy_sha256: effective.hierarchy_sha256});
+  const raw = f.write(f.finalRoot + '/index.json', index);
+  f.finalSelection.reference = effective;
+  f.finalSelection.prepared_bank = {path: f.finalRoot + '/index.json', bytes: raw.length, sha256: sha(raw)};
+  f.write('data/ownership-selection.json', f.finalSelection);
+}
+
+test('cold final package observation imports only requested final members and reuses them warm', t => {
+  const f = coldFixture({finalBank: true}); try {
+    assert.deepEqual(f.inventory().filter(([oid, kind]) => kind === 'blob' && !f.codeOids.has(oid)), []);
+    const r = f.run(); assert.equal(r.status, 0, r.stderr);
+    const imported = new Set(f.batches().flat());
+    const bank = f.finalIndex;
+    for (const p of [bank.pixelMap.parts[0], bank.pixelMap.parts[1]])
+      assert.ok(imported.has(f.git('rev-parse', f.head + ':' + f.finalRoot + '/' + p.path)));
+    for (const p of [bank.pixelMap.parts[2], ...bank.preparedOwnership.context_parts, ...bank.preparedOwnership.native_pixel_map.parts])
+      assert.ok(!imported.has(f.git('rev-parse', f.head + ':' + f.finalRoot + '/' + p.path)), 'Unexpected body: ' + p.path);
+    const prior = f.batches().length, warm = f.run(); assert.equal(warm.status, 0, warm.stderr);
+    assert.equal(f.batches().length, prior); assert.equal(warm.report.acquisition.fetched_objects, 0);
+    assert.deepEqual(warm.report.keys, r.report.keys);
+    assert.equal(r.report.query_count, 5);
+    t.diagnostic(JSON.stringify({acquired_objects: imported.size, declared_blob_bytes: r.report.acquisition.fetched_bytes,
+      final_word_members_read: 2, final_word_members_declared: bank.pixelMap.parts.length}));
   } finally { f.cleanup(); }
 });

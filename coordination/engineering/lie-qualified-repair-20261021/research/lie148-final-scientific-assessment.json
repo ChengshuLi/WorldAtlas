@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "kind": "lie148-final-scientific-and-composition-assessment",
+  "reviewer_worker_id": "01a15a0e-9f15-70f9-9391-bfaf7502a007",
+  "reviewed_local_commit": "287712e7b4048b57524d0ec9a2ecbaa7acd86cc6",
+  "scope": {
+    "package_id": "gb-LIE-ADM1--repair-evaluation",
+    "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "original_queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "original_queue_blob": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "cells": 148,
+    "intervals": 60,
+    "owner": 7121,
+    "target_id": "atlas:territory:LIE",
+    "selected_source_family": "gb:LIE:ADM1",
+    "source_contact_indices": [41684, 41687, 41690, 41691, 41692, 41693]
+  },
+  "contract_decision": {
+    "decision": "No concrete contradictory witness requiring a hold was found for the original 148 cells; proceeding with the positive repair path is supported under the original source-relative contract predicates.",
+    "reasoning": [
+      "The frozen queue selects the 2017 simplified LIE ADM1 source family; it does not require equivalence with the same-release full representation or the latest available representation.",
+      "The six original source-contact feature identities sum to 148 cells and match the recorded owner-7121 source lineage.",
+      "The full 11-feature simplified source family covers all 11 physical targets with no reported whole-target issues.",
+      "The actual source-evidence packet binds the exact 148 owner coordinates on each of the six relevant contact rows and includes complete AUT ADM1, AUT ADM2, CHE ADM1, and CHE ADM2 negative families.",
+      "The corrected native diagnostic exactly matches the original request: 148 requested, 148 supported, zero held; the native constructor records one assigned 148-cell row for atlas:territory:LIE / owner 7121."
+    ],
+    "retained_adverse_evidence": [
+      "Seven original keys are missed by the same-release full LIE source representation. This discrepancy remains explicit and adverse; no 141/7 split or claim that the misses are immaterial is made.",
+      "The separate AUT comparison conflict at y=92138, x=138082 remains outside this 148-key package and excluded from its assignment."
+    ],
+    "limits": [
+      "This is source-relative qualification reasoning under the original contract, not a legal boundary or political-authority determination.",
+      "The assessment does not establish final selected-native conservation, hosted execution, current-owner proof, root acceptance, or release completion.",
+      "Current official swisstopo OGD terms support use and attribution context, but do not independently prove the exact delivery-specific terms of the archived 2022 CHE competitor edition."
+    ]
+  },
+  "physical": {
+    "commit": "670e16bd1b334ce681ab3f8de8eaf0c5d9585d92",
+    "path": "coordination/engineering/lie-qualified-repair-20261021/physical-001/whole-target-support.json",
+    "sha256": "200ad351b58d2bbb9e04e067890bb5b474fe8b40b62bbb225e438c7c8ee4676e",
+    "targets_checked": 11,
+    "targets_with_issues": 0,
+    "pinned_input_count": 25
+  },
+  "source_and_native": {
+    "source_evidence": {
+      "commit": "749125808c1476aaf2b412be171faaba62226b68",
+      "path": "coordination/engineering/lie-qualified-repair-20261021/source-evidence-002/source-evidence.json",
+      "sha256": "b30bf4c1715e3d5313bd561040625dc9a80e9a3cf5c30ca858d3bb8a1b823c42",
+      "six_source_rows_each_cover_exact_148_key_set": true,
+      "complete_negative_families": ["gb:AUT:ADM1", "gb:AUT:ADM2", "gb:CHE:ADM1", "gb:CHE:ADM2"]
+    },
+    "native_diagnostic": {
+      "path": "coordination/engineering/lie-qualified-repair-20261021/native-diagnostic-002/native-diagnostic.json",
+      "sha256": "5eb32e2dc8f74e53512e877bab3858ac63991792b7d5322d2e1a07e378b79fe4",
+      "requested_cells": 148,
+      "supported_cells": 148,
+      "held_cells": 0,
+      "exact_patch_request_support_set_equality": true
+    },
+    "constructor": {
+      "path": "coordination/engineering/lie-qualified-repair-20261021/native-authority-001/constructor-result.json",
+      "sha256": "e3fc5fd0f775f143383013d099d7f9220f80f2ada456c982f3bc9e81b9d1abb1",
+      "component_id": "source-target:660186e9db29b4101ac31d51cf96c9f4e3ce81605c6d9a8fe0ba9000373e5174",
+      "ledger_rows": 1,
+      "row_disposition": "assigned",
+      "row_owner": 7121,
+      "row_cells": 148,
+      "source_receipt_sha256": "200ad351b58d2bbb9e04e067890bb5b474fe8b40b62bbb225e438c7c8ee4676e"
+    }
+  },
+  "composition": {
+    "path": "coordination/engineering/lie-qualified-repair-20261021/composition-001/selected-ledger.json",
+    "selected_ledger_sha256": "ac7a538841e74165bff132713d3d0e35c3f2e0a9a82732bda8348f88f32ced82",
+    "selected_ledger_row_count": 7008,
+    "selected_ledger_total_native_cells": 6336358,
+    "exact_lie_row": {
+      "component_id": "source-target:660186e9db29b4101ac31d51cf96c9f4e3ce81605c6d9a8fe0ba9000373e5174",
+      "target_id": "atlas:territory:LIE",
+      "owner": 7121,
+      "cells": 148,
+      "disposition": "assigned"
+    },
+    "prior_total_without_lie_delta": 6336210,
+    "delta_cells": 148,
+    "composition_patch": {
+      "path": "coordination/engineering/lie-qualified-repair-20261021/composition-001/patch.json",
+      "sha256": "28349dc1ffeaad2e7f11f8e8fcc5f390ba2a3b581fceaeb6626a331767332d3c",
+      "expanded_cells": 6336358,
+      "base_reference_id": "geography:review:211cb423e8c3bdcb3cbe88a4327fbd47eb10ccb61cd0ca4b884ed376564e7718",
+      "effective_reference_id": "geography:lie148-evidenced-repair-20261021"
+    },
+    "selected_delivery_expectations": {
+      "path": "coordination/engineering/lie-qualified-repair-20261021/selected-delivery-expectations.json",
+      "sha256": "9cf388a08587adc7a35bb197737ed2f35eed4e04d5cc11fed9512fb52df932a5",
+      "cumulative_native_cells": 6336358,
+      "selected_ledger_sha256_matches": true
+    }
+  },
+  "historical_note": "This final assessment supplements inventory/lie148-physical-source-native-review.json, which remains an interim record ending with a recommendation to proceed to native authority/conservation. It does not overwrite that interim history."
+}

@@ -1,0 +1,10 @@
+{
+  "phase": "finalize",
+  "command": "node scripts/prepare-delivery-handoff.mjs finalize coordination/engineering/rus-ukr12-continuation-20261023/finalize-config-001.json .cache/delivery-handoff/rus7-finalize-001",
+  "result": "failed before output publication",
+  "stderr": "no oauth token found for github.com; Geography object acquisition failed",
+  "destination_created": false,
+  "attempted_once": true,
+  "credential_changes": false,
+  "alternate_route": false
+}

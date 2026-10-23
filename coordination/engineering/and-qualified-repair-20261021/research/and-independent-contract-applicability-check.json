@@ -1,0 +1,102 @@
+{
+  "kind": "and72-independent-contract-applicability-check",
+  "as_of": "2026-10-21",
+  "reviewer_worker_id": "01a15a0e-9f15-70f9-9391-bfaf7502a007",
+  "scope": {
+    "package_id": "gb-AND-ADM1--repair-evaluation",
+    "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "original_queue_blob": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "cells": 72,
+    "land": 72,
+    "water": 0,
+    "intervals": 15,
+    "owner": 7109,
+    "block": 23,
+    "source_families": [6, 103],
+    "source_features": [661, 662, 663, 665, 666, 23686],
+    "excluded": [
+      "Separate nine-key gb-AND-ADM1--source-conflict package.",
+      "Separate read-only Iberia source/semantic issue #241 (223-location scope)."
+    ]
+  },
+  "ownership_check": {
+    "issue": "https://github.com/ChengshuLi/WorldAtlas/issues/2590",
+    "release_comment": "https://github.com/ChengshuLi/WorldAtlas/issues/2590#issuecomment-6301699903",
+    "result": "PR #2591 is closed/merged at reviewed head a090ae99b158ccbc0ae340038531fae4ada7508a. Its delivery comment records one successful stock run and a clean author-slot release, with root acceptance pending at that time. Current exact open pull-request searches for Andorra and owner 7109 returned no results; bounded searches do not establish that the package was never owned or prove current owner fields.",
+    "source_only_separate": "Issue #241 is explicitly a read-only Iberia regional source/semantic review, not the original AND repair task."
+  },
+  "contract_and_context": {
+    "original_contract": "Qualify unique current-location source membership, retained territorial exclusions and complete source competitors; derive a zero-reassignment additive native patch. Every exact interval must be either a qualified additive repair to its recorded location or a documented exception, with actual selected-native conservation and source/physical witness checks.",
+    "accepted_parent_lineage": "The retained atlas:territory:AND lineage has a complete seven-parish source-member set. This supports identity/aggregation context, not by itself per-key qualification.",
+    "observed_contacts": {
+      "AND_singleton_cells": 71,
+      "AND_plus_ESP_Lleida_cells": 1,
+      "foreign_key": {"y": 96891, "x": 132142, "source_feature": 23686, "name": "Lleida", "direct_owner_vector": []},
+      "note": "A foreign source contact and empty owner vector do not establish territorial exclusion. Keep this key explicit."
+    },
+    "source_versions": {
+      "AND": "Complete seven-feature geoBoundaries AND ADM1 family; represented-year claim 2007; upstream Wikimedia map page identifies Arz1969/CIA Factbook and shows both a Public Domain dedication and CC BY-SA 3.0 text. The metadata declaration and upstream page are both retained; this note does not adjudicate delivery-specific rights.",
+      "ESP": "Complete 52-feature ESP ADM2 family; represented-year claim 2018; recorded INE Data License. Its only original package contact is Lleida above."
+    },
+    "representation_difference": {
+      "original_simplified_hits": 72,
+      "same_release_full_hits": 66,
+      "no_full_hit": 6,
+      "keys": [
+        {"y": 96682, "x": 132192, "parish": "Ordino"},
+        {"y": 96825, "x": 132338, "parish": "Encamp"},
+        {"y": 96891, "x": 132155, "parish": "Sant Julia de Loria"},
+        {"y": 96891, "x": 132156, "parish": "Sant Julia de Loria"},
+        {"y": 96891, "x": 132157, "parish": "Sant Julia de Loria"},
+        {"y": 96891, "x": 132158, "parish": "Sant Julia de Loria"}
+      ],
+      "interpretation": "This is adverse source-resolution sensitivity, not a predetermined 66/6 split or a claim that the six differences are immaterial. Both seven-feature versions are valid and tied to the same represented-year claim."
+    },
+    "border_context": "Andorran government publications from 2022 and 2026 report Spain-Andorra cartographic divergence and delimitation work. They do not bind that report to any of the 72 keys. The Lleida contact and six full-versus-simplified misses remain key-specific adverse evidence; no sovereign boundary conclusion is inferred.",
+    "neighboring_families": {
+      "ESP_ADM1": "Not listed as an original source family or original contact. The original contract names AND ADM1 and ESP ADM2. A coarser ESP ADM1 parent is not automatically an additional same-tier competitor; include it only if retained lineage/source predicates show it is needed to resolve the exact Lleida contact.",
+      "FRA": "France borders Andorra, but no FRA feature appears among the original 72 contact records. The original package roster lists only AND ADM1 and ESP ADM2. The bounded original-key census is evidence about these exact native centers, not a full-area map or proof that every French source dataset was inspected. Do not impose whole-France-family hydration absent a contract predicate or a retained key-level signal; retain any direct French contact if one is identified by the stock source-evidence route."
+    },
+    "official_data_route": "The official Andorran cartographic portal advertises parish/border SHP products, but the downloaded workflow requires personal details and acceptance of product conditions. No form was submitted and no terms were accepted. This is a real access/terms boundary for that route, not proof that all original lawful source-relative qualification is impossible.",
+    "old_packet_sufficiency": "The earlier generic unresolved packet retained exact scope and source questions but had no actual physical producer, stock source-evidence admission, native diagnostic or authority attempt. Under the significant-research standard, it does not establish that an unresolved disposition was justified; the available original-source and stock qualification path remained untested.",
+    "next_bounded_predicates": [
+      "Use the original complete seven-member AND simplified family and the complete ESP ADM2 foreign family, retaining full-version sensitivity and the exact Lleida contact.",
+      "Obtain real physical support for the exact source members and target, retaining all residuals and source inputs.",
+      "Build stock source-evidence with complete family/negative provenance and explicit per-key treatment of the Lleida contact; do not exclude it solely by country name or empty direct-owner vector.",
+      "Run the unchanged stock native diagnostic/authority path on exactly the original 72 keys and retain every held reason."
+    ]
+  },
+  "evidence_read": {
+    "portable_handoff_directory": "inventory/and-audit-handoff/unpacked",
+    "handoff_file": "AND72-research-and-qualification-handoff.json",
+    "handoff_sha256": "e1c5c4bac4d64e2bf2de2b79df6b7b02f77870d450c6ec94458cddaa996d9237",
+    "manifest_sha256": "manifest.json file-level hashes were present and used for the opened handoff bodies; no geometry or source scanner was run by this reviewer.",
+    "specific_files_read": [
+      "README.txt",
+      "manifest.json",
+      "AND72-research-and-qualification-handoff.json",
+      "source-validity-results.json",
+      "source-contact-results.json",
+      "retained/README.md",
+      "retained/and-disposition.json",
+      "retained/original-source-roster-AND-excerpt.json",
+      "retained/retained-source-physical-context.json",
+      "primary/gb-metadata.json",
+      "primary/commons-source.html",
+      "primary/border-acquisition.json",
+      "and-original-key-join.json",
+      "and-source-payload-context.json",
+      "and-acceptance-reconciliation.json"
+    ],
+    "actual_reads": [
+      "GitHub issue #2590 and all four comments, including the explicit prior release/delivery comment.",
+      "GitHub PR #2591 current state/head/base, issue #241 body, and bounded open-PR searches for Andorra and owner 7109.",
+      "Task-retained original key/source/physical records and authenticated portable handoff."
+    ]
+  },
+  "limits": [
+    "No new source download, account/terms submission, geometry computation, observer, physical producer, native diagnostic or claim was run.",
+    "This is an independent contract/applicability assessment, not source or rights clearance, qualification, current owner observation or root acceptance.",
+    "The original contact census reports exact source-family contacts at the target centers; it does not by itself establish complete whole-area competitor geometry or political boundaries."
+  ]
+}

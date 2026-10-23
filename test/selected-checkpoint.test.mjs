@@ -1,3 +1,4 @@
+import {omitFixtureObjects} from './helpers/git-object-fixture.mjs';
 import {nativeLiteral} from './helpers/native-literal.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -472,7 +473,7 @@ test('scalar availability rechecks a remote-only original after explicit acquisi
 
 for(const populated of [true,false])test('scalar actual body acquisition remains '+(populated?'authenticated':'a failure, never an alias fallback'),async t=>{
  const f=await trustedFixture(t),p=f.pin('data/source.json',f.selected),expected=f.git('show',p.commit+':'+p.path),s=scalarPromisor(f,{populated});
- fs.unlinkSync(path.join(f.root,'.git','objects',p.git_blob_oid.slice(0,2),p.git_blob_oid.slice(2)));
+ omitFixtureObjects(t,f.root,[p.git_blob_oid]);
  if(populated){assert.deepEqual(s.readSource(p),expected);assert.throws(()=>s.readSource({...p,sha256:'0'.repeat(64)}),/Whole immutable input differs/);}
  else assert.throws(()=>s.readSource(p),/Command failed|Require whole ordinary/);
  assert.match(s.tracing(),remoteAttempt);
@@ -482,7 +483,7 @@ test('complete checkpoint qualification uses exact rebind aliases without implic
  const f=await trustedFixture(t),certificate=f.ledger.current_rebind,body=JSON.parse(f.git('show',certificate.commit+':'+certificate.path));
  const commits=new Set([certificate.commit,...['request','facts','publication','operating','result'].map(k=>body[k].commit)]);
  const s=scalarPromisor(f);
- for(const commit of commits)fs.unlinkSync(path.join(f.root,'.git','objects',commit.slice(0,2),commit.slice(2)));
+ omitFixtureObjects(t,f.root,[...commits]);
  const result=(await f.api.qualifyCheckpoint({reader:s.reader()}));
  assert.equal(result.available,true);assert.equal(result.state.ledger.rows.length,2);
  assert.deepEqual(nativeLiteral(f.api.projectNativeRows({state:result.state,rows:[1]}).rows),[{y:1,runs:[[0,1,2]]}]);
@@ -524,11 +525,13 @@ function miniatureInventory(root,prefix=''){
 }
 const miniatureBytes=inventory=>inventory.map(({device,inode,...file})=>file);
 
-for(const options of [{},{nativeAppend:true}])test(`miniature seed copies isolate all files and mutable state ${JSON.stringify(options)}`,async t=>{
+for(const options of [{},{nativeAppend:true}])for(const packed of [false,true])test(`miniature seed copies isolate all files and mutable state ${JSON.stringify(options)}, packed=${packed}`,async t=>{
  const [a,b]=await Promise.all([trustedFixture(t,options),trustedFixture(t,options)]);
+ if(packed)for(const f of [a,b])f.git('repack','-ad');
  const original=miniatureInventory(a.root),other=miniatureInventory(b.root);
  assert.deepEqual(miniatureBytes(original),miniatureBytes(other));
- assert.ok(original.some(file=>/^\.git\/objects\/[a-f0-9]{2}\/[a-f0-9]{38}$/.test(file.name)));
+ const object=original.find(file=>/^\.git\/objects\/(?:[a-f0-9]{2}\/[a-f0-9]{38}|pack\/pack-[a-f0-9]{40}\.pack)$/.test(file.name));
+ assert.ok(object,'Copied Git object body exists in loose or packed storage');
  assert.equal(fs.existsSync(path.join(a.root,'.git/objects/info/alternates')),false);
  for(let i=0;i<original.length;i++)
   assert.notEqual(`${original[i].device}:${original[i].inode}`,`${other[i].device}:${other[i].inode}`,original[i].name);
@@ -547,12 +550,13 @@ for(const options of [{},{nativeAppend:true}])test(`miniature seed copies isolat
  const originalData=structuredClone(Object.fromEntries(['ledger','patch','sidecar','envelope','selection','rootRow','manifest','features','registry'].map(key=>[key,b[key]])));
  a.features[0].properties.id='only the first consumer';a.ledger.rows[0].target_id='wrong owner';
  a.rootRow.certificate.decoded_sha256='0'.repeat(64);a.manifest.parts[0].sha256='0'.repeat(64);
- const object=original.find(file=>/^\.git\/objects\/[a-f0-9]{2}\/[a-f0-9]{38}$/.test(file.name));
  fs.chmodSync(path.join(a.root,object.name),0o644);
  fs.writeFileSync(path.join(a.root,object.name),'corrupt only the first object');
  fs.appendFileSync(path.join(a.root,'.git/config'),'\n# first consumer only\n');
  a.save('data/source.json',{changed:'first consumer only'});
- const c=await trustedFixture(t,options),third=miniatureInventory(c.root);
+ const c=await trustedFixture(t,options);
+ if(packed)c.git('repack','-ad');
+ const third=miniatureInventory(c.root);
  assert.deepEqual(miniatureBytes(miniatureInventory(b.root)),miniatureBytes(other));
  assert.deepEqual(miniatureBytes(third),miniatureBytes(original),'The private seed remains pristine');
  for(let i=0;i<third.length;i++)
@@ -781,7 +785,10 @@ for(const count of [3,16,64])test('genuine completed source/owner/component grow
   ...Array.from({length:count-3},(_,i)=>feature('D'+String(i).padStart(3,'0'),10+i))];
  const f=await trustedFixture(t,{nativeAppend:true,sourceFeatures}),baseline=await f.api.qualifyCheckpoint({reader:f.reader});
  assert.equal(baseline.state.certificate.entries.length,count);
+ const pin=f.pin;let physicalPinReads=0;
+ f.pin=(name,...args)=>{if(name==='appended/physical.json')physicalPinReads++;return pin(name,...args);};
  const next=await appendNativeAuthority(f,{completedConstructor:true,targetOwners:Array.from({length:count},(_,i)=>i)});
+ assert.equal(physicalPinReads,1,'One immutable physical descriptor serves every target');
  assert.equal(next.proof.source_rows.length,count);
  const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
  const transition=await f.api.qualifyTransition({state:baseline.state,reader});

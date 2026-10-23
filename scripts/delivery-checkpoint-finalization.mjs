@@ -3,7 +3,7 @@
 // accepted PR, tested tree, original job and complete artifact checks.
 import fs from 'node:fs';
 import path from 'node:path';
-import {randomUUID} from 'node:crypto';
+import {createHash, randomUUID} from 'node:crypto';
 import {locate} from './delivery-handoff-advance.mjs';
 import {ACCEPTED_CHECKPOINT_LOCATOR, acquireAcceptedCheckpoint, readAcceptedCheckpoint,
   releaseAcceptedCheckpoint, validateAcceptedCheckpointLocator} from './accepted-selected-checkpoint.mjs';
@@ -52,36 +52,70 @@ export function finalizationCheckpointBytes(config, reader, handle) {
   return Buffer.from(bytes);
 }
 
-// Preflight before publishing the batch. Canonical adoption is automatic, not
-// a second manual copy instruction. A failed adoption is resumable only with
-// identical completed products and either the original or chosen locator.
+// One canonical writer for the existing finalizer's derived destinations.
+// All files are preflighted before staging; interrupted adoption can resume only
+// with the same immutable outputs and exact preimage/postimage bytes.
+const identity = raw => raw === null ? undefined : ({bytes: raw.length, sha256: createHash('sha256').update(raw).digest('hex')});
+export function admitCanonicalOutputs(root, bindings, resume = false) {
+  const rows = bindings.map(({path: name, bytes, expected, previous, allowMissing = false, retained = false}) => {
+    if (!retained && expected === undefined) expected = identity(bytes);
+    need(typeof name === 'string' && !path.isAbsolute(name)
+      && name.split('/').every(part => part && part !== '.' && part !== '..'), 'Safe canonical output path required');
+    if (retained) need(retained === true && bytes === undefined && expected
+      && Number.isSafeInteger(expected.bytes) && expected.bytes > 0 && /^[a-f0-9]{64}$/.test(expected.sha256)
+      && same(expected, previous), 'Complete unchanged canonical retention required');
+    else need((Buffer.isBuffer(bytes) || bytes === null && previous && Number.isSafeInteger(previous.bytes) && /^[a-f0-9]{64}$/.test(previous.sha256)) && same(identity(bytes), expected), 'Canonical output changed after finalization');
+    return {name, bytes, expected: expected && {...expected}, previous: previous && {...previous}, allowMissing, retained};
+  });
+  need(new Set(rows.map(row => row.name)).size === rows.length, 'Duplicate canonical output path');
+  need(rows.every(row => rows.every(other => row === other || !row.name.startsWith(other.name + '/'))),
+    'Overlapping canonical output paths');
+  const inspect = row => {
+    let directory = root;
+    for (const part of row.name.split('/').slice(0, -1)) {
+      directory = path.join(directory, part);
+      const stat = fs.lstatSync(directory, {throwIfNoEntry: false});
+      need(!stat || stat.isDirectory() && fs.realpathSync(directory) === directory,
+        'Nonordinary canonical output directory');
+    }
+    const filename = path.join(root, row.name), stat = fs.lstatSync(filename, {throwIfNoEntry: false});
+    need(!stat || stat.isFile() && !(stat.mode & 0o111) && fs.realpathSync(filename) === filename,
+      'Nonordinary canonical output file');
+    const current = stat ? identity(fs.readFileSync(filename)) : undefined;
+    need(current === undefined && (row.previous === undefined || row.allowMissing || resume && row.bytes === null)
+      || current !== undefined && (row.previous && same(current, row.previous) || resume && same(current, row.expected)),
+    'Canonical output changed outside this finalization: ' + row.name);
+    return current;
+  };
+  for (const row of rows) inspect(row);
+  return () => {
+    for (const row of rows) {
+      // Retained inputs are already bound to the accepted Git tree by the
+      // finalizer. Recheck any materialized bytes, but leave sparse holes alone.
+      if (row.retained) { inspect(row); continue; }
+      need(same(identity(row.bytes), row.expected), 'Canonical output changed after finalization');
+      if (same(inspect(row), row.expected)) continue;
+      const filename = path.join(root, row.name), directory = path.dirname(filename);
+      if (row.bytes === null) { inspect(row); fs.unlinkSync(filename); continue; }
+      fs.mkdirSync(directory, {recursive: true});
+      const temporary = path.join(directory, `.finalize-${randomUUID()}.tmp`);
+      try {
+        inspect(row);
+        fs.writeFileSync(temporary, row.bytes, {flag: 'wx', mode: 0o644});
+        inspect(row);
+        fs.renameSync(temporary, filename);
+      } finally { if (fs.existsSync(temporary)) fs.unlinkSync(temporary); }
+    }
+  };
+}
+
+// Retained library checkpoint operation uses the same ordinary writer.
 export function admitCanonicalCheckpoint(root, reader, selector, bytes, resume = false) {
   if (bytes === undefined) return () => {};
   need(Buffer.isBuffer(bytes), 'Canonical checkpoint bytes required');
   bytes = Buffer.from(bytes);
   validateAcceptedCheckpointLocator(JSON.parse(bytes));
-  const directory = path.join(root, 'data'), filename = path.join(root, ACCEPTED_CHECKPOINT_LOCATOR);
   const previous = reader.hasPath(selector.commit, ACCEPTED_CHECKPOINT_LOCATOR)
-    ? reader.read(reader.pin(selector.commit, ACCEPTED_CHECKPOINT_LOCATOR)) : undefined;
-  const inspect = () => {
-    need(fs.lstatSync(directory).isDirectory() && fs.realpathSync(directory) === directory,
-      'Nonordinary canonical checkpoint directory');
-    const stat = fs.lstatSync(filename, {throwIfNoEntry: false});
-    need(!stat || stat.isFile() && fs.realpathSync(filename) === filename, 'Nonordinary canonical checkpoint file');
-    const current = stat ? fs.readFileSync(filename) : undefined;
-    need(current === undefined && previous === undefined || current !== undefined &&
-      (previous !== undefined && current.equals(previous) || resume && current.equals(bytes)),
-    'Canonical checkpoint changed outside this finalization');
-    return current;
-  };
-  inspect();
-  return () => {
-    if (inspect()?.equals(bytes)) return;
-    const temporary = path.join(directory, `.selected-checkpoint-${randomUUID()}.tmp`);
-    try {
-      fs.writeFileSync(temporary, bytes, {flag: 'wx', mode: 0o644});
-      inspect();
-      fs.renameSync(temporary, filename);
-    } finally { if (fs.existsSync(temporary)) fs.unlinkSync(temporary); }
-  };
+    ? identity(reader.read(reader.pin(selector.commit, ACCEPTED_CHECKPOINT_LOCATOR))) : undefined;
+  return admitCanonicalOutputs(root, [{path: ACCEPTED_CHECKPOINT_LOCATOR, bytes, previous}], resume);
 }

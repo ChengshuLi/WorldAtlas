@@ -21,8 +21,7 @@ The default declared domain is longitude −180 to 180, latitude −60 to the We
 Mercator north limit. Antarctica is excluded. Five-degree tiles keep clipping and
 union work bounded. `--bounds WEST SOUTH EAST NORTH` and `--tile-degrees` support
 regional pilots. Original inputs are read from Git blobs, not mutable checkout
-files. Output never overwrites an existing vintage. Run the local workspace storage
-check before reproduction, as required by `LOCAL_WORKSPACES.md` on current main.
+files. Output never overwrites an existing vintage.
 
 The land reference is the retained Natural Earth 1:10m physical layer at revision
 `ca96624a56bd078437bca8184e78163e5039ad19`. Its nested retained bytes and original

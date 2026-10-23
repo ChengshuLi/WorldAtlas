@@ -1,0 +1,46 @@
+{"selected_joint_phase":"trusted-startup","elapsed_ms":515}
+{"selected_joint_phase":"checkpoint-acquisition","elapsed_ms":9029}
+node:internal/errors:985
+  const err = new Error(message);
+              ^
+
+Error: Command failed: /usr/local/bin/git -c core.hooksPath=/dev/null -C /workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/00ea0af393560806a40a3afe4a73936ad68205d8dfd9001f0807b9334511f129/work cat-file -s 381d684f4534ea23b4b71471d2f0c0a4516ae107
+fatal: git cat-file: could not get object info
+
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at checkExecSyncError (node:child_process:942:11)
+    at execFileSync (node:child_process:978:15)
+    at ImmutableReader.git (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/00ea0af393560806a40a3afe4a73936ad68205d8dfd9001f0807b9334511f129/work/scripts/check-effective-geographic-regression.mjs:110:12)
+    at ImmutableReader.descriptor (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/00ea0af393560806a40a3afe4a73936ad68205d8dfd9001f0807b9334511f129/work/scripts/check-effective-geographic-regression.mjs:235:84)
+    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/00ea0af393560806a40a3afe4a73936ad68205d8dfd9001f0807b9334511f129/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:2121:23
+    at Array.map (<anonymous>)
+    at readRegistryAuthorityInputs (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/00ea0af393560806a40a3afe4a73936ad68205d8dfd9001f0807b9334511f129/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:2118:22)
+    at appendAuthority (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/00ea0af393560806a40a3afe4a73936ad68205d8dfd9001f0807b9334511f129/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:1126:30) {
+  status: 128,
+  signal: null,
+  output: [
+    null,
+    Buffer(0) [Uint8Array] [],
+    Buffer(47) [Uint8Array] [
+      102,  97, 116, 97, 108,  58,  32, 103, 105,
+      116,  32,  99, 97, 116,  45, 102, 105, 108,
+      101,  58,  32, 99, 111, 117, 108, 100,  32,
+      110, 111, 116, 32, 103, 101, 116,  32, 111,
+       98, 106, 101, 99, 116,  32, 105, 110, 102,
+      111,  10
+    ]
+  ],
+  pid: 438,
+  stdout: Buffer(0) [Uint8Array] [],
+  stderr: Buffer(47) [Uint8Array] [
+    102,  97, 116, 97, 108,  58,  32, 103, 105,
+    116,  32,  99, 97, 116,  45, 102, 105, 108,
+    101,  58,  32, 99, 111, 117, 108, 100,  32,
+    110, 111, 116, 32, 103, 101, 116,  32, 111,
+     98, 106, 101, 99, 116,  32, 105, 110, 102,
+    111,  10
+  ]
+}
+
+Node.js v24.19.0

@@ -1,0 +1,41 @@
+{
+  "source_zip_sha256": "0162fff92a3354104a5e5380c82836ab50d4f8353de1a2d28f75d8a345746ad7",
+  "pyproj": "3.7.2",
+  "shapely": "2.1.2",
+  "transform": "axis order change (2D) + Inverse of ETRS89 to WGS 84 (1) + UTM zone 33N",
+  "transform_accuracy_reported_m": 1.0,
+  "all_11_geometry_valid": true,
+  "results": [
+    {
+      "native_key_xy": [
+        152965,
+        59862
+      ],
+      "pyproj_epsg25833": [
+        1084844.9228168824,
+        7775150.296313317
+      ],
+      "difference_from_handwritten_transform_m": 0.3908628828867003,
+      "shapely_covers_features": [
+        "54"
+      ],
+      "nearest_boundary_m": 50.651847306453845,
+      "nearest_feature": "54"
+    },
+    {
+      "native_key_xy": [
+        152972,
+        59849
+      ],
+      "pyproj_epsg25833": [
+        1085040.3932579951,
+        7775923.544133571
+      ],
+      "difference_from_handwritten_transform_m": 0.39247459120833234,
+      "shapely_covers_features": [],
+      "nearest_boundary_m": 27.937773003054836,
+      "nearest_feature": "54"
+    }
+  ],
+  "limits": "Independent bounded numerical check of two existing coordinates only; CRS operation accuracy is not source geometry accuracy. No geometry repair, qualification, owner observation or assignment."
+}

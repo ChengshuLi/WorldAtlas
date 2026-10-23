@@ -697,3 +697,50 @@ test('prepared reuse retains actual integration/geography results and original c
   await assert.rejects(f.complete({preparedGeographySoftware:false,geographyReportLoader:async()=>geography}),/source differs/);
   assert.equal(f.writes.length,0);
 });
+
+
+test('final-bank software reports retain truthful execution and strict native proof under compatible summaries', () => {
+  const baseline='a'.repeat(40),candidate='b'.repeat(40);
+  const bank={path:'data/canonical-grid/current-startup/index.json',bytes:123,sha256:'c'.repeat(64)};
+  const selection={version:2,kind:'selected-final-native-bank-v2',prepared_bank:bank,reference:{id:'same-current-reference'}};
+  const native={version:1,method:'selected-native-owner-conservation-v1',status:'no-new-native-loss',
+    baseline_selection:selection,candidate_selection:selection,candidate_code_executed:true,
+    checkpoint_custody:{accepted_bank:bank,candidate_bank:bank},affected_rows:0,lost_or_reassigned_cells:0,intervals:[],
+    native_row_scope:{proof:'complete-accepted-final-bank-and-qualified-new-intervals',compared_rows:8,
+      representation_migration:false,changed_rows:[],added_cells:0}};
+  const report={version:1,method_id:'worldatlas-trusted-geography-check-v1',baseline_commit:baseline,candidate_commit:candidate,
+    trusted_code_commit:candidate,trusted_code_inventory_sha256:'d'.repeat(64),candidate_code_executed:true,
+    published:false,source_approval:false,gate_status:'passed',status:'no-footprint-change',regressions:0,
+    validation_scope:'selected-native-map-cells',selected_native_report:native};
+  const check=r=>checkGeographicReport(r,baseline,candidate,candidate);
+  assert.equal(check(report),false);
+  assert.equal(check({...report,status:'no-new-native-loss'}),false,'Original truthful final-bank native report remains supported');
+  const changed=structuredClone(report);changed.status='no-new-native-loss';
+  changed.selected_native_report.candidate_selection={...selection,prepared_bank:{...bank,sha256:'e'.repeat(64)}};
+  assert.notDeepEqual(changed.selected_native_report.baseline_selection,changed.selected_native_report.candidate_selection);
+  assert.equal(check(changed),false,'Changed banks retain the ordinary native result, not unchanged classification');
+  for(const mutate of [
+    r=>{r.selected_native_report.candidate_code_executed=false;},
+    r=>{r.selected_native_report.candidate_selection.kind='unknown';},
+    r=>{r.selected_native_report.lost_or_reassigned_cells=1;},r=>{r.selected_native_report.intervals=[{row:1}];},
+    r=>{r.selected_native_report.status='native-regressions-found';},r=>{r.regressions=1;},
+    r=>{delete r.selected_native_report;},r=>{delete r.validation_scope;},
+    r=>{r.selected_native_report.checkpoint_custody.accepted_bank={...bank,sha256:'e'.repeat(64)};},
+    r=>{r.selected_native_report.checkpoint_custody.candidate_bank={...bank,bytes:124};},
+    r=>{r.selected_native_report.candidate_selection={...selection,reference:{id:'changed-context'}};},
+    r=>{r.selected_native_report.candidate_selection={...selection,prepared_bank:{...bank,sha256:'e'.repeat(64)}};},
+    r=>{r.selected_native_report.native_row_scope.changed_rows=[3];},r=>{r.selected_native_report.native_row_scope.added_cells=1;},
+    r=>{r.selected_native_report.native_row_scope.representation_migration=true;},
+    r=>{r.selected_native_report.native_row_scope.compared_rows=0;},r=>{r.selected_native_report.affected_rows=1;}
+  ]) {const r=structuredClone(report);mutate(r);assert.throws(()=>check(r),/findings remain unresolved/);}
+  for(const status of ['not-applicable','no-new-regression','regressions-found']) {
+    const r={...report,status,adjudication:{status:'all-findings-supported-and-reviewed',unresolved_findings:0}};
+    assert.throws(()=>check(r),/findings remain unresolved/,'A native report cannot fall through generic success/adjudication');
+  }
+  const accepted={...report,status:'no-new-native-loss',trusted_code_commit:baseline,candidate_code_executed:false,
+    selected_native_report:{...native,candidate_code_executed:false}};
+  assert.equal(checkGeographicReport(accepted,baseline,candidate),false);
+  const legacy={...report,status:'no-new-native-loss',selected_native_report:{...native,candidate_selection:{version:1},candidate_code_executed:false}};
+  assert.equal(check(legacy),false,'Historical child markers retain their original meaning under software execution');
+  assert.throws(()=>check({...legacy,selected_native_report:{...legacy.selected_native_report,candidate_code_executed:true}}),/findings remain unresolved/);
+});

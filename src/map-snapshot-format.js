@@ -1,7 +1,7 @@
 import {validYear} from './model.js';
 import {locationAttributes} from './attributes.js';
 
-const geographicKinds=new Set(['location','province','area','region','subcontinent','continent','settlement']);
+const mapKinds=new Set(['location','province','area','region','subcontinent','continent','settlement','polity']);
 const object=value=>value!==null&&typeof value==='object'&&!Array.isArray(value);
 const text=value=>typeof value==='string'&&Boolean(value.trim());
 const interval=row=>validYear(row.valid_from)&&(validYear(row.valid_to)||row.valid_to===2027)&&row.valid_to>row.valid_from;
@@ -17,7 +17,7 @@ export function hydrateMapSnapshotPage(page){
  for(const key of ['entities','records','names','retirements','aliases_truncated'])if(!Array.isArray(page[key]))invalid(`${key} must be an array`);
  if(!object(page.sources))invalid('source dictionary');
  const entities=new Map();
- for(const row of page.entities){if(!object(row)||!text(row.id)||!geographicKinds.has(row.kind)||entities.has(row.id))invalid('entity identity or kind');entities.set(row.id,row.kind);}
+ for(const row of page.entities){if(!object(row)||!text(row.id)||!mapKinds.has(row.kind)||entities.has(row.id))invalid('entity identity or kind');entities.set(row.id,row.kind);}
  if(page.aliases_truncated.some(id=>!text(id)||!entities.has(id))||new Set(page.aliases_truncated).size!==page.aliases_truncated.length)invalid('alias truncation identities');
  for(const [id,source] of Object.entries(page.sources)){
   if(!object(source)||source.id!==id||!text(source.name)||!text(source.license)||!text(source.vintage)||!['historical','reference','estimate','example'].includes(source.status)||!object(source.metadata)||!flag(source.metadata_truncated))invalid(`source ${id}`);

@@ -1,0 +1,197 @@
+{
+  "kind": "Independent SWZ14 negative-family screen, physical receipt, and Tikhuba-role predicate assessment",
+  "as_of": "2026-10-21",
+  "status": "Bounded independent assessment only. Does not construct source evidence, run diagnostics, or approve any qualification/disposition.",
+  "scope": {
+    "package": "gb-SWZ-ADM2--repair-evaluation",
+    "cells": 14,
+    "intervals": 14,
+    "owners": 8,
+    "land": 14,
+    "water": 0,
+    "excluded": [
+      "SWZ ADM1 location-mapping, 26 cells",
+      "separate SWZ source review #964"
+    ]
+  },
+  "original_contract": {
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+    "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned."
+  },
+  "negative_candidate_bounds": {
+    "path": ".worldatlas-workspaces/2d82c0ae06b92ab3/42d17456f7a54d6568c34d0f3b55d222f56a720a7015812071dce708422d5208/work/coordination/engineering/swz-qualified-repair-20261021/research/swz14-whole-target-negative-candidate-bounds.json",
+    "author_worktree_head": "cfbaee3b2a73b164bd0e8648c3a31627ad3aa43d",
+    "working_file_status": "untracked at inspection; reviewed as active research input, not immutable public evidence",
+    "sha256": "2db9614b8bf3b407bd7b5a9a39fffb4dead1a33a2eef098db673d3e72c3fc93b",
+    "purpose": "Conservative candidate-family screen for source/negative closure; not a polygon overlay or qualification.",
+    "method": {
+      "target_geometry": "Exact current selected canonical feature geometry read from two pinned part blobs; only its envelope was transformed to native-grid x/y, with x=(lon+180)/360*262166 and y=(0.5-ln((1+sin(lat))/(1-sin(lat)))/(4*pi))*262166, matching src/pixel-grid.js.",
+      "run_intersection": "Union source_feature_indices from each complete source-candidate-block run intersecting the target geometry native-grid envelope. Envelope is conservative; a candidate run indicates native-raster source support somewhere in the bbox, not polygon intersection with target.",
+      "limits": [
+        "Screen uses source-candidate runs and indexes for blocks 36/37; families that geometrically overlap target but produce no native raster candidate-cell center in bbox may be omitted.",
+        "This does not prove polygon-level intersection or disjointness, legal territorial status, ancestry, or a complete source_evidence negative-family list.",
+        "SWZ ADM1 rows are broad tier context, not direct owner vectors or negative families.",
+        "Stock sourceTerritorialExclusions requires full original source bodies for selected negative families."
+      ],
+      "candidate_family_interpretation": "Five non-SWZ families have candidate raster feature spans inside at least one full canonical target-geometry native-grid bbox: MOZ ADM1/ADM2 and ZAF ADM1/ADM2/ADM3. These are bounded candidates to acquire and compare under stock sourceEvidence. They are not proven target polygon intersections or legal territorial exclusions. The 4 SWZ ADM1 features are explicit parent-tier context only; SWZ ADM2 is the positive family.",
+      "candidate_family_observations": [
+        "No MOZ ADM1 candidate occurs inside target-specific point candidate rows; MOZ families are flagged by raster candidate spans intersecting the full Mhlume, Lomahasha and Tikhuba geometry envelopes.",
+        "ZAF ADM1/ADM2/ADM3 families are flagged by raster candidate spans within the Ngwempisi and Zombodze geometry envelopes.",
+        "The family-level screen is conservative within native source-candidate coverage of the computed target bboxes, but the bbox screen can include features outside the exact target polygon and can omit non-rasterized tiny features."
+      ]
+    },
+    "foreign_candidate_families": [
+      {
+        "family_index": 223,
+        "source_id": "gb:MOZ:ADM1",
+        "feature_indexes": [
+          45695
+        ],
+        "target_ids": [
+          "gb:SWZ:ADM2:25544865B37706944907644",
+          "gb:SWZ:ADM2:25544865B99062950351047",
+          "gb:SWZ:ADM2:25544865B99429407754877"
+        ]
+      },
+      {
+        "family_index": 224,
+        "source_id": "gb:MOZ:ADM2",
+        "feature_indexes": [
+          45835
+        ],
+        "target_ids": [
+          "gb:SWZ:ADM2:25544865B37706944907644",
+          "gb:SWZ:ADM2:25544865B99062950351047"
+        ]
+      },
+      {
+        "family_index": 360,
+        "source_id": "gb:ZAF:ADM1",
+        "feature_indexes": [
+          66248,
+          66250
+        ],
+        "target_ids": [
+          "gb:SWZ:ADM2:25544865B616938903867",
+          "gb:SWZ:ADM2:25544865B75252057291440"
+        ]
+      },
+      {
+        "family_index": 361,
+        "source_id": "gb:ZAF:ADM2",
+        "feature_indexes": [
+          66275,
+          66305
+        ],
+        "target_ids": [
+          "gb:SWZ:ADM2:25544865B616938903867",
+          "gb:SWZ:ADM2:25544865B75252057291440"
+        ]
+      },
+      {
+        "family_index": 362,
+        "source_id": "gb:ZAF:ADM3",
+        "feature_indexes": [
+          66425,
+          66514
+        ],
+        "target_ids": [
+          "gb:SWZ:ADM2:25544865B616938903867",
+          "gb:SWZ:ADM2:25544865B75252057291440"
+        ]
+      }
+    ],
+    "four_swz_adm1_features": {
+      "family_index": 311,
+      "source_id": "gb:SWZ:ADM1",
+      "feature_indexes": [
+        56921,
+        56922,
+        56923,
+        56924
+      ],
+      "target_ids": [
+        "gb:SWZ:ADM2:25544865B37706944907644",
+        "gb:SWZ:ADM2:25544865B4123625373150",
+        "gb:SWZ:ADM2:25544865B616938903867",
+        "gb:SWZ:ADM2:25544865B74382320525051",
+        "gb:SWZ:ADM2:25544865B75252057291440",
+        "gb:SWZ:ADM2:25544865B91965971492812",
+        "gb:SWZ:ADM2:25544865B99062950351047",
+        "gb:SWZ:ADM2:25544865B99429407754877"
+      ]
+    },
+    "interpretation": "The five MOZ/ZAF families are a justified finite shortlist for further negative-family checks: their complete original source-candidate runs contain features in one or more target geometry native-grid bounding boxes. The four SWZ ADM1 features are appropriate broad parent-region context for all eight recorded targets, not separate direct owners and not foreign negative families.",
+    "limits": [
+      "The screen tests raster source-candidate runs against bounding boxes, not feature polygons against exact target polygons; it can include false positives outside a target and miss tiny/non-rasterized features or geometries with no candidate center in the box.",
+      "The family union lists candidate feature indices only. A stock negative-family operand must bind complete family bodies, and exact polygon-level check is still needed before describing a feature as an actual target intersection or disjoint result.",
+      "This is not a complete competitor closure or legal territorial adjudication. The report itself says it cannot prove complete negative family lists.",
+      "The source-evidence code may preserve bbox candidates conservatively; inclusion as a negative witness is not evidence that the foreign feature owns any native key."
+    ]
+  },
+  "physical_receipt_reuse": {
+    "receipt_check": "inventory/swz-physical-receipt-independent-check.json",
+    "receipt_commit": "0bc1bbb89c0428336cfba710fa1691aefe6c6904",
+    "receipt_path": "coordination/engineering/swz-qualified-repair-20261021/physical-001/execution-receipt.json",
+    "receipt_blob_oid": "e68356833d661d78269308349bfca1ccf27153d0",
+    "receipt_sha256": "31a5764268de2294fe00e282d57cc7a7cb36df84527e8f9cdca8e41c5839bc74",
+    "support_path": "coordination/engineering/swz-qualified-repair-20261021/physical-001/whole-target-support.json",
+    "support_blob_oid": "197ae9ae63e7b325bde2dbb95f2862daa7f0f045",
+    "support_sha256": "3fc9e5e06dfa1c529b186c13c8f906136adb2e24f472545ce04c9b466df4ee47",
+    "result": {
+      "targets": 8,
+      "input_count": 25,
+      "source_covers_candidate_all": true,
+      "candidate_covers_source_all": false,
+      "status_checked_all": true,
+      "issue_lists_empty_all": true,
+      "runtime_elapsed_seconds": 3.478521166000064
+    },
+    "geometry_binding": {
+      "selected_targets": 8,
+      "exact_features_equal_simplified_source": 8,
+      "exact_features_equal_full_source": 0,
+      "source_family": "gb:SWZ:ADM2 source payload, 2017 represented, ODbL 1.0; 53-feature simplified release; payload path coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-SWZ-ADM2-000.bin.gz; Git blob f997375cdeee1b2cb9e0246913a50807f2e165aa",
+      "meaning": "Physical receipt concerns the eight exact simplified target feature geometries staged from the retained source. It does not establish physical support for full unsimplified geometry; the separate 14-cell 8/6 contact comparison remains representation context."
+    },
+    "interpretation": "Reuse of the prior exact hash check: this supports whole-target physical coverage for the eight staged simplified source target features under the measured input, with no detected issues. It does not cover full unsimplified geometries, resolve territory, establish current source applicability, or prove selected-native conservation."
+  },
+  "source_predicate_context": {
+    "simplified_family": "The complete 53-feature simplified ADM2 release is the source product consumed by original queue/staging and is the scoped positive candidate family; all 53 same-tier features must be accounted for as relevant competitors in that product.",
+    "full_family": "The 53-feature same-release full geometry remains adverse representation evidence already compared. It is not an imposed replacement source. Eight exact keys hit the same-ID full feature; six do not. Neither 8/6 count is a contract threshold.",
+    "adm1_context": "Four complete ADM1 regional polygons each give one broad spatial contact per original center; their direct owner vectors are empty, GeoJSON has no parent field, and owner province IDs align by region. Use this as explicit broader-tier context, not direct ownership/ancestry or an exclusion proof.",
+    "completed_source_geometry_check": "No new geometry check was performed in this task; prior retained source-role preparation has 14 unique simplified ADM2 hits, 8 same-ID full hits, zero ties."
+  },
+  "tikhuba_role_specificity": {
+    "recorded_key": {
+      "block": 36,
+      "ordinal": 6,
+      "xy": [
+        154464,
+        151365
+      ],
+      "owner": 41017,
+      "source_id": "gb:SWZ:ADM2:25544865B99429407754877",
+      "parent_region": "Lubombo"
+    },
+    "retained_role_evidence": "The official material associates Tikhuba with the Matsanjeni North administrative/electoral unit at least from 2013 through 2023, and specifically categorizes it as a chiefdom in 2013 and 2018; this is earlier than the 2017 represented year of the provider geometry.",
+    "access_record": "inventory/swz-audit-handoff/extracted/primary/dated-retrieval-manifest.json and parliament-retrieval-manifest.json; recorded HTTP 503 for EBC/gov pages/PDF and Parliament PDF.",
+    "role_limit": "No retrieved primary text proves the exact spatial extent or one-to-one ancestry of the 2017 geometry, nor that Tikhuba must be renamed or that the original key belongs to another geometry. The EBC map is copyright-marked and was not downloaded, traced or redistributed.",
+    "assessment": "Tikhuba differs from the other 13 keys because it has a separate documented tier/role ambiguity: official indexed EBC material associates Tikhuba with Matsanjeni North as a chiefdom. It is also one of the six simplified-only geometry points. The evidence does not establish one-to-one spatial ancestry or a different owner. Direct EBC resources timed out/returned 503 in recorded attempts; the copyright-marked EBC map was not acquired. No presently known accessible unperformed primary endpoint is established. The exact role question remains key-specific and should be tested against the upcoming source/lineage result; do not silently rename or substitute it."
+  },
+  "finite_remaining_predicates": [
+    "For each of the 14 exact keys, the actual source/native result must state membership in the nominated complete simplified ADM2 family, whether any additional same-tier feature matches, and retain the separate full-geometry comparison as representation evidence.",
+    "The five foreign families are candidate families, not proven intersections; bind whole family inputs and use exact stock polygon-level exclusions/contacts. The current envelope screen cannot by itself establish completeness against small or non-rasterized competitors.",
+    "Bind all four ADM1 regions to their actual roles and lineage while retaining empty direct-owner vectors; do not classify them as second owners.",
+    "Use the exact physical stage binding and later native selected-reader conservation; the physical result alone is insufficient.",
+    "For Tikhuba, carry the EBC role evidence and unresolved extent/ancestry limitation separately from ordinary source-version sensitivity."
+  ],
+  "operations": {
+    "read_only": true,
+    "physical_receipt_replayed": false,
+    "source_geometry_or_observer_rerun": false,
+    "new_source_operands_fetched": false,
+    "web_retry": false
+  }
+}

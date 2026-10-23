@@ -1,5 +1,8 @@
+import {omitFixtureObjects} from './helpers/git-object-fixture.mjs';
 import {checkpointTestAPI} from './helpers/native-literal.mjs';
 import {nativeLiteral} from './helpers/native-literal.mjs';
+import {oldBank,writeFinal} from './fixtures/final-bank.mjs';
+import {finishEffectiveFootprint} from '../src/native-grid.js';
 import test, {after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -8,18 +11,19 @@ import {pathToFileURL} from 'node:url';
 import childProcess, {execFileSync} from 'node:child_process';
 import {gzipSync,gunzipSync,crc32,deflateRawSync} from 'node:zlib';
 import {trustedFixture as trustedNativeFixture} from './helpers/selected-joint-fixture.mjs';
+import {trustedFixture as appendedFixture,appendNativeAuthority} from './fixtures/selected-checkpoint.mjs';
 import {ACCEPTED_CHECKPOINT_CODE} from '../scripts/accepted-selected-checkpoint.mjs';
 import {renderWorkerResult} from '../scripts/worker-result.mjs';
 import crypto, {createHash} from 'node:crypto';
 import {syncBuiltinESMExports} from 'node:module';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
-import {valueBytes,valueSha,coordinateBounds,normaliseRetainedRepairLedger} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {valueBytes,valueSha,coordinateBounds,normaliseRetainedRepairLedger,mergeCompletedNativePatches} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {deriveCoordinateDelta,projectSourceFeatures,projectNativeRows,qualifyTransition} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const MODULE='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const CATALOGUE='coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
 const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/native-word-store.mjs','scripts/native-patch-store.mjs','scripts/check-effective-geographic-regression.mjs',
-  'scripts/selected-reference-metadata.mjs','src/reference-metadata.js','src/native-grid.js','src/ownership-codec.js'];
+  'scripts/selected-reference-metadata.mjs','src/reference-metadata.js','src/native-grid.js','src/ownership-codec.js','scripts/package-startup-ownership.mjs','src/ownership-assets.js','src/ownership-method.js'];
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const polygon=(x,y=0)=>({type:'Polygon',coordinates:[[[x,y],[x+.2,y],[x+.2,y+.2],[x,y+.2],[x,y]]]});
 const feature=(id,x)=>({type:'Feature',id,properties:{id,parent_id:'parent'},geometry:polygon(x)});
@@ -156,14 +160,15 @@ test('default accepted fixture copies history but isolates bytes, private state 
   assert.equal(Number(f.git('rev-list','--count','HEAD')),12);
  }
  const original=first.pin('data/source.json',first.selected),relative=path.join('.git/objects',original.git_blob_oid.slice(0,2),original.git_blob_oid.slice(2));
- const a=fs.statSync(path.join(first.root,relative)),b=fs.statSync(path.join(second.root,relative));
- assert(a.dev!==b.dev||a.ino!==b.ino,'Copied Git objects must not be hard-linked');
+ const files=root=>fs.readdirSync(path.join(root,'.git/objects'),{recursive:true,withFileTypes:true}).filter(e=>e.isFile()).map(e=>path.relative(root,path.join(e.parentPath,e.name))).sort();
+ const physical=files(first.root);assert.deepEqual(physical,files(second.root));assert(physical.length>0);
+ for(const name of physical){const a=fs.statSync(path.join(first.root,name)),b=fs.statSync(path.join(second.root,name));assert(a.dev!==b.dev||a.ino!==b.ino,'Copied Git objects must not be hard-linked');}
  const admitted=await first.api.qualifyCheckpoint({reader:first.reader});assert.equal(admitted.available,true);
  assert.throws(()=>second.api.releaseCheckpoint(admitted.state),/foreign/);
  first.api.releaseCheckpoint(admitted.state);
  first.ledger.rows[0].target_id='mutated returned row';
  first.save('data/source.json',{changed:'committed mutation'});first.commit();
- fs.unlinkSync(path.join(first.root,relative));fs.writeFileSync(path.join(first.root,relative),'corrupted only in first copy');
+ omitFixtureObjects(t,first.root,[original.git_blob_oid]);fs.mkdirSync(path.dirname(path.join(first.root,relative)),{recursive:true});fs.writeFileSync(path.join(first.root,relative),'corrupted only in first copy');
  assert.deepEqual(second.ledger,originalLedger);assert.equal(second.git('rev-parse','HEAD').toString(),originalHead);
  assert.equal(second.pin('data/source.json',second.selected).sha256,original.sha256);
  fs.rmSync(first.root,{recursive:true,force:true});
@@ -333,9 +338,12 @@ const JSON_BODY=valueBytes;
 const P='coordination/engineering/selected-geography-effective-prevention-20261009/';
 const {JOINT_CODE:JOINT}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs');
 const MEMBERS=['derived-certificate.json.gz','derived-facts.json','derived-publication.json','checkpoint-routes.json'];
-async function acceptedProducts(t,{sourcePaths,actualProducer=false,nativeOnly=false,sourceOverride=false,physicalLogicalSource=false,inheritedCode=false,wireProducts=false}={}) {
-  const f=nativeOnly?await trustedNativeFixture(t,{nativeOnly:true}):await trustedFixture(t,{sourcePaths,sourceOverride,physicalLogicalSource,inheritedCode,wireProducts});
-  for(const name of [...JOINT,...(actualProducer?['scripts/check-geographic-regression.py','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt']:[])])f.save(name,fs.readFileSync(name));
+async function acceptedProducts(t,{sourcePaths,actualProducer=false,nativeOnly=false,nativeAppend=false,sourceOverride=false,physicalLogicalSource=false,inheritedCode=false,wireProducts=false,completedNative=false,finalBank=false}={}) {
+  const f=nativeAppend||completedNative||finalBank?await appendedFixture(t,{nativeAppend:true,finalBank}):nativeOnly?await trustedNativeFixture(t,{nativeOnly:true}):await trustedFixture(t,{sourcePaths,sourceOverride,physicalLogicalSource,inheritedCode,wireProducts});
+  let prepared;
+  if(finalBank){const admitted=await f.api.qualifyCheckpoint({reader:f.reader});assert.equal(admitted.available,true);
+    prepared=await oldBank(f,admitted.state);f.api.releaseCheckpoint(admitted.state);}
+  for(const name of [...JOINT,...(actualProducer?['scripts/check-geographic-regression.py','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt','.github/evidence-policy.json']:[])])f.save(name,fs.readFileSync(name));
   f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[f.rootRow]});
   if(f.inherited)f.save(f.inherited.path,{reviewed:'successor configuration'});
   const trusted=f.commit();
@@ -362,12 +370,24 @@ async function acceptedProducts(t,{sourcePaths,actualProducer=false,nativeOnly=f
   f.api.releaseCheckpoint(state);
   const transport=await import(pathToFileURL(path.join(f.root,'scripts/accepted-selected-checkpoint.mjs')));
   if(actualProducer){
+    let candidate=trusted;
+    if(finalBank){const final=await writeFinal(f,prepared.index,prepared.features.map(p=>finishEffectiveFootprint(p,valueSha)),prepared.ownership);candidate=final.commit;}
+
+    if(completedNative){
+      Object.assign(f,await appendNativeAuthority(f,{name:'completed',completedConstructor:true}));
+      Object.assign(f,await appendNativeAuthority(f,{name:'unfinished',owner:1,mutatePatch:patch=>{
+        patch.rows=mergeCompletedNativePatches(patch.rows.map(row=>({rows:[row]})),f.manifest.size);
+      }}));
+      candidate=f.candidate;
+    }
     const destination=path.join(f.root,'actual-native-products');fs.mkdirSync(destination);
-    const driver="import importlib.util,json,pathlib,sys\nrepo=pathlib.Path(sys.argv[1]);s=importlib.util.spec_from_file_location('native_parent',repo/'scripts/run-geographic-check.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)\nprint(json.dumps(m.selected_joint(repo,sys.argv[2],sys.argv[2],trusted=sys.argv[2],checkpoint_destination=pathlib.Path(sys.argv[3]))))";
-    const issued=JSON.parse(execFileSync(process.env.PYTHON??'python3',['-I','-B','-c',driver,f.root,trusted,destination],{env:{...process.env,NODE:process.execPath},encoding:'utf8'}));
+    const driver="import importlib.util,json,pathlib,sys\nrepo=pathlib.Path(sys.argv[1]);s=importlib.util.spec_from_file_location('native_parent',repo/'scripts/run-geographic-check.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)\nprint(json.dumps(m.selected_joint(repo,sys.argv[2],sys.argv[4],trusted=sys.argv[2],checkpoint_destination=pathlib.Path(sys.argv[3]))))";
+    if(candidate!==trusted)f.git('checkout','--detach',trusted);
+    const issued=JSON.parse(execFileSync(process.env.PYTHON??'python3',['-I','-B','-c',driver,f.root,trusted,destination,candidate],{env:{...process.env,NODE:process.execPath},encoding:'utf8'}));
+    if(candidate!==trusted)f.git('checkout','--detach',candidate);
     const produced=new Map(MEMBERS.map(name=>[name,fs.readFileSync(path.join(destination,name))]));
     assert.deepEqual(issued.checkpoint.members.map(p=>p.name).sort(),[...MEMBERS].sort());
-    return {...f,trusted,transport,produced,products:{native:issued.native,
+    return {...f,trusted:candidate,acceptedBaseline:trusted,transport,produced,products:{native:issued.native,
       facts:JSON.parse(produced.get('derived-facts.json')),certificate:JSON.parse(gunzipSync(produced.get('derived-certificate.json.gz'))),
       census:JSON.parse(produced.get('checkpoint-routes.json'))}};
   }
@@ -387,17 +407,17 @@ function pack(f,mutate=()=>{}) {
   put('derived-publication.json',{version:1,kind:p.facts.kind,complete:true,accepted_checkpoint:false,
     validation_stage:p.facts.validation_stage,certificate,facts:df,routes});
   }
-  const report={version:1,method_id:'worldatlas-trusted-geography-check-v1',baseline_commit:f.trusted,
-    candidate_commit:f.trusted,trusted_code_commit:f.trusted,candidate_code_executed:false,published:false,
-    source_approval:false,gate_status:'passed',status:'no-new-native-loss',validation_scope:'selected-native-map-cells',selected_native_report:p.native,
+  const report={version:1,method_id:'worldatlas-trusted-geography-check-v1',baseline_commit:f.acceptedBaseline??f.trusted,
+    candidate_commit:f.trusted,trusted_code_commit:f.acceptedBaseline??f.trusted,candidate_code_executed:false,published:false,
+    source_approval:false,gate_status:'passed',status:'no-new-native-loss',validation_scope:'selected-native-map-cells',regressions:0,selected_native_report:p.native,
     checkpoint:{version:1,kind:'selected-checkpoint-products-v1',members:MEMBERS.map(name=>{
       const raw=bodies.get(name),decoded=name.endsWith('.gz')?valueBytes(p.certificate):null;
       return {name,bytes:raw.length,sha256:sha(raw),...(decoded?{decoded_bytes:decoded.length,decoded_sha256:sha(decoded)}:{})};})}};
   const raw=valueBytes(report);return {report,raw,zip:zipMembers([['geography-check.json',raw],...MEMBERS.map(name=>[name,bodies.get(name)])])};
 }
 async function acquire(f,mutate,{merged=f.trusted,tree=f.git('rev-parse',f.trusted+'^{tree}').toString().trim()}={}) {
-  const p=pack(f,mutate), request='01234567-abcd-4321-aaaa-123456789012',head=f.trusted,baseline=f.trusted,
-    candidate=f.trusted,workflowHead=f.trusted;
+  const p=pack(f,mutate), request='01234567-abcd-4321-aaaa-123456789012',head=f.trusted,baseline=f.acceptedBaseline??f.trusted,
+    candidate=f.trusted,workflowHead=baseline;
   const source={run_id:12,run_attempt:2,job_id:34,tree,head,baseline,candidate_commit:candidate,
     workflow_path:'.github/workflows/worker-merge.yml',event:'workflow_dispatch',workflow_head:workflowHead,
     artifact_id:56,artifact_name:`geography-${request}-2`,artifact_digest:sha(p.zip),artifact_bytes:p.zip.length,
@@ -411,6 +431,7 @@ async function acquire(f,mutate,{merged=f.trusted,tree=f.git('rev-parse',f.trust
     'Checkout trusted geographic checker','Install trusted geographic dependencies','Check exact combined geography with trusted baseline code',
     'Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02'].map(name=>({name,status:'completed',conclusion:'success'}))};
   const api=async route=>{
+    if(route==='/repos/owner/repo/issues')return [];
     if(route.endsWith('/comments?per_page=100&page=1'))return [{id:11,user:{login:'github-actions[bot]'},body:renderWorkerResult('merge',receipt)}];
     if(route.endsWith('/pulls/7'))return {number:7,merged:true,head:{sha:head,repo:{full_name:'owner/repo'}},base:{ref:'main',repo:{full_name:'owner/repo'}},merge_commit_sha:merged};
     if(route.endsWith('/attempts/2'))return run;
@@ -425,7 +446,7 @@ async function acquire(f,mutate,{merged=f.trusted,tree=f.git('rev-parse',f.trust
     token:'fixture',fetchImpl:async()=>new Response(p.zip)});
   assert.equal(result.available,true);
   const reader=new f.native.ImmutableReader(f.root,f.trusted);
-  return {handle:result.handle,reader};
+  return {handle:result.handle,reader,fixture:{api,archive:p.zip,locator:{version:1,kind:'accepted-selected-checkpoint-locator-v1',acceptance:{pr_number:7,request_id:request,head}}}};
 }
 async function qualify(f,a) {return f.api.qualifyAcceptedCheckpoint({reader:a.reader,acceptedHandle:a.handle});}
 
@@ -1000,4 +1021,212 @@ for(const role of ['ledger','patch'])test('accepted private digest does not cach
  assert(directories.length>0);for(const directory of directories)assert.equal(fs.existsSync(directory),false,'Failed invocation must release its own stores');
  assert.equal(valueSha(nativeLiteral(good.state[role])),f.products.facts.candidate_bindings[role+'_sha256'],'A failed separate admission must not close the valid snapshot');
  f.api.releaseCheckpoint(good.state);f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+
+
+for(const packed of [false,true])test('accepted checkpoint catch-up acquires only its appended completed-authority operands'+(packed?' (packed objects)':''),async t=>{
+  const f=await acceptedProducts(t,{nativeAppend:true,actualProducer:true}),a=await acquire(f);
+  const next=await appendNativeAuthority(f,{completedConstructor:true});
+  const binding=JSON.parse(f.git('show',next.entry.source_authority.commit+':'+next.entry.source_authority.path));
+  const layers=[[next.entry.rule_preimage,next.entry.source_authority],
+    [next.entry.completed_constructor,binding.source_evidence,binding.native_patch]];
+  const bodies=new Map(layers.flat().map(p=>[p.git_blob_oid,f.git('cat-file','blob',p.git_blob_oid)]));
+  omitFixtureObjects(t,f.root,layers.flat().map(p=>p.git_blob_oid),{packed});
+  a.reader=currentReader(f,a,next.candidate);
+  await assert.rejects(()=>qualify(f,a),/cat-file/,'Library callers remain read-only without acquisition');
+  const calls=[];
+  const q=await f.api.qualifyAcceptedCheckpoint({reader:a.reader,acceptedHandle:a.handle,
+    acquireAuthorityInputs:async (reader,pins)=>{
+      if(pins.some(p=>bodies.has(p.git_blob_oid))){
+        assert.equal(reader.version,next.candidate);
+        assert.deepEqual(pins,layers[calls.length]);calls.push(pins);
+        for(const p of pins)assert.equal(execFileSync('git',['-C',f.root,'hash-object','-w','--stdin'],
+          {input:bodies.get(p.git_blob_oid),encoding:'utf8'}).trim(),p.git_blob_oid);
+      } else for(const p of pins)assert.doesNotThrow(()=>f.git('cat-file','-e',p.git_blob_oid));
+      return {available:false,forged:'Callback return is not scientific evidence'};
+    }});
+  assert.equal(calls.length,2);assert.equal(q.available,true);
+  assert.equal(q.state.selected_commit,next.candidate);
+  assert.equal(q.state.accepted_execution.historical_selected_commit,f.trusted);
+  assert.deepEqual(nativeLiteral(q.state.patch.rows),next.patch.rows);
+  assert.deepEqual(nativeLiteral(q.state.ledger.rows),next.ledger.rows);
+  f.api.releaseCheckpoint(q.state);f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+
+
+test('accepted aggregate acquires complete inherited read groups without reopening historical science',async t=>{
+  const f=await acceptedProducts(t,{nativeOnly:true,actualProducer:true}),a=await acquire(f);
+  const read=p=>JSON.parse(f.git('show',p.commit+':'+p.path));
+  const registry=read(f.sidecar.authority_registry),certificate=read(f.ledger.current_rebind);
+  const bindings=registry.entries.map(entry=>read(entry.source_authority));
+  const layers=[[f.sidecar.authority_registry,f.sidecar.runtime_envelope,...Object.values(f.sidecar.logical_asset_map)],
+    [f.ledger.current_rebind],[certificate.request,certificate.facts],registry.entries.map(entry=>entry.source_authority)];
+  assert.equal(layers.at(-1).length,2,'Both inherited authority bindings are one known group');
+  const pins=[...new Map(layers.flat().map(p=>[p.git_blob_oid,p])).values()];
+  const bodies=new Map(pins.map(p=>[p.git_blob_oid,f.git('cat-file','blob',p.git_blob_oid)]));
+  const unused=[certificate.publication,certificate.operating,certificate.result,...bindings.flatMap(binding=>
+    binding.kind==='source-target-native-custody-v1'?[binding.source_evidence,binding.native_patch]:
+      [binding.native_proof.publication,...binding.native_proof.assets])];
+  const omitted=[...new Map(unused.filter(p=>!bodies.has(p.git_blob_oid)).map(p=>[p.git_blob_oid,p])).values()];
+  assert(omitted.length>0);
+  omitFixtureObjects(t,f.root,[...pins,...omitted].map(p=>p.git_blob_oid));
+  await assert.rejects(()=>qualify(f,a),/Invalid immutable blob size batch/,'No callback keeps the library read-only');
+  const calls=[];
+  a.reader=currentReader(f,a,f.trusted);
+  const q=await f.api.qualifyAcceptedCheckpoint({reader:a.reader,acceptedHandle:a.handle,
+    acquireAuthorityInputs:async (reader,group)=>{
+      assert.equal(reader.version,f.trusted);
+      const ordered=pins=>[...pins].sort((a,b)=>a.path.localeCompare(b.path));
+      assert.deepEqual(ordered(group),ordered(layers[calls.length]));calls.push(group);
+      for(const p of group)assert.equal(execFileSync('git',['-C',f.root,'hash-object','-w','--stdin'],
+        {input:bodies.get(p.git_blob_oid),encoding:'utf8'}).trim(),p.git_blob_oid);
+      return {available:true,state:{forged:'The ordinary reader must still authenticate'}};
+    }});
+  assert.equal(q.available,true,q.reason);assert.equal(calls.length,layers.length);
+  assert.deepEqual(nativeLiteral(q.state.ledger.rows),f.ledger.rows);
+  assert.deepEqual(nativeLiteral(q.state.patch.rows),f.patch.rows);
+  for(const p of omitted)assert.throws(()=>f.git('cat-file','-e',p.git_blob_oid),'Metadata-only reuse must not acquire historical proof products');
+  f.api.releaseCheckpoint(q.state);
+  const binding=layers.at(-1)[0];omitFixtureObjects(t,f.root,[binding.git_blob_oid]);
+  a.reader=currentReader(f,a,f.trusted);
+  await assert.rejects(()=>f.api.qualifyAcceptedCheckpoint({reader:a.reader,acceptedHandle:a.handle,
+    acquireAuthorityInputs:async()=>({available:true,complete:true})}),/Invalid immutable blob size batch/,'A successful callback return cannot replace missing bytes');
+  f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+
+
+test('accepted aggregate reuses only completed native classification under its whole registry binding',async t=>{
+  const f=await acceptedProducts(t,{completedNative:true,actualProducer:true}),a=await acquire(f);
+  const entries=f.registry.entries,completed=entries.find(entry=>entry.completed_constructor!==undefined);
+  const pending=entries.filter(entry=>entry.completed_constructor===undefined);
+  assert.equal(entries.length,3);assert.equal(pending.length,2);
+  const read=p=>JSON.parse(f.git('show',p.commit+':'+p.path));
+  assert.deepEqual(pending.map(entry=>read(entry.source_authority).kind).sort(),
+    ['source-target-native-custody-v1',undefined]);
+  const legacy=pending.find(entry=>read(entry.source_authority).kind===undefined);
+  const {readRetainedRegistryAuthority}=await import(pathToFileURL(path.join(f.root,P+'selected-neighbor-prevention.mjs')));
+  assert.throws(()=>readRetainedRegistryAuthority(new f.native.ImmutableReader(f.root,f.trusted),
+    {...legacy,completed_constructor:completed.completed_constructor}),/Completed constructor requires a modern source-target authority/,
+  'A new completion pin cannot convert legacy custody into native authority');
+  // authority_sha256 deliberately excludes completion pins. Only the accepted
+  // complete registry binding authorizes reusing the prior classification.
+  for(const name of ['added legacy completion','changed native completion']){
+    const registry=structuredClone(f.registry),entry=registry.entries.find(row=>row.authority_sha256===
+      (name.startsWith('added')?legacy:completed).authority_sha256);
+    entry.completed_constructor=name.startsWith('added')?completed.completed_constructor:
+      {...completed.completed_constructor,sha256:'f'.repeat(64)};
+    assert.deepEqual(registry.entries.map(row=>row.authority_sha256),entries.map(row=>row.authority_sha256));
+    const forged=await acquire({...f,produced:undefined},p=>{p.facts.candidate_bindings.registry_sha256=valueSha(registry);});
+    await assert.rejects(()=>qualify(f,forged),/Accepted checkpoint changed the complete ledger\/registry\/patch\/manifest/,name);
+    f.transport.releaseAcceptedCheckpoint(forged.handle);
+  }
+  const p=completed.source_authority;omitFixtureObjects(t,f.root,[p.git_blob_oid]);
+  const groups=[];
+  const q=await f.api.qualifyAcceptedCheckpoint({reader:a.reader,acceptedHandle:a.handle,
+    acquireAuthorityInputs:async(_reader,pins)=>{
+      groups.push(pins);assert(!pins.some(pin=>pin.git_blob_oid===p.git_blob_oid),'Accepted completed binding must not be requested again');
+    }});
+  assert.equal(q.available,true,q.reason);
+  assert(groups.some(pins=>pins.length===2&&pending.every(entry=>pins.some(pin=>pin.git_blob_oid===entry.source_authority.git_blob_oid))));
+  assert(![...a.reader.inventory.values()].some(pin=>pin.git_blob_oid===p.git_blob_oid&&pin.whole_body_consumed));
+  assert.deepEqual(nativeLiteral(q.state.ledger),f.ledger);assert.deepEqual(nativeLiteral(q.state.patch),f.patch);
+  assert.deepEqual(q.state.registry,f.registry);f.api.releaseCheckpoint(q.state);
+  assert.throws(()=>f.git('cat-file','-e',p.git_blob_oid),'The completed original binding remains absent');
+  for(const entry of pending){
+    const pin=entry.source_authority,body=f.git('cat-file','blob',pin.git_blob_oid);
+    omitFixtureObjects(t,f.root,[pin.git_blob_oid]);
+    a.reader=currentReader(f,a,f.trusted);
+    await assert.rejects(()=>qualify(f,a),/Invalid immutable blob size batch/,'Unclassified accepted bindings still require exact bytes');
+    assert.equal(execFileSync('git',['-C',f.root,'hash-object','-w','--stdin'],{input:body,encoding:'utf8'}).trim(),pin.git_blob_oid);
+  }
+  const coldReader=new f.native.ImmutableReader(f.root,f.acceptedBaseline);
+  const cold=await f.api.qualifyCheckpoint({reader:coldReader});assert.equal(cold.available,true,cold.reason);
+  await assert.rejects(()=>f.api.qualifyTransition({state:cold.state,reader:new f.native.ImmutableReader(f.root,f.trusted,{invocation:coldReader.invocation})}),
+    /cat-file|Invalid immutable blob size batch/,'A fresh append must still read completed authority custody');
+  f.api.releaseCheckpoint(cold.state);
+  f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+
+
+test('missing-object fixture refuses duplicate or absent targets before changing its store',async t=>{
+ const f=await trustedFixture(t),p=f.pin('data/source.json',f.selected);
+ const inventory=()=>f.git('cat-file','--batch-all-objects','--batch-check=%(objectname)').toString();
+ const before=inventory();
+ assert.throws(()=>omitFixtureObjects(t,f.root,[p.git_blob_oid,p.git_blob_oid]),/targets must be unique/);
+ assert.equal(inventory(),before);assert.doesNotThrow(()=>f.git('cat-file','-e',p.git_blob_oid));
+ assert.throws(()=>omitFixtureObjects(t,f.root,['0'.repeat(40)]),/Every omission target must exist first/);
+ assert.equal(inventory(),before);assert.doesNotThrow(()=>f.git('cat-file','-e',p.git_blob_oid));
+});
+
+// Actual existing Node/Python producer, actual retained artifact parser and a
+// fresh private reader. A live transition alone cannot cover this boundary.
+test('final-bank joint output survives retention and fresh accepted checkpoint admission',async t=>{
+ const f=await acceptedProducts(t,{actualProducer:true,finalBank:true});
+ assert.equal(f.products.facts.version,2);assert.equal(f.products.facts.kind,'derived-selected-final-checkpoint-candidate-v2');
+ const a=await acquire(f);t.after(()=>f.transport.releaseAcceptedCheckpoint(a.handle));
+ const admitted=await qualify(f,a);assert.equal(admitted.available,true);assert.equal(admitted.state.version,2);
+ assert.equal(admitted.state.selection.version,2);
+ const next=await f.api.qualifyTransition({state:admitted.state,reader:new f.native.ImmutableReader(f.root,f.trusted,{invocation:a.reader.invocation})});
+ assert.equal(next.available,true);assert.deepEqual(next.changedNativeRows,[]);assert.deepEqual(next.changedIds,[]);
+});
+
+
+test('final-bank software cold report reuses comparison without checkpoint issuance',async t=>{
+ const f=await acceptedProducts(t,{actualProducer:true,finalBank:true}),a=await acquire(f);
+ const acceptedSource=f.transport.readAcceptedCheckpoint(a.handle).source;
+ f.transport.releaseAcceptedCheckpoint(a.handle);
+ const archivePath='coordination/engineering/final-bank-fixture/geography-artifact.zip';
+ f.save(archivePath,a.fixture.archive);f.save('data/selected-checkpoint.json',{...a.fixture.locator,retained_artifact:{path:archivePath}});
+ const codePath='scripts/check-effective-geographic-regression.mjs';
+ f.save(codePath,Buffer.concat([fs.readFileSync(path.join(f.root,codePath)),Buffer.from('\n// Actual reviewed software fixture.\n')]));
+ const candidate=f.commit(),native=await import(pathToFileURL(path.join(f.root,codePath)));
+ const keys=['GH_TOKEN','GITHUB_TOKEN','WORLDATLAS_CHECKOUT_TOKEN','GITHUB_REPOSITORY'];
+ const previous={fetch:globalThis.fetch,environment:Object.fromEntries(keys.map(key=>[key,process.env[key]]))};
+ const requests=[];
+ globalThis.fetch=async(input,options)=>{const url=new URL(input);requests.push(url.href);
+   assert.equal(options.headers.Authorization,undefined,'Candidate reads carry no credentials');
+   assert.equal(options.method,'GET');
+   assert.notEqual(url.hostname,'fixtures.blob.core.windows.net','No Actions archive transport in candidate code');
+   assert.equal(url.origin,'https://api.github.com');
+   assert(!url.pathname.endsWith('/zip'),'No authenticated artifact fallback');
+   return new Response(JSON.stringify(await a.fixture.api(url.pathname+url.search)),{headers:{'content-type':'application/json'}});
+ };
+ const publicFetch=globalThis.fetch;
+ for(const key of keys)delete process.env[key];process.env.GITHUB_REPOSITORY='owner/repo';
+ try{
+   const publicApi=f.transport.acceptedCheckpointAPI(undefined,{publicReadOnly:true,fetchImpl:globalThis.fetch});
+   const publicMetadata=await publicApi('/repos/owner/repo/issues','GET');
+   assert.deepEqual(publicMetadata,await a.fixture.api('/repos/owner/repo/issues'));
+   await assert.rejects(()=>publicApi('/repos/owner/repo/issues','POST',{}),/metadata GET only/);
+   await assert.rejects(()=>publicApi.artifactRedirect('/repos/owner/repo/actions/artifacts/56/zip'),/metadata GET only/);
+   assert.throws(()=>f.transport.acceptedCheckpointAPI('fixture',{publicReadOnly:true}),/cannot carry credentials/);
+   assert.throws(()=>f.transport.acceptedCheckpointAPI(undefined),/token required/,'Ordinary joint issuance retains token-required acquisition');
+   const {loadGeographicReport}=await import(pathToFileURL(path.join(f.root,'scripts/geographic-report-artifact.mjs')));
+   const retained={api:a.fixture.api,repo:'owner/repo',runId:acceptedSource.run_id,artifactName:acceptedSource.artifact_name,
+     expectedHash:acceptedSource.report_sha256,source:acceptedSource};
+   await assert.rejects(()=>loadGeographicReport({...retained,retainedArchive:()=>undefined}),/requires its exact retained geographic archive/);
+   await assert.rejects(()=>loadGeographicReport({...retained,retainedArchive:()=>Buffer.from('corrupt')}),/differs from accepted artifact digest/);
+   const report=await native.inspectSelectedAcquired(f.root,f.trusted,candidate);
+   assert.equal(report.status,'no-new-native-loss');assert.equal(report.candidate_code_executed,true);
+   assert.equal(report.derived_checkpoint,undefined);assert.equal(report.checkpoint,undefined);
+   assert(report.execution_code_inventory.some(p=>p.path.endsWith('selected-checkpoint.mjs')));
+   assert(report.execution_code_inventory.some(p=>p.path===codePath&&p.sha256===sha(fs.readFileSync(path.join(f.root,codePath)))));
+   assert.equal(requests.length,1,'The public-only final-bank path performs only the explicit metadata GET');
+   assert.equal(new URL(requests[0]).pathname,'/repos/owner/repo/issues');
+   globalThis.fetch=previous.fetch;
+   assert.deepEqual(f.git('status','--porcelain').toString().trim(),'','Report-only comparison writes no checkpoint products');
+   const raw=path.join(f.root,'fixture-native-report.json');fs.writeFileSync(raw,JSON.stringify(report));
+   const driver="import importlib.util,json,pathlib,sys,io,contextlib\nrepo=pathlib.Path(sys.argv[1]);baseline,candidate,raw,out=sys.argv[2:];s=importlib.util.spec_from_file_location('wrapper',repo/'scripts/run-geographic-check.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)\noriginal=m.subprocess.check_output\ndef transport(command,*args,**kwargs):\n if '--input-type=module' in command:return pathlib.Path(raw).read_bytes()\n return original(command,*args,**kwargs)\nm.subprocess.check_output=transport\nm.unchanged_selected_inputs=lambda *args,**kwargs:None\nsys.argv=['run-geographic-check.py','--repo',str(repo),'--baseline',baseline,'--candidate',candidate,'--code-commit',candidate,'--out',out]\nwith contextlib.redirect_stdout(io.StringIO()):result=m.main()\nassert result==0\nprint(pathlib.Path(out).read_text())";
+   let calls=0;const enclosing=()=>JSON.parse(execFileSync(process.env.PYTHON??'python3',['-I','-B','-c',driver,f.root,f.trusted,candidate,raw,path.join(f.root,'cold-main-'+(++calls)+'.json')],{encoding:'utf8',env:{...process.env,NODE:process.execPath}}));
+   const wrapped=enclosing();assert.equal(wrapped.candidate_code_executed,true);assert.equal(wrapped.selected_native_report.candidate_code_executed,true);
+   assert.equal(wrapped.checkpoint,undefined);assert.equal(wrapped.source_approval,false);
+   fs.writeFileSync(raw,JSON.stringify({...report,candidate_code_executed:false}));
+   assert.throws(enclosing,/lacks a completed native result/,'The real wrapper refuses a false candidate-code child claim');
+   f.save('data/selected-checkpoint.json',a.fixture.locator);const missingArchive=f.commit();
+   const finalWithoutLegacyLocator=await native.inspectSelectedAcquired(f.root,f.trusted,missingArchive,{fetchImpl:publicFetch});
+   assert.equal(finalWithoutLegacyLocator.status,'no-new-native-loss',
+     'A v2 final-bank comparison reads the accepted final selection directly, independent of the legacy locator/archive');
+   assert.equal(finalWithoutLegacyLocator.candidate_code_executed,true);
+   assert.equal(finalWithoutLegacyLocator.checkpoint,undefined,'A software-only final-bank comparison does not issue a checkpoint');
+ }finally{globalThis.fetch=previous.fetch;for(const [key,value]of Object.entries(previous.environment)){if(value===undefined)delete process.env[key];else process.env[key]=value;}}
 });

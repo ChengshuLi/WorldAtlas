@@ -2,8 +2,12 @@ import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
-import {prepareCurrentSelectedAdditive} from '../scripts/package-current-additive.mjs';
+import {prepareCurrentSelectedAdditive,readCurrentSelectedAdditive} from '../scripts/package-current-additive.mjs';
+import {packagePreparedStartupOwnership} from '../scripts/package-startup-ownership.mjs';
+import os from 'node:os';
+import path from 'node:path';
 import {readGeographicReleaseManifest} from '../scripts/read-geographic-release-manifest.mjs';
+import {scientificNativeSelection,finalBankSelection} from '../src/reference-metadata.js';
 import {gunzipSync} from 'node:zlib';
 import { validateHierarchy } from '../hierarchy.mjs';
 import { openDatabase, seedDatabase, snapshot, importRecords, validateGeometry, geography } from '../database.mjs';
@@ -31,8 +35,8 @@ test('real seeded database exports the exact complete revision into current sele
  const source=read('world-index.json').parts.flatMap(name=>read(name).features);
  const derived=createHash('sha256').update(JSON.stringify(source)).update(JSON.stringify(read('hierarchy.json'))).digest('hex');
  assert.equal(referenceRevision,derived);
- const manifestBytes=fs.readFileSync(selection.manifest_path),manifest=JSON.parse(manifestBytes);
- assert.equal(createHash('sha256').update(manifestBytes).digest('hex'),selection.sha256);
+ const native=scientificNativeSelection(selection),manifestBytes=fs.readFileSync(native.manifest_path),manifest=JSON.parse(manifestBytes);
+ assert.equal(createHash('sha256').update(manifestBytes).digest('hex'),native.sha256);
  // This model control consumes the same complete ordinary bounds snapshot as
  // the offline package image, without requiring historical Git in shallow CI.
  const pin=manifest.original_assets.bounds;
@@ -43,16 +47,31 @@ test('real seeded database exports the exact complete revision into current sele
  assert.equal(createHash('sha256').update(bounds).digest('hex'),pin.sha256);
  const indices=new Map(JSON.parse(gunzipSync(bounds)).map(row=>[row.id,row.index]));
  const features=geography(db).features.map(feature=>({...feature,pixelIndex:indices.get(feature.id)}));
- const args={root:process.cwd(),selectedGrid:{manifest,sha256:selection.sha256,bounds},geographicRelease:readGeographicReleaseManifest().releases.at(-1),features,referenceRevision};
- const packaged=await prepareCurrentSelectedAdditive(args);
+ const args={root:process.cwd(),selectedGrid:{manifest,sha256:native.sha256,bounds},geographicRelease:readGeographicReleaseManifest().releases.at(-1),features,referenceRevision};
+ // Exercise the same final-bank header and finished-context binder used by
+ // ordinary packaging, not the retired historical-repair transport builder.
+ const outputs=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-model-package-'));let next=0;
+ t.after(()=>fs.rmSync(outputs,{recursive:true,force:true}));
+ const packageSelected=async options=>{
+  if(!finalBankSelection(selection))return prepareCurrentSelectedAdditive(options);
+  const selected=await readCurrentSelectedAdditive(options);
+  await packagePreparedStartupOwnership({manifest,manifestSha:native.sha256,
+   source:path.join(options.root,'data/canonical-grid/current-startup'),destination:path.join(outputs,String(next++)),
+   selected,features:options.features});
+  return selected;
+ };
+ const packaged=await packageSelected(args);
  assert.equal(packaged.referenceMetadata.application_reference_revision,derived);
  assert.equal(packaged.referenceMetadata.asset.sha256,selection.reference_projection.sha256);
- for(const revision of [undefined,'0'.repeat(64)])await assert.rejects(prepareCurrentSelectedAdditive({...args,referenceRevision:revision}),/reference revision/);
- const id=projection.location_changes[0].location_id,index=features.findIndex(feature=>feature.id===id);
- assert.ok(index>=0);assert.equal(features[index].properties.metadata.reference_revision,derived);
+ for(const revision of [undefined,'0'.repeat(64)])await assert.rejects(packageSelected({...args,referenceRevision:revision}),/reference revision/);
+ const correction=projection.location_changes.find(row=>Object.hasOwn(row.after_properties.metadata??{},'reference_corrections'));
+ assert.ok(correction,'The removed correction field must exist in the current accepted source');
+ const id=correction.location_id,index=features.findIndex(feature=>feature.id===id);
+ assert.ok(index>=0);assert.ok(Object.hasOwn(features[index].properties.metadata,'reference_corrections'));
+ assert.equal(features[index].properties.metadata.reference_revision,derived);
  for(const mutate of [p=>delete p.metadata.reference_corrections,p=>p.metadata.source_id='changed',p=>p.name='changed',p=>p.parent_id='changed',p=>p.metadata.reference_revision='0'.repeat(64)]){
   const bad=[...features];bad[index]=structuredClone(features[index]);mutate(bad[index].properties);
-  await assert.rejects(prepareCurrentSelectedAdditive({...args,features:bad}),/complete applied source|reference revision|owner identity or parent/);
+  await assert.rejects(packageSelected({...args,features:bad}),/complete applied source|reference revision|owner identity or parent|Prepared current owner, parent or bounds differ/);
  }
 });
 

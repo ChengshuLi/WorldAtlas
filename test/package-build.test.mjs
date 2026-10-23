@@ -6,7 +6,9 @@ import path from 'node:path';
 import {materializePackageInputs, runPackageBuild, verifyPackageDependencies, assertPackageStage, inspectPackageRuntime, inspectPackageInputs} from '../scripts/package-build.mjs';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {selectedDataCheckoutPatterns} from '../scripts/package-inputs.mjs';
+import {selectedDataCheckoutPatterns, validatePackageInputs} from '../scripts/package-inputs.mjs';
+import {DatabaseSync} from 'node:sqlite';
+import {workspaceManager} from '../scripts/local-workspace.mjs';
 import {committedPackageInputs} from '../scripts/package-output-artifact.mjs';
 
 const fixturePreflight = async () => ({passed: true, errors: [], synthetic_package_boundary_fixture: true});
@@ -69,7 +71,149 @@ test('only declared files enter the source image; unrelated research cannot alte
   const second = await runPackageBuild('static', {root, preflight: fixturePreflight});
   assert.equal(await fs.readFile(path.join(root, 'dist/value.json'), 'utf8'), '42');
   assert.equal(first.source_bytes, second.source_bytes);
+  assert.equal(Object.hasOwn(second, 'generated_database'), false);
   assert.deepEqual((await fs.readdir(path.join(root, '.cache'))).filter(name => name.startsWith('package-input-image-')), []);
+});
+
+test('package publication preserves local imports and exports only its generated comparison database', async t => {
+  const {root, definition} = await fixture(t, {program: `
+    import fs from 'node:fs';
+    import path from 'node:path';
+    import assert from 'node:assert/strict';
+    import {DatabaseSync} from 'node:sqlite';
+    assert.equal(fs.existsSync('data/atlas.sqlite'), false, 'Persistent local data must not enter the package image');
+    fs.mkdirSync('data');
+    const db = new DatabaseSync('data/atlas.sqlite');
+    db.exec("CREATE TABLE records(id TEXT PRIMARY KEY, value TEXT); INSERT INTO records VALUES ('seed', 'declared input');");
+    db.close();
+    const output = JSON.parse(fs.readFileSync('.github/package-inputs.json')).generated_outputs.find(name => name.endsWith('.sqlite'));
+    fs.mkdirSync(path.dirname(output), {recursive:true});
+    if (output !== 'data/atlas.sqlite') fs.renameSync('data/atlas.sqlite', output);
+    fs.mkdirSync('dist'); fs.writeFileSync('dist/value.json', '42');
+  `});
+  definition.generated_outputs = JSON.parse(await fs.readFile(new URL('../.github/package-inputs.json', import.meta.url))).generated_outputs;
+  await fs.writeFile(path.join(root, '.github/package-inputs.json'), JSON.stringify(definition));
+  await fs.mkdir(path.join(root, 'data'));
+  const localPath = path.join(root, 'data/atlas.sqlite'), local = new DatabaseSync(localPath);
+  local.exec("CREATE TABLE records(id TEXT PRIMARY KEY, value TEXT); INSERT INTO records VALUES ('local-import', 'unique retained evidence');");
+  local.close();
+  const before = await fs.readFile(localPath);
+  execFileSync('git', ['-C', root, 'init', '-q'], {stdio:'pipe'});
+  const first = await runPackageBuild('static', {root, preflight: fixturePreflight});
+  const second = await runPackageBuild('static', {root, preflight: fixturePreflight});
+  assert.deepEqual(first.generated_database, second.generated_database);
+  const databaseBytes = await fs.readFile(path.join(root, '.cache/package-atlas.sqlite'));
+  assert.deepEqual(second.generated_database, {path: '.cache/package-atlas.sqlite', bytes: databaseBytes.length,
+    git_blob_oid: createHash('sha1').update(`blob ${databaseBytes.length}\0`).update(databaseBytes).digest('hex')});
+  assert.deepEqual((await fs.readdir(path.join(root, '.cache'))).sort(), ['package-atlas.sqlite', 'package-input-build.json']);
+  assert.deepEqual(await fs.readFile(localPath), before, 'Every byte of the persistent local database is unchanged');
+  for (const [file, expected] of [[localPath, 'local-import'], [path.join(root, '.cache/package-atlas.sqlite'), 'seed']]) {
+    const db = new DatabaseSync(file, {readOnly:true});
+    try { assert.deepEqual(db.prepare('SELECT id FROM records').all().map(row => row.id), [expected]); }
+    finally { db.close(); }
+  }
+  assert.equal(await fs.readFile(path.join(root, 'dist/value.json'), 'utf8'), '42');
+  assert.deepEqual((await fs.readdir(path.join(root, '.cache'))).filter(name => name.startsWith('package-input-image-')), []);
+  assert.throws(() => validatePackageInputs({...definition, generated_outputs: ['data/atlas.sqlite']}), /Unsupported generated/);
+  await assert.rejects(runPackageBuild('static', {root, preflight:fixturePreflight, execute:async () => { throw Error('controlled build failure'); }}), /controlled build failure/);
+  assert.deepEqual(await fs.readFile(path.join(root, '.cache/package-atlas.sqlite')), databaseBytes);
+  assert.deepEqual(await fs.readFile(localPath), before);
+  assert.deepEqual(await fs.readdir(path.join(root, '.cache')), ['package-atlas.sqlite'], 'Failure keeps prior output but no successful receipt or temporary stage');
+});
+
+test('normal guarded release consumes only the unchanged database issued by the actual package builder', async t => {
+  const {root, definition} = await fixture(t, {program: `
+    import fs from 'node:fs';
+    import {DatabaseSync} from 'node:sqlite';
+    fs.mkdirSync('.cache');
+    const db = new DatabaseSync('.cache/package-atlas.sqlite');
+    db.exec("CREATE TABLE records(id TEXT PRIMARY KEY); INSERT INTO records VALUES ('generated seed');");
+    db.close();
+  `});
+  definition.generated_outputs = ['.cache/package-atlas.sqlite'];
+  await fs.writeFile(path.join(root, '.github/package-inputs.json'), JSON.stringify(definition));
+  await fs.writeFile(path.join(root, '.gitignore'), '.cache/\nnode_modules/\n');
+  await fs.writeFile(path.join(root, '.gitattributes'), '.cache/*.sqlite filter=must-not-run\n');
+  const git = (...args) => execFileSync('git', ['-C', root, ...args], {encoding:'utf8', stdio:['pipe','pipe','pipe']});
+  git('init', '-b', 'main'); git('config', 'user.name', 'Fixture'); git('config', 'user.email', 'fixture@example.org');
+  git('config', 'filter.must-not-run.clean', 'false'); git('config', 'filter.must-not-run.required', 'true');
+  git('add', '.'); git('commit', '-m', 'declared package fixture'); git('remote', 'add', 'origin', root);
+  const manager = workspaceManager(root), entry = manager.allocate({worker:'generated-db', branch:'engineering/generated-db'});
+  const head = git('rev-parse', 'HEAD').trim(), release = () => manager.release({worker:entry.worker, token:entry.token});
+  const cache = path.join(entry.path, '.cache'), database = path.join(cache, 'package-atlas.sqlite'), receiptFile = path.join(cache, 'package-input-build.json');
+  await fs.mkdir(path.join(entry.path, 'node_modules'));
+  const inputs = inspectPackageInputs(entry.path, definition);
+  assert.deepEqual(inputs.errors, []);
+  const definitionHash = createHash('sha256').update(await fs.readFile(path.join(entry.path, '.github/package-inputs.json'))).digest('hex');
+  const receipt = await runPackageBuild('static', {root:entry.path, preflight:async () => ({...await fixturePreflight(), inputs, input_definition_sha256:definitionHash})});
+  await fs.rmdir(path.join(entry.path, 'node_modules'));
+  const originalDatabase = await fs.readFile(database), originalReceipt = await fs.readFile(receiptFile);
+  const descriptor = receipt.generated_database;
+  assert.deepEqual(descriptor, {path:'.cache/package-atlas.sqlite', bytes:originalDatabase.length,
+    git_blob_oid:createHash('sha1').update(`blob ${originalDatabase.length}\0`).update(originalDatabase).digest('hex')});
+  assert.throws(() => git('cat-file', '-e', descriptor.git_blob_oid), 'Hashing must not add the database to shared Git');
+  const assertRetained = async () => {
+    assert.equal(manager.report().entries.find(row => row.token === entry.token)?.path, entry.path);
+    assert.equal(await fs.readFile(path.join(entry.path, 'src/value.json'), 'utf8'), '42');
+    assert.throws(() => git('rev-parse', '--verify', `refs/worldatlas-local-recovery/${entry.token}`));
+  };
+  assert.throws(() => manager.release({worker:entry.worker, token:'wrong'}), /ownership/);
+  for (const mutate of [
+    value => { delete value.generated_database; },
+    value => { value.version = 0; },
+    value => { value.kind = 'unknown'; },
+    value => { delete value.preflight; },
+    value => { value.preflight.passed = false; },
+    value => { value.preflight.inputs.head = '0'.repeat(40); },
+    value => { value.input_definition_sha256 = value.preflight.input_definition_sha256 = '0'.repeat(64); },
+    value => { value.preflight.input_definition_sha256 = '0'.repeat(64); },
+    value => { value.generated_database.path = 'data/atlas.sqlite'; },
+    value => { value.generated_database.bytes++; },
+    value => { value.generated_database.git_blob_oid = '0'.repeat(40); },
+  ]) {
+    const changed = JSON.parse(originalReceipt); mutate(changed);
+    const raw = JSON.stringify(changed); await fs.writeFile(receiptFile, raw);
+    assert.throws(release, /ignored/); await assertRetained();
+    assert.equal(await fs.readFile(receiptFile, 'utf8'), raw);
+    assert.deepEqual(await fs.readFile(database), originalDatabase);
+    await fs.writeFile(receiptFile, originalReceipt);
+  }
+  const changed = Buffer.from(originalDatabase); changed[changed.length - 1] ^= 1;
+  await fs.writeFile(database, changed);
+  assert.throws(release, /ignored/); await assertRetained();
+  assert.deepEqual(await fs.readFile(database), changed);
+  await fs.writeFile(database, originalDatabase);
+  for (const extra of ['package-atlas.sqlite-wal', 'package-atlas.sqlite-shm', 'valuable.json']) {
+    const file = path.join(cache, extra); await fs.writeFile(file, 'retain');
+    assert.throws(release, /ignored/); await assertRetained();
+    assert.equal(await fs.readFile(file, 'utf8'), 'retain'); await fs.unlink(file);
+  }
+  for (const file of [database, receiptFile]) {
+    const bytes = await fs.readFile(file), outside = path.join(root, '.cache', path.basename(file));
+    await fs.mkdir(path.dirname(outside), {recursive:true}); await fs.writeFile(outside, bytes);
+    await fs.unlink(file); await fs.symlink(outside, file);
+    assert.throws(release, /ignored/); await assertRetained();
+    assert.deepEqual(await fs.readFile(outside), bytes);
+    await fs.unlink(file); await fs.writeFile(file, bytes);
+  }
+  const outside = path.join(root, '.cache/aliased-build'); await fs.rename(cache, outside); await fs.symlink(outside, cache);
+  assert.throws(release, /ignored|Symlink|untracked/); await assertRetained();
+  await fs.unlink(cache); await fs.rename(outside, cache);
+  await fs.unlink(receiptFile);
+  assert.throws(release, /ignored/); await assertRetained();
+  await fs.writeFile(receiptFile, originalReceipt);
+  // A later clean commit is not silently treated as this build's producer.
+  execFileSync('git', ['-C', entry.path, 'commit', '--allow-empty', '-m', 'later task state'], {stdio:'pipe'});
+  assert.throws(release, /ignored/); await assertRetained();
+  execFileSync('git', ['-C', entry.path, 'reset', '--soft', head], {stdio:'pipe'});
+  const result = release();
+  assert.equal(result.released, true);
+  assert.deepEqual(result.removed_generated_database, {...descriptor, producer_head:head, input_definition_sha256:definitionHash,
+    build_receipt_sha256:createHash('sha256').update(originalReceipt).digest('hex')});
+  assert.equal(git('rev-parse', result.preservedRef).trim(), head);
+  assert.equal(git('rev-parse', 'engineering/generated-db').trim(), head);
+  await assert.rejects(fs.stat(entry.path), {code:'ENOENT'});
+  assert.throws(() => git('cat-file', '-e', descriptor.git_blob_oid), 'Release hashing must not archive the generated body');
 });
 
 test('undeclared reads and imports fail before replacing caller outputs and clean the image', async t => {

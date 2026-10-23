@@ -6,8 +6,7 @@ never run a scientific operator, accept a source, submit a review, commit, queue
 or merge. Publish the real head, obtain
 substantive independent review, then use the standard worker integration workflow.
 Scientific source/native supervision, rebind, selected-reader and output checks remain authoritative.
-Use Node 24 without loaders/preloads. Check storage with `local-workspace.mjs`
-before preparation. Sparse checkouts need the two literal existing composition
+Use Node 24 without loaders/preloads. Sparse checkouts need the two literal existing composition
 and selected-neighbor helper paths imported by the command; no dataset directory
 is required for the code. Missing immutable bodies fail with lazy fetch disabled.
 
@@ -21,9 +20,60 @@ Historical request fields remain literal provenance when reading original eviden
 without enforcing their old memory policy on current execution. Failed or partial
 products still cannot establish a successful result.
 
+## Current final-bank authoring
+
+After the support code is accepted, use the existing `finalize` command with
+`version: 2`, `selector: {commit, path: "data/ownership-selection.json"}` and
+`package_inputs: {commit, path: ".github/package-inputs.json"}` at the actual
+accepted selection. The initial conversion forbids new scientific or reference
+inputs. It retains N/M, exact E words and fixed compatibility files while making
+finished geometry/interval context explicit and issuing a truthful new E identity.
+Normal accepted-code joint validation, not the producer, admits the conversion.
+The first migration requires a new full package capture.
+
+For a later new native addition, version-2 `compose` takes the accepted selector
+and only the newly reviewed authorities' complete rule/binding/constructor/patch
+pins. It produces a new-evidence registry, not another cumulative ledger. Supply
+its whole pin as `change_evidence` to version-2 `finalize`. An unchanged hook is
+already accepted and contributes no new authorities. Legacy new-positive
+append/rebind methods are explicitly unsupported in this profile, not rerouted
+through an old selector. Existing reference-metadata preparation remains available;
+its complete new projection pin may be supplied as `reference_projection` without
+new cell authorities. Original N/source-contract changes require their genuine
+separate path, not an append exemption.
+
+Preparation reads the accepted current-E words and finished context, applies only
+the proposed new intervals and emits their complete next bank/context. Unchanged
+compatibility-only members keep their complete accepted index pins and ordinary
+Git tree and index identities; only genuine sparse copies may remain absent
+instead of being fetched and rewritten. Any materialized compatibility file must
+still match its exact accepted bytes. Committed or staged changes, ordinary
+deletions, links and nonordinary files refuse before adoption. A member also used by current E is always consumed and authenticated.
+This avoids compatibility hydration, not the complete current-E/context read and
+whole-stream/footprint hash recomputation. A small key change is not a bounded-row
+finalization, and later complete packaging still requires its actual declared
+inputs. The ordinary joint consumer separately
+qualifies new evidence and exhaustively checks all changed and unchanged cells
+and context against the immutable accepted main pinned by the queue. It reads
+only the newly proposed authority, not a history of accepted repairs. The next
+accepted main is automatically the next baseline; no checkpoint locator, artifact
+download, prior-authority ledger or manual promotion is part of this path. No public preparation result is a
+scientific capability. Historical evidence remains in Git; `change_evidence` is a
+qualification input, not a browser/build product. Version-2 finalization has no
+`accepted_checkpoint` option. Keep old evidence as history, not as a prerequisite
+for the next repair. Checker upgrades cannot certify their own simultaneous map
+changes; that comparison executes the accepted-main checker.
+
+The same staging, full-set preflight, exact interrupted resume and selector-last
+adoption below apply. The new expectations point to the complete current bank;
+there is no current-ledger expectation. Later final-to-final selected-data changes
+can use the existing eligible retained-package route. Unknown/restoration/checkpoint
+changes retain the ordinary full plan, and code changes never borrow old output
+as a new producer.
+
 ## Configurations and explicit commit boundaries
 
-Each config has `version: 1`. Input pins contain exact `commit`, `path`, ordinary
+The historical configurations below have `version: 1`. Input pins contain exact `commit`, `path`, ordinary
 `mode: "100644"`, `git_blob_oid` (or the existing `blob` spelling), `bytes`, and
 whole-file `sha256`. Git confirms the path/mode/OID before the bytes are consumed.
 No proposed input is called accepted merely because a hash matches.
@@ -90,6 +140,17 @@ No proposed input is called accepted merely because a hash matches.
    Checks reject duplicate authorities/components and overlap between new originals
    as well as the accepted patch. All original/source-evidence bodies retain their complete immutable identities. Registry and ledger conservation, one final
    interval union and one effective reference cover the complete combined result.
+   The same command derives and acquires missing exact public Git operands from
+   those committed pins, including their historical commit/path metadata, prior
+   cumulative roles, incoming source evidence and any retained reference projection.
+   It reuses the existing exact-OID importer, batching independent bodies per
+   dependency layer with implicit lazy fetching disabled. No full checkout profile,
+   manual prior-role list or separate materialization command is required for compose.
+   Whole byte/hash and native Git identities remain mandatory; a denied, unavailable
+   or mismatched input stops before any composition receipt. Verified imported bodies
+   can be reused after interruption. Missing historical metadata is authenticated
+   privately, not installed as partial repository history. Other scientific phases
+   and finalization retain their own input and acceptance contracts.
    Array order does not change the emitted bytes. No intermediate selector, new
    scientific qualification or source/physical rerun is introduced; final actual
    selected-reader and current-owner-zero acceptance remain separately required.
@@ -162,9 +223,10 @@ No proposed input is called accepted merely because a hash matches.
    retain their positions and must retain their exact accepted byte identities.
    Never use a globally sorted candidate list as the accepted baseline. The existing package definition
    validator rejects overlaps, missing optional declarations and unsafe paths.
-   No tracked selector or package file is written: inspect and adopt these staged
-   files in the delivery owner's ordinary commit/review flow. Repeating from the
-   staged selector/package or using exact `--resume` must produce no changes.
+   Finalize stages the complete outputs, then adopts the exact derived canonical
+   selector, package definition, current runtime bodies, admitted restorations,
+   sidecar, expectations and optional checkpoint. It does not copy the full
+   historical role inventory or replace different-vintage physical helpers.
    Scientific assembly, package builds and final delivery remain separate.
 
 For finalization, use local staging by default:
@@ -173,21 +235,29 @@ For finalization, use local staging by default:
 node scripts/prepare-delivery-handoff.mjs finalize CONFIG .cache/delivery-handoff/final-UNIQUE
 ```
 
-Adopt `ownership-selection.json` as `data/ownership-selection.json` and
-`package-inputs.json` as `.github/package-inputs.json`. Adopt the emitted sidecar
-and `selected-delivery-expectations.json` once at the configured receiving
-`new_prefix`; retain the staged bundle locally for exact `--resume`. Do not also
-commit that bundle under a `finalized/` directory. The delivery has one canonical,
-current-ledger-bound expectations file. A duplicate authoritative copy is not a
-prospective template and correctly retains full regression. This uses the existing
-staging/adoption contract; it performs no automatic Git mutation.
+The normal finalizer applies its authenticated write set without a separate copy
+list. Inspect and commit the resulting canonical diff in the ordinary review
+flow; it performs no Git index, commit or push operation. Publish the complete
+reviewed tree and genuine evidence ancestry, not a hand-written subset of files.
+Retain the staged bundle locally for exact `--resume`, rather than committing a
+second `finalized/` copy. Expectations have one current-ledger-bound canonical
+path under `new_prefix`.
+
+The preparation binding records the resolved original selector/package pins.
+Actual committed canonical bodies must still equal those preimages or the exact
+outputs; an unrelated commit advance is harmless, but a different selection must
+be reconciled rather than silently overwritten. All destinations are preflighted
+before staging. Adoption rechecks each ordinary file before rename, with the
+selector last; this is not atomic rollback. After interrupted adoption, only the
+same complete staged outputs with explicit `--resume` may finish a mixture of
+exact preimages/postimages. Edited, linked or conflicting files still refuse.
 
 Outputs use a fresh directory below `.cache/delivery-handoff/` or the caller's
 issue-owned `coordination/engineering/<job>/`. All products are admitted before
 mutation and created exclusively; `preparation.json` is written last. An explicit
 `--resume` checks every product, the complete file inventory and original binding.
 It never rewrites, repairs or blesses a partial directory. A changed config,
-input, result, head or body needs a fresh vintage. Commit boundaries above are
+input, result or body needs a fresh vintage. Commit boundaries above are
 intentional: immutable future pins cannot be predicted by bookkeeping.
 
 ## Reuse accepted methods; declare only consumed package roles
@@ -414,15 +484,16 @@ local output tree. Whole-cohort retention keeps new owned originals available
 without a second staging/adoption pass.
 
 For historical or cross-prefix roles absent from the accepted package baseline,
-supply an exact committed `restored_read_roles` snapshot:
-`{"commit":"<exact commit>"}`. The finalizer derives missing paths from its
+compact finalization uses its exact `composition.commit` as the restoration
+snapshot. Explicit full-pin configurations, or restorations at another commit,
+use `restored_read_roles: {"commit":"<exact commit>"}`. The finalizer derives missing paths from its
 already authenticated consumed-role projection; no separate package prepass or
 handwritten path inventory is needed. Unrelated snapshot files grant no read or
 write scope. The older explicit `paths` list remains supported and checked exactly.
 Declare the exact restored write paths in the ordinary issue scope. The snapshot
 must preserve each original ordinary mode, Git object, size and SHA-256. Duplicate,
 unbound, changed, nonordinary, missing or accepted-path-overwriting entries fail.
-Absent roles without that explicit snapshot also fail. Original custody commits
+Full-pin configurations without a snapshot still refuse absent roles. Original custody commits
 remain unchanged; this readback grants no additional write scope.
 
 Completion is written last. Exact `--resume` checks every flat output and its
@@ -496,6 +567,19 @@ contains `version: 1`, `selector: {commit, path}`, an explicit `source_evidence`
 scientific payload. The payload uses the existing `source-target-native-evidence-v1` format; source/physical pins,
 targets, geometry, exclusions and other scientific claims remain the operator's
 explicit reviewed inputs.
+
+A target's optional `coverage_rows` binds the land/water class of the complete
+requested native patch for its owner (`pixelIndex`), not that source member's
+geometric coverage. When using `coverage_rows` for same-owner siblings, one
+reviewed complete owner binding on any target suffices; the others may omit it.
+If supplied on more than one sibling, the complete bindings must be identical.
+Each binding uses sorted, nonoverlapping half-open `[start, end, class]` runs and
+must cover exactly that owner's requested cells; partial per-member rows,
+conflicting class bindings and extra cells are refused. Do not union partial
+rows, treat request-mask membership alone as physical class evidence, or omit a
+required class binding to bypass admission. The preparation command preserves
+this scientific input, and the native consumer still checks actual source/physical
+support and every retained sibling veto.
 
 The entry authenticates the selected sidecar, base manifest and runtime envelope,
 then fills only `native_contract`, `native_latitudes`, `owner_roster` and
@@ -855,8 +939,11 @@ IDs. Each node requires unique complete members; terminals retain the accepted
 canonical ID, owner, roster parent, source URL and location basis. Missing retired
 intermediaries, missing or extra descendants, foreign leaves, conflicting source
 metadata, duplicate edges and cycles fail closed. Unknown or opaque same-cohort
-ancestry is not treated as an unrelated family: mixed-family cohorts may therefore
-be conservatively rejected until they have separately reviewed complete support.
+ancestry is not treated as an unrelated family. Cross-provider negative ancestry
+automatically binds the whole consumed lineage to the independently registered
+selected source origin. It accepts neither caller-supplied origins nor
+`operation_stages`; historical intermediate geometries are not inputs to this
+negative-only check.
 The native geometry, boundary, physical and requested-cell checks still run.
 
 Legacy flat/single-original split inputs need no new inventory. Package assembly

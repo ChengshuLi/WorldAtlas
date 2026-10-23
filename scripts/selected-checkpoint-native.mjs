@@ -85,8 +85,22 @@ export async function compareNativeAdditiveIntervals(runs,{y,before,after,size,o
 // The joint launcher qualifies both states in one invocation and owns release.
 // Authentication stays in the shared projector, including the zero-row path.
 export async function compareSelectedCheckpointNative({transition}) {
-  const {authenticateTransition,visitNativeIntervals,projectVisibilityLatitudes}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs');
+  const {authenticateTransition,visitNativeIntervals,projectVisibilityLatitudes,finalBankComparison}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs');
   const {baseline,candidate,changedNativeRows}=authenticateTransition({transition});
+  if(candidate.version===2){
+    const proof=finalBankComparison({transition});
+    return {version:1,method:'selected-native-owner-conservation-v1',status:'no-new-native-loss',
+      repair_visibility:{new_components:proof.witnesses.length,witnesses:proof.witnesses},
+      baseline_selection:baseline.selection,candidate_selection:candidate.selection,
+      affected_rows:changedNativeRows.length,lost_or_reassigned_cells:0,intervals:[],
+      native_row_scope:{proof:'complete-accepted-final-bank-and-qualified-new-intervals',
+        compared_rows:candidate.manifest.size,changed_rows:changedNativeRows,
+        representation_migration:proof.migration,added_cells:proof.addedCells},
+      checkpoint_custody:{baseline_checkpoint:baseline.accepted_execution,
+        accepted_bank:proof.baselineIndex,candidate_bank:proof.candidateIndex},candidate_code_executed:false,
+      limits:['The same private transition exhaustively compares every final word and context value against accepted E plus newly qualified native intervals.',
+        'Original physical/source authority is retained; this is not sub-cell polygon coverage or approval of unsupported source changes.']};
+  }
   const visibilityCandidates=newVisibleRepairCandidates(baseline.additions,candidate.additions);
   const size=baseline.manifest.size,oldEntries=baseline.certificate.entries,newEntries=candidate.certificate.entries;
   demand(size===candidate.manifest.size&&oldEntries.length===newEntries.length,'Checkpoint native domain or complete owner roster differs');

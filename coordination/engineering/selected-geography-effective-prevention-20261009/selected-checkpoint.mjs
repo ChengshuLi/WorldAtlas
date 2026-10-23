@@ -10,11 +10,19 @@ import {admitNativePatchStore,admitNativeLedgerStore,admitNativeEnvelopeStore,ad
 import {nativeSequence,isNativeSequence,nativeRowAt} from '../../../src/native-grid.js';
 import {openNativeWordStore} from '../../../scripts/native-word-store.mjs';
 import {ImmutableReader, NativeAssetImage, decodeVisibilityLatitudes,
-  loadBaseSelection, selectedGeometrySourceAlias, selectedReferenceOwners} from '../../../scripts/check-effective-geographic-regression.mjs';
+  loadBaseSelection, selectedGeometrySourceAlias, selectedReferenceOwners, readSelectedGeometryBank} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {repairComponentKey, nativeOnlyComponent} from '../../../src/native-grid.js';
+import {finalBankSelection,scientificNativeSelection,validateReferenceMetadataHeader} from '../../../src/reference-metadata.js';
+import {readPreparedFinalOwnership} from '../../../scripts/package-startup-ownership.mjs';
+import {validateReferenceMetadataProjection} from '../../../scripts/selected-reference-metadata.mjs';
+import {finishEffectiveFootprint as finishEffectiveFootprintPure,extendFinishedNativeFootprint as extendFinishedNativeFootprintPure,
+  effectiveFootprintValue as effectiveFootprintValuePure,mergeUnassignedNativeIntervals} from '../../../src/native-grid.js';
+const finishEffectiveFootprint=feature=>finishEffectiveFootprintPure(feature,valueSha);
+const extendFinishedNativeFootprint=(feature,components)=>extendFinishedNativeFootprintPure(feature,components,valueSha);
+const effectiveFootprintValue=feature=>effectiveFootprintValuePure(feature,valueSha);
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 import {valueSha, valueIdentity, coordinateBounds, nativeBaseSelection,
-  normaliseRetainedRepairLedger, repairRowsIndex, repairIndexValues, readRetainedRegistryAuthority, readRegistryAuthorityInputs, verifyCompletedSourceTargetNativeAuthority, validateSupportedProgrammeCatalogue,
+  authorityRegistry, normaliseRetainedRepairLedger, repairRowsIndex, repairIndexValues, readRetainedRegistryAuthority, readRegistryAuthorityInputs, verifyCompletedSourceTargetNativeAuthority, validateSupportedProgrammeCatalogue,
   CURRENT_REBIND_CODE, verifyCurrentRebindExecution,
   currentRebindResult, currentRebindAcquisitionIdentity, retainedArcticNativeRows} from './selected-neighbor-prevention.mjs';
 
@@ -115,6 +123,12 @@ function pin(p) {
   if (p.decoded_bytes !== undefined) demand(Number.isSafeInteger(p.decoded_bytes)
     && p.decoded_bytes > 0 && hash(p.decoded_sha256),
   'Incomplete whole decoded checkpoint pin');
+}
+// Acquire only the complete pins this branch is about to consume. Callback
+// results are not evidence: the ordinary immutable readers still authenticate.
+async function acquireInputs(session, reader, pins) {
+  pins.forEach(pin);
+  if (pins.length) await session.acquireAuthorityInputs?.(reader, pins);
 }
 function resolvePin(reader, p) {
   pin(p);
@@ -241,8 +255,70 @@ async function storedProduct(session,reader,p,domain,ledger) {
   (session.productStores??=new WeakMap()).set(product,store);
   return product;
 }
-async function readSelectionProducts(session, reader) {
+// Current-profile operands are the finished bank, complete context and only the
+// proposed new evidence. Native N remains its original physical/source contract.
+// This reader authenticates bytes; only the existing accepted/transition path
+// can turn them into a private selected state.
+async function readSelectedPreparedBank(session,reader,{selection,manifest,ownerCount,indexPath,indexRaw,selected}) {
+  const index=JSON.parse(indexRaw);
+  const root=path.posix.dirname(indexPath),proof=index.preparedOwnership;
+  demand(Array.isArray(index.files)&&Array.isArray(proof?.context_parts)&&Array.isArray(index.pixelMap?.parts),
+    'Missing complete selected final bank');
+  // Every declared current URL has its actual ordinary committed tree identity.
+  // There is no body/descriptor borrowed from a historical repair selector.
+  const roster=new Map(index.files.map(p=>[root+'/'+p.path,p]));
+  demand(roster.size===index.files.length,'Duplicate selected final bank member');
+  const tree=reader.git('--literal-pathspecs','ls-tree','-r','-z',reader.version,'--',root).toString('utf8').split('\0').filter(Boolean);
+  demand(tree.length===roster.size+1,'Selected final bank whole tree roster differs');
+  for(const entry of tree){const match=/^(100644) blob ([a-f0-9]{40})\t(.+)$/.exec(entry);
+    demand(match&&(match[3]===indexPath||roster.has(match[3])),'Unknown/nonordinary selected final bank path');}
+  const routes=new Map(tree.map(line=>{const [meta,name]=line.split('\t');return [name,meta.split(' ')];}));
+  const consumed=[...index.pixelMap.parts,...proof.context_parts].map(p=>{
+    const name=root+'/'+p.path,member=roster.get(name),actual=routes.get(name);
+    demand(member&&actual?.[0]==='100644'&&(p.bytes===undefined||member.bytes===p.bytes)&&member.sha256===p.sha256,
+      'Selected final bank physical body differs');
+    return {commit:reader.version,path:name,mode:actual[0],git_blob_oid:actual[2],bytes:member.bytes,sha256:p.sha256};
+  });
+  await acquireInputs(session,reader,consumed);
+  const bank=await readPreparedFinalOwnership({indexRaw,manifest,manifestSha:scientificNativeSelection(selection).sha256,selected,ownerCount,
+    read:p=>reader.read(root+'/'+p.path,{expected:p.sha256})});
+  return {...bank,indexIdentity:{path:indexPath,bytes:indexRaw.length,sha256:sha(indexRaw)}};
+}
+function selectedRuntimeReferenceMetadata(reader,selection,manifest) {
+  const pin=selection.reference_projection;if(pin===undefined)return undefined;
+  const raw=reader.read(pin.path,{expected:pin.sha256});
+  demand(raw.length===pin.bytes,'Selected projection whole length differs');
+  const {native,reference}=validateReferenceMetadataHeader(JSON.parse(raw),{selection,manifest});
+  return {version:1,asset:{path:'reference-metadata/current.json',bytes:raw.length,sha256:sha(raw)},
+    native_reference:native,reference};
+}
+async function readFinalSelectionProducts(session,reader,selection,ownerCount) {
+  const hook=finalBankSelection(selection),native=scientificNativeSelection(selection);
+  const manifestRaw=reader.read(native.manifest_path,{expected:native.sha256}),manifest=JSON.parse(manifestRaw);
+  const indexRaw=reader.read(hook.path,{expected:hook.sha256}),index=JSON.parse(indexRaw),proof=index.preparedOwnership;
+  demand(indexRaw.length===hook.bytes&&index.version===3,'Final selection index identity/profile differs');
+  const referenceMetadata=selectedRuntimeReferenceMetadata(reader,selection,manifest);
+  demand(same(index.referenceMetadata,referenceMetadata)&&(!referenceMetadata||same(proof.base_reference,referenceMetadata.reference)),
+    'Final index reference metadata differs from its actual selected projection');
+  const selected={finalBank:hook,base:proof.base_reference,reference_release:selection.reference,referenceMetadata};
+  const bank=await readSelectedPreparedBank(session,reader,{selection,manifest,ownerCount:ownerCount??proof.owners,indexPath:hook.path,indexRaw,selected});
+  return {profile:2,selection,manifest,index,indexRaw,bank,reference:proof.base_reference,
+    binding:{index:{path:hook.path,bytes:hook.bytes,sha256:hook.sha256},manifest_sha256:native.sha256,
+      effective_reference:selection.reference}};
+}
+async function acceptedPreparedBank(state,proof) {
+  if(state.version===2)return proof.selected.bank;
+  const indexPath='data/canonical-grid/current-startup/index.json',indexRaw=proof.reader.read(indexPath);
+  demand(JSON.parse(indexRaw).version===2,'Final-authority migration needs the actual accepted corrected bank');
+  return readSelectedPreparedBank(proof.session,proof.reader,{selection:state.selection,manifest:state.manifest,
+    ownerCount:state.certificate.entries.length,indexPath,indexRaw,
+    selected:{selectionBytes:proof.reader.read('data/ownership-selection.json'),base:proof.selected.envelope.base_reference,
+      envelope:proof.selected.envelope,referenceMetadata:selectedRuntimeReferenceMetadata(proof.reader,state.selection,state.manifest)}});
+}
+
+async function readSelectionProducts(session, reader, ownerCount) {
   const selection = readNamed(session, reader, 'data/ownership-selection.json');
+  if(finalBankSelection(selection))return readFinalSelectionProducts(session,reader,selection,ownerCount);
   supported(selection?.version === 1 && selection.method === 'native-linear-evenodd-first-owner-v1'
     && selection.additive_release && selection.selected_geography?.kind === 'complete-world-index-with-exact-encoded-overrides',
   'Unsupported selected checkpoint profile');
@@ -255,6 +331,8 @@ async function readSelectionProducts(session, reader) {
   supported(sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2', 'Unsupported additive sidecar version');
   demand(same(sidecar.base_selection,nativeBaseSelection(selection)), 'Stale actual native base selection');
   keys(sidecar.logical_asset_map,'base_manifest,ledger,owner_roster,patch','Incomplete additive asset map');
+  await acquireInputs(session,reader,[sidecar.authority_registry,sidecar.runtime_envelope,
+    ...Object.values(sidecar.logical_asset_map)]);
   const [registry,wrapped,manifest] = readBodies(session,reader,[sidecar.authority_registry,
     sidecar.runtime_envelope,sidecar.logical_asset_map.base_manifest]);
   const ownerPin=sidecar.logical_asset_map.owner_roster;
@@ -362,7 +440,7 @@ function completeRows(rows, size, owners) {
     }
   }
 }
-function coordinateCheck(certificate, facts, additions) {
+function coordinateCertificateCheck(certificate, facts, checkEffective) {
   demand(certificate.version === 2 && certificate.kind === 'selected-coordinate-neighbor-certificate-v2'
     && same(certificate.entry_fields,FIELDS) && same(certificate.binding,facts.binding)
     && certificate.entries.length === facts.complete_owners && certificate.inputs.length === facts.complete_sources,
@@ -375,9 +453,7 @@ function coordinateCheck(certificate, facts, additions) {
       && sources.has(row[4]) && Number.isSafeInteger(row[5]) && row[5] >= 0
       && [row[6],row[7],row[8]].every(hash), 'Incomplete/duplicate checkpoint owner/index/parent identity');
     ids.add(row[0]);
-    const effective = additions.filter(p => p.target_id === row[0]);
-    demand(effective.every(p => p.pixelIndex === row[1] && p.base_geometry_sha256 === row[7])
-      && row[8] === valueSha({base_geometry_sha256:row[7],additions:effective}), 'Checkpoint complete primitive set differs');
+    checkEffective(row,i);
     demand(Array.isArray(row[9]) && row[9].length > 0 && row[9].every(b => Array.isArray(b) && b.length === 4
       && b.every(Number.isFinite) && b[0] >= -180 && b[2] <= 180 && b[1] >= -90 && b[3] <= 90
       && b[0] <= b[2] && b[1] <= b[3]), 'Invalid checkpoint exclusion bound');
@@ -390,15 +466,25 @@ function coordinateCheck(certificate, facts, additions) {
       'Unsupported retained selected source transport');
   }
 }
+function coordinateCheck(certificate,facts,additions) {
+  coordinateCertificateCheck(certificate,facts,row=>{
+    const effective = additions.filter(p => p.target_id === row[0]);
+    demand(effective.every(p => p.pixelIndex === row[1] && p.base_geometry_sha256 === row[7])
+      && row[8] === valueSha({base_geometry_sha256:row[7],additions:effective}), 'Checkpoint complete primitive set differs');
+  });
+}
 async function rebindOperands(session, reader, ledger, domain) {
   supported(ledger.current_rebind, 'Current-base-bound producer proof is unavailable');
+  await acquireInputs(session,reader,[ledger.current_rebind]);
   const certificate = readBody(session,reader,ledger.current_rebind);
   keys(certificate,'version,kind,execution_commit,base_selection,authority_registry_sha256,request,facts,publication,operating,result','Unknown current rebind certificate');
+  await acquireInputs(session,reader,[certificate.request,certificate.facts]);
   const request=await storedProduct(session,reader,certificate.request,domain,'envelope');
   return {certificate,request,facts:readBody(session,reader,certificate.facts)};
 }
 async function rebindProducts(session, reader, ledger, domain) {
   const operands=await rebindOperands(session,reader,ledger,domain),{certificate}=operands;
+  await acquireInputs(session,reader,[certificate.publication,certificate.operating,certificate.result]);
   return {...operands,publication:readBody(session,reader,certificate.publication),
     operating:readBody(session,reader,certificate.operating),
     result:await storedProduct(session,reader,certificate.result,domain,'envelope')};
@@ -415,9 +501,9 @@ function getState(state, reader) {
 
 /** Reader.version is the actual baseline, not the historical execution commit.
  * Unsupported reuse returns a cold-path decision. Corrupt custody throws. */
-export async function qualifyCheckpoint({reader,checkpointId}) {
+export async function qualifyCheckpoint({reader,checkpointId,acquireAuthorityInputs}) {
   sessionCheck(reader);
-  const session = {reader,invocation:reader.invocation,repo:reader.repo,closed:false,handles:new Set()};
+  const session = {reader,invocation:reader.invocation,repo:reader.repo,closed:false,handles:new Set(),acquireAuthorityInputs};
 
   try {
     const {catalogue,trusted,archiveReader} = rootCatalogue(session,reader);
@@ -500,12 +586,22 @@ async function acceptedAuthorities(session,reader,selected,{metadataOnly=false,.
   // Read only original small patch products already accepted by the checkpoint.
   // No original source/native qualification or selected acquisition is repeated.
   const entries=selected.registry.entries;
-  const bindings=readBodies(session,reader,entries.map(entry=>entry.source_authority));
+  // Only accepted aggregate metadata can reuse this classification: its whole
+  // registry is authenticated before this call, and completed constructors are
+  // admitted exclusively for native source-target custody. Cold/full reads stay.
+  const bindingPins=entries.filter(entry=>!metadataOnly||entry.completed_constructor===undefined)
+    .map(entry=>entry.source_authority);
+  await acquireInputs(session,reader,bindingPins);
+  const bindings=readBodies(session,reader,bindingPins);
   if(metadataOnly){
-    for(let i=0;i<entries.length;i++){
-      const binding=bindings[i],nativeOnly=binding.kind==='source-target-native-custody-v1';
+    let i=0;
+    for(const entry of entries){
+      if(entry.completed_constructor!==undefined){
+        oldAuthorities.set(entry.authority_sha256,{entry,nativeOnly:true});continue;
+      }
+      const binding=bindings[i++],nativeOnly=binding.kind==='source-target-native-custody-v1';
       if(nativeOnly){keys(binding,'version,kind,source_evidence,native_patch','Unknown accepted native source custody');demand(binding.version===1,'Unknown accepted native source custody version');}
-      oldAuthorities.set(entries[i].authority_sha256,{entry:entries[i],nativeOnly});
+      oldAuthorities.set(entry.authority_sha256,{entry,nativeOnly});
     }
     return oldAuthorities;
   }
@@ -517,6 +613,7 @@ async function acceptedAuthorities(session,reader,selected,{metadataOnly=false,.
     }
     return binding.native_proof.publication;
   });
+  await acquireInputs(session,reader,productPins);
   const products=[];for(let i=0;i<productPins.length;i++)products.push(bindings[i].kind==='source-target-native-custody-v1'
     ?await storedProduct(session,reader,productPins[i],domain,false):readBody(session,reader,productPins[i]));
   const patchPins=[],patchesByEntry=new Map();
@@ -539,6 +636,7 @@ async function acceptedAuthorities(session,reader,selected,{metadataOnly=false,.
     oldAuthorities.set(entry.authority_sha256,{entry,patches:[]});
     patchesByEntry.set(entry,patches);
   }
+  await acquireInputs(session,reader,patchPins);
   const patches=[];for(const p of patchPins)patches.push(await storedProduct(session,reader,p,domain,false));
   for(const [entry,indices]of patchesByEntry)oldAuthorities.set(entry.authority_sha256,
     {entry,patches:indices.map(index=>patches[index])});
@@ -603,9 +701,9 @@ function finishCheckpoint(session,reader,{data,routes,physicalPaths,rebind,selec
 // The accepted report is authority only after the transport module has verified
 // the existing bot merge receipt, actual merged tree, trusted job and archive.
 // Keep the legacy synchronous entry independent of this optional async boundary.
-export async function qualifyAcceptedCheckpoint({reader,acceptedHandle}) {
+export async function qualifyAcceptedCheckpoint({reader,acceptedHandle,acquireAuthorityInputs}) {
   sessionCheck(reader);
-  const session = {reader,invocation:reader.invocation,repo:reader.repo,closed:false,handles:new Set()};
+  const session = {reader,invocation:reader.invocation,repo:reader.repo,closed:false,handles:new Set(),acquireAuthorityInputs};
 
   try {
     const {trusted,archiveReader}=rootCatalogue(session,reader,{accepted:true});
@@ -705,14 +803,15 @@ async function admitDerivedCheckpoint(session,reader,archiveReader,accepted,sele
       && valueSha(products[name])===(actual.decoded_sha256??actual.sha256),
     'Accepted whole checkpoint publication/member differs: '+name);
   };
-  demand(facts.version===1 && facts.kind==='derived-selected-checkpoint-candidate-v1'
+  demand((facts.version===1&&facts.kind==='derived-selected-checkpoint-candidate-v1'
+      ||facts.version===2&&facts.kind==='derived-selected-final-checkpoint-candidate-v2')
     && facts.accepted_checkpoint===false
     && facts.candidate_code_executed===false && facts.executing_commit===(source.executing_commit??source.baseline)
     && facts.baseline_commit===source.baseline && facts.candidate_commit===source.candidate_commit,
   'Accepted derived execution/selected vintage differs');
   keys(publication,'version,complete,kind,accepted_checkpoint,validation_stage,certificate,facts'+(!seedRoot || Object.hasOwn(publication??{},'routes')?',routes':''),
     'Unknown accepted derived publication');
-  demand(publication.version===1 && publication.complete===true && publication.kind===facts.kind
+  demand(publication.version===facts.version && publication.complete===true && publication.kind===facts.kind
     && publication.accepted_checkpoint===false && publication.validation_stage===facts.validation_stage,
   'Accepted derived publication completion differs');
   published('derived-facts.json',publication.facts); published('derived-certificate.json.gz',publication.certificate);
@@ -757,9 +856,19 @@ async function admitDerivedCheckpoint(session,reader,archiveReader,accepted,sele
     && commit(facts.baseline_accepted_execution?.execution_commit)
     && commit(facts.baseline_accepted_execution?.historical_selected_commit),
   'Accepted predecessor checkpoint custody differs');
-  const selected=selectedInput??await readSelectionProducts(session,reader);
+  const selected=selectedInput??await readSelectionProducts(session,reader,certificate.entries.length);
   supported(same(selected.selection,facts.candidate_selection), 'Accepted checkpoint does not cover the actual complete selector');
-  const manifest=readNamed(session,reader,selected.selection.manifest_path,selected.selection.sha256);
+  const final=selected.profile===2;
+  demand(final===(facts.version===2)&&(!final||!seedRoot),'Accepted checkpoint profile/selection differs');
+  const manifest=final?selected.manifest:readNamed(session,reader,selected.selection.manifest_path,selected.selection.sha256);
+  let rebind,oldAuthorities,acceptedIdentityRows;
+  if(final){
+    acceptedIdentityRows=acceptedAuthorityIdentities(facts.accepted_authorities);
+    demand(same(facts.candidate_bindings,{...selected.binding,accepted_authorities_sha256:valueSha(acceptedIdentityRows)}),
+      'Accepted checkpoint changed the complete final bank/context/native binding');
+    checkFinalCertificateContext(certificate,selected.bank.features);
+    rebind={request:{}};
+  }else{
   const ledgerStore=session.productStores.get(selected.ledger),patchStore=session.productStores.get(selected.patch);
   demand(session.stores.has(ledgerStore)&&session.stores.has(patchStore), 'Missing live private selected product store');
   demand(same(facts.candidate_bindings,{ledger_sha256:ledgerStore.canonical_sha256,registry_sha256:valueSha(selected.registry),
@@ -768,15 +877,16 @@ async function admitDerivedCheckpoint(session,reader,archiveReader,accepted,sele
   // Accepted aggregate consumers use request/facts only. Keep the other original
   // product pins in the certificate and route census; cold seeds and changed
   // rebinds still acquire their complete proof bodies.
-  const rebind=await (seedRoot?rebindProducts:rebindOperands)(session,reader,selected.ledger,
+  rebind=await (seedRoot?rebindProducts:rebindOperands)(session,reader,selected.ledger,
     {size:manifest.size,ownerCount:certificate.entries.length});
   // The trusted accepted execution already proved this exact aggregate.
   // Keep authority identities and full route custody, not historical patch copies.
-  const oldAuthorities=await acceptedAuthorities(session,reader,selected,{metadataOnly:true});
+  oldAuthorities=await acceptedAuthorities(session,reader,selected,{metadataOnly:true});
   demand(same(rebind.request.base_selection,nativeBaseSelection(selected.selection))
     &&rebind.request.authority_registry_sha256===valueSha(legacyRegistry(selected.registry,oldAuthorities)),
     'Accepted checkpoint rebind/native selection differs');
   demand(same(selected.ledger.current_targets,rebind.request.current_targets), 'Accepted complete target roster differs');
+  }
   demand(same(certificate.inputs.map(p=>p.source),certificate.binding.sources), 'Accepted complete source binding inventory differs');
   demand(same(certificate.binding.selection,selected.selection), 'Accepted certificate selected binding differs');
   const inventories=facts.actual_reader_inventories;
@@ -795,6 +905,17 @@ async function admitDerivedCheckpoint(session,reader,archiveReader,accepted,sele
         'Ambiguous accepted body-consumption identity');
     }
   }
+  let expectedPaths;
+  if(final){
+    keys(census,'version,kind,candidate_commit,candidate_selection,current_reference_paths,routes',
+      'Unknown accepted final-bank route census');
+    demand(census.version===2&&census.kind==='selected-checkpoint-scientific-routes-v2'
+      &&census.candidate_commit===facts.candidate_commit&&same(census.candidate_selection,selected.selection)
+      &&Array.isArray(census.current_reference_paths)&&census.current_reference_paths.every(safe)
+      &&same(census.current_reference_paths,[...new Set(census.current_reference_paths)].sort()),
+      'Accepted final-bank route selection/reference scope differs');
+    expectedPaths=finalScientificRoutePaths(manifest,certificate,selected.selection,census.current_reference_paths);
+  }else{
   keys(census,'version,kind,candidate_commit,candidate_selection,predecessor_paths,routes',
     'Unknown complete accepted scientific route census');
   demand(census.version===1 && census.kind==='selected-checkpoint-scientific-routes-v1'
@@ -802,7 +923,8 @@ async function admitDerivedCheckpoint(session,reader,archiveReader,accepted,sele
     && Array.isArray(census.predecessor_paths)
     && same(census.predecessor_paths,[...new Set(census.predecessor_paths)].sort())
     && census.predecessor_paths.every(safe), 'Accepted route predecessor/selection identity differs');
-  const expectedPaths=scientificRoutePaths(census.predecessor_paths,inventories.candidate,manifest,certificate,selected.selection);
+  expectedPaths=scientificRoutePaths(census.predecessor_paths,inventories.candidate,manifest,certificate,selected.selection);
+  }
   demand(Array.isArray(census.routes) && same(census.routes.map(p=>p.path),expectedPaths)
     && census.routes.every(validRoute), 'Incomplete accepted present/absent route census');
   const policyPins=facts.executing_authority_pins;
@@ -837,9 +959,22 @@ async function admitDerivedCheckpoint(session,reader,archiveReader,accepted,sele
       'Trusted producer policy no longer preserves accepted eligibility');
   }
   session.executablePaths=acceptedExecutablePaths(session,reader,census.routes,Object.values(inventories).flat(),facts,priorPolicy,rebind);
-  const physicalPaths = bindPhysicalLogicalSources(reader,certificate,Object.values(inventories).flat());
+  const physicalPaths = final?new Set(certificate.inputs.map(p=>p.source.path))
+    :bindPhysicalLogicalSources(reader,certificate,Object.values(inventories).flat());
   const masked = maskedLogicalSources(certificate,physicalPaths);
   supported(sameScientificRoutes(reader,census.routes,session.executablePaths,masked), 'Accepted checkpoint input or routing alternative changed');
+  if(final){
+    const data={version:2,kind:'verified-selected-final-state-v2',selected_commit:reader.version,
+      accepted_execution:{kind:'accepted-selected-checkpoint-artifact-v1',accepted_head:receipt.merge_commit,
+        reviewed_head:receipt.reviewed_head,request_id:receipt.request_id,pr_number:receipt.pr_number,
+        execution_commit:facts.executing_commit,historical_selected_commit:facts.candidate_commit,
+        source,report_sha256:source.report_sha256,trusted_catalogue_commit:trusted},
+      selection:selected.selection,baseSelection:nativeBaseSelection(selected.selection),certificate,manifest,
+      accepted_authorities:acceptedIdentityRows};
+    const state=newState(session,data,{reader,selected,physicalPaths,nativeRows:new Map(),
+      routes:currentMaskedRoutes(reader,census.routes,masked),referencePaths:census.current_reference_paths});
+    return Object.freeze({available:true,state});
+  }
   if (!seedRoot) {
     // This private path is reached only with the transport's genuine accepted
     // handle and the original producer's successful native result. Its complete
@@ -887,6 +1022,39 @@ export function checkpointExecutingPolicy({transition}) {
 
 const scientificPath=name=>safe(name) && !/\.(mjs|py)$/.test(name)
   && !['requirements.txt','data/ownership-selection.json',LOCATOR].includes(name);
+// New-profile custody retains identity, not the old replay operands. Both
+// digests matter: authority_sha256 intentionally excludes completed_constructor.
+function acceptedAuthorityIdentities(values) {
+  demand(Array.isArray(values),'Missing accepted authority identities');
+  let prior='';
+  for(const pair of values){
+    demand(Array.isArray(pair)&&pair.length===2&&pair.every(hash)&&pair[0]>prior,
+      'Duplicate, unordered or rebound accepted authority identity');prior=pair[0];
+  }
+  return values;
+}
+function checkFinalCertificateContext(certificate,features,facts={binding:certificate.binding,
+    complete_owners:features.length,complete_sources:certificate.inputs.length}) {
+  demand(features.length===certificate.entries.length,'Final context/certificate denominator differs');
+  coordinateCertificateCheck(certificate,facts,(r,i)=>{
+    const f=features[i];
+    demand(r[0]===f.id&&r[1]===f.pixelIndex&&r[2]===f.properties.parent_id,
+      'Final context differs from the accepted complete owner/source certificate');
+    if(f.geometry===null){
+      demand(!Object.hasOwn(f,'finishedFootprint')&&!Object.hasOwn(f,'additiveFootprint')&&r[8]===r[7],
+        'Lazy final context changed an untouched reference geometry');
+    }else demand(r[7]===valueSha(f.geometry)&&r[8]===valueSha(effectiveFootprintValue(f)),
+      'Final context differs from the accepted complete owner/source certificate');
+  });
+}
+function finalScientificRoutePaths(manifest,certificate,selection,referencePaths) {
+  const native=scientificNativeSelection(selection);
+  const paths=new Set([native.manifest_path,native.selected_geography.path,manifest.native_latitudes.path,...referencePaths]);
+  for(const input of certificate.inputs){paths.add(input.path);paths.add(input.source.path);}
+  if(selection.reference_projection)paths.add(selection.reference_projection.path);
+  demand([...paths].every(safe),'Incomplete final-bank native/source/reference route');
+  return [...paths].sort();
+}
 function scientificRoutePaths(predecessor,inventory,manifest,certificate,selection) {
   const paths=new Set(predecessor.filter(name=>name!==LOCATOR));
   for (const p of inventory) if (scientificPath(p.path)) paths.add(p.path);
@@ -904,6 +1072,14 @@ function validRoute(p) {
 export function checkpointRouteCensus({transition}) {
   const genuine=authenticateTransition({transition});
   const before=states.get(genuine.baseline), after=states.get(genuine.candidate), {session,reader}=after;
+  if(genuine.candidate.version===2){
+    const referencePaths=[...after.referencePaths].sort();
+    const names=finalScientificRoutePaths(genuine.candidate.manifest,genuine.candidate.certificate,genuine.candidate.selection,referencePaths);
+    const routes=names.map(name=>({path:name,tree:reader.treeRoute(name)}));
+    demand(routes.every(validRoute),'Unsupported current final-bank route entry');
+    return freeze({version:2,kind:'selected-checkpoint-scientific-routes-v2',candidate_commit:reader.version,
+      candidate_selection:genuine.candidate.selection,current_reference_paths:referencePaths,routes});
+  }
   const predecessor=before.routes.map(p=>p.path);
   const names=scientificRoutePaths(predecessor,[...reader.inventory.values()],genuine.candidate.manifest,
     genuine.candidate.certificate,genuine.candidate.selection);
@@ -979,14 +1155,14 @@ function nativeContext(proof) {
   if (proof.nativeContext) return proof.nativeContext;
   supported(state.manifest.native_asset_transport, 'Unsupported legacy native transport');
 
-  const image = new NativeAssetImage(reader,state.manifest,state.selection.manifest_path);
+  const image = new NativeAssetImage(reader,state.manifest,state.baseSelection.manifest_path);
 
   proof.nativeContext = {image,table:null,inputInventory:new Map()}; return proof.nativeContext;
 }
 function nativeAsset(proof, pin, context) {
   const {session,reader} = proof, state = proof.state;
   if (context.visitingWords?.has(pin.path)) return context.visitingWords.get(pin.path);
-  const name = path.posix.join(path.posix.dirname(state.selection.manifest_path),pin.path);
+  const name = path.posix.join(path.posix.dirname(state.baseSelection.manifest_path),pin.path);
   const ordinary = reader.treeRoute(name).length > 0;
 
   const encoded = ordinary ? reader.read(name,{expected:pin.sha256,decoded:pin.decoded_bytes}) : context.image.logical(name,pin);
@@ -1047,10 +1223,10 @@ inputs.push(pins[0]);
     }
   }
   const result = freeze({rows:rows.map(y => proof.nativeRows.get(y)),requested_rows:rows,
-    native_binding:{base_selection:state.baseSelection,manifest_sha256:state.selection.sha256,
+    native_binding:{base_selection:state.baseSelection,manifest_sha256:state.baseSelection.sha256,
       owners_sha256:state.certificate.binding.owners_sha256},inputs,
     custody:{accepted_checkpoint:state.accepted_execution,new_whole_inputs:[...(proof.nativeContext?.inputInventory.values()??[])],
-      retained_native_inputs:Array.from(proof.rebind.request.acquisition.native_inputs)},
+      retained_native_inputs:state.version===2?[]:Array.from(proof.rebind.request.acquisition.native_inputs)},
     reused_rows:rows.filter(y => !missing.includes(y)),acquired_rows:missing});
   projections.set(result,{session,kind:'native',rows});
   return result;
@@ -1121,12 +1297,14 @@ function disjointPatchRows(before,patches) {
 async function appendAuthority(session, reader, entry, domain) {
   const child = new ImmutableReader(reader.repo,reader.version,{invocation:reader.invocation,gitExecutable:reader.gitExecutable});
   child.inventory=reader.inventory; // retain actual appended-producer inputs without reopening them
-  let proof;
+  let proof, evidence;
   if(entry.completed_constructor!==undefined){
+    await acquireInputs(session,child,[entry.rule_preimage,entry.source_authority]);
     const {preimage,binding}=readRegistryAuthorityInputs(child,entry);
     if(binding?.kind==='source-target-native-custody-v1'){
+      await acquireInputs(session,child,[entry.completed_constructor,binding.source_evidence,binding.native_patch]);
       const constructed=await storedProduct(session,child,entry.completed_constructor,domain,'constructor');
-      const evidence=await storedProduct(session,child,binding.source_evidence,domain,'envelope');
+      evidence=await storedProduct(session,child,binding.source_evidence,domain,'envelope');
       const candidate=await storedProduct(session,child,binding.native_patch,domain,false);
       proof=verifyCompletedSourceTargetNativeAuthority({constructed,preimage,binding,evidence,candidate});
     }
@@ -1134,7 +1312,8 @@ async function appendAuthority(session, reader, entry, domain) {
   proof??=readRetainedRegistryAuthority(child,entry);
 
   return {entry,nativeOnly:proof.original_pins.source_evidence!==undefined,patches:proof.native_proof.native_patches,ledger:proof.original_ledger,
-    contract:proof.native_proof.native_contract,source_scope_ids:proof.source_scope_ids};
+    contract:proof.native_proof.native_contract,source_scope_ids:proof.source_scope_ids,
+    referenceSources:evidence?.source_membership?.parts?.map(p=>p.path)??[]};
 }
 function expectedNativeAcquisition(proof, neededRows) {
   const {session,reader,state} = proof, prior = proof.rebind.request.acquisition;
@@ -1153,7 +1332,7 @@ function expectedNativeAcquisition(proof, neededRows) {
   for (const group of groups.values()) for (const p of group.parts) pins.set(p.path,p);
   const bodyIdentity = p => { const {commit,...identity}=p; return identity; };
   const inputs=[...pins.values()].map(asset => {
-    const name=path.posix.join(path.posix.dirname(state.selection.manifest_path),asset.path);
+    const name=path.posix.join(path.posix.dirname(state.baseSelection.manifest_path),asset.path);
     let custody;
     if (reader.treeRoute(name)) {
       const p=reader.descriptor(name);
@@ -1310,7 +1489,7 @@ function projectCheckpointMetadata(state,reader,selection) {
   // Historical encoded aliases do not change the original scientific source.
   const identity=p=>Object.fromEntries(['commit','path','mode','git_blob_oid','bytes','sha256',
     'encoding','decoded_bytes','decoded_sha256'].filter(k=>Object.hasOwn(p,k)).map(k=>[k,p[k]]));
-  const entries=state.certificate.entries.map(row=>[...row]);
+  const entries=state.certificate.entries.map(row=>[...row]),propertiesById=new Map();
   const inputs=state.certificate.inputs.map((input,i)=>{
     const source=resolver.sources[i], original=source.original_source??source;
     const priorOriginal=input.source.original_source??input.source;
@@ -1326,7 +1505,7 @@ function projectCheckpointMetadata(state,reader,selection) {
         && owner?.id===row[0] && owner.index===row[1]
         && feature.properties?.parent_id===owner.province_id && valueSha(feature.geometry)===row[7],
         'Checkpoint metadata application changes original geometry/ordinal/owner');
-      row[6]=valueSha(feature);
+      row[6]=valueSha(feature);propertiesById.set(row[0],feature.properties);
     }
     return {path:input.path,source:actual.source,whole_body_sha256:actual.whole_sha256,bytes:actual.body.length};
   });
@@ -1343,7 +1522,7 @@ function projectCheckpointMetadata(state,reader,selection) {
   const paths=new Set([selection.reference_projection.path,projection.hierarchy.after.path,
     'data/geographic-releases/current-manifest.json',path.posix.join('data/geographic-releases',pointer.path),
     ...projection.source_updates.map(update=>update.logical_path)]);
-  return {certificate:freeze(certificate),paths,reference:projection.reference,nativeReference:projection.native_reference};
+  return {certificate:freeze(certificate),paths,reference:projection.reference,nativeReference:projection.native_reference,propertiesById};
 }
 
 /** Visit complete authenticated row batches without retaining newly expanded
@@ -1391,7 +1570,7 @@ export async function visitNativeIntervals({state,rows,visit}) {
   demand(!context.intervalVisit,'Nested native interval visit');context.intervalVisit=true;
   let table,body,bodyPin,partIndex=0,failed=false;const reused=[],acquired=[];
   async function open(pin){
-    const name=path.posix.join(path.posix.dirname(state.selection.manifest_path),pin.path);
+    const name=path.posix.join(path.posix.dirname(state.baseSelection.manifest_path),pin.path);
     const chunks=proof.reader.treeRoute(name).length?proof.reader.stream(name,{expected:pin.sha256}):context.image.logicalStream(name,pin);
     const store=await openNativeWordStore(chunks,pin);
     for(const [key,p]of proof.reader.inventory)if(p.whole_body_consumed)context.inputInventory.set(key,{...p});
@@ -1437,7 +1616,7 @@ export async function visitNativeIntervals({state,rows,visit}) {
       finally{await iterator.return();}
     }
     return {reused_rows:reused,acquired_rows:acquired,custody:{accepted_checkpoint:state.accepted_execution,
-      new_whole_inputs:[...context.inputInventory.values()],retained_native_inputs:Array.from(proof.rebind.request.acquisition.native_inputs)}};
+      new_whole_inputs:[...context.inputInventory.values()],retained_native_inputs:state.version===2?[]:Array.from(proof.rebind.request.acquisition.native_inputs)}};
   }catch(error){failed=true;throw error;}
   finally{
     const errors=[];
@@ -1448,13 +1627,302 @@ export async function visitNativeIntervals({state,rows,visit}) {
   }
 }
 
+// Only newly issued evidence is read after final-bank adoption. The existing
+// authority reader still admits the complete original scope and physical proof.
+async function finalNativeAdditions(session,reader,state,selected,priorIdentities,ownerCount=state.certificate?.entries.length) {
+  const hook=selected.selection.change_evidence;
+  if(!hook||same(hook,state.selection.change_evidence))return {identities:priorIdentities,components:[],patches:[],referenceSources:[]};
+  demand(state.version===2,'Representation migration cannot add scientific cells');
+  await acquireInputs(session,reader,[hook]);
+  const registry=readBody(session,reader,hook);
+  const entries=[...authorityRegistry(registry).values()],seen=new Set(priorIdentities.map(pair=>pair[0]));
+  const components=[],patches=[],referenceSources=new Set(),identities=priorIdentities.map(pair=>[...pair]);
+  const contract=Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k=>[k,state.manifest[k]]));
+  const native={id:state.manifest.geographic_release,footprints_sha256:state.manifest.footprints_sha256,hierarchy_sha256:state.manifest.hierarchy_sha256};
+  for(const entry of entries){
+    demand(!seen.has(entry.authority_sha256),'Candidate repeats an already accepted authority identity');seen.add(entry.authority_sha256);
+    demand(entry.policy_id==='retained-source-literal-additions'&&entry.policy_version===1,'Unsupported appended source policy');
+    const qualified=await appendAuthority(session,reader,entry,{size:state.manifest.size,ownerCount});
+    supported(qualified.nativeOnly,'Final-bank positive changes require original native source-target authority');
+    demand(same(qualified.contract,contract)&&qualified.ledger.parent_inventory===undefined,
+      'New native authority changed the original physical/source contract');
+    demand(qualified.patches.every(p=>same(p.base_reference,selected.reference)
+      ||selected.selection.reference_projection&&same(p.base_reference,native)),
+      'New native authority belongs to a different reference');
+    for(const row of qualified.ledger.rows){
+      if(row.disposition==='assigned'){
+        const component={...row,authority_sha256:entry.authority_sha256,rule_sha256:entry.rule_sha256};
+        demand(nativeOnlyComponent(component,valueSha),'New positive component is not an admitted native cell set');components.push(component);
+      }
+      // Nonpositive/held dispositions remain in the complete authenticated new
+      // proof. They grant no context or word mutation and are not replay inputs.
+    }
+    for(const name of qualified.referenceSources)referenceSources.add(name);
+    patches.push(...qualified.patches);identities.push([entry.authority_sha256,valueSha(entry)]);
+  }
+  identities.sort((a,b)=>a[0].localeCompare(b[0]));acceptedAuthorityIdentities(identities);
+  return {identities,components,patches,referenceSources:[...referenceSources]};
+}
+function finalPatchRows(patches,size,ownerCount) {
+  const groups=new Map();
+  for(const patch of patches){completeRows(patch.rows,size,ownerCount);
+    for(const row of patch.rows){const runs=groups.get(row.y)??[];runs.push(...Array.from(row.runs,run=>[...run]));groups.set(row.y,runs);}}
+  const rows=[...groups].sort((a,b)=>a[0]-b[0]).map(([y,runs])=>({y,runs:runs.sort((a,b)=>a[0]-b[0]||a[1]-b[1]||a[2]-b[2])}));
+  // Even equal-owner overlap is not a new disjoint scientific addition.
+  completeRows(rows,size,ownerCount);return rows;
+}
+function sameWords(a,b){return a.length===b.length&&a.every((word,i)=>word===b[i]);}
+// Normal authority is the immutable accepted main supplied by the merge queue,
+// not a locator or a replayable chain of old repair receipts. Read current E,
+// validate only the new reviewed proposal, and require the complete result.
+export async function compareAcceptedFinalBank({beforeReader,afterReader,acquireAuthorityInputs,acquireMetadataInputs}) {
+  sessionCheck(beforeReader);
+  const session={invocation:beforeReader.invocation,repo:beforeReader.repo,closed:false,stores:new Set(),acquireAuthorityInputs};
+  sessionCheck(afterReader,session);
+  try {
+    const beforeSelection=beforeReader.json('data/ownership-selection.json');
+    const afterSelection=afterReader.json('data/ownership-selection.json');
+    demand(finalBankSelection(beforeSelection)&&finalBankSelection(afterSelection),
+      'Direct final-map comparison requires accepted and proposed final banks');
+    demand(same(nativeBaseSelection(beforeSelection),nativeBaseSelection(afterSelection)),
+      'Final bank changed original native/source/domain contract');
+    const before=await readFinalSelectionProducts(session,beforeReader,beforeSelection);
+    const count=before.bank.features.length;
+    const after=await readFinalSelectionProducts(session,afterReader,afterSelection,count);
+    demand(same(before.index.compatibility_files,after.index.compatibility_files),
+      'Final bank changed the accepted fixed compatibility roster');
+    for(const member of before.index.compatibility_files){
+      const old=beforeReader.treeRoute(path.posix.dirname(before.bank.indexIdentity.path)+'/'+member.path);
+      const current=afterReader.treeRoute(path.posix.dirname(after.bank.indexIdentity.path)+'/'+member.path);
+      // Compare object identity, not path spelling or missing local body size.
+      demand(old.split('\t')[0]===current.split('\t')[0], 'Final bank rebound an accepted compatibility body');
+    }
+    let sources;
+    const originalSources=async()=>{
+      if(sources)return sources;
+      const source=scientificNativeSelection(beforeSelection).selected_geography;
+      const route=beforeReader.treeRoute(source.path),match=/^(100644) blob ([a-f0-9]{40})\t/.exec(route);
+      demand(match,'Original source index is not an ordinary accepted file');
+      await acquireInputs(session,beforeReader,[{commit:beforeReader.version,path:source.path,mode:match[1],
+        git_blob_oid:match[2],bytes:source.bytes,sha256:source.sha256}]);
+      const bank=readSelectedGeometryBank(beforeReader,beforeSelection);
+      demand(bank.locations===count&&bank.footprints_sha256===before.manifest.footprints_sha256,
+        'Original source index differs from accepted owner scope');
+      await acquireInputs(session,beforeReader,[bank.world_index]);
+      const world=readBody(session,beforeReader,bank.world_index);
+      const paths=world.parts.map(p=>'data/'+p);
+      demand(new Set(paths).size===paths.length,'Duplicate original source containing route');
+      sources=new Map();
+      for(const p of [...bank.unchanged_files,...bank.overrides]){
+        pin(p);const name=p.logical_path??p.path;
+        demand(paths.includes(name)&&!sources.has(name),'Foreign or duplicate original source route');sources.set(name,p);
+      }
+      demand(sources.size===paths.length,'Incomplete original source containing roster');
+      return sources;
+    };
+    let reference=before.reference,properties=new Map();
+    if(!same(beforeSelection.reference_projection,afterSelection.reference_projection)){
+      demand(afterSelection.reference_projection,'Removing a selected metadata application is unsupported');
+      const projection=afterReader.json(afterSelection.reference_projection.path,{expected:afterSelection.reference_projection.sha256});
+      const previous=beforeSelection.reference_projection
+        ?beforeReader.json(beforeSelection.reference_projection.path,{expected:beforeSelection.reference_projection.sha256}):null;
+      const originalProperties=new Map((previous?.location_changes??[]).map(row=>[row.location_id,row.before_properties]));
+      const owners=before.bank.features.map(f=>({id:f.id,index:f.pixelIndex,
+        province_id:(originalProperties.get(f.id)??f.properties).parent_id}));
+      const roster=await originalSources();
+      const inputs=[projection.hierarchy.before,projection.hierarchy.after,...projection.receipts,
+        ...projection.source_updates.flatMap(update=>[update.before,update.after])];
+      await acquireInputs(session,afterReader,inputs);
+      const applied=validateReferenceMetadataProjection({projection,selection:afterSelection,manifest:before.manifest,
+        owners,originalSources:roster,read:p=>afterReader.read(p.path,{version:resolvePin(afterReader,p).version,expected:p.sha256})});
+      // Keep the existing receipt/release/current-tree joins without reopening
+      // original native transports, artifact receipts or all source bodies.
+      const readMetadata=async(name,expected)=>{
+        await acquireMetadataInputs?.(afterReader,[{path:name,...(expected?{sha256:expected}:{})}]);
+        return afterReader.read(name,{...(expected?{expected}:{})});
+      };
+      const pointer=JSON.parse(await readMetadata('data/geographic-releases/current-manifest.json'));
+      demand(safe(pointer.path)&&hash(pointer.sha256),'Unbound selected geographic release');
+      const encoded=await readMetadata('data/geographic-releases/'+pointer.path,pointer.sha256);
+      demand(encoded.length>=18&&encoded[0]===31&&encoded[1]===139,'Invalid whole reference release gzip');
+      const decodedBytes=encoded.readUInt32LE(encoded.length-4),decoded=gunzipSync(encoded,{maxOutputLength:decodedBytes});
+      demand(decoded.length===decodedBytes,'Whole reference release decoded size differs');
+      const releases=JSON.parse(decoded).releases;
+      demand(Array.isArray(releases)&&releases.length>0&&new Set(releases.map(r=>r.id)).size===releases.length,'Incomplete selected release roster');
+      const native=releases.find(r=>r.id===scientificNativeSelection(beforeSelection).release_id),current=releases.at(-1);
+      const identity=row=>Object.fromEntries(['id','footprints_sha256','hierarchy_sha256'].map(k=>[k,row?.[k]]));
+      demand(same(identity(native),applied.nativeReference)&&same(identity(current),applied.reference),
+        'Current reference metadata differs from the actual selected releases');
+      const receipts=new Set(Object.values(current.metadata?.metadata_migration_sha256??{}));
+      demand(applied.releaseReceipts.every(p=>receipts.has(p.sha256)),'Current reference release does not bind every applied metadata receipt');
+      const matches=(name,p)=>afterReader.treeRoute(name)===p.mode+' blob '+p.git_blob_oid+'\t'+name+'\0';
+      demand(projection.hierarchy.after.path==='data/hierarchy.json'&&projection.hierarchy.after.encoding===undefined
+        &&matches('data/hierarchy.json',projection.hierarchy.after),'Current hierarchy differs from the metadata application');
+      const source=readSelectedGeometryBank(beforeReader,beforeSelection);
+      demand(matches('data/world-index.json',source.world_index),'Source bank original index differs from current complete index');
+      for(const [name,p] of roster){
+        const update=applied.sourceUpdates.get(name);
+        if(update)demand(update.after.path===name&&update.after.encoding===undefined&&matches(name,update.after),
+          'Current complete source differs from the metadata application');
+        else if(!p.logical_path)demand(matches(name,p),'Current original containing body differs without a complete metadata application');
+      }
+      demand(applied.owners.every((owner,i)=>owner.id===after.bank.features[i].id&&owner.index===after.bank.features[i].pixelIndex
+        &&owner.province_id===after.bank.features[i].properties.parent_id),'Final context differs from projected owner identities');
+      reference=applied.reference;
+      properties=new Map(projection.location_changes.map(p=>[p.location_id,p.after_properties]));
+    }
+    demand(same(after.reference,reference),'Final bank silently changed content reference');
+    const added=await finalNativeAdditions(session,afterReader,
+      {version:2,selection:beforeSelection,manifest:before.manifest},after,[],count);
+    const rows=finalPatchRows(added.patches,before.manifest.size,count);
+    demand(same(rows,finalPatchRows(added.components.map(c=>({rows:c.native_rows})),before.manifest.size,count)),
+      'New proposal includes cells outside its assigned dispositions');
+    const owners=new Set(before.bank.features.map(f=>f.pixelIndex));
+    const expected=mergeUnassignedNativeIntervals(before.bank.ownership,rows,{owners,allowed:owners});
+    demand(sameWords(expected.rows,after.bank.ownership.rows)&&sameWords(expected.runs,after.bank.ownership.runs),
+      'Final bank omitted, invented, held or reassigned cells outside the qualified new intervals');
+    const byTarget=new Map();
+    for(const component of added.components){const group=byTarget.get(component.target_id)??[];group.push(component);byTarget.set(component.target_id,group);}
+    const lazy=new Set(before.bank.features.filter(f=>f.geometry===null&&byTarget.has(f.id)).map(f=>f.id)),originals=new Map();
+    if(lazy.size){
+      // Candidate paths only locate a member of the accepted immutable source
+      // index. They cannot supply the original geometry or redefine its pin.
+      const sources=await originalSources();
+      for(const name of added.referenceSources){
+        const pin=sources.get(name);demand(pin,'New target source is outside the accepted original source roster');
+        await acquireInputs(session,beforeReader,[pin]);
+        const collection=readBody(session,beforeReader,pin);
+        demand(collection.type==='FeatureCollection'&&Array.isArray(collection.features),'Incomplete original target containing source');
+        for(const feature of collection.features)if(lazy.has(feature.id)){
+          demand(!originals.has(feature.id),'Duplicate original target identity');originals.set(feature.id,feature.geometry);
+        }
+      }
+      demand(originals.size===lazy.size,'New lazy target lacks its accepted original containing source');
+    }
+    const changedIds=[];
+    for(let i=0;i<count;i++){
+      const feature=before.bank.features[i],components=byTarget.get(feature.id)??[];
+      const source=originals.has(feature.id)?{...feature,geometry:originals.get(feature.id)}:feature;
+      const current=extendFinishedNativeFootprint({...source,properties:properties.get(feature.id)??source.properties},components);
+      demand(same(after.bank.features[i],current),'Final context changed outside the qualified original owner/reference/native scope');
+      if(!same(feature,current))changedIds.push(feature.id);byTarget.delete(feature.id);
+    }
+    demand(byTarget.size===0,'New native authority names a foreign owner');
+    return {version:1,method:'selected-native-owner-conservation-v1',status:'no-new-native-loss',
+      baseline_selection:beforeSelection,candidate_selection:afterSelection,
+      affected_rows:rows.length,lost_or_reassigned_cells:0,intervals:[],
+      repair_visibility:{new_components:added.components.length,witnesses:added.components.map(c=>{
+        const row=c.native_rows.at(0),run=Array.from(row.runs)[0];
+        return {component_id:c.component_id,authority_sha256:c.authority_sha256,native_rows_sha256:valueSha(c.native_rows),
+          x:run[0],y:row.y,previous_owner:0,candidate_owner:run[2]};})},
+      native_row_scope:{proof:'complete-accepted-final-bank-and-qualified-new-intervals',
+        compared_rows:before.manifest.size,changed_rows:rows.map(r=>r.y),representation_migration:false,added_cells:expected.addedCells},
+      checkpoint_custody:{baseline_commit:beforeReader.version,accepted_bank:before.bank.indexIdentity,candidate_bank:after.bank.indexIdentity},
+      changed_ids:changedIds,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],
+      candidate_code_executed:false,
+      limits:['Accepted main is the baseline. Only the new reviewed proposal is consumed; historical repairs and checkpoint promotion are not replayed.',
+        'Exact map/context equality does not itself establish the scientific truth of an author-provided proposal.']};
+  } finally {session.closed=true;closeStores(session);}
+}
+
+async function qualifyFinalBankTransition(state,reader,selected,baseProof) {
+  const {session}=baseProof,migration=state.version!==2;
+  supported(same(nativeBaseSelection(selected.selection),state.baseSelection),'Final bank changed original native/source/domain contract');
+  demand(!migration||selected.selection.change_evidence===undefined,'Representation migration cannot add scientific authority');
+  const metadata=projectCheckpointMetadata(state,reader,selected.selection);
+  demand(!migration||metadata.paths.size===0,'Representation migration cannot also change reference metadata');
+  const masked=new Set([...maskedLogicalSources(state.certificate,baseProof.physicalPaths),...metadata.paths]);
+  supported(sameScientificRoutes(reader,baseProof.routes,session.executablePaths,masked),'Final bank changed an unqualified source/native/reference route');
+  const before=await acceptedPreparedBank(state,baseProof);
+  demand(same(before.index.compatibility_files,selected.index.compatibility_files),
+    'Final bank changed the accepted fixed compatibility roster');
+  const priorRoot=path.posix.dirname(before.indexIdentity.path),nextRoot=path.posix.dirname(selected.bank.indexIdentity.path);
+  for(const member of before.index.compatibility_files){
+    const prior=baseProof.reader.descriptor(priorRoot+'/'+member.path),next=reader.descriptor(nextRoot+'/'+member.path);
+    demand(prior.mode==='100644'&&next.mode===prior.mode&&next.git_blob_oid===prior.git_blob_oid
+      &&prior.bytes===member.bytes&&next.bytes===member.bytes,'Final bank rebound an accepted compatibility body');
+  }
+  const reference=before.index.preparedOwnership.base_reference;
+  demand(same(selected.reference,metadata.reference??reference),'Final bank silently changed content reference');
+  const identities=migration?state.registry.entries.map(entry=>[entry.authority_sha256,valueSha(entry)]).sort((a,b)=>a[0].localeCompare(b[0])):state.accepted_authorities;
+  acceptedAuthorityIdentities(identities);
+  const added=await finalNativeAdditions(session,reader,state,selected,identities);
+  const rows=finalPatchRows(added.patches,state.manifest.size,state.certificate.entries.length);
+  const ownerSet=new Set(state.certificate.entries.map(row=>row[1]));
+  const expected=mergeUnassignedNativeIntervals(before.ownership,rows,{owners:ownerSet,allowed:ownerSet});
+  demand(sameWords(expected.rows,selected.bank.ownership.rows)&&sameWords(expected.runs,selected.bank.ownership.runs),
+    'Final bank omitted, invented, held or reassigned cells outside the qualified new intervals');
+  const byTarget=new Map();
+  for(const component of added.components){const values=byTarget.get(component.target_id)??[];values.push(component);byTarget.set(component.target_id,values);}
+  const changedIds=[],entries=metadata.certificate.entries.map(row=>[...row]);
+  const expectedFeatures=before.features.map((feature,i)=>{
+    const row=entries[i],components=byTarget.get(feature.id)??[];
+    let source=feature;
+    if(feature.geometry===null){
+      demand(!Object.hasOwn(feature,'finishedFootprint')&&!Object.hasOwn(feature,'additiveFootprint'),
+        'Lazy prior context cannot hide an effective footprint');
+      if(migration)demand(state.certificate.entries[i][8]===valueSha({base_geometry_sha256:row[7],additions:[]}),
+        'Lazy migration context omitted an accepted primitive');
+      if(components.length){
+        // The newly admitted source-target body already contains the complete
+        // original target geometry. Join its exact certificate identity; do not
+        // hydrate unrelated historical source bodies merely to make it eager.
+        demand(components.every(c=>c.base_geometry_sha256===row[7]&&valueSha(c.base_geometry)===row[7]),
+          'New native target differs from its original lazy reference geometry');
+        source={...feature,geometry:components[0].base_geometry};
+      }
+    }
+    const original=finishEffectiveFootprint(source),properties=metadata.propertiesById?.get(feature.id)??original.properties;
+    const after=extendFinishedNativeFootprint({...original,properties},components);
+    const actual=selected.bank.features[i];
+    demand(same(actual,after),'Final context changed outside the qualified original owner/reference/native scope');
+    if(!same(feature,after))changedIds.push(feature.id);
+    row[8]=after.geometry===null?row[7]:valueSha(effectiveFootprintValue(after));
+    if(components.length)row[9]=[...row[9],...components.map(c=>c.native_bounds)];
+    byTarget.delete(feature.id);return after;
+  });
+  demand(byTarget.size===0,'New native authority names a foreign owner');
+  const certificate={...metadata.certificate,entries,binding:{...metadata.certificate.binding,selection:selected.selection,release:selected.reference}};
+  checkFinalCertificateContext(certificate,expectedFeatures);
+  let referencePaths;
+  if(metadata.paths.size)referencePaths=[...metadata.paths];
+  else if(!migration)referencePaths=baseProof.referencePaths;
+  else {
+    referencePaths=[];
+    if(selected.selection.reference_projection){
+      const projection=reader.json(selected.selection.reference_projection.path),pointer=reader.json('data/geographic-releases/current-manifest.json');
+      referencePaths=[selected.selection.reference_projection.path,projection.hierarchy.after.path,
+        'data/geographic-releases/current-manifest.json',path.posix.join('data/geographic-releases',pointer.path),
+        ...projection.source_updates.map(update=>update.logical_path)];
+    }
+  }
+  referencePaths=[...new Set(referencePaths)].sort();
+  const routeNames=finalScientificRoutePaths(state.manifest,certificate,selected.selection,referencePaths);
+  const routes=routeNames.map(name=>({path:name,tree:reader.treeRoute(name)}));
+  demand(routes.every(validRoute),'Incomplete qualified final-bank source route');
+  const candidate=newState(session,{version:2,kind:'verified-selected-final-state-v2',selected_commit:reader.version,
+    accepted_execution:state.accepted_execution,selection:selected.selection,baseSelection:state.baseSelection,
+    certificate,manifest:state.manifest,accepted_authorities:added.identities},
+    {session,reader,selected,nativeRows:new Map(),physicalPaths:new Set(certificate.inputs.map(p=>p.source.path)),routes,referencePaths,
+      finalComparison:{migration,addedCells:expected.addedCells,baselineIndex:before.indexIdentity,
+        candidateIndex:selected.bank.indexIdentity,witnesses:added.components.map(component=>{
+          const row=component.native_rows.at(0),run=Array.from(row.runs)[0];
+          return {component_id:component.component_id,authority_sha256:component.authority_sha256,
+            native_rows_sha256:valueSha(component.native_rows),x:run[0],y:row.y,previous_owner:0,candidate_owner:run[2]};
+        }),rows:rows.map(row=>row.y)}});
+  const transition=freeze({available:true,baseline:state,candidate,changedIds,changedNativeRows:rows.map(row=>row.y)});
+  transitions.set(transition,session);return transition;
+}
+
 /** Exhaustive actual append-only transition. Never reacquires a full selection.
  * A valid baseline remains usable when an unsupported candidate needs cold work. */
 export async function qualifyTransition({state,reader}) {
   const baseProof=getState(state,reader), {session}=baseProof,priorStores=new Set(session.stores);
   try {
 
-    const selected=await readSelectionProducts(session,reader);
+    const selected=await readSelectionProducts(session,reader,state.certificate.entries.length);
+    if(selected.profile===2)return await qualifyFinalBankTransition(state,reader,selected,baseProof);
+    demand(state.version!==2,'Current final-bank authority cannot downgrade to historical replay');
     const {oldRows,rowsPreserved,authoritiesPreserved}=normaliseTransitionSelection(session,state,selected);
     supported(same(nativeBaseSelection(selected.selection),state.baseSelection), 'Selected native/source/domain/owner base changed');
     const metadata=projectCheckpointMetadata(state,reader,selected.selection);
@@ -1536,6 +2004,17 @@ export function authenticateTransition({transition}) {
     && getState(transition.candidate).session===session,
   'Foreign transition state or invocation');
   return transition;
+}
+
+// Read-only consumption of the SAME private exhaustive final-bank comparison.
+// This cannot mint a transition or admit a public/caller-constructed scope.
+export function finalBankComparison({transition}) {
+  const genuine=authenticateTransition({transition});
+  if(genuine.candidate.version!==2)return null;
+  const proof=getState(genuine.candidate).finalComparison;
+  demand(proof&&proof.rows.length===genuine.changedNativeRows.length
+    &&same(proof.rows,genuine.changedNativeRows),'Missing privately qualified complete final-bank comparison');
+  return freeze({...proof});
 }
 
 // Pure arithmetic only. This function cannot mint a checkpoint, projector or

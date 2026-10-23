@@ -66,6 +66,33 @@ test('Cloudflare config protects assets and never provisions or migrates D1', ()
   assert.equal('DATABASE_URL' in config.vars, false);
 });
 
+test('public config preserves omitted Access settings without dropping explicit configuration', () => {
+  for (const options of [{}, {domain: '', audience: ''}]) {
+    const config = cloudflareConfig({...options, publicReadOnly: true});
+    assert.equal(config.keep_vars, true);
+    assert.deepEqual(config.vars, {ATLAS_CONTENT_BACKEND: 'postgres', ATLAS_READ_ONLY: '1', ATLAS_PUBLIC_READ_ONLY: '1'});
+  }
+  for (const options of [{domain: env.ATLAS_ACCESS_TEAM_DOMAIN}, {audience: env.ATLAS_ACCESS_AUD},
+    {domain: env.ATLAS_ACCESS_TEAM_DOMAIN, audience: env.ATLAS_ACCESS_AUD}]) {
+    const config = cloudflareConfig({...options, publicReadOnly: true});
+    assert.equal(config.keep_vars, true);
+    assert.deepEqual(config.vars, {ATLAS_CONTENT_BACKEND: 'postgres', ATLAS_READ_ONLY: '1', ATLAS_PUBLIC_READ_ONLY: '1',
+      ...(options.domain ? {ATLAS_ACCESS_TEAM_DOMAIN: options.domain} : {}),
+      ...(options.audience ? {ATLAS_ACCESS_AUD: options.audience} : {})});
+  }
+  for (const publicReadOnly of [undefined, false, 'true']) {
+    const config = cloudflareConfig({publicReadOnly});
+    assert.equal(Object.hasOwn(config, 'keep_vars'), false);
+    assert.equal(config.vars.ATLAS_ACCESS_TEAM_DOMAIN, '');
+    assert.equal(config.vars.ATLAS_ACCESS_AUD, '');
+    assert.equal(config.vars.ATLAS_PUBLIC_READ_ONLY, '0');
+  }
+  const privateConfig = cloudflareConfig({domain: env.ATLAS_ACCESS_TEAM_DOMAIN, audience: env.ATLAS_ACCESS_AUD});
+  assert.equal(privateConfig.vars.ATLAS_ACCESS_TEAM_DOMAIN, env.ATLAS_ACCESS_TEAM_DOMAIN);
+  assert.equal(privateConfig.vars.ATLAS_ACCESS_AUD, env.ATLAS_ACCESS_AUD);
+  assert.deepEqual(cloudflareConfig({preserveAssets: true, publicReadOnly: true}), cloudflareConfig({preserveAssets: true}));
+});
+
 test('explicit public mode permits real assets/API reads and always blocks writes', async () => {
   let calls = 0;
   const worker = protectedWorker({fetch(request, actualEnv, ctx) {
@@ -94,4 +121,13 @@ test('authenticated wrapper preserves the real atlas API and static asset routin
   assert.equal(response.status, 200);
   assert.equal((await response.json()).version, 1);
   assert.equal((await worker.fetch(req('/api/import', jwt, 'POST'), actualEnv)).status, 503);
+});
+
+
+test('Worker-only compatibility config reuses assets and existing bindings without credentials or uploads',()=>{
+ const value=cloudflareConfig({preserveAssets:true});
+ assert.equal(value.name,'worldatlas-explorer');assert.equal(value.assets,undefined);assert.equal(value.r2_buckets,undefined);assert.equal(value.vars,undefined);
+ assert.deepEqual(value.unsafe.metadata,{keep_assets:true,keep_bindings:['plain_text','json','secret_text','secret_key','r2_bucket','hyperdrive','assets']});
+ assert.equal(value.preview_urls,false);assert.equal(value.workers_dev,true);
+ const ordinary=cloudflareConfig({publicReadOnly:true});assert.equal(ordinary.unsafe,undefined);assert.equal(ordinary.vars.ATLAS_PUBLIC_READ_ONLY,'1');assert.ok(ordinary.assets.directory);
 });

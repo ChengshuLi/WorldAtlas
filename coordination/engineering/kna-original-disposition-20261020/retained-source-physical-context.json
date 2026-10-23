@@ -1,0 +1,3865 @@
+{
+  "version": 1,
+  "original_scope": {
+    "package_id": "gb-KNA-ADM1--repair-evaluation",
+    "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "queue_blob": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "queue_row_index_zero_based": 184,
+    "source_family": "gb:KNA:ADM1",
+    "source_family_index": 181,
+    "native_cells": 305,
+    "land_cells": 305,
+    "inland_water_cells": 0,
+    "source_relative_cells": 0,
+    "intervals": 125,
+    "owner_indices": [
+      7119
+    ],
+    "source_feature_indices": [
+      41036,
+      41037,
+      41039,
+      41040,
+      41041,
+      41043,
+      41044,
+      41046,
+      41047,
+      41048
+    ],
+    "native_blocks": [
+      28
+    ],
+    "contract_question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+    "completion_clause": "Every exact interval must be either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned."
+  },
+  "recorded_source_terms_and_vintage": {
+    "metadata_file": "data/administrative-sources.json",
+    "metadata_commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+    "metadata_blob": "2747b845f0c5654765da3b951c9074e52f220077",
+    "metadata_file_bytes": 661416,
+    "catalogue_path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+    "catalogue_blob": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+    "catalogue_metadata_sha256": "553690708f4f13b9156d58c089fbc954f9cbcffe32d4ce2bd567022bd7422559",
+    "boundary_name": "Saint Kitts and Nevis",
+    "boundary_type": "ADM1",
+    "boundary_canonical": "parish",
+    "boundary_source": "OpenStreetMap",
+    "represented_year_claim": "2021",
+    "source_metadata_update_date": "Thu Jan 19 07:31:04 2023",
+    "metadata_build_date": "Dec 12, 2023",
+    "recorded_license": "Creative Commons Attribution-ShareAlike 2.0",
+    "recorded_license_source": "www.openstreetmap.org/copyright",
+    "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KNA/ADM1/geoBoundaries-KNA-ADM1_simplified.geojson",
+    "advertised_and_catalogue_feature_count": 14,
+    "catalogue_original_uncompressed_sha256": "5d94bc5303f78b68e4f0ba5783611f7c292540e72776aa236c53883560d1ebcd",
+    "limit": "These are retained source-catalogue claims; the represented year and metadata timestamps are not independently verified effective dates or evidence of territorial suitability."
+  },
+  "retained_source_identity": {
+    "owner_index": 7119,
+    "owner_source_id": "atlas:territory:KNA",
+    "owner_name": "Saint Kitts and Nevis",
+    "province_id": "framework:province:saint-kitts-and-nevis:3f2e2541652a",
+    "location_basis": "Compact source country/territory",
+    "lineage_atoms_count": 14,
+    "lineage_atoms": [
+      "gb:KNA:ADM1:52472329B16958301240037",
+      "gb:KNA:ADM1:52472329B19766585583682",
+      "gb:KNA:ADM1:52472329B22687598135129",
+      "gb:KNA:ADM1:52472329B33043462803625",
+      "gb:KNA:ADM1:52472329B33869241417022",
+      "gb:KNA:ADM1:52472329B35296791475509",
+      "gb:KNA:ADM1:52472329B55778484611891",
+      "gb:KNA:ADM1:52472329B57902249562742",
+      "gb:KNA:ADM1:52472329B65639645183115",
+      "gb:KNA:ADM1:52472329B68765441097226",
+      "gb:KNA:ADM1:52472329B72200716330993",
+      "gb:KNA:ADM1:52472329B86967002358759",
+      "gb:KNA:ADM1:52472329B95288510107666",
+      "gb:KNA:ADM1:52472329B96254136738283"
+    ],
+    "coarse_owner_contact": "The retained owner-tagged block-028 candidate runs include source feature indices 41036–41048 (13 features); roster records for these all identify gb:KNA:ADM1 and owner 7119. Three of these (41038, 41042, 41045) are additional same-family contacts beyond the queue row's ten listed target features. The remaining lineage atom, feature 41035 (Christ Church Nichola Town), is not in those owner-tagged block-028 runs. No foreign-family feature is evidenced in this coarse owner-tagged contact slice.",
+    "limit": "This is a retained whole-block/source-lineage context check, not an exact per-key competitor, ancestry, territorial-exclusion, or repair-qualification finding. It does not prove that every competitor or historical exclusion is resolved."
+  },
+  "exact_interval_witness": {
+    "version": 1,
+    "kind": "retained-kna-original-source-physical-interval-join",
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "queue_blob": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "method": "Join existing block-028 source-candidate owner runs for owner 7119 against the exact block-028 physical-support and inland-water-support masks; split contiguous same-row intervals by physical-support class. No rasterization, geometry operation, observer, or source-body fetch.",
+    "comparison": {
+      "repair_evaluation_expected": {
+        "cells": 305,
+        "intervals": 125,
+        "source_features": [
+          41036,
+          41037,
+          41039,
+          41040,
+          41041,
+          41043,
+          41044,
+          41046,
+          41047,
+          41048
+        ]
+      },
+      "physical_companion_expected": {
+        "cells": 154,
+        "intervals": 90,
+        "source_relative": true,
+        "source_features": [
+          41037,
+          41038,
+          41039,
+          41040,
+          41042,
+          41043,
+          41045
+        ]
+      },
+      "computed_from_retained_masks": {
+        "repair-evaluation": {
+          "cells": 305,
+          "interval_count": 125,
+          "source_feature_union": [
+            41036,
+            41037,
+            41039,
+            41040,
+            41041,
+            41043,
+            41044,
+            41046,
+            41047,
+            41048
+          ]
+        },
+        "physical-interpretation-companion": {
+          "cells": 154,
+          "interval_count": 90,
+          "source_feature_union": [
+            41037,
+            41038,
+            41039,
+            41040,
+            41042,
+            41043,
+            41045
+          ]
+        }
+      },
+      "water_cells_in_owner7119_join": 0,
+      "owner_source_candidate_cells_before_split": 459
+    },
+    "groups": {
+      "repair-evaluation": [
+        {
+          "y": 118201,
+          "start": 85338,
+          "end": 85342,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41040
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118202,
+          "start": 85340,
+          "end": 85343,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41040
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118203,
+          "start": 85342,
+          "end": 85344,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41040
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118204,
+          "start": 85318,
+          "end": 85319,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41043
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118204,
+          "start": 85320,
+          "end": 85322,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41043
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118205,
+          "start": 85317,
+          "end": 85320,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41043
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118206,
+          "start": 85349,
+          "end": 85353,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41040
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118207,
+          "start": 85353,
+          "end": 85354,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41040
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118214,
+          "start": 85307,
+          "end": 85309,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41043
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118215,
+          "start": 85307,
+          "end": 85308,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41043
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118216,
+          "start": 85306,
+          "end": 85307,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41043
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118218,
+          "start": 85305,
+          "end": 85306,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41043
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118220,
+          "start": 85304,
+          "end": 85305,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41036
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118222,
+          "start": 85303,
+          "end": 85304,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41036
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118229,
+          "start": 85303,
+          "end": 85304,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41036
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118250,
+          "start": 85315,
+          "end": 85316,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41036
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118251,
+          "start": 85315,
+          "end": 85317,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41036
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118252,
+          "start": 85317,
+          "end": 85318,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41036
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118254,
+          "start": 85319,
+          "end": 85320,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41047
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118255,
+          "start": 85320,
+          "end": 85321,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41047
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118256,
+          "start": 85321,
+          "end": 85322,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41047
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118281,
+          "start": 85355,
+          "end": 85356,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41048
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118282,
+          "start": 85356,
+          "end": 85357,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41048
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118283,
+          "start": 85356,
+          "end": 85358,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41048
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118284,
+          "start": 85357,
+          "end": 85360,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41048
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118285,
+          "start": 85357,
+          "end": 85361,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41048
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118286,
+          "start": 85361,
+          "end": 85362,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41048
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118292,
+          "start": 85373,
+          "end": 85376,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41048
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118293,
+          "start": 85378,
+          "end": 85385,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41048
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118293,
+          "start": 85405,
+          "end": 85407,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118294,
+          "start": 85390,
+          "end": 85399,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118294,
+          "start": 85405,
+          "end": 85407,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118295,
+          "start": 85391,
+          "end": 85398,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118296,
+          "start": 85396,
+          "end": 85397,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118296,
+          "start": 85416,
+          "end": 85417,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118297,
+          "start": 85416,
+          "end": 85418,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118298,
+          "start": 85415,
+          "end": 85416,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118298,
+          "start": 85417,
+          "end": 85419,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118299,
+          "start": 85418,
+          "end": 85420,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118300,
+          "start": 85419,
+          "end": 85420,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118308,
+          "start": 85439,
+          "end": 85440,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118322,
+          "start": 85452,
+          "end": 85453,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118323,
+          "start": 85452,
+          "end": 85453,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118325,
+          "start": 85468,
+          "end": 85470,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118327,
+          "start": 85453,
+          "end": 85454,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118328,
+          "start": 85452,
+          "end": 85454,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118329,
+          "start": 85452,
+          "end": 85454,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118330,
+          "start": 85452,
+          "end": 85454,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118331,
+          "start": 85452,
+          "end": 85454,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118332,
+          "start": 85453,
+          "end": 85454,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118333,
+          "start": 85453,
+          "end": 85455,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118334,
+          "start": 85454,
+          "end": 85455,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118335,
+          "start": 85453,
+          "end": 85455,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118336,
+          "start": 85453,
+          "end": 85455,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118336,
+          "start": 85476,
+          "end": 85477,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118337,
+          "start": 85452,
+          "end": 85455,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118337,
+          "start": 85474,
+          "end": 85476,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118338,
+          "start": 85451,
+          "end": 85456,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118338,
+          "start": 85472,
+          "end": 85475,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118339,
+          "start": 85450,
+          "end": 85456,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118339,
+          "start": 85470,
+          "end": 85474,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118340,
+          "start": 85449,
+          "end": 85456,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118340,
+          "start": 85468,
+          "end": 85473,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118341,
+          "start": 85448,
+          "end": 85456,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118341,
+          "start": 85466,
+          "end": 85473,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118342,
+          "start": 85448,
+          "end": 85456,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118342,
+          "start": 85464,
+          "end": 85470,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118342,
+          "start": 85472,
+          "end": 85474,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118343,
+          "start": 85448,
+          "end": 85457,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118343,
+          "start": 85463,
+          "end": 85468,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118343,
+          "start": 85473,
+          "end": 85474,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118344,
+          "start": 85450,
+          "end": 85457,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118344,
+          "start": 85462,
+          "end": 85467,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118344,
+          "start": 85473,
+          "end": 85474,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118345,
+          "start": 85451,
+          "end": 85457,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118345,
+          "start": 85463,
+          "end": 85465,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118346,
+          "start": 85451,
+          "end": 85457,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118347,
+          "start": 85452,
+          "end": 85456,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118348,
+          "start": 85452,
+          "end": 85456,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118349,
+          "start": 85453,
+          "end": 85456,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118350,
+          "start": 85452,
+          "end": 85456,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118351,
+          "start": 85452,
+          "end": 85456,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118352,
+          "start": 85452,
+          "end": 85456,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118353,
+          "start": 85452,
+          "end": 85456,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118354,
+          "start": 85453,
+          "end": 85456,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118360,
+          "start": 85497,
+          "end": 85502,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41039
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118360,
+          "start": 85506,
+          "end": 85507,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41039
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118362,
+          "start": 85486,
+          "end": 85488,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41039
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118368,
+          "start": 85484,
+          "end": 85485,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41046
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118369,
+          "start": 85483,
+          "end": 85484,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41046
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118370,
+          "start": 85482,
+          "end": 85484,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41046
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118371,
+          "start": 85482,
+          "end": 85483,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41046
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118372,
+          "start": 85482,
+          "end": 85483,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41046
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118374,
+          "start": 85481,
+          "end": 85482,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41046
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118379,
+          "start": 85478,
+          "end": 85479,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41046
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118381,
+          "start": 85477,
+          "end": 85478,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41046
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118383,
+          "start": 85476,
+          "end": 85477,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41046
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118391,
+          "start": 85474,
+          "end": 85475,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41046
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118392,
+          "start": 85474,
+          "end": 85475,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41046
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118393,
+          "start": 85474,
+          "end": 85475,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41046
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118394,
+          "start": 85474,
+          "end": 85475,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41046
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118395,
+          "start": 85474,
+          "end": 85475,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41046
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118396,
+          "start": 85474,
+          "end": 85475,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41046
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118397,
+          "start": 85474,
+          "end": 85475,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41046
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118411,
+          "start": 85473,
+          "end": 85474,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41044
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118415,
+          "start": 85472,
+          "end": 85473,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118416,
+          "start": 85471,
+          "end": 85473,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118417,
+          "start": 85471,
+          "end": 85472,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118425,
+          "start": 85475,
+          "end": 85476,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118426,
+          "start": 85476,
+          "end": 85477,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118428,
+          "start": 85477,
+          "end": 85478,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118429,
+          "start": 85478,
+          "end": 85479,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118430,
+          "start": 85478,
+          "end": 85480,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118431,
+          "start": 85479,
+          "end": 85480,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118432,
+          "start": 85479,
+          "end": 85481,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118433,
+          "start": 85479,
+          "end": 85482,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118434,
+          "start": 85478,
+          "end": 85482,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118435,
+          "start": 85481,
+          "end": 85483,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118436,
+          "start": 85482,
+          "end": 85484,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118437,
+          "start": 85483,
+          "end": 85484,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118438,
+          "start": 85484,
+          "end": 85485,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118438,
+          "start": 85511,
+          "end": 85512,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118439,
+          "start": 85485,
+          "end": 85486,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118442,
+          "start": 85502,
+          "end": 85503,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118443,
+          "start": 85500,
+          "end": 85502,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41041
+          ],
+          "physical_support_intersection": true,
+          "inland_water_intersection": false
+        }
+      ],
+      "physical-interpretation-companion": [
+        {
+          "y": 118199,
+          "start": 85335,
+          "end": 85339,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41040
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118199,
+          "start": 85340,
+          "end": 85343,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41040
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118200,
+          "start": 85336,
+          "end": 85344,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41040
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118201,
+          "start": 85342,
+          "end": 85344,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41040
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118202,
+          "start": 85343,
+          "end": 85345,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41040
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118203,
+          "start": 85321,
+          "end": 85325,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41043
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118203,
+          "start": 85344,
+          "end": 85346,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41040
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118204,
+          "start": 85344,
+          "end": 85347,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41040
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118205,
+          "start": 85346,
+          "end": 85347,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41040
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118205,
+          "start": 85352,
+          "end": 85354,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41040
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118206,
+          "start": 85353,
+          "end": 85355,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41040
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118207,
+          "start": 85354,
+          "end": 85358,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41040
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118208,
+          "start": 85359,
+          "end": 85360,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41040
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118210,
+          "start": 85365,
+          "end": 85366,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41040
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118234,
+          "start": 85396,
+          "end": 85397,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41042
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118235,
+          "start": 85397,
+          "end": 85398,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41042
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118236,
+          "start": 85398,
+          "end": 85399,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41042
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118237,
+          "start": 85399,
+          "end": 85400,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41042
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118238,
+          "start": 85400,
+          "end": 85401,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41042
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118239,
+          "start": 85401,
+          "end": 85402,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41042
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118240,
+          "start": 85401,
+          "end": 85403,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41042
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118241,
+          "start": 85402,
+          "end": 85403,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41042
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118242,
+          "start": 85403,
+          "end": 85404,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41042
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118243,
+          "start": 85404,
+          "end": 85405,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41042
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118245,
+          "start": 85405,
+          "end": 85406,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41042
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118246,
+          "start": 85406,
+          "end": 85407,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41042
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118260,
+          "start": 85417,
+          "end": 85418,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41045
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118261,
+          "start": 85418,
+          "end": 85419,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41045
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118262,
+          "start": 85418,
+          "end": 85419,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41045
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118263,
+          "start": 85419,
+          "end": 85420,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41045
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118264,
+          "start": 85419,
+          "end": 85420,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41045
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118265,
+          "start": 85420,
+          "end": 85421,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41045
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118266,
+          "start": 85420,
+          "end": 85421,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41045
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118273,
+          "start": 85424,
+          "end": 85425,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41045
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118275,
+          "start": 85425,
+          "end": 85426,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41045
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118276,
+          "start": 85426,
+          "end": 85427,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41045
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118277,
+          "start": 85426,
+          "end": 85428,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41045
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118278,
+          "start": 85427,
+          "end": 85429,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41045
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118279,
+          "start": 85427,
+          "end": 85429,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41045
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118280,
+          "start": 85428,
+          "end": 85429,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41045
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118287,
+          "start": 85432,
+          "end": 85434,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41045
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118288,
+          "start": 85432,
+          "end": 85434,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41045
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118290,
+          "start": 85433,
+          "end": 85434,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41045
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118291,
+          "start": 85434,
+          "end": 85435,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41045
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118295,
+          "start": 85398,
+          "end": 85399,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118296,
+          "start": 85397,
+          "end": 85398,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118312,
+          "start": 85452,
+          "end": 85453,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118313,
+          "start": 85453,
+          "end": 85454,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118317,
+          "start": 85457,
+          "end": 85459,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118318,
+          "start": 85457,
+          "end": 85459,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118319,
+          "start": 85458,
+          "end": 85460,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118320,
+          "start": 85459,
+          "end": 85461,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118321,
+          "start": 85460,
+          "end": 85463,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118322,
+          "start": 85461,
+          "end": 85463,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118323,
+          "start": 85462,
+          "end": 85464,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118323,
+          "start": 85469,
+          "end": 85470,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118324,
+          "start": 85463,
+          "end": 85464,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118324,
+          "start": 85468,
+          "end": 85471,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118325,
+          "start": 85470,
+          "end": 85474,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118335,
+          "start": 85477,
+          "end": 85478,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118340,
+          "start": 85473,
+          "end": 85474,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118341,
+          "start": 85473,
+          "end": 85475,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118342,
+          "start": 85474,
+          "end": 85476,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118343,
+          "start": 85474,
+          "end": 85476,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118344,
+          "start": 85474,
+          "end": 85476,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118345,
+          "start": 85465,
+          "end": 85466,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118346,
+          "start": 85464,
+          "end": 85466,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118347,
+          "start": 85456,
+          "end": 85457,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118347,
+          "start": 85464,
+          "end": 85465,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118348,
+          "start": 85456,
+          "end": 85457,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118349,
+          "start": 85456,
+          "end": 85457,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118350,
+          "start": 85456,
+          "end": 85458,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118351,
+          "start": 85456,
+          "end": 85458,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118352,
+          "start": 85456,
+          "end": 85458,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118353,
+          "start": 85456,
+          "end": 85457,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41037
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118359,
+          "start": 85500,
+          "end": 85503,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41039
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118359,
+          "start": 85507,
+          "end": 85510,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41039
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118360,
+          "start": 85502,
+          "end": 85506,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41039
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118360,
+          "start": 85507,
+          "end": 85513,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41039
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118361,
+          "start": 85488,
+          "end": 85489,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41039
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118395,
+          "start": 85537,
+          "end": 85538,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41039
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118396,
+          "start": 85537,
+          "end": 85538,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41039
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118405,
+          "start": 85538,
+          "end": 85539,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41039
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118406,
+          "start": 85538,
+          "end": 85539,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41039
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118415,
+          "start": 85537,
+          "end": 85538,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41038
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118416,
+          "start": 85537,
+          "end": 85538,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41038
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118417,
+          "start": 85537,
+          "end": 85538,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41038
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118418,
+          "start": 85536,
+          "end": 85537,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41038
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118432,
+          "start": 85531,
+          "end": 85532,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41038
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        },
+        {
+          "y": 118433,
+          "start": 85530,
+          "end": 85531,
+          "owner_indices": [
+            7119
+          ],
+          "source_feature_indices": [
+            41038
+          ],
+          "physical_support_intersection": false,
+          "inland_water_intersection": false
+        }
+      ]
+    },
+    "lineage_atoms": [
+      {
+        "source_index": 41039,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B16958301240037",
+        "owners": [
+          7119
+        ],
+        "name": "Saint James Windward",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41041,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B19766585583682",
+        "owners": [
+          7119
+        ],
+        "name": "Saint John Figtree",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41038,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B22687598135129",
+        "owners": [
+          7119
+        ],
+        "name": "Saint George Gingerland",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41042,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B33043462803625",
+        "owners": [
+          7119
+        ],
+        "name": "Saint Mary Cayon",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41044,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B33869241417022",
+        "owners": [
+          7119
+        ],
+        "name": "Saint Paul Charlestown",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41043,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B35296791475509",
+        "owners": [
+          7119
+        ],
+        "name": "Saint Paul Capisterre",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41037,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B55778484611891",
+        "owners": [
+          7119
+        ],
+        "name": "Saint George Basseterre",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41035,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B57902249562742",
+        "owners": [
+          7119
+        ],
+        "name": "Christ Church Nichola Town",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41040,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B65639645183115",
+        "owners": [
+          7119
+        ],
+        "name": "Saint John Capisterre",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41046,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B68765441097226",
+        "owners": [
+          7119
+        ],
+        "name": "Saint Thomas Lowland",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41047,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B72200716330993",
+        "owners": [
+          7119
+        ],
+        "name": "Saint Thomas Middle Island",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41048,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B86967002358759",
+        "owners": [
+          7119
+        ],
+        "name": "Trinity Palmetto Point",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41045,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B95288510107666",
+        "owners": [
+          7119
+        ],
+        "name": "Saint Peter Basseterre",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41036,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B96254136738283",
+        "owners": [
+          7119
+        ],
+        "name": "Saint Anne Sandy Point",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "contact_feature_roster_records": [
+      {
+        "source_index": 41036,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B96254136738283",
+        "owners": [
+          7119
+        ],
+        "name": "Saint Anne Sandy Point",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41037,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B55778484611891",
+        "owners": [
+          7119
+        ],
+        "name": "Saint George Basseterre",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41038,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B22687598135129",
+        "owners": [
+          7119
+        ],
+        "name": "Saint George Gingerland",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41039,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B16958301240037",
+        "owners": [
+          7119
+        ],
+        "name": "Saint James Windward",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41040,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B65639645183115",
+        "owners": [
+          7119
+        ],
+        "name": "Saint John Capisterre",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41041,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B19766585583682",
+        "owners": [
+          7119
+        ],
+        "name": "Saint John Figtree",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41042,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B33043462803625",
+        "owners": [
+          7119
+        ],
+        "name": "Saint Mary Cayon",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41043,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B35296791475509",
+        "owners": [
+          7119
+        ],
+        "name": "Saint Paul Capisterre",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41044,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B33869241417022",
+        "owners": [
+          7119
+        ],
+        "name": "Saint Paul Charlestown",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41045,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B95288510107666",
+        "owners": [
+          7119
+        ],
+        "name": "Saint Peter Basseterre",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41046,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B68765441097226",
+        "owners": [
+          7119
+        ],
+        "name": "Saint Thomas Lowland",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41047,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B72200716330993",
+        "owners": [
+          7119
+        ],
+        "name": "Saint Thomas Middle Island",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 41048,
+        "family_index": 181,
+        "source_id": "gb:KNA:ADM1:52472329B86967002358759",
+        "owners": [
+          7119
+        ],
+        "name": "Trinity Palmetto Point",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "descriptors": [
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-028.json.gz",
+        "oid": "242c191e5cb4822c969247f4d4af99b56a5ec160",
+        "bytes": 476733,
+        "local_object": "warm"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-028.json.gz",
+        "oid": "320ee1a5fda2706aa446e8872a7180ca66ae76a6",
+        "bytes": 436795,
+        "local_object": "warm"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-028.json.gz",
+        "oid": "ce25d850997ac8d56bb82778a7527b290edc7edd",
+        "bytes": 2094,
+        "local_object": "warm"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+        "oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+        "bytes": 1844315,
+        "local_object": "warm"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+        "oid": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+        "bytes": 4404456,
+        "local_object": "warm"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+        "oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+        "bytes": 403376,
+        "local_object": "warm"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-KNA-ADM1-000.bin.gz",
+        "oid": "4157d03fce6f43d7d16e98a83ef4df26c7709b1f",
+        "catalogued_bytes": 3557,
+        "local_object": "warm after parent-authorized exact acquisition",
+        "acquired": false,
+        "decoded_sha256": "5d94bc5303f78b68e4f0ba5783611f7c292540e72776aa236c53883560d1ebcd",
+        "identity_join": "14/14 property shapeID and shapeName match roster; full properties stored above"
+      }
+    ],
+    "limits": [
+      "The 305/125 and 154/90 groups reproduce queue counts exactly from retained owner/source and physical masks; classification here only records mask intersection, not a new physical/geographic inference.",
+      "Per-interval source_feature_indices are unions of retained source-candidate feature contacts across each merged interval; they are coarse evidence and do not assign a causal source feature to every constituent cell.",
+      "The 14 lineage atoms are same-family KNA roster records; the repair row targets ten features and the separate companion targets seven. The two groups must not be conflated.",
+      "Issue #179 remains a separate read-only source/semantic review reference; it is not used as a gate.",
+      "The raw corpus payload is now acquired and hash-authenticated, and all 14 feature property identity/name records match the retained roster. This does not resolve whether each cell is eligible for repair or a documented exception; no geometry/physical replay or owner observer was run."
+    ],
+    "original_contract": {
+      "package_id": "gb-KNA-ADM1--repair-evaluation",
+      "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+      "completion": "Every exact interval must be either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned."
+    },
+    "unresolved_evidence_needed": [
+      {
+        "item": "Full source payload identity/property check",
+        "exact_input": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-KNA-ADM1-000.bin.gz",
+        "oid": "4157d03fce6f43d7d16e98a83ef4df26c7709b1f",
+        "status": "acquired by parent through authenticated public pinned-object route; payload identity/property join completed. No additional source-body acquisition is needed for this bounded metadata join."
+      },
+      {
+        "item": "Per-interval source membership, complete competitors, and retained territorial exclusions",
+        "status": "the coarse owner-tagged candidate/lineage joins identify source families and contacts but do not prove feature-level causal membership or every exclusion for each interval"
+      },
+      {
+        "item": "Selected-native conservation and final per-interval outcome",
+        "status": "not performed in this inventory; contract permits either qualified additive repair or documented unresolved exception, subject to full source/physical witness evidence"
+      },
+      {
+        "item": "Source and physical witness qualification",
+        "status": "retained block masks and summaries are available and joined to exact queue counts, but no independent observer or geographic calculation was run here"
+      }
+    ],
+    "source_payload_identity_verification": {
+      "compressed_bytes": 3557,
+      "git_blob_oid": "4157d03fce6f43d7d16e98a83ef4df26c7709b1f",
+      "decoded_bytes": 14698,
+      "decoded_sha256": "5d94bc5303f78b68e4f0ba5783611f7c292540e72776aa236c53883560d1ebcd",
+      "feature_count": 14,
+      "roster_family_feature_count": 14,
+      "identity_join": "14/14 shapeID values match the source-feature-roster source_id suffix; 14/14 shapeName values match roster names; all properties report shapeGroup KNA and shapeType ADM1.",
+      "target_feature_indices": [
+        41036,
+        41037,
+        41039,
+        41040,
+        41041,
+        41043,
+        41044,
+        41046,
+        41047,
+        41048
+      ],
+      "target_feature_names": [
+        "Saint Anne Sandy Point",
+        "Saint George Basseterre",
+        "Saint James Windward",
+        "Saint John Capisterre",
+        "Saint John Figtree",
+        "Saint Paul Capisterre",
+        "Saint Paul Charlestown",
+        "Saint Thomas Lowland",
+        "Saint Thomas Middle Island",
+        "Trinity Palmetto Point"
+      ],
+      "companion_contact_feature_indices": [
+        41037,
+        41038,
+        41039,
+        41040,
+        41042,
+        41043,
+        41045
+      ],
+      "contact_property_records": [
+        {
+          "source_index": 41036,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B96254136738283",
+          "roster_name": "Saint Anne Sandy Point",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint Anne Sandy Point",
+            "shapeISO": "KN-02",
+            "shapeID": "52472329B96254136738283",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41037,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B55778484611891",
+          "roster_name": "Saint George Basseterre",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint George Basseterre",
+            "shapeISO": "KN-03",
+            "shapeID": "52472329B55778484611891",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41038,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B22687598135129",
+          "roster_name": "Saint George Gingerland",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint George Gingerland",
+            "shapeISO": "KN-04",
+            "shapeID": "52472329B22687598135129",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41039,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B16958301240037",
+          "roster_name": "Saint James Windward",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint James Windward",
+            "shapeISO": "KN-05",
+            "shapeID": "52472329B16958301240037",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41040,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B65639645183115",
+          "roster_name": "Saint John Capisterre",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint John Capisterre",
+            "shapeISO": "KN-06",
+            "shapeID": "52472329B65639645183115",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41041,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B19766585583682",
+          "roster_name": "Saint John Figtree",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint John Figtree",
+            "shapeISO": "KN-07",
+            "shapeID": "52472329B19766585583682",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41042,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B33043462803625",
+          "roster_name": "Saint Mary Cayon",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint Mary Cayon",
+            "shapeISO": "KN-08",
+            "shapeID": "52472329B33043462803625",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41043,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B35296791475509",
+          "roster_name": "Saint Paul Capisterre",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint Paul Capisterre",
+            "shapeISO": "KN-09",
+            "shapeID": "52472329B35296791475509",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41044,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B33869241417022",
+          "roster_name": "Saint Paul Charlestown",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint Paul Charlestown",
+            "shapeISO": "KN-10",
+            "shapeID": "52472329B33869241417022",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41045,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B95288510107666",
+          "roster_name": "Saint Peter Basseterre",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint Peter Basseterre",
+            "shapeISO": "KN-11",
+            "shapeID": "52472329B95288510107666",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41046,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B68765441097226",
+          "roster_name": "Saint Thomas Lowland",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint Thomas Lowland",
+            "shapeISO": "KN-12",
+            "shapeID": "52472329B68765441097226",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41047,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B72200716330993",
+          "roster_name": "Saint Thomas Middle Island",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint Thomas Middle Island",
+            "shapeISO": "KN-13",
+            "shapeID": "52472329B72200716330993",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41048,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B86967002358759",
+          "roster_name": "Trinity Palmetto Point",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Trinity Palmetto Point",
+            "shapeISO": "KN-15",
+            "shapeID": "52472329B86967002358759",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        }
+      ],
+      "all_feature_properties": [
+        {
+          "source_index": 41035,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B57902249562742",
+          "roster_name": "Christ Church Nichola Town",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Christ Church Nichola Town",
+            "shapeISO": "KN-01",
+            "shapeID": "52472329B57902249562742",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41036,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B96254136738283",
+          "roster_name": "Saint Anne Sandy Point",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint Anne Sandy Point",
+            "shapeISO": "KN-02",
+            "shapeID": "52472329B96254136738283",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41037,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B55778484611891",
+          "roster_name": "Saint George Basseterre",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint George Basseterre",
+            "shapeISO": "KN-03",
+            "shapeID": "52472329B55778484611891",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41038,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B22687598135129",
+          "roster_name": "Saint George Gingerland",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint George Gingerland",
+            "shapeISO": "KN-04",
+            "shapeID": "52472329B22687598135129",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41039,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B16958301240037",
+          "roster_name": "Saint James Windward",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint James Windward",
+            "shapeISO": "KN-05",
+            "shapeID": "52472329B16958301240037",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41040,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B65639645183115",
+          "roster_name": "Saint John Capisterre",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint John Capisterre",
+            "shapeISO": "KN-06",
+            "shapeID": "52472329B65639645183115",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41041,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B19766585583682",
+          "roster_name": "Saint John Figtree",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint John Figtree",
+            "shapeISO": "KN-07",
+            "shapeID": "52472329B19766585583682",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41042,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B33043462803625",
+          "roster_name": "Saint Mary Cayon",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint Mary Cayon",
+            "shapeISO": "KN-08",
+            "shapeID": "52472329B33043462803625",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41043,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B35296791475509",
+          "roster_name": "Saint Paul Capisterre",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint Paul Capisterre",
+            "shapeISO": "KN-09",
+            "shapeID": "52472329B35296791475509",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41044,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B33869241417022",
+          "roster_name": "Saint Paul Charlestown",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint Paul Charlestown",
+            "shapeISO": "KN-10",
+            "shapeID": "52472329B33869241417022",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41045,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B95288510107666",
+          "roster_name": "Saint Peter Basseterre",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint Peter Basseterre",
+            "shapeISO": "KN-11",
+            "shapeID": "52472329B95288510107666",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41046,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B68765441097226",
+          "roster_name": "Saint Thomas Lowland",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint Thomas Lowland",
+            "shapeISO": "KN-12",
+            "shapeID": "52472329B68765441097226",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41047,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B72200716330993",
+          "roster_name": "Saint Thomas Middle Island",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Saint Thomas Middle Island",
+            "shapeISO": "KN-13",
+            "shapeID": "52472329B72200716330993",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        },
+        {
+          "source_index": 41048,
+          "family_index": 181,
+          "source_id": "gb:KNA:ADM1:52472329B86967002358759",
+          "roster_name": "Trinity Palmetto Point",
+          "roster_owner_indices": [
+            7119
+          ],
+          "properties": {
+            "shapeName": "Trinity Palmetto Point",
+            "shapeISO": "KN-15",
+            "shapeID": "52472329B86967002358759",
+            "shapeGroup": "KNA",
+            "shapeType": "ADM1"
+          },
+          "source_id_matches_shapeID": true,
+          "roster_name_matches_shapeName": true
+        }
+      ],
+      "geometry_handling": "The identity/property join used a lexical JSON span scanner: it decompressed the payload and parsed only each top-level properties object while scanning/skipping feature geometry values without parsing coordinates. A separate property-key diagnostic used full json.loads, which incidentally materialized geometry fields in memory; no geometry coordinates were inspected or used, and no geometry operation/replay occurred."
+    }
+  },
+  "source_payload_acquisition": {
+    "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-KNA-ADM1-000.bin.gz",
+    "oid": "4157d03fce6f43d7d16e98a83ef4df26c7709b1f",
+    "bytes": 3557,
+    "decoded_bytes": 14698,
+    "decoded_sha256": "5d94bc5303f78b68e4f0ba5783611f7c292540e72776aa236c53883560d1ebcd",
+    "already_present": false,
+    "authenticated_public_tree": "78f85570b9a542fbb2c01131138ab0e69147cca9",
+    "geometry_not_inspected": true
+  },
+  "author_selected_owner_result": {
+    "commit": "718cb8c3911f43739e50dfd1d423938c5c1e8b42",
+    "keys": 305,
+    "current_unassigned": 305,
+    "overlap": 0,
+    "executions": 1,
+    "inputs": 38
+  },
+  "scientific_limit": "Historical property identity and retained mask joins support documented uncertainty, not positive repair qualification. No raw source geometry is redistributed."
+}

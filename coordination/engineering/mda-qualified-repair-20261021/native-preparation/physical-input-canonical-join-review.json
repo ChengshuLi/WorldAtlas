@@ -1,0 +1,190 @@
+{
+  "version": 1,
+  "kind": "MDA retained physical input to current canonical target identity join",
+  "status": "complete_source_targets_joined",
+  "base_commit": "2bfc64ad6c622fd4e9c5f5f4cf763db22828e940",
+  "physical_stage_commit": "8b91fc6c3a45717e466599d040b81457fb60fe3e",
+  "canonical_part": {
+    "path": "data/geography/part-13.json",
+    "git_blob_oid": "44f886df47aa3e313f0c2ce98faea045e2eba8ed",
+    "bytes": 5709487,
+    "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1",
+    "feature_count": 1500
+  },
+  "physical_input_canonical_join": {
+    "task_local_path": "inventory/mda-source-evidence-preparation/physical-input-canonical-join.json",
+    "bytes": 244421,
+    "sha256": "4bfd2ffdb385de670c0ea61ba1020878a8e9ccea59a8bf74dab651aa1d4f759d",
+    "row_count": 18,
+    "mda_selected_joins": 16,
+    "ukr_contact_rows_preserved_without_selected_binding": 2
+  },
+  "identity_joins": [
+    {
+      "source_id": "gb:MDA:ADM1:25212430B51059014460141",
+      "owner_id": 27323,
+      "source_feature_index": 41952,
+      "name": "Cahul",
+      "canonical_id": "gb:MDA:ADM1:25212430B51059014460141",
+      "canonical_name": "Cahul",
+      "canonical_parent_id": "framework:province:cahul:2552867d150b",
+      "selected_binding": "exact source ID/name/original_id match"
+    },
+    {
+      "source_id": "gb:MDA:ADM1:25212430B55748044124793",
+      "owner_id": 27327,
+      "source_feature_index": 41953,
+      "name": "Gagauzia",
+      "canonical_id": "gb:MDA:ADM1:25212430B55748044124793",
+      "canonical_name": "Gagauzia",
+      "canonical_parent_id": "framework:province:gagauzia:f17f9ae0fc48",
+      "selected_binding": "exact source ID/name/original_id match"
+    },
+    {
+      "source_id": "gb:MDA:ADM1:25212430B43456438192105",
+      "owner_id": 27320,
+      "source_feature_index": 41954,
+      "name": "Taraclia",
+      "canonical_id": "gb:MDA:ADM1:25212430B43456438192105",
+      "canonical_name": "Taraclia",
+      "canonical_parent_id": "framework:province:taraclia:6d1570219c68",
+      "selected_binding": "exact source ID/name/original_id match"
+    },
+    {
+      "source_id": "gb:MDA:ADM1:25212430B81482951983667",
+      "owner_id": 27337,
+      "source_feature_index": 41955,
+      "name": "Cantemir",
+      "canonical_id": "gb:MDA:ADM1:25212430B81482951983667",
+      "canonical_name": "Cantemir",
+      "canonical_parent_id": "framework:province:cantemir:7c6744806350",
+      "selected_binding": "exact source ID/name/original_id match"
+    },
+    {
+      "source_id": "gb:MDA:ADM1:25212430B269818099865",
+      "owner_id": 27309,
+      "source_feature_index": 41957,
+      "name": "Leova",
+      "canonical_id": "gb:MDA:ADM1:25212430B269818099865",
+      "canonical_name": "Leova",
+      "canonical_parent_id": "framework:province:leova:25edd8cab634",
+      "selected_binding": "exact source ID/name/original_id match"
+    },
+    {
+      "source_id": "gb:MDA:ADM1:25212430B51243918943413",
+      "owner_id": 27324,
+      "source_feature_index": 41958,
+      "name": "Cimislia",
+      "canonical_id": "gb:MDA:ADM1:25212430B51243918943413",
+      "canonical_name": "Cimislia",
+      "canonical_parent_id": "framework:province:cimislia:e4e8c00b87d7",
+      "selected_binding": "exact source ID/name/original_id match"
+    },
+    {
+      "source_id": "gb:MDA:ADM1:25212430B10989766506063",
+      "owner_id": 27304,
+      "source_feature_index": 41959,
+      "name": "Stefan Voda",
+      "canonical_id": "gb:MDA:ADM1:25212430B10989766506063",
+      "canonical_name": "Stefan Voda",
+      "canonical_parent_id": "framework:province:stefan-voda:fb23f500a518",
+      "selected_binding": "exact source ID/name/original_id match"
+    },
+    {
+      "source_id": "gb:MDA:ADM1:25212430B31479954216778",
+      "owner_id": 27311,
+      "source_feature_index": 41961,
+      "name": "Causeni",
+      "canonical_id": "gb:MDA:ADM1:25212430B31479954216778",
+      "canonical_name": "Causeni",
+      "canonical_parent_id": "framework:province:causeni:276af439095a",
+      "selected_binding": "exact source ID/name/original_id match"
+    },
+    {
+      "source_id": "gb:MDA:ADM1:25212430B73317679220215",
+      "owner_id": 27334,
+      "source_feature_index": 41962,
+      "name": "Hincesti",
+      "canonical_id": "gb:MDA:ADM1:25212430B73317679220215",
+      "canonical_name": "Hincesti",
+      "canonical_parent_id": "framework:province:hincesti:a4fbf7f30b5b",
+      "selected_binding": "exact source ID/name/original_id match"
+    },
+    {
+      "source_id": "gb:MDA:ADM1:25212430B5738533784066",
+      "owner_id": 27328,
+      "source_feature_index": 41964,
+      "name": "Nisporeni",
+      "canonical_id": "gb:MDA:ADM1:25212430B5738533784066",
+      "canonical_name": "Nisporeni",
+      "canonical_parent_id": "framework:province:nisporeni:40998fa9fd57",
+      "selected_binding": "exact source ID/name/original_id match"
+    },
+    {
+      "source_id": "gb:MDA:ADM1:25212430B23943377724140",
+      "owner_id": 27307,
+      "source_feature_index": 41969,
+      "name": "Ungheni",
+      "canonical_id": "gb:MDA:ADM1:25212430B23943377724140",
+      "canonical_name": "Ungheni",
+      "canonical_parent_id": "framework:province:ungheni:9cd10ce84257",
+      "selected_binding": "exact source ID/name/original_id match"
+    },
+    {
+      "source_id": "gb:MDA:ADM1:25212430B22111314945643",
+      "owner_id": 27306,
+      "source_feature_index": 41972,
+      "name": "Transnistria",
+      "canonical_id": "gb:MDA:ADM1:25212430B22111314945643",
+      "canonical_name": "Transnistria",
+      "canonical_parent_id": "framework:province:transnistria:309703a61365",
+      "selected_binding": "exact source ID/name/original_id match"
+    },
+    {
+      "source_id": "gb:MDA:ADM1:25212430B61222791146584",
+      "owner_id": 27330,
+      "source_feature_index": 41973,
+      "name": "Falesti",
+      "canonical_id": "gb:MDA:ADM1:25212430B61222791146584",
+      "canonical_name": "Falesti",
+      "canonical_parent_id": "framework:province:falesti:26ed89160bcd",
+      "selected_binding": "exact source ID/name/original_id match"
+    },
+    {
+      "source_id": "gb:MDA:ADM1:25212430B89307550133505",
+      "owner_id": 27338,
+      "source_feature_index": 41975,
+      "name": "Glodeni",
+      "canonical_id": "gb:MDA:ADM1:25212430B89307550133505",
+      "canonical_name": "Glodeni",
+      "canonical_parent_id": "framework:province:glodeni:c0f39a206648",
+      "selected_binding": "exact source ID/name/original_id match"
+    },
+    {
+      "source_id": "gb:MDA:ADM1:25212430B65458906379390",
+      "owner_id": 27331,
+      "source_feature_index": 41984,
+      "name": "Edinet",
+      "canonical_id": "gb:MDA:ADM1:25212430B65458906379390",
+      "canonical_name": "Edinet",
+      "canonical_parent_id": "framework:province:edinet:f51f3ad1f473",
+      "selected_binding": "exact source ID/name/original_id match"
+    },
+    {
+      "source_id": "gb:MDA:ADM1:25212430B70903588336793",
+      "owner_id": 27333,
+      "source_feature_index": 41986,
+      "name": "Soroca",
+      "canonical_id": "gb:MDA:ADM1:25212430B70903588336793",
+      "canonical_name": "Soroca",
+      "canonical_parent_id": "framework:province:soroca:8c1ac44bf8fd",
+      "selected_binding": "exact source ID/name/original_id match"
+    }
+  ],
+  "limits": [
+    "The 16 MDA rows join by exact canonical feature ID, name, and original_id; this does not qualify any requested cell.",
+    "The two UKR contact source geometries remain literal in the physical input; no MDA selected owner was invented for them.",
+    "Complete negative UKR/ROU families remain separately bound by the source-evidence config.",
+    "The 133 adverse/nonmatch key partition remains unchanged."
+  ]
+}

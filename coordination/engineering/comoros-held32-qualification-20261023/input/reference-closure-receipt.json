@@ -1,0 +1,67 @@
+{
+  "kind": "exact-pinned-reference-tree-closure-acquisition",
+  "leaf": {
+    "api_response_bytes": 1416242,
+    "api_response_sha256": "95be10444a22e40c7fe056f17b472c1c181b4ed5b76ad8208b48d5e9af53d3a7",
+    "blob_oid": "ecd88fdf69a7139b818f0eb608bf78f76858c0fd",
+    "bytes": 1027706,
+    "imported_git_oid": "ecd88fdf69a7139b818f0eb608bf78f76858c0fd",
+    "path": "coordination/engineering/reference-owner-alias-correction-20261022/source-001/migration-receipt.json.gz",
+    "sha256": "1c9f480210da259abd1a46720a6494fc8fa5facc5dbad72ee7d5e403cf65f22f",
+    "tree_oid": "ce5f41e6dc7948bd0e868d5340ae4a21410fa06e"
+  },
+  "limits": [
+    "Only exact public commit/tree path metadata and the single pinned 1,027,706-byte blob required by the current accepted selection were acquired.",
+    "No branch/ref, source observation, scientific payload or selection was changed.",
+    "The Git trees were reconstructed from authenticated exact tree entries and each tree SHA-1 matched the pinned GitHub OID."
+  ],
+  "root_tree": "e97358818047be0e9d40f7acb80bd60fc3a6684d",
+  "source_commit": "929af97a43859ebfcb66112d5091da303e7396b2",
+  "tree_chain": [
+    {
+      "constructed_oid": "e97358818047be0e9d40f7acb80bd60fc3a6684d",
+      "entries": 47,
+      "response_bytes": 10710,
+      "response_sha256": "80d89dfd923998a0d5cc736de5334d4084999fa938f9208d3ace29e101f140ed",
+      "selected_child": {
+        "name": "coordination",
+        "oid": "8cc493b639a9ac6b40adf436a7170da164dd0962"
+      },
+      "tree_oid": "e97358818047be0e9d40f7acb80bd60fc3a6684d"
+    },
+    {
+      "constructed_oid": "8cc493b639a9ac6b40adf436a7170da164dd0962",
+      "entries": 3,
+      "response_bytes": 821,
+      "response_sha256": "e3d9e1b788bea611a1747751dd21ed79acce521b24a06e8b02d3d0b828b150e2",
+      "selected_child": {
+        "name": "engineering",
+        "oid": "ebd0c715c0276214b4169d1e5b87297af73cb203"
+      },
+      "tree_oid": "8cc493b639a9ac6b40adf436a7170da164dd0962"
+    },
+    {
+      "constructed_oid": "ebd0c715c0276214b4169d1e5b87297af73cb203",
+      "entries": 477,
+      "response_bytes": 112813,
+      "response_sha256": "b0d8b55186f1e26daa3ac5ce8868ccec9d8e874076d69a38eb19e1498b6dc25c",
+      "selected_child": {
+        "name": "reference-owner-alias-correction-20261022",
+        "oid": "c9970caf3e51c2830b524b2b540ec2c576083e70"
+      },
+      "tree_oid": "ebd0c715c0276214b4169d1e5b87297af73cb203"
+    },
+    {
+      "constructed_oid": "c9970caf3e51c2830b524b2b540ec2c576083e70",
+      "entries": 1,
+      "response_bytes": 398,
+      "response_sha256": "fdf76d2e310d296a39c81ed3af71841604f53ed75ee3fe55f5ed122eb6000753",
+      "selected_child": {
+        "name": "source-001",
+        "oid": "ce5f41e6dc7948bd0e868d5340ae4a21410fa06e"
+      },
+      "tree_oid": "c9970caf3e51c2830b524b2b540ec2c576083e70"
+    }
+  ],
+  "version": 1
+}

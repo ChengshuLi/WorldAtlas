@@ -7,7 +7,7 @@ import os from 'node:os';
 import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
-import {ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias, selectedGeometrySourceAlias, selectedReferenceOwners, selectedNativeSourceMembership} from '../../../scripts/check-effective-geographic-regression.mjs';
+import {ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias, selectedGeometrySourceAlias, selectedReferenceOwners, selectedNativeSourceMembership, requireSelectedOriginLineage} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {repairComponentKey, compareRepairComponents, nativeOnlyComponent, deriveSourceTargetNativeDelta, nativePolygonIntervals, polygonParts, witnessCellEffects, validateWitnessGeometry, verifyNativeSeamView} from '../../../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 import {scientificNativeSelection} from '../../../src/reference-metadata.js';
@@ -360,11 +360,12 @@ function originalSourceAliases(reader, request, aliases) {
   demand([request.additive.facts_path,request.additive.publication_path,request.additive.inventory_path].includes(p.path),'Unconsumed completed alias');
   pinCheck({...q,git_blob_oid:q.git_blob_oid??q.blob});
   demand(q.mode==='100644'&&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(k=>q[k]===p[k]),'Completed alias whole encoded/decoded pins differ');
-  const actual=reader.descriptor(q.path,q.commit);
+  const version=reader.pinnedVersion({...q,git_blob_oid:q.git_blob_oid??q.blob});
+  const actual=reader.descriptor(q.path,version);
   demand(actual.mode===q.mode&&actual.git_blob_oid===(q.git_blob_oid??q.blob)&&actual.bytes===q.bytes,'Completed alias actual Git identity differs');
   const decoded=p.uncompressed_bytes??0;
   demand(Number.isSafeInteger(decoded)&&decoded>=0,'Invalid completed alias decoded byte length');
-  const encoded=reader.read(q.path,{version:q.commit,expected:q.sha256});
+  const encoded=reader.read(q.path,{version,expected:q.sha256});
   if(p.uncompressed_bytes!==undefined){demand(hash(p.uncompressed_sha256),'Missing completed decoded hash');const raw=gunzipSync(encoded,{maxOutputLength:decoded});demand(raw.length===decoded&&sha(raw)===p.uncompressed_sha256,'Completed alias decoded body differs');}
   byPath.set(p.path,q);
  }
@@ -425,7 +426,7 @@ export function readOriginalRuleAuthority(reader, pins, sourceOutputAliases=[]) 
 // Only independently reviewed administrative SOURCE and NATIVE closures may retain
 // an older source selector. Both selectors and their complete unchanged source-map
 // identity are authenticated; current selected-bank conservation remains later.
-function originalAdministrativeBaseline(reader, issued, request, native) {
+function* originalAdministrativeBaseline(reader, issued, request, native) {
  if(same(issued.baseline,request.baseline))return true;
  const profile='retained-consumed-administrative-source';
  demand(issued.source_rule?.profile===profile&&request.additive?.source_profile===profile,
@@ -433,14 +434,16 @@ function originalAdministrativeBaseline(reader, issued, request, native) {
  matchSupportedProgramme(readSupportedProgrammeCatalogue(reader).catalogue,{preimageVersion:3,sourceProfile:profile,
   sourceCode:issued.executed_code,nativeCode:request.executed_code});
  const read=p=>{pinCheck({...p,git_blob_oid:p.git_blob_oid??p.blob});
-  const actual=reader.descriptor(p.path,p.commit);
+  const version=reader.pinnedVersion(p),actual=reader.descriptor(p.path,version);
   demand(actual.mode===p.mode&&actual.git_blob_oid===(p.git_blob_oid??p.blob)&&actual.bytes===p.bytes,'Original selector/source-map Git identity differs');
-  return JSON.parse(reader.read(p.path,{version:p.commit,expected:p.sha256}));};
+  return JSON.parse(reader.read(p.path,{version,expected:p.sha256}));};
  for(const baseline of [issued.baseline,request.baseline])demand(baseline?.version===2
   &&baseline.kind==='current-selected-native-baseline-v1'&&Object.keys(baseline).sort().join(',')==='kind,pins,version'
   &&Array.isArray(baseline.pins)&&baseline.pins.length===1&&baseline.pins[0].kind===undefined
   &&baseline.pins[0].path==='data/ownership-selection.json','Foreign original administrative selector');
- const historical=read(issued.baseline.pins[0]),selected=read(request.baseline.pins[0]),a=native.baseline_acquisition;
+ const pins=[issued.baseline.pins[0],request.baseline.pins[0]].map(p=>({...p,git_blob_oid:p.git_blob_oid??p.blob}));
+ const [historical,selected]=yield {kind:'bodies',reader,pins,read:()=>pins.map(read)};
+ const a=native.baseline_acquisition;
  demand(a?.kind==='current-selected-native-baseline-custody-v1'&&same(a.baseline_pin,request.baseline.pins[0])
   &&same(a.selection,selected)&&a.manifest_sha256===selected.sha256&&a.source_map_sha256===selected.selected_geography?.sha256,
   'Original native selector acquisition differs');
@@ -448,9 +451,13 @@ function originalAdministrativeBaseline(reader, issued, request, native) {
   &&same(historical.selected_geography,selected.selected_geography),'Original historical/current base geometry differs');
  const descriptor=selected.selected_geography;
  demand(descriptor?.kind==='complete-world-index-with-exact-encoded-overrides','Unsupported original selected source map');
- const actual=reader.descriptor(descriptor.path,request.baseline.pins[0].commit);
- demand(actual.bytes===descriptor.bytes,'Original selected source-map size differs');
- const map=read({...actual,sha256:descriptor.sha256});
+ const consumed=a.input_inventory?.filter(p=>p.path===descriptor.path);
+ demand(consumed?.length===1,'Missing/duplicate administrative consumed source map');
+ const mapPin=consumed[0];pinCheck(mapPin);
+ demand(mapPin.whole_body_consumed===true&&mapPin.bytes===descriptor.bytes&&mapPin.sha256===descriptor.sha256,'Administrative consumed source map identity differs');
+ // Retain the actual native execution's map origin, not a fabricated pin
+ // under the selector commit. Its whole map/source-bank joins remain below.
+ const map=yield {kind:'json',reader,pin:mapPin,read:()=>read(mapPin)};
  demand(map.kind===descriptor.kind&&map.native_manifest_sha256===selected.sha256&&map.release_id===selected.release_id,
   'Original selected source-map binding differs');
  const names=issued.source_rule.target_banks;
@@ -464,6 +471,9 @@ function originalAdministrativeBaseline(reader, issued, request, native) {
 }
 
 export function qualifyOriginalSourceAuthority(custody) {
+ return driveSourceAuthority(originalSourceAuthority(custody));
+}
+function* originalSourceAuthority(custody) {
  const proof=originalAuthorities.get(custody);demand(proof,'Require actual authenticated original rule custody');
  const {reader,bodies}=proof,{native_request:request,source_request:issued,source_facts:facts}=bodies,spec=request.additive;
  const keys=['publication_path','inventory_path','operating_path'];
@@ -474,7 +484,7 @@ export function qualifyOriginalSourceAuthority(custody) {
   demand(hash(p.uncompressed_sha256),'Missing complete decoded proof hash');const decoded=gunzipSync(encoded,{maxOutputLength:p.uncompressed_bytes});demand(decoded.length===p.uncompressed_bytes&&sha(decoded)===p.uncompressed_sha256,'Whole decoded original proof differs');return decoded;});
  const [publication,inventory,operating]=[JSON.parse(raw[0]),raw[1],JSON.parse(raw[2])],inventoryPin=pins[1];
  demand(publication.complete===true&&publication.facts.bytes===custody.pins.source_facts.bytes&&publication.facts.sha256===custody.pins.source_facts.sha256&&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(k=>publication.inventory[k]===inventoryPin[k]),'Partial/drifted original source publication');
- demand(facts.execution_commit===spec.source_execution_commit&&same(facts.input_descriptors,[issued.report,...issued.source_rule.inputs,...issued.baseline.pins])&&same(facts.runtime,spec.source_runtime)&&same(facts.installed_modules,issued.installed_modules)&&same(facts.parent,request.parent)&&originalAdministrativeBaseline(reader,issued,request,bodies.native_facts),'Original source execution closure differs');
+ demand(facts.execution_commit===spec.source_execution_commit&&same(facts.input_descriptors,[issued.report,...issued.source_rule.inputs,...issued.baseline.pins])&&same(facts.runtime,spec.source_runtime)&&same(facts.installed_modules,issued.installed_modules)&&same(facts.parent,request.parent)&&(yield* originalAdministrativeBaseline(reader,issued,request,bodies.native_facts)),'Original source execution closure differs');
  demand(operating.qualified===true&&operating.execution_commit===facts.execution_commit&&operating.exit?.code===0&&operating.exit.signal===null&&operating.owned_processes_remaining?.length===0&&operating.refusal===null&&operating.request_sha256===facts.request.sha256&&operating.destination===issued.destination,'Unqualified original source operating proof');
  const lines=inventory.toString('utf8').split('\n');demand(lines.pop()==='','Truncated complete source inventory');const rows=lines.map(line=>JSON.parse(line));
  demand(same(rows.map(r=>r.component_id),issued.source_rule.expected_ids)&&rows.length===facts.components&&new Set(rows.map(r=>r.component_id)).size===rows.length,'Omitted/duplicate/reordered source inventory');
@@ -536,7 +546,7 @@ export function qualifyOriginalNativeAuthority(custody, pins) {
 // Comparison is conservation, not admission of new authorities. The caller
 // must authenticate every whole registry preimage/source-authority body through
 // the committed selector before using this view. A registry is not approval.
-function authorityRegistry(registry) {
+export function authorityRegistry(registry) {
  demand(registry?.version===1&&registry.kind==='retained-rule-authority-registry-v1'&&Array.isArray(registry.entries)&&registry.entries.length>0,'Missing explicit retained authority registry');
  const byId=new Map();let previous='';
  for(const entry of registry.entries){
@@ -828,7 +838,9 @@ function* readAdoptedOsmRevision({evidence,proposed,owners,latitudes,read,json,r
 }
 
 function sourceTargetBodyVersion(reader,p) {
-  pinCheck(p);let version=p.commit;try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+  pinCheck(p);let version=p.commit;
+  if(reader instanceof ImmutableReader)version=reader.pinnedVersion(p);
+  else try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
   const d=reader.descriptor(p.path,version);
   demand(d.mode===p.mode&&d.git_blob_oid===p.git_blob_oid&&d.bytes===p.bytes,'Source-target whole identity differs');
   return version;
@@ -865,6 +877,7 @@ export async function qualifySourceTargetNativeAuthorityStored(reader,preimage,b
   demand(bytes===pin.decoded_bytes&&hash.digest('hex')===pin.decoded_sha256,'Source-target decoded body differs');
  };
  const acquire=async request=>{
+  if(request.kind==='bytes')return request.read();
   let input,expected;
   if(request.kind==='json'){
    const p=request.pin,version=sourceTargetBodyVersion(reader,p);input=chunks(p,version);expected={bytes:p.decoded_bytes??p.bytes,sha256:p.decoded_sha256??p.sha256};
@@ -915,7 +928,8 @@ function* evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnos
   &&same(preimage.source_evidence,binding.source_evidence)&&same(preimage.native_patch,binding.native_patch),
  'Source-target authority inputs differ');
  const read=p=>readSourceTargetBody(reader,p);
- const json=function*(pin){return yield {kind:'json',pin,read:()=>JSON.parse(read(pin))};};
+ const json=function*(pin){return yield {kind:'json',reader,pin,read:()=>JSON.parse(read(pin))};};
+  const bytes=function*(pin){return yield {kind:'bytes',reader,pin,read:()=>read(pin)};};
  const evidence=(yield* json(binding.source_evidence)), proposed=(yield* json(binding.native_patch));
  const dated = evidence?.version===2&&evidence.kind==='source-target-native-evidence-v2';
  const revised = evidence?.version===3&&evidence.kind==='source-target-native-evidence-v3';
@@ -933,13 +947,13 @@ function* evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnos
  demand(currentCatalogue.git_blob_oid===evidence.catalogue.git_blob_oid,'Source catalogue differs from the selected retained corpus');
  const catalogue=(yield* json(evidence.catalogue));
  const physicalInputs=(yield* json(evidence.physical_input));
- const physicalProgram=read(evidence.physical_reproduction);
+ const physicalProgram=yield* bytes(evidence.physical_reproduction);
  const candidateFrame=evidence.physical_reproduction.path===candidateFramePhysicalProgram.path
   &&sha(physicalProgram)===candidateFramePhysicalProgram.sha256?candidateFramePhysicalProgram:null;
  demand(evidence.native_latitudes.sha256===evidence.native_contract.native_latitudes.sha256
   &&evidence.native_latitudes.decoded_sha256===evidence.native_contract.native_latitudes.decoded_sha256,
  'Native source-target latitude contract differs');
- const latitudeRaw=read(evidence.native_latitudes);
+ const latitudeRaw=yield* bytes(evidence.native_latitudes);
  const physical=(yield* json(evidence.physical_evidence));
  demand(evidence.native_contract.size===262166&&latitudeRaw.length===262166*8,
  'Unsupported source-target native lattice');
@@ -1136,7 +1150,7 @@ function* evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnos
  // Complex accepted membership is only a negative ancestry witness. Keep the
  // flat positive reconciliation above unchanged; no descendant polygon stands
  // in for any part of the complete original source veto.
- const complexContexts=new WeakMap();
+ const complexContexts=new WeakMap();let originLineageBound=false;
  const complexSourceCompetitor = function*(id, originals) {
   if(owners.has(id)||evidence.targets.some(target=>target.id===id))return null;
   const changes=memberOwners.get(id)??[];
@@ -1214,8 +1228,9 @@ function* evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnos
      &&metadata.location_basis===change.basis&&metadata.source_url===change.source,
     'Complex source descendant parent or source identity differs');
     for(const member of members){const original=atoms(member);
-     demand([...original.sources].every(source=>source===change.source),
-      'Complex source intermediate provenance differs');}
+     if(![...original.sources].every(source=>source===change.source)&&!originLineageBound){
+      requireSelectedOriginLineage(reader,evidence.source_membership.lineage);originLineageBound=true;
+     }}
     if(metadata.original_id!==undefined)demand(members.length===1&&originals.has(members[0])
      &&metadata.original_id===originals.get(members[0]).properties?.shapeID,
     'Complex source original identity differs');
@@ -1568,7 +1583,7 @@ function* evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnos
     &&pin.bytes===expected.bytes&&pin.decoded_bytes===expected.uncompressed_bytes
     &&pin.decoded_sha256===expected.uncompressed_sha256,'Source family part differs from retained catalogue');yield pin;
   }};
-  const product=yield {kind:'source',sourceParts,record,read:()=>{
+  const product=yield {kind:'source',reader,sourceParts,record,read:()=>{
    const pieces=Array.from(sourceParts(),read),raw=Buffer.concat(pieces);
    demand(raw.length===record.original_bytes&&sha(raw)===record.original_sha256,'Whole original consumed source product differs');
    return JSON.parse(raw);
@@ -2126,7 +2141,10 @@ export function readRegistryAuthorityInputs(reader,entry) {
  return {pins,preimage,binding};
 }
 
-export function readRetainedRegistryAuthority(reader, entry, observationReader, {snapshot}={}) {
+export function readRetainedRegistryAuthority(reader,entry,observationReader,options={}) {
+ return driveSourceAuthority(retainedRegistryAuthority(reader,entry,observationReader,options));
+}
+function* retainedRegistryAuthority(reader, entry, observationReader, {snapshot}={}) {
  // Retain every actual whole input consumed by a detached authority reader.
  const observed=proof=>{
   if(observationReader!==undefined){
@@ -2146,7 +2164,7 @@ export function readRetainedRegistryAuthority(reader, entry, observationReader, 
  if(binding?.kind==='source-target-native-custody-v1'){
   const whole=p=>JSON.parse(readSourceTargetBody(reader,p));
   const proof=entry.completed_constructor===undefined
-   ?qualifySourceTargetNativeAuthority(reader,preimage,binding,{snapshot})
+   ?yield* evaluateSourceTargetNativeAuthority(reader,preimage,binding,false,snapshot)
    :verifyCompletedSourceTargetNativeAuthority({constructed:whole(entry.completed_constructor),preimage,binding,
      evidence:whole(binding.source_evidence),candidate:whole(binding.native_patch)});
   return observed(freeze({...proof,version:1,kind:'authenticated-registry-source-custody-v1',authority_sha256:entry.authority_sha256,
@@ -2160,7 +2178,7 @@ export function readRetainedRegistryAuthority(reader, entry, observationReader, 
  const original=originalAuthorities.get(custody).bodies;
  const codeIdentity=rows=>rows.map(p=>{demand(Object.keys(p).sort().join(',')==='bytes,path,sha256','Unsupported original complete code roster shape');return {path:p.path,bytes:p.bytes,sha256:p.sha256};});
  const programmeAuthority=readSupportedProgrammeAuthority(reader,{preimageVersion:preimage.version,sourceProfile:custody.source_rule.profile??null,sourceCode:codeIdentity(original.source_request.executed_code),nativeCode:codeIdentity(original.native_request.executed_code)});
- const source=qualifyOriginalSourceAuthority(custody),native=qualifyOriginalNativeAuthority(custody,binding.native_proof);
+ const source=yield* originalSourceAuthority(custody),native=qualifyOriginalNativeAuthority(custody,binding.native_proof);
  return observed(freeze({version:1,kind:'authenticated-registry-source-custody-v1',authority_sha256:entry.authority_sha256,
   rule_sha256:entry.rule_sha256,original_program_authority:programmeAuthority,policy_id:entry.policy_id,policy_version:entry.policy_version,
   pins,original_pins:binding.original_pins,source_scope_ids:custody.source_scope_ids,
@@ -2592,21 +2610,28 @@ export function acquireCurrentRebindOperands(snapshot,registry,originalRows,orig
 
 // A current rebind is complete data custody plus independently recomputed
 // applicability. It never replaces the original registry/source authority.
-export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,originalRows,originalPatches,size,snapshot}) {
+export function readCurrentRebindCustody(reader,pin,options) {
+ return driveSourceAuthority(currentRebindCustody(reader,pin,options));
+}
+function* currentRebindCustody(reader,pin,{baseSelection,registry,originalRows,originalPatches,size,snapshot}) {
  demand(reader instanceof ImmutableReader,'Require actual immutable custody reader');
  demand(snapshot?.reader===reader,'Current rebind custody requires the actual privately authenticated selected snapshot');
  rebindKeys(pin,'commit,path,mode,git_blob_oid,bytes,sha256','Foreign ordinary current rebind pin');pinCheck(pin);demand(pin.decoded_bytes===undefined,'Current rebind certificate requires whole ordinary JSON');
- const descriptor=reader.descriptor(pin.path,pin.commit);demand(descriptor.mode===pin.mode&&descriptor.git_blob_oid===pin.git_blob_oid&&descriptor.bytes===pin.bytes,'Whole rebind certificate identity differs');
- const certificate=reader.json(pin.path,{version:pin.commit,expected:pin.sha256});
+ const certificate=yield {kind:'json',reader,pin,read:()=>{
+  const version=reader.pinnedVersion(pin),descriptor=reader.descriptor(pin.path,version);
+  demand(descriptor.mode===pin.mode&&descriptor.git_blob_oid===pin.git_blob_oid&&descriptor.bytes===pin.bytes,'Whole rebind certificate identity differs');
+  return reader.json(pin.path,{version,expected:pin.sha256});}};
  demand(Object.keys(certificate).sort().join(',')==='authority_registry_sha256,base_selection,execution_commit,facts,kind,operating,publication,request,result,version','Foreign current rebind certificate roster');
  const names=['request','facts','publication','operating','result'];
  const roster=names.map(name=>{const p=certificate[name];pinCheck(p);demand(p.decoded_bytes===undefined,'Current rebind products require ordinary whole JSON');return {name,p};});
  const earlyRoster=roster.filter(({name})=>name!=='result');
- for(const {name,p}of roster){const actual=reader.descriptor(p.path,p.commit);demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Whole rebind product mode/OID/length differs');}
+ const bodies=yield {kind:'bodies',reader,pins:roster.map(({p})=>p),read:()=>{
+  for(const {p}of roster){const actual=reader.descriptor(p.path,reader.pinnedVersion(p));demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Whole rebind product mode/OID/length differs');}
+  return Object.fromEntries(earlyRoster.map(({name,p})=>[name,JSON.parse(reader.read(p.path,{version:reader.pinnedVersion(p),expected:p.sha256}))]));}};
  demand(/^[a-f0-9]{40}$/.test(certificate.execution_commit),'Missing actual rebind execution identity');
- const bodies=Object.fromEntries(earlyRoster.map(({name,p})=>[name,JSON.parse(reader.read(p.path,{version:p.commit,expected:p.sha256}))]));
  const historicalPaths=currentRebindCodePaths(bodies.request.executed_code);
- const historicalCode=historicalPaths.map(path=>reader.descriptor(path,certificate.execution_commit));
+ const historicalCode=yield {kind:'original-paths',reader,paths:bodies.request.executed_code.map(p=>({...p,commit:certificate.execution_commit})),
+  read:()=>historicalPaths.map(path=>reader.descriptor(path,certificate.execution_commit))};
  // Authenticate the complete vector that actually executed. Current wrapper
  // bytes never relabel a historical generation; current operands and results
  // are independently recomputed below under the current trusted validator.
@@ -2617,28 +2642,45 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  const externalNames=['code_source','terminal','stderr','stdout','issued_plan'];rebindKeys(bodies.operating.execution_custody,externalNames.join(','),'Incomplete external execution roster');
  const externalRoster=externalNames.map(name=>({name,p:bodies.operating.execution_custody[name]}));
  for(const {p}of externalRoster){pinCheck(p);demand(p.decoded_bytes===undefined,'External execution whole ordinary custody required');}
- for(const {p}of externalRoster){const actual=reader.descriptor(p.path,p.commit);demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'External execution ordinary identity differs');}
- const executionCustody=Object.fromEntries(externalRoster.map(({name,p})=>[name,reader.read(p.path,{version:p.commit,expected:p.sha256})]));
+ const executionCustody=yield {kind:'bodies',reader,pins:externalRoster.map(({p})=>p),read:()=>{
+  for(const {p}of externalRoster){const actual=reader.descriptor(p.path,reader.pinnedVersion(p));demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'External execution ordinary identity differs');}
+  return Object.fromEntries(externalRoster.map(({name,p})=>[name,reader.read(p.path,{version:reader.pinnedVersion(p),expected:p.sha256})]));}};
  verifyCurrentRebindExecution({request:bodies.request,operating:bodies.operating,expectedCode,custody:{...executionCustody,result_sha256:roster.find(p=>p.name==='result').p.sha256}});
  // Reauthenticate the exact issued explicit operands through the same whole
  // immutable reader. Historical plans without this field retain their route.
  const issuedOriginalInputs=JSON.parse(executionCustody.issued_plan).original_inputs;
- if(issuedOriginalInputs!==undefined)for(const p of issuedOriginalInputs){
-  const actual=reader.descriptor(p.path,p.commit);
+ if(issuedOriginalInputs!==undefined)yield {kind:'bodies',reader,pins:issuedOriginalInputs,read:()=>{for(const p of issuedOriginalInputs){
+  const version=reader.pinnedVersion(p),actual=reader.descriptor(p.path,version);
   demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Issued original input mode/OID/bytes differ');
-  reader.read(p.path,{version:p.commit,expected:p.sha256});
- }
+  reader.read(p.path,{version,expected:p.sha256});
+ }}};
 
  const acquired=acquireCurrentRebindOperands(snapshot,registry,originalRows,originalPatches,{
   targetSources:bodies.request.acquisition?.target_sources,predecessorProof:bodies.request.acquisition?.predecessor_proof});
  const resultPin=roster.find(row=>row.name==='result').p;
- bodies.result=JSON.parse(reader.read(resultPin.path,{version:resultPin.commit,expected:resultPin.sha256}));
+ bodies.result=JSON.parse(reader.read(resultPin.path,{version:reader.pinnedVersion(resultPin),expected:resultPin.sha256}));
  const result=verifyCurrentRebindProducts({certificate,...bodies,baseSelection,registry,originalRows,originalPatches,size,expectedCode,acquired,executionCustody,bodyPins:Object.fromEntries(roster.map(({name,p})=>[name,p]))});
  return result;
 }
 
 // Explicit committed data-only hook. This does not discover proposal files.
 export function readSelectedAdditive(snapshot) {
+ return driveSourceAuthority(selectedAdditive(snapshot));
+}
+export async function readSelectedAdditiveAcquired(snapshot) {
+ const steps=selectedAdditive(snapshot);
+ try{let step=steps.next();
+  while(!step.done){let value;try{
+   const request=step.value;
+   demand(request.reader instanceof ImmutableReader,'Require actual immutable acquisition reader');
+   if(request.kind==='original-paths')await request.reader.acquireOriginalPaths(request.paths);
+   else for(const pin of request.kind==='source'?request.sourceParts():request.pins??[request.pin])await request.reader.acquirePinned(pin);
+   value=request.read();
+  }catch(error){step=steps.throw(error);continue;}step=steps.next(value);}
+  return step.value;
+ }catch(error){try{steps.return();}catch{}throw error;}
+}
+function* selectedAdditive(snapshot) {
  const {reader,selection,manifest,owners}=snapshot,hook=selection.additive_release;
  if(hook===undefined)return null;
  demand(hook&&Object.keys(hook).sort().join(',')==='bytes,path,sha256'&&Number.isSafeInteger(hook.bytes)&&hook.bytes>0&&hash(hook.sha256),'Unsupported committed additive hook');
@@ -2683,7 +2725,7 @@ export function readSelectedAdditive(snapshot) {
  for(const entry of registry.entries){
   demand(entry.policy_id==='retained-source-literal-additions'&&entry.policy_version===1,'Unsupported source policy semantics/version');
   const child=new ImmutableReader(reader.repo,reader.version,{gitExecutable:reader.gitExecutable,invocation:reader.invocation});
-  const proof=readRetainedRegistryAuthority(child,entry,reader,{snapshot});
+  const proof=yield* retainedRegistryAuthority(child,entry,reader,{snapshot});
   for(const row of normalized.rows.values())if(row.authority_sha256===entry.authority_sha256){
    const original=proof.original_ledger.rows.find(r=>r.component_id===row.component_id);
    demand(original&&['assigned','zero-cell'].includes(original.disposition)&&same({...original,authority_sha256:entry.authority_sha256,rule_sha256:entry.rule_sha256},row),'Selected component rebinds original full native/source primitive');
@@ -2731,7 +2773,7 @@ export function readSelectedAdditive(snapshot) {
   for(const proof of proofs){delete proof.original_ledger;proof.native_proof={native_contract:proof.native_proof.native_contract,native_patches:proof.native_proof.native_patches};}
   const legacyAuthorities=new Set(proofs.filter(proof=>proof.original_pins.source_evidence===undefined).map(proof=>proof.authority_sha256));
   const legacyRegistry={...registry,entries:registry.entries.filter(entry=>legacyAuthorities.has(entry.authority_sha256))};
-  rebind=readCurrentRebindCustody(reader,named.ledger.current_rebind,{baseSelection,registry:legacyRegistry,originalRows:[...normalized.rows.values()].filter(row=>row.representation!=='native-cells'),originalPatches:proofs.filter(p=>p.original_pins.source_evidence===undefined).flatMap(p=>p.native_proof.native_patches),size:manifest.size,snapshot});
+  rebind=yield* currentRebindCustody(reader,named.ledger.current_rebind,{baseSelection,registry:legacyRegistry,originalRows:[...normalized.rows.values()].filter(row=>row.representation!=='native-cells'),originalPatches:proofs.filter(p=>p.original_pins.source_evidence===undefined).flatMap(p=>p.native_proof.native_patches),size:manifest.size,snapshot});
   demand(same(named.ledger.current_targets,rebind.current_targets),'Ledger current target pointsets differ from complete qualified rebind result');
  }else demand(!Object.hasOwn(named.ledger,'current_targets'),'Current targets require complete rebind custody');
  const expectedByRow=new Map();

@@ -1,0 +1,337 @@
+{
+  "version": 1,
+  "kind": "lie148-independent-source-applicability-and-stock-predicate-review",
+  "as_of_base": "b163f0c1a496dd8a341d646458e5f8ecac076e12",
+  "scope": {
+    "package_id": "gb-LIE-ADM1--repair-evaluation",
+    "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "queue_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "cells": 148,
+    "land": 148,
+    "water": 0,
+    "intervals": 60,
+    "owner_indices": [
+      7121
+    ],
+    "target_id": "atlas:territory:LIE",
+    "source_domain_transform": []
+  },
+  "original_contract_predicates": [
+    "Qualify exact original location membership, retained territorial exclusions, and complete source competitors.",
+    "Each of the 60 original intervals must be either a qualified additive repair to its recorded owner or a documented exception.",
+    "Run actual selected-native conservation plus source and physical witness checks; existing river water remains location-owned.",
+    "No owner or repair is asserted by this metadata-only assessment."
+  ],
+  "canonical_owner_geometry_locator": {
+    "commit": "b163f0c1a496dd8a341d646458e5f8ecac076e12",
+    "path": "data/geography/part-28.json",
+    "git_blob_oid": "a9e03cb07194a73f643af85d1e6db94abe3b5fc9",
+    "encoded_bytes": 6613963,
+    "feature_array_path": "/features/1263",
+    "feature_id": "atlas:territory:LIE",
+    "geometry_type": "MultiPolygon",
+    "source_member_count": 11,
+    "source_member_ids_equal_original_lineage": true,
+    "source_metadata": {
+      "source_name": "Atlas source aggregation",
+      "source_url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/",
+      "reference_year": "Undated modern reference",
+      "administrative_level": "Compact source country/territory",
+      "license": "Underlying source licenses retained in semantic-report.json"
+    },
+    "interpretation_limit": "This is a current canonical geometry locator and lineage/context join. It does not establish historical source equivalence, boundary authority, or rights."
+  },
+  "canonical_owner_bounds_locator": {
+    "commit": "b163f0c1a496dd8a341d646458e5f8ecac076e12",
+    "path": "data/canonical-grid/bounds.json.gz",
+    "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+    "encoded_bytes": 2663523,
+    "record_path": "$[7120]",
+    "owner_index": 7121,
+    "bounds": [
+      137981.7526422222,
+      91920.97471498145,
+      138100.0186377778,
+      92158.84517667477
+    ],
+    "interpretation_limit": "Bounds metadata only; geometry is in the separately pinned part-28 feature."
+  },
+  "lineage_and_source_selection": {
+    "owner_7121_location_id": "atlas:territory:LIE",
+    "lineage_atom_count": 11,
+    "lineage_atoms_equal_current_canonical_source_member_ids": true,
+    "original_selected_source_family": {
+      "key": "gb:LIE:ADM1",
+      "family_index": 193,
+      "represented_year": "2017",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "complete_features": 11
+    },
+    "original_contact_features": [
+      {
+        "index": 41684,
+        "id": "gb:LIE:ADM1:41692755B66371769109520",
+        "name": "Triesen",
+        "cells": 5
+      },
+      {
+        "index": 41687,
+        "id": "gb:LIE:ADM1:41692755B18610673403937",
+        "name": "Triesenberg",
+        "cells": 3
+      },
+      {
+        "index": 41690,
+        "id": "gb:LIE:ADM1:41692755B54662867343220",
+        "name": "Mauren",
+        "cells": 9
+      },
+      {
+        "index": 41691,
+        "id": "gb:LIE:ADM1:41692755B26730620500431",
+        "name": "Schaan",
+        "cells": 53
+      },
+      {
+        "index": 41692,
+        "id": "gb:LIE:ADM1:41692755B63992629942054",
+        "name": "Balzers",
+        "cells": 43
+      },
+      {
+        "index": 41693,
+        "id": "gb:LIE:ADM1:41692755B23424129986871",
+        "name": "Planken",
+        "cells": 35
+      }
+    ],
+    "positive_source_input": "Use the exact original 2017 simplified LIE ADM1 family as the selected source basis, with all 11 features and the six exact contacts; retain the full same-release family as adverse comparative evidence, not an automatic replacement.",
+    "identity_support": "Property-only join matched all 11 original source names/shape IDs to official Liechtenstein municipal-survey download labels; this is name/ID correspondence, not geometry, vintage, legal role, or terms equivalence."
+  },
+  "negative_source_family_coverage": {
+    "original_block_22_candidate_metadata": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-022.json.gz",
+      "git_blob_oid": "a19137a19e92e16b9d331913a963e5367788cb0c",
+      "encoded_bytes": 914257,
+      "exact_original_148_key_candidate_feature_indexes": [
+        41684,
+        41687,
+        41690,
+        41691,
+        41692,
+        41693
+      ],
+      "exact_original_148_key_candidate_families": [
+        193
+      ],
+      "scope_limit": "The per-cell candidate roster does not prove whole-target competitor absence."
+    },
+    "retained_complete_family_scans": [
+      {
+        "key": "gb:LIE:ADM1",
+        "features": 11,
+        "role": "selected original simplified family; full same-release 11-feature comparison retained separately; full version misses seven original cells."
+      },
+      {
+        "key": "gb:AUT:ADM1",
+        "family_index": 15,
+        "features": 9,
+        "represented_year": "2017",
+        "recorded_license": "CC BY-SA 2.0",
+        "original_148_key_hits": 0,
+        "adjacent_conflict_contact": "Vorarlberg feature 97560089B20931628540879 intersects only the separately excluded comparison key."
+      },
+      {
+        "key": "gb:AUT:ADM2",
+        "family_index": 16,
+        "features": 94,
+        "represented_year": "2017",
+        "recorded_license": "CC BY-SA 2.0",
+        "original_148_key_hits": 0,
+        "adjacent_conflict_contact": "Bludenz feature 14549572B41160672699042 intersects only the separately excluded comparison key."
+      }
+    ],
+    "additional_border_competitor_family_operands_identified_in_roster": [
+      {
+        "key": "gb:CHE:ADM1",
+        "family_index": 56,
+        "features": 26,
+        "represented_year": "2022",
+        "recorded_license": "Federal Office of Topography swisstopo License",
+        "compressed_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHE-ADM1-000.bin.gz",
+        "compressed_bytes": 139689,
+        "compressed_sha256": "ee584294823863023c54b753aec78e4cea46a907f4026d27ea29a805b2892450",
+        "decoded_bytes": 439174,
+        "decoded_sha256": "c0a78aa1cc5ce4a50e08e72d6424d4744024eb7421b13aedd8c3dd1139285cef",
+        "full_geometry_scan_performed": false
+      },
+      {
+        "key": "gb:CHE:ADM2",
+        "family_index": 57,
+        "features": 169,
+        "represented_year": "2022",
+        "recorded_license": "Federal Office of Topography swisstopo License",
+        "compressed_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHE-ADM2-000.bin.gz",
+        "compressed_bytes": 228317,
+        "compressed_sha256": "9bac8ea2933d6046130ddd6e39d7d3489ba1a22f8235f755f1054787e72d25c1",
+        "decoded_bytes": 726296,
+        "decoded_sha256": "bb272c66b2ad16c5e9d8a82dd6dbb774027dbac5f05a3a48288783f49ab11dfc",
+        "full_geometry_scan_performed": false
+      }
+    ],
+    "coverage_assessment": "Existing retained comparison covers all 11 LIE selected-family members and complete AUT ADM1/ADM2 families. Exact source-candidate metadata for the 148 keys names only six LIE features. However, because LIE also borders Switzerland and the original contract asks for complete competitors, CHE ADM1/ADM2 are a concrete additional negative-family input set unless the stock source recipe has an explicit, justified target-scope rule excluding them. Their catalogue/roster descriptors are available, but this review did not acquire or scan those geometries. Do not claim complete whole-target competitor clearance from the current AUT-only comparison."
+  },
+  "excluded_aut_conflict": {
+    "y": 92138,
+    "x": 138082,
+    "owners": [
+      7121,
+      8836
+    ],
+    "aut_feature_indices": [
+      1844,
+      1848
+    ],
+    "lie_feature_index": 41691,
+    "separate_package": "gb-AUT-ADM2--source-conflict",
+    "excluded_from_original_148": true
+  },
+  "physical_water_and_adverse_evidence": {
+    "retained_block22_mask_context": "148/148 original keys on physical land support, zero water support, zero source-relative cells; this is mask evidence, not an actual whole-target physical producer receipt.",
+    "full_same_release_difference": "Seven original keys are missed by the 11-feature full LIE representation; retain as adverse, do not auto-split or discard.",
+    "validity": "All original and comparative geometries in handoff passed validity checks; validity is not source applicability or fit."
+  },
+  "required_stock_recipe_bindings": [
+    "Bind original queue commit/path/blob and exact target ID atlas:territory:LIE, owner 7121, 148 exact keys and 60 interval ordinals.",
+    "Bind the current canonical target feature at data/geography/part-28.json#features/1263 and its 11-member source lineage as context; do not use its undated Natural Earth metadata as historical evidence.",
+    "Use all 11 original simplified LIE ADM1 features as the selected source input, with six exact contact IDs; carry full same-release seven-key misses as explicit adverse comparison.",
+    "Carry complete AUT ADM1/ADM2 and complete CHE ADM1/ADM2 as negative families; preserve the distinct AUT conflict point outside the 148.",
+    "Use actual selected-native conservation and physical/source witness results before proposing positive qualification; a zero-owner or name-match result alone is insufficient."
+  ],
+  "historical_status_and_limits": {
+    "prior_pr": "https://github.com/ChengshuLi/WorldAtlas/pull/2598",
+    "prior_root_acceptance_historical_suspended": true,
+    "current_credit_claimed": 0,
+    "current_review_or_observer_performed_by_this_agent": false,
+    "official_data_access": "The retained handoff reports linked official terms URL returned 404 and a separate official page returned 403; neither was retried or bypassed.",
+    "no_current_rights_or_authority_determination": true
+  },
+  "same_set_original_lineage_check": "true; canonical array order differs from original lineage order",
+  "competitor_input_closure": {
+    "observed_original_key_candidate_set": {
+      "pin": "2d1fc6f430e756498908bf2c4e267356a13f5cc7:coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-022.json.gz",
+      "blob_oid": "a19137a19e92e16b9d331913a963e5367788cb0c",
+      "exact_original_148_keys_expanded": 148,
+      "distinct_candidate_feature_indexes": [
+        41684,
+        41687,
+        41690,
+        41691,
+        41692,
+        41693
+      ],
+      "candidate_family_indexes": [
+        193
+      ],
+      "interpretation": "This is exact per-cell candidate evidence, not a whole-target negative-family screen."
+    },
+    "complete_families_present_in_authenticated_handoff": [
+      {
+        "key": "gb:LIE:ADM1",
+        "features": 11,
+        "role": "original selected simplified family; same-release full 11-feature variant retained as adverse comparison."
+      },
+      {
+        "key": "gb:AUT:ADM1",
+        "family_index": 15,
+        "features": 9,
+        "original_key_hits": 0,
+        "separate_conflict_contact": "Vorarlberg only at excluded y=92138,x=138082."
+      },
+      {
+        "key": "gb:AUT:ADM2",
+        "family_index": 16,
+        "features": 94,
+        "original_key_hits": 0,
+        "separate_conflict_contact": "Bludenz only at excluded y=92138,x=138082."
+      }
+    ],
+    "border_families_not_scanned_in_handoff": [
+      {
+        "key": "gb:CHE:ADM1",
+        "family_index": 56,
+        "features": 26,
+        "represented_year": "2022",
+        "license": "Federal Office of Topography swisstopo License",
+        "compressed_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHE-ADM1-000.bin.gz",
+        "compressed_bytes": 139689,
+        "compressed_sha256": "ee584294823863023c54b753aec78e4cea46a907f4026d27ea29a805b2892450",
+        "decoded_bytes": 439174,
+        "decoded_sha256": "c0a78aa1cc5ce4a50e08e72d6424d4744024eb7421b13aedd8c3dd1139285cef",
+        "publisher": "Federal Office of Topography swisstopo",
+        "source_url": "https://www.swisstopo.admin.ch/en/geodata/landscape/boundaries3d.html",
+        "license_source_url": "https://www.swisstopo.admin.ch/en/home/meta/conditions/geodata/ogd.html",
+        "license_detail_field": "nan"
+      },
+      {
+        "key": "gb:CHE:ADM2",
+        "family_index": 57,
+        "features": 169,
+        "represented_year": "2022",
+        "license": "Federal Office of Topography swisstopo License",
+        "compressed_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHE-ADM2-000.bin.gz",
+        "compressed_bytes": 228317,
+        "compressed_sha256": "9bac8ea2933d6046130ddd6e39d7d3489ba1a22f8235f755f1054787e72d25c1",
+        "decoded_bytes": 726296,
+        "decoded_sha256": "bb272c66b2ad16c5e9d8a82dd6dbb774027dbac5f05a3a48288783f49ab11dfc",
+        "publisher": "Federal Office of Topography swisstopo",
+        "source_url": "https://www.swisstopo.admin.ch/en/geodata/landscape/boundaries3d.html",
+        "license_source_url": "https://www.swisstopo.admin.ch/en/home/meta/conditions/geodata/ogd.html",
+        "license_detail_field": "nan"
+      }
+    ],
+    "assessment": "For a complete negative-family input set for Liechtenstein, include all features from AUT ADM1 (9), AUT ADM2 (94), CHE ADM1 (26), and CHE ADM2 (169), plus all 11 selected LIE source members. The original candidate-block expansion over the exact 148 keys finds only six LIE features at those cell centers; that center-candidate result does not establish whole-target/polygon absence for Switzerland. CHE is a concrete missing negative-family scan in the prior handoff, not an inferred contact or a finding of overlap.",
+    "swisstopo_terms_limit": {
+      "recorded_license": "Federal Office of Topography swisstopo License",
+      "recorded_license_detail": "nan",
+      "recorded_license_source": "https://www.swisstopo.admin.ch/en/home/meta/conditions/geodata/ogd.html",
+      "recorded_source": "https://www.swisstopo.admin.ch/en/geodata/landscape/boundaries3d.html",
+      "recorded_vintage": "2022",
+      "actual_reuse_clause_text_in_retained_metadata": false,
+      "assessment": "The retained catalogue and administrative metadata identify the publisher, custom license label, source link and terms link, but contain no actual license clauses. Do not describe these inputs as unrestricted or quote a commercial/noncommercial restriction without reviewing the linked terms. No Swiss geometry was fetched or scanned in this review.",
+      "read_attempt": {
+        "url": "https://www.swisstopo.admin.ch/en/home/meta/conditions/geodata/ogd.html",
+        "method": "GET via bounded programmatic curl range request (no browser)",
+        "http_status": 404,
+        "content_type": "application/json",
+        "response_bytes": 403,
+        "response_sha256": "6d16aee946a977a7a0e4e79925a334f66179652b1b28b7878e4fd8593fffd7d6",
+        "saved_response": "inventory/lie-swisstopo-ogd-recorded-url-response.json",
+        "server_error_detail": "[GET] \"/api/collector/en/home.json\": 404 Server Error"
+      },
+      "interpretation": "The recorded official OGD terms URL did not yield the terms page on this read. The only observed response was a 403-byte JSON 404 with an internal collector error. License clauses remain unverified from this source; this is a bounded access limitation, not evidence of a noncommercial restriction or unrestricted reuse."
+    }
+  },
+  "required_physical_native_outputs": [
+    "Bind the physical run to all 148 original keys/60 ordinals, owner7121, original block22 masks, and all 11 current canonical lineage members; report each source feature and physical/water outcome. Existing mask finding 148 land/0 water is not a whole-target physical producer receipt.",
+    "Retain the seven same-release full-LIE source misses as adverse evidence; do not silently switch to full geometry or split 141/7 without per-key source-applicability evidence under the original contract.",
+    "Provide exact source-evidence rows binding selected source IDs, current canonical target id, competitor feature IDs, and each original key/interval. The one AUT conflict key (92138,138082) must remain excluded as separate package evidence.",
+    "Run the stock selected-native diagnostic/authority/conservation against the exact 148-key request after source and physical inputs are bound; expose any held rows. No owner assignment or native hold removal follows from this review.",
+    "For the Swiss negative-family operands, preserve their recorded 2022 swisstopo source labels and terms URL; no unrestricted-use conclusion is supported by the retained metadata because licenseDetail is `nan` and the actual clauses are not embedded."
+  ],
+  "report_integrity_correction": {
+    "file": "inventory/lie-retained-source-physical-context.json",
+    "field": "purpose",
+    "correction": "Three exact public payloads were authenticated and used for property-only joins in the portable handoff; the local context file does not redistribute geometry. Existing contact and geometry-validity results are cited separately. No new observer or positive qualification is asserted.",
+    "portable_handoff_authority": "inventory/lie-audit-handoff/unpacked/retained/context.json"
+  },
+  "actual_reads_and_computations": [
+    "Read authenticated portable handoff README, retained context/disposition, source contacts, validity, official-name join, verified original pins, and original lineage excerpt.",
+    "Read frozen original source roster and complete retained-source catalogue from pinned public commit; metadata-only extraction for LIE/AUT/CHE family counts, IDs, years, and terms.",
+    "Expanded the exact 148 disposition interval keys against original block-022 source-candidate masks; result: six unique candidate feature indexes, all family193 LIE.",
+    "Read exact current canonical part-28 feature at index1263 and compared its 11 source_member_ids against original owner7121 lineage: equal as sets; array order differs.",
+    "Read exact canonical bounds owner record at index7121. No new geometry scan, observer, or physical/native producer was run."
+  ]
+}

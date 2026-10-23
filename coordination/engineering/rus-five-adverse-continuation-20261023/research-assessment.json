@@ -1,0 +1,56 @@
+{
+  "kind": "five_key_RUS_source_contact_research_assessment",
+  "status": "proposed_researched_unresolved; not root accepted; native holds remain",
+  "date": "2026-10-23",
+  "scope": {
+    "original_package_id": "gb-RUS-ADM2--repair-evaluation",
+    "original_denominator_cells": 2566967,
+    "exact_original_land_keys": 5,
+    "positive_repairs": 0,
+    "unresolved_proposals": 5,
+    "hold_removals": 0,
+    "whole_package_completion": false
+  },
+  "decision_basis": "The original simplified-source contacts are reproduced exactly. Full-resolution retained RUS/UKR source records are directly contradictory for these exact centers. Primary treaty text/map research and targeted same-vintage OSM relation/member lineage research did not resolve the applicable point-side/source relationship. All actual attempts and limits are retained below. This is a bounded researched-unresolved proposal, not an assertion that every conceivable source or archival route was exhausted.",
+  "shared_source_result": "All five are original mapped_land_support rows, each with an exact UKR ADM1 contact. Full-source comparison finds each center inside the matching full UKR ADM1 record and outside its matching full RUS ADM2 record, contrary to a simple positive RUS owner interpretation. The source archive contains complete records and provenance; neither source is represented as current legal authority.",
+  "research_steps": [
+    {
+      "step": "Reconcile original exact keys and native contacts",
+      "result": "Copied the five exact rows, interval ordinals, owner IDs/names, classes, and source foreign-contact IDs from the retained 9,451-key tuple inventory. The unchanged native holds and original interval ownership remain intact. No observer or physical/native producer was rerun."
+    },
+    {
+      "step": "Compare source-specific full records",
+      "result": "Retained archived complete RUS and UKR source records show opposite owner/foreign inclusion for all five keys. The exact RUS archive bytes are 50,309,119 bytes, SHA-256 faa6461e6a85d021ac4b99ee983b3cf92fa05d4468a8ea79e2dea2615fc30aab, pinned to geoBoundaries commit 9469f09592ced973a3448cf66b6100b741b64c0d and sourceData/gbOpen/RUS_ADM2.zip. The Sumy comparison report uses the correct hash. Three other historic reports contain a one-character checksum transcription error; retained bytes are unchanged and the verified checksum is documented in the existing addendum."
+    },
+    {
+      "step": "Sumy / Trubchevsky (x155620,y86172, owner38470, interval823)",
+      "result": "The retained RUS feature ID 1241910 matches OSM relation 1241910 by name/admin tags. Relation v25 (2017-11-20) contains outer way 131381559 v10 (2014-06-29), whose local historic nodes 359597803 and 978262909 stayed at their recorded coordinates until 2020. Target is about 4.469 m from that historical segment by local equirectangular diagnostic. OSM relation v25 full route returned HTTP404 in retained work; this is not an access denial. A full historic relation polygon was not reconstructed. Treaty sheet N-36-128-B provides regional route context but map ink/control does not establish the center side. The point remains materially ambiguous."
+    },
+    {
+      "step": "Tarasovsky / Luhansk (x159968,y90458 and x159967,y90460, owner37096, intervals1835/1838)",
+      "result": "Retained RUS feature ID 1526041 matches OSM relation 1526041 by name/admin tags. Relation v20 (2016-11-23) has 44 members; local outer way 290274182 v5 (2015-08-19) and relevant node histories are retained. Local line distances are about 4.409 m and 41.447 m; these are proximity diagnostics, not boundary accuracy or legal evidence. RUS archive capture date/version is not authenticated; treaty sheet M-37-128-A depicts a regional Derkul corridor but has no reliable pointwise registration/side determination. Full historical relation geometry was not reconstructed."
+    },
+    {
+      "step": "Krasnosulinsky / Luhansk (x160137,y90986 and x160134,y90988, owner37630, intervals1905/1906)",
+      "result": "Retained RUS feature ID 1517228 matches OSM relation 1517228 by name/admin tags. Relation v38 (2017-09-17) has 95 members and includes outer way 106358439 v15 (2017-09-11), tagged admin_level=2; dated historical nodes were retained. Local distances to the international-scale segment are about 25.598 m and 15.895 m, not ADM2 side or legal evidence. A bounded historical Overpass query returned HTTP406 twice, with the exact response retained; this is not an access denial. The treaty sheet is adverse but conditional map registration lacks independent controls. Full historic relation geometry was not reconstructed."
+    },
+    {
+      "step": "Primary treaty/map context and reasonable remaining limitations",
+      "result": "Original treaty text and relevant map sheets were inspected, including sheet-level labels/routes and targeted local controls. Sumy, Tarasovsky and Krasnosulinsky map placement remains conditional or ambiguous due to map scale/ink, local marker absence, or registration/control limitations. No present-day sovereignty, legal boundary or current authority conclusion is inferred from names or polygons."
+    }
+  ],
+  "unperformed_or_limited_routes": [
+    "No full historic OSM relation polygon was reconstructed. Official OSM element-version/history responses and local boundary-member/node histories were examined. A relation-version full request returned 404 for Sumy; the bounded dated Overpass historical query for Krasnosulinsky returned HTTP406 twice. OSM documentation limits the main editing API to element-scale use and points bulk historical consumers to Overpass/extracts. A full recursive member/node crawl was not undertaken because it would be a large historical data extraction, not a bounded local evidence check; no statement of global unavailability or access denial is made.",
+    "The retained RUS archive represented year is 2017, but capture date/version is not authenticated. Existing public archived bytes and source comparison are preserved; no second archive download or modern-source substitution was made.",
+    "The treaty maps do not provide independently controlled pointwise georeferencing adequate to resolve these center-side contradictions. The related map inspections and controls are cited in the retained reports; no missing marker is converted into proof of either side."
+  ],
+  "remaining_obstacle": "Current sources are incompatible at the five centers, and the retained historical local boundary evidence is close but cannot establish source applicability/side. No justified positive repair is supported. Reasonable targeted source, map and relation-lineage work has been done; the remaining unperformed full historical polygon reconstruction is a broad recursive extraction rather than a bounded contract-required step. The proposal remains reviewable and does not call the overall search exhaustive.",
+  "scientific_claims": {
+    "current_legal_boundary": false,
+    "sovereignty": false,
+    "positive_repair": false,
+    "owner_change": false,
+    "native_hold_removed": false,
+    "root_acceptance": false
+  }
+}

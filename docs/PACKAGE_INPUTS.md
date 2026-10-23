@@ -2,7 +2,7 @@
 
 `.github/package-inputs.json` is the shared source of truth for deployment package inputs and the applicability of package CI. It declares ordinary source files/directories, optional directories, package verification controls, and approved generated outputs. Directory entries end in `/`; other entries match exactly. No implementation byte fingerprints are maintained.
 
-`npm run build:static`, `npm run build:hosted`, and `npm run build:cloudflare` create a temporary source image containing only those declared inputs and the caller's installed dependencies. Private inner builders run there. Ordinary filesystem reads, imports and child tools cannot consume unpublished repository files absent from that image. Required missing inputs, source symlinks and dependency links escaping the dependency installation fail the build. Successful builds return only approved outputs; failed child builds retain previous caller outputs. Temporary images are removed in `finally` and live inside the managed checkout's cache so abandoned images remain subject to workspace cleanup. Check storage before large builds.
+`npm run build:static`, `npm run build:hosted`, and `npm run build:cloudflare` create a temporary source image containing only those declared inputs and the caller's installed dependencies. Private inner builders run there. Ordinary filesystem reads, imports and child tools cannot consume unpublished repository files absent from that image. Required missing inputs, source symlinks and dependency links escaping the dependency installation fail the build. Successful builds return only approved outputs; failed child builds retain previous caller outputs. Temporary images are removed in `finally` and live inside the managed checkout's cache so abandoned images remain subject to workspace cleanup.
 
 This is a cooperative build boundary, not an operating-system security sandbox. Deliberate absolute access to outside files, malicious dependencies and forged stage environment variables are not contained. It also does not guarantee a reproducible environment or pin remote network responses. Build jobs retain existing read-only credentials and deployment/import restrictions. Use the public package commands and review build changes under the normal independent-review gate.
 
@@ -47,7 +47,7 @@ Reuse does not recreate or compare the original installed environment. Historica
 runtime metadata stays literal in the original manifest. New captures record the actual
 build's runtime metadata without an installed-file inventory. Current assembly admits
 its locked Node dependencies, authenticates the archive extractor, and runs the current
-selected additive computation with its actual source/input/output bindings. The queue
+selected corrected-bank copy with its actual source/input/output bindings. The queue
 attempts this assembly before installing scientific Python requirements. Successful
 assembly needs only the Python standard library under isolated startup; a fallback
 build and ordinary full/evidence regression still install the pinned requirements
@@ -58,8 +58,11 @@ Tests, unrelated workflows and observer scripts outside the declared image do no
 invalidate those bytes merely because they changed. A declared observer remains a
 package input; this change does not guess which declared files are unused.
 
-Selected declaration admission checks the append-only inert file boundary and
-immutable source rows. It does not equate the parent reader inventory with all
+Selected declaration admission checks the inert file boundary and immutable
+source rows. For the prepared bank, two exact selector-bound v2 indices derive
+only the new active E/context members and exact retired prior-v2 members. Fixed
+v1 compatibility and normative N remain unchanged; no prefix exemption or URL
+rebinding is allowed. The first v2 rollout requires a new full capture. It does not equate the parent reader inventory with all
 scientific consumption: detached readers authenticate their own inputs, while
 existing scientific loading and copied-publication checks remain authoritative.
 
@@ -75,7 +78,9 @@ directories and present optional inputs), the reviewed expectations, and the
 coordination execution closure. Verification-only data fixtures are omitted on
 this route: neither retained assembly nor the declared full-build source image
 consumes them, and current emitted smoke reads the selected roles and emitted
-assets. Full and focused regression checkouts continue to retain their declared
+assets. The emitted consumer compares every final word to original N plus the
+accepted patch, with N constrained by its original decoded chunk hashes. Browser
+startup does not perform that composition. Full and focused regression checkouts continue to retain their declared
 verification fixtures.
 A worker run's workflow commit and built candidate commit are distinct: the authenticated inventory log binds the candidate,
 and the executed workflow must match its captured descriptor. The existing capture

@@ -1,0 +1,68 @@
+{
+  "title": "Bounded retained Norway historical WMS and metadata retrieval evidence",
+  "scope": "Copies of already retrieved small response bodies only. No request was repeated. The four GetFeatureInfo response bodies were not retained and are explicitly not represented here.",
+  "retrieved_bodies": [
+    {
+      "file": "historical-wms-capabilities.xml",
+      "request_url": "https://wms.geonorge.no/skwms1/wms.adm_enheter_historisk?service=WMS&request=GetCapabilities",
+      "resource": "Kartverket / Geonorge historical WMS GetCapabilities",
+      "observed_status": "HTTP 200",
+      "observed_content_type": "text/xml; charset=UTF-8",
+      "bytes": 38020,
+      "sha256": "cfd2da187762ac157577c0dc94dea5e88a0aab6dd74021956465f1f4b0f72954",
+      "retained_path": "inventory/rus-nor2-primary-retrieval-evidence/historical-wms-capabilities.xml"
+    },
+    {
+      "file": "historical-catalogue-shell.html",
+      "request_url": "https://kartkatalog.geonorge.no/metadata/uuid/9bc064e3-6c34-4c3a-8421-00290052e9c0",
+      "resource": "Kartkatalog metadata page (JavaScript shell)",
+      "observed_status": "HTTP 200",
+      "observed_content_type": "text/html",
+      "bytes": 4665,
+      "sha256": "b07fdc232ebb51e20fd645dbf4a33f3f55d0b2857cedd8879aef7ea38d7d33a3",
+      "retained_path": "inventory/rus-nor2-primary-retrieval-evidence/historical-catalogue-shell.html"
+    },
+    {
+      "file": "historical-series-iso19139.xml",
+      "request_url": "https://www.geonorge.no/geonetwork/srv/nor/xml_iso19139?uuid=9bc064e3-6c34-4c3a-8421-00290052e9c0",
+      "resource": "Geonorge ISO 19139 historical-series metadata",
+      "observed_status": "HTTP 200",
+      "observed_content_type": "application/xml",
+      "bytes": 50703,
+      "sha256": "86a74099dd3c9a95453358a2a6bafe14a494ded715f1a88f6d6c11bd367a4a45",
+      "retained_path": "inventory/rus-nor2-primary-retrieval-evidence/historical-series-iso19139.xml"
+    },
+    {
+      "file": "recorded-download-capabilities-response.html",
+      "request_url": "https://nedlasting.geonorge.no/api/capabilities/",
+      "resource": "Geonorge URL recorded in ISO metadata; HTML not-found response",
+      "observed_status": "HTTP 200 (HTML not-found body)",
+      "observed_content_type": "text/html",
+      "bytes": 5625,
+      "sha256": "731d1d824a797fce08326ec2f9318d810e91067b8503aef3585066683ad663e8",
+      "retained_path": "inventory/rus-nor2-primary-retrieval-evidence/recorded-download-capabilities-response.html"
+    }
+  ],
+  "point_query_evidence": {
+    "raw_response_bodies_retained": false,
+    "raw_body_hashes_available": false,
+    "result_record": "inventory/rus-nor2-researched-unresolved-assessment.json#primary_research_performed",
+    "method_record": "inventory/rus-nor-mng-source-applicability-followup.json#primary_source_followups",
+    "endpoint": "https://wms.geonorge.no/skwms1/wms.adm_enheter_historisk",
+    "recorded_requests": "Four WMS 1.3.0 GetFeatureInfo requests for layers fylker_2021/fylker_2023, followed by four small centered-pixel requests. The retained report records CRS, BBOX/pixel dimensions, key-to-pixel mapping and returned feature/no-result summaries; exact serialized query URLs and response bytes were not saved.",
+    "reported_outcomes": "For key (152972,59849), no result in either layer in coarse or tiny-pixel queries. For (152965,59862), Troms og Finnmark / county 54 in both layers in both query rounds.",
+    "interpretive_limit": "WMS GetFeatureInfo is a pixel lookup, not a vector geometry test. The response summaries do not prove exact point-in-polygon exclusion."
+  },
+  "original_contact_scan_semantics": {
+    "available_evidence": "The original retained contact index and complete-source bindings preserve the two cell keys, RUS owner, Norway family/source ID/name, and one-based source ordinal. The copied handoff also retains native negative operand bindings.",
+    "specific_method_verified": false,
+    "finding": "The retained contact rows do not identify whether the original contact predicate used center membership, raster-cell intersection, or another stored native contact rule. No cell-versus-center explanation is asserted for the contrast.",
+    "original_contact_index": "inventory/rus-other-contact-471-key-and-family-index.json",
+    "complete_source_bindings": "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/complete-source-negative-bindings.json"
+  },
+  "limitations": [
+    "These retained bodies document the actual retrievals but do not expose a 2022 county geometry.",
+    "The ISO record did not expose a direct 2022 file URL; the recorded capabilities URL returned an HTML not-found body.",
+    "No cart, credentials, terms acceptance, alternate route, or repeat point query was used."
+  ]
+}

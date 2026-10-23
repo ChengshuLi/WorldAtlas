@@ -237,9 +237,10 @@ function fixture(){
  const destA='.cache/additive-native-gap-repair/delivery/'+a.sha256+'/sources-000.jsonl.gz',destB='.cache/additive-native-gap-repair/delivery/'+b.sha256+'/components-001.jsonl.gz';
  const product=(p,destination)=>({identity:sha(json({mode:p.mode,bytes:p.bytes,sha256:p.sha256,uncompressed_bytes:p.uncompressed_bytes??null,uncompressed_sha256:p.uncompressed_sha256??null})),source:p,destinations:[p.path,destination],uses:['source-input','native-input','physical-product']});
  const plan={version:1,kind:'transport-only-deduplicated-input-plan',products:[product(a,destA),product(alias,destA),product(b,destB)],unique_encoded_bytes:a.bytes+alias.bytes+b.bytes};
+ const gitExecPath=fs.realpathSync(git(origin,['--exec-path']).toString().trim()),gitExecutable=fs.realpathSync(path.resolve(gitExecPath,'../../bin/git'));
  const fetchCalls=[],importedOids=[],writes=[],bodyReads=[],control={interruptFetch:false,interruptFile:false,corruptRead:false};
  const execute=(command,args,options)=>{
-  assert.equal(command,'git');assert.equal(options.env.GIT_NO_LAZY_FETCH,'1');
+  assert.ok(command==='git'||command===gitExecutable);assert.equal(options.env.GIT_NO_LAZY_FETCH,'1');
   if(args.includes('fetch')){
    const requested=options.input.trim().split('\n');fetchCalls.push(requested);assert.equal(new Set(requested).size,requested.length);
    args=args.map(a=>a==='https://github.com/ChengshuLi/WorldAtlas.git'?origin:a);
@@ -251,7 +252,7 @@ function fixture(){
   if((control.corruptRead||control.corruptOid===args.at(-1))&&args.includes('cat-file')&&args.includes('blob'))return Buffer.from('wrong bytes');return raw;
  };
  const options={execute,token:'',onMaterialized(event){writes.push(event.path);if(control.interruptFile){control.interruptFile=false;throw Error('fixture interruption after completed alias');}}};
- return {directory,origin,destination,plan,options,execute,control,fetchCalls,importedOids,writes,bodyReads,git,rawA,rawB,a,b,destA,destB,oidA,oidB,close(){fs.rmSync(directory,{recursive:true,force:true});}};
+ return {directory,origin,destination,plan,options,execute,control,fetchCalls,importedOids,writes,bodyReads,git,gitExecutable,gitExecPath,rawA,rawB,a,b,destA,destB,oidA,oidB,close(){fs.rmSync(directory,{recursive:true,force:true});}};
 }
 
 test('actual missing Git objects and repeated identities acquire once; complete aliases are materialized once',async()=>{
@@ -339,11 +340,19 @@ test('plain materialize CLI authenticates a saved recipe index and resumes with 
   } finally { f.close(); }
 });
 
-test('cold acquisition reuses gh login ephemerally; warm and non-fetch reads never request credentials', async () => {
+test('cold acquisition reuses selected Git/helpers and gh login; warm reads never reselect or request credentials', async () => {
   const f = fixture(); let tokenReads = 0, authenticatedFetches = 0;
+  const keys = ['PATH','GIT_EXEC_PATH','GIT_DIR','GIT_WORK_TREE','GIT_INDEX_FILE','GIT_CONFIG_GLOBAL'];
+  const saved = Object.fromEntries(keys.map(key => [key, process.env[key]]));
   try {
+    for (const key of ['GIT_DIR','GIT_WORK_TREE','GIT_INDEX_FILE','GIT_CONFIG_GLOBAL']) process.env[key] = path.join(f.directory, 'unrelated-' + key);
     const execute = deliveryAcquisitionExecute({readToken: () => { tokenReads++; return 'local-fixture-token'; },
       execute: (command, args, options) => {
+        assert.equal(command, f.gitExecutable);
+        assert.equal(options.env.GIT_EXEC_PATH, f.gitExecPath);
+        for (const key of ['GIT_DIR','GIT_WORK_TREE','GIT_INDEX_FILE']) assert.equal(options.env[key], undefined);
+        assert.equal(options.env.GIT_CONFIG_GLOBAL, '/dev/null');
+        assert.equal(options.env.GIT_NO_REPLACE_OBJECTS, '1');
         if (args.includes('fetch')) {
           authenticatedFetches++; assert.equal(options.env.GIT_CONFIG_COUNT, '3');
           assert.equal(options.env.GIT_CONFIG_KEY_2, 'http.https://github.com/.extraheader');
@@ -353,11 +362,15 @@ test('cold acquisition reuses gh login ephemerally; warm and non-fetch reads nev
       }});
     await acquireDeliveryInputs(f.plan, f.destination, {...f.options, execute});
     assert.equal(tokenReads, 1); assert.equal(authenticatedFetches, 1);
+    process.env.PATH = ''; process.env.GIT_EXEC_PATH = path.join(f.directory, 'wrong-helpers');
     await acquireDeliveryInputs(f.plan, f.destination, {...f.options, execute});
     assert.equal(tokenReads, 1); assert.equal(authenticatedFetches, 1);
     assert.throws(() => execute('git', ['fetch', 'https://example.invalid/repository'], {env: {}}), /Unexpected acquisition/);
     assert.equal(tokenReads, 1);
-  } finally { f.close(); }
+  } finally {
+    for (const [key, value] of Object.entries(saved)) { if (value === undefined) delete process.env[key]; else process.env[key] = value; }
+    f.close();
+  }
 });
 
 }

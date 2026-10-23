@@ -1,0 +1,283 @@
+{
+  "kind": "niu-independent-physical-receipt-review-v1",
+  "scope": {
+    "package_id": "gb-NIU-ADM1--repair-evaluation",
+    "original_land_cells": 116,
+    "original_intervals": 50,
+    "owner_index": 7126,
+    "original_source_features": [
+      47591,
+      47592,
+      47593,
+      47597,
+      47598,
+      47599,
+      47600,
+      47602
+    ],
+    "separate_physical_companion_cells": 47,
+    "companion_features": [
+      47593,
+      47595,
+      47596
+    ]
+  },
+  "actual_operation": {
+    "type": "read-only verification of committed physical receipt and exact stage/source identity",
+    "producer_rerun": false,
+    "owner_observer_rerun": false,
+    "source_scanner_rerun": false
+  },
+  "receipt": {
+    "commit": "e96d95a3b4337e6f26b272eefdd6ed36bc4fd434",
+    "prefix": "coordination/engineering/niu-qualified-repair-20261021/physical-001",
+    "execution_receipt_path": "coordination/engineering/niu-qualified-repair-20261021/physical-001/execution-receipt.json",
+    "execution_receipt_sha256": "af60cc3d43270aba8217d12af784c053ec3a28ffa65b8eb21bcf9ec2c2f94db00",
+    "support_path": "coordination/engineering/niu-qualified-repair-20261021/physical-001/whole-target-support.json",
+    "support_bytes": 30293,
+    "support_sha256": "d24e65b4e0ab93bff9591dfebacc5445c5238cdca61c953d078460d132b2a4b5",
+    "program": "scripts/qualify-source-cohort.py",
+    "program_sha256": "abc801b9a35d20c9f0dfe3bbc9bb2cb7dc107f1758414970d9cde11380574a18",
+    "execution_receipt_elapsed_seconds": 4.597228167000139,
+    "support_elapsed_seconds": 4.596646874999351,
+    "runtime": {
+      "shapely": "2.1.2",
+      "geos": "3.13.1"
+    },
+    "input_count": 25,
+    "source_id_queries": [
+      807
+    ]
+  },
+  "original_stage_input_binding": {
+    "path": "coordination/engineering/niu-qualified-repair-20261021/physical-preparation/original-stage-inputs.json",
+    "commit": "541aa3f960f3db3227d9ee46ed0896c47598a165",
+    "git_blob_oid": "bb63de07fe622b438664591e0a1d779378cc05eb",
+    "bytes": 7918,
+    "sha256": "8631332ba95eaec03a23d0ee2a77a7ade1fadbb6644635a68ea6bc66f23ecae9",
+    "rows": 8,
+    "source_payload_path": "inventory/niu-audit-handoff/extracted/primary/gb-original.geojson",
+    "source_payload_sha256": "4bf1e8967a32d43da06c12e43bf99ea35c704aa00ffaaa821f63728335088b13",
+    "source_payload_features": 14,
+    "all_eight_stage_properties_and_geometries_equal_selected_original_payload_feature": true,
+    "rows_detail": [
+      {
+        "target_id": "gb:NIU:ADM1:93272968B4423412382248",
+        "source_feature_index": 47591,
+        "source_feature_id": "93272968B4423412382248",
+        "source_name": "Hikutavake",
+        "family": "gb:NIU:ADM1",
+        "owner_index": 7126,
+        "stage_properties_equal_original_payload": true,
+        "stage_geometry_equal_original_payload": true,
+        "physical_issues": [],
+        "physical_source_id_queries": [
+          807
+        ],
+        "physical_relation": {
+          "status": "checked",
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "witness": "complete-candidate-reconstruction"
+        },
+        "interpretation": "Physical receipt only; does not decide source applicability, source competitors, simplified-vs-full representation sensitivity, or native owner conservation."
+      },
+      {
+        "target_id": "gb:NIU:ADM1:93272968B22364225711306",
+        "source_feature_index": 47592,
+        "source_feature_id": "93272968B22364225711306",
+        "source_name": "Toi",
+        "family": "gb:NIU:ADM1",
+        "owner_index": 7126,
+        "stage_properties_equal_original_payload": true,
+        "stage_geometry_equal_original_payload": true,
+        "physical_issues": [],
+        "physical_source_id_queries": [
+          807
+        ],
+        "physical_relation": {
+          "status": "checked",
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "witness": "complete-candidate-reconstruction"
+        },
+        "interpretation": "Physical receipt only; does not decide source applicability, source competitors, simplified-vs-full representation sensitivity, or native owner conservation."
+      },
+      {
+        "target_id": "gb:NIU:ADM1:93272968B97328284886537",
+        "source_feature_index": 47593,
+        "source_feature_id": "93272968B97328284886537",
+        "source_name": "Mutalau",
+        "family": "gb:NIU:ADM1",
+        "owner_index": 7126,
+        "stage_properties_equal_original_payload": true,
+        "stage_geometry_equal_original_payload": true,
+        "physical_issues": [
+          "extra_reconstruction"
+        ],
+        "physical_source_id_queries": [
+          807
+        ],
+        "physical_relation": {
+          "status": "checked",
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "witness": "complete-operation-pointset"
+        },
+        "interpretation": "Physical receipt only; does not decide source applicability, source competitors, simplified-vs-full representation sensitivity, or native owner conservation."
+      },
+      {
+        "target_id": "gb:NIU:ADM1:93272968B84240109118138",
+        "source_feature_index": 47597,
+        "source_feature_id": "93272968B84240109118138",
+        "source_name": "Vaiea",
+        "family": "gb:NIU:ADM1",
+        "owner_index": 7126,
+        "stage_properties_equal_original_payload": true,
+        "stage_geometry_equal_original_payload": true,
+        "physical_issues": [
+          "extra_reconstruction"
+        ],
+        "physical_source_id_queries": [
+          807
+        ],
+        "physical_relation": {
+          "status": "checked",
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "witness": "complete-operation-pointset"
+        },
+        "interpretation": "Physical receipt only; does not decide source applicability, source competitors, simplified-vs-full representation sensitivity, or native owner conservation."
+      },
+      {
+        "target_id": "gb:NIU:ADM1:93272968B73075059072765",
+        "source_feature_index": 47598,
+        "source_feature_id": "93272968B73075059072765",
+        "source_name": "Avatele",
+        "family": "gb:NIU:ADM1",
+        "owner_index": 7126,
+        "stage_properties_equal_original_payload": true,
+        "stage_geometry_equal_original_payload": true,
+        "physical_issues": [],
+        "physical_source_id_queries": [
+          807
+        ],
+        "physical_relation": {
+          "status": "checked",
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "witness": "complete-candidate-reconstruction"
+        },
+        "interpretation": "Physical receipt only; does not decide source applicability, source competitors, simplified-vs-full representation sensitivity, or native owner conservation."
+      },
+      {
+        "target_id": "gb:NIU:ADM1:93272968B40499677561204",
+        "source_feature_index": 47599,
+        "source_feature_id": "93272968B40499677561204",
+        "source_name": "Tamakautoga",
+        "family": "gb:NIU:ADM1",
+        "owner_index": 7126,
+        "stage_properties_equal_original_payload": true,
+        "stage_geometry_equal_original_payload": true,
+        "physical_issues": [],
+        "physical_source_id_queries": [
+          807
+        ],
+        "physical_relation": {
+          "status": "checked",
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "witness": "complete-candidate-reconstruction"
+        },
+        "interpretation": "Physical receipt only; does not decide source applicability, source competitors, simplified-vs-full representation sensitivity, or native owner conservation."
+      },
+      {
+        "target_id": "gb:NIU:ADM1:93272968B84066650409930",
+        "source_feature_index": 47600,
+        "source_feature_id": "93272968B84066650409930",
+        "source_name": "Alofi South",
+        "family": "gb:NIU:ADM1",
+        "owner_index": 7126,
+        "stage_properties_equal_original_payload": true,
+        "stage_geometry_equal_original_payload": true,
+        "physical_issues": [],
+        "physical_source_id_queries": [
+          807
+        ],
+        "physical_relation": {
+          "status": "checked",
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "witness": "complete-candidate-reconstruction"
+        },
+        "interpretation": "Physical receipt only; does not decide source applicability, source competitors, simplified-vs-full representation sensitivity, or native owner conservation."
+      },
+      {
+        "target_id": "gb:NIU:ADM1:93272968B40090915564601",
+        "source_feature_index": 47602,
+        "source_feature_id": "93272968B40090915564601",
+        "source_name": "Makefu",
+        "family": "gb:NIU:ADM1",
+        "owner_index": 7126,
+        "stage_properties_equal_original_payload": true,
+        "stage_geometry_equal_original_payload": true,
+        "physical_issues": [],
+        "physical_source_id_queries": [
+          807
+        ],
+        "physical_relation": {
+          "status": "checked",
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "witness": "complete-candidate-reconstruction"
+        },
+        "interpretation": "Physical receipt only; does not decide source applicability, source competitors, simplified-vs-full representation sensitivity, or native owner conservation."
+      }
+    ]
+  },
+  "source_vintage_and_choice": {
+    "catalogue_pin": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json at original queue commit 2d1fc6f430e756498908bf2c4e267356a13f5cc7, blob 09afab19371f0814da61e79e5f310c5fb2405b6d",
+    "source_payload_blob": "0846aee08451e6c2dbe2553fb871b7e362a3f192",
+    "compressed_bytes": 3251,
+    "compressed_sha256": "396f6e10e5ab71cbb1eae927f47a518511ae1d485cc057a6eeaa97395ca8f7e3",
+    "decoded_bytes": 14444,
+    "decoded_sha256": "4bf1e8967a32d43da06c12e43bf99ea35c704aa00ffaaa821f63728335088b13",
+    "features": 14,
+    "recorded_boundary_source": "Pacific Data Hub 2011 Niue population and housing census village-boundary dataset",
+    "catalogue_represented_year": 2020,
+    "recorded_license": "CC BY 4.0",
+    "interpretation": "Physical stage geometries match the original simplified source. Physical matching does not establish current applicability or resolve same-release full-source differences; existing comparison records 116 simplified unique contacts versus 101 full, with 15 full noncontacts. Preserve the full representation as adverse comparison evidence, not automatic replacement or veto."
+  },
+  "result_summary": {
+    "staged_targets": 8,
+    "no_issue_targets": 6,
+    "extra_reconstruction_targets": [
+      "Mutalau",
+      "Vaiea"
+    ],
+    "other_issue_reasons": [],
+    "land_water_or_hierarchy_issue_count": 0,
+    "status": "The whole-target physical receipt supports six contacted simplified targets without issue and records extra-reconstruction residuals for Mutalau and Vaiea. It is not native qualification and does not clear those two residuals."
+  },
+  "predicates_for_later_native_result": [
+    "Maintain the exact original 116 keys, 50 intervals and owner 7126; preserve every unqualified key and do not absorb the separate 47-cell physical companion.",
+    "Bind each selected source member to the exact original 14-feature NIU simplified family, with the eight package contacts and six noncontacts retained as same-family context; resolve relevant foreign competitors based on scoped evidence rather than treating the center raster shortlist as whole-polygon proof.",
+    "Retain the full same-release 14-feature comparison and its 15 noncontacts as representation-sensitivity evidence. The physical receipt used the simplified geometry and cannot resolve applicability or the generalization difference.",
+    "Carry Mutalau and Vaiea extra_reconstruction findings forward as adverse evidence; a native result must not erase or reinterpret them as physical clearance.",
+    "For any positive repair, require the original contract source-evidence and actual native-authority/conservation predicates; current zero owner assignment is not qualification."
+  ],
+  "limits": [
+    "The physical operation compared eight original simplified whole-target members to retained GSHHG records; it does not prove official source authority, territorial law, or completeness of source competitors.",
+    "The physical method uses a heterogeneous-date global physical source and cannot validate the original source vintage.",
+    "No source-evidence or native-authority producer was run in this review. No qualification, repair credit or hold removal is claimed.",
+    "The bounded source candidate screen showed no non-NIU source family among source candidates whose rasterized runs overlap a padded family/canonical envelope, but it is only a raster-center shortlist and not whole-polygon competitor proof."
+  ]
+}

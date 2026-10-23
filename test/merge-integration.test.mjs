@@ -13,7 +13,8 @@ import {focusedIntegrationTest, integrationTestFiles, integrationNeedsBrowser, p
 import {renderClaim, githubAPI} from '../scripts/issue-claim-contract.mjs';
 import {reviewedTestPlan, prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile, integrationChanges, geographyRequired, createCandidate, cleanupCandidate, cleanupMergedHead} from '../scripts/merge-integration.mjs';
 
-import {EXECUTION_CODE} from '../scripts/check-unchanged-selected-geography.mjs';
+import {EXECUTION_CODE, REBIND_CODE} from '../scripts/check-unchanged-selected-geography.mjs';
+import {staticModuleClosure} from './helpers/static-module-closure.mjs';
 const sha = letter => letter.repeat(40);
 const FOCUSED_INTEGRATION_TESTS = integrationTestFiles('evidence', 0);
 
@@ -49,6 +50,40 @@ test('only staging-test shards prepare the immutable migration derivative', () =
     assert.deepEqual(fs.readFileSync('drizzle/0002_geographic_reference_releases.sql'),original);
   } finally { process.chdir(cwd); fs.rmSync(temporary,{recursive:true,force:true}); }
 });
+test('new native dispatch refuses absent or blank intent before API setup without changing queued legacy inputs', () => {
+  const workflow=fs.readFileSync('.github/workflows/worker-merge.yml','utf8');
+  const field=workflow.match(/      reviewed_tests:\n([\s\S]*?)(?=      request_id:)/)[1];
+  assert.match(field,/required: true/);assert.doesNotMatch(field,/default:/);
+  assert.match(workflow,/REVIEWED_TESTS_REQUIRED: 'true'/);
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-dispatch-intent-'));
+  try {
+    for(const name of staticModuleClosure(process.cwd(),['scripts/run-worker-merge.mjs'])){
+      const target=path.join(directory,name);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(name,target);
+    }
+    fs.copyFileSync('package.json',path.join(directory,'package.json'));
+    const event=path.join(directory,'event.json'),output=path.join(directory,'output');
+    const invoke=(reviewed_tests,required=true)=>{
+      fs.writeFileSync(event,JSON.stringify({inputs:{pr_number:'2',expected_head:sha('a'),request_id:'dispatch-intent-test',reviewed_tests}}));
+      const env={...process.env,GH_TOKEN:'',GITHUB_TOKEN:'',NODE_OPTIONS:'',NODE_PATH:'',
+        GITHUB_EVENT_PATH:event,GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',
+        MERGE_PHASE:'prepare',GITHUB_OUTPUT:output};
+      if(required)env.REVIEWED_TESTS_REQUIRED='true';else delete env.REVIEWED_TESTS_REQUIRED;
+      return spawnSync(process.execPath,['scripts/run-worker-merge.mjs'],{cwd:directory,env,encoding:'utf8',timeout:10000});
+    };
+    for(const missing of [undefined,null,'','  ',{}]){
+      const result=invoke(missing);assert.notEqual(result.status,0);
+      assert.match(result.stderr,/Required reviewed_tests/);
+      assert.doesNotMatch(result.stderr,/Read\/write GitHub token required/,'Intent rejects before constructing an API client');
+      assert.equal(fs.existsSync(output),false);assert.equal(fs.existsSync(path.join(directory,'merge-result.json')),false);
+    }
+    // No credentials are supplied: reaching this existing boundary proves that
+    // valid intent and already-queued old definitions survive the new check.
+    for(const intent of ['auto','complete',JSON.stringify({base:sha('b'),head:sha('a'),files:['test/example.test.mjs']})])
+      assert.match(invoke(intent).stderr,/Read\/write GitHub token required/);
+    assert.match(invoke(undefined,false).stderr,/Read\/write GitHub token required/);
+  } finally {fs.rmSync(directory,{recursive:true,force:true});}
+});
+
 function fixture({head=sha('a'),base=sha('b'),candidate=sha('c')}={}) {
   const repo = 'owner/repo';
   const issue = {number: 1, state: 'open', created_at: '2026-10-03T00:00:00Z', labels: ['type:engineering','kind:work-item','status:ready'],
@@ -132,11 +167,32 @@ test('actual full preparation emits archive patterns from the authenticated cand
   assert.equal(f.calls.filter(row=>row.route.includes('/contents/.github/package-inputs.json')).length,1);
 });
 
+test('explicit auto refuses unsupported scope and cleans its candidate while complete deliberately selects every shard',async()=>{
+  for(const make of [fixture,packetFixture]){
+    const f=make();
+    if(make===fixture){
+      await assert.rejects(prepareIntegration({...f.options(),reviewedTests:'auto'}),/Automatic test scope is unavailable/);
+      assert.equal(f.refs.size,0);assert.equal(f.writes.length,0);
+      assert.equal(f.calls.filter(row=>row.method==='DELETE'&&row.route.includes('/git/refs/heads/worldatlas-integration/')).length,1);
+    }
+    const prepared=await prepareIntegration({...f.options(),reviewedTests:'complete'});
+    assert.equal(prepared.profile,'full');assert.equal(prepared.test_selection,'complete');
+    assert.deepEqual(prepared.shards,[0,1,2]);assert.equal(prepared.test_files,undefined);
+    assert.deepEqual(prepared.checkout_patterns,fullCheckoutPatterns(f.packageInputs));
+    assert.equal(prepared.geography_required,true);
+    assert.equal(prepared.geography_software,false);
+  }
+  const legacy=fixture(),prepared=await prepareIntegration(legacy.options());
+  assert.equal(prepared.profile,'full');assert.equal(prepared.test_selection,undefined,'Already-queued omitted input keeps its old route');
+  const final=fixture();
+  assert.equal((await final.complete({reviewedTests:'complete'})).accepted,true,'Explicit complete retains final admission');
+});
+
 
 const PACKET_TESTS = ['test/evidence-quality.test.mjs','test/premerge-evidence.test.mjs','test/engineering-owned-scope-routing.test.mjs'];
-function packetFixture() {
+function packetFixture(format = 'json') {
   const f=fixture(),old=f.api,prefix='coordination/engineering/colombia-held-residual-830-20261019/';
-  const names=['README.md','current-owner-observation-79c7802.json','full-package-crosswalk-current-owner-79c7802.json','partition-a.json','partition-b.json','per-key-unresolved-request.json'].map(n=>prefix+n);
+  const names=['README.md','current-owner-observation-79c7802.json','full-package-crosswalk-current-owner-79c7802.json','partition-a.json','partition-b.json','per-key-unresolved-request.json'].map(n=>prefix+n.replace(/\.json$/, '.'+format));
   const blob=path=>({path,sha:sha('e'),mode:'100644',type:'blob',size:1});
   const parents=rows=>{
     const all=new Map(rows.map(row=>[row.path,row]));
@@ -153,8 +209,8 @@ function packetFixture() {
 }
 
 test('default actual preparation derives the inert packet consumers without an operator roster',async()=>{
-  for(const reviewedTests of [undefined,null,'']){
-    const f=packetFixture(),prepared=await prepareIntegration({...f.options(),reviewedTests});
+  for(const format of ['json','jsonl','json.gz','jsonl.gz'])for(const reviewedTests of [undefined,null,'','auto']){
+    const f=packetFixture(format),prepared=await prepareIntegration({...f.options(),reviewedTests});
     assert.equal(prepared.profile,'evidence');assert.equal(prepared.test_selection,'reviewed');
     assert.deepEqual(prepared.test_files,PACKET_TESTS);assert.deepEqual(prepared.shards,[0]);
     assert.deepEqual(prepared.checkout_patterns,focusedCheckoutPatterns(f.packageInputs,EXECUTION_CODE));
@@ -164,13 +220,40 @@ test('default actual preparation derives the inert packet consumers without an o
     await assert.rejects(f.complete({geographyResult:'skipped'}),/Trusted combined geography/);
   }
   const f=packetFixture();
+  const reviewedTests=JSON.stringify({base:f.base,head:f.head,files:PACKET_TESTS});
+  const explicit=await prepareIntegration({...f.options(),reviewedTests});
+  assert.equal(explicit.profile,'evidence');assert.equal(explicit.test_selection,'reviewed');
+  assert.deepEqual(explicit.test_files,PACKET_TESTS);
+  // The existing dispatch input distinguishes this identical manual roster.
   await assert.rejects(prepareIntegration({...f.options(),reviewedTests:{base:sha('0'),head:f.head,files:PACKET_TESTS}}),/stale/);
 });
 
+test('actual automatic packet roster runs without installed dependencies or external executables',async()=>{
+  const f=packetFixture('json.gz'),prepared=await prepareIntegration(f.options());
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-packet-runtime-'));
+  try {
+    const sources=staticModuleClosure(process.cwd(),['scripts/run-integration-tests.mjs',...prepared.test_files]);
+    for(const name of [...sources,'.github/evidence-policy.json','scripts/native-ownership/validate-context-input-stage.mjs']){
+      const target=path.join(directory,name);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(name,target);
+    }
+    const empty=path.join(directory,'empty-path');fs.mkdirSync(empty);
+    const env={...process.env,PATH:empty,NODE_PATH:'',NODE_OPTIONS:'',INTEGRATION_PROFILE:prepared.profile,INTEGRATION_SHARD:String(prepared.shards[0]),
+      INTEGRATION_TEST_SELECTION:prepared.test_selection,INTEGRATION_TEST_FILES_BASE64:Buffer.from(JSON.stringify(prepared.test_files)).toString('base64')};
+    delete env.NODE_TEST_CONTEXT; // Exercise the real nested Node test runner.
+    const result=spawnSync(process.execPath,['scripts/run-integration-tests.mjs'],{cwd:directory,encoding:'utf8',timeout:20000,
+      env});
+    assert.equal(result.status,0,result.stdout+result.stderr);assert.match(result.stdout,/# skipped 0/);
+    assert.match(result.stdout,/# fail 0/);assert.match(result.stdout,/"git_command_attempts":0/);
+    assert.match(result.stdout,/"native_inputs":\{"applicable":true,"fetched":\[\]\}/);
+    assert.equal(fs.existsSync(path.join(directory,'node_modules')),false);
+  } finally {fs.rmSync(directory,{recursive:true,force:true});}
+});
+
 test('automatic packet boundary reuses inert names and refuses executable, redirected or declared roles',()=>{
-  const f=packetFixture(),entries=new Map(f.integrated.map(row=>[row.path,row]));
+ for(const format of ['json','jsonl','json.gz','jsonl.gz']){
+  const f=packetFixture(format),entries=new Map(f.integrated.map(row=>[row.path,row]));
   assert(inertEvidenceAdditions(f.files,entries,f.packageInputs));
-  const file=f.files[0];
+  for(const file of [f.files[0],f.files[1]]){
   for(const delta of [{status:'modified'},{status:'removed'},{status:'renamed',previous_filename:'src/old.js'},{previous_filename:'old.json'}])
     assert.equal(inertEvidenceAdditions([{...file,...delta}],entries,f.packageInputs),false);
   for(const delta of [{mode:'100755'},{mode:'120000'},{type:'commit',mode:'160000'},{sha:'not-an-oid'},{size:undefined}]){
@@ -181,7 +264,9 @@ test('automatic packet boundary reuses inert names and refuses executable, redir
   assert.equal(inertEvidenceAdditions(f.files,redirected,f.packageInputs),false);
   for(const category of ['inputs','verification_paths'])for(const role of [file.filename,'coordination/engineering/colombia-held-residual-830-20261019/'])
     assert.equal(inertEvidenceAdditions(f.files,entries,{...f.packageInputs,[category]:[...f.packageInputs[category],role]}),false);
-  for(const filename of ['package.json','package-lock.json','npm-shrinkwrap.json','import-map.json','requirements.txt','replay.mjs','replay.py']){
+  }
+  for(const filename of ['package.json','package-lock.json','npm-shrinkwrap.json','import-map.json','requirements.txt','replay.mjs','replay.py',
+    'replay.mjs.gz','replay.py.gz','payload.gz','report.json.gz.mjs','report.json.gz.gz']){
     for(const root of ['coordination/engineering/packet/','research/geography/packet/']){
       const name=root+filename,changed=new Map(entries);changed.set(name,{path:name,type:'blob',mode:'100644',sha:sha('f'),size:1});
       for(let at=name.indexOf('/');at>=0;at=name.indexOf('/',at+1))changed.set(name.slice(0,at),{type:'tree',mode:'040000',sha:sha('d')});
@@ -189,29 +274,35 @@ test('automatic packet boundary reuses inert names and refuses executable, redir
     }
   }
   assert.equal(inertEvidenceAdditions([],entries,f.packageInputs),false);
+ }
 });
 
 test('default mixed changes retain broad routing and missing packet consumers cannot be silently omitted',async()=>{
+ for(const format of ['json','json.gz']){
   for(const filename of ['scripts/merge-integration.mjs','test/evidence-quality.test.mjs','.github/package-inputs.json','src/effective-footprint.js','data/ownership-selection.json']){
-    const f=packetFixture(),row=f.integrated.find(row=>row.path===filename);
+    const f=packetFixture(format),row=f.integrated.find(row=>row.path===filename);
     if(row)row.sha=sha('f');else f.integrated.push({path:filename,sha:sha('f'),type:'blob',mode:'100644',size:1});
     const prepared=await prepareIntegration(f.options());assert.notEqual(prepared.test_selection,'reviewed',filename);
   }
   for(const filename of [...PACKET_TESTS,EXECUTION_CODE[0],'test/fixtures/contract/input.json']){
-    const f=packetFixture();for(const key of ['baseline','authored','integrated'])f[key]=f[key].filter(row=>row.path!==filename);
+    const f=packetFixture(format);for(const key of ['baseline','authored','integrated'])f[key]=f[key].filter(row=>row.path!==filename);
     await assert.rejects(prepareIntegration(f.options()),/ordinary|unavailable|fixture boundary/,filename);
   }
+ }
 });
 
 test('reviewed tests bind both trusted phases without changing actual geography obligations', async () => {
-  const f=controlFixture({withContractBoundary:true}), files=['test/merge-integration.test.mjs'];
-  const request={base:f.base,head:f.head,files,inputs:[]};
-  const prepared=await prepareIntegration({...f.options(),reviewedTests:JSON.stringify(request)});
+  const f=controlFixture({withContractBoundary:true}), files=['test/example.test.mjs'];
+  const context={base:f.base,head:f.head,entries:new Map(f.integrated.map(row=>[row.path,row])),files:[],definition:f.packageInputs};
+  const request=reviewedTestPlan({base:f.base,head:f.head,files},context).request;
+  const serialized=JSON.stringify(request);
+  assert.deepEqual(reviewedTestPlan(serialized,context).request,request);
+  const prepared=await prepareIntegration({...f.options(),reviewedTests:serialized});
   assert.equal(prepared.profile,'evidence');assert.equal(prepared.test_selection,'reviewed');
   assert.deepEqual(prepared.test_files,files);assert.deepEqual(prepared.shards,[0]);
   assert.equal(prepared.geography_required,false);
   assert.deepEqual(prepared.checkout_patterns,focusedCheckoutPatterns(f.packageInputs,[...EXECUTION_CODE]));
-  assert.equal((await f.complete({reviewedTests:request,geographyResult:'skipped'})).accepted,true);
+  assert.equal((await f.complete({reviewedTests:serialized,geographyResult:'skipped'})).accepted,true);
   for(const changed of [{base:sha('0')},{head:sha('0')},{head:undefined}]) {
     const stale={...request,...changed};
     await assert.rejects(prepareIntegration({...f.options(),reviewedTests:stale}),/stale|binding/);
@@ -231,6 +322,12 @@ test('reviewed tests derive the complete fixture and executing-policy boundary w
   const context={base:plan.base,head:plan.head,entries,files:[],definition:loadPackageInputs()};
   const result=reviewedTestPlan(plan,context);
   assert.deepEqual(result.files,plan.files);assert.deepEqual(result.inputs,[...EXECUTION_CODE]);assert.equal(result.build,false);
+  assert.deepEqual(result.request,{base:plan.base,head:plan.head,files:plan.files});
+  assert.deepEqual(reviewedTestPlan(JSON.stringify(result.request),context),result);
+  assert.deepEqual(reviewedTestPlan({...plan,files:[...plan.files,...plan.files]},context).request,result.request,'Request uses the normalized reviewed roster');
+  assert.throws(()=>reviewedTestPlan(JSON.stringify(result.files),context),/stale|binding/,'A bare suite list is not a bound dispatch argument');
+  for(const changed of [{base:sha('c')},{head:sha('c')}])
+    assert.throws(()=>reviewedTestPlan(JSON.stringify(result.request),{...context,...changed}),/stale|binding/);
   assert.deepEqual(reviewedTestPlan({...plan,inputs:undefined},context),result);
   assert.deepEqual(reviewedTestPlan({...plan,inputs:result.inputs},context),result,'Derived compatibility envelope works unchanged');
   for(const files of [[],['test/missing.test.mjs'],['../escape.test.mjs'],['test/../escape.test.mjs'],[null]])
@@ -247,14 +344,20 @@ test('reviewed tests derive the complete fixture and executing-policy boundary w
   assert.throws(()=>reviewedTestPlan(plan,{...context,entries:omitted}),/unavailable/);
   const noFixtures=new Map(entries);noFixtures.delete('test/fixtures/contract/input.json');
   assert.throws(()=>reviewedTestPlan(plan,{...context,entries:noFixtures}),/fixture boundary/);
-  assert.equal(reviewedTestPlan(undefined,context),null);
+  for(const absent of [undefined,null,'']) assert.equal(reviewedTestPlan(absent,context),null);
 });
 
 
 for (const [label, consumer, operand] of [
+  ...['test/final-bank-finalizer.test.mjs','test/selected-delivery-smoke.test.mjs','test/final-bank-checkpoint.test.mjs','test/selected-owner-observation.test.mjs',
+    'test/accepted-checkpoint-qualification.test.mjs'].map(consumer =>
+    [consumer,consumer,'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz']),
   ['rebind custody', 'test/current-rebind-product-custody.test.mjs', 'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json'],
   ['workspace bootstrap', 'test/local-workspace.test.mjs', 'docs/LOCAL_WORKSPACES.md'],
-  ['regional research gate', 'test/regional-research-gate.test.mjs', 'data/research-geography-gate.json']
+  ['quota observation guide', 'test/github-quota.test.mjs', 'docs/MERGE_QUEUE_CLIENT.md'],
+  ['regional research gate', 'test/regional-research-gate.test.mjs', 'data/research-geography-gate.json'],
+  ...['test/publication-plan.test.mjs','test/package-current-additive.test.mjs'].map(consumer =>
+    [consumer,consumer,'coordination/publication/cloudflare-history.json'])
 ]) test(`reviewed ${label} retains current declared policy and refuses missing or redirected operands`, () => {
   const row=(mode='100644',type='blob')=>({sha:sha('e'),mode,type});
   const entries=new Map([...EXECUTION_CODE.map(name=>[name,row()]),[operand,row()],
@@ -276,6 +379,124 @@ for (const [label, consumer, operand] of [
   assert.throws(()=>reviewedTestPlan({...request,inputs:[...plan.inputs,'data/arbitrary.json']},context),/manual inputs/);
   const changed=new Map(entries);changed.set(operand,{...row(),sha:sha('f')});
   assert.deepEqual(reviewedTestPlan(request,{...context,entries:changed}),plan,'Select the current body, not a historical fixture copy');
+});
+
+test('reviewed quota consumer reads its current guide through actual sparse checkout', () => {
+  const consumer='test/github-quota.test.mjs',operand='docs/MERGE_QUEUE_CLIENT.md';
+  const row={sha:sha('e'),mode:'100644',type:'blob'};
+  const entries=new Map([...EXECUTION_CODE,operand,consumer,'test/fixtures/contract/input.json'].map(name=>[name,row]));
+  const request={base:sha('a'),head:sha('b'),files:[consumer]};
+  const plan=reviewedTestPlan(request,{...request,entries,files:[],definition:loadPackageInputs()});
+  assert.equal(plan.build,false);
+  const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'reviewed-quota-guide-'));
+  try {
+    const git=(args,options={})=>execFileSync('git',args,{cwd:temporary,encoding:'utf8',...options});
+    git(['init','-q']);
+    for(const name of [...staticModuleClosure(process.cwd(),[consumer]),operand,'package.json']) {
+      fs.mkdirSync(path.dirname(path.join(temporary,name)),{recursive:true});
+      fs.copyFileSync(name,path.join(temporary,name));
+    }
+    const excluded='docs/unrelated-guide.md';fs.writeFileSync(path.join(temporary,excluded),'not a reviewed operand');
+    git(['add','.']);git(['-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','current quota guide inputs']);
+    git(['sparse-checkout','set','--no-cone','--stdin'],{input:plan.checkout_patterns.join('\n')+'\n'});
+    assert.deepEqual(fs.readFileSync(path.join(temporary,operand)),fs.readFileSync(operand));
+    assert.equal(fs.existsSync(path.join(temporary,excluded)),false);
+    const args=['--test','--test-reporter=tap','--test-name-pattern=canonical native observation',consumer];
+    const env={...process.env};delete env.NODE_TEST_CONTEXT;
+    const result=spawnSync(process.execPath,args,{cwd:temporary,encoding:'utf8',env});
+    assert.equal(result.status,0,result.stdout+result.stderr);
+    assert.match(result.stdout,/canonical native observation examples/);
+    fs.unlinkSync(path.join(temporary,operand));
+    const absent=spawnSync(process.execPath,args,{cwd:temporary,encoding:'utf8',env});
+    assert.notEqual(absent.status,0,'The actual consumer must reject a missing current guide');
+    assert.match(absent.stdout+absent.stderr,/ENOENT/);
+  } finally { fs.rmSync(temporary,{recursive:true,force:true}); }
+});
+
+for (const consumer of ['test/final-bank-finalizer.test.mjs','test/selected-delivery-smoke.test.mjs','test/final-bank-checkpoint.test.mjs','test/selected-owner-observation.test.mjs',
+    'test/accepted-checkpoint-qualification.test.mjs'])
+test(`reviewed ${consumer} materializes its normative latitude operand through actual sparse checkout`, () => {
+  const operand='coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz';
+  const row={sha:sha('e'),mode:'100644',type:'blob'};
+  const entries=new Map([...EXECUTION_CODE,operand,consumer,'test/fixtures/contract/input.json'].map(name=>[name,row]));
+  const request={base:sha('a'),head:sha('b'),files:[consumer]};
+  const plan=reviewedTestPlan(request,{...request,entries,files:[],definition:loadPackageInputs()});
+  assert.equal(plan.build,false);
+  const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'reviewed-final-bank-inputs-'));
+  try {
+    const git=(args,options={})=>execFileSync('git',args,{cwd:temporary,encoding:'utf8',...options});
+    git(['init','-q']);
+    fs.mkdirSync(path.dirname(path.join(temporary,operand)),{recursive:true});
+    // This control tests opaque current-body materialization, not scientific decoding.
+    const body=Buffer.from('Synthetic current latitude operand\n');
+    fs.writeFileSync(path.join(temporary,operand),body);
+    const excluded='data/unrelated-retained-input.json';
+    fs.mkdirSync(path.join(temporary,'data'));fs.writeFileSync(path.join(temporary,excluded),'not a reviewed operand');
+    git(['add','.']);git(['-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','current final-bank fixture inputs']);
+    const head=git(['rev-parse','HEAD']),tree=git(['rev-parse','HEAD^{tree}']);
+    git(['sparse-checkout','set','--no-cone','--stdin'],{input:plan.checkout_patterns.join('\n')+'\n'});
+    assert.deepEqual(fs.readFileSync(path.join(temporary,operand)),body);
+    assert.equal(fs.existsSync(path.join(temporary,excluded)),false);
+    assert.equal(git(['rev-parse','HEAD']),head);assert.equal(git(['rev-parse','HEAD^{tree}']),tree);
+    assert.equal(git(['status','--porcelain']), '');
+  } finally { fs.rmSync(temporary,{recursive:true,force:true}); }
+});
+
+test('reviewed hosted consumers retain their current inputs through actual sparse materialization', () => {
+  const operands=['coordination/publication/cloudflare-history.json','data/observation-registry-history/base-v1.json',
+    'data/research-geography-gate.json','data/hosted-type-catalog.json','data/settlement-estimates.json',
+    'coordination/engineering/cloudflare-publication-846-20261007/registry-source.json','docs/MERGE_QUEUE_CLIENT.md'];
+  const consumers=['test/neon-forward-migrations.test.mjs','test/compact-membership-profile.test.mjs','test/current-postgres-recovery.test.mjs',
+    'test/merge-integration.test.mjs','test/settlement-population-import.test.mjs','test/publication-cloudflare.test.mjs','test/cloudflare-access.test.mjs'];
+  const row={sha:sha('e'),mode:'100644',type:'blob'};
+  const entries=new Map([...EXECUTION_CODE,...operands,...consumers,'test/example.test.mjs','test/fixtures/contract/input.json'].map(name=>[name,row]));
+  const request={base:sha('a'),head:sha('b'),files:consumers};
+  const context={base:request.base,head:request.head,entries,files:[],definition:loadPackageInputs()};
+  const plan=reviewedTestPlan(request,context);
+  assert.equal(plan.build,false);assert.deepEqual(plan.files,consumers);
+  assert.deepEqual(plan.inputs,[...EXECUTION_CODE,operands[6],operands[0],operands[5],...operands.slice(1,5)]);
+  assert(plan.checkout_patterns.includes('postgres'),'PostgreSQL DDL is executing source, like drizzle');
+  for(const consumer of consumers) {
+    const expected=consumer===consumers[6]?operands.slice(1,3):consumer===consumers[5]?[operands[0],operands[5]]:consumer===consumers[3]?[operands[6],operands[5],...operands.slice(0,5)]:consumer===consumers[2]?[operands[0]]:consumer===consumers[1]?operands.slice(0,4):
+      consumer===consumers[4]?operands.slice(1,5):operands.slice(0,5);
+    const single=reviewedTestPlan({...request,files:[consumer]},context);
+    assert.deepEqual(single.inputs,[...EXECUTION_CODE,...expected]);
+    for(const operand of expected)assert(single.checkout_patterns.includes('/'+operand));
+    for(const operand of expected) {
+      const absent=new Map(entries);absent.delete(operand);
+      assert.throws(()=>reviewedTestPlan({...request,files:[consumer]},{...context,entries:absent}),/unavailable/);
+      for(const name of [operand,path.posix.dirname(operand)]) {
+        const redirected=new Map(entries);redirected.set(name,{...row,mode:'120000'});
+        assert.throws(()=>reviewedTestPlan({...request,files:[consumer]},{...context,entries:redirected}),/unavailable/);
+      }
+      const definition={...context.definition,verification_paths:context.definition.verification_paths.filter(name=>name!==operand)};
+      assert.throws(()=>reviewedTestPlan({...request,files:[consumer]},{...context,definition}),/verification declaration/);
+    }
+  }
+  assert.deepEqual(reviewedTestPlan({...request,files:['test/example.test.mjs']},context).inputs,[...EXECUTION_CODE]);
+  assert.throws(()=>reviewedTestPlan({...request,inputs:[...plan.inputs,'data/arbitrary.json']},context),/manual inputs/);
+  const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'reviewed-postgres-inputs-'));
+  try {
+    const git=(args,options={})=>execFileSync('git',args,{cwd:temporary,encoding:'utf8',...options});
+    git(['init','-q']);
+    for(const name of [...operands,'postgres/schema.sql','scripts/publication-cloudflare.mjs',
+      'src/observation-modules.js','src/observation-registry.js','src/json-contract.js']) {
+      fs.mkdirSync(path.dirname(path.join(temporary,name)),{recursive:true});
+      fs.copyFileSync(name,path.join(temporary,name));
+    }
+    fs.writeFileSync(path.join(temporary,'package.json'),JSON.stringify({type:'module'}));
+    const excluded='data/unrelated-retained-input.json';fs.writeFileSync(path.join(temporary,excluded),'not a reviewed operand');
+    git(['add','.']);git(['-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','current PostgreSQL inputs']);
+    git(['sparse-checkout','set','--no-cone','--stdin'],{input:plan.checkout_patterns.join('\n')+'\n'});
+    for(const name of [...operands,'postgres/schema.sql'])assert.deepEqual(fs.readFileSync(path.join(temporary,name)),fs.readFileSync(name));
+    assert.equal(fs.existsSync(path.join(temporary,excluded)),false);
+    const result=spawnSync(process.execPath,['--input-type=module','-e',
+      "await import('./src/observation-modules.js'); await import('./scripts/publication-cloudflare.mjs'); "+
+      "const assert=(await import('node:assert/strict')).default,fs=await import('node:fs'),source=JSON.parse(fs.readFileSync('data/settlement-estimates.json')); "+
+      "assert.equal(source.entities.length,582); assert.equal(source.entity_history.length,9301); assert.ok(JSON.parse(fs.readFileSync('coordination/engineering/cloudflare-publication-846-20261007/registry-source.json')).deployments.length); console.log('actual-sparse-postgres-inputs');"],
+      {cwd:temporary,encoding:'utf8'});
+    assert.equal(result.status,0,result.stderr);assert.equal(result.stdout.trim(),'actual-sparse-postgres-inputs');
+  } finally { fs.rmSync(temporary,{recursive:true,force:true}); }
 });
 
 test('reviewed regional gate materializes only its live policy for the actual sparse consumer', () => {
@@ -317,29 +538,39 @@ test('reviewed lists cannot omit actual packaged consumers when package source c
     const f=controlFixture({withContractBoundary:true});f.packageInputs.inputs.push('src/');
     const required=['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
     const entries=new Map([...f.integrated,...required.map(path=>({path,sha:sha('e'),type:'blob',mode:'100644'}))].map(row=>[row.path,row]));
-    const request={base:f.base,head:f.head,files:['test/merge-integration.test.mjs'],inputs:[]};
+    const request={base:f.base,head:f.head,files:['test/example.test.mjs'],inputs:[]};
     const context={base:f.base,head:f.head,entries,files:[changed],definition:f.packageInputs};
     const plan=reviewedTestPlan(request,context);
     assert.equal(plan.build,true);assert.deepEqual(plan.files,[...request.files,...required]);
+    assert.deepEqual(plan.request,{base:f.base,head:f.head,files:[...request.files,...required]});
+    assert.deepEqual(reviewedTestPlan(JSON.stringify(plan.request),context),plan,'The dispatch argument retains automatically required consumers');
     assert.deepEqual(plan.checkout_patterns,fullCheckoutPatterns(f.packageInputs));
     entries.delete(required[0]);assert.throws(()=>reviewedTestPlan(request,context),/packaged consumer/);
   }
-  // Use the actual declaration, not a synthetic allowlist. Author tooling is
-  // not an atlas build input, while runtime and package-policy edits still are.
-  const consumer='test/local-workspace.test.mjs',required=['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
-  const row={sha:sha('e'),type:'blob',mode:'100644'};
-  const entries=new Map([...EXECUTION_CODE.map(name=>[name,row]),...required.map(name=>[name,row]),
-    [consumer,row],['docs/LOCAL_WORKSPACES.md',row],['test/fixtures/contract/input.json',row]]);
-  const request={base:sha('a'),head:sha('b'),files:[consumer]};
-  const changed={filename:'scripts/local-workspace.mjs',status:'modified'};
-  const context={base:request.base,head:request.head,entries,files:[changed],definition:loadPackageInputs()};
-  const tooling=reviewedTestPlan(request,context);
-  assert.deepEqual(tooling.files,[consumer]);assert.equal(tooling.build,false);
-  assert.equal(geographyRequired('engineering/tooling',[changed]),true);
-  assert.equal(candidateGeographyCode('evidence',[changed],'reviewed'),true);
-  for(const filename of ['src/effective-footprint.js','.github/package-inputs.json']) {
-    const actual=reviewedTestPlan(request,{...context,files:[{filename,status:'modified'}]});
-    assert.deepEqual(actual.files,[consumer,...required]);assert.equal(actual.build,true);
+  assert(REBIND_CODE.includes('scripts/worker-identity.mjs'),'Author support custody remains mandatory');
+  // Use the actual declaration, not a synthetic allowlist. Author and scientific
+  // comparison controls are not builder inputs; runtime and package policy are.
+  for (const [source,consumer] of [
+    ['scripts/local-workspace.mjs','test/local-workspace.test.mjs'],
+    ['scripts/worker-identity.mjs','test/local-workspace.test.mjs'],
+    ['scripts/check-effective-geographic-regression.mjs','test/effective-geographic-regression.test.mjs']
+  ]) {
+    const required=['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
+    const row={sha:sha('e'),type:'blob',mode:'100644'};
+    const entries=new Map([...EXECUTION_CODE.map(name=>[name,row]),...required.map(name=>[name,row]),
+      [consumer,row],['docs/LOCAL_WORKSPACES.md',row],['test/fixtures/contract/input.json',row]]);
+    const request={base:sha('a'),head:sha('b'),files:[consumer]};
+    const changed={filename:source,status:'modified'};
+    const context={base:request.base,head:request.head,entries,files:[changed],definition:loadPackageInputs()};
+    const comparison=reviewedTestPlan(request,context);
+    assert.deepEqual(comparison.files,[consumer]);assert.equal(comparison.build,false);
+    assert(comparison.inputs.includes('scripts/check-effective-geographic-regression.mjs'),'Scientific checker custody remains mandatory');
+    assert.equal(geographyRequired('engineering/tooling',[changed]),true);
+    assert.equal(candidateGeographyCode('evidence',[changed],'reviewed'),true);
+    for(const filename of ['src/effective-footprint.js','.github/package-inputs.json']) {
+      const actual=reviewedTestPlan(request,{...context,files:[{filename,status:'modified'}]});
+      assert.deepEqual(actual.files,[consumer,...required]);assert.equal(actual.build,true);
+    }
   }
 
 });
@@ -352,18 +583,20 @@ test('minimal reviewed package consumer derives real inputs without a changed pa
  const packagePlan=reviewedTestPlan({base:f.base,head:f.head,files:[required]},context);
  assert.equal(packagePlan.build,true);assert.deepEqual(packagePlan.files,[required]);
  assert.deepEqual(packagePlan.checkout_patterns,fullCheckoutPatterns(f.packageInputs));
- const unitPlan=reviewedTestPlan({base:f.base,head:f.head,files:['test/merge-integration.test.mjs']},context);
+ const unitPlan=reviewedTestPlan({base:f.base,head:f.head,files:['test/example.test.mjs']},context);
  assert.equal(unitPlan.build,false);assert.deepEqual(unitPlan.inputs,[...EXECUTION_CODE]);
 });
 
 test('reviewed full builds materialize real historical fixture paths without widening tests or accepting manual inputs',async()=>{
   const f=controlFixture({withContractBoundary:true}), kernel='src/effective-footprint.js';
   f.packageInputs.inputs.push('src/','data/package-input.json');
+  const latitude='coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz';
+  f.packageInputs.verification_paths.push(latitude);
   const files=['test/additive-release.test.mjs','test/selected-delivery-smoke.test.mjs',
     'test/effective-footprint.test.mjs','test/source-target-native-delivery.test.mjs'];
   const expected=[...files,'test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
   for(const rows of [f.baseline,f.authored,f.integrated]) {
-    for(const name of expected)rows.push({path:name,sha:sha('c'),mode:'100644',type:'blob'});
+    for(const name of [...expected,latitude])rows.push({path:name,sha:sha('c'),mode:'100644',type:'blob'});
     const existing=rows.find(row=>row.path===kernel);
     if(existing)existing.sha=rows===f.baseline?sha('d'):sha('e');
     else rows.push({path:kernel,sha:rows===f.baseline?sha('d'):sha('e'),mode:'100644',type:'blob'});
@@ -805,7 +1038,7 @@ function controlFixture({withContractBoundary=false}={}) {
   f.pr.changed_files=f.files.length;
   f.authored=f.files.map(file=>({path:file.filename,sha:sha('e'),mode:'100644',type:'blob'}));
   f.baseline=f.authored.map(row=>({...row,sha:sha('d')}));
-  const stable=(withContractBoundary?[...EXECUTION_CODE,'test/fixtures/contract/input.json']:[]).filter(name=>!f.authored.some(row=>row.path===name))
+  const stable=(withContractBoundary?[...EXECUTION_CODE,'test/example.test.mjs','test/fixtures/contract/input.json']:[]).filter(name=>!f.authored.some(row=>row.path===name))
     .map(path=>({path,sha:sha('c'),mode:'100644',type:'blob'}));
   f.authored.push(...structuredClone(stable));f.baseline.push(...structuredClone(stable));
   f.integrated=structuredClone(f.authored);
@@ -1501,6 +1734,31 @@ test('changed checker uses fresh candidate science and cannot accept a baseline-
  assert.equal(unrelated.writes.length, 0);
 });
 
+test('actual queue validates simultaneous final-map and checker edits with accepted main code', async () => {
+ const f=fixture(),original=f.api;
+ const paths=['scripts/check-geographic-regression.py','data/canonical-grid/current-startup/index.json'];
+ for(const filename of paths){
+  f.baseline.push({path:filename,sha:'before-'+filename,mode:'100644',type:'blob'});
+  f.authored.push({path:filename,sha:'after-'+filename,mode:'100644',type:'blob'});
+  f.integrated.push({path:filename,sha:'after-'+filename,mode:'100644',type:'blob'});
+ }
+ f.pr.changed_files=3;
+ f.api=async(route,...args)=>route.includes('/pulls/2/files')
+  ? ['src/a.js',...paths].map(filename=>({filename,status:'modified'})):original(route,...args);
+ const prepared=await prepareIntegration(f.options());
+ assert.equal(prepared.geography_required,true);
+ assert.equal(prepared.geography_software,false);
+ await assert.rejects(f.complete({geographyReportLoader:async()=>({version:1,method_id:'worldatlas-trusted-geography-check-v1',
+  baseline_commit:f.base,candidate_commit:f.candidate,trusted_code_commit:f.candidate,
+  trusted_code_inventory_sha256:'d'.repeat(64),candidate_code_executed:true,
+  published:false,source_approval:false,gate_status:'passed',status:'not-applicable'})}),/exact trusted combined check/);
+ assert.equal(f.writes.length,0);
+ const result=await f.complete();
+ assert.equal(result.geography.trusted_code_commit,f.base);
+ assert.equal(result.tested_base,f.base);
+ assert.equal(f.writes.length,1);
+});
+
 test('workflow candidate geography is selected by trusted profile output without credentials', () => {
  for (const [file, selector, candidate, baseline] of [
   ['worker-merge.yml', 'prepare', 'needs.prepare.outputs.candidate', 'needs.prepare.outputs.base']
@@ -1556,4 +1814,37 @@ test('successful original build archive is retained before later tests without r
  assert.match(yaml,/needs: \[prepare, integration, geography\]/);
  assert.match(yaml,/INTEGRATION_RESULT: \$\{\{ needs\.integration\.result \}\}/);
  assert.match(yaml,/GEOGRAPHY_RESULT: \$\{\{ needs\.geography\.result \}\}/);
+});
+
+
+test('actual preparation completes a truncated candidate tree and refuses incomplete child metadata before scope selection',async()=>{
+  for(const incomplete of [false,true]){
+    const f=fixture(),original=f.api,root=sha('e'),directory=sha('d'),calls=[];
+    f.api=githubAPI('synthetic-tree-token',{fetchImpl:async(url,init)=>{
+      const route=new URL(url).pathname+new URL(url).search;calls.push(route);
+      let value;
+      if(route==='/repos/owner/repo/git/trees/'+root+'?recursive=1')
+        value={sha:root,truncated:true,tree:[{path:'ignored-partial',sha:sha('f'),type:'blob',mode:'100644',size:1}]};
+      else if(route==='/repos/owner/repo/git/trees/'+root)
+        value={sha:root,truncated:false,tree:[{path:'src',sha:directory,type:'tree',mode:'040000'}]};
+      else if(route==='/repos/owner/repo/git/trees/'+directory+'?recursive=1')
+        value={sha:directory,truncated:false,tree:[{path:incomplete?'missing/a.js':'a.js',sha:sha('a'),type:'blob',mode:'100644',size:7}]};
+      else{
+        value=await original(route,init.method,init.body?JSON.parse(init.body):undefined);
+        if(route==='/repos/owner/repo/git/commits/'+f.candidate)value={...value,tree:{sha:root}};
+      }
+      return init.method==='DELETE'?new Response(null,{status:204}):Response.json(value);
+    }});
+    if(incomplete){
+      await assert.rejects(prepareIntegration(f.options()),/Incomplete immutable tree parent inventory/);
+      assert.equal(f.refs.size,0,'owned candidate is cleaned on incomplete child refusal');
+      assert(!calls.some(route=>route.includes('/contents/.github/package-inputs.json')),'no reviewed scope accepted from a partial tree');
+    }else{
+      const prepared=await prepareIntegration(f.options());
+      assert.equal(prepared.candidate_tree,root);assert.equal(prepared.candidate,f.candidate);
+      assert.equal(prepared.profile,'full');assert.equal(prepared.base,f.base);
+    }
+    assert.equal(calls.filter(route=>route==='/repos/owner/repo/git/trees/'+root+'?recursive=1').length,1);
+    assert(!calls.some(route=>route.includes('/git/blobs/')));
+  }
 });

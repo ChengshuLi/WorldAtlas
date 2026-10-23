@@ -1,0 +1,365 @@
+{
+  "kind": "independent_read_only_review_rus_ukr_seven_candidate",
+  "reviewed_at_utc": "2026-10-23",
+  "base_commit": "9e3637776d2593f0a024adee41a19e319e3b6385",
+  "branch": "engineering/rus-ukr12-continuation-20261023",
+  "original_package": 2302,
+  "original_denominator_cells": 2566967,
+  "exact_candidate_keys_y_x_owner": [
+    [
+      86172,
+      155617,
+      38470
+    ],
+    [
+      86172,
+      155618,
+      38470
+    ],
+    [
+      86172,
+      155619,
+      38470
+    ],
+    [
+      86500,
+      154548,
+      37091
+    ],
+    [
+      90451,
+      159971,
+      37096
+    ],
+    [
+      90453,
+      159970,
+      37096
+    ],
+    [
+      90456,
+      159969,
+      37096
+    ]
+  ],
+  "exact_adverse_keys_outside_scope": [
+    [
+      86172,
+      155620,
+      38470
+    ],
+    [
+      90458,
+      159968,
+      37096
+    ],
+    [
+      90460,
+      159967,
+      37096
+    ],
+    [
+      90986,
+      160137,
+      37630
+    ],
+    [
+      90988,
+      160134,
+      37630
+    ]
+  ],
+  "checked_artifact_hashes": [
+    {
+      "file": "exact-original-scope.json",
+      "bytes": 12258,
+      "sha256": "8998e512ca84344fe11b7ad559bc68029e98dd11b830afda2b35ddb031a3791f"
+    },
+    {
+      "file": "source-applicability-decision.json",
+      "bytes": 8295,
+      "sha256": "3abdbf6446fa72d3c62b047368489a117fa4d5201e01fc9409553e91a84f261c"
+    },
+    {
+      "file": "territorial-applicability.json",
+      "bytes": 6375,
+      "sha256": "a0f05a4a3d2fb4341873383a6c7aeed9b6a51a5c0cb694a9a1b6c1141f3419a7"
+    },
+    {
+      "file": "source-evidence.json",
+      "bytes": 520308,
+      "sha256": "f8780699299fd9f964d0b2d41f3e8d2f46aac09edc8674cd9b03229180d5e00f"
+    },
+    {
+      "file": "native-patch.json",
+      "bytes": 654,
+      "sha256": "41687332106deff91d4fd44cf9660806bc697048cfa658dc0793a0cfad808f3b"
+    },
+    {
+      "file": "native-diagnostic-001/native-diagnostic.json",
+      "bytes": 7003,
+      "sha256": "cf57a18c9d3a0083c079f3f1742e2c7f1ab8efbe5a6e74d075be8fb2e133ef84"
+    },
+    {
+      "file": "native-authority-001/constructor-result.json",
+      "bytes": 13681,
+      "sha256": "bd56a93e444a3805f7a1fa1b0fd116e2e66ad1223cbd9a12641011d0f654f796"
+    }
+  ],
+  "source_pin": {
+    "commit": "c6720857e7ad3530ca44a542d96ea9edb9eca77b",
+    "path": "coordination/engineering/rus-context-qualified-repair-20261021/source-inputs/source-evidence.json",
+    "mode": "100644",
+    "git_blob_oid": "5331c8a4e2c0ecb57a8f61491fe4280672b48a11",
+    "bytes": 8172157,
+    "sha256": "3ef2620e959dce79c9278534de33923cd7dc2c1d8f6a7f928cb28ede935abc91"
+  },
+  "complete_original_sources_and_negatives_retained": {
+    "original_targets": 334,
+    "original_foreign_features": 122,
+    "original_negative_bindings": 230,
+    "runtime_targets": 3,
+    "runtime_negative_operands": 4,
+    "physical_commit": "d41ba96f505fe507773cb1a23aab558941ee5a9c",
+    "physical_path": "coordination/engineering/russia-repair-delivery-20261017/physical-001/whole-target-support.json",
+    "physical_sha256": "38c8d148dbc33bab7fc94e2c7931b9a2ca757ff04d90191f08fa2506a6fc1a8c"
+  },
+  "observed_stock_results": {
+    "diagnostic": {
+      "requested": 7,
+      "supported": 7,
+      "held": 0
+    },
+    "constructor": {
+      "owner_components": 3,
+      "native_cells": 7,
+      "assigned_key_set_matches_scope": true,
+      "owner_rows": [
+        {
+          "owner_index": 37091,
+          "target_id": "gb:RUS:ADM2:50074027B12942583135720",
+          "native_cells": 1,
+          "native_rows": [
+            {
+              "runs": [
+                [
+                  154548,
+                  154549,
+                  37091
+                ]
+              ],
+              "y": 86500
+            }
+          ],
+          "source_receipt_sha256": "38c8d148dbc33bab7fc94e2c7931b9a2ca757ff04d90191f08fa2506a6fc1a8c"
+        },
+        {
+          "owner_index": 37096,
+          "target_id": "gb:RUS:ADM2:50074027B13034578172477",
+          "native_cells": 3,
+          "native_rows": [
+            {
+              "runs": [
+                [
+                  159971,
+                  159972,
+                  37096
+                ]
+              ],
+              "y": 90451
+            },
+            {
+              "runs": [
+                [
+                  159970,
+                  159971,
+                  37096
+                ]
+              ],
+              "y": 90453
+            },
+            {
+              "runs": [
+                [
+                  159969,
+                  159970,
+                  37096
+                ]
+              ],
+              "y": 90456
+            }
+          ],
+          "source_receipt_sha256": "38c8d148dbc33bab7fc94e2c7931b9a2ca757ff04d90191f08fa2506a6fc1a8c"
+        },
+        {
+          "owner_index": 38470,
+          "target_id": "gb:RUS:ADM2:50074027B66126711442497",
+          "native_cells": 3,
+          "native_rows": [
+            {
+              "runs": [
+                [
+                  155617,
+                  155620,
+                  38470
+                ]
+              ],
+              "y": 86172
+            }
+          ],
+          "source_receipt_sha256": "38c8d148dbc33bab7fc94e2c7931b9a2ca757ff04d90191f08fa2506a6fc1a8c"
+        }
+      ],
+      "territorial_contacts": [
+        {
+          "decision_sha256": "e264d9e1b9248024a51795db022087ccd0498821dca5c113243ff530b7779fd0",
+          "exclusion_geometry_sha256": "16891896478d1906358ca11e193deb30eace6532028a31a4ef69a4c2e4a04d5d",
+          "exclusion_index": 3,
+          "kind": "interior",
+          "negative_ordinal": 1,
+          "operand_sha256": "9c163e5360e03353bf2f73e66f19a95ed0f4b51fc08f00b6235ebe9b00bc66cb",
+          "original_source": {
+            "id": "original-ukr",
+            "pointer": "/features/6/geometry"
+          },
+          "pixelIndex": 38470,
+          "resolution": "contextual",
+          "source_id": "gb:RUS:ADM2:50074027B66126711442497",
+          "target_id": "gb:RUS:ADM2:50074027B66126711442497",
+          "x": 155617,
+          "y": 86172
+        },
+        {
+          "decision_sha256": "45083cdf54bbff5f57a2c0073ec7f9a4527594d65626b0b5f6c55c3f59221978",
+          "exclusion_geometry_sha256": "16891896478d1906358ca11e193deb30eace6532028a31a4ef69a4c2e4a04d5d",
+          "exclusion_index": 3,
+          "kind": "interior",
+          "negative_ordinal": 1,
+          "operand_sha256": "9c163e5360e03353bf2f73e66f19a95ed0f4b51fc08f00b6235ebe9b00bc66cb",
+          "original_source": {
+            "id": "original-ukr",
+            "pointer": "/features/6/geometry"
+          },
+          "pixelIndex": 38470,
+          "resolution": "contextual",
+          "source_id": "gb:RUS:ADM2:50074027B66126711442497",
+          "target_id": "gb:RUS:ADM2:50074027B66126711442497",
+          "x": 155618,
+          "y": 86172
+        },
+        {
+          "decision_sha256": "8c7365a2da0ccf09fc81fe324faeb191354bcd2f6cfa2809c66a7820fc734822",
+          "exclusion_geometry_sha256": "16891896478d1906358ca11e193deb30eace6532028a31a4ef69a4c2e4a04d5d",
+          "exclusion_index": 3,
+          "kind": "interior",
+          "negative_ordinal": 1,
+          "operand_sha256": "9c163e5360e03353bf2f73e66f19a95ed0f4b51fc08f00b6235ebe9b00bc66cb",
+          "original_source": {
+            "id": "original-ukr",
+            "pointer": "/features/6/geometry"
+          },
+          "pixelIndex": 38470,
+          "resolution": "contextual",
+          "source_id": "gb:RUS:ADM2:50074027B66126711442497",
+          "target_id": "gb:RUS:ADM2:50074027B66126711442497",
+          "x": 155619,
+          "y": 86172
+        },
+        {
+          "decision_sha256": "e9895524391364bf807e450cc1a57f9c16df2e19e08714bc1656ee516b343be6",
+          "exclusion_geometry_sha256": "174d29c53ad128a3393370b4f56c1e4bb546cb54af18259253d39eee9e212b22",
+          "exclusion_index": 0,
+          "kind": "interior",
+          "negative_ordinal": 0,
+          "operand_sha256": "efbd18b67cea4c16d8e1500a8a50c47da3229683e863e6b9f499d339e303681c",
+          "original_source": {
+            "id": "original-ukr",
+            "pointer": "/features/5/geometry"
+          },
+          "pixelIndex": 37091,
+          "resolution": "contextual",
+          "source_id": "gb:RUS:ADM2:50074027B12942583135720",
+          "target_id": "gb:RUS:ADM2:50074027B12942583135720",
+          "x": 154548,
+          "y": 86500
+        },
+        {
+          "decision_sha256": "2fd6140fa86f2bdbb62f5267f44b828a353d29553e08b34f165b1248d5503842",
+          "exclusion_geometry_sha256": "df58eda4dcc6ec481dcbfc8142edfcb4b31a441af56d45cc73085343de2a88d3",
+          "exclusion_index": 1,
+          "kind": "interior",
+          "negative_ordinal": 0,
+          "operand_sha256": "462d00cfd234b8bc089b6664ade44a230fc1180f87f7414721cebedde9b03d9c",
+          "original_source": {
+            "id": "original-ukr",
+            "pointer": "/features/8/geometry"
+          },
+          "pixelIndex": 37096,
+          "resolution": "contextual",
+          "source_id": "gb:RUS:ADM2:50074027B13034578172477",
+          "target_id": "gb:RUS:ADM2:50074027B13034578172477",
+          "x": 159971,
+          "y": 90451
+        },
+        {
+          "decision_sha256": "b1cfb33bb8095b9b20f316102f1dde16003c3e7c95b42dee10201320030dfb87",
+          "exclusion_geometry_sha256": "df58eda4dcc6ec481dcbfc8142edfcb4b31a441af56d45cc73085343de2a88d3",
+          "exclusion_index": 1,
+          "kind": "interior",
+          "negative_ordinal": 0,
+          "operand_sha256": "462d00cfd234b8bc089b6664ade44a230fc1180f87f7414721cebedde9b03d9c",
+          "original_source": {
+            "id": "original-ukr",
+            "pointer": "/features/8/geometry"
+          },
+          "pixelIndex": 37096,
+          "resolution": "contextual",
+          "source_id": "gb:RUS:ADM2:50074027B13034578172477",
+          "target_id": "gb:RUS:ADM2:50074027B13034578172477",
+          "x": 159970,
+          "y": 90453
+        },
+        {
+          "decision_sha256": "a415eb5fff4b3b9fa109715680c1ae55617103ee54cf7d1255d98ecff1ca639d",
+          "exclusion_geometry_sha256": "df58eda4dcc6ec481dcbfc8142edfcb4b31a441af56d45cc73085343de2a88d3",
+          "exclusion_index": 1,
+          "kind": "interior",
+          "negative_ordinal": 0,
+          "operand_sha256": "462d00cfd234b8bc089b6664ade44a230fc1180f87f7414721cebedde9b03d9c",
+          "original_source": {
+            "id": "original-ukr",
+            "pointer": "/features/8/geometry"
+          },
+          "pixelIndex": 37096,
+          "resolution": "contextual",
+          "source_id": "gb:RUS:ADM2:50074027B13034578172477",
+          "target_id": "gb:RUS:ADM2:50074027B13034578172477",
+          "x": 159969,
+          "y": 90456
+        }
+      ]
+    }
+  },
+  "independent_findings": {
+    "supporting": [
+      "All seven constructed native assignments exactly match the seven original mapped-land tuples; no owner was reassigned.",
+      "Sumy/Trubchevsky uses corrected owner 38470 and source target ID gb:RUS:ADM2:50074027B66126711442497; the same full owner target retains both Chernihiv and Sumy negative operands.",
+      "Each contextual record binds exact pixel index, cell, original negative ordinal, original UKR feature geometry hash, explicit decision text and original-scope owner. The stock reader emitted seven contextual contacts.",
+      "Retained whole-target physical output is reused; all three selected original targets have no target issues according to the retained reconciliation, with no assertion that this is a per-cell legal or whole-package result.",
+      "The chosen distinction (simplified UKR contact, archived full UKR center exclusion, archived full RUS owner inclusion) is narrowly source-specific and does not claim sovereignty/current legal ownership."
+    ],
+    "adverse_and_limits": [
+      "The represented OSM/Wambacher year is 2017; archived relation identity history corroborates source-era ID/name but does not prove exact geometric snapshot equivalence.",
+      "Treaty/map context is not exact geodetic point-in-treaty-side proof: Klimovsky lacks local route callout, Sumy map strokes overlap, and Tarasovsky map was not registered to each center.",
+      "Native diagnostics and constructor qualification establish original source/native predicates only; they do not establish current effective selected owner, final-E conservation, delivered selection, or root acceptance.",
+      "The accepted checkout has no readable `data/ownership-selection.json` in the bounded local object set. Current final-bank v2 selector and effective_selected_owner were therefore not independently verified in this review."
+    ],
+    "prohibited_inferences": [
+      "No current owner-zero inference.",
+      "No conclusion about all 12 pending keys or entire 2,566,967-cell package.",
+      "No repair credit or hold removal; root accounting remains authoritative."
+    ]
+  },
+  "conclusion": "The stock source/native qualification for these exact seven source-context candidates succeeded under the original bounded contract. The scientific source applicability is supportable as a narrowly qualified contextual interpretation with the stated source-vintage and map limitations. This review does not approve final selected-output adoption or delivery; those remain unverified until the current final-bank selector/effective owner binding and normal v2 conservation/delivery gates are checked.",
+  "root_credit_assigned": false
+}

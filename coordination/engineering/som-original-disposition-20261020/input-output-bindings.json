@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "purpose": "Actual encoded/decoded output bindings; not a test-pass or acceptance receipt",
+  "selected_commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+  "outputs": [
+    {
+      "path": "som-selected-owner-observation.json.gz",
+      "bytes": 47851,
+      "sha256": "66b9a49aa9b3455fd8d7c5a9aa63ecb5e6a45588e777d898aba678a4c841514a",
+      "decoded_bytes": 907236,
+      "decoded_sha256": "bc523894f2485a0d55aec56490cdceadb555a752fd765e7234b9eaaad3928843"
+    },
+    {
+      "path": "som-retained-witness-join.json.gz",
+      "bytes": 42237,
+      "sha256": "561cefb7ca3cf5789530175cb0079ee5e27e4a0f4478fe1b33ec362f9f777893",
+      "decoded_bytes": 712625,
+      "decoded_sha256": "79b09dffc4af0000e6fec8d636e6a87d537fc8475107d07482e8cfa98b96975c"
+    },
+    {
+      "path": "som-disposition.json.gz",
+      "bytes": 25303,
+      "sha256": "d9e87d1c360c3cfe21883b756bcd5da64bd4721abe91ac8c278c37c9e65075cf",
+      "decoded_bytes": 249230,
+      "decoded_sha256": "38835822455a95fa68d8e1392ce1b6470974a3b073061e315cb66d7e9c9a026c"
+    },
+    {
+      "path": "evidence-context.json",
+      "bytes": 77090,
+      "sha256": "85aa0f37ebe38f42986c004bc3c0977b63eee062b2a1ee6a7933c9b2045fb8a1"
+    }
+  ]
+}

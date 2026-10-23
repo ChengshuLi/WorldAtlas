@@ -8,8 +8,10 @@ For example, use a UUID:
 
 ```sh
 REQUEST_ID="$(node -e 'console.log(require("node:crypto").randomUUID())')"
+: "${REVIEWED_TESTS:?Use the serialized validated plan.request described below}"
 gh workflow run worker-merge.yml --repo ChengshuLi/WorldAtlas --ref main \
   -f pr_number=PR-NUMBER -f expected_head=EXACT-REVIEWED-HEAD \
+  -f reviewed_tests="$REVIEWED_TESTS" \
   -f request_id="$REQUEST_ID"
 ```
 
@@ -24,33 +26,99 @@ There is no separate registration, FIFO-ticket store, scheduler, wake notifier o
 custom observation client. Research, PR checks and independent review can continue
 while native Actions holds pending merge runs.
 
+## Submit reviewed consumers without rebuilding the request
+
+When the review identifies a bounded consumer roster, use the existing
+`reviewedTestPlan` in the actual accepted `scripts/merge-integration.mjs` with the
+exact accepted base, reviewed head, candidate tree, changed files and package
+input definition. Its `request` contains that validated pair and the normalized
+consumer list, including mandatory packaged consumers. Serialize
+`JSON.stringify(plan.request)` directly into `REVIEWED_TESTS` for the command above,
+and pass that exact serialized value back through `reviewedTestPlan` with the
+same current context before recording a request or dispatching it. Do not
+serialize `plan.files`, reconstruct the pair, or send the full derived plan.
+
+The reviewed roster remains human-selected review scope, not an automated
+sufficiency certificate. Inputs, checkout patterns, build and geography duties
+remain independently derived and revalidated by trusted preparation and final
+admission. A changed base or head requires review of the new pair, not silently
+rebinding the old argument. The native workflow requires `reviewed_tests` with no
+default; missing or blank intent is rejected before candidate checkout, installs,
+builds or tests. Do not omit it or reconstruct a second dispatch shape.
+
+Use the explicit value `auto` only for the existing authenticated inert-packet
+or selected-data routes. If neither route applies, preparation refuses and cleans
+its candidate instead of silently running complete regression. Use the explicit
+value `complete` when review calls for the full suite and genuine package build.
+These values do not waive geography, source checks or exact candidate identities.
+Already-queued older workflow definitions retain their original omitted-input
+behavior; new submissions cannot select that legacy behavior. This is direct use
+of the existing planner and native workflow, not a separate dispatch client.
+
 ## Find the execution and inspect its outcome
 
 Use ordinary GitHub CLI commands and match the exact request ID in the displayed
 run title. Record the matching numeric run ID and URL alongside the request.
+Designate one observer for that execution; other workers reuse its observations
+and terminal receipt rather than starting duplicate status or discovery loops.
 
 ```sh
 gh run list --repo ChengshuLi/WorldAtlas --workflow worker-merge.yml \
   --branch main --event workflow_dispatch --limit 100 \
   --json databaseId,displayTitle,status,conclusion,url,createdAt
-gh run view RUN-ID --repo ChengshuLi/WorldAtlas
-gh run watch RUN-ID --repo ChengshuLi/WorldAtlas --exit-status
+```
+
+Once the run is known, routine observation needs only its exact status endpoint:
+
+```sh
+gh api --cache 60s repos/ChengshuLi/WorldAtlas/actions/runs/RUN-ID \
+  --jq '{id,status,conclusion,run_attempt,html_url}'
+```
+
+Space routine reads at least a minute apart, or longer while no useful phase
+change is expected. The native CLI cache avoids repeated identical reads within
+that minute; it is not fresh merge authority. Do not combine this with repeated
+run listing, full logs, `gh run view` or another watcher. Inspect exact jobs when
+needed to diagnose a changed phase or detect that the final merge finished before
+the aggregate run:
+
+```sh
+gh api --cache 60s 'repos/ChengshuLi/WorldAtlas/actions/runs/RUN-ID/jobs?per_page=100' \
+  --jq '{total_count,jobs:[.jobs[]|{id,name,status,conclusion}]}'
+```
+
+If `total_count` exceeds the returned roster, follow pagination for that inspection;
+do not infer absence from an incomplete page. For an interactive view, use one
+`gh run watch RUN-ID --repo ChengshuLi/WorldAtlas --interval 60 --exit-status`
+instead of the status loop. Never use its default three-second interval for
+background observation. In CLI v2.102.0 each refresh reads the run, workflow and
+jobs, plus annotations for uncached active jobs; `--compact` changes display, not
+that request pattern. See the [official command](https://cli.github.com/manual/gh_run_watch)
+and [versioned implementation](https://github.com/cli/cli/blob/v2.102.0/pkg/cmd/run/watch/watch.go).
+
+After the final merge job succeeds, verify actual PR state without `--cache`:
+
+```sh
 gh api repos/ChengshuLi/WorldAtlas/pulls/PR-NUMBER \
   --jq '{merged, head: .head.sha, merge_commit_sha, state, html_url}'
 ```
 
 A bounded list can omit older runs: absence from one page is not proof that
 submission failed. Search the relevant time window and paginate Actions history
-when needed. A `gh run watch` timeout, interrupted local process or disconnected
-terminal does not cancel the workflow. Resume `gh run view`/`gh run watch` for the
-same execution rather than dispatching another request. If a submission response
-is uncertain, reconcile existing executions and current PR state first; never
-blindly redispatch. Reruns retain the original preparation and exact candidate;
-they cannot bypass missing or failed candidate checks.
+only when discovery or uncertain-dispatch reconciliation needs it, not on each
+status read. An interrupted observer or disconnected terminal does not cancel
+the workflow. Resume observation of the same known execution rather than
+dispatching another request. If a submission response is uncertain, reconcile
+existing executions and current PR state first; never blindly redispatch.
+Reruns retain the original preparation and exact candidate; they cannot bypass
+missing or failed candidate checks.
 
 Read the workflow jobs, logs and canonical bot result comment for diagnostics.
 `gh run view RUN-ID --log` retains the complete result even if notification fails;
-no duplicate diagnostic result artifact is produced.
+retrieve it once when needed and reuse it. No duplicate diagnostic result artifact
+is produced. Reuse exact immutable Git objects already present locally and the
+documented missing-object transport instead of repeating body-by-body source
+acquisition while observing an unchanged run.
 A green workflow, candidate SHA or bot comment alone does not establish a merge.
 Fresh PR API state must have `merged: true`, `.head.sha` equal to the exact reviewed
 head, and a nonempty `.merge_commit_sha`. Retain that actual squash commit and the
@@ -83,6 +151,25 @@ main/head changed or the execution predates attempt-qualified uploads. Changed
 reviewed bytes need fresh substantive review. A pending run, uncertain dispatch or
 missing result is not a settled failure. No new recovery daemon is involved;
 existing API quota/deadline guards and native provider queueing still apply.
+
+If GitHub explicitly truncates an exact recursive Git-tree response, the existing
+client discards those partial rows and assembles the complete inventory from
+nonrecursive child trees, reusing identical subtree identities within that read.
+This is metadata acquisition, not a scope-check exemption or another queue retry.
+Wrong identities, incomplete child inventories, provider refusals and explicit
+caller byte limits remain failures; no source blobs are fetched by this walk.
+
+On a rate-limit rejection, use the response's existing headers rather than polling
+`/rate_limit`. Exhausted primary capacity (`x-ratelimit-remaining: 0`) requires
+waiting past `x-ratelimit-reset`; `retry-after` must also elapse when supplied.
+For a confirmed secondary-only rejection without either delay, wait at least a
+minute and increase the wait on further rejection. Stop rather than retry an
+ordinary permission error or ambiguous mutation. Do not switch credentials to
+work around a limit. The accepted shared client keeps bounded read retries and
+conditional ETag revalidation; its phase receipts count its own actual attempts,
+not every CLI or integration request made by the account. Keep Actions-token and
+user-token accounting separate. See GitHub's
+[rate-limit handling guidance](https://docs.github.com/en/rest/using-the-rest-api/best-practices-for-using-the-rest-api#handle-rate-limit-errors-appropriately).
 
 ## Release the owned workspace
 

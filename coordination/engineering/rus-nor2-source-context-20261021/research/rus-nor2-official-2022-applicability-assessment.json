@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "kind": "rus-nor2-official-2022-source-applicability-assessment",
+  "scope": "Two existing held native keys only; no owner, qualification, selected-state, or credit changes.",
+  "evidence_read": [
+    {
+      "path": "inventory/rus-nor2-official-2022-comparison/source-contact-provenance-followup.json",
+      "sha256": "708a0657df1c3022995990abbe42e71d40f800ece85dd31a7cb4fbc2629b2968"
+    },
+    {
+      "path": "inventory/rus-nor2-official-2022-comparison/two-center-2022-fylke-comparison.json",
+      "sha256": "8c70e630df2ffefe30095244223e282965c35920a5ce0ec36f48e3aaa764725d"
+    },
+    {
+      "path": "inventory/rus-nor2-official-2022-comparison/independent-numerical-crosscheck.json",
+      "sha256": "4641a617a8ea315086b716272c09742fe7dca9cc4ec08ded28ac4851e9e7afc8"
+    },
+    {
+      "path": "inventory/rus-nor2-official-2022-comparison/2022-atom-feed.xml",
+      "sha256": "95bae8dec2e857d1e5813a99dc93ce935613a15d1a734ff1c585dee84ee336a5"
+    }
+  ],
+  "source_scope": {
+    "official_publisher": "Kartverket",
+    "dataset": "Administrative enheter fylker - historiske data 2022",
+    "entry_updated": "2022-12-14T12:34:45",
+    "atom_feed_updated": "2026-10-21T04:06Z",
+    "distribution": "Complete 11-feature Fylke family, GML EPSG:25833, full 2022 Kartverket product; source ZIP SHA-256 0162fff92a3354104a5e5380c82836ab50d4f8353de1a2d28f75d8a345746ad7; decoded GML 37,491,789 bytes.",
+    "relation_to_original": "The original RUS-NOR contact was generated from the simplified 2022 GeoBoundaries/Kartverket-derived family, not this full official GML. The official comparison is a separate representation of the same general 2022 administrative source context."
+  },
+  "per_key_assessment": [
+    {
+      "xy": [152965, 59862],
+      "original_simplified_contact": "NOR feature gb:NOR:ADM1:71437522B84427958303197; retained native point-in-feature result is a contact.",
+      "official_2022_result": "Covered by Fylke 54, Troms og Finnmark; independently confirmed with PyProj 3.7.2 and Shapely 2.1.2. Nearest boundary is about 50.65 m in that comparison.",
+      "implication": "The official full 2022 source corroborates the original simplified contact. This is adverse to treating the contact as a mere simplification artifact and supports retaining the territorial hold.",
+      "limit": "This does not determine sovereign status, the opposite-side Russian source applicability, or other native predicates."
+    },
+    {
+      "xy": [152972, 59849],
+      "original_simplified_contact": "NOR feature gb:NOR:ADM1:71437522B84427958303197; retained native point-in-feature result is a contact.",
+      "official_2022_result": "Covered by none of the complete 11 Fylke polygons; nearest boundary is about 27.94 m in the independent PyProj/Shapely check.",
+      "implication": "This is a concrete source-representation discrepancy, consistent with the retained adjacent-year WMS no-hit and current API no-hit. It is evidence against relying on the simplified contact alone as territorial applicability evidence.",
+      "limit": "Outside the 2022 Norwegian Fylke family does not establish inclusion in Russia, nor does the short distance prove positional error or legal boundary placement. Keep held and uncredited."
+    }
+  ],
+  "finite_next_step": "If key 152972/59849 is reconsidered for a positive native path, the next bounded material check is exact key membership against the already-defined complete same-tier RUS target/source family and the existing physical/native predicates, while preserving the official Norwegian discrepancy and both source representations. The current evidence alone does not establish Russian membership. No such computation was run for this assessment.",
+  "overall_conclusion": "The 2022 full official Kartverket source materially corroborates one original contact and contradicts the other simplified contact. That supports distinct source-applicability treatment for these exact keys, but neither changes native state: key 152965/59862 remains affirmatively adverse to repair; key 152972/59849 is a bounded representation discrepancy, not proof of Russian assignment. Both remain held/uncredited pending the full original-contract predicates.",
+  "methods_and_limits": [
+    "This assessment reuses the saved two-point comparison and independent numerical cross-check; it performs no new geometry scan, observer, producer, or source acquisition.",
+    "The second point's nearest-boundary distance is a computed distance, not a stated source positional accuracy.",
+    "Kartverket feed reports rights=Kartverket. The dataset-specific Data Norge record was not independently read; the recorded HTTP 404 remains a metadata limitation, not a denial or license-clearance result.",
+    "No conclusion is drawn that Norway-exterior means Russia-interior, or that the official polygon establishes a legal boundary or current sovereignty."
+  ]
+}

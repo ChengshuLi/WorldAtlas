@@ -1,0 +1,65 @@
+{
+  "as_of": "2026-10-21",
+  "kind": "BDI Ntahangwa source-vintage primary-source check",
+  "scope": {
+    "question": "Does official primary-source evidence establish that Ntahangwa's administrative identity/delimitation postdates the retained geoBoundaries BDI ADM2 source represented-year claim of 2007?",
+    "retained_source": {
+      "package_id": "gb-BDI-ADM2--repair-evaluation",
+      "family": "gb:BDI:ADM2",
+      "represented_year_claim": "2007",
+      "catalogue_metadata_sha256": "de2bb9c370b9fbbd6f8d3ef0ed824e1489675fc27fab5a034ade9c90f67164ad",
+      "payload_commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+      "payload_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BDI-ADM2-000.bin.gz",
+      "payload_blob": "2443da0c46ca3884e36a0c8ab5a3dca9678cb332",
+      "payload_decoded_sha256": "b90f58bf70724da30e8fd2fc5e89ea68ce2139e88dade8722fd85d20f92b15c2",
+      "catalogue_license_label": "Public Domain"
+    }
+  },
+  "primary_sources": [
+    {
+      "title": "Plan National de Développement du Burundi 2018–2027",
+      "publisher": "Présidence de la République du Burundi",
+      "url": "https://www.presidence.gov.bi/wp-content/uploads/2018/08/PND-Burundi-2018-2027-Version-Finale.pdf",
+      "document_date": "June 2018",
+      "page": 34,
+      "pdf_page_index_zero_based": 42,
+      "text_lines": "1466-1474",
+      "substance": "The plan reports administrative redistricting of provinces and communes, including delimitation and regrouping of the communes of Bujumbura Mairie into three communes named Muha, Ntahangwa, and Mukaza.",
+      "direct_read": true
+    },
+    {
+      "title": "Communiqué de presse no. 11, Conseil des Ministres, 15 June 2022",
+      "publisher": "Présidence de la République du Burundi",
+      "url": "https://www.presidence.gov.bi/wp-content/uploads/2022/06/Communique-CM-15-JUIN-2022.pdf",
+      "document_date": "15 June 2022",
+      "pages": [1, 2, 3, 4],
+      "pdf_page_index_zero_based": 0,
+      "text_lines": "16-30, 36-58, 66-72, 112-128",
+      "substance": "The communiqué says Burundi then counted 18 provinces and 119 communes; recounts the 2005 assimilation of Bujumbura Mairie as a province and zones as communes; and describes a proposed new delimitation/re-grouping from 119 to 42 communes. It lists Ntahangwa among the proposed commune composition and records a recommendation to locate its seat at Mutimbuzi. This is a Council communiqué describing an adopted draft project and recommendations, not proof by itself that the later project was promulgated or that any particular boundary was adopted.",
+      "direct_read": true
+    },
+    {
+      "title": "Loi n°1/33 du 28 novembre 2014 portant révision de la loi sur l'organisation de l'administration communale",
+      "publisher": "Présidence de la République du Burundi",
+      "url": "https://presidence.gov.bi/2014/11/loi-n133-du-28-novembre-2014-portant-revision-de-la-loi-n102-du-25-janvier-2010-portant-organisation-de-ladministration-communale/",
+      "official_page_date": "28 November 2014",
+      "official_page_directly_read": true,
+      "linked_official_pdf": "https://www.presidence.gov.bi/wp-content/uploads/2014/11/loi-033-2014.pdf",
+      "official_pdf_access": "Fetch failed with HTTP 400 from document service because reported content length was 13,480,065 bytes; body/pages were not read. No retry or alternate transfer attempted.",
+      "substance": "The official Presidency page identifies the enacted law and date, but the law text itself was not directly inspected in this pass."
+    }
+  ],
+  "assessment": {
+    "finding": "There is affirmative official evidence that Bujumbura Mairie communes were delimited and regrouped into the three-commune arrangement including Ntahangwa by the 2018 plan, after the retained ADM2 catalogue's claimed 2007 representation year. This makes a source-vintage/identity applicability question concrete; it is not merely inferred from matching names.",
+    "not_established": [
+      "The available evidence does not establish that the retained 2007 Ntahangwa feature is geometrically the 2014/2018 Ntahangwa commune, nor provide an old-to-new polygon crosswalk.",
+      "The 2022 communiqué's 42-commune delineation is a proposal/project account; it is not treated as promulgation evidence.",
+      "No conclusion is made about present legal authority, source clearance, geometry correctness, or per-cell causal attribution."
+    ],
+    "next_evidence_if_needed": "Directly inspect the 2014 official law text/annex and any enacted map or legally documented predecessor-to-successor membership table; exact geometry equivalence would still require separate evidence."
+  },
+  "related_retained_context": {
+    "prior_whole_target_comparison": "inventory/bdi-whole-target-context-comparison.json",
+    "scope_note": "Existing comparison is 21 retained 2007 ADM2 target polygons against 18 retained 2014 ADM1 features plus COD/TZA contexts; it is not an old-to-new Ntahangwa crosswalk."
+  }
+}

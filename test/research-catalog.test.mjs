@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {DatabaseSync} from 'node:sqlite';
 import {importBatch,registerMedia,entityProfile} from '../hosted/records.js';
-import {catalogPage,entityRelationshipsPage,entityMediaPage,capacityReport} from '../hosted/research-catalog.js';
+import {catalogPage,entityRelationshipsPage,entityMediaPage,capacityReport,ownerLabelSnapshot} from '../hosted/research-catalog.js';
 
 class D1 {
  constructor(){this.sqlite=new DatabaseSync(':memory:');this.sqlite.exec('PRAGMA foreign_keys=ON');for(const file of fs.readdirSync(new URL('../drizzle/',import.meta.url)).filter(f=>f.endsWith('.sql')).sort())this.sqlite.exec(fs.readFileSync(new URL(`../drizzle/${file}`,import.meta.url),'utf8'));}
@@ -79,5 +79,56 @@ test('catalog and graph reads reject revision changes instead of publishing inco
  const db=await fixture();try{
   const drifting=()=>{let reads=0;return {prepare(sql){const statement=db.prepare(sql);if(!sql.includes('coalesce(max(rowid),0) revision'))return statement;return {async first(){const row=await statement.first();return {...row,revision:row.revision+Number(++reads>1)};}};}};};
   for(const request of [d=>catalogPage(d,'sources'),d=>entityRelationshipsPage(d,'location'),d=>entityMediaPage(d,'location'),d=>capacityReport(d)])await assert.rejects(request(drifting()),error=>error.status===409&&error.retryable===true);
+ }finally{db.sqlite.close();}
+});
+
+
+async function ownerCaptureRelease(db,id='owner-capture',publish=true){
+ const {stageGeographicRelease,finalizeGeographicRelease,geographicMembershipHash,geographicLocationIdsHash,geographicChangesHash}=await import('../hosted/geographic-releases.js');
+ const kinds=['continent','subcontinent','region','area','province','location'];
+ const extra=Array.from({length:5},(_,n)=>kinds.map((kind,i)=>({id:`capture:${n}:${kind}`,kind,name:`Capture ${kind}`,parent_id:i?`capture:${n}:${kinds[i-1]}`:null,source_id:'capture-reference'}))).flat();
+ await importBatch(db,{sources:[source('capture-reference',{status:'reference'})],entities:extra});
+ const memberships=kinds.map((kind,i)=>({entity_id:kind,kind,parent_id:i?kinds[i-1]:null,reference_name:kind==='location'?'Release location':`Reference ${kind}`,active:1,source_id:'capture-reference',evidence:{method:'fixture-reference'}})).concat(extra.map(e=>({entity_id:e.id,kind:e.kind,parent_id:e.parent_id,reference_name:e.name,active:1,source_id:'capture-reference',evidence:{method:'fixture-reference'}})));
+ const release={id,source_id:'capture-reference',version:1,reference_date:'2026-10-01',hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64),membership_sha256:await geographicMembershipHash(memberships),location_ids_sha256:await geographicLocationIdsHash(memberships),changes_sha256:await geographicChangesHash([]),expected_counts:Object.fromEntries(kinds.map(k=>[k,6])),metadata:{fixture:true}};
+ await stageGeographicRelease(db,{release,memberships,changes:[]});
+ if(publish)await finalizeGeographicRelease(db,id);
+ return release;
+}
+
+test('owner replica exhausts the canonical category catalog at one revision without database mutation',async()=>{
+ const db=await fixture();try{
+  await importMany(db,'categories',Array.from({length:271},(_,i)=>({id:`owner:replica:${String(i).padStart(3,'0')}`,kind:'owner',name:`Canonical owner ${i}`,source_id:'history'})));
+  const release=await ownerCaptureRelease(db),before=db.sqlite.prepare('SELECT total_changes() n').get().n;
+  const snapshot=await ownerLabelSnapshot(db,{releaseId:release.id});
+  assert.equal(snapshot.kind,'neon-owner-label-replica-v1');assert.equal(snapshot.owners.length,272);
+  assert.deepEqual(snapshot.owners.map(r=>r.id),db.sqlite.prepare("SELECT id FROM atlas_categories WHERE kind='owner' AND source_id='history' ORDER BY id").all().map(r=>r.id));
+  assert.deepEqual(snapshot.capture_reference,{id:release.id,hierarchy_sha256:release.hierarchy_sha256,footprints_sha256:release.footprints_sha256});
+  assert.equal(snapshot.revision,db.sqlite.prepare('SELECT coalesce(max(rowid),0) revision FROM atlas_ingestions').get().revision);
+  assert.equal(db.sqlite.prepare('SELECT total_changes() n').get().n,before,'The exporter is read-only');
+  await assert.rejects(ownerLabelSnapshot(db,{releaseId:'missing'}),/published capture release/);
+  await assert.rejects(ownerLabelSnapshot(db),/capture release ID/);
+  const staged=await fixture();try{await ownerCaptureRelease(staged,'staged',false);await assert.rejects(ownerLabelSnapshot(staged,{releaseId:'staged'}),/published capture release/);}finally{staged.sqlite.close();}
+  let reads=0;
+  const drifting={prepare(sql){const statement=db.prepare(sql);if(!sql.includes('coalesce(max(rowid),0) revision'))return statement;return {async first(){const row=await statement.first();return {...row,revision:row.revision+Number(++reads>=4)};}};}};
+  await assert.rejects(ownerLabelSnapshot(drifting,{releaseId:release.id}),error=>error.status===409&&error.retryable===true);
+ }finally{db.sqlite.close();}
+});
+
+test('entity profiles use the owner category while geographic membership and original identity remain separate',async()=>{
+ const db=await fixture();try{
+  await importBatch(db,{entities:[{id:'owner:canonical',kind:'polity',name:'Original registry label',source_id:'history'}],categories:[{id:'owner:canonical',kind:'owner',name:'Canonical category name',source_id:'history'}]});
+  const release=await ownerCaptureRelease(db);
+  const current=await entityProfile(db,'owner:canonical',2026,{releaseId:release.id});
+  assert.equal(current.name,'Canonical category name');assert.equal(current.display_name,'Canonical category name');
+  assert.equal(current.original_registry.name,'Original registry label');assert.equal(current.reference_geography,null);
+  const geographicReader={prepare(sql){assert.ok(!sql.includes('FROM atlas_categories'),'Geographic names never consult owner categories');return db.prepare(sql);}};
+  const location=await entityProfile(geographicReader,'location',2026,{releaseId:release.id});assert.equal(location.display_name,'Release location');assert.equal(location.original_registry.name,'Reference location');
+  await importBatch(db,{names:[{id:'owner-dated',entity_id:'owner:canonical',name:'Preferred dated owner',role:'preferred',language:'en',valid_from:1000,valid_to:2027,source_id:'history'}]});
+  assert.equal((await entityProfile(db,'owner:canonical',1000)).display_name,'Preferred dated owner');
+  assert.equal((await entityProfile(db,'owner:canonical',2026)).display_name,'Preferred dated owner');
+  await importBatch(db,{retirements:[{id:'retire-owner-dated',collection:'names',target_id:'owner-dated',source_id:'history',reason:'Fixture withdrawal'}]});
+  assert.equal((await entityProfile(db,'owner:canonical',2026)).display_name,'Canonical category name');
+  assert.equal((await entityProfile(db,'owner:canonical',1000)).display_name,null,'A reference label is not asserted as a dated profile name');
+  assert.equal(db.sqlite.prepare("SELECT name FROM atlas_entities WHERE id='owner:canonical'").get().name,'Original registry label');
  }finally{db.sqlite.close();}
 });

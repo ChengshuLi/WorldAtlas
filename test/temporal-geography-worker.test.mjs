@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {DatabaseSync} from 'node:sqlite';
 import worker from '../hosted/worker.js';
+import {protectedWorker,legacyPublicMapRelease} from '../hosted/cloudflare-access.js';
+import {loadHostedTemporalGeography} from '../src/hosted-temporal-client.js';
 import {importBatch} from '../hosted/records.js';
 import {createLocalPostgres} from '../scripts/verify-postgres-schema.mjs';
 import {stageGeographicRelease,finalizeGeographicRelease,geographicMembershipHash,geographicLocationIdsHash,geographicChangesHash} from '../hosted/geographic-releases.js';
@@ -29,7 +31,7 @@ async function fixture(backend){
   const objects=new Map();const env={DB,ASSETS:{fetch:()=>new Response('static fixture')},BUCKET:{async head(key){return objects.has(key)?{}:null;},async put(key,bytes){objects.set(key,bytes);},async get(key){const bytes=objects.get(key);return bytes?{body:bytes,size:bytes.byteLength}:null;}}};
   const request=(path,{method='GET',headers={},body,...options}={},selected=env)=>worker.fetch(new Request(origin+path,{method,headers,...(body===undefined?{}:{body:typeof body==='string'||body instanceof Uint8Array?body:JSON.stringify(body)}),...options}),selected,{});
   const post=(body,selected=env)=>request('/api/geography/temporal/import',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json'},body:{expected_geography:pin,...body}},selected);
-  return {DB,env,request,post,close:()=>pg?pg.close():DB.sqlite.close()};
+  return {DB,env,request,post,memberships,close:()=>pg?pg.close():DB.sqlite.close()};
  }catch(error){await (pg?pg.close():Promise.resolve(DB.sqlite.close()));throw error;}
 }
 
@@ -69,3 +71,73 @@ for(const backend of ['sqlite','postgres']){
   }finally{await f.close();}
  });
 }
+
+
+for(const backend of ['sqlite','postgres'])test(`map-bound release remains selected after a newer publication on actual ${backend}`,async()=>{
+ const f=await fixture(backend);try{
+  assert.equal((await f.post({ingestion_id:'pinned-original',memberships:[membership('pinned-old')]})).status,200);
+  assert.equal((await f.post({ingestion_id:'pinned-correction',memberships:[membership('pinned-current')],retirements:[{id:'pinned-withdrawal',collection:'memberships',target_id:'pinned-old',replacement_id:'pinned-current',source_id:'worker-history',reason:'Fixture correction'}]})).status,200);
+  const newer={release_id:'worker-newer',hierarchy_sha256:'c'.repeat(64),footprints_sha256:'d'.repeat(64)};
+  for(const [id,version,published] of [[newer.release_id,2,true],['worker-staged',3,false]]){
+   await stageGeographicRelease(f.DB,{release:{id,source_id:'worker-reference-source',version,reference_date:'2026-10-03',hierarchy_sha256:newer.hierarchy_sha256,footprints_sha256:newer.footprints_sha256,
+    membership_sha256:await geographicMembershipHash(f.memberships),location_ids_sha256:await geographicLocationIdsHash(f.memberships),changes_sha256:await geographicChangesHash([]),expected_counts:Object.fromEntries(tiers.map(kind=>[kind,6]))},memberships:f.memberships});
+   if(published)await finalizeGeographicRelease(f.DB,id);
+  }
+  const selected=new URLSearchParams({year:'1000',release_id:pin.release_id});
+  const before=(await f.DB.prepare('SELECT coalesce(max(rowid),0) revision FROM atlas_ingestions').first()).revision;
+  for(const stream of ['records','withdrawals']){
+   const response=await f.request('/api/geography/temporal/snapshot?'+selected+'&stream='+stream);assert.equal(response.status,200);
+   const page=await response.json();assert.equal(page.release_id,pin.release_id);assert.equal(page.hierarchy_sha256,pin.hierarchy_sha256);assert.equal(page.footprints_sha256,pin.footprints_sha256);
+   assert.deepEqual((stream==='records'?page.records:page.withdrawals).map(row=>row.id),[stream==='records'?'pinned-current':'pinned-withdrawal']);
+  }
+  const inline=await f.request('/api/map/snapshot?'+selected+'&evidence_only=1&include_temporal=1');assert.equal(inline.status,200);const body=await inline.json();
+  assert.ok(body.records.some(row=>row.attribute==='population'&&row.value===42));
+  for(const stream of ['records','withdrawals']){
+   const page=body.temporal_geography[stream];assert.equal(page.release_id,pin.release_id);assert.equal(page.revision,body.revision);
+   assert.deepEqual((stream==='records'?page.records:page.withdrawals).map(row=>row.id),[stream==='records'?'pinned-current':'pinned-withdrawal']);
+  }
+  const latest=await (await f.request('/api/geography/temporal/snapshot?year=1000')).json();assert.equal(latest.release_id,newer.release_id);assert.deepEqual(latest.records,[]);
+  const generic=await (await f.request('/api/map/snapshot?year=1000&evidence_only=1&include_temporal=1')).json();
+  for(const stream of ['records','withdrawals'])assert.equal(generic.temporal_geography[stream].release_id,newer.release_id);
+  for(const id of ['worker-missing','worker-staged'])for(const path of ['/api/geography/temporal/snapshot?year=1000','/api/map/snapshot?year=1000&evidence_only=1&include_temporal=1']){
+   const response=await f.request(path+'&release_id='+id);assert.equal(response.status,409);assert.match((await response.json()).error,/Published reference geography/);
+  }
+  assert.equal((await f.DB.prepare('SELECT coalesce(max(rowid),0) revision FROM atlas_ingestions').first()).revision,before,'Read selection never publishes or imports data');
+ }finally{await f.close();}
+});
+
+
+for(const backend of ['sqlite','postgres'])test(`public legacy map pair stays fixed across staging, finalization, new clients and rollback on actual ${backend}`,async()=>{
+ const f=await fixture(backend),publicWorker=protectedWorker(worker),publicEnv={...f.env,ATLAS_PUBLIC_READ_ONLY:'1',ATLAS_READ_ONLY:'0'};
+ const request=route=>publicWorker.fetch(new Request(origin+route),publicEnv,{});
+ const legacyPaths=['/api/map/snapshot?year=1000&evidence_only=1&include_temporal=1','/api/geography/temporal/snapshot?year=1000'];
+ const create=async(id,version)=>stageGeographicRelease(f.DB,{release:{id,source_id:'worker-reference-source',version,reference_date:'2026-10-03',hierarchy_sha256:pin.hierarchy_sha256,footprints_sha256:pin.footprints_sha256,membership_sha256:await geographicMembershipHash(f.memberships),location_ids_sha256:await geographicLocationIdsHash(f.memberships),changes_sha256:await geographicChangesHash([]),expected_counts:Object.fromEntries(tiers.map(kind=>[kind,6]))},memberships:f.memberships});
+ const pins=page=>({release_id:page.release_id,hierarchy_sha256:page.hierarchy_sha256,footprints_sha256:page.footprints_sha256});
+ const expected={...pin,release_id:legacyPublicMapRelease};
+ const readOld=async()=>{
+  const bodies=[];
+  // These are the two release-omitting request shapes issued by the retained
+  // deployed 4a1fc677 clients. Exercise the real public wrapper and SQL, not a
+  // mocked release selector or generic service whose latest semantics differ.
+  for(const route of legacyPaths){const response=await request(route);assert.equal(response.status,200);assert.equal(response.headers.get('X-Atlas-Legacy-Map-Release'),legacyPublicMapRelease);const body=await response.json();if(!body.temporal_geography)assert.deepEqual(pins(body),expected);if(body.temporal_geography)for(const stream of ['records','withdrawals'])assert.deepEqual(pins(body.temporal_geography[stream]),expected);bodies.push(body);}
+  return bodies;
+ };
+ try{
+  for(const route of legacyPaths)assert.equal((await request(route)).status,409,'absent fixed legacy release must not become latest');
+  await create(legacyPublicMapRelease,6);
+  for(const route of legacyPaths)assert.equal((await request(route)).status,409,'staged fixed legacy release must not become latest');
+  await finalizeGeographicRelease(f.DB,legacyPublicMapRelease);
+  const before=await readOld();
+  await create('worker-target-v10',10);await readOld();
+  for(const route of legacyPaths)assert.equal((await request(route+'&release_id=worker-target-v10')).status,409,'explicit staged target refuses');
+  await finalizeGeographicRelease(f.DB,'worker-target-v10');
+  const after=await readOld();const withoutRevision=value=>JSON.parse(JSON.stringify(value,(key,value)=>key==='revision'?undefined:value));assert.deepEqual(withoutRevision(after),withoutRevision(before),'old open/cached page pins and content remain unchanged');
+  const generic=await (await request('/api/geography/release')).json();assert.equal(generic.id,'worker-target-v10','separate generic latest endpoint is unchanged');
+  const seen=[];
+  const current=await loadHostedTemporalGeography({apiGet:async route=>{seen.push(route);const response=await request(route);assert.equal(response.status,200);return response.json();},year:1000,expectedGeography:{...pin,release_id:'worker-target-v10'}});
+  assert.ok(current);assert.ok(seen.length>=2);assert.ok(seen.every(route=>new URL(origin+route).searchParams.get('release_id')==='worker-target-v10'));
+  await readOld(); // Reverting the page/asset deployment still uses the fixed old pair.
+  for(const id of ['', 'worker-missing','%20'])for(const route of legacyPaths)assert.ok((await request(route+'&release_id='+id)).status>=400,'explicit invalid selection never falls back');
+  assert.equal((await publicWorker.fetch(new Request(origin+'/api/records/import',{method:'POST',body:'{}'}),publicEnv,{})).status,503,'public write protection remains forced');
+ }finally{await f.close();}
+});

@@ -1,7 +1,10 @@
+import {scientificNativeSelection,finalBankSelection} from '../src/reference-metadata.js';
 import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
+import {isDeepStrictEqual} from 'node:util';
+import {isUtf8} from 'node:buffer';
 import {compatiblePackageProducers} from './package-producer-contract.mjs';
 
 export const PACKAGE_INPUT_FILE = '.github/package-inputs.json';
@@ -24,7 +27,7 @@ export function validatePackageInputs(value) {
   }
   // Ambient databases, secrets and existing build/cache output cannot become source inputs.
   if (value.inputs.some(row => /^(?:\.git(?:\/|$)|node_modules(?:\/|$)|\.cache(?:\/|$)|dist(?:\/|$)|data\/atlas\.sqlite)/.test(row))) throw Error('Ambient/generated package source input');
-  const outputs = ['dist/', '.cache/deployment-budget.json', 'data/prepared-evidence/', 'data/atlas.sqlite'];
+  const outputs = ['dist/', '.cache/deployment-budget.json', 'data/prepared-evidence/', '.cache/package-atlas.sqlite'];
   if (value.generated_outputs.some(row => !outputs.includes(row))) throw Error('Unsupported generated package output');
   return value;
 }
@@ -75,7 +78,7 @@ export function fullCheckoutPatterns(definition) {
 export function focusedCheckoutPatterns(definition, verificationPaths = definition.verification_paths) {
   validatePackageInputs(definition);
   return [
-    'scripts', 'src', 'test', '.github', 'drizzle', 'hosted', '/*.mjs',
+    'scripts', 'src', 'test', '.github', 'drizzle', 'hosted', 'postgres', '/*.mjs',
     'coordination/engineering/**/*.mjs', 'coordination/engineering/**/*.js',
     'coordination/engineering/**/*.cjs', 'coordination/engineering/**/*.py',
     'coordination/engineering/**/package.json',
@@ -186,7 +189,77 @@ export function admitSelectedPackageDeclarations(before, current, {selection, pr
     'Package definition is not an append-only selected change or authenticated cumulative replacement');
   return {removed,retired,retainedInputs,additions:newInputs.slice(retainedInputs.length)};
 }
-export function admitPackageInputTransition(before, current, {acceptedInputs, typedInputs, priorSidecarRaw, producerWorkflows, preliminary = false} = {}) {
+// Derive the only mutable prepared-bank inputs from both whole committed indexes.
+// Tree metadata admits transport scope; the ordinary copier and emitted full-word
+// parity still authenticate every encoded/decoded body against N + accepted repairs.
+export const PREPARED_STARTUP_PREFIX = 'data/canonical-grid/current-startup/';
+export const PREPARED_STARTUP_INDEX = PREPARED_STARTUP_PREFIX + 'index.json';
+export function preparedStartupPackageTransition(before, current, raw = {}) {
+  const equal=isDeepStrictEqual,need=(ok,message)=>{if(!ok)throw Error(message);};
+  const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
+  const git=bytes=>createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
+  const parse=(source,name,bytes)=>{
+    const row=source.files.find(row=>row.path===name);
+    need(row?.mode==='100644'&&Buffer.isBuffer(bytes)&&isUtf8(bytes)&&git(bytes)===row.oid,'Prepared transition whole metadata differs: '+name);
+    return JSON.parse(bytes);
+  };
+  const inspect=(source,indexRaw,selectionRaw)=>{
+    const index=parse(source,PREPARED_STARTUP_INDEX,indexRaw),selection=parse(source,'data/ownership-selection.json',selectionRaw);
+    const proof=index.preparedOwnership;
+    const final=index.version===3,selectedNative=scientificNativeSelection(selection);
+    need(equal(selection,source.selection)&&selectedNative.method==='native-linear-evenodd-first-owner-v1'
+      &&(final?proof?.version===3: index.version===2&&proof?.version===2&&proof.selection_sha256===sha(selectionRaw))
+      &&index.native_manifest_sha256===selectedNative.sha256&&proof.native_manifest_sha256===selectedNative.sha256
+      &&proof.native_pixel_map?.canonical_grid_sha256===selectedNative.sha256,'Prepared transition selector/native binding differs');
+    if(final){const pin=finalBankSelection(selection);need(pin.path===PREPARED_STARTUP_INDEX&&pin.bytes===indexRaw.length&&pin.sha256===sha(indexRaw)
+      &&index.additiveRelease===undefined&&equal(proof.effective_reference,selection.reference),'Prepared final transition index binding differs');}
+    else need(equal(proof.base_reference,index.additiveRelease?.base_reference)
+      &&equal(proof.effective_reference,index.additiveRelease?.effective_reference),'Prepared legacy transition content binding differs');
+    need(index.release_id===proof.effective_reference?.id&&index.footprints_sha256===proof.effective_reference?.footprints_sha256
+      &&index.hierarchy_sha256===proof.effective_reference?.hierarchy_sha256,'Prepared transition content/effective binding differs');
+    need(Array.isArray(index.files)&&index.files.length>0&&new Set(index.files.map(pin=>pin.path)).size===index.files.length
+      &&Array.isArray(index.compatibility_files)&&index.compatibility_files.length>0
+      &&new Set(index.compatibility_files.map(pin=>pin.path)).size===index.compatibility_files.length,'Prepared transition inventory differs');
+    const pins=new Map(index.files.map(pin=>[pin.path,pin])),entries=new Map(source.files.map(row=>[row.path,row]));
+    for(const pin of index.files){
+      need(safePackagePath(pin.path)&&!pin.path.endsWith('/')&&pin.path!=='index.json'&&Number.isSafeInteger(pin.bytes)&&pin.bytes>0
+        &&/^[a-f0-9]{64}$/.test(pin.sha256),'Invalid prepared transition pin');
+      const row=entries.get(PREPARED_STARTUP_PREFIX+pin.path);
+      need(row?.mode==='100644'&&/^[a-f0-9]{40}$/.test(row.oid)
+        &&(row.bytes===undefined||row.bytes===pin.bytes),'Prepared transition tree member differs');
+    }
+    const active=[...(index.pixelMap?.parts??[]),...(proof.context_parts??[])],native=proof.native_pixel_map;
+    need(active.length>0&&Array.isArray(native.parts)&&native.parts.length>0,'Prepared transition active operands missing');
+    const names=new Set();
+    for(const pin of [...index.compatibility_files,...native.parts,...active]){
+      need(pins.get(pin.path)?.sha256===pin.sha256,'Prepared transition operand differs');names.add(pin.path);
+    }
+    const latitude=native.native_latitudes;
+    need(pins.get(latitude?.transport_path)?.sha256===latitude?.sha256,'Prepared transition native latitude differs');names.add(latitude.transport_path);
+    need(index.compatibility_files.every(pin=>equal(pin,pins.get(pin.path)))&&names.size===pins.size
+      &&[...pins.keys()].every(name=>names.has(name)),'Prepared transition retains an inactive or unbound member');
+    const actual=source.files.filter(row=>row.path.startsWith(PREPARED_STARTUP_PREFIX)).map(row=>row.path).sort();
+    need(equal(actual,[PREPARED_STARTUP_INDEX,...index.files.map(pin=>PREPARED_STARTUP_PREFIX+pin.path)].sort()),'Prepared transition actual inventory differs');
+    return {index,pins,entries,active:new Set(active.map(pin=>pin.path))};
+  };
+  const old=inspect(before,raw.beforeIndex,raw.beforeSelection),next=inspect(current,raw.afterIndex,raw.afterSelection);
+  need(equal(old.index.compatibility_files,next.index.compatibility_files)
+    &&equal(old.index.preparedOwnership.native_pixel_map,next.index.preparedOwnership.native_pixel_map)
+    &&equal(old.index.preparedOwnership.base_reference,next.index.preparedOwnership.base_reference),
+  'Prepared transition changes compatibility, original native or content reference');
+  const added=new Set(),removed=new Set();
+  for(const [name,pin] of old.pins){
+    if(next.pins.has(name))need(equal(pin,next.pins.get(name))
+      &&equal(old.entries.get(PREPARED_STARTUP_PREFIX+name),next.entries.get(PREPARED_STARTUP_PREFIX+name)), 'Prepared immutable URL rebound');
+    else{need(old.active.has(name)&&!old.index.compatibility_files.some(pin=>pin.path===name), 'Prepared compatibility member removed');removed.add(PREPARED_STARTUP_PREFIX+name);}
+  }
+  for(const name of next.pins.keys())if(!old.pins.has(name)){
+    need(next.active.has(name),'Unbound prepared addition');added.add(PREPARED_STARTUP_PREFIX+name);
+  }
+  return {added,removed,changed:new Set([PREPARED_STARTUP_INDEX,...added,...removed])};
+}
+
+export function admitPackageInputTransition(before, current, {acceptedInputs, typedInputs, priorSidecarRaw, producerWorkflows, preparedStartup, preliminary = false} = {}) {
   const need=(ok,message)=>{if(!ok)throw Error(message);};
   const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
   const commit=value=>/^[a-f0-9]{40}$/.test(value??'');
@@ -197,12 +270,19 @@ export function admitPackageInputTransition(before, current, {acceptedInputs, ty
     before.definition,current.definition,{selection:before.selection,priorSidecarRaw,priorEntry:name=>oldInventory.get(name),currentPaths:current.files.map(row=>row.path)});
   const {additive_release:oldAdditive,...oldBase}=before.selection;
   const {additive_release:newAdditive,...newBase}=current.selection;
-  need(same(oldBase,newBase)&&oldAdditive&&newAdditive,'Original invariant selection differs');
+  if(before.selection.version===2||current.selection.version===2){
+    need(before.selection.version===2&&current.selection.version===2,'First final-profile adoption requires a genuine full capture');
+    finalBankSelection(before.selection);finalBankSelection(current.selection);
+    need(isDeepStrictEqual(scientificNativeSelection(before.selection),scientificNativeSelection(current.selection))
+      &&isDeepStrictEqual(before.selection.reference_projection,current.selection.reference_projection),'Original final-profile native/reference selection differs');
+  }else need(same(oldBase,newBase)&&oldAdditive&&newAdditive,'Original invariant selection differs');
   const oldFiles=new Map(before.files.map(row=>[row.path,row])),newFiles=new Map(current.files.map(row=>[row.path,row]));
   need(oldFiles.size===before.files.length&&oldFiles.size>0&&newFiles.size===current.files.length,'Duplicate or incomplete source input inventory');
-  const exceptions=new Set(['.github/package-inputs.json','data/ownership-selection.json']);
+  const bank=preparedStartup?preparedStartupPackageTransition(before,current,preparedStartup):{changed:new Set(),added:new Set(),removed:new Set()};
+  const exceptions=new Set(['.github/package-inputs.json','data/ownership-selection.json',...bank.changed]);
   for(const [name,row] of oldFiles) {
-    if(removed.includes(name)) {
+    if(bank.removed.has(name)) { need(!newFiles.has(name),'Retired final-bank input remains'); }
+    else if(removed.includes(name)) {
       need(row.mode==='100644'&&row.oid===(retired.get(name).git_blob_oid??retired.get(name).blob),
         'Retired cumulative role differs from original source inventory: '+name);
       need(!newFiles.has(name),'Retired declaration remains an implicit package input: '+name);
@@ -235,7 +315,7 @@ export function admitPackageInputTransition(before, current, {acceptedInputs, ty
   }
   const added=[];
   for(const [name,row] of newFiles)if(!oldFiles.has(name)){
-    need(row.mode==='100644'&&newDeclarations.includes(name),
+    need(row.mode==='100644'&&(newDeclarations.includes(name)||bank.added.has(name)),
       'Unadmitted new invariant/directory/optional package input: '+name);added.push(name);
   }
   return {original_head:before.head,current_head:current.head,invariant_files:oldFiles.size-exceptions.size-removed.length,

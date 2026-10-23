@@ -16,7 +16,7 @@ class RepairTests(unittest.TestCase):
   small=box(12,41,12.0001,41.0001);full=box(12,41,12.002,41.002);world=box(11.99,40.99,12.01,41.01)
   self.features=[]
   for id,g in [('A',box(0,0,1,1)),('B',box(1,0,2,1)),('VAT+00?',small),('atlas:location:ITA:SLL:1209',world.difference(small))]:
-   self.features.append({'type':'Feature','properties':{'id':id,'name':id,'parent_id':'province','reference_owner':'Original','metadata':{'reference_owner_id':'owner:original'}},'geometry':mapping(g)})
+   self.features.append({'type':'Feature','properties':{'id':id,'name':id,'parent_id':'province','reference_owner':'Original','metadata':{'reference_owner_id':'owner:original','reference_polity':'Stale alias'}},'geometry':mapping(g)})
   union=union_all([m.geometry(f['geometry']) for f in self.features[:2]])
   m.write(self.root/'union.json.gz',{'type':'Feature','properties':{'id':'A'},'geometry':mapping(union)})
   replacement={'VAT+00?':full,'atlas:location:ITA:SLL:1209':world.difference(full)}
@@ -31,18 +31,21 @@ class RepairTests(unittest.TestCase):
   before,after,units,r=self.stage();self.assertEqual(r['removed_ids'],['B']);self.assertEqual(r['changed_ids'],['A','VAT+00?','atlas:location:ITA:SLL:1209']);self.assertEqual(len(r['archives']),4)
   self.assertEqual({f['properties']['id'] for f in after},{'A','VAT+00?','atlas:location:ITA:SLL:1209'});self.assertNotIn('unused',units)
   self.assertTrue(all(not x['history_transfer'] for x in r['relationships']));self.assertEqual(before,self.features)
+  by_id={f['properties']['id']:f for f in after};self.assertEqual(by_id['VAT+00?']['properties']['metadata']['reference_polity'],'Vatican')
+  self.assertEqual(by_id['atlas:location:ITA:SLL:1209']['properties']['metadata']['reference_polity'],'Stale alias');self.assertEqual(by_id['atlas:location:ITA:SLL:1209']['properties']['reference_owner'],'Original')
+  for archive in r['archives']:self.assertEqual(archive['feature'],next(f for f in self.features if f['properties']['id']==archive['id']))
   self.assertEqual(m.area(union_all([m.geometry(f['geometry']) for f in after]).symmetric_difference(union_all([m.geometry(f['geometry']) for f in before]))),0)
  def test_owner_does_not_choose_parent(self):
   _,after,_,_=self.stage();a=next(f for f in after if f['properties']['id']=='A')
-  self.assertEqual(a['properties']['reference_owner'],'Winner');self.assertEqual(a['properties']['parent_id'],'province')
+  self.assertEqual(a['properties']['reference_owner'],'Winner');self.assertEqual(a['properties']['metadata']['reference_polity'],'Winner');self.assertEqual(a['properties']['metadata']['reference_owner_evidence'],self.report['union_proposals'][0]['modern_reference_owner']);self.assertEqual(a['properties']['parent_id'],'province')
  def test_disputed_reference_not_overridden_by_source_owner(self):
   proposal=self.report['union_proposals'][0]
   proposal['modern_reference_owner']={'status':'disputed','winner':None,'conflicts':[{'owner_ids':['owner:a','owner:b']}]}
   proposal['reference_source_record_majority']={'winner':{'owner_id':'owner:a','name':'A'}}
   _,after,_,_=self.stage();a=next(f for f in after if f['properties']['id']=='A')
-  self.assertIsNone(a['properties']['reference_owner']);self.assertIsNone(a['properties']['metadata']['reference_owner_id'])
+  self.assertIsNone(a['properties']['reference_owner']);self.assertIsNone(a['properties']['metadata']['reference_owner_id']);self.assertIsNone(a['properties']['metadata']['reference_polity']);self.assertEqual(a['properties']['metadata']['reference_owner_evidence'],proposal['modern_reference_owner'])
  def test_unrelated_identity_and_geometry_preserved_exactly(self):
-  untouched={'type':'Feature','properties':{'id':'C','name':'C','parent_id':'province','reference_owner':'Other','metadata':{'nested':{'note':'untouched'}}},'geometry':mapping(box(5,5,6,6))}
+  untouched={'type':'Feature','properties':{'id':'C','name':'C','parent_id':'province','reference_owner':'Other','metadata':{'reference_polity':'Unchanged political reference','nested':{'note':'untouched'}}},'geometry':mapping(box(5,5,6,6))}
   self.features.append(untouched)
   _,after,_,r=self.stage();self.assertEqual(next(f for f in after if f['properties']['id']=='C'),untouched);self.assertEqual(r['reused_ids'],['C'])
  def test_reject_stale_original(self):

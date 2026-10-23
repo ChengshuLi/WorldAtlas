@@ -5,18 +5,19 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {execFileSync} from 'node:child_process';
-import {gzipSync} from 'node:zlib';
+import {gzipSync,gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
 import {shuffleOwnershipBytes} from '../../src/ownership-codec.js';
 import {nativeRowLatitudes} from '../../src/native-grid.js';
 import {valueBytes,valueSha,coordinateBounds,mergeCompletedNativePatches} from '../../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {mapCellSelectionFixture} from './map-cell-selection.mjs';
+import {JOINT_CODE} from '../../coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs';
 import {deriveCoordinateDelta} from '../../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const MODULE='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const CATALOGUE='coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
 const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/native-word-store.mjs','scripts/native-patch-store.mjs','scripts/check-effective-geographic-regression.mjs',
-  'scripts/selected-reference-metadata.mjs','src/reference-metadata.js','src/native-grid.js','src/ownership-codec.js'];
+  'scripts/selected-reference-metadata.mjs','src/reference-metadata.js','src/native-grid.js','src/ownership-codec.js','scripts/package-startup-ownership.mjs','src/ownership-assets.js','src/ownership-method.js'];
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const polygon=(x,y=0)=>({type:'Polygon',coordinates:[[[x,y],[x+.2,y],[x+.2,y+.2],[x,y+.2],[x,y]]]});
 const feature=(id,x)=>({type:'Feature',id,properties:{id,parent_id:'parent'},geometry:polygon(x)});
@@ -42,9 +43,9 @@ function fixtureRepository(root){
 const trustedSeeds=new Map();
 after(()=>{for(const seed of trustedSeeds.values())fs.rmSync(seed.root,{recursive:true,force:true});});
 
-function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,nativeConsumer,sourceOverride,physicalLogicalSource,originalPatchRows,overrideLogicalPath,nativeLayout,sourceFeatures}){
+function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,nativeConsumer,sourceOverride,physicalLogicalSource,originalPatchRows,overrideLogicalPath,nativeLayout,sourceFeatures,finalBank,packageRoles}){
  const {git,save,commit,pin}=fixtureRepository(root);
- git('init','-q');if(codeRoutes)save('data/scientific.js',{fixture:'scientific input, not executed code'});save(PROGRAMME,fs.readFileSync(PROGRAMME));for(const name of [...CODE,...(nativeConsumer?['scripts/selected-checkpoint-native.mjs']:[])])save(name,fs.readFileSync(name));save('package.json',{type:'module'});
+ git('init','-q');if(codeRoutes)save('data/scientific.js',{fixture:'scientific input, not executed code'});save(PROGRAMME,fs.readFileSync(PROGRAMME));for(const name of new Set([...CODE,...(finalBank?JOINT_CODE:[]),...(nativeConsumer?['scripts/selected-checkpoint-native.mjs']:[])]))save(name,fs.readFileSync(name));save('package.json',{type:'module'});
  const {features,certificate}=fixtures(sourceFeatures), source={type:'FeatureCollection',features};save('data/source.json',source);
  if(sourceOverride)save('data/selected-source.json.gz',gzipSync(valueBytes(source)));
  const reference={id:'geography:fixture',hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64)};
@@ -55,9 +56,9 @@ function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,nativeC
  const runs=nativeLayout?.runs??[2**coordinateBits,0,2*2**coordinateBits,0,3*2**coordinateBits+1,1];
  const partWords=nativeLayout?.runPartWords??runs.length;
  if(!Number.isSafeInteger(partWords)||partWords<=0||partWords%2)throw Error('Fixture requires complete positive run-word partitions');
- const parts=[encode('native/rows.bin.gz','rows',table)];
+ const parts=[encode(finalBank?'native-v1/ownership/rows-0.bin.gz':'native/rows.bin.gz','rows',table)];
  for(let offset=0;offset<runs.length;offset+=partWords)
-  parts.push(encode(nativeLayout?`native/runs-${offset}.bin.gz`:'native/runs.bin.gz','runs',runs.slice(offset,offset+partWords),offset));
+  parts.push(encode(finalBank?`native-v1/ownership/runs-${offset}.bin.gz`:nativeLayout?`native/runs-${offset}.bin.gz`:'native/runs.bin.gz','runs',runs.slice(offset,offset+partWords),offset));
  const compressedParts=parts.map(p=>fs.readFileSync(path.join(root,'data',p.path))),whole=Buffer.concat(compressedParts),fragment=gzipSync(whole);
  save('data/transport/fragment.gz',fragment);
  let assetOffset=0;
@@ -70,6 +71,12 @@ function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,nativeC
   latitudes.forEach((v,i)=>bytes.writeDoubleLE(v,i*8));save('original/latitudes.f64le.gz',gzipSync(bytes));
   const initial=commit(),body=git('show',initial+':original/latitudes.f64le.gz'),tree=git('ls-tree',initial,'--','original/latitudes.f64le.gz').toString().split(/\s+/);
   manifest.native_latitudes={root:'repository',commit:initial,path:'original/latitudes.f64le.gz',mode:tree[0],git_blob_oid:tree[2],bytes:body.length,sha256:sha(body),decoded_bytes:bytes.length,decoded_sha256:sha(bytes)};
+  if(finalBank){
+    const name='coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz';
+    const encoded=fs.readFileSync(name),decoded=gunzipSync(encoded);save(name,encoded);const at=commit();
+    manifest.version=2;manifest.footprints_sha256=reference.footprints_sha256;manifest.geographic_release=reference.id;
+    manifest.native_latitudes={root:'repository',role:'immutable-normative-rule-input',...pin(name,at),decoded_bytes:decoded.length,decoded_sha256:sha(decoded)};
+  }
   manifest.original_assets={bounds:{sha256:sha(fs.readFileSync(path.join(root,'data/owners.json')))}};
  }
  if(nativeConsumer){
@@ -79,19 +86,31 @@ function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,nativeC
   save('data/owners.json',owners);
  }
  save('data/manifest.json',manifest);
+ if(finalBank){
+  save('data/world-index.json',{parts:['source.json']});save('data/hierarchy.json',{fixture:'unchanged hierarchy'});
+  save('data/canonical-grid/manifest.json',manifest);save('data/geographic-releases/index.json',{releases:[]});
+  const release={reference};save('data/geographic-releases/fixture.json',release);
+  save('data/geographic-releases/current-manifest.json',{path:'fixture.json',sha256:valueSha(release)});
+ }
+
  const primitive=addition('old','A',1,certificate.entries[0][7],.3);
  const literal={...primitive,base_geometry:features[0].geometry,disposition:'assigned',native_cells:1,source_receipt_sha256:'c'.repeat(64)};
  const originalPatch={version:1,kind:'unassigned-native-cells-v1',rows:originalPatchRows??[{y:1,runs:[[2,3,1]]}]};
  save('original/patch-one.json',originalPatch);save('original/rule.json',{version:1});const one=commit();
  save('original/publication.json',{assets:[{path:'patch-one.json',bytes:pin('original/patch-one.json').bytes,sha256:pin('original/patch-one.json').sha256}]});
- const two=commit();save('original/binding.json',{native_proof:{publication:pin('original/publication.json'),assets:[pin('original/patch-one.json',one)]}});const three=commit();
+ const two=commit();let packageBinding={};
+ if(packageRoles){for(const name of ['source-publication','source-inventory','source-operating','native-inventory','native-operating'])save('original/'+name+'.json',{});const metadata=commit();
+  const inputs=['source-publication','source-inventory','source-operating'].map(name=>pin('original/'+name+'.json',metadata));
+  save('original/native-request.json',{additive:{publication_path:inputs[0].path,inventory_path:inputs[1].path,operating_path:inputs[2].path,inputs}});const requestAt=commit();
+  packageBinding={original_pins:{native_request:pin('original/native-request.json',requestAt)},inventory:pin('original/native-inventory.json',metadata),operating:pin('original/native-operating.json',metadata)};}
+ save('original/binding.json',{...(packageRoles?{original_pins:packageBinding.original_pins}:{}),native_proof:{publication:pin('original/publication.json'),assets:[pin('original/patch-one.json',one)],...(packageRoles?{inventory:packageBinding.inventory,operating:packageBinding.operating}:{})}});const three=commit();
  const entry={policy_id:'retained-source-literal-additions',policy_version:1,rule_preimage:pin('original/rule.json',one),rule_sha256:pin('original/rule.json',one).sha256,source_authority:pin('original/binding.json',three)};entry.authority_sha256=valueSha(entry);
  const registry={version:1,kind:'retained-rule-authority-registry-v1',entries:[entry]};save('data/registry.json',registry);
- const baseSelection={version:1,method:manifest.method,manifest_path:'data/manifest.json',sha256:pin('data/manifest.json',one).sha256,release_id:reference.id,selected_geography:{version:1,kind:'complete-world-index-with-exact-encoded-overrides',path:'data/bank.json',bytes:1,sha256:'d'.repeat(64)}};
+ const baseSelection={version:1,...(finalBank?{artifact_consumption:{fixture:'accepted immutable source inventory'}}:{}),method:manifest.method,manifest_path:'data/manifest.json',sha256:pin('data/manifest.json',one).sha256,release_id:reference.id,selected_geography:{version:1,kind:'complete-world-index-with-exact-encoded-overrides',path:'data/bank.json',bytes:1,sha256:'d'.repeat(64)}};
  const target={target_id:'A',pixelIndex:1,geometry:features[0].geometry,geometry_sha256:valueSha(features[0].geometry)};
  const currentRows=[{y:1,runs:[[0,1,2]]}];
  const request={base_selection:baseSelection,authority_registry_sha256:valueSha(registry),current_targets:[target],current_rows:currentRows,original_patch_sha256s:[valueSha(originalPatch)],acquisition:{predecessor_rows:[],predecessor_proof:null,native_inputs:[]}};
- const rebind={request,result:{native:{rows:originalPatch.rows}},facts:{acquisition_phases:[]},publication:{},operating:{}};
+ const rebind={request,result:{native:{rows:originalPatch.rows}},facts:{acquisition_phases:[]},publication:{},operating:packageRoles?{execution_custody:{}}:{}};
  for(const [name,body]of Object.entries(rebind))save('accepted-rebind/'+name+'.json',body);const four=commit();
  const rc={version:1,kind:'qualified-native-additive-current-bank-rebind-v1',execution_commit:one,base_selection:baseSelection,authority_registry_sha256:valueSha(registry),...Object.fromEntries(Object.keys(rebind).map(name=>[name,pin('accepted-rebind/'+name+'.json',four)]))};save('accepted-rebind/certificate.json',rc);const five=commit();
  const ledger={version:2,kind:'native-additive-repair-ledger-v2',authority_registry_sha256:valueSha(registry),scope_ids:['old','rejected'],rows:[{...literal,authority_sha256:entry.authority_sha256},{component_id:'rejected',disposition:'rejected',reason:'complete original exception',authority_sha256:entry.authority_sha256}],parent_inventory:{components:2,roster_sha256:'e'.repeat(64)},current_rebind:pin('accepted-rebind/certificate.json',five),current_targets:[target]};save('data/ledger.json',ledger);const six=commit();
@@ -122,15 +141,15 @@ function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,nativeC
 
 // The real entry reads each independent copy's ordinary committed catalogue and
 // products. Qualification, readers and private module state are always fresh.
-async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeAppend=false,nativeConsumer=false,sourceOverride=false,physicalLogicalSource=false,originalPatchRows,overrideLogicalPath='data/source.json',nativeLayout,sourceFeatures}={}){
+async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeAppend=false,nativeConsumer=false,sourceOverride=false,physicalLogicalSource=false,originalPatchRows,overrideLogicalPath='data/source.json',nativeLayout,sourceFeatures,finalBank=false,packageRoles=false}={}){
  // Snapshot caller-owned rows before both keying and building the private seed.
- const options={incompleteNative,codeRoutes,nativeAppend,nativeConsumer,sourceOverride,physicalLogicalSource,
+ const options={incompleteNative,codeRoutes,nativeAppend,nativeConsumer,sourceOverride,physicalLogicalSource,finalBank,packageRoles,
   originalPatchRows:structuredClone(originalPatchRows??[{y:1,runs:[[2,3,1]]}]),overrideLogicalPath,nativeLayout:structuredClone(nativeLayout??null),sourceFeatures:structuredClone(sourceFeatures??null)};
  const key=JSON.stringify(options);
- let seed=trustedSeeds.get(key);
+ let seed=finalBank?null:trustedSeeds.get(key);
  if(!seed){
   const root=fs.mkdtempSync(path.join(process.cwd(),'.checkpoint-seed-'));
-  try{seed=buildTrustedSeed(root,options);trustedSeeds.set(key,seed);}
+  try{seed=buildTrustedSeed(root,options);if(finalBank)t.after(()=>fs.rmSync(root,{recursive:true,force:true}));else trustedSeeds.set(key,seed);}
   catch(error){fs.rmSync(root,{recursive:true,force:true});throw error;}
  }
  const root=fs.mkdtempSync(path.join(process.cwd(),'.checkpoint-test-'));
@@ -167,15 +186,16 @@ async function appendNativeAuthority(f,{owner=0,targetOwners,name='appended',com
  f.save(membershipPath,{type:'FeatureCollection',features:f.features.map(p=>({...p,
   properties:{...p.properties,metadata:{source_member_ids:[family+':'+p.id]}}}))});
  f.save(name+'/native-patch.json',{rows:nativePatchRows===undefined?mergeCompletedNativePatches(requested.map(({owner,x,y})=>({rows:[{y,runs:[[x,x+1,owner+1]]}]})),f.manifest.size):structuredClone(nativePatchRows)});const originals=f.commit();
+ const physicalEvidence=f.pin(name+'/physical.json',originals);
  const evidence={version:1,kind:'source-target-native-evidence-v1',
   catalogue:f.pin('coordination/engineering/original-geography-source-corpus-20261006/catalogue.json',originals),
-  owner_roster:f.pin('data/owners.json',originals),physical_evidence:f.pin(name+'/physical.json',originals),
+  owner_roster:f.pin('data/owners.json',originals),physical_evidence:physicalEvidence,
   physical_input:f.pin(name+'/measured.json',originals),physical_reproduction:f.pin(name+'/physical.py',originals),
   native_latitudes:f.manifest.native_latitudes,
   native_contract:Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k=>[k,f.manifest[k]])),
   base_reference:f.envelope.base_reference,families:[{source_id:family,parts:[f.pin(name+'/source.json',originals)]}],
   targets:requested.map(({target,feature,owner})=>({id:target,target_id:feature.id,pixelIndex:owner+1,source_family:family,base_geometry:feature.geometry,
-   source_receipt_sha256:f.pin(name+'/physical.json',originals).sha256,coverage_classes:['mapped_land_support']})),
+   source_receipt_sha256:physicalEvidence.sha256,coverage_classes:['mapped_land_support']})),
   source_membership:{index:f.pin('data/world-index.json',originals),lineage:f.pin('data/semantic-report.json',originals),parts:[f.pin(membershipPath,originals)]}};
  mutateEvidence(evidence);f.save(name+'/evidence.json',evidence);const ev=f.commit();
  const operands={source_evidence:f.pin(name+'/evidence.json',ev),native_patch:f.pin(name+'/native-patch.json',originals)};
@@ -229,7 +249,7 @@ export {MODULE,PROGRAMME,CATALOGUE,CODE,sha,polygon,feature,fixtures,addition,tr
 // The existing three-owner reference fixture supplies the complete real base
 // reader contract. The catalogue below is synthetic accepted custody, with one
 // retained rejected component and no additive cells; no scientific run is claimed.
-export async function referenceCheckpointFixture(t) {
+export async function referenceCheckpointFixture(t,{finalBank=false}={}) {
  const f=mapCellSelectionFixture(t), current=f.current;
  const raw=(version,name)=>execFileSync('git',['-C',f.repo,'show',version+':'+name],{maxBuffer:Infinity});
  const json=(version,name)=>JSON.parse(raw(version,name));
@@ -237,10 +257,12 @@ export async function referenceCheckpointFixture(t) {
  delete baseSelection.additive_release; delete baseSelection.reference_projection;
  for(const name of ['data/hierarchy.json','data/geography/fixture.json','data/geographic-releases/current-manifest.json','data/geographic-releases/releases.json.gz'])
   f.write(name,raw(f.base,name));
- for(const name of [...CODE,'scripts/selected-checkpoint-native.mjs'])f.write(name,fs.readFileSync(name));
+ for(const name of new Set([...CODE,...JOINT_CODE,'scripts/selected-checkpoint-native.mjs']))f.write(name,fs.readFileSync(name));
  f.write(PROGRAMME,fs.readFileSync(PROGRAMME));f.write('package.json',{type:'module'});
  const put=(name,value)=>{f.write(name,value);const version=f.commit();return f.pin(name,version);};
- const patchPin=put('accepted/empty-patch.json',{version:1,kind:'unassigned-native-cells-v1',rows:[]});
+ const retainedRows=finalBank?[{y:f.cells[1].y,runs:[[f.cells[1].x,f.cells[1].x+1,1]]}]:[];
+ const originalPatch={version:1,kind:'unassigned-native-cells-v1',rows:retainedRows};
+ const patchPin=put('accepted/empty-patch.json',originalPatch);
  const rule=put('accepted/rule.json',{synthetic:'retained rejected component'});
  const publication=put('accepted/native-publication.json',{assets:[{path:'patch-empty.json',bytes:patchPin.bytes,sha256:patchPin.sha256}]});
  // The original publication name and actual immutable asset locator must join.
@@ -249,20 +271,23 @@ export async function referenceCheckpointFixture(t) {
  const entry={policy_id:'retained-source-literal-additions',policy_version:1,rule_preimage:rule,rule_sha256:rule.sha256,source_authority:binding};
  entry.authority_sha256=valueSha(entry);
  const registry={version:1,kind:'retained-rule-authority-registry-v1',entries:[entry]},registryPin=put('accepted/registry.json',registry);
- const request={base_selection:baseSelection,authority_registry_sha256:valueSha(registry),current_targets:[],current_rows:[],
-  original_patch_sha256s:[valueSha({version:1,kind:'unassigned-native-cells-v1',rows:[]})],acquisition:{predecessor_rows:[],predecessor_proof:null,native_inputs:[]}};
- const products={request,result:{native:{rows:[]}},facts:{acquisition_phases:[]},publication:{},operating:{}};
+ const target={target_id:'A',pixelIndex:1,geometry:f.features[0].geometry,geometry_sha256:valueSha(f.features[0].geometry)},targets=finalBank?[target]:[];
+ const literal={...addition('old','A',1,target.geometry_sha256,.3),base_geometry:target.geometry,disposition:'assigned',native_cells:1,source_receipt_sha256:'c'.repeat(64)};
+ const additions=finalBank?[{...literal,authority_sha256:entry.authority_sha256,rule_sha256:entry.rule_sha256}]:[];
+ const request={base_selection:baseSelection,authority_registry_sha256:valueSha(registry),current_targets:targets,current_rows:retainedRows,
+  original_patch_sha256s:[valueSha(originalPatch)],acquisition:{predecessor_rows:[],predecessor_proof:null,native_inputs:[]}};
+ const products={request,result:{native:{rows:retainedRows}},facts:{acquisition_phases:[]},publication:{},operating:{}};
  const pins=Object.fromEntries(Object.entries(products).map(([name,body])=>[name,put('accepted/rebind-'+name+'.json',body)]));
  const rebind=put('accepted/rebind.json',{version:1,kind:'qualified-native-additive-current-bank-rebind-v1',execution_commit:f.original,
   base_selection:baseSelection,authority_registry_sha256:valueSha(registry),...pins});
- const ledger={version:2,kind:'native-additive-repair-ledger-v2',authority_registry_sha256:valueSha(registry),scope_ids:['rejected'],
-  rows:[{component_id:'rejected',disposition:'rejected',reason:'synthetic retained exception',authority_sha256:entry.authority_sha256}],
-  parent_inventory:{components:1,roster_sha256:'e'.repeat(64)},current_rebind:rebind,current_targets:[]};
+ const ledger={version:2,kind:'native-additive-repair-ledger-v2',authority_registry_sha256:valueSha(registry),scope_ids:finalBank?['old','rejected']:['rejected'],
+  rows:[...(finalBank?[{...literal,authority_sha256:entry.authority_sha256}]:[]),{component_id:'rejected',disposition:'rejected',reason:'synthetic retained exception',authority_sha256:entry.authority_sha256}],
+  parent_inventory:{components:finalBank?2:1,roster_sha256:'e'.repeat(64)},current_rebind:rebind,current_targets:targets};
  const ledgerPin=put('accepted/ledger.json',ledger),reference={id:manifest.geographic_release,hierarchy_sha256:manifest.hierarchy_sha256,footprints_sha256:manifest.footprints_sha256};
  const effective={...reference,footprints_sha256:valueSha({domain:'worldatlas-effective-native-footprints:v2',base_reference:reference,
-  authority_registry_sha256:valueSha(registry),ledger_sha256:ledgerPin.sha256,components:[]})};
+  authority_registry_sha256:valueSha(registry),ledger_sha256:ledgerPin.sha256,components:additions})};
  const patch={version:2,kind:'unassigned-native-cells-v1',authority_registry_sha256:valueSha(registry),ledger_sha256:ledgerPin.sha256,
-  base_reference:reference,effective_reference:effective,rows:[]};
+  base_reference:reference,effective_reference:effective,rows:retainedRows};
  const bounds=f.pin('data/canonical-grid/bounds.json.gz',f.original);
  const assets={base_manifest:f.pin(f.selection.manifest_path,f.base),owner_roster:bounds,ledger:ledgerPin,patch:put('accepted/patch.json',patch)};
  const envelope={version:2,kind:'retained-native-base-plus-delta-v2',base_reference:reference,effective_reference:effective,...assets};
@@ -273,7 +298,8 @@ export async function referenceCheckpointFixture(t) {
  const api=checkpointTestAPI(t,await import(pathToFileURL(path.join(f.repo,MODULE)))),native=await import(pathToFileURL(path.join(f.repo,'scripts/check-effective-geographic-regression.mjs')));
  const neighbors=await import(pathToFileURL(path.join(f.repo,CODE[1]))),reader=new native.ImmutableReader(f.repo,selected);
  const snapshot=native.loadBaseSelection(reader),resolver=native.selectedGeometrySourceAlias(snapshot);
- const certificate=neighbors.joinSelectedCoordinateCertificate(resolver,[neighbors.selectedCoordinateShard(resolver,resolver.paths)]);
+ const originalCertificate=neighbors.joinSelectedCoordinateCertificate(resolver,[neighbors.selectedCoordinateShard(resolver,resolver.paths)]);
+ const certificate=finalBank?deriveCoordinateDelta({certificate:originalCertificate,oldAdditions:[],additions,selection}).certificate:originalCertificate;
  const execution_code=CODE.map(name=>f.pin(name,selected)),runtime=[{path:process.execPath,bytes:fs.statSync(process.execPath).size,sha256:'f'.repeat(64)}];
  const facts={version:1,kind:'trusted-selected-coordinate-stage-v1',candidate_code_executed:false,selected_commit:selected,executing_commit:selected,
   execution_code,runtime,binding:certificate.binding,complete_owners:certificate.entries.length,complete_sources:1};
@@ -282,7 +308,7 @@ export async function referenceCheckpointFixture(t) {
   certificate:{path:'certificate.json.gz',bytes:compressed.length,sha256:sha(compressed),decoded_bytes:valueBytes(certificate).length,decoded_sha256:valueSha(certificate)}};
  const outputPin=put('accepted/publication.json',output);
  const inventory=[...reader.inventory.values(),f.pin(PROGRAMME,selected)];
- const custody=put('accepted/custody.json',{complete_cold_custody:[{facts,publication:output,effective_additions:[],inventory}]});
+ const custody=put('accepted/custody.json',{complete_cold_custody:[{facts,publication:output,effective_additions:additions,inventory}]});
  const paths=new Set(inventory.map(p=>p.path).filter(p=>!/\.(mjs|py)$/.test(p)&&p!=='requirements.txt'));paths.delete('data/ownership-selection.json');
  for(const part of manifest.parts)paths.add(path.posix.join(path.posix.dirname(selection.manifest_path),part.path));
  for(const input of certificate.inputs){paths.add(input.path);paths.add(input.source.path);}
@@ -295,7 +321,7 @@ export async function referenceCheckpointFixture(t) {
  for(const name of ['data/hierarchy.json','data/geography/fixture.json','data/geographic-releases/current-manifest.json','data/geographic-releases/releases.json.gz'])f.write(name,raw(current,name));
  const currentReference=f.projection.reference;
  const currentEffective={...currentReference,footprints_sha256:valueSha({domain:'worldatlas-effective-native-footprints:v2',
-  base_reference:currentReference,authority_registry_sha256:valueSha(registry),ledger_sha256:ledgerPin.sha256,components:[]})};
+  base_reference:currentReference,authority_registry_sha256:valueSha(registry),ledger_sha256:ledgerPin.sha256,components:additions})};
  const currentPatch={...patch,base_reference:currentReference,effective_reference:currentEffective};
  const currentAssets={...assets,patch:put('current/patch.json',currentPatch)};
  const currentEnvelope={...envelope,...currentAssets,base_reference:currentReference,effective_reference:currentEffective};

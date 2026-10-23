@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "composition_commit": "f2c2d63998a3dceb004d5cb28abbca7bd066bcf1",
+  "selected_base": "48aee4b24b0ec72c9c3e1f65adbc3745b7bc9386",
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "failed before output",
+      "reason": "Missing exact GUM composition commit/tree 6eb122845397608a4d3bdf38c607997bb7280842; acquired through normal blob-filtered exact Git fetch."
+    },
+    {
+      "attempt": 2,
+      "status": "failed before output",
+      "reason": "Sparse checkout lacked data/ownership-selection.json canonical preimage; unchanged exact base bytes materialized before retry."
+    },
+    {
+      "attempt": 3,
+      "status": "success",
+      "stdout": {
+        "destination": ".cache/delivery-handoff/ukr4-finalized-001",
+        "resumed": false,
+        "binding": {
+          "phase": "finalize",
+          "config_sha256": "e7e75221d32749b489de60529c44f639b89966b4dc928aadf47d98462968c6cd",
+          "selector": {
+            "path": "data/ownership-selection.json",
+            "commit": "48aee4b24b0ec72c9c3e1f65adbc3745b7bc9386",
+            "mode": "100644",
+            "git_blob_oid": "a02ff2f35078ae58830cf8b904ce69b40e90be7f",
+            "bytes": 1853,
+            "sha256": "18c6c7b67224bb5daf74c75ed8e6a2e8f01c1561aab927e3f8c4a49750bec9ef"
+          },
+          "package_inputs": {
+            "path": ".github/package-inputs.json",
+            "commit": "48aee4b24b0ec72c9c3e1f65adbc3745b7bc9386",
+            "mode": "100644",
+            "git_blob_oid": "58e4ca58f2cbd5ae3f2066cffea0fac1fde63410",
+            "bytes": 41472,
+            "sha256": "f2bc4358e81e2d736b7766cda9b3e442b974b70b42497ed1a9881e431167dc43"
+          }
+        }
+      }
+    }
+  ],
+  "diagnostic_runs": 1,
+  "constructor_runs": 1,
+  "physical_replays": 0,
+  "owner_observer_replays": 0,
+  "root_acceptance": false
+}

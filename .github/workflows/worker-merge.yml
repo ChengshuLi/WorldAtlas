@@ -10,9 +10,9 @@ on:
         type: string
         required: true
       reviewed_tests:
-        description: 'Optional exact reviewed test/fixture roster: JSON {base,head,files,inputs}; omitted uses normal regression'
+        description: 'Exact plan.request JSON, auto for proven automatic routing, or complete for the full suite'
         type: string
-        required: false
+        required: true
       request_id:
         type: string
         required: true
@@ -71,6 +71,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           MERGE_PHASE: prepare
           CHECKOUT_PATTERNS_FORMAT: wrapped-base64
+          REVIEWED_TESTS_REQUIRED: 'true'
         run: node scripts/run-worker-merge.mjs
   geography:
     needs: prepare
@@ -281,8 +282,10 @@ jobs:
           PACKAGE_BOOTSTRAP
       # The focused delivery tests import @noble/hashes and exercise tiny
       # source/physical CLI fixtures with NumPy/Shapely. Keep their real runtime.
+      # Only trusted automatic inert packets use the dependency-free consumers;
+      # explicit reviewed requests and all broader routes retain installation.
       - run: npm ci --no-audit --no-fund
-        if: needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence'
+        if: (needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence') && !(needs.prepare.outputs.profile == 'evidence' && needs.prepare.outputs.test_selection == 'reviewed' && (inputs.reviewed_tests == 'auto' || inputs.reviewed_tests == ''))
       - name: Assemble unchanged base with current selected output
         id: assembly
         if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && needs.prepare.outputs.test_selection == 'selected-data'
@@ -316,7 +319,7 @@ jobs:
       # Retained assembly uses Node and isolated Python standard-library extraction.
       # Keep scientific dependencies for fallback builds and ordinary regressions.
       - run: python -m pip install -r requirements.txt
-        if: (needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence') && steps.assembly.outputs.assembled != 'true'
+        if: (needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence') && steps.assembly.outputs.assembled != 'true' && !(needs.prepare.outputs.profile == 'evidence' && needs.prepare.outputs.test_selection == 'reviewed' && (inputs.reviewed_tests == 'auto' || inputs.reviewed_tests == ''))
       - name: Snapshot original final-worker package inputs
         if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'
         run: node scripts/package-output-artifact.mjs --snapshot

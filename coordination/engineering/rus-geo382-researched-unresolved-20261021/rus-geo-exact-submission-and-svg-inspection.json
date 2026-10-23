@@ -1,0 +1,43 @@
+{
+  "scope": "382 GEO-contact original RUS keys; research only, no adoption or credit",
+  "new_primary_records": [
+    {
+      "url": "https://github.com/wmgeolab/geoBoundaries/issues/1799",
+      "finding": "2021 issue sought replacement of the then-existing GEO ADM1 license for geoBoundaries5; this is historical source-publisher policy, not a new WorldAtlas public-domain-only gate."
+    },
+    {
+      "url": "https://github.com/wmgeolab/geoBoundaries/pull/1815",
+      "finding": "Earlier 2021 replacement proposal closed unmerged; not assumed to be the retained source."
+    },
+    {
+      "url": "https://github.com/wmgeolab/geoBoundaries/pull/2518",
+      "finding": "2022 replacement submitted September28 and merged October12, merge dd6bc19c03c8a37644ecbeecbbbf0c5f94a54568. Exact source archive Git blob1215b1bd2c44593b7247217cc728ba131a3c36b5,132840bytes,SHA256f2d25eac89a9647f2ec962435dce5ced6056394c3f2af88ebc82cd9b325fac26 equals retained release archive byte for byte. Human review1125815020 approved without additional digitization detail; no inline comments. Sole source commit2398866c8819bef506f9a40dcf280962b4fe26c3."
+    }
+  ],
+  "corrected_prior_limit": "The earlier failed connector search did not exhaust public issue history. Ordinary authorized GitHub search succeeded and authenticates the exact 2022 submission. It narrows archive provenance but does not itself recover pixel-to-coordinate digitization controls.",
+  "svg_examined": [
+    {
+      "path": "inventory/rus-geo-wikimedia-source/Georgia.svg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Georgia.svg",
+      "bytes": 640047,
+      "sha256": "1e8805c534940ad66a71e298f20eab095550d4c7b636021c0dbcefcf2c620220",
+      "sha1": "dbbbde0f51afcc81b4b9add3fcb21aa72469afcb"
+    },
+    {
+      "path": "inventory/rus-geo-wikimedia-source/Georgia-preview.png",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Georgia.svg/960px-Georgia.svg.png",
+      "bytes": 125238,
+      "sha256": "43d025592d4522c5627732ad92519116f443bd641d67971aa3f653bc0f60cdfe",
+      "sha1": "f77874129414d2330cf88ece40e93b786cdbea9a"
+    }
+  ],
+  "svg_visual_findings": "Viewed actual published preview pixels. It depicts a country outline, internal subdivisions and hydrographic lines, with grey fills. No visible scale bar, coordinate graticule, region labels or georeferencing control points. Parsed SVG root gives pixel width774.12183,height412.6658; embedded RDF identifies StillImage only. No CRS/projection/geographic-coordinate metadata found in the complete640047-byte SVG. SHA1 matches Commons recordeddbbbde0f51afcc81b4b9add3fcb21aa72469afcb. These are source-role facts, not proof of invalid geometry or sovereignty.",
+  "source_terms": "Orlovic attribution; CC BY3.0; retain license link and change disclosure if republishing. The byte-authenticated sourceData meta.txt explicitly names this Wikimedia SVG; archive processing records still lack the digitizing transform/source-version binding.",
+  "next_finite_question": "Independent source-specific review must decide whether the illustrative cartographic role and missing georeferencing chain plus original exact source conflict support researched-unresolved disposition, or whether a concrete lawful comparator would materially resolve a subset. No automatic dismissal of all382 and no universal official-certificate requirement.",
+  "read_records": [
+    "rus-geo-source-issue-search.json",
+    "rus-geo-source-submission-threads.json",
+    "rus-geo-source-submission-immutable-bindings.json"
+  ],
+  "no_science_reexecution": true
+}
