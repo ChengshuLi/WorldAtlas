@@ -1,0 +1,109 @@
+{
+  "consumed_blob_pins": [
+    {
+      "api_response": null,
+      "bytes": 10164089,
+      "commit": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
+      "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+      "path": "data/hierarchy.json",
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    {
+      "api_response": null,
+      "bytes": 10164089,
+      "commit": "f1c1c5fd6baaca0fdf350c13996bd480bdd05cd3",
+      "git_blob_oid": "0ec8bae8e04140326d8b48f09a35ac66ae54deb0",
+      "path": "data/hierarchy.json",
+      "sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144"
+    },
+    {
+      "api_response": null,
+      "bytes": 1015684,
+      "commit": "1bdea2f51598daa0cec045384537823506531b9e",
+      "git_blob_oid": "9826d1306fc3cbe1bfe87db4237ff0e963395299",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cathai-parent-reference-release-20261016/cathai-reference-migration-receipt.json.gz",
+      "sha256": "93188024a4937986e5553b49b63e8cdfad8a38a9f46a6f599c41e0ffa4cbf6f5"
+    },
+    {
+      "api_response": null,
+      "bytes": 1027706,
+      "commit": "929af97a43859ebfcb66112d5091da303e7396b2",
+      "git_blob_oid": "ecd88fdf69a7139b818f0eb608bf78f76858c0fd",
+      "path": "coordination/engineering/reference-owner-alias-correction-20261022/source-001/migration-receipt.json.gz",
+      "sha256": "1c9f480210da259abd1a46720a6494fc8fa5facc5dbad72ee7d5e403cf65f22f"
+    },
+    {
+      "api_response": null,
+      "bytes": 4863162,
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "git_blob_oid": "a6a359c8c566462b280a461b4a5e1591e1f486c4",
+      "path": "data/geography/part-27.json",
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+    },
+    {
+      "api_response": null,
+      "bytes": 4865691,
+      "commit": "f1c1c5fd6baaca0fdf350c13996bd480bdd05cd3",
+      "git_blob_oid": "8f5eb1b821e880720a962b54d1e5dfdb413b8473",
+      "path": "data/geography/part-27.json",
+      "sha256": "bdaa057e28a89bcfd3ddf9f9dbe677352b3fb259ff70e61da113cf8032d19b20"
+    },
+    {
+      "api_response": null,
+      "bytes": 4746385,
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "git_blob_oid": "b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f",
+      "path": "data/geography/part-22.json",
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+    },
+    {
+      "api_response": {
+        "bytes": 6539794,
+        "sha256": "a74f799ef935126ca393a68c22f617d3e0708c124be5f92209a6af625b8f858b"
+      },
+      "bytes": 4746412,
+      "commit": "929af97a43859ebfcb66112d5091da303e7396b2",
+      "git_blob_oid": "372c82ec51149cbfa7d140537f281c8fdac1785b",
+      "path": "data/geography/part-22.json",
+      "sha256": "3da17f3186026bb678f0e6c87ab034c1ee93f9c74bdf446e96fbf7a0368793b0"
+    }
+  ],
+  "kind": "exact-current-reference-projection-consumed-input-closure",
+  "limits": [
+    "Only the exact hierarchy, receipt and source-update bodies declared in the current accepted reference projection were resolved.",
+    "Each absent commit was imported as its exact native Git commit object; only required tree metadata and pinned blobs were added.",
+    "No refs, selector, source observation or scientific input was changed."
+  ],
+  "projection": {
+    "bytes": 321535,
+    "path": "coordination/engineering/reference-owner-alias-correction-20261022/reference-002/reference-metadata.json",
+    "sha256": "45a75988cb6dbaa3f0bdb960e0ad0dbdc22b2c565cd03a1c2bbfb11a3049788d"
+  },
+  "selector": {
+    "commit": "0e50bd281afec27ce32fac8dcb4dfe2401f94b6c",
+    "path": "data/ownership-selection.json"
+  },
+  "tree_oids_constructed_and_verified": [
+    "023bdb8687934643c0ce765ddd8f435d784b2d9c",
+    "0ecf3d4cfa8d170d701c91557c33ba0c376212c1",
+    "15e7e37936ee4a4899b17773d33ea0bb4e08a954",
+    "44d7a0d8a5f33533bcd555b5ff70cdc3b980db8c",
+    "4837525eeb4b4b7356134fe0d279eb8da7d31e79",
+    "599dfa256c8890c380195cb7448191520cbf1c8f",
+    "6b66406625563e5fe1da1052a18f8aba71bfa252",
+    "6c277956969492f4759527da608c83391ff9243c",
+    "7b164f4ee4fbc79cd1f4eadcf5798d880bc2fe64",
+    "8921347ef593d50dc39f94ccea56b1167158a05e",
+    "8b604798cdefaf86452b00747ee4e1986ccabf38",
+    "8cc493b639a9ac6b40adf436a7170da164dd0962",
+    "9c9487bde05494a53b64ec3d287d1361d7243f08",
+    "b03ca1e49e9869de7a273a891a2fe28f38728944",
+    "c9970caf3e51c2830b524b2b540ec2c576083e70",
+    "ce5f41e6dc7948bd0e868d5340ae4a21410fa06e",
+    "d158d36834f2f66fd25f02a03ec874bb19ca8e03",
+    "e97358818047be0e9d40f7acb80bd60fc3a6684d",
+    "ebd0c715c0276214b4169d1e5b87297af73cb203",
+    "f2458667ac0b1834e26939f36f07582d5e00e922"
+  ],
+  "version": 1
+}
