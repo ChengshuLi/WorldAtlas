@@ -409,7 +409,7 @@ function pack(f,mutate=()=>{}) {
   }
   const report={version:1,method_id:'worldatlas-trusted-geography-check-v1',baseline_commit:f.acceptedBaseline??f.trusted,
     candidate_commit:f.trusted,trusted_code_commit:f.acceptedBaseline??f.trusted,candidate_code_executed:false,published:false,
-    source_approval:false,gate_status:'passed',status:'no-new-native-loss',validation_scope:'selected-native-map-cells',selected_native_report:p.native,
+    source_approval:false,gate_status:'passed',status:'no-new-native-loss',validation_scope:'selected-native-map-cells',regressions:0,selected_native_report:p.native,
     checkpoint:{version:1,kind:'selected-checkpoint-products-v1',members:MEMBERS.map(name=>{
       const raw=bodies.get(name),decoded=name.endsWith('.gz')?valueBytes(p.certificate):null;
       return {name,bytes:raw.length,sha256:sha(raw),...(decoded?{decoded_bytes:decoded.length,decoded_sha256:sha(decoded)}:{})};})}};
