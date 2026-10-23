@@ -1,0 +1,10 @@
+file:///Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/compare-existing-native-rule.mjs:5
+import {processingAllowance} from './inputs/accepted89ff/scripts/check-effective-geographic-regression.mjs';
+        ^^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module './inputs/accepted89ff/scripts/check-effective-geographic-regression.mjs' does not provide an export named 'processingAllowance'
+    at #asyncInstantiate (node:internal/modules/esm/module_job:327:21)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:431:5)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.19.0

@@ -79,7 +79,7 @@ function renderLegend() {
   $('#legend-title').textContent = labels[mode].toUpperCase();
   const categories = new Map(); let unknown = 0;
   let referenceContexts=0;
-  for (const feature of data.features) { const v = value(feature),shown=presentedAttribute(state(feature),mode),key=categoryKey(feature); if (v == null) unknown++; else categories.set(key, levels.includes(mode) ? unitName(trail(feature).find(u=>u.id===v)) : v);if(v!=null&&shown.reference_context)referenceContexts++; }
+  for (const feature of data.features) { const v = value(feature),shown=presentedAttribute(state(feature),mode),key=categoryKey(feature); if (v == null && !(mode==='owner' && shown.category_id!=null)) unknown++; else categories.set(key, levels.includes(mode) ? unitName(trail(feature).find(u=>u.id===v)) : v??`Name unavailable (${shown.category_id})`);if(v!=null&&shown.reference_context)referenceContexts++; }
   if(mode==='owner' && polities.length){categories.clear();polities.forEach(f=>categories.set(f.properties.name,f.properties.name));unknown=0;}
   $('#legend-count').textContent = mode==='population' ? 'LOG SCALE' : `${categories.size.toLocaleString()} ${levels.includes(mode)?'UNITS':'GROUPS'}`;
   if (mode==='population') $('#legend-items').innerHTML = `<div class="gradient"></div><div class="scale"><span>0</span><span>${maxPopulation.toLocaleString()}</span></div>`;
@@ -116,7 +116,7 @@ function renderDetails() {
   $('#details').innerHTML = `<div class="detail-top"><span class="eyebrow">LOCATION PROFILE</span><button id="close-details" aria-label="Close location profile">×</button></div>
     <div class="profile-main"><h3>${escape(displayName(feature))}</h3>${nameContext?`<div class="profile-name-context">${escape(nameContext)}</div>`:''}<div class="profile-year">${formatYear(year)}</div>
     <div class="profile-subheading">${hierarchyContext}</div><div class="breadcrumbs" aria-label="${hierarchyContext}">${[...levels].reverse().map(level=>{const u=chain.find(u=>u.level===level);return `<button data-unit="${escape(u.id)}"><small>${u.level}</small><span>${escape(u.display_name||u.name)}</span></button>`;}).join('')}</div>
-    <dl class="profile-attributes">${attributes.map(key=>{const shown=presentedAttribute(record,key);return `<div><dt>${attributeLabel(key)}</dt><dd>${shown.value==null?'<span class="muted">Unknown</span>':escape(key==='population'?shown.value.toLocaleString():shown.value)}${shown.reference_context&&shown.value!=null?'<small class="reference-badge">Reference</small>':''}</dd></div>`;}).join('')}</dl></div>
+    <dl class="profile-attributes">${attributes.map(key=>{const shown=presentedAttribute(record,key);return `<div><dt>${attributeLabel(key)}</dt><dd>${shown.value==null?`<span class="muted">${key==='owner'&&shown.category_id!=null?'Name unavailable':'Unknown'}</span>`:escape(key==='population'?shown.value.toLocaleString():shown.value)}${shown.reference_context&&shown.value!=null?'<small class="reference-badge">Reference</small>':''}</dd></div>`;}).join('')}</dl></div>
     <details class="profile-evidence"${evidenceOpen?' open':''}><summary>Evidence & sources</summary><div class="profile-evidence-content">
     <section><h4>Geography</h4>${sourceQuality?`<p><strong>Reference source under review:</strong> ${escape(sourceQuality.summary)} ${escape(sourceQuality.individual_correspondence||'')}${(sourceQuality.public_evidence_files??[]).filter(file=>/^[\w./-]+$/.test(file.path)&&!file.path.split('/').includes('..')).map(file=>`<br><a href="./${escape(file.path)}" download>${escape(file.title)}</a>`).join('')}</p>`:''}${year!==2026&&!feature.properties.temporal?.display_name?`<p>No dated location name covers ${formatYear(year)}; the reference name ${escape(feature.properties.name)} is shown.</p>`:''}<p>${year===2026?'Reference parent chain.':feature.properties.temporal?.parent_record||chain.some(u=>u.parent_record)?'Includes sourced membership for the selected year; other parent links use reference geography.':`Reference parent chain; historical membership for ${formatYear(year)} is unknown.`}</p>
     ${referenceData.pixelMissing?.includes(feature.id)?'<p>This sourced territory currently has no interior pixel at the fixed resolution. Its geographic identity and records remain available; grid representation is awaiting review.</p>':''}
@@ -167,7 +167,7 @@ function render() {
   $('#map-title').textContent = mode==='owner'?'The political world':`${labels[mode]} of the world`;
   $('#map-year').textContent = formatYear(year);
   const exampleCount = [...states.values()].filter(s=>s.is_example).length;
-  $('#coverage').textContent = `${data.features.length.toLocaleString()} geographic locations · ${[...states.values()].filter(s=>s.owner!=null).length.toLocaleString()} locations with ownership${exampleCount?` · ${exampleCount} example records`:''}${year===2026?' · Modern ownership reference':''}`;
+  $('#coverage').textContent = `${data.features.length.toLocaleString()} geographic locations · ${[...states.values()].filter(s=>s.category_ids?.owner!=null).length.toLocaleString()} locations with ownership${exampleCount?` · ${exampleCount} example records`:''}${year===2026?' · Modern ownership reference':''}`;
   $('#map-note').textContent = boundaries.size?`${boundaries.size} dated local boundaries · Others are modern reference`:mode==='owner'?'Whole-location ownership · Fixed pixel grid':'Geographic regions · Thin local borders, bold parent borders';
 }
 function setMode(next) {
@@ -205,7 +205,7 @@ async function loadYear(next) {
     parents=new Map(data.units.map(u=>[u.id,u]));features=new Map(data.features.map(f=>[f.id,f]));
     for(const e of temporal.entities.values())if(e.kind==='settlement'&&features.has(e.parent_id)){const p=features.get(e.parent_id).properties;p.settlement_search=[...(p.settlement_search||[]),...e.search_names];}
     polities=[];
-    states=resolveAttributes(data.features,year,{states:result.states,records:result.attributes||[],temporal,examples:$('#examples').checked,evidenceAvailable:!result.evidenceUnavailable,referenceBaselines:result.referenceBaselines||[],referenceContexts:result.referenceContexts});
+    states=resolveAttributes(data.features,year,{states:result.states,records:result.attributes||[],temporal,examples:$('#examples').checked,evidenceAvailable:!result.evidenceUnavailable,referenceBaselines:result.referenceBaselines||[],referenceContexts:result.referenceContexts,ownerLabels:data.ownerLabels});
     boundaries=nextBoundaries;
     if(changed)rebuildGeometry(preparedNative);
     else geoLayer.updateMetadata(data.features);
@@ -228,8 +228,8 @@ $('#london').onclick = ()=>select('atlas:city:GBR-Greater London',true);
 $('#about').onclick = ()=>$('#data-dialog').showModal(); $('#close-dialog').onclick = ()=>$('#data-dialog').close();
 $('#search').oninput = event => {
   const query=event.target.value.trim().toLocaleLowerCase();
-  const matches=query&&data?data.features.filter(f=>`${f.properties.name} ${f.properties.reference_owner} ${(f.properties.temporal?.search_names || []).join(' ')} ${(f.properties.metadata?.search_aliases || []).join(' ')} ${(f.properties.settlement_search || []).join(' ')}`.toLocaleLowerCase().includes(query)).slice(0,20):[];
-  $('#results').innerHTML=matches.map(f=>`<button data-result="${escape(f.id)}">${escape(displayName(f))}<small>${escape(f.properties.reference_owner || '')}</small></button>`).join('') || (query?'<p>No matching locations.</p>':'');
+  const matches=query&&data?data.features.filter(f=>`${displayName(f)} ${states.get(f.id)?.owner??''} ${(f.properties.temporal?.search_names || []).join(' ')} ${(f.properties.metadata?.search_aliases || []).join(' ')} ${(f.properties.settlement_search || []).join(' ')}`.toLocaleLowerCase().includes(query)).slice(0,20):[];
+  $('#results').innerHTML=matches.map(f=>`<button data-result="${escape(f.id)}">${escape(displayName(f))}<small>${escape(states.get(f.id)?.owner || '')}</small></button>`).join('') || (query?'<p>No matching locations.</p>':'');
   document.querySelectorAll('[data-result]').forEach(b=>b.onclick=()=>{select(b.dataset.result,true); $('#results').innerHTML='';});
 };
 async function start() {

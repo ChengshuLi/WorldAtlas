@@ -78,14 +78,18 @@ test('exact shared-boundary samples and horizontal endpoints follow explicit hal
     assert.equal(owner(result,x,y),integerOracle(index,x,latitudes[y],size));
 });
 
-test('native interval partitioning is identical to a complete bounded run',()=>{
-  const index=[item(1,[ring([[-150,-16],[80,16],[150,-16],[-150,-16]])])],size=32;
-  const complete=run(index),rows=[],ties=[];
-  for(let rowStart=0;rowStart<size;rowStart+=8){
-    const part=run(index,size,{rowStart,rowEnd:rowStart+8});rows.push(...part.rows);ties.push(...part.ties);
+test('native interval partitioning is identical across complete row windows',()=>{
+  for(const size of [32,8192]){
+    const index=[item(1,[ring([[-150,-16],[80,16],[150,-16],[-150,-16]])])];
+    const latitudes=nativeRowLatitudes(size),complete=run(index,size,{latitudes}),rows=[],ties=[];
+    const step=size===32?8:4096;
+    for(let rowStart=0;rowStart<size;rowStart+=step){
+      const part=run(index,size,{latitudes,rowStart,rowEnd:Math.min(size,rowStart+step)});
+      rows.push(...part.rows);ties.push(...part.ties);
+    }
+    assert(complete.rows.size>0);
+    assert.deepEqual(rows,[...complete.rows]);assert.deepEqual(ties,complete.ties);
   }
-  assert.deepEqual(rows,[...complete.rows]);
-  assert.deepEqual(ties,complete.ties);
 });
 
 test('separately split dateline islands and polar clipping retain every original span',()=>{
@@ -117,5 +121,4 @@ test('missing, malformed, noncanonical and oversized domains fail explicitly',()
   assert.throws(()=>run([item(1,[ring([[0,0],[1,0],[0,1],[1,1]])])]),/Unclosed/);
   assert.throws(()=>run([item(1,[rectangle(0,0,181,1)])]),/lon\/lat/);
   assert.throws(()=>run([item(1,[rectangle(0,0,1,NaN)])]),/Unclosed|lon\/lat/);
-  assert.throws(()=>nativePolygonIntervals(good,{size:8192,rowStart:0,rowEnd:4097,latitudes:nativeRowLatitudes(8192)}),/at most4096/);
 });

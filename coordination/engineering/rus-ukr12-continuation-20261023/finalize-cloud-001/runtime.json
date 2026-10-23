@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "kind": "accepted-code-cloud-finalization-result",
+  "issue": 2302,
+  "technical_scope_comment": 6355953045,
+  "original_scientific_claim_comment": 6355350806,
+  "accepted_code_commit": "9e3637776d2593f0a024adee41a19e319e3b6385",
+  "input_head": "4142d7b55a39771ca7ed719deeb96bc7d917ee1a",
+  "command": "node scripts/prepare-delivery-handoff.mjs finalize coordination/engineering/rus-ukr12-continuation-20261023/finalize-config-001.json .cache/delivery-handoff/rus7-finalize-001",
+  "node": "24.19.0",
+  "config_sha256": "98ba3576d04ac97493af4b3b08a6bbfcd8acb8e514135d5b011eada88fcba5bf",
+  "started_at": "2026-10-23T02:32:29Z",
+  "ended_at": "2026-10-23T02:33:01Z",
+  "elapsed_seconds": 32.085,
+  "exit_code": 0,
+  "stdout": {
+    "destination": ".cache/delivery-handoff/rus7-finalize-001",
+    "resumed": false,
+    "binding": {
+      "phase": "finalize",
+      "config_sha256": "98ba3576d04ac97493af4b3b08a6bbfcd8acb8e514135d5b011eada88fcba5bf",
+      "selector": {
+        "path": "data/ownership-selection.json",
+        "commit": "9e3637776d2593f0a024adee41a19e319e3b6385",
+        "mode": "100644",
+        "git_blob_oid": "90cf8f9e9354f9d95cecd1a53db6306676914864",
+        "bytes": 1928,
+        "sha256": "841e39b1f0b70b87330cbdbc2890aaeb889de3c2da0e01183fbf486c280f1bd2"
+      },
+      "package_inputs": {
+        "path": ".github/package-inputs.json",
+        "commit": "9e3637776d2593f0a024adee41a19e319e3b6385",
+        "mode": "100644",
+        "git_blob_oid": "c3dc5f539e5b336642b3ad88d38e0b03a06f6ccb",
+        "bytes": 38747,
+        "sha256": "eca18a65f0d9a65ba51b5e21b4830734147c17c4181657a4ca2a69557c7a37c2"
+      }
+    }
+  },
+  "stderr_bytes": 0,
+  "prior_local_attempts": [
+    {
+      "phase": "launcher",
+      "result": "External timing binary absent; finalizer did not start."
+    },
+    {
+      "phase": "finalizer dynamic module import",
+      "result": "Locked @noble/hashes dependency not linked; no output was published. Reused existing version 2.0.1 read-only in the owned checkout before the successful unchanged command."
+    }
+  ],
+  "bank_fetch_required": false,
+  "scientific_constructor_repeated": false,
+  "owner_observation_repeated": false,
+  "application_build_executed": false,
+  "new_scientific_qualification": false,
+  "root_credit_assigned": false,
+  "limits": [
+    "Prepared data only; accepted-code joint before/after qualification and exact public-head review remain pending.",
+    "Original Team 3 evidence, independent packet review and all five adverse keys are preserved unchanged.",
+    "No deployment or production write."
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "action": "Run unchanged stock source-batch-intervals.mjs for gb-SLE-ADM2--physical-interpretation into owned intervals/",
+  "target_branch": "engineering/sierra-leone-physical-review-20261018-worker4",
+  "status": "denied-before-execution",
+  "reason": "Although bounded and local, this reruns the stock source interval extractor, conflicting with the explicit SLE restriction to reuse retained source/physical evidence without a source replay.",
+  "restriction": "Do not bypass this rejection through a workaround or indirect execution.",
+  "completed": "Own normal allocation75861 and live overlap/retained source/physical/stockroute metadata inspection.",
+  "next": "Reuse parent Cloud already-passed613interval output if supplied; no extraction/reconstruction bypass.",
+  "recorded_utc": "2026-10-18T04:23:09.865057+00:00"
+}

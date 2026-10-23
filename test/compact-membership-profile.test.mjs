@@ -58,8 +58,9 @@ for(const version of [2,3])test('compact V4 preserves every raw collection and r
    await assert.rejects(f.engine.query('SELECT * FROM worldatlas_membership_evidence'),/permission denied/);
   }finally{await f.engine.exec('RESET ROLE');}
   await f.engine.exec('DROP TABLE worldatlas_memberships_original_v1');
-  assert.equal((await compactMembershipCatalog(f.db)).profile,'compact-only');
-  assert.equal((await verifyCompactMembershipRuntime(driver,definitions)).status,'verified');
+  const compactOnlyProof=await verifyCompactMembershipRuntime(driver,definitions);
+  assert.equal(compactOnlyProof.profile,'compact-only');
+  assert.equal(compactOnlyProof.status,'verified');
  }finally{await f.close();}
 });
 

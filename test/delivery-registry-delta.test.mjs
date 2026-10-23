@@ -6,10 +6,9 @@ import {jsonBytes, digest, finalizeDelivery, packageProjection} from '../scripts
 // Small immutable metadata only. No authority qualification, native scans or GIS.
 const BASE = '1'.repeat(40), SOURCE = '2'.repeat(40), NEXT = '3'.repeat(40);
 const OWNED = 'coordination/engineering/joint-delta/';
-function fixture({count = 7, generated = true, cumulative = true} = {}) {
-  const records = new Map(), charges = [], reads = [], parsed = [];
+function fixture({count = 7, generated = true, cumulative = true, producerVintages = false, mixedProducer = false, corruptProducer = false, revised = false, omitRevisedIndex = false} = {}) {
+  const records = new Map(), reads = [];
   const reader = {
-    budget: {add(item) { assert.ok(Number.isSafeInteger(item.bytes) && item.bytes >= 0); charges.push(item.bytes); }},
     add(name, value, commit = NEXT) {
       const raw = Buffer.isBuffer(value) ? value : jsonBytes(value);
       const pin = {commit, path: name, mode: '100644', bytes: raw.length, sha256: digest(raw),
@@ -22,7 +21,7 @@ function fixture({count = 7, generated = true, cumulative = true} = {}) {
       const {roles, ...identity} = pin; // Projection annotations are not part of immutable identity.
       assert.deepEqual(identity, actual.pin, 'Changed whole original pin'); reads.push(pin.path); return actual.raw;
     },
-    json(pin) { parsed.push(pin.path); return JSON.parse(reader.read(pin)); },
+    json(pin) { return JSON.parse(reader.read(pin)); },
     hasPath(commit, name) { return records.has(commit + ':' + name); },
     git(...args) { assert.deepEqual(args, ['rev-parse', 'HEAD']); return Buffer.from(NEXT); }
   };
@@ -30,10 +29,25 @@ function fixture({count = 7, generated = true, cumulative = true} = {}) {
   for (const role of ['catalogue', 'physical_input', 'physical_reproduction', 'physical_evidence', 'native_latitudes', 'owner_roster'])
     common[role] = reader.add('coordination/engineering/original-common/' + role + '.json', {retained: role}, BASE);
   const family = reader.add('coordination/engineering/original-common/family.json', {type: 'FeatureCollection', features: []}, BASE);
+  const revisionRoles = revised ? Object.fromEntries(['raw_source', 'source_stage', 'assessment', 'scope', 'parent_decision', 'attribution']
+    .map(role => [role, reader.add('coordination/engineering/original-common/revised-' + role + '.json', {retained: role}, BASE)])) : null;
+  const revisionIndex = revised ? reader.add('data/world-index.json', {parts: ['geography/original.json']}, BASE) : null;
+  if (revised) revisionRoles.current_geography = reader.add('coordination/engineering/original-common/revised-fine.json',
+    {input_pins: omitRevisedIndex ? [] : [revisionIndex]}, BASE);
+  const revision = revised ? reader.add('coordination/engineering/original-common/revised-adoption.json',
+    {version: 1, kind: 'adopted-osm-revised-source-native-v1', ...revisionRoles}, BASE) : null;
   const originals = [], restorations = [];
+  const liveProducer = producerVintages ? reader.add('scripts/qualify-source-cohort.py', Buffer.from('# current accepted helper\n'), BASE) : null;
+  const producers = [];
   const makeAuthority = (ordinal, stem, commit) => {
-    const evidence = reader.add(stem + 'source-evidence.json', {version: 1, kind: 'source-target-native-evidence-v1',
-      ...common, targets: [{id: 'original:' + ordinal}], families: [{source_id: 'original', parts: [family]}]}, commit);
+    const historical = producerVintages && ordinal > 0
+      ? reader.add(liveProducer.path, Buffer.from('# original producer vintage ' + ordinal + '\n'), String(ordinal + 3).repeat(40)) : null;
+    if (historical) producers.push(historical);
+    const originalRoles = historical ? {...common, physical_reproduction: corruptProducer ? {...historical, sha256: 'f'.repeat(64)} : historical,
+      ...(mixedProducer ? {physical_input: historical} : {})} : common;
+    const evidence = reader.add(stem + 'source-evidence.json', {version: revised ? 3 : 1, kind: 'source-target-native-evidence-v' + (revised ? 3 : 1),
+      ...(revised ? {revised_source_adoption: revision} : {}),
+      ...originalRoles, targets: [{id: 'original:' + ordinal}], families: [{source_id: 'original', parts: [family]}]}, commit);
     const native = reader.add(stem + 'native-patch.json', {rows: [{y: ordinal, runs: [[ordinal, ordinal + 1, 1]]}]}, commit);
     const binding = {version: 1, kind: 'source-target-native-custody-v1', source_evidence: evidence, native_patch: native};
     const source_authority = reader.add(stem + 'authority-binding.json', binding, commit);
@@ -79,7 +93,7 @@ function fixture({count = 7, generated = true, cumulative = true} = {}) {
   const rebind = reader.add('coordination/engineering/original-common/rebind.json', {
     request: stub, facts: stub, publication: stub, result: stub, operating}, BASE);
   const package_inputs = reader.add('.github/package-inputs.json', {version: 1,
-    inputs: ['public/', '.github/package-inputs.json'], optional_inputs: ['public/'], verification_paths: [], generated_outputs: []}, BASE);
+    inputs: ['public/', '.github/package-inputs.json', ...(liveProducer ? [liveProducer.path] : [])], optional_inputs: ['public/'], verification_paths: [], generated_outputs: []}, BASE);
   const config = {version: 1, new_prefix: OWNED, selector, package_inputs, rebind};
   if (restorations.length) config.restored_read_roles = {commit: NEXT, paths: restorations};
   const setRegistry = entries => {
@@ -101,8 +115,17 @@ function fixture({count = 7, generated = true, cumulative = true} = {}) {
       base_selection: base, authority_registry: config.registry, logical_asset_map: assets, runtime_envelope: config.runtime_envelope});
   };
   setRegistry([old.entry, ...additions.map(value => value.entry)]);
-  return {reader, config, old, additions, originals, priorRegistry, priorSidecar, accepted, setRegistry, charges, reads, parsed, base};
+  return {reader, config, old, additions, originals, priorRegistry, priorSidecar, accepted, setRegistry, reads, base, liveProducer, producers, revisionRoles, revisionIndex, revision};
 }
+
+test('v3 package projection retains every adopted revised-source body and the original current index', () => {
+  const f = fixture({count: 1, revised: true});
+  const roles = JSON.parse(packageProjection(f.config, f.reader, f.accepted)['package-roles.json']);
+  for (const pin of [f.revision, f.revisionIndex, ...Object.values(f.revisionRoles)])
+    assert.ok(roles.paths.some(row => row.path === pin.path && row.sha256 === pin.sha256), pin.path);
+  const missing = fixture({count: 1, revised: true, omitRevisedIndex: true});
+  assert.throws(() => packageProjection(missing.config, missing.reader, missing.accepted), /Missing revised source current index/);
+});
 
 for (const generated of [true, false]) test('cumulative finalizer discovers seven original-prefix authorities, preserving original custody (' + generated + ')', () => {
   const f = fixture({generated}), before = f.originals.map(pin => Buffer.from(f.reader.read(pin)));
@@ -114,7 +137,6 @@ for (const generated of [true, false]) test('cumulative finalizer discovers seve
   f.originals.forEach((pin, i) => assert.deepEqual(f.reader.read(pin), before[i]));
   assert.equal(JSON.parse(output['selected-delivery-expectations.json']).cumulative_native_cells, 8);
   assert.deepEqual(JSON.parse(output['package-inputs.json']).inputs.slice(0, 2), ['public/', '.github/package-inputs.json']);
-  assert.equal(f.charges.filter(bytes => bytes === f.priorRegistry.bytes).length, 12);
   const again = finalizeDelivery(f.config, f.reader);
   for (const name of Object.keys(output)) assert.deepEqual(again[name], output[name]);
 });
@@ -123,6 +145,43 @@ test('empty registry delta is valid and does not rediscover inherited authoritie
   const f = fixture({count: 0}), output = finalizeDelivery(f.config, f.reader);
   assert.equal(JSON.parse(output['package-roles.json']).new_authorities, 0);
   assert.equal(JSON.parse(output['selected-delivery-expectations.json']).cumulative_native_cells, 1);
+});
+
+test('snapshot-only restoration uses one projection and preserves explicit-list outputs and reads', () => {
+  const f = fixture({count: 7, producerVintages: true});
+  f.reads.length = 0;
+  const explicit = finalizeDelivery(f.config, f.reader), explicitReads = [...f.reads];
+  const {commit} = f.config.restored_read_roles;
+  f.config.restored_read_roles = {commit};
+  const before = jsonBytes(f.config);
+  f.reader.add('coordination/engineering/unbound/snapshot-only.json', {unrelated: true}, NEXT);
+  f.reads.length = 0;
+  const derived = finalizeDelivery(f.config, f.reader);
+  assert.deepEqual(derived, explicit);
+  assert.deepEqual(f.reads, explicitReads, 'Derivation must not add another authenticated body traversal');
+  assert.deepEqual(jsonBytes(f.config), before, 'No handwritten path list is injected into caller configuration');
+  assert.ok(!JSON.parse(derived['package-roles.json']).paths.some(pin => pin.path.includes('/unbound/')));
+  assert.deepEqual(f.reader.read(f.liveProducer), Buffer.from('# current accepted helper\n'));
+});
+
+test('derived restoration preserves missing, changed, nonordinary and current-path refusals', () => {
+  for (const alter of [
+    f => { f.config.restored_read_roles.commit = 'f'.repeat(40); },
+    f => { const pin = f.originals.find(pin => pin.commit === SOURCE); f.reader.add(pin.path, {changed: true}, NEXT); },
+    f => { const original = f.reader.pin; f.reader.pin = (commit, name) =>
+      commit === NEXT && !name.startsWith(OWNED) ? {...original(commit, name), mode: '120000'} : original(commit, name); },
+    f => { const pin = f.originals.find(pin => pin.commit === SOURCE); f.reader.add(pin.path, {changed: true}, BASE); }
+  ]) {
+    const f = fixture({count: 1});
+    f.config.restored_read_roles = {commit: NEXT};
+    alter(f);
+    assert.throws(() => finalizeDelivery(f.config, f.reader), /accepted path identity/);
+  }
+  for (const bad of [{commit: NEXT, paths: []}, {commit: NEXT, paths: null},
+    {commit: NEXT, unexpected: true}, {commit: 'main'}]) {
+    const f = fixture({count: 1}); f.config.restored_read_roles = bad;
+    assert.throws(() => finalizeDelivery(f.config, f.reader), /Exact committed restored read-role inventory/);
+  }
 });
 
 test('standalone package and initial no-hook finalization retain prefix selection', () => {
@@ -163,7 +222,7 @@ test('duplicate or invalid accepted identities and a forged accepted registry bi
   assert.throws(() => finalizeDelivery(f.config, f.reader), /Changed whole original pin/);
 });
 
-test('wrong selector hook, prior base, prebuilt base and unavailable parse allowance refuse before publication', () => {
+test('wrong selector hook, prior base and prebuilt base refuse before publication', () => {
   const badHook = fixture(); badHook.config.selector = badHook.reader.add('data/ownership-selection.json',
     {...badHook.reader.json(badHook.config.selector), additive_release: {path: badHook.priorSidecar.path, bytes: 1, sha256: 'f'.repeat(64)}}, BASE);
   assert.throws(() => finalizeDelivery(badHook.config, badHook.reader), /Original selected sidecar differs/);
@@ -175,22 +234,48 @@ test('wrong selector hook, prior base, prebuilt base and unavailable parse allow
   const prebuilt = fixture({generated: false}); prebuilt.config.sidecar = prebuilt.reader.add(prebuilt.config.sidecar.path,
     {...prebuilt.reader.json(prebuilt.config.sidecar), base_selection: {...prebuilt.base, release_id: 'wrong'}});
   assert.throws(() => finalizeDelivery(prebuilt.config, prebuilt.reader), /preserve.*base/);
-  const budget = fixture(); budget.reader.budget.add = () => { throw Error('Control: parse allowance unavailable'); };
-  assert.throws(() => finalizeDelivery(budget.config, budget.reader), /parse allowance unavailable/);
-  assert.ok(!budget.parsed.includes(budget.priorRegistry.path));
+
 });
 
-test('caller config cannot replace the accepted registry and missing originals stage without a restoration list', () => {
+test('caller config cannot replace the accepted registry or silently restore missing original roles', () => {
   const f = fixture(); f.config.accepted_registry = {version: 1, entries: []}; f.config.new_authorities = [];
   assert.equal(JSON.parse(finalizeDelivery(f.config, f.reader)['package-roles.json']).new_authorities, 7);
   delete f.config.restored_read_roles;
-  const outputs = finalizeDelivery(f.config, f.reader);
-  const projection = JSON.parse(outputs['package-roles.json']);
-  assert.equal(projection.new_authorities, 7);
-  const staged = Object.keys(outputs).filter(name => name.startsWith('restored-read-roles/'));
-  assert.equal(staged.length, 28);
-  for (const name of staged) {
-    const pin = projection.paths.find(value => value.path === name.slice('restored-read-roles/'.length));
-    assert.ok(pin); assert.deepEqual(outputs[name], f.reader.read(pin));
+  assert.throws(() => finalizeDelivery(f.config, f.reader), /accepted path identity/);
+});
+
+
+test('historical physical producers retain two exact vintages without replacing the current helper', () => {
+  const f = fixture({count: 2, producerVintages: true}), current = Buffer.from(f.reader.read(f.liveProducer));
+  const output = finalizeDelivery(f.config, f.reader), roles = JSON.parse(output['package-roles.json']);
+  const originals = roles.paths.filter(pin => pin.path === f.liveProducer.path);
+  assert.equal(originals.length, 2);
+  assert.deepEqual(originals.map(pin => pin.commit).sort(), f.producers.map(pin => pin.commit).sort());
+  for (const pin of originals) {
+    assert.deepEqual(pin.roles, ['source-target physical_reproduction']);
+    assert.deepEqual(f.reader.read(pin), f.reader.read(f.producers.find(original => original.commit === pin.commit)));
   }
+  assert.equal(JSON.parse(output['package-inputs.json']).inputs.filter(name => name === f.liveProducer.path).length, 1);
+  assert.deepEqual(f.reader.read(f.liveProducer), current);
+  assert.ok(!Object.keys(output).includes('qualify-source-cohort.py'));
+});
+
+test('historical producer custody cannot excuse corrupt pins, data roles or a current-path restoration', () => {
+  const corrupt = fixture({count: 1, producerVintages: true, corruptProducer: true});
+  assert.throws(() => finalizeDelivery(corrupt.config, corrupt.reader), /Changed whole original pin/);
+  const mixed = fixture({count: 1, producerVintages: true, mixedProducer: true});
+  assert.throws(() => finalizeDelivery(mixed.config, mixed.reader), /Original consumed role differs from accepted path/);
+  const restore = fixture({count: 1, producerVintages: true});
+  restore.config.restored_read_roles.paths.push(restore.liveProducer.path);
+  assert.throws(() => finalizeDelivery(restore.config, restore.reader), /Restoration would overwrite an existing accepted path/);
+});
+
+
+test('historical producer pin cannot acquire an explicit final outer role', () => {
+  const f = fixture({count: 1, producerVintages: true}), original = f.producers[0];
+  const roles = JSON.parse(packageProjection({...f.config, outer_roles: [original]}, f.reader, f.accepted)['package-roles.json']);
+  const atPath = roles.paths.filter(pin => pin.path === original.path);
+  assert.equal(atPath.length, 2, 'historical evidence and current/outer use stay separate');
+  assert.deepEqual(atPath.find(pin => pin.roles.includes('explicit final reader outer role')).roles, ['explicit final reader outer role']);
+  assert.throws(() => finalizeDelivery({...f.config, outer_roles: [original]}, f.reader), /derived outer roles/);
 });

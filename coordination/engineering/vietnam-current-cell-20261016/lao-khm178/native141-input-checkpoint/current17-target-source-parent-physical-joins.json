@@ -1,0 +1,6843 @@
+[
+  {
+    "owner": 48168,
+    "target_id": "gb:VNM:ADM2:81297802B1284717956892",
+    "name": "Dien Bien",
+    "keys": [
+      {
+        "owner": 48168,
+        "y": 115099,
+        "x": 205997
+      }
+    ],
+    "count": 1,
+    "current_accepted_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "current_parent_id": "framework:province:ien-bien:14cb12874239",
+    "current_metadata": {
+      "source_id": "gb:VNM:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "reference_year": "2020",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "District",
+      "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "81297802B1284717956892",
+      "representative_point": [
+        102.99183243243243,
+        21.2548
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:VNM:ADM1",
+      "hierarchy_overlap": 0.96921,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 2,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "f03a0fa77de120847ff756bf7ff79c1b9964d003095249b58db7eb12db79e68c",
+      "reference_version": 3,
+      "geographic_area_code": "VIE",
+      "geographic_region_code": 41,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.92465,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "VNM-450",
+        "overlap": 0.963118
+      },
+      "regional_match": {
+        "reference_iso": "VNM",
+        "source_id": "VNM-450",
+        "overlap": 0.963118,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q881",
+      "reference_polity": "Vietnam",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "Vietnam",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "Asia",
+        "decision_index": 1144,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_source_atoms": [
+      "gb:VNM:ADM2:81297802B1284717956892"
+    ],
+    "actual_observed_source_records": [
+      {
+        "source_index": 65319,
+        "family_index": 354,
+        "source_id": "gb:VNM:ADM2:81297802B1284717956892",
+        "ordinal": 163,
+        "owners": [
+          48168
+        ],
+        "name": "Dien Bien",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "physical_classes": {
+      "land": 1
+    },
+    "original_contradictions": [
+      {
+        "key": {
+          "owner": 48168,
+          "y": 115099,
+          "x": 205997
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65319
+        ]
+      }
+    ],
+    "original_whole_veto_readiness": {
+      "local_path": "vietnam-next/repair-package/next557-source-veto-readiness/source-veto-readiness.json",
+      "target_id": "gb:VNM:ADM2:81297802B1284717956892",
+      "ordered_territorial_exclusion_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "whole_stage": {
+        "bytes": 28560,
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/reference1588/cell-hold-audit/dienbien130-readiness/original-stage-inputs.json",
+        "sha256": "c1299320383253ec3cf06304a9eb3a0a0f65dde3165fb0c748cda9de18f4c127"
+      }
+    },
+    "stock_input_status": "proposed-with-retained-whole-physical",
+    "physical_evidence": {
+      "bytes": 240095,
+      "commit": "1838eadd248d4ddd430f23764ff90149d58aa7c5",
+      "git_blob_oid": "554f8afbda49521882135553f110c73515ce7b57",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/physical/whole-target-support.json",
+      "sha256": "ac86cd6687663e237db1473830d14e5151b0b5df6a1aeae7e997a2ac6bfbc0a3"
+    },
+    "physical_input": {
+      "bytes": 161126,
+      "commit": "c1e652a338a2351f85fb816093eaa72d210972ce",
+      "git_blob_oid": "7f78188454deced550904797f4ff984d10f7f974",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/original-stage-inputs.json",
+      "sha256": "baaa6a314770cca7b4eb09462fda642d2cc492c9f22d1e10331596b3b688004d"
+    },
+    "physical_reproduction": {
+      "bytes": 48543,
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "mode": "100644",
+      "path": "scripts/qualify-source-cohort.py",
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+    },
+    "physical_result_issues": [],
+    "class_rows": [
+      {
+        "y": 115099,
+        "runs": [
+          [
+            205997,
+            205998,
+            "mapped_land_support"
+          ]
+        ]
+      }
+    ],
+    "proposed_current_territorial_mask_country": "LAO",
+    "proposed_current_mask_source": {
+      "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/inputs/lao_admin0.geojson",
+      "bytes": 2800455,
+      "sha256": "a3065f4de59fb96e773e4853c350cd51505049c0d8f0c18253cdc3971fff663c"
+    },
+    "retained_prior_evidence_origin": "vietnam-next/repair-package/quephong49-physical-preparation/next-physical557/native-source-evidence-inland295-proposed.json"
+  },
+  {
+    "owner": 48181,
+    "target_id": "gb:VNM:ADM2:81297802B14510014839166",
+    "name": "Tuy Duc",
+    "keys": [
+      {
+        "owner": 48181,
+        "y": 122073,
+        "x": 209286
+      },
+      {
+        "owner": 48181,
+        "y": 122074,
+        "x": 209286
+      },
+      {
+        "owner": 48181,
+        "y": 122075,
+        "x": 209286
+      }
+    ],
+    "count": 3,
+    "current_accepted_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "current_parent_id": "framework:province:ak-nong:ec49a255c608",
+    "current_metadata": {
+      "source_id": "gb:VNM:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "reference_year": "2020",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "District",
+      "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "81297802B14510014839166",
+      "representative_point": [
+        107.3922902187728,
+        12.13715
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:VNM:ADM1",
+      "hierarchy_overlap": 0.92608,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 1,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "6dcedee57519c59303fde51efbc846476508a4d8dac4bb828a3aea5f434eb901",
+      "reference_version": 3,
+      "geographic_area_code": "VIE",
+      "geographic_region_code": 41,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.91193,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "VNM-4835",
+        "overlap": 0.937896
+      },
+      "regional_match": {
+        "reference_iso": "VNM",
+        "source_id": "VNM-4835",
+        "overlap": 0.937896,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q881",
+      "reference_polity": "Vietnam",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "Vietnam",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "Asia",
+        "decision_index": 422,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_source_atoms": [
+      "gb:VNM:ADM2:81297802B14510014839166"
+    ],
+    "actual_observed_source_records": [
+      {
+        "source_index": 65797,
+        "family_index": 354,
+        "source_id": "gb:VNM:ADM2:81297802B14510014839166",
+        "ordinal": 641,
+        "owners": [
+          48181
+        ],
+        "name": "Tuy Duc",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "physical_classes": {
+      "land": 3
+    },
+    "original_contradictions": [
+      {
+        "key": {
+          "owner": 48181,
+          "y": 122073,
+          "x": 209286
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65797
+        ]
+      },
+      {
+        "key": {
+          "owner": 48181,
+          "y": 122074,
+          "x": 209286
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65797
+        ]
+      },
+      {
+        "key": {
+          "owner": 48181,
+          "y": 122075,
+          "x": 209286
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65797
+        ]
+      }
+    ],
+    "original_whole_veto_readiness": {
+      "local_path": "vietnam-next/repair-package/next351-source-veto-readiness/source-veto-readiness.json",
+      "target_id": "gb:VNM:ADM2:81297802B14510014839166",
+      "ordered_territorial_exclusion_operand_ids": [
+        "retained-country-reference:ADM0_A3:KHM"
+      ],
+      "whole_stage": {
+        "bytes": 36027,
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/reference1588/cell-hold-audit/tuyduc2-readiness/whole-target-stage-inputs.json",
+        "sha256": "0031838cf4a108b6866b62294ecb1a7aa253d27676f41312b6299ceb617329ac"
+      }
+    },
+    "stock_input_status": "proposed-with-retained-whole-physical",
+    "physical_evidence": {
+      "bytes": 324148,
+      "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+      "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+      "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+    },
+    "physical_input": {
+      "bytes": 811030,
+      "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+      "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+      "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+    },
+    "physical_reproduction": {
+      "bytes": 48543,
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "mode": "100644",
+      "path": "scripts/qualify-source-cohort.py",
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+    },
+    "physical_result_issues": [],
+    "class_rows": [
+      {
+        "y": 122073,
+        "runs": [
+          [
+            209286,
+            209287,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 122074,
+        "runs": [
+          [
+            209286,
+            209287,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 122075,
+        "runs": [
+          [
+            209286,
+            209287,
+            "mapped_land_support"
+          ]
+        ]
+      }
+    ],
+    "proposed_current_territorial_mask_country": "KHM",
+    "proposed_current_mask_source": {
+      "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/inputs/khm_admin0.geojson",
+      "bytes": 310214,
+      "sha256": "7f1c6a35592a7b149a0af378045675b37193401f737f22ad7677afa0206b0eb7"
+    },
+    "retained_prior_evidence_origin": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json"
+  },
+  {
+    "owner": 48212,
+    "target_id": "gb:VNM:ADM2:81297802B20367953633835",
+    "name": "Dak Glei",
+    "keys": [
+      {
+        "owner": 48212,
+        "y": 119835,
+        "x": 209456
+      },
+      {
+        "owner": 48212,
+        "y": 119836,
+        "x": 209456
+      },
+      {
+        "owner": 48212,
+        "y": 119872,
+        "x": 209451
+      },
+      {
+        "owner": 48212,
+        "y": 119872,
+        "x": 209452
+      },
+      {
+        "owner": 48212,
+        "y": 119872,
+        "x": 209453
+      },
+      {
+        "owner": 48212,
+        "y": 119872,
+        "x": 209454
+      },
+      {
+        "owner": 48212,
+        "y": 119873,
+        "x": 209449
+      },
+      {
+        "owner": 48212,
+        "y": 119873,
+        "x": 209450
+      },
+      {
+        "owner": 48212,
+        "y": 119873,
+        "x": 209451
+      },
+      {
+        "owner": 48212,
+        "y": 119873,
+        "x": 209452
+      },
+      {
+        "owner": 48212,
+        "y": 119873,
+        "x": 209453
+      },
+      {
+        "owner": 48212,
+        "y": 119874,
+        "x": 209448
+      },
+      {
+        "owner": 48212,
+        "y": 119874,
+        "x": 209449
+      },
+      {
+        "owner": 48212,
+        "y": 119874,
+        "x": 209450
+      },
+      {
+        "owner": 48212,
+        "y": 119874,
+        "x": 209451
+      },
+      {
+        "owner": 48212,
+        "y": 119875,
+        "x": 209447
+      },
+      {
+        "owner": 48212,
+        "y": 119875,
+        "x": 209448
+      },
+      {
+        "owner": 48212,
+        "y": 119875,
+        "x": 209449
+      },
+      {
+        "owner": 48212,
+        "y": 119876,
+        "x": 209446
+      },
+      {
+        "owner": 48212,
+        "y": 119876,
+        "x": 209447
+      },
+      {
+        "owner": 48212,
+        "y": 119877,
+        "x": 209445
+      },
+      {
+        "owner": 48212,
+        "y": 119879,
+        "x": 209439
+      },
+      {
+        "owner": 48212,
+        "y": 119879,
+        "x": 209440
+      },
+      {
+        "owner": 48212,
+        "y": 119879,
+        "x": 209441
+      },
+      {
+        "owner": 48212,
+        "y": 119880,
+        "x": 209436
+      },
+      {
+        "owner": 48212,
+        "y": 119880,
+        "x": 209437
+      },
+      {
+        "owner": 48212,
+        "y": 119880,
+        "x": 209438
+      },
+      {
+        "owner": 48212,
+        "y": 119880,
+        "x": 209439
+      },
+      {
+        "owner": 48212,
+        "y": 119881,
+        "x": 209433
+      },
+      {
+        "owner": 48212,
+        "y": 119881,
+        "x": 209434
+      },
+      {
+        "owner": 48212,
+        "y": 119881,
+        "x": 209435
+      },
+      {
+        "owner": 48212,
+        "y": 119881,
+        "x": 209436
+      },
+      {
+        "owner": 48212,
+        "y": 119881,
+        "x": 209437
+      },
+      {
+        "owner": 48212,
+        "y": 119882,
+        "x": 209431
+      },
+      {
+        "owner": 48212,
+        "y": 119882,
+        "x": 209432
+      },
+      {
+        "owner": 48212,
+        "y": 119882,
+        "x": 209433
+      },
+      {
+        "owner": 48212,
+        "y": 119882,
+        "x": 209434
+      },
+      {
+        "owner": 48212,
+        "y": 119882,
+        "x": 209435
+      },
+      {
+        "owner": 48212,
+        "y": 119883,
+        "x": 209432
+      },
+      {
+        "owner": 48212,
+        "y": 119883,
+        "x": 209433
+      },
+      {
+        "owner": 48212,
+        "y": 120026,
+        "x": 209345
+      }
+    ],
+    "count": 41,
+    "current_accepted_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "current_parent_id": "framework:province:kon-tum:b8f152b7de08",
+    "current_metadata": {
+      "source_id": "gb:VNM:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "reference_year": "2020",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "District",
+      "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "81297802B20367953633835",
+      "representative_point": [
+        107.81313016608112,
+        15.1367
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:VNM:ADM1",
+      "hierarchy_overlap": 0.971947,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 2,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "3020128c9094cecda51691566c14d87407a71aa528e4a668df1a7709ea800903",
+      "reference_version": 3,
+      "geographic_area_code": "VIE",
+      "geographic_region_code": 41,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.94689,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "VNM-486",
+        "overlap": 0.957762
+      },
+      "regional_match": {
+        "reference_iso": "VNM",
+        "source_id": "VNM-486",
+        "overlap": 0.957762,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q881",
+      "reference_polity": "Vietnam",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "Vietnam",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "Asia",
+        "decision_index": 1349,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_source_atoms": [
+      "gb:VNM:ADM2:81297802B20367953633835"
+    ],
+    "actual_observed_source_records": [
+      {
+        "source_index": 41301,
+        "family_index": 185,
+        "source_id": "gb:LAO:ADM1:31783359B8999899719232",
+        "ordinal": 1,
+        "owners": [],
+        "name": "Attapeu",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65126,
+        "family_index": 353,
+        "source_id": "gb:VNM:ADM1:63759600B65226847193503",
+        "ordinal": 34,
+        "owners": [],
+        "name": "Kon Tum",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65302,
+        "family_index": 354,
+        "source_id": "gb:VNM:ADM2:81297802B20367953633835",
+        "ordinal": 146,
+        "owners": [
+          48212
+        ],
+        "name": "Dak Glei",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "physical_classes": {
+      "land": 41
+    },
+    "original_contradictions": [
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119835,
+          "x": 209456
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119836,
+          "x": 209456
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119872,
+          "x": 209451
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119872,
+          "x": 209452
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119872,
+          "x": 209453
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119872,
+          "x": 209454
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119873,
+          "x": 209449
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119873,
+          "x": 209450
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119873,
+          "x": 209451
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119873,
+          "x": 209452
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119873,
+          "x": 209453
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119874,
+          "x": 209448
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119874,
+          "x": 209449
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119874,
+          "x": 209450
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119874,
+          "x": 209451
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119875,
+          "x": 209447
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119875,
+          "x": 209448
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119875,
+          "x": 209449
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119876,
+          "x": 209446
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119876,
+          "x": 209447
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119877,
+          "x": 209445
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119879,
+          "x": 209439
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119879,
+          "x": 209440
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119879,
+          "x": 209441
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119880,
+          "x": 209436
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119880,
+          "x": 209437
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119880,
+          "x": 209438
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119880,
+          "x": 209439
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119881,
+          "x": 209433
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119881,
+          "x": 209434
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119881,
+          "x": 209435
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119881,
+          "x": 209436
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119881,
+          "x": 209437
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119882,
+          "x": 209431
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119882,
+          "x": 209432
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119882,
+          "x": 209433
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119882,
+          "x": 209434
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119882,
+          "x": 209435
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119883,
+          "x": 209432
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 119883,
+          "x": 209433
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65302
+        ]
+      },
+      {
+        "key": {
+          "owner": 48212,
+          "y": 120026,
+          "x": 209345
+        },
+        "flags": [
+          "foreign-source-family"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "VNM"
+        ],
+        "actual_sids": [
+          41301,
+          65126,
+          65302
+        ]
+      }
+    ],
+    "original_whole_veto_readiness": {
+      "local_path": "vietnam-next/repair-package/next351-source-veto-readiness/source-veto-readiness.json",
+      "target_id": "gb:VNM:ADM2:81297802B20367953633835",
+      "ordered_territorial_exclusion_operand_ids": [
+        "gb:LAO:ADM1:31783359B8999899719232",
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "whole_stage": {
+        "bytes": 55859,
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/foreign1053/dakglei3-readiness/whole-target-stage-inputs.json",
+        "sha256": "a8cfb5af634f848262a59833789db7c1fcd29fbb44e719098bed992f6d0adf75"
+      }
+    },
+    "stock_input_status": "proposed-with-retained-whole-physical",
+    "physical_evidence": {
+      "bytes": 324148,
+      "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+      "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+      "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+    },
+    "physical_input": {
+      "bytes": 811030,
+      "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+      "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+      "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+    },
+    "physical_reproduction": {
+      "bytes": 48543,
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "mode": "100644",
+      "path": "scripts/qualify-source-cohort.py",
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+    },
+    "physical_result_issues": [],
+    "class_rows": [
+      {
+        "y": 119835,
+        "runs": [
+          [
+            209456,
+            209457,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 119836,
+        "runs": [
+          [
+            209456,
+            209457,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 119872,
+        "runs": [
+          [
+            209451,
+            209455,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 119873,
+        "runs": [
+          [
+            209449,
+            209454,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 119874,
+        "runs": [
+          [
+            209448,
+            209452,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 119875,
+        "runs": [
+          [
+            209447,
+            209450,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 119876,
+        "runs": [
+          [
+            209446,
+            209448,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 119877,
+        "runs": [
+          [
+            209445,
+            209446,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 119879,
+        "runs": [
+          [
+            209439,
+            209442,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 119880,
+        "runs": [
+          [
+            209436,
+            209440,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 119881,
+        "runs": [
+          [
+            209433,
+            209438,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 119882,
+        "runs": [
+          [
+            209431,
+            209436,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 119883,
+        "runs": [
+          [
+            209432,
+            209434,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 120026,
+        "runs": [
+          [
+            209345,
+            209346,
+            "mapped_land_support"
+          ]
+        ]
+      }
+    ],
+    "proposed_current_territorial_mask_country": "LAO",
+    "proposed_current_mask_source": {
+      "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/inputs/lao_admin0.geojson",
+      "bytes": 2800455,
+      "sha256": "a3065f4de59fb96e773e4853c350cd51505049c0d8f0c18253cdc3971fff663c"
+    },
+    "retained_prior_evidence_origin": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json"
+  },
+  {
+    "owner": 48268,
+    "target_id": "gb:VNM:ADM2:81297802B2701886719052",
+    "name": "Ky Son",
+    "keys": [
+      {
+        "owner": 48268,
+        "y": 116456,
+        "x": 207051
+      },
+      {
+        "owner": 48268,
+        "y": 116457,
+        "x": 207052
+      },
+      {
+        "owner": 48268,
+        "y": 116458,
+        "x": 207052
+      }
+    ],
+    "count": 3,
+    "current_accepted_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "current_parent_id": "framework:province:nghe-an:3678322ea117",
+    "current_metadata": {
+      "source_id": "gb:VNM:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "reference_year": "2020",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "District",
+      "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "81297802B2701886719052",
+      "representative_point": [
+        104.22872016987415,
+        19.410473482683948
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:VNM:ADM1",
+      "hierarchy_overlap": 0.93432,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 4,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "54f20e755f511432a19f0438939f0caea192641ce78e3ce3f7b52b3cb1fe1f97",
+      "reference_version": 3,
+      "geographic_area_code": "VIE",
+      "geographic_region_code": 41,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.92968,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "VNM-475",
+        "overlap": 0.977602
+      },
+      "regional_match": {
+        "reference_iso": "VNM",
+        "source_id": "VNM-475",
+        "overlap": 0.977602,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q881",
+      "reference_polity": "Vietnam",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "Vietnam",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "Asia",
+        "decision_index": 1688,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_source_atoms": [
+      "gb:VNM:ADM2:81297802B2701886719052"
+    ],
+    "actual_observed_source_records": [
+      {
+        "source_index": 65133,
+        "family_index": 353,
+        "source_id": "gb:VNM:ADM1:63759600B83996903780984",
+        "ordinal": 41,
+        "owners": [],
+        "name": "Nghệ An",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65469,
+        "family_index": 354,
+        "source_id": "gb:VNM:ADM2:81297802B2701886719052",
+        "ordinal": 313,
+        "owners": [
+          48268
+        ],
+        "name": "Ky Son",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "physical_classes": {
+      "land": 3
+    },
+    "original_contradictions": [
+      {
+        "key": {
+          "owner": 48268,
+          "y": 116456,
+          "x": 207051
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65133,
+          65469
+        ]
+      },
+      {
+        "key": {
+          "owner": 48268,
+          "y": 116457,
+          "x": 207052
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65133,
+          65469
+        ]
+      },
+      {
+        "key": {
+          "owner": 48268,
+          "y": 116458,
+          "x": 207052
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65133,
+          65469
+        ]
+      }
+    ],
+    "original_whole_veto_readiness": {
+      "local_path": "vietnam-next/repair-package/next351-source-veto-readiness/source-veto-readiness.json",
+      "target_id": "gb:VNM:ADM2:81297802B2701886719052",
+      "ordered_territorial_exclusion_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "whole_stage": {
+        "bytes": 49110,
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/reference1588/cell-hold-audit/kyson8-readiness/whole-target-stage-inputs.json",
+        "sha256": "b7a37c39bf283cd07435e11f56d66d54a8c46d18ea814bd7cd02e19e6ea107ee"
+      }
+    },
+    "stock_input_status": "proposed-with-retained-whole-physical",
+    "physical_evidence": {
+      "bytes": 324148,
+      "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+      "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+      "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+    },
+    "physical_input": {
+      "bytes": 811030,
+      "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+      "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+      "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+    },
+    "physical_reproduction": {
+      "bytes": 48543,
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "mode": "100644",
+      "path": "scripts/qualify-source-cohort.py",
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+    },
+    "physical_result_issues": [],
+    "class_rows": [
+      {
+        "y": 116456,
+        "runs": [
+          [
+            207051,
+            207052,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 116457,
+        "runs": [
+          [
+            207052,
+            207053,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 116458,
+        "runs": [
+          [
+            207052,
+            207053,
+            "mapped_land_support"
+          ]
+        ]
+      }
+    ],
+    "proposed_current_territorial_mask_country": "LAO",
+    "proposed_current_mask_source": {
+      "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/inputs/lao_admin0.geojson",
+      "bytes": 2800455,
+      "sha256": "a3065f4de59fb96e773e4853c350cd51505049c0d8f0c18253cdc3971fff663c"
+    },
+    "retained_prior_evidence_origin": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json"
+  },
+  {
+    "owner": 48336,
+    "target_id": "gb:VNM:ADM2:81297802B35904575630157",
+    "name": "Sop Cop",
+    "keys": [
+      {
+        "owner": 48336,
+        "y": 115573,
+        "x": 206283
+      },
+      {
+        "owner": 48336,
+        "y": 115602,
+        "x": 206372
+      },
+      {
+        "owner": 48336,
+        "y": 115602,
+        "x": 206373
+      },
+      {
+        "owner": 48336,
+        "y": 115602,
+        "x": 206374
+      },
+      {
+        "owner": 48336,
+        "y": 115602,
+        "x": 206375
+      },
+      {
+        "owner": 48336,
+        "y": 115602,
+        "x": 206376
+      }
+    ],
+    "count": 6,
+    "current_accepted_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "current_parent_id": "framework:province:son-la:9ecbd1d87e71",
+    "current_metadata": {
+      "source_id": "gb:VNM:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "reference_year": "2020",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "District",
+      "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "81297802B35904575630157",
+      "representative_point": [
+        103.470332,
+        20.8764
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:VNM:ADM1",
+      "hierarchy_overlap": 0.97551,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 3,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "4462cf94cf82f8e0c5448327981c678b59c0db29021df1e91c01f8f9723523da",
+      "reference_version": 3,
+      "geographic_area_code": "VIE",
+      "geographic_region_code": 41,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.9963,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "VNM-455",
+        "overlap": 0.935855
+      },
+      "regional_match": {
+        "reference_iso": "VNM",
+        "source_id": "VNM-455",
+        "overlap": 0.935855,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q881",
+      "reference_polity": "Vietnam",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "Vietnam",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "Asia",
+        "decision_index": 2092,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_source_atoms": [
+      "gb:VNM:ADM2:81297802B35904575630157"
+    ],
+    "actual_observed_source_records": [
+      {
+        "source_index": 65676,
+        "family_index": 354,
+        "source_id": "gb:VNM:ADM2:81297802B35904575630157",
+        "ordinal": 520,
+        "owners": [
+          48336
+        ],
+        "name": "Sop Cop",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "physical_classes": {
+      "land": 6
+    },
+    "original_contradictions": [
+      {
+        "key": {
+          "owner": 48336,
+          "y": 115573,
+          "x": 206283
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65676
+        ]
+      },
+      {
+        "key": {
+          "owner": 48336,
+          "y": 115602,
+          "x": 206372
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65676
+        ]
+      },
+      {
+        "key": {
+          "owner": 48336,
+          "y": 115602,
+          "x": 206373
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65676
+        ]
+      },
+      {
+        "key": {
+          "owner": 48336,
+          "y": 115602,
+          "x": 206374
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65676
+        ]
+      },
+      {
+        "key": {
+          "owner": 48336,
+          "y": 115602,
+          "x": 206375
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65676
+        ]
+      },
+      {
+        "key": {
+          "owner": 48336,
+          "y": 115602,
+          "x": 206376
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65676
+        ]
+      }
+    ],
+    "original_whole_veto_readiness": {
+      "local_path": "vietnam-next/repair-package/next557-source-veto-readiness/source-veto-readiness.json",
+      "target_id": "gb:VNM:ADM2:81297802B35904575630157",
+      "ordered_territorial_exclusion_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "whole_stage": {
+        "bytes": 41472,
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/reference1588/cell-hold-audit/sopcop49-readiness/whole-target-stage-inputs.json",
+        "sha256": "31bcd870e5ce3008e93d086875e8e0f86d44cca3a3ff9aff63f7b79fb275c3f8"
+      }
+    },
+    "stock_input_status": "proposed-with-retained-whole-physical",
+    "physical_evidence": {
+      "bytes": 240095,
+      "commit": "1838eadd248d4ddd430f23764ff90149d58aa7c5",
+      "git_blob_oid": "554f8afbda49521882135553f110c73515ce7b57",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/physical/whole-target-support.json",
+      "sha256": "ac86cd6687663e237db1473830d14e5151b0b5df6a1aeae7e997a2ac6bfbc0a3"
+    },
+    "physical_input": {
+      "bytes": 161126,
+      "commit": "c1e652a338a2351f85fb816093eaa72d210972ce",
+      "git_blob_oid": "7f78188454deced550904797f4ff984d10f7f974",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/original-stage-inputs.json",
+      "sha256": "baaa6a314770cca7b4eb09462fda642d2cc492c9f22d1e10331596b3b688004d"
+    },
+    "physical_reproduction": {
+      "bytes": 48543,
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "mode": "100644",
+      "path": "scripts/qualify-source-cohort.py",
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+    },
+    "physical_result_issues": [],
+    "class_rows": [
+      {
+        "y": 115573,
+        "runs": [
+          [
+            206283,
+            206284,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115602,
+        "runs": [
+          [
+            206372,
+            206377,
+            "mapped_land_support"
+          ]
+        ]
+      }
+    ],
+    "proposed_current_territorial_mask_country": "LAO",
+    "proposed_current_mask_source": {
+      "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/inputs/lao_admin0.geojson",
+      "bytes": 2800455,
+      "sha256": "a3065f4de59fb96e773e4853c350cd51505049c0d8f0c18253cdc3971fff663c"
+    },
+    "retained_prior_evidence_origin": "vietnam-next/repair-package/quephong49-physical-preparation/next-physical557/native-source-evidence-inland295-proposed.json"
+  },
+  {
+    "owner": 48348,
+    "target_id": "gb:VNM:ADM2:81297802B37103290877054",
+    "name": "Que Phong",
+    "keys": [
+      {
+        "owner": 48348,
+        "y": 116254,
+        "x": 207452
+      }
+    ],
+    "count": 1,
+    "current_accepted_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "current_parent_id": "framework:province:nghe-an:3678322ea117",
+    "current_metadata": {
+      "source_id": "gb:VNM:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "reference_year": "2020",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "District",
+      "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "81297802B37103290877054",
+      "representative_point": [
+        104.8479373625909,
+        19.70525
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:VNM:ADM1",
+      "hierarchy_overlap": 0.978559,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 2,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "dc05ca317f6a30ff17b0cd35c2fe2e7cf1e4d3f19375ad0d40cfd1b30225af72",
+      "reference_version": 3,
+      "geographic_area_code": "VIE",
+      "geographic_region_code": 41,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.93303,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "VNM-475",
+        "overlap": 0.991317
+      },
+      "regional_match": {
+        "reference_iso": "VNM",
+        "source_id": "VNM-475",
+        "overlap": 0.991317,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q881",
+      "reference_polity": "Vietnam",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "Vietnam",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "Asia",
+        "decision_index": 1687,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_source_atoms": [
+      "gb:VNM:ADM2:81297802B37103290877054"
+    ],
+    "actual_observed_source_records": [
+      {
+        "source_index": 41305,
+        "family_index": 185,
+        "source_id": "gb:LAO:ADM1:31783359B1064119540000",
+        "ordinal": 5,
+        "owners": [],
+        "name": "Houaphan",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65133,
+        "family_index": 353,
+        "source_id": "gb:VNM:ADM1:63759600B83996903780984",
+        "ordinal": 41,
+        "owners": [],
+        "name": "Nghệ An",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65643,
+        "family_index": 354,
+        "source_id": "gb:VNM:ADM2:81297802B37103290877054",
+        "ordinal": 487,
+        "owners": [
+          48348
+        ],
+        "name": "Que Phong",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "physical_classes": {
+      "land": 1
+    },
+    "original_contradictions": [
+      {
+        "key": {
+          "owner": 48348,
+          "y": 116254,
+          "x": 207452
+        },
+        "flags": [
+          "foreign-source-family"
+        ],
+        "hold_reasons": [
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "VNM"
+        ],
+        "actual_sids": [
+          41305,
+          65133,
+          65643
+        ]
+      }
+    ],
+    "stock_input_status": "proposed-with-retained-whole-physical",
+    "physical_evidence": {
+      "commit": "f24862107d352e7fc4893532eb20177b6d1374f3",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/physical/whole-target-support.json",
+      "mode": "100644",
+      "git_blob_oid": "80545423ee5e81cf899c2ddd4a0f22ec0e446690",
+      "bytes": 22199,
+      "sha256": "31701e6f28114770f49de65a52b8570c7a723c4c662409bf0660dc7b3612d424"
+    },
+    "physical_input": {
+      "commit": "2855587c4ae012b64a546f8c4c9a915b3021cd3e",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/original-stage-inputs.json",
+      "mode": "100644",
+      "git_blob_oid": "7f15c122ef3e288ac1842a24e50027773a6a78c6",
+      "bytes": 35549,
+      "sha256": "6e050718cdae7fa799e8c9df11ada24db5f49a7bfa7df2791824d7bc334e4ba1"
+    },
+    "physical_reproduction": {
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "path": "scripts/qualify-source-cohort.py",
+      "mode": "100644",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "bytes": 48543,
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+    },
+    "physical_result_issues": [],
+    "class_rows": [
+      {
+        "y": 116254,
+        "runs": [
+          [
+            207452,
+            207453,
+            "mapped_land_support"
+          ]
+        ]
+      }
+    ],
+    "proposed_current_territorial_mask_country": "LAO",
+    "proposed_current_mask_source": {
+      "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/inputs/lao_admin0.geojson",
+      "bytes": 2800455,
+      "sha256": "a3065f4de59fb96e773e4853c350cd51505049c0d8f0c18253cdc3971fff663c"
+    },
+    "retained_prior_evidence_origin": "vietnam-next/repair-package/quephong49-physical-preparation/native-source-evidence-proposed.json"
+  },
+  {
+    "owner": 48365,
+    "target_id": "gb:VNM:ADM2:81297802B39086824409595",
+    "name": "Nam Po",
+    "keys": [
+      {
+        "owner": 48365,
+        "y": 114786,
+        "x": 205955
+      },
+      {
+        "owner": 48365,
+        "y": 114787,
+        "x": 205955
+      },
+      {
+        "owner": 48365,
+        "y": 114788,
+        "x": 205954
+      },
+      {
+        "owner": 48365,
+        "y": 114861,
+        "x": 205962
+      },
+      {
+        "owner": 48365,
+        "y": 114862,
+        "x": 205959
+      },
+      {
+        "owner": 48365,
+        "y": 114862,
+        "x": 205960
+      },
+      {
+        "owner": 48365,
+        "y": 114862,
+        "x": 205961
+      },
+      {
+        "owner": 48365,
+        "y": 114863,
+        "x": 205960
+      },
+      {
+        "owner": 48365,
+        "y": 114869,
+        "x": 206033
+      },
+      {
+        "owner": 48365,
+        "y": 114870,
+        "x": 206030
+      },
+      {
+        "owner": 48365,
+        "y": 114887,
+        "x": 205931
+      },
+      {
+        "owner": 48365,
+        "y": 114893,
+        "x": 205927
+      }
+    ],
+    "count": 12,
+    "current_accepted_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "current_parent_id": "framework:province:ien-bien:14cb12874239",
+    "current_metadata": {
+      "source_id": "gb:VNM:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "reference_year": "2020",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "District",
+      "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "81297802B39086824409595",
+      "representative_point": [
+        102.80700528917436,
+        21.882550000000002
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:VNM:ADM1",
+      "hierarchy_overlap": 0.967662,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 2,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "4f41089f36afb3f4c5c48c95c584826d2341d80f6dbefaa0650d95253ff5b1a7",
+      "reference_version": 3,
+      "geographic_area_code": "VIE",
+      "geographic_region_code": 41,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.97242,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "VNM-450",
+        "overlap": 0.962694
+      },
+      "regional_match": {
+        "reference_iso": "VNM",
+        "source_id": "VNM-450",
+        "overlap": 0.962694,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q881",
+      "reference_polity": "Vietnam",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "Vietnam",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "Asia",
+        "decision_index": 1144,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_source_atoms": [
+      "gb:VNM:ADM2:81297802B39086824409595"
+    ],
+    "actual_observed_source_records": [
+      {
+        "source_index": 65110,
+        "family_index": 353,
+        "source_id": "gb:VNM:ADM1:63759600B72990231521734",
+        "ordinal": 18,
+        "owners": [],
+        "name": "Điện Biên",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65545,
+        "family_index": 354,
+        "source_id": "gb:VNM:ADM2:81297802B39086824409595",
+        "ordinal": 389,
+        "owners": [
+          48365
+        ],
+        "name": "Nam Po",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "physical_classes": {
+      "land": 12
+    },
+    "original_contradictions": [
+      {
+        "key": {
+          "owner": 48365,
+          "y": 114786,
+          "x": 205955
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65110,
+          65545
+        ]
+      },
+      {
+        "key": {
+          "owner": 48365,
+          "y": 114787,
+          "x": 205955
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65110,
+          65545
+        ]
+      },
+      {
+        "key": {
+          "owner": 48365,
+          "y": 114788,
+          "x": 205954
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65110,
+          65545
+        ]
+      },
+      {
+        "key": {
+          "owner": 48365,
+          "y": 114861,
+          "x": 205962
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65110,
+          65545
+        ]
+      },
+      {
+        "key": {
+          "owner": 48365,
+          "y": 114862,
+          "x": 205959
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65110,
+          65545
+        ]
+      },
+      {
+        "key": {
+          "owner": 48365,
+          "y": 114862,
+          "x": 205960
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65110,
+          65545
+        ]
+      },
+      {
+        "key": {
+          "owner": 48365,
+          "y": 114862,
+          "x": 205961
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65110,
+          65545
+        ]
+      },
+      {
+        "key": {
+          "owner": 48365,
+          "y": 114863,
+          "x": 205960
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65110,
+          65545
+        ]
+      },
+      {
+        "key": {
+          "owner": 48365,
+          "y": 114869,
+          "x": 206033
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65110,
+          65545
+        ]
+      },
+      {
+        "key": {
+          "owner": 48365,
+          "y": 114870,
+          "x": 206030
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65110,
+          65545
+        ]
+      },
+      {
+        "key": {
+          "owner": 48365,
+          "y": 114887,
+          "x": 205931
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65110,
+          65545
+        ]
+      },
+      {
+        "key": {
+          "owner": 48365,
+          "y": 114893,
+          "x": 205927
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65110,
+          65545
+        ]
+      }
+    ],
+    "original_whole_veto_readiness": {
+      "local_path": "vietnam-next/repair-package/next351-source-veto-readiness/source-veto-readiness.json",
+      "target_id": "gb:VNM:ADM2:81297802B39086824409595",
+      "ordered_territorial_exclusion_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "whole_stage": {
+        "bytes": 53395,
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/reference1588/cell-hold-audit/nampo38-readiness/whole-target-stage-inputs.json",
+        "sha256": "fb5937044a39556f2e241258b7c57fe09ddb4a40c33e2a80785e55cace886899"
+      }
+    },
+    "stock_input_status": "proposed-with-retained-whole-physical",
+    "physical_evidence": {
+      "bytes": 324148,
+      "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+      "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+      "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+    },
+    "physical_input": {
+      "bytes": 811030,
+      "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+      "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+      "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+    },
+    "physical_reproduction": {
+      "bytes": 48543,
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "mode": "100644",
+      "path": "scripts/qualify-source-cohort.py",
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+    },
+    "physical_result_issues": [],
+    "class_rows": [
+      {
+        "y": 114786,
+        "runs": [
+          [
+            205955,
+            205956,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 114787,
+        "runs": [
+          [
+            205955,
+            205956,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 114788,
+        "runs": [
+          [
+            205954,
+            205955,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 114861,
+        "runs": [
+          [
+            205962,
+            205963,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 114862,
+        "runs": [
+          [
+            205959,
+            205962,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 114863,
+        "runs": [
+          [
+            205960,
+            205961,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 114869,
+        "runs": [
+          [
+            206033,
+            206034,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 114870,
+        "runs": [
+          [
+            206030,
+            206031,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 114887,
+        "runs": [
+          [
+            205931,
+            205932,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 114893,
+        "runs": [
+          [
+            205927,
+            205928,
+            "mapped_land_support"
+          ]
+        ]
+      }
+    ],
+    "proposed_current_territorial_mask_country": "LAO",
+    "proposed_current_mask_source": {
+      "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/inputs/lao_admin0.geojson",
+      "bytes": 2800455,
+      "sha256": "a3065f4de59fb96e773e4853c350cd51505049c0d8f0c18253cdc3971fff663c"
+    },
+    "retained_prior_evidence_origin": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json"
+  },
+  {
+    "owner": 48373,
+    "target_id": "gb:VNM:ADM2:81297802B41294306698552",
+    "name": "An Phu",
+    "keys": [
+      {
+        "owner": 48373,
+        "y": 123052,
+        "x": 207627
+      },
+      {
+        "owner": 48373,
+        "y": 123052,
+        "x": 207628
+      },
+      {
+        "owner": 48373,
+        "y": 123052,
+        "x": 207629
+      },
+      {
+        "owner": 48373,
+        "y": 123052,
+        "x": 207630
+      },
+      {
+        "owner": 48373,
+        "y": 123053,
+        "x": 207626
+      },
+      {
+        "owner": 48373,
+        "y": 123053,
+        "x": 207627
+      }
+    ],
+    "count": 6,
+    "current_accepted_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "current_parent_id": "framework:province:an-giang:80041a5add12",
+    "current_metadata": {
+      "source_id": "gb:VNM:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "reference_year": "2020",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "District",
+      "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "81297802B41294306698552",
+      "representative_point": [
+        105.10090986336465,
+        10.8443
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:VNM:ADM1",
+      "hierarchy_overlap": 0.97552,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 4,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "64f8cfe92a8620b46a93a3115c6193b89160b1c70cafc4092de860d73cbff70a",
+      "reference_version": 3,
+      "geographic_area_code": "VIE",
+      "geographic_region_code": 41,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.51457,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "VNM-498",
+        "overlap": 0.92928
+      },
+      "regional_match": {
+        "reference_iso": "VNM",
+        "source_id": "VNM-498",
+        "overlap": 0.92928,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q881",
+      "reference_polity": "Vietnam",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "Vietnam",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "Asia",
+        "decision_index": 509,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_source_atoms": [
+      "gb:VNM:ADM2:81297802B41294306698552"
+    ],
+    "actual_observed_source_records": [
+      {
+        "source_index": 65092,
+        "family_index": 353,
+        "source_id": "gb:VNM:ADM1:63759600B46141220358660",
+        "ordinal": 0,
+        "owners": [],
+        "name": "An Giang",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65164,
+        "family_index": 354,
+        "source_id": "gb:VNM:ADM2:81297802B41294306698552",
+        "ordinal": 8,
+        "owners": [
+          48373
+        ],
+        "name": "An Phu",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "physical_classes": {
+      "inland-water": 6
+    },
+    "original_contradictions": [
+      {
+        "key": {
+          "owner": 48373,
+          "y": 123052,
+          "x": 207627
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65164
+        ]
+      },
+      {
+        "key": {
+          "owner": 48373,
+          "y": 123052,
+          "x": 207628
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65164
+        ]
+      },
+      {
+        "key": {
+          "owner": 48373,
+          "y": 123052,
+          "x": 207629
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65164
+        ]
+      },
+      {
+        "key": {
+          "owner": 48373,
+          "y": 123052,
+          "x": 207630
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65164
+        ]
+      },
+      {
+        "key": {
+          "owner": 48373,
+          "y": 123053,
+          "x": 207626
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65092,
+          65164
+        ]
+      },
+      {
+        "key": {
+          "owner": 48373,
+          "y": 123053,
+          "x": 207627
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65164
+        ]
+      }
+    ],
+    "original_whole_veto_readiness": {
+      "local_path": "vietnam-next/repair-package/next351-source-veto-readiness/source-veto-readiness.json",
+      "target_id": "gb:VNM:ADM2:81297802B41294306698552",
+      "ordered_territorial_exclusion_operand_ids": [
+        "gb:KHM:ADM1:37992800B57023840568534",
+        "retained-country-reference:ADM0_A3:KHM"
+      ],
+      "whole_stage": {
+        "bytes": 12119,
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/foreign1053/anphu1-readiness/whole-target-stage-inputs.json",
+        "sha256": "8b31d990efff3907177722c0b21b2ac474537c8954e3a39e80c00957c8df82bb"
+      }
+    },
+    "stock_input_status": "proposed-with-retained-whole-physical",
+    "physical_evidence": {
+      "bytes": 324148,
+      "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+      "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+      "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+    },
+    "physical_input": {
+      "bytes": 811030,
+      "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+      "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+      "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+    },
+    "physical_reproduction": {
+      "bytes": 48543,
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "mode": "100644",
+      "path": "scripts/qualify-source-cohort.py",
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+    },
+    "physical_result_issues": [
+      "missing_reconstruction",
+      "extra_reconstruction",
+      "contradictory_land_water_support"
+    ],
+    "class_rows": [
+      {
+        "y": 123052,
+        "runs": [
+          [
+            207627,
+            207631,
+            "mapped_inland_water_support"
+          ]
+        ]
+      },
+      {
+        "y": 123053,
+        "runs": [
+          [
+            207626,
+            207628,
+            "mapped_inland_water_support"
+          ]
+        ]
+      }
+    ],
+    "proposed_current_territorial_mask_country": "KHM",
+    "proposed_current_mask_source": {
+      "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/inputs/khm_admin0.geojson",
+      "bytes": 310214,
+      "sha256": "7f1c6a35592a7b149a0af378045675b37193401f737f22ad7677afa0206b0eb7"
+    },
+    "retained_prior_evidence_origin": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-anphu1-proposed.json"
+  },
+  {
+    "owner": 48437,
+    "target_id": "gb:VNM:ADM2:81297802B50587214410487",
+    "name": "Huyen Hong Ngu",
+    "keys": [
+      {
+        "owner": 48437,
+        "y": 123106,
+        "x": 207754
+      },
+      {
+        "owner": 48437,
+        "y": 123107,
+        "x": 207756
+      },
+      {
+        "owner": 48437,
+        "y": 123108,
+        "x": 207758
+      }
+    ],
+    "count": 3,
+    "current_accepted_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "current_parent_id": "framework:province:ong-thap:831b00388f10",
+    "current_metadata": {
+      "source_id": "gb:VNM:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "reference_year": "2020",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "District",
+      "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "81297802B50587214410487",
+      "representative_point": [
+        105.29027292191435,
+        10.804
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:VNM:ADM1",
+      "hierarchy_overlap": 0.797095,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 1,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "bb3fca9272a7cadaa43d4dd42f70144e9a7809ca5926d89d68651472975557c0",
+      "reference_version": 3,
+      "geographic_area_code": "VIE",
+      "geographic_region_code": 41,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "VNM-500",
+        "overlap": 0.772368
+      },
+      "regional_match": {
+        "reference_iso": "VNM",
+        "source_id": "VNM-500",
+        "overlap": 0.772368,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q881",
+      "reference_polity": "Vietnam",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "Vietnam",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "Asia",
+        "decision_index": 1764,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_source_atoms": [
+      "gb:VNM:ADM2:81297802B50587214410487"
+    ],
+    "actual_observed_source_records": [
+      {
+        "source_index": 65112,
+        "family_index": 353,
+        "source_id": "gb:VNM:ADM1:63759600B81354309972615",
+        "ordinal": 20,
+        "owners": [],
+        "name": "Đồng Tháp",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65436,
+        "family_index": 354,
+        "source_id": "gb:VNM:ADM2:81297802B50587214410487",
+        "ordinal": 280,
+        "owners": [
+          48437
+        ],
+        "name": "Huyen Hong Ngu",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "physical_classes": {
+      "land": 3
+    },
+    "original_contradictions": [
+      {
+        "key": {
+          "owner": 48437,
+          "y": 123106,
+          "x": 207754
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65112,
+          65436
+        ]
+      },
+      {
+        "key": {
+          "owner": 48437,
+          "y": 123107,
+          "x": 207756
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65112,
+          65436
+        ]
+      },
+      {
+        "key": {
+          "owner": 48437,
+          "y": 123108,
+          "x": 207758
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65112,
+          65436
+        ]
+      }
+    ],
+    "stock_input_status": "held-missing-whole-target-physical-receipt",
+    "missing_fact": "Exact whole-target physical result and matching consumed/selected original stage for this HuyenHongNgu member; sourcequalification physical=land strings cannot substitute."
+  },
+  {
+    "owner": 48532,
+    "target_id": "gb:VNM:ADM2:81297802B63375818356773",
+    "name": "Bo Trach",
+    "keys": [
+      {
+        "owner": 48532,
+        "y": 118321,
+        "x": 208469
+      }
+    ],
+    "count": 1,
+    "current_accepted_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "current_parent_id": "framework:province:quang-binh:b9a88dc32933",
+    "current_metadata": {
+      "source_id": "gb:VNM:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "reference_year": "2020",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "District",
+      "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "81297802B63375818356773",
+      "representative_point": [
+        106.26703672039244,
+        17.4917
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:VNM:ADM1",
+      "hierarchy_overlap": 0.992722,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 1,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "5bc36c7ea7275f7639f594270a3bf054cd0b5d0c5604e3fc78db62dd86d433f0",
+      "reference_version": 3,
+      "geographic_area_code": "VIE",
+      "geographic_region_code": 41,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.95471,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "VNM-476",
+        "overlap": 0.989239
+      },
+      "regional_match": {
+        "reference_iso": "VNM",
+        "source_id": "VNM-476",
+        "overlap": 0.989239,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q881",
+      "reference_polity": "Vietnam",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "Vietnam",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "Asia",
+        "decision_index": 1898,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_source_atoms": [
+      "gb:VNM:ADM2:81297802B63375818356773"
+    ],
+    "actual_observed_source_records": [
+      {
+        "source_index": 65138,
+        "family_index": 353,
+        "source_id": "gb:VNM:ADM1:63759600B63586366081005",
+        "ordinal": 46,
+        "owners": [],
+        "name": "Quảng Bình",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65221,
+        "family_index": 354,
+        "source_id": "gb:VNM:ADM2:81297802B63375818356773",
+        "ordinal": 65,
+        "owners": [
+          48532
+        ],
+        "name": "Bo Trach",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "physical_classes": {
+      "land": 1
+    },
+    "original_contradictions": [
+      {
+        "key": {
+          "owner": 48532,
+          "y": 118321,
+          "x": 208469
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65138,
+          65221
+        ]
+      }
+    ],
+    "original_whole_veto_readiness": {
+      "local_path": "vietnam-next/repair-package/next351-source-veto-readiness/source-veto-readiness.json",
+      "target_id": "gb:VNM:ADM2:81297802B63375818356773",
+      "ordered_territorial_exclusion_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "whole_stage": {
+        "bytes": 34150,
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/reference1588/cell-hold-audit/botrach41-readiness/whole-target-stage-inputs.json",
+        "sha256": "d6700e9c6cc0212223c8902e2c327f30f89b30c89af8f47b0b462b4920ea8706"
+      }
+    },
+    "stock_input_status": "proposed-with-retained-whole-physical",
+    "physical_evidence": {
+      "bytes": 324148,
+      "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+      "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+      "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+    },
+    "physical_input": {
+      "bytes": 811030,
+      "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+      "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+      "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+    },
+    "physical_reproduction": {
+      "bytes": 48543,
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "mode": "100644",
+      "path": "scripts/qualify-source-cohort.py",
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+    },
+    "physical_result_issues": [
+      "extra_reconstruction"
+    ],
+    "class_rows": [
+      {
+        "y": 118321,
+        "runs": [
+          [
+            208469,
+            208470,
+            "mapped_land_support"
+          ]
+        ]
+      }
+    ],
+    "proposed_current_territorial_mask_country": "LAO",
+    "proposed_current_mask_source": {
+      "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/inputs/lao_admin0.geojson",
+      "bytes": 2800455,
+      "sha256": "a3065f4de59fb96e773e4853c350cd51505049c0d8f0c18253cdc3971fff663c"
+    },
+    "retained_prior_evidence_origin": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-botrach41-proposed.json"
+  },
+  {
+    "owner": 48556,
+    "target_id": "gb:VNM:ADM2:81297802B66107700635107",
+    "name": "Vu Quang",
+    "keys": [
+      {
+        "owner": 48556,
+        "y": 117626,
+        "x": 207849
+      },
+      {
+        "owner": 48556,
+        "y": 117629,
+        "x": 207848
+      },
+      {
+        "owner": 48556,
+        "y": 117632,
+        "x": 207847
+      }
+    ],
+    "count": 3,
+    "current_accepted_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "current_parent_id": "framework:province:ha-tinh:cef6a0aaa43c",
+    "current_metadata": {
+      "source_id": "gb:VNM:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "reference_year": "2020",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "District",
+      "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "81297802B66107700635107",
+      "representative_point": [
+        105.4554237570028,
+        18.319200000000002
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:VNM:ADM1",
+      "hierarchy_overlap": 0.97837,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 2,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "a2eec3e01c2e308be3213bf9cd5a7d004dff2e4e676809d06c33e16b8e755b28",
+      "reference_version": 3,
+      "geographic_area_code": "VIE",
+      "geographic_region_code": 41,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.85909,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "VNM-474",
+        "overlap": 0.969801
+      },
+      "regional_match": {
+        "reference_iso": "VNM",
+        "source_id": "VNM-474",
+        "overlap": 0.969801,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q881",
+      "reference_polity": "Vietnam",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "Vietnam",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "Asia",
+        "decision_index": 1017,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_source_atoms": [
+      "gb:VNM:ADM2:81297802B66107700635107"
+    ],
+    "actual_observed_source_records": [
+      {
+        "source_index": 65117,
+        "family_index": 353,
+        "source_id": "gb:VNM:ADM1:63759600B52412632417993",
+        "ordinal": 25,
+        "owners": [],
+        "name": "Hà Tĩnh",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65839,
+        "family_index": 354,
+        "source_id": "gb:VNM:ADM2:81297802B66107700635107",
+        "ordinal": 683,
+        "owners": [
+          48556
+        ],
+        "name": "Vu Quang",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "physical_classes": {
+      "land": 3
+    },
+    "original_contradictions": [
+      {
+        "key": {
+          "owner": 48556,
+          "y": 117626,
+          "x": 207849
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65117,
+          65839
+        ]
+      },
+      {
+        "key": {
+          "owner": 48556,
+          "y": 117629,
+          "x": 207848
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65117,
+          65839
+        ]
+      },
+      {
+        "key": {
+          "owner": 48556,
+          "y": 117632,
+          "x": 207847
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65117,
+          65839
+        ]
+      }
+    ],
+    "original_whole_veto_readiness": {
+      "local_path": "vietnam-next/repair-package/next351-source-veto-readiness/source-veto-readiness.json",
+      "target_id": "gb:VNM:ADM2:81297802B66107700635107",
+      "ordered_territorial_exclusion_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "whole_stage": {
+        "bytes": 14115,
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/reference1588/cell-hold-audit/vuquang1-readiness/original-stage-inputs.json",
+        "sha256": "c6c3e5d347a6ef910667c77fe07d7c86759caca3f35fc241b7e9400a8e7db3fc"
+      }
+    },
+    "stock_input_status": "proposed-with-retained-whole-physical",
+    "physical_evidence": {
+      "bytes": 324148,
+      "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+      "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+      "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+    },
+    "physical_input": {
+      "bytes": 811030,
+      "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+      "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+      "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+    },
+    "physical_reproduction": {
+      "bytes": 48543,
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "mode": "100644",
+      "path": "scripts/qualify-source-cohort.py",
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+    },
+    "physical_result_issues": [],
+    "class_rows": [
+      {
+        "y": 117626,
+        "runs": [
+          [
+            207849,
+            207850,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 117629,
+        "runs": [
+          [
+            207848,
+            207849,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 117632,
+        "runs": [
+          [
+            207847,
+            207848,
+            "mapped_land_support"
+          ]
+        ]
+      }
+    ],
+    "proposed_current_territorial_mask_country": "LAO",
+    "proposed_current_mask_source": {
+      "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/inputs/lao_admin0.geojson",
+      "bytes": 2800455,
+      "sha256": "a3065f4de59fb96e773e4853c350cd51505049c0d8f0c18253cdc3971fff663c"
+    },
+    "retained_prior_evidence_origin": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json"
+  },
+  {
+    "owner": 48575,
+    "target_id": "gb:VNM:ADM2:81297802B68440719308655",
+    "name": "Tan Chau",
+    "keys": [
+      {
+        "owner": 48575,
+        "y": 122483,
+        "x": 208456
+      },
+      {
+        "owner": 48575,
+        "y": 122483,
+        "x": 208457
+      },
+      {
+        "owner": 48575,
+        "y": 122483,
+        "x": 208458
+      },
+      {
+        "owner": 48575,
+        "y": 122484,
+        "x": 208460
+      },
+      {
+        "owner": 48575,
+        "y": 122484,
+        "x": 208461
+      },
+      {
+        "owner": 48575,
+        "y": 122485,
+        "x": 208463
+      },
+      {
+        "owner": 48575,
+        "y": 122496,
+        "x": 208472
+      },
+      {
+        "owner": 48575,
+        "y": 122497,
+        "x": 208472
+      },
+      {
+        "owner": 48575,
+        "y": 122500,
+        "x": 208474
+      },
+      {
+        "owner": 48575,
+        "y": 122501,
+        "x": 208475
+      },
+      {
+        "owner": 48575,
+        "y": 122502,
+        "x": 208477
+      },
+      {
+        "owner": 48575,
+        "y": 122503,
+        "x": 208478
+      },
+      {
+        "owner": 48575,
+        "y": 122504,
+        "x": 208479
+      },
+      {
+        "owner": 48575,
+        "y": 122505,
+        "x": 208480
+      },
+      {
+        "owner": 48575,
+        "y": 122506,
+        "x": 208481
+      },
+      {
+        "owner": 48575,
+        "y": 122508,
+        "x": 208484
+      },
+      {
+        "owner": 48575,
+        "y": 122509,
+        "x": 208485
+      },
+      {
+        "owner": 48575,
+        "y": 122510,
+        "x": 208486
+      }
+    ],
+    "count": 18,
+    "current_accepted_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "current_parent_id": "framework:province:tay-ninh:ce04ab3eb69e",
+    "current_metadata": {
+      "source_id": "gb:VNM:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "reference_year": "2020",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "District",
+      "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "81297802B68440719308655",
+      "representative_point": [
+        106.30030979133227,
+        11.59095
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:VNM:ADM1",
+      "hierarchy_overlap": 0.983282,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 1,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "e196060e5d8400bb31c6ce3cc0ba4370db1317b413424fa94b7b0aac23793f88",
+      "reference_version": 3,
+      "geographic_area_code": "VIE",
+      "geographic_region_code": 41,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.99151,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "VNM-444",
+        "overlap": 0.967412
+      },
+      "regional_match": {
+        "reference_iso": "VNM",
+        "source_id": "VNM-444",
+        "overlap": 0.967412,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q881",
+      "reference_polity": "Vietnam",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "Vietnam",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "Asia",
+        "decision_index": 2214,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_source_atoms": [
+      "gb:VNM:ADM2:81297802B68440719308655"
+    ],
+    "actual_observed_source_records": [
+      {
+        "source_index": 65145,
+        "family_index": 353,
+        "source_id": "gb:VNM:ADM1:63759600B24834630697040",
+        "ordinal": 53,
+        "owners": [],
+        "name": "Tây Ninh",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65688,
+        "family_index": 354,
+        "source_id": "gb:VNM:ADM2:81297802B68440719308655",
+        "ordinal": 532,
+        "owners": [
+          48575
+        ],
+        "name": "Tan Chau",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "physical_classes": {
+      "land": 18
+    },
+    "original_contradictions": [
+      {
+        "key": {
+          "owner": 48575,
+          "y": 122483,
+          "x": 208456
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65688
+        ]
+      },
+      {
+        "key": {
+          "owner": 48575,
+          "y": 122483,
+          "x": 208457
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65688
+        ]
+      },
+      {
+        "key": {
+          "owner": 48575,
+          "y": 122483,
+          "x": 208458
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65688
+        ]
+      },
+      {
+        "key": {
+          "owner": 48575,
+          "y": 122484,
+          "x": 208460
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65688
+        ]
+      },
+      {
+        "key": {
+          "owner": 48575,
+          "y": 122484,
+          "x": 208461
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65688
+        ]
+      },
+      {
+        "key": {
+          "owner": 48575,
+          "y": 122485,
+          "x": 208463
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65145,
+          65688
+        ]
+      },
+      {
+        "key": {
+          "owner": 48575,
+          "y": 122496,
+          "x": 208472
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65145,
+          65688
+        ]
+      },
+      {
+        "key": {
+          "owner": 48575,
+          "y": 122497,
+          "x": 208472
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65145,
+          65688
+        ]
+      },
+      {
+        "key": {
+          "owner": 48575,
+          "y": 122500,
+          "x": 208474
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65145,
+          65688
+        ]
+      },
+      {
+        "key": {
+          "owner": 48575,
+          "y": 122501,
+          "x": 208475
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65145,
+          65688
+        ]
+      },
+      {
+        "key": {
+          "owner": 48575,
+          "y": 122502,
+          "x": 208477
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65145,
+          65688
+        ]
+      },
+      {
+        "key": {
+          "owner": 48575,
+          "y": 122503,
+          "x": 208478
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65145,
+          65688
+        ]
+      },
+      {
+        "key": {
+          "owner": 48575,
+          "y": 122504,
+          "x": 208479
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65145,
+          65688
+        ]
+      },
+      {
+        "key": {
+          "owner": 48575,
+          "y": 122505,
+          "x": 208480
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65145,
+          65688
+        ]
+      },
+      {
+        "key": {
+          "owner": 48575,
+          "y": 122506,
+          "x": 208481
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65145,
+          65688
+        ]
+      },
+      {
+        "key": {
+          "owner": 48575,
+          "y": 122508,
+          "x": 208484
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65145,
+          65688
+        ]
+      },
+      {
+        "key": {
+          "owner": 48575,
+          "y": 122509,
+          "x": 208485
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65145,
+          65688
+        ]
+      },
+      {
+        "key": {
+          "owner": 48575,
+          "y": 122510,
+          "x": 208486
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65145,
+          65688
+        ]
+      }
+    ],
+    "stock_input_status": "proposed-with-retained-whole-physical",
+    "physical_evidence": {
+      "commit": "ab2b03a95de1c02c0a3bb179b688541a33340b16",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-002/missing235/physical-001/whole-target-support.json",
+      "mode": "100644",
+      "git_blob_oid": "8d50335aad2d0c39f7e865455c954cdeca085766",
+      "bytes": 104970,
+      "sha256": "4ade7d21d33ed399d1cf234396fd426ca5cb37d7e8a7a41c099b71dadefbd405"
+    },
+    "physical_input": {
+      "commit": "5eb6885f18a9d267161f2bd9dd236fd676e7cbbe",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-002/missing235/whole-target-stage-inputs.json",
+      "git_blob_oid": "172fc8bb9c9934eb642f80f7bd138a43411a790f",
+      "bytes": 280465,
+      "sha256": "307048eecf7b7dd7540c8fccf372c9a936fad23f02170afa28eadc81f7e25b2a"
+    },
+    "physical_reproduction": {
+      "bytes": 48543,
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "mode": "100644",
+      "path": "scripts/qualify-source-cohort.py",
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+    },
+    "physical_result_issues": [],
+    "class_rows": [
+      {
+        "y": 122483,
+        "runs": [
+          [
+            208456,
+            208459,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 122484,
+        "runs": [
+          [
+            208460,
+            208462,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 122485,
+        "runs": [
+          [
+            208463,
+            208464,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 122496,
+        "runs": [
+          [
+            208472,
+            208473,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 122497,
+        "runs": [
+          [
+            208472,
+            208473,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 122500,
+        "runs": [
+          [
+            208474,
+            208475,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 122501,
+        "runs": [
+          [
+            208475,
+            208476,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 122502,
+        "runs": [
+          [
+            208477,
+            208478,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 122503,
+        "runs": [
+          [
+            208478,
+            208479,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 122504,
+        "runs": [
+          [
+            208479,
+            208480,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 122505,
+        "runs": [
+          [
+            208480,
+            208481,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 122506,
+        "runs": [
+          [
+            208481,
+            208482,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 122508,
+        "runs": [
+          [
+            208484,
+            208485,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 122509,
+        "runs": [
+          [
+            208485,
+            208486,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 122510,
+        "runs": [
+          [
+            208486,
+            208487,
+            "mapped_land_support"
+          ]
+        ]
+      }
+    ],
+    "proposed_current_territorial_mask_country": "KHM",
+    "proposed_current_mask_source": {
+      "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/inputs/khm_admin0.geojson",
+      "bytes": 310214,
+      "sha256": "7f1c6a35592a7b149a0af378045675b37193401f737f22ad7677afa0206b0eb7"
+    },
+    "retained_prior_evidence_origin": "vietnam-next/physical235/actual-products/whole-target-support.json"
+  },
+  {
+    "owner": 48596,
+    "target_id": "gb:VNM:ADM2:81297802B72423367852086",
+    "name": "Nam Giang",
+    "keys": [
+      {
+        "owner": 48596,
+        "y": 119659,
+        "x": 209303
+      },
+      {
+        "owner": 48596,
+        "y": 119659,
+        "x": 209304
+      },
+      {
+        "owner": 48596,
+        "y": 119660,
+        "x": 209303
+      },
+      {
+        "owner": 48596,
+        "y": 119486,
+        "x": 209188
+      }
+    ],
+    "count": 4,
+    "current_accepted_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "current_parent_id": "framework:province:quang-nam:a24d2f2e2dbb",
+    "current_metadata": {
+      "source_id": "gb:VNM:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "reference_year": "2020",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "District",
+      "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "81297802B72423367852086",
+      "representative_point": [
+        107.60969852362206,
+        15.60875
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:VNM:ADM1",
+      "hierarchy_overlap": 0.975474,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 1,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "43c01f1edb1e103d8245a6fd481c6473d516e7d97a5590b52130f184961f8ad2",
+      "reference_version": 3,
+      "geographic_area_code": "VIE",
+      "geographic_region_code": 41,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.95311,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "VNM-487",
+        "overlap": 0.992277
+      },
+      "regional_match": {
+        "reference_iso": "VNM",
+        "source_id": "VNM-487",
+        "overlap": 0.992277,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q881",
+      "reference_polity": "Vietnam",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "Vietnam",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "Asia",
+        "decision_index": 1899,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_source_atoms": [
+      "gb:VNM:ADM2:81297802B72423367852086"
+    ],
+    "actual_observed_source_records": [
+      {
+        "source_index": 41316,
+        "family_index": 185,
+        "source_id": "gb:LAO:ADM1:31783359B64397225362620",
+        "ordinal": 16,
+        "owners": [],
+        "name": "Xekong",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65543,
+        "family_index": 354,
+        "source_id": "gb:VNM:ADM2:81297802B72423367852086",
+        "ordinal": 387,
+        "owners": [
+          48596
+        ],
+        "name": "Nam Giang",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "physical_classes": {
+      "land": 4
+    },
+    "original_contradictions": [
+      {
+        "key": {
+          "owner": 48596,
+          "y": 119659,
+          "x": 209303
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65543
+        ]
+      },
+      {
+        "key": {
+          "owner": 48596,
+          "y": 119659,
+          "x": 209304
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65543
+        ]
+      },
+      {
+        "key": {
+          "owner": 48596,
+          "y": 119660,
+          "x": 209303
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65543
+        ]
+      },
+      {
+        "key": {
+          "owner": 48596,
+          "y": 119486,
+          "x": 209188
+        },
+        "flags": [
+          "foreign-source-family"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "VNM"
+        ],
+        "actual_sids": [
+          41316,
+          65543
+        ]
+      }
+    ],
+    "original_whole_veto_readiness": {
+      "local_path": "vietnam-next/repair-package/next351-source-veto-readiness/source-veto-readiness.json",
+      "target_id": "gb:VNM:ADM2:81297802B72423367852086",
+      "ordered_territorial_exclusion_operand_ids": [
+        "gb:LAO:ADM1:31783359B64397225362620",
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "whole_stage": {
+        "bytes": 52272,
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/foreign1053/namgiang37-readiness/whole-target-stage-inputs.json",
+        "sha256": "b275a8ec0e225b6efd54460f88fb8b1fef3a8ba15a0f43717c16d3c69ad0944a"
+      }
+    },
+    "stock_input_status": "proposed-with-retained-whole-physical",
+    "physical_evidence": {
+      "bytes": 324148,
+      "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+      "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+      "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+    },
+    "physical_input": {
+      "bytes": 811030,
+      "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+      "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+      "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+    },
+    "physical_reproduction": {
+      "bytes": 48543,
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "mode": "100644",
+      "path": "scripts/qualify-source-cohort.py",
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+    },
+    "physical_result_issues": [],
+    "class_rows": [
+      {
+        "y": 119486,
+        "runs": [
+          [
+            209188,
+            209189,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 119659,
+        "runs": [
+          [
+            209303,
+            209305,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 119660,
+        "runs": [
+          [
+            209303,
+            209304,
+            "mapped_land_support"
+          ]
+        ]
+      }
+    ],
+    "proposed_current_territorial_mask_country": "LAO",
+    "proposed_current_mask_source": {
+      "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/inputs/lao_admin0.geojson",
+      "bytes": 2800455,
+      "sha256": "a3065f4de59fb96e773e4853c350cd51505049c0d8f0c18253cdc3971fff663c"
+    },
+    "retained_prior_evidence_origin": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json"
+  },
+  {
+    "owner": 48597,
+    "target_id": "gb:VNM:ADM2:81297802B72565329345275",
+    "name": "Muong Lat",
+    "keys": [
+      {
+        "owner": 48597,
+        "y": 115834,
+        "x": 207102
+      },
+      {
+        "owner": 48597,
+        "y": 115834,
+        "x": 207103
+      },
+      {
+        "owner": 48597,
+        "y": 115834,
+        "x": 207104
+      },
+      {
+        "owner": 48597,
+        "y": 115835,
+        "x": 207102
+      },
+      {
+        "owner": 48597,
+        "y": 115835,
+        "x": 207103
+      },
+      {
+        "owner": 48597,
+        "y": 115835,
+        "x": 207104
+      },
+      {
+        "owner": 48597,
+        "y": 115835,
+        "x": 207105
+      },
+      {
+        "owner": 48597,
+        "y": 115836,
+        "x": 207102
+      },
+      {
+        "owner": 48597,
+        "y": 115836,
+        "x": 207103
+      },
+      {
+        "owner": 48597,
+        "y": 115836,
+        "x": 207104
+      },
+      {
+        "owner": 48597,
+        "y": 115837,
+        "x": 207104
+      },
+      {
+        "owner": 48597,
+        "y": 115843,
+        "x": 207101
+      },
+      {
+        "owner": 48597,
+        "y": 115844,
+        "x": 207100
+      },
+      {
+        "owner": 48597,
+        "y": 115845,
+        "x": 207099
+      },
+      {
+        "owner": 48597,
+        "y": 115846,
+        "x": 207097
+      },
+      {
+        "owner": 48597,
+        "y": 115846,
+        "x": 207098
+      },
+      {
+        "owner": 48597,
+        "y": 115847,
+        "x": 207096
+      },
+      {
+        "owner": 48597,
+        "y": 115848,
+        "x": 207094
+      },
+      {
+        "owner": 48597,
+        "y": 115848,
+        "x": 207095
+      },
+      {
+        "owner": 48597,
+        "y": 115849,
+        "x": 207094
+      },
+      {
+        "owner": 48597,
+        "y": 115898,
+        "x": 207204
+      },
+      {
+        "owner": 48597,
+        "y": 115918,
+        "x": 207177
+      },
+      {
+        "owner": 48597,
+        "y": 115919,
+        "x": 207176
+      },
+      {
+        "owner": 48597,
+        "y": 115920,
+        "x": 207174
+      },
+      {
+        "owner": 48597,
+        "y": 115921,
+        "x": 207173
+      },
+      {
+        "owner": 48597,
+        "y": 115922,
+        "x": 207172
+      },
+      {
+        "owner": 48597,
+        "y": 115923,
+        "x": 207170
+      },
+      {
+        "owner": 48597,
+        "y": 115924,
+        "x": 207169
+      }
+    ],
+    "count": 28,
+    "current_accepted_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "current_parent_id": "framework:province:thanh-hoa:d4ffcc7255ac",
+    "current_metadata": {
+      "source_id": "gb:VNM:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "reference_year": "2020",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "District",
+      "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "81297802B72565329345275",
+      "representative_point": [
+        104.66738604972375,
+        20.5122
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:VNM:ADM1",
+      "hierarchy_overlap": 0.897632,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 2,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "7f5e129dfeab7baec5bd403b9b98793e1418c86eba103d206979bf18a537f862",
+      "reference_version": 3,
+      "geographic_area_code": "VIE",
+      "geographic_region_code": 41,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.92484,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "VNM-456",
+        "overlap": 0.878645
+      },
+      "regional_match": {
+        "reference_iso": "VNM",
+        "source_id": "VNM-456",
+        "overlap": 0.878645,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q881",
+      "reference_polity": "Vietnam",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "Vietnam",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "Asia",
+        "decision_index": 2229,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_source_atoms": [
+      "gb:VNM:ADM2:81297802B72565329345275"
+    ],
+    "actual_observed_source_records": [
+      {
+        "source_index": 65148,
+        "family_index": 353,
+        "source_id": "gb:VNM:ADM1:63759600B30623332474263",
+        "ordinal": 56,
+        "owners": [],
+        "name": "Thanh Hóa",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65527,
+        "family_index": 354,
+        "source_id": "gb:VNM:ADM2:81297802B72565329345275",
+        "ordinal": 371,
+        "owners": [
+          48597
+        ],
+        "name": "Muong Lat",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "physical_classes": {
+      "land": 28
+    },
+    "original_contradictions": [
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115834,
+          "x": 207102
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115834,
+          "x": 207103
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115834,
+          "x": 207104
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115835,
+          "x": 207102
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115835,
+          "x": 207103
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115835,
+          "x": 207104
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115835,
+          "x": 207105
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115836,
+          "x": 207102
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115836,
+          "x": 207103
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115836,
+          "x": 207104
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115837,
+          "x": 207104
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115843,
+          "x": 207101
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115844,
+          "x": 207100
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115845,
+          "x": 207099
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115846,
+          "x": 207097
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115846,
+          "x": 207098
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115847,
+          "x": 207096
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115848,
+          "x": 207094
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115848,
+          "x": 207095
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115849,
+          "x": 207094
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115898,
+          "x": 207204
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65148,
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115918,
+          "x": 207177
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65148,
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115919,
+          "x": 207176
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65148,
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115920,
+          "x": 207174
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65148,
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115921,
+          "x": 207173
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115922,
+          "x": 207172
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115923,
+          "x": 207170
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      },
+      {
+        "key": {
+          "owner": 48597,
+          "y": 115924,
+          "x": 207169
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65527
+        ]
+      }
+    ],
+    "original_whole_veto_readiness": {
+      "local_path": "vietnam-next/repair-package/next351-source-veto-readiness/source-veto-readiness.json",
+      "target_id": "gb:VNM:ADM2:81297802B72565329345275",
+      "ordered_territorial_exclusion_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "whole_stage": {
+        "bytes": 33939,
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/reference1588/cell-hold-audit/muonglat18-readiness/whole-target-stage-inputs.json",
+        "sha256": "9d76c1190c782da173246cf45019b0f73179a5cbc3c44949dc95966bfbdb443b"
+      }
+    },
+    "stock_input_status": "proposed-with-retained-whole-physical",
+    "physical_evidence": {
+      "bytes": 324148,
+      "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+      "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+      "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+    },
+    "physical_input": {
+      "bytes": 811030,
+      "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+      "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+      "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+    },
+    "physical_reproduction": {
+      "bytes": 48543,
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "mode": "100644",
+      "path": "scripts/qualify-source-cohort.py",
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+    },
+    "physical_result_issues": [],
+    "class_rows": [
+      {
+        "y": 115834,
+        "runs": [
+          [
+            207102,
+            207105,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115835,
+        "runs": [
+          [
+            207102,
+            207106,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115836,
+        "runs": [
+          [
+            207102,
+            207105,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115837,
+        "runs": [
+          [
+            207104,
+            207105,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115843,
+        "runs": [
+          [
+            207101,
+            207102,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115844,
+        "runs": [
+          [
+            207100,
+            207101,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115845,
+        "runs": [
+          [
+            207099,
+            207100,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115846,
+        "runs": [
+          [
+            207097,
+            207099,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115847,
+        "runs": [
+          [
+            207096,
+            207097,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115848,
+        "runs": [
+          [
+            207094,
+            207096,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115849,
+        "runs": [
+          [
+            207094,
+            207095,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115898,
+        "runs": [
+          [
+            207204,
+            207205,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115918,
+        "runs": [
+          [
+            207177,
+            207178,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115919,
+        "runs": [
+          [
+            207176,
+            207177,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115920,
+        "runs": [
+          [
+            207174,
+            207175,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115921,
+        "runs": [
+          [
+            207173,
+            207174,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115922,
+        "runs": [
+          [
+            207172,
+            207173,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115923,
+        "runs": [
+          [
+            207170,
+            207171,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115924,
+        "runs": [
+          [
+            207169,
+            207170,
+            "mapped_land_support"
+          ]
+        ]
+      }
+    ],
+    "proposed_current_territorial_mask_country": "LAO",
+    "proposed_current_mask_source": {
+      "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/inputs/lao_admin0.geojson",
+      "bytes": 2800455,
+      "sha256": "a3065f4de59fb96e773e4853c350cd51505049c0d8f0c18253cdc3971fff663c"
+    },
+    "retained_prior_evidence_origin": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json"
+  },
+  {
+    "owner": 48599,
+    "target_id": "gb:VNM:ADM2:81297802B72882386082996",
+    "name": "Thuong Xuan",
+    "keys": [
+      {
+        "owner": 48599,
+        "y": 116207,
+        "x": 207487
+      },
+      {
+        "owner": 48599,
+        "y": 116207,
+        "x": 207488
+      },
+      {
+        "owner": 48599,
+        "y": 116208,
+        "x": 207487
+      }
+    ],
+    "count": 3,
+    "current_accepted_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "current_parent_id": "framework:province:thanh-hoa:d4ffcc7255ac",
+    "current_metadata": {
+      "source_id": "gb:VNM:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "reference_year": "2020",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "District",
+      "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "81297802B72882386082996",
+      "representative_point": [
+        105.27289144518272,
+        19.90795
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:VNM:ADM1",
+      "hierarchy_overlap": 0.903604,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 1,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "fd68dcf36bb075202083e58bc67e52b846b922a9e82682684da655225390592a",
+      "reference_version": 3,
+      "geographic_area_code": "VIE",
+      "geographic_region_code": 41,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.96944,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "VNM-456",
+        "overlap": 0.959731
+      },
+      "regional_match": {
+        "reference_iso": "VNM",
+        "source_id": "VNM-456",
+        "overlap": 0.959731,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q881",
+      "reference_polity": "Vietnam",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "Vietnam",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "Asia",
+        "decision_index": 2229,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_source_atoms": [
+      "gb:VNM:ADM2:81297802B72882386082996"
+    ],
+    "actual_observed_source_records": [
+      {
+        "source_index": 65133,
+        "family_index": 353,
+        "source_id": "gb:VNM:ADM1:63759600B83996903780984",
+        "ordinal": 41,
+        "owners": [],
+        "name": "Nghệ An",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65760,
+        "family_index": 354,
+        "source_id": "gb:VNM:ADM2:81297802B72882386082996",
+        "ordinal": 604,
+        "owners": [
+          48599
+        ],
+        "name": "Thuong Xuan",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "physical_classes": {
+      "land": 3
+    },
+    "original_contradictions": [
+      {
+        "key": {
+          "owner": 48599,
+          "y": 116207,
+          "x": 207487
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65133,
+          65760
+        ]
+      },
+      {
+        "key": {
+          "owner": 48599,
+          "y": 116207,
+          "x": 207488
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65133,
+          65760
+        ]
+      },
+      {
+        "key": {
+          "owner": 48599,
+          "y": 116208,
+          "x": 207487
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65133,
+          65760
+        ]
+      }
+    ],
+    "original_whole_veto_readiness": {
+      "local_path": "vietnam-next/repair-package/next351-source-veto-readiness/source-veto-readiness.json",
+      "target_id": "gb:VNM:ADM2:81297802B72882386082996",
+      "ordered_territorial_exclusion_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "whole_stage": {
+        "bytes": 15329,
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/reference1588/cell-hold-audit/thuongxuan13-readiness/original-stage-inputs.json",
+        "sha256": "cc2ee94e82a29144cf43e5a63f5fc9bd7cb48bf9c13960ae908a4a321fbe8eae"
+      }
+    },
+    "stock_input_status": "proposed-with-retained-whole-physical",
+    "physical_evidence": {
+      "bytes": 324148,
+      "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+      "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+      "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+    },
+    "physical_input": {
+      "bytes": 811030,
+      "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+      "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+      "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+    },
+    "physical_reproduction": {
+      "bytes": 48543,
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "mode": "100644",
+      "path": "scripts/qualify-source-cohort.py",
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+    },
+    "physical_result_issues": [],
+    "class_rows": [
+      {
+        "y": 116207,
+        "runs": [
+          [
+            207487,
+            207489,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 116208,
+        "runs": [
+          [
+            207487,
+            207488,
+            "mapped_land_support"
+          ]
+        ]
+      }
+    ],
+    "proposed_current_territorial_mask_country": "LAO",
+    "proposed_current_mask_source": {
+      "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/inputs/lao_admin0.geojson",
+      "bytes": 2800455,
+      "sha256": "a3065f4de59fb96e773e4853c350cd51505049c0d8f0c18253cdc3971fff663c"
+    },
+    "retained_prior_evidence_origin": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json"
+  },
+  {
+    "owner": 48661,
+    "target_id": "gb:VNM:ADM2:81297802B81765499113898",
+    "name": "Quan Son",
+    "keys": [
+      {
+        "owner": 48661,
+        "y": 115954,
+        "x": 207270
+      },
+      {
+        "owner": 48661,
+        "y": 115966,
+        "x": 207270
+      },
+      {
+        "owner": 48661,
+        "y": 115967,
+        "x": 207270
+      },
+      {
+        "owner": 48661,
+        "y": 115968,
+        "x": 207270
+      },
+      {
+        "owner": 48661,
+        "y": 116021,
+        "x": 207266
+      },
+      {
+        "owner": 48661,
+        "y": 116097,
+        "x": 207476
+      }
+    ],
+    "count": 6,
+    "current_accepted_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "current_parent_id": "framework:province:thanh-hoa:d4ffcc7255ac",
+    "current_metadata": {
+      "source_id": "gb:VNM:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "reference_year": "2020",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "District",
+      "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "81297802B81765499113898",
+      "representative_point": [
+        104.82611893831975,
+        20.25385
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:VNM:ADM1",
+      "hierarchy_overlap": 0.876427,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 2,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "345ce02bbf203c5470d32d087cf64db75ae18564a9bc3d99c39eaf6c98606881",
+      "reference_version": 3,
+      "geographic_area_code": "VIE",
+      "geographic_region_code": 41,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.69678,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "VNM-456",
+        "overlap": 0.834853
+      },
+      "regional_match": {
+        "reference_iso": "VNM",
+        "source_id": "VNM-456",
+        "overlap": 0.834853,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q881",
+      "reference_polity": "Vietnam",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "Vietnam",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "Asia",
+        "decision_index": 2229,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_source_atoms": [
+      "gb:VNM:ADM2:81297802B81765499113898"
+    ],
+    "actual_observed_source_records": [
+      {
+        "source_index": 65148,
+        "family_index": 353,
+        "source_id": "gb:VNM:ADM1:63759600B30623332474263",
+        "ordinal": 56,
+        "owners": [],
+        "name": "Thanh Hóa",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65633,
+        "family_index": 354,
+        "source_id": "gb:VNM:ADM2:81297802B81765499113898",
+        "ordinal": 477,
+        "owners": [
+          48661
+        ],
+        "name": "Quan Son",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "physical_classes": {
+      "land": 6
+    },
+    "original_contradictions": [
+      {
+        "key": {
+          "owner": 48661,
+          "y": 115954,
+          "x": 207270
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65148,
+          65633
+        ]
+      },
+      {
+        "key": {
+          "owner": 48661,
+          "y": 115966,
+          "x": 207270
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65148,
+          65633
+        ]
+      },
+      {
+        "key": {
+          "owner": 48661,
+          "y": 115967,
+          "x": 207270
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65148,
+          65633
+        ]
+      },
+      {
+        "key": {
+          "owner": 48661,
+          "y": 115968,
+          "x": 207270
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65148,
+          65633
+        ]
+      },
+      {
+        "key": {
+          "owner": 48661,
+          "y": 116021,
+          "x": 207266
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65633
+        ]
+      },
+      {
+        "key": {
+          "owner": 48661,
+          "y": 116097,
+          "x": 207476
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65633
+        ]
+      }
+    ],
+    "original_whole_veto_readiness": {
+      "local_path": "vietnam-next/repair-package/next351-source-veto-readiness/source-veto-readiness.json",
+      "target_id": "gb:VNM:ADM2:81297802B81765499113898",
+      "ordered_territorial_exclusion_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "whole_stage": {
+        "bytes": 38439,
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/reference1588/cell-hold-audit/quanson7-readiness/whole-target-stage-inputs.json",
+        "sha256": "df0050a0eb3c51fa443ac1c8c4f7c436a02c8f3209729c9874d3167a3bcfa11f"
+      }
+    },
+    "stock_input_status": "proposed-with-retained-whole-physical",
+    "physical_evidence": {
+      "bytes": 324148,
+      "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+      "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+      "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+    },
+    "physical_input": {
+      "bytes": 811030,
+      "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+      "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+      "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+    },
+    "physical_reproduction": {
+      "bytes": 48543,
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "mode": "100644",
+      "path": "scripts/qualify-source-cohort.py",
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+    },
+    "physical_result_issues": [],
+    "class_rows": [
+      {
+        "y": 115954,
+        "runs": [
+          [
+            207270,
+            207271,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115966,
+        "runs": [
+          [
+            207270,
+            207271,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115967,
+        "runs": [
+          [
+            207270,
+            207271,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 115968,
+        "runs": [
+          [
+            207270,
+            207271,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 116021,
+        "runs": [
+          [
+            207266,
+            207267,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 116097,
+        "runs": [
+          [
+            207476,
+            207477,
+            "mapped_land_support"
+          ]
+        ]
+      }
+    ],
+    "proposed_current_territorial_mask_country": "LAO",
+    "proposed_current_mask_source": {
+      "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/inputs/lao_admin0.geojson",
+      "bytes": 2800455,
+      "sha256": "a3065f4de59fb96e773e4853c350cd51505049c0d8f0c18253cdc3971fff663c"
+    },
+    "retained_prior_evidence_origin": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json"
+  },
+  {
+    "owner": 48757,
+    "target_id": "gb:VNM:ADM2:81297802B94706269623038",
+    "name": "A Luoi",
+    "keys": [
+      {
+        "owner": 48757,
+        "y": 119223,
+        "x": 209296
+      },
+      {
+        "owner": 48757,
+        "y": 119227,
+        "x": 209295
+      }
+    ],
+    "count": 2,
+    "current_accepted_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "current_parent_id": "framework:province:thua-thien-hue:60b06156be93",
+    "current_metadata": {
+      "source_id": "gb:VNM:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "reference_year": "2020",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "District",
+      "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "81297802B94706269623038",
+      "representative_point": [
+        107.33725778816199,
+        16.23225
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:VNM:ADM1",
+      "hierarchy_overlap": 0.842472,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 3,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "c2dfc033887b4e8248a92dc7229599bfcbd470396c67255861613d611a87f785",
+      "reference_version": 3,
+      "geographic_area_code": "VIE",
+      "geographic_region_code": 41,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.8586,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "VNM-490",
+        "overlap": 0.904473
+      },
+      "regional_match": {
+        "reference_iso": "VNM",
+        "source_id": "VNM-490",
+        "overlap": 0.904473,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q881",
+      "reference_polity": "Vietnam",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "Vietnam",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "Asia",
+        "decision_index": 2235,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_source_atoms": [
+      "gb:VNM:ADM2:81297802B94706269623038"
+    ],
+    "actual_observed_source_records": [
+      {
+        "source_index": 65149,
+        "family_index": 353,
+        "source_id": "gb:VNM:ADM1:63759600B73452440048702",
+        "ordinal": 57,
+        "owners": [],
+        "name": "Thừa Thiên Huế",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65156,
+        "family_index": 354,
+        "source_id": "gb:VNM:ADM2:81297802B94706269623038",
+        "ordinal": 0,
+        "owners": [
+          48757
+        ],
+        "name": "A Luoi",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "physical_classes": {
+      "land": 2
+    },
+    "original_contradictions": [
+      {
+        "key": {
+          "owner": 48757,
+          "y": 119223,
+          "x": 209296
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65149,
+          65156
+        ]
+      },
+      {
+        "key": {
+          "owner": 48757,
+          "y": 119227,
+          "x": 209295
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "reference_countries": [
+          "LAO"
+        ],
+        "actual_sids": [
+          65156
+        ]
+      }
+    ],
+    "original_whole_veto_readiness": {
+      "local_path": "vietnam-next/repair-package/next351-source-veto-readiness/source-veto-readiness.json",
+      "target_id": "gb:VNM:ADM2:81297802B94706269623038",
+      "ordered_territorial_exclusion_operand_ids": [
+        "retained-country-reference:ADM0_A3:LAO"
+      ],
+      "whole_stage": {
+        "bytes": 46400,
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/repair-package/reference1588/cell-hold-audit/aluoi6-readiness/whole-target-stage-inputs.json",
+        "sha256": "eb28f285bf26f2dd2770b813454d1a7de51eb43d23ba7c091c30b95c2d680698"
+      }
+    },
+    "stock_input_status": "proposed-with-retained-whole-physical",
+    "physical_evidence": {
+      "bytes": 324148,
+      "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+      "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+      "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+    },
+    "physical_input": {
+      "bytes": 811030,
+      "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+      "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+      "mode": "100644",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+      "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+    },
+    "physical_reproduction": {
+      "bytes": 48543,
+      "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+      "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+      "mode": "100644",
+      "path": "scripts/qualify-source-cohort.py",
+      "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+    },
+    "physical_result_issues": [],
+    "class_rows": [
+      {
+        "y": 119223,
+        "runs": [
+          [
+            209296,
+            209297,
+            "mapped_land_support"
+          ]
+        ]
+      },
+      {
+        "y": 119227,
+        "runs": [
+          [
+            209295,
+            209296,
+            "mapped_land_support"
+          ]
+        ]
+      }
+    ],
+    "proposed_current_territorial_mask_country": "LAO",
+    "proposed_current_mask_source": {
+      "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/inputs/lao_admin0.geojson",
+      "bytes": 2800455,
+      "sha256": "a3065f4de59fb96e773e4853c350cd51505049c0d8f0c18253cdc3971fff663c"
+    },
+    "retained_prior_evidence_origin": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json"
+  }
+]

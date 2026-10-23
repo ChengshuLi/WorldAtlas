@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/prepare-stage.py", line 87, in <module>
+    assert atoms==[o['id']] and m['source_id']=='gb:EST:ADM3' and m['reference_year']=='2019' and m['source_role']=='Local Government Areas';assert m['original_id']==sources['gb:EST:ADM3'][o['id']]['properties']['shapeID'];scope='Whole direct original '+m['source_role']+'; exact source identity is retained. '+m['selection_reason']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

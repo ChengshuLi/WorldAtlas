@@ -1,0 +1,76 @@
+{
+  "kind": "actual-Egypt-refusal-and-correction-history",
+  "accepted_code": "21984e9ec4ec7370bc807e2da23cea2228747698",
+  "events": [
+    {
+      "phase": "source-evidence-001",
+      "exit_code": 1,
+      "reason": "Missing exact original composition771341 tree for accepted runtime-envelope; no native science.",
+      "external_seconds": 5.79,
+      "stdout": {
+        "path": "source-evidence-001.stdout.log.gz",
+        "decoded_bytes": 0,
+        "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "source-evidence-001.stderr.log.gz",
+        "decoded_bytes": 1124,
+        "decoded_sha256": "1586dc446b1819319a7f67e9811b10e1f18cd9fba71287b994dee22d267444f9"
+      }
+    },
+    {
+      "phase": "native-authority-001",
+      "exit_code": 1,
+      "reason": "Current stock entry rejected old expanded pins; exact commit/path locators required, before scientific reads.",
+      "external_seconds": 0.65,
+      "stdout": {
+        "path": "native-authority-001.stdout.log.gz",
+        "decoded_bytes": 0,
+        "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "native-authority-001.stderr.log.gz",
+        "decoded_bytes": 831,
+        "decoded_sha256": "42deec74a3fb7bcf86bc747330eceb3921c4d760b483fd85c2e55ba6f868d5df"
+      }
+    },
+    {
+      "phase": "native-authority-002",
+      "exit_code": 1,
+      "reason": "Unsupported whole primitive: adapter declared empty water GeometryCollections positive. Corrected only per-member positive class declarations; all474 original requested water keys and all whole witnesses retained.",
+      "external_seconds": 8.05,
+      "stdout": {
+        "path": "native-authority-002.stdout.log.gz",
+        "decoded_bytes": 0,
+        "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "native-authority-002.stderr.log.gz",
+        "decoded_bytes": 6773,
+        "decoded_sha256": "4a8b37dbe4d748dd2cdeb0939da94e50aa3791c9e3ed934c985fa12adf7410bf"
+      }
+    },
+    {
+      "phase": "native-authority-003",
+      "exit_code": 1,
+      "reason": "Proposed native cells lack unique source-target coverage. Genuine complete scientific refusal, no authority output.",
+      "external_seconds": 28.54,
+      "stdout": {
+        "path": "native-authority-003.stdout.log.gz",
+        "decoded_bytes": 0,
+        "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "native-authority-003.stderr.log.gz",
+        "decoded_bytes": 25208,
+        "decoded_sha256": "debc7a716afe768ed8adb3e60be1d078f549bf981d28a4ad245ee5d5bab9aee9"
+      }
+    }
+  ],
+  "new_accepted_cells": 0,
+  "limits": [
+    "No previous successful source or physical science was repeated.",
+    "The complete original patch stayed unchanged; all failed inputs and scientific refusals remain retained.",
+    "Git2.39 optional-probe warnings are preserved; unchanged stock current-body fallback and identity guards remained active."
+  ]
+}

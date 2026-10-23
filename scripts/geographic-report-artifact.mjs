@@ -1,12 +1,10 @@
-// Privileged merge jobs inspect bounded bytes in memory, never extract archives.
+// Privileged merge jobs authenticate complete bytes without extracting archives.
 import {inflateRawSync, gunzipSync, crc32} from 'node:zlib';
 import {createHash} from 'node:crypto';
+import {isDeepStrictEqual} from 'node:util';
 import {githubAPI, githubPages} from './issue-claim-contract.mjs';
 import {successfulGeographyJob, WORKFLOW_PATH, QUEUE_WORKFLOW_PATH} from './integration-proof.mjs';
 
-const MAX_REPORT = 32 * 1024 * 1024;
-const MAX_ARCHIVE = 40 * 1024 * 1024;
-const MAX_LOG = 2 * 1024 * 1024;
 const need = (ok, message) => { if (!ok) throw Error(message); };
 export const reportHash = raw => createHash('sha256').update(raw).digest('hex');
 const positive = n => Number.isSafeInteger(n) && n > 0;
@@ -27,8 +25,7 @@ export function validateGeographyProof(value) {
     Object.keys(value).sort().join() === [...keys].sort().join() &&
     ['run_id','run_attempt','job_id','artifact_id','artifact_bytes','report_bytes'].every(key => positive(value[key])) &&
     ['tree','head','baseline'].every(key => commit(value[key])) &&
-    hash(value.report_sha256) && hash(value.artifact_digest) && value.report_bytes <= MAX_REPORT &&
-    value.artifact_bytes <= MAX_ARCHIVE && (queue ? /^geography-[-a-zA-Z0-9]{16,100}-[1-9]\d*$/ :
+    hash(value.report_sha256) && hash(value.artifact_digest) && (queue ? /^geography-[-a-zA-Z0-9]{16,100}-[1-9]\d*$/ :
       /^proposed-geography-[1-9]\d*-[1-9]\d*$/).test(value.artifact_name),
     'Invalid original geographic proof identity');
   need(!extended || commit(value.workflow_head) && commit(value.candidate_commit) &&
@@ -42,35 +39,6 @@ export function validateGeographyProof(value) {
   return value;
 }
 
-export function readGeographyJobReceipt(raw, artifactName) {
-  need(Buffer.isBuffer(raw) && raw.length > 0 && raw.length <= MAX_LOG &&
-    (/^(?:proposed-geography-[1-9]\d*|geography-[-a-zA-Z0-9]{16,100})-[1-9]\d*$/).test(artifactName ?? ''), 'Invalid bounded geography job log');
-  const lines = raw.toString('utf8').split(/\r?\n/).map(line => line.replace(/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d+Z /, ''));
-  const receipts = [];
-  for (const line of lines) {
-    if (!line.startsWith('{')) continue;
-    let value; try { value = JSON.parse(line); } catch { continue; }
-    if (Object.hasOwn(value, 'report_sha256') || Object.hasOwn(value, 'report_bytes')) receipts.push(value);
-  }
-  const uploadLines = lines.filter(line => /^Artifact (?:proposed-geography-|geography-)/.test(line) && line.includes('has been successfully uploaded!'));
-  const uploads = uploadLines.map(line => /^Artifact ((?:proposed-geography-([1-9]\d*)|geography-[-a-zA-Z0-9]{16,100})-([1-9]\d*)) has been successfully uploaded! Final size is ([1-9]\d*) bytes\. Artifact ID is ([1-9]\d*)$/.exec(line)).filter(Boolean);
-  const digests = lines.map(line => /^SHA256 digest of uploaded artifact zip is ([a-f0-9]{64})$/.exec(line)).filter(Boolean);
-  need(receipts.length === 1 && uploads.length === 1 && uploadLines.length === 1 && digests.length === 1 &&
-    uploads[0][1] === artifactName &&
-    hash(receipts[0].report_sha256) && positive(receipts[0].report_bytes) && receipts[0].report_bytes <= MAX_REPORT,
-    'Missing, ambiguous or malformed original geographic job receipt');
-  const result = {artifact_name: uploads[0][1], artifact_id: Number(uploads[0][5]),
-    artifact_bytes: Number(uploads[0][4]), artifact_digest: digests[0][1],
-    report_sha256: receipts[0].report_sha256, report_bytes: receipts[0].report_bytes};
-  need(positive(result.artifact_id) && positive(result.artifact_bytes) && result.artifact_bytes <= MAX_ARCHIVE,
-    'Invalid original geographic artifact receipt');
-  if (Object.hasOwn(receipts[0], 'candidate_commit')) {
-    need(commit(receipts[0].candidate_commit), 'Invalid geographic candidate receipt');
-    result.candidate_commit = receipts[0].candidate_commit;
-  }
-  return result;
-}
-
 export const CHECKPOINT_MEMBERS = Object.freeze([
   'derived-certificate.json.gz', 'derived-facts.json', 'derived-publication.json',
   'checkpoint-routes.json'
@@ -79,7 +47,6 @@ export const CHECKPOINT_MEMBERS = Object.freeze([
 // Recognize their metadata, but never decode them or use them for map validity.
 const ARCHIVED_POLYGON_MEMBERS = ['facts.json', 'operands.json.gz', 'publication.json'];
 const MEMBER_NAMES = new Set(['geography-check.json', ...CHECKPOINT_MEMBERS, ...ARCHIVED_POLYGON_MEMBERS, 'operating.json']);
-const MAX_PHASE = 256 * 1024 * 1024;
 const reportProducts = new WeakMap();
 const preparedQueueSources = new WeakMap();
 const exactKeys = (value, keys) => value && typeof value === 'object' && !Array.isArray(value) &&
@@ -114,7 +81,7 @@ function extraFields(raw, start, size) {
 // The complete small fixed roster is admitted before decoding. Nothing is
 // extracted, and physical records must exactly tile the local-file area.
 function archiveDirectory(raw) {
-  need(Buffer.isBuffer(raw) && raw.length >= 22 && raw.length <= MAX_ARCHIVE, 'Invalid report archive');
+  need(Buffer.isBuffer(raw) && raw.length >= 22, 'Invalid report archive');
   const end = raw.length - 22;
   const count = raw.readUInt16LE(end + 10);
   need(raw.readUInt32LE(end) === 0x06054b50 && raw.readUInt16LE(end + 20) === 0 &&
@@ -132,7 +99,7 @@ function archiveDirectory(raw) {
     const extraLength = raw.readUInt16LE(cursor + 30), commentLength = raw.readUInt16LE(cursor + 32);
     const attributes = raw.readUInt32LE(cursor + 38), offset = raw.readUInt32LE(cursor + 42);
     need(raw.readUInt16LE(cursor + 6) <= 20 && (flags & ~0x808) === 0 && [0, 8].includes(method) &&
-      size > 0 && size <= MAX_REPORT && packed > 0 && packed <= MAX_ARCHIVE && offset + 30 <= central &&
+      size > 0 && packed > 0 && offset + 30 <= central &&
       raw.readUInt16LE(cursor + 34) === 0 && [0, 0x8000].includes((attributes >>> 16) & 0xf000) && !(attributes & 0x10) &&
       cursor + 46 + nameLength + extraLength + commentLength <= end,
       'Unsupported, unsafe or oversized report archive entry');
@@ -181,18 +148,10 @@ function decodeMember(raw, row) {
   return body;
 }
 
-export function readReportArchive(raw, expectedHash, expectedBytes, {admit = () => {}} = {}) {
-  need(hash(expectedHash) && (expectedBytes === undefined || positive(expectedBytes) && expectedBytes <= MAX_REPORT),
+export function readReportArchive(raw, expectedHash, expectedBytes) {
+  need(hash(expectedHash) && (expectedBytes === undefined || positive(expectedBytes)),
     'Invalid report archive or trusted report digest');
   const entries = archiveDirectory(raw), root = entries.get('geography-check.json');
-  // Include transport, decoded report, UTF-16 parsing and conservative live JSON
-  // room in the same phase. Each remaining member is admitted before allocation.
-  let admitted = 2 * raw.length + 8 * root.size;
-  // Preserve the legacy single-report 32 MiB contract. The tighter complete
-  // product phase applies only to checkpoint bundles; caller admission still
-  // observes the real root representation charge before any decoding.
-  need(entries.size === 1 || admitted <= MAX_PHASE, 'Geographic checkpoint combined budget exceeded');
-  admit(admitted);
   const reportBytes = decodeMember(raw, root);
   need((expectedBytes === undefined || reportBytes.length === expectedBytes) && reportHash(reportBytes) === expectedHash,
     'Report archive bytes differ from trusted geography job digest');
@@ -201,7 +160,7 @@ export function readReportArchive(raw, expectedHash, expectedBytes, {admit = () 
   const descriptor = report.checkpoint;
   if (descriptor === undefined) {
     need(entries.size === 1, 'Legacy report archive contains unlisted members');
-    reportProducts.set(report, {report_bytes: reportBytes, members: new Map(), admitted_bytes: admitted});
+    reportProducts.set(report, {report_bytes: reportBytes, members: new Map()});
     return report;
   }
   need(exactKeys(descriptor, ['version', 'kind', 'members']) && descriptor.version === 1 &&
@@ -214,13 +173,11 @@ export function readReportArchive(raw, expectedHash, expectedBytes, {admit = () 
   for (const row of descriptor.members) {
     const gzip = row.name.endsWith('.gz');
     need(exactKeys(row, ['name', 'bytes', 'sha256', ...(gzip ? ['decoded_bytes', 'decoded_sha256'] : [])]) &&
-      positive(row.bytes) && row.bytes <= MAX_REPORT && row.bytes === entries.get(row.name).size && hash(row.sha256) &&
-      (!gzip || positive(row.decoded_bytes) && row.decoded_bytes <= MAX_REPORT && hash(row.decoded_sha256)),
+      positive(row.bytes) && row.bytes === entries.get(row.name).size && hash(row.sha256) &&
+      (!gzip || positive(row.decoded_bytes) && hash(row.decoded_sha256)),
       'Invalid checkpoint member bounds or digest');
-    if (CHECKPOINT_MEMBERS.includes(row.name)) admitted += row.bytes + 8 * (gzip ? row.decoded_bytes : row.bytes);
+
   }
-  need(admitted <= MAX_PHASE, 'Geographic checkpoint combined budget exceeded');
-  admit(admitted);
   const members = new Map();
   for (const row of descriptor.members.filter(row => CHECKPOINT_MEMBERS.includes(row.name))) {
     const body = decodeMember(raw, entries.get(row.name));
@@ -232,25 +189,25 @@ export function readReportArchive(raw, expectedHash, expectedBytes, {admit = () 
     }
     members.set(row.name, body);
   }
-  reportProducts.set(report, {report_bytes: reportBytes, members, admitted_bytes: admitted});
+  reportProducts.set(report, {report_bytes: reportBytes, members});
   return report;
 }
 
-async function boundedBody(response, maximum = MAX_ARCHIVE) {
+async function boundedBody(response, maximum) {
   need(response.ok && response.body, 'Geographic report download failed');
   const declared = response.headers.get('content-length');
-  need(declared === null || (/^\d+$/.test(declared) && Number(declared) <= maximum),
+  need(declared === null || (/^\d+$/.test(declared) && (maximum === undefined || Number(declared) <= maximum)),
     'Geographic report download exceeds archive budget');
   const chunks = []; let size = 0;
   for await (const chunk of response.body) {
     size += chunk.length;
-    if (size > maximum) { throw Error('Geographic report download exceeds archive budget'); }
+    if (maximum !== undefined && size > maximum) { throw Error('Geographic report download exceeds archive budget'); }
     chunks.push(Buffer.from(chunk));
   }
   return Buffer.concat(chunks, size);
 }
 
-async function downloadRedirect(response, fetchImpl, maximum = MAX_ARCHIVE) {
+async function downloadRedirect(response, fetchImpl, maximum) {
   need(response.status === 302, 'Geographic artifact API did not return a download');
   let destination;
   try { destination = new URL(response.headers.get('location')); } catch { throw Error('Invalid geographic artifact delivery address'); }
@@ -262,9 +219,9 @@ async function downloadRedirect(response, fetchImpl, maximum = MAX_ARCHIVE) {
   } catch { throw Error('Geographic report delivery failed or exceeded bounded archive budget'); }
 }
 
-// Only the originating attempt named by an already authenticated job receipt is
-// inspected. A failed/cancelled code attempt can contain successful geography; its
-// actual unique geography job and all required steps must still be successful.
+// Authenticate the exact originating attempt and its unique successful job.
+// Queue aggregate/step projections do not establish producer readiness; the job
+// must be completed/successful even when the enclosing attempt failed/cancelled.
 async function readGeographyOriginJob({api, repo, number, source}) {
   const route = `/repos/${repo}/actions/runs/${source.run_id}/attempts/${source.run_attempt}`;
   const run = await api(route);
@@ -273,7 +230,7 @@ async function readGeographyOriginJob({api, repo, number, source}) {
   need(run.id === source.run_id && run.run_attempt === source.run_attempt && run.head_sha === workflowHead &&
     run.event === (queue ? 'workflow_dispatch' : 'pull_request') && run.path === (queue ? QUEUE_WORKFLOW_PATH : WORKFLOW_PATH) &&
     run.repository?.full_name === repo && run.head_repository?.full_name === repo &&
-    (queue ? ['in_progress', 'completed'].includes(run.status) : run.status === 'completed') &&
+    (queue || run.status === 'completed') &&
     (queue || Array.isArray(run.pull_requests) && (!run.pull_requests.length ||
       run.pull_requests.some(pr => pr.number === number && pr.head?.sha === source.head))),
     'Original geographic run identity or state changed');
@@ -307,84 +264,60 @@ export async function validateGeographyOrigin(options) {
   await validatePRGeographyCandidate(options);
 }
 
-export async function loadGeographicReport({api, repo, runId, artifactName, expectedHash, source, fresh, retainedArchive, admit = () => {}, token, fetchImpl = fetch, onRequest = () => {}}) {
+export async function loadGeographicReport({api, repo, runId, artifactName, expectedHash, source, fresh, retainedArchive, token, fetchImpl = fetch, onRequest = () => {}}) {
+  need(/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') && /^[1-9]\d*$/.test(String(runId)) &&
+    hash(expectedHash) && (token || !fresh && typeof retainedArchive === 'function') && (source || fresh), 'Missing trusted geographic artifact outputs');
   if (fresh) {
     const originAttempt = Number(artifactName?.split('-').at(-1));
-    need(!source && positive(Number(runId)) && positive(fresh.run_attempt) &&
+    need(!source && positive(fresh.run_attempt) && positive(fresh.artifact_id) &&
+      positive(fresh.report_bytes) && hash(fresh.artifact_digest) &&
       [fresh.head, fresh.baseline, fresh.candidate_commit, fresh.workflow_head].every(commit) &&
       /^[-a-zA-Z0-9]{16,100}$/.test(fresh.request_id ?? '') &&
       positive(originAttempt) && originAttempt <= fresh.run_attempt &&
-      artifactName === `geography-${fresh.request_id}-${originAttempt}`, 'Invalid fresh queue geography identity');
+      artifactName === `geography-${fresh.request_id}-${originAttempt}`, 'Invalid fresh queue geography identity or native upload outputs');
     const identity = {run_id: Number(runId), run_attempt: originAttempt, head: fresh.head,
       baseline: fresh.baseline, candidate_commit: fresh.candidate_commit,
       workflow_path: QUEUE_WORKFLOW_PATH, event: 'workflow_dispatch', workflow_head: fresh.workflow_head};
     const {job, run} = await readGeographyOriginJob({api, repo, source: identity});
     need(run.head_branch === 'main', 'Fresh queue geography requires an authenticated main producer');
-    const client = typeof api.jobLogRedirect === 'function' ? api : githubAPI(token, {fetchImpl, onRequest});
-    const response = await client.jobLogRedirect(`/repos/${repo}/actions/jobs/${job.id}/logs`);
-    const receipt = readGeographyJobReceipt(await downloadRedirect(response, fetchImpl, MAX_LOG), artifactName);
-    need(receipt.report_sha256 === expectedHash, 'Fresh geographic job report differs from trusted output');
     const candidate = await api(`/repos/${repo}/git/commits/${fresh.candidate_commit}`);
     need(candidate.sha === fresh.candidate_commit && commit(candidate.tree?.sha), 'Fresh geographic candidate tree unavailable');
-    source = validateGeographyProof({...identity, tree: candidate.tree.sha, job_id: job.id, ...receipt});
-  }
-  if (source) {
+    source = {...identity, tree: candidate.tree.sha, job_id: job.id, artifact_name: artifactName,
+      artifact_id: fresh.artifact_id, artifact_digest: fresh.artifact_digest,
+      report_sha256: expectedHash, report_bytes: fresh.report_bytes};
+  } else {
     validateGeographyProof(source);
     need(Number(runId) === source.run_id && artifactName === source.artifact_name && expectedHash === source.report_sha256,
       'Original geographic artifact outputs changed');
   }
-  need(/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') && /^[1-9]\d*$/.test(String(runId)) &&
-    (source || /^geography-[-a-zA-Z0-9]{16,100}-[1-9]\d*$/.test(artifactName ?? '')) &&
-    /^[a-f0-9]{64}$/.test(expectedHash ?? '') && token, 'Missing trusted geographic artifact outputs');
-  const matches = []; let total = 0;
-  for (let page = 1; page <= 100; page++) {
-    const result = await api(`/repos/${repo}/actions/runs/${runId}/artifacts?per_page=100&page=${page}`);
-    need(Array.isArray(result.artifacts) && Number.isSafeInteger(result.total_count) && result.total_count <= 10000,
-      'Incomplete geographic artifact inventory');
-    total += result.artifacts.length;
-    matches.push(...result.artifacts.filter(row => row.name === artifactName));
-    if (total === result.total_count) break;
-    need(result.artifacts.length === 100 && page < 100 && total < result.total_count,
-      'Incomplete geographic artifact inventory');
-  }
-  need(matches.length <= 1, 'Duplicate geographic artifact');
-  if (source && matches.length) need(matches[0].id === source.artifact_id && matches[0].size_in_bytes === source.artifact_bytes &&
-    matches[0].digest === `sha256:${source.artifact_digest}` && matches[0].workflow_run?.id === source.run_id &&
-    matches[0].workflow_run?.head_sha === (source.workflow_head ?? source.head), 'Original geographic artifact identity changed');
-  const unavailable = !matches.length || matches[0].expired;
-  if (unavailable) {
-    if (!source || typeof retainedArchive !== 'function') {
-      const error = Error('Missing or expired geographic artifact; no exact retained copy supplied');
-      error.geographyUnavailable = true; throw error;
+  let bytes, origin = 'actions';
+  // Historical callers authenticate the original acceptance/run/job first.
+  // An absent optional copy may use remote transport; malformed materialized
+  // bytes and read failures are never treated as absence.
+  if (!fresh && typeof retainedArchive === 'function') {
+    bytes = await retainedArchive(source.artifact_bytes);
+    if (bytes != null) {
+      need(Buffer.isBuffer(bytes) && bytes.length === source.artifact_bytes && reportHash(bytes) === source.artifact_digest,
+        'Retained geographic archive differs from accepted artifact digest');
+      origin = 'retained-exact';
     }
-    // A retained location is only a hint. The accepted original digest remains
-    // authority, including when Actions has deleted the original after expiry.
-    need(source.artifact_bytes <= MAX_REPORT, 'Retained geographic archive exceeds ordinary file limit');
-    admit(2 * source.artifact_bytes);
-    const bytes = await retainedArchive(source.artifact_bytes);
-    need(Buffer.isBuffer(bytes) && bytes.length === source.artifact_bytes && reportHash(bytes) === source.artifact_digest,
-      'Retained geographic archive differs from accepted artifact digest');
-    const report = readReportArchive(bytes, expectedHash, source.report_bytes, {admit});
-    reportProducts.set(report, {...reportProducts.get(report), source, archive_bytes: bytes, archive_origin: 'retained-exact'});
-    if (fresh) preparedQueueSources.set(report, Object.freeze({...source}));
-    return report;
   }
-  need(Number.isSafeInteger(matches[0].id) && matches[0].id > 0 &&
-    positive(matches[0].size_in_bytes) && matches[0].size_in_bytes <= MAX_ARCHIVE,
-    'Missing, duplicate, expired or oversized geographic artifact');
-
-  // The initial fixed API host receives the token. Redirect delivery receives
-  // no credentials, and its signed URL is never included in errors or logs.
-  const client = typeof api.artifactRedirect === 'function' ? api : githubAPI(token, {fetchImpl, onRequest});
-  const response = await client.artifactRedirect(`/repos/${repo}/actions/artifacts/${matches[0].id}/zip`);
-  admit(2 * matches[0].size_in_bytes);
-  const bytes = await downloadRedirect(response, fetchImpl, matches[0].size_in_bytes);
-  if (source) need(bytes.length === source.artifact_bytes && reportHash(bytes) === source.artifact_digest,
-    'Original geographic archive differs from trusted upload receipt');
-  const report = readReportArchive(bytes, expectedHash, source?.report_bytes, {admit});
-  // Only fresh queue loading authenticates this main-run producer and its job
-  // receipt here. Supplied/historical custody cannot attest queue preparation.
-  reportProducts.set(report, {...reportProducts.get(report), source: source ?? null, archive_bytes: bytes, archive_origin: 'actions'});
+  if (bytes == null) {
+    need(token, 'Credential-free checkpoint requires its exact retained geographic archive');
+    // The fixed API host receives credentials; exact-ID signed delivery does
+    // not. Permission, expiry and transport errors propagate without guessing
+    // whether a missing remote object means access was denied.
+    const client = typeof api.artifactRedirect === 'function' ? api : githubAPI(token, {fetchImpl, onRequest});
+    const response = await client.artifactRedirect(`/repos/${repo}/actions/artifacts/${source.artifact_id}/zip`);
+    bytes = await downloadRedirect(response, fetchImpl, source.artifact_bytes);
+    need((fresh || bytes.length === source.artifact_bytes) && reportHash(bytes) === source.artifact_digest,
+      'Original geographic archive differs from trusted upload identity');
+  }
+  // The native upload digest authenticates the complete newly downloaded ZIP;
+  // its observed byte length is then retained literally in original custody.
+  if (fresh) source = validateGeographyProof({...source, artifact_bytes: bytes.length});
+  const report = readReportArchive(bytes, expectedHash, source.report_bytes);
+  reportProducts.set(report, {...reportProducts.get(report), source, archive_bytes: bytes, archive_origin: origin});
   if (fresh) preparedQueueSources.set(report, Object.freeze({...source}));
   return report;
 }
@@ -396,19 +329,41 @@ export function checkGeographicReport(geography, baseline, candidate, codeCommit
     geography.candidate_commit === candidate && geography.candidate_code_executed === (codeCommit !== baseline) &&
     geography.published === false && geography.source_approval === false && geography.gate_status === 'passed',
     'Geographic report does not bind exact trusted combined check');
-  if (codeCommit !== baseline) need(!geography.checkpoint && !geography.reused_baseline_proof && !geography.unchanged_selected_inputs &&
+  if (codeCommit !== baseline) need(!geography.checkpoint && !geography.reused_baseline_proof &&
     /^[a-f0-9]{64}$/.test(geography.trusted_code_inventory_sha256 ?? ''),
     'Software geography must bind actual execution inventory without baseline/checkpoint reuse');
-  const nativePass = geography.status === 'no-new-native-loss' && geography.validation_scope === 'selected-native-map-cells'
-    && geography.selected_native_report?.status === 'no-new-native-loss'
-    && geography.selected_native_report.method === 'selected-native-owner-conservation-v1'
-    && geography.selected_native_report.candidate_code_executed === false
-    && geography.selected_native_report.lost_or_reassigned_cells === 0
-    && Array.isArray(geography.selected_native_report.intervals) && geography.selected_native_report.intervals.length === 0;
-  const ordinaryPass = nativePass || ['not-applicable', 'no-footprint-change', 'no-new-regression'].includes(geography.status);
+  if (geography.unchanged_selected_inputs) {
+    const proof = geography.unchanged_selected_inputs;
+    need(geography.status === 'not-applicable' && proof.version === 1 &&
+      proof.kind === 'trusted-unchanged-selected-geography-v1' && proof.status === 'unchanged-selected-inputs' &&
+      proof.baseline_commit === baseline && proof.candidate_commit === candidate &&
+      proof.trusted_reader_policy_commit === codeCommit && proof.candidate_code_executed === false &&
+      proof.science_reexecuted === false && proof.source_approval === false && proof.published === false,
+      'Unchanged geography applicability does not bind actual executing code and data');
+  }
+  const native = geography.selected_native_report;
+  const selectedNative = Object.hasOwn(geography, 'selected_native_report') || geography.validation_scope === 'selected-native-map-cells';
+  const finalProfile = native?.candidate_selection?.version === 2;
+  const bank = native?.candidate_selection?.prepared_bank, scope = native?.native_row_scope;
+  const unchangedFinal = codeCommit !== baseline && finalProfile && bank && typeof bank.path === 'string' && bank.path.length > 0
+    && positive(bank.bytes) && hash(bank.sha256)
+    && isDeepStrictEqual(native.baseline_selection, native.candidate_selection)
+    && isDeepStrictEqual(native.checkpoint_custody?.accepted_bank, bank) && isDeepStrictEqual(native.checkpoint_custody?.candidate_bank, bank)
+    && scope?.proof === 'complete-accepted-final-bank-and-qualified-new-intervals' && scope.representation_migration === false
+    && Array.isArray(scope.changed_rows) && scope.changed_rows.length === 0 && scope.added_cells === 0
+    && positive(scope.compared_rows) && native.affected_rows === 0;
+  const nativePass = (geography.status === 'no-new-native-loss' || geography.status === 'no-footprint-change' && unchangedFinal)
+    && geography.validation_scope === 'selected-native-map-cells' && geography.regressions === 0
+    && native?.status === 'no-new-native-loss' && native.method === 'selected-native-owner-conservation-v1'
+    && native.candidate_code_executed === (finalProfile && codeCommit !== baseline)
+    && (!finalProfile || native.candidate_selection.kind === 'selected-final-native-bank-v2')
+    && native.lost_or_reassigned_cells === 0 && Array.isArray(native.intervals) && native.intervals.length === 0;
+  const ordinaryPass = ['not-applicable', 'no-footprint-change', 'no-new-regression'].includes(geography.status);
   const waterPass = geography.status === 'regressions-found' &&
     geography.adjudication?.status === 'all-findings-supported-and-reviewed' &&
     geography.adjudication.unresolved_findings === 0;
-  need(ordinaryPass || waterPass, 'Combined geographic findings remain unresolved');
+  // A selected-native result cannot use generic success or water adjudication
+  // to evade its own conservation and actual-execution checks.
+  need(selectedNative ? nativePass : ordinaryPass || waterPass, 'Combined geographic findings remain unresolved');
   return waterPass;
 }

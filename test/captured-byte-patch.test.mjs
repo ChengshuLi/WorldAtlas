@@ -36,10 +36,6 @@ test('a correct encoded pin cannot hide incorrect decoded custody',()=>{
  const f=fixture();f.declaration.decoded_sha256='0'.repeat(64);
  assert.throws(()=>applyEncodedBytePatch(f.commands,f.target,f.resolve),/Consumed decoded source differs/);
 });
-test('an oversized declaration fails before the loader opens a source',()=>{
- const f=fixture();f.declaration.decoded_bytes=32*1024*1024+1;
- assert.throws(()=>applyEncodedBytePatch(f.commands,f.target,f.resolve));assert.equal(f.reads,0);
-});
 test('copy-range and complete-target checks remain active',()=>{
  const f=fixture();assert.throws(()=>applyEncodedBytePatch([{copy:['source',f.body.length,1]}],{...f.target,bytes:1},f.resolve),/Escaped source copy range/);
  assert.throws(()=>applyEncodedBytePatch(f.commands,{...f.target,sha256:'0'.repeat(64)},f.resolve));
@@ -51,13 +47,6 @@ test('fresh invocations do not reuse old source buffers or successful verdicts',
  assert.throws(()=>applyEncodedBytePatch(f.commands,f.target,f.resolve));assert.equal(f.reads,3);
 });
 
-test('complete unique input budget rejects before any source opens',()=>{
- let opens=0;
- const commands=['a','b','c','d'].map(name=>({copy:[name,0,1]}));
- const resolve=name=>({declaration:{path:name+'.gz',object:name,mode:'100644',encoded_bytes:32*1024*1024,decoded_bytes:32*1024*1024,encoded_sha256:'0'.repeat(64),decoded_sha256:'0'.repeat(64)},read(){opens++;assert.fail('source must not open');}});
- assert.throws(()=>applyEncodedBytePatch(commands,{bytes:4,sha256:'0'.repeat(64),mode:'100644'},resolve),/Complete captured input\/output phase exceeds cap/);
- assert.equal(opens,0);
-});
 test('a malformed late command rejects before opening an earlier valid source',()=>{
  const f=fixture();assert.throws(()=>applyEncodedBytePatch([{copy:['source',0,4]},{literal:'!!!='}],f.target,f.resolve));assert.equal(f.reads,0);
 });

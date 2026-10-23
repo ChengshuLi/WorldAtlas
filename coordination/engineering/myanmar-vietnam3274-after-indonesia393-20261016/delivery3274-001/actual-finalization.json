@@ -1,0 +1,56 @@
+{
+  "status": "actual-stock-composed-and-finalized-evidence-pending",
+  "accepted_base": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+  "composition_commit": "9e5b6abe80aa84a588b4bdfe77e2a70075aa910c",
+  "composition_tree": "16e2fb2f3f6ce0e2b4233a42a5fa265023a42738",
+  "candidate_before_evidence": "b2e4b644116cbc2863eee47dd0437fe54d5899bd",
+  "candidate_tree": "b99105d98ac73f378ed4f81a7d3b8362acd28f32",
+  "prefix": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/",
+  "delivery_prefix": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/",
+  "exact_additions": 3274,
+  "cumulative_native_cells": 285582,
+  "prior_package_declarations": 261,
+  "package_declarations": 265,
+  "new_actual_consumer_leaves": [
+    "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/composition/patch.json",
+    "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/composition/runtime-envelope.json",
+    "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/composition/selected-ledger.json",
+    "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/ownership-selection-v2.json"
+  ],
+  "exact_restored_read_roles": 44,
+  "actual_stock_executions": [
+    {
+      "command": [
+        "node",
+        "scripts/prepare-delivery-handoff.mjs",
+        "compose",
+        ".takeover/joint3274-after393/actual-34981099cd03/config/compose.json",
+        ".cache/delivery-handoff/myanmar-vietnam3274-34981099cd03/composition"
+      ],
+      "actual_accepted_baseline": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+      "actual_executing_stock_code_commit": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+      "ended_utc": "2026-10-16T04:11:56.766715+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 8.569988192990422,
+      "max_rss_kib": 889792,
+      "source_native_or_geometry_replay": false
+    },
+    {
+      "command": [
+        "node",
+        "scripts/prepare-delivery-handoff.mjs",
+        "finalize",
+        ".takeover/joint3274-after393/actual-34981099cd03/config/finalize.json",
+        ".cache/delivery-handoff/myanmar-vietnam3274-34981099cd03/finalization"
+      ],
+      "actual_accepted_baseline": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+      "actual_executing_stock_code_commit": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+      "ended_utc": "2026-10-16T04:12:48.807141+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 26.852614997013006,
+      "max_rss_kib": 889792,
+      "source_native_or_geometry_replay": false
+    }
+  ],
+  "limits": "Actual accepted393 metadata composition/finalizer. Original scientific proofs stay historical. Fresh evidence-byte validator acceptance, stock evidence manifest, exact public head review, CI and Main-owned integration remain pending; no new selected consumer execution or repair credit."
+}

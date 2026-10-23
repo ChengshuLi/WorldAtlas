@@ -19,10 +19,10 @@ export function validateNativeSelectionReceipt(manifest, manifestSha256, receipt
     receipt.installation_ready !== false)
     throw Error('Native comparison receipt differs from selected source/method/domain');
   const products = receipt.products;
-  if (!Array.isArray(products) || !products.length || products.length > 512 ||
+  if (!Array.isArray(products) || !products.length ||
     new Set(products.map(product => product.path)).size !== products.length ||
     products.some(product => !hash(product.sha256) || !Number.isSafeInteger(product.bytes) ||
-      product.bytes < 0 || product.bytes > 32 * 1024 * 1024))
+      product.bytes < 0))
     throw Error('Native comparison product inventory is incomplete');
   const inventoryHash = digest(Buffer.from(JSON.stringify(products)));
   if (receipt.two_run_products !== products.length || receipt.run_one_sha256 !== inventoryHash ||
@@ -53,9 +53,9 @@ export function requireVerifiedNativeSelection(manifest, manifestSha256, repo = 
     throw Error('Native comparison receipt must be an immutable ordinary blob');
   const blob = tree.split(' ')[2].split('\t')[0];
   const length = Number(execFileSync('git', ['-C', repo, 'cat-file', '-s', blob], {encoding:'utf8'}));
-  if (!Number.isSafeInteger(length) || length < 1 || length > 32 * 1024 * 1024)
-    throw Error('Native comparison receipt exceeds original file budget');
-  const bytes = execFileSync('git', ['-C', repo, 'cat-file', 'blob', blob], {maxBuffer:32*1024*1024});
+  if (!Number.isSafeInteger(length) || length < 1)
+    throw Error('Invalid native comparison receipt byte length');
+  const bytes = execFileSync('git', ['-C', repo, 'cat-file', 'blob', blob], {maxBuffer:length+1});
   if (bytes.length !== length || digest(bytes) !== pin.sha256) throw Error('Native comparison receipt hash differs');
   validateNativeSelectionReceipt(manifest, manifestSha256, JSON.parse(bytes));
   return {...pin, manifest_sha256:manifestSha256};

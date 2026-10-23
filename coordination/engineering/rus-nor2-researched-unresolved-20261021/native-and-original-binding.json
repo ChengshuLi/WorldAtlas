@@ -1,0 +1,74 @@
+{
+  "kind": "read-only exact original/held/diagnostic join; no new producer",
+  "author_base": "f9ec1ee6f4c7907e2cc2e8ed5ef4223778f994e2",
+  "prior_partition_commit": "b57a338a8758c31f01cb9c5b559900d7c4d498e4",
+  "prior_partition_path": "coordination/engineering/rus-872-researched-unresolved-20261021/rus-1343-current-held-partition.json.gz",
+  "bindings": {
+    "diagnostic": {
+      "commit": "c6720857e7ad3530ca44a542d96ea9edb9eca77b",
+      "path": "coordination/engineering/rus-context-qualified-repair-20261021/native-diagnostic-002/native-diagnostic.json",
+      "bytes": 5278783,
+      "sha256": "72d66e29049391e01c06a31a3460efa5d581c16975e2daaa7cf54cf57da9683c",
+      "matched_keys": [
+        {
+          "y": 59849,
+          "x": 152972,
+          "owner_index": 38297,
+          "native_decision": "territorial_exclusion_cells"
+        },
+        {
+          "y": 59862,
+          "x": 152965,
+          "owner_index": 38297,
+          "native_decision": "territorial_exclusion_cells"
+        }
+      ]
+    },
+    "held": {
+      "commit": "c6720857e7ad3530ca44a542d96ea9edb9eca77b",
+      "path": "coordination/engineering/rus-context-qualified-repair-20261021/supported-inputs-001/held-original.json",
+      "bytes": 64981,
+      "sha256": "e23036a23e2bb8ba103b76e0206508d84bbb8f4cc204fbaf7552b16c4043629d",
+      "matched_keys": [
+        {
+          "y": 59849,
+          "x": 152972,
+          "owner_index": 38297,
+          "native_decision": "territorial_exclusion_cells"
+        },
+        {
+          "y": 59862,
+          "x": 152965,
+          "owner_index": 38297,
+          "native_decision": "territorial_exclusion_cells"
+        }
+      ]
+    }
+  },
+  "checks": {
+    "original_nor_contacts": 2,
+    "disjoint_from_accepted_CHN_872": true,
+    "remaining_other_contacts": 469
+  },
+  "native_predicate_limit": "territorial_exclusion_cells is a stock predicate label, not a sovereignty determination. Native holds remain unchanged.",
+  "coordinate_crosscheck": {
+    "uncompressed_latitude_table_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+    "native_size": 262166,
+    "longitude_formula": "(x+0.5)/262166*360-180",
+    "method": "Read pinned little-endian float64 latitude at offset y*8 and compare exact reported latitude and longitude within1e-12; no geometry/owner execution",
+    "matched_points": [
+      {
+        "x": 152972,
+        "y": 59849,
+        "latitude": 69.43996822160625,
+        "longitude": 30.058131107771402
+      },
+      {
+        "x": 152965,
+        "y": 59862,
+        "latitude": 69.4336981394968,
+        "longitude": 30.048518877352535
+      }
+    ]
+  }
+}

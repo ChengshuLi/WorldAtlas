@@ -1,0 +1,142 @@
+{
+  "kind": "and72-final-positive-source-native-assessment",
+  "as_of": "2026-10-21",
+  "reviewer_worker_id": "01a15a0e-9f15-70f9-9391-bfaf7502a007",
+  "scope": {
+    "package_id": "gb-AND-ADM1--repair-evaluation",
+    "original_cells": 72,
+    "original_intervals": 15,
+    "owner": 7109,
+    "source_contacts": [
+      661,
+      662,
+      663,
+      665,
+      666,
+      23686
+    ],
+    "excluded_source_conflict": {
+      "cells": 9,
+      "intervals": 5
+    }
+  },
+  "physical": {
+    "commit": "36a0fe3f23b552ddcd4fdfdf7c11ab4ac6c4e18d",
+    "output_path": "coordination/engineering/and-qualified-repair-20261021/physical-001/whole-target-support.json",
+    "sha256": "c97f23c46de1040e7f463bccbfe78312058b2fffab3c4f696d2e8f9ecb1fa296",
+    "targets": 7,
+    "issues": 0,
+    "all_consumed_members_equal_complete_and_source_lineage": true,
+    "meaning": "Whole-target support evidence for all seven original AND family members, not administrative competitor clearance or a per-key result."
+  },
+  "source_evidence": {
+    "commit": "0708d5f1ad50a9e5c87b7a1f4f47c4e18d335fc0",
+    "path": "coordination/engineering/and-qualified-repair-20261021/source-evidence-001/source-evidence.json",
+    "sha256": "bfc504eb6dfc144a0b8412aeee2ccd8ef9fc41f2fa50096532a6c3d6ee79d181",
+    "positive_contact_targets": 5,
+    "full_original_positive_family": {
+      "id": "gb:AND:ADM1",
+      "features": 7,
+      "decoded_sha256": "159b76ce81686d6c57ede4fc978e2806384306c80d4d1f4ea9de18db67f26ea2"
+    },
+    "complete_negative_families": [
+      {
+        "id": "gb:ESP:ADM1",
+        "features": 19,
+        "decoded_sha256": "b61a1bf661b90883763f633f5e9dbc27e7356309e42cbe56b60d2ceab5112f63"
+      },
+      {
+        "id": "gb:ESP:ADM2",
+        "features": 52,
+        "decoded_sha256": "40a12d32651a352b59bc88447432421ab80e2d950deb6f552efbae907f7232c2"
+      },
+      {
+        "id": "gb:FRA:ADM1",
+        "features": 13,
+        "decoded_sha256": "7dc61e5c7e4c81f5fa10d339e6a5bc8428f1346f43f4426d9d165d2e44fc3a7e"
+      },
+      {
+        "id": "gb:FRA:ADM2",
+        "features": 96,
+        "decoded_sha256": "a14ed131c86c802e5d546c7cbeccbd4daebc94a66fea413f563935a53504f251"
+      }
+    ],
+    "all_five_target_rows_have_exact_72_key_coverage": true,
+    "lleida_contact_retained": true
+  },
+  "diagnostic": {
+    "commit": "8deb3ba79a8c2e3ba8e10b2636699feee1f673e9",
+    "path": "coordination/engineering/and-qualified-repair-20261021/native-diagnostic-001/native-diagnostic.json",
+    "sha256": "81f2651170ffd272c1c079738da1bfddf1170717540704bdb6c547ea819ae7f4",
+    "requested": 72,
+    "supported": 71,
+    "held": 1,
+    "held_key": {
+      "y": 96891,
+      "x": 132142
+    },
+    "reason": "unique-source-target-coverage, matching the explicit ESP ADM2 Lleida feature gb:ESP:ADM2:93216281B77878961012946 overlap."
+  },
+  "authority": {
+    "commit": "5a4a2c6a21f8f2346146caaeb884d79cb97289f0",
+    "constructor_path": "coordination/engineering/and-qualified-repair-20261021/native-authority-001/constructor-result.json",
+    "constructor_sha256": "c5f1a57cf575c668dd92b894941c4fc41380e387b0c1adc8081706fd5dfa2715",
+    "binding_path": "coordination/engineering/and-qualified-repair-20261021/native-authority-001/authority-binding.json",
+    "binding_sha256": "ece496939ca55447add72c37e9dcd626bd3011e25c8436132ade747c7463a43f",
+    "preparation_path": "coordination/engineering/and-qualified-repair-20261021/native-authority-001/preparation.json",
+    "preparation_sha256": "8ee18c0a66bc94106a736f15bb719011aecb515aa92e6ccb40c72977bf097c24",
+    "qualified_native_cells": 71,
+    "single_owner": 7109,
+    "disposition": "assigned",
+    "target": "atlas:territory:AND",
+    "source_receipt_sha256": "c97f23c46de1040e7f463bccbfe78312058b2fffab3c4f696d2e8f9ecb1fa296",
+    "native_rows_equal_supported_diagnostic_partition": true,
+    "component_ids": [
+      "source-target:71ac6072da01ffade978f1b746f737e468eebeece5af619e3bab15a80465e56d"
+    ]
+  },
+  "partition_review": {
+    "source_evidence_dropped_only_held_key_from_each_of_five_candidate_coverages": true,
+    "negative_contacts_unchanged": true,
+    "native_patch_equals_71_supported_diagnostic_keys": true,
+    "full_source_misses": [
+      {
+        "y": 96682,
+        "x": 132192
+      },
+      {
+        "y": 96825,
+        "x": 132338
+      },
+      {
+        "y": 96891,
+        "x": 132155
+      },
+      {
+        "y": 96891,
+        "x": 132156
+      },
+      {
+        "y": 96891,
+        "x": 132157
+      },
+      {
+        "y": 96891,
+        "x": 132158
+      }
+    ],
+    "all_six_misses_retained_in_71_supported_set": true,
+    "interpretation": "All six remain adverse same-release full-vs-simplified representation differences. The frozen original contract names the 2007 simplified source, with full-source comparison retained as adverse evidence; absent contrary source-applicability evidence these misses do not automatically replace that original input or impose a 66/6 split."
+  },
+  "source_limits": {
+    "license_provenance": "Preserve the source metadata Public Domain/2007 declaration separately from original page CC BY-SA 3.0 text and public-domain dedication; no new legal clearance is claimed.",
+    "territorial_status": "No political sovereignty or legal boundary determination is made. Empty direct-owner vectors are not used to erase actual foreign geometry contacts.",
+    "lleida": "The exact key at (96891,132142) remains held; no attempt was made to infer it away."
+  },
+  "independent_assessment": "Source identity, complete positive and bounded complete negative families, the actual whole-target physical witness, and the stock diagnostic/authority together support the stock constructor result for exactly71 original cells. The one Lleida-overlap key remains outside the positive subset. This is an adequate bounded positive repair path for71, while preserving the full72 original denominator and excluded nine-cell conflict scope. It is not a claim of final composition, hosted conservation, root acceptance, or credit; those remain separate.",
+  "not_performed_by_reviewer": [
+    "No owner observation, scanner, physical producer, native diagnostic, or authority command was rerun.",
+    "No new geometry or source data were acquired."
+  ],
+  "remaining_confirmation": "Inspect final composed candidate and exact public head before formal review; verify selected product adds exactly these71 cells without changing prior rows, and retains one held key and all source limitations."
+}

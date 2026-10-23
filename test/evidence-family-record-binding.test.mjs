@@ -33,7 +33,7 @@ test('encoded, decoded, combined and future output admission reject before any b
     f.readFile=Object.assign(()=>{reads++;return f.raw},{assertAncestor:()=>{}});
     zlib.gunzipSync=(...args)=>{gunzips++;return orig(...args)};syncBuiltinESMExports();
     const options={readFile:f.readFile,maxTotalBytes:f.file.bytes+f.file.uncompressed_bytes-1};
-    if(scenario==='decoded'){f.file.uncompressed_bytes=33554433;options.maxTotalBytes=268435456;}
+    if(scenario==='decoded'){f.file.uncompressed_bytes=33554433;options.maxTotalBytes=268435456;options.maxFileBytes=33554432;}
     if(scenario==='future-output')f.manifest.outputs=[{path:'future.txt',bytes:200,sha256:'0'.repeat(64),hash_kind:'file-bytes'}];
     if(scenario==='future-source')f.manifest.sources=[{id:'future',retention:'retained',files:[{path:'future-source.txt',bytes:200,sha256:'0'.repeat(64),hash_kind:'file-bytes'}]}];
     try{assert.throws(()=>validateEvidence(f.manifest,options),/budget|phase/);assert.equal(reads,0);assert.equal(gunzips,0);}
@@ -71,4 +71,23 @@ test('actual control CLI rejects files, dangling destinations and symlink parent
       if(kind==='symlink-parent'){assert.equal(sha256(fs.readFileSync(path.join(root,'real-parent/sentinel'))),before);assert.equal(fs.existsSync(destination),false);assert.equal(fs.lstatSync(parent).isSymbolicLink(),true);}
     }
   }finally{fs.rmSync(root,{recursive:true,force:true});}
+});
+
+
+test('complete-family custody reads and gunzips one checked snapshot while retaining both record joins',()=>{
+  const f=fixture(),original=zlib.gunzipSync,read=f.readFile;let reads=0,gunzips=0;
+  f.readFile=Object.assign((...args)=>{reads++;return read(...args);},{assertAncestor:read.assertAncestor});
+  zlib.gunzipSync=(...args)=>{gunzips++;return original(...args);};syncBuiltinESMExports();
+  try{assert.equal(run(f).limits.length,2);assert.equal(reads,1);assert.equal(gunzips,1);}
+  finally{zlib.gunzipSync=original;syncBuiltinESMExports();}
+});
+
+test('family snapshot rejects late descriptor/vintage drift and never carries trust across calls',()=>{
+  let f=fixture();
+  assert.throws(()=>validateEvidence(f.manifest,{readFile:f.readFile,onFileChecked(){f.file.uncompressed_sha256='0'.repeat(64);}}),/Checked subject descriptor changed/);
+  f=fixture();
+  assert.throws(()=>validateEvidence(f.manifest,{readFile:f.readFile,onFileChecked(){f.manifest.baseline.subject_files[ids[0]].commit='b'.repeat(40);}}),/unpinned/);
+  f=fixture();
+  assert.equal(validateEvidence(f.manifest,{readFile:f.readFile,onFileChecked(){f.raw.fill(0);}}).limits.length,2);
+  assert.throws(()=>run(f),/Input bytes mismatch/);
 });

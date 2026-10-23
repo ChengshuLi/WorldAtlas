@@ -27,9 +27,10 @@ export function validateDelivery(value){
 }
 export function validateOperation(deployment){
  const op=deployment.payload?.worldatlas_publication;
- need(op?.version===1&&op.operation_id&&op.publisher_worker_id&&['site','recovery'].includes(op.kind),'Malformed publisher operation');
+ need(op?.version===1&&op.operation_id&&op.publisher_worker_id&&['site','recovery','geography'].includes(op.kind),'Malformed publisher operation');
  need(sha(deployment.sha)&&deployment.sha===op.primary_commit&&Array.isArray(op.issues)&&op.issues.length>0&&op.issues.every(positive)&&new Set(op.issues).size===op.issues.length,'Unpinned operation scope');
  need(Number.isFinite(Date.parse(op.started_at))&&Number.isFinite(Date.parse(op.expires_at))&&Date.parse(op.expires_at)>Date.parse(op.started_at)&&typeof op.rollback_url==='string'&&op.rollback_url.startsWith('https://github.com/'+publicationRepo+'/'),'Missing bounded operation/rollback');
+ if(op.kind==='geography')need(/^[a-f0-9]{64}$/.test(op.operation_sha256??'')&&op.read_only===true&&op.origin==='https://worldatlas-explorer.chengshu-worldatlas.workers.dev'&&Date.parse(op.expires_at)-Date.parse(op.started_at)<=2*60*60*1000,'Unpinned geographic owner operation');
  return op;
 }
 async function resultReceipt(api,status,deployment,op){
@@ -97,16 +98,16 @@ export async function publicationPlan(api,{bootstrap=null}={}){
  const plan={version:1,target_commit:target,last_delivery:delivery,unsettled_operations:state.unsettled,commits:[],pull_requests:[],issues:[],unlinked_commits:[],blockers:[]};
  if(!delivery)plan.blockers.push('No verified primary delivery boundary: reconstruct from original build/deployment evidence; never substitute mirror SHA or current main');
  else{
-  // Compare API pagination is bounded independently of files (files are irrelevant).
+  // Read the complete pinned commit comparison; its file inventory is irrelevant.
   const commits=[];let total;
-  for(let page=1;page<=100;page++){
+  for(let page=1;;page++){
    const comparison=await api(root+'/compare/'+delivery.primary_commit+'...'+target+'?per_page=100&page='+page);
    need(['ahead','identical'].includes(comparison.status)&&comparison.merge_base_commit?.sha===delivery.primary_commit,'Delivered commit is not an ancestor of pinned main');
    need(Number.isSafeInteger(comparison.total_commits)&&comparison.total_commits>=0&&Array.isArray(comparison.commits),'Incomplete comparison');
    if(total===undefined)total=comparison.total_commits;need(total===comparison.total_commits,'Comparison changed during pagination');
    commits.push(...comparison.commits);
    if(commits.length===total)break;
-   need(commits.length<total&&comparison.commits.length===100&&page<100,'Incomplete commit pagination');
+   need(commits.length<total&&comparison.commits.length===100,'Incomplete commit pagination');
   }
   need(commits.length===total&&new Set(commits.map(c=>c.sha)).size===total&&commits.every(c=>sha(c.sha)),'Incomplete/duplicate commit inventory');
   // Check successive delivered receipts are monotone; a stale or divergent delivery cannot silently replace one.
@@ -136,7 +137,10 @@ export async function publicationPlan(api,{bootstrap=null}={}){
   }
  }
  for(const issue of [...issues.values()].sort((a,b)=>a.number-b.number)){
-  need(!issue.pull_request,'Issue reference points to a PR: inspect scope manually');
+  if(issue.pull_request){
+   for(const pr of plan.pull_requests.filter(pr=>pr.issues.includes(issue.number))){pr.issues=pr.issues.filter(number=>number!==issue.number);(pr.related_pull_requests??=[]).push(issue.number);pr.needs_manual_issue_mapping=pr.issues.length===0;}
+   continue; // Related PRs are provenance, not original acceptance issues or a live-work gate.
+  }
   plan.issues.push({number:issue.number,title:issue.title,state:issue.state,url:issue.html_url,labels:issue.labels.map(label=>typeof label==='string'?label:label.name),discovery:issue.discovery,last_check:pendingChecks.get(issue.number)??null,eligibility:'unreviewed'});
  }
  if(state.unsettled.length)plan.blockers.push('An active/unsettled operation blocks new live work');

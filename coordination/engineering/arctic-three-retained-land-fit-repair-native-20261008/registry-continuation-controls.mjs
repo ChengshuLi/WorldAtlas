@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 // Exact production function extraction: sparse author checkout lacks the old full import closure.
-const source=fs.readFileSync('coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs','utf8');
+const source=fs.readFileSync('coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/predecessor-context-v9.mjs','utf8');
 const body=source.slice(source.indexOf('export function verifyRegistryContinuation('),source.indexOf('export function verifyAuthoredValidatorSources('));
 const verifyRegistryContinuation=Function('assert',body.replace('export function','function')+';return verifyRegistryContinuation;')(assert);
 const originalRaw=fs.readFileSync('scripts/native-ownership/verified-candidates.json'),original=JSON.parse(originalRaw);

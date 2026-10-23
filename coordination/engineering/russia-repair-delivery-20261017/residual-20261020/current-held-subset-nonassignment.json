@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "kind": "russia-current-cumulative-patch-held-subset-nonassignment-v1",
+  "created_at_utc": "2026-10-20",
+  "status": "passed",
+  "scope": {
+    "package_id": "gb-RUS-ADM2--repair-evaluation",
+    "data_commit": "a7930ca6eb907823caeff668af09c2f9bcbdf5ef",
+    "active_cumulative_patch_commit": "cbc470a2185a739fc07835c622ec1987d867310a",
+    "held_cells": 9451,
+    "held_intervals": 3878,
+    "held_scanlines": 3380,
+    "check_type": "held-subset interval comparison to complete current cumulative selected additive patch; not full-package owner observation"
+  },
+  "selector_chain": {
+    "root_selector": {
+      "commit": "a7930ca6eb907823caeff668af09c2f9bcbdf5ef",
+      "path": "data/ownership-selection.json",
+      "git_blob_oid": "2e1ec2875d2932eafb33f4c1062412282df234cb",
+      "bytes": 1851,
+      "sha256": "c84656cbbab04c214a37717933cb129ea78bac8838bf0feff44b02f5a1997c62"
+    },
+    "selected_sidecar": {
+      "commit": "a7930ca6eb907823caeff668af09c2f9bcbdf5ef",
+      "path": "coordination/engineering/brunei-original-repair-20261019/finalized-002/ownership-selection-brn-828.json",
+      "git_blob_oid": "ea5fb193ca975d499ebae354d257d4ce9332ba95",
+      "bytes": 3440,
+      "sha256": "813392703f41cedef539fa91e74bf75df990a9ff1083aa7c82e7dcad30bc9989"
+    },
+    "base_manifest": {
+      "commit": "7e423077552651d6ec1d6bf6b879c34e956f985a",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/base-native-manifest.json",
+      "git_blob_oid": "31d970d0fe2bf8c899f020aad09a3826ea451790",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+    },
+    "owner_roster": {
+      "commit": "7e423077552651d6ec1d6bf6b879c34e956f985a",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f"
+    },
+    "owner_roster_decoded": {
+      "bytes": 11096191,
+      "sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+    },
+    "runtime_envelope": {
+      "commit": "cbc470a2185a739fc07835c622ec1987d867310a",
+      "path": "coordination/engineering/brunei-original-repair-20261019/composition-002/runtime-envelope.json",
+      "git_blob_oid": "756fc10940ac428fabebdc4d5362ad671d56d911",
+      "bytes": 1391,
+      "sha256": "0d8ec6bbb53e1b27748752ea4aada91bd0bd94aa21100f24e7e126c2a15dd76e"
+    },
+    "authority_registry": {
+      "commit": "cbc470a2185a739fc07835c622ec1987d867310a",
+      "path": "coordination/engineering/brunei-original-repair-20261019/composition-002/authority-registry.json",
+      "git_blob_oid": "6e827006b2542340fc3b87f822769cbc9eafa428",
+      "bytes": 252551,
+      "sha256": "3736928a13c569c805bd65d32fd55ab81dffc0da3201fb7503ac95fda17b8ce4"
+    },
+    "cumulative_patch": {
+      "commit": "cbc470a2185a739fc07835c622ec1987d867310a",
+      "path": "coordination/engineering/brunei-original-repair-20261019/composition-002/patch.json",
+      "git_blob_oid": "441d191f751eff76845cecd7666bdd0c76f14d19",
+      "bytes": 30403385,
+      "sha256": "fca6c6c0227f67513bf24fcf46c550da045edecec189379c26783724f474ae3e"
+    },
+    "cumulative_ledger": {
+      "commit": "cbc470a2185a739fc07835c622ec1987d867310a",
+      "path": "coordination/engineering/brunei-original-repair-20261019/composition-002/selected-ledger.json",
+      "git_blob_oid": "7d2f0d0ddc7bc51bafc88843f0a7de1274fa3786",
+      "bytes": 62142321,
+      "sha256": "d706062f9bb901cf1fcafe09087d289c6646cea58fb553107cbd03a20bb4398a"
+    },
+    "registry_value_sha256": "3736928a13c569c805bd65d32fd55ab81dffc0da3201fb7503ac95fda17b8ce4",
+    "patch_metadata": {
+      "kind": "unassigned-native-cells-v1",
+      "version": 2,
+      "ledger_sha256": "d706062f9bb901cf1fcafe09087d289c6646cea58fb553107cbd03a20bb4398a",
+      "authority_registry_sha256": "3736928a13c569c805bd65d32fd55ab81dffc0da3201fb7503ac95fda17b8ce4",
+      "base_reference": {
+        "footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+        "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+        "id": "geography:review:211cb423e8c3bdcb3cbe88a4327fbd47eb10ccb61cd0ca4b884ed376564e7718"
+      },
+      "effective_reference": {
+        "footprints_sha256": "871027784842e56cea846ccf3ff955078bec3e2c5ae7e74629ccbe3a33abbfbc",
+        "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+        "id": "geography:review:brn828-delivery-candidate-20261019"
+      }
+    }
+  },
+  "held_roster": {
+    "commit": "a7930ca6eb907823caeff668af09c2f9bcbdf5ef",
+    "path": "coordination/engineering/russia-repair-delivery-20261017/native-partition-preaccept-001/held-native-patch.json",
+    "git_blob_oid": "65e399377825e07b14d8763b37eb0ad515ef8de9",
+    "bytes": 156307,
+    "sha256": "7375330bf8bf2ba6432bc8c0fba869e42bcdcb3ec47cccf7fd3c72e52204a403"
+  },
+  "join_driver_code": {
+    "commit": "52e619379d32cc5e97b2b0aa3676e4508d1b86cc",
+    "path": "coordination/engineering/russia-repair-delivery-20261017/residual-20261020/verify-current-held-subset.mjs",
+    "git_blob_oid": "305fb28b7a06664991ee36cd431344db6701e679",
+    "bytes": 12315,
+    "sha256": "c278173447082dfc6e20d00b6bed7421dacc69f09ce457711aac48ce2c83a04f"
+  },
+  "parser_code": {
+    "commit": "a7930ca6eb907823caeff668af09c2f9bcbdf5ef",
+    "path": "scripts/native-patch-store.mjs",
+    "git_blob_oid": "c4afd08b55e176b90ade259d80059f2393bb54b5",
+    "bytes": 42142,
+    "sha256": "05175fe3b3b5b747c1d825ff10e713cd555185a269cf08914acebf347534c495"
+  },
+  "prior_accepted_bridge": {
+    "path": "coordination/engineering/five-repair-delivery-20261017/verification/eight-conservation-final.json",
+    "pin": {
+      "commit": "a7930ca6eb907823caeff668af09c2f9bcbdf5ef",
+      "path": "coordination/engineering/five-repair-delivery-20261017/verification/eight-conservation-final.json",
+      "git_blob_oid": "5e242c8dc041d3c91cb827bdd859ef556fd89bcf",
+      "bytes": 177226,
+      "sha256": "9731c26dd51318bc9fc3ffe423d95a1b69e7ff372e619278d172ee8d9dab67f6"
+    },
+    "pr_number": 2377,
+    "merge_commit": "821d5eacfec816f9eb21eeec8a9ebb990f4e16f4",
+    "accepted_run": 39006904251,
+    "accepted_receipt": 6230307071,
+    "scope_note": "Accepted exact-eight conservation baseline only; its selected-state selector is historical and does not by itself establish present owner-zero. Current Brunei patch comparison is separately pinned below."
+  },
+  "supplemental_offline_candidate_check": {
+    "path": "coordination/engineering/russia-repair-delivery-20261017/verification/patch-conservation.json",
+    "pin": {
+      "commit": "a7930ca6eb907823caeff668af09c2f9bcbdf5ef",
+      "path": "coordination/engineering/russia-repair-delivery-20261017/verification/patch-conservation.json",
+      "git_blob_oid": "0dd4bad1a6f700c4f0791608b7a6e1155494ea75",
+      "bytes": 5381,
+      "sha256": "e8aed9793ba735a30c5db06c6afaf19c3587e91965bd5b29ee93df71b4bd2b08"
+    },
+    "accepted": false,
+    "scope_note": "RUS offline candidate artifact only; not the accepted PR #2377 baseline bridge and not used as current selected-owner evidence."
+  },
+  "result": {
+    "held_key_count": 9451,
+    "held_interval_count": 3878,
+    "held_scanline_count": 3380,
+    "duplicate_held_keys": 0,
+    "cumulative_patch_interval_count": 1267597,
+    "held_key_patch_owner_hits": 0,
+    "held_interval_patch_overlaps": 0,
+    "conflicting_or_duplicate_selected_patch_intervals": 0,
+    "patch_parser_integrity": "Complete strict parse succeeded; parser rejects duplicate/unordered rows and unordered/overlapping intervals.",
+    "cumulative_patch_row_count": 163928,
+    "exact_held_patch_blob_oid": "65e399377825e07b14d8763b37eb0ad515ef8de9",
+    "current_base_owner_observation": "not performed",
+    "current_selected_state_check": "The retained accepted baseline bridge plus this exact current cumulative additive patch comparison establishes no current additive patch assignment/overlap for the held coordinate roster only."
+  },
+  "limits": [
+    "This is a held-subset current cumulative PATCH comparison, not the full-package observe-selected-owners result and not a full current base-owner observation.",
+    "The prior accepted bridge is historical and limited to its exact selector; the current Brunei cumulative patch is separately pinned and compared against all held coordinates.",
+    "No source/physical science was rerun. No land/water legal classification, source applicability, territorial authority, sovereignty, repair acceptance or new accepted credit is asserted.",
+    "All 9,451 original residual cells remain held/unassigned with zero new credit."
+  ]
+}

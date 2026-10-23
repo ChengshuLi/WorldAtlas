@@ -51,7 +51,9 @@ legacy/report-only evidence cannot authorize this exception.
 
 ## Independent decision and same-head rerun
 
-The normal exact-head `worldatlas-review:v1` receipt must substantively accept
+This specialized physical-water approval retains an exact-head
+`worldatlas-review:v1` decision comment; general scientific PR review does not
+require that format. The decision must substantively accept
 both source and geometry domains. Its additive `geographic_adjudications` field
 has `version: 1` and one `decisions` row for every dossier. Each decision records:
 
@@ -62,6 +64,16 @@ has `version: 1` and one `decisions` row for every dossier. Each decision record
 - Explicit `source_limits` and `source_refs_sha256`, computed using shared
   canonical JSON including the final newline.
 - Sorted, unique `finding_sha256s` covering every complete supported finding.
+
+The decision's existing v1 envelope binds `pr_number`, `head_sha`,
+`manifest_sha256`, `author_worker_id`, distinct `reviewer_worker_id`,
+`outcome: "accepted"`, actual validation `limits` and substantive `domains`
+(implementation, source, geometry and release where applicable). Each domain has
+an accepted or accepted-with-limits outcome, actual inspected scope and explicit
+limits. `validateReviewReceipt` in `scripts/premerge-evidence.mjs` validates this
+specialized envelope; all byte-validator limits remain required verbatim, and a
+limited source remains accepted-with-limits. This authorizes only the explicit
+per-dossier decision below, not a general geographic approval.
 
 The read-only adapter validates the actual issue contract and declared scope,
 whole-file evidence and latest distinct review from GitHub. Candidate-local

@@ -3,7 +3,6 @@ import gzip
 import subprocess
 import sys
 import tempfile
-import time
 from unittest.mock import patch
 import hashlib
 import importlib.util
@@ -48,7 +47,7 @@ class Native(unittest.TestCase):
   return {'member_bytes':at,'member_sha256':hashlib.sha256(b''.join(bodies)).hexdigest(),'parts':parts}
  def test_exact_single_body_and_order(self):
   index=self.fixture();seen=[]
-  body=m.physical_native_member(index,lambda p:p['body'],lambda:seen.append(True))
+  body=m.physical_native_member(index,lambda p:(seen.append(p['ordinal']),p['body'])[1])
   self.assertIsInstance(body,bytearray);self.assertEqual(body,b'abcdefghi');self.assertEqual(len(seen),3)
  def test_late_failure_never_returns_member_for_decode(self):
   for mutation in ['offset','ordinal','hash','size','late-corrupt']:
@@ -58,7 +57,7 @@ class Native(unittest.TestCase):
    elif mutation=='size':index['member_bytes']+=1
    else:index['parts'][-1]['body']=b'bad'
    with self.assertRaises(ValueError):
-    body=m.physical_native_member(index,lambda p:p['body'],lambda:None)
+    body=m.physical_native_member(index,lambda p:p['body'])
     decoded.append(body)
    self.assertFalse(decoded)
 
@@ -98,9 +97,9 @@ class PhysicalBoundary(unittest.TestCase):
       descriptor=next(p for p in [metadata_part,first,last] if p['path']==file.name)
       pin.update(decoded_bytes=descriptor['uncompressed_bytes'],decoded_sha256=descriptor['uncompressed_sha256'])
      pins.append(pin)
-    config={'version':1,'inputs':pins,'roles':{'stages':'data/stages.json','transport':'data/transport.json','native_index':'data/index.json','comparison':'data/comparison.py'},'metadata_prefix':'data','native_prefix':'data','resources':{'input_bytes':1000000,'output_bytes':1000000,'deadline_seconds':60},'runtime':{'python':sys.version,'numpy':numpy.__version__,'shapely':shapely.__version__,'geos':shapely.geos_version_string}}
+    config={'version':1,'inputs':pins,'roles':{'stages':'data/stages.json','transport':'data/transport.json','native_index':'data/index.json','comparison':'data/comparison.py'},'metadata_prefix':'data','native_prefix':'data','runtime':{'python':sys.version,'numpy':numpy.__version__,'shapely':shapely.__version__,'geos':shapely.geos_version_string}}
     raw=json.dumps(config).encode();(root/'config.json').write_bytes(raw)
-    admission={'observed_unix_seconds':time.time(),'program_sha256':m.sha(Path(m.__file__).read_bytes()),'config_sha256':m.sha(raw),'runtime_inventory_bytes':0,'execution_reserve_bytes':0,'allowance':{'rssBytes':2147483648,'phaseBytes':2147483648}}
+    admission={'version':1,'program_sha256':m.sha(Path(m.__file__).read_bytes()),'config_sha256':m.sha(raw),'runtime_files':[]}
     (root/'admission.json').write_text(json.dumps(admission))
     with patch.object(m,'verify_runtime',return_value=None),patch.object(m,'PHYSICAL_COMPARISON_SHA',m.sha(method)):
      with self.assertRaisesRegex(ValueError,'fragment|member'):

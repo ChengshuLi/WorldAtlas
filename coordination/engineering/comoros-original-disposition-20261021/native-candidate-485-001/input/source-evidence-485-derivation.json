@@ -1,0 +1,487 @@
+{
+  "version": 1,
+  "kind": "derived-source-evidence-owner-subset",
+  "source_input": {
+    "path": "coordination/engineering/comoros-original-disposition-20261021/evidence/source-004/source-evidence.json",
+    "commit": "5dd402383b2a1021a465b8e2c8c0406dd40f4832",
+    "git_blob_oid": "c2ca3c7d785bf35b2a067cc72b95ff9e6a0b9c89",
+    "bytes": 63667,
+    "sha256": "1696a8cb4d7e97dbefbf8bfbd939433e4b971fb3b00c7806693099e5ba96edc7"
+  },
+  "patch_input": {
+    "path": "coordination/engineering/comoros-original-disposition-20261021/native-candidate-485-001/input/native-patch.json",
+    "commit": "0425523d57759a741a0a31d4857d62a45207253c",
+    "bytes": 30149,
+    "sha256": "008fcd247cf8629ef5daa48b5d9f273963d345bd1bca3250ab2cffbfcb68eee0"
+  },
+  "source_physical_receipt_sha256": "55fa33003f115dae3bf9f397403000e8ffead4c83a6e80a7622881a67ac83b8b",
+  "transformation": "For each of the three sibling source-target rows, retain the original target, source-family, catalogue, physical receipt, selected-base and comparator fields byte-semantically unchanged; filter only coverage_rows to the exact keys in the candidate patch and coalesce adjacent cells with identical retained class.",
+  "accounting": {
+    "original_unique_keys": 571,
+    "candidate_unique_keys": 485,
+    "held_complement_keys": 86,
+    "candidate_class_counts": {
+      "mapped_land_support": 485,
+      "mapped_inland_water_support": 0
+    },
+    "candidate_keys_match_patch": true,
+    "held_complement_preserved_in_original_input": true,
+    "held_complement_exact_keys_xy_feature": [
+      {
+        "source_feature": "Grande Comore",
+        "x": 162647,
+        "y": 139415
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162648,
+        "y": 139415
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162649,
+        "y": 139415
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162653,
+        "y": 139415
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162628,
+        "y": 139421
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162604,
+        "y": 139434
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162603,
+        "y": 139435
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162602,
+        "y": 139436
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162594,
+        "y": 139452
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162594,
+        "y": 139453
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162590,
+        "y": 139478
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162598,
+        "y": 139510
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162598,
+        "y": 139512
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162586,
+        "y": 139595
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162584,
+        "y": 139649
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162581,
+        "y": 139653
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162580,
+        "y": 139657
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162577,
+        "y": 139666
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162565,
+        "y": 139684
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162682,
+        "y": 139797
+      },
+      {
+        "source_feature": "Grande Comore",
+        "x": 162685,
+        "y": 139801
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163463,
+        "y": 139937
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163459,
+        "y": 139938
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163476,
+        "y": 139947
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163478,
+        "y": 139950
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163481,
+        "y": 139954
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163482,
+        "y": 139956
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163483,
+        "y": 139977
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163485,
+        "y": 139981
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163488,
+        "y": 139986
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163410,
+        "y": 140010
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163275,
+        "y": 140013
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163275,
+        "y": 140014
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163499,
+        "y": 140021
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163331,
+        "y": 140023
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163333,
+        "y": 140023
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163335,
+        "y": 140026
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163335,
+        "y": 140028
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163356,
+        "y": 140028
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163337,
+        "y": 140029
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163356,
+        "y": 140029
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163356,
+        "y": 140030
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163344,
+        "y": 140031
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163354,
+        "y": 140031
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163504,
+        "y": 140037
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163513,
+        "y": 140069
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162874,
+        "y": 140073
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162878,
+        "y": 140074
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163513,
+        "y": 140074
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162886,
+        "y": 140076
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162887,
+        "y": 140076
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162888,
+        "y": 140076
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162889,
+        "y": 140077
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162904,
+        "y": 140080
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162925,
+        "y": 140089
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162939,
+        "y": 140097
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162941,
+        "y": 140098
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162946,
+        "y": 140102
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162956,
+        "y": 140105
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162960,
+        "y": 140110
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162965,
+        "y": 140114
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162979,
+        "y": 140124
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162989,
+        "y": 140126
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162990,
+        "y": 140127
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162992,
+        "y": 140128
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162995,
+        "y": 140129
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162997,
+        "y": 140129
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162998,
+        "y": 140129
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163512,
+        "y": 140129
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163511,
+        "y": 140132
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163511,
+        "y": 140139
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163515,
+        "y": 140144
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163484,
+        "y": 140153
+      },
+      {
+        "source_feature": "Anjouan",
+        "x": 163484,
+        "y": 140154
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 163030,
+        "y": 140158
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 163030,
+        "y": 140162
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 163029,
+        "y": 140170
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 163029,
+        "y": 140171
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162910,
+        "y": 140177
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162912,
+        "y": 140182
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162910,
+        "y": 140185
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162911,
+        "y": 140186
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162883,
+        "y": 140187
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162883,
+        "y": 140188
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162885,
+        "y": 140190
+      },
+      {
+        "source_feature": "Moheli",
+        "x": 162910,
+        "y": 140192
+      }
+    ]
+  },
+  "validation": {
+    "all_three_target_coverage_unions_equal_candidate_patch": true,
+    "all_retained_candidate_classes_mapped_land_support": true,
+    "source_geometry_and_physical_receipt_reused_without_change": true
+  },
+  "limits": [
+    "This derived source-evidence file scopes retained class rows to a candidate patch; it adds no source applicability, territorial exclusion, competitor completeness, authority, legal or current-boundary finding.",
+    "This remains proposed candidate input only; it does not establish acceptance or credit."
+  ],
+  "output": {
+    "path": "coordination/engineering/comoros-original-disposition-20261021/native-candidate-485-001/input/source-evidence-485.json",
+    "bytes": 169572,
+    "sha256": "6b10d96b1a55727f45e45c3c5f35c0ab7d2a1c4a5e93ab3430cfe5409a0ad380"
+  },
+  "generator": {
+    "path": "coordination/engineering/comoros-original-disposition-20261021/native-candidate-485-001/input/derive-source-evidence-485.py",
+    "bytes": 3543,
+    "sha256": "348baee13f8e6d0e364894f1c6461c72964b0079fea9e743c024e97c17841b62"
+  },
+  "partition_input": {
+    "path": "coordination/engineering/comoros-original-disposition-20261021/native-candidate-485-001/input/candidate-partition.json",
+    "bytes": 59360,
+    "sha256": "0a9b98b5f1e54fef4abef49446b61619227ef62b5d7fca0322f327587def0426",
+    "held_remainder_keys": 86
+  }
+}

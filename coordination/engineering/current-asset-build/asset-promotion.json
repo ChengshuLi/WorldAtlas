@@ -1,0 +1,2582 @@
+{
+  "version": 1,
+  "issue": 2011,
+  "operation": "one-time promotion of accepted current prepared data and published startup transport bytes",
+  "source": {
+    "run_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/38757451254",
+    "run_attempt": 1,
+    "artifact_id": 11985611672,
+    "artifact_name": "cloudflare-package-output-38757451254-1",
+    "artifact_bytes": 342422008,
+    "artifact_sha256": "2d1e5c97be60135a1510180960bd18fbd718cbf2400ddd7a3db51d0854c9d44b",
+    "source_head": "a8573a5d167ebdea5fc2d05d41cd26c648516b00",
+    "output_manifest_path": ".cache/package-output-manifest.json",
+    "output_manifest_sha256": "3b0be7e20bcb461412c39e603e6e719afb600ee317132e41ef449e9f127e084e"
+  },
+  "selection": {
+    "native_manifest_sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+    "release_id": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+    "footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+    "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+  },
+  "additive_effective_reference": {
+    "footprints_sha256": "efc0d7c1270bc4e990a8695bf63f772f78b614f355dab2a4cf7f9340a328218d",
+    "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "id": "geography:myanmar4334-delivery-20261015"
+  },
+  "semantics": [
+    "Current native, temporal, reference and prepared evidence remain bound to the accepted BASE footprint; additive Myanmar effective geography remains separately selected.",
+    "All promoted artifact members are authenticated against the accepted original package output manifest.",
+    "The source ownership archive download contract retains all84 exact archived bodies;45 missing aliases are copied from verified baseline source files before current-source replacement. No predecessor file is deleted.",
+    "Current temporal promotion uses exactly54 paths from the accepted runtime index. The separately recorded54 unprefixed legacy-public-compatibility paths preserve exact accepted prior public URL bodies; they are not the current runtime roster.",
+    "The current-startup bank retains all30 exact current and predecessor published transports; its pixelMap is the exact accepted artifact object.",
+    "Historical native context capture omits the old current_execution field and does not confer current execution authority."
+  ],
+  "scientific_producers_invoked": false,
+  "changed_files": [
+    {
+      "target": "data/canonical-grid/current-startup/index.json",
+      "bytes": 12771,
+      "sha256": "bd9d7176df746bbf84297b94495762e3154ab2508fe809109ff6941bd8b281b0",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-json-subobject-and-member-roster",
+        "path": "dist/client/atlas-geography.json",
+        "json_path": "pixelMap",
+        "members": 30
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/native-v1/native-row-latitudes.f64le.gz",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/native-v1/native-row-latitudes.f64le.gz",
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/native-v1/ownership/rows-0.bin.gz",
+      "bytes": 306620,
+      "sha256": "89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/native-v1/ownership/rows-0.bin.gz",
+        "sha256": "89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-0.bin.gz",
+      "bytes": 3854101,
+      "sha256": "3d551738a3454d2028e1d9adc352b7446d7c0f25c8d42044704cf1efb6f64b6b",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/native-v1/ownership/startup-runs-0.bin.gz",
+        "sha256": "3d551738a3454d2028e1d9adc352b7446d7c0f25c8d42044704cf1efb6f64b6b"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-12582912.bin.gz",
+      "bytes": 3478667,
+      "sha256": "01012dd358291a9e4ee51888a1d2b618ab2003e06a6eebd3a236392ecdbbc015",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/native-v1/ownership/startup-runs-12582912.bin.gz",
+        "sha256": "01012dd358291a9e4ee51888a1d2b618ab2003e06a6eebd3a236392ecdbbc015"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-16777216.bin.gz",
+      "bytes": 3289324,
+      "sha256": "d5ed4d7e1700fb60298a53cc37ad9943257f57f853e19cc786ef975ebc7f0cae",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/native-v1/ownership/startup-runs-16777216.bin.gz",
+        "sha256": "d5ed4d7e1700fb60298a53cc37ad9943257f57f853e19cc786ef975ebc7f0cae"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-20971520.bin.gz",
+      "bytes": 3146696,
+      "sha256": "198daba78eaeed9f316f088a86f8a7c4cf8f7e868253fc09487870eceddaf58a",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/native-v1/ownership/startup-runs-20971520.bin.gz",
+        "sha256": "198daba78eaeed9f316f088a86f8a7c4cf8f7e868253fc09487870eceddaf58a"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-25165824.bin.gz",
+      "bytes": 3272873,
+      "sha256": "764a967753d010daa794b30ca597bee0503646e7cae6965b14df63f280b9c544",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/native-v1/ownership/startup-runs-25165824.bin.gz",
+        "sha256": "764a967753d010daa794b30ca597bee0503646e7cae6965b14df63f280b9c544"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-29360128.bin.gz",
+      "bytes": 3296575,
+      "sha256": "ff29a1956ae0dd99e4db155c9cdabf96c72155a1a772210910d5119845759cf8",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/native-v1/ownership/startup-runs-29360128.bin.gz",
+        "sha256": "ff29a1956ae0dd99e4db155c9cdabf96c72155a1a772210910d5119845759cf8"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-33554432.bin.gz",
+      "bytes": 3521891,
+      "sha256": "826cffaf4b05286a68ae479bc6e6caba3b3b3993f7fa57eae08efe7f6089694b",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/native-v1/ownership/startup-runs-33554432.bin.gz",
+        "sha256": "826cffaf4b05286a68ae479bc6e6caba3b3b3993f7fa57eae08efe7f6089694b"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-37748736.bin.gz",
+      "bytes": 3497645,
+      "sha256": "18472136ceb94b95a17918acdfba32c56d13a2979043c66fb74cf615d81551ee",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/native-v1/ownership/startup-runs-37748736.bin.gz",
+        "sha256": "18472136ceb94b95a17918acdfba32c56d13a2979043c66fb74cf615d81551ee"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-4194304.bin.gz",
+      "bytes": 3428397,
+      "sha256": "da6498fc3c898adca6231896e9b1f2c734153064d78431bc5a311fec768c18f9",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/native-v1/ownership/startup-runs-4194304.bin.gz",
+        "sha256": "da6498fc3c898adca6231896e9b1f2c734153064d78431bc5a311fec768c18f9"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-41943040.bin.gz",
+      "bytes": 3534601,
+      "sha256": "f4e7f8de92e3d709db9675386961fac934a8a21652bf6f34f8d122ed71c73c44",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/native-v1/ownership/startup-runs-41943040.bin.gz",
+        "sha256": "f4e7f8de92e3d709db9675386961fac934a8a21652bf6f34f8d122ed71c73c44"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-46137344.bin.gz",
+      "bytes": 3556931,
+      "sha256": "bb9b1ba3ace6229a338eee6c903e1d5db637a765c46ed60f957ceb6e34346101",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/native-v1/ownership/startup-runs-46137344.bin.gz",
+        "sha256": "bb9b1ba3ace6229a338eee6c903e1d5db637a765c46ed60f957ceb6e34346101"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-50331648.bin.gz",
+      "bytes": 3397952,
+      "sha256": "09aaf4d9a115dea6a85ed2a853532045c627ea2408f259513ce9de8e616ef55d",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/native-v1/ownership/startup-runs-50331648.bin.gz",
+        "sha256": "09aaf4d9a115dea6a85ed2a853532045c627ea2408f259513ce9de8e616ef55d"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-54525952.bin.gz",
+      "bytes": 2460609,
+      "sha256": "91bfddd9aa632dc18ecc2f487a71673b504f971d2795e7c4af9c9298f4fe4fbc",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/native-v1/ownership/startup-runs-54525952.bin.gz",
+        "sha256": "91bfddd9aa632dc18ecc2f487a71673b504f971d2795e7c4af9c9298f4fe4fbc"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-8388608.bin.gz",
+      "bytes": 3423683,
+      "sha256": "244e3da13a412b4a4ccbc652191a080495a5611df5d0ee2207c8d08ac27b929a",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/native-v1/ownership/startup-runs-8388608.bin.gz",
+        "sha256": "244e3da13a412b4a4ccbc652191a080495a5611df5d0ee2207c8d08ac27b929a"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-0.bin.gz",
+      "bytes": 3854096,
+      "sha256": "5e73bd6ee306f3be021c7f89bf336c590ae3c02021df1c436d22088ed4284171",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-0.bin.gz",
+        "sha256": "5e73bd6ee306f3be021c7f89bf336c590ae3c02021df1c436d22088ed4284171"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-12582912.bin.gz",
+      "bytes": 3478667,
+      "sha256": "01012dd358291a9e4ee51888a1d2b618ab2003e06a6eebd3a236392ecdbbc015",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-12582912.bin.gz",
+        "sha256": "01012dd358291a9e4ee51888a1d2b618ab2003e06a6eebd3a236392ecdbbc015"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-16777216.bin.gz",
+      "bytes": 3289324,
+      "sha256": "d5ed4d7e1700fb60298a53cc37ad9943257f57f853e19cc786ef975ebc7f0cae",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-16777216.bin.gz",
+        "sha256": "d5ed4d7e1700fb60298a53cc37ad9943257f57f853e19cc786ef975ebc7f0cae"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-20971520.bin.gz",
+      "bytes": 3146696,
+      "sha256": "198daba78eaeed9f316f088a86f8a7c4cf8f7e868253fc09487870eceddaf58a",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-20971520.bin.gz",
+        "sha256": "198daba78eaeed9f316f088a86f8a7c4cf8f7e868253fc09487870eceddaf58a"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-25165824.bin.gz",
+      "bytes": 3272873,
+      "sha256": "764a967753d010daa794b30ca597bee0503646e7cae6965b14df63f280b9c544",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-25165824.bin.gz",
+        "sha256": "764a967753d010daa794b30ca597bee0503646e7cae6965b14df63f280b9c544"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-29360128.bin.gz",
+      "bytes": 3296575,
+      "sha256": "ff29a1956ae0dd99e4db155c9cdabf96c72155a1a772210910d5119845759cf8",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-29360128.bin.gz",
+        "sha256": "ff29a1956ae0dd99e4db155c9cdabf96c72155a1a772210910d5119845759cf8"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-33554432.bin.gz",
+      "bytes": 3521891,
+      "sha256": "826cffaf4b05286a68ae479bc6e6caba3b3b3993f7fa57eae08efe7f6089694b",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-33554432.bin.gz",
+        "sha256": "826cffaf4b05286a68ae479bc6e6caba3b3b3993f7fa57eae08efe7f6089694b"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-37748736.bin.gz",
+      "bytes": 3497645,
+      "sha256": "18472136ceb94b95a17918acdfba32c56d13a2979043c66fb74cf615d81551ee",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-37748736.bin.gz",
+        "sha256": "18472136ceb94b95a17918acdfba32c56d13a2979043c66fb74cf615d81551ee"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-4194304.bin.gz",
+      "bytes": 3428397,
+      "sha256": "da6498fc3c898adca6231896e9b1f2c734153064d78431bc5a311fec768c18f9",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-4194304.bin.gz",
+        "sha256": "da6498fc3c898adca6231896e9b1f2c734153064d78431bc5a311fec768c18f9"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-41943040.bin.gz",
+      "bytes": 3534601,
+      "sha256": "f4e7f8de92e3d709db9675386961fac934a8a21652bf6f34f8d122ed71c73c44",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-41943040.bin.gz",
+        "sha256": "f4e7f8de92e3d709db9675386961fac934a8a21652bf6f34f8d122ed71c73c44"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-46137344.bin.gz",
+      "bytes": 3556931,
+      "sha256": "bb9b1ba3ace6229a338eee6c903e1d5db637a765c46ed60f957ceb6e34346101",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-46137344.bin.gz",
+        "sha256": "bb9b1ba3ace6229a338eee6c903e1d5db637a765c46ed60f957ceb6e34346101"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-50331648.bin.gz",
+      "bytes": 3397952,
+      "sha256": "09aaf4d9a115dea6a85ed2a853532045c627ea2408f259513ce9de8e616ef55d",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-50331648.bin.gz",
+        "sha256": "09aaf4d9a115dea6a85ed2a853532045c627ea2408f259513ce9de8e616ef55d"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-54525952.bin.gz",
+      "bytes": 2460609,
+      "sha256": "91bfddd9aa632dc18ecc2f487a71673b504f971d2795e7c4af9c9298f4fe4fbc",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-54525952.bin.gz",
+        "sha256": "91bfddd9aa632dc18ecc2f487a71673b504f971d2795e7c4af9c9298f4fe4fbc"
+      }
+    },
+    {
+      "target": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-8388608.bin.gz",
+      "bytes": 3423683,
+      "sha256": "244e3da13a412b4a4ccbc652191a080495a5611df5d0ee2207c8d08ac27b929a",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-8388608.bin.gz",
+        "sha256": "244e3da13a412b4a4ccbc652191a080495a5611df5d0ee2207c8d08ac27b929a"
+      }
+    },
+    {
+      "target": "data/current-build-context.json",
+      "bytes": 14592,
+      "sha256": "28b93994927f461df6199a1ebfcbdf2953d37e57be6338599caec5d8918846ab",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-json-subobjects",
+        "path": "dist/client/atlas-geography.json",
+        "json_paths": [
+          "boundarySourceReviews",
+          "coverageClassification",
+          "nativeContextInputStage"
+        ],
+        "omitted_fields": [
+          "nativeContextInputStage.current_execution"
+        ],
+        "role": "historical capture only"
+      }
+    },
+    {
+      "target": "data/ownership-history/algorithms/incremental/7d2cb076cafcc132-31ea705a96a09ed3/prepare-ownership-incremental.py",
+      "bytes": 28797,
+      "sha256": "31ea705a96a09ed3a2ced8081434c4d2b25557c14c473c6bd77adf29704047e9",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-history/algorithms/incremental/7d2cb076cafcc132-31ea705a96a09ed3/prepare-ownership-incremental.py",
+        "sha256": "31ea705a96a09ed3a2ced8081434c4d2b25557c14c473c6bd77adf29704047e9"
+      }
+    },
+    {
+      "target": "data/ownership-history/archive-4.json.gz",
+      "bytes": 1136,
+      "sha256": "4cb54089682d0bf2ef4270b3eb39ee7c2858b98c363988979a7857aa1c350a33",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-history/archive-4.json.gz",
+        "sha256": "4cb54089682d0bf2ef4270b3eb39ee7c2858b98c363988979a7857aa1c350a33"
+      }
+    },
+    {
+      "target": "data/ownership-history/archive-index.json",
+      "bytes": 579561,
+      "sha256": "89b8182439c3ce6eda670d2c19f00b4fb148f7ed0022c608f2f5d033f6ffb8cb",
+      "previous": {
+        "bytes": 577132,
+        "sha256": "cb52d2bb0d1a4f54672cc6883ad35e00c7509664d92be80b4d7d56317d0b4b16"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-history/archive-index.json",
+        "sha256": "89b8182439c3ce6eda670d2c19f00b4fb148f7ed0022c608f2f5d033f6ffb8cb"
+      }
+    },
+    {
+      "target": "data/ownership-history/changed-38.json.gz",
+      "bytes": 1166,
+      "sha256": "5e0f5315f51d792711c283a942d06cc437abf6427db7e26f2d41272590d14f32",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-history/changed-38.json.gz",
+        "sha256": "5e0f5315f51d792711c283a942d06cc437abf6427db7e26f2d41272590d14f32"
+      }
+    },
+    {
+      "target": "data/ownership-history/historical-diagnostics.json",
+      "bytes": 1021,
+      "sha256": "a69561a535bbf7351d3f7fc9b9c5359a3c56c133dbe89f3324c5b48c5cd1796f",
+      "previous": {
+        "bytes": 2653,
+        "sha256": "068d7e2cd6eb54f51304444aa9ebb319efef5b430dd39be82abba09a5f1779f3"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-history/historical-diagnostics.json",
+        "sha256": "a69561a535bbf7351d3f7fc9b9c5359a3c56c133dbe89f3324c5b48c5cd1796f"
+      }
+    },
+    {
+      "target": "data/ownership-history/incremental-evidence-1435750.json.gz",
+      "bytes": 1023,
+      "sha256": "fc5dcf33d0d3b2db4e4231cbcdd8185d46e31dd4bfd953ab64caf2de171cae70",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-history/incremental-evidence-1435750.json.gz",
+        "sha256": "fc5dcf33d0d3b2db4e4231cbcdd8185d46e31dd4bfd953ab64caf2de171cae70"
+      }
+    },
+    {
+      "target": "data/ownership-history/index.json",
+      "bytes": 588023,
+      "sha256": "2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179",
+      "previous": {
+        "bytes": 579219,
+        "sha256": "0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-history/index.json",
+        "sha256": "2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179"
+      }
+    },
+    {
+      "target": "data/ownership-history/location-identity-map.json.gz",
+      "bytes": 5029255,
+      "sha256": "c004dc5866c22e34bc02fd19834322fc2fcee46075e46682b4c3290a2cea3986",
+      "previous": {
+        "bytes": 5029234,
+        "sha256": "ce0fade04cef21cd78b3a305bef520720b358ba43d209d498a2aecfa6b09bffa"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-history/location-identity-map.json.gz",
+        "sha256": "c004dc5866c22e34bc02fd19834322fc2fcee46075e46682b4c3290a2cea3986"
+      }
+    },
+    {
+      "target": "data/ownership-history/migration-receipt.json",
+      "bytes": 1957437,
+      "sha256": "7d2cb076cafcc1323e0d70e2817a3db6f18313ff910a5a588c3e90cbf9c61022",
+      "previous": {
+        "bytes": 1886445,
+        "sha256": "e2eb810a57988535c24354a3b45d73e32e004ecfb6597ecdcde272f1c65730d0"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-history/migration-receipt.json",
+        "sha256": "7d2cb076cafcc1323e0d70e2817a3db6f18313ff910a5a588c3e90cbf9c61022"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/archive-15.json.gz",
+      "bytes": 2102,
+      "sha256": "2c2f17d508b60b4f51e09b33659dd30f59d14b89e6b66a705ccb37ee62e7a03c",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/archive-15.json.gz",
+        "sha256": "2c2f17d508b60b4f51e09b33659dd30f59d14b89e6b66a705ccb37ee62e7a03c",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/archive-22.json.gz",
+      "bytes": 2141,
+      "sha256": "e9062ade10b8cc7db5ae4b87a88e74071961ab9ab6ab7b83992ae242c96ad44b",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/archive-22.json.gz",
+        "sha256": "e9062ade10b8cc7db5ae4b87a88e74071961ab9ab6ab7b83992ae242c96ad44b",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/archive-index.json",
+      "bytes": 577132,
+      "sha256": "cb52d2bb0d1a4f54672cc6883ad35e00c7509664d92be80b4d7d56317d0b4b16",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/archive-index.json",
+        "sha256": "cb52d2bb0d1a4f54672cc6883ad35e00c7509664d92be80b4d7d56317d0b4b16",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/historical-diagnostics.json",
+      "bytes": 2653,
+      "sha256": "068d7e2cd6eb54f51304444aa9ebb319efef5b430dd39be82abba09a5f1779f3",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/historical-diagnostics.json",
+        "sha256": "068d7e2cd6eb54f51304444aa9ebb319efef5b430dd39be82abba09a5f1779f3",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/location-identity-map.json.gz",
+      "bytes": 5029234,
+      "sha256": "ce0fade04cef21cd78b3a305bef520720b358ba43d209d498a2aecfa6b09bffa",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/location-identity-map.json.gz",
+        "sha256": "ce0fade04cef21cd78b3a305bef520720b358ba43d209d498a2aecfa6b09bffa",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/migration-receipt.json",
+      "bytes": 1886445,
+      "sha256": "e2eb810a57988535c24354a3b45d73e32e004ecfb6597ecdcde272f1c65730d0",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/migration-receipt.json",
+        "sha256": "e2eb810a57988535c24354a3b45d73e32e004ecfb6597ecdcde272f1c65730d0",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/archive-0.json.gz",
+      "bytes": 42,
+      "sha256": "e12c20417066c3f13b6ca547a51f4bb633b5fca7ac15fd05a2b67c95330437a4",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/archive-0.json.gz",
+        "sha256": "e12c20417066c3f13b6ca547a51f4bb633b5fca7ac15fd05a2b67c95330437a4",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/archive-35.json.gz",
+      "bytes": 36,
+      "sha256": "80071d46efe64cdd73a122960754dda24e6d645dfc4f828dd84c794316285ff7",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/archive-35.json.gz",
+        "sha256": "80071d46efe64cdd73a122960754dda24e6d645dfc4f828dd84c794316285ff7",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/archive-index.json",
+      "bytes": 574752,
+      "sha256": "9bb8726591c17ace2cf602f12c3f4ce4a1b6c1b5a98393e89844bfd8c11f6d91",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/archive-index.json",
+        "sha256": "9bb8726591c17ace2cf602f12c3f4ce4a1b6c1b5a98393e89844bfd8c11f6d91",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/location-identity-map.json.gz",
+      "bytes": 5087769,
+      "sha256": "8cebfa593af9af8cc943351686cef528ba82156a320d3d473a279f002d2efd7e",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/location-identity-map.json.gz",
+        "sha256": "8cebfa593af9af8cc943351686cef528ba82156a320d3d473a279f002d2efd7e",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/migration-receipt.json",
+      "bytes": 2079222,
+      "sha256": "e08d67bc39bde0e11e86f60ffcf9b3867ad5cfaa50c3bd1544b11b7cd4b6cbc5",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/migration-receipt.json",
+        "sha256": "e08d67bc39bde0e11e86f60ffcf9b3867ad5cfaa50c3bd1544b11b7cd4b6cbc5",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-0.json.gz",
+      "bytes": 53,
+      "sha256": "6ece1b82269404a936dfc7619fd942c51a3d067b3c4da736a52d2c948110e008",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-0.json.gz",
+        "sha256": "6ece1b82269404a936dfc7619fd942c51a3d067b3c4da736a52d2c948110e008",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-14.json.gz",
+      "bytes": 64,
+      "sha256": "05008806b32132a07528a974380a7d2a7bd2524a950bdcb4bf409cfb749aaae5",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-14.json.gz",
+        "sha256": "05008806b32132a07528a974380a7d2a7bd2524a950bdcb4bf409cfb749aaae5",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-4.json.gz",
+      "bytes": 2111,
+      "sha256": "9ed395fe415b1859077b90df09262ac317fface69c991fa1925bdf9b2b6e488f",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-4.json.gz",
+        "sha256": "9ed395fe415b1859077b90df09262ac317fface69c991fa1925bdf9b2b6e488f",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-5.json.gz",
+      "bytes": 64,
+      "sha256": "c840822c3ed688661241d5301087d6e6bff8cceb5bfabd00a66d34a400fe0ddc",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-5.json.gz",
+        "sha256": "c840822c3ed688661241d5301087d6e6bff8cceb5bfabd00a66d34a400fe0ddc",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-index.json",
+      "bytes": 572633,
+      "sha256": "3ae55147fe12006f1806e80226031492d2072ad1c92ad92d39b77ed79918f61a",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-index.json",
+        "sha256": "3ae55147fe12006f1806e80226031492d2072ad1c92ad92d39b77ed79918f61a",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/location-identity-map.json.gz",
+      "bytes": 5101795,
+      "sha256": "e870094faf26a3b961bcb4ca4bacd39aa4853706d63219bc4bc94b8f6d7f7245",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/location-identity-map.json.gz",
+        "sha256": "e870094faf26a3b961bcb4ca4bacd39aa4853706d63219bc4bc94b8f6d7f7245",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/migration-receipt.json",
+      "bytes": 3540073,
+      "sha256": "f44affea3bf822e7d87a8913054ae2c8c96edb2235fa903bc559c2e7c1e90607",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/migration-receipt.json",
+        "sha256": "f44affea3bf822e7d87a8913054ae2c8c96edb2235fa903bc559c2e7c1e90607",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-0.json.gz",
+      "bytes": 5657,
+      "sha256": "7ded30565955ccd0c201457be502131cf85b2828e30c869d051a40967ce0b0ef",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-0.json.gz",
+        "sha256": "7ded30565955ccd0c201457be502131cf85b2828e30c869d051a40967ce0b0ef",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-18.json.gz",
+      "bytes": 1543,
+      "sha256": "1af1ade446031c726890a408b4248b9eb32c1140d157077e1d36efc679088247",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-18.json.gz",
+        "sha256": "1af1ade446031c726890a408b4248b9eb32c1140d157077e1d36efc679088247",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-20.json.gz",
+      "bytes": 104,
+      "sha256": "04c390c2ac061e0f342375cb6d31db2643ea04bb5f065f73391750eeee439b05",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-20.json.gz",
+        "sha256": "04c390c2ac061e0f342375cb6d31db2643ea04bb5f065f73391750eeee439b05",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-26.json.gz",
+      "bytes": 2922,
+      "sha256": "0da600a0169c529951415b1511422d049405f84cbc2adc57d025b36146f63a46",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-26.json.gz",
+        "sha256": "0da600a0169c529951415b1511422d049405f84cbc2adc57d025b36146f63a46",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-3.json.gz",
+      "bytes": 1779,
+      "sha256": "7e84d02bb9e94ed54360bbc0cb1a7a7602fa4133bebff66b3112c451ca083d65",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-3.json.gz",
+        "sha256": "7e84d02bb9e94ed54360bbc0cb1a7a7602fa4133bebff66b3112c451ca083d65",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-30.json.gz",
+      "bytes": 128,
+      "sha256": "9b263896b9c8190fb482429ba7b9d3cf09469e80f9ccbbaaec17b30e6a620ea5",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-30.json.gz",
+        "sha256": "9b263896b9c8190fb482429ba7b9d3cf09469e80f9ccbbaaec17b30e6a620ea5",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-31.json.gz",
+      "bytes": 81,
+      "sha256": "4c68140228be621bfa1ce70495f47b5d6cff94e6c4277c32a043f4aa5e7d666a",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-31.json.gz",
+        "sha256": "4c68140228be621bfa1ce70495f47b5d6cff94e6c4277c32a043f4aa5e7d666a",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-index.json",
+      "bytes": 569129,
+      "sha256": "b469f0994e1045258974c8fda383a3e41a01c96875e0dcf8d79f64f7981700bc",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-index.json",
+        "sha256": "b469f0994e1045258974c8fda383a3e41a01c96875e0dcf8d79f64f7981700bc",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/location-identity-map.json.gz",
+      "bytes": 5083607,
+      "sha256": "c4c6513d60e215eba58dda78d53f1f9c723affa4d25d689213453b3ffe0b5969",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/location-identity-map.json.gz",
+        "sha256": "c4c6513d60e215eba58dda78d53f1f9c723affa4d25d689213453b3ffe0b5969",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/migration-receipt.json",
+      "bytes": 2483050,
+      "sha256": "31a2022aee12afec285f2e12fad703073c707f799bae6337264351bf86aa346a",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/migration-receipt.json",
+        "sha256": "31a2022aee12afec285f2e12fad703073c707f799bae6337264351bf86aa346a",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-0.json.gz",
+      "bytes": 53,
+      "sha256": "6ece1b82269404a936dfc7619fd942c51a3d067b3c4da736a52d2c948110e008",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-0.json.gz",
+        "sha256": "6ece1b82269404a936dfc7619fd942c51a3d067b3c4da736a52d2c948110e008",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-14.json.gz",
+      "bytes": 64,
+      "sha256": "05008806b32132a07528a974380a7d2a7bd2524a950bdcb4bf409cfb749aaae5",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-14.json.gz",
+        "sha256": "05008806b32132a07528a974380a7d2a7bd2524a950bdcb4bf409cfb749aaae5",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-4.json.gz",
+      "bytes": 2111,
+      "sha256": "9ed395fe415b1859077b90df09262ac317fface69c991fa1925bdf9b2b6e488f",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-4.json.gz",
+        "sha256": "9ed395fe415b1859077b90df09262ac317fface69c991fa1925bdf9b2b6e488f",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-5.json.gz",
+      "bytes": 64,
+      "sha256": "c840822c3ed688661241d5301087d6e6bff8cceb5bfabd00a66d34a400fe0ddc",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-5.json.gz",
+        "sha256": "c840822c3ed688661241d5301087d6e6bff8cceb5bfabd00a66d34a400fe0ddc",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-index.json",
+      "bytes": 572633,
+      "sha256": "3ae55147fe12006f1806e80226031492d2072ad1c92ad92d39b77ed79918f61a",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-index.json",
+        "sha256": "3ae55147fe12006f1806e80226031492d2072ad1c92ad92d39b77ed79918f61a",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/location-identity-map.json.gz",
+      "bytes": 5101795,
+      "sha256": "e870094faf26a3b961bcb4ca4bacd39aa4853706d63219bc4bc94b8f6d7f7245",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/location-identity-map.json.gz",
+        "sha256": "e870094faf26a3b961bcb4ca4bacd39aa4853706d63219bc4bc94b8f6d7f7245",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/migration-receipt.json",
+      "bytes": 3540073,
+      "sha256": "f44affea3bf822e7d87a8913054ae2c8c96edb2235fa903bc559c2e7c1e90607",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/migration-receipt.json",
+        "sha256": "f44affea3bf822e7d87a8913054ae2c8c96edb2235fa903bc559c2e7c1e90607",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-0.json.gz",
+      "bytes": 5657,
+      "sha256": "7ded30565955ccd0c201457be502131cf85b2828e30c869d051a40967ce0b0ef",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-0.json.gz",
+        "sha256": "7ded30565955ccd0c201457be502131cf85b2828e30c869d051a40967ce0b0ef",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-18.json.gz",
+      "bytes": 1543,
+      "sha256": "1af1ade446031c726890a408b4248b9eb32c1140d157077e1d36efc679088247",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-18.json.gz",
+        "sha256": "1af1ade446031c726890a408b4248b9eb32c1140d157077e1d36efc679088247",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-20.json.gz",
+      "bytes": 104,
+      "sha256": "04c390c2ac061e0f342375cb6d31db2643ea04bb5f065f73391750eeee439b05",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-20.json.gz",
+        "sha256": "04c390c2ac061e0f342375cb6d31db2643ea04bb5f065f73391750eeee439b05",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-26.json.gz",
+      "bytes": 2922,
+      "sha256": "0da600a0169c529951415b1511422d049405f84cbc2adc57d025b36146f63a46",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-26.json.gz",
+        "sha256": "0da600a0169c529951415b1511422d049405f84cbc2adc57d025b36146f63a46",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-3.json.gz",
+      "bytes": 1779,
+      "sha256": "7e84d02bb9e94ed54360bbc0cb1a7a7602fa4133bebff66b3112c451ca083d65",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-3.json.gz",
+        "sha256": "7e84d02bb9e94ed54360bbc0cb1a7a7602fa4133bebff66b3112c451ca083d65",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-30.json.gz",
+      "bytes": 128,
+      "sha256": "9b263896b9c8190fb482429ba7b9d3cf09469e80f9ccbbaaec17b30e6a620ea5",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-30.json.gz",
+        "sha256": "9b263896b9c8190fb482429ba7b9d3cf09469e80f9ccbbaaec17b30e6a620ea5",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-31.json.gz",
+      "bytes": 81,
+      "sha256": "4c68140228be621bfa1ce70495f47b5d6cff94e6c4277c32a043f4aa5e7d666a",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-31.json.gz",
+        "sha256": "4c68140228be621bfa1ce70495f47b5d6cff94e6c4277c32a043f4aa5e7d666a",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-index.json",
+      "bytes": 569129,
+      "sha256": "b469f0994e1045258974c8fda383a3e41a01c96875e0dcf8d79f64f7981700bc",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-index.json",
+        "sha256": "b469f0994e1045258974c8fda383a3e41a01c96875e0dcf8d79f64f7981700bc",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/location-identity-map.json.gz",
+      "bytes": 5083607,
+      "sha256": "c4c6513d60e215eba58dda78d53f1f9c723affa4d25d689213453b3ffe0b5969",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/location-identity-map.json.gz",
+        "sha256": "c4c6513d60e215eba58dda78d53f1f9c723affa4d25d689213453b3ffe0b5969",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/prior-archives/0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/migration-receipt.json",
+      "bytes": 2483050,
+      "sha256": "31a2022aee12afec285f2e12fad703073c707f799bae6337264351bf86aa346a",
+      "previous": null,
+      "source": {
+        "kind": "retained-source-alias",
+        "baseline_commit": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+        "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/migration-receipt.json",
+        "sha256": "31a2022aee12afec285f2e12fad703073c707f799bae6337264351bf86aa346a",
+        "authority": "dist/client/ownership-history/archive-delivery.json archives"
+      }
+    },
+    {
+      "target": "data/ownership-history/reuse-37.json.gz",
+      "bytes": 2811,
+      "sha256": "63ba085906659d000b4ef874a02771d36473a4ad9d5e810ebf4098dc3c2fed74",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-history/reuse-37.json.gz",
+        "sha256": "63ba085906659d000b4ef874a02771d36473a4ad9d5e810ebf4098dc3c2fed74"
+      }
+    },
+    {
+      "target": "data/ownership-history/reuse-4.json.gz",
+      "bytes": 352731,
+      "sha256": "1ab83f05331a92f4fa3b691284b0da13b3cac38533bba7812577d36322601f3e",
+      "previous": {
+        "bytes": 353505,
+        "sha256": "e7f9f12185097c3e5c4d9a07e7b3123de656eb5acbf5cc30aa85c9783fbc1b17"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-history/reuse-4.json.gz",
+        "sha256": "1ab83f05331a92f4fa3b691284b0da13b3cac38533bba7812577d36322601f3e"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/century-1-ad.json.gz",
+      "bytes": 417032,
+      "sha256": "c78c171748fd8dbd58ea710b62ce8481d177fd536999f78c5e1c4a63a61c666d",
+      "previous": {
+        "bytes": 417034,
+        "sha256": "99226a05fa97afeeadd22d068c077389d698f2b4dd43666316559c95bcf3138c"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1-ad.json.gz",
+        "sha256": "c78c171748fd8dbd58ea710b62ce8481d177fd536999f78c5e1c4a63a61c666d"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-100-bc.json.gz",
+      "bytes": 559804,
+      "sha256": "48524a762a0f9fe6e0b4004063e81a89e0da860ca5746ec84e86b12439424398",
+      "previous": {
+        "bytes": 559806,
+        "sha256": "8a3ad1ce734b0cfc954e418ba8d16a7a75ff0f9cbdbb5c2ab358e65d06c8d41a"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-100-bc.json.gz",
+        "sha256": "48524a762a0f9fe6e0b4004063e81a89e0da860ca5746ec84e86b12439424398"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1000-bc.json.gz",
+      "bytes": 21756,
+      "sha256": "4d34a0b67c8aafdab6447e149804ac6c686b44e8400471074d44928e04df59b9",
+      "previous": {
+        "bytes": 21758,
+        "sha256": "35762d3e146a66880857d4bb91024701593aba44bba6179291c1d9c015af9ec6"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1000-bc.json.gz",
+        "sha256": "4d34a0b67c8aafdab6447e149804ac6c686b44e8400471074d44928e04df59b9"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1001-ad.json.gz",
+      "bytes": 794892,
+      "sha256": "2df3d938a9b5716643a3a4a9e08b0673abc8c6cb5142adcf80328e07896603af",
+      "previous": {
+        "bytes": 794895,
+        "sha256": "370b81b0f554ef4ec4706ce11ae6e9b23275d5dc79fd4c72fab2fac303e3ea04"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1001-ad.json.gz",
+        "sha256": "2df3d938a9b5716643a3a4a9e08b0673abc8c6cb5142adcf80328e07896603af"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-101-ad.json.gz",
+      "bytes": 393764,
+      "sha256": "51f9183418421aaa564b5547e9cbe0125d791e037357ada5ce7699d6c8df69ac",
+      "previous": {
+        "bytes": 393767,
+        "sha256": "e191840d24f175fb5f011935654db866300fb87881906fdfa58bc0f42d79e1ac"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-101-ad.json.gz",
+        "sha256": "51f9183418421aaa564b5547e9cbe0125d791e037357ada5ce7699d6c8df69ac"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1100-bc.json.gz",
+      "bytes": 22105,
+      "sha256": "118a51104d22a41d243d71ede15e8c61a4b38fad83142a96d787e41afb2f0001",
+      "previous": {
+        "bytes": 22106,
+        "sha256": "c8c9c17949f7a98b7b6e58cd23ccf3da6978e83fa42bfe033054f216f13bac42"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1100-bc.json.gz",
+        "sha256": "118a51104d22a41d243d71ede15e8c61a4b38fad83142a96d787e41afb2f0001"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1101-ad.json.gz",
+      "bytes": 691563,
+      "sha256": "629dda85831a73395cd26a64c2e82f1409794d2b7d4b71ad3ade7c9b36dbbb59",
+      "previous": {
+        "bytes": 691567,
+        "sha256": "742197fc6481fca885d7c39c2b01a1b8786ca8eb0643374da1e05495b9a43b2b"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1101-ad.json.gz",
+        "sha256": "629dda85831a73395cd26a64c2e82f1409794d2b7d4b71ad3ade7c9b36dbbb59"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1200-bc.json.gz",
+      "bytes": 33675,
+      "sha256": "51941ca98bf1c5ab613353e4065ab1870314e27b2f63bd46c0c75b90c53dd2cf",
+      "previous": {
+        "bytes": 33673,
+        "sha256": "68173dd443b0ee51aab1835ae241c891e3dde5a638f14e397b75cb51780555f7"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1200-bc.json.gz",
+        "sha256": "51941ca98bf1c5ab613353e4065ab1870314e27b2f63bd46c0c75b90c53dd2cf"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1201-ad.json.gz",
+      "bytes": 1011048,
+      "sha256": "8d1cbde89bf37d63a092ab217f6c29236609f388e9a45e91e1a6b5601173b0ff",
+      "previous": {
+        "bytes": 1011053,
+        "sha256": "93bafbf339a935d534f00e7ec1a37ece80b1f9e6f8e1577820e2dc5f705c77bb"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1201-ad.json.gz",
+        "sha256": "8d1cbde89bf37d63a092ab217f6c29236609f388e9a45e91e1a6b5601173b0ff"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1300-bc.json.gz",
+      "bytes": 38347,
+      "sha256": "1330a38c48721ef893e6af82d4cf8be69c7e9047d4164649bd8cb225c6e68a47",
+      "previous": {
+        "bytes": 38348,
+        "sha256": "e7f721f7a0dfb5cf0fce831881ce9071df933aa6d98805c2dc764a1aa3316926"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1300-bc.json.gz",
+        "sha256": "1330a38c48721ef893e6af82d4cf8be69c7e9047d4164649bd8cb225c6e68a47"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1301-ad.json.gz",
+      "bytes": 906650,
+      "sha256": "e8c14bebf3a9240d560d2ec1199020b6bc31385f2bd2ce952d6fd01362af921f",
+      "previous": {
+        "bytes": 906646,
+        "sha256": "b8a8b0540cbbc83c46f7607077d719cc446f02d2c467dc4985a242aae97aec6e"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1301-ad.json.gz",
+        "sha256": "e8c14bebf3a9240d560d2ec1199020b6bc31385f2bd2ce952d6fd01362af921f"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1400-bc.json.gz",
+      "bytes": 22773,
+      "sha256": "e1542b58ac401f2d43db398c2135637ae8443ba0cceec9e1d11ecbfb49eb6350",
+      "previous": {
+        "bytes": 22775,
+        "sha256": "ad87756dae4171b3293befbffdcfe02783eb3cc27301887143f036f7b049484f"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1400-bc.json.gz",
+        "sha256": "e1542b58ac401f2d43db398c2135637ae8443ba0cceec9e1d11ecbfb49eb6350"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1401-ad.json.gz",
+      "bytes": 1088479,
+      "sha256": "08d904b5a5fbd35ea76b8d84ea261e99619579139be100f41aba1d9b76ec01c7",
+      "previous": {
+        "bytes": 1088478,
+        "sha256": "61398fcd3452b5e8b22e78507ed35b7d4f2cc8b781ce5d5091b072884e223a0e"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1401-ad.json.gz",
+        "sha256": "08d904b5a5fbd35ea76b8d84ea261e99619579139be100f41aba1d9b76ec01c7"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1500-bc.json.gz",
+      "bytes": 21364,
+      "sha256": "af128825d156293ef17e857fb24252db014995d0311fc2a3bc76a7cda3c476bb",
+      "previous": {
+        "bytes": 21369,
+        "sha256": "dbf8eb432df841f40db84215140cd91d043be03e3494c5f99af8af28ce8d488f"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1500-bc.json.gz",
+        "sha256": "af128825d156293ef17e857fb24252db014995d0311fc2a3bc76a7cda3c476bb"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1501-ad.json.gz",
+      "bytes": 1501493,
+      "sha256": "a1ef6c593eb8ed6f67d1195edf4be15f35fd2ceb3c596ddf9bc96f8c0ab1b28d",
+      "previous": {
+        "bytes": 1501495,
+        "sha256": "459b0ec9b45f4a9df0437a715c547cc7c7b19dc53b574146b0239f81514012d3"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1501-ad.json.gz",
+        "sha256": "a1ef6c593eb8ed6f67d1195edf4be15f35fd2ceb3c596ddf9bc96f8c0ab1b28d"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1600-bc.json.gz",
+      "bytes": 17654,
+      "sha256": "faee5ce90430184016a774924ea4a53a80283f791adaaae39b742798f3543eee",
+      "previous": {
+        "bytes": 17655,
+        "sha256": "95a09a17114fd02f43bcf485f4b77aeffa21335e08df89861285632624aa6b82"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1600-bc.json.gz",
+        "sha256": "faee5ce90430184016a774924ea4a53a80283f791adaaae39b742798f3543eee"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1601-ad.json.gz",
+      "bytes": 1703754,
+      "sha256": "1954f3d3e9d5554939306e5a6248705f12aa9a4e59defa3afde5c86ef620600c",
+      "previous": {
+        "bytes": 1703487,
+        "sha256": "a1fd01153f08b7d894d5e08844295983c843b1acedff8e94935668073e2ef40c"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1601-ad.json.gz",
+        "sha256": "1954f3d3e9d5554939306e5a6248705f12aa9a4e59defa3afde5c86ef620600c"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1700-bc.json.gz",
+      "bytes": 10252,
+      "sha256": "43a2ee60dcf429b7fa400c4f7d3daf862ea99a3718c1f07fa0c06cb92282653b",
+      "previous": {
+        "bytes": 10251,
+        "sha256": "f2fe234c6eca0c9626bd6c97d90535e7f34104bbff5f6568f2a793878647f724"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1700-bc.json.gz",
+        "sha256": "43a2ee60dcf429b7fa400c4f7d3daf862ea99a3718c1f07fa0c06cb92282653b"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1701-ad.json.gz",
+      "bytes": 2186246,
+      "sha256": "b26c868ad02e58e0c55678cbeddd5409245632e6e6c00c6023639d4e3765b0e7",
+      "previous": {
+        "bytes": 2186457,
+        "sha256": "7be7d534e2349dcd13aec1f083877d5c1f9759ac6c0b8b0e92cfa21cb1c80d43"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1701-ad.json.gz",
+        "sha256": "b26c868ad02e58e0c55678cbeddd5409245632e6e6c00c6023639d4e3765b0e7"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1800-bc.json.gz",
+      "bytes": 15208,
+      "sha256": "c4869744837c2a4ecdbb6bbf78ff8ba966adf74bad419d9cd1fd7f33633ba63f",
+      "previous": {
+        "bytes": 15209,
+        "sha256": "da36a469ebd80e3e0c1bb08709106597cc0d0a76838afd0d2969ef5515bccb74"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1800-bc.json.gz",
+        "sha256": "c4869744837c2a4ecdbb6bbf78ff8ba966adf74bad419d9cd1fd7f33633ba63f"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1801-ad.json.gz",
+      "bytes": 1754009,
+      "sha256": "f58112ce78963c768e4764300e50f461440e18b8fd77511743cc65b494085594",
+      "previous": {
+        "bytes": 3001036,
+        "sha256": "f4de3c857e0904b179457e0dfb54a87011cdd33cd90dcb99350ae3acbd518634"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1801-ad.json.gz",
+        "sha256": "f58112ce78963c768e4764300e50f461440e18b8fd77511743cc65b494085594"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1851-ad.json.gz",
+      "bytes": 1716156,
+      "sha256": "ab95d32b42c3212a20dabda4d8b67cbfb50f4639b76e475a9f7e42a5d14542d0",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1851-ad.json.gz",
+        "sha256": "ab95d32b42c3212a20dabda4d8b67cbfb50f4639b76e475a9f7e42a5d14542d0"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1900-bc.json.gz",
+      "bytes": 10426,
+      "sha256": "bb73e48c1718f35c0c75389649cd64a724eec4dc02b6ac1af1798b1cd0c0d0e7",
+      "previous": {
+        "bytes": 10429,
+        "sha256": "9856928ca8e3eb98fd5d3c3c63d66dd6eac9fb4448ce90f4b9a4d70ddd63f026"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1900-bc.json.gz",
+        "sha256": "bb73e48c1718f35c0c75389649cd64a724eec4dc02b6ac1af1798b1cd0c0d0e7"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1901-ad.json.gz",
+      "bytes": 1407449,
+      "sha256": "891aa3ccc78570c528cccf777644095c2740790f659424a37c9a215bc4b0f4ff",
+      "previous": {
+        "bytes": 3037320,
+        "sha256": "ee0d3842c819206609edbbe982930f389541e6f4860f0f655b316d67e068a14f"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1901-ad.json.gz",
+        "sha256": "891aa3ccc78570c528cccf777644095c2740790f659424a37c9a215bc4b0f4ff"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1926-ad.json.gz",
+      "bytes": 1615181,
+      "sha256": "fb5bf4a038b392e5d43eeffb580a57f042cc16c76e2d5190f0585337494d0c8e",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1926-ad.json.gz",
+        "sha256": "fb5bf4a038b392e5d43eeffb580a57f042cc16c76e2d5190f0585337494d0c8e"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-1951-ad.json.gz",
+      "bytes": 1115764,
+      "sha256": "d6482db173ae2863b7d43b4e7c12130abdbdd8c5c2a7d2b6dd20a177b9bff87b",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-1951-ad.json.gz",
+        "sha256": "d6482db173ae2863b7d43b4e7c12130abdbdd8c5c2a7d2b6dd20a177b9bff87b"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-200-bc.json.gz",
+      "bytes": 364074,
+      "sha256": "62dd0e719dc2c92674eeaac936aa045942968247a6bfaca0e4262d7c9e13ef3d",
+      "previous": {
+        "bytes": 364078,
+        "sha256": "c6de6b04f8f387dec2cf7f341730401f3b9e6ea6a2ddbc82ba745d7f4c8a9aab"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-200-bc.json.gz",
+        "sha256": "62dd0e719dc2c92674eeaac936aa045942968247a6bfaca0e4262d7c9e13ef3d"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-2000-bc.json.gz",
+      "bytes": 10427,
+      "sha256": "7db65ee3a8f156c699c142179c82f588dd680ce71e1113837532c347b83cbc07",
+      "previous": {
+        "bytes": 10429,
+        "sha256": "683504ed9339dd6f275aa088371810139f87fc660a10fe07a73effa61443d18c"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-2000-bc.json.gz",
+        "sha256": "7db65ee3a8f156c699c142179c82f588dd680ce71e1113837532c347b83cbc07"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-2001-ad.json.gz",
+      "bytes": 765799,
+      "sha256": "15282ac4369b364a04582ea005a1759cdf4c7bf9f27db74b9b8e844f35f6ea58",
+      "previous": {
+        "bytes": 765749,
+        "sha256": "f9f4bc100ea10bcb6e289caac7054a9887bc67b03b43c2f8c0a139ca14106826"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-2001-ad.json.gz",
+        "sha256": "15282ac4369b364a04582ea005a1759cdf4c7bf9f27db74b9b8e844f35f6ea58"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-201-ad.json.gz",
+      "bytes": 480083,
+      "sha256": "86025b3e37daf35f8a320ed54c3eb1a9cfc1130b22c448df309af6b7d631e881",
+      "previous": {
+        "bytes": 480082,
+        "sha256": "aa0c06a32efb5125e1958fbadd45babfbd9711a450f1dee5ee3d00b7b28412dd"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-201-ad.json.gz",
+        "sha256": "86025b3e37daf35f8a320ed54c3eb1a9cfc1130b22c448df309af6b7d631e881"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-2100-bc.json.gz",
+      "bytes": 10522,
+      "sha256": "13836b7fc00b40ea386b7e9945b449b61f97600cae99b06df671ec649e3ca934",
+      "previous": {
+        "bytes": 10523,
+        "sha256": "6c9920306aad44d8cf28e3fc23b1c41ca51106483c6f2f53c271364b1d3117a5"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-2100-bc.json.gz",
+        "sha256": "13836b7fc00b40ea386b7e9945b449b61f97600cae99b06df671ec649e3ca934"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-2200-bc.json.gz",
+      "bytes": 11784,
+      "sha256": "12e6ac9a2ed98ee115ffec8c3558364f1c5bf909f83b1f51be0c4eb84d31c11c",
+      "previous": {
+        "bytes": 11787,
+        "sha256": "5a7fac31d86238290136038dc841d35aad49413a4500ced099f7f5347c1fe942"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-2200-bc.json.gz",
+        "sha256": "12e6ac9a2ed98ee115ffec8c3558364f1c5bf909f83b1f51be0c4eb84d31c11c"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-2300-bc.json.gz",
+      "bytes": 16761,
+      "sha256": "ca9d7349e2b98fa2be2da54676add0006d18e7be6227cddaadcc61aec340bbef",
+      "previous": {
+        "bytes": 16762,
+        "sha256": "e2ec083bfed84cbc6470be09777b0af60cdf4a7d909dd6c6c8271f0db4b7c3df"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-2300-bc.json.gz",
+        "sha256": "ca9d7349e2b98fa2be2da54676add0006d18e7be6227cddaadcc61aec340bbef"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-2400-bc.json.gz",
+      "bytes": 6424,
+      "sha256": "c6dca1915ccf2b675152cd196b0bbe909fa2a9015d1e5108437a2b7511fd3ca2",
+      "previous": {
+        "bytes": 6423,
+        "sha256": "7ea762033ebc1f0ac249284ddd6cce56787129c4e6a59e00c0582b3db30c6e1a"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-2400-bc.json.gz",
+        "sha256": "c6dca1915ccf2b675152cd196b0bbe909fa2a9015d1e5108437a2b7511fd3ca2"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-2500-bc.json.gz",
+      "bytes": 6424,
+      "sha256": "1e00d7e85f90e88bf509de2e96977abac187147482fa11dc08777f92e15d4903",
+      "previous": {
+        "bytes": 6423,
+        "sha256": "25814619ec9cdff67ee05b4e7b5c5c4f604836146b4138dc39843f16b4d6efcc"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-2500-bc.json.gz",
+        "sha256": "1e00d7e85f90e88bf509de2e96977abac187147482fa11dc08777f92e15d4903"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-2600-bc.json.gz",
+      "bytes": 5583,
+      "sha256": "3ac0cc0a6b9ebc8e95dd15d370573fa7babee707f8ac4d316ff829359c53d10a",
+      "previous": {
+        "bytes": 5582,
+        "sha256": "a9c59977c577de9bd19fb26e38353807bb9fcd71c1d953d52b32bf39aff834ff"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-2600-bc.json.gz",
+        "sha256": "3ac0cc0a6b9ebc8e95dd15d370573fa7babee707f8ac4d316ff829359c53d10a"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-2700-bc.json.gz",
+      "bytes": 5583,
+      "sha256": "519382f4d57629f36061479956321987bbb5ed5b262a19f169e2acbf697f2ec5",
+      "previous": {
+        "bytes": 5582,
+        "sha256": "6009aaf9b4d902e5b95d0d081b4b35ec169f52bdab9cb7f81e9c1262d5840545"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-2700-bc.json.gz",
+        "sha256": "519382f4d57629f36061479956321987bbb5ed5b262a19f169e2acbf697f2ec5"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-2800-bc.json.gz",
+      "bytes": 4978,
+      "sha256": "c3f9370974a9b41bbc19c6baec50afe3269a4ddb95ba96b9488abd38b318f3f0",
+      "previous": {
+        "bytes": 4977,
+        "sha256": "0b084a8f738ad2776c3a8354459df068ae44425e9fe988519449d72dda513487"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-2800-bc.json.gz",
+        "sha256": "c3f9370974a9b41bbc19c6baec50afe3269a4ddb95ba96b9488abd38b318f3f0"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-2900-bc.json.gz",
+      "bytes": 4979,
+      "sha256": "4383a349452d085bd7c1a459f72f4a49957dc6ca80f3e63197b0c592a3eb8d3f",
+      "previous": {
+        "bytes": 4978,
+        "sha256": "9af1e1819a6c47b06e83013520ea38e4bdf4d61094878951298e1722211800c8"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-2900-bc.json.gz",
+        "sha256": "4383a349452d085bd7c1a459f72f4a49957dc6ca80f3e63197b0c592a3eb8d3f"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-300-bc.json.gz",
+      "bytes": 573001,
+      "sha256": "c5cc32dc95cd9569b3d5e089462b0bab693dbd3f5a05acbf1aae5b8f788c842f",
+      "previous": {
+        "bytes": 573004,
+        "sha256": "8827b86b308fd73d213d058bb9d57592c908bddea10adf64b1c3eaaaff76af11"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-300-bc.json.gz",
+        "sha256": "c5cc32dc95cd9569b3d5e089462b0bab693dbd3f5a05acbf1aae5b8f788c842f"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-3000-bc.json.gz",
+      "bytes": 4978,
+      "sha256": "86c2f5a189596b4825c970aa38be0778c6381c2f80cb727413c314e55a2502be",
+      "previous": {
+        "bytes": 4977,
+        "sha256": "ae0b4507399a58d04ea35545a78bcc3cc42d65dece6b9dad91f71ec5c2334fd1"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-3000-bc.json.gz",
+        "sha256": "86c2f5a189596b4825c970aa38be0778c6381c2f80cb727413c314e55a2502be"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-301-ad.json.gz",
+      "bytes": 670871,
+      "sha256": "22c9163437800fe5108cbbc74064bfaf8053e85ac94aeebefcd47e8e57908ddf",
+      "previous": {
+        "bytes": 670874,
+        "sha256": "6ffb1b2a4e5507c7ed73330f3f1f16ba3ab49e309922eb94817051787976c024"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-301-ad.json.gz",
+        "sha256": "22c9163437800fe5108cbbc74064bfaf8053e85ac94aeebefcd47e8e57908ddf"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-400-bc.json.gz",
+      "bytes": 350584,
+      "sha256": "2ccd977d0932a3f49e89688a1573ba13d45d68d9b4041d9c249d162ca7d66e58",
+      "previous": {
+        "bytes": 350586,
+        "sha256": "9372e42ca28a0437a7dca53170891c196218523186cfa2bba68e8f829f99b718"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-400-bc.json.gz",
+        "sha256": "2ccd977d0932a3f49e89688a1573ba13d45d68d9b4041d9c249d162ca7d66e58"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-401-ad.json.gz",
+      "bytes": 667715,
+      "sha256": "7c4b4a8dc6c1a5fba05907fcf19192dfed23e643b0ff3a4ceba00e31c780a930",
+      "previous": {
+        "bytes": 667718,
+        "sha256": "895a533c320ecde8e22461f902a513ed1d6ac7022bebfcb577c004dee6dabc22"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-401-ad.json.gz",
+        "sha256": "7c4b4a8dc6c1a5fba05907fcf19192dfed23e643b0ff3a4ceba00e31c780a930"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-500-bc.json.gz",
+      "bytes": 182526,
+      "sha256": "bbb2178e7dbd1893c6c8f05b0f168002bf529fa492fe9c17dfba72379547a14b",
+      "previous": {
+        "bytes": 182526,
+        "sha256": "90f59191c8159cb5ce0ead45fef250cb62ee96730d0528af076129d5911695fc"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-500-bc.json.gz",
+        "sha256": "bbb2178e7dbd1893c6c8f05b0f168002bf529fa492fe9c17dfba72379547a14b"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-501-ad.json.gz",
+      "bytes": 602893,
+      "sha256": "26064ec4c2cb2259bb56fe037fac7b589803e2424647318355fc708264604de7",
+      "previous": {
+        "bytes": 602894,
+        "sha256": "cfcb885223e945a593766245256a33d99d2a92131eda663618959d1824d5baca"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-501-ad.json.gz",
+        "sha256": "26064ec4c2cb2259bb56fe037fac7b589803e2424647318355fc708264604de7"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-600-bc.json.gz",
+      "bytes": 135346,
+      "sha256": "89386b2955149e69e97a24c0e1ecf289bf2b145a912d0db86de92d2fc2030975",
+      "previous": {
+        "bytes": 135347,
+        "sha256": "67d7301e346d2ed0c130d6b836e116081b6d686b357aedc7d7a5ccee8da67647"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-600-bc.json.gz",
+        "sha256": "89386b2955149e69e97a24c0e1ecf289bf2b145a912d0db86de92d2fc2030975"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-601-ad.json.gz",
+      "bytes": 880341,
+      "sha256": "187e8bc03a34cf69d97c21be9a413523801f7fa3f1b55e6d197e80d6efa338c2",
+      "previous": {
+        "bytes": 880344,
+        "sha256": "efa0d83d6c20b00ea81294f796f5344876765a1058caf1c2790fee4cd670fb60"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-601-ad.json.gz",
+        "sha256": "187e8bc03a34cf69d97c21be9a413523801f7fa3f1b55e6d197e80d6efa338c2"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-700-bc.json.gz",
+      "bytes": 117496,
+      "sha256": "7d8f653546ecff32e1025b6b51024656d81a3bd2e97dd6f73ff96d69a1f3a40a",
+      "previous": {
+        "bytes": 117499,
+        "sha256": "7164a18e286e5746289d95413dc9b1753ed30a32f222416ad75cfbb21d28a043"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-700-bc.json.gz",
+        "sha256": "7d8f653546ecff32e1025b6b51024656d81a3bd2e97dd6f73ff96d69a1f3a40a"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-701-ad.json.gz",
+      "bytes": 730869,
+      "sha256": "18061a1e919dc2166d109b1fbdb1dfa890080f36fbf4e5dd7ae4663f5ffbe4d0",
+      "previous": {
+        "bytes": 730871,
+        "sha256": "4c1b32be1297bd767110cbb80d821e9b9af0b42382f8aaf0c981d833915b7a4d"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-701-ad.json.gz",
+        "sha256": "18061a1e919dc2166d109b1fbdb1dfa890080f36fbf4e5dd7ae4663f5ffbe4d0"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-800-bc.json.gz",
+      "bytes": 51133,
+      "sha256": "6503c7e888da3a301923019a7548ae9fd4a54a7a67d83fb794d97286e27fe2e2",
+      "previous": {
+        "bytes": 51134,
+        "sha256": "49af225c78ad6fd4615af628cacde016cd172f4dbd9725cd810f6e4c3be07bdd"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-800-bc.json.gz",
+        "sha256": "6503c7e888da3a301923019a7548ae9fd4a54a7a67d83fb794d97286e27fe2e2"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-801-ad.json.gz",
+      "bytes": 850557,
+      "sha256": "42c3017988b596f4a829d68e7984df8e9f3a9e315214d491bb7ecf99deae08c0",
+      "previous": {
+        "bytes": 850559,
+        "sha256": "13eacfc15fefdfb0e32a5fd103f55362ae15f06eb5bdc1c93b3cb179897ec841"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-801-ad.json.gz",
+        "sha256": "42c3017988b596f4a829d68e7984df8e9f3a9e315214d491bb7ecf99deae08c0"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-900-bc.json.gz",
+      "bytes": 26213,
+      "sha256": "bf9d895779ed2380332536bc0d94306ff2b87e49eeb61c4bc90b0428eccab08d",
+      "previous": {
+        "bytes": 26214,
+        "sha256": "2416282a58210107fd471c10883d4ce3e8b820396b1b28e51d1c333e27896069"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-900-bc.json.gz",
+        "sha256": "bf9d895779ed2380332536bc0d94306ff2b87e49eeb61c4bc90b0428eccab08d"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/century-901-ad.json.gz",
+      "bytes": 743798,
+      "sha256": "10b1ff6d4ce938302ad5e29a4c1fb1cb64b26df53dc3454e48b4a0483216e304",
+      "previous": {
+        "bytes": 743801,
+        "sha256": "4237f04b41531002255537c197921c33c3cbf147eb0099ef974d88e12d68e42e"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/century-901-ad.json.gz",
+        "sha256": "10b1ff6d4ce938302ad5e29a4c1fb1cb64b26df53dc3454e48b4a0483216e304"
+      },
+      "role": "legacy-public-compatibility"
+    },
+    {
+      "target": "data/ownership-runtime/index.json",
+      "bytes": 582435,
+      "sha256": "35afb94570fbe5537e5f4c70f171ab08a8aeeeedbb8fb74f0fd7a26861539119",
+      "previous": {
+        "bytes": 780497,
+        "sha256": "07b1045565198fe32b1b944c2046b9d7cd72414a0a35eaf1bf3f8cc154ccd426"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/index.json",
+        "sha256": "35afb94570fbe5537e5f4c70f171ab08a8aeeeedbb8fb74f0fd7a26861539119"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1-ad.json.gz",
+      "bytes": 403927,
+      "sha256": "41223457c8eb4a914fcce36fa0b1cabed38a5e06c9eb6c1c6e401942bb55beba",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1-ad.json.gz",
+        "sha256": "41223457c8eb4a914fcce36fa0b1cabed38a5e06c9eb6c1c6e401942bb55beba"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-100-bc.json.gz",
+      "bytes": 544179,
+      "sha256": "2a64a9d87818193f41278ba1882426c7bd41e1091b648ebeec74209f60dc1684",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-100-bc.json.gz",
+        "sha256": "2a64a9d87818193f41278ba1882426c7bd41e1091b648ebeec74209f60dc1684"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1000-bc.json.gz",
+      "bytes": 20980,
+      "sha256": "1c7e85110534303ed5f9deddb814606f2f264638cc820bcc0413e9954120c14a",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1000-bc.json.gz",
+        "sha256": "1c7e85110534303ed5f9deddb814606f2f264638cc820bcc0413e9954120c14a"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1001-ad.json.gz",
+      "bytes": 770323,
+      "sha256": "14533eb70b127cc866f5a47c099859a458db2166b129b38b2cd7fff32be9c7c5",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1001-ad.json.gz",
+        "sha256": "14533eb70b127cc866f5a47c099859a458db2166b129b38b2cd7fff32be9c7c5"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-101-ad.json.gz",
+      "bytes": 379665,
+      "sha256": "33b51aa68be090ace0005bd33788dc8a6f389d5aa1b7464d613e738e75f0a8d6",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-101-ad.json.gz",
+        "sha256": "33b51aa68be090ace0005bd33788dc8a6f389d5aa1b7464d613e738e75f0a8d6"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1100-bc.json.gz",
+      "bytes": 21292,
+      "sha256": "3f06d5302d1dc02aeeffb458418f8eff0cbdc74c5852be760bc210d8fb8f2609",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1100-bc.json.gz",
+        "sha256": "3f06d5302d1dc02aeeffb458418f8eff0cbdc74c5852be760bc210d8fb8f2609"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1101-ad.json.gz",
+      "bytes": 668170,
+      "sha256": "208be22dcac0c2e52c18b120b199434a0a78bdbdf95c78a2e11313ba7cd715f5",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1101-ad.json.gz",
+        "sha256": "208be22dcac0c2e52c18b120b199434a0a78bdbdf95c78a2e11313ba7cd715f5"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1200-bc.json.gz",
+      "bytes": 32238,
+      "sha256": "e325527530c04024dddf0e05b3eb96fb7f0b15f6ff3f4e53093b1f2ba03cae01",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1200-bc.json.gz",
+        "sha256": "e325527530c04024dddf0e05b3eb96fb7f0b15f6ff3f4e53093b1f2ba03cae01"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1201-ad.json.gz",
+      "bytes": 982384,
+      "sha256": "880be3b63a03fb101336c59d740d98d3ac89c1051dce44930ab109b2c6d8d0df",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1201-ad.json.gz",
+        "sha256": "880be3b63a03fb101336c59d740d98d3ac89c1051dce44930ab109b2c6d8d0df"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1300-bc.json.gz",
+      "bytes": 36704,
+      "sha256": "f213394c39dd4db9726c7c26d3dbde2e6d66a2115b903f1da2c399cc42c8cba8",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1300-bc.json.gz",
+        "sha256": "f213394c39dd4db9726c7c26d3dbde2e6d66a2115b903f1da2c399cc42c8cba8"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1301-ad.json.gz",
+      "bytes": 878168,
+      "sha256": "7c6975ccc29254bcc67a8c227b72feafdfc80e78a473a36926f4870b05a59dd0",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1301-ad.json.gz",
+        "sha256": "7c6975ccc29254bcc67a8c227b72feafdfc80e78a473a36926f4870b05a59dd0"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1400-bc.json.gz",
+      "bytes": 21984,
+      "sha256": "ab436ca10a461cd78c3553f5e1e40b4ad502d82466112486322d32951f8d4c96",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1400-bc.json.gz",
+        "sha256": "ab436ca10a461cd78c3553f5e1e40b4ad502d82466112486322d32951f8d4c96"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1401-ad.json.gz",
+      "bytes": 1058270,
+      "sha256": "08cd13bce70c7bff8d4b867f5e4b7b2151250271e93832b2b7fcbe9918213e87",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1401-ad.json.gz",
+        "sha256": "08cd13bce70c7bff8d4b867f5e4b7b2151250271e93832b2b7fcbe9918213e87"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1500-bc.json.gz",
+      "bytes": 20595,
+      "sha256": "99c7e77267b328314abc4e8d45f9df246c73c735bba64f0f208bdbe13fd84bcd",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1500-bc.json.gz",
+        "sha256": "99c7e77267b328314abc4e8d45f9df246c73c735bba64f0f208bdbe13fd84bcd"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1501-ad.json.gz",
+      "bytes": 1463827,
+      "sha256": "73c1cbd8e2964d01cd9607dc93bfb5a56094f8e6292be4afd4bd7fe4d6eeafc3",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1501-ad.json.gz",
+        "sha256": "73c1cbd8e2964d01cd9607dc93bfb5a56094f8e6292be4afd4bd7fe4d6eeafc3"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1600-bc.json.gz",
+      "bytes": 17027,
+      "sha256": "5e6df3b8a22ad456c3ac0b4dbe61b62b225199917007ff48e43aa11919f66b57",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1600-bc.json.gz",
+        "sha256": "5e6df3b8a22ad456c3ac0b4dbe61b62b225199917007ff48e43aa11919f66b57"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1601-ad.json.gz",
+      "bytes": 1666544,
+      "sha256": "b6714ff79517ab84a8d641276b98e4d440a8ca390ee69a4eaacd78146d02f7b8",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1601-ad.json.gz",
+        "sha256": "b6714ff79517ab84a8d641276b98e4d440a8ca390ee69a4eaacd78146d02f7b8"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1700-bc.json.gz",
+      "bytes": 9775,
+      "sha256": "37f637251f35c34687d76e19fd3fe7c9953c74bccf7b232575c7e4eb2d8511b5",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1700-bc.json.gz",
+        "sha256": "37f637251f35c34687d76e19fd3fe7c9953c74bccf7b232575c7e4eb2d8511b5"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1701-ad.json.gz",
+      "bytes": 2144053,
+      "sha256": "d33899d5d3e2798572faf32d0b7d290b98998ed9b41a7d651e251fff587f6eac",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1701-ad.json.gz",
+        "sha256": "d33899d5d3e2798572faf32d0b7d290b98998ed9b41a7d651e251fff587f6eac"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1800-bc.json.gz",
+      "bytes": 14643,
+      "sha256": "f07d20764a4cdb2f948a28a3971eaaa008a633f78fa67966cbd10dc3d725170a",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1800-bc.json.gz",
+        "sha256": "f07d20764a4cdb2f948a28a3971eaaa008a633f78fa67966cbd10dc3d725170a"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1801-ad.json.gz",
+      "bytes": 1712796,
+      "sha256": "10164bf557447c87ff3d9abd30ddf9ad419fb961dda2df596aeb621b74301a8c",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1801-ad.json.gz",
+        "sha256": "10164bf557447c87ff3d9abd30ddf9ad419fb961dda2df596aeb621b74301a8c"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1851-ad.json.gz",
+      "bytes": 1671403,
+      "sha256": "fa2dcab01fe36f57e959b9bbdcce08c6502e6db2c91ed1ad4077adc417a8955b",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1851-ad.json.gz",
+        "sha256": "fa2dcab01fe36f57e959b9bbdcce08c6502e6db2c91ed1ad4077adc417a8955b"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1900-bc.json.gz",
+      "bytes": 9957,
+      "sha256": "fbc50d835c241267af75489c295fd094bb6cd97aaa8ec81c547324b6e686687b",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1900-bc.json.gz",
+        "sha256": "fbc50d835c241267af75489c295fd094bb6cd97aaa8ec81c547324b6e686687b"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1901-ad.json.gz",
+      "bytes": 1366562,
+      "sha256": "606cfb17c68a94d6c31193798b02a156670d8920553adce6113889e86e18335c",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1901-ad.json.gz",
+        "sha256": "606cfb17c68a94d6c31193798b02a156670d8920553adce6113889e86e18335c"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1926-ad.json.gz",
+      "bytes": 1571769,
+      "sha256": "5fc80cb3fa59c64843f7ea73824b4e8a5f421340f1dfb028fa5d988d26813f54",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1926-ad.json.gz",
+        "sha256": "5fc80cb3fa59c64843f7ea73824b4e8a5f421340f1dfb028fa5d988d26813f54"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1951-ad.json.gz",
+      "bytes": 1078222,
+      "sha256": "9cc463602483caba2678a5fa75953d30f740ab490be5b6363ad32752e106318e",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-1951-ad.json.gz",
+        "sha256": "9cc463602483caba2678a5fa75953d30f740ab490be5b6363ad32752e106318e"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-200-bc.json.gz",
+      "bytes": 351065,
+      "sha256": "ce650126f1560002e07e0501f6803ae833777bc2ed7d8c55ecddfc66f60b21a5",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-200-bc.json.gz",
+        "sha256": "ce650126f1560002e07e0501f6803ae833777bc2ed7d8c55ecddfc66f60b21a5"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2000-bc.json.gz",
+      "bytes": 9960,
+      "sha256": "993ae9603b64f8219779209fb85347fb3736c513a175b4e3474820cf3f4b96a7",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2000-bc.json.gz",
+        "sha256": "993ae9603b64f8219779209fb85347fb3736c513a175b4e3474820cf3f4b96a7"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2001-ad.json.gz",
+      "bytes": 736871,
+      "sha256": "6931dae0e4ab3016c3562eba123aff6aa6cdd505b9a64884a3b41fd53f7dd31a",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2001-ad.json.gz",
+        "sha256": "6931dae0e4ab3016c3562eba123aff6aa6cdd505b9a64884a3b41fd53f7dd31a"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-201-ad.json.gz",
+      "bytes": 464109,
+      "sha256": "23723a4ecb9ecbcc154d8a4398268afeeed4edc0a197beac97db927146e67850",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-201-ad.json.gz",
+        "sha256": "23723a4ecb9ecbcc154d8a4398268afeeed4edc0a197beac97db927146e67850"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2100-bc.json.gz",
+      "bytes": 10029,
+      "sha256": "f28d046a1347b614c946cd3cde2711a72bd6f4f1886adddb282bbbd2a3a56f7c",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2100-bc.json.gz",
+        "sha256": "f28d046a1347b614c946cd3cde2711a72bd6f4f1886adddb282bbbd2a3a56f7c"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2200-bc.json.gz",
+      "bytes": 11260,
+      "sha256": "581c692fd48b1c6215fd4af19de6a1f7d0a7ff8bf9d77459aec01e1c314b4ff2",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2200-bc.json.gz",
+        "sha256": "581c692fd48b1c6215fd4af19de6a1f7d0a7ff8bf9d77459aec01e1c314b4ff2"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2300-bc.json.gz",
+      "bytes": 16120,
+      "sha256": "84550e602332a343b6510520d38437f6a9e893cee3cd373625a80ae6bc04cee3",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2300-bc.json.gz",
+        "sha256": "84550e602332a343b6510520d38437f6a9e893cee3cd373625a80ae6bc04cee3"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2400-bc.json.gz",
+      "bytes": 6075,
+      "sha256": "74953967c5a96605df7fa4cbfc285597bb37a0d25a787122b2839aef6b886b04",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2400-bc.json.gz",
+        "sha256": "74953967c5a96605df7fa4cbfc285597bb37a0d25a787122b2839aef6b886b04"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2500-bc.json.gz",
+      "bytes": 6075,
+      "sha256": "8599160f774f4fcfd436f564ae78469669e3f26aa6ba6a7cfeb99af6a2fdd506",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2500-bc.json.gz",
+        "sha256": "8599160f774f4fcfd436f564ae78469669e3f26aa6ba6a7cfeb99af6a2fdd506"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2600-bc.json.gz",
+      "bytes": 5250,
+      "sha256": "ab3684834a4d691a980471230ac64f468e7a32e3760b1bba63a39b9b7cffe811",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2600-bc.json.gz",
+        "sha256": "ab3684834a4d691a980471230ac64f468e7a32e3760b1bba63a39b9b7cffe811"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2700-bc.json.gz",
+      "bytes": 5250,
+      "sha256": "8a676554c4ad3fa9bce51d9c722897389de198e787e2a5314abd13282a9e6c4f",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2700-bc.json.gz",
+        "sha256": "8a676554c4ad3fa9bce51d9c722897389de198e787e2a5314abd13282a9e6c4f"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2800-bc.json.gz",
+      "bytes": 4670,
+      "sha256": "463daf77163074d7cb06ea24e1353d24e6b1175a8b8208c3d3acc705f85dd228",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2800-bc.json.gz",
+        "sha256": "463daf77163074d7cb06ea24e1353d24e6b1175a8b8208c3d3acc705f85dd228"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2900-bc.json.gz",
+      "bytes": 4672,
+      "sha256": "f11a62f271bef07dee32acf42987c4ea1b02773fc1ef91f3dcdda66cca842f5c",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-2900-bc.json.gz",
+        "sha256": "f11a62f271bef07dee32acf42987c4ea1b02773fc1ef91f3dcdda66cca842f5c"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-300-bc.json.gz",
+      "bytes": 558373,
+      "sha256": "d6079352327a3915bfd1972689b4bd16d9891d2f842d23d335a861c3fa00bbc8",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-300-bc.json.gz",
+        "sha256": "d6079352327a3915bfd1972689b4bd16d9891d2f842d23d335a861c3fa00bbc8"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-3000-bc.json.gz",
+      "bytes": 4674,
+      "sha256": "5288a67cad0896125df8c4e6f064d04e42c9253233154501ecabe16683bed632",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-3000-bc.json.gz",
+        "sha256": "5288a67cad0896125df8c4e6f064d04e42c9253233154501ecabe16683bed632"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-301-ad.json.gz",
+      "bytes": 653063,
+      "sha256": "b34b30ea3a371da42a07da8e00847d3ab331bf9f2f0d9fefe63a882b5c8740bb",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-301-ad.json.gz",
+        "sha256": "b34b30ea3a371da42a07da8e00847d3ab331bf9f2f0d9fefe63a882b5c8740bb"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-400-bc.json.gz",
+      "bytes": 340822,
+      "sha256": "f52d7885c52b9776140b163d845c97f452afb2dc875431c3874a0fcaf3fed0cd",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-400-bc.json.gz",
+        "sha256": "f52d7885c52b9776140b163d845c97f452afb2dc875431c3874a0fcaf3fed0cd"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-401-ad.json.gz",
+      "bytes": 647154,
+      "sha256": "9573ee4d2d44d4a999f8d11acfa6dd8ee3ad62789903246946bb6e7575b39dd0",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-401-ad.json.gz",
+        "sha256": "9573ee4d2d44d4a999f8d11acfa6dd8ee3ad62789903246946bb6e7575b39dd0"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-500-bc.json.gz",
+      "bytes": 177088,
+      "sha256": "413b8a5cecac51595b801560dfe4d2705c0a38218775397e248528ccaccbb750",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-500-bc.json.gz",
+        "sha256": "413b8a5cecac51595b801560dfe4d2705c0a38218775397e248528ccaccbb750"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-501-ad.json.gz",
+      "bytes": 584209,
+      "sha256": "b1b8a04575db95d89372fb08ff0c75d72b402966d5ba266c32c68728a3291e52",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-501-ad.json.gz",
+        "sha256": "b1b8a04575db95d89372fb08ff0c75d72b402966d5ba266c32c68728a3291e52"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-600-bc.json.gz",
+      "bytes": 131502,
+      "sha256": "5cff981682f03bf2511db9d70f6ab3a2785b036b20e6dc7ad526dc5072cb1e08",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-600-bc.json.gz",
+        "sha256": "5cff981682f03bf2511db9d70f6ab3a2785b036b20e6dc7ad526dc5072cb1e08"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-601-ad.json.gz",
+      "bytes": 855867,
+      "sha256": "75b80848459c5b5b2cb2d0df7129320518ca74082a41d18340b5d6e5633f8563",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-601-ad.json.gz",
+        "sha256": "75b80848459c5b5b2cb2d0df7129320518ca74082a41d18340b5d6e5633f8563"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-700-bc.json.gz",
+      "bytes": 113624,
+      "sha256": "e41e44d1b5f1b051bb3596de81304f1753d3a855dd4bb7f43d07e39ef7d77402",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-700-bc.json.gz",
+        "sha256": "e41e44d1b5f1b051bb3596de81304f1753d3a855dd4bb7f43d07e39ef7d77402"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-701-ad.json.gz",
+      "bytes": 708723,
+      "sha256": "ee81b47621c97e079247a0567de1cc170a4e0105673abbba3d7d81a592092be5",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-701-ad.json.gz",
+        "sha256": "ee81b47621c97e079247a0567de1cc170a4e0105673abbba3d7d81a592092be5"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-800-bc.json.gz",
+      "bytes": 49717,
+      "sha256": "ab3a1b7e65045f1efe769899215caeab2a6923b304e42d48d942a981ebabe318",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-800-bc.json.gz",
+        "sha256": "ab3a1b7e65045f1efe769899215caeab2a6923b304e42d48d942a981ebabe318"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-801-ad.json.gz",
+      "bytes": 826095,
+      "sha256": "fce713f10c16f80c4b3886ed0041bd5e919f21402330a92699f930edfda4d456",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-801-ad.json.gz",
+        "sha256": "fce713f10c16f80c4b3886ed0041bd5e919f21402330a92699f930edfda4d456"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-900-bc.json.gz",
+      "bytes": 25162,
+      "sha256": "94c5cb6508ac37547ed74f5fbb1d98dc8db9341ba1a908124e436e114df9c0fa",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-900-bc.json.gz",
+        "sha256": "94c5cb6508ac37547ed74f5fbb1d98dc8db9341ba1a908124e436e114df9c0fa"
+      }
+    },
+    {
+      "target": "data/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-901-ad.json.gz",
+      "bytes": 721268,
+      "sha256": "dc9e9ccb79e02845102c441676cbb1e548d6fa7228184764bfe317515d98f558",
+      "previous": null,
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/ownership-runtime/v9-2c1bc8f38f8662bfc30546f28b28a8221c63cdc47c268ce6df7c755aac0b1179/century-901-ad.json.gz",
+        "sha256": "dc9e9ccb79e02845102c441676cbb1e548d6fa7228184764bfe317515d98f558"
+      }
+    },
+    {
+      "target": "data/prepared-evidence/index.json",
+      "bytes": 12337,
+      "sha256": "a80160287489f0ac22ea0805692b8f5cd81a53e282467d27ee0cbf8d52cdd6b2",
+      "previous": {
+        "bytes": 14987,
+        "sha256": "b233282e4ea3f3e51658f6f1a272e995ddf93823c9f74759e1a353261c3baa5e"
+      },
+      "source": {
+        "kind": "accepted-artifact-member",
+        "path": "dist/client/prepared-evidence/index.json",
+        "sha256": "a80160287489f0ac22ea0805692b8f5cd81a53e282467d27ee0cbf8d52cdd6b2"
+      }
+    },
+    {
+      "target": "data/reference-attributes/index.json",
+      "bytes": 37285,
+      "sha256": "363ff55d13e54bfa7996442f5a971f3779c1a7d85002676fb97fdabcfc163129",
+      "previous": {
+        "bytes": 36740,
+        "sha256": "e21a5361d7ab74f8c9a909b681c6eda0d0c6c1e1becf36154bcf5b4b2215c356"
+      },
+      "source": {
+        "kind": "accepted-artifact-json-subobject",
+        "path": "dist/client/reference-attributes/startup-bundle.json.gz",
+        "json_path": "index",
+        "transform": "JSON.stringify(index) + newline",
+        "sha256": "363ff55d13e54bfa7996442f5a971f3779c1a7d85002676fb97fdabcfc163129"
+      }
+    }
+  ],
+  "checks": {
+    "ownership_history_source_files": 226,
+    "ownership_archive_download_files": 84,
+    "ownership_archive_download_bytes": 92442521,
+    "current_temporal_buckets": 54,
+    "current_temporal_encoded_bytes": 26594204,
+    "current_temporal_decoded_bytes": 327312240,
+    "reference_parts_exact_encoded_and_decoded": 73,
+    "prepared_startup_files": 30,
+    "prepared_startup_bytes": 96478262,
+    "legacy_public_temporal_buckets": 54,
+    "legacy_public_temporal_encoded_bytes": 27358586,
+    "stock_prepared_evidence_reader": "passed;6 payloads and22 retained import batches",
+    "stock_history_and_reference_package_outputs": "all144 output members byte-identical to accepted artifact on Node24.19.0",
+    "stock_runtime_reader": "passed for all54 current buckets at108 boundary years;54 wrong-source headers and year zero rejected"
+  },
+  "limits": [
+    "This operation authenticates and promotes accepted bytes. It does not independently rerun or reapprove the historical scientific methods.",
+    "Parent-owned code integration, current geometry/audit/registry activation, full package verification and independent exact-head review remain outside this promotion."
+  ]
+}

@@ -1,0 +1,7 @@
+# Two RUS/KAZ researched-unresolved proposals
+
+This packet proposes a researched-unresolved disposition for exactly two original Klyuchevsky/Pavlodar contact keys: x188743/y86689 and x188744/y86691. Both are original mapped-land cells. Their native holds and every selected assignment remain unchanged. Root acceptance is separate; this does not complete the original 2,566,967-cell Russia package.
+
+Actual examination of Treaty I-52717 and its M-44-3 map led to an adverse finding: conditional projected-grid registration places both centers west of the marker-linked boundary route, on the map's Kazakhstan-labeled side. The exact original Pavlodar source contact therefore remains substantive. The research records preserve the failed initial registration, corrected units, actual trace, sensitivity limits, and independent-review corrections; the latest corrected registration and country-side join govern. This is a historical source comparison, not a determination of current sovereignty.
+
+`proposed-disposition.json.gz` preserves the two exact original tuples and source pins. `retained-research-records.json.gz` preserves the actual research records byte-for-byte, including their public primary-source URLs, map/raster hashes, trace vertices and sampler. `research-assessment.json` connects the significant investigation and adverse result to the original contract. No observer, physical producer, native diagnostic or constructor was rerun. The other 85 currently pending RUS keys are outside this proposal.

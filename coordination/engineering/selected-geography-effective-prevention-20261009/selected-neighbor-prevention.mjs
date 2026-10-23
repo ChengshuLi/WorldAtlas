@@ -1,14 +1,16 @@
 // #1569 prevention helper. Input pins/binding must be derived by the trusted
 // selected-bank resolver. These functions do not select/activate a release.
 import {createHash} from 'node:crypto';
+import {isNativeSequence,nativeSequence} from '../../../src/native-grid.js';
 import fs from 'node:fs';
+import os from 'node:os';
 import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
-import {processingAllowance, ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias, selectedGeometrySourceAlias} from '../../../scripts/check-effective-geographic-regression.mjs';
-import {nativeOnlyComponent, deriveSourceTargetNativeDelta, nativePolygonIntervals, polygonParts, witnessCellEffects, validateWitnessGeometry} from '../../../src/native-grid.js';
+import {ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias, selectedGeometrySourceAlias, selectedReferenceOwners, selectedNativeSourceMembership, requireSelectedOriginLineage} from '../../../scripts/check-effective-geographic-regression.mjs';
+import {repairComponentKey, compareRepairComponents, nativeOnlyComponent, deriveSourceTargetNativeDelta, nativePolygonIntervals, polygonParts, witnessCellEffects, validateWitnessGeometry, verifyNativeSeamView} from '../../../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
-const FILE=33554432, SLOT=512;
+import {scientificNativeSelection} from '../../../src/reference-metadata.js';
 const certificates=new WeakMap(), originalAuthorities=new WeakMap(), selectedAdditions=new WeakMap();
 // Original accepted source/native programs. Case rosters are not policy IDs.
 // Changing a complete program requires ordinary trusted-code/rule review.
@@ -19,23 +21,92 @@ const hash=v=>typeof v==='string'&&/^[a-f0-9]{64}$/.test(v);
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const canonical=v=>{
  if(Array.isArray(v))return v.map(canonical);
+ if(isNativeSequence(v))return Array.from(v,canonical);
  if(v&&typeof v==='object'){const out=Object.create(null);for(const k of Object.keys(v).sort())out[k]=canonical(v[k]);return out;}
  demand((v===null||['number','string','boolean'].includes(typeof v))&&(typeof v!=='number'||Number.isFinite(v)),'Nonfinite/missing/non-JSON canonical value');return v;
 };
 export const valueBytes=v=>Buffer.from(JSON.stringify(canonical(v))+'\n');
-export const valueSha=v=>sha(valueBytes(v));
-const same=(a,b)=>valueBytes(a).equals(valueBytes(b));
+// Hash the same canonical JSON bytes without cloning the complete value or
+// retaining its complete serialized string/Buffer. Only the current object's
+// key order, traversal ancestors and a small output chunk are additional state.
+export function valueSha(value) {return canonicalDigest(value,false);}
+// Count the exact UTF-8 chunks fed to the hash, including the final newline.
+// This never reconstructs a complete canonical value just to measure its bytes.
+export function valueIdentity(value) {return canonicalDigest(value,true);}
+function canonicalDigest(value,measureBytes) {
+ const hash=createHash('sha256'),ancestors=new Set();
+ let parts=[],length=0,bytes=0;
+ const flush=()=>{
+  const chunk=parts.join('');hash.update(chunk);
+  if(measureBytes){bytes+=Buffer.byteLength(chunk);demand(Number.isSafeInteger(bytes),'Canonical byte count is not representable');}
+  parts=[];length=0;
+ };
+ const write=text=>{
+  parts.push(text);length+=text.length;
+  if(length>=16384)flush();
+ };
+ const string=value=>{
+  write('"');
+  for(let start=0;start<value.length;){
+   let end=Math.min(start+8192,value.length);
+   // JSON.stringify preserves paired surrogates; a chunk must not turn one
+   // into two independently escaped lone surrogates.
+   if(end<value.length&&value.charCodeAt(end-1)>=0xd800&&value.charCodeAt(end-1)<=0xdbff
+    &&value.charCodeAt(end)>=0xdc00&&value.charCodeAt(end)<=0xdfff)end--;
+   write(JSON.stringify(value.slice(start,end)).slice(1,-1));start=end;
+  }
+  write('"');
+ };
+ const index=key=>String(Number(key)>>>0)===key&&key!=='4294967295';
+ const visit=value=>{
+  // Native interval triples and coordinate pairs dominate selected hashes. This exact
+  // scalar case preserves JSON number/-0 semantics without three recursive
+  // visits or temporary whole-array serialization. Other arrays keep the
+  // ordinary sparse/circular/nonfinite checks below.
+  if(Array.isArray(value)&&(value.length===2||value.length===3)&&Number.isFinite(value[0])
+    &&Number.isFinite(value[1])&&(value.length===2||Number.isFinite(value[2]))){
+   write('['+value[0]+','+value[1]+(value.length===3?','+value[2]:'')+']');return;
+  }
+  if(value&&typeof value==='object'){
+   demand(!ancestors.has(value),'Circular canonical value');ancestors.add(value);
+   if(isNativeSequence(value)){
+    write('[');
+    if(Array.isArray(value)){
+     for(let i=0;i<value.length;i++){if(i)write(',');if(i in value)visit(value[i]);else write('null');}
+    }else{let first=true;for(const item of value){if(!first)write(',');first=false;visit(item);}}
+    write(']');
+   }else{
+    // canonical() assigns lexically sorted keys into a new object. JSON then
+    // emits its array-index keys numerically before the other lexical keys.
+    const keys=Object.keys(value).sort((a,b)=>index(a)?index(b)?Number(a)-Number(b):-1:index(b)?1:a<b?-1:a>b?1:0);
+    write('{');
+    for(let i=0;i<keys.length;i++){
+     if(i)write(',');string(keys[i]);write(':');visit(value[keys[i]]);
+    }
+    write('}');
+   }
+   ancestors.delete(value);return;
+  }
+  demand((value===null||['number','string','boolean'].includes(typeof value))
+   &&(typeof value!=='number'||Number.isFinite(value)),'Nonfinite/missing/non-JSON canonical value');
+  if(typeof value==='string')string(value);else write(JSON.stringify(value));
+ };
+ visit(value);write('\n');
+ if(length)flush();
+ const sha256=hash.digest('hex');return measureBytes?{sha256,bytes}:sha256;
+}
+const same=(a,b)=>valueSha(a)===valueSha(b);
 const freeze=v=>{if(v&&typeof v==='object'){Object.values(v).forEach(freeze);Object.freeze(v);}return v;};
 // The executing checkout supplies policy authority. reader.version can be an
 // untrusted candidate and therefore must never choose the catalogue. Policy is
-// ordinary consumed data, separately inventoried/charged from the 17/28 code.
+// ordinary consumed data, separately inventoried from the executed code.
 export function validateSupportedProgrammeCatalogue(catalogue) {
  demand(catalogue&&Object.keys(catalogue).sort().join(',')==='current_rebind_migrations,kind,programs,version'
   &&catalogue.version===1&&catalogue.kind==='trusted-source-native-programmes-v1'
-  &&Array.isArray(catalogue.programs)&&catalogue.programs.length>0&&catalogue.programs.length<=512
-  &&Array.isArray(catalogue.current_rebind_migrations)&&catalogue.current_rebind_migrations.length<=512,'Malformed trusted programme catalogue');
- const vector=rows=>{demand(Array.isArray(rows)&&rows.length>0&&rows.length<=28&&new Set(rows.map(p=>p?.path)).size===rows.length,'Incomplete/duplicate programme code vector');
-  for(const p of rows)demand(p&&Object.keys(p).sort().join(',')==='bytes,path,sha256'&&typeof p.path==='string'&&!p.path.includes('\\')&&!p.path.split('/').some(s=>!s||s==='.'||s==='..')&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE&&hash(p.sha256),'Malformed programme code descriptor');};
+  &&Array.isArray(catalogue.programs)&&catalogue.programs.length>0
+  &&Array.isArray(catalogue.current_rebind_migrations),'Malformed trusted programme catalogue');
+ const vector=rows=>{demand(Array.isArray(rows)&&rows.length>0&&new Set(rows.map(p=>p?.path)).size===rows.length,'Incomplete/duplicate programme code vector');
+  for(const p of rows)demand(p&&Object.keys(p).sort().join(',')==='bytes,path,sha256'&&typeof p.path==='string'&&!p.path.includes('\\')&&!p.path.split('/').some(s=>!s||s==='.'||s==='..')&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&hash(p.sha256),'Malformed programme code descriptor');};
  const keys=new Set();
  for(const p of catalogue.programs){
   demand(p&&Object.keys(p).sort().join(',')==='accepted_head,independent_review_comment,native_executed_code,preimage_version,source_executed_code,source_profile'
@@ -49,8 +120,8 @@ export function validateSupportedProgrammeCatalogue(catalogue) {
   demand(p&&Object.keys(p).sort().join(',')==='current_code,execution_commit,historical_code,independent_review_comment'
    &&/^[a-f0-9]{40}$/.test(p.execution_commit)&&Number.isSafeInteger(p.independent_review_comment)&&p.independent_review_comment>0,'Malformed exact rebind migration');
   vector(p.historical_code);vector(p.current_code);
-  demand(same(p.historical_code.map(p=>p.path),CURRENT_REBIND_CODE)&&same(p.current_code.map(p=>p.path),CURRENT_REBIND_CODE)
-   &&!same(p.historical_code,p.current_code),'Incomplete/identity rebind migration');
+  currentRebindCodePaths(p.historical_code);currentRebindCodePaths(p.current_code);
+  demand(!same(p.historical_code,p.current_code),'Incomplete/identity rebind migration');
   const key=valueSha([p.execution_commit,p.historical_code,p.current_code]);demand(!migrations.has(key),'Ambiguous exact rebind migration');migrations.add(key);
  }
  return catalogue;
@@ -61,14 +132,10 @@ export function readSupportedProgrammeCatalogue(reader) {
  const version=execFileSync(reader.gitExecutable,['-c','core.hooksPath=/dev/null','-C',moduleRoot,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
  demand(/^[a-f0-9]{40}$/.test(version),'Missing executing trusted policy checkout');
  const modulePin=reader.descriptor(PROGRAMME_MODULE,version);
- demand(reader.used+2*modulePin.bytes<=reader.phaseLimit,'Policy helper identity scratch exceeds complete phase');reader.used+=modulePin.bytes;
  const moduleBody=fs.readFileSync(fileURLToPath(import.meta.url));
  demand(moduleBody.length===modulePin.bytes&&sha(moduleBody)===sha(reader.read(PROGRAMME_MODULE,{version})),'Executing policy helper differs from trusted checkout');
  const descriptor=reader.descriptor(PROGRAMME_CATALOGUE,version);
- demand(descriptor.mode==='100644'&&descriptor.bytes<=1048576&&reader.used+3*descriptor.bytes<=reader.phaseLimit,'Trusted policy body exceeds complete phase');
- // Whole bytes plus parsed/canonical scratch are charged before parsing. The
- // local full catalogue does not escape the calling authority frame.
- reader.used+=2*descriptor.bytes;
+ demand(descriptor.mode==='100644','Trusted policy body must be an ordinary file');
  const body=reader.read(PROGRAMME_CATALOGUE,{version});
  return {catalogue:validateSupportedProgrammeCatalogue(JSON.parse(body)),pin:{...reader.inventory.get(version+':'+PROGRAMME_CATALOGUE)}};
 }
@@ -82,31 +149,29 @@ export function matchSupportedProgramme(catalogue,{preimageVersion,sourceProfile
  demand(source&&native,'Unknown/ambiguous original source/native policy program closure');return {source,native};
 }
 
-// Only the compact reviewed authority escapes. The full policy graph and
-// exact matching scratch finish before native member phases reset accounting.
+// Only the compact reviewed authority escapes the catalogue lookup.
 export function readSupportedProgrammeAuthority(reader,request) {
  const policy=readSupportedProgrammeCatalogue(reader),supported=matchSupportedProgramme(policy.catalogue,request);
  const review=p=>({accepted_head:p.accepted_head,independent_review_comment:p.independent_review_comment});
  const authority={source:review(supported.source),native:review(supported.native),catalogue:policy.pin};
- const carry=2*valueBytes(authority).length;demand(reader.used+carry<=reader.phaseLimit,'Programme authority carry exceeds complete phase');
- reader.metadataBytes+=carry;reader.used+=carry;return authority;
+ return authority;
 }
 
 function pinCheck(p){
  demand(p&&/^[a-f0-9]{40}$/.test(p.commit)&&['100644','100755'].includes(p.mode)&&/^[a-f0-9]{40}$/.test(p.git_blob_oid),'Missing immutable body identity');
  demand(typeof p.path==='string'&&!p.path.includes('\\')&&!p.path.split('/').some(s=>!s||s==='.'||s==='..'),'Unsafe immutable path');
- demand(Number.isSafeInteger(p.bytes)&&p.bytes>=0&&p.bytes<=FILE&&hash(p.sha256),'Ordinary encoded body cap/hash');
- if(p.decoded_bytes!==undefined)demand(Number.isSafeInteger(p.decoded_bytes)&&p.decoded_bytes>=0&&p.decoded_bytes<=FILE&&hash(p.decoded_sha256),'Ordinary decoded body cap/hash');
+ demand(Number.isSafeInteger(p.bytes)&&p.bytes>=0&&hash(p.sha256),'Ordinary encoded body size/hash');
+ if(p.decoded_bytes!==undefined)demand(Number.isSafeInteger(p.decoded_bytes)&&p.decoded_bytes>=0&&hash(p.decoded_sha256),'Ordinary decoded body size/hash');
 }
 // Bounds derive ONLY from complete actual pointsets. Camera bounds are ignored.
 // A seam-spanning polygon widens to the entire longitude domain conservatively.
 export function coordinateBounds(g){
  demand(g&&['Polygon','MultiPolygon'].includes(g.type)&&same(Object.keys(g).sort(),['coordinates','type']),'Unsupported whole primitive');
- const polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;demand(Array.isArray(polys)&&polys.length>0,'Missing polygons');const boxes=[];
- for(const poly of polys){demand(Array.isArray(poly)&&poly.length>0,'Missing rings');let lo=Infinity,hi=-Infinity,south=Infinity,north=-Infinity,seam=false;
-  for(const ring of poly){demand(Array.isArray(ring)&&ring.length>=4,'Incomplete ring');let prior;
-   for(const p of ring){demand(Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)&&Math.abs(p[0])<=180&&Math.abs(p[1])<=90,'Invalid/nonfinite coordinate');lo=Math.min(lo,p[0]);hi=Math.max(hi,p[0]);south=Math.min(south,p[1]);north=Math.max(north,p[1]);if(prior&&Math.abs(prior[0]-p[0])>180)seam=true;prior=p;}
-   demand(same(ring[0],ring.at(-1)),'Unclosed original ring');
+ const polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;demand(isNativeSequence(polys)&&polys.length>0,'Missing polygons');const boxes=[];
+ for(const poly of polys){demand(isNativeSequence(poly)&&poly.length>0,'Missing rings');let lo=Infinity,hi=-Infinity,south=Infinity,north=-Infinity,seam=false;
+  for(const ring of poly){demand(isNativeSequence(ring)&&ring.length>=4,'Incomplete ring');let prior,first;
+   for(const p of ring){first??=p;demand(Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)&&Math.abs(p[0])<=180&&Math.abs(p[1])<=90,'Invalid/nonfinite coordinate');lo=Math.min(lo,p[0]);hi=Math.max(hi,p[0]);south=Math.min(south,p[1]);north=Math.max(north,p[1]);if(prior&&Math.abs(prior[0]-p[0])>180)seam=true;prior=p;}
+   demand(same(first,prior),'Unclosed original ring');
   }
   if(seam||hi-lo>180){lo=-180;hi=180;}boxes.push([lo,south,hi,north]);
  }
@@ -131,24 +196,16 @@ function bindCoordinateRows(certificate){
 }
 // Selected source adapter: whole source bodies are acquired through the trusted
 // data-only selected-bank resolver, never the historical raw target path.
-export function selectedCoordinateShard(resolver,sourcePaths,{priorShards=[],outputReserve=4*1024*1024,onFeature}={}) {
+export function selectedCoordinateShard(resolver,sourcePaths,{priorShards=[],onFeature}={}) {
  demand(resolver instanceof SelectedGeometrySources&&Array.isArray(sourcePaths)&&sourcePaths.length>0&&new Set(sourcePaths).size===sourcePaths.length,'Require actual selected source resolver and unique whole containing scope');
  demand(sourcePaths.every(p=>resolver.paths.includes(p)),'Foreign selected source shard');
- const snapshot=resolver.snapshot,reader=resolver.reader;
- demand(Number.isSafeInteger(outputReserve)&&outputReserve>0&&outputReserve<=FILE,'Bounded coordinate output reserve required');reader.outputBytes=outputReserve;
+ const snapshot=resolver.snapshot;
  const binding={version:1,kind:'selected-complete-coordinate-binding-v1',selection:snapshot.selection,release:resolver.release,
-   sources:resolver.sources,owners_sha256:valueSha(snapshot.owners),coordinate_domain:'complete-original-pointset-bounds:v1'};
+   sources:resolver.sources,owners_sha256:valueSha(selectedReferenceOwners(snapshot)),coordinate_domain:'complete-original-pointset-bounds:v1'};
  for(const shard of priorShards)demand(certificates.has(shard)&&same(shard.binding,binding),'Unqualified or foreign retained coordinate shard');
- // Complete immutable metadata is the only state retained across genuine
- // acquisition phases. Original source collections are discarded after each
- // iteration; bounds are not substitute geometry inputs to polygon consumers.
- const ownerIdentity=snapshot.owners.map(r=>[r.index,r.id,r.province_index,r.province_id]);
- const retained=valueBytes({binding,ownerIdentity,image:resolver.image?{index:resolver.image.index,map:resolver.image.map}:null,bank:resolver.bank??null,priorShards}).length;
- demand(retained<=FILE,'Retained coordinate certificate metadata exceeds ordinary bound');
- reader.metadataBytes=8*1024*1024+2*(snapshot.metadataBytes+retained)+snapshot.acquisition_buffer_bytes;reader.phase();
- const roster=new Map(snapshot.owners.map(r=>[r.id,r])),entries=[],seen=new Set(),inputFacts=[],phases=[];
+ const roster=new Map(selectedReferenceOwners(snapshot).map(r=>[r.id,r])),entries=[],seen=new Set(),inputFacts=[];
  for(const name of sourcePaths){
-  reader.metadataBytes=8*1024*1024+2*(snapshot.metadataBytes+retained+valueBytes({entries,inputFacts}).length)+snapshot.acquisition_buffer_bytes;reader.phase();const actual=resolver.read(name);inputFacts.push({path:name,source:actual.source,whole_body_sha256:actual.whole_sha256,bytes:actual.body.length});
+  const actual=resolver.read(name);inputFacts.push({path:name,source:actual.source,whole_body_sha256:actual.whole_sha256,bytes:actual.body.length});
   for(let ordinal=0;ordinal<actual.collection.features.length;ordinal++){
    const f=actual.collection.features[ordinal],id=f.id??f.properties?.id,owner=roster.get(id);
    demand(f.type==='Feature'&&owner&&!seen.has(id)&&f.properties?.parent_id===owner.province_id,'Foreign/duplicate/misparented whole selected row');seen.add(id);
@@ -162,12 +219,11 @@ export function selectedCoordinateShard(resolver,sourcePaths,{priorShards=[],out
    entries.push(coordinateRow({id,index:owner.index,parent_id:owner.province_id,parent_index:owner.province_index,source:name,ordinal,whole_feature_sha256:valueSha(f),geometry_sha256:valueSha(f.geometry),effective_geometry_sha256:valueSha(effective),boxes}));
    if(onFeature!==undefined){demand(typeof onFeature==='function','Require trusted source digest callback');onFeature(f);}
   }
-  phases.push({source:name,complete_phase_bytes:reader.used,descriptors:reader.charged.size});
  }
- const result={version:2,kind:'selected-complete-coordinate-shard-v2',entry_fields:COORDINATE_FIELDS,binding,paths:sourcePaths,inputs:inputFacts,entries,phases};
- demand(valueBytes(result).length<=reader.outputBytes,'Selected coordinate shard exceeds prospective output');freeze(result);certificates.set(result,{binding,resolver});return result;
+ const result={version:2,kind:'selected-complete-coordinate-shard-v2',entry_fields:COORDINATE_FIELDS,binding,paths:sourcePaths,inputs:inputFacts,entries};
+ freeze(result);certificates.set(result,{binding,resolver});return result;
 }
-export function joinSelectedCoordinateCertificate(resolver,shards,{outputReserve=32*1024*1024}={}) {
+export function joinSelectedCoordinateCertificate(resolver,shards) {
  demand(resolver instanceof SelectedGeometrySources&&Array.isArray(shards)&&shards.length>0,'Missing actual selected coordinate shards');
  const expected=new Set(resolver.paths),seenPaths=new Set(),seenIds=new Set(),entries=[],inputs=[];
  let binding;for(const shard of shards){
@@ -177,11 +233,9 @@ export function joinSelectedCoordinateCertificate(resolver,shards,{outputReserve
   for(const input of shard.inputs){demand(input.path===resolver.paths[inputs.length]&&same(input.source,{...resolver.sources[inputs.length],...(input.source.whole_encoded_alias?{whole_encoded_alias:input.source.whole_encoded_alias}:{})}), 'Complete selected source input order or whole binding differs');inputs.push(input);}for(const row of shard.entries){demand(!seenIds.has(row.id),'Duplicate complete location join');seenIds.add(row.id);entries.push(row);}
  }
  demand(seenPaths.size===expected.size&&seenIds.size===resolver.snapshot.owners.length&&resolver.snapshot.owners.every(o=>seenIds.has(o.id)),'Incomplete canonical source/owner roster; exclusion forbidden');
- const retained=2*(resolver.snapshot.metadataBytes+valueBytes({shards,ownerIdentity:resolver.snapshot.owners.map(r=>[r.index,r.id,r.province_index,r.province_id]),binding}).length)+resolver.snapshot.acquisition_buffer_bytes;
- const reader=resolver.reader;demand(Number.isSafeInteger(outputReserve)&&outputReserve>0&&outputReserve<=FILE,'Bounded complete certificate output reserve required');reader.outputBytes=outputReserve;reader.metadataBytes=8*1024*1024+retained;reader.phase();
- demand(shards.length+inputs.length<=SLOT,'Complete coordinate join descriptor cap');entries.sort((a,b)=>a.index-b.index);
- const result={version:2,kind:'selected-coordinate-neighbor-certificate-v2',entry_fields:COORDINATE_FIELDS,binding,entries,inputs,complete_phase_bytes:reader.used,limitations:['Certificate projects complete owner identity/index/parent tuples and merged coordinate bounds. Full original camera metadata remains authenticated source custody and charged carried state; it is not duplicated as certificate geometry.','Conservative exclusion only. Actual whole geometry and original polygon predicates are mandatory for every possible neighbor.']};
- demand(valueBytes(result).length<=reader.outputBytes,'Complete selected certificate exceeds prospective output');freeze(result);certificates.set(result,{binding,resolver});return result;
+ entries.sort((a,b)=>a.index-b.index);
+ const result={version:2,kind:'selected-coordinate-neighbor-certificate-v2',entry_fields:COORDINATE_FIELDS,binding,entries,inputs,limitations:['Certificate projects complete owner identity/index/parent tuples and merged coordinate bounds. Full original camera metadata remains authenticated source custody; it is not duplicated as certificate geometry.','Conservative exclusion only. Actual whole geometry and original polygon predicates are mandatory for every possible neighbor.']};
+ freeze(result);certificates.set(result,{binding,resolver});return result;
 }
 // Qualification of a persisted cold product uses the independently retained
 // live trusted child acknowledgement, plus the actual selected resolver. The
@@ -202,12 +256,12 @@ export function acceptColdCoordinateCertificate(resolver,certificate,{facts,expe
  demand(encoded_sha256===publication.certificate.sha256&&decoded_sha256===publication.certificate.decoded_sha256,'Cold complete certificate bytes differ');
  demand(publication.facts&&valueSha(facts)===publication.facts.sha256,'Cold facts differ from genuine acknowledged publication');
  demand(facts.kind===publication.kind&&facts.selected_commit===resolver.reader.version&&facts.candidate_code_executed===false&&certificate.kind==='selected-coordinate-neighbor-certificate-v2','Foreign cold certificate execution/input');
- demand(same(certificate.binding.selection,resolver.snapshot.selection)&&same(certificate.binding.release,resolver.release)&&same(certificate.binding.sources,resolver.sources)&&certificate.binding.owners_sha256===valueSha(resolver.snapshot.owners)&&same(facts.binding,certificate.binding),'Cold certificate selected source/owner binding differs');
+ demand(same(certificate.binding.selection,resolver.snapshot.selection)&&same(certificate.binding.release,resolver.release)&&same(certificate.binding.sources,resolver.sources)&&certificate.binding.owners_sha256===valueSha(selectedReferenceOwners(resolver.snapshot))&&same(facts.binding,certificate.binding),'Cold certificate selected source/owner binding differs');
  bindCoordinateRows(certificate);
- const paths=new Set(resolver.paths),owners=new Map(resolver.snapshot.owners.map(r=>[r.id,r])),seen=new Set(),sources=new Set();
+ const paths=new Set(resolver.paths),owners=new Map(selectedReferenceOwners(resolver.snapshot).map(r=>[r.id,r])),seen=new Set(),sources=new Set();
  demand(Array.isArray(certificate.inputs)&&certificate.inputs.length===paths.size&&Array.isArray(certificate.entries)&&certificate.entries.length===owners.size,'Incomplete cold source/owner certificate');
  for(let i=0;i<certificate.inputs.length;i++){const input=certificate.inputs[i],expected=resolver.sources[i];
-  demand(input.path===resolver.paths[i]&&!sources.has(input.path)&&sources.add(input.path)&&same(input.source,{...expected,...(input.source?.whole_encoded_alias?{whole_encoded_alias:input.source.whole_encoded_alias}:{})})&&hash(input.whole_body_sha256)&&Number.isSafeInteger(input.bytes)&&input.bytes>0&&input.bytes<=FILE,'Foreign/duplicate/reordered/drifted complete cold source');
+  demand(input.path===resolver.paths[i]&&!sources.has(input.path)&&sources.add(input.path)&&same(input.source,{...expected,...(input.source?.whole_encoded_alias?{whole_encoded_alias:input.source.whole_encoded_alias}:{})})&&hash(input.whole_body_sha256)&&Number.isSafeInteger(input.bytes)&&input.bytes>0,'Foreign/duplicate/reordered/drifted complete cold source');
   validateColdSourceBody(input,expected,facts);
  }
  for(let i=0;i<certificate.entries.length;i++){const row=certificate.entries[i],owner=owners.get(row.id);demand(row.id===resolver.snapshot.owners[i].id&&owner&&!seen.has(row.id)&&seen.add(row.id)&&row.index===owner.index&&row.parent_id===owner.province_id&&row.parent_index===owner.province_index&&paths.has(row.source)&&Number.isSafeInteger(row.ordinal)&&row.ordinal>=0&&hash(row.whole_feature_sha256)&&hash(row.geometry_sha256)&&hash(row.effective_geometry_sha256)&&Array.isArray(row.boxes)&&row.boxes.length>0,'Foreign/duplicate/drifted cold owner record');
@@ -229,31 +283,42 @@ export function sealColdCoordinateCertificate(certificate,product) {
  demand(proof?.resolver instanceof SelectedGeometrySources&&certificate.kind==='selected-coordinate-neighbor-certificate-v2','Require genuine complete cold validation before detachment');
  demand(proof.accepted&&valueSha(product.publication)===proof.accepted.publication_sha256&&valueSha(product.facts)===proof.accepted.facts_sha256&&product.encoded_sha256===proof.accepted.encoded_sha256&&product.decoded_sha256===proof.accepted.decoded_sha256,'Persisted custody differs from privately accepted whole product');
  demand(valueSha(certificate)===product.decoded_sha256&&same(product.publication.certificate,{path:'certificate.json.gz',bytes:product.publication.certificate.bytes,sha256:product.encoded_sha256,decoded_bytes:product.publication.certificate.decoded_bytes,decoded_sha256:product.decoded_sha256})&&valueSha(product.facts)===product.publication.facts.sha256,'Validated persisted cold product changed');
- const inventory=[...proof.resolver.reader.inventory.values()],completePhaseBytes=proof.resolver.reader.used;
- demand(Array.isArray(inventory)&&Number.isSafeInteger(completePhaseBytes)&&completePhaseBytes>0&&completePhaseBytes<=proof.resolver.reader.phaseLimit,'Missing complete persisted cold acquisition custody');
- const receipt=JSON.parse(valueBytes({version:1,kind:'privately-validated-persisted-coordinate-receipt-v1',binding:certificate.binding,publication:product.publication,facts:product.facts,inventory,complete_phase_bytes:completePhaseBytes,effective_additions:proof.resolver.snapshot.additive?.normalized_rows??[]}));
- demand(valueBytes(receipt).length<=FILE,'Complete persisted cold custody exceeds member bound');
- freeze(receipt);coldReceipts.set(receipt,{decoded_sha256:product.decoded_sha256,encoded_sha256:product.encoded_sha256});
+ const inventory=[...proof.resolver.reader.inventory.values()].filter(pin=>pin.whole_body_consumed===true);
+ demand(inventory.length>0,'Missing complete persisted cold acquisition custody');
+ const receipt=JSON.parse(valueBytes({version:1,kind:'privately-validated-persisted-coordinate-receipt-v1',binding:certificate.binding,publication:product.publication,facts:product.facts,inventory,effective_additions:proof.resolver.snapshot.additive?.normalized_rows??[]}));
+ const metadataApplication={scientific_selection:nativeBaseSelection(proof.resolver.snapshot.selection),
+  projected:!!proof.resolver.snapshot.selection.reference_projection};
+ freeze(receipt);coldReceipts.set(receipt,{decoded_sha256:product.decoded_sha256,encoded_sha256:product.encoded_sha256,metadataApplication});
  // Shard proofs retain their resolver identity. Only the fully validated cold
 // certificate proof relinquishes the selected snapshot after its helper ends.
- certificates.set(certificate,{binding:certificate.binding,persisted:true});return receipt;
+ certificates.set(certificate,{binding:certificate.binding,persisted:true,metadataApplication});return receipt;
 }
 export function reopenColdCoordinateCertificate(receipt,product) {
  const proof=coldReceipts.get(receipt);
  demand(proof&&same(product.publication,receipt.publication)&&same(product.facts,receipt.facts)&&product.encoded_sha256===proof.encoded_sha256&&product.decoded_sha256===proof.decoded_sha256&&valueSha(product.certificate)===proof.decoded_sha256&&same(product.certificate.binding,receipt.binding),'Missing private persisted custody or changed whole cold product');
- bindCoordinateRows(product.certificate);freeze(product.certificate);certificates.set(product.certificate,{binding:receipt.binding,persisted:true});return product.certificate;
+ bindCoordinateRows(product.certificate);freeze(product.certificate);certificates.set(product.certificate,{binding:receipt.binding,persisted:true,metadataApplication:proof.metadataApplication});return product.certificate;
 }
 
 export function selectedCertificateAffectedPlan(before,after) {
  demand(certificates.has(before)&&certificates.has(after),'Require both complete cold source certificates');
  const old=new Map(before.entries.map(r=>[r.id,r])),next=new Map(after.entries.map(r=>[r.id,r]));
- demand(old.size===next.size&&[...old].every(([id,row])=>next.has(id)&&row.index===next.get(id).index&&row.parent_id===next.get(id).parent_id&&row.parent_index===next.get(id).parent_index),'Selected continuous identity/owner/parent roster changed');
+ demand(old.size===next.size&&[...old].every(([id,row])=>next.has(id)&&row.index===next.get(id).index),
+  'Selected continuous stable identity/owner roster changed');
+ const parentChanges=[...old].some(([id,row])=>row.parent_id!==next.get(id).parent_id||row.parent_index!==next.get(id).parent_index);
+ if(parentChanges){
+  const applicability=certificate=>{const proof=certificates.get(certificate);return proof.metadataApplication??{
+   scientific_selection:nativeBaseSelection(proof.resolver.snapshot.selection),
+   projected:!!proof.resolver.snapshot.selection.reference_projection};};
+  const prior=applicability(before),current=applicability(after);
+  demand((prior.projected||current.projected)&&same(prior.scientific_selection,current.scientific_selection),
+   'Selected continuous parent change lacks a validated metadata-only application');
+ }
+
  const changed=[...old.keys()].filter(id=>old.get(id).effective_geometry_sha256!==next.get(id).effective_geometry_sha256).sort(),needed=new Set(changed),pairs=new Set();
  const intersects=(a,b)=>a[0]<=b[2]&&b[0]<=a[2]&&a[1]<=b[3]&&b[1]<=a[3];
  for(const id of changed){const bounds=[...old.get(id).boxes,...next.get(id).boxes];
   for(const certificate of [before,after])for(const row of certificate.entries)if(row.id!==id&&row.boxes.some(a=>bounds.some(b=>intersects(a,b)))){needed.add(row.id);pairs.add([id,row.id].sort().join('\0'));}
  }
- demand(valueBytes([...needed,...pairs]).length<=FILE,'Complete continuous affected closure exceeds output cap');
  return freeze({version:1,kind:'complete-selected-continuous-plan-v1',changed_ids:changed,required_ids:[...needed].sort(),pairs:[...pairs].sort().map(p=>p.split('\0')),source_paths:{baseline:[...new Set([...needed].map(id=>old.get(id).source))].sort(),candidate:[...new Set([...needed].map(id=>next.get(id).source))].sort()},
   source_bindings:{baseline:before.binding,candidate:after.binding},limits:['Coordinate exclusion only. All required full original polygons and unchanged strict coverage/overlap predicates remain mandatory.']});
 }
@@ -276,7 +341,6 @@ export function selectedAffectedPlan(certificate,changes) {
  const active=[];for(const current of boxes){for(let i=active.length-1;i>=0;i--)if(active[i].box[2]<current.box[0])active.splice(i,1);
   for(const other of active)if(other.id!==current.id&&other.box[1]<=current.box[3]&&current.box[1]<=other.box[3])pairs.add([other.id,current.id].sort().join('\0'));active.push(current);
  }
- demand(valueBytes([...pairs]).length<=FILE,'Complete affected pair roster exceeds bounded output; refuse incomplete comparison');
  return {version:1,kind:'complete-selected-affected-plan-v1',binding:certificate.binding,changed_ids:[...targets.keys()].sort(),required_ids:[...needed].sort(),pairs:[...pairs].sort().map(p=>p.split('\0')),
   source_paths:[...new Set(certificate.entries.filter(r=>needed.has(r.id)).map(r=>r.source))].sort(),limitations:['Original strict polygon predicates still required; this plan is not geographic approval.']};
 }
@@ -296,11 +360,12 @@ function originalSourceAliases(reader, request, aliases) {
   demand([request.additive.facts_path,request.additive.publication_path,request.additive.inventory_path].includes(p.path),'Unconsumed completed alias');
   pinCheck({...q,git_blob_oid:q.git_blob_oid??q.blob});
   demand(q.mode==='100644'&&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(k=>q[k]===p[k]),'Completed alias whole encoded/decoded pins differ');
-  const actual=reader.descriptor(q.path,q.commit);
+  const version=reader.pinnedVersion({...q,git_blob_oid:q.git_blob_oid??q.blob});
+  const actual=reader.descriptor(q.path,version);
   demand(actual.mode===q.mode&&actual.git_blob_oid===(q.git_blob_oid??q.blob)&&actual.bytes===q.bytes,'Completed alias actual Git identity differs');
   const decoded=p.uncompressed_bytes??0;
-  demand(Number.isSafeInteger(decoded)&&decoded>=0&&decoded<=FILE&&reader.used+2*decoded<=reader.phaseLimit,'Completed alias decoder phase exceeds cap');reader.used+=2*decoded;
-  reader.admit(actual,decoded);const encoded=reader.read(q.path,{version:q.commit,expected:q.sha256,decoded});
+  demand(Number.isSafeInteger(decoded)&&decoded>=0,'Invalid completed alias decoded byte length');
+  const encoded=reader.read(q.path,{version,expected:q.sha256});
   if(p.uncompressed_bytes!==undefined){demand(hash(p.uncompressed_sha256),'Missing completed decoded hash');const raw=gunzipSync(encoded,{maxOutputLength:decoded});demand(raw.length===decoded&&sha(raw)===p.uncompressed_sha256,'Completed alias decoded body differs');}
   byPath.set(p.path,q);
  }
@@ -318,17 +383,13 @@ export function readOriginalRuleAuthority(reader, pins, sourceOutputAliases=[]) 
  const normal=p=>({...p,git_blob_oid:p.git_blob_oid??p.blob});
  const identity=p=>{const q=normal(p);return {commit:q.commit,path:q.path,mode:q.mode,git_blob_oid:q.git_blob_oid,bytes:q.bytes,sha256:q.sha256};};
  const admitted=new Map();
- // All six whole bodies and retained parsed metadata are prospectively charged
- // before reading the first body. No callback or arbitrary loader is accepted.
- const retained=Object.values(pins).reduce((n,p)=>n+2*p.bytes,0)+(sourceOutputAliases.length?2*valueBytes(sourceOutputAliases).length:0);
- demand(Number.isSafeInteger(retained)&&retained<=FILE,'Original rule metadata exceeds whole bound');
- reader.metadataBytes+=retained;reader.phase();
+ // Authenticate every whole body before interpreting the original rule.
  for(const [key,p]of Object.entries(pins)){
   pinCheck(normal(p));let version=p.commit;
-  try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+  try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
   const actual=reader.descriptor(p.path,version);
   demand(actual.mode===p.mode&&actual.git_blob_oid===normal(p).git_blob_oid&&actual.bytes===p.bytes,'Original authority body mode/OID differs');
-  reader.admit(actual);admitted.set(key,{pin:p,version});
+  admitted.set(key,{pin:p,version});
  }
  const bodies={};for(const [key,{pin,version}]of admitted)bodies[key]=JSON.parse(reader.read(pin.path,{version,expected:pin.sha256}));
  const {ledger,native_facts:native, native_manifest:manifest,native_request:request,source_facts:source,source_request:issued}=bodies;
@@ -355,7 +416,7 @@ export function readOriginalRuleAuthority(reader, pins, sourceOutputAliases=[]) 
  for(const row of selected){demand(row.source_receipt_sha256===pins.source_facts.sha256&&valueSha(row.geometry)===row.geometry_sha256,'Original whole primitive/source receipt changed');coordinateBounds(row.geometry);}
  demand(batch?same(spec.scope_ids,ledger.scope_ids):selected.length===1&&selected[0].component_id===spec.component_id,'Original proposal selection differs');
  const result=freeze({version:1,kind:'authenticated-original-rule-custody-v1',pins,manifest_original_pin:manifestOriginal,rule_sha256:ledger.rule_sha256,rule_preimage:preimage,source_rule:issued.source_rule,ledger,
-  source_scope_ids:ledger.scope_ids,...(sourceOutputAliases.length?{source_output_aliases:sourceOutputAliases}:{}),complete_phase_bytes:reader.used,limitations:['Historical whole executed rule custody only. Full predecessor publication/operating/source closure and current-bank rebind are independently required before selection. No physical authority or activation approval.']});
+  source_scope_ids:ledger.scope_ids,...(sourceOutputAliases.length?{source_output_aliases:sourceOutputAliases}:{}),limitations:['Historical whole executed rule custody only. Full predecessor publication/operating/source closure and current-bank rebind are independently required before selection. No physical authority or activation approval.']});
  originalAuthorities.set(result,{reader,bodies,aliases});return result;
 }
 
@@ -365,7 +426,7 @@ export function readOriginalRuleAuthority(reader, pins, sourceOutputAliases=[]) 
 // Only independently reviewed administrative SOURCE and NATIVE closures may retain
 // an older source selector. Both selectors and their complete unchanged source-map
 // identity are authenticated; current selected-bank conservation remains later.
-function originalAdministrativeBaseline(reader, issued, request, native) {
+function* originalAdministrativeBaseline(reader, issued, request, native) {
  if(same(issued.baseline,request.baseline))return true;
  const profile='retained-consumed-administrative-source';
  demand(issued.source_rule?.profile===profile&&request.additive?.source_profile===profile,
@@ -373,18 +434,16 @@ function originalAdministrativeBaseline(reader, issued, request, native) {
  matchSupportedProgramme(readSupportedProgrammeCatalogue(reader).catalogue,{preimageVersion:3,sourceProfile:profile,
   sourceCode:issued.executed_code,nativeCode:request.executed_code});
  const read=p=>{pinCheck({...p,git_blob_oid:p.git_blob_oid??p.blob});
-  const actual=reader.descriptor(p.path,p.commit);
+  const version=reader.pinnedVersion(p),actual=reader.descriptor(p.path,version);
   demand(actual.mode===p.mode&&actual.git_blob_oid===(p.git_blob_oid??p.blob)&&actual.bytes===p.bytes,'Original selector/source-map Git identity differs');
-  // Whole encoded input and parsed/canonical scratch stay charged in this
-  // existing phase; no reset or release of the retained authority graph.
-  const retained=3*p.bytes;demand(Number.isSafeInteger(retained)&&reader.used+retained<=reader.phaseLimit,'Original baseline retained phase exceeds cap');
-  reader.metadataBytes+=retained;reader.used+=retained;reader.admit(actual);
-  return JSON.parse(reader.read(p.path,{version:p.commit,expected:p.sha256}));};
+  return JSON.parse(reader.read(p.path,{version,expected:p.sha256}));};
  for(const baseline of [issued.baseline,request.baseline])demand(baseline?.version===2
   &&baseline.kind==='current-selected-native-baseline-v1'&&Object.keys(baseline).sort().join(',')==='kind,pins,version'
   &&Array.isArray(baseline.pins)&&baseline.pins.length===1&&baseline.pins[0].kind===undefined
   &&baseline.pins[0].path==='data/ownership-selection.json','Foreign original administrative selector');
- const historical=read(issued.baseline.pins[0]),selected=read(request.baseline.pins[0]),a=native.baseline_acquisition;
+ const pins=[issued.baseline.pins[0],request.baseline.pins[0]].map(p=>({...p,git_blob_oid:p.git_blob_oid??p.blob}));
+ const [historical,selected]=yield {kind:'bodies',reader,pins,read:()=>pins.map(read)};
+ const a=native.baseline_acquisition;
  demand(a?.kind==='current-selected-native-baseline-custody-v1'&&same(a.baseline_pin,request.baseline.pins[0])
   &&same(a.selection,selected)&&a.manifest_sha256===selected.sha256&&a.source_map_sha256===selected.selected_geography?.sha256,
   'Original native selector acquisition differs');
@@ -392,9 +451,13 @@ function originalAdministrativeBaseline(reader, issued, request, native) {
   &&same(historical.selected_geography,selected.selected_geography),'Original historical/current base geometry differs');
  const descriptor=selected.selected_geography;
  demand(descriptor?.kind==='complete-world-index-with-exact-encoded-overrides','Unsupported original selected source map');
- const actual=reader.descriptor(descriptor.path,request.baseline.pins[0].commit);
- demand(actual.bytes===descriptor.bytes,'Original selected source-map size differs');
- const map=read({...actual,sha256:descriptor.sha256});
+ const consumed=a.input_inventory?.filter(p=>p.path===descriptor.path);
+ demand(consumed?.length===1,'Missing/duplicate administrative consumed source map');
+ const mapPin=consumed[0];pinCheck(mapPin);
+ demand(mapPin.whole_body_consumed===true&&mapPin.bytes===descriptor.bytes&&mapPin.sha256===descriptor.sha256,'Administrative consumed source map identity differs');
+ // Retain the actual native execution's map origin, not a fabricated pin
+ // under the selector commit. Its whole map/source-bank joins remain below.
+ const map=yield {kind:'json',reader,pin:mapPin,read:()=>read(mapPin)};
  demand(map.kind===descriptor.kind&&map.native_manifest_sha256===selected.sha256&&map.release_id===selected.release_id,
   'Original selected source-map binding differs');
  const names=issued.source_rule.target_banks;
@@ -408,21 +471,20 @@ function originalAdministrativeBaseline(reader, issued, request, native) {
 }
 
 export function qualifyOriginalSourceAuthority(custody) {
+ return driveSourceAuthority(originalSourceAuthority(custody));
+}
+function* originalSourceAuthority(custody) {
  const proof=originalAuthorities.get(custody);demand(proof,'Require actual authenticated original rule custody');
  const {reader,bodies}=proof,{native_request:request,source_request:issued,source_facts:facts}=bodies,spec=request.additive;
  const keys=['publication_path','inventory_path','operating_path'];
  const pins=keys.map(key=>{const original=spec.inputs.find(p=>p.path===spec[key]);const p=proof.aliases.get(original?.path)??original;demand(p,'Omitted qualified source proof '+key);pinCheck({...p,git_blob_oid:p.git_blob_oid??p.blob});return p;});
- const retained=pins.reduce((n,p)=>n+2*(p.bytes+(p.uncompressed_bytes??0)),0);
- demand(Number.isSafeInteger(retained)&&retained<=FILE,'Qualified proof retained metadata cap');reader.metadataBytes+=retained;
- // Retain and charge the prior six whole bodies: no phase reset while live.
- demand(reader.used+retained<=reader.phaseLimit,'Complete original source proof phase exceeds cap');reader.used+=retained;
- const admitted=pins.map(p=>{let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
-  const actual=reader.descriptor(p.path,version);demand(actual.mode===p.mode&&actual.git_blob_oid===(p.git_blob_oid??p.blob)&&actual.bytes===p.bytes,'Qualified original proof mode/OID differs');reader.admit(actual,p.uncompressed_bytes??0);return {p,version};});
- const raw=admitted.map(({p,version})=>{const encoded=reader.read(p.path,{version,expected:p.sha256,decoded:p.uncompressed_bytes??0});if(p.uncompressed_bytes===undefined)return encoded;
+ const admitted=pins.map(p=>{let version=p.commit;try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+  const actual=reader.descriptor(p.path,version);demand(actual.mode===p.mode&&actual.git_blob_oid===(p.git_blob_oid??p.blob)&&actual.bytes===p.bytes,'Qualified original proof mode/OID differs');return {p,version};});
+ const raw=admitted.map(({p,version})=>{const encoded=reader.read(p.path,{version,expected:p.sha256});if(p.uncompressed_bytes===undefined)return encoded;
   demand(hash(p.uncompressed_sha256),'Missing complete decoded proof hash');const decoded=gunzipSync(encoded,{maxOutputLength:p.uncompressed_bytes});demand(decoded.length===p.uncompressed_bytes&&sha(decoded)===p.uncompressed_sha256,'Whole decoded original proof differs');return decoded;});
  const [publication,inventory,operating]=[JSON.parse(raw[0]),raw[1],JSON.parse(raw[2])],inventoryPin=pins[1];
  demand(publication.complete===true&&publication.facts.bytes===custody.pins.source_facts.bytes&&publication.facts.sha256===custody.pins.source_facts.sha256&&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(k=>publication.inventory[k]===inventoryPin[k]),'Partial/drifted original source publication');
- demand(facts.execution_commit===spec.source_execution_commit&&same(facts.input_descriptors,[issued.report,...issued.source_rule.inputs,...issued.baseline.pins])&&same(facts.runtime,spec.source_runtime)&&same(facts.installed_modules,issued.installed_modules)&&same(facts.parent,request.parent)&&originalAdministrativeBaseline(reader,issued,request,bodies.native_facts),'Original source execution closure differs');
+ demand(facts.execution_commit===spec.source_execution_commit&&same(facts.input_descriptors,[issued.report,...issued.source_rule.inputs,...issued.baseline.pins])&&same(facts.runtime,spec.source_runtime)&&same(facts.installed_modules,issued.installed_modules)&&same(facts.parent,request.parent)&&(yield* originalAdministrativeBaseline(reader,issued,request,bodies.native_facts)),'Original source execution closure differs');
  demand(operating.qualified===true&&operating.execution_commit===facts.execution_commit&&operating.exit?.code===0&&operating.exit.signal===null&&operating.owned_processes_remaining?.length===0&&operating.refusal===null&&operating.request_sha256===facts.request.sha256&&operating.destination===issued.destination,'Unqualified original source operating proof');
  const lines=inventory.toString('utf8').split('\n');demand(lines.pop()==='','Truncated complete source inventory');const rows=lines.map(line=>JSON.parse(line));
  demand(same(rows.map(r=>r.component_id),issued.source_rule.expected_ids)&&rows.length===facts.components&&new Set(rows.map(r=>r.component_id)).size===rows.length,'Omitted/duplicate/reordered source inventory');
@@ -432,7 +494,7 @@ export function qualifyOriginalSourceAuthority(custody) {
   demand(row.source_case?.source&&spec.inputs.some(p=>same(p,row.source_case.source)),'Whole proposal source-case custody omitted');
   for(const pin of [row.source_case?.source,row.original_record?.source])demand(pin&&issued.source_rule.inputs.some(p=>same(p,pin)),'Whole original source-case/record custody omitted');
  }
- const result=freeze({version:1,kind:'qualified-original-source-authority-v1',original:custody,pins,rows,complete_phase_bytes:reader.used,
+ const result=freeze({version:1,kind:'qualified-original-source-authority-v1',original:custody,pins,rows,
   limitations:['Original retained source-relative qualification only. Physical authority/date/water truth remains unapproved; native proposal qualification and actual selected-bank conservation/rebind are separately mandatory.']});
  proof.qualifiedSource=result;return result;
 }
@@ -444,58 +506,19 @@ export function qualifyOriginalNativeAuthority(custody, pins) {
  const {reader,bodies}=proof,{native_request:issued,native_facts:facts}=bodies;
  demand(proof.qualifiedSource,'Native authority requires complete qualified source predecessor first');
  demand(pins&&Object.keys(pins).sort().join(',')==='assets,inventory,operating,publication'&&Array.isArray(pins.assets),'Require complete native proof roster');
- // The source acquisition frame is finished. Retain its complete live parsed
- // custody/body/source views, then acquire one complete native member at a time.
- // Size the complete live graph without allocating canonical clones/strings.
- // Each string's six bytes per UTF-16 unit bounds JSON escaping and UTF-8;
- // the doubled graph bound includes its retained object representation.
- const measurementScratch=1024*1024;
- demand(reader.used+measurementScratch<=reader.phaseLimit,'Native carry measurement scratch exceeds phase');
- const carryBytes=value=>{
-  const ancestors=new WeakSet();let objects=0,total=0;
-  const add=n=>{total+=n;demand(Number.isSafeInteger(total)&&total<=FILE,'Native carry graph exceeds bounded metadata member');};
-  const visit=v=>{
-   if(v===null||v===undefined){add(4);return;}
-   if(typeof v==='string'){add(6*v.length+2);return;}
-   if(typeof v==='boolean'){add(5);return;}
-   if(typeof v==='number'){demand(Number.isFinite(v),'Unsupported native carry number');add(String(v).length);return;}
-   demand(typeof v==='object'&&!ancestors.has(v)&&++objects<=131072,'Unsupported/cyclic native carry graph');ancestors.add(v);add(2);
-   if(v instanceof Map){v.forEach((item,key)=>{visit(key);visit(item);add(4);});}
-   else if(Array.isArray(v)){for(let i=0;i<v.length;i++){visit(v[i]);add(1);}}
-   else{demand(Object.getPrototypeOf(v)===Object.prototype||Object.getPrototypeOf(v)===null,'Unsupported native carry object');for(const key in v){if(Object.hasOwn(v,key)){add(6*key.length+4);visit(v[key]);}}}
-   ancestors.delete(v);
-  };visit(value);return 2*total;
- };
- const sourceCarry=carryBytes({custody,pins,bodies,source:proof.qualifiedSource});
- const outerMetadata=reader.metadataBytes;
- const sourceMetadata=outerMetadata+sourceCarry+measurementScratch;
  const held={publication:null,operating:null,rows:[],nativePatches:[],nativeContracts:[]};
- let maxPhase=reader.used;
- const finishedMember=(p,parse,consume)=>{
-  const readCompletedMember=()=>{
-  reader.metadataBytes=sourceMetadata+carryBytes(reader.inventory)+carryBytes(held);reader.phase();
+ const finishedMember=(p,consume)=>{
   const q={...p,git_blob_oid:p.git_blob_oid??p.blob,decoded_bytes:p.decoded_bytes??p.uncompressed_bytes,decoded_sha256:p.decoded_sha256??p.uncompressed_sha256};pinCheck(q);
-  let version=q.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+  let version=q.commit;try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
   const actual=reader.descriptor(q.path,version);demand(actual.mode===q.mode&&actual.git_blob_oid===q.git_blob_oid&&actual.bytes===q.bytes,'Original native proof whole mode/OID differs');
-  // Parsing/comparison retains graph, string and canonical scratch while
-  // the complete byte body is live.
-  // An inverse-only gzip needs one extra decoded-size buffer for gunzip's
-  // chunks/concatenation; its raw bytes never escape this finished frame.
-  const scratch=parse?4*(q.decoded_bytes??q.bytes):(q.decoded_bytes??0);
-  demand(Number.isSafeInteger(scratch)&&reader.used+scratch<=reader.phaseLimit,'Complete native decoder/parsed scratch exceeds prospective cap');reader.used+=scratch;
-  reader.admit(actual,q.decoded_bytes??0);maxPhase=Math.max(maxPhase,reader.used);
-  const encoded=reader.read(q.path,{version,expected:q.sha256,decoded:q.decoded_bytes??0});
+  const encoded=reader.read(q.path,{version,expected:q.sha256});
   let raw=encoded;
   if(q.decoded_bytes!==undefined){raw=gunzipSync(encoded,{maxOutputLength:q.decoded_bytes});demand(raw.length===q.decoded_bytes&&sha(raw)===q.decoded_sha256,'Original whole native decoded proof differs');}
   consume(raw);
-  };
-  readCompletedMember();
-  // Whole body/decoder temporaries are out of scope; parsed custody stays held.
-  reclaimCompletedRebindFrame();
  };
- finishedMember(pins.publication,true,raw=>{held.publication=JSON.parse(raw);});
- finishedMember(pins.inventory,true,raw=>{const lines=raw.toString('utf8').split('\n');demand(lines.pop()==='','Truncated whole native inventory');held.rows=lines.map(s=>JSON.parse(s));});
- finishedMember(pins.operating,true,raw=>{held.operating=JSON.parse(raw);});
+ finishedMember(pins.publication,raw=>{held.publication=JSON.parse(raw);});
+ finishedMember(pins.inventory,raw=>{const lines=raw.toString('utf8').split('\n');demand(lines.pop()==='','Truncated whole native inventory');held.rows=lines.map(s=>JSON.parse(s));});
+ finishedMember(pins.operating,raw=>{held.operating=JSON.parse(raw);});
  const {publication,operating,rows,nativePatches,nativeContracts}=held,inventoryPin=pins.inventory;
  demand(publication.complete===true&&publication.facts.bytes===custody.pins.native_facts.bytes&&publication.facts.sha256===custody.pins.native_facts.sha256&&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(k=>publication.inventory[k]===inventoryPin[k]),'Partial/drifted original native publication');
  demand(same(facts.input_descriptors,[issued.report,...issued.additive.inputs,...issued.baseline.pins])&&same(facts.installed_modules,issued.installed_modules),'Original native actual input/module closure differs');
@@ -508,8 +531,7 @@ export function qualifyOriginalNativeAuthority(custody, pins) {
  for(let i=0;i<pins.assets.length;i++){
   const p=pins.assets[i],declared=publication.assets[i];
   demand(p.path.endsWith('/'+declared.path)&&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(k=>p[k]===declared[k]),'Original native asset roster rebound');
-   const parsed=declared.path==='base-native-manifest.json'||declared.path.startsWith('patch-')||p.sha256===custody.pins.ledger.sha256;
-  finishedMember(p,parsed,raw=>{
+  finishedMember(p,raw=>{
   if(declared.path==='base-native-manifest.json'){const m=JSON.parse(raw);nativeContracts.push(Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k=>[k,m[k]])));}
   if(declared.path.startsWith('patch-')){const patch=JSON.parse(raw);demand(patch.kind==='unassigned-native-cells-v1'&&patch.ledger_sha256===custody.pins.ledger.sha256,'Qualified original patch/ledger differs');nativePatches.push(patch);}
   if(p.sha256===custody.pins.ledger.sha256)demand(same(JSON.parse(raw),custody.ledger),'Whole published native ledger differs');
@@ -517,31 +539,42 @@ export function qualifyOriginalNativeAuthority(custody, pins) {
  }
  demand(nativeContracts.length===1,'Original native publication omits complete base manifest');
  demand(pins.assets.some(p=>p.sha256===custody.pins.ledger.sha256),'Published native assets omit original complete ledger');
- // Only complete parsed views and descriptor custody escape the final frame.
- reader.metadataBytes=sourceMetadata+carryBytes(reader.inventory)+carryBytes(held);reader.phase();maxPhase=Math.max(maxPhase,reader.used);
- return freeze({version:1,kind:'qualified-original-native-authority-v1',pins,scope_ids:custody.source_scope_ids,native_scope_ids:nativeScope,inventory_rows:rows,native_patches:nativePatches,native_contract:nativeContracts[0],rule_sha256:custody.rule_sha256,complete_phase_bytes:maxPhase,
+ return freeze({version:1,kind:'qualified-original-native-authority-v1',pins,scope_ids:custody.source_scope_ids,native_scope_ids:nativeScope,inventory_rows:rows,native_patches:nativePatches,native_contract:nativeContracts[0],rule_sha256:custody.rule_sha256,
   limitations:['Original unactivated proposal custody/qualification only; selected current-bank applicability and immutable policy authority remain separately required.']});
 }
 
 // Comparison is conservation, not admission of new authorities. The caller
 // must authenticate every whole registry preimage/source-authority body through
 // the committed selector before using this view. A registry is not approval.
-function authorityRegistry(registry) {
+export function authorityRegistry(registry) {
  demand(registry?.version===1&&registry.kind==='retained-rule-authority-registry-v1'&&Array.isArray(registry.entries)&&registry.entries.length>0,'Missing explicit retained authority registry');
  const byId=new Map();let previous='';
  for(const entry of registry.entries){
-  demand(entry&&Object.keys(entry).sort().join(',')==='authority_sha256,policy_id,policy_version,rule_preimage,rule_sha256,source_authority'&&hash(entry.authority_sha256)&&entry.authority_sha256>previous&&hash(entry.rule_sha256)&&typeof entry.policy_id==='string'&&entry.policy_id&&Number.isSafeInteger(entry.policy_version)&&entry.policy_version>0,'Foreign/duplicate/unordered authority entry');
+  demand(entry&&['authority_sha256,policy_id,policy_version,rule_preimage,rule_sha256,source_authority','authority_sha256,completed_constructor,policy_id,policy_version,rule_preimage,rule_sha256,source_authority'].includes(Object.keys(entry).sort().join(','))&&hash(entry.authority_sha256)&&entry.authority_sha256>previous&&hash(entry.rule_sha256)&&typeof entry.policy_id==='string'&&entry.policy_id&&Number.isSafeInteger(entry.policy_version)&&entry.policy_version>0,'Foreign/duplicate/unordered authority entry');
   pinCheck(entry.rule_preimage);pinCheck(entry.source_authority);
+  if(entry.completed_constructor!==undefined)pinCheck(entry.completed_constructor);
   demand(entry.rule_preimage.sha256===entry.rule_sha256,'Original full rule preimage differs');
-  const {authority_sha256,...preimage}=entry;demand(valueSha(preimage)===authority_sha256,'Whole authority entry changed');
+  const {authority_sha256,completed_constructor,...preimage}=entry;demand(valueSha(preimage)===authority_sha256,'Whole authority entry changed');
   byId.set(authority_sha256,entry);previous=authority_sha256;
  }
  return byId;
 }
+// The authenticated physical-reproduction role supplies method identity, not a
+// new execution certificate. This reviewed producer translates the complete
+// physical source by periodic_offset before relation(candidate, translatedSource).
+// Its pinned comparison method reconstructs coverage shortcuts, intersections,
+// support and every residual in the unchanged candidate coordinate frame.
+// Unknown producers retain the zero-frame restriction for conflict qualification.
+// Whole-program identity intentionally fails closed on future method changes.
+const candidateFramePhysicalProgram = Object.freeze({
+ path:'scripts/qualify-source-cohort.py',
+ sha256:'abc801b9a35d20c9f0dfe3bbc9bb2cb7dc107f1758414970d9cde11380574a18'
+});
+
 // Admit retained whole query semantics before projecting any witness to cells.
 // Coverage shortcuts refer to the complete candidate/source record; no empty
 // replacement geometry is invented. Repeated source IDs require distinct frames.
-function physicalQueryAdmission(result, required) {
+function physicalQueryAdmission(result, required, candidateFrame) {
  const present=Object.hasOwn(result,'source_id_queries')||Object.hasOwn(result,'query_relations');
  demand(present||!required,'Unsupported original native geometry without complete source query evidence; Unresolved contradictory or hierarchy physical support');
  if(!present)return;
@@ -553,7 +586,8 @@ function physicalQueryAdmission(result, required) {
  for(const q of queries){
   demand(q&&expected.has(q.source_id)&&[-360,0,360].includes(q.periodic_offset)
    &&q.status==='checked','Unknown or missing physical source query');
-  demand(!required||q.periodic_offset===0,'Unqualified periodic physical conflict frame');
+  demand(!required||q.periodic_offset===0||candidateFrame===candidateFramePhysicalProgram,
+   'Unqualified periodic physical conflict frame');
   const identity=q.source_id+':'+q.periodic_offset;
   demand(!seen.has(identity),'Duplicate physical source query frame');seen.add(identity);joined.add(q.source_id);
   const bools=['source_covers_candidate','candidate_covers_source','intersects','disjoint'];
@@ -572,8 +606,7 @@ function physicalQueryAdmission(result, required) {
  }
  demand(joined.size===expected.size,'Incomplete physical source query identity join');
 }
-function reconstructionResidualPointsets(result, attributed = false) {
- const pointset=(kind,geometry)=>attributed?{kind,geometry}:geometry;
+function reconstructionResidualPointsets(result, dated = false, candidateFrame) {
  demand(Array.isArray(result?.issues)&&result.support&&typeof result.support==='object',
   'Missing qualified physical source interpretation');
  const support=result.support,residualKeys=['missing_reconstruction','extra_reconstruction'];
@@ -581,12 +614,17 @@ function reconstructionResidualPointsets(result, attributed = false) {
  const conflictKeys=[...residualKeys,'contradictory_land_water_support',...hierarchyKeys];
  const hierarchy=support.hierarchy_disagreements;
  const empty=g=>validateWitnessGeometry(g).empty;
+ const witness=(role,geometry)=>({source_id:result.target,role,geometry});
+ // Mapped water remains distinct positive water evidence. It cannot supersede
+ // exterior context and blocks the dated-land exception at any actual contact.
+ const waterContext=()=>dated&&support.mapped_inland_water_support&&!empty(support.mapped_inland_water_support)
+  ?[witness('mapped_inland_water_support',support.mapped_inland_water_support)]:[];
  const observed=[...residualKeys,'contradictory_land_water_support'].some(key=>
   Object.hasOwn(support,key)&&!empty(support[key]))
   ||Object.hasOwn(support,'hierarchy_disagreements')&&(!hierarchy||typeof hierarchy!=='object'
    ||Object.keys(hierarchy).sort().join(',')!==hierarchyKeys.join(',')
    ||Object.values(hierarchy).some(g=>!empty(g)));
- physicalQueryAdmission(result,false);
+ physicalQueryAdmission(result,false,candidateFrame);
  // Preserve genuine legacy issue-free evidence, while admitting every present
  // query/support primitive before returning. Unknown fields cannot hide issues.
  if(result.issues.length===0&&!observed){
@@ -594,8 +632,8 @@ function reconstructionResidualPointsets(result, attributed = false) {
    'hierarchy_disagreements',...residualKeys,'contradictory_land_water_support'];
   demand(Object.keys(support).every(k=>allowed.includes(k)),'Incomplete physical residual operation roster');
   for(const [key,g]of Object.entries(support))if(key!=='hierarchy_disagreements')validateWitnessGeometry(g);
-  return support.outside_mapped_L1_context&&!empty(support.outside_mapped_L1_context)
-   ?[pointset('outside_mapped_L1_context',support.outside_mapped_L1_context)]:[];
+  return [...(support.outside_mapped_L1_context&&!empty(support.outside_mapped_L1_context)
+   ?[witness('outside_mapped_L1_context',support.outside_mapped_L1_context)]:[]),...waterContext()];
  }
  const supportKeys=['mapped_land_support','mapped_inland_water_support','outside_mapped_L1_context',
   'hierarchy_disagreements',...residualKeys,'contradictory_land_water_support'];
@@ -607,7 +645,7 @@ function reconstructionResidualPointsets(result, attributed = false) {
  for(const geometry of Object.values(operations))validateWitnessGeometry(geometry);
  const general=conflictKeys.some(k=>!empty(operations[k])&&(!residualKeys.includes(k)
   ||!['Polygon','MultiPolygon'].includes(operations[k].type)));
- physicalQueryAdmission(result,general);
+ physicalQueryAdmission(result,general,candidateFrame);
  const issues=new Map();
  for(const issue of result.issues){
   demand(issue&&Object.keys(issue).sort().join(',')==='geometry,reason'
@@ -620,47 +658,284 @@ function reconstructionResidualPointsets(result, attributed = false) {
   if(empty(geometry)){demand(!issues.has(key),'Empty physical residual has an issue witness');continue;}
   demand(issues.has(key)&&same(issues.get(key),geometry),
    'Missing or mismatched complete physical residual witness; Unresolved contradictory or hierarchy physical support');
-  pointsets.push(pointset(key,geometry));
+  pointsets.push(witness(key,geometry));
  }
- // Exterior context is an independent exclusion, never positive land/water.
+ // Preserve the context role and original member; it is never positive land.
  if(!empty(operations.outside_mapped_L1_context))
-  pointsets.push(pointset('outside_mapped_L1_context',operations.outside_mapped_L1_context));
- return pointsets;
+  pointsets.push(witness('outside_mapped_L1_context',operations.outside_mapped_L1_context));
+ return [...pointsets,...waterContext()];
 }
 
 // Source-target evidence uses the same retained registry and literal native
 // patch route. It has no invented original-gap inventory or addition polygon.
-export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
- return evaluateSourceTargetNativeAuthority(reader, preimage, binding, false);
+// Explicit OSM snapshot format adapter. The adopted body must already be in the
+// exact reviewed candidate; a copied or mismatched adoption cannot replace it.
+// All scientific review facts retain their own original, unchanged vintages.
+function* readAdoptedOsmRevision({evidence,proposed,owners,latitudes,read,json,readAdopted,reader,physicalInputs,keys}) {
+ const data=yield* readAdopted(evidence.revised_source_adoption,'Revised source adoption');
+ const roles=['raw_source','source_stage','assessment','scope','parent_decision','current_geography','attribution'];
+ demand(keys(data,'version,kind,source_id,'+roles.join(',')+',members,records')&&data.version===1
+  &&data.kind==='adopted-osm-revised-source-native-v1'&&typeof data.source_id==='string'&&data.source_id
+  &&Array.isArray(data.members)&&data.members.length>0&&Array.isArray(data.records)&&data.records.length>0
+  &&evidence.families.length===1,'Incomplete adopted revised source');
+ const loaded={};for(const role of roles)loaded[role]=yield* json(data[role]);
+ const {raw_source:raw,source_stage:stage,assessment,scope,parent_decision:decision,current_geography:fine,attribution}=loaded;
+ demand(Array.isArray(stage)&&stage.length===data.members.length&&same(stage,physicalInputs)
+  &&Array.isArray(raw.elements)&&typeof raw.osm3s?.timestamp_osm_base==='string'
+  &&Array.isArray(assessment.source_assessments)&&Array.isArray(scope.records)
+  &&Array.isArray(scope.supported_source_choice_keys),'Missing whole revised-source operands');
+ const relative=(pin,name)=>pin.path.slice(0,pin.path.lastIndexOf('/')+1)+name;
+ for(const [field,pin]of [['exact_roster',data.scope],['distinct_scientific_assessment',data.assessment]]){
+  const declared=decision[field];demand(declared&&relative(data.parent_decision,declared.path)===pin.path
+   &&declared.sha256===pin.sha256&&declared.bytes===pin.bytes,'Parent source decision differs from exact reviewed body');
+ }
+ demand(decision.kind==='bounded-parent-display-source-choice-adoption-v1'
+  &&typeof decision.decision==='string'&&decision.decision.trim()&&decision.native_qualification===false
+  &&decision.accepted_map_cells===0&&decision.whole_original_scope===data.records.length
+  &&decision.adopted_display_source_choice_keys===scope.supported_source_choice_keys.length
+  &&decision.blocked_proposed_CHN_keys===data.records.length-scope.supported_source_choice_keys.length,
+ 'Missing bounded parent source-choice decision');
+ demand(attribution.provider==='OpenStreetMap contributors'&&attribution.license==='ODbL'
+  &&attribution.license_url==='https://opendatacommons.org/licenses/odbl/1-0/'
+  &&typeof attribution.notice==='string'&&attribution.notice.includes('OpenStreetMap contributors')
+  &&attribution.source_snapshot===raw.osm3s.timestamp_osm_base&&attribution.stage_sha256===data.source_stage.sha256,
+ 'Revised OSM attribution or snapshot differs');
+ const byKey=rows=>{
+  demand(Array.isArray(rows),'Missing original source key roster');const map=new Map();
+  for(const row of rows){const p=row.original_key;
+   const key=p&&p.owner+':'+p.y+':'+p.x;
+   demand(keys(p,'owner,y,x')&&Number.isSafeInteger(p.owner)&&p.owner>0&&Number.isSafeInteger(p.y)&&p.y>=0&&p.y<262166
+    &&Number.isSafeInteger(p.x)&&p.x>=0&&p.x<262166&&!map.has(key),
+   'Duplicate or invalid original revised-source key');map.set(key,row);
+  }return map;
+ };
+ const scopeRows=byKey(scope.records),records=byKey(data.records),fineRows=byKey(fine.records);
+ const supported=new Set(scope.supported_source_choice_keys.map(key=>key.owner+':'+key.y+':'+key.x));
+ demand(supported.size===scope.supported_source_choice_keys.length&&records.size===scopeRows.size
+  &&fineRows.size===records.size&&[...scopeRows.keys()].every(key=>records.has(key)&&fineRows.has(key))
+  &&[...supported].every(key=>scopeRows.has(key)),'Revised source scope or current-geography key roster differs');
+ demand(fine.kind==='bounded-complete-current-fine-geography-exact-native365-observation-v1'
+  &&fine.feature_inventory?.index_parts>0&&fine.feature_inventory.features===owners.size
+  &&fine.native_rule?.size===262166&&fine.native_rule.latitude_sha256===evidence.native_latitudes.decoded_sha256,
+ 'Missing complete current-geography observation');
+ const currentPins=fine.input_pins.filter(pin=>pin.path==='data/world-index.json'||pin.path.startsWith('data/geography/'));
+ const indexes=currentPins.filter(pin=>pin.path==='data/world-index.json');
+ demand(indexes.length===1,'Missing unique complete current index');
+ const index=yield* json(indexes[0]),expectedPaths=['data/world-index.json',...index.parts.map(name=>'data/'+name)];
+ demand(new Set(expectedPaths).size===expectedPaths.length&&currentPins.length===expectedPaths.length
+  &&expectedPaths.every(name=>currentPins.filter(pin=>pin.path===name).length===1)
+  &&fine.feature_inventory.index_parts===index.parts.length,'Incomplete current-geography operand closure');
+ for(const pin of currentPins){const actual=reader.descriptor(pin.path);
+  demand(actual.mode===pin.mode&&actual.git_blob_oid===pin.git_blob_oid&&actual.bytes===pin.bytes,
+   'Current geography changed after revised-source comparison');
+ }
+ const members=new Map(),relationIds=new Set();
+ const segments=points=>{const result=new Map();let prior,started=false;for(const point of points){
+  if(!started){prior=point;started=true;continue;}
+  const ends=[prior,point].sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
+  demand(ends.every(p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)
+   &&Math.abs(p[0])<=180&&Math.abs(p[1])<=90),'Invalid literal revised-source segment');
+  const id=JSON.stringify(ends);result.set(id,(result.get(id)??0)+1);prior=point;
+ }return result;};
+ const addSegments=(target,source)=>{for(const [key,count]of source)target.set(key,(target.get(key)??0)+count);};
+ for(const member of data.members){
+  demand(keys(member,'source_id,target_id,pixelIndex,relation_id,relation_version,relation_timestamp,snapshot_timestamp,geometry_sha256,base_geometry_sha256')
+   &&member.source_id==='osm:relation:'+member.relation_id&&!members.has(member.source_id)
+   &&Number.isSafeInteger(member.relation_id)&&member.relation_id>0&&!relationIds.has(member.relation_id)
+   &&Number.isSafeInteger(member.relation_version)&&member.relation_version>0
+   &&owners.get(member.target_id)===member.pixelIndex&&hash(member.geometry_sha256)&&hash(member.base_geometry_sha256),
+  'Invalid revised source stable crosswalk');
+  const inputs=stage.filter(row=>row.target===member.source_id),relations=raw.elements.filter(row=>row.type==='relation'&&row.id===member.relation_id);
+  const reviews=assessment.source_assessments.filter(row=>row.source_id===member.source_id);
+  demand(inputs.length===1&&relations.length===1&&reviews.length===1,'Missing or duplicate whole revised source member');
+  const input=inputs[0],relation=relations[0],review=reviews[0],provenance=input.consumed.properties?.source_provenance;
+  demand(relation.version===member.relation_version&&relation.timestamp===member.relation_timestamp
+   &&member.snapshot_timestamp===raw.osm3s.timestamp_osm_base&&input.consumed.id===member.source_id
+   &&valueSha(input.consumed.geometry)===member.geometry_sha256
+   &&input.selected.id===member.target_id&&valueSha(input.selected.geometry)===member.base_geometry_sha256
+   &&provenance?.raw_source_body?.sha256===data.raw_source.sha256
+   &&provenance.raw_source_body.bytes===data.raw_source.bytes
+   &&provenance.relation_version===member.relation_version&&provenance.relation_timestamp===member.relation_timestamp
+   &&provenance.source_snapshot===member.snapshot_timestamp&&provenance.old_atlas_identity===member.target_id
+   &&provenance.old_stable_owner===member.pixelIndex&&review.target_id===member.target_id
+   &&review.stable_owner===member.pixelIndex&&review.relation_version===member.relation_version
+   &&review.relation_edit_timestamp===member.relation_timestamp&&review.snapshot===member.snapshot_timestamp
+   &&review.literal_segments_equal_raw_multiset===true&&review.valid_geometry===true
+   &&review.source_identity_and_administrative_role_supported===true,
+  'Revised source raw version, geometry, physical query or substantive review differs');
+  const rawSegments=new Map(),stageSegments=new Map();
+  for(const part of relation.members){
+   if(['subarea','admin_centre','label'].includes(part.role))continue;
+   demand(['outer','inner',''].includes(part.role)&&part.type==='way'&&Array.isArray(part.geometry)&&part.geometry.length>=2,
+    'Missing or unsupported whole OSM boundary member');
+   addSegments(rawSegments,segments(part.geometry.map(p=>[p.lon,p.lat])));
+  }
+  for(const polygon of polygonParts(input.consumed.geometry))for(const ring of polygon)addSegments(stageSegments,segments(ring));
+  demand(rawSegments.size>0&&same([...rawSegments].sort(),[...stageSegments].sort()),'Literal revised-source boundary segments differ');
+  members.set(member.source_id,{...member,feature:input.selected});relationIds.add(member.relation_id);
+ }
+ demand(new Set(data.members.map(row=>row.pixelIndex)).size===members.size,'Ambiguous revised-source stable target');
+ for(const [key,record]of records){
+  demand(keys(record,'original_key,source_id,target_id,pixelIndex,adopted_display_choice')
+   &&typeof record.adopted_display_choice==='boolean','Malformed adopted revised-source key');
+  const original=scopeRows.get(key),current=fineRows.get(key),member=members.get(record.source_id);
+  demand(member&&record.target_id===member.target_id&&record.pixelIndex===member.pixelIndex
+   &&original.new_source_identity===record.source_id&&original.target_id===record.target_id&&original.target_owner===record.pixelIndex
+   &&record.adopted_display_choice===supported.has(key)
+   &&(original.source_choice_disposition==='supported_for_parent_display_source_choice')===record.adopted_display_choice
+   &&current.proposed_source_id===record.source_id&&current.target_id===record.target_id&&current.target_owner===record.pixelIndex
+   &&Array.isArray(current.current_fine_contacts)&&current.current_fine_contacts.length===0
+   &&Array.isArray(current.current_fine_boundary_ties)&&current.current_fine_boundary_ties.length===0,
+  'Revised source display choice or current competitor scope differs');
+ }
+ const adopted=new Map();
+ for(const record of records.values())if(record.adopted_display_choice){
+  const key=record.pixelIndex+':'+record.original_key.y+':'+record.original_key.x;
+  demand(!adopted.has(key),'Duplicate adopted target native key');adopted.set(key,record);
+ }
+ // Other relations saved in this same acquisition are not silently promoted
+ // into the twelve-feature stage or dropped as potential new competitors.
+ // Exact rational centre/binary64 bounds may prove them wholly irrelevant;
+ // otherwise this narrow adapter refuses and requires their own full treatment.
+ const withinLongitude=(x,west,east)=>{
+  const centre=BigInt(360*x+180-180*262166),width=262166n;
+  const compare=value=>{
+   if(value===0)return centre<0n?-1:centre>0n?1:0;
+   const view=new DataView(new ArrayBuffer(8));view.setFloat64(0,value,false);
+   const word=view.getBigUint64(0,false),power=Number(word>>52n&2047n);
+   let n=(word&((1n<<52n)-1n))+(power?1n<<52n:0n),d=1n;
+   const exponent=power?power-1075:-1074;if(word>>63n)n=-n;
+   if(exponent>=0)n<<=BigInt(exponent);else d<<=BigInt(-exponent);
+   const difference=centre*d-n*width;return difference<0n?-1:difference>0n?1:0;
+  };return compare(west)>=0&&compare(east)<=0;
+ };
+ for(const relation of raw.elements.filter(row=>row.type==='relation'&&!relationIds.has(row.id))){
+  const boundary=relation.members.filter(part=>!['subarea','admin_centre','label'].includes(part.role));
+  demand(boundary.length>0&&boundary.every(part=>['outer','inner',''].includes(part.role)
+   &&part.type==='way'&&Array.isArray(part.geometry)&&part.geometry.length>=2),'Incomplete unselected raw relation');
+  const points=boundary.flatMap(part=>part.geometry.map(p=>[p.lon,p.lat]));
+  demand(points.every(p=>p.every(Number.isFinite)&&Math.abs(p[0])<=180&&Math.abs(p[1])<=90),
+   'Invalid unselected raw relation coordinates');
+  const west=Math.min(...points.map(p=>p[0])),east=Math.max(...points.map(p=>p[0]));
+  const south=Math.min(...points.map(p=>p[1])),north=Math.max(...points.map(p=>p[1]));
+  demand(!data.records.some(({original_key:p})=>latitudes[p.y]>=south&&latitudes[p.y]<=north
+   &&withinLongitude(p.x,west,east)),'Unadopted raw relation may compete at an original key');
+ }
+ let requested=0;
+ for(const row of proposed.rows)for(const run of row.runs){
+  demand(Array.isArray(run)&&run.length===3&&run.every(Number.isSafeInteger)&&run[1]>run[0]
+   &&run[1]-run[0]<=adopted.size,'Unbounded revised-source proposed interval');
+  for(let x=run[0];x<run[1];x++){
+   const record=adopted.get(run[2]+':'+row.y+':'+x);
+   demand(record&&evidence.targets.some(target=>target.id===record.source_id
+    &&target.pixelIndex===record.pixelIndex),'Requested native key lacks adopted revised-source choice');requested++;
+  }
+ }
+ demand(requested>0&&requested<=adopted.size,'Missing or duplicate adopted revised-source proposal');
+ return {sourceId:data.source_id,stagePin:data.source_stage,product:{features:stage.map(row=>row.consumed)},
+  resolve(id){const member=members.get(id);demand(member,'Missing revised source stable crosswalk');
+   return {id:member.target_id,pixelIndex:member.pixelIndex,feature:member.feature};}};
+}
+
+function sourceTargetBodyVersion(reader,p) {
+  pinCheck(p);let version=p.commit;
+  if(reader instanceof ImmutableReader)version=reader.pinnedVersion(p);
+  else try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+  const d=reader.descriptor(p.path,version);
+  demand(d.mode===p.mode&&d.git_blob_oid===p.git_blob_oid&&d.bytes===p.bytes,'Source-target whole identity differs');
+  return version;
+}
+function readSourceTargetBody(reader,p) {
+  const version=sourceTargetBodyVersion(reader,p);
+  const raw=reader.read(p.path,{version,expected:p.sha256});
+  if(p.decoded_bytes===undefined)return raw;
+  const decoded=gunzipSync(raw,{maxOutputLength:p.decoded_bytes});
+  demand(decoded.length===p.decoded_bytes&&sha(decoded)===p.decoded_sha256,'Source-target decoded body differs');return decoded;
+}
+
+export function qualifySourceTargetNativeAuthority(reader, preimage, binding, {snapshot}={}) {
+ return driveSourceAuthority(evaluateSourceTargetNativeAuthority(reader, preimage, binding, false, snapshot));
+}
+
+// Owned async acquisition for the same evaluator. Views remain valid until
+// close(), including while callers serialize their required authority products.
+export async function qualifySourceTargetNativeAuthorityStored(reader,preimage,binding,{snapshot,directory=os.tmpdir()}={}) {
+ demand(reader instanceof ImmutableReader,'Require actual immutable source reader');
+ const {admitNativeMetadataStore,authenticatedDecodedNativeChunks}=await import('../../../scripts/native-patch-store.mjs');
+ const stores=new Set();let closed=false;
+ const close=()=>{if(closed)return;closed=true;let failed=false,failure;
+  for(const store of stores)try{store.close();}catch(error){if(!failed){failed=true;failure=error;}}
+  stores.clear();if(failed)throw failure;
+ };
+ const chunks=async function*(pin,version=sourceTargetBodyVersion(reader,pin)){
+  const encoded=reader.stream(pin.path,{version,expected:pin.sha256});
+  if(pin.decoded_bytes===undefined){yield* encoded;return;}
+  const hash=createHash('sha256');let bytes=0;
+  for await(const chunk of authenticatedDecodedNativeChunks(encoded,pin,{directory})){
+   bytes+=chunk.length;hash.update(chunk);yield chunk;
+  }
+  demand(bytes===pin.decoded_bytes&&hash.digest('hex')===pin.decoded_sha256,'Source-target decoded body differs');
+ };
+ const acquire=async request=>{
+  if(request.kind==='bytes')return request.read();
+  let input,expected;
+  if(request.kind==='json'){
+   const p=request.pin,version=sourceTargetBodyVersion(reader,p);input=chunks(p,version);expected={bytes:p.decoded_bytes??p.bytes,sha256:p.decoded_sha256??p.sha256};
+  }else{
+   demand(request.kind==='source','Unknown source acquisition operation');
+   input=(async function*(){for(const pin of request.sourceParts())yield* chunks(pin);})();
+   expected={bytes:request.record.original_bytes,sha256:request.record.original_sha256};
+  }
+  if(request.kind==='source'&&!(Number.isSafeInteger(expected.bytes)&&expected.bytes>=0&&hash(expected.sha256))){
+   for await(const chunk of input){}
+   throw Error('Whole original consumed source product differs');
+  }
+  let store;try{store=await admitNativeMetadataStore({chunks:input,expected,directory,mutableMetadata:true});}
+  catch(error){if(request.kind==='source'&&['Complete native JSON identity differs','JSON stream exceeds exact byte identity'].includes(error?.message))
+    throw Error('Whole original consumed source product differs');throw error;}
+  stores.add(store);return store.metadata;
+ };
+ const steps=evaluateSourceTargetNativeAuthority(reader,preimage,binding,false,snapshot);
+ try{
+  let step=steps.next();
+  while(!step.done){let value;try{value=await acquire(step.value);}catch(error){step=steps.throw(error);continue;}
+   step=steps.next(value);}
+  return Object.freeze({proof:step.value,close,[Symbol.dispose]:close});
+ }catch(error){try{steps.return();}catch{}try{close();}catch{}throw error;}
 }
 
 // Same authenticated preparation and predicates as qualification. This returns
 // observations only, before any authority ledger or native proof construction.
 export function diagnoseSourceTargetNativeAuthority(reader, preimage, binding) {
- return evaluateSourceTargetNativeAuthority(reader, preimage, binding, true);
+ return driveSourceAuthority(evaluateSourceTargetNativeAuthority(reader, preimage, binding, true));
 }
 
-function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnostic) {
+// Each requested body is acquired at its original semantic read point. The
+// driver advances the single evaluator only after that acquisition succeeds.
+function driveSourceAuthority(steps) {
+ try {
+  let step=steps.next();
+  while(!step.done){let value;try{value=step.value.read();}catch(error){step=steps.throw(error);continue;}
+   step=steps.next(value);}
+  return step.value;
+ }catch(error){try{steps.return();}catch{}throw error;}
+}
+function* evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnostic, snapshot) {
  demand(preimage?.version===1&&preimage.kind==='source-target-native-rule-v1'
   &&Object.keys(preimage).sort().join(',')==='kind,native_patch,source_evidence,version'
   &&binding?.version===1&&binding.kind==='source-target-native-custody-v1'
   &&Object.keys(binding).sort().join(',')==='kind,native_patch,source_evidence,version'
   &&same(preimage.source_evidence,binding.source_evidence)&&same(preimage.native_patch,binding.native_patch),
  'Source-target authority inputs differ');
- const read=p=>{
-  pinCheck(p);let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
-  const d=reader.descriptor(p.path,version);
-  demand(d.mode===p.mode&&d.git_blob_oid===p.git_blob_oid&&d.bytes===p.bytes,'Source-target whole identity differs');
-  const parseReserve=6*(p.decoded_bytes??p.bytes);
-  demand(reader.used+parseReserve<=reader.phaseLimit,'Source-target complete parsed acquisition exceeds phase');
-  reader.used+=parseReserve;reader.admit(d,p.decoded_bytes??0);
-  const raw=reader.read(p.path,{version,expected:p.sha256,decoded:p.decoded_bytes??0});
-  if(p.decoded_bytes===undefined)return raw;
-  const decoded=gunzipSync(raw,{maxOutputLength:p.decoded_bytes});
-  demand(decoded.length===p.decoded_bytes&&sha(decoded)===p.decoded_sha256,'Source-target decoded body differs');return decoded;
- };
- const evidence=JSON.parse(read(binding.source_evidence)), proposed=JSON.parse(read(binding.native_patch));
- demand(evidence?.version===1&&evidence.kind==='source-target-native-evidence-v1'
+ const read=p=>readSourceTargetBody(reader,p);
+ const json=function*(pin){return yield {kind:'json',reader,pin,read:()=>JSON.parse(read(pin))};};
+  const bytes=function*(pin){return yield {kind:'bytes',reader,pin,read:()=>read(pin)};};
+ const evidence=(yield* json(binding.source_evidence)), proposed=(yield* json(binding.native_patch));
+ const dated = evidence?.version===2&&evidence.kind==='source-target-native-evidence-v2';
+ const revised = evidence?.version===3&&evidence.kind==='source-target-native-evidence-v3';
+ demand((dated||revised||evidence?.version===1&&evidence.kind==='source-target-native-evidence-v1')
+  &&(dated?evidence.dated_land_support!==undefined:evidence.dated_land_support===undefined)
+  &&(revised?evidence.revised_source_adoption!==undefined:evidence.revised_source_adoption===undefined)
   &&Array.isArray(evidence.targets)&&evidence.targets.length>0&&Array.isArray(proposed.rows)
   &&Object.keys(proposed).join(',')==='rows',
  'Incomplete source-target evidence');
@@ -670,13 +945,16 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  'Require retained original source catalogue');
  const currentCatalogue=reader.descriptor(evidence.catalogue.path);
  demand(currentCatalogue.git_blob_oid===evidence.catalogue.git_blob_oid,'Source catalogue differs from the selected retained corpus');
- const catalogue=JSON.parse(read(evidence.catalogue));
- const physicalInputs=JSON.parse(read(evidence.physical_input));read(evidence.physical_reproduction);
+ const catalogue=(yield* json(evidence.catalogue));
+ const physicalInputs=(yield* json(evidence.physical_input));
+ const physicalProgram=yield* bytes(evidence.physical_reproduction);
+ const candidateFrame=evidence.physical_reproduction.path===candidateFramePhysicalProgram.path
+  &&sha(physicalProgram)===candidateFramePhysicalProgram.sha256?candidateFramePhysicalProgram:null;
  demand(evidence.native_latitudes.sha256===evidence.native_contract.native_latitudes.sha256
   &&evidence.native_latitudes.decoded_sha256===evidence.native_contract.native_latitudes.decoded_sha256,
  'Native source-target latitude contract differs');
- const latitudeRaw=read(evidence.native_latitudes);
- const physical=JSON.parse(read(evidence.physical_evidence));
+ const latitudeRaw=yield* bytes(evidence.native_latitudes);
+ const physical=(yield* json(evidence.physical_evidence));
  demand(evidence.native_contract.size===262166&&latitudeRaw.length===262166*8,
  'Unsupported source-target native lattice');
  const latitudes=Float64Array.from({length:262166},(_,i)=>latitudeRaw.readDoubleLE(i*8));
@@ -684,7 +962,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   &&(y===0||latitudes[y]<latitudes[y-1]),'Invalid decreasing source-target native latitude table');
  demand(evidence.owner_roster.sha256===evidence.native_contract.original_assets.bounds.sha256,
  'Source-target owner roster differs from original native identity asset');
- const roster=JSON.parse(read(evidence.owner_roster));
+ const roster=(yield* json(evidence.owner_roster));
  demand(Array.isArray(roster),'Missing original owner roster');
  const owners=new Map();
  for(const [i,owner]of roster.entries()){
@@ -694,34 +972,122 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  // Optional reconciliation uses existing complete aggregation lineage, not an
  // authored source-to-owner guess. Canonical parts retain the accepted members
  // and base geometry; the complete lineage exposes omitted competing owners.
- const memberOwners=new Map(), canonicalOwners=new Map();
+ const memberOwners=new Map(), canonicalOwners=new Map(), semanticOwners=new Map();
+ let completeCohort=null;
+ const externalOriginals=new Map(),usedExternalOriginals=new Set();
  if(evidence.source_membership!==undefined){
   const membership=evidence.source_membership;
-  demand(membership&&Object.keys(membership).sort().join(',')==='index,lineage,parts'
+  demand(membership&&same(Object.keys(membership).sort(),['index','lineage','parts',
+   ...(membership.cohort_inventory===undefined?[]:['cohort_inventory']),
+   ...(membership.negative_natural_earth===undefined?[]:['negative_natural_earth'])].sort())
    &&Array.isArray(membership.parts)&&membership.parts.length>0,'Incomplete accepted source membership');
-  const current=p=>{
+  const current=function*(p){
    pinCheck(p);const actual=reader.descriptor(p.path);
-   demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,
-    'Source membership differs from selected canonical bytes');return JSON.parse(read(p));
+   const exact=actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes;
+   if(!exact){
+    // A current metadata application does not alter original aggregation
+    // membership or pointsets. Use only the privately validated N source view;
+    // actual M bytes and all non-parent properties were checked in full first.
+    demand(snapshot?.selection.reference_projection,'Source membership differs from selected canonical bytes');
+    demand(snapshot.reader.repo===reader.repo&&snapshot.reader.version===reader.version,
+     'Source membership belongs to another actual selected reader');
+    selectedNativeSourceMembership(snapshot,p);
+   }
+   return (yield* json(p));
   };
+  // The accepted registry authenticates the entire Natural Earth original,
+  // not a selected feature collection or a name-based crosswalk. These leaves
+  // are available only to negative ancestry, never to positive reconciliation.
+  if(membership.negative_natural_earth!==undefined){
+   const role=membership.negative_natural_earth;
+   demand(role&&Object.keys(role).sort().join(',')==='atoms,registry,source'
+    &&role.registry?.path==='data/sources.json'&&Array.isArray(role.atoms)&&role.atoms.length>0,
+   'Invalid negative Natural Earth source role');
+   const registry=(yield* current(role.registry)),raw=read(role.source);
+   demand(hash(registry.hashes?.ne_10m_admin_1_states_provinces)
+    &&sha(raw)===registry.hashes.ne_10m_admin_1_states_provinces,
+   'Negative Natural Earth whole source differs from accepted registry');
+   const product=JSON.parse(raw),originals=new Map();
+   demand(product.type==='FeatureCollection'&&Array.isArray(product.features)&&product.features.length>0,
+    'Missing complete negative Natural Earth collection');
+   for(const [ordinal,feature]of product.features.entries()){
+    const id=feature.properties?.adm1_code;
+    demand(feature.type==='Feature'&&typeof id==='string'&&id&&!originals.has(id),
+     'Missing or duplicate negative Natural Earth native identity');
+    coordinateBounds(feature.geometry);originals.set(id,{feature,ordinal});
+   }
+   for(const atom of role.atoms){
+    demand(atom&&Object.keys(atom).sort().join(',')==='feature_ordinal,geometry_sha256,source_id'
+     &&typeof atom.source_id==='string'&&Number.isSafeInteger(atom.feature_ordinal)&&atom.feature_ordinal>=0
+     &&hash(atom.geometry_sha256)&&!externalOriginals.has(atom.source_id),
+    'Invalid or duplicate negative Natural Earth atom');
+    const original=originals.get(atom.source_id);
+    demand(original&&original.ordinal===atom.feature_ordinal
+     &&valueSha(original.feature.geometry)===atom.geometry_sha256,
+    'Negative Natural Earth original identity or geometry differs');
+    demand(!owners.has(atom.source_id)&&!evidence.targets.some(target=>target.id===atom.source_id),
+     'External original cannot supply a positive native owner');
+    externalOriginals.set(atom.source_id,{...atom,geometry:original.feature.geometry});
+   }
+  }
   demand(membership.lineage.path==='data/semantic-report.json'&&membership.index.path==='data/world-index.json',
    'Require complete accepted aggregation lineage and world index');
-  const lineage=current(membership.lineage),index=current(membership.index);
+  const lineage=(yield* current(membership.lineage)),index=(yield* current(membership.index));
   demand(Array.isArray(lineage.changes)&&Array.isArray(index.parts)&&index.parts.length>0
    &&new Set(index.parts).size===index.parts.length,'Incomplete accepted membership inventory');
-  for(const change of lineage.changes)if(Array.isArray(change.replaces))for(const member of change.replaces){
-   const changes=memberOwners.get(member)??[];changes.push(change);memberOwners.set(member,changes);
+  for(const change of lineage.changes){
+   const records=semanticOwners.get(change.id)??[];records.push(change);semanticOwners.set(change.id,records);
+   if(Array.isArray(change.replaces))for(const member of change.replaces){
+    const changes=memberOwners.get(member)??[];changes.push(change);memberOwners.set(member,changes);
+   }
   }
+  for(const id of externalOriginals.keys())demand(!semanticOwners.has(id),
+   'External original shadows accepted semantic ancestry');
   const paths=new Set();
   for(const pin of membership.parts){
    demand(index.parts.includes(pin.path.slice(5))&&pin.path.startsWith('data/')&&!paths.has(pin.path),
     'Foreign or duplicate accepted membership part');paths.add(pin.path);
-   const collection=current(pin);
+   const collection=(yield* current(pin));
    demand(collection.type==='FeatureCollection'&&Array.isArray(collection.features),'Incomplete accepted membership part');
    for(const feature of collection.features){
     demand(owners.has(feature.id)&&!canonicalOwners.has(feature.id),'Foreign or duplicate accepted membership owner');
     canonicalOwners.set(feature.id,feature);
    }
+  }
+  if(membership.cohort_inventory!==undefined){
+   const inventory=membership.cohort_inventory;
+   demand(inventory&&Object.keys(inventory).sort().join(',')==='index,parts'
+    &&inventory.index?.path==='data/macro-foundation/world-review-projection.json'
+    &&Array.isArray(inventory.parts),'Invalid complete canonical cohort inventory');
+   let rows;
+   completeCohort=function*(labels,cohort){
+    if(!rows){
+     const projection=(yield* current(inventory.index));
+     demand(projection.version===1&&projection.kind==='current-membership-projection'
+      &&projection.current_pins?.location_index_sha256===membership.index.sha256
+      &&Number.isSafeInteger(projection.locations)&&projection.locations>0
+      &&Array.isArray(projection.location_parts)&&projection.location_parts.length>0
+      &&new Set(projection.location_parts).size===projection.location_parts.length
+      &&same(inventory.parts.map(pin=>pin.path),projection.location_parts.map(name=>'data/'+name)),
+     'Stale or incomplete canonical cohort projection inventory');
+     rows=new Map();
+     for(const pin of inventory.parts){
+      demand(Number.isSafeInteger(pin.decoded_bytes)&&pin.decoded_bytes>0&&hash(pin.decoded_sha256),
+       'Missing complete canonical cohort decoded identity');
+      const records=(yield* current(pin));demand(Array.isArray(records),'Malformed canonical cohort partition');
+      for(const record of records){
+       demand(typeof record.id==='string'&&owners.has(record.id)&&!rows.has(record.id),
+        'Foreign or duplicate canonical cohort identity');rows.set(record.id,record);
+      }
+     }
+     demand(rows.size===projection.locations&&rows.size===owners.size,
+      'Incomplete complete-owner canonical cohort inventory');
+    }
+    const expected=[...rows.values()].filter(row=>labels.has(row.owner)).map(row=>row.id).sort();
+    demand(same(expected,cohort.map(feature=>feature.id).sort())
+     &&cohort.every(feature=>rows.get(feature.id)?.owner===feature.properties.reference_owner),
+    'Incomplete complex source canonical cohort parts');
+   };
   }
  }
  const reconcile=(id,originals)=>{
@@ -743,7 +1109,397 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   }
   return {id:change.id,pixelIndex:owners.get(change.id),feature:accepted};
  };
+
+ // A split original cannot supply a positive owner. It can remain a complete
+ // negative competitor after every accepted descendant is authenticated.
+ const splitCompetitor = (id, originals) => {
+  const changes = memberOwners.get(id) ?? [];
+  const canonical = [...canonicalOwners.values()].filter(feature =>
+   feature.properties?.metadata?.source_member_ids?.includes(id)).map(feature => feature.id);
+  if (owners.has(id) || changes.length < 2 && canonical.length < 2) return null;
+  demand(changes.length > 1 && canonical.length > 1,
+   'Incomplete accepted split-source descendant inventory');
+  demand(!evidence.targets.some(target => target.id === id),
+   'Split original source cannot supply a positive native target');
+  const original = originals.get(id), descendants = new Set();
+  for (const change of changes) {
+   const accepted = canonicalOwners.get(change.id), properties = accepted?.properties;
+   const metadata = properties?.metadata;
+   demand(typeof change.id === 'string' && !descendants.has(change.id)
+    && semanticOwners.get(change.id)?.length === 1 && semanticOwners.get(change.id)[0] === change
+    && same(change.replaces, [id]) && accepted && owners.has(change.id)
+    && properties.id === change.id && same(metadata?.source_member_ids, [id])
+    && metadata.original_id === original?.properties?.shapeID,
+   'Incomplete or ambiguous accepted split-source descendant');
+   demand(typeof properties.parent_id === 'string' && properties.parent_id
+    && roster[owners.get(change.id)-1]?.province_id === properties.parent_id
+    && typeof change.basis === 'string' && change.basis
+    && metadata.location_basis === change.basis
+    && typeof change.source === 'string' && change.source
+    && metadata.source_url === change.source,
+   'Accepted split-source descendant parent or source identity differs');
+   descendants.add(change.id);
+  }
+  demand(same([...descendants].sort(), canonical.sort()),
+   'Incomplete accepted split-source descendant inventory');
+  return {source_id: id, geometry_sha256: valueSha(original.geometry),
+   descendants: [...descendants].sort().map(target_id => ({target_id,
+    pixelIndex: owners.get(target_id), parent_id: canonicalOwners.get(target_id).properties.parent_id}))};
+ };
+
+ // Complex accepted membership is only a negative ancestry witness. Keep the
+ // flat positive reconciliation above unchanged; no descendant polygon stands
+ // in for any part of the complete original source veto.
+ const complexContexts=new WeakMap();let originLineageBound=false;
+ const complexSourceCompetitor = function*(id, originals) {
+  if(owners.has(id)||evidence.targets.some(target=>target.id===id))return null;
+  const changes=memberOwners.get(id)??[];
+  const node=name=>{
+   const records=semanticOwners.get(name),change=records?.[0];
+   demand(records?.length===1&&change.id===name&&Array.isArray(change.replaces)&&change.replaces.length>0
+    &&change.replaces.every(member=>typeof member==='string'&&member)
+    &&new Set(change.replaces).size===change.replaces.length
+    &&typeof change.source==='string'&&change.source&&typeof change.basis==='string'&&change.basis,
+   'Missing, duplicate or malformed complex split-source descendant ancestry');
+   return change;
+  };
+  const atoms=(name,trail=new Set())=>{
+   demand(!trail.has(name),'Cyclic complex source ancestry');
+   if(originals.has(name)||externalOriginals.has(name))return {members:new Set([name]),sources:new Set()};
+   const change=node(name),next=new Set([...trail,name]),members=new Set(),sources=new Set([change.source]);
+   for(const member of change.replaces){const child=atoms(member,next);
+    for(const atom of child.members)members.add(atom);for(const source of child.sources)sources.add(source);}
+   return {members,sources};
+  };
+  let context=complexContexts.get(originals);
+  if(context===undefined){
+   // These labels bound a completeness inventory, never ownership authority.
+   // Seed them from direct original identities or positive joins already
+   // authenticated above, independently of the surviving negative edges.
+   const seeds=[...canonicalOwners.values()].filter(feature=>originals.has(feature.id)
+    ||feature.properties?.metadata?.source_member_ids?.some(member=>originals.has(member))
+    ||evidence.targets.some(target=>originals.has(target.id)&&(target.target_id??target.id)===feature.id));
+   const labels=new Set(seeds.map(feature=>feature.properties?.reference_owner)
+    .filter(label=>typeof label==='string'&&label));
+   const cohort=[...canonicalOwners.values()].filter(feature=>labels.has(feature.properties?.reference_owner));
+   if(completeCohort)yield* completeCohort(labels,cohort);
+   const complex=cohort.some(feature=>{
+    const members=feature.properties?.metadata?.source_member_ids;
+    return Array.isArray(members)&&(members.some(member=>!originals.has(member))
+     ||members.length>1&&members.some(member=>(memberOwners.get(member)??[]).length!==1
+      ||owners.has(member)&&member!==feature.id));
+   });
+   context=null;
+   if(complex){
+    demand(completeCohort&&labels.size>0,'Complex source ancestry requires a complete canonical cohort inventory');
+    const reverse=new Map();
+    for(const feature of cohort){
+     let leaves;
+     if(originals.has(feature.id)&&!semanticOwners.has(feature.id))leaves=new Set([feature.id]);
+     else{
+      const change=node(feature.id),members=feature.properties?.metadata?.source_member_ids;
+      demand(Array.isArray(members)&&members.length>0&&members.every(member=>typeof member==='string'&&member)
+       &&new Set(members).size===members.length&&same([...members].sort(),[...change.replaces].sort()),
+      'Incomplete complex split-source descendant canonical member inventory');
+      leaves=new Set();for(const member of members)for(const atom of atoms(member).members)leaves.add(atom);
+     }
+     for(const atom of leaves){const terminals=reverse.get(atom)??new Set();terminals.add(feature.id);reverse.set(atom,terminals);}
+    }
+    context={reverse};
+   }
+   complexContexts.set(originals,context);
+  }
+  if(!context||!changes.some(change=>!canonicalOwners.has(change.id)
+   ||Array.isArray(change.replaces)&&change.replaces.length>1&&change.replaces.some(member=>
+    !originals.has(member)||(memberOwners.get(member)??[]).length!==1
+    ||owners.has(member)&&member!==change.id)))return null;
+  const descendants=new Set();
+  const walk=(name,trail=new Set())=>{
+   demand(!trail.has(name),'Cyclic complex source descendants');
+   if(owners.has(name)){
+    const accepted=canonicalOwners.get(name),properties=accepted?.properties,metadata=properties?.metadata,
+     change=node(name),members=metadata?.source_member_ids;
+    demand(accepted&&properties.id===name&&Array.isArray(members)&&members.length>0
+     &&members.every(member=>typeof member==='string'&&member)&&new Set(members).size===members.length
+     &&same([...members].sort(),[...change.replaces].sort()),
+    'Incomplete complex split-source descendant canonical member inventory');
+    demand(typeof properties.parent_id==='string'&&properties.parent_id
+     &&roster[owners.get(name)-1]?.province_id===properties.parent_id
+     &&metadata.location_basis===change.basis&&metadata.source_url===change.source,
+    'Complex source descendant parent or source identity differs');
+    for(const member of members){const original=atoms(member);
+     if(![...original.sources].every(source=>source===change.source)&&!originLineageBound){
+      requireSelectedOriginLineage(reader,evidence.source_membership.lineage);originLineageBound=true;
+     }}
+    if(metadata.original_id!==undefined)demand(members.length===1&&originals.has(members[0])
+     &&metadata.original_id===originals.get(members[0]).properties?.shapeID,
+    'Complex source original identity differs');
+    demand((memberOwners.get(name)??[]).every(change=>change.id===name),
+     'Current complex source descendant is also retired');
+    descendants.add(name);return;
+   }
+   const edges=memberOwners.get(name)??[];
+   demand(edges.length>0&&new Set(edges.map(change=>change.id)).size===edges.length,
+    'Missing or duplicate complex source descendant');
+   for(const edge of edges){const change=node(edge.id);
+    demand(change===edge&&change.replaces.includes(name),'Conflicting complex source ancestry edge');
+    walk(change.id,new Set([...trail,name]));}
+  };
+  walk(id);
+  const observed=[...(context.reverse.get(id)??[])];
+  demand(same([...descendants].sort(),observed.sort()),
+   'Incomplete complex source canonical descendant inventory');
+  return {source_id:id,geometry_sha256:valueSha((originals.get(id)??externalOriginals.get(id)).geometry),
+   descendants:[...descendants].sort().map(target_id=>({target_id,pixelIndex:owners.get(target_id),
+    parent_id:canonicalOwners.get(target_id).properties.parent_id}))};
+ };
+
+ // Adoption belongs to the exact selected candidate, independently of which
+ // accepted checkout supplies the checker. Original source pins still bind the
+ // complete reviewed body; a separate prior merge adds no scientific authority.
+ const keys=(v,list)=>v&&typeof v==='object'&&!Array.isArray(v)&&Object.keys(v).sort().join(',')===list.split(',').sort().join(',');
+ const readAdopted=function*(pin,label){
+  pinCheck(pin);
+  const current=reader.descriptor(pin.path,reader.version);
+  demand(current.mode===pin.mode&&current.git_blob_oid===pin.git_blob_oid&&current.bytes===pin.bytes,
+   label+' differs from selected candidate input');
+  return (yield* json(pin));
+ };
+ const pointer=(body,name)=>{
+  demand(typeof name==='string'&&name.startsWith('/')&&!/~(?![01])/.test(name),'Invalid adopted evidence pointer');
+  let value=body;
+  for(const part of name.slice(1).split('/').map(p=>p.replace(/~1/g,'/').replace(/~0/g,'~'))){
+   demand(value&&typeof value==='object'&&Object.hasOwn(value,part),'Missing adopted evidence record');value=value[part];
+  }
+  return value;
+ };
+ // An explicit reviewed canonical view preserves original bytes and joins each
+ // changed operand to its complete authenticated source/physical body. It is
+ // not a relaxed coordinate parser: every view must prove identical complete
+ // native spans and exact boundary ties before the strict scanner sees it.
+ const seamViews=new Map(),usedSeamViews=new Set();
+ const seamKey=(role,id,pointer)=>JSON.stringify([role,id,pointer]);
+ if(evidence.canonical_seam_views!==undefined){
+  demand(!revised&&evidence.adopted_provider_families===undefined,
+   'Canonical seam views require retained original source families');
+  const data=(yield* readAdopted(evidence.canonical_seam_views,'Canonical seam views'));
+  demand(keys(data,'version,kind,method,records')&&data.version===1
+   &&data.kind==='retained-periodic-native-views-v1'
+   &&keys(data.method,'pin,export')&&data.method.export==='canonical'
+   &&data.method.pin.path==='scripts/majority.py'
+   &&Array.isArray(data.records)&&data.records.length>0,'Incomplete canonical seam views');
+  pinCheck(data.method.pin);
+  const method=reader.descriptor(data.method.pin.path,reader.version);
+  demand(method.mode===data.method.pin.mode&&method.git_blob_oid===data.method.pin.git_blob_oid
+   &&method.bytes===data.method.pin.bytes,'Canonical seam method differs from selected implementation');
+  read(data.method.pin);
+  for(const record of data.records){
+   demand(keys(record,'role,source_id,pointer,original_geometry_sha256,geometry')
+    &&['source','physical'].includes(record.role)&&typeof record.source_id==='string'&&record.source_id
+    &&hash(record.original_geometry_sha256)&&typeof record.pointer==='string'
+    &&(record.role==='source'?record.pointer==='/geometry':
+     /^\/support\/(mapped_land_support|mapped_inland_water_support|outside_mapped_L1_context)$/.test(record.pointer)
+     ||/^\/query_relations\/(0|[1-9][0-9]*)\/witness_geometry$/.test(record.pointer)),
+    'Unknown canonical seam operand');
+   const key=seamKey(record.role,record.source_id,record.pointer);
+   demand(!seamViews.has(key),'Duplicate canonical seam operand');seamViews.set(key,record);
+  }
+ }
+ const nativeView=(role,id,path,original)=>{
+  const key=seamKey(role,id,path),record=seamViews.get(key);
+  if(!record)return original;
+  demand(valueSha(original)===record.original_geometry_sha256,'Canonical seam original geometry differs');
+  verifyNativeSeamView(original,record.geometry,{size:262166,latitudes});
+  usedSeamViews.add(key);return record.geometry;
+ };
+ for(const record of seamViews.values())if(record.role==='physical'){
+  const results=physical.results.filter(result=>result.target===record.source_id);
+  demand(results.length===1,'Missing or duplicate canonical seam physical target');
+  const original=pointer(results[0],record.pointer);
+  const geometry=nativeView('physical',record.source_id,record.pointer,original);
+  const parts=record.pointer.slice(1).split('/');
+  let parent=results[0];for(const part of parts.slice(0,-1))parent=parent[part];
+  parent[parts.at(-1)]=geometry;
+ }
+ // New provider applicability is an explicit reviewed adoption decision, never an
+ // extension of the frozen original catalogue or an authored owner guess.
+ // The complete product is also an existing family-part read role, so this
+ // closed document introduces no hidden recursive scientific operands.
+ const adoptedFamilies=new Map();
+ if(evidence.adopted_provider_families!==undefined){
+  demand(!revised,'Revised source evidence cannot combine provider-family adoption');
+  const data=(yield* readAdopted(evidence.adopted_provider_families,'Adopted provider families'));
+  demand(keys(data,'version,kind,families')&&data.version===1&&data.kind==='adopted-provider-source-families-v1'
+   &&Array.isArray(data.families)&&data.families.length>0,'Incomplete adopted provider families');
+  for(const family of data.families){
+   demand(keys(family,'source_id,product,feature_count,id_property,id_prefix,bindings')
+    &&typeof family.source_id==='string'&&family.source_id&&!adoptedFamilies.has(family.source_id)
+    &&!catalogue.products.some(product=>product.key===family.source_id)
+    &&Number.isSafeInteger(family.feature_count)&&family.feature_count>0
+    &&typeof family.id_property==='string'&&family.id_property
+    &&typeof family.id_prefix==='string'&&family.id_prefix.startsWith(family.source_id+':')
+    &&Array.isArray(family.bindings)&&family.bindings.length>0,'Invalid or conflicting adopted provider family');
+   const declared=evidence.families.filter(item=>item.source_id===family.source_id);
+   demand(declared.length===1&&same(declared[0].parts,[family.product]),
+    'Adopted provider product differs from complete family read role');
+   const product=(yield* json(family.product));
+   demand(product.type==='FeatureCollection'&&Array.isArray(product.features)
+    &&product.features.length===family.feature_count,'Incomplete adopted provider member roster');
+   const originals=new Map(),ordinals=new Map(),bindings=new Map();
+   for(const [ordinal,feature]of product.features.entries()){
+    const property=feature.properties?.[family.id_property];
+    demand(feature.type==='Feature'&&(typeof property==='string'&&property
+     ||Number.isSafeInteger(property)),'Missing adopted provider member property');
+    const id=family.id_prefix+property;
+    demand(!originals.has(id),'Duplicate adopted provider source identity');
+    coordinateBounds(feature.geometry);originals.set(id,feature);ordinals.set(id,ordinal);
+   }
+   for(const binding of family.bindings){
+    demand(keys(binding,'source_id,feature_ordinal,source_property,properties_sha256,geometry_sha256,target_id,pixelIndex,base_geometry_sha256,decision,scope')
+     &&typeof binding.source_id==='string'&&!bindings.has(binding.source_id)
+     &&Number.isSafeInteger(binding.feature_ordinal)&&binding.feature_ordinal>=0
+     &&hash(binding.properties_sha256)&&hash(binding.geometry_sha256)&&hash(binding.base_geometry_sha256)
+     &&typeof binding.decision==='string'&&binding.decision.trim()
+     &&Array.isArray(binding.scope)&&binding.scope.length>0,'Incomplete adopted provider binding');
+    const original=originals.get(binding.source_id),accepted=canonicalOwners.get(binding.target_id);
+    demand(original&&ordinals.get(binding.source_id)===binding.feature_ordinal
+     &&same(original.properties[family.id_property],binding.source_property)
+     &&valueSha(original.properties)===binding.properties_sha256&&valueSha(original.geometry)===binding.geometry_sha256,
+    'Adopted provider source member identity differs');
+    demand(accepted&&owners.get(binding.target_id)===binding.pixelIndex
+     &&valueSha(accepted.geometry)===binding.base_geometry_sha256,'Adopted provider canonical target differs');
+    const scope=new Set();
+    for(const point of binding.scope){
+     demand(keys(point,'y,x')&&Number.isSafeInteger(point.y)&&point.y>=0&&point.y<262166
+      &&Number.isSafeInteger(point.x)&&point.x>=0&&point.x<262166&&!scope.has(point.y+':'+point.x),
+     'Invalid or duplicate adopted provider native key');scope.add(point.y+':'+point.x);
+    }
+    bindings.set(binding.source_id,{...binding,scope,id:binding.target_id,feature:accepted});
+   }
+   adoptedFamilies.set(family.source_id,{product,originals,ordinals,bindings});
+  }
+ }
+ const datedCentres=[];
+ if(dated){
+  const data=(yield* readAdopted(evidence.dated_land_support,'Dated land support'));
+  demand(keys(data,'version,kind,native_contract_sha256,provenance,records')&&data.version===1
+   &&data.kind==='adopted-dated-native-centre-land-support-v1'
+   &&data.native_contract_sha256===valueSha(evidence.native_contract)
+   &&Array.isArray(data.provenance)&&data.provenance.length>0
+   &&Array.isArray(data.records)&&data.records.length>0,'Incomplete adopted dated land support');
+  const relative=(base,name,levels=1)=>{
+   demand(typeof name==='string'&&!name.includes('\\')&&name.split('/').every(p=>p&&p!=='.'&&p!=='..'),
+    'Unsafe dated evidence relative path');
+   return [...base.split('/').slice(0,-levels),...name.split('/')].join('/');
+  };
+  const instant=value=>{
+   const m=typeof value==='string'&&/^(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d)(?:\.(\d+))?Z$/.exec(value);
+   demand(m&&Number.isFinite(Date.parse(value))&&new Date(value).toISOString().slice(0,19)===m[1],
+    'Invalid dated acquisition instant');
+   const fraction=(m[2]??'').replace(/0+$/,'');return m[1]+(fraction?'.'+fraction:'')+'Z';
+  };
+  // Authenticate native PNG context as complete encoded bytes. It is not JSON
+  // and no pixel-decoding or scientific reinterpretation is performed here.
+  const readFrame=p=>{
+   pinCheck(p);demand(p.decoded_bytes===undefined,'Native PNG context must be an ordinary encoded body');
+   let version=p.commit;try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+   const d=reader.descriptor(p.path,version);
+   demand(d.mode===p.mode&&d.git_blob_oid===p.git_blob_oid&&d.bytes===p.bytes,'Dated frame whole identity differs');
+   return reader.read(p.path,{version,expected:p.sha256});
+  };
+  const provenance=new Map(),loaded=new Map(),used=new Set();
+  for(const item of data.provenance){
+   demand(item&&typeof item.id==='string'&&item.id&&!provenance.has(item.id)
+    &&['adoption','review','observation','frame'].includes(item.role)
+    &&keys(item,item.role==='frame'?'id,role,pin,observation,block_pointer,display_pointer,channels,display_base':'id,role,pin'),
+   'Foreign or duplicate dated evidence role');
+   pinCheck(item.pin);const identity=item.pin.commit+':'+item.pin.path;
+   let content=loaded.get(identity);
+   if(content)demand(same(content.pin,item.pin)&&content.frame===(item.role==='frame'),'Conflicting dated evidence body role');
+   else{
+    const frame=item.role==='frame',raw=frame?readFrame(item.pin):read(item.pin);
+    demand(!frame||raw.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),'Missing native PNG context');
+    content={pin:item.pin,frame,body:frame?null:JSON.parse(raw)};loaded.set(identity,content);
+   }
+   provenance.set(item.id,{...item,body:content.body});
+  }
+  const reference=(ref,role,fields='id,pointer')=>{
+   demand(keys(ref,fields),'Malformed dated evidence reference');const item=provenance.get(ref.id);
+   demand(item?.role===role,'Missing dated evidence role: '+role);used.add(item.id);
+   return {item,value:pointer(item.body,ref.pointer)};
+  };
+  const seen=new Set();
+  for(const record of data.records){
+   demand(keys(record,'source_id,pixelIndex,y,x,longitude,latitude,adoption,review,observations')
+    &&typeof record.source_id==='string'&&record.source_id&&Number.isSafeInteger(record.pixelIndex)&&record.pixelIndex>0
+    &&Number.isSafeInteger(record.y)&&record.y>=0&&record.y<262166
+    &&Number.isSafeInteger(record.x)&&record.x>=0&&record.x<262166
+    &&record.longitude===(record.x+.5)/262166*360-180&&record.latitude===latitudes[record.y],
+   'Dated land native centre differs');
+   const identity=record.pixelIndex+':'+record.y+':'+record.x;
+   demand(!seen.has(identity),'Duplicate dated land centre');seen.add(identity);
+   const target=evidence.targets.find(t=>t.id===record.source_id);
+   demand(target?.pixelIndex===record.pixelIndex&&target.coverage_classes?.includes('mapped_land_support'),
+    'Dated land lacks exact requested source member and land class');
+   const key={owner:record.pixelIndex,y:record.y,x:record.x};
+   const adoption=reference(record.adoption,'adoption'),a=adoption.value;
+   demand(a&&same(a.original_key,key)&&same(a.centre_unchanged,{...key,longitude:record.longitude,latitude:record.latitude})
+    &&a.original_record_unchanged&&['owner','y','x'].every(k=>a.original_record_unchanged[k]===key[k])
+    &&Number.isSafeInteger(a.original_source_array_index)&&a.original_source_array_index>=0
+    &&Number.isSafeInteger(a.plan_index)&&a.plan_index>=0&&a.adopted_bounded_answer===true
+    &&a.category==='dated-terrestrial-body-location'&&a.remaining_physical_question===null
+    &&typeof a.actual_answer==='string'&&a.actual_answer.trim()&&typeof a.source_review_kind==='string'&&a.source_review_kind
+    &&Array.isArray(a.answer_dates)&&a.answer_dates.length>0,'Missing adopted terrestrial centre interpretation');
+   const review=reference(record.review,'review','id,pointer,interpretation_pointer'),r=review.value;
+   demand(a.review&&review.item.pin.path===relative(adoption.item.pin.path,a.review.path)
+    &&r&&same(r.original_key,key)&&r.index===a.review.record_index
+    &&r.original_source_array_index===a.original_source_array_index
+    &&(review.item.body.records?.includes(r)||review.item.body.points?.includes(r))
+    &&pointer(r,record.review.interpretation_pointer)===a.source_review_kind,
+   'Dated centre substantive review differs');
+   const dates=a.answer_dates.map(value=>{
+    if(typeof value==='string'&&/^\d{4}-\d\d-\d\d$/.test(value)){instant(value+'T00:00:00Z');return value;}
+    return instant(value);
+   }),observed=new Set();
+   demand(new Set(dates).size===dates.length&&Array.isArray(record.observations)&&record.observations.length===dates.length,
+    'Incomplete dated centre observation dates');
+   for(const ref of record.observations){
+    const observation=reference(ref,'observation','id,pointer,frames'),o=observation.value,body=observation.item.body;
+    const date=instant(body.acquisition_datetime);
+    const matched=dates.filter(d=>d===date||d.length===10&&date.startsWith(d+'T'));
+    demand(matched.length===1&&!observed.has(matched[0])&&typeof body.item==='string'&&body.item
+     &&o&&same(o.original_key,key)&&o.index===a.plan_index&&o.longitude===record.longitude&&o.latitude===record.latitude
+     &&Array.isArray(body.points)&&body.points.includes(o)&&Array.isArray(o.physical_block)
+     &&Array.isArray(ref.frames)&&ref.frames.length===2,'Dated centre observation or scene differs');observed.add(matched[0]);
+    const channels=new Set();
+    for(const id of ref.frames){
+     const f=provenance.get(id);demand(f?.role==='frame'&&f.observation===ref.id
+      &&['rgb','nir-red-green'].includes(f.channels)&&!channels.has(f.channels),'Dated centre native frame differs');
+     used.add(id);channels.add(f.channels);
+     const block=pointer(body,f.block_pointer),display=pointer(body,f.display_pointer);
+     demand(Array.isArray(body.blocks)&&body.blocks.includes(block)&&same(block.block,o.physical_block)
+      &&Array.isArray(block.indices)&&block.indices.includes(o.index)&&Array.isArray(block.displays)&&block.displays.includes(display)
+      &&typeof display.path==='string'&&display.path.split('/').includes(body.item)
+      &&display.path.endsWith('/'+f.channels+'-native.png')
+      &&typeof f.display_base==='string'&&!f.display_base.includes('\\')
+      &&f.display_base.split('/').every(p=>p&&p!=='.'&&p!=='..')
+      &&f.pin.path===relative(f.display_base+'/_',display.path)
+      &&display.bytes===f.pin.bytes&&display.sha256===f.pin.sha256,'Dated native frame registration differs');
+    }
+   }
+   datedCentres.push({source_id:record.source_id,pixelIndex:record.pixelIndex,y:record.y,x:record.x});
+  }
+  demand(used.size===provenance.size,'Unused dated evidence provenance');
+ }
  const targets=new Map(), resolvedTargets=new Map(), residualsByOwner=new Map(), generalOwners=new Set();
+ // These facts belong only to the parsed target objects in this evaluation.
+ // Keep each distinct custody comparison; reuse work only after its first
+ // ordinary validation, without retaining another geometry or serialized body.
+ const targetFacts=new WeakMap();
+ const targetBaseSha=target=>{
+  const facts=targetFacts.get(target);
+  return facts.baseSha??=valueSha(target.base_geometry);
+ };
  for(const target of evidence.targets){
   const ownerId=target.target_id??target.id;
   demand(typeof target.id==='string'&&target.id&&!targets.has(target.id)&&owners.get(ownerId)===target.pixelIndex&&hash(target.source_receipt_sha256),
@@ -752,28 +1508,34 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   demand(supports.length===1,'Missing or duplicate physical source member');const support=supports[0];
   demand(target.source_receipt_sha256===evidence.physical_evidence.sha256,
    'Missing qualified physical source interpretation');
-  const residuals=reconstructionResidualPointsets(support,diagnostic);
+  const residuals=reconstructionResidualPointsets(support,dated,candidateFrame);
   const generalIssues=support.issues.some(i=>!['missing_reconstruction','extra_reconstruction'].includes(i.reason)
    ||!['Polygon','MultiPolygon'].includes(i.geometry?.type));
   if(generalIssues)generalOwners.add(target.pixelIndex);
   if(residuals.length){
-   const item=residualsByOwner.get(target.pixelIndex)??{index:target.pixelIndex,geometries:[]};
-   item.geometries.push(...residuals);
+   const item=residualsByOwner.get(target.pixelIndex)??{index:target.pixelIndex,witnesses:[]};
+   item.witnesses.push(...residuals);
    residualsByOwner.set(target.pixelIndex,item);
   }
   demand(Array.isArray(target.coverage_classes)&&target.coverage_classes.length>0
    &&target.coverage_classes.every(kind=>['mapped_land_support','mapped_inland_water_support'].includes(kind))
    &&new Set(target.coverage_classes).size===target.coverage_classes.length,
    'Unresolved physical support cannot qualify a repair');
-  const polygons=target.coverage_classes.flatMap(kind=>{const geometry=support.support[kind];coordinateBounds(geometry);
-   return geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;});
+  const hasDated=datedCentres.some(p=>p.source_id===target.id);
+  const coverageBounds=[],polygons=[];
+  for(const kind of target.coverage_classes){const geometry=support.support[kind];
+   if(hasDated&&validateWitnessGeometry(geometry).empty)continue;coverageBounds.push(...coordinateBounds(geometry));
+   // Keep the required polygon roster, never expand stored rings/vertices.
+   for(const polygon of geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates)polygons.push(polygon);
+  }
   target.coverage_geometry={type:'MultiPolygon',coordinates:polygons};
   coordinateBounds(target.base_geometry);
+  const facts={coverageBounds};targetFacts.set(target,facts);
   targets.set(target.id,target);
   const prior=resolvedTargets.get(ownerId);
   demand(!prior||prior.pixelIndex===target.pixelIndex&&prior.source_family===target.source_family
    &&same(prior.base_geometry,target.base_geometry),'Conflicting accepted target base or source family');
-  if(!prior)resolvedTargets.set(ownerId,{...target,id:ownerId});
+  if(!prior){const resolved={...target,id:ownerId};resolvedTargets.set(ownerId,resolved);targetFacts.set(resolved,facts);}
  }
  const rowsByOwner=new Map();let previous=-1;
  for(const row of proposed.rows){
@@ -809,165 +1571,380 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   demand(!prior||same(prior,rows),'Conflicting sibling native coverage class bindings');
   coverageRowsByOwner.set(target.pixelIndex,rows);
  }
- const diagnosticRows=new Map(),witnessKindRows=diagnostic?new Map():null;
- const witnessKinds=['missing_reconstruction','extra_reconstruction','contradictory_land_water_support',
-  'L2-outside-L1','L3-outside-L2','L4-outside-L3','outside_mapped_L1_context'];
- let firstFailure=null,traceReserve=0;
- if(diagnostic){
-  const cells=proposed.rows.reduce((n,row)=>n+row.runs.reduce((m,r)=>m+r[1]-r[0],0),0);
-  // Retain exact requested-centre reason/output spans, never whole-world traces.
-  // Extra 256 bytes/cell + 128 bytes/row retain owner-specific contact masks
-  // and worst-case uncoalesced output; existing geometric scratch is unchanged.
-  traceReserve=4096+cells*768+proposed.rows.length*256
-   +6*valueBytes({preimage,native_contract:evidence.native_contract}).length;
-  demand(Number.isSafeInteger(traceReserve)&&reader.used+traceReserve<=reader.phaseLimit,
-   'Complete native diagnostic trace exceeds allowance');reader.used+=traceReserve;
+ // Optional adopted source applicability retains every original negative.
+ const completeOriginalSources=new Map();
+ const readCompleteSource=function*(parts,record){
+  demand(record&&Array.isArray(parts)&&parts.length===record.parts.length,
+   'Missing complete original source family');
+  const identity=valueSha({parts,record});
+  if(completeOriginalSources.has(identity))return completeOriginalSources.get(identity);
+  const sourceParts=function*(){for(const [i,pin]of parts.entries()){
+   const expected=record.parts[i];demand(pin.path===expected.path&&pin.sha256===expected.sha256
+    &&pin.bytes===expected.bytes&&pin.decoded_bytes===expected.uncompressed_bytes
+    &&pin.decoded_sha256===expected.uncompressed_sha256,'Source family part differs from retained catalogue');yield pin;
+  }};
+  const product=yield {kind:'source',reader,sourceParts,record,read:()=>{
+   const pieces=Array.from(sourceParts(),read),raw=Buffer.concat(pieces);
+   demand(raw.length===record.original_bytes&&sha(raw)===record.original_sha256,'Whole original consumed source product differs');
+   return JSON.parse(raw);
+  }};
+  demand(product.features?.length===record.feature_count,'Incomplete original source feature roster');
+  completeOriginalSources.set(identity,product);return product;
+ };
+
+ // Optional references share authenticated complete originals, while retaining
+ // every per-target operand and ordinal. Expansion precedes the unchanged
+ // applicability and whole-geometry veto paths; it supplies no positive owner.
+ if(evidence.territorial_exclusion_sources!==undefined){
+  const sources=evidence.territorial_exclusion_sources,loaded=new Map(),seen=new Set();
+  demand(!revised&&evidence.adopted_provider_families===undefined
+   &&Array.isArray(sources)&&sources.length>0,'Complete original territorial sources required');
+  for(const family of sources){
+   demand(keys(family,'source_id,parts')&&typeof family.source_id==='string'&&family.source_id
+    &&!seen.has(family.source_id)&&!evidence.families.some(f=>f.source_id===family.source_id),
+   'Duplicate, positive or invalid territorial source family');seen.add(family.source_id);
+   const matches=catalogue.products.filter(record=>record.key===family.source_id);
+   demand(matches.length===1,'Missing unique complete territorial source family');
+   const product=(yield* readCompleteSource(family.parts,matches[0]));
+   demand(product.type==='FeatureCollection'&&product.features.length>0,'Incomplete territorial source collection');
+   for(const [feature_ordinal,feature]of product.features.entries()){
+    const shape=feature.properties?.shapeID,source_id=family.source_id+':'+shape;
+    demand(feature.type==='Feature'&&typeof shape==='string'&&shape&&!loaded.has(source_id),
+     'Missing or duplicate territorial original source identity');
+    coordinateBounds(feature.geometry);
+    loaded.set(source_id,{feature_ordinal,geometry_sha256:valueSha(feature.geometry),geometry:feature.geometry});
+   }
+  }
+  for(const target of targets.values()){
+   demand(target.territorial_exclusions===undefined||Array.isArray(target.territorial_exclusions),
+    'Malformed territorial exclusions');
+   if(target.territorial_exclusions===undefined)continue;
+   target.territorial_exclusions=target.territorial_exclusions.map((operand,negative_ordinal)=>{
+    if(['Polygon','MultiPolygon'].includes(operand?.type))return operand;
+    demand(keys(operand,'source_id,feature_ordinal,negative_ordinal,geometry_sha256')
+     &&typeof operand.source_id==='string'&&Number.isSafeInteger(operand.feature_ordinal)
+     &&operand.feature_ordinal>=0&&operand.negative_ordinal===negative_ordinal&&hash(operand.geometry_sha256),
+    'Malformed or duplicate territorial source reference');
+    const original=loaded.get(operand.source_id);
+    demand(original&&original.feature_ordinal===operand.feature_ordinal
+     &&original.geometry_sha256===operand.geometry_sha256,'Territorial reference differs from complete original');
+    return original.geometry;
+   });
+  }
  }
- const recordDiagnostic=(y,start,end,owner,reason,witnessMask=0)=>{
+
+ // Source semantics enter through the same executing-tree pin as dated land;
+ // the native operator receives only exact member/operand/centre identities.
+ const territorialApplicability=[],territorialContextHits=[],territorialOperands=new Map();
+ if(evidence.territorial_applicability!==undefined){
+  const data=(yield* readAdopted(evidence.territorial_applicability,'Territorial applicability'));
+  demand(keys(data,'version,kind,provenance,records')&&data.version===1
+   &&data.kind==='adopted-native-territorial-applicability-v1'
+   &&Array.isArray(data.provenance)&&data.provenance.length>0
+   &&Array.isArray(data.records)&&data.records.length>0,'Incomplete adopted territorial applicability');
+  const provenance=new Map(),loaded=new Map(),used=new Set(),seen=new Set();
+  for(const item of data.provenance){
+   const multipart=item.role==='original-source'&&keys(item,'id,role,parts');
+   demand((multipart||keys(item,'id,role,pin'))&&typeof item.id==='string'&&item.id&&!provenance.has(item.id)
+    &&['adoption','scope','original-source'].includes(item.role),'Unknown or duplicate territorial provenance');
+   const pins=multipart?item.parts:[item.pin];
+   demand(Array.isArray(pins)&&pins.length>0&&new Set(pins.map(valueSha)).size===pins.length,
+    'Duplicate or missing territorial source parts');for(const pin of pins)pinCheck(pin);
+   const identity=valueSha(multipart?{parts:pins}:item.pin);
+   if(!loaded.has(identity)){
+    if(multipart){
+     const matches=catalogue.products.filter(product=>product.parts.length===pins.length
+      &&product.parts.every((part,i)=>part.path===pins[i].path&&part.sha256===pins[i].sha256));
+     demand(matches.length===1,'Missing unique complete territorial source family');
+     loaded.set(identity,(yield* readCompleteSource(pins,matches[0])));
+    }else loaded.set(identity,(yield* json(item.pin)));
+   }
+   provenance.set(item.id,{...item,body:loaded.get(identity)});
+  }
+  const reference=(ref,role,fields='id,pointer')=>{
+   demand(keys(ref,fields),'Malformed territorial evidence reference');const item=provenance.get(ref.id);
+   demand(item?.role===role,'Missing territorial evidence role: '+role);used.add(item.id);
+   return {item,value:pointer(item.body,ref.pointer)};
+  };
+  for(const record of data.records){
+   demand(keys(record,'role,source_id,target_id,pixelIndex,y,x,negative_ordinal,geometry_sha256,original_source,adoption,scope')
+    &&record.role==='contextual'&&typeof record.source_id==='string'&&typeof record.target_id==='string'
+    &&Number.isSafeInteger(record.pixelIndex)&&record.pixelIndex>0
+    &&Number.isSafeInteger(record.y)&&record.y>=0&&record.y<262166
+    &&Number.isSafeInteger(record.x)&&record.x>=0&&record.x<262166
+    &&Number.isSafeInteger(record.negative_ordinal)&&record.negative_ordinal>=0&&hash(record.geometry_sha256),
+   'Invalid territorial applicability record');
+   const target=targets.get(record.source_id),negative=target?.territorial_exclusions?.[record.negative_ordinal];
+   demand(target&&target.pixelIndex===record.pixelIndex&&(target.target_id??target.id)===record.target_id
+    &&negative&&valueSha(negative)===record.geometry_sha256,'Territorial target or original negative differs');
+   const original=reference(record.original_source,'original-source');
+   demand(valueSha(original.value)===record.geometry_sha256,'Territorial complete source geometry differs');
+   const operand_sha256=valueSha({...('parts'in original.item?{parts:original.item.parts}:{pin:original.item.pin}),pointer:record.original_source.pointer});
+   const operandKey=JSON.stringify([record.source_id,record.negative_ordinal]);
+   demand(!territorialOperands.has(operandKey)||territorialOperands.get(operandKey)===operand_sha256,
+    'Original territorial operand has conflicting provenance');territorialOperands.set(operandKey,operand_sha256);
+   const adoption=reference(record.adoption,'adoption');
+   demand(typeof adoption.value==='string'&&adoption.value.trim(),'Missing explicit territorial applicability decision');
+   const scope=reference(record.scope,'scope','id,pointer,owner_pointer');
+   demand(scope.value?.y===record.y&&scope.value.x===record.x
+    &&pointer(scope.value,record.scope.owner_pointer)===record.pixelIndex,
+   'Territorial decision scope differs from exact native key');
+   demand((rowsByOwner.get(record.pixelIndex)??[]).some(row=>row.y===record.y
+    &&row.runs.some(run=>run[0]<=record.x&&record.x<run[1])),
+   'Territorial applicability is outside the requested native cells');
+   const identity=JSON.stringify([record.source_id,record.target_id,record.pixelIndex,record.y,record.x,record.negative_ordinal]);
+   demand(!seen.has(identity),'Duplicate territorial applicability record');seen.add(identity);
+   territorialApplicability.push({...record,operand_sha256,decision_sha256:valueSha({pin:adoption.item.pin,pointer:record.adoption.pointer})});
+  }
+  demand(used.size===provenance.size,'Unused territorial evidence provenance');
+ }
+ // Raw contacts are diagnostic attribution, not a second hold decision. In
+ // particular, dated same-member land can supersede exterior interior context,
+ // and mapped water is a veto only under the existing exact dated-land rule.
+ const witnessKinds=['missing_reconstruction','extra_reconstruction','contradictory_land_water_support',
+  'L2-outside-L1','L3-outside-L2','L4-outside-L3','outside_mapped_L1_context','mapped_inland_water_support'];
+ const witnessKindBits=new Map(witnessKinds.map((kind,index)=>[kind,1<<index]));
+ const diagnosticRows=new Map(),witnessKindRows=new Map(); let firstFailure=null;
+ const recordDiagnostic=(y,start,end,owner,reason,mask)=>{
   const runs=diagnosticRows.get(y)??[],prior=runs.at(-1);
   if(prior&&prior[1]===start&&prior[2]===owner&&prior[3]===reason)prior[1]=end;
   else runs.push([start,end,owner,reason]);diagnosticRows.set(y,runs);
-  if(witnessMask){
-   const kinds=witnessKindRows.get(y)??[],last=kinds.at(-1);
-   if(last&&last[1]===start&&last[2]===owner&&last[3]===witnessMask)last[1]=end;
-   else kinds.push([start,end,owner,witnessMask]);witnessKindRows.set(y,kinds);
+  if(mask){
+   const contacts=witnessKindRows.get(y)??[],previous=contacts.at(-1);
+   if(previous&&previous[1]===start&&previous[2]===owner&&previous[3]===mask)previous[1]=end;
+   else contacts.push([start,end,owner,mask]);witnessKindRows.set(y,contacts);
   }
  };
- const checked=new Set(),families=new Set();
+ // A new source is deliberately separate from the retained shapeID catalogue.
+ // The opt-in executing-tree adoption binds the whole raw snapshot, explicit
+ // stable crosswalk and bounded original-key choice; it does not replace base
+ // county geometry or relax the v1/v2 original-source join.
+ const revision = revised ? yield* readAdoptedOsmRevision({evidence,proposed,owners,latitudes,
+  read,json,readAdopted,reader,physicalInputs,keys}) : null;
+ const checked=new Set(),families=new Set(),physicalContextHits=[],providerCompetitors=[],providerVetoes=[],splitCompetitors=[];
+ for(const [source_family,adopted]of adoptedFamilies)for(const [source_id,feature]of adopted.originals){
+  const bound=adopted.bindings.has(source_id);
+  const veto_targets=[...resolvedTargets.values()].filter(target=>!bound||target.source_family!==source_family)
+   .map(target=>({target_id:target.id,pixelIndex:target.pixelIndex}));
+  if(!veto_targets.length)continue;
+  const identity={source_family,source_id,feature_ordinal:adopted.ordinals.get(source_id),geometry_sha256:valueSha(feature.geometry)};
+  const product=evidence.families.find(family=>family.source_id===source_family).parts[0];
+  providerCompetitors.push({...identity,veto_targets});
+  providerVetoes.push({...identity,veto_targets,geometry:feature.geometry,operand_sha256:valueSha({product,...identity})});
+ }
  for(const family of evidence.families){
   demand(typeof family.source_id==='string'&&!families.has(family.source_id),'Duplicate source family');families.add(family.source_id);
+  const adopted=adoptedFamilies.get(family.source_id);
   const record=catalogue.products.find(product=>product.key===family.source_id);
-  demand(record&&family.parts.length===record.parts.length,'Missing complete original source family');
-  const pieces=family.parts.map((pin,i)=>{
-   const expected=record.parts[i];demand(pin.path===expected.path&&pin.sha256===expected.sha256
-    &&pin.bytes===expected.bytes&&pin.decoded_bytes===expected.uncompressed_bytes
-    &&pin.decoded_sha256===expected.uncompressed_sha256,'Source family part differs from retained catalogue');return read(pin);
-  });
-  const raw=Buffer.concat(pieces);demand(raw.length===record.original_bytes&&sha(raw)===record.original_sha256,
-   'Whole original consumed source product differs');
-  const product=JSON.parse(raw);demand(product.features?.length===record.feature_count,'Incomplete original source feature roster');
-  const originals=new Map();
-  for(const feature of product.features){
-   const sourceId=feature.properties?.shapeID;
-   demand(typeof sourceId==='string'&&sourceId&&!originals.has(family.source_id+':'+sourceId),
-    'Duplicate or missing original source feature identity');originals.set(family.source_id+':'+sourceId,feature);
+  demand(revised?same(family.parts,[revision.stagePin])&&family.source_id===revision.sourceId
+   :adopted||record&&family.parts.length===record.parts.length,'Missing complete original or adopted source family');
+  const product=adopted?.product??(revised?revision.product:(yield* readCompleteSource(family.parts,record)));
+  const originals=adopted?.originals??new Map();
+  if(!adopted)for(const feature of product.features){
+   const sourceId=revised?feature.id:feature.properties?.shapeID;
+   const id=revised?sourceId:family.source_id+':'+sourceId;
+   demand(typeof sourceId==='string'&&sourceId&&!originals.has(id),
+    'Duplicate or missing original source feature identity');originals.set(id,feature);
   }
+  const resolve=id=>adopted?adopted.bindings.get(id):revised?revision.resolve(id):reconcile(id,originals);
   const selected=evidence.targets.filter(target=>target.source_family===family.source_id);
   demand(selected.length>0,'Unused source family');
-  for(const target of selected){const original=originals.get(target.id),owner=reconcile(target.id,originals);
+  const selectedOwners=new Set(selected.map(t=>t.pixelIndex));
+  if(adopted)for(const binding of adopted.bindings.values())if(selectedOwners.has(binding.pixelIndex)){
+   for(const row of rowsByOwner.get(binding.pixelIndex)??[])for(const run of row.runs)for(let x=run[0];x<run[1];x++)
+    demand(binding.scope.has(row.y+':'+x),'Requested native key lacks adopted provider member applicability');
+  }
+  for(const target of selected){const original=originals.get(target.id),owner=resolve(target.id);
    const measured=physicalInputs.filter(input=>input.target===target.id);
-   demand(owner.id===(target.target_id??target.id)&&owner.pixelIndex===target.pixelIndex,
+   demand(owner&&owner.id===(target.target_id??target.id)&&owner.pixelIndex===target.pixelIndex,
     'Source member differs from accepted target mapping');
-   demand(!owner.feature||same(owner.feature.geometry,target.base_geometry),'Accepted aggregate base geometry differs');
+   demand(!owner.feature||valueSha(owner.feature.geometry)===targetBaseSha(target),'Accepted aggregate base geometry differs');
    demand(original&&measured.length===1&&same(measured[0].consumed.geometry,original.geometry)
-    &&measured[0].selected.id===owner.id&&same(measured[0].selected.geometry,target.base_geometry),
+    &&(!adopted||same(measured[0].consumed,original))
+    &&measured[0].selected.id===owner.id&&valueSha(measured[0].selected.geometry)===targetBaseSha(target),
     'Physical source query or selected target differs from measured whole inputs');
   }
   // A retained measured sibling cannot escape its owner's veto by being
   // omitted from the positive selected-target roster. Its complete source and
   // canonical base joins remain mandatory; it supplies no borrowed coverage.
-  const selectedOwners=new Set(selected.map(t=>t.pixelIndex));
   for(const [id,original]of originals)if(!targets.has(id)){
-   const candidateOwner=selectedOwners.has(owners.get(id))
+   const candidateOwner=adopted?selectedOwners.has(adopted.bindings.get(id)?.pixelIndex):selectedOwners.has(revised?resolve(id).pixelIndex:owners.get(id))
     ||(memberOwners.get(id)??[]).some(change=>selected.some(t=>(t.target_id??t.id)===change.id));
    if(!candidateOwner)continue;
    const measured=physicalInputs.filter(input=>input.target===id);
    const results=physical.results.filter(result=>result.target===id);
-   if(!measured.length&&!results.length)continue;
-   const owner=reconcile(id,originals),target=resolvedTargets.get(owner.id);
+   if(!adopted&&!measured.length&&!results.length)continue;
+   const owner=resolve(id),target=resolvedTargets.get(owner.id);
    demand(selectedOwners.has(owner.pixelIndex)&&target
     &&measured.length===1&&results.length===1,'Missing or duplicate measured sibling physical interpretation');
    demand(same(measured[0].consumed.geometry,original.geometry)&&measured[0].selected.id===owner.id
+    &&(!adopted||same(measured[0].consumed,original))
     &&same(measured[0].selected.geometry,target.base_geometry)
     &&(!owner.feature||same(owner.feature.geometry,target.base_geometry)),
    'Measured sibling differs from complete original or accepted owner base');
-   const witnesses=reconstructionResidualPointsets(results[0],diagnostic);
+   const witnesses=reconstructionResidualPointsets(results[0],dated,candidateFrame);
    if(results[0].issues.some(i=>!['missing_reconstruction','extra_reconstruction'].includes(i.reason)
     ||!['Polygon','MultiPolygon'].includes(i.geometry?.type)))generalOwners.add(owner.pixelIndex);
-   if(witnesses.length){const item=residualsByOwner.get(owner.pixelIndex)??{index:owner.pixelIndex,geometries:[]};
-    item.geometries.push(...witnesses);residualsByOwner.set(owner.pixelIndex,item);}
+   if(witnesses.length){const item=residualsByOwner.get(owner.pixelIndex)??{index:owner.pixelIndex,witnesses:[]};
+    item.witnesses.push(...witnesses);residualsByOwner.set(owner.pixelIndex,item);}
   }
   for(const target of selected)if(generalOwners.has(target.pixelIndex)){
    demand(target.coverage_classes.length===1||coverageRowsByOwner.has(target.pixelIndex),
     'Mixed physical conflict coverage requires explicit native class rows');
    demand(Array.isArray(target.territorial_exclusions),
-    'General physical conflict requires a supplied territorial_exclusions array; [] supplies no additional geometries, not foreign-territory clearance');
+    'General physical conflict qualification requires explicit territorial exclusions');
   }
-  const bounds=selected.flatMap(target=>coordinateBounds(target.coverage_geometry));
+  // Form views for every original family member before spatial prefiltering,
+  // including omitted competitors. Raw originals above still bind custody.
+  const nativeOriginals=new Map([...originals].map(([id,feature])=>[id,
+   {...feature,geometry:nativeView('source',id,'/geometry',feature.geometry)}]));
+  const bounds=selected.flatMap(target=>datedCentres.some(p=>p.source_id===target.id)
+   ?coordinateBounds(nativeOriginals.get(target.id).geometry):targetFacts.get(target).coverageBounds);
   const intersects=(a,b)=>a[0]<=b[2]&&b[0]<=a[2]&&a[1]<=b[3]&&b[1]<=a[3];
-  const sourceFeatures=product.features.filter(feature=>coordinateBounds(feature.geometry).some(part=>bounds.some(box=>intersects(part,box))))
-   .map(feature=>{const id=family.source_id+':'+feature.properties.shapeID;
-    const owner=reconcile(id,originals);
-    return {id,target_id:owner.id,pixelIndex:owner.pixelIndex,geometry:feature.geometry};});
-  const coverageFeatures=selected.map(target=>({id:target.target_id??target.id,source_id:target.id,pixelIndex:target.pixelIndex,geometry:target.coverage_geometry}));
-  const exclusions=selected.flatMap(target=>(target.territorial_exclusions??[]).map(geometry=>({id:target.target_id??target.id,pixelIndex:target.pixelIndex,geometry})));
+  const sourceFeatures=[],splitVetoes=[...externalOriginals.values()];
+  for(const [id,feature] of nativeOriginals){
+   if(adopted&&!adopted.bindings.has(id))continue;
+   if(!coordinateBounds(feature.geometry).some(part=>bounds.some(box=>intersects(part,box))))continue;
+   const split=!adopted&&!revised?((yield* complexSourceCompetitor(id,originals))??splitCompetitor(id,originals)):null;
+   if(split){
+    splitCompetitors.push(split);
+    splitVetoes.push({...split,geometry:feature.geometry});
+   }else{
+    const owner=resolve(id);
+    sourceFeatures.push({id,target_id:owner.id,pixelIndex:owner.pixelIndex,geometry:feature.geometry});
+   }
+  }
+  // Authenticate both directions for each external leaf actually present in
+  // this complete cohort, even if its own geometry is disjoint. Whole external
+  // originals already enter every family’s conservative native veto route.
+  for(const [id,original]of externalOriginals){
+   if(!complexContexts.get(originals)?.reverse.has(id))continue;
+   demand(!originals.has(id),'External original collides with a complete source family');
+   const split=(yield* complexSourceCompetitor(id,originals));
+   demand(split,'External original lacks complete negative ancestry');
+   if(!usedExternalOriginals.has(id))splitCompetitors.push({...split,
+    source_family:'natural-earth:adm1',feature_ordinal:original.feature_ordinal});
+   usedExternalOriginals.add(id);
+  }
+  const coverageFeatures=selected.filter(t=>t.coverage_geometry.coordinates.length).map(target=>({id:target.target_id??target.id,source_id:target.id,pixelIndex:target.pixelIndex,geometry:target.coverage_geometry}));
+  let exclusions=selected.flatMap(target=>(target.territorial_exclusions??[]).map((geometry,ordinal)=>({
+   id:target.target_id??target.id,pixelIndex:target.pixelIndex,geometry,
+   ...(evidence.territorial_applicability===undefined?{}:{source_id:target.id,negative_ordinal:ordinal,geometry_sha256:valueSha(geometry),
+    operand_sha256:territorialOperands.get(JSON.stringify([target.id,ordinal]))})})));
+  for(const member of splitVetoes){
+   // Every original ring remains a veto. No child is used as a surrogate
+   // owner and no applicability exception can turn this negative positive.
+   const memberBounds=coordinateBounds(member.geometry);
+   for(const target of selected){
+    const targetBounds=coordinateBounds(datedCentres.some(point=>point.source_id===target.id)
+     ?nativeOriginals.get(target.id).geometry:target.coverage_geometry);
+    if(!memberBounds.some(part=>targetBounds.some(box=>intersects(part,box))))continue;
+    exclusions.push({id:target.target_id??target.id,pixelIndex:target.pixelIndex,
+     geometry:member.geometry,split_source_id:member.source_id,
+     negative_ordinal:null,geometry_sha256:member.geometry_sha256});
+   }
+  }
+  for(const member of providerVetoes){
+   // This is a negative operand for an existing target, not a fabricated owner.
+   // It has no original negative ordinal and cannot match an applicability
+   // exception, including when another operand has identical geometry.
+   for(const target of member.veto_targets)if(selectedOwners.has(target.pixelIndex))exclusions.push({id:target.target_id,
+    pixelIndex:target.pixelIndex,geometry:member.geometry,provider_source_id:member.source_id,
+    negative_ordinal:null,geometry_sha256:member.geometry_sha256,operand_sha256:member.operand_sha256});
+  }
+  // Qualification requires coverage; discard only whole exclusions proven
+  // disjoint from every complete coverage part. Keep diagnostic reasons intact.
+  if(!diagnostic&&evidence.territorial_applicability===undefined)exclusions=exclusions.filter(feature=>coordinateBounds(feature.geometry)
+   .some(part=>bounds.some(box=>intersects(part,box))));
   const blocks=new Map();
   for(const row of proposed.rows)if(row.runs.some(run=>selectedOwners.has(run[2]))){
    const block=Math.floor(row.y/4096);const list=blocks.get(block)??[];list.push(row);blocks.set(block,list);
   }
   for(const [block,rows]of blocks){
    const rowStart=block*4096,rowEnd=Math.min(262166,rowStart+4096);
-   // Patch rows name owners, not members. Conservatively keep every measured
-   // sibling's original residual parts and boundaries in that owner's veto.
-   const hitReserve=rows.reduce((n,row)=>n+row.runs.reduce((m,r)=>m+r[1]-r[0],0),0)*192;
-   demand(Number.isSafeInteger(hitReserve)&&reader.used+hitReserve<=reader.phaseLimit,'Candidate-cell hit inventory exceeds allowance');
-   reader.used+=hitReserve;
-   const residualHits=new Set(),residualKinds=diagnostic?new Map():null;
+   // Preserve every actual role/member contact. Only exact exterior interiors
+   // can be considered below, after the unchanged native source/owner guards.
+   const residualHits=new Set(),waterHits=new Set(),exteriorHits=[],witnessMasks=diagnostic?new Map():null;
    for(const item of residualsByOwner.values())if(selectedOwners.has(item.index)){
     const requestedRows=rows.map(row=>({y:row.y,runs:row.runs.filter(run=>run[2]===item.index)}))
      .filter(row=>row.runs.length);
-    const cells=requestedRows.reduce((n,row)=>n+row.runs.reduce((m,r)=>m+r[1]-r[0],0),0);
-    // Reserve one full operation's flattened geometry, exact integers, scanner
-    // rows/ties and up to four hit kinds per requested centre before predicates.
-    // Parsed immutable input reserve remains live; scratch is released per op.
-    for(const witness of item.geometries){
-     const geometry=diagnostic?witness.geometry:witness;
-     const kind=diagnostic?witnessKinds.indexOf(witness.kind):-1;
-     demand(!diagnostic||kind>=0,'Unknown physical witness attribution kind');
-     const stats=validateWitnessGeometry(geometry,{latitudes,rowStart,rowEnd,requestedCells:cells});
-     const reserve=stats.scratch_bytes;
-     demand(Number.isSafeInteger(reserve)&&reader.used+reserve<=reader.phaseLimit,
-      'Complete candidate-cell witness phase exceeds allowance');
-     reader.used+=reserve;
-     try{
-      const effects=witnessCellEffects(geometry,{size:262166,latitudes,requestedRows,nativePolygonIntervals});
-      for(const hit of effects.hits){
-       const key=item.index+':'+hit.y+':'+hit.x;residualHits.add(key);
-       if(diagnostic)residualKinds.set(key,(residualKinds.get(key)??0)|(1<<kind));
-      }
-     }finally{reader.used-=reserve;}
+    for(const witness of item.witnesses){
+     validateWitnessGeometry(witness.geometry);
+     const effects=witnessCellEffects(witness.geometry,{size:262166,latitudes,requestedRows,nativePolygonIntervals});
+     for(const hit of effects.hits){
+      const key=item.index+':'+hit.y+':'+hit.x;
+      if(diagnostic)witnessMasks.set(key,(witnessMasks.get(key)??0)|witnessKindBits.get(witness.role));
+      if(witness.role==='mapped_inland_water_support')waterHits.add(key);
+      else if(witness.role==='outside_mapped_L1_context')exteriorHits.push({
+       source_id:witness.source_id,pixelIndex:item.index,role:witness.role,...hit});
+      else residualHits.add(key);
+     }
     }
    }
    // Class masks share the complete source/exclusion scan below, but retain
-   // independent member coverage and boundary adjudication. Keep the existing
-   // complete class reservations live until this block finishes.
-   const classes=[],coverageFeatureGroups=[];let classReserve=0;
+   // independent member coverage and boundary adjudication.
+   const blockCentres=datedCentres.filter(p=>selected.some(t=>t.id===p.source_id)&&p.y>=rowStart&&p.y<rowEnd);
+   // Actual mapped water contradicts this typed terrestrial-centre claim even
+   // when no exterior context is present. Other mapped-water class cells retain
+   // their existing semantics; only exact authenticated dated-land keys veto.
+   for(const point of blockCentres){
+    const key=point.pixelIndex+':'+point.y+':'+point.x;
+    if(waterHits.has(key))residualHits.add(key);
+   }
+   const classes=[],coverageFeatureGroups=[],coverageCentreGroups=[];
    for(const kind of ['mapped_land_support','mapped_inland_water_support'])
     if(selected.some(t=>coverageRowsByOwner.has(t.pixelIndex))){
      if(selected.every(t=>t.coverage_classes.length===1&&t.coverage_classes[0]===kind)){
       classes.push({kind,combined:true});continue;
      }
-     const features=selected.filter(t=>t.coverage_classes.includes(kind)).map(t=>{
+     const features=selected.filter(t=>t.coverage_classes.includes(kind)).flatMap(t=>{
       const geometry=physical.results.find(r=>r.target===t.id).support[kind];
-      return {id:t.target_id??t.id,source_id:t.id,pixelIndex:t.pixelIndex,geometry};
+      if(datedCentres.some(p=>p.source_id===t.id)&&validateWitnessGeometry(geometry).empty)return [];
+      return [{id:t.target_id??t.id,source_id:t.id,pixelIndex:t.pixelIndex,geometry}];
      });
-     if(features.length===0){classes.push({kind,empty:true});continue;}
-     const reserve=[...sourceFeatures,...features,...exclusions].reduce((n,f)=>n
-      +validateWitnessGeometry(f.geometry,{latitudes,rowStart,rowEnd}).scratch_bytes,0)*2;
-     demand(Number.isSafeInteger(reserve)&&reader.used+reserve<=reader.phaseLimit,
-      'Complete declared physical class scan exceeds allowance');
-     reader.used+=reserve;classReserve+=reserve;
-     classes.push({kind,group:coverageFeatureGroups.length});coverageFeatureGroups.push(features);
+     const centres=kind==='mapped_land_support'?blockCentres:[];
+     if(features.length===0&&centres.length===0){classes.push({kind,empty:true});continue;}
+     classes.push({kind,group:coverageFeatureGroups.length});coverageFeatureGroups.push(features);coverageCentreGroups.push(centres);
     }
+   if(coverageFeatureGroups.length)for(const feature of [...sourceFeatures,...exclusions,...coverageFeatureGroups.flat()])
+    validateWitnessGeometry(feature.geometry);
    // Empty rows here derive the permitted source/coverage domain, not a claim
    // about actual ownership. Actual current owner zero is enforced separately
    // by selectedAdditiveRows and the emitted native patch application.
+   const applicable=territorialApplicability.filter(record=>selected.some(t=>t.id===record.source_id)
+    &&record.y>=rowStart&&record.y<rowEnd).map(record=>{
+     const exclusion_index=exclusions.findIndex(feature=>feature.source_id===record.source_id
+      &&feature.negative_ordinal===record.negative_ordinal);
+     demand(exclusion_index>=0,'Missing original territorial operand');
+     return {source_id:record.source_id,pixelIndex:record.pixelIndex,y:record.y,x:record.x,exclusion_index,
+      exclusion_geometry_sha256:record.geometry_sha256,operand_sha256:record.operand_sha256,decision_sha256:record.decision_sha256};
+    });
    const allowed=deriveSourceTargetNativeDelta({targets:[...resolvedTargets.values()].filter(target=>target.source_family===family.source_id).map(({id,pixelIndex})=>({id,pixelIndex})),
     sourceFeatures,coverageFeatures,territorialExclusions:exclusions,size:262166,latitudes,rowStart,rowEnd,
-    ...(coverageFeatureGroups.length?{coverageFeatureGroups}:{}),
+    ...(applicable.length?{territorialApplicability:applicable}:{}),
+    ...(dated?{coverageCentres:blockCentres}:{}),
+    ...(coverageFeatureGroups.length?{coverageFeatureGroups,...(dated?{coverageCentreGroups}:{})}:{}),
     ...(diagnostic?{diagnosticRows:rows.map(row=>({y:row.y,runs:row.runs.filter(r=>selectedOwners.has(r[2]))})).filter(row=>row.runs.length)}:{}),
     ownerRows:Array.from({length:rowEnd-rowStart},(_,i)=>({y:rowStart+i,complete_owner_intervals:[]}))});
+   for(const hit of allowed.territorial_contacts??[])territorialContextHits.push({...hit,
+    target_id:exclusions[hit.exclusion_index].id,negative_ordinal:exclusions[hit.exclusion_index].negative_ordinal,
+    ...(exclusions[hit.exclusion_index].provider_source_id?{provider_source_id:exclusions[hit.exclusion_index].provider_source_id}:{}),
+    original_source:territorialApplicability.find(record=>record.source_id===hit.source_id
+     &&record.pixelIndex===hit.pixelIndex&&record.y===hit.y&&record.x===hit.x
+     &&record.operand_sha256===hit.operand_sha256)?.original_source});
    const allowedRows=new Map(allowed.rows.map(row=>[row.y,row.runs]));
+   // The native view reuses its existing complete source scan and decision;
+   // owner equality alone never lets an active sibling lend its dated support.
+   const matchedCentres=new Set((allowed.source_matched_coverage_centres??[])
+    .map(p=>JSON.stringify([p.source_id,p.pixelIndex,p.y,p.x])));
+   for(const hit of exteriorHits){
+    const key=hit.pixelIndex+':'+hit.y+':'+hit.x;
+    const superseded=hit.kind==='interior'&&!waterHits.has(key)
+     &&matchedCentres.has(JSON.stringify([hit.source_id,hit.pixelIndex,hit.y,hit.x]));
+    if(!superseded)residualHits.add(key);
+    if(dated)physicalContextHits.push({...hit,resolution:superseded
+     ?'superseded-by-adopted-dated-terrestrial-centre':'retained-exterior-veto'});
+   }
    const decisionRows=diagnostic?new Map(allowed.diagnostic_rows.map(row=>[row.y,row.runs])):null;
    const classAllowed=new Map(classes.map(item=>[item.kind,item.combined?allowedRows:item.empty?new Map()
     :new Map(allowed.coverage_groups[item.group].rows.map(row=>[row.y,row.runs]))]));
@@ -981,7 +1958,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
       const segment=coverageRowsByOwner.get(run[2])?.find(r=>r.y===row.y)?.runs.find(span=>span[0]<=x&&x<span[1]);
       if(reason==='assigned_cells'&&segment&&!(classAllowed.get(segment[2])?.get(row.y)??[])
        .some(span=>span[2]===run[2]&&span[0]<=x&&x<span[1]))reason='declared-land-water-class-support';
-      recordDiagnostic(row.y,x,x+1,run[2],reason,residualKinds.get(run[2]+':'+row.y+':'+x)??0);cellReasons.push(reason);
+      recordDiagnostic(row.y,x,x+1,run[2],reason,witnessMasks.get(run[2]+':'+row.y+':'+x)??0);cellReasons.push(reason);
      }
      if(!firstFailure){
       const residual=cellReasons.includes('physical-reconstruction-residual-or-conflict');
@@ -1002,9 +1979,10 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
       'Requested native cells lack declared land/water class support');
     }checked.add(row.y+':'+run.join(':'));
    }
-   reader.used-=hitReserve+classReserve;
   }
  }
+ demand(usedExternalOriginals.size===externalOriginals.size,'Unused negative Natural Earth atom');
+ demand(usedSeamViews.size===seamViews.size,'Unused canonical seam operand');
  demand(checked.size===proposed.rows.reduce((n,row)=>n+row.runs.length,0),'Unqualified proposed native intervals');
  if(diagnostic){
   const decisions=[...diagnosticRows].sort((a,b)=>a[0]-b[0]).map(([y,runs])=>({y,runs:runs.sort((a,b)=>a[0]-b[0])}));
@@ -1022,102 +2000,258 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
     .map(([y,runs])=>({y,runs:runs.sort((a,b)=>a[0]-b[0])})),
    requested_cells:requested,supported_cells:supportedCells,held_cells:heldCells,
    original_pins:{source_evidence:binding.source_evidence,native_patch:binding.native_patch},
+   ...(adoptedFamilies.size?{provider_competitors:providerCompetitors}:{}),
+   ...(splitCompetitors.length?{split_source_competitors:splitCompetitors}:{}),
+   ...(dated?{physical_context_hits:physicalContextHits}:{}),
+   ...(evidence.territorial_applicability===undefined?{}:{territorial_contacts:territorialContextHits}),
    rule_sha256:valueSha(preimage),native_contract:evidence.native_contract,
    limitations:['Native diagnostic screening only; no authority products, current-owner-zero, acceptance or whole-source clearance.',
     'All original source, physical, query, witness and territorial limits remain retained.']};
-  const output=valueBytes(result).length;
-  demand(output<=traceReserve&&Number.isSafeInteger(reader.outputBytes)&&output<=reader.outputBytes,
-   'Complete native diagnostic output exceeds allowance');
   return result;
  }
- const ledgerRows=[...resolvedTargets.values()].map(target=>{
-  const native_rows=rowsByOwner.get(target.pixelIndex)??[];demand(native_rows.length>0,'Zero-cell source-target repair');
+ demand(rowsByOwner.size>0,'Empty source-target native patch');
+ const ledgerRows=[...resolvedTargets.values()].filter(target=>rowsByOwner.has(target.pixelIndex)).map(target=>{
+  const native_rows=rowsByOwner.get(target.pixelIndex);
   let west=262166,east=0;for(const row of native_rows)for(const run of row.runs){west=Math.min(west,run[0]);east=Math.max(east,run[1]-1);}
   const native_bounds=[(west+.5)/262166*360-180,latitudes[native_rows.at(-1).y],
    (east+.5)/262166*360-180,latitudes[native_rows[0].y]];
   return {representation:'native-cells',component_id:'source-target:'+valueSha({target_id:target.id,evidence:binding.source_evidence.sha256}),
    target_id:target.id,pixelIndex:target.pixelIndex,disposition:'assigned',base_geometry:target.base_geometry,
-   base_geometry_sha256:valueSha(target.base_geometry),source_receipt_sha256:target.source_receipt_sha256,
+   base_geometry_sha256:targetBaseSha(target),source_receipt_sha256:target.source_receipt_sha256,
    native_rows,native_bounds,native_cells:native_rows.reduce((n,row)=>n+row.runs.reduce((n,run)=>n+run[1]-run[0],0),0)};
  }).sort((a,b)=>a.component_id.localeCompare(b.component_id));
  return {source_scope_ids:ledgerRows.map(row=>row.component_id),original_ledger:{version:2,kind:'native-additive-repair-ledger-v2',
   scope_ids:ledgerRows.map(row=>row.component_id),rows:ledgerRows},source_rows:ledgerRows,
   native_proof:{native_contract:evidence.native_contract,native_patches:[{base_reference:evidence.base_reference,rows:proposed.rows}]},
   original_pins:{source_evidence:binding.source_evidence,native_patch:binding.native_patch},
+  ...(adoptedFamilies.size?{provider_competitors:providerCompetitors}:{}),
+   ...(splitCompetitors.length?{split_source_competitors:splitCompetitors}:{}),
+  ...(dated?{physical_context_hits:physicalContextHits}:{}),
+  ...(evidence.territorial_applicability===undefined?{}:{territorial_contacts:territorialContextHits}),
   limitations:['Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.',
    'Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred.']};
+}
+
+// One validated merge implementation serves literal producers and stored views.
+// Only one row cursor per patch and one pending interval are retained.
+export function mergeCompletedNativePatches(patches, size) {
+  let stored=false;
+  for (const patch of patches) {
+    demand(isNativeSequence(patch.rows), 'Complete native intervals required'); let previous = -1;
+    stored ||= !Array.isArray(patch.rows);
+    for (const row of patch.rows) {
+      demand(Number.isSafeInteger(row.y) && row.y > previous && row.y < size && isNativeSequence(row.runs) && row.runs.length,
+        'Invalid complete native row'); previous = row.y; let end = 0;
+      stored ||= !Array.isArray(row.runs);
+      for (const run of row.runs) {
+        demand(Array.isArray(run) && run.length === 3 && run.every(Number.isSafeInteger) && run[0] >= end
+          && run[1] > run[0] && run[1] <= size && run[2] > 0, 'Invalid complete native interval'); end = run[1];
+      }
+    }
+  }
+  function* mergedRuns(group) {
+    const cursors=[];let pending=null,failed=false;
+    try {
+      for(const row of group){const cursor={iterator:row.runs[Symbol.iterator]()};cursors.push(cursor);cursor.next=cursor.iterator.next();}
+      while(true){
+      let selected;
+      for(const cursor of cursors)if(!cursor.next.done&&(!selected||cursor.next.value[0]<selected.next.value[0]))selected=cursor;
+      if(!selected)break;
+      const run=selected.next.value;selected.next=selected.iterator.next();
+      demand(!pending||run[0]>=pending[1], 'Modern cells overlap the accepted cumulative patch or another original authority');
+      if(pending&&pending[1]===run[0]&&pending[2]===run[2])pending[1]=run[1];
+      else {if(pending)yield pending;pending=[...run];}
+    }if(pending)yield pending;
+    }catch(error){failed=true;throw error;}
+    finally{let cleanup;for(const cursor of cursors)try{cursor.iterator.return?.();}catch(error){cleanup??=error;}
+      if(!failed&&cleanup)throw cleanup;}
+  }
+  function* mergedRows() {
+    const cursors=[];let failed=false;
+    try {
+      for(const patch of patches){const cursor={iterator:patch.rows[Symbol.iterator]()};cursors.push(cursor);cursor.next=cursor.iterator.next();}
+      while(true){
+      let y=Infinity;for(const cursor of cursors)if(!cursor.next.done)y=Math.min(y,cursor.next.value.y);
+      if(y===Infinity)return;
+      const active=cursors.filter(cursor=>!cursor.next.done&&cursor.next.value.y===y),group=active.map(cursor=>cursor.next.value);
+      let count=0;for(const run of mergedRuns(group))count++;
+      yield {y,runs:nativeSequence(count,()=>mergedRuns(group))};
+      for(const cursor of active)cursor.next=cursor.iterator.next();
+    }}catch(error){failed=true;throw error;}
+    finally{let cleanup;for(const cursor of cursors)try{cursor.iterator.return?.();}catch(error){cleanup??=error;}
+      if(!failed&&cleanup)throw cleanup;}
+  }
+  let count=0;for(const row of mergedRows())count++;
+  const result=nativeSequence(count,mergedRows);
+  return stored?result:Array.from(result,row=>({y:row.y,runs:Array.from(row.runs)}));
+}
+
+// Reuse a reviewed completed qualification. These are the same metadata,
+// source/row joins and interval checks used by composition; no predicate replay
+// or new runtime attestation is claimed. Current owner-zero remains separate.
+export function verifyCompletedSourceTargetNativeAuthority({constructed,binding,preimage,evidence,candidate}) {
+ demand(binding?.version===1 && binding.kind==='source-target-native-custody-v1'
+  && same(Object.keys(binding).sort(), ['kind','native_patch','source_evidence','version'])
+  && same(preimage,{...binding,kind:'source-target-native-rule-v1'})
+  && constructed?.version===1 && constructed.kind==='existing-source-target-native-constructor-result'
+  && ['source_evidence','native_patch'].every(role=>constructed.inputs?.[role]?.commit===binding[role]?.commit
+   && constructed.inputs[role].path===binding[role].path)
+  && same(Object.keys(constructed.inputs??{}).sort(),['native_patch','source_evidence'])
+  && constructed.rule_sha256===valueSha(preimage)
+  && isNativeSequence(constructed.component_ids) && constructed.component_ids.length>0
+  && new Set(constructed.component_ids).size===constructed.component_ids.length
+  && same(constructed.component_ids,constructed.ledger_rows?.map(row=>row.component_id)),
+ 'Committed modern constructor scope/rule/patch differs');
+ demand(isNativeSequence(evidence.targets)&&evidence.targets.length>0
+  && new Set(evidence.targets.map(target=>target.id)).size===evidence.targets.length,
+ 'Complete original source-target roster required');
+ const targets=new Map();let targetOrdinal=0;
+ for(const target of evidence.targets){
+  const id=target.target_id??target.id,priorOrdinal=targets.get(id),prior=priorOrdinal===undefined?undefined:evidence.targets.at(priorOrdinal);
+  demand(target.source_receipt_sha256===evidence.physical_evidence?.sha256
+   &&(!prior||prior.pixelIndex===target.pixelIndex&&prior.source_family===target.source_family
+    &&same(prior.base_geometry,target.base_geometry)),'Conflicting original source target/family/receipt');
+  targets.set(id,targetOrdinal++);
+ }
+ const size=evidence.native_contract.size,candidateRows=mergeCompletedNativePatches([candidate],size);
+ const requestedOwners=new Set();for(const row of candidateRows)for(const run of row.runs)requestedOwners.add(run[2]);
+ const requestedTargets=new Map([...targets].filter(([,ordinal])=>requestedOwners.has(evidence.targets.at(ordinal).pixelIndex)));
+ for(const row of constructed.ledger_rows){
+  demand(row.representation==='native-cells'
+   &&row.component_id==='source-target:'+valueSha({target_id:row.target_id,evidence:binding.source_evidence.sha256})
+   &&!Object.hasOwn(row,'authority_sha256')&&!Object.hasOwn(row,'rule_sha256'),'Foreign or duplicate modern component');
+  const ordinal=requestedTargets.get(row.target_id),target=ordinal===undefined?undefined:evidence.targets.at(ordinal);
+  demand(target?.pixelIndex===row.pixelIndex&&same(target.base_geometry,row.base_geometry)
+   &&target.source_receipt_sha256===evidence.physical_evidence?.sha256
+   &&row.source_receipt_sha256===target.source_receipt_sha256,'Modern row changes the original source target/owner/receipt');
+ }
+ demand(constructed.ledger_rows.length===requestedTargets.size,'Modern constructor omits a requested source target');
+ demand(same(candidateRows,
+  mergeCompletedNativePatches(Array.from(constructed.ledger_rows,row=>({rows:row.native_rows})),size)),
+ 'Modern ledger intervals differ from original patch');
+ return {source_scope_ids:constructed.component_ids,
+  original_ledger:{version:2,kind:'native-additive-repair-ledger-v2',scope_ids:constructed.component_ids,rows:constructed.ledger_rows},
+  source_rows:constructed.ledger_rows,
+  native_proof:{native_contract:evidence.native_contract,native_patches:[{base_reference:evidence.base_reference,rows:candidate.rows}]},
+  original_pins:{source_evidence:binding.source_evidence,native_patch:binding.native_patch},
+  limitations:constructed.limitations};
 }
 
 // One detached authority acquisition. The returned view cannot authorize a
 // selected release: the committed hook must additionally authenticate the
 // qualified native publication, operating proof and actual current bank.
-export function readRetainedRegistryAuthority(reader, entry, observationReader) {
- // Only the package bridge supplies an observer. Carry requested descriptor
- // custody after this detached typed authority succeeds, without retaining its
- // scientific bodies or changing default readers' inventories and proof views.
- const observed=proof=>{
-  if(typeof observationReader?.captureSelectedInputs==='function')
-   observationReader.captureSelectedInputs(reader.inventory.values(),bytes=>{
-    demand(Number.isSafeInteger(bytes)&&bytes>0&&Number.isSafeInteger(observationReader.metadataBytes),
-     'Bounded selected input descriptor retention required');
-    reader.checkMemory();observationReader.checkMemory();
-    const childBytes=reader.used+bytes,parentBytes=observationReader.used+bytes,metadataBytes=observationReader.metadataBytes+bytes;
-    demand([childBytes,parentBytes,metadataBytes].every(Number.isSafeInteger)&&childBytes<=reader.phaseLimit&&parentBytes<=observationReader.phaseLimit,
-     'Selected input descriptor retention exceeds authority or parent phase');
-    reader.used=childBytes;observationReader.used=parentBytes;observationReader.metadataBytes=metadataBytes;
-   });
-  return proof;
- };
+export function readRegistryAuthorityInputs(reader,entry) {
  const singleton={version:1,kind:'retained-rule-authority-registry-v1',entries:[entry]};
  authorityRegistry(singleton);
  const pins=[entry.rule_preimage,entry.source_authority];
- const retained=pins.reduce((n,p)=>n+2*p.bytes,0);
- demand(Number.isSafeInteger(retained)&&retained<=FILE,'Registry retained whole metadata bound');
- reader.metadataBytes+=retained;reader.phase();
  const admitted=pins.map(p=>{
   pinCheck(p);let version=p.commit;
-  try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+  try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
   const actual=reader.descriptor(p.path,version);
   demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Registry authority whole mode/OID differs');
-  reader.admit(actual);return {p,version};
+  return {p,version};
  });
  const [preimage,binding]=admitted.map(({p,version})=>JSON.parse(reader.read(p.path,{version,expected:p.sha256})));
  demand(valueSha(preimage)===entry.rule_sha256,'Complete original registry preimage differs');
+ return {pins,preimage,binding};
+}
+
+export function readRetainedRegistryAuthority(reader,entry,observationReader,options={}) {
+ return driveSourceAuthority(retainedRegistryAuthority(reader,entry,observationReader,options));
+}
+function* retainedRegistryAuthority(reader, entry, observationReader, {snapshot}={}) {
+ // Retain every actual whole input consumed by a detached authority reader.
+ const observed=proof=>{
+  if(observationReader!==undefined){
+   demand(observationReader instanceof ImmutableReader&&observationReader.repo===reader.repo,'Require an actual immutable authority observer');
+   for(const pin of reader.inventory.values())if(pin.whole_body_consumed===true){
+    const key=pin.commit+':'+pin.path,prior=observationReader.inventory.get(key);
+    demand(!prior||['commit','path','mode','git_blob_oid','bytes'].every(field=>prior[field]===pin[field])
+     &&(prior.sha256===undefined||prior.sha256===pin.sha256),'Detached consumed-input custody differs');
+    observationReader.inventory.set(key,{...pin});
+   }
+   if(typeof observationReader.captureSelectedInputs==='function')
+    observationReader.captureSelectedInputs([...reader.inventory.values()].filter(pin=>pin.whole_body_consumed===true));
+  }
+  return proof;
+ };
+ const {pins,preimage,binding}=readRegistryAuthorityInputs(reader,entry);
  if(binding?.kind==='source-target-native-custody-v1'){
-  const proof=qualifySourceTargetNativeAuthority(reader,preimage,binding);
+  const whole=p=>JSON.parse(readSourceTargetBody(reader,p));
+  const proof=entry.completed_constructor===undefined
+   ?yield* evaluateSourceTargetNativeAuthority(reader,preimage,binding,false,snapshot)
+   :verifyCompletedSourceTargetNativeAuthority({constructed:whole(entry.completed_constructor),preimage,binding,
+     evidence:whole(binding.source_evidence),candidate:whole(binding.native_patch)});
   return observed(freeze({...proof,version:1,kind:'authenticated-registry-source-custody-v1',authority_sha256:entry.authority_sha256,
-   rule_sha256:entry.rule_sha256,policy_id:entry.policy_id,policy_version:entry.policy_version,pins}));
+   rule_sha256:entry.rule_sha256,policy_id:entry.policy_id,policy_version:entry.policy_version,
+   pins:entry.completed_constructor===undefined?pins:[...pins,entry.completed_constructor]}));
  }
+ demand(entry.completed_constructor===undefined,'Completed constructor requires a modern source-target authority');
  demand(binding?.version===1&&binding.kind==='original-issued-rule-source-custody-v1'&&['kind,native_proof,original_pins,version','kind,native_proof,original_pins,source_output_aliases,version'].includes(Object.keys(binding).sort().join(',')),'Unsupported original authority binding');
  const custody=readOriginalRuleAuthority(reader,binding.original_pins,binding.source_output_aliases??[]);
  demand(same(preimage,custody.rule_preimage)&&custody.rule_sha256===entry.rule_sha256,'Registry relabelled original executed rule');
  const original=originalAuthorities.get(custody).bodies;
  const codeIdentity=rows=>rows.map(p=>{demand(Object.keys(p).sort().join(',')==='bytes,path,sha256','Unsupported original complete code roster shape');return {path:p.path,bytes:p.bytes,sha256:p.sha256};});
  const programmeAuthority=readSupportedProgrammeAuthority(reader,{preimageVersion:preimage.version,sourceProfile:custody.source_rule.profile??null,sourceCode:codeIdentity(original.source_request.executed_code),nativeCode:codeIdentity(original.native_request.executed_code)});
- const source=qualifyOriginalSourceAuthority(custody),native=qualifyOriginalNativeAuthority(custody,binding.native_proof);
+ const source=yield* originalSourceAuthority(custody),native=qualifyOriginalNativeAuthority(custody,binding.native_proof);
  return observed(freeze({version:1,kind:'authenticated-registry-source-custody-v1',authority_sha256:entry.authority_sha256,
   rule_sha256:entry.rule_sha256,original_program_authority:programmeAuthority,policy_id:entry.policy_id,policy_version:entry.policy_version,
   pins,original_pins:binding.original_pins,source_scope_ids:custody.source_scope_ids,
-  source_rows:source.rows,native_proof:native,original_ledger:custody.ledger,complete_phase_bytes:reader.used,
+  source_rows:source.rows,native_proof:native,original_ledger:custody.ledger,
   limitations:['Whole original preimage, issued requests and qualified source predecessor authenticated. Policy semantics and actual current selected-bank applicability remain separately required; this view cannot authorize selection.']}));
 }
+
+// Validated ordered component indexes retain only the source cursor and count.
+// Lookups reread one component at a time; geometry is never a Map value.
+export function repairRowsIndex(source,{project=row=>row,include=()=>true}={}) {
+ demand(isNativeSequence(source),'Missing complete component sequence');
+ let size=0,previous,ordinal=0;const positions=[];
+ for(const raw of source){const row=project(raw);
+  demand(!previous||compareRepairComponents(previous,row)<0,'Foreign/duplicate/unordered component');
+  previous={component_id:row.component_id,authority_sha256:row.authority_sha256};if(include(row)){positions.push(ordinal);size++;}ordinal++;
+ }
+ const index={size,
+  at(ordinal){
+   demand(Number.isSafeInteger(ordinal),'Invalid repair component ordinal');
+   return ordinal<0||ordinal>=size?undefined:project(source.at(positions[ordinal]));
+  },
+  get(key){
+   let identity;try{const [authority_sha256,component_id]=JSON.parse(key);identity={authority_sha256,component_id};}catch{return undefined;}
+   let lo=0,hi=source.length;
+   while(lo<hi){const mid=Math.floor((lo+hi)/2),row=project(source.at(mid));
+    if(compareRepairComponents(row,identity)<0)lo=mid+1;else hi=mid;}
+   if(lo===source.length)return undefined;const row=project(source.at(lo));
+   return repairComponentKey(row)===key&&include(row)?row:undefined;
+  },
+  has(key){return index.get(key)!==undefined;},
+  *values(){for(const raw of source){const row=project(raw);if(include(row))yield row;}},
+  *keys(){for(const row of index.values())yield repairComponentKey(row);},
+  *entries(){for(const row of index.values())yield [repairComponentKey(row),row];},
+  [Symbol.iterator](){return index.entries();}
+ };return Object.freeze(index);
+}
+export const repairIndexValues=index=>nativeSequence(index.size,()=>index.values());
 
 export function normaliseRetainedRepairLedger(ledger,registry) {
  const authorities=authorityRegistry(registry),legacy=ledger?.version===1&&ledger.kind==='native-additive-repair-ledger-v1';
  demand(legacy||ledger?.version===2&&ledger.kind==='native-additive-repair-ledger-v2'&&ledger.authority_registry_sha256===valueSha(registry),'Unsupported or unbound versioned repair ledger');
- demand(Array.isArray(ledger.scope_ids)&&Array.isArray(ledger.rows)&&ledger.scope_ids.length===ledger.rows.length&&new Set(ledger.scope_ids).size===ledger.rows.length,'Incomplete complete ledger scope');
+ demand(isNativeSequence(ledger.scope_ids)&&isNativeSequence(ledger.rows)&&ledger.scope_ids.length===ledger.rows.length,'Incomplete complete ledger scope');
  let legacyEntry;if(legacy){demand(hash(ledger.rule_sha256),'Missing original v1 rule');const matches=registry.entries.filter(e=>e.rule_sha256===ledger.rule_sha256);demand(matches.length===1,'Original v1 authority omitted or ambiguous');legacyEntry=matches[0];}
- const rows=new Map();let previous='';
- for(let i=0;i<ledger.rows.length;i++){
-  const row=ledger.rows[i];demand(row.component_id===ledger.scope_ids[i]&&row.component_id>previous,'Foreign/duplicate/unordered component');previous=row.component_id;
+ let previous,i=0;
+ for(const row of ledger.rows){
+  const identity=legacy?{...row,authority_sha256:legacyEntry.authority_sha256}:row;
+  demand(typeof row.component_id==='string'&&row.component_id&&row.component_id===ledger.scope_ids.at(i)
+   &&(!previous||compareRepairComponents(previous,identity)<0),'Foreign/duplicate/unordered component');previous={component_id:identity.component_id,authority_sha256:identity.authority_sha256};i++;
   demand(['assigned','zero-cell','already-resolved','rejected','awaiting-evidence'].includes(row.disposition),'Unknown original ledger disposition');
   if(!['assigned','zero-cell'].includes(row.disposition))continue;
   const entry=legacy?legacyEntry:authorities.get(row.authority_sha256);demand(entry&&(!Object.hasOwn(row,'rule_sha256')||row.rule_sha256===entry.rule_sha256),'Per-component original authority rebound');
-  if(nativeOnlyComponent({...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256},valueSha)){rows.set(row.component_id,{...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256});continue;}
+  if(nativeOnlyComponent({...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256},valueSha)){continue;}
   demand(typeof row.target_id==='string'&&Number.isSafeInteger(row.pixelIndex)&&row.pixelIndex>0&&hash(row.base_geometry_sha256)&&hash(row.geometry_sha256)&&hash(row.source_receipt_sha256)&&valueSha(row.geometry)===row.geometry_sha256,'Missing complete original primitive identity');
   coordinateBounds(row.geometry);demand(Number.isSafeInteger(row.native_cells)&&(row.disposition==='assigned'?row.native_cells>0:row.native_cells===0),'False original native contribution');
-  rows.set(row.component_id,{...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256});
  }
+ const rows=repairRowsIndex(ledger.rows,{include:row=>['assigned','zero-cell'].includes(row.disposition),
+  project:row=>{const entry=legacy?legacyEntry:authorities.get(row.authority_sha256);
+   return entry?{...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256}:row;}});
  return {rows,authorities,registry_sha256:valueSha(registry)};
 }
 export function compareVersionedRepairLedgers(before,after,{beforeRegistry,afterRegistry}) {
@@ -1137,11 +2271,14 @@ function leastRotation(points){
   const start=Math.min(i,j);return Array.from({length:n},(_,k)=>points[(start+k)%n]).join('');
 }
 function ringKey(ring){
-  const points=ring.map(([x,y])=>bits(x)+bits(y));
+  // Rotation needs indexed key symbols, not a second coordinate graph.
+  const points=Array.from(ring,([x,y])=>bits(x)+bits(y));
   demand(points.length>=4&&points[0]===points.at(-1),'Ring binary64 closure changed');points.pop();
   const a=leastRotation(points),b=leastRotation([...points].reverse());return a<b?a:b;
 }
-function groupKey(polygon){return JSON.stringify([ringKey(polygon[0]),polygon.slice(1).map(ringKey).sort()]);}
+function groupKey(polygon){let outer;const holes=[];for(const ring of polygon){
+  const key=ringKey(ring);if(outer===undefined)outer=key;else holes.push(key);
+ }return JSON.stringify([outer,holes.sort()]);}
 export function preservedNativePolygonGroups(original,current){
   const old=rebindPolygonParts(original),next=rebindPolygonParts(current),remaining=new Map();
   for(const polygon of old){const key=groupKey(polygon);remaining.set(key,(remaining.get(key)??0)+1);}
@@ -1154,8 +2291,8 @@ export function preservedNativePolygonGroups(original,current){
 function conservativeBounds(geometry){
   const polygons=rebindPolygonParts(geometry),b=[Infinity,Infinity,-Infinity,-Infinity];let periodic=false;
   for(const polygon of polygons)for(const ring of polygon){
-    for(let i=0;i<ring.length;i++){const [x,y]=ring[i];b[0]=Math.min(b[0],x);b[1]=Math.min(b[1],y);b[2]=Math.max(b[2],x);b[3]=Math.max(b[3],y);
-      if(Math.abs(x)===180||(i&&Math.abs(x-ring[i-1][0])>180))periodic=true;}}
+    let prior;for(const [x,y] of ring){b[0]=Math.min(b[0],x);b[1]=Math.min(b[1],y);b[2]=Math.max(b[2],x);b[3]=Math.max(b[3],y);
+      if(Math.abs(x)===180||(prior!==undefined&&Math.abs(x-prior)>180))periodic=true;prior=x;}}
   if(periodic||b[2]-b[0]>180){b[0]=-180;b[2]=180;}
   return b;
 }
@@ -1197,10 +2334,15 @@ export function conserveCurrentNativeRows({originalPatches,currentRows,size}) {
 }
 
 const rebindKeys=(v,w,m)=>demand(v&&Object.keys(v).sort().join(',')===w.split(',').sort().join(','),m);
+// Historical observations remain authenticated receipt content. New products
+// need only their actual input/output and execution-outcome custody.
+const rebindReceiptKeys=(v,required,historical,m)=>{
+ const fields=required.split(','),optional=historical.split(',');
+ demand(v&&fields.every(key=>Object.hasOwn(v,key))&&Object.keys(v).every(key=>fields.includes(key)||optional.includes(key)),m);
+};
 export function nativeBaseSelection(selection) {
  demand(selection&&typeof selection==='object'&&!Array.isArray(selection),'Missing complete selected native identity');
- const {additive_release,...base}=selection;
- return base;
+ return scientificNativeSelection(selection);
 }
 
 // Only the actual checker-consumed prior view can establish earlier additions.
@@ -1212,14 +2354,21 @@ export function requirePriorAdditiveConservation(snapshot,registry,ledger) {
  demand(prior&&selectedAdditions.get(prior)?.snapshot===snapshot,
   'Require actual privately consumed prior additive selection');
  const proof=compareVersionedRepairLedgers(prior.ledger,ledger,{beforeRegistry:prior.registry,afterRegistry:registry});
- const byId=new Map(ledger.rows.map(row=>[row.component_id,row]));
+ const identity=(body,authorities)=>{
+  const legacyAuthority=body.version===1?authorities.entries.find(entry=>entry.rule_sha256===body.rule_sha256).authority_sha256:null;
+  return row=>repairComponentKey(legacyAuthority?{...row,authority_sha256:legacyAuthority}:row);
+ };
+ const nextKey=identity(ledger,registry),priorKey=identity(prior.ledger,prior.registry);
+ const byId=new Map(ledger.rows.map(row=>[nextKey(row),row]));
  const literal=row=>{if(prior.ledger.version!==1)return row;const {authority_sha256,rule_sha256,...body}=row;return body;};
- for(const row of prior.ledger.rows)demand(byId.has(row.component_id)&&same(literal(byId.get(row.component_id)),literal(row)),
+ for(const row of prior.ledger.rows)demand(byId.has(priorKey(row))&&same(literal(byId.get(priorKey(row))),literal(row)),
   'Previously selected complete row or exception changed');
  return {prior_components:proof.preserved_components,prior_authorities:proof.preserved_authorities};
 }
 
-export const CURRENT_REBIND_CODE=Object.freeze([
+// Literal historical execution vectors retain their original path inventory.
+// Current production adds the metadata reader and its pure projection helper.
+export const LEGACY_CURRENT_REBIND_CODE=Object.freeze([
  'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
  'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs',
  'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs',
@@ -1249,6 +2398,18 @@ export const CURRENT_REBIND_CODE=Object.freeze([
  'scripts/local-workspace.mjs',
  'scripts/worker-identity.mjs',
 ]);
+export const CURRENT_REBIND_CODE=Object.freeze([...LEGACY_CURRENT_REBIND_CODE,
+ 'scripts/selected-reference-metadata.mjs','src/reference-metadata.js']);
+// Historical requests select only a known complete literal profile. Their
+// actual bytes are still authenticated at the original execution commit;
+// recognizing a path vector never repins or requalifies that execution.
+export function currentRebindCodePaths(code,{requireCurrent=false}={}) {
+ demand(Array.isArray(code)&&code.every(pin=>pin&&typeof pin.path==='string'),'Foreign/incomplete current rebind execution code profile');
+ const paths=code.map(pin=>pin.path);
+ const profiles=requireCurrent?[CURRENT_REBIND_CODE]:[LEGACY_CURRENT_REBIND_CODE,CURRENT_REBIND_CODE];
+ const profile=profiles.find(expected=>same(paths,expected));
+ demand(profile,'Foreign/incomplete current rebind execution code profile');return profile;
+}
 export function currentRebindResult({baseSelection,registry,originalRows,originalPatches,currentTargets,currentRows,size}) {
  demand(Array.isArray(originalRows)&&originalRows.length>0&&Array.isArray(currentTargets)&&currentTargets.length>0,'Missing complete rebind geometry operands');
  const byTarget=new Map();let prior='';
@@ -1273,7 +2434,6 @@ export function verifyCurrentRebindExecution({request,operating,expectedCode,cus
  const names=['code_source','terminal','stderr','stdout','issued_plan'];
  rebindKeys(operating.execution_custody,names.join(','),'Incomplete external execution roster');
  for(const name of names){const pin=operating.execution_custody[name];pinCheck(pin);demand(pin.decoded_bytes===undefined,'Execution custody must be whole ordinary bodies');const raw=custody[name];demand(Buffer.isBuffer(raw)&&raw.length===pin.bytes&&sha(raw)===pin.sha256,'External execution whole body differs: '+name);}
- demand(operating.execution_custody.code_source.bytes<=1048576&&operating.execution_custody.terminal.bytes<=131072&&operating.execution_custody.stderr.bytes<=currentRebindLogLimits(request.limits).stderr&&operating.execution_custody.stdout.bytes<=currentRebindLogLimits(request.limits).stdout&&operating.execution_custody.issued_plan.bytes<=1048576,'External execution metadata/log bound');
  const proof=JSON.parse(custody.code_source),terminal=JSON.parse(custody.terminal),output=JSON.parse(custody.stdout),plan=JSON.parse(custody.issued_plan);
  rebindKeys(request.execution,'command,pre_use','Missing issued actual execution contract');
  rebindKeys(proof,'version,kind,execution_commit,command,pre_use,post_use','Foreign whole execution source proof');
@@ -1281,31 +2441,41 @@ export function verifyCurrentRebindExecution({request,operating,expectedCode,cus
  const before=proof.pre_use;rebindKeys(before,'runtime,code,entry,supervisor,plan','Incomplete actual executed closure');
  demand(same(before.code,expectedCode),'Whole actual executing code closure differs');
  const ordinary=(p,installedExecutable=false,emptyStdlib=false)=>{rebindKeys(p,'path,bytes,sha256,mode','Incomplete external executing body');demand(typeof p.path==='string'&&p.path.startsWith('/')&&!p.path.split('/').some((x,i)=>i>0&&(!x||x==='.'||x==='..'))&&Number.isSafeInteger(p.bytes)&&(p.bytes>0||(emptyStdlib&&p.bytes===0&&p.sha256==='e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'))&&hash(p.sha256)&&(installedExecutable?[420,493,511]:[420,493]).includes(p.mode),'Unsafe/untyped external execution identity');};
- demand(Array.isArray(before.runtime)&&before.runtime.length>=4&&before.runtime.length<=512,'Missing complete actual runtime');const seen=new Set();let runtimeBytes=0;
- for(const p of before.runtime){rebindKeys(p,'role,path,bytes,sha256,mode','Foreign installed runtime identity');const {role,...body}=p;ordinary(body,['node','git','time','supervisor-python'].includes(role),role==='supervisor-stdlib');demand(['node','git','time','supervisor-python','supervisor-stdlib','installed-dependency','process-inspector','resource-command'].includes(role)&&!seen.has(p.path),'Foreign/duplicate installed runtime');seen.add(p.path);runtimeBytes+=p.bytes;}
- demand(Number.isSafeInteger(runtimeBytes)&&runtimeBytes<request.limits.complete_phase_bytes&&['node','git','time','supervisor-python'].every(role=>before.runtime.filter(p=>p.role===role).length===1),'Incomplete installed runtime roles/complete admission');
+ demand(Array.isArray(before.runtime)&&before.runtime.length>=3,'Missing complete actual runtime');const seen=new Set();
+ for(const p of before.runtime){rebindKeys(p,'role,path,bytes,sha256,mode','Foreign installed runtime identity');const {role,...body}=p;ordinary(body,['node','git','time','supervisor-python'].includes(role),role==='supervisor-stdlib');demand(['node','git','time','supervisor-python','supervisor-stdlib','installed-dependency','process-inspector','resource-command'].includes(role)&&!seen.has(p.path),'Foreign/duplicate installed runtime');seen.add(p.path);}
+ demand(['node','git','supervisor-python'].every(role=>before.runtime.filter(p=>p.role===role).length===1),'Incomplete installed runtime roles');
  const dependencyRoot='coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/';
  const dependencies=expectedCode.filter(p=>p.path.startsWith(dependencyRoot));demand(dependencies.length===5&&before.runtime.filter(p=>p.role==='installed-dependency').length===5&&dependencies.every(p=>before.runtime.some(r=>r.role==='installed-dependency'&&r.path.endsWith('/node_modules/@noble/hashes/'+p.path.slice(dependencyRoot.length))&&r.bytes===p.bytes&&r.sha256===p.sha256&&r.mode===420)),'Actual installed hash import closure differs from whole source custody');
- for(const name of ['entry','supervisor','plan']){ordinary(before[name]);demand(before[name].bytes<=FILE,'Ordinary external body cap');}
+ for(const name of ['entry','supervisor','plan'])ordinary(before[name]);
  demand(before.plan.bytes===custody.issued_plan.length&&before.plan.sha256===sha(custody.issued_plan),'Actual invoked plan whole bytes differ');
  const explicitInputs=Object.hasOwn(plan,'original_inputs');
- rebindKeys(plan,'version,kind,execution_commit,base_selection,authority_registry_sha256,original_rows_sha256,original_patch_sha256s,target_sources,predecessor_proof,executed_code,limits'+(explicitInputs?',original_inputs':''),'Foreign actual issued plan');
- if(explicitInputs)demand(Array.isArray(plan.original_inputs)&&plan.original_inputs.length===2&&new Set(plan.original_inputs.map(p=>p?.path)).size===2&&plan.original_inputs.every(p=>p&&Object.keys(p).sort().join(',')==='bytes,commit,git_blob_oid,mode,path,sha256'&&p.mode==='100644'&&typeof p.path==='string'&&!p.path.includes('\\')&&!p.path.split('/').some(s=>!s||s==='.'||s==='..')&&/^[a-f0-9]{40}$/.test(p.commit)&&/^[a-f0-9]{40}$/.test(p.git_blob_oid)&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE&&/^[a-f0-9]{64}$/.test(p.sha256)),'Missing complete original input descriptors');
- demand(plan.version===1&&plan.kind==='issued-current-rebind-acquisition-plan-v1'&&plan.execution_commit===request.execution_commit&&same(plan.base_selection,request.base_selection)&&plan.authority_registry_sha256===request.authority_registry_sha256&&plan.original_rows_sha256===valueSha(request.original_rows)&&same(plan.original_patch_sha256s,request.original_patch_sha256s)&&same(plan.target_sources,request.acquisition.target_sources)&&same(plan.predecessor_proof,request.acquisition.predecessor_proof)&&same(plan.executed_code,expectedCode)&&same(plan.limits,request.limits),'Actual cold issued input plan changes complete original/current operands or bounds');
- const command=proof.command;demand(Array.isArray(command)&&(command.length===6||command.length===7&&command[3]==='--expose-gc'),'Foreign external rebind command shape');
- const boundCommand=command.length===7?command.toSpliced(3,1):command;demand(boundCommand.every(p=>typeof p==='string')&&boundCommand[0]===before.runtime.find(p=>p.role==='time').path&&['-l','-v'].includes(command[1])&&boundCommand[2]===before.runtime.find(p=>p.role==='node').path&&boundCommand[3]===before.entry.path&&boundCommand[4]===before.plan.path&&boundCommand[5].startsWith('/')&&!boundCommand[5].split('/').some((x,i)=>i>0&&(!x||x==='.'||x==='..')),'Actual external command differs from bound runtime/entry/plan/destination');
- rebindKeys(terminal,'version,kind,execution_commit,command,request_sha256,publication_sha256,code_source_sha256,exit_code,signal,guard_reason,lifetime_rss_bytes,sampled_group_peak_bytes,sampled_stop_bytes,lifetime_ceiling_bytes,elapsed_seconds,wall_limit_seconds,owned_processes_remaining,termination_events','Foreign actual terminal roster');
+ rebindReceiptKeys(plan,'version,kind,execution_commit,base_selection,authority_registry_sha256,original_rows_sha256,original_patch_sha256s,target_sources,predecessor_proof,executed_code'+(explicitInputs?',original_inputs':''),'limits','Foreign actual issued plan');
+ if(explicitInputs)demand(Array.isArray(plan.original_inputs)&&plan.original_inputs.length===2&&new Set(plan.original_inputs.map(p=>p?.path)).size===2&&plan.original_inputs.every(p=>p&&Object.keys(p).sort().join(',')==='bytes,commit,git_blob_oid,mode,path,sha256'&&p.mode==='100644'&&typeof p.path==='string'&&!p.path.includes('\\')&&!p.path.split('/').some(s=>!s||s==='.'||s==='..')&&/^[a-f0-9]{40}$/.test(p.commit)&&/^[a-f0-9]{40}$/.test(p.git_blob_oid)&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&/^[a-f0-9]{64}$/.test(p.sha256)),'Missing complete original input descriptors');
+ demand(plan.version===1&&plan.kind==='issued-current-rebind-acquisition-plan-v1'&&plan.execution_commit===request.execution_commit&&same(plan.base_selection,request.base_selection)&&plan.authority_registry_sha256===request.authority_registry_sha256&&plan.original_rows_sha256===valueSha(request.original_rows)&&same(plan.original_patch_sha256s,request.original_patch_sha256s)&&same(plan.target_sources,request.acquisition.target_sources)&&same(plan.predecessor_proof,request.acquisition.predecessor_proof)&&same(plan.executed_code,expectedCode)&&Object.hasOwn(plan,'limits')===Object.hasOwn(request,'limits')&&(!Object.hasOwn(plan,'limits')||same(plan.limits,request.limits)),'Actual cold issued input plan changes complete original/current operands');
+ const command=proof.command,plain=Array.isArray(command)&&command.length===4;
+ demand(plain||Array.isArray(command)&&(command.length===6||command.length===7&&command[3]==='--expose-gc'),'Foreign external rebind command shape');
+ const destination=command.at(-1);
+ demand(command.every(p=>typeof p==='string')&&destination.startsWith('/')&&!destination.split('/').some((x,i)=>i>0&&(!x||x==='.'||x==='..')),'Unsafe external rebind command destination');
+ if(plain)demand(command[0]===before.runtime.find(p=>p.role==='node').path&&command[1]===before.entry.path&&command[2]===before.plan.path,'Actual external command differs from bound runtime/entry/plan/destination');
+ else{
+  const boundCommand=command.length===7?command.toSpliced(3,1):command;
+  demand(before.runtime.filter(p=>p.role==='time').length===1&&boundCommand[0]===before.runtime.find(p=>p.role==='time').path&&['-l','-v'].includes(command[1])&&boundCommand[2]===before.runtime.find(p=>p.role==='node').path&&boundCommand[3]===before.entry.path&&boundCommand[4]===before.plan.path,'Historical external command differs from bound runtime/entry/plan/destination');
+ }
+ rebindReceiptKeys(terminal,'version,kind,execution_commit,command,request_sha256,publication_sha256,code_source_sha256,exit_code,signal,guard_reason,elapsed_seconds,owned_processes_remaining,termination_events','lifetime_rss_bytes,sampled_group_peak_bytes,sampled_stop_bytes,lifetime_ceiling_bytes,wall_limit_seconds','Foreign actual terminal roster');
  demand(terminal.version===1&&terminal.kind==='current-rebind-external-terminal-v1'&&terminal.execution_commit===request.execution_commit&&same(terminal.command,command)&&terminal.request_sha256===operating.request_sha256&&terminal.publication_sha256===operating.publication_sha256&&terminal.code_source_sha256===operating.execution_custody.code_source.sha256&&Number.isSafeInteger(terminal.exit_code)&&terminal.exit_code===0&&terminal.signal===null&&terminal.guard_reason===null&&Array.isArray(terminal.owned_processes_remaining)&&terminal.owned_processes_remaining.length===0&&Array.isArray(terminal.termination_events)&&terminal.termination_events.length===0,'Failed/foreign external command or surviving owned process');
- demand(Number.isSafeInteger(terminal.lifetime_rss_bytes)&&terminal.lifetime_rss_bytes>0&&terminal.lifetime_rss_bytes<=request.limits.rss_bytes&&Number.isFinite(terminal.elapsed_seconds)&&terminal.elapsed_seconds>=0&&terminal.elapsed_seconds<=request.limits.wall_seconds,'External actual lifetime/wall bound');
- demand(terminal.lifetime_rss_bytes===operating.lifetime_rss_bytes&&terminal.elapsed_seconds===operating.elapsed_seconds&&terminal.lifetime_ceiling_bytes===request.limits.rss_bytes&&terminal.wall_limit_seconds===request.limits.wall_seconds&&Number.isSafeInteger(terminal.sampled_stop_bytes)&&terminal.sampled_stop_bytes===request.limits.sampled_stop_bytes&&Number.isSafeInteger(terminal.sampled_group_peak_bytes)&&terminal.sampled_group_peak_bytes>0&&terminal.sampled_group_peak_bytes<terminal.sampled_stop_bytes,'External numeric journal differs from actual operating bounds');
- const stderr=custody.stderr.toString('utf8'),rss=command[1]==='-l'?[...stderr.matchAll(/^\s*(\d+)\s+maximum resident set size\s*$/gm)]:[...stderr.matchAll(/^\s*Maximum resident set size \(kbytes\):\s*(\d+)\s*$/gm)];
- demand(rss.length===1&&Number(rss[0][1])*(command[1]==='-l'?1:1024)===terminal.lifetime_rss_bytes,'Raw external time lifetime RSS differs');
- const real=command[1]==='-l'?[...stderr.matchAll(/^\s*(\d+(?:\.\d+)?)\s+real\s+\d+(?:\.\d+)?\s+user\s+\d+(?:\.\d+)?\s+sys\s*$/gm)]:[...stderr.matchAll(/^\s*Elapsed \(wall clock\) time \(h:mm:ss or m:ss\):\s*(\d+(?::\d+){1,2}(?:\.\d+)?)\s*$/gm)];
- demand(real.length===1,'Missing/duplicate raw external time wall duration');
- const elapsed=real[0][1].split(':').reduce((n,x)=>n*60+Number(x),0);
- // External time prints centiseconds. The parent journal spans the entire
- // command; allow only that display rounding, not a relaxed wall deadline.
- demand(Number.isFinite(elapsed)&&elapsed>=0&&elapsed<=request.limits.wall_seconds&&elapsed<=terminal.elapsed_seconds+0.01,'Raw external time wall duration differs from actual journal/bound');
+ demand(Number.isFinite(terminal.elapsed_seconds)&&terminal.elapsed_seconds>=0&&terminal.elapsed_seconds===operating.elapsed_seconds,'External elapsed journal differs from actual operating observation');
+ // Old immutable timed receipts retain their original observation identity.
+ // New plain launches bind monotonic elapsed time in the terminal only.
+ if(!plain){
+  const stderr=custody.stderr.toString('utf8'),rss=command[1]==='-l'?[...stderr.matchAll(/^\s*(\d+)\s+maximum resident set size\s*$/gm)]:[...stderr.matchAll(/^\s*Maximum resident set size \(kbytes\):\s*(\d+)\s*$/gm)];
+  if(Object.hasOwn(terminal,'lifetime_rss_bytes'))demand(Number.isSafeInteger(terminal.lifetime_rss_bytes)&&terminal.lifetime_rss_bytes>0&&terminal.lifetime_rss_bytes===operating.lifetime_rss_bytes&&rss.length===1&&Number(rss[0][1])*(command[1]==='-l'?1:1024)===terminal.lifetime_rss_bytes,'Historical raw external time RSS observation differs');
+  const real=command[1]==='-l'?[...stderr.matchAll(/^\s*(\d+(?:\.\d+)?)\s+real\s+\d+(?:\.\d+)?\s+user\s+\d+(?:\.\d+)?\s+sys\s*$/gm)]:[...stderr.matchAll(/^\s*Elapsed \(wall clock\) time \(h:mm:ss or m:ss\):\s*(\d+(?::\d+){1,2}(?:\.\d+)?)\s*$/gm)];
+  demand(real.length===1,'Missing/duplicate raw external time wall duration');
+  const elapsed=real[0][1].split(':').reduce((n,x)=>n*60+Number(x),0);
+  // External time prints centiseconds. The parent journal spans the entire
+  // command; allow only that display rounding.
+  demand(Number.isFinite(elapsed)&&elapsed>=0&&elapsed<=terminal.elapsed_seconds+0.01,'Raw external time wall duration differs from actual journal');
+ }
  rebindKeys(output,'version,kind,execution_commit,request_sha256,publication_sha256,result_sha256','Foreign actual child stdout');
  demand(output.version===1&&output.kind==='current-rebind-child-publication-v1'&&output.execution_commit===request.execution_commit&&output.request_sha256===operating.request_sha256&&output.publication_sha256===operating.publication_sha256&&output.result_sha256===custody.result_sha256,'Raw child publication/output identity differs');
  return {runtime:before.runtime,command,code_source_sha256:operating.execution_custody.code_source.sha256,terminal_sha256:operating.execution_custody.terminal.sha256};
@@ -1329,40 +2499,29 @@ export function currentRebindAcquisitionIdentity(acquisition) {
  })};
 }
 
-export function currentRebindLogLimits(limits) {
- const out={stdout:limits?.stdout_bytes??8192,stderr:limits?.stderr_bytes??40960,monitor:limits?.monitor_bytes??1048576};
- demand(Object.values(out).every(n=>Number.isSafeInteger(n)&&n>0&&n<=FILE),'Invalid bounded runtime log allowance');
- return out;
-}
-export function validateCurrentRebindLimits(limits) {
- const required=['complete_phase_bytes','descriptors','output_bytes','rss_bytes','sampled_stop_bytes','wall_seconds'],optional=['stdout_bytes','stderr_bytes','monitor_bytes'];
- demand(limits&&required.every(k=>Object.hasOwn(limits,k))&&Object.keys(limits).every(k=>required.includes(k)||optional.includes(k))&&Object.values(limits).every(n=>Number.isSafeInteger(n)&&n>0),'Untyped or foreign rebind limits');
- demand(limits.descriptors<=512&&Number.isSafeInteger(7*limits.output_bytes)&&limits.sampled_stop_bytes<=limits.rss_bytes,'Rebind admission exceeds supported finite bounds');
- currentRebindLogLimits(limits);return limits;
-}
-
-export function verifyCurrentRebindProducts({certificate,request,facts,publication,operating,result,baseSelection,registry,originalRows,originalPatches,size,expectedCode,bodyPins,acquired,executionCustody,currentPhaseLimit=processingAllowance().phaseBytes}) {
- for(const [name,body]of Object.entries({request,facts,publication,operating,result}))demand(body&&bodyPins[name]?.sha256===valueSha(body)&&bodyPins[name]?.bytes===valueBytes(body).length,'Whole canonical rebind product bytes differ: '+name);
+export function verifyCurrentRebindProducts({certificate,request,facts,publication,operating,result,baseSelection,registry,originalRows,originalPatches,size,expectedCode,bodyPins,acquired,executionCustody}) {
+ for(const [name,body]of Object.entries({request,facts,publication,operating,result})){
+  const pin=body&&bodyPins[name],identity=body&&valueIdentity(body);
+  demand(body&&pin?.sha256===identity.sha256&&pin?.bytes===identity.bytes,'Whole canonical rebind product bytes differ: '+name);
+ }
  rebindKeys(certificate,'version,kind,execution_commit,base_selection,authority_registry_sha256,request,facts,publication,operating,result','Foreign current rebind certificate');
  demand(certificate.version===1&&/^[a-f0-9]{40}$/.test(certificate.execution_commit)&&certificate.execution_commit===request.execution_commit&&certificate.kind==='qualified-native-additive-current-bank-rebind-v1'&&same(certificate.base_selection,baseSelection)&&certificate.authority_registry_sha256===valueSha(registry),'Stale current rebind certificate');
- rebindKeys(request,'version,kind,execution_commit,executed_code,base_selection,authority_registry_sha256,original_rows,original_patch_sha256s,current_targets,current_rows,acquisition,execution,size,limits','Foreign issued rebind request');
+ rebindReceiptKeys(request,'version,kind,execution_commit,executed_code,base_selection,authority_registry_sha256,original_rows,original_patch_sha256s,current_targets,current_rows,acquisition,execution,size','limits','Foreign issued rebind request');
  demand(request.version===1&&request.kind==='issued-native-additive-current-bank-rebind-v1'&&/^[a-f0-9]{40}$/.test(request.execution_commit)&&same(request.executed_code,expectedCode)&&same(request.base_selection,baseSelection)&&request.authority_registry_sha256===valueSha(registry)&&same(request.original_rows,originalRows)&&same(request.original_patch_sha256s,originalPatches.map(valueSha))&&request.size===size,'Issued rebind changes original authority, current base or trusted method');
- validateCurrentRebindLimits(request.limits);
  demand(acquired&&same(acquired.base_selection,baseSelection)&&same(acquired.current_targets,request.current_targets)&&same(acquired.current_rows,request.current_rows),'Current operands differ from independently acquired selected bodies');
  rebindKeys(request.acquisition,'version,kind,target_sources,source_inputs,native_inputs,predecessor_proof,predecessor_rows,manifest_sha256','Incomplete current rebind acquisition custody');
  demand(request.acquisition.version===1&&request.acquisition.kind==='complete-selected-rebind-inputs-v1'&&same(currentRebindAcquisitionIdentity(request.acquisition),currentRebindAcquisitionIdentity(acquired.acquisition)),'Issued acquisition is not the complete independently consumed source/native roster');
- demand(Array.isArray(acquired.acquisition_phases)&&acquired.acquisition_phases.length>0&&acquired.acquisition_phases.every(p=>Number.isSafeInteger(p.complete_phase_bytes)&&p.complete_phase_bytes>0&&p.complete_phase_bytes<=currentPhaseLimit&&Number.isSafeInteger(p.descriptors)&&p.descriptors>0&&p.descriptors<=request.limits.descriptors),'Independent acquisition exceeds consumer bounds');
+ demand(Array.isArray(acquired.acquisition_phases)&&acquired.acquisition_phases.length>0,'Missing independent complete acquisition custody');
  const expected=currentRebindResult({baseSelection,registry,originalRows,originalPatches,currentTargets:request.current_targets,currentRows:request.current_rows,size});
  demand(same(result,expected),'Complete current rebind result/inverse differs');
- rebindKeys(facts,'version,kind,execution_commit,request_sha256,result_sha256,complete_phase_bytes,descriptors,acquisition_sha256,acquisition_phases','Foreign rebind facts');
- demand(facts.version===1&&facts.kind==='native-additive-current-bank-rebind-facts-v1'&&facts.execution_commit===request.execution_commit&&facts.request_sha256===bodyPins.request.sha256&&facts.result_sha256===bodyPins.result.sha256&&Number.isSafeInteger(facts.complete_phase_bytes)&&facts.complete_phase_bytes>0&&facts.complete_phase_bytes<=request.limits.complete_phase_bytes&&Number.isSafeInteger(facts.descriptors)&&facts.descriptors>0&&facts.descriptors<=request.limits.descriptors,'Rebind facts do not bind actual request/result/admission');
+ rebindReceiptKeys(facts,'version,kind,execution_commit,request_sha256,result_sha256,acquisition_sha256,acquisition_phases','complete_phase_bytes,descriptors','Foreign rebind facts');
+ demand(facts.version===1&&facts.kind==='native-additive-current-bank-rebind-facts-v1'&&facts.execution_commit===request.execution_commit&&facts.request_sha256===bodyPins.request.sha256&&facts.result_sha256===bodyPins.result.sha256,'Rebind facts do not bind actual request/result');
  rebindKeys(publication,'version,kind,execution_commit,request_sha256,outputs','Foreign rebind publication');
- demand(facts.acquisition_sha256===valueSha(request.acquisition)&&Array.isArray(facts.acquisition_phases)&&facts.acquisition_phases.length===acquired.acquisition_phases.length&&facts.acquisition_phases.every((p,i)=>{const actual=acquired.acquisition_phases[i];const {complete_phase_bytes,descriptors,...scope}=p,{complete_phase_bytes:a,descriptors:b,...actualScope}=actual;return same(scope,actualScope)&&Number.isSafeInteger(complete_phase_bytes)&&complete_phase_bytes>0&&complete_phase_bytes<=request.limits.complete_phase_bytes&&Number.isSafeInteger(descriptors)&&descriptors>0&&descriptors<=request.limits.descriptors;}),'Original executed acquisition phases/whole input custody differ');
+ demand(facts.acquisition_sha256===valueSha(request.acquisition)&&Array.isArray(facts.acquisition_phases)&&facts.acquisition_phases.length===acquired.acquisition_phases.length&&facts.acquisition_phases.every((p,i)=>{const actual=acquired.acquisition_phases[i];const {complete_phase_bytes,descriptors,...scope}=p,{complete_phase_bytes:a,descriptors:b,...actualScope}=actual;return same(scope,actualScope);}),'Original executed acquisition phases/whole input custody differ');
  demand(publication.version===1&&publication.kind==='native-additive-current-bank-rebind-publication-v1'&&publication.execution_commit===request.execution_commit&&publication.request_sha256===bodyPins.request.sha256&&same(publication.outputs,{facts:{path:'facts.json',bytes:bodyPins.facts.bytes,sha256:bodyPins.facts.sha256},result:{path:'result.json',bytes:bodyPins.result.bytes,sha256:bodyPins.result.sha256}}),'Incomplete rebind publication output bindings');
- rebindKeys(operating,'version,kind,execution_commit,request_sha256,publication_sha256,exit_code,signal,owned_processes_remaining,lifetime_rss_bytes,elapsed_seconds,execution_custody','Foreign rebind operating proof');
- demand(operating.version===1&&operating.kind==='native-additive-current-bank-rebind-operating-v1'&&operating.execution_commit===request.execution_commit&&operating.request_sha256===bodyPins.request.sha256&&operating.publication_sha256===bodyPins.publication.sha256&&Number.isSafeInteger(operating.exit_code)&&operating.exit_code===0&&operating.signal===null&&Array.isArray(operating.owned_processes_remaining)&&operating.owned_processes_remaining.length===0&&Number.isSafeInteger(operating.lifetime_rss_bytes)&&operating.lifetime_rss_bytes>0&&operating.lifetime_rss_bytes<=request.limits.rss_bytes&&Number.isFinite(operating.elapsed_seconds)&&operating.elapsed_seconds>=0&&operating.elapsed_seconds<=request.limits.wall_seconds,'Unqualified rebind operating custody');
+ rebindReceiptKeys(operating,'version,kind,execution_commit,request_sha256,publication_sha256,exit_code,signal,owned_processes_remaining,elapsed_seconds,execution_custody','lifetime_rss_bytes','Foreign rebind operating proof');
+ demand(operating.version===1&&operating.kind==='native-additive-current-bank-rebind-operating-v1'&&operating.execution_commit===request.execution_commit&&operating.request_sha256===bodyPins.request.sha256&&operating.publication_sha256===bodyPins.publication.sha256&&Number.isSafeInteger(operating.exit_code)&&operating.exit_code===0&&operating.signal===null&&Array.isArray(operating.owned_processes_remaining)&&operating.owned_processes_remaining.length===0&&Number.isFinite(operating.elapsed_seconds)&&operating.elapsed_seconds>=0,'Unqualified rebind operating custody');
  verifyCurrentRebindExecution({request,operating,expectedCode,custody:{...executionCustody,result_sha256:bodyPins.result.sha256}});
- demand(bodyPins.result.bytes<=request.limits.output_bytes,'Whole rebind output exceeds issued bound');
  return result;
 }
 
@@ -1390,46 +2549,19 @@ export function currentRebindSourceView(snapshot) {
  if(snapshot.selection.selected_geography)return selectedGeometrySourceAlias(snapshot);
  return new SelectedGeometrySources(snapshot);
 }
-// Reclaim only temporaries from a completed whole frame. The retained table,
-// targets, source/native custody, rows and proofs remain live and charged.
-const rebindGc=process.execArgv.length===1&&process.execArgv[0]==='--expose-gc'?globalThis.gc:null;
-export function reclaimCompletedRebindFrame() {
- if(process.execArgv.includes('--expose-gc')) {
-  demand(process.execArgv.length===1&&typeof rebindGc==='function'&&globalThis.gc===rebindGc&&Function.prototype.toString.call(rebindGc)==='function gc() { [native code] }','Require exact exposed Node reclamation callable');
-  rebindGc();
-  demand(globalThis.gc===rebindGc,'Reclamation callable drift');
- }
-}
-// Versioned bounded serialization correction: acquisition keeps its separate
-// 4 MiB result reserve. This completed-frame reset retains its last conservative
-// metadata charge (including the table and earlier rows), but no longer carries
-// the completed native input buffers. All returned/current output graphs and
-// canonical copies, UTF-16 JSON text and retained encoded buffers are reserved
-// here before constructing/hashing any final product. Seven bytes per admitted
-// UTF-8 byte is a conservative logical representation reserve, not measured RSS.
-export function admitCurrentRebindOutputFrame(reader,limits){
- demand(reader instanceof ImmutableReader&&limits&&Number.isSafeInteger(limits.output_bytes)&&limits.output_bytes>0&&Number.isSafeInteger(7*limits.output_bytes)&&Number.isSafeInteger(limits.complete_phase_bytes)&&limits.complete_phase_bytes>0&&limits.complete_phase_bytes<=reader.phaseLimit,'Bounded complete product output frame required');
- reader.outputBytes=7*limits.output_bytes;reader.phase();
- demand(reader.used<=limits.complete_phase_bytes,'Complete retained product serialization frame exceeds issued child bound before products');
- return reader.used;
-}
-export function acquireCurrentRebindOperands(snapshot,registry,originalRows,originalPatches,{targetSources,predecessorProof=null,carriedMetadataBytes=0,outputLimits=null}={}) {
+export function acquireCurrentRebindOperands(snapshot,registry,originalRows,originalPatches,{targetSources,predecessorProof=null}={}) {
  demand(snapshot?.reader instanceof ImmutableReader,'Require actual current selected reader');
  const resolver=currentRebindSourceView(snapshot),reader=snapshot.reader;
- demand(Number.isSafeInteger(carriedMetadataBytes)&&carriedMetadataBytes>=0&&carriedMetadataBytes<=reader.phaseLimit,'Incomplete retained rebind reader metadata');
  // The private snapshot authenticates the selected base and optional additive
  // hook. Acquisition reads only its base manifest/source roster, never a delta.
  const baseSelection=nativeBaseSelection(snapshot.selection);
  const targets=new Map();for(const row of originalRows){demand(['assigned','zero-cell'].includes(row.disposition),'Unsupported original rebind row');const owner=snapshot.owners[row.pixelIndex-1];demand(owner?.id===row.target_id,'Current rebind target owner differs');targets.set(row.target_id,owner);}
  const phases=[],sourceInputs=[],nativeInputs=[],currentTargets=[];let predecessorRows=[];
  const bodyIdentity=({commit,...p})=>p;
- const sourceMetadata=valueBytes({bank:resolver.bank??null,paths:resolver.paths,sources:resolver.sources,release:resolver.release,replacements:[...resolver.replacements],image:resolver.image?{index:resolver.image.index,map:resolver.image.map}:null}).length;
- const retained=()=>carriedMetadataBytes+8*1024*1024+2*(snapshot.metadataBytes+sourceMetadata+valueBytes({registry,originalRows,originalPatches,currentTargets,sourceInputs,nativeInputs,predecessorRows,phases,receipt_provenance:snapshot.receiptProvenance??null,prior_acquisition_phases:snapshot.acquisitionPhases??null,reader_inventory:[...reader.inventory]}).length)+(snapshot.acquisition_buffer_bytes??0);
- const begin=extra=>{reader.metadataBytes=retained()+extra;reader.outputBytes=4*1024*1024;reader.phase();};
  // Each whole source frame completes before another starts. Only complete
  // selected targets and its exact whole input descriptor survive the frame.
  const sourceFrame=name=>{
-  const actual=resolver.read(name),found=[];
+  const actual=resolver.readNativeReferenceSource(name),found=[];
   for(const feature of actual.collection.features){const id=feature.id??feature.properties?.id,owner=targets.get(id);if(!owner)continue;
    demand(sourceByTarget.get(id)===name&&feature.properties?.parent_id===owner.province_id,'Current target containing source/parent differs');coordinateBounds(feature.geometry);
    found.push({target_id:id,pixelIndex:owner.index,geometry:feature.geometry,geometry_sha256:valueSha(feature.geometry)});}
@@ -1441,36 +2573,34 @@ export function acquireCurrentRebindOperands(snapshot,registry,originalRows,orig
  demand(Array.isArray(targetSources)&&targetSources.length===targets.size,'Missing complete target source bindings');
  const sourceByTarget=new Map();for(const entry of targetSources){rebindKeys(entry,'target_id,path','Foreign target source binding');demand(targets.has(entry.target_id)&&resolver.paths.includes(entry.path)&&!sourceByTarget.has(entry.target_id),'Foreign/duplicate target source');sourceByTarget.set(entry.target_id,entry.path);}
  const paths=resolver.paths.filter(name=>targetSources.some(entry=>entry.path===name));
- for(const name of paths){const declared=resolver.sources[resolver.paths.indexOf(name)];begin(declared.decoded_bytes??declared.bytes);const frame=sourceFrame(name);currentTargets.push(...frame.found);sourceInputs.push(frame.input);phases.push({kind:'complete-current-target-source',path:name,complete_phase_bytes:reader.used,descriptors:reader.charged.size});reclaimCompletedRebindFrame();}
+ for(const name of paths){const frame=sourceFrame(name);currentTargets.push(...frame.found);sourceInputs.push(frame.input);phases.push({kind:'complete-current-target-source',path:name});}
  currentTargets.sort((a,b)=>a.target_id<b.target_id?-1:a.target_id>b.target_id?1:0);
  demand(currentTargets.length===targets.size&&new Set(currentTargets.map(t=>t.target_id)).size===targets.size,'Missing/duplicate complete current targets');
  const continuity=snapshot.manifest.provenance?.successor_continuation;
  if(continuity?.issue===1520){
   demand(continuity.selected_old_new_rows===60&&continuity.added_cells===141&&continuity.removed_cells===0&&continuity.reassigned_cells===0,'Foreign selected Arctic continuation');
   pinCheck(predecessorProof);demand(predecessorProof.bytes===1990604&&predecessorProof.sha256==='d8af3b2eaf77f4fa948c01937ccb107f3d7eaa833ea4bac1d4480c633d509794'&&predecessorProof.decoded_bytes===undefined,'Missing exact whole qualified Arctic predecessor proof');
-  begin(2*predecessorProof.bytes);
-  const predecessorFrame=()=>{let version=predecessorProof.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}const actual=reader.descriptor(predecessorProof.path,version);demand(actual.mode===predecessorProof.mode&&actual.git_blob_oid===predecessorProof.git_blob_oid&&actual.bytes===predecessorProof.bytes,'Predecessor whole original mode/OID/bytes differ');return retainedArcticNativeRows(JSON.parse(reader.read(predecessorProof.path,{version,expected:predecessorProof.sha256})));};
-  predecessorRows=predecessorFrame();phases.push({kind:'complete-qualified-arctic-predecessor',path:predecessorProof.path,sha256:predecessorProof.sha256,complete_phase_bytes:reader.used,descriptors:reader.charged.size});reclaimCompletedRebindFrame();
+  const predecessorFrame=()=>{let version=predecessorProof.commit;try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}const actual=reader.descriptor(predecessorProof.path,version);demand(actual.mode===predecessorProof.mode&&actual.git_blob_oid===predecessorProof.git_blob_oid&&actual.bytes===predecessorProof.bytes,'Predecessor whole original mode/OID/bytes differ');return retainedArcticNativeRows(JSON.parse(reader.read(predecessorProof.path,{version,expected:predecessorProof.sha256})));};
+  predecessorRows=predecessorFrame();phases.push({kind:'complete-qualified-arctic-predecessor',path:predecessorProof.path,sha256:predecessorProof.sha256});
  }else demand(predecessorProof===null,'Invented predecessor conservation proof');
  const manifest=snapshot.manifest,root=snapshot.selection.manifest_path.slice(0,snapshot.selection.manifest_path.lastIndexOf('/')+1),image=snapshot.image;
  const load=pin=>{
   const name=root+pin.path,ordinary=reader.git('ls-tree','-z',reader.version,'--',name).length>0;
-  const representations=pin.decoded_bytes*(ordinary?2:3);demand(reader.used+representations<=reader.phaseLimit,'Current complete native representations exceed prospective bound');reader.used+=representations;
   if(!nativeInputs.some(p=>p.logical_path===name)){
    let custody;if(ordinary)custody={kind:'ordinary-native-body',pin:{...bodyIdentity(reader.descriptor(name)),sha256:pin.sha256}};
    else{demand(image instanceof NativeAssetImage,'Missing genuine selected native transport');const member=image.index.files.find(p=>p.path===pin.path);demand(member,'Missing complete native member');custody={kind:'selected-native-transport',index:manifest.native_asset_transport.index,member,fragments:image.index.parts.filter(p=>p.offset<member.offset+member.bytes&&member.offset<p.offset+p.decoded_bytes).map(p=>({...p,pin:bodyIdentity(reader.descriptor(image.directory+'/'+p.path))}))};}
    nativeInputs.push({logical_path:name,asset:pin,custody});
   }
-  let encoded;if(ordinary)encoded=reader.read(name,{expected:pin.sha256,decoded:pin.decoded_bytes});
+  let encoded;if(ordinary)encoded=reader.read(name,{expected:pin.sha256});
   else{demand(image instanceof NativeAssetImage,'Current native rebind requires selected ordinary or authenticated native image');encoded=image.logical(name,pin);}
   demand(encoded.length===pin.bytes&&sha(encoded)===pin.sha256,'Current native whole encoded body differs');
   const raw=gunzipSync(encoded,{maxOutputLength:pin.decoded_bytes});demand(raw.length===pin.decoded_bytes,'Current native whole decoded body differs');
   const words=unshuffleOwnershipBytes(raw,pin.words),canonical=Buffer.alloc(words.byteLength);for(let i=0;i<words.length;i++)canonical.writeUInt32LE(words[i],i*4);
   demand(sha(canonical)===pin.decoded_sha256,'Current native whole canonical words differ');return words;
  };
- const rowPins=manifest.parts.filter(p=>p.kind==='rows');demand(rowPins.length===1,'Unsupported split current row table');begin(0);const table=load(rowPins[0]);
+ const rowPins=manifest.parts.filter(p=>p.kind==='rows');demand(rowPins.length===1,'Unsupported split current row table');const table=load(rowPins[0]);
  demand(table.length===manifest.size*2,'Incomplete current native row table');let offset=0;for(let y=0;y<manifest.size;y++){demand(table[y*2]===offset,'Current whole row partition differs');offset+=table[y*2+1];}demand(offset*2===manifest.runWords,'Current native row table omits runs');
- phases.push({kind:'complete-current-native-row-table',complete_phase_bytes:reader.used,descriptors:reader.charged.size});reclaimCompletedRebindFrame();
+ phases.push({kind:'complete-current-native-row-table'});
  const neededRows=[...new Set(originalPatches.flatMap(p=>p.rows.map(row=>row.y)).concat(predecessorRows.map(row=>row.y)))].sort((a,b)=>a-b),currentRows=[],groups=new Map();
  for(const y of neededRows){demand(Number.isSafeInteger(y)&&y>=0&&y<manifest.size,'Foreign original row');const start=table[y*2]*2,end=start+table[y*2+1]*2;
   const parts=manifest.parts.filter(p=>p.kind==='runs'&&start<p.offset+p.words&&p.offset<end),key=valueSha(parts);
@@ -1482,153 +2612,111 @@ export function acquireCurrentRebindOperands(snapshot,registry,originalRows,orig
   return group.rows.map(({y,start,end})=>{const runs=[];for(const pin of group.parts){const words=cache.get(pin.path);for(let i=Math.max(start,pin.offset);i<Math.min(end,pin.offset+pin.words);i+=2){const x=words[i-pin.offset],z=words[i-pin.offset+1],bits=manifest.coordinateBits,mask=2**bits-1;const run=[x&mask,(z&mask)+1,(x>>>bits)+(z>>>bits)*2**(32-bits)];demand(run[1]<=manifest.size&&snapshot.owners[run[2]-1],'Current row has foreign coordinate/owner');runs.push(run);}}
    demand(runs.length===table[y*2+1],'Incomplete current containing word inverse');return {y,runs};});
  };
- for(const group of groups.values()){begin(table.byteLength+2*valueBytes(currentRows).length);
-  const rowReserve=group.rows.reduce((n,{y})=>n+table[y*2+1]*24+64,0);demand(reader.used+rowReserve<=reader.phaseLimit,'Current complete row output exceeds phase');reader.used+=rowReserve;
-  const rows=groupFrame(group);currentRows.push(...rows);phases.push({kind:'complete-current-native-window-group',rows:group.rows.map(row=>row.y),parts:group.parts.map(pin=>pin.path),complete_phase_bytes:reader.used,descriptors:reader.charged.size});
-  reclaimCompletedRebindFrame();
+ for(const group of groups.values()){
+  const rows=groupFrame(group);currentRows.push(...rows);phases.push({kind:'complete-current-native-window-group',rows:group.rows.map(row=>row.y),parts:group.parts.map(pin=>pin.path)});
  }
  currentRows.sort((a,b)=>a.y-b.y);
  const candidateIds=new Set(originalPatches.flatMap(p=>p.rows.map(row=>row.y))),candidateRows=currentRows.filter(row=>candidateIds.has(row.y));
  demand(predecessorRows.every(prior=>same(prior,currentRows.find(row=>row.y===prior.y))),'Current native bank loses/reassigns a complete earlier Arctic row');
- // Input frames retain their original 4 MiB reserves. The complete result
- // and its subsequent serialization have a different lifetime: table, groups,
- // all current rows and earlier carried graphs are still live at this point.
- // Reserve first before measuring the newly complete row/group carry, then
- // admit that full measured carry before building the numerical result.
- if(outputLimits){
-  admitCurrentRebindOutputFrame(reader,outputLimits);
-  reader.metadataBytes=retained()+table.byteLength+2*valueBytes({currentRows,groups:[...groups.values()]}).length;
-  admitCurrentRebindOutputFrame(reader,outputLimits);
- }
  const result=currentRebindResult({baseSelection,registry,originalRows,originalPatches,currentTargets,currentRows:candidateRows,size:manifest.size});
- return freeze({base_selection:baseSelection,current_targets:currentTargets,current_rows:candidateRows,source_inputs:sourceInputs,acquisition:{version:1,kind:'complete-selected-rebind-inputs-v1',target_sources:targetSources,source_inputs:sourceInputs,native_inputs:nativeInputs,predecessor_proof:predecessorProof,predecessor_rows:predecessorRows,manifest_sha256:valueSha(manifest)},acquisition_phases:phases,input_inventory:[...reader.inventory.values()].map(pin=>({...pin})),result,
+ return freeze({base_selection:baseSelection,current_targets:currentTargets,current_rows:candidateRows,source_inputs:sourceInputs,acquisition:{version:1,kind:'complete-selected-rebind-inputs-v1',target_sources:targetSources,source_inputs:sourceInputs,native_inputs:nativeInputs,predecessor_proof:predecessorProof,predecessor_rows:predecessorRows,manifest_sha256:valueSha(manifest)},acquisition_phases:phases,input_inventory:[...reader.inventory.values()].filter(pin=>pin.whole_body_consumed===true).map(pin=>({...pin})),result,
   limits:['Actual selected before-state acquisition and exact applicability only. Original registry/source/native authority must also be authenticated by the committed reader; no activation or physical approval.','External cold operating qualification and repeated whole outputs remain mandatory before publishing a current_rebind certificate.']});
 }
 
 // A current rebind is complete data custody plus independently recomputed
 // applicability. It never replaces the original registry/source authority.
-// Preserve completed-frame peaks after a later complete phase resets used.
-export function retainCurrentRebindPhasePeak(reader,priorPhaseBytes,outputPhaseBytes,acquisitionPhases){
- reader.used=Math.max(priorPhaseBytes,outputPhaseBytes,reader.used,...acquisitionPhases.map(p=>p.complete_phase_bytes));
- return reader.used;
+export function readCurrentRebindCustody(reader,pin,options) {
+ return driveSourceAuthority(currentRebindCustody(reader,pin,options));
 }
-// Serialization scratch belongs to this call. Keep reader.used's measured
-// peak for custody, but do not charge completed serialization to later phases.
-export function withCurrentRebindOutputReserve(reader,run) {
- const outputBytes=reader.outputBytes;
- try{return run();}finally{reader.outputBytes=outputBytes;}
-}
-// Replaying an authenticated receipt consumes current resources. Its historical
-// producer grant remains evidence to verify, never authority for this allocation.
-export function currentRebindReadbackLimits(reader,roster) {
- demand(reader instanceof ImmutableReader,'Require actual current readback reader');
- const products=roster.filter(({name})=>['request','facts','result','publication'].includes(name));
- demand(products.length===4&&new Set(products.map(p=>p.name)).size===4,'Incomplete current readback products');
- const output_bytes=products.reduce((n,{p})=>{demand(Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE,'Invalid whole readback product');return n+p.bytes;},0);
- return {output_bytes,complete_phase_bytes:reader.phaseLimit};
-}
-export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,originalRows,originalPatches,size,snapshot,carriedMetadataBytes=0}) {
- return withCurrentRebindOutputReserve(reader,()=>{
+function* currentRebindCustody(reader,pin,{baseSelection,registry,originalRows,originalPatches,size,snapshot}) {
  demand(reader instanceof ImmutableReader,'Require actual immutable custody reader');
  demand(snapshot?.reader===reader,'Current rebind custody requires the actual privately authenticated selected snapshot');
- demand(Number.isSafeInteger(carriedMetadataBytes)&&carriedMetadataBytes>=0&&carriedMetadataBytes<=reader.phaseLimit,'Untyped retained rebind metadata');
- rebindKeys(pin,'commit,path,mode,git_blob_oid,bytes,sha256','Foreign ordinary current rebind pin');pinCheck(pin);demand(pin.decoded_bytes===undefined&&reader.used+2*pin.bytes<=reader.phaseLimit,'Whole current rebind certificate exceeds prospective bound');reader.used+=2*pin.bytes;
- const descriptor=reader.descriptor(pin.path,pin.commit);demand(descriptor.mode===pin.mode&&descriptor.git_blob_oid===pin.git_blob_oid&&descriptor.bytes===pin.bytes,'Whole rebind certificate identity differs');
- const certificate=reader.json(pin.path,{version:pin.commit,expected:pin.sha256});
+ rebindKeys(pin,'commit,path,mode,git_blob_oid,bytes,sha256','Foreign ordinary current rebind pin');pinCheck(pin);demand(pin.decoded_bytes===undefined,'Current rebind certificate requires whole ordinary JSON');
+ const certificate=yield {kind:'json',reader,pin,read:()=>{
+  const version=reader.pinnedVersion(pin),descriptor=reader.descriptor(pin.path,version);
+  demand(descriptor.mode===pin.mode&&descriptor.git_blob_oid===pin.git_blob_oid&&descriptor.bytes===pin.bytes,'Whole rebind certificate identity differs');
+  return reader.json(pin.path,{version,expected:pin.sha256});}};
  demand(Object.keys(certificate).sort().join(',')==='authority_registry_sha256,base_selection,execution_commit,facts,kind,operating,publication,request,result,version','Foreign current rebind certificate roster');
  const names=['request','facts','publication','operating','result'];
  const roster=names.map(name=>{const p=certificate[name];pinCheck(p);demand(p.decoded_bytes===undefined,'Current rebind products require ordinary whole JSON');return {name,p};});
  const earlyRoster=roster.filter(({name})=>name!=='result');
- const metadata=earlyRoster.reduce((n,{p})=>n+2*p.bytes,0)+2*pin.bytes;
- demand(reader.used+metadata<=reader.phaseLimit,'Complete current rebind custody admission before body opens');reader.used+=metadata;
- for(const {name,p}of roster){const actual=reader.descriptor(p.path,p.commit);demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Whole rebind product mode/OID/length differs');if(name!=='result')reader.admit(actual);}
+ const bodies=yield {kind:'bodies',reader,pins:roster.map(({p})=>p),read:()=>{
+  for(const {p}of roster){const actual=reader.descriptor(p.path,reader.pinnedVersion(p));demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Whole rebind product mode/OID/length differs');}
+  return Object.fromEntries(earlyRoster.map(({name,p})=>[name,JSON.parse(reader.read(p.path,{version:reader.pinnedVersion(p),expected:p.sha256}))]));}};
  demand(/^[a-f0-9]{40}$/.test(certificate.execution_commit),'Missing actual rebind execution identity');
- const historicalCode=CURRENT_REBIND_CODE.map(path=>reader.descriptor(path,certificate.execution_commit));
- for(const p of historicalCode)reader.admit(p);
- // Authenticate what originally executed. Current wrapper bytes are not a
- // historical generation: current operands and complete results are recomputed
- // below under the current trusted validator, without a cross-vintage whitelist.
+ const historicalPaths=currentRebindCodePaths(bodies.request.executed_code);
+ const historicalCode=yield {kind:'original-paths',reader,paths:bodies.request.executed_code.map(p=>({...p,commit:certificate.execution_commit})),
+  read:()=>historicalPaths.map(path=>reader.descriptor(path,certificate.execution_commit))};
+ // Authenticate the complete vector that actually executed. Current wrapper
+ // bytes never relabel a historical generation; current operands and results
+ // are independently recomputed below under the current trusted validator.
  const expectedCode=historicalCode.map(p=>({path:p.path,bytes:p.bytes,sha256:sha(reader.read(p.path,{version:p.commit}))}));
- const bodies=Object.fromEntries(earlyRoster.map(({name,p})=>[name,JSON.parse(reader.read(p.path,{version:p.commit,expected:p.sha256}))]));
  // External custody verifies the original vector; current acquisition below
  // executes the current trusted closure without relabelling historical runs.
  demand(snapshot?.reader===reader,'Current rebind custody requires the actual privately authenticated selected snapshot');
  const externalNames=['code_source','terminal','stderr','stdout','issued_plan'];rebindKeys(bodies.operating.execution_custody,externalNames.join(','),'Incomplete external execution roster');
  const externalRoster=externalNames.map(name=>({name,p:bodies.operating.execution_custody[name]}));
  for(const {p}of externalRoster){pinCheck(p);demand(p.decoded_bytes===undefined,'External execution whole ordinary custody required');}
- const logLimits=currentRebindLogLimits(bodies.request.limits);
- const externalCaps={code_source:1048576,terminal:131072,stderr:logLimits.stderr,stdout:logLimits.stdout,issued_plan:1048576};
- for(const {name,p}of externalRoster)demand(p.bytes<=externalCaps[name],'External metadata/log cap before read');
- const externalBytes=externalRoster.reduce((n,{p})=>n+2*p.bytes,0);demand(reader.used+externalBytes<=reader.phaseLimit,'Complete external execution custody before opens');reader.used+=externalBytes;
- for(const {p}of externalRoster){const actual=reader.descriptor(p.path,p.commit);demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'External execution ordinary identity differs');reader.admit(actual);}
- const executionCustody=Object.fromEntries(externalRoster.map(({name,p})=>[name,reader.read(p.path,{version:p.commit,expected:p.sha256})]));
+ const executionCustody=yield {kind:'bodies',reader,pins:externalRoster.map(({p})=>p),read:()=>{
+  for(const {p}of externalRoster){const actual=reader.descriptor(p.path,reader.pinnedVersion(p));demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'External execution ordinary identity differs');}
+  return Object.fromEntries(externalRoster.map(({name,p})=>[name,reader.read(p.path,{version:reader.pinnedVersion(p),expected:p.sha256})]));}};
  verifyCurrentRebindExecution({request:bodies.request,operating:bodies.operating,expectedCode,custody:{...executionCustody,result_sha256:roster.find(p=>p.name==='result').p.sha256}});
  // Reauthenticate the exact issued explicit operands through the same whole
  // immutable reader. Historical plans without this field retain their route.
  const issuedOriginalInputs=JSON.parse(executionCustody.issued_plan).original_inputs;
- if(issuedOriginalInputs!==undefined)for(const p of issuedOriginalInputs){
-  const actual=reader.descriptor(p.path,p.commit);
+ if(issuedOriginalInputs!==undefined)yield {kind:'bodies',reader,pins:issuedOriginalInputs,read:()=>{for(const p of issuedOriginalInputs){
+  const version=reader.pinnedVersion(p),actual=reader.descriptor(p.path,version);
   demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Issued original input mode/OID/bytes differ');
-  reader.admit(actual);reader.read(p.path,{version:p.commit,expected:p.sha256});
- }
+  reader.read(p.path,{version,expected:p.sha256});
+ }}};
 
- // The original request/external-plan frame is fully authenticated above.
- // Only these issued acquisition locators are needed during current word reads;
- // whole request/result bodies are reopened at their identical immutable pins
- // after the completed window frame, for the unchanged complete verifier.
- const acquisitionSpec={targetSources:bodies.request.acquisition?.target_sources,predecessorProof:bodies.request.acquisition?.predecessor_proof,outputLimits:currentRebindReadbackLimits(reader,roster)};
- bodies.request=null;
- reclaimCompletedRebindFrame();
- const priorPhaseBytes=reader.used;
- const liveMetadata=carriedMetadataBytes+2*(valueBytes({certificate,bodies,acquisitionSpec,historicalCode,expectedCode,roster,externalRoster,...(issuedOriginalInputs===undefined?{}:{issuedOriginalInputs})}).length+externalBytes);
-
- const acquired=acquireCurrentRebindOperands(snapshot,registry,originalRows,originalPatches,{...acquisitionSpec,carriedMetadataBytes:liveMetadata});
- // Preserve the complete live-table/result peak before the reopen frame resets.
- const outputPhaseBytes=reader.used;
- // Complete raw row/run frames have returned. All acquired result/rows/targets,
- // source/native custody and the full selected snapshot stay live and charged.
- reclaimCompletedRebindFrame();
- reader.metadataBytes=8*1048576+2*snapshot.metadataBytes+carriedMetadataBytes+2*(valueBytes({certificate,bodies,acquisitionSpec,historicalCode,expectedCode,roster,externalRoster,acquired,...(issuedOriginalInputs===undefined?{}:{issuedOriginalInputs})}).length+externalBytes)+(snapshot.acquisition_buffer_bytes??0);reader.phase();
- for(const name of ['request','result']){
-  const {p}=roster.find(row=>row.name===name);
-  // Encoded bytes plus parsed/canonical/expected-result scratch are reserved
-  // before reads; completed-window words are no longer live in this phase.
-  demand(reader.used+4*p.bytes<=reader.phaseLimit,'Complete reopened rebind product exceeds phase');reader.used+=3*p.bytes;
-  bodies[name]=JSON.parse(reader.read(p.path,{version:p.commit,expected:p.sha256}));
- }
- const identityScratch=2*(valueBytes(bodies.request.acquisition.native_inputs).length+valueBytes(acquired.acquisition.native_inputs).length);
- demand(Number.isSafeInteger(identityScratch)&&identityScratch<=FILE&&reader.used+identityScratch<=reader.phaseLimit,'Complete native identity comparison scratch exceeds phase');reader.used+=identityScratch;
- const result=verifyCurrentRebindProducts({certificate,...bodies,baseSelection,registry,originalRows,originalPatches,size,expectedCode,acquired,executionCustody,currentPhaseLimit:reader.phaseLimit,bodyPins:Object.fromEntries(roster.map(({name,p})=>[name,p]))});
- // A sequential phase must never hide an earlier complete acquisition peak.
- retainCurrentRebindPhasePeak(reader,priorPhaseBytes,outputPhaseBytes,acquired.acquisition_phases);
+ const acquired=acquireCurrentRebindOperands(snapshot,registry,originalRows,originalPatches,{
+  targetSources:bodies.request.acquisition?.target_sources,predecessorProof:bodies.request.acquisition?.predecessor_proof});
+ const resultPin=roster.find(row=>row.name==='result').p;
+ bodies.result=JSON.parse(reader.read(resultPin.path,{version:reader.pinnedVersion(resultPin),expected:resultPin.sha256}));
+ const result=verifyCurrentRebindProducts({certificate,...bodies,baseSelection,registry,originalRows,originalPatches,size,expectedCode,acquired,executionCustody,bodyPins:Object.fromEntries(roster.map(({name,p})=>[name,p]))});
  return result;
- });
 }
 
 // Explicit committed data-only hook. This does not discover proposal files.
 export function readSelectedAdditive(snapshot) {
+ return driveSourceAuthority(selectedAdditive(snapshot));
+}
+export async function readSelectedAdditiveAcquired(snapshot) {
+ const steps=selectedAdditive(snapshot);
+ try{let step=steps.next();
+  while(!step.done){let value;try{
+   const request=step.value;
+   demand(request.reader instanceof ImmutableReader,'Require actual immutable acquisition reader');
+   if(request.kind==='original-paths')await request.reader.acquireOriginalPaths(request.paths);
+   else for(const pin of request.kind==='source'?request.sourceParts():request.pins??[request.pin])await request.reader.acquirePinned(pin);
+   value=request.read();
+  }catch(error){step=steps.throw(error);continue;}step=steps.next(value);}
+  return step.value;
+ }catch(error){try{steps.return();}catch{}throw error;}
+}
+function* selectedAdditive(snapshot) {
  const {reader,selection,manifest,owners}=snapshot,hook=selection.additive_release;
  if(hook===undefined)return null;
- demand(hook&&Object.keys(hook).sort().join(',')==='bytes,path,sha256'&&Number.isSafeInteger(hook.bytes)&&hook.bytes>0&&hook.bytes<=FILE&&hash(hook.sha256),'Unsupported committed additive hook');
+ demand(hook&&Object.keys(hook).sort().join(',')==='bytes,path,sha256'&&Number.isSafeInteger(hook.bytes)&&hook.bytes>0&&hash(hook.sha256),'Unsupported committed additive hook');
  const descriptor=reader.descriptor(hook.path);demand(descriptor.bytes===hook.bytes,'Committed additive sidecar whole length differs');
  const sidecar=reader.json(hook.path,{expected:hook.sha256});
  demand(sidecar?.version===2&&sidecar.kind==='retained-native-additive-selection-v2'&&Object.keys(sidecar).sort().join(',')==='authority_registry,base_selection,kind,logical_asset_map,runtime_envelope,version','Unsupported committed additive sidecar');
  const baseSelection=nativeBaseSelection(selection);
  demand(same(sidecar.base_selection,baseSelection),'Stale/foreign actual native base selection');
  const whole=({p,alias,role})=>{
-  pinCheck(p);let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+  pinCheck(p);let version=p.commit;try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
   const actual=reader.descriptor(p.path,version);demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Selected additive ordinary whole identity differs');
-  reader.admit(actual,alias?0:(p.decoded_bytes??0));return {p,version,...(alias?{alias:true,role}:{})};
+  return {p,version,...(alias?{alias:true,role}:{})};
  };
  demand(Object.keys(sidecar.logical_asset_map).sort().join(',')==='base_manifest,ledger,owner_roster,patch','Incomplete/foreign logical additive asset map');
  const roster=[{p:sidecar.runtime_envelope},{p:sidecar.authority_registry},...Object.entries(sidecar.logical_asset_map).map(([role,p])=>({p,...(['base_manifest','owner_roster'].includes(role)?(selectedBaseAssetAlias(snapshot,role,p),{alias:true,role}):{})}))];
- const metadata=roster.reduce((n,{p,alias})=>n+2*(p.bytes+(alias?0:(p.decoded_bytes??0))),0);demand(Number.isSafeInteger(metadata)&&metadata<=reader.phaseLimit&&reader.used+metadata<=reader.phaseLimit,'Complete selected additive metadata admission before reads');reader.used+=metadata;
  const admitted=roster.map(whole);
  // Every ordinary encoded alias is whole authenticated here; only privately
  // accepted base graphs skip duplicate decoded acquisition. Retain ledger/patch.
  const assetFrame=()=>{
   const bodies=admitted.map(({p,version,alias,role})=>{
-  const raw=reader.read(p.path,{version,expected:p.sha256,decoded:alias?0:(p.decoded_bytes??0)});if(alias)return selectedBaseAssetAlias(snapshot,role,p);if(p.decoded_bytes===undefined)return JSON.parse(raw);
+  const raw=reader.read(p.path,{version,expected:p.sha256});if(alias)return selectedBaseAssetAlias(snapshot,role,p);if(p.decoded_bytes===undefined)return JSON.parse(raw);
   const decoded=gunzipSync(raw,{maxOutputLength:p.decoded_bytes});demand(decoded.length===p.decoded_bytes&&sha(decoded)===p.decoded_sha256,'Selected additive whole decoded inverse differs');return JSON.parse(decoded);
  });
   const [wrapped,registry,...assets]=bodies,envelope=wrapped.additiveRelease??wrapped;
@@ -1645,40 +2733,31 @@ export function readSelectedAdditive(snapshot) {
  const {registry,envelope,named}=assetFrame();
  let resolver=snapshot.geometrySources;
  if(!resolver){
-  // The source-bank metadata has been completely authenticated in this stage.
-  // Retain its actual view for later whole-source phases; do not reopen it while
-  // the current acquisition's complete input charges are still resident.
   resolver=new SelectedGeometrySources(snapshot);snapshot.geometrySources=resolver;
-  const retainedSourceMetadata=valueBytes({...(resolver.bank?{bank:resolver.bank}:{}),sources:resolver.sources,release:resolver.release}).length;
-  demand(reader.used+retainedSourceMetadata<=reader.phaseLimit,'Complete selected source metadata exceeds acquisition phase');
-  reader.used+=retainedSourceMetadata;reader.metadataBytes+=retainedSourceMetadata;snapshot.metadataBytes+=retainedSourceMetadata;
  }
- demand(envelope.base_reference.id===selection.release_id&&envelope.base_reference.footprints_sha256===resolver.release.footprints_sha256,'Additive effective baseline differs from actual selected source bank');
+ demand(envelope.base_reference.id===resolver.release.id&&envelope.base_reference.footprints_sha256===resolver.release.footprints_sha256,'Additive effective baseline differs from actual selected source bank');
  const normalized=normaliseRetainedRepairLedger(named.ledger,registry),proofs=[];
- let retained=2*valueBytes({sidecar,admitted,envelope,named,registry}).length;
  for(const entry of registry.entries){
   demand(entry.policy_id==='retained-source-literal-additions'&&entry.policy_version===1,'Unsupported source policy semantics/version');
-  // Previous acquisition bodies have been discarded. Only the complete selected
-  // metadata/proof views are live across genuine detached authority phases.
-  const child=new ImmutableReader(reader.repo,reader.version,{runtimeBytes:reader.runtimeBytes,executionBytes:reader.executionBytes,outputBytes:4*1024*1024,metadataBytes:reader.metadataBytes+retained,gitExecutable:reader.gitExecutable,allowance:reader.allowance});
-  const proof=readRetainedRegistryAuthority(child,entry,reader);
-  demand(valueBytes(proof).length<=child.outputBytes,'Complete detached authority view exceeds prospective output reserve');
+  const child=new ImmutableReader(reader.repo,reader.version,{gitExecutable:reader.gitExecutable,invocation:reader.invocation});
+  const proof=yield* retainedRegistryAuthority(child,entry,reader,{snapshot});
   for(const row of normalized.rows.values())if(row.authority_sha256===entry.authority_sha256){
    const original=proof.original_ledger.rows.find(r=>r.component_id===row.component_id);
    demand(original&&['assigned','zero-cell'].includes(original.disposition)&&same({...original,authority_sha256:entry.authority_sha256,rule_sha256:entry.rule_sha256},row),'Selected component rebinds original full native/source primitive');
   }
-  const view={authority_sha256:entry.authority_sha256,rule_sha256:entry.rule_sha256,source_scope_ids:proof.source_scope_ids,native_proof:proof.native_proof,original_ledger:proof.original_ledger,pins:proof.pins,original_pins:proof.original_pins};proofs.push(view);retained+=valueBytes(view).length;
+  const view={authority_sha256:entry.authority_sha256,rule_sha256:entry.rule_sha256,source_scope_ids:proof.source_scope_ids,native_proof:proof.native_proof,original_ledger:proof.original_ledger,pins:proof.pins,original_pins:proof.original_pins};proofs.push(view);
  }
 
  const expectedScope=new Map();
  for(const proof of proofs){
   if(proof.original_ledger.parent_inventory!==undefined)demand(same(named.ledger.parent_inventory,proof.original_ledger.parent_inventory),'Selected ledger changes complete original inventory denominator');
   for(const original of proof.original_ledger.rows){
-   demand(!expectedScope.has(original.component_id),'Ambiguous repeated original authority component');expectedScope.set(original.component_id,{original,proof});
+   const key=repairComponentKey({...original,authority_sha256:named.ledger.version===1?undefined:proof.authority_sha256});
+   demand(!expectedScope.has(key),'Ambiguous repeated original authority component');expectedScope.set(key,{original,proof});
   }
  }
- demand(named.ledger.rows.length===expectedScope.size&&named.ledger.scope_ids.every(id=>expectedScope.has(id)),'Selected ledger omits/invents complete original native scope or exceptions');
- for(const row of named.ledger.rows){const {original,proof}=expectedScope.get(row.component_id);
+ demand(named.ledger.rows.length===expectedScope.size&&named.ledger.rows.every(row=>expectedScope.has(repairComponentKey(row))),'Selected ledger omits/invents complete original native scope or exceptions');
+ for(const row of named.ledger.rows){const {original,proof}=expectedScope.get(repairComponentKey(row));
   if(named.ledger.version===1)demand(same(row,original),'Selected original v1 row rebound');
   else{const {authority_sha256,rule_sha256,...literal}=row;demand(authority_sha256===proof.authority_sha256&&(rule_sha256===undefined||rule_sha256===proof.rule_sha256)&&same(literal,original),'Selected v2 row rebinds original full primitive/exception authority');}
  }
@@ -1707,15 +2786,16 @@ export function readSelectedAdditive(snapshot) {
   // Retain only native patches/contracts and custody before current acquisition.
   expectedScope.clear();
   for(const proof of proofs){delete proof.original_ledger;proof.native_proof={native_contract:proof.native_proof.native_contract,native_patches:proof.native_proof.native_patches};}
-  reclaimCompletedRebindFrame();
   const legacyAuthorities=new Set(proofs.filter(proof=>proof.original_pins.source_evidence===undefined).map(proof=>proof.authority_sha256));
   const legacyRegistry={...registry,entries:registry.entries.filter(entry=>legacyAuthorities.has(entry.authority_sha256))};
-  rebind=readCurrentRebindCustody(reader,named.ledger.current_rebind,{baseSelection,registry:legacyRegistry,originalRows:[...normalized.rows.values()].filter(row=>row.representation!=='native-cells'),originalPatches:proofs.filter(p=>p.original_pins.source_evidence===undefined).flatMap(p=>p.native_proof.native_patches),size:manifest.size,snapshot,carriedMetadataBytes:2*valueBytes({sidecar,admitted,envelope,named,proofs,patch}).length});
+  rebind=yield* currentRebindCustody(reader,named.ledger.current_rebind,{baseSelection,registry:legacyRegistry,originalRows:[...normalized.rows.values()].filter(row=>row.representation!=='native-cells'),originalPatches:proofs.filter(p=>p.original_pins.source_evidence===undefined).flatMap(p=>p.native_proof.native_patches),size:manifest.size,snapshot});
   demand(same(named.ledger.current_targets,rebind.current_targets),'Ledger current target pointsets differ from complete qualified rebind result');
  }else demand(!Object.hasOwn(named.ledger,'current_targets'),'Current targets require complete rebind custody');
  const expectedByRow=new Map();
  for(const original of originalPatches){
-  demand(rebind||same(original.base_reference,envelope.base_reference),'Original delta requires an actual qualified current-bank rebind');
+  demand(rebind||same(original.base_reference,envelope.base_reference)
+    ||(snapshot.selection.reference_projection&&same(original.base_reference,{id:resolver.nativeRelease.id,footprints_sha256:resolver.nativeRelease.footprints_sha256,hierarchy_sha256:resolver.nativeRelease.hierarchy_sha256})),
+    'Original delta requires an actual qualified current-bank rebind or validated metadata application');
   for(const row of original.rows){const all=expectedByRow.get(row.y)??[];all.push(...row.runs.map(r=>[...r]));expectedByRow.set(row.y,all);}
  }
  const expectedRows=[...expectedByRow].sort((a,b)=>a[0]-b[0]).map(([y,runs])=>{
@@ -1726,15 +2806,12 @@ export function readSelectedAdditive(snapshot) {
  demand(same(patch.rows,expectedRows),'Selected native patch omits/invents original qualified assignment cells');
  // Current-bank target pointsets and zero-owned native exclusion are checked by
  // the actual affected-source/interval callers, never inferred from this delta.
- // The whole encoded/decoded acquisition remains charged above while this
- // helper owns its body arrays. After return those arrays (including the second
- // owner-roster decode) are dead; only this complete view is carried onward.
  // The independently authenticated original owner roster remains in snapshot.
  const consumerRows=[...normalized.rows.values()].map(row=>{if(!rebind||row.representation==='native-cells')return row;const target=rebind.current_targets.find(target=>target.target_id===row.target_id);demand(target&&owners[target.pixelIndex-1]?.id===target.target_id,'Current rebind owner roster differs');return {...row,base_geometry:target.geometry,base_geometry_sha256:target.geometry_sha256};});
  const legacy_native_rows=[...new Set(proofs.filter(proof=>proof.original_pins.source_evidence===undefined)
   .flatMap(proof=>proof.native_proof.native_patches.flatMap(patch=>patch.rows.map(row=>row.y))))].sort((a,b)=>a-b);
  const carried={sidecar,registry,ledger:named.ledger,patch,envelope,legacy_native_rows,normalized_rows:consumerRows,authority_proofs:proofs.map(proof=>({authority_sha256:proof.authority_sha256,rule_sha256:proof.rule_sha256,source_scope_ids:proof.source_scope_ids,pins:proof.pins,original_pins:proof.original_pins})),assigned_cells:total,...(rebind?{current_rebind:rebind}:{})};
- const result=freeze({...carried,metadata_bytes:valueBytes(carried).length+4096});
+ const result=freeze(carried);
  selectedAdditions.set(result,{snapshot});return result;
 }
 export function selectedAdditiveRows(view,row,base) {

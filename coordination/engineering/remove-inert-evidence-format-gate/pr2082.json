@@ -1,0 +1,1575 @@
+{
+  "branch": "engineering/myanmar-vietnam3274-after-indonesia393-20261016",
+  "base": "64fc78d219cc0d4db062a7ebc27ffec6aa1dc18e",
+  "merge_base": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+  "head": "41a6a586c1997508b029171289d2f13df802a5c9",
+  "files": [
+    {
+      "filename": ".github/package-inputs.json",
+      "status": "modified"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability112-001/native-authority-001/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability112-001/native-authority-001/constructor-result.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability112-001/native-authority-001/execution.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability112-001/native-authority-001/native-authority-config.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability112-001/native-authority-001/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability112-001/native-authority-001/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability112-001/native-authority-001/result-checks.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability112-001/native-authority-001/reviewed-executing-root.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability112-001/native-authority-001/stderr.txt",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability112-001/native-authority-001/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/README.md",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/SOURCE-NOTICE.md",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/composition-b638-001/authority-registry.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/composition-b638-001/compose-config.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/composition-b638-001/execution.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/composition-b638-001/patch.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/composition-b638-001/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/composition-b638-001/result-checks.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/composition-b638-001/runtime-envelope.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/composition-b638-001/selected-ledger.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/composition-b638-001/stderr.txt",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/composition-b638-001/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/finalization-b638-001/execution.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/finalization-b638-001/finalize-config.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/finalization-b638-001/first-refusal/execution.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/finalization-b638-001/first-refusal/finalize-config.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/finalization-b638-001/first-refusal/stderr.txt",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/finalization-b638-001/first-refusal/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/finalization-b638-001/package-roles.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/finalization-b638-001/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/finalization-b638-001/result-checks.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/finalization-b638-001/selected-delivery-expectations.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/finalization-b638-001/stderr.txt",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/finalization-b638-001/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/native-authority-001/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/native-authority-001/constructor-result.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/native-authority-001/execution.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/native-authority-001/first-refusal/execution.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/native-authority-001/first-refusal/stderr.txt",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/native-authority-001/first-refusal/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/native-authority-001/native-authority-config.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/native-authority-001/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/native-authority-001/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/native-authority-001/result-checks.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/native-authority-001/reviewed-executing-root.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/native-authority-001/stderr.txt",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/native-authority-001/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/ownership-selection-b638-v2.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/review/qualified-result/actual-result-review.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/review/qualified-result/review.md",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/review/selected-native/review.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/review/selected-native/review.md",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/selected-consumer-b638-001/checkpoint-routes.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/selected-consumer-b638-001/derived-certificate.json.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/selected-consumer-b638-001/derived-facts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/selected-consumer-b638-001/derived-publication.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/selected-consumer-b638-001/execution-start.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/selected-consumer-b638-001/execution.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/selected-consumer-b638-001/output-inventory.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/selected-consumer-b638-001/result-checks.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/selected-consumer-b638-001/stderr.txt",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/selected-consumer-b638-001/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/source/original-catalogue-notices.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/README.md",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/accepted71-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/composition-b638-001/authority-registry.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/composition-b638-001/compose-config.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/composition-b638-001/execution.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/composition-b638-001/patch.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/composition-b638-001/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/composition-b638-001/result-checks.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/composition-b638-001/runtime-envelope.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/composition-b638-001/selected-ledger.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/composition-b638-001/stderr.txt",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/composition-b638-001/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/delivery-summary.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/finalization-b638-001/execution.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/finalization-b638-001/finalize-config.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/finalization-b638-001/package-roles.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/finalization-b638-001/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/finalization-b638-001/result-checks.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/finalization-b638-001/selected-delivery-expectations.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/finalization-b638-001/stderr.txt",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/finalization-b638-001/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/history/1929-manifest-refusal/execution.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/history/1929-manifest-refusal/stderr.txt",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/history/1929-manifest-refusal/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/ownership-selection-b638-v2.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/remaining1442-outside-request.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/review/qualified112/review.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/review/qualified112/review.md",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/selected-consumer-b638-001/checkpoint-routes.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/selected-consumer-b638-001/derived-certificate.json.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/selected-consumer-b638-001/derived-facts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/selected-consumer-b638-001/derived-publication.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/selected-consumer-b638-001/exact2041-key-join.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/selected-consumer-b638-001/execution-start.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/selected-consumer-b638-001/execution.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/selected-consumer-b638-001/output-inventory.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/selected-consumer-b638-001/remaining1442-outside-request.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/selected-consumer-b638-001/result-checks.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/selected-consumer-b638-001/stderr.txt",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability2041-001/selected-consumer-b638-001/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/README.md",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/current-main-applicability.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/actual-baseline-pins.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/actual-finalization.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/composition/authority-registry.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/composition/patch.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/composition/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/composition/runtime-envelope.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/composition/selected-ledger.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/config/compose.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/config/finalize.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/exact-conservation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/execution/compose.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/execution/compose.stderr.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/execution/compose.stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/execution/finalize.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/execution/finalize.stderr.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/execution/finalize.stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/finalization/ownership-selection-v2.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/finalization/ownership-selection.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/finalization/package-inputs.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/finalization/package-roles.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/finalization/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/finalization/selected-delivery-expectations.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/history/Vietnam-finite-stock-role-blob-presence.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/history/Vietnam-finite-stock-role-metadata-probe.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/history/current-restoration-role-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/history/joint-new-prefix-restoration-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/history/owned-original-provenance-pack-copy.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/history/provisional-restoration-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/history/recovered-original5eb-custody.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/history/myanmar-frozen-41434648-evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/history/vietnam-frozen-6ef487cd-evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/original-scientific-scope-and-metric-history.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/ownership-selection-v2.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261014/border-chn274-20261016/country274-input-context.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261014/border-chn274-20261016/native-authority-274-v1/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261014/border-chn274-20261016/native-authority-274-v1/constructor-result.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261014/border-chn274-20261016/native-authority-274-v1/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261014/border-chn274-20261016/native-authority-274-v1/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261014/border-chn274-20261016/native-patch-274.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261014/border-chn274-20261016/source-evidence-274.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261014/border-first-physical-20261016/whole-target-stage-inputs.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261014/border-first-physical-20261016/whole-target-support.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261014/border-hongngu3-20261016/country3-input-context.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261014/border-hongngu3-20261016/native-authority-3-v1/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261014/border-hongngu3-20261016/native-authority-3-v1/constructor-result.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261014/border-hongngu3-20261016/native-authority-3-v1/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261014/border-hongngu3-20261016/native-authority-3-v1/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261014/border-hongngu3-20261016/native-patch-3.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261014/border-hongngu3-20261016/source-evidence-3.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-002/missing235/physical-001/whole-target-support.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-002/missing235/whole-target-stage-inputs.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261014/dated-centre-support/cathai671-land-support-v1.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/ACTUAL-818-CONSTRUCTOR-RESULT.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/actual-native818-executions.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/actual-native818-missing235.stderr.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/actual-native818-missing235.stdout.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/actual-native818-next351.stderr.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/actual-native818-next351.stdout.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/actual-native818-next557.stderr.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/actual-native818-next557.stdout.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/immutable-input-checkpoint.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/inputs-manifest.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/missing235/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/missing235/constructor-result.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/missing235/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/missing235/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/next351/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/next351/constructor-result.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/next351/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/next351/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/next557/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/next557/constructor-result.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/next557/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/next557/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/country-source-proposals.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/country818-retained-body-candidate.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/literal-CN-native-kernel-comparison.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/native-patch-missing235-818-PROPOSED.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/native-patch-next351-818-PROPOSED.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/native-patch-next557-818-PROPOSED.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/native-source-evidence-missing235-818-PROPOSED.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/native-source-evidence-next351-818-PROPOSED.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/native-source-evidence-next557-818-PROPOSED.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/actual-delivery-journal.jsonl",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/compose1233-b638-001.execution.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/compose1233-b638-001/authority-registry.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/compose1233-b638-001/patch.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/compose1233-b638-001/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/compose1233-b638-001/runtime-envelope.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/compose1233-b638-001/selected-ledger.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/config-compose1233-b638-001.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/config-finalize1233-b638-001.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/final-proof/CURRENT-DELIVERY-RESULT.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/final-proof/FINAL-CANONICAL-1233-CANDIDATE.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/final-proof/actual-accepted-original-scope-copy-custody.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/final-proof/actual-delivery-journal.jsonl",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/final-proof/claim2061-001.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/final-proof/consumer-bootstrap-support-file.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/final-proof/consumer1233-b638-001.execution.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/final-proof/consumer1233-b638-001.stderr",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/final-proof/consumer1233-b638-001.stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/final-proof/consumer1233-b638-002.execution.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/final-proof/consumer1233-b638-002.stderr",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/final-proof/consumer1233-b638-002.stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/final-proof/delivery-handoff.md",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/final-proof/finaldata-three-executable-removals.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/final-proof/original178-latest-substantive-status.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/finalize1233-b638-001.execution.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/finalize1233-b638-001/ownership-selection.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/finalize1233-b638-001/package-inputs.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/finalize1233-b638-001/package-roles.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/finalize1233-b638-001/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/finalize1233-b638-001/selected-delivery-expectations.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/finalize1233-b638-001/selection-sidecar1233-b638.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/independent-review/FINAL-actual-consumer-review.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/independent-review/REVIEW.md",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/independent-review/actual-canonical-candidate-review.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/independent-review/actual-composition-semantic-review.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/independent-review/actual-original-row-conservation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/independent-review/closed1233-child-issue.md",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/independent-review/expected-original1233-context.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/independent-review/issue1881-live.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined1233/original-nine-quartets1233.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/accepted-b638-prefix-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/compose956-001/authority-registry.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/compose956-001/patch.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/compose956-001/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/compose956-001/runtime-envelope.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/compose956-001/selected-ledger.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/compose956-b638-001/authority-registry.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/compose956-b638-001/patch.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/compose956-b638-001/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/compose956-b638-001/runtime-envelope.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/compose956-b638-001/selected-ledger.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/finalize89ff-956-001/ownership-selection.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/finalize89ff-956-001/package-inputs.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/finalize89ff-956-001/package-roles.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/finalize89ff-956-001/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/finalize89ff-956-001/selected-delivery-expectations.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/finalize89ff-956-001/selection-sidecar956.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/finalize956-b638-001/ownership-selection.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/finalize956-b638-001/package-inputs.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/finalize956-b638-001/package-roles.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/finalize956-b638-001/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/finalize956-b638-001/selected-delivery-expectations.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/combined956/finalize956-b638-001/selection-sidecar956-b638.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/RESULT.md",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/accepted-code-bindings.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/actual-admission.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/actual-comparison-receipt.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/actual-comparison.stderr",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/actual-comparison.stdout",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/all178-reconciled-location-facts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/all178-status.csv",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/bootstrap-001.stderr",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/bootstrap-001.stdout",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/comparison-input-bindings.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/current89ff-foreign8-geometry-facts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/current89ff-foreign8-map-contacts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/current89ff-part13-read-binding.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/exact178-original-scope.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/executed-custody.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/foreign16-existing-Atlas-proposals.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/foreign8-exclusive-location-proposals.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/inputs/current89ff-VNM17-geography-subset.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/inputs/current89ff-foreign8-geography-subset.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/inputs/existing345-native-locations.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/inputs/khm_admin0.geojson",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/inputs/khm_admin2.geojson",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/inputs/lao_admin0.geojson",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/inputs/lao_admin2.geojson",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/inputs/original-gb-KHM-ADM2.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/inputs/original-gb-LAO-ADM2.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/inputs/vnm_admin0.geojson",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/khm-cod-adm0-contacts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/khm-cod-adm2-contacts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/khm-original-adm2-contacts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/lao-cod-adm0-contacts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/lao-cod-adm2-contacts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/lao-original-adm2-contacts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/HongNgu3-missing-whole-physical.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/TanChau18-mode-complete-v2-checkpoint.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/accepted272335-prefix-actual-read.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-0b0247438ee1-001/actual-config.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-0b0247438ee1-001/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-0b0247438ee1-001/constructor-result.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-0b0247438ee1-001/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-0b0247438ee1-001/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-31701e6f2811-001/actual-config.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-31701e6f2811-001/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-31701e6f2811-001/constructor-result.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-31701e6f2811-001/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-31701e6f2811-001/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-ac86cd668766-001/actual-config.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-ac86cd668766-001/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-ac86cd668766-001/constructor-result.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-ac86cd668766-001/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-ac86cd668766-001/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native18-4ade7d21d33e-v2-001/actual-config.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native18-4ade7d21d33e-v2-001/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native18-4ade7d21d33e-v2-001/constructor-result.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native18-4ade7d21d33e-v2-001/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native18-4ade7d21d33e-v2-001/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-stock-code-closure.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-stock-qualified138-result.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-stock-worktree.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/candidate-native-patch-138-with-physical-PROPOSED.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/candidate-native-patch-141-PROPOSED.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/checkpoint.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/compose138-001/authority-registry.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/compose138-001/patch.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/compose138-001/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/compose138-001/runtime-envelope.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/compose138-001/selected-ledger.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/config-compose138-001.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/config-finalize138-001.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/config-finalize138-v2.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/current17-target-source-parent-physical-joins.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/finalize138-001-failure.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/finalize138-001.stderr",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/finalize138-001.stdout",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/finalize138-v2-001.stderr",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/finalize138-v2-001.stdout",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/finalize138-v2-001/ownership-selection.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/finalize138-v2-001/package-inputs.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/finalize138-v2-001/package-roles.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/finalize138-v2-001/preparation.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/finalize138-v2-001/selected-delivery-expectations.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/finalize138-v2-001/selection-sidecar138.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-0b0247438ee1-001.stderr",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-0b0247438ee1-001.stdout",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-31701e6f2811-001.stderr",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-31701e6f2811-001.stdout",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-4ade7d21d33e-001.stderr",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-4ade7d21d33e-001.stdout",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-4ade7d21d33e-v2-001.execution.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-4ade7d21d33e-v2-001.stderr",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-4ade7d21d33e-v2-001.stdout",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-ac86cd668766-001.stderr",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-ac86cd668766-001.stdout",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-patch-0b0247438ee1-PROPOSED.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-patch-31701e6f2811-PROPOSED.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-patch-4ade7d21d33e-PROPOSED.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-patch-ac86cd668766-PROPOSED.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-source-evidence-0b0247438ee1-PROPOSED.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-source-evidence-31701e6f2811-PROPOSED.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-source-evidence-4ade7d21d33e-PROPOSED.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-source-evidence-4ade7d21d33e-mode-complete-v2-PROPOSED.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-source-evidence-ac86cd668766-PROPOSED.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/original-stock-targets-immutable-ancestry.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/retained-physical-custody.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/static-input-custody-checks.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/new-vnm-cod-adm0-contacts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/official-gap21-unresolved.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/official-overlap8-conflicts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/root-country-source-applicability-decision141.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/selection-sidecar138.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/source-body-bindings.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/source-evidence-file-inventory.txt",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/source/hdx-khm-cod-package.headers",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/source/hdx-khm-cod-package.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/source/hdx-khm-geojson.headers",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/source/hdx-lao-cod-package.headers",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/source/hdx-lao-cod-package.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/source/hdx-lao-geojson.headers",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/source/hdx-vnm-cod-package.headers",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/source/hdx-vnm-cod-package.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/source/hdx-vnm-geojson.headers",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/source/khm_admin_boundaries.geojson.zip",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/source/lao_admin_boundaries.geojson.zip",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/source/vnm_admin_boundaries.geojson.zip",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/stock-evidence-target-locators.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/vnm-current-map-execution-receipt.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/vnm-current-map-input-pins.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/vnm-current-map.stderr",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/vnm-current-map.stdout",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/vnm-source-body-binding.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/vnm141-location-proposals.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/vietnam-current-cell-20261016/selection-sidecar1233-b638.json",
+      "status": "added"
+    },
+    {
+      "filename": "data/ownership-selection.json",
+      "status": "modified"
+    }
+  ],
+  "reservation": {
+    "mode": "engineering",
+    "owned_paths": [
+      "coordination/engineering/myanmar-adm3-current-cells-20261014/",
+      "coordination/engineering/vietnam-current-cell-20261014/",
+      "coordination/engineering/vietnam-current-cell-20261016/",
+      "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/",
+      "data/ownership-selection.json",
+      ".github/package-inputs.json"
+    ],
+    "evidence_manifest": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/evidence-quality.json"
+  },
+  "expected": {
+    "test_selection": "selected-data",
+    "expectations_path": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/finalization/selected-delivery-expectations.json",
+    "shards": [
+      0
+    ]
+  }
+}

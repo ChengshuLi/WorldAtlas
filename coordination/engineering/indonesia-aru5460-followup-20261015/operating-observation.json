@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "qualified_cells": 5460,
+  "new_accepted_cells": 0,
+  "accepted_baseline_cells": 139838,
+  "proposed_cumulative_cells": 145298,
+  "compose": {
+    "exit_code": 0,
+    "external_seconds": 4.536519791,
+    "code_commit": "21fd27d6752dec663fd541cf948264d4e1d982e0",
+    "config": ".cache/delivery-handoff/aru5460-compose-21fd-config.json",
+    "destination": ".cache/delivery-handoff/aru5460-compose-21fd-001",
+    "science_replayed": false
+  },
+  "finalize": {
+    "exit_code": 0,
+    "external_seconds": 20.896801084,
+    "code_commit": "21fd27d6752dec663fd541cf948264d4e1d982e0",
+    "config": ".cache/delivery-handoff/aru5460-finalize-21fd-config-002.json",
+    "destination": ".cache/delivery-handoff/aru5460-final-21fd-002",
+    "science_replayed": false
+  },
+  "failed001": "The ordinary exact-locator guard rejected two accidentally added rebind descriptor fields before any output. The data-only locator was corrected in002; production guards and scientific inputs are unchanged.",
+  "limits": [
+    "Qualification, composition and finalization are not accepted-cell credit.",
+    "Trusted current-owner-zero, conservation, emitted-output checks and actual integration remain pending.",
+    "Original source, physical and native qualification were not replayed."
+  ]
+}

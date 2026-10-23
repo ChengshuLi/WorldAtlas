@@ -1,0 +1,23 @@
+{
+  "inputs": [
+    {
+      "commit": "a4a587c563a3647d18df450e4b20c44ccd1bd27e",
+      "path": "coordination/engineering/papua-new-guinea-native-repair-20261017/config/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "3ae61af766de631aedf6d54c35f3e7eb93b61ce9",
+      "bytes": 80520843,
+      "sha256": "fbe82cd1a9882b39ca894d18dce974872ad9abebf37890b7e50801b0e746a5ed"
+    },
+    {
+      "commit": "a4a587c563a3647d18df450e4b20c44ccd1bd27e",
+      "path": "coordination/engineering/papua-new-guinea-native-repair-20261017/native-inputs-001/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "d05ee6c1146c5153384d88d6bc77dfcb3f9ae775",
+      "bytes": 80520632,
+      "sha256": "8d45240f0139ce223cf4f09ece1fcf5a4b4cca988a646155a832c277e54b13df"
+    }
+  ],
+  "actual_diagnostic_commit": "464fac92c0779d1b8a68e8f48e552d9e27bd3b73",
+  "reason": "Release redundant raw working-tree serializations only after exact Git identity verification. Original diagnostic pins are unchanged and remain reachable in this published branch history. Complete original negative geometries are retained once in source-stage/context operands; compaction proof authenticates them and proves every omission.",
+  "initial_failure": "Copied custom writer 64 MiB ceiling rejected the 80,520,632-byte exact source before any output. Removed unexplained per-file and phase numeric ceilings; exact pinned identities and destination controls remain. This cap correction is distinct from representation reduction."
+}

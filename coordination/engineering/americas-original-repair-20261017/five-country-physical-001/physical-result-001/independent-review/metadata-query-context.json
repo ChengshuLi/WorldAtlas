@@ -1,0 +1,105 @@
+{
+  "kind": "independent-actual-result-metadata-query-context",
+  "reviewer": "/root/peru_original_evaluation",
+  "complete_original_metadata_records": 188612,
+  "combined_envelope_relevant_records": 12210,
+  "countries": {
+    "MEX": {
+      "targets": 158,
+      "metadata_box_pairs": 2193,
+      "actual_query_pairs": 2193,
+      "missing_pairs": [],
+      "extra_pairs": [],
+      "metadata_geometry_issues": [],
+      "query_levels": {
+        "1": 2134,
+        "2": 59
+      },
+      "witness": {
+        "complete-operation-pointset": 380,
+        "complete-source-record-reconstruction": 946,
+        "disjoint-after-explicit-predicate": 818,
+        "complete-candidate-reconstruction": 49
+      }
+    },
+    "ECU": {
+      "targets": 58,
+      "metadata_box_pairs": 314,
+      "actual_query_pairs": 314,
+      "missing_pairs": [],
+      "extra_pairs": [],
+      "metadata_geometry_issues": [],
+      "query_levels": {
+        "1": 311,
+        "2": 3
+      },
+      "witness": {
+        "complete-operation-pointset": 125,
+        "disjoint-after-explicit-predicate": 152,
+        "complete-candidate-reconstruction": 29,
+        "complete-source-record-reconstruction": 8
+      }
+    },
+    "BOL": {
+      "targets": 37,
+      "metadata_box_pairs": 66,
+      "actual_query_pairs": 66,
+      "missing_pairs": [],
+      "extra_pairs": [],
+      "metadata_geometry_issues": [],
+      "query_levels": {
+        "1": 37,
+        "2": 25,
+        "3": 4
+      },
+      "witness": {
+        "complete-candidate-reconstruction": 37,
+        "complete-operation-pointset": 18,
+        "disjoint-after-explicit-predicate": 10,
+        "complete-source-record-reconstruction": 1
+      }
+    },
+    "PER": {
+      "targets": 55,
+      "metadata_box_pairs": 261,
+      "actual_query_pairs": 261,
+      "missing_pairs": [],
+      "extra_pairs": [],
+      "metadata_geometry_issues": [],
+      "query_levels": {
+        "1": 233,
+        "2": 13,
+        "3": 15
+      },
+      "witness": {
+        "complete-operation-pointset": 62,
+        "disjoint-after-explicit-predicate": 164,
+        "complete-candidate-reconstruction": 24,
+        "complete-source-record-reconstruction": 11
+      }
+    },
+    "COL": {
+      "targets": 81,
+      "metadata_box_pairs": 435,
+      "actual_query_pairs": 435,
+      "missing_pairs": [],
+      "extra_pairs": [],
+      "metadata_geometry_issues": [],
+      "query_levels": {
+        "1": 415,
+        "2": 17,
+        "3": 3
+      },
+      "witness": {
+        "disjoint-after-explicit-predicate": 210,
+        "complete-candidate-reconstruction": 38,
+        "complete-operation-pointset": 121,
+        "complete-source-record-reconstruction": 66
+      }
+    }
+  },
+  "limits": [
+    "Numeric bounding-box selection expectation and source-level context only; no exact geographic predicate, source decoding, physical producer, native constructor or source qualification was rerun.",
+    "Agreement proves completeness against the retained conservative metadata envelope, not geographic completeness of GSHHG, independent exact intersection correctness or present physical truth."
+  ]
+}

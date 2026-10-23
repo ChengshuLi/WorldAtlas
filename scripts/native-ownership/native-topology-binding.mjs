@@ -15,9 +15,9 @@ export function bindNativeTopology(repo, commit, inputs) {
       throw Error('Missing ordinary retained topology evidence');
     const blob = tree.split(' ')[2].split('\t')[0];
     const length = Number(execFileSync('git', ['-C', repo, 'cat-file', '-s', blob], {encoding: 'utf8'}));
-    if (!Number.isSafeInteger(length) || length < 1 || length > 32 * 1024 * 1024)
-      throw Error('Topology evidence exceeds whole-file budget');
-    const raw = execFileSync('git', ['-C', repo, 'cat-file', 'blob', blob], {maxBuffer: 32 * 1024 * 1024});
+    if (!Number.isSafeInteger(length) || length < 1)
+      throw Error('Invalid topology evidence byte length');
+    const raw = execFileSync('git', ['-C', repo, 'cat-file', 'blob', blob], {maxBuffer: length + 1});
     if (raw.length !== length) throw Error('Incomplete retained topology evidence');
     files.push({path: name, commit, bytes: raw.length, sha256: digest(raw)});
     return {raw, value: JSON.parse(raw)};

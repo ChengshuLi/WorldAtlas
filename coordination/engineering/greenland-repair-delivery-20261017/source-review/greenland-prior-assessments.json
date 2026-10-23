@@ -1,0 +1,190 @@
+[
+  {
+    "id": "gb:GRL:ADM1:42512837B15316814347491",
+    "name": "Northeast Greenland National Park",
+    "reference_owner": "Greenland",
+    "geometry_type": "MultiPolygon",
+    "geometry_inventory": {
+      "component_count": 2,
+      "ring_count": 2,
+      "hole_ring_count": 0,
+      "vertex_count": 2984,
+      "bbox_degrees": [
+        -61.4476,
+        70.8226,
+        -11.3123,
+        83.6274
+      ]
+    },
+    "review_flags": [
+      "2 disconnected geometry components require source-level island/fragment review"
+    ],
+    "geometry_sha256": "69378335b1031f5190586dcaf5ce6b387bb8fffac2aa0711f3920d8b8f75f174",
+    "baseline_part": "geography/part-9.json",
+    "baseline_part_sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+    "source_id": "gb:GRL:ADM1",
+    "source_name": "geoBoundaries gbOpen",
+    "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GRL/ADM1/geoBoundaries-GRL-ADM1.geojson",
+    "license": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+    "reference_year": "2020",
+    "administrative_level": "ADM1",
+    "source_role": "Municipalities",
+    "location_basis": null,
+    "original_id": "42512837B15316814347491",
+    "source_member_ids": [],
+    "source_member_crosswalk": {
+      "status": "not-applicable",
+      "source_member_ids": []
+    },
+    "geoBoundaries_source_name": "Northeast Greenland National Park",
+    "geoBoundaries_source_geometry_inventory": {
+      "component_count": 1,
+      "ring_count": 1,
+      "hole_ring_count": 0,
+      "vertex_count": 9014,
+      "bbox_degrees": [
+        -61.44756317120334,
+        70.82259578097057,
+        -11.312318801671324,
+        83.62741851825007
+      ]
+    },
+    "geoBoundaries_name_matches": true,
+    "geoBoundaries_geometry_matches_screen": false,
+    "resolve_source_name": null,
+    "resolve_source_geometry_inventory": null,
+    "resolve_source_license": null,
+    "parent_overlap_claim": 0.999118,
+    "reference_territory_overlap_claim": 0.97727,
+    "parent_chain": [
+      {
+        "id": "framework:province:northeast-greenland-national-park:1f4418bcbda4",
+        "name": "Northeast Greenland National Park",
+        "type": "province"
+      },
+      {
+        "id": "framework:area:greenland:0f042de27bac",
+        "name": "Greenland",
+        "type": "area"
+      },
+      {
+        "id": "framework:region:subarctic-america:4a2093d6d3b9",
+        "name": "Arctic and Subarctic America",
+        "type": "region"
+      },
+      {
+        "id": "framework:subcontinent:northern-america:477e054b32f2",
+        "name": "Northern America",
+        "type": "subcontinent"
+      },
+      {
+        "id": "framework:continent:north-america:1ca27616f338",
+        "name": "North America",
+        "type": "continent"
+      }
+    ],
+    "aafc_current_name_en": null,
+    "aafc_ecozone_id": null,
+    "aafc_ecoprovince_id": null,
+    "aafc_ecoprovince_name_en": null,
+    "parent_name_matches_official_ecoprovince": null,
+    "aafc_current_source_feature_present": false,
+    "classification": "insufficient-evidence",
+    "source_identity_finding": "retained geoBoundaries original ID and source name verified",
+    "assessment": "Greenland location gb:GRL:ADM1:42512837B15316814347491 (Greenland) from source gb:GRL:ADM1 names Northeast Greenland National Park; the source/atlas component counts are 1/2 and vertex counts are 9014/2984. Names match. Boundary generalization, municipality/park role and physical-tier fit remain unverified (follow-up #888).",
+    "confidence": "insufficient evidence for geographic correctness"
+  },
+  {
+    "id": "gb:GRL:ADM1:42512837B82481266018751",
+    "name": "Qeqertalik",
+    "reference_owner": "Greenland",
+    "geometry_type": "Polygon",
+    "geometry_inventory": {
+      "component_count": 1,
+      "ring_count": 1,
+      "hole_ring_count": 0,
+      "vertex_count": 654,
+      "bbox_degrees": [
+        -53.7597,
+        67.4937,
+        -44.4004,
+        69.0102
+      ]
+    },
+    "review_flags": [],
+    "geometry_sha256": "9742d3e1fe5c6742fe581721c21c5d0cd282bb8f903bc4320d3e1c30a865b011",
+    "baseline_part": "geography/part-9.json",
+    "baseline_part_sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+    "source_id": "gb:GRL:ADM1",
+    "source_name": "geoBoundaries gbOpen",
+    "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GRL/ADM1/geoBoundaries-GRL-ADM1.geojson",
+    "license": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+    "reference_year": "2020",
+    "administrative_level": "ADM1",
+    "source_role": "Municipalities",
+    "location_basis": null,
+    "original_id": "42512837B82481266018751",
+    "source_member_ids": [],
+    "source_member_crosswalk": {
+      "status": "not-applicable",
+      "source_member_ids": []
+    },
+    "geoBoundaries_source_name": "Qeqertalik",
+    "geoBoundaries_source_geometry_inventory": {
+      "component_count": 1,
+      "ring_count": 1,
+      "hole_ring_count": 0,
+      "vertex_count": 2683,
+      "bbox_degrees": [
+        -53.76989364617481,
+        67.49250793429377,
+        -44.40043260660789,
+        69.01024985104982
+      ]
+    },
+    "geoBoundaries_name_matches": true,
+    "geoBoundaries_geometry_matches_screen": false,
+    "resolve_source_name": null,
+    "resolve_source_geometry_inventory": null,
+    "resolve_source_license": null,
+    "parent_overlap_claim": 0.994856,
+    "reference_territory_overlap_claim": 0.95532,
+    "parent_chain": [
+      {
+        "id": "framework:province:qeqertalik:321d544aeeb4",
+        "name": "Qeqertalik",
+        "type": "province"
+      },
+      {
+        "id": "framework:area:greenland:0f042de27bac",
+        "name": "Greenland",
+        "type": "area"
+      },
+      {
+        "id": "framework:region:subarctic-america:4a2093d6d3b9",
+        "name": "Arctic and Subarctic America",
+        "type": "region"
+      },
+      {
+        "id": "framework:subcontinent:northern-america:477e054b32f2",
+        "name": "Northern America",
+        "type": "subcontinent"
+      },
+      {
+        "id": "framework:continent:north-america:1ca27616f338",
+        "name": "North America",
+        "type": "continent"
+      }
+    ],
+    "aafc_current_name_en": null,
+    "aafc_ecozone_id": null,
+    "aafc_ecoprovince_id": null,
+    "aafc_ecoprovince_name_en": null,
+    "parent_name_matches_official_ecoprovince": null,
+    "aafc_current_source_feature_present": false,
+    "classification": "insufficient-evidence",
+    "source_identity_finding": "retained geoBoundaries original ID and source name verified",
+    "assessment": "Greenland location gb:GRL:ADM1:42512837B82481266018751 (Greenland) from source gb:GRL:ADM1 names Qeqertalik; the source/atlas component counts are 1/1 and vertex counts are 2683/654. Names match. Boundary generalization, municipality/park role and physical-tier fit remain unverified (follow-up #888).",
+    "confidence": "insufficient evidence for geographic correctness"
+  }
+]

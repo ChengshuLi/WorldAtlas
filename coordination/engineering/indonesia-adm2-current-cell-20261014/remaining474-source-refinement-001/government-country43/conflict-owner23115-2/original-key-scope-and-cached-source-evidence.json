@@ -1,0 +1,457 @@
+{
+  "package": "conflict",
+  "owner": 23115,
+  "count": 2,
+  "records": [
+    {
+      "original_package": "conflict",
+      "owner": 23115,
+      "y": 130021,
+      "x": 212813,
+      "original_request_id": "conflict:Borneo:6:130021:212813",
+      "retained_actual_comparison": {
+        "original_conflict_record_unchanged": {
+          "original_request": {
+            "id": "conflict:Borneo:6:130021:212813",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 130021,
+            "x": 212813,
+            "original_record": {
+              "outcome_interval_index": 6,
+              "pair": [
+                "Kapuas Hulu",
+                "Song"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B82886709098386",
+                "gb:MYS:ADM2:92858781B41369964486545"
+              ],
+              "y": 130021,
+              "x": 212813,
+              "longitude_rational": "14711490/131083",
+              "longitude_display": 112.23034260735564,
+              "latitude_native_f64": 1.4574688773321887,
+              "latitude_hex": "0x1.751cae2b145fcp+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_frozen_interval": {
+            "owners": [
+              23115,
+              31076
+            ],
+            "stable_ids": [
+              "gb:IDN:ADM2:22746128B82886709098386",
+              "gb:MYS:ADM2:92858781B41369964486545"
+            ],
+            "names": [
+              "Kapuas Hulu",
+              "Song"
+            ],
+            "original_interval": {
+              "original_block": 31,
+              "original_record_ordinal": 6,
+              "original_row": [
+                130021,
+                212813,
+                212815,
+                [
+                  23115,
+                  31076
+                ],
+                [
+                  36233,
+                  36398,
+                  46091
+                ],
+                "land"
+              ],
+              "interval_id": "idn-source-conflict:130021:212813:212815",
+              "all_source_feature_ids": [
+                "gb:IDN:ADM1:65028918B19721185942402",
+                "gb:IDN:ADM2:22746128B82886709098386",
+                "gb:MYS:ADM2:92858781B41369964486545"
+              ]
+            }
+          },
+          "current_selected_owner_observation": {
+            "id": "conflict:Borneo:6:130021:212813",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 130021,
+            "x": 212813,
+            "original_owner": null,
+            "baseline_owner": 0,
+            "append_owner": 0,
+            "effective_owner": 0,
+            "owner_identity": null
+          },
+          "original_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+              "feature_ordinal": 138,
+              "shapeName": "Kapuas Hulu",
+              "kind": "interior"
+            }
+          ],
+          "full_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+              "feature_ordinal": 138,
+              "shapeName": "Kapuas Hulu",
+              "kind": "interior"
+            }
+          ],
+          "complete_foreign_family_memberships": {
+            "gb:MYS:ADM1": {
+              "original_request_id": "conflict:Borneo:6:130021:212813",
+              "y": 130021,
+              "x": 212813,
+              "original_memberships": [],
+              "full_memberships": []
+            },
+            "gb:MYS:ADM2": {
+              "original_request_id": "conflict:Borneo:6:130021:212813",
+              "y": 130021,
+              "x": 212813,
+              "original_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B41369964486545",
+                  "feature_ordinal": 104,
+                  "shapeName": "Song",
+                  "kind": "interior"
+                }
+              ],
+              "full_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B41369964486545",
+                  "feature_ordinal": 104,
+                  "shapeName": "Song",
+                  "kind": "interior"
+                }
+              ]
+            }
+          },
+          "full_foreign_fine_existing_Atlas_locations": [
+            {
+              "owner": 31076,
+              "id": "gb:MYS:ADM2:92858781B41369964486545",
+              "name": "Song",
+              "parent_id": "framework:province:sarawak:8a5fb64d0d51",
+              "source_reference_year": "2020"
+            }
+          ],
+          "actual_JMG_Sarawak_contact_kinds": [],
+          "JMG_applicability": "Sarawakonly;notSabah",
+          "source_assessment_cohort": "both-full-Sarawak-fine;government-country-footprint-disagreement",
+          "chosen_owner": null,
+          "accepted_or_completed_credit": 0
+        },
+        "actual_new_government_comparison_unchanged": {
+          "request": {
+            "id": "conflict:Borneo:6:130021:212813",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 130021,
+            "x": 212813,
+            "original_record": {
+              "outcome_interval_index": 6,
+              "pair": [
+                "Kapuas Hulu",
+                "Song"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B82886709098386",
+                "gb:MYS:ADM2:92858781B41369964486545"
+              ],
+              "y": 130021,
+              "x": 212813,
+              "longitude_rational": "14711490/131083",
+              "longitude_display": 112.23034260735564,
+              "latitude_native_f64": 1.4574688773321887,
+              "latitude_hex": "0x1.751cae2b145fcp+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+              "feature_ordinal": 138,
+              "shapeName": "Kapuas Hulu",
+              "kind": "interior"
+            }
+          ],
+          "full_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+              "feature_ordinal": 138,
+              "shapeName": "Kapuas Hulu",
+              "kind": "interior"
+            }
+          ],
+          "full_private_MYS_memberships": [
+            {
+              "source_id": "gb:MYS:ADM2:92858781B41369964486545",
+              "feature_ordinal": 104,
+              "shapeName": "Song",
+              "kind": "interior"
+            }
+          ],
+          "cached_Gov_Sarawak_state_contacts": [],
+          "new_Gov_Sabah_state_contacts": [],
+          "Gov_district_Sarawak_contacts": [],
+          "Gov_district_Sabah_contacts": [],
+          "Gov_Sabah_line_incidence_only": [],
+          "scientific_observation_partition": "IDNfullpositive__Govstateoutside__Govdistrictoutside",
+          "owner_or_hold_changed": false,
+          "authority_or_repair_credit": 0
+        },
+        "review_scope": "Country-side negative operand source correction candidate, not direct ownership/physical qualification."
+      }
+    },
+    {
+      "original_package": "conflict",
+      "owner": 23115,
+      "y": 130192,
+      "x": 213846,
+      "original_request_id": "conflict:Borneo:8:130192:213846",
+      "retained_actual_comparison": {
+        "original_conflict_record_unchanged": {
+          "original_request": {
+            "id": "conflict:Borneo:8:130192:213846",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 130192,
+            "x": 213846,
+            "original_record": {
+              "outcome_interval_index": 7,
+              "pair": [
+                "Kapuas Hulu",
+                "Bukit Mabong"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B82886709098386",
+                "gb:MYS:ADM2:92858781B56085190058706"
+              ],
+              "y": 130192,
+              "x": 213846,
+              "longitude_rational": "14897430/131083",
+              "longitude_display": 113.6488331820297,
+              "latitude_native_f64": 1.2227202084336857,
+              "latitude_hex": "0x1.3904310b61882p+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_frozen_interval": {
+            "owners": [
+              23115,
+              31106
+            ],
+            "stable_ids": [
+              "gb:IDN:ADM2:22746128B82886709098386",
+              "gb:MYS:ADM2:92858781B56085190058706"
+            ],
+            "names": [
+              "Kapuas Hulu",
+              "Bukit Mabong"
+            ],
+            "original_interval": {
+              "original_block": 31,
+              "original_record_ordinal": 7,
+              "original_row": [
+                130192,
+                213846,
+                213847,
+                [
+                  23115,
+                  31106
+                ],
+                [
+                  36398,
+                  45977,
+                  46101
+                ],
+                "land"
+              ],
+              "interval_id": "idn-source-conflict:130192:213846:213847",
+              "all_source_feature_ids": [
+                "gb:IDN:ADM2:22746128B82886709098386",
+                "gb:MYS:ADM1:15666254B8535925993004",
+                "gb:MYS:ADM2:92858781B56085190058706"
+              ]
+            }
+          },
+          "current_selected_owner_observation": {
+            "id": "conflict:Borneo:8:130192:213846",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 130192,
+            "x": 213846,
+            "original_owner": null,
+            "baseline_owner": 0,
+            "append_owner": 0,
+            "effective_owner": 0,
+            "owner_identity": null
+          },
+          "original_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+              "feature_ordinal": 138,
+              "shapeName": "Kapuas Hulu",
+              "kind": "interior"
+            }
+          ],
+          "full_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+              "feature_ordinal": 138,
+              "shapeName": "Kapuas Hulu",
+              "kind": "interior"
+            }
+          ],
+          "complete_foreign_family_memberships": {
+            "gb:MYS:ADM1": {
+              "original_request_id": "conflict:Borneo:8:130192:213846",
+              "y": 130192,
+              "x": 213846,
+              "original_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+                  "feature_ordinal": 6,
+                  "shapeName": "Sarawak",
+                  "kind": "interior"
+                }
+              ],
+              "full_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+                  "feature_ordinal": 6,
+                  "shapeName": "Sarawak",
+                  "kind": "interior"
+                }
+              ]
+            },
+            "gb:MYS:ADM2": {
+              "original_request_id": "conflict:Borneo:8:130192:213846",
+              "y": 130192,
+              "x": 213846,
+              "original_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+                  "feature_ordinal": 114,
+                  "shapeName": "Bukit Mabong",
+                  "kind": "interior"
+                }
+              ],
+              "full_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+                  "feature_ordinal": 114,
+                  "shapeName": "Bukit Mabong",
+                  "kind": "interior"
+                }
+              ]
+            }
+          },
+          "full_foreign_fine_existing_Atlas_locations": [
+            {
+              "owner": 31106,
+              "id": "gb:MYS:ADM2:92858781B56085190058706",
+              "name": "Bukit Mabong",
+              "parent_id": "framework:province:sarawak:8a5fb64d0d51",
+              "source_reference_year": "2020"
+            }
+          ],
+          "actual_JMG_Sarawak_contact_kinds": [],
+          "JMG_applicability": "Sarawakonly;notSabah",
+          "source_assessment_cohort": "both-full-Sarawak-fine;government-country-footprint-disagreement",
+          "chosen_owner": null,
+          "accepted_or_completed_credit": 0
+        },
+        "actual_new_government_comparison_unchanged": {
+          "request": {
+            "id": "conflict:Borneo:8:130192:213846",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 130192,
+            "x": 213846,
+            "original_record": {
+              "outcome_interval_index": 7,
+              "pair": [
+                "Kapuas Hulu",
+                "Bukit Mabong"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B82886709098386",
+                "gb:MYS:ADM2:92858781B56085190058706"
+              ],
+              "y": 130192,
+              "x": 213846,
+              "longitude_rational": "14897430/131083",
+              "longitude_display": 113.6488331820297,
+              "latitude_native_f64": 1.2227202084336857,
+              "latitude_hex": "0x1.3904310b61882p+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+              "feature_ordinal": 138,
+              "shapeName": "Kapuas Hulu",
+              "kind": "interior"
+            }
+          ],
+          "full_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+              "feature_ordinal": 138,
+              "shapeName": "Kapuas Hulu",
+              "kind": "interior"
+            }
+          ],
+          "full_private_MYS_memberships": [
+            {
+              "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+              "feature_ordinal": 6,
+              "shapeName": "Sarawak",
+              "kind": "interior"
+            },
+            {
+              "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+              "feature_ordinal": 114,
+              "shapeName": "Bukit Mabong",
+              "kind": "interior"
+            }
+          ],
+          "cached_Gov_Sarawak_state_contacts": [],
+          "new_Gov_Sabah_state_contacts": [],
+          "Gov_district_Sarawak_contacts": [],
+          "Gov_district_Sabah_contacts": [],
+          "Gov_Sabah_line_incidence_only": [],
+          "scientific_observation_partition": "IDNfullpositive__Govstateoutside__Govdistrictoutside",
+          "owner_or_hold_changed": false,
+          "authority_or_repair_credit": 0
+        },
+        "review_scope": "Country-side negative operand source correction candidate, not direct ownership/physical qualification."
+      }
+    }
+  ]
+}

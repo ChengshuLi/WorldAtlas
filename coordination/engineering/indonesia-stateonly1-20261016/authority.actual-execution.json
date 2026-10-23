@@ -1,0 +1,18 @@
+{
+  "command": [
+    "node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "native-authority",
+    ".cloud-work/stateonly1-native-config.json",
+    "coordination/engineering/indonesia-stateonly1-20261016/authority"
+  ],
+  "executing_input_head": "0a719c4a1e6981a0778a9df56360d08d5d2a5643",
+  "reviewed_code_head": "9fa67a901e6202622752e4487d9ffb5a7440b0f5",
+  "elapsed_seconds": 5.083994545042515,
+  "exit_code": 0,
+  "maxrss_wait4_children_bytes": 457056256,
+  "rss_interpretation": "Maximum per-process child ru_maxrss reported by Linux wait4, not a sampled concurrent group sum. No memory cap/override.",
+  "user_seconds": 4.375986,
+  "system_seconds": 3.391588,
+  "new_source_or_physical_producer_calls": 0
+}

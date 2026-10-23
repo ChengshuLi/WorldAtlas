@@ -1,0 +1,1232 @@
+{
+  "owner": {
+    "id": "gb:CRI:ADM2:36466004B12090025276311",
+    "index": 15807,
+    "bounds": [
+      70163.99634722222,
+      124728.50661611918,
+      70441.67383555556,
+      124963.2681025631
+    ],
+    "province_id": "framework:province:provincia-puntarenas:d96f1a32df76",
+    "province_index": 3806,
+    "name": "Puerto Jimenez",
+    "reference_owner": "Costa Rica",
+    "source_id": "gb:CRI:ADM2",
+    "source_atoms": [
+      "gb:CRI:ADM2:36466004B12090025276311"
+    ]
+  },
+  "original_source_feature": {
+    "source_index": 20187,
+    "family_index": 78,
+    "source_id": "gb:CRI:ADM2:36466004B12090025276311",
+    "ordinal": 0,
+    "owners": [
+      15807
+    ],
+    "name": "Puerto Jimenez",
+    "geometry_status": "raw-native-supported"
+  },
+  "source_properties": {
+    "shapeName": "Puerto Jimenez",
+    "shapeISO": "",
+    "shapeID": "36466004B12090025276311",
+    "shapeGroup": "CRI",
+    "shapeType": "ADM2"
+  },
+  "selected_metadata": {
+    "source_id": "gb:CRI:ADM2",
+    "source_name": "geoBoundaries gbOpen",
+    "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CRI/ADM2/geoBoundaries-CRI-ADM2.geojson",
+    "license": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+    "reference_year": "2020",
+    "administrative_level": "ADM2",
+    "parent_source_level": "ADM1",
+    "granularity_version": 3,
+    "source_role": "Canton",
+    "selection_reason": "Named Cantons territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+    "parent_match": "Named source administrative unit grouped within this geographic area",
+    "original_id": "36466004B12090025276311",
+    "representative_point": [
+      -83.45546527732412,
+      8.53155
+    ],
+    "hierarchy_version": 4,
+    "hierarchy_source": "gb:CRI:ADM1",
+    "hierarchy_overlap": 0.981399,
+    "topology_version": 1,
+    "reference_version": 3,
+    "geographic_area_code": "COS",
+    "geographic_region_code": 80,
+    "geographic_match": "largest source overlap",
+    "geographic_overlap": 0.63103,
+    "coverage_version": 1,
+    "semantic_version": 1,
+    "remote_version": 1,
+    "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+    "framework_match": {
+      "source": "Natural Earth",
+      "id": "CRI-1330",
+      "overlap": 0.97199
+    },
+    "regional_match": {
+      "reference_iso": "CRI",
+      "source_id": "CRI-1330",
+      "overlap": 0.97199,
+      "method": "reference-territory-constrained overlap"
+    },
+    "reference_owner_id": "owner:Q800",
+    "reference_polity": "Costa Rica",
+    "reference_polity_status": "reference",
+    "reference_polity_evidence": {
+      "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+      "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+      "reference_territory": "Costa Rica",
+      "classification": "Sovereign country",
+      "note": null,
+      "uncertainty": false
+    },
+    "semantic_review": {
+      "status": "open",
+      "continent": "North America",
+      "decision_index": 55,
+      "evidence_file": "geographic-decisions"
+    }
+  },
+  "provider_metadata": {
+    "boundaryID": "CRI-ADM2-36466004",
+    "boundaryName": "Costa Rica",
+    "boundaryISO": "CRI",
+    "boundaryYearRepresented": "2020",
+    "boundaryType": "ADM2",
+    "boundaryCanonical": "Cantons",
+    "boundarySource": "geoBoundaries, Wikimedia Commons",
+    "boundaryLicense": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+    "licenseDetail": "nan",
+    "licenseSource": "commons.wikimedia.org/wiki/File",
+    "boundarySourceURL": "commons.wikimedia.org/wiki/File",
+    "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+    "buildDate": "Dec 12, 2023",
+    "Continent": "Latin America and the Caribbean",
+    "UNSDG-region": "Latin America and the Caribbean",
+    "UNSDG-subregion": "Central America",
+    "worldBankIncomeGroup": "Upper-middle-income Countries",
+    "admUnitCount": "83",
+    "meanVertices": "3201.0",
+    "minVertices": "230",
+    "maxVertices": "14876",
+    "meanPerimeterLengthKM": "138.56717625425765",
+    "minPerimeterLengthKM": "13.268977983106817",
+    "maxPerimeterLengthKM": "590.8233818392314",
+    "meanAreaSqKM": "618.8974158369535",
+    "minAreaSqKM": "6.760403951406345",
+    "maxAreaSqKM": "3357.0676314794223",
+    "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CRI/ADM2/geoBoundaries-CRI-ADM2-all.zip",
+    "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CRI/ADM2/geoBoundaries-CRI-ADM2.geojson",
+    "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CRI/ADM2/geoBoundaries-CRI-ADM2.topojson",
+    "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CRI/ADM2/geoBoundaries-CRI-ADM2-PREVIEW.png",
+    "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CRI/ADM2/geoBoundaries-CRI-ADM2_simplified.geojson",
+    "sha256": "3aefbfb2c8b6c5bfe4e46449ee98a1b2248cccf12187e76215a76173a2d8f5e0"
+  },
+  "provider_original_raw_sha256": "3aefbfb2c8b6c5bfe4e46449ee98a1b2248cccf12187e76215a76173a2d8f5e0",
+  "original_package": "gb-CRI-ADM2--repair-evaluation",
+  "package_cells": 4380,
+  "affected_owner_cells": 127,
+  "affected_owner_intervals": 86,
+  "affected_owner_blocks": {
+    "block-030.json.gz": {
+      "intervals": 86,
+      "cells": 127,
+      "water_cells": 0
+    }
+  },
+  "owner_intervals": [
+    [
+      124776,
+      70327,
+      70328,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124777,
+      70327,
+      70328,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124785,
+      70333,
+      70334,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124786,
+      70334,
+      70336,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124787,
+      70335,
+      70336,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124788,
+      70336,
+      70337,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124807,
+      70358,
+      70363,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124808,
+      70359,
+      70364,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124809,
+      70361,
+      70365,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124810,
+      70362,
+      70365,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124811,
+      70364,
+      70365,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124812,
+      70365,
+      70366,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124836,
+      70414,
+      70415,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124837,
+      70415,
+      70416,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124839,
+      70429,
+      70431,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124840,
+      70420,
+      70423,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124840,
+      70428,
+      70430,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124840,
+      70430,
+      70432,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124841,
+      70427,
+      70428,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124841,
+      70428,
+      70429,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124841,
+      70429,
+      70430,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124841,
+      70430,
+      70432,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124842,
+      70430,
+      70431,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124842,
+      70431,
+      70432,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124852,
+      70164,
+      70165,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124853,
+      70165,
+      70166,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124854,
+      70166,
+      70167,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124854,
+      70167,
+      70168,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124855,
+      70167,
+      70168,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124855,
+      70168,
+      70169,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124856,
+      70168,
+      70170,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124857,
+      70170,
+      70171,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124858,
+      70171,
+      70172,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124858,
+      70172,
+      70173,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124859,
+      70172,
+      70174,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124860,
+      70174,
+      70175,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124861,
+      70175,
+      70176,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124862,
+      70177,
+      70178,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124863,
+      70178,
+      70179,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124864,
+      70179,
+      70180,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124866,
+      70182,
+      70183,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124867,
+      70183,
+      70184,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124868,
+      70184,
+      70185,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124869,
+      70185,
+      70186,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124870,
+      70186,
+      70188,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124871,
+      70188,
+      70189,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124872,
+      70189,
+      70190,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124873,
+      70190,
+      70191,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124874,
+      70191,
+      70192,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124875,
+      70192,
+      70194,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124876,
+      70194,
+      70195,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124883,
+      70434,
+      70435,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124884,
+      70435,
+      70437,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124885,
+      70436,
+      70438,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124886,
+      70436,
+      70438,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124887,
+      70437,
+      70438,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124888,
+      70437,
+      70438,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124889,
+      70438,
+      70439,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124891,
+      70439,
+      70440,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124897,
+      70440,
+      70441,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124904,
+      70216,
+      70217,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124905,
+      70218,
+      70219,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124906,
+      70220,
+      70221,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124911,
+      70223,
+      70224,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124912,
+      70223,
+      70225,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124912,
+      70240,
+      70244,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124912,
+      70244,
+      70245,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124913,
+      70224,
+      70225,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124913,
+      70234,
+      70237,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124913,
+      70237,
+      70243,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124913,
+      70243,
+      70244,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124914,
+      70238,
+      70242,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124918,
+      70439,
+      70440,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124925,
+      70439,
+      70440,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124942,
+      70376,
+      70377,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124943,
+      70378,
+      70379,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124945,
+      70383,
+      70384,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124946,
+      70436,
+      70437,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124947,
+      70436,
+      70437,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124948,
+      70436,
+      70437,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124949,
+      70436,
+      70437,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124950,
+      70436,
+      70437,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124960,
+      70419,
+      70420,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124961,
+      70421,
+      70422,
+      [
+        15807
+      ],
+      [
+        20184,
+        20187
+      ],
+      "land"
+    ],
+    [
+      124961,
+      70422,
+      70423,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ],
+    [
+      124962,
+      70424,
+      70425,
+      [
+        15807
+      ],
+      [
+        20187
+      ],
+      "land"
+    ]
+  ],
+  "source_contact_cells": 127,
+  "source_contact_intervals": 86,
+  "source_contact_other_owner_cells": 0,
+  "official_evidence": {
+    "url": "https://www.imprentanacional.go.cr/pub/2022/06/21/COMP_21_06_2022.html",
+    "document": "La Gaceta 115, 2022-06-21, Law 10195",
+    "relevant_parts": [
+      "Articles 1–4",
+      "Transitory VII"
+    ],
+    "facts": [
+      "Creates Puerto Jiménez canton from the existing second district of Golfito.",
+      "Municipality installation stated as 2024-05-01.",
+      "Names official national cartography and CRTM05 as law boundary references.",
+      "Until municipal installation the stated transition provisions apply."
+    ]
+  },
+  "necessary_source_fact": "A truthful as-of date and geographic role for original member 36466004B12090025276311: the retained 2020 represented-year/Cantons label does not establish when this member became a canton or which dated boundary version the retained body contains. Resolve original-provider derivation/version evidence; do not substitute build date for vintage or assume a corrected year.",
+  "limits": [
+    "The 27 direct-original memberships remain unchanged.",
+    "This law-to-metadata discrepancy does not establish geometry equality, inequality, invalidity, or a need to alter the frozen cell keys.",
+    "Native source geometry declares CRS84; the law mentions official CRTM05 references. No coordinate transform or predicate was run.",
+    "All semantic states remain open; no blanket current-law or current-boundary gate is inferred."
+  ]
+}

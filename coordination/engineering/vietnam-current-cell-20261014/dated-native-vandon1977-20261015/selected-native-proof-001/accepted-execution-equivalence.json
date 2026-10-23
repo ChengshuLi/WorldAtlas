@@ -1,0 +1,207 @@
+{
+  "version": 1,
+  "kind": "retained-execution-accepted-code-equivalence-v1",
+  "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+  "original_executing_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+  "original_derived_facts_sha256": "46e252b81b4179bb9284a8b2d81aae9354603e451a476d0dfd402a1d10fba62b",
+  "execution_code_files": 22,
+  "authority_files": 2,
+  "files": [
+    {
+      "path": "scripts/run-geographic-check.py",
+      "bytes": 30772,
+      "sha256": "f42f93dbb9be8f29c4b711aa85980a1bb13103c2cbd6a4a1c3ee11e2c7f20e1b",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "bytes": 77588,
+      "sha256": "a800152549981ef1f40fb5632bf7c2af1cba6825b56584ebe59e69aade40450d",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "scripts/selected-checkpoint-native.mjs",
+      "bytes": 7564,
+      "sha256": "ff99c3db5060bc3e80ef0e894fed98efe588ee75d1578eddd4cc47aed33d112a",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "src/native-grid.js",
+      "bytes": 37995,
+      "sha256": "78c1e2bc2df944f11b2b638645d20defa82511a1cb17debbf865921945b14740",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 162130,
+      "sha256": "bf63f33386d421640f2f80ee859388e2068c09ccc7bf309bc3c23d3a05f5381f",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs",
+      "bytes": 77356,
+      "sha256": "be025b83cb6a887c2d2c4056273030d16a96bdb07ff02bd3fcf45cb9a64833dd",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs",
+      "bytes": 12749,
+      "sha256": "4bda93a0b3e094ecff8aa594856b8873ab4371292897f76298eb4aab5107f144",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "scripts/accepted-selected-checkpoint.mjs",
+      "bytes": 9995,
+      "sha256": "aa5590ad4cfac5d98d3052ac095068a0134380ab1ac293e63145eb27ca65e65f",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "scripts/check-handoff-scope.mjs",
+      "bytes": 8179,
+      "sha256": "f2b4e03701182058fdd6864cac9ff65b270899914d7c030fb42d053fd400f693",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "scripts/evidence-policy.mjs",
+      "bytes": 2483,
+      "sha256": "684ad01c51c0626bafe4715c9ab5b46eeb901ee54bc9dcb6f439ef505f0f55b2",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "bytes": 28506,
+      "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "scripts/geographic-report-artifact.mjs",
+      "bytes": 26756,
+      "sha256": "d44944326735fedfeef77093a00d7a4ee722d24cc8140d641aee40fecbb942a5",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "scripts/github-quota.mjs",
+      "bytes": 3378,
+      "sha256": "ba8503e32145f5563857f1015fb1516b1e65dcc451164a39930867e3a8d032b2",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "scripts/github-snapshots.mjs",
+      "bytes": 1595,
+      "sha256": "eaf2ca029adae4319ff6b0f1ce9ba75b7f965aeeab7fa7fe72548fa888f22afe",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "scripts/integration-proof.mjs",
+      "bytes": 889,
+      "sha256": "f08e03c81efa756d36126812cfe415118cace433a1477cc25fdb60def19572ec",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "bytes": 22495,
+      "sha256": "890262c61c4c285732df52da55df7f0f78b2fbd339bcb68b2de2561814d2123f",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "scripts/job-deadline.mjs",
+      "bytes": 7840,
+      "sha256": "4f81c4448e6256f3841766744852cc9f8eddf2c929857a3cb85dd09f77815314",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "scripts/research-import-gate.mjs",
+      "bytes": 335,
+      "sha256": "0079ee16f5cf1068a09be8d5b416ed6a22e33c33b0605b203cc213f4f6198905",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "scripts/worker-result.mjs",
+      "bytes": 1913,
+      "sha256": "21757f7bebf64513389c0bb97e9f79f556f145bafbb4ceae9d4889e68a43883f",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "src/regional-import-gate.js",
+      "bytes": 7292,
+      "sha256": "83215f326c85b6f95c21f5560c7f0477c581b1e37a1a4f52de4ef39741dabf7d",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "scripts/geographic_checkpoint_products.py",
+      "bytes": 6191,
+      "sha256": "d7d3a19233ae2b1b5b94d9226f4420d241b3dfbbebc825f56bad3b2a86838152",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+      "bytes": 252214,
+      "sha256": "633bf569788c97c2aa52c27c4cb919c7dd1021eb1cd78fc7b326fc7369d475a8",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json",
+      "bytes": 10854,
+      "sha256": "3d953ff2889bb048719ea7751bb1eeb6dde9749413c5b59e84dc42071a274474",
+      "original_commit": "18b763e2c23b54673aeaf7667804e62e5524254c",
+      "accepted_commit": "f43770d6b60a7826cd861d2c3954b9db7c886e9d",
+      "identical": true
+    }
+  ],
+  "limits": [
+    "Whole-byte code/authority equivalence only; the preserved original baseline/candidate/runtime and scientific limitations are unchanged.",
+    "Current accepted270358prefix is independently preserved in composition/finalization; this equivalence is not a fresh native comparison against that prefix. Ordinary trusted final delivery is still required."
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "kind": "actual-stock-native-authority-request-scope-rejection",
+  "config": "config/admin-native-authority-003.json",
+  "entrypoint": "scripts/prepare-delivery-handoff.mjs native-authority",
+  "stdout": "",
+  "stderr": "Native coverage classes differ from complete requested owner cells\n",
+  "output_created": false,
+  "cause": "Explicit coverage class rows still describe all 293965 original requested cells; the supported patch contains 293912. The stock complete-request scope guard rejected before authority creation.",
+  "correction": "A fresh config intersects only coverage_rows with exact diagnostic supported_rows, retaining every other source/physical/negative field. Original rows and full diagnostic remain retained."
+}

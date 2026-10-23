@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "selector": {
+    "commit": "f833c2d7de6f239955cf592560d559d5377c4c6f",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "0792161cd1e07933af04b286ef7ef82e6b0e98b7",
+    "bytes": 1856,
+    "sha256": "a29f5e9ae323eddd14c618a0765d18d45becf1890946de8dcb824b041edebf62"
+  },
+  "effective_release_id": "geography:png-nine-selected-delivery-20261018",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "bf4cf96756a3a2673f7b4610ac8aacdda716f7ef",
+        "path": "coordination/engineering/png-nine-preparation-successor-20261018/native-nine-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "03c6971b4cd33bd78dbec06d152301a69ad979f2",
+        "bytes": 756,
+        "sha256": "5ba5a0db116e27870e027c83bae7770b5fa0fd596e61665b8cfad760f0d785a7"
+      },
+      "source_authority": {
+        "commit": "bf4cf96756a3a2673f7b4610ac8aacdda716f7ef",
+        "path": "coordination/engineering/png-nine-preparation-successor-20261018/native-nine-authority-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "724342fe31a9ca7d397561dd37ba0920e957ee6a",
+        "bytes": 759,
+        "sha256": "bde6977c932b8ea10d0c4c318d5bff40d30ce838019fb27a4a96257e1e3c3c80"
+      },
+      "ledger": {
+        "commit": "bf4cf96756a3a2673f7b4610ac8aacdda716f7ef",
+        "path": "coordination/engineering/png-nine-preparation-successor-20261018/native-nine-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "d1105327663008fb1d8db48c33580b24929ec173",
+        "bytes": 2984,
+        "sha256": "8afc482a29903ade11c4e8405c7462a683bd81a0b7ac7f4dca9acd7dc0cc2b71"
+      },
+      "native_patch": {
+        "commit": "585f1f3246fd444c6cba9a933bbbd0b1685b0962",
+        "path": "coordination/engineering/png-nine-preparation-successor-20261018/delivery-nine-inputs-001/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "c077e036f66d9a8c54c13723ae47cfaf31a7d64f",
+        "bytes": 143,
+        "sha256": "62e53a26a86b646c6ee1475f79150e501fb328aae620d7dfa75b1f210a5bb78e"
+      }
+    }
+  ]
+}

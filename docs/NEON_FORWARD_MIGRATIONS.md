@@ -1,10 +1,10 @@
 # Reviewed PostgreSQL forward deployment
 
-The frozen fourteen-table copy and its original evidence must be verified first. `scripts/neon-forward-migrations.mjs` then applies reviewed PostgreSQL forward migrations without importing historical facts, rotating credentials, changing Site audience or moving media.
+For schema-forward modes, the frozen fourteen-table copy and its original evidence must be verified first. `scripts/neon-forward-migrations.mjs` then applies reviewed PostgreSQL forward migrations without rotating credentials, changing Site audience or moving media. Only an explicitly pinned historical settlement bundle may be added through the existing private ingestion services after forward verification.
 
-The workflow is `.github/workflows/neon-forward-migrations.yml`. A root-maintainer commit changing `.github/operations/neon-forward-production.json` explicitly activates production on `work`; other pushes only use the separate optional rehearsal operation and skip when it is absent. Manual dispatch also supports production, verify-only and rehearsal. The selector uses Bash builtins, not ripgrep. The repository and branch are checked in the script. The workflow shares the owner-maintenance concurrency group with the original copy workflow.
+The workflow is `.github/workflows/neon-forward-migrations.yml`, with explicit manual dispatch for production, verify-only or rehearsal. Ordinary pushes and merges never select a forward operation. The selector uses Bash builtins, and the script checks the repository and branch. The workflow shares the owner-maintenance concurrency group with current PostgreSQL recovery. The completed original copy executor and workflow are retired; its original workflow/repository identities and exact committed receipt remain available to authenticate the preserved production proof. The forward executor does not depend on an expiring Actions ZIP.
 
-Root owns the concrete operation and its publication. Do not substitute a successful rehearsal receipt for the production baseline. The original production run must be completed and successful; its authenticated artifact and receipt bytes must match the reviewed hashes, source identity, original full-byte copy and readback. No forward operation is automatically created by this tool.
+Root owns the concrete operation and its publication. Do not substitute a successful rehearsal receipt for the production baseline. The original production run must be completed and successful; the whole committed `data/validation/neon-production-storage-migration.json` body must match the reviewed receipt hash, and its repository/workflow/head/run/attempt must match that original run. The original source identity, full-byte copy, runtime checks and readback remain mandatory. Historical artifact ID/hash fields are retained as provenance, not fetched as a second copy of the receipt. No forward operation is automatically created by this tool.
 
 ## Reviewed operation template
 
@@ -50,7 +50,7 @@ Root owns the concrete operation and its publication. Do not substitute a succes
 }
 ```
 
-All placeholder values fail validation. Migration IDs, file paths, order and byte hashes are pinned. The template supports the first migration alone, or both in order. Source checkpoint parts are unpacked and independently verified before SQL.
+All placeholder values fail validation. Migration IDs, file paths, order and byte hashes are pinned. The initial-baseline template supports the first migration alone, the first two, or all three known migrations in order (the third is `postgres/migrations/0003_typed_observations.sql`). For that initial route, source checkpoint parts are unpacked and independently verified before SQL. Do not run the historical revision-1321 example against a grown database.
 
 Root privately verifies the Site's maintenance state and commits a fresh hash-pinned attestation:
 
@@ -69,7 +69,7 @@ Root privately verifies the Site's maintenance state and commits a fresh hash-pi
 }
 ```
 
-The attestation must match the operation and be at most one hour old, with at most 30 seconds of future clock skew. CI checks its bytes and freshness before and after the transaction. This is an explicit reviewed root attestation: **the runner does not independently access the private Site**. No private Site access credential is copied into Actions. Keep maintenance enabled until root verifies the compatible website, runtime, forward schema and storage v2.
+The attestation must match the operation and be at most one hour old, with at most 30 seconds of future clock skew. CI checks its bytes and freshness before and after the transaction. This is an explicit reviewed root attestation: **the runner does not independently access the private Site**. No private Site access credential is copied into Actions. Keep maintenance enabled until root verifies the compatible website, runtime and resulting forward/storage contract.
 
 ## Execution and receipts
 
@@ -98,8 +98,145 @@ The registry is owner-only and rejects update, delete and truncate. The installe
 
 The runtime receives SELECT/INSERT on the four dated membership/existence tables. For footprints it receives SELECT only on `atlas_footprint_versions` and `atlas_footprint_version_objects`, and SELECT/INSERT on the three selection/withdrawal tables. Publication fields remain owner-only. No new sequence, explicit ingestion rowid, mutation of original facts, registry access, guard bypass, schema creation or role membership is granted. The original narrow geographic-release publication permissions remain as reviewed in the frozen foundation.
 
-Storage v1 still describes the original fourteen tables. Storage v2 describes the eighteen/23 atlas fact tables and their source/target migration and catalog proofs; the administrative registry must be preserved separately in owner-maintenance receipts/backups, without granting public/runtime access. This tool targets the initial frozen baseline; later migrations after content growth need a newly reviewed current snapshot and technical-maintainer operation.
+Storage v1 still describes the original fourteen tables. Storage v2 describes the eighteen/23 atlas fact tables and their source/target migration and catalog proofs; the administrative registry must be preserved separately in owner-maintenance receipts/backups, without granting public/runtime access. After content growth, use the explicit current-source preservation pin below rather than replacing the immutable historical baseline or copying its old facts back.
+
+## Current compact-source continuation
+
+The same operation may include this additional pin, with **all three** existing migrations in their original order:
+
+```json
+"current_source": {
+  "inventory_file": "data/validation/current-recovery/source-inventory.json",
+  "inventory_sha256": "ACTUAL_CURRENT_INVENTORY_SHA256",
+  "receipt_file": "data/validation/current-recovery/receipt.json",
+  "receipt_sha256": "ACTUAL_SUCCESSFUL_NATIVE_RECOVERY_RECEIPT_SHA256"
+}
+```
+
+Use the existing current PostgreSQL recovery operation's successful native backup/isolated-restore receipt and complete owner inventory. Its read-only source marker must be exact compact-only V4 over frozen base2 or base3. The receipt pins the same collections, owner registry, compact physical rows and dictionary sequences; its encrypted-backup and isolated-restore readback must have succeeded. These are reviewed operation inputs, not self-generated assertions of live readiness. No operation file or fresh maintenance receipt is supplied by this implementation.
+
+For a current capture followed immediately by the reviewed forward operation, the same operation may instead set `"current_source": "capture-current-native"`. Supply `window_comment_id` to the existing forward workflow. It invokes the existing native recovery function in that same owner job, under its genuine forward-workflow identity and the shared maintenance concurrency group. The fresh publisher window must additionally pin `forward_operation_sha256` to the complete committed operation-file bytes. An old read-only-only window cannot authorize this caller. All existing actor, exact main/tool/source, reservation, hosting/drain, recipient and expiry checks remain, and the exact window is reread before and after forward SQL.
+
+The successful native capture must belong to the same head, run, attempt and window. The executor reads its actual private inventory and sanitized receipt from local runner files, computes their whole-byte pins in memory, and passes them through the unchanged current-source validator. It does not publish an inventory to Git or transfer it through an artifact. Only encrypted backup bytes, the recipient envelope and sanitized recovery receipts from `data/validation/current-postgres-recovery/public-receipts/` are uploaded alongside the sanitized forward receipt. Plaintext dump and inventories remain private. Explicit pre-existing `current_source` pins remain supported unchanged.
+
+This integration does not produce its own maintenance approval. The existing fresh hash-pinned root maintenance attestation still must match the captured current marker and pass before and after SQL. Capture/restore or authorization failure stops before the owner installer; a post-commit check failure must be reconciled, never treated as permission to repeat unknown writes. Repository acceptance is not permission for the live backup, grants or migration.
+
+Keep the original top-level checkpoint/source fields and authenticated baseline receipt unchanged as historical provenance. The old registry rows retain their original fingerprint, guards and application timestamps. The fresh maintenance attestation instead binds the current recovery marker's revision/fingerprint. A current-source continuation does not unpack or compare live facts to the old revision-1321 snapshot, restore any old row, or reopen the retired baseline copy executor.
+
+Inside the existing owner lock and atomic transaction, the installer reads the actual current compact inventory and compares it with the reviewed pin. It applies only the missing canonical V3 DDL and necessary typed-table grants. The only accepted delta is three empty typed tables, their known catalog/functions/permissions, and one new immutable migration row. Every inherited logical collection, original registry row, compact physical row, dictionary key/sequence, ingestion sequence, database/default ACL and inherited function/table/sequence permission remains exact. Unknown profiles, data drift, modified registry rows, extra access and unreviewed DDL refuse and roll back. Repeating the same operation after a successful commit verifies a no-op; a new base3 recovery pin can independently verify the resulting state.
+
+Issue #2696's settlement-population import is cancelled. The 9,301 estimates remain Git source evidence, not verified location populations or a production import objective. This workflow does not accept a `settlement_import` declaration. The unrelated reviewed forward-schema and active geographic synchronization paths retain their existing authorization, preservation and retry boundaries.
 
 ## Local validation
 
-Focused tests use actual PostgreSQL 18.3/PGlite to exercise both forward migrations, complete original-byte and sequence preservation, idempotent retries, atomic rollback, restricted runtime permissions, immutable registry, catalog tampering rejection and no-network skipped operations. They also exercise private maintenance attestation boundaries and the actual Bash operation selector. No production or disposable Neon call is made by those tests.
+Focused tests use actual PostgreSQL/PGlite SQL to exercise all three forward migrations, complete original-byte and sequence preservation, idempotent retries, atomic rollback, restricted runtime permissions, immutable registry, catalog tampering rejection and no-network skipped operations. They also exercise private maintenance attestation boundaries and the actual Bash operation selector. No production or disposable Neon call is made by those tests.
+
+The grown-state tests execute the real installer and recovery inventory against an isolated compact PostgreSQL database with additional source/entity/release rows. They cover exact preservation, idempotence, base3 inventory, transactional rollback and adverse fingerprints/private ACLs/physical evidence/sequences/registry rows. They do not claim a native `pg_dump` rehearsal, provider branch execution, HTTP deployment or production import.
+
+The same-job test uses an in-process native-capture/provider fixture but executes the actual forward service and PostgreSQL SQL twice, including a fresh base3 verification. It checks preserved rows/registry/ACLs, no archive request, genuine workflow identity, exact operation/window binding, changed-window refusal and private upload boundaries. It is not a native Docker dump/restore or production execution receipt.
+
+
+## Retired settlement production route
+
+The cancelled owner settlement helper and its private-database research-bundle
+adapter have been removed. A forward operation containing `settlement_import`,
+including a false or null value, refuses before native capture, provider requests
+or owner database access. The generic research importer likewise rejects its
+retired `database`, `target` and `manifestSHA` options rather than silently
+switching transports.
+
+The original 9,301 estimates, source hashes, typed contracts, historical parity
+queries and Git history remain intact. Generic research HTTP import and dry-run
+support are separate, unchanged capabilities; they do not authorize the cancelled
+settlement import. Active geography synchronization below remains unchanged.
+
+
+## Ordered geographic publication, without schema or settlement work
+
+Issue #2701 uses the same private owner workflow with `geography-verify` and
+`geography-production`, selecting `.github/operations/neon-geographic-production.json`.
+The closed operation pins the existing production project/branch, v10 compressed
+manifest and original index, plus the exact retained v8 membership image. Four
+ordered v7–v10 plans reuse the existing complete admission, stage and finalize
+services. Each phase stays within the unchanged 512-descriptor bound. There is no
+archive-upload tail, public write endpoint, DDL, grant, role membership, backup
+or settlement operation. The cancelled settlement import remains cancelled.
+
+`geography-verify` validates every complete input, including restored v8 bytes,
+before returning with no database calls. Production requires a fresh existing
+`worldatlas-production` / `worldatlas-publication` GitHub deployment record with
+`kind: geography`, the exact accepted `primary_commit`, issue #2701, the complete
+operation-file SHA-256, the existing origin, and `read_only: true`. Its creator
+must match the workflow actor; its operation window is at most two hours. Pass
+that existing record's ID as `publication_deployment_id`. Complete publication
+registry reconciliation must show it as the sole unsettled operation. The same
+window is reauthenticated between releases, and expiry checked before each write.
+This uses the existing owner-maintenance concurrency and server-side Neon binding,
+not the historical fourteen-table copy baseline or the cancelled import window.
+
+The `geography-production` job has a 120-minute execution budget, covering
+checkout, all four ordered releases, verification, the public build and receipt
+retention. The former 30-minute whole-job limit interrupted healthy publication
+before all releases finished. Other modes retain their 30-minute limit. This
+budget matches the maximum publication-window duration; it does not renew that
+window or permit writes after its actual expiry. A timed-out or expired operation
+still requires durable-state reconciliation and a fresh exact-head window before
+resuming the original immutable ingestion IDs. Stuck jobs remain bounded.
+
+The exact published v6 predecessor and all later existing release pins must match.
+The same immutable ingestion IDs and service transactions preserve prior entities,
+prior release memberships, unrelated content and access. Cát Hải's new parent is
+release-scoped membership, not an overwrite of `atlas_entities`. A failed or lost
+response requires reconciliation of those original IDs and release states before
+continuation; previous committed batches are not undone or replaced. Only the
+sanitized receipt is uploaded. Settle the same publication record with separate
+per-issue results and `delivery: null`; geographic publication cannot claim a
+website deployment. Publish the separately tested read-only website only after
+its exact requested content release is verified published.
+
+Issue discovery is reporting, not artifact or database compatibility. References
+to earlier PRs stay PR provenance, not invented original issues or a deployment
+blocker. Exact head/release pins and genuine unsettled-operation serialization
+remain authoritative.
+
+
+### Coordinated public map publication
+
+The publication operation selects one accepted source and its exact M content
+release. The public Worker compatibility deployment must precede any release
+finalization: the two legacy map snapshot routes keep omitted `release_id` at
+the retained published v6, while explicit new clients keep their own M and
+separate generic release endpoints keep their existing semantics. Empty or
+unknown explicit IDs do not fall back. This protects cached/open old pages and
+asset rollback after later releases are published.
+
+Compile only that same Worker entry with `node scripts/build-cloudflare.mjs
+--legacy-worker`. Its existing Wrangler metadata uses `keep_assets` and retained
+binding types; it does not copy credentials, upload a replacement asset set, or
+change the public write policy. Before the normal serialized Worker deployment,
+verify the actual provider's non-secret binding inventory against the retained
+configuration. Stop on an unexpected binding rather than discard it. The explicit
+geography publication window binds the old asset inventory and new Worker
+separately and settles with `delivery:null`; it is not a staging/recovery action
+or a new full website delivery. After synchronization, the existing Cloudflare
+publication record binds and publishes the complete new package.
+
+Once this compatibility deployment is verified, `geography-production` performs
+the exact bounded append through the existing private services and immutable
+batch receipts. It then uses the existing public builder's `--publication`
+boundary: authenticate the source-bound successful operation, derive M from the
+accepted selected products, and verify the published exact M and old-client
+compatibility before the expensive build. A mismatch stops, never selects
+latest or starts an unrelated synchronization. No future write authorization is
+inferred from the current v7–v10 operation/window.
+
+The owner workflow retains the completed public package with its exact source,
+operation, M, configuration, original build receipt, and complete output hashes.
+A retry looks for that same workflow/source/operation artifact and verifies all
+bytes before reuse, without claiming another build. A damaged or incompatible
+retained package refuses rather than silently rebuilding. Only the public
+package and sanitized receipts are uploaded, never SQLite or private database
+inventories. The existing publisher deploys that exact package under the normal
+serialized publication operation and verifies served assets plus explicit M;
+the prior live pair remains usable throughout. A failed deploy resumes from the
+retained package instead of rebuilding or issuing new ingestion IDs.

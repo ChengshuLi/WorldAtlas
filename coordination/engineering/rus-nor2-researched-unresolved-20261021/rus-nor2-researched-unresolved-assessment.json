@@ -1,0 +1,118 @@
+{
+  "title": "RUS NOR two-key source-applicability disposition assessment",
+  "status": "Substantive research assessment only. Recommends retaining both existing native holds as documented, researched-unresolved contacts; no key, owner, credit, or selected output changed.",
+  "contract": {
+    "issue": "https://github.com/ChengshuLi/WorldAtlas/issues/2302",
+    "package_id": "gb-RUS-ADM2--repair-evaluation",
+    "queue_commit": "9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c",
+    "queue_blob": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "contract_language": "Qualify unique current-location source membership, retained territorial exclusions, complete source competitors, and zero-reassignment additive native conservation; each interval is a qualified additive repair or a documented exception.",
+    "interpretation": "Source-specific applicability and significant research are required. The contract does not impose a universal current-boundary certificate or make a no-feature lookup a positive repair. These two records support only an exception/unresolved proposal with native holds retained."
+  },
+  "retained_scope": {
+    "tuple_index": "inventory/rus-other-contact-471-key-and-family-index.json",
+    "tuple_index_sha256": "b9a968677ce39d4d03f9fc0b61997d92a21d45f2b20fec7cb017510ae8d32d23",
+    "count": 2,
+    "current_class": "mapped_land_support",
+    "owner": "gb:RUS:ADM2:50074027B59329255842991",
+    "owner_name": "Petsamo District",
+    "source_family": "gb:NOR:ADM1",
+    "source_feature": "gb:NOR:ADM1:71437522B84427958303197",
+    "source_name": "Troms og Finnmark",
+    "source_ordinal_1based": 10,
+    "source_boundary_id": "NOR-ADM1-71437522",
+    "source_year": "2022",
+    "source_publisher": "Kartverket",
+    "source_license": "CC BY 4.0",
+    "source_feature_count": 11,
+    "source_family_decoded_sha256": "a24bd867e42c8f2d7bdd07e723594f2d55736d50de8cf1e92062ae443a0f0f72"
+  },
+  "primary_research_performed": [
+    {
+      "source": "Kartverket 2024 regional change page",
+      "url": "https://www.kartverket.no/til-lands/kommunereform/regionsendringer-2024",
+      "result": "Troms og Finnmark split into Troms and Finnmark effective 2024-01-01."
+    },
+    {
+      "source": "Kartverket 2024 map page",
+      "url": "https://www.kartverket.no/til-lands/kommunereform/endringskart-2024",
+      "result": "Confirms the split and links an illustrative map. The map is not a dated 2022 polygon source."
+    },
+    {
+      "source": "Current Kartverket county dataset metadata",
+      "url": "https://data.norge.no/nb/datasets/8aa07439-e295-3e11-8ee5-141cf03d7bd5/administrative-enheter-fylker",
+      "result": "Current cadastre-derived county dataset, reference date 2026-01-01, CC BY 4.0. The metadata recommends the historical administrative-units WMS for historical data."
+    },
+    {
+      "source": "Kartverket historical WMS capabilities",
+      "url": "https://wms.geonorge.no/skwms1/wms.adm_enheter_historisk?service=WMS&request=GetCapabilities",
+      "result": "HTTP 200, 38,020-byte XML, SHA-256 cfd2da187762ac157577c0dc94dea5e88a0aab6dd74021956465f1f4b0f72954. Published queryable county layers include 2021 and 2023, but not 2022."
+    },
+    {
+      "source": "Kartverket historical WMS GetFeatureInfo",
+      "url": "https://wms.geonorge.no/skwms1/wms.adm_enheter_historisk",
+      "result": "Two retained points were queried in 2021 and 2023 layers first using 100x100 pixels over BBOX 69.42,30.03,69.45,30.08, then using 101x101 pixels centered on each coordinate with ±0.00001-degree BBOX. For (152965,59862), both layers returned Troms og Finnmark/fylkesnummer 54. For (152972,59849), both returned no result. The small centered pixel is approximately 2 cm north-south and under 1 cm east-west by coordinate scale; WMS pixel lookup is not a vector geometry test."
+    },
+    {
+      "source": "Kartverket current point API",
+      "url": "https://api.kartverket.no/kommuneinfo/v1/punkt",
+      "details": "inventory/rus-nor-current-kartverket-point-lookup.json",
+      "result": "For (152965,59862), current API returned Finnmark/Sør-Varanger. For (152972,59849), it returned HTTP 404 'Ingen treff'."
+    },
+    {
+      "source": "Historical series ISO metadata",
+      "url": "https://www.geonorge.no/geonetwork/srv/nor/xml_iso19139?uuid=9bc064e3-6c34-4c3a-8421-00290052e9c0",
+      "result": "HTTP 200, 50,703-byte XML, SHA-256 86a74099dd3c9a95453358a2a6bafe14a494ded715f1a88f6d6c11bd367a4a45. It identifies the historical series and points distributions to Geonorge download, but exposes no direct 2022 file URL or exact 2022 snapshot."
+    }
+  ],
+  "per_key_assessment": [
+    {
+      "key": {
+        "x": 152972,
+        "y": 59849
+      },
+      "coordinate": {
+        "latitude": 69.43996822160625,
+        "longitude": 30.058131107771402
+      },
+      "evidence": [
+        "The retained 2022 Troms og Finnmark feature contacts this RUS-owned cell.",
+        "Official WMS GetFeatureInfo in both published adjacent historical layers (2021 and 2023) returned no county feature, including a tiny BBOX centered on the retained point.",
+        "The 2026 Kartverket point API also returned no match."
+      ],
+      "assessment": "The retained source-contact record and official query pixels disagree for this key, but the original contact-test implementation is not identified in the retained row/index. The exact cause of the disagreement was not independently rederived, so no cell-versus-center or other mechanism is asserted. Bracketing-year WMS pixel lookups and the current point API do not resolve the 2022 source contact. This is not a positive repair.",
+      "disposition": "A researched-unresolved exception is supportable with the native hold retained."
+    },
+    {
+      "key": {
+        "x": 152965,
+        "y": 59862
+      },
+      "coordinate": {
+        "latitude": 69.4336981394968,
+        "longitude": 30.048518877352535
+      },
+      "evidence": [
+        "The retained 2022 Troms og Finnmark feature contacts this RUS-owned cell.",
+        "Official WMS GetFeatureInfo in both 2021 and 2023 returns Troms og Finnmark/fylkesnummer 54, including a tiny BBOX centered on the retained point.",
+        "The 2026 Kartverket point API returns Finnmark/Sør-Varanger."
+      ],
+      "assessment": "Official 2021 and 2023 WMS query pixels and the 2026 point API place the queried location in the Norwegian county lineage, while the original native target records Petsamo District and the retained 2022 source contacts the cell. This is adverse to a positive RUS additive repair. The original contact-test implementation is not identified in the retained row/index, so no center-versus-cell mechanism is inferred.",
+      "disposition": "A researched-unresolved exception is supportable with the native hold retained."
+    }
+  ],
+  "remaining_material_step": {
+    "available": false,
+    "reason": "The historical WMS capabilities do not advertise a 2022 county layer. The official historical-series ISO record links to cart-based Geonorge downloads but provides no direct 2022 file URL; its recorded capabilities URL returned a 5,625-byte HTML not-found page. No cart, credentials, or consent was used. A specific 2022 source version remains conceivable, but no concrete authorized direct retrieval route is exposed by the inspected official metadata. The already available adjacent-year layers and precise point queries constitute the bounded reasonable public comparison completed here.",
+    "not_a_universal_gate": "This assessment does not demand a universally current polygon or certificate. It records the particular asymmetric source conflict for these two contacts and leaves all native holds unchanged."
+  },
+  "limitations": [
+    "WMS GetFeatureInfo reports the feature at an image pixel; even the tiny centered-pixel query is not a vector point-in-polygon test or legal boundary determination.",
+    "No 2022 historical geometry was retrieved or compared; 2021 and 2023 are bracketing evidence only.",
+    "A no-result response is not proof of exclusion from Norway or proof of RUS membership.",
+    "No owner observation, geometry scanner, physical producer, native diagnostic, constructor, key mutation, or acceptance claim was made.",
+    "The retained original contact index records keys, owner, source identity/name and source ordinal, but does not identify whether its source-contact predicate was center membership, raster-cell intersection, or another native rule. No cell-versus-center explanation is asserted."
+  ],
+  "primary_retrieval_evidence": "inventory/rus-nor2-primary-retrieval-evidence/manifest.json",
+  "primary_retrieval_evidence_sha256": "e49173b20e86e939e69248db0073f69acfaba6b37245a328b4dc0a6a6676c3fd"
+}

@@ -1,0 +1,305 @@
+{
+  "proposed_candidate_before_cleanup": "afaac0b5d8dfc320f8f2a8fb81fddb25092094ae",
+  "action": "Remove exactly three newly added executable copies from final data tree; retain all original bytes and execution pins in immutable original commit ancestry.",
+  "deletions": [
+    {
+      "remove_from_proposed_current_tree": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/compare-existing-native-rule.mjs",
+      "absent_in_accepted_b638": true,
+      "original_preservation": {
+        "commit": "be6bfb41a974d241075227856a121752a3c7170c",
+        "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/compare-existing-native-rule.mjs",
+        "mode": "100644",
+        "git_blob_oid": "c94ca3fa244a7d16e1de1c195a5857300cfede56",
+        "bytes": 7484,
+        "sha256": "a50ba668a7f44d0715fa18d34eb66f096d0720c320e68606ca2b953c44282b8a"
+      },
+      "role": "Original early source-comparison executed helper or its native module copy; historical method provenance only, not a selected authority/runtime/package read role."
+    },
+    {
+      "remove_from_proposed_current_tree": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/compare-vnm-current-map.mjs",
+      "absent_in_accepted_b638": true,
+      "original_preservation": {
+        "commit": "be6bfb41a974d241075227856a121752a3c7170c",
+        "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/compare-vnm-current-map.mjs",
+        "mode": "100644",
+        "git_blob_oid": "0f9da72c78fe2e182f094db29780da7d12d35adf",
+        "bytes": 4356,
+        "sha256": "c51cd573945b415f93690c904799fa16a60ce6774f3c1bcda481ac0875c4e90d"
+      },
+      "role": "Original early source-comparison executed helper or its native module copy; historical method provenance only, not a selected authority/runtime/package read role."
+    },
+    {
+      "remove_from_proposed_current_tree": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/inputs/accepted89ff-native-grid.mjs",
+      "absent_in_accepted_b638": true,
+      "original_preservation": {
+        "commit": "be6bfb41a974d241075227856a121752a3c7170c",
+        "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/inputs/accepted89ff-native-grid.mjs",
+        "mode": "100644",
+        "git_blob_oid": "1f3dc7193b2f791c8deb1ca34a182a3f402d7b5d",
+        "bytes": 37995,
+        "sha256": "78c1e2bc2df944f11b2b638645d20defa82511a1cb17debbf865921945b14740"
+      },
+      "role": "Original early source-comparison executed helper or its native module copy; historical method provenance only, not a selected authority/runtime/package read role."
+    }
+  ],
+  "actual_consumer_consumed_inventory_matches": [],
+  "runtime_package_filename_matches": [],
+  "nine_original_quartet_read_role_checks": [
+    {
+      "quartet": 1,
+      "role": "rule_preimage",
+      "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-0b0247438ee1-001/original-rule-preimage.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 1,
+      "role": "source_authority",
+      "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-0b0247438ee1-001/authority-binding.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 1,
+      "role": "ledger",
+      "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-0b0247438ee1-001/constructor-result.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 1,
+      "role": "native_patch",
+      "commit": "be6bfb41a974d241075227856a121752a3c7170c",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-patch-0b0247438ee1-PROPOSED.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 2,
+      "role": "rule_preimage",
+      "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-31701e6f2811-001/original-rule-preimage.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 2,
+      "role": "source_authority",
+      "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-31701e6f2811-001/authority-binding.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 2,
+      "role": "ledger",
+      "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-31701e6f2811-001/constructor-result.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 2,
+      "role": "native_patch",
+      "commit": "be6bfb41a974d241075227856a121752a3c7170c",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-patch-31701e6f2811-PROPOSED.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 3,
+      "role": "rule_preimage",
+      "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native18-4ade7d21d33e-v2-001/original-rule-preimage.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 3,
+      "role": "source_authority",
+      "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native18-4ade7d21d33e-v2-001/authority-binding.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 3,
+      "role": "ledger",
+      "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native18-4ade7d21d33e-v2-001/constructor-result.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 3,
+      "role": "native_patch",
+      "commit": "be6bfb41a974d241075227856a121752a3c7170c",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-patch-4ade7d21d33e-PROPOSED.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 4,
+      "role": "rule_preimage",
+      "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-ac86cd668766-001/original-rule-preimage.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 4,
+      "role": "source_authority",
+      "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-ac86cd668766-001/authority-binding.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 4,
+      "role": "ledger",
+      "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-ac86cd668766-001/constructor-result.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 4,
+      "role": "native_patch",
+      "commit": "be6bfb41a974d241075227856a121752a3c7170c",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/native-patch-ac86cd668766-PROPOSED.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 5,
+      "role": "rule_preimage",
+      "commit": "ce348825d4bba7c1fc8adbb519fd55837268b7cd",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/next557/original-rule-preimage.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 5,
+      "role": "source_authority",
+      "commit": "ce348825d4bba7c1fc8adbb519fd55837268b7cd",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/next557/authority-binding.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 5,
+      "role": "ledger",
+      "commit": "ce348825d4bba7c1fc8adbb519fd55837268b7cd",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/next557/constructor-result.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 5,
+      "role": "native_patch",
+      "commit": "a6fb19a5b4e095c82d5b667cbe372ec4df9ad195",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/native-patch-next557-818-PROPOSED.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 6,
+      "role": "rule_preimage",
+      "commit": "ce348825d4bba7c1fc8adbb519fd55837268b7cd",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/next351/original-rule-preimage.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 6,
+      "role": "source_authority",
+      "commit": "ce348825d4bba7c1fc8adbb519fd55837268b7cd",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/next351/authority-binding.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 6,
+      "role": "ledger",
+      "commit": "ce348825d4bba7c1fc8adbb519fd55837268b7cd",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/next351/constructor-result.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 6,
+      "role": "native_patch",
+      "commit": "a6fb19a5b4e095c82d5b667cbe372ec4df9ad195",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/native-patch-next351-818-PROPOSED.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 7,
+      "role": "rule_preimage",
+      "commit": "ce348825d4bba7c1fc8adbb519fd55837268b7cd",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/missing235/original-rule-preimage.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 7,
+      "role": "source_authority",
+      "commit": "ce348825d4bba7c1fc8adbb519fd55837268b7cd",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/missing235/authority-binding.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 7,
+      "role": "ledger",
+      "commit": "ce348825d4bba7c1fc8adbb519fd55837268b7cd",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/missing235/constructor-result.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 7,
+      "role": "native_patch",
+      "commit": "a6fb19a5b4e095c82d5b667cbe372ec4df9ad195",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/native-patch-missing235-818-PROPOSED.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 8,
+      "role": "rule_preimage",
+      "commit": "7ad23c0827f915a6b9ae9ac70ec46577727476eb",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/border-chn274-20261016/native-authority-274-v1/original-rule-preimage.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 8,
+      "role": "source_authority",
+      "commit": "7ad23c0827f915a6b9ae9ac70ec46577727476eb",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/border-chn274-20261016/native-authority-274-v1/authority-binding.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 8,
+      "role": "ledger",
+      "commit": "7ad23c0827f915a6b9ae9ac70ec46577727476eb",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/border-chn274-20261016/native-authority-274-v1/constructor-result.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 8,
+      "role": "native_patch",
+      "commit": "31731e69f86850828c497c60770d14e1d72b67de",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/border-chn274-20261016/native-patch-274.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 9,
+      "role": "rule_preimage",
+      "commit": "0fc54fc11599bc93052406573f34e6e00aff3c59",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/border-hongngu3-20261016/native-authority-3-v1/original-rule-preimage.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 9,
+      "role": "source_authority",
+      "commit": "0fc54fc11599bc93052406573f34e6e00aff3c59",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/border-hongngu3-20261016/native-authority-3-v1/authority-binding.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 9,
+      "role": "ledger",
+      "commit": "0fc54fc11599bc93052406573f34e6e00aff3c59",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/border-hongngu3-20261016/native-authority-3-v1/constructor-result.json",
+      "removed_filename_references": []
+    },
+    {
+      "quartet": 9,
+      "role": "native_patch",
+      "commit": "e47b1d11d86f07f60791e614c0e59938bf46edea",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/border-hongngu3-20261016/native-patch-3.json",
+      "removed_filename_references": []
+    }
+  ],
+  "all_scientific_quartets_preserved_unchanged": true,
+  "selected_data_change": false,
+  "source_body_change": false,
+  "consumer_rerun": "Not justified by historical-code-only current-tree cleanup; actual consumer remains pinned to A."
+}

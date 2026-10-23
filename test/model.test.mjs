@@ -1,13 +1,20 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import {prepareCurrentSelectedAdditive,readCurrentSelectedAdditive} from '../scripts/package-current-additive.mjs';
+import {packagePreparedStartupOwnership} from '../scripts/package-startup-ownership.mjs';
+import os from 'node:os';
+import path from 'node:path';
+import {readGeographicReleaseManifest} from '../scripts/read-geographic-release-manifest.mjs';
+import {scientificNativeSelection,finalBankSelection} from '../src/reference-metadata.js';
 import {gunzipSync} from 'node:zlib';
 import { validateHierarchy } from '../hierarchy.mjs';
 import { openDatabase, seedDatabase, snapshot, importRecords, validateGeometry, geography } from '../database.mjs';
 import { parseYear, validYear, yearToTick, tickToYear, categoryColor, populationColor, levels } from '../src/model.js';
-let db;
+let db,referenceRevision;
 const createdSourceIds=new Set(JSON.parse(gunzipSync(fs.readFileSync('data/macro-improvements/combined-restoration/aggregate-source-receipt.json.gz'))).added_ids);
-before(()=>{ db=openDatabase(':memory:'); seedDatabase(db); });
+before(()=>{ db=openDatabase(':memory:'); ({referenceRevision}=seedDatabase(db)); });
 after(()=>db.close());
 test('new source land retains unknown owners and its original source metadata',()=>{
   const parts=JSON.parse(fs.readFileSync('data/world-index.json')).parts;
@@ -19,6 +26,55 @@ test('new source land retains unknown owners and its original source metadata',(
     assert.equal(JSON.parse(row.metadata).reference_version,feature.properties.metadata.reference_version);
   }
 });
+test('real seeded database exports the exact complete revision into current selected metadata packaging',async t=>{
+ const read=name=>JSON.parse(fs.readFileSync('data/'+name));
+ const selection=read('ownership-selection.json');
+ if(!selection.reference_projection){t.skip('Current selection has no metadata projection');return;}
+ const projection=JSON.parse(fs.readFileSync(selection.reference_projection.path));
+ assert.ok(projection.location_changes.length>0,'The current metadata comparison must be nonvacuous');
+ const source=read('world-index.json').parts.flatMap(name=>read(name).features);
+ const derived=createHash('sha256').update(JSON.stringify(source)).update(JSON.stringify(read('hierarchy.json'))).digest('hex');
+ assert.equal(referenceRevision,derived);
+ const native=scientificNativeSelection(selection),manifestBytes=fs.readFileSync(native.manifest_path),manifest=JSON.parse(manifestBytes);
+ assert.equal(createHash('sha256').update(manifestBytes).digest('hex'),native.sha256);
+ // This model control consumes the same complete ordinary bounds snapshot as
+ // the offline package image, without requiring historical Git in shallow CI.
+ const pin=manifest.original_assets.bounds;
+ assert.equal(pin.path,'data/canonical-grid/bounds.json.gz');
+ assert.equal(pin.sha256,manifest.bounds.sha256);
+ assert.ok(fs.lstatSync(pin.path).isFile());
+ const bounds=fs.readFileSync(pin.path);
+ assert.equal(createHash('sha256').update(bounds).digest('hex'),pin.sha256);
+ const indices=new Map(JSON.parse(gunzipSync(bounds)).map(row=>[row.id,row.index]));
+ const features=geography(db).features.map(feature=>({...feature,pixelIndex:indices.get(feature.id)}));
+ const args={root:process.cwd(),selectedGrid:{manifest,sha256:native.sha256,bounds},geographicRelease:readGeographicReleaseManifest().releases.at(-1),features,referenceRevision};
+ // Exercise the same final-bank header and finished-context binder used by
+ // ordinary packaging, not the retired historical-repair transport builder.
+ const outputs=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-model-package-'));let next=0;
+ t.after(()=>fs.rmSync(outputs,{recursive:true,force:true}));
+ const packageSelected=async options=>{
+  if(!finalBankSelection(selection))return prepareCurrentSelectedAdditive(options);
+  const selected=await readCurrentSelectedAdditive(options);
+  await packagePreparedStartupOwnership({manifest,manifestSha:native.sha256,
+   source:path.join(options.root,'data/canonical-grid/current-startup'),destination:path.join(outputs,String(next++)),
+   selected,features:options.features});
+  return selected;
+ };
+ const packaged=await packageSelected(args);
+ assert.equal(packaged.referenceMetadata.application_reference_revision,derived);
+ assert.equal(packaged.referenceMetadata.asset.sha256,selection.reference_projection.sha256);
+ for(const revision of [undefined,'0'.repeat(64)])await assert.rejects(packageSelected({...args,referenceRevision:revision}),/reference revision/);
+ const correction=projection.location_changes.find(row=>Object.hasOwn(row.after_properties.metadata??{},'reference_corrections'));
+ assert.ok(correction,'The removed correction field must exist in the current accepted source');
+ const id=correction.location_id,index=features.findIndex(feature=>feature.id===id);
+ assert.ok(index>=0);assert.ok(Object.hasOwn(features[index].properties.metadata,'reference_corrections'));
+ assert.equal(features[index].properties.metadata.reference_revision,derived);
+ for(const mutate of [p=>delete p.metadata.reference_corrections,p=>p.metadata.source_id='changed',p=>p.name='changed',p=>p.parent_id='changed',p=>p.metadata.reference_revision='0'.repeat(64)]){
+  const bad=[...features];bad[index]=structuredClone(features[index]);mutate(bad[index].properties);
+  await assert.rejects(packageSelected({...args,features:bad}),/complete applied source|reference revision|owner identity or parent|Prepared current owner, parent or bounds differ/);
+ }
+});
+
 test('year parsing supports BC/BCE/AD/CE and rejects invalid or out-of-range dates',()=>{
   for (const [input,want] of [['3000 BC',-3000],['44 bce',-44],['2026 AD',2026],['1 CE',1],['-1',-1],['1444',1444],['0',null],['3001 BC',null],['2027',null],['1.5',null],['-20 AD',null],['abc',null],['1e3',null]]) assert.equal(parseYear(input),want,input);
   for (let tick=0;tick<=5025;tick++) assert.equal(yearToTick(tickToYear(tick)),tick);
@@ -47,7 +103,17 @@ test('every location has exactly all six hierarchy levels',()=>{
   assert.equal(london.properties.metadata.source_member_ids.length,33);
 });
 test('seed is idempotent and missing history stays missing',()=>{
+  const retired=JSON.parse(fs.readFileSync('data/topology-report.json')).retired.find(r=>r.name==='Xianggang');assert.ok(retired);
+  const active='atlas:territory:HKG';
+  importRecords(db,{states:[retired.id,active].map(location_id=>({location_id,valid_from:1900,valid_to:1901,owner:'Visibility fixture',source:'Preserved source-history visibility fixture'}))});
+  const stored=()=>db.prepare('SELECT * FROM states WHERE valid_from=1900 AND location_id IN (?,?) ORDER BY id').all(retired.id,active);
+  const original=stored();assert.equal(original.length,2);
   seedDatabase(db); assert.ok(db.prepare('SELECT count(*) n FROM locations').get().n>20000);
+  assert.deepEqual(stored(),original,'the complete seed chain preserves imported active and retired history');
+  assert.equal(db.prepare('SELECT active FROM locations WHERE id=?').get(retired.id).active,0);
+  assert.equal(db.prepare('SELECT active FROM locations WHERE id=?').get(active).active,1);
+  const ids=new Set(geography(db).features.map(f=>f.id));assert.ok(!ids.has(retired.id));assert.ok(ids.has(active));
+  const states=snapshot(db,1900).states;assert.ok(!states.some(s=>s.location_id===retired.id));assert.ok(states.some(s=>s.location_id===active&&s.owner==='Visibility fixture'));
   for (const year of [-3000,-1,1,1444,2026]) assert.equal(snapshot(db,year).states.length,0);
   assert.throws(()=>snapshot(db,0),/Year must/);
 });
@@ -80,27 +146,12 @@ test('boundary versions require polygons and sources, and resolve by date',()=>{
   assert.throws(()=>importRecords(db,{boundaries:[row]}),/Overlapping/);
   for (const invalid of [{type:'Point',coordinates:[1,2]},{type:'Polygon',coordinates:[]},{type:'Polygon',coordinates:[[[0,0],[1,0],[1,1],[0,1]]]},{type:'Polygon',coordinates:[[[0,0],[181,0],[1,1],[0,0]]]}]) assert.throws(()=>validateGeometry(invalid));
 });
-test('unknown, zero population, and category colors have stable, distinct semantics',()=>{
-  assert.notEqual(populationColor(null,100),populationColor(0,100));
-  assert.notEqual(populationColor(0,100),populationColor(100,100));
-  assert.equal(categoryColor('England'),categoryColor('England'));
-  const owners=new Set(geography(db).features.map(f=>f.properties.reference_owner));
-  assert.equal(new Set([...owners].map(categoryColor)).size,owners.size,'modern owners must have distinct colors');
-});
 
 test('historical political records are dated, sourced, and do not extend into 2025',()=>{
   const medieval=snapshot(db,1444,false,true).polities;assert.ok(medieval.length>50);assert.ok(medieval.every(f=>f.properties.valid_from<=1444 && f.properties.valid_to>1444 && f.properties.source.includes('Cliopatria')));
   assert.equal(snapshot(db,2025).polities.length,0);assert.equal(snapshot(db,2026).polities.length,0);assert.ok(snapshot(db,-3000,false,true).polities.length>0);
 });
 
-test('both Huidong counties have complete, distinct geographical parents',()=>{
-  const data=geography(db), units=new Map(data.units.map(u=>[u.id,u]));
-  const huidong=data.features.filter(f=>f.properties.name==='Huidongxian');
-  assert.equal(huidong.length,2);
-  const chains=huidong.map(f=>{const out=[];for(let p=units.get(f.properties.parent_id);p;p=units.get(p.parent_id))out.push(p.name);return out;});
-  assert.ok(chains.some(c=>JSON.stringify(c)===JSON.stringify(['Liangshan Yi Autonomous Prefecture','Sichuan','Southwest China','Eastern Asia','Asia'])));
-  assert.ok(chains.some(c=>JSON.stringify(c)===JSON.stringify(['Huizhou','Guangdong','South China','Eastern Asia','Asia'])));
-});
 
 test('inserts and updates cannot skip hierarchy levels',()=>{
   const region=db.prepare("SELECT id FROM units WHERE level='region' LIMIT 1").get().id;
@@ -112,25 +163,28 @@ test('inserts and updates cannot skip hierarchy levels',()=>{
   assert.throws(()=>db.prepare("UPDATE units SET level='area' WHERE id=?").run(province),/immutable/);
 });
 
+test('post-reseed geography preserves owner colors, county parents, cross-owner regions, and city memberships',()=>{
+  const data=geography(db), units=new Map(data.units.map(u=>[u.id,u]));
+  assert.notEqual(populationColor(null,100),populationColor(0,100));
+  assert.notEqual(populationColor(0,100),populationColor(100,100));
+  assert.equal(categoryColor('England'),categoryColor('England'));
+  const owners=new Set(data.features.map(f=>f.properties.reference_owner));
+  assert.equal(new Set([...owners].map(categoryColor)).size,owners.size,'modern owners must have distinct colors');
 
+  const huidong=data.features.filter(f=>f.properties.name==='Huidongxian');
+  assert.equal(huidong.length,2);
+  const chains=huidong.map(f=>{const out=[];for(let p=units.get(f.properties.parent_id);p;p=units.get(p.parent_id))out.push(p.name);return out;});
+  assert.ok(chains.some(c=>JSON.stringify(c)===JSON.stringify(['Liangshan Yi Autonomous Prefecture','Sichuan','Southwest China','Eastern Asia','Asia'])));
+  assert.ok(chains.some(c=>JSON.stringify(c)===JSON.stringify(['Huizhou','Guangdong','South China','Eastern Asia','Asia'])));
 
-
-
-
-test('geographic regions cross ownership borders and subdivide large countries',()=>{
- const data=geography(db),units=new Map(data.units.map(u=>[u.id,u]));
  const region=f=>{let u=units.get(f.properties.parent_id);while(u.level!=='region')u=units.get(u.parent_id);return u;};
  const macau=data.features.find(f=>f.id==='atlas:territory:MAC');assert.equal(region(macau).name,'South China');assert.notEqual(region(macau).name,macau.properties.reference_owner);
  for(const owner of ['United States','Russia'])assert.ok(new Set(data.features.filter(f=>f.properties.reference_owner?.includes(owner)).map(f=>region(f).id)).size>1,owner);
  const sameRegion=data.features.filter(f=>region(f).id===region(macau).id);assert.ok(new Set(sameRegion.map(f=>f.properties.reference_owner)).size>1);
  const roma=data.features.find(f=>f.id==='atlas:location:ITA:SLL:1209');assert.ok(roma);assert.equal(units.get(roma.properties.parent_id).name,'Roma');assert.ok(!data.features.some(f=>f.properties.name==='Lazio'));assert.ok(roma.properties.metadata.search_aliases.includes('Rome'));
  const report=JSON.parse(fs.readFileSync('data/granularity-report.json'));assert.equal(report.selections.find(x=>x.boundaryISO==='DEU').boundaryType,'ADM3');
-});
 
-
-
-test('non-Latin municipalities remain distinct and city memberships contain all districts',()=>{
- const data=geography(db),byId=new Map(data.features.map(f=>[f.id,f]));
+ const byId=new Map(data.features.map(f=>[f.id,f]));
  for(const [id,name] of [['gb:TWN:ADM2:52511910B4802898208422','線西鄉'],['gb:TWN:ADM2:52511910B24462040337349','永靖鄉'],['gb:TWN:ADM2:52511910B36549244443661','泰安鄉'],['gb:TWN:ADM2:52511910B52234359951443','埔心鄉']])assert.equal(byId.get(id)?.properties.name,name);
  for(const [id,count] of [['atlas:city:KOR-11',25],['atlas:city:TWN-1166',12],['atlas:city:TWN-1167',29],['atlas:city:TWN-1156',38],['atlas:city:TWN-1164',7]]){
   const members=byId.get(id).properties.metadata.source_member_ids;assert.equal(members.length,count,id);

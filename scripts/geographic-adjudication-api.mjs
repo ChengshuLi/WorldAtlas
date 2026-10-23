@@ -116,11 +116,12 @@ export async function collectGeographicApproval({api, repo, number, expectedHead
   }
   need(Array.isArray(descriptors) && descriptors.length <= 64 && new Set(descriptors.map(row => row.path)).size === descriptors.length,
     'Invalid or duplicate source-decision dossier inventory');
-  const checked = await checkPremergeEvidence({api, repo, pr, issue, reservation, files, policy, review: true});
+  const reviewed = latestReviews(await githubPages(api, `/repos/${repo}/issues/${number}/comments`), expectedHead);
+  const checked = await checkPremergeEvidence({api, repo, pr, issue, reservation, files, policy});
   // The current shared validator returns bytes-verified, not its overwritten
   // intermediate checked label. No legacy/report-failure result qualifies.
-  need(checked.status === 'bytes-verified' && checked.review?.comment_id && checked.head_sha === expectedHead &&
-    checked.manifest_sha256 === sha256(manifestRaw), 'Missing actual whole-file/exact-head review validation');
+  need(checked.status === 'bytes-verified' && checked.head_sha === expectedHead &&
+    checked.manifest_sha256 === sha256(manifestRaw), 'Missing actual whole-file evidence validation');
   const dossiers = [];
   const prefix = requirement.manifestPath.slice(0, requirement.manifestPath.lastIndexOf('/') + 1);
   for (const descriptor of descriptors) {
@@ -140,7 +141,7 @@ export async function collectGeographicApproval({api, repo, number, expectedHead
     freshPR.base.ref === 'main' && freshPR.head.repo?.full_name === repo, 'PR or source contract changed during byte validation');
   verifyIssueScope({branch: freshPR.head.ref, issue: freshIssue});
   const {receipt, comment} = latestReviews(await githubPages(api, `/repos/${repo}/issues/${number}/comments`), expectedHead);
-  need(comment.id === checked.review.comment_id, 'Source decision changed during byte validation; rerun same head');
+  need(comment.id === reviewed.comment.id, 'Source decision changed during byte validation; rerun same head');
   validateReviewReceipt(receipt, {pr: freshPR, issue: freshIssue, manifest, manifestHash: checked.manifest_sha256, files,
     limits: checked.limits, author: manifest.worker_id, reviewKind: requirement.quality.review_kind});
   for (const name of ['source', 'geometry']) need(receipt.domains?.[name] &&

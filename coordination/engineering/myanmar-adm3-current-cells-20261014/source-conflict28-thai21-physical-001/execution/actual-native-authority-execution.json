@@ -1,0 +1,30 @@
+{
+  "actual_executing_tree": "fddace51e262faf39703e3328b94462c5ddc42db",
+  "tree": "1fb6478723a92fc0064eeda16ea3982f2d818586",
+  "unchanged_accepted_operator_code": "64fc78d219cc0d4db062a7ebc27ffec6aa1dc18e",
+  "typed_packet_pin": {
+    "commit": "7d0c50dda4146b945950219045391125bc2880a9",
+    "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/source-conflict28-thai21-physical-001/PROPOSED-adopted-territorial-applicability-source28-thai21.json",
+    "bytes": 48606,
+    "sha256": "5b64b137f0b3dbe040a01bfa75b3cd62d519ba8e6dc3802536db1d8f6bb52c4f",
+    "git_blob_oid": "2ff58f9af73c90914eaaed1e3f97f49f417d208a",
+    "mode": "100644"
+  },
+  "native_input_commit": "7ae9286941030b8e159f04939be72037049b72b3",
+  "native_input_tree": "262de8ca971ce99d980424f6c787755e1ad29235",
+  "actual_owned_worktree_branch": "refs/heads/engineering/myanmar-takeover-20261016",
+  "root_adopted_exact21": true,
+  "accepted_native_credit": 0,
+  "command": [
+    "node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "native-authority",
+    ".takeover/source28-thai21/stock-native-authority-config.json",
+    ".cache/delivery-handoff/source28-thai21-native-authority-001"
+  ],
+  "elapsed_seconds": 4.603704568988178,
+  "max_rss_kib": 317100,
+  "exit_code": 0,
+  "ended_utc": "2026-10-16T06:41:32.166769+00:00",
+  "no_scientific_source_or_physical_replay": true
+}

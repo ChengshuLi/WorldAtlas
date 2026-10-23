@@ -10,7 +10,7 @@ import {compactContextInputs} from '../../../scripts/native-ownership/compact-co
 import {nativeRuntimeIndex} from '../../../src/native-runtime.js';
 import {compileNativeOwnership} from '../../../scripts/native-ownership/compile-native-ownership.mjs';
 import {nativeCandidateManifest,NATIVE_CANONICAL_LATITUDE_SHA256} from '../../../scripts/native-ownership/native-candidate-manifest.mjs';
-import {committedPreparationFiles,requirePlainExecution,createNativeCandidateOutput,candidateBudget} from '../../../scripts/native-ownership/native-preparation-guards.mjs';
+import {committedPreparationFiles,requirePlainExecution,createNativeCandidateOutput} from '../../../scripts/native-ownership/native-preparation-guards.mjs';
 import {shuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 import {footprintHash} from '../../../scripts/check-prepared.mjs';
 export const BEFORE='6ea7c3613759d7b747c800c399b70c1be24e1f6aea21fc81c389cfdcc78d3eb1';
@@ -31,30 +31,30 @@ export function immutableReader(repo,commit,storage){
   assert(/^100(?:644|755) blob /.test(tree)&&tree.slice(tree.indexOf('\t')+1)===p+'\0','Missing ordinary source '+p);
   const oid=tree.split(' ')[2].split('\t')[0];
   const bytes=Number(execFileSync('git',['-C',repo,'cat-file','-s',oid],{encoding:'utf8'}));
-  assert(Number.isSafeInteger(bytes)&&bytes>0&&bytes<=32*1024*1024,'Bounded source bytes required');
+  assert(Number.isSafeInteger(bytes)&&bytes>0,'Invalid source byte length');
   const stored=storage?.get(commit+':'+p);
   if(storage)assert(stored,'Undeclared complete ordinary source input '+p);
   let raw;
   if(stored){
    assert.equal(stored.original.blob,oid,'Original containing-file OID changed');
    assert.equal(stored.original.mode,tree.split(' ')[0]);assert.equal(stored.original.bytes,bytes);
-   assert(Number.isSafeInteger(stored.alias.bytes)&&stored.alias.bytes>0&&stored.alias.bytes<=32*1024*1024,'Bounded encoded alias size required before read');
-   assert(Number.isSafeInteger(stored.alias.decoded_bytes)&&stored.alias.decoded_bytes===bytes&&stored.alias.decoded_bytes<=32*1024*1024,'Bounded decoded original size required');
+   assert(Number.isSafeInteger(stored.alias.bytes)&&stored.alias.bytes>0,'Valid encoded alias size required before read');
+   assert(Number.isSafeInteger(stored.alias.decoded_bytes)&&stored.alias.decoded_bytes===bytes,'Valid decoded original size required');
    const name=path.join(repo,stored.alias.path);assert(safe(stored.alias.path));
    const stat=fs.lstatSync(name);assert(stat.isFile()&&fs.realpathSync(name)===name,'Ordinary retained alias required');
-   assert(stat.size===stored.alias.bytes&&stat.size<=32*1024*1024,'Actual encoded alias size differs before read');
+   assert(stat.size===stored.alias.bytes,'Actual encoded alias size differs before read');
    const encoded=fs.readFileSync(name);assert.equal(encoded.length,stored.alias.bytes);assert.equal(SHA(encoded),stored.alias.sha256);
-   raw=gunzipSync(encoded,{maxOutputLength:32*1024*1024});assert.equal(raw.length,stored.alias.decoded_bytes);assert.equal(SHA(raw),stored.alias.decoded_sha256);
+   raw=gunzipSync(encoded,{maxOutputLength:stored.alias.decoded_bytes+1});assert.equal(raw.length,stored.alias.decoded_bytes);assert.equal(SHA(raw),stored.alias.decoded_sha256);
    assert.equal(SHA(raw),stored.original.sha256,'Whole original input changed');
    const blobHash=createHash('sha1').update(Buffer.from(`blob ${raw.length}\0`)).update(raw).digest('hex');
    assert.equal(blobHash,oid,'Restored source body differs from actual immutable Git blob');
-  }else raw=execFileSync('git',['-C',repo,'cat-file','blob',oid],{maxBuffer:32*1024*1024});
+  }else raw=execFileSync('git',['-C',repo,'cat-file','blob',oid],{maxBuffer:bytes+1});
   assert.equal(raw.length,bytes);
-  const decoded=raw[0]===31&&raw[1]===139?gunzipSync(raw,{maxOutputLength:32*1024*1024}):raw;
+  const decoded=raw[0]===31&&raw[1]===139?gunzipSync(raw):raw;
   files.set(p,{raw,pin:{commit,path:p,mode:tree.split(' ')[0],blob:oid,bytes,sha256:SHA(raw),decoded_bytes:decoded.length,decoded_sha256:SHA(decoded)}});
   return raw;
  }
- return {read,object:p=>{const raw=read(p);return JSON.parse(raw[0]===31&&raw[1]===139?gunzipSync(raw,{maxOutputLength:32*1024*1024}):raw);},pins:()=>[...files.values()].map(x=>x.pin)};
+ return {read,object:p=>{const raw=read(p);return JSON.parse(raw[0]===31&&raw[1]===139?gunzipSync(raw):raw);},pins:()=>[...files.values()].map(x=>x.pin)};
 }
 export function loadSuccessor(repo,baseline,{storage}={}){
  const current=immutableReader(repo,baseline,storage),reviewed=immutableReader(repo,PROPOSAL,storage);
@@ -84,7 +84,7 @@ export function loadSuccessor(repo,baseline,{storage}={}){
  const manifestRaw=current.read('data/canonical-grid/manifest.json'),manifest=JSON.parse(manifestRaw);
  assert.equal(manifest.size,262166);assert.equal(manifest.coordinateBits,19);
  const boundsRaw=current.read('data/canonical-grid/'+manifest.bounds.path);assert.equal(SHA(boundsRaw),manifest.bounds.sha256);
- const bounds=JSON.parse(gunzipSync(boundsRaw,{maxOutputLength:32*1024*1024}));
+ const bounds=JSON.parse(gunzipSync(boundsRaw));
  const membership=current.read('data/canonical-grid/'+manifest.province_membership.path);assert.equal(SHA(membership),manifest.province_membership.sha256);
  const compact=compactContextInputs(after,bounds,AFTER);
  const old=compactContextInputs(features,bounds,BEFORE);assert.equal(old.owner_sha256,compact.owner_sha256);
@@ -118,25 +118,23 @@ export async function run(baseline,vintage,{inputOnly=false}={}){
  const code=executedClosure(repo,head);
  const indexPath='coordination/engineering/eastern-two-gap-repair-native-20261007/original-inputs/index.json';
  const physicalIndex=path.join(repo,indexPath),indexStat=fs.lstatSync(physicalIndex);
- assert(indexStat.isFile()&&fs.realpathSync(physicalIndex)===physicalIndex&&indexStat.size<=32*1024*1024,'Bounded ordinary source index required before read');
+ assert(indexStat.isFile()&&fs.realpathSync(physicalIndex)===physicalIndex,'Ordinary source index required before read');
  const indexBytes=fs.readFileSync(physicalIndex);
- const committedIndex=execFileSync('git',['show',head+':'+indexPath],{maxBuffer:32*1024*1024});assert(indexBytes.equals(committedIndex),'Ordinary input index differs from freeze');
+ const committedIndex=execFileSync('git',['show',head+':'+indexPath],{maxBuffer:indexStat.size+1});assert(indexBytes.equals(committedIndex),'Ordinary input index differs from freeze');
  const sourceIndex=JSON.parse(indexBytes);assert.equal(sourceIndex.baseline_commit,baseline);assert.equal(sourceIndex.proposal_commit,PROPOSAL);
  const storage=new Map(sourceIndex.files.map(row=>[row.original.commit+':'+row.original.path,row]));assert.equal(storage.size,sourceIndex.files.length,'Duplicate whole-source alias');
  const inputs=loadSuccessor(repo,baseline,{storage});
  assert.equal(inputs.sourceFiles.length,sourceIndex.files.length,'Unused or missing complete ordinary input');
- const sourceAdmission=[...sourceIndex.files.map(p=>p.alias),...code,{path:indexPath,bytes:indexBytes.length}];
- const preflight=candidateBudget(sourceAdmission,{reserveBytes:96*1024*1024,reserveDescriptors:128}).snapshot();
  const latitudeOriginal=inputs.sourceFiles.find(p=>p.path===inputs.latitude.path&&p.commit===baseline);
  const latitudeHeadTree=execFileSync('git',['ls-tree','-z',head,'--',inputs.latitude.path],{encoding:'utf8'});
  bindLatitudeTree(latitudeOriginal,latitudeHeadTree);
  const capsule={baseline_commit:baseline,execution_commit:head,source_files:inputs.sourceFiles,ordinary_source_index:{path:indexPath,bytes:indexBytes.length,sha256:SHA(indexBytes)},ordinary_sources:sourceIndex.files,executed_sources:code,
   original_canonical_sha256:inputs.originalCanonicalSha,owner_sha256:inputs.ownerSha,before_footprints_sha256:BEFORE,after_footprints_sha256:AFTER,
-  release_id:inputs.releaseId,locations:inputs.features.length,input_admission:preflight,normative_latitude_binding:{original_read_commit:baseline,evaluation_commit:head,path:inputs.latitude.path,mode:latitudeOriginal.mode,blob:latitudeOriginal.blob,encoded_sha256:inputs.latitude.sha256,decoded_sha256:inputs.latitude.decoded_sha256,whole_blob_equality:true},software:{node:process.version,v8:process.versions.v8,zlib:process.versions.zlib,platform:process.platform,arch:process.arch},
+  release_id:inputs.releaseId,locations:inputs.features.length,normative_latitude_binding:{original_read_commit:baseline,evaluation_commit:head,path:inputs.latitude.path,mode:latitudeOriginal.mode,blob:latitudeOriginal.blob,encoded_sha256:inputs.latitude.sha256,decoded_sha256:inputs.latitude.decoded_sha256,whole_blob_equality:true},software:{node:process.version,v8:process.versions.v8,zlib:process.versions.zlib,platform:process.platform,arch:process.arch},
   source_approval:'Only two Main-approved physical-reference additions; no legal/water/historical-cause approval'};
  if(inputOnly){console.log(JSON.stringify(capsule));return capsule;}
- const out=createNativeCandidateOutput(repo,'.cache/native-grid-candidates/'+vintage),products=[],admission=candidateBudget(sourceAdmission,{reserveBytes:0,reserveDescriptors:0});
- const write=(p,raw,decoded=raw)=>{assert(safe(p));assert(raw.length<=32*1024*1024&&decoded.length<=32*1024*1024);admission.add({bytes:raw.length});const dest=path.join(out,p);fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,raw,{flag:'wx'});const pin={path:p,bytes:raw.length,sha256:SHA(raw),decoded_bytes:decoded.length,decoded_sha256:SHA(decoded)};products.push(pin);return pin;};
+ const out=createNativeCandidateOutput(repo,'.cache/native-grid-candidates/'+vintage),products=[];
+ const write=(p,raw,decoded=raw)=>{assert(safe(p));const dest=path.join(out,p);fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,raw,{flag:'wx'});const pin={path:p,bytes:raw.length,sha256:SHA(raw),decoded_bytes:decoded.length,decoded_sha256:SHA(decoded)};products.push(pin);return pin;};
  const compactParts=[];
  for(let first=0;first<inputs.features.length;first+=1500){const raw=json(inputs.features.slice(first,first+1500));compactParts.push({...write('context/part-'+first+'.json.gz',gzipSync(raw,{level:9}),raw),first_owner:first+1,owners:Math.min(1500,inputs.features.length-first)});}
  const compiled=await compileNativeOwnership(inputs.index,{size:inputs.manifest.size,latitudes:inputs.latitudes,

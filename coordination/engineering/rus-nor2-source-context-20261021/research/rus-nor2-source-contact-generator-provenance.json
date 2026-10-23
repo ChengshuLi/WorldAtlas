@@ -1,0 +1,88 @@
+{
+  "kind": "bounded_RUS_original_source_contact_generator_provenance_check",
+  "status": "completed_read_only",
+  "checked_at_utc": "2026-10-21",
+  "scope": "Authenticate the retained source-competitor-native-counts result and determine whether the original source-contact scanner invocation/call is pinned by the retained handoff.",
+  "actual_reads": [
+    {
+      "path": "coordination/engineering/russia-repair-delivery-20261017/source-review/source-competitor-native-counts.json",
+      "retained_commit": "f943cf6f0f4bddb52786179bb7045806f718cf25",
+      "also_pinned_at_commit": "a7930ca6eb907823caeff668af09c2f9bcbdf5ef",
+      "git_blob_oid": "5fb0aa3905e08430eb53da3169ec1065daa45a42",
+      "bytes": 267145,
+      "sha256": "63a3debe872902a09d34dfd375a98a1a2129b7985231d289432fc942ccd4c2f3",
+      "observed_schema": [
+        "cells_by_source_family_set",
+        "non_russian_original_competitor_intervals",
+        "limits"
+      ],
+      "observation": "The file authenticates interval/count outputs and a scope limit; it contains no generator, command, script path, code commit, or call record."
+    },
+    {
+      "path": "coordination/engineering/russia-repair-delivery-20261017/native-inputs-002/source-evidence.json",
+      "commit": "a8c114c829646ac2191e21bbb9f4f15fec710787",
+      "git_blob_oid": "1206cb657064415bc31d5f5c6d5086f2e3788b63",
+      "bytes": 23554075,
+      "sha256": "a55983972a251bde712c739006cd9a0165188060e44a0982927a6d243fc00ddc",
+      "observation": "Authenticated complete-native input body used for the retained follow-up; its presence does not bind the earlier source-contact scanner invocation."
+    },
+    {
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "commit": "9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "observation": "Pins source-family payloads and metadata; it is not a record of the old native source-contact scan call."
+    },
+    {
+      "path": "src/native-grid.js",
+      "commit": "e9e4eb5afd7c5ed1ed1871e44996da8b10a37802",
+      "git_blob_oid": "add4cef02bb5a790f22a9078fdf9bd51679059d3",
+      "bytes": 53197,
+      "sha256": "3d20777f5896d28192e40428dd34cab89d47873a08bf073a17338c4ff97d43cd",
+      "role": "Retained native-grid implementation pin referenced by later comparison evidence. It supports native geometry interval/effect calculations, but retained records do not identify an invocation of it that produced source-competitor-native-counts.json."
+    },
+    {
+      "path": "scripts/qualify-source-cohort.py",
+      "commit": "9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c",
+      "git_blob_oid": "f69180b425d665a022dd18290688864674dd20a5",
+      "bytes": 43642,
+      "sha256": "abc801b9a35d20c9f0dfe3bbc9bb2cb7dc107f1758414970d9cde11380574a18",
+      "role": "Explicitly pinned as physical reproduction in retained-source-evidence-complete-native.json; not identified as the source-contact count generator."
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "commit": "e9e4eb5afd7c5ed1ed1871e44996da8b10a37802",
+      "git_blob_oid": "b56641a48e2c5456999c2ea60dd68d8404a10cd1",
+      "bytes": 235054,
+      "sha256": "024e8d498d4567ad0d50f24afcf3729a38008bfaa5f717704f890b1e2f44a4ff",
+      "role": "Later applicability/constructor implementation pin; no retained linkage says this generated the historical source-contact count artifact."
+    },
+    {
+      "path": "coordination/engineering/russia-repair-delivery-20261017/residual-20261020/verify-current-held-subset.mjs",
+      "commit": "52e619379d32cc5e97b2b0aa3676e4508d1b86cc",
+      "git_blob_oid": "305fb28b7a06664991ee36cd431344db6701e679",
+      "bytes": 12315,
+      "sha256": "c278173447082dfc6e20d00b6bed7421dacc69f09ce457711aac48ce2c83a04f",
+      "role": "Later identity/table join verifier for held-key evidence, not the original contact scanner."
+    }
+  ],
+  "crosscheck": {
+    "handoff_files_checked": [
+      "retained-read-manifest.json",
+      "file-manifest.json",
+      "source-custody.json",
+      "input-custody.json",
+      "comparison-source-code-pins.json",
+      "original-review-input-pins.json",
+      "README.md",
+      "join-retained-operands.mjs",
+      "check-regional-native.mjs"
+    ],
+    "result": "The handoff retains the count output, full native evidence, source/physical inputs, downstream code pins, and later identity-join scripts. The named join script states it is an identity/table join; the regional checker is for the separate RUS-CHN comparison. No old scanner executable or invocation record for source-competitor-native-counts.json is listed or referenced in these checked records.",
+    "no_geometry_or_scan_rerun": true,
+    "network_or_browser_used": false
+  },
+  "conclusion": "The exact count artifact and its associated input/output records are authenticated. The actual historical source-contact generation predicate cannot be independently authenticated from the retained materials inspected: the native helper pin establishes available implementation semantics, not that specific call's use or arguments. This is a provenance gap, not evidence that the counts are incorrect. No scan was rerun.",
+  "remaining_evidence_needed": "An immutable source-contact scan script/call record, or a contemporaneous run manifest binding the exact native helper, source roster/order, latitude input, requested intervals and output hash 63a3debe872902a09d34dfd375a98a1a2129b7985231d289432fc942ccd4c2f3."
+}

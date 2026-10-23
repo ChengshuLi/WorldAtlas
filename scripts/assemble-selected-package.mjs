@@ -1,34 +1,34 @@
 // Executed only after trusted selected-data classification proves this complete
 // programme is unchanged from the PR base. API credentials stay in trusted code;
-// subprocesses and the current scientific reader receive no token environment.
+// subprocesses and current-product consumption receive no token environment.
 import fs from 'node:fs';
 import fsp from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
+import {isDeepStrictEqual} from 'node:util';
 import {execFileSync} from 'node:child_process';
-import {processingAllowance} from './check-effective-geographic-regression.mjs';
+import {gunzipSync} from 'node:zlib';
+import {footprintHash} from './check-prepared.mjs';
+import {canonicalValue} from '../src/native-grid.js';
+import {additiveBaseReference,scientificNativeSelection,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
 import {githubAPI, githubPages} from './issue-claim-contract.mjs';
-import {integrationTree} from './integration-profile.mjs';
-import {loadPackageInputs, readPackageInputs, containsPackagePath} from './package-inputs.mjs';
-import {inspectPackageRuntime, verifyPackageDependencies} from './package-build.mjs';
+import {loadPackageInputs, readPackageInputs, containsPackagePath, safePackagePath, PREPARED_STARTUP_INDEX} from './package-inputs.mjs';
+import {compatiblePackageProducers,requireProducerInstallation} from './package-producer-contract.mjs';
+import {assertCloudflareStaticAssets, inspectPackageNodeRuntime, verifyPackageDependencies} from './package-build.mjs';
 import {committedPackageInputs, committedPackageProducer, PACKAGE_PRODUCER_WORKFLOWS, PACKAGE_PRODUCER_KIND, packageBuildConfiguration,
-  validatePackageOutputManifest, admitPackageInputTransition, admitPackageOutputTransition, inertSelectedPackageInput, streamedPackageFile, installedPackageIdentity, installedPackageDifferences, declaredPackagePythonRoots} from './package-output-artifact.mjs';
-import {authenticateOriginalPackageOutput, readOriginalPackageInventory, issuePackageAssemblyExecution, preparePackageSelectedAdditive,
-  publishPackageSelectedAdditive, packageSelectedPublicationInventory, requirePackageAssemblyExecution}
+  validatePackageOutputManifest, admitPackageInputTransition, admitPackageOutputTransition, inertSelectedPackageInput, streamedPackageFile, resolvePackagePythonExecutable} from './package-output-artifact.mjs';
+import {authenticateOriginalPackageOutput, readOriginalPackageInventory, requireOriginalPackageOutput, issuePackageAssemblyExecution, requirePackageAssemblyExecution}
   from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
 
 const need=(ok,message)=>{if(!ok)throw Error(message);};
 const hash=raw=>createHash('sha256').update(raw).digest('hex');
+const canonicalHash=value=>hash(JSON.stringify(canonicalValue(value))+'\n');
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const root=path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const git=args=>execFileSync('git',['-C',root,...args],{encoding:'utf8',maxBuffer:32*1048576,
+const git=args=>execFileSync('git',['-C',root,...args],{encoding:'utf8',maxBuffer:Infinity,
   env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_TERMINAL_PROMPT:'0'}}).trim();
 const ordered=rows=>rows.sort((a,b)=>a.path.localeCompare(b.path,'en'));
-export function admitAssemblyAtlasMetadata(bytes,allowance=processingAllowance()){
-  need(Number.isSafeInteger(bytes)&&bytes>0&&2*bytes<=allowance.phaseBytes,'Actual atlas exceeds current metadata allocation');
-  return bytes;
-}
 export async function createPackageAssemblyScratch(sourceRoot){
   const cache=path.join(sourceRoot,'.cache');
   let stat;try{stat=await fsp.lstat(cache);}catch(error){if(error.code!=='ENOENT')throw error;}
@@ -42,34 +42,89 @@ function admitDisk(bytes,label){
 }
 const treeRows=tree=>ordered([...tree.entries.values()].filter(row=>row.type==='blob').map(row=>({path:row.path,mode:row.mode,oid:row.sha})));
 
-async function blobJSON(api,repo,tree,name){
-  const row=tree.entries.get(name);need(row?.type==='blob'&&row.mode==='100644'&&row.size<=8*1048576,'Bounded ordinary original metadata required');
+// Source authenticity needs the complete declared input closure, not unrelated
+// repository history. Only declared directories use recursive tree requests;
+// exact leaves and workflow paths use ordinary authenticated ancestor trees.
+function packageMetadata(api,repo){
+  const commits=new Map(),trees=new Map();
+  const oid=value=>/^[a-f0-9]{40}$/.test(value??'');
+  const commit=async head=>{
+    need(oid(head),'Exact package metadata commit required');
+    if(!commits.has(head)){
+      const object=await api(`/repos/${repo}/git/commits/${head}`);
+      need(object.sha===head&&oid(object.tree?.sha),'Package metadata commit differs');commits.set(head,object);
+    }
+    return commits.get(head);
+  };
+  const listing=async(sha,recursive=false)=>{
+    need(oid(sha),'Exact package metadata tree required');
+    const key=sha+(recursive?'?recursive=1':'');
+    if(!trees.has(key)){
+      const value=await api(`/repos/${repo}/git/trees/${key}`);
+      need(value.sha===sha&&value.truncated===false&&Array.isArray(value.tree),'Incomplete or different package metadata tree');
+      const entries=new Map();
+      for(const row of value.tree){
+        need(typeof row.path==='string'&&!row.path.includes('\0')
+          &&row.path.split('/').every(part=>part&&part!=='.'&&part!=='..')&&(recursive||!row.path.includes('/'))
+          &&oid(row.sha)&&!entries.has(row.path),'Invalid or duplicate package metadata path');
+        entries.set(row.path,row);
+      }
+      trees.set(key,entries);
+    }
+    return trees.get(key);
+  };
+  const scope=async(head,paths)=>{
+    const object=await commit(head),entries=new Map();
+    for(const name of new Set(paths)){
+      need(safePackagePath(name),'Safe package metadata scope required');
+      const directory=name.endsWith('/'),parts=name.replace(/\/$/,'').split('/');
+      let sha=object.tree.sha,row;
+      for(let index=0;index<parts.length;index++){
+        row=(await listing(sha)).get(parts[index]);if(!row)break;
+        if(index<parts.length-1){need(row.type==='tree'&&row.mode==='040000','Ordinary package metadata ancestor required');sha=row.sha;}
+      }
+      if(!row)continue; // Exact absence is part of optional-input admission.
+      const prefix=parts.join('/');
+      if(directory){
+        need(row.type==='tree'&&row.mode==='040000','Declared package input directory differs');
+        for(const [relative,child]of await listing(row.sha,true))entries.set(prefix+'/'+relative,{...child,path:prefix+'/'+relative});
+      }else entries.set(prefix,{...row,path:prefix});
+    }
+    return {object,entries};
+  };
+  return {commit,scope};
+}
+const acceptedMetadataPaths=current=>current.definition.inputs.filter(name=>!name.endsWith('/')&&!inertSelectedPackageInput(name));
+
+async function blobRaw(api,repo,tree,name){
+  const row=tree.entries.get(name);need(row?.type==='blob'&&row.mode==='100644','Bounded ordinary original metadata required');
   const blob=await api(`/repos/${repo}/git/blobs/${row.sha}`);need(blob.encoding==='base64','Original metadata body unavailable');
   const raw=Buffer.from(blob.content,'base64');need(raw.length===row.size&&createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')===row.sha,'Original metadata Git identity differs');
-  return JSON.parse(raw);
+  return raw;
 }
-function sourceCompatible(before,current){
-  try{admitPackageInputTransition(before,current,{acceptedInputs:current.accepted_selected_inputs,preliminary:true});return true;}
+async function blobJSON(api,repo,tree,name){ return JSON.parse(await blobRaw(api,repo,tree,name)); }
+function sourceCompatible(before,current,priorSidecarRaw,producerWorkflows,preparedStartup){
+  try{admitPackageInputTransition(before,current,{acceptedInputs:current.accepted_selected_inputs,priorSidecarRaw,producerWorkflows,preparedStartup,preliminary:true});return true;}
   catch{return false;}
 }
 
 // This is the bootstrap's actual trusted PR/combined-candidate base, not the
 // originating package head. Read only tree metadata for explicit retained leaves;
-// the existing private selected reader authenticates their typed consumption.
+// the current-product consumer records their actual whole-body consumption.
 function acceptedInputsFromTree(base,tree,current){
   const files=[];
   for(const name of current.definition.inputs){
     if(name.endsWith('/')||inertSelectedPackageInput(name))continue;
     const row=tree.entries.get(name);
     if(row?.type==='blob'&&row.mode==='100644'&&/^[a-f0-9]{40}$/.test(row.sha??'')&&
-      Number.isSafeInteger(row.size)&&row.size>=0&&row.size<=32*1048576)
+      Number.isSafeInteger(row.size)&&row.size>=0)
       files.push({path:name,mode:row.mode,oid:row.sha,bytes:row.size});
   }
   return {commit:base,files};
 }
 export async function acceptedSelectedPackageInputs({api,repo,base,current}){
   need(/^[a-f0-9]{40}$/.test(base??''),'Exact trusted selected base required');
-  const tree=await integrationTree(api,repo,base);
+  const tree=await packageMetadata(api,repo).scope(base,acceptedMetadataPaths(current));
   need(tree.object.sha===base,'Trusted selected base commit differs');
   return acceptedInputsFromTree(base,tree,current);
 }
@@ -78,16 +133,19 @@ export async function findOriginalPackage({api,repo,current,originalRunId,truste
   // A small recent-result search is an optimization. Exhaustion means a full
   // build, never a claim that no older result exists.
   need(originalRunId===undefined||Number.isSafeInteger(originalRunId)&&originalRunId>0,'Exact optional original run required');
+  const metadata=packageMetadata(api,repo);
   let trustedCommit,acceptedInputs=trustedBase===undefined?current.accepted_selected_inputs:undefined;
   if(trustedBase!==undefined){
     need(/^[a-f0-9]{40}$/.test(trustedBase),'Exact trusted selected base required');
-    trustedCommit=await api(`/repos/${repo}/git/commits/${trustedBase}`);
+    trustedCommit=await metadata.commit(trustedBase);
     need(trustedCommit.sha===trustedBase&&/^[a-f0-9]{40}$/.test(trustedCommit.tree?.sha??''),'Trusted selected base commit differs');
   }
-  const responses=originalRunId===undefined?await Promise.all([
-    api(`/repos/${repo}/actions/workflows/merge-integration-checks.yml/runs?event=pull_request&per_page=20&page=1`),
-    api(`/repos/${repo}/actions/workflows/worker-merge.yml/runs?event=workflow_dispatch&per_page=20&page=1`)
-  ]):[{workflow_runs:[await api(`/repos/${repo}/actions/runs/${originalRunId}`)]}];
+  const workflows=current.producer?.workflows?.map(row=>row.path);
+  need(same(workflows,PACKAGE_PRODUCER_WORKFLOWS)||same(workflows,[PACKAGE_PRODUCER_WORKFLOWS[1]]),
+    'Complete current package producer workflows required');
+  const responses=originalRunId===undefined?await Promise.all(workflows.map(workflow=>
+    api(`/repos/${repo}/actions/workflows/${path.posix.basename(workflow)}/runs?event=${workflow===PACKAGE_PRODUCER_WORKFLOWS[0]?'pull_request':'workflow_dispatch'}&per_page=20&page=1`)
+  )):[{workflow_runs:[await api(`/repos/${repo}/actions/runs/${originalRunId}`)]}];
   need(responses.every(response=>Array.isArray(response.workflow_runs)&&response.workflow_runs.length<=20),'Bounded original run discovery unavailable');
   const runs=responses.flatMap(response=>response.workflow_runs).sort((a,b)=>b.id-a.id||b.run_attempt-a.run_attempt);
   if(originalRunId!==undefined)need(runs.length===1&&runs[0]?.id===originalRunId,'Pinned original run identity differs');
@@ -124,26 +182,45 @@ export async function findOriginalPackage({api,repo,current,originalRunId,truste
             artifact_id:artifact.id,artifact_name:artifact.name,artifact_digest:artifact.digest.slice(7),artifact_bytes:artifact.size_in_bytes};
           const receipt=await readOriginalPackageInventory({api,repo,origin});
           origin.head=receipt.original_head;
-          const tree=await integrationTree(api,repo,origin.head),all=treeRows(tree);
-          const producer={kind:PACKAGE_PRODUCER_KIND,workflows:all.filter(row=>PACKAGE_PRODUCER_WORKFLOWS.includes(row.path))};
-          if(!same(producer,current.producer))continue;
-          const workflowTree=origin.head===receipt.executed_workflow.sha?tree:await integrationTree(api,repo,receipt.executed_workflow.sha);
+          // Check the small producer contract before requesting a whole declared
+          // source closure for an incompatible original.
+          const producerTree=await metadata.scope(origin.head,PACKAGE_PRODUCER_WORKFLOWS);
+          const producer={kind:PACKAGE_PRODUCER_KIND,workflows:treeRows(producerTree)};
+          const workflowTree=origin.head===receipt.executed_workflow.sha?producerTree:await metadata.scope(receipt.executed_workflow.sha,[receipt.workflow_path]);
           const actual=workflowTree.entries.get(receipt.workflow_path),captured=producer.workflows.find(row=>row.path===receipt.workflow_path);
           if(actual?.type!=='blob'||actual.mode!=='100644'||!same(captured,{path:receipt.workflow_path,mode:actual.mode,oid:actual.sha}))continue;
+          let producerWorkflows;
+          if(!same(producer,current.producer)){
+            producerWorkflows={original:(await blobRaw(api,repo,producerTree,receipt.workflow_path)).toString('utf8'),
+              current:(await blobRaw(api,repo,await metadata.scope(current.head,[receipt.workflow_path]),receipt.workflow_path)).toString('utf8')};
+            compatiblePackageProducers(producer,current.producer,producerWorkflows);
+            requireProducerInstallation(receipt.producer_job);
+          }
           const definition=await readPackageInputs({route:`/repos/${repo}`,base:origin.head,api});
+          const tree=await metadata.scope(origin.head,[...definition.inputs,...PACKAGE_PRODUCER_WORKFLOWS,'data/ownership-selection.json']),all=treeRows(tree);
           const source={head:origin.head,tree:tree.object.tree.sha,definition,producer,
             files:all.filter(row=>containsPackagePath(definition.inputs,row.path)),
             selection:await blobJSON(api,repo,tree,'data/ownership-selection.json')};
           if(trustedCommit&&!acceptedInputs){
             need(tree.object.sha===origin.head&&/^[a-f0-9]{40}$/.test(tree.object.tree?.sha??''),'Original source commit differs');
-            // Both commit identities came from this invocation's authenticated API.
-            // Reuse only the already-read complete tree, never a caller-supplied map.
-            acceptedInputs=tree.object.tree.sha===trustedCommit.tree.sha
-              ?acceptedInputsFromTree(trustedBase,tree,current)
-              :await acceptedSelectedPackageInputs({api,repo,base:trustedBase,current});
+            // Reuse exact ancestor listings by tree OID, including across
+            // distinct commits. New current leaves are resolved independently.
+            acceptedInputs=acceptedInputsFromTree(trustedBase,
+              await metadata.scope(trustedBase,acceptedMetadataPaths(current)),current);
           }
-          if(!sourceCompatible(source,{...current,accepted_selected_inputs:acceptedInputs}))continue;
-          return {source,origin,receipt,...(trustedCommit?{accepted_selected_inputs:acceptedInputs}:{})};
+          const priorSidecarRaw=source.definition.inputs.some(name=>!current.definition.inputs.includes(name))
+            ?await blobRaw(api,repo,await metadata.scope(origin.head,[source.selection.additive_release?.path]),source.selection.additive_release.path):undefined;
+          let preparedStartup;
+          if(source.files.some(row=>row.path===PREPARED_STARTUP_INDEX)&&current.files.some(row=>row.path===PREPARED_STARTUP_INDEX)){
+            const nextTree=await metadata.scope(current.head,[PREPARED_STARTUP_INDEX,'data/ownership-selection.json']);
+            preparedStartup={beforeIndex:await blobRaw(api,repo,tree,PREPARED_STARTUP_INDEX),
+              afterIndex:await blobRaw(api,repo,nextTree,PREPARED_STARTUP_INDEX),
+              beforeSelection:await blobRaw(api,repo,tree,'data/ownership-selection.json'),
+              afterSelection:await blobRaw(api,repo,nextTree,'data/ownership-selection.json')};
+          }
+          if(!sourceCompatible(source,{...current,accepted_selected_inputs:acceptedInputs},priorSidecarRaw,producerWorkflows,preparedStartup))continue;
+          return {source,origin,receipt,priorSidecarRaw,...(preparedStartup?{preparedStartup}:{}),...(producerWorkflows?{producerWorkflows}:{}),
+            ...(trustedCommit?{accepted_selected_inputs:acceptedInputs}:{})};
         }catch(error){
           console.warn(`Skipped original package producer ${run.id}/${attempt}: ${String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,300)}`);
         }
@@ -180,6 +257,72 @@ function currentSource(){
     files:committedPackageInputs(root,definition),producer:committedPackageProducer(root)};
 }
 
+// Reuse the independently authenticated emitted base, including actual geometry.
+// The current ledger cannot supply its own supposedly independent target shape.
+export function readOriginalPackageGeography(original,{sourceRoot}={}) {
+  const {root:originalRoot,manifest}=requireOriginalPackageOutput(original);
+  const output=new Map(manifest.output.files.map(pin=>[pin.path,pin]));
+  const read=name=>{
+    const pin=output.get(name);need(pin,'Original geography is absent from authenticated output');
+    const raw=fs.readFileSync(path.join(originalRoot,name));
+    need(raw.length===pin.bytes&&hash(raw)===pin.sha256,'Original geography output differs');return raw;
+  };
+  const atlas=JSON.parse(read('dist/client/atlas-geography.json'));
+  need(additiveBaseReference(atlas,canonicalHash),'Original content base descriptor missing');
+  const asset=pin=>{
+    need(/^additive-repairs\/[A-Za-z0-9_.-]+$/.test(pin?.path??''),'Original additive asset path differs');
+    const name='dist/client/'+pin.path;
+    need(same(output.get(name),{path:name,bytes:pin.bytes,sha256:pin.sha256}),'Original additive asset pin differs');
+    return read(name);
+  };
+  let selectedGrid;
+  if(atlas.preparedOwnership!==undefined){
+    need(atlas.preparedOwnership.version===(manifest.source.selection.version===2?3:2)&&sourceRoot,'Original corrected bank requires its unchanged source native manifest');
+    const native=scientificNativeSelection(manifest.source.selection),name=native.manifest_path,originalPin=manifest.source.files.find(pin=>pin.path===name);
+    need(safePackagePath(name)&&originalPin?.mode==='100644','Original native source pin missing');
+    const file=path.join(sourceRoot,name),raw=fs.readFileSync(file);
+    need(fs.lstatSync(file).isFile()&&fs.realpathSync(file)===file&&createHash('sha1').update('blob '+raw.length+'\0').update(raw).digest('hex')===originalPin.oid
+      &&hash(raw)===native.sha256&&hash(raw)===atlas.preparedOwnership.native_manifest_sha256,'Original native source body differs');
+    selectedGrid={sha256:hash(raw),manifest:JSON.parse(raw)};
+  }else selectedGrid={sha256:atlas.additiveRelease.base_manifest.sha256,
+    manifest:JSON.parse(asset(atlas.additiveRelease.base_manifest)),bounds:asset(atlas.additiveRelease.owner_roster)};
+  const parts=(names,kind)=>{
+    need(Array.isArray(names)&&names.length>0&&new Set(names).size===names.length,'Complete distinct original '+kind+' parts required');
+    return names.flatMap(name=>{
+      need(typeof name==='string'&&name.startsWith('geography/'+kind+'-')&&/^geography\/(?:catalog|part)-[0-9]+\.json\.gz$/.test(name),'Original geography part path differs');
+      const rows=JSON.parse(gunzipSync(read('dist/client/'+name)));
+      need(Array.isArray(rows)&&rows.length>0,'Nonempty original geography part required');return rows;
+    });
+  };
+  const catalog=parts(atlas.parts,'catalog'),geometries=new Map();
+  for(const row of parts(atlas.geometryParts,'part')){
+    need(typeof row.id==='string'&&!geometries.has(row.id)&&row.geometry,'Duplicate or missing original geometry');
+    geometries.set(row.id,row.geometry);
+  }
+  const ids=new Set(),features=catalog.map(feature=>{
+    need(typeof feature.id==='string'&&!ids.has(feature.id)&&feature.geometry===null&&geometries.has(feature.id),'Original geography identity join differs');
+    ids.add(feature.id);return {...feature,geometry:geometries.get(feature.id)};
+  });
+  const geographicRelease=additiveBaseReference(atlas,canonicalHash);
+  need(ids.size===geometries.size&&footprintHash(features)===geographicRelease.footprints_sha256,'Original complete base geometry differs');
+  let referenceRevision;
+  if(manifest.source.selection?.reference_projection!==undefined||atlas.referenceMetadata!==undefined){
+    const metadata=atlas.referenceMetadata;
+    need(metadata,'Original reference metadata descriptor missing');
+    const name='dist/client/reference-metadata/current.json',raw=read(name),pin=manifest.source.selection?.reference_projection;
+    need(pin&&raw.length===pin.bytes&&hash(raw)===pin.sha256&&
+      isDeepStrictEqual(metadata.asset,{path:'reference-metadata/current.json',bytes:raw.length,sha256:hash(raw)}),
+    'Original reference metadata source/output identity differs');
+    const projection=validateReferenceMetadataHeader(JSON.parse(raw),{selection:manifest.source.selection,manifest:selectedGrid.manifest});
+    need(isDeepStrictEqual(projection.native,originalNativeReference(atlas.preparedOwnership?.native_pixel_map??atlas.pixelMap))&&isDeepStrictEqual(projection.native,metadata.native_reference)&&
+      isDeepStrictEqual(projection.reference,metadata.reference)&&isDeepStrictEqual(projection.reference,geographicRelease),
+      'Original reference metadata application differs');
+    referenceRevision=metadata.application_reference_revision;
+    need(/^[a-f0-9]{64}$/.test(referenceRevision??''),'Original application reference revision required');
+  }
+  return {atlas,selectedGrid,geographicRelease,features,...(referenceRevision===undefined?{}:{referenceRevision})};
+}
+
 export async function assembleSelectedPackage({api,repo,expectedHead,originalRunId,trustedBase}){
   const started=performance.now(),current=currentSource();need(current.head===expectedHead,'Actual selected head changed');
   const found=await findOriginalPackage({api,repo,current,originalRunId,trustedBase});if(!found)return {assembled:false,reason:'No applicable retained original output in bounded recent-result search'};
@@ -191,81 +334,77 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
   try{
     const archive=path.join(scratch,'original.zip'),originalRoot=path.join(scratch,'original');
     await downloadOriginal(api,repo,found.origin,archive);
-    const pythonArgs=['-I','-S','-B',path.join(root,'scripts/extract-package-output.py')];
+    const extractorName='scripts/extract-package-output.py',extractorRaw=fs.readFileSync(path.join(root,extractorName));
+    const extractor=streamedPackageFile(root,extractorName),extractorOid=createHash('sha1').update(`blob ${extractorRaw.length}\0`).update(extractorRaw).digest('hex');
+    need(git(['ls-tree','HEAD','--',extractorName])===`100644 blob ${extractorOid}\t${extractorName}`&&hash(extractorRaw)===extractor.sha256,'Executing package extractor differs from current source');
+    const python=resolvePackagePythonExecutable(),pythonArgs=['-I','-S','-B',path.join(root,extractorName)];
     // Authenticate and consume the archive once through the extractor's held descriptor.
-    execFileSync('python3',[...pythonArgs,archive,originalRoot,found.origin.artifact_digest,found.receipt.package_output_manifest_sha256,String(found.receipt.package_output_manifest_bytes)],{stdio:'pipe',maxBuffer:1048576});
+    execFileSync(python.executable,[...pythonArgs,archive,originalRoot,found.origin.artifact_digest,found.receipt.package_output_manifest_sha256,String(found.receipt.package_output_manifest_bytes)],{stdio:'pipe',maxBuffer:1048576});
+    need(same(streamedPackageFile(root,extractorName),extractor)&&same(resolvePackagePythonExecutable(python.sha256),python),'Package extraction execution changed');
     const manifestRaw=fs.readFileSync(path.join(originalRoot,'.cache/package-output-manifest.json')),manifest=validatePackageOutputManifest(JSON.parse(manifestRaw));
     for(const key of ['head','tree','definition','files','producer','selection'])need(same(manifest.source[key],found.source[key]),'Retained manifest differs from original immutable source: '+key);
-    need(manifest.runtime.installed?.version===2&&manifest.runtime.installed.python?.parser,
-      'Version 2 original installed parser evidence required; legacy aggregate evidence requires a full build');
     const original=await authenticateOriginalPackageOutput({api,repo,origin:found.origin,root:originalRoot,manifestRaw});
-    const installed=installedPackageIdentity(root,declaredPackagePythonRoots(root),{expectedParser:manifest.runtime.installed.python.parser,expectedExecutable:manifest.runtime.installed.python.executable_sha256});
-    const differences=installedPackageDifferences(manifest.runtime.installed,installed);
-    const recordAndRequireRuntime=()=>{
-      fs.writeFileSync(path.join(root,'.cache/package-runtime-comparison.json'),JSON.stringify({version:2,
-        original_manifest_sha256:hash(manifestRaw),current:installed,differences})+'\n',{flag:'wx'});
-      need(differences.length===0,'Original runtime incompatibility: '+JSON.stringify(differences.map(row=>
-        ({component:row.component,...(row.changed_components?{changed_components:row.changed_components}:{}),...(row.changed_files?{changed_files:row.changed_files.slice(0,10),changed_file_count:row.changed_files.length}: {})}))));
-    };
-    if(differences.length)recordAndRequireRuntime();
-    // Actual scientific imports run only after original custody and complete
-    // installed-byte admission, with the same no-site startup as measurement.
-    const runtime=inspectPackageRuntime(root);
-    if(runtime.errors.length){differences.push({component:'runtime.preflight',errors:runtime.errors});recordAndRequireRuntime();}
-    const actualRuntime={node:process.version,platform:process.platform,arch:process.arch,
-      versions:process.versions,dependencies:runtime.package_lock_sha256,
-      python:{version:runtime.python.version,imports:runtime.python.imports}};
-    for(const [component,value] of Object.entries(actualRuntime))if(!same(manifest.runtime[component],value))
-      differences.push({component:'runtime.'+component,original:manifest.runtime[component],current:value});
-    if(!same(manifest.configuration,packageBuildConfiguration()))differences.push({component:'configuration',
-      original:manifest.configuration,current:packageBuildConfiguration()});
-    recordAndRequireRuntime();
+    // Admit the current locked installation for the computation we actually run.
+    // Original runtime metadata stays in the retained artifact as history.
+    const runtime=inspectPackageNodeRuntime(root);
+    need(runtime.errors.length===0,'Current package runtime admission failed: '+JSON.stringify(runtime.errors));
+    need(same(manifest.configuration,packageBuildConfiguration()),'Original build configuration differs');
     const stage=path.join(scratch,'assembly');fs.mkdirSync(stage);
-    for(const name of ['.github/package-inputs.json','data/ownership-selection.json']){
-      fs.mkdirSync(path.dirname(path.join(stage,name)),{recursive:true});fs.copyFileSync(path.join(root,name),path.join(stage,name),fs.constants.COPYFILE_EXCL);
-    }
-    const atlasPath=path.join(originalRoot,'dist/client/atlas-geography.json');
-    const atlasPin=manifest.output.files.find(pin=>pin.path==='dist/client/atlas-geography.json');
-    // Atlas is an actual emitted asset, not an 8 MiB control receipt. Charge its
-    // authenticated whole bytes to the same current scientific allowance; the
-    // private execution frame then accounts for the parsed graph and checks RSS.
-    need(atlasPin&&fs.statSync(atlasPath).size===atlasPin.bytes,'Authenticated whole atlas size differs');
-    admitAssemblyAtlasMetadata(atlasPin.bytes);
-    const atlas=JSON.parse(fs.readFileSync(atlasPath));need(atlas.additiveRelease?.base_reference,'Original additive base descriptor missing');
     const execution=issuePackageAssemblyExecution({original,source:root,stage,executingRoot:root,
-      inheritedMetadata:[current,found.source,manifest,atlas,{runtime}],acceptedInputs:current.accepted_selected_inputs});
-    const publication=await preparePackageSelectedAdditive({root:stage,originalPackage:original,assemblyExecution:execution,
-      selectedGrid:{sha256:current.selection.sha256},geographicRelease:atlas.additiveRelease.base_reference});
-    need(publication,'Genuine current additive publication required');
-    const consumed=packageSelectedPublicationInventory(publication,{root:stage});
-    const transition=admitPackageOutputTransition(manifest,current,{acceptedInputs:current.accepted_selected_inputs,typedInputs:consumed});
-    const oldAssets=['base_manifest','ledger','owner_roster','patch'].map(role=>atlas.additiveRelease[role]);
-    need(oldAssets.every(pin=>/^additive-repairs\/[A-Za-z0-9_.-]+$/.test(pin?.path??''))&&new Set(oldAssets.map(pin=>pin.path)).size===4,'Original four public additive assets required');
-    for(const pin of oldAssets)need(same(streamedPackageFile(originalRoot,'dist/client/'+pin.path),{path:'dist/client/'+pin.path,bytes:pin.bytes,sha256:pin.sha256}),'Original additive output differs');
-    const mutable=new Set(oldAssets.map(pin=>'dist/client/'+pin.path));mutable.add('dist/client/atlas-geography.json');
-    for(const role of ['base_manifest','ledger','owner_roster','patch']){
-      const name='dist/client/'+publication.additiveRelease[role].path;
-      need(!manifest.output.files.some(pin=>pin.path===name&&!mutable.has(name)),'New additive asset collides with invariant output');
+      acceptedInputs:current.accepted_selected_inputs,priorSidecarRaw:found.priorSidecarRaw,producerWorkflows:found.producerWorkflows,preparedStartup:found.preparedStartup});
+    const {atlas,selectedGrid,geographicRelease,features,referenceRevision}=readOriginalPackageGeography(original,{sourceRoot:root});
+    // The authenticated execution closure includes this literal deferred import.
+    // Current locked dependencies are admitted above; no dependency sees API credentials.
+    need(!process.env.GH_TOKEN&&!process.env.GITHUB_TOKEN,'Current additive consumption must be credential-free');
+    const {readCurrentSelectedAdditive}=await import('./package-current-additive.mjs');
+    const {packagePreparedStartupOwnership}=await import('./package-startup-ownership.mjs');
+    const publication=await readCurrentSelectedAdditive({root,selectedGrid,geographicRelease,referenceRevision});
+    need(publication&&same(publication.selection,current.selection),'Genuine same-source current additive publication required');
+    need(isDeepStrictEqual(publication.referenceMetadata,atlas.referenceMetadata),'Current reference metadata differs from retained output');
+    need(atlas.preparedOwnership?.version===(publication.finalBank?3:2),'Corrected-bank reuse requires a matching full-capture producer');
+    const bankPrefix='data/canonical-grid/current-startup/',preparedDirectory=path.join(scratch,'prepared');
+    const prepared=await packagePreparedStartupOwnership({manifest:selectedGrid.manifest,manifestSha:selectedGrid.sha256,
+      source:path.join(root,bankPrefix),destination:preparedDirectory,selected:publication,features});
+    const consumed=[...publication.inputInventory,...prepared.input_inventory.map(pin=>({...pin,path:bankPrefix+pin.path}))].map(pin=>{
+      const row=current.files.find(row=>row.path===pin.path);
+      need(row&&row.mode===pin.mode&&row.oid===pin.git_blob_oid&&pin.whole_body_consumed===true,'Current prepared input differs from actual source');
+      return {...pin,commit:current.head};
+    });
+    const transition=admitPackageOutputTransition(manifest,current,{acceptedInputs:current.accepted_selected_inputs,typedInputs:consumed,priorSidecarRaw:found.priorSidecarRaw,producerWorkflows:found.producerWorkflows,preparedStartup:found.preparedStartup});
+    const originalNative=new Set([...JSON.parse(found.preparedStartup.beforeIndex).compatibility_files.map(pin=>pin.path),
+      ...atlas.preparedOwnership.native_pixel_map.parts.map(pin=>pin.path),atlas.preparedOwnership.native_pixel_map.native_latitudes.transport_path]);
+    const mutable=new Set([...atlas.pixelMap.parts,...atlas.preparedOwnership.context_parts]
+      .filter(pin=>!originalNative.has(pin.path)).map(pin=>'dist/client/'+pin.path));
+    mutable.add('dist/client/atlas-geography.json');
+    const originalFiles=new Map(manifest.output.files.map(pin=>[pin.path,pin]));
+    const newFiles=new Set(prepared.files.map(pin=>'dist/client/'+pin.path));
+    for(const pin of prepared.files){
+      const name='dist/client/'+pin.path,prior=originalFiles.get(name);
+      need(!prior||same(prior,{path:name,bytes:pin.bytes,sha256:pin.sha256}),'Prepared immutable output URL would be rebound');
     }
-    atlas.reference_release=publication.reference_release;atlas.additiveRelease=publication.additiveRelease;
+    atlas.reference_release=publication.reference_release;if(publication.additiveRelease)atlas.additiveRelease=publication.additiveRelease;else delete atlas.additiveRelease;
+    atlas.pixelMap=prepared.pixelMap;atlas.preparedOwnership=prepared.preparedOwnership;
     const atlasRaw=Buffer.from(JSON.stringify(atlas));
-    admitDisk(atlasRaw.length+['base_manifest','ledger','owner_roster','patch'].reduce((sum,role)=>sum+publication.additiveRelease[role].bytes,0)+6*4096,
-      'the actual current additive assets and atlas');
+    admitDisk(atlasRaw.length+prepared.files.reduce((sum,pin)=>sum+pin.bytes,0)+6*4096,'the actual corrected bank and atlas');
     fs.renameSync(path.join(originalRoot,'dist/client'),path.join(stage,'dist'));
-    for(const pin of oldAssets)fs.unlinkSync(path.join(stage,'dist',pin.path));
-    publishPackageSelectedAdditive(publication,{root:stage});
+    for(const name of mutable)if(name!=='dist/client/atlas-geography.json'&&!newFiles.has(name))fs.unlinkSync(path.join(stage,'dist',name.slice('dist/client/'.length)));
+    for(const pin of prepared.files)if(!originalFiles.has('dist/client/'+pin.path)){
+      const file=path.join(stage,'dist',pin.path);fs.mkdirSync(path.dirname(file),{recursive:true});
+      fs.copyFileSync(path.join(preparedDirectory,pin.path),file,fs.constants.COPYFILE_EXCL);
+    }
     fs.writeFileSync(path.join(stage,'dist/atlas-geography.json'),atlasRaw);
     fs.renameSync(path.join(stage,'dist'),path.join(stage,'client'));
     fs.mkdirSync(path.join(stage,'dist'));fs.renameSync(path.join(stage,'client'),path.join(stage,'dist/client'));
     fs.renameSync(path.join(originalRoot,'dist/cloudflare'),path.join(stage,'dist/cloudflare'));
     for(const pin of manifest.output.files)if(!mutable.has(pin.path))need(same(streamedPackageFile(stage,pin.path),pin),'Invariant output changed during assembly');
+    assertCloudflareStaticAssets(stage);
     requirePackageAssemblyExecution(execution);
     const assembly={kind:'retained-original-output-plus-current-additive',origin:found.origin,
-      original_manifest_sha256:hash(manifestRaw),runtime_identity_version:2,transition,current_execution:execution,
+      original_manifest_sha256:hash(manifestRaw),transition,current_execution:execution,
       original_base_context_retained:true,base_restoration_invoked:false,invariant_build_invoked:false,
       current_selected_inputs:consumed,elapsed_seconds:(performance.now()-started)/1000};
     const receipt={version:1,kind:'cloudflare',input_definition_sha256:current.input_definition_sha256,assembly,
-      preflight:{passed:true,errors:[],inputs:{head:current.head},runtime,
+      preflight:{passed:true,errors:[],inputs:{head:current.head},runtime:{...runtime,extractor:{python,source:extractor,startup:['-I','-S','-B']}},
         limitation:'Current assembly code, dependency and selected-source admission; original invariant build is reused, not reexecuted.'}};
     const receiptRaw=Buffer.from(JSON.stringify(receipt,null,2)+'\n');
     const receiptTarget=path.join(root,'.cache/package-input-build.json'),stagedReceipt=path.join(scratch,'receipt.json');
@@ -290,33 +429,30 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     }
     committed=true;
     return {assembled:true,receipt_sha256:hash(receiptRaw),origin:found.origin,elapsed_seconds:assembly.elapsed_seconds,
-      reused_output_files:manifest.output.files.length-mutable.size,current_additive_assets:4};
+      reused_output_files:manifest.output.files.length-mutable.size,current_prepared_assets:prepared.files.length};
   }finally{
     if(!preserveScratch)try{await fsp.rm(scratch,{recursive:true,force:true});}
     catch(error){if(!committed)throw error;console.warn('Committed selected output is valid; temporary output cleanup remains pending');}
   }
 }
 
-// Production assembly binds source and original output custody. Reference-run
-// authentication and output equivalence belong to the independent observer.
+// Production assembly runs only inside the authenticated selected-data queue.
 export function packageAssemblyInvocation(event, environment = process.env) {
-  const proofMode=environment.GITHUB_EVENT_NAME==='workflow_dispatch'&&environment.GITHUB_WORKFLOW==='Selected package equivalence proof';
-  const workerMode=environment.GITHUB_EVENT_NAME==='workflow_dispatch'&&environment.GITHUB_WORKFLOW==='Serialize worker PR merges'&&
-    environment.GITHUB_REF==='refs/heads/main';
-  need(proofMode||workerMode||environment.GITHUB_EVENT_NAME==='pull_request','Trusted selected-data CI invocation required');
-  if(workerMode)need(environment.INTEGRATION_PROFILE==='full'&&environment.INTEGRATION_SHARD==='0'&&
+  need(environment.GITHUB_EVENT_NAME==='workflow_dispatch'&&environment.GITHUB_WORKFLOW==='Serialize worker PR merges'&&
+    environment.GITHUB_REF==='refs/heads/main','Trusted selected-data worker invocation required');
+  need(environment.INTEGRATION_PROFILE==='full'&&environment.INTEGRATION_SHARD==='0'&&
     environment.INTEGRATION_TEST_SELECTION==='selected-data','Trusted selected-data worker integration (0) required');
-  const expectedHead=proofMode?event.inputs?.source_head:workerMode?environment.SELECTED_PACKAGE_CANDIDATE:event.pull_request?.head?.sha;
-  need(/^[a-f0-9]{40}$/.test(expectedHead??''),proofMode?'Exact proof source head required':'Exact selected package candidate required');
-  let originalRunId;
-  if(proofMode){
-    need(/^[1-9]\d*$/.test(event.inputs?.original_run_id??'')&&Number.isSafeInteger(Number(event.inputs.original_run_id)),
-      'Exact original package run identity required');
-    originalRunId=Number(event.inputs.original_run_id);
-  }
+  const expectedHead=environment.SELECTED_PACKAGE_CANDIDATE;
+  need(/^[a-f0-9]{40}$/.test(expectedHead??''),'Exact selected package candidate required');
   const trustedBase=environment.SELECTED_PACKAGE_TRUSTED_BASE;
   need(trustedBase===undefined||/^[a-f0-9]{40}$/.test(trustedBase),'Exact trusted selected base required');
-  return {proofMode,expectedHead,originalRunId,...(trustedBase===undefined?{}:{trustedBase})};
+  return {expectedHead,...(trustedBase===undefined?{}:{trustedBase})};
+}
+
+export function packageAssemblyAPI(token,options={}){
+  // Match the queue's existing non-merge read allowance. Shared transport owns
+  // its unchanged transient status, attempt, timeout and denial policy.
+  return githubAPI(token,{...options,conditionalReads:false,readWaitMs:8*60*1000});
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
@@ -324,11 +460,10 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
   try{
     need(process.argv.length===2&&process.env.GH_TOKEN&&process.env.GITHUB_REPOSITORY&&process.env.GITHUB_EVENT_PATH,'Trusted selected-data CI invocation required');
     const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
-    const api=githubAPI(process.env.GH_TOKEN,{conditionalReads:false});delete process.env.GH_TOKEN;delete process.env.GITHUB_TOKEN;
-    const {proofMode,expectedHead,originalRunId,trustedBase}=packageAssemblyInvocation(event);
-    result=await assembleSelectedPackage({api,repo:process.env.GITHUB_REPOSITORY,expectedHead,originalRunId,trustedBase});
-    if(proofMode)need(result.assembled,'Actual assembly required; fallback cannot establish equivalence');
-  }catch(error){if(process.env.GITHUB_EVENT_NAME==='workflow_dispatch'&&process.env.GITHUB_WORKFLOW==='Selected package equivalence proof')process.exitCode=1;result={assembled:false,reason:String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,600)};}
+    const api=packageAssemblyAPI(process.env.GH_TOKEN);delete process.env.GH_TOKEN;delete process.env.GITHUB_TOKEN;
+    const {expectedHead,trustedBase}=packageAssemblyInvocation(event);
+    result=await assembleSelectedPackage({api,repo:process.env.GITHUB_REPOSITORY,expectedHead,trustedBase});
+  }catch(error){result={assembled:false,reason:String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,600)};}
   console.log(JSON.stringify(result));
   if(process.env.GITHUB_OUTPUT)fs.appendFileSync(process.env.GITHUB_OUTPUT,`assembled=${result.assembled}\nassembly_sha256=${result.receipt_sha256??''}\n`);
 }

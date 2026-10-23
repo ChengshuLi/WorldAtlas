@@ -1,0 +1,41 @@
+{
+  "outputs": [
+    {
+      "path": "coordination/engineering/jamaica-native-repair-evaluation-20261016/checkpoint-pacific/geography-artifact.zip",
+      "bytes": 7651426,
+      "sha256": "92fcb57c5050078f263922f15a94495364f275e34abea4fa97903ba6b71f243c",
+      "git_blob_oid": "d8b23168af17d121fd144bb2607ec9b3c233a1ed"
+    },
+    {
+      "path": "coordination/engineering/jamaica-native-repair-evaluation-20261016/checkpoint-pacific/selected-checkpoint.json",
+      "bytes": 386,
+      "sha256": "6ed3efcf37b310f60dae6d33d4abf0fae2f847f83404af85d0d65e1e3c3480c7",
+      "git_blob_oid": "e2f51656a4df31ee278d02b5c34ce54f4558e9d1"
+    }
+  ],
+  "accepted_commit": "5c65b213d005607e769af66d39bf03d4554882d6",
+  "source": {
+    "run_id": 38973566940,
+    "run_attempt": 1,
+    "head": "de5c8a27ce75d48997e96d08f23b05cdcea0af95",
+    "baseline": "b66316835ec65fc3f40d4f02d8bf1ffd0e7c93a0",
+    "candidate_commit": "3d0a663c3ff0cad966721666340322374ce48be1",
+    "workflow_path": ".github/workflows/worker-merge.yml",
+    "event": "workflow_dispatch",
+    "workflow_head": "b66316835ec65fc3f40d4f02d8bf1ffd0e7c93a0",
+    "tree": "40f84a68a1981cd546d05378ce01e54d6c5df7a1",
+    "job_id": 117217862164,
+    "artifact_name": "geography-pacific-five-2254-de5c8a2-20261016-002-1",
+    "artifact_id": 12077059783,
+    "artifact_digest": "92fcb57c5050078f263922f15a94495364f275e34abea4fa97903ba6b71f243c",
+    "report_sha256": "aa794a9642aea766e6756995ed53e2dc49bea11da7e4e388b22570c497528604",
+    "report_bytes": 123458,
+    "artifact_bytes": 7651426
+  },
+  "admission": {
+    "authority_entries": 152,
+    "ledger_rows": 934,
+    "selection_equal": true
+  },
+  "limit": "Stock live-authenticated admission of previously accepted Pacific checkpoint; transport reuse only, no new source qualification, publication or science replay."
+}

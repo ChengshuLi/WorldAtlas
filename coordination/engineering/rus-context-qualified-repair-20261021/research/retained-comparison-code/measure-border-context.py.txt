@@ -1,0 +1,14 @@
+from pathlib import Path
+import json,hashlib,collections,datetime
+from shapely.geometry import shape,Point
+from shapely.ops import nearest_points
+from pyproj import Geod
+D=Path(__file__).resolve().parent;keys=json.loads((D/'RUS8980-LSIB-exact-native-regional-sides.json').read_text())['rows'];f=json.loads((D/'primary/State-LSIB-RUS-CHN-full-resolution.geojson').read_text())['features'][0];g=shape(f['geometry']);assert g.is_valid and g.is_simple;geod=Geod(ellps='WGS84');rows=[]
+for r in keys:
+ p=Point(r['longitude'],r['normative_latitude']);a=nearest_points(p,g)[1];_,_,d=geod.inv(p.x,p.y,a.x,a.y)
+ rows.append({'y':r['y'],'x':r['x'],'owner_index':r['owner_index'],'native_regional_relation':r['native_regional_relation'],'planar_nearest_source_point':[a.x,a.y],'geodesic_distance_to_that_source_point_m':d})
+summary={}
+for effect in ['interior','outside']:
+ rr=[r['geodesic_distance_to_that_source_point_m'] for r in rows if r['native_regional_relation']==effect]
+ summary[effect]={'keys':len(rr),'minimum_m':min(rr),'maximum_m':max(rr),'at_most_100m_context_only':sum(d<=100 for d in rr),'over_100m_context_only':sum(d>100 for d in rr)}
+out={'kind':'RUS_CHN_distance_context_not_threshold_or_qualification','created_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'summary':summary,'rows':rows,'method':'Nearest source point in native WGS84 coordinate space, then WGS84 ellipsoid geodesic point-to-point distance. This is contextual distance to an actual source point, not a guaranteed geodesic minimum to every segment.','limits':['The provider says most lines are within100m, not every point and not a guaranteed error bound. This grouping is not an eligibility rule.','Source coordinates and all original/native identities are unchanged. No snapping, tolerance tuning, physical inference, legal-boundary adoption or repair.']};(D/'RUS8980-LSIB-distance-context.json').write_text(json.dumps(out,indent=2)+'\n');print(json.dumps(summary,indent=2))

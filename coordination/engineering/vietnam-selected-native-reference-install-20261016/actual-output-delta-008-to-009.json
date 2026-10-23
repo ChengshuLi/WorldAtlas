@@ -1,0 +1,24 @@
+{
+  "current009_success": true,
+  "exact_delta": [
+    {
+      "path": "reference-migrations/eastern-two-gap-repair-20261006/products/dated-reference-names/revalidation.json",
+      "before_008_sha256": "3bb9614b3cfad127879a23c1407fa3b9bc67fe556748cbb0d6a6b266a260941f",
+      "after_009_sha256": "40e161f5695e7b99ab3a413e51c4a15187ffcc9d4638e4129fa25e8b3edc5cc9"
+    },
+    {
+      "path": "reference-migrations/eastern-two-gap-repair-20261006/products/demographic-evidence/revalidation.json",
+      "before_008_sha256": "4365ab98e019a3309ccea19590e2e093bc5b8033c5d2ee88e3a69a8aed122a3d",
+      "after_009_sha256": "a7abef7c42c6792a8b4af2836f1b88ea5158032bc9c7c8b648a302c01eb0574a"
+    },
+    {
+      "path": "prepared-evidence/index.json",
+      "before_008_sha256": "0d422cf4027af6d0f351f0e8c45d353c1636f98ce1974181f3725c7adbc7b381",
+      "after_009_sha256": "048b615e3086f889b8052ea97173ba6a9beb51cfcb93245f87b91a345edde746"
+    }
+  ],
+  "writes": 450,
+  "unchanged_from008": 447,
+  "native_source_geometry_release_body_changes": false,
+  "reason": "Final installer postimage hash is embedded in composed evidence wrappers and their index references."
+}

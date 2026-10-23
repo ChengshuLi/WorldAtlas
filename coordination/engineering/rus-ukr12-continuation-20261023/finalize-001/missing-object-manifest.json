@@ -1,0 +1,460 @@
+{
+  "version": 1,
+  "kind": "exact-final-bank-missing-object-inventory",
+  "target": {
+    "repository": "ChengshuLi/WorldAtlas",
+    "commit": "9e3637776d2593f0a024adee41a19e319e3b6385",
+    "path": "data/canonical-grid/current-startup/index.json",
+    "index_bytes": 49610,
+    "index_sha256": "c47b3bd0d2e6dbb1a0ab23039cfaabd8b1e32922bb45c832fad993ed0a0cead2",
+    "index_version": 3
+  },
+  "helper": {
+    "path": "scripts/prepare-delivery-handoff.mjs",
+    "phase": "finalize",
+    "git_launcher": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/git/bin/git",
+    "git_executable": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/git/bin/git",
+    "git_exec_path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/git/libexec/git-core",
+    "repository_remote": "https://github.com/ChengshuLi/WorldAtlas.git",
+    "fetch_command": "git -C <owned-workspace> -c fetch.negotiationAlgorithm=noop fetch --no-tags --no-write-fetch-head --no-recurse-submodules --no-auto-maintenance --filter=blob:none --stdin https://github.com/ChengshuLi/WorldAtlas.git",
+    "fetch_was_executed": false,
+    "reason": "Existing gh auth token acquisition failed before fetch"
+  },
+  "closure": {
+    "inventory_files": 79,
+    "missing_object_count": 71,
+    "missing_bytes": 137418243,
+    "missing": [
+      {
+        "oid": "33ca7c3b7f6b6e7761680333fcaaffb3d8b5df85",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-0207afc58b89fc153818fb1995986006bf8792d2e0e7332de439e0e1b3a16af6.json.gz",
+        "bytes": 892136,
+        "sha256": "0207afc58b89fc153818fb1995986006bf8792d2e0e7332de439e0e1b3a16af6"
+      },
+      {
+        "oid": "4e128ee41e334a55ee39d06be8fab1399ff173b1",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-10f86db5ba18b2e7d3d019c0d00bb285ac95bdfdd12e72d4c72f4475fd1c7c56.json.gz",
+        "bytes": 303394,
+        "sha256": "10f86db5ba18b2e7d3d019c0d00bb285ac95bdfdd12e72d4c72f4475fd1c7c56"
+      },
+      {
+        "oid": "d1cf271cf952b495fd7cd6e6a40cbc6fd8ae60d0",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-21961d1750401388eb8723124f5602e5a4a9108054335741a09656cd76e31782.json.gz",
+        "bytes": 490973,
+        "sha256": "21961d1750401388eb8723124f5602e5a4a9108054335741a09656cd76e31782"
+      },
+      {
+        "oid": "5facf84de32d1475c179fe43b78c54045277b57d",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-2c94bce9153d32353b6a019030ede59a54405aecb7587801d75fab81132f41bd.json.gz",
+        "bytes": 400927,
+        "sha256": "2c94bce9153d32353b6a019030ede59a54405aecb7587801d75fab81132f41bd"
+      },
+      {
+        "oid": "620c0f3b37e58d8ee5b80b825770ac718a3eecf2",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-30f835a5ab5ccc665d2529af6760fe05fa774371e53bab0df00206c370c7d806.json.gz",
+        "bytes": 140314,
+        "sha256": "30f835a5ab5ccc665d2529af6760fe05fa774371e53bab0df00206c370c7d806"
+      },
+      {
+        "oid": "01dea89a55f6b3e59ba8f6991f8deb3bf6016cda",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-32bb9fa0a558bea6ed60d107ee722cb0b495b4b1e6e9417427c2978da094c376.json.gz",
+        "bytes": 298123,
+        "sha256": "32bb9fa0a558bea6ed60d107ee722cb0b495b4b1e6e9417427c2978da094c376"
+      },
+      {
+        "oid": "de33bc19c62e85417ecbcaca3224617fb9413a4e",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-3b177aa4c85b7acb48bb5407481d3127fee835a954cd45ecc5ef1ed00e1d4a13.json.gz",
+        "bytes": 393697,
+        "sha256": "3b177aa4c85b7acb48bb5407481d3127fee835a954cd45ecc5ef1ed00e1d4a13"
+      },
+      {
+        "oid": "959998bd398856f4ffcc44d0068cadb4cf15cd71",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-3e19b577fe92afee3f876850429f0606d857f6163204903dcd4c06559f1e4a30.json.gz",
+        "bytes": 874246,
+        "sha256": "3e19b577fe92afee3f876850429f0606d857f6163204903dcd4c06559f1e4a30"
+      },
+      {
+        "oid": "449d1b9691c56af0785fcd37aeaeda3e46f5e866",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-43fa5fbc711e1b0a805c4eb69e058d339bf61bccdab2a158f3b14a141ee84ee7.json.gz",
+        "bytes": 260711,
+        "sha256": "43fa5fbc711e1b0a805c4eb69e058d339bf61bccdab2a158f3b14a141ee84ee7"
+      },
+      {
+        "oid": "4308b1e892a741c37f5f327d084c8808896e70df",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-47729e22ded3e6f181570bf6b5cea7cc6570df64ee20e7568f04835dfd20898b.json.gz",
+        "bytes": 495619,
+        "sha256": "47729e22ded3e6f181570bf6b5cea7cc6570df64ee20e7568f04835dfd20898b"
+      },
+      {
+        "oid": "09bc523e5cfb5dcd5a88105fe112a4378b2e5d4d",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-5480d5a76f55009c1b430145e14774ef967adb2f85dfb7c4648ea4ffbebf9741.json.gz",
+        "bytes": 180769,
+        "sha256": "5480d5a76f55009c1b430145e14774ef967adb2f85dfb7c4648ea4ffbebf9741"
+      },
+      {
+        "oid": "47dcc49362d6dab90c55bf8ec27cf14e6ce2d1a6",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-5e20631c2ac9ae9dc4d7ad529a1077881ab6aa773960050e3c56dbee8a9f80b1.json.gz",
+        "bytes": 712265,
+        "sha256": "5e20631c2ac9ae9dc4d7ad529a1077881ab6aa773960050e3c56dbee8a9f80b1"
+      },
+      {
+        "oid": "7d7ea35d371cad661724f3e9279dfa04e8ef3c8a",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-668a0f501ffe9a6496db35e37c61d67c37bcf888f653ced5f8b60b704b9b58a1.json.gz",
+        "bytes": 1021328,
+        "sha256": "668a0f501ffe9a6496db35e37c61d67c37bcf888f653ced5f8b60b704b9b58a1"
+      },
+      {
+        "oid": "e4d0715e8488a66e7bdcaccb3a1aa077f447bbf8",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-6ccf56c72ba3f9b8d1a0a6146892355ec21ce3d6f46c2a9bc664db7dbf6727fd.json.gz",
+        "bytes": 549790,
+        "sha256": "6ccf56c72ba3f9b8d1a0a6146892355ec21ce3d6f46c2a9bc664db7dbf6727fd"
+      },
+      {
+        "oid": "f396698286d7e5ec45d831cad98b4fccbc99d343",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-7095f930a97c561505adebecbebc5a21604c71aaffddba9a0e0a4bd9e8a4c9f9.json.gz",
+        "bytes": 38833,
+        "sha256": "7095f930a97c561505adebecbebc5a21604c71aaffddba9a0e0a4bd9e8a4c9f9"
+      },
+      {
+        "oid": "25d659a324246b7130e907bf5716bf28a649ede3",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-8a8b0df5521eda1c39f82f991ff6ff76e6b25a7fd14ae0a4e9b8791f87b654ce.json.gz",
+        "bytes": 187451,
+        "sha256": "8a8b0df5521eda1c39f82f991ff6ff76e6b25a7fd14ae0a4e9b8791f87b654ce"
+      },
+      {
+        "oid": "32237acd3454e4ed6b7c73db165df36ce2b5eb13",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-91df629dfdf1597fd4f79d9e039fc5b403d287c7a882b9f5f9687b0f444aba56.json.gz",
+        "bytes": 92272,
+        "sha256": "91df629dfdf1597fd4f79d9e039fc5b403d287c7a882b9f5f9687b0f444aba56"
+      },
+      {
+        "oid": "c9109432add5162b594e56206b81ca5b368c3d82",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-986945464d141913ce75c4da0751968ed18b9cf6da2561ce0e8a67eb927a88c7.json.gz",
+        "bytes": 308434,
+        "sha256": "986945464d141913ce75c4da0751968ed18b9cf6da2561ce0e8a67eb927a88c7"
+      },
+      {
+        "oid": "aba7d038a4f287caaaa46639bc777be38d775aa6",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-a0765bdfd90cff67132198c7f21389dfa81ec2b5a326c3f84df066c4a79a6131.json.gz",
+        "bytes": 257679,
+        "sha256": "a0765bdfd90cff67132198c7f21389dfa81ec2b5a326c3f84df066c4a79a6131"
+      },
+      {
+        "oid": "9e7ecd61945c4530038639e78c4a70f759735015",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-a3e17eb7a22e30fc62d3ee8f7a37995194ab654191dea02a15ef6e9b2225715d.json.gz",
+        "bytes": 241774,
+        "sha256": "a3e17eb7a22e30fc62d3ee8f7a37995194ab654191dea02a15ef6e9b2225715d"
+      },
+      {
+        "oid": "483f71a405e067b72ed6c45a29bc54fb91687495",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-b86a633badef4692435866cd021c9f1c3027b843b22c5f53af36114200bba982.json.gz",
+        "bytes": 102904,
+        "sha256": "b86a633badef4692435866cd021c9f1c3027b843b22c5f53af36114200bba982"
+      },
+      {
+        "oid": "6819ff1f186a20b7d024fa555d1bea6250a943e4",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-c56d8012b5a0a132098c5fe14723139db9b7ca11256aa58431ad50e861aaface.json.gz",
+        "bytes": 311961,
+        "sha256": "c56d8012b5a0a132098c5fe14723139db9b7ca11256aa58431ad50e861aaface"
+      },
+      {
+        "oid": "8974931247a6514e5a95550fa985583c911adfaa",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-c77ce6738c025ef6ec7b865bdf54c930c85807cbf25a0808d9a27c58c006d090.json.gz",
+        "bytes": 351285,
+        "sha256": "c77ce6738c025ef6ec7b865bdf54c930c85807cbf25a0808d9a27c58c006d090"
+      },
+      {
+        "oid": "d0575cbd2974a7f61830be1adec6ff03ddccb785",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-c7c720ddda99c912b542dfff9e1ab014680a7f54441c874ae5ed0871ea73465d.json.gz",
+        "bytes": 819365,
+        "sha256": "c7c720ddda99c912b542dfff9e1ab014680a7f54441c874ae5ed0871ea73465d"
+      },
+      {
+        "oid": "0adac27b84db6dd38bcc1fc2594b319691301b73",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-cd41a63494f8415b734ab179d477ecc779f2f3b767363d3b224dfdc9dd4e5e34.json.gz",
+        "bytes": 918391,
+        "sha256": "cd41a63494f8415b734ab179d477ecc779f2f3b767363d3b224dfdc9dd4e5e34"
+      },
+      {
+        "oid": "e8bd439e6c67dbaa9eaa9a09d46a5ed13094a65f",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-d0599801fe8a35fe0e189904eecd5543f6cad36d020961a1bc211d0b15ac9a09.json.gz",
+        "bytes": 952558,
+        "sha256": "d0599801fe8a35fe0e189904eecd5543f6cad36d020961a1bc211d0b15ac9a09"
+      },
+      {
+        "oid": "e382f03cf0c093b5a9ed756b06e0e6aaa88c24ec",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-d1eb7e2827dd9f0ced28ab59d3aab8360e59ae18cd9847239bb92dbd09391135.json.gz",
+        "bytes": 387805,
+        "sha256": "d1eb7e2827dd9f0ced28ab59d3aab8360e59ae18cd9847239bb92dbd09391135"
+      },
+      {
+        "oid": "811706b84b91426ca680dc9e2fcd9f15165c931f",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-ddacf8512f5d5eb243e11f9a0c3c4b3122f510bcbec384ddee21d7c08f8d1602.json.gz",
+        "bytes": 335877,
+        "sha256": "ddacf8512f5d5eb243e11f9a0c3c4b3122f510bcbec384ddee21d7c08f8d1602"
+      },
+      {
+        "oid": "4c0b6d7ba2db00fe1fb71e66fabbb4094e8349dd",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-dded3691871d9e3add58cd884cdb89b05b3a35eaa9267b4d080dab360e2dc02e.json.gz",
+        "bytes": 139655,
+        "sha256": "dded3691871d9e3add58cd884cdb89b05b3a35eaa9267b4d080dab360e2dc02e"
+      },
+      {
+        "oid": "fe1ddafa76347c8b97d503ee0c4487c4daf32bd1",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-dfe8783d7fae5c04edaf67b9b8159b12d4f2a1c6e1f936686af2e82f68925153.json.gz",
+        "bytes": 92791,
+        "sha256": "dfe8783d7fae5c04edaf67b9b8159b12d4f2a1c6e1f936686af2e82f68925153"
+      },
+      {
+        "oid": "39b82140c53893265b54b6a0b27bdfe398434788",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-f8b01d7e4306c23855c0647db06296b1d1b332107f948c797e621080e39c350a.json.gz",
+        "bytes": 379409,
+        "sha256": "f8b01d7e4306c23855c0647db06296b1d1b332107f948c797e621080e39c350a"
+      },
+      {
+        "oid": "6ec32451c0c7e0333309e3ac29b9deae3ac9f857",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-fb05e8a141157fffa68a2432beae630f82e422ca2fbb998f2886fb69a30c6a82.json.gz",
+        "bytes": 450587,
+        "sha256": "fb05e8a141157fffa68a2432beae630f82e422ca2fbb998f2886fb69a30c6a82"
+      },
+      {
+        "oid": "1039b9cea0f878dc17737cf03079dbc7040b6210",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-fb5e398f30c4cfb6591d75c6fe010e34060137cf9c86814b3833a1c3d9ca236b.json.gz",
+        "bytes": 521137,
+        "sha256": "fb5e398f30c4cfb6591d75c6fe010e34060137cf9c86814b3833a1c3d9ca236b"
+      },
+      {
+        "oid": "a49a67fc5189d3b8b29801c75bde919c592884e9",
+        "path": "data/canonical-grid/current-startup/geography/effective-context-fca9720f345e0792130f3aff33b91c9cea86f3f54a39aa8322436235e47b52e4.json.gz",
+        "bytes": 1489271,
+        "sha256": "fca9720f345e0792130f3aff33b91c9cea86f3f54a39aa8322436235e47b52e4"
+      },
+      {
+        "oid": "5d8aa5e0341ae0a24f3553d67e1b8581d36c7d1b",
+        "path": "data/canonical-grid/current-startup/native-v1/ownership/rows-0.bin.gz",
+        "bytes": 306620,
+        "sha256": "89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0"
+      },
+      {
+        "oid": "bd4b48c5888c7749a6db1e1c1437bd8309ab81b1",
+        "path": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-0.bin.gz",
+        "bytes": 3854101,
+        "sha256": "3d551738a3454d2028e1d9adc352b7446d7c0f25c8d42044704cf1efb6f64b6b"
+      },
+      {
+        "oid": "d986eb10382f668e5ff9cd9cb1c10b0c511023cc",
+        "path": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-12582912.bin.gz",
+        "bytes": 3478667,
+        "sha256": "01012dd358291a9e4ee51888a1d2b618ab2003e06a6eebd3a236392ecdbbc015"
+      },
+      {
+        "oid": "b9b90e91f69e56585ff49bc46dbfcc0035116d75",
+        "path": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-16777216.bin.gz",
+        "bytes": 3289324,
+        "sha256": "d5ed4d7e1700fb60298a53cc37ad9943257f57f853e19cc786ef975ebc7f0cae"
+      },
+      {
+        "oid": "7595351d14cad31f792b184c4dfffe1224b43e64",
+        "path": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-20971520.bin.gz",
+        "bytes": 3146696,
+        "sha256": "198daba78eaeed9f316f088a86f8a7c4cf8f7e868253fc09487870eceddaf58a"
+      },
+      {
+        "oid": "1c750fc517ab808f25479c50c2ac16aa0c2c3ae6",
+        "path": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-25165824.bin.gz",
+        "bytes": 3272873,
+        "sha256": "764a967753d010daa794b30ca597bee0503646e7cae6965b14df63f280b9c544"
+      },
+      {
+        "oid": "0eeec052bfcc759bc6fd564e93bdca953b29474b",
+        "path": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-29360128.bin.gz",
+        "bytes": 3296575,
+        "sha256": "ff29a1956ae0dd99e4db155c9cdabf96c72155a1a772210910d5119845759cf8"
+      },
+      {
+        "oid": "0c11ab143e831013f045f768b4e33f9c0d1d09bd",
+        "path": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-33554432.bin.gz",
+        "bytes": 3521891,
+        "sha256": "826cffaf4b05286a68ae479bc6e6caba3b3b3993f7fa57eae08efe7f6089694b"
+      },
+      {
+        "oid": "11c065922281b70564febafadf8121215b095661",
+        "path": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-37748736.bin.gz",
+        "bytes": 3497645,
+        "sha256": "18472136ceb94b95a17918acdfba32c56d13a2979043c66fb74cf615d81551ee"
+      },
+      {
+        "oid": "4cd3369d268f958db6cba804cc987931aeeaad14",
+        "path": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-4194304.bin.gz",
+        "bytes": 3428397,
+        "sha256": "da6498fc3c898adca6231896e9b1f2c734153064d78431bc5a311fec768c18f9"
+      },
+      {
+        "oid": "c62ad1dd1fecefa59753aa86c16af2dc08690f71",
+        "path": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-41943040.bin.gz",
+        "bytes": 3534601,
+        "sha256": "f4e7f8de92e3d709db9675386961fac934a8a21652bf6f34f8d122ed71c73c44"
+      },
+      {
+        "oid": "2363585a7d5c3a533a09923f089f5bd37fe55fc7",
+        "path": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-46137344.bin.gz",
+        "bytes": 3556931,
+        "sha256": "bb9b1ba3ace6229a338eee6c903e1d5db637a765c46ed60f957ceb6e34346101"
+      },
+      {
+        "oid": "880bc9137a47daf314a70ef03ffcd30d2ac80e9f",
+        "path": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-50331648.bin.gz",
+        "bytes": 3397952,
+        "sha256": "09aaf4d9a115dea6a85ed2a853532045c627ea2408f259513ce9de8e616ef55d"
+      },
+      {
+        "oid": "61e7d50e1d74c22f4f1e4adf75044ff9fd60ea72",
+        "path": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-54525952.bin.gz",
+        "bytes": 2460609,
+        "sha256": "91bfddd9aa632dc18ecc2f487a71673b504f971d2795e7c4af9c9298f4fe4fbc"
+      },
+      {
+        "oid": "19622b43c11bdd3e328dca4687b0e5fc376508cf",
+        "path": "data/canonical-grid/current-startup/native-v1/ownership/startup-runs-8388608.bin.gz",
+        "bytes": 3423683,
+        "sha256": "244e3da13a412b4a4ccbc652191a080495a5611df5d0ee2207c8d08ac27b929a"
+      },
+      {
+        "oid": "03dcafff3eaa9ff64f4473bf51f806ee7bb08050",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/1121f583c069ede389035793f07a9c5783c239929d1636005394b9379192677d/native-v1/ownership/startup-runs-33554432.bin.gz",
+        "bytes": 3542883,
+        "sha256": "1121f583c069ede389035793f07a9c5783c239929d1636005394b9379192677d"
+      },
+      {
+        "oid": "7f11c3162ded2e189399904fe1f990adb6817679",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/14f0c529d172276bdd06f124974c1113e5d1111e35dd74e4b78a23a64ac117d4/native-v1/ownership/startup-runs-29360128.bin.gz",
+        "bytes": 3292694,
+        "sha256": "14f0c529d172276bdd06f124974c1113e5d1111e35dd74e4b78a23a64ac117d4"
+      },
+      {
+        "oid": "272c2f11bc592f6cc569596a26240754a3f23017",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/2dabd37a53179ebc28aed13f546ef0031eaf712e1272aedf7292223e7042e5db/native-v1/ownership/startup-runs-54525952.bin.gz",
+        "bytes": 3097313,
+        "sha256": "2dabd37a53179ebc28aed13f546ef0031eaf712e1272aedf7292223e7042e5db"
+      },
+      {
+        "oid": "a96264f3308fe7175e3ef11433b06bc279d8b6ce",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/4622e83231434bc023de7768e7c281b85a643ae4a588816d29b7c05702c3c25c/native-v1/ownership/startup-runs-41943040.bin.gz",
+        "bytes": 3570525,
+        "sha256": "4622e83231434bc023de7768e7c281b85a643ae4a588816d29b7c05702c3c25c"
+      },
+      {
+        "oid": "388987914c149429577394509b087b9a6f2711ee",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/782493a0d76b99d322e8e8bf666109a189e91611ae7190f74d40077a0dd3c6b4/native-v1/ownership/startup-runs-37748736.bin.gz",
+        "bytes": 3517615,
+        "sha256": "782493a0d76b99d322e8e8bf666109a189e91611ae7190f74d40077a0dd3c6b4"
+      },
+      {
+        "oid": "0b21641ac7702aecdc4982002036e17a636370be",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/794c4c00f8df45e09b65b5458fcd63fb93de0f59b0069d1eb6d14f09bbb2f4e8/native-v1/ownership/startup-runs-50331648.bin.gz",
+        "bytes": 3483007,
+        "sha256": "794c4c00f8df45e09b65b5458fcd63fb93de0f59b0069d1eb6d14f09bbb2f4e8"
+      },
+      {
+        "oid": "00fe6d13674035724ddfff52bd920b45b891e60e",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/b4f0c5cd984fd7eafde86f7f19b54e3023c3259bc8aae14b65b5cab677b9eb6c/native-v1/ownership/startup-runs-46137344.bin.gz",
+        "bytes": 3619593,
+        "sha256": "b4f0c5cd984fd7eafde86f7f19b54e3023c3259bc8aae14b65b5cab677b9eb6c"
+      },
+      {
+        "oid": "45946db81b65ae3709fa9c51c84007ba42738853",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-0.bin.gz",
+        "bytes": 3854096,
+        "sha256": "5e73bd6ee306f3be021c7f89bf336c590ae3c02021df1c436d22088ed4284171"
+      },
+      {
+        "oid": "d986eb10382f668e5ff9cd9cb1c10b0c511023cc",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-12582912.bin.gz",
+        "bytes": 3478667,
+        "sha256": "01012dd358291a9e4ee51888a1d2b618ab2003e06a6eebd3a236392ecdbbc015"
+      },
+      {
+        "oid": "b9b90e91f69e56585ff49bc46dbfcc0035116d75",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-16777216.bin.gz",
+        "bytes": 3289324,
+        "sha256": "d5ed4d7e1700fb60298a53cc37ad9943257f57f853e19cc786ef975ebc7f0cae"
+      },
+      {
+        "oid": "7595351d14cad31f792b184c4dfffe1224b43e64",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-20971520.bin.gz",
+        "bytes": 3146696,
+        "sha256": "198daba78eaeed9f316f088a86f8a7c4cf8f7e868253fc09487870eceddaf58a"
+      },
+      {
+        "oid": "1c750fc517ab808f25479c50c2ac16aa0c2c3ae6",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-25165824.bin.gz",
+        "bytes": 3272873,
+        "sha256": "764a967753d010daa794b30ca597bee0503646e7cae6965b14df63f280b9c544"
+      },
+      {
+        "oid": "0eeec052bfcc759bc6fd564e93bdca953b29474b",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-29360128.bin.gz",
+        "bytes": 3296575,
+        "sha256": "ff29a1956ae0dd99e4db155c9cdabf96c72155a1a772210910d5119845759cf8"
+      },
+      {
+        "oid": "0c11ab143e831013f045f768b4e33f9c0d1d09bd",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-33554432.bin.gz",
+        "bytes": 3521891,
+        "sha256": "826cffaf4b05286a68ae479bc6e6caba3b3b3993f7fa57eae08efe7f6089694b"
+      },
+      {
+        "oid": "11c065922281b70564febafadf8121215b095661",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-37748736.bin.gz",
+        "bytes": 3497645,
+        "sha256": "18472136ceb94b95a17918acdfba32c56d13a2979043c66fb74cf615d81551ee"
+      },
+      {
+        "oid": "4cd3369d268f958db6cba804cc987931aeeaad14",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-4194304.bin.gz",
+        "bytes": 3428397,
+        "sha256": "da6498fc3c898adca6231896e9b1f2c734153064d78431bc5a311fec768c18f9"
+      },
+      {
+        "oid": "c62ad1dd1fecefa59753aa86c16af2dc08690f71",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-41943040.bin.gz",
+        "bytes": 3534601,
+        "sha256": "f4e7f8de92e3d709db9675386961fac934a8a21652bf6f34f8d122ed71c73c44"
+      },
+      {
+        "oid": "2363585a7d5c3a533a09923f089f5bd37fe55fc7",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-46137344.bin.gz",
+        "bytes": 3556931,
+        "sha256": "bb9b1ba3ace6229a338eee6c903e1d5db637a765c46ed60f957ceb6e34346101"
+      },
+      {
+        "oid": "880bc9137a47daf314a70ef03ffcd30d2ac80e9f",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-50331648.bin.gz",
+        "bytes": 3397952,
+        "sha256": "09aaf4d9a115dea6a85ed2a853532045c627ea2408f259513ce9de8e616ef55d"
+      },
+      {
+        "oid": "61e7d50e1d74c22f4f1e4adf75044ff9fd60ea72",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-54525952.bin.gz",
+        "bytes": 2460609,
+        "sha256": "91bfddd9aa632dc18ecc2f487a71673b504f971d2795e7c4af9c9298f4fe4fbc"
+      },
+      {
+        "oid": "19622b43c11bdd3e328dca4687b0e5fc376508cf",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-8388608.bin.gz",
+        "bytes": 3423683,
+        "sha256": "244e3da13a412b4a4ccbc652191a080495a5611df5d0ee2207c8d08ac27b929a"
+      },
+      {
+        "oid": "7123c186bcf5b8b7cf951ffe1290f30bf53eed97",
+        "path": "data/canonical-grid/current-startup/ownership-vintages/f5d7dafd5e19d2cc3602de5c00dd8083e9f4fa1f96d1ac34532f0d6617088156/native-v1/ownership/startup-runs-25165824.bin.gz",
+        "bytes": 3274377,
+        "sha256": "f5d7dafd5e19d2cc3602de5c00dd8083e9f4fa1f96d1ac34532f0d6617088156"
+      }
+    ]
+  },
+  "limitations": [
+    "This is the exact 79-member startup-bank closure declared by the accepted final-bank index. Other finalizer closures were not asserted complete.",
+    "No missing object was downloaded or written during this read-only inventory."
+  ]
+}

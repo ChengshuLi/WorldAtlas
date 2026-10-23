@@ -1,0 +1,87 @@
+{
+  "kind": "mnp-original-source-family-center-contact-completeness-check",
+  "as_of": "2026-10-21",
+  "scope": {
+    "package_id": "gb-MNP-ADM2--repair-evaluation",
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "cells": 205,
+    "intervals": 83,
+    "targets": [
+      {"source_index": 45686, "source_id": "gb:MNP:ADM2:39175420B24162802066299", "name": "Tinian", "owner": 30767, "cells": 11},
+      {"source_index": 45687, "source_id": "gb:MNP:ADM2:39175420B64217482742742", "name": "Rota", "owner": 30769, "cells": 5},
+      {"source_index": 45688, "source_id": "gb:MNP:ADM2:39175420B77088391070908", "name": "Northern Islands", "owner": 30770, "cells": 189}
+    ],
+    "excluded": ["Saipan owner 30768", "31-cell physical companion", "regional source review #383"]
+  },
+  "immutable_metadata": {
+    "source_feature_roster": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "bytes": 1844315,
+      "decoded_record_count": 73567,
+      "fields": ["source_index", "family_index", "source_id", "ordinal", "owners", "name", "geometry_status"],
+      "bounds_or_geometry_field": false
+    },
+    "block_028_candidates": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-028.json.gz",
+      "blob_oid": "242c191e5cb4822c969247f4d4af99b56a5ec160",
+      "compressed_bytes": 476733,
+      "decoded_bytes": 3372962,
+      "decoded_rows": 4096,
+      "row_fields": ["y", "runs"],
+      "run_fields_as_retained": ["start", "end", "owners", "source_indices"]
+    },
+    "block_029_candidates": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-029.json.gz",
+      "blob_oid": "3fc846f1a3a57841d82c695b97ad31b93af681e6",
+      "compressed_bytes": 613896,
+      "decoded_bytes": 4552072,
+      "decoded_rows": 4096,
+      "row_fields": ["y", "runs"],
+      "run_fields_as_retained": ["start", "end", "owners", "source_indices"]
+    },
+    "source_contact_result": {
+      "path": "inventory/mnp-audit-handoff/extracted/source-contact-results.json",
+      "sha256": "de65f43a7630d8f60219f18b3d5543b495787ff2082195dd217c22f7a0b52669",
+      "keys": 205
+    }
+  },
+  "joined_center_contacts": {
+    "observed_source_indices": [45686, 45687, 45688, 61269, 64048],
+    "joined_to_original_roster": true,
+    "queue_source_families": [222, 346, 347],
+    "feature_rows": [
+      {"source_index": 45686, "source_id": "gb:MNP:ADM2:39175420B24162802066299", "family_index": 222, "name": "Tinian", "owners": [30767], "geometry_status": "raw-native-supported", "center_incidences": 11},
+      {"source_index": 45687, "source_id": "gb:MNP:ADM2:39175420B64217482742742", "family_index": 222, "name": "Rota", "owners": [30769], "geometry_status": "raw-native-supported", "center_incidences": 5},
+      {"source_index": 45688, "source_id": "gb:MNP:ADM2:39175420B77088391070908", "family_index": 222, "name": "Northern Islands", "owners": [30770], "geometry_status": "raw-native-supported", "center_incidences": 189},
+      {"source_index": 61269, "source_id": "gb:USA:ADM1:66186276B16791499040259", "family_index": 346, "name": "Commonwealth of the Northern Mariana Islands", "owners": [], "geometry_status": "raw-native-supported", "center_incidences": 203},
+      {"source_index": 64048, "source_id": "gb:USA:ADM2:52423323B84565222808084", "family_index": 347, "name": "Northern Islands", "owners": [], "geometry_status": "raw-native-supported", "center_incidences": 150}
+    ],
+    "complete_family_center_hits": {
+      "gb:MNP:ADM2": {"feature_count": 4, "keys_matched": 205, "vector_mismatches": 0},
+      "gb:USA:ADM1": {"feature_count": 56, "keys_matched": 203, "vector_mismatches": 0},
+      "gb:USA:ADM2": {"feature_count": 3233, "keys_matched": 150, "vector_mismatches": 0}
+    },
+    "usa_contact_incidence_total": 353,
+    "usa_contact_incidence_limit": "203 ADM1 + 150 ADM2 incidences overlap across the 205 distinct keys; not 353 unique cells."
+  },
+  "finding": {
+    "bounded_result": "No additional source family or feature is surfaced in the retained original candidate masks or 205-row center-contact output beyond MNP ADM2, USA ADM1 and USA ADM2. The source IDs join exactly to the original 73,567-entry roster and match the queue's three listed families.",
+    "whole_extent_limit": "The roster contains no feature bounds or geometries. Block candidate masks encode native row/run center memberships only. The retained contact result tests the 205 original native centers against complete listed family payloads, not all points of the three full MNP target polygons. Thus these records cannot establish whole-polygon or subcell noncontact by any other family; no such whole-extent check was run here.",
+    "next_evidence_scope": "A claim about additional whole-target overlap would require a distinct bounded family-extent or whole-polygon comparison. This metadata check identifies no concrete further family/pin to add, and does not impose an all-world family inventory requirement."
+  },
+  "operations": {
+    "read_existing_roster_blob": true,
+    "read_existing_block_028_029_candidate_blobs": true,
+    "joined_existing_source_contact_rows": true,
+    "source_scan_or_scanner_rerun": false,
+    "owner_observer": false,
+    "physical_producer": false,
+    "geometry_comparison": false,
+    "new_acquisition": false
+  }
+}

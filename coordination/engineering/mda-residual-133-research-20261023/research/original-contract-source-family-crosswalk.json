@@ -1,0 +1,142 @@
+{
+  "scope": {
+    "package": "gb-MDA-ADM1--repair-evaluation",
+    "original_cells": 1986,
+    "original_intervals": 539,
+    "original_owners": 16,
+    "pending_cells_before_this_reconciliation": 133,
+    "disposition_changed": false
+  },
+  "contract": {
+    "issue": "https://github.com/ChengshuLi/WorldAtlas/issues/2582",
+    "rule": "Each exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+    "exact_2020_official_snapshot_required": false,
+    "upstream_match_subset_is_universal_predicate": false
+  },
+  "retained_whole_scope_results_not_rerun": {
+    "native_supported": 1918,
+    "native_held_ukr_source_contacts": 68,
+    "additional_research_holds_not_native_failures": 65,
+    "physical_supported": 1986,
+    "physical_missing": 0,
+    "inland_water_overlap": 0,
+    "exact_interval_vector_joins": 539,
+    "direct_owner_assignments_for_ukr_contacts": 0
+  },
+  "residual_source_classes": [
+    {
+      "class": "mda-match-plus-ukr-contact",
+      "count": 46,
+      "archived_full_mda_membership": "unique matching target",
+      "archived_ukr_contact": true,
+      "ukr_feature_counts": {
+        "odessa_oblast": 44,
+        "vinnytsia_oblast": 2
+      },
+      "remaining_question": "Whether the exact recorded source witnesses justify the MDA repair for each key under the source-specific original contract; a contact alone does not assign ownership."
+    },
+    {
+      "class": "mda-only-archived-source-nonmatch",
+      "count": 65,
+      "consumed_simplified_mda_membership": true,
+      "archived_full_mda_membership": false,
+      "archived_ukr_contact": false,
+      "remaining_question": "Whether source-version displacement is compatible with the consumed source's documented precision and applicable local evidence. Full-resolution nonmembership alone is not a universal veto."
+    },
+    {
+      "class": "ukr-contact-outside-archived-mda-source",
+      "count": 22,
+      "archived_full_mda_membership": false,
+      "archived_ukr_contact": true,
+      "ukr_feature_counts": {
+        "odessa_oblast": 18,
+        "vinnytsia_oblast": 4
+      },
+      "remaining_question": "Whether the exact source contact is applicable to each recorded MDA location or reflects source-family/version displacement; a single current-service no-feature result cannot answer the class."
+    }
+  ],
+  "source_identity": {
+    "ukr_family": "retained original 2017 source family",
+    "ukr_features": {
+      "odessa_oblast": "gb:UKR:ADM1:14850775B53240635394722",
+      "vinnytsia_oblast": "gb:UKR:ADM1:14850775B93300237551625"
+    },
+    "interpretation": "Bounded source-family identity and contact evidence; not a legal-boundary finding or territorial exclusion. All 68 contacts remain ownerless."
+  },
+  "provenance": [
+    {
+      "artifact": "mda-retained-witness-join.json.gz",
+      "public_pr": "https://github.com/ChengshuLi/WorldAtlas/pull/2583",
+      "git_blob": "84e7454b0cd4af9e44cea2ab3f3fece9e7911df7"
+    },
+    {
+      "artifact": "source-version-key-comparison.json.gz",
+      "public_pr": "https://github.com/ChengshuLi/WorldAtlas/pull/2675",
+      "git_blob": "db6472f961e451784175d2c832f8216c53b6d937"
+    },
+    {
+      "artifact": "source-identity-clarification.json",
+      "sha256": "b8accc6866f2bf6af77ebe3515a002884dc57bb92d869e28d7ee03cdde17d421"
+    },
+    {
+      "artifact": "research/source-family-spatial-followup.json",
+      "sha256": "de3e1e3034af7ad80ee67953241d8b2c2a4f5037877f8a365c551a045a18de8f"
+    },
+    {
+      "artifact": "research/uat2-133-attribute-identify-followup.json",
+      "sha256": "ddadab445a4a537c51cb73c6232c8c34a0fe30ae0eb6a2665cdd26e09172796b"
+    },
+    {
+      "artifact": "research/mda-133-disposition-proposal.json",
+      "sha256": "f1cbb66e82c0e07e55129268c97507f41ce23fc83f3df1f6c01580cacb2e8e23"
+    }
+  ],
+  "limitations": [
+    "This is a crosswalk of retained source and disposition evidence, not a geometry rerun.",
+    "Three current UAT II WMS point-identify observations are not representative enough to disposition any class.",
+    "The 2024 BNS layer and current UAT II attributes do not establish the consumed 2020 MDA revision.",
+    "No class-wide repair, unresolved outcome, owner assignment, hold removal, or credit is supported by this file.",
+    "The supplemental 68-key point-in-polygon check confirms the UKR contacts persist in the retained complete full-source UKR family; it does not adjudicate legal ownership or the governing MDA version. The 65-key distance diagnostic measures source divergence only and supplies no positional-accuracy threshold.",
+    "A bounded 133-center current UAT II text/plain point-identify check returned 108 matching current names and 25 no-feature results; without per-feature historical validity and geometry it does not resolve the consumed-2020 source disagreement or source applicability."
+  ],
+  "supplemental_spatial_result": {
+    "ukr_contacts": {
+      "tested_against": "complete retained full-source UKR ADM1 family (27 features)",
+      "keys": 68,
+      "persisting_hits": 68,
+      "misses": 0,
+      "multi_feature_hits": 0,
+      "counts": {
+        "odessa_oblast": 62,
+        "vinnytsia_oblast": 6
+      }
+    },
+    "mda_65": {
+      "consumed_simplified_sha256": "b9f85b5b94d053cd3fc7f60d9823ec2ba9cd37b780f4935a778203d67cb5f523",
+      "archived_full_sha256": "ca7378f66c2a635e2a0ceccf58cfa711c6390bebb13ee656efa5d72c4dda45de",
+      "all_65_inside_consumed_simplified_and_outside_archived_full": true,
+      "approx_nearest_boundary_inside_depth_median": 11.553,
+      "approx_nearest_boundary_outside_depth_median": 17.626,
+      "positional_accuracy_conclusion": "none; archive metadata supplies no quantitative accuracy/scale, and distances are diagnostic only"
+    },
+    "disposition_changed": false
+  },
+  "supplemental_current_uat2_point_identify": {
+    "queried": 133,
+    "http_200": 133,
+    "current_name_match": 108,
+    "no_feature": 25,
+    "conflicting_name": 0,
+    "service_precision_m": "10-20",
+    "center_pixel_approx_m": "9.89-10.40 east-west by 14.83 north-south",
+    "historical_linkage": "no per-feature validity date or exact link to consumed 2020 MDA source",
+    "interpretation": "current-name corroboration only; pixel/service precision comparable to observed source offsets and no geometry was inspected, so it cannot determine exact source-side membership or which 2020 representation governs",
+    "disposition_changed": false
+  },
+  "proposed_disposition": {
+    "positive_repair_candidate": 65,
+    "researched_unresolved_proposal": 68,
+    "accepted_changes": 0,
+    "details": "See mda-133-disposition-proposal.json; ordinary owner binding, construction, final review and delivery remain outstanding for the positive candidates. All holds and original denominators remain unchanged."
+  }
+}

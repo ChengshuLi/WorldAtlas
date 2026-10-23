@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "preparation_allowance": {
+    "phaseBytes": 536870912,
+    "rssBytes": 536870912
+  },
+  "selector": {
+    "commit": "21fd27d6752dec663fd541cf948264d4e1d982e0",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "59e66085278320add134761c49746be3c71a8833",
+    "bytes": 1566,
+    "sha256": "97c8458fee9e59b1e0a684d5917307a2672fba507802ee33e059c4057cdb2a3e"
+  },
+  "effective_release_id": "geography:indonesia-aru5460-native-followup-20261015",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "1edc9e35cb0df84db77b219553593679cc21a9fb",
+        "path": "coordination/engineering/indonesia-kepulauan-aru-20261015/native5460-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "c3c912100a3a42be82a583a363fa007c1e57b2f6",
+        "bytes": 737,
+        "sha256": "3435718571c0ec508a34fa947c5c6b6333785337584a66ffe4450a3a414db513"
+      },
+      "source_authority": {
+        "commit": "1edc9e35cb0df84db77b219553593679cc21a9fb",
+        "path": "coordination/engineering/indonesia-kepulauan-aru-20261015/native5460-authority-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "bb96784991b2c79b29a074d638439caa16525337",
+        "bytes": 740,
+        "sha256": "8d406f599ffd6c27d64e5e682498f9c2e542d91b9726b2c72454b4b094b44946"
+      },
+      "ledger": {
+        "commit": "1edc9e35cb0df84db77b219553593679cc21a9fb",
+        "path": "coordination/engineering/indonesia-kepulauan-aru-20261015/native5460-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "1e298d7172c8487f6362eeb2c6303f822845f037",
+        "bytes": 90050,
+        "sha256": "50a97f1753daef6db0a6076e3c97ac35b44ecc66f03992774c0c59ddc62bce51"
+      },
+      "native_patch": {
+        "commit": "23c9d63be15307b0203f2636210ac0e2a44dee2b",
+        "path": "coordination/engineering/indonesia-kepulauan-aru-20261015/native5460-input-001/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "23b9ccc56f26093790b1c303870b37f9e1d72a15",
+        "bytes": 74283,
+        "sha256": "b873a7c60e7c48fd956e85f779c29209de39a655f9d99cfe86b4ab300fb87dd5"
+      }
+    }
+  ]
+}

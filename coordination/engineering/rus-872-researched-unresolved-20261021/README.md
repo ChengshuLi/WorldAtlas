@@ -1,0 +1,19 @@
+# RUS: researched-unresolved proposal for 872 CHN-contact keys
+
+The original 2,566,967-cell repair package remains incomplete. This packet proposes explicit researched-unresolved treatment for exactly 872 original keys (793 land and 79 water, 32 owners). It does not add repairs, change selected data, remove native holds, or assert root acceptance. The 471 other-family contacts remain independently pending. Prior accepted 2,557,516 and the 8,108 repairs accepted from PR #2671 are preserved.
+
+## Evidence and original contract
+
+Issue #2302 permits every original cell to finish supported, held, already-owned or explicitly unresolved, while keeping source, physical and native uncertainty separate. The proposal rests on actual source-specific investigation: complete original RUS/CHN source context, original competitor bindings, retained full-resolution LSIB 11.4 comparison, the actual native diagnostic result, opened primary agreements and joint-inspection records, and focused searches for named map/marker attachments. The independent assessment records operations, findings, limits and a finite future evidence trigger.
+
+All 872 have original CHN contacts and lie outside the retained Russia-facing side of the LSIB comparison. The illustrative CHN derivative and dated LSIB comparison do not adjudicate sovereignty, legal ownership or surveyed boundaries. The accepted 8,108 interpretation is not transferred to this adverse group. Distances are descriptive, never eligibility thresholds. Whole-target physical adverse context remains pinned and is not erased.
+
+The opened agreement was signed 9 November 2006 and replaced the 1994 agreement; its PDF gives an effective-date rule without the last-notice date. Official 2016 records identify maps and marker registers but expose no attachments tying these contacts to a sector. The Russian MFA index returned HTTP 502 on two ordinary same-URL reads, a transient failure, not an access denial. The separate HTTP 403 was not retried or bypassed. Missing attachments are not claimed nonexistent. No known accessible exact attachment was deliberately left unread, and no universal boundary certificate is demanded.
+
+## Exact bindings and limits
+
+`proposed-disposition.json` enumerates the exact 872 keys. `rus-1343-current-held-partition.json.gz` contains the two-group join to the delivered 1,343-key hold patch. Its decompressed SHA is the original partition SHA cited in the assessment. `rus-1343-diagnostic-reuse-binding.json` joins both groups to the already executed diagnostic without rerunning geometry or production. Every held key still has `territorial_exclusion_cells`, a native predicate label rather than a sovereignty claim.
+
+The assessment and source-applicability report retain their original bytes and provenance paths. Their named `inventory/` reports are supplied here under the same basenames (partition compressed). Full original tuples, complete sources, negative bindings, LSIB comparisons and physical evidence are immutable in reviewed commit `c6720857e7ad3530ca44a542d96ea9edb9eca77b` under `coordination/engineering/rus-context-qualified-repair-20261021/research/`; earlier exact source commit/path/blob pins remain in those records. The executed diagnostic is under that packet's `native-diagnostic-002/`. Old execution is not relabelled as new. Separate source and physical companion scopes remain excluded.
+
+Author checks expanded original tuples and delivered held/diagnostic rows: 872/471 form a disjoint exhaustive 1,343-key union, and all 872 tuple rows match the independently computed digest. No scientific observation, producer, constructor or selected product was rerun or changed. One independent exact-public-head review and ordinary stock delivery remain required; root alone records accepted disposition credit.

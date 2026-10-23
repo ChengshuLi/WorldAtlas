@@ -1,0 +1,328 @@
+{
+  "kind": "independent-five-archived-parent-discrepancy-source-check",
+  "baseline": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+  "source_pins": {
+    "gb:CAN:ADM1": {
+      "feature_count": 13,
+      "bytes": 26022306,
+      "sha256": "0c9e4fc56c8b9ce958960ffabd1556fbe7c3ec0deeea346a2b5b7dff05e35449"
+    },
+    "gb:CAN:ADM3": {
+      "feature_count": 5162,
+      "bytes": 28924424,
+      "sha256": "70a228935086c1bb9c30938b198cba33261fdf405658dc43540e7e1d1a18a7f9"
+    }
+  },
+  "rows": [
+    {
+      "id": "gb:CAN:ADM3:43193130B21589470434093",
+      "expected_area": "NBR",
+      "archived_chain": [
+        "geo:province:d0153948f8b9ced4:MAI",
+        "geo:area:MAI",
+        "geo:region:75",
+        "geo:subcontinent:Northern America",
+        "geo:continent:North America"
+      ],
+      "metadata_area": "MAI",
+      "name": "Campobello Island",
+      "archived_parent": {
+        "id": "geo:province:d0153948f8b9ced4:MAI",
+        "name": "Saint John--St. Stephen",
+        "level": "province",
+        "parent_id": "geo:area:MAI",
+        "metadata": {
+          "source": "gb:CAN:ADM2",
+          "basis": "Geographic portion of a source administrative unit; not a new government division",
+          "kind": "geographic_portion",
+          "original_unit_id": "world/continent:North America/subcontinent:Northern America/region:Canada/area:Eastern Canada/province:811477B20578745802052"
+        }
+      },
+      "archived_metadata": {
+        "source_id": "gb:CAN:ADM3",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAN/ADM3/geoBoundaries-CAN-ADM3.geojson",
+        "license": "Open Data Commons Open Database License 1.0",
+        "reference_year": "2016",
+        "administrative_level": "ADM3",
+        "parent_source_level": "ADM2",
+        "granularity_version": 2,
+        "parent_match": "geoBoundaries dominant overlap: 83.73%",
+        "original_id": "43193130B21589470434093",
+        "representative_point": [
+          -66.91988939182093,
+          44.89342698478458
+        ],
+        "hierarchy_version": 3,
+        "hierarchy_source": "gb:CAN:ADM2",
+        "hierarchy_overlap": 0.8373,
+        "reference_version": 2,
+        "geographic_area_code": "MAI",
+        "geographic_region_code": 75,
+        "geographic_match": "nearest source coastline (source coverage gap)",
+        "geographic_overlap": 0,
+        "topology_version": 1,
+        "retired_reason": "Superseded by the semantic reference coverage; original geometry and all historical records retained"
+      },
+      "original_ADM1_overlaps": [
+        {
+          "name": "New Brunswick",
+          "original_id": "82249235B4167839012994",
+          "fraction_of_ADM3_original": 0.9773757275191919,
+          "fraction_of_archived_geometry": 0.8353542099871081
+        }
+      ]
+    },
+    {
+      "id": "gb:CAN:ADM3:43193130B21446998817882",
+      "expected_area": "SAS",
+      "archived_chain": [
+        "geo:province:7b687d0fe27bbde0:MAN",
+        "geo:area:MAN",
+        "geo:region:71",
+        "geo:subcontinent:Northern America",
+        "geo:continent:North America"
+      ],
+      "metadata_area": "MAN",
+      "name": "Flin Flon (Part)",
+      "archived_parent": {
+        "id": "geo:province:7b687d0fe27bbde0:MAN",
+        "name": "Northern / Nord",
+        "level": "province",
+        "parent_id": "geo:area:MAN",
+        "metadata": {
+          "source": "gb:CAN:ADM2",
+          "basis": "Geographic portion of a source administrative unit; not a new government division",
+          "kind": "geographic_portion",
+          "original_unit_id": "world/continent:North America/subcontinent:Northern America/region:Canada/area:Western Canada/province:811477B84145681599203"
+        }
+      },
+      "archived_metadata": {
+        "source_id": "gb:CAN:ADM3",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAN/ADM3/geoBoundaries-CAN-ADM3.geojson",
+        "license": "Open Data Commons Open Database License 1.0",
+        "reference_year": "2016",
+        "administrative_level": "ADM3",
+        "parent_source_level": "ADM2",
+        "granularity_version": 2,
+        "parent_match": "geoBoundaries dominant overlap: 99.98%",
+        "original_id": "43193130B21446998817882",
+        "representative_point": [
+          -101.85872104960453,
+          54.75604958756816
+        ],
+        "hierarchy_version": 3,
+        "hierarchy_source": "gb:CAN:ADM2",
+        "hierarchy_overlap": 0.999781,
+        "reference_version": 2,
+        "geographic_area_code": "MAN",
+        "geographic_region_code": 71,
+        "geographic_match": "largest source overlap",
+        "geographic_overlap": 1,
+        "topology_version": 1,
+        "retired_reason": "Superseded by the semantic reference coverage; original geometry and all historical records retained"
+      },
+      "original_ADM1_overlaps": [
+        {
+          "name": "Saskatchewan",
+          "original_id": "82249235B71336988791422",
+          "fraction_of_ADM3_original": 0.9076223412300275,
+          "fraction_of_archived_geometry": 0.9072460772531051
+        },
+        {
+          "name": "Manitoba",
+          "original_id": "82249235B50381585000441",
+          "fraction_of_ADM3_original": 0.09237765876987108,
+          "fraction_of_archived_geometry": 0.09275392274692572
+        }
+      ]
+    },
+    {
+      "id": "gb:CAN:ADM3:43193130B30343858980202",
+      "expected_area": "SAS",
+      "archived_chain": [
+        "geo:province:0745a199138baf4c:MAN",
+        "geo:area:MAN",
+        "geo:region:71",
+        "geo:subcontinent:Northern America",
+        "geo:continent:North America"
+      ],
+      "metadata_area": "MAN",
+      "name": "Togo",
+      "archived_parent": {
+        "id": "geo:province:0745a199138baf4c:MAN",
+        "name": "Yorkton--Melville",
+        "level": "province",
+        "parent_id": "geo:area:MAN",
+        "metadata": {
+          "source": "gb:CAN:ADM2",
+          "basis": "Geographic portion of a source administrative unit; not a new government division",
+          "kind": "geographic_portion",
+          "original_unit_id": "world/continent:North America/subcontinent:Northern America/region:Canada/area:Western Canada/province:811477B87665829892242"
+        }
+      },
+      "archived_metadata": {
+        "source_id": "gb:CAN:ADM3",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAN/ADM3/geoBoundaries-CAN-ADM3.geojson",
+        "license": "Open Data Commons Open Database License 1.0",
+        "reference_year": "2016",
+        "administrative_level": "ADM3",
+        "parent_source_level": "ADM2",
+        "granularity_version": 2,
+        "parent_match": "geoBoundaries dominant overlap: 99.48%",
+        "original_id": "43193130B30343858980202",
+        "representative_point": [
+          -101.5825939082562,
+          51.40172567999705
+        ],
+        "hierarchy_version": 3,
+        "hierarchy_source": "gb:CAN:ADM2",
+        "hierarchy_overlap": 0.994849,
+        "reference_version": 2,
+        "geographic_area_code": "MAN",
+        "geographic_region_code": 71,
+        "geographic_match": "largest source overlap",
+        "geographic_overlap": 0.79619,
+        "topology_version": 1,
+        "retired_reason": "Superseded by the semantic reference coverage; original geometry and all historical records retained"
+      },
+      "original_ADM1_overlaps": [
+        {
+          "name": "Saskatchewan",
+          "original_id": "82249235B71336988791422",
+          "fraction_of_ADM3_original": 0.9954310981715238,
+          "fraction_of_archived_geometry": 0.9945255033250614
+        },
+        {
+          "name": "Manitoba",
+          "original_id": "82249235B50381585000441",
+          "fraction_of_ADM3_original": 0.004568901828337858,
+          "fraction_of_archived_geometry": 0.005474496674902534
+        }
+      ]
+    },
+    {
+      "id": "gb:CAN:ADM3:43193130B51193612877937",
+      "expected_area": "SAS",
+      "archived_chain": [
+        "geo:province:7b687d0fe27bbde0:MAN",
+        "geo:area:MAN",
+        "geo:region:71",
+        "geo:subcontinent:Northern America",
+        "geo:continent:North America"
+      ],
+      "metadata_area": "MAN",
+      "name": "Sturgeon Weir 184F",
+      "archived_parent": {
+        "id": "geo:province:7b687d0fe27bbde0:MAN",
+        "name": "Northern / Nord",
+        "level": "province",
+        "parent_id": "geo:area:MAN",
+        "metadata": {
+          "source": "gb:CAN:ADM2",
+          "basis": "Geographic portion of a source administrative unit; not a new government division",
+          "kind": "geographic_portion",
+          "original_unit_id": "world/continent:North America/subcontinent:Northern America/region:Canada/area:Western Canada/province:811477B84145681599203"
+        }
+      },
+      "archived_metadata": {
+        "source_id": "gb:CAN:ADM3",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAN/ADM3/geoBoundaries-CAN-ADM3.geojson",
+        "license": "Open Data Commons Open Database License 1.0",
+        "reference_year": "2016",
+        "administrative_level": "ADM3",
+        "parent_source_level": "ADM2",
+        "granularity_version": 2,
+        "parent_match": "geoBoundaries dominant overlap: 100.00%",
+        "original_id": "43193130B51193612877937",
+        "representative_point": [
+          -101.85163929289827,
+          54.28553384124049
+        ],
+        "hierarchy_version": 3,
+        "hierarchy_source": "gb:CAN:ADM2",
+        "hierarchy_overlap": 1,
+        "reference_version": 2,
+        "geographic_area_code": "MAN",
+        "geographic_region_code": 71,
+        "geographic_match": "largest source overlap",
+        "geographic_overlap": 0.50225,
+        "topology_version": 1,
+        "retired_reason": "Superseded by the semantic reference coverage; original geometry and all historical records retained"
+      },
+      "original_ADM1_overlaps": [
+        {
+          "name": "Saskatchewan",
+          "original_id": "82249235B71336988791422",
+          "fraction_of_ADM3_original": 1.0,
+          "fraction_of_archived_geometry": 0.9999999999999999
+        }
+      ]
+    },
+    {
+      "id": "gb:CAN:ADM3:43193130B19755763177353",
+      "expected_area": "ONT",
+      "archived_chain": [
+        "geo:province:228dc684c46e9ad4:QUE",
+        "geo:area:QUE",
+        "geo:region:72",
+        "geo:subcontinent:Northern America",
+        "geo:continent:North America"
+      ],
+      "metadata_area": "QUE",
+      "name": "Akwesasne (Part) 59",
+      "archived_parent": {
+        "id": "geo:province:228dc684c46e9ad4:QUE",
+        "name": "Ottawa",
+        "level": "province",
+        "parent_id": "geo:area:QUE",
+        "metadata": {
+          "source": "gb:CAN:ADM2",
+          "basis": "Geographic portion of a source administrative unit; not a new government division",
+          "kind": "geographic_portion",
+          "original_unit_id": "world/continent:North America/subcontinent:Northern America/region:Canada/area:Eastern Canada/province:811477B85931941465938"
+        }
+      },
+      "archived_metadata": {
+        "source_id": "gb:CAN:ADM3",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAN/ADM3/geoBoundaries-CAN-ADM3.geojson",
+        "license": "Open Data Commons Open Database License 1.0",
+        "reference_year": "2016",
+        "administrative_level": "ADM3",
+        "parent_source_level": "ADM2",
+        "granularity_version": 2,
+        "parent_match": "geoBoundaries dominant overlap: 91.05%",
+        "original_id": "43193130B19755763177353",
+        "representative_point": [
+          -74.73329440186225,
+          45.0046201423263
+        ],
+        "hierarchy_version": 3,
+        "hierarchy_source": "gb:CAN:ADM2",
+        "hierarchy_overlap": 0.910452,
+        "reference_version": 2,
+        "geographic_area_code": "QUE",
+        "geographic_region_code": 72,
+        "geographic_match": "largest source overlap",
+        "geographic_overlap": 0.04031,
+        "topology_version": 1,
+        "retired_reason": "Superseded by the semantic reference coverage; original geometry and all historical records retained"
+      },
+      "original_ADM1_overlaps": [
+        {
+          "name": "Ontario",
+          "original_id": "82249235B66370767641120",
+          "fraction_of_ADM3_original": 0.9569380165976438,
+          "fraction_of_archived_geometry": 0.8923291540073602
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Pinned full-source polygon overlay demonstrates geographic consistency, not exact pre-adaptation input identity or current legal boundary approval. Archive parent metadata belongs to an older reference stage."
+  ]
+}

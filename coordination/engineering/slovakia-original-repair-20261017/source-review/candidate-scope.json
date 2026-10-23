@@ -1,0 +1,577 @@
+{
+  "package": {
+    "package_id": "gb-SVK-ADM2--repair-evaluation",
+    "primary_source": "gb:SVK:ADM2",
+    "source_family_index": 306,
+    "category": "repair-evaluation",
+    "native_cells": 1811,
+    "land_cells": 1811,
+    "inland_water_cells": 0,
+    "source_relative_cells": 0,
+    "interval_segments": 700,
+    "owners": [
+      40388,
+      40389,
+      40390,
+      40394,
+      40395,
+      40396,
+      40397,
+      40399,
+      40403,
+      40418,
+      40425,
+      40429,
+      40431,
+      40432,
+      40433,
+      40435,
+      40439,
+      40443,
+      40444,
+      40452,
+      40456,
+      40459,
+      40460,
+      40462
+    ],
+    "source_features": [
+      20470,
+      20472,
+      20473,
+      36009,
+      36012,
+      36013,
+      36019,
+      51316,
+      56310,
+      56311,
+      56312,
+      56313,
+      56314,
+      56315,
+      56316,
+      56317,
+      56319,
+      56323,
+      56324,
+      56328,
+      56332,
+      56338,
+      56339,
+      56340,
+      56341,
+      56345,
+      56357,
+      56362,
+      56365,
+      56370,
+      56376,
+      56379,
+      56380,
+      56381,
+      56385,
+      56389,
+      56390,
+      56392,
+      56395
+    ],
+    "source_families": [
+      82,
+      150,
+      266,
+      305,
+      306
+    ],
+    "native_blocks": [
+      21,
+      22
+    ],
+    "provinces": [
+      "framework:province:region-of-banska-bystrica:d7651afb4cbe",
+      "framework:province:region-of-kosice:93453c8c0245",
+      "framework:province:region-of-nitra:0da4ebefe939",
+      "framework:province:region-of-presov:a500b63a305a",
+      "framework:province:region-of-trencin:9580ca756f86",
+      "framework:province:region-of-trnava:9910de85677f",
+      "framework:province:region-of-zilina:043eeafd2a8b"
+    ],
+    "location_count": 24,
+    "source_feature_count": 39,
+    "locality_count": 7,
+    "cost": {
+      "primary_source_decoded_bytes": 469146,
+      "all_required_source_decoded_bytes": 2078266,
+      "primary_full_source_raster_measured_seconds": 0.195,
+      "source_interval_segments": 700,
+      "maximum_native_rows_per_execution_frame": 4096,
+      "observed_global_census_peak_rss_bytes": 884973568
+    },
+    "evidence": {
+      "selection": "ownership-binding.json",
+      "lineage": "lineage.json",
+      "territorial_source_catalogue": "retained-source-catalogue.json",
+      "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "source_features": "source-feature-roster.json",
+      "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+      "physical": "physical-unassigned-summary.json",
+      "source_domain_transform": []
+    },
+    "work": {
+      "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+      "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+      "priority": 1
+    },
+    "execution": {
+      "command": "node source-batch-intervals.mjs gb-SVK-ADM2--repair-evaluation OUTPUT_DIRECTORY",
+      "output_columns": [
+        "y",
+        "start",
+        "end",
+        "candidate_owner_indices",
+        "source_feature_indices",
+        "physical_class"
+      ]
+    }
+  },
+  "owners": [
+    {
+      "id": "gb:SVK:ADM2:56367889B1447043738985",
+      "index": 40388,
+      "bounds": [
+        146184.27136722222,
+        90138.17794048195,
+        146797.52133555556,
+        90595.63225706268
+      ],
+      "province_id": "framework:province:region-of-kosice:93453c8c0245",
+      "province_index": 3912,
+      "name": "District of Kovice - okolie",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B1447043738985"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B14569056094647",
+      "index": 40389,
+      "bounds": [
+        147116.05302555553,
+        89823.85434520789,
+        147507.11730888888,
+        90186.4623801045
+      ],
+      "province_id": "framework:province:region-of-presov:a500b63a305a",
+      "province_index": 3914,
+      "name": "District of Snina",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B14569056094647"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B15205076567490",
+      "index": 40390,
+      "bounds": [
+        145449.6968,
+        90288.7616019433,
+        145954.07505444446,
+        90991.56408190989
+      ],
+      "province_id": "framework:province:region-of-banska-bystrica:d7651afb4cbe",
+      "province_index": 3910,
+      "name": "District of Rimavsk",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B15205076567490"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B17286119603144",
+      "index": 40394,
+      "bounds": [
+        144068.22762777776,
+        89958.84703384842,
+        144433.43943055556,
+        90320.4636928542
+      ],
+      "province_id": "framework:province:region-of-trencin:9580ca756f86",
+      "province_index": 3915,
+      "name": "District of Trencon",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B17286119603144"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B18200948818921",
+      "index": 40395,
+      "bounds": [
+        146366.18544166666,
+        89519.60609493245,
+        146758.70620277777,
+        89904.35552436474
+      ],
+      "province_id": "framework:province:region-of-presov:a500b63a305a",
+      "province_index": 3914,
+      "name": "District of Bardejov",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B18200948818921"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B24002183790147",
+      "index": 40396,
+      "bounds": [
+        145940.0200438889,
+        89564.85260843845,
+        146384.46423777778,
+        89864.50932060408
+      ],
+      "province_id": "framework:province:region-of-presov:a500b63a305a",
+      "province_index": 3914,
+      "name": "District of Stark Lubovna",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B24002183790147"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B25974753894430",
+      "index": 40397,
+      "bounds": [
+        145008.0199138889,
+        89348.02512620206,
+        145354.22468166667,
+        89710.97714443751
+      ],
+      "province_id": "framework:province:region-of-zilina:043eeafd2a8b",
+      "province_index": 3917,
+      "name": "District of Numestovo",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B25974753894430"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B27848609458937",
+      "index": 40399,
+      "bounds": [
+        143976.8815156894,
+        91147.58912024356,
+        144576.17425277777,
+        91424.07999760778
+      ],
+      "province_id": "framework:province:region-of-nitra:0da4ebefe939",
+      "province_index": 3913,
+      "name": "District of Komprno",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B27848609458937"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B34538662559621",
+      "index": 40403,
+      "bounds": [
+        143447.403975,
+        90168.74820858981,
+        143751.66218277777,
+        90392.5268509835
+      ],
+      "province_id": "framework:province:region-of-trnava:9910de85677f",
+      "province_index": 3916,
+      "name": "District of Skalica",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B34538662559621"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B51496625279666",
+      "index": 40418,
+      "bounds": [
+        145780.53572722222,
+        89584.44040195447,
+        146115.52561611112,
+        89998.4030889178
+      ],
+      "province_id": "framework:province:region-of-presov:a500b63a305a",
+      "province_index": 3914,
+      "name": "District of Kermarok",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B51496625279666"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B59585277732331",
+      "index": 40425,
+      "bounds": [
+        145185.6373788889,
+        90536.59346373982,
+        145600.44225,
+        90964.71714258926
+      ],
+      "province_id": "framework:province:region-of-banska-bystrica:d7651afb4cbe",
+      "province_index": 3910,
+      "name": "District of Lucenec",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B59585277732331"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B62553648042075",
+      "index": 40429,
+      "bounds": [
+        144162.89868333333,
+        90907.37876703264,
+        144814.599665,
+        91398.47621965379
+      ],
+      "province_id": "framework:province:region-of-nitra:0da4ebefe939",
+      "province_index": 3913,
+      "name": "District of Nova Zkmky",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B62553648042075"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B62817588919968",
+      "index": 40431,
+      "bounds": [
+        144428.05046277776,
+        89453.46119709416,
+        145034.16369000002,
+        89697.68881934804
+      ],
+      "province_id": "framework:province:region-of-zilina:043eeafd2a8b",
+      "province_index": 3917,
+      "name": "District of Cadca",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B62817588919968"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B65708067786299",
+      "index": 40432,
+      "bounds": [
+        146749.16627333334,
+        90261.68450192575,
+        147217.42387888886,
+        90764.59682516487
+      ],
+      "province_id": "framework:province:region-of-kosice:93453c8c0245",
+      "province_index": 3912,
+      "name": "District of Trebi ov",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B65708067786299"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B65848289259275",
+      "index": 40433,
+      "bounds": [
+        143415.65275944443,
+        90268.53791533162,
+        143851.28526277776,
+        90578.59768821654
+      ],
+      "province_id": "framework:province:region-of-trnava:9910de85677f",
+      "province_index": 3916,
+      "name": "District of Senica",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B65848289259275"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B67356758961124",
+      "index": 40435,
+      "bounds": [
+        146916.87968944444,
+        89806.58083124075,
+        147244.00459833335,
+        90212.13787287763
+      ],
+      "province_id": "framework:province:region-of-presov:a500b63a305a",
+      "province_index": 3914,
+      "name": "District of Humennn",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B67356758961124"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B75362220391655",
+      "index": 40439,
+      "bounds": [
+        144277.52348444445,
+        89704.72421461933,
+        144509.9045138889,
+        90065.11753472348
+      ],
+      "province_id": "framework:province:region-of-trencin:9580ca756f86",
+      "province_index": 3915,
+      "name": "District of Prchov",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B75362220391655"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B78366861694162",
+      "index": 40443,
+      "bounds": [
+        143643.22741222222,
+        90947.24880985983,
+        144109.373125,
+        91394.35988709918
+      ],
+      "province_id": "framework:province:region-of-trnava:9910de85677f",
+      "province_index": 3916,
+      "name": "District of Dunajskn Streda",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B78366861694162"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B79509103276820",
+      "index": 40444,
+      "bounds": [
+        143911.00085166667,
+        90115.23915752042,
+        144205.71912999998,
+        90462.07346830322
+      ],
+      "province_id": "framework:province:region-of-trencin:9580ca756f86",
+      "province_index": 3915,
+      "name": "Nov\u00e9 Mesto nad V\u00e1hom",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B79509103276820"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B91036256885729",
+      "index": 40452,
+      "bounds": [
+        143720.1294388889,
+        90203.50692256688,
+        143987.46593500001,
+        90446.54048730088
+      ],
+      "province_id": "framework:province:region-of-trencin:9580ca756f86",
+      "province_index": 3915,
+      "name": "District of Myjava",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B91036256885729"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B96980961358907",
+      "index": 40456,
+      "bounds": [
+        144929.22446611113,
+        90697.51112686012,
+        145319.48768666666,
+        91074.20680996832
+      ],
+      "province_id": "framework:province:region-of-banska-bystrica:d7651afb4cbe",
+      "province_index": 3910,
+      "name": "District of Velka Krta",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B96980961358907"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B97606993013938",
+      "index": 40459,
+      "bounds": [
+        147145.7651722222,
+        90112.02475229472,
+        147386.52094888888,
+        90501.05205920381
+      ],
+      "province_id": "framework:province:region-of-kosice:93453c8c0245",
+      "province_index": 3912,
+      "name": "District of Sobrance",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B97606993013938"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B98399677297130",
+      "index": 40460,
+      "bounds": [
+        144259.75445555555,
+        89874.08394023452,
+        144558.47804777778,
+        90148.81299145949
+      ],
+      "province_id": "framework:province:region-of-trencin:9580ca756f86",
+      "province_index": 3915,
+      "name": "District of Ilava",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B98399677297130"
+      ]
+    },
+    {
+      "id": "gb:SVK:ADM2:56367889B99469568447767",
+      "index": 40462,
+      "bounds": [
+        146949.72326333335,
+        89597.08481110279,
+        147181.95864499998,
+        89923.71172967259
+      ],
+      "province_id": "framework:province:region-of-presov:a500b63a305a",
+      "province_index": 3914,
+      "name": "District of Medzilaborce",
+      "reference_owner": "Slovakia",
+      "source_id": "gb:SVK:ADM2",
+      "source_atoms": [
+        "gb:SVK:ADM2:56367889B99469568447767"
+      ]
+    }
+  ],
+  "scope": {
+    "cells": 1811,
+    "owners": 24,
+    "atoms": 24
+  },
+  "claim_status": "unclaimed"
+}

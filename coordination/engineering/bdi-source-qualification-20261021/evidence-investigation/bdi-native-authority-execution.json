@@ -1,0 +1,53 @@
+{
+  "kind": "actual-native-authority-execution-record",
+  "executing_checkout_commit": "fd35809976a5b3791c0a6710c6aeccf50e707e9f",
+  "phase": "native-authority",
+  "config": {
+    "version": 1,
+    "source_evidence": {
+      "commit": "fd35809976a5b3791c0a6710c6aeccf50e707e9f",
+      "path": "coordination/engineering/bdi-source-qualification-20261021/supported-inputs-001/source-evidence.json"
+    },
+    "native_patch": {
+      "commit": "fd35809976a5b3791c0a6710c6aeccf50e707e9f",
+      "path": "coordination/engineering/bdi-source-qualification-20261021/supported-inputs-001/native-patch.json"
+    }
+  },
+  "attempts": [
+    {
+      "ordinal": 1,
+      "exit_code": 1,
+      "stderr": "Nonordinary native scratch directory\n",
+      "output_directory_created": false,
+      "scratch": "macOS default /var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/",
+      "reason": "ordinary-directory stock guard rejects symlinked ancestor; no guard changed"
+    },
+    {
+      "ordinal": 2,
+      "exit_code": 0,
+      "scratch": "ordinary task-owned native-scratch/bdi-native-authority-ordinary",
+      "result": {
+        "destination": "coordination/engineering/bdi-source-qualification-20261021/native-authority-001",
+        "resumed": false,
+        "binding": {
+          "phase": "native-authority",
+          "config_sha256": "01366f1a066a7099bfc8aeb4d67743bf9c67916a055b889289b5eef7a73f8926"
+        },
+        "observation": {
+          "elapsed_seconds": 3.515441208,
+          "qualified_cells": 448,
+          "limits": [
+            "Original source/physical producers are not replayed.",
+            "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+          ]
+        }
+      },
+      "stderr_bytes": 0
+    }
+  ],
+  "limits": [
+    "First refusal preserved; no authority existed before ordinary scratch retry.",
+    "No source, physical or owner observation rerun.",
+    "Constructor qualification remains distinct from final selected-output acceptance."
+  ]
+}

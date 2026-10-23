@@ -1,0 +1,626 @@
+{
+  "version": 1,
+  "selector": {
+    "commit": "675cf6285b8d1cdaed3a7d8915146e7d45ce9052",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "b2abcfeb2ef1fded14f7c553cd324bffd6a43bd2",
+    "bytes": 1564,
+    "sha256": "6a0d4c7596dc8cf5cddf17547621a2a73db66d67ddc0870d4709d1da8746bedb"
+  },
+  "effective_release_id": "geography:indonesia-remaining474-native-followup-20261016",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "4b14731f2a8cc602ed0a5a7e220f0d0a5b9d72d3",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/kapuas7/authority/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "555911ae51dc8eeef5eeeb95177cc6a61776edfb",
+        "bytes": 798,
+        "sha256": "04b28b623df0f1514b4ef0302b4f5cd6084aa387fe95055d9f47d571fe8a074b"
+      },
+      "source_authority": {
+        "commit": "4b14731f2a8cc602ed0a5a7e220f0d0a5b9d72d3",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/kapuas7/authority/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "bba032bb720dcf038f19670bbbb70c9f29628b61",
+        "bytes": 801,
+        "sha256": "ef39a9c1520731f80d2f1a45e5fb2218e23dca4f99472d6bdbbb8f8e2fa1b7ae"
+      },
+      "ledger": {
+        "commit": "4b14731f2a8cc602ed0a5a7e220f0d0a5b9d72d3",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/kapuas7/authority/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "0948f331afb59851226cf53b959e6b4ced939ec6",
+        "bytes": 13283,
+        "sha256": "ba3f3f3e0ca7026797a37e482000e8217debaf4c63e2a47a96c2f29c3b834040"
+      },
+      "native_patch": {
+        "bytes": 319,
+        "commit": "e201cfae0476779c66e6d6e90b4f2960e719e67e",
+        "git_blob_oid": "92cf7a11f07f42b89e09494230ae64ef3bced641",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/kapuas7/candidate-native-patch.json",
+        "sha256": "ad6b6e1debba77ddbd337e2716225972620d07ef88a7a0df2d15a65c1cf2296d"
+      }
+    },
+    {
+      "rule_preimage": {
+        "commit": "4b14731f2a8cc602ed0a5a7e220f0d0a5b9d72d3",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/malinau5/authority/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "26502907e4914b49417066ff38fcfb1e111f1145",
+        "bytes": 800,
+        "sha256": "130045ee0d23870bf71dba0e4a5e8e854815b9a61cb146ff74f3a256aa9a42df"
+      },
+      "source_authority": {
+        "commit": "4b14731f2a8cc602ed0a5a7e220f0d0a5b9d72d3",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/malinau5/authority/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "9386cb54124a3cd6a093e7924e3127f00c01e03c",
+        "bytes": 803,
+        "sha256": "2091ce89e6225591afeb5876376fa0c07c330b6f85e6758a8e9fcf8460d869e5"
+      },
+      "ledger": {
+        "commit": "4b14731f2a8cc602ed0a5a7e220f0d0a5b9d72d3",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/malinau5/authority/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "a2ae0bb0555cb78d6f92181c2cbabe076b6131c8",
+        "bytes": 13153,
+        "sha256": "d3ae5e0c1d4a1e909a5ae152d6a45885615404b29834439416a3e45cbcdf59e4"
+      },
+      "native_patch": {
+        "bytes": 231,
+        "commit": "e201cfae0476779c66e6d6e90b4f2960e719e67e",
+        "git_blob_oid": "60bc3457fd544661c39bc597eebe037a43fbbf26",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/malinau5/candidate-native-patch.json",
+        "sha256": "59c7c10f188961407ad898d2c53ad1e9b19fc645a8174717df9f1bab793d6dfb"
+      }
+    },
+    {
+      "rule_preimage": {
+        "commit": "4b14731f2a8cc602ed0a5a7e220f0d0a5b9d72d3",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/idn14/native-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "9f55afe003b4b98334200635dc5e87487c45dd74",
+        "bytes": 795,
+        "sha256": "8539d1c3e5ed4b50c2b6dd1b2ade6f9f846152315ce5a455b02844926cda57d2"
+      },
+      "source_authority": {
+        "commit": "4b14731f2a8cc602ed0a5a7e220f0d0a5b9d72d3",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/idn14/native-authority-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "ffef3d7304f596fcac46296d57db29911347f4f4",
+        "bytes": 798,
+        "sha256": "77f25d78acd6b7fa69f1e735ed919d43f8b8cb6ee8448564e09d7d8ff5724fee"
+      },
+      "ledger": {
+        "commit": "4b14731f2a8cc602ed0a5a7e220f0d0a5b9d72d3",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/idn14/native-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "a9e9ab64222b62e443efc4a1d256c090743d5d06",
+        "bytes": 44304,
+        "sha256": "a1d5f834bbc43d90d6dfe0f45eea2a838eb25c0ba0244dcc90974ed826a2ab87"
+      },
+      "native_patch": {
+        "bytes": 627,
+        "commit": "e201cfae0476779c66e6d6e90b4f2960e719e67e",
+        "git_blob_oid": "901640cb39746b7dfefacbc1d9ae35f72889ee0e",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/idn14/candidate-native-patch.json",
+        "sha256": "c3be5fef548f7b39c89ee4271112f3dd3f4accaff7c4dfc7c8aa905d72980a82"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/conflict3/authority/original-rule-preimage.json",
+        "commit": "58aa634d45919a15eab17b0980ac4345bedb6cae",
+        "mode": "100644",
+        "git_blob_oid": "8c00f9d22692230f71a1485f585c7f41b9b578ed",
+        "bytes": 803,
+        "sha256": "1b127881e4adc75cedb031124797eea54241ac9851a61d03765f9465bd956346"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/conflict3/authority/authority-binding.json",
+        "commit": "58aa634d45919a15eab17b0980ac4345bedb6cae",
+        "mode": "100644",
+        "git_blob_oid": "9ba8e453daf41cd0a06a400ea1494de8ed536926",
+        "bytes": 806,
+        "sha256": "c81db79d519b28996ed00a26f75250c7c6540ca353e4d6ff0cf840a3df78e1ec"
+      },
+      "ledger": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/conflict3/authority/constructor-result.json",
+        "commit": "58aa634d45919a15eab17b0980ac4345bedb6cae",
+        "mode": "100644",
+        "git_blob_oid": "229b463235e38edf188d279a57bca3173c13de0b",
+        "bytes": 21793,
+        "sha256": "eda8e9f7d198537906ce1cabfc1f890919bb56fc331e7ff2864633c1ed84a28a"
+      },
+      "native_patch": {
+        "bytes": 143,
+        "commit": "4b14731f2a8cc602ed0a5a7e220f0d0a5b9d72d3",
+        "git_blob_oid": "5cb471dda8f171aa76abd55dcb3635d8983a3c5b",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/conflict3/candidate-native-patch.json",
+        "sha256": "bd99c1ef53c688c16e2e8c92a4412ffcbf47c771f730fb9745fc6bcab61add08"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/kapuas216-government/authority/original-rule-preimage.json",
+        "commit": "58baf6149eed8655e8a7d62a362fb1d5fa1b9a13",
+        "mode": "100644",
+        "git_blob_oid": "e3353e54c7f3bac5c9e88933c39d6f9ef2abbdb2",
+        "bytes": 825,
+        "sha256": "dbf88fd4280ec3c95244299a9e137bf617c80fb984abd766327095bd90c5a0de"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/kapuas216-government/authority/authority-binding.json",
+        "commit": "58baf6149eed8655e8a7d62a362fb1d5fa1b9a13",
+        "mode": "100644",
+        "git_blob_oid": "ca1e98e7a3e5e865fc847287655825e0e8dd006b",
+        "bytes": 828,
+        "sha256": "4edfdd29cb7b5be125bfa7cf435e2110d328b4060b237d06a3023f71fb9b2b24"
+      },
+      "ledger": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/kapuas216-government/authority/constructor-result.json",
+        "commit": "58baf6149eed8655e8a7d62a362fb1d5fa1b9a13",
+        "mode": "100644",
+        "git_blob_oid": "a6a91055e967655556dbc64c21d8e628c33584b6",
+        "bytes": 17316,
+        "sha256": "40fc9865a70bd045e76983d32ee1000502db45341dfb5f15bff53374d3bf6941"
+      },
+      "native_patch": {
+        "bytes": 4323,
+        "commit": "58aa634d45919a15eab17b0980ac4345bedb6cae",
+        "git_blob_oid": "a8cd18519520339122c7c8362cb5b6bc187e30c7",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/kapuas216-government/candidate-native-patch.json",
+        "sha256": "b75bfdd77b5165d24f151778919f562e0894623c7eea863879b23b35d4ba3db7"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/malinau58-mahakam5-government/authority/original-rule-preimage.json",
+        "commit": "184090b23cac8e0e70d61137d5a16c74fcd52214",
+        "mode": "100644",
+        "git_blob_oid": "c45f6409212def8a1d93ca761efcbe929bb06108",
+        "bytes": 844,
+        "sha256": "3c468482538a0efe46ac7f85839c0c326c46a14c4dd109458fce2515df9d732e"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/malinau58-mahakam5-government/authority/authority-binding.json",
+        "commit": "184090b23cac8e0e70d61137d5a16c74fcd52214",
+        "mode": "100644",
+        "git_blob_oid": "10961fe81760a0a72597c645b927f8df8ca6a36c",
+        "bytes": 847,
+        "sha256": "4d2ebf835b7bf0e8a965a9ceb154bf777e5fee8ee063f9dd3faa2978ff70c956"
+      },
+      "ledger": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/malinau58-mahakam5-government/authority/constructor-result.json",
+        "commit": "184090b23cac8e0e70d61137d5a16c74fcd52214",
+        "mode": "100644",
+        "git_blob_oid": "7f3a4dd69f7fb2616f102d8149f452bd60abf4cc",
+        "bytes": 21477,
+        "sha256": "03e3f29bf124de8ea36a497333e768184ef235fcdaf37b314ef80cd971c52a37"
+      },
+      "native_patch": {
+        "bytes": 2013,
+        "commit": "58baf6149eed8655e8a7d62a362fb1d5fa1b9a13",
+        "git_blob_oid": "3ca0dc9cc9680f165152f03af23cbf54ebeb4f89",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/malinau58-mahakam5-government/candidate-native-patch.json",
+        "sha256": "da55543d9368fbaa05262df17f74d3cbc02e87efd33182069cb869ca3c249b43"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/additional32-government/authority/original-rule-preimage.json",
+        "commit": "184090b23cac8e0e70d61137d5a16c74fcd52214",
+        "mode": "100644",
+        "git_blob_oid": "94749c97636f4cb287c84b6939fd4ce3b5b0304e",
+        "bytes": 831,
+        "sha256": "2b6f2e28490a2b8f421272690eda757e66db2d8caa85226a026df31c7d3b69eb"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/additional32-government/authority/authority-binding.json",
+        "commit": "184090b23cac8e0e70d61137d5a16c74fcd52214",
+        "mode": "100644",
+        "git_blob_oid": "1f417aa6958395d86fba72a4a6f426d549740081",
+        "bytes": 834,
+        "sha256": "5d74274f315a9b4e0e13b94bad7d0ec4d7a363f5837e8fe8d963cefb4569f626"
+      },
+      "ledger": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/additional32-government/authority/constructor-result.json",
+        "commit": "184090b23cac8e0e70d61137d5a16c74fcd52214",
+        "mode": "100644",
+        "git_blob_oid": "8dd987e8af26e9f91b6ab86dacc00e3142274df4",
+        "bytes": 37148,
+        "sha256": "983d733ab7a56d91c32011e5d16e4f709a64038585df46bf2753a9b3a4f8a8f8"
+      },
+      "native_patch": {
+        "bytes": 825,
+        "commit": "2f58fa5c0a0a08142962870a5d6b218cc835ec00",
+        "git_blob_oid": "85a285a22952fc229b30d3907657fc705861cd0e",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/additional32-government/candidate-native-patch.json",
+        "sha256": "90327800a06d73a07081a6c6857f651b4af467d16987a8f934f5fbd508e4149f"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/foreign-native/tebedu1/authority/original-rule-preimage.json",
+        "commit": "184090b23cac8e0e70d61137d5a16c74fcd52214",
+        "mode": "100644",
+        "git_blob_oid": "706fd7d2c5862327b91b4e98186040e37de334d9",
+        "bytes": 826,
+        "sha256": "64c01e8559539e7eac9ceb405afef45c43134f1f144dafdba254efeaaf1af98a"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/foreign-native/tebedu1/authority/authority-binding.json",
+        "commit": "184090b23cac8e0e70d61137d5a16c74fcd52214",
+        "mode": "100644",
+        "git_blob_oid": "503b24ea9dd2afb7e7cafb5b082c229612495326",
+        "bytes": 829,
+        "sha256": "affad15fefefc15a6f988650c293b6ac9d2fd06d1956945d13d08c9440002d9f"
+      },
+      "ledger": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/foreign-native/tebedu1/authority/constructor-result.json",
+        "commit": "184090b23cac8e0e70d61137d5a16c74fcd52214",
+        "mode": "100644",
+        "git_blob_oid": "fe4a6bf2b8ff2323c766326ab338c5c103251c1c",
+        "bytes": 2946,
+        "sha256": "87bc8a7938135fe9e99d05ddcca4449ce17a3bde4908dbe004c25ab23cec4de6"
+      },
+      "native_patch": {
+        "bytes": 55,
+        "commit": "58baf6149eed8655e8a7d62a362fb1d5fa1b9a13",
+        "git_blob_oid": "3956df413b029c1ebb0f4997f804ad83400233aa",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/foreign-native/tebedu1/candidate-native-patch.json",
+        "sha256": "5755b1175938dc45533df1977e659f4b185adecc2846982e66a821b85f712111"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/foreign-native/balibo2/authority/original-rule-preimage.json",
+        "commit": "184090b23cac8e0e70d61137d5a16c74fcd52214",
+        "mode": "100644",
+        "git_blob_oid": "1ed913052c89a4c8d1dc12a2687d4fa7915dbf18",
+        "bytes": 826,
+        "sha256": "42384661c0c067ef27cc03b265084cb4933365cdd489968792d37928dc20bd93"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/foreign-native/balibo2/authority/authority-binding.json",
+        "commit": "184090b23cac8e0e70d61137d5a16c74fcd52214",
+        "mode": "100644",
+        "git_blob_oid": "4a13c3d1422da7a584be7e58615a8e517e0dd0bd",
+        "bytes": 829,
+        "sha256": "c382440f3518c76a144e8953af3b2c2f89aa00d3e780187403df126146a30d3a"
+      },
+      "ledger": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/foreign-native/balibo2/authority/constructor-result.json",
+        "commit": "184090b23cac8e0e70d61137d5a16c74fcd52214",
+        "mode": "100644",
+        "git_blob_oid": "ba6e19a53532e298abba03bf283960b48c6a22ea",
+        "bytes": 3681,
+        "sha256": "6ecc11bf654c775efe59552f3fbc57aa5b0343378da19442a63f2e26248ca636"
+      },
+      "native_patch": {
+        "bytes": 99,
+        "commit": "58baf6149eed8655e8a7d62a362fb1d5fa1b9a13",
+        "git_blob_oid": "5d7754fdd04e44997e5898d2727655d204a556ad",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/foreign-native/balibo2/candidate-native-patch.json",
+        "sha256": "d85297bc651d49b7017f153a1aeab35eb4471843f616ebd402cbbef7ecf0e3ed"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/foreign-native/fatumean1/authority/original-rule-preimage.json",
+        "commit": "754ee575113d3c48bbf5726643d4a3b6513f3e88",
+        "mode": "100644",
+        "git_blob_oid": "a45fbaae09239f216661e967c520e7d3f405278d",
+        "bytes": 830,
+        "sha256": "06c370719be9ff7bf5005b3e69809c63f1046045d2ab9a4cc7ab26431f6e9c50"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/foreign-native/fatumean1/authority/authority-binding.json",
+        "commit": "754ee575113d3c48bbf5726643d4a3b6513f3e88",
+        "mode": "100644",
+        "git_blob_oid": "fd33c66b1e8d1b8651366c0bc8a35ec5160518fc",
+        "bytes": 833,
+        "sha256": "18a94a2960b3c4d543f932e3fe0309c5d28d48d057a5f06fa141016169be598b"
+      },
+      "ledger": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/foreign-native/fatumean1/authority/constructor-result.json",
+        "commit": "754ee575113d3c48bbf5726643d4a3b6513f3e88",
+        "mode": "100644",
+        "git_blob_oid": "1b8a0b1fb017a2344c5d1616940008a46d5e9d70",
+        "bytes": 2988,
+        "sha256": "11bd74f8d667dac823c350eeecfa011bbf33936b9e37ae8a65cd9f1d06478961"
+      },
+      "native_patch": {
+        "bytes": 55,
+        "commit": "2662418c8d0f1f1cf7a72c3d998dddc8684be8e4",
+        "git_blob_oid": "019e279bb5cc33314fa8a5a256068e875bb2af6a",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/foreign-native/fatumean1/candidate-native-patch.json",
+        "sha256": "19f8b565e24ed76548f1670759c8ed30c79f9fa1105ee7345b66374ecff1cba5"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/conflict-owner23065-4/authority/original-rule-preimage.json",
+        "commit": "93026ee24a9746799f41308278b15133b21ba51c",
+        "mode": "100644",
+        "git_blob_oid": "6f75a4b0a9682c73da87be9baa365d4db80f6ba0",
+        "bytes": 865,
+        "sha256": "08d4a8966a0821dbd3e5d180808425275dc8cba1d2300dcd15dc4a7538315f4f"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/conflict-owner23065-4/authority/authority-binding.json",
+        "commit": "93026ee24a9746799f41308278b15133b21ba51c",
+        "mode": "100644",
+        "git_blob_oid": "f96d15dea88abf4de109952c7c51017801d34b0b",
+        "bytes": 868,
+        "sha256": "63207c3afb204c9893ba4ccd31fc38f391e322a826c4ce4afaa789b463e4d94c"
+      },
+      "ledger": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/conflict-owner23065-4/authority/constructor-result.json",
+        "commit": "93026ee24a9746799f41308278b15133b21ba51c",
+        "mode": "100644",
+        "git_blob_oid": "aed2ca94d48d52807e0b4fd7501a08c656b57f11",
+        "bytes": 9684,
+        "sha256": "a8d9f3e04e60ff36e97a753848c44efc0ad0910629cb895cff83d4e1104c7969"
+      },
+      "native_patch": {
+        "bytes": 55,
+        "commit": "3156ef28bd2e0472580c470a1590c3d78c54478f",
+        "git_blob_oid": "da402ce7477da12fb5fca86ffe65451ef9d02f5d",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/conflict-owner23065-4/candidate-native-patch.json",
+        "sha256": "6569e8e5da676d63f116953a719e7b8aa4e18f70314794f4dafc32021ef4da21"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/conflict-owner23071-6/authority/original-rule-preimage.json",
+        "commit": "93026ee24a9746799f41308278b15133b21ba51c",
+        "mode": "100644",
+        "git_blob_oid": "813103a5bdf6032dea9c6564782a516dc00d2e72",
+        "bytes": 866,
+        "sha256": "db488b2ff4ac2d91e06b31c0d7a9114fae906ea17f7319b3f49915fda8dfd26d"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/conflict-owner23071-6/authority/authority-binding.json",
+        "commit": "93026ee24a9746799f41308278b15133b21ba51c",
+        "mode": "100644",
+        "git_blob_oid": "70b5f1d37ddbcfa3a02eee145d9f76ef40b74129",
+        "bytes": 869,
+        "sha256": "89a73e6f59c4b330bccdb10d26d00bb03143f8d15a6a5f1e2066003d1c841ec9"
+      },
+      "ledger": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/conflict-owner23071-6/authority/constructor-result.json",
+        "commit": "93026ee24a9746799f41308278b15133b21ba51c",
+        "mode": "100644",
+        "git_blob_oid": "55270dca12ac417f962d4a085ff28d80958fc91a",
+        "bytes": 8780,
+        "sha256": "48e4f7ed5fb226bca4f190c6f3004bc94292e00df228f8b81789c68ebc64c0e9"
+      },
+      "native_patch": {
+        "bytes": 143,
+        "commit": "3156ef28bd2e0472580c470a1590c3d78c54478f",
+        "git_blob_oid": "e73b39aaf91775001aba8348481af4d1d575bf1b",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/conflict-owner23071-6/candidate-native-patch.json",
+        "sha256": "c20d9b73dfb51007c2801830f707a93a08f512f0fb319c7fc5a6e86bc5239c4b"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/whole-owner-union-001/owner22771-union24/authority/original-rule-preimage.json",
+        "commit": "a0f4203cea5ce7bef97a9bc6d72e4aa0475a3891",
+        "mode": "100644",
+        "git_blob_oid": "6e2862c6efc4dcfa0e21416990ad1624060c7a45",
+        "bytes": 885,
+        "sha256": "25136183db1292e7a2cb475d5be239a87d00a3ce3f4efe098a0a6df5a3455972"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/whole-owner-union-001/owner22771-union24/authority/authority-binding.json",
+        "commit": "a0f4203cea5ce7bef97a9bc6d72e4aa0475a3891",
+        "mode": "100644",
+        "git_blob_oid": "2e176e94be326b497505630d69cc0c53ca5ae645",
+        "bytes": 888,
+        "sha256": "5a7edb608ec50a18ad4131cec740863c09d62fcef13aa60351d32b5ee8af1324"
+      },
+      "ledger": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/whole-owner-union-001/owner22771-union24/authority/constructor-result.json",
+        "commit": "a0f4203cea5ce7bef97a9bc6d72e4aa0475a3891",
+        "mode": "100644",
+        "git_blob_oid": "27018f81da940db745a88889208700ad30f5bdc6",
+        "bytes": 15631,
+        "sha256": "4c4a8c1cdb5c9f5d06f203054636f68ec4a60b1cea93ed8f1e24245637f33dfc"
+      },
+      "native_patch": {
+        "bytes": 693,
+        "commit": "93026ee24a9746799f41308278b15133b21ba51c",
+        "git_blob_oid": "8f5691d73d71c5c4ef985399ed48d8e0bef28b9f",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/whole-owner-union-001/owner22771-union24/candidate-native-patch.json",
+        "sha256": "a47bf8b4d2d933e8f4da188cdf31ba3d39abcfb16d7cd81a00482db1158880a2"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/whole-owner-union-001/owner22935-union6/authority/original-rule-preimage.json",
+        "commit": "a0f4203cea5ce7bef97a9bc6d72e4aa0475a3891",
+        "mode": "100644",
+        "git_blob_oid": "8504df20f1660c30b0ab6d2be79c55e40f9c28f0",
+        "bytes": 884,
+        "sha256": "38237d597aa55b07f8208def1a190bfe22b2d24c74644a74d659b7e4fc1c9266"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/whole-owner-union-001/owner22935-union6/authority/authority-binding.json",
+        "commit": "a0f4203cea5ce7bef97a9bc6d72e4aa0475a3891",
+        "mode": "100644",
+        "git_blob_oid": "ac617288518a8200efcff2a31591967e6e2053d6",
+        "bytes": 887,
+        "sha256": "ecdf7d433c4cd09944b6e9ace3d977ac32cb34d82d9fa04b0427929160ab8f06"
+      },
+      "ledger": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/whole-owner-union-001/owner22935-union6/authority/constructor-result.json",
+        "commit": "a0f4203cea5ce7bef97a9bc6d72e4aa0475a3891",
+        "mode": "100644",
+        "git_blob_oid": "c8f8ab3bfd2443e6ba1d960a90cb2d59735813e0",
+        "bytes": 13281,
+        "sha256": "c2c7947e2d56cccdbe70530d4488ebcd28be14893adfc0719347b00b667b2225"
+      },
+      "native_patch": {
+        "bytes": 275,
+        "commit": "93026ee24a9746799f41308278b15133b21ba51c",
+        "git_blob_oid": "f64fca4b8dc91bd13efa89b17c1f894eba22bb90",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/whole-owner-union-001/owner22935-union6/candidate-native-patch.json",
+        "sha256": "9cec0dc7bdfcbae3a8ef4e0b544b95c207f0aa956dfd6010532f32ce92ccb027"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/whole-owner-union-001/owner23115-union3/authority/original-rule-preimage.json",
+        "commit": "a0f4203cea5ce7bef97a9bc6d72e4aa0475a3891",
+        "mode": "100644",
+        "git_blob_oid": "6e7ce13e53a6b935f2f6acd802c2badcc30354f5",
+        "bytes": 884,
+        "sha256": "1ca220c485b7cb027c0c0bd06e484426afa003545c0a7d0c2a9e3bd7654505f8"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/whole-owner-union-001/owner23115-union3/authority/authority-binding.json",
+        "commit": "a0f4203cea5ce7bef97a9bc6d72e4aa0475a3891",
+        "mode": "100644",
+        "git_blob_oid": "9d9be0d39811449f3f478a899efae83c7895e54e",
+        "bytes": 887,
+        "sha256": "9b3fa3131f6a266519e93985a0d2acef3c18cf90b9cdfe8cc57d770dabaefd06"
+      },
+      "ledger": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/whole-owner-union-001/owner23115-union3/authority/constructor-result.json",
+        "commit": "a0f4203cea5ce7bef97a9bc6d72e4aa0475a3891",
+        "mode": "100644",
+        "git_blob_oid": "4ce5fb4e585345aca456b771f7b3678cde641966",
+        "bytes": 13193,
+        "sha256": "d4dbd2bd7a15f4f2f00bda1379765707e1f8a595f6a46ab522c9245637436274"
+      },
+      "native_patch": {
+        "bytes": 143,
+        "commit": "93026ee24a9746799f41308278b15133b21ba51c",
+        "git_blob_oid": "7223e12ada9357d463a3c8b42f4f1c9b908f4080",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/whole-owner-union-001/owner23115-union3/candidate-native-patch.json",
+        "sha256": "7a2000bd81de2ee3e7dd920f0e091025c749e7baa6f39dba51510aba0097d811"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/tls6-retained-country-footprint/owner22839-1/authority/original-rule-preimage.json",
+        "commit": "a0f4203cea5ce7bef97a9bc6d72e4aa0475a3891",
+        "mode": "100644",
+        "git_blob_oid": "f3383a83d1ce3309acfc8aa98225287a6f8a9f0e",
+        "bytes": 871,
+        "sha256": "fe0897eec3c7f3708a79cbdf7820880a6f96d84c7518f52f04b2a609b50ee801"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/tls6-retained-country-footprint/owner22839-1/authority/authority-binding.json",
+        "commit": "a0f4203cea5ce7bef97a9bc6d72e4aa0475a3891",
+        "mode": "100644",
+        "git_blob_oid": "28943891c95267ef742dbe41a64415a191a7aa9d",
+        "bytes": 874,
+        "sha256": "99ebe4d19cf67175a6f6d6f099894882c6d720d582cdc07662317fb3f2843408"
+      },
+      "ledger": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/tls6-retained-country-footprint/owner22839-1/authority/constructor-result.json",
+        "commit": "a0f4203cea5ce7bef97a9bc6d72e4aa0475a3891",
+        "mode": "100644",
+        "git_blob_oid": "712991dd9ae098f1697c1c4546cf83e80b72e1b0",
+        "bytes": 7666,
+        "sha256": "54f9d6a89124e9c1124d87f9bfde2c58cbbc14f76e02ee058adb3ba318d50b90"
+      },
+      "native_patch": {
+        "bytes": 55,
+        "commit": "93026ee24a9746799f41308278b15133b21ba51c",
+        "git_blob_oid": "033c894e28c08e683665e0726de3429c9c2e2c55",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/tls6-retained-country-footprint/owner22839-1/candidate-native-patch.json",
+        "sha256": "6100b97b45e602bd19b591ae45e2e39954513ca26bd53f6b7e9931ddd6d9e52e"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/tls6-retained-country-footprint/owner22947-4/authority/original-rule-preimage.json",
+        "commit": "a0f4203cea5ce7bef97a9bc6d72e4aa0475a3891",
+        "mode": "100644",
+        "git_blob_oid": "a2676428b8f8f549b7bbd7aa415fe03262946f14",
+        "bytes": 871,
+        "sha256": "80ca285d9354d26f00556d6eefb34624efdb7b0354b97b56262e243a20a7910b"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/tls6-retained-country-footprint/owner22947-4/authority/authority-binding.json",
+        "commit": "a0f4203cea5ce7bef97a9bc6d72e4aa0475a3891",
+        "mode": "100644",
+        "git_blob_oid": "0d001fadc05a073b24c382dc72cd80ca20e78159",
+        "bytes": 874,
+        "sha256": "250664e9c792b90a7feb4639437c15b11194e3cec7c4291106a96b9d08be639e"
+      },
+      "ledger": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/tls6-retained-country-footprint/owner22947-4/authority/constructor-result.json",
+        "commit": "a0f4203cea5ce7bef97a9bc6d72e4aa0475a3891",
+        "mode": "100644",
+        "git_blob_oid": "d09d6ebc67de091398c8e33a35bdf2b878444881",
+        "bytes": 3303,
+        "sha256": "d942014aa1d4e76d9daafa81b657d5533e2e508c669e788f517c91aae8712af8"
+      },
+      "native_patch": {
+        "bytes": 99,
+        "commit": "93026ee24a9746799f41308278b15133b21ba51c",
+        "git_blob_oid": "9c7853dbcd56e5834377c25704fd5afc4f1fc845",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/tls6-retained-country-footprint/owner22947-4/candidate-native-patch.json",
+        "sha256": "378ca58ab29f954dd36a34507885453a49ab93a5aaec9223b502b7e09bc1e8b4"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/tls6-retained-country-footprint/owner23013-1/authority/original-rule-preimage.json",
+        "commit": "a0f4203cea5ce7bef97a9bc6d72e4aa0475a3891",
+        "mode": "100644",
+        "git_blob_oid": "c8812c3e73339cbec3b859cb9643b5ddada72192",
+        "bytes": 871,
+        "sha256": "4ca04e151f6db102bcd0f38024a28d360225dffc57ccb0694a033a63bb4bd312"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/tls6-retained-country-footprint/owner23013-1/authority/authority-binding.json",
+        "commit": "a0f4203cea5ce7bef97a9bc6d72e4aa0475a3891",
+        "mode": "100644",
+        "git_blob_oid": "43892bc7304f3c6d3ad02aad15bd83a0de02109b",
+        "bytes": 874,
+        "sha256": "2b7a860302b09c6bbef8123d0a8b682eedd258bde3fcb23c09f6d4a1de6657e0"
+      },
+      "ledger": {
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/tls6-retained-country-footprint/owner23013-1/authority/constructor-result.json",
+        "commit": "a0f4203cea5ce7bef97a9bc6d72e4aa0475a3891",
+        "mode": "100644",
+        "git_blob_oid": "bf0c8170dc94e7c020158960591b13770d76e220",
+        "bytes": 6054,
+        "sha256": "9b76a390e67d03a7a94277b0c963a0749e7040490dda5cface09450dd166451b"
+      },
+      "native_patch": {
+        "bytes": 55,
+        "commit": "93026ee24a9746799f41308278b15133b21ba51c",
+        "git_blob_oid": "fe2a1aa6e6ad83230f6f4a0e738a7b1104414dc3",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/tls6-retained-country-footprint/owner23013-1/candidate-native-patch.json",
+        "sha256": "2f58d1814b3ae83cf8df39c8d98e6d9467abb6b7e4606d9ae50dca0425075e13"
+      }
+    }
+  ]
+}

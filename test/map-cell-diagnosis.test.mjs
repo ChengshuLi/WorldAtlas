@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {diagnoseMapCell} from '../src/map-cell-diagnosis.js';
-import {measureCellFeatures, sourceFeatureId, sourceTransitions} from '../scripts/diagnose-map-cell.mjs';
+import {diagnoseCells, measureCellFeatures, sourceFeatureId, sourceTransitions} from '../scripts/diagnose-map-cell.mjs';
+import {mapCellSelectionFixture} from './fixtures/map-cell-selection.mjs';
 import {nativeRowLatitudes} from '../src/native-grid.js';
 
 const blank = () => ({effectiveOwner: {index: 0, id: null}, physicalEvidence: [],
@@ -151,4 +152,53 @@ test('a source-defined native boundary tie does not create an unassigned-cell ru
   assert.deepEqual(result.intended_location, location); assert.match(result.reasons.join(' '), /declared native sampling rule/);
   input.intendedLocations.push({...location, id: 'location:other', index: 8});
   assert.equal(diagnoseMapCell(input).location_status, 'unresolved');
+});
+
+
+test('actual diagnostic retains native indices while applying authenticated current source and owner parents', async t => {
+  const f = mapCellSelectionFixture(t);
+  const original = await diagnoseCells({repo: f.repo, commit: f.base, cells: f.cells});
+  const current = await diagnoseCells({repo: f.repo, commit: f.current, cells: f.cells});
+  for (const [i, report] of current.reports.entries()) {
+    assert.equal(report.effectiveOwner.id, 'A'); assert.equal(report.effectiveOwner.index, 1);
+    assert.equal(report.effectiveOwner.province_id, 'Q'); assert.equal(report.effectiveOwner.province_index, 2);
+    assert.deepEqual(report.diagnosis.current_owner, {id: 'A', index: 1, name: 'Source A'});
+    assert.equal(original.reports[i].effectiveOwner.province_id, 'P');
+    assert.deepEqual(report.effectiveOwner.bounds, f.owners[0].bounds);
+    assert.equal(report.lineage.native.first_owner, original.reports[i].lineage.native.first_owner);
+    assert.equal(report.lineage.selected.first_owner, 1); assert.equal(report.effectiveOwner.name, 'Source A');
+  }
+  const source = current.reports[0].lineage.selected.matches.find(row => row.id === 'A');
+  assert.equal(source.tags.parent_id, 'Q');
+  assert.deepEqual(source.tags.metadata.reference_corrections, f.currentFeatures[0].properties.metadata.reference_corrections);
+  assert.deepEqual(f.currentFeatures.map(row => row.geometry), f.features.map(row => row.geometry));
+  assert.equal(f.git('status', '--porcelain'), '');
+  f.git('reset', '--hard', f.base);
+  const nativeOnly = JSON.parse(f.git('show', f.base + ':data/ownership-selection.json'));
+  delete nativeOnly.additive_release; f.write('data/ownership-selection.json', nativeOnly);
+  const withoutAdditions = await diagnoseCells({repo: f.repo, commit: f.commit(), cells: f.cells});
+  assert.equal(withoutAdditions.reports[0].effectiveOwner.province_id, 'P');
+  assert.equal(withoutAdditions.reports[1].effectiveOwner.index, 0);
+});
+
+test('actual diagnostic rejects foreign native sidecars and unauthenticated or materially changed projections', async t => {
+  const f = mapCellSelectionFixture(t), run = commit => diagnoseCells({repo: f.repo, commit, cells: f.cells});
+  const foreignSidecar = structuredClone(f.sidecar); foreignSidecar.base_selection.release_id = 'geography:foreign';
+  f.write('data/ownership-selection.json', {...f.selection, additive_release: f.plain('inputs/sidecar.json', foreignSidecar)});
+  await assert.rejects(run(f.commit()), /Additive selection belongs to a different base/);
+  f.git('reset', '--hard', f.current);
+  f.write('inputs/projection.json', {...f.projection, reference: {...f.projection.reference, id: f.projection.reference.id.replace('current', 'changed')}});
+  await assert.rejects(run(f.commit()), /Whole immutable input differs/);
+  f.git('reset', '--hard', f.current);
+  const foreignProjection = {...f.projection, reference: {...f.projection.reference, id: 'geography:foreign'}};
+  f.write('data/ownership-selection.json', {...f.selection, reference_projection: f.plain('inputs/projection.json', foreignProjection)});
+  await assert.rejects(run(f.commit()), /Current reference metadata differs from the actual latest release/);
+  f.git('reset', '--hard', f.current);
+  const {reference_projection, ...unprojected} = f.selection; f.write('data/ownership-selection.json', unprojected);
+  await assert.rejects(run(f.commit()), /Native source differs from current selected geographic release/);
+  f.git('reset', '--hard', f.current);
+  const drift = structuredClone(f.currentFeatures); drift[0].geometry.coordinates[0][1][0] += 0.1;
+  f.write('data/geography/fixture.json', {type: 'FeatureCollection', features: drift}); const altered = f.commit();
+  f.projection.source_updates[0].after = f.pin('data/geography/fixture.json', altered);
+  await assert.rejects(run(f.project()), /geometry|Geometry/);
 });

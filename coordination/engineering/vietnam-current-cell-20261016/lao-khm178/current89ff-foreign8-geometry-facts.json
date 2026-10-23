@@ -1,0 +1,584 @@
+{
+  "accepted_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+  "complete_part_binding": "current89ff-part13-read-binding.json",
+  "features": [
+    {
+      "id": "gb:KHM:ADM2:14789045B80161198747042",
+      "name": "Peam Chor",
+      "parent_id": "framework:province:prey-veng:bf5951b5cf7d",
+      "reference_owner": "Cambodia",
+      "metadata": {
+        "source_id": "gb:KHM:ADM2",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KHM/ADM2/geoBoundaries-KHM-ADM2.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "2014",
+        "administrative_level": "ADM2",
+        "parent_source_level": "ADM1",
+        "granularity_version": 3,
+        "source_role": "District",
+        "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "14789045B80161198747042",
+        "representative_point": [
+          105.24963031561461,
+          11.04925
+        ],
+        "hierarchy_version": 4,
+        "hierarchy_source": "gb:KHM:ADM1",
+        "hierarchy_overlap": 0.992429,
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 3,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+        "original_geometry_sha256": "9fd1bb8fcf7f556bb88485f79eb762a22b5019734bdfe4643502a389d586e9dd",
+        "reference_version": 3,
+        "geographic_area_code": "CBD",
+        "geographic_region_code": 41,
+        "geographic_match": "largest source overlap",
+        "geographic_overlap": 0.94131,
+        "coverage_version": 1,
+        "semantic_version": 1,
+        "remote_version": 1,
+        "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "KHM-1790",
+          "overlap": 0.9054
+        },
+        "regional_match": {
+          "reference_iso": "KHM",
+          "source_id": "KHM-1790",
+          "overlap": 0.9054,
+          "method": "reference-territory-constrained overlap"
+        },
+        "reference_owner_id": "owner:Q424",
+        "reference_polity": "Cambodia",
+        "reference_polity_status": "reference",
+        "reference_polity_evidence": {
+          "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+          "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+          "reference_territory": "Cambodia",
+          "classification": "Sovereign country",
+          "note": null,
+          "uncertainty": false
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "Asia",
+          "decision_index": 1852,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "current89ff_geometry_equals_complete_original_consumed_geometry": false,
+      "current_geometry_json_sha256": "5464c9be6fa77a96568c0701e5d3abe252ef469685bfe6897403fbf4dd392242",
+      "original_geometry_json_sha256": "95b3cdf11acafb2fbf3f1b526d017873dcb88de1d3c0e730aa7f8510094d6085"
+    },
+    {
+      "id": "gb:KHM:ADM2:14789045B26681024602209",
+      "name": "Chantrea",
+      "parent_id": "framework:province:svay-rieng:a9b44d675a0b",
+      "reference_owner": "Cambodia",
+      "metadata": {
+        "source_id": "gb:KHM:ADM2",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KHM/ADM2/geoBoundaries-KHM-ADM2.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "2014",
+        "administrative_level": "ADM2",
+        "parent_source_level": "ADM1",
+        "granularity_version": 3,
+        "source_role": "District",
+        "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "14789045B26681024602209",
+        "representative_point": [
+          106.0910262158007,
+          10.92025
+        ],
+        "hierarchy_version": 4,
+        "hierarchy_source": "gb:KHM:ADM1",
+        "hierarchy_overlap": 0.99953,
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 2,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+        "original_geometry_sha256": "3d2faf63b81d13d4ff987f462e9d9a674067342ee0a3979b14207f62dbb0dde7",
+        "reference_version": 3,
+        "geographic_area_code": "CBD",
+        "geographic_region_code": 41,
+        "geographic_match": "largest source overlap",
+        "geographic_overlap": 0.89934,
+        "coverage_version": 1,
+        "semantic_version": 1,
+        "remote_version": 1,
+        "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "KHM-1801",
+          "overlap": 0.836686
+        },
+        "regional_match": {
+          "reference_iso": "KHM",
+          "source_id": "KHM-1801",
+          "overlap": 0.836686,
+          "method": "reference-territory-constrained overlap"
+        },
+        "reference_owner_id": "owner:Q424",
+        "reference_polity": "Cambodia",
+        "reference_polity_status": "reference",
+        "reference_polity_evidence": {
+          "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+          "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+          "reference_territory": "Cambodia",
+          "classification": "Sovereign country",
+          "note": null,
+          "uncertainty": false
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "Asia",
+          "decision_index": 2160,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "current89ff_geometry_equals_complete_original_consumed_geometry": false,
+      "current_geometry_json_sha256": "dc2fa02d01fc3673877b4fdc204f941f42e0643dd1f621a8b6b98e88c236906e",
+      "original_geometry_json_sha256": "0f7fede52891d35cecca16a549b7b80cd798cd0a4dfcdf2a05ca6364d4bd2b69"
+    },
+    {
+      "id": "gb:KHM:ADM2:14789045B36806562781005",
+      "name": "Memot",
+      "parent_id": "framework:province:tbong-khmum:42aff336f7fc",
+      "reference_owner": "Cambodia",
+      "metadata": {
+        "source_id": "gb:KHM:ADM2",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KHM/ADM2/geoBoundaries-KHM-ADM2.geojson",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "reference_year": "2014",
+        "administrative_level": "ADM2",
+        "parent_source_level": "ADM1",
+        "granularity_version": 3,
+        "source_role": "District",
+        "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "14789045B36806562781005",
+        "representative_point": [
+          106.2185214090322,
+          11.91825
+        ],
+        "hierarchy_version": 4,
+        "hierarchy_source": "gb:KHM:ADM1",
+        "hierarchy_overlap": 0.993689,
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 3,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+        "original_geometry_sha256": "980f7567b3cbe44e0f0d4060f890aae0ddc6a15b53fd9b8006ec19247cac761d",
+        "reference_version": 3,
+        "geographic_area_code": "CBD",
+        "geographic_region_code": 41,
+        "geographic_match": "largest source overlap",
+        "geographic_overlap": 0.96705,
+        "coverage_version": 1,
+        "semantic_version": 1,
+        "remote_version": 1,
+        "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "KHM-1784",
+          "overlap": 0.937008
+        },
+        "regional_match": {
+          "reference_iso": "KHM",
+          "source_id": "KHM-1784",
+          "overlap": 0.937008,
+          "method": "reference-territory-constrained overlap"
+        },
+        "reference_owner_id": "owner:Q424",
+        "reference_polity": "Cambodia",
+        "reference_polity_status": "reference",
+        "reference_polity_evidence": {
+          "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+          "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+          "reference_territory": "Cambodia",
+          "classification": "Sovereign country",
+          "note": null,
+          "uncertainty": false
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "Asia",
+          "decision_index": 2216,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "current89ff_geometry_equals_complete_original_consumed_geometry": false,
+      "current_geometry_json_sha256": "5a1b75aea917cd72f5c32f715c5326c8afb86359e1cce29c058c48cf927ec83c",
+      "original_geometry_json_sha256": "25336a3f99730b8324feea6c8d712e4e4eac119079ee48ca1865ca0892254052"
+    },
+    {
+      "id": "gb:LAO:ADM2:54806243B33031915083472",
+      "name": "Dakcheung",
+      "parent_id": "framework:province:xekong:c86f7f164d20",
+      "reference_owner": "Lao People's Democratic Republic",
+      "metadata": {
+        "source_id": "gb:LAO:ADM2",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/LAO/ADM2/geoBoundaries-LAO-ADM2.geojson",
+        "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+        "reference_year": "2019",
+        "administrative_level": "ADM2",
+        "parent_source_level": "ADM1",
+        "granularity_version": 3,
+        "source_role": "Districts",
+        "selection_reason": "Named Districts territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "54806243B33031915083472",
+        "representative_point": [
+          107.30333914750958,
+          15.386827777777768
+        ],
+        "hierarchy_version": 4,
+        "hierarchy_source": "gb:LAO:ADM1",
+        "hierarchy_overlap": 0.996242,
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 3,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+        "original_geometry_sha256": "93395116cde6551b4714f374ba76d01c65b327e9a6b3ad241ac194ac1e04d547",
+        "reference_version": 3,
+        "geographic_area_code": "LAO",
+        "geographic_region_code": 41,
+        "geographic_match": "largest source overlap",
+        "geographic_overlap": 0.95276,
+        "coverage_version": 1,
+        "semantic_version": 1,
+        "remote_version": 1,
+        "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "LAO-3295",
+          "overlap": 0.926583
+        },
+        "regional_match": {
+          "reference_iso": "LAO",
+          "source_id": "LAO-3295",
+          "overlap": 0.926583,
+          "method": "reference-territory-constrained overlap"
+        },
+        "reference_owner_id": "owner:Q819",
+        "reference_polity": "Laos",
+        "reference_polity_status": "reference",
+        "reference_polity_evidence": {
+          "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+          "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+          "reference_territory": "Laos",
+          "classification": "Sovereign country",
+          "note": null,
+          "uncertainty": false
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "Asia",
+          "decision_index": 2367,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "current89ff_geometry_equals_complete_original_consumed_geometry": false,
+      "current_geometry_json_sha256": "22ddd7e77c81f742c0695f54e44e81de5d56b0add7025d08f435bcb47d40d11d",
+      "original_geometry_json_sha256": "7c3c6d4f92603720c67c24a20202cfba5eedf9672e33aa7b23667de3a877235a"
+    },
+    {
+      "id": "gb:LAO:ADM2:54806243B58703699561211",
+      "name": "May",
+      "parent_id": "framework:province:phongsaly:a7b93e7a076f",
+      "reference_owner": "Lao People's Democratic Republic",
+      "metadata": {
+        "source_id": "gb:LAO:ADM2",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/LAO/ADM2/geoBoundaries-LAO-ADM2.geojson",
+        "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+        "reference_year": "2019",
+        "administrative_level": "ADM2",
+        "parent_source_level": "ADM1",
+        "granularity_version": 3,
+        "source_role": "Districts",
+        "selection_reason": "Named Districts territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "54806243B58703699561211",
+        "representative_point": [
+          102.72710817924224,
+          21.420078325415677
+        ],
+        "hierarchy_version": 4,
+        "hierarchy_source": "gb:LAO:ADM1",
+        "hierarchy_overlap": 0.994402,
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 3,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+        "original_geometry_sha256": "50fb82f4fc9396c2fbbfdc23fb6e1229019bce4b3c0d726c73a0424db45797e1",
+        "reference_version": 3,
+        "geographic_area_code": "LAO",
+        "geographic_region_code": 41,
+        "geographic_match": "largest source overlap",
+        "geographic_overlap": 0.9471,
+        "coverage_version": 1,
+        "semantic_version": 1,
+        "remote_version": 1,
+        "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "LAO-3291",
+          "overlap": 0.931904
+        },
+        "regional_match": {
+          "reference_iso": "LAO",
+          "source_id": "LAO-3291",
+          "overlap": 0.931904,
+          "method": "reference-territory-constrained overlap"
+        },
+        "reference_owner_id": "owner:Q819",
+        "reference_polity": "Laos",
+        "reference_polity_status": "reference",
+        "reference_polity_evidence": {
+          "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+          "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+          "reference_territory": "Laos",
+          "classification": "Sovereign country",
+          "note": null,
+          "uncertainty": false
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "Asia",
+          "decision_index": 1831,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "current89ff_geometry_equals_complete_original_consumed_geometry": false,
+      "current_geometry_json_sha256": "690e76d7260e27c05b955840008cc3f3b25edd3f724987f432437d8f1964590b",
+      "original_geometry_json_sha256": "d3df1b02f1352a995dbb153d1cc85683509712b88da0353561cd73ad69ae4ed6"
+    },
+    {
+      "id": "gb:LAO:ADM2:54806243B20736296010663",
+      "name": "Sopbao",
+      "parent_id": "framework:province:houaphan:bb6cb57c3301",
+      "reference_owner": "Lao People's Democratic Republic",
+      "metadata": {
+        "source_id": "gb:LAO:ADM2",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/LAO/ADM2/geoBoundaries-LAO-ADM2.geojson",
+        "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+        "reference_year": "2019",
+        "administrative_level": "ADM2",
+        "parent_source_level": "ADM1",
+        "granularity_version": 3,
+        "source_role": "Districts",
+        "selection_reason": "Named Districts territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "54806243B20736296010663",
+        "representative_point": [
+          104.39070523300228,
+          20.65
+        ],
+        "hierarchy_version": 4,
+        "hierarchy_source": "gb:LAO:ADM1",
+        "hierarchy_overlap": 0.986539,
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 4,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+        "original_geometry_sha256": "56ad4349174114aebd7852793ff30fc7b7eb772e5a655ebca0e3b8e4c0d360c3",
+        "reference_version": 3,
+        "geographic_area_code": "LAO",
+        "geographic_region_code": 41,
+        "geographic_match": "largest source overlap",
+        "geographic_overlap": 0.97418,
+        "coverage_version": 1,
+        "semantic_version": 1,
+        "remote_version": 1,
+        "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "LAO-3288",
+          "overlap": 0.899517
+        },
+        "regional_match": {
+          "reference_iso": "LAO",
+          "source_id": "LAO-3288",
+          "overlap": 0.899517,
+          "method": "reference-territory-constrained overlap"
+        },
+        "reference_owner_id": "owner:Q819",
+        "reference_polity": "Laos",
+        "reference_polity_status": "reference",
+        "reference_polity_evidence": {
+          "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+          "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+          "reference_territory": "Laos",
+          "classification": "Sovereign country",
+          "note": null,
+          "uncertainty": false
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "Asia",
+          "decision_index": 1111,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "current89ff_geometry_equals_complete_original_consumed_geometry": false,
+      "current_geometry_json_sha256": "490014c123c984151f4cab685c5e7e20ff8ebea57d9aeeed1f6b3b50446b200b",
+      "original_geometry_json_sha256": "879120d4c0ed4bc64684d3dcc225374b3baf50eaa093c7198d7e96fdd8bc750b"
+    },
+    {
+      "id": "gb:LAO:ADM2:54806243B54136616884271",
+      "name": "Viengxay",
+      "parent_id": "framework:province:houaphan:bb6cb57c3301",
+      "reference_owner": "Lao People's Democratic Republic",
+      "metadata": {
+        "source_id": "gb:LAO:ADM2",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/LAO/ADM2/geoBoundaries-LAO-ADM2.geojson",
+        "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+        "reference_year": "2019",
+        "administrative_level": "ADM2",
+        "parent_source_level": "ADM1",
+        "granularity_version": 3,
+        "source_role": "Districts",
+        "selection_reason": "Named Districts territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "54806243B54136616884271",
+        "representative_point": [
+          104.28689479676815,
+          20.38945
+        ],
+        "hierarchy_version": 4,
+        "hierarchy_source": "gb:LAO:ADM1",
+        "hierarchy_overlap": 0.997097,
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 3,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+        "original_geometry_sha256": "d7ce876f2620ef328248d2502a4aa4eb84168267b7ee990446543065661b61b0",
+        "reference_version": 3,
+        "geographic_area_code": "LAO",
+        "geographic_region_code": 41,
+        "geographic_match": "largest source overlap",
+        "geographic_overlap": 0.92225,
+        "coverage_version": 1,
+        "semantic_version": 1,
+        "remote_version": 1,
+        "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "LAO-3288",
+          "overlap": 0.943658
+        },
+        "regional_match": {
+          "reference_iso": "LAO",
+          "source_id": "LAO-3288",
+          "overlap": 0.943658,
+          "method": "reference-territory-constrained overlap"
+        },
+        "reference_owner_id": "owner:Q819",
+        "reference_polity": "Laos",
+        "reference_polity_status": "reference",
+        "reference_polity_evidence": {
+          "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+          "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+          "reference_territory": "Laos",
+          "classification": "Sovereign country",
+          "note": null,
+          "uncertainty": false
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "Asia",
+          "decision_index": 1111,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "current89ff_geometry_equals_complete_original_consumed_geometry": false,
+      "current_geometry_json_sha256": "e308c4a9e9a9ced885c805fde2d6368c5983cbebb722a0b0f3639bd4c968a88b",
+      "original_geometry_json_sha256": "92d7d67c7f0c2375ad77ad5d6ba602196ad70def3f0d42acb941ade46431dfbe"
+    },
+    {
+      "id": "gb:LAO:ADM2:54806243B53408209397741",
+      "name": "Xamtay",
+      "parent_id": "framework:province:houaphan:bb6cb57c3301",
+      "reference_owner": "Lao People's Democratic Republic",
+      "metadata": {
+        "source_id": "gb:LAO:ADM2",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/LAO/ADM2/geoBoundaries-LAO-ADM2.geojson",
+        "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+        "reference_year": "2019",
+        "administrative_level": "ADM2",
+        "parent_source_level": "ADM1",
+        "granularity_version": 3,
+        "source_role": "Districts",
+        "selection_reason": "Named Districts territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "54806243B53408209397741",
+        "representative_point": [
+          104.51333050781588,
+          19.98622877914773
+        ],
+        "hierarchy_version": 4,
+        "hierarchy_source": "gb:LAO:ADM1",
+        "hierarchy_overlap": 0.996029,
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 4,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+        "original_geometry_sha256": "5f631f8986df7db00f7131d015cc92a29ed7248f9930c16e32d71ea8015c34bf",
+        "reference_version": 3,
+        "geographic_area_code": "LAO",
+        "geographic_region_code": 41,
+        "geographic_match": "largest source overlap",
+        "geographic_overlap": 0.99182,
+        "coverage_version": 1,
+        "semantic_version": 1,
+        "remote_version": 1,
+        "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "LAO-3288",
+          "overlap": 0.947643
+        },
+        "regional_match": {
+          "reference_iso": "LAO",
+          "source_id": "LAO-3288",
+          "overlap": 0.947643,
+          "method": "reference-territory-constrained overlap"
+        },
+        "reference_owner_id": "owner:Q819",
+        "reference_polity": "Laos",
+        "reference_polity_status": "reference",
+        "reference_polity_evidence": {
+          "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+          "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+          "reference_territory": "Laos",
+          "classification": "Sovereign country",
+          "note": null,
+          "uncertainty": false
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "Asia",
+          "decision_index": 1111,
+          "evidence_file": "geographic-decisions"
+        }
+      },
+      "current89ff_geometry_equals_complete_original_consumed_geometry": false,
+      "current_geometry_json_sha256": "23f7b442f0aa434e04fd308558225b57a922b48a70f35234d7c406d95d9c9c12",
+      "original_geometry_json_sha256": "9b9315e95e363b3e639680282a2e006f34b98ec3285a079fb92f8f3505454c93"
+    }
+  ],
+  "spatial_predicate_rerun": false,
+  "limit": "Exact current map geometry byte-value comparison only, no currentbank gridzero check."
+}

@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "baseline_definition_reproduced_failure": true,
+  "current_definition_isolated_consumer_passed": true,
+  "consumer": "readGeographicReleaseManifest through actual runPackageBuild isolated source image",
+  "original_commit": "cbae0744df211592c69eeebfa48eacaeb9a8bae2",
+  "whole_consumed_inputs": [
+    {
+      "path": "data/geographic-releases/index.json",
+      "bytes": 225846,
+      "sha256": "f7d2fd73cdffa5e73ed68033f3c97732a106423106c9a21315c3365187feeebd"
+    },
+    {
+      "path": "data/geographic-releases/current-manifest.json",
+      "bytes": 207,
+      "sha256": "29eb01a7a4bea330198ae68e20d6eddfc2a9cd1da2d877b83e898427e26bbc67"
+    },
+    {
+      "path": "data/geographic-releases/releases-v10-gzip.json.gz",
+      "bytes": 273920,
+      "sha256": "0ed0a6c5ef27a13cf0c79709c4201adcfb7c24e4ed716356f879ef14ceefe8da"
+    }
+  ],
+  "current_release": "geography:review:211cb423e8c3bdcb3cbe88a4327fbd47eb10ccb61cd0ca4b884ed376564e7718",
+  "release_count": 10,
+  "manifest_batch_descriptors": 3816,
+  "materialized_source_bytes": 741847,
+  "limits": [
+    "This exact failure-boundary control reads the complete pointer/index/current-release manifest; it does not rerun the full application/database/build/picker or materialize every historical batch.",
+    "No scientific producer or metadata installer was executed."
+  ],
+  "package_source_delta": {
+    "before_release_files": 3,
+    "before_release_bytes": 463478,
+    "after_release_files": 3487,
+    "after_release_bytes": 221482525,
+    "added_release_files": 3484,
+    "added_release_bytes": 221019047,
+    "package_definition_byte_delta": -116,
+    "only_ordinary_json_products": true,
+    "old_inputs": [
+      {
+        "path": "data/geographic-releases/current-manifest.json",
+        "mode": "100644",
+        "kind": "blob",
+        "git_blob_oid": "ac1dc464d1dfb1e0503c4e78994baca4d09186fd",
+        "bytes": 207
+      },
+      {
+        "path": "data/geographic-releases/index.json",
+        "mode": "100644",
+        "kind": "blob",
+        "git_blob_oid": "81dbce3155eda45c4d90bf9a54c9a380b87120eb",
+        "bytes": 225846
+      },
+      {
+        "path": "data/geographic-releases/releases-v9.json.gz",
+        "mode": "100644",
+        "kind": "blob",
+        "git_blob_oid": "e5a11f41c4d91982bf30aac0d162ebb3019f4ec9",
+        "bytes": 237425
+      }
+    ],
+    "total_package_source_byte_delta": 221018931
+  },
+  "failed_run": 38896614847,
+  "failed_job": 116958749745,
+  "failed_log_sha256": "837387f22307a66675e524adf546feaa787e8e2b7c7ae7668c45a63d76cb2292",
+  "focused_tests": {
+    "tests": 21,
+    "passed": 21,
+    "failed": 0,
+    "skipped": 0,
+    "command": "node --test test/package-geographic-releases.test.mjs test/geographic-release-manifest.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs"
+  },
+  "repair": "Replace three explicit geographic release filenames with the stable data/geographic-releases/ input directory. Preserve every existing canonical/source/scientific delivery body.",
+  "actual_directory_materialization_limit": "A full historical directory archive attempt stopped on an unavailable old promisor object; it was not substituted for the successful exact three-body manifest consumer check. Full application/build/picker remains the hosted integration gate.",
+  "local_test_setup": "Initial expanded test run lacked three unchanged sparse fixture files. Restored their exact HEAD bytes and reran all21 controls successfully."
+}

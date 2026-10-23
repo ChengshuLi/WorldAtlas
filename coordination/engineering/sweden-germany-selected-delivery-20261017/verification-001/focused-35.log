@@ -1,0 +1,43 @@
+✔ modern compact config resolves exact full pins and preserves legacy objects and canonical outputs (789.719553ms)
+✔ cold CLI emits identical final products and resumes compact configuration exactly (1247.767364ms)
+✔ compact form refuses mixed full pins, existing sidecar and handwritten locator descriptors (283.320696ms)
+✔ wrong commit, wrong path, missing product and changed product hash fail before writes (1471.595234ms)
+✔ delivery finalizer satisfies actual append-only selected-data classifier and rejects global sorting (11.559977ms)
+✔ canonical originals remain in the candidate while absent historical roles require explicit exact restoration (2497.468573ms)
+✔ actual CLI checks complete mixed assigned/zero-cell cohort, every new cell and stable rows (236.15191ms)
+✔ actual CLI admits an exact 34920857-byte emitted ledger and refuses whole-file drift (889.438677ms)
+✔ smoke rejects wrong ledger hash without creating output (23.113155ms)
+✔ smoke rejects wrong cumulative count without creating output (138.194368ms)
+✔ smoke rejects duplicate member without creating output (18.180165ms)
+✔ smoke rejects missing member without creating output (18.161767ms)
+✔ smoke rejects duplicate roster without creating output (18.590529ms)
+✔ smoke rejects duplicate batch without creating output (19.832072ms)
+✔ smoke rejects wrong target without creating output (103.701228ms)
+✔ smoke rejects wrong disposition without creating output (83.579944ms)
+✔ smoke rejects wrong geometry without creating output (71.221449ms)
+✔ smoke rejects empty cohorts without creating output (15.553785ms)
+✔ smoke rejects undeclared field without creating output (14.733411ms)
+✔ actual kernel rejects missing/duplicate selected rows, target drift and omitted effective primitive (365.293601ms)
+✔ saved before-state controls reject real owner mutation without changing added cells (220.849846ms)
+✔ current base controls use every affected occupied row and a nonvacuous fallback (84.433234ms)
+✔ actual loaded target custody agrees with the current pinned roster (64.722619ms)
+✔ actual loader rejects additions over already occupied native cells (50.15395ms)
+✔ whole-file checks reject corrupted assets, absent assets, path traversal and symlinks (157.472624ms)
+✔ every output collision and symlink rejects before work and preserves originals (60.098975ms)
+✔ CLI fails on missing required arguments and duplicate/unknown options (335.185782ms)
+✔ genuine startup native descriptor without encoded bytes passes with actual whole-file hash and size (134.932417ms)
+✔ genuine startup native descriptor still rejects wrong encoded SHA and missing selected custody bytes (81.426981ms)
+✔ actual emitted smoke keeps distinct authority pointsets with the same original component label (164.612326ms)
+✔ actual CLI authenticates derived gzip against unchanged selected science and all native cells (209.54894ms)
+✔ emitted gzip refuses changed source identity, encoded bytes, decoded bytes and semantic envelope (25.878688ms)
+✔ shared full-output consumer authenticates actual cells without inventing reviewed expectations, gzip=false (175.270258ms)
+✔ shared full-output consumer authenticates actual cells without inventing reviewed expectations, gzip=true (178.44346ms)
+✔ selected-map CLI and kernel still require independent expectations (17.706028ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6429.534333

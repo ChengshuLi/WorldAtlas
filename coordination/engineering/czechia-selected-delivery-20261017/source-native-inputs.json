@@ -1,0 +1,62 @@
+{
+  "packages": [
+    {
+      "country": "Czechia",
+      "original_cells": 3934,
+      "supported_cells": 3786,
+      "held_cells": 148,
+      "quartets": [
+        {
+          "rule_preimage": {
+            "commit": "cb333f83bd9996cc1f685a36c87872b8aea21a16",
+            "path": "coordination/engineering/czechia-original-repair-20261017/native-authority-001/original-rule-preimage.json",
+            "mode": "100644",
+            "git_blob_oid": "a5c7492461b88908d56e8a8ba1095b36e12e3f11",
+            "bytes": 737,
+            "sha256": "b2ab6630aaa62bd226a3cb20c5213658b65361f7e4aae5b4fcc40e62e84e14fe"
+          },
+          "source_authority": {
+            "commit": "cb333f83bd9996cc1f685a36c87872b8aea21a16",
+            "path": "coordination/engineering/czechia-original-repair-20261017/native-authority-001/authority-binding.json",
+            "mode": "100644",
+            "git_blob_oid": "da6b7667423bab454849014f79eefdc4a4fb5469",
+            "bytes": 740,
+            "sha256": "f727ae8f3ed619bbc448fe8fd05f41215e8df8c6d2a4715f58e6303039ecb8d7"
+          },
+          "ledger": {
+            "commit": "cb333f83bd9996cc1f685a36c87872b8aea21a16",
+            "path": "coordination/engineering/czechia-original-repair-20261017/native-authority-001/constructor-result.json",
+            "mode": "100644",
+            "git_blob_oid": "bc3a00ddb0bbf4418e1c9885778645d4304f2ae0",
+            "bytes": 157849,
+            "sha256": "8ab0850c7e1d07db14fbaf3d0becb3e092b027c05034d2fab4b7c80ff272aedc"
+          },
+          "native_patch": {
+            "bytes": 51219,
+            "commit": "01dc1386510aef197ae6f1bfd6c59b92c114e810",
+            "git_blob_oid": "c886a407c98433e69bd919a3b3310da2560e5e23",
+            "mode": "100644",
+            "path": "coordination/engineering/czechia-original-repair-20261017/supported-inputs-001/native-patch.json",
+            "sha256": "9adbc1fd70c306b6a8a734091e67611ccf03d33d202aba63904f801b000d92c0"
+          }
+        }
+      ],
+      "original_patch": {
+        "commit": "cb333f83bd9996cc1f685a36c87872b8aea21a16",
+        "path": "coordination/engineering/czechia-original-repair-20261017/source-stage-001/original-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "4e5ad81dc59ffa391a43515591990f3f1b79408b",
+        "bytes": 53082,
+        "sha256": "277d03235d505957a29f793228eb354eb365c12f6a58b9a2628f8f513d9308e6"
+      },
+      "literal_holds": {
+        "commit": "cb333f83bd9996cc1f685a36c87872b8aea21a16",
+        "path": "coordination/engineering/czechia-original-repair-20261017/supported-inputs-001/held-original.json",
+        "mode": "100644",
+        "git_blob_oid": "2540f1c9a5a064e83e505cc55be18b64c18b161b",
+        "bytes": 7825,
+        "sha256": "9d28f979944e19ca46bb6713836eca6a5df9a79f2e6c1b3c017ef2abc2e55282"
+      }
+    }
+  ]
+}

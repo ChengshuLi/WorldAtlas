@@ -339,11 +339,13 @@ def collection_state(p, members):
             'unknown_member_ids': [r['member_id'] for r in rows if r['point_state'] == 'unknown']}
 
 
-def diagnose(root, request):
+def _diagnose_with_inputs(root, request):
+    """Keep this invocation's authenticated operands for its crossing reader."""
     result = {'helper_version': VERSION, 'kind': 'symbolic-original-source-point-diagnostic',
               'geometry_acceptance': 'not-assessed', 'limits': LIMITS, 'points': []}
+    prepared = None
     if not isinstance(request, dict):
-        return dict(result, status='invalid', reason='malformed-request')
+        return dict(result, status='invalid', reason='malformed-request'), prepared
     result['declared_collections'] = request.get('collections')
     try:
         prepared, custody = read_inputs(Path(root), request)
@@ -379,4 +381,8 @@ def diagnose(root, request):
             result['points'].append(row)
     except DiagnosticError as error:
         result.update(status=error.status, reason=error.reason)
-    return result
+    return result, prepared
+
+
+def diagnose(root, request):
+    return _diagnose_with_inputs(root, request)[0]

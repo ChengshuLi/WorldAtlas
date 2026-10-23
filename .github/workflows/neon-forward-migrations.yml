@@ -10,11 +10,23 @@ on:
         required: true
         default: verify-only
         type: choice
-        options: [verify-only, production, rehearsal]
+        options: [verify-only, production, rehearsal, geography-verify, geography-production]
+
+      publication_deployment_id:
+        description: Existing exact geography publication operation and bounded read-only window
+        type: string
+        required: false
+
+      window_comment_id:
+        description: Fresh publisher window for an operation with current native capture
+        type: string
+        required: false
 
 permissions:
   contents: read
   actions: read
+  issues: read
+  deployments: read
 
 concurrency:
   group: neon-storage-owner-maintenance
@@ -22,9 +34,11 @@ concurrency:
 
 jobs:
   forward:
-    if: github.repository == 'ChengshuLi/WorldAtlas'
+    if: github.repository == 'ChengshuLi/WorldAtlas' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # Geography includes four ordered releases, verification and the public build.
+    # This execution budget does not extend the separately checked owner window.
+    timeout-minutes: ${{ inputs.mode == 'geography-production' && 120 || 30 }}
     steps:
       - name: Checkout exact reviewed operation
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
@@ -40,15 +54,19 @@ jobs:
         run: |
           [ "$EVENT_NAME" = workflow_dispatch ] || exit 1
           case "$REQUESTED_MODE" in
-            rehearsal|production|verify-only) mode="$REQUESTED_MODE" ;;
+            rehearsal|production|verify-only|geography-verify|geography-production) mode="$REQUESTED_MODE" ;;
             *) exit 1 ;;
           esac
           operation=.github/operations/neon-forward-rehearsal.json
           if [ "$mode" != rehearsal ]; then
             operation=.github/operations/neon-forward-production.json
           fi
+          if [[ "$mode" == geography-* ]]; then
+            operation=.github/operations/neon-geographic-production.json
+          fi
           echo "mode=$mode" >> "$GITHUB_OUTPUT"
           echo "file=$operation" >> "$GITHUB_OUTPUT"
+          echo "package=worldatlas-public-$GITHUB_SHA-$(sha256sum "$operation" | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
       - name: Set up Node 24
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
@@ -61,9 +79,61 @@ jobs:
           NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
           NEON_PROJECT_ID: ${{ vars.NEON_PROJECT_ID }}
           GITHUB_TOKEN: ${{ github.token }}
+          PUBLICATION_DEPLOYMENT_ID: ${{ inputs.publication_deployment_id }}
+          WINDOW_COMMENT_ID: ${{ inputs.window_comment_id }}
           FORWARD_MODE: ${{ steps.operation.outputs.mode }}
           FORWARD_OPERATION: ${{ steps.operation.outputs.file }}
         run: node scripts/neon-forward-migrations.mjs "$FORWARD_MODE" "$FORWARD_OPERATION"
+      - name: Reuse exact already-built public package if retained
+        id: retained
+        if: steps.operation.outputs.mode == 'geography-production'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PACKAGE_NAME: ${{ steps.operation.outputs.package }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "found=false" >> "$GITHUB_OUTPUT"
+          # Same accepted source, exact operation, same owner workflow only.
+          # Do not infer a failed run means its completed package was lost.
+          gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/neon-forward-migrations.yml/runs?event=workflow_dispatch&branch=main&head_sha=$GITHUB_SHA&per_page=100" > "$RUNNER_TEMP/publication-runs.json"
+          for run in $(jq -r --arg head "$GITHUB_SHA" '.[] | .workflow_runs[] | select(.head_sha==$head and .event=="workflow_dispatch" and .head_branch=="main") | .id' "$RUNNER_TEMP/publication-runs.json"); do
+            gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/runs/$run/artifacts?per_page=100" > "$RUNNER_TEMP/publication-artifacts.json"
+            if jq -e --arg name "$PACKAGE_NAME" '.[] | .artifacts[] | select(.name==$name and .expired==false)' "$RUNNER_TEMP/publication-artifacts.json" >/dev/null; then
+              gh run download "$run" --repo "$GITHUB_REPOSITORY" --name "$PACKAGE_NAME" --dir "$RUNNER_TEMP/publication-package"
+              mkdir -p dist .cache
+              cp -a "$RUNNER_TEMP/publication-package/dist/client" "$RUNNER_TEMP/publication-package/dist/cloudflare" dist/
+              cp "$RUNNER_TEMP/publication-package/.cache/cloudflare-publication.json" "$RUNNER_TEMP/publication-package/.cache/package-input-build.json" .cache/
+              echo "found=true" >> "$GITHUB_OUTPUT"
+              break
+            fi
+          done
+      - name: Set up Python for a genuinely new full public build
+        if: steps.operation.outputs.mode == 'geography-production' && steps.retained.outputs.found != 'true'
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install locked public-build Python inputs
+        if: steps.operation.outputs.mode == 'geography-production' && steps.retained.outputs.found != 'true'
+        run: python -m pip install -r requirements.txt
+      - name: Verify the exact pair before building or reusing its public package
+        if: steps.operation.outputs.mode == 'geography-production'
+        env:
+          ATLAS_PUBLIC_READ_ONLY: '1'
+        run: node scripts/build-cloudflare.mjs --publication > "$RUNNER_TEMP/public-package-result.json"
+      - name: Preserve the exact public package for same-pair deployment and resume
+        if: steps.operation.outputs.mode == 'geography-production' && steps.retained.outputs.found != 'true'
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: ${{ steps.operation.outputs.package }}
+          path: |
+            dist/client/
+            dist/cloudflare/
+            .cache/cloudflare-publication.json
+            .cache/package-input-build.json
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14
       - name: Preserve sanitized forward receipt
         if: always()
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
@@ -72,3 +142,12 @@ jobs:
           path: data/validation/neon-forward-migrations/
           if-no-files-found: error
           retention-days: 14
+      - name: Retain encrypted native backup and sanitized recovery receipts only
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: current-postgres-recovery-${{ github.run_id }}-${{ github.run_attempt }}
+          # Never upload private inventories or the plaintext native dump.
+          path: data/validation/current-postgres-recovery/public-receipts/
+          if-no-files-found: ignore
+          retention-days: 90

@@ -1,0 +1,193 @@
+{
+  "kind": "main-adopted-reviewed-dated-physical-answers",
+  "original_package": "gb-MMR-ADM3--physical-interpretation",
+  "source_scene": "S2A_47PMP_20200105_0_L2A",
+  "sensing_datetime": "2020-01-05T04:04:51.228000Z",
+  "decision": "Main explicitly adopts exactly original observation indices1823 and1824 as bounded dated terrestrial-body locations, with1824 vegetated settlement-edge wording. This is a non-additive two-key subset of the unchanged previously adopted2235 physical answers.",
+  "counts": {
+    "adopted_bounded_terrestrial_body_locations": 2,
+    "new_physical_answer_credit": 0,
+    "native_or_repair_credit": 0
+  },
+  "limits": [
+    "No whole150m-cell land extent, permanence, annual dry substrate, legal shoreline, new jurisdiction interval, causal GSHHG omission explanation or selected ownership is asserted.",
+    "1824 has visible vegetation at the exact pixel; surrounding settlement/body context supports body location, not an exposed/developed substrate claim.",
+    "The other2093 ground-cover keys were not substantively reviewed for typed terrestrial-body support in this task; water140 and unfinished558 remain excluded.",
+    "All source/member/competitor/negative/tie/territory and actual current-owner checks remain; narrow exterior omission precedence proposal is separate.",
+    "No actual original repair subset or native assignment count has been established."
+  ],
+  "records": [
+    {
+      "original_key": {
+        "owner": 30271,
+        "y": 122215,
+        "x": 202763
+      },
+      "centre_unchanged": {
+        "owner": 30271,
+        "y": 122215,
+        "x": 202763,
+        "longitude": 98.4299260773708,
+        "latitude": 12.085996589427584
+      },
+      "original_record_unchanged": {
+        "owner": 30271,
+        "y": 122215,
+        "x": 202763,
+        "original_interval_record": [
+          122215,
+          202763,
+          202764,
+          [
+            30271
+          ],
+          [
+            44893,
+            44955,
+            45111
+          ],
+          "source-relative"
+        ],
+        "original_interval_pointer": "/packages/2/rows/5845"
+      },
+      "original_source_array_index": 5845,
+      "original_request_record_index": 1831,
+      "plan_index": 1823,
+      "adopted_bounded_answer": true,
+      "category": "dated-terrestrial-body-location",
+      "source_review_kind": "supported bounded dated terrestrial-body location",
+      "actual_answer": "At the2020-01-05 acquisition the unchanged centre is on the visible developed coastal settlement body, on the landward side of the adjacent shore.",
+      "answer_dates": [
+        "2020-01-05T04:04:51.228000Z"
+      ],
+      "remaining_physical_question": null,
+      "review": {
+        "path": "developed-pair-substantive-review.json",
+        "record_index": 1823
+      },
+      "upstream_ground_cover_adoption": {
+        "commit": "af05531ab877884ef0fea7f5e7f4a5616540c8a7",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/adopted-dated-physical-answers.json",
+        "pointer": "/records/1823"
+      },
+      "original_source_member": {
+        "source_index": 45111,
+        "family_index": 218,
+        "source_id": "gb:MMR:ADM3:66882298B62167174305830",
+        "ordinal": 140,
+        "owners": [
+          30271
+        ],
+        "name": "Kyunsu",
+        "geometry_status": "raw-native-supported"
+      },
+      "original_interval_identity": {
+        "path": "original-myeik6564-request-intervals.json",
+        "pointer": "/1831",
+        "literal_record": {
+          "package_id": "gb-MMR-ADM3--physical-interpretation",
+          "family": 218,
+          "category": "physical-interpretation",
+          "y": 122215,
+          "start": 202763,
+          "end": 202764,
+          "physical": "source-relative",
+          "owners": [
+            30271
+          ],
+          "sids": [
+            44893,
+            44955,
+            45111
+          ]
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 30271,
+        "y": 122216,
+        "x": 202763
+      },
+      "centre_unchanged": {
+        "owner": 30271,
+        "y": 122216,
+        "x": 202763,
+        "longitude": 98.4299260773708,
+        "latitude": 12.084653847495268
+      },
+      "original_record_unchanged": {
+        "owner": 30271,
+        "y": 122216,
+        "x": 202763,
+        "original_interval_record": [
+          122216,
+          202763,
+          202764,
+          [
+            30271
+          ],
+          [
+            44893,
+            44955,
+            45111
+          ],
+          "source-relative"
+        ],
+        "original_interval_pointer": "/packages/2/rows/5846"
+      },
+      "original_source_array_index": 5846,
+      "original_request_record_index": 1832,
+      "plan_index": 1824,
+      "adopted_bounded_answer": true,
+      "category": "dated-terrestrial-body-location",
+      "source_review_kind": "supported bounded dated terrestrial-body location",
+      "actual_answer": "At the2020-01-05 acquisition the unchanged centre is on the vegetated southern edge of the same visible coastal settlement body, landward of the adjacent shore; the exact sampled pixel is not asserted to be a roof or bare developed material.",
+      "answer_dates": [
+        "2020-01-05T04:04:51.228000Z"
+      ],
+      "remaining_physical_question": null,
+      "review": {
+        "path": "developed-pair-substantive-review.json",
+        "record_index": 1824
+      },
+      "upstream_ground_cover_adoption": {
+        "commit": "af05531ab877884ef0fea7f5e7f4a5616540c8a7",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/adopted-dated-physical-answers.json",
+        "pointer": "/records/1824"
+      },
+      "original_source_member": {
+        "source_index": 45111,
+        "family_index": 218,
+        "source_id": "gb:MMR:ADM3:66882298B62167174305830",
+        "ordinal": 140,
+        "owners": [
+          30271
+        ],
+        "name": "Kyunsu",
+        "geometry_status": "raw-native-supported"
+      },
+      "original_interval_identity": {
+        "path": "original-myeik6564-request-intervals.json",
+        "pointer": "/1832",
+        "literal_record": {
+          "package_id": "gb-MMR-ADM3--physical-interpretation",
+          "family": 218,
+          "category": "physical-interpretation",
+          "y": 122216,
+          "start": 202763,
+          "end": 202764,
+          "physical": "source-relative",
+          "owners": [
+            30271
+          ],
+          "sids": [
+            44893,
+            44955,
+            45111
+          ]
+        }
+      }
+    }
+  ]
+}

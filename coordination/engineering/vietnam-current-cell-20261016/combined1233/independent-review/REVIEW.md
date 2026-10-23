@@ -1,0 +1,37 @@
+# Independent original 1,233 review
+
+Status: **ready for parent integration of exact candidate `afaac0b5d8dfc320f8f2a8fb81fddb25092094ae` on accepted b638. No material substantive finding or remaining review blocker.** The independent original-source, final-product and completed actual-consumer reviews pass. Parent/Main remains the sole merger.
+
+The closed roster is 141 LAO/KHM country-source repairs, 818 retained-body China-border repairs and 274 newly reconstructed whole-body China-border repairs. It comprises nine original qualified quartets, 41 original district targets and exactly 1,233 distinct original owner/y/x keys. The original constructor intervals and typed source support match those original cohorts exactly. The physical classes are 1,227 mapped-land support and six An Phu mapped-inland-water support. The Hồng Ngự three keys are included as the original finite three qualified land centres; their mixed whole-body and hierarchy contradiction witnesses remain, and this does not certify the whole owner.
+
+## Actual composed products
+
+Reviewed `native141-input-checkpoint/compose1233-b638-001/` from immutable output commit `83b0ea217908d57783e21c8d00458e51246e2e82`, against the actual accepted b638 selected ledger, registry and patch retained under `inputs/accepted-b638/coordination/engineering/indonesia-papua9580-20261015/delivery/`.
+
+Every one of the 281,915 accepted native assignments remains with the same owner. There are zero removed or changed assignments, including the accepted Papua additions, and no repeated patch position. The entire added assignment set equals the intended original 1,233-key set, giving 283,148 cells. All 691 accepted ledger rows and 83 accepted authority entries remain identical as complete objects; sorting changes their positions, so positional prefix comparison alone would be misleading. The candidate adds exactly 41 ledger rows and nine authorities, giving 732 rows and 92 authorities. Current targets, parent inventory and current rebind are identical, and the effective hierarchy reference is unchanged. No Cát Hải owner 48500 assignment is added.
+
+This comparison reads emitted data only. It does not rerun construction, geography, source production or the consumer. Exact findings and locators are in `actual-composition-semantic-review.json`; original key and physical-class context is in `expected-original1233-context.json`.
+
+The actual final canonical selection pins precisely the reviewed ledger, patch, registry and runtime envelope: their complete parsed bodies match the reviewed composition. Its base selection is unchanged. The only non-coordination changes versus accepted b638 are `.github/package-inputs.json` and `data/ownership-selection.json`; geography and hierarchy data are not changed. The finalization execution exited zero at 00:45:49 UTC. `actual-canonical-candidate-review.json` records the actual candidate inspection.
+
+All 41 new rows also preserve the complete original constructor row bodies: source target identity, whole base geometry, native rows, owner, source receipt and other original fields. Each retains its original constructor rule binding. This verifies the original emitted scientific identity beyond aggregate counts; details are in `actual-original-row-conservation.json`.
+
+## Source applicability and limits
+
+For the 141 LAO/KHM keys, the adopted finite source decision uses VNM GSO 2025 country location together with the complete LAO 2019 and KHM 2018 government country masks. It retains the original 2020 district targets, source atoms and parents; it does not backdate the country product as a 2020 survey or replace the district hierarchy. The other 37 original comparison keys are excluded. Six An Phu cells remain inland-water support.
+
+For the 1,092 China-border keys, the official World Polygons 11.4 product is used with its matching LSIB 11.4 lineage and the finite source applicability decision. The whole official China polygon's remote self-intersection, four-decimal coordinate precision and observed local displacement remain explicit. The retained unchanged whole-mask native comparison agreed at all 1,506 original centres; that comparison is not a certificate of global polygon validity or a positional accuracy bound. The 118 contrary OSM results are retained, including 92 in the 818 cohort and 26 in the 274 cohort. Adverse China-only, maritime, overlap and gap partitions are excluded. Foreign ADM1 SID 15319 supplies no selectable county owner.
+
+The 274 support is whole consumed original geometry for the five original target districts, with the original target and parent identities retained. The GSHHG physical support has heterogeneous source vintages: it is source-relative land/water support, not a dated 2020 image, current river survey or legal national boundary. Official country membership does not itself supply physical land/water evidence.
+
+The exact dated 671 support body is committed at `coordination/engineering/vietnam-current-cell-20261014/dated-centre-support/cathai671-land-support-v1.json`: 300,759 bytes and 671 records. It is reviewed evidence input only, outside the 1,233 runtime package inputs. It supplies no 671 patch, authority, parent correction or hierarchy change. The actual consumer must retain that limited role.
+
+## Completed actual consumer
+
+Actual `consumer1233-b638-002` ran against exact candidate `afaac0b5` and accepted baseline `b6382262f8d03d9e7d33b26d8adb40a55197262b`, from 00:50:16 to 01:14:28 UTC. It exited zero after 1,451.975 seconds with zero stderr bytes, `status: no-new-native-loss`, zero lost or reassigned cells and no failure intervals. Its final selected release matches the reviewed canonical selection. It executed the accepted runtime, not candidate code.
+
+All 21,712 selected patch rows occur exactly once in both baseline and candidate phase row sets across 41 phases. The completed actual application therefore passed the accepted `selectedAdditiveRows` guard against overlap with preexisting assigned native cells throughout the selected patch; no new assignment overwrites an assigned native cell. The 41 visibility witnesses exactly cover the 41 added components, and each witness is an intended original key with previous owner zero and the correct new owner. These 41 witnesses are component visibility checks, not 1,233 independent physical observations or an all-cell query count.
+
+The consumer preserves 83 authorities and appends nine. Its 683 preserved active components are distinct from the 691 full accepted ledger rows independently compared above; neither quantity is relabelled as the other. The independently read complete patch preserves 281,915 accepted assignments and adds exactly 1,233, yielding 283,148. The source applicability, original whole-body identity, physical-class distinctions and source limits were reviewed separately; the owner-conservation consumer alone does not approve scientific authority or sub-cell polygon coverage.
+
+`FINAL-actual-consumer-review.json` records the completed findings and actual receipt paths. Consumer001's 0.073-second bootstrap failure remains preserved: the minimal checkout lacked `scripts/run-geographic-check.py`, before data work. The author restored only the exact accepted b638 file for consumer002. No source, construction or consumer rerun was performed by this independent review lane. No hierarchy, 671 authority, 671 patch or parent correction is included.

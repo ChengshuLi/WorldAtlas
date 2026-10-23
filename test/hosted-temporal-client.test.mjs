@@ -11,7 +11,7 @@ function page(stream,{records=[],withdrawals=[],revision=10,next_cursor=null,sou
  return {year,stream,...pins,records,withdrawals,sources,next_cursor,revision,capability:{datedMembership:1,datedExistence:1,datedFootprints:0},...extra};
 }
 const options={year:1000,expectedGeography:pins,expectedRevision:10};
-function routing(pages,calls=[]){return async(url,{signal})=>{assert.equal(signal instanceof AbortSignal,true);const parsed=new URL(url,'https://atlas.test');assert.equal(parsed.pathname,'/api/geography/temporal/snapshot');const stream=parsed.searchParams.get('stream'),cursor=parsed.searchParams.get('cursor');assert.ok(Number(parsed.searchParams.get('limit'))<=200);calls.push({stream,cursor,limit:Number(parsed.searchParams.get('limit')),examples:parsed.searchParams.get('examples'),year:parsed.searchParams.get('year')});const row=pages[stream][cursor];if(row instanceof Error)throw row;assert.ok(row,`No synthetic ${stream} page for ${cursor}`);return structuredClone(row);};}
+function routing(pages,calls=[]){return async(url,{signal})=>{assert.equal(signal instanceof AbortSignal,true);const parsed=new URL(url,'https://atlas.test');assert.equal(parsed.pathname,'/api/geography/temporal/snapshot');assert.equal(parsed.searchParams.get('release_id'),pins.release_id);const stream=parsed.searchParams.get('stream'),cursor=parsed.searchParams.get('cursor');assert.ok(Number(parsed.searchParams.get('limit'))<=200);calls.push({stream,cursor,limit:Number(parsed.searchParams.get('limit')),examples:parsed.searchParams.get('examples'),year:parsed.searchParams.get('year')});const row=pages[stream][cursor];if(row instanceof Error)throw row;assert.ok(row,`No synthetic ${stream} page for ${cursor}`);return structuredClone(row);};}
 
 test('both sparse streams complete under fixed pins/revision before legacy history becomes authoritative',async()=>{
  const old={id:'old-parent',entity_id:'location:a',field:'parent',value:'province:old',valid_from:950,valid_to:1050},name={id:'kept-name',entity_id:'location:a',field:'name',value:'Test label',valid_from:1000,valid_to:1100},legacy=[old,name];
@@ -60,7 +60,7 @@ test('abort/cancellation preserves its reason and no completed or partial result
 });
 
 test('retryable oversized pages reduce only that stream limit and keep the same cursor/revision',async()=>{
- const calls=[];let retry=true;const apiGet=async(url,{signal})=>{const parsed=new URL(url,'https://atlas.test'),stream=parsed.searchParams.get('stream');calls.push({stream,limit:Number(parsed.searchParams.get('limit')),cursor:parsed.searchParams.get('cursor')});if(stream==='records'&&retry){retry=false;throw Object.assign(Error('Page budget'),{status:413,retryable:true,suggested_limit:50});}assert.equal(signal.aborted,false);return page(stream);};
+ const calls=[];let retry=true;const apiGet=async(url,{signal})=>{const parsed=new URL(url,'https://atlas.test'),stream=parsed.searchParams.get('stream');assert.equal(parsed.searchParams.get('release_id'),pins.release_id);calls.push({stream,limit:Number(parsed.searchParams.get('limit')),cursor:parsed.searchParams.get('cursor')});if(stream==='records'&&retry){retry=false;throw Object.assign(Error('Page budget'),{status:413,retryable:true,suggested_limit:50});}assert.equal(signal.aborted,false);return page(stream);};
  const result=await loadHostedTemporalGeography({...options,apiGet});assert.equal(result.complete,true);assert.deepEqual(calls.filter(call=>call.stream==='records').map(call=>call.limit),[200,50]);assert.deepEqual(calls.filter(call=>call.stream==='withdrawals').map(call=>call.limit),[200]);assert.ok(calls.every(call=>call.cursor===''));
  await assert.rejects(loadHostedTemporalGeography({...options,apiGet:async()=>{throw Object.assign(Error('Bad limit'),{status:413,retryable:true,suggested_limit:200});}}),/invalid-suggested-limit/);
 });
@@ -80,4 +80,13 @@ test('explicit unknown parents and BC/AD boundaries retain source evidence and r
  const row=claim('unknown-parent','location:a','memberships',{parent_id:null,effective_parent_id:'province:a',parent_context:'reference',membership_status:'unknown',status:'unknown',valid_from:-1,valid_to:1}),pages={records:{'':page('records',{year:-1,records:[row]})},withdrawals:{'':page('withdrawals',{year:-1})}};
  const result=await loadHostedTemporalGeography({...options,year:-1,expectedGeography:{...pins,id:pins.release_id,release_id:undefined},apiGet:routing(pages)});assert.equal(result.mergedHistory[0].value,'province:a');assert.equal(result.mergedHistory[0].metadata.parent_context,'reference');assert.equal(result.mergedHistory[0].status,'unknown');assert.equal(result.mergedHistory[0].source,source.name);
  pages.records[''].year=1;pages.withdrawals[''].year=1;await assert.rejects(loadHostedTemporalGeography({...options,year:1,apiGet:routing(pages)}),/dated claim/);
+});
+
+
+test('malformed selected release pins never request a latest-release fallback',async()=>{
+ for(const expectedGeography of [undefined,{}, {...pins,release_id:''},{...pins,hierarchy_sha256:'bad'}]){
+  let requests=0;
+  await assert.rejects(loadHostedTemporalGeography({...options,expectedGeography,apiGet:async()=>{requests++;throw Error('must not fetch');}}),/invalid-expected-pins/);
+  assert.equal(requests,0);
+ }
 });

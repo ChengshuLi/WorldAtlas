@@ -1,0 +1,2263 @@
+{
+  "kind": "read-only-original-Cuba-proposal-screen",
+  "accepted_head": "3b3e9e675cfb37999d5665438f9fbf25bbd4238b",
+  "queue_commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+  "source_packages": 644,
+  "physical_packages": 16,
+  "package": {
+    "package_id": "gb-CUB-ADM2--repair-evaluation",
+    "primary_source": "gb:CUB:ADM2",
+    "source_family_index": 80,
+    "category": "repair-evaluation",
+    "native_cells": 26459,
+    "land_cells": 26459,
+    "inland_water_cells": 0,
+    "source_relative_cells": 0,
+    "interval_segments": 8489,
+    "owners": [
+      15890,
+      15891,
+      15892,
+      15893,
+      15895,
+      15897,
+      15899,
+      15900,
+      15901,
+      15902,
+      15903,
+      15907,
+      15910,
+      15911,
+      15912,
+      15914,
+      15918,
+      15920,
+      15921,
+      15922,
+      15925,
+      15926,
+      15927,
+      15928,
+      15935,
+      15936,
+      15937,
+      15944,
+      15946,
+      15949,
+      15951,
+      15953,
+      15954,
+      15955,
+      15957,
+      15958,
+      15959,
+      15961,
+      15962,
+      15968,
+      15969,
+      15970,
+      15971,
+      15972,
+      15973,
+      15975,
+      15976,
+      15979,
+      15980,
+      15983,
+      15984,
+      15985,
+      15987,
+      15989,
+      15990,
+      15993,
+      15995,
+      15997,
+      16001,
+      16002,
+      16007,
+      16008,
+      16009,
+      16012,
+      16016,
+      16017,
+      16018,
+      16020,
+      16022,
+      16023,
+      16024,
+      16025,
+      16029,
+      16030,
+      16031,
+      16032,
+      16039,
+      16041,
+      16042,
+      16044,
+      16045,
+      16046,
+      16047,
+      16049,
+      16050,
+      16054,
+      16055
+    ],
+    "source_features": [
+      20270,
+      20271,
+      20272,
+      20273,
+      20274,
+      20275,
+      20276,
+      20277,
+      20278,
+      20279,
+      20280,
+      20281,
+      20282,
+      20283,
+      20284,
+      20285,
+      20286,
+      20287,
+      20288,
+      20289,
+      20290,
+      20293,
+      20294,
+      20295,
+      20297,
+      20298,
+      20300,
+      20301,
+      20302,
+      20303,
+      20304,
+      20305,
+      20307,
+      20308,
+      20310,
+      20311,
+      20312,
+      20313,
+      20314,
+      20315,
+      20316,
+      20317,
+      20318,
+      20319,
+      20320,
+      20321,
+      20322,
+      20323,
+      20324,
+      20325,
+      20326,
+      20327,
+      20328,
+      20329,
+      20330,
+      20331,
+      20332,
+      20333,
+      20334,
+      20335,
+      20336,
+      20337,
+      20338,
+      20340,
+      20344,
+      20346,
+      20352,
+      20353,
+      20354,
+      20356,
+      20362,
+      20363,
+      20365,
+      20366,
+      20368,
+      20373,
+      20375,
+      20378,
+      20380,
+      20386,
+      20389,
+      20391,
+      20394,
+      20402,
+      20403,
+      20406,
+      20407,
+      20411,
+      20412,
+      20415,
+      20417,
+      20421,
+      20422,
+      20423,
+      20427,
+      20428,
+      20436,
+      20438,
+      20446,
+      20448,
+      20450,
+      20451,
+      20453
+    ],
+    "source_families": [
+      79,
+      80
+    ],
+    "native_blocks": [
+      27,
+      28
+    ],
+    "provinces": [
+      "framework:province:artemisa:21ebbde966ce",
+      "framework:province:camaguey:280f546c8526",
+      "framework:province:ciego-de-avila:546042066e6e",
+      "framework:province:cienfuegos:3e9925735a7e",
+      "framework:province:granma:5058c05b9a0b",
+      "framework:province:guantanamo:de72e87608cf",
+      "framework:province:havana:4955eb221306",
+      "framework:province:holguin:23245782bae5",
+      "framework:province:isle-of-youth:a82c178dbf7f",
+      "framework:province:las-tunas:a3c232b6a189",
+      "framework:province:matanzas:581938eec19f",
+      "framework:province:mayabeque:d7bfb32814c9",
+      "framework:province:pinar-del-rio:4fd1607ec72f",
+      "framework:province:sancti-spiritus:229266423b65",
+      "framework:province:santiago-de-cuba:56efefbc77ab",
+      "framework:province:villa-clara:532b6b15abfc"
+    ],
+    "location_count": 87,
+    "source_feature_count": 103,
+    "locality_count": 16,
+    "cost": {
+      "primary_source_decoded_bytes": 922009,
+      "all_required_source_decoded_bytes": 1480001,
+      "primary_full_source_raster_measured_seconds": 0.245,
+      "source_interval_segments": 8489,
+      "maximum_native_rows_per_execution_frame": 4096,
+      "observed_global_census_peak_rss_bytes": 884973568
+    },
+    "evidence": {
+      "selection": "ownership-binding.json",
+      "lineage": "lineage.json",
+      "territorial_source_catalogue": "retained-source-catalogue.json",
+      "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "source_features": "source-feature-roster.json",
+      "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+      "physical": "physical-unassigned-summary.json",
+      "source_domain_transform": []
+    },
+    "work": {
+      "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+      "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+      "priority": 1
+    },
+    "execution": {
+      "command": "node source-batch-intervals.mjs gb-CUB-ADM2--repair-evaluation OUTPUT_DIRECTORY",
+      "output_columns": [
+        "y",
+        "start",
+        "end",
+        "candidate_owner_indices",
+        "source_feature_indices",
+        "physical_class"
+      ]
+    }
+  },
+  "measured_cells": 26459,
+  "measured_intervals": 8489,
+  "measured_owners": 87,
+  "physical_classes": {
+    "land": 26459
+  },
+  "accepted_cumulative_cells": 2209586,
+  "accepted_overlap_cells": 0,
+  "accepted_overlaps": [],
+  "owners": [
+    {
+      "id": "gb:CUB:ADM2:75667366B10388242457894",
+      "index": 15890,
+      "bounds": [
+        71113.61985833333,
+        113721.19736312055,
+        71306.96728333333,
+        113819.70099998136
+      ],
+      "province_id": "framework:province:havana:4955eb221306",
+      "province_index": 2011,
+      "name": "Habana del Este",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B10388242457894"
+      ],
+      "original_cells": 167
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B10680094164751",
+      "index": 15891,
+      "bounds": [
+        69926.37199777778,
+        114300.78171161204,
+        70093.4299988889,
+        114533.37187475878
+      ],
+      "province_id": "framework:province:pinar-del-rio:4fd1607ec72f",
+      "province_index": 3654,
+      "name": "San Juan y Mart\u00ednez",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B10680094164751"
+      ],
+      "original_cells": 10
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B11766528680291",
+      "index": 15892,
+      "bounds": [
+        74442.83676277778,
+        114829.8746379095,
+        74744.83743,
+        115119.41872162667
+      ],
+      "province_id": "framework:province:camaguey:280f546c8526",
+      "province_index": 1144,
+      "name": "Minas",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B11766528680291"
+      ],
+      "original_cells": 77
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B12605402479047",
+      "index": 15893,
+      "bounds": [
+        71069.19728611111,
+        114011.14273110473,
+        71224.60346500001,
+        114119.08843059509
+      ],
+      "province_id": "framework:province:mayabeque:d7bfb32814c9",
+      "province_index": 2952,
+      "name": "Bataban\u00f3",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B12605402479047"
+      ],
+      "original_cells": 51
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B15173471690010",
+      "index": 15895,
+      "bounds": [
+        73529.62519611111,
+        114337.57240993866,
+        73787.276115,
+        114580.30266865405
+      ],
+      "province_id": "framework:province:ciego-de-avila:546042066e6e",
+      "province_index": 1323,
+      "name": "Chambas",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B15173471690010"
+      ],
+      "original_cells": 73
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B15427453282982",
+      "index": 15897,
+      "bounds": [
+        76441.26992166667,
+        115945.82833229519,
+        76694.91552666666,
+        116236.65859816641
+      ],
+      "province_id": "framework:province:guantanamo:de72e87608cf",
+      "province_index": 1908,
+      "name": "San Antonio del Sur",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B15427453282982"
+      ],
+      "original_cells": 65
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B18779675214629",
+      "index": 15899,
+      "bounds": [
+        73785.45551777778,
+        114718.85686341347,
+        74039.0282988889,
+        115021.91617261629
+      ],
+      "province_id": "framework:province:ciego-de-avila:546042066e6e",
+      "province_index": 1323,
+      "name": "Baragu\u00e1",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B18779675214629"
+      ],
+      "original_cells": 14
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B18879934460880",
+      "index": 15900,
+      "bounds": [
+        72022.68046333332,
+        113724.84140803436,
+        72382.86741777779,
+        113994.23434447785
+      ],
+      "province_id": "framework:province:matanzas:581938eec19f",
+      "province_index": 2937,
+      "name": "Mart\u00ed",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B18879934460880"
+      ],
+      "original_cells": 756
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B19835862496893",
+      "index": 15901,
+      "bounds": [
+        73538.14559111111,
+        114747.26905344149,
+        73819.53709777776,
+        115005.78812322517
+      ],
+      "province_id": "framework:province:ciego-de-avila:546042066e6e",
+      "province_index": 1323,
+      "name": "Venezuela",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B19835862496893"
+      ],
+      "original_cells": 94
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B19980502726207",
+      "index": 15902,
+      "bounds": [
+        70661.52915611111,
+        113837.74483589496,
+        70882.33118722223,
+        113933.76904325755
+      ],
+      "province_id": "framework:province:artemisa:21ebbde966ce",
+      "province_index": 659,
+      "name": "Mariel",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B19980502726207"
+      ],
+      "original_cells": 227
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B2002412802844",
+      "index": 15903,
+      "bounds": [
+        71292.32968166667,
+        113716.04795562541,
+        71606.63758611112,
+        113851.2757093371
+      ],
+      "province_id": "framework:province:mayabeque:d7bfb32814c9",
+      "province_index": 2952,
+      "name": "Santa Cruz del Norte",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B2002412802844"
+      ],
+      "original_cells": 114
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B23583938902461",
+      "index": 15907,
+      "bounds": [
+        74829.02184555556,
+        115889.0388881081,
+        75027.24847111112,
+        116168.53236513505
+      ],
+      "province_id": "framework:province:granma:5058c05b9a0b",
+      "province_index": 1881,
+      "name": "Manzanillo",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B23583938902461"
+      ],
+      "original_cells": 47
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B25903359168563",
+      "index": 15910,
+      "bounds": [
+        71268.37062222222,
+        113914.2389772492,
+        71471.69492,
+        114136.45074818039
+      ],
+      "province_id": "framework:province:mayabeque:d7bfb32814c9",
+      "province_index": 2952,
+      "name": "G\u00fcines",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B25903359168563"
+      ],
+      "original_cells": 19
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B26080416722316",
+      "index": 15911,
+      "bounds": [
+        74906.43363944444,
+        115078.18985552699,
+        75151.26755388889,
+        115382.40278611956
+      ],
+      "province_id": "framework:province:las-tunas:a3c232b6a189",
+      "province_index": 2646,
+      "name": "Manati",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B26080416722316"
+      ],
+      "original_cells": 1
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B26845086877570",
+      "index": 15912,
+      "bounds": [
+        70512.89559888889,
+        114702.2143275978,
+        71760.44163944444,
+        115093.21234277774
+      ],
+      "province_id": "framework:province:isle-of-youth:a82c178dbf7f",
+      "province_index": 2187,
+      "name": "Isle of Youth",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B26845086877570"
+      ],
+      "original_cells": 4699
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B28750002223070",
+      "index": 15914,
+      "bounds": [
+        74827.41972,
+        115621.97546411537,
+        75213.02221166666,
+        115924.93356794605
+      ],
+      "province_id": "framework:province:granma:5058c05b9a0b",
+      "province_index": 1881,
+      "name": "R\u00edo Cauto",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B28750002223070"
+      ],
+      "original_cells": 177
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B30494015691989",
+      "index": 15918,
+      "bounds": [
+        74401.18149833332,
+        115455.26991542189,
+        74669.90164833333,
+        115693.60409327834
+      ],
+      "province_id": "framework:province:las-tunas:a3c232b6a189",
+      "province_index": 2646,
+      "name": "Amancio",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B30494015691989"
+      ],
+      "original_cells": 45
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B31265103522165",
+      "index": 15920,
+      "bounds": [
+        70968.84596722221,
+        113762.3836253702,
+        71072.4743611111,
+        113826.98221366735
+      ],
+      "province_id": "framework:province:havana:4955eb221306",
+      "province_index": 2011,
+      "name": "Playa",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B31265103522165"
+      ],
+      "original_cells": 59
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B3179564295802",
+      "index": 15921,
+      "bounds": [
+        73067.19350166668,
+        114141.81671961029,
+        73326.88348944446,
+        114476.98143116367
+      ],
+      "province_id": "framework:province:villa-clara:532b6b15abfc",
+      "province_index": 4825,
+      "name": "Remedios",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B3179564295802"
+      ],
+      "original_cells": 64
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B31859189272131",
+      "index": 15922,
+      "bounds": [
+        74963.52756833335,
+        116138.83631137833,
+        75771.79991111111,
+        116302.11389163522
+      ],
+      "province_id": "framework:province:santiago-de-cuba:56efefbc77ab",
+      "province_index": 4108,
+      "name": "Guam\u00e1",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B31859189272131"
+      ],
+      "original_cells": 269
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B3386148809140",
+      "index": 15925,
+      "bounds": [
+        74092.48103333334,
+        114372.4609433619,
+        74586.66394333333,
+        114954.64862354277
+      ],
+      "province_id": "framework:province:camaguey:280f546c8526",
+      "province_index": 1144,
+      "name": "Esmeralda",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B3386148809140"
+      ],
+      "original_cells": 1968
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B34198341478564",
+      "index": 15926,
+      "bounds": [
+        74709.88196333333,
+        115986.83053346106,
+        74956.75494666665,
+        116216.58895271494
+      ],
+      "province_id": "framework:province:granma:5058c05b9a0b",
+      "province_index": 1881,
+      "name": "Campechuela",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B34198341478564"
+      ],
+      "original_cells": 20
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B34978007419445",
+      "index": 15927,
+      "bounds": [
+        73806.79291722222,
+        114871.58581984507,
+        74305.78220388888,
+        115221.0583515283
+      ],
+      "province_id": "framework:province:camaguey:280f546c8526",
+      "province_index": 1144,
+      "name": "Florida",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B34978007419445"
+      ],
+      "original_cells": 187
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B35074617847721",
+      "index": 15928,
+      "bounds": [
+        69742.78297388888,
+        114289.6711654028,
+        69955.79284888889,
+        114588.0832420388
+      ],
+      "province_id": "framework:province:pinar-del-rio:4fd1607ec72f",
+      "province_index": 3654,
+      "name": "Guane",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B35074617847721"
+      ],
+      "original_cells": 1
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B38669823996593",
+      "index": 15935,
+      "bounds": [
+        72532.66615722222,
+        113920.32767945388,
+        72703.00123333333,
+        114111.74806786698
+      ],
+      "province_id": "framework:province:villa-clara:532b6b15abfc",
+      "province_index": 4825,
+      "name": "Quemado de G\u00fcines",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B38669823996593"
+      ],
+      "original_cells": 35
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B38833271967671",
+      "index": 15936,
+      "bounds": [
+        75084.48804777778,
+        115129.97780277228,
+        75392.3146261111,
+        115478.50915136722
+      ],
+      "province_id": "framework:province:las-tunas:a3c232b6a189",
+      "province_index": 2646,
+      "name": "Puerto Padre",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B38833271967671"
+      ],
+      "original_cells": 480
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B39202767563909",
+      "index": 15937,
+      "bounds": [
+        72273.12181722223,
+        113811.94437712604,
+        72674.23579722222,
+        114075.43356735275
+      ],
+      "province_id": "framework:province:villa-clara:532b6b15abfc",
+      "province_index": 4825,
+      "name": "Corralillo",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B39202767563909"
+      ],
+      "original_cells": 333
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B42220855402560",
+      "index": 15944,
+      "bounds": [
+        76649.83753944443,
+        116002.82381389037,
+        76881.27185833333,
+        116180.47077128015
+      ],
+      "province_id": "framework:province:guantanamo:de72e87608cf",
+      "province_index": 1908,
+      "name": "Im\u00edas",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B42220855402560"
+      ],
+      "original_cells": 79
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B44154135823395",
+      "index": 15946,
+      "bounds": [
+        70160.28232888889,
+        113948.86880013393,
+        70377.66163722222,
+        114190.17739115757
+      ],
+      "province_id": "framework:province:pinar-del-rio:4fd1607ec72f",
+      "province_index": 3654,
+      "name": "La Palma",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B44154135823395"
+      ],
+      "original_cells": 532
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B45015819829333",
+      "index": 15949,
+      "bounds": [
+        70376.27798333332,
+        114015.25090974776,
+        70721.90016,
+        114268.07722491141
+      ],
+      "province_id": "framework:province:artemisa:21ebbde966ce",
+      "province_index": 659,
+      "name": "San Crist\u00f3bal",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B45015819829333"
+      ],
+      "original_cells": 74
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B46102635862321",
+      "index": 15951,
+      "bounds": [
+        71774.05970666668,
+        113703.52989072983,
+        72055.81533277778,
+        113993.52318584993
+      ],
+      "province_id": "framework:province:matanzas:581938eec19f",
+      "province_index": 2937,
+      "name": "C\u00e1rdenas",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B46102635862321"
+      ],
+      "original_cells": 379
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B4706922994966",
+      "index": 15953,
+      "bounds": [
+        73028.81531222223,
+        114635.85501683864,
+        73366.06274166667,
+        114955.04028469426
+      ],
+      "province_id": "framework:province:sancti-spiritus:229266423b65",
+      "province_index": 4081,
+      "name": "Sancti Spiritus",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B4706922994966"
+      ],
+      "original_cells": 73
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B47194088471769",
+      "index": 15954,
+      "bounds": [
+        69600.12097555556,
+        114177.87231519095,
+        69847.57655,
+        114548.23151314791
+      ],
+      "province_id": "framework:province:pinar-del-rio:4fd1607ec72f",
+      "province_index": 3654,
+      "name": "Mantua",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B47194088471769"
+      ],
+      "original_cells": 1083
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B47389896256",
+      "index": 15955,
+      "bounds": [
+        76276.39663722222,
+        116052.73093983681,
+        76429.47245166668,
+        116196.28348121616
+      ],
+      "province_id": "framework:province:guantanamo:de72e87608cf",
+      "province_index": 1908,
+      "name": "Guant\u00e1namo",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B47389896256"
+      ],
+      "original_cells": 33
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B49025507333210",
+      "index": 15957,
+      "bounds": [
+        70874.6846788889,
+        113980.64249855297,
+        70980.42496555555,
+        114117.4309728591
+      ],
+      "province_id": "framework:province:artemisa:21ebbde966ce",
+      "province_index": 659,
+      "name": "Alqu\u00edzar",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B49025507333210"
+      ],
+      "original_cells": 9
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B49038548326439",
+      "index": 15958,
+      "bounds": [
+        76113.19830222223,
+        115634.27999788213,
+        76435.80813,
+        115797.85521440401
+      ],
+      "province_id": "framework:province:holguin:23245782bae5",
+      "province_index": 2062,
+      "name": "Frank Pa\u00eds",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B49038548326439"
+      ],
+      "original_cells": 52
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B49196044130673",
+      "index": 15959,
+      "bounds": [
+        72741.16095111112,
+        114636.32634656265,
+        73100.61966666667,
+        114913.83010137771
+      ],
+      "province_id": "framework:province:sancti-spiritus:229266423b65",
+      "province_index": 4081,
+      "name": "Trinidad",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B49196044130673"
+      ],
+      "original_cells": 590
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B50607521886252",
+      "index": 15961,
+      "bounds": [
+        75799.76428444445,
+        115330.72835838253,
+        76047.65680222223,
+        115629.14028570837
+      ],
+      "province_id": "framework:province:holguin:23245782bae5",
+      "province_index": 2062,
+      "name": "Banes",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B50607521886252"
+      ],
+      "original_cells": 313
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B5141529927700",
+      "index": 15962,
+      "bounds": [
+        72946.96126111111,
+        114054.34976622043,
+        73125.01566944444,
+        114358.2076022195
+      ],
+      "province_id": "framework:province:villa-clara:532b6b15abfc",
+      "province_index": 4825,
+      "name": "Camajuan\u00ed",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B5141529927700"
+      ],
+      "original_cells": 19
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B55450845848024",
+      "index": 15968,
+      "bounds": [
+        70933.599205,
+        113805.29539357059,
+        71049.53483611112,
+        113925.94163059792
+      ],
+      "province_id": "framework:province:artemisa:21ebbde966ce",
+      "province_index": 659,
+      "name": "Bauta",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B55450845848024"
+      ],
+      "original_cells": 2
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B56415669308485",
+      "index": 15969,
+      "bounds": [
+        73155.60170277777,
+        114752.76229120135,
+        73579.29108833334,
+        115010.87731802424
+      ],
+      "province_id": "framework:province:sancti-spiritus:229266423b65",
+      "province_index": 4081,
+      "name": "La Sierpe",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B56415669308485"
+      ],
+      "original_cells": 53
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B58223785748914",
+      "index": 15970,
+      "bounds": [
+        72582.25922555555,
+        113754.14765145171,
+        72960.94344777778,
+        114123.35034822024
+      ],
+      "province_id": "framework:province:villa-clara:532b6b15abfc",
+      "province_index": 4825,
+      "name": "Sagua La Grande",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B58223785748914"
+      ],
+      "original_cells": 1969
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B58423249689704",
+      "index": 15971,
+      "bounds": [
+        74615.720675,
+        115381.15412888255,
+        74771.12685388888,
+        115684.41937293025
+      ],
+      "province_id": "framework:province:las-tunas:a3c232b6a189",
+      "province_index": 2646,
+      "name": "Colombia",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B58423249689704"
+      ],
+      "original_cells": 17
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B5928073683426",
+      "index": 15972,
+      "bounds": [
+        72861.39319166666,
+        113944.91618966445,
+        73077.68014166667,
+        114232.68228732896
+      ],
+      "province_id": "framework:province:villa-clara:532b6b15abfc",
+      "province_index": 4825,
+      "name": "Encrucijada",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B5928073683426"
+      ],
+      "original_cells": 229
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B60074867578630",
+      "index": 15973,
+      "bounds": [
+        74468.68924333333,
+        116134.41617370889,
+        74691.31187166666,
+        116347.40863552887
+      ],
+      "province_id": "framework:province:granma:5058c05b9a0b",
+      "province_index": 1881,
+      "name": "Niquero",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B60074867578630"
+      ],
+      "original_cells": 358
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B61514763609503",
+      "index": 15975,
+      "bounds": [
+        74751.53722777778,
+        115415.40929385762,
+        74998.33738722223,
+        115713.83909510083
+      ],
+      "province_id": "framework:province:las-tunas:a3c232b6a189",
+      "province_index": 2646,
+      "name": "Jobabo",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B61514763609503"
+      ],
+      "original_cells": 14
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B6235496505331",
+      "index": 15976,
+      "bounds": [
+        69808.61576944444,
+        114065.40545653422,
+        70047.4053011111,
+        114379.86250033972
+      ],
+      "province_id": "framework:province:pinar-del-rio:4fd1607ec72f",
+      "province_index": 3654,
+      "name": "Minas de Matahambre",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B6235496505331"
+      ],
+      "original_cells": 529
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B62928460103923",
+      "index": 15979,
+      "bounds": [
+        71589.5967961111,
+        113908.86165360229,
+        71852.491035,
+        114245.84833970066
+      ],
+      "province_id": "framework:province:matanzas:581938eec19f",
+      "province_index": 2937,
+      "name": "Uni\u00f3n de Reyes",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B62928460103923"
+      ],
+      "original_cells": 1
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B63092623675998",
+      "index": 15980,
+      "bounds": [
+        76864.81365944445,
+        115966.25352600214,
+        77097.41316055556,
+        116161.63236250999
+      ],
+      "province_id": "framework:province:guantanamo:de72e87608cf",
+      "province_index": 1908,
+      "name": "Mais\u00ed",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B63092623675998"
+      ],
+      "original_cells": 81
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B65325522017421",
+      "index": 15983,
+      "bounds": [
+        74328.648905,
+        114820.30711229901,
+        74569.47750555555,
+        115018.31496198817
+      ],
+      "province_id": "framework:province:camaguey:280f546c8526",
+      "province_index": 1144,
+      "name": "Sierra de Cubitas",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B65325522017421"
+      ],
+      "original_cells": 28
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B65648600044594",
+      "index": 15984,
+      "bounds": [
+        70037.71972388889,
+        114233.23418975019,
+        70315.76133166667,
+        114519.53253342338
+      ],
+      "province_id": "framework:province:pinar-del-rio:4fd1607ec72f",
+      "province_index": 3654,
+      "name": "Pinar del R\u00edo",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B65648600044594"
+      ],
+      "original_cells": 39
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B65880514113985",
+      "index": 15985,
+      "bounds": [
+        74135.08300833334,
+        115401.59920097188,
+        74445.16712722223,
+        115674.76686343909
+      ],
+      "province_id": "framework:province:camaguey:280f546c8526",
+      "province_index": 1144,
+      "name": "Santa Cruz del Sur",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B65880514113985"
+      ],
+      "original_cells": 97
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B66529798652377",
+      "index": 15987,
+      "bounds": [
+        71551.7283738889,
+        113742.9013475909,
+        71799.69371555556,
+        113902.45595960921
+      ],
+      "province_id": "framework:province:matanzas:581938eec19f",
+      "province_index": 2937,
+      "name": "Matanzas",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B66529798652377"
+      ],
+      "original_cells": 126
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B6678530358474",
+      "index": 15989,
+      "bounds": [
+        76619.10585833332,
+        115782.92336040534,
+        76984.9730761111,
+        116084.54275821264
+      ],
+      "province_id": "framework:province:guantanamo:de72e87608cf",
+      "province_index": 1908,
+      "name": "Baracoa",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B6678530358474"
+      ],
+      "original_cells": 13
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B66908051996326",
+      "index": 15990,
+      "bounds": [
+        72525.23812055556,
+        114440.70958913217,
+        72804.29926277779,
+        114793.56077323297
+      ],
+      "province_id": "framework:province:cienfuegos:3e9925735a7e",
+      "province_index": 1324,
+      "name": "Cumanayagua",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B66908051996326"
+      ],
+      "original_cells": 82
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B68367745340454",
+      "index": 15993,
+      "bounds": [
+        69993.95256666667,
+        114015.80392182029,
+        70216.86649055556,
+        114286.28261789745
+      ],
+      "province_id": "framework:province:pinar-del-rio:4fd1607ec72f",
+      "province_index": 3654,
+      "name": "Vi\u00f1ales",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B68367745340454"
+      ],
+      "original_cells": 344
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B69202185225589",
+      "index": 15995,
+      "bounds": [
+        71252.49501444444,
+        114171.71925418843,
+        72391.53346055555,
+        114622.97123111752
+      ],
+      "province_id": "framework:province:matanzas:581938eec19f",
+      "province_index": 2937,
+      "name": "Ci\u00e9naga de Zapata",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B69202185225589"
+      ],
+      "original_cells": 1126
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B69518596321544",
+      "index": 15997,
+      "bounds": [
+        75881.32704,
+        115525.28553409212,
+        76063.75088166667,
+        115600.16680077922
+      ],
+      "province_id": "framework:province:holguin:23245782bae5",
+      "province_index": 2062,
+      "name": "Antilla",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B69518596321544"
+      ],
+      "original_cells": 365
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B71613146081304",
+      "index": 16001,
+      "bounds": [
+        69218.08685444444,
+        114491.29804987962,
+        69934.09133000001,
+        114843.83235502802
+      ],
+      "province_id": "framework:province:pinar-del-rio:4fd1607ec72f",
+      "province_index": 3654,
+      "name": "Sandino",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B71613146081304"
+      ],
+      "original_cells": 861
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B7171439243991",
+      "index": 16002,
+      "bounds": [
+        76107.22674333333,
+        116057.30925377214,
+        76307.9293811111,
+        116305.67613490076
+      ],
+      "province_id": "framework:province:guantanamo:de72e87608cf",
+      "province_index": 1908,
+      "name": "Niceto P\u00e9rez",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B7171439243991"
+      ],
+      "original_cells": 37
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B73853566554491",
+      "index": 16007,
+      "bounds": [
+        74658.10417833333,
+        116194.34575946473,
+        74988.0692188889,
+        116331.1509050769
+      ],
+      "province_id": "framework:province:granma:5058c05b9a0b",
+      "province_index": 1881,
+      "name": "Pil\u00f3n",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B73853566554491"
+      ],
+      "original_cells": 310
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B73876769816488",
+      "index": 16008,
+      "bounds": [
+        70347.51254722223,
+        113855.70649960767,
+        70690.36741611111,
+        114053.32310891028
+      ],
+      "province_id": "framework:province:artemisa:21ebbde966ce",
+      "province_index": 659,
+      "name": "Bah\u00eda Honda",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B73876769816488"
+      ],
+      "original_cells": 594
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B76262272549979",
+      "index": 16009,
+      "bounds": [
+        70142.14918055556,
+        114146.47227363427,
+        70444.36831944445,
+        114508.44408406554
+      ],
+      "province_id": "framework:province:pinar-del-rio:4fd1607ec72f",
+      "province_index": 3654,
+      "name": "Consolaci\u00f3n del Sur",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B76262272549979"
+      ],
+      "original_cells": 86
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B7803341445428",
+      "index": 16012,
+      "bounds": [
+        76205.39334555557,
+        116162.95037078335,
+        76498.72796999999,
+        116305.13406107585
+      ],
+      "province_id": "framework:province:guantanamo:de72e87608cf",
+      "province_index": 1908,
+      "name": "Caimanera",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B7803341445428"
+      ],
+      "original_cells": 164
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B79453709532283",
+      "index": 16016,
+      "bounds": [
+        74640.18950166667,
+        116075.0776770306,
+        74853.92761555556,
+        116245.56877365138
+      ],
+      "province_id": "framework:province:granma:5058c05b9a0b",
+      "province_index": 1881,
+      "name": "Media Luna",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B79453709532283"
+      ],
+      "original_cells": 32
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B79962068280443",
+      "index": 16017,
+      "bounds": [
+        75194.16082444445,
+        115213.86835232092,
+        75512.47404277779,
+        115478.50915136722
+      ],
+      "province_id": "framework:province:las-tunas:a3c232b6a189",
+      "province_index": 2646,
+      "name": "Jes\u00fas Men\u00e9ndez",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B79962068280443"
+      ],
+      "original_cells": 105
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B80263662304106",
+      "index": 16018,
+      "bounds": [
+        71111.50796555556,
+        113745.35662827954,
+        71143.2591811111,
+        113777.82435573493
+      ],
+      "province_id": "framework:province:havana:4955eb221306",
+      "province_index": 2011,
+      "name": "Regla",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B80263662304106"
+      ],
+      "original_cells": 16
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B81437275330712",
+      "index": 16020,
+      "bounds": [
+        75592.36184888888,
+        115339.78475752712,
+        75869.31109833333,
+        115519.36156057658
+      ],
+      "province_id": "framework:province:holguin:23245782bae5",
+      "province_index": 2062,
+      "name": "Rafael Freyre",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B81437275330712"
+      ],
+      "original_cells": 139
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B81992415495720",
+      "index": 16022,
+      "bounds": [
+        73749.262045,
+        114171.32481530373,
+        74233.61373,
+        114658.39805377735
+      ],
+      "province_id": "framework:province:ciego-de-avila:546042066e6e",
+      "province_index": 1323,
+      "name": "Mor\u00f3n",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B81992415495720"
+      ],
+      "original_cells": 1323
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B82556438360114",
+      "index": 16023,
+      "bounds": [
+        70954.71813277778,
+        113982.85524178193,
+        71079.53827833333,
+        114125.16555847351
+      ],
+      "province_id": "framework:province:artemisa:21ebbde966ce",
+      "province_index": 659,
+      "name": "G\u00fcira de Melena",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B82556438360114"
+      ],
+      "original_cells": 18
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B82870270071557",
+      "index": 16024,
+      "bounds": [
+        70298.72054166665,
+        114078.35496773213,
+        70579.96640055555,
+        114396.86844243345
+      ],
+      "province_id": "framework:province:pinar-del-rio:4fd1607ec72f",
+      "province_index": 3654,
+      "name": "Los Palacios",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B82870270071557"
+      ],
+      "original_cells": 123
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B829419499099",
+      "index": 16025,
+      "bounds": [
+        73894.83699888889,
+        115146.79210561939,
+        74282.91550277777,
+        115565.7320297451
+      ],
+      "province_id": "framework:province:camaguey:280f546c8526",
+      "province_index": 1144,
+      "name": "Vertientes",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B829419499099"
+      ],
+      "original_cells": 167
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B86823637835543",
+      "index": 16029,
+      "bounds": [
+        72412.65238833333,
+        114474.30669206241,
+        72626.6089738889,
+        114636.87622871755
+      ],
+      "province_id": "framework:province:cienfuegos:3e9925735a7e",
+      "province_index": 1324,
+      "name": "Cienfuegos",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B86823637835543"
+      ],
+      "original_cells": 382
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B86860977517537",
+      "index": 16030,
+      "bounds": [
+        71068.17775166666,
+        113749.39583743928,
+        71092.86505,
+        113786.85020544288
+      ],
+      "province_id": "framework:province:havana:4955eb221306",
+      "province_index": 2011,
+      "name": "Plaza de la Revoluci\u00f3n",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B86860977517537"
+      ],
+      "original_cells": 28
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B87194513843542",
+      "index": 16031,
+      "bounds": [
+        73251.94770777777,
+        114297.78749123626,
+        73607.91087666668,
+        114572.44294961155
+      ],
+      "province_id": "framework:province:sancti-spiritus:229266423b65",
+      "province_index": 4081,
+      "name": "Yaguajay",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B87194513843542"
+      ],
+      "original_cells": 130
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B87842371437689",
+      "index": 16032,
+      "bounds": [
+        73026.55777166667,
+        113962.78083054081,
+        73414.05368444444,
+        114330.95572357341
+      ],
+      "province_id": "framework:province:villa-clara:532b6b15abfc",
+      "province_index": 4825,
+      "name": "Caibari\u00e9n",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B87842371437689"
+      ],
+      "original_cells": 1337
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B91712962926649",
+      "index": 16039,
+      "bounds": [
+        75687.10572833334,
+        116110.45157235829,
+        76206.19440833334,
+        116305.67613490076
+      ],
+      "province_id": "framework:province:santiago-de-cuba:56efefbc77ab",
+      "province_index": 4108,
+      "name": "Santiago de Cuba",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B91712962926649"
+      ],
+      "original_cells": 202
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B92334467605945",
+      "index": 16041,
+      "bounds": [
+        76397.64841222222,
+        115670.6409533719,
+        76673.50530333334,
+        115895.25518765865
+      ],
+      "province_id": "framework:province:holguin:23245782bae5",
+      "province_index": 2062,
+      "name": "Moa",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B92334467605945"
+      ],
+      "original_cells": 213
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B92506466281371",
+      "index": 16042,
+      "bounds": [
+        70034.07852944445,
+        114373.01214034497,
+        70197.56816,
+        114523.93614803831
+      ],
+      "province_id": "framework:province:pinar-del-rio:4fd1607ec72f",
+      "province_index": 3654,
+      "name": "San Luis",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B92506466281371"
+      ],
+      "original_cells": 127
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B93291752136089",
+      "index": 16044,
+      "bounds": [
+        71461.35392777777,
+        113976.92814853064,
+        71672.68885333334,
+        114203.82177515652
+      ],
+      "province_id": "framework:province:mayabeque:d7bfb32814c9",
+      "province_index": 2952,
+      "name": "Nueva Paz",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B93291752136089"
+      ],
+      "original_cells": 63
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B93303026760321",
+      "index": 16045,
+      "bounds": [
+        71100.58438222222,
+        113749.07904227584,
+        71115.07633611112,
+        113777.11175601865
+      ],
+      "province_id": "framework:province:havana:4955eb221306",
+      "province_index": 2011,
+      "name": "La Habana Vieja",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B93303026760321"
+      ],
+      "original_cells": 13
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B93428692702847",
+      "index": 16046,
+      "bounds": [
+        74558.044155,
+        114711.94894190207,
+        75045.30879555555,
+        115197.22021463729
+      ],
+      "province_id": "framework:province:camaguey:280f546c8526",
+      "province_index": 1144,
+      "name": "Nuevitas",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B93428692702847"
+      ],
+      "original_cells": 741
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B93847620286343",
+      "index": 16047,
+      "bounds": [
+        73870.87793944446,
+        114468.79967201485,
+        74229.89971166667,
+        114710.7714126857
+      ],
+      "province_id": "framework:province:ciego-de-avila:546042066e6e",
+      "province_index": 1323,
+      "name": "Bolivia",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B93847620286343"
+      ],
+      "original_cells": 85
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B94668251008376",
+      "index": 16049,
+      "bounds": [
+        75382.33775333333,
+        115241.60989252546,
+        75682.22652777778,
+        115454.72397165526
+      ],
+      "province_id": "framework:province:holguin:23245782bae5",
+      "province_index": 2062,
+      "name": "Gibara",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B94668251008376"
+      ],
+      "original_cells": 125
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B9514275444181",
+      "index": 16050,
+      "bounds": [
+        75783.45173333332,
+        115597.05094727526,
+        76144.51257444444,
+        115898.05241708524
+      ],
+      "province_id": "framework:province:holguin:23245782bae5",
+      "province_index": 2062,
+      "name": "Mayar\u00ed",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B9514275444181"
+      ],
+      "original_cells": 219
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B9750656068001",
+      "index": 16054,
+      "bounds": [
+        70871.18913222222,
+        113825.241099133,
+        70958.79627055557,
+        114015.32991164637
+      ],
+      "province_id": "framework:province:artemisa:21ebbde966ce",
+      "province_index": 659,
+      "name": "Caimito",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B9750656068001"
+      ],
+      "original_cells": 35
+    },
+    {
+      "id": "gb:CUB:ADM2:75667366B98184381496608",
+      "index": 16055,
+      "bounds": [
+        70651.62510722222,
+        113915.89956673203,
+        70888.3027461111,
+        114181.02759580647
+      ],
+      "province_id": "framework:province:artemisa:21ebbde966ce",
+      "province_index": 659,
+      "name": "Artemisa",
+      "reference_owner": "Cuba",
+      "source_id": "gb:CUB:ADM2",
+      "source_atoms": [
+        "gb:CUB:ADM2:75667366B98184381496608"
+      ],
+      "original_cells": 23
+    }
+  ],
+  "complete_declared_source_checks": [
+    {
+      "key": "gb:CUB:ADM1",
+      "feature_count": 16,
+      "advertised_feature_count": 16,
+      "original_bytes": 557992,
+      "original_sha256": "c146dae6fe44c3d28e0025df1b4fa348caea41de6c688586144d02577e255ecf",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CUB/ADM1/geoBoundaries-CUB-ADM1_simplified.geojson",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "source_represented_year_claim": "2017"
+    },
+    {
+      "key": "gb:CUB:ADM2",
+      "feature_count": 168,
+      "advertised_feature_count": 168,
+      "original_bytes": 922009,
+      "original_sha256": "1673cb709da1d112b9e81f4a0c105ccfb6c9edcf3f72c392b28069b74d801d45",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CUB/ADM2/geoBoundaries-CUB-ADM2_simplified.geojson",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "source_represented_year_claim": "2017"
+    }
+  ],
+  "open_issue_count": 864,
+  "open_pr_count": 80,
+  "potential_scope_matches": [
+    {
+      "kind": "issue",
+      "number": 1657,
+      "title": "Authenticate actual Namibia\u2013Angola treaty comparison findings before success",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1657",
+      "subject_matches": [],
+      "package_literal": false,
+      "country_text": true
+    },
+    {
+      "kind": "issue",
+      "number": 1268,
+      "title": "Classify the complete Namibia\u2013Angola gap family against retained sources and physical references",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1268",
+      "subject_matches": [],
+      "package_literal": false,
+      "country_text": true
+    },
+    {
+      "kind": "issue",
+      "number": 1223,
+      "title": "Finish #411\u2019s initial assessments of 24 provinces and 3 area purposes",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1223",
+      "subject_matches": [],
+      "package_literal": false,
+      "country_text": true
+    },
+    {
+      "kind": "issue",
+      "number": 1046,
+      "title": "Crosswalk Angola\u2019s 2018 municipalities to the 2024 administrative division",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1046",
+      "subject_matches": [],
+      "package_literal": false,
+      "country_text": true
+    },
+    {
+      "kind": "issue",
+      "number": 411,
+      "title": "Review Southern African Interior and Southeast Coast interior batch 1: Angola, Malawi, Mozambique",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/411",
+      "subject_matches": [],
+      "package_literal": false,
+      "country_text": true
+    },
+    {
+      "kind": "issue",
+      "number": 179,
+      "title": "Review Caribbean interior batch 3: Cuba, Haiti, Jamaica + 6 more existing areas",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/179",
+      "subject_matches": [],
+      "package_literal": false,
+      "country_text": true
+    },
+    {
+      "kind": "issue",
+      "number": 177,
+      "title": "Review Caribbean interior batch 1: Aruba, Bahamas, Cayman Islands + 6 more existing areas",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/177",
+      "subject_matches": [
+        "gb:CUB:ADM2:75667366B10388242457894",
+        "gb:CUB:ADM2:75667366B10680094164751",
+        "gb:CUB:ADM2:75667366B11766528680291",
+        "gb:CUB:ADM2:75667366B12605402479047",
+        "gb:CUB:ADM2:75667366B15173471690010",
+        "gb:CUB:ADM2:75667366B15427453282982",
+        "gb:CUB:ADM2:75667366B18779675214629",
+        "gb:CUB:ADM2:75667366B18879934460880",
+        "gb:CUB:ADM2:75667366B19835862496893",
+        "gb:CUB:ADM2:75667366B19980502726207",
+        "gb:CUB:ADM2:75667366B2002412802844",
+        "gb:CUB:ADM2:75667366B23583938902461",
+        "gb:CUB:ADM2:75667366B25903359168563",
+        "gb:CUB:ADM2:75667366B26080416722316",
+        "gb:CUB:ADM2:75667366B26845086877570",
+        "gb:CUB:ADM2:75667366B28750002223070",
+        "gb:CUB:ADM2:75667366B30494015691989",
+        "gb:CUB:ADM2:75667366B31265103522165",
+        "gb:CUB:ADM2:75667366B3179564295802",
+        "gb:CUB:ADM2:75667366B31859189272131",
+        "gb:CUB:ADM2:75667366B3386148809140",
+        "gb:CUB:ADM2:75667366B34198341478564",
+        "gb:CUB:ADM2:75667366B34978007419445",
+        "gb:CUB:ADM2:75667366B35074617847721",
+        "gb:CUB:ADM2:75667366B38669823996593",
+        "gb:CUB:ADM2:75667366B38833271967671",
+        "gb:CUB:ADM2:75667366B39202767563909",
+        "gb:CUB:ADM2:75667366B42220855402560",
+        "gb:CUB:ADM2:75667366B44154135823395",
+        "gb:CUB:ADM2:75667366B45015819829333",
+        "gb:CUB:ADM2:75667366B46102635862321",
+        "gb:CUB:ADM2:75667366B4706922994966",
+        "gb:CUB:ADM2:75667366B47194088471769",
+        "gb:CUB:ADM2:75667366B47389896256",
+        "gb:CUB:ADM2:75667366B49025507333210",
+        "gb:CUB:ADM2:75667366B49038548326439",
+        "gb:CUB:ADM2:75667366B49196044130673",
+        "gb:CUB:ADM2:75667366B50607521886252",
+        "gb:CUB:ADM2:75667366B5141529927700",
+        "gb:CUB:ADM2:75667366B55450845848024",
+        "gb:CUB:ADM2:75667366B56415669308485",
+        "gb:CUB:ADM2:75667366B58223785748914",
+        "gb:CUB:ADM2:75667366B58423249689704",
+        "gb:CUB:ADM2:75667366B5928073683426",
+        "gb:CUB:ADM2:75667366B60074867578630",
+        "gb:CUB:ADM2:75667366B61514763609503",
+        "gb:CUB:ADM2:75667366B6235496505331",
+        "gb:CUB:ADM2:75667366B62928460103923",
+        "gb:CUB:ADM2:75667366B63092623675998",
+        "gb:CUB:ADM2:75667366B65325522017421",
+        "gb:CUB:ADM2:75667366B65648600044594",
+        "gb:CUB:ADM2:75667366B65880514113985",
+        "gb:CUB:ADM2:75667366B66529798652377",
+        "gb:CUB:ADM2:75667366B6678530358474",
+        "gb:CUB:ADM2:75667366B66908051996326",
+        "gb:CUB:ADM2:75667366B68367745340454",
+        "gb:CUB:ADM2:75667366B69202185225589",
+        "gb:CUB:ADM2:75667366B69518596321544",
+        "gb:CUB:ADM2:75667366B71613146081304",
+        "gb:CUB:ADM2:75667366B7171439243991",
+        "gb:CUB:ADM2:75667366B73853566554491",
+        "gb:CUB:ADM2:75667366B73876769816488",
+        "gb:CUB:ADM2:75667366B76262272549979",
+        "gb:CUB:ADM2:75667366B7803341445428",
+        "gb:CUB:ADM2:75667366B79453709532283",
+        "gb:CUB:ADM2:75667366B79962068280443",
+        "gb:CUB:ADM2:75667366B80263662304106",
+        "gb:CUB:ADM2:75667366B81437275330712",
+        "gb:CUB:ADM2:75667366B81992415495720",
+        "gb:CUB:ADM2:75667366B82556438360114",
+        "gb:CUB:ADM2:75667366B82870270071557",
+        "gb:CUB:ADM2:75667366B829419499099",
+        "gb:CUB:ADM2:75667366B86823637835543",
+        "gb:CUB:ADM2:75667366B86860977517537",
+        "gb:CUB:ADM2:75667366B87194513843542",
+        "gb:CUB:ADM2:75667366B87842371437689",
+        "gb:CUB:ADM2:75667366B91712962926649",
+        "gb:CUB:ADM2:75667366B92334467605945",
+        "gb:CUB:ADM2:75667366B92506466281371",
+        "gb:CUB:ADM2:75667366B93291752136089",
+        "gb:CUB:ADM2:75667366B93303026760321",
+        "gb:CUB:ADM2:75667366B93428692702847",
+        "gb:CUB:ADM2:75667366B93847620286343",
+        "gb:CUB:ADM2:75667366B94668251008376",
+        "gb:CUB:ADM2:75667366B9514275444181",
+        "gb:CUB:ADM2:75667366B9750656068001",
+        "gb:CUB:ADM2:75667366B98184381496608"
+      ],
+      "package_literal": false,
+      "country_text": true
+    },
+    {
+      "kind": "issue",
+      "number": 176,
+      "title": "Complete regional geography audit: Caribbean",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/176",
+      "subject_matches": [],
+      "package_literal": false,
+      "country_text": true
+    }
+  ],
+  "inputs": [
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "bytes": 1754890,
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-package-queue.json",
+      "bytes": 3259790,
+      "sha256": "3ccb2d5ef10ea9b7501784b44c7c0ea783df346009dfbb2cc9189a147b9df2f0"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "bytes": 1844315,
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json",
+      "bytes": 120963,
+      "sha256": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-unassigned-summary.json",
+      "bytes": 154672,
+      "sha256": "a82c56c1d92ff52c0b0e52c9bf329905a05bace4b6a27c12771509d419888501"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+      "bytes": 4404456,
+      "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-027.json.gz",
+      "bytes": 658909,
+      "sha256": "3ef85aa6a7bc9235fffe06a46bea69bfffa9fcb9d13aeb32a364b16191efb696",
+      "decoded_bytes": 5022444,
+      "decoded_sha256": "7f1751b5c741ffed290a3553a8ee86410ba2f42dda0681d9acf954ad719d2a22"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-027.json.gz",
+      "bytes": 502097,
+      "sha256": "bd038c98361e9d2ee6187765ceb7d91b6bb174114f5dfccd7b92c376839c1eea",
+      "decoded_bytes": 2488924,
+      "decoded_sha256": "bbae9fd5766c25ab46c02fda90f2bc788e81eb4eca3b419591866ab43ba98b61"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-027.json.gz",
+      "bytes": 14381,
+      "sha256": "2280371346676eac0ca982c040504a9dcba640cf66c5c2c3d1385de44cb3767a",
+      "decoded_bytes": 92288,
+      "decoded_sha256": "2d251bfcf589c0db7d02be77ac011b25e509bb910e7811532f20aa75a33720f4"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-028.json.gz",
+      "bytes": 476733,
+      "sha256": "2000877ef3d698ee43b6e1ae0d7bb0cb8cf505a94b21255076691311fb5c3ba4",
+      "decoded_bytes": 3372962,
+      "decoded_sha256": "1ea269bc51f49a00166c22ffcb3f875761fd98d7c9423b4dd96019b0d584774a"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-028.json.gz",
+      "bytes": 436795,
+      "sha256": "2d3327eb79a3ef3d56ec58e1400f8394754881183d2937747c303aeef9098cd5",
+      "decoded_bytes": 2055434,
+      "decoded_sha256": "7f11b44dd86940e523b550a4c6a8572714de4cd490629d71bd9e00426c14f700"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-028.json.gz",
+      "bytes": 2094,
+      "sha256": "a878b7eab8260dfc4ab3b1db67e39ef4667047bc8980d779c645b0598f60d234",
+      "decoded_bytes": 13594,
+      "decoded_sha256": "339f333f640ba15c8c22f71b3db888c871464621c2f193780f4a946596f07cd8"
+    },
+    {
+      "commit": "3b3e9e675cfb37999d5665438f9fbf25bbd4238b",
+      "path": "data/ownership-selection.json",
+      "bytes": 1850,
+      "sha256": "73cd741bc51a43faeda36cf8e034f3c49caf45ca7f7c60e042569551f4bb2716"
+    },
+    {
+      "commit": "3b3e9e675cfb37999d5665438f9fbf25bbd4238b",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/ownership-selection-greenland-current.json",
+      "bytes": 3484,
+      "sha256": "6b65c91bfd633d0a8b275ef8c7a13890349e366d4c77053f8bad9b3f3d0c8ac8"
+    },
+    {
+      "commit": "c8a5133bc78923b8ca78c6feeb992b87ceaa8c17",
+      "bytes": 12708346,
+      "git_blob_oid": "df3c7f8efa3c0d694e4b0629b9486e09dbe294c5",
+      "mode": "100644",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/composition-current-001/patch.json",
+      "sha256": "bb62deda4e1bf4b2d51a08baf6503b21ed13e54a9f1cf03e7c52e408b3518643"
+    },
+    {
+      "commit": "3b3e9e675cfb37999d5665438f9fbf25bbd4238b",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    {
+      "commit": "3b3e9e675cfb37999d5665438f9fbf25bbd4238b",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CUB-ADM1-000.bin.gz",
+      "bytes": 171156,
+      "sha256": "ce8ea8b4edbd8c70a8c9eafe0e5c36c53051278e6f5ea56cce8cda87d2ab2492",
+      "decoded_bytes": 557992,
+      "decoded_sha256": "c146dae6fe44c3d28e0025df1b4fa348caea41de6c688586144d02577e255ecf"
+    },
+    {
+      "commit": "3b3e9e675cfb37999d5665438f9fbf25bbd4238b",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CUB-ADM2-000.bin.gz",
+      "bytes": 280212,
+      "sha256": "08a99180bc79433b33b79b1d1b78ab27a2ecdef68ef04e6f0871267e2842c405",
+      "decoded_bytes": 922009,
+      "decoded_sha256": "1673cb709da1d112b9e81f4a0c105ccfb6c9edcf3f72c392b28069b74d801d45"
+    }
+  ],
+  "transport": {
+    "path": "original-intervals.json.gz",
+    "bytes": 49363,
+    "sha256": "d5da33e2e8f8892899035828b17df9a27f240aa55261aac8c8bc3f39f0d8a802"
+  },
+  "limits": [
+    "No claim or scientific qualification has been made.",
+    "Original queue owner mapping is only the frozen requested scope; complete ownerless foreign originals must be tested separately.",
+    "Current source authority, actual construction intent and unresolved obligations still require substantive review."
+  ]
+}

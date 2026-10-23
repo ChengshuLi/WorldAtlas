@@ -31,11 +31,15 @@ const registryBody=pin=>{
 const registry=registryBody(certificate.registry),originalRegistry=registryBody(certificate.predecessor_registry);
 validateRetainedRegistryPrefixes(registry,originalRegistry);
 const releaseCatalogue=registryBody(certificate.release_product_catalogue);
-const completeInputs=completeReleaseProductInputs(certificate,releaseCatalogue);
+const consumerPin=certificate.application_consumer_code,consumerRaw=fs.readFileSync(path.join(root,consumerPin.path));
+assert.equal(consumerRaw.length,consumerPin.bytes);assert.equal(createHash('sha256').update(consumerRaw).digest('hex'),consumerPin.sha256);
+const consumerCode=JSON.parse(consumerRaw);
+const completeInputs=completeReleaseProductInputs(certificate,releaseCatalogue,consumerCode);
+assert.equal(completeInputs.length,500);
 assert.deepEqual(authenticateReleaseCatalogueMetadata(root,certificate.release_product_catalogue),releaseCatalogue);
 let catalogueMutationRejections=0;
 for(const change of [x=>x.products.pop(),x=>x.products[1]=x.products[0],x=>x.products[0].path='foreign',x=>x.products[0].mode='100755',x=>delete x.products[0].bytes,x=>x.issue=1]){
- const changed=structuredClone(releaseCatalogue);change(changed);assert.throws(()=>completeReleaseProductInputs(certificate,changed));catalogueMutationRejections++;
+ const changed=structuredClone(releaseCatalogue);change(changed);assert.throws(()=>completeReleaseProductInputs(certificate,changed,consumerCode));catalogueMutationRejections++;
 }
 
 const releaseProducts=normalizedReleaseProductPins(registry,releaseCatalogue.products);
@@ -51,7 +55,7 @@ let releaseProductRejections=0,releaseProductAdverseOpens=0;
 const originalOpen=fs.openSync;fs.openSync=(...args)=>{releaseProductAdverseOpens++;return originalOpen(...args);};
 try {
  for(const change of [p=>delete p[0].bytes,p=>p[0].path='foreign.json.gz',p=>p[0].sha256='0'.repeat(64),
-   p=>p[0].decoded_sha256='0'.repeat(64),p=>delete p[0].decoded_bytes,p=>p[0].bytes=32*1024*1024+1,
+   p=>p[0].decoded_sha256='0'.repeat(64),p=>delete p[0].decoded_bytes,p=>p[0].bytes++,
    p=>p[0].mode='100755',p=>p.pop(),p=>p.reverse(),p=>p[1]=p[0]]){
   const changed=structuredClone(releaseProducts);change(changed);
   assert.throws(()=>authenticateReleaseProducts(root,registry,changed));releaseProductRejections++;

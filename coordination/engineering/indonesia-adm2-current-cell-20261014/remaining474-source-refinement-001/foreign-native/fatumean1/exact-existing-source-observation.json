@@ -1,0 +1,131 @@
+{
+  "whole_actual_symmetric_comparison_sha256": "31173774757bb332105e5df431bdbcba858c5d96173da7591f428dd3cb6100f9",
+  "record": {
+    "request": {
+      "id": "conflict:TimorPNG:4:137844:222101",
+      "original_package": "conflict",
+      "country": "TLS",
+      "y": 137844,
+      "x": 222101,
+      "original_record": {
+        "interval_id": "idn-source-conflict:137844:222101:222102",
+        "y": 137844,
+        "start": 222101,
+        "end": 222102,
+        "cell_count": 1,
+        "physical_support_class": "land",
+        "candidate_owner_indices": [
+          22839,
+          42172
+        ],
+        "competing_stable_subject_ids": [
+          "gb:IDN:ADM2:22746128B36840991830224",
+          "gb:TLS:ADM2:22284137B11881161065747"
+        ],
+        "competing_subject_names": [
+          "Belu",
+          "Fatumean"
+        ],
+        "province_ids": [
+          "framework:province:east-nusa-tenggara:5b5b49121e97",
+          "framework:province:cova-lima:77efc0acc95b"
+        ],
+        "all_source_feature_indices": [
+          36248,
+          36306,
+          58385
+        ],
+        "all_source_feature_ids": [
+          "gb:IDN:ADM1:65028918B90323071856071",
+          "gb:IDN:ADM2:22746128B36840991830224",
+          "gb:TLS:ADM2:22284137B11881161065747"
+        ],
+        "current_owner": 0,
+        "decision": "held-unresolved-source-mapping",
+        "accepted_cells": 0,
+        "held_cells": 1,
+        "record_locators": {
+          "extracted_input": ".cache/idn-adm2-extraction-20261014-v1/conflict/block-033.json.gz",
+          "json_pointer": "/4",
+          "frozen_input": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-033.json.gz",
+          "frozen_run_pointers": [
+            "/2676/runs/4"
+          ]
+        },
+        "authority_finding_ids": [
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5"
+        ],
+        "next_action_id": "A3",
+        "longitude_exact_rational": "16383330/131083",
+        "longitude_approx": 124.98439919745505,
+        "latitude_f64": -9.244356744626964,
+        "latitude_exact_hex": "-0x1.27d1c53c575adp+3",
+        "utm51s_approx_locator_only": {
+          "easting_m": 718006.504385755,
+          "northing_m": 8977525.583644532,
+          "method": "scalar WGS84 truncated transverse-Mercator series; locator only, not certified datum/epoch transformation or boundary-side proof"
+        }
+      },
+      "original_request_custody": {
+        "bytes": 12166,
+        "sha256": "099255b963b98c5b437e3169a5846987e6ea18b1bcdf74ffc2659e706be51c30",
+        "local_source_path_omitted": true
+      }
+    },
+    "original_idn_memberships": [
+      {
+        "source_id": "gb:IDN:ADM2:22746128B36840991830224",
+        "feature_ordinal": 46,
+        "shapeName": "Belu",
+        "kind": "interior"
+      }
+    ],
+    "full_idn_memberships": [],
+    "full_foreign_memberships": [
+      {
+        "source_id": "gb:TLS:ADM2:22284137B11881161065747",
+        "feature_ordinal": 18,
+        "shapeName": "Fatumean",
+        "kind": "interior"
+      }
+    ],
+    "foreign_family_details": {
+      "gb:TLS:ADM2": {
+        "original_request_id": "conflict:TimorPNG:4:137844:222101",
+        "y": 137844,
+        "x": 222101,
+        "original_memberships": [
+          {
+            "source_id": "gb:TLS:ADM2:22284137B11881161065747",
+            "feature_ordinal": 18,
+            "shapeName": "Fatumean",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:TLS:ADM2:22284137B11881161065747",
+            "feature_ordinal": 18,
+            "shapeName": "Fatumean",
+            "kind": "interior"
+          }
+        ]
+      },
+      "gb:TLS:ADM1": {
+        "original_request_id": "conflict:TimorPNG:4:137844:222101",
+        "y": 137844,
+        "x": 222101,
+        "original_memberships": [],
+        "full_memberships": []
+      }
+    },
+    "symmetric_source_category": "IDN-full-outside__foreign-full-contact",
+    "source_applicability_or_owner_winner": null,
+    "hold_or_owner_changes": false,
+    "authority_or_repair_credit": 0
+  }
+}

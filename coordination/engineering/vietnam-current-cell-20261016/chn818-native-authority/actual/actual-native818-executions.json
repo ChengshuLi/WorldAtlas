@@ -1,0 +1,58 @@
+{
+  "input_commit": "a6fb19a5b4e095c82d5b667cbe372ec4df9ad195",
+  "executions": [
+    {
+      "bank": "next557",
+      "proposed_cells": 251,
+      "exit_code": null,
+      "exit_code_gap": "Reporting helper raisedAttributeError decoding wait4status after child completed and was reaped; no native replay.",
+      "wrapper_failure": "os.waitstatus_to_exitcode unavailable in systemPython",
+      "CLI_elapsed_seconds": 11.997344041,
+      "CLI_reported_qualified_cells": 251,
+      "stdout": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/original-decisions-20261015/bulk-completion/repair/chn1506-source-reconciliation/native818-authority-inputs/actual-native818-next557.stdout.log",
+      "stderr": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/original-decisions-20261015/bulk-completion/repair/chn1506-source-reconciliation/native818-authority-inputs/actual-native818-next557.stderr.log",
+      "output": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/original-decisions-20261015/bulk-completion/repair/chn1506-source-reconciliation/native818-authority-inputs/stock-run-worktree/.cache/delivery-handoff/native818-next557-001"
+    },
+    {
+      "bank": "next351",
+      "proposed_cells": 479,
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "scripts/prepare-delivery-handoff.mjs",
+        "native-authority",
+        ".cache/config-native818-next351.json",
+        ".cache/delivery-handoff/native818-next351-001"
+      ],
+      "cwd": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/original-decisions-20261015/bulk-completion/repair/chn1506-source-reconciliation/native818-authority-inputs/stock-run-worktree",
+      "exit_code": 0,
+      "raw_wait_status": 0,
+      "wall_seconds": 15.29439902305603,
+      "ru_maxrss": 764280832,
+      "ru_maxrss_units": "bytes",
+      "stdout": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/original-decisions-20261015/bulk-completion/repair/chn1506-source-reconciliation/native818-authority-inputs/actual-native818-next351.stdout.log",
+      "stderr": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/original-decisions-20261015/bulk-completion/repair/chn1506-source-reconciliation/native818-authority-inputs/actual-native818-next351.stderr.log",
+      "output": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/original-decisions-20261015/bulk-completion/repair/chn1506-source-reconciliation/native818-authority-inputs/stock-run-worktree/.cache/delivery-handoff/native818-next351-001"
+    },
+    {
+      "bank": "missing235",
+      "proposed_cells": 88,
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "scripts/prepare-delivery-handoff.mjs",
+        "native-authority",
+        ".cache/config-native818-missing235.json",
+        ".cache/delivery-handoff/native818-missing235-001"
+      ],
+      "cwd": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/original-decisions-20261015/bulk-completion/repair/chn1506-source-reconciliation/native818-authority-inputs/stock-run-worktree",
+      "exit_code": 0,
+      "raw_wait_status": 0,
+      "wall_seconds": 13.94697093963623,
+      "ru_maxrss": 753647616,
+      "ru_maxrss_units": "bytes",
+      "stdout": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/original-decisions-20261015/bulk-completion/repair/chn1506-source-reconciliation/native818-authority-inputs/actual-native818-missing235.stdout.log",
+      "stderr": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/original-decisions-20261015/bulk-completion/repair/chn1506-source-reconciliation/native818-authority-inputs/actual-native818-missing235.stderr.log",
+      "output": "/Users/chengshuli/Documents/Codex/2026-10-13/task/vietnam-next/original-decisions-20261015/bulk-completion/repair/chn1506-source-reconciliation/native818-authority-inputs/stock-run-worktree/.cache/delivery-handoff/native818-missing235-001"
+    }
+  ],
+  "qualified_or_accepted_credit_not_assumed": true
+}

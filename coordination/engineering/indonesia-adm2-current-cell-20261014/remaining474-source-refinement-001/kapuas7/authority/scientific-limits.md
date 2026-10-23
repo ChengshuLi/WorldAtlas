@@ -1,0 +1,7 @@
+# Actual Kapuas7 stock qualification
+
+The unchanged accepted stock entry executed at Root-authorized HEAD f82acf8da15646afd9ef51d57e2bd0c186f4aabd using immutable source/patch e201cfae0476779c66e6d6e90b4f2960e719e67e. It exited0 at2026-10-15T23:52:22.091349Z; internal12.176417459seconds/external12.997100958seconds,316112896-byte observed child lifetime peak. Normal runtime defaults/no application memory limiter or heap flags.
+
+The complete original authority-binding, original-rule-preimage, constructor-result and preparation are retained byte-for-byte from the stock output. Nothing is reconstructed from a receipt or handwritten binding. Constructor-result contains exactly7 native cells, owner23115, one original component, and all seven reviewed original native rows. The input remains the original positive source/physical/member/base facts with complete full MYS foreign negatives; actual symmetric full519IDN sole Kapuas support and independent JMG observations remain in the immutable source-refinement packet.
+
+No physical/source producer is replayed, no legal border or jurisdiction is inferred from a provider resolution choice, and no additional original250 Kapuas hold is qualified. Independent actual26 result review is assigned to the consolidated reviewer; the prior exactscientific amendment review is retained in the input checkpoint. Selected-final ownerzero/conservation/patch/picker checks and ordinary delivery acceptance remain pending. Qualification supplies zero accepted-repair credit until that acceptance.

@@ -11,7 +11,7 @@ export function migrateReference(db,read){
   const current=new Map(db.prepare('SELECT id,metadata,active FROM locations').all().map(l=>[l.id,{...l,metadata:JSON.parse(l.metadata)}]));
   const retired=new Set(read('semantic-report.json').retired.map(r=>r.id));
   const obsolete=[...current.values()].filter(l=>l.active&&!ids.has(l.id)&&(retired.has(l.id)||bundledSources.has(l.metadata.source_name)));
-  if(!obsolete.length&&features.every(f=>current.get(f.id)?.metadata.reference_revision===revision))return;
+  if(!obsolete.length&&features.every(f=>current.get(f.id)?.metadata.reference_revision===revision))return revision;
   const file=db.prepare('PRAGMA database_list').all().find(d=>d.name==='main')?.file;
   if(file&&fs.existsSync(file))db.prepare('VACUUM INTO ?').run(`${file}.reference-backup-${Date.now()}`);
   db.exec('BEGIN');
@@ -28,4 +28,5 @@ export function migrateReference(db,read){
     for(const l of obsolete)db.prepare('UPDATE locations SET active=0,metadata=? WHERE id=?').run(JSON.stringify({...l.metadata,retired_reason:'Superseded by the semantic reference coverage; original geometry and all historical records retained'}),l.id);
     db.exec('COMMIT');
   }catch(e){db.exec('ROLLBACK');throw e;}
+  return revision;
 }

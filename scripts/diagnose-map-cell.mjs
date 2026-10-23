@@ -6,8 +6,9 @@ import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {execFileSync} from 'node:child_process';
 import {isDeepStrictEqual} from 'node:util';
-import {ImmutableReader, loadBaseSelection, loadNativeRowTable, acquireNativeRows} from './check-effective-geographic-regression.mjs';
+import {ImmutableReader, loadBaseSelection, selectedReferenceOwners, loadNativeRowTable, acquireNativeRows} from './check-effective-geographic-regression.mjs';
 import {normaliseRetainedRepairLedger} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {scientificNativeSelection} from '../src/reference-metadata.js';
 import {nativeRuntimeIndex} from '../src/native-runtime.js';
 import {nativePolygonIntervals, NATIVE_GRID_METHOD} from '../src/native-grid.js';
 import {loadNativeLatitudes} from '../src/native-latitudes.js';
@@ -16,10 +17,9 @@ import {pickOwnership} from '../src/pixel-ownership.js';
 import {projectCell} from '../src/pixel-grid.js';
 import {diagnoseMapCell} from '../src/map-cell-diagnosis.js';
 
-const MAX = 32 * 1024 * 1024;
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const demand = (condition, message) => { if (!condition) throw Error(message); };
-const decode = bytes => bytes[0] === 31 && bytes[1] === 139 ? gunzipSync(bytes, {maxOutputLength: MAX}) : bytes;
+const decode = bytes => bytes[0] === 31 && bytes[1] === 139 ? gunzipSync(bytes) : bytes;
 const json = bytes => JSON.parse(decode(bytes));
 const polygons = g => g.type === 'Polygon' ? [g.coordinates] : g.coordinates;
 
@@ -109,13 +109,13 @@ export async function diagnoseCells({repo, commit, cells, original = [], consume
   demand(Array.isArray(cells) && cells.length > 0, 'Supply at least one cell');
   const reader = new ImmutableReader(repo, commit), snapshot = loadBaseSelection(reader);
   demand(snapshot, 'No committed native selection');
+  const referenceOwners = selectedReferenceOwners(snapshot);
   const {size} = snapshot.manifest;
   for (const cell of cells) demand(Number.isInteger(cell.x) && Number.isInteger(cell.y) && cell.x >= 0 && cell.y >= 0 && cell.x < size && cell.y < size, 'Cell outside canonical grid');
-  reader.metadataBytes += snapshot.metadataBytes; reader.phase();
   const readPin = pin => {
     let version = pin.commit ?? commit;
     try { reader.git('cat-file', '-e', version + '^{commit}'); } catch { version = commit; }
-    const raw = reader.read(pin.path, {version, expected: pin.sha256, decoded: pin.decoded_bytes ?? 0});
+    const raw = reader.read(pin.path, {version, expected: pin.sha256});
     demand(raw.length === pin.bytes, 'Selected source size differs');
     const body = decode(raw);
     if (pin.decoded_sha256) demand(sha(body) === pin.decoded_sha256, 'Selected decoded source differs');
@@ -125,22 +125,19 @@ export async function diagnoseCells({repo, commit, cells, original = [], consume
   const latitudePin = snapshot.manifest.native_latitudes;
   const latitudes = await loadNativeLatitudes({...snapshot.manifest, native_latitudes: {...latitudePin, transport_path: 'native-v1/native-row-latitudes.f64le.gz'}}, reference,
     async () => new Response(readPin(latitudePin)));
-  reader.metadataBytes += latitudes.byteLength;
   let patch = {rows: []}, additions = [];
   if (snapshot.selection.additive_release) {
-    reader.phase();
     const sidecar = json(readPin(snapshot.selection.additive_release));
-    const {additive_release, ...base} = snapshot.selection;
+    // loadBaseSelection separately authenticates and applies reference metadata.
+    // The retained sidecar still binds the original scientific native selection.
+    const base = scientificNativeSelection(snapshot.selection);
     demand(isDeepStrictEqual(sidecar.base_selection, base), 'Additive selection belongs to a different base');
     const ledger = json(readPin(sidecar.logical_asset_map.ledger));
     patch = json(readPin(sidecar.logical_asset_map.patch));
     const registry = json(readPin(sidecar.authority_registry));
     additions = [...normaliseRetainedRepairLedger(ledger, registry).rows.values()];
-    reader.metadataBytes += Buffer.byteLength(JSON.stringify({patch, additions}));
   }
-  reader.phase();
   const table = loadNativeRowTable(snapshot);
-  reader.metadataBytes += table.byteLength;
   const ys = [...new Set(cells.map(c => c.y))].sort((a, b) => a - b), native = acquireNativeRows(snapshot, table, ys);
   const reports = cells.map(cell => {
     const k = ys.indexOf(cell.y), row = [];
@@ -150,13 +147,12 @@ export async function diagnoseCells({repo, commit, cells, original = [], consume
     for (const run of row) { demand(run.length === 3 && run.every(Number.isSafeInteger) && run[0] >= end && run[1] > run[0] && run[1] <= size && snapshot.owners[run[2] - 1], 'Invalid or overlapping effective native row'); end = run[1]; }
     const owner = row.find(r => r[0] <= cell.x && cell.x < r[1])?.[2] ?? 0;
     return {cell: {...cell, longitude: (cell.x + .5) / size * 360 - 180, latitude: latitudes[cell.y]},
-      effectiveOwner: owner ? snapshot.owners[owner - 1] : {index: 0, id: null},
+      effectiveOwner: owner ? referenceOwners[owner - 1] : {index: 0, id: null},
       physicalEvidence: [], lineage: {original: [], consumed: [], selected: empty(), native: {first_owner: owner, method: NATIVE_GRID_METHOD}}, transitions: []};
   });
   const owners = new Map(snapshot.owners.map(o => [o.id, o.index])), seen = new Set();
   const sourceInfo = new Map();
   for (const name of snapshot.geometrySources.paths) {
-    reader.phase();
     const result = snapshot.geometrySources.read(name), features = result.collection.features;
     for (const feature of features) {
       demand(owners.has(feature.id) && !seen.has(feature.id), 'Duplicate or foreign selected feature'); seen.add(feature.id);
@@ -175,12 +171,10 @@ export async function diagnoseCells({repo, commit, cells, original = [], consume
     report.lineage.selected.coverage = 'complete-selected-world-roster-and-committed-additions';
   }
 
-  reader.phase();
   const administrativeSources = reader.json('data/administrative-sources.json');
   // Optional upstream and physical GeoJSON files use their existing format and
   // original IDs. They are inputs at this commit, not a new evidence manifest.
   for (const [role, paths] of [['original', original], ['consumed', consumed], ['physical', physical]]) for (const name of paths) {
-    reader.phase();
     const raw = reader.read(name), body = decode(raw), value = JSON.parse(body);
     const features = value.type === 'FeatureCollection' ? value.features : value.type === 'Feature' ? [value] : null;
     demand(Array.isArray(features), 'Source input must be GeoJSON');
@@ -215,7 +209,6 @@ export async function diagnoseCells({repo, commit, cells, original = [], consume
 async function physicalReference(reader, snapshot, reports, {size, latitudes}) {
   const name = 'data/coverage-classification/manifest.json';
   try {
-    reader.phase();
     const manifest = reader.json(name);
     const canonical = reader.read('data/canonical-grid/manifest.json', {version: manifest.geography_commit});
     const grid = JSON.parse(canonical);

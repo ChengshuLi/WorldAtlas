@@ -1,0 +1,514 @@
+{
+  "version": 1,
+  "kind": "palau-original-physical-candidate-centre-inspection",
+  "whole_target_support_sha256": "344f060db3955769de8acef2d6772f7a074afc9cf07399c6f7a016a503a26d0d",
+  "shapely": "2.1.2",
+  "geos": "3.13.1",
+  "complete_targets": 16,
+  "candidate_cells": 1117,
+  "rows": [
+    {
+      "id": "gb:PLW:ADM1:51375826B69298749218873",
+      "name": "Aimeliik",
+      "owner": 35433,
+      "candidate_cells": 3,
+      "support_candidate_counts": {
+        "mapped_land_support": 3,
+        "mapped_inland_water_support": 0,
+        "outside_mapped_L1_context": 0,
+        "L2-outside-L1": 0,
+        "L3-outside-L2": 0,
+        "L4-outside-L3": 0,
+        "missing_reconstruction": 0,
+        "extra_reconstruction": 0,
+        "contradictory_land_water_support": 0
+      },
+      "nonempty_support_classes": [
+        "mapped_land_support",
+        "outside_mapped_L1_context",
+        "extra_reconstruction"
+      ],
+      "original_issues": [
+        {
+          "reason": "extra_reconstruction",
+          "geometry_nonempty": true,
+          "bounds": [
+            134.48683224194008,
+            7.4114403,
+            134.507056,
+            7.481816751925527
+          ],
+          "candidate_hits": []
+        }
+      ]
+    },
+    {
+      "id": "gb:PLW:ADM1:51375826B14634142702996",
+      "name": "Airai",
+      "owner": 35423,
+      "candidate_cells": 79,
+      "support_candidate_counts": {
+        "mapped_land_support": 79,
+        "mapped_inland_water_support": 0,
+        "outside_mapped_L1_context": 0,
+        "L2-outside-L1": 0,
+        "L3-outside-L2": 0,
+        "L4-outside-L3": 0,
+        "missing_reconstruction": 0,
+        "extra_reconstruction": 0,
+        "contradictory_land_water_support": 0
+      },
+      "nonempty_support_classes": [
+        "mapped_land_support",
+        "outside_mapped_L1_context",
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "original_issues": [
+        {
+          "reason": "missing_reconstruction",
+          "geometry_nonempty": true,
+          "bounds": [
+            134.5267945,
+            7.3342567,
+            134.5847724,
+            7.3596579
+          ],
+          "candidate_hits": []
+        },
+        {
+          "reason": "extra_reconstruction",
+          "geometry_nonempty": true,
+          "bounds": [
+            134.50265422911315,
+            7.3287103,
+            134.5884631,
+            7.401330180125762
+          ],
+          "candidate_hits": []
+        }
+      ]
+    },
+    {
+      "id": "gb:PLW:ADM1:51375826B68373509078236",
+      "name": "Angaur",
+      "owner": 35432,
+      "candidate_cells": 37,
+      "support_candidate_counts": {
+        "mapped_land_support": 37,
+        "mapped_inland_water_support": 0,
+        "outside_mapped_L1_context": 0,
+        "L2-outside-L1": 0,
+        "L3-outside-L2": 0,
+        "L4-outside-L3": 0,
+        "missing_reconstruction": 0,
+        "extra_reconstruction": 0,
+        "contradictory_land_water_support": 0
+      },
+      "nonempty_support_classes": [
+        "mapped_land_support",
+        "outside_mapped_L1_context",
+        "extra_reconstruction"
+      ],
+      "original_issues": [
+        {
+          "reason": "extra_reconstruction",
+          "geometry_nonempty": true,
+          "bounds": [
+            134.1438965,
+            6.9180173,
+            134.1463197,
+            6.9203035
+          ],
+          "candidate_hits": []
+        }
+      ]
+    },
+    {
+      "id": "gb:PLW:ADM1:51375826B76455151990264",
+      "name": "Hatohobei",
+      "owner": 35434,
+      "candidate_cells": 0,
+      "support_candidate_counts": {
+        "mapped_land_support": 0,
+        "mapped_inland_water_support": 0,
+        "outside_mapped_L1_context": 0,
+        "L2-outside-L1": 0,
+        "L3-outside-L2": 0,
+        "L4-outside-L3": 0,
+        "missing_reconstruction": 0,
+        "extra_reconstruction": 0,
+        "contradictory_land_water_support": 0
+      },
+      "nonempty_support_classes": [
+        "mapped_land_support",
+        "outside_mapped_L1_context"
+      ],
+      "original_issues": []
+    },
+    {
+      "id": "gb:PLW:ADM1:51375826B25708098730444",
+      "name": "Koror",
+      "owner": 35426,
+      "candidate_cells": 719,
+      "support_candidate_counts": {
+        "mapped_land_support": 719,
+        "mapped_inland_water_support": 0,
+        "outside_mapped_L1_context": 0,
+        "L2-outside-L1": 0,
+        "L3-outside-L2": 0,
+        "L4-outside-L3": 0,
+        "missing_reconstruction": 0,
+        "extra_reconstruction": 0,
+        "contradictory_land_water_support": 0
+      },
+      "nonempty_support_classes": [
+        "mapped_land_support",
+        "outside_mapped_L1_context"
+      ],
+      "original_issues": []
+    },
+    {
+      "id": "gb:PLW:ADM1:51375826B21693494950446",
+      "name": "Melekeok",
+      "owner": 35425,
+      "candidate_cells": 22,
+      "support_candidate_counts": {
+        "mapped_land_support": 22,
+        "mapped_inland_water_support": 0,
+        "outside_mapped_L1_context": 0,
+        "L2-outside-L1": 0,
+        "L3-outside-L2": 0,
+        "L4-outside-L3": 0,
+        "missing_reconstruction": 0,
+        "extra_reconstruction": 0,
+        "contradictory_land_water_support": 0
+      },
+      "nonempty_support_classes": [
+        "mapped_land_support"
+      ],
+      "original_issues": []
+    },
+    {
+      "id": "gb:PLW:ADM1:51375826B48991434772650",
+      "name": "Ngaraard",
+      "owner": 35429,
+      "candidate_cells": 55,
+      "support_candidate_counts": {
+        "mapped_land_support": 55,
+        "mapped_inland_water_support": 0,
+        "outside_mapped_L1_context": 0,
+        "L2-outside-L1": 0,
+        "L3-outside-L2": 0,
+        "L4-outside-L3": 0,
+        "missing_reconstruction": 0,
+        "extra_reconstruction": 0,
+        "contradictory_land_water_support": 0
+      },
+      "nonempty_support_classes": [
+        "mapped_land_support",
+        "outside_mapped_L1_context",
+        "extra_reconstruction"
+      ],
+      "original_issues": [
+        {
+          "reason": "extra_reconstruction",
+          "geometry_nonempty": true,
+          "bounds": [
+            134.6005580693535,
+            7.612128701608811,
+            134.609969,
+            7.6150522
+          ],
+          "candidate_hits": []
+        }
+      ]
+    },
+    {
+      "id": "gb:PLW:ADM1:51375826B16617280953256",
+      "name": "Ngarchelong",
+      "owner": 35424,
+      "candidate_cells": 19,
+      "support_candidate_counts": {
+        "mapped_land_support": 19,
+        "mapped_inland_water_support": 0,
+        "outside_mapped_L1_context": 0,
+        "L2-outside-L1": 0,
+        "L3-outside-L2": 0,
+        "L4-outside-L3": 0,
+        "missing_reconstruction": 0,
+        "extra_reconstruction": 0,
+        "contradictory_land_water_support": 0
+      },
+      "nonempty_support_classes": [
+        "mapped_land_support",
+        "outside_mapped_L1_context",
+        "extra_reconstruction"
+      ],
+      "original_issues": [
+        {
+          "reason": "extra_reconstruction",
+          "geometry_nonempty": true,
+          "bounds": [
+            134.6151188,
+            7.683965398467034,
+            134.6373826438675,
+            7.7113108
+          ],
+          "candidate_hits": []
+        }
+      ]
+    },
+    {
+      "id": "gb:PLW:ADM1:51375826B95953962908269",
+      "name": "Ngardmau",
+      "owner": 35437,
+      "candidate_cells": 5,
+      "support_candidate_counts": {
+        "mapped_land_support": 5,
+        "mapped_inland_water_support": 0,
+        "outside_mapped_L1_context": 0,
+        "L2-outside-L1": 0,
+        "L3-outside-L2": 0,
+        "L4-outside-L3": 0,
+        "missing_reconstruction": 0,
+        "extra_reconstruction": 0,
+        "contradictory_land_water_support": 0
+      },
+      "nonempty_support_classes": [
+        "mapped_land_support",
+        "outside_mapped_L1_context"
+      ],
+      "original_issues": []
+    },
+    {
+      "id": "gb:PLW:ADM1:51375826B6202415756314",
+      "name": "Ngeremlengui",
+      "owner": 35431,
+      "candidate_cells": 11,
+      "support_candidate_counts": {
+        "mapped_land_support": 11,
+        "mapped_inland_water_support": 0,
+        "outside_mapped_L1_context": 0,
+        "L2-outside-L1": 0,
+        "L3-outside-L2": 0,
+        "L4-outside-L3": 0,
+        "missing_reconstruction": 0,
+        "extra_reconstruction": 0,
+        "contradictory_land_water_support": 0
+      },
+      "nonempty_support_classes": [
+        "mapped_land_support",
+        "outside_mapped_L1_context"
+      ],
+      "original_issues": []
+    },
+    {
+      "id": "gb:PLW:ADM1:51375826B59587402164376",
+      "name": "Ngatpang",
+      "owner": 35430,
+      "candidate_cells": 18,
+      "support_candidate_counts": {
+        "mapped_land_support": 18,
+        "mapped_inland_water_support": 0,
+        "outside_mapped_L1_context": 0,
+        "L2-outside-L1": 0,
+        "L3-outside-L2": 0,
+        "L4-outside-L3": 0,
+        "missing_reconstruction": 0,
+        "extra_reconstruction": 0,
+        "contradictory_land_water_support": 0
+      },
+      "nonempty_support_classes": [
+        "mapped_land_support",
+        "outside_mapped_L1_context",
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "original_issues": [
+        {
+          "reason": "missing_reconstruction",
+          "geometry_nonempty": true,
+          "bounds": [
+            134.48683224194008,
+            7.4801597,
+            134.5305555,
+            7.49998
+          ],
+          "candidate_hits": []
+        },
+        {
+          "reason": "extra_reconstruction",
+          "geometry_nonempty": true,
+          "bounds": [
+            134.5052371,
+            7.4801597,
+            134.524575,
+            7.49998
+          ],
+          "candidate_hits": []
+        }
+      ]
+    },
+    {
+      "id": "gb:PLW:ADM1:51375826B32695076810418",
+      "name": "Ngchesar",
+      "owner": 35427,
+      "candidate_cells": 11,
+      "support_candidate_counts": {
+        "mapped_land_support": 11,
+        "mapped_inland_water_support": 0,
+        "outside_mapped_L1_context": 0,
+        "L2-outside-L1": 0,
+        "L3-outside-L2": 0,
+        "L4-outside-L3": 0,
+        "missing_reconstruction": 0,
+        "extra_reconstruction": 0,
+        "contradictory_land_water_support": 0
+      },
+      "nonempty_support_classes": [
+        "mapped_land_support"
+      ],
+      "original_issues": []
+    },
+    {
+      "id": "gb:PLW:ADM1:51375826B1021187793063",
+      "name": "Ngiwal",
+      "owner": 35422,
+      "candidate_cells": 20,
+      "support_candidate_counts": {
+        "mapped_land_support": 20,
+        "mapped_inland_water_support": 0,
+        "outside_mapped_L1_context": 0,
+        "L2-outside-L1": 0,
+        "L3-outside-L2": 0,
+        "L4-outside-L3": 0,
+        "missing_reconstruction": 0,
+        "extra_reconstruction": 0,
+        "contradictory_land_water_support": 0
+      },
+      "nonempty_support_classes": [
+        "mapped_land_support"
+      ],
+      "original_issues": []
+    },
+    {
+      "id": "gb:PLW:ADM1:51375826B83906845617852",
+      "name": "Peleliu",
+      "owner": 35436,
+      "candidate_cells": 103,
+      "support_candidate_counts": {
+        "mapped_land_support": 103,
+        "mapped_inland_water_support": 0,
+        "outside_mapped_L1_context": 0,
+        "L2-outside-L1": 0,
+        "L3-outside-L2": 0,
+        "L4-outside-L3": 0,
+        "missing_reconstruction": 0,
+        "extra_reconstruction": 0,
+        "contradictory_land_water_support": 0
+      },
+      "nonempty_support_classes": [
+        "mapped_land_support",
+        "outside_mapped_L1_context",
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "original_issues": [
+        {
+          "reason": "missing_reconstruction",
+          "geometry_nonempty": true,
+          "bounds": [
+            134.2305542,
+            6.9807327,
+            134.2863733,
+            7.0905594
+          ],
+          "candidate_hits": []
+        },
+        {
+          "reason": "extra_reconstruction",
+          "geometry_nonempty": true,
+          "bounds": [
+            134.23145094552203,
+            6.9782126,
+            134.2840475,
+            7.0992525
+          ],
+          "candidate_hits": []
+        }
+      ]
+    },
+    {
+      "id": "gb:PLW:ADM1:51375826B80300454073965",
+      "name": "Sonsorol",
+      "owner": 35435,
+      "candidate_cells": 14,
+      "support_candidate_counts": {
+        "mapped_land_support": 14,
+        "mapped_inland_water_support": 0,
+        "outside_mapped_L1_context": 0,
+        "L2-outside-L1": 0,
+        "L3-outside-L2": 0,
+        "L4-outside-L3": 0,
+        "missing_reconstruction": 0,
+        "extra_reconstruction": 0,
+        "contradictory_land_water_support": 0
+      },
+      "nonempty_support_classes": [
+        "mapped_land_support",
+        "outside_mapped_L1_context",
+        "extra_reconstruction"
+      ],
+      "original_issues": [
+        {
+          "reason": "extra_reconstruction",
+          "geometry_nonempty": true,
+          "bounds": [
+            132.2182532,
+            5.3306057,
+            132.2237443,
+            5.3349314
+          ],
+          "candidate_hits": []
+        }
+      ]
+    },
+    {
+      "id": "gb:PLW:ADM1:51375826B36601808440460",
+      "name": "Kayangel",
+      "owner": 35428,
+      "candidate_cells": 1,
+      "support_candidate_counts": {
+        "mapped_land_support": 1,
+        "mapped_inland_water_support": 0,
+        "outside_mapped_L1_context": 0,
+        "L2-outside-L1": 0,
+        "L3-outside-L2": 0,
+        "L4-outside-L3": 0,
+        "missing_reconstruction": 0,
+        "extra_reconstruction": 0,
+        "contradictory_land_water_support": 0
+      },
+      "nonempty_support_classes": [
+        "mapped_land_support",
+        "outside_mapped_L1_context",
+        "extra_reconstruction"
+      ],
+      "original_issues": [
+        {
+          "reason": "extra_reconstruction",
+          "geometry_nonempty": true,
+          "bounds": [
+            134.7184768,
+            8.0859052,
+            134.7211241,
+            8.0940721
+          ],
+          "candidate_hits": []
+        }
+      ]
+    }
+  ],
+  "limit": "Every retained original support and issue geometry was inspected without buffering, snapping or deleting residuals. Point coverage is candidate-relative, not exact whole-shape reconstruction or present physical/legal truth."
+}

@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "selector": {
+    "path": "data/ownership-selection.json",
+    "commit": "5c7e90e54248db11a5f54d638c32c288d25c7023",
+    "mode": "100644",
+    "git_blob_oid": "67d4e0018fd52ace3510d3fdcd12792e15e6a5ae",
+    "bytes": 1845,
+    "sha256": "02c3cfe429c4afb94968cfc69212159e1e03a3b0053f13a3a9c9d3da23d22382"
+  },
+  "effective_release_id": "geography:tanzania-supported-repairs-20261017",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/tanzania-native-repair-recovery-20261017/native-authority-001/original-rule-preimage.json",
+        "commit": "fc6e1594ffa49ef72b0288f225c1b0e5a5d0a875",
+        "mode": "100644",
+        "git_blob_oid": "2f81b17112b0034a3d03f5a60486ad6323062c81",
+        "bytes": 754,
+        "sha256": "5e875d4282f04dddd7c78554f0b83ecb159e98a4f3624bac2fb38b183cab3e6f"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/tanzania-native-repair-recovery-20261017/native-authority-001/authority-binding.json",
+        "commit": "fc6e1594ffa49ef72b0288f225c1b0e5a5d0a875",
+        "mode": "100644",
+        "git_blob_oid": "04d83430f56edb62d79db83c27cfe09192eabd94",
+        "bytes": 757,
+        "sha256": "8feb19d5be3b9b9f91bf581a94ef9e8d0137c498145395d226da18c8f3008763"
+      },
+      "ledger": {
+        "path": "coordination/engineering/tanzania-native-repair-recovery-20261017/native-authority-001/constructor-result.json",
+        "commit": "fc6e1594ffa49ef72b0288f225c1b0e5a5d0a875",
+        "mode": "100644",
+        "git_blob_oid": "f8e7280335f8ad5fbb8ff9d983ea6ddc6924dbce",
+        "bytes": 676374,
+        "sha256": "c8ab12b73456a6f43a481da35177601ce2a3051a19801406a635f0155cccf4e5"
+      },
+      "native_patch": {
+        "bytes": 367389,
+        "commit": "78686e45ba72ee9fcd36f2cdb3dfbe075286b58f",
+        "git_blob_oid": "5e4e67791c70ab2f59f8b317c9de8a5e8a15214b",
+        "mode": "100644",
+        "path": "coordination/engineering/tanzania-native-repair-recovery-20261017/supported-inputs-001/native-patch.json",
+        "sha256": "d593a7a9ab81444486c628734999ee063b09c80e01dd3b22d97b11b54141b584"
+      }
+    }
+  ]
+}

@@ -4,7 +4,6 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
-const CAP=32*1024*1024,TOTAL=256*1024*1024;
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const retained=new WeakMap();
 export function splitOriginalContextRecords(raw){
@@ -30,7 +29,7 @@ export function splitOriginalContextRecords(raw){
  return {prefix,rows,separators,suffix};
 }
 function ordinary(file,pin){
- const stat=fs.lstatSync(file);assert(stat.isFile()&&fs.realpathSync(file)===file&&stat.size===pin.bytes&&stat.size<=CAP);
+ const stat=fs.lstatSync(file);assert(stat.isFile()&&fs.realpathSync(file)===file&&stat.size===pin.bytes);
  assert.equal((stat.mode&0o111)?'100755':'100644',pin.mode??'100644');
  const fd=fs.openSync(file,'r');let raw;
  try{assert.equal(fs.fstatSync(fd).size,stat.size);raw=Buffer.alloc(stat.size+1);let offset=0;
@@ -39,21 +38,17 @@ function ordinary(file,pin){
  }finally{fs.closeSync(fd);}assert.equal(sha(raw),pin.sha256);return raw;
 }
 export const readContextBody=ordinary;
-export function acquireOriginalContextPair({beforeFile,afterFile,beforePin,afterPin,afterRaw,runtimeBytes,codeBytes,reserveBytes=131072}){
+export function acquireOriginalContextPair({beforeFile,afterFile,beforePin,afterPin,afterRaw}){
  const decoded=pin=>pin.decoded_bytes??pin.uncompressed_bytes;
- const retainedOutputReserve=decoded(beforePin)+decoded(afterPin)+reserveBytes;
- let total=runtimeBytes+codeBytes+retainedOutputReserve;assert(Number.isSafeInteger(total)&&total>=0);
- for(const pin of [beforePin,afterPin])for(const n of [pin.bytes,decoded(pin)]){assert(Number.isSafeInteger(n)&&n>0&&n<=CAP);total+=n;}
- assert(total<=TOTAL,'Complete context acquisition exceeds budget before body opens');
+ for(const pin of [beforePin,afterPin])for(const n of [pin.bytes,decoded(pin)])assert(Number.isSafeInteger(n)&&n>0);
  if(afterRaw){assert(Buffer.isBuffer(afterRaw));assert.equal(afterRaw.length,afterPin.bytes);assert.equal(sha(afterRaw),afterPin.sha256);}
  const bodies=[ordinary(beforeFile,beforePin),afterRaw??ordinary(afterFile,afterPin)],pins=[beforePin,afterPin];
- const chunks=bodies.map((raw,i)=>{const result=gunzipSync(raw,{maxOutputLength:CAP});assert.equal(result.length,decoded(pins[i]));assert.equal(sha(result),pins[i].decoded_sha256??pins[i].uncompressed_sha256);return splitOriginalContextRecords(result);});
+ const chunks=bodies.map((raw,i)=>{const result=gunzipSync(raw,{maxOutputLength:decoded(pins[i])+1});assert.equal(result.length,decoded(pins[i]));assert.equal(sha(result),pins[i].decoded_sha256??pins[i].uncompressed_sha256);return splitOriginalContextRecords(result);});
  const [before,after]=chunks;assert.deepEqual(before.rows.map(r=>[r.value.id,r.value.pixelIndex]),after.rows.map(r=>[r.value.id,r.value.pixelIndex]));
  const changes=[];
  for(let i=0;i<before.rows.length;i++)if(!before.rows[i].raw.equals(after.rows[i].raw))changes.push({ordinal:i,id:before.rows[i].value.id,before_sha256:sha(before.rows[i].raw),after_sha256:sha(after.rows[i].raw),before:Buffer.from(before.rows[i].raw),after:Buffer.from(after.rows[i].raw)});
  const result={beforePin:structuredClone(beforePin),afterPin:structuredClone(afterPin),row_count:before.rows.length,changes,
   layouts:[before,after].map(c=>({prefix:Buffer.from(c.prefix),separators:c.separators.map(b=>Buffer.from(b)),suffix:Buffer.from(c.suffix)})),
-  budget:{complete_phase_bytes:total,installed_runtime_bytes:runtimeBytes,actual_code_bytes:codeBytes,reserved_output_review_bytes:retainedOutputReserve,small_metadata_reserve_bytes:reserveBytes},
   original_encoded_sha256:bodies.map(sha),original_decoded_sha256:pins.map(p=>p.decoded_sha256??p.uncompressed_sha256)};
  retained.set(result,sha(Buffer.from(JSON.stringify(result))));return result;
 }

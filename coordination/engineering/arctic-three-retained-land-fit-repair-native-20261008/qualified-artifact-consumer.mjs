@@ -14,7 +14,6 @@ import {requireCheckoutExecution} from './artifact-checkout-execution.mjs';
 import {validateRetainedAssociation} from './qualified-artifact-association.mjs';
 
 const N2 = 'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008';
-const MEMBER_CAP = 32 * 1024 * 1024;
 const BEFORE = 'b9a3c8bf375217dba3a50d1a022ec7e4ac6c6f1cdedff22845da953c805b7433';
 const AFTER = '2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9';
 const MANIFEST = 'd9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba';
@@ -36,7 +35,7 @@ function statBody(root, pin) {
   assert(pin && typeof pin.path === 'string' && !path.isAbsolute(pin.path));
   assert(pin.path.split('/').every(piece => piece && piece !== '.' && piece !== '..') && !pin.path.includes('\\'));
   assert.equal(pin.mode, '100644');
-  assert(Number.isSafeInteger(pin.bytes) && pin.bytes > 0 && pin.bytes <= MEMBER_CAP);
+  assert(Number.isSafeInteger(pin.bytes) && pin.bytes > 0);
   assert(/^[a-f0-9]{64}$/.test(pin.sha256));
   const file = path.join(root, pin.path);
   for (let ancestor = file;; ancestor = path.dirname(ancestor)) {
@@ -85,7 +84,7 @@ function reader(root, ledger, defaultSpace = 'root') {
     assert.equal(sha(raw), pin.sha256, 'Whole selected artifact changed');
     ledger.encoded_read_bytes += raw.length;
     if (pin.decoded_bytes !== undefined) {
-      assert(Number.isSafeInteger(pin.decoded_bytes) && pin.decoded_bytes > 0 && pin.decoded_bytes <= MEMBER_CAP);
+      assert(Number.isSafeInteger(pin.decoded_bytes) && pin.decoded_bytes > 0);
       assert(/^[a-f0-9]{64}$/.test(pin.decoded_sha256));
       const decoded = gunzipSync(raw, {maxOutputLength: pin.decoded_bytes});
       assert.equal(decoded.length, pin.decoded_bytes);
@@ -138,8 +137,8 @@ export function normalizedReleaseProductPins(registry, products) {
     assert.equal(pin.space ?? 'root', 'root');
     assert.equal(pin.path, 'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/release-v9/' + row.path);
     assert.equal(pin.mode, '100644');
-    assert(Number.isSafeInteger(pin.bytes) && pin.bytes > 0 && pin.bytes <= MEMBER_CAP);
-    assert(Number.isSafeInteger(pin.decoded_bytes) && pin.decoded_bytes > 0 && pin.decoded_bytes <= MEMBER_CAP);
+    assert(Number.isSafeInteger(pin.bytes) && pin.bytes > 0);
+    assert(Number.isSafeInteger(pin.decoded_bytes) && pin.decoded_bytes > 0);
     assert.equal(pin.sha256, row.sha256);
     assert.equal(pin.decoded_sha256, row.payload_sha256);
     return pin;
@@ -305,8 +304,6 @@ export async function consumeQualifiedArcticArtifacts({root, stage, selection, r
     ledger.declarations.set(key, declared);
   }
   const releaseCatalogue=JSON.parse(read(certificate.release_product_catalogue));
-  const completeInputs=completeReleaseProductInputs(certificate,releaseCatalogue);
-  for(const pin of completeInputs){const declared=descriptor(pin),key=declarationKey(declared);if(ledger.declarations.has(key))assert.deepEqual(ledger.declarations.get(key),declared);else ledger.declarations.set(key,declared);}
   // Complete qualification inventories remain whole immutable source custody.
   // Ordinary application consumption verifies these records and delivered
   // artifacts; it does not relabel historical inputs as freshly executed.
@@ -317,32 +314,11 @@ export async function consumeQualifiedArcticArtifacts({root, stage, selection, r
     registry: stage.registry, pixel_audit: stage.pixelAudit, selected_geography: selection.selected_geography
   });
   const consumerCode = JSON.parse(read(certificate.application_consumer_code));
-  assert.equal(consumerCode.kind, 'qualified-artifact-application-code-closure-v1');
-  assert(consumerCode.critical_files.length > 0);
-  const entryCritical=consumerCode.entry_critical_files?.[issued.entry_point]??[];
-  assert(Array.isArray(entryCritical));
-  const criticalPins=[...consumerCode.critical_files,...entryCritical];
-  const critical = new Map(criticalPins.map(pin => [pin.path, pin]));
-  assert.equal(critical.size, criticalPins.length);
-  // The certificate carries critical source custody for every supported entry.
-  // Authenticate those complete bodies even when this invocation does not
-  // execute another entry's adapter. Only the exact current entry's subset is
-  // labelled as executed below.
-  const sourceCustody=new Map();
-  for(const pin of [...consumerCode.critical_files,...Object.values(consumerCode.entry_critical_files??{}).flat()]){
-    const previous=sourceCustody.get(pin.path);
-    if(previous)assert.deepEqual(previous,pin);else sourceCustody.set(pin.path,pin);
-  }
-  for(const pin of sourceCustody.values())read(pin);
-  const wrapperPaths = Object.values(consumerCode.entry_roles[issued.entry_point]).flat();
-  assert(wrapperPaths.every(name => typeof name === 'string'));
-  assert.equal(new Set(wrapperPaths).size, wrapperPaths.length);
-  assert(wrapperPaths.every(name => !critical.has(name)), 'Execution roles must be disjoint');
-  assert.deepEqual([...critical.keys(), ...wrapperPaths].sort(), issued.files.map(pin => pin.path).sort(), 'Complete actual execution role closure required');
+  const completeInputs=completeReleaseProductInputs(certificate,releaseCatalogue,consumerCode);
+  ledger.declarations=new Map(completeInputs.map(pin=>{const declared=descriptor(pin);return [declarationKey(declared),declared];}));
+  // Historical code metadata remains authenticated above. The private current
+  // execution authority binds the complete actual committed import closure.
   for (const pin of issued.files) {
-    if (critical.has(pin.path)) assert.deepEqual(pin, critical.get(pin.path), 'Reviewed critical consumer semantics changed');
-    // The remaining explicit role files use their genuine current package-issued
-    // whole source/stage pins. They are not relabelled as historical SCI code.
     const declared = descriptor(pin);
     const key = declarationKey(declared);
     if (ledger.declarations.has(key)) assert.deepEqual(ledger.declarations.get(key), declared);
@@ -537,9 +513,8 @@ export async function consumeQualifiedArcticArtifacts({root, stage, selection, r
     const declared = descriptor(pin, 'image');
     assert.deepEqual(ledger.declarations.get(declarationKey(declared)), declared, 'Reconstructed member absent from complete roster');
   }
-  // All fragment/member roles have been admitted before the unchanged restorer
-  // opens a fragment. The real encoded+decoded reads are charged, including its
-  // second index read, separately from later authenticated member consumption.
+  // All fragment/member roles are declared before the unchanged restorer opens
+  // a fragment. Record its actual complete reads, including the second index read.
   restoreWholeImage(path.dirname(path.join(root, indexPin.path)), image, {expectedIndexSha: indexPin.sha256});
   ledger.encoded_read_bytes += indexPin.bytes;
   const imageReader = reader(image, ledger, 'image');
@@ -555,7 +530,7 @@ export async function consumeQualifiedArcticArtifacts({root, stage, selection, r
         unchanged_locations: 49623, changed_ids: SUBJECTS}, scientific_producers_invoked: false,
       historical_science_reexecuted: false, ordinary_normal_package_contract: true,
       current_execution: {source_head: issued.source_commit, runtime: issued.runtime,
-        full_code_closure: issued.files, critical_consumer_code_sha256: certificate.application_consumer_code.sha256},
+        full_code_closure: issued.files, historical_consumer_code_sha256: certificate.application_consumer_code.sha256},
       consumed_input_bytes: {encoded: ledger.encoded_read_bytes, decoded: ledger.decoded_read_bytes},
       qualification_inventory_sha256: certificate.qualification_inventory.sha256},
     releaseProducts, selectedGeometry:override, predecessorRelease: steps.at(-1).predecessor,

@@ -1,0 +1,151 @@
+{
+  "kind": "bdi-upstream-archive-property-provenance",
+  "as_of": "2026-10-21",
+  "scope": {
+    "repair_package": "gb-BDI-ADM2--repair-evaluation",
+    "full_original_scope": {
+      "cells": 583,
+      "land": 378,
+      "inland_water": 205,
+      "intervals": 433,
+      "owners": 21
+    },
+    "assessment_slice": {
+      "cells": 448,
+      "definition": "mechanically supported cells outside the four separately investigated recorded owners Bugarama, Muhuta, Muha, and Ntahangwa (81 supported cells retained separately)",
+      "other_retained_territorial_holds": 54
+    }
+  },
+  "upstream_archive": {
+    "repository": "wmgeolab/geoBoundaries",
+    "path": "sourceData/gbOpen/BDI_ADM2.zip",
+    "commit": "b7dd6a55701c76a330500ad9d9240f2b9997c6a8",
+    "commit_date": "2023-01-19T12:31:04Z",
+    "commit_message": "Cleared history",
+    "commit_url": "https://github.com/wmgeolab/geoBoundaries/commit/b7dd6a55701c76a330500ad9d9240f2b9997c6a8",
+    "git_lfs_pointer": {
+      "sha256": "522c15fd275ab02381d545e77c291a2a5b6bdc948d20597064e9c84e911d2eae",
+      "bytes": 448304
+    },
+    "retrieval": {
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/b7dd6a55701c76a330500ad9d9240f2b9997c6a8/sourceData/gbOpen/BDI_ADM2.zip",
+      "default_sandbox_attempt": "failed before transfer: DNS resolution failure for media.githubusercontent.com",
+      "authorized_network_attempt": "completed; SHA-256 and byte size matched the exact LFS pointer",
+      "local_temporary_path": "local-retained/bdi-upstream-source-522c15fd.zip",
+      "raw_geometry_published": false
+    },
+    "archive_members": [
+      {
+        "name": "BDI_ADM2.shp",
+        "bytes": 721100,
+        "sha256": "a2f5f6748b1fe5ac496c6828c4fa2bae11233327a57ec05a64803963bf22398b"
+      },
+      {
+        "name": "BDI_ADM2.dbf",
+        "bytes": 2597,
+        "sha256": "602564940073e5573db2008960021084811528e0369378eec21667ec7969c41e"
+      },
+      {
+        "name": "BDI_ADM2.prj",
+        "bytes": 143,
+        "sha256": "98aaf3d1c0ecadf1a424a4536de261c3daf4e373697cb86c40c43b989daf52eb"
+      },
+      {
+        "name": "BDI_ADM2.qpj",
+        "bytes": 257,
+        "sha256": "1de411dcdeedce3219242306fc29bfa1d7fa08883e4ff6779baf798ec50d1657"
+      },
+      {
+        "name": "BDI_ADM2.shx",
+        "bytes": 1052,
+        "sha256": "c9564ecec8de2174a6049ef6c0594f94fd5b7b3ecf762f67d68846580f05e6b6"
+      },
+      {
+        "name": "BDI_ADM2.cpg",
+        "bytes": 5,
+        "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+      },
+      {
+        "name": "meta.txt",
+        "bytes": 497,
+        "sha256": "ddcc0db064b62a2509abc9e2420d4ae96dbbab6727700dca1da61c705a13b5b7"
+      }
+    ],
+    "archive_metadata_text": {
+      "representative_year": "2007.0",
+      "boundary_type": "ADM2",
+      "source_1": "New York University Spatial Data Repository, Stanford University",
+      "source_2": "Map Maker Limited",
+      "license_claim": "Public Domain",
+      "license_notes": "License on metadata pop-up on source page",
+      "license_source": "https://geo.nyu.edu/catalog/stanford-th822mn7301#iso-metadata-reference-info",
+      "other_notes": "blank"
+    },
+    "upstream_project_terms_context": {
+      "readme_at_commit": "https://api.github.com/repos/wmgeolab/geoBoundaries/contents/README.md?ref=b7dd6a55701c76a330500ad9d9240f2b9997c6a8",
+      "readme_summary": "Describes geoBoundaries as an open-license boundary resource, identifies archival GitHub file access, and requests acknowledgement.",
+      "license_at_commit": "https://api.github.com/repos/wmgeolab/geoBoundaries/contents/LICENSE?ref=b7dd6a55701c76a330500ad9d9240f2b9997c6a8",
+      "license_summary": "CC BY 4.0 for project code and derivative works, with an explicit public-domain-material exception; repository license alone is not a fresh independent rights determination for this source archive."
+    },
+    "scoped_history_limit": "The previously queried GitHub path history returned only the 2023 cleared-history commit above; it does not disclose the original acquisition date or a 2007-to-later revision trail."
+  },
+  "dbf_property_comparison": {
+    "method": "Parsed only BDI_ADM2.dbf bytes; did not read, evaluate, transform, or publish shapefile geometry.",
+    "archive_record_count": 119,
+    "fields": [
+      {
+        "name": "Name",
+        "type": "C",
+        "width": 10,
+        "decimals": 0
+      },
+      {
+        "name": "Level",
+        "type": "C",
+        "width": 10,
+        "decimals": 0
+      }
+    ],
+    "level_values": "All 119 records are ADM2.",
+    "retained_geojson_comparison": {
+      "recorded_source_corpus_commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+      "retained_adm2_corpus_feature_count": 119,
+      "retained_property_join": "inventory/bdi-source-property-identity-join.json",
+      "archive_and_retained_Name_Level_order_match": true,
+      "matching_records": 119,
+      "canonical_serialized_Name_Level_sequence_sha256": "e5d3ca273a7c4b6e4d6d5b664aeef11f96584e17e964354fe93f3e6d9efbb44f",
+      "interpretation": "The source archive DBF names and hierarchy levels match the retained 119-feature geoJSON property sequence exactly. The DBF has no shapeID, per-feature vintage, predecessor, or lineage fields, so this is a label-and-order identity bridge only, not proof of geometrical equivalence between the unsimplified archive and retained simplified geoJSON."
+    }
+  },
+  "source_predicate_assessment_for_448": {
+    "exact_original_scope_and_stable_identity": "The retained 119-feature ADM2 family has unique geoBoundaries shapeIDs and source names; the author-authenticated property join reports all 21 direct source targets map to selected owner name/ID, with the four specified reform-sensitive owners kept outside this 448 slice. No source-archive property conflict was found for the remaining targets.",
+    "unique_source_membership": "Existing retained source/physical point comparison reports expected-source hits for all 583 requested centers and evaluates the complete 193-feature source set across BDI ADM1/ADM2, COD ADM1, and TZA ADM1. The 448 subset is mechanically supported after retaining 81 separately investigated keys and 54 territorial holds. The new archive comparison corroborates every one of the 119 ADM2 Name/Level labels, but does not independently compare archive geometry.",
+    "territorial_exclusions_and_competitors": "Keep all 54 diagnostic territorial exclusions. Preserve all 33 exact source contacts: 21 direct BDI ADM2 owners, nine parent-level BDI ADM1 contacts, and three ownerless COD/TZA ADM1 contacts. Their complete families were considered; parent/foreign labels are not direct ownership or clearance.",
+    "physical_and_water": "The existing whole-target physical receipt and exact pointwise physical comparisons are retained; the current native evaluator checks exact adverse issue pointsets cell-wise. Keep all 205 original water cells in the full 583 denominator and their source/physical class witnesses. No issue-free-target blanket rule is imposed.",
+    "source_applicability_limit": "The upstream and retained source identity is now better evidenced, but source metadata explicitly represents 2007 and provides no per-feature revision lineage. Official reform evidence confirms administrative restructuring; it does not identify a target-specific contradiction for these 448 recorded stable-location keys. A modern 42-commune crosswalk is not a blanket precondition under the original stable-target repair semantics. Any newly found target-specific contradiction must be held individually.",
+    "construction_status": "The stock `supported-inputs` preparation succeeded once: it requests 448 cells and retains 135 held cells (81 separately investigated source keys +54 territorial exclusions), with zero overlap and original denominator 583. Existing complete source/physical/negative pins remain unchanged. This advances an ordinary positive-candidate path only; native-authority/constructor and actual selected-native conservation for these 448 still have to run and be assessed before any qualification or completion credit."
+  },
+  "restrictions_and_limits": [
+    "The ZIP was acquired only from the exact public upstream LFS object and remains only at the local temporary path; no raw geometry is included in this record or redistributed.",
+    "The Stanford catalog page returned an actual Request Rejected access-control body; this work did not retry it or acquire that catalog resource through another route.",
+    "The Assembly-hosted law request remains the previously recorded zero-byte connection failure; no law download was retried here.",
+    "A Public Domain statement inside geoBoundaries metadata does not independently resolve underlying source provenance or every downstream rights issue.",
+    "No archive-vs-retained polygon comparison, modern boundary crosswalk, observer, physical producer, diagnostic, or constructor was run in this investigation."
+  ],
+  "supported_input_preparation": {
+    "status": "succeeded; preparation only, no authority or completion emitted",
+    "stock_command": "node scripts/prepare-delivery-handoff.mjs supported-inputs .cache/delivery-handoff/bdi-supported-inputs-001.json coordination/engineering/bdi-source-qualification-20261021/supported-inputs-001",
+    "outputs_path": "coordination/engineering/bdi-source-qualification-20261021/supported-inputs-001",
+    "output_commit": "pending author commit at time of inspection",
+    "original_scope_partition": {
+      "original_cells": 583,
+      "requested_candidate_cells": 448,
+      "held_cells": 135,
+      "existing_native_territorial_holds": 54,
+      "separately_investigated_prior_source_holds": 81,
+      "overlap_between_448_and_held": 0
+    },
+    "source_physical_negative_pins": "retained unchanged from source-evidence-001 / native-diagnostic-001 inputs",
+    "interpretation": "This is a concrete stock-supported candidate request that keeps all 583 original cells accounted for and separates both hold classes. It does not claim an additive repair or an exception; the native authority/constructor and conservation receipt remain required."
+  }
+}

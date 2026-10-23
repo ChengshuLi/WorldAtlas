@@ -1,0 +1,65 @@
+{
+  "at_utc": "2026-10-15T17:36:50.259966+00:00",
+  "completed_utc": "2026-10-15T17:38:31.403125+00:00",
+  "exit_code": 0,
+  "elapsed_seconds": 101.1287891670363,
+  "deadline_seconds": null,
+  "deadline_terminated": false,
+  "direct_child_lifetime_peak_rss_bytes": 704610304,
+  "application_memory_policy_configured": false,
+  "numeric_phase_or_rss_override": false,
+  "child_exited": true,
+  "joint_mode": "authenticated-checkpoint-append-v1",
+  "native_status": "no-new-native-loss",
+  "cold_fallback_executed": false,
+  "producer_replayed": false,
+  "integration_attempted": false,
+  "public_action": false,
+  "version": 1,
+  "kind": "retained-actual-selected-native-observation-v1",
+  "original_trusted_head": "18b763e2c23b54673aeaf7667804e62e5524254c",
+  "original_baseline": "86cfcbef58220fbdb5b322d831a828ab71ab20ba",
+  "original_candidate": "18b763e2c23b54673aeaf7667804e62e5524254c",
+  "source_receipt_sha256": "235613f24eb5c35dc2ab8359c83ad133b16f82223aea600c06d0a61874915323",
+  "native_affected_rows": 352,
+  "lost_or_reassigned_cells": 0,
+  "repair_visibility": {
+    "new_components": 1,
+    "witnesses": [
+      {
+        "component_id": "source-target:22c89d22ddab5e0f4e83d819a9bf03f08a15e9a2be994df03fbd076253fbde6c",
+        "native_rows_sha256": "a1bf2cf192fadef97977e08af35e7f58b1e87d3d577bf981d58fad0ea9e6cdd2",
+        "x": 209509,
+        "y": 115253,
+        "previous_owner": 0,
+        "candidate_owner": 48235
+      }
+    ]
+  },
+  "complete_original_product_inventory": [
+    {
+      "path": "joint-products-001/checkpoint-routes.json",
+      "bytes": 267139,
+      "sha256": "a35fd8247859d15066b0f941b5e4fe114391c58e7675473fc5a28496799fa1ea"
+    },
+    {
+      "path": "joint-products-001/derived-certificate.json.gz",
+      "bytes": 7516513,
+      "sha256": "748e99b0ea59e6ccbf70baec04df8163e8a14670a987e88f3a4bb66f34f56768"
+    },
+    {
+      "path": "joint-products-001/derived-facts.json",
+      "bytes": 490849,
+      "sha256": "46e252b81b4179bb9284a8b2d81aae9354603e451a476d0dfd402a1d10fba62b"
+    },
+    {
+      "path": "joint-products-001/derived-publication.json",
+      "bytes": 660,
+      "sha256": "cc5bd8d87d0fd24352aec7f6c77d4f406ea22fbd70ac441228b01516c7910caf"
+    }
+  ],
+  "limits": [
+    "Selected original observation fields; absolute local runtime/checkout paths are omitted from this public note. The complete original receipt and four products remain retained unchanged.",
+    "This is the actual original18b versus86cf execution, not a fresh comparison of the final current-baseline candidate. No accepted data, deployment or browser claim."
+  ]
+}

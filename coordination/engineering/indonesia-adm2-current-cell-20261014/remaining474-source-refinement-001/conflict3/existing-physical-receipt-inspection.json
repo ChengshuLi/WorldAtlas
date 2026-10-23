@@ -1,0 +1,70 @@
+{
+  "kind": "conflict3-existing-whole-target-physical-receipt-inspection",
+  "actual_receipt_pin": {
+    "commit": "9a343960ae6a4c39cf59ab67f02f2fbae9e2fce8",
+    "mode": "100644",
+    "path": "coordination/engineering/indonesia-remaining19590-20261015/whole-physical-result-001/whole-target-support.json",
+    "git_blob_oid": "042ee2afee23057bd2dc3d2ce025cea8de7de6c1",
+    "bytes": 4245327,
+    "sha256": "9556cc79ae09c88f499be6c05400c5cc417fd6f5d795138cd8fed2664016fe4e"
+  },
+  "targets": [
+    {
+      "id": "gb:IDN:ADM2:22746128B82886709098386",
+      "owner": 23115,
+      "support_classes_retained": [
+        "mapped_land_support",
+        "mapped_inland_water_support",
+        "outside_mapped_L1_context",
+        "hierarchy_disagreements",
+        "missing_reconstruction",
+        "extra_reconstruction",
+        "contradictory_land_water_support"
+      ],
+      "whole_target_issue_counts": {
+        "contradictory_land_water_support": 1
+      },
+      "source_query_count": 8,
+      "query_relation_count": 8
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B56140662064287",
+      "owner": 22947,
+      "support_classes_retained": [
+        "mapped_land_support",
+        "mapped_inland_water_support",
+        "outside_mapped_L1_context",
+        "hierarchy_disagreements",
+        "missing_reconstruction",
+        "extra_reconstruction",
+        "contradictory_land_water_support"
+      ],
+      "whole_target_issue_counts": {
+        "missing_reconstruction": 1,
+        "extra_reconstruction": 1
+      },
+      "source_query_count": 1,
+      "query_relation_count": 1
+    },
+    {
+      "id": "gb:IDN:ADM2:22746128B36840991830224",
+      "owner": 22839,
+      "support_classes_retained": [
+        "mapped_land_support",
+        "mapped_inland_water_support",
+        "outside_mapped_L1_context",
+        "hierarchy_disagreements",
+        "missing_reconstruction",
+        "extra_reconstruction",
+        "contradictory_land_water_support"
+      ],
+      "whole_target_issue_counts": {},
+      "source_query_count": 1,
+      "query_relation_count": 1
+    }
+  ],
+  "exact_original3_queue_class": "land",
+  "interpretation": "These are actual retained whole-target physical support geometries and issue geometries, not fresh point-specific predicates. Whole-target issues do not show that a particular proposed centre fails; actual stock authority must classify each proposed centre using these unchanged geometries.",
+  "new_physical_or_geometry_predicate_runs": 0,
+  "qualification_passed": null
+}

@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "selector": {
+    "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "1722ef4be3df1a52f589535fe0ac6fb9da27ea85",
+    "bytes": 1841,
+    "sha256": "71c61652c40b237178a8e25a15ea14ebf1395ccc019ae30c6f672ed4e374344a"
+  },
+  "effective_release_id": "geography:slovakia-supported-repair-20261017",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "faadabeb4201911818dd4f55d3d5f9d2004240af",
+        "path": "coordination/engineering/slovakia-original-repair-20261017/native-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "b878fc3056f4dd30dc595b9ca3d1df16d0b454f6",
+        "bytes": 739,
+        "sha256": "138b057aa69b56d456ad62d3775f99770f9527a5b6a07d5136aadc059f6b763d"
+      },
+      "source_authority": {
+        "commit": "faadabeb4201911818dd4f55d3d5f9d2004240af",
+        "path": "coordination/engineering/slovakia-original-repair-20261017/native-authority-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "221cb90a861430bfa9d225c4506e9d05c922a355",
+        "bytes": 742,
+        "sha256": "fd45e6c4141ef23600b2e06e1d50820ce7fac427399ffbe8614f631aa8eb13d7"
+      },
+      "ledger": {
+        "commit": "faadabeb4201911818dd4f55d3d5f9d2004240af",
+        "path": "coordination/engineering/slovakia-original-repair-20261017/native-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "5611f9b69ff9d02ce476c02df3f8574a7fd229ca",
+        "bytes": 71769,
+        "sha256": "f8f3bc822a130b4c533ddcc5ffaa96c95d803f2d28f02a630ecd8009e660c0fc"
+      },
+      "native_patch": {
+        "bytes": 24951,
+        "commit": "fcd0c473ca580a9f797451f61a81a325037ce80b",
+        "git_blob_oid": "a6467d94b9e4e9dd09fe3ca614c63631ea423eaa",
+        "mode": "100644",
+        "path": "coordination/engineering/slovakia-original-repair-20261017/supported-inputs-001/native-patch.json",
+        "sha256": "0a6d1b971f21aba7c96577245f1bbba2ebc1c2aab0a7fdba6a3e4883c17b9bcc"
+      }
+    }
+  ]
+}

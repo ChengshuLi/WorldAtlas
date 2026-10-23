@@ -1,0 +1,3025 @@
+{
+  "kind": "bdi-104-held-key-evidence-consolidation",
+  "as_of": "2026-10-21",
+  "status": "evidence consolidation only; 479 root-accepted and 104 held as reported by root accounting. This file creates no new disposition, approval, or source qualification.",
+  "package": {
+    "id": "gb-BDI-ADM2--repair-evaluation",
+    "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "public_main_at_consolidation": "df41ad2c149e02f9c977fd4b6b089e113595d4c0",
+    "original_cells": 583,
+    "land": 378,
+    "inland_water": 205,
+    "intervals": 433,
+    "original_selected_observation": {
+      "commit": "5c1919dd1c7e89618398454220b57edf0fa388d2",
+      "query_sha256": "3e51e503891e714c22546e801535fb1833dce1b0ffe05eabe67bd2024a62d19a",
+      "intervals_sha256": "cdfb7670eabd7fa8512208b27b427b1d788d7079297cdca4a725f27a66308a3c",
+      "scientific_qualification": false
+    },
+    "retained_masks": {
+      "witness_join": "inventory/bdi-retained-source-physical-water-witness-join.json",
+      "selection_method": {
+        "code_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "code_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs",
+        "code_blob": "c5ba9331deb93eed40662d1dc579cdaedea55c46",
+        "method": "Independent retained-mask join implementing stock segment classification: family = lowest family index among directly owner-mapped sids; unique candidate iff native owner vector length is one; physical class from retained land/water masks; keep exactly family20 + repair-evaluation segments. No producer/observer was executed.",
+        "rejected_or_unselected_counters": {
+          "source_segments_other_family": 171138,
+          "source_segments_nonunique_owner": 13,
+          "eligible_unique_owner_segments_without_land_or_water": 0
+        }
+      },
+      "source_physical_water_inputs": [
+        {
+          "kind": "source-candidates",
+          "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+          "tree": "9954105d964a6239c5721d4909881da7b1f558d4",
+          "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-032.json.gz",
+          "blob": "5c56cb06a4879060a4ad933395cd643cdaaa5565",
+          "compressed_bytes": 800317,
+          "compressed_sha256": "00a677c75540d3be3a750e7f41d2d296f05dc24b84cec9d3776713986a7f6064",
+          "decoded_bytes": 5600583,
+          "decoded_sha256": "f86385a134758b6df4f13ad07ba81a2c545547a9068c5ad66fdffd0f8ece6aa9"
+        },
+        {
+          "kind": "physical-support",
+          "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+          "tree": "9954105d964a6239c5721d4909881da7b1f558d4",
+          "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-032.json.gz",
+          "blob": "5f8f1e8aa032abc85e931930eb4eb9b0dbc0ebdb",
+          "compressed_bytes": 516947,
+          "compressed_sha256": "2b3d882155a28df8782b346bd7382b2faa1ccfa0ebf1c2f0f2c6d779c055905a",
+          "decoded_bytes": 2359068,
+          "decoded_sha256": "7f6b485f745b9523165108a1868b7b57e1677aac90f065bbc2e45694d4106566"
+        },
+        {
+          "kind": "inland-water-support",
+          "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+          "tree": "9954105d964a6239c5721d4909881da7b1f558d4",
+          "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-032.json.gz",
+          "blob": "9bee5462a2f4a8bf1e54816c4a3bd61d9227e221",
+          "compressed_bytes": 32628,
+          "compressed_sha256": "5a8910efab0c7f8667167655e138c1ae0efb7d5ec52ff143c7ef377f925c98a6",
+          "decoded_bytes": 207160,
+          "decoded_sha256": "fa64308a425e6d6484635c2c62cfbcce85e0cfdae138bbde81fec0e7798b632d"
+        }
+      ]
+    },
+    "native_diagnostic": {
+      "commit": "d05e05db3ea89fbf76a283aed0619c38571fca89",
+      "report": "coordination/engineering/bdi-source-qualification-20261021/native-diagnostic-001/native-diagnostic.json"
+    },
+    "original_native_authority_448": {
+      "commit": "fd35809976a5b3791c0a6710c6aeccf50e707e9f",
+      "result_path": "coordination/engineering/bdi-source-qualification-20261021/native-authority-001/constructor-result.json",
+      "result_sha256": "8f5480eb806052d89775ec7ba638205b8fa37eb9211e9931c4726ff266259e37",
+      "cells": 448,
+      "root_acceptance_pr": "https://github.com/ChengshuLi/WorldAtlas/pull/2654",
+      "merged_head": "1f0646c1f5e7814ff110f203309147f557b38ee5",
+      "merge_commit": "1eb32e327c94c8cd7c2e8208567cc9c16d91c061",
+      "authoritative_candidate_sorted_y_x_owner_sha256": "19ce0047df3abc560cc303a74a37632f04841a4e6e0647d4b24a17c4ee756287"
+    },
+    "additional_continuity_31": {
+      "root_acceptance_pr": "https://github.com/ChengshuLi/WorldAtlas/pull/2656",
+      "cells": 31,
+      "basis_record": "inventory/bdi-official-administrative-lineage-followup-20261021.json",
+      "limitation": "2015 law says Bugarama and Muhuta retain their then-current limits on province transfer; this is not proof of 2007 capture date or geometric identity, but root has accepted this bounded 31-key continuation."
+    }
+  },
+  "accounting": {
+    "accepted": {
+      "cells": 479,
+      "partition": [
+        {
+          "source": "PR #2654",
+          "cells": 448,
+          "land": 290,
+          "inland_water": 158,
+          "key_sha256": "07f06177a262bf5957428ff119efd5c4778c18e09abbece3fe6838139ccefef1"
+        },
+        {
+          "source": "PR #2656",
+          "cells": 31,
+          "land": 12,
+          "inland_water": 19,
+          "key_sha256": "31b3a8ce855eed4cc701c824abd6a0ec6ca4d0f52d5d474e80dace1426de885a"
+        }
+      ],
+      "land": 302,
+      "inland_water": 177,
+      "key_sha256": "60ec0c50b99e64df5fb1437fa3c848e036e22529a0ac9aadf3db3a98347ebb3e"
+    },
+    "remaining": {
+      "cells": 104,
+      "land": 76,
+      "inland_water": 28,
+      "key_sha256": "28a5ccfb7370bd03706d80827c1ac9be1ce72fdf6727a0c6c9452e98c5433676",
+      "disjoint_from_accepted": true,
+      "union_with_accepted_equals_original": true
+    },
+    "remaining_groups": {
+      "source_vintage_provenance": {
+        "cells": 50,
+        "land": 22,
+        "inland_water": 28,
+        "key_sha256": "5fb5075d8e0633d841918e2a2f4f79780883ac54bd864011875c81024d235d7b",
+        "groups": [
+          {
+            "group_id": "provenance_muha",
+            "status": "held_pending_source_vintage_applicability",
+            "count": 41,
+            "land": 19,
+            "inland_water": 22,
+            "owner_index": 9087,
+            "target_feature_id": "gb:BDI:ADM2:21766830B84199363749171",
+            "target_name": "Muha",
+            "2014_constituent_names": [
+              "Kanyosha",
+              "Kinindo",
+              "Musaga"
+            ],
+            "specific_unmet_predicate": "Show the retained source feature/geometry identity is applicable to the original recorded stable target for these exact requested cells; legal/statistical names and membership text do not establish polygon equivalence or explain the represented-year-2007 metadata.",
+            "keys": [
+              {
+                "x": 152452,
+                "y": 133565,
+                "latitude": -3.4068994632185574,
+                "longitude_native_center": 29.344079705224942,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2035,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B47636051590360",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152451,
+                "y": 133566,
+                "latitude": -3.408270211174185,
+                "longitude_native_center": 29.342706529450794,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2035,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B47636051590360",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152452,
+                "y": 133566,
+                "latitude": -3.408270211174185,
+                "longitude_native_center": 29.344079705224942,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2035,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B47636051590360",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152451,
+                "y": 133567,
+                "latitude": -3.4096409571767508,
+                "longitude_native_center": 29.342706529450794,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2035,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B47636051590360",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152452,
+                "y": 133567,
+                "latitude": -3.4096409571767508,
+                "longitude_native_center": 29.344079705224942,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2035,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B47636051590360",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152451,
+                "y": 133568,
+                "latitude": -3.411011701225473,
+                "longitude_native_center": 29.342706529450794,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2035,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B47636051590360",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152451,
+                "y": 133569,
+                "latitude": -3.4123824433195695,
+                "longitude_native_center": 29.342706529450794,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2035,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B47636051590360",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152451,
+                "y": 133570,
+                "latitude": -3.4137531834582187,
+                "longitude_native_center": 29.342706529450794,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2035,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B47636051590360",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152451,
+                "y": 133571,
+                "latitude": -3.4151239216407188,
+                "longitude_native_center": 29.342706529450794,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2035,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B47636051590360",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152451,
+                "y": 133604,
+                "latitude": -3.460357179124889,
+                "longitude_native_center": 29.342706529450794,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152450,
+                "y": 133606,
+                "latitude": -3.463098519555274,
+                "longitude_native_center": 29.341333353676674,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152449,
+                "y": 133609,
+                "latitude": -3.467210515316434,
+                "longitude_native_center": 29.339960177902555,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152447,
+                "y": 133611,
+                "latitude": -3.46995183589181,
+                "longitude_native_center": 29.337213826354287,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152448,
+                "y": 133611,
+                "latitude": -3.46995183589181,
+                "longitude_native_center": 29.338587002128406,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152445,
+                "y": 133612,
+                "latitude": -3.4713224931975346,
+                "longitude_native_center": 29.33446747480602,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152446,
+                "y": 133612,
+                "latitude": -3.4713224931975346,
+                "longitude_native_center": 29.335840650580167,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152447,
+                "y": 133612,
+                "latitude": -3.4713224931975346,
+                "longitude_native_center": 29.337213826354287,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152448,
+                "y": 133612,
+                "latitude": -3.4713224931975346,
+                "longitude_native_center": 29.338587002128406,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152444,
+                "y": 133613,
+                "latitude": -3.472693148514241,
+                "longitude_native_center": 29.3330942990319,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152445,
+                "y": 133613,
+                "latitude": -3.472693148514241,
+                "longitude_native_center": 29.33446747480602,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152446,
+                "y": 133613,
+                "latitude": -3.472693148514241,
+                "longitude_native_center": 29.335840650580167,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152447,
+                "y": 133613,
+                "latitude": -3.472693148514241,
+                "longitude_native_center": 29.337213826354287,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152443,
+                "y": 133614,
+                "latitude": -3.4740638018411483,
+                "longitude_native_center": 29.33172112325778,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152444,
+                "y": 133614,
+                "latitude": -3.4740638018411483,
+                "longitude_native_center": 29.3330942990319,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152445,
+                "y": 133614,
+                "latitude": -3.4740638018411483,
+                "longitude_native_center": 29.33446747480602,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152446,
+                "y": 133614,
+                "latitude": -3.4740638018411483,
+                "longitude_native_center": 29.335840650580167,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152447,
+                "y": 133614,
+                "latitude": -3.4740638018411483,
+                "longitude_native_center": 29.337213826354287,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152444,
+                "y": 133615,
+                "latitude": -3.475434453177474,
+                "longitude_native_center": 29.3330942990319,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152445,
+                "y": 133615,
+                "latitude": -3.475434453177474,
+                "longitude_native_center": 29.33446747480602,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152446,
+                "y": 133615,
+                "latitude": -3.475434453177474,
+                "longitude_native_center": 29.335840650580167,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152447,
+                "y": 133615,
+                "latitude": -3.475434453177474,
+                "longitude_native_center": 29.337213826354287,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152444,
+                "y": 133616,
+                "latitude": -3.476805102522438,
+                "longitude_native_center": 29.3330942990319,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152445,
+                "y": 133616,
+                "latitude": -3.476805102522438,
+                "longitude_native_center": 29.33446747480602,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152446,
+                "y": 133616,
+                "latitude": -3.476805102522438,
+                "longitude_native_center": 29.335840650580167,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152444,
+                "y": 133617,
+                "latitude": -3.4781757498752586,
+                "longitude_native_center": 29.3330942990319,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152445,
+                "y": 133617,
+                "latitude": -3.4781757498752586,
+                "longitude_native_center": 29.33446747480602,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152446,
+                "y": 133617,
+                "latitude": -3.4781757498752586,
+                "longitude_native_center": 29.335840650580167,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152445,
+                "y": 133618,
+                "latitude": -3.4795463952351526,
+                "longitude_native_center": 29.33446747480602,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152446,
+                "y": 133618,
+                "latitude": -3.4795463952351526,
+                "longitude_native_center": 29.335840650580167,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152445,
+                "y": 133619,
+                "latitude": -3.480917038601301,
+                "longitude_native_center": 29.33446747480602,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152445,
+                "y": 133620,
+                "latitude": -3.4822876799730005,
+                "longitude_native_center": 29.33446747480602,
+                "owner_index": 9087,
+                "source_feature_indices": [
+                  2034,
+                  2154
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B39611815861631",
+                  "gb:BDI:ADM2:21766830B84199363749171"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              }
+            ]
+          },
+          {
+            "group_id": "provenance_ntahangwa",
+            "status": "held_pending_source_vintage_applicability",
+            "count": 9,
+            "land": 3,
+            "inland_water": 6,
+            "owner_index": 9089,
+            "target_feature_id": "gb:BDI:ADM2:21766830B87038696970617",
+            "target_name": "Ntahangwa",
+            "2014_constituent_names": [
+              "Cibitoke",
+              "Gihosha",
+              "Buterere",
+              "Kamenge",
+              "Kinama",
+              "Ngagara"
+            ],
+            "specific_unmet_predicate": "Show the retained source feature/geometry identity is applicable to the original recorded stable target for these exact requested cells; legal/statistical names and membership text do not establish polygon equivalence or explain the represented-year-2007 metadata.",
+            "keys": [
+              {
+                "x": 152439,
+                "y": 133528,
+                "latitude": -3.3561804230029053,
+                "longitude_native_center": 29.32622842016127,
+                "owner_index": 9089,
+                "source_feature_indices": [
+                  2035,
+                  2156
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B47636051590360",
+                  "gb:BDI:ADM2:21766830B87038696970617"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152440,
+                "y": 133529,
+                "latitude": -3.3575512426721876,
+                "longitude_native_center": 29.32760159593539,
+                "owner_index": 9089,
+                "source_feature_indices": [
+                  2035,
+                  2156
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B47636051590360",
+                  "gb:BDI:ADM2:21766830B87038696970617"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152441,
+                "y": 133529,
+                "latitude": -3.3575512426721876,
+                "longitude_native_center": 29.32897477170951,
+                "owner_index": 9089,
+                "source_feature_indices": [
+                  2035,
+                  2156
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B47636051590360",
+                  "gb:BDI:ADM2:21766830B87038696970617"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152442,
+                "y": 133529,
+                "latitude": -3.3575512426721876,
+                "longitude_native_center": 29.33034794748366,
+                "owner_index": 9089,
+                "source_feature_indices": [
+                  2035,
+                  2156
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B47636051590360",
+                  "gb:BDI:ADM2:21766830B87038696970617"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152445,
+                "y": 133530,
+                "latitude": -3.358922060417338,
+                "longitude_native_center": 29.33446747480602,
+                "owner_index": 9089,
+                "source_feature_indices": [
+                  2035,
+                  2156
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B47636051590360",
+                  "gb:BDI:ADM2:21766830B87038696970617"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152448,
+                "y": 133539,
+                "latitude": -3.3712593334087053,
+                "longitude_native_center": 29.338587002128406,
+                "owner_index": 9089,
+                "source_feature_indices": [
+                  2156
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B87038696970617"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152449,
+                "y": 133539,
+                "latitude": -3.3712593334087053,
+                "longitude_native_center": 29.339960177902555,
+                "owner_index": 9089,
+                "source_feature_indices": [
+                  2156
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B87038696970617"
+                ],
+                "physical_class": "inland-water",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152450,
+                "y": 133539,
+                "latitude": -3.3712593334087053,
+                "longitude_native_center": 29.341333353676674,
+                "owner_index": 9089,
+                "source_feature_indices": [
+                  2156
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B87038696970617"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              },
+              {
+                "x": 152450,
+                "y": 133540,
+                "latitude": -3.372630131869523,
+                "longitude_native_center": 29.341333353676674,
+                "owner_index": 9089,
+                "source_feature_indices": [
+                  2156
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B87038696970617"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false
+              }
+            ]
+          }
+        ]
+      },
+      "foreign_contact": {
+        "cells": 54,
+        "land": 54,
+        "inland_water": 0,
+        "key_sha256": "15763e4171d0d7336a115a2acb13cf9361eebc8139dcf41ce64d0d461a619c2a",
+        "groups": [
+          {
+            "group_id": "foreign_tza_9030_kigoma",
+            "status": "held_pending_exact_competitor_boundary_relation",
+            "count": 7,
+            "country": "TZA",
+            "owner_index": 9030,
+            "foreign_feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+            "foreign_feature_name": "Kigoma",
+            "source_index_check": {
+              "index_in_original_interval_rows": 60207,
+              "index_reported_in_prior_followup": 60207,
+              "equal": true
+            },
+            "specific_unmet_predicate": "Resolve the complete original source competitor at the exact retained cell center against a lawful, sufficiently detailed boundary witness; contact is not itself proof of foreign territory or sovereign dispute.",
+            "keys": [
+              {
+                "x": 153117,
+                "y": 133913,
+                "latitude": -3.883796389280383,
+                "longitude_native_center": 30.257241595019963,
+                "owner_index": 9030,
+                "source_feature_indices": [
+                  2026,
+                  2136,
+                  60207
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B60452886876050",
+                  "gb:BDI:ADM2:21766830B38172137244003",
+                  "gb:TZA:ADM1:36957248B11692782910073"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60207,
+                  "prior_followup_report_source_feature_index": 60207,
+                  "feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+                  "feature_name": "Kigoma"
+                }
+              },
+              {
+                "x": 153102,
+                "y": 133951,
+                "latitude": -3.93585562156624,
+                "longitude_native_center": 30.236643958408024,
+                "owner_index": 9030,
+                "source_feature_indices": [
+                  2026,
+                  2136,
+                  60207
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B60452886876050",
+                  "gb:BDI:ADM2:21766830B38172137244003",
+                  "gb:TZA:ADM1:36957248B11692782910073"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60207,
+                  "prior_followup_report_source_feature_index": 60207,
+                  "feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+                  "feature_name": "Kigoma"
+                }
+              },
+              {
+                "x": 153101,
+                "y": 133952,
+                "latitude": -3.937225557605288,
+                "longitude_native_center": 30.235270782633904,
+                "owner_index": 9030,
+                "source_feature_indices": [
+                  2026,
+                  2136,
+                  60207
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B60452886876050",
+                  "gb:BDI:ADM2:21766830B38172137244003",
+                  "gb:TZA:ADM1:36957248B11692782910073"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60207,
+                  "prior_followup_report_source_feature_index": 60207,
+                  "feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+                  "feature_name": "Kigoma"
+                }
+              },
+              {
+                "x": 153100,
+                "y": 133956,
+                "latitude": -3.9427052792097736,
+                "longitude_native_center": 30.233897606859784,
+                "owner_index": 9030,
+                "source_feature_indices": [
+                  2026,
+                  2136,
+                  60207
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B60452886876050",
+                  "gb:BDI:ADM2:21766830B38172137244003",
+                  "gb:TZA:ADM1:36957248B11692782910073"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60207,
+                  "prior_followup_report_source_feature_index": 60207,
+                  "feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+                  "feature_name": "Kigoma"
+                }
+              },
+              {
+                "x": 153097,
+                "y": 133965,
+                "latitude": -3.9550345206795687,
+                "longitude_native_center": 30.229778079537397,
+                "owner_index": 9030,
+                "source_feature_indices": [
+                  2026,
+                  2136,
+                  60207
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B60452886876050",
+                  "gb:BDI:ADM2:21766830B38172137244003",
+                  "gb:TZA:ADM1:36957248B11692782910073"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60207,
+                  "prior_followup_report_source_feature_index": 60207,
+                  "feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+                  "feature_name": "Kigoma"
+                }
+              },
+              {
+                "x": 153097,
+                "y": 133966,
+                "latitude": -3.9564044250862143,
+                "longitude_native_center": 30.229778079537397,
+                "owner_index": 9030,
+                "source_feature_indices": [
+                  2026,
+                  2136,
+                  60207
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B60452886876050",
+                  "gb:BDI:ADM2:21766830B38172137244003",
+                  "gb:TZA:ADM1:36957248B11692782910073"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60207,
+                  "prior_followup_report_source_feature_index": 60207,
+                  "feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+                  "feature_name": "Kigoma"
+                }
+              },
+              {
+                "x": 153097,
+                "y": 133967,
+                "latitude": -3.9577743272275576,
+                "longitude_native_center": 30.229778079537397,
+                "owner_index": 9030,
+                "source_feature_indices": [
+                  2026,
+                  2136,
+                  60207
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B60452886876050",
+                  "gb:BDI:ADM2:21766830B38172137244003",
+                  "gb:TZA:ADM1:36957248B11692782910073"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60207,
+                  "prior_followup_report_source_feature_index": 60207,
+                  "feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+                  "feature_name": "Kigoma"
+                }
+              }
+            ]
+          },
+          {
+            "group_id": "foreign_tza_9036_kagera",
+            "status": "held_pending_exact_competitor_boundary_relation",
+            "count": 1,
+            "country": "TZA",
+            "owner_index": 9036,
+            "foreign_feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+            "foreign_feature_name": "Kagera",
+            "source_index_check": {
+              "index_in_original_interval_rows": 60195,
+              "index_reported_in_prior_followup": 60195,
+              "equal": true
+            },
+            "specific_unmet_predicate": "Resolve the complete original source competitor at the exact retained cell center against a lawful, sufficiently detailed boundary witness; contact is not itself proof of foreign territory or sovereign dispute.",
+            "keys": [
+              {
+                "x": 153249,
+                "y": 133033,
+                "latitude": -2.6774043969193677,
+                "longitude_native_center": 30.438500797204824,
+                "owner_index": 9036,
+                "source_feature_indices": [
+                  2144,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B41528201457160",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              }
+            ]
+          },
+          {
+            "group_id": "foreign_tza_9040_kagera",
+            "status": "held_pending_exact_competitor_boundary_relation",
+            "count": 31,
+            "country": "TZA",
+            "owner_index": 9040,
+            "foreign_feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+            "foreign_feature_name": "Kagera",
+            "source_index_check": {
+              "index_in_original_interval_rows": 60195,
+              "index_reported_in_prior_followup": 60195,
+              "equal": true
+            },
+            "specific_unmet_predicate": "Resolve the complete original source competitor at the exact retained cell center against a lawful, sufficiently detailed boundary witness; contact is not itself proof of foreign territory or sovereign dispute.",
+            "keys": [
+              {
+                "x": 153331,
+                "y": 133206,
+                "latitude": -2.9146808231394887,
+                "longitude_native_center": 30.5511012106833,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153329,
+                "y": 133209,
+                "latitude": -2.918795013756545,
+                "longitude_native_center": 30.54835485913503,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153328,
+                "y": 133210,
+                "latitude": -2.9201664072826867,
+                "longitude_native_center": 30.54698168336091,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153327,
+                "y": 133212,
+                "latitude": -2.9229091893109493,
+                "longitude_native_center": 30.545608507586792,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153326,
+                "y": 133213,
+                "latitude": -2.924280577811504,
+                "longitude_native_center": 30.544235331812644,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153325,
+                "y": 133214,
+                "latitude": -2.925651964635296,
+                "longitude_native_center": 30.542862156038524,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153325,
+                "y": 133215,
+                "latitude": -2.927023349781542,
+                "longitude_native_center": 30.542862156038524,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153321,
+                "y": 133219,
+                "latitude": -2.932508873575391,
+                "longitude_native_center": 30.537369452942016,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153322,
+                "y": 133219,
+                "latitude": -2.932508873575391,
+                "longitude_native_center": 30.538742628716136,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153387,
+                "y": 133221,
+                "latitude": -2.935251625386665,
+                "longitude_native_center": 30.62799905403446,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153388,
+                "y": 133222,
+                "latitude": -2.936622998768147,
+                "longitude_native_center": 30.62937222980858,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153389,
+                "y": 133223,
+                "latitude": -2.9379943704658134,
+                "longitude_native_center": 30.63074540558273,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153312,
+                "y": 133224,
+                "latitude": -2.9393657404788818,
+                "longitude_native_center": 30.52501087097488,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153311,
+                "y": 133225,
+                "latitude": -2.9407371088065286,
+                "longitude_native_center": 30.52363769520076,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153312,
+                "y": 133225,
+                "latitude": -2.9407371088065286,
+                "longitude_native_center": 30.52501087097488,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2028,
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B60812330206497",
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153391,
+                "y": 133225,
+                "latitude": -2.9407371088065286,
+                "longitude_native_center": 30.63349175713097,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153310,
+                "y": 133226,
+                "latitude": -2.9421084754480495,
+                "longitude_native_center": 30.522264519426642,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153311,
+                "y": 133226,
+                "latitude": -2.9421084754480495,
+                "longitude_native_center": 30.52363769520076,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2028,
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B60812330206497",
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153392,
+                "y": 133226,
+                "latitude": -2.9421084754480495,
+                "longitude_native_center": 30.634864932905117,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153307,
+                "y": 133227,
+                "latitude": -2.943479840402621,
+                "longitude_native_center": 30.518144992104254,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153308,
+                "y": 133227,
+                "latitude": -2.943479840402621,
+                "longitude_native_center": 30.519518167878374,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153304,
+                "y": 133229,
+                "latitude": -2.9462225652477825,
+                "longitude_native_center": 30.514025464781867,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153303,
+                "y": 133230,
+                "latitude": -2.9475939251368053,
+                "longitude_native_center": 30.512652289007747,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153290,
+                "y": 133231,
+                "latitude": -2.9489652833357454,
+                "longitude_native_center": 30.494801003944076,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153302,
+                "y": 133231,
+                "latitude": -2.9489652833357454,
+                "longitude_native_center": 30.5112791132336,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153396,
+                "y": 133231,
+                "latitude": -2.9489652833357454,
+                "longitude_native_center": 30.640357636001625,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153292,
+                "y": 133232,
+                "latitude": -2.950336639843818,
+                "longitude_native_center": 30.497547355492316,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153300,
+                "y": 133232,
+                "latitude": -2.950336639843818,
+                "longitude_native_center": 30.50853276168536,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153301,
+                "y": 133232,
+                "latitude": -2.950336639843818,
+                "longitude_native_center": 30.50990593745948,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153295,
+                "y": 133233,
+                "latitude": -2.9517079946602403,
+                "longitude_native_center": 30.501666882814703,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153299,
+                "y": 133233,
+                "latitude": -2.9517079946602403,
+                "longitude_native_center": 30.50715958591121,
+                "owner_index": 9040,
+                "source_feature_indices": [
+                  2142,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B44986812705529",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              }
+            ]
+          },
+          {
+            "group_id": "foreign_tza_9067_kigoma",
+            "status": "held_pending_exact_competitor_boundary_relation",
+            "count": 1,
+            "country": "TZA",
+            "owner_index": 9067,
+            "foreign_feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+            "foreign_feature_name": "Kigoma",
+            "source_index_check": {
+              "index_in_original_interval_rows": 60207,
+              "index_reported_in_prior_followup": 60207,
+              "equal": true
+            },
+            "specific_unmet_predicate": "Resolve the complete original source competitor at the exact retained cell center against a lawful, sufficiently detailed boundary witness; contact is not itself proof of foreign territory or sovereign dispute.",
+            "keys": [
+              {
+                "x": 152743,
+                "y": 134336,
+                "latitude": -4.463107002167147,
+                "longitude_native_center": 29.743673855496127,
+                "owner_index": 9067,
+                "source_feature_indices": [
+                  2135,
+                  60207
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B71257741300393",
+                  "gb:TZA:ADM1:36957248B11692782910073"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60207,
+                  "prior_followup_report_source_feature_index": 60207,
+                  "feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+                  "feature_name": "Kigoma"
+                }
+              }
+            ]
+          },
+          {
+            "group_id": "foreign_tza_9079_kagera",
+            "status": "held_pending_exact_competitor_boundary_relation",
+            "count": 10,
+            "country": "TZA",
+            "owner_index": 9079,
+            "foreign_feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+            "foreign_feature_name": "Kagera",
+            "source_index_check": {
+              "index_in_original_interval_rows": 60195,
+              "index_reported_in_prior_followup": 60195,
+              "equal": true
+            },
+            "specific_unmet_predicate": "Resolve the complete original source competitor at the exact retained cell center against a lawful, sufficiently detailed boundary witness; contact is not itself proof of foreign territory or sovereign dispute.",
+            "keys": [
+              {
+                "x": 153529,
+                "y": 133254,
+                "latitude": -2.980506053646314,
+                "longitude_native_center": 30.822990013960606,
+                "owner_index": 9079,
+                "source_feature_indices": [
+                  2028,
+                  2141,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B60812330206497",
+                  "gb:BDI:ADM2:21766830B80223800900582",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153530,
+                "y": 133254,
+                "latitude": -2.980506053646314,
+                "longitude_native_center": 30.824363189734754,
+                "owner_index": 9079,
+                "source_feature_indices": [
+                  2028,
+                  2141,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B60812330206497",
+                  "gb:BDI:ADM2:21766830B80223800900582",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153525,
+                "y": 133255,
+                "latitude": -2.981877371048207,
+                "longitude_native_center": 30.8174973108641,
+                "owner_index": 9079,
+                "source_feature_indices": [
+                  2028,
+                  2141,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B60812330206497",
+                  "gb:BDI:ADM2:21766830B80223800900582",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153526,
+                "y": 133255,
+                "latitude": -2.981877371048207,
+                "longitude_native_center": 30.818870486638218,
+                "owner_index": 9079,
+                "source_feature_indices": [
+                  2028,
+                  2141,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B60812330206497",
+                  "gb:BDI:ADM2:21766830B80223800900582",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153521,
+                "y": 133256,
+                "latitude": -2.98324868674043,
+                "longitude_native_center": 30.81200460776759,
+                "owner_index": 9079,
+                "source_feature_indices": [
+                  2141,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B80223800900582",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153520,
+                "y": 133257,
+                "latitude": -2.9846200007222006,
+                "longitude_native_center": 30.810631431993443,
+                "owner_index": 9079,
+                "source_feature_indices": [
+                  2141,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B80223800900582",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153521,
+                "y": 133257,
+                "latitude": -2.9846200007222006,
+                "longitude_native_center": 30.81200460776759,
+                "owner_index": 9079,
+                "source_feature_indices": [
+                  2028,
+                  2141,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B60812330206497",
+                  "gb:BDI:ADM2:21766830B80223800900582",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153519,
+                "y": 133258,
+                "latitude": -2.985991312992734,
+                "longitude_native_center": 30.809258256219323,
+                "owner_index": 9079,
+                "source_feature_indices": [
+                  2028,
+                  2141,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B60812330206497",
+                  "gb:BDI:ADM2:21766830B80223800900582",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153514,
+                "y": 133259,
+                "latitude": -2.9873626235512463,
+                "longitude_native_center": 30.802392377348696,
+                "owner_index": 9079,
+                "source_feature_indices": [
+                  2028,
+                  2141,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B60812330206497",
+                  "gb:BDI:ADM2:21766830B80223800900582",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              },
+              {
+                "x": 153515,
+                "y": 133259,
+                "latitude": -2.9873626235512463,
+                "longitude_native_center": 30.803765553122815,
+                "owner_index": 9079,
+                "source_feature_indices": [
+                  2028,
+                  2141,
+                  60195
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B60812330206497",
+                  "gb:BDI:ADM2:21766830B80223800900582",
+                  "gb:TZA:ADM1:36957248B48065738140082"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60195,
+                  "prior_followup_report_source_feature_index": 60195,
+                  "feature_id": "gb:TZA:ADM1:36957248B48065738140082",
+                  "feature_name": "Kagera"
+                }
+              }
+            ]
+          },
+          {
+            "group_id": "foreign_tza_9079_kigoma",
+            "status": "held_pending_exact_competitor_boundary_relation",
+            "count": 1,
+            "country": "TZA",
+            "owner_index": 9079,
+            "foreign_feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+            "foreign_feature_name": "Kigoma",
+            "source_index_check": {
+              "index_in_original_interval_rows": 60207,
+              "index_reported_in_prior_followup": 60207,
+              "equal": true
+            },
+            "specific_unmet_predicate": "Resolve the complete original source competitor at the exact retained cell center against a lawful, sufficiently detailed boundary witness; contact is not itself proof of foreign territory or sovereign dispute.",
+            "keys": [
+              {
+                "x": 153512,
+                "y": 133313,
+                "latitude": -3.061410829647101,
+                "longitude_native_center": 30.799646025800456,
+                "owner_index": 9079,
+                "source_feature_indices": [
+                  2028,
+                  2141,
+                  60207
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B60812330206497",
+                  "gb:BDI:ADM2:21766830B80223800900582",
+                  "gb:TZA:ADM1:36957248B11692782910073"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "TZA",
+                  "source_feature_index_in_original_row": 60207,
+                  "prior_followup_report_source_feature_index": 60207,
+                  "feature_id": "gb:TZA:ADM1:36957248B11692782910073",
+                  "feature_name": "Kigoma"
+                }
+              }
+            ]
+          },
+          {
+            "group_id": "foreign_cod_9001_south kivu",
+            "status": "held_pending_exact_competitor_boundary_relation",
+            "count": 2,
+            "country": "COD",
+            "owner_index": 9001,
+            "foreign_feature_id": "gb:COD:ADM1:28894549B54646848790483",
+            "foreign_feature_name": "South Kivu",
+            "source_index_check": {
+              "index_in_original_interval_rows": 18746,
+              "index_reported_in_prior_followup": 60180,
+              "equal": false
+            },
+            "specific_unmet_predicate": "Resolve the complete original source competitor at the exact retained cell center against a lawful, sufficiently detailed boundary witness; contact is not itself proof of foreign territory or sovereign dispute.",
+            "keys": [
+              {
+                "x": 152389,
+                "y": 133323,
+                "latitude": -3.075122902449578,
+                "longitude_native_center": 29.257569631454857,
+                "owner_index": 9001,
+                "source_feature_indices": [
+                  2030,
+                  2131,
+                  18746
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B68487327478732",
+                  "gb:BDI:ADM2:21766830B2147150443328",
+                  "gb:COD:ADM1:28894549B54646848790483"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "COD",
+                  "source_feature_index_in_original_row": 18746,
+                  "prior_followup_report_source_feature_index": 60180,
+                  "feature_id": "gb:COD:ADM1:28894549B54646848790483",
+                  "feature_name": "South Kivu"
+                }
+              },
+              {
+                "x": 152388,
+                "y": 133327,
+                "latitude": -3.0806076822523325,
+                "longitude_native_center": 29.256196455680737,
+                "owner_index": 9001,
+                "source_feature_indices": [
+                  2030,
+                  2131,
+                  18746
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM1:87207978B68487327478732",
+                  "gb:BDI:ADM2:21766830B2147150443328",
+                  "gb:COD:ADM1:28894549B54646848790483"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "COD",
+                  "source_feature_index_in_original_row": 18746,
+                  "prior_followup_report_source_feature_index": 60180,
+                  "feature_id": "gb:COD:ADM1:28894549B54646848790483",
+                  "feature_name": "South Kivu"
+                }
+              }
+            ]
+          },
+          {
+            "group_id": "foreign_cod_9047_south kivu",
+            "status": "held_pending_exact_competitor_boundary_relation",
+            "count": 1,
+            "country": "COD",
+            "owner_index": 9047,
+            "foreign_feature_id": "gb:COD:ADM1:28894549B54646848790483",
+            "foreign_feature_name": "South Kivu",
+            "source_index_check": {
+              "index_in_original_interval_rows": 18746,
+              "index_reported_in_prior_followup": 60180,
+              "equal": false
+            },
+            "specific_unmet_predicate": "Resolve the complete original source competitor at the exact retained cell center against a lawful, sufficiently detailed boundary witness; contact is not itself proof of foreign territory or sovereign dispute.",
+            "keys": [
+              {
+                "x": 152240,
+                "y": 133142,
+                "latitude": -2.826907874256714,
+                "longitude_native_center": 29.052966441109817,
+                "owner_index": 9047,
+                "source_feature_indices": [
+                  2130,
+                  18746
+                ],
+                "source_feature_ids": [
+                  "gb:BDI:ADM2:21766830B51540876931984",
+                  "gb:COD:ADM1:28894549B54646848790483"
+                ],
+                "physical_class": "land",
+                "base_owner": 0,
+                "accepted_additive_owner": 0,
+                "effective_selected_owner": 0,
+                "existing_product_overlap": false,
+                "foreign_contact": {
+                  "country": "COD",
+                  "source_feature_index_in_original_row": 18746,
+                  "prior_followup_report_source_feature_index": 60180,
+                  "feature_id": "gb:COD:ADM1:28894549B54646848790483",
+                  "feature_name": "South Kivu"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "key_hash_encoding": "For this report only: UTF-8 compact JSON of sorted [x,y,owner_index,physical_class] arrays, order by y then x then owner_index, SHA-256. Coordinates, not a hash of unrelated source blobs.",
+    "original_native_hold_status": "The existing diagnostic classifies 54 keys as territorial exclusions; 50 source-vintage/provenance keys remained among the original source-applicability holds after the accepted 31-key continuation. The retained full 583-key owner observation was captured at commit 5c1919dd, before the accepted additions; its base/additive/effective owner fields are zero in that historical observation snapshot. It is not current owner state or qualification."
+  },
+  "provenance_evidence": {
+    "source": "inventory/bdi-source-property-identity-join.json",
+    "retained_source_payload": {
+      "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BDI-ADM2-000.bin.gz",
+      "blob": "2443da0c46ca3884e36a0c8ab5a3dca9678cb332",
+      "decoded_bytes": 350000,
+      "decoded_sha256": "b90f58bf70724da30e8fd2fc5e89ea68ce2139e88dade8722fd85d20f92b15c2",
+      "features": 119,
+      "property_fields": [
+        "shapeGroup",
+        "shapeID",
+        "shapeISO",
+        "shapeName",
+        "shapeType"
+      ],
+      "per_feature_date_or_predecessor_fields": false
+    },
+    "muha_ntahangwa": {
+      "official_enacted_law": "Loi n°1/33 du 28 novembre 2014",
+      "local_file": "inventory/bdi-law-1-33-2014.pdf",
+      "bytes": 13480065,
+      "sha256": "d85a6845c2b95905048ec08e5105616ab7319d6b9f4b6700e189ec6af41a65bc",
+      "printed_page_29_articles_123_125": [
+        "Article 123 establishes the Bujumbura urban perimeter as the Province of Mairie de Bujumbura.",
+        "Article 124 states the then-current Mairie perimeter has three urban communes: Muha, Mukaza, and Ntahangwa.",
+        "Article 125 expressly describes Muha as extending over the territories of Kanyosha, Kinindo, and Musaga administrative entities, with its seat at Kanyosha.",
+        "Article 125 expressly describes Ntahangwa as extending over Cibitoke, Gihosha, Buterere, Kamenge, Kinama, and Ngagara administrative entities, with its seat at Kamenge.",
+        "Article 125 says the administrative entities composing the urban communes are constituted as urban zones."
+      ],
+      "membership_limit": "Law lists textual constituent areas but no boundary map, coordinates, source-feature ID, or polygon equivalence. INSBU 2022/2023 tabulations corroborate old and aggregate labels, not geometry."
+    },
+    "source_year_and_reform": {
+      "catalogue_claim": "BDI ADM2 represented year 2007",
+      "official_2018_context": {
+        "url": "https://www.presidence.gov.bi/wp-content/uploads/2018/08/PND-Burundi-2018-2027-Version-Finale.pdf",
+        "finding": "reports redistricting/regrouping of Mairie communes including Muha/Ntahangwa"
+      },
+      "official_2022_communicate": {
+        "url": "https://www.presidence.gov.bi/wp-content/uploads/2022/06/Communique-CM-15-JUIN-2022.pdf",
+        "status": "draft/project discussion, not enacted boundary proof"
+      },
+      "official_2023_law": {
+        "assembly": "https://assemblee.bi/wp-content/uploads/2024/01/n%C2%B05-du-16-mars-2023.pdf",
+        "CENI": "https://www.ceniburundi.bi/wp-content/uploads/2024/06/LOI-n%C2%B05-du-16-mars-2023DETERMINATION-ET-DELIMITATION-DES-PROVINCES-COMMUNES-ZONES-ET-QUARTIERS.pdf",
+        "status": "78-page PDF metadata/index surfaced, but page rendering/read did not expose annex pages; do not treat indexed snippets as full enacted membership evidence"
+      }
+    },
+    "specific_unmet_predicate": "For Muha/Ntahangwa exact original cells, source feature applicability to the recorded stable target remains unproven at geometry/vintage level. A 2007 label is not proof against applicability; exact names and enacted constituent lists are positive identity evidence but do not establish the retained polygon’s capture/revision history or equality to those constituent boundaries. This is a specific evidence gap, not a universal contemporary-42-commune certificate requirement."
+  },
+  "foreign_contact_evidence": {
+    "TZA": {
+      "keys": 51,
+      "contact_features": [
+        "gb:TZA:ADM1:36957248B11692782910073 (Kigoma)",
+        "gb:TZA:ADM1:36957248B48065738140082 (Kagera)"
+      ],
+      "opened_primary": "UN Treaty Series, League of Nations, Volume 54 (1926), https://treaties.un.org/doc/Publication/UNTS/LON/Volume%2054/v54.pdf",
+      "finding": "The 1924 protocol was accepted with accompanying maps; map controls conflicts with text, and the Kagera midstream was provisional pending survey and later acceptance. Treaty volume entry includes protocol text but not annexed map plate, so exact cell-to-boundary comparison remains unsatisfied. LOC map record 76696266 metadata surfaced, but LOC direct page returned HTTP 403 and image was not inspected; UN Geneva archive direct request also returned HTTP 403. No retry.",
+      "other_context": "1978 Kagera basin agreement concerns cooperation, not boundary delimitation."
+    },
+    "COD": {
+      "keys": 3,
+      "contact_feature": "gb:COD:ADM1:28894549B54646848790483 (South Kivu)",
+      "source_context": "inventory/bdi-cod-three-frontier-source-context.json",
+      "visual_pdf": "inventory/bdi-cod-boundary-study-visual-check.json",
+      "pdf": {
+        "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs048.pdf",
+        "bytes": 261300,
+        "sha256": "e1a58fe341544b0ec617160d0211178d8bf51ee5c0fc0383eec725cdcd979f20",
+        "rendered_printed_pages": [
+          5,
+          6,
+          7
+        ]
+      },
+      "finding": "1965 U.S. State Department study describes a thalweg boundary and reports an unofficial historical delta claim. It lists historical maps but the inspected appendix/map-reference/final pages contain text only; no exact cell-to-marker or point-to-thalweg relation. This is not evidence that the three cells are in the claim area."
+    },
+    "specific_unmet_predicate": "For each foreign-contact cell, resolve complete source competitors at the exact native center using a lawful, suitably detailed boundary witness. The original source contact is adverse evidence, not by itself proof of disputed sovereignty or proof the point is foreign."
+  },
+  "access_and_actions": {
+    "completed_acquisitions": [
+      {
+        "item": "official 2014 communal law linked attachment",
+        "bytes": 13480065,
+        "sha256": "d85a6845c2b95905048ec08e5105616ab7319d6b9f4b6700e189ec6af41a65bc",
+        "note": "exact Presidency-linked PDF was retrieved after the indexed reader size failure; pages 29/31 visually inspected"
+      },
+      {
+        "item": "FSU-hosted State Department IBS No. 48 PDF",
+        "bytes": 261300,
+        "sha256": "e1a58fe341544b0ec617160d0211178d8bf51ee5c0fc0383eec725cdcd979f20",
+        "note": "exact PDF acquired once after initial DNS failure; relevant printed pages 5–7 visually rendered with PDFKit/CoreGraphics"
+      }
+    ],
+    "denied_or_failed_not_retried": [
+      {
+        "target": "Library of Congress Burundi–Tanzania map item 76696266",
+        "result": "HTTP 403 on direct page; no image inspected; no retry"
+      },
+      {
+        "target": "UN Geneva archive 1924 frontier protocol record",
+        "result": "HTTP 403; no retry"
+      },
+      {
+        "target": "Official 2023 Assembly PDF download",
+        "result": "curl exit 28 after 45.006 seconds, zero bytes; no subsequent bypass route"
+      },
+      {
+        "target": "Stanford catalogue source record",
+        "result": "HTTP 200 returned 325-byte Request Rejected access-control page; no retry or alternate route"
+      },
+      {
+        "target": "CENI 2023 law PDF screenshots",
+        "result": "Cloudflare verification page, no PDF content; no bypass"
+      }
+    ],
+    "reasonable_lawful_unperformed_next_step": "For Tanzania keys, locate the 1924 protocol’s annexed boundary map or a competent official successor survey/accepted boundary record via an ordinary public route; if accessible, bind its relevant segment to the exact retained coordinates. For COD keys, locate a sufficiently detailed lawful boundary map or accepted delimitation record for the Rusizi/Rusizi Rutoya segment and compare the exact native centers. For Muha/Ntahangwa, seek dated source revision provenance or a lawful authoritative mapped/coordinate record of the 2014 constituent unions, then bind it to the retained source features; do not infer equivalence from names alone. None of these is marked exhausted."
+  },
+  "data_quality_note": "For COD South Kivu, the earlier foreign-contact follow-up labels source_feature_index 60180, while the original interval vector and property-identity join map this contact feature ID to index 18746. This report associates the contact by exact feature ID and records both numbers; the mismatch is preserved rather than silently normalized. TZA feature indices match.",
+  "limits": [
+    "This is a source-evidence consolidation, not a new geometry comparison or a package disposition.",
+    "The 479 accepted count and acceptance of the 31-key continuity portion follow root accounting and the cited public deliveries; this report independently reconstructs exact sets from the retained original keys and recorded decisions, but does not make root acceptance determinations. The 448 output’s authoritative candidate-set digest from its own partition record is separately recorded; local canonical hashes in this file use the encoding documented above.",
+    "The TZA and COD primary-source evidence is insufficient for exact per-cell frontier adjudication from the records inspected.",
+    "All 104 key records retain original x/y, owner/source membership, physical class, and literal observer current-owner fields; those current-owner fields are not qualification evidence."
+  ],
+  "evidence_addendum": {
+    "status": "Author-side evidence consolidation only. It records completed inspections and access outcomes; it does not award credit or complete any held disposition. The independent reviewer supports a researched-unresolved status for the remaining groups, subject to final packet review.",
+    "publisher_metadata_field_comparison": {
+      "source_report": "bdi-geoboundaries-publisher-provenance.json",
+      "official_documentation_url": "https://www.geoboundaries.org/api.html",
+      "authenticated_records": [
+        {
+          "role": "gbOpen BDI ADM2 release metadata",
+          "release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+          "blob_sha256": "8fd6a2d1c76c2373a29dfb0cde59ac62738876ff6966313006eaf3f2dc7edb34",
+          "bytes": 924
+        },
+        {
+          "role": "parent gbOpen BDI ADM2 release metadata",
+          "parent_commit": "55f27702ac698d96ed27d275afb918e496547fa6",
+          "blob_sha256": "a6aef60468ef4f3881b0a460f0fbb3a6502e905cd5c172649dc04bd7ca46718a",
+          "bytes": 924
+        }
+      ],
+      "exact_field_delta": {
+        "buildDate": {
+          "before": "Dec 07, 2023",
+          "after": "Dec 12, 2023"
+        },
+        "all_other_fields": "byte-authenticated parsed values unchanged, including boundaryYearRepresented=2007, source, license, sourceDataUpdateDate, and 119-unit count"
+      },
+      "interpretation": "geoBoundaries defines boundaryYearRepresented as the represented boundary year/range, sourceDataUpdateDate as source integration date, and buildDate as standardization/build date. The metadata update does not explain the retained Muha or Ntahangwa feature geometry or resolve their 2007 represented-year discrepancy."
+    },
+    "distinct_salb_2015_family": {
+      "source_report": "bdi-salb-terms-access-and-publisher-reuse.json",
+      "metadata_url": "https://www.geoboundaries.org/api/current/gbAuthoritative/BDI/ADM2/",
+      "release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "boundary_id": "BDI-ADM2-91688708",
+      "represented_period": "26-03-2015 to 01-05-2015",
+      "source": "UN SALB, Institut Geographique de Burundi",
+      "units": 119,
+      "terms_reference": "https://www.unsalb.org/sites/default/files/wysiwyg_uploads/docs_uploads/TermsOfUseSALB2021.pdf",
+      "actual_terms_access": "The exact linked terms PDF was not read: the web reader could not retrieve it and the official salb.un.org host returned HTTP 403 Forbidden. No retry, mirror, or alternate route was used. geoBoundaries states this family is mirrored from UN SALB, noncommercial, and in-country verified; that publisher summary is not a substitute for the inaccessible specific terms.",
+      "use_limit": "This is a distinct, potentially relevant later-dated provenance family, but no geometry was acquired and no permission for comparison, adoption, or redistribution is asserted. Metadata alone does not identify either retained Muha/Ntahangwa feature."
+    },
+    "tanzania_frontier_primary_record": {
+      "source_report": "bdi-54-foreign-contact-source-followup.json",
+      "pdf_url": "https://treaties.un.org/doc/Publication/UNTS/LON/Volume%2054/v54.pdf",
+      "title": "United Nations Treaty Series, League of Nations, Volume 54 (1926), protocol signed at Kigoma on 5 August 1924",
+      "acquisition": {
+        "bytes": 7041838,
+        "sha256": "e89a0ea710dfb3f420703a7bd42e696d48e1d4bd379cdce0b3254e8670c6cbda",
+        "pages": 446
+      },
+      "visual_review": {
+        "pdf_page_indices_zero_based": [
+          238,
+          239,
+          240,
+          241,
+          242,
+          243,
+          244,
+          245,
+          246,
+          247,
+          248,
+          249,
+          250,
+          251,
+          252
+        ],
+        "printed_content": "Treaty No. 1287 begins at printed page 240; the textual protocol and its 51-part boundary description occupy printed pages 244–251. The next treaty begins at PDF index 252.",
+        "relevant_clauses": "The exchange of notes accepts the protocol and accompanying maps; the map controls if it conflicts with the text. The Kagera midstream was provisional pending survey and subsequent government acceptance. Items 49–50 describe the route to and downstream along the Kagera; item 51 concerns Lake Tanganyika.",
+        "map_limit": "The treaty entry references accompanying map sheets but the inspected entry contains no map plate, scale, graticule, or drawn marker map. It therefore does not locate the 51 exact TZA-contact cells against the boundary."
+      },
+      "next_evidence_needed": "A lawfully accessible annexed map or competent accepted successor survey for the relevant Kigoma/Kagera segment, joined to the exact 51 original cell centers."
+    },
+    "assembly_access_chronology": {
+      "source_report": "bdi-contract-and-provenance-followup.json",
+      "target": "https://assemblee.bi/wp-content/uploads/2024/01/n%C2%B05-du-16-mars-2023.pdf",
+      "attempts": [
+        {
+          "order": 1,
+          "result": "Original request timed out after 45.006 seconds (curl exit 28); zero bytes received."
+        },
+        {
+          "order": 2,
+          "authorization": "Later same-target ordinary network-enabled GET was explicitly authorized.",
+          "result": "Ended with curl exit 7, HTTP 000, zero bytes; connection to assemblee.bi port 443 failed after 157 ms. No transfer remained pending and no further attempt or alternate route was used."
+        }
+      ],
+      "other_access_limits": "CENI 2023 law PDF screenshots returned a Cloudflare verification page. The Stanford source catalogue returned HTTP 200 with a 325-byte Request Rejected access-control body. Neither route was retried or bypassed."
+    },
+    "cod_index_correction": {
+      "source_report": "bdi-54-foreign-contact-source-followup.json",
+      "feature_id": "gb:COD:ADM1:28894549B54646848790483",
+      "correct_original_contact_index": 18746,
+      "prior_followup_index": 60180,
+      "resolution": "The exact original interval and source-property identity join bind the South Kivu feature to contact index 18746. The earlier foreign-contact follow-up's index 60180 is a transcription/mapping error for this same feature ID; the three COD keys and feature identity are unchanged."
+    },
+    "cod_visual_source_limit": {
+      "source_report": "bdi-cod-boundary-study-visual-check.json",
+      "pdf_url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs048.pdf",
+      "bytes": 261300,
+      "sha256": "e1a58fe341544b0ec617160d0211178d8bf51ee5c0fc0383eec725cdcd979f20",
+      "rendered_pages": "Printed pages 5–7 were visually inspected. They cite separate 1936/1937 1:100,000 and 1:200,000 maps and a 1964 1:500,000 series, but reproduce no map plate on the pages inspected.",
+      "limit": "The 1965 study discusses the thalweg and an unofficial historic delta claim, but no exact side-of-boundary relation is established for the three COD centers. The earlier foreign-contact report's index 60180 is superseded by the exact 18746 contact-index join above."
+    }
+  }
+}

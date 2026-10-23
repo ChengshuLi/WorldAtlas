@@ -1,0 +1,1793 @@
+{
+  "kind": "read-only-original-Denmark-proposal-screen",
+  "accepted_head": "2223d85bbe8b18585c221cc1329d115e8e774a42",
+  "queue_commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+  "source_packages": 644,
+  "physical_packages": 16,
+  "package": {
+    "package_id": "gb-DNK-ADM2--repair-evaluation",
+    "primary_source": "gb:DNK:ADM2",
+    "source_family_index": 91,
+    "category": "repair-evaluation",
+    "native_cells": 27783,
+    "land_cells": 23874,
+    "inland_water_cells": 3909,
+    "source_relative_cells": 0,
+    "interval_segments": 7471,
+    "owners": [
+      16543,
+      16544,
+      16545,
+      16546,
+      16547,
+      16548,
+      16549,
+      16551,
+      16554,
+      16555,
+      16556,
+      16558,
+      16559,
+      16560,
+      16561,
+      16563,
+      16564,
+      16565,
+      16566,
+      16570,
+      16572,
+      16574,
+      16575,
+      16576,
+      16577,
+      16578,
+      16581,
+      16582,
+      16583,
+      16586,
+      16587,
+      16589,
+      16591,
+      16592,
+      16593,
+      16594,
+      16597,
+      16598,
+      16600,
+      16601,
+      16602,
+      16603,
+      16604,
+      16605,
+      16606,
+      16608,
+      16609,
+      16610,
+      16611,
+      16612,
+      16613,
+      16614,
+      16615,
+      16616,
+      16617,
+      16618,
+      16619,
+      16620,
+      16621,
+      16623,
+      16626,
+      16627,
+      16630,
+      16632,
+      16633,
+      16634,
+      16635,
+      16637,
+      16638
+    ],
+    "source_features": [
+      21060,
+      21061,
+      21062,
+      21063,
+      21064,
+      21065,
+      21066,
+      21067,
+      21068,
+      21069,
+      21070,
+      21071,
+      21072,
+      21073,
+      21074,
+      21075,
+      21076,
+      21077,
+      21078,
+      21079,
+      21080,
+      21081,
+      21082,
+      21083,
+      21084,
+      21086,
+      21091,
+      21092,
+      21094,
+      21095,
+      21096,
+      21098,
+      21100,
+      21101,
+      21104,
+      21109,
+      21112,
+      21113,
+      21115,
+      21116,
+      21117,
+      21120,
+      21121,
+      21122,
+      21123,
+      21124,
+      21126,
+      21127,
+      21129,
+      21130,
+      21131,
+      21132,
+      21134,
+      21135,
+      21136,
+      21138,
+      21140,
+      21144,
+      21145,
+      21146,
+      21147,
+      21148,
+      21149,
+      21150,
+      21151,
+      21152,
+      21154,
+      21155,
+      21156,
+      21157,
+      21158,
+      21159,
+      21160,
+      21161
+    ],
+    "source_families": [
+      90,
+      91
+    ],
+    "native_blocks": [
+      19,
+      20
+    ],
+    "provinces": [
+      "framework:province:hovedstaden:d8f1013fafda",
+      "framework:province:midtjylland:be4f7fd4b1d5",
+      "framework:province:nordjylland:1557dd67c30a",
+      "framework:province:sjlland:a1e0ddea6675",
+      "framework:province:syddanmark:60564f04e4f6",
+      "framework:province:syddanmark:e6f372e49b1f"
+    ],
+    "location_count": 69,
+    "source_feature_count": 74,
+    "locality_count": 6,
+    "cost": {
+      "primary_source_decoded_bytes": 380355,
+      "all_required_source_decoded_bytes": 654292,
+      "primary_full_source_raster_measured_seconds": 0.179,
+      "source_interval_segments": 7471,
+      "maximum_native_rows_per_execution_frame": 4096,
+      "observed_global_census_peak_rss_bytes": 884973568
+    },
+    "evidence": {
+      "selection": "ownership-binding.json",
+      "lineage": "lineage.json",
+      "territorial_source_catalogue": "retained-source-catalogue.json",
+      "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "source_features": "source-feature-roster.json",
+      "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+      "physical": "physical-unassigned-summary.json",
+      "source_domain_transform": []
+    },
+    "work": {
+      "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+      "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+      "priority": 1
+    },
+    "execution": {
+      "command": "node source-batch-intervals.mjs gb-DNK-ADM2--repair-evaluation OUTPUT_DIRECTORY",
+      "output_columns": [
+        "y",
+        "start",
+        "end",
+        "candidate_owner_indices",
+        "source_feature_indices",
+        "physical_class"
+      ]
+    }
+  },
+  "measured_cells": 27783,
+  "measured_intervals": 7471,
+  "measured_owners": 69,
+  "physical_classes": {
+    "land": 23874,
+    "inland-water": 3909
+  },
+  "accepted_cumulative_cells": 2209586,
+  "accepted_overlap_cells": 0,
+  "accepted_overlaps": [],
+  "owners": [
+    {
+      "id": "gb:DNK:ADM2:71786716B12088833667766",
+      "index": 16543,
+      "bounds": [
+        140105.95265722222,
+        81801.86390677073,
+        140255.60574888886,
+        81909.74543235343
+      ],
+      "province_id": "framework:province:hovedstaden:d8f1013fafda",
+      "province_index": 2074,
+      "name": "Rudersdal",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B12088833667766"
+      ],
+      "original_cells": 17
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B14316823735839",
+      "index": 16544,
+      "bounds": [
+        138750.700085,
+        82381.60313078905,
+        138981.55181277776,
+        82697.95893432587
+      ],
+      "province_id": "framework:province:syddanmark:60564f04e4f6",
+      "province_index": 4450,
+      "name": "Nyborg",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B14316823735839"
+      ],
+      "original_cells": 114
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B16948230614219",
+      "index": 16545,
+      "bounds": [
+        137685.43223833333,
+        80278.03262966455,
+        138104.53371888888,
+        80790.70952214635
+      ],
+      "province_id": "framework:province:nordjylland:1557dd67c30a",
+      "province_index": 3310,
+      "name": "Vesthimmerland",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B16948230614219"
+      ],
+      "original_cells": 905
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B1982958908427",
+      "index": 16546,
+      "bounds": [
+        137806.902485,
+        82127.39861325352,
+        138139.0522422222,
+        82522.6909507937
+      ],
+      "province_id": "framework:province:syddanmark:60564f04e4f6",
+      "province_index": 4450,
+      "name": "Kolding",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B1982958908427"
+      ],
+      "original_cells": 50
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B20459048637380",
+      "index": 16547,
+      "bounds": [
+        138003.89110444442,
+        80497.40770148429,
+        138614.44658888888,
+        80909.10870321353
+      ],
+      "province_id": "framework:province:nordjylland:1557dd67c30a",
+      "province_index": 3310,
+      "name": "Mariagerfjord",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B20459048637380"
+      ],
+      "original_cells": 203
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B20787037821184",
+      "index": 16548,
+      "bounds": [
+        138477.17355833334,
+        81046.6022130803,
+        138972.66729833334,
+        81511.82676140043
+      ],
+      "province_id": "framework:province:midtjylland:be4f7fd4b1d5",
+      "province_index": 3028,
+      "name": "Syddjurs",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B20787037821184"
+      ],
+      "original_cells": 566
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B21087296928926",
+      "index": 16549,
+      "bounds": [
+        137616.61366333332,
+        80729.61436465508,
+        138202.99161666667,
+        81330.42105953272
+      ],
+      "province_id": "framework:province:midtjylland:be4f7fd4b1d5",
+      "province_index": 3028,
+      "name": "Viborg",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B21087296928926"
+      ],
+      "original_cells": 188
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B23852349760420",
+      "index": 16551,
+      "bounds": [
+        139711.90259444446,
+        81722.88114396337,
+        139985.86606444445,
+        82002.53074999477
+      ],
+      "province_id": "framework:province:hovedstaden:d8f1013fafda",
+      "province_index": 2074,
+      "name": "Frederikssund",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B23852349760420"
+      ],
+      "original_cells": 156
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B25765023105800",
+      "index": 16554,
+      "bounds": [
+        138409.08322222222,
+        82487.35973378124,
+        138842.0212416667,
+        82898.16312168818
+      ],
+      "province_id": "framework:province:syddanmark:60564f04e4f6",
+      "province_index": 4450,
+      "name": "Faaborg-Midtfyn",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B25765023105800"
+      ],
+      "original_cells": 413
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B2638221370026",
+      "index": 16555,
+      "bounds": [
+        137573.93886444444,
+        82421.88074247369,
+        138204.0111511111,
+        82761.80945727212
+      ],
+      "province_id": "framework:province:syddanmark:60564f04e4f6",
+      "province_index": 4450,
+      "name": "Haderslev",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B2638221370026"
+      ],
+      "original_cells": 139
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B26630627548335",
+      "index": 16556,
+      "bounds": [
+        139821.42972333333,
+        81470.55470711313,
+        140126.78028944443,
+        81688.02701176258
+      ],
+      "province_id": "framework:province:hovedstaden:d8f1013fafda",
+      "province_index": 2074,
+      "name": "Gribskov",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B26630627548335"
+      ],
+      "original_cells": 123
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B29460567915272",
+      "index": 16558,
+      "bounds": [
+        136960.98019166666,
+        81822.88778768874,
+        137575.32251833336,
+        82308.53431895905
+      ],
+      "province_id": "framework:province:syddanmark:60564f04e4f6",
+      "province_index": 4450,
+      "name": "Varde",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B29460567915272"
+      ],
+      "original_cells": 217
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B32401712412850",
+      "index": 16559,
+      "bounds": [
+        139480.97804277777,
+        82962.52430642043,
+        139939.18595166667,
+        83470.1160399441
+      ],
+      "province_id": "framework:province:sjlland:a1e0ddea6675",
+      "province_index": 4269,
+      "name": "Guldborgsund",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B32401712412850"
+      ],
+      "original_cells": 695
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B32972196165212",
+      "index": 16560,
+      "bounds": [
+        139168.7820311111,
+        82278.84006798516,
+        139481.48781000002,
+        82741.2993686722
+      ],
+      "province_id": "framework:province:sjlland:a1e0ddea6675",
+      "province_index": 4269,
+      "name": "Slagelse",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B32972196165212"
+      ],
+      "original_cells": 1000
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B33031054619724",
+      "index": 16561,
+      "bounds": [
+        141782.86834666668,
+        82544.05695719426,
+        142116.91152499997,
+        82943.99865125104
+      ],
+      "province_id": "framework:province:hovedstaden:d8f1013fafda",
+      "province_index": 2074,
+      "name": "Bornholm",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B33031054619724"
+      ],
+      "original_cells": 500
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B34155480621965",
+      "index": 16563,
+      "bounds": [
+        140201.2791277778,
+        82063.77651440658,
+        140399.28728166665,
+        82189.65265326294
+      ],
+      "province_id": "framework:province:hovedstaden:d8f1013fafda",
+      "province_index": 2074,
+      "name": "T\u00e5rnby",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B34155480621965"
+      ],
+      "original_cells": 5
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B34564018913551",
+      "index": 16564,
+      "bounds": [
+        137914.75466444442,
+        79998.50974907148,
+        138645.7608611111,
+        80561.84806696416
+      ],
+      "province_id": "framework:province:nordjylland:1557dd67c30a",
+      "province_index": 3310,
+      "name": "Aalborg",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B34564018913551"
+      ],
+      "original_cells": 1019
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B34761600297143",
+      "index": 16565,
+      "bounds": [
+        136977.29274277776,
+        81285.1965482513,
+        137537.30844833332,
+        81910.39306181697
+      ],
+      "province_id": "framework:province:midtjylland:be4f7fd4b1d5",
+      "province_index": 3028,
+      "name": "Ringk\u00f8bing-Skjern",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B34761600297143"
+      ],
+      "original_cells": 635
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B34966856505407",
+      "index": 16566,
+      "bounds": [
+        138625.51582,
+        82646.92282747735,
+        138949.21800611113,
+        82999.80896976526
+      ],
+      "province_id": "framework:province:syddanmark:60564f04e4f6",
+      "province_index": 4450,
+      "name": "Svendborg",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B34966856505407"
+      ],
+      "original_cells": 1724
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B40980494570781",
+      "index": 16570,
+      "bounds": [
+        139303.9431688889,
+        81631.27241465882,
+        139669.37344333334,
+        81976.1489345523
+      ],
+      "province_id": "framework:province:sjlland:a1e0ddea6675",
+      "province_index": 4269,
+      "name": "Odsherred",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B40980494570781"
+      ],
+      "original_cells": 486
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B422224300956",
+      "index": 16572,
+      "bounds": [
+        138142.25649333332,
+        79476.59616328274,
+        138670.37533555555,
+        79895.59092248176
+      ],
+      "province_id": "framework:province:nordjylland:1557dd67c30a",
+      "province_index": 3310,
+      "name": "Hj\u00f8rring",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B422224300956"
+      ],
+      "original_cells": 164
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B42683939496467",
+      "index": 16574,
+      "bounds": [
+        139018.6191722222,
+        81741.20890072576,
+        139424.466705,
+        82339.23862665212
+      ],
+      "province_id": "framework:province:sjlland:a1e0ddea6675",
+      "province_index": 4269,
+      "name": "Kalundborg",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B42683939496467"
+      ],
+      "original_cells": 1561
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B43620076453863",
+      "index": 16575,
+      "bounds": [
+        138382.8666222222,
+        81592.31423027375,
+        138563.03292333332,
+        81839.75246477938
+      ],
+      "province_id": "framework:province:midtjylland:be4f7fd4b1d5",
+      "province_index": 3028,
+      "name": "Odder",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B43620076453863"
+      ],
+      "original_cells": 665
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B45041800869669",
+      "index": 16576,
+      "bounds": [
+        139716.12638,
+        82418.8033282966,
+        140042.59587388887,
+        82756.45979681038
+      ],
+      "province_id": "framework:province:sjlland:a1e0ddea6675",
+      "province_index": 4269,
+      "name": "Faxe",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B45041800869669"
+      ],
+      "original_cells": 87
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B45706286685972",
+      "index": 16577,
+      "bounds": [
+        138710.79259388888,
+        82124.69017644868,
+        138899.98905722224,
+        82510.78861506154
+      ],
+      "province_id": "framework:province:syddanmark:60564f04e4f6",
+      "province_index": 4450,
+      "name": "Kerteminde",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B45706286685972"
+      ],
+      "original_cells": 652
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B45944384032152",
+      "index": 16578,
+      "bounds": [
+        138790.82604777778,
+        82719.6337700802,
+        139063.55151166668,
+        83273.283015807
+      ],
+      "province_id": "framework:province:syddanmark:60564f04e4f6",
+      "province_index": 4450,
+      "name": "Langeland",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B45944384032152"
+      ],
+      "original_cells": 840
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B46678336638205",
+      "index": 16581,
+      "bounds": [
+        137627.90136611112,
+        82705.48242454587,
+        138102.64029777778,
+        83172.69905887175
+      ],
+      "province_id": "framework:province:syddanmark:60564f04e4f6",
+      "province_index": 4450,
+      "name": "Aabenraa",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B46678336638205"
+      ],
+      "original_cells": 303
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B48627086580811",
+      "index": 16582,
+      "bounds": [
+        138194.83534111115,
+        80701.36074772896,
+        138627.19076944445,
+        81149.93533803806
+      ],
+      "province_id": "framework:province:midtjylland:be4f7fd4b1d5",
+      "province_index": 3028,
+      "name": "Randers",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B48627086580811"
+      ],
+      "original_cells": 198
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B49302352621351",
+      "index": 16583,
+      "bounds": [
+        140123.43039055556,
+        81768.49320532143,
+        140239.6573172222,
+        81830.15326330217
+      ],
+      "province_id": "framework:province:hovedstaden:d8f1013fafda",
+      "province_index": 2074,
+      "name": "H\u00f8rsholm",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B49302352621351"
+      ],
+      "original_cells": 28
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B51826106160484",
+      "index": 16586,
+      "bounds": [
+        137167.14462111113,
+        82323.43915286708,
+        137276.08915888888,
+        82477.6265256389
+      ],
+      "province_id": "framework:province:syddanmark:e6f372e49b1f",
+      "province_index": 4451,
+      "name": "Fan\u00f8",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B51826106160484"
+      ],
+      "original_cells": 402
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B51925893320851",
+      "index": 16587,
+      "bounds": [
+        137666.42520333332,
+        79838.92137586972,
+        138306.76565833334,
+        80292.88396213016
+      ],
+      "province_id": "framework:province:nordjylland:1557dd67c30a",
+      "province_index": 3310,
+      "name": "Jammerbugt",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B51925893320851"
+      ],
+      "original_cells": 377
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B53109750697969",
+      "index": 16589,
+      "bounds": [
+        138739.33955833333,
+        81636.22146259631,
+        138861.90216333332,
+        81939.39833751817
+      ],
+      "province_id": "framework:province:midtjylland:be4f7fd4b1d5",
+      "province_index": 3028,
+      "name": "Sams\u00f8",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B53109750697969"
+      ],
+      "original_cells": 360
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B53270433009438",
+      "index": 16591,
+      "bounds": [
+        140186.058935,
+        81935.90304941809,
+        140268.85969666665,
+        82006.15070794395
+      ],
+      "province_id": "framework:province:hovedstaden:d8f1013fafda",
+      "province_index": 2074,
+      "name": "Gentofte",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B53270433009438"
+      ],
+      "original_cells": 41
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B54697214973088",
+      "index": 16592,
+      "bounds": [
+        139992.34739055557,
+        82098.75922283331,
+        140109.15690833333,
+        82160.66185863172
+      ],
+      "province_id": "framework:province:hovedstaden:d8f1013fafda",
+      "province_index": 2074,
+      "name": "Ish\u00f8j",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B54697214973088"
+      ],
+      "original_cells": 3
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B54938770362357",
+      "index": 16593,
+      "bounds": [
+        138332.90943444445,
+        81199.09180681135,
+        138648.9651122222,
+        81650.9354937568
+      ],
+      "province_id": "framework:province:midtjylland:be4f7fd4b1d5",
+      "province_index": 3028,
+      "name": "Aarhus",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B54938770362357"
+      ],
+      "original_cells": 172
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B56383958265758",
+      "index": 16594,
+      "bounds": [
+        137060.31197611112,
+        80107.52689782852,
+        137708.73588277778,
+        80765.40584545495
+      ],
+      "province_id": "framework:province:nordjylland:1557dd67c30a",
+      "province_index": 3310,
+      "name": "Thisted",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B56383958265758"
+      ],
+      "original_cells": 951
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B58016217336700",
+      "index": 16597,
+      "bounds": [
+        136983.1186538889,
+        80895.36497800678,
+        137634.74681166664,
+        81330.55208585464
+      ],
+      "province_id": "framework:province:midtjylland:be4f7fd4b1d5",
+      "province_index": 3028,
+      "name": "Holstebro",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B58016217336700"
+      ],
+      "original_cells": 653
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B59118439676977",
+      "index": 16598,
+      "bounds": [
+        139551.617215,
+        82739.26064702377,
+        140225.74795444444,
+        83076.57511018048
+      ],
+      "province_id": "framework:province:sjlland:a1e0ddea6675",
+      "province_index": 4269,
+      "name": "Vordingborg",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B59118439676977"
+      ],
+      "original_cells": 1016
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B62179325616663",
+      "index": 16600,
+      "bounds": [
+        137935.65512055554,
+        81738.34968974831,
+        138417.749265,
+        82060.2898252845
+      ],
+      "province_id": "framework:province:midtjylland:be4f7fd4b1d5",
+      "province_index": 3028,
+      "name": "Hedensted",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B62179325616663"
+      ],
+      "original_cells": 274
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B63500106048247",
+      "index": 16601,
+      "bounds": [
+        139076.44134,
+        82940.57193576494,
+        139509.0880638889,
+        83415.44625078484
+      ],
+      "province_id": "framework:province:sjlland:a1e0ddea6675",
+      "province_index": 4269,
+      "name": "Lolland",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B63500106048247"
+      ],
+      "original_cells": 1325
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B65113762150251",
+      "index": 16602,
+      "bounds": [
+        137983.71888722223,
+        81536.49544521648,
+        138602.13935166664,
+        81965.92874312737
+      ],
+      "province_id": "framework:province:midtjylland:be4f7fd4b1d5",
+      "province_index": 3028,
+      "name": "Horsens",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B65113762150251"
+      ],
+      "original_cells": 314
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B65540528804322",
+      "index": 16603,
+      "bounds": [
+        138211.8761311111,
+        82363.63463689863,
+        138564.562225,
+        82770.08758454677
+      ],
+      "province_id": "framework:province:syddanmark:60564f04e4f6",
+      "province_index": 4450,
+      "name": "Assens",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B65540528804322"
+      ],
+      "original_cells": 230
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B65993177657172",
+      "index": 16604,
+      "bounds": [
+        139347.78315,
+        81898.08668023284,
+        139720.42298944446,
+        82265.07968404244
+      ],
+      "province_id": "framework:province:sjlland:a1e0ddea6675",
+      "province_index": 4269,
+      "name": "Holb\u00e6k",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B65993177657172"
+      ],
+      "original_cells": 267
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B67811636615197",
+      "index": 16605,
+      "bounds": [
+        139414.99959944445,
+        82411.7502160953,
+        139868.47395555553,
+        82782.43859261453
+      ],
+      "province_id": "framework:province:sjlland:a1e0ddea6675",
+      "province_index": 4269,
+      "name": "N\u00e6stved",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B67811636615197"
+      ],
+      "original_cells": 200
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B68566026973001",
+      "index": 16606,
+      "bounds": [
+        138531.2088838889,
+        80668.57712557474,
+        139569.75036333333,
+        81252.26844172402
+      ],
+      "province_id": "framework:province:midtjylland:be4f7fd4b1d5",
+      "province_index": 3028,
+      "name": "Norddjurs",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B68566026973001"
+      ],
+      "original_cells": 238
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B69433812533005",
+      "index": 16608,
+      "bounds": [
+        137395.44751277778,
+        80521.91550909253,
+        137842.95031000001,
+        80980.67358951004
+      ],
+      "province_id": "framework:province:midtjylland:be4f7fd4b1d5",
+      "province_index": 3028,
+      "name": "Skive",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B69433812533005"
+      ],
+      "original_cells": 763
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B6967543231569",
+      "index": 16609,
+      "bounds": [
+        137127.45560166665,
+        82144.67760361522,
+        137596.00450277777,
+        82628.92037234618
+      ],
+      "province_id": "framework:province:syddanmark:60564f04e4f6",
+      "province_index": 4450,
+      "name": "Esbjerg",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B6967543231569"
+      ],
+      "original_cells": 361
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B69774565938083",
+      "index": 16610,
+      "bounds": [
+        137277.4728127778,
+        80343.69281705878,
+        137594.11108166666,
+        80755.46634043092
+      ],
+      "province_id": "framework:province:nordjylland:1557dd67c30a",
+      "province_index": 3310,
+      "name": "Mors\u00f8",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B69774565938083"
+      ],
+      "original_cells": 1270
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B72299351601619",
+      "index": 16611,
+      "bounds": [
+        137968.134575,
+        82814.89344141475,
+        138421.24481166666,
+        83131.35548516677
+      ],
+      "province_id": "framework:province:syddanmark:60564f04e4f6",
+      "province_index": 4450,
+      "name": "S\u00f8nderborg",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B72299351601619"
+      ],
+      "original_cells": 529
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B75086220402227",
+      "index": 16612,
+      "bounds": [
+        139002.81638833336,
+        79878.86665311053,
+        139256.53481722224,
+        80051.36793368688
+      ],
+      "province_id": "framework:province:nordjylland:1557dd67c30a",
+      "province_index": 3310,
+      "name": "L\u00e6s\u00f8",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B75086220402227"
+      ],
+      "original_cells": 120
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B75417410603706",
+      "index": 16613,
+      "bounds": [
+        138489.55361944446,
+        79290.61056765915,
+        138823.30550222224,
+        80049.75477623854
+      ],
+      "province_id": "framework:province:nordjylland:1557dd67c30a",
+      "province_index": 3310,
+      "name": "Frederikshavn",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B75417410603706"
+      ],
+      "original_cells": 518
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B76174594185827",
+      "index": 16614,
+      "bounds": [
+        137247.83349,
+        82598.26321432622,
+        137811.85450944447,
+        83069.23285427706
+      ],
+      "province_id": "framework:province:syddanmark:60564f04e4f6",
+      "province_index": 4450,
+      "name": "T\u00f8nder",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B76174594185827"
+      ],
+      "original_cells": 223
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B79370302577150",
+      "index": 16615,
+      "bounds": [
+        138178.95973333335,
+        79854.30951793936,
+        138705.84056944444,
+        80194.46140095565
+      ],
+      "province_id": "framework:province:nordjylland:1557dd67c30a",
+      "province_index": 3310,
+      "name": "Br\u00f8nderslev",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B79370302577150"
+      ],
+      "original_cells": 120
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B81020738772022",
+      "index": 16616,
+      "bounds": [
+        140160.49775,
+        82000.46208608004,
+        140294.27523388888,
+        82139.13349637309
+      ],
+      "province_id": "framework:province:hovedstaden:d8f1013fafda",
+      "province_index": 2074,
+      "name": "Copenhagen",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B81020738772022"
+      ],
+      "original_cells": 3
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B82112898444320",
+      "index": 16617,
+      "bounds": [
+        138047.51261388892,
+        82113.08094630197,
+        138263.50826833333,
+        82267.52338983938
+      ],
+      "province_id": "framework:province:syddanmark:60564f04e4f6",
+      "province_index": 4450,
+      "name": "Fredericia",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B82112898444320"
+      ],
+      "original_cells": 66
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B8217347854635",
+      "index": 16618,
+      "bounds": [
+        139811.23437888888,
+        81929.30017799082,
+        140004.4361561111,
+        82259.42012291028
+      ],
+      "province_id": "framework:province:sjlland:a1e0ddea6675",
+      "province_index": 4269,
+      "name": "Roskilde",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B8217347854635"
+      ],
+      "original_cells": 80
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B8451397458066",
+      "index": 16619,
+      "bounds": [
+        140223.19911833334,
+        82142.87261218323,
+        140315.831105,
+        82213.60583836577
+      ],
+      "province_id": "framework:province:hovedstaden:d8f1013fafda",
+      "province_index": 2074,
+      "name": "Drag\u00f8r",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B8451397458066"
+      ],
+      "original_cells": 105
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B86094483146336",
+      "index": 16620,
+      "bounds": [
+        138169.71109944445,
+        82214.12083608135,
+        138410.32122833334,
+        82477.6265256389
+      ],
+      "province_id": "framework:province:syddanmark:60564f04e4f6",
+      "province_index": 4450,
+      "name": "Middelfart",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B86094483146336"
+      ],
+      "original_cells": 687
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B87133991415535",
+      "index": 16621,
+      "bounds": [
+        139878.81494777778,
+        81640.51892523121,
+        140110.90468166667,
+        81840.14158305283
+      ],
+      "province_id": "framework:province:hovedstaden:d8f1013fafda",
+      "province_index": 2074,
+      "name": "Hiller\u00f8d",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B87133991415535"
+      ],
+      "original_cells": 1
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B90858178482348",
+      "index": 16623,
+      "bounds": [
+        138544.82695111108,
+        82985.10127184085,
+        138749.8990222222,
+        83153.857856802
+      ],
+      "province_id": "framework:province:syddanmark:60564f04e4f6",
+      "province_index": 4450,
+      "name": "\u00c6r\u00f8",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B90858178482348"
+      ],
+      "original_cells": 605
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B94140568065229",
+      "index": 16626,
+      "bounds": [
+        138344.92537611112,
+        82128.30139327828,
+        138728.56162277778,
+        82396.35820026678
+      ],
+      "province_id": "framework:province:syddanmark:60564f04e4f6",
+      "province_index": 4450,
+      "name": "Nordfyn",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B94140568065229"
+      ],
+      "original_cells": 554
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B94194061920718",
+      "index": 16627,
+      "bounds": [
+        137193.72534055554,
+        80732.13386374303,
+        137413.653485,
+        81111.65454270739
+      ],
+      "province_id": "framework:province:midtjylland:be4f7fd4b1d5",
+      "province_index": 3028,
+      "name": "Struer",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B94194061920718"
+      ],
+      "original_cells": 622
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B9584980796535",
+      "index": 16630,
+      "bounds": [
+        139661.07152,
+        81975.89022105439,
+        139883.40285277777,
+        82255.94689708248
+      ],
+      "province_id": "framework:province:sjlland:a1e0ddea6675",
+      "province_index": 4269,
+      "name": "Lejre",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B9584980796535"
+      ],
+      "original_cells": 32
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B96315335718138",
+      "index": 16632,
+      "bounds": [
+        140139.59729388886,
+        82073.7187139374,
+        140201.71607111112,
+        82152.02583218037
+      ],
+      "province_id": "framework:province:hovedstaden:d8f1013fafda",
+      "province_index": 2074,
+      "name": "Hvidovre",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B96315335718138"
+      ],
+      "original_cells": 6
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B96319125747184",
+      "index": 16633,
+      "bounds": [
+        140038.51773611113,
+        81842.73562813867,
+        140128.74653444445,
+        81964.63490046553
+      ],
+      "province_id": "framework:province:hovedstaden:d8f1013fafda",
+      "province_index": 2074,
+      "name": "Fures\u00f8",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B96319125747184"
+      ],
+      "original_cells": 1
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B96997928459710",
+      "index": 16634,
+      "bounds": [
+        139708.9896388889,
+        81602.61046217334,
+        139908.89121388888,
+        81790.43985056327
+      ],
+      "province_id": "framework:province:hovedstaden:d8f1013fafda",
+      "province_index": 2074,
+      "name": "Halsn\u00e6s",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B96997928459710"
+      ],
+      "original_cells": 270
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B97058706593659",
+      "index": 16635,
+      "bounds": [
+        140103.69511666667,
+        81505.95148076519,
+        140271.91830000002,
+        81675.27581791172
+      ],
+      "province_id": "framework:province:hovedstaden:d8f1013fafda",
+      "province_index": 2074,
+      "name": "Helsing\u00f8r",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B97058706593659"
+      ],
+      "original_cells": 7
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B9806363865609",
+      "index": 16637,
+      "bounds": [
+        136982.68171055554,
+        80717.28024503165,
+        137262.47109166667,
+        81175.96535612312
+      ],
+      "province_id": "framework:province:midtjylland:be4f7fd4b1d5",
+      "province_index": 3028,
+      "name": "Lemvig",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B9806363865609"
+      ],
+      "original_cells": 342
+    },
+    {
+      "id": "gb:DNK:ADM2:71786716B98245585766658",
+      "index": 16638,
+      "bounds": [
+        139910.2020438889,
+        82388.2755203701,
+        140159.0412722222,
+        82621.13009852568
+      ],
+      "province_id": "framework:province:sjlland:a1e0ddea6675",
+      "province_index": 4269,
+      "name": "Stevns",
+      "reference_owner": "Denmark",
+      "source_id": "gb:DNK:ADM2",
+      "source_atoms": [
+        "gb:DNK:ADM2:71786716B98245585766658"
+      ],
+      "original_cells": 22
+    }
+  ],
+  "complete_declared_source_checks": [
+    {
+      "key": "gb:DNK:ADM1",
+      "feature_count": 5,
+      "advertised_feature_count": 5,
+      "original_bytes": 273937,
+      "original_sha256": "cd8c1cd3d10df313e9d8641e2118903125a205ba0130dd34f55f2ed043399dd7",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/DNK/ADM1/geoBoundaries-DNK-ADM1_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "source_represented_year_claim": "2021"
+    },
+    {
+      "key": "gb:DNK:ADM2",
+      "feature_count": 98,
+      "advertised_feature_count": 98,
+      "original_bytes": 380355,
+      "original_sha256": "d67ed4e8b7f1bb613f93edd2bfc7c69e85169aab31e19596115cf648d9b31628",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/DNK/ADM2/geoBoundaries-DNK-ADM2_simplified.geojson",
+      "recorded_license": "Public Domain",
+      "source_represented_year_claim": "2018"
+    }
+  ],
+  "open_issue_count": 865,
+  "open_pr_count": 83,
+  "potential_scope_matches": [
+    {
+      "kind": "issue",
+      "number": 333,
+      "title": "Review Nordic Europe interior batch 1: Denmark, Finland, F\u00f8royar + 1 more existing areas",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/333",
+      "subject_matches": [
+        "gb:DNK:ADM2:71786716B12088833667766",
+        "gb:DNK:ADM2:71786716B14316823735839",
+        "gb:DNK:ADM2:71786716B16948230614219",
+        "gb:DNK:ADM2:71786716B1982958908427",
+        "gb:DNK:ADM2:71786716B20459048637380",
+        "gb:DNK:ADM2:71786716B20787037821184",
+        "gb:DNK:ADM2:71786716B21087296928926",
+        "gb:DNK:ADM2:71786716B23852349760420",
+        "gb:DNK:ADM2:71786716B25765023105800",
+        "gb:DNK:ADM2:71786716B2638221370026",
+        "gb:DNK:ADM2:71786716B26630627548335",
+        "gb:DNK:ADM2:71786716B29460567915272",
+        "gb:DNK:ADM2:71786716B32401712412850",
+        "gb:DNK:ADM2:71786716B32972196165212",
+        "gb:DNK:ADM2:71786716B33031054619724",
+        "gb:DNK:ADM2:71786716B34155480621965",
+        "gb:DNK:ADM2:71786716B34564018913551",
+        "gb:DNK:ADM2:71786716B34761600297143",
+        "gb:DNK:ADM2:71786716B34966856505407",
+        "gb:DNK:ADM2:71786716B40980494570781",
+        "gb:DNK:ADM2:71786716B422224300956",
+        "gb:DNK:ADM2:71786716B42683939496467",
+        "gb:DNK:ADM2:71786716B43620076453863",
+        "gb:DNK:ADM2:71786716B45041800869669",
+        "gb:DNK:ADM2:71786716B45706286685972",
+        "gb:DNK:ADM2:71786716B45944384032152",
+        "gb:DNK:ADM2:71786716B46678336638205",
+        "gb:DNK:ADM2:71786716B48627086580811",
+        "gb:DNK:ADM2:71786716B49302352621351",
+        "gb:DNK:ADM2:71786716B51826106160484",
+        "gb:DNK:ADM2:71786716B51925893320851",
+        "gb:DNK:ADM2:71786716B53109750697969",
+        "gb:DNK:ADM2:71786716B53270433009438",
+        "gb:DNK:ADM2:71786716B54697214973088",
+        "gb:DNK:ADM2:71786716B54938770362357",
+        "gb:DNK:ADM2:71786716B56383958265758",
+        "gb:DNK:ADM2:71786716B58016217336700",
+        "gb:DNK:ADM2:71786716B59118439676977",
+        "gb:DNK:ADM2:71786716B62179325616663",
+        "gb:DNK:ADM2:71786716B63500106048247",
+        "gb:DNK:ADM2:71786716B65113762150251",
+        "gb:DNK:ADM2:71786716B65540528804322",
+        "gb:DNK:ADM2:71786716B65993177657172",
+        "gb:DNK:ADM2:71786716B67811636615197",
+        "gb:DNK:ADM2:71786716B68566026973001",
+        "gb:DNK:ADM2:71786716B69433812533005",
+        "gb:DNK:ADM2:71786716B6967543231569",
+        "gb:DNK:ADM2:71786716B69774565938083",
+        "gb:DNK:ADM2:71786716B72299351601619",
+        "gb:DNK:ADM2:71786716B75086220402227",
+        "gb:DNK:ADM2:71786716B75417410603706",
+        "gb:DNK:ADM2:71786716B76174594185827",
+        "gb:DNK:ADM2:71786716B79370302577150",
+        "gb:DNK:ADM2:71786716B81020738772022",
+        "gb:DNK:ADM2:71786716B82112898444320",
+        "gb:DNK:ADM2:71786716B8217347854635",
+        "gb:DNK:ADM2:71786716B8451397458066",
+        "gb:DNK:ADM2:71786716B86094483146336",
+        "gb:DNK:ADM2:71786716B87133991415535",
+        "gb:DNK:ADM2:71786716B90858178482348",
+        "gb:DNK:ADM2:71786716B94140568065229",
+        "gb:DNK:ADM2:71786716B94194061920718",
+        "gb:DNK:ADM2:71786716B9584980796535",
+        "gb:DNK:ADM2:71786716B96315335718138",
+        "gb:DNK:ADM2:71786716B96319125747184",
+        "gb:DNK:ADM2:71786716B96997928459710",
+        "gb:DNK:ADM2:71786716B97058706593659",
+        "gb:DNK:ADM2:71786716B9806363865609",
+        "gb:DNK:ADM2:71786716B98245585766658"
+      ],
+      "package_literal": false,
+      "country_text": true
+    },
+    {
+      "kind": "issue",
+      "number": 332,
+      "title": "Complete regional geography audit: Nordic Europe",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/332",
+      "subject_matches": [],
+      "package_literal": false,
+      "country_text": true
+    }
+  ],
+  "inputs": [
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "bytes": 1754890,
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-package-queue.json",
+      "bytes": 3259790,
+      "sha256": "3ccb2d5ef10ea9b7501784b44c7c0ea783df346009dfbb2cc9189a147b9df2f0"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "bytes": 1844315,
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json",
+      "bytes": 120963,
+      "sha256": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-unassigned-summary.json",
+      "bytes": 154672,
+      "sha256": "a82c56c1d92ff52c0b0e52c9bf329905a05bace4b6a27c12771509d419888501"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+      "bytes": 4404456,
+      "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-019.json.gz",
+      "bytes": 864475,
+      "sha256": "0e8bf97541c4f29bd2d3aa65a2a06bc0f82ff8c4488490384b2330ad9d749c6c",
+      "decoded_bytes": 9124592,
+      "decoded_sha256": "7b4b325f480e0700c99bf79d1dfdc87019d944847f0f6020312aee628eba73c8"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-019.json.gz",
+      "bytes": 601845,
+      "sha256": "856119147ba011bff828aa0db09b275b17f8894ab0cddbc166ccc7e15ed01750",
+      "decoded_bytes": 2817642,
+      "decoded_sha256": "b925533495f03b5d1200f339537fab4eaebacb072474aa3486230ab1d8f390e5"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-019.json.gz",
+      "bytes": 18306,
+      "sha256": "ac22e99d13a7fe5a502d19a4457337269c5bd27eb2f2c63435933da1d839387b",
+      "decoded_bytes": 129216,
+      "decoded_sha256": "629c6a933b8b23821e5a625cf49bc19814b44652f23368d6a0c05bcc4a009151"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-020.json.gz",
+      "bytes": 914625,
+      "sha256": "05a61f2b7d29ba94e4462eaeb60ad762037ef1ff647cb2537919e6784be63b9e",
+      "decoded_bytes": 8048971,
+      "decoded_sha256": "ee840742404158c36b4376389c4867daa1180816bffe75b3c6bcf5fa71995e1b"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-020.json.gz",
+      "bytes": 668392,
+      "sha256": "aa3b4378a70a2cd246599148fc67e02675ec1dbb4c7fbd172d0e1c962ea1e0a1",
+      "decoded_bytes": 2991428,
+      "decoded_sha256": "f85a692cdc94bbdbad278a3ae49b5b2b99903d3cfd5416aa2d6bc221da732c68"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-020.json.gz",
+      "bytes": 1176,
+      "sha256": "8ee2a437de254000aad0f5a284a90e8ca5cbce7f9e6adfa6659dbfce9368461d",
+      "decoded_bytes": 8814,
+      "decoded_sha256": "545c30cbb431faad93a8c456a173098a363243791dee450aa748b8d89708ce55"
+    },
+    {
+      "commit": "2223d85bbe8b18585c221cc1329d115e8e774a42",
+      "path": "data/ownership-selection.json",
+      "bytes": 1850,
+      "sha256": "73cd741bc51a43faeda36cf8e034f3c49caf45ca7f7c60e042569551f4bb2716"
+    },
+    {
+      "commit": "2223d85bbe8b18585c221cc1329d115e8e774a42",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/ownership-selection-greenland-current.json",
+      "bytes": 3484,
+      "sha256": "6b65c91bfd633d0a8b275ef8c7a13890349e366d4c77053f8bad9b3f3d0c8ac8"
+    },
+    {
+      "commit": "c8a5133bc78923b8ca78c6feeb992b87ceaa8c17",
+      "bytes": 12708346,
+      "git_blob_oid": "df3c7f8efa3c0d694e4b0629b9486e09dbe294c5",
+      "mode": "100644",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/composition-current-001/patch.json",
+      "sha256": "bb62deda4e1bf4b2d51a08baf6503b21ed13e54a9f1cf03e7c52e408b3518643"
+    },
+    {
+      "commit": "2223d85bbe8b18585c221cc1329d115e8e774a42",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    {
+      "commit": "2223d85bbe8b18585c221cc1329d115e8e774a42",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-DNK-ADM1-000.bin.gz",
+      "bytes": 108116,
+      "sha256": "2b4d7935cdcc11fd0f96bc234982ceecebcadf615738b42d742d1a9b5043e7b1",
+      "decoded_bytes": 273937,
+      "decoded_sha256": "cd8c1cd3d10df313e9d8641e2118903125a205ba0130dd34f55f2ed043399dd7"
+    },
+    {
+      "commit": "2223d85bbe8b18585c221cc1329d115e8e774a42",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-DNK-ADM2-000.bin.gz",
+      "bytes": 118433,
+      "sha256": "9ad1f6a5a798871aac0e505ebdae797b6a8f77b278eab92ad1664aa2af18581a",
+      "decoded_bytes": 380355,
+      "decoded_sha256": "d67ed4e8b7f1bb613f93edd2bfc7c69e85169aab31e19596115cf648d9b31628"
+    }
+  ],
+  "transport": {
+    "path": "original-intervals.json.gz",
+    "bytes": 43551,
+    "sha256": "3641d100b575fdaa94ad515065c0da2853fe96c0cc2d6a0d84f95e7054b28f32"
+  },
+  "limits": [
+    "No claim or scientific qualification has been made.",
+    "Original queue owner mapping is only the frozen requested scope; complete ownerless foreign originals must be tested separately.",
+    "Current source authority, actual construction intent and unresolved obligations still require substantive review."
+  ]
+}

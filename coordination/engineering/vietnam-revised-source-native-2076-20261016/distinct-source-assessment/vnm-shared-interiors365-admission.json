@@ -1,0 +1,18 @@
+{
+  "kind": "bounded-independent-observation-prospective-admission",
+  "memory_rss_limit_bytes": 805306368,
+  "wall_deadline_seconds": 120,
+  "poll_seconds": 0.05,
+  "free_bytes_before": 11181326336,
+  "memory_available_before": {
+    "MemTotal": 10451464192,
+    "MemAvailable": 8057360384
+  },
+  "script_sha256": "e91c6caf67440887b11bdc9bc98943564eff0f000cb944695b7f96759644b8ca",
+  "command": [
+    "node",
+    "--max-old-space-size=512",
+    "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/b17b1596b6fa77df18903733e0bac93a9ef6dcb059e80446fe7c638ff093e449/review/.cache/source-assessment/observe-vnm-shared-interiors365.mjs"
+  ],
+  "scope": "Exact365 missing VNM708 native boundary/shared-interior proof; read-only operands; no global source-bank replay"
+}

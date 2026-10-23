@@ -1,0 +1,59 @@
+{
+  "catalogue_commit": "9431af7bce2729274500f6733843ebd5b1315117",
+  "catalogue_path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+  "records": [
+    {
+      "advertised_feature_count": 34,
+      "cohort": "administrative-registry",
+      "feature_count": 34,
+      "key": "gb:CHN:ADM1",
+      "metadata_sha256": "df10c7b79297bd3b71ca8d5f36f61f3396d94c2abee48a85938471c0e2e5bded",
+      "original_bytes": 263343,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 77377,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+          "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+          "uncompressed_bytes": 263343,
+          "uncompressed_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CHN/ADM1/geoBoundaries-CHN-ADM1_simplified.geojson",
+      "recorded_license": "Public Domain",
+      "source_represented_year_claim": "2019"
+    },
+    {
+      "advertised_feature_count": 330,
+      "cohort": "administrative-registry",
+      "feature_count": 330,
+      "key": "gb:MMR:ADM3",
+      "metadata_sha256": "47544cecee2a593c22b8af18fc26182f3db9558626b3af2dc677e01de23dafb0",
+      "original_bytes": 4205367,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 1396414,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+          "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6",
+          "uncompressed_bytes": 4205367,
+          "uncompressed_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+      "source_represented_year_claim": "2019"
+    }
+  ],
+  "notice": "Literal original catalogue records; not a new source rights determination."
+}

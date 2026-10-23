@@ -1,0 +1,119 @@
+{
+  "kind": "and72-source-role-applicability-assessment",
+  "as_of": "2026-10-21",
+  "package_id": "gb-AND-ADM1--repair-evaluation",
+  "reviewer_worker_id": "01a15a0e-9f15-70f9-9391-bfaf7502a007",
+  "scope": {
+    "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_blob": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "cells": 72,
+    "intervals": 15,
+    "owners": [7109],
+    "primary_family": "gb:AND:ADM1",
+    "foreign_family": "gb:ESP:ADM2",
+    "separate_source_conflict": "The nine-key gb-AND-ADM1--source-conflict package is excluded.",
+    "separate_regional_review": "Issue #241 is a distinct read-only Iberia source/semantic scope."
+  },
+  "original_contract": {
+    "question": "Qualify unique current-location source membership, retained territorial exclusions and complete source competitors; derive and verify a zero-reassignment additive native patch.",
+    "completion": "Every exact interval must be a qualified additive repair to its recorded location or a documented exception, with actual selected-native conservation and source/physical witness checks.",
+    "interpretation": "The contract directs qualification against the recorded location/source and retained exclusion/competitor evidence. It does not state that the most detailed or newest available representation must replace the specifically consumed simplified source. The six full-version misses therefore remain adverse evidence to carry through qualification, not an automatic six-key exclusion before the stock checks."
+  },
+  "source_role_evidence": {
+    "AND": {
+      "source_id": "gb:AND:ADM1",
+      "source_feature_family_index": 6,
+      "represented_year_claim": "2007",
+      "feature_count": 7,
+      "consumed_representation": "Simplified GeoJSON at geoBoundaries release commit 9469f09; original source corpus records the same exact consumed URL and byte identity.",
+      "simplified_decoded_bytes": 13699,
+      "simplified_sha256": "159b76ce81686d6c57ede4fc978e2806384306c80d4d1f4ea9de18db67f26ea2",
+      "full_decoded_bytes": 78218,
+      "full_sha256": "e9e4fcd28a898ad101ac4562b58c76fed346be738ddc357a017889d9275d72fb",
+      "properties_validity": "All seven features are retained as valid in both simplified and same-release full payloads.",
+      "metadata_license_declaration": "Public Domain",
+      "upstream_page_evidence": {
+        "url": "https://commons.wikimedia.org/wiki/File:0_Andorra_parishes_all.svg",
+        "page_sha256_from_authenticated_acquisition_record": "77254be52e6279131c2017620854d37e8228c410debc0e62ec2132d6ff36dd98",
+        "page_bytes_from_authenticated_acquisition_record": 96924,
+        "reported_attribution_and_terms": "The handoff's recorded read of the exact page says the map is attributed to Arz1969 and CIA Factbook, originally uploaded in February 2007, and the page displays CC BY-SA 3.0 text alongside the copyright-holder's Public Domain dedication.",
+        "current_read_limit": "The handoff primary/commons-source.html body is absent from the extracted handoff directory, although its acquisition record and finding are present. I relied on those authenticated retained read records rather than claiming to have reopened the page body in this turn."
+      },
+      "lineage": "The accepted atlas:territory:AND lineage lists the complete seven original parish source IDs as members of the compact territory owner 7109. This is positive identity/aggregation context, not by itself per-key or legal-boundary qualification.",
+      "applicability_assessment": "There is a concrete, documented basis to attempt stock qualification against the original consumed simplified family: it is the exact frozen source identity, the family has seven valid members and all members are retained in accepted owner lineage. Its represented year and source attribution remain factual vintage context, not proof of current legal delimitation or positional accuracy."
+    },
+    "ESP": {
+      "ADM2": {
+        "source_id": "gb:ESP:ADM2",
+        "family_index": 103,
+        "represented_year_claim": "2018",
+        "features": 52,
+        "decoded_bytes": 3761096,
+        "decoded_sha256": "40a12d32651a352b59bc88447432421ab80e2d950deb6f552efbae907f7232c2",
+        "recorded_license": "National Institute of Statistics (INE) Data License",
+        "role": "Original foreign/competitor source family explicitly present in the queue package row. Retain the complete family and all direct contacts."
+      },
+      "ADM1": {
+        "represented_year_claim": "2017",
+        "features": 19,
+        "recorded_source": "Instituto Geográfico Nacional",
+        "recorded_license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "role": "Not an original same-tier queue family/contact. A complete parent-family check is a bounded, relevant way to interpret the Lleida ADM2 contact and possible parent/lineage relationship; its absence from the exact center roster should not itself be treated as evidence that ESP ADM2 is excluded or invalid."
+      },
+      "observed_contact": {
+        "feature_index": 23686,
+        "feature_id": "gb:ESP:ADM2:93216281B77878961012946",
+        "name": "Lleida",
+        "key": {"y": 96891, "x": 132142},
+        "direct_owner_vector": [],
+        "assessment": "Retain the contact explicitly. Empty direct-owner membership is not a territorial exclusion, ancestry finding, or proof of political boundary location."
+      }
+    }
+  },
+  "representation_sensitive_keys": {
+    "simplified_contacts": 72,
+    "same_release_full_contacts": 66,
+    "full_geometry_misses": 6,
+    "keys": [
+      {"y": 96682, "x": 132192, "source_name": "Ordino"},
+      {"y": 96825, "x": 132338, "source_name": "Encamp"},
+      {"y": 96891, "x": 132155, "source_name": "Sant Julia de Loria"},
+      {"y": 96891, "x": 132156, "source_name": "Sant Julia de Loria"},
+      {"y": 96891, "x": 132157, "source_name": "Sant Julia de Loria"},
+      {"y": 96891, "x": 132158, "source_name": "Sant Julia de Loria"}
+    ],
+    "finding": "This same-release comparison is materially adverse resolution sensitivity. It does not prove which representation better reflects the intended source boundary, and does not justify silently dropping six keys or presuming all 72 qualified. Keep all 72 in the stock qualification request, and retain the six exact misses as explicit source-evidence context for any per-key result."
+  },
+  "bounded_negative_family_recommendation": {
+    "ESP_ADM2": "Required by the original queue family and exact Lleida contact; retain its complete 52-feature family, not just the contacted feature.",
+    "ESP_ADM1": "Relevant parent context for the exact Lleida ADM2 contact. It is an optional contextual family check supported by the complete retained source catalogue, not a substitute same-tier candidate or a new legal certificate.",
+    "FRA_ADM1_and_ADM2": "France borders Andorra, so complete 13-feature FRA ADM1 and 96-feature FRA ADM2 families are a defensible bounded neighbor screen against the exact five Andorran parish polygons and foreign-contact point. Retain any intersections as contacts requiring interpretation; no owner-vector or country-name exclusion is implied. This finite neighboring-family check improves the original complete-competitor inquiry without demanding every French level or a global family census absent a contract or key-level signal.",
+    "recorded_metadata": {
+      "ESP_ADM1": {"represented_year": "2017", "license": "CC BY 4.0"},
+      "ESP_ADM2": {"represented_year": "2018", "license": "INE Data License"},
+      "FRA_ADM1": {"represented_year": "2022", "license": "Etalab Open License 2.0"},
+      "FRA_ADM2": {"represented_year": "2022", "license": "Etalab Open License 2.0"}
+    },
+    "limits": "These are recorded source-catalogue claims and a bounded relevance judgment; they do not adjudicate reuse, legal borders, whole-area completeness, or political sovereignty. Retain original terms/vintages and any direct contact evidence."
+  },
+  "decision": {
+    "supported_next_step": "Attempt the unchanged stock physical/source-evidence/native qualification path for the complete original 72-key set, with original simplified AND source as the consumed source, complete AND seven-member family, complete ESP ADM2 family, the bounded ESP/FRA parent/neighbor context, and explicit Lleida handling.",
+    "not_supported": [
+      "Do not treat the 66 full-geometry hits as prequalified repairs or the six misses as automatically held.",
+      "Do not use lineage completeness, empty owner vectors, or physical land support alone as per-key qualification.",
+      "Do not claim current legal-boundary authority, source-rights clearance, or a global competitor census from these inputs."
+    ],
+    "specific_remaining_witnesses": [
+      "Actual stock physical support for all seven source members relevant to the exact keys, with residuals retained.",
+      "Stock source-evidence rows binding exact source IDs, candidate and canonical target references, complete negative families, and all direct contacts, including Lleida and any ESP/FRA intersections.",
+      "Actual unchanged stock native diagnostic and authority results for exactly 72 original keys, preserving any held reason and the six full-version misses as context."
+    ]
+  },
+  "reads_and_limits": {
+    "handoff": "inventory/and-audit-handoff/unpacked/AND72-research-and-qualification-handoff.json; SHA256 e1c5c4bac4d64e2bf2de2b79df6b7b02f77870d450c6ec94458cddaa996d9237",
+    "retained_source_context": "inventory/and-audit-handoff/unpacked/retained/retained-source-physical-context.json",
+    "original_and_metadata": "inventory/and-audit-handoff/unpacked/primary/gb-metadata.json",
+    "source_catalogue_read": "Read data/administrative-sources.json at original queue commit 2d1fc6f430e756498908bf2c4e267356a13f5cc7 through the owned partial Git store using bundled Git; read exact ESP and FRA metadata entries only. No source geometries were fetched, scanned or recomputed by this reviewer.",
+    "physical_work": "No observer, source scanner, physical producer, native diagnostic/authority, claim, allocation or terms submission was run by this reviewer."
+  }
+}

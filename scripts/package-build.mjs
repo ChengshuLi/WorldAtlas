@@ -1,11 +1,11 @@
 import fs from 'node:fs/promises';
 import fsSync, {constants} from 'node:fs';
 import path from 'node:path';
-import {fileURLToPath, pathToFileURL} from 'node:url';
+import {fileURLToPath} from 'node:url';
 import {spawn, spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {loadPackageInputs, validatePackageInputs, containsPackagePath} from './package-inputs.mjs';
-import {issueCurrentExecution,authenticateCurrentExecution,requireCurrentExecution,currentExecutionClosure} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs';
+import {issueCurrentExecution,requireCurrentExecution,currentExecutionClosure} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs';
 
 // One explicit startup policy for package production and selected consumers.
 // Site hooks, user/PYTHONPATH imports and ambient bytecode cannot run before
@@ -29,6 +29,7 @@ export function packagePythonProbeArgs(rows){
 export function createPackagePythonExecution(stage,{python,sourceHelper,env=process.env}={}) {
   if(!path.isAbsolute(python??'')||/[\r\n]/.test(process.execPath)||/\s/.test(process.execPath))throw Error('Exact executable paths required for current Python launcher');
   const base=fsSync.realpathSync(stage),helperPath=path.join(base,'scripts/package-python-runtime.py');
+  const identities=new Map(),identity=file=>{const resolved=fsSync.realpathSync(file),stat=fsSync.statSync(resolved);return {resolved,...Object.fromEntries(['dev','ino','size','mode','mtimeMs','ctimeMs'].map(key=>[key,stat[key]]))};};
   const pin=file=>{
     const actual=fsSync.realpathSync(file),stat=fsSync.statSync(actual);
     if(!stat.isFile())throw Error('Ordinary current execution tool required');
@@ -36,6 +37,7 @@ export function createPackagePythonExecution(stage,{python,sourceHelper,env=proc
     try{for(;;){const n=fsSync.readSync(fd,buffer,0,buffer.length,null);if(!n)break;bytes+=n;hash.update(buffer.subarray(0,n));}held=fsSync.fstatSync(fd);}finally{fsSync.closeSync(fd);}
     const after=fsSync.statSync(actual),fields=['dev','ino','size','mode','mtimeMs','ctimeMs'];
     if(bytes!==stat.size||fsSync.realpathSync(file)!==actual||fields.some(key=>stat[key]!==held[key]||stat[key]!==after[key]))throw Error('Current execution tool changed while reading');
+    if(!identities.has(file))identities.set(file,{resolved:actual,...Object.fromEntries(fields.map(key=>[key,stat[key]]))});
     return {path:file,resolved:actual,mode:stat.mode&0o777,bytes,sha256:hash.digest('hex')};
   };
   if(fsSync.realpathSync(helperPath)!==helperPath)throw Error('Declared Python helper must be ordinary');
@@ -50,12 +52,16 @@ export function createPackagePythonExecution(stage,{python,sourceHelper,env=proc
   const record={kind:'current-package-isolated-python-execution-v1',source_role:'scripts/package-build.mjs',
     attribution:'Current application execution policy; not a historical scientific invocation',
     interpreter,helper:{...helperPin,source:sourceHelper},node,launcher:launcherPin,startup:['-I','-S','-B'],argv_mode:'--run-cli'};
+  // Only four private same-process change detectors. Stat equality does not
+  // establish content identity; creation and final verify still hash every tool.
+  const check=()=>{for(const [file,expected]of identities)if(JSON.stringify(identity(file))!==JSON.stringify(expected))throw Error('Current Python execution tool changed');};
   const verify=()=>{
+    check();
     for(const expected of [interpreter,helperPin,node,launcherPin])if(JSON.stringify(pin(expected.path))!==JSON.stringify(expected))throw Error('Current Python execution tool changed');
     if(fsSync.realpathSync(launcher)!==launcher||!fsSync.lstatSync(launcher).isFile())throw Error('Current Python launcher replaced');
   };
-  verify();
-  return {env:{...env,PATH:directory+path.delimiter+(env.PATH??'')},record,verify};
+  check();
+  return {env:{...env,PATH:directory+path.delimiter+(env.PATH??'')},record,check,verify};
 }
 
 export function packagePythonSourceDescriptor(root,head) {
@@ -140,54 +146,17 @@ export function inspectPackageInputs(root, definition) {
     materialized_bytes: materialized.reduce((n, row) => n + row.bytes, 0), missing_objects: missingObjects, errors};
 }
 
-export function inspectPackageAncestry(root, definition, requiredAncestors = []) {
-  const errors = [], ancestors = [...requiredAncestors];
-  // Only caller-required ancestry is checked. Historical qualified-source
-  // custody does not require a full ancestor graph in an ordinary shallow CI
-  // package checkout; its existing immutable reader authenticates those pins.
-  for (const commit of new Set(ancestors)) {
-    if (!/^[a-f0-9]{40}$/.test(commit ?? '')) { errors.push({kind: 'source-ancestry', detail: 'Invalid required ancestor'}); continue; }
-    const result = spawnSync('git', ['-C', root, '-c', 'protocol.allow=never', 'merge-base', '--is-ancestor', commit, 'HEAD'], {env: gitEnv(), encoding: 'utf8', timeout: 30000});
-    if (result.error || result.status !== 0) errors.push({kind: 'source-ancestry', commit, detail: result.error?.message ?? (result.status === 1 ? 'Not an ancestor of HEAD' : result.stderr.trim())});
-  }
-  return {required_ancestors: [...new Set(ancestors)], errors};
-}
-
-// Front-load the same complete role roster the retained consumer requires.
-// Its downstream whole-code authentication remains the authority.
-export function validatePackageExecutionRoles(files,consumerCode,entry) {
-  const critical=[...(consumerCode.critical_files??[]),...(consumerCode.entry_critical_files?.[entry]??[])].map(p=>p.path);
-  const roles=consumerCode.entry_roles?.[entry];
-  if(consumerCode.kind!=='qualified-artifact-application-code-closure-v1'||!critical.length||!roles)throw Error('Missing complete consumer execution roles');
-  const expected=[...critical,...Object.values(roles).flat()].sort();
-  if(expected.some(p=>typeof p!=='string')||new Set(expected).size!==expected.length||JSON.stringify(expected)!==JSON.stringify([...files].sort()))throw Error('Complete actual execution role closure required');
-  return true;
-}
-
 export function inspectPackageExecutionInputs(root, definition, kind = 'cloudflare') {
   if (!['static', 'hosted', 'cloudflare'].includes(kind)) throw Error('Unknown package build');
-  const errors = [], contextPath = 'data/native-context-migration/manifest.json';
-  let files = [];
-  if (containsPackagePath(definition.inputs, contextPath)) {
-    try {
-      const context = json(path.join(root, contextPath));
-      if (context.version === 2 && context.kind === 'retained-identity-context-continuation-v2' && context.issue === 1295) {
-        files = currentExecutionClosure(root, `scripts/build-${kind}-inner.mjs`);
-        for (const file of files) if (!containsPackagePath(definition.inputs, file)) errors.push({kind: 'execution-declaration', path: file, detail: 'Actual project import is not a declared package input'});
-        const stagePath='coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/context-stage-v9.json';
-        if (fsSync.existsSync(path.join(root,stagePath))) {
-          const stage=json(path.join(root,stagePath));
-          const pinned=p=>{if(!p||typeof p.path!=='string'||!containsPackagePath(definition.inputs,p.path))throw Error('Missing declared consumer role input');const raw=fsSync.readFileSync(path.join(root,p.path));if(raw.length!==p.bytes||sha(raw)!==p.sha256)throw Error('Consumer role input identity differs');return JSON.parse(raw);};
-          const certificate=pinned(stage.artifact_consumption?.certificate);
-          validatePackageExecutionRoles(files,pinned(certificate.application_consumer_code),`scripts/build-${kind}-inner.mjs`);
-        }
-      }
-    } catch (error) { errors.push({kind: 'execution-inputs', detail: error.message}); }
-  }
-  return {files, errors};
+  const errors = [];let files = [];
+  try {
+    files=currentExecutionClosure(root,`scripts/build-${kind}-inner.mjs`);
+    for(const file of files)if(!containsPackagePath(definition.inputs,file))errors.push({kind:'execution-declaration',path:file,detail:'Actual project import is not a declared package input'});
+  } catch(error){errors.push({kind:'execution-inputs',detail:error.message});}
+  return {files,errors};
 }
 
-export function inspectPackageRuntime(root, {python = 'python3'} = {}) {
+export function inspectPackageNodeRuntime(root) {
   const errors = [], result = {node: {version: process.version, executable: process.execPath}, python: null, npm_packages: 0, optional_npm_omissions: []};
   if(process.env.NODE_OPTIONS?.trim()||process.env.NODE_PATH?.trim())errors.push({kind:'node-execution',detail:'Actual package issuer requires NODE_OPTIONS and NODE_PATH unset'});
   const attempt = (kind, run) => { try { run(); } catch (error) { errors.push({kind, detail: error.message}); } };
@@ -219,6 +188,12 @@ export function inspectPackageRuntime(root, {python = 'python3'} = {}) {
     }
     for (const name of Object.keys(installed.packages)) if (!lock.packages[name]) errors.push({kind: 'npm-lock', path: name, detail: 'Unlisted installed package'});
   });
+  return {...result, errors};
+}
+
+export function inspectPackageRuntime(root, {python = 'python3'} = {}) {
+  const {errors,...result}=inspectPackageNodeRuntime(root);
+  const attempt = (kind, run) => { try { run(); } catch (error) { errors.push({kind, detail: error.message}); } };
   attempt('python-runtime', () => {
     const requirements = fsSync.readFileSync(path.join(root, 'requirements.txt'), 'utf8');
     const modules = ['numpy', 'shapely', 'pyproj'].map(name => {
@@ -233,31 +208,16 @@ export function inspectPackageRuntime(root, {python = 'python3'} = {}) {
   return {...result, errors};
 }
 
-export async function inspectPackageBrowser(root, mode = 'probe') {
-  if (!['probe', 'required', 'off'].includes(mode)) throw Error('Browser mode must be probe, required or off');
-  if (mode === 'off') return {mode, status: 'not-requested', limitation: 'No browser capability or GPU/Canvas check performed', errors: []};
-  try {
-    // Use the installed locked Playwright only. Never npx or download a browser.
-    const module = path.join(root, 'node_modules/playwright/index.mjs');
-    const source = `import {chromium} from ${JSON.stringify(pathToFileURL(module).href)};const browser=await chromium.launch({headless:true,timeout:5000});try{console.log(JSON.stringify({version:browser.version()}));}finally{await browser.close();}`;
-    const observed = JSON.parse(command(process.execPath, ['--input-type=module', '-e', source], {cwd: root, timeout: 10000, maxBuffer: 64 * 1024}));
-    return {mode, status: 'available', ...observed, limitation: 'Launch capability only; actual GPU/Canvas assertions remain separate', errors: []};
-  } catch (error) {
-    const detail = error.message.slice(0, 1600);
-    return {mode, status: 'unavailable', detail, errors: mode === 'required' ? [{kind: 'browser-capability', detail}] : []};
-  }
-}
-
-export async function preflightPackageBuild({root = process.cwd(), kind = 'cloudflare', browser = 'probe', python = 'python3', requiredAncestors = []} = {}) {
+export async function preflightPackageBuild({root = process.cwd(), kind = 'cloudflare', python = 'python3'} = {}) {
   const started = performance.now();
   root = fsSync.realpathSync(root);
   const definition = loadPackageInputs(root);
-  const inputs = inspectPackageInputs(root, definition), ancestry = inspectPackageAncestry(root, definition, requiredAncestors);
+  const inputs = inspectPackageInputs(root, definition);
   const execution = inspectPackageExecutionInputs(root, definition, kind);
-  const runtime = inspectPackageRuntime(root, {python}), browserCapability = await inspectPackageBrowser(root, browser);
-  const errors = [...inputs.errors, ...ancestry.errors, ...execution.errors, ...runtime.errors, ...browserCapability.errors];
+  const runtime = inspectPackageRuntime(root, {python});
+  const errors = [...inputs.errors, ...execution.errors, ...runtime.errors];
   return {version: 1, kind: 'package-build-preflight', passed: errors.length === 0, input_definition_sha256: sha(fsSync.readFileSync(path.join(root, '.github/package-inputs.json'))),
-    inputs, ancestry, execution, runtime, browser: browserCapability, errors, elapsed_seconds: (performance.now() - started) / 1000,
+    inputs, execution, runtime, errors, elapsed_seconds: (performance.now() - started) / 1000,
     limitation: 'Availability and runtime preflight only. Existing authenticated package/selected readers and applicable hosted tests remain authoritative; no scientific producer, fetch or installation invoked.'};
 }
 
@@ -331,6 +291,27 @@ export async function verifyPackageDependencies(directory) {
   return root;
 }
 
+// A real provider limit on new published static files, not decoded scientific
+// inputs or historical custody: https://developers.cloudflare.com/workers/platform/limits/#static-assets
+export const CLOUDFLARE_STATIC_ASSET_BYTES=25*1024*1024;
+export function assertCloudflareStaticAssets(root) {
+  root=fsSync.realpathSync(root);
+  for(const relative of ['dist','dist/client']){
+    const stat=fsSync.lstatSync(path.join(root,relative));
+    if(!stat.isDirectory()||stat.isSymbolicLink())throw Error('Cloudflare static asset directory must be ordinary: '+relative);
+  }
+  const visit=relative=>{
+    for(const name of fsSync.readdirSync(path.join(root,relative))){
+      const child=relative+'/'+name,stat=fsSync.lstatSync(path.join(root,child));
+      if(stat.isSymbolicLink())throw Error('Cloudflare static asset must be ordinary: '+child);
+      if(stat.isDirectory())visit(child);
+      else if(!stat.isFile()||stat.size>CLOUDFLARE_STATIC_ASSET_BYTES)
+        throw Error('Cloudflare static asset exceeds 25 MiB or is nonordinary: '+child);
+    }
+  };
+  visit('dist/client');
+}
+
 export function assertPackageStage(directory = repository) {
   const expected = process.env.WORLDATLAS_PACKAGE_STAGE;
   if (!expected || path.resolve(expected) !== path.resolve(directory)) throw Error('Private builder requires a declared input image; use build:static, build:hosted or build:cloudflare');
@@ -362,21 +343,10 @@ export async function runPackageBuild(kind, {root = repository, execute, preflig
     delete env.WORLDATLAS_CURRENT_EXECUTION_PATH;
     delete env.WORLDATLAS_CURRENT_EXECUTION_SHA256;
     delete env.WORLDATLAS_PACKAGE_SOURCE_ROOT;
-    // Bind current checkout execution separately from immutable authored lineage.
-    const contextPath=path.join(stage,'data/native-context-migration/manifest.json');
-    const context=await fs.readFile(contextPath,'utf8').then(JSON.parse,error=>{if(error.code==='ENOENT')return null;throw error;});
+    // Current execution is independent of the historical producer/continuation.
     let currentExecution;
-    if(context?.version===2&&context.kind==='retained-identity-context-continuation-v2'&&context.issue===1295){
-      // Only the explicit successor sidecar adds a whole numerical-input
-      // admission before the first current execution/runtime authentication.
-      const successorSidecar=path.join(stage,'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/context-stage-v9.json');
-      const successorStat=await fs.lstat(successorSidecar).catch(error=>{if(error.code==='ENOENT')return null;throw error;});
-      if(successorStat){
-        const {preflightOuterArcticPackage}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-package-preflight.mjs');
-        preflightOuterArcticPackage({source:root,stage,entry:entries[kind]});
-      }
+    if(containsPackagePath(definition.inputs,'data/ownership-selection.json')||containsPackagePath(definition.inputs,'data/native-context-migration/manifest.json')){
       currentExecution=issueCurrentExecution({source:root,stage,entry:entries[kind]});
-      authenticateCurrentExecution(currentExecution,{root:stage,executingRoot:root,sourceRoot:root});
       const raw=Buffer.from(JSON.stringify(currentExecution)+'\n');
       await fs.mkdir(path.join(stage,'.cache'),{recursive:true});
       await fs.writeFile(path.join(stage,'.cache/current-context-execution.json'),raw,{flag:'wx'});
@@ -389,7 +359,7 @@ export async function runPackageBuild(kind, {root = repository, execute, preflig
       child.on('error', reject);
       child.on('exit', (code, signal) => code === 0 ? resolve() : reject(Error(`Package ${kind} build failed (${signal ?? code}); prior outputs retained`)));
     }));
-    pythonExecution?.verify();
+    pythonExecution?.check();
     try{await run(path.join(stage, entries[kind]), {cwd: stage, env});}
     catch(error){
       try{pythonExecution?.verify();}catch(changed){throw new AggregateError([error,changed],'Build failed and current Python execution changed');}
@@ -397,6 +367,7 @@ export async function runPackageBuild(kind, {root = repository, execute, preflig
     }
     pythonExecution?.verify();
     if(currentExecution)requireCurrentExecution(currentExecution);
+    if(kind==='cloudflare')assertCloudflareStaticAssets(stage);
     // Only explicit generated outputs return to the caller. Source archives and
     // unpublished research never get copied back or altered by this wrapper.
     for (const output of definition.generated_outputs) {
@@ -420,6 +391,18 @@ export async function runPackageBuild(kind, {root = repository, execute, preflig
     if(currentExecution)receipt.current_context_execution=currentExecution;
     if(pythonExecution)receipt.current_python_execution=pythonExecution.record;
     receipt.preflight = readiness;
+    // Only the closed file actually exported by this successful build is disposable.
+    const database = '.cache/package-atlas.sqlite';
+    if (exports.some(output => output.target === path.join(root, database))) {
+      const file = path.join(root, database), before = fsSync.lstatSync(file);
+      if (!before.isFile() || fsSync.realpathSync(file) !== file) throw Error('Generated comparison database must be ordinary');
+      // Native Git streams this binary with no filters, object write or hydration.
+      const oid = command('git', ['-C', root, '-c', 'core.bigFileThreshold=0', 'hash-object', '--no-filters', '--', database], {env: gitEnv()}).trim();
+      const after = fsSync.lstatSync(file);
+      if (!/^[a-f0-9]{40}$/.test(oid) || ['dev','ino','size','mode','mtimeMs','ctimeMs'].some(key => before[key] !== after[key]))
+        throw Error('Generated comparison database changed while hashing');
+      receipt.generated_database = {path: database, bytes: after.size, git_blob_oid: oid};
+    }
     await fs.writeFile(path.join(cache, 'package-input-build.json'), JSON.stringify(receipt, null, 2) + '\n');
     return receipt;
   } finally {

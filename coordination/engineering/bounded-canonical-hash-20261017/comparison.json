@@ -1,0 +1,100 @@
+{
+  "shared-old": {
+    "mode": "old",
+    "kind": "2000",
+    "digest": "4cf767734719dc5519eba8ce6de316f4f0a860882b21b240ff305045f3e3ec0c",
+    "elapsed_ms": 566.7139480000001,
+    "before": {
+      "rss": 41406464,
+      "heapTotal": 12767232,
+      "heapUsed": 9389352,
+      "external": 4346725,
+      "arrayBuffers": 510746
+    },
+    "after": {
+      "rss": 361684992,
+      "heapTotal": 293761024,
+      "heapUsed": 221888552,
+      "external": 28870605,
+      "arrayBuffers": 25034586
+    },
+    "maxRSS_KiB": 353208
+  },
+  "shared-new": {
+    "mode": "new",
+    "kind": "2000",
+    "digest": "4cf767734719dc5519eba8ce6de316f4f0a860882b21b240ff305045f3e3ec0c",
+    "elapsed_ms": 858.387712,
+    "before": {
+      "rss": 38371328,
+      "heapTotal": 13291520,
+      "heapUsed": 9390088,
+      "external": 4346725,
+      "arrayBuffers": 510746
+    },
+    "after": {
+      "rss": 57970688,
+      "heapTotal": 27185152,
+      "heapUsed": 15617576,
+      "external": 3982630,
+      "arrayBuffers": 146611
+    },
+    "maxRSS_KiB": 56612
+  },
+  "actual-old": {
+    "mode": "old",
+    "kind": "actual-patch",
+    "pin": {
+      "commit": "f6f6f15109d63b918e1a4569ac68906e948117a7",
+      "path": "coordination/engineering/five-repair-delivery-20261017/composition-004/patch.json",
+      "bytes": 26453595,
+      "sha256": "c3c83e3bec5a1dbe60df63eea7d22d5173281de1ad1068c5632cbda674c6cf9d"
+    },
+    "bytes": 26453595,
+    "digest": "c3c83e3bec5a1dbe60df63eea7d22d5173281de1ad1068c5632cbda674c6cf9d",
+    "elapsed_ms": 435.285018,
+    "before": {
+      "rss": 252878848,
+      "heapTotal": 230309888,
+      "heapUsed": 110122080,
+      "external": 56889744,
+      "arrayBuffers": 26600170
+    },
+    "after": {
+      "rss": 489934848,
+      "heapTotal": 387256320,
+      "heapUsed": 316133352,
+      "external": 56889784,
+      "arrayBuffers": 53053765
+    },
+    "maxRSS_KiB": 478520
+  },
+  "actual-new": {
+    "mode": "new",
+    "kind": "actual-patch",
+    "pin": {
+      "commit": "f6f6f15109d63b918e1a4569ac68906e948117a7",
+      "path": "coordination/engineering/five-repair-delivery-20261017/composition-004/patch.json",
+      "bytes": 26453595,
+      "sha256": "c3c83e3bec5a1dbe60df63eea7d22d5173281de1ad1068c5632cbda674c6cf9d"
+    },
+    "bytes": 26453595,
+    "digest": "c3c83e3bec5a1dbe60df63eea7d22d5173281de1ad1068c5632cbda674c6cf9d",
+    "elapsed_ms": 715.470345,
+    "before": {
+      "rss": 227741696,
+      "heapTotal": 245252096,
+      "heapUsed": 110113448,
+      "external": 30436149,
+      "arrayBuffers": 26600170
+    },
+    "after": {
+      "rss": 316084224,
+      "heapTotal": 245514240,
+      "heapUsed": 153077304,
+      "external": 30436189,
+      "arrayBuffers": 26600170
+    },
+    "maxRSS_KiB": 308676
+  }
+}

@@ -5,7 +5,6 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
-import {installedNodeIdentity, effectiveNodeDependencyInventory, validateNodeIdentity} from './package-node-runtime.mjs';
 import {loadPackageInputs, validatePackageInputs, containsPackagePath, safePackagePath, PACKAGE_PRODUCER_KIND, admitPackageInputTransition} from './package-inputs.mjs';
 
 export {PACKAGE_PRODUCER_KIND, inertSelectedPackageInput, admitPackageInputTransition} from './package-inputs.mjs';
@@ -18,12 +17,9 @@ const sha = raw => createHash('sha256').update(raw).digest('hex');
 const commit = value => /^[a-f0-9]{40}$/.test(value ?? '');
 const hash = value => /^[a-f0-9]{64}$/.test(value ?? '');
 const positive = value => Number.isSafeInteger(value) && value > 0;
-const MAX_METADATA = 8 * 1024 * 1024;
-// Content sizes are admitted from actual inventories and available disk, not a
-// fixed package-size allowance. These metadata bounds do not change deployment limits.
-// Content is streamed with one 1 MiB buffer. No whole package is held in memory.
-export const PACKAGE_OUTPUT_LIMITS = Object.freeze({files: 20000, member_bytes: Number.MAX_SAFE_INTEGER,
-  total_bytes: Number.MAX_SAFE_INTEGER, metadata_bytes: MAX_METADATA});
+// Preserve the existing Cloudflare output file-count contract. Content hashing
+// streams complete members and does not impose an application-memory ceiling.
+export const PACKAGE_OUTPUT_LIMITS = Object.freeze({files: 20000});
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
 function ordinary(root, relative, directory = false) {
@@ -44,14 +40,14 @@ function ordinary(root, relative, directory = false) {
   return at;
 }
 
-export function streamedPackageFile(root, relative, maximum = PACKAGE_OUTPUT_LIMITS.member_bytes) {
+export function streamedPackageFile(root, relative) {
   need(safePackagePath(relative) && !relative.endsWith('/'), 'Safe ordinary package path required');
-  return streamedOrdinaryFile(root, relative, maximum);
+  return streamedOrdinaryFile(root, relative);
 }
 
-function streamedOrdinaryFile(root, relative, maximum = PACKAGE_OUTPUT_LIMITS.member_bytes) {
+function streamedOrdinaryFile(root, relative) {
   const file = ordinary(root, relative), before = fs.lstatSync(file);
-  need(Number.isSafeInteger(before.size) && before.size >= 0 && before.size <= maximum, 'Package member exceeds admitted bytes');
+  need(Number.isSafeInteger(before.size) && before.size >= 0, 'Invalid whole package member size');
   const fd = fs.openSync(file, fs.constants.O_RDONLY | fs.constants.O_NOFOLLOW), digest = createHash('sha256');
   const buffer = Buffer.alloc(1024 * 1024); let bytes = 0;
   try {
@@ -79,7 +75,7 @@ export function inventoryPackageOutput(root) {
       else {
         need(stat.isFile() && result.length < PACKAGE_OUTPUT_LIMITS.files, 'Unsupported or excessive output inventory');
         const row = streamedPackageFile(root, child); total += row.bytes;
-        need(total <= PACKAGE_OUTPUT_LIMITS.total_bytes, 'Package output exceeds transport admission'); result.push(row);
+        need(Number.isSafeInteger(total),'Package output total is not an exact integer');result.push(row);
       }
     }
   };
@@ -94,14 +90,18 @@ export function inventoryPackageOutput(root) {
   return {files: result, bytes: total};
 }
 
-const git = (root, args) => execFileSync('git', ['-C', root, ...args], {encoding: 'utf8',
-  maxBuffer: 32 * 1024 * 1024, env: {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_TERMINAL_PROMPT: '0'}});
+function capturePackageCommand(executable,args,{input,env}={}) {
+  return execFileSync(executable,args,{input,env,encoding:'utf8',maxBuffer:Infinity});
+}
+
+const git = (root, args) => capturePackageCommand('git',['-C',root,...args],
+  {env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_TERMINAL_PROMPT:'0'}});
 export function committedPackageInputs(root, definition = loadPackageInputs(root), head = 'HEAD') {
   const rows = git(root, ['ls-tree', '-rz', '--full-tree', head]).split('\0').filter(Boolean).map(line => {
     const tab = line.indexOf('\t'), [mode, type, oid] = line.slice(0, tab).split(' ');
     return {path: line.slice(tab + 1), mode, type, oid};
   }).filter(row => containsPackagePath(definition.inputs, row.path));
-  need(rows.length > 0 && rows.length <= 20000 && rows.every(row => row.type === 'blob' &&
+  need(rows.length > 0 && rows.every(row => row.type === 'blob' &&
     ['100644','100755'].includes(row.mode) && commit(row.oid)), 'Complete ordinary package source tree required');
   for (const name of definition.inputs) need(definition.optional_inputs.includes(name) ||
     rows.some(row => containsPackagePath([name], row.path)), 'Declared input absent from original tree');
@@ -110,7 +110,7 @@ export function committedPackageInputs(root, definition = loadPackageInputs(root
 
 function readJSON(root, relative) {
   const file = ordinary(root, relative), stat = fs.statSync(file);
-  need(stat.size > 0 && stat.size <= MAX_METADATA, 'Bounded whole package metadata required');
+  need(Number.isSafeInteger(stat.size)&&stat.size>0,'Invalid whole package metadata size');
   return JSON.parse(fs.readFileSync(file));
 }
 
@@ -120,7 +120,9 @@ export function packageBuildConfiguration(env = process.env) {
 }
 
 // The staged image inventories build and capture code, dependencies and config.
-// Only the two genuine workflow invocations are outside that source boundary.
+// Historical author captures retain both original workflow identities. Current
+// captures require the remaining queue producer; immutable source comparison
+// prevents transferring an old two-workflow capture into a queue-only producer.
 // Post-build tests/observers run after capture, not as producer identity inputs.
 export const PACKAGE_PRODUCER_WORKFLOWS = [
   '.github/workflows/merge-integration-checks.yml', '.github/workflows/worker-merge.yml',
@@ -131,13 +133,12 @@ export function committedPackageProducer(root, head = 'HEAD') {
     need(match, 'Ordinary package producer workflow required');
     return {path:match[2],mode:'100644',oid:match[1]};
   });
-  need(same(workflows.map(row=>row.path),PACKAGE_PRODUCER_WORKFLOWS),'Complete package producer workflows required');
+  need(same(workflows.map(row=>row.path),PACKAGE_PRODUCER_WORKFLOWS) ||
+    same(workflows.map(row=>row.path),[PACKAGE_PRODUCER_WORKFLOWS[1]]),'Complete package producer workflows required');
   return {kind:PACKAGE_PRODUCER_KIND,workflows};
 }
 
-// Identity v2 retains raw evidence separately from narrowly proven relocation
-// metadata. Old aggregate-only evidence remains valid history, but cannot prove
-// equivalence under this policy and therefore takes the ordinary full-build path.
+// Bind the actual archive extractor before and after its execution.
 export function resolvePackagePythonExecutable(expectedSha256) {
   let executable;
   for(const directory of (process.env.PATH??'').split(path.delimiter)){
@@ -150,74 +151,6 @@ export function resolvePackagePythonExecutable(expectedSha256) {
   need(expectedSha256===undefined||identity.sha256===expectedSha256,'Python executable differs from authenticated original');
   return {executable,sha256:identity.sha256};
 }
-function packagePythonIdentity(args,input,expectedExecutable) {
-  try {
-    const python=resolvePackagePythonExecutable(expectedExecutable);
-    const result=JSON.parse(execFileSync(python.executable,['-I','-S','-B',fileURLToPath(new URL('./package-python-runtime.py',import.meta.url)),...args],
-      {input,encoding:'utf8',maxBuffer:MAX_METADATA,env:{...process.env,PYTHONDONTWRITEBYTECODE:'1'}}));
-    need(result.valid===true||result.executable_sha256===python.sha256,'Python reported executable differs from independently observed bytes');
-    return result;
-  } catch(error) {
-    const detail=String(error.stderr??'').trim().split('\n').at(-1)||error.code||error.message;
-    throw Error('Python installed identity failed: '+String(detail).slice(0,1000));
-  }
-}
-export function installedPackageIdentity(root, pythonImports = [], {expectedParser,expectedExecutable} = {}) {
-  const node = installedNodeIdentity(root);
-  const python = pythonImports.length ? packagePythonIdentity([JSON.stringify(pythonImports),
-    ...(expectedParser===undefined?[]:['--expected-parser'])],expectedParser===undefined?undefined:JSON.stringify(expectedParser),expectedExecutable) : null;
-  return {version:2,...node,python};
-}
-
-export function declaredPackagePythonRoots(root) {
-  const file=path.join(root,'requirements.txt');
-  if(!fs.existsSync(file))return [];
-  return fs.readFileSync(file,'utf8').split(/\r?\n/).map(line=>line.trim()).filter(line=>line&&!line.startsWith('#')).map(line=>{
-    const match=/^([A-Za-z0-9_.-]+)==([^\s;]+)$/.exec(line);
-    need(match,'Exact pinned scientific dependency declaration required');
-    return {name:match[1],version:match[2]};
-  });
-}
-
-export function validateInstalledPackageIdentity(value) {
-  need(value?.version===2,'Version 2 installed inventory required');
-  need(same(Object.keys(value).sort(),['dependencies','node','python','version']),'Exact versioned installed identity fields required');
-  validateNodeIdentity({node:value.node,dependencies:value.dependencies});
-  need(Object.hasOwn(value,'python'),'Explicit installed Python identity required');
-  if(value.python!==null){
-    const result=packagePythonIdentity(['--validate'],JSON.stringify(value.python));
-    need(result.valid===true,'Complete bound Python inventory required');
-  }
-  return value;
-}
-
-export function installedPackageDifferences(original,current) {
-  validateInstalledPackageIdentity(current);
-  if(original?.version!==2||current?.version!==2)return [{component:'identity-policy',reason:'Version 2 raw and effective installed evidence required'}];
-  validateInstalledPackageIdentity(original);
-  const differences=[];
-  for(const component of ['node','dependencies','python']) {
-    const before=original[component],after=current[component];
-    const identity=value=>component==='node'?value:value===null?null:
-      {sha256:value?.sha256,files:value?.files,...(component==='python'?{executable_sha256:value?.executable_sha256}:{} )};
-    if(same(identity(before),identity(after)))continue;
-    const row={component,original:identity(before),current:identity(after)};
-    if(component==='python'&&before&&after){
-      row.changed_components=['interpreter','roots','distributions','parser'].filter(key=>!same(
-        key==='parser'?{provider:before.parser?.provider,sha256:before.parser?.sha256}:before[key],
-        key==='parser'?{provider:after.parser?.provider,sha256:after.parser?.sha256}:after[key]));
-    }
-    const inventory=value=>component==='dependencies'?effectiveNodeDependencyInventory({dependencies:value}):
-      (value?.inventory??[]).map(member=>({path:(member.distribution??'')+':'+member.path,identity:member.effective}));
-    if(component!=='node'){
-      const old=new Map(inventory(before).map(member=>[member.path,member])),now=new Map(inventory(after).map(member=>[member.path,member]));
-      row.changed_files=[...new Set([...old.keys(),...now.keys()])].sort().filter(name=>!same(old.get(name),now.get(name)));
-    }
-    differences.push(row);
-  }
-  return differences;
-}
-
 export function snapshotPackageOutputSource(root = process.cwd()) {
   root = fs.realpathSync(root);
   const definition = loadPackageInputs(root), files = committedPackageInputs(root, definition);
@@ -249,8 +182,7 @@ export function snapshotPackageOutputSource(root = process.cwd()) {
   need(same(actual,files),'Actual original source image differs from complete immutable inventory');
   const head = git(root, ['rev-parse','HEAD']).trim(), tree = git(root, ['rev-parse','HEAD^{tree}']).trim();
   return {head, tree, input_definition_sha256: sha(fs.readFileSync(path.join(root, '.github/package-inputs.json'))),
-    definition, files, producer: committedPackageProducer(root), selection: readJSON(root, 'data/ownership-selection.json'),
-    installed_runtime:installedPackageIdentity(root,declaredPackagePythonRoots(root))};
+    definition, files, producer: committedPackageProducer(root), selection: readJSON(root, 'data/ownership-selection.json')};
 }
 
 export function createPackageOutputManifest(root = process.cwd()) {
@@ -271,11 +203,11 @@ export function createPackageOutputManifest(root = process.cwd()) {
   const output = inventoryPackageOutput(root);
   const {installed_runtime,...manifestSource}=source;
   const manifest = {version: 1, kind: 'original-cloudflare-package-output', source:manifestSource,
-    runtime: {installed: installed_runtime, node: process.version, versions: process.versions, platform: process.platform, arch: process.arch,
-      dependencies: streamedPackageFile(root, 'package-lock.json', MAX_METADATA).sha256,
+    runtime: {...(installed_runtime===undefined?{}:{installed:installed_runtime}), node: process.version, versions: process.versions, platform: process.platform, arch: process.arch,
+      dependencies: streamedPackageFile(root, 'package-lock.json').sha256,
       python: {version:receipt.preflight.runtime?.python?.version??null,imports:receipt.preflight.runtime?.python?.imports??[]}},
     configuration: packageBuildConfiguration(), output,
-    original_build_receipt: streamedPackageFile(root, '.cache/package-input-build.json', MAX_METADATA),
+    original_build_receipt: streamedPackageFile(root, '.cache/package-input-build.json'),
     semantics: 'Original full package output, retained without claiming a fresh build when reused.'};
   validatePackageOutputManifest(manifest);
   return manifest;
@@ -284,40 +216,40 @@ export function createPackageOutputManifest(root = process.cwd()) {
 export function validatePackageOutputManifest(value) {
   need(value?.version === 1 && value.kind === 'original-cloudflare-package-output' &&
     commit(value.source?.head) && commit(value.source?.tree) && hash(value.source?.input_definition_sha256) &&
-    Array.isArray(value.source.files) && value.source.files.length > 0 && value.source.files.length <= 20000,
+    Array.isArray(value.source.files) && value.source.files.length > 0,
     'Invalid original package identity');
   validatePackageInputs(value.source.definition);
   // Absence preserves legacy history; transition admission requires this new
   // capture policy explicitly rather than reinterpreting the old programme.
   const producer=value.source.producer;
   if(producer!==undefined)need(producer?.kind===PACKAGE_PRODUCER_KIND&&
-    Array.isArray(producer.workflows)&&producer.workflows.length===PACKAGE_PRODUCER_WORKFLOWS.length&&
-    producer.workflows.every((row,index)=>row.path===PACKAGE_PRODUCER_WORKFLOWS[index]&&row.mode==='100644'&&commit(row.oid)),
+    Array.isArray(producer.workflows)&&
+    (same(producer.workflows.map(row=>row?.path),PACKAGE_PRODUCER_WORKFLOWS)||
+     same(producer.workflows.map(row=>row?.path),[PACKAGE_PRODUCER_WORKFLOWS[1]]))&&
+    producer.workflows.every(row=>row.mode==='100644'&&commit(row.oid)),
     'Invalid immediate package producer identity');
   need(value.source.selection && typeof value.source.selection === 'object' &&
     value.runtime && typeof value.runtime.node === 'string' && typeof value.runtime.platform === 'string' &&
     typeof value.runtime.arch === 'string' && hash(value.runtime.dependencies) &&
-    hash(value.runtime.installed?.node?.sha256) && hash(value.runtime.installed?.dependencies?.sha256) &&
     value.configuration && typeof value.configuration === 'object' && !Array.isArray(value.configuration) &&
     Object.values(value.configuration).every(item => typeof item === 'string'), 'Missing original runtime/configuration');
-  if(value.runtime.installed?.version===2)validateInstalledPackageIdentity(value.runtime.installed);
+  // Original installed-runtime metadata is historical evidence, never a claim
+  // that this reader has recreated or reexecuted the original environment.
   const sources = new Set();
   for (const row of value.source.files) {
     need(safePackagePath(row.path) && !sources.has(row.path) && ['100644','100755'].includes(row.mode) && commit(row.oid),
       'Duplicate or invalid original package input'); sources.add(row.path);
   }
   need(Array.isArray(value.output?.files) && value.output.files.length > 0 &&
-    value.output.files.length <= PACKAGE_OUTPUT_LIMITS.files && positive(value.output.bytes) &&
-    value.output.bytes <= PACKAGE_OUTPUT_LIMITS.total_bytes, 'Invalid original output inventory');
+    value.output.files.length <= PACKAGE_OUTPUT_LIMITS.files && positive(value.output.bytes), 'Invalid original output inventory');
   const outputs = new Set(); let bytes = 0;
   for (const row of value.output.files) {
     need(safePackagePath(row.path) && /^dist\/(client|cloudflare)\//.test(row.path) && !outputs.has(row.path) &&
-      Number.isSafeInteger(row.bytes) && row.bytes >= 0 && row.bytes <= PACKAGE_OUTPUT_LIMITS.member_bytes && hash(row.sha256),
-      'Duplicate, unsafe or oversized original output'); outputs.add(row.path); bytes += row.bytes;
+      Number.isSafeInteger(row.bytes) && row.bytes >= 0 && hash(row.sha256),
+      'Duplicate, unsafe or malformed original output'); outputs.add(row.path); bytes += row.bytes;
   }
   need(bytes === value.output.bytes && ['dist/client/atlas-geography.json','dist/cloudflare/index.js',
     'dist/cloudflare/wrangler.json'].every(name => outputs.has(name)), 'Incomplete original package inventory');
-  need(Buffer.byteLength(JSON.stringify(value)) <= MAX_METADATA, 'Original package metadata exceeds admission');
   return value;
 }
 

@@ -1,22 +1,104 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
 import {prepareNativeRegressionInputs,NATIVE_REGRESSION_COMMITS,integrationTestFiles} from '../scripts/run-integration-tests.mjs';
-function fixture({present=[],fetchFails=false,fetchIncomplete=false}={}){
- const available=new Set(present),calls=[];
- const run=(command,args)=>{
-  calls.push({command,args});assert.equal(command,'git');
-  if(args[0]==='cat-file')return {status:available.has(args[2].slice(0,-9))?0:1};
-  assert.deepEqual(args.slice(0,5),['fetch','--no-tags','--depth=1','origin',args[4]]);
-  if(!fetchFails&&!fetchIncomplete)for(const commit of args.slice(4))available.add(commit);
+const manifestPath='coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/manifest.json';
+const stagePath='coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/evidence-quality.json';
+const custodyRoot='coordination/engineering/physical-gap-components-1005-20261005-local19/';
+const exceptionPinsPath='test/fixtures/original-repair-exceptions/historical-input-pins.json';
+const EXCEPTION_TEST='test/original-repair-exception-controls.test.mjs';
+const EXCEPTION_COMMITS=Object.freeze({accepted:'cd1886f20f34abdcafe7c327ae0ee768ce5d47ae',selectedProducts:'e17dba85347a4a31ccb9ecdaa4c7a20b6b950c8d',originalSalvador:'32d819ddc9333ff025584665665c963822dfcead'});
+const slePinsPath='test/fixtures/sle-physical-review/input-pins.json';
+const holdPinsPath='test/fixtures/held-row-contact/input-locators.json';
+const HOLD_TEST='test/held-row-contact-reconstruction-controls.test.mjs';
+const HOLD_COMMITS=Object.freeze(["252f2aa1e6309b6990985dec73611d6df0e11c70","601852e911478b90762edb7b9d80985786f95d43","8c192828cf81a554176efdead967acb9b05ac79e","6a6358d232df09ef4561073f8727b2892d5413ea","e38e3488de52e6ef299157f7dc736398a1b9ca1f","2d1fc6f430e756498908bf2c4e267356a13f5cc7"]);
+const HISTORICAL=Object.freeze({
+ bounds:'d55795e4c0ad01527029db0bd1d774124a12a61a',
+ proof:'548c5f89f00271050823076a84695bb41e1b8454',
+ context:'d70c5d86e345a225b6bc78d67451b3cbbf7a5eed',
+ pinnedPackage:'65cfcef5ffd7d8b98077b9058a374d1e27047430',
+ latitudes:'35d2d3ff48957d34ee8d4329824b268ecadc6d3c'
+});
+const CUSTODY_COMMITS=Object.freeze([
+ '8f6dc184d1a41b634cec4759bb57b3cc04dd980a','6ed6406f9fad4c7c468b06a376346b216cb50db7'
+]);
+const heldPinsPath='test/fixtures/held-cell-exceptions/historical-input-pins.json';
+const HELD_TEST='test/held-cell-exception-evidence-controls.test.mjs';
+const HELD_COMMITS=Object.freeze([
+ '427cf5eb2d5004b0b65ffc34bf33d7fbbb6e44bc','b991e2295c50a64e49d4f92c76c37bd95c869b63',
+ '5b32388df0501b013ac9a3ba97864932db493d59','252f2aa1e6309b6990985dec73611d6df0e11c70',
+ 'f988605570667858062905c04c31231564882d11','21984e9ec4ec7370bc807e2da23cea2228747698',
+ '07c74ff101d4ab5e679255ed85c402356aa54a42'
+]);
+const SLE_COMMITS=Object.freeze([
+ '21984e9ec4ec7370bc807e2da23cea2228747698','a6da25fcc78819b8e88ec2040a934039aefc5f97',
+ '597f45d79fb84e222637c3390cb93c11377474af','31ced2c0b64292cbdfeb3bcf7beffeb0410b76be',
+ '5b32388df0501b013ac9a3ba97864932db493d59','58ae8c238f4b170fdf887a0f0c5b2da1dff97ca4'
+]);
+const FULL_COMMITS=Object.freeze([...new Set([
+ HISTORICAL.bounds,HISTORICAL.proof,HISTORICAL.context,HISTORICAL.pinnedPackage,HISTORICAL.latitudes,
+ ...CUSTODY_COMMITS,...Object.values(EXCEPTION_COMMITS),...HELD_COMMITS,...HOLD_COMMITS,...SLE_COMMITS
+])]);
+const SLE_TEST='test/sierra-leone-physical-review-controls.test.mjs';
+function fixture({present=[],fetchFails=false,fetchIncomplete=false,bodiesPresent=true,bodyFetchFails=false,bodyFetchIncomplete=false}={}){
+ const available=new Set(present),calls=[],documents=new Map(),descriptors=new Map();
+ const pin=(commit,name,bytes=7)=>({commit,path:name,bytes,sha256:'a'.repeat(64)});
+ const slePins=JSON.parse(fs.readFileSync(slePinsPath,'utf8'));
+ const holdPins=JSON.parse(fs.readFileSync(holdPinsPath,'utf8'));
+ const exceptionPins=JSON.parse(fs.readFileSync(exceptionPinsPath,'utf8'));
+ const heldPins=JSON.parse(fs.readFileSync(heldPinsPath,'utf8'));
+ const manifest={original_assets:{bounds:pin(HISTORICAL.bounds,'data/bounds.json')},
+  native_latitudes:pin(HISTORICAL.latitudes,'data/latitudes.gz')};
+ const proof=pin(HISTORICAL.proof,'retained/proof.json');
+ const stage={baseline:{commit:HISTORICAL.pinnedPackage,files:[pin(undefined,'data/input.json'),pin(undefined,'scripts/not-consumed.js')]}};
+ const custody={generations:CUSTODY_COMMITS.map(commit=>({executed_code_commit:commit,
+  code:[pin(undefined,custodyRoot+'executed-code/'+commit+'/scripts/original.py')]}))};
+ documents.set(manifestPath,manifest);documents.set(stagePath,stage);documents.set(custodyRoot+'custody-v1/index.json',custody);
+ documents.set(slePinsPath,slePins);documents.set(exceptionPinsPath,exceptionPins);documents.set(heldPinsPath,heldPins);documents.set(holdPinsPath,holdPins);
+ const manifestHash=createHash('sha256').update(JSON.stringify(manifest)).digest('hex');
+ documents.set('scripts/native-ownership/verified-candidates.json',{candidates:{[manifestHash]:proof}});
+ const declare=pin=>{
+  const oid=pin.git_blob_oid??createHash('sha1').update(pin.commit+':'+pin.path).digest('hex');
+  descriptors.set(pin.commit+':'+pin.path,{...pin,oid,mode:'100644'});return oid;
+ };
+ for(const p of [manifest.original_assets.bounds,manifest.native_latitudes,proof,
+  {...stage.baseline.files[0],commit:stage.baseline.commit},{...manifest.native_latitudes,commit:stage.baseline.commit},
+  ...custody.generations.map(g=>pin(g.executed_code_commit,'scripts/original.py')),
+  ...Object.values(slePins.inputs),...exceptionPins.inputs,...heldPins.inputs,
+  ...holdPins.source_and_evidence_inputs,...holdPins.original_extraction_inputs,holdPins.helper,holdPins.latitudes])declare(p);
+ const bodyAvailable=new Set(bodiesPresent?[...descriptors.values()].map(p=>p.oid):[]);
+ const run=(command,args,options={})=>{
+  calls.push({command,args,options});assert.equal(command,'git');
+  if(args[0]==='cat-file'&&args[1]==='-e')return {status:available.has(args[2].slice(0,-9))?0:1};
+  if(args[0]==='ls-tree'){
+   const p=descriptors.get(args[2]+':'+args[4]);
+   return {status:0,stdout:p?`${p.mode} blob ${p.oid}\t${p.path}\0`:''};
+  }
+  if(args[0]==='cat-file'){
+   const rows=options.input.trimEnd().split('\n').map(oid=>{
+    const p=[...descriptors.values()].find(p=>p.oid===oid);assert(p);
+    return bodyAvailable.has(oid)?`${oid} blob ${p.bytes}`:`${oid} missing`;
+   });return {status:0,stdout:rows.join('\n')+'\n'};
+  }
+  assert.equal(args[0],'fetch');
+  if(args.includes('--stdin')){
+   assert.deepEqual(args,['fetch','--no-tags','--no-write-fetch-head','--no-recurse-submodules','--no-auto-maintenance','--filter=blob:none','--stdin','origin']);
+   if(!bodyFetchFails&&!bodyFetchIncomplete)for(const oid of options.input.trimEnd().split('\n'))bodyAvailable.add(oid);
+   return {status:bodyFetchFails?1:0,stderr:'synthetic body fetch failure'};
+  }
+  assert.deepEqual(args.slice(0,3),['fetch','--no-tags','--depth=1']);
+  if(!fetchFails&&!fetchIncomplete)for(const commit of args.slice(args.indexOf('origin')+1))available.add(commit);
   return {status:fetchFails?1:0,stderr:fetchFails?'synthetic unavailable remote':''};
  };
- return {calls,options:{exists:()=>true,run}};
+ return {calls,documents,descriptors,declare,bodyAvailable,options:{exists:()=>true,readFile:name=>{
+  assert(documents.has(name),'Undeclared fixture metadata '+name);return Buffer.from(JSON.stringify(documents.get(name)));
+ },run}};
 }
 test('shallow PR and queue regressions obtain only missing immutable vintages and verify availability',()=>{
- const f=fixture({present:[NATIVE_REGRESSION_COMMITS[0]]});
- assert.deepEqual(prepareNativeRegressionInputs('full',f.options),{applicable:true,fetched:NATIVE_REGRESSION_COMMITS.slice(1)});
- assert.deepEqual(f.calls.find(c=>c.args[0]==='fetch').args,['fetch','--no-tags','--depth=1','origin',...NATIVE_REGRESSION_COMMITS.slice(1)]);
+ const f=fixture({present:[HISTORICAL.bounds]});
+ assert.deepEqual(prepareNativeRegressionInputs('full',f.options),{applicable:true,fetched:FULL_COMMITS.slice(1)});
+ assert.deepEqual(f.calls.find(c=>c.args[0]==='fetch').args,['fetch','--no-tags','--depth=1','origin',...FULL_COMMITS.slice(1)]);
  const count=f.calls.filter(c=>c.args[0]==='fetch').length;
  assert.deepEqual(prepareNativeRegressionInputs('full',f.options),{applicable:true,fetched:[]});
  assert.equal(f.calls.filter(c=>c.args[0]==='fetch').length,count);
@@ -27,61 +109,65 @@ test('unpublished evidence and absent native implementation do not fetch or insp
 });
 test('failed or incomplete frozen input fetch cannot establish regression coverage',()=>{
  for(const options of [{fetchFails:true},{fetchIncomplete:true}]){
-  const f=fixture(options);assert.throws(()=>prepareNativeRegressionInputs('full',f.options),/fetch failed|remain unavailable/);
+  const f=fixture(options);assert.throws(()=>prepareNativeRegressionInputs('full',f.options),/command failed|remain unavailable/);
  }
 });
 
-test('complete archived priority artifacts register their immutable input and execution vintages',()=>{
- const report=JSON.parse(fs.readFileSync('coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/report.json'));
- for(const commit of [report.input_commit,report.executed_code_commit,report.original_native_commit]){
-  assert.ok(NATIVE_REGRESSION_COMMITS.includes(commit),`Shallow CI must restore ${commit}`);
- }
-});
-
-
-const common=[
- 'd55795e4c0ad01527029db0bd1d774124a12a61a','548c5f89f00271050823076a84695bb41e1b8454',
- 'd70c5d86e345a225b6bc78d67451b3cbbf7a5eed','65cfcef5ffd7d8b98077b9058a374d1e27047430',
- '35d2d3ff48957d34ee8d4329824b268ecadc6d3c'
-];
-const audit=[
- 'ff566eab31ef072084c548f67dee8ee727ab3d47','e67eeafc1aa130aa5c1a6d1222d39116625fd003',
- '8b61b9303553f2068f18ad5a000d4cba14059547','b6e0d0d21cfd6dde68c3c292c9513d3a24896a11',
- '85571b6ef23f5565f08693a542fa7dad20c651b8'
-];
-const componentInput='c603befd3aaf4da90d59b12378e1e0739331efba';
-const custody=['8f6dc184d1a41b634cec4759bb57b3cc04dd980a','6ed6406f9fad4c7c468b06a376346b216cb50db7'];
-const priority='bf9e8a6580e997d82d0414235e3a0d2a81e1e24a';
+const common=[HISTORICAL.bounds,HISTORICAL.proof,HISTORICAL.context,HISTORICAL.pinnedPackage,HISTORICAL.latitudes];
+const custody=CUSTODY_COMMITS;
 const consumers=[
- ['test/physical-audit-evidence.test.mjs',audit],
- ['test/physical-component-evidence.test.mjs',[componentInput,...custody]],
+ ['test/select-build-ownership.test.mjs',[HISTORICAL.bounds,HISTORICAL.proof]],
+ ['test/native-materialization-gate.test.mjs',[HISTORICAL.proof]],
+ ['test/pinned-native-package-inputs.test.mjs',[HISTORICAL.pinnedPackage]],
+ ['test/native-latitudes.test.mjs',[HISTORICAL.latitudes]],
  ['test/physical-component-custody.test.mjs',custody],
- ['test/physical-component-fixture.test.mjs',custody],
  ['test/physical-component-report-binding.test.mjs',custody],
- ['test/physical-gap-priority-evidence.test.mjs',[priority]]
+ [EXCEPTION_TEST,Object.values(EXCEPTION_COMMITS)],
+ [HELD_TEST,HELD_COMMITS],
+ [HOLD_TEST,HOLD_COMMITS],
+ [SLE_TEST,SLE_COMMITS]
 ];
 function requiredFor(files,options={}){
  const f=fixture(options),result=prepareNativeRegressionInputs('full',{...f.options,files});
  return {...f,result};
 }
-test('actual physical consumer files acquire their complete archived source and execution unions',()=>{
+test('actual native and physical consumer files acquire only their complete original input unions',()=>{
  for(const [name,commits] of consumers){
-  const f=requiredFor([name]),expected=[...common,...commits];
+  const f=requiredFor([name]),expected=commits;
   assert.deepEqual(f.result,{applicable:true,fetched:expected},name);
   assert.deepEqual(f.calls.filter(c=>c.args[0]==='fetch').map(c=>c.args),
-   [['fetch','--no-tags','--depth=1','origin',...expected]],name);
-  assert.deepEqual(f.calls.filter(c=>c.args[0]==='cat-file').map(c=>c.args[2]),
+   [['fetch','--no-tags','--depth=1','--filter=blob:none','origin',...expected]],name);
+  assert.deepEqual(f.calls.filter(c=>c.args[0]==='cat-file'&&c.args[1]==='-e').map(c=>c.args[2]),
    [...expected,...expected].map(commit=>commit+'^{commit}'),name);
  }
 });
-test('common native inputs remain while unrelated and compact physical controls omit archive acquisition',()=>{
+test('held-row reconstruction acquires exactly its immutable source, evidence, helper, latitude and original-block pins',()=>{
+ const f=requiredFor([HOLD_TEST],{present:HOLD_COMMITS,bodiesPresent:false});
+ const pins=f.documents.get(holdPinsPath);
+ const expected=[...pins.source_and_evidence_inputs,...pins.original_extraction_inputs,pins.helper,pins.latitudes];
+ assert.equal(expected.length,14);
+ const trees=f.calls.filter(c=>c.args[0]==='ls-tree').map(c=>c.args[2]+':'+c.args[4]);
+ assert.equal(trees.length,expected.length);
+ assert.deepEqual(new Set(trees),new Set(expected.map(pin=>pin.commit+':'+pin.path)));
+ const declared=new Set(expected.map(pin=>f.descriptors.get(pin.commit+':'+pin.path).oid));
+ const fetch=f.calls.find(c=>c.args.includes('--stdin'));
+ assert(fetch,'exact body acquisition is required');
+ assert.deepEqual(new Set(fetch.options.input.trimEnd().split('\n')),declared);
+});
+test('unrelated and snapshot-only controls omit historical acquisition while unscoped callers retain it',()=>{
  for(const files of [['test/future-native-consumer.test.mjs'],[
   'test/physical-component-evidence-controls.test.mjs','test/physical-gap-priority-controls.test.mjs',
-  'test/physical-gap-priority-evidence-controls.test.mjs','test/context-input-stage.test.mjs']]){
-  const f=requiredFor(files);assert.deepEqual(f.result.fetched,common);
+  'test/physical-gap-priority-evidence-controls.test.mjs','test/context-input-stage.test.mjs',
+  'test/compact-context-inputs.test.mjs','test/build-context-validation-vintage.test.mjs',
+  'test/current-rebind-product-custody.test.mjs','test/prepare-startup-ownership.test.mjs',
+  'test/build-context-continuation.test.mjs','test/install-selected-native-reference.test.mjs',
+  'test/native-preparation.test.mjs','test/worldwide-gap-inventory.test.mjs',
+  'test/worldwide-native-batches-controls.test.mjs','test/install-macro-reference.test.mjs']]){
+  const f=requiredFor(files);assert.deepEqual(f.result.fetched,[]);assert.deepEqual(f.calls,[]);
  }
- assert.deepEqual(requiredFor(undefined).result.fetched,NATIVE_REGRESSION_COMMITS);
- for(const files of [[],null,'test/physical-audit-evidence.test.mjs',[null],['../test/physical-audit-evidence.test.mjs']])
+ assert.deepEqual(requiredFor(undefined).result.fetched,FULL_COMMITS);
+ assert.deepEqual(NATIVE_REGRESSION_COMMITS,FULL_COMMITS);
+ for(const files of [[],null,'test/physical-component-custody.test.mjs',[null],['../test/physical-component-custody.test.mjs']])
   assert.throws(()=>requiredFor(files),/Actual regression file roster/);
  const f=fixture();
  assert.throws(()=>prepareNativeRegressionInputs('full',{...f.options,files:['test/deleted-consumer.test.mjs'],
@@ -90,36 +176,199 @@ test('common native inputs remain while unrelated and compact physical controls 
 });
 test('file order, duplicates and shard movement cannot drop or duplicate an archived requirement',()=>{
  const all=consumers.map(([name])=>name);
+ const consumerUnion=[...new Set(consumers.flatMap(([,commits])=>commits))];
  for(const files of [all,[...all].reverse(),[...all,all[0]]])
-  assert.deepEqual(requiredFor(files).result.fetched,NATIVE_REGRESSION_COMMITS);
+  assert.deepEqual(requiredFor(files).result.fetched,consumerUnion);
  for(const shard of [0,1,2]){
-  const files=integrationTestFiles('full',shard),expected=new Set(common);
+  const files=integrationTestFiles('full',shard),expected=new Set();
   for(const [name,commits] of consumers)if(files.includes(name))for(const commit of commits)expected.add(commit);
   assert.deepEqual(new Set(requiredFor(files).result.fetched),expected);
  }
 });
+test('Sierra Leone scoped fetch and body failures refuse without retrying or broadening',()=>{
+ for(const profile of ['evidence','full']){
+  for(const options of [{fetchFails:true},{fetchIncomplete:true}]){
+   const f=fixture(options);
+   assert.throws(()=>prepareNativeRegressionInputs(profile,{...f.options,files:[SLE_TEST]}),/command failed|remain unavailable/,profile);
+   assert.equal(f.calls.filter(c=>c.args[0]==='fetch').length,1,'failed commit fetch is not retried');
+  }
+  for(const option of [{bodyFetchFails:true},{bodyFetchIncomplete:true}]){
+   const f=fixture({present:FULL_COMMITS,bodiesPresent:false,...option});
+   assert.throws(()=>prepareNativeRegressionInputs(profile,{...f.options,files:[SLE_TEST]}),/command failed|bodies remain unavailable/,profile);
+   assert.equal(f.calls.filter(c=>c.args[0]==='fetch'&&c.args.includes('--stdin')).length,1,'failed body fetch is not retried');
+  }
+ }
+ for(const change of ['missing-role','foreign-pin']){
+  const f=fixture(),pins=f.documents.get(slePinsPath);
+  if(change==='missing-role')delete pins.inputs.selected_state;
+  else pins.inputs.selected_state.commit='f'.repeat(40);
+  assert.throws(()=>prepareNativeRegressionInputs('full',{...f.options,files:[SLE_TEST]}),
+   change==='missing-role'?/roster is incomplete/:/Invalid original regression input declaration/);
+  assert.deepEqual(f.calls,[],'invalid Sierra Leone pins fail before Git access');
+ }
+});
 test('a missing required archived object still fails after a scoped fetch, and present ones are not fetched again',()=>{
- const files=['test/physical-component-custody.test.mjs'];
- for(const options of [{present:common,fetchFails:true},{present:common,fetchIncomplete:true}])
-  assert.throws(()=>requiredFor(files,options),/fetch failed|remain unavailable/);
- const f=requiredFor(files,{present:[...common,custody[0]]});
- assert.deepEqual(f.result.fetched,[custody[1]]);
- assert.deepEqual(prepareNativeRegressionInputs('full',{...f.options,files}),{applicable:true,fetched:[]});
- assert.equal(f.calls.filter(c=>c.args[0]==='fetch').length,1);
+ for(const [name,commits] of consumers){
+  const files=[name],present=commits.slice(0,-1),missing=commits.at(-1);
+  for(const options of [{present,fetchFails:true},{present,fetchIncomplete:true}])
+   assert.throws(()=>requiredFor(files,options),/command failed|remain unavailable/,name);
+  const f=requiredFor(files,{present});
+  assert.deepEqual(f.result.fetched,[missing],name);
+  assert.deepEqual(prepareNativeRegressionInputs('full',{...f.options,files}),{applicable:true,fetched:[]});
+  assert.equal(f.calls.filter(c=>c.args[0]==='fetch').length,1,name);
+ }
 });
 
 
-test('scoped physical pins agree with the actual retained audit envelope, reports and component generations',()=>{
+test('remaining custody pins agree with the captured authenticated component generations',()=>{
  const read=name=>JSON.parse(fs.readFileSync(name));
- const root=read('coordination/engineering/physical-gap-audit-1005-20261005-local18/evidence-quality.json');
- const envelope=read(root.mandatory_input_stage.envelope_manifest);
- const reports=root.audit_reports.map(pin=>read(pin.path));
- const actualAudit=new Set([envelope.executed_code_commit,
-  ...reports.flatMap(report=>[report.baseline_commit,report.water_commit,report.executed_code_commit])]);
- assert.deepEqual(actualAudit,new Set([common[1],...audit]));
- const index=read('coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json');
+ const index=read('test/fixtures/native-custody/generations.json');
  assert.deepEqual(new Set(index.generations.map(generation=>generation.executed_code_commit)),new Set(custody));
- assert.deepEqual(new Set(index.generations.map(generation=>generation.input_commit)),new Set([componentInput]));
- const source=fs.readFileSync(new URL('../scripts/run-integration-tests.mjs',import.meta.url),'utf8');
- assert.match(source,/prepareNativeRegressionInputs\(testSelection === 'complete' \? profile : 'evidence',\{files,run:git.run\}\)/);
+});
+test('Sierra Leone consumer acquires only its complete original pinned commit scope',()=>{
+ for(const profile of ['evidence','full']){
+  const f=fixture();
+  const result=prepareNativeRegressionInputs(profile,{...f.options,files:[SLE_TEST]});
+  assert.deepEqual(result,{applicable:true,fetched:[...SLE_COMMITS]},profile);
+  assert.deepEqual(f.calls.filter(c=>c.args[0]==='fetch').map(c=>c.args),
+   [['fetch','--no-tags','--depth=1','--filter=blob:none','origin',...SLE_COMMITS]],profile);
+  const trees=f.calls.filter(c=>c.args[0]==='ls-tree');
+  const declared=SLE_COMMITS.map(commit=>trees.some(c=>c.args[2]===commit));
+  assert(declared.every(Boolean),'every original Sierra Leone commit is represented by a consumed pin');
+  assert.equal(trees.length,Object.values(JSON.parse(fs.readFileSync(slePinsPath,'utf8')).inputs).length);
+  assert(!trees.some(c=>!SLE_COMMITS.includes(c.args[2])),'no unrelated native history is inspected');
+ }
+ const f=fixture({present:[SLE_COMMITS[0]]});
+ const result=prepareNativeRegressionInputs('full',{...f.options,files:[SLE_TEST]});
+ assert.deepEqual(result,{applicable:true,fetched:SLE_COMMITS.slice(1)});
+});
+
+
+test('scoped acquisition fetches only the missing declared body union through stdin',()=>{
+ const f=fixture({present:NATIVE_REGRESSION_COMMITS,bodiesPresent:false}),files=consumers.map(([name])=>name);
+ prepareNativeRegressionInputs('full',{...f.options,files});
+ const trees=f.calls.filter(c=>c.args[0]==='ls-tree'),fetches=f.calls.filter(c=>c.args[0]==='fetch');
+ assert.equal(fetches.length,1);assert(fetches[0].args.includes('--stdin'));
+ const expected=new Set(trees.map(c=>f.descriptors.get(c.args[2]+':'+c.args[4]).oid));
+ assert.deepEqual(new Set(fetches[0].options.input.trimEnd().split('\n')),expected);
+ assert(!trees.some(c=>c.args[4]==='scripts/not-consumed.js'));
+ const before=f.calls.length;prepareNativeRegressionInputs('full',{...f.options,files});
+ assert(!f.calls.slice(before).some(c=>c.args[0]==='fetch'));
+ assert(f.calls.every(c=>c.options.env.GIT_NO_LAZY_FETCH==='1'));
+});
+test('existing source-roster additions are acquired without a second body inventory',()=>{
+ const f=fixture({present:NATIVE_REGRESSION_COMMITS,bodiesPresent:false});
+ const baseline=f.documents.get(stagePath).baseline,pin={path:'data/new-original.json',bytes:13};
+ baseline.files.push(pin);const oid=f.declare({...pin,commit:baseline.commit});
+ prepareNativeRegressionInputs('full',{...f.options,files:['test/pinned-native-package-inputs.test.mjs']});
+ assert(f.calls.find(c=>c.args.includes('--stdin')).options.input.split('\n').includes(oid));
+});
+test('failed or incomplete exact body fetch is a hard failure',()=>{
+ for(const option of [{bodyFetchFails:true},{bodyFetchIncomplete:true}]){
+  const f=fixture({present:NATIVE_REGRESSION_COMMITS,bodiesPresent:false,...option});
+  assert.throws(()=>prepareNativeRegressionInputs('full',{...f.options,files:['test/native-latitudes.test.mjs']}),/command failed|bodies remain unavailable/);
+ }
+});
+test('missing, linked, altered and ambiguous original tree descriptors fail before body fetch',()=>{
+ for(const change of ['missing','linked','wrong-path','extra','oid','mode']){
+  const f=fixture({present:NATIVE_REGRESSION_COMMITS,bodiesPresent:false}),run=f.options.run;
+  f.options.run=(command,args,options)=>{
+   const result=run(command,args,options);if(args[0]!=='ls-tree')return result;
+   if(change==='missing')result.stdout='';
+   if(change==='linked')result.stdout=result.stdout.replace('100644','120000');
+   if(change==='wrong-path')result.stdout=result.stdout.replace('data/latitudes.gz','data/wrong.gz');
+   if(change==='extra')result.stdout+=result.stdout;
+   return result;
+  };
+  if(change==='oid')f.documents.get(manifestPath).native_latitudes.git_blob_oid='f'.repeat(40);
+  if(change==='mode')f.documents.get(manifestPath).native_latitudes.mode='100755';
+  assert.throws(()=>prepareNativeRegressionInputs('full',{...f.options,files:['test/native-latitudes.test.mjs']}),/tree identity differs/,change);
+  assert(!f.calls.some(c=>c.args[0]==='fetch'));
+ }
+});
+test('partial, reordered, foreign, wrong-type and wrong-length body inventories refuse',()=>{
+ for(const change of ['empty','unterminated','foreign','type','size','extra','error','signal']){
+  const f=fixture({present:NATIVE_REGRESSION_COMMITS}),run=f.options.run;
+  f.options.run=(command,args,options)=>{
+   const r=run(command,args,options);if(!args[1]?.startsWith('--batch-check'))return r;
+   if(change==='empty')r.stdout='';if(change==='unterminated')r.stdout=r.stdout.trimEnd();
+   if(change==='foreign')r.stdout=r.stdout.replace(/^[a-f0-9]{40}/,'f'.repeat(40));
+   if(change==='type')r.stdout=r.stdout.replace(' blob ',' tree ');
+   if(change==='size')r.stdout=r.stdout.replace(/ 7\n$/,' 8\n');
+   if(change==='extra')r.stdout+=r.stdout;if(change==='error')r.error=Error('body inspection failed');
+   if(change==='signal'){r.status=null;r.signal='SIGTERM';}
+   return r;
+  };
+  assert.throws(()=>prepareNativeRegressionInputs('full',{...f.options,files:['test/native-latitudes.test.mjs']}),/inventory|type or length|command failed/,change);
+ }
+});
+test('invalid or absent original-role declarations do not broaden acquisition',()=>{
+ for(const change of ['commit','path','length','absent-proof','custody-prefix','empty-custody']){
+  const f=fixture(),manifest=f.documents.get(manifestPath);
+  let files=['test/native-latitudes.test.mjs'];
+  if(change==='commit')manifest.native_latitudes.commit='f'.repeat(40);
+  if(change==='path')manifest.native_latitudes.path='../outside';
+  if(change==='length')manifest.native_latitudes.bytes=-1;
+  if(change==='absent-proof'){files=['test/native-materialization-gate.test.mjs'];f.documents.get('scripts/native-ownership/verified-candidates.json').candidates={};}
+  if(change==='custody-prefix'){files=['test/physical-component-custody.test.mjs'];f.documents.get(custodyRoot+'custody-v1/index.json').generations[0].code[0].path='scripts/foreign.py';}
+  if(change==='empty-custody'){files=['test/physical-component-custody.test.mjs'];f.documents.get(custodyRoot+'custody-v1/index.json').generations=[];}
+  assert.throws(()=>prepareNativeRegressionInputs('full',{...f.options,files}),/declaration|custody code path|roster is incomplete/,change);
+  assert.deepEqual(f.calls,[]);
+ }
+});
+
+
+test('optional source lengths remain optional while duplicate declared identities agree',()=>{
+ const f=fixture({present:NATIVE_REGRESSION_COMMITS});
+ delete f.documents.get(manifestPath).native_latitudes.bytes;
+ prepareNativeRegressionInputs('full',{...f.options,files:['test/native-latitudes.test.mjs']});
+ const g=fixture({present:NATIVE_REGRESSION_COMMITS});
+ const baseline=g.documents.get(stagePath).baseline;
+ baseline.files.push({...baseline.files[0]});
+ prepareNativeRegressionInputs('full',{...g.options,files:['test/pinned-native-package-inputs.test.mjs']});
+ assert.equal(g.calls.filter(c=>c.args[0]==='ls-tree'&&c.args[4]==='data/input.json').length,1);
+ baseline.files.at(-1).sha256='f'.repeat(64);
+ assert.throws(()=>prepareNativeRegressionInputs('full',{...g.options,files:['test/pinned-native-package-inputs.test.mjs']}),/Conflicting original regression input declarations/);
+});
+
+
+test('commit inspection errors and interrupted tree reads refuse without a fetch retry',()=>{
+ for(const phase of ['commit','tree']){
+  const f=fixture({present:NATIVE_REGRESSION_COMMITS}),run=f.options.run;
+  f.options.run=(command,args,options)=>{
+   if(phase==='commit'&&args[1]==='-e'||phase==='tree'&&args[0]==='ls-tree')return {status:null,error:Error('interrupted read')};
+   return run(command,args,options);
+  };
+  assert.throws(()=>prepareNativeRegressionInputs('full',{...f.options,files:['test/native-latitudes.test.mjs']}),/inspection failed|command failed/);
+  assert(!f.calls.some(c=>c.args[0]==='fetch'));
+ }
+});
+
+test('evidence profile acquires the exact original exception consumer pins without unrelated history',()=>{
+ const f=fixture({bodiesPresent:false});
+ const r=prepareNativeRegressionInputs('evidence',{...f.options,files:[EXCEPTION_TEST]});
+ assert.deepEqual(r.fetched,Object.values(EXCEPTION_COMMITS));
+ const wanted=JSON.parse(fs.readFileSync(exceptionPinsPath,'utf8')).inputs;
+ const trees=f.calls.filter(x=>x.args[0]==='ls-tree').map(x=>x.args[2]+':'+x.args[4]);
+ assert.deepEqual(new Set(trees),new Set(wanted.map(p=>p.commit+':'+p.path)));
+ assert.equal(f.calls.filter(x=>x.args.includes('--stdin')).length,1);
+});
+
+test('held-row evidence acquisition preserves exact scope and refuses failed or incomplete custody',()=>{
+ for(const profile of ['evidence','full']){
+  const present=fixture({present:FULL_COMMITS});
+  assert.deepEqual(prepareNativeRegressionInputs(profile,{...present.options,files:[HOLD_TEST]}),{applicable:true,fetched:[]});
+  assert.equal(present.calls.filter(c=>c.args[0]==='ls-tree').length,14);
+  assert.equal(present.calls.filter(c=>c.args[0]==='fetch').length,0);
+  for(const failure of [{fetchFails:true},{fetchIncomplete:true}]){
+   const f=fixture(failure);
+   assert.throws(()=>prepareNativeRegressionInputs(profile,{...f.options,files:[HOLD_TEST]}),/command failed|remain unavailable/);
+   assert.equal(f.calls.filter(c=>c.args[0]==='fetch').length,1);
+  }
+  for(const failure of [{bodyFetchFails:true},{bodyFetchIncomplete:true}]){
+   const f=fixture({present:FULL_COMMITS,bodiesPresent:false,...failure});
+   assert.throws(()=>prepareNativeRegressionInputs(profile,{...f.options,files:[HOLD_TEST]}),/command failed|bodies remain unavailable/);
+   assert.equal(f.calls.filter(c=>c.args[0]==='fetch').length,1);
+  }
+ }
 });

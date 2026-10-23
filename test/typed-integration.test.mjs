@@ -65,6 +65,20 @@ test('typed API rejects missing approval, bad source/registry/raw pins, unsuppor
  const before=await exportStorageMarkerV3(f.db);for(const payload of bad){await assert.rejects(importTypedBatch(f.db,payload),rejection);assert.deepEqual(await exportStorageMarkerV3(f.db),before);}
  await importTypedBatch(f.db,base);
  const incomplete=await f.envelope({retirements:[{id:'withdrawal',collection:'observations',target_id:'candidate',replacement_id:'absent',source_id:'example',reason:'Rejected missing correction'}]});const installed=await exportStorageMarkerV3(f.db);await assert.rejects(importTypedBatch(f.db,incomplete),rejection);assert.deepEqual(await exportStorageMarkerV3(f.db),installed);
+ {
+ const approved={version:2,ready_for_location_attributes:true,macro_boundaries:{approved:true,approval_issue:1,approval_evidence:'synthetic-only',boundary_sha256:'c'.repeat(64)},regions:[{region_id:'synthetic',semantic_complete:true,approval_issue:1,approval_evidence:'synthetic-only',macro_boundary_sha256:'c'.repeat(64),approved_release:pins,approved_location_ids:['location-0'],approved_subject_ids:['location-0']}]};
+ const row=observation('factual-pinned',{source_id:'historical',is_example:0,metadata:{expected_geography:pins}}),payload=await f.envelope({observations:[row]},{examples:false,region_ids:['synthetic']});
+ const before=await exportStorageMarkerV3(f.db);
+ for(const metadata of [{},{expected_geography:{...pins,release_id:'other-territory'}}]){await assert.rejects(importTypedBatch(f.db,{...payload,observations:[{...row,metadata}]},{gate:approved}),/matching geography pins/);assert.deepEqual(await exportStorageMarkerV3(f.db),before);}
+ assert.equal((await importTypedBatch(f.db,payload,{gate:approved})).duplicate,false);
+ const raw=await f.db.prepare('SELECT * FROM atlas_typed_observations WHERE id=?').bind(row.id).first();assert.equal(raw.metadata,JSON.stringify(row.metadata));
+ const sources=(await f.db.prepare('SELECT * FROM atlas_sources WHERE id=?').bind('historical').all()).results.map(row=>({...row,metadata:JSON.parse(row.metadata)})),entities=(await f.db.prepare('SELECT * FROM atlas_entities WHERE id=?').bind('location-0').all()).results.map(row=>({...row,metadata:JSON.parse(row.metadata)}));
+ const snapshot={version:1,registry_sha256:f.contract.registry_sha256,geography_pins:pins,sources,entities,observations:[decodeTypedRow('observations',raw)],feature_links:[],retirements:[]};assert.equal((await resolveTypedSnapshot(snapshot,-100)).observations[0].value,false);
+ await assert.rejects(resolveTypedSnapshot({...snapshot,geography_pins:{...pins,release_id:'new-territory'}},-100),/revalidation/);assert.equal((await f.db.prepare('SELECT metadata FROM atlas_typed_observations WHERE id=?').bind(row.id).first()).metadata,raw.metadata);
+ const corrected=observation('replacement-pinned',{source_id:'historical',is_example:0,metadata:{expected_geography:{...pins,release_id:'other-territory'}}});
+ const correction=await f.envelope({observations:[corrected],retirements:[{id:'factual-retirement',collection:'observations',target_id:row.id,replacement_id:corrected.id,source_id:'historical',reason:'Synthetic rejected cross-territory replacement'}]},{examples:false,region_ids:['synthetic']});
+ const installed=await exportStorageMarkerV3(f.db);await assert.rejects(importTypedBatch(f.db,correction,{gate:approved}),/matching geography pins/);assert.deepEqual(await exportStorageMarkerV3(f.db),installed);
+ }
 }));
 
 test('legacy or altered installed schemas never advertise typed capabilities',async()=>{
@@ -156,19 +170,4 @@ test('bounded hosted client and exact-byte prepared/static resolver agree on all
  const correctedArchive={...archive,observations:[...observations,decodeTypedRow('observations',await f.db.prepare('SELECT * FROM atlas_typed_observations WHERE id=?').bind(replacement.id).first())],retirements:(await f.db.prepare('SELECT * FROM atlas_typed_retirements').all()).results.map(row=>decodeTypedRow('retirements',row))};
  const correctedPrepared=await resolveTypedSnapshot(correctedArchive,-100,{examples:true});assert.deepEqual(compare(corrected),compare(correctedPrepared));assert.equal(corrected.observations.some(row=>row.evidence.id==='root-false'),false);assert.equal(corrected.observations.find(row=>row.evidence.id===replacement.id).value,true);
  const circular={...archive,observations:[{...observations[0],id:'a',method:'derived',metadata:{derivation_input_ids:['b']},original_json:{metadata:JSON.stringify({derivation_input_ids:['b']})}},{...observations[0],id:'b',method:'derived',metadata:{derivation_input_ids:['a']},original_json:{metadata:JSON.stringify({derivation_input_ids:['a']})}}]};await assert.rejects(resolveTypedSnapshot(circular,-100,{examples:true}),/Circular derivation/);
-}));
-
-test('factual typed geography is retained per claim and cannot be silently repinned on import, correction or prepared reads',()=>both(async f=>{
- const approved={version:2,ready_for_location_attributes:true,macro_boundaries:{approved:true,approval_issue:1,approval_evidence:'synthetic-only',boundary_sha256:'c'.repeat(64)},regions:[{region_id:'synthetic',semantic_complete:true,approval_issue:1,approval_evidence:'synthetic-only',macro_boundary_sha256:'c'.repeat(64),approved_release:pins,approved_location_ids:['location-0'],approved_subject_ids:['location-0']}]};
- const row=observation('factual-pinned',{source_id:'historical',is_example:0,metadata:{expected_geography:pins}}),payload=await f.envelope({observations:[row]},{examples:false,region_ids:['synthetic']});
- const before=await exportStorageMarkerV3(f.db);
- for(const metadata of [{},{expected_geography:{...pins,release_id:'other-territory'}}]){await assert.rejects(importTypedBatch(f.db,{...payload,observations:[{...row,metadata}]},{gate:approved}),/matching geography pins/);assert.deepEqual(await exportStorageMarkerV3(f.db),before);}
- assert.equal((await importTypedBatch(f.db,payload,{gate:approved})).duplicate,false);
- const raw=await f.db.prepare('SELECT * FROM atlas_typed_observations WHERE id=?').bind(row.id).first();assert.equal(raw.metadata,JSON.stringify(row.metadata));
- const sources=(await f.db.prepare('SELECT * FROM atlas_sources WHERE id=?').bind('historical').all()).results.map(row=>({...row,metadata:JSON.parse(row.metadata)})),entities=(await f.db.prepare('SELECT * FROM atlas_entities WHERE id=?').bind('location-0').all()).results.map(row=>({...row,metadata:JSON.parse(row.metadata)}));
- const snapshot={version:1,registry_sha256:f.contract.registry_sha256,geography_pins:pins,sources,entities,observations:[decodeTypedRow('observations',raw)],feature_links:[],retirements:[]};assert.equal((await resolveTypedSnapshot(snapshot,-100)).observations[0].value,false);
- await assert.rejects(resolveTypedSnapshot({...snapshot,geography_pins:{...pins,release_id:'new-territory'}},-100),/revalidation/);assert.equal((await f.db.prepare('SELECT metadata FROM atlas_typed_observations WHERE id=?').bind(row.id).first()).metadata,raw.metadata);
- const corrected=observation('replacement-pinned',{source_id:'historical',is_example:0,metadata:{expected_geography:{...pins,release_id:'other-territory'}}});
- const correction=await f.envelope({observations:[corrected],retirements:[{id:'factual-retirement',collection:'observations',target_id:row.id,replacement_id:corrected.id,source_id:'historical',reason:'Synthetic rejected cross-territory replacement'}]},{examples:false,region_ids:['synthetic']});
- const installed=await exportStorageMarkerV3(f.db);await assert.rejects(importTypedBatch(f.db,correction,{gate:approved}),/matching geography pins/);assert.deepEqual(await exportStorageMarkerV3(f.db),installed);
 }));

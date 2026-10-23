@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "selector": {
+    "commit": "a6f086726dda83c421937ba2d6e1c845a6139e15",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "bytes": 1832,
+    "sha256": "67c681d06bfcb72950e772febca8465f7b827a1a5d42e6ae1b6abf13a7705099",
+    "git_blob_oid": "1dba8732785343b4fecf473a52e76c16b4192b51"
+  },
+  "effective_release_id": "geography:gum-original-repair-20261021",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "f7c9a8cd754877d10d63ba915217318b342d397c",
+        "path": "coordination/engineering/gum-original-repair-20261021/source-applicability-002/native-authority-run-001/original-rule-preimage.json",
+        "mode": "100644",
+        "bytes": 751,
+        "sha256": "66b6b2ff0c273b17158b3774c2ad57b46c2d5cdebb6ac031fee99549726b1e27",
+        "git_blob_oid": "195231e9919b148b4f9e5714afe58967e8124fef"
+      },
+      "source_authority": {
+        "commit": "f7c9a8cd754877d10d63ba915217318b342d397c",
+        "path": "coordination/engineering/gum-original-repair-20261021/source-applicability-002/native-authority-run-001/authority-binding.json",
+        "mode": "100644",
+        "bytes": 754,
+        "sha256": "4e3dc5f1c5434910d1839a1661f978c33f4c85c0dd8ab89b6553e3c648b5c3d7",
+        "git_blob_oid": "4378cafce7e51274862f5fac7d6f78766c74486b"
+      },
+      "ledger": {
+        "commit": "f7c9a8cd754877d10d63ba915217318b342d397c",
+        "path": "coordination/engineering/gum-original-repair-20261021/source-applicability-002/native-authority-run-001/constructor-result.json",
+        "mode": "100644",
+        "bytes": 1949869,
+        "sha256": "b3735b7bb8a1282e8920868f55409b3b75a28777d880b29cd2315cb1d30801bd",
+        "git_blob_oid": "d0ef745995205a5ddbaa559ffd62c00195783a7a"
+      },
+      "native_patch": {
+        "commit": "44601c86cb6b805a66ec0aba6860f2d24610ef38",
+        "path": "coordination/engineering/gum-original-repair-20261021/source-evidence-001/native-requested-patch.json",
+        "mode": "100644",
+        "bytes": 10230,
+        "sha256": "95168d142276959f5cf9222d66aae378a78619e51e2334a983524f7b78e00689",
+        "git_blob_oid": "46d246321d266d1764febab32faf13192c955251"
+      }
+    }
+  ]
+}

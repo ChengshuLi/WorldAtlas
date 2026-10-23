@@ -4,18 +4,20 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {execFileSync, spawnSync} from 'node:child_process';
-import {gzipSync} from 'node:zlib';
-import {candidateBudget} from '../scripts/native-ownership/native-preparation-guards.mjs';
-import {renderClaim} from '../scripts/issue-claim-contract.mjs';
-import {subjectsHash} from '../scripts/evidence-quality.mjs';
-import {jsonBytes, digest, pinReader, publish, prepareRequests, retainProducts, nativeRequests,
-  composeAuthorities, packageProjection, rebindCustody, requestProfile, finalizedSelection, finalizedPackageInputs, finalizeDelivery, prepareEvidence} from '../scripts/prepare-delivery-handoff.mjs';
+import childProcess, {execFileSync, spawnSync} from 'node:child_process';
+import zlib, {gzipSync} from 'node:zlib';
+import crypto from 'node:crypto';
+import {syncBuiltinESMExports} from 'node:module';
+import {jsonBytes, digest, pinReader, publish, admitPublication, prepareRequests, retainProducts, nativeRequests,
+  composeAuthorities, packageProjection, rebindCustody, requestProfile, finalizedSelection, finalizedPackageInputs, finalizeDelivery} from '../scripts/prepare-delivery-handoff.mjs';
+
+import {admitPackageInputTransition, PACKAGE_PRODUCER_KIND} from '../scripts/package-inputs.mjs';
+import {committedPackageInputs} from '../scripts/package-output-artifact.mjs';
 
 const commit = 'a'.repeat(40), prefix = 'coordination/engineering/control/';
-function memoryReader({admit = true} = {}) {
+function memoryReader() {
   const bodies = new Map(), pins = new Map(); let ordinal = 0;
-  const reader = {budget: admit ? candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0}) : null,
+  const reader = {
     add(name, value) { const raw = Buffer.isBuffer(value) ? value : jsonBytes(value); const pin = {path: name, commit,
       mode: '100644', blob: (++ordinal).toString(16).padStart(40, '0'), bytes: raw.length, sha256: digest(raw)};
       bodies.set(pin.sha256, raw); pins.set(name, pin); return pin; },
@@ -82,14 +84,6 @@ test('writer resumes only exact complete bytes and rejects collisions, dangling 
   assert.throws(() => publish(root, '.cache/delivery-handoff/../escape', products, {}), /fresh owned/);
 });
 
-test('combined read/output budget fails before creating destination', t => {
-  const root = directory(t), budget = candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0,
-    allowance: {phaseBytes: 256 * 1048576, rssBytes: 1024 * 1048576}});
-  let remaining = budget.snapshot().limit_bytes;
-  while (remaining) { const bytes = Math.min(32 * 1048576, remaining); budget.add({bytes}); remaining -= bytes; }
-  assert.throws(() => publish(root, '.cache/delivery-handoff/overflow', {'x.json': jsonBytes({})}, {}, false, budget), /Aggregate/);
-  assert.equal(fs.existsSync(path.join(root, '.cache')), false);
-});
 
 function terminalFixture(root) {
   const {reader, request} = requestsFixture(); const requestPin = reader.add(prefix + 'source-request.json', request);
@@ -116,6 +110,51 @@ test('retention joins genuine terminal, request, facts and every published outpu
   write(root, f.config.terminal, jsonBytes(f.terminal)); fs.unlinkSync(path.join(root, 'run/inventory.jsonl.gz'));
   assert.throws(() => retainProducts(f.config, root, f.reader), /ENOENT/);
   write(root, 'run/inventory.jsonl.gz', Buffer.from('changed')); assert.throws(() => retainProducts(f.config, root, f.reader), /Incomplete/);
+});
+
+test('retention decodes and hashes the inventory once per invocation without changing products', t => {
+  const root = directory(t), f = terminalFixture(root), decoded = zlib.gunzipSync(f.inventory);
+  const gunzip = zlib.gunzipSync, hash = crypto.createHash; let decodes = 0, hashes = 0;
+  zlib.gunzipSync = (raw, ...args) => {
+    if (Buffer.isBuffer(raw) && raw.equals(f.inventory)) decodes++;
+    return gunzip(raw, ...args);
+  };
+  crypto.createHash = (algorithm, ...args) => {
+    const result = hash(algorithm, ...args), update = result.update;
+    result.update = function(raw, ...rest) {
+      if (algorithm === 'sha256' && Buffer.isBuffer(raw) && raw.equals(decoded)) hashes++;
+      return update.call(this, raw, ...rest);
+    }; return result;
+  }; syncBuiltinESMExports();
+  try {
+    const first = retainProducts(f.config, root, f.reader);
+    assert.equal(decodes, 1); assert.equal(hashes, 1);
+    assert.deepEqual(first['inventory.jsonl.gz'], f.inventory);
+    assert.deepEqual(retainProducts(f.config, root, f.reader), first);
+    assert.equal(decodes, 2); assert.equal(hashes, 2);
+  } finally { zlib.gunzipSync = gunzip; crypto.createHash = hash; syncBuiltinESMExports(); }
+});
+
+test('retention still rejects missing, invalid and changed decoded inventory identities', t => {
+  const root = directory(t), f = terminalFixture(root);
+  for (const mutate of [p => delete p.uncompressed_bytes, p => p.uncompressed_bytes = 0,
+    p => p.uncompressed_bytes = -1, p => p.uncompressed_bytes = 1.5,
+    p => p.uncompressed_bytes--, p => p.uncompressed_bytes++,
+    p => delete p.uncompressed_sha256, p => p.uncompressed_sha256 = '0'.repeat(64)]) {
+    const publication = structuredClone(f.publication); mutate(publication.inventory);
+    write(root, 'run/publication.json', jsonBytes(publication));
+    assert.throws(() => retainProducts(f.config, root, f.reader), /inventory|outputLength|larger than/);
+  }
+});
+
+test('explicit output inventories still authenticate a compressed inventory-named member', t => {
+  const root = directory(t), f = terminalFixture(root);
+  const publication = {...f.publication, outputs: {
+    facts: {path: 'facts.json', ...f.publication.facts},
+    inventory: {path: 'inventory.jsonl.gz', ...f.publication.inventory, uncompressed_sha256: '0'.repeat(64)}
+  }};
+  write(root, 'run/publication.json', jsonBytes(publication));
+  assert.throws(() => retainProducts(f.config, root, f.reader), /Decoded output differs/);
 });
 
 test('native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields', t => {
@@ -151,16 +190,16 @@ function authorityFixture() {
   return {reader, registry, ledger};
 }
 
-test('composition invokes existing conservation logic and rejects duplicate original scope', () => {
+test('composition invokes existing conservation logic and rejects duplicate original scope', async () => {
   const f = authorityFixture(), reg = f.reader.add(prefix + 'registry.json', f.registry), led = f.reader.add(prefix + 'ledger.json', f.ledger);
-  const config = {registries: [reg], ledgers: [led]}, output = composeAuthorities(config, f.reader);
+  const config = {registries: [reg], ledgers: [led]}, output = await composeAuthorities(config, f.reader);
   const ledger = JSON.parse(output['composed-original-ledger.json']);
   assert.equal(ledger.rows[0].native_cells, 2); assert.deepEqual(ledger.scope_ids, ['component:a']);
-  assert.throws(() => composeAuthorities({...config, ledgers: [led, led]}, f.reader), /Duplicate/);
+  await assert.rejects(() => composeAuthorities({...config, ledgers: [led, led]}, f.reader), /Duplicate/);
   const unordered = {...f.ledger, scope_ids: ['component:z', 'component:a'], rows: [{...f.ledger.rows[0], component_id: 'component:z'}, f.ledger.rows[0]]};
-  const ordered = JSON.parse(composeAuthorities({...config, ledgers: [f.reader.add(prefix + 'unordered.json', unordered)]}, f.reader)['composed-original-ledger.json']);
+  const ordered = JSON.parse((await composeAuthorities({...config, ledgers: [f.reader.add(prefix + 'unordered.json', unordered)]}, f.reader))['composed-original-ledger.json']);
   assert.deepEqual(ordered.scope_ids, ['component:a', 'component:z']);
-  unordered.scope_ids.reverse(); assert.throws(() => composeAuthorities({...config, ledgers: [f.reader.add(prefix + 'wrong-roster.json', unordered)]}, f.reader), /roster mismatch/);
+  unordered.scope_ids.reverse(); await assert.rejects(() => composeAuthorities({...config, ledgers: [f.reader.add(prefix + 'wrong-roster.json', unordered)]}, f.reader), /roster mismatch/);
   const projection = packageProjection({registry: f.reader.add(prefix + 'composed-reg.json', JSON.parse(output['authority-registry.json'])),
     ledger: f.reader.add(prefix + 'composed-led.json', ledger), new_prefix: 'coordination/engineering/new/'}, f.reader);
   const smoke = JSON.parse(projection['selected-delivery-expectations.json']); assert.equal(smoke.cumulative_native_cells, 2); assert.equal(smoke.selected_ledger_sha256, null);
@@ -172,6 +211,94 @@ test('immutable Git input reader rejects whole-body drift, missing objects and n
   git('add', 'input.json'); git('commit', '-m', 'Fixture'); const r = pinReader(root), pin = r.pin(git('rev-parse', 'HEAD'), 'input.json');
   assert.equal(r.json(pin).value, 1); assert.throws(() => r.read({...pin, path: 'missing.json'}), /Missing ordinary/); assert.throws(() => r.read({...pin, sha256: '0'.repeat(64)}), /hash differs/);
   assert.throws(() => r.read({...pin, mode: '120000'}), /identity/); assert.throws(() => r.read({...pin, path: '../input.json'}), /safe/);
+});
+
+
+function immutableReaderFixture(t) {
+  const root = directory(t);
+  const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
+  git('init'); git('config', 'user.name', 'Fixture'); git('config', 'user.email', 'fixture@example.invalid');
+  write(root, 'input.json', jsonBytes({value: 1}));
+  write(root, 'alias.json', jsonBytes({value: 1}));
+  git('add', '.'); git('commit', '-m', 'Fixture');
+  return {root, git, head: git('rev-parse', 'HEAD')};
+}
+
+test('immutable Git input reader reuses exact descriptor queries without trusting returned copies or requested hashes', t => {
+  const {root, head} = immutableReaderFixture(t), r = pinReader(root);
+  const execute = childProcess.execFileSync, calls = [];
+  childProcess.execFileSync = (command, args, options) => {
+    if (command === 'git' && options?.cwd === root) calls.push(args);
+    return execute(command, args, options);
+  }; syncBuiltinESMExports();
+  try {
+    const pin = r.pin(head, 'input.json'), descriptor = r.descriptor(head, 'input.json');
+    descriptor.bytes++; descriptor.git_blob_oid = '0'.repeat(40);
+    assert.equal(r.descriptor(head, 'input.json').bytes, pin.bytes);
+    assert.equal(r.descriptor(head, 'input.json').git_blob_oid, pin.git_blob_oid);
+    assert.equal(r.json(pin).value, 1);
+    assert.deepEqual(r.pin(head, 'input.json'), pin);
+    for (const changed of [{...pin, bytes: pin.bytes + 1}, {...pin, mode: '100755'},
+      {...pin, git_blob_oid: '0'.repeat(40)}]) assert.throws(() => r.read(changed), /identity differs/);
+    assert.throws(() => r.read({...pin, sha256: '0'.repeat(64)}), /hash differs/);
+    const exposed = r.read(pin); exposed[0] ^= 1;
+    assert.throws(() => r.read(pin), /hash differs/);
+    assert.equal(calls.filter(args => args[0] === 'ls-tree').length, 1);
+    // One descriptor size query and the existing bounded body-read size query.
+    assert.equal(calls.filter(args => args[0] === 'cat-file' && args[1] === '-s').length, 2);
+    assert.equal(calls.filter(args => args[0] === 'cat-file' && args[1] === 'blob').length, 1);
+  } finally { childProcess.execFileSync = execute; syncBuiltinESMExports(); }
+});
+
+test('immutable Git input reader separates exact paths, vintages and fresh readers', t => {
+  const {root, git, head} = immutableReaderFixture(t), r = pinReader(root);
+  const first = r.pin(head, 'input.json'), alias = r.pin(head, 'alias.json');
+  assert.equal(first.git_blob_oid, alias.git_blob_oid); assert.notEqual(first.path, alias.path);
+  write(root, 'input.json', jsonBytes({value: 2})); git('add', '.'); git('commit', '-m', 'Changed');
+  const next = r.pin(git('rev-parse', 'HEAD'), 'input.json');
+  assert.equal(r.json(next).value, 2); assert.equal(r.json(first).value, 1);
+  assert.throws(() => r.read({...first, path: 'alias.json', bytes: first.bytes + 1}), /identity differs/);
+  const exposed = r.read(first); exposed[0] ^= 1;
+  assert.throws(() => r.read(first), /hash differs/);
+  assert.equal(pinReader(root).json(first).value, 1);
+});
+
+test('immutable Git input reader validates before lookup and never caches missing or invalid metadata', t => {
+  const {root, git, head} = immutableReaderFixture(t), r = pinReader(root);
+  r.descriptor(head, 'input.json');
+  const execute = childProcess.execFileSync, calls = [];
+  let failSize = true;
+  childProcess.execFileSync = (command, args, options) => {
+    if (command === 'git' && options?.cwd === root) {
+      calls.push(args);
+      if (failSize && args[0] === 'cat-file' && args[1] === '-s') { failSize = false; return Buffer.from('NaN'); }
+    }
+    return execute(command, args, options);
+  }; syncBuiltinESMExports();
+  try {
+    for (const [version, name] of [['main', 'input.json'], [head, '../input.json']])
+      assert.throws(() => r.descriptor(version, name), /Exact commit and safe/);
+    assert.equal(calls.length, 0);
+    for (let i = 0; i < 2; i++) assert.throws(() => r.descriptor(head, 'missing.json'), /Missing ordinary/);
+    assert.throws(() => r.descriptor(head, 'alias.json'), /Invalid whole body size/);
+    assert.equal(r.descriptor(head, 'alias.json').path, 'alias.json');
+    assert.equal(calls.filter(args => args[0] === 'ls-tree').length, 4);
+  } finally { childProcess.execFileSync = execute; syncBuiltinESMExports(); }
+  fs.symlinkSync('input.json', path.join(root, 'link.json'));
+  git('add', '.'); git('update-index', '--chmod=+x', 'input.json'); git('commit', '-m', 'Nonordinary');
+  const changed = git('rev-parse', 'HEAD');
+  for (const name of ['input.json', 'link.json']) assert.throws(() => r.descriptor(changed, name), /Missing ordinary/);
+});
+
+test('immutable Git input reader ignores mutable replacement objects for exact commit and blob identities', t => {
+  const {root, git, head} = immutableReaderFixture(t), r = pinReader(root), first = r.pin(head, 'input.json');
+  write(root, 'input.json', jsonBytes({value: 2})); git('add', '.'); git('commit', '-m', 'Replacement');
+  const replacement = git('rev-parse', 'HEAD'), changed = r.pin(replacement, 'input.json');
+  git('replace', head, replacement);
+  git('replace', first.git_blob_oid, changed.git_blob_oid);
+  assert.equal(pinReader(root).json(first).value, 1);
+  assert.equal(pinReader(root).pin(head, 'input.json').sha256, first.sha256);
+  assert.equal(r.json(first).value, 1);
 });
 
 test('rebind commit phases require complete custody and publication-matching result pins', () => {
@@ -188,28 +315,17 @@ test('rebind commit phases require complete custody and publication-matching res
   assert.throws(() => rebindCustody({...config, result: r.add(prefix + 'wrong-result.json', {wrong: true})}, r), /output pin differs/);
 });
 
-test('new request issuance requires explicit finite v2 profiles and actual HEAD support/code pins', () => {
+test('new request issuance authenticates v2 actual HEAD support/code pins', () => {
   const reader = memoryReader(), code = reader.add('scripts/operator.mjs', Buffer.from('code'));
   const support = ['scripts/local-workspace.mjs', 'scripts/worker-identity.mjs'].map(p => reader.add(p, Buffer.from('support')));
   const template = {operating_profile: 'source-native-v2', output_reserve: 131072, executed_code: [code], operating_runtime: {supervisor: code, support_code: support}};
   reader.git = () => Buffer.from(commit); reader.pin = (c, p) => [code, ...support].find(x => x.path === p);
-  const requested_resources = {processing_allowance: {phaseBytes: 600000000, rssBytes: 700000000}, operating_limits:
-    {rss_bytes: 800000000, wall_seconds: 1400, output_bytes: 2000000, retained_bytes: 3000000, log_bytes: 100000, monitor_bytes: 100000, receipt_bytes: 10000}};
-  const issued = requestProfile(template, {}, {requested_resources}, reader);
-  assert.deepEqual(issued.processing_allowance, requested_resources.processing_allowance); assert.equal(issued.operating_limits.wall_seconds, 1400);
+  const issued = requestProfile(template, {}, {}, reader);
+  assert.equal(issued.operating_profile, 'source-native-v2');
+  assert.equal(Object.hasOwn(issued,'output_reserve'),false);
   assert.throws(() => requestProfile({...template, operating_profile: undefined}, {}, {}, reader), /v2/);
-  assert.throws(() => requestProfile(template, {}, {}, reader), /Explicit/);
-  for (const mutate of [x => x.operating_limits.rss_bytes = Infinity, x => x.operating_limits.wall_seconds = 0,
-    x => x.processing_allowance.phaseBytes = 900000000, x => x.processing_allowance.phaseBytes = 131071, x => x.operating_limits.output_bytes = 1,
-    x => x.operating_limits.retained_bytes = 1, x => x.operating_limits.log_bytes = 900000000,
-    x => x.operating_limits.monitor_bytes = 900000000, x => x.operating_limits.receipt_bytes = 900000000]) {
-    const bad = structuredClone(requested_resources); mutate(bad); assert.throws(() => requestProfile(template, {}, {requested_resources: bad}, reader));
-  }
-  for (const output_reserve of [1000, Number.MAX_SAFE_INTEGER]) {
-    assert.throws(() => requestProfile({...template, output_reserve}, {}, {requested_resources}, reader), /finite bounds/);
-  }
   const drift = structuredClone(template); drift.operating_runtime.support_code[0].sha256 = '0'.repeat(64);
-  assert.throws(() => requestProfile(drift, {}, {requested_resources}, reader), /actual HEAD/);
+  assert.throws(() => requestProfile(drift, {}, {}, reader), /actual HEAD/);
 });
 
 test('coherent SOURCE inventory changes and native preparation facts omissions are rejected against pinned scope/targets', t => {
@@ -265,8 +381,17 @@ test('native self-consistent target substitutions fail the independent immutable
       assets: Object.entries(products).map(([path, raw]) => ({path, bytes: raw.length, sha256: digest(raw)}))};
     for (const [name, raw] of Object.entries({...products, 'facts.json': facts, 'inventory.jsonl.gz': inventory, 'publication.json': jsonBytes(publication)})) write(root, 'run/' + name, raw);
     write(root, f.config.terminal, jsonBytes({...f.terminal, request_sha256: pin.sha256}));
+    return publication;
   }
-  candidate('target'); assert.ok(retainProducts({...f.config, request: pin}, root, r)['ledger-batch.json']);
+  const publication = candidate('target');
+  assert.ok(retainProducts({...f.config, request: pin}, root, r)['ledger-batch.json']);
+  const owners = publication.assets.find(row => row.path === 'owners-batch.json.gz');
+  owners.uncompressed_bytes = 2; owners.uncompressed_sha256 = digest(Buffer.from('{}'));
+  write(root, 'run/publication.json', jsonBytes(publication));
+  assert.ok(retainProducts({...f.config, request: pin}, root, r)['owners-batch.json.gz']);
+  owners.uncompressed_sha256 = '0'.repeat(64);
+  write(root, 'run/publication.json', jsonBytes(publication));
+  assert.throws(() => retainProducts({...f.config, request: pin}, root, r), /Decoded output differs/);
   candidate('foreign-native-target');
   assert.throws(() => retainProducts({...f.config, request: pin}, root, r), /immutable SOURCE handoff/);
 });
@@ -304,9 +429,9 @@ test('final package appends preserve the entire accepted prefix and validate dup
   assert.deepEqual(finalizedPackageInputs({...original, optional_inputs: [prefix + 'obsolete.json']}, prefix, paths).optional_inputs, [prefix + 'obsolete.json']);
 });
 
-function finalizationFixture({historical = false, custodyPin = null} = {}) {
+async function finalizationFixture({historical = false, custodyPin = null} = {}) {
   const f = authorityFixture(), r = f.reader, owned = 'coordination/engineering/finalize/';
-  const composed = composeAuthorities({registries: [r.add(prefix + 'original-registry.json', f.registry)], ledgers: [r.add(prefix + 'original-ledger.json', f.ledger)]}, r);
+  const composed = await composeAuthorities({registries: [r.add(prefix + 'original-registry.json', f.registry)], ledgers: [r.add(prefix + 'original-ledger.json', f.ledger)]}, r);
   const registry = r.add(owned + 'registry.json', composed['authority-registry.json']);
   const ledger = r.add(owned + 'ledger.json', composed['composed-original-ledger.json']);
   const retained = historical ? 'coordination/engineering/accepted-original/' : owned;
@@ -326,8 +451,8 @@ function finalizationFixture({historical = false, custodyPin = null} = {}) {
   return {reader: r, config: {version: 1, registry, ledger, rebind, selected_ledger, selector, sidecar, package_inputs, new_prefix: owned}};
 }
 
-test('finalization joins genuine release metadata, stages fresh files, and repeats without changes', t => {
-  const {reader,config} = finalizationFixture(), root = directory(t), reads = [], originalRead = reader.read;
+test('finalization joins genuine release metadata, stages fresh files, and repeats without changes', async t => {
+  const {reader,config} = await finalizationFixture(), root = directory(t), reads = [], originalRead = reader.read;
   reader.read = pin => { reads.push(pin.path); return originalRead(pin); };
   const output = finalizeDelivery(config, reader);
   assert.ok(reads.includes(reader.json(config.sidecar).logical_asset_map.owner_roster.path), 'retained owner whole pin was authenticated');
@@ -342,7 +467,7 @@ test('finalization joins genuine release metadata, stages fresh files, and repea
   assert.throws(() => publish(root, destination, output, {phase: 'changed'}, true), /changed/);
 });
 
-test('finalization rejects coherent foreign sidecar/base/ledger/envelope bindings before publication', t => {
+test('finalization rejects coherent foreign sidecar/base/ledger/envelope bindings before publication', async t => {
   for (const mutate of [
     (f,s) => s.base_selection.selected_geography.sha256 = '0'.repeat(64),
     (f,s) => s.authority_registry = f.config.ledger,
@@ -355,7 +480,7 @@ test('finalization rejects coherent foreign sidecar/base/ledger/envelope binding
     (f,s) => { const p=f.reader.json(s.logical_asset_map.patch); p.ledger_sha256='0'.repeat(64); s.logical_asset_map.patch=f.reader.add(s.logical_asset_map.patch.path,p); const e=f.reader.json(s.runtime_envelope); e.patch={bytes:s.logical_asset_map.patch.bytes,sha256:s.logical_asset_map.patch.sha256}; s.runtime_envelope=f.reader.add(s.runtime_envelope.path,e); },
     (f,s) => { const l=f.reader.json(f.config.selected_ledger); l.current_rebind=f.config.ledger; f.config.selected_ledger=f.reader.add(f.config.selected_ledger.path,l); s.logical_asset_map.ledger=f.config.selected_ledger; }
   ]) {
-    const f=finalizationFixture(), root=directory(t), sidecar=f.reader.json(f.config.sidecar); mutate(f,sidecar);
+    const f=await finalizationFixture(), root=directory(t), sidecar=f.reader.json(f.config.sidecar); mutate(f,sidecar);
     f.config.sidecar=f.reader.add(f.config.sidecar.path,sidecar);
     assert.throws(() => publish(root, '.cache/delivery-handoff/refused', finalizeDelivery(f.config,f.reader), {}), /differs|differ|preserve/);
     assert.equal(fs.existsSync(path.join(root,'.cache')),false);
@@ -363,31 +488,37 @@ test('finalization rejects coherent foreign sidecar/base/ledger/envelope binding
 });
 
 
-test('finalization appends authenticated inherited read roles without widening output ownership', () => {
-  const {reader, config} = finalizationFixture({historical: true});
+test('finalization retains historical custody but packages only the six current consumer bodies', async () => {
+  const {reader, config} = await finalizationFixture({historical: true});
   const original = reader.json(config.package_inputs), result = finalizeDelivery(config, reader);
   const actual = JSON.parse(result['package-inputs.json']);
   assert.deepEqual(actual.inputs.slice(0, original.inputs.length), original.inputs);
-  assert.ok(actual.inputs.includes('coordination/engineering/accepted-original/custody.json'));
-  assert.ok(actual.inputs.includes('coordination/engineering/accepted-original/operating.json'));
+  const sidecar = reader.json(config.sidecar);
+  const current = [config.sidecar, sidecar.runtime_envelope, ...Object.values(sidecar.logical_asset_map)].map(p => p.path).sort();
+  assert.deepEqual(actual.inputs.slice(original.inputs.length), current);
+  const retained = JSON.parse(result['package-roles.json']).paths.map(p => p.path);
+  for (const name of ['custody.json', 'operating.json'].map(n => 'coordination/engineering/accepted-original/' + n)) {
+    assert.ok(retained.includes(name));
+    assert.ok(!actual.inputs.includes(name));
+  }
   assert.ok(Object.keys(result).every(name => !name.includes('/')));
   const foreign = reader.add('coordination/engineering/unbound/existing.json', {});
   assert.throws(() => finalizeDelivery({...config, outer_roles: [foreign]}, reader), /derived outer roles/);
   assert.throws(() => finalizedPackageInputs(original, config.new_prefix, [foreign.path]), /owned package/);
 });
 
-test('finalization refuses changed, absent or nonordinary inherited read identities', () => {
+test('finalization refuses changed, absent or nonordinary inherited read identities', async () => {
   for (const change of [p => ({...p, sha256: '0'.repeat(64)}), p => ({...p, bytes: p.bytes + 1}),
     p => ({...p, blob: '0'.repeat(40)}), p => ({...p, mode: '100755'}),
     () => { throw new Error('missing accepted inherited path'); }]) {
-    const {reader, config} = finalizationFixture({historical: true}), originalPin = reader.pin;
+    const {reader, config} = await finalizationFixture({historical: true}), originalPin = reader.pin;
     reader.pin = (c, name) => name === 'coordination/engineering/accepted-original/custody.json'
       ? change(originalPin(c, name)) : originalPin(c, name);
     assert.throws(() => finalizeDelivery(config, reader), /accepted path identity|missing accepted inherited path/);
   }
 });
 
-test('finalization checks the independent Git package baseline, not the role source commit', t => {
+test('finalization checks the independent Git package baseline, not the role source commit', async t => {
   const root = directory(t), name = 'coordination/engineering/accepted-original/custody.json';
   const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe','pipe','pipe']}).toString().trim();
   git('init'); git('config','user.name','Fixture'); git('config','user.email','fixture@example.invalid');
@@ -398,17 +529,19 @@ test('finalization checks the independent Git package baseline, not the role sou
   write(root, name, jsonBytes({})); git('add','.'); git('commit','-m','Original source body');
   const source = git('rev-parse','HEAD'), actual = pinReader(root);
   assert.deepEqual(actual.json(actual.pin(source,name)), {});
-  const restored = finalizationFixture({historical: true, custodyPin: actual.pin(source,name)});
+  const restored = await finalizationFixture({historical: true, custodyPin: actual.pin(source,name)});
   const originalPin = restored.reader.pin;
   restored.config.package_inputs = {...restored.config.package_inputs, commit: absent};
   restored.config.restored_read_roles = {commit: source, paths: [name]};
   restored.reader.hasPath = (c,p) => { assert.equal(c,absent); return actual.hasPath(c,p); };
   restored.reader.pin = (c,p) => p === name ? actual.pin(c,p) : originalPin(commit,p);
-  assert.ok(JSON.parse(finalizeDelivery(restored.config,restored.reader)['package-inputs.json']).inputs.includes(name));
+  const result = finalizeDelivery(restored.config,restored.reader);
+  assert.ok(JSON.parse(result['package-roles.json']).paths.some(pin => pin.path === name));
+  assert.ok(!JSON.parse(result['package-inputs.json']).inputs.includes(name));
   restored.config.restored_read_roles.commit = changed;
   assert.throws(()=>finalizeDelivery(restored.config,restored.reader), /Restored snapshot differs/);
   for (const baseline of [absent, changed]) {
-    const {reader,config} = finalizationFixture({historical: true}), originalPin = reader.pin, calls = [];
+    const {reader,config} = await finalizationFixture({historical: true}), originalPin = reader.pin, calls = [];
     config.package_inputs = {...config.package_inputs, commit: baseline};
     reader.pin = (c,p) => { calls.push(c); return p === name ? actual.pin(c,p) : originalPin(commit,p); };
     assert.throws(() => finalizeDelivery(config,reader), /Missing ordinary exact Git body|accepted path identity/);
@@ -417,9 +550,9 @@ test('finalization checks the independent Git package baseline, not the role sou
   }
 });
 
-test('finalization admits only an exact committed restoration of absent canonical read roles', () => {
-  const setup = () => {
-    const f = finalizationFixture({historical: true}), original = f.reader.pin;
+test('finalization admits only an exact committed restoration of absent canonical read roles', async () => {
+  const setup = async () => {
+    const f = await finalizationFixture({historical: true}), original = f.reader.pin;
     const paths = ['custody.json','operating.json'].map(n => 'coordination/engineering/accepted-original/' + n);
     const snapshot = 'b'.repeat(40);
     f.config.restored_read_roles = {commit: snapshot, paths: [...paths]};
@@ -430,9 +563,13 @@ test('finalization admits only an exact committed restoration of absent canonica
     };
     return f;
   };
-  const f = setup(), output = finalizeDelivery(f.config,f.reader);
+  const f = await setup(), output = finalizeDelivery(f.config,f.reader);
   const inputs = JSON.parse(output['package-inputs.json']).inputs;
-  for (const name of f.config.restored_read_roles.paths) assert.ok(inputs.includes(name));
+  const retained = JSON.parse(output['package-roles.json']).paths.map(pin => pin.path);
+  for (const name of f.config.restored_read_roles.paths) {
+    assert.ok(retained.includes(name));
+    assert.ok(!inputs.includes(name));
+  }
   for (const mutate of [
     f => f.config.restored_read_roles.paths.push(f.config.restored_read_roles.paths[0]),
     f => f.config.restored_read_roles.paths.push('coordination/engineering/unbound/existing.json'),
@@ -442,20 +579,15 @@ test('finalization admits only an exact committed restoration of absent canonica
     f => { const old=f.reader.pin; f.reader.pin=(c,p)=>c==='b'.repeat(40)?{...old(c,p),mode:'120000'}:old(c,p); },
     f => { const old=f.reader.pin; f.reader.pin=(c,p)=>{ if(c==='b'.repeat(40)) throw Error('missing snapshot'); return old(c,p); }; },
     f => { f.reader.hasPath=()=>true; const old=f.reader.pin; f.reader.pin=(c,p)=>old(c===commit?'b'.repeat(40):c,p); }
-  ]) { const g=setup(); mutate(g); assert.throws(()=>finalizeDelivery(g.config,g.reader), /inventory|required|accepted path identity/); }
-  const g=setup(); g.config.restored_read_roles.paths=[];
+  ]) { const g=await setup(); mutate(g); assert.throws(()=>finalizeDelivery(g.config,g.reader), /inventory|required|accepted path identity/); }
+  const g=await setup(); g.config.restored_read_roles.paths=[];
   assert.throws(()=>finalizeDelivery(g.config,g.reader), /inventory required/);
-  const h=setup(); delete h.config.restored_read_roles;
-  const automatic = finalizeDelivery(h.config,h.reader);
-  for (const name of ['custody.json','operating.json']) {
-    const originalPath = 'coordination/engineering/accepted-original/' + name;
-    assert.deepEqual(automatic['restored-read-roles/' + originalPath], h.reader.read(h.reader.pin('b'.repeat(40),originalPath)));
-    assert.ok(JSON.parse(automatic['package-inputs.json']).inputs.includes(originalPath));
-  }
+  const h=await setup(); delete h.config.restored_read_roles;
+  assert.throws(() => finalizeDelivery(h.config,h.reader), /accepted path identity/);
 });
 
-test('finalization refuses a new identity at an accepted package path', () => {
-  const {reader,config} = finalizationFixture();
+test('finalization refuses a new identity at an accepted package path', async () => {
+  const {reader,config} = await finalizationFixture();
   const first = finalizeDelivery(config, reader);
   const package_inputs = reader.add(config.package_inputs.path, first['package-inputs.json']);
   const originalPin = reader.pin;
@@ -465,11 +597,13 @@ test('finalization refuses a new identity at an accepted package path', () => {
 
 // Actual Git/plain-Node fixture for metadata assembly. The source interpretation
 // and native construction controls live in source-member-native-delivery.test;
-// this fixture exercises the consumed-role boundary without replaying science.
-function modernFinalizationFixture(t, {mixed = false, membership = true} = {}) {
+// this method-free fixture exercises the consumed-role boundary without claiming a native bank.
+// The actual native CLI/bank contract is exercised by delivery-finalize-config.test.mjs.
+function modernFinalizationFixture(t, {completed = false, mixed = false, membership = true, cohort = false, external = false, dated = false, territorial = false, territorialParts = false, provider = false, seam = false, negativeSources = false} = {}) {
   const root = directory(t), owned = 'coordination/engineering/modern-finalize/';
   const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
   git('init'); git('config', 'user.name', 'Finalizer fixture'); git('config', 'user.email', 'finalizer@example.invalid');
+  git('config', 'gc.auto', '0'); git('config', 'maintenance.auto', 'false');
   const save = (name, value) => write(root, name, Buffer.isBuffer(value) ? value : jsonBytes(value));
   const commitAll = () => { git('add', '.'); git('commit', '--allow-empty', '-qm', 'Immutable finalizer fixture'); return git('rev-parse', 'HEAD'); };
   const r = pinReader(root), pin = name => r.pin(git('rev-parse', 'HEAD'), name);
@@ -481,7 +615,9 @@ function modernFinalizationFixture(t, {mixed = false, membership = true} = {}) {
   const familyPart = inherited + 'family-part.json.gz', familyRaw = jsonBytes({type: 'FeatureCollection', features: []});
   save(familyPart, gzipSync(familyRaw));
   const memberPaths = ['data/world-index.json', 'data/semantic-report.json', 'data/geography/part-0.json'];
-  for (const name of memberPaths) save(name, {retained: name});
+  if (cohort) memberPaths.push('data/macro-foundation/world-review-projection.json', 'data/macro-foundation/world-review-locations-0.json.gz');
+  if (external) memberPaths.push('data/sources.json', 'data/retained-natural-earth.json');
+  for (const name of memberPaths) save(name, name.endsWith('.gz') ? gzipSync(jsonBytes([{retained:name}])) : {retained: name});
   const incidental = inherited + 'gshhg-never-consumed.json'; save(incidental, {not_a_selected_reader_operand: true});
   const geometry = {type: 'Polygon', coordinates: [[[0, 0], [1, 0], [0, 1], [0, 0]]]};
   const baseReference = {id: 'geography:base', footprints_sha256: 'b'.repeat(64), hierarchy_sha256: 'c'.repeat(64)};
@@ -489,7 +625,7 @@ function modernFinalizationFixture(t, {mixed = false, membership = true} = {}) {
   save(ownerPath, gzipSync(ownerRaw)); commitAll();
   const owner = {...pin(ownerPath), encoding: 'gzip', decoded_bytes: ownerRaw.length, decoded_sha256: digest(ownerRaw)};
   save(inherited + 'base-manifest.json', {geographic_release: baseReference.id, footprints_sha256: baseReference.footprints_sha256,
-    hierarchy_sha256: baseReference.hierarchy_sha256, size: 8, coordinateBits: 3, method: 'native-linear-evenodd-first-owner-v1',
+    hierarchy_sha256: baseReference.hierarchy_sha256, size: 8, coordinateBits: 3,
     native_latitudes: pin(roles.native_latitudes), original_assets: {bounds: {sha256: owner.sha256}}}); commitAll();
   const baseManifest = pin(inherited + 'base-manifest.json');
   // Deliberately unsorted nested selector keys and accepted declaration ordering.
@@ -505,7 +641,60 @@ function modernFinalizationFixture(t, {mixed = false, membership = true} = {}) {
     targets: [{id: 'source:A', target_id: 'target'}],
     families: [{source_id: 'source', parts: [{...pin(familyPart), decoded_bytes: familyRaw.length, decoded_sha256: digest(familyRaw)}]}],
     native_contract: {incidental_reproducer_operand: pin(incidental)},
-    ...(membership ? {source_membership: {index: pin(memberPaths[0]), lineage: pin(memberPaths[1]), parts: [pin(memberPaths[2])]}} : {})};
+    ...(membership ? {source_membership: {index: pin(memberPaths[0]), lineage: pin(memberPaths[1]), parts: [pin(memberPaths[2])],
+      ...(cohort ? {cohort_inventory:{index:pin(memberPaths[3]),parts:[pin(memberPaths[4])]}} : {}),
+      ...(external ? {negative_natural_earth:{registry:pin('data/sources.json'),source:pin('data/retained-natural-earth.json'),
+        atoms:[{source_id:'TST-1',feature_ordinal:0,geometry_sha256:'a'.repeat(64)}]}} : {})}} : {})};
+  let datedSupport;
+  if (dated) {
+    const provenance = ['adoption', 'review', 'observation', 'frame'].map(role => {
+      const name = inherited + 'dated-' + role + (role === 'frame' ? '.png' : '.json');
+      save(name, role === 'frame' ? Buffer.from('encoded frame fixture; never decoded by package projection') : {retained: role});
+      return {id: role, role, name};
+    });
+    commitAll();
+    const entries = provenance.map(({id, role, name}) => ({id, role, pin: pin(name)}));
+    entries.push({...entries[3], id: 'same-frame-second-reference'});
+    const body = {version: 1, kind: 'adopted-dated-native-centre-land-support-v1', provenance: entries, records: []};
+    const supportPath = inherited + 'dated-support.json'; save(supportPath, body); commitAll();
+    datedSupport = {body, path: supportPath, pin: pin(supportPath)};
+    Object.assign(evidenceBody, {version: 2, kind: 'source-target-native-evidence-v2', dated_land_support: datedSupport.pin});
+  }
+  let territorialSupport;
+  if (territorial) {
+    const sources = ['adoption','scope','original-source'].map(role => {
+      const name = inherited + 'territorial-' + role + '.json';save(name,{retained:role});return {id:role,role,name};
+    });commitAll();
+    const body = {version:1,kind:'adopted-native-territorial-applicability-v1',
+      provenance:sources.map(({id,role,name})=>({id,role,pin:pin(name)})),records:[]};
+    if(territorialParts){
+      const raw=jsonBytes({type:'FeatureCollection',features:[]}),cut=Math.floor(raw.length/2);
+      const names=[inherited+'negative-part-0.bin.gz',inherited+'negative-part-1.bin.gz'];
+      save(names[0],gzipSync(raw.subarray(0,cut)));save(names[1],gzipSync(raw.subarray(cut)));commitAll();
+      body.provenance[2]={id:'original-source',role:'original-source',parts:names.map(name=>pin(name))};
+    }
+    const name=inherited+'territorial-applicability.json';save(name,body);commitAll();
+    territorialSupport={body,path:name,pin:pin(name)};evidenceBody.territorial_applicability=territorialSupport.pin;
+  }
+  let providerAdoption;
+  if(provider){
+    const name=inherited+'adopted-provider-families.json';
+    save(name,{version:1,kind:'adopted-provider-source-families-v1',families:[]});commitAll();
+    providerAdoption=pin(name);evidenceBody.adopted_provider_families=providerAdoption;
+  }
+  let seamViews;
+  if(seam){
+    save('scripts/majority.py',Buffer.from('# retained canonical method'));commitAll();
+    const name=inherited+'canonical-seam-views.json',method=pin('scripts/majority.py');
+    save(name,{version:1,kind:'retained-periodic-native-views-v1',method:{pin:method,export:'canonical'},records:[]});commitAll();
+    seamViews={pin:pin(name),method};evidenceBody.canonical_seam_views=seamViews.pin;
+  }
+  if(negativeSources){
+    const raw=jsonBytes({type:'FeatureCollection',features:[]});
+    const name=inherited+'negative-original.bin.gz';save(name,gzipSync(raw));commitAll();
+    evidenceBody.territorial_exclusion_sources=[{source_id:'negative',parts:[{...pin(name),
+      decoded_bytes:raw.length,decoded_sha256:digest(raw)}]}];
+  }
   save(owned + 'source-evidence.json', evidenceBody); save(owned + 'native-patch.json', {rows: [{y: 2, runs: [[2, 4, 1]]}]}); commitAll();
   const authority = binding => {
     const stem = binding.kind === 'source-target-native-custody-v1' ? 'modern' : 'legacy';
@@ -540,6 +729,17 @@ function modernFinalizationFixture(t, {mixed = false, membership = true} = {}) {
       native_cells: 1, disposition: 'assigned', authority_sha256: legacy.authority_sha256, rule_sha256: legacy.rule_sha256});
     rows.unshift({component_id: 'held:fixture', disposition: 'awaiting-evidence', reason: 'literal unresolved evidence',
       authority_sha256: legacy.authority_sha256, rule_sha256: legacy.rule_sha256});
+  }
+  if (completed) {
+    const binding = r.json(modern.source_authority);
+    const originalRows = rows.filter(row => row.authority_sha256 === modern.authority_sha256)
+      .map(({authority_sha256, rule_sha256, ...row}) => row);
+    save(owned + 'constructor-result.json', {version: 1, kind: 'existing-source-target-native-constructor-result',
+      inputs: Object.fromEntries(['source_evidence', 'native_patch'].map(role => [role,
+        {commit: binding[role].commit, path: binding[role].path}])),
+      component_ids: originalRows.map(row => row.component_id), ledger_rows: originalRows,
+      rule_sha256: modern.rule_sha256, limitations: ['Metadata fixture; scientific qualification is tested separately.']});
+    commitAll(); modern.completed_constructor = pin(owned + 'constructor-result.json');
   }
   const package_inputs = pin('.github/package-inputs.json');
   const registry = {version: 1, kind: 'retained-rule-authority-registry-v1', entries: entries.sort((a, b) => a.authority_sha256.localeCompare(b.authority_sha256))};
@@ -585,8 +785,101 @@ function modernFinalizationFixture(t, {mixed = false, membership = true} = {}) {
     return spawnSync(process.execPath, [script, phase, 'config.json', destination, ...flags], {cwd: root, env, encoding: 'utf8'});
   };
   return {root, r, config, run, git, save, commitAll, pin, evidenceBody, originalSelector, originalPackage, assets,
-    consumed: [...Object.values(roles), familyPart, ...(membership ? memberPaths : [])], incidental, withEvidence};
+    consumed: [...Object.values(roles), familyPart, ...(membership ? memberPaths : [])], incidental, withEvidence, datedSupport, territorialSupport, providerAdoption, seamViews};
 }
+
+// Build a private object universe, not a loose-file deletion simulation. Git's
+// pack writer takes this exact OID list (without --revs), so omitted historical
+// blobs cannot enter through graph traversal or another object's pack delta.
+function omitHistoricalObjects(t, f, omitted, storage) {
+  assert.ok(!process.env.GIT_ALTERNATE_OBJECT_DIRECTORIES, 'Fixture has no ambient alternate object database');
+  const ids = new Set(omitted), before = f.git('rev-parse', 'HEAD'), tree = f.git('rev-parse', 'HEAD^{tree}');
+  const objects = path.resolve(f.root, f.git('rev-parse', '--git-path', 'objects'));
+  assert.equal(objects, path.join(f.root, '.git', 'objects'), 'Fixture owns its ordinary object directory');
+  assert.equal(fs.existsSync(path.join(objects, 'info', 'alternates')), false);
+  assert.equal(f.git('remote'), '', 'Fixture has no network fallback');
+  for (const oid of ids) assert.equal(f.git('cat-file', '-t', oid), 'blob');
+  if (storage === 'loose') for (const oid of ids)
+    assert.equal(fs.existsSync(path.join(objects, oid.slice(0, 2), oid.slice(2))), true);
+  if (storage === 'packed') {
+    f.git('repack', '-ad');
+    assert.ok(fs.readdirSync(path.join(objects, 'pack')).some(name => name.endsWith('.pack')));
+    for (const oid of ids) assert.equal(fs.existsSync(path.join(objects, oid.slice(0, 2), oid.slice(2))), false);
+  }
+  const all = f.git('cat-file', '--batch-all-objects', '--batch-check=%(objectname)').split('\n');
+  assert.ok([...ids].every(oid => all.includes(oid)));
+  const allowed = all.filter(oid => !ids.has(oid));
+  const env = {...process.env, GIT_NO_LAZY_FETCH: '1'};
+  const pack = execFileSync('git', ['pack-objects', '--stdout'], {cwd: f.root, env,
+    input: allowed.join('\n') + '\n', maxBuffer: 16 * 1024 * 1024});
+  const quarantine = fs.mkdtempSync(path.join(os.tmpdir(), 'finalizer-original-objects-'));
+  t.after(() => fs.rmSync(quarantine, {recursive: true, force: true}));
+  fs.renameSync(objects, path.join(quarantine, 'objects'));
+  fs.mkdirSync(path.join(objects, 'pack'), {recursive: true});
+  fs.mkdirSync(path.join(objects, 'info'));
+  execFileSync('git', ['index-pack', '--stdin'], {cwd: f.root, env, input: pack, stdio: ['pipe', 'pipe', 'pipe']});
+  assert.equal(f.git('rev-parse', 'HEAD'), before); assert.equal(f.git('rev-parse', 'HEAD^{tree}'), tree);
+  assert.equal(fs.existsSync(path.join(objects, 'info', 'alternates')), false);
+  assert.deepEqual(f.git('cat-file', '--batch-all-objects', '--batch-check=%(objectname)').split('\n').sort(), allowed.sort());
+  for (const oid of ids) {
+    const probe = spawnSync('git', ['cat-file', '-e', oid], {cwd: f.root, env, encoding: 'utf8'});
+    assert.notEqual(probe.status, 0, 'Historical body must be genuinely unreadable: ' + oid);
+  }
+}
+
+for (const storage of ['loose', 'packed']) test('completed-constructor finalization keeps provenance cold with ' + storage + ' history', t => {
+  const f = modernFinalizationFixture(t, {completed: true, cohort: true, external: true, dated: true,
+    territorial: true, territorialParts: true, provider: true, seam: true, negativeSources: true});
+  const entry = f.r.json(f.config.registry).entries[0], binding = f.r.json(entry.source_authority);
+  const originalEvidence = Buffer.from(f.r.read(binding.source_evidence)), leaves = new Map();
+  const collect = value => {
+    if (!value || typeof value !== 'object') return;
+    if (value.path && value.commit && value.git_blob_oid) leaves.set(value.path, value);
+    else for (const member of Object.values(value)) collect(member);
+  };
+  collect(f.evidenceBody); collect(f.datedSupport.body); collect(f.territorialSupport.body); collect(f.seamViews);
+  for (const pin of [f.evidenceBody.catalogue, f.evidenceBody.source_membership.index,
+    f.datedSupport.pin, f.territorialSupport.pin, f.providerAdoption, f.seamViews.method])
+    assert.ok(leaves.has(pin.path), 'Exercise the original role: ' + pin.path);
+  f.git('rm', '--', ...leaves.keys()); f.commitAll();
+  f.config.package_inputs = f.pin('.github/package-inputs.json');
+  omitHistoricalObjects(t, f, [...leaves.values()].map(pin => pin.git_blob_oid), storage);
+  const destination = '.cache/delivery-handoff/completed-cold';
+  const run = f.run('finalize', destination); assert.equal(run.status, 0, run.stderr);
+  const output = name => JSON.parse(fs.readFileSync(path.join(f.root, destination, name)));
+  const roles = output('package-roles.json').paths;
+  for (const pin of [entry.rule_preimage, entry.source_authority, entry.completed_constructor,
+    binding.source_evidence, binding.native_patch])
+    assert.ok(roles.some(role => role.path === pin.path && role.sha256 === pin.sha256), pin.path);
+  for (const name of leaves.keys()) assert.ok(!roles.some(role => role.path === name), name);
+  assert.deepEqual(f.r.read(binding.source_evidence), originalEvidence, 'Original provenance body stays byte-identical');
+  assert.equal(output('selected-delivery-expectations.json').cumulative_native_cells, 2);
+  assert.ok(!f.config.restored_read_roles, 'No restoration snapshot or bypass flag');
+});
+
+for (const storage of ['loose', 'packed']) test('unqualified source-target finalization still requires historical leaf bodies with ' + storage + ' history', t => {
+  const f = modernFinalizationFixture(t), leaf = f.evidenceBody.catalogue;
+  f.git('rm', '--', leaf.path); f.commitAll();
+  f.config.package_inputs = f.pin('.github/package-inputs.json');
+  omitHistoricalObjects(t, f, [leaf.git_blob_oid], storage);
+  const destination = '.cache/delivery-handoff/unqualified-cold';
+  const run = f.run('finalize', destination);
+  assert.notEqual(run.status, 0, 'No completed constructor means no cold-corpus route');
+  assert.match(run.stderr, /cat-file|bad object|missing/i);
+  assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+});
+
+test('completed-constructor finalizer retains every direct immutable body check', t => {
+  const f = modernFinalizationFixture(t, {completed: true});
+  const entry = f.r.json(f.config.registry).entries[0], binding = f.r.json(entry.source_authority);
+  for (const pin of [entry.rule_preimage, entry.source_authority, entry.completed_constructor,
+    binding.source_evidence, binding.native_patch]) {
+    const original = f.r.read;
+    f.r.read = p => original(p.path === pin.path ? {...p, sha256: '0'.repeat(64)} : p);
+    assert.throws(() => packageProjection(f.config, f.r), /hash differs/, pin.path);
+    f.r.read = original;
+  }
+});
 
 for (const mixed of [false, true]) test('real finalizer supports ' + (mixed ? 'mixed legacy/modern' : 'modern') + ' roles, flat envelope aliases and exact resume', t => {
   const f = modernFinalizationFixture(t, {mixed}), first = '.cache/delivery-handoff/first', second = '.cache/delivery-handoff/second';
@@ -596,20 +889,107 @@ for (const mixed of [false, true]) test('real finalizer supports ' + (mixed ? 'm
   const inputs = JSON.parse(products('package-inputs.json'));
   assert.deepEqual(inputs.inputs.slice(0, f.originalPackage.inputs.length), f.originalPackage.inputs);
   for (const key of ['optional_inputs', 'verification_paths', 'generated_outputs', 'retained_policy']) assert.deepEqual(inputs[key], f.originalPackage[key]);
-  for (const name of [...f.consumed, ...Object.values(f.assets).map(p => p.path)]) assert.ok(inputs.inputs.includes(name), name);
+  const custody = JSON.parse(products('package-roles.json')).paths.map(p => p.path);
+  for (const name of [...f.consumed, ...Object.values(f.assets).map(p => p.path)]) assert.ok(custody.includes(name), name);
+  const sidecar = f.r.json(f.config.sidecar);
+  const current = [f.config.sidecar, sidecar.runtime_envelope, ...Object.values(f.assets)].map(p => p.path).sort();
+  assert.deepEqual(inputs.inputs.slice(f.originalPackage.inputs.length), current);
+  for (const name of f.consumed) assert.ok(!inputs.inputs.includes(name), name);
   assert.ok(!inputs.inputs.includes(f.incidental)); assert.ok(!inputs.inputs.some(name => name.endsWith('selected-delivery-expectations.json')));
   const selected = JSON.parse(products('ownership-selection.json')), original = {...selected}; delete original.additive_release;
   assert.equal(JSON.stringify(original), JSON.stringify(JSON.parse(f.originalSelector)));
-  assert.deepEqual(fs.readFileSync(path.join(f.root, 'data/ownership-selection.json')), f.originalSelector);
+  assert.deepEqual(fs.readFileSync(path.join(f.root, 'data/ownership-selection.json')), products('ownership-selection.json'));
+  assert.deepEqual(fs.readFileSync(path.join(f.root, '.github/package-inputs.json')), products('package-inputs.json'));
+  assert.deepEqual(fs.readFileSync(path.join(f.root, f.config.new_prefix, 'selected-delivery-expectations.json')), products('selected-delivery-expectations.json'));
   const expected = JSON.parse(products('selected-delivery-expectations.json'));
   const members = expected.cohorts.flatMap(cohort => cohort.members);
   assert.equal(members.find(row => row.component_id === 'source-target:fixture').native_rows_sha256, digest(jsonBytes([{y: 2, runs: [[2, 4, 1]]}])));
   assert.equal(expected.cumulative_native_cells, mixed ? 3 : 2);
   if (mixed) assert.ok(members.find(row => row.component_id === 'legacy:fixture').geometry_sha256);
   const resumed = f.run('finalize', first, ['--resume']); assert.equal(resumed.status, 0, resumed.stderr); assert.equal(JSON.parse(resumed.stdout).resumed, true);
+  f.commitAll(); // Normal committed adoption, distinct from interrupted --resume.
   const repeated = f.run('finalize', second); assert.equal(repeated.status, 0, repeated.stderr);
   for (const name of ['ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json'])
     assert.deepEqual(fs.readFileSync(path.join(f.root, second, name)), products(name));
+});
+
+test('real v2 package command closes dated support and fixed provenance once without original-role copies', t => {
+  const f = modernFinalizationFixture(t, {dated: true}), destination = '.cache/delivery-handoff/dated';
+  const run = f.run('package', destination); assert.equal(run.status, 0, run.stderr);
+  const projection = JSON.parse(fs.readFileSync(path.join(f.root, destination, 'package-roles.json')));
+  const needed = [f.datedSupport.pin, ...f.datedSupport.body.provenance.map(entry => entry.pin)];
+  for (const pin of needed) {
+    const matches = projection.paths.filter(entry => entry.path === pin.path);
+    assert.equal(matches.length, 1, pin.path);
+    assert.equal(matches[0].sha256, pin.sha256); assert.equal(matches[0].bytes, pin.bytes);
+  }
+  for (const role of ['adoption', 'review', 'observation', 'frame']) assert.ok(projection.paths.some(entry =>
+    entry.roles.includes('source-target dated ' + role)), role);
+  assert.deepEqual(fs.readdirSync(path.join(f.root, destination)).sort(),
+    ['package-roles.json', 'preparation.json', 'selected-delivery-expectations.json']);
+  assert.ok(!projection.paths.some(pin => pin.path === f.incidental));
+});
+
+test('real package command retains every complete territorial source part without parsing a JSON chunk', t => {
+  const f=modernFinalizationFixture(t,{territorial:true,territorialParts:true}),destination='.cache/delivery-handoff/multipart';
+  const run=f.run('package',destination);assert.equal(run.status,0,run.stderr);
+  const projection=JSON.parse(fs.readFileSync(path.join(f.root,destination,'package-roles.json')));
+  for(const pin of f.territorialSupport.body.provenance[2].parts){
+    const paths=projection.paths.filter(p=>p.path===pin.path);assert.equal(paths.length,1);
+    assert.equal(paths[0].sha256,pin.sha256);assert.ok(paths[0].roles.includes('source-target territorial original-source'));
+  }
+  const evidence=structuredClone(f.evidenceBody),support=structuredClone(f.territorialSupport.body);
+  support.provenance[2].parts[1].sha256='0'.repeat(64);
+  f.save(f.territorialSupport.path,support);f.commitAll();evidence.territorial_applicability=f.pin(f.territorialSupport.path);
+  const output='.cache/delivery-handoff/refused-multipart';
+  const failed=f.run('package',output,[],f.withEvidence(evidence));assert.notEqual(failed.status,0);
+  assert.match(failed.stderr,/hash differs/);assert.equal(fs.existsSync(path.join(f.root,output)),false);
+});
+
+test('real package command retains territorial adoption, exact scope and original sources beside dated land roles', t => {
+  const f=modernFinalizationFixture(t,{dated:true,territorial:true}),destination='.cache/delivery-handoff/territorial';
+  const run=f.run('package',destination);assert.equal(run.status,0,run.stderr);
+  const projection=JSON.parse(fs.readFileSync(path.join(f.root,destination,'package-roles.json')));
+  for(const typed of [f.datedSupport,f.territorialSupport])for(const pin of [typed.pin,...typed.body.provenance.map(p=>p.pin)]){
+    const matches=projection.paths.filter(p=>p.path===pin.path);assert.equal(matches.length,1,pin.path);
+    assert.equal(matches[0].sha256,pin.sha256);assert.equal(matches[0].bytes,pin.bytes);
+  }
+  for(const role of ['adoption','scope','original-source'])assert.ok(projection.paths.some(p=>
+    p.roles.includes('source-target territorial '+role)),role);
+  assert.deepEqual(fs.readdirSync(path.join(f.root,destination)).sort(),
+    ['package-roles.json','preparation.json','selected-delivery-expectations.json']);
+  for(const change of ['typed-pin','source-pin','unknown-role']){
+    const evidence=structuredClone(f.evidenceBody),support=structuredClone(f.territorialSupport.body);
+    if(change==='typed-pin')evidence.territorial_applicability.sha256='0'.repeat(64);
+    else{
+      if(change==='source-pin')support.provenance[2].pin.sha256='0'.repeat(64);
+      else support.provenance[2].role='arbitrary-tree';
+      f.save(f.territorialSupport.path,support);f.commitAll();evidence.territorial_applicability=f.pin(f.territorialSupport.path);
+    }
+    const output='.cache/delivery-handoff/refused-territorial-'+change;
+    const failed=f.run('package',output,[],f.withEvidence(evidence));assert.notEqual(failed.status,0,change);
+    assert.match(failed.stderr,/hash differs|Unknown territorial applicability provenance role/);
+    assert.equal(fs.existsSync(path.join(f.root,output)),false);
+  }
+});
+
+test('v2 package refuses altered typed or declared provenance and unknown roles before publication', t => {
+  const f = modernFinalizationFixture(t, {dated: true}); let ordinal = 0;
+  for (const change of ['typed-pin', 'declared-frame', 'unknown-role', 'missing-pin']) {
+    const evidence = structuredClone(f.evidenceBody), support = structuredClone(f.datedSupport.body);
+    if (change === 'typed-pin') evidence.dated_land_support.sha256 = '0'.repeat(64);
+    else {
+      if (change === 'declared-frame') support.provenance[3].pin.sha256 = '0'.repeat(64);
+      if (change === 'unknown-role') support.provenance[3].role = 'nested-source-tree';
+      if (change === 'missing-pin') delete support.provenance[3].pin;
+      f.save(f.datedSupport.path, support); f.commitAll(); evidence.dated_land_support = f.pin(f.datedSupport.path);
+    }
+    const destination = '.cache/delivery-handoff/refused-dated-' + ordinal++;
+    const run = f.run('package', destination, [], f.withEvidence(evidence));
+    assert.notEqual(run.status, 0, change);
+    assert.match(run.stderr, /hash differs|Unknown dated support provenance role|Missing whole consumed package role/, change);
+    assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+  }
 });
 
 test('real modern package command accepts absent optional membership and refuses omitted or altered consumed dependencies before publication', t => {
@@ -630,17 +1010,6 @@ test('real modern package command accepts absent optional membership and refuses
 });
 
 
-// Scalar extraction from the reviewed AUS facts/evidence at
-// c753c65a72e51718b453883a941fc22e148b5fbb, merged as 94d7016a6e12ec5c5414db24202e95d5dd9e4459:
-// coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/
-// retained-002/native/facts.json and evidence-quality.json. These small controls
-// exercise report transfer, not geographic computation or original byte identity.
-const ausNativeScalars = {components: 13, assigned_cells: 20, assigned_components: 7,
-  zero_cell_components: 6, native_conflicts: 0, removed_cells: 0, reassigned_cells: 0, source_exceptions: 0,
-  candidate_cell_contributions: 20, shared_same_owner_cells: 0};
-const ausSourceEvaluation = 'ad32930dc368c1b4b1cb46cc0484649053d44762';
-const ausNativeEvaluation = '5d287b5f78c9219b1d9202d20d8824ef2ef7898b';
-
 test('real modern package command rejects changed whole dependency pins and incomplete accepted membership', t => {
   const f = modernFinalizationFixture(t); let ordinal = 0;
   const refused = body => {
@@ -660,121 +1029,10 @@ test('real modern package command rejects changed whole dependency pins and inco
   ]) { const body = structuredClone(f.evidenceBody); mutate(body); refused(body); }
 });
 
-function evidenceFixture(reader = memoryReader({admit: false})) {
-  const descriptor = pin => ({path: pin.path, bytes: pin.bytes, sha256: pin.sha256, hash_kind: 'file-bytes'});
-  const baseline = reader.add('baseline.json', {retained: true});
-  const input = reader.add(prefix + 'native-request.json', {operation: 'unactivated-additive-native-batch-v1'});
-  const facts = {...ausNativeScalars, execution_commit: ausNativeEvaluation, request: input};
-  const measurement = reader.add(prefix + 'native-facts.json', facts);
-  const sourceInput = reader.add(prefix + 'source-request.json', {operation: 'retained-land-source-premises-v1'});
-  const sourceFacts = reader.add(prefix + 'source-facts.json', {components: 13, source_compatible: 13,
-    execution_commit: ausSourceEvaluation, request: sourceInput});
-  const manifest = {version: 1, issue: 1785, lane: 'engineering', worker_id: 'fixture', subject_ids: [], subject_ids_sha256: subjectsHash([]),
-    baseline: {version: 2, commit, files: [{...descriptor(baseline), commit}], pins: {}}, sources: [],
-    outputs: [input, measurement, sourceInput, sourceFacts].map(descriptor),
-    methods: [{id: 'delivery', kind: 'code', description: 'Retained delivery measurements', software: 'Node 24', units: 'components, native cells'}],
-    metrics: [], summaries: [], conclusions: [], stages: {research: 'complete', implementation: 'implemented', geographic_approval: 'not-requested'}, commands: []};
-  const source = {measurement, input, input_file: {path: input.path, commit: 'candidate'}, evaluation_commit: ausNativeEvaluation,
-    vintage: 'archived', fields: Object.keys(ausNativeScalars).map(field => ({id: 'aus-native-' + field, field}))};
-  const config = {version: 1, template: reader.add(prefix + 'template.json', manifest), metric_sources: [source,
-    {measurement: sourceFacts, input: sourceInput, input_file: {path: sourceInput.path, commit: 'candidate'}, evaluation_commit: ausSourceEvaluation,
-      vintage: 'archived', fields: ['components', 'source_compatible'].map(field => ({id: 'aus-source-' + field, field}))}]};
-  return {reader, config, manifest, source, facts};
-}
-
-test('typed evidence transfers actual AUS counts and explicit request/evaluation vintages', () => {
-  const f = evidenceFixture(), manifest = JSON.parse(prepareEvidence(f.config, f.reader)['evidence-quality.json']);
-  for (const [field, value] of Object.entries(ausNativeScalars)) {
-    const metric = manifest.metrics.find(row => row.id === 'aus-native-' + field);
-    assert.equal(metric.value, value);
-    assert.equal(metric.unit, ['assigned_cells', 'removed_cells', 'reassigned_cells', 'candidate_cell_contributions', 'shared_same_owner_cells'].includes(field) ? 'native cells' : 'components');
-    assert.equal(metric.input_sha256, f.source.input.sha256);
-    assert.deepEqual(metric.input_file, f.source.input_file);
-    assert.equal(metric.evaluation_commit, ausNativeEvaluation); assert.equal(metric.vintage, 'archived');
-    assert.deepEqual(manifest.metric_bindings.find(row => row.metric_id === metric.id),
-      {metric_id: metric.id, path: f.source.measurement.path, json_pointer: '/' + field});
-  }
-  assert.equal(manifest.metrics.find(row => row.id === 'aus-source-source_compatible').value, 13);
-  assert.equal(manifest.metrics.find(row => row.id === 'aus-source-components').evaluation_commit, ausSourceEvaluation);
-});
-
-test('typed evidence supports the concrete elapsed/bytes/emitted delivery measurements', () => {
-  const f = evidenceFixture();
-  const values = {elapsed_seconds: 54.003, complete_phase_bytes: 289834589, expected_components_verified: 73,
-    cumulative_native_cells_picked_and_sampled: 1123, stable_owner_controls: 347};
-  const measurement = f.reader.add(prefix + 'measured.json', values);
-  f.manifest.outputs.push({path: measurement.path, bytes: measurement.bytes, sha256: measurement.sha256, hash_kind: 'file-bytes'});
-  f.config.template = f.reader.add(prefix + 'template-extra.json', f.manifest);
-  f.config.metric_sources.push({...f.source, measurement, fields: Object.keys(values).map(field => ({id: field, field}))});
-  const result = JSON.parse(prepareEvidence(f.config, f.reader)['evidence-quality.json']);
-  for (const [field, unit] of Object.entries({elapsed_seconds: 'seconds', complete_phase_bytes: 'bytes', expected_components_verified: 'components',
-    cumulative_native_cells_picked_and_sampled: 'native cells', stable_owner_controls: 'sampled occupied row controls'})) {
-    assert.equal(result.metrics.find(row => row.id === field).unit, unit);
-    assert.equal(result.metrics.find(row => row.id === field).value, values[field]);
-  }
-});
-
-test('typed evidence refuses wrong units/types, missing values and changed consumed/evaluation bindings', () => {
-  for (const mutate of [f => f.source.fields[0].field = 'unknown_cells', f => f.source.fields[0].unit = 'native cells',
-    f => f.source.fields[0].type = 'number', f => f.source.fields.push({...f.source.fields[0]}),
-    f => f.source.evaluation_commit = commit, f => f.source.input_file.path = 'foreign.json',
-    f => f.source.input_file.commit = 'b'.repeat(40), f => f.source.vintage = 'current', f => f.source.fields = []]) {
-    const f = evidenceFixture(); mutate(f); assert.throws(() => prepareEvidence(f.config, f.reader));
-  }
-  for (const value of [undefined, null, '6', true, -1, 0.5, Number.MAX_SAFE_INTEGER + 1]) {
-    const f = evidenceFixture(), facts = {...f.facts, zero_cell_components: value};
-    f.source.measurement = f.reader.add(prefix + 'bad-facts.json', facts);
-    f.manifest.outputs.push({path: f.source.measurement.path, bytes: f.source.measurement.bytes,
-      sha256: f.source.measurement.sha256, hash_kind: 'file-bytes'});
-    f.config.template = f.reader.add(prefix + 'bad-template.json', f.manifest);
-    assert.throws(() => prepareEvidence(f.config, f.reader), /Missing\/invalid measured value/);
-  }
-  const f = evidenceFixture(); f.source.input = f.reader.add(prefix + 'foreign-request.json', {other: true});
-  f.source.input_file.path = f.source.input.path;
-  assert.throws(() => prepareEvidence(f.config, f.reader), /Consumed input differs/);
-  const stale = evidenceFixture(); stale.source.measurement.sha256 = '0'.repeat(64);
-  assert.throws(() => prepareEvidence(stale.config, stale.reader), /missing fixture pin/);
-});
-
-test('evidence CLI authenticates Git inputs and refuses malformed metrics before publication; immutable resume', t => {
-  const root = directory(t), git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
-  git('init'); git('config', 'user.name', 'Fixture'); git('config', 'user.email', 'fixture@example.invalid');
-  const memory = evidenceFixture();
-  for (const pin of [memory.config.template, ...memory.config.metric_sources.flatMap(source => [source.input, source.measurement])])
-    write(root, pin.path, memory.reader.read(pin));
-  write(root, 'baseline.json', jsonBytes({retained: true})); git('add', '.'); git('commit', '-m', 'Pinned fixture');
-  const reader = pinReader(root), head = git('rev-parse', 'HEAD'), config = structuredClone(memory.config);
-  const manifest = memory.manifest; manifest.baseline.commit = head; manifest.baseline.files[0].commit = head;
-  // Actual fixture request descriptors are frozen in the measured bytes above;
-  // the constructor joins their content hashes without relabeling evaluation.
-  write(root, memory.config.template.path, jsonBytes(manifest)); git('add', '.'); git('commit', '-m', 'Pinned template');
-  config.template = reader.pin(git('rev-parse', 'HEAD'), memory.config.template.path);
-  for (const source of config.metric_sources) {
-    source.input = reader.pin(head, source.input.path); source.measurement = reader.pin(head, source.measurement.path);
-  }
-  const script = new URL('../scripts/prepare-delivery-handoff.mjs', import.meta.url).pathname;
-  const run = (destination, ...flags) => JSON.parse(execFileSync(process.execPath,
-    [script, 'evidence', 'config.json', destination, ...flags], {cwd: root, env: {...process.env, GIT_NO_LAZY_FETCH: '1'}, stdio: ['pipe', 'pipe', 'pipe']}).toString());
-  write(root, 'config.json', jsonBytes(config)); const destination = '.cache/delivery-handoff/evidence';
-  assert.equal(run(destination).resumed, false);
-  const original = fs.readFileSync(path.join(root, destination, 'evidence-quality.json'));
-  assert.equal(JSON.parse(original).metrics.find(row => row.id === 'aus-native-zero_cell_components').unit, 'components');
-  assert.equal(run(destination, '--resume').resumed, true);
-  assert.throws(() => run(destination), /Occupied destination/);
-  for (const change of [c => c.metric_sources[0].fields.find(row => row.field === 'zero_cell_components').unit = 'native cells',
-    c => c.metric_sources[0].fields.find(row => row.field === 'native_conflicts').unit = 'native cells',
-    c => c.metric_sources[0].fields[0].field = 'unrecognized', c => c.metric_sources[0].fields[0].type = 'number',
-    c => c.metric_sources[0].measurement.sha256 = '0'.repeat(64)]) {
-    const invalid = structuredClone(config); change(invalid); write(root, 'config.json', jsonBytes(invalid));
-    assert.throws(() => run('.cache/delivery-handoff/refused'));
-    assert.equal(fs.existsSync(path.join(root, '.cache/delivery-handoff/refused')), false);
-    assert.deepEqual(fs.readFileSync(path.join(root, destination, 'evidence-quality.json')), original);
-  }
-});
-
-test('delivery CLI retires review-freeze and queue-submission entry points before any mutation', () => {
+test('delivery CLI refuses retired manifest, review-freeze and queue entry points before mutation', () => {
   const script = fileURLToPath(new URL('../scripts/prepare-delivery-handoff.mjs', import.meta.url));
-  for (const args of [['review', 'absent-config.json', 'absent-destination'],
+  for (const args of [['evidence', 'absent-config.json', 'absent-destination'],
+    ['review', 'absent-config.json', 'absent-destination'],
     ['advance', 'absent-config.json', 'absent-destination', '--submit-queue']]) {
     assert.throws(() => execFileSync(process.execPath, [script, ...args], {
       encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], env: {...process.env, NODE_OPTIONS: '', NODE_PATH: ''}
@@ -807,8 +1065,9 @@ function modernCompositionFixture(t, {mixed = true} = {}) {
     const binding = {version: 1, kind: 'source-target-native-custody-v1',
       source_evidence: f.pin(appendPrefix + 'source-evidence.json'), native_patch: f.pin(appendPrefix + 'native-patch.json')};
     f.save(appendPrefix + 'binding.json', binding); f.save(appendPrefix + 'rule.json', {...binding, kind: 'source-target-native-rule-v1'}); f.commitAll();
-    const constructed = {products: JSON.parse(JSON.stringify({'original-rule-preimage.json': jsonBytes({...binding, kind: 'source-target-native-rule-v1'}),
-      'authority-binding.json': jsonBytes(binding)})), component_ids: [row.component_id], ledger_rows: [row],
+    const constructed = {version:1,kind:'existing-source-target-native-constructor-result',
+      inputs:Object.fromEntries(['source_evidence','native_patch'].map(role=>[role,
+        {commit:binding[role].commit,path:binding[role].path}])), component_ids: [row.component_id], ledger_rows: [row],
       rule_sha256: f.pin(appendPrefix + 'rule.json').sha256, limitations: ['Actual current owner-zero remains separately required.']};
     f.save(appendPrefix + 'constructed-authority.json', constructed); f.commitAll();
     return {version: 1, selector, rule_preimage: f.pin(appendPrefix + 'rule.json'), source_authority: f.pin(appendPrefix + 'binding.json'),
@@ -837,7 +1096,7 @@ for (const mixed of [false, true]) test('late compose and finalize replace moder
   const authority = {policy_id: 'retained-source-literal-additions', policy_version: 1, rule_preimage: f.config.rule_preimage,
     rule_sha256: f.config.rule_preimage.sha256, source_authority: f.config.source_authority};
   assert.deepEqual(registry.entries.find(entry => entry.authority_sha256 === digest(jsonBytes(authority))),
-    {authority_sha256: digest(jsonBytes(authority)), ...authority}, 'existing authority constructor policy/pin contract');
+    {authority_sha256: digest(jsonBytes(authority)), ...authority, completed_constructor:f.config.ledger}, 'original authority identity plus completed output custody');
   for (const entry of f.priorRegistry.entries) assert.deepEqual(registry.entries.find(next => next.authority_sha256 === entry.authority_sha256), entry);
   for (const row of f.priorLedger.rows) assert.deepEqual(ledger.rows.find(next => next.component_id === row.component_id), row);
   for (const name of ['parent_inventory', 'current_rebind', 'current_targets']) assert.deepEqual(ledger[name], f.priorLedger[name]);
@@ -861,12 +1120,20 @@ for (const mixed of [false, true]) test('late compose and finalize replace moder
   const sidecar = JSON.parse(sidecarRaw), originalSidecar = f.r.json(f.r.pin(f.config.selector.commit, JSON.parse(f.accepted['ownership-selection.json']).additive_release.path));
   for (const role of ['base_manifest', 'owner_roster']) assert.deepEqual(sidecar.logical_asset_map[role], originalSidecar.logical_asset_map[role]);
   const inputs = JSON.parse(read('package-inputs.json')), priorInputs = JSON.parse(f.accepted['package-inputs.json']);
-  assert.deepEqual(inputs.inputs.slice(0, priorInputs.inputs.length), priorInputs.inputs);
+  const obsolete = [JSON.parse(f.accepted['ownership-selection.json']).additive_release.path, originalSidecar.runtime_envelope.path, originalSidecar.logical_asset_map.ledger.path, originalSidecar.logical_asset_map.patch.path];
+  const retained = priorInputs.inputs.filter(name => !obsolete.includes(name));
+  assert.deepEqual(inputs.inputs.slice(0, retained.length), retained);
+  assert(obsolete.every(name => !inputs.inputs.includes(name)));
   assert.ok(inputs.inputs.includes(finalConfig.sidecar_output)); assert.ok(!inputs.inputs.some(name => name.endsWith('selected-delivery-expectations.json')));
   assert.equal(JSON.parse(read('selected-delivery-expectations.json')).cumulative_native_cells, mixed ? 5 : 4);
   const roles = JSON.parse(read('package-roles.json')).paths.find(p => p.path === finalConfig.sidecar_output);
   assert.ok(!Object.hasOwn(roles, 'commit')); assert.deepEqual(roles.roles, ['generated final sidecar']);
-  f.save(finalConfig.sidecar_output, sidecarRaw); f.commitAll();
+  assert.deepEqual(fs.readFileSync(path.join(f.root, finalConfig.sidecar_output)), sidecarRaw);
+  assert.deepEqual(fs.readFileSync(path.join(f.root, 'data/ownership-selection.json')), read('ownership-selection.json'));
+  assert.deepEqual(fs.readFileSync(path.join(f.root, '.github/package-inputs.json')), read('package-inputs.json'));
+  for (const pin of [sidecar.authority_registry, sidecar.runtime_envelope, ...Object.values(sidecar.logical_asset_map)])
+    assert.deepEqual(fs.readFileSync(path.join(f.root, pin.path)), f.r.read(pin));
+  f.commitAll();
   const resumed = f.run('finalize', destination, ['--resume'], finalConfig); assert.equal(resumed.status, 0, resumed.stderr);
   const repeated = f.run('finalize', '.cache/delivery-handoff/final-again', [], finalConfig); assert.equal(repeated.status, 0, repeated.stderr);
   for (const name of ['selection-sidecar.json', 'ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json'])
@@ -878,7 +1145,7 @@ test('late modern composition refuses scope, source-contract, patch and occupied
   for (const [change, pattern] of [
     [s => { s.component_id = 'held:fixture'; }, /Foreign or duplicate/],
     [s => { s.row.native_cells = 3; }, /Native component cell count/],
-    [s => { s.native.rows[0].runs[0][2] = 2; }, /ledger intervals differ/],
+    [s => { s.native.rows[0].runs[0][2] = 2; }, /source target\/owner\/receipt/],
     [s => { s.row.pixelIndex = 2; s.row.native_rows[0].runs[0][2] = 2; s.native.rows[0].runs[0][2] = 2; }, /source target\/owner\/receipt/],
     [s => { s.native.rows[0].y = 2; s.row.native_rows[0].y = 2; }, /overlap/],
     [s => { s.source.base_reference.id = 'geography:wrong'; }, /baseline\/contract/],
@@ -886,7 +1153,7 @@ test('late modern composition refuses scope, source-contract, patch and occupied
     [s => { s.source.targets.push({...s.source.targets[0], id: 'source:B', source_family: 'foreign'}); }, /target\/family\/receipt/],
     [s => { const correct = {...s.source.targets[0], id: 'source:B'}; s.source.targets[0].source_receipt_sha256 = 'f'.repeat(64);
       s.source.targets.push(correct); }, /target\/family\/receipt/],
-    [s => { s.native.rows = []; }, /ledger intervals differ/],
+    [s => { s.native.rows = []; }, /source target\/owner\/receipt/],
     [s => { s.row.native_rows[0].runs[0][0] = -1; }, /native-only|native-cell|interval|primitive identity/i],
   ]) {
     const config = f.makeAppend(change), destination = '.cache/delivery-handoff/refused-compose-' + ordinal++;
@@ -905,27 +1172,22 @@ test('late modern composition refuses scope, source-contract, patch and occupied
   }
 });
 
-test('modern composition accepts compatible mapped members and refuses omitted parsed metadata carry', t => {
+test('modern composition accepts compatible mapped members', t => {
   const f = modernCompositionFixture(t);
   const compatible = f.makeAppend(s => s.source.targets.push({...s.source.targets[0], id: 'source:B'}));
   const accepted = f.run('compose', '.cache/delivery-handoff/compatible-members', [], compatible);
   assert.equal(accepted.status, 0, accepted.stderr);
-  const large = f.makeAppend(s => { s.source.retained_metadata = 'x'.repeat(2 * 1024 * 1024); });
-  const config = {...large, preparation_allowance: {phaseBytes: 4 * 1024 * 1024, rssBytes: 256 * 1024 * 1024}};
-  const destination = '.cache/delivery-handoff/refused-metadata-carry', result = f.run('compose', destination, [], config);
-  assert.notEqual(result.status, 0); assert.match(result.stderr, /composition carry exceeds/);
-  assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+
 });
 
-test('generated sidecar refuses foreign/colliding outputs and changed release joins before publication', t => {
+test('generated sidecar refuses foreign/colliding outputs and changed release joins before publication', async t => {
   const f = modernCompositionFixture(t), occupied = f.owned + 'occupied-output.json', sentinel = Buffer.from('existing-sidecar-path-sentinel\n');
   f.save(occupied, sentinel);
-  const config = f.finalizeConfig(composeAuthorities(f.config, f.r)); let ordinal = 0;
+  const config = f.finalizeConfig(await composeAuthorities(f.config, f.r)); let ordinal = 0;
   for (const changed of [
     {...config, sidecar_output: 'coordination/engineering/foreign/sidecar.json'},
     {...config, sidecar_output: f.owned + 'preparation.json'},
     {...config, sidecar_output: f.owned + 'package-inputs.json'},
-    {...config, sidecar_output: f.owned + 'restored-read-roles'},
     {...config, sidecar_output: occupied},
     {...config, sidecar: f.r.pin(f.config.selector.commit, JSON.parse(f.accepted['ownership-selection.json']).additive_release.path)},
     {...config, patch: {...config.patch, sha256: '0'.repeat(64)}},
@@ -952,14 +1214,14 @@ function secondModernDelta(state) {
   state.row.native_rows = structuredClone(state.native.rows); state.row.native_cells = 1;
 }
 
-for (const mixed of [false, true]) test('multiple modern originals compose once with separate custody and unchanged selected baseline' + (mixed ? ' and legacy rows' : ''), t => {
+for (const mixed of [false, true]) test('multiple modern originals compose once with separate custody and unchanged selected baseline' + (mixed ? ' and legacy rows' : ''), async t => {
   const f = modernCompositionFixture(t, {mixed});
   const second = f.makeAppend(secondModernDelta, f.owned + 'second/');
   const config = modernGroups(f.config, [f.config, second]);
-  assert.deepEqual(composeAuthorities(modernGroups(f.config, [f.config]), f.r), composeAuthorities(f.config, f.r),
+  assert.deepEqual(await composeAuthorities(modernGroups(f.config, [f.config]), f.r), await composeAuthorities(f.config, f.r),
     'singleton array preserves existing products byte for byte');
-  const products = composeAuthorities(config, f.r);
-  assert.deepEqual(composeAuthorities({...config, authorities: [...config.authorities].reverse()}, f.r), products,
+  const products = await composeAuthorities(config, f.r);
+  assert.deepEqual(await composeAuthorities({...config, authorities: [...config.authorities].reverse()}, f.r), products,
     'independent originals produce order-independent cumulative bytes');
   const destination = '.cache/delivery-handoff/multiple-compose';
   const run = f.run('compose', destination, [], config); assert.equal(run.status, 0, run.stderr);
@@ -984,11 +1246,14 @@ for (const mixed of [false, true]) test('multiple modern originals compose once 
   assert.equal(finalRead('selected-delivery-expectations.json').cumulative_native_cells, mixed ? 6 : 5);
   const finalSelector = finalRead('ownership-selection.json'); delete finalSelector.additive_release;
   assert.equal(JSON.stringify(finalSelector), JSON.stringify(JSON.parse(f.originalSelector)));
-  assert.deepEqual(finalRead('package-inputs.json').inputs.slice(0, JSON.parse(f.accepted['package-inputs.json']).inputs.length),
-    JSON.parse(f.accepted['package-inputs.json']).inputs);
+  const priorSelector = JSON.parse(f.accepted['ownership-selection.json']), priorSidecar = f.r.json(f.r.pin(f.config.selector.commit, priorSelector.additive_release.path));
+  const obsolete = [priorSelector.additive_release.path, priorSidecar.runtime_envelope.path, priorSidecar.logical_asset_map.ledger.path, priorSidecar.logical_asset_map.patch.path];
+  const retained = JSON.parse(f.accepted['package-inputs.json']).inputs.filter(name => !obsolete.includes(name));
+  assert.deepEqual(finalRead('package-inputs.json').inputs.slice(0, retained.length), retained);
+  assert(obsolete.every(name => !finalRead('package-inputs.json').inputs.includes(name)));
 });
 
-test('multiple modern originals reject mixed/empty groups, duplicate authorities/components and cross-original overlaps', t => {
+test('multiple modern originals reject mixed/empty groups, duplicate authorities/components and cross-original overlaps', async t => {
   const f = modernCompositionFixture(t); let ordinal = 0;
   const second = f.makeAppend(secondModernDelta, f.owned + 'second/');
   const config = modernGroups(f.config, [f.config, second]);
@@ -1004,13 +1269,16 @@ test('multiple modern originals reject mixed/empty groups, duplicate authorities
   const sameEvidence = f.makeAppend(s => {
     s.native.rows = [{y: 3, runs: [[4, 5, 1]]}]; s.row.native_rows = structuredClone(s.native.rows); s.row.native_cells = 1;
   }, f.owned + 'same-source/');
-  refusal(modernGroups(f.config, [f.config, sameEvidence]), /Foreign or duplicate modern component/);
+  const sameLabel = await composeAuthorities(modernGroups(f.config, [f.config, sameEvidence]), f.r);
+  const repeated = JSON.parse(sameLabel['selected-ledger.json']).rows.filter(row => row.component_id === f.r.json(f.config.ledger).component_ids[0]);
+  assert.equal(repeated.length, 2); assert.notEqual(repeated[0].authority_sha256, repeated[1].authority_sha256);
+  assert.deepEqual(repeated.map(row => row.native_cells).sort(), [1, 2]);
   for (const [change, pattern] of [
     [s => { s.native.rows = [{y: 3, runs: [[3, 5, 1]]}]; s.row.native_rows = structuredClone(s.native.rows); s.row.native_cells = 2; }, /overlap/],
     [s => { s.source.native_contract.method = 'wrong'; }, /baseline\/contract/],
     [s => { s.source.base_reference.id = 'geography:wrong'; }, /baseline\/contract/],
     [s => { s.row.source_receipt_sha256 = '0'.repeat(64); }, /source target\/owner\/receipt/],
-    [s => { s.native.rows[0].runs[0][2] = 2; }, /ledger intervals differ/],
+    [s => { s.native.rows[0].runs[0][2] = 2; }, /source target\/owner\/receipt/],
   ]) {
     const next = f.makeAppend(s => { secondModernDelta(s); change(s); }, f.owned + 'bad-' + ordinal + '/');
     refusal(modernGroups(f.config, [f.config, next]), pattern);
@@ -1019,59 +1287,448 @@ test('multiple modern originals reject mixed/empty groups, duplicate authorities
   refusal(badPin, /hash differs/);
 });
 
-test('multiple modern source-evidence carry is aggregate rather than reset per original', t => {
-  const f = modernCompositionFixture(t);
-  const first = f.makeAppend(s => { s.source.retained_metadata = 'a'.repeat(256 * 1024); }, f.owned + 'large-first/');
-  const second = f.makeAppend(s => { secondModernDelta(s); s.source.retained_metadata = 'b'.repeat(256 * 1024); }, f.owned + 'large-second/');
-  const preparation_allowance = {phaseBytes: 5 * 1024 * 1024, rssBytes: 256 * 1024 * 1024};
-  for (const [ordinal, original] of [first, second].entries()) {
-    const run = f.run('compose', '.cache/delivery-handoff/single-budget-' + ordinal, [], {...original, preparation_allowance});
-    assert.equal(run.status, 0, run.stderr);
+
+test('publication refuses nested original-role copies before creating output', t => {
+  const root = directory(t), raw = jsonBytes({original: true});
+  const destination = '.cache/delivery-handoff/refused-nested';
+  assert.throws(() => publish(root, destination, {'package-roles.json': jsonBytes({paths: []}),
+    'restored-read-roles/coordination/engineering/original/source.json': raw}, {}), /flat product filenames/);
+  assert.equal(fs.existsSync(path.join(root, '.cache')), false);
+});
+
+test('flat publication preserves prior completed trees and refuses post-admission mutation', t => {
+  const root = directory(t), destination = '.cache/delivery-handoff/historical';
+  const oldBody = jsonBytes({original: true}), receipt = jsonBytes({historical: true});
+  write(root, destination + '/restored-read-roles/original.json', oldBody);
+  write(root, destination + '/preparation.json', receipt);
+  assert.throws(() => publish(root, destination, {'flat.json': jsonBytes({new: true})}, {}, true), /foreign resumed output inventory/);
+  assert.deepEqual(fs.readFileSync(path.join(root, destination, 'restored-read-roles/original.json')), oldBody);
+  assert.deepEqual(fs.readFileSync(path.join(root, destination, 'preparation.json')), receipt);
+  const products = {'flat.json': jsonBytes({value: 1})};
+  const publishAdmitted = admitPublication(root, '.cache/delivery-handoff/fresh', products, {});
+  products['flat.json'].fill(0);
+  assert.throws(publishAdmitted, /Admitted products changed/);
+  assert.equal(fs.existsSync(path.join(root, '.cache/delivery-handoff/fresh')), false);
+});
+
+test('real package projection retains the provider-adoption leaf and its existing family/member roles',t=>{
+ const f=modernFinalizationFixture(t,{provider:true}),destination='.cache/delivery-handoff/provider';
+ const run=f.run('package',destination);assert.equal(run.status,0,run.stderr);
+ const projection=JSON.parse(fs.readFileSync(path.join(f.root,destination,'package-roles.json')));
+ const matches=projection.paths.filter(pin=>pin.path===f.providerAdoption.path);
+ assert.equal(matches.length,1);assert.equal(matches[0].sha256,f.providerAdoption.sha256);
+ assert.ok(matches[0].roles.includes('source-target adopted provider families'));
+ for(const name of f.consumed)assert.ok(projection.paths.some(pin=>pin.path===name),name);
+ const evidence=structuredClone(f.evidenceBody);evidence.adopted_provider_families.sha256='0'.repeat(64);
+ const failed=f.run('package','.cache/delivery-handoff/provider-refused',[],f.withEvidence(evidence));
+ assert.notEqual(failed.status,0);assert.match(failed.stderr,/hash differs/);
+ assert.equal(fs.existsSync(path.join(f.root,'.cache/delivery-handoff/provider-refused','preparation.json')),false);
+});
+
+
+test('finalizer authenticates and parses a shared cumulative selected ledger only once per invocation',t=>{
+  const f=modernFinalizationFixture(t),reader=f.r;
+  f.config.ledger=f.config.selected_ledger;
+  const selected=reader.read(f.config.selected_ledger),oid=f.config.selected_ledger.git_blob_oid;
+  const read=reader.read,json=reader.json,hash=crypto.createHash,parse=JSON.parse;let reads=0,parses=0,hashes=0;
+  reader.read=pin=>{if(pin.git_blob_oid===oid)reads++;return read(pin);};
+  reader.json=pin=>JSON.parse(reader.read(pin));
+  JSON.parse=(raw,...args)=>{if(Buffer.isBuffer(raw)&&raw.equals(selected))parses++;return parse(raw,...args);};
+  crypto.createHash=(algorithm,...args)=>{
+    const result=hash(algorithm,...args),update=result.update;
+    result.update=function(raw,...rest){
+      if(algorithm==='sha256'&&Buffer.isBuffer(raw)&&raw.equals(selected))hashes++;
+      return update.call(this,raw,...rest);
+    };return result;
+  };syncBuiltinESMExports();
+  try{
+    const products=finalizeDelivery(f.config,reader);
+    assert.equal(JSON.parse(products['selected-delivery-expectations.json']).selected_ledger_sha256,f.config.selected_ledger.sha256);
+    console.log('ACTUAL_SELECTED_LEDGER_WORK',JSON.stringify({reads,parses,hashes}));
+    assert.equal(reads,1);assert.equal(parses,1);assert.equal(hashes,1);
+  }finally{reader.read=read;reader.json=json;JSON.parse=parse;crypto.createHash=hash;syncBuiltinESMExports();}
+});
+
+test('finalizer reuses only its owned rows for conservation and normalized projections',t=>{
+  const f=modernFinalizationFixture(t,{mixed:true});
+  f.config.ledger=f.config.selected_ledger;
+  const raw=f.r.read(f.config.selected_ledger),ledger=JSON.parse(raw),registry=f.r.json(f.config.registry);
+  const rowBytes=jsonBytes(ledger.rows),scopeBytes=jsonBytes(ledger.scope_ids);
+  const complete=new Set([rowBytes.toString(),scopeBytes.toString()]);
+  const expected=finalizeDelivery(f.config,f.r),parse=JSON.parse,from=Buffer.from;
+  let traversals=0,visits=0;const allocations=[];
+  JSON.parse=(body,...args)=>{
+    const value=parse(body,...args);
+    if(Buffer.isBuffer(body)&&body.equals(raw))Object.defineProperty(value.rows,Symbol.iterator,{value:function*(){
+      traversals++;for(let i=0;i<this.length;i++){visits++;yield this[i];}
+    }});
+    return value;
+  };
+  Buffer.from=function(value,...args){
+    if(typeof value==='string'&&complete.has(value))allocations.push(Buffer.byteLength(value));
+    return from.call(this,value,...args);
+  };
+  let actual;
+  try{actual=finalizeDelivery(f.config,f.r);}finally{JSON.parse=parse;Buffer.from=from;}
+  assert.deepEqual(actual,expected,'Every emitted finalizer byte is unchanged by observation');
+  assert.deepEqual(f.r.read(f.config.selected_ledger),raw,'The original selected body is unchanged');
+  t.diagnostic(JSON.stringify({authorities:registry.entries.length,rows:ledger.rows.length,traversals,visits,
+    completeCanonicalAllocations:allocations,rowsBytes:rowBytes.length,scopeBytes:scopeBytes.length}));
+  assert.deepEqual(allocations,[],'No complete rows/scope canonical Buffer is needed to compare the owned snapshot to itself');
+  assert.equal(traversals,3,'Two validation traversals plus one normalized collection');
+  assert.equal(visits,3*ledger.rows.length);
+});
+
+test('public package projection cannot claim the finalizer snapshot or bypass permissive serialization',t=>{
+  const f=modernFinalizationFixture(t,{mixed:true}),ledger=f.r.json(f.config.selected_ledger);
+  const config={...f.config,ledger:f.config.selected_ledger};
+  const reader={...f.r,json(pin){return pin.git_blob_oid===config.selected_ledger.git_blob_oid?ledger:f.r.json(pin);}};
+  const held=ledger.rows.find(row=>row.disposition==='awaiting-evidence');
+  assert.ok(held);
+  const iterate=ledger.rows[Symbol.iterator],authorities=f.r.json(config.registry).entries.length;let traversals=0;
+  Object.defineProperty(ledger.rows,Symbol.iterator,{value:function*(){traversals++;yield* iterate.call(this);}});
+  const expected=packageProjection(config,reader);
+  assert.equal(traversals,authorities+3,'Caller-owned normalized views are still collected at every original boundary');
+  traversals=0;
+  held.ignored_metadata={nonfinite:Infinity,omitted:undefined};
+  assert.deepEqual(packageProjection(config,reader,null,ledger),expected,
+    'Ignored metadata keeps JSON.stringify semantics and a public fourth argument grants no capability');
+  assert.equal(traversals,authorities+3);
+  held.ignored_metadata=1n;
+  assert.throws(()=>packageProjection(config,reader,null,ledger),/BigInt/,
+    'Even the same public object still undergoes complete serialization');
+});
+
+test('public package projection still compares different row and scope views and requires current metadata',t=>{
+  const f=modernFinalizationFixture(t),ledger=f.r.json(f.config.selected_ledger);
+  const config={...f.config,ledger:f.config.selected_ledger};
+  for(const mutate of [value=>{value.rows[0].ignored_metadata='changed';},value=>{value.scope_ids[0]='changed';},
+    value=>{delete value.current_rebind;},value=>{delete value.current_targets;}]){
+    const selected=structuredClone(ledger);mutate(selected);let reads=0;
+    const reader={...f.r,json(pin){return pin.git_blob_oid===config.selected_ledger.git_blob_oid
+      ? ++reads===1?ledger:selected:f.r.json(pin);}};
+    assert.throws(()=>packageProjection(config,reader,null,ledger),/does not conserve/);
   }
-  const config = {...modernGroups(f.config, [first, second]), preparation_allowance};
-  const destination = '.cache/delivery-handoff/multiple-budget-refused', result = f.run('compose', destination, [], config);
-  assert.notEqual(result.status, 0); assert.match(result.stderr, /composition carry exceeds/);
-  assert.equal(fs.existsSync(path.join(f.root, destination)), false);
 });
 
-test('final handoff publishes exact original roles locally with one receipt and exact resume', t => {
-  const root = directory(t), name = 'coordination/engineering/original/source.json', raw = jsonBytes({original: true});
-  const pin = {commit, path: name, mode: '100644', bytes: raw.length, sha256: digest(raw),
-    git_blob_oid: execFileSync('git', ['hash-object', '--stdin'], {input: raw}).toString().trim()};
-  const products = {'package-roles.json': jsonBytes({paths: [pin]}), 'ownership-selection.json': jsonBytes({selected: true}),
-    ['restored-read-roles/' + name]: raw};
-  const destination = '.cache/delivery-handoff/restored', binding = {phase: 'finalize', input: commit};
-  assert.equal(publish(root, destination, products, binding).resumed, false);
-  assert.deepEqual(fs.readFileSync(path.join(root,destination,'restored-read-roles',name)),raw);
-  assert.equal(fs.existsSync(path.join(root,name)),false, 'original repository path is never written');
-  assert.equal(publish(root,destination,products,binding,true).resumed,true);
-  const receipt = JSON.parse(fs.readFileSync(path.join(root,destination,'preparation.json')));
-  assert.deepEqual(Object.keys(receipt.outputs).sort(),Object.keys(products).sort());
-  assert.throws(()=>publish(root,destination,products,{phase:'changed'},true),/bytes\/binding changed/);
-  fs.mkdirSync(path.join(root,destination,'foreign-empty'));
-  assert.throws(()=>publish(root,destination,products,binding,true),/foreign resumed output inventory/);
+test('finalizer retains complete conservation for a distinct caller-owned composed ledger',t=>{
+  const f=modernFinalizationFixture(t,{mixed:true}),json=f.r.json;
+  f.r.json=pin=>{
+    const value=json(pin);
+    if(pin.git_blob_oid===f.config.ledger.git_blob_oid)
+      value.rows.find(row=>row.disposition==='awaiting-evidence').ignored_metadata='changed';
+    return value;
+  };
+  assert.throws(()=>finalizeDelivery(f.config,f.r),/does not conserve/);
 });
 
-test('original role publication refuses unbound or corrupt roles before creating output', t => {
-  for (const kind of ['unbound','corrupt','nonlocal']) {
-    const root=directory(t), raw=jsonBytes({original:true}), name='coordination/engineering/original/source.json';
-    const pin={commit,path:name,mode:'100644',bytes:raw.length,sha256:digest(raw),
-      git_blob_oid:execFileSync('git',['hash-object','--stdin'],{input:raw}).toString().trim()};
-    const products={'package-roles.json':jsonBytes({paths:kind==='unbound'?[]:[pin]}),
-      ['restored-read-roles/'+name]:kind==='corrupt'?Buffer.from('changed'):raw};
-    const destination=kind==='nonlocal'?'coordination/engineering/control/output':'.cache/delivery-handoff/refused';
-    assert.throws(()=>publish(root,destination,products,{}),/authenticated package role|body differs|local delivery output tree/);
-    assert.equal(fs.existsSync(path.join(root,destination)),false);
+test('finalizer caller methods and getters cannot expose its owned snapshot through their receiver',async t=>{
+  const f=modernCompositionFixture(t),config=f.finalizeConfig(await composeAuthorities(f.config,f.r));
+  const expected=finalizeDelivery(config,f.r),seen=new Map(),getterReceivers=[];
+  const receiver=Symbol('caller receiver');
+  const reader={...f.r,[receiver](){return this;},json(pin){
+    assert.equal(this,reader,'Caller JSON method retains its own reader');
+    return JSON.parse(this.read(pin));
+  }};
+  for(const name of ['pin','git','hasPath','descriptor']){
+    const method=f.r[name];
+    const callback=function(...args){
+      seen.set(name,[this,this[receiver]()]);
+      // Each public parsed view can be mutated, but is never the private one.
+      const visible=this.json(config.selected_ledger);
+      visible.rows.find(row=>row.disposition==='awaiting-evidence').ignored_metadata=1n;
+      return method(...args);
+    };
+    callback.bind=()=>{throw Error('A caller-owned bind override is not a binding primitive');};
+    if(name==='pin')Object.defineProperty(reader,name,{enumerable:true,get(){getterReceivers.push(this);return callback;}});
+    else reader[name]=callback;
+  }
+  assert.deepEqual(finalizeDelivery(config,reader),expected,'Public-view mutations cannot change any final output byte');
+  assert.deepEqual([...seen.keys()].sort(),['descriptor','git','hasPath','pin']);
+  for(const references of seen.values())for(const value of references)assert.equal(value,reader);
+  assert.ok(getterReceivers.length>0);
+  for(const value of getterReceivers)assert.equal(value,reader,'Getter evaluation cannot acquire the private wrapper');
+});
+
+
+test('finalizer selected snapshot isolates mutable reader bytes and authenticates anew on the next call',t=>{
+  const f=modernFinalizationFixture(t),reader=f.r;
+  f.config.ledger=f.config.selected_ledger;
+  const raw=reader.read(f.config.selected_ledger),json=reader.json;let changed=false;
+  reader.json=pin=>{
+    if(!changed&&pin.path===f.config.registry.path){raw.fill(0);changed=true;}
+    return json(pin);
+  };
+  const result=finalizeDelivery(f.config,reader);
+  assert.equal(JSON.parse(result['selected-delivery-expectations.json']).selected_ledger_sha256,f.config.selected_ledger.sha256);
+  assert.equal(changed,true);
+  assert.throws(()=>finalizeDelivery(f.config,reader),/Whole body hash differs/);
+});
+
+test('finalizer snapshot does not hide a changed selected-ledger role descriptor',t=>{
+  const f=modernFinalizationFixture(t),reader=f.r;
+  f.config.ledger=f.config.selected_ledger;
+  const json=reader.json;let changed=false;
+  reader.json=pin=>{
+    if(!changed&&pin.path===f.config.registry.path){f.config.ledger.sha256='0'.repeat(64);changed=true;}
+    return json(pin);
+  };
+  assert.throws(()=>finalizeDelivery(f.config,reader),/Whole body hash differs/);
+  assert.equal(changed,true);
+});
+
+test('cumulative snapshot retains coherent changed-row and rebind refusals',t=>{
+  for(const kind of ['rows','rebind']){
+    const f=modernFinalizationFixture(t),r=f.r,sidecar=r.json(f.config.sidecar);
+    const selected=r.json(f.config.selected_ledger),patch=r.json(sidecar.logical_asset_map.patch);
+    const wrapped=r.json(sidecar.runtime_envelope),envelope=wrapped.additiveRelease;
+    if(kind==='rows')selected.rows[0].native_cells++;
+    else selected.current_rebind=f.config.registry;
+    f.save(f.config.selected_ledger.path,selected);f.commitAll();
+    const next=f.pin(f.config.selected_ledger.path);
+    f.config.ledger=next;f.config.selected_ledger=next;
+    patch.ledger_sha256=next.sha256;
+    f.save(sidecar.logical_asset_map.patch.path,patch);f.commitAll();
+    const nextPatch=f.pin(sidecar.logical_asset_map.patch.path);
+    Object.assign(envelope.ledger,{bytes:next.bytes,sha256:next.sha256});
+    Object.assign(envelope.patch,{bytes:nextPatch.bytes,sha256:nextPatch.sha256});
+    f.save(sidecar.runtime_envelope.path,wrapped);f.commitAll();
+    sidecar.runtime_envelope=f.pin(sidecar.runtime_envelope.path);
+    sidecar.logical_asset_map.ledger=next;sidecar.logical_asset_map.patch=nextPatch;
+    f.save(f.config.sidecar.path,sidecar);f.commitAll();f.config.sidecar=f.pin(f.config.sidecar.path);
+    assert.throws(()=>finalizeDelivery(f.config,r),kind==='rows'?/Native component cell count differs/:/metadata joins differ/);
   }
 });
 
 
-test('complete publication namespace rejects flat staging-directory collision before mutation', t => {
-  const root=directory(t), raw=jsonBytes({original:true}), name='coordination/engineering/original/source.json';
-  const pin={commit,path:name,mode:'100644',bytes:raw.length,sha256:digest(raw),
-    git_blob_oid:execFileSync('git',['hash-object','--stdin'],{input:raw}).toString().trim()};
-  const products={'package-roles.json':jsonBytes({paths:[pin]}), 'restored-read-roles':jsonBytes({sidecar:true}),
-    ['restored-read-roles/'+name]:raw};
-  assert.throws(()=>publish(root,'.cache/delivery-handoff/collision',products,{}),/Product file\/directory collision/);
-  assert.equal(fs.existsSync(path.join(root,'.cache')),false);
+test('package roles retain the explicit canonical seam table and exact retained method',t=>{
+  const f=modernFinalizationFixture(t,{seam:true}),destination='.cache/delivery-handoff/seam';
+  const run=f.run('package',destination);assert.equal(run.status,0,run.stderr);
+  const projection=JSON.parse(fs.readFileSync(path.join(f.root,destination,'package-roles.json')));
+  for(const pin of [f.seamViews.pin,f.seamViews.method]){
+    const matches=projection.paths.filter(entry=>entry.path===pin.path);
+    assert.equal(matches.length,1);assert.equal(matches[0].sha256,pin.sha256);
+  }
+  for(const label of ['views','method'])assert.ok(projection.paths.some(entry=>
+    entry.roles.includes('source-target canonical seam '+label)));
+});
+
+test('real package command preserves complete canonical cohort pins and rejects malformed roles',t=>{
+ const f=modernFinalizationFixture(t,{cohort:true});
+ const accepted=f.run('package','.cache/delivery-handoff/cohort-complete');
+ assert.equal(accepted.status,0,accepted.stderr);
+ const output=JSON.parse(fs.readFileSync(path.join(f.root,'.cache/delivery-handoff/cohort-complete/package-roles.json')));
+ for(const pin of [f.evidenceBody.source_membership.cohort_inventory.index,...f.evidenceBody.source_membership.cohort_inventory.parts])
+  assert(output.paths.some(item=>item.path===pin.path),'Missing cohort consumed path '+pin.path);
+ let ordinal=0;
+ for(const mutate of [role=>delete role.index,role=>role.parts=[],role=>role.index.sha256='0'.repeat(64),
+  role=>role.parts[0].sha256='0'.repeat(64),role=>role.extra=role.index]){
+  const body=structuredClone(f.evidenceBody);mutate(body.source_membership.cohort_inventory);
+  const result=f.run('package','.cache/delivery-handoff/cohort-rejected-'+ordinal++,[],f.withEvidence(body));
+  assert.notEqual(result.status,0);assert.match(result.stderr,/cohort|hash differs/);
+ }
+});
+
+test('package closes exact complete negative reference sources without broad pin walking',t=>{
+ const f=modernFinalizationFixture(t,{negativeSources:true}),destination='.cache/delivery-handoff/negative-complete';
+ const accepted=f.run('package',destination);assert.equal(accepted.status,0,accepted.stderr);
+ const output=JSON.parse(fs.readFileSync(path.join(f.root,destination,'package-roles.json'))),
+   original=f.evidenceBody.territorial_exclusion_sources[0].parts[0];
+ assert.ok(output.paths.some(item=>item.path===original.path&&item.sha256===original.sha256
+   &&item.roles.includes('source-target territorial source part')));
+ let ordinal=0;
+ for(const mutate of [sources=>sources[0].parts=[],sources=>sources.push(sources[0]),
+   sources=>sources[0].source_id='',sources=>sources[0].parts[0].sha256='0'.repeat(64),
+   sources=>sources[0].extra=sources[0].parts[0]]){
+  const body=structuredClone(f.evidenceBody);mutate(body.territorial_exclusion_sources);
+  const result=f.run('package','.cache/delivery-handoff/negative-rejected-'+ordinal++,[],f.withEvidence(body));
+  assert.notEqual(result.status,0);assert.match(result.stderr,/territorial|hash differs/);
+ }
+});
+
+test('real package command preserves complete external negative source roles and rejects malformed pins',t=>{
+ const f=modernFinalizationFixture(t,{external:true,cohort:true});
+ const accepted=f.run('package','.cache/delivery-handoff/negative-external-complete');
+ assert.equal(accepted.status,0,accepted.stderr);
+ const output=JSON.parse(fs.readFileSync(path.join(f.root,'.cache/delivery-handoff/negative-external-complete/package-roles.json')));
+ for(const key of ['registry','source'])assert(output.paths.some(item=>item.path===f.evidenceBody.source_membership.negative_natural_earth[key].path));
+ let ordinal=0;
+ for(const mutate of [role=>delete role.registry,role=>delete role.source,role=>role.atoms=[],
+  role=>role.source.sha256='0'.repeat(64),role=>role.registry.sha256='0'.repeat(64),role=>role.extra=role.source]){
+  const body=structuredClone(f.evidenceBody);mutate(body.source_membership.negative_natural_earth);
+  const result=f.run('package','.cache/delivery-handoff/negative-external-rejected-'+ordinal++,[],f.withEvidence(body));
+  assert.notEqual(result.status,0);assert.match(result.stderr,/Natural Earth|hash differs/);
+ }
+});
+
+test('combined external ancestry and complete negative reference sources retain both package roles',t=>{
+ const f=modernFinalizationFixture(t,{external:true,cohort:true,negativeSources:true});
+ const destination='.cache/delivery-handoff/combined-negative-roles',accepted=f.run('package',destination);
+ assert.equal(accepted.status,0,accepted.stderr);
+ const output=JSON.parse(fs.readFileSync(path.join(f.root,destination,'package-roles.json')));
+ for(const pin of [f.evidenceBody.territorial_exclusion_sources[0].parts[0],
+  ...['registry','source'].map(key=>f.evidenceBody.source_membership.negative_natural_earth[key])])
+  assert(output.paths.some(item=>item.path===pin.path&&item.sha256===pin.sha256),'Both complete negative role sets remain consumed');
+});
+
+
+test('successive finalizations replace authenticated cumulative roots and preserve unrelated and shared inputs', async t => {
+  const f=modernCompositionFixture(t), products=await composeAuthorities(f.config,f.r);
+  let config=f.finalizeConfig(products);
+  const unrelated='coordination/engineering/unrelated/selected-ledger.json';
+  const optional='coordination/engineering/unrelated/patch.json';
+  f.save(unrelated,{unrelated:true});f.save(optional,{optional:true});
+  const original=f.r.json(config.package_inputs);
+  original.inputs.push(unrelated,optional);original.optional_inputs.push(optional);
+  f.save('.github/package-inputs.json',original);f.commitAll();config={...config,package_inputs:f.pin('.github/package-inputs.json')};
+  const source = () => {
+    const definition=JSON.parse(fs.readFileSync(path.join(f.root,'.github/package-inputs.json')));
+    return {head:f.git('rev-parse','HEAD'),definition,files:committedPackageInputs(f.root,definition),
+      producer:{kind:PACKAGE_PRODUCER_KIND,workflows:[]},
+      selection:JSON.parse(fs.readFileSync(path.join(f.root,'data/ownership-selection.json')))};
+  };
+  const initial=source(), priorSidecarRaw=fs.readFileSync(path.join(f.root,initial.selection.additive_release.path));
+  let expectedCount;
+  for(let round=0;round<3;round++){
+    const output=finalizeDelivery(config,f.r),definition=JSON.parse(output['package-inputs.json']),selector=JSON.parse(output['ownership-selection.json']);
+    expectedCount??=definition.inputs.length;assert.equal(definition.inputs.length,expectedCount);
+    assert(definition.inputs.includes(unrelated));assert(definition.inputs.includes(optional));assert(definition.optional_inputs.includes(optional));
+    const sidecar=JSON.parse(output[path.posix.basename(config.sidecar_output)]);
+    for(const role of ['base_manifest','owner_roster'])assert(definition.inputs.includes(sidecar.logical_asset_map[role].path));
+    const prior=f.r.json(f.r.pin(config.selector.commit,f.r.json(config.selector).additive_release.path));
+    for(const pin of [prior.runtime_envelope,prior.logical_asset_map.ledger,prior.logical_asset_map.patch])
+      if(!Object.values(sidecar.logical_asset_map).some(p=>p.path===pin.path)&&sidecar.runtime_envelope.path!==pin.path)assert(!definition.inputs.includes(pin.path));
+    f.save(config.sidecar_output,output[path.posix.basename(config.sidecar_output)]);
+    f.save('data/ownership-selection.json',output['ownership-selection.json']);f.save('.github/package-inputs.json',output['package-inputs.json']);f.commitAll();
+    const current=source();
+    const admitted=admitPackageInputTransition(initial,current,{priorSidecarRaw});
+    assert(admitted.removed_selected_inputs.length>0);
+    assert.throws(()=>admitPackageInputTransition(initial,current),/authenticated prior cumulative/);
+    const changed=Buffer.from(priorSidecarRaw);changed[0]^=1;
+    assert.throws(()=>admitPackageInputTransition(initial,current,{priorSidecarRaw:changed}),/authenticated prior cumulative/);
+    const omitted=structuredClone(current);
+    omitted.definition.inputs=omitted.definition.inputs.filter(name=>name!==unrelated);
+    omitted.files=omitted.files.filter(row=>row.path!==unrelated);
+    assert.throws(()=>admitPackageInputTransition(initial,omitted,{priorSidecarRaw}),/not an authenticated prior cumulative role/);
+    const drift=structuredClone(initial);
+    drift.files.find(row=>admitted.removed_selected_inputs.includes(row.path)).oid='0'.repeat(40);
+    assert.throws(()=>admitPackageInputTransition(drift,current,{priorSidecarRaw}),/differs from original source inventory/);
+    const next='coordination/engineering/repeated-'+round+'/';
+    for(const [name,pin] of [['selected-ledger.json',config.selected_ledger],['patch.json',config.patch],['runtime-envelope.json',config.runtime_envelope]])f.save(next+name,f.r.read(pin));
+    f.commitAll();config={...config,selector:f.pin('data/ownership-selection.json'),package_inputs:f.pin('.github/package-inputs.json'),new_prefix:next,sidecar_output:next+'selection-sidecar.json',selected_ledger:f.pin(next+'selected-ledger.json'),patch:f.pin(next+'patch.json'),runtime_envelope:f.pin(next+'runtime-envelope.json')};
+  }
+});
+
+
+test('finalization does not narrow an unrelated accepted directory declaration',async t=>{
+ const f=modernCompositionFixture(t),config=f.finalizeConfig(await composeAuthorities(f.config,f.r));
+ const definition=f.r.json(config.package_inputs),selector=f.r.json(config.selector),prior=f.r.json(f.r.pin(config.selector.commit,selector.additive_release.path));
+ const directory=path.posix.dirname(selector.additive_release.path)+'/';
+ definition.inputs=definition.inputs.filter(p=>!p.startsWith(directory));definition.inputs.push(directory);
+ f.save('.github/package-inputs.json',definition);f.commitAll();
+ const output=finalizeDelivery({...config,package_inputs:f.pin('.github/package-inputs.json')},f.r);
+ assert(JSON.parse(output['package-inputs.json']).inputs.includes(directory));
+});
+
+test('malformed prior cumulative role cannot authorize package input removal',async t=>{
+ const f=modernCompositionFixture(t),config=f.finalizeConfig(await composeAuthorities(f.config,f.r));
+ const selector=f.r.json(config.selector),prior=f.r.json(f.r.pin(config.selector.commit,selector.additive_release.path));
+ prior.logical_asset_map.ledger.path='../unrelated.json';f.save(selector.additive_release.path,prior);f.commitAll();
+ const pin=f.pin(selector.additive_release.path);selector.additive_release={path:pin.path,bytes:pin.bytes,sha256:pin.sha256};
+ f.save('data/ownership-selection.json',selector);f.commitAll();
+ assert.throws(()=>finalizeDelivery({...config,selector:f.pin('data/ownership-selection.json')},f.r),/prior cumulative package roles/);
+});
+
+
+// Real cold object store: no ancestor graph, alternates, native corpus or copied
+// working tree. Only the original fixture repository supplies native metadata
+// and exact-OID Git transport; the production composition and reader run unchanged.
+function coldCompositionReader(t, original, control = {}) {
+  const root = directory(t), git = (...args) => execFileSync('git', ['-C', root, ...args],
+    {encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'], env: {...process.env, GIT_NO_LAZY_FETCH: '1'}}).trim();
+  git('init'); original.git('config', 'uploadpack.allowFilter', 'true');
+  original.git('config', 'uploadpack.allowAnySHA1InWant', 'true');
+  const calls = {commits: [], trees: [], fetches: []};
+  const reader = pinReader(root, {
+    loadTree() { assert.fail('Historical metadata must use native Git'); },
+    execute(command, args, options) {
+      assert.equal(command, 'git');
+      assert.equal(options.env.GIT_NO_LAZY_FETCH, '1');
+      assert.equal(options.env.GIT_NO_REPLACE_OBJECTS, '1');
+      if (args.includes('fetch')) {
+        assert(args.includes('--no-tags') && args.includes('--no-recurse-submodules') && args.includes('--no-auto-maintenance'));
+        const metadata = args.includes('--filter=tree:0');
+        assert(metadata || args.includes('--filter=blob:none'));
+        const ids = options.input.trim().split('\n'); assert(ids.every(id => /^[a-f0-9]{40}$/.test(id)));
+        calls.fetches.push({metadata, ids});
+        if(metadata)(args.includes('--depth=1')?calls.commits:calls.trees).push(...ids);
+        if(metadata&&control.denyMetadata)throw Error('fixture native metadata denied');
+        if (!metadata && control.denyBodies) throw Error('fixture acquisition denied');
+        if (!metadata && control.partial) {
+          control.partial = false;
+          execFileSync(command, args.map(a => a === 'https://github.com/ChengshuLi/WorldAtlas.git' ? 'file://' + original.root : a),
+            {...options, input: ids[0] + '\n'});
+          throw Error('fixture interrupted exact import');
+        }
+        args = args.map(a => a === 'https://github.com/ChengshuLi/WorldAtlas.git' ? 'file://' + original.root : a);
+      }
+      const result=execFileSync(command,args,options);
+      if(control.wrongTree&&args.includes('cat-file')&&args[args.indexOf('cat-file')+1]==='tree'){const changed=Buffer.from(result);changed[0]^=1;return changed;}
+      return result;
+    }
+  });
+  return {root, git, reader, calls, control,
+    inventory: () => git('cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype)')
+      .split('\n').filter(Boolean).map(line => line.split(' '))};
+}
+
+test('cold composition acquires only its complete multi-authority operands and warm reuse fetches nothing', async t => {
+  const f = modernCompositionFixture(t), second = f.makeAppend(secondModernDelta, f.owned + 'second/');
+  const config = modernGroups(f.config, [f.config, second]), consumed = new Map();
+  const read = pin => { consumed.set(pin.git_blob_oid ?? pin.blob, pin); return f.r.read(pin); };
+  const expected = await composeAuthorities(config, {...f.r, acquire: undefined, read, json: pin => JSON.parse(read(pin))});
+  const cold = coldCompositionReader(t, f);
+  assert.deepEqual(cold.inventory(), []);
+  const actual = await composeAuthorities(config, cold.reader);
+  assert.deepEqual(actual, expected);
+  const warm = pinReader(f.root, {loadTree: () => assert.fail('Warm path trees must stay local'), execute(command, args, options) {
+      assert(!args.includes('fetch'), 'A fully warm invocation must not fetch or consult authentication');
+      return execFileSync(command, args, options);
+    }});
+  assert.deepEqual(await composeAuthorities(config, warm), expected);
+  assert.deepEqual(cold.inventory().map(([oid, type]) => { assert.equal(type, 'blob'); return oid; }).sort(), [...consumed.keys()].sort());
+  for (const name of [...f.consumed, f.incidental]) assert.equal(cold.inventory().some(([oid]) => oid === f.pin(name).git_blob_oid), false,
+    'Unconsumed scientific operand must stay cold: ' + name);
+  const bodyFetches = cold.calls.fetches.filter(call => !call.metadata);
+  assert(bodyFetches.some(call => call.ids.length > 4), 'Independent authority operands share an exact-OID batch');
+  assert.equal(new Set(bodyFetches.flatMap(call => call.ids)).size, bodyFetches.reduce((n, call) => n + call.ids.length, 0));
+  assert.equal(new Set(cold.calls.trees).size, cold.calls.trees.length, 'Shared path trees are authenticated once');
+  const fetches = cold.calls.fetches.length;
+  assert.deepEqual(await composeAuthorities(config, cold.reader), expected);
+  assert.equal(cold.calls.fetches.length, fetches);
+  assert.equal(fs.existsSync(path.join(cold.root, '.git/shallow')), false, 'No partial historical origin is installed');
+  assert.equal(fs.existsSync(path.join(cold.root, '.git/objects/info/alternates')), false);
+  const result = publish(cold.root, '.cache/delivery-handoff/composed', actual, {phase: 'compose', config_sha256: digest(jsonBytes(config))});
+  assert.equal(result.resumed, false);
+});
+
+for (const refusal of ['metadata', 'tree', 'bodies', 'hash', 'partial']) test('cold composition refuses ' + refusal + ' failure without a completion receipt', async t => {
+  const f = modernCompositionFixture(t), config = structuredClone(f.config), control = {};
+  if (refusal === 'metadata') control.denyMetadata = true;
+  if (refusal === 'tree') control.wrongTree = true;
+  if (refusal === 'bodies') control.denyBodies = true;
+  if (refusal === 'partial') control.partial = true;
+  if (refusal === 'hash') config.ledger.sha256 = '0'.repeat(64);
+  const cold = coldCompositionReader(t, f, control), destination = '.cache/delivery-handoff/refused';
+  await assert.rejects(async () => publish(cold.root, destination, await composeAuthorities(config, cold.reader), {phase: 'compose'}),
+    /denied|identity|hash differs|acquisition failed|fetch failed/);
+  assert.equal(fs.existsSync(path.join(cold.root, destination)), false);
+  if (refusal === 'partial') {
+    assert.equal(cold.inventory().length, 1, 'The failed import actually retained one owned immutable body');
+    const retained = cold.inventory()[0][0], before = cold.calls.fetches.length;
+    const actual = await composeAuthorities(config, cold.reader);
+    assert.deepEqual(actual, await composeAuthorities(config, f.r));
+    assert(!cold.calls.fetches.slice(before).filter(call => !call.metadata).some(call => call.ids.includes(retained)),
+      'Continuation reuses the verified partial import');
+  }
 });

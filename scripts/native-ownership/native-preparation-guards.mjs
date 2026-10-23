@@ -7,76 +7,9 @@ const digest = raw => createHash('sha256').update(raw).digest('hex');
 const safe = name => typeof name === 'string' && /^[a-zA-Z0-9_./-]+$/.test(name) &&
   name.split('/').every(part => part && part !== '.' && part !== '..');
 
-export function requirePlainExecution({boundedHeap=false}={}) {
-  const bounded=boundedHeap===true&&process.execArgv.length===2
-    &&process.execArgv[0]==='--max-old-space-size=128'
-    &&process.execArgv[1]==='--max-semi-space-size=16';
-  if ((process.execArgv.length&&!bounded) || process.env.NODE_OPTIONS?.trim() || process.env.NODE_PATH?.trim())
+export function requirePlainExecution() {
+  if (process.execArgv.length || process.env.NODE_OPTIONS?.trim() || process.env.NODE_PATH?.trim())
     throw Error('Native preparation requires the reviewed plain Node launch without loaders/preloads');
-}
-
-// Carry only reservation policy between genuine grants, never OS/RSS observations.
-const allowanceContexts = new WeakMap();
-
-// Current operational admission, independent of literal historical receipts.
-// OS availability is already net of resident parent/concurrent memory. Reserve
-// only additional planned concurrent growth and explicit operating headroom for
-// parent/system growth and expansion. Both limits cover a complete process/phase,
-// so credit only measured resident RSS, never historical or on-disk byte counts.
-// Kept in this existing low-level guard to avoid expanding native import rosters.
-export function preparationAllowance({availableBytes=process.availableMemory(),concurrentReservedBytes=Number(process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES??0),currentRssBytes=process.memoryUsage().rss,headroomBytes=(process.env.WORLDATLAS_MEMORY_HEADROOM_BYTES===undefined?undefined:Number(process.env.WORLDATLAS_MEMORY_HEADROOM_BYTES)),phaseBytes,rssBytes}={}) {
-  if (![availableBytes,concurrentReservedBytes,currentRssBytes].every(n=>Number.isSafeInteger(n)&&n>=0)) throw Error('Invalid current preparation resource observations');
-  if (headroomBytes!==undefined&&(!Number.isSafeInteger(headroomBytes)||headroomBytes<=0)) throw Error('Set WORLDATLAS_MEMORY_HEADROOM_BYTES or headroomBytes to a justified positive byte reservation for system growth');
-  const growthBytes=headroomBytes===undefined?Math.floor((availableBytes-concurrentReservedBytes)/2)
-    :availableBytes-concurrentReservedBytes-headroomBytes;
-  if (growthBytes<=0) throw Error('Insufficient current preparation memory after concurrent reservation and safety headroom');
-  const rssLimitBytes=currentRssBytes+growthBytes;
-  if (!Number.isSafeInteger(rssLimitBytes)) throw Error('Invalid current preparation resource observations');
-  rssBytes??=rssLimitBytes;phaseBytes??=rssLimitBytes;
-  if (![phaseBytes,rssBytes].every(n=>Number.isSafeInteger(n)&&n>0)||phaseBytes>rssLimitBytes||rssBytes>rssLimitBytes) throw Error('Requested preparation allowance exceeds current memory admission');
-  const allowance = Object.freeze({phaseBytes,rssBytes});
-  allowanceContexts.set(allowance, {headroomBytes, concurrentReservedBytes});
-  return allowance;
-}
-export function preparationRequestAllowance(value){
-  if(!value||typeof value!=='object'||Array.isArray(value)||Object.keys(value).sort().join(',')!=='phaseBytes,rssBytes'||![value.phaseBytes,value.rssBytes].every(n=>Number.isSafeInteger(n)&&n>0))throw Error('Explicit finite preparation request allowance required');
-  const context = allowanceContexts.get(value);
-  const currentReserved = Number(process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES ?? 0);
-  if (!Number.isSafeInteger(currentReserved) || currentReserved < 0) throw Error('Invalid current preparation resource observations');
-  // Keep the admitted explicit headroom policy, preserving the direct API's
-  // explicit-option precedence. Undefined still uses fresh environment/default.
-  // A new concurrent reservation can tighten the prior reservation floor.
-  const reservations = context ? {
-    concurrentReservedBytes: Math.max(context.concurrentReservedBytes, currentReserved),
-    ...(context.headroomBytes === undefined ? {} : {headroomBytes: context.headroomBytes})
-  } : {};
-  return preparationAllowance({...reservations, phaseBytes:value.phaseBytes,rssBytes:value.rssBytes});
-}
-export function candidateBudget(inputs, {reserveBytes = 131072, reserveDescriptors = 16, allowance} = {}) {
-  // An automatic budget is admitted once at this entry, not through two
-  // non-atomic OS observations. Explicit prior grants still need fresh admission.
-  allowance=allowance===undefined?preparationAllowance():preparationRequestAllowance(allowance);
-  const limitBytes = allowance.phaseBytes, limitDescriptors = 512;
-  if (![limitBytes,allowance.rssBytes].every(n=>Number.isSafeInteger(n)&&n>0)) throw Error('Invalid current preparation allowance');
-  if (!Number.isSafeInteger(reserveBytes) || reserveBytes < 0 || !Number.isInteger(reserveDescriptors) || reserveDescriptors < 0)
-    throw Error('Invalid preparation budget reservation');
-  let bytes = 0, descriptors = 0;
-  function check(){
-    if(process.memoryUsage().rss>=allowance.rssBytes)throw Error('Current preparation RSS allowance exceeded');
-    if(!Number.isSafeInteger(bytes+reserveBytes)||bytes+reserveBytes>limitBytes||descriptors+reserveDescriptors>limitDescriptors)throw Error('Aggregate evidence preparation budget exceeded');
-  }
-  function add(item) {
-    check();
-    if (!Number.isSafeInteger(item?.bytes) || item.bytes < 0 || item.bytes > 32 * 1024 * 1024)
-      throw Error('Invalid whole-file admission');
-    if (!Number.isSafeInteger(bytes+item.bytes+reserveBytes)||bytes + item.bytes + reserveBytes > limitBytes || descriptors + 1 + reserveDescriptors > limitDescriptors)
-      throw Error('Aggregate evidence preparation budget exceeded');
-    bytes += item.bytes; descriptors++;
-  }
-  check();for (const input of inputs) add(input);
-  return {add, allowance, snapshot: () => {check();return {accounted_bytes: bytes, accounted_descriptors: descriptors,
-    reserved_review_bytes: reserveBytes, reserved_review_descriptors: reserveDescriptors, limit_bytes: limitBytes,
-    rss_limit_bytes:allowance.rssBytes,limit_descriptors: limitDescriptors, limits_include_reserve: true};}};
 }
 
 export function originalCandidateAssets(repo, manifest) {
@@ -92,8 +25,8 @@ export function originalCandidateAssets(repo, manifest) {
       throw Error('Original identity asset must be an ordinary blob');
     const blob = tree.split(' ')[2].split('\t')[0];
     const bytes = Number(execFileSync('git', ['-C', repo, 'cat-file', '-s', blob], {encoding: 'utf8'}));
-    if (!Number.isSafeInteger(bytes) || bytes < 0 || bytes > 32 * 1024 * 1024) throw Error('Original identity byte budget exceeded');
-    const raw = execFileSync('git', ['-C', repo, 'cat-file', 'blob', blob], {maxBuffer: 32 * 1024 * 1024});
+    if (!Number.isSafeInteger(bytes) || bytes < 0) throw Error('Invalid original identity byte length');
+    const raw = execFileSync('git', ['-C', repo, 'cat-file', 'blob', blob], {maxBuffer: bytes + 1});
     if (raw.length !== bytes || digest(raw) !== reference.sha256) throw Error('Original identity asset hash differs');
     output[key] = raw;
   }
@@ -120,14 +53,14 @@ export function committedPreparationFiles(repo, commit, names) {
       throw Error('Commit exact ordinary executed files before generation');
     const blob = tree.split(' ')[2].split('\t')[0];
     const count = Number(execFileSync('git', ['-C', root, 'cat-file', '-s', blob], {encoding: 'utf8'}));
-    if (!Number.isSafeInteger(count) || count < 0 || count > 32 * 1024 * 1024)
-      throw Error('Executed code exceeds existing whole-file budget');
+    if (!Number.isSafeInteger(count) || count < 0)
+      throw Error('Invalid executed code byte length');
     const file = path.join(root, name);
     const actualStat = fs.lstatSync(file);
     if (!actualStat.isFile() || fs.realpathSync(file) !== file)
       throw Error('Executed code must be ordinary and inside the repository');
     if (actualStat.size !== count) throw Error('Executed code differs from immutable bootstrap');
-    const original = execFileSync('git', ['-C', root, 'cat-file', 'blob', blob], {maxBuffer: 32 * 1024 * 1024});
+    const original = execFileSync('git', ['-C', root, 'cat-file', 'blob', blob], {maxBuffer: count + 1});
     const actual = fs.readFileSync(file);
     if (actual.length !== count || !actual.equals(original)) throw Error('Executed code differs from immutable bootstrap');
     return {path: name, bytes: actual.length, sha256: digest(actual)};

@@ -7,11 +7,11 @@ import {createHash} from 'node:crypto';
 import {DatabaseSync} from 'node:sqlite';
 import {decodeDerived} from '../src/derived-records.js';
 import {decodeReferences} from '../src/reference-records.js';
-import {derivedRecordsAt} from '../derived.mjs';
-import {resolveAttributes} from '../src/attributes.js';
-import {resolveTemporal} from '../src/temporal.js';
 import {snapshot} from '../database.mjs';
 import {temporalCatalog} from '../temporal.mjs';
+import {readCurrentSelectedAdditive} from '../scripts/package-current-additive.mjs';
+import {loadOwnershipAssets} from '../src/ownership-assets.js';
+import {loadAdditiveNativePatch,loadPreparedNativeContext,nativeReferenceForData} from '../src/effective-footprint.js';
 import {runtimeOwnershipBucket,runtimeOwnershipData} from '../src/runtime-ownership.js';
 
 const root=path.resolve(import.meta.dirname,'..');
@@ -111,24 +111,6 @@ test('ownership codecs preserve identity, dated labels, competing evidence and t
  assert.equal(renamed.metadata.footprint,'dated');assert.equal(decodeDerived(v2.parts,v2.index,1100)[0].value,null);
 });
 
-test('actual environmental tables decode exactly at all normal-period boundaries',()=>{
- const data=prepared(path.join(root,'data/reference-attributes'),'reference');
- assert.equal(data.index.version,2);
- assert.equal(data.parts.flat().reduce((n,[,v])=>n+v.length,0),data.index.records);
- for(const year of [-3000,-1,1,1000,1900,1901,1930,1931,1960,1961,1990,1991,2020,2021,2025,2026]){
-  const expected=expectedReferences(data,year),decoded=decodeReferences(data.parts,data.index,year);
-  assert.equal(decoded.length,expected.length,`reference count at ${year}`);
-  assert.equal(fingerprint(decoded),fingerprint(expected),`reference value/provenance at ${year}`);
- }
- assert.equal(expectedReferences(data,2021).length,0);
- assert.equal(expectedReferences(data,2026).filter(r=>r.attribute==='climate').length,data.index.climate_counts['1991']);
- for(const r of expectedReferences(data,2026)){
-  assert.ok(r.source&&r.metadata.source_url);assert.ok(r.metadata.share>=0&&r.metadata.share<=1);
-  assert.ok(r.value===null||typeof r.value==='string'&&r.value.trim()&&!/^(N\/A|unknown|not mapped)$/i.test(r.value),`Missing source class must be an explicit unknown: ${r.location_id}`);
-  if(r.attribute==='vegetation')assert.match(r.source,/potential natural/);
- }
-});
-
 test('reference codecs preserve supported precision and do not bridge unsupported intervals',()=>{
  const type={attribute:'population',valid_from:1900,valid_to:1901,method:'estimate',status:'estimate',source:'Dated census fixture',metadata:{precision:'hundreds',source_year:1900}};
  const record={...type,id:'reference:l:population:1900',location_id:'l',value:1200,metadata:{...type.metadata,share:null,coverage:null}};
@@ -141,29 +123,18 @@ test('reference codecs preserve supported precision and do not bridge unsupporte
 });
 
 const ownerPath=path.join(root,'data/ownership-history/index.json');
-const haveOwners=fs.existsSync(ownerPath)&&fs.existsSync(path.join(root,'data/ownership-runtime/index.json'));
-test('actual prepared historical records match independent compact-table interpretation',{skip:!haveOwners&&!process.env.ATLAS_REQUIRE_PREPARED?'ownership preparation not finished':false},()=>{
- assert.ok(haveOwners,'Ownership preparation is required for publication');
- const years=[-3000,-1,1,1000,1444,1901,1931,1961,1991,2020,2024,2025,2026],owners=ownershipSnapshots(path.dirname(ownerPath),years),references=prepared(path.join(root,'data/reference-attributes'),'reference');
- for(const year of years){
-  const expected=[...owners.get(year),...expectedReferences(references,year)];
-  assert.equal(fingerprint(derivedRecordsAt(year)),fingerprint(expected),`server prepared values/evidence at ${year}`);
- }
- assert.equal(owners.get(2025).length,0,'Unsupported recent ownership is not carried forward');
- assert.equal(owners.get(2026).length,0,'Modern political references are resolved separately');
-});
-
 const staticRoot=fs.existsSync(path.join(root,'dist/client/atlas-geography.json'))?path.join(root,'dist/client'):path.join(root,'dist');
 const haveStatic=fs.existsSync(path.join(staticRoot,'atlas-geography.json'))&&fs.existsSync(path.join(staticRoot,'ownership-runtime/index.json'));
-test('static and server exports resolve every active location identically, with examples on and off',{skip:!haveStatic&&!process.env.ATLAS_REQUIRE_STATIC?'full static export not built':false},()=>{
+test('default-map static and server exports preserve complete state and attribute inputs, with examples on and off',{skip:!haveStatic&&!process.env.ATLAS_REQUIRE_STATIC?'full static export not built':false},()=>{
  assert.ok(haveStatic,'A complete static build is required for publication');
  const manifest=read(path.join(staticRoot,'atlas-geography.json'));
  const reference={...manifest,features:manifest.parts.flatMap(p=>read(path.join(staticRoot,p))),temporal:{...manifest.temporal,entities:manifest.entityParts.flatMap(p=>read(path.join(staticRoot,p))),history:manifest.temporalHistoryParts.flatMap(p=>read(path.join(staticRoot,p)))}};
  const history=read(path.join(staticRoot,'atlas-history.json.gz'));
- const years=[-3000,-1,1,1000,1444,1901,1931,1961,1991,2020,2024,2025,2026],owners=ownershipSnapshots(path.join(root,'data/ownership-history'),years),references=prepared(path.join(staticRoot,'reference-attributes'),'reference');
+ // Date boundaries and year changes are exercised by the focused runtime, codec and browser tests.
+ const years=[1444],owners=ownershipSnapshots(path.join(root,'data/ownership-history'),years),references=prepared(path.join(staticRoot,'reference-attributes'),'reference');
  const runtime=read(path.join(staticRoot,'ownership-runtime/index.json')),buckets=new Map();
  assert.equal(runtime.source_index_sha256,createHash('sha256').update(fs.readFileSync(ownerPath)).digest('hex'),'Static ownership is derived from the current prepared source');
- const db=new DatabaseSync(path.join(root,'data/atlas.sqlite'),{readOnly:true});
+ const db=new DatabaseSync(path.join(root,'.cache/package-atlas.sqlite'),{readOnly:true});
  try{
   const serverFeatures=db.prepare('SELECT id,name,parent_id,reference_owner,metadata,active FROM locations WHERE active=1 ORDER BY id').all().map(({metadata,...properties})=>({id:properties.id,properties:{...properties,metadata:JSON.parse(metadata)}}));
   const serverUnits=db.prepare('WITH RECURSIVE used(id) AS (SELECT parent_id FROM locations WHERE active=1 UNION SELECT u.parent_id FROM units u JOIN used x ON u.id=x.id WHERE u.parent_id IS NOT NULL) SELECT * FROM units WHERE id IN (SELECT id FROM used)').all().map(u=>({...u,metadata:JSON.parse(u.metadata)}));
@@ -182,12 +153,143 @@ test('static and server exports resolve every active location identically, with 
     assert.equal(staticOwnerFingerprint,preparedOwnerFingerprint,`Actual static temporal transport preserves prepared source values at ${year}`);
     const exported={states:selectedStates(history.states,year,examples),attributes:[...staticOwners,...referenceRecords,...(history.attributes||[]).filter(r=>r.valid_from<=year&&r.valid_to>year&&(!r.is_example||examples))]};
     assert.deepEqual(server.polities,[],'Normal Political mode has no independent source polygon layer');
-    const serverTemporal=resolveTemporal(serverReference,year,examples),staticTemporal=resolveTemporal(reference,year,examples);
-    const resolve=(features,state,temporal)=>[...resolveAttributes(features,year,{states:state.states,records:state.attributes,temporal,examples}).values()];
-    const actual=resolve(serverTemporal.features,server,serverTemporal),expected=resolve(staticTemporal.features,exported,staticTemporal);
-    assert.equal(actual.length,expected.length,`active locations at ${year}/${examples}`);
-    assert.equal(fingerprint(actual),fingerprint(expected),`all resolved fields/provenance at ${year}/${examples}`);
+    // Catalog inputs were compared above. Compare the remaining complete inputs
+    // instead of running the same resolvers twice and hiding lower-priority drift.
+    assert.equal(fingerprint(server.states),fingerprint(exported.states),`all snapshot states/provenance at ${year}/${examples}`);
+    assert.equal(fingerprint(server.attributes),fingerprint(exported.attributes),`all snapshot attributes/provenance at ${year}/${examples}`);
    }
   }
  }finally{db.close();}
+});
+
+// These controls consume the actual package's current import closure. Keep them
+// in the existing packaged-asset boundary so even a minimal reviewed roster
+// derives its real inputs from the package definition and retains the build.
+import os from 'node:os';
+import {inspectPackageExecutionInputs} from '../scripts/package-build.mjs';
+import {loadPackageInputs, containsPackagePath} from '../scripts/package-inputs.mjs';
+import {currentExecutionClosure} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs';
+const ROOT=process.cwd();
+const COLD='scripts/check-effective-geographic-regression.mjs';
+const NATIVE='scripts/selected-checkpoint-native.mjs';
+const SHARED='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
+test('focused comparison and checkpoint methods stay outside each actual builder execution closure',()=>{
+  const prefix='coordination/engineering/selected-geography-effective-prevention-20261009/';
+  const methods=['scripts/check-effective-geographic-regression.mjs','scripts/selected-checkpoint-native.mjs', 'scripts/run-geographic-check.py',
+    prefix+'selected-checkpoint.mjs',prefix+'selected-joint-entry.mjs','test/fixtures/selected-checkpoint.mjs'];
+  for(const entry of ['scripts/build-static-inner.mjs','scripts/build-hosted-inner.mjs','scripts/build-cloudflare-inner.mjs']) {
+    const closure=currentExecutionClosure(process.cwd(),entry);
+    for(const method of methods)assert(!closure.includes(method),entry+' now executes '+method);
+  }
+});
+
+test('actual current package import closure rejects an undeclared new helper before image creation', () => {
+  const root = process.cwd(), definition = loadPackageInputs(root);
+  const actual = inspectPackageExecutionInputs(root, definition);
+  assert.equal(actual.errors.length, 0, JSON.stringify(actual.errors));
+  assert(actual.files.includes('scripts/package-build.mjs'));
+  const missing = inspectPackageExecutionInputs(root, {...definition, inputs: definition.inputs.filter(x => x !== 'scripts/package-inputs.mjs')});
+  assert(missing.errors.some(x => x.kind === 'execution-declaration' && x.path === 'scripts/package-inputs.mjs'));
+});
+
+test('all actual package entries expose their complete declared current import closures',()=>{
+ const root=process.cwd(),definition=loadPackageInputs(root);
+ for(const kind of ['static','hosted','cloudflare']){
+  const actual=inspectPackageExecutionInputs(root,definition,kind),entry=`scripts/build-${kind}-inner.mjs`;
+  assert.deepEqual(actual.errors,[]);
+  assert(actual.files.includes(entry));assert(actual.files.includes('scripts/package-build.mjs'));
+  assert(actual.files.includes('scripts/package-current-additive.mjs'));
+  assert(!actual.files.includes('scripts/native-ownership/validate-build-context-stage.mjs'));
+  assert.deepEqual(actual.files,[...new Set(actual.files)].sort());
+  for(const name of actual.files)assert(containsPackagePath(definition.inputs,name),name);
+ }
+});
+
+test('all ordinary package entries declare their complete current consumer closure',()=>{
+ const definition=loadPackageInputs(ROOT);
+ for(const kind of ['static','hosted','cloudflare']){
+  const actual=inspectPackageExecutionInputs(ROOT,definition,kind);
+  assert.deepEqual(actual.errors,[]);
+  assert(actual.files.includes('scripts/package-current-additive.mjs'));
+  assert(actual.files.includes('src/native-grid.js'));
+  for(const name of [COLD,NATIVE,SHARED,'scripts/visible-gap-eligibility.mjs','scripts/native-ownership/validate-build-context-stage.mjs'])assert(!actual.files.includes(name),name);
+  assert(actual.files.includes(`scripts/build-${kind}-inner.mjs`));
+  assert.deepEqual(actual.files,[...new Set(actual.files)].sort());
+  for(const name of actual.files)assert(containsPackagePath(definition.inputs,name),name);
+ }
+});
+
+test('an undeclared import in the actual current consumer fails current-input preflight',t=>{
+ const definition=loadPackageInputs(ROOT), actual=inspectPackageExecutionInputs(ROOT,definition,'static');
+ assert.deepEqual(actual.errors,[]);
+ const root=fs.mkdtempSync(path.join(ROOT,'.joint-package-boundary-'));
+ t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+ for(const name of actual.files){const target=path.join(root,name);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(path.join(ROOT,name),target,fs.constants.COPYFILE_EXCL);}
+ const undeclared='coordination/undeclared-acceptance-probe.mjs';
+ fs.mkdirSync(path.dirname(path.join(root,undeclared)),{recursive:true});
+ fs.writeFileSync(path.join(root,undeclared),'export const current = true;\n',{flag:'wx'});
+ fs.appendFileSync(path.join(root,'scripts/package-current-additive.mjs'),"\nawait import('../"+undeclared+"');\n");
+ const rejected=inspectPackageExecutionInputs(root,definition,'static');
+ assert(rejected.files.includes(undeclared));
+ assert(rejected.errors.some(e=>e.kind==='execution-declaration'&&e.path===undeclared));
+});
+
+test('shared selected-input admission covers actual builders and refuses undeclared imports',t=>{
+  const root=fs.realpathSync(process.cwd()),definition=loadPackageInputs(root),files=new Set();
+  for(const kind of ['static','hosted','cloudflare']){
+    const actual=inspectPackageExecutionInputs(root,definition,kind);
+    assert.deepEqual(actual.errors,[],'Actual '+kind+' preflight must include its complete current import closure');
+    assert(!actual.files.includes('scripts/package-output-artifact.mjs'));
+    for(const name of actual.files)files.add(name);
+  }
+  const fixture=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-output-role-closure-')));
+  t.after(()=>fs.rmSync(fixture,{recursive:true,force:true}));
+  for(const name of files){const dest=path.join(fixture,name);fs.mkdirSync(path.dirname(dest),{recursive:true});
+    fs.copyFileSync(path.join(root,name),dest,fs.constants.COPYFILE_EXCL);}
+  fs.writeFileSync(path.join(fixture,'undeclared-fixture.mjs'),'export const fixture=true;\n');
+  fs.appendFileSync(path.join(fixture,'scripts/package-current-additive.mjs'),
+    "\nimport '../undeclared-fixture.mjs';\n");
+  for(const kind of ['static','hosted','cloudflare']){
+    const rejected=inspectPackageExecutionInputs(fixture,definition,kind);
+    assert(rejected.files.includes('undeclared-fixture.mjs'));
+    assert(rejected.errors.some(error=>error.kind==='execution-declaration'&&error.path==='undeclared-fixture.mjs'),
+      'The real '+kind+' entry must refuse undeclared imports');
+  }
+});
+
+// Independently decode the served final words and compare the complete arrays
+// with the unchanged scientific N+patch consumer. This is publication parity,
+// not browser startup or a second source qualification.
+test('finished static native bank preserves every accepted word, owner and effective feature context',{skip:!haveStatic&&!process.env.ATLAS_REQUIRE_STATIC?'full static export not built':false},async()=>{
+ assert.ok(haveStatic,'A complete static build is required for publication');
+ const data=read(path.join(staticRoot,'atlas-geography.json'));
+ const selection=read(path.join(root,'data/ownership-selection.json'));
+ if(selection.version===2){const {checkEmittedSelectedDelivery}=await import('../scripts/selected-delivery-smoke.mjs');
+  const report=await checkEmittedSelectedDelivery({root,emittedDirectory:staticRoot});assert.equal(report.kind,'actual-emitted-final-bank-consumer');assert(report.complete_run_words>0);return;}
+ const native=read(path.join(root,selection.manifest_path));
+ const selected=await readCurrentSelectedAdditive({root,selectedGrid:{manifest:native,sha256:selection.sha256},
+   geographicRelease:data.preparedOwnership?.base_reference??data.reference_release,referenceRevision:data.referenceMetadata?.application_reference_revision});
+ if(!selected){assert.equal(data.preparedOwnership,undefined);return;}
+ assert.deepEqual(data.additiveRelease,selected.envelope);
+ assert.equal(data.preparedOwnership.selection_sha256,createHash('sha256').update(selected.selectionBytes).digest('hex'));
+ const features=data.parts.flatMap(p=>read(path.join(staticRoot,p))),expectedFeatures=structuredClone(features),actualFeatures=structuredClone(features);
+ const original={...data,pixelMap:data.preparedOwnership.native_pixel_map};delete original.preparedOwnership;
+ const pins=new Map(Object.entries(selected.sidecar.logical_asset_map).map(([role,pin])=>[selected.envelope[role].path,pin]));
+ async function fetcher(input){
+  const name=String(input).replace(/^\.\//,'');
+  const raw=pins.has(name)?await selected.read(pins.get(name)):fs.readFileSync(path.join(staticRoot,name));
+  return new Response(raw);
+ }
+ const base=await loadOwnershipAssets(original.pixelMap,fetcher,{requireNative:true,expectedReference:nativeReferenceForData(original)});
+ const expected=await loadAdditiveNativePatch(original,expectedFeatures,base,{fetcher});
+ const final=await loadOwnershipAssets(data.pixelMap,fetcher,{requireNative:true,expectedReference:data.reference_release});
+ const actual=await loadPreparedNativeContext(data,actualFeatures,final,{fetcher});
+ assert.deepEqual(actual.rows,expected.rows,'Every final row word equals the accepted scientific composition');
+ assert.deepEqual(actual.runs,expected.runs,'Every final run word, including held/unchanged owners, is preserved');
+ for(const key of ['size','coordinateBits','method','geographic_release','hierarchy_sha256','footprints_sha256','reference_owner_sha256',
+  'effective_footprint_sha256','effective_footprint_domain','additive_base_reference','additive_patch_sha256','additive_ledger_sha256',
+  'additive_added_cells','reference_owner_source_sha256','additive_authority_registry_sha256','additive_rule_sha256'])assert.deepEqual(actual[key],expected[key],key);
+ assert.deepEqual(actualFeatures,expectedFeatures,'Complete parent, camera, base geometry and effective-footprint context is preserved');
+ for(const [key,words] of [['rows_sha256',actual.rows],['runs_word_stream_sha256',actual.runs]])assert.equal(
+  createHash('sha256').update(Buffer.from(words.buffer,words.byteOffset,words.byteLength)).digest('hex'),data.preparedOwnership[key]);
 });

@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "qualified_contribution_commit": "a74a77a60813685c002d11ad6ce5378b25903752",
+  "reviewed_executing_code_commit": "9fa67a901e6202622752e4487d9ffb5a7440b0f5",
+  "actual_executing_input_commit": "0a719c4a1e6981a0778a9df56360d08d5d2a5643",
+  "qualified_cells": 1,
+  "original_repair_keys": 1,
+  "original_conflict_keys": 0,
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "a74a77a60813685c002d11ad6ce5378b25903752",
+        "path": "coordination/engineering/indonesia-stateonly1-20261016/authority/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "3e3d109bed91892ec57c292c9717fe7d262442ab",
+        "bytes": 698,
+        "sha256": "88c7c782bb4bc8c91bad4edbd8fb3e8fc2d3430b53be2b505346a35df99ce51c"
+      },
+      "source_authority": {
+        "commit": "a74a77a60813685c002d11ad6ce5378b25903752",
+        "path": "coordination/engineering/indonesia-stateonly1-20261016/authority/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "c9a5a172f369e6a118f665677b6ac3870500b676",
+        "bytes": 701,
+        "sha256": "25a71cf09ce080b003c4806759be48e699508537241a2bf1989325b82990de72"
+      },
+      "ledger": {
+        "commit": "a74a77a60813685c002d11ad6ce5378b25903752",
+        "path": "coordination/engineering/indonesia-stateonly1-20261016/authority/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "38571698a0063bcbde67df6a2011dc49d3b35083",
+        "bytes": 13554,
+        "sha256": "70d5a1c40fc019c980eec5cc5c250a592cb8ee54ff0dfe1e58a6b35683247480"
+      },
+      "native_patch": {
+        "bytes": 55,
+        "commit": "0a719c4a1e6981a0778a9df56360d08d5d2a5643",
+        "git_blob_oid": "3973e9d942562f327d84488e15b7226f746eff85",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-stateonly1-20261016/candidate-native-patch.json",
+        "sha256": "dd30cef6319491a6ff2c13a6d47f337b0c0785ff3010c7f119d86b72cfa85495"
+      }
+    }
+  ],
+  "literal_keyset": {
+    "commit": "5d0a0716f52ed28610e2d547afcdcff49daf60c8",
+    "path": "coordination/engineering/indonesia-stateonly1-20261016/qualified1-owner-y-x.jsonl",
+    "mode": "100644",
+    "git_blob_oid": "7b4ab99c45e118a1fef2433e73cfc08e13d3daf1",
+    "bytes": 22,
+    "sha256": "cb92842bc15eef46243a352799f119f2ad7b4c253dcf5da53cdaa9a4932898c0"
+  },
+  "original_request_to_native_owner_join": [
+    {
+      "original_request_id": "repair:23115:130105:213977",
+      "original_requested_owner": 23115,
+      "qualified_native_owner": 23115,
+      "y": 130105,
+      "x": 213977,
+      "qualified_target_id": "gb:IDN:ADM2:22746128B82886709098386"
+    }
+  ],
+  "adopted_typed_and_restore_input_pins": [
+    {
+      "commit": "a74a77a60813685c002d11ad6ce5378b25903752",
+      "path": "coordination/engineering/indonesia-stateonly1-20261016/adopted-source-choice.json",
+      "mode": "100644",
+      "git_blob_oid": "7a015f53a53c6d7a5eae67810401305ac60bd188",
+      "bytes": 996,
+      "sha256": "4a4978541d97f674f55047069f75ffe24b6602e6cf78d194eb69ed89efcba6f8"
+    },
+    {
+      "commit": "a74a77a60813685c002d11ad6ce5378b25903752",
+      "path": "coordination/engineering/indonesia-stateonly1-20261016/territorial-applicability.json",
+      "mode": "100644",
+      "git_blob_oid": "86f2a666ee20f91dc93cbbcedf7154d16b6eae18",
+      "bytes": 1776,
+      "sha256": "3e58107ea9a194111dcaad11af21bd9e414cf4cba0a81a8fda2ce6cab36c1f87"
+    },
+    {
+      "commit": "a74a77a60813685c002d11ad6ce5378b25903752",
+      "path": "coordination/engineering/indonesia-stateonly1-20261016/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "8a91a70a3d7cf9b87b9b1c0bbcb694e71b059fd8",
+      "bytes": 16323183,
+      "sha256": "a57ef692a09ea666b2ea17aef5002bab0b89da1784bf7abc25c5628218a4aa37"
+    },
+    {
+      "commit": "a74a77a60813685c002d11ad6ce5378b25903752",
+      "path": "coordination/engineering/indonesia-stateonly1-20261016/candidate-native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "3973e9d942562f327d84488e15b7226f746eff85",
+      "bytes": 55,
+      "sha256": "dd30cef6319491a6ff2c13a6d47f337b0c0785ff3010c7f119d86b72cfa85495"
+    },
+    {
+      "commit": "a74a77a60813685c002d11ad6ce5378b25903752",
+      "path": "coordination/engineering/indonesia-stateonly1-20261016/retained-original-negative-contexts.json",
+      "mode": "100644",
+      "git_blob_oid": "e330f52338b3fc55f028518e5fa3208a97f60334",
+      "bytes": 1083,
+      "sha256": "44937e810d5e56721b5ced03cfe1635b194e53361a3e999a346e2bb98c748c08"
+    },
+    {
+      "commit": "a74a77a60813685c002d11ad6ce5378b25903752",
+      "path": "coordination/engineering/indonesia-stateonly1-20261016/independent-source-choice-review.json",
+      "mode": "100644",
+      "git_blob_oid": "dec5163388c7fa41a8b59fdcac709df1f8b0853d",
+      "bytes": 3270,
+      "sha256": "13bca5d1dc9c4965c53bc1eb3d5de8ca4e1808facc44091e3b7e7b85652b27bc"
+    }
+  ],
+  "actual_execution": {
+    "commit": "a74a77a60813685c002d11ad6ce5378b25903752",
+    "path": "coordination/engineering/indonesia-stateonly1-20261016/authority.actual-execution.json",
+    "mode": "100644",
+    "git_blob_oid": "5a8a6708549e31c05b46d03302834afbeb193760",
+    "bytes": 715,
+    "sha256": "ed31291d4473547e120b83e20856ffb029bb31f42c458c31e9085cfadf3d96e8"
+  },
+  "accepted_current_owner_zero_proof": {
+    "commit": "a74a77a60813685c002d11ad6ce5378b25903752",
+    "path": "coordination/engineering/indonesia-stateonly1-20261016/current-owner-zero-proof.json",
+    "mode": "100644",
+    "git_blob_oid": "1605bdedc414833cfec8af2a6ee87c976a5eb6c3",
+    "bytes": 7746,
+    "sha256": "ce4880cc9b657fcb56636b7bf077410c1010d80fce25dd6abf78c4dccde2e519"
+  },
+  "stock_qualified_cells": 1,
+  "ledger_rows": 1,
+  "retained_complete_negative_operands": 165,
+  "actual_typed_negative_contacts": 1,
+  "whole_source_and_physical_producer_replays": 0,
+  "selector_changed": false,
+  "frozen967_changed": false,
+  "accepted_native_credit": 0,
+  "limits": [
+    "The exact state-only source choice is separate from the original20 fine-shared choices and original48/provider15 prepared sets.",
+    "Sarawak coarse ADM1/government-state observations remain genuine contrary contextual evidence; no fine governmental crosswalk or sovereignty claim.",
+    "Current native base owner-zero proof is reused only with exact unchanged accepted base and selected target bytes; fresh whole accepted285582 patch has no hit.",
+    "Prepared967 has no overlap, but is not accepted and is not modified.",
+    "Final current competition/conservation, distinct output review, emitted consumer and accepted subsequent selected delivery remain required."
+  ],
+  "original_request_to_native_owner_join_pin": {
+    "commit": "5d0a0716f52ed28610e2d547afcdcff49daf60c8",
+    "path": "coordination/engineering/indonesia-stateonly1-20261016/original1-request-to-native-owner.json",
+    "mode": "100644",
+    "git_blob_oid": "3a3d7968bf1ebe32facd24acdf90227aa68ef5c4",
+    "bytes": 244,
+    "sha256": "5d206ef66ee314d590e69bd5f3514e001a4b4882580129005395d6203a7b1275"
+  },
+  "portable_metadata_correction": "The initial unreviewed portable index declared20 bytes for its22-byte literal key file. This bounded correction derives the full immutable pin from actual Git bytes; scientific quartet and execution are unchanged."
+}

@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "kind": "estonia-original-residual-selected-owner-reconciliation-v1",
+  "package_id": "gb-EST-ADM2--repair-evaluation",
+  "data_commit": "a4390854c013c8891b187556ac4498888ee33633",
+  "code_commit": "a4390854c013c8891b187556ac4498888ee33633",
+  "original_scope": {
+    "cells": 34461,
+    "intervals": 9065,
+    "owners": 90,
+    "land_cells": 32510,
+    "inland_water_cells": 1951,
+    "native_blocks": [
+      18,
+      19
+    ]
+  },
+  "selected_owner_observation": {
+    "path": "residual-disposition-001/current-selected-owner-observation.json.gz",
+    "kind": "literal-selected-owner-observation-v1",
+    "query_count": 34461,
+    "query_sha256": "297dea3beb1787b9ba2503a206440030f1e224b2fac143fe2a753f0c4c77342a",
+    "original_intervals_sha256": "ca78032f5d30f8274a4627836c39521110babf5ee4197173738ae8c3db655a6a",
+    "base_nonzero": 0,
+    "accepted_additive_owner_nonzero": 30621,
+    "effective_owner_nonzero": 30621,
+    "effective_owner_zero": 3840,
+    "overlaps": 0,
+    "compressed_bytes": 279574,
+    "compressed_sha256": "d91993df4eac28efca346328053a6a44f10253e5f410ac27208edff27bb00937",
+    "decoded_bytes": 11520172,
+    "decoded_sha256": "6ea0e1bac4479729f2ae0f27d3eca8e18ce7273a6d4620e98eab3552ea7ff7d6"
+  },
+  "held_roster": {
+    "path": "coordination/engineering/estonia-native-repair-20261017/qualified-native-inputs-001/held-original.json",
+    "sha256": "0460d3659bf4a5d3606e3b0006b14a9d8bfcbd8d01965321cab752c15cf5500f",
+    "rows": 559,
+    "expanded_exact_keys": 3840
+  },
+  "accounting": {
+    "path": "coordination/engineering/estonia-native-repair-20261017/accounting-001/original-scope-disposition.json",
+    "sha256": "e67f44cbce0c27c1d0882106c59cb813654c7135f76cd8a668020911d85422e2",
+    "sha256_payload": {
+      "original_cells": 34461,
+      "original_intervals": 9065,
+      "original_owners": 90,
+      "supported_cells": 30621,
+      "held_cells": 3840,
+      "prior_source_fitness_held_cells": 2672,
+      "identity_territorial_hold_overlap": 0,
+      "supported_owners": 82,
+      "wholly_held_owners": 8
+    }
+  },
+  "source_fitness": {
+    "path": "coordination/engineering/estonia-native-repair-20261017/source-fitness-001/source-fitness-assessment.json",
+    "sha256": "eef176f3f7807cf6d1325339e3e732dc1be13c345b8231316dd9f2dcf66eee99"
+  },
+  "exact_key_reconciliation": {
+    "observation_keys": 34461,
+    "held_roster_keys": 3840,
+    "unheld_observed_keys": 30621,
+    "held_key_mismatches": 0,
+    "held_keys_with_nonzero_effective_owner": 0,
+    "unheld_keys_with_zero_effective_owner": 0,
+    "held_keys_with_overlap": 0,
+    "all_base_owners_zero": true
+  },
+  "held_reason_counts": {
+    "retained_source_fitness:named merged municipality footprint contradiction": 1526,
+    "retained_source_fitness:pre-represented-year municipal identity contradiction": 1146,
+    "territorial_exclusion_cells": 1168
+  },
+  "held_owner_counts": {
+    "18935": 45,
+    "18952": 259,
+    "18963": 31,
+    "18976": 67,
+    "18996": 14,
+    "19003": 1526,
+    "19017": 2,
+    "19022": 201,
+    "19028": 1,
+    "19036": 1,
+    "19047": 1101,
+    "19050": 188,
+    "19066": 49,
+    "19098": 252,
+    "19116": 22,
+    "19127": 27,
+    "19128": 53,
+    "19132": 1
+  },
+  "disposition": {
+    "status": "proposed_unresolved_unaccepted",
+    "accepted": false,
+    "accepted_repair_cells": 0,
+    "accepted_exception_cells": 0,
+    "new_repair_credit": 0,
+    "new_exception_credit": 0,
+    "selected_owner_changes": 0,
+    "package_complete": false
+  },
+  "limits": [
+    "The observation is literal selected-product state, not source or physical qualification.",
+    "The proposed unresolved disposition does not award accepted exception or repair credit.",
+    "No contemporary legal boundary, current applicability, sovereignty, whole-cell physical fitness, or regional publication approval is claimed.",
+    "The observation retains base and additive ownership separately; no base/patch overlap occurs."
+  ]
+}

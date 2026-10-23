@@ -1,0 +1,19 @@
+# GUM native authority output 001
+
+This is the stock `native-authority` constructor output from the committed source-evidence v2 and the unchanged full original 139-key native patch. It follows the stock contract in `docs/DELIVERY_HANDOFF.md`: the command accepts the source-evidence and native-patch locators. Its config is version 1 and binds only those two required inputs; the separate selected-owner receipt is retained as companion evidence below, not represented as a third stock constructor input.
+
+## Exact input bindings
+
+- Source evidence: `coordination/engineering/gum-original-repair-20261021/source-applicability-002/generated/source-evidence.json`, commit `019c3d0b3373821ff7b8a40c7c7607403553bc11`, blob `d02320cd70269a8cf8329ed614f6ff23f6c24d6e`, 49,451 bytes, SHA-256 `160d43d3f62e941698b51af9d87f62867a6fea9c3c8112de9efe9ae0079e5496`.
+- Native patch: `coordination/engineering/gum-original-repair-20261021/source-evidence-001/native-requested-patch.json`, commit `44601c86cb6b805a66ec0aba6860f2d24610ef38`, blob `46d246321d266d1764febab32faf13192c955251`, 10,230 bytes, SHA-256 `95168d142276959f5cf9222d66aae378a78619e51e2334a983524f7b78e00689`.
+- Territorial applicability packet referenced by the source evidence: `coordination/engineering/gum-original-repair-20261021/source-applicability-001/territorial-applicability.json`, commit `fa627f64fcdefdb36d199889793bc674e7938cd3`, blob `9ac5393fb19e13f0bd9e00b84c9b009a3de98ca8`, 180,490 bytes, SHA-256 `3cbfa368cad92b187727440d531f316cc0bcd3679e6b6be4335c7fa2ecc83508`.
+- Current selected-owner observation (companion, not a direct constructor input): `coordination/engineering/gum-original-repair-20261021/current-owner-observation-2bfc64ad.json`, commit `8dfe03dc20bce90fb3f1af057748702aebbe569e`, blob `57a08aedb658f6a21705514d748cd4a99860cac0`, 49,975 bytes, SHA-256 `c160556709c76d8f8928c0e902c52acb89cdfe8924617cef1ada359761c6772`. It records 139 exact queried keys, query SHA-256 `4494d3e6b69211b135e3158e9175d5986c2f2fccc9e91f9c38c463208c9fdcf4`, selector commit `2bfc64ad6c622fd4e9c5f5f4cf763db22828e940`, no owner change/qualification, and the original interval hash `3e15e92cd13028e708ba40677c180447fb2f053df05817ea819a4c4ac9eb9d4c`.
+- Physical witness in the source-evidence input: whole-target support at `coordination/engineering/gum-original-repair-20261021/physical-001/whole-target-support.json`, commit `8dfe03dc20bce90fb3f1af057748702aebbe569e`, blob `8f1822133b543b5489fe363487cbcaa088188f8f`, 174,711 bytes, SHA-256 `7ce82dbbb1bf150ded93dbe6253226a42477dc3094a7cea8713a31d333947d3b`.
+
+## Result and limits
+
+The stock command exited 0 and reported 139 qualified native cells. `constructor-result.json` contains one owner-7117 ledger row and one component ID, with 139 native cells. This is a constructor result, not accepted repair, final selected-output conservation, or credit. The companion owner receipt remains a separate zero-owner observation; it is not promoted into the constructor's input set.
+
+The whole-target physical comparison reports both missing and extra GSHHG reconstruction flags for Santa Rita (`77769853B26973637010941`), Piti (`77769853B27536991093250`), Yigo (`77769853B33377803133936`), and Umatac (`77769853B97114790292533`); nine other source targets have neither flag. These remain target-level reconstruction differences, not per-key physical clearance or current land/water truth.
+
+The applicability interpretation is limited to the 269 exact retained native-center contacts with the two Guam-labeled USA operands on the listed GUM member keys. It relies on exact Census 2018 state/county-equivalent identity and 19 exact-name Census 2021 subdivision joins; it does not establish sovereignty, title, legal authority, or boundary equality. Source vintages and license labels remain catalogue metadata claims. No owner, acceptance, or credit change is asserted.

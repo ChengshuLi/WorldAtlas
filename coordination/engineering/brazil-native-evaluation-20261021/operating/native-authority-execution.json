@@ -1,0 +1,37 @@
+{
+  "started_at": "2026-10-21T04:35:29.809287+00:00",
+  "code_commit": "737b4e01c3d1f721a1df175f350bf75c16bbc5ba",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "native-authority",
+    "coordination/engineering/brazil-native-evaluation-20261021/config/native-authority-001.json",
+    "coordination/engineering/brazil-native-evaluation-20261021/native-authority-001"
+  ],
+  "cwd": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/00ea0af393560806a40a3afe4a73936ad68205d8dfd9001f0807b9334511f129/work",
+  "runtime": {
+    "node": "v24.19.0",
+    "git": "git version 2.52.0",
+    "node_sha256": "bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12",
+    "git_sha256": "9dae295c1a4ffae4ee772e6205fcf22b26e1bfeeb5ee98f278b5139bda7ca22f",
+    "git_exec_path": "/usr/local/libexec/git-core"
+  },
+  "launch_note": "Initial launcher assertion caught inherited NODE_PATH before invoking native code. Plain launch removes that global module search override and retains local installed dependencies. NODE_OPTIONS was absent.",
+  "status": "completed",
+  "exit_code": 1,
+  "elapsed_seconds": 28.373655421019066,
+  "finished_at": "2026-10-21T04:35:58.182941+00:00",
+  "destination_exists": false,
+  "native-authority.stdout.log": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "native-authority.stderr.log": {
+    "bytes": 57,
+    "sha256": "3b6807991e627d4d508471ab608e604fdf745d8de093438d96fc066f3bfdcf57"
+  },
+  "native-authority.time.log": {
+    "bytes": 152,
+    "sha256": "da48b6c3908683cc872b86db2480b9de92a54683be1211dece7d66dbc853baa4"
+  }
+}

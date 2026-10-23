@@ -1,0 +1,9 @@
+{
+  "phase": "compose",
+  "attempt": "001",
+  "exit_code": 1,
+  "error": "Complete nonempty modern authority pin groups required",
+  "destination_exists": false,
+  "cause": "Authority groups were locators rather than complete ordinary descriptors; no output created.",
+  "correction": "Existing pinReader derived complete descriptors; compose 002 and finalize 001 succeeded without scientific input or predicate changes."
+}

@@ -1,0 +1,1510 @@
+{
+  "package_id": "gb-ZAF-ADM3--repair-evaluation",
+  "original_interval_read_commit": "bfacb7ace398d4eafbca2b5db41870627e6d9454",
+  "accepted_selection_commit": "bfacb7ace398d4eafbca2b5db41870627e6d9454",
+  "original_class_counts": {
+    "land": 4804
+  },
+  "original_cells": 4804,
+  "original_intervals": 2542,
+  "original_owners": 68,
+  "accepted_original_owner_cells": 4777,
+  "proposed_documented_exceptions": 27,
+  "different_owner_intersections": [],
+  "original_key_sha256": "9318d881c0f0b973a78facd21575dd6b653f976d472154b3731beb4c8bc9a8b6",
+  "accepted_original_key_sha256": "036fd3653fe224fcfeda1d1f1e8395254a4896d5a9e5f0b92b94c6fb5f9b5629",
+  "proposed_exception_key_sha256": "b4995c18905ebd12c8d70b5bc99d6dcf5502aa7ad361c2ff89a3ec3f88071605",
+  "original_equals_requested_patch": true,
+  "partition_exhaustive_disjoint": true,
+  "exception_records": [
+    {
+      "y": 148833,
+      "x": 150793,
+      "owner": 49328,
+      "source_feature_indices": [
+        9156,
+        66249,
+        66300,
+        66394
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 9156,
+          "family_index": 48,
+          "source_id": "gb:BWA:ADM1:57670837B77729612727439",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Central District",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66249,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B37104984973577",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Limpopo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66300,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B68910643198214",
+          "ordinal": 46,
+          "owners": [],
+          "name": "Waterberg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66394,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B88632116880655",
+          "ordinal": 88,
+          "owners": [
+            49328
+          ],
+          "name": "Lephalale",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-BWA",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 148833,
+      "x": 150794,
+      "owner": 49328,
+      "source_feature_indices": [
+        9156,
+        66249,
+        66300,
+        66394
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 9156,
+          "family_index": 48,
+          "source_id": "gb:BWA:ADM1:57670837B77729612727439",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Central District",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66249,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B37104984973577",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Limpopo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66300,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B68910643198214",
+          "ordinal": 46,
+          "owners": [],
+          "name": "Waterberg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66394,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B88632116880655",
+          "ordinal": 88,
+          "owners": [
+            49328
+          ],
+          "name": "Lephalale",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-BWA",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 148833,
+      "x": 150795,
+      "owner": 49328,
+      "source_feature_indices": [
+        9156,
+        66249,
+        66300,
+        66394
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 9156,
+          "family_index": 48,
+          "source_id": "gb:BWA:ADM1:57670837B77729612727439",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Central District",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66249,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B37104984973577",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Limpopo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66300,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B68910643198214",
+          "ordinal": 46,
+          "owners": [],
+          "name": "Waterberg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66394,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B88632116880655",
+          "ordinal": 88,
+          "owners": [
+            49328
+          ],
+          "name": "Lephalale",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-BWA",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 149917,
+      "x": 145914,
+      "owner": 49322,
+      "source_feature_indices": [
+        9160,
+        66252,
+        66304,
+        66329
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 9160,
+          "family_index": 48,
+          "source_id": "gb:BWA:ADM1:57670837B51384475500083",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Kgalagadi District",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66252,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B51294388644125",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Nothern Cape",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66304,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B49450251729649",
+          "ordinal": 50,
+          "owners": [],
+          "name": "Z F Mgcawu",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66329,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B86009182191517",
+          "ordinal": 23,
+          "owners": [
+            49322
+          ],
+          "name": "Dawid Kruiper",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-BWA",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 150102,
+      "x": 146004,
+      "owner": 49322,
+      "source_feature_indices": [
+        9160,
+        66252,
+        66304,
+        66329
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 9160,
+          "family_index": 48,
+          "source_id": "gb:BWA:ADM1:57670837B51384475500083",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Kgalagadi District",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66252,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B51294388644125",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Nothern Cape",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66304,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B49450251729649",
+          "ordinal": 50,
+          "owners": [],
+          "name": "Z F Mgcawu",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66329,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B86009182191517",
+          "ordinal": 23,
+          "owners": [
+            49322
+          ],
+          "name": "Dawid Kruiper",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-BWA",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 150140,
+      "x": 148114,
+      "owner": 49297,
+      "source_feature_indices": [
+        9160,
+        66251,
+        66268,
+        66373
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 9160,
+          "family_index": 48,
+          "source_id": "gb:BWA:ADM1:57670837B51384475500083",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Kgalagadi District",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66251,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B85643022077130",
+          "ordinal": 6,
+          "owners": [],
+          "name": "North West",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66268,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B1265322146951",
+          "ordinal": 14,
+          "owners": [],
+          "name": "Dr Ruth Segomotsi Mompati",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66373,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B79703818366198",
+          "ordinal": 67,
+          "owners": [
+            49297
+          ],
+          "name": "Kagisano/Molopo",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-BWA",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 150394,
+      "x": 146126,
+      "owner": 49322,
+      "source_feature_indices": [
+        9160,
+        66252,
+        66304,
+        66329
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 9160,
+          "family_index": 48,
+          "source_id": "gb:BWA:ADM1:57670837B51384475500083",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Kgalagadi District",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66252,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B51294388644125",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Nothern Cape",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66304,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B49450251729649",
+          "ordinal": 50,
+          "owners": [],
+          "name": "Z F Mgcawu",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66329,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B86009182191517",
+          "ordinal": 23,
+          "owners": [
+            49322
+          ],
+          "name": "Dawid Kruiper",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-BWA",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 150518,
+      "x": 149521,
+      "owner": 49226,
+      "source_feature_indices": [
+        9159,
+        66469
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 9159,
+          "family_index": 48,
+          "source_id": "gb:BWA:ADM1:57670837B18017563073821",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Southern District",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66469,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B47394950220829",
+          "ordinal": 163,
+          "owners": [
+            49226
+          ],
+          "name": "Ratlou",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-BWA",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 150623,
+      "x": 146229,
+      "owner": 49322,
+      "source_feature_indices": [
+        9160,
+        66252,
+        66304,
+        66329
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 9160,
+          "family_index": 48,
+          "source_id": "gb:BWA:ADM1:57670837B51384475500083",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Kgalagadi District",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66252,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B51294388644125",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Nothern Cape",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66304,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B49450251729649",
+          "ordinal": 50,
+          "owners": [],
+          "name": "Z F Mgcawu",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66329,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B86009182191517",
+          "ordinal": 23,
+          "owners": [
+            49322
+          ],
+          "name": "Dawid Kruiper",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-BWA",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 150626,
+      "x": 146230,
+      "owner": 49322,
+      "source_feature_indices": [
+        9160,
+        66252,
+        66304,
+        66329
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 9160,
+          "family_index": 48,
+          "source_id": "gb:BWA:ADM1:57670837B51384475500083",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Kgalagadi District",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66252,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B51294388644125",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Nothern Cape",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66304,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B49450251729649",
+          "ordinal": 50,
+          "owners": [],
+          "name": "Z F Mgcawu",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66329,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B86009182191517",
+          "ordinal": 23,
+          "owners": [
+            49322
+          ],
+          "name": "Dawid Kruiper",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-BWA",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 150627,
+      "x": 146230,
+      "owner": 49322,
+      "source_feature_indices": [
+        9160,
+        66252,
+        66304,
+        66329
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 9160,
+          "family_index": 48,
+          "source_id": "gb:BWA:ADM1:57670837B51384475500083",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Kgalagadi District",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66252,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B51294388644125",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Nothern Cape",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66304,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B49450251729649",
+          "ordinal": 50,
+          "owners": [],
+          "name": "Z F Mgcawu",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66329,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B86009182191517",
+          "ordinal": 23,
+          "owners": [
+            49322
+          ],
+          "name": "Dawid Kruiper",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-BWA",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 150629,
+      "x": 146231,
+      "owner": 49322,
+      "source_feature_indices": [
+        9160,
+        66252,
+        66304,
+        66329
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 9160,
+          "family_index": 48,
+          "source_id": "gb:BWA:ADM1:57670837B51384475500083",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Kgalagadi District",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66252,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B51294388644125",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Nothern Cape",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66304,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B49450251729649",
+          "ordinal": 50,
+          "owners": [],
+          "name": "Z F Mgcawu",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66329,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B86009182191517",
+          "ordinal": 23,
+          "owners": [
+            49322
+          ],
+          "name": "Dawid Kruiper",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-BWA",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 150630,
+      "x": 146231,
+      "owner": 49322,
+      "source_feature_indices": [
+        9160,
+        66252,
+        66304,
+        66329
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 9160,
+          "family_index": 48,
+          "source_id": "gb:BWA:ADM1:57670837B51384475500083",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Kgalagadi District",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66252,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B51294388644125",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Nothern Cape",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66304,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B49450251729649",
+          "ordinal": 50,
+          "owners": [],
+          "name": "Z F Mgcawu",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66329,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B86009182191517",
+          "ordinal": 23,
+          "owners": [
+            49322
+          ],
+          "name": "Dawid Kruiper",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-BWA",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 150631,
+      "x": 146231,
+      "owner": 49322,
+      "source_feature_indices": [
+        9160,
+        66252,
+        66304,
+        66329
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 9160,
+          "family_index": 48,
+          "source_id": "gb:BWA:ADM1:57670837B51384475500083",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Kgalagadi District",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66252,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B51294388644125",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Nothern Cape",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66304,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B49450251729649",
+          "ordinal": 50,
+          "owners": [],
+          "name": "Z F Mgcawu",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66329,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B86009182191517",
+          "ordinal": 23,
+          "owners": [
+            49322
+          ],
+          "name": "Dawid Kruiper",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-BWA",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 150974,
+      "x": 146171,
+      "owner": 49322,
+      "source_feature_indices": [
+        9160,
+        66252,
+        66304,
+        66329
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 9160,
+          "family_index": 48,
+          "source_id": "gb:BWA:ADM1:57670837B51384475500083",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Kgalagadi District",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66252,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B51294388644125",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Nothern Cape",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66304,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B49450251729649",
+          "ordinal": 50,
+          "owners": [],
+          "name": "Z F Mgcawu",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66329,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B86009182191517",
+          "ordinal": 23,
+          "owners": [
+            49322
+          ],
+          "name": "Dawid Kruiper",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-BWA",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 150976,
+      "x": 146170,
+      "owner": 49322,
+      "source_feature_indices": [
+        9160,
+        66252,
+        66304,
+        66329
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 9160,
+          "family_index": 48,
+          "source_id": "gb:BWA:ADM1:57670837B51384475500083",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Kgalagadi District",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66252,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B51294388644125",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Nothern Cape",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66304,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B49450251729649",
+          "ordinal": 50,
+          "owners": [],
+          "name": "Z F Mgcawu",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66329,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B86009182191517",
+          "ordinal": 23,
+          "owners": [
+            49322
+          ],
+          "name": "Dawid Kruiper",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-BWA",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 150978,
+      "x": 146169,
+      "owner": 49322,
+      "source_feature_indices": [
+        9160,
+        66252,
+        66304,
+        66329
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 9160,
+          "family_index": 48,
+          "source_id": "gb:BWA:ADM1:57670837B51384475500083",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Kgalagadi District",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66252,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B51294388644125",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Nothern Cape",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66304,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B49450251729649",
+          "ordinal": 50,
+          "owners": [],
+          "name": "Z F Mgcawu",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66329,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B86009182191517",
+          "ordinal": 23,
+          "owners": [
+            49322
+          ],
+          "name": "Dawid Kruiper",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-BWA",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 150979,
+      "x": 146169,
+      "owner": 49322,
+      "source_feature_indices": [
+        9160,
+        66252,
+        66304,
+        66329
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 9160,
+          "family_index": 48,
+          "source_id": "gb:BWA:ADM1:57670837B51384475500083",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Kgalagadi District",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66252,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B51294388644125",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Nothern Cape",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66304,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B49450251729649",
+          "ordinal": 50,
+          "owners": [],
+          "name": "Z F Mgcawu",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66329,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B86009182191517",
+          "ordinal": 23,
+          "owners": [
+            49322
+          ],
+          "name": "Dawid Kruiper",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-BWA",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 151389,
+      "x": 154571,
+      "owner": 49256,
+      "source_feature_indices": [
+        45695,
+        66248,
+        66295,
+        66372
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 45695,
+          "family_index": 223,
+          "source_id": "gb:MOZ:ADM1:27363107B47421408423272",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Maputo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66248,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B26311534340602",
+          "ordinal": 3,
+          "owners": [],
+          "name": "KwaZulu-Natal",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66295,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B87808740966359",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Umkhanyakude",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66372,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B5837125139106",
+          "ordinal": 66,
+          "owners": [
+            49256
+          ],
+          "name": "Jozini",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-MOZ",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 151400,
+      "x": 155033,
+      "owner": 49321,
+      "source_feature_indices": [
+        45695,
+        66248,
+        66295,
+        66503
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 45695,
+          "family_index": 223,
+          "source_id": "gb:MOZ:ADM1:27363107B47421408423272",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Maputo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66248,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B26311534340602",
+          "ordinal": 3,
+          "owners": [],
+          "name": "KwaZulu-Natal",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66295,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B87808740966359",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Umkhanyakude",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66503,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B85816100363009",
+          "ordinal": 197,
+          "owners": [
+            49321
+          ],
+          "name": "Umhlabuyalingana",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-MOZ",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 151400,
+      "x": 155034,
+      "owner": 49321,
+      "source_feature_indices": [
+        45695,
+        66248,
+        66295,
+        66503
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 45695,
+          "family_index": 223,
+          "source_id": "gb:MOZ:ADM1:27363107B47421408423272",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Maputo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66248,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B26311534340602",
+          "ordinal": 3,
+          "owners": [],
+          "name": "KwaZulu-Natal",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66295,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B87808740966359",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Umkhanyakude",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66503,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B85816100363009",
+          "ordinal": 197,
+          "owners": [
+            49321
+          ],
+          "name": "Umhlabuyalingana",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-MOZ",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 151401,
+      "x": 155028,
+      "owner": 49321,
+      "source_feature_indices": [
+        45695,
+        66248,
+        66295,
+        66503
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 45695,
+          "family_index": 223,
+          "source_id": "gb:MOZ:ADM1:27363107B47421408423272",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Maputo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66248,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B26311534340602",
+          "ordinal": 3,
+          "owners": [],
+          "name": "KwaZulu-Natal",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66295,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B87808740966359",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Umkhanyakude",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66503,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B85816100363009",
+          "ordinal": 197,
+          "owners": [
+            49321
+          ],
+          "name": "Umhlabuyalingana",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-MOZ",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 151401,
+      "x": 155029,
+      "owner": 49321,
+      "source_feature_indices": [
+        45695,
+        66248,
+        66295,
+        66503
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 45695,
+          "family_index": 223,
+          "source_id": "gb:MOZ:ADM1:27363107B47421408423272",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Maputo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66248,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B26311534340602",
+          "ordinal": 3,
+          "owners": [],
+          "name": "KwaZulu-Natal",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66295,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B87808740966359",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Umkhanyakude",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66503,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B85816100363009",
+          "ordinal": 197,
+          "owners": [
+            49321
+          ],
+          "name": "Umhlabuyalingana",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-MOZ",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 151402,
+      "x": 155024,
+      "owner": 49321,
+      "source_feature_indices": [
+        45695,
+        66248,
+        66295,
+        66503
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 45695,
+          "family_index": 223,
+          "source_id": "gb:MOZ:ADM1:27363107B47421408423272",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Maputo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66248,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B26311534340602",
+          "ordinal": 3,
+          "owners": [],
+          "name": "KwaZulu-Natal",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66295,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B87808740966359",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Umkhanyakude",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66503,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B85816100363009",
+          "ordinal": 197,
+          "owners": [
+            49321
+          ],
+          "name": "Umhlabuyalingana",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-MOZ",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 151403,
+      "x": 155019,
+      "owner": 49321,
+      "source_feature_indices": [
+        45695,
+        66248,
+        66295,
+        66503
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 45695,
+          "family_index": 223,
+          "source_id": "gb:MOZ:ADM1:27363107B47421408423272",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Maputo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66248,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B26311534340602",
+          "ordinal": 3,
+          "owners": [],
+          "name": "KwaZulu-Natal",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66295,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B87808740966359",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Umkhanyakude",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66503,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B85816100363009",
+          "ordinal": 197,
+          "owners": [
+            49321
+          ],
+          "name": "Umhlabuyalingana",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-MOZ",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 151404,
+      "x": 146828,
+      "owner": 49322,
+      "source_feature_indices": [
+        9160,
+        66304,
+        66329
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 9160,
+          "family_index": 48,
+          "source_id": "gb:BWA:ADM1:57670837B51384475500083",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Kgalagadi District",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66304,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B49450251729649",
+          "ordinal": 50,
+          "owners": [],
+          "name": "Z F Mgcawu",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66329,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B86009182191517",
+          "ordinal": 23,
+          "owners": [
+            49322
+          ],
+          "name": "Dawid Kruiper",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-BWA",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 151404,
+      "x": 155014,
+      "owner": 49321,
+      "source_feature_indices": [
+        45695,
+        66248,
+        66295,
+        66503
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 45695,
+          "family_index": 223,
+          "source_id": "gb:MOZ:ADM1:27363107B47421408423272",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Maputo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66248,
+          "family_index": 360,
+          "source_id": "gb:ZAF:ADM1:76434192B26311534340602",
+          "ordinal": 3,
+          "owners": [],
+          "name": "KwaZulu-Natal",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66295,
+          "family_index": 361,
+          "source_id": "gb:ZAF:ADM2:47623444B87808740966359",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Umkhanyakude",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 66503,
+          "family_index": 362,
+          "source_id": "gb:ZAF:ADM3:15628383B85816100363009",
+          "ordinal": 197,
+          "owners": [
+            49321
+          ],
+          "name": "Umhlabuyalingana",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "ZAF-MOZ",
+      "native_repair_credit": 0
+    }
+  ],
+  "new_native_repairs": 0,
+  "accepted_disposition_credit": 0,
+  "status": "proposed; independent substantive review and accepted integration required",
+  "accepted_original_class_counts": {
+    "land": 4777
+  },
+  "current_selection_identity_checked_at": "bfacb7ace398d4eafbca2b5db41870627e6d9454"
+}

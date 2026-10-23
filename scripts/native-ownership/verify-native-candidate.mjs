@@ -71,7 +71,7 @@ if(reference.root!=='repository' || reference.role!=='immutable-normative-rule-i
    reference.path!=='coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz' ||
    reference.commit!==manifest.provenance.evaluation_commit)
   throw Error('Unknown normative table reference');
-const encoded=execFileSync('git',['-C',repo,'show',reference.commit+':'+reference.path],{maxBuffer:32*1024*1024});
+const encoded=execFileSync('git',['-C',repo,'show',reference.commit+':'+reference.path],{maxBuffer:reference.bytes+1});
 const raw=gunzipSync(encoded,{maxOutputLength:inputs.manifest.size*8});
 if(encoded.length!==reference.bytes || digest(encoded)!==reference.sha256 ||
    raw.length!==inputs.manifest.size*8 || digest(raw)!==NATIVE_CANONICAL_LATITUDE_SHA256)

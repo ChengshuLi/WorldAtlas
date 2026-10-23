@@ -1,0 +1,77 @@
+{
+  "package_id": "gb-TON-ADM1--physical-interpretation",
+  "primary_source": "gb:TON:ADM1",
+  "source_family_index": 329,
+  "category": "physical-interpretation",
+  "native_cells": 1984,
+  "land_cells": 0,
+  "inland_water_cells": 0,
+  "source_relative_cells": 1984,
+  "interval_segments": 754,
+  "owners": [
+    42236,
+    42237,
+    42238,
+    42239,
+    42240
+  ],
+  "source_features": [
+    58432,
+    58433,
+    58434,
+    58435,
+    58436
+  ],
+  "source_families": [
+    329
+  ],
+  "native_blocks": [
+    34,
+    35,
+    36
+  ],
+  "provinces": [
+    "framework:province:eua:237244c6da44",
+    "framework:province:ha-apai:e88847494ddc",
+    "framework:province:niuas:6e2e18552131",
+    "framework:province:tongatapu:a388b5003bd7",
+    "framework:province:vava-u:2054ce027a75"
+  ],
+  "location_count": 5,
+  "source_feature_count": 5,
+  "locality_count": 5,
+  "cost": {
+    "primary_source_decoded_bytes": 34754,
+    "all_required_source_decoded_bytes": 34754,
+    "primary_full_source_raster_measured_seconds": 0.067,
+    "source_interval_segments": 754,
+    "maximum_native_rows_per_execution_frame": 4096,
+    "observed_global_census_peak_rss_bytes": 884973568
+  },
+  "evidence": {
+    "selection": "ownership-binding.json",
+    "lineage": "lineage.json",
+    "territorial_source_catalogue": "retained-source-catalogue.json",
+    "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+    "source_features": "source-feature-roster.json",
+    "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+    "physical": "physical-unassigned-summary.json",
+    "source_domain_transform": []
+  },
+  "work": {
+    "question": "Interpret unique territorial candidates outside the retained GSHHG land/inland-water classes using existing coast/river/local source evidence and source vintages.",
+    "completion": "Classify each interval with a reusable source interpretation or an explicit unresolved question. Physical-mask disagreement alone does not reject a source-backed river/location assignment.",
+    "priority": 4
+  },
+  "execution": {
+    "command": "node source-batch-intervals.mjs gb-TON-ADM1--physical-interpretation OUTPUT_DIRECTORY",
+    "output_columns": [
+      "y",
+      "start",
+      "end",
+      "candidate_owner_indices",
+      "source_feature_indices",
+      "physical_class"
+    ]
+  }
+}

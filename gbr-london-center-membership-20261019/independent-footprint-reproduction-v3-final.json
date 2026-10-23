@@ -1,0 +1,231 @@
+{
+  "category_counts": {
+    "ambiguous": 2,
+    "contained": 530,
+    "intersecting": 108,
+    "zero": 0
+  },
+  "comparison_to_final_v2": {
+    "all_categories_contacts_flags_and_areas_match": true,
+    "area_absolute_tolerance": 1e-06,
+    "keys_compared": 640,
+    "maximum_area_absolute_delta": 9.5367431640625e-07,
+    "mismatch_count": 0
+  },
+  "inputs": {
+    "feature_count": 33,
+    "footprint_v2_sha256": "70bc2c544d38c2d34ed0702f0f19a450f20588177cd83312660f7156db459d7d",
+    "held_original_sha256": "16cf23393c3d1ac4ec15f97dc68a8d57d822f41a29be778e7bf694a08198b25e",
+    "key_count": 640,
+    "projected_grid_width": 262166,
+    "source_gbr_adm2_compressed_sha256": "2c2d33d04a7a50d2cdccae6d3d1f76ff7132555bf6b49ce71220324f8218b981",
+    "source_gbr_adm2_decoded_sha256": "df8cc6a80583bd621e09b0750d16c17019009d48921e745cb5058f46f63b8b54",
+    "source_scope_assessment_sha256": "312fa9855c4f47e489f37332d4fa614faefb1f462ed4f630e7e733dd4f4da760",
+    "footprint_v2_path": "gbr-london-full-cell-footprints-v2.json"
+  },
+  "interpretation": "Geometric source-polygon footprint comparison only. It does not establish current applicability, physical qualification, legal authority, or repair/exception acceptance. Package accepted/held counts and credit are unchanged.",
+  "method": "Independent Python standard-library implementation directly compared with final footprint v2. Projects all source coordinates to the pinned grid, clips rings to each unit square for area (outer less holes), determines contact with closed-cell segment/vertex checks, checks all four corners against polygon outer/hole parity, and rejects whole-cell containment if any polygon ring enters the open cell interior. This covers holes, edge-only touches, and boundary crossings.",
+  "mismatches": [],
+  "per_feature_counts": {
+    "gb:GBR:ADM2:9080712B13607306368601": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 1,
+      "positive_overlap_cells": 1
+    },
+    "gb:GBR:ADM2:9080712B25883423000924": {
+      "boundary_only_cells": 0,
+      "contained_cells": 47,
+      "keys_with_any_contact": 66,
+      "positive_overlap_cells": 66
+    },
+    "gb:GBR:ADM2:9080712B26905607212870": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B27244151555615": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B29790766461311": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B31505825113523": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B32800787628045": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 1,
+      "positive_overlap_cells": 1
+    },
+    "gb:GBR:ADM2:9080712B3334907750367": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B39473788331099": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B40540283796062": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B42809460048540": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B44623990435361": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B45194275403121": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B48606994457952": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B49045247202114": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B52245663238426": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B53792364084436": {
+      "boundary_only_cells": 0,
+      "contained_cells": 339,
+      "keys_with_any_contact": 378,
+      "positive_overlap_cells": 378
+    },
+    "gb:GBR:ADM2:9080712B54935279696040": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B54972646687738": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B56158297313901": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B62294642180343": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B6382316371033": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B64588414247228": {
+      "boundary_only_cells": 0,
+      "contained_cells": 144,
+      "keys_with_any_contact": 195,
+      "positive_overlap_cells": 195
+    },
+    "gb:GBR:ADM2:9080712B6991151074246": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B71536097625899": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B81123650494794": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B85229688010924": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B85959270461063": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B89177385119631": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B98331752183955": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "gb:GBR:ADM2:9080712B98999290586969": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 1,
+      "positive_overlap_cells": 1
+    },
+    "gb:GBR:ADM2:9080712B99403255709140": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    },
+    "natural-earth:adm1:GBR-4809": {
+      "boundary_only_cells": 0,
+      "contained_cells": 0,
+      "keys_with_any_contact": 0,
+      "positive_overlap_cells": 0
+    }
+  },
+  "report_id": "gbr-london-640-independent-footprint-reproduction-v3",
+  "comparison_scope_note": "The compared v2 file is an additive provenance correction of physical artifact references only; its footprint geometry, contact classifications, and numeric outcomes are unchanged from the exact report originally checked."
+}

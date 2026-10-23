@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { syncBuiltinESMExports } from 'node:module';
 import { mkdtemp, mkdir, writeFile, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
@@ -38,16 +40,17 @@ function fixture() {
   return { hierarchy, locations, reports, worldReview: { territories, policy_crosswalk }, policies, frozen, migrations: { retiredLocations: new Set(), createdLocations: new Set(), retiredGroups: new Set(), createdGroups: new Set() }, closure: { locations: new Map(locations.map(r => [r.id, { status: 'open', footprint_sha256: r.footprint_sha256 }])), groups: new Map(hierarchy.map(r => [r.id, { status: 'open' }])), policy_crosswalk }, expectedCounts: { locations: 6, groups: 30, reference_owner_groups: 6, policy_profiles: 6 } };
 }
 
-async function fixtureRepository(t) {
+async function fixtureRepository(t,{twoParts=false}={}) {
   const root = await mkdtemp(join(tmpdir(), 'worldatlas-semantic-followup-')); t.after(() => rm(root, { recursive: true, force: true }));
   const data = fixture();
   const put = async (path, value) => { const p = join(root, path); await mkdir(dirname(p), { recursive: true }); const raw = typeof value === 'string' ? value : JSON.stringify(value); await writeFile(p, path.endsWith('.gz') ? gzipSync(raw, { mtime: 0 }) : raw); };
   const geometryRaw = '{"type":"Polygon","coordinates":[[[1.0,0.0],[2.0,0.0],[1.0,1.0],[1.0,0.0]]]}';
   const features = data.locations.map(r => `{"id":${JSON.stringify(r.id)},"properties":${JSON.stringify({ id: r.id, name: r.name, parent_id: r.parent_id, reference_owner: r.owner, metadata: {} })},"geometry":${geometryRaw}}`);
-  await put('data/geography/part-0.json', `{"type":"FeatureCollection","features":[${features.join(',')}]}`);
-  await put('data/hierarchy.json', data.hierarchy); await put('data/world-index.json', { parts: ['geography/part-0.json'] });
+  const partNames=twoParts?['geography/part-0.json','geography/part-1.json']:['geography/part-0.json'];
+  for(const [i,name]of partNames.entries())await put('data/'+name, `{"type":"FeatureCollection","features":[${(twoParts?features.slice(i*3,i*3+3):features).join(',')}]}`);
+  await put('data/hierarchy.json', data.hierarchy); await put('data/world-index.json', { parts: partNames });
   await put('data/world-review.json', data.worldReview); await put('data/location-policy.json', { countries: data.policies }); await put('data/administrative-sources.json', {});
-  const input_sha256 = Object.fromEntries(await Promise.all(['data/hierarchy.json', 'data/world-index.json', 'data/geography/part-0.json'].map(async path => [path, hash(await readFile(join(root, path)))])));
+  const input_sha256 = Object.fromEntries(await Promise.all(['data/hierarchy.json', 'data/world-index.json', ...partNames.map(name=>'data/'+name)].map(async path => [path, hash(await readFile(join(root, path)))])));
   const groupHashes = new Map(data.reports.flatMap(r => r.groups.map(g => [g.id, g.footprint_sha256])));
   await put('data/global-semantic-closure.json.gz', { input_sha256: Object.fromEntries(Object.entries(input_sha256).map(([path, digest]) => [path.slice(5), digest])), locations: data.locations.map(r => ({ id: r.id, status: 'open', footprint_sha256: r.footprint_sha256 })), groups: data.hierarchy.map(r => ({ id: r.id, status: 'open', footprint_sha256: groupHashes.get(r.id) })), policy_crosswalk: data.worldReview.policy_crosswalk });
   for (const report of data.reports) { await put(LEDGERS[report.continent], { ...report, input_sha256 }); await put(`data/geographic-decisions/${report.continent.toLowerCase().replaceAll(' ', '-')}.json`, data.frozen[report.continent]); }
@@ -134,4 +137,41 @@ test('source-parent measurements require current footprint context and actual me
   report.source_evidence.original_parent_geometry_diagnostics['Africa:continent'].original_parent_candidates[0].member_matches[0].id = 'location:1';
   await writeFile(path, gzipSync(JSON.stringify(report), { mtime: 0 }));
   await assert.rejects(validateSemanticFollowup(root, { expectedCounts }), /references a nonmember/);
+});
+
+test('actual semantic validation checks complete current member fields and literal compact shards',async t=>{
+ const {projectCurrentMemberEdges}=await import('../scripts/prepare-macro-review-projection.mjs');
+ const {footprintHash}=await import('../scripts/check-prepared.mjs');
+ const {root,expectedCounts}=await fixtureRepository(t,{twoParts:true}),indexRaw=await readFile(join(root,'data/world-index.json'));
+ const parts=await Promise.all(JSON.parse(indexRaw).parts.map(async name=>({path:'data/'+name,mode:'100644',raw:await readFile(join(root,'data/'+name))}))),features=parts.flatMap(part=>JSON.parse(part.raw).features);
+ // This fixture's existing feature shape intentionally omits the optional
+ // GeoJSON Feature tag. The projection must preserve that accepted input.
+ const extracted=projectCurrentMemberEdges({indexRaw,parts}),hierarchyRaw=await readFile(join(root,'data/hierarchy.json')),hierarchy=JSON.parse(hierarchyRaw),groups=new Map(hierarchy.map(r=>[r.id,r]));
+ const currentPins={hierarchy_sha256:hash(hierarchyRaw),location_index_sha256:hash(indexRaw),footprints_sha256:footprintHash(features)};
+ const locations=features.map(feature=>{const p=feature.properties,chain=[];for(let id=p.parent_id;id!==null;id=groups.get(id).parent_id)chain.push(id);return{id:feature.id,name:p.name,parent_id:p.parent_id,owner:p.reference_owner,parent_chain:chain,status:'open',semantic_status:'open'};});
+ const projection={version:1,kind:'current-membership-projection',semantic_complete:false,regional_interiors_approved:false,historical_claims_transferred:false,geometry_changes:0,current_pins:currentPins,counts:{locations:6,groups:30,...Object.fromEntries(['continent','subcontinent','region','area','province'].map(tier=>[tier,6]))},locations,groups:hierarchy.map(row=>({...row,member_location_ids:locations.filter(l=>l.parent_chain.includes(row.id)).map(l=>l.id),branch_semantic_status:'open'})),archived_predecessors:[],crosswalks:[],member_edges:extracted.member_edges};
+ const dashboard={member_edges:extracted.member_edges,current_pins:currentPins,locations:6,location_parts:['macro-foundation/world-review-locations-0.json.gz']};
+ const directory=join(root,'data/macro-foundation');await mkdir(directory,{recursive:true});
+ const save=async()=>{await writeFile(join(directory,'current-membership-projection.json.gz'),gzipSync(JSON.stringify(projection)));await writeFile(join(directory,'world-review-projection.json'),JSON.stringify(dashboard));await writeFile(join(directory,'world-review-locations-0.json.gz'),gzipSync(JSON.stringify(projection.locations)));};
+ await save();const parse=JSON.parse,counts=new Map(parts.map(part=>[part.raw.toString(),0]));let result;
+ const reads=[],paths=new Map(parts.map(part=>[join(root,part.path),part.path]));
+ const bodyPaths=new Map(parts.map(part=>[part.raw.toString(),part.path]));
+ const asyncRead=fs.promises.readFile,syncRead=fs.readFileSync;
+ const observe=file=>{if(paths.has(String(file)))reads.push(['read',paths.get(String(file))]);};
+ fs.promises.readFile=async function(file,...args){observe(file);return asyncRead.call(this,file,...args);};
+ fs.readFileSync=function(file,...args){observe(file);return syncRead.call(this,file,...args);};
+ syncBuiltinESMExports();
+ JSON.parse=function(raw,...args){if(Buffer.isBuffer(raw)&&counts.has(raw.toString())){
+  counts.set(raw.toString(),counts.get(raw.toString())+1);reads.push(['parse',bodyPaths.get(raw.toString())]);
+ }return parse(raw,...args);};
+ try{result=await validateSemanticFollowup(root,{expectedCounts});}finally{
+  JSON.parse=parse;fs.promises.readFile=asyncRead;fs.readFileSync=syncRead;syncBuiltinESMExports();
+ }
+ assert.deepEqual([...counts.values()],[1,1],'each indexed current part decoded once; existing retained-baseline text parsing is separate');
+ const firstParse=reads.findIndex(([operation])=>operation==='parse');
+ assert.deepEqual(reads.slice(firstParse-1,firstParse+3),parts.flatMap(part=>[['read',part.path],['parse',part.path]]),
+  'current canonical raw bodies are read and consumed one at a time, not accumulated before decoding');
+ assert.equal(result.current_member_edges.validated,true);assert.equal(result.current_member_edges.native_absence_admission,false);assert.equal(Object.hasOwn(result.current_member_edges,'features'),false);
+ projection.locations[0].source_member_ids=['forged'];await save();await assert.rejects(validateSemanticFollowup(root,{expectedCounts}),/member property/);
+ delete projection.locations[0].source_member_ids;await save();const compact=structuredClone(projection.locations);compact[0].source_member_ids=null;await writeFile(join(directory,'world-review-locations-0.json.gz'),gzipSync(JSON.stringify(compact)));await assert.rejects(validateSemanticFollowup(root,{expectedCounts}),/member property/);
 });

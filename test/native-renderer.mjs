@@ -42,7 +42,7 @@ const options={ownership,orderedOwners:true,coverage:classified?{grid:physical,m
 const layer=new (location.search.includes('canvas')?PixelCanvasLayer:PixelLayer)(features,options).addTo(map);
 window.fixture={layer,map,L,ownership,options,setColor:value=>color=value};
 </script>`;
-const server=await createServer({cacheDir:path.resolve(scratch,'vite'),server:{host:'127.0.0.1',port:0},
+const server=await createServer({cacheDir:path.resolve(scratch,'vite'),server:{host:'127.0.0.1',port:0,watch:null},
  plugins:[{name:'native-renderer-fixture',configureServer(s){s.middlewares.use((req,res,next)=>{
   if(req.url.startsWith('/fixture?')){res.setHeader('Content-Type','text/html');res.end(html);return;}
   const match=/^\/fixture-grid\/(ownership|physicalGrid)\/(metadata|rows|runs)$/.exec(req.url);

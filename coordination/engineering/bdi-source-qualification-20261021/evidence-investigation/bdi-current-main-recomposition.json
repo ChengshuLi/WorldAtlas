@@ -1,0 +1,33 @@
+{
+  "new_base": "eb338df800b6664d9bc54831644469480b25f6e0",
+  "unchanged_original_constructor": "2e2b93b10da8a5eecf98c46d26d67fcee458a327",
+  "unchanged_patch_commit": "fd35809976a5b3791c0a6710c6aeccf50e707e9f",
+  "composition_receipt": {
+    "destination": "coordination/engineering/bdi-source-qualification-20261021/composition-002",
+    "resumed": false,
+    "binding": {
+      "phase": "compose",
+      "config_sha256": "4a9878ef32d8b21043e61c9985dd5fa4067bd236da454a457cdf114fdf03cf54"
+    }
+  },
+  "finalization_receipt": {
+    "destination": ".cache/delivery-handoff/bdi-finalized-003",
+    "resumed": false,
+    "binding": {
+      "phase": "finalize",
+      "config_sha256": "9f6009ccfc6fba4a4f8dabfea0fb9632e5f015664a3ff1f5d29a39ead7f05c25"
+    }
+  },
+  "preserved_failed_admissions": [
+    {
+      "reason": "fatal: not a tree object\nCommand failed: git ls-tree -z b807d74c096bf811d59b435d16a95530ad91acd0 -- coordination/engineering/brazil-native-evaluation-20261021/composition-001/authority-registry.json\nfatal: not a tree object\n\n",
+      "outcome": "No destination produced; exact public commit metadata acquired."
+    },
+    {
+      "reason": "Generated sidecar would replace an existing committed body\n",
+      "outcome": "No destination produced; new sidecar filename used preserving prior committed body."
+    }
+  ],
+  "cumulative_native_cells": 6335845,
+  "no_scientific_producer_repeated": true
+}

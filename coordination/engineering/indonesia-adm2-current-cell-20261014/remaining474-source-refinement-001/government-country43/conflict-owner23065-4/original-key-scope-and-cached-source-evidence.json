@@ -1,0 +1,914 @@
+{
+  "package": "conflict",
+  "owner": 23065,
+  "count": 4,
+  "records": [
+    {
+      "original_package": "conflict",
+      "owner": 23065,
+      "y": 130333,
+      "x": 211907,
+      "original_request_id": "conflict:Borneo:9:130333:211907",
+      "retained_actual_comparison": {
+        "original_conflict_record_unchanged": {
+          "original_request": {
+            "id": "conflict:Borneo:9:130333:211907",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 130333,
+            "x": 211907,
+            "original_record": {
+              "outcome_interval_index": 8,
+              "pair": [
+                "Sintang",
+                "Sri Aman"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B74245273608062",
+                "gb:MYS:ADM2:92858781B67044495158935"
+              ],
+              "y": 130333,
+              "x": 211907,
+              "longitude_rational": "14548410/131083",
+              "longitude_display": 110.98624535599582,
+              "latitude_native_f64": 1.0291398998277554,
+              "latitude_hex": "0x1.0775b664c4d85p+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_frozen_interval": {
+            "owners": [
+              23065,
+              31127
+            ],
+            "stable_ids": [
+              "gb:IDN:ADM2:22746128B74245273608062",
+              "gb:MYS:ADM2:92858781B67044495158935"
+            ],
+            "names": [
+              "Sintang",
+              "Sri Aman"
+            ],
+            "original_interval": {
+              "original_block": 31,
+              "original_record_ordinal": 8,
+              "original_row": [
+                130333,
+                211907,
+                211908,
+                [
+                  23065,
+                  31127
+                ],
+                [
+                  36712,
+                  45977,
+                  46079
+                ],
+                "land"
+              ],
+              "interval_id": "idn-source-conflict:130333:211907:211908",
+              "all_source_feature_ids": [
+                "gb:IDN:ADM2:22746128B74245273608062",
+                "gb:MYS:ADM1:15666254B8535925993004",
+                "gb:MYS:ADM2:92858781B67044495158935"
+              ]
+            }
+          },
+          "current_selected_owner_observation": {
+            "id": "conflict:Borneo:9:130333:211907",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 130333,
+            "x": 211907,
+            "original_owner": null,
+            "baseline_owner": 0,
+            "append_owner": 0,
+            "effective_owner": 0,
+            "owner_identity": null
+          },
+          "original_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B74245273608062",
+              "feature_ordinal": 452,
+              "shapeName": "Sintang",
+              "kind": "interior"
+            }
+          ],
+          "full_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B74245273608062",
+              "feature_ordinal": 452,
+              "shapeName": "Sintang",
+              "kind": "interior"
+            }
+          ],
+          "complete_foreign_family_memberships": {
+            "gb:MYS:ADM1": {
+              "original_request_id": "conflict:Borneo:9:130333:211907",
+              "y": 130333,
+              "x": 211907,
+              "original_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+                  "feature_ordinal": 6,
+                  "shapeName": "Sarawak",
+                  "kind": "interior"
+                }
+              ],
+              "full_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+                  "feature_ordinal": 6,
+                  "shapeName": "Sarawak",
+                  "kind": "interior"
+                }
+              ]
+            },
+            "gb:MYS:ADM2": {
+              "original_request_id": "conflict:Borneo:9:130333:211907",
+              "y": 130333,
+              "x": 211907,
+              "original_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B67044495158935",
+                  "feature_ordinal": 92,
+                  "shapeName": "Sri Aman",
+                  "kind": "interior"
+                }
+              ],
+              "full_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B67044495158935",
+                  "feature_ordinal": 92,
+                  "shapeName": "Sri Aman",
+                  "kind": "interior"
+                }
+              ]
+            }
+          },
+          "full_foreign_fine_existing_Atlas_locations": [
+            {
+              "owner": 31127,
+              "id": "gb:MYS:ADM2:92858781B67044495158935",
+              "name": "Sri Aman",
+              "parent_id": "framework:province:sarawak:8a5fb64d0d51",
+              "source_reference_year": "2020"
+            }
+          ],
+          "actual_JMG_Sarawak_contact_kinds": [],
+          "JMG_applicability": "Sarawakonly;notSabah",
+          "source_assessment_cohort": "both-full-Sarawak-fine;government-country-footprint-disagreement",
+          "chosen_owner": null,
+          "accepted_or_completed_credit": 0
+        },
+        "actual_new_government_comparison_unchanged": {
+          "request": {
+            "id": "conflict:Borneo:9:130333:211907",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 130333,
+            "x": 211907,
+            "original_record": {
+              "outcome_interval_index": 8,
+              "pair": [
+                "Sintang",
+                "Sri Aman"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B74245273608062",
+                "gb:MYS:ADM2:92858781B67044495158935"
+              ],
+              "y": 130333,
+              "x": 211907,
+              "longitude_rational": "14548410/131083",
+              "longitude_display": 110.98624535599582,
+              "latitude_native_f64": 1.0291398998277554,
+              "latitude_hex": "0x1.0775b664c4d85p+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B74245273608062",
+              "feature_ordinal": 452,
+              "shapeName": "Sintang",
+              "kind": "interior"
+            }
+          ],
+          "full_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B74245273608062",
+              "feature_ordinal": 452,
+              "shapeName": "Sintang",
+              "kind": "interior"
+            }
+          ],
+          "full_private_MYS_memberships": [
+            {
+              "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+              "feature_ordinal": 6,
+              "shapeName": "Sarawak",
+              "kind": "interior"
+            },
+            {
+              "source_id": "gb:MYS:ADM2:92858781B67044495158935",
+              "feature_ordinal": 92,
+              "shapeName": "Sri Aman",
+              "kind": "interior"
+            }
+          ],
+          "cached_Gov_Sarawak_state_contacts": [],
+          "new_Gov_Sabah_state_contacts": [],
+          "Gov_district_Sarawak_contacts": [],
+          "Gov_district_Sabah_contacts": [],
+          "Gov_Sabah_line_incidence_only": [],
+          "scientific_observation_partition": "IDNfullpositive__Govstateoutside__Govdistrictoutside",
+          "owner_or_hold_changed": false,
+          "authority_or_repair_credit": 0
+        },
+        "review_scope": "Country-side negative operand source correction candidate, not direct ownership/physical qualification."
+      }
+    },
+    {
+      "original_package": "conflict",
+      "owner": 23065,
+      "y": 130333,
+      "x": 211908,
+      "original_request_id": "conflict:Borneo:10:130333:211908",
+      "retained_actual_comparison": {
+        "original_conflict_record_unchanged": {
+          "original_request": {
+            "id": "conflict:Borneo:10:130333:211908",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 130333,
+            "x": 211908,
+            "original_record": {
+              "outcome_interval_index": 9,
+              "pair": [
+                "Sintang",
+                "Sri Aman"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B74245273608062",
+                "gb:MYS:ADM2:92858781B67044495158935"
+              ],
+              "y": 130333,
+              "x": 211908,
+              "longitude_rational": "14548590/131083",
+              "longitude_display": 110.98761853176995,
+              "latitude_native_f64": 1.0291398998277554,
+              "latitude_hex": "0x1.0775b664c4d85p+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_frozen_interval": {
+            "owners": [
+              23065,
+              31127
+            ],
+            "stable_ids": [
+              "gb:IDN:ADM2:22746128B74245273608062",
+              "gb:MYS:ADM2:92858781B67044495158935"
+            ],
+            "names": [
+              "Sintang",
+              "Sri Aman"
+            ],
+            "original_interval": {
+              "original_block": 31,
+              "original_record_ordinal": 9,
+              "original_row": [
+                130333,
+                211908,
+                211909,
+                [
+                  23065,
+                  31127
+                ],
+                [
+                  36233,
+                  36712,
+                  46079
+                ],
+                "land"
+              ],
+              "interval_id": "idn-source-conflict:130333:211908:211909",
+              "all_source_feature_ids": [
+                "gb:IDN:ADM1:65028918B19721185942402",
+                "gb:IDN:ADM2:22746128B74245273608062",
+                "gb:MYS:ADM2:92858781B67044495158935"
+              ]
+            }
+          },
+          "current_selected_owner_observation": {
+            "id": "conflict:Borneo:10:130333:211908",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 130333,
+            "x": 211908,
+            "original_owner": null,
+            "baseline_owner": 0,
+            "append_owner": 0,
+            "effective_owner": 0,
+            "owner_identity": null
+          },
+          "original_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B74245273608062",
+              "feature_ordinal": 452,
+              "shapeName": "Sintang",
+              "kind": "interior"
+            }
+          ],
+          "full_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B74245273608062",
+              "feature_ordinal": 452,
+              "shapeName": "Sintang",
+              "kind": "interior"
+            }
+          ],
+          "complete_foreign_family_memberships": {
+            "gb:MYS:ADM1": {
+              "original_request_id": "conflict:Borneo:10:130333:211908",
+              "y": 130333,
+              "x": 211908,
+              "original_memberships": [],
+              "full_memberships": []
+            },
+            "gb:MYS:ADM2": {
+              "original_request_id": "conflict:Borneo:10:130333:211908",
+              "y": 130333,
+              "x": 211908,
+              "original_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B67044495158935",
+                  "feature_ordinal": 92,
+                  "shapeName": "Sri Aman",
+                  "kind": "interior"
+                }
+              ],
+              "full_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B67044495158935",
+                  "feature_ordinal": 92,
+                  "shapeName": "Sri Aman",
+                  "kind": "interior"
+                }
+              ]
+            }
+          },
+          "full_foreign_fine_existing_Atlas_locations": [
+            {
+              "owner": 31127,
+              "id": "gb:MYS:ADM2:92858781B67044495158935",
+              "name": "Sri Aman",
+              "parent_id": "framework:province:sarawak:8a5fb64d0d51",
+              "source_reference_year": "2020"
+            }
+          ],
+          "actual_JMG_Sarawak_contact_kinds": [],
+          "JMG_applicability": "Sarawakonly;notSabah",
+          "source_assessment_cohort": "both-full-Sarawak-fine;government-country-footprint-disagreement",
+          "chosen_owner": null,
+          "accepted_or_completed_credit": 0
+        },
+        "actual_new_government_comparison_unchanged": {
+          "request": {
+            "id": "conflict:Borneo:10:130333:211908",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 130333,
+            "x": 211908,
+            "original_record": {
+              "outcome_interval_index": 9,
+              "pair": [
+                "Sintang",
+                "Sri Aman"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B74245273608062",
+                "gb:MYS:ADM2:92858781B67044495158935"
+              ],
+              "y": 130333,
+              "x": 211908,
+              "longitude_rational": "14548590/131083",
+              "longitude_display": 110.98761853176995,
+              "latitude_native_f64": 1.0291398998277554,
+              "latitude_hex": "0x1.0775b664c4d85p+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B74245273608062",
+              "feature_ordinal": 452,
+              "shapeName": "Sintang",
+              "kind": "interior"
+            }
+          ],
+          "full_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B74245273608062",
+              "feature_ordinal": 452,
+              "shapeName": "Sintang",
+              "kind": "interior"
+            }
+          ],
+          "full_private_MYS_memberships": [
+            {
+              "source_id": "gb:MYS:ADM2:92858781B67044495158935",
+              "feature_ordinal": 92,
+              "shapeName": "Sri Aman",
+              "kind": "interior"
+            }
+          ],
+          "cached_Gov_Sarawak_state_contacts": [],
+          "new_Gov_Sabah_state_contacts": [],
+          "Gov_district_Sarawak_contacts": [],
+          "Gov_district_Sabah_contacts": [],
+          "Gov_Sabah_line_incidence_only": [],
+          "scientific_observation_partition": "IDNfullpositive__Govstateoutside__Govdistrictoutside",
+          "owner_or_hold_changed": false,
+          "authority_or_repair_credit": 0
+        },
+        "review_scope": "Country-side negative operand source correction candidate, not direct ownership/physical qualification."
+      }
+    },
+    {
+      "original_package": "conflict",
+      "owner": 23065,
+      "y": 130333,
+      "x": 211909,
+      "original_request_id": "conflict:Borneo:11:130333:211909",
+      "retained_actual_comparison": {
+        "original_conflict_record_unchanged": {
+          "original_request": {
+            "id": "conflict:Borneo:11:130333:211909",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 130333,
+            "x": 211909,
+            "original_record": {
+              "outcome_interval_index": 10,
+              "pair": [
+                "Sintang",
+                "Sri Aman"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B74245273608062",
+                "gb:MYS:ADM2:92858781B67044495158935"
+              ],
+              "y": 130333,
+              "x": 211909,
+              "longitude_rational": "14548770/131083",
+              "longitude_display": 110.98899170754407,
+              "latitude_native_f64": 1.0291398998277554,
+              "latitude_hex": "0x1.0775b664c4d85p+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_frozen_interval": {
+            "owners": [
+              23065,
+              31127
+            ],
+            "stable_ids": [
+              "gb:IDN:ADM2:22746128B74245273608062",
+              "gb:MYS:ADM2:92858781B67044495158935"
+            ],
+            "names": [
+              "Sintang",
+              "Sri Aman"
+            ],
+            "original_interval": {
+              "original_block": 31,
+              "original_record_ordinal": 10,
+              "original_row": [
+                130333,
+                211909,
+                211911,
+                [
+                  23065,
+                  31127
+                ],
+                [
+                  36712,
+                  45977,
+                  46079
+                ],
+                "land"
+              ],
+              "interval_id": "idn-source-conflict:130333:211909:211911",
+              "all_source_feature_ids": [
+                "gb:IDN:ADM2:22746128B74245273608062",
+                "gb:MYS:ADM1:15666254B8535925993004",
+                "gb:MYS:ADM2:92858781B67044495158935"
+              ]
+            }
+          },
+          "current_selected_owner_observation": {
+            "id": "conflict:Borneo:11:130333:211909",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 130333,
+            "x": 211909,
+            "original_owner": null,
+            "baseline_owner": 0,
+            "append_owner": 0,
+            "effective_owner": 0,
+            "owner_identity": null
+          },
+          "original_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B74245273608062",
+              "feature_ordinal": 452,
+              "shapeName": "Sintang",
+              "kind": "interior"
+            }
+          ],
+          "full_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B74245273608062",
+              "feature_ordinal": 452,
+              "shapeName": "Sintang",
+              "kind": "interior"
+            }
+          ],
+          "complete_foreign_family_memberships": {
+            "gb:MYS:ADM1": {
+              "original_request_id": "conflict:Borneo:11:130333:211909",
+              "y": 130333,
+              "x": 211909,
+              "original_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+                  "feature_ordinal": 6,
+                  "shapeName": "Sarawak",
+                  "kind": "interior"
+                }
+              ],
+              "full_memberships": []
+            },
+            "gb:MYS:ADM2": {
+              "original_request_id": "conflict:Borneo:11:130333:211909",
+              "y": 130333,
+              "x": 211909,
+              "original_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B67044495158935",
+                  "feature_ordinal": 92,
+                  "shapeName": "Sri Aman",
+                  "kind": "interior"
+                }
+              ],
+              "full_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B67044495158935",
+                  "feature_ordinal": 92,
+                  "shapeName": "Sri Aman",
+                  "kind": "interior"
+                }
+              ]
+            }
+          },
+          "full_foreign_fine_existing_Atlas_locations": [
+            {
+              "owner": 31127,
+              "id": "gb:MYS:ADM2:92858781B67044495158935",
+              "name": "Sri Aman",
+              "parent_id": "framework:province:sarawak:8a5fb64d0d51",
+              "source_reference_year": "2020"
+            }
+          ],
+          "actual_JMG_Sarawak_contact_kinds": [],
+          "JMG_applicability": "Sarawakonly;notSabah",
+          "source_assessment_cohort": "both-full-Sarawak-fine;government-country-footprint-disagreement",
+          "chosen_owner": null,
+          "accepted_or_completed_credit": 0
+        },
+        "actual_new_government_comparison_unchanged": {
+          "request": {
+            "id": "conflict:Borneo:11:130333:211909",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 130333,
+            "x": 211909,
+            "original_record": {
+              "outcome_interval_index": 10,
+              "pair": [
+                "Sintang",
+                "Sri Aman"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B74245273608062",
+                "gb:MYS:ADM2:92858781B67044495158935"
+              ],
+              "y": 130333,
+              "x": 211909,
+              "longitude_rational": "14548770/131083",
+              "longitude_display": 110.98899170754407,
+              "latitude_native_f64": 1.0291398998277554,
+              "latitude_hex": "0x1.0775b664c4d85p+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B74245273608062",
+              "feature_ordinal": 452,
+              "shapeName": "Sintang",
+              "kind": "interior"
+            }
+          ],
+          "full_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B74245273608062",
+              "feature_ordinal": 452,
+              "shapeName": "Sintang",
+              "kind": "interior"
+            }
+          ],
+          "full_private_MYS_memberships": [
+            {
+              "source_id": "gb:MYS:ADM2:92858781B67044495158935",
+              "feature_ordinal": 92,
+              "shapeName": "Sri Aman",
+              "kind": "interior"
+            }
+          ],
+          "cached_Gov_Sarawak_state_contacts": [],
+          "new_Gov_Sabah_state_contacts": [],
+          "Gov_district_Sarawak_contacts": [],
+          "Gov_district_Sabah_contacts": [],
+          "Gov_Sabah_line_incidence_only": [],
+          "scientific_observation_partition": "IDNfullpositive__Govstateoutside__Govdistrictoutside",
+          "owner_or_hold_changed": false,
+          "authority_or_repair_credit": 0
+        },
+        "review_scope": "Country-side negative operand source correction candidate, not direct ownership/physical qualification."
+      }
+    },
+    {
+      "original_package": "conflict",
+      "owner": 23065,
+      "y": 130333,
+      "x": 211910,
+      "original_request_id": "conflict:Borneo:12:130333:211910",
+      "retained_actual_comparison": {
+        "original_conflict_record_unchanged": {
+          "original_request": {
+            "id": "conflict:Borneo:12:130333:211910",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 130333,
+            "x": 211910,
+            "original_record": {
+              "outcome_interval_index": 10,
+              "pair": [
+                "Sintang",
+                "Sri Aman"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B74245273608062",
+                "gb:MYS:ADM2:92858781B67044495158935"
+              ],
+              "y": 130333,
+              "x": 211910,
+              "longitude_rational": "14548950/131083",
+              "longitude_display": 110.99036488331821,
+              "latitude_native_f64": 1.0291398998277554,
+              "latitude_hex": "0x1.0775b664c4d85p+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_frozen_interval": {
+            "owners": [
+              23065,
+              31127
+            ],
+            "stable_ids": [
+              "gb:IDN:ADM2:22746128B74245273608062",
+              "gb:MYS:ADM2:92858781B67044495158935"
+            ],
+            "names": [
+              "Sintang",
+              "Sri Aman"
+            ],
+            "original_interval": {
+              "original_block": 31,
+              "original_record_ordinal": 10,
+              "original_row": [
+                130333,
+                211909,
+                211911,
+                [
+                  23065,
+                  31127
+                ],
+                [
+                  36712,
+                  45977,
+                  46079
+                ],
+                "land"
+              ],
+              "interval_id": "idn-source-conflict:130333:211909:211911",
+              "all_source_feature_ids": [
+                "gb:IDN:ADM2:22746128B74245273608062",
+                "gb:MYS:ADM1:15666254B8535925993004",
+                "gb:MYS:ADM2:92858781B67044495158935"
+              ]
+            }
+          },
+          "current_selected_owner_observation": {
+            "id": "conflict:Borneo:12:130333:211910",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 130333,
+            "x": 211910,
+            "original_owner": null,
+            "baseline_owner": 0,
+            "append_owner": 0,
+            "effective_owner": 0,
+            "owner_identity": null
+          },
+          "original_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B74245273608062",
+              "feature_ordinal": 452,
+              "shapeName": "Sintang",
+              "kind": "interior"
+            }
+          ],
+          "full_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B74245273608062",
+              "feature_ordinal": 452,
+              "shapeName": "Sintang",
+              "kind": "interior"
+            }
+          ],
+          "complete_foreign_family_memberships": {
+            "gb:MYS:ADM1": {
+              "original_request_id": "conflict:Borneo:12:130333:211910",
+              "y": 130333,
+              "x": 211910,
+              "original_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+                  "feature_ordinal": 6,
+                  "shapeName": "Sarawak",
+                  "kind": "interior"
+                }
+              ],
+              "full_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+                  "feature_ordinal": 6,
+                  "shapeName": "Sarawak",
+                  "kind": "interior"
+                }
+              ]
+            },
+            "gb:MYS:ADM2": {
+              "original_request_id": "conflict:Borneo:12:130333:211910",
+              "y": 130333,
+              "x": 211910,
+              "original_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B67044495158935",
+                  "feature_ordinal": 92,
+                  "shapeName": "Sri Aman",
+                  "kind": "interior"
+                }
+              ],
+              "full_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B67044495158935",
+                  "feature_ordinal": 92,
+                  "shapeName": "Sri Aman",
+                  "kind": "interior"
+                }
+              ]
+            }
+          },
+          "full_foreign_fine_existing_Atlas_locations": [
+            {
+              "owner": 31127,
+              "id": "gb:MYS:ADM2:92858781B67044495158935",
+              "name": "Sri Aman",
+              "parent_id": "framework:province:sarawak:8a5fb64d0d51",
+              "source_reference_year": "2020"
+            }
+          ],
+          "actual_JMG_Sarawak_contact_kinds": [],
+          "JMG_applicability": "Sarawakonly;notSabah",
+          "source_assessment_cohort": "both-full-Sarawak-fine;government-country-footprint-disagreement",
+          "chosen_owner": null,
+          "accepted_or_completed_credit": 0
+        },
+        "actual_new_government_comparison_unchanged": {
+          "request": {
+            "id": "conflict:Borneo:12:130333:211910",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 130333,
+            "x": 211910,
+            "original_record": {
+              "outcome_interval_index": 10,
+              "pair": [
+                "Sintang",
+                "Sri Aman"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B74245273608062",
+                "gb:MYS:ADM2:92858781B67044495158935"
+              ],
+              "y": 130333,
+              "x": 211910,
+              "longitude_rational": "14548950/131083",
+              "longitude_display": 110.99036488331821,
+              "latitude_native_f64": 1.0291398998277554,
+              "latitude_hex": "0x1.0775b664c4d85p+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B74245273608062",
+              "feature_ordinal": 452,
+              "shapeName": "Sintang",
+              "kind": "interior"
+            }
+          ],
+          "full_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B74245273608062",
+              "feature_ordinal": 452,
+              "shapeName": "Sintang",
+              "kind": "interior"
+            }
+          ],
+          "full_private_MYS_memberships": [
+            {
+              "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+              "feature_ordinal": 6,
+              "shapeName": "Sarawak",
+              "kind": "interior"
+            },
+            {
+              "source_id": "gb:MYS:ADM2:92858781B67044495158935",
+              "feature_ordinal": 92,
+              "shapeName": "Sri Aman",
+              "kind": "interior"
+            }
+          ],
+          "cached_Gov_Sarawak_state_contacts": [],
+          "new_Gov_Sabah_state_contacts": [],
+          "Gov_district_Sarawak_contacts": [],
+          "Gov_district_Sabah_contacts": [],
+          "Gov_Sabah_line_incidence_only": [],
+          "scientific_observation_partition": "IDNfullpositive__Govstateoutside__Govdistrictoutside",
+          "owner_or_hold_changed": false,
+          "authority_or_repair_credit": 0
+        },
+        "review_scope": "Country-side negative operand source correction candidate, not direct ownership/physical qualification."
+      }
+    }
+  ]
+}

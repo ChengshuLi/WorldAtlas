@@ -1,0 +1,133 @@
+{
+  "title": "GEO ADM1 sourceData submission artifact inspection",
+  "status": "bounded actual source-submission ZIP inspected; upstream Wikimedia item intent remains unresolved",
+  "authenticated_release": {
+    "repository": "wmgeolab/geoBoundaries",
+    "commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "path": "sourceData/gbOpen/GEO_ADM1.zip",
+    "pointer_blob_oid": "f2d25eac89a9647f2ec962435dce5ced6056394c3f2af88ebc82cd9b325fac26",
+    "lfs_size_bytes": 132840,
+    "downloaded_size_bytes": 132840,
+    "downloaded_sha256": "f2d25eac89a9647f2ec962435dce5ced6056394c3f2af88ebc82cd9b325fac26",
+    "integrity": "downloaded content SHA-256 equals exact Git LFS pointer OID and byte count"
+  },
+  "archive_members": [
+    {
+      "name": "GEO_ADM1.cpg",
+      "bytes": 5
+    },
+    {
+      "name": "GEO_ADM1.dbf",
+      "bytes": 2462,
+      "sha256": "d8c4dabebe1495c57e3cd41f9b1dfd1046308cf3e55a7826213cb357106d9667"
+    },
+    {
+      "name": "GEO_ADM1.prj",
+      "bytes": 145,
+      "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+    },
+    {
+      "name": "GEO_ADM1.sbn",
+      "bytes": 252
+    },
+    {
+      "name": "GEO_ADM1.sbx",
+      "bytes": 132
+    },
+    {
+      "name": "GEO_ADM1.shp",
+      "bytes": 144468,
+      "not_inspected": "geometry not read or processed"
+    },
+    {
+      "name": "GEO_ADM1.shp.xml",
+      "bytes": 9627,
+      "sha256": "df7da351f7dc80dff72369b008c24559da1c208e1cdcbe325b5d4099804828a0"
+    },
+    {
+      "name": "GEO_ADM1.shx",
+      "bytes": 196
+    },
+    {
+      "name": "license.PNG",
+      "bytes": 37522,
+      "sha256": "9b6921ac26d40ef7d9a681ad9441007278c43c752cd2acaa2d2d68ea0dfafd43"
+    },
+    {
+      "name": "meta.txt",
+      "bytes": 433,
+      "sha256": "d236f596f3cd8c41c14a51cf3f4161078732fd73b57936ed017cc972fd68e1a9"
+    }
+  ],
+  "source_metadata": {
+    "meta_txt": {
+      "boundary_representative_year": "2015",
+      "level": "ADM1",
+      "canonical_boundary_type": "Autonomous Republic, Region, City",
+      "source_1": "geoBoundaries",
+      "source_2": "Wikimedia",
+      "release_type": "gbOpen",
+      "license": "Creative Commons Attribution 3.0 License",
+      "license_source": "https://commons.wikimedia.org/wiki/File:Georgia.svg",
+      "link_to_source_data": "https://commons.wikimedia.org/wiki/File:Georgia.svg",
+      "other_notes": "empty"
+    },
+    "license_image": {
+      "visible_page": "commons.wikimedia.org/wiki/File:Georgia.svg",
+      "visible_terms": "Creative Commons Attribution 3.0 Unported",
+      "visible_conditions": "attribution; give appropriate credit, link to license, indicate changes, and do not imply endorsement",
+      "interpretation_limit": "the image is a screenshot of a Wikimedia licensing panel, not a copy or description of the SVG map's cartographic intent or content"
+    }
+  },
+  "embedded_esri_lineage": {
+    "xml_sha256": "df7da351f7dc80dff72369b008c24559da1c208e1cdcbe325b5d4099804828a0",
+    "recorded_creation": "2022-09-27; Esri ArcGIS 13.0.0.36056",
+    "recorded_steps": [
+      "CreateFeatureclass creates GEO_subdivisions as a polyline feature class in WGS84 geographic coordinates.",
+      "FeatureToPolygon derives GEO_subdivisions_FeatureToPo from GEO_subdivisions.",
+      "UpdateSchema adds Name, Level and ISO_Code fields.",
+      "CalculateField sets Level to ADM1.",
+      "FeatureClassToFeatureClass exports GEO_ADM1.shp."
+    ],
+    "named_working_project": "GEO GEO_subdivisions / GEO_subdivisions_FeatureToPo",
+    "recorded_local_output": "C:\\Users\\dfornatora\\Documents\\GEO\\GEO_ADM1.shp",
+    "limitation": "lineage records processing but does not identify the source layer's acquisition, digitization method, source revision, or exact boundary geometry date"
+  },
+  "feature_records": {
+    "dbf_record_count": 12,
+    "fields": [
+      "Shape_Leng",
+      "Shape_Area",
+      "Name",
+      "Level",
+      "ISO_Code"
+    ],
+    "target_record": {
+      "name": "Abkhazia",
+      "level": "ADM1",
+      "iso_code": "GE-AB"
+    },
+    "property_limit": "feature records contain no per-feature date, derivation citation, source object ID, or predecessor lineage"
+  },
+  "relation_to_derived_release": {
+    "derived_release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "derived_all_zip_sha256": "f77abcdc56534904af18997fa1721d79ac514642120459f40faf6bb1ae27a295",
+    "retained_simplified_geojson_sha256": "68b5cea2e8fec0ecf93530d0149b1c7ad923e5e942697b9eb861969f341d0be3",
+    "finding": "the sourceData archive is an actual original submission record and gives a concrete Wikimedia File:Georgia.svg reference, unlike the derived all.zip alone; the source shapefile is coordinate-bearing, but this does not establish whether that referenced SVG was an authoritative administrative boundary, an illustrative map, or another type of source"
+  },
+  "bounded_conclusion": "The original source archive adds a specific source URL, CC BY 3.0 terms, a 2015 represented-year label, a 2022 ArcGIS processing lineage, and a 12-row ADM1 attribute table. It does not resolve the upstream Wikimedia item's cartographic role or the actual geometry capture date. No geometry was read, compared, or processed. Preserve the GEO 382-contact group as pending; do not infer either clearance or invalidity from this record alone.",
+  "upstream_wikimedia_item_read": {
+    "url": "https://commons.wikimedia.org/wiki/File:Georgia.svg",
+    "access_method": "read-only web page inspection; no browser and no SVG download",
+    "page_facts": {
+      "title": "File:Georgia.svg",
+      "summary_source": "Own work",
+      "listed_author": "Orlovic",
+      "license": "CC BY 3.0 Unported",
+      "file_history": ["Current SVG file revision listed as 10 May 2015; prior listed revisions include 2010 and 2008."],
+      "descriptive_usage": "Commons page categorizes it as a map of subdivisions of Georgia and lists use on administrative-divisions and Mkhare pages/templates."
+    },
+    "interpretation_limit": "This identifies the exact Wikimedia item named in sourceData/meta.txt and gives its own-work attribution, license, revision history and map context. The page does not establish that it is an authoritative administrative boundary dataset, nor that the 2022 Shapefile was digitized from the 2015 revision or that its geometries are equivalent to that SVG."
+  },
+  "actual_operation": "Retrieved one exact public LFS object at the authenticated release path; hash and size verified; inspected ZIP directory, meta.txt, .shp.xml, .prj, DBF schema/records, and rendered license.PNG locally. Opened the exact Wikimedia Commons item named by the source metadata. No browser, geometry operation, producer, observer, or additional file download used."
+}

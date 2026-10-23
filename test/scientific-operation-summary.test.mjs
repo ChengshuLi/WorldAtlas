@@ -11,7 +11,7 @@ const canonical = value => Array.isArray(value) ? value.map(canonical)
 const recordHash = value => hash(JSON.stringify(canonical(value)) + '\n');
 
 function fixture(phase = 'physical') {
-  // Actual sourceCohort/run_physical receipt and stdout shapes. Synthetic paths
+  // Historical sourceCohort/run_physical shapes, including optional old admission. Synthetic paths
   // stand in for installed local files; no scientific operation is executed.
   const files = Array.from({length: 388}, (_, i) => ({path: `/Users/fixture/runtime/module-${i}.py`, bytes: i + 1,
     sha256: hash(String(i))}));
@@ -33,7 +33,7 @@ function fixture(phase = 'physical') {
   return {publication, products, preparation, execution, admission};
 }
 
-test('actual physical shapes retain binding, exact receipt/output refs and observed operating quantities compactly', () => {
+test('historical physical shapes retain binding, exact receipt/output refs and observed operating quantities compactly', () => {
   const f = fixture(), originals = {publication: JSON.stringify(f.publication), preparation: Buffer.from(f.preparation),
     receipt: Buffer.from(f.products['execution-receipt.json'])};
   const s = scientificOperationSummary(f.publication, f), raw = JSON.stringify(s);
@@ -129,4 +129,15 @@ test('resume and missing observations do not synthesize a new execution observat
   assert.equal(s.resumed, true); assert.deepEqual(s.observed, {});
   assert(!s.runtime_inventory && !s.admission);
   assert.equal(s.outputs.length, 2);
+});
+
+
+test('current receipts without historical admission do not invent allowance or complete runtime rows', () => {
+  const f = fixture(); delete f.execution.fresh_admission; delete f.publication.observation.allowance;
+  f.products['execution-receipt.json'] = bytes(f.execution);
+  const s = scientificOperationSummary(f.publication, {products:f.products});
+  assert.equal(s.runtime_inventory.records,388);
+  assert.equal(s.artifacts.execution_receipt.sha256,hash(f.products['execution-receipt.json']));
+  assert(!s.admission && !s.observed.allowance);
+  assert(!JSON.stringify(s).includes('/Users/') && !JSON.stringify(s).includes('module-'));
 });

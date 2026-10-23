@@ -113,12 +113,42 @@ class LedgerControls(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Baseline input hash/size mismatch'):
             ledger.require_code(snapshot, report, {path})
 
-    def test_same_issue_upstream_cannot_omit_original_descriptors(self):
-        row = descriptor('original.json', b'original')
-        envelope = {'entries': [{'original': row, 'encoded': descriptor('payload.gz', b'packed')}]}
-        child = {'baseline': {'commit': 'a' * 40, 'files': []}, 'sources': [], 'outputs': []}
+    def test_same_issue_upstream_requires_original_descriptors_and_execution_closure(self):
+        commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT).decode().strip()
+        def original(path):
+            return subprocess.check_output(['git', 'show', commit + ':' + path], cwd=ROOT)
+        source_path = 'scripts/evidence/contracts.py'
+        raw = original(source_path)
+        source = descriptor(source_path, raw)
+        encoded = deterministic_gzip(raw)
+        payload_path = self.out / 'original.gz'
+        payload_path.write_bytes(encoded)
+        payload = descriptor(str(payload_path.relative_to(ROOT)), encoded)
+        code = [descriptor(path, original(path)) for path in sorted(ledger.ENVELOPE_CODE)]
+        envelope = {'entries': [{'original': source, 'encoded': payload}],
+                    'executed_code_commit': commit, 'code_inputs': code}
+        child = {'baseline': {'commit': commit, 'files': [source]}, 'sources': [],
+                 'outputs': [payload, *code]}
+        reports = [None, None, None, {'baseline_commit': commit}]
+        ledger.upstream_closure(child, envelope, reports)
+        missing = copy.deepcopy(child)
+        missing['baseline']['files'] = []
         with self.assertRaisesRegex(ValueError, 'complete original file descriptors'):
-            ledger.upstream_closure(child, envelope, [None, None, None, {'baseline_commit': 'a' * 40}])
+            ledger.upstream_closure(missing, envelope, reports)
+        for kind in ('duplicate-code', 'missing-code', 'changed-code-pin', 'changed-child-code'):
+            with self.subTest(kind=kind):
+                altered, changed = copy.deepcopy(envelope), copy.deepcopy(child)
+                if kind == 'duplicate-code':
+                    altered['code_inputs'].append(copy.deepcopy(altered['code_inputs'][0]))
+                elif kind == 'missing-code':
+                    altered['code_inputs'].pop()
+                elif kind == 'changed-code-pin':
+                    altered['code_inputs'][0]['sha256'] = '0' * 64
+                else:
+                    next(row for row in changed['outputs']
+                         if row['path'] == altered['code_inputs'][0]['path'])['sha256'] = '0' * 64
+                with self.assertRaisesRegex(ValueError, 'execution'):
+                    ledger.upstream_closure(changed, altered, reports)
 
     def test_invented_rehashed_source_keys_are_rejected(self):
         original = {'id': 'original-location', 'input_path': 'original-part.json', 'name': 'Original'}

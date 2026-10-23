@@ -1,0 +1,443 @@
+{
+  "version": 1,
+  "kind": "mnp-retained-source-physical-context",
+  "as_of": "2026-10-20",
+  "method": "Independent read-only reconstruction from the original pinned classifier and source-candidate/physical/water mask blobs, plus property-only source-payload identity joins. The complete payload bytes were decoded and parsed for property joins; geometry fields were not inspected, transformed or recomputed. The reviewer did not run a selected-owner observer.",
+  "scope": {
+    "package_id": "gb-MNP-ADM2--repair-evaluation",
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "queue_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "land_cells": 205,
+    "inland_water_cells": 0,
+    "source_relative_cells": 0,
+    "intervals": 83,
+    "owners": [
+      30767,
+      30769,
+      30770
+    ],
+    "native_blocks": [
+      28,
+      29
+    ],
+    "excluded_adjacent_scopes": [
+      "gb-MNP-ADM2--physical-interpretation (31 cells)",
+      "regional source-review issue #383"
+    ]
+  },
+  "contract": {
+    "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+    "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned."
+  },
+  "immutable_inputs": [
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "git_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+      "bytes": 1754890,
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "bytes": 1844315,
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+      "git_blob_oid": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+      "note": "Original roster/lineage objects authenticated at original commit; object byte metadata was not separately repeated in this inventory."
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-028.json.gz",
+      "git_blob_oid": "242c191e5cb4822c969247f4d4af99b56a5ec160",
+      "compressed_bytes": 476733,
+      "compressed_sha256": "2000877ef3d698ee43b6e1ae0d7bb0cb8cf505a94b21255076691311fb5c3ba4",
+      "decoded_bytes": 3372962,
+      "decoded_sha256": "1ea269bc51f49a00166c22ffcb3f875761fd98d7c9423b4dd96019b0d584774a"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-029.json.gz",
+      "git_blob_oid": "3fc846f1a3a57841d82c695b97ad31b93af681e6",
+      "compressed_bytes": 613896,
+      "compressed_sha256": "7775f315311056808bfead2394034459a83a3590a201fe0deedb66fea1866528",
+      "decoded_bytes": 4552072,
+      "decoded_sha256": "a497602aa36f61e9d86b2078d6811e2362612fe7a11920f50df315b991106798"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-028.json.gz",
+      "git_blob_oid": "320ee1a5fda2706aa446e8872a7180ca66ae76a6",
+      "compressed_bytes": 436795,
+      "compressed_sha256": "2d3327eb79a3ef3d56ec58e1400f8394754881183d2937747c303aeef9098cd5",
+      "decoded_bytes": 2055434,
+      "decoded_sha256": "7f11b44dd86940e523b550a4c6a8572714de4cd490629d71bd9e00426c14f700"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-029.json.gz",
+      "git_blob_oid": "2e1d884705c104bd3dbc61ac5444761875210ba5",
+      "compressed_bytes": 508848,
+      "compressed_sha256": "7af023db048ed84fe910c0ce966508b5b4127c95c6215f0d36213ed20d94b5d2",
+      "decoded_bytes": 2354796,
+      "decoded_sha256": "a62fb29038527ceba28ebef27ee3d487ec4fb0a31ca64610d16f02947b5189ee"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-028.json.gz",
+      "git_blob_oid": "ce25d850997ac8d56bb82778a7527b290edc7edd",
+      "compressed_bytes": 2094,
+      "compressed_sha256": "a878b7eab8260dfc4ab3b1db67e39ef4667047bc8980d779c645b0598f60d234",
+      "decoded_bytes": 13594,
+      "decoded_sha256": "339f333f640ba15c8c22f71b3db888c871464621c2f193780f4a946596f07cd8"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-029.json.gz",
+      "git_blob_oid": "01851c2ff5b06938769c6662bea70c19c69148ba",
+      "compressed_bytes": 19710,
+      "compressed_sha256": "c3a2e3b0c84e34e19aa39c7afbb02f62a434f29fad6e64aa7429522b9ebfe30f",
+      "decoded_bytes": 125470,
+      "decoded_sha256": "c4611ff0fcfb89048a4c524493a60b90ced1ff4d80ef9c1bc94a66d6b02b62c9"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs",
+      "git_blob_oid": "c5ba9331deb93eed40662d1dc579cdaedea55c46",
+      "compressed_bytes": 6840,
+      "compressed_sha256": "2589022806876f7faa645293fd9a0ea4b22d0c35a5a6a29fbdc30f5b730f5689",
+      "kind": "classifier source"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MNP-ADM2-000.bin.gz",
+      "git_blob_oid": "7e0a102cf999520b4c5d6288951edeaa9ded6d96",
+      "compressed_bytes": 3997,
+      "compressed_sha256": "9722702a021275528671b3dd4f39f7baa6c547a15dcc0a301e2c0dfbb986b006",
+      "decoded_bytes": 13215,
+      "decoded_sha256": "220838b7a594fbfdec93cc994bf5ea6890e39560e855d4bc8084e0943dfe46fd"
+    }
+  ],
+  "classifier_reconstruction": {
+    "classifier": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs",
+      "git_blob_oid": "c5ba9331deb93eed40662d1dc579cdaedea55c46",
+      "bytes": 6840,
+      "sha256": "2589022806876f7faa645293fd9a0ea4b22d0c35a5a6a29fbdc30f5b730f5689"
+    },
+    "derived_counts": {
+      "rows": 83,
+      "unique_cell_keys": 205,
+      "land": 205,
+      "inland_water": 0,
+      "source_relative": 0,
+      "blocks": {
+        "28": {
+          "intervals": 61,
+          "cells": 181
+        },
+        "29": {
+          "intervals": 22,
+          "cells": 24
+        }
+      },
+      "owners": [
+        30767,
+        30769,
+        30770
+      ]
+    },
+    "canonical_key_sha256": "7912c8183f668ca2f81e6e37444dd82750e1ce8b3f9bd3f84eb4e7c9e4a5ff97",
+    "canonical_interval_sha256": "3ae61d944c990816ecc0b9b8317de8ab88f78927c3d821da82371912f9c22375",
+    "feature_raw_incidence_cells": {
+      "45686": 11,
+      "45687": 5,
+      "45688": 189,
+      "61269": 203,
+      "64048": 150
+    },
+    "disjoint_contact_vectors": [
+      {
+        "source_indices": [
+          45686,
+          61269
+        ],
+        "cells": 11,
+        "intervals": 11,
+        "owners": [
+          30767
+        ]
+      },
+      {
+        "source_indices": [
+          45687,
+          61269
+        ],
+        "cells": 5,
+        "intervals": 4,
+        "owners": [
+          30769
+        ]
+      },
+      {
+        "source_indices": [
+          45688,
+          61269
+        ],
+        "cells": 39,
+        "intervals": 30,
+        "owners": [
+          30770
+        ]
+      },
+      {
+        "source_indices": [
+          45688,
+          61269,
+          64048
+        ],
+        "cells": 148,
+        "intervals": 36,
+        "owners": [
+          30770
+        ]
+      },
+      {
+        "source_indices": [
+          45688,
+          64048
+        ],
+        "cells": 2,
+        "intervals": 2,
+        "owners": [
+          30770
+        ]
+      }
+    ],
+    "limitation": "These are original classified mask intervals and contact vectors; incidence is not a geometric overlay or proof of source applicability, completeness, territorial/legal status, or positive repair fitness."
+  },
+  "source_payload_property_joins": {
+    "mnp_payload": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MNP-ADM2-000.bin.gz",
+      "git_blob_oid": "7e0a102cf999520b4c5d6288951edeaa9ded6d96",
+      "compressed_bytes": 3997,
+      "compressed_sha256": "9722702a021275528671b3dd4f39f7baa6c547a15dcc0a301e2c0dfbb986b006",
+      "decoded_bytes": 13215,
+      "decoded_sha256": "220838b7a594fbfdec93cc994bf5ea6890e39560e855d4bc8084e0943dfe46fd",
+      "feature_count": 4,
+      "matches_by_shapeID_suffix": {
+        "45686": {
+          "source_id": "gb:MNP:ADM2:39175420B24162802066299",
+          "shapeName": "Tinian",
+          "shapeISO": "",
+          "shapeID": "39175420B24162802066299",
+          "shapeGroup": "MNP",
+          "shapeType": "ADM2",
+          "owner_indices": [
+            30767
+          ],
+          "match_count": 1
+        },
+        "45687": {
+          "source_id": "gb:MNP:ADM2:39175420B64217482742742",
+          "shapeName": "Rota",
+          "shapeISO": "",
+          "shapeID": "39175420B64217482742742",
+          "shapeGroup": "MNP",
+          "shapeType": "ADM2",
+          "owner_indices": [
+            30769
+          ],
+          "match_count": 1
+        },
+        "45688": {
+          "source_id": "gb:MNP:ADM2:39175420B77088391070908",
+          "shapeName": "Northern Islands",
+          "shapeISO": "",
+          "shapeID": "39175420B77088391070908",
+          "shapeGroup": "MNP",
+          "shapeType": "ADM2",
+          "owner_indices": [
+            30770
+          ],
+          "match_count": 1
+        },
+        "45685": {
+          "source_id": "gb:MNP:ADM2:39175420B42755231479115",
+          "shapeName": "Saipan",
+          "shapeISO": "",
+          "shapeID": "39175420B42755231479115",
+          "shapeGroup": "MNP",
+          "shapeType": "ADM2",
+          "owner_indices": [
+            30768
+          ],
+          "selected_package_contact": false,
+          "match_count": 1
+        }
+      },
+      "property_fields_checked": [
+        "shapeName",
+        "shapeISO",
+        "shapeID",
+        "shapeGroup",
+        "shapeType"
+      ],
+      "geometry_accessed": false
+    },
+    "usa_adm1_contact": {
+      "source_index": 61269,
+      "source_id": "gb:USA:ADM1:66186276B16791499040259",
+      "owner_indices": [],
+      "payload": {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-USA-ADM1-000.bin.gz",
+        "git_blob_oid": "f482da25b1b259e9726dd6aade4b8a1a381f3e3f",
+        "compressed_bytes": 1702347,
+        "compressed_sha256": "a1059264c0f20ad40a50fb51a19c49182bfd9fb012c591a1a6e8a971340ed43b",
+        "decoded_bytes": 5469814,
+        "decoded_sha256": "9d7a32244a5c3c2868d039355db2fdd9eb903ef255cfda128decd20bedc0dfbe",
+        "feature_count": 56,
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7"
+      },
+      "matched_properties": {
+        "shapeName": "Commonwealth of the Northern Mariana Islands",
+        "shapeISO": "US-MP",
+        "shapeID": "66186276B16791499040259",
+        "shapeGroup": "USA",
+        "shapeType": "ADM1",
+        "match_count": 1
+      }
+    },
+    "usa_adm2_contact": {
+      "source_index": 64048,
+      "source_id": "gb:USA:ADM2:52423323B84565222808084",
+      "owner_indices": [],
+      "payload": {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-USA-ADM2-000.bin.gz",
+        "git_blob_oid": "05f3069c9ef0686e6ff2e74753ea855bc0077f98",
+        "compressed_bytes": 2476897,
+        "compressed_sha256": "fe2128f4a5c164c9a9f58a6321af446782f6a689e4d5d9452e5967047c1958c9",
+        "decoded_bytes": 7938450,
+        "decoded_sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a",
+        "feature_count": 3233,
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7"
+      },
+      "matched_properties": {
+        "shapeName": "Northern Islands",
+        "shapeISO": "",
+        "shapeID": "52423323B84565222808084",
+        "shapeGroup": "USA",
+        "shapeType": "ADM2",
+        "match_count": 1
+      }
+    },
+    "source_catalogue_claims": [
+      {
+        "source": "gb:MNP:ADM2",
+        "feature_count": 4,
+        "recorded_license": "Public Domain",
+        "represented_year": "2021",
+        "metadata_sha256": "61ee5969f5d527ce3412538bff9eab11a74d559492e27531f39f069c9d66ffb0"
+      },
+      {
+        "source": "gb:USA:ADM1",
+        "feature_count": 56,
+        "recorded_license": "Public Domain",
+        "represented_year": "2018",
+        "metadata_sha256": "1347e4c224f3d8dc9525287f224b623540abba51d14f45cb0a857ddb2c22fbc7"
+      },
+      {
+        "source": "gb:USA:ADM2",
+        "feature_count": 3233,
+        "recorded_license": "Public Domain",
+        "represented_year": "2018",
+        "metadata_sha256": "52c9da4222df0f4997e544db39bfcd2952c47d38f58924041d743b8d25aa6518"
+      }
+    ],
+    "claim_limit": "Catalogue license/year fields and payload property identity are retained metadata, not independent legal/current-rights clearance."
+  },
+  "owner_lineage": [
+    {
+      "owner_index": 30767,
+      "name": "Tinian",
+      "province_id": "framework:province:tinian:96edea1faa18",
+      "province_index": 4606,
+      "source_atom": "gb:MNP:ADM2:39175420B24162802066299"
+    },
+    {
+      "owner_index": 30769,
+      "name": "Rota",
+      "province_id": "framework:province:rota:6289f651d115",
+      "province_index": 3977,
+      "source_atom": "gb:MNP:ADM2:39175420B64217482742742"
+    },
+    {
+      "owner_index": 30770,
+      "name": "Northern Islands",
+      "province_id": "framework:province:northern-islands:b543729a71dc",
+      "province_index": 3379,
+      "source_atom": "gb:MNP:ADM2:39175420B77088391070908"
+    }
+  ],
+  "physical_water_context": {
+    "retained_operands": [
+      {
+        "block": 28,
+        "role": "physical support",
+        "git_blob_oid": "320ee1a5fda2706aa446e8872a7180ca66ae76a6",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-028.json.gz"
+      },
+      {
+        "block": 29,
+        "role": "physical support",
+        "git_blob_oid": "2e1d884705c104bd3dbc61ac5444761875210ba5",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-029.json.gz"
+      },
+      {
+        "block": 28,
+        "role": "inland water support",
+        "git_blob_oid": "ce25d850997ac8d56bb82778a7527b290edc7edd",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-028.json.gz"
+      },
+      {
+        "block": 29,
+        "role": "inland water support",
+        "git_blob_oid": "01851c2ff5b06938769c6662bea70c19c69148ba",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-029.json.gz"
+      }
+    ],
+    "classified_result": "All 205 package cells classify land; no interval is inland-water or source-relative. The physical support masks and water masks were used as classifier inputs.",
+    "limits": [
+      "No raw geometry was accessed and no per-cell geometric witness was independently checked.",
+      "The result does not establish water/land truth beyond the retained classifier/mask result, source fit, or positive additive repair qualification."
+    ]
+  },
+  "stock_owner_observation_reference": {
+    "performed_by_coordinator_once": true,
+    "path": "mnp-selected-owner-observation.json.gz",
+    "base_commit": "d8fe956218a0ef14c7ebdd9416f5b4163f682963",
+    "query_count": 205,
+    "original_interval_count": 83,
+    "result_summary": "all base/accepted-additive/effective selected owner fields were zero; no existing-product overlap",
+    "note": "This is a separate coordinator observation reference, not independently rerun or represented as source/physical scientific clearance."
+  },
+  "remaining_limits": [
+    "Full source competitor completeness and present applicability are unresolved; family 222 has distinct Saipan/owner 30768, whose noncontact cannot be inferred solely from this package roster or the mask classifier.",
+    "The ownerless USA ADM1 and ADM2 contacts require explicit applicability/exclusion treatment; contact alone is not ownership evidence.",
+    "No current rights clearance, territorial determination, geometry witness, positive repair qualification, or complete competitor proof.",
+    "No root acceptance or accepted credit is asserted by this inventory."
+  ]
+}

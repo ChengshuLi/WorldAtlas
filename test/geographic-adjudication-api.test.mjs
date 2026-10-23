@@ -80,7 +80,7 @@ test('actual evidence/scope/review validators produce bounded read-only authorit
 });
 for(const [name,options,pattern] of [
  ['self review',{mutation:({receipt,claim})=>receipt.reviewer_worker_id=claim.worker_id},/distinct worker/],
- ['stale reviewed head',{mutation:({receipt})=>receipt.head_sha='c'.repeat(40)},/Missing independent/],
+ ['stale reviewed head',{mutation:({receipt})=>receipt.head_sha='c'.repeat(40)},/Missing current exact-head source decision/],
  ['missing explicit source decisions',{secondReview:r=>delete r.geographic_adjudications},/explicit per-dossier/],
  ['target uncertainty',{mutation:({decision})=>decision.target_uncertainty='unknown'},/Unresolved/],
  ['target resolution',{mutation:({decision})=>decision.resolution_suitability='unknown'},/Unresolved/],

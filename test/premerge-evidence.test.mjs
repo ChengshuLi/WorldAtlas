@@ -1,8 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import fs from 'node:fs';
+import path from 'node:path';
+import zlib from 'node:zlib';
+import {syncBuiltinESMExports} from 'node:module';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
-import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
+import {sha256, subjectsHash, repositoryReader} from '../scripts/evidence-quality.mjs';
 import {evidenceRequirement} from '../scripts/evidence-policy.mjs';
 import {validatePremergeManifest, validateRecordChecks, validateReviewReceipt, checkPremergeEvidence, GEOMETRY_VERSION} from '../scripts/premerge-evidence.mjs';
 
@@ -31,6 +35,86 @@ function fixture() {
   return {manifest, spec, issue, files, reservation, pr, readFile, manifestPath, branch};
 }
 const validate = f => validatePremergeManifest(f.manifest, f);
+function sharedResultFixture() {
+  const f = fixture(), values = Object.fromEntries(Array.from({length: 8}, (_,i) => ['field' + i, i + 1]));
+  const decoded = Buffer.from(JSON.stringify(values)), compressed = zlib.gzipSync(decoded);
+  f.manifest.outputs = [{...desc(outputPath, compressed), uncompressed_bytes: decoded.length,
+    uncompressed_sha256: sha256(decoded)}];
+  f.manifest.metrics = Object.entries(values).map(([field, value]) => ({id: field, value, unit: 'count',
+    vintage: 'archived', input_sha256: sha256(baseline), evaluation_commit: commit}));
+  f.manifest.metric_bindings = Object.keys(values).map(field => ({metric_id: field, path: outputPath, json_pointer: '/' + field}));
+  f.manifest.summaries = [];
+  const reads = new Map(), bodies = new Map([[commit + ':baseline.txt', baseline], ['candidate:' + outputPath, compressed]]);
+  f.readFile = (name, vintage) => {
+    const key = vintage + ':' + name; reads.set(key, (reads.get(key) ?? 0) + 1);
+    assert.ok(bodies.has(key), 'No undeclared synthetic body'); return bodies.get(key);
+  };
+  return {...f, reads, bodies, decoded, compressed};
+}
+
+test('eight shared-result metrics reuse one authenticated read and gzip decode in the actual validator', () => {
+  const f = sharedResultFixture(), original = zlib.gunzipSync, parse = JSON.parse; let gunzips = 0, parses = 0;
+  zlib.gunzipSync = (...args) => {gunzips++; return original(...args);}; syncBuiltinESMExports();
+  JSON.parse = (raw, ...args) => {if (Buffer.isBuffer(raw) && raw.equals(f.decoded)) parses++; return parse(raw, ...args);};
+  try {
+    assert.equal(validate(f).metric_bindings_checked, 8);
+    assert.equal(f.reads.get('candidate:' + outputPath), 1);
+    assert.equal(f.reads.get(commit + ':baseline.txt'), 1);
+    assert.equal(gunzips, 1); assert.equal(parses, 1);
+  } finally {JSON.parse = parse; zlib.gunzipSync = original; syncBuiltinESMExports();}
+});
+
+test('record and metric checks share the authenticated decoded result while retaining exact reference joins', () => {
+  const f = sharedResultFixture(), rows = [{id: 'a', owner: 'expected'}];
+  const decoded = Buffer.from(JSON.stringify({...JSON.parse(f.decoded), rows})), raw = zlib.gzipSync(decoded);
+  const reference = Buffer.from(JSON.stringify(rows));
+  f.bodies.set('candidate:' + outputPath, raw); f.bodies.set(commit + ':baseline.txt', reference);
+  Object.assign(f.manifest.outputs[0], desc(outputPath, raw), {uncompressed_bytes: decoded.length, uncompressed_sha256: sha256(decoded)});
+  f.manifest.baseline.files = [desc('baseline.txt', reference)];
+  f.manifest.metrics.forEach(metric => {metric.input_sha256 = sha256(reference);});
+  f.manifest.record_checks = [{version: 1, path: outputPath, json_pointer: '/rows', id_key: 'id',
+    reference_path: 'baseline.txt', reference_json_pointer: '', reference_id_key: 'id', fields: {owner: 'owner'}}];
+  assert.equal(validate(f).record_checks_checked, 1);
+  assert.equal(f.reads.get('candidate:' + outputPath), 1); assert.equal(f.reads.get(commit + ':baseline.txt'), 1);
+  f.bodies.set(commit + ':baseline.txt', Buffer.from(JSON.stringify([{id: 'a', owner: 'foreign'}])));
+  f.manifest.baseline.files = [desc('baseline.txt', f.bodies.get(commit + ':baseline.txt'))];
+  f.manifest.metrics.forEach(metric => {metric.input_sha256 = f.manifest.baseline.files[0].sha256;});
+  assert.throws(() => validate(f), /Independent record join mismatch/);
+});
+
+test('shared-result reuse preserves every pointer/value check and reauthenticates each fresh call', () => {
+  const f = sharedResultFixture(); validate(f);
+  f.manifest.metrics[7].value++; assert.throws(() => validate(f), /Generated result differs/);
+  f.manifest.metrics[7].value--;
+  f.manifest.metric_bindings[7].json_pointer = '/absent'; assert.throws(() => validate(f), /pointer does not resolve/);
+  f.manifest.metric_bindings[7].json_pointer = '/field7';
+  const changed = zlib.gzipSync(Buffer.from(JSON.stringify({field0: 99})));
+  f.bodies.set('candidate:' + outputPath, changed);
+  assert.throws(() => validate(f), /Input bytes mismatch/);
+  Object.assign(f.manifest.outputs[0], desc(outputPath, changed));
+  assert.throws(() => validate(f), /Uncompressed bytes mismatch/);
+  const decoded = Buffer.from(JSON.stringify({...JSON.parse(f.decoded), field7: 99}));
+  const raw = zlib.gzipSync(decoded); f.bodies.set('candidate:' + outputPath, raw);
+  Object.assign(f.manifest.outputs[0], desc(outputPath, raw), {uncompressed_bytes: decoded.length, uncompressed_sha256: sha256(decoded)});
+  assert.throws(() => validate(f), /Generated result differs/);
+});
+
+test('reuse checks descriptor identity on a cache hit and keeps historical/candidate same paths distinct', () => {
+  const drifted = sharedResultFixture();
+  Object.defineProperty(drifted.manifest.metric_bindings[1], 'json_pointer', {get() {
+    drifted.manifest.outputs[0].sha256 = '0'.repeat(64); return '/field1';
+  }});
+  assert.throws(() => validate(drifted), /Checked evidence descriptor changed/);
+  const f = sharedResultFixture();
+  f.manifest.baseline = {version: 2, commit, files: [{...desc(outputPath, baseline), commit}], pins: {}};
+  f.bodies.delete(commit + ':baseline.txt'); f.bodies.set(commit + ':' + outputPath, baseline);
+  f.readFile.assertAncestor = actual => assert.equal(actual, commit);
+  f.manifest.metrics.forEach(metric => {metric.input_file = {path: outputPath, commit};});
+  assert.equal(validate(f).metric_bindings_checked, 8);
+  assert.equal(f.reads.get(commit + ':' + outputPath), 1);
+  assert.equal(f.reads.get('candidate:' + outputPath), 1);
+});
+
 test('independent record bindings reject coherent wrong joins, incomplete and vacuous coverage', () => {
   const reference = [{id: 'a', parent: 'province-a', unit: 'm2'}, {id: 'b', parent: 'province-b', unit: 'm2'}];
   const manifest = {outputs: [{path: 'candidate.json'}], baseline: {commit, files: [{path: 'reference.json'}]}, record_checks: [{
@@ -65,9 +149,6 @@ test('scientific requirements preserve legacy scopes while ordinary engineering 
   f.issue.created_at = '2026-10-02T00:00:00Z'; assert.equal(evidenceRequirement(f.issue, f.spec, policy, branch).legacy, true);
   delete f.issue.created_at; assert.throws(() => evidenceRequirement(f.issue, f.spec, policy, branch), /timestamp/);
   assert.equal(evidenceRequirement({}, {}, {...policy, mode: 'report-only'}).required, false);
-});
-test('positive real-format ledger validates actual files and binds an independent review', () => {
-  const f = fixture(); assert.equal(validate(f).metric_bindings_checked, 1); assert.equal(review(f).reviewer, 'reviewer');
 });
 test('regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail', () => {
   const mutations = [f => f.manifest.baseline.files[0].sha256 = 'broken', f => f.manifest.baseline.files[0].hash_kind = 'entry',
@@ -124,6 +205,26 @@ test('Washington-style generated narrative/table mismatch fails against the same
   f.manifest.rendered_tables[0].rows[0].template = 'Wrong | {value}%'; assert.throws(() => validate(f), /table differs/);
   f.manifest.rendered_tables = []; assert.throws(() => validate(f), /ledger-bound/);
 });
+test('large table and control rereads retain exact descriptors through the real local reader', () => {
+  const f = fixture(), directory = fs.mkdtempSync(path.join(process.cwd(), '.cache-premerge-reread-'));
+  const tablePath = 'coordination/engineering/synthetic/table.md', controlPath = 'coordination/engineering/synthetic/control.json';
+  const table = Buffer.alloc(36065990, 32); table.write('Share | 50.00%\n');
+  const control = Buffer.from(JSON.stringify({method_id: 'synthetic', kind: 'positive-control', outcome: 'passed'}) + ' '.repeat(36065990));
+  try {
+    for (const [name, raw] of [[outputPath, output], [tablePath, table], [controlPath, control]]) {
+      const target = path.join(directory, name); fs.mkdirSync(path.dirname(target), {recursive: true}); fs.writeFileSync(target, raw, {flag: 'wx'});
+      if (name === outputPath) continue;
+      f.manifest.outputs.push({...desc(name, raw), ...(name === tablePath ? {role: 'generated-table'} : {})});
+      f.files.push({filename: name, status: 'added'}); f.manifest.change_receipts.push({path: name, status: 'added'});
+    }
+    f.manifest.rendered_tables = [{path: tablePath, rows: [{metric_id: 'share', line: 1, template: 'Share | {value}%', decimals: 2, scale: 100}]}];
+    f.manifest.validation = [{method_id: 'synthetic', kind: 'positive-control', outcome: 'passed', evidence_path: controlPath}];
+    const reader = repositoryReader(directory);
+    f.readFile = (name, vintage, descriptor) => name === 'baseline.txt' ? baseline : reader(name, vintage, descriptor);
+    assert.equal(validate(f).change_files_checked, 4);
+    fs.appendFileSync(path.join(directory, controlPath), 'x'); assert.throws(() => validate(f), /budget/);
+  } finally { fs.rmSync(directory, {recursive: true, force: true}); }
+});
 test('scientific reviews reject self approval, stale heads and absent factual/geometry review', () => {
   for (const mutate of [r => r.reviewer_worker_id = 'author', r => r.head_sha = commit, r => r.outcome = 'changes-requested', r => delete r.domains.implementation]) {
     const f = fixture(), r = receipt(f); mutate(r); assert.throws(() => review(f, r));
@@ -132,7 +233,7 @@ test('scientific reviews reject self approval, stale heads and absent factual/ge
   assert.throws(() => review(f, receipt(f), {limits: ['Primary source inaccessible']}), /limits/);
 });
 
-function remoteFixture(f, comments = [], extraContents = []) {
+function remoteFixture(f, extraContents = []) {
   const bytes = Buffer.from(JSON.stringify(f.manifest));
   const contents = new Map([['baseline.txt', baseline], [outputPath, output], [manifestPath, bytes], ...extraContents]);
   const oid = bytes => createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
@@ -145,34 +246,74 @@ function remoteFixture(f, comments = [], extraContents = []) {
     if (route.includes('/git/trees/')) return {truncated: false, tree};
     if (route.includes('/git/blobs/')) {const sha=route.split('/').pop(),raw=blobs.get(sha);return {sha,size:raw.length,encoding:'base64',content:raw.toString('base64')};}
     if (route.includes('/compare/')) return {status: 'identical'};
-    if (route.includes('/comments?')) return comments;
     throw Error(`Unexpected remote route: ${route}`);
   };
   return {api, calls, bytes, tree, blobs};
 }
-test('mock remote queue checks exact blobs/head/independent receipt with read-only requests', async () => {
-  const f = fixture(), r = receipt(f), remote = remoteFixture(f); r.manifest_sha256 = sha256(remote.bytes);
-  const {api, calls} = remoteFixture(f, [{id: 1, author_association: 'OWNER', body: `<!-- worldatlas-review:v1\n${JSON.stringify(r)}\n-->`}]);
-  const result = await checkPremergeEvidence({...f, api, repo: 'test/repo', policy, review: true});
-  assert.equal(result.review.reviewer, 'reviewer'); assert.ok(calls.every(row => row.method === 'GET'));
-  await assert.rejects(() => checkPremergeEvidence({...f, api: remote.api, repo: 'test/repo', policy, review: true}), /Missing independent/);
-  const failed = await checkPremergeEvidence({...f, api: remote.api, repo: 'test/repo', policy: {...policy, mode: 'report-only'}, review: true});
+
+test('hosted whole-manifest loading forwards exact large sizes through nested immutable REST readers',async()=>{
+ const f=fixture(),raw=Buffer.alloc(36065990,17),extras=[];
+ for(let i=0;i<8;i++){
+  const name='coordination/engineering/synthetic/large-'+i+'.bin';extras.push([name,raw]);
+  f.manifest.outputs.push(desc(name,raw));f.files.push({filename:name,status:'added'});f.manifest.change_receipts.push({path:name,status:'added'});
+ }
+ assert.ok(f.manifest.outputs.reduce((sum,file)=>sum+file.bytes,0)>256*1024*1024);f.pr.changed_files=f.files.length;
+ const remote=remoteFixture(f,extras),forwarded=[];
+ const api=memoizeImmutableGitBlobs(memoizeImmutableGitBlobs(async(...args)=>{forwarded.push(args);return remote.api(...args);}));
+ assert.equal((await checkPremergeEvidence({...f,api,repo:'test/repo',policy})).status,'bytes-verified');
+ assert.ok(forwarded.some(([, , ,options])=>options?.expectedImmutableBytes===raw.length&&Number.isSafeInteger(options.maxResponseBytes)));
+ const changed=remote.tree.find(row=>row.path===extras[0][0]);changed.size--;
+ await assert.rejects(checkPremergeEvidence({...f,api,repo:'test/repo',policy}),/Manifest\/tree evidence size differs/);
+});
+test('hosted manifests use exact tree sizes beyond 1 MiB and authenticate inventories beyond 512 files',async()=>{
+ const f=fixture(),extras=[];
+ for(let i=0;i<513;i++){
+  const name='coordination/engineering/synthetic/control-'+i+'.bin',raw=Buffer.from('control '+i);extras.push([name,raw]);
+  f.manifest.outputs.push(desc(name,raw));f.files.push({filename:name,status:'added'});f.manifest.change_receipts.push({path:name,status:'added'});
+ }
+ f.manifest.notes='x'.repeat(1024*1024);f.pr.changed_files=f.files.length;
+ const remote=remoteFixture(f,extras),forwarded=[],batches=[];
+ assert(remote.bytes.length>1024*1024);
+ const api=memoizeImmutableGitBlobs(async(...args)=>{forwarded.push(args);return remote.api(...args);});
+ api.prefetchGitBlobs=async(repo,rows)=>{assert.equal(repo,'test/repo');batches.push(rows);};
+ const result=await checkPremergeEvidence({...f,api,repo:'test/repo',policy});
+ assert.equal(result.status,'bytes-verified');assert.equal(result.checked.length,515);
+ assert(batches.some(rows=>rows.length>512));
+ assert(forwarded.some(([, , ,options])=>options?.expectedImmutableBytes===remote.bytes.length));
+ const last=remote.tree.find(row=>row.path===extras.at(-1)[0]);last.size--;
+ await assert.rejects(checkPremergeEvidence({...f,api,repo:'test/repo',policy}),/Manifest\/tree evidence size differs/);
+});
+test('scientific byte checks need no duplicate review comment and do not certify review', async () => {
+  const f = fixture(), remote = remoteFixture(f);
+  const result = await checkPremergeEvidence({...f, api: remote.api, repo: 'test/repo', policy});
+  assert.equal(result.metric_bindings_checked, 1);
+  assert.equal(result.status, 'bytes-verified');
+  assert.equal(result.head_sha, head);
+  assert.equal(Object.hasOwn(result, 'review'), false);
+  assert.ok(remote.calls.every(row => row.method === 'GET'));
+  assert.ok(!remote.calls.some(row => /\/(?:comments|reviews)\?/.test(row.route)));
+  f.manifest.metrics[0].value = 2;
+  await assert.rejects(checkPremergeEvidence({...f, api: remoteFixture(f).api, repo: 'test/repo', policy}), /Generated result|summary/i);
+  const failed = await checkPremergeEvidence({...f, api: remoteFixture(f).api, repo: 'test/repo', policy: {...policy, mode: 'report-only'}});
   assert.equal(failed.status, 'report-failure');
 });
-test('incomplete remote trees cannot become a passed byte check', async () => {
-  const f = fixture(), remote = remoteFixture(f);
-  await assert.rejects(() => checkPremergeEvidence({...f, repo: 'test/repo', policy,
-    api: async route => route.includes('/git/trees/') ? {truncated: true, tree: []} : remote.api(route)}), /Incomplete/);
-});
-test('remote decisions reject stale exact-head reviews and a later change request', async () => {
-  const f = fixture(), remote = remoteFixture(f), r = receipt(f); r.manifest_sha256 = sha256(remote.bytes);
-  const comment = receipt => ({id: 1, author_association: 'OWNER', body: `<!-- worldatlas-review:v1\n${JSON.stringify(receipt)}\n-->`});
-  await assert.rejects(() => checkPremergeEvidence({...f, repo: 'test/repo', policy, review: true,
-    api: remoteFixture(f, [comment({...r, head_sha: commit})]).api}), /Missing independent/);
-  await assert.rejects(() => checkPremergeEvidence({...f, repo: 'test/repo', policy, review: true,
-    api: remoteFixture(f, [comment(r), {...comment({...r, outcome: 'changes-requested'}), id: 2}]).api}), /unresolved/);
-  await assert.rejects(() => checkPremergeEvidence({...f, repo: 'test/repo', policy,
-    api: route => route.includes('/compare/') ? Promise.resolve({status: 'diverged'}) : remote.api(route)}), /ancestor/);
+test('manifest discovery omits the unused base read and final checks still authenticate base and history', async () => {
+  const f = fixture(), historical = 'c'.repeat(40);
+  f.manifest.baseline = {version: 2, commit: historical, files: [{...desc('baseline.txt', baseline), commit: historical}], pins: {}};
+  f.manifest.metrics[0].vintage = 'archived';
+  f.files[0].status = f.manifest.change_receipts[0].status = 'modified';
+  f.manifest.change_receipts[0].original_sha256 = sha256(output);
+  const remote = remoteFixture(f);
+  const result = await checkPremergeEvidence({...f, api: remote.api, repo: 'test/repo', policy});
+  const routes = remote.calls.map(row => row.route);
+  const manifestOID = [...remote.blobs].find(([, body]) => body.equals(remote.bytes))[0];
+  const manifestRead = routes.indexOf(`/repos/test/repo/git/blobs/${manifestOID}`);
+  const baseRead = routes.indexOf(`/repos/test/repo/git/commits/${commit}`);
+  assert.ok(baseRead > manifestRead, 'Base discovery must wait until after the candidate manifest is read');
+  assert.equal(routes.filter(route => route === `/repos/test/repo/git/commits/${commit}`).length, 1);
+  assert.equal(routes.filter(route => route === `/repos/test/repo/git/commits/${historical}`).length, 1);
+  assert.ok(result.checked.includes(`${historical}:baseline.txt`));
+  assert.equal(result.change_files_checked, 2, 'The modified output still needs authenticated original base bytes');
 });
 
 test('unchanged authored evidence survives unrelated main advance, while current metrics require refresh', () => {
@@ -218,23 +359,18 @@ test('trusted hosted gate checks a new limited prior-evidence registry and still
 });
 
 
-test('fresh remote review, head, tree/path checks reject after immutable bytes were reused',async()=>{
- for(const change of ['review','head','tree','mode','path']) {
-  const f=fixture(),comments=[],remote=remoteFixture(f,comments),r=receipt(f);r.manifest_sha256=sha256(remote.bytes);
-  const comment=value=>({id:comments.length+1,author_association:'OWNER',body:`<!-- worldatlas-review:v1\n${JSON.stringify(value)}\n-->`});
-  comments.push(comment(r));const api=memoizeImmutableGitBlobs(remote.api);
-  const check=()=>checkPremergeEvidence({...f,api,repo:'test/repo',policy,review:true});
-  await check();await check();assert.equal(remote.calls.filter(c=>c.route.includes('/git/blobs/')).length,3);
-  assert.equal(remote.calls.filter(c=>c.route.includes('/comments?')).length,2);
-  if(change==='review')comments.push(comment({...r,outcome:'changes-requested'}));
-  if(change==='head')f.pr.head.sha='c'.repeat(40);
+test('fresh remote tree/path checks reject after immutable bytes were reused',async()=>{
+ for(const change of ['tree','mode','path']) {
+  const f=fixture(),remote=remoteFixture(f),api=memoizeImmutableGitBlobs(remote.api);
+  const check=()=>checkPremergeEvidence({...f,api,repo:'test/repo',policy});
+  await check();assert.equal(remote.calls.filter(c=>c.route.includes('/git/blobs/')).length,3);
   if(change==='mode')remote.tree.find(e=>e.path===outputPath).mode='120000';
   if(change==='path')remote.tree.splice(remote.tree.findIndex(e=>e.path===outputPath),1);
   if(change==='tree') {
    const raw=Buffer.from('{"value":0.6}\n'),oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
    remote.blobs.set(oid,raw);Object.assign(remote.tree.find(e=>e.path===outputPath),{sha:oid,size:raw.length});
   }
-  await assert.rejects(check(),change==='review'?/unresolved/:change==='head'?/Missing independent/:['mode','path'].includes(change)?/nonordinary/:/Input bytes mismatch/);
+  await assert.rejects(check(),['mode','path'].includes(change)?/nonordinary/:/Input bytes mismatch/);
   assert.equal(remote.calls.filter(c=>c.route.includes('/git/blobs/')).length,change==='tree'?4:3);
  }
  const f=fixture(),remote=remoteFixture(f);let truncated=false;
@@ -243,12 +379,10 @@ test('fresh remote review, head, tree/path checks reject after immutable bytes w
  await assert.rejects(checkPremergeEvidence({...f,api,repo:'test/repo',policy}),/Incomplete/);
 });
 
-test('scientific review needs substantive scope, not a duplicate file inventory or prose hashes', () => {
+test('specialized dossier review retains substantive scope and exact manifest binding', () => {
   const f = fixture(), value = receipt(f);
   delete value.inspected_files;
   delete value.evidence_hashes;
-  assert.equal(review(f, value).reviewer, 'reviewer');
-  f.issue.body += '\nProgress and disposition are reviewed in ordinary comments.';
   assert.equal(review(f, value).reviewer, 'reviewer');
   value.manifest_sha256 = 'c'.repeat(64);
   assert.throws(() => review(f, value), /exact head, manifest/);
@@ -257,22 +391,13 @@ test('scientific review needs substantive scope, not a duplicate file inventory 
 test('ordinary engineering reads no synthetic scientific packet or review JSON', async () => {
   const f = fixture(); delete f.spec.evidence_quality;
   f.issue.body = `<!-- worldatlas-work:v1\n${JSON.stringify(f.spec)}\n-->`;
-  const result = await checkPremergeEvidence({...f, repo: 'test/repo', policy, review: true,
+  const result = await checkPremergeEvidence({...f, repo: 'test/repo', policy,
     api: async () => { throw Error('Ordinary engineering must not fetch an invented scientific packet'); }});
   assert.equal(result.status, 'not-required');
   assert.equal(result.head_sha, f.pr.head.sha);
   assert.match(result.limits.join(), /substantive exact-head review/);
 });
 
-test('minimal manifests reuse Git change inventory but preserve evidence and independent review',()=>{
- const f=fixture();delete f.manifest.change_receipts;
- f.files.push({filename:'scripts/repair.mjs',status:'modified'});
- f.pr.changed_files=f.files.length;
- validate(f);
- const r=receipt(f);review(f,r);
- delete r.inspected_files;delete r.evidence_hashes;review(f,r);
- f.manifest.outputs[0].sha256='c'.repeat(64);assert.throws(()=>validate(f),/hash|bytes/i);
-});
 test('omitting duplicate change receipts does not authorize replacing original scientific evidence',()=>{
  for(const status of ['modified','removed','renamed']){
   const f=fixture();delete f.manifest.change_receipts;
@@ -294,10 +419,8 @@ test('declared controls remain checked, not accepted merely because controls are
 test('remote minimal manifests need no base-body copies for unrelated code changes',async()=>{
  const f=fixture();delete f.manifest.change_receipts;
  f.files.push({filename:'scripts/repair.mjs',status:'modified'});f.pr.changed_files=f.files.length;
- const r=receipt(f),remote=remoteFixture(f);r.manifest_sha256=sha256(remote.bytes);
- const check=remoteFixture(f,[{id:1,author_association:'OWNER',body:`<!-- worldatlas-review:v1\n${JSON.stringify(r)}\n-->`}]);
- const result=await checkPremergeEvidence({...f,api:check.api,repo:'test/repo',policy,review:true});
- assert.equal(result.review.reviewer,'reviewer');
+ const result=await checkPremergeEvidence({...f,api:remoteFixture(f).api,repo:'test/repo',policy});
+ assert.equal(result.change_files_checked,3);
  f.manifest.metrics[0].value=2;
- await assert.rejects(checkPremergeEvidence({...f,api:remoteFixture(f).api,repo:'test/repo',policy,review:false}),/Generated result|summary/i);
+ await assert.rejects(checkPremergeEvidence({...f,api:remoteFixture(f).api,repo:'test/repo',policy}),/Generated result|summary/i);
 });

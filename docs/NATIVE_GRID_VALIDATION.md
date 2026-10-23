@@ -34,7 +34,7 @@ After the explicit native build:
 node test/native-build-binding.mjs
 node test/native-world-context.mjs
 node --test test/native-materialization-gate.test.mjs test/select-build-ownership.test.mjs
-node --test test/native-renderer.test.mjs test/native-dated-browser.test.mjs test/context-input-stage.test.mjs
+node --test test/native-renderer.test.mjs test/native-dated-browser.test.mjs test/compact-context-inputs.test.mjs
 ```
 
 The binding readback compares every packaged row/run word to the registered candidate; authenticates every original native footprint; verifies original IDs and parents; checks normative latitude bytes; preserves the complete original physical-class manifest, source limits and asset bytes except its ownership association; and verifies the retained prepared-evidence index. It also confirms the original legacy grid remains selectable with its original digest. The world context control duplicates an existing native vertex and requires every output word and original owner mapping to remain identical. This representation control is not a factual repair.
@@ -45,9 +45,48 @@ Recovery selects the retained legacy manifest by running the ordinary build with
 
 ## Limits before delivery
 
+Source-target coverage masks are strictly admitted per original geometry while
+being converted to the Float64 rings required by the native scanner. Only the
+numerical polygons are then grouped by their already-checked original source
+ordinal. This removes the earlier complete coordinate walk for raw mask grouping;
+it does not bypass exact geometry fields, nonempty polygons/rings, literal finite
+bounded pairs, closure, or original member-to-owner checks. Sparse arrays remain
+invalid. Source and exclusion conversion, the public footprint/runtime APIs and
+the scanner's own numerical checks are unchanged.
+
+Each invocation and coverage class converts its current operands. Numerical rings
+are not cached across classes, row blocks or calls, and lazy source storage must
+remain open until conversion completes. The required Float64 rings, polygon
+rosters, scan edges/intersections and result arrays remain input/output-sized
+memory terms. `test/native-coverage-admission.test.mjs` exercises strict rejection,
+genuine stored 31/32/33 boundaries, exact result parity and one coordinate visit
+per original coverage conversion; that pass count is not a wall-time claim.
+
 Cold changed-geography preparation remains slow and whole-process memory measurements vary substantially. Incremental source authentication limits each serialization buffer to one feature; it does not bound total geometry or grid memory. Original geographic approval/certificates retain their existing meaning. Independent exact-head review, bounded evidence packaging, normal queue checks and a separately authorized verified delivery are required. No live facts were read back or mutated in this offline validation. Genuine source gaps and uncertain physical-water questions remain open for the global source audit and coordinated factual repairs.
 
-Current selected-reader and native-preparation memory grants use actual reported
-resources and finite safety headroom. See [PROCESSING_MEMORY_ADMISSION.md](PROCESSING_MEMORY_ADMISSION.md)
-for concurrent-growth reservations, complete-phase/RSS limits and existing explicit
-preparation arguments.
+Selected readers and native preparation use ordinary runtime/OS memory behavior.
+See [PROCESSING_MEMORY_ADMISSION.md](PROCESSING_MEMORY_ADMISSION.md). Scientific
+checks, immutable input identity and complete-output acceptance remain required.
+
+## Numerical edge-record lifetime
+
+The monotone scanner schedules each edge once and uses it only while the current
+row is below its exclusive end. Activation now clears the consumed pending-array
+slot, transferring sole ownership to the active set. The existing expiration
+filter can then release the entire edge and its cached exact binary decompositions.
+The sorted roster's first edge is read only to initialize the scan; its monotone
+cursor never revisits a consumed slot. Horizontal and excluded-vertex ties were
+recorded as scalar values before activation. Every row-block or canonical seam
+scan constructs fresh edges, so later scans do not depend on an earlier record.
+
+A bounded 155-vertex polygon with thirty short-lived holes has 62 scheduled edges
+and at most four active edges. Instrumenting the exact before/after scanner gives
+62 versus four peak cached edges; retained records after the last activation also
+drop from 62 to four. Complete rows, ties and flags are unchanged. These are live
+record counts, not a new RSS or speed measurement. Controls cover endpoint ties,
+repeated/out-of-order overlapping row blocks and repeated multi-block seam scans.
+
+Full numerical coordinate arrays, pending-array slots, future edge records,
+genuinely active edges and block results remain input-sized. This lifetime
+correction does not bound complex active geometry or eliminate whole
+request/result serialization.

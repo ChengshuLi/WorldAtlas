@@ -58,7 +58,7 @@ rebuildGeometry({grid:baseForReference(),features:original});render();
 function baseForReference(){return referenceData.ownership;}
 window.fixture={map,L,events,loadYear,get layer(){return geoLayer;},get year(){return year;},get ids(){return data.features.map(f=>f.id);},get error(){return $('#year-error').textContent??'';}};
 </script>`;
-const server=await createServer({cacheDir:path.resolve(scratch,'vite'),server:{host:'127.0.0.1',port:0},plugins:[{
+const server=await createServer({cacheDir:path.resolve(scratch,'vite'),server:{watch:null,host:'127.0.0.1',port:0},plugins:[{
  name:'native-dated-fixture',configureServer(s){s.middlewares.use((req,res,next)=>{
   if(req.url.startsWith('/fixture?')){res.setHeader('Content-Type','text/html');res.end(html);return;}
   if(req.url==='/latitudes'){res.end(Buffer.from(latitudes.buffer));return;}

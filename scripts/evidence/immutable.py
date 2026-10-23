@@ -13,7 +13,9 @@ import importlib.util
 import types
 
 VERSION = 'worldatlas-evidence-preparation-v1'
+# Compatibility constant for older explicit callers; not a shared file ceiling.
 MAX_FILE_BYTES = 32 * 1024 * 1024
+# Retained for historical transport callers; current callers choose any explicit budget.
 MAX_PHASE_BYTES = 256 * 1024 * 1024
 
 
@@ -44,12 +46,12 @@ def deterministic_gzip(raw):
 
 class Baseline:
     """A commit plus reviewed whole-file pins; never the mutable working tree."""
-    def __init__(self, repo, commit, files, *, max_phase_bytes=MAX_PHASE_BYTES):
+    def __init__(self, repo, commit, files, *, max_phase_bytes=None):
         if not re.fullmatch('[a-f0-9]{40}', commit):
             raise ValueError('An immutable 40-character baseline commit is required')
         self.repo, self.commit = str(Path(repo).resolve()), commit
         self.pins = {}
-        if not isinstance(max_phase_bytes, int) or not 0 < max_phase_bytes <= MAX_PHASE_BYTES:
+        if max_phase_bytes is not None and (type(max_phase_bytes) is not int or max_phase_bytes <= 0):
             raise ValueError('Invalid bounded phase budget')
         self.max_phase_bytes = max_phase_bytes
         self.consumed = {}
@@ -77,20 +79,18 @@ class Baseline:
             raise ValueError('Baseline evidence must be an ordinary committed file: ' + name)
         blob = row.split()[2]
         size = int(self._git('cat-file', '-s', blob))
-        if size > MAX_FILE_BYTES:
-            raise ValueError('Baseline file exceeds byte budget')
         self.admit(name, size)
         return self._git('cat-file', 'blob', blob)
 
     def admit(self, name, size):
         """Account unique actual raw/decoded inputs, including index discoveries."""
-        if size < 0 or size > MAX_FILE_BYTES:
-            raise ValueError('Input exceeds file byte budget')
+        if type(size) is not int or size < 0:
+            raise ValueError('Invalid input byte size')
         previous = self.consumed.get(name)
         if previous is not None and previous != size:
             raise ValueError('Consumed input size changed')
         if previous is None:
-            if sum(self.consumed.values()) + size > self.max_phase_bytes:
+            if self.max_phase_bytes is not None and sum(self.consumed.values()) + size > self.max_phase_bytes:
                 raise ValueError('Complete execution phase exceeds byte budget')
             self.consumed[name] = size
 
@@ -114,7 +114,7 @@ class Baseline:
             if ancestor.is_symlink():
                 raise ValueError('Symlink in consumed input/code path')
         with target.open('rb') as stream:
-            actual = stream.read(MAX_FILE_BYTES + 1)
+            actual = stream.read(len(expected) + 1)
         if actual != expected:
             raise ValueError('Actually consumed materialized input/code drift: ' + name)
         return actual
@@ -180,9 +180,7 @@ class Baseline:
             raw = self.read(name)
             if name.endswith('.gz'):
                 with gzip.GzipFile(fileobj=io.BytesIO(raw)) as stream:
-                    raw_json = stream.read(MAX_FILE_BYTES + 1)
-                if len(raw_json) > MAX_FILE_BYTES:
-                    raise ValueError('Uncompressed part exceeds byte budget')
+                    raw_json = stream.read(self.max_phase_bytes + 1 if self.max_phase_bytes is not None else -1)
                 self.admit(name + ':decoded', len(raw_json))
             else:
                 raw_json = raw
@@ -253,8 +251,6 @@ class NewVintage:
         payloads = {}
         for name, value in values.items():
             raw = canonical_json(value)
-            if len(raw) > MAX_FILE_BYTES:
-                raise ValueError('Output exceeds file byte budget')
             payloads[name] = deterministic_gzip(raw) if name.endswith('.gz') else raw
         return self.publish_bytes(payloads)
 
@@ -265,25 +261,20 @@ class NewVintage:
         payloads = {}
         decoded_output_bytes = 0
         for name, value in values.items():
-            if not isinstance(value, bytes) or len(value) > MAX_FILE_BYTES:
-                raise ValueError('Require bounded complete output bytes')
+            if not isinstance(value, bytes):
+                raise ValueError('Require complete output bytes')
             payloads[name] = value
             if name.endswith('.gz'):
                 with gzip.GzipFile(fileobj=io.BytesIO(value)) as stream:
-                    raw = stream.read(MAX_FILE_BYTES + 1)
-                if len(raw) > MAX_FILE_BYTES:
-                    raise ValueError('Decoded output exceeds file byte budget')
+                    raw = stream.read(self.baseline.max_phase_bytes + 1 if self.baseline.max_phase_bytes is not None else -1)
                 decoded_output_bytes += len(raw)
-        if sum(self.baseline.consumed.values()) + sum(len(raw) for raw in payloads.values()) + decoded_output_bytes + 4096 > self.baseline.max_phase_bytes:
-            raise ValueError('Complete phase including output exceeds byte budget')
         records = [descriptor(str((self.root / name).relative_to(self.baseline.repo)), raw) for name, raw in payloads.items()]
         receipt = canonical_json({'version': 1, 'status': 'complete', 'outputs': records})
-        if len(receipt) > 4096:
-            raise ValueError('Completion receipt exceeds admitted reserve')
-        # Check the entire set and all pins again immediately before first mutation.
+        total = sum(self.baseline.consumed.values()) + sum(map(len, payloads.values())) + decoded_output_bytes + len(receipt)
+        if self.baseline.max_phase_bytes is not None and total > self.baseline.max_phase_bytes:
+            raise ValueError('Complete phase including output exceeds byte budget')
+        # Recheck the complete owned destination immediately before first mutation.
         NewVintage(self.baseline, self.owned_path, self.vintage, self.filenames)
-        for name in self.baseline.pins:
-            self.baseline.pinned_bytes(name)
         self.root.parent.mkdir(parents=True, exist_ok=True)
         self.root.mkdir()  # Exclusive run reservation; never reuse a retained run.
         try:
@@ -313,15 +304,10 @@ def write_new_vintage(baseline, owned_path, vintage, filename, value):
     target = admit_destination(baseline, owned_path, vintage, [filename]) / filename
     if not re.fullmatch('[a-z0-9][a-z0-9-]{0,63}', vintage) or not re.fullmatch(r'[a-zA-Z0-9_-]+\.json(?:\.gz)?', filename):
         raise ValueError('Use a named new vintage and a plain JSON filename')
-    # Recheck every pin before even creating directories; changed working-tree
-    # evidence is irrelevant, a caller cannot substitute a different baseline.
-    for name, pin in baseline.pins.items():
-        if sha256(baseline.read(name)) != pin['sha256']:
-            raise ValueError('Immutable baseline input changed')
     raw = canonical_json(value)
     encoded = deterministic_gzip(raw) if filename.endswith('.gz') else raw
     output_bytes = len(encoded) + (len(raw) if filename.endswith('.gz') else 0)
-    if len(raw) > MAX_FILE_BYTES or len(encoded) > MAX_FILE_BYTES or sum(baseline.consumed.values()) + output_bytes > baseline.max_phase_bytes:
+    if baseline.max_phase_bytes is not None and sum(baseline.consumed.values()) + output_bytes > baseline.max_phase_bytes:
         raise ValueError('Output exceeds complete byte budget')
     target.parent.mkdir(parents=True, exist_ok=True)
     temporary = None

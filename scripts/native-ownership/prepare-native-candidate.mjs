@@ -9,18 +9,17 @@ import {bindNativeTopology} from './native-topology-binding.mjs';
 import {loadNativeSourceInputs} from './native-only-inputs.mjs';
 import {compileNativeOwnership} from './compile-native-ownership.mjs';
 import {nativeCandidateManifest,NATIVE_CANONICAL_LATITUDE_SHA256} from './native-candidate-manifest.mjs';
-import {committedPreparationFiles,createNativeCandidateOutput,requirePlainExecution,candidateBudget,preparationAllowance} from './native-preparation-guards.mjs';
+import {committedPreparationFiles,createNativeCandidateOutput,requirePlainExecution} from './native-preparation-guards.mjs';
 import {shuffleOwnershipBytes} from '../../src/ownership-codec.js';
 
 const options = {};
 requirePlainExecution();
 for (let n = 2; n < process.argv.length; n += 2) {
   const key = process.argv[n];
-  if (!['--repo', '--baseline', '--vintage','--phase-bytes','--rss-bytes'].includes(key) || !process.argv[n + 1] || options[key])
+  if (!['--repo', '--baseline', '--vintage'].includes(key) || !process.argv[n + 1] || options[key])
     throw Error('Explicit repository, immutable baseline and fresh offline vintage required');
   options[key] = process.argv[n + 1];
 }
-const allowance=preparationAllowance({phaseBytes:options['--phase-bytes']===undefined?undefined:Number(options['--phase-bytes']),rssBytes:options['--rss-bytes']===undefined?undefined:Number(options['--rss-bytes'])});
 const repo = fs.realpathSync(options['--repo']), baseline = options['--baseline'];
 if (!/^[a-f0-9]{40}$/.test(baseline ?? '') || !/^[a-zA-Z0-9_-]+$/.test(options['--vintage'] ?? ''))
   throw Error('Invalid immutable baseline or vintage');
@@ -42,22 +41,19 @@ if (!/^100644 blob /.test(latitudeTree) || latitudeTree.slice(latitudeTree.index
   throw Error('Missing ordinary immutable normative latitude table');
 const latitudeBlob = latitudeTree.split(' ')[2].split('\t')[0];
 const latitudeLength = Number(execFileSync('git', ['-C', repo, 'cat-file', '-s', latitudeBlob], {encoding: 'utf8'}));
-if (!Number.isInteger(latitudeLength) || latitudeLength < 1 || latitudeLength > 32 * 1024 * 1024)
-  throw Error('Normative latitude file exceeds existing byte budget');
-const latitudeEncoded = execFileSync('git', ['-C', repo, 'cat-file', 'blob', latitudeBlob], {maxBuffer: 32 * 1024 * 1024});
+if (!Number.isInteger(latitudeLength) || latitudeLength < 1)
+  throw Error('Invalid normative latitude file length');
+const latitudeEncoded = execFileSync('git', ['-C', repo, 'cat-file', 'blob', latitudeBlob], {maxBuffer: latitudeLength + 1});
 const latitudeBytes = gunzipSync(latitudeEncoded, {maxOutputLength: inputs.manifest.size * 8});
 if (latitudeBytes.length !== inputs.manifest.size * 8 || digest(latitudeBytes) !== NATIVE_CANONICAL_LATITUDE_SHA256)
   throw Error('Immutable normative latitude bytes differ');
 const latitudes = Float64Array.from({length: inputs.manifest.size}, (_, i) => latitudeBytes.readDoubleLE(i * 8));
-const admission = candidateBudget([...inputs.sourceFiles, ...executed, ...topology.files, {bytes: latitudeEncoded.length}],{allowance});
 const out = createNativeCandidateOutput(repo, '.cache/native-grid-candidates/' + options['--vintage']);
 const products = [];
 function write(relative, raw, decoded = raw) {
-  if (!/^[a-zA-Z0-9_./-]+$/.test(relative) || relative.split('/').some(p => !p || p === '.' || p === '..') ||
-    raw.length > 32 * 1024 * 1024 || decoded.length > 32 * 1024 * 1024)
-    throw Error('Unsafe or oversized candidate product');
+  if (!/^[a-zA-Z0-9_./-]+$/.test(relative) || relative.split('/').some(p => !p || p === '.' || p === '..'))
+    throw Error('Unsafe candidate product');
   const file = path.join(out, relative); fs.mkdirSync(path.dirname(file), {recursive: true});
-  admission.add({bytes: raw.length}); // Enforce cumulative limits before writing each new product.
   fs.writeFileSync(file, raw, {flag: 'wx'});
   const descriptor = {path: relative, bytes: raw.length, sha256: digest(raw),
     decoded_bytes: decoded.length, decoded_sha256: digest(decoded)};
@@ -96,8 +92,7 @@ const reportBytes = json({version: 1, baseline_commit: baseline, evaluation_comm
     'New offline candidate only; original assets, release, identities, point sets and live facts unchanged.',
     'Physical land/water and true native coverage omissions remain unclassified.']});
 write('report.json.gz', gzipSync(reportBytes, {level: 9}), reportBytes);
-write('preparation-budget.json', json({...admission.snapshot(), excludes_this_budget_file: true}));
 fs.writeFileSync(path.join(out, 'progress.json'), json({phase: 'complete', elapsed_ms: performance.now() - started,
-  maxRSS_raw: process.resourceUsage().maxRSS, products: products.length, aggregate_budget: admission.snapshot()}));
+  products: products.length}));
 console.log(JSON.stringify({phase: 'complete', output: out, checked_cells: compiled.checked_cells,
   owners: inputs.roster.length, installation_ready: false}));

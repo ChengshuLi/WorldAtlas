@@ -1,0 +1,1148 @@
+{
+  "kind": "full-original-per-area-remainder-applicability-screening",
+  "baseline": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+  "complete_source_record": {
+    "advertised_feature_count": 5162,
+    "cohort": "administrative-registry",
+    "feature_count": 5162,
+    "key": "gb:CAN:ADM3",
+    "metadata_sha256": "076d2f5aa4ffa97a0b290f2d4d14811f3b73cde380bb7b9c1efa6beef2df20b9",
+    "original_bytes": 28924424,
+    "original_metadata_file": "data/administrative-sources.json",
+    "original_sha256": "70a228935086c1bb9c30938b198cba33261fdf405658dc43540e7e1d1a18a7f9",
+    "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+    "parts": [
+      {
+        "bytes": 10224469,
+        "hash_kind": "file-bytes",
+        "offset": 0,
+        "ordinal": 0,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CAN-ADM3-000.bin.gz",
+        "sha256": "9b04f222c2e9cab8a03b3b53e6c5a78892ef2f7a40cf89dfd5649cb59836ee09",
+        "uncompressed_bytes": 28924424,
+        "uncompressed_sha256": "70a228935086c1bb9c30938b198cba33261fdf405658dc43540e7e1d1a18a7f9"
+      }
+    ],
+    "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAN/ADM3/geoBoundaries-CAN-ADM3_simplified.geojson",
+    "recorded_license": "Open Data Commons Open Database License 1.0",
+    "source_represented_year_claim": "2016"
+  },
+  "semantic_remainder_input": {
+    "sha256": "9a2ab3d4a7a0a84581252b0b06a14eba63e01ac67fc42949b22aecde3cf8ea86",
+    "area_original_counts": {
+      "NFL": 342,
+      "LAB": 29,
+      "PEI": 9,
+      "NSC": 5,
+      "NBR": 11,
+      "QUE": 163,
+      "MAN": 228,
+      "SAS": 948,
+      "ONT": 171,
+      "YUK": 36,
+      "NWT": 41,
+      "BRC": 357,
+      "ABT": 423,
+      "NUN": 31
+    },
+    "distinct_atoms": 2794
+  },
+  "counts": {
+    "all": 144097,
+    "inside_full_original_remainder": 144097,
+    "outside_full_original_remainder": 0,
+    "other_original_contact": 0,
+    "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 144049
+  },
+  "targets": [
+    {
+      "id": "atlas:multipart:31ba3f8cfe5dec603858",
+      "index": 5760,
+      "areas": [
+        "NBR",
+        "QUE"
+      ],
+      "counts": {
+        "all": 237,
+        "inside_full_original_remainder": 237,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 237
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:multipart:b584f34f0420c6386763",
+      "index": 5780,
+      "areas": [
+        "NUN",
+        "QUE"
+      ],
+      "counts": {
+        "all": 450,
+        "inside_full_original_remainder": 450,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 450
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:multipart:eb54b54f2e8cdb87e6b1",
+      "index": 5797,
+      "areas": [
+        "NUN",
+        "QUE"
+      ],
+      "counts": {
+        "all": 3112,
+        "inside_full_original_remainder": 3112,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 3112
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-101:QUE",
+      "index": 6612,
+      "areas": [
+        "QUE"
+      ],
+      "counts": {
+        "all": 937,
+        "inside_full_original_remainder": 937,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 937
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-102:QUE",
+      "index": 6613,
+      "areas": [
+        "QUE"
+      ],
+      "counts": {
+        "all": 1782,
+        "inside_full_original_remainder": 1782,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 1782
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-103:LAB",
+      "index": 6614,
+      "areas": [
+        "LAB"
+      ],
+      "counts": {
+        "all": 92,
+        "inside_full_original_remainder": 92,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 92
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-103:QUE",
+      "index": 6615,
+      "areas": [
+        "QUE"
+      ],
+      "counts": {
+        "all": 19947,
+        "inside_full_original_remainder": 19947,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 19947
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-104:LAB",
+      "index": 6616,
+      "areas": [
+        "LAB"
+      ],
+      "counts": {
+        "all": 262,
+        "inside_full_original_remainder": 262,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 262
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-105:LAB",
+      "index": 6617,
+      "areas": [
+        "LAB"
+      ],
+      "counts": {
+        "all": 35,
+        "inside_full_original_remainder": 35,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 35
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-106:NFL",
+      "index": 6618,
+      "areas": [
+        "NFL"
+      ],
+      "counts": {
+        "all": 1358,
+        "inside_full_original_remainder": 1358,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 1358
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-107:NFL",
+      "index": 6619,
+      "areas": [
+        "NFL"
+      ],
+      "counts": {
+        "all": 2103,
+        "inside_full_original_remainder": 2103,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 2103
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-109:NFL",
+      "index": 6621,
+      "areas": [
+        "NFL"
+      ],
+      "counts": {
+        "all": 4016,
+        "inside_full_original_remainder": 4016,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 4016
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-112:NFL",
+      "index": 6624,
+      "areas": [
+        "NFL"
+      ],
+      "counts": {
+        "all": 1358,
+        "inside_full_original_remainder": 1358,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 1351
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-113:NFL",
+      "index": 6625,
+      "areas": [
+        "NFL"
+      ],
+      "counts": {
+        "all": 9734,
+        "inside_full_original_remainder": 9734,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 9734
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-114:NFL",
+      "index": 6626,
+      "areas": [
+        "NFL"
+      ],
+      "counts": {
+        "all": 23159,
+        "inside_full_original_remainder": 23159,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 23159
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-116:NFL",
+      "index": 6628,
+      "areas": [
+        "NFL"
+      ],
+      "counts": {
+        "all": 724,
+        "inside_full_original_remainder": 724,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 724
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-118:QUE",
+      "index": 6630,
+      "areas": [
+        "QUE"
+      ],
+      "counts": {
+        "all": 23,
+        "inside_full_original_remainder": 23,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 23
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-12:NUN",
+      "index": 6631,
+      "areas": [
+        "NUN"
+      ],
+      "counts": {
+        "all": 2058,
+        "inside_full_original_remainder": 2058,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 2058
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-122:NBR",
+      "index": 6634,
+      "areas": [
+        "NBR"
+      ],
+      "counts": {
+        "all": 159,
+        "inside_full_original_remainder": 159,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 159
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-122:NSC",
+      "index": 6635,
+      "areas": [
+        "NSC"
+      ],
+      "counts": {
+        "all": 41,
+        "inside_full_original_remainder": 41,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 41
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-123:NBR",
+      "index": 6636,
+      "areas": [
+        "NBR"
+      ],
+      "counts": {
+        "all": 445,
+        "inside_full_original_remainder": 445,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 445
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-13:NUN",
+      "index": 6640,
+      "areas": [
+        "NUN"
+      ],
+      "counts": {
+        "all": 1238,
+        "inside_full_original_remainder": 1238,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 1238
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-130:PEI",
+      "index": 6641,
+      "areas": [
+        "PEI"
+      ],
+      "counts": {
+        "all": 636,
+        "inside_full_original_remainder": 636,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 636
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-131:QUE",
+      "index": 6642,
+      "areas": [
+        "QUE"
+      ],
+      "counts": {
+        "all": 2310,
+        "inside_full_original_remainder": 2310,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 2300
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-132:ONT",
+      "index": 6643,
+      "areas": [
+        "ONT"
+      ],
+      "counts": {
+        "all": 290,
+        "inside_full_original_remainder": 290,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 290
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-132:QUE",
+      "index": 6644,
+      "areas": [
+        "QUE"
+      ],
+      "counts": {
+        "all": 2415,
+        "inside_full_original_remainder": 2415,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 2415
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-134:ONT",
+      "index": 6645,
+      "areas": [
+        "ONT"
+      ],
+      "counts": {
+        "all": 744,
+        "inside_full_original_remainder": 744,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 744
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-156:MAN",
+      "index": 6670,
+      "areas": [
+        "MAN"
+      ],
+      "counts": {
+        "all": 417,
+        "inside_full_original_remainder": 417,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 417
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-156:SAS",
+      "index": 6671,
+      "areas": [
+        "SAS"
+      ],
+      "counts": {
+        "all": 196,
+        "inside_full_original_remainder": 196,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 196
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-157:SAS",
+      "index": 6673,
+      "areas": [
+        "SAS"
+      ],
+      "counts": {
+        "all": 212,
+        "inside_full_original_remainder": 212,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 212
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-159:SAS",
+      "index": 6676,
+      "areas": [
+        "SAS"
+      ],
+      "counts": {
+        "all": 472,
+        "inside_full_original_remainder": 472,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 472
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-16:NUN",
+      "index": 6677,
+      "areas": [
+        "NUN"
+      ],
+      "counts": {
+        "all": 887,
+        "inside_full_original_remainder": 887,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 887
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-16:NWT",
+      "index": 6678,
+      "areas": [
+        "NWT"
+      ],
+      "counts": {
+        "all": 2581,
+        "inside_full_original_remainder": 2581,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 2581
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-18:NUN",
+      "index": 6707,
+      "areas": [
+        "NUN"
+      ],
+      "counts": {
+        "all": 430,
+        "inside_full_original_remainder": 430,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 430
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-185:BRC",
+      "index": 6718,
+      "areas": [
+        "BRC"
+      ],
+      "counts": {
+        "all": 15,
+        "inside_full_original_remainder": 15,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 14
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-191:BRC",
+      "index": 6722,
+      "areas": [
+        "BRC"
+      ],
+      "counts": {
+        "all": 601,
+        "inside_full_original_remainder": 601,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 601
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-192:BRC",
+      "index": 6723,
+      "areas": [
+        "BRC"
+      ],
+      "counts": {
+        "all": 39,
+        "inside_full_original_remainder": 39,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 39
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-193:BRC",
+      "index": 6724,
+      "areas": [
+        "BRC"
+      ],
+      "counts": {
+        "all": 369,
+        "inside_full_original_remainder": 369,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 369
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-194:BRC",
+      "index": 6725,
+      "areas": [
+        "BRC"
+      ],
+      "counts": {
+        "all": 56,
+        "inside_full_original_remainder": 56,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 56
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-21:NUN",
+      "index": 6743,
+      "areas": [
+        "NUN"
+      ],
+      "counts": {
+        "all": 236,
+        "inside_full_original_remainder": 236,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 236
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-213:BRC",
+      "index": 6744,
+      "areas": [
+        "BRC"
+      ],
+      "counts": {
+        "all": 58,
+        "inside_full_original_remainder": 58,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 58
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-214:ABT",
+      "index": 6745,
+      "areas": [
+        "ABT"
+      ],
+      "counts": {
+        "all": 11,
+        "inside_full_original_remainder": 11,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 11
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-215:MAN",
+      "index": 6747,
+      "areas": [
+        "MAN"
+      ],
+      "counts": {
+        "all": 8,
+        "inside_full_original_remainder": 8,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 8
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-217:ONT",
+      "index": 6752,
+      "areas": [
+        "ONT"
+      ],
+      "counts": {
+        "all": 120,
+        "inside_full_original_remainder": 120,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 120
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-217:QUE",
+      "index": 6753,
+      "areas": [
+        "QUE"
+      ],
+      "counts": {
+        "all": 128,
+        "inside_full_original_remainder": 128,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 128
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-22:NUN",
+      "index": 6754,
+      "areas": [
+        "NUN"
+      ],
+      "counts": {
+        "all": 1723,
+        "inside_full_original_remainder": 1723,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 1723
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-25:NUN",
+      "index": 6757,
+      "areas": [
+        "NUN"
+      ],
+      "counts": {
+        "all": 3061,
+        "inside_full_original_remainder": 3061,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 3061
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-28:NUN",
+      "index": 6760,
+      "areas": [
+        "NUN"
+      ],
+      "counts": {
+        "all": 979,
+        "inside_full_original_remainder": 979,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 979
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-30:NUN",
+      "index": 6762,
+      "areas": [
+        "NUN"
+      ],
+      "counts": {
+        "all": 3177,
+        "inside_full_original_remainder": 3177,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 3177
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-31:QUE",
+      "index": 6764,
+      "areas": [
+        "QUE"
+      ],
+      "counts": {
+        "all": 2658,
+        "inside_full_original_remainder": 2658,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 2658
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-33:NWT",
+      "index": 6767,
+      "areas": [
+        "NWT"
+      ],
+      "counts": {
+        "all": 954,
+        "inside_full_original_remainder": 954,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 954
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-35:NWT",
+      "index": 6770,
+      "areas": [
+        "NWT"
+      ],
+      "counts": {
+        "all": 189,
+        "inside_full_original_remainder": 189,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 189
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-36:NUN",
+      "index": 6771,
+      "areas": [
+        "NUN"
+      ],
+      "counts": {
+        "all": 2902,
+        "inside_full_original_remainder": 2902,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 2902
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-38:NUN",
+      "index": 6775,
+      "areas": [
+        "NUN"
+      ],
+      "counts": {
+        "all": 406,
+        "inside_full_original_remainder": 406,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 406
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-39:NUN",
+      "index": 6776,
+      "areas": [
+        "NUN"
+      ],
+      "counts": {
+        "all": 1133,
+        "inside_full_original_remainder": 1133,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 1133
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-45:NUN",
+      "index": 6787,
+      "areas": [
+        "NUN"
+      ],
+      "counts": {
+        "all": 7427,
+        "inside_full_original_remainder": 7427,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 7427
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-46:NUN",
+      "index": 6788,
+      "areas": [
+        "NUN"
+      ],
+      "counts": {
+        "all": 225,
+        "inside_full_original_remainder": 225,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 225
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-47:QUE",
+      "index": 6790,
+      "areas": [
+        "QUE"
+      ],
+      "counts": {
+        "all": 5707,
+        "inside_full_original_remainder": 5707,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 5707
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-49:NUN",
+      "index": 6792,
+      "areas": [
+        "NUN"
+      ],
+      "counts": {
+        "all": 2285,
+        "inside_full_original_remainder": 2285,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 2285
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-5:NUN",
+      "index": 6793,
+      "areas": [
+        "NUN"
+      ],
+      "counts": {
+        "all": 659,
+        "inside_full_original_remainder": 659,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 659
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-6:NUN",
+      "index": 6807,
+      "areas": [
+        "NUN"
+      ],
+      "counts": {
+        "all": 600,
+        "inside_full_original_remainder": 600,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 600
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-72:QUE",
+      "index": 6837,
+      "areas": [
+        "QUE"
+      ],
+      "counts": {
+        "all": 4159,
+        "inside_full_original_remainder": 4159,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 4159
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-77:LAB",
+      "index": 6843,
+      "areas": [
+        "LAB"
+      ],
+      "counts": {
+        "all": 28,
+        "inside_full_original_remainder": 28,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 28
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-78:LAB",
+      "index": 6845,
+      "areas": [
+        "LAB"
+      ],
+      "counts": {
+        "all": 3,
+        "inside_full_original_remainder": 3,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 3
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-79:LAB",
+      "index": 6847,
+      "areas": [
+        "LAB"
+      ],
+      "counts": {
+        "all": 881,
+        "inside_full_original_remainder": 881,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 881
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-91:MAN",
+      "index": 6863,
+      "areas": [
+        "MAN"
+      ],
+      "counts": {
+        "all": 85,
+        "inside_full_original_remainder": 85,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 85
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-91:ONT",
+      "index": 6864,
+      "areas": [
+        "ONT"
+      ],
+      "counts": {
+        "all": 4410,
+        "inside_full_original_remainder": 4410,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 4410
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-93:ONT",
+      "index": 6866,
+      "areas": [
+        "ONT"
+      ],
+      "counts": {
+        "all": 2692,
+        "inside_full_original_remainder": 2692,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 2692
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-94:ONT",
+      "index": 6867,
+      "areas": [
+        "ONT"
+      ],
+      "counts": {
+        "all": 1893,
+        "inside_full_original_remainder": 1893,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 1893
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-96:ONT",
+      "index": 6869,
+      "areas": [
+        "ONT"
+      ],
+      "counts": {
+        "all": 3,
+        "inside_full_original_remainder": 3,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 3
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-97:ONT",
+      "index": 6871,
+      "areas": [
+        "ONT"
+      ],
+      "counts": {
+        "all": 431,
+        "inside_full_original_remainder": 431,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 431
+      },
+      "other_original_contacts": {}
+    },
+    {
+      "id": "atlas:physical:CAN-98:ONT",
+      "index": 6872,
+      "areas": [
+        "ONT"
+      ],
+      "counts": {
+        "all": 8926,
+        "inside_full_original_remainder": 8926,
+        "outside_full_original_remainder": 0,
+        "other_original_contact": 0,
+        "inside_full_remainder_without_competitor_and_within_intended_ecoregion": 8896
+      },
+      "other_original_contacts": {}
+    }
+  ],
+  "limits": [
+    "Read-only full-original point predicate screening using all 273 retained AAFC semantic nodes to recover the complete by-area remainder atom inventory.",
+    "All 5162 complete CAN ADM3 original features participate. Every original outside the intended area remainder is a whole negative competitor.",
+    "Neither current target geometry nor archived simplified reference geometry is used to filter candidates. The original denominator remains unchanged.",
+    "This does not establish adopted provider scope, whole physical support, actual native boundary handling, or final authority. The archived geometry and parent-chain discrepancies remain independently reviewed."
+  ]
+}

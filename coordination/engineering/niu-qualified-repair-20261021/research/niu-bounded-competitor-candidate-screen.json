@@ -1,0 +1,219 @@
+{
+  "kind": "niu-bounded-competitor-candidate-screen-v1",
+  "status": "read-only raster candidate shortlist; not whole-polygon proof or qualification",
+  "scope": {
+    "package_id": "gb-NIU-ADM1--repair-evaluation",
+    "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "original_cells": 116,
+    "original_intervals": 50,
+    "owner": 7126,
+    "native_block": 35,
+    "separate_physical_companion_cells": 47
+  },
+  "inputs": {
+    "source_candidates": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-035.json.gz",
+      "git_blob_oid": "efadb30876bf9a1604b2c2cf84534a8ebf4a1856",
+      "compressed_bytes": 254815,
+      "decoded_bytes": 1887984,
+      "read": "Already-present public Git blob, decoded in memory; no acquisition."
+    },
+    "source_feature_roster": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "compressed_bytes": 1844315,
+      "decoded_bytes": 13496995,
+      "roster_entries": 73567,
+      "read": "Already-present public Git blob, decoded in memory; used only to resolve candidate indices to family/owner/ID/name."
+    },
+    "source_family_extent_record": {
+      "path": "inventory/niu-audit-handoff/extracted/source-validity-results.json",
+      "sha256": "16fa49882e14012c467437c252d7c9eadfd374a06373b89bf5c9d57c97fc7e1e",
+      "bytes": 11585,
+      "method": "Reused precomputed original simplified family feature bounds; no geometry or source scanner rerun."
+    },
+    "canonical_extent_record": {
+      "path": "inventory/niu-audit-handoff/extracted/retained/canonical-NIU-feature.json",
+      "commit": "01fe271e2554b03675769701691fb3dc07442303",
+      "canonical_path": "data/geography/part-28.json",
+      "canonical_blob_oid": "a9e03cb07194a73f643af85d1e6db94abe3b5fc9",
+      "local_excerpt_sha256": "73ef10cfbb8bfba1e7e3ba7957953486d7c79d96bc8d1509579d7f1f51d5ca1b",
+      "bytes": 5481,
+      "method": "Read retained polygon coordinate extrema only to include the current canonical NIU target envelope; no overlay or source comparison."
+    },
+    "native_latitude_table": {
+      "path": "inventory/niu-audit-handoff/extracted/code/native-row-latitudes.f64le.gz",
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "compressed_bytes": 1851757,
+      "decoded_bytes": 2097328,
+      "row_count": 262166,
+      "method": "Used the exact already-retained descending row-latitude table for row-envelope lookup; not a producer run."
+    }
+  },
+  "envelope": {
+    "source_family_lonlat_bounds": [
+      -169.94976854230515,
+      -19.155172062065333,
+      -169.77368188985278,
+      -18.95273902988174
+    ],
+    "canonical_target_lonlat_bounds": [
+      -169.9489,
+      -19.1552,
+      -169.7737,
+      -18.9531
+    ],
+    "union_lonlat_bounds": [
+      -169.94976854230515,
+      -19.1552,
+      -169.77368188985278,
+      -18.95273902988174
+    ],
+    "native_grid_box_with_two_cell_padding": {
+      "x_start_inclusive": 7316,
+      "x_end_exclusive": 7449,
+      "y_start_inclusive": 145142,
+      "y_end_exclusive": 145302,
+      "x_column_width": 262144,
+      "y_lookup": "Exact retained row-latitude table (262166 rows), not a formula-sized substitute."
+    },
+    "mapping": "Longitude columns use the native 262144-wide grid. Latitude rows were selected from the stored native row-latitudes table, with a two-row/column pad around the source/canonical union envelope."
+  },
+  "candidate_screen": {
+    "candidate_rows_examined": 160,
+    "overlapping_compressed_runs": 87,
+    "distinct_candidate_source_indices": 10,
+    "resolved_families": [
+      {
+        "family_index": 241,
+        "family_id": "gb:NIU:ADM1",
+        "feature_count": 10,
+        "owner_indices": [
+          7126
+        ],
+        "members": [
+          {
+            "source_index": 47591,
+            "ordinal": 2,
+            "source_id": "gb:NIU:ADM1:93272968B4423412382248",
+            "name": "Hikutavake",
+            "owners": [
+              7126
+            ]
+          },
+          {
+            "source_index": 47592,
+            "ordinal": 3,
+            "source_id": "gb:NIU:ADM1:93272968B22364225711306",
+            "name": "Toi",
+            "owners": [
+              7126
+            ]
+          },
+          {
+            "source_index": 47593,
+            "ordinal": 4,
+            "source_id": "gb:NIU:ADM1:93272968B97328284886537",
+            "name": "Mutalau",
+            "owners": [
+              7126
+            ]
+          },
+          {
+            "source_index": 47595,
+            "ordinal": 6,
+            "source_id": "gb:NIU:ADM1:93272968B39016058610074",
+            "name": "Liku",
+            "owners": [
+              7126
+            ]
+          },
+          {
+            "source_index": 47596,
+            "ordinal": 7,
+            "source_id": "gb:NIU:ADM1:93272968B74056989697157",
+            "name": "Hakupu",
+            "owners": [
+              7126
+            ]
+          },
+          {
+            "source_index": 47597,
+            "ordinal": 8,
+            "source_id": "gb:NIU:ADM1:93272968B84240109118138",
+            "name": "Vaiea",
+            "owners": [
+              7126
+            ]
+          },
+          {
+            "source_index": 47598,
+            "ordinal": 9,
+            "source_id": "gb:NIU:ADM1:93272968B73075059072765",
+            "name": "Avatele",
+            "owners": [
+              7126
+            ]
+          },
+          {
+            "source_index": 47599,
+            "ordinal": 10,
+            "source_id": "gb:NIU:ADM1:93272968B40499677561204",
+            "name": "Tamakautoga",
+            "owners": [
+              7126
+            ]
+          },
+          {
+            "source_index": 47600,
+            "ordinal": 11,
+            "source_id": "gb:NIU:ADM1:93272968B84066650409930",
+            "name": "Alofi South",
+            "owners": [
+              7126
+            ]
+          },
+          {
+            "source_index": 47602,
+            "ordinal": 13,
+            "source_id": "gb:NIU:ADM1:93272968B40090915564601",
+            "name": "Makefu",
+            "owners": [
+              7126
+            ]
+          }
+        ]
+      }
+    ],
+    "package_members_present": 8,
+    "companion_members_present": 2,
+    "foreign_candidate_family_count": 0,
+    "bounded_conclusion": "Within this padded native raster-center envelope, all candidate source indices resolve to ten members of the same NIU ADM1 family, including all eight requested source members and two separate physical-companion members (Liku/Hakupu). No non-NIU feature or New Zealand source family is represented in these candidate runs."
+  },
+  "canonical_parent_context": {
+    "canonical_id": "atlas:territory:NIU",
+    "owner_index": 7126,
+    "parent_id": "framework:province:niue:41699e810a4a",
+    "natural_earth_reference_polity": "New Zealand",
+    "reference_status": "reference",
+    "reference_owner_id": "owner:Q664",
+    "reference_uncertainty": true,
+    "role_conclusion": "New Zealand appears only as reference-polity context in the retained canonical metadata. It is not assigned as owner for the 14 NIU ADM1 source roster entries; this candidate screen also found no non-NIU source feature in the raster envelope. This does not prove that New Zealand is absent from every whole-polygon or sub-cell competitor context."
+  },
+  "limits_and_next_operand": {
+    "not_proven": [
+      "Whole-polygon disjointness or sub-cell overlap absence beyond cell-center raster candidates.",
+      "Completeness of the raster candidate file as a census of every geometrical polygon that might be relevant outside the enumerated raster centers.",
+      "Territorial/legal authority, source suitability or positive qualification.",
+      "Resolution of the 15 simplified/full same-release contact differences."
+    ],
+    "not_a_new_scan": "The only spatial input was the frozen compressed source-candidate block; this operation bounded its already-computed candidate indices against a conservative extent envelope and joined indices to the original roster. It did not run the source scanner, resample geometry, rerun an observer or physical producer.",
+    "complete_family_operand": "The 14-feature NIU ADM1 source family is the complete identified consumed-source family and remains needed as a family-level candidate/competitor context. The bounded block-center screen reveals no specific foreign source family operand to acquire.",
+    "remaining_foreign_scope": "For any whole-target negative-source assertion beyond the frozen raster candidate domain, bra’s source/physical preparation must identify the exact relevant family operands from its stock source-evidence route. This screen does not justify broad source-corpus hydration or naming New Zealand as a competing family."
+  },
+  "superseded_approximation": {
+    "note": "An initial exploratory envelope mapped latitude via the nominal 262144 width and omitted southern native rows. It was superseded before this result by indexing the exact retained 262166-row latitude table. The final candidate count/bounds above use the retained table."
+  }
+}

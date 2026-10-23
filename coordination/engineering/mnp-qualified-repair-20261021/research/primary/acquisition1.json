@@ -1,0 +1,38 @@
+[
+  {
+    "name": "gb-mnp-metadata.json",
+    "url": "https://www.geoboundaries.org/api/current/gbOpen/MNP/ADM2/",
+    "final_url": "https://www.geoboundaries.org/api/current/gbOpen/MNP/ADM2/",
+    "status": 200,
+    "bytes": 1786,
+    "sha256": "80fa3eb38dc772c1cd6ffbb58c8c8297ae1cbed808ccf3bd726fafd764b44c83",
+    "read_utc": "2026-10-21T09:38:07.245905+00:00"
+  },
+  {
+    "name": "census-state2018-mnp.json",
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/Generalized_ACS2018/State_County/MapServer/7/query?where=STATE%3D%2769%27&outFields=%2A&returnGeometry=false&f=json",
+    "final_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/Generalized_ACS2018/State_County/MapServer/7/query?where=STATE%3D%2769%27&outFields=%2A&returnGeometry=false&f=json",
+    "status": 200,
+    "bytes": 3549,
+    "sha256": "85dfafcca143f252b29e83502ba1849dcdc2776b1d8fb9497d7d6875fcf59923",
+    "read_utc": "2026-10-21T09:38:10.552305+00:00"
+  },
+  {
+    "name": "census-county2018-mnp.json",
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/Generalized_ACS2018/State_County/MapServer/11/query?where=STATE%3D%2769%27&outFields=%2A&returnGeometry=false&f=json",
+    "final_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/Generalized_ACS2018/State_County/MapServer/11/query?where=STATE%3D%2769%27&outFields=%2A&returnGeometry=false&f=json",
+    "status": 200,
+    "bytes": 5919,
+    "sha256": "07dd40579b08cb1ec8d7e9936106039b5e7d14b17dd17cfc9d06ee11e615c0d8",
+    "read_utc": "2026-10-21T09:38:10.275472+00:00"
+  },
+  {
+    "name": "census-state-county2021.json",
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/Generalized_ACS2021/State_County/MapServer?f=json",
+    "final_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/Generalized_ACS2021/State_County/MapServer?f=json",
+    "status": 200,
+    "bytes": 8692,
+    "sha256": "bcfc2344066e656b094794724f3f0c60e2491f7a9d0dcca423989b70ba42e43b",
+    "read_utc": "2026-10-21T09:38:10.216662+00:00"
+  }
+]

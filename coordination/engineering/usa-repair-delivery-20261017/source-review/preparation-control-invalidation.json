@@ -1,0 +1,6 @@
+{
+  "invalidated_artifact": "preparation-boundary-controls-INVALID-missing-commit.json",
+  "reason": "The operator supplied an incorrect nonexisting commit. Ten fresh-output guards rejected before reading it, but the five method-drift executions failed on missing Git input rather than the intended immutable-method assertion. The all-15 success claim is invalid and is not evidence.",
+  "corrective_action": "Preserve original attempt and method, verify exact commit and every unchanged method preimage before controls, then require AssertionError rather than arbitrary nonzero status for actual drift controls.",
+  "scientific_source_native_outputs_affected": false
+}

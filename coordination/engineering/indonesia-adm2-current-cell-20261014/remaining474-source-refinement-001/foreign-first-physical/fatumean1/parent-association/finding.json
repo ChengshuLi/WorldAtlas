@@ -1,0 +1,221 @@
+{
+  "kind": "Fatumean-exact-member-parent-association-support",
+  "reviewer": "/root/physical_remainder_exact_scope",
+  "status": "Affirmative existing named parent association supported; no need for universal strict coarse containment",
+  "original_package": "gb-IDN-ADM2--source-conflict",
+  "exact_cell": {
+    "y": 137844,
+    "x": 222101,
+    "literal_existing_owner": 42172,
+    "source_id": "gb:TLS:ADM2:22284137B11881161065747"
+  },
+  "actual_accepted675_feature_properties": {
+    "id": "gb:TLS:ADM2:22284137B11881161065747",
+    "name": "Fatumean",
+    "parent_id": "framework:province:cova-lima:77efc0acc95b",
+    "reference_owner": "Timor-Leste",
+    "metadata": {
+      "source_id": "gb:TLS:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TLS/ADM2/geoBoundaries-TLS-ADM2.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "reference_year": "2020",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Administrative Posts",
+      "selection_reason": "Named Administrative Posts territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "22284137B11881161065747",
+      "representative_point": [
+        125.02030191570881,
+        -9.24655
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:TLS:ADM1",
+      "hierarchy_overlap": 0.962989,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 1,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "2a0b28c961b94fe207a1dd8c1d5edc2d159323aa402147edc39642a0da32ce88",
+      "reference_version": 3,
+      "geographic_area_code": "LSI",
+      "geographic_region_code": 42,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "TLS-548",
+        "overlap": 0.821605
+      },
+      "regional_match": {
+        "reference_iso": "TLS",
+        "source_id": "TLS-548",
+        "overlap": 0.821605,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q574",
+      "reference_polity": "East Timor",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "East Timor",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "Asia",
+        "decision_index": 815,
+        "evidence_file": "geographic-decisions"
+      }
+    }
+  },
+  "actual_existing_parent_node": {
+    "id": "framework:province:cova-lima:77efc0acc95b",
+    "level": "province",
+    "metadata": {
+      "basis": "Named source administrative unit grouped within this geographic area",
+      "child_count": 6,
+      "framework_status": "retained-reference",
+      "kind": "geographic",
+      "review_reasons": [
+        "Previous reference grouping retained; semantic tier review outstanding"
+      ],
+      "semantic_review": {
+        "action": "open",
+        "boundary_status": "open",
+        "evidence": [
+          {
+            "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:lesser-sunda-is:21e4a49d55fc. This declaration alone is not semantic approval.",
+            "title": "gb:TLS:ADM1",
+            "url": "https://www.geoboundaries.org/"
+          },
+          {
+            "inspected_fact": "Actual location source gb:TLS:ADM2; role Administrative Posts; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+            "title": "Timor-Leste",
+            "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TLS/ADM2/geoBoundaries-TLS-ADM2.geojson"
+          }
+        ],
+        "rationale": "Actual member audit: 6 locations, roles {'Administrative Posts': 6}, source vintages {'2020': 6}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+        "remaining_reasons": [
+          "members have source parent overlap below 0.8; full-parent validation required",
+          "Exact members requiring stronger parent correspondence: gb:TLS:ADM2:22284137B60263836524270",
+          "Fresh independent pinned-parent diagnostic: Suai (gb:TLS:ADM2:22284137B60263836524270) representative point(s) outside the named source parent. Full footprint/source-vintage comparison is required; do not reparent from a point alone."
+        ]
+      },
+      "source": "gb:TLS:ADM1",
+      "source_url": "https://www.geoboundaries.org/"
+    },
+    "name": "Cova Lima",
+    "parent_id": "framework:area:lesser-sunda-is:21e4a49d55fc"
+  },
+  "existing_exact_source_memberships": {
+    "original_ADM1_memberships": [],
+    "original_ADM2_memberships": [
+      {
+        "source_id": "gb:TLS:ADM2:22284137B11881161065747",
+        "feature_ordinal": 18,
+        "shapeName": "Fatumean",
+        "kind": "interior"
+      }
+    ],
+    "full_ADM1_memberships": [],
+    "full_ADM2_memberships": [
+      {
+        "source_id": "gb:TLS:ADM2:22284137B11881161065747",
+        "feature_ordinal": 18,
+        "shapeName": "Fatumean",
+        "kind": "interior"
+      }
+    ]
+  },
+  "actualcurrentowner": 0,
+  "current_source_receipt": {
+    "path": "idn-remaining474-source-research-001/worker3-nunukan57/worker6-followup-001/current501-selected-owner-observations.json",
+    "bytes": 189841,
+    "sha256": "1f771bad6a796182914f6c4c0b84b1fc0b5f022da20318e2dff3da4852b1634c"
+  },
+  "parent_primary_sources": [
+    {
+      "url": "https://timor-leste.gov.tl/?lang=en&p=91",
+      "section": "Cova Lima District",
+      "actual_supported_fact": "The national government explicitly names Fatumean among Cova Lima subdistricts. This supplies named whole-member administrative association independently of a point inside a coarse polygon."
+    },
+    {
+      "url": "https://covalima.gov.tl/",
+      "section": "Jeografia",
+      "actual_supported_fact": "The municipal authority identifies seven administrative posts including Fatumea. This corroborates the municipality context; national exact Fatumean naming is retained as primary join evidence."
+    }
+  ],
+  "official_readback": {
+    "path": "idn-physical-remainder80712-001/worker5-remainder-verification/fatumean-parent-association-001/official-government-readback.json",
+    "sha256": "abd25db73bde7005fcec911879621b3a99c351f8790256c8d9e304bb3b945ad5"
+  },
+  "actual_source_level_metadata": {
+    "ADM1": {
+      "boundaryID": "TLS-ADM1-58719522",
+      "boundaryISO": "TLS",
+      "boundaryYear": "2017",
+      "boundaryType": "ADM1",
+      "boundarySource": "OpenStreetMap, Wambacher",
+      "boundaryCanonical": "Municipalities",
+      "boundaryLicense": "Open Data Commons Open Database License 1.0",
+      "licenseDetail": "Open Data Commons Open Database License 1.0",
+      "licenseSource": "https//www.openstreetmap.org/copyright",
+      "boundarySourceURL": "https//wambachers-osm.website/boundaries/",
+      "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+      "buildDate": "Dec 12, 2023",
+      "admUnitCount": "13",
+      "meanVertices": "1207.0",
+      "minVertices": "51",
+      "maxVertices": "5067",
+      "meanPerimeterLengthKM": "178.81124478100352",
+      "maxPerimeterLengthKM": "234.97774842088717",
+      "minPerimeterLengthKM": "124.59279214218161",
+      "meanAreaSqKM": "1145.3249931260707",
+      "minAreaSqKM": "345.66161266531384",
+      "maxAreaSqKM": "1952.5580021962242"
+    },
+    "ADM2": {
+      "boundaryID": "TLS-ADM2-22284137",
+      "boundaryISO": "TLS",
+      "boundaryYear": "2020",
+      "boundaryType": "ADM2",
+      "boundarySource": "WHO, OCHA ROAP",
+      "boundaryCanonical": "Administrative Posts",
+      "boundaryLicense": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "licenseDetail": "",
+      "licenseSource": "https//data.humdata.org/dataset/timor-leste-administrative-boundaries-levels-0-3",
+      "boundarySourceURL": "https//data.humdata.org/dataset/timor-leste-administrative-boundaries-levels-0-3",
+      "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+      "buildDate": "Dec 12, 2023",
+      "admUnitCount": "65",
+      "meanVertices": "1824.0",
+      "minVertices": "360",
+      "maxVertices": "6662",
+      "meanPerimeterLengthKM": "83.74509932087298",
+      "maxPerimeterLengthKM": "162.69123997412566",
+      "minPerimeterLengthKM": "17.844244240959387",
+      "meanAreaSqKM": "229.11277627227736",
+      "minAreaSqKM": "5.131836622219308",
+      "maxAreaSqKM": "621.32307775753"
+    }
+  },
+  "scientific_interpretation": "The two provider vintages are different: coarse2017 OSM/Wambacher municipal geometry and fine2020 WHO/OCHA administrative-post geometry. Original and full fine Fatumean positively contain this exact centre while both coarse versions omit it. Existing feature metadata records Cova Lima hierarchy overlap0.962989; it is a retained whole-member observation, not newly computed proof. Direct government named membership means coarse absence should be recorded as a source-vintage/geometry discrepancy rather than an unknown named parent or automatic assignment veto.",
+  "limits": [
+    "Do not clear the open whole Cova Lima semantic/footprint review or the separate Suai parent issue.",
+    "No new alias, reparenting, hierarchy edit, positive-corpus substitution or scientific predicate ran.",
+    "Source/member/parent support does not provide Fatumean-specific physical-stage/qualification results. A physical receipt for Balibo or IDN Belu cannot be relabeled Fatumean.",
+    "Ordinary current-owner/source/physical/conservation checks and independent review remain necessary for any actual cell delivery."
+  ],
+  "next_concrete_action": "Retain this affirmative named Fatumean\u2192Cova Lima association and exact source-level discrepancy in the ordinary Fatumean whole-source/selected-body physical preparation; no additional generic strict-parent-container test is introduced. Root owns any resulting producer/qualification/publication action.",
+  "owner_changes_or_acceptance_credit": 0
+}

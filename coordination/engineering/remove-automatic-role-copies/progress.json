@@ -1,0 +1,39 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "remove-automatic-role-copies",
+  "branch": "engineering/remove-automatic-role-copies",
+  "base_main_commit": "8c68e8c47657c50199068fda24b3b821d7fcd2e0",
+  "github_issue": 1994,
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Delete automatic original-role copies, helper and nested publisher integration; retain explicit restoration and canonical identities"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-15T11:56:00Z",
+  "completed": [
+    "Independent accepted-base deletion implemented",
+    "Actual old/new finalize CLI products and complete receipt preserved byte-for-byte",
+    "Focused canonical/missing/changed restoration and writer safety controls executed"
+  ],
+  "checks": [
+    "Focused handoff/finalizer/registry/acquisition tests; actual log in owned directory",
+    "git diff --check"
+  ],
+  "deployment": "No production operation or scientific rerun",
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "coordination/engineering/remove-automatic-role-copies/README.md",
+    "coordination/engineering/remove-automatic-role-copies/comparison.txt",
+    "coordination/engineering/remove-automatic-role-copies/focused-tests.tap"
+  ],
+  "blockers": [],
+  "next_action": "Obtain distinct exact-head review and let the designated root submit normal serialized integration",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}

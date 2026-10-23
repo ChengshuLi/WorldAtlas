@@ -1,0 +1,89 @@
+{
+  "kind": "cod-uga-2006-candidate-vs-ubos-county-polygon-overlap-v1",
+  "status": "research-only; source geometry overlap, no key disposition",
+  "scope": {
+    "residual_package": "gb-COD-ADM2--repair-evaluation",
+    "owner": 14568,
+    "target_source_id": "gb:COD:ADM2:63176286B75372177576839",
+    "target_name": "Irumu",
+    "candidate_centers": 112,
+    "candidate_center_labels": {
+      "Ntoroko": 66,
+      "Bughendra": 46
+    }
+  },
+  "inputs": {
+    "geoboundaries_source_commit": "923e9c210b59836e069c182d68daf85439096381",
+    "geoboundaries_source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-UGA-ADM2-000.bin.gz",
+    "geoboundaries_git_blob_oid": "1f8672d7303051dd6425dc822598dd935bc3c61f",
+    "geoboundaries_archive_sha256": "c16dc4723d4a48cbe5622bfe3f555cf46e0490a1a08324a22503696a5fc9389c",
+    "geoboundaries_decoded_bytes": 1021800,
+    "geoboundaries_decoded_sha256": "0a13e10b3bc6beeb02db4502c7f29a2ebbbb681a932307ccba4cd53e994feac7",
+    "ubos_archive_bytes": 8325415,
+    "ubos_archive_sha256": "9857cf0088b578beccea29c467f9e1a1224b6341ebe944320c975cb9ca984921",
+    "ubos_counties": 164,
+    "ubos_coordinate_reference": "embedded .prj WGS 84 UTM 36N, custom false northing 200000 m",
+    "comparison_crs": "same UTM 36N custom-200000 m projection; candidate WGS 84 coordinates were forward projected"
+  },
+  "result": [
+    {
+      "candidate_name": "Ntoroko",
+      "candidate_source_id": "47994165B6683335913560",
+      "candidate_area_km2": 931.21,
+      "intersecting_ubos_county_count": 1,
+      "overlaps": [
+        {
+          "county": "NTOROKO",
+          "intersection_km2": 853.4,
+          "candidate_pct": 91.644,
+          "county_pct": 60.825
+        }
+      ]
+    },
+    {
+      "candidate_name": "Bughendra",
+      "candidate_source_id": "47994165B11452154134589",
+      "candidate_area_km2": 890.26,
+      "intersecting_ubos_county_count": 5,
+      "overlaps": [
+        {
+          "county": "BUGHENDERA",
+          "intersection_km2": 542.98,
+          "candidate_pct": 60.991,
+          "county_pct": 95.625
+        },
+        {
+          "county": "BWAMBA",
+          "intersection_km2": 276.45,
+          "candidate_pct": 31.052,
+          "county_pct": 98.057
+        },
+        {
+          "county": "NTOROKO",
+          "intersection_km2": 23.2,
+          "candidate_pct": 2.605,
+          "county_pct": 1.653
+        },
+        {
+          "county": "BURAHYA",
+          "intersection_km2": 6.45,
+          "candidate_pct": 0.724,
+          "county_pct": 0.505
+        },
+        {
+          "county": "BUNYANGABU",
+          "intersection_km2": 4.81,
+          "candidate_pct": 0.54,
+          "county_pct": 0.964
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Area comparisons are planar in the dataset's embedded custom UTM projection.",
+    "The UBOS archive has conflicting ISO/ESRI projection metadata; results follow its embedded .prj.",
+    "The geoBoundaries candidate source is recorded as 2006 Counties / Public Domain and cites geoBoundaries/Wikimedia; UBOS is the separate 2006 county source.",
+    "Different polygon extents show source disagreement, not which source applies to the 2019 OCHA Irumu target.",
+    "No native cell was tested; no target source row, owner, hold, patch, credit, or package status changed."
+  ]
+}

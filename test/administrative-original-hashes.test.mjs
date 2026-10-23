@@ -2,9 +2,8 @@ import fs from 'node:fs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {admitAdministrativeOriginalPreimages,originalAdministrativeCandidateHash,originalAdministrativeProductFeatures,originalAdministrativeProductMatch,retainedAdministrativeSourcePremises,retainedAdministrativeFragmentPremises} from '../scripts/additive-gap-repair.mjs';
+import {originalAdministrativeCandidateHash,originalAdministrativeProductFeatures,originalAdministrativeProductMatch,retainedAdministrativeSourcePremises,retainedAdministrativeFragmentPremises} from '../scripts/additive-gap-repair.mjs';
 import {canonicalValue,footprintValueSha256 as digest} from '../src/effective-footprint.js';
-import {candidateBudget,preparationAllowance} from '../scripts/native-ownership/native-preparation-guards.mjs';
 const sha=body=>createHash('sha256').update(body).digest('hex');
 const canonical=value=>JSON.stringify(canonicalValue(value))+'\n';
 const bytes=value=>Buffer.from(canonical(value).replaceAll('25,','25.0,').replaceAll('-8,','-8.0,'));
@@ -60,27 +59,6 @@ test('whole product preimages reject rebinding, wrong ordinal, duplicates and ac
  assert.throws(()=>check(scope),/complete value/);
  const otherProduct=originalAdministrativeProductFeatures({sourceScope:f.scope,pin:{path:'foreign.geojson'},body:f.body});
  assert.equal(originalAdministrativeProductMatch(otherProduct[0],f.binding.feature_sha256,f.binding.geometry_sha256),false);
-});
-
-test('original preimages and complete products retain byte admission limits',()=>{
- const f=fixture(),oversized='A'.repeat(Math.ceil(32*1024*1024/3)*4+1);
- const scope=structuredClone(f.scope);scope.original_administrative_canonical_bindings[0].feature_bytes_base64=oversized;
- assert.throws(()=>originalAdministrativeProductFeatures({sourceScope:scope,pin:f.pin,body:f.body}),/oversized/);
- assert.throws(()=>originalAdministrativeProductFeatures({sourceScope:{},pin:f.pin,body:Buffer.alloc(32*1024*1024+1)}),/byte bounds/);
- scope.original_candidate_canonical_bindings[0].geometry_bytes_base64=oversized;
- assert.equal(originalAdministrativeCandidateHash({sourceScope:scope,componentId:'candidate',candidate:f.geometry,expected:f.binding.geometry_sha256,kind:'geometry'}),false);
-});
-
-test('original alias decoding uses the same phase budget across products and native cases',()=>{
- const f=fixture(),budget=candidateBudget([],{reserveBytes:0,reserveDescriptors:0});
- admitAdministrativeOriginalPreimages(f.scope,budget);
- const once=budget.snapshot();assert.equal(once.accounted_descriptors,9);assert(once.accounted_bytes>0);
- admitAdministrativeOriginalPreimages(f.scope,budget,{products:false,componentIds:['candidate']});
- assert.equal(budget.snapshot().accounted_descriptors,12);
- const almostFull=candidateBudget([],{reserveBytes:256*1024*1024-1,reserveDescriptors:0,allowance:preparationAllowance({phaseBytes:256*1024**2,rssBytes:512*1024**2})});
- assert.throws(()=>admitAdministrativeOriginalPreimages(f.scope,almostFull),/Aggregate evidence/);
- const crowded=structuredClone(f.scope);crowded.original_administrative_canonical_bindings=Array(257).fill(f.binding);
- assert.throws(()=>admitAdministrativeOriginalPreimages(crowded,budget),/descriptor limit/);
 });
 
 test('registered original-hash programme preserves all prior methods and exact reviewed current vector',()=>{

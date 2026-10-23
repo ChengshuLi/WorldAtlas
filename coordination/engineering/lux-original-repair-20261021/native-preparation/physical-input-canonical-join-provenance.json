@@ -1,0 +1,32 @@
+{
+  "kind": "post-execution-canonical-identity-join",
+  "package": "LUX",
+  "executed_stage": {
+    "commit": "e47379202b58ce01221e253920ced40beb7fea17",
+    "path": "coordination/engineering/lux-original-repair-20261021/physical-preparation/original-stage-inputs.json"
+  },
+  "physical_result": {
+    "commit": "e447ef5fc4fcae9b8f04a6d517904cbf30b413df",
+    "path": "coordination/engineering/lux-original-repair-20261021/physical-001/whole-target-support.json"
+  },
+  "canonical": {
+    "commit": "5c1919dd1c7e89618398454220b57edf0fa388d2",
+    "path": "data/geography/part-28.json",
+    "blob": "a9e03cb07194a73f643af85d1e6db94abe3b5fc9"
+  },
+  "derived_input": {
+    "path": "coordination/engineering/lux-original-repair-20261021/native-preparation/physical-input-canonical-join.json",
+    "bytes": 171407,
+    "sha256": "e951980cda725afd64394d04bc50fbce2c2a3206071c03f41f20b541e5d98b37"
+  },
+  "verification": {
+    "target_count": 12,
+    "all_consumed_features_unchanged": true
+  },
+  "limits": [
+    "Derived after the actual physical execution; selected metadata did not exist in the executed stage.",
+    "All consumed original Features and their geometries remain identical. The stock physical producer uses consumed geometry; no physical result is altered or replayed.",
+    "Selected identity/geometry is explicit pinned canonical context; the normal native constructor must authenticate the complete source and canonical joins.",
+    "No native qualification, assignment, hold removal or completion follows from this metadata join."
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "predecessor_typed_source": {
+    "commit": "e201cfae0476779c66e6d6e90b4f2960e719e67e",
+    "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/kapuas7/source-evidence.json",
+    "sha256": "cb01119200ca404e53e820743d39f8bef0d763b1560e2c045d6fd35b98e1ca33"
+  },
+  "original_positive_source_and_physical_predecessor": "bd4878a35bf5847890e6fc73c1bb03d77cfed3a0 foreign3398/source-evidence.json; every positive field remains equal",
+  "negative_replacement_index": 6,
+  "negative_replaced_source": "gb:MYS:ADM1:15666254B8535925993004 full same9469f09 OSM/Wambacher2017 Sarawak",
+  "negative_replacement_geometry": {
+    "path": "idn-remaining474-source-research-001/worker2-malinau-mahakam105/resumed-001/jmg-state-server4326-polygon.json",
+    "bytes": 3158564,
+    "sha256": "5d341d91f44316d28a5ea3ac199eb3617e2892c0a35b97f7d97424850a16a671"
+  },
+  "negative_replacement_published_whole_source": {
+    "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/sources/JMG/jmg-state-server4326-polygon.json.gz",
+    "bytes": 1256517,
+    "sha256": "8ed4d599a3cc38555281766c3e08a488171bf3d7ddd0087f3204686694e9d414",
+    "encoding": "gzip",
+    "decoded_bytes": 3158564,
+    "decoded_sha256": "5d341d91f44316d28a5ea3ac199eb3617e2892c0a35b97f7d97424850a16a671",
+    "gzip_mtime": 0,
+    "commit": "e201cfae0476779c66e6d6e90b4f2960e719e67e"
+  },
+  "government_service": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/11",
+  "country_boundary_companion": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/4",
+  "conversion": {
+    "source_path": "idn-remaining474-source-research-001/worker2-malinau-mahakam105/resumed-001/jmg-state-server4326.json",
+    "source_bytes": 3192811,
+    "source_sha256": "b1acff48ea9a240052e4fe9f41fd58881f589934d45c53b61b1be42c1f323230",
+    "source_crs": {
+      "wkid": 4326,
+      "latestWkid": 4326
+    },
+    "attributes": {
+      "OBJECTID": 1,
+      "NAM": "Sarawak",
+      "ARK": 124178.90625,
+      "SHAPE.STArea()": 124178909875.718,
+      "SHAPE.STLength()": 3621148.872325424
+    },
+    "ring_count": 1,
+    "vertices": 80128,
+    "output_path": "idn-remaining474-source-research-001/worker2-malinau-mahakam105/resumed-001/jmg-state-server4326-polygon.json",
+    "output_bytes": 3158564,
+    "output_sha256": "5d341d91f44316d28a5ea3ac199eb3617e2892c0a35b97f7d97424850a16a671",
+    "derivation": "Esri one closed ring mapped directly to GeoJSON Polygon coordinates, preserving every parsed binary64 coordinate and order; no reprojection, clipping, simplification, orientation change or predicate. WGS84 projection was requested from public original service, default datum transformation remains unspecified."
+  },
+  "unchanged_negative_family_scope": "Other15 whole full MYSADM1 and all159 whole full MYSADM2; every actualfine foreignclaim remains a veto",
+  "original_negative_and_full_negative_retained": "Complete original/fullsimplified comparison and source bodies retained immutablee201; no oldoperand/body is changed",
+  "new_positive_source_geometry_or_class": false
+}

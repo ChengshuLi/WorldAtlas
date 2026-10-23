@@ -42,22 +42,12 @@ test('queue profile retains geography owned scope and full fallback outside it',
  for(const file of [{filename:'src/main.js'},{filename:owned+'finding.json',previous_filename:'src/main.js'}])assert.equal(integrationProfile(branch,[file],reservation),'full');
 });
 
-// Package selection is a coordination control. Exercise its focused contracts
-// when the runner omits application regression; full discovery runs that file
-// separately, so do not register the same tests twice in the full profile.
-if (process.env.INTEGRATION_PROFILE === 'evidence') await import('./deployment-budget-scope.test.mjs');
-
-test('package CI coordination paths use focused tests while builders and runners stay full', () => {
-  for (const filename of ['scripts/classify-deployment-budget.mjs',
-    '.github/workflows/deployment-budget.yml', 'test/deployment-budget-scope.test.mjs']) {
-    assert.equal(integrationProfile('engineering/example', [{filename}]), 'evidence', filename);
-  }
+test('package verification, builders and runners stay full', () => {
   for (const filename of ['scripts/build-hosted.mjs', 'scripts/build-static.mjs', 'scripts/deployment-budget.mjs',
-    'scripts/package-inputs.mjs', 'scripts/package-build.mjs', '.github/package-inputs.json',
-    'scripts/build-cloudflare-inner.mjs', 'test/package-build.test.mjs', 'scripts/run-integration-tests.mjs', 'src/main.js', 'data/hierarchy.json', 'drizzle/0002.sql']) {
+    
+    'scripts/build-cloudflare-inner.mjs', 'src/main.js', 'data/hierarchy.json', 'drizzle/0002.sql']) {
     assert.equal(integrationProfile('engineering/example', [{filename}]), 'full', filename);
   }
-  assert.equal(integrationProfile('engineering/example', [{filename:'scripts/classify-deployment-budget.mjs', previous_filename:'src/main.js'}]), 'full');
 });
 
 test('geography software route is derived from changed checker inputs, retaining data and source-only routes', async () => {
@@ -66,9 +56,9 @@ test('geography software route is derived from changed checker inputs, retaining
  for (const name of CURRENT_REBIND_CODE) assert.equal(candidateGeographyCode('full', changed(name)), true, name);
  for (const name of ['scripts/run-geographic-check.py', 'scripts/check-effective-geographic-regression.mjs',
   'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
-  'src/ownership-codec.js', 'src/native-grid.js', 'requirements.txt']) {
+  'src/ownership-codec.js', 'src/native-grid.js', 'src/reference-metadata.js', 'requirements.txt']) {
   assert.equal(candidateGeographyCode('full', changed(name)), true, name);
-  assert.equal(candidateGeographyCode('evidence', changed(name)), false, name);
+  assert.equal(candidateGeographyCode('evidence', changed(name)), true, name);
   assert.equal(candidateGeographyCode('full', changed(name), 'selected-data'), false, name);
  }
  for (const name of ['data/geography/part-0.json', 'src/app.js', 'src/attributes.js',
@@ -79,4 +69,16 @@ test('geography software route is derived from changed checker inputs, retaining
  assert.equal(candidateGeographyCode('full', [...changed('data/geography/part-0.json'),
   ...changed('coordination/engineering/example/source-adjudication.json')]), false);
  assert.equal(candidateGeographyCode('full', [{filename: 'docs/removed.txt', previous_filename: 'scripts/check-geographic-regression.py'}]), true);
+});
+
+
+test('a selected final-bank edit cannot choose its candidate checker',()=>{
+ const accepted=new Map([['data/canonical-grid/current-startup/index.json',{type:'blob'}]]);
+ const code={filename:'scripts/check-effective-geographic-regression.mjs',status:'modified'};
+ assert.equal(candidateGeographyCode('full',[code],undefined,accepted),true,'Code-only upgrade remains an actual software test');
+ for(const name of ['data/ownership-selection.json','data/canonical-grid/current-startup/index.json',
+  'data/canonical-grid/current-startup/ownership/new.bin.gz']){
+  for(const file of [{filename:name,status:'modified'},{filename:'retired.json',previous_filename:name,status:'renamed'}])
+   assert.equal(candidateGeographyCode('full',[code,file],undefined,accepted),false,name);
+ }
 });

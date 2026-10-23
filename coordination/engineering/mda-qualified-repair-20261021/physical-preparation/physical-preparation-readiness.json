@@ -1,0 +1,425 @@
+{
+  "kind": "mda-physical-preparation-source-stage-manifest",
+  "status": "stage-prepared-task-inventory-only; not committed as an admitted input and not executed",
+  "original_scope": {
+    "package_id": "gb-MDA-ADM1--repair-evaluation",
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "cells": 1986,
+    "land_cells": 1986,
+    "inland_water_cells": 0,
+    "intervals": 539,
+    "owners": 16,
+    "source_feature_indices": [
+      41952,
+      41953,
+      41954,
+      41955,
+      41957,
+      41958,
+      41959,
+      41961,
+      41962,
+      41964,
+      41969,
+      41972,
+      41973,
+      41975,
+      41984,
+      41986,
+      60699,
+      60702
+    ],
+    "distinct_physical_source_targets": 18
+  },
+  "classification_proposal": {
+    "MDA_only_archived_target_matches": 1853,
+    "adverse_complement": 133,
+    "adverse_set_definition": "all exact original query keys outside keys-upstream-matched-MDA-only.json; split as 46 in keys-upstream-matched-UKR-contact.json, 65 in keys-upstream-nonmatch-MDA-only.json, and 22 in keys-upstream-nonmatch-UKR-contact.json. These are retained comparison partitions, not qualification or exception outcomes.",
+    "source_keyset_paths": [
+      "keys-upstream-matched-MDA-only.json",
+      "keys-upstream-matched-UKR-contact.json",
+      "keys-upstream-nonmatch-MDA-only.json",
+      "keys-upstream-nonmatch-UKR-contact.json"
+    ]
+  },
+  "stage_schema": "Each stage row is exactly {family,target,consumed}, following retained stock stage inputs. target is the original source feature stable ID; consumed is the unchanged complete source Feature from the exact retained original family body. Rows follow the frozen queue source_feature_ids order.",
+  "source_bodies": [
+    {
+      "group": "MDA",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MDA-ADM1-000.bin.gz",
+      "git_blob_oid": "82738c7c084a39168cfc6e7f9cc455753a5ee100",
+      "encoded_bytes": 74109,
+      "encoded_sha256": "9e28a612d0c3d7b0c8483d2078e9ba3dc844416b56725a29576816373ab91d03",
+      "decoded_bytes": 317753,
+      "decoded_sha256": "b9f85b5b94d053cd3fc7f60d9823ec2ba9cd37b780f4935a778203d67cb5f523",
+      "full_feature_count": 37,
+      "stage_feature_count": 16
+    },
+    {
+      "group": "UKR",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-UKR-ADM1-000.bin.gz",
+      "git_blob_oid": "c312a11650e4cde33bdeb047649c9f730b3a4433",
+      "encoded_bytes": 248309,
+      "encoded_sha256": "4c3791c4904b62ede78e6e6ba461f1b987ce80baf281284395aeed33df2a3908",
+      "decoded_bytes": 761290,
+      "decoded_sha256": "4a5947e7497574d51f93255dfa7e03dce0c7acf6ecee52d25773a5205854a399",
+      "full_feature_count": 27,
+      "stage_feature_count": 2
+    }
+  ],
+  "stage_rows": [
+    {
+      "source_feature_index": 41952,
+      "source_id": "gb:MDA:ADM1:25212430B51059014460141",
+      "source_feature_group": "MDA",
+      "source_feature_name": "Cahul",
+      "source_shape_id": "25212430B51059014460141",
+      "original_target_stage_index": 0
+    },
+    {
+      "source_feature_index": 41953,
+      "source_id": "gb:MDA:ADM1:25212430B55748044124793",
+      "source_feature_group": "MDA",
+      "source_feature_name": "Gagauzia",
+      "source_shape_id": "25212430B55748044124793",
+      "original_target_stage_index": 1
+    },
+    {
+      "source_feature_index": 41954,
+      "source_id": "gb:MDA:ADM1:25212430B43456438192105",
+      "source_feature_group": "MDA",
+      "source_feature_name": "Taraclia",
+      "source_shape_id": "25212430B43456438192105",
+      "original_target_stage_index": 2
+    },
+    {
+      "source_feature_index": 41955,
+      "source_id": "gb:MDA:ADM1:25212430B81482951983667",
+      "source_feature_group": "MDA",
+      "source_feature_name": "Cantemir",
+      "source_shape_id": "25212430B81482951983667",
+      "original_target_stage_index": 3
+    },
+    {
+      "source_feature_index": 41957,
+      "source_id": "gb:MDA:ADM1:25212430B269818099865",
+      "source_feature_group": "MDA",
+      "source_feature_name": "Leova",
+      "source_shape_id": "25212430B269818099865",
+      "original_target_stage_index": 4
+    },
+    {
+      "source_feature_index": 41958,
+      "source_id": "gb:MDA:ADM1:25212430B51243918943413",
+      "source_feature_group": "MDA",
+      "source_feature_name": "Cimislia",
+      "source_shape_id": "25212430B51243918943413",
+      "original_target_stage_index": 5
+    },
+    {
+      "source_feature_index": 41959,
+      "source_id": "gb:MDA:ADM1:25212430B10989766506063",
+      "source_feature_group": "MDA",
+      "source_feature_name": "Stefan Voda",
+      "source_shape_id": "25212430B10989766506063",
+      "original_target_stage_index": 6
+    },
+    {
+      "source_feature_index": 41961,
+      "source_id": "gb:MDA:ADM1:25212430B31479954216778",
+      "source_feature_group": "MDA",
+      "source_feature_name": "Causeni",
+      "source_shape_id": "25212430B31479954216778",
+      "original_target_stage_index": 7
+    },
+    {
+      "source_feature_index": 41962,
+      "source_id": "gb:MDA:ADM1:25212430B73317679220215",
+      "source_feature_group": "MDA",
+      "source_feature_name": "Hincesti",
+      "source_shape_id": "25212430B73317679220215",
+      "original_target_stage_index": 8
+    },
+    {
+      "source_feature_index": 41964,
+      "source_id": "gb:MDA:ADM1:25212430B5738533784066",
+      "source_feature_group": "MDA",
+      "source_feature_name": "Nisporeni",
+      "source_shape_id": "25212430B5738533784066",
+      "original_target_stage_index": 9
+    },
+    {
+      "source_feature_index": 41969,
+      "source_id": "gb:MDA:ADM1:25212430B23943377724140",
+      "source_feature_group": "MDA",
+      "source_feature_name": "Ungheni",
+      "source_shape_id": "25212430B23943377724140",
+      "original_target_stage_index": 10
+    },
+    {
+      "source_feature_index": 41972,
+      "source_id": "gb:MDA:ADM1:25212430B22111314945643",
+      "source_feature_group": "MDA",
+      "source_feature_name": "Transnistria",
+      "source_shape_id": "25212430B22111314945643",
+      "original_target_stage_index": 11
+    },
+    {
+      "source_feature_index": 41973,
+      "source_id": "gb:MDA:ADM1:25212430B61222791146584",
+      "source_feature_group": "MDA",
+      "source_feature_name": "Falesti",
+      "source_shape_id": "25212430B61222791146584",
+      "original_target_stage_index": 12
+    },
+    {
+      "source_feature_index": 41975,
+      "source_id": "gb:MDA:ADM1:25212430B89307550133505",
+      "source_feature_group": "MDA",
+      "source_feature_name": "Glodeni",
+      "source_shape_id": "25212430B89307550133505",
+      "original_target_stage_index": 13
+    },
+    {
+      "source_feature_index": 41984,
+      "source_id": "gb:MDA:ADM1:25212430B65458906379390",
+      "source_feature_group": "MDA",
+      "source_feature_name": "Edinet",
+      "source_shape_id": "25212430B65458906379390",
+      "original_target_stage_index": 14
+    },
+    {
+      "source_feature_index": 41986,
+      "source_id": "gb:MDA:ADM1:25212430B70903588336793",
+      "source_feature_group": "MDA",
+      "source_feature_name": "Soroca",
+      "source_shape_id": "25212430B70903588336793",
+      "original_target_stage_index": 15
+    },
+    {
+      "source_feature_index": 60699,
+      "source_id": "gb:UKR:ADM1:14850775B53240635394722",
+      "source_feature_group": "UKR",
+      "source_feature_name": "Odessa Oblast",
+      "source_shape_id": "14850775B53240635394722",
+      "original_target_stage_index": 16
+    },
+    {
+      "source_feature_index": 60702,
+      "source_id": "gb:UKR:ADM1:14850775B93300237551625",
+      "source_feature_group": "UKR",
+      "source_feature_name": "Vinnytsia Oblast",
+      "source_shape_id": "14850775B93300237551625",
+      "original_target_stage_index": 17
+    }
+  ],
+  "stage_file": {
+    "path": "inventory/mda-physical-preparation/original-stage-inputs.json",
+    "bytes": 192286,
+    "sha256": "dd49cdbe36f7db09c47145d8f37065262947cd8352b604b351f7f7488e57e5ec",
+    "git_commit": "PENDING parent commit",
+    "git_blob_oid": "PENDING parent commit"
+  },
+  "physical_input_closure": {
+    "required_roles": "Reuse exact 24 shared physical-comparison/native inputs and admitted private runtime from inventory/lie-audit-recovery-cache/delivery-handoff/lie-physical-config-private.json; replace its LIE stage pin with the MDA stage after parent commit. The sample config records 202 runtime files, Python 3.12.14, NumPy 2.3.5, Shapely 2.1.2, GEOS 3.13.1.",
+    "required_stage_binding": "The only MDA-specific physical-stage body is this 18-row exact source-feature file; it needs immutable commit/blob/byte/SHA binding before stock invocation. Current canonical target bindings are a separate downstream source-evidence join.",
+    "no_missing_source_body": "Complete MDA and UKR original source feature bodies are already present in the authenticated handoff and match their retained descriptor hashes; no further source payload acquisition is indicated for physical preparation.",
+    "not_run": true,
+    "shared_immutable_inputs_from_retained_stock_config": [
+      {
+        "bytes": 9834,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "86654c37ec854d862073aaf63c8d8d144956b283",
+        "path": "coordination/engineering/global-physical-comparison-20261006/comparison.py",
+        "sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe"
+      },
+      {
+        "bytes": 56473,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "56943cc4cc0ff21f2fbecca2c0ea7f95f6ca4298",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+        "sha256": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26"
+      },
+      {
+        "bytes": 5821,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "a749382ae63a861a8f65a6275a851fea0e79c454",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json",
+        "sha256": "1fc10fa094ebd128f21d6440152d391cec879a2ec6ded9d665667f9e42513d12"
+      },
+      {
+        "bytes": 1257080,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "df032b45bc2a9be5835bc9a0a016642bc26ebdbc",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-000.jsonl.gz",
+        "sha256": "c548e4465e2ad06647d456b74d17395fd6f2b6ad3ff146ecd6d21d61e51933e1"
+      },
+      {
+        "bytes": 1208965,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "ac62176e0ad47d91ca17377fedc138416b5278ef",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-001.jsonl.gz",
+        "sha256": "0969ea1fbd0732c135f470089e3f83cb64a6d21446dc72e65a87a53f81548f9f"
+      },
+      {
+        "bytes": 1191861,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "6453614d50cdb31b4215728b09d7ad9ee4cd20d7",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-002.jsonl.gz",
+        "sha256": "cef9a67165d875695263e2c729b5379e329ccf906356a885dbbf114fa1abe264"
+      },
+      {
+        "bytes": 1177247,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "13362555c6f6514003b69adbd8e3d81f6ec51bdd",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-003.jsonl.gz",
+        "sha256": "f67073921a62be3e8d4f5433d1aa3f1690baf72a667820e44a40d2c2b817a32b"
+      },
+      {
+        "bytes": 1164683,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "04d608b9715a413ef7f74224a9a85007307c752f",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-004.jsonl.gz",
+        "sha256": "58bc6035a98a29762527078ee91dafd3499804ccd9411f51c8b3b11980dbcf22"
+      },
+      {
+        "bytes": 1155371,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "68ff6385969f0a1ae8fb56bc2712706d1a276c38",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-005.jsonl.gz",
+        "sha256": "ded396a5db78a6768a3c237568fd2c43b2753976d3bf67e1bbf3eb931f048f49"
+      },
+      {
+        "bytes": 1148156,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "2de70ab6b927a386d26d62ccf6f4c5bb437bfead",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-006.jsonl.gz",
+        "sha256": "c6410e64029a6e4beaf9adaa009060e55c71cf9f0cb8f06efed9f9fba0d8ef34"
+      },
+      {
+        "bytes": 1140886,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "e2eecf3bafe633a148e5e097750601919cf946a9",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-007.jsonl.gz",
+        "sha256": "341324e9950ff86b6d38205a7bdb6940ba87a779a7201d21b8a0ad146f87f319"
+      },
+      {
+        "bytes": 1141102,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "e0bdaa0a94f2908eeafce0699a1fb0316656b00e",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-008.jsonl.gz",
+        "sha256": "343be75a5e6a7687f44cc51848216ea102e7fa8bfbe3942641312f1dfd66edde"
+      },
+      {
+        "bytes": 1132445,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "ba39d5f608c13e9e0b8254705f66e93a56a16258",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-009.jsonl.gz",
+        "sha256": "a5ceddd483762da22405fd629a3a4a1b3182069de970524ceaf2a9c7599a7b14"
+      },
+      {
+        "bytes": 1128682,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "62438f205f76babd1f6c4e1d68cf5a50f3eac272",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-010.jsonl.gz",
+        "sha256": "87726c6fce692d786b0a8d14c1220d2e8db1c663e898b688b3b633dc10c1b66f"
+      },
+      {
+        "bytes": 1125219,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "e476bf703de50711003b90d6323b5d2e9f41c9d9",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-011.jsonl.gz",
+        "sha256": "457d4cc8279bd36eadaac16e1b5a2b7ed5d572040192f090edfd4933d4c6f8f1"
+      },
+      {
+        "bytes": 1121691,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "d028bfb9281e72923155085fe6fc58f254ea169a",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-012.jsonl.gz",
+        "sha256": "c00491f50f55fdc7baca221394ad23aa2aa9a000f7b333733a9223fb8ddfe498"
+      },
+      {
+        "bytes": 1120633,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "a8df23bc26466b2faa4eb2a73405b0b58c352d09",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-013.jsonl.gz",
+        "sha256": "0cd35cddcd698907ce1211429fa393086a29bc6bc1729bb68e711221ea737eb5"
+      },
+      {
+        "bytes": 1113872,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "2c5947576e0d34ca4fb99eda81b7779b83518287",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-014.jsonl.gz",
+        "sha256": "fbc3a4810a36f33f0724e176d61ad13bdf6a36b741640aa65508130c8ebbf6fe"
+      },
+      {
+        "bytes": 1107592,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "ac5b3ec4c499d53f351695e029ae35732ffd3833",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-015.jsonl.gz",
+        "sha256": "df4d45b2c2b1f7d96c57ab30f9974b7849e16626deb0ad6aa50efc0acc102819"
+      },
+      {
+        "bytes": 1117463,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "5c98a155046742a6b3fc6dce1a7ba38cd0c0f111",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-016.jsonl.gz",
+        "sha256": "c90919472ed35d2a4a223abcda6c253e6d529eff0070b23b933e42e7ff9dae0e"
+      },
+      {
+        "bytes": 698664,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "2b274cf9312059cac124517c14ac480812a367f3",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-017.jsonl.gz",
+        "sha256": "0015c9a348e6eebd18a4d5f6491a0cda7b60e89ee76cf8f4c6cc54a6a3986eff"
+      },
+      {
+        "bytes": 22743455,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "1ed08dd7fe8c237c34e9e02ac04c158960362436",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-00.bin.gz",
+        "sha256": "99546c4a2bf41fe8f8a050fb425ab372c22e9c9821bf592d66ed9748b36301eb"
+      },
+      {
+        "bytes": 23286998,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "7f23a353abcf3dc23aafdcfd5644ff55d0271a7e",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-01.bin.gz",
+        "sha256": "c4a508d91e40bdd66e48f2533530916c773566e75277826c0806218c3997bcbf"
+      },
+      {
+        "bytes": 19571844,
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "git_blob_oid": "39ada13dc05a9b44b08c0221b71d00137fa6d11a",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-02.bin.gz",
+        "sha256": "b7070a55d8edfbead17c14a014ed0c430586606bf0f38ea10c0c1e038f31c7c0"
+      }
+    ],
+    "shared_input_count": 24,
+    "shared_inputs_source": "inventory/lie-audit-recovery-cache/delivery-handoff/lie-physical-config-private.json, minus its first target-specific LIE stage input; these are the exact common stock physical comparison and native inputs."
+  },
+  "other_physical_science_inputs": {
+    "physical_support": {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-022.json.gz",
+      "git_blob_oid": "6473fa0629f974d76909d8d5db126ab6fea02cfd",
+      "encoded_bytes": 552211,
+      "decoded_bytes": 2370722,
+      "decoded_sha256": "815ab60ec3bfbda0c2734bc4d4f96b384dbee468abca4e5f4ac0dcbf04d04fbb"
+    },
+    "inland_water_support": {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-022.json.gz",
+      "git_blob_oid": "81411b27437b95b18314fbeb8c7e6a40f0e51c94",
+      "encoded_bytes": 120031,
+      "decoded_bytes": 550270,
+      "decoded_sha256": "8e24dc8a720d6e71dd546dc3cf627d37c90afd4fc76ebeb1afc15512e2a6a891"
+    }
+  },
+  "limits": [
+    "The 1853/133 split is a retained source-version comparison, not an executed physical result or scientific qualification.",
+    "Full 37-feature MDA and 27-feature UKR sources remain the source-evidence/negative competitor basis; the 18 stage features are only exact original source features touching the requested 1,986 keys.",
+    "Canonical current geography target pins are not supplied in this handoff manifest and should be bound separately for source/native evidence; none is inferred or fabricated here.",
+    "No producer, native diagnostic, or owner observation was run."
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "kind": "gum-native-contextual-applicability-adoption-v1",
+  "decision": "For the exact GUM original-package native-center contacts only, classify the two retained USA-labelled operand identities as Guam administrative context. The retained official Census 2018 state-equivalent row identifies Guam (GEOID 66), and county-equivalent row identifies Guam (GEOID 66010); the retained Census 2021 County Subdivisions query joins all 19 named geoBoundaries GUM ADM2 members to exact Guam subdivision BASENAME values under STATE 66 / COUNTY 010. Accordingly, exact contacts with these two named Guam operands are contextual and do not operate as foreign territorial exclusions for these exact member/key incidences. This is a narrow source-applicability interpretation for this package, not a conclusion about sovereignty, title, international law, current authority, geometry equality, or other USA operands.",
+  "scope": {
+    "package": "gb-GUM-ADM2--repair-evaluation",
+    "target_id": "atlas:territory:GUM",
+    "cells": 139,
+    "intervals": 86,
+    "owner": 7117,
+    "foreign_operands": [
+      {
+        "source_id": "gb:USA:ADM1:66186276B63361112364184",
+        "source_family": "gb:USA:ADM1",
+        "feature_ordinal": 44,
+        "shapeName": "Guam",
+        "shapeID": "66186276B63361112364184",
+        "geometry_sha256": "eca21a3509a93f13595e549a6516769310d239167860d92d9d70f2c4c7b43ab6"
+      },
+      {
+        "source_id": "gb:USA:ADM2:52423323B58805530467838",
+        "source_family": "gb:USA:ADM2",
+        "feature_ordinal": 2365,
+        "shapeName": "Guam",
+        "shapeID": "52423323B58805530467838",
+        "geometry_sha256": "91852e9fba78eb54c59bf758f22292c9641ebcb49993965c8aba0cd09b2a810a"
+      }
+    ]
+  },
+  "official_hierarchy_facts": {
+    "census_2018_state_equivalent": {
+      "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/Generalized_ACS2018/State_County/MapServer/7/query?where=STATE%3D%2766%27&outFields=%2A&returnGeometry=false&f=json",
+      "response_bytes": 3468,
+      "response_sha256": "5bca6495576ffaa7f6d3439d8733dc238237687138ace353e4ec3794d1a9b7a9",
+      "feature_count": 1,
+      "attributes": {
+        "OBJECTID": 2,
+        "STATENS": "01802705",
+        "AREALAND": 543555840,
+        "ALANDHIST": null,
+        "AREAWATER": 934337453,
+        "AWATERHIST": null,
+        "DIVISION": "0",
+        "EFFDATE": null,
+        "ESTABDATE": null,
+        "FUNCSTAT": "A",
+        "GCFLG": null,
+        "GEOID": "66",
+        "LSADC": "00",
+        "MTFCC": "G4000",
+        "BASENAME": "Guam",
+        "NAME": "Guam",
+        "OID": 27490748116647,
+        "REGION": "9",
+        "STATE": "66",
+        "STUSAB": "GU",
+        "UR": null,
+        "VINTAGE": "90",
+        "CENTLON": "+144.7740932",
+        "CENTLAT": "+13.4437303",
+        "INTPTLON": "+144.7729493",
+        "INTPTLAT": "+13.4382886",
+        "HU100": null,
+        "POP100": null,
+        "STGEOMETRY_Length": 161832.5474677313,
+        "STGEOMETRY_Area": 596243058.4095417
+      }
+    },
+    "census_2018_county_equivalent": {
+      "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/Generalized_ACS2018/State_County/MapServer/11/query?where=STATE%3D%2766%27&outFields=%2A&returnGeometry=false&f=json",
+      "response_bytes": 3907,
+      "response_sha256": "8c40de2d3bff63aa78cbdea63b04f757fcabffd442d841a3322a8deddc1bf28d",
+      "feature_count": 1,
+      "attributes": {
+        "OBJECTID": 633,
+        "COUNTYNS": "01802705",
+        "AREALAND": 543555840,
+        "ALANDHIST": 543520983,
+        "AREAWATER": 934337453,
+        "AWATERHIST": 934232858,
+        "CBSA": null,
+        "COUNTYCC": "H4",
+        "COUNTY": "010",
+        "COUSUBTYP": "M",
+        "CSA": null,
+        "EFFDATE": null,
+        "ESTABDATE": null,
+        "FIPS55": "99010",
+        "FUNCSTAT": "F",
+        "GCFLG": null,
+        "GEOID": "66010",
+        "LSADC": "00",
+        "METDIV": null,
+        "MTFCC": "G4020",
+        "BASENAME": "Guam",
+        "NAME": "Guam",
+        "OID": 27590748079587,
+        "STATE": "66",
+        "UR": null,
+        "VINTAGE": "90",
+        "CENTLON": "+144.7740932",
+        "CENTLAT": "+13.4437303",
+        "INTPTLON": "+144.7729493",
+        "INTPTLAT": "+13.4382886",
+        "HU100": null,
+        "POP100": null,
+        "STGEOMETRY_Length": 161832.5474677313,
+        "STGEOMETRY_Area": 596243058.4095417
+      }
+    },
+    "census_2021_county_subdivisions": {
+      "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/Generalized_ACS2021/Places_CouSub_ConCity_SubMCD/MapServer/7/query?where=STATE%3D%2766%27&outFields=%2A&returnGeometry=false&f=json",
+      "response_bytes": 9772,
+      "response_sha256": "ede1b4bba5011a6ff90662097a26575fd334f369bb8386763b96033c56186c9a",
+      "feature_count": 20,
+      "exact_named_municipality_joins": 19,
+      "unmatched_record": {
+        "OBJECTID": 21985,
+        "COUSUBNS": "00000000",
+        "AREALAND": 0,
+        "AREAWATER": 917696860,
+        "COUSUBCC": "Z9",
+        "COUNTY": "010",
+        "COUSUB": "00000",
+        "FUNCSTAT": "F",
+        "GEOID": "6601000000",
+        "LSADC": "00",
+        "MTFCC": "G4040",
+        "BASENAME": "County subdivision not defined",
+        "NAME": "County subdivision not defined",
+        "STATE": "66",
+        "CENTLON": "+144.6732048",
+        "CENTLAT": "+13.2615853",
+        "INTPTLON": "+144.6728851",
+        "INTPTLAT": "+13.2619047",
+        "OID": "276903018501757"
+      },
+      "join_method": "Exact shapeName to BASENAME join, without normalization or geometric comparison. Full Census query returned 20 features; 19 named municipalities join exactly; one water-only undefined subdivision is retained explicitly, not discarded or adopted.",
+      "layer_metadata_path": "primary/census-cousub2021-layer.json",
+      "layer_metadata_sha256": "19ad4fb5143255c9739e8f25d927173f262aa86d738d6208d204dde8b6a644e8"
+    },
+    "geoBoundaries_operand_source_metadata": {
+      "feature_sources": "Complete retained gb:USA:ADM1 and gb:USA:ADM2 product pins at the original corpus baseline.",
+      "recorded_shape_identity": [
+        "Guam",
+        "US-GU",
+        "USA",
+        "ADM1"
+      ]
+    }
+  },
+  "limits": [
+    "The Census attributes establish the exact named administrative hierarchy represented in the retained Census products, not sovereignty, title, external legal validity, or exact boundary equivalence to geoBoundaries polygons.",
+    "The 19 named GUM feature identities are joined by exact name and stable shapeID to Census BASENAME and GEOID; no geometry comparison was performed.",
+    "The 20th Census row is an undefined water-only record and is retained as unmatched, not adopted as a municipality.",
+    "This decision applies only to exact retained interior native-center contact incidences with the two Guam operands and the listed GUM members. It does not blanket-suppress USA families or resolve any non-Guam operand.",
+    "Source-catalogue labels/vintage/license fields are retained metadata claims, not independent upstream rights validation or proof of present applicability.",
+    "The GUM physical comparison is whole-target and includes adverse reconstruction flags; it does not provide per-key physical clearance or current land/water truth.",
+    "No owner, native assignment, repair, acceptance, or credit is changed or asserted by this contextualization."
+  ]
+}

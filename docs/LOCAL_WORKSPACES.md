@@ -1,8 +1,9 @@
 # Bounded local workspaces
 
 Whenever an author, premerge reviewer, Auditor or publisher needs a new local checkout, use `scripts/local-workspace.mjs`
-for new local checkouts. Fresh branches do not require accumulating fresh directories.
-Use Node 24 from any checkout of the same primary repository. Keep one stable worker ID for each chat across successive issues; a new job is not a new worker. Distinct reviewer agents keep their own worker IDs. One shared Git object
+for new local checkouts. Fresh branches do not require accumulating fresh directories. Lane prefixes are optional;
+Git ref validity, unique fresh branches and exact worker/slot ownership remain enforced.
+Use Node 24 and the helper bound to the task's repository, not an ambient checkout. Keep one stable worker ID for each chat across successive issues; a new job is not a new worker. Distinct reviewer agents keep their own worker IDs. One shared Git object
 store and registry serve all its worktrees. Each unique worker ID has at most one
 `work` slot and one `review` slot. Release a finished slot before allocating its
 replacement. A reviewer remains isolated from the author's files and reasoning. Review slots are optional: inspect exact diffs and immutable evidence through GitHub APIs or Git blobs without allocating a checkout when no filesystem reproduction/test is needed.
@@ -13,21 +14,77 @@ Worker identity belongs to the chat, not the issue, branch, goal, checkout or Gi
 
 Active legacy work keeps its recorded worker ID only for finishing, renewing and releasing that exact claim/checkout. Do not rename an active claim, take over another chat’s slot or start new work under the legacy ID. After verified merge/handoff and safe release, use this chat’s ID for the next job and allocation. Independent reviewer agents keep their own stable distinct reviewer IDs (actual agent identity when available); an inherited parent CODEX_THREAD_ID does not identify a sub-agent. Never invent a second ID for self-review. Review allocation is exempt from the author-ID check because review sub-agents may inherit their parent’s environment; review identity remains cooperative and must be checked by the reviewer.
 
-## Allocate and inspect
+New author allocation requires the current chat’s worker ID; the release command instead uses the recorded worker, slot and saved token to select its target, without changing the operator’s identity.
+
+## Task environment
+
+Check `node --version` in the same execution context that will run the allocator.
+If Node 24 is not selected, locate an already installed Node 24 runtime through
+the task's supported environment configuration and select it in that task's
+`PATH`; do not assume another shell's runtime is available. If none is available,
+report that runtime requirement instead of running the helper with an incompatible
+Node. The allocator uses built-in modules and does not require `npm ci`.
+
+Before fetching or running the bootstrap below, bind `TASK_REPO` to the absolute
+repository path supplied by this task's environment/handoff, not `pwd` or a saved
+primary checkout. There is no repository path encoded in `CODEX_THREAD_ID`.
+Check the task's actual filesystem permissions and that repository's Git common
+directory (`git -C "$TASK_REPO" rev-parse --path-format=absolute --git-common-dir`). The shared Git directory
+holds objects, refs, the registry and temporary bootstrap helpers; managed checkout
+paths are derived from it under the sibling `.worldatlas-workspaces` directory.
+Allocation needs write access to both locations. Changing the working directory
+or copying the helper into a writable task directory neither expands permissions
+nor relocates the shared store or managed slots.
+
+If that access is unavailable, retain the existing checkout and report the exact
+missing scope for the task's supported access setup. Do not reset a stale or dirty
+primary checkout, create an unmanaged clone, or change worker identity to work
+around it. Authorized read-only API/blob inspection can continue while execution
+is blocked. Use the current-main instructions rather than a stale checkout's
+saved claim or runtime assumptions.
+
+## Initial task store or released checkout
+
+`TASK_REPO` identifies the task's shared Git repository, not its managed author
+checkout. A released or absent author checkout is normal: use the existing task
+store and allocate a fresh slot below. `isGitRepository=false` at the shell's cwd
+alone does not establish that the supplied task repository is absent.
+
+If the task genuinely has no existing repository, establish one Git store at a
+fresh path inside its authorized writable task root with ordinary metadata-only
+setup, then use the pinned bootstrap and exact missing-object acquisition below:
 
 ```sh
-node scripts/local-workspace.mjs report
-node scripts/local-workspace.mjs check
-node scripts/local-workspace.mjs allocate --worker YOUR-WORKER-ID --slot work \
+git clone --filter=blob:none --no-checkout --no-tags --single-branch --branch main \
+  https://github.com/ChengshuLi/WorldAtlas.git "$TASK_REPO"
+```
+
+This initial store is not an author allocation or a producer-ready checkout.
+Reuse it across jobs; do not clone per package. An inaccessible existing store,
+a denied operation, or an occupied destination is not permission to replace it,
+choose another identity or bypass the access/ownership guards.
+
+## Allocate and inspect
+
+Use the current pinned bootstrap below when the task checkout is stale. For an
+already-current helper, use its absolute task path. The CLI derives the registry
+from the helper's own Git store; changing cwd cannot select another allocator.
+An incorrectly selected old executable is not upgraded by this binding.
+
+```sh
+: "${TASK_REPO:?Use the repository path supplied by this task}"
+node "$TASK_REPO/scripts/local-workspace.mjs" report
+node "$TASK_REPO/scripts/local-workspace.mjs" check
+node "$TASK_REPO/scripts/local-workspace.mjs" allocate --worker YOUR-WORKER-ID --slot work \
   --branch geography/YOUR-FRESH-JOB --include data/regional-review/YOUR-PACKET \
-  --include data/hierarchy.json --reserve-gib 1
-node scripts/local-workspace.mjs allocate --worker YOUR-REVIEWER-ID --slot review \
+  --include data/hierarchy.json
+node "$TASK_REPO/scripts/local-workspace.mjs" allocate --worker YOUR-REVIEWER-ID --slot review \
   --commit EXACT_40_CHARACTER_REVIEW_HEAD --include data/regional-review/YOUR-PACKET
 ```
 
 Replace placeholders and retain the returned path and ownership token locally.
-Work allocation fetches `origin/main` and pins its commit before creating a fresh
-lane branch. Review allocation detaches the exact locally available reviewed
+Work allocation rejects an existing branch, then fetches `origin/main` and pins
+its commit before acquiring the registry lock and creating a fresh branch. Review allocation detaches the exact locally available reviewed
 commit; fetch the PR head first if necessary. Do not allocate one review directory
 per revision: finish/release the previous review slot and allocate its replacement.
 Publisher/Auditor inspection that needs local execution also uses the detached review slot; API/blob-only inspection needs no checkout. Any
@@ -47,14 +104,13 @@ as literal `data/`, `research/` or `coordination/` paths. Include new owned pack
 paths too. Scope is a storage choice, not permission to omit required evidence or
 weaken a check. Resolve pinned baseline bytes with Git when a reproducer supports
 that; otherwise include their exact paths. Verify required inputs are present.
-Use `--profile full` only when the actual build/test needs it, with an adequate
-`--reserve-gib` estimate. There is no allocation-time limit bypass.
+Use `--profile full` only when the actual build/test needs it.
 
 Allocation reads tree metadata before sizing only the selected blobs in bounded
 no-lazy-fetch batches. Native `rev-list --missing=print --ignore-missing` probes
 disable fetch before object parsing, including on Git 2.39, before `cat-file`
 sizes locally present selected blobs. Excluded partial-clone blobs need not be present and are not
-hydrated for sizing. Missing selected blobs fail before a reservation, branch or
+hydrated for sizing. Missing selected blobs fail before a slot, branch or
 checkout is created; acquire only the explicitly required inputs through the
 coordinated import path, then retry normal allocation. This also applies to full
 profiles, which select every file.
@@ -69,27 +125,32 @@ or overwrite a checkout holding active work.
 
 The following code-only bootstrap loads both allocator modules from one exact
 locally available main commit. It uses an exclusive temporary directory inside
-the shared Git store, retains the original repository as the current directory,
-and removes only its generated helper copies afterward. A failed main refresh or
+the task repository's shared Git store and removes only its generated helper copies
+afterward. Git reads and helper execution do not depend on the shell's cwd. A failed main refresh or
 commit lookup stops without using a cached older pin. Missing helper blobs
 stop before execution; acquire those exact pinned objects through the coordinated
 route below rather than falling back to an old executable. Use Node 24.
 
 ```sh
 (
-git -c fetch.negotiationAlgorithm=noop fetch --no-tags --no-recurse-submodules \
+: "${TASK_REPO:?Use the repository path supplied by this task}"
+case "$TASK_REPO" in /*) ;; *) echo 'Absolute task repository required' >&2; exit 1;; esac
+git -C "$TASK_REPO" -c fetch.negotiationAlgorithm=noop fetch --no-tags --no-recurse-submodules \
   --no-auto-maintenance --filter=blob:none origin main || exit
-base=$(GIT_NO_LAZY_FETCH=1 git rev-parse --verify 'origin/main^{commit}') || exit
-GIT_NO_LAZY_FETCH=1 python3 - "$base" inspect --commit "$base" \
+base=$(GIT_NO_LAZY_FETCH=1 git -C "$TASK_REPO" rev-parse --verify 'origin/main^{commit}') || exit
+GIT_NO_LAZY_FETCH=1 python3 - "$TASK_REPO" "$base" inspect --commit "$base" \
   --include data/YOUR-REQUIRED-PATH <<'PYTHON'
 import os, re, subprocess, sys, tempfile
 from pathlib import Path
-base, *args = sys.argv[1:]
+repo, base, *args = sys.argv[1:]
+if not Path(repo).is_absolute():
+    raise SystemExit('Absolute task repository required')
+repo = str(Path(repo).resolve(strict=True))
 if not re.fullmatch('[a-f0-9]{40}', base):
     raise SystemExit('Exact accepted commit required')
 env = dict(os.environ, GIT_NO_LAZY_FETCH='1', GIT_NO_REPLACE_OBJECTS='1')
 def git(*args, **kwargs):
-    return subprocess.check_output(['git', '--no-replace-objects', *args], env=env, **kwargs)
+    return subprocess.check_output(['git', '-C', repo, '--no-replace-objects', *args], env=env, **kwargs)
 common = Path(git('rev-parse', '--path-format=absolute', '--git-common-dir').decode().strip()).resolve(strict=True)
 sources = {}
 for name in ('local-workspace.mjs', 'worker-identity.mjs'):
@@ -144,9 +205,8 @@ not missing-blob rows. No object acquisition is automatic. On older Git,
 
 For a coordinated acquisition, authenticate each missing path/OID/type/size
 against the same immutable GitHub tree. Use the relevant subtree's metadata when
-needed; refuse truncated, conflicting or unknown descriptors. Run `check` before
-downloading and allow for the missing object bytes, the planned checkout
-reservation and other build/dependency needs above the existing free-space floor.
+needed; refuse truncated, conflicting or unknown descriptors. Compare actual free
+space with the missing object bytes, planned checkout and build/dependency growth.
 Only the verified `missing[].oid` list from this exact scope may be imported:
 
 ```sh
@@ -162,38 +222,33 @@ repository OIDs, global `ls-tree -l`, a full clone or automatic lazy fetching.
 This reuses the exact-object transport used by geography acquisition; its
 geography-specific CLI/declaration limits are unchanged and are not a universal
 workspace prefetch interface. Inspection does not resolve an undeclared required
-path: sparse inputs must still cover the actual checks, or use an adequately
-reserved full profile.
+path: sparse inputs must still cover the actual checks, or use a full profile when needed.
 
-## Storage admission and ongoing checks
+## Actual storage and operation sizing
 
-Allocation is serialized across this repository by an exclusive local directory
-lock. It requires at least **10 GiB free after the new reservation**. There is no
-fixed cap on combined checkout usage or on an individual reservation. Reservations
-must be positive, finite and represent safe integer byte counts. Usage reporting
-and `check` still include all registered legacy worktrees, even outside the managed root,
-and the primary checkout's Git store. Each managed slot counts the greater of
-measured usage and its reserved future size; allocation reserves at least the
-selected Git input size and defaults to 1 GiB. Reserve for dependencies, downloads,
-decompression, generated data and build output before starting, rather than
-estimating source size alone. Missing selected inputs or unknown selected input sizes
-block allocation. Allocation checks real free space without traversing registered
-checkouts; missing worktree paths or unknown checkout measurements block `report`
-and `check`.
+Allocation is serialized by an exclusive local directory lock. There is no fixed
+free-space floor or reservation system. `report` inventories measured usage for
+registered worktrees, including legacy paths and the primary checkout's Git store;
+`check` is a cheap free-space report, returning only `freeBytes`. Existing registry
+reservation fields are ignored without rewriting other workers' entries. New
+entries retain an inert zero field so older clients can still read and release them.
 
-Run `check` before downloads, installations, reproductions/builds and at work
-milestones. A failure means stop new generation/installation and inspect `report`;
-release completed work, or record a storage blocker. Do not fall back to a full
-clone, unmanaged worktree, `git archive` extraction or another `/tmp` directory.
-Keep bounded scratch inside the slot so it is measured. Do not duplicate retained
-datasets for baseline experiments: use pinned Git inputs and small derived output.
+Use actual available space and the operation's expected downloads, dependencies,
+decompression and output growth when planning work. Keep bounded scratch inside
+the slot, reuse pinned Git inputs and avoid duplicating retained datasets. A small
+operation does not need a fixed multi-gigabyte reserve. Filesystem and Git failures
+propagate normally. If initial worktree creation fails, the allocator removes only
+its new reservation when both the filesystem and Git confirm no checkout exists.
+It never deletes a branch or files during that recovery. Partial checkouts and
+unknown or interrupted state stay recorded for inspection, never as ready slots. Missing selected inputs still block allocation.
 
-These are cooperative admission/milestone gates, **not filesystem quotas**. A
-running generator, another application or a worker bypassing the tool can exceed
-the budget between checks. No daemon kills processes or deletes files under disk
-pressure. Disk free space accounts for other repositories/apps; the usage
-report inventories this repository only. Unregistered historical archives must
-be inspected during migration; the helper does not infer their ownership.
+These reports are observations, not filesystem quotas or promised capacity. Other
+workers and applications can consume space after measurement. Nothing kills
+processes or deletes files under disk pressure. `report` refuses missing worktree
+paths, unknown measurements and invalid registry records; `check` reads free space
+without traversing worktrees. Inspect actual failures and preserve unique work
+before releasing any completed owned slot. Ownership, isolation, sparse input and
+safe-release protections remain required.
 
 Reuse existing package download caches and browser binaries; install dependencies
 only for checks that need them. Share immutable dependency environments keyed by
@@ -210,10 +265,23 @@ the owned managed author slot. `gh run watch` and the native merge workflow do n
 perform local cleanup. Preserve the run URL, request ID, head and merge commit on
 the original issue before release. Stop local servers/reproduction processes,
 push required evidence, preserve unique scratch and leave the slot clean. Continue
-from the primary checkout to reconcile the original issue and allocate the next job.
+using the task-bound `TASK_REPO` and pinned helper to reconcile the original issue
+and allocate the next job; the shell's cwd does not select that repository.
 Settle any retained live-operation reservation through its existing workflow.
 A release failure does not invalidate an already verified merge. Legacy/unmanaged
 checkouts are retained for explicit inspection.
+
+Include the actual local cleanup outcome in the existing final author or reviewer
+handoff: the owned managed slot was released, no local slot was used, or a checkout
+remains retained or blocked. For retained or blocked cleanup, give the reason,
+responsible worker and next action. Preserve the durable checkpoint before removal,
+then report release only after the existing release command succeeds. A retained
+primary, legacy or unmanaged checkout is not a completed release or permission to
+delete it. A verified merge or deleted remote refs never establishes local cleanup.
+Keep ownership tokens and private filesystem details local. Use plain language in
+the existing conversation, not a new receipt, ledger or admission gate. Existing
+chats apply this rule at their next actual handoff; editing instructions alone does
+not establish adoption or cleanup.
 
 Reviewers must release their local review slot immediately after durably posting
 the review; no waiting for the author to merge. Failed/blocked tasks first preserve
@@ -221,23 +289,37 @@ their checkpoint and unique work. For a manual finish/release, stop processes us
 the slot and run:
 
 ```sh
-node scripts/local-workspace.mjs release --worker YOUR-WORKER-ID --slot work \
+node "$TASK_REPO/scripts/local-workspace.mjs" release --worker RECORDED-WORKER-ID --slot work \
   --token EXACT_RETURNED_TOKEN
 ```
 
+With explicit user authorization to delete an exact retired checkout, an operator may release that selected slot after verifying its backup and confirming no live process or live operation depends on it, while leaving `CODEX_THREAD_ID` unchanged. Use the normal release guards; this does not authorize automatic cross-chat cleanup, new work under the recorded worker, registry edits, forced removal or releasing another holder’s live-operation reservation.
+
 Release preserves the current commit at a local `refs/worldatlas-local-recovery/`
 ref, then asks Git to remove the exact owned worktree without `--force`. Branches
-and the shared Git store remain. It rejects uncommitted, untracked **and ignored**
-files, plus index trust flags that can hide edits (`assume-unchanged` or materialized `skip-worktree`): first commit/push necessary evidence, preserve unique scratch outputs, and
+and the shared Git store remain. It rejects uncommitted, untracked and unrecognized
+ignored files, plus index trust flags that can hide edits (`assume-unchanged` or materialized `skip-worktree`): first commit/push necessary evidence, preserve unique scratch outputs, and
 remove only verified regenerable artifacts. A review checkout must be clean too.
+After the last SQL parity/static-history consumer, the same release can remove
+`.cache/package-atlas.sqlite` and `.cache/package-input-build.json` with the
+checkout when they are the only remaining ignored files. It binds the successful
+build receipt to the clean producer HEAD, committed input definition, exact DB
+byte count and whole Git blob OID. The release result retains that descriptor and
+the receipt hash; it does not archive another SQLite copy. An edited DB, missing
+or stale receipt, WAL/SHM, symlink or any other ignored file still refuses before
+removal. Keep unknown local databases and historical evidence under the existing
+preservation rules. This local receipt check establishes unchanged generated
+output, not an authenticated receipt from an untrusted actor.
+
 Release does not decide whether acceptance is complete or a process is finished;
-the holder must establish that before calling it. It does not delete remote refs,
+the operator must establish that before calling it. It does not delete remote refs,
 original repository evidence, other workers' work or production data.
 
 The token changes on every allocation. Wrong/stale tokens, symlink directories,
 changed Git identity and an occupied slot fail closed. A failed/interrupted
-allocation remains `preparing` in the registry and consumes its reservation. A
-crash may leave the local lock. Neither expiry nor a timeout authorizes deletion
+allocation with a partial checkout or unknown state remains `preparing` and
+occupies its slot. Fetch runs outside the registry lock; a crash during the
+locked mutation may still leave the local lock. Neither expiry nor a timeout authorizes deletion
 or lock breaking: inspect processes, `git worktree list`, the registry and actual
 files, preserve work and reconcile under one operator. There is intentionally no
 automatic stale-lock recovery or broad destructive sweep.
@@ -249,6 +331,5 @@ existing author/reviewer/Auditor/publisher instructions to read this guide befor
 their next allocation. Finish active legacy jobs in place; do not move their live
 files. After a job is finished, inspect and preserve unique work before removing
 its completed legacy checkout with Git. `report` lists legacy usage; it never
-automatically deletes it. A breached budget may therefore block new allocations
-until legacy cleanup is safely completed. Managed paths and the registry are
+automatically deletes it. Actual disk exhaustion may therefore require safe legacy cleanup. Managed paths and the registry are
 local execution state, not another issue/status ledger.

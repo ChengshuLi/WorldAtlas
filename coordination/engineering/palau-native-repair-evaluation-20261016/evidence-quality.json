@@ -1,0 +1,611 @@
+{
+  "version": 1,
+  "issue": 2255,
+  "lane": "engineering",
+  "worker_id": "01a14696-5599-71f5-9949-73da4141a002",
+  "subject_ids": [
+    "gb:PLW:ADM1:51375826B1021187793063",
+    "gb:PLW:ADM1:51375826B14634142702996",
+    "gb:PLW:ADM1:51375826B16617280953256",
+    "gb:PLW:ADM1:51375826B21693494950446",
+    "gb:PLW:ADM1:51375826B25708098730444",
+    "gb:PLW:ADM1:51375826B32695076810418",
+    "gb:PLW:ADM1:51375826B36601808440460",
+    "gb:PLW:ADM1:51375826B48991434772650",
+    "gb:PLW:ADM1:51375826B59587402164376",
+    "gb:PLW:ADM1:51375826B6202415756314",
+    "gb:PLW:ADM1:51375826B68373509078236",
+    "gb:PLW:ADM1:51375826B69298749218873",
+    "gb:PLW:ADM1:51375826B76455151990264",
+    "gb:PLW:ADM1:51375826B80300454073965",
+    "gb:PLW:ADM1:51375826B83906845617852",
+    "gb:PLW:ADM1:51375826B95953962908269"
+  ],
+  "subject_ids_sha256": "7de7d773dfc0563f3db7290078260bf45f254cb4514bf68ea0f0e447b094d9ee",
+  "baseline": {
+    "commit": "e143ae59177efa2114e9075dac2d99008ed43894",
+    "files": [
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+        "bytes": 1754890,
+        "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PLW-ADM1-000.bin.gz",
+        "bytes": 11652,
+        "sha256": "304f2bd28da9e5a65acc02ab7c93a9b0b9e4f8f531d4da6ce000f316fc1eaa03",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 41438,
+        "uncompressed_sha256": "5936705821fd2f777ab8f6dc60a461f4cbee7050492b3b95459e36bd90b92fca"
+      },
+      {
+        "path": "data/geography/part-19.json",
+        "bytes": 4583022,
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+      "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PLW-ADM1-000.bin.gz": "304f2bd28da9e5a65acc02ab7c93a9b0b9e4f8f531d4da6ce000f316fc1eaa03",
+      "data/geography/part-19.json": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+    },
+    "pin_files": {
+      "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PLW-ADM1-000.bin.gz": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PLW-ADM1-000.bin.gz",
+      "data/geography/part-19.json": "data/geography/part-19.json"
+    },
+    "subject_files": {
+      "gb:PLW:ADM1:51375826B1021187793063": "data/geography/part-19.json",
+      "gb:PLW:ADM1:51375826B14634142702996": "data/geography/part-19.json",
+      "gb:PLW:ADM1:51375826B16617280953256": "data/geography/part-19.json",
+      "gb:PLW:ADM1:51375826B21693494950446": "data/geography/part-19.json",
+      "gb:PLW:ADM1:51375826B25708098730444": "data/geography/part-19.json",
+      "gb:PLW:ADM1:51375826B32695076810418": "data/geography/part-19.json",
+      "gb:PLW:ADM1:51375826B36601808440460": "data/geography/part-19.json",
+      "gb:PLW:ADM1:51375826B48991434772650": "data/geography/part-19.json",
+      "gb:PLW:ADM1:51375826B59587402164376": "data/geography/part-19.json",
+      "gb:PLW:ADM1:51375826B6202415756314": "data/geography/part-19.json",
+      "gb:PLW:ADM1:51375826B68373509078236": "data/geography/part-19.json",
+      "gb:PLW:ADM1:51375826B69298749218873": "data/geography/part-19.json",
+      "gb:PLW:ADM1:51375826B76455151990264": "data/geography/part-19.json",
+      "gb:PLW:ADM1:51375826B80300454073965": "data/geography/part-19.json",
+      "gb:PLW:ADM1:51375826B83906845617852": "data/geography/part-19.json",
+      "gb:PLW:ADM1:51375826B95953962908269": "data/geography/part-19.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "palau-original-reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/blob/9469f09/releaseData/gbOpen/PLW/ADM1/geoBoundaries-PLW-ADM1_simplified.geojson",
+      "role": "Complete original simplified sixteen-State source; exact target identities and full competitor family.",
+      "vintage": "Represented 2017, metadata build December 2023.",
+      "retrieved_at": "2026-10-16",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0. Credit OpenStreetMap contributors, Wambacher and geoBoundaries gbOpen; retain ODbL obligations for derived reference-native assignments. https://opendatacommons.org/licenses/odbl/1-0/ ."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Read complete original corpus payload from exact baseline. Decoded 41438 bytes, SHA256 5936705821fd2f777ab8f6dc60a461f4cbee7050492b3b95459e36bd90b92fca. Full and simplified products are distinct.",
+      "limit": "Reference-state repair only; incomplete archipelago inventory, present legal coastlines, maritime jurisdiction and regional semantics remain uncertified.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "palau-primary-territorial-context",
+      "url": "https://ministryofhrctd.pw/wp-content/uploads/2020/07/Place-Names-from-Ridge-to-Reef.pdf",
+      "role": "National cultural State/island-group corroboration, alongside national State webpages and Koror constitutional and management texts cited in source-scope-review.md.",
+      "vintage": "2014 national cultural publication; Koror constitution revised 2005 and tour manual PDF metadata 2015.",
+      "retrieved_at": "2026-10-16",
+      "license": {
+        "status": "unknown",
+        "terms": "Primary PDFs, full text and rendered pages are not redistributed. National cultural publication is all rights reserved; tour manual asks readers to contact the State department before copying sections. Bounded paraphrases and source citations only."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Original national cultural PDF 9709181 bytes SHA256 a9e0946f1e59fbe6194db985b9a723b587cefec220b580f6193d9865f16181de. Inspect PDF pages 71,84,85,88,92; see exact citations and hashes for Koror originals in source-scope-review.md.",
+      "limit": "State/island-group context and intra-state hierarchy, not georeferenced current legal boundary lines or complete island coverage.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/authority/authority-binding.json",
+      "bytes": 737,
+      "sha256": "8b81f1a802f24dc743e0d163edd2b4622b4a544c31d45500e2b6d484dfd5d792",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/authority/constructor-result.json",
+      "bytes": 29942,
+      "sha256": "4f5535ce83259910097678daef75e2bfa5cfc9883a374c022f77f85cb16c1a90",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/authority/original-rule-preimage.json",
+      "bytes": 734,
+      "sha256": "1e35eeaa117da963958e972e2c10c922e714faf2c51e389fa94d353f52e948db",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/authority/preparation.json",
+      "bytes": 501,
+      "sha256": "1e498900173e98a482cd39f5b00851dd1feae4e7b1a0132698be9462f53fe5dd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/candidate-native-patch.json",
+      "bytes": 15653,
+      "sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "bytes": 5912,
+      "sha256": "dc4d7b90b27b3a29ad21c7eee5428ce93ae41fa9b2a0ee9479a3d803ac958532",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/complete-source-roster.json",
+      "bytes": 2883,
+      "sha256": "b0d7a49c1ad0a0f9986cb8be7f9841c3cfb1ca6612fe64b88bdbb455403ac00e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/consumed-original-inputs.json",
+      "bytes": 4803,
+      "sha256": "e23f06651429dcfca078694723420866211977f17040186df08c5d0eed011c30",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/original-stage-inputs.json",
+      "bytes": 73909,
+      "sha256": "a7eb2190ea1e70ea7ac5293ba1b974482bafacceedce51993659661ff3ffd274",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/physical-candidate-inspection.json",
+      "bytes": 14405,
+      "sha256": "83f5e297dd10f9c826021f601505f7af761fb001957156e306f0ec472829218f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/retained-administrative-source-entry.json",
+      "bytes": 1894,
+      "sha256": "917c17c9c97673bbf8c8f427309559ccc693221f09a0dc0173f7e72d1a2d1646",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/retained-component-candidates.json",
+      "bytes": 52635,
+      "sha256": "d0af1e2ff51696e3341aaa6e481b3093277db09268ffff0eccb4adb0015d7403",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/retained-source-target-topology.json",
+      "bytes": 13782,
+      "sha256": "27beca08724dc6f3d9ce2fd7f6b1a6b7e5c188e4d59346d7fc048fc3ae926500",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/intervals/block-030.json.gz",
+      "bytes": 2215,
+      "sha256": "4622e8cd27ee4749e56dc87cc6569797e5038bd23297d02e5be32c12cb2f894e",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 19552,
+      "uncompressed_sha256": "20f6b83025e4ed3a4e0bd5f7a78d4b81403723ddcf523de6c9b668595817d8fd"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/intervals/block-031.json.gz",
+      "bytes": 116,
+      "sha256": "7b1d5e5be9c82b1bf67f5656ca34b2f416570ac6cb1b39a4e57a7283401147c0",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 416,
+      "uncompressed_sha256": "ef955e72c90f47f2dcb8d7d4704a37fa2e7e94885c5a4f9b8127f7e5c8248826"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/intervals/package.json",
+      "bytes": 2599,
+      "sha256": "fdd0301fd3ba90c95cd2cdeeff8230a1e301b8e94effab5c31c26d6cca65ce07",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/native-diagnostic/native-diagnostic.json",
+      "bytes": 56653,
+      "sha256": "91fd741fb669bfd663727f96056d1638d293df89dcb4cdffb2ee1d1caa4b0873",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/native-diagnostic/preparation.json",
+      "bytes": 266,
+      "sha256": "5712493f51173d7a6cd4d71652bcf0d64a6e048b8f890b8a71fd31d6a5c25d41",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/physical/execution-receipt.json",
+      "bytes": 58170,
+      "sha256": "3e660fe268f41c1dafb441e50841089d984b0906a262cb072324f33044268740",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/physical/preparation.json",
+      "bytes": 544,
+      "sha256": "4dc4aa8e2172b746c1b6be6fdcd57b47bd4c18374c3cf6e1e8431648499b8a6d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/physical/whole-target-support.json",
+      "bytes": 253502,
+      "sha256": "344f060db3955769de8acef2d6772f7a074afc9cf07399c6f7a016a503a26d0d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/source-evidence/preparation.json",
+      "bytes": 262,
+      "sha256": "46d21be87b702aa20e6c28b0a974be6d7c181a2888b9ec242b902b7bfbd4cda0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/source-evidence/source-evidence.json",
+      "bytes": 35066,
+      "sha256": "11c28fa6f7a27ad535c855e419a9688c11c9f4b1a3c25fc97962e5ff8178ce09",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "original-palau-qualification",
+      "kind": "code",
+      "description": "Retain actual whole-source physical/native constructor results and immutable consumed-input bindings, exact diagnostic decisions, every physical residual and authenticated accepted-emitted owner-zero readback. No geometry repair, buffer or guessed ownership.",
+      "software": "Accepted stock prepare-delivery-handoff at e143ae59177efa2114e9075dac2d99008ed43894; Node 24.19.0; Python 3.12.14, NumPy 2.3.5, Shapely 2.1.2, GEOS 3.13.1.",
+      "units": "Exact native cell centres and half-open intervals; source CRS84 longitude/latitude, no area or distance threshold."
+    }
+  ],
+  "metrics": [
+    {
+      "id": "requested_cells",
+      "value": 1117,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "supported_cells",
+      "value": 1117,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "held_cells",
+      "value": 0,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "candidate_cells",
+      "value": 1117,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "occupied_native_base_cells",
+      "value": 0,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "prior_additive_overlap_cells",
+      "value": 0,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "inherited_additive_cells",
+      "value": 294376,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "original-interval-segments",
+      "value": 434,
+      "unit": "half-open intervals",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "owner-35422-cells",
+      "value": 20,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "owner-35423-cells",
+      "value": 79,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "owner-35424-cells",
+      "value": 19,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "owner-35425-cells",
+      "value": 22,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "owner-35426-cells",
+      "value": 719,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "owner-35427-cells",
+      "value": 11,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "owner-35428-cells",
+      "value": 1,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "owner-35429-cells",
+      "value": 55,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "owner-35430-cells",
+      "value": 18,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "owner-35431-cells",
+      "value": 11,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "owner-35432-cells",
+      "value": 37,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "owner-35433-cells",
+      "value": 3,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "owner-35435-cells",
+      "value": 14,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "owner-35436-cells",
+      "value": 103,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    },
+    {
+      "id": "owner-35437-cells",
+      "value": 5,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "7b6619abac8607a20965aa7376299d065207341c57ba0aa958de3625696d1f2c",
+      "evaluation_commit": "f811e35a5e4641996a4021607f953c020427eb61"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "requested_cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/native-diagnostic/native-diagnostic.json",
+      "json_pointer": "/requested_cells"
+    },
+    {
+      "metric_id": "supported_cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/native-diagnostic/native-diagnostic.json",
+      "json_pointer": "/supported_cells"
+    },
+    {
+      "metric_id": "held_cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/native-diagnostic/native-diagnostic.json",
+      "json_pointer": "/held_cells"
+    },
+    {
+      "metric_id": "candidate_cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "json_pointer": "/candidate_cells"
+    },
+    {
+      "metric_id": "occupied_native_base_cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "json_pointer": "/occupied_native_base_cells"
+    },
+    {
+      "metric_id": "prior_additive_overlap_cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "json_pointer": "/prior_additive_overlap_cells"
+    },
+    {
+      "metric_id": "inherited_additive_cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "json_pointer": "/inherited_additive_cells"
+    },
+    {
+      "metric_id": "original-interval-segments",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/intervals/package.json",
+      "json_pointer": "/interval_segments"
+    },
+    {
+      "metric_id": "owner-35422-cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "json_pointer": "/owner_counts/35422"
+    },
+    {
+      "metric_id": "owner-35423-cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "json_pointer": "/owner_counts/35423"
+    },
+    {
+      "metric_id": "owner-35424-cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "json_pointer": "/owner_counts/35424"
+    },
+    {
+      "metric_id": "owner-35425-cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "json_pointer": "/owner_counts/35425"
+    },
+    {
+      "metric_id": "owner-35426-cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "json_pointer": "/owner_counts/35426"
+    },
+    {
+      "metric_id": "owner-35427-cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "json_pointer": "/owner_counts/35427"
+    },
+    {
+      "metric_id": "owner-35428-cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "json_pointer": "/owner_counts/35428"
+    },
+    {
+      "metric_id": "owner-35429-cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "json_pointer": "/owner_counts/35429"
+    },
+    {
+      "metric_id": "owner-35430-cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "json_pointer": "/owner_counts/35430"
+    },
+    {
+      "metric_id": "owner-35431-cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "json_pointer": "/owner_counts/35431"
+    },
+    {
+      "metric_id": "owner-35432-cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "json_pointer": "/owner_counts/35432"
+    },
+    {
+      "metric_id": "owner-35433-cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "json_pointer": "/owner_counts/35433"
+    },
+    {
+      "metric_id": "owner-35435-cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "json_pointer": "/owner_counts/35435"
+    },
+    {
+      "metric_id": "owner-35436-cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "json_pointer": "/owner_counts/35436"
+    },
+    {
+      "metric_id": "owner-35437-cells",
+      "path": "coordination/engineering/palau-native-repair-evaluation-20261016/evidence/accepted-emitted-owner-zero.json",
+      "json_pointer": "/owner_counts/35437"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "status": "supported",
+      "text": "Complete original source and actual physical/native candidate evidence support exactly 1117 reference-State repair cells with no candidate holds. Original reconstruction residuals for nine States remain preserved and intersect no candidate centres.",
+      "source_ids": [
+        "palau-original-reference",
+        "palau-primary-territorial-context"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "Final current-selector integration and actual final selected-output verification remain required. Separate physical companion, missing islands, current legal boundaries, maritime rights, regional semantics and publication are not resolved.",
+      "source_ids": [
+        "palau-original-reference",
+        "palau-primary-territorial-context"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs gb-PLW-ADM1--repair-evaluation FRESH_OUTPUT",
+    "env -u NODE_OPTIONS -u NODE_PATH node scripts/prepare-delivery-handoff.mjs physical CONFIG FRESH_OUTPUT",
+    "env -u NODE_OPTIONS -u NODE_PATH node scripts/prepare-delivery-handoff.mjs source-evidence CONFIG FRESH_OUTPUT",
+    "env -u NODE_OPTIONS -u NODE_PATH node scripts/prepare-delivery-handoff.mjs native-diagnostic CONFIG FRESH_OUTPUT",
+    "env -u NODE_OPTIONS -u NODE_PATH node scripts/prepare-delivery-handoff.mjs native-authority CONFIG FRESH_OUTPUT"
+  ]
+}

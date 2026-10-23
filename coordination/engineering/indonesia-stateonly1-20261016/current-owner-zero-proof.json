@@ -1,0 +1,175 @@
+{
+  "kind": "current-owner-zero-by-exact-unchanged-base-proof-reuse-and-fresh-whole-accepted-patch",
+  "accepted_selection_commit": "7ef13f96c0005b6e181a640005bd867bbc2f63d0",
+  "original_request": "repair:23115:130105:213977",
+  "native_key": [
+    23115,
+    130105,
+    213977
+  ],
+  "accepted_selector_pin": {
+    "commit": "7ef13f96c0005b6e181a640005bd867bbc2f63d0",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "883a474b66571a200346891545c60596a3bba3d7",
+    "bytes": 1583,
+    "sha256": "70e13c013102fa05b04c8ff8cc09fc8d8709694aa9dbea65f6b6c293cd215891"
+  },
+  "accepted_patch_pin": {
+    "commit": "7ef13f96c0005b6e181a640005bd867bbc2f63d0",
+    "path": "coordination/engineering/myanmar-vietnam3274-after-indonesia393-20261016/delivery3274-001/composition/patch.json",
+    "mode": "100644",
+    "git_blob_oid": "05635c1864df5e90c07ff9cd6b60d4259451d327",
+    "bytes": 2773728,
+    "sha256": "f24f65e0ac1eabfab233e1f65bff820f982e0bc060b7998a3657cd1955fadff7"
+  },
+  "historical_actual_base_ownership_record_unchanged": {
+    "original": {
+      "id": "repair:23115:130105:213977",
+      "original_package": "repair",
+      "country": "MYS",
+      "owner": 23115,
+      "y": 130105,
+      "x": 213977,
+      "original_held_interval": [
+        130105,
+        213977,
+        213978,
+        23115
+      ],
+      "original_request_custody": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+        "bytes": 11275,
+        "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+      },
+      "original_foreign_source_indices": [
+        45977
+      ],
+      "original_held_reason": "territorial_exclusion_cells"
+    },
+    "target": {
+      "id": "gb:IDN:ADM2:22746128B82886709098386",
+      "index": 23115,
+      "bounds": [
+        212303.8473972222,
+        129926.11715153734,
+        214263.8295427778,
+        131024.95934183786
+      ],
+      "province_id": "framework:province:west-kalimantan:16a25aa9e8c0",
+      "province_index": 4905
+    },
+    "selected_properties": {
+      "id": "gb:IDN:ADM2:22746128B82886709098386",
+      "name": "Kapuas Hulu",
+      "parent_id": "framework:province:west-kalimantan:16a25aa9e8c0",
+      "reference_owner": "Indonesia",
+      "metadata": {
+        "source_id": "gb:IDN:ADM2",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson",
+        "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+        "reference_year": "2020",
+        "administrative_level": "ADM2",
+        "parent_source_level": "ADM1",
+        "granularity_version": 3,
+        "source_role": "regency, city",
+        "selection_reason": "Named regency, city territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "22746128B82886709098386",
+        "representative_point": [
+          112.79555606101215,
+          0.8261499999999999
+        ],
+        "hierarchy_version": 4,
+        "hierarchy_source": "gb:IDN:ADM1",
+        "hierarchy_overlap": 0.989492,
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 4,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+        "original_geometry_sha256": "483399909080812f39e323dcfe1c51e411a13d382b78ad25e51c9188f0748f59",
+        "reference_version": 3,
+        "geographic_area_code": "BOR",
+        "geographic_region_code": 42,
+        "geographic_match": "largest source overlap",
+        "geographic_overlap": 1,
+        "coverage_version": 1,
+        "semantic_version": 1,
+        "remote_version": 1,
+        "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "IDN-1228",
+          "overlap": 0.990103
+        },
+        "regional_match": {
+          "reference_iso": "IDN",
+          "source_id": "IDN-1228",
+          "overlap": 0.990103,
+          "method": "reference-territory-constrained overlap"
+        },
+        "reference_owner_id": "owner:Q252",
+        "reference_polity": "Indonesia",
+        "reference_polity_status": "reference",
+        "reference_polity_evidence": {
+          "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+          "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+          "reference_territory": "Indonesia",
+          "classification": "Sovereign country",
+          "note": null,
+          "uncertainty": false
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "Asia",
+          "decision_index": 2345,
+          "evidence_file": "geographic-decisions"
+        }
+      }
+    },
+    "selected_geometry_sha256": "c2550d6807bba5da8d2f5f08366496de6a3d3f34da18f8f3568a239789eb9f93",
+    "base_owner": 0,
+    "patch_hits": [],
+    "effective_owner": 0,
+    "government_district_interior_contacts": 0
+  },
+  "historical_actual_execution_commit": "cd68e89523901acf477d0365470410b8b970bb48",
+  "historical_owner_proof": {
+    "path": "/workspace/scratch/127991fc8b8e/indonesia108-source-policy-assessment-20261016/repair21-current-ownership.json",
+    "bytes": 102021,
+    "sha256": "20b30606d2b0ba04edaa337b51c6e92744d7a92e7d4cda58450422705973c2fc"
+  },
+  "actual_current_base_manifest_same_git_blob_and_sha256": {
+    "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+    "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+    "git_blob_oid": "31d970d0fe2bf8c899f020aad09a3826ea451790",
+    "bytes": 252447,
+    "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+  },
+  "actual_current_selected_target_geography_same_git_blob": {
+    "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+    "path": "data/geography/part-10.json",
+    "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+    "bytes": 5144571,
+    "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+  },
+  "base_owner_zero_reused_without_replaying_native_assets": true,
+  "current_accepted_patch_hits": [],
+  "current_effective_owner": 0,
+  "current_patch_cells": 285582,
+  "prepared967_conditional_absence": {
+    "path": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/8d1b48b3f5b8875aad38141c4d25c15394578cc67b5692c93e18a8ae8ed29678/work/.cache/delivery-handoff/native967-after-accepted2082/composition/patch.json",
+    "bytes": 2789115,
+    "sha256": "bc6e57dff035bd9b07d63a6caf37e253d1cc7c7742662ff6dbcea5cee015ee4c",
+    "key_overlap": false,
+    "meaning": "Conditional prepared967 check only; not accepted-current ownership."
+  },
+  "fresh_native_world_or_source_or_physical_replays": 0,
+  "elapsed_seconds": 0.23574608896160498,
+  "limits": [
+    "Actual earlier native owner-zero is reused only because current accepted native base manifest and target geography bytes are unchanged.",
+    "Fresh whole current accepted additive patch is authenticated and has no hit at the exact key.",
+    "Final current competition/conservation and actual emitted accepted successor still required; no native/repair credit."
+  ]
+}

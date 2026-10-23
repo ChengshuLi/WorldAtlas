@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "purpose": "Independent source-specific interpretation of the proposed 8,108 Russia-facing CHN-contact keys; no promotion or acceptance.",
+  "handoff_archive": {
+    "path": "inventory/rus-context-handoff/russia-9451-primary-research-and-8108-proposal.zip",
+    "bytes": 12045329,
+    "sha256": "40ddbc3dfff0f44a4290c4b7a4cdc19473c01262fa6ed339fb9d44b0c6e290ce",
+    "extracted_to": "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021",
+    "manifest_members": 73,
+    "manifest_mismatches": 0
+  },
+  "contract": {
+    "source": "original queue issue #2302 and pinned source-package-queue.json at 9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c",
+    "exact_original": "2,566,967 cells / 346,353 intervals / 334 owners",
+    "prior_accepted": "2,557,516, preserve unchanged",
+    "residual": "9,451 cells = 9,235 land + 216 inland water",
+    "non_scope_preserved": "872 opposite-side CHN contacts and 471 other-family contacts; accepted_delta 0"
+  },
+  "exact_key_join": {
+    "tuple_rows": 9451,
+    "expanded_original_patch_cells": 9451,
+    "original_patch_owner_mismatches": 0,
+    "proposed_keys": 8108,
+    "proposed_unique_keys": 8108,
+    "proposal_classes": {
+      "mapped_land_support": 7971,
+      "mapped_inland_water_support": 137
+    },
+    "target_owners": 32,
+    "CHN_source_feature_contacts": {
+      "Heilongjiang Province [gb:CHN:ADM1:43563684B55920014778896]": 6825,
+      "Inner Mongolia Autonomous Region [gb:CHN:ADM1:43563684B95381459098578]": 782,
+      "Jilin Province [gb:CHN:ADM1:43563684B3982601277390]": 437,
+      "Xinjiang Uyghur Autonomous Region [gb:CHN:ADM1:43563684B50492231896073]": 64
+    },
+    "exact_negative_operands_checked": 34,
+    "feature_pointer_hash_or_target_negative_mismatches": 0
+  },
+  "LSIB_context": {
+    "source": "official US State Department LSIB 11.4 CHN-RUS full line, read from retained original full-resolution GeoJSON and metadata",
+    "feature_attributes": {
+      "ID": "43bcf969-bbbc-4684-aca3-ee6df428c1b4",
+      "COUNTRY1": "CHINA",
+      "COUNTRY2": "RUSSIA",
+      "RANK": "1",
+      "STATUS": "International Boundary",
+      "LABEL": null,
+      "NOTES": null
+    },
+    "geometry": "one complete MultiLineString feature; parts have 18,756 and 160 vertices",
+    "regional_comparison": "8,980 exact CHN-contact keys: 8,108 interior on north/east Russia-facing side, 872 opposite, 0 line-boundary; alternative outer analysis closures and ordinary relation had 0 disagreements. Two distant State WorldPolygons attribute anchors identify that side as Russia (same WPID). Closure segments are analytic only, never replacement source geometry.",
+    "proposed_distances": "3,376 at most 100m; 4,732 farther. Descriptive context only, not a cutoff. Distance uses planar nearest line point then geodesic distance to it and is not guaranteed global geodesic minimum."
+  },
+  "primary_context_read": {
+    "CHN_source": "Original consumed 34-feature CHN ADM1 is represented-year 2019, public-domain metadata, but actual `sourceData` XML traces to an illustrative blank-province map derivative and 2022 line/polygon processing. Full source properties name four contacting features; that derivative is not a surveyed national border and has no retained quantified positional-error guarantee.",
+    "RUS_source": "Original RUS ADM2 represented-year claim 2017, ODbL 1.0, boundarySource OpenStreetMap/Wambacher; sourceDataUpdateDate 2023. Catalogue advertised 2,328 units while retained full geometry has 2,327 features; exact original IDs for the 32 affected targets nevertheless match the retained target/source rows. No independent current municipal/legal authority is implied.",
+    "bilateral_primary_records": [
+      "PRC MFA July 2008 report records signature of the supplemental descriptive protocol for the eastern boundary and annex, stating the 4,300+ km boundary was demarcated and domestic ratification steps remained.",
+      "PRC MFA October 14, 2008 briefing says exchange of notes confirmed the protocol and annex entered into force that day and mentions marker unveiling.",
+      "PRC MFA June 2024 29th boundary-committee statement says the border was clear and stable and records the committee mechanism. These are national primary statements, not segment-by-segment cell-coordinate validation."
+    ],
+    "US_metadata_limit": "The 2025 LSIB metadata describes most, not all, lines as within 100m; it gives no universal error guarantee. The product reflects US boundary recognition/dispute policy, not universal sovereignty or control. No special disputed label appears on the retained CHN-RUS feature."
+  },
+  "interpretation": {
+    "conclusion": "A source-specific contextual treatment is defensible for the exact 8,108-key Russia-facing subset as a candidate to carry into the existing stock native qualification path. It is materially better supported than treating the 2019 illustrative CHN ADM1 boundary contact as dispositive where the retained full-resolution international line and bilateral records place those exact centers on the Russia-facing side. This is a contextual applicability statement about these retained competing source geometries, not a sovereignty finding, current legal boundary certification, or positive repair/credit.",
+    "not_qualified_yet": "No observer, native diagnostic/authority, constructor, or current-owner conservation was run here. Original source membership, all 122 complete foreign source features across six source families and 230 target-specific negative operand bindings (for 334 RUS targets), physical issues and native uniqueness must remain in the stock qualification route; physical/source issues are not cured by the side comparison. The retained physical summary has 236 adverse records across 140 of 334 targets; the 54MB target-level receipt was referenced but not materialized in this ZIP, so this review does not say whether the 32 proposed targets are individually issue-free.",
+    "remaining_adverse_scope": "Keep all 872 opposite-side CHN keys and 471 other-family keys adverse/preserved; do not apply the contextual statement to their keys or generalize it to entire provinces/municipalities. Preserve all original physical/source issues and all prior 2,557,516 accepted cells."
+  },
+  "actual_operations": [
+    "Verified extracted 73 manifest-listed files by byte count and SHA-256; all matched.",
+    "Expanded 3,380 original held scanline runs to 9,451 keyed cells; all 9,451 tuple rows match owner index.",
+    "Joined all 8,108 proposed keys to all 8,108 LSIB side rows; all are interior on the Russia-facing side.",
+    "Checked 34 distinct target-feature CHN operands against exact target-relative negative ordinals, original full-source feature IDs/names, canonical source geometry hashes, and retained target negative geometries; zero mismatch.",
+    "Read retained original CHN and RUS metadata, full LSIB attributes, 2008/2024 PRC MFA HTML bodies and retained US LSIB documentation; no external outreach or new geometry operation."
+  ],
+  "limits": [
+    "Side relation was already computed by retained stock-native comparison data; no new line/polygon geometry or owner scan was executed.",
+    "Distance strata are contextual only and do not select eligibility.",
+    "Full target physical issue body was referenced in the handoff but not materialized in this ZIP; only the original physical summary and authenticated receipt pin are available here.",
+    "This conclusion supports an exact contextual evidence proposal and further stock qualification, not an 8,108 positive outcome. Root retains acceptance authority."
+  ],
+  "traceable_sources_examined": {
+    "retained_paths": [
+      "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/primary/CHN-source-meta.txt",
+      "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/primary/CHN-source-license.png",
+      "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/primary/CHN-source-CHN_ADM1.shp.xml",
+      "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/primary/Commons-China-blank-province-map.html",
+      "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/primary/RUS-ADM2-current-metadata.json",
+      "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/primary/CHN-ADM1-current-metadata.json",
+      "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/original-CHN-ADM1.geojson",
+      "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/primary/State-LSIB-RUS-CHN-full-resolution.geojson",
+      "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/primary/State-LargeScaleInternationalBoundaries_v11_4_24Feb2025.txt",
+      "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/primary/State-lsib.xml",
+      "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/primary/MFA-CHN-demarcation-2008.html",
+      "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/primary/MFA-CHN-entry-into-force-2008.html",
+      "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/primary/MFA-CHN-RUS-joint-border-committee-2024.html",
+      "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/RUS9451-portable-exact-source-key-tuples.json",
+      "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/RUS8980-LSIB-exact-native-regional-sides.json",
+      "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/complete-source-negative-bindings.json",
+      "inventory/rus-context-handoff/unpacked/worldatlas-RUS9451-effort-followup-20261021/retained-source-evidence-complete-native.json"
+    ],
+    "primary_urls": [
+      "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CHN/ADM1/geoBoundaries-CHN-ADM1_simplified.geojson",
+      "https://commons.wikimedia.org/wiki/File:China_blank_province_map.svg",
+      "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/RUS/ADM2/geoBoundaries-RUS-ADM2_simplified.geojson",
+      "https://data.geodata.state.gov/LSIB.gpkg",
+      "https://data.geodata.state.gov/waf/iso/lsib.xml",
+      "https://www.fmprc.gov.cn/gjhdq_676201/gj_676203/oz_678770/1206_679110/xgxw_679116/200807/t20080722_9336208.shtml",
+      "https://bb.china-embassy.gov.cn/chn/fyrth/200810/t20081014_3920413.htm",
+      "https://www.fmprc.gov.cn/wjb_673085/zzjg_673183/bjhysws_674671/xgxw_674673/202406/t20240621_11439760.shtml"
+    ],
+    "counts_verified": "Complete-source-negative-bindings has 122 feature entries across six distinct foreign source families, 230 target-specific bindings, and 334 RUS target records."
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "kind": "mnp205-canonical-location-metadata-join",
+  "status": "exact canonical geography part resolved; requested target records joined without geometry replay",
+  "review_base_commit": "8a0d0302db6c982f3eb081eea05da63bb991259e",
+  "review_descriptor": {
+    "path": "data/world-review.json",
+    "blob_oid": "276aed9643232d89cdb7cb3bf0d4ac3e8a4cc021",
+    "bytes": 14334666,
+    "location_count": 49589,
+    "location_parts_count": 34
+  },
+  "group_bindings": [
+    {
+      "owner_index": 30767,
+      "parent_id": "framework:province:tinian:96edea1faa18",
+      "location_metadata_part": "world-review-locations-29.json.gz",
+      "source_target_id": "gb:MNP:ADM2:39175420B24162802066299",
+      "name": "Tinian",
+      "basis": "ADM2",
+      "source_year": "2021",
+      "license": "Public Domain",
+      "parent_overlap": 0.6781,
+      "reasons": [],
+      "status": "source-assessed",
+      "semantic_status": "open"
+    },
+    {
+      "owner_index": 30769,
+      "parent_id": "framework:province:rota:6289f651d115",
+      "location_metadata_part": "world-review-locations-29.json.gz",
+      "source_target_id": "gb:MNP:ADM2:39175420B64217482742742",
+      "name": "Rota",
+      "basis": "ADM2",
+      "source_year": "2021",
+      "license": "Public Domain",
+      "parent_overlap": 0.71402,
+      "reasons": [],
+      "status": "source-assessed",
+      "semantic_status": "open"
+    },
+    {
+      "owner_index": 30770,
+      "parent_id": "framework:province:northern-islands:b543729a71dc",
+      "location_metadata_part": "world-review-locations-29.json.gz",
+      "source_target_id": "gb:MNP:ADM2:39175420B77088391070908",
+      "name": "Northern Islands",
+      "basis": "ADM2",
+      "source_year": "2021",
+      "license": "Public Domain",
+      "parent_overlap": 0.589,
+      "reasons": [],
+      "status": "source-assessed",
+      "semantic_status": "open"
+    }
+  ],
+  "metadata_chunk": {
+    "path": "data/world-review-locations-29.json.gz",
+    "blob_oid": "bcad2a0fc53d3e717bfe50e262f793fe8c72c8da",
+    "compressed_bytes": 53867,
+    "compressed_sha256": "df1f600b9a337cec80f9e38fa66e9f3fb71d2c57a1a049d18e6742c5e558f8bd",
+    "decoded_bytes": 887334,
+    "decoded_sha256": "59976c93cfc1e422c992cb0412bb363b7b0b104b1d42c674abd8b5100b8795b5",
+    "decoded_locations": 1500
+  },
+  "locator_code": [
+    {
+      "commit": "8a0d0302db6c982f3eb081eea05da63bb991259e",
+      "path": "scripts/rebuild-framework.py",
+      "blob_oid": "bb43f8d912308cd8238742dd0d0f8f901898a3a5",
+      "bytes": 16322,
+      "observed_rule": "Flattens features in the existing data/world-index.json order, then emits each 1,500-feature slice as data/geography/part-N.json. It exposes no inverse ID-to-part index."
+    },
+    {
+      "commit": "8a0d0302db6c982f3eb081eea05da63bb991259e",
+      "path": "scripts/review-world.py",
+      "blob_oid": "7d269cb8909b09e26d5abfc84528da90a22ebfb3",
+      "bytes": 13920,
+      "observed_rule": "Builds world-review-locations-N.json.gz by separately grouping flattened features by reference owner; its groups[].location_parts map to review metadata shards, not geography/part-N.json."
+    }
+  ],
+  "geography_part_29_descriptor": {
+    "path": "data/geography/part-29.json",
+    "blob_oid": "b2375382c8e41ea4a6d11dd4337f5d73e424a879",
+    "bytes": null,
+    "body_read": false,
+    "note": "This is not implied by world-review-locations-29; exact feature membership was not read or inferred."
+  },
+  "interpretation_limits": [
+    "This authenticates the selected source identities, stable parent IDs, and review metadata; the chunk contains no selected canonical geometry or data/geography/part-N.json path.",
+    "The review descriptor and metadata chunk do not establish current selected-geography geometry bytes or the feature's part shard. The similarly numbered review metadata chunk 29 must not be conflated with geography/part-29.json.",
+    "The source package input and physical receipt remain separate; no source-evidence/native diagnostic or authority producer was run by this reviewer."
+  ],
+  "canonical_target_part": {
+    "commit": "8a0d0302db6c982f3eb081eea05da63bb991259e",
+    "path": "data/geography/part-16.json",
+    "git_blob_oid": "02d53ca01dc014a3c9481eb1017a89487fc2bd89",
+    "bytes": 5213846,
+    "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797",
+    "acquisition_record": "inventory/mnp-audit-canonical-part-acquisition.json",
+    "target_record_source": "inventory/mnp-audit-canonical-targets.json",
+    "matched_requested_targets": [
+      {
+        "source_target_id": "gb:MNP:ADM2:39175420B24162802066299",
+        "name": "Tinian",
+        "parent_id": "framework:province:tinian:96edea1faa18",
+        "reference_owner": "United States of America",
+        "geometry_type": "MultiPolygon",
+        "part_path": "data/geography/part-16.json",
+        "part_blob_oid": "02d53ca01dc014a3c9481eb1017a89487fc2bd89",
+        "coordinate_values_omitted": true
+      },
+      {
+        "source_target_id": "gb:MNP:ADM2:39175420B64217482742742",
+        "name": "Rota",
+        "parent_id": "framework:province:rota:6289f651d115",
+        "reference_owner": "United States of America",
+        "geometry_type": "MultiPolygon",
+        "part_path": "data/geography/part-16.json",
+        "part_blob_oid": "02d53ca01dc014a3c9481eb1017a89487fc2bd89",
+        "coordinate_values_omitted": true
+      },
+      {
+        "source_target_id": "gb:MNP:ADM2:39175420B77088391070908",
+        "name": "Northern Islands",
+        "parent_id": "framework:province:northern-islands:b543729a71dc",
+        "reference_owner": "United States of America",
+        "geometry_type": "MultiPolygon",
+        "part_path": "data/geography/part-16.json",
+        "part_blob_oid": "02d53ca01dc014a3c9481eb1017a89487fc2bd89",
+        "coordinate_values_omitted": true
+      }
+    ],
+    "interpretation_limits": [
+      "This locator now binds the three requested MNP ADM2 target identities to the exact canonical geography part.",
+      "The records were checked for IDs, names, parent IDs, owner labels and geometry type only; coordinates were not analyzed and no geometry computation or science operation was run.",
+      "The earlier candidate arithmetic was only a plausible shard screen; exact membership is established by the authenticated part body and target record IDs, not by ordinal inference."
+    ]
+  }
+}

@@ -1,0 +1,408 @@
+{
+  "kind": "complete-administrative-source-preparation-preservation",
+  "original_input_commit": "68e28d58293f7c951378886fa40cf680a2c3694f",
+  "complete_targets": 1603,
+  "original_requested_cells": 293965,
+  "preserved_old_exclusions": 153,
+  "appended_whole_exclusions": 492,
+  "total_whole_exclusions": 645,
+  "source_evidence_bytes": 99406128,
+  "source_evidence_sha256": "1c4db3fcefbbda375dd1b6b0b71c052dc9594b092f370b23327b97061f6fad14",
+  "entire_original_body_equal_after_removing_only_two_declared_additions": true,
+  "cohort_inventory": {
+    "index": {
+      "bytes": 7715259,
+      "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+      "git_blob_oid": "11b1f5d18bb82b955e225e552c96ba4e666b49b3",
+      "mode": "100644",
+      "path": "data/macro-foundation/world-review-projection.json",
+      "sha256": "b959409f46b971a511d57cf0b05a2b49ee1247b52f53f81a5f71069632626d7d"
+    },
+    "parts": [
+      {
+        "bytes": 38603,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 852234,
+        "decoded_sha256": "5fe539a3f4446fb11425f9e57b3d96ba4affe3a5f8c22e80bde015652726a8a7",
+        "git_blob_oid": "172bb17a36aa80061eb41cdb6bfac752764e53b7",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-0.json.gz",
+        "sha256": "85f026beb8921304e02a1bdb69a5b22bbc791b5f15645b4c8afd5922e225bd00"
+      },
+      {
+        "bytes": 37793,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 840400,
+        "decoded_sha256": "ad0038846077f3da944df1cf2e9716b4660b1babedeb15843f87134d7c0be23d",
+        "git_blob_oid": "d1ceb6c7310ede3477762f565fdae83e10d9cffd",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-1.json.gz",
+        "sha256": "7d827ff1f3d48036851c8ad40b72c04814fbdb91522d66c6983ccc54482c141f"
+      },
+      {
+        "bytes": 44475,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 873268,
+        "decoded_sha256": "a986845f77e391e021eb1bb9e9404e9d3aaf55f035247c5c6b43ab5c52083a6c",
+        "git_blob_oid": "fe3fad107fac0de1113bbd2dda5bbb36664e9d5e",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-2.json.gz",
+        "sha256": "3560062a53bc8ccecfcbc74d090cd8c64381b698950b3f2aae7a9365e05c7043"
+      },
+      {
+        "bytes": 35861,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 812281,
+        "decoded_sha256": "855e757fed021c73ad29c39c1dbf0a6995241367368e7641b879ed7400562afd",
+        "git_blob_oid": "fb6f255071f942dc2e576beb43c60dc209c8cd1c",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-3.json.gz",
+        "sha256": "76dc4e01be806585442e5706f6c45eadb402f588790922a1d6cec1bc28915707"
+      },
+      {
+        "bytes": 38700,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 835977,
+        "decoded_sha256": "06d36f85b4c1ad7e265b1e6aa3a2f57cb6fcd50921b0877c507e94b0cfdd8406",
+        "git_blob_oid": "b224893648c18b91357f3af0abf92b9cd3aac9ba",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-4.json.gz",
+        "sha256": "e3f9c15278f88c47e9106924fb3f20e05fc28a92760c46c13b35448b9ef4e50e"
+      },
+      {
+        "bytes": 36676,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 872174,
+        "decoded_sha256": "6a16d8965ce4299ef416b30db3fb25122be3a188a5ac638401159f96a0bfd76f",
+        "git_blob_oid": "0fcca9668e0e57510885ba156f2ff7839d77c205",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-5.json.gz",
+        "sha256": "cfd3fe065557d62f7075b6d2c5ce9203894500641a9fe9d1f5445228c6e4f810"
+      },
+      {
+        "bytes": 36853,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 834337,
+        "decoded_sha256": "f82d55547c3524b0343da1d9e0b404c74020d568161379dd8da90801826c734c",
+        "git_blob_oid": "306a759a4cf3818f7c086401ac07c1ffdf7ae7e4",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-6.json.gz",
+        "sha256": "b7d34bfb646186ecaf767b2627c3ce9fbb94080234a2b1204e448ae0f23d7328"
+      },
+      {
+        "bytes": 34439,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 833290,
+        "decoded_sha256": "dbb1a40da49c621106458cfa36bc0edc28a168d7d711cc7eb7ef220ca3b7d77f",
+        "git_blob_oid": "9348300f3d841d8ddb4b29aee239d3644a7e7616",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-7.json.gz",
+        "sha256": "504822f9b1623d343ae3d8e9fc8897ed14f725dc2f15f6ddbe95f1142c6946ed"
+      },
+      {
+        "bytes": 39907,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 837454,
+        "decoded_sha256": "82c4020f9d33f934ea7a4335ffa65fcaf2116bedaa68269029f492ff9f3e1504",
+        "git_blob_oid": "9b2305ac33d19402662e160fee58d0abb9b2447d",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-8.json.gz",
+        "sha256": "45f865ecb51b70bfab978f4f01c02cb1fbdb2155cd6d84c2143d33a1bdf089b6"
+      },
+      {
+        "bytes": 39845,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 849888,
+        "decoded_sha256": "49870d43f0ead3793961b83df7e1f8e9dced2f08f4493111345519f21c4e5945",
+        "git_blob_oid": "789ff086e1b3ab764a1e2a900cb00609191d5ace",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-9.json.gz",
+        "sha256": "b262cea2579288cc3e9815703567e05edbfe3d8b6ed3df6a36a5b6779dc5a10a"
+      },
+      {
+        "bytes": 36278,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 839711,
+        "decoded_sha256": "d91a7de892ff926b77632376ed9ff88add18684d4ef7cd4880daf663f7fa5a85",
+        "git_blob_oid": "ff435dcaae32966e146a32761e9a7419b5a2d42c",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-10.json.gz",
+        "sha256": "2fa78c20771a0fd7eb8b8930fef8dd5ab63f232d9d3448cc5da9b70a59f30bcd"
+      },
+      {
+        "bytes": 35752,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 813906,
+        "decoded_sha256": "321d1e6500509a61ab68447d8b5d7720aebf36ca132b639ff5130e999c844ac2",
+        "git_blob_oid": "65ef1a9df7cef82addf83be6f242c13e19426a2f",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-11.json.gz",
+        "sha256": "2d66ef4e0809e6c6cf5522f53c192de1ae86552b9a8021757a1b472462027df0"
+      },
+      {
+        "bytes": 30457,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 797017,
+        "decoded_sha256": "222b5ad5369935ade7f3e276c6a9cd00ebf53b89ed94a9ae64b1111e8c26362b",
+        "git_blob_oid": "d36e47aa4cf2f9e04fccf4c66a56242d37523b8d",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-12.json.gz",
+        "sha256": "ca2e35b7fcef4d22cfbdd383b0978d48fe98408dcdd0bebfcf3694751db0d452"
+      },
+      {
+        "bytes": 41191,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 837192,
+        "decoded_sha256": "490e132f81887ca585e514cd4969ecf88550675b64449b95cf3a7d1d8a932b43",
+        "git_blob_oid": "7663c0a4c4cc5631caf034931f9d46dce17be0bf",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-13.json.gz",
+        "sha256": "e9c7b2fdf145c77afc8f3bdce8d1d2713c63c995b515ba135c88ceebfcf7b8e0"
+      },
+      {
+        "bytes": 32925,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 830153,
+        "decoded_sha256": "624acb756642fe62b181b164ca3fe8e1645da8a4122e4a54e938c2d73e48be85",
+        "git_blob_oid": "861fafbfb2b2ce76d18f98a39ef61cee50650a0d",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-14.json.gz",
+        "sha256": "66e353a33276d2d9014296f3552f2da07ed01725fe0ce8387cb4d57318a9fe6e"
+      },
+      {
+        "bytes": 36025,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 825883,
+        "decoded_sha256": "afcf221910fee27ee48171d6502db06ffd8f0fb03a4863a3347864c0fd06662a",
+        "git_blob_oid": "051936f8f73dee8819845ca15ba468858b48d8c8",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-15.json.gz",
+        "sha256": "794c7a18628630cb90d790f3da8443e577a37a429cbbe91bf5accd0f8600ecae"
+      },
+      {
+        "bytes": 37084,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 824833,
+        "decoded_sha256": "2a33ae0fde6365c9f489d8e6e19a3138f51359926f676dd32a9ff0e14eacfd2a",
+        "git_blob_oid": "d9932cb4c5c444b0e6a3e195e3c64019d8b7f25c",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-16.json.gz",
+        "sha256": "eb0c0b291c7449aac166cb0e23ed9dd2b4ccae6297dffcb1dfbc9989ac687a84"
+      },
+      {
+        "bytes": 35925,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 837635,
+        "decoded_sha256": "177b79e26182a12bb8e93ad9ebe113cd8f78fade911cdff569cc4436a4bc7a2a",
+        "git_blob_oid": "416b2748f382a56a6c2a429cb338e028280439f7",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-17.json.gz",
+        "sha256": "8aef6f74c66131540f88003903209d53eb1a1bec403d2e214b3c2c8c89380ca8"
+      },
+      {
+        "bytes": 41056,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 818534,
+        "decoded_sha256": "612af75d7c32e3b0852f0290e6573139929eda9e34a4edfb8af9c1846d4367d2",
+        "git_blob_oid": "8fed6cefa42b90e38640bab5d72e394f3abc6bcd",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-18.json.gz",
+        "sha256": "b6355dbec8a0bfb862fd759ef7566d33449f97e0ba81834fdfb389cb30fc14fd"
+      },
+      {
+        "bytes": 39707,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 839067,
+        "decoded_sha256": "bca45b3c975d853507288d5415d2f9a981954dae28f837b6dc5c96eaaa71855c",
+        "git_blob_oid": "3b90c6323a550814f23f4835d86d3f0fd0ae03b3",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-19.json.gz",
+        "sha256": "00f036d1546384230edde42e268a9eb55ebc257414cd634c7b6474ad09184e03"
+      },
+      {
+        "bytes": 50664,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 885051,
+        "decoded_sha256": "a03e104b69f0a8d36cb0a2fd458f39e665e6736b8fe1ca1c5780bc7bc0fea78a",
+        "git_blob_oid": "3eece99c7fa962bfce996e82c252577ebb51d44b",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-20.json.gz",
+        "sha256": "e699c9cc39848858b3c0d553d234b2e8353bcb15d4225367b65a774dde5765b4"
+      },
+      {
+        "bytes": 50407,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 884400,
+        "decoded_sha256": "972b8f0371f36f9523d6b6ee66478368591012f95b00b4c6ae2a50dca0b9587e",
+        "git_blob_oid": "67660d85ea453468e6c7a457afec2b0c304916f3",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-21.json.gz",
+        "sha256": "4330a88dfb5899c2e00d592e6731e03d7c351ccaf9c77d6866ddd577331f0c16"
+      },
+      {
+        "bytes": 38071,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 860075,
+        "decoded_sha256": "f1c793939637f900ec7fc172195da9d84c983f1c247a6e9476484e9ec25f4877",
+        "git_blob_oid": "093d31a45fb57b6f063aa44d899af49d8ee0867a",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-22.json.gz",
+        "sha256": "a31ca5da3791f15a2edce1527fc13e6119583410107dda3571d4e97191c8d08a"
+      },
+      {
+        "bytes": 43253,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 839078,
+        "decoded_sha256": "981fbabd08cb89f882b4d51b4ad2cace37ed0badab4db4b63dc970be8b7e5902",
+        "git_blob_oid": "e6e621a0f7b5026efae58bd39f08409a11b0b5ba",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-23.json.gz",
+        "sha256": "6f2c3a2fb3d611cf6da32f05168b2a5f4dea8f44a5daad956f1682c11c794f50"
+      },
+      {
+        "bytes": 44111,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 842544,
+        "decoded_sha256": "e197ad9182b79b7bd236620c4bc74eb4ff2b5365fb6d3045ee5a6806886cc365",
+        "git_blob_oid": "88e7c1f73dc050b2e4f987bfffee7481fea32e9d",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-24.json.gz",
+        "sha256": "c1ee208cead318c3cfafd6cba149703e9029b7014dec5aebc2b24a83fe2949d8"
+      },
+      {
+        "bytes": 39687,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 891382,
+        "decoded_sha256": "ae5cc810d1b82e87a871800d1dc2048968c98fa42b9613e69abc0d91c599d435",
+        "git_blob_oid": "b0f6b8db955bcd08c986127b0e71dcad5e26f7c9",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-25.json.gz",
+        "sha256": "a72ef14862d76b2bfdb42758591d5f1f14becd038ac95f57b4b6fdde00e5305f"
+      },
+      {
+        "bytes": 41479,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 907213,
+        "decoded_sha256": "805a75d6f4d9f90c249f877bd0c9055d8830c70547737600409b9d1f19daabf8",
+        "git_blob_oid": "80105eefb5d67a71b40ce894d3e1a93762fe5025",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-26.json.gz",
+        "sha256": "f3e761cbacbeec530d289d955e018e5993156af3ac05edc985a7d1e8e74a36b2"
+      },
+      {
+        "bytes": 40205,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 879927,
+        "decoded_sha256": "f52430ebb070f9f33d7b6ee1af9512dc491de04bc50641111ec44fae2cfeae40",
+        "git_blob_oid": "5b0424f53ec441fdd0a56bac81bafe87b83f6d57",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-27.json.gz",
+        "sha256": "f6aa2faed29fe617de1dd7d2de9ef34bd995465fd6764c462f9b81fd6aca0409"
+      },
+      {
+        "bytes": 48367,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 866424,
+        "decoded_sha256": "8aee2e07b81e9b0c47d64513483a6fec481f4d0c98246c3ccc42b614b75c04e7",
+        "git_blob_oid": "90192470ad56e898867af91a2a320541274e8e18",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-28.json.gz",
+        "sha256": "20747e7b992c88920918aa5f589f841edcc1007d270c46af5a4122247028a215"
+      },
+      {
+        "bytes": 42079,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 894987,
+        "decoded_sha256": "307aadcd65d39dc8ef6d765454d1261c51624a1cce5d9a1fef4fd3ca434a3ef1",
+        "git_blob_oid": "e94b0ea619a7f11688aefe4b1fd7f7cc1a8e5dec",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-29.json.gz",
+        "sha256": "0d92e1af6b8ec2708d0642a27fb409446fd7f4f7f2ab703603d0e09de91bc9f5"
+      },
+      {
+        "bytes": 40307,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 794025,
+        "decoded_sha256": "9f96051a84616730934d5c9f53d631d7e240049ac406ed1621af4bc6022a9c97",
+        "git_blob_oid": "94d504d836e84a0f03393bce5104899a7d7732b2",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-30.json.gz",
+        "sha256": "0dcf574e08637c2e500f88187fea7efc20ce19a4885a0c9f271420d1a21cb2f7"
+      },
+      {
+        "bytes": 45255,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 770325,
+        "decoded_sha256": "d1106e008c838654c43fce61c3a6c0a4dfbc25f629f812013a7654194b65f2a1",
+        "git_blob_oid": "adb8e92e4a5a70cf7179e783bc5cea401b6356dd",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-31.json.gz",
+        "sha256": "ab57d060ae24825b581f70e839851eeef70e73f2833aaf4df12cbf986803fee5"
+      },
+      {
+        "bytes": 45825,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 770246,
+        "decoded_sha256": "66426b637e7d27a9aa07303760518cc8b86a1a9f4f98572a35fae28484a96b06",
+        "git_blob_oid": "8557e6b070f4d8a9ffdd1a457393487ded9aeb25",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-32.json.gz",
+        "sha256": "3627dea486c9b1d7bd1e4cebc492d6efe4392498ba67be4b029f325235d4ffd5"
+      },
+      {
+        "bytes": 6342,
+        "commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+        "decoded_bytes": 71629,
+        "decoded_sha256": "30bd5f9aac02e2a17c054eaef1a4b3bfffc0861723b5dc9f152f3052b2588780",
+        "git_blob_oid": "2e765b86a07c012aa5ce6c743b1b3933f35ba9ff",
+        "mode": "100644",
+        "path": "data/macro-foundation/world-review-locations-33.json.gz",
+        "sha256": "a53bc08472686b02612ac3c2313e26fa82667e644a861916d66e07c45dfc57d5"
+      }
+    ]
+  },
+  "accepted_negative_lineage_helper": {
+    "frozen_reviewed_head": "814a9309339ed2867862996e025eca2deb6d1ae2",
+    "actual_merge_commit": "a9f6ccadcc1bdea6185fcaf5eac7ec00f8c4551a",
+    "whole_changed_file_equality": [
+      {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+        "bytes": 216143,
+        "sha256": "efe5e6df96a36b3d5ac1fc293edd8f1eebbfe4b8d40c6d687cc3569ea9931b05"
+      },
+      {
+        "path": "docs/DELIVERY_HANDOFF.md",
+        "bytes": 57298,
+        "sha256": "9324f04d7474737759d38f6b08b72e55e363033e7accb913e53bde8fd27cdf10"
+      },
+      {
+        "path": "scripts/integration-profile.mjs",
+        "bytes": 72820,
+        "sha256": "dfd9ac4d7fb440d63406526985164f6d872a88d815b434edf0081c4618c9b7f9"
+      },
+      {
+        "path": "scripts/prepare-delivery-handoff.mjs",
+        "bytes": 126474,
+        "sha256": "7597c7a84d45eff646e9056478fcd85ab1d665233ae3ac1278354bbd4b0b6f95"
+      },
+      {
+        "path": "test/delivery-handoff.test.mjs",
+        "bytes": 109744,
+        "sha256": "ed7f73ea38ba19ac02b565b829d27e1c9c1a1657fdef753fb135255f0aff741f"
+      },
+      {
+        "path": "test/selected-data-profile.test.mjs",
+        "bytes": 151390,
+        "sha256": "7c17edb5acd947a1c47a6050664f148352c72a8e6592514586272253b47ee7a2"
+      },
+      {
+        "path": "test/source-member-native-delivery.test.mjs",
+        "bytes": 39740,
+        "sha256": "b0ba2419766cd52a2957f752db6cc3d9d25112a9cbc8ece952cd65c1a8eb6953"
+      }
+    ]
+  },
+  "limits": [
+    "This verifies complete input preservation and actual accepted helper bytes, not administrative native qualification."
+  ]
+}

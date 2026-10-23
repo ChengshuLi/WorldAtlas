@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "method_sha256": "12d2e5d13aee87e4f11969bf30bc9941617be2825eddd080e9435721d94254ac",
+  "experiments": [
+    {
+      "case": "missing-constructor-row",
+      "base_commit": "7a6bcd928b1747b0d0b72216f4bdde05d4dced69",
+      "mutant_commit": "1dad9590bbb1c637d5fb5369fc4819414931f1c1",
+      "changed_constructor_body_retained_as_ordinary_git_blob": true,
+      "exit_code": 1,
+      "no_output_created": true,
+      "elapsed_seconds": 3.1740795460063964,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/check-accounting.py\", line 49, in <module>\n    con=read(P+'/native-authority-001/constructor-result.json');rows=con['ledger_rows'];assert con['kind']=='existing-source-target-native-constructor-result' and len(rows)==len(owner_targets) and len({r['target_id'] for r in rows})==len(rows) and len({r['pixelIndex'] for r in rows})==len(rows) and all(r['disposition']=='assigned' for r in rows)\n                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "case": "duplicate-constructor-row",
+      "base_commit": "7a6bcd928b1747b0d0b72216f4bdde05d4dced69",
+      "mutant_commit": "70f34420d7b6d77e1502a0059a0fe81b4a9ac8d0",
+      "changed_constructor_body_retained_as_ordinary_git_blob": true,
+      "exit_code": 1,
+      "no_output_created": true,
+      "elapsed_seconds": 3.1959295769920573,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/check-accounting.py\", line 49, in <module>\n    con=read(P+'/native-authority-001/constructor-result.json');rows=con['ledger_rows'];assert con['kind']=='existing-source-target-native-constructor-result' and len(rows)==len(owner_targets) and len({r['target_id'] for r in rows})==len(rows) and len({r['pixelIndex'] for r in rows})==len(rows) and all(r['disposition']=='assigned' for r in rows)\n                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "case": "changed-constructor-owner",
+      "base_commit": "7a6bcd928b1747b0d0b72216f4bdde05d4dced69",
+      "mutant_commit": "cd34e7824d2a42e9290c3d7540a0fdfe68c52444",
+      "changed_constructor_body_retained_as_ordinary_git_blob": true,
+      "exit_code": 1,
+      "no_output_created": true,
+      "elapsed_seconds": 2.9701701090089045,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/check-accounting.py\", line 49, in <module>\n    con=read(P+'/native-authority-001/constructor-result.json');rows=con['ledger_rows'];assert con['kind']=='existing-source-target-native-constructor-result' and len(rows)==len(owner_targets) and len({r['target_id'] for r in rows})==len(rows) and len({r['pixelIndex'] for r in rows})==len(rows) and all(r['disposition']=='assigned' for r in rows)\n                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  ]
+}

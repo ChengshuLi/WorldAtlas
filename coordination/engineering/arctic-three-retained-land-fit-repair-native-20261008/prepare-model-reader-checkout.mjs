@@ -15,10 +15,8 @@ export async function prepareModelReaderCheckout({root=process.cwd(),profile,sha
   if(!selection.artifact_consumption)return {applicable:false};
   const stage=JSON.parse(fs.readFileSync(path.join(root,N2,'context-stage-v9.json')));
   assert.equal(stage.version,4);assert.deepEqual(stage.artifact_consumption,selection.artifact_consumption);
-  // Complete selected physical/decode/member admission precedes runtime hashing
-  // and restoration. The genuine same-root checkout is declared explicitly.
-  const admission=preflightArtifactPackage({source:root,stage:root,sidecar:stage});
-  const execution=issueCheckoutExecution({root,admission});
+  preflightArtifactPackage({source:root,stage:root,sidecar:stage});
+  const execution=issueCheckoutExecution({root});
   fs.mkdirSync(path.join(root,'.cache'),{recursive:true});
   const restoredReceipt=restoreCanonicalProducts({root,mode:'checkout',temporaryRoot:path.join(root,'.cache')});
   const context=await consumeQualifiedArcticArtifacts({root,stage,selection,restoredReceipt,currentExecution:execution});

@@ -20,7 +20,7 @@ test('physical resume authenticates complete original products and inputs withou
  fs.mkdirSync(directory,{recursive:true});
  const pin={path:'input.json',bytes:2,sha256:hash('{}')};
  const config={physical:{version:1,inputs:[pin]}};
- const binding={phase:'physical',program_sha256:'a'.repeat(64),config_sha256:'b'.repeat(64)};
+ const binding={phase:'physical',entry_sha256:'0'.repeat(64),program_sha256:'a'.repeat(64),config_sha256:'b'.repeat(64)};
  const body=json({results:[{target:'one',issues:[]}],repaired_credit:0});
  const execution=json({complete:true,program:{sha256:binding.program_sha256},
   fresh_admission:{config_sha256:hash(jsonBytes(config.physical))},
@@ -29,8 +29,10 @@ test('physical resume authenticates complete original products and inputs withou
  const receipt={version:1,binding,outputs:Object.fromEntries(Object.entries(products).map(([name,raw])=>[name,{bytes:raw.length,sha256:hash(raw)}]))};
  for(const [name,raw]of Object.entries(products))fs.writeFileSync(path.join(directory,name),raw);
  fs.writeFileSync(path.join(directory,'preparation.json'),jsonBytes(receipt));
- let reads=0;const reader={read:p=>{assert.deepEqual(p,{...pin,mode:'100644'});reads++;return Buffer.from('{}');},budget:{add(){}}};
- resumeSource(root,destination,config,binding,reader);assert.equal(reads,1);
+ let reads=0;const reader={read:p=>{assert.deepEqual(p,{...pin,mode:'100644'});reads++;return Buffer.from('{}');}};
+ const original=fs.readFileSync(path.join(directory,'preparation.json'));
+ const resumed=resumeSource(root,destination,config,{...binding,entry_sha256:'1'.repeat(64)},reader);assert.equal(reads,1);
+ assert.deepEqual(resumed.binding,binding);assert.deepEqual(fs.readFileSync(path.join(directory,'preparation.json')),original);
  fs.writeFileSync(path.join(directory,'whole-target-support.json'),json({results:[]}));
  assert.throws(()=>resumeSource(root,destination,config,binding,reader),/product changed/);
  fs.writeFileSync(path.join(directory,'whole-target-support.json'),body);

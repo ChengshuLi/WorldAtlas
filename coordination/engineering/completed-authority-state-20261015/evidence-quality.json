@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "issue": 2000,
+  "lane": "engineering",
+  "worker_id": "01a13ff3-0121-75f8-b542-8bdd0c07c016",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "4aa52927bf61765cc462a2d0824fa5bce83df919",
+    "files": [
+      {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs",
+        "bytes": 83394,
+        "sha256": "87f5ea46aeffe303c1cd2a4a94474c8990db40b5e47f5142cd217adc924493e0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/selected-checkpoint.test.mjs",
+        "bytes": 36874,
+        "sha256": "5a95bf4d687228818c6fcc9be3724799421bdbc9d1f8d530110d239858797718",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/completed-authority-state-20261015/compare-result.json",
+      "bytes": 1919,
+      "sha256": "197a84e0a15cdf2bd2971f83ed5175b0a4e608ec12d66fd88e3d65bb44927aab",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "retire-completed-authority-state",
+      "kind": "code",
+      "description": "Retire only temporary full appended-authority wrapper reservations after complete source/contract/denominator/literal checks and helper-frame unwind; retain original compact patch identity and unchanged shared reader admission. Actual pre-change/current public transition comparison uses the same ordinary-Git fixture and reports equal semantic bytes with distinct truthful execution provenance. The recorded byte delta is canonical retained accounting, not RSS savings or proof of stock delivery recovery.",
+      "software": "Node 24.19.0; Git; repository test fixtures",
+      "units": "Canonical retained-accounting bytes; no scientific measurement"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/selected-checkpoint.test.mjs test/accepted-checkpoint-qualification.test.mjs test/native-checkpoint-consumer.test.mjs test/effective-geographic-regression.test.mjs",
+    "node coordination/engineering/completed-authority-state-20261015/compare.mjs"
+  ]
+}

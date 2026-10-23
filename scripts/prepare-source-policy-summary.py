@@ -53,8 +53,6 @@ def main():
     parser.add_argument('--check', action='store_true')
     args = parser.parse_args()
     raw = (json.dumps(build_summary(), ensure_ascii=False, separators=(',', ':')) + '\n').encode()
-    if len(raw) > 80000:
-        raise ValueError('Bounded policy summary exceeds its 80 KB budget')
     if args.check:
         if not TARGET.exists() or TARGET.read_bytes() != raw:
             raise ValueError('Source-policy summary is stale; regenerate explicitly')

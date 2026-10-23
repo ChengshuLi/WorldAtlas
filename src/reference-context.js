@@ -18,6 +18,11 @@ export function referenceContextByLocation(records=[]){
 export function presentedAttribute(record={},attribute){
  const provenance=record.provenance?.[attribute]??{status:'unknown'};
  if(record[attribute]!=null)return {value:record[attribute],category_id:record.category_ids?.[attribute]??null,provenance,reference_context:provenance.method==='reference'};
+ // A missing canonical name is not missing ownership evidence. Retain the
+ // admitted category identity while leaving unavailable display text blank.
+ if(attribute==='owner'&&record.category_ids?.owner!=null
+  &&!['unknown','disputed','no-majority'].includes(provenance.status)&&!provenance.metadata?.invalidated_footprint)
+  return {value:null,category_id:record.category_ids.owner,provenance,reference_context:provenance.method==='reference'};
  // Explicit dated uncertainty, rejected classifications or invalidated footprints
  // remain authoritative. A modern baseline cannot silently override that evidence.
  if(provenance.id||provenance.source||provenance.source_id||provenance.metadata?.invalidated_footprint)return {value:null,category_id:null,provenance,reference_context:false};

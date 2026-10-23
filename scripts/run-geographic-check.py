@@ -51,8 +51,6 @@ def prefetch_declared_inputs(repo, baseline, candidate, timeout=120):
                 child.communicate(timeout=5)
             except subprocess.TimeoutExpired as error:
                 raise RuntimeError('Prefetch process group did not terminate') from error
-        if len(stdout) > 1024 * 1024:
-            raise ValueError('Prefetch summary exceeds bound')
         summary = json.loads(stdout)
         if not isinstance(summary, dict) or summary.get('complete_scientific_closure') is not False:
             raise ValueError('Prefetch cannot assert scientific closure')
@@ -65,9 +63,9 @@ def prefetch_declared_inputs(repo, baseline, candidate, timeout=120):
               'complete_scientific_closure': False, 'partial_import_possible': True}}), file=sys.stderr, flush=True)
 
 
-MAX_BYTES = 32 * 1024 * 1024
-TRUSTED_PATHS = ['scripts/run-geographic-check.py', 'scripts/check-geographic-regression.py',
-                 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',  'src/native-grid.js', 'src/ownership-codec.js',
+TRUSTED_PATHS = ['scripts/run-geographic-check.py', 'scripts/geography-prefetch.mjs', 'scripts/geography-routing-metadata.mjs', 'scripts/check-geographic-regression.py',
+                 'scripts/package-startup-ownership.mjs','src/ownership-assets.js','src/ownership-method.js',
+                 'scripts/native-word-store.mjs','scripts/native-patch-store.mjs', 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',  'src/native-grid.js', 'src/ownership-codec.js',
                  'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py',
                  'scripts/ellipsoidal_area.py', 'requirements.txt',
                  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
@@ -83,10 +81,10 @@ TRUSTED_PATHS = ['scripts/run-geographic-check.py', 'scripts/check-geographic-re
                  'scripts/github-snapshots.mjs',
                  'scripts/integration-proof.mjs',
                  'scripts/issue-claim-contract.mjs',
-                 'scripts/job-deadline.mjs',
                  'scripts/research-import-gate.mjs',
                  'scripts/worker-result.mjs',
-                 'src/regional-import-gate.js']
+                 'src/regional-import-gate.js',
+                 'scripts/selected-reference-metadata.mjs', 'src/reference-metadata.js']
 PIN_PATHS = ['data/hierarchy.json', 'data/canonical-grid/manifest.json',
              'data/geographic-releases/index.json', 'data/geographic-releases/current-manifest.json']
 
@@ -103,7 +101,7 @@ def safe_path(value):
 
 
 def git(repo, *args):
-    return subprocess.check_output(['git', '-c', 'core.hooksPath=/dev/null', '-C', str(repo), *args], stderr=subprocess.PIPE)
+    return subprocess.check_output(['git', '-c', 'core.hooksPath=/dev/null', '-C', str(repo), *args])
 
 
 def entry(repo, commit, name):
@@ -117,15 +115,17 @@ def entry(repo, commit, name):
 
 def read(repo, commit, name):
     blob = entry(repo, commit, name)['git_blob_oid']
-    if int(git(repo, 'cat-file', '-s', blob)) > MAX_BYTES:
-        raise ValueError('Geography input exceeds bounded file size: ' + name)
-    return git(repo, 'cat-file', 'blob', blob)
+    size = int(git(repo, 'cat-file', '-s', blob))
+    raw = git(repo, 'cat-file', 'blob', blob)
+    if len(raw) != size:
+        raise ValueError('Incomplete immutable geography input: ' + name)
+    return raw
 
 
 def inventory(repo, commit):
     index = json.loads(read(repo, commit, 'data/world-index.json'))
     parts = index.get('parts')
-    if not isinstance(parts, list) or not 1 <= len(parts) <= 512 or len(set(parts)) != len(parts):
+    if not isinstance(parts, list) or not len(parts) >= 1 or len(set(parts)) != len(parts):
         raise ValueError('Invalid or incomplete live geography part inventory')
     names = ['data/world-index.json', *PIN_PATHS, *['data/' + safe_path(p) for p in parts]]
     pointer = json.loads(read(repo, commit, PIN_PATHS[-1]))
@@ -184,33 +184,6 @@ def checkpoint_products_module(repo):
     return module
 
 
-def selected_consumer_allowance(repo):
-    # Node has terminated. Admit the actual parent phase with current resources,
-    # installed runtime/code, and the complete retained report/output reserve.
-    env = {key: value for key, value in os.environ.items() if key not in ['NODE_OPTIONS', 'NODE_PATH']}
-    executable = os.environ.get('NODE', 'node')
-    runtime_bytes = pathlib.Path(sys.executable).resolve().stat().st_size
-    code_bytes = sum((repo / name).stat().st_size for name in TRUSTED_PATHS)
-    # Re-observe current resources after the Node native child has exited.
-    # Reuse the trusted reader's OS/cgroup-aware admission instead of an
-    # unrelated fixed historical phase ceiling. The caller pins executing code.
-    allowance_raw = subprocess.check_output([
-        executable, '--input-type=module', '-e',
-        'const {processingAllowance}=await import(process.argv[1]);process.stdout.write(JSON.stringify(processingAllowance()));',
-        (repo / 'scripts/check-effective-geographic-regression.mjs').resolve().as_uri()],
-        env=env, timeout=30)
-    if len(allowance_raw) > 4096:
-        raise ValueError('Oversized current reader allowance')
-    allowance = json.loads(allowance_raw)
-    phase_limit = allowance.get('phaseBytes')
-    if type(phase_limit) is not int or not 0 < phase_limit <= 9007199254740991:
-        raise ValueError('Invalid current checkpoint transport allowance')
-    remaining = phase_limit - runtime_bytes - code_bytes - 2 * MAX_BYTES
-    if remaining <= 0:
-        raise ValueError('Complete selected consumer has no current product allowance')
-    return remaining
-
-
 def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destination=None):
     products = checkpoint_products_module(repo) if checkpoint_destination is not None else None
     if products is not None:
@@ -219,10 +192,9 @@ def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destin
     entrypoint = repo / 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs'
     with tempfile.TemporaryDirectory(prefix='trusted-selected-joint-') as temporary:
         destination = pathlib.Path(temporary).resolve() / 'complete'
-        raw = subprocess.check_output([os.environ.get('NODE', 'node'), '--expose-gc', str(entrypoint),
+        raw = subprocess.check_output([os.environ.get('NODE', 'node'), str(entrypoint),
                                        str(repo), trusted or baseline, baseline, candidate, str(destination), sys.executable], env=env)
-        if len(raw) > MAX_BYTES:
-            raise ValueError('Joint selected acknowledgement exceeds output cap')
+
         issued = json.loads(raw)
         if issued.get('kind') != 'trusted-selected-joint-comparison-v1' or issued.get('candidate_code_executed') is not False:
             raise ValueError('Unsupported joint selected acknowledgement')
@@ -230,8 +202,9 @@ def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destin
             decision = issued.get('reuse_unavailable')
             if not isinstance(decision, dict) or decision.get('cold') not in ['candidate', 'baseline-and-candidate'] or not decision.get('reason'):
                 raise ValueError('Joint fallback omitted its unavailable custody decision')
+            print(json.dumps(issued), file=sys.stderr, flush=True)
             return issued
-        if issued.get('mode') != 'authenticated-checkpoint-append-v1' or not isinstance(issued.get('native'), dict):
+        if issued.get('mode') not in ['authenticated-checkpoint-append-v1', 'accepted-final-map-comparison-v1'] or not isinstance(issued.get('native'), dict):
             raise ValueError('Joint selected comparison did not complete native validation')
         native = issued['native']
         if native.get('method') != 'selected-native-owner-conservation-v1' or native.get('candidate_code_executed') is not False or native.get('status') not in ['native-regressions-found', 'no-new-native-loss']:
@@ -240,16 +213,18 @@ def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destin
             return issued
         if native.get('lost_or_reassigned_cells') != 0 or native.get('intervals') != []:
             raise ValueError('Successful native comparison contradicts conservation results')
-        if checkpoint_destination is not None:
-            issued['checkpoint'] = products.retain_checkpoint_products(destination, checkpoint_destination, issued,
-                allowance=min(products.PHASE, selected_consumer_allowance(repo)))
+        if checkpoint_destination is not None and issued.get('mode') == 'authenticated-checkpoint-append-v1':
+            with stage_timing('selected-checkpoint-retention'):
+                issued['checkpoint'] = products.retain_checkpoint_products(destination, checkpoint_destination, issued)
         return issued
 
 
 
-def run_applicability_collector(command, env, timeout=120):
-    # Metadata acquisition may launch Git. A timeout must reap that owned group
-    # before ordinary prefetch/full checks can resume in the same object store.
+def run_applicability_collector(command, env, timeout=None):
+    # The hosting provider bounds the overall job. A separate shortcut cutoff
+    # can turn finite cold acquisition into a much longer replay.
+    # Keep explicit timeout injection for cleanup controls, and always reap Git's
+    # owned group before ordinary prefetch/full checks can use the object store.
     if os.name != 'posix':
         raise OSError('Owned applicability process groups unavailable')
     child = subprocess.Popen(command, env=env, stdout=subprocess.PIPE,
@@ -289,27 +264,26 @@ def applicability_decline(reason, collector_reason=None):
     return None
 
 
-def unchanged_selected_inputs(repo, baseline, candidate):
+def unchanged_selected_inputs(repo, baseline, candidate, *, code_commit=None):
     """Bounded applicability only; incomplete identity discovery keeps full checks."""
     if baseline == candidate:
         # A self-comparison must still execute its applicable scientific checks.
         return None
+    code_commit = code_commit or baseline
     env = dict(os.environ, GIT_NO_LAZY_FETCH='1', GIT_TERMINAL_PROMPT='0')
     for name in ['NODE_OPTIONS', 'NODE_PATH']:
         env.pop(name, None)
     try:
         result = run_applicability_collector([
             env.get('NODE', 'node'), str(repo / 'scripts/check-unchanged-selected-geography.mjs'),
-            str(repo), baseline, candidate], env)
+            str(repo), baseline, candidate, code_commit], env)
         if result.returncode:
             return applicability_decline('collector-process-failed')
-        if len(result.stdout) > 2 * 1024 * 1024:
-            return applicability_decline('collector-output-limit')
         proof = json.loads(result.stdout)
         if (not isinstance(proof, dict) or proof.get('version') != 1
                 or proof.get('baseline_commit') != baseline
                 or proof.get('candidate_commit') != candidate
-                or proof.get('trusted_reader_policy_commit') != baseline
+                or proof.get('trusted_reader_policy_commit') != code_commit
                 or proof.get('candidate_code_executed') is not False):
             return applicability_decline('collector-binding-invalid')
         if proof.get('status') != 'unchanged-selected-inputs':
@@ -341,16 +315,16 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
               'published': False, 'source_approval': False}
     if software:
         report['execution_limits'] = [
-            'Candidate checker code executed against distinct baseline and candidate data; no checkpoint reuse or new checkpoint authority.',
+            'Candidate checker code executed against distinct baseline and candidate data; authenticated accepted-state input may be read, but no new checkpoint authority is issued.',
             'Authenticated source adjudication remains baseline-only; deliver checker upgrades separately from data corrections that require it.',
-            'Nested child receipts retain their legacy candidate_code_executed=false marker verbatim. That marker is not evidence that candidate checker code was absent; this report binds actual executing code.']
-    if not software and before == after and baseline != candidate:
+            'Historical child receipts retain their legacy candidate_code_executed=false marker; final-bank children bind actual execution. Neither format grants accepted-checkpoint issuance under candidate code.']
+    if before == after and baseline != candidate:
         with stage_timing('unchanged-selected-inputs'):
-            applicability = unchanged_selected_inputs(repo, baseline, candidate)
+            applicability = unchanged_selected_inputs(repo, baseline, candidate, code_commit=code_commit)
         if applicability is not None:
             return {**report, 'status': 'not-applicable', 'regressions': None,
                     'unchanged_selected_inputs': applicability,
-                    'limits': ['Complete selected consumed-input and method identities are unchanged; applicability only, not fresh scientific validation or global gap clearance.',
+                    'limits': ['Actual immutable selected data is unchanged under one executing checker; applicability only, not historical legality, scientific validation of new code or global gap clearance.',
                                'Independent source quality, evidence, review and current combined-tree consumer gates remain required.']}
     selected = any(git(repo, 'ls-tree', '-z', version, '--', 'data/ownership-selection.json')
                    for version in [baseline, candidate])
@@ -363,25 +337,30 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
         env = dict(os.environ)
         for name in ['NODE_OPTIONS', 'NODE_PATH']:
             env.pop(name, None)
-        if joint is not None and joint['mode'] == 'authenticated-checkpoint-append-v1':
+        if joint is not None and joint['mode'] in ['authenticated-checkpoint-append-v1', 'accepted-final-map-comparison-v1']:
             native = joint['native']
         else:
-            # Eager whole-bank transport helps the legacy cold consumers, but
-            # needlessly downloads sources/native assets for a qualified warm
-            # checkpoint. Software always takes this genuine cold path; other
-            # callers require the joint entry's explicit unavailable decision.
-            if prefetch:
+            # The final-bank reader acquires its exact current operands itself.
+            # This optional prefetch serves only historical version-1 selectors;
+            # selection shape and all pins are still admitted by the real reader.
+            if prefetch and json.loads(read(repo, baseline, 'data/ownership-selection.json')).get('version') != 2:
                 with stage_timing('selected-prefetch'):
                     prefetch_declared_inputs(repo, baseline, candidate)
             with stage_timing('selected-native'):
                 native_raw = subprocess.check_output([
-                    os.environ.get('NODE', 'node'), str(repo / 'scripts/check-effective-geographic-regression.mjs'),
-                    str(repo), baseline, candidate, sys.executable], stderr=subprocess.PIPE, env=env)
-            if len(native_raw) > MAX_BYTES:
-                raise ValueError('Selected native report exceeds bounded output')
+                    os.environ.get('NODE', 'node'), '--input-type=module', '--eval',
+                    "const [module, repo, baseline, candidate, parentRuntimePath] = process.argv.slice(1);"
+                    "const {inspectSelectedAcquired} = await import(module);"
+                    "process.stdout.write(JSON.stringify(await inspectSelectedAcquired(repo, baseline, candidate, {parentRuntimePath})) + '\\n');",
+                    (repo / 'scripts/check-effective-geographic-regression.mjs').as_uri(),
+                    str(repo), baseline, candidate, sys.executable], env=env)
+
             native = json.loads(native_raw)
+        final_profile = (native.get('candidate_selection') or {}).get('version') == 2
+        expected_child_software = software if final_profile else False
         if (native.get('method') != 'selected-native-owner-conservation-v1'
-                or native.get('candidate_code_executed') is not False
+                or native.get('candidate_code_executed') is not expected_child_software
+                or (final_profile and native['candidate_selection'].get('kind') != 'selected-final-native-bank-v2')
                 or native.get('status') not in ['native-regressions-found', 'no-new-native-loss']):
             raise ValueError('Selected map comparison lacks a completed native result')
         report['selected_native_report'] = native
@@ -389,11 +368,27 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
             return {**report, 'status': 'native-regressions-found',
                     'regressions': len(native['intervals']),
                     'limits': ['Existing owner loss/reassignment has no automatic water or political exception. Unsupported native scope requires an explicit migration.']}
-        if native.get('lost_or_reassigned_cells') != 0 or native.get('intervals') != []:
+        if type(native.get('lost_or_reassigned_cells')) is not int or native['lost_or_reassigned_cells'] != 0 or native.get('intervals') != []:
             raise ValueError('Successful native comparison contradicts conservation results')
         if joint is not None and joint.get('checkpoint') is not None:
             report['checkpoint'] = joint['checkpoint']
-        return {**report, 'status':'no-new-native-loss', 'regressions':0,
+        # An identical admitted final bank includes all words AND finished context.
+        # Preserve this existing summary category for older merge readers without
+        # rewriting the child's truthful execution marker or skipping comparison.
+        bank = (native.get('candidate_selection') or {}).get('prepared_bank')
+        custody, scope = native.get('checkpoint_custody') or {}, native.get('native_row_scope') or {}
+        unchanged_final = (software and final_profile and isinstance(bank, dict)
+            and isinstance(bank.get('path'), str) and bool(bank['path'])
+            and type(bank.get('bytes')) is int and bank['bytes'] > 0
+            and isinstance(bank.get('sha256'), str) and re.fullmatch('[a-f0-9]{64}', bank['sha256'])
+            and native.get('baseline_selection') == native.get('candidate_selection')
+            and custody.get('accepted_bank') == bank == custody.get('candidate_bank')
+            and scope.get('proof') == 'complete-accepted-final-bank-and-qualified-new-intervals'
+            and scope.get('representation_migration') is False
+            and scope.get('changed_rows') == [] and type(scope.get('added_cells')) is int and scope['added_cells'] == 0
+            and type(scope.get('compared_rows')) is int and scope['compared_rows'] > 0
+            and type(native.get('affected_rows')) is int and native['affected_rows'] == 0)
+        return {**report, 'status':'no-footprint-change' if unchanged_final else 'no-new-native-loss', 'regressions':0,
                 'validation_scope':'selected-native-map-cells',
                 'limits':['Selected map-cell conservation and source-qualified visible additions were checked. Continuous polygon overlap is outside map-cell repair scope.',
                           'This does not approve a new grid, ownership identity migration or unsupported source methodology.']}
@@ -516,8 +511,6 @@ def main():
             if git(repo, 'remote', 'get-url', remote).decode().strip() not in [
                     'https://github.com/ChengshuLi/WorldAtlas', 'https://github.com/ChengshuLi/WorldAtlas.git']:
                 raise ValueError('Candidate acquisition requires the anonymous public repository remote')
-    with stage_timing('trusted-checkout-initial'):
-        verify_trusted_checkout(repo, args.code_commit)
     if args.fetch:
         with stage_timing('candidate-fetch'):
             fetch_candidate(repo, args.candidate)
@@ -534,8 +527,7 @@ def main():
         result.get('adjudication', {}).get('status') == 'all-findings-supported-and-reviewed')
     result['gate_status'] = 'passed' if passed else 'blocked'
     raw = (json.dumps(result, sort_keys=True, separators=(',', ':'), allow_nan=False) + '\n').encode()
-    if len(raw) > MAX_BYTES:
-        raise ValueError('Geography check output exceeds bounded report size')
+
     if any(p.is_symlink() for p in [args.out, *args.out.absolute().parents]):
         raise ValueError('Symlink report path forbidden')
     with args.out.open('xb') as stream:
@@ -543,7 +535,7 @@ def main():
     digest = hashlib.sha256(raw).hexdigest()
     if os.environ.get('GITHUB_OUTPUT'):
         with open(os.environ['GITHUB_OUTPUT'], 'a') as stream:
-            stream.write('report_sha256=' + digest + '\n')
+            stream.write('report_sha256=' + digest + '\nreport_bytes=' + str(len(raw)) + '\n')
     print(json.dumps({'status': result['status'], 'regressions': result['regressions'],
                       'report_bytes': len(raw), 'report_sha256': hashlib.sha256(raw).hexdigest(),
                       **({'candidate_commit': args.candidate} if comparison else {})}))

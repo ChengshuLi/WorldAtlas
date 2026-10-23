@@ -7,7 +7,6 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
-import time
 import unittest
 from unittest.mock import patch
 
@@ -34,7 +33,6 @@ def fixture():
                 families=[dict(id=k, family_index=v) for k, v in probe.FAMILY_INDICES.items()],
                 targets=[target], country=dict(code='IDN', source_prefix='gb:IDN:', registry_hash_key='ne_10m_admin_0_countries'),
                 selector_format='cohort-intervals-v1', expected_counts=dict(repair=2, physical=1), expected_segments=2,
-                resources=dict(input_bytes=268435456, output_bytes=16777216, deadline_seconds=180),
                 runtime=dict(python=sys.version, numpy='test', shapely='test', geos='test'), physical_reproducer=pins[-1])
 
 
@@ -69,21 +67,20 @@ class SourceConfig(unittest.TestCase):
             c = fixture(); mutate(c)
             with self.assertRaises(ValueError): probe.validate_config(c)
 
-    def test_paths_and_resource_budgets(self):
+    def test_paths_and_whole_pin_identity(self):
         for name in ('../outside', '/tmp/file', 'nested/../file', 'nested//file', 'nested\\file'):
             with self.assertRaises(ValueError): probe.safe_path(name)
-        for field, value in [('input_bytes', probe.MAX_INPUT + 1), ('output_bytes', probe.MAX_OUTPUT + 1),
-                             ('deadline_seconds', 181), ('deadline_seconds', True)]:
-            c = fixture(); c['resources'][field] = value
-            with self.assertRaises(ValueError): probe.validate_config(c)
-        c = fixture(); c['resources']['input_bytes'] = 11
-        with self.assertRaisesRegex(ValueError, 'complete input budget'): probe.validate_config(c)
+        for value in (0, -1, True, 1.5):
+            c = fixture(); c['inputs'][0]['bytes'] = value
+            with self.assertRaisesRegex(ValueError, 'whole input pin'): probe.validate_config(c)
 
-    def test_decoded_inputs_charged(self):
+    def test_decoded_input_identity_required(self):
         c = fixture(); p = c['inputs'][0]; p['path'] += '.gz'; c['roles']['catalogue'] = p['path']
         with self.assertRaisesRegex(ValueError, 'Decoded pin'): probe.validate_config(c)
-        p.update(decoded_bytes=100, decoded_sha256='e' * 64); c['resources']['input_bytes'] = 111
-        with self.assertRaisesRegex(ValueError, 'complete input budget'): probe.validate_config(c)
+        p.update(decoded_bytes=100, decoded_sha256='e' * 64)
+        self.assertEqual(len(probe.validate_config(c)), 12)
+        p['decoded_sha256'] = 'not-a-digest'
+        with self.assertRaisesRegex(ValueError, 'Decoded pin'): probe.validate_config(c)
 
 
 class Selectors(unittest.TestCase):
@@ -121,26 +118,17 @@ class EntryAdmission(unittest.TestCase):
         self.config.write_text(json.dumps(fixture()))
         self.admission = self.root / 'admission.json'
         self.output = self.root / 'result'
-        self.receipt = dict(observed_unix_seconds=time.time(), allowance=dict(rssBytes=2**40, phaseBytes=2**40),
-                            runtime_inventory_bytes=0, execution_reserve_bytes=0,
-                            program_sha256=probe.sha(Path(probe.__file__).read_bytes()), config_sha256=probe.sha(self.config.read_bytes()))
+        self.receipt = dict(version=1, runtime_files=[], program_sha256=probe.sha(Path(probe.__file__).read_bytes()), config_sha256=probe.sha(self.config.read_bytes()))
 
     def execute(self):
         self.admission.write_text(json.dumps(self.receipt))
         return probe.run(self.root, self.config, self.admission, self.output, 'coordination/engineering/test/source-001')
 
-    def test_stale_future_and_drift_admission_create_nothing(self):
-        for changes in [dict(observed_unix_seconds=time.time()-61), dict(observed_unix_seconds=time.time()+60),
-                        dict(program_sha256='0' * 64), dict(config_sha256='0' * 64)]:
+    def test_program_and_config_drift_create_nothing(self):
+        for changes in [dict(version=2), dict(program_sha256='0' * 64), dict(config_sha256='0' * 64)]:
             old = dict(self.receipt); self.receipt.update(changes)
             with self.assertRaises(ValueError): self.execute()
             self.assertFalse(self.output.exists()); self.receipt = old
-
-    def test_complete_phase_admission_includes_runtime_and_reserve(self):
-        self.receipt.update(runtime_inventory_bytes=7, execution_reserve_bytes=7)
-        self.receipt['allowance']['phaseBytes'] = 26
-        with self.assertRaisesRegex(ValueError, 'complete phase'): self.execute()
-        self.assertFalse(self.output.exists())
 
     def test_output_collision_and_dangling_symlink_preserve_sentinel(self):
         self.output.mkdir(); sentinel = self.output / 'keep'; sentinel.write_text('unchanged')
@@ -180,7 +168,7 @@ class ScientificFixture(unittest.TestCase):
                 raise RuntimeError('Required source scientific controls need repository-pinned NumPy/Shapely') from error
             raise unittest.SkipTest('Pinned NumPy/Shapely runtime unavailable: ' + str(error))
 
-    def scientific_run(self, mutation=None, config_mutation=None, runtime_mutation=None):
+    def scientific_run(self, mutation=None, config_mutation=None, runtime_mutation=None, prepare_only=False):
         temp = tempfile.TemporaryDirectory(); self.addCleanup(temp.cleanup)
         root = Path(temp.name)
         def git(*args):
@@ -239,29 +227,90 @@ class ScientificFixture(unittest.TestCase):
         config=root/'config.json'; config.write_bytes(encoded(c))
         runtime_files=[dict(path=p,bytes=Path(p).stat().st_size,sha256=probe.sha(Path(p).read_bytes())) for p in probe.runtime_paths()]
         if runtime_mutation: runtime_mutation(runtime_files)
-        admission=root/'admission.json'; admission.write_bytes(encoded(dict(observed_unix_seconds=time.time(),allowance=dict(rssBytes=536870912,phaseBytes=536870912),
-            runtime_files=runtime_files,runtime_inventory_bytes=sum(p['bytes'] for p in runtime_files),execution_reserve_bytes=MAX_TEST_RESERVE,program_sha256=probe.sha(Path(probe.__file__).read_bytes()),config_sha256=probe.sha(config.read_bytes()))))
+        admission=root/'admission.json'; admission.write_bytes(encoded(dict(version=1,
+            runtime_files=runtime_files,program_sha256=probe.sha(Path(probe.__file__).read_bytes()),config_sha256=probe.sha(config.read_bytes()))))
         output=root/'result'
         self.last_output = output
-        result=probe.run(root,config,admission,output,'coordination/engineering/test/source-001')
+        result=None if prepare_only else probe.run(root,config,admission,output,'coordination/engineering/test/source-001')
         return root,output,result
 
-    def test_actual_entry_products_preserve_holds_and_receipt_hashes(self):
-        root,out,result=self.scientific_run()
-        self.assertTrue(result['complete'])
-        qualification=json.loads((out/'source-qualification.json').read_bytes())
-        self.assertEqual(qualification['candidate_cells'],3)
-        self.assertEqual(qualification['source_prerequisite_repair_candidates'],2)
-        self.assertEqual(qualification['physical_interpretation_held_cells'],1)
-        self.assertEqual(qualification['outside_retained_IDN_reference_cells'],2)
-        self.assertEqual(qualification['native_authority_qualified_cells'],0)
-        self.assertEqual(qualification['repaired_credit'],0)
-        self.assertEqual(len(qualification['complete_families']),9)
-        receipt=json.loads((out/'execution-receipt.json').read_bytes())
-        for pin in receipt['outputs']:
-            self.assertTrue(pin['path'].startswith('coordination/engineering/test/source-001/'))
-            raw=(out/Path(pin['path']).name).read_bytes()
-            self.assertEqual((len(raw),probe.sha(raw)),(pin['bytes'],pin['sha256']))
+    def test_stock_physical_periodic_queries_keep_candidate_frame(self):
+        # Exercise the actual stock physical entry point with original native
+        # source records. No query/frame receipt is authored by this test.
+        import gzip
+        import types
+        from shapely.geometry import box, mapping, shape
+        from shapely.affinity import translate
+        method_path = ROOT / 'coordination/engineering/global-physical-comparison-20261006/comparison.py'
+        method = method_path.read_bytes()
+        self.assertEqual(probe.sha(method), probe.PHYSICAL_COMPARISON_SHA)
+        comparison = types.ModuleType('physical_comparison')
+        exec(compile(method, str(method_path), 'exec'), comparison.__dict__)
+        temp = tempfile.TemporaryDirectory(); self.addCleanup(temp.cleanup)
+        root = Path(temp.name)
+        def git(*args):
+            return subprocess.check_output(['git', '-C', str(root), *args], stderr=subprocess.DEVNULL)
+        git('init'); git('config', 'user.email', 'fixture@example.invalid'); git('config', 'user.name', 'Fixture')
+        native = bytearray(); metadata = []
+        for ordinal, (ident, level, flag, parent, geometry) in enumerate([
+            (0, 1, 0, -1, box(180, -.02, 190, .02)),
+            (97, 2, 2 << 16, 0, box(185.5, -.005, 186.5, .005))
+        ]):
+            xy = self.np.rint(self.np.asarray(geometry.exterior.coords) * 1e6).astype('>i4')
+            points = xy.tobytes(); left, bottom, right, top = self.np.rint(self.np.asarray(geometry.bounds) * 1e6).astype(int)
+            header = comparison.HEADER.pack(ident, len(xy), flag | level, left, right, bottom, top, 0, 0, parent, parent)
+            meta, decoded = comparison.decode_record(header, points, ordinal, len(native))
+            self.assertFalse(meta['geometry_issues']); metadata.append(meta); native.extend(header + points)
+        encode = lambda value: (json.dumps(value, separators=(',', ':')) + '\n').encode()
+        candidate = box(-175, -.01, -168, .01)
+        bodies = {'stages.json': encode([dict(target='periodic-target', consumed=dict(geometry=mapping(candidate)))]),
+                  'comparison.py': method}
+        def fragment(name, data):
+            encoded = gzip.compress(data, mtime=0); bodies[name] = encoded
+            return dict(path=name, bytes=len(encoded), sha256=probe.sha(encoded),
+                        uncompressed_bytes=len(data), uncompressed_sha256=probe.sha(data))
+        meta_part = fragment('metadata.jsonl.gz', b''.join(encode(row) for row in metadata))
+        native_part = fragment('native.bin.gz', bytes(native))
+        bodies['transport.json'] = encode(dict(complete_sources=2, entries=[dict(kind='sources', delivered=meta_part)]))
+        bodies['native-index.json'] = encode(dict(record_count=2, member_bytes=len(native), member_sha256=probe.sha(native),
+                                                 parts=[dict(native_part, ordinal=0, offset=0)]))
+        # Prefixes name an ordinary containing directory, including the raw records.
+        inputs = root / 'inputs'; inputs.mkdir()
+        for name, body in bodies.items(): (inputs / name).write_bytes(body)
+        git('add', '.'); git('commit', '-qm', 'original periodic physical inputs')
+        commit = git('rev-parse', 'HEAD').decode().strip(); pins = []
+        for name, body in bodies.items():
+            pin = dict(path='inputs/' + name, commit=commit, bytes=len(body), sha256=probe.sha(body),
+                       git_blob_oid=git('rev-parse', commit + ':inputs/' + name).decode().strip())
+            if name.endswith('.gz'):
+                decoded = gzip.decompress(body); pin.update(decoded_bytes=len(decoded), decoded_sha256=probe.sha(decoded))
+            pins.append(pin)
+        config = dict(version=1, inputs=pins, roles=dict(stages='inputs/stages.json', transport='inputs/transport.json',
+                      native_index='inputs/native-index.json', comparison='inputs/comparison.py'),
+                      metadata_prefix='inputs', native_prefix='inputs', runtime=dict(python=sys.version,
+                      numpy=self.np.__version__, shapely=self.shapely.__version__, geos=self.shapely.geos_version_string))
+        config_path = root / 'config.json'; config_path.write_bytes(encode(config))
+        runtime = [dict(path=p, bytes=Path(p).stat().st_size, sha256=probe.sha(Path(p).read_bytes())) for p in probe.runtime_paths()]
+        admission = root / 'admission.json'; admission.write_bytes(encode(dict(version=1, runtime_files=runtime,
+            program_sha256=probe.sha(Path(probe.__file__).read_bytes()), config_sha256=probe.sha(config_path.read_bytes()))))
+        probe.run_physical(root, config_path, admission, root / 'output', 'coordination/engineering/fixture/physical')
+        result = json.loads((root / 'output/whole-target-support.json').read_bytes())['results'][0]
+        self.assertEqual([(q['source_id'], q['periodic_offset']) for q in result['query_relations']], [(0, -360), (97, -360)])
+        self.assertEqual(result['query_relations'][0]['witness'], 'complete-operation-pointset')
+        self.assertEqual(result['query_relations'][1]['witness'], 'complete-source-record-reconstruction')
+        self.assertEqual(shape(result['query_relations'][0]['witness_geometry']), candidate.intersection(box(-180, -.02, -170, .02)))
+        for q in result['query_relations']:
+            self.assertTrue(q['intersects']); self.assertFalse(q['disjoint'])
+        self.assertIn('contradictory_land_water_support', [issue['reason'] for issue in result['issues']])
+        for key, geometry in result['support'].items():
+            operands = geometry.values() if key == 'hierarchy_disagreements' else [geometry]
+            for operand in operands:
+                g = shape(operand)
+                if not g.is_empty: self.assertTrue(candidate.covers(g), key)
+        witness = shape(result['query_relations'][0]['witness_geometry'])
+        self.assertFalse(candidate.intersects(box(180, -.02, 190, .02)))
+        self.assertFalse(witness.equals_exact(translate(witness, xoff=360), 0))
+        self.assertEqual({name: (inputs / name).read_bytes() for name in bodies}, bodies)
 
     def test_reference_competitor_withheld_but_source_observations_survive(self):
         def mutate(data,c):
@@ -286,46 +335,62 @@ class ScientificFixture(unittest.TestCase):
 
 
     def test_full_node_source_entry_resume_and_tampered_product(self):
-        root, _, _ = self.scientific_run()
+        root, _, _ = self.scientific_run(prepare_only=True)
         source = json.loads((root / 'config.json').read_bytes())
         runtime_files = json.loads((root / 'admission.json').read_bytes())['runtime_files']
         executable = str(Path(sys.executable).resolve())
         python_pin = next(pin for pin in runtime_files if str(Path(pin['path']).resolve()) == executable)
         python_pin['path'] = sys.executable
-        config = dict(version=1, source=source, runtime_inventory=dict(python=python_pin, files=runtime_files),
-                      processing_allowance=dict(phaseBytes=536870912, rssBytes=536870912))
+        config = dict(version=1, source=source, runtime_inventory=dict(python=python_pin, files=runtime_files))
         (root / 'cli-config.json').write_text(json.dumps(config))
         destination = '.cache/delivery-handoff/source-fixture-001'
         command = ['node', str(ROOT / 'scripts/prepare-delivery-handoff.mjs'),
                    'source', 'cli-config.json', destination]
         env = {k: v for k, v in os.environ.items() if k not in ('NODE_OPTIONS', 'NODE_PATH')}
         env['GIT_NO_LAZY_FETCH'] = '1'
-        # Fresh automatic Node admission replaces the duplicated manual parent
-        # cap. Explicit intentional caps and unavailable memory still refuse
-        # before scientific scratch or outputs are created.
-        limited = dict(config, preparation_allowance=dict(phaseBytes=1, rssBytes=536870912))
-        (root / 'cli-config.json').write_text(json.dumps(limited))
-        denied = subprocess.run(command, cwd=root, env=env, capture_output=True, text=True, timeout=30)
-        self.assertNotEqual(denied.returncode, 0)
-        self.assertFalse((root / '.cache/delivery-handoff').exists())
-        (root / 'cli-config.json').write_text(json.dumps(config))
-        exhausted = dict(env, WORLDATLAS_MEMORY_HEADROOM_BYTES=str(2**52))
-        denied = subprocess.run(command, cwd=root, env=exhausted, capture_output=True, text=True, timeout=30)
-        self.assertNotEqual(denied.returncode, 0)
-        self.assertIn('Insufficient current preparation memory', denied.stderr)
-        self.assertFalse((root / '.cache/delivery-handoff').exists())
         first = subprocess.run(command, cwd=root, env=env, capture_output=True, text=True, timeout=30)
         self.assertEqual(first.returncode, 0, first.stdout + first.stderr)
         self.assertFalse(json.loads(first.stdout)['resumed'])
         output = root / destination
+        qualification=json.loads((output/'source-qualification.json').read_bytes())
+        self.assertEqual(qualification['candidate_cells'],3)
+        self.assertEqual(qualification['source_prerequisite_repair_candidates'],2)
+        self.assertEqual(qualification['physical_interpretation_held_cells'],1)
+        self.assertEqual(qualification['outside_retained_IDN_reference_cells'],2)
+        self.assertEqual(qualification['native_authority_qualified_cells'],0)
+        self.assertEqual(qualification['repaired_credit'],0)
+        self.assertEqual(len(qualification['complete_families']),9)
+        receipt=json.loads((output/'execution-receipt.json').read_bytes())
+        self.assertTrue(receipt['complete'])
+        for pin in receipt['outputs']:
+            self.assertTrue(pin['path'].startswith(destination+'/'))
+            raw=(output/Path(pin['path']).name).read_bytes()
+            self.assertEqual((len(raw),probe.sha(raw)),(pin['bytes'],pin['sha256']))
+        # Retained execution can have an older metadata entrypoint while its
+        # scientific algorithm, config, inputs and outputs remain identical.
+        encode = lambda value: (json.dumps(value, sort_keys=True, separators=(',', ':')) + '\n').encode()
+        preparation = output / 'preparation.json'
+        original = json.loads(preparation.read_bytes())
+        original['binding']['entry_sha256'] = '0' * 64
+        preparation.write_bytes(encode(original))
         before = {p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in output.iterdir()}
         resumed = subprocess.run(command + ['--resume'], cwd=root, env=env, capture_output=True, text=True, timeout=30)
         self.assertEqual(resumed.returncode, 0, resumed.stdout + resumed.stderr)
         self.assertTrue(json.loads(resumed.stdout)['resumed'])
         self.assertNotIn('observation', json.loads(resumed.stdout))
+        self.assertEqual(json.loads(resumed.stdout)['binding'], original['binding'])
         self.assertEqual(before, {p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in output.iterdir()})
-        # The prior admission time and every immutable output remain literal,
-        # rather than rerunning the producer and normalizing its new observation.
+        for field in ('phase', 'program_sha256', 'config_sha256'):
+            changed = copy.deepcopy(original)
+            changed['binding'][field] = 'changed' if field == 'phase' else 'f' * 64
+            preparation.write_bytes(encode(changed))
+            refused = subprocess.run(command + ['--resume'], cwd=root, env=env, capture_output=True, text=True, timeout=30)
+            self.assertNotEqual(refused.returncode, 0)
+            self.assertIn('Source resume configuration/code/inventory differs', refused.stderr)
+            self.assertEqual(preparation.read_bytes(), encode(changed))
+        preparation.write_bytes(before['preparation.json'][0])
+        # Every immutable output remains literal when the prior publication is
+        # reused rather than rerunning the producer.
         damaged = output / 'source-qualification.json'
         damaged.write_bytes(damaged.read_bytes() + b'\n')
         tampered = damaged.read_bytes()
@@ -333,6 +398,23 @@ class ScientificFixture(unittest.TestCase):
         self.assertNotEqual(denied.returncode, 0)
         self.assertIn('Source resumed product changed', denied.stderr)
         self.assertEqual(damaged.read_bytes(), tampered)
+
+    def test_interrupted_publication_preserves_written_products_without_complete_receipt(self):
+        root, out, _ = self.scientific_run(prepare_only=True)
+        original_open = Path.open
+        def interrupted(path, mode='r', *args, **kwargs):
+            if path.parent == out and path.name == 'source-qualification.json' and mode == 'xb':
+                raise OSError('simulated interrupted publication')
+            return original_open(path, mode, *args, **kwargs)
+        with patch.object(Path, 'open', interrupted), self.assertRaisesRegex(OSError, 'interrupted'):
+            probe.run(root, root/'config.json', root/'admission.json', out, 'coordination/engineering/test/source-001')
+        self.assertTrue((out/'original-stage-inputs.json').is_file())
+        self.assertEqual(len(json.loads((out/'original-stage-inputs.json').read_bytes())), 1)
+        self.assertFalse((out/'execution-receipt.json').exists())
+        preserved = {p.name: p.read_bytes() for p in out.iterdir()}
+        with self.assertRaisesRegex(ValueError, 'fresh output'):
+            probe.run(root, root/'config.json', root/'admission.json', out, 'coordination/engineering/test/source-001')
+        self.assertEqual(preserved, {p.name: p.read_bytes() for p in out.iterdir()})
 
     def test_actual_consumed_pin_and_runtime_omission_fail(self):
         for mutation in [lambda c:c['inputs'][0].update(sha256='0'*64),
@@ -357,9 +439,6 @@ class ScientificFixture(unittest.TestCase):
             with self.subTest(mutation=mutation), self.assertRaises((AssertionError,ValueError)):
                 self.scientific_run(mutation)
             self.assertFalse(self.last_output.exists())
-
-
-MAX_TEST_RESERVE = 64 * 1024 * 1024
 
 
 if __name__ == '__main__':

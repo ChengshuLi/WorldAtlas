@@ -1,0 +1,70 @@
+{
+  "positive_header_unchanged": true,
+  "single_original_target": "gb:IDN:ADM2:22746128B82886709098386",
+  "positive_target_fields_unchanged": true,
+  "complete175_whole_foreign_geometries_equal_actual_full_families": true,
+  "patch_exact_original_keys": [
+    [
+      23115,
+      129957,
+      212968
+    ],
+    [
+      23115,
+      130104,
+      213978
+    ],
+    [
+      23115,
+      130119,
+      213646
+    ],
+    [
+      23115,
+      130130,
+      213787
+    ],
+    [
+      23115,
+      130162,
+      212771
+    ],
+    [
+      23115,
+      130258,
+      212680
+    ],
+    [
+      23115,
+      130332,
+      212415
+    ]
+  ],
+  "all7_full_MYS_outside": true,
+  "all7_JMG_Sarawak_outside": true,
+  "JMG_boundary_ties_total": 0,
+  "source_qualifications_not_rerun": true,
+  "authority_not_yet_executed": true,
+  "reviewer": "/root/remaining474_malinau_mahakam105",
+  "author": "/root/remaining474_kapuas257",
+  "result": "PASS_WITH_LIMITS_FOR_ORDINARY_AUTHORITY_ATTEMPT",
+  "pins": {
+    "source-evidence.json": {
+      "bytes": 4526943,
+      "sha256": "cb01119200ca404e53e820743d39f8bef0d763b1560e2c045d6fd35b98e1ca33"
+    },
+    "candidate-native-patch.json": {
+      "bytes": 319,
+      "sha256": "ad6b6e1debba77ddbd337e2716225972620d07ef88a7a0df2d15a65c1cf2296d"
+    },
+    "original-target-simplified-exclusions.json": {
+      "bytes": 79381,
+      "sha256": "3b7d5cdc16063ed355b106ef53df6a7d96d2c438d780c4424579752adf11e0e5"
+    },
+    "complete-refined-exclusion-custody.json": {
+      "bytes": 100115,
+      "sha256": "c5b5b0ab421e953c58ceed032c5196cfb5ecf28a084b86edac7f70ae0278249a"
+    }
+  },
+  "superseding_readiness": "PROVISIONAL_ONLY: await same9469f09 full IDN ADM2 all519-member exact native support/competitor query; no authority launch before that consequential symmetric check."
+}

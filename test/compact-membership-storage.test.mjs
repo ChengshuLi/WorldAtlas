@@ -96,3 +96,12 @@ test('application role can use guarded membership view but cannot touch private 
   await assert.rejects(f.engine.query(rawInsert,['second','1:location','1:continent',null,1,'ref','{}']),/adjacent-tier/);
  }finally{await f.engine.exec('RESET ROLE');}
 }));
+
+test('server copy and precommit runtime hook keep the original intact on failed verification',async()=>{
+ const {rehearseCompactMembershipStorage}=await import('../scripts/compact-membership-storage.mjs');const f=await createLocalPostgres();try{
+  await assert.rejects(rehearseCompactMembershipStorage(f.engine,{copyOnServer:true,afterSwitch:()=>{throw Error('incompatible runtime');}}),/incompatible runtime/);
+  assert.equal((await f.engine.query("SELECT relkind FROM pg_class WHERE oid='atlas_geographic_memberships'::regclass")).rows[0].relkind,'r');
+  assert.equal((await f.engine.query("SELECT to_regclass('worldatlas_membership_rows') value")).rows[0].value,null);
+  const r=await rehearseCompactMembershipStorage(f.engine,{copyOnServer:true});assert.equal(r.copied,0);assert.equal(r.parity.exact,true);
+ }finally{await f.close();}
+});

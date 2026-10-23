@@ -1,0 +1,72 @@
+{
+  "packages": [
+    {
+      "country": "United Republic of Tanzania",
+      "original_cells": 32809,
+      "supported_cells": 32462,
+      "held_cells": 347,
+      "quartets": [
+        {
+          "rule_preimage": {
+            "path": "coordination/engineering/tanzania-native-repair-recovery-20261017/native-authority-001/original-rule-preimage.json",
+            "commit": "fc6e1594ffa49ef72b0288f225c1b0e5a5d0a875",
+            "mode": "100644",
+            "git_blob_oid": "2f81b17112b0034a3d03f5a60486ad6323062c81",
+            "bytes": 754,
+            "sha256": "5e875d4282f04dddd7c78554f0b83ecb159e98a4f3624bac2fb38b183cab3e6f"
+          },
+          "source_authority": {
+            "path": "coordination/engineering/tanzania-native-repair-recovery-20261017/native-authority-001/authority-binding.json",
+            "commit": "fc6e1594ffa49ef72b0288f225c1b0e5a5d0a875",
+            "mode": "100644",
+            "git_blob_oid": "04d83430f56edb62d79db83c27cfe09192eabd94",
+            "bytes": 757,
+            "sha256": "8feb19d5be3b9b9f91bf581a94ef9e8d0137c498145395d226da18c8f3008763"
+          },
+          "ledger": {
+            "path": "coordination/engineering/tanzania-native-repair-recovery-20261017/native-authority-001/constructor-result.json",
+            "commit": "fc6e1594ffa49ef72b0288f225c1b0e5a5d0a875",
+            "mode": "100644",
+            "git_blob_oid": "f8e7280335f8ad5fbb8ff9d983ea6ddc6924dbce",
+            "bytes": 676374,
+            "sha256": "c8ab12b73456a6f43a481da35177601ce2a3051a19801406a635f0155cccf4e5"
+          },
+          "native_patch": {
+            "bytes": 367389,
+            "commit": "78686e45ba72ee9fcd36f2cdb3dfbe075286b58f",
+            "git_blob_oid": "5e4e67791c70ab2f59f8b317c9de8a5e8a15214b",
+            "mode": "100644",
+            "path": "coordination/engineering/tanzania-native-repair-recovery-20261017/supported-inputs-001/native-patch.json",
+            "sha256": "d593a7a9ab81444486c628734999ee063b09c80e01dd3b22d97b11b54141b584"
+          }
+        }
+      ],
+      "original_patch": {
+        "path": "coordination/engineering/tanzania-native-repair-recovery-20261017/native-request-002/native-requested-patch.json",
+        "commit": "fc6e1594ffa49ef72b0288f225c1b0e5a5d0a875",
+        "mode": "100644",
+        "git_blob_oid": "44dcb637855a3e684ff54ffa1715a93ff9e7e995",
+        "bytes": 373043,
+        "sha256": "82516b901ba338a9b56d508597c0f017c1fec1e3b05e58b36ad96915dc9bf37e"
+      },
+      "literal_holds": {
+        "path": "coordination/engineering/tanzania-native-repair-recovery-20261017/supported-inputs-001/held-original.json",
+        "commit": "fc6e1594ffa49ef72b0288f225c1b0e5a5d0a875",
+        "mode": "100644",
+        "git_blob_oid": "aab62ae8750c1e9a15c9dd64a2e05d9ffeb9e1d7",
+        "bytes": 14335,
+        "sha256": "527b4c0e5152e822530930fc570dfd63821027db48d9dfeece87f60fed06eaf9"
+      },
+      "accounting": {
+        "path": "coordination/engineering/tanzania-native-repair-recovery-20261017/supported-inputs-001/original-scope-partition.json",
+        "commit": "fc6e1594ffa49ef72b0288f225c1b0e5a5d0a875",
+        "mode": "100644",
+        "git_blob_oid": "f0b3609185ebfcc209574a3e911ca0b4e7b7dafe",
+        "bytes": 8059,
+        "sha256": "122bb5255208e8842fda4d52d5e6a5f367a95e715712ffb8baf4ea91a0399c74"
+      },
+      "source_review": "https://github.com/ChengshuLi/WorldAtlas/pull/2406#pullrequestreview-5559956354",
+      "source_head": "fc6e1594ffa49ef72b0288f225c1b0e5a5d0a875"
+    }
+  ]
+}
