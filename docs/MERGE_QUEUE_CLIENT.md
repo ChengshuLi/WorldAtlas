@@ -8,8 +8,10 @@ For example, use a UUID:
 
 ```sh
 REQUEST_ID="$(node -e 'console.log(require("node:crypto").randomUUID())')"
+: "${REVIEWED_TESTS:?Use the serialized validated plan.request described below}"
 gh workflow run worker-merge.yml --repo ChengshuLi/WorldAtlas --ref main \
   -f pr_number=PR-NUMBER -f expected_head=EXACT-REVIEWED-HEAD \
+  -f reviewed_tests="$REVIEWED_TESTS" \
   -f request_id="$REQUEST_ID"
 ```
 
@@ -31,7 +33,7 @@ When the review identifies a bounded consumer roster, use the existing
 exact accepted base, reviewed head, candidate tree, changed files and package
 input definition. Its `request` contains that validated pair and the normalized
 consumer list, including mandatory packaged consumers. Serialize
-`JSON.stringify(plan.request)` directly as the dispatch's `reviewed_tests` value,
+`JSON.stringify(plan.request)` directly into `REVIEWED_TESTS` for the command above,
 and pass that exact serialized value back through `reviewedTestPlan` with the
 same current context before recording a request or dispatching it. Do not
 serialize `plan.files`, reconstruct the pair, or send the full derived plan.
@@ -40,9 +42,18 @@ The reviewed roster remains human-selected review scope, not an automated
 sufficiency certificate. Inputs, checkout patterns, build and geography duties
 remain independently derived and revalidated by trusted preparation and final
 admission. A changed base or head requires review of the new pair, not silently
-rebinding the old argument. Without a reviewed argument, ordinary automatic
-routing remains unchanged. This is direct use of the existing planner and native
-workflow, not a separate dispatch client.
+rebinding the old argument. The native workflow requires `reviewed_tests` with no
+default; missing or blank intent is rejected before candidate checkout, installs,
+builds or tests. Do not omit it or reconstruct a second dispatch shape.
+
+Use the explicit value `auto` only for the existing authenticated inert-packet
+or selected-data routes. If neither route applies, preparation refuses and cleans
+its candidate instead of silently running complete regression. Use the explicit
+value `complete` when review calls for the full suite and genuine package build.
+These values do not waive geography, source checks or exact candidate identities.
+Already-queued older workflow definitions retain their original omitted-input
+behavior; new submissions cannot select that legacy behavior. This is direct use
+of the existing planner and native workflow, not a separate dispatch client.
 
 ## Find the execution and inspect its outcome
 

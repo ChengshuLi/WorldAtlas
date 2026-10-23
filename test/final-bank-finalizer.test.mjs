@@ -3,9 +3,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {execFileSync} from 'node:child_process';
-import {gunzipSync} from 'node:zlib';
-import {fileURLToPath} from 'node:url';
+import {execFileSync,spawnSync} from 'node:child_process';
+import {gunzipSync,gzipSync} from 'node:zlib';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import {omitFixtureObjects} from './helpers/git-object-fixture.mjs';
 import {committedPackageInputs} from '../scripts/package-output-artifact.mjs';
 import {admitPackageInputTransition,preparedStartupPackageTransition} from '../scripts/package-inputs.mjs';
 import {trustedFixture,appendNativeAuthority,referenceCheckpointFixture} from './fixtures/selected-checkpoint.mjs';
@@ -32,6 +33,7 @@ test('existing finalizer migrates accepted E without reading old ledger/patch an
  const forbidden=new Set([f.sidecar.logical_asset_map.ledger.path,f.sidecar.logical_asset_map.patch.path,f.sidecar.authority_registry.path]);
  const actual={...normal,read(pin){assert(!forbidden.has(pin.path),'Historical repairs are not final-bank preparation operands');return read(pin);}};
  const config={version:2,selector:{commit:f.bankCommit,path:'data/ownership-selection.json'},package_inputs:{commit:f.bankCommit,path:'.github/package-inputs.json'}};
+ assert.throws(()=>finalizeDelivery({...config,accepted_checkpoint:{obsolete:true}},actual),/Exact final-bank preparation config/);
  const outputs=finalizeDelivery(config,actual);assert.throws(()=>publishFinalizedDelivery(f.root,'early',outputs,{}),/finished startup bank/);
  await prepareFinalizedStartupOwnership(outputs);const selection=JSON.parse(outputs['ownership-selection.json']);assert.equal(selection.version,2);assert.equal(selection.additive_release,undefined);
  publishFinalizedDelivery(f.root,'coordination/engineering/final-bank-test/finalized',outputs,{phase:'finalize'});publishFinalizedDelivery(f.root,'coordination/engineering/final-bank-test/finalized',outputs,{phase:'finalize'},true);
@@ -154,6 +156,9 @@ test('final-bank reference-only authoring retains words and uses the existing co
  const result=await finalize(f,at,{reference_projection:pin},'coordination/engineering/final-bank-test/reference-finalized'),candidate=f.commit();
  const next=await f.api.qualifyTransition({state:first.candidate,reader:new f.native.ImmutableReader(f.root,candidate,{invocation:reader.invocation})});
  assert.equal(next.available,true);assert.deepEqual(next.changedNativeRows,[]);assert(next.changedIds.length>0);
+ const directBefore=new f.native.ImmutableReader(f.root,at);
+ const direct=await f.api.compareAcceptedFinalBank({beforeReader:directBefore,afterReader:new f.native.ImmutableReader(f.root,candidate,{invocation:directBefore.invocation})});
+ assert.equal(direct.native_row_scope.added_cells,0);assert(direct.changed_ids.length>0);
  assert.deepEqual(result.index.preparedOwnership.native_pixel_map,migration.index.preparedOwnership.native_pixel_map);
  assert.equal(result.index.preparedOwnership.rows_sha256,migration.index.preparedOwnership.rows_sha256);
  assert.equal(result.index.preparedOwnership.runs_word_stream_sha256,migration.index.preparedOwnership.runs_word_stream_sha256);
@@ -162,6 +167,18 @@ test('final-bank reference-only authoring retains words and uses the existing co
  // declaration, not the old source/evidence file or independently used inputs.
  f.save('inputs/projection-next.json',projection);const replacement=f.commit();
  const again=await finalize(f,candidate,{reference_projection:f.pin('inputs/projection-next.json',replacement)},'coordination/engineering/final-bank-test/reference-replaced');
+ const metadataSuccessor=f.commit(),priorMetadata=new f.native.ImmutableReader(f.root,candidate);
+ const repeatedMetadata=await f.api.compareAcceptedFinalBank({beforeReader:priorMetadata,afterReader:new f.native.ImmutableReader(f.root,metadataSuccessor,{invocation:priorMetadata.invocation})});
+ assert.equal(repeatedMetadata.native_row_scope.added_cells,0);assert.deepEqual(repeatedMetadata.changed_ids,[]);
+ await t.test('coherently rebound release still must declare each metadata receipt',async()=>{
+  const release=JSON.parse(gunzipSync(read(metadataSuccessor,'data/geographic-releases/releases.json.gz')));
+  delete release.releases.at(-1).metadata.metadata_migration_sha256;
+  const encoded=gzipSync(Buffer.from(JSON.stringify(release))),digest=createHash('sha256').update(encoded).digest('hex');
+  f.save('data/geographic-releases/releases.json.gz',encoded);f.save('data/geographic-releases/current-manifest.json',{path:'releases.json.gz',sha256:digest});
+  const rebound=f.commit(),accepted=new f.native.ImmutableReader(f.root,at);
+  await assert.rejects(f.api.compareAcceptedFinalBank({beforeReader:accepted,afterReader:new f.native.ImmutableReader(f.root,rebound,{invocation:accepted.invocation})}),/does not bind every applied metadata receipt/);
+  f.git('reset','--hard',metadataSuccessor);
+ });
  const declarations=JSON.parse(again.outputs['package-inputs.json']);
  assert(!declarations.inputs.includes('inputs/projection.json'));assert(declarations.inputs.includes('inputs/projection-next.json'));
  assert(fs.existsSync(path.join(f.root,'inputs/projection.json')),'Original projection evidence remains recoverable');
@@ -195,6 +212,42 @@ test('final-bank reference-only authoring retains words and uses the existing co
  await assert.rejects(checkEmittedSelectedDelivery(options),/Current reference properties differ/);write('locations.json',features);
  write('atlas-geography.json',{...atlas,referenceMetadata:{...referenceMetadata,asset:{...referenceMetadata.asset,sha256:'d'.repeat(64)}}});
  await assert.rejects(checkEmittedSelectedDelivery(options),/deep-equal|equal/);write('atlas-geography.json',atlas);
+ await t.test('cold reference-only CLI admits exact current metadata without historical or native transport bodies',()=>{
+  const sourcePin=f.pin(selected.selected_geography.path,at),source=json(at,sourcePin.path);
+  const required=[...new Map([
+   sourcePin,source.world_index,projection.hierarchy.before,projection.hierarchy.after,...projection.receipts,
+   ...projection.source_updates.flatMap(update=>[update.before,update.after]),
+   ...[...migration.index.pixelMap.parts,...migration.index.preparedOwnership.context_parts].map(p=>f.pin(bank+p.path,at)),
+   ...[...result.index.pixelMap.parts,...result.index.preparedOwnership.context_parts].map(p=>f.pin(bank+p.path,candidate))
+  ].map(p=>[p.git_blob_oid,p])).values()];
+  const used=new Set(required.map(p=>p.git_blob_oid));
+  const unnecessary=[...new Map([
+   f.pin('data/canonical-grid/bounds.json.gz',at),...f.manifest.parts.map(p=>f.pin(path.posix.dirname(selected.manifest_path)+'/'+p.path,at)),
+   ...['authority_registry','runtime_envelope'].map(k=>sidecar[k]),sidecar.logical_asset_map.ledger,sidecar.logical_asset_map.patch,
+   ...result.index.compatibility_files.map(p=>f.pin(bank+p.path,candidate))
+  ].filter(p=>!used.has(p.git_blob_oid)).map(p=>[p.git_blob_oid,p])).values()];
+  assert(unnecessary.length>0);
+  const remote=fs.mkdtempSync(path.join(path.dirname(f.root),'.reference-map-remote-'));t.after(()=>fs.rmSync(remote,{recursive:true,force:true}));
+  execFileSync('git',['clone','--bare','--no-hardlinks',f.root,remote],{stdio:'ignore'});
+  execFileSync('git',['-C',remote,'config','uploadpack.allowAnySHA1InWant','true']);execFileSync('git',['-C',remote,'config','uploadpack.allowFilter','true']);
+  f.git('reset','--hard',at);f.git('config','url.'+pathToFileURL(remote).href+'.insteadOf','https://github.com/ChengshuLi/WorldAtlas.git');
+  omitFixtureObjects(t,f.root,[...required,...unnecessary].map(p=>p.git_blob_oid));
+  const objects=()=>new Set(f.git('--no-lazy-fetch','--no-replace-objects','cat-file','--batch-all-objects','--batch-check=%(objectname)').toString().trim().split('\n'));
+  const before=objects(),env={...process.env,GH_TOKEN:''};delete env.NODE_OPTIONS;delete env.NODE_PATH;
+  const command='coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs';
+  const run=()=>spawnSync(process.execPath,[path.join(f.root,command),f.root,at,at,candidate,path.join(f.root,'no-reference-product')],{encoding:'utf8',env});
+  const cold=run();assert.equal(cold.status,0,cold.stderr);const report=JSON.parse(cold.stdout);
+  assert.equal(report.mode,'accepted-final-map-comparison-v1');assert.equal(report.native.native_row_scope.added_cells,0);
+  const after=objects();
+  assert.deepEqual([...after].filter(id=>!before.has(id)).sort(),required.map(p=>p.git_blob_oid).sort());
+  // Promisor-aware existence probes need not prove local materialization.
+  for(const p of unnecessary)assert(!after.has(p.git_blob_oid),'Unrelated object remains absent locally: '+p.path);
+  assert(!fs.existsSync(path.join(f.root,'no-reference-product')));
+  f.git('config','--unset','url.'+pathToFileURL(remote).href+'.insteadOf');
+  f.git('config','url.'+pathToFileURL(path.join(remote,'absent')).href+'.insteadOf','https://github.com/ChengshuLi/WorldAtlas.git');
+  const warm=run();assert.equal(warm.status,0,warm.stderr);assert.deepEqual(JSON.parse(warm.stdout),report);
+  t.diagnostic('Cold reference imported '+required.length+' exact metadata/current-bank blobs; '+unnecessary.length+' unrelated native/history/compatibility blobs remain absent.');
+ });
  f.api.releaseCheckpoint(next.candidate);f.api.releaseCheckpoint(original.state);
 });
 
