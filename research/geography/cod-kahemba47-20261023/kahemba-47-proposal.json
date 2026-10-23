@@ -29,7 +29,7 @@
     "hold_removals": 0,
     "accepted_credit": 0,
     "package_completion": false,
-    "basis": "The exact candidate source representation has a strong direct primary-source crosswalk to the official USCB 2019 Lunda Norte polygon. A retained USCB October 2024 DRC comparison places five of the 47 Kahemba centers strictly inside its DRC ADM0/current KAHEMBA ADM2 and 42 outside; all five inside keys still retain the original Lunda Norte contact and original COD target. This newer source-specific center result adds context but does not establish attribution transfer to the separate 2021 geoBoundaries record or decide territorial applicability under the original source-relative contract. The full original stock diagnostic held these cells. The independent reviewer found no qualification or clearance from this center comparison and no distinct reasonable public digital primary-source step likely to settle the remaining provenance/applicability question."
+    "basis": "The exact candidate source representation has a strong direct primary-source crosswalk to the official USCB 2019 Lunda Norte polygon. A retained USCB October 2024 DRC comparison places five of the 47 Kahemba centers strictly inside its DRC ADM0/current KAHEMBA ADM2 and 42 outside; all five inside keys still retain the original Lunda Norte contact and original COD target. The bounded full-ring test against the complete 2019 USCB Lunda Norte polygon finds all five centers outside and not on its boundary, while those same centers remain hits in the pinned 2021 simplified geoBoundaries feature. This three-way pattern is consistent with simplification/generalization sensitivity, but does not establish that the 2021 hit is an erroneous artifact: the original contract evaluates the registered 2021 candidate representation and supplies no rule replacing it with the older full ring or discarding a contact after simplification changes center membership. Conversely, the 2021 hit alone does not establish territorial applicability; the 2024 DRC product is not retroactive evidence about 2021, and the vertex-subsequence crosswalk proves correspondence rather than identical geometry or transfer of attribution. The full original stock diagnostic held these cells. The independent reviewer found that the five-key result sharpens but does not resolve the source-relative conflict; no distinct reasonable public digital primary-source step likely to decide it was identified. All 47 remain held and pending, with no repair, owner change, hold removal, accepted credit, or package completion."
   },
   "original_diagnostic": {
     "path": "coordination/engineering/congo-original-repair-20261018/diagnostic-original-001/native-diagnostic.json",
@@ -63,7 +63,29 @@
   "crosswalk": {
     "method": "Compare the pinned Lunda Norte polygon ring to the official 2019 Census Lunda Norte ring by ordered vertex sequence and bounds.",
     "result": "All 1380 unique vertices of the pinned simplified ring match the 28897-unique-vertex Census ring in one reverse cyclic subsequence; closed endpoint and bounds match.",
-    "assessment": "Strong representation-level correspondence. Not proof that geoBoundaries inherited the 2019 feature attribution, and not a territorial-applicability or full-cell test."
+    "assessment": "Strong representation-level correspondence. Not proof that geoBoundaries inherited the 2019 feature attribution, and not a territorial-applicability or full-cell test. The pinned simplified representation differs in center membership at the exact five-key set: all five are outside the full 2019 ring but remain center-hits in the pinned simplified 2021 feature. This is consistent with generalization sensitivity, not by itself proof of an erroneous simplification contact."
+  },
+  "five_key_2019_full_ring_test": {
+    "archive_path": "coordination/engineering/congo-original-repair-20261018/residual-930-20261019/source-lineage-evidence-20261023/angola-adm1-adm2-uscb-oct19.zip",
+    "archive_bytes": 6042844,
+    "archive_sha256": "c700d2f72d3c32dda77a89308930443eadd79005d5cb32d674ee681dadabe4af",
+    "shapefile_member": "Angola_adm1_uscb_2019.shp",
+    "dbf_record_number": 12,
+    "feature_attributes": {"ADM1_NAME": "LUNDA NORTE", "OBJECTID": "12", "GEO_MATCH": "AGO_08", "GENC_CODE": "AO-LNO", "FIPS_CODE": "AO17"},
+    "projection": "WGS 84 geographic coordinates, as identified by the matching PRJ",
+    "geometry": {"type": "valid ESRI Polygon", "parts": 1, "stored_coordinates": 28898, "unique_vertices": 28897},
+    "method": "Unchanged retained centers from candidate-source-center-overlay.local.json, keyed by exact original [y,x,owner]; interpreted as lon,lat in WGS 84. Shapely planar contains and covers predicates; planar point-to-boundary distances in unprojected coordinate degrees. No metric conversion or positional-accuracy assertion.",
+    "results": [
+      {"key": [136900, 144758, 14485], "contains": false, "covers": false, "boundary_distance_degrees": 0.00015343023052083305},
+      {"key": [136901, 144760, 14485], "contains": false, "covers": false, "boundary_distance_degrees": 0.00004181982975618977},
+      {"key": [136939, 144420, 14485], "contains": false, "covers": false, "boundary_distance_degrees": 0.00019211410017658495},
+      {"key": [136940, 144421, 14485], "contains": false, "covers": false, "boundary_distance_degrees": 0.00007142378634470285},
+      {"key": [136960, 144261, 14485], "contains": false, "covers": false, "boundary_distance_degrees": 0.0002594784076174233}
+    ],
+    "cross_tab": "All five are inside the retained 2024 DRC/KAHEMBA comparison, outside/not on the 2019 full Lunda Norte ring, and center-hits in the pinned 2021 simplified Lunda Norte feature.",
+    "interpretation": "The pattern is consistent with simplification/generalization sensitivity but does not prove that the pinned 2021 center hit is an erroneous artifact. The original source-relative contract evaluates the registered 2021 representation and does not say to substitute the 2019 full ring or discard contacts changed by simplification. The 2019-to-2021 vertex-subsequence relationship is not identical geometry or proof of attribution transfer; the 2024 DRC product is not retroactive. The result sharpens but does not resolve historical/source applicability.",
+    "reviewer_assessment": "Existing independent reviewer brn828_reviewer independently assessed the exact five-key result: it materially sharpens but does not resolve the issue; the near-boundary flips are consistent with representation sensitivity, and no separate reasonable public digital primary-source step likely to decide applicability was identified.",
+    "disposition_effect": "No changes: all 47 keys remain pending and held; zero repair, owner change, hold removal, credit, or package completion."
   },
   "additional_primary_reference_assessed": {
     "source": "U.S. Department of State, Large Scale International Boundaries (LSIB), Edition 11.4",
@@ -73,10 +95,11 @@
   },
   "review": {
     "reviewer": "Existing independent reviewer brn828_reviewer; bounded follow-up on the exact 47-key source crosswalk and disposition.",
-    "conclusion": "The exact 2019 primary-source crosswalk resolves practical representation identity. The retained current-USCB comparison adds context: 5 of 47 centers are inside current DRC ADM0/current KAHEMBA ADM2 and 42 are outside, while all five inside keys retain the original Lunda Norte contact and COD target. This does not decide historical source-relative territorial applicability or provenance transfer to the separate 2021 record. The comparison grants no qualification or clearance; no distinct reasonable public digital primary-source step is apparent. A researched-unresolved proposal remains supportable for these exact 47 keys only, with every native hold retained.",
+    "conclusion": "The exact 2019 primary-source crosswalk resolves practical representation correspondence, not identical geometry or territorial applicability. In the bounded full-ring test, the exact five centers inside the retained 2024 USCB DRC/KAHEMBA comparison are outside/not on the 2019 full Lunda Norte ring yet remain center-hits in the pinned 2021 simplified feature. This is consistent with generalization sensitivity but does not prove that the pinned 2021 hit is an erroneous artifact or authorize dropping the source contact under the original contract. The reviewer found the result sharpens but does not resolve the source-relative conflict; no distinct reasonable public digital primary-source step likely to decide it was identified. The result grants no qualification or clearance; all 47 keys remain pending and held, with zero repair, owner change, hold removal, credit, or package completion.",
     "limits": "No geometry or native diagnostic rerun; no legal certificate demanded.",
     "exact_public_head_review": "Pending; reviewer will bind the final public PR head.",
-    "current_uscb_42_5_assessment": "Verified against the retained derived input and exact five unchanged contact rows; no geometry rerun. Current ADM2 is context only, not an identity crosswalk."
+    "current_uscb_42_5_assessment": "Verified against the retained derived input and exact five unchanged contact rows; no geometry rerun. Current ADM2 is context only, not an identity crosswalk.",
+    "five_key_2019_full_ring_assessment": "Existing reviewer brn828_reviewer assessed the bounded exact result and found a three-way source-representation discrepancy, not a unique territorial-applicability determination. All five are close to the 2019 boundary; angular distances are recorded in planar coordinate degrees, not converted to ground distance. The original contract does not prescribe replacing the 2021 simplified candidate with the 2019 full ring, and no proof establishes whether these deviations are erroneous simplification artifacts."
   },
   "publication_limits": {
     "included": "Derived project-cell identifiers, source citations, hashes, diagnostic bindings and source/applicability findings only.",
