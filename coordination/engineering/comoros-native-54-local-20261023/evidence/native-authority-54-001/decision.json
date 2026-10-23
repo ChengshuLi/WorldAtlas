@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "kind": "comoros-54-stock-native-authority-constructor-checkpoint",
+  "date": "2026-10-23",
+  "status": "constructor-qualified-pending-independent-review-and-current-selection-conservation",
+  "original_scope": {
+    "package": "gb-COM-ADM1--repair-evaluation",
+    "original_keys": 571,
+    "intervals": 296,
+    "owner": 7114,
+    "accepted_485_excluded": 485,
+    "separate_32_proposal_excluded": 32,
+    "constructor_request": 54,
+    "held_status": "retain native holds pending review and selected-state conservation; no root credit or package completion"
+  },
+  "input_derivation": {
+    "phase": "stock prepare-delivery-handoff.mjs supported-inputs",
+    "input_diagnostic": {
+      "commit": "5ed93c1376977aa1b58b58a73c076f1dfea4730f",
+      "path": "coordination/engineering/comoros-original-disposition-20261021/evidence/native-diagnostic-004/native-diagnostic.json",
+      "requested": 571,
+      "supported": 571,
+      "held": 0,
+      "first_failure": null
+    },
+    "result_partition": {
+      "original": 571,
+      "supported_for_this_exact_subset": 54,
+      "excluded_as_previously_accepted": 485,
+      "excluded_as_separate_32_proposal": 32,
+      "other_remaining": 0
+    },
+    "source_coverage": "Source-evidence target coverage narrowed by the stock helper to exactly 54 cells for each of the three original island source targets; every class is mapped_land_support."
+  },
+  "constructor": {
+    "phase": "stock prepare-delivery-handoff.mjs native-authority",
+    "result": {
+      "qualified_cells": 54,
+      "component_id": "source-target:3a2301cec35ff1b0f450020fc8d01c224ba8e7c86088a2e9d39268cd10764feb",
+      "target_id": "atlas:territory:COM",
+      "pixelIndex": 7114,
+      "disposition": "assigned",
+      "native_rows": 46,
+      "exact_key_set_matches_request": true,
+      "constructor_sha256": "77c5aa43657b8ffa744b47eb2f74c8838fb76adc24ceabed7325d0532ad0117f"
+    },
+    "meaning": "This is a qualified native-authority proposal only. It does not establish current effective ownership, selected output conservation, acceptance, credit, or completion."
+  },
+  "applicability": {
+    "retained_adverse_context": "OCHA 2019 disagreement remains recorded. OCHA is non-operative comparator context under the frozen source evidence and was not used as a constructor source or negative operand. No OCHA geometry was included.",
+    "primary_law": "Comoros Law 11-006/AU Articles 1 and 7 support the autonomous-island and prefecture hierarchy corresponding to the three original source members; Articles 8–11 address communes. This is administrative identity corroboration, not exact cell-level boundary proof.",
+    "law_url": "https://justice.gouv.km/texte/loi-n11-006-au-du-02-mai-2011-portant-organisation-territoriale-de-lunion-des-comores/",
+    "census_limit": "INSEED RGPH 2017 catalog identifies ZD as its lowest geographic unit; no 54-key ZD assignment is asserted.",
+    "limit": "No whole-source clearance, exhaustive unregistered-competitor search, rights claim for OCHA, current-owner-zero, or selected-native conservation is asserted."
+  },
+  "review_and_delivery": {
+    "review": "Original independent substantive reviewer requested; not yet returned at time of checkpoint.",
+    "public_pr": "PR2739 remains unchanged at reviewed head 5ed93c1376977aa1b58b58a73c076f1dfea4730f. This 54-key constructor is local-only and is not included in that PR.",
+    "dispatch": "No dispatch for this 54-key proposal. PR2739 queue retry remains governed by the separately accepted recursive-tree fix and root coordination."
+  },
+  "artifacts": [
+    {
+      "path": "coordination/engineering/comoros-native-54-local-20261023/input/prior-holds-exclusion.json",
+      "bytes": 50682,
+      "sha256": "316427680320a0c378ab6e07f8b43622da4e147722548ed0cc10737686badaad"
+    },
+    {
+      "path": "coordination/engineering/comoros-native-54-local-20261023/input/supported-inputs-config.json",
+      "bytes": 418,
+      "sha256": "8f319925382b069f625f0af9b4783ff219d6ab5e90091f546f1debb93a6b14a4"
+    },
+    {
+      "path": "coordination/engineering/comoros-native-54-local-20261023/input/native-authority-config.json",
+      "bytes": 431,
+      "sha256": "6bf181c586d70537ede714fc20323730aee4775b371db2428b0d87a0bba8a8e2"
+    },
+    {
+      "path": "coordination/engineering/comoros-native-54-local-20261023/evidence/supported-inputs-001/preparation.json",
+      "bytes": 610,
+      "sha256": "ff89e95e8d73b1804cc0adc263adf89b1c45d12417054eea335a42bc32320d66"
+    },
+    {
+      "path": "coordination/engineering/comoros-native-54-local-20261023/evidence/supported-inputs-001/original-scope-partition.json",
+      "bytes": 2286,
+      "sha256": "544abf97cca0ab1d8ea02ce7498930ddc27d33523243c55fe54d1c27f87aa057"
+    },
+    {
+      "path": "coordination/engineering/comoros-native-54-local-20261023/evidence/supported-inputs-001/held-original.json",
+      "bytes": 24999,
+      "sha256": "dbb070300fea731ac303f7af8a5883e971f5596565ababb23829c7716b5cd8cd"
+    },
+    {
+      "path": "coordination/engineering/comoros-native-54-local-20261023/evidence/supported-inputs-001/native-patch.json",
+      "bytes": 2094,
+      "sha256": "21d3ebfce2c68afcef314c7eabd14c04a6a5ed4710fdfa6434214c811286b4db"
+    },
+    {
+      "path": "coordination/engineering/comoros-native-54-local-20261023/evidence/supported-inputs-001/source-evidence.json",
+      "bytes": 22471,
+      "sha256": "5946812e787e4bc0be28fc8b859ed5b5c3dc08e928507dd126fbdd6cfd2f8775"
+    },
+    {
+      "path": "coordination/engineering/comoros-native-54-local-20261023/evidence/native-authority-54-001/preparation.json",
+      "bytes": 500,
+      "sha256": "27fefc3e783899fb6eacb42f23339c797cab4c239eb2438aa08ccf684a5a00cb"
+    },
+    {
+      "path": "coordination/engineering/comoros-native-54-local-20261023/evidence/native-authority-54-001/original-rule-preimage.json",
+      "bytes": 753,
+      "sha256": "e4b1485c0d1efd19a7fdc161dc5bb8e24fd1f0d09c21f3afd5561e3b3451e3a4"
+    },
+    {
+      "path": "coordination/engineering/comoros-native-54-local-20261023/evidence/native-authority-54-001/authority-binding.json",
+      "bytes": 756,
+      "sha256": "28e7be1e7da88cb781d82decbc1fdb19b42637d1609241b2181563c1656b10c2"
+    },
+    {
+      "path": "coordination/engineering/comoros-native-54-local-20261023/evidence/native-authority-54-001/constructor-result.json",
+      "bytes": 5912,
+      "sha256": "77c5aa43657b8ffa744b47eb2f74c8838fb76adc24ceabed7325d0532ad0117f"
+    }
+  ],
+  "prior_research_checkpoint": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-18/task-3/com54-evidence-checkpoint-20261023.json",
+    "bytes": 35768,
+    "sha256": "9d9f0cdcf0a14bac53b7570c03b7ba149da30b5a7b9e2bc163238315960392bd"
+  }
+}

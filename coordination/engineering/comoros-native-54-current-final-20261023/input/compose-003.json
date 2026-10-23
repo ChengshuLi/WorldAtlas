@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "selector": {
+    "commit": "2d097d44081411110935bc9cd5b211a30d9c50eb",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "8cc8a63b9a9581c059414766e839bc408eed6d01",
+    "bytes": 2284,
+    "sha256": "362c3fc2741067e6907c932f35fefe372bb2fead1ae0b1136c87b4f36fe6a430"
+  },
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "3dcc031fe86346cf4cb285cef02f81d9a903c55c",
+        "path": "coordination/engineering/comoros-native-54-local-20261023/evidence/native-authority-54-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "6169071283fbead42626c25ced074a2d810ca168",
+        "bytes": 753,
+        "sha256": "e4b1485c0d1efd19a7fdc161dc5bb8e24fd1f0d09c21f3afd5561e3b3451e3a4"
+      },
+      "source_authority": {
+        "commit": "3dcc031fe86346cf4cb285cef02f81d9a903c55c",
+        "path": "coordination/engineering/comoros-native-54-local-20261023/evidence/native-authority-54-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "e523fd65f44a1898f81b54e7e89755066ca382bd",
+        "bytes": 756,
+        "sha256": "28e7be1e7da88cb781d82decbc1fdb19b42637d1609241b2181563c1656b10c2"
+      },
+      "ledger": {
+        "commit": "3dcc031fe86346cf4cb285cef02f81d9a903c55c",
+        "path": "coordination/engineering/comoros-native-54-local-20261023/evidence/native-authority-54-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "8d563b67ba8fdbd3f283b453f4cc94384cd4f9b7",
+        "bytes": 5912,
+        "sha256": "77c5aa43657b8ffa744b47eb2f74c8838fb76adc24ceabed7325d0532ad0117f"
+      },
+      "native_patch": {
+        "commit": "c33c9c6b268c30c613890dc34ae037d18d715429",
+        "path": "coordination/engineering/comoros-native-54-local-20261023/evidence/supported-inputs-001/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "be7d674c2096477066ab05aeef408524b971038d",
+        "bytes": 2094,
+        "sha256": "21d3ebfce2c68afcef314c7eabd14c04a6a5ed4710fdfa6434214c811286b4db"
+      }
+    }
+  ]
+}
