@@ -1,4 +1,32 @@
 {
+  "additional_primary_metadata_context": {
+    "metadata": {
+      "createDate": [
+        "2024-04-03T07:42:33"
+      ],
+      "idCredit": [
+        "CENSUS DATA 2014 Age-Sex Data: Resultados Definitivos do Recenseamento Geral da População e Habitação de Angola 2014, Quadro 1.02: População Residente por Área de Residência, Municípios e Comunas, Segundo os Grandes Grupos Etários e Sexo; Quadro 1.04: População Residente por Grupos Etários e Municípios, Segundo a Área de Residência, Sexo e Índice de Masculinidade; Quadro 1.05: População Residente por Sexo, Municípios e Comunas, Segundo os Grupos Etários. Instituto Nacional de Estatística de Angola. Originally downloaded from http://www.ine.gov.ao/ (data were published in individual provincial reports that are no longer available online, accessed September 05, 2019). The U.S. Census Bureau cannot guarantee the accuracy of non-U.S. census and survey data. GEOSPATIAL BOUNDARIES International boundaries coincide with the Large Scale International Boundaries (LSIB) dataset from the U.S. Department of State, Office of the Geographer and Global Issues. Available online at http://geonode.state.gov (accessed April 02, 2024). Geospatial data for the first-order administrative divisions of Angola were downloaded from GeoBoundaries, available online at http://data.humdata.org/dataset/geoboundaries-admin-boundaries-for-angola, \"Angola - Subnational Administrative Boundaries\" (accessed April 02, 2024). The U.S. Census Bureau cannot guarantee the accuracy of boundary placements. NATIONAL ESTIMATES AND PROJECTIONS U.S. Census Bureau, Population Division. International Database, August 2024 release, available online at http://www.census.gov/idb (accessed April 02, 2024). NATIONAL AND SUBNATIONAL AREA NAMES AND CODES (1) U.S. National Geospatial-Intelligence Agency. NGA Geographic Names Server (GNS), available at http://geonames.nga.mil/geonames/GNSHome/welcome.html (accessed April 02, 2024). Contains geographic area names from the U.S. Board on Geographic Names and the U.S. Government Federal Information Processing System (FIPS) codes. (2) U.S. Government Geopolitical Entities, Names, and Codes (GENC) Standard. NSG Standards Registry, available at http://nsgreg.nga.mil/registries/browse/results.jsp?registryType=genc (accessed April 02, 2024)."
+      ],
+      "mdDateSt": [
+        "20240521"
+      ],
+      "resTitle": [
+        "Angola: First-Order Administrative Divisions"
+      ],
+      "useLimit": [
+        "U.S. Census Bureau population estimates: None. Acknowledgment of the Census Bureau would be appreciated in products derived from its population estimates. The subnational boundaries used for this shapefile were downloaded by the U.S. Census Bureau from a publicly available source for this product. GeoBoundaries indicates that the Open Database License (ODC-ODbL) applies to the use of these boundaries. The international boundaries are derived from the Large Scale International Boundaries (LSIB) dataset (public domain)."
+      ]
+    },
+    "metadata_bytes": 26458,
+    "metadata_member": "Angola_adm1_uscb_2024.shp.xml",
+    "metadata_sha256": "a7e461c194ecffd81e904298b6fefcd2660ae95e0cd5538aa726fcc0b22301d6",
+    "page_url": "https://www.census.gov/geographies/mapping-files/time-series/demo/international-programs/subnationalpopulation.html",
+    "scope_note": "2024 Census ADM1 metadata for a later product; not asserted as provenance for the pinned 2021 geoBoundaries polygon. ZIP geometry was not committed.",
+    "source": "U.S. Census Bureau current Angola subnational boundaries ZIP linked from its 2026-10-23 page",
+    "zip_bytes": 11480383,
+    "zip_sha256": "48c3b457b38909396ca2bed7880400876c3c91ddbc13f6af6bcfd8be99787713",
+    "zip_url": "https://www2.census.gov/programs-surveys/international-programs/mapping-files/time-series/ep/angola-adm1-adm2-adm3-uscb-aug24.zip"
+  },
   "evidence_type": "source-metadata-only; geometry not downloaded",
   "records": [
     {
@@ -72,5 +100,24 @@
   ],
   "release_index": "https://www.geoboundaries.org/api.html",
   "repository": "https://github.com/wmgeolab/geoBoundaries",
-  "retrieved_utc": "2026-10-23"
+  "retrieved_utc": "2026-10-23",
+  "additional_primary_metadata_context_2019": {
+    "source": "U.S. Census Bureau official time-series mapping-file archive; October 2019 Angola ADM1/ADM2 package",
+    "archive_directory_url": "https://www2.census.gov/programs-surveys/international-programs/mapping-files/time-series/",
+    "zip_url": "https://www2.census.gov/programs-surveys/international-programs/mapping-files/time-series/angola-adm1-adm2-uscb-oct19.zip",
+    "zip_bytes": 6042844,
+    "zip_sha256": "c700d2f72d3c32dda77a89308930443eadd79005d5cb32d674ee681dadabe4af",
+    "zip_last_modified": "2019-11-25T16:20:51Z",
+    "metadata_member": "Angola_adm1_uscb_2019.shp.xml",
+    "metadata_bytes": 24229,
+    "metadata_sha256": "7b256bc2288267557449c5eab5be0aa78f8c887934d26afc0c7780be388c37e1",
+    "retained_metadata_path": "uige-census-2019-adm1-map-metadata.xml",
+    "recorded_lineage": {
+      "adm1": "The XML says the original 161-polygons shapefile was matched to 2016 census districts after one Lunda Norte split, aligned to the 2018 U.S. Department of State LSIB polygon, then dissolved to 18 province polygons.",
+      "source_administrative_data": "The XML names the HDX archive ago_admbnda_adm2_gadm_ine_ocha_20180904.zip, accessed 2019-09-09, as the source of the first-order administrative divisions.",
+      "placement_limit": "The Census Bureau states it cannot guarantee boundary-placement accuracy.",
+      "represented_administrative_vintage": "18 provinces as of the 2014 census."
+    },
+    "scope_note": "Different Census product (2019), with its own documented 2018 HDX/LSIB lineage; not asserted to be the source geometry or method for the pinned geoBoundaries 2021 Uige feature."
+  }
 }
