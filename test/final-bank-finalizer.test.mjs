@@ -412,3 +412,90 @@ test('retiring current-bank paths refuse non-sparse loss, staged replacements an
  f.git('update-index','--add','--cacheinfo',`100644,${oid},${name}`);f.git('update-index','--skip-worktree','--',name);
  publish(true);assert.equal(f.git('ls-files','--stage','--',name).length,0);
 });
+
+
+test('finalizer derives complete sparse output preimages without a caller input list',async t=>{
+ const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit),at=f.commit();f.api.releaseCheckpoint(before.state);
+ const added=await appendNativeAuthority(f,{owner:1,name:'coordination/engineering/automatic-preimages',completedConstructor:true});
+ f.save('data/ownership-selection.json',migration.selection);f.save('coordination/engineering/automatic-preimages/registry.json',{version:1,kind:'retained-rule-authority-registry-v1',entries:[added.entry]});
+ const source=f.commit(),hook=f.pin('coordination/engineering/automatic-preimages/registry.json',source);
+ execFileSync('git',['sparse-checkout','set','--no-cone','--stdin'],{cwd:f.root,input:'/*\n!/data/\n!/.github/package-inputs.json\n',stdio:'pipe'});
+ for(const name of ['data/ownership-selection.json','.github/package-inputs.json',bank+'index.json']){
+  assert(!fs.existsSync(path.join(f.root,name)));assert.equal(f.git('ls-files','-v','--',name).toString(),'S '+name+'\n');
+ }
+ const initial=f.git('ls-files','--stage','-v','-z').toString().split('\0').filter(Boolean),normal=pinReader(f.root),calls=[];
+ const reader={...normal,git(...args){if(args[0]==='sparse-checkout')calls.push(args);return normal.git(...args);}};
+ const outputs=finalizeDelivery({version:2,selector:{commit:at,path:'data/ownership-selection.json'},package_inputs:{commit:at,path:'.github/package-inputs.json'},change_evidence:hook},reader);
+ await prepareFinalizedStartupOwnership(outputs);const index=JSON.parse(outputs['startup-ownership.json']);
+ const destination='coordination/engineering/final-bank-test/automatic-preimages';
+ publishFinalizedDelivery(f.root,destination,outputs,{phase:'finalize'});
+ assert.equal(calls.length,1);assert.deepEqual(calls[0].slice(0,3),['sparse-checkout','add','--']);
+ const requested=new Set(calls[0].slice(3).map(name=>name.slice(1)));
+ for(const name of ['data/ownership-selection.json','.github/package-inputs.json',bank+'index.json'])assert(requested.has(name));
+ const current=new Set([...migration.index.pixelMap.parts,...migration.index.preparedOwnership.context_parts].map(p=>p.path));
+ for(const pin of migration.index.compatibility_files.filter(p=>!current.has(p.path))){
+  assert(!requested.has(bank+pin.path));assert(!fs.existsSync(path.join(f.root,bank+pin.path)));assert.equal(f.git('ls-files','-v','--',bank+pin.path).toString(),'S '+bank+pin.path+'\n');
+ }
+ const retired=new Set(migration.index.files.filter(p=>!index.files.some(next=>next.path===p.path)).map(p=>bank+p.path));
+ const expected=initial.filter(row=>![...retired].some(name=>row.endsWith('\t'+name))).map(row=>requested.has(row.split('\t')[1])?row.replace(/^S /,'H '):row);
+ assert.deepEqual(f.git('ls-files','--stage','-v','-z').toString().split('\0').filter(Boolean),expected,'Only planned output inclusions and exact retirements change index flags/entries');
+ assert.deepEqual(fs.readFileSync(path.join(f.root,'data/ownership-selection.json')),outputs['ownership-selection.json']);
+ publishFinalizedDelivery(f.root,destination,outputs,{phase:'finalize'},true);
+ f.git('add','-A');const committed=f.commit();
+ assert.deepEqual(f.git('ls-tree','-r','--name-only',committed,'--',bank).toString().trim().split('\n').sort(),[bank+'index.json',...index.files.map(p=>bank+p.path)].sort());
+ assert.deepEqual(f.git('show',committed+':data/ownership-selection.json'),outputs['ownership-selection.json']);
+ publishFinalizedDelivery(f.root,destination,outputs,{phase:'finalize'},true);
+});
+
+
+test('automatic sparse preimages refuse deleted, staged, edited and racing canonical state',async t=>{
+ const {f,before}=await prepare(t);f.api.releaseCheckpoint(before.state);
+ const normal=pinReader(f.root),calls=[];let duringMaterialization=false;
+ const reader={...normal,git(...args){if(args[0]==='sparse-checkout')calls.push(args);const result=normal.git(...args);
+  if(duringMaterialization&&args[0]==='sparse-checkout')f.git('update-index','--add','--cacheinfo',`100644,${bad},${name}`);return result;}};
+ const outputs=finalizeDelivery({version:2,selector:{commit:f.bankCommit,path:'data/ownership-selection.json'},package_inputs:{commit:f.bankCommit,path:'.github/package-inputs.json'}},reader);
+ await prepareFinalizedStartupOwnership(outputs);
+ const name='data/ownership-selection.json',file=path.join(f.root,name),original=f.git('show',f.bankCommit+':'+name),oid=f.git('rev-parse',f.bankCommit+':'+name).toString().trim();
+ execFileSync('git',['sparse-checkout','set','--no-cone','--stdin'],{cwd:f.root,input:'/*\n!/data/\n!/.github/package-inputs.json\n',stdio:'pipe'});
+ const destination='coordination/engineering/final-bank-test/preimage-refusals',publish=(resume=false)=>publishFinalizedDelivery(f.root,destination,outputs,{phase:'finalize'},resume);
+ const reset=()=>{if(fs.lstatSync(file,{throwIfNoEntry:false}))fs.unlinkSync(file);f.git('update-index','--add','--cacheinfo',`100644,${oid},${name}`);f.git('update-index','--no-assume-unchanged','--',name);f.git('update-index','--skip-worktree','--',name);assert.equal(f.git('ls-files','-v','--',name).toString(),'S '+name+'\n');};
+ const bad=f.git('hash-object','-w','--stdin').toString().trim();
+ for(const mutation of ['ordinary-loss','staged-deletion','staged-bytes','staged-mode','assume-unchanged','edited','symlink']){
+  if(mutation==='ordinary-loss')f.git('update-index','--no-skip-worktree','--',name);
+  if(mutation==='staged-deletion')f.git('update-index','--force-remove','--',name);
+  if(mutation==='staged-bytes'){f.git('update-index','--add','--cacheinfo',`100644,${bad},${name}`);f.git('update-index','--skip-worktree','--',name);}
+  if(mutation==='staged-mode'){f.git('update-index','--add','--cacheinfo',`100755,${oid},${name}`);f.git('update-index','--skip-worktree','--',name);}
+  if(mutation==='assume-unchanged')f.git('update-index','--assume-unchanged','--',name);
+  if(mutation==='edited')f.save(name,Buffer.from('user edit'));
+  if(mutation==='symlink'){fs.mkdirSync(path.dirname(file),{recursive:true});fs.symlinkSync('missing',file);}
+  assert.throws(()=>publish(),/Indexed canonical output differs|Canonical output changed outside|Nonordinary canonical output/,mutation);
+  assert(!fs.existsSync(path.join(f.root,destination)));assert.equal(calls.length,0,'Invalid state refuses before materialization');reset();
+ }
+ const packageFile=path.join(f.root,'.github/package-inputs.json');f.save('.github/package-inputs.json',Buffer.from('unrelated output edit'));
+ assert.throws(()=>publish(),/Canonical output changed outside/);assert.equal(calls.length,0);assert(!fs.existsSync(file));fs.unlinkSync(packageFile);
+ const write=fs.writeFileSync;let changed=false;
+ fs.writeFileSync=function(filename,...args){const result=write.call(this,filename,...args);
+  if(!changed&&typeof filename==='string'&&filename.includes(destination)){changed=true;f.git('update-index','--force-remove','--',name);}return result;};
+ try{assert.throws(()=>publish(),/Canonical output index changed before materialization/);assert(changed);}finally{fs.writeFileSync=write;}
+ assert.equal(calls.length,0);assert(!fs.existsSync(file));reset();
+ duringMaterialization=true;assert.throws(()=>publish(true),/Canonical output index changed during materialization/);
+ assert.deepEqual(fs.readFileSync(file),original,'A materialization-time index race refuses before selector adoption');duringMaterialization=false;reset();
+ publish(true);assert.equal(calls.length,2);assert.deepEqual(fs.readFileSync(file),outputs['ownership-selection.json']);
+});
+
+
+test('normal finalize CLI automatically materializes its sparse canonical preimages',async t=>{
+ const {f,before}=await prepare(t);f.api.releaseCheckpoint(before.state);
+ const config='coordination/engineering/final-bank-test/automatic-cli.json',destination='.cache/delivery-handoff/automatic-cli';
+ f.save(config,{version:2,selector:{commit:f.bankCommit,path:'data/ownership-selection.json'},package_inputs:{commit:f.bankCommit,path:'.github/package-inputs.json'}});
+ execFileSync('git',['sparse-checkout','set','--no-cone','--stdin'],{cwd:f.root,input:'/*\n!/data/\n!/.github/package-inputs.json\n',stdio:'pipe'});
+ assert(!fs.existsSync(path.join(f.root,'data/ownership-selection.json')));
+ const entry=fileURLToPath(new URL('../scripts/prepare-delivery-handoff.mjs',import.meta.url));
+ const run=flags=>execFileSync(process.execPath,[entry,'finalize',config,destination,...flags],{cwd:f.root,env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_NO_REPLACE_OBJECTS:'1'},encoding:'utf8',stdio:'pipe'});
+ run([]);
+ const selection=JSON.parse(fs.readFileSync(path.join(f.root,'data/ownership-selection.json'))),index=JSON.parse(fs.readFileSync(path.join(f.root,bank+'index.json')));
+ assert.equal(selection.version,2);assert.equal(selection.prepared_bank.sha256,createHash('sha256').update(fs.readFileSync(path.join(f.root,bank+'index.json'))).digest('hex'));
+ assert.deepEqual(fs.readFileSync(path.join(f.root,'data/ownership-selection.json')),fs.readFileSync(path.join(f.root,destination,'ownership-selection.json')));
+ run(['--resume']);f.git('add','-A');const committed=f.commit();
+ assert.deepEqual(f.git('ls-tree','-r','--name-only',committed,'--',bank).toString().trim().split('\n').sort(),[bank+'index.json',...index.files.map(p=>bank+p.path)].sort());
+});
