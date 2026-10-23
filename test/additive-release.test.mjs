@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {applyAdditiveNativePatch,loadAdditiveNativePatch,additiveBaseReference,nativeReferenceForData,footprintValueSha256 as hash,loadedBaseFootprintSha256,additiveReleaseFootprintDigest} from '../src/effective-footprint.js';
+import {applyAdditiveNativePatch,loadAdditiveNativePatch,additiveBaseReference,nativeReferenceForData,footprintValueSha256 as hash,loadedBaseFootprintSha256,additiveReleaseFootprintDigest,verifyAdditiveLedgerSelection} from '../src/effective-footprint.js';
 import {packOwnership,pickOwnership,samplePackedOwnership} from '../src/pixel-ownership.js';
 import {nativeSourceDigest} from '../src/native-source-digest.js';
 import {createHash} from 'node:crypto';
@@ -327,7 +327,7 @@ async function prepareBrowserFixture({data,features,transports,fetcher}){
  }finally{await fs.rm(root,{recursive:true,force:true});}
 }
 
-async function metadataRuntimeFixture({ledgerBytes,rosterBytes}={}){
+async function metadataRuntimeFixture({ledgerBytes,rosterBytes,nativeRunWords}={}){
  const {default:fs}=await import('node:fs'),{shuffleOwnershipBytes}=await import('../src/ownership-codec.js');
  const sha=body=>createHash('sha256').update(body).digest('hex'),json=value=>Buffer.from(JSON.stringify(value)+'\n');
  const asset=(path,body)=>({path,bytes:body.length,sha256:sha(body)}),bodies=new Map();
@@ -350,6 +350,17 @@ async function metadataRuntimeFixture({ledgerBytes,rosterBytes}={}){
  const source_updates=[{logical_path:'data/geography/part-0.json',before:pin('data/geography/part-0.json',{type:'FeatureCollection',features:originalFeatures}),after:pin('data/geography/part-0.json',{type:'FeatureCollection',features:currentFeatures})}];
  const rows=Array(262166).fill(new Uint32Array());rows[3]=Uint32Array.from([1,3,1,8,10,2]);rows[4]=Uint32Array.from([7,8,3]);
  const base={...packOwnership({size:rows.length,rows}),method:'native-linear-evenodd-first-owner-v1',geographic_release:native.id,footprints_sha256:native.footprints_sha256,hierarchy_sha256:native.hierarchy_sha256};
+ if(nativeRunWords!==undefined){
+  const runs=new Uint32Array(nativeRunWords),table=new Uint32Array(base.size*2);let cursor=0;
+  for(let y=0;y<base.size;y++){
+   const count=y===3?2:Math.min(16,nativeRunWords/2-cursor);table[y*2]=cursor;table[y*2+1]=count;
+   for(let x=0;x<count;x++){
+    const [start,end,owner]=y===3?(x===0?[1,3,1]:[8,10,2]):[100+x*2,101+x*2,2];
+    runs[cursor*2]=owner*2**19+start;runs[cursor*2+1]=end-1;cursor++;
+   }
+  }
+  assert.equal(cursor*2,nativeRunWords);Object.assign(base,{rows:table,runs,runWords:nativeRunWords});
+ }
  const transports=new Map(),put=(path,body)=>{transports.set('./'+path,body);return asset(path,body);};
  const parts=['rows','runs'].map(kind=>{const words=base[kind],body=gzipSync(shuffleOwnershipBytes(words));return {...put('native-v1/ownership/'+kind+'-0.bin.gz',body),kind,offset:0,words:words.length,encoding:'byte-shuffle',decoded_sha256:sha(new Uint8Array(words.buffer))};});
  const owners=originalFeatures.map(f=>({id:f.id,index:f.pixelIndex,province_id:f.properties.parent_id,province_index:f.properties.parent_id==='new'?1:2,bounds:[0,0,10,10]}));
@@ -467,7 +478,7 @@ test('metadata runtime rejects malformed transport, unbound projection and every
   await assert.rejects(loadAdditiveNativePatch(data,features,base,{fetcher:async path=>new Response(transports.get(path))}),error);
   assert.deepEqual({features,base},before,'Rejected metadata must not mutate caller ownership or features');};
  const repin=(state,edit)=>{const projection=structuredClone(f.projection);edit(projection);const body=f.json(projection);state.data.referenceMetadata.asset=f.asset('reference-metadata/current.json',body);state.transports.set('./reference-metadata/current.json',body);};
- for(const mutate of [m=>m.foreign=true,m=>m.version=2,m=>m.asset.path='../current.json',m=>m.asset.path='reference-metadata/other.json',m=>m.asset.bytes=0,m=>m.asset.bytes=32*1024*1024+1,m=>m.asset.sha256='broken',m=>m.asset.encoding='gzip',m=>m.native_reference.hierarchy_sha256='0'.repeat(64),m=>m.reference.id='geography:foreign',m=>m.reference.foreign=true])
+ for(const mutate of [m=>m.foreign=true,m=>m.version=2,m=>m.asset.path='../current.json',m=>m.asset.path='reference-metadata/other.json',m=>m.asset.bytes=0,m=>m.asset.bytes=Number.MAX_SAFE_INTEGER+1,m=>m.asset.sha256='broken',m=>m.asset.encoding='gzip',m=>m.native_reference.hierarchy_sha256='0'.repeat(64),m=>m.reference.id='geography:foreign',m=>m.reference.foreign=true])
   await rejects(({data})=>mutate(data.referenceMetadata),/metadata|reference/i);
  await rejects(({data})=>delete data.referenceMetadata,/original native manifest/);
  await rejects(({data})=>delete data.additiveRelease,/explicit selected native asset closure/);
@@ -645,4 +656,53 @@ test('gzip ledger and patch reject malformed descriptors, encoded and decoded dr
  const data=structuredClone(f.data),patch={...f.patch,ledger_sha256:data.additiveRelease.ledger.sha256},body=f.json(patch),raw=gzipSync(body),name=data.additiveRelease.patch.path;
  data.additiveRelease.patch={...f.asset(name,raw),encoding:'gzip',decoded_bytes:body.length,decoded_sha256:createHash('sha256').update(body).digest('hex')};
  await assert.rejects(loadAdditiveNativePatch(data,structuredClone(f.currentFeatures),f.base,{fetcher:async key=>key==='./'+name?new Response(raw):f.fetcher(key)}),/differs from selected whole ledger/);
+});
+
+test('exact reference metadata stream accepts more than 32 MiB and still checks the whole body',async()=>{
+ const f=await metadataRuntimeFixture(),expected=await loadAdditiveNativePatch(f.data,structuredClone(f.currentFeatures),f.base,{fetcher:f.fetcher});
+ const key='./reference-metadata/current.json',small=f.transports.get(key);
+ const raw=Buffer.concat([small,Buffer.alloc(32*1024*1024+1-small.length,0x20)]);
+ f.data.referenceMetadata.asset=f.asset(key.slice(2),raw);f.transports.set(key,raw);
+ const actual=await loadAdditiveNativePatch(f.data,structuredClone(f.currentFeatures),f.base,{fetcher:f.fetcher});
+ assert.deepEqual(actual,expected);
+ for(const [body,error]of [[raw.subarray(0,-1),/Incomplete/],[Buffer.concat([raw,Buffer.from(' ')]),/exceeds/]])
+  await assert.rejects(loadAdditiveNativePatch(f.data,structuredClone(f.currentFeatures),f.base,{fetcher:async path=>path===key?new Response(body):f.fetcher(path)}),error);
+ const damaged=Buffer.from(raw);damaged[0]^=1;
+ await assert.rejects(loadAdditiveNativePatch(f.data,structuredClone(f.currentFeatures),f.base,{fetcher:async path=>path===key?new Response(damaged):f.fetcher(path)}),/whole checksum/);
+ for(const bytes of [0,-1,1.5,NaN,Infinity,Number.MAX_SAFE_INTEGER+1]){
+  const data=structuredClone(f.data);data.referenceMetadata.asset.bytes=bytes;
+  assert.throws(()=>nativeReferenceForData(data),/Unsafe reference metadata/);
+ }
+});
+
+test('inert exact rebind custody has no byte ceiling and retains complete target and pin checks',async()=>{
+ const f=await metadataRuntimeFixture(),ledger=JSON.parse(f.transports.get('./additive-repairs/ledger.json'));
+ const component=ledger.rows[0];
+ ledger.current_rebind={commit:'1'.repeat(40),path:'inputs/rebind.json',mode:'100644',git_blob_oid:'2'.repeat(40),bytes:32*1024*1024+1,sha256:'3'.repeat(64)};
+ ledger.current_targets=[{target_id:component.target_id,pixelIndex:component.pixelIndex,geometry:component.base_geometry,geometry_sha256:component.base_geometry_sha256}];
+ const verify=value=>verifyAdditiveLedgerSelection(value,f.effectiveFeatures,f.patch);
+ assert.deepEqual(verify(ledger),{selected_components:1,assigned_cells:2});
+ const small=structuredClone(ledger);small.current_rebind.bytes=1;assert.deepEqual(verify(ledger),verify(small));
+ for(const [field,value]of [['bytes',0],['bytes',-1],['bytes',1.5],['bytes',Infinity],['bytes',Number.MAX_SAFE_INTEGER+1],['path','../escape'],['mode','120000'],['commit','main'],['git_blob_oid','bad'],['sha256','bad']]){
+  const bad=structuredClone(ledger);bad.current_rebind[field]=value;
+  assert.throws(()=>verify(bad),/rebind/);
+ }
+ for(const alter of [x=>x.current_targets=[],x=>x.current_targets.push(x.current_targets[0]),x=>x.current_targets[0].pixelIndex=2,x=>x.current_targets[0].geometry.coordinates[0][1][0]=9]){
+  const bad=structuredClone(ledger);alter(bad);assert.throws(()=>verify(bad),/target|pointset/i);
+ }
+});
+
+test('loaded original native part above 32 MiB retains exact words, hashes and complete extents',async()=>{
+ const f=await metadataRuntimeFixture({nativeRunWords:32*1024*1024/4+2}),before=f.base.runs.slice();
+ assert.equal(f.base.runs.byteLength,32*1024*1024+8);
+ const actual=await loadAdditiveNativePatch(f.data,structuredClone(f.currentFeatures),f.base,{fetcher:f.fetcher});
+ assert.deepEqual(f.base.runs,before);before[f.base.rows[3*2]*2+1]=4;
+ assert.deepEqual(actual.runs,before);assert.deepEqual(actual.rows,f.base.rows);
+ assert.equal(pickOwnership(actual,3,3),1);assert.equal(pickOwnership(actual,100,0),2);
+ const key='./'+f.data.additiveRelease.base_manifest.path,manifest=JSON.parse(f.transports.get(key));
+ for(const alter of [p=>p.words=0,p=>p.words=-1,p=>p.words=.5,p=>p.words=Number.MAX_SAFE_INTEGER,p=>p.offset=1,p=>p.words+=2,p=>p.words-=2,p=>p.decoded_sha256='0'.repeat(64)]){
+  const bad=structuredClone(manifest);alter(bad.parts.find(p=>p.kind==='runs'));
+  const raw=f.json(bad),data=structuredClone(f.data);data.additiveRelease.base_manifest=f.asset(key.slice(2),raw);data.pixelMap.canonical_grid_sha256=data.additiveRelease.base_manifest.sha256;
+  await assert.rejects(loadAdditiveNativePatch(data,structuredClone(f.currentFeatures),f.base,{fetcher:async path=>path===key?new Response(raw):f.fetcher(path)}),/native asset closure|native ownership|selected manifest/);
+ }
 });

@@ -1010,21 +1010,27 @@ fixture success does not imply actual emitted-map or GPU/Canvas acceptance.
 
 ### Remaining bounds outside this additive-asset correction
 
-This is not a claim that the application is free of arbitrary limits. The
-following remaining fixed guards need their own concrete justification or
+This is not a claim that the application is free of arbitrary limits.
+
+The source-metadata reader, browser reference-metadata descriptor, already-loaded
+original native parts, inert current-rebind pin and encoded latitude input now
+use exact whole lengths/hashes rather than the former 32 MiB ceilings. Native
+word coverage, the fixed normative latitude table and real runtime failures
+remain mandatory. Package-image reads forward a supplied exact byte descriptor;
+readers without one retain their existing fallback. The new boundary controls
+are synthetic and do not claim a production-size outage or scientific gain.
+
+The following remaining fixed guards need their own concrete justification or
 exact-descriptor replacement; merely belonging to another format is insufficient:
 
-- `effective-footprint.js`: 32 MiB on the reference-metadata asset, original
-  native manifest chunk decoded bytes, and the inert current-rebind custody pin.
-  Exact decoded native words and complete coverage are genuine integrity checks;
-  the additional 32 MiB constant is not established as an engine limit.
+- `effective-footprint.js`: prepared-context chunks retain their separate 32 MiB
+  decoded-size guard; this correction does not remove that context contract.
 - `selected-delivery-smoke.mjs`: 32 MiB decoded catalogue chunks, plus legacy
   `repositoryReader` fallback for unpinned top-level files and native startup
   parts without encoded byte declarations. These are policy defaults, not
   proven platform limits.
-- `selected-reference-metadata.mjs`: 32 MiB encoded/decoded original metadata
-  source inputs. `prepare-delivery-handoff.mjs` still bounds the separate current
-  release registry decode at 64 MiB and its small release pointer at 4 KiB.
+- `prepare-delivery-handoff.mjs` still bounds the separate current release
+  registry decode at 64 MiB and its small release pointer at 4 KiB.
 - Cloudflare Workers Static Assets and Pages have a real 25 MiB (26,214,400
   bytes) per-file limit. It applies to published encoded files, not decoded
   scientific JSON. See the lossless transport boundary below.

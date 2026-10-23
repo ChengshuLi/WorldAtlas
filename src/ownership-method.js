@@ -18,7 +18,7 @@ export function ownershipMetadata(manifest, {requireNative = false, expectedRefe
         latitude.path !== 'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz' ||
         !/^[a-f0-9]{40}$/.test(latitude.commit ?? '') || !hash(latitude.sha256) ||
         latitude.decoded_sha256 !== LATITUDE_DIGEST || latitude.decoded_bytes !== manifest.size * 8 ||
-        !Number.isSafeInteger(latitude.bytes) || latitude.bytes < 1 || latitude.bytes > 32 * 1024 * 1024)
+        !Number.isSafeInteger(latitude.bytes) || latitude.bytes < 1)
       throw Error('Native ownership rule input is missing or incompatible');
     if (!hash(manifest.footprints_sha256) || !hash(manifest.hierarchy_sha256) ||
         typeof manifest.geographic_release !== 'string' || !manifest.geographic_release.startsWith('geography:'))

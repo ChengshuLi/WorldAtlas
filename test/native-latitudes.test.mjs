@@ -62,3 +62,51 @@ test('packager rejects altered pinned input metadata without creating output', a
     expectedReference: reference, destination}), /input changed/);
   await assert.rejects(fs.access(destination));
 });
+
+test('exact latitude encoding above 32 MiB survives package-image and browser readers with the fixed original table',async()=>{
+ const {createHash}=await import('node:crypto');
+ const {readPinnedBuildFile}=await import('../scripts/native-ownership/read-pinned-build-file.mjs');
+ const sha=raw=>createHash('sha256').update(raw).digest('hex');
+ const original=await fs.readFile(input.path),header=Buffer.from(original.subarray(0,10));
+ assert.equal(header[3],0);header[3]=16;
+ // A legal gzip comment changes only encoded transport size; the normative
+ // decoded words/digest stay byte-identical. No giant synthetic latitude grid.
+ const encoded=Buffer.concat([header,Buffer.alloc(32*1024*1024,0x61),Buffer.from([0]),original.subarray(10)]);
+ const pin={...input,bytes:encoded.length,sha256:sha(encoded)},selected={...manifest,native_latitudes:pin};
+ assert.ok(encoded.length>32*1024*1024);
+ const image=path.join(root,'large-image'),source=path.join(image,input.path),destination=path.join(root,'large-output');
+ await fs.mkdir(path.dirname(source),{recursive:true});await fs.writeFile(source,encoded,{flag:'wx'});
+ const cwd=process.cwd(),old=process.env.WORLDATLAS_PACKAGE_STAGE;
+ try{
+  process.chdir(image);process.env.WORLDATLAS_PACKAGE_STAGE=image;
+  const packaged=await packageNativeLatitudes({manifest:selected,expectedReference:reference,destination});
+  assert.equal(packaged.receipt.bytes,encoded.length);assert.equal(packaged.receipt.decoded_bytes,262166*8);
+  assert.equal(packaged.receipt.decoded_sha256,input.decoded_sha256);
+  assert.equal(sha(await fs.readFile(path.join(destination,packaged.native_latitudes.transport_path))),pin.sha256);
+  const table=await loadNativeLatitudes({...selected,native_latitudes:packaged.native_latitudes},reference,async()=>new Response(encoded));
+  const decoded=gunzipSync(original);
+  assert.equal(table.length,262166);for(let y=0;y<table.length;y++)assert.equal(table[y],decoded.readDoubleLE(y*8));
+  for(const bytes of [pin.bytes-1,pin.bytes+1,0,-1,.5,Infinity,Number.MAX_SAFE_INTEGER+1])
+   assert.throws(()=>readPinnedBuildFile({...pin,root:image,bytes}),/budget|byte count|descriptor/i);
+  assert.throws(()=>readPinnedBuildFile({...pin,root:image,sha256:'0'.repeat(64)}),/snapshot bytes differ/);
+  const unpinned={...pin,root:image};delete unpinned.bytes;
+  assert.throws(()=>readPinnedBuildFile(unpinned),/budget/,'Legacy unpinned fallback is unchanged');
+  await fs.unlink(source);await fs.symlink(path.join(destination,packaged.native_latitudes.transport_path),source);
+  assert.throws(()=>readPinnedBuildFile({...pin,root:image}),/ordinary|symlink/);
+ }finally{
+  process.chdir(cwd);if(old===undefined)delete process.env.WORLDATLAS_PACKAGE_STAGE;else process.env.WORLDATLAS_PACKAGE_STAGE=old;
+  await fs.rm(image,{recursive:true,force:true});await fs.rm(destination,{recursive:true,force:true});
+ }
+});
+
+test('latitude descriptor precision and normative format remain mandatory before any fetch',async()=>{
+ const selected={...manifest,native_latitudes:{...input,transport_path:'native-v1/native-row-latitudes.f64le.gz'}};
+ let reads=0;const fetcher=async()=>{reads++;throw Error('must not fetch');};
+ for(const change of [m=>m.size++,m=>m.coordinateBits--,m=>m.native_latitudes.decoded_bytes++,m=>m.native_latitudes.decoded_sha256='0'.repeat(64),
+  ...[0,-1,.5,NaN,Infinity,Number.MAX_SAFE_INTEGER+1].map(bytes=>m=>m.native_latitudes.bytes=bytes)]){
+  const bad=structuredClone(selected);change(bad);await assert.rejects(loadNativeLatitudes(bad,reference,fetcher),/missing or incompatible/);
+ }
+ assert.equal(reads,0);
+ const failure=new RangeError('Array buffer allocation failed');
+ await assert.rejects(loadNativeLatitudes(selected,reference,async()=>{throw failure;}),error=>error===failure);
+});

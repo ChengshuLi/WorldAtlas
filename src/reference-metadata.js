@@ -493,8 +493,8 @@ export function nativeReferenceForData(data,hashValue) {
   require(metadata.version===1,'Unsupported reference metadata');
   exactKeys(metadata.asset,['path','bytes','sha256'],'Reference metadata asset');
   require(metadata.asset.path==='reference-metadata/current.json'&&Number.isSafeInteger(metadata.asset.bytes)
-    &&metadata.asset.bytes>0&&metadata.asset.bytes<=32*1024*1024&&hex.test(metadata.asset.sha256),
-  'Unsafe/oversized reference metadata asset');
+    &&metadata.asset.bytes>0&&hex.test(metadata.asset.sha256),
+  'Unsafe reference metadata asset');
   for(const reference of [metadata.native_reference,metadata.reference]){
     exactKeys(reference,['id','footprints_sha256','hierarchy_sha256'],'Reference metadata reference');
     require(typeof reference.id==='string'&&reference.id.startsWith('geography:')

@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {gunzipSync} from 'node:zlib';
+import {gunzipSync,gzipSync} from 'node:zlib';
 import {gridProjection,appendRelease,composeEvidence,applyInstall,safe,patchJSONText,validateMetadataStages} from '../scripts/install-macro-reference.mjs';
 import {preparedEvidenceJSON} from '../src/prepared-evidence.js';
 import {assertReferenceOnlyFeatureChange,assertReferenceOnlyLocationChange,projectReferenceFeatures,projectReferenceOwners,assertAppliedReferenceProperties} from '../src/reference-metadata.js';
@@ -267,4 +267,45 @@ test('generated application revision requires its explicit migration result and 
  const source={...expected,metadata:{...expected.metadata,reference_revision:'original source literal'}};
  assert.doesNotThrow(()=>assertAppliedReferenceProperties(source,source,{referenceRevision:revision}));
  assert.throws(()=>assertAppliedReferenceProperties({...source,metadata:{...source.metadata,reference_revision:revision}},source,{referenceRevision:revision}),/complete applied source/);
+});
+
+test('whole pinned metadata above 32 MiB is bounded by exact encoded and decoded identities',()=>{
+ for(const compressed of [false,true]){
+  const f=wholeMetadataProjectionFixture(),original=f.config.receipts[0],body=f.bodies.get(original.commit+':'+original.path);
+  const decoded=Buffer.concat([body,Buffer.alloc(32*1024*1024+1-body.length,0x20)]),raw=compressed?gzipSync(decoded):decoded;
+  const pin={...original,bytes:raw.length,sha256:sha(raw),git_blob_oid:createHash('sha1').update('blob '+raw.length+'\0').update(raw).digest('hex'),
+   ...(compressed?{encoding:'gzip',decoded_bytes:decoded.length,decoded_sha256:sha(decoded)}:{})};
+  f.config.receipts=[pin];f.bodies.set(pin.commit+':'+pin.path,raw);
+  const projection=prepareReferenceMetadataProjection(f.config),result=validateReferenceMetadataProjection({...f.config,projection});
+  assert.deepEqual(result.units,f.afterUnits);assert.equal(result.owners[0].province_id,'new');assert.deepEqual(projection.location_changes,f.changes);
+  for(const bytes of [raw.subarray(0,-1),Buffer.concat([raw,Buffer.from(' ')])]){
+   f.bodies.set(pin.commit+':'+pin.path,bytes);assert.throws(()=>validateReferenceMetadataProjection({...f.config,projection}),/Whole reference metadata input differs/);
+  }
+  f.bodies.set(pin.commit+':'+pin.path,raw);
+  for(const field of ['sha256','git_blob_oid']){
+   const bad=structuredClone(projection);bad.receipts[0][field]='0'.repeat(field==='sha256'?64:40);
+   assert.throws(()=>validateReferenceMetadataProjection({...f.config,projection:bad}),/Whole reference metadata input differs/);
+  }
+  if(compressed)for(const change of [p=>p.decoded_bytes--,p=>p.decoded_bytes++,p=>p.decoded_sha256='0'.repeat(64)]){
+   const bad=structuredClone(projection);change(bad.receipts[0]);
+   assert.throws(()=>validateReferenceMetadataProjection({...f.config,projection:bad}),/larger than|Whole decoded reference metadata differs/);
+  }
+ }
+});
+
+test('whole metadata descriptor precision, encoding and ordinary identity failures remain fatal',()=>{
+ const f=wholeMetadataProjectionFixture(),projection=prepareReferenceMetadataProjection(f.config);
+ for(const [field,value]of [['bytes',0],['bytes',-1],['bytes',.5],['bytes',Infinity],['bytes',Number.MAX_SAFE_INTEGER+1],['path','../escape'],['mode','120000'],['commit','main'],['git_blob_oid','bad'],['sha256','bad']]){
+  const bad=structuredClone(projection);bad.receipts[0][field]=value;
+  assert.throws(()=>prepareReferenceMetadataProjection({...f.config,receipts:bad.receipts}),/whole reference metadata pin/);
+ }
+ const raw=f.bodies.get(projection.receipts[0].commit+':'+projection.receipts[0].path),encoded=gzipSync(raw);
+ const pin={...projection.receipts[0],bytes:encoded.length,sha256:sha(encoded),git_blob_oid:createHash('sha1').update('blob '+encoded.length+'\0').update(encoded).digest('hex'),encoding:'gzip',decoded_bytes:raw.length,decoded_sha256:sha(raw)};
+ f.bodies.set(pin.commit+':'+pin.path,encoded);
+ for(const [field,value]of [['encoding','br'],['decoded_bytes',0],['decoded_bytes',-1],['decoded_bytes',.5],['decoded_bytes',Infinity],['decoded_bytes',Number.MAX_SAFE_INTEGER+1],['decoded_sha256','bad']]){
+  const bad=structuredClone(projection);bad.receipts=[{...pin,[field]:value}];
+  assert.throws(()=>prepareReferenceMetadataProjection({...f.config,receipts:bad.receipts}),/Bounded reference metadata decoding/);
+ }
+ const failure=new RangeError('Array buffer allocation failed');
+ assert.throws(()=>prepareReferenceMetadataProjection({...f.config,read:()=>{throw failure;}}),error=>error===failure);
 });

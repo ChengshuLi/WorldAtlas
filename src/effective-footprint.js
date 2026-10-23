@@ -375,8 +375,8 @@ export async function loadAdditiveNativePatch(data,features,base,{fetcher=fetch,
   for(const kind of ['rows','runs']){
     const words=base[kind];require(words instanceof Uint32Array,'Missing actual decoded native asset');let offset=0;
     for(const part of originalManifest.parts.filter(part=>part.kind===kind).sort((a,b)=>a.offset-b.offset)){
-      require(part.offset===offset&&Number.isSafeInteger(part.words)&&part.words>0&&part.words*4<=32*1024*1024
-        &&offset+part.words<=words.length&&hex.test(part.decoded_sha256),'Incomplete original native asset closure');
+      require(part.offset===offset&&Number.isSafeInteger(part.words)&&part.words>0
+        &&part.words<=words.length-offset&&hex.test(part.decoded_sha256),'Incomplete original native asset closure');
       const raw=new Uint8Array(words.buffer,words.byteOffset+offset*4,part.words*4);
       require(Array.from(sha256(raw),byte=>byte.toString(16).padStart(2,'0')).join('')===part.decoded_sha256,'Decoded native ownership differs from original selected manifest');offset+=part.words;
     }
@@ -464,7 +464,7 @@ function versionedCurrentTargets(ledger) {
   exactKeys(pin,['commit','path','mode','git_blob_oid','bytes','sha256'],'Current rebind ordinary pin');
   require(/^[a-f0-9]{40}$/.test(pin.commit)&&/^[a-f0-9]{40}$/.test(pin.git_blob_oid)&&pin.mode==='100644'
     &&typeof pin.path==='string'&&!pin.path.includes('\\')&&pin.path.split('/').every(p=>p&&p!=='.'&&p!=='..')
-    &&Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&pin.bytes<=32*1024*1024&&hex.test(pin.sha256),'Incomplete current rebind custody');
+    &&Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&hex.test(pin.sha256),'Incomplete current rebind custody');
   // This pin is independently authenticated by the selected authority reader.
   // Browser consumption relies on the selected whole ledger, never infers a
   // source approval or qualification from the shape of this pin.
