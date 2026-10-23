@@ -71,8 +71,10 @@ delete sourceEvidence.base_reference; delete sourceEvidence.native_contract; del
 const currentSelection = reader.json(reader.pin(head, 'data/ownership-selection.json'));
 const currentManifestPin = reader.pin(head, currentSelection.native_selection.manifest_path);
 const currentManifest = reader.json(currentManifestPin);
-sourceEvidence.owner_roster = currentManifest.original_assets?.bounds;
-if (!sourceEvidence.owner_roster) throw new Error('Selected manifest has no original owner-roster pin');
+const ownerRoster = currentManifest.original_assets?.bounds;
+if (!ownerRoster?.commit || !ownerRoster.path || !ownerRoster.sha256) throw new Error('Selected manifest has no original owner-roster locator');
+sourceEvidence.owner_roster = reader.pin(ownerRoster.commit, ownerRoster.path);
+if (sourceEvidence.owner_roster.sha256 !== ownerRoster.sha256) throw new Error('Selected owner-roster hash differs from manifest');
 sourceEvidence.targets = targets;
 const config = {version:1, selector:{commit:head,path:'data/ownership-selection.json'}, compact_territorial_exclusions:true,
   territorial_exclusion_families:familyParts.map(f=>f.source_id), source_evidence:sourceEvidence};
