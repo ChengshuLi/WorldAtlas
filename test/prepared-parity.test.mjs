@@ -209,7 +209,7 @@ test('actual current package import closure rejects an undeclared new helper bef
 test('an undeclared import in the actual current consumer fails current-input preflight',t=>{
  const {root:source,definition,entries}=actualBuilderClosures(),actual=entries.get('static');
  assert.deepEqual(actual.errors,[]);
- const root=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-joint-package-boundary-'));
+ const root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-joint-package-boundary-')));
  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
  for(const name of actual.files){const target=path.join(root,name);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(path.join(source,name),target,fs.constants.COPYFILE_EXCL);}
  const undeclared='coordination/undeclared-acceptance-probe.mjs';
