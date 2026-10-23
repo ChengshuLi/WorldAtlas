@@ -108,9 +108,10 @@ global serialization across every historical writer.
 
 For an authorized live reservation, use native `gh workflow run issue-claims.yml`
 with the documented issue, worker, branch, action, claim ID, request ID and live-work
-inputs. Observe the exact run using `gh run view` / `gh run watch`, then read back
-its canonical bot comment and operation state. Preserve the original IDs when
-reconciling an uncertain dispatch; never infer acceptance from a queued run or
+inputs. Follow the existing [bounded observation guidance](MERGE_QUEUE_CLIENT.md#find-the-execution-and-inspect-its-outcome):
+use one cached exact-run observer or one interactive watch with an explicit interval
+of at least 60 seconds. Then read back its canonical bot comment and operation state.
+Preserve the original IDs when reconciling an uncertain dispatch; never infer acceptance from a queued run or
 blindly redispatch a mutation. Only the holder can renew/release. An open PR or
 live operation blocks release/rotation; expiry never permits takeover or proves
 cleanup. Recovery still requires explicit approval and preservation of earlier
