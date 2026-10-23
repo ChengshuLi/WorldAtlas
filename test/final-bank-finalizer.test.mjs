@@ -341,3 +341,74 @@ test('compatibility roles that also serve current E retain complete body acquisi
  const outputs=finalizeDelivery({version:2,selector:{commit:at,path:'data/ownership-selection.json'},package_inputs:{commit:at,path:'.github/package-inputs.json'}},reader);
  await assert.rejects(prepareFinalizedStartupOwnership(outputs),/required current-E member acquired/);
 });
+
+
+test('finalizer retires exact sparse current-bank preimages through normal staging and resume',async t=>{
+ const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit),at=f.commit();f.api.releaseCheckpoint(before.state);
+ const added=await appendNativeAuthority(f,{owner:1,name:'coordination/engineering/sparse-retirement',completedConstructor:true});
+ f.save('data/ownership-selection.json',migration.selection);f.save('coordination/engineering/sparse-retirement/registry.json',{version:1,kind:'retained-rule-authority-registry-v1',entries:[added.entry]});
+ const source=f.commit(),hook=f.pin('coordination/engineering/sparse-retirement/registry.json',source);
+ const retired=[migration.index.preparedOwnership.context_parts[0].path,migration.index.pixelMap.parts.find(p=>p.kind==='runs').path].map(p=>bank+p);
+ const active=new Set([...migration.index.pixelMap.parts,...migration.index.preparedOwnership.context_parts].map(p=>p.path));
+ const fixed=bank+migration.index.compatibility_files.find(p=>!active.has(p.path)&&p.path.endsWith('startup-runs-999.bin.gz')).path;
+ const fixedEntry=f.git('ls-files','--stage','-z','--',fixed).toString();
+ execFileSync('git',['sparse-checkout','set','--no-cone','--stdin'],{cwd:f.root,input:`/*\n${[...retired,fixed].map(p=>'!/'+p).join('\n')}\n`,stdio:'pipe'});
+ for(const name of [...retired,fixed]){assert(!fs.existsSync(path.join(f.root,name)));assert.equal(f.git('ls-files','-v','--',name).toString(),'S '+name+'\n');}
+ const originalIndex=f.git('ls-files','--stage','-v','-z').toString().split('\0').filter(Boolean);
+ const reader=pinReader(f.root),outputs=finalizeDelivery({version:2,selector:{commit:at,path:'data/ownership-selection.json'},package_inputs:{commit:at,path:'.github/package-inputs.json'},change_evidence:hook},reader);
+ await prepareFinalizedStartupOwnership(outputs);
+ const index=JSON.parse(outputs['startup-ownership.json']);
+ for(const name of retired)assert(!index.files.some(p=>bank+p.path===name),'The control must actually retire this old current part');
+ const destination='coordination/engineering/final-bank-test/sparse-retired';
+ publishFinalizedDelivery(f.root,destination,outputs,{phase:'finalize'});
+ for(const name of retired){assert(!fs.existsSync(path.join(f.root,name)));assert.equal(f.git('ls-files','--stage','--',name).length,0,'Sparse retirement must remove the obsolete index entry');}
+ assert.deepEqual(f.git('ls-files','--stage','-v','-z').toString().split('\0').filter(Boolean),
+  originalIndex.filter(row=>!retired.some(name=>row.endsWith('\t'+name))),'Every unrelated index identity and flag remains exact');
+ assert.equal(f.git('ls-files','--stage','-z','--',fixed).toString(),fixedEntry);assert.equal(f.git('ls-files','-v','--',fixed).toString(),'S '+fixed+'\n');
+ publishFinalizedDelivery(f.root,destination,outputs,{phase:'finalize'},true);
+ f.git('add','-A');const committed=f.commit();
+ const actual=f.git('ls-tree','-r','--name-only',committed,'--',bank).toString().trim().split('\n').sort();
+ assert.deepEqual(actual,[bank+'index.json',...index.files.map(p=>bank+p.path)].sort(),'Normal staging commits exactly the final bank, without retired sparse URLs');
+ assert.equal(f.git('ls-files','--stage','-z','--',fixed).toString(),fixedEntry);assert.equal(f.git('ls-files','-v','--',fixed).toString(),'S '+fixed+'\n');
+ publishFinalizedDelivery(f.root,destination,outputs,{phase:'finalize'},true);
+});
+
+
+test('retiring current-bank paths refuse non-sparse loss, staged replacements and changed index custody',async t=>{
+ const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit),at=f.commit();f.api.releaseCheckpoint(before.state);
+ const added=await appendNativeAuthority(f,{owner:1,name:'coordination/engineering/retirement-guards',completedConstructor:true});
+ f.save('data/ownership-selection.json',migration.selection);f.save('coordination/engineering/retirement-guards/registry.json',{version:1,kind:'retained-rule-authority-registry-v1',entries:[added.entry]});
+ const source=f.commit(),hook=f.pin('coordination/engineering/retirement-guards/registry.json',source);
+ const name=bank+migration.index.preparedOwnership.context_parts[0].path,file=path.join(f.root,name),original=fs.readFileSync(file),oid=f.git('rev-parse',source+':'+name).toString().trim();
+ const reader=pinReader(f.root),outputs=finalizeDelivery({version:2,selector:{commit:at,path:'data/ownership-selection.json'},package_inputs:{commit:at,path:'.github/package-inputs.json'},change_evidence:hook},reader);
+ await prepareFinalizedStartupOwnership(outputs);assert(!JSON.parse(outputs['startup-ownership.json']).files.some(p=>bank+p.path===name));
+ const destination='coordination/engineering/final-bank-test/retirement-guards',publish=(resume=false)=>publishFinalizedDelivery(f.root,destination,outputs,{phase:'finalize'},resume);
+ const pristine=()=>{f.git('update-index','--no-assume-unchanged','--no-skip-worktree','--',name);fs.writeFileSync(file,original,{mode:0o644});fs.chmodSync(file,0o644);f.git('add','--',name);};
+ for(const mutation of ['missing','deleted-index','staged-bytes','staged-mode','assume-unchanged']){
+  if(mutation==='missing')fs.unlinkSync(file);
+  if(mutation==='deleted-index')f.git('update-index','--force-remove','--',name);
+  if(mutation==='staged-bytes'){fs.writeFileSync(file,Buffer.from('wrong staged input'));f.git('add','--',name);fs.writeFileSync(file,original);}
+  if(mutation==='staged-mode')f.git('update-index','--chmod=+x','--',name);
+  if(mutation==='assume-unchanged')f.git('update-index','--assume-unchanged','--',name);
+  assert.throws(()=>publish(),/Canonical output changed outside|Indexed final-bank retirement differs/,mutation);
+  assert(!fs.existsSync(path.join(f.root,destination)),'Invalid preimage refuses before staging');
+  if(mutation==='deleted-index')f.git('update-index','--add','--cacheinfo',`100644,${oid},${name}`);
+  pristine();
+ }
+ fs.writeFileSync(file,Buffer.from('different committed preimage'));f.commit();
+ assert.throws(()=>publish(),/Committed canonical baseline differs/);pristine();f.commit();
+ f.git('rm','--',name);f.commit();f.save(name,original);f.git('add','--',name);
+ assert.throws(()=>publish(),/Indexed final-bank retirement differs/,'A removed HEAD path cannot conceal a newly staged replacement');f.commit();
+ execFileSync('git',['sparse-checkout','set','--no-cone','--stdin'],{cwd:f.root,input:`/*\n!/${name}\n`,stdio:'pipe'});
+ assert(!fs.existsSync(file));assert.equal(f.git('ls-files','-v','--',name).toString(),'S '+name+'\n');
+ f.save(name,Buffer.from('changed sparse body'));assert.throws(()=>publish(),/Canonical output changed outside/);fs.unlinkSync(file);
+ fs.symlinkSync('missing-sentinel',file);assert.throws(()=>publish(),/Nonordinary canonical output/);fs.unlinkSync(file);
+ assert(!fs.existsSync(path.join(f.root,destination)),'Sparse byte/type refusals precede staging');
+ const selector=fs.readFileSync(path.join(f.root,'data/ownership-selection.json')),write=fs.writeFileSync;let changed=false;
+ fs.writeFileSync=function(filename,...args){const result=write.call(this,filename,...args);
+  if(!changed&&typeof filename==='string'&&filename.includes(destination)){changed=true;f.git('update-index','--force-remove','--',name);}return result;};
+ try{assert.throws(()=>publish(),/retirement index changed before adoption/);assert(changed);}finally{fs.writeFileSync=write;}
+ assert.deepEqual(fs.readFileSync(path.join(f.root,'data/ownership-selection.json')),selector,'Staging-time index changes refuse before selector adoption');
+ f.git('update-index','--add','--cacheinfo',`100644,${oid},${name}`);f.git('update-index','--skip-worktree','--',name);
+ publish(true);assert.equal(f.git('ls-files','--stage','--',name).length,0);
+});

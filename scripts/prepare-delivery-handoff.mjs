@@ -1555,7 +1555,7 @@ export async function prepareFinalizedStartupOwnership(outputs) {
     for (const [name, bytes] of originalBodies) if (!bodies.has(name)) {
       need([2,3].includes(previous.version) && [...previous.pixelMap.parts, ...previous.preparedOwnership.context_parts].some(pin => pin.path === name),
         'Only inactive prior final-bank operands may retire');
-      adoption.set(prefix + name, {path: prefix + name, bytes: null, expected: undefined, previous: visitProduct(bytes), kind: 'retired'});
+      adoption.set(prefix + name, {path: prefix + name, bytes: null, expected: undefined, previous: visitProduct(bytes), git_blob_oid: tree.get(name), kind: 'retired'});
     }
     for (const [name, bytes] of [...bodies, ['index.json', indexBytes]]) {
       const target = prefix + name, expected = visitProduct(bytes), old = adoption.get(target);
@@ -1589,12 +1589,15 @@ export function publishFinalizedDelivery(root, destination, outputs, binding, re
     'Authenticated complete finalization outputs required');
   need(!plan.startupRequired || plan.startupPrepared, 'Native finalization requires the finished startup bank before publication');
   const reader = plan.reader, head = reader.git('rev-parse', 'HEAD').toString().trim();
-  const retainedSparse = row => {
-    const entry = reader.git('ls-files', '--stage', '-t', '-z', '--', row.path).toString();
+  const indexed = row => reader.git('ls-files', '--stage', '-v', '-z', '--', row.path).toString();
+  const exactIndex = (row, entry, role) => {
     const identity = `100644 ${row.git_blob_oid} 0\t${row.path}\0`;
-    need(entry === 'H ' + identity || entry === 'S ' + identity,
-      'Indexed retained compatibility differs: ' + row.path);
+    need(entry === 'H ' + identity || entry === 'S ' + identity, `Indexed ${role} differs: ` + row.path);
     return entry === 'S ' + identity;
+  };
+  const retainedSparse = row => {
+    const entry = indexed(row);
+    return exactIndex(row, entry, 'retained compatibility');
   };
   const rows = plan.adoption.map(row => {
     if (row.retained) {
@@ -1610,7 +1613,18 @@ export function publishFinalizedDelivery(root, destination, outputs, binding, re
       ? same(current, row.previous) || same(current, row.expected)
       : current === undefined || same(current, row.expected),
     'Committed canonical baseline differs from finalization: ' + row.path);
-    return {...row, previous: current ?? row.previous, allowMissing: row.kind === 'input' || row.kind === 'retired' && current === undefined};
+    if (row.kind === 'retired') {
+      const retirementIndex = indexed(row);
+      // A genuine sparse omission is not an ordinary worktree deletion. Resume
+      // may also observe our already staged retirement, but never a replacement.
+      const removed = retirementIndex === '' && (current === undefined
+        || resume && fs.existsSync(path.join(root, destination)));
+      need(current !== undefined || retirementIndex === '', 'Indexed final-bank retirement differs: ' + row.path);
+      const sparseRetirement = !removed && exactIndex(row, retirementIndex, 'final-bank retirement');
+      return {...row, previous: current ?? row.previous, retirementIndex, sparseRetirement,
+        allowMissing: current === undefined || sparseRetirement};
+    }
+    return {...row, previous: current ?? row.previous, allowMissing: row.kind === 'input'};
   });
   need(rows.every(row => row.path !== destination && !row.path.startsWith(destination + '/')
     && !destination.startsWith(row.path + '/')),
@@ -1621,7 +1635,23 @@ export function publishFinalizedDelivery(root, destination, outputs, binding, re
   need(reader.git('rev-parse', 'HEAD').toString().trim() === head, 'Finalization HEAD changed before adoption');
   for (const row of rows.filter(row => row.retained)) need(retainedSparse(row) === row.allowMissing,
     'Retained compatibility index changed before adoption: ' + row.path);
+  const retired = rows.filter(row => row.kind === 'retired');
+  const recheckRetirements = () => {
+    for (const row of retired) need(indexed(row) === row.retirementIndex,
+      'Final-bank retirement index changed before adoption: ' + row.path);
+  };
+  recheckRetirements();
   adopt();
+  // Normal git add ignores excluded sparse paths even after clearing their
+  // skip-worktree bit. Retire only these exact, now-absent indexed preimages.
+  const sparseRetirements = retired.filter(row => row.sparseRetirement);
+  if (sparseRetirements.length) {
+    recheckRetirements();
+    for (const row of sparseRetirements) need(!fs.lstatSync(path.join(root, row.path), {throwIfNoEntry: false}),
+      'Retired sparse output reappeared before staging: ' + row.path);
+    reader.git('update-index', '--force-remove', '--', ...sparseRetirements.map(row => row.path));
+    for (const row of sparseRetirements) need(indexed(row) === '', 'Sparse retirement was not staged: ' + row.path);
+  }
   return publication;
 }
 

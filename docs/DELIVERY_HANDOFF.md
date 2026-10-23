@@ -64,6 +64,13 @@ qualification input, not a browser/build product. Version-2 finalization has no
 for the next repair. Checker upgrades cannot certify their own simultaneous map
 changes; that comparison executes the accepted-main checker.
 
+When a replaced current-bank member is absent under sparse checkout, the finalizer
+still authenticates its complete Git body and exact ordinary index entry. It
+removes only that proven sparse retirement from the index after canonical adoption,
+so normal staging cannot retain an obsolete bank URL. Other index entries and
+unchanged compatibility omissions remain untouched; non-sparse loss or a staged
+replacement still refuses. Exact interrupted resume remains supported.
+
 The same staging, full-set preflight, exact interrupted resume and selector-last
 adoption below apply. The new expectations point to the complete current bank;
 there is no current-ledger expectation. Later final-to-final selected-data changes
