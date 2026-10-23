@@ -20,3 +20,6 @@ These 92 keys belong to the existing original COD repair-evaluation scope of 3,9
 
 - `oicha-33-bukonjo-busongora-publication-20261023/` — exact 33-key proposal, its existing independent review, and aggregate UBOS polygon-overlap statistics.
 - `kasongo-lunda-59-publication-20261023/` — exact 59-key proposal, research summary, independent review, and stock diagnostic outputs.
+
+
+Publication-status correction: the user approved publication of these exact 33 Oïcha and 59 Kasongo-Lunda project-cell identifiers and derived findings. No scientific disposition changed: all 92 remain held, with root acceptance and credit pending. No raw source polygons or map images are included.
