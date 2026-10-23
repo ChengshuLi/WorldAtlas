@@ -184,7 +184,7 @@ export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readW
   }
   return finish(payload);
  };
- const api = async(route, method='GET', body, {maxResponseBytes} = {}) => {
+ const read = async(route, method='GET', body, {maxResponseBytes} = {}) => {
   if(maxResponseBytes!==undefined&&(!Number.isSafeInteger(maxResponseBytes)||maxResponseBytes<=0||method!=='GET'||body!==undefined))
    throw Error('Invalid caller response-byte admission');
   let lastQuota;
@@ -205,6 +205,69 @@ export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readW
     await sleep(delay);
    }
   }
+ };
+ // GitHub caps recursive tree responses independently of repository validity.
+ // Decompose only an explicitly truncated immutable GET, discarding its rows.
+ // Keep raw HTTP snapshots and each child's retries separate from this walk.
+ const api = async(route,method='GET',body,options={}) => {
+  const value=await read(route,method,body,options);
+  const match=/^(\/repos\/[\w.-]+\/[\w.-]+\/git\/trees\/)([a-f0-9]{40})\?recursive=1$/.exec(route);
+  // Bounded callers retain their original refusal; completion cannot enlarge
+  // an explicit response allowance into a multi-response aggregate.
+  if(method!=='GET'||body!==undefined||!match||options.maxResponseBytes!==undefined||value?.truncated!==true)return value;
+  const inventories=new Map(),oid=value=>/^[a-f0-9]{40}$/.test(value??'');
+  const need=(ok,message)=>{if(!ok)throw Error(message);};
+  const rows=(response,sha,recursive)=>{
+   need(response?.sha===sha&&typeof response.truncated==='boolean'&&Array.isArray(response.tree),
+     'Invalid immutable tree response identity');
+   const entries=new Map();
+   for(const row of response.tree){
+    const parts=typeof row.path==='string'?row.path.split('/'):[];
+    need(parts.length>0&&parts.every(part=>part&&part!=='.'&&part!=='..'&&!/[\x00-\x1f\x7f\\]/.test(part))
+      &&(recursive||parts.length===1)&&oid(row.sha)&&!entries.has(row.path)
+      &&(row.type==='tree'&&row.mode==='040000'||row.type==='commit'&&row.mode==='160000'
+        ||row.type==='blob'&&['100644','100755','120000'].includes(row.mode)
+          &&Number.isSafeInteger(row.size)&&row.size>=0),'Invalid or duplicate immutable tree entry');
+    entries.set(row.path,row);
+   }
+   if(recursive)for(const [name,row]of entries){
+    if(row.type==='tree')need(row.sha!==sha,'Cyclic immutable tree inventory');
+    for(let at=name.indexOf('/');at>=0;at=name.indexOf('/',at+1)){
+     const parent=entries.get(name.slice(0,at));
+     need(parent?.type==='tree','Incomplete immutable tree parent inventory');
+     if(row.type==='tree')need(row.sha!==parent.sha,'Cyclic immutable tree inventory');
+    }
+   }
+   return entries;
+  };
+  const collect=async(sha,initial,ancestors)=>{
+   need(!ancestors.has(sha),'Cyclic immutable tree inventory');
+   if(inventories.has(sha))return inventories.get(sha);
+   const response=initial??await read(match[1]+sha+'?recursive=1');
+   need(response?.sha===sha&&typeof response.truncated==='boolean'&&Array.isArray(response.tree),
+     'Invalid immutable tree response identity');
+   let entries;
+   if(response.truncated===false){
+    entries=rows(response,sha,true);
+    for(const row of entries.values())if(row.type==='tree')need(!ancestors.has(row.sha),'Cyclic immutable tree inventory');
+   }
+   else{
+    const direct=await read(match[1]+sha);
+    need(direct?.truncated===false,'Incomplete direct immutable tree inventory');
+    entries=rows(direct,sha,false);
+    const parents=new Set([...ancestors,sha]);
+    for(const row of [...entries.values()])if(row.type==='tree'){
+     for(const [relative,child]of await collect(row.sha,undefined,parents)){
+      const name=row.path+'/'+relative;
+      need(!entries.has(name),'Duplicate expanded immutable tree path');
+      entries.set(name,{...child,path:name});
+     }
+    }
+   }
+   inventories.set(sha,entries);return entries;
+  };
+  const entries=await collect(match[2],value,new Set());
+  return {...value,tree:[...entries.values()].sort((a,b)=>a.path<b.path?-1:a.path>b.path?1:0),truncated:false};
  };
  // Only fixed artifact/job-log API routes expose redirect headers. Delivery is
  // handled separately without credentials; no signed URL enters accounting.
