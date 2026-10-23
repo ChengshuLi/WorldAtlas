@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "selector": {
+    "commit": "0e50bd281afec27ce32fac8dcb4dfe2401f94b6c",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "6e4df90224313c75215b87aca820e91ad0a8af72",
+    "bytes": 2275,
+    "sha256": "1aa3d31772e2e330b3a3539a2c5e36024aad24e4a6874a3f9106fa1cc010577c"
+  },
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "abd7fbe9f4e2ffa3aa1a62b9ad645be053ccad4a",
+        "path": "coordination/engineering/mda-residual-133-research-20261023/preparation/positive65-001/native-authority-002/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "9e8487a27e35c3878edbabc6594930872f4e7a2b",
+        "bytes": 752,
+        "sha256": "00c074d1d88d2cf884a9019c63ea23bf187bc57592b3c13ec8e86db887f40181"
+      },
+      "source_authority": {
+        "commit": "abd7fbe9f4e2ffa3aa1a62b9ad645be053ccad4a",
+        "path": "coordination/engineering/mda-residual-133-research-20261023/preparation/positive65-001/native-authority-002/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "1d697ea3cdffee1d4e8772423bd1d9b83687a877",
+        "bytes": 755,
+        "sha256": "aa4464052b86ce7f26d9c950ad868e3450d460bb1f468402f09f74347aff1a3e"
+      },
+      "ledger": {
+        "commit": "abd7fbe9f4e2ffa3aa1a62b9ad645be053ccad4a",
+        "path": "coordination/engineering/mda-residual-133-research-20261023/preparation/positive65-001/native-authority-002/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "ce8952a48483181468d70e2b46bf247262ebf81a",
+        "bytes": 34085,
+        "sha256": "fbb70fdcb9f46596fb32be12e1ae18a8aef827c5d67ea4a0d15c992bb24bd882"
+      },
+      "native_patch": {
+        "commit": "d0b1e01c0ef53e7fe30b58346c03b644602a26ee",
+        "path": "coordination/engineering/mda-residual-133-research-20261023/preparation/positive65-001/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "63863685cf87a1e64ebb942da389762db8b23a49",
+        "bytes": 7388,
+        "sha256": "811ad6423b330491b36934a0b65a2d23c412f4b598cf6a3057206919d63bbe05"
+      }
+    }
+  ]
+}

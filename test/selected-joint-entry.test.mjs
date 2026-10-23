@@ -1,10 +1,15 @@
+import {omitFixtureObjects} from './helpers/git-object-fixture.mjs';
+import {nativeLiteral} from './helpers/native-literal.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import {gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
-import {spawnSync} from 'node:child_process';
+import {spawnSync,execFileSync} from 'node:child_process';
+import {pathToFileURL} from 'node:url';
+import {trustedFixture as checkpointFixture,appendNativeAuthority} from './fixtures/selected-checkpoint.mjs';
+import {JOINT_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs';
 import {trustedFixture} from './helpers/selected-joint-fixture.mjs';
 
 const ENTRY = 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs';
@@ -15,6 +20,19 @@ function run(f, baseline, candidate, destination = path.join(f.root, 'complete')
     baseline, candidate, destination], {encoding:'utf8', env, timeout:30000});
 }
 
+const PHASES = ['trusted-startup', 'checkpoint-acquisition', 'baseline-qualification',
+  'candidate-qualification', 'native-comparison', 'checkpoint-output'];
+function assertPhases(result, expected) {
+  const timings = result.stderr.trim().split('\n').filter(line => line.startsWith('{')).map(line => JSON.parse(line))
+    .filter(row => Object.hasOwn(row, 'selected_joint_phase'));
+  assert.deepEqual(timings.map(row => row.selected_joint_phase), expected);
+  for (const timing of timings) {
+    assert.deepEqual(Object.keys(timing).sort(), ['elapsed_ms', 'selected_joint_phase']);
+    assert(Number.isSafeInteger(timing.elapsed_ms) && timing.elapsed_ms >= 0);
+  }
+  assert.doesNotMatch(result.stdout, /selected_joint_phase|elapsed_ms/);
+}
+
 test('actual joint CLI reports unseeded baseline as explicit cold validation, never unchanged success', async t => {
   const f = await trustedFixture(t);
   f.save('data/ownership-selection.json', {version:1}); const selected = f.commit();
@@ -23,6 +41,7 @@ test('actual joint CLI reports unseeded baseline as explicit cold validation, ne
   const report = JSON.parse(result.stdout);
   assert.equal(report.mode, 'legacy-cold-required');
   assert.equal(report.reuse_unavailable.cold, 'baseline-and-candidate');
+  assertPhases(result, PHASES.slice(0, 3));
   assert.equal(Object.hasOwn(report, 'native'), false);
   assert.equal(fs.existsSync(path.join(f.root, 'complete')), false);
 });
@@ -35,6 +54,7 @@ test('actual joint CLI preserves a qualified baseline but requires cold validati
   const report = JSON.parse(result.stdout);
   assert.equal(report.mode, 'legacy-cold-required');
   assert.equal(report.reuse_unavailable.cold, 'candidate');
+  assertPhases(result, PHASES.slice(0, 4));
   assert.match(report.reuse_unavailable.reason, /route changed/);
   assert.equal(fs.existsSync(path.join(f.root, 'complete')), false);
 });
@@ -44,19 +64,23 @@ test('joint output collision and dangling symlink fail before qualification and 
   const sentinel = Buffer.from('original output sentinel'); fs.writeFileSync(destination, sentinel);
   let result = run(f, f.selected, f.selected, destination);
   assert.notEqual(result.status, 0); assert.match(result.stderr, /output already exists/);
+  assertPhases(result, []);
   assert.deepEqual(fs.readFileSync(destination), sentinel);
   fs.unlinkSync(destination); fs.symlinkSync(path.join(f.root, 'absent-target'), destination);
   result = run(f, f.selected, f.selected, destination);
   assert.notEqual(result.status, 0); assert.match(result.stderr, /output already exists/);
+  assertPhases(result, []);
   assert.equal(fs.readlinkSync(destination), path.join(f.root, 'absent-target'));
   assert.equal(fs.existsSync(path.join(f.root, 'absent-target')), false);
 });
 
-test('joint launcher authenticates its additional consumer module before importing it', async t => {
-  const f = await trustedFixture(t), consumer = path.join(f.root, 'scripts/selected-checkpoint-native.mjs');
+for(const module of ['scripts/selected-checkpoint-native.mjs','scripts/geography-prefetch.mjs'])
+test('joint launcher authenticates additional module before importing it: '+module, async t => {
+  const f = await trustedFixture(t), consumer = path.join(f.root, module);
   fs.appendFileSync(consumer, '\nthrow Error("unauthenticated consumer executed");\n');
   const result = run(f, f.selected, f.selected);
   assert.notEqual(result.status, 0); assert.match(result.stderr, /Joint code size differs/);
+  assertPhases(result, []);
   assert.doesNotMatch(result.stderr, /Error: unauthenticated consumer executed/);
   assert.equal(fs.existsSync(path.join(f.root, 'complete')), false);
 });
@@ -67,6 +91,7 @@ test('actual joint CLI qualifies once, runs the real native consumer and release
   assert.equal(result.status, 0, result.stderr);
   const report = JSON.parse(result.stdout);
   assert.equal(report.mode, 'authenticated-checkpoint-append-v1');
+  assertPhases(result, PHASES);
   assert.equal(report.native.status, 'no-new-native-loss');
   assert.equal(report.continuous, undefined);
   assert.deepEqual(fs.readdirSync(path.join(f.root,'complete')).sort(), ['checkpoint-routes.json','derived-certificate.json.gz','derived-facts.json','derived-publication.json']);
@@ -81,6 +106,11 @@ test('actual joint CLI qualifies once, runs the real native consumer and release
   assert.equal(createHash('sha256').update(decoded).digest('hex'), derived.certificate.decoded_sha256);
   assert.equal(certificate.entries.length, 3);
   const derivedFacts = JSON.parse(fs.readFileSync(path.join(f.root, 'complete', derived.facts.path)));
+  for (const name of fs.readdirSync(path.join(f.root, 'complete'))) {
+    const encodedBody = fs.readFileSync(path.join(f.root, 'complete', name));
+    const body = name.endsWith('.gz') ? gunzipSync(encodedBody) : encodedBody;
+    assert.doesNotMatch(body.toString(), /selected_joint_phase|elapsed_ms/);
+  }
   assert.equal(derivedFacts.baseline_commit, f.selected);
   assert.equal(derivedFacts.candidate_commit, f.selected);
   assert.deepEqual(derivedFacts.candidate_selection, f.selection);
@@ -119,11 +149,11 @@ test('actual warm joint entry reuses native-only custody without requiring addit
   const certificate=JSON.parse(gunzipSync(fs.readFileSync(path.join(f.root,'complete/derived-certificate.json.gz'))));
   assert.deepEqual(certificate.entries.find(row=>row[0]==='B')[9],[[1,0,10,20]]);
   assert.equal(f.ledger.current_targets.some(row=>row.target_id==='B'),false);
-  const qualified=f.api.qualifyCheckpoint({reader:f.reader});
+  const qualified=(await f.api.qualifyCheckpoint({reader:f.reader}));
   assert.equal(qualified.available,true);
   const row=qualified.state.additions.find(row=>row.representation==='native-cells');
   assert.equal(Object.hasOwn(row,'geometry'),false);
-  assert.deepEqual(row.native_rows,[{y:2,runs:[[2,3,2]]}]);
+  assert.deepEqual(nativeLiteral(row.native_rows),[{y:2,runs:[[2,3,2]]}]);
   f.api.releaseCheckpoint(qualified.state);
 });
 
@@ -140,5 +170,81 @@ test('actual warm native-only transition rejects coherently repinned same-count 
   const result=run(f,f.selected,candidate);
   assert.notEqual(result.status,0);
   assert.match(result.stderr,/Candidate patch omitted, invented or reassigned original native intervals/);
+  assertPhases(result, PHASES.slice(0, 3));
   assert.equal(fs.existsSync(path.join(f.root,'complete')),false);
+});
+
+
+test('actual joint CLI acquires exact inherited and appended read closure, then stays offline when warm',async t=>{
+  const f=await checkpointFixture(t,{nativeAppend:true});
+  for(const name of JOINT_CODE)f.save(name,fs.readFileSync(name));
+  f.commit();
+  const next=await appendNativeAuthority(f,{completedConstructor:true});
+  const binding=JSON.parse(f.git('show',next.entry.source_authority.commit+':'+next.entry.source_authority.path));
+  const pins=[next.entry.rule_preimage,next.entry.source_authority,next.entry.completed_constructor,
+    binding.source_evidence,binding.native_patch];
+  const read=p=>JSON.parse(f.git('show',p.commit+':'+p.path));
+  const rebind=read(f.ledger.current_rebind),inherited=f.registry.entries.map(entry=>read(entry.source_authority));
+  const requiredPins=[...new Map([...pins,f.sidecar.authority_registry,f.sidecar.runtime_envelope,
+    ...Object.values(f.sidecar.logical_asset_map),f.ledger.current_rebind,
+    ...['request','facts','publication','operating','result'].map(role=>rebind[role]),
+    ...f.registry.entries.map(entry=>entry.source_authority),
+    ...inherited.flatMap(binding=>[binding.native_proof.publication,...binding.native_proof.assets])]
+    .map(p=>[p.git_blob_oid,p])).values()];
+  const unrelated=f.pin('appended/source.json');
+  const remote=fs.mkdtempSync(path.join(path.dirname(f.root),'.joint-remote-'));
+  t.after(()=>fs.rmSync(remote,{recursive:true,force:true}));
+  execFileSync('git',['clone','--bare','--no-hardlinks',f.root,remote],{stdio:'ignore'});
+  execFileSync('git',['-C',remote,'config','uploadpack.allowAnySHA1InWant','true']);
+  execFileSync('git',['-C',remote,'config','uploadpack.allowFilter','true']);
+  const url=pathToFileURL(remote).href;
+  const unavailable=pathToFileURL(path.join(remote,'absent')).href;
+  f.git('config','url.'+unavailable+'.insteadOf','https://github.com/ChengshuLi/WorldAtlas.git');
+  const missing=p=>{try{f.git('cat-file','-e',p.git_blob_oid);return false;}catch{return true;}};
+  omitFixtureObjects(t,f.root,[...requiredPins,unrelated].map(p=>p.git_blob_oid));
+  for(const p of [...requiredPins,unrelated])assert(missing(p));
+  const objects=()=>new Set(f.git('cat-file','--batch-all-objects','--batch-check=%(objectname)').toString().trim().split('\n'));
+  const before=objects();
+  const refused=run(f,f.selected,next.candidate,path.join(f.root,'refused'),{GH_TOKEN:''});
+  assert.notEqual(refused.status,0);assert.match(refused.stderr,/Geography object acquisition failed/);
+  assert.equal(refused.stdout,'');assert(!fs.existsSync(path.join(f.root,'refused')));
+  assert.deepEqual([...objects()].sort(),[...before].sort());
+  f.git('config','--unset','url.'+unavailable+'.insteadOf');
+  f.git('config','url.'+url+'.insteadOf','https://github.com/ChengshuLi/WorldAtlas.git');
+  const cold=run(f,f.selected,next.candidate,path.join(f.root,'cold'),{GH_TOKEN:''});
+  assert.equal(cold.status,0,cold.stderr);
+  const report=JSON.parse(cold.stdout);
+  assert.equal(report.mode,'authenticated-checkpoint-append-v1');
+  assert.equal(report.native.status,'no-new-native-loss');
+  assert.deepEqual(report.native.native_row_scope.changed_rows,[next.y]);
+  assert.deepEqual([...objects()].filter(id=>!before.has(id)).sort(),requiredPins.map(p=>p.git_blob_oid).sort());
+  t.diagnostic('Imported '+requiredPins.length+' exact blobs / '+requiredPins.reduce((n,p)=>n+p.bytes,0)+' logical bytes; no network-byte or RSS claim');
+  assert(missing(unrelated),'No source geometry or unrelated closure is acquired');
+  for(const p of requiredPins){
+    const body=f.git('cat-file','blob',p.git_blob_oid);
+    assert.equal(body.length,p.bytes);
+    assert.equal(createHash('sha256').update(body).digest('hex'),p.sha256);
+  }
+  f.git('config','url.'+unavailable+'.insteadOf','https://github.com/ChengshuLi/WorldAtlas.git');
+  f.git('config','--unset','url.'+url+'.insteadOf');
+  const warm=run(f,f.selected,next.candidate,path.join(f.root,'warm'),{GH_TOKEN:''});
+  assert.equal(warm.status,0,warm.stderr);
+  assert.equal(JSON.parse(warm.stdout).native.status,'no-new-native-loss');
+  assert(missing(unrelated));
+  assert.deepEqual([...objects()].sort(),[...before,...requiredPins.map(p=>p.git_blob_oid)].sort());
+  // An absent producer commit retains the existing exact current-path alias.
+  const absent=next.entry.completed_constructor.commit;
+  omitFixtureObjects(t,f.root,[absent]);
+  const alias=run(f,f.selected,next.candidate,path.join(f.root,'alias'),{GH_TOKEN:''});
+  assert.equal(alias.status,0,alias.stderr);
+  assert.equal(JSON.parse(alias.stdout).native.status,'no-new-native-loss');
+  assert.throws(()=>f.git('cat-file','-e',absent+'^{commit}'));
+  // A known origin must not fall back to the identical current-path alias.
+  const p=pins[0],originalTree=f.git('rev-parse',p.commit+':appended').toString().trim();
+  assert.notEqual(originalTree,f.git('rev-parse',next.candidate+':appended').toString().trim());
+  assert.equal(f.git('rev-parse',next.candidate+':'+p.path).toString().trim(),p.git_blob_oid);
+  omitFixtureObjects(t,f.root,[originalTree]);
+  const mismatch=run(f,f.selected,next.candidate,path.join(f.root,'mismatch'),{GH_TOKEN:''});
+  assert.notEqual(mismatch.status,0);assert.match(mismatch.stderr,/Geography object acquisition failed/);
+  assert.equal(mismatch.stdout,'');assert(!fs.existsSync(path.join(f.root,'mismatch')));
 });

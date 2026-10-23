@@ -1,0 +1,209 @@
+{
+  "version": 1,
+  "kind": "adopted-native-territorial-applicability-v1",
+  "provenance": [
+    {
+      "id": "original-ukr",
+      "role": "original-source",
+      "parts": [
+        {
+          "bytes": 248309,
+          "commit": "9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c",
+          "decoded_bytes": 761290,
+          "decoded_sha256": "4a5947e7497574d51f93255dfa7e03dce0c7acf6ecee52d25773a5205854a399",
+          "git_blob_oid": "c312a11650e4cde33bdeb047649c9f730b3a4433",
+          "mode": "100644",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-UKR-ADM1-000.bin.gz",
+          "sha256": "4c3791c4904b62ede78e6e6ba461f1b987ce80baf281284395aeed33df2a3908"
+        }
+      ]
+    },
+    {
+      "id": "decision",
+      "role": "adoption",
+      "pin": {
+        "commit": "fdfc63c10819785fd689b6d8b688b6b0600bc06e",
+        "path": "coordination/engineering/rus-ukr12-continuation-20261023/source-applicability-decision.json",
+        "mode": "100644",
+        "git_blob_oid": "1eb0f4470fde75ebc66c14c771c34cccc8fae32d",
+        "bytes": 8295,
+        "sha256": "3abdbf6446fa72d3c62b047368489a117fa4d5201e01fc9409553e91a84f261c"
+      }
+    },
+    {
+      "id": "scope",
+      "role": "scope",
+      "pin": {
+        "commit": "fdfc63c10819785fd689b6d8b688b6b0600bc06e",
+        "path": "coordination/engineering/rus-ukr12-continuation-20261023/exact-original-scope.json",
+        "mode": "100644",
+        "git_blob_oid": "a4dca533db24e173f379ca4af63217d5b109f9ea",
+        "bytes": 12258,
+        "sha256": "8998e512ca84344fe11b7ad559bc68029e98dd11b830afda2b35ddb031a3791f"
+      }
+    }
+  ],
+  "records": [
+    {
+      "role": "contextual",
+      "source_id": "gb:RUS:ADM2:50074027B66126711442497",
+      "target_id": "gb:RUS:ADM2:50074027B66126711442497",
+      "pixelIndex": 38470,
+      "y": 86172,
+      "x": 155617,
+      "negative_ordinal": 1,
+      "geometry_sha256": "16891896478d1906358ca11e193deb30eace6532028a31a4ef69a4c2e4a04d5d",
+      "original_source": {
+        "id": "original-ukr",
+        "pointer": "/features/6/geometry"
+      },
+      "adoption": {
+        "id": "decision",
+        "pointer": "/statements/0/statement"
+      },
+      "scope": {
+        "id": "scope",
+        "pointer": "/rows/0",
+        "owner_pointer": "/original_owner"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:RUS:ADM2:50074027B66126711442497",
+      "target_id": "gb:RUS:ADM2:50074027B66126711442497",
+      "pixelIndex": 38470,
+      "y": 86172,
+      "x": 155618,
+      "negative_ordinal": 1,
+      "geometry_sha256": "16891896478d1906358ca11e193deb30eace6532028a31a4ef69a4c2e4a04d5d",
+      "original_source": {
+        "id": "original-ukr",
+        "pointer": "/features/6/geometry"
+      },
+      "adoption": {
+        "id": "decision",
+        "pointer": "/statements/1/statement"
+      },
+      "scope": {
+        "id": "scope",
+        "pointer": "/rows/1",
+        "owner_pointer": "/original_owner"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:RUS:ADM2:50074027B66126711442497",
+      "target_id": "gb:RUS:ADM2:50074027B66126711442497",
+      "pixelIndex": 38470,
+      "y": 86172,
+      "x": 155619,
+      "negative_ordinal": 1,
+      "geometry_sha256": "16891896478d1906358ca11e193deb30eace6532028a31a4ef69a4c2e4a04d5d",
+      "original_source": {
+        "id": "original-ukr",
+        "pointer": "/features/6/geometry"
+      },
+      "adoption": {
+        "id": "decision",
+        "pointer": "/statements/2/statement"
+      },
+      "scope": {
+        "id": "scope",
+        "pointer": "/rows/2",
+        "owner_pointer": "/original_owner"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:RUS:ADM2:50074027B12942583135720",
+      "target_id": "gb:RUS:ADM2:50074027B12942583135720",
+      "pixelIndex": 37091,
+      "y": 86500,
+      "x": 154548,
+      "negative_ordinal": 0,
+      "geometry_sha256": "174d29c53ad128a3393370b4f56c1e4bb546cb54af18259253d39eee9e212b22",
+      "original_source": {
+        "id": "original-ukr",
+        "pointer": "/features/5/geometry"
+      },
+      "adoption": {
+        "id": "decision",
+        "pointer": "/statements/3/statement"
+      },
+      "scope": {
+        "id": "scope",
+        "pointer": "/rows/3",
+        "owner_pointer": "/original_owner"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:RUS:ADM2:50074027B13034578172477",
+      "target_id": "gb:RUS:ADM2:50074027B13034578172477",
+      "pixelIndex": 37096,
+      "y": 90451,
+      "x": 159971,
+      "negative_ordinal": 0,
+      "geometry_sha256": "df58eda4dcc6ec481dcbfc8142edfcb4b31a441af56d45cc73085343de2a88d3",
+      "original_source": {
+        "id": "original-ukr",
+        "pointer": "/features/8/geometry"
+      },
+      "adoption": {
+        "id": "decision",
+        "pointer": "/statements/4/statement"
+      },
+      "scope": {
+        "id": "scope",
+        "pointer": "/rows/4",
+        "owner_pointer": "/original_owner"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:RUS:ADM2:50074027B13034578172477",
+      "target_id": "gb:RUS:ADM2:50074027B13034578172477",
+      "pixelIndex": 37096,
+      "y": 90453,
+      "x": 159970,
+      "negative_ordinal": 0,
+      "geometry_sha256": "df58eda4dcc6ec481dcbfc8142edfcb4b31a441af56d45cc73085343de2a88d3",
+      "original_source": {
+        "id": "original-ukr",
+        "pointer": "/features/8/geometry"
+      },
+      "adoption": {
+        "id": "decision",
+        "pointer": "/statements/5/statement"
+      },
+      "scope": {
+        "id": "scope",
+        "pointer": "/rows/5",
+        "owner_pointer": "/original_owner"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:RUS:ADM2:50074027B13034578172477",
+      "target_id": "gb:RUS:ADM2:50074027B13034578172477",
+      "pixelIndex": 37096,
+      "y": 90456,
+      "x": 159969,
+      "negative_ordinal": 0,
+      "geometry_sha256": "df58eda4dcc6ec481dcbfc8142edfcb4b31a441af56d45cc73085343de2a88d3",
+      "original_source": {
+        "id": "original-ukr",
+        "pointer": "/features/8/geometry"
+      },
+      "adoption": {
+        "id": "decision",
+        "pointer": "/statements/6/statement"
+      },
+      "scope": {
+        "id": "scope",
+        "pointer": "/rows/6",
+        "owner_pointer": "/original_owner"
+      }
+    }
+  ]
+}

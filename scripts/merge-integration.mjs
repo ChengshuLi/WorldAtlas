@@ -1,27 +1,36 @@
 import {collectGeographicApproval, bindingHash} from './geographic-adjudication-api.mjs';
-import {integrationProfile, selectedDataCandidate, selectedDataSelection, candidateGeographyCode} from './integration-profile.mjs';
-import {FOCUSED_INTEGRATION_TESTS} from './run-integration-tests.mjs';
-import {githubPages, verifyIssueScope, workSpec} from './issue-claim-contract.mjs';
-import {validateIssuePRBody, validateLanePaths} from './check-handoff-scope.mjs';
-import {checkPremergeEvidence} from './premerge-evidence.mjs';
+import {COORDINATION_PATHS, integrationProfile, inertEvidenceAdditions, selectedDataCandidate, selectedDataSelection, candidateGeographyCode} from './integration-profile.mjs';
+import {focusedIntegrationTest, PACKAGED_ASSET_TESTS} from './run-integration-tests.mjs';
+import {EXECUTION_CODE, REBIND_CODE} from './check-unchanged-selected-geography.mjs';
+import {loadPackageInputs, packagePathRequired, readPackageInputs, safePackagePath, containsPackagePath, selectedDataCheckoutPatterns, fullCheckoutPatterns, focusedCheckoutPatterns} from './package-inputs.mjs';
+import {githubPages} from './issue-claim-contract.mjs';
 import {memoizeImmutableGitBlobs} from './immutable-git-blobs.mjs';
-import {evidenceRequirement} from './evidence-policy.mjs';
 import {checkGeographicReport, geographicReportProducts, preparedQueueSource} from './geographic-report-artifact.mjs';
 import {QUEUE_WORKFLOW_PATH} from './integration-proof.mjs';
 
 const need = (condition, message) => { if (!condition) throw Error(message); };
 const root = repo => `/repos/${repo}`;
 
+// Reuse the existing control/test inventories, excluding actual scientific
+// method and package roles. Docs, workflows and packets can be source/producer
+// pins; those ambiguous inputs retain geography. No scientific data is scanned.
+export function geographyRequired(branch, files, reservation = {}, authoredEntries) {
+  if (integrationProfile(branch, files, reservation, authoredEntries) !== 'evidence') return true;
+  let definition;
+  try { definition = loadPackageInputs(); } catch { return true; }
+  const methods = new Set([...EXECUTION_CODE, ...REBIND_CODE]);
+  return files.some(file => [file.filename, ...(file.previous_filename ? [file.previous_filename] : [])].some(name =>
+    !(COORDINATION_PATHS.has(name) && name.startsWith('scripts/') || focusedIntegrationTest(name)) ||
+    methods.has(name) || packagePathRequired(name, definition)));
+}
 
-export function checkCurrentChecks(checks, {evidenceRequired = false} = {}) {
+// Exact-head review belongs to the submitting operator. Existing checks must
+// be settled; check names and issue metadata add no merge authority.
+export function checkCurrentChecks(checks) {
   const latest = new Map();
   for (const check of checks) {
     const key = `${check.app?.id}:${check.name}`;
     if (!latest.has(key) || latest.get(key).id < check.id) latest.set(key, check);
-  }
-  for (const name of ['scope', ...(evidenceRequired ? ['evidence'] : [])]) {
-    const check = [...latest.values()].filter(row => row.name === name).sort((a,b) => b.id-a.id)[0];
-    need(check?.status === 'completed' && check.conclusion === 'success', `Current head must pass trusted ${name} check`);
   }
   need([...latest.values()].every(row => row.status === 'completed' && ['success','skipped','neutral'].includes(row.conclusion)),
     'Current checks are pending or failed; submit only ready PRs');
@@ -42,13 +51,6 @@ export function checkCandidateParents(commit, base, head) {
     throw candidateFailure('Integration candidate is not the exact current main plus reviewed head; resubmit unchanged head',
       candidateDiagnostics(commit, base, head));
   }
-}
-function unchangedPR(fresh, original) {
-  need(fresh.head.sha === original.head.sha, 'PR head changed; review the new head');
-  need(fresh.state === 'open' && !fresh.draft && fresh.base.ref === 'main' &&
-    fresh.head.ref === original.head.ref && fresh.head.repo?.full_name === original.head.repo?.full_name &&
-    fresh.body === original.body && fresh.title === original.title && fresh.changed_files === original.changed_files,
-    'PR scope/body changed during candidate preparation; revalidate before resubmission');
 }
 function preparedBranch({number, integrationRequestId}) {
   need(Number.isSafeInteger(number) && number > 0 && /^[-a-zA-Z0-9]{16,160}$/.test(integrationRequestId ?? ''),
@@ -92,9 +94,9 @@ export async function cleanupMergedHead({api: rawAPI, repo, number, expectedHead
       return retained('PR is not confirmed merged at the expected head');
     if (pr.head.repo?.full_name !== repo) return retained('Head belongs to another or unavailable repository');
     reference = pr.head.ref;
-    if (typeof reference !== 'string' || !/^(?:engineering|geography|research)\/[a-zA-Z0-9][a-zA-Z0-9._/-]*$/.test(reference) ||
-        reference.includes('..') || reference.includes('//') || reference.endsWith('/') || reference.endsWith('.lock'))
-      return retained('Not an ordinary worker lane head branch');
+    if (typeof reference !== 'string' || !/^[a-zA-Z0-9][a-zA-Z0-9._/-]*$/.test(reference) ||
+        reference.startsWith('worldatlas-integration/') || reference.includes('..') || reference.includes('//') || reference.endsWith('/') || reference.endsWith('.lock'))
+      return retained('Not a safely addressed head branch');
     const metadata = await api(root(repo));
     need(typeof metadata.default_branch === 'string' && metadata.default_branch.length > 0, 'Default branch unavailable');
     if (reference === metadata.default_branch) return retained('Default branch');
@@ -153,13 +155,6 @@ export async function createCandidate(options, state) {
     throw error;
   }
 }
-export function checkReviewedTrees(files, authored, integrated) {
-  for (const name of new Set(files.flatMap(file => [file.filename, ...(file.previous_filename ? [file.previous_filename] : [])]))) {
-    const a = authored.get(name), b = integrated.get(name);
-    need((!a && !b) || (a && b && a.sha === b.sha && a.mode === b.mode && a.type === b.type),
-      `Integration changes reviewed bytes at ${name}; update and obtain substantive review`);
-  }
-}
 export {integrationProfile} from './integration-profile.mjs';
 
 async function tree(api, repo, commit, knownObject) {
@@ -169,9 +164,26 @@ async function tree(api, repo, commit, knownObject) {
   return {object, entries: new Map(value.tree.map(row => [row.path, row]))};
 }
 
-// All remote authorities and evidence are re-read in both trusted phases. No
-// candidate executable code is imported by this module or given a write token.
-export async function inspectMerge({api, repo, number, expectedHead, policy, evidenceCheck = checkPremergeEvidence, candidateContext}) {
+// Execution routing follows the authenticated combined tree, not GitHub's PR
+// inventory (which can still include changes already accepted on main). The PR
+// inventory remains a complete authored diff for review in inspectMerge.
+export function integrationChanges(baseline, integrated) {
+  const files = [];
+  for (const filename of [...new Set([...baseline.keys(), ...integrated.keys()])].sort()) {
+    const before = baseline.get(filename), after = integrated.get(filename);
+    const old = before?.type === 'tree' ? undefined : before;
+    const next = after?.type === 'tree' ? undefined : after;
+    if (old?.type === next?.type && old?.mode === next?.mode && old?.sha === next?.sha) continue;
+    files.push({filename, status: !old ? 'added' : !next ? 'removed' : 'modified',
+      ...(next ? {mode: next.mode} : {})});
+  }
+  return files;
+}
+
+// Both trusted phases bind the reviewed head, current checks and main. Actual
+// consumers verify scientific inputs/results; no generic issue-driven byte walk
+// is repeated here. Candidate code never receives a write token.
+export async function inspectMerge({api, repo, number, expectedHead, candidateContext}) {
   const pr = await api(`${root(repo)}/pulls/${number}`);
   if (pr.head.sha !== expectedHead) throw candidateFailure('PR head changed; review the new head',
     candidateDiagnostics(null, candidateContext?.base ?? pr.base.sha, expectedHead, {
@@ -183,69 +195,133 @@ export async function inspectMerge({api, repo, number, expectedHead, policy, evi
   }
   need(pr.state === 'open' && !pr.draft && pr.base.ref === 'main' && pr.head.repo?.full_name === repo,
     'Only open non-draft repository PRs targeting main may merge');
-  const {github_issue} = validateIssuePRBody(pr.body ?? '');
-  const issue = await api(`${root(repo)}/issues/${github_issue}`);
-  if (issue.number !== github_issue) throw Error('Issue response does not match the PR linkage');
-  const reservation = verifyIssueScope({branch: pr.head.ref, issue});
   const files = await githubPages(api, `${root(repo)}/pulls/${number}/files`);
   need(Number.isSafeInteger(pr.changed_files) && files.length === pr.changed_files &&
     new Set(files.map(file => file.filename)).size === files.length, 'Incomplete PR file inventory');
-  validateLanePaths(pr.head.ref, files.flatMap(file => [file.filename, ...(file.previous_filename ? [file.previous_filename] : [])]),
-    {ownedPaths: reservation.owned_paths});
-  const requirement = evidenceRequirement(issue, workSpec(issue.body), policy, pr.head.ref);
-  checkCurrentChecks(await githubPages(api, `${root(repo)}/commits/${expectedHead}/check-runs`),
-    {evidenceRequired: policy.mode === 'enforce-new' && requirement.required});
+  checkCurrentChecks(await githubPages(api, `${root(repo)}/commits/${expectedHead}/check-runs`));
   const statuses = await api(`${root(repo)}/commits/${expectedHead}/status`);
   need(!statuses.statuses?.length || statuses.state === 'success', 'Commit status is pending or failed');
-  const evidence = await evidenceCheck({api, repo, pr, issue, reservation, files, policy});
   const base = (await api(`${root(repo)}/git/ref/heads/main`)).object.sha;
-  return {pr, issue, reservation, files, evidence, base};
+  return {pr, files, base};
 }
+// The operator supplies the consumers actually reviewed for
+// this immutable pair. This is an execution argument, not source approval or an
+// automated proof that an arbitrary roster is sufficient. Unknown impact uses
+// explicit complete or legacy queued routing; package and geography duties remain independent.
+export function reviewedTestPlan(request, {base, head, entries, files, definition}) {
+  if (request === undefined || request === null || request === '') return null;
+  const plan = typeof request === 'string' ? JSON.parse(request) : request;
+  need(plan && !Array.isArray(plan) && commitID(plan.base) && plan.base === base &&
+    commitID(plan.head) && plan.head === head, 'Reviewed tests are stale or lack the exact base/head binding');
+  need(Array.isArray(plan.files) && plan.files.length > 0, 'Reviewed tests require a nonempty test roster');
+  // New requests do not maintain a shadow transitive fixture catalogue.
+  const ordinary = (name, row) => row?.type === 'blob' && ['100644','100755'].includes(row.mode) && commitID(row.sha) &&
+    name.split('/').slice(0,-1).every((_, index, parts) => {
+      const parent = entries.get(parts.slice(0,index+1).join('/'));
+      return !parent || parent.type === 'tree' && parent.mode === '040000';
+    });
+  const tests = [...new Set(plan.files)];
+  need(tests.every(name => typeof name === 'string' && /^test\/[A-Za-z0-9_.-]+\.test\.mjs$/.test(name) &&
+    ordinary(name, entries.get(name))), 'Reviewed test is missing or not an ordinary candidate test file');
+  const packageChanged = files.some(file => [file.filename, file.previous_filename].filter(Boolean)
+    .some(name => containsPackagePath(definition.inputs, name)));
+  if (packageChanged) for (const name of PACKAGED_ASSET_TESTS) {
+    need(ordinary(name, entries.get(name)), 'Required packaged consumer is unavailable');
+    if (!tests.includes(name)) tests.push(name);
+  }
+  const build = tests.some(name => PACKAGED_ASSET_TESTS.includes(name));
+  // Contract fixtures are one stable complete source directory. Current policy
+  // comes from the existing executing-authority roster, and real package inputs
+  // come from the package definition consumed by the builder itself.
+  const inputs = [...EXECUTION_CODE];
+  // These consumers read current declared policy, not historical fixture copies.
+  for (const [consumer, operand] of [
+    ...['test/final-bank-finalizer.test.mjs', 'test/selected-delivery-smoke.test.mjs', 'test/final-bank-checkpoint.test.mjs', 'test/selected-owner-observation.test.mjs',
+      'test/accepted-checkpoint-qualification.test.mjs'].map(consumer =>
+      [consumer, 'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz']),
+    ['test/current-rebind-product-custody.test.mjs', 'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json'],
+    ['test/local-workspace.test.mjs', 'docs/LOCAL_WORKSPACES.md'],
+    ...['test/github-quota.test.mjs', 'test/merge-integration.test.mjs'].map(consumer =>
+      [consumer, 'docs/MERGE_QUEUE_CLIENT.md']),
+    ['test/regional-research-gate.test.mjs', 'data/research-geography-gate.json'],
+    ...['test/current-postgres-recovery.test.mjs', 'test/publication-plan.test.mjs',
+      'test/publication-cloudflare.test.mjs', 'test/package-current-additive.test.mjs'].map(consumer =>
+      [consumer, 'coordination/publication/cloudflare-history.json']),
+    ...['test/publication-cloudflare.test.mjs', 'test/merge-integration.test.mjs'].map(consumer =>
+      [consumer, 'coordination/engineering/cloudflare-publication-846-20261007/registry-source.json']),
+    ...['test/neon-forward-migrations.test.mjs', 'test/compact-membership-profile.test.mjs', 'test/merge-integration.test.mjs'].flatMap(consumer =>
+      ['coordination/publication/cloudflare-history.json', 'data/observation-registry-history/base-v1.json',
+        'data/research-geography-gate.json', 'data/hosted-type-catalog.json'].map(operand => [consumer, operand])),
+    ...['data/observation-registry-history/base-v1.json', 'data/research-geography-gate.json',
+      'data/hosted-type-catalog.json'].map(operand => ['test/settlement-population-import.test.mjs', operand]),
+    ...['test/neon-forward-migrations.test.mjs', 'test/settlement-population-import.test.mjs',
+      'test/merge-integration.test.mjs'].map(consumer => [consumer, 'data/settlement-estimates.json']),
+    ...['data/observation-registry-history/base-v1.json', 'data/research-geography-gate.json']
+      .map(operand => ['test/cloudflare-access.test.mjs', operand])
+  ]) if (tests.includes(consumer)) {
+    need(definition.verification_paths.includes(operand), 'Current reviewed operand lacks its verification declaration: ' + operand);
+    if (!inputs.includes(operand)) inputs.push(operand);
+  }
+  need(plan.inputs === undefined || Array.isArray(plan.inputs) &&
+    (plan.inputs.length===0 || JSON.stringify(plan.inputs)===JSON.stringify(inputs)),
+    'Reviewed fixture operands are derived; manual inputs are unsupported');
+  for (const name of inputs) need(ordinary(name,entries.get(name)), 'Current executing authority input is unavailable: '+name);
+  const fixtures=[...entries].filter(([name,row])=>name.startsWith('test/fixtures/')&&row.type!=='tree');
+  need(fixtures.length>0&&fixtures.every(([name,row])=>ordinary(name,row)), 'Self-contained fixture boundary is missing or nonordinary');
+  return {request:{base, head, files:tests}, files:tests, inputs, build,
+    // Full-profile consumers can read historical fixtures outside package roles.
+    checkout_patterns:build ? fullCheckoutPatterns(definition) : focusedCheckoutPatterns(definition, inputs)};
+}
+
 export async function prepareIntegration(options) {
   options = {...options, api: memoizeImmutableGitBlobs(options.api)};
+  const automatic = options.reviewedTests === 'auto', complete = options.reviewedTests === 'complete';
+  const requested = automatic || complete ? undefined : options.reviewedTests;
   const state = await inspectMerge(options);
   if (state.replayed) return state;
   const fresh = await createCandidate(options, state);
   try {
-    // The owned merge can outlive mutable scope, checks or review. Re-read
-    // their authority once before exposing the candidate to read-only tests.
-    let revalidated;
-    try { revalidated = await inspectMerge({...options, candidateContext: {base: fresh.base, candidate: fresh.candidate}}); }
-    catch (error) {
-      throw candidateFailure(error.message, error.candidateDiagnostics ?? candidateDiagnostics(fresh.object, fresh.base, state.pr.head.sha,
-        {candidate: commitID(fresh.candidate), reason: 'authority-revalidation-failed', observed_at: new Date().toISOString()}));
-    }
-    need(!revalidated.replayed, 'PR merged during candidate preparation; resubmit unchanged head');
-    const diagnostics = candidateDiagnostics(fresh.object, fresh.base, state.pr.head.sha, {
-      candidate: commitID(fresh.candidate), observed_head: commitID(revalidated.pr.head.sha),
-      observed_base: commitID(revalidated.base), observed_pr_base: commitID(revalidated.pr.base.sha),
-      inspected_pr_base: commitID(state.pr.base.sha), observed_at: new Date().toISOString()});
-    try { unchangedPR(revalidated.pr, state.pr); }
-    catch (error) { throw candidateFailure(error.message, {...diagnostics, reason: 'pr-scope-changed'}); }
-    if (revalidated.issue.body !== state.issue.body) {
-      throw candidateFailure('Issue contract or ownership changed during candidate preparation', {...diagnostics, reason: 'authority-changed'});
-    }
-    if (revalidated.base !== fresh.base || revalidated.pr.base.sha !== state.pr.base.sha) {
-      throw candidateFailure('Main or PR evidence base advanced during candidate preparation; resubmit unchanged head',
-        {...diagnostics, reason: 'base-advanced'});
-    }
-    Object.assign(state, revalidated);
+    // Candidate creation cannot grant merge permission: final integration binds
+    // the reviewed head, current checks and main again before the squash.
     const candidate = fresh.candidate;
-    const [authored, integrated] = await Promise.all([
-      tree(options.api, options.repo, state.pr.head.sha), tree(options.api, options.repo, candidate, fresh.object)
+    const [baseline, integrated] = await Promise.all([
+      tree(options.api, options.repo, state.base), tree(options.api, options.repo, candidate, fresh.object)
     ]);
     checkCandidateParents(integrated.object, fresh.base, state.pr.head.sha);
-    checkReviewedTrees(state.files, authored.entries, integrated.entries);
-    const profile = integrationProfile(state.pr.head.ref, state.files, state.reservation, authored?.entries);
-    let baseline, selection = null;
-    if (profile === 'full' && selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) {
+    const files = integrationChanges(baseline.entries, integrated.entries);
+    const applicability = integrationProfile(state.pr.head.ref, files, {}, integrated.entries);
+    let selection = null;
+    if (!complete && applicability === 'full' && selectedDataCandidate(state.pr.head.ref, files, {})) {
       try {
-        baseline = await tree(options.api, options.repo, state.base);
-        selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files, reservation: state.reservation, baseline, authored});
-      } catch { /* Unknown applicability retains the complete suite. */ }
+        // Applicability belongs to the actual combined candidate; older author
+        // snapshots need not reproduce accepted-main smoke or package edits.
+        selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files, reservation: {}, baseline, authored: integrated});
+      } catch { /* Legacy requests retain full fallback; explicit auto refuses below. */ }
     }
-    const software = candidateGeographyCode(profile, state.files, selection?.test_selection);
-    return {...state, candidate, profile, ...selection, geography_software: software,
+    const geographyRequiredForCandidate = geographyRequired(state.pr.head.ref, files, {}, integrated.entries);
+    const software = geographyRequiredForCandidate && candidateGeographyCode(applicability, files, selection?.test_selection, baseline.entries);
+    const packageInputs = await readPackageInputs({api: options.api, route: root(options.repo), base: candidate, maximumBytes: 8 * 1024 * 1024});
+    // Pure new evidence packets need the same reviewed consumer contract by
+    // default, not an operator-selected mode or all coordination-code regressions.
+    const request = !complete && [undefined, null, ''].includes(requested) &&
+      inertEvidenceAdditions(files, integrated.entries, packageInputs)
+      ? {base:state.base, head:state.pr.head.sha, files:[
+        'test/evidence-quality.test.mjs', 'test/premerge-evidence.test.mjs',
+        'test/engineering-owned-scope-routing.test.mjs']}
+      : requested;
+    const reviewed = reviewedTestPlan(request, {base:state.base, head:state.pr.head.sha,
+      entries:integrated.entries, files, definition:packageInputs});
+    need(!reviewed || !selection, 'Selected-data delivery retains its mandatory native and emitted execution path');
+    need(!automatic || reviewed || selection, 'Automatic test scope is unavailable; supply exact plan.request JSON or explicitly request complete');
+    const profile = complete ? 'full' : reviewed ? (reviewed.build ? 'full' : 'evidence') : applicability;
+    const checkoutPatterns = selection?.test_selection === 'selected-data'
+      ? selectedDataCheckoutPatterns(packageInputs, integrated.entries, selection.expectations_path)
+      : reviewed?.checkout_patterns ?? (profile === 'full' ? fullCheckoutPatterns(packageInputs) : focusedCheckoutPatterns(packageInputs));
+    return {...state, candidate, profile, ...selection,
+      ...(complete ? {test_selection:'complete', shards:[0,1,2]} : {}),
+      ...(reviewed ? {test_selection:'reviewed', test_files:reviewed.files, shards:[0]} : {}), geography_software: software,
+      geography_required: geographyRequiredForCandidate,
+      candidate_tree: integrated.object.tree.sha, checkout_patterns: checkoutPatterns,
       candidate_ref: fresh.reference};
   } catch (error) {
     if (fresh.reference) {
@@ -256,9 +332,11 @@ export async function prepareIntegration(options) {
   }
 }
 export async function completeIntegration(options) {
+  need(options.preparedGeographySoftware === undefined || typeof options.preparedGeographySoftware === 'boolean',
+    'Invalid prepared geographic checker choice');
   options = {...options, api: memoizeImmutableGitBlobs(options.api)};
   // Duplicate/canceled executions reconcile the immutable reviewed head before
-  // requiring now-inapplicable candidate jobs or traversing evidence.
+  // requiring now-inapplicable candidate jobs.
   const initialPR = await options.api(`${root(options.repo)}/pulls/${options.number}`);
   need(initialPR.head?.sha === options.expectedHead, 'PR head changed; obtain fresh exact-head review');
   if (initialPR.merged) {
@@ -269,66 +347,75 @@ export async function completeIntegration(options) {
   need(options.integrationResult === 'success',
     'Integration tests failed, skipped or were cancelled; no merge performed');
   // Rejection-only fast path: known stale base/head cannot benefit from the
-  // expensive full evidence inventory. Eligible/replayed requests still run
-  // every normal trusted validation and the later final base guard.
+  // candidate inventory. Eligible requests still run every actual consumer
+  // validation and the later final base guard.
   const current = await options.api(`${root(options.repo)}/git/ref/heads/main`);
   need(current.object?.sha === options.testedBase, 'Main advanced after integration tests; resubmit unchanged head');
   const state = await inspectMerge(options);
   if (state.replayed) return {accepted: true, replayed: true, merge_commit: state.pr.merge_commit_sha,
     head_cleanup: await cleanupMergedHead(options)};
-  need(options.geographyResult === 'success',
-    'Trusted combined geography check missing, failed or cancelled; no merge performed');
   need(state.base === options.testedBase, 'Main advanced after integration tests; resubmit unchanged head');
-  need(typeof options.geographyReportLoader === 'function', 'Missing trusted geography report loader');
   const candidate = await options.api(`${root(options.repo)}/git/commits/${options.testedCandidate}`);
   need(candidate.sha === options.testedCandidate && candidate.tree?.sha,
     'Integration candidate identity or tree unavailable');
   checkCandidateParents(candidate, state.base, state.pr.head.sha);
-  const geography = await options.geographyReportLoader({api: options.api});
-  const products = geographicReportProducts(geography), geographicSource = products?.source;
-  if (geographicSource) need(geographicSource.tree === candidate.tree.sha &&
-    geographicSource.head === state.pr.head.sha && geographicSource.baseline === state.base &&
-    (!geographicSource.candidate_commit || geographicSource.candidate_commit === geography.candidate_commit),
-    'Geographic source differs from accepted candidate identities');
-  const preparedSource = preparedQueueSource(geography);
-  if (preparedSource) need(preparedSource.workflow_path === QUEUE_WORKFLOW_PATH &&
-    preparedSource.event === 'workflow_dispatch' && preparedSource.candidate_commit === options.testedCandidate &&
-    preparedSource.tree === candidate.tree.sha && preparedSource.head === state.pr.head.sha && preparedSource.baseline === state.base,
-    'Prepared geographic source differs from accepted queue candidate');
-  let authored;
-  if (!preparedSource) {
-    const integrated = await tree(options.api, options.repo, options.testedCandidate, candidate);
-    authored = await tree(options.api, options.repo, state.pr.head.sha);
-    checkReviewedTrees(state.files, authored.entries, integrated.entries);
+  // Independently rederive execution applicability from the exact tested pair.
+  // Neither preparation output nor a stale authored inventory can waive it.
+  const [baseline, integrated] = await Promise.all([
+    tree(options.api, options.repo, state.base), tree(options.api, options.repo, options.testedCandidate, candidate)
+  ]);
+  const files = integrationChanges(baseline.entries, integrated.entries);
+  if (options.reviewedTests && !['auto','complete'].includes(options.reviewedTests)) reviewedTestPlan(options.reviewedTests, {base:state.base, head:state.pr.head.sha,
+    entries:integrated.entries, files,
+    definition:await readPackageInputs({api:options.api, route:root(options.repo), base:options.testedCandidate})});
+  const omitGeography = options.geographyResult === 'skipped' &&
+    !geographyRequired(state.pr.head.ref, files, {}, integrated.entries);
+  let geography, geographicSource, waterPass = false;
+  // Clean Git composition is verified by the combined candidate checks. Final
+  // authority binds its parents and exact tested base/head, not whole-file
+  // equality with the isolated author branch.
+  if (!omitGeography) {
+    need(options.geographyResult === 'success',
+      'Trusted combined geography check missing, failed or cancelled; no merge performed');
+    need(typeof options.geographyReportLoader === 'function', 'Missing trusted geography report loader');
+    geography = await options.geographyReportLoader({api: options.api});
+    geographicSource = geographicReportProducts(geography)?.source;
+    if (geographicSource) need(geographicSource.tree === candidate.tree.sha &&
+      geographicSource.head === state.pr.head.sha && geographicSource.baseline === state.base &&
+      (!geographicSource.candidate_commit || geographicSource.candidate_commit === geography.candidate_commit),
+      'Geographic source differs from accepted candidate identities');
+    const preparedSource = preparedQueueSource(geography);
+    if (preparedSource) need(preparedSource.workflow_path === QUEUE_WORKFLOW_PATH &&
+      preparedSource.event === 'workflow_dispatch' && preparedSource.candidate_commit === options.testedCandidate &&
+      preparedSource.tree === candidate.tree.sha && preparedSource.head === state.pr.head.sha && preparedSource.baseline === state.base,
+      'Prepared geographic source differs from accepted queue candidate');
+    let software;
+    if (preparedSource && options.preparedGeographySoftware !== undefined) {
+      // The same trusted prepare output already selected this authenticated
+      // queue job's checker. Exact candidate/source bindings above prevent
+      // transferring the choice; report text alone supplies no such authority.
+      software = options.preparedGeographySoftware;
+    } else {
+      // Older queued workflows and non-queue callers retain the original
+      // derivation. Missing preparation output never implies baseline code.
+      const profile = integrationProfile(state.pr.head.ref, files, {}, integrated.entries);
+      let selection = null;
+      if (candidateGeographyCode(profile, files, undefined, baseline.entries) && selectedDataCandidate(state.pr.head.ref, files, {})) {
+        try {
+          selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files,
+            reservation: {}, baseline, authored: integrated});
+        } catch { /* Unknown applicability retains full software validation. */ }
+      }
+      software = candidateGeographyCode(profile, files, selection?.test_selection, baseline.entries);
+    }
+    const codeCommit = software ? options.testedCandidate : state.base;
+    waterPass = checkGeographicReport(geography, state.base, options.testedCandidate, codeCommit);
   }
-  // The authenticated main queue's geography job depends on successful prepare,
-  // which compares these immutable trees before exposing its candidate output.
-  // Ordinary reports and supplied/historical custody retain the full comparison.
-  // Preparation authenticated both trees; focused test eligibility additionally
-  // needs the authored ordinary-file entries when routing the final candidate.
-  if (!authored && state.files.some(file => FOCUSED_INTEGRATION_TESTS.includes(file.filename)))
-    authored = await tree(options.api, options.repo, state.pr.head.sha);
-  const profile = integrationProfile(state.pr.head.ref, state.files, state.reservation, authored?.entries);
-  let baseline, selection = null;
-  if (profile === 'full' && selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) {
-    authored ??= await tree(options.api, options.repo, state.pr.head.sha);
-    try {
-      baseline = await tree(options.api, options.repo, state.base);
-      selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files,
-        reservation: state.reservation, baseline, authored});
-    } catch { /* Unknown applicability retains full software validation. */ }
-  }
-  const software = candidateGeographyCode(profile, state.files, selection?.test_selection);
-  const codeCommit = software ? options.testedCandidate : state.base;
-  const waterPass = checkGeographicReport(geography, state.base, options.testedCandidate, codeCommit);
   const currentPR = await options.api(`${root(options.repo)}/pulls/${options.number}`);
-  const currentIssue = await options.api(`${root(options.repo)}/issues/${state.issue.number}`);
-  need(currentPR.head.sha === state.pr.head.sha && currentPR.body === state.pr.body && currentPR.title === state.pr.title &&
-    currentPR.state === 'open' && !currentPR.draft && currentPR.base.ref === 'main' && currentIssue.body === state.issue.body,
-    'Head/body or issue contract changed during integration review');
-  verifyIssueScope({branch: currentPR.head.ref, issue: currentIssue});
-  checkCurrentChecks(await githubPages(options.api, `${root(options.repo)}/commits/${state.pr.head.sha}/check-runs`),
-    {evidenceRequired: options.policy.mode === 'enforce-new' && evidenceRequirement(currentIssue, workSpec(currentIssue.body), options.policy, currentPR.head.ref).required});
+  need(currentPR.head.sha === state.pr.head.sha && currentPR.head.repo?.full_name === options.repo &&
+    currentPR.state === 'open' && !currentPR.draft && currentPR.base.ref === 'main',
+    'Reviewed head or PR eligibility changed during integration');
+  checkCurrentChecks(await githubPages(options.api, `${root(options.repo)}/commits/${state.pr.head.sha}/check-runs`));
   const freshStatuses = await options.api(`${root(options.repo)}/commits/${state.pr.head.sha}/status`);
   need(!freshStatuses.statuses?.length || freshStatuses.state === 'success', 'Commit statuses changed during final review');
   if (waterPass) {
@@ -343,13 +430,14 @@ export async function completeIntegration(options) {
   need((await options.api(`${root(options.repo)}/git/ref/heads/main`)).object.sha === state.base,
     'Main advanced during final review; resubmit unchanged head');
   const merged = await options.api(`${root(options.repo)}/pulls/${options.number}/merge`, 'PUT', {
-    sha: state.pr.head.sha, merge_method: 'squash', commit_title: state.pr.title, commit_message: state.pr.body
+    sha: state.pr.head.sha, merge_method: 'squash', commit_title: currentPR.title, commit_message: currentPR.body
   });
   need(merged.merged, 'GitHub did not merge the PR');
-  return {accepted: true, merge_commit: merged.sha, title: state.pr.title, github_issue: state.issue.number,
-    geography: {status: 'passed', trusted_code_commit: geography.trusted_code_commit, candidate_commit: geography.candidate_commit,
+  return {accepted: true, merge_commit: merged.sha, title: currentPR.title,
+    geography: omitGeography ? {status: 'not-applicable', reason: 'non-geographic-controls'} :
+      {status: 'passed', trusted_code_commit: geography.trusted_code_commit, candidate_commit: geography.candidate_commit,
       report_sha256: options.geographyReportHash, adjudication: geography.adjudication ?? null,
       ...(geographicSource ? {execution: 'fresh-queue', source: geographicSource} : {})},
-    tested_base: state.base, tested_candidate: options.testedCandidate, reviewed_head: state.pr.head.sha, evidence: state.evidence,
+    tested_base: state.base, tested_candidate: options.testedCandidate, reviewed_head: state.pr.head.sha,
     head_cleanup: await cleanupMergedHead(options)};
 }

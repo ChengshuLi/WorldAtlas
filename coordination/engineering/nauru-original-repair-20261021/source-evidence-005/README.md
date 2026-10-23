@@ -1,0 +1,9 @@
+# NRU exact 12-key stock source evidence
+
+The separate `source-context-002/exact-center-candidates-12.json` gives the exact retained-corpus center result and feature-key split: Anabar (source index 48487, `gb:NRU:ADM1:42797286B10235022797721`) has 4 keys; Ewa (48489, `gb:NRU:ADM1:42797286B43186886097675`) has 4; Aiwo (48494, `gb:NRU:ADM1:42797286B70192209207598`) has 4. The held full-source-miss key `(131469,252633)` is excluded. All 12 selected centers have one retained candidate and zero non-NRU candidates in the pinned corpus of 368 families / 73,567 features; this does not inventory real-world claims outside that corpus. Empty retained-candidate lists are not territorial/legal exclusions.
+
+This source evidence binds the exact 12-key patch to the complete owner-level `mapped_land_support` mask from the retained physical classification. All three sibling source targets (pixelIndex 7127) carry the same 12-cell owner mask, as required by the stock validator. The repeated rows report physical class at requested centers only; they do not assert that each individual source feature polygon contains every key. The exact per-feature center membership remains in the separate census.
+
+The stock schema treats `coverage_rows` as owner-level physical-class rows at requested centers, keyed by `target.pixelIndex`: diagnostic code requires their union to equal the complete requested patch for that owner and requires sibling owner bindings to be identical. `supportedInputs` applies the same owner-level rule. See exact code pins/lines in the sidecar.
+
+Original package scope remains 13 cells / 11 intervals; the Aiwo full-source-miss remains held. Source applicability, external competitors, legal authority, physical interpretation beyond the retained classification, and acceptance remain unresolved. The stock diagnostic and constructor outputs apply only to this 12-key candidate and do not establish current-owner-zero or final selected-output conservation.

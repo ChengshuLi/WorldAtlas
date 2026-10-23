@@ -23,7 +23,7 @@ const {readGeographicReleaseManifest} = await import('./read-geographic-release-
 const {checkPrepared} = await import('./check-prepared.mjs');
 const {environmentClassifications} = await import('../src/environment-classifications.js');
 const {openDatabase,seedDatabase,geography} = await import('../database.mjs');
-const {prepareCurrentSelectedAdditive} = await import('./package-current-additive.mjs');
+const {readCurrentSelectedAdditive} = await import('./package-current-additive.mjs');
 
 // Preparation and scientific qualification publish current products once. Builds
 // consume those products; historical reconstruction remains explicit reproduction.
@@ -40,26 +40,29 @@ const preparedEvidence=ownershipSelection.requireNative?await readPreparedEviden
 // Validate the complete retained context chain before allocating application geography.
 const releaseManifest=readGeographicReleaseManifest('data/geographic-releases');
 const geographicRelease=releaseManifest.releases.at(-1);
-if(ownershipSelection.releaseId&&ownershipSelection.releaseId!==geographicRelease.id)throw Error('Committed ownership selection belongs to another release');
+if(ownershipSelection.releaseId&&ownershipSelection.releaseId!==geographicRelease.id&&!ownershipSelection.referenceProjection)throw Error('Committed ownership selection belongs to another release');
 const fixedGridPath=ownershipSelection.manifestPath;
 const selectedGrid=await fs.access(fixedGridPath).then(()=>selectBuildOwnership({...ownershipSelection,expectedReference:geographicRelease}),()=>{if(ownershipSelection.requireNative)throw Error('Selected native grid is missing');return null;});
 const fixedGrid=selectedGrid?.manifest;
+// Scientific context/physical assets retain N; the explicit application projection
+// separately binds truthful current hierarchy/catalog metadata M.
+const nativeReference=selectedGrid?.nativeReference??geographicRelease;
 const currentContext=ownershipSelection.requireNative?JSON.parse(await fs.readFile('data/current-build-context.json')):null;
-if(currentContext&&(currentContext.native_manifest_sha256!==selectedGrid.sha256||currentContext.release_id!==geographicRelease.id||currentContext.footprints_sha256!==geographicRelease.footprints_sha256||currentContext.hierarchy_sha256!==geographicRelease.hierarchy_sha256))throw Error('Prepared current context differs from selected native reference; prepare and review matching products');
+if(currentContext&&(currentContext.native_manifest_sha256!==selectedGrid.sha256||currentContext.release_id!==nativeReference.id||currentContext.footprints_sha256!==nativeReference.footprints_sha256||currentContext.hierarchy_sha256!==nativeReference.hierarchy_sha256))throw Error('Prepared current context differs from selected native reference; prepare and review matching products');
 const nativeContextInputStage=currentContext?{status:'accepted-prepared-assets',native_manifest_sha256:selectedGrid.sha256,preparation:currentContext.nativeContextInputStage}:null;
 const db = openDatabase();
 try {
-  seedDatabase(db);
+  const {referenceRevision}=seedDatabase(db);
   const reference = geography(db);
   const pixelAudit=JSON.parse(await fs.readFile('data/pixel-audit.json','utf8'));
   reference.pixelMissing=pixelAudit.missing.map(f=>f.id);
-  checkPrepared(reference.features);
-  if(geographicRelease.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex')||geographicRelease.footprints_sha256!==checkPrepared(reference.features))throw Error('Reference release does not match prepared map assets');
+  const preparedFootprints=checkPrepared(reference.features);
+  if(geographicRelease.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex')||geographicRelease.footprints_sha256!==preparedFootprints)throw Error('Reference release does not match prepared map assets');
   validatePreparedEvidenceIndex(preparedEvidence,geographicRelease);
   const boundarySourceReviews=currentContext?.boundarySourceReviews??{};
   let gridIndex,ownership;
   if(fixedGrid){
-    if(fixedGrid.footprints_sha256!==checkPrepared(reference.features)||fixedGrid.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex'))throw Error('Precompiled canonical grid is stale');
+    if(fixedGrid.footprints_sha256!==preparedFootprints||(selectedGrid.applicationReference?.hierarchy_sha256??fixedGrid.hierarchy_sha256)!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex'))throw Error('Precompiled canonical grid is stale');
     const bytes=selectedGrid.bounds;
     if(createHash('sha256').update(bytes).digest('hex')!==fixedGrid.bounds.sha256)throw Error('Precompiled location bounds hash mismatch');
     const bounds=JSON.parse(gunzipSync(bytes)),byId=new Map(bounds.map(row=>[row.id,row]));
@@ -67,7 +70,7 @@ try {
     gridIndex=createGridIndex(reference.features.map(feature=>({...feature,geometry:null,gridBounds:byId.get(feature.id).bounds,pixelIndex:byId.get(feature.id).index})));
   }else{gridIndex=createGridIndex(reference.features);ownership=packOwnership(compileOwnership(gridIndex));}
   const pixelIndices=new Map(gridIndex.map(({feature,index})=>[feature.id,index]));
-  const packageAdditive=ownershipSelection.requireNative?await prepareCurrentSelectedAdditive({root:process.cwd(),selectedGrid,geographicRelease,features:reference.features.map(feature=>({...feature,pixelIndex:pixelIndices.get(feature.id)}))}):null;
+  const packageAdditive=ownershipSelection.requireNative?await readCurrentSelectedAdditive({root:process.cwd(),selectedGrid,geographicRelease,referenceRevision}):null;
   const history = {
     attributes:db.prepare('SELECT * FROM attribute_records WHERE location_id IN (SELECT id FROM locations WHERE active=1)').all().map(r=>({...r,value:JSON.parse(r.value),metadata:JSON.parse(r.metadata)})),
     states: db.prepare('SELECT * FROM states WHERE location_id IN (SELECT id FROM locations WHERE active=1)').all(),
@@ -91,9 +94,11 @@ try {
   // Original canonical files remain in data and prior published vintages. The
   // deployment includes only the transport referenced by its new manifest;
   // this build must never prune retained objects from the publisher's storage.
+  let preparedOwnership;
   if(fixedGrid?.method){
-    const prepared=await packagePreparedStartupOwnership({manifest:fixedGrid,manifestSha:selectedGrid.sha256,source:'data/canonical-grid/current-startup',destination:'dist'});
+    const prepared=await packagePreparedStartupOwnership({manifest:fixedGrid,manifestSha:selectedGrid.sha256,source:'data/canonical-grid/current-startup',destination:'dist',selected:packageAdditive,features:reference.features.map(feature=>({...feature,pixelIndex:pixelIndices.get(feature.id)}))});
     Object.assign(pixelMap,prepared.pixelMap);
+    preparedOwnership=prepared.preparedOwnership;
   }else if(fixedGrid){
     for(const part of fixedGrid.parts){
       const bytes=await fs.readFile(path.join(selectedGrid.source,part.path));
@@ -119,13 +124,13 @@ try {
     if(!fixedGrid)throw Error('Physical classification requires canonical grid');
     coverageClassification=currentContext?.coverageClassification??JSON.parse(await fs.readFile(coveragePath));
     const canonicalHash=selectedGrid.sha256;
-    await loadCoverageClassification(coverageClassification,{...fixedGrid,release_id:geographicRelease.id,canonical_grid_sha256:canonicalHash},async url=>new Response(await fs.readFile('data/'+url.replace(/^\.\//,''))));
-    pixelMap.canonical_grid_sha256=canonicalHash;
+    await loadCoverageClassification(coverageClassification,{...fixedGrid,release_id:nativeReference.id,canonical_grid_sha256:canonicalHash},async url=>new Response(await fs.readFile('data/'+url.replace(/^\.\//,''))));
+    if(!preparedOwnership)pixelMap.canonical_grid_sha256=canonicalHash;
     await fs.mkdir('dist/coverage-classification',{recursive:true});
     for(const part of coverageClassification.parts)await fs.copyFile('data/'+part.path,'dist/'+part.path);
   }
   const referenceBundle=await packageReferenceBundle({source:'data/reference-attributes',destination:'dist/reference-attributes',expectedFootprints:geographicRelease.footprints_sha256});
-  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({gridVerification:selectedGrid?.verification??null,nativeContextInputStage,coverageClassification,referenceAttributes:referenceBundle.descriptor,contentCapabilities:{mapSnapshots:1,datedGeography:1,datedFootprints:0,storageExport:2},type:reference.type,sourceQualityReviews:reference.sourceQualityReviews,boundarySourceReviews,reference_release:packageAdditive?.reference_release??geographicRelease,...(packageAdditive?{additiveRelease:packageAdditive.additiveRelease}:{}),preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
+  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({gridVerification:selectedGrid?.verification??null,nativeContextInputStage,coverageClassification,referenceAttributes:referenceBundle.descriptor,contentCapabilities:{mapSnapshots:1,datedGeography:1,datedFootprints:0,storageExport:2},type:reference.type,ownerLabels:reference.ownerLabels,sourceQualityReviews:reference.sourceQualityReviews,boundarySourceReviews,reference_release:packageAdditive?.reference_release??geographicRelease,...(packageAdditive?{additiveRelease:packageAdditive.additiveRelease,...(packageAdditive.referenceMetadata?{referenceMetadata:packageAdditive.referenceMetadata}:{})}:{}),preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap,...(preparedOwnership?{preparedOwnership}:{})}));
   await fs.writeFile('dist/atlas-history.json.gz',gzipSync(JSON.stringify(history)));
   await fs.writeFile('dist/environment-classifications.json',JSON.stringify({version:1,unknown:null,attributes:environmentClassifications}));
   await packageOwnershipHistory({source:'data/ownership-history',destination:'dist/ownership-history',hosted:process.env.ATLAS_HOSTED_BUILD==='1',compactReceipts:true});
@@ -171,3 +176,5 @@ try {
   if(process.env.ATLAS_HOSTED_BUILD!=='1')for(const file of await fs.readdir('dist',{recursive:true})){const stat=await fs.stat(`dist/${file}`);if(stat.isFile()&&stat.size>25*1024*1024)throw new Error(`Static asset exceeds 25 MiB: ${file}`);}
   console.log(`Static atlas ready: ${reference.features.length} polygons and ${history.states.length} dated records.`);
 } finally { db.close(); }
+await fs.mkdir('.cache',{recursive:true});
+await fs.rename('data/atlas.sqlite','.cache/package-atlas.sqlite');

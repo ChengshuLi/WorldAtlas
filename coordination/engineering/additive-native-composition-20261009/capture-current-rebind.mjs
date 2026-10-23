@@ -2,8 +2,9 @@
 // complete import/runtime closure before import and records external operation.
 // This module cannot issue an operating certificate or select a release.
 import fs from 'node:fs';import path from 'node:path';
+import {repairComponentKey} from '../../../src/native-grid.js';
 import {ImmutableReader} from '../../../scripts/check-effective-geographic-regression.mjs';
-import {CURRENT_REBIND_CODE,normaliseRetainedRepairLedger,nativeBaseSelection,requirePriorAdditiveConservation,readRetainedRegistryAuthority,acquireCurrentRebindOperands,currentRebindSourceView,valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {currentRebindCodePaths,normaliseRetainedRepairLedger,nativeBaseSelection,requirePriorAdditiveConservation,readRetainedRegistryAuthority,acquireCurrentRebindOperands,currentRebindSourceView,valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 const prepared=new WeakSet(),completedPrior=new WeakMap();
 const demand=(v,m)=>{if(!v)throw Error(m);},same=(a,b)=>valueBytes(a).equals(valueBytes(b));
 const exists=p=>{try{return fs.lstatSync(p);}catch(e){if(e.code==='ENOENT')return null;throw e;}};
@@ -17,7 +18,8 @@ export function validateCurrentRebindPlan(plan,{executionCommit,baseSelection,re
  const explicit=plan&&Object.hasOwn(plan,'original_inputs');
  demand(plan&&Object.keys(plan).filter(k=>!['original_inputs','limits'].includes(k)).sort().join(',')==='authority_registry_sha256,base_selection,executed_code,execution_commit,kind,original_patch_sha256s,original_rows_sha256,predecessor_proof,target_sources,version','Foreign actual issued rebind plan');
  if(explicit)demand(Array.isArray(plan.original_inputs)&&plan.original_inputs.length===2&&new Set(plan.original_inputs.map(p=>p?.path)).size===2&&plan.original_inputs.every(p=>p&&Object.keys(p).sort().join(',')==='bytes,commit,git_blob_oid,mode,path,sha256'&&p.mode==='100644'&&typeof p.path==='string'&&!p.path.includes('\\')&&!p.path.split('/').some(s=>!s||s==='.'||s==='..')&&/^[a-f0-9]{40}$/.test(p.commit)&&/^[a-f0-9]{40}$/.test(p.git_blob_oid)&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&/^[a-f0-9]{64}$/.test(p.sha256)),'Missing complete original input descriptors');
- demand(plan.version===1&&plan.kind==='issued-current-rebind-acquisition-plan-v1'&&plan.execution_commit===executionCommit&&/^[a-f0-9]{40}$/.test(executionCommit)&&same(plan.base_selection,baseSelection)&&plan.authority_registry_sha256===valueSha(registry)&&plan.original_rows_sha256===valueSha(originalRows)&&same(plan.executed_code,executedCode)&&same(executedCode.map(p=>p.path),CURRENT_REBIND_CODE),'Actual planned source/method/selected identity differs');
+ currentRebindCodePaths(executedCode,{requireCurrent:true});
+ demand(plan.version===1&&plan.kind==='issued-current-rebind-acquisition-plan-v1'&&plan.execution_commit===executionCommit&&/^[a-f0-9]{40}$/.test(executionCommit)&&same(plan.base_selection,baseSelection)&&plan.authority_registry_sha256===valueSha(registry)&&plan.original_rows_sha256===valueSha(originalRows)&&same(plan.executed_code,executedCode),'Actual planned source/method/selected identity differs');
  demand(Array.isArray(plan.target_sources)&&plan.target_sources.length>0&&Array.isArray(plan.original_patch_sha256s)&&plan.original_patch_sha256s.length===registry.entries.length,'Missing complete planned input roster');return plan;
 }
 // Encode complete canonical products before creating the destination. The
@@ -42,8 +44,8 @@ function originalOperands(reader,registry,ledger){
  for(const entry of registry.entries){
   proofs.push(completedOriginalAuthority(reader,entry));
  }
- const expected=new Map();for(const proof of proofs)for(const row of proof.original_ledger.rows){demand(!expected.has(row.component_id),'Repeated original complete authority component');expected.set(row.component_id,{row,proof});}
- demand(ledger.rows.length===expected.size&&ledger.rows.every(row=>{const prior=expected.get(row.component_id);if(!prior)return false;const {authority_sha256,rule_sha256,...literal}=row;return authority_sha256===prior.proof.authority_sha256&&rule_sha256===prior.proof.rule_sha256&&same(literal,prior.row); }),'Composed ledger changes original scope/exception/primitive authority');
+ const expected=new Map();for(const proof of proofs)for(const row of proof.original_ledger.rows){const key=repairComponentKey({...row,authority_sha256:proof.authority_sha256});demand(!expected.has(key),'Repeated original complete authority component');expected.set(key,{row,proof});}
+ demand(ledger.rows.length===expected.size&&ledger.rows.every(row=>{const prior=expected.get(repairComponentKey(row));if(!prior)return false;const {authority_sha256,rule_sha256,...literal}=row;return authority_sha256===prior.proof.authority_sha256&&rule_sha256===prior.proof.rule_sha256&&same(literal,prior.row); }),'Composed ledger changes original scope/exception/primitive authority');
  // Complete ledger/patch authentication above has finished. Duplicate original
  // ledgers and native presentation graphs do not escape this helper frame.
  return {rows:[...normalized.rows.values()],patches:proofs.flatMap(p=>p.native_proof.native_patches)};

@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "selector": {
+    "path": "data/ownership-selection.json",
+    "commit": "ffe590afe39e14caafdf25f45c5b6bbb8a49fc1b",
+    "mode": "100644",
+    "git_blob_oid": "883a474b66571a200346891545c60596a3bba3d7",
+    "bytes": 1583,
+    "sha256": "70e13c013102fa05b04c8ff8cc09fc8d8709694aa9dbea65f6b6c293cd215891"
+  },
+  "effective_release_id": "geography:vietnam-full-LAO9-private-conservation-20261016",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/lao9-full-source-observation-001/native9-actual-001/authority/original-rule-preimage.json",
+        "commit": "de28ff6952c47d78d2f5513867452b887a96869f",
+        "mode": "100644",
+        "git_blob_oid": "8060239ccc42366d08bef47e34fa22982df77564",
+        "bytes": 792,
+        "sha256": "2e7c60badf4a0ad3369cd2c901fece841503c034620a2093427a95c21057d38f"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/lao9-full-source-observation-001/native9-actual-001/authority/authority-binding.json",
+        "commit": "de28ff6952c47d78d2f5513867452b887a96869f",
+        "mode": "100644",
+        "git_blob_oid": "c5c73389b18bd7354a19ee5198c7ce0e67390866",
+        "bytes": 795,
+        "sha256": "6f6eda8e0633103fb9e4741ec6e70349fe1d6ec3f2a97dee7afd6ea563c505e1"
+      },
+      "ledger": {
+        "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/lao9-full-source-observation-001/native9-actual-001/authority/constructor-result.json",
+        "commit": "de28ff6952c47d78d2f5513867452b887a96869f",
+        "mode": "100644",
+        "git_blob_oid": "76c396d3176e7152c9ff1c870428c1468572cf31",
+        "bytes": 33209,
+        "sha256": "6e0ed1fc4bcbb528c416d469ded600e97aa88ddbfad73aed5da6f46f3a534876"
+      },
+      "native_patch": {
+        "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/lao9-full-source-observation-001/candidate-native9-patch.json",
+        "commit": "db813343c9ef614294e47ed019e604fe406d72ed",
+        "mode": "100644",
+        "git_blob_oid": "d13b168b063e61deb01c1cf2f257ed054124967c",
+        "bytes": 385,
+        "sha256": "ae6ccfad38a75864039398ed6415ff810792ecb006827b893d3685998d359a50"
+      }
+    }
+  ]
+}

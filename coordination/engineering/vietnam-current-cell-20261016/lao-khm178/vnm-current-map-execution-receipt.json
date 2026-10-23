@@ -1,0 +1,55 @@
+{
+  "status": "completed",
+  "elapsed_ms": 1033.886458,
+  "finished_utc": "2026-10-15T23:46:09.958Z",
+  "internal_lifetime_max_rss_bytes": 391151616,
+  "final_rss_bytes": 391168000,
+  "policy_guards_added": false,
+  "source_predicate": "native-linear-evenodd-first-owner-v1",
+  "kernel_sha256": "78c1e2bc2df944f11b2b638645d20defa82511a1cb17debbf865921945b14740",
+  "inputs": [
+    {
+      "path": "bulk-completion/vn-lao-khm178/exact178-original-scope.json",
+      "bytes": 190735,
+      "sha256": "cad0d740c7ca74a598272ee8d4610bdd7b32f7d005e66c4e4bc88830c7ea5f7a"
+    },
+    {
+      "path": "bulk-completion/vn-lao-khm178/inputs/existing345-native-locations.json",
+      "bytes": 261960,
+      "sha256": "8cffc3e3fa0f7d6191c298859404099b06fa92571a2b0608da78e9ae7d53e9a9"
+    },
+    {
+      "path": "bulk-completion/vn-lao-khm178/inputs/vnm_admin0.geojson",
+      "bytes": 27020501,
+      "sha256": "494705d9255ba292273b3b529637c2fb779a7d82a0a7a90b3c4be2ffb93dd183"
+    },
+    {
+      "path": "bulk-completion/vn-lao-khm178/inputs/current89ff-foreign8-geography-subset.json",
+      "bytes": 145830,
+      "sha256": "f0a58ced6fafd769470c1aa261b48070f58ac972fd9b113e42c10449c9b24143"
+    },
+    {
+      "path": "vietnam-next/repair-package/reference1588/cell-hold-audit/tanbien26-readiness/inputs/native-latitudes.f64le.gz",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147"
+    }
+  ],
+  "summaries": [
+    {
+      "kind": "new-vnm-cod-adm0",
+      "features": 1,
+      "keys": 178,
+      "positive_keys": 149,
+      "tie_keys": 0
+    },
+    {
+      "kind": "current89ff-foreign8-map",
+      "features": 8,
+      "keys": 178,
+      "positive_keys": 0,
+      "tie_keys": 0
+    }
+  ],
+  "ownership_mutation": false,
+  "repair_credit": 0
+}

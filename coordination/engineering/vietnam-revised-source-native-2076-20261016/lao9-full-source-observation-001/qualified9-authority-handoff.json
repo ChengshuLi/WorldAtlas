@@ -1,0 +1,370 @@
+{
+  "kind": "qualified-original-vietnam-LAO9-portable-authority-handoff-v1",
+  "group": {
+    "authority": {
+      "rule_preimage": {
+        "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/lao9-full-source-observation-001/native9-actual-001/authority/original-rule-preimage.json",
+        "commit": "de28ff6952c47d78d2f5513867452b887a96869f",
+        "mode": "100644",
+        "git_blob_oid": "8060239ccc42366d08bef47e34fa22982df77564",
+        "bytes": 792,
+        "sha256": "2e7c60badf4a0ad3369cd2c901fece841503c034620a2093427a95c21057d38f"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/lao9-full-source-observation-001/native9-actual-001/authority/authority-binding.json",
+        "commit": "de28ff6952c47d78d2f5513867452b887a96869f",
+        "mode": "100644",
+        "git_blob_oid": "c5c73389b18bd7354a19ee5198c7ce0e67390866",
+        "bytes": 795,
+        "sha256": "6f6eda8e0633103fb9e4741ec6e70349fe1d6ec3f2a97dee7afd6ea563c505e1"
+      },
+      "ledger": {
+        "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/lao9-full-source-observation-001/native9-actual-001/authority/constructor-result.json",
+        "commit": "de28ff6952c47d78d2f5513867452b887a96869f",
+        "mode": "100644",
+        "git_blob_oid": "76c396d3176e7152c9ff1c870428c1468572cf31",
+        "bytes": 33209,
+        "sha256": "6e0ed1fc4bcbb528c416d469ded600e97aa88ddbfad73aed5da6f46f3a534876"
+      },
+      "native_patch": {
+        "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/lao9-full-source-observation-001/candidate-native9-patch.json",
+        "commit": "db813343c9ef614294e47ed019e604fe406d72ed",
+        "mode": "100644",
+        "git_blob_oid": "d13b168b063e61deb01c1cf2f257ed054124967c",
+        "bytes": 385,
+        "sha256": "ae6ccfad38a75864039398ed6415ff810792ecb006827b893d3685998d359a50"
+      }
+    },
+    "keys": [
+      {
+        "y": 114786,
+        "x": 205956,
+        "owner": 26855
+      },
+      {
+        "y": 114861,
+        "x": 205963,
+        "owner": 26855
+      },
+      {
+        "y": 115242,
+        "x": 205967,
+        "owner": 26855
+      },
+      {
+        "y": 116097,
+        "x": 207477,
+        "owner": 26845
+      },
+      {
+        "y": 116098,
+        "x": 207474,
+        "owner": 26845
+      },
+      {
+        "y": 119659,
+        "x": 209305,
+        "owner": 26808
+      },
+      {
+        "y": 119660,
+        "x": 209302,
+        "owner": 26808
+      },
+      {
+        "y": 119872,
+        "x": 209450,
+        "owner": 26808
+      },
+      {
+        "y": 119872,
+        "x": 209455,
+        "owner": 26808
+      }
+    ],
+    "cells": 9,
+    "keyset_sha256": "0f201559d5caee77c61a13c0778ae58000a10103ce09956fece89825d61cadbb"
+  },
+  "original_scope_records": [
+    {
+      "original_key": {
+        "owner": 48365,
+        "y": 114786,
+        "x": 205956
+      },
+      "proposed_target_owner": 26855,
+      "proposed_target_id": "gb:LAO:ADM2:54806243B58703699561211",
+      "contrary_original_contacts": [
+        {
+          "source_index": 65110,
+          "family_index": 353,
+          "source_id": "gb:VNM:ADM1:63759600B72990231521734",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Điện Biên",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM1",
+          "source_represented_year_claim": "2008"
+        },
+        {
+          "source_index": 65545,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B39086824409595",
+          "ordinal": 389,
+          "owners": [
+            48365
+          ],
+          "name": "Nam Po",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 48365,
+        "y": 114861,
+        "x": 205963
+      },
+      "proposed_target_owner": 26855,
+      "proposed_target_id": "gb:LAO:ADM2:54806243B58703699561211",
+      "contrary_original_contacts": [
+        {
+          "source_index": 65545,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B39086824409595",
+          "ordinal": 389,
+          "owners": [
+            48365
+          ],
+          "name": "Nam Po",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 48168,
+        "y": 115242,
+        "x": 205967
+      },
+      "proposed_target_owner": 26855,
+      "proposed_target_id": "gb:LAO:ADM2:54806243B58703699561211",
+      "contrary_original_contacts": [
+        {
+          "source_index": 65110,
+          "family_index": 353,
+          "source_id": "gb:VNM:ADM1:63759600B72990231521734",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Điện Biên",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM1",
+          "source_represented_year_claim": "2008"
+        },
+        {
+          "source_index": 65319,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B1284717956892",
+          "ordinal": 163,
+          "owners": [
+            48168
+          ],
+          "name": "Dien Bien",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 48661,
+        "y": 116097,
+        "x": 207477
+      },
+      "proposed_target_owner": 26845,
+      "proposed_target_id": "gb:LAO:ADM2:54806243B53408209397741",
+      "contrary_original_contacts": [
+        {
+          "source_index": 65633,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B81765499113898",
+          "ordinal": 477,
+          "owners": [
+            48661
+          ],
+          "name": "Quan Son",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 48661,
+        "y": 116098,
+        "x": 207474
+      },
+      "proposed_target_owner": 26845,
+      "proposed_target_id": "gb:LAO:ADM2:54806243B53408209397741",
+      "contrary_original_contacts": [
+        {
+          "source_index": 65633,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B81765499113898",
+          "ordinal": 477,
+          "owners": [
+            48661
+          ],
+          "name": "Quan Son",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 48596,
+        "y": 119659,
+        "x": 209305
+      },
+      "proposed_target_owner": 26808,
+      "proposed_target_id": "gb:LAO:ADM2:54806243B33031915083472",
+      "contrary_original_contacts": [
+        {
+          "source_index": 65543,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B72423367852086",
+          "ordinal": 387,
+          "owners": [
+            48596
+          ],
+          "name": "Nam Giang",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 48596,
+        "y": 119660,
+        "x": 209302
+      },
+      "proposed_target_owner": 26808,
+      "proposed_target_id": "gb:LAO:ADM2:54806243B33031915083472",
+      "contrary_original_contacts": [
+        {
+          "source_index": 65543,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B72423367852086",
+          "ordinal": 387,
+          "owners": [
+            48596
+          ],
+          "name": "Nam Giang",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 48212,
+        "y": 119872,
+        "x": 209450
+      },
+      "proposed_target_owner": 26808,
+      "proposed_target_id": "gb:LAO:ADM2:54806243B33031915083472",
+      "contrary_original_contacts": [
+        {
+          "source_index": 65302,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B20367953633835",
+          "ordinal": 146,
+          "owners": [
+            48212
+          ],
+          "name": "Dak Glei",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 48212,
+        "y": 119872,
+        "x": 209455
+      },
+      "proposed_target_owner": 26808,
+      "proposed_target_id": "gb:LAO:ADM2:54806243B33031915083472",
+      "contrary_original_contacts": [
+        {
+          "source_index": 65302,
+          "family_index": 354,
+          "source_id": "gb:VNM:ADM2:81297802B20367953633835",
+          "ordinal": 146,
+          "owners": [
+            48212
+          ],
+          "name": "Dak Glei",
+          "geometry_status": "raw-native-supported",
+          "source_family": "gb:VNM:ADM2",
+          "source_represented_year_claim": "2020"
+        }
+      ]
+    }
+  ],
+  "execution_vintage": {
+    "code_commit": "eb979ee9ff9aedb23b380b959a1350d0639e3ad6",
+    "receipt": {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/lao9-full-source-observation-001/native9-actual-001/execution.json",
+      "commit": "de28ff6952c47d78d2f5513867452b887a96869f",
+      "mode": "100644",
+      "git_blob_oid": "a977be0f149b138a77317cce279af0dfb448cbd1",
+      "bytes": 605,
+      "sha256": "4ec6f870612e55a08d87487ba63102e953493c36265267bfa25a18381b822102"
+    },
+    "admission": {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/lao9-full-source-observation-001/native9-actual-001/admission.json",
+      "commit": "de28ff6952c47d78d2f5513867452b887a96869f",
+      "mode": "100644",
+      "git_blob_oid": "26437ef7a128a89e3f4d57a5528a4b4284b41afe",
+      "bytes": 5892,
+      "sha256": "efd637a6537789ec8f5b5ee14428cec1a5bbd54ef1e6715f65240f348d53fdaa"
+    }
+  },
+  "adopted_full_family": {
+    "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/lao9-full-source-observation-001/adopted-full-source-family9.json",
+    "commit": "db813343c9ef614294e47ed019e604fe406d72ed",
+    "mode": "100644",
+    "git_blob_oid": "f9b73e08cdd281bb5f51161c3ed47eaa634eddc8",
+    "bytes": 4213,
+    "sha256": "10aa405651e2201d7daf6366fd0399c7a2229c9aa3ffdb8e4fc38ee4815fd194"
+  },
+  "territorial_applicability": {
+    "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/lao9-full-source-observation-001/adopted-territorial-context9.json",
+    "commit": "d180af35d91639bbfc81a58ff2c0478b11098161",
+    "mode": "100644",
+    "git_blob_oid": "6d2d838337519242815d1a63c99ffe13feea7beb",
+    "bytes": 10173,
+    "sha256": "6e11c014286637ad61e25d9b1c75f31a683df65c4e5d91b949494982cc367171"
+  },
+  "limits": [
+    "Only subsequent cumulative delivery; frozen967 untouched.",
+    "Final actual accepted-predecessor applicability and selected consumer remain composer gates.",
+    "All historical simplified/VNM/COD source contrasts and exact11 whole original contextual contacts remain retained.",
+    "Same-release full-source physical and native qualification have genuine new actual receipts; no old proof relabeling."
+  ],
+  "accepted_credit": 0
+}

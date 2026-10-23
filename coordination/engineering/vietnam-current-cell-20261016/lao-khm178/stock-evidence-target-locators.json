@@ -1,0 +1,664 @@
+{
+  "48348": [
+    {
+      "file": "vietnam-next/repair-package/quephong49-physical-preparation/native-source-evidence-proposed.json",
+      "id": "gb:VNM:ADM2:81297802B37103290877054",
+      "classes": [
+        "mapped_land_support"
+      ],
+      "exclusions": 2,
+      "physical_evidence": {
+        "commit": "f24862107d352e7fc4893532eb20177b6d1374f3",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/physical/whole-target-support.json",
+        "mode": "100644",
+        "git_blob_oid": "80545423ee5e81cf899c2ddd4a0f22ec0e446690",
+        "bytes": 22199,
+        "sha256": "31701e6f28114770f49de65a52b8570c7a723c4c662409bf0660dc7b3612d424"
+      },
+      "physical_input": {
+        "commit": "2855587c4ae012b64a546f8c4c9a915b3021cd3e",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/que-phong/original-stage-inputs.json",
+        "mode": "100644",
+        "git_blob_oid": "7f15c122ef3e288ac1842a24e50027773a6a78c6",
+        "bytes": 35549,
+        "sha256": "6e050718cdae7fa799e8c9df11ada24db5f49a7bfa7df2791824d7bc334e4ba1"
+      },
+      "physical_reproduction": {
+        "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+        "path": "scripts/qualify-source-cohort.py",
+        "mode": "100644",
+        "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+        "bytes": 48543,
+        "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+      },
+      "keys": [
+        "id",
+        "pixelIndex",
+        "source_family",
+        "base_geometry",
+        "source_receipt_sha256",
+        "coverage_classes",
+        "coverage_rows",
+        "territorial_exclusions"
+      ]
+    }
+  ],
+  "48373": [
+    {
+      "file": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-anphu1-proposed.json",
+      "id": "gb:VNM:ADM2:81297802B41294306698552",
+      "classes": [
+        "mapped_land_support"
+      ],
+      "exclusions": 2,
+      "physical_evidence": {
+        "bytes": 324148,
+        "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+        "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+        "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+      },
+      "physical_input": {
+        "bytes": 811030,
+        "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+        "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+        "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+      },
+      "physical_reproduction": {
+        "bytes": 48543,
+        "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+        "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+        "mode": "100644",
+        "path": "scripts/qualify-source-cohort.py",
+        "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+      },
+      "keys": [
+        "base_geometry",
+        "coverage_classes",
+        "coverage_rows",
+        "id",
+        "pixelIndex",
+        "source_family",
+        "source_receipt_sha256",
+        "territorial_exclusions"
+      ]
+    }
+  ],
+  "48532": [
+    {
+      "file": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-botrach41-proposed.json",
+      "id": "gb:VNM:ADM2:81297802B63375818356773",
+      "classes": [
+        "mapped_land_support"
+      ],
+      "exclusions": 1,
+      "physical_evidence": {
+        "bytes": 324148,
+        "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+        "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+        "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+      },
+      "physical_input": {
+        "bytes": 811030,
+        "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+        "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+        "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+      },
+      "physical_reproduction": {
+        "bytes": 48543,
+        "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+        "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+        "mode": "100644",
+        "path": "scripts/qualify-source-cohort.py",
+        "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+      },
+      "keys": [
+        "base_geometry",
+        "coverage_classes",
+        "coverage_rows",
+        "id",
+        "pixelIndex",
+        "source_family",
+        "source_receipt_sha256",
+        "territorial_exclusions"
+      ]
+    }
+  ],
+  "48596": [
+    {
+      "file": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json",
+      "id": "gb:VNM:ADM2:81297802B72423367852086",
+      "classes": [
+        "mapped_land_support"
+      ],
+      "exclusions": 2,
+      "physical_evidence": {
+        "bytes": 324148,
+        "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+        "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+        "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+      },
+      "physical_input": {
+        "bytes": 811030,
+        "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+        "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+        "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+      },
+      "physical_reproduction": {
+        "bytes": 48543,
+        "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+        "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+        "mode": "100644",
+        "path": "scripts/qualify-source-cohort.py",
+        "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+      },
+      "keys": [
+        "base_geometry",
+        "coverage_classes",
+        "coverage_rows",
+        "id",
+        "pixelIndex",
+        "source_family",
+        "source_receipt_sha256",
+        "territorial_exclusions"
+      ]
+    }
+  ],
+  "48212": [
+    {
+      "file": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json",
+      "id": "gb:VNM:ADM2:81297802B20367953633835",
+      "classes": [
+        "mapped_land_support"
+      ],
+      "exclusions": 2,
+      "physical_evidence": {
+        "bytes": 324148,
+        "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+        "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+        "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+      },
+      "physical_input": {
+        "bytes": 811030,
+        "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+        "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+        "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+      },
+      "physical_reproduction": {
+        "bytes": 48543,
+        "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+        "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+        "mode": "100644",
+        "path": "scripts/qualify-source-cohort.py",
+        "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+      },
+      "keys": [
+        "base_geometry",
+        "coverage_classes",
+        "coverage_rows",
+        "id",
+        "pixelIndex",
+        "source_family",
+        "source_receipt_sha256",
+        "territorial_exclusions"
+      ]
+    }
+  ],
+  "48365": [
+    {
+      "file": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json",
+      "id": "gb:VNM:ADM2:81297802B39086824409595",
+      "classes": [
+        "mapped_land_support"
+      ],
+      "exclusions": 1,
+      "physical_evidence": {
+        "bytes": 324148,
+        "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+        "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+        "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+      },
+      "physical_input": {
+        "bytes": 811030,
+        "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+        "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+        "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+      },
+      "physical_reproduction": {
+        "bytes": 48543,
+        "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+        "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+        "mode": "100644",
+        "path": "scripts/qualify-source-cohort.py",
+        "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+      },
+      "keys": [
+        "base_geometry",
+        "coverage_classes",
+        "coverage_rows",
+        "id",
+        "pixelIndex",
+        "source_family",
+        "source_receipt_sha256",
+        "territorial_exclusions"
+      ]
+    }
+  ],
+  "48597": [
+    {
+      "file": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json",
+      "id": "gb:VNM:ADM2:81297802B72565329345275",
+      "classes": [
+        "mapped_land_support"
+      ],
+      "exclusions": 1,
+      "physical_evidence": {
+        "bytes": 324148,
+        "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+        "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+        "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+      },
+      "physical_input": {
+        "bytes": 811030,
+        "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+        "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+        "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+      },
+      "physical_reproduction": {
+        "bytes": 48543,
+        "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+        "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+        "mode": "100644",
+        "path": "scripts/qualify-source-cohort.py",
+        "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+      },
+      "keys": [
+        "base_geometry",
+        "coverage_classes",
+        "coverage_rows",
+        "id",
+        "pixelIndex",
+        "source_family",
+        "source_receipt_sha256",
+        "territorial_exclusions"
+      ]
+    }
+  ],
+  "48599": [
+    {
+      "file": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json",
+      "id": "gb:VNM:ADM2:81297802B72882386082996",
+      "classes": [
+        "mapped_land_support"
+      ],
+      "exclusions": 1,
+      "physical_evidence": {
+        "bytes": 324148,
+        "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+        "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+        "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+      },
+      "physical_input": {
+        "bytes": 811030,
+        "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+        "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+        "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+      },
+      "physical_reproduction": {
+        "bytes": 48543,
+        "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+        "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+        "mode": "100644",
+        "path": "scripts/qualify-source-cohort.py",
+        "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+      },
+      "keys": [
+        "base_geometry",
+        "coverage_classes",
+        "coverage_rows",
+        "id",
+        "pixelIndex",
+        "source_family",
+        "source_receipt_sha256",
+        "territorial_exclusions"
+      ]
+    }
+  ],
+  "48268": [
+    {
+      "file": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json",
+      "id": "gb:VNM:ADM2:81297802B2701886719052",
+      "classes": [
+        "mapped_land_support"
+      ],
+      "exclusions": 1,
+      "physical_evidence": {
+        "bytes": 324148,
+        "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+        "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+        "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+      },
+      "physical_input": {
+        "bytes": 811030,
+        "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+        "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+        "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+      },
+      "physical_reproduction": {
+        "bytes": 48543,
+        "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+        "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+        "mode": "100644",
+        "path": "scripts/qualify-source-cohort.py",
+        "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+      },
+      "keys": [
+        "base_geometry",
+        "coverage_classes",
+        "coverage_rows",
+        "id",
+        "pixelIndex",
+        "source_family",
+        "source_receipt_sha256",
+        "territorial_exclusions"
+      ]
+    }
+  ],
+  "48661": [
+    {
+      "file": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json",
+      "id": "gb:VNM:ADM2:81297802B81765499113898",
+      "classes": [
+        "mapped_land_support"
+      ],
+      "exclusions": 1,
+      "physical_evidence": {
+        "bytes": 324148,
+        "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+        "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+        "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+      },
+      "physical_input": {
+        "bytes": 811030,
+        "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+        "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+        "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+      },
+      "physical_reproduction": {
+        "bytes": 48543,
+        "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+        "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+        "mode": "100644",
+        "path": "scripts/qualify-source-cohort.py",
+        "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+      },
+      "keys": [
+        "base_geometry",
+        "coverage_classes",
+        "coverage_rows",
+        "id",
+        "pixelIndex",
+        "source_family",
+        "source_receipt_sha256",
+        "territorial_exclusions"
+      ]
+    }
+  ],
+  "48757": [
+    {
+      "file": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json",
+      "id": "gb:VNM:ADM2:81297802B94706269623038",
+      "classes": [
+        "mapped_land_support"
+      ],
+      "exclusions": 1,
+      "physical_evidence": {
+        "bytes": 324148,
+        "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+        "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+        "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+      },
+      "physical_input": {
+        "bytes": 811030,
+        "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+        "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+        "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+      },
+      "physical_reproduction": {
+        "bytes": 48543,
+        "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+        "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+        "mode": "100644",
+        "path": "scripts/qualify-source-cohort.py",
+        "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+      },
+      "keys": [
+        "base_geometry",
+        "coverage_classes",
+        "coverage_rows",
+        "id",
+        "pixelIndex",
+        "source_family",
+        "source_receipt_sha256",
+        "territorial_exclusions"
+      ]
+    }
+  ],
+  "48181": [
+    {
+      "file": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json",
+      "id": "gb:VNM:ADM2:81297802B14510014839166",
+      "classes": [
+        "mapped_land_support"
+      ],
+      "exclusions": 1,
+      "physical_evidence": {
+        "bytes": 324148,
+        "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+        "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+        "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+      },
+      "physical_input": {
+        "bytes": 811030,
+        "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+        "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+        "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+      },
+      "physical_reproduction": {
+        "bytes": 48543,
+        "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+        "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+        "mode": "100644",
+        "path": "scripts/qualify-source-cohort.py",
+        "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+      },
+      "keys": [
+        "base_geometry",
+        "coverage_classes",
+        "coverage_rows",
+        "id",
+        "pixelIndex",
+        "source_family",
+        "source_receipt_sha256",
+        "territorial_exclusions"
+      ]
+    }
+  ],
+  "48556": [
+    {
+      "file": "vietnam-next/repair-package/next-physical351/native-inputs/native-source-evidence-clean309-proposed.json",
+      "id": "gb:VNM:ADM2:81297802B66107700635107",
+      "classes": [
+        "mapped_land_support"
+      ],
+      "exclusions": 1,
+      "physical_evidence": {
+        "bytes": 324148,
+        "commit": "3b00c97c54d25a787f47e54f3e9575ba8adcbf27",
+        "git_blob_oid": "1f6102790a570c798e95dbc47e5c351ddbf015fe",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/physical/whole-target-support.json",
+        "sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78"
+      },
+      "physical_input": {
+        "bytes": 811030,
+        "commit": "06a49464a820abaa73f9244ed7fe0638212f9d7d",
+        "git_blob_oid": "99e0627fd4b413407e999e7e372459f6d506e833",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next351/original-stage-inputs.json",
+        "sha256": "e61a2c5a6179113b30365dd24131bb4a46e5b2ea36860edddf82ce89ace307ea"
+      },
+      "physical_reproduction": {
+        "bytes": 48543,
+        "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+        "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+        "mode": "100644",
+        "path": "scripts/qualify-source-cohort.py",
+        "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+      },
+      "keys": [
+        "base_geometry",
+        "coverage_classes",
+        "coverage_rows",
+        "id",
+        "pixelIndex",
+        "source_family",
+        "source_receipt_sha256",
+        "territorial_exclusions"
+      ]
+    }
+  ],
+  "48168": [
+    {
+      "file": "vietnam-next/repair-package/quephong49-physical-preparation/next-physical557/native-source-evidence-inland295-proposed.json",
+      "id": "gb:VNM:ADM2:81297802B1284717956892",
+      "classes": [
+        "mapped_land_support"
+      ],
+      "exclusions": 1,
+      "physical_evidence": {
+        "bytes": 240095,
+        "commit": "1838eadd248d4ddd430f23764ff90149d58aa7c5",
+        "git_blob_oid": "554f8afbda49521882135553f110c73515ce7b57",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/physical/whole-target-support.json",
+        "sha256": "ac86cd6687663e237db1473830d14e5151b0b5df6a1aeae7e997a2ac6bfbc0a3"
+      },
+      "physical_input": {
+        "bytes": 161126,
+        "commit": "c1e652a338a2351f85fb816093eaa72d210972ce",
+        "git_blob_oid": "7f78188454deced550904797f4ff984d10f7f974",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/original-stage-inputs.json",
+        "sha256": "baaa6a314770cca7b4eb09462fda642d2cc492c9f22d1e10331596b3b688004d"
+      },
+      "physical_reproduction": {
+        "bytes": 48543,
+        "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+        "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+        "mode": "100644",
+        "path": "scripts/qualify-source-cohort.py",
+        "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+      },
+      "keys": [
+        "base_geometry",
+        "coverage_classes",
+        "coverage_rows",
+        "id",
+        "pixelIndex",
+        "source_family",
+        "source_receipt_sha256",
+        "territorial_exclusions"
+      ]
+    }
+  ],
+  "48336": [
+    {
+      "file": "vietnam-next/repair-package/quephong49-physical-preparation/next-physical557/native-source-evidence-inland295-proposed.json",
+      "id": "gb:VNM:ADM2:81297802B35904575630157",
+      "classes": [
+        "mapped_land_support"
+      ],
+      "exclusions": 1,
+      "physical_evidence": {
+        "bytes": 240095,
+        "commit": "1838eadd248d4ddd430f23764ff90149d58aa7c5",
+        "git_blob_oid": "554f8afbda49521882135553f110c73515ce7b57",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/physical/whole-target-support.json",
+        "sha256": "ac86cd6687663e237db1473830d14e5151b0b5df6a1aeae7e997a2ac6bfbc0a3"
+      },
+      "physical_input": {
+        "bytes": 161126,
+        "commit": "c1e652a338a2351f85fb816093eaa72d210972ce",
+        "git_blob_oid": "7f78188454deced550904797f4ff984d10f7f974",
+        "mode": "100644",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cell-refinement-001/next557/original-stage-inputs.json",
+        "sha256": "baaa6a314770cca7b4eb09462fda642d2cc492c9f22d1e10331596b3b688004d"
+      },
+      "physical_reproduction": {
+        "bytes": 48543,
+        "commit": "2347ff09c3e07fb196422668c6b54e9504e1d860",
+        "git_blob_oid": "4dea98fd3d75a70327f1f1313619c44eb113971f",
+        "mode": "100644",
+        "path": "scripts/qualify-source-cohort.py",
+        "sha256": "58ef81739b264085b2997be7baa3df03ba6bb673f91a160176efd79b71fec081"
+      },
+      "keys": [
+        "base_geometry",
+        "coverage_classes",
+        "coverage_rows",
+        "id",
+        "pixelIndex",
+        "source_family",
+        "source_receipt_sha256",
+        "territorial_exclusions"
+      ]
+    }
+  ],
+  "48437": [],
+  "48575": []
+}

@@ -44,7 +44,7 @@ function checkpoint({historical = false} = {}) {
   const report = {version: 1, method_id: 'worldatlas-trusted-geography-check-v1', baseline_commit: baseline,
     candidate_commit: candidate, trusted_code_commit: baseline, candidate_code_executed: false,
     published: false, source_approval: false, gate_status: 'passed', status: historical ? 'no-new-regression' : 'no-new-native-loss',
-    ...(!historical ? {validation_scope: 'selected-native-map-cells', selected_native_report: {method: 'selected-native-owner-conservation-v1',
+    ...(!historical ? {regressions: 0, validation_scope: 'selected-native-map-cells', selected_native_report: {method: 'selected-native-owner-conservation-v1',
       status: 'no-new-native-loss', candidate_code_executed: false, lost_or_reassigned_cells: 0, intervals: []}} : {}),
     checkpoint: {version: 1, kind: 'selected-checkpoint-products-v1', members: bodies.map(([name, raw]) => ({name, bytes: raw.length,
       sha256: reportHash(raw), ...(name.endsWith('.gz') ? {decoded_bytes: json({member:name}).length, decoded_sha256: reportHash(json({member:name}))} : {})}))}};
@@ -114,10 +114,9 @@ function acceptedFixture(options, alterReport = () => {}) {
     if(route.endsWith('/attempts/2')) return f.run;
     if(route.endsWith('/attempts/2/jobs?per_page=100&page=1')) return {jobs:[f.job]};
     if(route.includes('/git/commits/')) return {sha:route.split('/').at(-1),tree:{sha:f.tree??tree}};
-    if(route.endsWith('/artifacts?per_page=100&page=1')) return {total_count:1,artifacts:[f.artifact]};
     throw Error('Unexpected fixture route '+route);
   };
-  api.artifactRedirect=async route => {f.calls.push(route);return new Response(null,{status:302,headers:{location:'https://fixtures.blob.core.windows.net/zip'}});};
+  api.artifactRedirect=async route => {f.calls.push(route);assert.equal(route,`/repos/owner/repo/actions/artifacts/${f.artifact.id}/zip`);return new Response(null,{status:302,headers:{location:'https://fixtures.blob.core.windows.net/zip'}});};
   f.options={api,repo:'owner/repo',locator:{pr_number:7,request_id:request,head},token:'fixture',admit:bytes=>f.admitted.push(bytes),
     fetchImpl:async()=>new Response(f.zip)};
   return f;
@@ -132,7 +131,8 @@ test('real acquisition accepts bot/merged/tree/origin/artifact custody and mints
   releaseAcceptedCheckpoint(result.handle); assert.throws(()=>readAcceptedCheckpoint(result.handle),/private/);
 });
 test('fresh accepted map reports require completed native conservation even with refreshed authenticated provenance', async () => {
-  for (const alter of [r => delete r.validation_scope, r => delete r.selected_native_report,
+  for (const alter of [r => delete r.regressions, r => r.regressions = 1,
+    r => delete r.validation_scope, r => delete r.selected_native_report,
     r => r.selected_native_report.method = 'foreign', r => r.selected_native_report.status = 'native-regressions-found',
     r => r.selected_native_report.candidate_code_executed = true, r => r.selected_native_report.lost_or_reassigned_cells = 1,
     r => delete r.selected_native_report.lost_or_reassigned_cells, r => delete r.selected_native_report.intervals,
@@ -187,37 +187,53 @@ test('actual merge, origin workflow/head/attempt, successful job, artifact ident
     f=>f.run.head_sha=head,f=>f.run.path='.github/workflows/merge-integration-checks.yml',
     f=>f.run.event='pull_request',f=>f.run.run_attempt=1,f=>f.job.head_sha=head,f=>f.job.id=99,
     f=>f.job.status='in_progress',f=>f.job.conclusion='skipped',
-    f=>f.artifact.id=1,f=>f.artifact.digest='sha256:'+'0'.repeat(64)]) {
+    f=>f.artifact.id=1,f=>f.zip=Buffer.from('tampered')]) {
     const f=acceptedFixture();mutate(f);await assert.rejects(acquireAcceptedCheckpoint(f.options));
   }
 });
-test('expired original is unavailable unless the exact accepted artifact is retained', async () => {
-  const missing=acceptedFixture();missing.artifact.expired=true;
-  assert.equal((await acquireAcceptedCheckpoint(missing.options)).available,false);
-  const f=acceptedFixture();f.artifact.expired=true;let read=0;
+test('authenticated retained bytes are preferred without remote rediscovery', async () => {
+  const f=acceptedFixture();let read=0;
+  f.options.api.artifactRedirect=async()=>{throw Error('remote must not be contacted');};
   const result=await acquireAcceptedCheckpoint({...f.options,retainedArchive:async maximum=>{read++;assert.equal(maximum,f.zip.length);return f.zip;}});
   assert.equal(read,1);assert.equal(readAcceptedCheckpoint(result.handle).archive_origin,'retained-exact');
-  assert(!f.calls.some(route=>route.endsWith('/zip')));
-  const forged=acceptedFixture();forged.artifact.expired=true;
-  const other=checkpoint();other.bodies[1][1]=json({forged:true});
-  other.report.checkpoint.members[1]={name:other.bodies[1][0],bytes:other.bodies[1][1].length,sha256:reportHash(other.bodies[1][1])};
-  await assert.rejects(acquireAcceptedCheckpoint({...forged.options,retainedArchive:async()=>encode(other).zip}),/accepted artifact digest/);
+  assert(!f.calls.some(route=>route.includes('/artifacts')));
+  releaseAcceptedCheckpoint(result.handle);
+  const forged=acceptedFixture();let remote=0;
+  forged.options.api.artifactRedirect=async()=>{remote++;throw Error('must not fall back');};
+  await assert.rejects(acquireAcceptedCheckpoint({...forged.options,retainedArchive:async()=>Buffer.from('tampered')}),/accepted artifact digest/);
+  assert.equal(remote,0);
 });
-test('a missing retained copy never bypasses a permission or inventory failure', async () => {
-  const f=acceptedFixture();let reads=0;const original=f.options.api;
-  const api=Object.assign(async route=>{if(route.includes('/artifacts?'))throw Error('access denied');return original(route);},{artifactRedirect:original.artifactRedirect});
-  await assert.rejects(acquireAcceptedCheckpoint({...f.options,api,retainedArchive:async()=>{reads++;return f.zip;}}),/access denied/);
+test('only an actually absent optional copy falls back to exact remote transport', async () => {
+  for (const absent of [null, undefined]) {
+    const f=acceptedFixture();let reads=0;
+    const result=await acquireAcceptedCheckpoint({...f.options,retainedArchive:async()=>{reads++;return absent;}});
+    assert.equal(reads,1);assert.equal(readAcceptedCheckpoint(result.handle).archive_origin,'actions');
+    assert(f.calls.some(route=>route.endsWith('/artifacts/56/zip')));
+    releaseAcceptedCheckpoint(result.handle);
+  }
+  for (const message of ['403 access denied','404 unavailable or denied','429 rate limited','500 service failure','network failure']) {
+    const f=acceptedFixture();let reads=0;
+    f.options.api.artifactRedirect=async()=>{throw Error(message);};
+    await assert.rejects(acquireAcceptedCheckpoint({...f.options,retainedArchive:async()=>{reads++;return null;}}),{message});
+    assert.equal(reads,1);
+  }
+});
+test('original source authentication precedes retained access and retained read errors refuse', async () => {
+  const f=acceptedFixture();let reads=0;f.run.head_sha=head;
+  await assert.rejects(acquireAcceptedCheckpoint({...f.options,retainedArchive:async()=>{reads++;return f.zip;}}),/run identity/);
   assert.equal(reads,0);
+  for (const error of [Error('nonordinary retained file'),Error('retained permission failure')]) {
+    const f=acceptedFixture();let remote=0;
+    f.options.api.artifactRedirect=async()=>{remote++;throw Error('must not fall back');};
+    await assert.rejects(acquireAcceptedCheckpoint({...f.options,retainedArchive:async()=>{throw error;}}),error);
+    assert.equal(remote,0);
+  }
 });
-test('fresh queue loader retains real workflow identity and original successful upload receipt', async () => {
+test('fresh queue loader retains real workflow identity and original successful native upload identity', async () => {
   const f=acceptedFixture();f.run.status='in_progress';f.run.head_branch='main';
-  const log=Buffer.from([JSON.stringify({report_sha256:f.source.report_sha256,report_bytes:f.raw.length}),
-    `SHA256 digest of uploaded artifact zip is ${f.source.artifact_digest}`,
-    `Artifact ${f.source.artifact_name} has been successfully uploaded! Final size is ${f.zip.length} bytes. Artifact ID is 56`].join('\n'));
-  f.options.api.jobLogRedirect=async()=>new Response(null,{status:302,headers:{location:'https://fixtures.blob.core.windows.net/log'}});
   const report=await loadGeographicReport({...f.options,runId:12,artifactName:f.source.artifact_name,expectedHash:f.source.report_sha256,
-    fresh:{run_attempt:2,head,baseline,candidate_commit:candidate,workflow_head:workflowHead,request_id:request},
-    fetchImpl:async url=>new Response(url.endsWith('/log')?log:f.zip)});
+    fresh:{artifact_id:f.source.artifact_id,artifact_digest:f.source.artifact_digest,report_bytes:f.raw.length,run_attempt:2,head,baseline,candidate_commit:candidate,workflow_head:workflowHead,request_id:request},
+    fetchImpl:async()=>new Response(f.zip)});
   assert.deepEqual(geographicReportProducts(report).source,f.source);
 });
 
@@ -252,13 +268,9 @@ test('retained partial-write failure leaves original ZIP but never publishes a f
 });
 test('queue rerun carries its actual successful original attempt without relabeling it current', async () => {
   const f=acceptedFixture();f.run.head_branch='main';
-  const log=Buffer.from([JSON.stringify({report_sha256:f.source.report_sha256,report_bytes:f.raw.length}),
-    `SHA256 digest of uploaded artifact zip is ${f.source.artifact_digest}`,
-    `Artifact ${f.source.artifact_name} has been successfully uploaded! Final size is ${f.zip.length} bytes. Artifact ID is 56`].join('\n'));
-  f.options.api.jobLogRedirect=async()=>new Response(null,{status:302,headers:{location:'https://fixtures.blob.core.windows.net/log'}});
   const report=await loadGeographicReport({...f.options,runId:12,artifactName:f.source.artifact_name,expectedHash:f.source.report_sha256,
-    fresh:{run_attempt:3,head,baseline,candidate_commit:candidate,workflow_head:workflowHead,request_id:request},
-    fetchImpl:async url=>new Response(url.endsWith('/log')?log:f.zip)});
+    fresh:{artifact_id:f.source.artifact_id,artifact_digest:f.source.artifact_digest,report_bytes:f.raw.length,run_attempt:3,head,baseline,candidate_commit:candidate,workflow_head:workflowHead,request_id:request},
+    fetchImpl:async()=>new Response(f.zip)});
   const source=geographicReportProducts(report).source;
   assert.equal(source.run_attempt,2);assert.equal(source.job_id,34);assert.equal(source.artifact_name,f.source.artifact_name);
   assert(!f.calls.some(route=>route.includes('/attempts/3/')));

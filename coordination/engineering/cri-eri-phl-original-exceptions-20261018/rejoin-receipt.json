@@ -1,0 +1,53 @@
+{
+  "kind": "read-only-original-partition-rejoin-receipt",
+  "baseline": "dfe57bc8511fea3ee6cc78384ff2e94d19c7cecd",
+  "same_selected_assets_at": "4d87bbff6dc37dd585dad7be154bec46c35f25e0",
+  "provenance": "Reuses accepted2493 interval expansion, roster join and binary-search current patch comparison algorithm with the three explicit country operand lists in input-custody.json. Private review adapter is not a new repository program or scientific producer.",
+  "accepted_algorithm": "dfe57bc8511fea3ee6cc78384ff2e94d19c7cecd:coordination/engineering/sweden-el-salvador-original-exceptions-20261018/verify-original-partitions.py",
+  "review_adapter_sha256": "5aac7d236fe642c7316b7ce42f4c7a05cee32862b0fce1df35121f9a78fa2692",
+  "scope": {
+    "original": 116436,
+    "accepted": 116420,
+    "proposed_exceptions": 16
+  },
+  "verified": [
+    "Complete original extracted interval/owner union equals original requested patch",
+    "Current patch intersection contains exact recorded owner for every accepted original key",
+    "All16 residual keys equal unchanged held ledgers",
+    "Every residual original physical class is land",
+    "Complete original source-contact roster joined for every residual",
+    "Zero different-owner intersections and no residual already accepted",
+    "All1368 Philippines water keys already accepted"
+  ],
+  "no_scientific_producer_executed": true,
+  "initial_admission_failure": "First CRI rejoin used only block029 and correctly failed full requested-patch equality; complete immutable blocks030/031 were added before the successful full rejoin. No partial result was treated as a verified partition.",
+  "results": [
+    {
+      "package_id": "gb-CRI-ADM2--repair-evaluation",
+      "original_cells": 4380,
+      "accepted_original_owner_cells": 4376,
+      "proposed_documented_exceptions": 4,
+      "original_key_sha256": "9e903a777e195dbf3a5c8eacae7fcc9c0a1d69cbc431e6917bb8fbf55a41a3da",
+      "accepted_original_key_sha256": "b67c086050b54ac87509ac2a0574424eb1e9692ac7a4f782dad9207bf01e7562",
+      "proposed_exception_key_sha256": "0f0ef698b62a940391de323b26b9b37b17b6f81bdff25dcbfe9c40744262f42c"
+    },
+    {
+      "package_id": "gb-ERI-ADM2--repair-evaluation",
+      "original_cells": 15449,
+      "accepted_original_owner_cells": 15444,
+      "proposed_documented_exceptions": 5,
+      "original_key_sha256": "3adc5a1645fb340a983929f8f5d8248822438b400b933e4fff860edf6f4107a9",
+      "accepted_original_key_sha256": "be9aef1f11f6f9c062f08e785542ee393363d3d79605a5e3421714a23414c9cc",
+      "proposed_exception_key_sha256": "7ae8bf22d9bc0856500c3d2212e41b67787092b7a6e9dc552344246d9af1ab74"
+    },
+    {
+      "package_id": "gb-PHL-ADM3--repair-evaluation",
+      "original_cells": 96607,
+      "accepted_original_owner_cells": 96600,
+      "proposed_documented_exceptions": 7,
+      "original_key_sha256": "2e3a33c34e58a5cfe51659827bae52fdbcad44a7be797356893b5d4b6b38467e",
+      "accepted_original_key_sha256": "66c48474080bae4e874bf08c951e3e50ef9690351ff2489a7b2872654d7a420b",
+      "proposed_exception_key_sha256": "d4868a653301d585ed45c5df84e05f43ea6558b3a9df08f62396f0ad1d747d85"
+    }
+  ]
+}

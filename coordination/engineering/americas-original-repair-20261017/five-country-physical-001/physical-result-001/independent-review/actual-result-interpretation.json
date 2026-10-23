@@ -1,0 +1,6327 @@
+{
+  "kind": "actual-first-stock-physical-result-interpretation",
+  "reviewer": "/root/peru_original_evaluation",
+  "countries": {
+    "MEX": {
+      "targets": 158,
+      "issue_targets": 60,
+      "query_relations": 2193,
+      "issue_reasons": {
+        "missing_reconstruction": 23,
+        "extra_reconstruction": 36,
+        "contradictory_land_water_support": 27,
+        "L2-outside-L1": 7
+      },
+      "support_nonempty": {
+        "mapped_land_support": 158,
+        "mapped_inland_water_support": 27,
+        "outside_mapped_L1_context": 109,
+        "hierarchy_disagreements/L2-outside-L1": 7,
+        "hierarchy_disagreements/L3-outside-L2": 0,
+        "hierarchy_disagreements/L4-outside-L3": 0,
+        "missing_reconstruction": 23,
+        "extra_reconstruction": 36,
+        "contradictory_land_water_support": 27
+      },
+      "witnesses": {
+        "complete-operation-pointset": 380,
+        "complete-source-record-reconstruction": 946,
+        "disjoint-after-explicit-predicate": 818,
+        "complete-candidate-reconstruction": 49
+      }
+    },
+    "ECU": {
+      "targets": 58,
+      "issue_targets": 15,
+      "query_relations": 314,
+      "issue_reasons": {
+        "missing_reconstruction": 11,
+        "extra_reconstruction": 13,
+        "contradictory_land_water_support": 3,
+        "L2-outside-L1": 1
+      },
+      "support_nonempty": {
+        "mapped_land_support": 58,
+        "mapped_inland_water_support": 3,
+        "outside_mapped_L1_context": 29,
+        "hierarchy_disagreements/L2-outside-L1": 1,
+        "hierarchy_disagreements/L3-outside-L2": 0,
+        "hierarchy_disagreements/L4-outside-L3": 0,
+        "missing_reconstruction": 11,
+        "extra_reconstruction": 13,
+        "contradictory_land_water_support": 3
+      },
+      "witnesses": {
+        "complete-operation-pointset": 125,
+        "disjoint-after-explicit-predicate": 152,
+        "complete-candidate-reconstruction": 29,
+        "complete-source-record-reconstruction": 8
+      }
+    },
+    "BOL": {
+      "targets": 37,
+      "issue_targets": 16,
+      "query_relations": 66,
+      "issue_reasons": {
+        "missing_reconstruction": 2,
+        "extra_reconstruction": 8,
+        "contradictory_land_water_support": 16,
+        "L2-outside-L1": 9,
+        "L3-outside-L2": 1
+      },
+      "support_nonempty": {
+        "mapped_land_support": 37,
+        "mapped_inland_water_support": 16,
+        "outside_mapped_L1_context": 0,
+        "hierarchy_disagreements/L2-outside-L1": 9,
+        "hierarchy_disagreements/L3-outside-L2": 1,
+        "hierarchy_disagreements/L4-outside-L3": 0,
+        "missing_reconstruction": 2,
+        "extra_reconstruction": 8,
+        "contradictory_land_water_support": 16
+      },
+      "witnesses": {
+        "complete-candidate-reconstruction": 37,
+        "complete-operation-pointset": 18,
+        "disjoint-after-explicit-predicate": 10,
+        "complete-source-record-reconstruction": 1
+      }
+    },
+    "PER": {
+      "targets": 55,
+      "issue_targets": 12,
+      "query_relations": 261,
+      "issue_reasons": {
+        "missing_reconstruction": 6,
+        "extra_reconstruction": 7,
+        "contradictory_land_water_support": 8,
+        "L2-outside-L1": 4
+      },
+      "support_nonempty": {
+        "mapped_land_support": 55,
+        "mapped_inland_water_support": 8,
+        "outside_mapped_L1_context": 31,
+        "hierarchy_disagreements/L2-outside-L1": 4,
+        "hierarchy_disagreements/L3-outside-L2": 0,
+        "hierarchy_disagreements/L4-outside-L3": 0,
+        "missing_reconstruction": 6,
+        "extra_reconstruction": 7,
+        "contradictory_land_water_support": 8
+      },
+      "witnesses": {
+        "complete-operation-pointset": 62,
+        "disjoint-after-explicit-predicate": 164,
+        "complete-candidate-reconstruction": 24,
+        "complete-source-record-reconstruction": 11
+      }
+    },
+    "COL": {
+      "targets": 81,
+      "issue_targets": 18,
+      "query_relations": 435,
+      "issue_reasons": {
+        "missing_reconstruction": 12,
+        "extra_reconstruction": 14,
+        "contradictory_land_water_support": 5,
+        "L3-outside-L2": 1,
+        "L2-outside-L1": 1
+      },
+      "support_nonempty": {
+        "mapped_land_support": 81,
+        "mapped_inland_water_support": 5,
+        "outside_mapped_L1_context": 43,
+        "hierarchy_disagreements/L2-outside-L1": 1,
+        "hierarchy_disagreements/L3-outside-L2": 1,
+        "hierarchy_disagreements/L4-outside-L3": 0,
+        "missing_reconstruction": 12,
+        "extra_reconstruction": 14,
+        "contradictory_land_water_support": 5
+      },
+      "witnesses": {
+        "disjoint-after-explicit-predicate": 210,
+        "complete-candidate-reconstruction": 38,
+        "complete-operation-pointset": 121,
+        "complete-source-record-reconstruction": 66
+      }
+    }
+  },
+  "targets": [
+    {
+      "target": "gb:MEX:ADM2:50627088B12095165689012",
+      "country": "MEX",
+      "name": "Cuajinicuilapa",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B1209754794586",
+      "country": "MEX",
+      "name": "Guaymas",
+      "query_count": 47,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B13205785170557",
+      "country": "MEX",
+      "name": "Catemaco",
+      "query_count": 2,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B13797450449328",
+      "country": "MEX",
+      "name": "Ensenada",
+      "query_count": 180,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B14118013577680",
+      "country": "MEX",
+      "name": "Bácum",
+      "query_count": 6,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B14246153618123",
+      "country": "MEX",
+      "name": "Lázaro Cárdenas",
+      "query_count": 4,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B14293404548968",
+      "country": "MEX",
+      "name": "Solidaridad",
+      "query_count": 2,
+      "issue_reasons": [
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B1433623777217",
+      "country": "MEX",
+      "name": "San Ignacio Río Muerto",
+      "query_count": 32,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B14557669521894",
+      "country": "MEX",
+      "name": "Huatabampo",
+      "query_count": 6,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B147152783463",
+      "country": "MEX",
+      "name": "Progreso",
+      "query_count": 9,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B15970916420519",
+      "country": "MEX",
+      "name": "Soto la Marina",
+      "query_count": 76,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B16692163202625",
+      "country": "MEX",
+      "name": "Isla Mujeres",
+      "query_count": 21,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B1685589835575",
+      "country": "MEX",
+      "name": "Santo Domingo Armenta",
+      "query_count": 1,
+      "issue_reasons": [
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B17136177006846",
+      "country": "MEX",
+      "name": "San Luis Río Colorado",
+      "query_count": 5,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B18038735195258",
+      "country": "MEX",
+      "name": "Acuña",
+      "query_count": 2,
+      "issue_reasons": [
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B19134439985606",
+      "country": "MEX",
+      "name": "La Paz",
+      "query_count": 27,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B19211860628202",
+      "country": "MEX",
+      "name": "Tonalá",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B19734737763323",
+      "country": "MEX",
+      "name": "Mier",
+      "query_count": 3,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B20857302677335",
+      "country": "MEX",
+      "name": "Puerto Vallarta",
+      "query_count": 6,
+      "issue_reasons": [
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B21160446054995",
+      "country": "MEX",
+      "name": "Hunucmá",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B21176552123181",
+      "country": "MEX",
+      "name": "Comondú",
+      "query_count": 122,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B24493610345769",
+      "country": "MEX",
+      "name": "San Pedro Mixtepec -Dto. 22 -",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B24578642235400",
+      "country": "MEX",
+      "name": "Ascensión",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B25417186263654",
+      "country": "MEX",
+      "name": "Tamiahua",
+      "query_count": 15,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B25746055261470",
+      "country": "MEX",
+      "name": "Hermosillo",
+      "query_count": 29,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B26941201425875",
+      "country": "MEX",
+      "name": "La Unión de Isidoro Montes de Oca",
+      "query_count": 3,
+      "issue_reasons": [
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B28083225707634",
+      "country": "MEX",
+      "name": "Guerrero",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B29480766363328",
+      "country": "MEX",
+      "name": "Campeche",
+      "query_count": 4,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B29884383288787",
+      "country": "MEX",
+      "name": "Petatlán",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B31597135225135",
+      "country": "MEX",
+      "name": "Santa María Tonameca",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B34380918216366",
+      "country": "MEX",
+      "name": "Dzidzantún",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B34623658197151",
+      "country": "MEX",
+      "name": "Cihuatlán",
+      "query_count": 3,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B35092187555669",
+      "country": "MEX",
+      "name": "Santa María Huatulco",
+      "query_count": 6,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B35395028449016",
+      "country": "MEX",
+      "name": "Veracruz",
+      "query_count": 10,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B3562448791337",
+      "country": "MEX",
+      "name": "Santa María Huazolotitlán",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B36163788288008",
+      "country": "MEX",
+      "name": "Santiago Pinotepa Nacional",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B36536609271858",
+      "country": "MEX",
+      "name": "Tijuana",
+      "query_count": 5,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B36584167330730",
+      "country": "MEX",
+      "name": "Nuevo Laredo",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B36646128750714",
+      "country": "MEX",
+      "name": "San Francisco del Mar",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B36827584115772",
+      "country": "MEX",
+      "name": "Tuxpan",
+      "query_count": 1,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B3683914427881",
+      "country": "MEX",
+      "name": "Santiago Ixcuintla",
+      "query_count": 6,
+      "issue_reasons": [
+        "extra_reconstruction",
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B36916974246303",
+      "country": "MEX",
+      "name": "Camargo",
+      "query_count": 2,
+      "issue_reasons": [
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B37332042551424",
+      "country": "MEX",
+      "name": "Aldama",
+      "query_count": 21,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B37392390891999",
+      "country": "MEX",
+      "name": "Tecomán",
+      "query_count": 16,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B37536515094098",
+      "country": "MEX",
+      "name": "Salina Cruz",
+      "query_count": 1,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B38726210466963",
+      "country": "MEX",
+      "name": "San Felipe",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B38743512142751",
+      "country": "MEX",
+      "name": "Felipe Carrillo Puerto",
+      "query_count": 30,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B38747904305717",
+      "country": "MEX",
+      "name": "Tapachula",
+      "query_count": 1,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B38874433306118",
+      "country": "MEX",
+      "name": "Lázaro Cárdenas",
+      "query_count": 3,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B39480353913545",
+      "country": "MEX",
+      "name": "Actopan",
+      "query_count": 2,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B3950990861765",
+      "country": "MEX",
+      "name": "Centla",
+      "query_count": 3,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B40588220742551",
+      "country": "MEX",
+      "name": "Sinanché",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B41221510425691",
+      "country": "MEX",
+      "name": "Aquila",
+      "query_count": 3,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B42356912123760",
+      "country": "MEX",
+      "name": "Nautla",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B42762923799593",
+      "country": "MEX",
+      "name": "San Andrés Tuxtla",
+      "query_count": 2,
+      "issue_reasons": [
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B42796639886072",
+      "country": "MEX",
+      "name": "Mulegé",
+      "query_count": 101,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B44837755081847",
+      "country": "MEX",
+      "name": "Angostura",
+      "query_count": 57,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B45198070242199",
+      "country": "MEX",
+      "name": "Rosario",
+      "query_count": 6,
+      "issue_reasons": [
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B45390656969896",
+      "country": "MEX",
+      "name": "Armería",
+      "query_count": 2,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B46889164342382",
+      "country": "MEX",
+      "name": "Matamoros",
+      "query_count": 259,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B47039366190393",
+      "country": "MEX",
+      "name": "Othón P. Blanco",
+      "query_count": 35,
+      "issue_reasons": [
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B47201282051967",
+      "country": "MEX",
+      "name": "Angel R. Cabada",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B50606245291674",
+      "country": "MEX",
+      "name": "Elota",
+      "query_count": 4,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B50740950401551",
+      "country": "MEX",
+      "name": "Ixil",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B50873486185333",
+      "country": "MEX",
+      "name": "Tenabo",
+      "query_count": 1,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B51271489460916",
+      "country": "MEX",
+      "name": "Cárdenas",
+      "query_count": 3,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B5149905661880",
+      "country": "MEX",
+      "name": "Boca del Río",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B51809073979104",
+      "country": "MEX",
+      "name": "Río Lagartos",
+      "query_count": 2,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B52540056379408",
+      "country": "MEX",
+      "name": "Santiago Astata",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B52773743390897",
+      "country": "MEX",
+      "name": "San Pedro Huamelula",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B52793228533805",
+      "country": "MEX",
+      "name": "Frontera Hidalgo",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B53659635813519",
+      "country": "MEX",
+      "name": "Mazatlán",
+      "query_count": 9,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B53896362948042",
+      "country": "MEX",
+      "name": "Metapa",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B54619766562201",
+      "country": "MEX",
+      "name": "La Trinitaria",
+      "query_count": 2,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B5477759296036",
+      "country": "MEX",
+      "name": "Juárez",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B55072426150825",
+      "country": "MEX",
+      "name": "Cajeme",
+      "query_count": 8,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B55174657645518",
+      "country": "MEX",
+      "name": "Benito Juárez",
+      "query_count": 4,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B55202518937979",
+      "country": "MEX",
+      "name": "Tizimín",
+      "query_count": 3,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B55944116291568",
+      "country": "MEX",
+      "name": "Tampico Alto",
+      "query_count": 20,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B56392169999769",
+      "country": "MEX",
+      "name": "Loreto",
+      "query_count": 27,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B56884755613455",
+      "country": "MEX",
+      "name": "Guasave",
+      "query_count": 25,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B57971111763522",
+      "country": "MEX",
+      "name": "Anáhuac",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B58275904386471",
+      "country": "MEX",
+      "name": "Navolato",
+      "query_count": 78,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B59302189712162",
+      "country": "MEX",
+      "name": "Vega de Alatorre",
+      "query_count": 1,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B59810365960374",
+      "country": "MEX",
+      "name": "Ojinaga",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B60863102587946",
+      "country": "MEX",
+      "name": "San Blas",
+      "query_count": 12,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B60977128263275",
+      "country": "MEX",
+      "name": "Cazones de Herrera",
+      "query_count": 1,
+      "issue_reasons": [
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B61133778664315",
+      "country": "MEX",
+      "name": "San Miguel del Puerto",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B62386575329079",
+      "country": "MEX",
+      "name": "Tomatlán",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B62824552173050",
+      "country": "MEX",
+      "name": "Marquelia",
+      "query_count": 1,
+      "issue_reasons": [
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B63268830739579",
+      "country": "MEX",
+      "name": "Coahuayana",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B63495042821208",
+      "country": "MEX",
+      "name": "Ahome",
+      "query_count": 38,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B64168457575480",
+      "country": "MEX",
+      "name": "Los Cabos",
+      "query_count": 4,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B6461377547607",
+      "country": "MEX",
+      "name": "Alto Lucero de Gutiérrez Barrios",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B64715613220585",
+      "country": "MEX",
+      "name": "Ciudad Madero",
+      "query_count": 1,
+      "issue_reasons": [
+        "missing_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B65141848449255",
+      "country": "MEX",
+      "name": "Tecolutla",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B65687353920950",
+      "country": "MEX",
+      "name": "Benemérito de las Américas",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B65754879428970",
+      "country": "MEX",
+      "name": "Paraíso",
+      "query_count": 4,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B6586948636564",
+      "country": "MEX",
+      "name": "Mapastepec",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B66512895446284",
+      "country": "MEX",
+      "name": "Tecate",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B67478118137256",
+      "country": "MEX",
+      "name": "Altamira",
+      "query_count": 14,
+      "issue_reasons": [
+        "extra_reconstruction",
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B67615476566962",
+      "country": "MEX",
+      "name": "La Huerta",
+      "query_count": 30,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B67639994326823",
+      "country": "MEX",
+      "name": "Ocosingo",
+      "query_count": 6,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B68116165686784",
+      "country": "MEX",
+      "name": "Zihuatanejo de Azueta",
+      "query_count": 9,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B68322081472397",
+      "country": "MEX",
+      "name": "Culiacán",
+      "query_count": 77,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B68364674252683",
+      "country": "MEX",
+      "name": "Pitiquito",
+      "query_count": 3,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B68823921856898",
+      "country": "MEX",
+      "name": "Caborca",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B68824645549174",
+      "country": "MEX",
+      "name": "Yobaín",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B69577652591157",
+      "country": "MEX",
+      "name": "Gustavo Díaz Ordaz",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B6965194159018",
+      "country": "MEX",
+      "name": "Tuxtla Chico",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B70110967390572",
+      "country": "MEX",
+      "name": "Tecuala",
+      "query_count": 4,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B70846464748232",
+      "country": "MEX",
+      "name": "Puerto Peñasco",
+      "query_count": 7,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B71409715310525",
+      "country": "MEX",
+      "name": "Guadalupe",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B714151448233",
+      "country": "MEX",
+      "name": "Suchiate",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B71945417585230",
+      "country": "MEX",
+      "name": "Santo Domingo Tehuantepec",
+      "query_count": 2,
+      "issue_reasons": [
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B72181114245692",
+      "country": "MEX",
+      "name": "Reynosa",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B72731607601772",
+      "country": "MEX",
+      "name": "Santiago Jamiltepec",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B73039114437677",
+      "country": "MEX",
+      "name": "Santiago Tapextla",
+      "query_count": 1,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B73050427186978",
+      "country": "MEX",
+      "name": "Bahía de Banderas",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B73770248415585",
+      "country": "MEX",
+      "name": "Técpan de Galeana",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B76577839440191",
+      "country": "MEX",
+      "name": "Manuel Benavides",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B76795265629930",
+      "country": "MEX",
+      "name": "Etchojoa",
+      "query_count": 3,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B77395732347793",
+      "country": "MEX",
+      "name": "Mecayapan",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B77696414551918",
+      "country": "MEX",
+      "name": "San Pedro Pochutla",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B77985545046422",
+      "country": "MEX",
+      "name": "Manzanillo",
+      "query_count": 15,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B78546697072074",
+      "country": "MEX",
+      "name": "Ocampo",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B79233583938817",
+      "country": "MEX",
+      "name": "Cozumel",
+      "query_count": 3,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B80471800868115",
+      "country": "MEX",
+      "name": "Hecelchakán",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B81743896776092",
+      "country": "MEX",
+      "name": "Villa de Tututepec de Melchor Ocampo",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B82523169832508",
+      "country": "MEX",
+      "name": "Compostela",
+      "query_count": 4,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B83273722146736",
+      "country": "MEX",
+      "name": "Pajapan",
+      "query_count": 1,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B84511814526600",
+      "country": "MEX",
+      "name": "Dzilam de Bravo",
+      "query_count": 1,
+      "issue_reasons": [
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B84599572497035",
+      "country": "MEX",
+      "name": "Mexicali",
+      "query_count": 114,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B84741997482443",
+      "country": "MEX",
+      "name": "Río Bravo",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B85126992940446",
+      "country": "MEX",
+      "name": "Calkiní",
+      "query_count": 4,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B85594866218636",
+      "country": "MEX",
+      "name": "Miguel Alemán",
+      "query_count": 2,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction",
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B85761395013038",
+      "country": "MEX",
+      "name": "Acapulco de Juárez",
+      "query_count": 5,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B85792572299721",
+      "country": "MEX",
+      "name": "Pijijiapan",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B86222630376242",
+      "country": "MEX",
+      "name": "Cabo Corrientes",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B86226245749853",
+      "country": "MEX",
+      "name": "San Mateo del Mar",
+      "query_count": 2,
+      "issue_reasons": [
+        "extra_reconstruction",
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B86735774155910",
+      "country": "MEX",
+      "name": "Tatahuicapan de Juárez",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B86783514296689",
+      "country": "MEX",
+      "name": "Carmen",
+      "query_count": 17,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B87487449340620",
+      "country": "MEX",
+      "name": "Bacalar",
+      "query_count": 12,
+      "issue_reasons": [
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B89333927260358",
+      "country": "MEX",
+      "name": "Lerdo de Tejada",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B89618269520255",
+      "country": "MEX",
+      "name": "Celestún",
+      "query_count": 4,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B89843068192047",
+      "country": "MEX",
+      "name": "Tulum",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B89895407901700",
+      "country": "MEX",
+      "name": "Frontera Comalapa",
+      "query_count": 2,
+      "issue_reasons": [
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B90102683496666",
+      "country": "MEX",
+      "name": "Guerrero",
+      "query_count": 2,
+      "issue_reasons": [
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B90299742739886",
+      "country": "MEX",
+      "name": "Coyuca de Benítez",
+      "query_count": 3,
+      "issue_reasons": [
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B90852523965903",
+      "country": "MEX",
+      "name": "Champotón",
+      "query_count": 2,
+      "issue_reasons": [
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B9132255009494",
+      "country": "MEX",
+      "name": "San Fernando",
+      "query_count": 336,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B91471061308984",
+      "country": "MEX",
+      "name": "Playas de Rosarito",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B92525339863236",
+      "country": "MEX",
+      "name": "Empalme",
+      "query_count": 4,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B92566493153794",
+      "country": "MEX",
+      "name": "Santa María Colotepec",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B92995602725414",
+      "country": "MEX",
+      "name": "San Ignacio",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B93400387524803",
+      "country": "MEX",
+      "name": "Acapetahua",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B94546809143043",
+      "country": "MEX",
+      "name": "Alvarado",
+      "query_count": 10,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:MEX:ADM2:50627088B96340136292286",
+      "country": "MEX",
+      "name": "Amatenango de la Frontera",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B16036105102773",
+      "country": "ECU",
+      "name": "Sucre",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B16857875434642",
+      "country": "ECU",
+      "name": "Rioverde",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B19905531919728",
+      "country": "ECU",
+      "name": "Jipijapa",
+      "query_count": 3,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B20282725655414",
+      "country": "ECU",
+      "name": "Paquisha",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B25401291560682",
+      "country": "ECU",
+      "name": "Santa Rosa",
+      "query_count": 22,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B28339541752257",
+      "country": "ECU",
+      "name": "Portoviejo",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B32343432212573",
+      "country": "ECU",
+      "name": "Jama",
+      "query_count": 1,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B32619791172197",
+      "country": "ECU",
+      "name": "San Vicente",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B32687179357863",
+      "country": "ECU",
+      "name": "Lago Agrio",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B34607676191169",
+      "country": "ECU",
+      "name": "Zapotillo",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B34654590669506",
+      "country": "ECU",
+      "name": "Tosagua",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B36504899110850",
+      "country": "ECU",
+      "name": "Nangaritza",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B36933905288912",
+      "country": "ECU",
+      "name": "San Lorenzo",
+      "query_count": 7,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B39062181944850",
+      "country": "ECU",
+      "name": "Puerto Lopez",
+      "query_count": 6,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B39254193540064",
+      "country": "ECU",
+      "name": "Jaramijo",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B40714321113119",
+      "country": "ECU",
+      "name": "Arenillas",
+      "query_count": 10,
+      "issue_reasons": [
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B40737212656211",
+      "country": "ECU",
+      "name": "Palanda",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B41959203551937",
+      "country": "ECU",
+      "name": "Huaquillas",
+      "query_count": 10,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B42265273644391",
+      "country": "ECU",
+      "name": "Yantzaza",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B43814367991628",
+      "country": "ECU",
+      "name": "Limon Indanza",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B44801921966022",
+      "country": "ECU",
+      "name": "Puyango",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B46981965589636",
+      "country": "ECU",
+      "name": "Eloy Alfaro",
+      "query_count": 8,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B49766571468879",
+      "country": "ECU",
+      "name": "Salinas",
+      "query_count": 1,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B49822942031092",
+      "country": "ECU",
+      "name": "Isabela",
+      "query_count": 35,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B50260374474946",
+      "country": "ECU",
+      "name": "Esmeraldas",
+      "query_count": 4,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B50799900166454",
+      "country": "ECU",
+      "name": "Samborondon",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B52535355247444",
+      "country": "ECU",
+      "name": "Naranjal",
+      "query_count": 6,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B54520179219696",
+      "country": "ECU",
+      "name": "Machala",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B57489769890627",
+      "country": "ECU",
+      "name": "El Pangui",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B5800321951611",
+      "country": "ECU",
+      "name": "Tiwintza",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B6127992117214",
+      "country": "ECU",
+      "name": "El Guabo",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B62075287883124",
+      "country": "ECU",
+      "name": "Taisha",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B63398910527025",
+      "country": "ECU",
+      "name": "Cascales",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B63754497407840",
+      "country": "ECU",
+      "name": "Balao",
+      "query_count": 1,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B65989855164186",
+      "country": "ECU",
+      "name": "Sozoranga",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B665042104792",
+      "country": "ECU",
+      "name": "Aguarico",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B67239224798881",
+      "country": "ECU",
+      "name": "Sucumbios",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B7040191128771",
+      "country": "ECU",
+      "name": "Las Lajas",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B72136829689010",
+      "country": "ECU",
+      "name": "Manta",
+      "query_count": 1,
+      "issue_reasons": [
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B7366793693817",
+      "country": "ECU",
+      "name": "Chinchipe",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B73941749048341",
+      "country": "ECU",
+      "name": "Santa Cruz",
+      "query_count": 52,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B75288721097085",
+      "country": "ECU",
+      "name": "Guayaquil",
+      "query_count": 36,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B77805583896778",
+      "country": "ECU",
+      "name": "Calvas",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B78809265584676",
+      "country": "ECU",
+      "name": "Muisne",
+      "query_count": 13,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B83271763782433",
+      "country": "ECU",
+      "name": "San Jacinto de Yaguachi",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B85617002422218",
+      "country": "ECU",
+      "name": "Tulcan",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B86865530067586",
+      "country": "ECU",
+      "name": "Putumayo",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B88993978002865",
+      "country": "ECU",
+      "name": "La Libertad",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B89599541187452",
+      "country": "ECU",
+      "name": "Pastaza",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B90110286076801",
+      "country": "ECU",
+      "name": "Espindola",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B90160317571497",
+      "country": "ECU",
+      "name": "Gualaquiza",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B91942112022560",
+      "country": "ECU",
+      "name": "Pedernales",
+      "query_count": 7,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B91956383415021",
+      "country": "ECU",
+      "name": "San Juan Bosco",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B94997360470933",
+      "country": "ECU",
+      "name": "Santa Elena",
+      "query_count": 5,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B96374734157472",
+      "country": "ECU",
+      "name": "San Cristobal",
+      "query_count": 44,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B97967949149299",
+      "country": "ECU",
+      "name": "Duran",
+      "query_count": 3,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction",
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B98272453986256",
+      "country": "ECU",
+      "name": "Cuyabeno",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:ECU:ADM2:8360857B99830619134812",
+      "country": "ECU",
+      "name": "Montecristi",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B10216811995240",
+      "country": "BOL",
+      "name": "Manco Kapac",
+      "query_count": 5,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction",
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B11005199202815",
+      "country": "BOL",
+      "name": "Gran Chaco",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B1243940975424",
+      "country": "BOL",
+      "name": "Sajama",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B13760935176175",
+      "country": "BOL",
+      "name": "Abuná",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B1406724056762",
+      "country": "BOL",
+      "name": "Saucarí",
+      "query_count": 2,
+      "issue_reasons": [
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B1600294298168",
+      "country": "BOL",
+      "name": "Germán Busch",
+      "query_count": 2,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B17686030747592",
+      "country": "BOL",
+      "name": "Sabaya",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B22915857143112",
+      "country": "BOL",
+      "name": "Nor Lipez",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B24789788010808",
+      "country": "BOL",
+      "name": "Sur Lipez",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B2662658731226",
+      "country": "BOL",
+      "name": "Abel Iturralde",
+      "query_count": 4,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B30477507656931",
+      "country": "BOL",
+      "name": "Luis Calvo",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B34166652400223",
+      "country": "BOL",
+      "name": "Franz Tamayo",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B35005318942219",
+      "country": "BOL",
+      "name": "Bautista Saavedra",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B3686245801684",
+      "country": "BOL",
+      "name": "Daniel Campos",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B3714124293467",
+      "country": "BOL",
+      "name": "General José Manuel Pando",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B37315753156097",
+      "country": "BOL",
+      "name": "Poopó",
+      "query_count": 2,
+      "issue_reasons": [
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B40548411134311",
+      "country": "BOL",
+      "name": "Antonio Quijarro",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B43874264041869",
+      "country": "BOL",
+      "name": "Pacajes",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B46299848099436",
+      "country": "BOL",
+      "name": "Omasuyos",
+      "query_count": 2,
+      "issue_reasons": [
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B48061932483413",
+      "country": "BOL",
+      "name": "Cercado",
+      "query_count": 4,
+      "issue_reasons": [
+        "extra_reconstruction",
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B48307092607901",
+      "country": "BOL",
+      "name": "Arce",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B49791769879016",
+      "country": "BOL",
+      "name": "Manuripi",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B53717716043647",
+      "country": "BOL",
+      "name": "Ladislao Cabrera",
+      "query_count": 3,
+      "issue_reasons": [
+        "extra_reconstruction",
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B56918274933766",
+      "country": "BOL",
+      "name": "Angel Sandoval",
+      "query_count": 2,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B61921799976557",
+      "country": "BOL",
+      "name": "Vaca Diez",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B66577071935588",
+      "country": "BOL",
+      "name": "Los Andes",
+      "query_count": 3,
+      "issue_reasons": [
+        "extra_reconstruction",
+        "contradictory_land_water_support",
+        "L3-outside-L2"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B67981930474483",
+      "country": "BOL",
+      "name": "Abaroa",
+      "query_count": 2,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction",
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B75340926517548",
+      "country": "BOL",
+      "name": "Sebastián Pagador",
+      "query_count": 2,
+      "issue_reasons": [
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B79819940935294",
+      "country": "BOL",
+      "name": "Iténez",
+      "query_count": 2,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B8249503809057",
+      "country": "BOL",
+      "name": "Federico Román",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B84054841626555",
+      "country": "BOL",
+      "name": "Pantaleón Dalence",
+      "query_count": 2,
+      "issue_reasons": [
+        "extra_reconstruction",
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B85917375700846",
+      "country": "BOL",
+      "name": "Ingavi",
+      "query_count": 2,
+      "issue_reasons": [
+        "extra_reconstruction",
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B89802127799327",
+      "country": "BOL",
+      "name": "Nicolás Suárez",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B91200896364808",
+      "country": "BOL",
+      "name": "Mamoré",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B98561374556205",
+      "country": "BOL",
+      "name": "Sur Carangas",
+      "query_count": 2,
+      "issue_reasons": [
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B99482203353222",
+      "country": "BOL",
+      "name": "Camacho",
+      "query_count": 2,
+      "issue_reasons": [
+        "extra_reconstruction",
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:BOL:ADM2:80513517B99991540254109",
+      "country": "BOL",
+      "name": "Modesto Omiste",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B1064179091614",
+      "country": "PER",
+      "name": "Pacasmayo",
+      "query_count": 1,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B11077659062931",
+      "country": "PER",
+      "name": "Tumbes",
+      "query_count": 3,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B12853794750589",
+      "country": "PER",
+      "name": "Yunguyo",
+      "query_count": 4,
+      "issue_reasons": [
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B13089313750619",
+      "country": "PER",
+      "name": "Sechura",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B15199345066694",
+      "country": "PER",
+      "name": "Tahuamanu",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B17280612130391",
+      "country": "PER",
+      "name": "San Antonio de Putina",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B18343164378490",
+      "country": "PER",
+      "name": "Huancabamba",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B19525046252167",
+      "country": "PER",
+      "name": "Datem del Marañon",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B1957856782963",
+      "country": "PER",
+      "name": "Pisco",
+      "query_count": 20,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B2009584770590",
+      "country": "PER",
+      "name": "Viru",
+      "query_count": 6,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B21009248898999",
+      "country": "PER",
+      "name": "Callao",
+      "query_count": 3,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B24455260096548",
+      "country": "PER",
+      "name": "Huarmey",
+      "query_count": 16,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B24627039816812",
+      "country": "PER",
+      "name": "Caraveli",
+      "query_count": 7,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B246740541536",
+      "country": "PER",
+      "name": "San Ignacio",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B29242066404010",
+      "country": "PER",
+      "name": "Huaura",
+      "query_count": 7,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B29685222960103",
+      "country": "PER",
+      "name": "Barranca",
+      "query_count": 3,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B31634859634019",
+      "country": "PER",
+      "name": "Paita",
+      "query_count": 6,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B32032082656225",
+      "country": "PER",
+      "name": "Sandia",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B3265311261772",
+      "country": "PER",
+      "name": "Ayabaca",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B38197042578648",
+      "country": "PER",
+      "name": "Cañete",
+      "query_count": 16,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B38323615258078",
+      "country": "PER",
+      "name": "Talara",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B40725623046053",
+      "country": "PER",
+      "name": "Ica",
+      "query_count": 8,
+      "issue_reasons": [
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B42439705570298",
+      "country": "PER",
+      "name": "Casma",
+      "query_count": 21,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B42703841252030",
+      "country": "PER",
+      "name": "Bagua",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B43857057528938",
+      "country": "PER",
+      "name": "Mariscal Ramon Castilla",
+      "query_count": 10,
+      "issue_reasons": [
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B48399127015258",
+      "country": "PER",
+      "name": "Ascope",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B49364565182822",
+      "country": "PER",
+      "name": "Condorcanqui",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B49517942967283",
+      "country": "PER",
+      "name": "Contralmirante Villar",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B54708928525670",
+      "country": "PER",
+      "name": "Jorge Basadre",
+      "query_count": 3,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B5897753899369",
+      "country": "PER",
+      "name": "Lima",
+      "query_count": 19,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B61745843991716",
+      "country": "PER",
+      "name": "Nasca",
+      "query_count": 9,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B62474480123859",
+      "country": "PER",
+      "name": "Zarumilla",
+      "query_count": 14,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B65851578200644",
+      "country": "PER",
+      "name": "Moho",
+      "query_count": 2,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction",
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B67596976235519",
+      "country": "PER",
+      "name": "Puno",
+      "query_count": 5,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction",
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B69891072008043",
+      "country": "PER",
+      "name": "Junin",
+      "query_count": 2,
+      "issue_reasons": [
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B70453073553936",
+      "country": "PER",
+      "name": "El Collao",
+      "query_count": 2,
+      "issue_reasons": [
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B72337675709954",
+      "country": "PER",
+      "name": "Tacna",
+      "query_count": 5,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B7276941823371",
+      "country": "PER",
+      "name": "Chiclayo",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B73301228794049",
+      "country": "PER",
+      "name": "Purus",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B74998142298356",
+      "country": "PER",
+      "name": "Chincha",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B75431659471329",
+      "country": "PER",
+      "name": "Ilo",
+      "query_count": 3,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B79480017417132",
+      "country": "PER",
+      "name": "Chucuito",
+      "query_count": 2,
+      "issue_reasons": [
+        "extra_reconstruction",
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B80561874516771",
+      "country": "PER",
+      "name": "Trujillo",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B8131486322955",
+      "country": "PER",
+      "name": "Huancane",
+      "query_count": 3,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction",
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B8185732836313",
+      "country": "PER",
+      "name": "Atalaya",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B8316055413936",
+      "country": "PER",
+      "name": "Coronel Portillo",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B85206486043179",
+      "country": "PER",
+      "name": "Santa",
+      "query_count": 13,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B8738296483293",
+      "country": "PER",
+      "name": "Sullana",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B8928059178056",
+      "country": "PER",
+      "name": "Camana",
+      "query_count": 7,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B90412746256760",
+      "country": "PER",
+      "name": "Huaral",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B92685441035465",
+      "country": "PER",
+      "name": "Islay",
+      "query_count": 8,
+      "issue_reasons": [
+        "missing_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B97572959999904",
+      "country": "PER",
+      "name": "Tambopata",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B9789876914090",
+      "country": "PER",
+      "name": "Pasco",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B97940066257739",
+      "country": "PER",
+      "name": "Lambayeque",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:PER:ADM2:86281439B99020092108711",
+      "country": "PER",
+      "name": "Putumayo",
+      "query_count": 5,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B10536000233920",
+      "country": "COL",
+      "name": "Coveñas",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B11470740818947",
+      "country": "COL",
+      "name": "Tumaco",
+      "query_count": 22,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B12628358742837",
+      "country": "COL",
+      "name": "Los Córdobas",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B12935674193542",
+      "country": "COL",
+      "name": "Taraira",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B13648445071260",
+      "country": "COL",
+      "name": "San Antero",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B14998951172946",
+      "country": "COL",
+      "name": "Puerto Nariño",
+      "query_count": 3,
+      "issue_reasons": [
+        "contradictory_land_water_support",
+        "L3-outside-L2"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B15462988930410",
+      "country": "COL",
+      "name": "El Encanto",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B17655587109293",
+      "country": "COL",
+      "name": "El Carmen",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B17674180496874",
+      "country": "COL",
+      "name": "La Pedrera",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B20687876454915",
+      "country": "COL",
+      "name": "Unguía",
+      "query_count": 6,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction",
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B21429087141697",
+      "country": "COL",
+      "name": "Becerrill",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B21872376500424",
+      "country": "COL",
+      "name": "Francisco Pizarro (Salahonda)",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B21922340436225",
+      "country": "COL",
+      "name": "Agustín Codazzi",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B23933062741111",
+      "country": "COL",
+      "name": "Tibú",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B2481053474358",
+      "country": "COL",
+      "name": "Santa Marta",
+      "query_count": 4,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B26608751492830",
+      "country": "COL",
+      "name": "Bajo Baudó (Pizarro)",
+      "query_count": 3,
+      "issue_reasons": [
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B29529138088476",
+      "country": "COL",
+      "name": "Providencia (Santa Isabel)",
+      "query_count": 3,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B29749803006962",
+      "country": "COL",
+      "name": "La Jagua De Ibirico",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B30016646196042",
+      "country": "COL",
+      "name": "San Felipe",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B32018425198797",
+      "country": "COL",
+      "name": "Necoclí",
+      "query_count": 5,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B3276683190429",
+      "country": "COL",
+      "name": "Puerto Escondido",
+      "query_count": 2,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B33268622823443",
+      "country": "COL",
+      "name": "Barranquilla",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B333930671770",
+      "country": "COL",
+      "name": "Guapi",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B33539636068872",
+      "country": "COL",
+      "name": "López",
+      "query_count": 12,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B35669712343607",
+      "country": "COL",
+      "name": "La Tola",
+      "query_count": 18,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B36183297139579",
+      "country": "COL",
+      "name": "San Bernardo Del Viento",
+      "query_count": 4,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B37330638753990",
+      "country": "COL",
+      "name": "Urumita",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B38303278930766",
+      "country": "COL",
+      "name": "Santiago De Tolú",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B39779647098113",
+      "country": "COL",
+      "name": "Cúcuta",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B41074866331491",
+      "country": "COL",
+      "name": "Riohacha",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B41471862384078",
+      "country": "COL",
+      "name": "San Juan De Urabá",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B42533804398270",
+      "country": "COL",
+      "name": "Puerto Asís",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B43275073099169",
+      "country": "COL",
+      "name": "Leticia",
+      "query_count": 4,
+      "issue_reasons": [
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B4639527364844",
+      "country": "COL",
+      "name": "Puerto Leguízamo",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B47092068992796",
+      "country": "COL",
+      "name": "Ricaurte",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B48285719364233",
+      "country": "COL",
+      "name": "Juan De Acosta",
+      "query_count": 2,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B48431057450442",
+      "country": "COL",
+      "name": "San Andrés",
+      "query_count": 4,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B48690619382287",
+      "country": "COL",
+      "name": "Cuaspud",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B48982003363918",
+      "country": "COL",
+      "name": "Cacahual",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B50420641639319",
+      "country": "COL",
+      "name": "Puerto Carreño",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B52108893597118",
+      "country": "COL",
+      "name": "Ipiales",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B53559247838582",
+      "country": "COL",
+      "name": "Sitionuevo",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B53697702098906",
+      "country": "COL",
+      "name": "Puerto Colombia",
+      "query_count": 2,
+      "issue_reasons": [
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B54446489784787",
+      "country": "COL",
+      "name": "Cumbal",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B54920381077672",
+      "country": "COL",
+      "name": "Timbiquí",
+      "query_count": 4,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B57930571389360",
+      "country": "COL",
+      "name": "Yavaraté  (Cor. Departamental)",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B59918479254924",
+      "country": "COL",
+      "name": "Turbana",
+      "query_count": 3,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B60850908313742",
+      "country": "COL",
+      "name": "El Litoral Del San Juán (Docordó)",
+      "query_count": 22,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B62655490891692",
+      "country": "COL",
+      "name": "Paná-paná (Campo Alegre)",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B63219167188036",
+      "country": "COL",
+      "name": "Manaure",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B64319066043835",
+      "country": "COL",
+      "name": "Villa Del Rosario",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B67825714501436",
+      "country": "COL",
+      "name": "Bahía Solano (Mutis)",
+      "query_count": 14,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B6840641027062",
+      "country": "COL",
+      "name": "Riosucio",
+      "query_count": 16,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B69446102501587",
+      "country": "COL",
+      "name": "Barbacoas",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B69747109400917",
+      "country": "COL",
+      "name": "Cartagena De Indias",
+      "query_count": 35,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B7133073110314",
+      "country": "COL",
+      "name": "La Guadalupe",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B72973217917261",
+      "country": "COL",
+      "name": "Mosquera",
+      "query_count": 24,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B7457968430038",
+      "country": "COL",
+      "name": "Pacoa (Cor. Departamental)",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B77502299141728",
+      "country": "COL",
+      "name": "Nuquí",
+      "query_count": 12,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B78010874315873",
+      "country": "COL",
+      "name": "Ciénaga",
+      "query_count": 4,
+      "issue_reasons": [
+        "contradictory_land_water_support",
+        "L2-outside-L1"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B79369128068178",
+      "country": "COL",
+      "name": "La Primavera",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B82326475607220",
+      "country": "COL",
+      "name": "Buenaventura",
+      "query_count": 48,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B84273930819596",
+      "country": "COL",
+      "name": "Moñitos",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B85256872918621",
+      "country": "COL",
+      "name": "Pueblo Viejo",
+      "query_count": 7,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction",
+        "contradictory_land_water_support"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": true,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": true
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B8590395772901",
+      "country": "COL",
+      "name": "Puerto Colombia",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B86693666640795",
+      "country": "COL",
+      "name": "San Onofre",
+      "query_count": 4,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B87562004853041",
+      "country": "COL",
+      "name": "El Charco",
+      "query_count": 14,
+      "issue_reasons": [
+        "missing_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B89391660501858",
+      "country": "COL",
+      "name": "Albania",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B90132082814174",
+      "country": "COL",
+      "name": "Turbo",
+      "query_count": 11,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B91699112359201",
+      "country": "COL",
+      "name": "La Jagua Del Pilar",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B91740979880715",
+      "country": "COL",
+      "name": "Acandí",
+      "query_count": 2,
+      "issue_reasons": [
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B94072212482436",
+      "country": "COL",
+      "name": "Curumaní",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B94752560507760",
+      "country": "COL",
+      "name": "Arauquita",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B94755540005328",
+      "country": "COL",
+      "name": "Juradó",
+      "query_count": 19,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B95820075707853",
+      "country": "COL",
+      "name": "Santa Catalina",
+      "query_count": 3,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B95886697546678",
+      "country": "COL",
+      "name": "Tarapacá",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B96062501211498",
+      "country": "COL",
+      "name": "Uribia",
+      "query_count": 11,
+      "issue_reasons": [
+        "missing_reconstruction",
+        "extra_reconstruction"
+      ],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": true,
+        "extra_reconstruction": true,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B97252339631603",
+      "country": "COL",
+      "name": "Dibulla",
+      "query_count": 2,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B97476971281230",
+      "country": "COL",
+      "name": "Valle Del Guamuez",
+      "query_count": 1,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B98586800286799",
+      "country": "COL",
+      "name": "Maicao",
+      "query_count": 3,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": false,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    },
+    {
+      "target": "gb:COL:ADM2:7082276B99136561352014",
+      "country": "COL",
+      "name": "Santa Bárbara (Iscuandé)",
+      "query_count": 11,
+      "issue_reasons": [],
+      "support_nonempty": {
+        "mapped_land_support": true,
+        "mapped_inland_water_support": false,
+        "outside_mapped_L1_context": true,
+        "missing_reconstruction": false,
+        "extra_reconstruction": false,
+        "contradictory_land_water_support": false
+      }
+    }
+  ],
+  "qualified_cells": 0,
+  "accepted_cells": 0,
+  "limits": [
+    "Whole-source-target diagnostic, not an original-cell classification or territorial adjudication.",
+    "No source, native, physical producer or GEOS predicates reran."
+  ]
+}

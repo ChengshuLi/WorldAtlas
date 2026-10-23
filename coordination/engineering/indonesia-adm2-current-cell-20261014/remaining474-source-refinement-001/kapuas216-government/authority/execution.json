@@ -1,0 +1,56 @@
+{
+  "public_record": {
+    "command": [
+      "[local machine path or invocation omitted; original private record hash retained]",
+      "scripts/prepare-delivery-handoff.mjs",
+      "native-authority",
+      ".cache/remaining474-kapuas216-government-001/config.json",
+      ".cache/delivery-handoff/remaining474-kapuas216-government-native-authority-001"
+    ],
+    "cwd": "[local machine path or invocation omitted; original private record hash retained]",
+    "started": "2026-10-16T00:10:03.144179+00:00",
+    "finished": "2026-10-16T00:10:15.032511+00:00",
+    "exit_code": 0,
+    "deadline_exceeded": false,
+    "external_seconds": 11.884191583,
+    "child_lifetime_peak_bytes": 370081792,
+    "input_commit": "58aa634d45919a15eab17b0980ac4345bedb6cae",
+    "config_sha256": "42ea2cd362be1ac5d5cc37c9273688c02eb20810e84f93e7f05ced4a44d09f0a",
+    "numeric_memory_fields_or_heap_flags": false,
+    "source_or_physical_producer_replay": false,
+    "complete_products": [
+      {
+        "file": "authority-binding.json",
+        "bytes": 828,
+        "sha256": "4edfdd29cb7b5be125bfa7cf435e2110d328b4060b237d06a3023f71fb9b2b24"
+      },
+      {
+        "file": "constructor-result.json",
+        "bytes": 17316,
+        "sha256": "40fc9865a70bd045e76983d32ee1000502db45341dfb5f15bff53374d3bf6941"
+      },
+      {
+        "file": "original-rule-preimage.json",
+        "bytes": 825,
+        "sha256": "dbf88fd4280ec3c95244299a9e137bf617c80fb984abd766327095bd90c5a0de"
+      },
+      {
+        "file": "preparation.json",
+        "bytes": 501,
+        "sha256": "3636413bd4e7e562f9da276b1b44a890fbee7384a2639a74184bed295152097f"
+      }
+    ]
+  },
+  "original_private_body_sha256": "d38187c963ddd4dc650177762a41edebd7974fb4adc231a4890fd2f9ac778aa0",
+  "omitted_local_machine_fields": [
+    {
+      "field": "/command/0",
+      "value_sha256": "985b934eadc5dc71cb5457c2da636f6c87265154e8c80be160275a4d3b0c48d3"
+    },
+    {
+      "field": "/cwd",
+      "value_sha256": "cbc9e134ce9b6beb39b351863a78dfd87f6ac3d21f0814be85cc34cd1c630597"
+    }
+  ],
+  "scientific_fields_unchanged": true
+}

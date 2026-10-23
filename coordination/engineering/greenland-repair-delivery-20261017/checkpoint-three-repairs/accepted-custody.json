@@ -1,0 +1,60 @@
+{
+  "locator": {
+    "version": 1,
+    "kind": "accepted-selected-checkpoint-locator-v1",
+    "acceptance": {
+      "pr_number": 2287,
+      "request_id": "three-repairs-2287-a0e4ff8-20261017-001",
+      "head": "a0e4ff8f2ca28bc38d2f8edf9f82124dcf42f878"
+    },
+    "retained_artifact": {
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/checkpoint-three-repairs/geography-artifact.zip"
+    }
+  },
+  "accepted_merge": "aa86126887af58d2c99f0eee91da26dd27010eb5",
+  "original_source": {
+    "run_id": 38986423405,
+    "run_attempt": 1,
+    "head": "a0e4ff8f2ca28bc38d2f8edf9f82124dcf42f878",
+    "baseline": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+    "candidate_commit": "0fd7c9d544546380a192adaa3f638d7573042264",
+    "workflow_path": ".github/workflows/worker-merge.yml",
+    "event": "workflow_dispatch",
+    "workflow_head": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+    "tree": "25c02fb562b956a7a1a123ad1e8ff66b61fe5dcb",
+    "job_id": 117259011619,
+    "artifact_name": "geography-three-repairs-2287-a0e4ff8-20261017-001-1",
+    "artifact_id": 12083861080,
+    "artifact_digest": "7b4bcd806a5253c8399c44aa9889a78dd10c629a408e4279d0acff075806eaa5",
+    "report_sha256": "1400ab711ddb63a9c7090e6cce76c7466c76e85b6555faf2b194d7e9b0855746",
+    "report_bytes": 768169,
+    "artifact_bytes": 7861170
+  },
+  "archive_origin": "retained-exact",
+  "report_status": "no-new-native-loss",
+  "checkpoint_members": [
+    {
+      "bytes": 482923,
+      "name": "checkpoint-routes.json",
+      "sha256": "defe06419ae72ac5989e023da84c58138a8d635ec75622301be94e01329a4ad9"
+    },
+    {
+      "bytes": 7521604,
+      "decoded_bytes": 18427099,
+      "decoded_sha256": "52d8889c26bb00d3c8d8bd35ee6822a35fff9e84a82d8bab196a9c5a2725ca4b",
+      "name": "derived-certificate.json.gz",
+      "sha256": "1aa07c63d63b4cc32d94efb96bb90daacdc8c5429c5ded883f88cfb4c4253c50"
+    },
+    {
+      "bytes": 439562,
+      "name": "derived-facts.json",
+      "sha256": "338355495ab6948490966385842a886e245c0126606358e61ce2bf1456a48b34"
+    },
+    {
+      "bytes": 660,
+      "name": "derived-publication.json",
+      "sha256": "e5f607089106070390ad58b916dd87bf5c6688778b04e9fa7df5d14691a42c04"
+    }
+  ],
+  "adoption_note": "Stock acquire/retain created the exact archive and locator. The first auxiliary custody serialization referenced the wrong report-status field after successful retention; this read-only stock reacquisition authenticated those same retained bytes and repaired only the missing custody report. No download or scientific replay."
+}

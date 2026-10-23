@@ -1,0 +1,345 @@
+{
+  "package_id": "gb-PHL-ADM3--repair-evaluation",
+  "original_interval_read_commit": "dfe57bc8511fea3ee6cc78384ff2e94d19c7cecd",
+  "accepted_selection_commit": "dfe57bc8511fea3ee6cc78384ff2e94d19c7cecd",
+  "original_class_counts": {
+    "inland-water": 1368,
+    "land": 95239
+  },
+  "original_cells": 96607,
+  "original_intervals": 36123,
+  "original_owners": 864,
+  "accepted_original_owner_cells": 96600,
+  "proposed_documented_exceptions": 7,
+  "different_owner_intersections": [],
+  "original_key_sha256": "2e3a33c34e58a5cfe51659827bae52fdbcad44a7be797356893b5d4b6b38467e",
+  "accepted_original_key_sha256": "66c48474080bae4e874bf08c951e3e50ef9690351ff2489a7b2872654d7a420b",
+  "proposed_exception_key_sha256": "d4868a653301d585ed45c5df84e05f43ea6558b3a9df08f62396f0ad1d747d85",
+  "original_equals_requested_patch": true,
+  "partition_exhaustive_disjoint": true,
+  "exception_records": [
+    {
+      "y": 121871,
+      "x": 221714,
+      "owner": 34707,
+      "source_feature_indices": [
+        49126,
+        49190,
+        50437
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 49126,
+          "family_index": 259,
+          "source_id": "gb:PHL:ADM1:36201628B29919658129037",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Eastern Visayas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 49190,
+          "family_index": 260,
+          "source_id": "gb:PHL:ADM2:2640588B89959078713723",
+          "ordinal": 59,
+          "owners": [],
+          "name": "Northern Samar",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 50437,
+          "family_index": 261,
+          "source_id": "gb:PHL:ADM3:30758251B57957454535676",
+          "ordinal": 1219,
+          "owners": [
+            34707
+          ],
+          "name": "Rosario",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "unresolved_prior_source_fitness",
+      "proposed_disposition": "documented_unresolved_source_fitness_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 121872,
+      "x": 221714,
+      "owner": 34707,
+      "source_feature_indices": [
+        49126,
+        49190,
+        50437
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 49126,
+          "family_index": 259,
+          "source_id": "gb:PHL:ADM1:36201628B29919658129037",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Eastern Visayas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 49190,
+          "family_index": 260,
+          "source_id": "gb:PHL:ADM2:2640588B89959078713723",
+          "ordinal": 59,
+          "owners": [],
+          "name": "Northern Samar",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 50437,
+          "family_index": 261,
+          "source_id": "gb:PHL:ADM3:30758251B57957454535676",
+          "ordinal": 1219,
+          "owners": [
+            34707
+          ],
+          "name": "Rosario",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "unresolved_prior_source_fitness",
+      "proposed_disposition": "documented_unresolved_source_fitness_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 121873,
+      "x": 221713,
+      "owner": 34707,
+      "source_feature_indices": [
+        49126,
+        49190,
+        50437
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 49126,
+          "family_index": 259,
+          "source_id": "gb:PHL:ADM1:36201628B29919658129037",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Eastern Visayas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 49190,
+          "family_index": 260,
+          "source_id": "gb:PHL:ADM2:2640588B89959078713723",
+          "ordinal": 59,
+          "owners": [],
+          "name": "Northern Samar",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 50437,
+          "family_index": 261,
+          "source_id": "gb:PHL:ADM3:30758251B57957454535676",
+          "ordinal": 1219,
+          "owners": [
+            34707
+          ],
+          "name": "Rosario",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "unresolved_prior_source_fitness",
+      "proposed_disposition": "documented_unresolved_source_fitness_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 121874,
+      "x": 221713,
+      "owner": 34707,
+      "source_feature_indices": [
+        49126,
+        49190,
+        50437
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 49126,
+          "family_index": 259,
+          "source_id": "gb:PHL:ADM1:36201628B29919658129037",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Eastern Visayas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 49190,
+          "family_index": 260,
+          "source_id": "gb:PHL:ADM2:2640588B89959078713723",
+          "ordinal": 59,
+          "owners": [],
+          "name": "Northern Samar",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 50437,
+          "family_index": 261,
+          "source_id": "gb:PHL:ADM3:30758251B57957454535676",
+          "ordinal": 1219,
+          "owners": [
+            34707
+          ],
+          "name": "Rosario",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "unresolved_prior_source_fitness",
+      "proposed_disposition": "documented_unresolved_source_fitness_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 122384,
+      "x": 220756,
+      "owner": 34476,
+      "source_feature_indices": [
+        49123,
+        49180,
+        49357
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 49123,
+          "family_index": 259,
+          "source_id": "gb:PHL:ADM1:36201628B13149248482964",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Bicol Region",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 49180,
+          "family_index": 260,
+          "source_id": "gb:PHL:ADM2:2640588B67488359993346",
+          "ordinal": 49,
+          "owners": [],
+          "name": "Masbate",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 49357,
+          "family_index": 261,
+          "source_id": "gb:PHL:ADM3:30758251B44740133494602",
+          "ordinal": 139,
+          "owners": [
+            34476
+          ],
+          "name": "Balud",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "unresolved_prior_source_fitness",
+      "proposed_disposition": "documented_unresolved_source_fitness_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 126746,
+      "x": 218547,
+      "owner": 35234,
+      "source_feature_indices": [
+        49114,
+        49209,
+        50309
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 49114,
+          "family_index": 259,
+          "source_id": "gb:PHL:ADM1:36201628B49646111072560",
+          "ordinal": 0,
+          "owners": [],
+          "name": "ARMM",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 49209,
+          "family_index": 260,
+          "source_id": "gb:PHL:ADM2:2640588B7308386302326",
+          "ordinal": 78,
+          "owners": [],
+          "name": "Sulu",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 50309,
+          "family_index": 261,
+          "source_id": "gb:PHL:ADM3:30758251B88112004605587",
+          "ordinal": 1091,
+          "owners": [
+            35234
+          ],
+          "name": "Pangutaran",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "unresolved_prior_source_fitness",
+      "proposed_disposition": "documented_unresolved_source_fitness_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 126748,
+      "x": 218548,
+      "owner": 35234,
+      "source_feature_indices": [
+        49114,
+        49209,
+        50309
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 49114,
+          "family_index": 259,
+          "source_id": "gb:PHL:ADM1:36201628B49646111072560",
+          "ordinal": 0,
+          "owners": [],
+          "name": "ARMM",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 49209,
+          "family_index": 260,
+          "source_id": "gb:PHL:ADM2:2640588B7308386302326",
+          "ordinal": 78,
+          "owners": [],
+          "name": "Sulu",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 50309,
+          "family_index": 261,
+          "source_id": "gb:PHL:ADM3:30758251B88112004605587",
+          "ordinal": 1091,
+          "owners": [
+            35234
+          ],
+          "name": "Pangutaran",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "unresolved_prior_source_fitness",
+      "proposed_disposition": "documented_unresolved_source_fitness_exception",
+      "native_repair_credit": 0
+    }
+  ],
+  "new_native_repairs": 0,
+  "accepted_disposition_credit": 0,
+  "status": "proposed documented unresolved outcomes; distinct review and normal acceptance pending",
+  "accepted_selection_unchanged_at": "4d87bbff6dc37dd585dad7be154bec46c35f25e0",
+  "accepted_original_class_counts": {
+    "inland-water": 1368,
+    "land": 95232
+  }
+}

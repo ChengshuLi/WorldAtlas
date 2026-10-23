@@ -1,0 +1,11 @@
+Actual393 selected-native joint result: PASS WITH LIMITS.
+
+Accepted71d95f45 executed the existing trusted joint entry against actual675 baseline and real canonical8fa52b14 candidate. It exited0 at02:04:52.735233UTC after57.4855seconds, reporting authenticated-checkpoint-append-v1/no-new-native-loss, no candidate code execution or cold fallback.
+
+The actual scope is every393 original appended cell on202 changed native rows:198 original-base rows acquired and4 authenticated rows reused. These exactly match the independent18-authority/29-component roster (368repair+25conflict). The trusted same-base cumulative-patch application rejects preexisting assigned base overlap for all requested rows, and authenticated transition rejects overlap with every inherited patch interval. Therefore whole-append ownerzero follows from the actual complete-row proof and exact tuple custody, not only29 visibility samples.
+
+Actual conservation reports0lost/reassigned cells and0loss intervals. All29 new components have genuine0→target witnesses matching their original component native-row hash and actual requested tuple. Unchanged complete base/patch custody preserves the other rows and all281915 inherited cells; cumulative candidate is282308. Composition/canonical reviews and original source/physical custody remain unchanged.
+
+All4 complete products and gzip decoded certificate hashes link correctly to facts/publication/routes/native result. The certificate preserves49625 original owner/index/parent identities. The21 recorded code bodies and2 authority bodies match71d; all4 runtime bodies match recorded bytes/hashes. Reader rosters contain341baseline/116candidate descriptors:334/106 explicitly whole-consumed and7/10 metadata-only, independently checked by Git size/OID without relabelling them whole reads. Optional retained archive is explicitly unconsumed; nested PR2013 qualification custody is historical, while the actual selected baseline is675.
+
+This is actual trusted selected-native ownerzero/conservation and visibility proof, not browser/GPU picking, sub-cell polygon coverage, new territorial adjudication or acceptance. Derived checkpoint remains unaccepted. Original106repair+2conflict exclusions and all source/physical/datum/vintage limits remain. No source, predicate, producer or operator was rerun by the reviewer.

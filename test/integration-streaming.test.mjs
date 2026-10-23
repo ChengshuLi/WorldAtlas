@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import {spawn} from 'node:child_process';
-import {PassThrough} from 'node:stream';
+import {PassThrough, Writable} from 'node:stream';
 import {streamTestProcess} from '../scripts/run-integration-tests.mjs';
 
 function sinks() {
@@ -12,7 +12,7 @@ function sinks() {
   return {stdout,stderr,get out(){return out;},get err(){return err;}};
 }
 const code = source => ['--input-type=module','--eval',source];
-test('stdout and stderr arrive while the child is still waiting, with chunked zero-skips summary',async t=>{
+test('stdout and stderr arrive while the child is still waiting',async t=>{
   const root=fs.mkdtempSync(path.join(process.cwd(),'.cache/integration-stream-'));
   t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
   const release=path.join(root,'release'),s=sinks();let observed=false;
@@ -44,18 +44,33 @@ test('the real Node TAP runner reports a finished test while the next test is st
   assert.equal(await streamTestProcess(['--test','--test-reporter=tap',file],{...s,env}),0);
   assert.ok(live,'first TAP result must arrive before the real second test finishes');
 });
-test('failed children retain their status and diagnostics; successful missing or skipped summaries reject',async()=>{
+test('the child exit status controls success without requiring a TAP summary',async()=>{
   const s=sinks();assert.equal(await streamTestProcess(code("console.error('specific failure');process.exit(7)"),s),7);
   assert.match(s.err,/specific failure/);
   for(const source of ["console.log('no footer')","console.log('# skipped 2')"])
-    await assert.rejects(streamTestProcess(code(source),sinks()),/zero skipped/);
+    assert.equal(await streamTestProcess(code(source),sinks()),0);
 });
-test('large prior output cannot bury the final summary or require retention of the full transcript',async()=>{
-  assert.equal(await streamTestProcess(code("process.stdout.write('x'.repeat(100000)+'\\n# skipped 0\\n')"),sinks()),0);
+test('actual Node tests may intentionally skip; failed assertions still fail',async t=>{
+  const root=fs.mkdtempSync(path.join(process.cwd(),'.cache/integration-status-'));
+  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  const env={...process.env};delete env.NODE_TEST_CONTEXT;
+  for(const fail of [false,true]){
+    const file=path.join(root,`status-${fail}.test.mjs`);
+    fs.writeFileSync(file,`import test from 'node:test';import assert from 'node:assert/strict';
+      test('inapplicable fixture',{skip:'explicitly inapplicable'},()=>assert.fail());
+      test('actual assertion',()=>assert.equal(${fail},false));`,{flag:'wx'});
+    const s=sinks();assert.equal(await streamTestProcess(['--test','--test-reporter=tap',file],{...s,env}),fail?1:0);
+    assert.match(s.out,/# skipped 1/);
+  }
 });
-test('output overflow terminates the actual child and refuses its apparent success',async()=>{
-  await assert.rejects(streamTestProcess(code("console.log('x'.repeat(10000));setInterval(()=>{},1000)"),
-    {...sinks(),maxBytes:1000}),/output exceeds/);
+test('output above the former 64 MiB ceiling streams without retaining the transcript',async()=>{
+  const expected=65*1024*1024;let received=0;
+  const stdout=new Writable({write(chunk,encoding,done){received+=chunk.length;done();}});
+  const stderr=new Writable({write(chunk,encoding,done){done();}});
+  const source=`import {once} from 'node:events';const chunk=Buffer.alloc(64*1024,120);
+    for(let i=0;i<1040;i++)if(!process.stdout.write(chunk))await once(process.stdout,'drain');`;
+  assert.equal(await streamTestProcess(code(source),{stdout,stderr}),0);
+  assert.equal(received,expected);
 });
 test('cancellation terminates the actual test process group, including a descendant', {skip:process.platform==='win32'}, async t=>{
   const root=fs.mkdtempSync(path.join(process.cwd(),'.cache/integration-cancel-'));

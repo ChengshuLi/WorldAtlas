@@ -1,0 +1,797 @@
+{
+  "head": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+  "authority_checkpoint": "627e774149c0acb9b0197f1fd506ebb327b5f36e",
+  "reviewer": "01a1474a-4fc5-76aa-ae6b-db83509eb031",
+  "method": "Independent Shapely exact native-centre covers, literal raw roster/canonical/history joins; no production constructor reused for geometric decisions",
+  "runtime": {
+    "shapely": "2.1.2",
+    "geos": "3.13.1",
+    "numpy": "2.3.5"
+  },
+  "raw_source_crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "id": "gb:GRL:ADM1:42512837B15316814347491",
+      "name": "Northeast Greenland National Park",
+      "owners": [
+        21253
+      ],
+      "type": "Polygon",
+      "valid": true,
+      "empty": false,
+      "dimension": 2,
+      "coordinate_count": 8019,
+      "bounds": [
+        -61.44756317120334,
+        70.82259578097057,
+        -11.312318801671324,
+        83.62741851825007
+      ]
+    },
+    {
+      "id": "gb:GRL:ADM1:42512837B56880650870693",
+      "name": "Avannaata",
+      "owners": [
+        6138,
+        6247,
+        7094
+      ],
+      "type": "Polygon",
+      "valid": true,
+      "empty": false,
+      "dimension": 2,
+      "coordinate_count": 5579,
+      "bounds": [
+        -73.04203033443235,
+        68.73475282933697,
+        -44.44730803908097,
+        81.21067047106544
+      ]
+    },
+    {
+      "id": "gb:GRL:ADM1:42512837B19798010135006",
+      "name": "Sermersooq",
+      "owners": [
+        6263,
+        6910
+      ],
+      "type": "MultiPolygon",
+      "valid": true,
+      "empty": false,
+      "dimension": 2,
+      "coordinate_count": 11448,
+      "bounds": [
+        -52.238971709776536,
+        61.16363525396383,
+        -21.475471496712146,
+        71.99222963638869
+      ]
+    },
+    {
+      "id": "gb:GRL:ADM1:42512837B76623301896964",
+      "name": "Kujalleq",
+      "owners": [
+        6501,
+        6998
+      ],
+      "type": "Polygon",
+      "valid": true,
+      "empty": false,
+      "dimension": 2,
+      "coordinate_count": 4278,
+      "bounds": [
+        -48.41829681434649,
+        59.97671127300691,
+        -42.11208343520235,
+        62.86818974116369
+      ]
+    },
+    {
+      "id": "gb:GRL:ADM1:42512837B89373787162082",
+      "name": "Qeqqata",
+      "owners": [
+        5968,
+        7030
+      ],
+      "type": "Polygon",
+      "valid": true,
+      "empty": false,
+      "dimension": 2,
+      "coordinate_count": 3860,
+      "bounds": [
+        -53.99156951941774,
+        65.04304504399363,
+        -44.33021864747258,
+        67.77235412574237
+      ]
+    },
+    {
+      "id": "gb:GRL:ADM1:42512837B82481266018751",
+      "name": "Qeqertalik",
+      "owners": [
+        21254
+      ],
+      "type": "Polygon",
+      "valid": true,
+      "empty": false,
+      "dimension": 2,
+      "coordinate_count": 2505,
+      "bounds": [
+        -53.76989364617481,
+        67.49250793429377,
+        -44.40043260660789,
+        69.01024985104982
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "id": "gb:GRL:ADM1:42512837B15316814347491",
+      "owner": 21253,
+      "candidate_centres": 469394,
+      "source_hits": {
+        "Northeast Greenland National Park": 469394,
+        "Avannaata": 0,
+        "Sermersooq": 0,
+        "Kujalleq": 0,
+        "Qeqqata": 0,
+        "Qeqertalik": 0
+      },
+      "physical_hits": {
+        "mapped_land_support": 469394,
+        "mapped_inland_water_support": 0,
+        "outside_mapped_L1_context": 0,
+        "L2-outside-L1": 0,
+        "L3-outside-L2": 0,
+        "L4-outside-L3": 0,
+        "missing_reconstruction": 0,
+        "extra_reconstruction": 0,
+        "contradictory_land_water_support": 0
+      },
+      "physical_geometries": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "valid": true,
+          "empty": false,
+          "dimension": 2,
+          "coordinate_count": 31480,
+          "bounds": [
+            -61.44756317120334,
+            70.82259578097057,
+            -12.142167000000029,
+            83.61925
+          ]
+        },
+        "mapped_inland_water_support": {
+          "type": "MultiPolygon",
+          "valid": true,
+          "empty": false,
+          "dimension": 2,
+          "coordinate_count": 1405,
+          "bounds": [
+            -48.50194400000004,
+            75.588611,
+            -18.28027800000001,
+            82.272222
+          ]
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "valid": true,
+          "empty": false,
+          "dimension": 2,
+          "coordinate_count": 29177,
+          "bounds": [
+            -60.53807941580327,
+            71.1409495081402,
+            -11.312318801671324,
+            83.62741851825007
+          ]
+        },
+        "L2-outside-L1": {
+          "type": "Polygon",
+          "valid": true,
+          "empty": true,
+          "dimension": 2,
+          "coordinate_count": 0,
+          "bounds": [
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "L3-outside-L2": {
+          "type": "GeometryCollection",
+          "valid": true,
+          "empty": true,
+          "dimension": -1,
+          "coordinate_count": 0,
+          "bounds": [
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "L4-outside-L3": {
+          "type": "GeometryCollection",
+          "valid": true,
+          "empty": true,
+          "dimension": -1,
+          "coordinate_count": 0,
+          "bounds": [
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "valid": true,
+          "empty": true,
+          "dimension": 2,
+          "coordinate_count": 0,
+          "bounds": [
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "valid": true,
+          "empty": true,
+          "dimension": 2,
+          "coordinate_count": 0,
+          "bounds": [
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "contradictory_land_water_support": {
+          "type": "MultiLineString",
+          "valid": true,
+          "empty": false,
+          "dimension": 1,
+          "coordinate_count": 2782,
+          "bounds": [
+            -48.50194400000004,
+            75.588611,
+            -18.28027800000001,
+            82.272222
+          ]
+        }
+      },
+      "issues": [
+        {
+          "reason": "contradictory_land_water_support",
+          "hits": 0,
+          "type": "MultiLineString",
+          "valid": true,
+          "empty": false,
+          "dimension": 1,
+          "coordinate_count": 2782,
+          "bounds": [
+            -48.50194400000004,
+            75.588611,
+            -18.28027800000001,
+            82.272222
+          ]
+        }
+      ],
+      "selected_base_hits": 0,
+      "selected_source_intent": {
+        "area_km2": 929808,
+        "decision": "Retain named source territory: finer physical classification has offshore coverage gaps beyond the bounded coastline adjustment",
+        "uncovered_km2": 3143.32
+      },
+      "selection_reason": "Named municipalities are source coverage only; enormous ice-sheet districts require physical-geography review."
+    },
+    {
+      "id": "gb:GRL:ADM1:42512837B82481266018751",
+      "owner": 21254,
+      "candidate_centres": 32822,
+      "source_hits": {
+        "Northeast Greenland National Park": 0,
+        "Avannaata": 0,
+        "Sermersooq": 0,
+        "Kujalleq": 0,
+        "Qeqqata": 0,
+        "Qeqertalik": 32822
+      },
+      "physical_hits": {
+        "mapped_land_support": 32822,
+        "mapped_inland_water_support": 0,
+        "outside_mapped_L1_context": 0,
+        "L2-outside-L1": 0,
+        "L3-outside-L2": 0,
+        "L4-outside-L3": 0,
+        "missing_reconstruction": 0,
+        "extra_reconstruction": 0,
+        "contradictory_land_water_support": 0
+      },
+      "physical_geometries": {
+        "mapped_land_support": {
+          "type": "MultiPolygon",
+          "valid": true,
+          "empty": false,
+          "dimension": 2,
+          "coordinate_count": 13315,
+          "bounds": [
+            -53.765832999999986,
+            67.49250793429377,
+            -44.40043260660789,
+            69.01024985104982
+          ]
+        },
+        "mapped_inland_water_support": {
+          "type": "MultiPolygon",
+          "valid": true,
+          "empty": false,
+          "dimension": 2,
+          "coordinate_count": 195,
+          "bounds": [
+            -53.50861100000003,
+            67.6725,
+            -51.16638900000004,
+            68.001944
+          ]
+        },
+        "outside_mapped_L1_context": {
+          "type": "MultiPolygon",
+          "valid": true,
+          "empty": false,
+          "dimension": 2,
+          "coordinate_count": 12875,
+          "bounds": [
+            -53.76989364617481,
+            67.49309780558261,
+            -50.25591700000001,
+            69.002083
+          ]
+        },
+        "L2-outside-L1": {
+          "type": "Polygon",
+          "valid": true,
+          "empty": true,
+          "dimension": 2,
+          "coordinate_count": 0,
+          "bounds": [
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "L3-outside-L2": {
+          "type": "GeometryCollection",
+          "valid": true,
+          "empty": true,
+          "dimension": -1,
+          "coordinate_count": 0,
+          "bounds": [
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "L4-outside-L3": {
+          "type": "GeometryCollection",
+          "valid": true,
+          "empty": true,
+          "dimension": -1,
+          "coordinate_count": 0,
+          "bounds": [
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "missing_reconstruction": {
+          "type": "Polygon",
+          "valid": true,
+          "empty": true,
+          "dimension": 2,
+          "coordinate_count": 0,
+          "bounds": [
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "extra_reconstruction": {
+          "type": "Polygon",
+          "valid": true,
+          "empty": true,
+          "dimension": 2,
+          "coordinate_count": 0,
+          "bounds": [
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "contradictory_land_water_support": {
+          "type": "MultiLineString",
+          "valid": true,
+          "empty": false,
+          "dimension": 1,
+          "coordinate_count": 384,
+          "bounds": [
+            -53.50861100000003,
+            67.6725,
+            -51.16638900000004,
+            68.001944
+          ]
+        }
+      },
+      "issues": [
+        {
+          "reason": "contradictory_land_water_support",
+          "hits": 0,
+          "type": "MultiLineString",
+          "valid": true,
+          "empty": false,
+          "dimension": 1,
+          "coordinate_count": 384,
+          "bounds": [
+            -53.50861100000003,
+            67.6725,
+            -51.16638900000004,
+            68.001944
+          ]
+        }
+      ],
+      "selected_base_hits": 0,
+      "selected_source_intent": null,
+      "selection_reason": "Named municipalities are source coverage only; enormous ice-sheet districts require physical-geography review."
+    }
+  ],
+  "literal_history_equal": true,
+  "split_originals": 4,
+  "split_descendants": 9,
+  "frozen_intervals": 62096,
+  "native_patch_rows": 28605,
+  "consumed": [
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/native-inputs-001/source-evidence.json",
+      "bytes": 2994863,
+      "sha256": "8740d5784c62a889a1f02062130ec1cea2e3e3744f2e776951e384e0bde118a6",
+      "git_blob_oid": "df37f5e16ed5493eccc944469036a1e585c14ebf"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-review/input-custody.json",
+      "bytes": 1850,
+      "sha256": "7fc5c89048452765ef1e780d31749b0aac3e480fff397995d0d439eae6693246",
+      "git_blob_oid": "d21fbdf8d9b97685d5a85a2e1e8821bc0c0ff404"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-review/source-custody.json",
+      "bytes": 2638,
+      "sha256": "bb42241115e312138e4b8b4a6f0fc6f3d17d4a6f6922c5e68c63312e81805f48",
+      "git_blob_oid": "a46fa1ba305086a6adcbfb0e6de91e8c66361f10"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-review/source-target-review.json",
+      "bytes": 34154,
+      "sha256": "47a8b7bd2e0e72d3e998e06a0d02be208d71ded9c059664c9f01c02951f15c9c",
+      "git_blob_oid": "b08281ccfad1b03b1f8a596ec025f63b9e2593ce"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-review/complete-primary-membership.json",
+      "bytes": 884039,
+      "sha256": "9e9e446efdde65d6330a02b25b853690b98eec0422670d4a1e9b8f08c80de652",
+      "git_blob_oid": "36dc92c2e22ad47f783701a1dcbff951efa5db48"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-GRL-ADM1-000.bin.gz",
+      "bytes": 625354,
+      "sha256": "3fc5ea1fbc4e1421ab285818215d9165bc38084828b1a1327959fe26170224a4",
+      "git_blob_oid": "d195ad27cacf2a06912aedc19b383f872276db90",
+      "decoded_bytes": 1599609,
+      "decoded_sha256": "43aa28f61ddf149d508933fad79404fff32c5b5d97e42635e5c7f21a9a5f7460"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "bytes": 1844315,
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa",
+      "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "decoded_bytes": 13496995,
+      "decoded_sha256": "7fa99cbf064121e0130b66758c212ae22b2a7be5649f2e250e9cda89a9bd595e"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+      "bytes": 4404456,
+      "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4",
+      "git_blob_oid": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+      "decoded_bytes": 22336586,
+      "decoded_sha256": "607372a1af11bebf58c24aa15bdfae1999fafc532bb65ab7d822c0c20b57a435"
+    },
+    {
+      "commit": "7e423077552651d6ec1d6bf6b879c34e956f985a",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+      "decoded_bytes": 11096191,
+      "decoded_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "data/semantic-report.json",
+      "bytes": 6091596,
+      "sha256": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831",
+      "git_blob_oid": "db3e1ec83d764bc8183caa4779a94b3ad1db0456"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "data/geography/part-9.json",
+      "bytes": 5729632,
+      "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+      "git_blob_oid": "79a4f0cd17ca9f7007916be8419c2fa986fe7a61"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-review/prior-assessment-custody.json",
+      "bytes": 486,
+      "sha256": "764cd72db60475abf7e0955286b5613806620ad2c39715fc91c970a377548a82",
+      "git_blob_oid": "37bb689b7f83057edb1c51e07a4b75e4334c25b7"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "data/regional-review/regional-review-a9f03b364bdefa4a/subject-assessment.json",
+      "bytes": 575153,
+      "sha256": "f3568b5977a26263e509401c8dbcb10e6b94fe81e459c8b5020c514af56ddc80",
+      "git_blob_oid": "7aadf668fa15fcf451d1a555bb9a28b2d43d9b24"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-review/greenland-prior-assessments.json",
+      "bytes": 7010,
+      "sha256": "8e53a60e590acb8a7ab7c19922028ba95d247fda88816e4c142cf66aaa38ab6e",
+      "git_blob_oid": "4b06b49e5b05d089486508a346f36e1b78f90f5d"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/original-stage-inputs.json",
+      "bytes": 487286,
+      "sha256": "b6d10966b99e981b02d42ddc6d10692810b438de36e50e9ca4525f352d54cc26",
+      "git_blob_oid": "9f8f4dfbc82391df92b3a76f290ec0e6d4e2ca0f"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "scripts/refine-remote.py",
+      "bytes": 7440,
+      "sha256": "6a6a5258328aa1153d567d9a98b90339421700d491f36fbdca216d3e0cbc2726",
+      "git_blob_oid": "c5db9115604b6c82318a68ca008df7a21688bc93"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "scripts/geographic-regions.py",
+      "bytes": 7804,
+      "sha256": "627fb2759f10cbcfb64a29b773b689fcd8787e0edd602e350896d9ceaa738e10",
+      "git_blob_oid": "4a7116246916823fd2d67c97c10ae6dbfc6ad25c"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "scripts/rebuild-framework.py",
+      "bytes": 16322,
+      "sha256": "203b95f04ecd52d101c15e8e961050bb87a1bbe8e10ef0cc7f73a6b0950b33f5",
+      "git_blob_oid": "bb43f8d912308cd8238742dd0d0f8f901898a3a5"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+      "bytes": 14656,
+      "sha256": "3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776",
+      "git_blob_oid": "fd6d98e7cc62c97a21f80c122f43a528cfba5bdd"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-9.json",
+      "bytes": 5729632,
+      "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+      "git_blob_oid": "79a4f0cd17ca9f7007916be8419c2fa986fe7a61"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "data/hierarchy.json",
+      "bytes": 10164089,
+      "sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+      "git_blob_oid": "0ec8bae8e04140326d8b48f09a35ac66ae54deb0"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs",
+      "bytes": 6840,
+      "sha256": "2589022806876f7faa645293fd9a0ea4b22d0c35a5a6a29fbdc30f5b730f5689",
+      "git_blob_oid": "c5ba9331deb93eed40662d1dc579cdaedea55c46"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "bytes": 1754890,
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+      "git_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/package.json",
+      "bytes": 1952,
+      "sha256": "291f65cac911ac8427f4973d550da1098fd6b978550acad8115f0fcd52a8b6ce",
+      "git_blob_oid": "091cbbb71adde6cac8d4169c41694ff10a63c4d1"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-002.json.gz",
+      "bytes": 22181,
+      "sha256": "8e07213c3726a80b1d4d8c0c0575f409437637c5c2e348f87ff2075d22346916",
+      "git_blob_oid": "df22b12f7800b1a14618986f3fe0de865ebe5e2a"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-003.json.gz",
+      "bytes": 57591,
+      "sha256": "30d21710f79f5996e41e833ae1966391437d01cbc056b1bc4149a3fa059ab655",
+      "git_blob_oid": "2634bc1fdd22ac7d0d458990225ff151a891d36e"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-004.json.gz",
+      "bytes": 44649,
+      "sha256": "1beda03d4b5a8c676f7c80a918aba028b1990422c2b24e128920a9b02d252ad4",
+      "git_blob_oid": "9f0a10c540a451c38cd487f7f017641f1c6e8ec6"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-005.json.gz",
+      "bytes": 72089,
+      "sha256": "3877697199128df89c5db521d827eeb40e6bfee84df838aa43dbfb78a0610b4d",
+      "git_blob_oid": "2f8aa2e7e88f1b31352496e73eaef783b5a6f5e5"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-006.json.gz",
+      "bytes": 19469,
+      "sha256": "b9c121d142b11652973904142ea9f9ec841227cb2296dcee6e04cfd78dafd500",
+      "git_blob_oid": "7d5653f2026716c5504e030119ae29af7315e68b"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-007.json.gz",
+      "bytes": 7485,
+      "sha256": "a6d35825ead01f82a83c570a58ada838214979f0c3fcafaf1ab1c2943a739341",
+      "git_blob_oid": "222412713f8cf86ac2bb67a327e28b2fc61fc820"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-008.json.gz",
+      "bytes": 1769,
+      "sha256": "30bf05ea2b46d90b65308f5c6fa6791d8c8cb35322423a6f0477a026ac3be2de",
+      "git_blob_oid": "f39fcf95e2bf72853730dc6eeb7b1cec0d585b96"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-009.json.gz",
+      "bytes": 19920,
+      "sha256": "89595e1b02d1b5f4176ef5c154c95fa6f19c6bef8ee93b1bb4905c2616395071",
+      "git_blob_oid": "93d14eb6010764037e89520d0b099e1571750afa"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-010.json.gz",
+      "bytes": 18953,
+      "sha256": "ab4aebbddcf9dcc361c7005eaa81735462e7ec9088400fb72a1123b5bce53289",
+      "git_blob_oid": "daf30dbb5300fc40bc9c68122f875ff4d870f3f8"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-011.json.gz",
+      "bytes": 16959,
+      "sha256": "4405773c150e71a6a9353aba3b99c347b6b151cb540e3f76cf38556dcb4c5910",
+      "git_blob_oid": "f70079699fce65042e26206084ec47619ffbd4c7"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-012.json.gz",
+      "bytes": 22242,
+      "sha256": "bea233d825abc91a5ae59d1f3c4b62ed4f21fa785b938bebf3b2c4e61c637f72",
+      "git_blob_oid": "cefe5185c184b33a328741138a046cd378286aa8"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-013.json.gz",
+      "bytes": 10306,
+      "sha256": "e1b49f7b59e61e2954de658db62eed8f189f699d9df219b0492f1e089abf03a8",
+      "git_blob_oid": "4d5c2a9a8e5f20f129bbb3b0650102b5e4c85935"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-014.json.gz",
+      "bytes": 2643,
+      "sha256": "d64089cf4c55508cd4098550c80fca51a66f11eaaf1a55857d48de4ed4f068b4",
+      "git_blob_oid": "1399fb562370a3e7676a39ae024b8b4ee927027a"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-015.json.gz",
+      "bytes": 28975,
+      "sha256": "290ce19501c3115f64fdd2203d2b4467e263c537c00c595154f67acd92f02c8a",
+      "git_blob_oid": "c0a04493e9e7b1aaf441640e2e1f949169e3d548"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/native-patch.json",
+      "bytes": 1927075,
+      "sha256": "1040ca4fcae26a79b68bd6f2684eb863ca5b2ecdbe0d100ad2e1daeba3b715aa",
+      "git_blob_oid": "da1b55a72aad58d1aae9481e891ecfc08c2d77aa"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/native-diagnostic-001/native-diagnostic.json",
+      "bytes": 6840544,
+      "sha256": "2cc417702fd7f4bdae96f0b549b806e1d1be16587ddca272696fb7fc7f0dd695",
+      "git_blob_oid": "4d7ccba497eb9a624abdc39403cb6dba4dbb36e9"
+    },
+    {
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "decoded_bytes": 2097328,
+      "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+    },
+    {
+      "commit": "d12dc04cba31bdb1fefde09d90f32e08f27389f5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/physical-001/whole-target-support.json",
+      "bytes": 5860234,
+      "sha256": "b3f2a0eec0ac8857cfe9578d8b9607ec54dc6d312d17fa33d561e55ba06eca1e",
+      "git_blob_oid": "ae267485559f696f391004dbb59688019502a49c"
+    },
+    {
+      "commit": "d12dc04cba31bdb1fefde09d90f32e08f27389f5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/original-stage-inputs.json",
+      "bytes": 487286,
+      "sha256": "b6d10966b99e981b02d42ddc6d10692810b438de36e50e9ca4525f352d54cc26",
+      "git_blob_oid": "9f8f4dfbc82391df92b3a76f290ec0e6d4e2ca0f"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "scripts/qualify-source-cohort.py",
+      "bytes": 43642,
+      "sha256": "abc801b9a35d20c9f0dfe3bbc9bb2cb7dc107f1758414970d9cde11380574a18",
+      "git_blob_oid": "f69180b425d665a022dd18290688864674dd20a5"
+    }
+  ],
+  "unique_raw_plus_decoded_input_bytes": 112435834
+}

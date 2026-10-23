@@ -8,9 +8,6 @@ import {restoreWholeImage} from './evidence/restore-whole-image.mjs';
 import {applyBytePatch,verifyWholeBytes} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/byte-patch.mjs';
 import {gunzipSync} from 'node:zlib';
 import {applyEncodedBytePatch} from './evidence/captured-byte-patch.mjs';
-// Retain the immutable original in the actual import closure for authored-source custody.
-import * as originalRestoration from '../coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs';
-export {originalRestoration};
 
 const sha = raw => createHash('sha256').update(raw).digest('hex');
 const canonicalIndex = 'b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876';
@@ -270,10 +267,8 @@ export function restoreCanonicalProducts({root, temporaryRoot, mode = 'package'}
     new_release_memberships:{index_sha256:membershipIndex,canonical_paths:340,memberships:84833,source_commit:'bad783529fa35d0bd45cd65ed899c02ea96c93b6',scientific_records_recomputed:false},
     scientific_producers_invoked: false, original_vintages_and_unknowns_preserved: true};
   restored.set(root, {receipt, map, old, membershipImage});
-  // Stock readers use only the fully verified installed paths and priorImage.
-  // Preserve those complete files; discard only this exclusive object's staging
-  // copies after every current/prior whole body has been verified again.
-  getRestoredCanonicalProducts(root);
+  // Each copy already authenticated its installed bytes. Keep those complete
+  // files and release only this exclusive object's verified staging copies.
   const released=[];
   for(const [directory,pins] of [
     [memberships,membershipImage.files],

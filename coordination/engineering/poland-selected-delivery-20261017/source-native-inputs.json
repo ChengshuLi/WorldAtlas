@@ -1,0 +1,62 @@
+{
+  "packages": [
+    {
+      "country": "Poland",
+      "original_cells": 7309,
+      "supported_cells": 7236,
+      "held_cells": 73,
+      "quartets": [
+        {
+          "rule_preimage": {
+            "commit": "d6017783b1154a59386ea8701b1a729749806741",
+            "path": "coordination/engineering/poland-original-repair-20261017/native-authority-001/original-rule-preimage.json",
+            "mode": "100644",
+            "git_blob_oid": "ac3dcfe352ee2258a885bbf5c20929a55b0cf843",
+            "bytes": 737,
+            "sha256": "d117ff4da77b7d27a7538cfaaa869ac4856c41b6f2a0c6b7040f7136a5edfcb2"
+          },
+          "source_authority": {
+            "commit": "d6017783b1154a59386ea8701b1a729749806741",
+            "path": "coordination/engineering/poland-original-repair-20261017/native-authority-001/authority-binding.json",
+            "mode": "100644",
+            "git_blob_oid": "1a8b0fe6373f735f7c138e9b9f3eae2033e18bf8",
+            "bytes": 740,
+            "sha256": "9a7f9d47d6b0143123b8b6f344a600f8786a07e9ddce0c76a0b2a7330e7a3b3b"
+          },
+          "ledger": {
+            "commit": "d6017783b1154a59386ea8701b1a729749806741",
+            "path": "coordination/engineering/poland-original-repair-20261017/native-authority-001/constructor-result.json",
+            "mode": "100644",
+            "git_blob_oid": "af67bc9e402adec969a74faff2a8d670e438a09a",
+            "bytes": 239136,
+            "sha256": "9dcf55f01f7cb6e408e4fe42b885d7b4853cb7de9c2185e01a3dc357145f406c"
+          },
+          "native_patch": {
+            "bytes": 100531,
+            "commit": "28d47a8bb0306dc6efd0c2512e81d9e5a1b4264b",
+            "git_blob_oid": "9589615c0d129a9ec62acfe1ad60bf6e36e50e8f",
+            "mode": "100644",
+            "path": "coordination/engineering/poland-original-repair-20261017/supported-inputs-001/native-patch.json",
+            "sha256": "0f75b8f5df68c590775fd9c4c5c24a99c878981c7896b4139b5ed77435848a56"
+          }
+        }
+      ],
+      "original_patch": {
+        "commit": "d6017783b1154a59386ea8701b1a729749806741",
+        "path": "coordination/engineering/poland-original-repair-20261017/source-stage-001/original-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "78b526463c572cd4e7f4e553c0d18e85e1cb1fd9",
+        "bytes": 101377,
+        "sha256": "d87a525f66b69f88d0c4e5a347d9297aa840d327f9f63773d36d6a7e3d6535aa"
+      },
+      "literal_holds": {
+        "commit": "d6017783b1154a59386ea8701b1a729749806741",
+        "path": "coordination/engineering/poland-original-repair-20261017/supported-inputs-001/held-original.json",
+        "mode": "100644",
+        "git_blob_oid": "a33bdc7900ad66fe68182d67926ef71c8b772451",
+        "bytes": 4829,
+        "sha256": "f9d7fc11321c93726963e7a302ec593a12fa3c0df80e6c27bd5cdb11a3948661"
+      }
+    }
+  ]
+}

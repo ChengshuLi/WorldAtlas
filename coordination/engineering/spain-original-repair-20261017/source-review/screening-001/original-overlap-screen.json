@@ -1,0 +1,84 @@
+{
+  "kind": "Spain-complete-original-spatial-overlap-screen",
+  "accepted_main": "282d14b4682f738fed6a0e6f3ee0d0e4b775d611",
+  "original_cells": 29477,
+  "original_intervals": 11546,
+  "original_owners": 113,
+  "comparisons": [
+    {
+      "reference": "actual_accepted_additive",
+      "cells": 6028236,
+      "overlap_cells": 0,
+      "overlap_keys": []
+    },
+    {
+      "reference": "entire_Sweden_original",
+      "cells": 18381,
+      "overlap_cells": 0,
+      "overlap_keys": []
+    },
+    {
+      "reference": "entire_Germany_original",
+      "cells": 27555,
+      "overlap_cells": 0,
+      "overlap_keys": []
+    }
+  ],
+  "inputs": [
+    {
+      "path": "block-023.json.gz",
+      "bytes": 35161,
+      "sha256": "738663ac8ba27db01f4b2034d45d4d8cf7d79908237ac19d19f9aadc401c4d52"
+    },
+    {
+      "path": "block-024.json.gz",
+      "bytes": 26482,
+      "sha256": "e8d0efea8d0184e69973d9f378a83ced2cb3a1ad2bb2dc42123cb6806f173bc7"
+    },
+    {
+      "path": "block-025.json.gz",
+      "bytes": 2555,
+      "sha256": "8876a3a6b490a413bd461826da4af2f3d4b29c7bca66ff1c5d66bdde079f7d00"
+    },
+    {
+      "path": "block-026.json.gz",
+      "bytes": 9580,
+      "sha256": "5d01a2ef0703c804b25cd49f2fd45ea8cf96814b277e086deae578e663cf742a"
+    },
+    {
+      "commit": "282d14b4682f738fed6a0e6f3ee0d0e4b775d611",
+      "path": "data/ownership-selection.json",
+      "bytes": 1842,
+      "sha256": "999ba4bc8a6ee7e47c12ce6557fb4cfd11cbc918d3441ad17cad279b31815b93"
+    },
+    {
+      "commit": "282d14b4682f738fed6a0e6f3ee0d0e4b775d611",
+      "path": "coordination/engineering/tanzania-selected-delivery-20261017/ownership-selection-combined.json",
+      "bytes": 3456,
+      "sha256": "1908df25f2d93e60d7a7b49eecb1a57ac9f8d90d4a88ff7f80c3523625428542"
+    },
+    {
+      "commit": "e903092199d82fe2626c7d5517f18988e5adacd4",
+      "path": "coordination/engineering/tanzania-selected-delivery-20261017/composition-001/patch.json",
+      "bytes": 28010462,
+      "sha256": "9120c89042c2d028ac327cfc1aec6a3560ddf3779d5588359ef633ae7f50b9ad"
+    },
+    {
+      "commit": "a1a8c3060a97cfc0648a7412c1662e19fde83f76",
+      "path": "coordination/engineering/sweden-original-repair-20261017/source-stage-001/original-native-patch.json",
+      "bytes": 217998,
+      "sha256": "47694b3131fdca8b648bc7988712e1eef028a99bee1ee06d0ae017afbeb920bf"
+    },
+    {
+      "commit": "9ebe37b375b46b06f2eed17302c746582e80a2aa",
+      "path": "coordination/engineering/germany-original-repair-20261017/source-stage-001/original-native-patch.json",
+      "bytes": 219583,
+      "sha256": "6e6e56ca235716532eeb1c34fe4bd95b7e612c4dc4083ce49ba41a3e77d37ab9"
+    }
+  ],
+  "limitations": [
+    "Spatial keys are compared irrespective of owner; complete pending originals conservatively cover their proposed supported subsets.",
+    "This does not replace genuine native-base owner-zero or final selected-output conservation.",
+    "Spain remains unclaimed and outside active denominators."
+  ]
+}

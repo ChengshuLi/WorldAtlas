@@ -3,9 +3,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
+import {spawnSync} from 'node:child_process';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
+import {EXECUTION_CODE} from '../scripts/check-unchanged-selected-geography.mjs';
 
 const root=path.resolve(import.meta.dirname,'..');
 // Mock the real authenticated core-response boundary even when these child
@@ -19,29 +20,31 @@ globalThis.Response=class extends NativeResponse {
 };
 `;
 
-function run({readFails=false,commentFails=false,phase='prepare',merged=true,head='a'.repeat(40),integration='skipped',geography='skipped',mergeOnReconcile=false,mergeCommit='b'.repeat(40)}={}) {
+function run({readFails=false,commentFails=false,phase='prepare',merged=true,head='a'.repeat(40),integration='skipped',geography='skipped',mergeOnReconcile=false,mergeCommit='b'.repeat(40),hosted=false}={}) {
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-merge-entry-'));
   fs.mkdirSync(path.join(directory,'.github'));
   fs.copyFileSync(path.join(root,'.github/evidence-policy.json'),path.join(directory,'.github/evidence-policy.json'));
   fs.writeFileSync(path.join(directory,'event.json'),JSON.stringify({inputs:{pr_number:'2',expected_head:'a'.repeat(40),request_id:'entrypoint-test-request'}}));
   fs.writeFileSync(path.join(directory,'mock.mjs'),capacityShim+`let reads=0;globalThis.fetch=async(url,options)=> {
     if(options.method==='PUT')throw Error('Unexpected new merge');
+    if(new URL(url).pathname.includes('/contents/')||new URL(url).pathname.includes('/attempts/'))throw Error('Job-clock metadata must not be fetched');
     const posting=options.method==='POST';
     if(new URL(url).pathname.endsWith('/pulls/2'))reads++;
     return new Response(JSON.stringify(posting?{}:{merged:${merged}||(${mergeOnReconcile}&&reads>1),head:{sha:'${head}'},merge_commit_sha:${JSON.stringify(mergeCommit)}}),
       {status:posting?${commentFails?403:201}:${readFails?418:200},headers:{'Content-Type':'application/json'}});
   };`);
   const result=spawnSync(process.execPath,['--import',path.join(directory,'mock.mjs'),path.join(root,'scripts/run-worker-merge.mjs')],{
-    cwd:directory,encoding:'utf8',env:{...process.env,GITHUB_ACTIONS:'false',GH_TOKEN:'synthetic-test-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',
+    cwd:directory,encoding:'utf8',env:{...process.env,GITHUB_ACTIONS:String(hosted),GH_TOKEN:'synthetic-test-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',
       GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:phase,INTEGRATION_RESULT:integration,GEOGRAPHY_RESULT:geography}});
   const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json'))),summary=fs.readFileSync(path.join(directory,'summary'),'utf8');
   fs.rmSync(directory,{recursive:true,force:true});return {result,receipt,summary};
 }
 test('actual trusted entry point preserves the original rejection before a denied comment',()=>{
   const {result,receipt,summary}=run({readFails:true,commentFails:true});
-  assert.notEqual(result.status,0);assert.match(result.stderr,/POST.*HTTP 403/);
+  assert.notEqual(result.status,0);
   assert.equal(receipt.accepted,false);assert.equal(receipt.status,'not-merged');
   assert.match(receipt.reason,/GET.*HTTP 418/);assert.match(summary,/GET.*HTTP 418/);
+  assert.equal(Object.hasOwn(receipt,'retryable'),false);
   assert.equal(receipt.api_error.http_status,418);assert.equal(receipt.notification_api_error.http_status,403);
 });
 test('actual trusted entry point retains its preparation receipt before successful notification',()=>{
@@ -81,8 +84,8 @@ test('actual entry point logs the exact complete result when bot notification fa
   }
 });
 
-test('actual entry point saves owned-parent/head/conflict/base diagnostics when notification fails',()=>{
- for(const kind of ['parents','head','conflict','base']) {
+test('actual entry point saves owned-parent/conflict diagnostics when notification fails',()=>{
+ for(const kind of ['parents','conflict']) {
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-merge-diagnostics-'));
   const sha=c=>c.repeat(40),head=sha('a'),base=sha('b'),candidate=sha('c');
   fs.mkdirSync(path.join(directory,'.github'));
@@ -101,7 +104,6 @@ test('actual entry point saves owned-parent/head/conflict/base diagnostics when 
     ['/git/commits/'+candidate]:{sha:candidate,tree:{sha:sha('f')},parents:[{sha:kind==='parents'?sha('e'):base},{sha:head}]}
   };
   fs.writeFileSync(path.join(directory,'mock.mjs'),capacityShim+`import fs from 'node:fs';const routes=${JSON.stringify(routes)},refs=new Map();
-    let prReads=0,baseReads=0;
     globalThis.fetch=async(url,options)=>{
       const route=new URL(url).pathname.replace('/repos/owner/repo',''),body=options.body?JSON.parse(options.body):null;
       if(route==='/git/refs'&&options.method==='POST'){refs.set(body.ref.replace('refs/heads/',''),body.sha);return Response.json({ref:body.ref},{status:201});}
@@ -112,8 +114,6 @@ test('actual entry point saves owned-parent/head/conflict/base diagnostics when 
       }
       if(route.startsWith('/git/ref/heads/worldatlas-integration/'))return Response.json({object:{sha:refs.get(route.split('/git/ref/heads/')[1])}});
       if(options.method==='DELETE'){refs.delete(route.split('/git/refs/heads/')[1]);fs.writeFileSync('remaining-refs.json',JSON.stringify([...refs]));return new Response(null,{status:204});}
-      if(route==='/pulls/2'&&++prReads===2&&'${kind}'==='head')routes[route].head.sha='d'.repeat(40);
-      if(route==='/git/ref/heads/main'&&++baseReads===2&&'${kind}'==='base')routes[route].object.sha='d'.repeat(40);
       return Response.json(options.method==='POST'?{}:routes[route]??{},{status:options.method==='POST'?403:200});
     };`);
   try {
@@ -121,18 +121,19 @@ test('actual entry point saves owned-parent/head/conflict/base diagnostics when 
       cwd:directory,encoding:'utf8',env:{...process.env,GITHUB_ACTIONS:'false',GH_TOKEN:'synthetic-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',
         GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:'prepare'}});
     const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
-    assert.notEqual(result.status,0);assert.match(result.stderr,/HTTP 403/);
-    assert.equal(receipt.retryable,kind==='parents'||kind==='base');
+    assert.notEqual(result.status,0);assert.match(receipt.notification_error,/HTTP 403/);
+    assert.equal(Object.hasOwn(receipt,'retryable'),false);
     assert.equal(receipt.candidate_diagnostics.expected_base,base);
     assert.equal(receipt.candidate_diagnostics.expected_head,head);
     assert.equal(receipt.candidate_diagnostics.candidate,kind==='conflict'?null:candidate);
     if(kind==='parents')assert.deepEqual(receipt.candidate_diagnostics.actual_parents,[sha('e'),head]);
     else {
-      assert.equal(receipt.candidate_diagnostics.reason,{head:'head-changed',conflict:'conflict',base:'base-advanced'}[kind]);
+      assert.equal(receipt.candidate_diagnostics.reason,'conflict');
       assert.ok(receipt.candidate_diagnostics.observed_at);
     }
     assert.deepEqual(JSON.parse(fs.readFileSync(path.join(directory,'remaining-refs.json'))),[]);
-    assert.match(fs.readFileSync(path.join(directory,'summary'),'utf8'),/exact current main|head changed|conflict|base advanced/);
+    assert.equal(fs.existsSync(path.join(directory,'outputs')),false,'Substantive preparation failure cannot publish candidate job outputs');
+    assert.match(fs.readFileSync(path.join(directory,'summary'),'utf8'),/exact current main|conflict/);
   } finally {fs.rmSync(directory,{recursive:true,force:true});}
  }
 });
@@ -167,16 +168,21 @@ test('actual final entry point cleans only its owned ref and retains successful 
   }
 });
 
-test('actual owned prepare skips preview polling and cleans its ref when notification is denied',()=>{
+for(const wrapped of [false,true]) for(const notification of ['denied','transport']) test(`actual owned prepare retains ${wrapped?'wrapped':'legacy'} outputs when notification is ${notification}`,()=>{
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-prepare-notify-cleanup-'));
   const sha=c=>c.repeat(40),head=sha('a'),base=sha('b'),candidate=sha('c'),owned=sha('e');
+  const packageRaw=Buffer.from(JSON.stringify({version:1,inputs:['.github/package-inputs.json'],optional_inputs:[],verification_paths:[],generated_outputs:[]}));
+  const packageBlob={type:'file',path:'.github/package-inputs.json',encoding:'base64',size:packageRaw.length,
+    sha:createHash('sha1').update(`blob ${packageRaw.length}\0`).update(packageRaw).digest('hex'),content:packageRaw.toString('base64')};
   fs.mkdirSync(path.join(directory,'.github'));
   fs.copyFileSync(path.join(root,'.github/evidence-policy.json'),path.join(directory,'.github/evidence-policy.json'));
-  fs.writeFileSync(path.join(directory,'event.json'),JSON.stringify({inputs:{pr_number:'2',expected_head:head,request_id:'notification-cleanup-test'}}));
+  const reviewed={base,head,files:['test/example.test.mjs'],inputs:[]};
+  fs.writeFileSync(path.join(directory,'event.json'),JSON.stringify({inputs:{pr_number:'2',expected_head:head,request_id:'notification-cleanup-test',...(wrapped?{reviewed_tests:JSON.stringify(reviewed)}:{})}}));
   const issue={number:1,state:'open',created_at:'2020-01-01T00:00:00Z',labels:['type:engineering','kind:work-item','status:ready'],
     body:'<!-- worldatlas-work:v1\n'+JSON.stringify({mode:'engineering',max_prs:2,depends_on:[],scope:'code'})+'\n-->'};
   const pr={number:2,state:'open',draft:false,body:'Closes #1',title:'Repair',changed_files:1,
     head:{sha:head,ref:'engineering/test',repo:{full_name:'owner/repo'}},base:{ref:'main',sha:base},mergeable:true,merge_commit_sha:candidate};
+  const authorityRows=[...EXECUTION_CODE,'test/fixtures/owned-prepare.json'].map(name=>({path:name,sha:sha('8'),mode:'100644',type:'blob'}));
   const routes={
     '/pulls/2':pr,'/issues/1':issue,'/issues/1/timeline':[],
     '/issues/1/comments':[{id:1,user:{login:'github-actions[bot]'},body:renderClaim({version:1,active:true,worker_id:'worker',claim_id:'nonce',branch:'engineering/test',expires_at:new Date(Date.now()+3600000).toISOString()})}],
@@ -184,9 +190,13 @@ test('actual owned prepare skips preview polling and cleans its ref when notific
     ['/commits/'+head+'/check-runs']:{check_runs:[{id:1,name:'scope',app:{id:1},status:'completed',conclusion:'success'}]},
     ['/commits/'+head+'/status']:{statuses:[]},'/git/ref/heads/main':{object:{sha:base}},
     ['/git/commits/'+candidate]:{sha:candidate,parents:[{sha:sha('d')},{sha:head}]},
-    ['/git/commits/'+owned]:{sha:owned,tree:{sha:'combined'},parents:[{sha:base},{sha:head}]},
-    ['/git/commits/'+head]:{tree:{sha:'combined'}},
-    '/git/trees/combined':{truncated:false,tree:[{path:'src/a.js',sha:'blob',mode:'100644',type:'blob'}]}
+    '/contents/.github/package-inputs.json':packageBlob,
+    ['/git/commits/'+base]:{sha:base,tree:{sha:sha('5')}},
+    ['/git/trees/'+sha('5')]:{truncated:false,tree:authorityRows},
+    ['/git/commits/'+owned]:{sha:owned,tree:{sha:sha('6')},parents:[{sha:base},{sha:head}]},
+    ['/git/commits/'+head]:{tree:{sha:sha('6')}},
+    ['/git/trees/'+sha('6')]:{truncated:false,tree:[...authorityRows,{path:'src/a.js',sha:'blob',mode:'100644',type:'blob'},
+      {path:'test/example.test.mjs',sha:sha('7'),mode:'100644',type:'blob'}]}
   };
   fs.writeFileSync(path.join(directory,'mock.mjs'),capacityShim+`import fs from 'node:fs';const routes=${JSON.stringify(routes)},refs=new Map();
     const originalSetTimeout=globalThis.setTimeout;globalThis.setTimeout=(fn,ms,...args)=>{if(ms===2000)throw Error('Unexpected candidate polling sleep');return originalSetTimeout(fn,ms,...args);};
@@ -198,18 +208,38 @@ test('actual owned prepare skips preview polling and cleans its ref when notific
       if(route==='/merges'&&options.method==='POST'){if(body.base==='main'||body.base==='engineering/test')throw Error('Protected branch update');refs.set(body.base,'${owned}');return Response.json({sha:'${owned}'},{status:201});}
       if(route.startsWith('/git/ref/heads/worldatlas-integration/'))return Response.json({object:{sha:refs.get(route.split('/git/ref/heads/')[1])}});
       if(options.method==='DELETE'){refs.delete(route.split('/git/refs/heads/')[1]);fs.writeFileSync('remaining-refs.json',JSON.stringify([...refs]));return new Response(null,{status:204});}
-      if(route==='/issues/2/comments'&&options.method==='POST')return Response.json({},{status:403});
+      if(route==='/issues/2/comments'&&options.method==='POST'){fs.writeFileSync('remaining-refs.json',JSON.stringify([...refs]));if('${notification}'==='transport')throw Error('Synthetic notification transport failure');return Response.json({},{status:403});}
       return Response.json(routes[route]??{});
     };`);
   try {
     const result=spawnSync(process.execPath,['--import',path.join(directory,'mock.mjs'),path.join(root,'scripts/run-worker-merge.mjs')],{
-      cwd:directory,encoding:'utf8',env:{...process.env,GITHUB_ACTIONS:'false',GH_TOKEN:'synthetic-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',GITHUB_RUN_ID:'1234',
+      cwd:directory,encoding:'utf8',env:{...process.env,GITHUB_ACTIONS:'false',GH_TOKEN:'synthetic-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',GITHUB_RUN_ID:'1234',CHECKOUT_PATTERNS_FORMAT:wrapped?'wrapped-base64':'',
         GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:'prepare'}});
     const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
-    assert.notEqual(result.status,0);assert.match(result.stderr,/POST.*HTTP 403/);
+    assert.equal(result.status,0,result.stderr);
     assert.equal(receipt.accepted,false);assert.equal(receipt.status,'testing');assert.equal(receipt.tested_candidate,owned);
-    assert.match(receipt.notification_error,/HTTP 403/);assert.equal(receipt.candidate_cleanup.status,'deleted');
-    assert.deepEqual(JSON.parse(fs.readFileSync(path.join(directory,'remaining-refs.json'))),[]);
+    assert.match(receipt.notification_error,notification==='denied'?/HTTP 403/:/transport failure/);
+    assert.equal(receipt.candidate_cleanup,undefined);
+    assert.deepEqual(JSON.parse(fs.readFileSync(path.join(directory,'remaining-refs.json'))),[[receipt.candidate_ref,owned]]);
+    const outputs=fs.readFileSync(path.join(directory,'outputs'),'utf8');
+    assert.match(outputs,new RegExp('^candidate='+owned+'$','m'));assert.match(outputs,new RegExp('^base='+base+'$','m'));
+    assert.match(outputs,wrapped?/shards=\[0\]/:/shards=\[0,1,2\]/);
+    assert.deepEqual(JSON.parse(Buffer.from(outputs.match(/^test_files_base64=(.+)$/m)[1],'base64')),wrapped?reviewed.files:[]);
+    assert.equal(receipt.test_selection,wrapped?'reviewed':'complete');
+    const encoded=outputs.match(wrapped?/^checkout_patterns_base64<<CHECKOUT_BASE64\n([A-Za-z0-9+/=\n]+)\nCHECKOUT_BASE64$/m:/^checkout_patterns_base64=([A-Za-z0-9+/=]+)$/m)?.[1];assert(encoded);
+    if(wrapped)assert(encoded.split('\n').every(line=>line.length<=76),'Encoded data uses short lines without limiting the complete payload');
+    else assert(!encoded.includes('\n'),'Old queued workflow keeps its single-quoted decoder input');
+    const patterns=Buffer.from(encoded.replaceAll('\n',''),'base64').toString();
+    if(!wrapped){
+      const legacy=spawnSync(process.env.PYTHON??'python3',['-c',"import base64,sys; sys.stdout.buffer.write(base64.b64decode('"+encoded+"', validate=True))"],{encoding:'utf8'});
+      assert.equal(legacy.status,0,legacy.stderr);assert.equal(legacy.stdout,patterns,'The queued legacy single-quoted decoder consumes the actual new producer output');
+    }
+    if(wrapped) {assert.match(patterns,/^scripts\n/);assert(!patterns.includes('/*\n'));}
+    else {
+      assert.match(patterns,/^\/\*\n/);
+      assert.match(patterns,/!\/coordination\/engineering\/reference-source-custody-20261007\//);
+      assert.match(patterns,/!\/research\/geography\/\*/);
+    }
   } finally {fs.rmSync(directory,{recursive:true,force:true});}
 });
 
@@ -221,6 +251,7 @@ for (const phase of ['prepare', 'merge']) test(`actual ${phase} replay accepts m
 for (const integration of ['failure', 'cancelled', 'skipped']) test(`actual final ${integration} run fails when PR is still open`, () => {
   const {result, receipt} = run({phase: 'merge', merged: false, integration});
   assert.notEqual(result.status, 0); assert.equal(receipt.accepted, false);
+  assert.equal(Object.hasOwn(receipt,'retryable'),false);
 });
 test('actual final replay refuses a different merged head', () => {
   const {result, receipt} = run({phase: 'merge', head: 'c'.repeat(40)});
@@ -234,6 +265,74 @@ test('native Actions concurrency holds the full existing lifecycle without custo
   for (const stage of ['prepare', 'integration', 'geography', 'merge']) assert.match(yaml, new RegExp('  ' + stage + ':\\n'));
 });
 
+test('actual queue entry points omit geography only for independently rechecked controls', () => {
+  for (const [phase,choice] of [['prepare',undefined],...[undefined,'false','true','','False','0','null'].map(choice=>['merge',choice])]) {
+    const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-control-geography-'));
+    const sha=c=>c.repeat(40), head=sha('a'),base=sha('b'),candidate=sha('c');
+    const packageRaw=Buffer.from(JSON.stringify({version:1,inputs:['.github/package-inputs.json'],optional_inputs:[],verification_paths:[],generated_outputs:[]}));
+    const packageBlob={type:'file',path:'.github/package-inputs.json',encoding:'base64',size:packageRaw.length,
+      sha:createHash('sha1').update(`blob ${packageRaw.length}\0`).update(packageRaw).digest('hex'),content:packageRaw.toString('base64')};
+    const files=['scripts/merge-integration.mjs','test/merge-integration.test.mjs'].map(filename=>({filename,status:'modified'}));
+    const rows=files.map(file=>({path:file.filename,sha:sha('e'),mode:'100644',type:'blob'}));
+    const issue={number:1,state:'open',created_at:'2020-01-01T00:00:00Z',labels:['type:engineering','kind:work-item','status:ready'],
+      body:'<!-- worldatlas-work:v1\n'+JSON.stringify({mode:'engineering',max_prs:1,depends_on:[],scope:'queue controls'})+'\n-->'};
+    const pr={number:2,state:'open',draft:false,body:'Closes #1',title:'Repair controls',changed_files:files.length,
+      head:{sha:head,ref:'engineering/controls',repo:{full_name:'owner/repo'}},base:{ref:'main',sha:base},mergeable:true};
+    const routes={
+      '/pulls/2':pr,'/issues/1':issue,'/pulls/2/files':files,
+      '/contents/.github/package-inputs.json':packageBlob,
+      ['/commits/'+head+'/check-runs']:{check_runs:[{id:1,name:'scope',app:{id:1},status:'completed',conclusion:'success'}]},
+      ['/commits/'+head+'/status']:{statuses:[]},'/git/ref/heads/main':{object:{sha:base}},
+      ['/git/commits/'+base]:{sha:base,tree:{sha:sha('5')}},
+      ['/git/trees/'+sha('5')]:{truncated:false,tree:[]},
+      ['/git/commits/'+head]:{tree:{sha:sha('6')}},['/git/trees/'+sha('6')]:{truncated:false,tree:rows},
+      ['/git/commits/'+candidate]:{sha:candidate,tree:{sha:sha('7')},parents:[{sha:base},{sha:head}]},
+      ['/git/trees/'+sha('7')]:{truncated:false,tree:rows}
+    };
+    fs.mkdirSync(path.join(directory,'.github'));
+    fs.copyFileSync(path.join(root,'.github/evidence-policy.json'),path.join(directory,'.github/evidence-policy.json'));
+    fs.writeFileSync(path.join(directory,'event.json'),JSON.stringify({inputs:{pr_number:'2',expected_head:head,request_id:'control-geography-entrypoint'}}));
+    fs.writeFileSync(path.join(directory,'mock.mjs'),capacityShim+`import fs from 'node:fs';const routes=${JSON.stringify(routes)},refs=new Map();
+      globalThis.fetch=async(url,options)=>{
+        const route=new URL(url).pathname.replace('/repos/owner/repo',''),body=options.body?JSON.parse(options.body):null;
+        if(route==='/git/refs'&&options.method==='POST'){refs.set(body.ref.replace('refs/heads/',''),body.sha);return Response.json({ref:body.ref},{status:201});}
+        if(route==='/merges'&&options.method==='POST'){refs.set(body.base,'${candidate}');return Response.json({sha:'${candidate}'},{status:201});}
+        if(route.startsWith('/git/ref/heads/worldatlas-integration/'))return Response.json({object:{sha:refs.get(route.split('/git/ref/heads/')[1])}});
+        if(route==='/pulls/2/merge'&&options.method==='PUT'){fs.writeFileSync('merge-write.json',JSON.stringify(body));return Response.json({merged:true,sha:'${sha('f')}'});}
+        if(route==='/issues/2/comments'&&options.method==='POST')return Response.json({},{status:201});
+        if(!Object.hasOwn(routes,route))throw Error('Unexpected geography or external request: '+route);
+        return Response.json(routes[route]);
+      };`);
+    try {
+      const result=spawnSync(process.execPath,['--import',path.join(directory,'mock.mjs'),path.join(root,'scripts/run-worker-merge.mjs')],{
+        cwd:directory,encoding:'utf8',env:{...process.env,GITHUB_ACTIONS:'false',GH_TOKEN:'synthetic-token',
+          GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',GITHUB_EVENT_PATH:path.join(directory,'event.json'),
+          GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:phase,
+          INTEGRATION_RESULT:'success',GEOGRAPHY_RESULT:'skipped',TESTED_BASE:base,TESTED_CANDIDATE:candidate,CANDIDATE_REF:'',
+          ...(choice===undefined?{}:{PREPARED_GEOGRAPHY_SOFTWARE:choice})}});
+      const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
+      if(choice!==undefined&&!['true','false'].includes(choice)) {
+        assert.notEqual(result.status,0);assert.equal(receipt.accepted,false);
+        assert.match(receipt.reason,/Invalid prepared geographic checker choice/);
+        assert.equal(fs.existsSync(path.join(directory,'merge-write.json')),false);continue;
+      }
+      assert.equal(result.status,0,result.stderr);
+      if(phase==='prepare') {
+        assert.equal(receipt.geography_required,false);
+        assert.match(fs.readFileSync(path.join(directory,'outputs'),'utf8'),/^geography_required=false$/m);
+        assert.equal(fs.existsSync(path.join(directory,'merge-write.json')),false);
+      } else {
+        assert.equal(receipt.accepted,true);
+        assert.deepEqual(receipt.geography,{status:'not-applicable',reason:'non-geographic-controls'});
+        assert.equal(JSON.parse(fs.readFileSync(path.join(directory,'merge-write.json'))).sha,head);
+      }
+    } finally {fs.rmSync(directory,{recursive:true,force:true});}
+  }
+  const yaml=fs.readFileSync(path.join(root,'.github/workflows/worker-merge.yml'),'utf8');
+  assert.match(yaml,/geography_required: \$\{\{ steps\.prepare\.outputs\.geography_required \}\}/);
+  assert.match(yaml,/if: needs\.prepare\.outputs\.candidate != '' && needs\.prepare\.outputs\.geography_required != 'false'/);
+});
+
 test('actual final refusal reconciles a concurrent matching-head merge without redispatch', () => {
   const {result, receipt} = run({phase: 'merge', merged: false, integration: 'cancelled', mergeOnReconcile: true, commentFails: true});
   assert.equal(result.status, 0, result.stderr); assert.equal(receipt.accepted, true);
@@ -245,92 +344,22 @@ for (const phase of ['prepare', 'merge']) test(`actual ${phase} cannot accept me
   assert.notEqual(result.status, 0); assert.equal(receipt.accepted, false); assert.match(receipt.reason, /no confirmed merge commit/);
 });
 
-function hostedDeadlineRun({phase = 'merge', ageSeconds = 0, expire = false, corrupt = false, foreignJob = false,
-  malformedMetadata = false, pending = false, badWorkflow = false, metadataNetworkFailure = false} = {}) {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'atlas-merge-deadline-'));
-  fs.mkdirSync(path.join(directory, '.github'));
-  fs.copyFileSync(path.join(root, '.github/evidence-policy.json'), path.join(directory, '.github/evidence-policy.json'));
-  const request = 'deadline-entrypoint-request', reference = `worldatlas-integration/pr-2-${request}-1234`;
-  fs.writeFileSync(path.join(directory, 'event.json'), JSON.stringify({inputs: {pr_number: '2', expected_head: 'a'.repeat(40), request_id: request}}));
-  const workflow = fs.readFileSync(path.join(root, '.github/workflows/worker-merge.yml'));
-  const file = {type: 'file', path: '.github/workflows/worker-merge.yml', encoding: 'base64', size: workflow.length,
-    sha: createHash('sha1').update(`blob ${workflow.length}\0`).update(workflow).digest('hex'), content: workflow.toString('base64')};
-  if (corrupt) file.content = Buffer.from('changed workflow').toString('base64');
-  fs.writeFileSync(path.join(directory, 'calls.json'), '[]');
-  fs.writeFileSync(path.join(directory, 'mock.mjs'), capacityShim + `
-    import fs from 'node:fs'; import {performance} from 'node:perf_hooks';
-    const realNow = performance.now.bind(performance), wall = Date.now(); let elapsed = 0, jobs = 0;
-    Object.defineProperty(performance, 'now', {value: () => realNow() + elapsed});
-    const calls = []; globalThis.fetch = async (url, options) => {
-      const route = new URL(url).pathname; calls.push({route, method: options.method});
-      fs.writeFileSync('calls.json', JSON.stringify(calls));
-      if (options.method === 'PUT') throw Error('No new merge is allowed');
-      if (route.includes('/contents/')) return Response.json(${JSON.stringify(file)});
-      if (route.includes('/attempts/1/jobs')) {
-        if (${metadataNetworkFailure}) throw Error('Metadata transport failure');
-        jobs++; return Response.json(${malformedMetadata} ? {} : {total_count: 1, jobs: [{id: 51, name: '${phase}',
-          run_id: 1234, run_attempt: 1, status: ${pending} && jobs === 1 ? 'queued' : 'in_progress',
-          started_at: new Date(wall - ${ageSeconds} * 1000).toISOString()}]});
-      }
-      if (route.endsWith('/pulls/2')) {
-        if (${expire}) elapsed += ${phase === 'merge' ? 75 : 10} * 60000 - ${ageSeconds} * 1000 - 27000;
-        return Response.json({merged: ${!(corrupt || foreignJob || malformedMetadata || badWorkflow || metadataNetworkFailure || ageSeconds >= (phase === 'merge' ? 75 : 10) * 60 - 40)}, head: {sha: 'a'.repeat(40)}, merge_commit_sha: 'b'.repeat(40)});
-      }
-      if (options.method === 'DELETE') return new Response(null, {status: 204});
-      return Response.json(route.includes('/git/ref/heads/') ? {object: {sha: 'b'.repeat(40)}} : {});
-    };
-  `);
-  try {
-    const result = spawnSync(process.execPath, ['--import', path.join(directory, 'mock.mjs'), path.join(root, 'scripts/run-worker-merge.mjs')], {
-      cwd: directory, encoding: 'utf8', timeout: 10000, env: {...process.env,
-        GH_TOKEN: 'synthetic-deadline-token', GITHUB_ACTIONS: 'true', GITHUB_REPOSITORY: 'owner/repo', GITHUB_REF: 'refs/heads/main',
-        GITHUB_RUN_ID: '1234', GITHUB_RUN_ATTEMPT: '1', GITHUB_JOB: foreignJob ? 'geography' : phase,
-        GITHUB_WORKFLOW_SHA: 'c'.repeat(40), GITHUB_WORKFLOW_REF: 'owner/repo/.github/workflows/' + (badWorkflow ? 'foreign.yml' : 'worker-merge.yml') + '@refs/heads/main',
-        GITHUB_EVENT_PATH: path.join(directory, 'event.json'), GITHUB_OUTPUT: path.join(directory, 'outputs'), GITHUB_STEP_SUMMARY: path.join(directory, 'summary'),
-        MERGE_PHASE: phase, INTEGRATION_RESULT: 'success', GEOGRAPHY_RESULT: 'success', TESTED_CANDIDATE: 'b'.repeat(40), CANDIDATE_REF: reference}});
-    const receipt = JSON.parse(fs.readFileSync(path.join(directory, 'merge-result.json')));
-    const calls = JSON.parse(fs.readFileSync(path.join(directory, 'calls.json')));
-    return {result, receipt, calls};
-  } finally {fs.rmSync(directory, {recursive: true, force: true});}
-}
-for (const [phase, minutes] of [['prepare', 10], ['merge', 75]]) {
-  test(`actual ${phase} HTTP deadline binds authenticated job start and executing workflow`, () => {
-    const {result, receipt, calls} = hostedDeadlineRun({phase, ageSeconds: 30, pending: true});
-    assert.equal(result.status, 0, result.stderr); assert.equal(receipt.accepted, true);
-    assert.equal(receipt.job_deadline.timeout_minutes, minutes); assert.equal(receipt.job_deadline.finalization_ms, 30000);
-    assert.equal(receipt.job_deadline.metadata_reads, 2); assert.equal(receipt.job_deadline.phase, phase);
-    assert.equal(calls.filter(row => row.route.includes('/contents/')).length, 1);
-    assert(!calls.some(row => row.route === '/rate_limit'));
+
+for (const phase of ['prepare', 'merge']) {
+  test(`hosted ${phase} uses the existing Actions timeout without job-clock metadata admission`, () => {
+    const {result, receipt} = run({phase, hosted: true});
+    assert.equal(result.status, 0, result.stderr);
+    assert.equal(receipt.accepted, true);
+    assert.equal(receipt.status, phase === 'prepare' ? 'already-merged' : 'merged');
+    assert.equal(receipt.job_deadline, undefined);
+    assert.equal(receipt.request_accounting.actual_http_attempts, phase === 'prepare' ? 2 : 3);
   });
-  for (const remaining of [40, 19, 0, -60]) test(`actual ${phase} startup refuses ${remaining}s remaining without post-refusal HTTP`, () => {
-    const {receipt, calls} = hostedDeadlineRun({phase, ageSeconds: minutes * 60 - remaining});
-    assert.equal(receipt.accepted, false); assert.match(receipt.reason, /deadline exhausted/);
-    assert.equal(receipt.job_deadline_exhausted, true);
-    assert.equal(calls.length, 2, 'Only immutable workflow and authenticated job metadata may be fetched');
-    assert(calls.every(row => row.method === 'GET' && /\/contents\/|\/attempts\/1\/jobs$/.test(row.route)));
-    assert.match(receipt.notification_error, /deadline/);
-  });
-  test(`actual ${phase} starts with a valid near-ceiling deadline and reserves finalization time`, () => {
-    const {result, receipt, calls} = hostedDeadlineRun({phase, ageSeconds: minutes * 60 - 55});
-    assert.equal(result.status, 0, result.stderr); assert.equal(receipt.accepted, true);
-    assert.equal(receipt.job_deadline.timeout_minutes, minutes);
-    assert.equal(receipt.job_deadline.finalization_ms, 30000);
-    assert.equal(calls.filter(row => row.method === 'POST').length, 1);
-  });
-}
-test('actual final work expiry leaves the existing reserved time usable for owned cleanup and notification', () => {
-  const {result, receipt, calls} = hostedDeadlineRun({expire: true, ageSeconds: 60});
-  assert.notEqual(result.status, 0); assert.equal(receipt.accepted, false); assert.equal(receipt.job_deadline_exhausted, true);
-  assert.equal(receipt.candidate_cleanup.status, 'deleted'); assert.equal(receipt.notification_error, undefined);
-  assert.equal(calls.filter(row => row.method === 'DELETE').length, 1);
-  assert.equal(calls.filter(row => row.method === 'POST').length, 1);
-  assert.equal(calls.filter(row => row.route.endsWith('/pulls/2')).length, 1, 'Normal reconciliation cannot spend the cleanup reserve');
-});
-for (const phase of ['prepare', 'merge']) for (const option of ['corrupt', 'foreignJob', 'malformedMetadata', 'badWorkflow', 'metadataNetworkFailure'])
-  test(`actual ${phase} deadline rejects ${option} without post-refusal HTTP`, () => {
-    const {receipt, calls} = hostedDeadlineRun({phase, [option]: true});
+  test(`hosted ${phase} retains actual API denial and durable refusal without metadata admission`, () => {
+    const {result, receipt} = run({phase, hosted: true, readFails: true, commentFails: true});
+    assert.notEqual(result.status, 0);
     assert.equal(receipt.accepted, false);
-    assert(calls.every(row => row.method === 'GET' && /\/contents\/|\/attempts\/1\/jobs$/.test(row.route)));
-    assert.match(receipt.reason, /workflow|job|inventory|metadata|Metadata/);
-    assert.match(receipt.notification_error, /deadline/);
+    assert.equal(receipt.api_error.http_status, 418);
+    assert.equal(receipt.notification_api_error.http_status, 403);
+    assert.match(receipt.reason, /GET.*HTTP 418/);
   });
+}

@@ -8,7 +8,7 @@ test('map and legend presentation keys preserve source identities and distinguis
   assert.notEqual(categoryPresentationKey('owner',a),categoryPresentationKey('owner',b));
   assert.equal(JSON.parse(categoryPresentationKey('owner',a))[0],a.category_id);
   assert.equal(a.category_id,b.category_id);
-  assert.equal(categoryPresentationKey('owner',{value:null,category_id:'owner:old'}),null);
+  assert.equal(categoryPresentationKey('owner',{value:null,category_id:'owner:old'}),'owner:old','Known assignment survives unavailable display text');
 });
 test('shared named modes distinguish display groups; fixed classifications and hierarchy use stable IDs', () => {
   for(const mode of ['culture','religion']) assert.deepEqual(JSON.parse(categoryPresentationKey(mode,{value:'Name',category_id:'stable'})),['stable','Name']);

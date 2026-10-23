@@ -18,26 +18,26 @@ GitHub Issues is the single source of truth for TODOs, current status and work h
 
 Geography researchers use `docs/GEOGRAPHY_HANDOFF.md` and `docs/prompts/GEOGRAPHY.txt`, label `type:geography`, branch `geography/<job-id>`, and the issue's exact evidence ownership prefixes. They do not execute migrations, update shared geography, perform live imports or publish. The existing table's engineering geographic releases and historical content responsibilities remain distinct.
 
-Read [LOCAL_WORKSPACES.md](LOCAL_WORKSPACES.md). Allocate isolated checkouts through `scripts/local-workspace.mjs`; keep bounded work/review slots, include exact required sparse inputs, check storage before generation/installations, and release finished slots after preserving unique work. Do not retain a full checkout per task or review revision. Existing chats must refresh their saved instructions.
+Read [LOCAL_WORKSPACES.md](LOCAL_WORKSPACES.md). Allocate isolated checkouts through `scripts/local-workspace.mjs`; keep bounded work/review slots, include exact required sparse inputs, and release finished slots after preserving unique work. Do not retain a full checkout per task or review revision. Existing chats must refresh their saved instructions.
 
 ## Issue workflow and incremental PRs
 
-Use issue forms and exactly one type label. Future work types may add `type:*` labels/forms and appropriate ownership rules; the current Git lanes are engineering, geography and research. Geography is evidence/proposal-only, with safe issue-declared `owned_paths`; history keeps its campaign ownership and complete-region import gate. Labels describe type; GitHub open/closed state and dated comments describe progress. Keep completed issues. Preserve legacy dates and evidence; never substitute a migrated issue's creation timestamp for an unknown original raised date.
+Use existing issues/PR discussions to record scope, dependencies, evidence and
+remaining work. Labels and issue forms are optional. Coherent changes can address
+multiple related issues, or proceed without a new issue. There is no required body
+syntax. Use GitHub closure keywords only for acceptance actually completed.
 
-Inspect Issues, assignments, comments and active PRs before claiming scope. Post planned scope/validation and dependencies on the issue. Large objectives can have multiple focused PRs or bounded linked child issues. `kind:umbrella` identifies broad objectives; one child/campaign completion does not close its parent. Every PR addresses exactly one issue or part of it and targets **main**:
-
-- `Refs #N` for partial work; the issue stays open.
-- `Closes #N` for final work only after its complete acceptance criteria and required live verification are met.
-
-Use exactly one of those canonical lines in the PR body. A focused PR may cite source evidence/dependencies without closing other issues. Report milestones, blockers, evidence and next actions in issue comments with dates. The GitHub issue is the authoritative completion record.
-
-Create a fresh unique lane branch from current `origin/main` for every PR, including subsequent PRs on the same large issue. Never accumulate unrelated work or reuse a merged branch. Unique IDs match `[a-z0-9][a-z0-9-]{0,63}`. Use isolated worktrees; inspect unmerged branches and do not switch another thread's checkout. Resume an active job/campaign serially, with one writer.
-
-Maintainers integrate reviewed PRs serially after affected checks. **Use the serialized worker merge queue**, which checks current ownership/head/main and squash-merges using the PR title. The already merged initial foundation PR #2 preserves its full history; do not rewrite it. The historical `work` branch is not the future integration base. Branch protection has not been configured; maintainers must honor checks before merge.
+Create a fresh unique Git branch from current `origin/main`, using an isolated
+managed checkout. Lane prefixes are conventions. Preserve other workers' files and
+branches; coordinate overlap before editing. Submit the reviewed exact head through
+the serialized queue, which validates the current-main candidate and actual tests,
+then squash-merges using the PR title. It grants no live-operation authority.
 
 ## Git ownership and durable evidence
 
-Research only edits its campaign directory. Shared handover updates are engineering work; task progress never requires a shared Markdown edit. Geography edits only issue-declared `data/regional-review/<packet-id>/` or `research/geography/<campaign-id>/` directories; local reproductions cannot mutate the baseline or call live APIs. Engineering cannot change these evidence directories, history campaign directories or another job's progress. It consumes source/proposal evidence and writes supported migrations elsewhere. Declared geography ownership is checked from the actual linked GitHub issue by trusted CI, and rechecked with all PR paths before merge. CI uses trusted base scripts and read-only permissions to check candidate paths, including rename sources, PR issue linkage and issue type. These checks protect Git scope, not historical truth or database authorization.
+Research only edits its campaign directory. Shared handover updates are engineering work; task progress never requires a shared Markdown edit. Geography edits only issue-declared `data/regional-review/<packet-id>/` or `research/geography/<campaign-id>/` directories; local reproductions cannot mutate the baseline or call live APIs. Engineering cannot change these evidence directories, history campaign directories or another job's progress. It consumes source/proposal evidence and writes supported migrations elsewhere. Ownership is coordinated by distinct workers and the parent. Ordinary queue
+admission does not fetch issue contracts or police labels/branch prefixes. Exact
+candidate files and real scientific/consumer checks determine integration safety.
 
 Keep lawful original sources/restoration manifests, factual inputs, bundles, release pins and import/read-back receipts in the campaign directory. Templates under `coordination/templates/` are execution artifacts. A follow-up PR uses a new directory and links preserved prior campaign evidence; it does not overwrite another campaign. Push early/often, attach PRs as instructed and leave exact branch/commit/issue/PR and next action. Fresh threads cannot access your caches or private credentials. The pre-Issues tracker archive and migration receipt remain immutable snapshots.
 

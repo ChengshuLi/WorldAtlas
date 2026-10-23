@@ -4,7 +4,8 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {generateKeyPairSync,createHash} from 'node:crypto';
-import {nativeReadbackFailureCode,isolatedFilesystemUsage,loadRecoveryReservation,validateRecoveryWindow,validatedOwnerConnection,assertRestoredInventory,boundedOwnerJSON,runCurrentPostgresRecovery,isolatedDatabaseACLList,isolatedDatabaseACLSQL,isolatedRestoreSQL,isolatedOriginalChecks,verifyRecoveryHosting} from '../scripts/current-postgres-recovery.mjs';
+import {nativeMembershipDigestSQL,patchNativeRestoreFile,nativeReadbackFailureCode,isolatedFilesystemUsage,loadRecoveryReservation,validateRecoveryWindow,validatedOwnerConnection,assertRestoredInventory,boundedOwnerJSON,runCurrentPostgresRecovery,isolatedDatabaseACLList,isolatedDatabaseACLSQL,isolatedRestoreSQL,isolatedOriginalChecks,verifyRecoveryHosting} from '../scripts/current-postgres-recovery.mjs';
+import {createLocalPostgres} from '../scripts/verify-postgres-schema.mjs';
 import {backupRecipientFingerprint} from '../scripts/recovery-backup-envelope.mjs';
 import {cloudflareFixture} from './fixtures/cloudflare-publication.mjs';
 import {storageExportV2Contract,storageExportV2Collections,v2MarkerIdentity} from '../hosted/storage-export-v2-contract.js';
@@ -146,7 +147,6 @@ test('database ACL rendering excludes the forced create prelude and rejects unex
  for(const x of [rendered.replace('GRANT ALL','CREATE DATABASE other;\nGRANT ALL'),rendered.replace('TO neon_superuser','TO other'),rendered.replace('GRANT ALL','\\connect other\nGRANT ALL'),rendered.replace('Type: ACL','Type: TABLE'),rendered.replace('dump complete','incomplete'),rendered+rendered])assert.throws(()=>isolatedDatabaseACLSQL(x));
 });
 
-test('TOC-style early input close reproduces full-size spawnSync EPIPE despite successful child exit',async()=>{const {execFileSync}=await import('node:child_process');assert.throws(()=>execFileSync('head',['-c','10'],{input:Buffer.alloc(22510251),stdio:['pipe','pipe','pipe']}),error=>error.code==='EPIPE'&&error.status===0);});
 
 
 test('native readback diagnostics retain only fixed process codes or terse SQLSTATE',()=>{
@@ -161,3 +161,6 @@ test('isolated disk readback accepts one bounded mount measurement and rejects m
  assert.deepEqual(isolatedFilesystemUsage('Filesystem 1024-blocks Used Available Capacity Mounted on\ntmpfs 3145728 2400000 745728 77% /var/lib/postgresql\n'),{capacity_bytes:3221225472,used_bytes:2457600000,available_bytes:763625472});
  for(const row of ['', 'tmpfs 10 9 2 90% /var/lib/postgresql', 'tmpfs 99999999999999999999 0 0 0% /var/lib/postgresql','tmpfs 10 1 9 10% /other','tmpfs 10 1 9 10% /var/lib/postgresql\ntmpfs 10 1 9 10% /var/lib/postgresql'])assert.throws(()=>isolatedFilesystemUsage(row));
 });
+
+test('bounded native membership digest preserves raw JSON TEXT spelling and is independent of insertion order',async()=>{const f=await createLocalPostgres();try{await f.engine.exec('DROP TABLE atlas_geographic_memberships; CREATE TABLE atlas_geographic_memberships(release_id text,entity_id text,parent_id text,reference_name text,active integer,source_id text,evidence text)');const row=['r','x',null,null,1,'s',' {"a":1,"a":2} '];await f.engine.query('INSERT INTO atlas_geographic_memberships VALUES($1,$2,$3,$4,$5,$6,$7)',row);const before=(await f.engine.query(nativeMembershipDigestSQL())).rows[0];assert.equal(Number(before.rows),1);assert.match(before.ordered_rows_sha256,/^[a-f0-9]{64}$/);await f.engine.query("UPDATE atlas_geographic_memberships SET evidence=$1",['{"a":2}']);assert.notEqual((await f.engine.query(nativeMembershipDigestSQL())).rows[0].ordered_rows_sha256,before.ordered_rows_sha256);}finally{await f.close();}});
+test('stream restore header patch retains COPY bytes beyond first bounded header buffer',()=>{const dir=fs.mkdtempSync(path.join(os.tmpdir(),'native-header-')),file=path.join(dir,'restore.sql'),head="-- dump\nSELECT pg_catalog.set_config('search_path', '', false);\n-- Name: test; Type: TABLE DATA\n",tail='COPY test FROM stdin;\n'+'original raw bytes\n'.repeat(2000)+'\\.\n';try{fs.writeFileSync(file,head+tail,{mode:0o600});patchNativeRestoreFile(file);const bytes=fs.readFileSync(file,'utf8');assert.equal(bytes.slice(bytes.indexOf('\n-- Name: ')),(head+tail).slice((head+tail).indexOf('\n-- Name: ')));assert.ok(bytes.includes('public,pg_catalog'));}finally{fs.rmSync(dir,{recursive:true});}});

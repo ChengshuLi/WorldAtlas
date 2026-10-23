@@ -1,8 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import fs from 'node:fs';
+import path from 'node:path';
+import zlib from 'node:zlib';
+import {syncBuiltinESMExports} from 'node:module';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
-import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
+import {sha256, subjectsHash, repositoryReader} from '../scripts/evidence-quality.mjs';
 import {evidenceRequirement} from '../scripts/evidence-policy.mjs';
 import {validatePremergeManifest, validateRecordChecks, validateReviewReceipt, checkPremergeEvidence, GEOMETRY_VERSION} from '../scripts/premerge-evidence.mjs';
 
@@ -31,6 +35,86 @@ function fixture() {
   return {manifest, spec, issue, files, reservation, pr, readFile, manifestPath, branch};
 }
 const validate = f => validatePremergeManifest(f.manifest, f);
+function sharedResultFixture() {
+  const f = fixture(), values = Object.fromEntries(Array.from({length: 8}, (_,i) => ['field' + i, i + 1]));
+  const decoded = Buffer.from(JSON.stringify(values)), compressed = zlib.gzipSync(decoded);
+  f.manifest.outputs = [{...desc(outputPath, compressed), uncompressed_bytes: decoded.length,
+    uncompressed_sha256: sha256(decoded)}];
+  f.manifest.metrics = Object.entries(values).map(([field, value]) => ({id: field, value, unit: 'count',
+    vintage: 'archived', input_sha256: sha256(baseline), evaluation_commit: commit}));
+  f.manifest.metric_bindings = Object.keys(values).map(field => ({metric_id: field, path: outputPath, json_pointer: '/' + field}));
+  f.manifest.summaries = [];
+  const reads = new Map(), bodies = new Map([[commit + ':baseline.txt', baseline], ['candidate:' + outputPath, compressed]]);
+  f.readFile = (name, vintage) => {
+    const key = vintage + ':' + name; reads.set(key, (reads.get(key) ?? 0) + 1);
+    assert.ok(bodies.has(key), 'No undeclared synthetic body'); return bodies.get(key);
+  };
+  return {...f, reads, bodies, decoded, compressed};
+}
+
+test('eight shared-result metrics reuse one authenticated read and gzip decode in the actual validator', () => {
+  const f = sharedResultFixture(), original = zlib.gunzipSync, parse = JSON.parse; let gunzips = 0, parses = 0;
+  zlib.gunzipSync = (...args) => {gunzips++; return original(...args);}; syncBuiltinESMExports();
+  JSON.parse = (raw, ...args) => {if (Buffer.isBuffer(raw) && raw.equals(f.decoded)) parses++; return parse(raw, ...args);};
+  try {
+    assert.equal(validate(f).metric_bindings_checked, 8);
+    assert.equal(f.reads.get('candidate:' + outputPath), 1);
+    assert.equal(f.reads.get(commit + ':baseline.txt'), 1);
+    assert.equal(gunzips, 1); assert.equal(parses, 1);
+  } finally {JSON.parse = parse; zlib.gunzipSync = original; syncBuiltinESMExports();}
+});
+
+test('record and metric checks share the authenticated decoded result while retaining exact reference joins', () => {
+  const f = sharedResultFixture(), rows = [{id: 'a', owner: 'expected'}];
+  const decoded = Buffer.from(JSON.stringify({...JSON.parse(f.decoded), rows})), raw = zlib.gzipSync(decoded);
+  const reference = Buffer.from(JSON.stringify(rows));
+  f.bodies.set('candidate:' + outputPath, raw); f.bodies.set(commit + ':baseline.txt', reference);
+  Object.assign(f.manifest.outputs[0], desc(outputPath, raw), {uncompressed_bytes: decoded.length, uncompressed_sha256: sha256(decoded)});
+  f.manifest.baseline.files = [desc('baseline.txt', reference)];
+  f.manifest.metrics.forEach(metric => {metric.input_sha256 = sha256(reference);});
+  f.manifest.record_checks = [{version: 1, path: outputPath, json_pointer: '/rows', id_key: 'id',
+    reference_path: 'baseline.txt', reference_json_pointer: '', reference_id_key: 'id', fields: {owner: 'owner'}}];
+  assert.equal(validate(f).record_checks_checked, 1);
+  assert.equal(f.reads.get('candidate:' + outputPath), 1); assert.equal(f.reads.get(commit + ':baseline.txt'), 1);
+  f.bodies.set(commit + ':baseline.txt', Buffer.from(JSON.stringify([{id: 'a', owner: 'foreign'}])));
+  f.manifest.baseline.files = [desc('baseline.txt', f.bodies.get(commit + ':baseline.txt'))];
+  f.manifest.metrics.forEach(metric => {metric.input_sha256 = f.manifest.baseline.files[0].sha256;});
+  assert.throws(() => validate(f), /Independent record join mismatch/);
+});
+
+test('shared-result reuse preserves every pointer/value check and reauthenticates each fresh call', () => {
+  const f = sharedResultFixture(); validate(f);
+  f.manifest.metrics[7].value++; assert.throws(() => validate(f), /Generated result differs/);
+  f.manifest.metrics[7].value--;
+  f.manifest.metric_bindings[7].json_pointer = '/absent'; assert.throws(() => validate(f), /pointer does not resolve/);
+  f.manifest.metric_bindings[7].json_pointer = '/field7';
+  const changed = zlib.gzipSync(Buffer.from(JSON.stringify({field0: 99})));
+  f.bodies.set('candidate:' + outputPath, changed);
+  assert.throws(() => validate(f), /Input bytes mismatch/);
+  Object.assign(f.manifest.outputs[0], desc(outputPath, changed));
+  assert.throws(() => validate(f), /Uncompressed bytes mismatch/);
+  const decoded = Buffer.from(JSON.stringify({...JSON.parse(f.decoded), field7: 99}));
+  const raw = zlib.gzipSync(decoded); f.bodies.set('candidate:' + outputPath, raw);
+  Object.assign(f.manifest.outputs[0], desc(outputPath, raw), {uncompressed_bytes: decoded.length, uncompressed_sha256: sha256(decoded)});
+  assert.throws(() => validate(f), /Generated result differs/);
+});
+
+test('reuse checks descriptor identity on a cache hit and keeps historical/candidate same paths distinct', () => {
+  const drifted = sharedResultFixture();
+  Object.defineProperty(drifted.manifest.metric_bindings[1], 'json_pointer', {get() {
+    drifted.manifest.outputs[0].sha256 = '0'.repeat(64); return '/field1';
+  }});
+  assert.throws(() => validate(drifted), /Checked evidence descriptor changed/);
+  const f = sharedResultFixture();
+  f.manifest.baseline = {version: 2, commit, files: [{...desc(outputPath, baseline), commit}], pins: {}};
+  f.bodies.delete(commit + ':baseline.txt'); f.bodies.set(commit + ':' + outputPath, baseline);
+  f.readFile.assertAncestor = actual => assert.equal(actual, commit);
+  f.manifest.metrics.forEach(metric => {metric.input_file = {path: outputPath, commit};});
+  assert.equal(validate(f).metric_bindings_checked, 8);
+  assert.equal(f.reads.get(commit + ':' + outputPath), 1);
+  assert.equal(f.reads.get('candidate:' + outputPath), 1);
+});
+
 test('independent record bindings reject coherent wrong joins, incomplete and vacuous coverage', () => {
   const reference = [{id: 'a', parent: 'province-a', unit: 'm2'}, {id: 'b', parent: 'province-b', unit: 'm2'}];
   const manifest = {outputs: [{path: 'candidate.json'}], baseline: {commit, files: [{path: 'reference.json'}]}, record_checks: [{
@@ -121,6 +205,26 @@ test('Washington-style generated narrative/table mismatch fails against the same
   f.manifest.rendered_tables[0].rows[0].template = 'Wrong | {value}%'; assert.throws(() => validate(f), /table differs/);
   f.manifest.rendered_tables = []; assert.throws(() => validate(f), /ledger-bound/);
 });
+test('large table and control rereads retain exact descriptors through the real local reader', () => {
+  const f = fixture(), directory = fs.mkdtempSync(path.join(process.cwd(), '.cache-premerge-reread-'));
+  const tablePath = 'coordination/engineering/synthetic/table.md', controlPath = 'coordination/engineering/synthetic/control.json';
+  const table = Buffer.alloc(36065990, 32); table.write('Share | 50.00%\n');
+  const control = Buffer.from(JSON.stringify({method_id: 'synthetic', kind: 'positive-control', outcome: 'passed'}) + ' '.repeat(36065990));
+  try {
+    for (const [name, raw] of [[outputPath, output], [tablePath, table], [controlPath, control]]) {
+      const target = path.join(directory, name); fs.mkdirSync(path.dirname(target), {recursive: true}); fs.writeFileSync(target, raw, {flag: 'wx'});
+      if (name === outputPath) continue;
+      f.manifest.outputs.push({...desc(name, raw), ...(name === tablePath ? {role: 'generated-table'} : {})});
+      f.files.push({filename: name, status: 'added'}); f.manifest.change_receipts.push({path: name, status: 'added'});
+    }
+    f.manifest.rendered_tables = [{path: tablePath, rows: [{metric_id: 'share', line: 1, template: 'Share | {value}%', decimals: 2, scale: 100}]}];
+    f.manifest.validation = [{method_id: 'synthetic', kind: 'positive-control', outcome: 'passed', evidence_path: controlPath}];
+    const reader = repositoryReader(directory);
+    f.readFile = (name, vintage, descriptor) => name === 'baseline.txt' ? baseline : reader(name, vintage, descriptor);
+    assert.equal(validate(f).change_files_checked, 4);
+    fs.appendFileSync(path.join(directory, controlPath), 'x'); assert.throws(() => validate(f), /budget/);
+  } finally { fs.rmSync(directory, {recursive: true, force: true}); }
+});
 test('scientific reviews reject self approval, stale heads and absent factual/geometry review', () => {
   for (const mutate of [r => r.reviewer_worker_id = 'author', r => r.head_sha = commit, r => r.outcome = 'changes-requested', r => delete r.domains.implementation]) {
     const f = fixture(), r = receipt(f); mutate(r); assert.throws(() => review(f, r));
@@ -146,6 +250,39 @@ function remoteFixture(f, extraContents = []) {
   };
   return {api, calls, bytes, tree, blobs};
 }
+
+test('hosted whole-manifest loading forwards exact large sizes through nested immutable REST readers',async()=>{
+ const f=fixture(),raw=Buffer.alloc(36065990,17),extras=[];
+ for(let i=0;i<8;i++){
+  const name='coordination/engineering/synthetic/large-'+i+'.bin';extras.push([name,raw]);
+  f.manifest.outputs.push(desc(name,raw));f.files.push({filename:name,status:'added'});f.manifest.change_receipts.push({path:name,status:'added'});
+ }
+ assert.ok(f.manifest.outputs.reduce((sum,file)=>sum+file.bytes,0)>256*1024*1024);f.pr.changed_files=f.files.length;
+ const remote=remoteFixture(f,extras),forwarded=[];
+ const api=memoizeImmutableGitBlobs(memoizeImmutableGitBlobs(async(...args)=>{forwarded.push(args);return remote.api(...args);}));
+ assert.equal((await checkPremergeEvidence({...f,api,repo:'test/repo',policy})).status,'bytes-verified');
+ assert.ok(forwarded.some(([, , ,options])=>options?.expectedImmutableBytes===raw.length&&Number.isSafeInteger(options.maxResponseBytes)));
+ const changed=remote.tree.find(row=>row.path===extras[0][0]);changed.size--;
+ await assert.rejects(checkPremergeEvidence({...f,api,repo:'test/repo',policy}),/Manifest\/tree evidence size differs/);
+});
+test('hosted manifests use exact tree sizes beyond 1 MiB and authenticate inventories beyond 512 files',async()=>{
+ const f=fixture(),extras=[];
+ for(let i=0;i<513;i++){
+  const name='coordination/engineering/synthetic/control-'+i+'.bin',raw=Buffer.from('control '+i);extras.push([name,raw]);
+  f.manifest.outputs.push(desc(name,raw));f.files.push({filename:name,status:'added'});f.manifest.change_receipts.push({path:name,status:'added'});
+ }
+ f.manifest.notes='x'.repeat(1024*1024);f.pr.changed_files=f.files.length;
+ const remote=remoteFixture(f,extras),forwarded=[],batches=[];
+ assert(remote.bytes.length>1024*1024);
+ const api=memoizeImmutableGitBlobs(async(...args)=>{forwarded.push(args);return remote.api(...args);});
+ api.prefetchGitBlobs=async(repo,rows)=>{assert.equal(repo,'test/repo');batches.push(rows);};
+ const result=await checkPremergeEvidence({...f,api,repo:'test/repo',policy});
+ assert.equal(result.status,'bytes-verified');assert.equal(result.checked.length,515);
+ assert(batches.some(rows=>rows.length>512));
+ assert(forwarded.some(([, , ,options])=>options?.expectedImmutableBytes===remote.bytes.length));
+ const last=remote.tree.find(row=>row.path===extras.at(-1)[0]);last.size--;
+ await assert.rejects(checkPremergeEvidence({...f,api,repo:'test/repo',policy}),/Manifest\/tree evidence size differs/);
+});
 test('scientific byte checks need no duplicate review comment and do not certify review', async () => {
   const f = fixture(), remote = remoteFixture(f);
   const result = await checkPremergeEvidence({...f, api: remote.api, repo: 'test/repo', policy});

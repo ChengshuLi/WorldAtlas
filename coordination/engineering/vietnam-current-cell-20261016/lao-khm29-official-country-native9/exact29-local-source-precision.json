@@ -1,0 +1,663 @@
+{
+  "kind": "descriptive-local-source-precision-observations-no-new-membership-classification",
+  "runtime": {
+    "shapely": "2.1.2"
+  },
+  "projection": "Existing retained WGS84 transverse-Mercator metric frame, central meridian105, k1, falseeasting18500000; nominal distances only",
+  "service_coordinate_precision": "Whole official country JSON vertices use4decimal degree service coordinates; exact LSIB retained source coordinates are separate",
+  "counts": {
+    "VNM-only": 8,
+    "LAO-only": 7,
+    "KHM-only": 13,
+    "official-gap": 1
+  },
+  "VNM_positive8_point_to_LSIB_range_m": [
+    4.120264672966829,
+    254.98290648984914
+  ],
+  "observations": [
+    {
+      "original_key": {
+        "owner": 48597,
+        "y": 115845,
+        "x": 207098
+      },
+      "new_country_disposition": "VNM-only",
+      "applicable_named_border": "LAO-VNM",
+      "nominal_point_to_exact_LSIB_m": 115.75071538887497,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 114.70865921847744,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.856230328070814,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 0.22048575110640722
+        },
+        "LAO": {
+          "nominal_point_to_country_boundary_m": 114.70865921847741,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.856230328070814,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 0.22048575110640722
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48661,
+        "y": 115955,
+        "x": 207270
+      },
+      "new_country_disposition": "VNM-only",
+      "applicable_named_border": "LAO-VNM",
+      "nominal_point_to_exact_LSIB_m": 4.120264672966829,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 4.422276638753424,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 0.011663228727146653,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 0.5725318232556421
+        },
+        "LAO": {
+          "nominal_point_to_country_boundary_m": 4.422276638753427,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 0.011663228727146653,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 0.5725318232556406
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48661,
+        "y": 116097,
+        "x": 207477
+      },
+      "new_country_disposition": "LAO-only",
+      "applicable_named_border": "LAO-VNM",
+      "nominal_point_to_exact_LSIB_m": 7.006643936938225,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 3.516190653546013,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 3.5027634519140713,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 3.4659230508269085
+        },
+        "LAO": {
+          "nominal_point_to_country_boundary_m": 3.516190653546013,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 3.5027634519140713,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 3.465923050826911
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48575,
+        "y": 122515,
+        "x": 208492
+      },
+      "new_country_disposition": "VNM-only",
+      "applicable_named_border": "KHM-VNM",
+      "nominal_point_to_exact_LSIB_m": 254.98290648984914,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 246.59005707951326,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 11.670993548741276,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 6.1091154860167585
+        },
+        "KHM": {
+          "nominal_point_to_country_boundary_m": 246.59005707951326,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 11.670993548741276,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 6.1091154860167585
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48240,
+        "y": 123084,
+        "x": 208377
+      },
+      "new_country_disposition": "VNM-only",
+      "applicable_named_border": "KHM-VNM",
+      "nominal_point_to_exact_LSIB_m": 43.58094466174476,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 45.26866982801975,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.6877191008770764,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 1.6877310052767496
+        },
+        "KHM": {
+          "nominal_point_to_country_boundary_m": 45.26866982801977,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.6877191008770764,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 1.6877310052767123
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48437,
+        "y": 123109,
+        "x": 207760
+      },
+      "new_country_disposition": "VNM-only",
+      "applicable_named_border": "KHM-VNM",
+      "nominal_point_to_exact_LSIB_m": 16.9795099754691,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 18.595709057168868,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.6153153754763363,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 1.6170059828129473
+        },
+        "KHM": {
+          "nominal_point_to_country_boundary_m": 18.59570905716884,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.6153153754763363,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 1.6170059828129393
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48437,
+        "y": 123110,
+        "x": 207762
+      },
+      "new_country_disposition": "VNM-only",
+      "applicable_named_border": "KHM-VNM",
+      "nominal_point_to_exact_LSIB_m": 10.261437186515053,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 12.119741534747217,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.8582886063562363,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 1.8583176759384685
+        },
+        "KHM": {
+          "nominal_point_to_country_boundary_m": 12.119741534747295,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.8582886063562363,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 1.85831767593843
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48530,
+        "y": 123164,
+        "x": 208365
+      },
+      "new_country_disposition": "VNM-only",
+      "applicable_named_border": "KHM-VNM",
+      "nominal_point_to_exact_LSIB_m": 30.6367113643655,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 29.622906980925105,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.0138044105451955,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 1.0138043553212925
+        },
+        "KHM": {
+          "nominal_point_to_country_boundary_m": 29.62290698092512,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.0138044105451955,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 1.0138043553213036
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48597,
+        "y": 115833,
+        "x": 207102
+      },
+      "new_country_disposition": "LAO-only",
+      "applicable_named_border": "LAO-VNM",
+      "nominal_point_to_exact_LSIB_m": 130.59741058470087,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 122.28180587962272,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 11.462168204050387,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 4.808217716324785
+        },
+        "LAO": {
+          "nominal_point_to_country_boundary_m": 122.28180587962272,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 11.462168204050387,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 4.8082177163247835
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48597,
+        "y": 115833,
+        "x": 207103
+      },
+      "new_country_disposition": "LAO-only",
+      "applicable_named_border": "LAO-VNM",
+      "nominal_point_to_exact_LSIB_m": 144.45977680165367,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 134.64519680998825,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 9.82595434763277,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 9.802376534125996
+        },
+        "LAO": {
+          "nominal_point_to_country_boundary_m": 134.64519680998822,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 9.82595434763277,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 9.802376534125996
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48597,
+        "y": 115834,
+        "x": 207105
+      },
+      "new_country_disposition": "LAO-only",
+      "applicable_named_border": "LAO-VNM",
+      "nominal_point_to_exact_LSIB_m": 16.02673434750861,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 17.4918389749626,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.4647542326511256,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 1.465425673465587
+        },
+        "LAO": {
+          "nominal_point_to_country_boundary_m": 17.4918389749626,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.4647542326511256,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 1.465425673465582
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48597,
+        "y": 115842,
+        "x": 207103
+      },
+      "new_country_disposition": "LAO-only",
+      "applicable_named_border": "LAO-VNM",
+      "nominal_point_to_exact_LSIB_m": 43.119511258668936,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 45.72336188525504,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 2.3408636625711368,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 2.851861027967818
+        },
+        "LAO": {
+          "nominal_point_to_country_boundary_m": 45.72336188525503,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 2.3408636625711368,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 2.8518610279678147
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48597,
+        "y": 115847,
+        "x": 207095
+      },
+      "new_country_disposition": "LAO-only",
+      "applicable_named_border": "LAO-VNM",
+      "nominal_point_to_exact_LSIB_m": 122.95163786665574,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 129.1713524347582,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 2.1774714598708718,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 6.832041766808874
+        },
+        "LAO": {
+          "nominal_point_to_country_boundary_m": 129.1713524347582,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 2.1774714598708718,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 6.832041766808874
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48597,
+        "y": 115916,
+        "x": 207180
+      },
+      "new_country_disposition": "VNM-only",
+      "applicable_named_border": "LAO-VNM",
+      "nominal_point_to_exact_LSIB_m": 6.643911983117872,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 7.166770121133439,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 0.483090518422835,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 0.5597244749749865
+        },
+        "LAO": {
+          "nominal_point_to_country_boundary_m": 7.166770121133439,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 0.483090518422835,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 0.5597244749749876
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48479,
+        "y": 118957,
+        "x": 208819
+      },
+      "new_country_disposition": "LAO-only",
+      "applicable_named_border": "LAO-VNM",
+      "nominal_point_to_exact_LSIB_m": 41.620087116974936,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 38.484862092715204,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 3.2074330826427375,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 3.057134431248455
+        },
+        "LAO": {
+          "nominal_point_to_country_boundary_m": 38.484862092715204,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 3.2074330826427375,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 3.057134431248455
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48352,
+        "y": 122464,
+        "x": 208350
+      },
+      "new_country_disposition": "KHM-only",
+      "applicable_named_border": "KHM-VNM",
+      "nominal_point_to_exact_LSIB_m": 47.93420473850302,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 50.24350848976776,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 2.3073797473757787,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 2.311139323004177
+        },
+        "KHM": {
+          "nominal_point_to_country_boundary_m": 50.243508489767756,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 2.3073797473757787,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 2.3111393230041855
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48575,
+        "y": 122485,
+        "x": 208464
+      },
+      "new_country_disposition": "KHM-only",
+      "applicable_named_border": "KHM-VNM",
+      "nominal_point_to_exact_LSIB_m": 2.6106411468242667,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 1.4152471698684639,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.198213257939058,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 1.1901933826877613
+        },
+        "KHM": {
+          "nominal_point_to_country_boundary_m": 1.4152471698684546,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.198213257939058,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 1.1901933826877582
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48575,
+        "y": 122486,
+        "x": 208466
+      },
+      "new_country_disposition": "KHM-only",
+      "applicable_named_border": "KHM-VNM",
+      "nominal_point_to_exact_LSIB_m": 216.13503582603565,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 211.27694147568943,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 4.890485608087579,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 1.1885263994045308
+        },
+        "KHM": {
+          "nominal_point_to_country_boundary_m": 211.27694147568943,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 4.890485608087579,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 1.1885263994045283
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48575,
+        "y": 122488,
+        "x": 208470
+      },
+      "new_country_disposition": "KHM-only",
+      "applicable_named_border": "KHM-VNM",
+      "nominal_point_to_exact_LSIB_m": 316.10576588056466,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 312.6400624091689,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 3.6594355766382742,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 2.8972317767290425
+        },
+        "KHM": {
+          "nominal_point_to_country_boundary_m": 312.6400624091689,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 3.6594355766382742,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 2.8972317767290443
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48575,
+        "y": 122492,
+        "x": 208471
+      },
+      "new_country_disposition": "KHM-only",
+      "applicable_named_border": "KHM-VNM",
+      "nominal_point_to_exact_LSIB_m": 262.76477096430466,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 266.8201499678317,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 2.04977191277516,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 4.063354024970761
+        },
+        "KHM": {
+          "nominal_point_to_country_boundary_m": 266.8201499678317,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 2.04977191277516,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 4.063354024970761
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48516,
+        "y": 122965,
+        "x": 208401
+      },
+      "new_country_disposition": "KHM-only",
+      "applicable_named_border": "KHM-VNM",
+      "nominal_point_to_exact_LSIB_m": 64.5509856001218,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 65.89597096972679,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.3444561070408347,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 1.3455038290936248
+        },
+        "KHM": {
+          "nominal_point_to_country_boundary_m": 65.89597096972679,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.3444561070408347,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 1.345503829093445
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48373,
+        "y": 123052,
+        "x": 207626
+      },
+      "new_country_disposition": "KHM-only",
+      "applicable_named_border": "KHM-VNM",
+      "nominal_point_to_exact_LSIB_m": 62.969048217202165,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 11071.135285039889,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.3954425077781332,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 11015.033143342522
+        },
+        "KHM": {
+          "nominal_point_to_country_boundary_m": 53.024772754078555,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 9.952345285694905,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 9.934692224863152
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48373,
+        "y": 123053,
+        "x": 207624
+      },
+      "new_country_disposition": "KHM-only",
+      "applicable_named_border": "KHM-VNM",
+      "nominal_point_to_exact_LSIB_m": 96.67499678148599,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 11264.46597220989,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.3954425077781332,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 11182.005407984834
+        },
+        "KHM": {
+          "nominal_point_to_country_boundary_m": 91.47262203992625,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 5.257975528887791,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 5.143611738379186
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48373,
+        "y": 123053,
+        "x": 207625
+      },
+      "new_country_disposition": "KHM-only",
+      "applicable_named_border": "KHM-VNM",
+      "nominal_point_to_exact_LSIB_m": 19.35835004409853,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 11131.742713932104,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.3954425077781332,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 11115.149830678929
+        },
+        "KHM": {
+          "nominal_point_to_country_boundary_m": 9.718198446472512,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 9.646058715594869,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 9.628384803033022
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48373,
+        "y": 123054,
+        "x": 207622
+      },
+      "new_country_disposition": "KHM-only",
+      "applicable_named_border": "KHM-VNM",
+      "nominal_point_to_exact_LSIB_m": 108.38290376038506,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 11464.34139428126,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.3954425077781332,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 11379.393081130627
+        },
+        "KHM": {
+          "nominal_point_to_country_boundary_m": 107.16399723875577,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.2246259036614149,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 1.2131220858787113
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48373,
+        "y": 123054,
+        "x": 207623
+      },
+      "new_country_disposition": "KHM-only",
+      "applicable_named_border": "KHM-VNM",
+      "nominal_point_to_exact_LSIB_m": 43.82485363907558,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 11329.981779926082,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.3954425077781332,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 11295.426344611806
+        },
+        "KHM": {
+          "nominal_point_to_country_boundary_m": 44.00929345065607,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 0.18209101889540436,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 0.18677876026743861
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48373,
+        "y": 123055,
+        "x": 207620
+      },
+      "new_country_disposition": "KHM-only",
+      "applicable_named_border": "KHM-VNM",
+      "nominal_point_to_exact_LSIB_m": 68.3904789629106,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 11670.425415447495,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.3954425077781332,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 11625.327273611954
+        },
+        "KHM": {
+          "nominal_point_to_country_boundary_m": 66.61087633308473,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.7805187178440887,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 1.778662067262914
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48323,
+        "y": 123094,
+        "x": 207822
+      },
+      "new_country_disposition": "KHM-only",
+      "applicable_named_border": "KHM-VNM",
+      "nominal_point_to_exact_LSIB_m": 67.3323260410233,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 60.85302133095575,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 6.542052260823759,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 6.341367911445159
+        },
+        "KHM": {
+          "nominal_point_to_country_boundary_m": 60.85302133095575,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 6.542052260823759,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 6.341367911445157
+        }
+      }
+    },
+    {
+      "original_key": {
+        "owner": 48373,
+        "y": 123097,
+        "x": 207578
+      },
+      "new_country_disposition": "official-gap",
+      "applicable_named_border": "KHM-VNM",
+      "nominal_point_to_exact_LSIB_m": 10.607623982291685,
+      "country_boundary_observations": {
+        "VNM": {
+          "nominal_point_to_country_boundary_m": 16935.405736692574,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 1.3954425077781332,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 16942.38082522083
+        },
+        "KHM": {
+          "nominal_point_to_country_boundary_m": 8.254657647346715,
+          "nearest_country_boundary_point_to_exact_LSIB_m": 2.353071124115156,
+          "nearest_exact_LSIB_point_to_country_boundary_m": 2.352831674845614
+        }
+      }
+    }
+  ],
+  "limits": [
+    "No positional accuracy bound, buffer, threshold, revised kernel, side-of-unoriented-line inference or legal-border classification.",
+    "No source geometry repaired/cropped/rounded or membership query repeated.",
+    "Source-relative country positives preserve every old GSO/COD contradiction and all original physical fields."
+  ]
+}

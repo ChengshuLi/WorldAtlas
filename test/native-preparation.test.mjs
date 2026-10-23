@@ -1,3 +1,4 @@
+import {normativeLatitudeBytes} from './fixtures/native-latitudes.mjs';
 import test, {after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -40,8 +41,8 @@ test('actual committed CLI fixture produces two identical complete offline candi
     'native-candidate-manifest.mjs','native-preparation-guards.mjs','native-topology-binding.mjs','verify-native-candidate.mjs',
     'prepare-context-inputs.mjs','compact-context-inputs.mjs','verify-context-inputs.mjs'])
     put('scripts/native-ownership/' + name, fs.readFileSync(path.join(source, name)));
-  for (const name of ['src/native-grid.js','src/native-runtime.js','src/ownership-codec.js','src/ownership-assets.js','src/ownership-method.js','src/pixel-ownership.js','src/pixel-grid.js','scripts/audit-grid-intervals.mjs',latitudePath])
-    put(name, fs.readFileSync(path.join(atlas, name)));
+  for (const name of ['src/native-grid.js','src/native-runtime.js','src/ownership-codec.js','src/ownership-assets.js','src/ownership-method.js','src/pixel-ownership.js','src/pixel-grid.js','scripts/audit-grid-intervals.mjs','scripts/selected-reference-metadata.mjs','src/reference-metadata.js',latitudePath])
+    put(name, name===latitudePath?normativeLatitudeBytes():fs.readFileSync(path.join(atlas, name)));
   const feature = {type: 'Feature', id: 'fixture-location', properties: {name: 'Fixture', parent_id: 'province'},
     geometry: {type: 'Polygon', coordinates: [[[0,0],[1,0],[1,1],[0,1],[0,0]]]}};
   const footprint = sha(Buffer.from(JSON.stringify([[feature.id, feature.geometry]])));
@@ -96,7 +97,7 @@ test('actual committed CLI fixture produces two identical complete offline candi
   assert.equal(sha(originalAssets.bounds), bounds); assert.equal(sha(originalAssets.province_membership), provinceHash);
   assert.equal(fs.existsSync(path.join(one, 'bounds.json.gz')), false, 'original identity assets resolve explicitly from Git');
   const decoded = await loadOwnershipAssets(manifest, async url => new Response(fs.readFileSync(path.join(one, url.slice(2)))));
-  const normative = gunzipSync(fs.readFileSync(path.join(atlas, latitudePath)));
+  const normative = gunzipSync(normativeLatitudeBytes());
   // Independent integer half-space oracle for the fixture rectangle, not native scanlines.
   const threshold = lon => Number((BigInt(262166) * BigInt(lon) + 180n * (262166n - 1n) + 359n) / 360n);
   const start = threshold(0), end = threshold(1); let runs = 0, owned = 0;
@@ -135,6 +136,22 @@ test('actual committed context preparation and readback retain complete geometry
   const proof=JSON.parse(execFileSync(process.execPath,[verify,'one','two'],{cwd:repo,encoding:'utf8'}));
   assert.equal(proof.locations,1);assert.equal(proof.complete_original_ids_and_parents,true);assert.equal(proof.unchanged_original_point_sets,true);
   assert.equal(proof.run_one_sha256,proof.run_two_sha256);
+  const preparedInputs=JSON.parse(fs.readFileSync(path.join(repo,'.cache/native-context-inputs/one/inputs.json')));
+  for(const executed of [preparedInputs.executed_sources,proof.executed_sources]){
+    assert.equal(executed.length,11,'Current preparation and readback bind the complete code closure');
+    for(const name of ['scripts/selected-reference-metadata.mjs','src/reference-metadata.js'])
+      assert.equal(executed.filter(file=>file.path===name).length,1);
+  }
+  for(const name of ['scripts/selected-reference-metadata.mjs','src/reference-metadata.js']){
+    const helper=path.join(repo,name),original=fs.readFileSync(helper);
+    fs.appendFileSync(helper,'\n// changed executed helper\n');
+    try {
+      for(const [command,args] of [[prepare,[baseline,'changed-context-helper']],[verify,['one','two']]])
+        assert.throws(()=>execFileSync(process.execPath,[command,...args],{cwd:repo,stdio:'pipe'}),
+          error=>/Executed code differs from immutable bootstrap/.test(error.stderr?.toString()??''));
+      assert.equal(fs.existsSync(path.join(repo,'.cache/native-context-inputs/changed-context-helper')),false);
+    } finally {fs.writeFileSync(helper,original);}
+  }
   assert.throws(()=>execFileSync(process.execPath,[prepare,baseline,'one'],{cwd:repo,stdio:'pipe'}));
   const output=path.join(repo,'.cache/native-context-inputs/two'),reportFile=path.join(output,'inputs.json'),report=fs.readFileSync(reportFile);
   fs.unlinkSync(reportFile);
@@ -159,7 +176,7 @@ test('explicit original identity references reject invalid contracts', () => {
   assert.throws(() => originalCandidateAssets(repo, manifest), /reference/);
 });
 test('canonical owner packing crosses low/high word boundaries with independently checked row spans', async () => {
-  const size = 262166, normative = gunzipSync(fs.readFileSync(path.join(atlas, latitudePath)));
+  const size = 262166, normative = gunzipSync(normativeLatitudeBytes());
   const latitudes = Float64Array.from({length: size}, (_, y) => normative.readDoubleLE(y * 8));
   const ids = [8191,8192,8193,67108863];
   const index = ids.map((id,i) => ({index: id, polygons: [[Float64Array.from([

@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
-import {validateSupportedProgrammeCatalogue,readSupportedProgrammeCatalogue,readSupportedProgrammeAuthority,matchSupportedProgramme,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {validateSupportedProgrammeCatalogue,readSupportedProgrammeCatalogue,readSupportedProgrammeAuthority,matchSupportedProgramme,LEGACY_CURRENT_REBIND_CODE,CURRENT_REBIND_CODE,currentRebindCodePaths,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const name='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const helper='coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
@@ -125,5 +125,22 @@ test('independent admission cannot borrow a closure from another profile or prei
   isolated.programs[0].source_executed_code[0].sha256='d'.repeat(64);
   isolated.programs[1][key]=key==='source_profile'?'foreign-profile':original.preimage_version===2?3:2;
   assert.throws(()=>matchSupportedProgramme(isolated,q),/Unknown\/ambiguous original/);
+ }
+});
+
+
+test('literal historical migration profiles stay legal without relabelling their pins',()=>{
+ const c=read(),original=structuredClone(c.current_rebind_migrations);
+ validateSupportedProgrammeCatalogue(c);assert.deepEqual(c.current_rebind_migrations,original);
+ for(const migration of original)for(const field of ['historical_code','current_code']){
+  assert.strictEqual(currentRebindCodePaths(migration[field]),LEGACY_CURRENT_REBIND_CODE);
+  assert.deepEqual(migration[field].map(row=>row.path),LEGACY_CURRENT_REBIND_CODE);
+ }
+ const expanded=CURRENT_REBIND_CODE.map(path=>({path,bytes:1,sha256:'a'.repeat(64)}));
+ const next={...structuredClone(original[0]),current_code:expanded};c.current_rebind_migrations.push(next);
+ validateSupportedProgrammeCatalogue(c);assert.deepEqual(c.current_rebind_migrations.slice(0,original.length),original);
+ for(const field of ['historical_code','current_code'])for(const edit of [rows=>rows.pop(),rows=>rows.reverse(),rows=>rows.push(rows[0]),rows=>rows[0].path='foreign.mjs']){
+  const bad=structuredClone(c);edit(bad.current_rebind_migrations.at(-1)[field]);
+  assert.throws(()=>validateSupportedProgrammeCatalogue(bad),/Foreign\/incomplete|duplicate/);
  }
 });

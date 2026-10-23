@@ -25,14 +25,26 @@ explains which criteria it advances and what happens next. The independent revie
 checks these statements against actual changes and evidence alongside exact-head review.
 A partial implementation may merge without completing the whole issue.
 
-Use `Closes #N` only when every original criterion is proven, including required
+Issue links are optional and may name multiple related issues. Use GitHub closure keywords only when every original criterion is proven, including required
 production acceptance. Otherwise use `Refs #N`. Initial research may finish with
-explicit unknowns where its original promise permits that; correction or approval
-work cannot close merely because the uncertainty was documented. No closure grants
-geography approval, publication or import permission.
+explicit unknowns where its original promise permits that. A correction's expressly
+permitted documented-exception alternative requires its stated facts, checks and
+review. A package may complete with genuinely unresolved cells after substantial
+evidence research and reasonable investigation of applicable repair-qualification
+paths still leave a concrete blocker. A substantiated access, rights or provenance
+obstacle may legitimately prevent execution; an actual failed constructor run is not
+mandatory.
+Document the exact sources examined, attempts, results and concrete remaining blocker.
+Pending investigation is unfinished work, not genuinely unresolved completion. Retained
+masks, owner-zero observations, metadata-only joins and generic questions alone do not
+establish that completion condition. Assess effort against the actual problem, not
+an arbitrary time quota, impossible exhaustive search or universal authority
+certificate; source rights and access restrictions still apply. Otherwise correction or approval
+work cannot close merely because uncertainty was documented. No closure grants repair
+credit, geography approval, publication or import permission.
 
 Continue unfinished in-scope work on the original issue, regardless of merged PR
-count. The legacy `max_prs` field is a positive planning estimate, not an allowance.
+count. Ordinary work needs no `max_prs` field; historical contracts remain preserved.
 No budget bump or successor issue is needed. Review remaining obligations after
 meaningful results; split only for a distinct deliverable, ownership or genuine wait.
 Reuse an existing follow-up before creating another. Do not silently expand acceptance

@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "error": "The one-key preparation manifest conflated the full original request with the separate 9,451 held patch. A bounded download assertion failed before any diagnostic ran.",
+  "original_full_request": {
+    "commit": "23784430fdb0f24d36827d3069b3621cb3231b16",
+    "path": "coordination/engineering/russia-repair-delivery-20261017/source-stage/native-patch.json",
+    "git_blob_oid": "974b2149a016b74930e8be328cccbcc0d0f03918",
+    "bytes": 8980728,
+    "sha256": "0e89b12468441a137ad63f83c33b1a47d5ed79cd09c4e9d4952089df266bcd54",
+    "cells": 2566967
+  },
+  "actual_held_request": {
+    "commit": "c6720857e7ad3530ca44a542d96ea9edb9eca77b",
+    "path": "coordination/engineering/rus-context-qualified-repair-20261021/research/original-held-native-patch.json",
+    "mode": "100644",
+    "git_blob_oid": "65e399377825e07b14d8763b37eb0ad515ef8de9",
+    "bytes": 156307,
+    "sha256": "7375330bf8bf2ba6432bc8c0fba869e42bcdcb3ec47cccf7fd3c72e52204a403"
+  },
+  "correction": "Use the authenticated 9,451 held request and existing successful 66-target projection; the unchanged original 334-target/230-negative archival evidence remains pinned. Do not feed full original coverage rows to the residual request or describe all 334 targets as runtime targets."
+}

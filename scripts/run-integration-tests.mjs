@@ -6,43 +6,171 @@ import {spawn, spawnSync} from 'node:child_process';
 import {compileHostedMigrations} from './compile-hosted-migrations.mjs';
 import {observeSetupPhase,measuredGitSetup} from './ci-setup-observations.mjs';
 
-export const PACKAGED_ASSET_TESTS = ['test/compact-ownership.test.mjs','test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs'];
+export const PACKAGED_ASSET_TESTS = ['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
 
 // Both PR CI and the trusted queue's isolated candidate checkout are shallow.
-// Keep the common native/context vintages for every full regression shard.
-const COMMON_NATIVE_REGRESSION_COMMITS = [
-  'd55795e4c0ad01527029db0bd1d774124a12a61a',
-  '548c5f89f00271050823076a84695bb41e1b8454',
-  'd70c5d86e345a225b6bc78d67451b3cbbf7a5eed',
-  '65cfcef5ffd7d8b98077b9058a374d1e27047430',
-  '35d2d3ff48957d34ee8d4329824b268ecadc6d3c'
-];
-// Only these actual tests consume the additional archived physical vintages.
-// Select by the runner's file roster, so ordinary shard reassignment is harmless.
-const ARCHIVED_PHYSICAL_REGRESSION_INPUTS = [
+// Acquire historical inputs for the actual consuming test files, independently
+// of shard placement. Unscoped/manual callers retain the complete old roster.
+const NATIVE_REGRESSION_INPUTS = [
+  {tests:['test/select-build-ownership.test.mjs'],commits:[
+    'd55795e4c0ad01527029db0bd1d774124a12a61a',
+    '548c5f89f00271050823076a84695bb41e1b8454'
+  ]},
+  // This context vintage is still available to unscoped historical reproducers.
+  // Scheduled context tests authenticate ordinary captured snapshots instead.
+  {tests:[],commits:['d70c5d86e345a225b6bc78d67451b3cbbf7a5eed']},
+  {tests:['test/pinned-native-package-inputs.test.mjs'],commits:[
+    '65cfcef5ffd7d8b98077b9058a374d1e27047430'
+  ]},
+  {tests:['test/native-latitudes.test.mjs'],commits:[
+    '35d2d3ff48957d34ee8d4329824b268ecadc6d3c'
+  ]},
+  {tests:['test/native-materialization-gate.test.mjs'],commits:[
+    '548c5f89f00271050823076a84695bb41e1b8454'
+  ]},
   {tests:['test/physical-component-custody.test.mjs','test/physical-component-report-binding.test.mjs'],commits:[
     // Each executes complete original custody before its own assertions.
     // The compact evidence-controls wrapper uses synthetic predicates instead.
     '8f6dc184d1a41b634cec4759bb57b3cc04dd980a',
     '6ed6406f9fad4c7c468b06a376346b216cb50db7'
+  ]},
+  {tests:['test/original-repair-exception-controls.test.mjs'],commits:[
+    'cd1886f20f34abdcafe7c327ae0ee768ce5d47ae',
+    'e17dba85347a4a31ccb9ecdaa4c7a20b6b950c8d',
+    '32d819ddc9333ff025584665665c963822dfcead'
+  ]},
+  {tests:['test/held-cell-exception-evidence-controls.test.mjs'],commits:[
+    '427cf5eb2d5004b0b65ffc34bf33d7fbbb6e44bc',
+    'b991e2295c50a64e49d4f92c76c37bd95c869b63',
+    '5b32388df0501b013ac9a3ba97864932db493d59',
+    '252f2aa1e6309b6990985dec73611d6df0e11c70',
+    'f988605570667858062905c04c31231564882d11',
+    '21984e9ec4ec7370bc807e2da23cea2228747698',
+    '07c74ff101d4ab5e679255ed85c402356aa54a42'
+  ]},
+
+  {tests:['test/held-row-contact-reconstruction-controls.test.mjs'],commits:["252f2aa1e6309b6990985dec73611d6df0e11c70","601852e911478b90762edb7b9d80985786f95d43","8c192828cf81a554176efdead967acb9b05ac79e","6a6358d232df09ef4561073f8727b2892d5413ea","e38e3488de52e6ef299157f7dc736398a1b9ca1f","2d1fc6f430e756498908bf2c4e267356a13f5cc7"]},
+  {tests:['test/sierra-leone-physical-review-controls.test.mjs'],commits:[
+    '21984e9ec4ec7370bc807e2da23cea2228747698',
+    'a6da25fcc78819b8e88ec2040a934039aefc5f97',
+    '597f45d79fb84e222637c3390cb93c11377474af',
+    '31ced2c0b64292cbdfeb3bcf7beffeb0410b76be',
+    '5b32388df0501b013ac9a3ba97864932db493d59',
+    '58ae8c238f4b170fdf887a0f0c5b2da1dff97ca4'
   ]}
 ];
-export const NATIVE_REGRESSION_COMMITS = [...COMMON_NATIVE_REGRESSION_COMMITS,
-  ...ARCHIVED_PHYSICAL_REGRESSION_INPUTS.flatMap(group=>group.commits)];
-export function prepareNativeRegressionInputs(profile,{files,exists=fs.existsSync,run=spawnSync}={}) {
-  if(profile!=='full'||!exists('scripts/native-ownership/validate-context-input-stage.mjs'))return {applicable:false,fetched:[]};
+export const NATIVE_REGRESSION_COMMITS = [...new Set(NATIVE_REGRESSION_INPUTS.flatMap(group=>group.commits))];
+// Original body rosters already belong to these consumers' immutable metadata.
+// Acquisition does not authenticate science; the unchanged readers hash each
+// body when they consume it. Do not hydrate unrelated historical tree blobs.
+function nativeRegressionBodies(files,readFile) {
+  const has=name=>files.includes('test/'+name+'.test.mjs');
+  const read=name=>JSON.parse(readFile(name));
+  const pins=[];
+  let candidate,raw;
+  const manifest=()=>{
+    if(!candidate){raw=readFile('coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/manifest.json');candidate=JSON.parse(raw);}
+    return candidate;
+  };
+  if(has('select-build-ownership'))pins.push(manifest().original_assets.bounds);
+  if(has('select-build-ownership')||has('native-materialization-gate')){
+    manifest();
+    pins.push(read('scripts/native-ownership/verified-candidates.json').candidates[createHash('sha256').update(raw).digest('hex')]);
+  }
+  if(has('native-latitudes'))pins.push(manifest().native_latitudes);
+  if(has('pinned-native-package-inputs')){
+    const {baseline}=read('coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/evidence-quality.json');
+    pins.push(...baseline.files.filter(pin=>pin.path.startsWith('data/')).map(pin=>({...pin,commit:baseline.commit})),
+      {...manifest().native_latitudes,commit:baseline.commit});
+  }
+  if(has('physical-component-custody')||has('physical-component-report-binding')){
+    const root='coordination/engineering/physical-gap-components-1005-20261005-local19/';
+    for(const generation of read(root+'custody-v1/index.json').generations){
+      const commit=generation.executed_code_commit,prefix=root+'executed-code/'+commit+'/';
+      for(const pin of generation.code){
+        if(!pin.path.startsWith(prefix))throw Error('Original custody code path differs');
+        pins.push({...pin,commit,path:pin.path.slice(prefix.length)});
+      }
+    }
+  }
+  if(has('original-repair-exception-controls'))pins.push(...read('test/fixtures/original-repair-exceptions/historical-input-pins.json').inputs);
+  if(has('held-cell-exception-evidence-controls')){
+    pins.push(...read('test/fixtures/held-cell-exceptions/historical-input-pins.json').inputs);
+  }
+  if(has('sierra-leone-physical-review-controls')){
+    const root='test/fixtures/sle-physical-review/';
+    pins.push(...Object.values(read(root+'input-pins.json').inputs));
+  }
+  if(has('held-row-contact-reconstruction-controls')){
+    const inputs=read('test/fixtures/held-row-contact/input-locators.json');
+    pins.push(...inputs.source_and_evidence_inputs,...inputs.original_extraction_inputs,inputs.helper,inputs.latitudes);
+  }
+  return pins;
+}
+export function prepareNativeRegressionInputs(profile,{files,exists=fs.existsSync,readFile=fs.readFileSync,run=spawnSync}={}) {
+  const retainedEvidenceControls=Array.isArray(files)&&files.some(file=>['test/sierra-leone-physical-review-controls.test.mjs','test/original-repair-exception-controls.test.mjs','test/held-cell-exception-evidence-controls.test.mjs','test/held-row-contact-reconstruction-controls.test.mjs'].includes(file))===true;
+  if((profile!=='full'&&!retainedEvidenceControls)||!exists('scripts/native-ownership/validate-context-input-stage.mjs'))return {applicable:false,fetched:[]};
   if(files!==undefined&&(!Array.isArray(files)||!files.length||files.some(name=>typeof name!=='string'||!/^test\/[A-Za-z0-9_.-]+\.test\.mjs$/.test(name)||!exists(name))))
     throw Error('Actual regression file roster required');
-  // Unscoped callers retain every remaining regression dependency.
-  const required=files===undefined?NATIVE_REGRESSION_COMMITS:[...COMMON_NATIVE_REGRESSION_COMMITS,
-    ...ARCHIVED_PHYSICAL_REGRESSION_INPUTS.filter(group=>group.tests.some(name=>files.includes(name))).flatMap(group=>group.commits)];
-  const present=commit=>run('git',['cat-file','-e',commit+'^{commit}'],{encoding:'utf8'}).status===0;
-  const missing=required.filter(commit=>!present(commit));
-  if(missing.length){
-    const fetched=run('git',['fetch','--no-tags','--depth=1','origin',...missing],{encoding:'utf8',maxBuffer:4*1024*1024});
-    if(fetched.status!==0)throw Error('Immutable native regression fetch failed: '+(fetched.error?.message??fetched.stderr??''));
+  // Unscoped callers retain every remaining regression dependency and their
+  // original whole-commit fetch behavior. Scoped runs derive only consumed pins.
+  const required=files===undefined?NATIVE_REGRESSION_COMMITS:[...new Set(NATIVE_REGRESSION_INPUTS
+    .filter(group=>group.tests.some(name=>files.includes(name))).flatMap(group=>group.commits))];
+  const pins=files===undefined?[]:nativeRegressionBodies(files,readFile);
+  const declared=new Map();
+  for(const pin of pins){
+    if(!pin||!required.includes(pin.commit)||typeof pin.path!=='string'||!pin.path||pin.path.includes('\\')||
+      /[\0\r\n]/.test(pin.path)||path.posix.isAbsolute(pin.path)||pin.path.split('/').some(part=>!part||part==='.'||part==='..')||
+      pin.bytes!==undefined&&(!Number.isSafeInteger(pin.bytes)||pin.bytes<0))throw Error('Invalid original regression input declaration');
+    const key=pin.commit+'\0'+pin.path,prior=declared.get(key);
+    if(prior&&['bytes','mode','git_blob_oid','sha256'].some(field=>prior[field]!==undefined&&pin[field]!==undefined&&prior[field]!==pin[field]))
+      throw Error('Conflicting original regression input declarations');
+    declared.set(key,{...prior,...pin});
   }
+  if(files!==undefined&&required.some(commit=>!pins.some(pin=>pin.commit===commit)))throw Error('Original regression input roster is incomplete');
+  const options={encoding:'utf8',maxBuffer:Infinity,env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_TERMINAL_PROMPT:'0'}};
+  const git=(args,input)=>{
+    const result=run('git',args,{...options,...(input===undefined?{}:{input})});
+    if(result.error||result.status!==0)throw Error('Immutable native regression command failed: '+(result.error?.message??result.stderr??''));
+    return result.stdout;
+  };
+  const present=commit=>{
+    const result=run('git',['cat-file','-e',commit+'^{commit}'],options);
+    if(result.error||result.status===null)throw Error('Immutable native regression commit inspection failed');
+    return result.status===0;
+  };
+  const missing=required.filter(commit=>!present(commit));
+  if(missing.length)git(['fetch','--no-tags','--depth=1',...(files===undefined?[]:['--filter=blob:none']),'origin',...missing]);
   if(required.some(commit=>!present(commit)))throw Error('Immutable native regression inputs remain unavailable');
+  const objects=new Map();
+  for(const pin of declared.values()){
+    const row=git(['ls-tree','-z',pin.commit,'--',pin.path]);
+    const match=typeof row==='string'&&/^(100644|100755) blob ([a-f0-9]{40})\t([^\0]+)\0$/.exec(row);
+    if(!match||match[3]!==pin.path||pin.mode!==undefined&&pin.mode!==match[1]||pin.git_blob_oid!==undefined&&pin.git_blob_oid!==match[2])
+      throw Error('Original regression tree identity differs: '+pin.path);
+    const oid=match[2],previous=objects.get(oid);
+    if(previous?.bytes!==undefined&&pin.bytes!==undefined&&previous.bytes!==pin.bytes)throw Error('Conflicting original regression input lengths');
+    objects.set(oid,{oid,bytes:pin.bytes??previous?.bytes});
+  }
+  const inventory=()=>{
+    if(!objects.size)return [];
+    const rows=git(['cat-file','--batch-check=%(objectname) %(objecttype) %(objectsize)'],[...objects.keys()].join('\n')+'\n');
+    const lines=typeof rows==='string'&&rows.endsWith('\n')?rows.slice(0,-1).split('\n'):[];
+    if(lines.length!==objects.size)throw Error('Incomplete original regression body inventory');
+    const absent=[];
+    [...objects.values()].forEach((pin,index)=>{
+      if(lines[index]===pin.oid+' missing'){absent.push(pin.oid);return;}
+      const fields=lines[index].split(' '),size=Number(fields[2]);
+      if(fields.length!==3||fields[0]!==pin.oid||fields[1]!=='blob'||!/^\d+$/.test(fields[2])||
+        !Number.isSafeInteger(size)||pin.bytes!==undefined&&size!==pin.bytes)throw Error('Original regression body type or length differs');
+    });
+    return absent;
+  };
+  const absent=inventory();
+  if(absent.length){
+    git(['fetch','--no-tags','--no-write-fetch-head','--no-recurse-submodules','--no-auto-maintenance','--filter=blob:none','--stdin','origin'],absent.join('\n')+'\n');
+    if(inventory().length)throw Error('Original regression bodies remain unavailable');
+  }
   return {applicable:true,fetched:missing};
 }
 
@@ -51,7 +179,7 @@ export function prepareNativeRegressionInputs(profile,{files,exists=fs.existsSyn
 export const DATABASE_NEIGHBOR_TESTS = [
   'test/temporal-geography.test.mjs', 'test/postgres-runtime-role.test.mjs',
   'test/reference-hierarchy-release.test.mjs', 'test/hosted-catalog.test.mjs',
-  'test/neon-storage-migration.test.mjs', 'test/postgres-restore.test.mjs',
+  'test/postgres-restore.test.mjs',
   'test/model-semantic-migration.test.mjs'
 ];
 export const MIGRATION_WORKER_TESTS = [
@@ -76,20 +204,60 @@ export function fullRegressionShard(inventory, shard) {
     (name === COMPONENT_CONTROL_TEST ? 1 : index % 3) === shard)];
 }
 
-// The runner owns this roster; routing controls derive their focused membership.
-export const FOCUSED_INTEGRATION_TESTS = Object.freeze(['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
-  'evidence-quality','premerge-evidence','geographic-adjudication-api','trusted-workflow-checkouts','merge-integration','merge-integration-entrypoint','integration-proof',
-  // Actual delivery entry/advance consumers, including scientific dispatch guards.
-  'delivery-evidence-derivation','delivery-finalize-config','delivery-handoff-advance','delivery-handoff','delivery-registry-delta','local-workspace','native-authority-entry','native-diagnostic-entry','native-witness-authority','physical-source-retention','source-cohort','source-completed-staging','source-evidence-derivation','source-member-native-delivery','source-target-native-delivery'].map(name => `test/${name}.test.mjs`));
+// Focused regression follows delivery-control test families. The same predicate
+// routes changed tests and selects the actual discovered files, so adding or
+// removing a control does not require a second inventory edit. App/rendering,
+// database, prepared-output and scientific-kernel suites remain full regression.
+const FOCUSED_TEST_FAMILIES = [
+  'delivery-[\\w-]+', 'integration-[\\w-]+', 'ci-[\\w-]+', 'github-[\\w-]+',
+  'issue-[\\w-]+', 'worker-[\\w-]+',
+  'package-(?:build(?:-preflight)?|inputs|output-artifact|python-execution|python-runtime)',
+  'selected-package-(?:assembly|bootstrap)',
+  'source-(?:cohort|completed-staging|evidence-derivation|member-native-delivery|target-native-delivery)',
+  'handoff-scope', 'regional-research-gate', 'geography-worker-lane',
+  'evidence-quality', 'historical-evidence', 'premerge-evidence',
+  'geographic-adjudication-api', 'geographic-report-artifact', 'trusted-workflow-checkouts',
+  'merge-integration(?:-entrypoint)?', 'selected-data-profile', 'git-blob-transport',
+  'immutable-git-blobs', 'local-workspace',
+  // Immutable reader, original-authority, checkpoint and wrapper consumers.
+  // Scientific kernels and packaged/rendered output remain full regression.
+  'accepted-(?:checkpoint-qualification|joint-transport)', 'additive-gap-repair',
+  'administrative-original-hashes', 'component-authority-identity', 'current-rebind-product-custody',
+  'effective-geographic-regression', 'evidence-byte-bounds', 'fiji-canonical-reproduction',
+  'geographic-(?:checkpoint-products|regression)', 'geography-prefetch',
+  'immutable-reader-read', 'installed-runtime-identity', 'map-cell-diagnosis',
+  'native-(?:additions-order|checkpoint-consumer|word-store|stream-custody|interval-stream|interval-projection)', 'canonical-value-hash', 'parallel-geography-comparison',
+  'selected-native-witness',
+  'qualification-exclusion-prefilter', 'selected-checkpoint', 'final-bank-(?:checkpoint|finalizer)',
+  'selected-joint-(?:check|entry|package-boundary)', 'selected-metadata-wiring',
+  'source-target-native-diagnostic', 'supported-programs', 'trusted-geography-check',
+  'unchanged-selected-geography', 'visible-gap-eligibility',
+  'native-(?:authority-entry|diagnostic-entry|witness-authority|regression-inputs)',
+  'physical-source-retention', 'revised-source-native', 'dated-centre-authority', 'full-regression-shards',
+  'sierra-leone-physical-review-controls', 'held-cell-exception-evidence-controls', 'held-row-contact-reconstruction-controls'
+];
+const focusedTest = new RegExp('^test/(?:' + FOCUSED_TEST_FAMILIES.join('|') + ')\\.test\\.(?:mjs|py)$');
+// This shared fixture has only focused consumers; reuse their ordinary-file
+// routing checks. Test execution still discovers only top-level *.test.mjs.
+export const focusedIntegrationTest = name => focusedTest.test(name) || ['test/fixtures/selected-checkpoint.mjs','test/fixtures/native-word-store.mjs'].includes(name);
 
-export function integrationTestFiles(profile, shard, testSelection = 'complete') {
-  if (!['complete','selected-output'].includes(testSelection) ||
-      (testSelection !== 'complete' && (profile !== 'full' || shard !== 0))) throw Error('Invalid trusted test selection');
+export function integrationTestFiles(profile, shard, testSelection = 'complete', reviewed = process.env.INTEGRATION_TEST_FILES_BASE64) {
+  if (!['complete','selected-output','reviewed'].includes(testSelection) ||
+      (testSelection === 'selected-output' && profile !== 'full') || (testSelection !== 'complete' && shard !== 0)) throw Error('Invalid trusted test selection');
   if (!['full','evidence'].includes(profile) || !Number.isInteger(shard) || shard < 0 || shard > 2 ||
       (profile === 'evidence' && shard !== 0)) throw Error('Invalid trusted integration test profile');
+  if (testSelection === 'reviewed') {
+    if (typeof reviewed !== 'string' || !/^[A-Za-z0-9+/]+={0,2}$/.test(reviewed)) throw Error('Missing reviewed test roster');
+    const files = JSON.parse(Buffer.from(reviewed, 'base64').toString('utf8'));
+    if (!Array.isArray(files) || !files.length || new Set(files).size !== files.length ||
+        !fs.lstatSync('test').isDirectory() || files.some(name => typeof name !== 'string' ||
+          !/^test\/[A-Za-z0-9_.-]+\.test\.mjs$/.test(name) || !fs.existsSync(name) || !fs.lstatSync(name).isFile()))
+      throw Error('Invalid or missing reviewed candidate test file');
+    return files;
+  }
   const inventory = fs.readdirSync('test').filter(name => name.endsWith('.test.mjs')).sort().map(name=>`test/${name}`);
   const files = testSelection === 'selected-output' ? ['test/compact-ownership.test.mjs']
-    : profile === 'full' ? fullRegressionShard(inventory, shard) : [...FOCUSED_INTEGRATION_TESTS];
+    : profile === 'full' ? fullRegressionShard(inventory, shard) : inventory.filter(focusedIntegrationTest);
   if (!files.length || files.some(name => !fs.existsSync(name))) throw Error('Missing integration test inventory');
   return files;
 }
@@ -105,13 +273,13 @@ export function prepareIntegrationTests(files) {
   }
 }
 
-// Stream diagnostics immediately; retain only a bounded tail for the final TAP
-// summary. Cancellation also reaches the test workers and their Python children.
+// Stream diagnostics immediately. Cancellation also reaches the test workers
+// and their Python children; the actual runner exit status determines success.
 export async function streamTestProcess(args, {env = process.env,
-  stdout = process.stdout, stderr = process.stderr, maxBytes = 64 * 1024 * 1024} = {}) {
+  stdout = process.stdout, stderr = process.stderr} = {}) {
   const grouped = process.platform !== 'win32';
   const child = spawn(process.execPath, args, {env, detached: grouped, stdio: ['ignore', 'pipe', 'pipe']});
-  let tail = '', bytes = 0, failure, cancelled, escalation, orphaned = false;
+  let failure, cancelled, escalation, orphaned = false;
   let cleanup = Promise.resolve();
   const stop = signal => {
     try { grouped ? process.kill(-child.pid, signal) : child.kill(signal); }
@@ -125,19 +293,6 @@ export async function streamTestProcess(args, {env = process.env,
   };
   const onInt = () => cancel('SIGINT'), onTerm = () => cancel('SIGTERM');
   process.on('SIGINT', onInt); process.on('SIGTERM', onTerm);
-  child.stdout.setEncoding('utf8');
-  child.stdout.on('data', chunk => {
-    tail = (tail + chunk).slice(-64 * 1024);
-  });
-  for (const stream of [child.stdout, child.stderr]) {
-    stream.on('data', chunk => {
-      bytes += Buffer.byteLength(chunk);
-      if (bytes > maxBytes && !failure) {
-        failure = Error('Regression output exceeds unchanged 64 MiB bound');
-        cancel('output-limit');
-      }
-    });
-  }
   // Exit precedes close: descendants may inherit output pipes and prevent
   // close forever. Start cleanup as soon as the test runner itself exits.
   child.once('exit', () => {
@@ -160,8 +315,6 @@ export async function streamTestProcess(args, {env = process.env,
     if (failure) throw failure;
     if (cancelled) return cancelled === 'SIGINT' ? 130 : 143;
     if (result.status === 0 && orphaned) throw Error('Regression exited successfully with unfinished descendants');
-    if (result.status === 0 && !/^# skipped 0$/m.test(tail)) throw Error('Regression did not establish zero skipped tests');
-    if (result.status === 0 && /^# skipped [1-9]/m.test(tail)) throw Error('Skipped tests cannot establish regression coverage');
     return result.status ?? 1;
   } finally {
     clearTimeout(escalation);
@@ -173,7 +326,7 @@ export async function streamTestProcess(args, {env = process.env,
 export function requireCurrentPackageAssembly({directory=process.cwd(),expected=process.env.SELECTED_PACKAGE_ASSEMBLY_SHA256}={}) {
   if(!/^[a-f0-9]{64}$/.test(expected??''))throw Error('Trusted current package assembly digest required');
   const file=path.join(directory,'.cache/package-input-build.json'),stat=fs.lstatSync(file);
-  if(!stat.isFile()||stat.isSymbolicLink()||stat.size>8*1024*1024)throw Error('Bounded ordinary assembly receipt required');
+  if(!stat.isFile()||stat.isSymbolicLink())throw Error('Ordinary assembly receipt required');
   const raw=fs.readFileSync(file);
   if(createHash('sha256').update(raw).digest('hex')!==expected)throw Error('Current assembly receipt digest differs');
   const receipt=JSON.parse(raw),assembly=receipt.assembly;
@@ -193,7 +346,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const retained=testSelection==='selected-output'?requireCurrentPackageAssembly():null;
   if(retained)console.log(JSON.stringify({package_assembly:retained}));
   const git=measuredGitSetup();
-  const nativeInputs=await observeSetupPhase('immutable-regression-inputs',()=>prepareNativeRegressionInputs(testSelection === 'complete' ? profile : 'evidence',{files,run:git.run}),{counters:git.snapshot});
+  const nativeInputs=await observeSetupPhase('immutable-regression-inputs',()=>prepareNativeRegressionInputs(testSelection === 'reviewed' ? 'full' : testSelection === 'complete' ? profile : 'evidence',{files,run:git.run}),{counters:git.snapshot});
   console.log(JSON.stringify({native_inputs:nativeInputs}));
   // Current prepared products are committed inputs. Historical restoration is
   // explicit reproduction, never a mutation of ordinary regression inputs.

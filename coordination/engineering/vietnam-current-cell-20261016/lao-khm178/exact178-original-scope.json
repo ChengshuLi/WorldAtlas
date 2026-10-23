@@ -1,0 +1,8124 @@
+{
+  "source_pin": {
+    "bytes": 232506,
+    "commit": "a9c2d4122eed9d08cd3f213d3f5157039c8823bb",
+    "decoded_bytes": 19639757,
+    "decoded_sha256": "e079e92f47b95039bf29d639af7c5eb55e8616e6907f46667a60b4656b8944a5",
+    "file": "source-qualification-cells.json.gz",
+    "git_blob_oid": "48db686a6726c3dc719a722f0260b81e159b988d",
+    "path": "coordination/engineering/vietnam-current-cell-20261014/evidence/source-qualification/cells.json.gz",
+    "sha256": "a85502406c50a52f012802a42f0e7a37480703ebe876aeaf212cfe96bfd65a2b"
+  },
+  "current_accepted_binding_for_root_final_gate": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+  "original_record_count": 178,
+  "cohorts": [
+    {
+      "country": "LAO",
+      "owner": 48168,
+      "name": "Dien Bien",
+      "count": 2
+    },
+    {
+      "country": "LAO",
+      "owner": 48212,
+      "name": "Dak Glei",
+      "count": 43
+    },
+    {
+      "country": "LAO",
+      "owner": 48268,
+      "name": "Ky Son",
+      "count": 3
+    },
+    {
+      "country": "LAO",
+      "owner": 48336,
+      "name": "Sop Cop",
+      "count": 6
+    },
+    {
+      "country": "LAO",
+      "owner": 48348,
+      "name": "Que Phong",
+      "count": 1
+    },
+    {
+      "country": "LAO",
+      "owner": 48365,
+      "name": "Nam Po",
+      "count": 14
+    },
+    {
+      "country": "LAO",
+      "owner": 48479,
+      "name": "Huong Hoa",
+      "count": 1
+    },
+    {
+      "country": "LAO",
+      "owner": 48532,
+      "name": "Bo Trach",
+      "count": 1
+    },
+    {
+      "country": "LAO",
+      "owner": 48556,
+      "name": "Vu Quang",
+      "count": 3
+    },
+    {
+      "country": "LAO",
+      "owner": 48596,
+      "name": "Nam Giang",
+      "count": 6
+    },
+    {
+      "country": "LAO",
+      "owner": 48597,
+      "name": "Muong Lat",
+      "count": 35
+    },
+    {
+      "country": "LAO",
+      "owner": 48599,
+      "name": "Thuong Xuan",
+      "count": 3
+    },
+    {
+      "country": "LAO",
+      "owner": 48661,
+      "name": "Quan Son",
+      "count": 9
+    },
+    {
+      "country": "LAO",
+      "owner": 48757,
+      "name": "A Luoi",
+      "count": 2
+    },
+    {
+      "country": "KHM",
+      "owner": 48181,
+      "name": "Tuy Duc",
+      "count": 3
+    },
+    {
+      "country": "KHM",
+      "owner": 48240,
+      "name": "Duc Hue",
+      "count": 1
+    },
+    {
+      "country": "KHM",
+      "owner": 48323,
+      "name": "Tan Hong",
+      "count": 1
+    },
+    {
+      "country": "KHM",
+      "owner": 48352,
+      "name": "Tan Bien",
+      "count": 1
+    },
+    {
+      "country": "KHM",
+      "owner": 48373,
+      "name": "An Phu",
+      "count": 13
+    },
+    {
+      "country": "KHM",
+      "owner": 48437,
+      "name": "Huyen Hong Ngu",
+      "count": 5
+    },
+    {
+      "country": "KHM",
+      "owner": 48516,
+      "name": "Ben Cau",
+      "count": 1
+    },
+    {
+      "country": "KHM",
+      "owner": 48530,
+      "name": "Thanh Hoa",
+      "count": 1
+    },
+    {
+      "country": "KHM",
+      "owner": 48575,
+      "name": "Tan Chau",
+      "count": 23
+    }
+  ],
+  "records": [
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48365,
+        "y": 114786,
+        "x": 205955
+      },
+      "name": "Nam Po",
+      "original_bank_index": 1424,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65110,
+          65545
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48365
+        ],
+        "declared_sids": [
+          65110,
+          65545
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48365,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 205955,
+        "y": 114786
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48365,
+        "y": 114786,
+        "x": 205956
+      },
+      "name": "Nam Po",
+      "original_bank_index": 1425,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65110,
+          65545
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48365
+        ],
+        "declared_sids": [
+          65110,
+          65545
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48365,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 205956,
+        "y": 114786
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48365,
+        "y": 114787,
+        "x": 205955
+      },
+      "name": "Nam Po",
+      "original_bank_index": 1426,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65110,
+          65545
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48365
+        ],
+        "declared_sids": [
+          65110,
+          65545
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48365,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 205955,
+        "y": 114787
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48365,
+        "y": 114788,
+        "x": 205954
+      },
+      "name": "Nam Po",
+      "original_bank_index": 1427,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65110,
+          65545
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48365
+        ],
+        "declared_sids": [
+          65110,
+          65545
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48365,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 205954,
+        "y": 114788
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48365,
+        "y": 114861,
+        "x": 205962
+      },
+      "name": "Nam Po",
+      "original_bank_index": 1451,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65110,
+          65545
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48365
+        ],
+        "declared_sids": [
+          65110,
+          65545
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48365,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 205962,
+        "y": 114861
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48365,
+        "y": 114861,
+        "x": 205963
+      },
+      "name": "Nam Po",
+      "original_bank_index": 1452,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65545
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48365
+        ],
+        "declared_sids": [
+          65545
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48365,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 205963,
+        "y": 114861
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48365,
+        "y": 114862,
+        "x": 205959
+      },
+      "name": "Nam Po",
+      "original_bank_index": 1453,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65110,
+          65545
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48365
+        ],
+        "declared_sids": [
+          65110,
+          65545
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48365,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 205959,
+        "y": 114862
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48365,
+        "y": 114862,
+        "x": 205960
+      },
+      "name": "Nam Po",
+      "original_bank_index": 1454,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65110,
+          65545
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48365
+        ],
+        "declared_sids": [
+          65110,
+          65545
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48365,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 205960,
+        "y": 114862
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48365,
+        "y": 114862,
+        "x": 205961
+      },
+      "name": "Nam Po",
+      "original_bank_index": 1455,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65110,
+          65545
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48365
+        ],
+        "declared_sids": [
+          65110,
+          65545
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48365,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 205961,
+        "y": 114862
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48365,
+        "y": 114863,
+        "x": 205960
+      },
+      "name": "Nam Po",
+      "original_bank_index": 1456,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65110,
+          65545
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48365
+        ],
+        "declared_sids": [
+          65110,
+          65545
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48365,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 205960,
+        "y": 114863
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48365,
+        "y": 114869,
+        "x": 206033
+      },
+      "name": "Nam Po",
+      "original_bank_index": 1457,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65110,
+          65545
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48365
+        ],
+        "declared_sids": [
+          65110,
+          65545
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48365,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 206033,
+        "y": 114869
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48365,
+        "y": 114870,
+        "x": 206030
+      },
+      "name": "Nam Po",
+      "original_bank_index": 1458,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65110,
+          65545
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48365
+        ],
+        "declared_sids": [
+          65110,
+          65545
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48365,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 206030,
+        "y": 114870
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48365,
+        "y": 114887,
+        "x": 205931
+      },
+      "name": "Nam Po",
+      "original_bank_index": 1460,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65110,
+          65545
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48365
+        ],
+        "declared_sids": [
+          65110,
+          65545
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48365,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 205931,
+        "y": 114887
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48365,
+        "y": 114893,
+        "x": 205927
+      },
+      "name": "Nam Po",
+      "original_bank_index": 1461,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65110,
+          65545
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48365
+        ],
+        "declared_sids": [
+          65110,
+          65545
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48365,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 205927,
+        "y": 114893
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48168,
+        "y": 115099,
+        "x": 205997
+      },
+      "name": "Dien Bien",
+      "original_bank_index": 1890,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65319
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48168
+        ],
+        "declared_sids": [
+          65319
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48168,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 205997,
+        "y": 115099
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48168,
+        "y": 115242,
+        "x": 205967
+      },
+      "name": "Dien Bien",
+      "original_bank_index": 2591,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65110,
+          65319
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48168
+        ],
+        "declared_sids": [
+          65110,
+          65319
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48168,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 205967,
+        "y": 115242
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48336,
+        "y": 115573,
+        "x": 206283
+      },
+      "name": "Sop Cop",
+      "original_bank_index": 7020,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65676
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48336
+        ],
+        "declared_sids": [
+          65676
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48336,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 206283,
+        "y": 115573
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48336,
+        "y": 115602,
+        "x": 206372
+      },
+      "name": "Sop Cop",
+      "original_bank_index": 7570,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65676
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48336
+        ],
+        "declared_sids": [
+          65676
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48336,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 206372,
+        "y": 115602
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48336,
+        "y": 115602,
+        "x": 206373
+      },
+      "name": "Sop Cop",
+      "original_bank_index": 7571,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65676
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48336
+        ],
+        "declared_sids": [
+          65676
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48336,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 206373,
+        "y": 115602
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48336,
+        "y": 115602,
+        "x": 206374
+      },
+      "name": "Sop Cop",
+      "original_bank_index": 7572,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65676
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48336
+        ],
+        "declared_sids": [
+          65676
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48336,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 206374,
+        "y": 115602
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48336,
+        "y": 115602,
+        "x": 206375
+      },
+      "name": "Sop Cop",
+      "original_bank_index": 7573,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65676
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48336
+        ],
+        "declared_sids": [
+          65676
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48336,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 206375,
+        "y": 115602
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48336,
+        "y": 115602,
+        "x": 206376
+      },
+      "name": "Sop Cop",
+      "original_bank_index": 7574,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65676
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48336
+        ],
+        "declared_sids": [
+          65676
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48336,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 206376,
+        "y": 115602
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115833,
+        "x": 207102
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8414,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207102,
+        "y": 115833
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115833,
+        "x": 207103
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8415,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207103,
+        "y": 115833
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115834,
+        "x": 207102
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8416,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207102,
+        "y": 115834
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115834,
+        "x": 207103
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8417,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207103,
+        "y": 115834
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115834,
+        "x": 207104
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8418,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207104,
+        "y": 115834
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115834,
+        "x": 207105
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8419,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207105,
+        "y": 115834
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115835,
+        "x": 207102
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8420,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207102,
+        "y": 115835
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115835,
+        "x": 207103
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8421,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207103,
+        "y": 115835
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115835,
+        "x": 207104
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8422,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207104,
+        "y": 115835
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115835,
+        "x": 207105
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8423,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207105,
+        "y": 115835
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115836,
+        "x": 207102
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8424,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207102,
+        "y": 115836
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115836,
+        "x": 207103
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8425,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207103,
+        "y": 115836
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115836,
+        "x": 207104
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8426,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207104,
+        "y": 115836
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115837,
+        "x": 207104
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8427,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207104,
+        "y": 115837
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115842,
+        "x": 207103
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8428,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65148,
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65148,
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207103,
+        "y": 115842
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115843,
+        "x": 207101
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8429,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207101,
+        "y": 115843
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115844,
+        "x": 207100
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8430,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207100,
+        "y": 115844
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115845,
+        "x": 207098
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8431,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207098,
+        "y": 115845
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115845,
+        "x": 207099
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8432,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207099,
+        "y": 115845
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115846,
+        "x": 207097
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8433,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207097,
+        "y": 115846
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115846,
+        "x": 207098
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8434,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207098,
+        "y": 115846
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115847,
+        "x": 207095
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8435,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207095,
+        "y": 115847
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115847,
+        "x": 207096
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8436,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207096,
+        "y": 115847
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115848,
+        "x": 207094
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8437,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207094,
+        "y": 115848
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115848,
+        "x": 207095
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8438,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207095,
+        "y": 115848
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115849,
+        "x": 207094
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8439,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207094,
+        "y": 115849
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115898,
+        "x": 207204
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8458,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65148,
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65148,
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207204,
+        "y": 115898
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115916,
+        "x": 207180
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8461,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65148,
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65148,
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207180,
+        "y": 115916
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115918,
+        "x": 207177
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8462,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65148,
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65148,
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207177,
+        "y": 115918
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115919,
+        "x": 207176
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8463,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65148,
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65148,
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207176,
+        "y": 115919
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115920,
+        "x": 207174
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8464,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65148,
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65148,
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207174,
+        "y": 115920
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115921,
+        "x": 207173
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8465,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207173,
+        "y": 115921
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115922,
+        "x": 207172
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8466,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207172,
+        "y": 115922
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115923,
+        "x": 207170
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8467,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207170,
+        "y": 115923
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48597,
+        "y": 115924,
+        "x": 207169
+      },
+      "name": "Muong Lat",
+      "original_bank_index": 8468,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65527
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48597
+        ],
+        "declared_sids": [
+          65527
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48597,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207169,
+        "y": 115924
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48661,
+        "y": 115954,
+        "x": 207270
+      },
+      "name": "Quan Son",
+      "original_bank_index": 8469,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65148,
+          65633
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48661
+        ],
+        "declared_sids": [
+          65148,
+          65633
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48661,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207270,
+        "y": 115954
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48661,
+        "y": 115955,
+        "x": 207270
+      },
+      "name": "Quan Son",
+      "original_bank_index": 8470,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65148,
+          65633
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48661
+        ],
+        "declared_sids": [
+          65148,
+          65633
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48661,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207270,
+        "y": 115955
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48661,
+        "y": 115966,
+        "x": 207270
+      },
+      "name": "Quan Son",
+      "original_bank_index": 8471,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65148,
+          65633
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48661
+        ],
+        "declared_sids": [
+          65148,
+          65633
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48661,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207270,
+        "y": 115966
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48661,
+        "y": 115967,
+        "x": 207270
+      },
+      "name": "Quan Son",
+      "original_bank_index": 8472,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65148,
+          65633
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48661
+        ],
+        "declared_sids": [
+          65148,
+          65633
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48661,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207270,
+        "y": 115967
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48661,
+        "y": 115968,
+        "x": 207270
+      },
+      "name": "Quan Son",
+      "original_bank_index": 8473,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65148,
+          65633
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48661
+        ],
+        "declared_sids": [
+          65148,
+          65633
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48661,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207270,
+        "y": 115968
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48661,
+        "y": 116021,
+        "x": 207266
+      },
+      "name": "Quan Son",
+      "original_bank_index": 8474,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65633
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48661
+        ],
+        "declared_sids": [
+          65633
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48661,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207266,
+        "y": 116021
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48661,
+        "y": 116097,
+        "x": 207476
+      },
+      "name": "Quan Son",
+      "original_bank_index": 8521,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65633
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48661
+        ],
+        "declared_sids": [
+          65633
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48661,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207476,
+        "y": 116097
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48661,
+        "y": 116097,
+        "x": 207477
+      },
+      "name": "Quan Son",
+      "original_bank_index": 8522,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65633
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48661
+        ],
+        "declared_sids": [
+          65633
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48661,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207477,
+        "y": 116097
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48661,
+        "y": 116098,
+        "x": 207474
+      },
+      "name": "Quan Son",
+      "original_bank_index": 8525,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65633
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48661
+        ],
+        "declared_sids": [
+          65633
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48661,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207474,
+        "y": 116098
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48599,
+        "y": 116207,
+        "x": 207487
+      },
+      "name": "Thuong Xuan",
+      "original_bank_index": 8582,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65133,
+          65760
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48599
+        ],
+        "declared_sids": [
+          65133,
+          65760
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48599,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207487,
+        "y": 116207
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48599,
+        "y": 116207,
+        "x": 207488
+      },
+      "name": "Thuong Xuan",
+      "original_bank_index": 8583,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65133,
+          65760
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48599
+        ],
+        "declared_sids": [
+          65133,
+          65760
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48599,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207488,
+        "y": 116207
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48599,
+        "y": 116208,
+        "x": 207487
+      },
+      "name": "Thuong Xuan",
+      "original_bank_index": 8584,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65133,
+          65760
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48599
+        ],
+        "declared_sids": [
+          65133,
+          65760
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48599,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207487,
+        "y": 116208
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48268,
+        "y": 116456,
+        "x": 207051
+      },
+      "name": "Ky Son",
+      "original_bank_index": 8799,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65133,
+          65469
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48268
+        ],
+        "declared_sids": [
+          65133,
+          65469
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48268,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207051,
+        "y": 116456
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48268,
+        "y": 116457,
+        "x": 207052
+      },
+      "name": "Ky Son",
+      "original_bank_index": 8800,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65133,
+          65469
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48268
+        ],
+        "declared_sids": [
+          65133,
+          65469
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48268,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207052,
+        "y": 116457
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48268,
+        "y": 116458,
+        "x": 207052
+      },
+      "name": "Ky Son",
+      "original_bank_index": 8801,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65133,
+          65469
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48268
+        ],
+        "declared_sids": [
+          65133,
+          65469
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48268,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207052,
+        "y": 116458
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48556,
+        "y": 117626,
+        "x": 207849
+      },
+      "name": "Vu Quang",
+      "original_bank_index": 9314,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65117,
+          65839
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48556
+        ],
+        "declared_sids": [
+          65117,
+          65839
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48556,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207849,
+        "y": 117626
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48556,
+        "y": 117629,
+        "x": 207848
+      },
+      "name": "Vu Quang",
+      "original_bank_index": 9315,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65117,
+          65839
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48556
+        ],
+        "declared_sids": [
+          65117,
+          65839
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48556,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207848,
+        "y": 117629
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48556,
+        "y": 117632,
+        "x": 207847
+      },
+      "name": "Vu Quang",
+      "original_bank_index": 9316,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65117,
+          65839
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48556
+        ],
+        "declared_sids": [
+          65117,
+          65839
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48556,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 207847,
+        "y": 117632
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48532,
+        "y": 118321,
+        "x": 208469
+      },
+      "name": "Bo Trach",
+      "original_bank_index": 9493,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65138,
+          65221
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48532
+        ],
+        "declared_sids": [
+          65138,
+          65221
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48532,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208469,
+        "y": 118321
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48479,
+        "y": 118957,
+        "x": 208819
+      },
+      "name": "Huong Hoa",
+      "original_bank_index": 9630,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          41312,
+          65142,
+          65428
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48479
+        ],
+        "declared_sids": [
+          41312,
+          65142,
+          65428
+        ],
+        "flags": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48479,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 208819,
+        "y": 118957
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48757,
+        "y": 119223,
+        "x": 209296
+      },
+      "name": "A Luoi",
+      "original_bank_index": 10040,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65149,
+          65156
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48757
+        ],
+        "declared_sids": [
+          65149,
+          65156
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48757,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 209296,
+        "y": 119223
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48757,
+        "y": 119227,
+        "x": 209295
+      },
+      "name": "A Luoi",
+      "original_bank_index": 10041,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65156
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48757
+        ],
+        "declared_sids": [
+          65156
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48757,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 209295,
+        "y": 119227
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48596,
+        "y": 119659,
+        "x": 209303
+      },
+      "name": "Nam Giang",
+      "original_bank_index": 10252,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65543
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48596
+        ],
+        "declared_sids": [
+          65543
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48596,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209303,
+        "y": 119659
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48596,
+        "y": 119659,
+        "x": 209304
+      },
+      "name": "Nam Giang",
+      "original_bank_index": 10253,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65543
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48596
+        ],
+        "declared_sids": [
+          65543
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48596,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209304,
+        "y": 119659
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48596,
+        "y": 119659,
+        "x": 209305
+      },
+      "name": "Nam Giang",
+      "original_bank_index": 10254,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65543
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48596
+        ],
+        "declared_sids": [
+          65543
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48596,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209305,
+        "y": 119659
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48596,
+        "y": 119660,
+        "x": 209302
+      },
+      "name": "Nam Giang",
+      "original_bank_index": 10255,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65543
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48596
+        ],
+        "declared_sids": [
+          65543
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48596,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209302,
+        "y": 119660
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48596,
+        "y": 119660,
+        "x": 209303
+      },
+      "name": "Nam Giang",
+      "original_bank_index": 10256,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65543
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48596
+        ],
+        "declared_sids": [
+          65543
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48596,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209303,
+        "y": 119660
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119835,
+        "x": 209456
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10418,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209456,
+        "y": 119835
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119836,
+        "x": 209456
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10419,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209456,
+        "y": 119836
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119872,
+        "x": 209450
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10443,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209450,
+        "y": 119872
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119872,
+        "x": 209451
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10444,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209451,
+        "y": 119872
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119872,
+        "x": 209452
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10445,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209452,
+        "y": 119872
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119872,
+        "x": 209453
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10446,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209453,
+        "y": 119872
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119872,
+        "x": 209454
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10447,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209454,
+        "y": 119872
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119872,
+        "x": 209455
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10448,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209455,
+        "y": 119872
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119873,
+        "x": 209449
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10449,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209449,
+        "y": 119873
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119873,
+        "x": 209450
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10450,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209450,
+        "y": 119873
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119873,
+        "x": 209451
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10451,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209451,
+        "y": 119873
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119873,
+        "x": 209452
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10452,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209452,
+        "y": 119873
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119873,
+        "x": 209453
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10453,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209453,
+        "y": 119873
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119874,
+        "x": 209448
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10455,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209448,
+        "y": 119874
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119874,
+        "x": 209449
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10456,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209449,
+        "y": 119874
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119874,
+        "x": 209450
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10457,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209450,
+        "y": 119874
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119874,
+        "x": 209451
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10458,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209451,
+        "y": 119874
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119875,
+        "x": 209447
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10463,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209447,
+        "y": 119875
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119875,
+        "x": 209448
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10464,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209448,
+        "y": 119875
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119875,
+        "x": 209449
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10465,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209449,
+        "y": 119875
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119876,
+        "x": 209446
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10471,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209446,
+        "y": 119876
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119876,
+        "x": 209447
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10472,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209447,
+        "y": 119876
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119877,
+        "x": 209445
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10480,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209445,
+        "y": 119877
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119879,
+        "x": 209439
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10494,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209439,
+        "y": 119879
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119879,
+        "x": 209440
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10495,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209440,
+        "y": 119879
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119879,
+        "x": 209441
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10496,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209441,
+        "y": 119879
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119880,
+        "x": 209436
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10500,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209436,
+        "y": 119880
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119880,
+        "x": 209437
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10501,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209437,
+        "y": 119880
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119880,
+        "x": 209438
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10502,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209438,
+        "y": 119880
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119880,
+        "x": 209439
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10503,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209439,
+        "y": 119880
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119881,
+        "x": 209433
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10504,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209433,
+        "y": 119881
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119881,
+        "x": 209434
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10505,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209434,
+        "y": 119881
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119881,
+        "x": 209435
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10506,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209435,
+        "y": 119881
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119881,
+        "x": 209436
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10507,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209436,
+        "y": 119881
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119881,
+        "x": 209437
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10508,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209437,
+        "y": 119881
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119882,
+        "x": 209431
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10509,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209431,
+        "y": 119882
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119882,
+        "x": 209432
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10510,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209432,
+        "y": 119882
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119882,
+        "x": 209433
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10511,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209433,
+        "y": 119882
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119882,
+        "x": 209434
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10512,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209434,
+        "y": 119882
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119882,
+        "x": 209435
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10513,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209435,
+        "y": 119882
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119883,
+        "x": 209432
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10514,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209432,
+        "y": 119883
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 119883,
+        "x": 209433
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10515,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          65302
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "LAO"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209433,
+        "y": 119883
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48348,
+        "y": 116254,
+        "x": 207452
+      },
+      "name": "Que Phong",
+      "original_bank_index": 8585,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          41305,
+          65133,
+          65643
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48348
+        ],
+        "declared_sids": [
+          41305,
+          65133,
+          65643
+        ],
+        "flags": [
+          "foreign-source-family"
+        ],
+        "hold_reasons": [
+          "foreign-source-family"
+        ],
+        "owner": 48348,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "VNM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-source-family"
+        ],
+        "x": 207452,
+        "y": 116254
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48596,
+        "y": 119486,
+        "x": 209188
+      },
+      "name": "Nam Giang",
+      "original_bank_index": 10200,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          41316,
+          65543
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48596
+        ],
+        "declared_sids": [
+          41316,
+          65543
+        ],
+        "flags": [
+          "foreign-source-family"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48596,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "VNM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209188,
+        "y": 119486
+      }
+    },
+    {
+      "country_comparison": "LAO",
+      "original_key": {
+        "owner": 48212,
+        "y": 120026,
+        "x": 209345
+      },
+      "name": "Dak Glei",
+      "original_bank_index": 10547,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          41301,
+          65126,
+          65302
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48212
+        ],
+        "declared_sids": [
+          41301,
+          65126,
+          65302
+        ],
+        "flags": [
+          "foreign-source-family"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48212,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "VNM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 209345,
+        "y": 120026
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48181,
+        "y": 122073,
+        "x": 209286
+      },
+      "name": "Tuy Duc",
+      "original_bank_index": 12414,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65797
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48181
+        ],
+        "declared_sids": [
+          65797
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48181,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 209286,
+        "y": 122073
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48181,
+        "y": 122074,
+        "x": 209286
+      },
+      "name": "Tuy Duc",
+      "original_bank_index": 12416,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65797
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48181
+        ],
+        "declared_sids": [
+          65797
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48181,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 209286,
+        "y": 122074
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48181,
+        "y": 122075,
+        "x": 209286
+      },
+      "name": "Tuy Duc",
+      "original_bank_index": 12417,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65797
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48181
+        ],
+        "declared_sids": [
+          65797
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48181,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 209286,
+        "y": 122075
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48352,
+        "y": 122464,
+        "x": 208350
+      },
+      "name": "Tan Bien",
+      "original_bank_index": 13110,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65145,
+          65686
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48352
+        ],
+        "declared_sids": [
+          65145,
+          65686
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48352,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208350,
+        "y": 122464
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122483,
+        "x": 208456
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13128,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208456,
+        "y": 122483
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122483,
+        "x": 208457
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13129,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208457,
+        "y": 122483
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122483,
+        "x": 208458
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13130,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208458,
+        "y": 122483
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122484,
+        "x": 208460
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13133,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208460,
+        "y": 122484
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122484,
+        "x": 208461
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13134,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208461,
+        "y": 122484
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122485,
+        "x": 208463
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13136,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65145,
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65145,
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208463,
+        "y": 122485
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122485,
+        "x": 208464
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13137,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208464,
+        "y": 122485
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122486,
+        "x": 208466
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13140,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208466,
+        "y": 122486
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122488,
+        "x": 208470
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13142,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208470,
+        "y": 122488
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122492,
+        "x": 208471
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13148,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65145,
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65145,
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208471,
+        "y": 122492
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122496,
+        "x": 208472
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13156,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65145,
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65145,
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208472,
+        "y": 122496
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122497,
+        "x": 208472
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13161,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65145,
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65145,
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208472,
+        "y": 122497
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122500,
+        "x": 208474
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13171,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65145,
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65145,
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208474,
+        "y": 122500
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122501,
+        "x": 208475
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13174,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65145,
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65145,
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208475,
+        "y": 122501
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122502,
+        "x": 208477
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13177,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65145,
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65145,
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208477,
+        "y": 122502
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122503,
+        "x": 208478
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13179,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65145,
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65145,
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208478,
+        "y": 122503
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122504,
+        "x": 208479
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13180,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65145,
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65145,
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208479,
+        "y": 122504
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122505,
+        "x": 208480
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13181,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65145,
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65145,
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208480,
+        "y": 122505
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122506,
+        "x": 208481
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13182,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65145,
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65145,
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208481,
+        "y": 122506
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122508,
+        "x": 208484
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13185,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65145,
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65145,
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208484,
+        "y": 122508
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122509,
+        "x": 208485
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13186,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65145,
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65145,
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208485,
+        "y": 122509
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122510,
+        "x": 208486
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13187,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65145,
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65145,
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208486,
+        "y": 122510
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48575,
+        "y": 122515,
+        "x": 208492
+      },
+      "name": "Tan Chau",
+      "original_bank_index": 13188,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65145,
+          65688
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48575
+        ],
+        "declared_sids": [
+          65145,
+          65688
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "owner": 48575,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 208492,
+        "y": 122515
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48516,
+        "y": 122965,
+        "x": 208401
+      },
+      "name": "Ben Cau",
+      "original_bank_index": 13525,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          40831,
+          65145,
+          65202
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48516
+        ],
+        "declared_sids": [
+          40831,
+          65145,
+          65202
+        ],
+        "flags": [
+          "foreign-source-family"
+        ],
+        "hold_reasons": [
+          "foreign-source-family"
+        ],
+        "owner": 48516,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "VNM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-source-family"
+        ],
+        "x": 208401,
+        "y": 122965
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48373,
+        "y": 123052,
+        "x": 207626
+      },
+      "name": "An Phu",
+      "original_bank_index": 13583,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          40818,
+          65164
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48373
+        ],
+        "declared_sids": [
+          40818,
+          65164
+        ],
+        "flags": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48373,
+        "package": "repair-evaluation",
+        "physical": "inland-water",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 207626,
+        "y": 123052
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48373,
+        "y": 123052,
+        "x": 207627
+      },
+      "name": "An Phu",
+      "original_bank_index": 13584,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65164
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48373
+        ],
+        "declared_sids": [
+          65164
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48373,
+        "package": "repair-evaluation",
+        "physical": "inland-water",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 207627,
+        "y": 123052
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48373,
+        "y": 123052,
+        "x": 207628
+      },
+      "name": "An Phu",
+      "original_bank_index": 13585,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65164
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48373
+        ],
+        "declared_sids": [
+          65164
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48373,
+        "package": "repair-evaluation",
+        "physical": "inland-water",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 207628,
+        "y": 123052
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48373,
+        "y": 123052,
+        "x": 207629
+      },
+      "name": "An Phu",
+      "original_bank_index": 13586,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65164
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48373
+        ],
+        "declared_sids": [
+          65164
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48373,
+        "package": "repair-evaluation",
+        "physical": "inland-water",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 207629,
+        "y": 123052
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48373,
+        "y": 123052,
+        "x": 207630
+      },
+      "name": "An Phu",
+      "original_bank_index": 13587,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65164
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48373
+        ],
+        "declared_sids": [
+          65164
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48373,
+        "package": "repair-evaluation",
+        "physical": "inland-water",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 207630,
+        "y": 123052
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48373,
+        "y": 123053,
+        "x": 207624
+      },
+      "name": "An Phu",
+      "original_bank_index": 13588,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          40818,
+          65092,
+          65164
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48373
+        ],
+        "declared_sids": [
+          40818,
+          65092,
+          65164
+        ],
+        "flags": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48373,
+        "package": "repair-evaluation",
+        "physical": "inland-water",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 207624,
+        "y": 123053
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48373,
+        "y": 123053,
+        "x": 207625
+      },
+      "name": "An Phu",
+      "original_bank_index": 13589,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65092,
+          65164
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48373
+        ],
+        "declared_sids": [
+          65092,
+          65164
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48373,
+        "package": "repair-evaluation",
+        "physical": "inland-water",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 207625,
+        "y": 123053
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48373,
+        "y": 123053,
+        "x": 207626
+      },
+      "name": "An Phu",
+      "original_bank_index": 13590,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65092,
+          65164
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48373
+        ],
+        "declared_sids": [
+          65092,
+          65164
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48373,
+        "package": "repair-evaluation",
+        "physical": "inland-water",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 207626,
+        "y": 123053
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48373,
+        "y": 123053,
+        "x": 207627
+      },
+      "name": "An Phu",
+      "original_bank_index": 13591,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65164
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48373
+        ],
+        "declared_sids": [
+          65164
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48373,
+        "package": "repair-evaluation",
+        "physical": "inland-water",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 207627,
+        "y": 123053
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48373,
+        "y": 123054,
+        "x": 207622
+      },
+      "name": "An Phu",
+      "original_bank_index": 13593,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          40818,
+          65092,
+          65164
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48373
+        ],
+        "declared_sids": [
+          40818,
+          65092,
+          65164
+        ],
+        "flags": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48373,
+        "package": "repair-evaluation",
+        "physical": "inland-water",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 207622,
+        "y": 123054
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48373,
+        "y": 123054,
+        "x": 207623
+      },
+      "name": "An Phu",
+      "original_bank_index": 13594,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65092,
+          65164
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48373
+        ],
+        "declared_sids": [
+          65092,
+          65164
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48373,
+        "package": "repair-evaluation",
+        "physical": "inland-water",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 207623,
+        "y": 123054
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48373,
+        "y": 123055,
+        "x": 207620
+      },
+      "name": "An Phu",
+      "original_bank_index": 13596,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          40818,
+          65092,
+          65164
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48373
+        ],
+        "declared_sids": [
+          40818,
+          65092,
+          65164
+        ],
+        "flags": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48373,
+        "package": "repair-evaluation",
+        "physical": "inland-water",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 207620,
+        "y": 123055
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48240,
+        "y": 123084,
+        "x": 208377
+      },
+      "name": "Duc Hue",
+      "original_bank_index": 13635,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          40831,
+          65348
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48240
+        ],
+        "declared_sids": [
+          40831,
+          65348
+        ],
+        "flags": [
+          "foreign-source-family"
+        ],
+        "hold_reasons": [
+          "foreign-source-family"
+        ],
+        "owner": 48240,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "VNM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-source-family"
+        ],
+        "x": 208377,
+        "y": 123084
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48323,
+        "y": 123094,
+        "x": 207822
+      },
+      "name": "Tan Hong",
+      "original_bank_index": 13652,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          40829,
+          65112,
+          65691
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48323
+        ],
+        "declared_sids": [
+          40829,
+          65112,
+          65691
+        ],
+        "flags": [
+          "foreign-source-family"
+        ],
+        "hold_reasons": [
+          "foreign-source-family"
+        ],
+        "owner": 48323,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "VNM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-source-family"
+        ],
+        "x": 207822,
+        "y": 123094
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48373,
+        "y": 123097,
+        "x": 207578
+      },
+      "name": "An Phu",
+      "original_bank_index": 13653,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          40818,
+          65092,
+          65164
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48373
+        ],
+        "declared_sids": [
+          40818,
+          65092,
+          65164
+        ],
+        "flags": [
+          "foreign-source-family"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48373,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "VNM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 207578,
+        "y": 123097
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48437,
+        "y": 123106,
+        "x": 207754
+      },
+      "name": "Huyen Hong Ngu",
+      "original_bank_index": 13654,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65112,
+          65436
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48437
+        ],
+        "declared_sids": [
+          65112,
+          65436
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48437,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 207754,
+        "y": 123106
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48437,
+        "y": 123107,
+        "x": 207756
+      },
+      "name": "Huyen Hong Ngu",
+      "original_bank_index": 13655,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65112,
+          65436
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48437
+        ],
+        "declared_sids": [
+          65112,
+          65436
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48437,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 207756,
+        "y": 123107
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48437,
+        "y": 123108,
+        "x": 207758
+      },
+      "name": "Huyen Hong Ngu",
+      "original_bank_index": 13656,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65112,
+          65436
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48437
+        ],
+        "declared_sids": [
+          65112,
+          65436
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48437,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 207758,
+        "y": 123108
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48437,
+        "y": 123109,
+        "x": 207760
+      },
+      "name": "Huyen Hong Ngu",
+      "original_bank_index": 13657,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65112,
+          65436
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48437
+        ],
+        "declared_sids": [
+          65112,
+          65436
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48437,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 207760,
+        "y": 123109
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48437,
+        "y": 123110,
+        "x": 207762
+      },
+      "name": "Huyen Hong Ngu",
+      "original_bank_index": 13658,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          40829,
+          65112,
+          65436
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48437
+        ],
+        "declared_sids": [
+          40829,
+          65112,
+          65436
+        ],
+        "flags": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48437,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 207762,
+        "y": 123110
+      }
+    },
+    {
+      "country_comparison": "KHM",
+      "original_key": {
+        "owner": 48530,
+        "y": 123164,
+        "x": 208365
+      },
+      "name": "Thanh Hoa",
+      "original_bank_index": 13669,
+      "original_record": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          40831,
+          65131,
+          65728
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48530
+        ],
+        "declared_sids": [
+          40831,
+          65131,
+          65728
+        ],
+        "flags": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "owner": 48530,
+        "package": "repair-evaluation",
+        "physical": "land",
+        "qualified": false,
+        "reference_countries": [
+          "KHM"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "x": 208365,
+        "y": 123164
+      }
+    }
+  ],
+  "limits": "Original178 distinct unassigned-audit keys only; no fresh current-owner-zero claim. Root normal final consumer checks accepted current0/conservation before delivery."
+}

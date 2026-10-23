@@ -1,0 +1,1486 @@
+{
+  "kind": "proposed-exact-original17-CHN-display-source-ranking-v1",
+  "status": "PROPOSAL: all17 held pending substantive parent decision",
+  "issue": "https://github.com/ChengshuLi/WorldAtlas/issues/2076",
+  "scope_original_keys": 17,
+  "whole_original_source_revision_scope": 365,
+  "existing_adopted_CHN_keys": 348,
+  "proposed_additional_CHN_display_choices": 17,
+  "parent_adoption": false,
+  "native_qualification": false,
+  "current_additive_owner_zero": false,
+  "predecessor_conservation": false,
+  "accepted_map_cell_credit": 0,
+  "source_and_edition_identities": {
+    "Natural_Earth": {
+      "retained_full_source": {
+        "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+        "commit": "415d90d08d33fde27dd66189a4d1a21e4802c21f",
+        "mode": "100644",
+        "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+        "bytes": 4719659,
+        "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075"
+      },
+      "source_manifest": {
+        "path": "data/retained-geographic-sources/namibia/manifest.json",
+        "commit": "415d90d08d33fde27dd66189a4d1a21e4802c21f",
+        "mode": "100644",
+        "git_blob_oid": "e4e9c044589a3c73367a63b936933c7538021292",
+        "bytes": 10452,
+        "sha256": "aa50635f372959d7c36045648e8e426737da4d6039e7ebcb4309160fcc917894"
+      },
+      "upstream_snapshot": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_admin_0_countries.geojson",
+      "retained_snapshot_reference_date": "2026-10-01",
+      "encoded_bytes": 4719659,
+      "decoded_bytes": 13287234,
+      "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255",
+      "whole_country_features": 258,
+      "release_version": "Not separately asserted: exact upstream commit and whole-body hashes identify the retained edition."
+    },
+    "official_LSIB": {
+      "old_whole_feature_metadata": {
+        "path": "vietnam-next/original-decisions-20261015/bulk-completion/repair/chn1506-source-reconciliation/world-polygons-china-feature.json",
+        "bytes": 4004905,
+        "sha256": "4a3a6c63b642177d9ab61285cc70422aa167ce0fea6c006b6e4c8bdcc45e32d4",
+        "response_metadata": {
+          "type": "FeatureCollection",
+          "totalFeatures": "unknown",
+          "numberReturned": 1,
+          "timeStamp": "2026-10-15T23:57:17.074Z",
+          "crs": {
+            "type": "name",
+            "properties": {
+              "name": "urn:ogc:def:crs:EPSG::4326"
+            }
+          }
+        },
+        "feature_id": "DoS_WP_High_Resolution.123248",
+        "properties": {
+          "fid": 56,
+          "WP_Name": "China",
+          "WP_Name_ND": "China",
+          "DOS_Short": "China",
+          "DOS_Long": "People’s Republic of China",
+          "Map_Label": "CHINA",
+          "US_Recog": "Independent",
+          "Show_Disp": null,
+          "Map_Disp": null,
+          "NOTES": "With the establishment of diplomatic relations with China on January 1, 1979, the US Government recognized the People’s Republic of China as the sole legal government of China and acknowledged the Chinese position that there is only one Chi",
+          "NOTES_Cont": "na and that Taiwan is part of China.",
+          "MapTint_2": "CN",
+          "MapTint_3": "CHN",
+          "GENC_Short": "China",
+          "GENC_Full": "People’s Republic of China",
+          "GENC_2": "CN",
+          "GENC_3": "CHN",
+          "ISO_3166_1": null,
+          "ISO_3166_2": null,
+          "WP_ID": "422131df-82bc-4f1b-9a1f-ee89cc970e19",
+          "WP_PREV_ID": "422131df-82bc-4f1b-9a1f-ee89cc970e19",
+          "WP_PAR_ID": "422131df-82bc-4f1b-9a1f-ee89cc970e19"
+        },
+        "valid": false,
+        "validity_detail": "Self-intersection[80.5954 42.9033]",
+        "geometry_type": "Polygon",
+        "bounds": [
+          73.4993,
+          20.2231,
+          134.7755,
+          53.561
+        ],
+        "vertex_count": 216061
+      },
+      "metadata_receipt": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/border-chn274-20261016/country274-input-context.json",
+        "commit": "6ef487cd8f29e714dd10ae963d9fd58c41fd1b54",
+        "mode": "100644",
+        "git_blob_oid": "e1357aa89dacc5ec5e6e05a8fffb0714d6ded123",
+        "bytes": 919295,
+        "sha256": "cbed2cfac8389cfef87621549644219c0a11b71af920c87bd26bc6adb8448af9"
+      },
+      "exact_unchanged_whole_geometry": {
+        "pin": {
+          "bytes": 36065990,
+          "commit": "a6fb19a5b4e095c82d5b667cbe372ec4df9ad195",
+          "git_blob_oid": "8ef6d858b7e05cbb200319e25e435eb0fd525c44",
+          "mode": "100644",
+          "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/native-source-evidence-next351-818-PROPOSED.json",
+          "sha256": "33416e7976b0ec2a1f7618e182359b97272da4d2fd4c07411fd13aceb26661d6"
+        },
+        "pointer": "/targets/6/territorial_exclusions/0"
+      },
+      "geometry_sha256": "1faef81cbf6c0c4776387d85842b76b4d0514793e096a9309872524abcce41a2",
+      "geometry_bytes": 4003795,
+      "whole_geometry_vertices": 216061,
+      "geometry_type": "Polygon",
+      "original_observation": {
+        "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/literal-CN-native-kernel-comparison.json",
+        "commit": "6ef487cd8f29e714dd10ae963d9fd58c41fd1b54",
+        "mode": "100644",
+        "git_blob_oid": "1f06945d8c4a016762a8ddb158516372ea8caadf",
+        "bytes": 436149,
+        "sha256": "d326aef83d771657a67a3e8abaf4ce6d0a583df328b10f29eff89a2a04457cf5"
+      },
+      "global_OGC_defect": "Self-intersection[80.5954 42.9033] disclosed, not repaired",
+      "edition_limit": "The old source metadata records feature ID, whole feature hash and2026-10-15 WFS response timestamp, but no independently authenticated dataset edition identifier. Complete unrepaired geometry is retained in the genuine old source evidence and reused by fresh diagnostics. The original4,004,905-byte WFS FeatureCollection itself has not been acquired or re-read in this cloud handoff.",
+      "related_retained_line_product": {
+        "pin": {
+          "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm29-official-country-native9/source-bindings.json",
+          "commit": "aad3fbbbb04c0211bbad71172ea4fee79f66d330",
+          "mode": "100644",
+          "git_blob_oid": "925b2f2bf447393394b9ec09f88c666a1de293e5",
+          "bytes": 8443,
+          "sha256": "72401038fd52430e02c90ef313d364c439d7bb930ab911237ee4159b4d901d3b"
+        },
+        "table": "Department of State LSIB v11.4 24Feb2025",
+        "source_GPKG_publisher_bound_sha256": "1e2723fc1e699531353706e5c8f584d93547b6564417a6f59d2e990142ee1c12",
+        "VNM_World_Polygons_sha256": "1724066750315eb7ebfac7fcff7bebf41cf2c7004fa6c1775fa10d671a9f6ffb",
+        "link": "Same VNM whole country body hash as the northern official-country context. The retained distinct source9 review states LSIB11.4/WorldPolygons11.4beta, while distinguishing line precision from country-service serialization.",
+        "limit": "Related line/source9 bindings do not independently authenticate the separate CHN WFS country-product edition or rank it against Natural Earth. The originalCHN4MBFeatureCollection and old raw metadata were not included in the cloud handoff."
+      }
+    }
+  },
+  "prior_display_convention": {
+    "document": {
+      "path": "docs/DATA_SOURCES.md",
+      "commit": "415d90d08d33fde27dd66189a4d1a21e4802c21f",
+      "mode": "100644",
+      "git_blob_oid": "d9f3f06ef1dd6809342f8440634b24d20a52c766",
+      "bytes": 16836,
+      "sha256": "b820065d55515e0de1e35f74e7670a7b270b0d0f8450497fdc9cd921dd20e65a"
+    },
+    "implementation": {
+      "path": "scripts/reconcile-topology.py",
+      "commit": "415d90d08d33fde27dd66189a4d1a21e4802c21f",
+      "mode": "100644",
+      "git_blob_oid": "1573b3a7814f903196b17c0c1ea34f10f5745669",
+      "bytes": 8419,
+      "sha256": "1739883a9ada57e346f12c009beb4c14091429e810ec7cc77f8b01e8bd3ae763"
+    },
+    "actual_rule": "Shared interiors use supported Natural Earth reference borders, then finer source polygon and stable ID; this is a display convention, not a sovereignty ruling.",
+    "explicit_LSIB_vs_NE_ranking": false,
+    "limit": "Neither the documented shared-interior rule nor the source28 comparator explicitly assesses/ranks a contrary official LSIB country-mask veto at these17. Parent earlier17 decision addressed original VNM versus new OSM CHN source choice; the official-country conflict is now retained for separate substantive treatment."
+  },
+  "proposal_reasoning": [
+    "For only these17 exact shared-interior keys, prefer the retained whole high-resolution State World Polygons CHN alignment together with the independently assessed unique OSM county source over the coarse Natural Earth country display operand. The proposed advantage is detailed country-boundary purpose plus matching fine-county applicability, not file recency, more vertices alone, or legal sovereignty authority.",
+    "The retained original whole-country observation classifies each key CHN, and the unchanged whole CHN native mask confirms strict interior with no ties. The complete twelve-source native observation places every key in exactly its corresponding new OSM county, without a source boundary tie. The complete current49625-feature canonical comparison finds no current fine contact or tie at any of these keys. Thus the proposal adds a specific competing country reference absent from the earlier NE-only source-choice decision.",
+    "This is an explicit bounded exception to the earlier NE shared-interior display convention. It does not follow automatically from that convention. Natural Earth is retained as contrary country evidence and the original VNM ADM2/ADM1 geometries and original owner keys remain contrary evidence. Their interiors are genuine; no old geometry is declared wrong or superseded wholesale.",
+    "Official State publisher metadata describes a U.S. policy-based international-boundary dataset which may differ from de facto control. Natural Earth describes a de facto country product at1:10million. Agreement between State and OSM does not establish independent survey lineage, de facto control, or a treaty-level resolution. The observed disagreement cannot be proved to be solely cartographic generalization. The parent must explicitly accept this limited detailed-cartography preference and its viewpoint/accuracy limits, or keep all17 held."
+  ],
+  "publisher_context_read_2026_10_16": [
+    {
+      "url": "https://geodata.state.gov/geonetwork/srv/api/records/3bdb81a0-c1b9-439a-a0b1-85dac30c59b2",
+      "role": "Publisher metadata only; no geometry newly acquired",
+      "facts": "LSIB11.4 published2025-02-24; international-boundary/cartographic analysis role, U.S. policy viewpoint rather than necessarily de facto control. Most lines are described as within100m of their true ground position. These general statements do not authenticate the separate retained CHN WFS edition or certify accuracy at these17 centres."
+    },
+    {
+      "url": "https://data.geodata.state.gov/",
+      "role": "Publisher static metadata index only",
+      "facts": "Lists LSIB and World Polygons metadata dated2025-02-24. This contextual date is not substituted for the missing CHN WFS edition identifier."
+    },
+    {
+      "url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/",
+      "role": "Publisher role/scale metadata only",
+      "facts": "Admin0 country product at1:10million with de facto default. The actual retained source remains pinned by exactca96624 commit and body hashes, rather than silently adopting the currently advertised release."
+    }
+  ],
+  "limitations": [
+    "The CHN WFS original4,004,905-byte FeatureCollection was not included in the cloud handoff; its response metadata/hash is retained. The entire unchanged4,003,795-byte country geometry is authenticated in the old scientific source evidence. No independent CHN WFS edition/version or fresh service-body equality is claimed.",
+    "The retained whole CHN Polygon has the disclosed remote OGC self-intersection at80.5954,42.9033. No repair/crop/simplification is proposed. The existing native even-odd rule and zero exact ties are scoped numerical facts, not a blanket OGC-validity or absolute-accuracy assertion.",
+    "The retained original classification says CHN and old complete country comparison was reused. This proposal does not newly rerun all LSIB world-country features or independently verify a fresh VNM whole-country predicate; the CHN native interior result is exact for the pinned whole CHN geometry.",
+    "Publisher positional-accuracy guidance is not a per-key uncertainty bound. Distance from the exact LSIB line and authoritative local survey confirmation have not been newly established at these17; no sub-cell survey-accuracy guarantee is made.",
+    "OSM relation version is not the complete geometry version. The entire2026-10-16T00:19:04Z snapshot SHA and literal boundary-segment multiset remain binding; the five source members are existing members of the original twelve, without relabeling them as the old PDDL targets.",
+    "All contrary original VNM geometry, original country/source-family contacts, old17 blocked-CHN disposition, earlier VNM-choice decision, failed VNM native executions and fresh territorial diagnostics remain genuine historical evidence. No source approval flag or accepted selected data changes at proposal time.",
+    "The old365 canonical comparison retains its realcd68 vintage. Actual current applicability must compare all37 pinned index/part identities against the eventual execution tree; no world scan rerun is needed when exact identities remain equal.",
+    "No native17 output, current additive owner-zero proof or predecessor conservation exists for the proposed CHN route yet. Whole physical12-source results are reused only for identical source/geometry identities; no native credit follows from those prior physical facts."
+  ],
+  "smallest_follow_on_if_adopted": [
+    "Use the already reviewed opt-in v3 adapter. Preserve the whole365 key roster and original348 approval, and publish a new dated source-choice scope/assessment addendum and exact parent decision for only these additional17. Keep the old348/17 files byte-exact historical operands; do not claim the original assessor already approved17.",
+    "The v3 roles require the same complete365 record-key join with the retained current-geography observation. Any new whole-scope body must retain all old facts and explicitly distinguish17 newly adopted display choices. Its parent decision must hash-bind that actual new body; changing only a boolean or reusing the old decision is insufficient.",
+    "Reuse the same raw snapshot, twelve whole stage features, stable-ID crosswalk, physical12-target receipt, complete original contacts and current365 competitor proof. No new adapter, source acquisition, physical producer or all-world scan is proposed.",
+    "Prepare only17 CHN candidate cells through the existing source/native stock entry points with actual resource admission. Require point/source, mask/residual/tie gates, current owner-zero and complete predecessor conservation before any selected delivery. Existing qualified348 outputs retain their actual old execution identity and are not replayed.",
+    "Carry existing OSM attribution, ODbL notice and downstream distribution duties; retain State/Natural Earth/source licenses and exact edition limitations. Supply any eventually qualified quartet to the sole cumulative composer without creating a competing selector."
+  ],
+  "source_members": [
+    {
+      "source_id": "osm:relation:2719410",
+      "relation_version": 32,
+      "relation_edit_timestamp": "2025-12-16T10:06:59Z",
+      "snapshot": "2026-10-16T00:19:04Z",
+      "name": "金平苗族瑶族傣族自治县",
+      "name_en": "Jinping Miao, Yao and Dai Autonomous County",
+      "division_code": "532530",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "stable_owner": 11584,
+      "retained_parent_id": "framework:province:honghe-hani-and-yi-autonomous-prefecture:bf2f208cb205",
+      "retained_parent_name": "Honghe Hani and Yi Autonomous Prefecture",
+      "literal_segment_count": 2749,
+      "literal_segments_equal_raw_multiset": true,
+      "valid_geometry": true,
+      "source_identity_and_administrative_role_supported": true,
+      "proposed_original_keys": [
+        {
+          "owner": 48156,
+          "y": 114072,
+          "x": 206522
+        },
+        {
+          "owner": 48156,
+          "y": 114073,
+          "x": 206522
+        }
+      ],
+      "existing_whole_physical_issues": []
+    },
+    {
+      "source_id": "osm:relation:2719413",
+      "relation_version": 18,
+      "relation_edit_timestamp": "2025-08-06T09:28:42Z",
+      "snapshot": "2026-10-16T00:19:04Z",
+      "name": "绿春县",
+      "name_en": "Lüchun County",
+      "division_code": null,
+      "target_id": "gb:CHN:ADM2:17275852B38063051407977",
+      "stable_owner": 11930,
+      "retained_parent_id": "framework:province:honghe-hani-and-yi-autonomous-prefecture:bf2f208cb205",
+      "retained_parent_name": "Honghe Hani and Yi Autonomous Prefecture",
+      "literal_segment_count": 1655,
+      "literal_segments_equal_raw_multiset": true,
+      "valid_geometry": true,
+      "source_identity_and_administrative_role_supported": true,
+      "proposed_original_keys": [
+        {
+          "owner": 48755,
+          "y": 114173,
+          "x": 205644
+        }
+      ],
+      "existing_whole_physical_issues": []
+    },
+    {
+      "source_id": "osm:relation:2723222",
+      "relation_version": 27,
+      "relation_edit_timestamp": "2025-08-06T09:28:42Z",
+      "snapshot": "2026-10-16T00:19:04Z",
+      "name": "马关县",
+      "name_en": "Maguan County",
+      "division_code": "532625",
+      "target_id": "gb:CHN:ADM2:17275852B76703841753402",
+      "stable_owner": 12908,
+      "retained_parent_id": "framework:province:wenshan-zhuang-and-miao-autonomous-prefecture:769019fc316e",
+      "retained_parent_name": "Wenshan Zhuang and Miao Autonomous Prefecture",
+      "literal_segment_count": 1894,
+      "literal_segments_equal_raw_multiset": true,
+      "valid_geometry": true,
+      "source_identity_and_administrative_role_supported": true,
+      "proposed_original_keys": [
+        {
+          "owner": 48439,
+          "y": 114029,
+          "x": 207192
+        },
+        {
+          "owner": 48439,
+          "y": 114030,
+          "x": 207191
+        }
+      ],
+      "existing_whole_physical_issues": []
+    },
+    {
+      "source_id": "osm:relation:2723223",
+      "relation_version": 30,
+      "relation_edit_timestamp": "2025-08-06T09:28:42Z",
+      "snapshot": "2026-10-16T00:19:04Z",
+      "name": "麻栗坡县",
+      "name_en": "Malipo County",
+      "division_code": "532624",
+      "target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "stable_owner": 12076,
+      "retained_parent_id": "framework:province:wenshan-zhuang-and-miao-autonomous-prefecture:769019fc316e",
+      "retained_parent_name": "Wenshan Zhuang and Miao Autonomous Prefecture",
+      "literal_segment_count": 1875,
+      "literal_segments_equal_raw_multiset": true,
+      "valid_geometry": true,
+      "source_identity_and_administrative_role_supported": true,
+      "proposed_original_keys": [
+        {
+          "owner": 48535,
+          "y": 113896,
+          "x": 207441
+        },
+        {
+          "owner": 48535,
+          "y": 113898,
+          "x": 207442
+        },
+        {
+          "owner": 48535,
+          "y": 113900,
+          "x": 207443
+        },
+        {
+          "owner": 48535,
+          "y": 113902,
+          "x": 207444
+        },
+        {
+          "owner": 48535,
+          "y": 113989,
+          "x": 207352
+        }
+      ],
+      "existing_whole_physical_issues": []
+    },
+    {
+      "source_id": "osm:relation:2773868",
+      "relation_version": 21,
+      "relation_edit_timestamp": "2026-03-29T08:31:11Z",
+      "snapshot": "2026-10-16T00:19:04Z",
+      "name": "龙州县",
+      "name_en": "Longzhou County",
+      "division_code": "451423",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "stable_owner": 12167,
+      "retained_parent_id": "framework:province:chongzuo:f87e4ad1db21",
+      "retained_parent_name": "Chongzuo",
+      "literal_segment_count": 1573,
+      "literal_segments_equal_raw_multiset": true,
+      "valid_geometry": true,
+      "source_identity_and_administrative_role_supported": true,
+      "proposed_original_keys": [
+        {
+          "owner": 48619,
+          "y": 114199,
+          "x": 208760
+        },
+        {
+          "owner": 48619,
+          "y": 114200,
+          "x": 208753
+        },
+        {
+          "owner": 48619,
+          "y": 114200,
+          "x": 208754
+        },
+        {
+          "owner": 48619,
+          "y": 114200,
+          "x": 208755
+        },
+        {
+          "owner": 48619,
+          "y": 114200,
+          "x": 208756
+        },
+        {
+          "owner": 48619,
+          "y": 114200,
+          "x": 208757
+        },
+        {
+          "owner": 48619,
+          "y": 114200,
+          "x": 208758
+        }
+      ],
+      "existing_whole_physical_issues": []
+    }
+  ],
+  "records": [
+    {
+      "original_key": {
+        "owner": 48156,
+        "y": 114072,
+        "x": 206522
+      },
+      "proposed_CHN_source_id": "osm:relation:2719410",
+      "proposed_CHN_target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "proposed_CHN_owner": 11584,
+      "proposed_county": "Jinping Miao, Yao and Dai Autonomous County",
+      "longitude": 103.59169381231737,
+      "latitude": 22.737015308929383,
+      "retained_NE_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_NE_country_ties": [],
+      "retained_whole_LSIB_CHN_interior": true,
+      "retained_whole_LSIB_CHN_boundary_ties": [],
+      "retained_original_country_classification": "CHN",
+      "unique_exact_native_OSM_hits": [
+        "osm:relation:2719410"
+      ],
+      "exact_native_OSM_boundary_ties": [],
+      "contrary_original_VNM_fine_interiors": [
+        "gb:VNM:ADM2:81297802B11536853186467"
+      ],
+      "contrary_original_VNM_fine_boundary_ties": [],
+      "all_original_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B84540832148656",
+          "source_index": 15319,
+          "owners": [],
+          "name": "Yunnan Province",
+          "family": "gb:CHN:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM2:81297802B11536853186467",
+          "source_index": 65199,
+          "owners": [
+            48156
+          ],
+          "name": "Bat Xat",
+          "family": "gb:VNM:ADM2"
+        }
+      ],
+      "current_canonical_fine_contacts": [],
+      "current_canonical_fine_boundary_ties": [],
+      "previous_NE_based_CHN_disposition": "blocked_for_proposed_CHN_target",
+      "previous_VNM_v1_native_result": "territorial_exclusion_cells",
+      "proposed_new_source_choice": "CHN, pending explicit bounded parent adoption",
+      "new_native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48156,
+        "y": 114073,
+        "x": 206522
+      },
+      "proposed_CHN_source_id": "osm:relation:2719410",
+      "proposed_CHN_target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "proposed_CHN_owner": 11584,
+      "proposed_county": "Jinping Miao, Yao and Dai Autonomous County",
+      "longitude": 103.59169381231737,
+      "latitude": 22.73574883871993,
+      "retained_NE_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_NE_country_ties": [],
+      "retained_whole_LSIB_CHN_interior": true,
+      "retained_whole_LSIB_CHN_boundary_ties": [],
+      "retained_original_country_classification": "CHN",
+      "unique_exact_native_OSM_hits": [
+        "osm:relation:2719410"
+      ],
+      "exact_native_OSM_boundary_ties": [],
+      "contrary_original_VNM_fine_interiors": [
+        "gb:VNM:ADM2:81297802B11536853186467"
+      ],
+      "contrary_original_VNM_fine_boundary_ties": [],
+      "all_original_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B84540832148656",
+          "source_index": 15319,
+          "owners": [],
+          "name": "Yunnan Province",
+          "family": "gb:CHN:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM2:81297802B11536853186467",
+          "source_index": 65199,
+          "owners": [
+            48156
+          ],
+          "name": "Bat Xat",
+          "family": "gb:VNM:ADM2"
+        }
+      ],
+      "current_canonical_fine_contacts": [],
+      "current_canonical_fine_boundary_ties": [],
+      "previous_NE_based_CHN_disposition": "blocked_for_proposed_CHN_target",
+      "previous_VNM_v1_native_result": "territorial_exclusion_cells",
+      "proposed_new_source_choice": "CHN, pending explicit bounded parent adoption",
+      "new_native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48439,
+        "y": 114029,
+        "x": 207192
+      },
+      "proposed_CHN_source_id": "osm:relation:2723222",
+      "proposed_CHN_target_id": "gb:CHN:ADM2:17275852B76703841753402",
+      "proposed_CHN_owner": 12908,
+      "proposed_county": "Maguan County",
+      "longitude": 104.51172158098302,
+      "latitude": 22.79146242332274,
+      "retained_NE_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_NE_country_ties": [],
+      "retained_whole_LSIB_CHN_interior": true,
+      "retained_whole_LSIB_CHN_boundary_ties": [],
+      "retained_original_country_classification": "CHN",
+      "unique_exact_native_OSM_hits": [
+        "osm:relation:2723222"
+      ],
+      "exact_native_OSM_boundary_ties": [],
+      "contrary_original_VNM_fine_interiors": [
+        "gb:VNM:ADM2:81297802B50713424689894"
+      ],
+      "contrary_original_VNM_fine_boundary_ties": [],
+      "all_original_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B84540832148656",
+          "source_index": 15319,
+          "owners": [],
+          "name": "Yunnan Province",
+          "family": "gb:CHN:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM2:81297802B50713424689894",
+          "source_index": 65843,
+          "owners": [
+            48439
+          ],
+          "name": "Xin Man",
+          "family": "gb:VNM:ADM2"
+        }
+      ],
+      "current_canonical_fine_contacts": [],
+      "current_canonical_fine_boundary_ties": [],
+      "previous_NE_based_CHN_disposition": "blocked_for_proposed_CHN_target",
+      "previous_VNM_v1_native_result": "territorial_exclusion_cells",
+      "proposed_new_source_choice": "CHN, pending explicit bounded parent adoption",
+      "new_native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48439,
+        "y": 114030,
+        "x": 207191
+      },
+      "proposed_CHN_source_id": "osm:relation:2723222",
+      "proposed_CHN_target_id": "gb:CHN:ADM2:17275852B76703841753402",
+      "proposed_CHN_owner": 12908,
+      "proposed_county": "Maguan County",
+      "longitude": 104.5103484052089,
+      "latitude": 22.790196458021803,
+      "retained_NE_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_NE_country_ties": [],
+      "retained_whole_LSIB_CHN_interior": true,
+      "retained_whole_LSIB_CHN_boundary_ties": [],
+      "retained_original_country_classification": "CHN",
+      "unique_exact_native_OSM_hits": [
+        "osm:relation:2723222"
+      ],
+      "exact_native_OSM_boundary_ties": [],
+      "contrary_original_VNM_fine_interiors": [
+        "gb:VNM:ADM2:81297802B50713424689894"
+      ],
+      "contrary_original_VNM_fine_boundary_ties": [],
+      "all_original_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B84540832148656",
+          "source_index": 15319,
+          "owners": [],
+          "name": "Yunnan Province",
+          "family": "gb:CHN:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM2:81297802B50713424689894",
+          "source_index": 65843,
+          "owners": [
+            48439
+          ],
+          "name": "Xin Man",
+          "family": "gb:VNM:ADM2"
+        }
+      ],
+      "current_canonical_fine_contacts": [],
+      "current_canonical_fine_boundary_ties": [],
+      "previous_NE_based_CHN_disposition": "blocked_for_proposed_CHN_target",
+      "previous_VNM_v1_native_result": "territorial_exclusion_cells",
+      "proposed_new_source_choice": "CHN, pending explicit bounded parent adoption",
+      "new_native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113896,
+        "x": 207441
+      },
+      "proposed_CHN_source_id": "osm:relation:2723223",
+      "proposed_CHN_target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "proposed_CHN_owner": 12076,
+      "proposed_county": "Malipo County",
+      "longitude": 104.85364234874083,
+      "latitude": 22.959730875836318,
+      "retained_NE_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_NE_country_ties": [],
+      "retained_whole_LSIB_CHN_interior": true,
+      "retained_whole_LSIB_CHN_boundary_ties": [],
+      "retained_original_country_classification": "CHN",
+      "unique_exact_native_OSM_hits": [
+        "osm:relation:2723223"
+      ],
+      "exact_native_OSM_boundary_ties": [],
+      "contrary_original_VNM_fine_interiors": [
+        "gb:VNM:ADM2:81297802B6357673458882"
+      ],
+      "contrary_original_VNM_fine_boundary_ties": [],
+      "all_original_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B84540832148656",
+          "source_index": 15319,
+          "owners": [],
+          "name": "Yunnan Province",
+          "family": "gb:CHN:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM2:81297802B6357673458882",
+          "source_index": 65820,
+          "owners": [
+            48535
+          ],
+          "name": "Vi Xuyen",
+          "family": "gb:VNM:ADM2"
+        }
+      ],
+      "current_canonical_fine_contacts": [],
+      "current_canonical_fine_boundary_ties": [],
+      "previous_NE_based_CHN_disposition": "blocked_for_proposed_CHN_target",
+      "previous_VNM_v1_native_result": "territorial_exclusion_cells",
+      "proposed_new_source_choice": "CHN, pending explicit bounded parent adoption",
+      "new_native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113898,
+        "x": 207442
+      },
+      "proposed_CHN_source_id": "osm:relation:2723223",
+      "proposed_CHN_target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "proposed_CHN_owner": 12076,
+      "proposed_county": "Malipo County",
+      "longitude": 104.85501552451501,
+      "latitude": 22.95720206869549,
+      "retained_NE_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_NE_country_ties": [],
+      "retained_whole_LSIB_CHN_interior": true,
+      "retained_whole_LSIB_CHN_boundary_ties": [],
+      "retained_original_country_classification": "CHN",
+      "unique_exact_native_OSM_hits": [
+        "osm:relation:2723223"
+      ],
+      "exact_native_OSM_boundary_ties": [],
+      "contrary_original_VNM_fine_interiors": [
+        "gb:VNM:ADM2:81297802B6357673458882"
+      ],
+      "contrary_original_VNM_fine_boundary_ties": [],
+      "all_original_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B84540832148656",
+          "source_index": 15319,
+          "owners": [],
+          "name": "Yunnan Province",
+          "family": "gb:CHN:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM2:81297802B6357673458882",
+          "source_index": 65820,
+          "owners": [
+            48535
+          ],
+          "name": "Vi Xuyen",
+          "family": "gb:VNM:ADM2"
+        }
+      ],
+      "current_canonical_fine_contacts": [],
+      "current_canonical_fine_boundary_ties": [],
+      "previous_NE_based_CHN_disposition": "blocked_for_proposed_CHN_target",
+      "previous_VNM_v1_native_result": "territorial_exclusion_cells",
+      "proposed_new_source_choice": "CHN, pending explicit bounded parent adoption",
+      "new_native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113900,
+        "x": 207443
+      },
+      "proposed_CHN_source_id": "osm:relation:2723223",
+      "proposed_CHN_target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "proposed_CHN_owner": 12076,
+      "proposed_county": "Malipo County",
+      "longitude": 104.85638870028913,
+      "latitude": 22.954673214275896,
+      "retained_NE_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_NE_country_ties": [],
+      "retained_whole_LSIB_CHN_interior": true,
+      "retained_whole_LSIB_CHN_boundary_ties": [],
+      "retained_original_country_classification": "CHN",
+      "unique_exact_native_OSM_hits": [
+        "osm:relation:2723223"
+      ],
+      "exact_native_OSM_boundary_ties": [],
+      "contrary_original_VNM_fine_interiors": [
+        "gb:VNM:ADM2:81297802B6357673458882"
+      ],
+      "contrary_original_VNM_fine_boundary_ties": [],
+      "all_original_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B84540832148656",
+          "source_index": 15319,
+          "owners": [],
+          "name": "Yunnan Province",
+          "family": "gb:CHN:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM2:81297802B6357673458882",
+          "source_index": 65820,
+          "owners": [
+            48535
+          ],
+          "name": "Vi Xuyen",
+          "family": "gb:VNM:ADM2"
+        }
+      ],
+      "current_canonical_fine_contacts": [],
+      "current_canonical_fine_boundary_ties": [],
+      "previous_NE_based_CHN_disposition": "blocked_for_proposed_CHN_target",
+      "previous_VNM_v1_native_result": "territorial_exclusion_cells",
+      "proposed_new_source_choice": "CHN, pending explicit bounded parent adoption",
+      "new_native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113902,
+        "x": 207444
+      },
+      "proposed_CHN_source_id": "osm:relation:2723223",
+      "proposed_CHN_target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "proposed_CHN_owner": 12076,
+      "proposed_county": "Malipo County",
+      "longitude": 104.85776187606325,
+      "latitude": 22.952144312581556,
+      "retained_NE_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_NE_country_ties": [],
+      "retained_whole_LSIB_CHN_interior": true,
+      "retained_whole_LSIB_CHN_boundary_ties": [],
+      "retained_original_country_classification": "CHN",
+      "unique_exact_native_OSM_hits": [
+        "osm:relation:2723223"
+      ],
+      "exact_native_OSM_boundary_ties": [],
+      "contrary_original_VNM_fine_interiors": [
+        "gb:VNM:ADM2:81297802B6357673458882"
+      ],
+      "contrary_original_VNM_fine_boundary_ties": [],
+      "all_original_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B84540832148656",
+          "source_index": 15319,
+          "owners": [],
+          "name": "Yunnan Province",
+          "family": "gb:CHN:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM2:81297802B6357673458882",
+          "source_index": 65820,
+          "owners": [
+            48535
+          ],
+          "name": "Vi Xuyen",
+          "family": "gb:VNM:ADM2"
+        }
+      ],
+      "current_canonical_fine_contacts": [],
+      "current_canonical_fine_boundary_ties": [],
+      "previous_NE_based_CHN_disposition": "blocked_for_proposed_CHN_target",
+      "previous_VNM_v1_native_result": "territorial_exclusion_cells",
+      "proposed_new_source_choice": "CHN, pending explicit bounded parent adoption",
+      "new_native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113989,
+        "x": 207352
+      },
+      "proposed_CHN_source_id": "osm:relation:2723223",
+      "proposed_CHN_target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "proposed_CHN_owner": 12076,
+      "proposed_county": "Malipo County",
+      "longitude": 104.73142970484349,
+      "latitude": 22.8420913922618,
+      "retained_NE_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_NE_country_ties": [],
+      "retained_whole_LSIB_CHN_interior": true,
+      "retained_whole_LSIB_CHN_boundary_ties": [],
+      "retained_original_country_classification": "CHN",
+      "unique_exact_native_OSM_hits": [
+        "osm:relation:2723223"
+      ],
+      "exact_native_OSM_boundary_ties": [],
+      "contrary_original_VNM_fine_interiors": [
+        "gb:VNM:ADM2:81297802B6357673458882"
+      ],
+      "contrary_original_VNM_fine_boundary_ties": [],
+      "all_original_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B84540832148656",
+          "source_index": 15319,
+          "owners": [],
+          "name": "Yunnan Province",
+          "family": "gb:CHN:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM2:81297802B6357673458882",
+          "source_index": 65820,
+          "owners": [
+            48535
+          ],
+          "name": "Vi Xuyen",
+          "family": "gb:VNM:ADM2"
+        }
+      ],
+      "current_canonical_fine_contacts": [],
+      "current_canonical_fine_boundary_ties": [],
+      "previous_NE_based_CHN_disposition": "blocked_for_proposed_CHN_target",
+      "previous_VNM_v1_native_result": "territorial_exclusion_cells",
+      "proposed_new_source_choice": "CHN, pending explicit bounded parent adoption",
+      "new_native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114199,
+        "x": 208760
+      },
+      "proposed_CHN_source_id": "osm:relation:2773868",
+      "proposed_CHN_target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "proposed_CHN_owner": 12167,
+      "proposed_county": "Longzhou County",
+      "longitude": 106.6648611948155,
+      "latitude": 22.57607990419722,
+      "retained_NE_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_NE_country_ties": [],
+      "retained_whole_LSIB_CHN_interior": true,
+      "retained_whole_LSIB_CHN_boundary_ties": [],
+      "retained_original_country_classification": "CHN",
+      "unique_exact_native_OSM_hits": [
+        "osm:relation:2773868"
+      ],
+      "exact_native_OSM_boundary_ties": [],
+      "contrary_original_VNM_fine_interiors": [
+        "gb:VNM:ADM2:81297802B75623207701482"
+      ],
+      "contrary_original_VNM_fine_boundary_ties": [],
+      "all_original_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B59914390554750",
+          "source_index": 15317,
+          "owners": [],
+          "name": "Guangxi Zhuang Autonomous Region",
+          "family": "gb:CHN:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM1:63759600B11108179203280",
+          "source_index": 65105,
+          "owners": [],
+          "name": "Cao Bằng",
+          "family": "gb:VNM:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM2:81297802B75623207701482",
+          "source_index": 65381,
+          "owners": [
+            48619
+          ],
+          "name": "Ha Lang",
+          "family": "gb:VNM:ADM2"
+        }
+      ],
+      "current_canonical_fine_contacts": [],
+      "current_canonical_fine_boundary_ties": [],
+      "previous_NE_based_CHN_disposition": "blocked_for_proposed_CHN_target",
+      "previous_VNM_v1_native_result": "territorial_exclusion_cells",
+      "proposed_new_source_choice": "CHN, pending explicit bounded parent adoption",
+      "new_native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114200,
+        "x": 208753
+      },
+      "proposed_CHN_source_id": "osm:relation:2773868",
+      "proposed_CHN_target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "proposed_CHN_owner": 12167,
+      "proposed_county": "Longzhou County",
+      "longitude": 106.6552489643966,
+      "latitude": 22.574811948261406,
+      "retained_NE_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_NE_country_ties": [],
+      "retained_whole_LSIB_CHN_interior": true,
+      "retained_whole_LSIB_CHN_boundary_ties": [],
+      "retained_original_country_classification": "CHN",
+      "unique_exact_native_OSM_hits": [
+        "osm:relation:2773868"
+      ],
+      "exact_native_OSM_boundary_ties": [],
+      "contrary_original_VNM_fine_interiors": [
+        "gb:VNM:ADM2:81297802B75623207701482"
+      ],
+      "contrary_original_VNM_fine_boundary_ties": [],
+      "all_original_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B59914390554750",
+          "source_index": 15317,
+          "owners": [],
+          "name": "Guangxi Zhuang Autonomous Region",
+          "family": "gb:CHN:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM1:63759600B11108179203280",
+          "source_index": 65105,
+          "owners": [],
+          "name": "Cao Bằng",
+          "family": "gb:VNM:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM2:81297802B75623207701482",
+          "source_index": 65381,
+          "owners": [
+            48619
+          ],
+          "name": "Ha Lang",
+          "family": "gb:VNM:ADM2"
+        }
+      ],
+      "current_canonical_fine_contacts": [],
+      "current_canonical_fine_boundary_ties": [],
+      "previous_NE_based_CHN_disposition": "blocked_for_proposed_CHN_target",
+      "previous_VNM_v1_native_result": "territorial_exclusion_cells",
+      "proposed_new_source_choice": "CHN, pending explicit bounded parent adoption",
+      "new_native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114200,
+        "x": 208754
+      },
+      "proposed_CHN_source_id": "osm:relation:2773868",
+      "proposed_CHN_target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "proposed_CHN_owner": 12167,
+      "proposed_county": "Longzhou County",
+      "longitude": 106.65662214017073,
+      "latitude": 22.574811948261406,
+      "retained_NE_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_NE_country_ties": [],
+      "retained_whole_LSIB_CHN_interior": true,
+      "retained_whole_LSIB_CHN_boundary_ties": [],
+      "retained_original_country_classification": "CHN",
+      "unique_exact_native_OSM_hits": [
+        "osm:relation:2773868"
+      ],
+      "exact_native_OSM_boundary_ties": [],
+      "contrary_original_VNM_fine_interiors": [
+        "gb:VNM:ADM2:81297802B75623207701482"
+      ],
+      "contrary_original_VNM_fine_boundary_ties": [],
+      "all_original_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B59914390554750",
+          "source_index": 15317,
+          "owners": [],
+          "name": "Guangxi Zhuang Autonomous Region",
+          "family": "gb:CHN:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM1:63759600B11108179203280",
+          "source_index": 65105,
+          "owners": [],
+          "name": "Cao Bằng",
+          "family": "gb:VNM:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM2:81297802B75623207701482",
+          "source_index": 65381,
+          "owners": [
+            48619
+          ],
+          "name": "Ha Lang",
+          "family": "gb:VNM:ADM2"
+        }
+      ],
+      "current_canonical_fine_contacts": [],
+      "current_canonical_fine_boundary_ties": [],
+      "previous_NE_based_CHN_disposition": "blocked_for_proposed_CHN_target",
+      "previous_VNM_v1_native_result": "territorial_exclusion_cells",
+      "proposed_new_source_choice": "CHN, pending explicit bounded parent adoption",
+      "new_native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114200,
+        "x": 208755
+      },
+      "proposed_CHN_source_id": "osm:relation:2773868",
+      "proposed_CHN_target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "proposed_CHN_owner": 12167,
+      "proposed_county": "Longzhou County",
+      "longitude": 106.65799531594485,
+      "latitude": 22.574811948261406,
+      "retained_NE_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_NE_country_ties": [],
+      "retained_whole_LSIB_CHN_interior": true,
+      "retained_whole_LSIB_CHN_boundary_ties": [],
+      "retained_original_country_classification": "CHN",
+      "unique_exact_native_OSM_hits": [
+        "osm:relation:2773868"
+      ],
+      "exact_native_OSM_boundary_ties": [],
+      "contrary_original_VNM_fine_interiors": [
+        "gb:VNM:ADM2:81297802B75623207701482"
+      ],
+      "contrary_original_VNM_fine_boundary_ties": [],
+      "all_original_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B59914390554750",
+          "source_index": 15317,
+          "owners": [],
+          "name": "Guangxi Zhuang Autonomous Region",
+          "family": "gb:CHN:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM1:63759600B11108179203280",
+          "source_index": 65105,
+          "owners": [],
+          "name": "Cao Bằng",
+          "family": "gb:VNM:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM2:81297802B75623207701482",
+          "source_index": 65381,
+          "owners": [
+            48619
+          ],
+          "name": "Ha Lang",
+          "family": "gb:VNM:ADM2"
+        }
+      ],
+      "current_canonical_fine_contacts": [],
+      "current_canonical_fine_boundary_ties": [],
+      "previous_NE_based_CHN_disposition": "blocked_for_proposed_CHN_target",
+      "previous_VNM_v1_native_result": "territorial_exclusion_cells",
+      "proposed_new_source_choice": "CHN, pending explicit bounded parent adoption",
+      "new_native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114200,
+        "x": 208756
+      },
+      "proposed_CHN_source_id": "osm:relation:2773868",
+      "proposed_CHN_target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "proposed_CHN_owner": 12167,
+      "proposed_county": "Longzhou County",
+      "longitude": 106.65936849171902,
+      "latitude": 22.574811948261406,
+      "retained_NE_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_NE_country_ties": [],
+      "retained_whole_LSIB_CHN_interior": true,
+      "retained_whole_LSIB_CHN_boundary_ties": [],
+      "retained_original_country_classification": "CHN",
+      "unique_exact_native_OSM_hits": [
+        "osm:relation:2773868"
+      ],
+      "exact_native_OSM_boundary_ties": [],
+      "contrary_original_VNM_fine_interiors": [
+        "gb:VNM:ADM2:81297802B75623207701482"
+      ],
+      "contrary_original_VNM_fine_boundary_ties": [],
+      "all_original_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B59914390554750",
+          "source_index": 15317,
+          "owners": [],
+          "name": "Guangxi Zhuang Autonomous Region",
+          "family": "gb:CHN:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM1:63759600B11108179203280",
+          "source_index": 65105,
+          "owners": [],
+          "name": "Cao Bằng",
+          "family": "gb:VNM:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM2:81297802B75623207701482",
+          "source_index": 65381,
+          "owners": [
+            48619
+          ],
+          "name": "Ha Lang",
+          "family": "gb:VNM:ADM2"
+        }
+      ],
+      "current_canonical_fine_contacts": [],
+      "current_canonical_fine_boundary_ties": [],
+      "previous_NE_based_CHN_disposition": "blocked_for_proposed_CHN_target",
+      "previous_VNM_v1_native_result": "territorial_exclusion_cells",
+      "proposed_new_source_choice": "CHN, pending explicit bounded parent adoption",
+      "new_native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114200,
+        "x": 208757
+      },
+      "proposed_CHN_source_id": "osm:relation:2773868",
+      "proposed_CHN_target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "proposed_CHN_owner": 12167,
+      "proposed_county": "Longzhou County",
+      "longitude": 106.66074166749314,
+      "latitude": 22.574811948261406,
+      "retained_NE_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_NE_country_ties": [],
+      "retained_whole_LSIB_CHN_interior": true,
+      "retained_whole_LSIB_CHN_boundary_ties": [],
+      "retained_original_country_classification": "CHN",
+      "unique_exact_native_OSM_hits": [
+        "osm:relation:2773868"
+      ],
+      "exact_native_OSM_boundary_ties": [],
+      "contrary_original_VNM_fine_interiors": [
+        "gb:VNM:ADM2:81297802B75623207701482"
+      ],
+      "contrary_original_VNM_fine_boundary_ties": [],
+      "all_original_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B59914390554750",
+          "source_index": 15317,
+          "owners": [],
+          "name": "Guangxi Zhuang Autonomous Region",
+          "family": "gb:CHN:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM1:63759600B11108179203280",
+          "source_index": 65105,
+          "owners": [],
+          "name": "Cao Bằng",
+          "family": "gb:VNM:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM2:81297802B75623207701482",
+          "source_index": 65381,
+          "owners": [
+            48619
+          ],
+          "name": "Ha Lang",
+          "family": "gb:VNM:ADM2"
+        }
+      ],
+      "current_canonical_fine_contacts": [],
+      "current_canonical_fine_boundary_ties": [],
+      "previous_NE_based_CHN_disposition": "blocked_for_proposed_CHN_target",
+      "previous_VNM_v1_native_result": "territorial_exclusion_cells",
+      "proposed_new_source_choice": "CHN, pending explicit bounded parent adoption",
+      "new_native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114200,
+        "x": 208758
+      },
+      "proposed_CHN_source_id": "osm:relation:2773868",
+      "proposed_CHN_target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "proposed_CHN_owner": 12167,
+      "proposed_county": "Longzhou County",
+      "longitude": 106.66211484326726,
+      "latitude": 22.574811948261406,
+      "retained_NE_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_NE_country_ties": [],
+      "retained_whole_LSIB_CHN_interior": true,
+      "retained_whole_LSIB_CHN_boundary_ties": [],
+      "retained_original_country_classification": "CHN",
+      "unique_exact_native_OSM_hits": [
+        "osm:relation:2773868"
+      ],
+      "exact_native_OSM_boundary_ties": [],
+      "contrary_original_VNM_fine_interiors": [
+        "gb:VNM:ADM2:81297802B75623207701482"
+      ],
+      "contrary_original_VNM_fine_boundary_ties": [],
+      "all_original_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B59914390554750",
+          "source_index": 15317,
+          "owners": [],
+          "name": "Guangxi Zhuang Autonomous Region",
+          "family": "gb:CHN:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM1:63759600B11108179203280",
+          "source_index": 65105,
+          "owners": [],
+          "name": "Cao Bằng",
+          "family": "gb:VNM:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM2:81297802B75623207701482",
+          "source_index": 65381,
+          "owners": [
+            48619
+          ],
+          "name": "Ha Lang",
+          "family": "gb:VNM:ADM2"
+        }
+      ],
+      "current_canonical_fine_contacts": [],
+      "current_canonical_fine_boundary_ties": [],
+      "previous_NE_based_CHN_disposition": "blocked_for_proposed_CHN_target",
+      "previous_VNM_v1_native_result": "territorial_exclusion_cells",
+      "proposed_new_source_choice": "CHN, pending explicit bounded parent adoption",
+      "new_native_qualification": false
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114173,
+        "x": 205644
+      },
+      "proposed_CHN_source_id": "osm:relation:2719413",
+      "proposed_CHN_target_id": "gb:CHN:ADM2:17275852B38063051407977",
+      "proposed_CHN_owner": 11930,
+      "proposed_county": "Lüchun County",
+      "longitude": 102.38604548263316,
+      "latitude": 22.609042662138076,
+      "retained_NE_country_hits": [
+        {
+          "ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam",
+          "ISO_A3_EH": "VNM"
+        }
+      ],
+      "retained_NE_country_ties": [],
+      "retained_whole_LSIB_CHN_interior": true,
+      "retained_whole_LSIB_CHN_boundary_ties": [],
+      "retained_original_country_classification": "CHN",
+      "unique_exact_native_OSM_hits": [
+        "osm:relation:2719413"
+      ],
+      "exact_native_OSM_boundary_ties": [],
+      "contrary_original_VNM_fine_interiors": [
+        "gb:VNM:ADM2:81297802B94651516294700"
+      ],
+      "contrary_original_VNM_fine_boundary_ties": [],
+      "all_original_contacts": [
+        {
+          "source_id": "gb:CHN:ADM1:43563684B84540832148656",
+          "source_index": 15319,
+          "owners": [],
+          "name": "Yunnan Province",
+          "family": "gb:CHN:ADM1"
+        },
+        {
+          "source_id": "gb:VNM:ADM2:81297802B94651516294700",
+          "source_index": 65530,
+          "owners": [
+            48755
+          ],
+          "name": "Muong Te",
+          "family": "gb:VNM:ADM2"
+        }
+      ],
+      "current_canonical_fine_contacts": [],
+      "current_canonical_fine_boundary_ties": [],
+      "previous_NE_based_CHN_disposition": "blocked_for_proposed_CHN_target",
+      "previous_VNM_v1_native_result": "territorial_exclusion_cells",
+      "proposed_new_source_choice": "CHN, pending explicit bounded parent adoption",
+      "new_native_qualification": false
+    }
+  ],
+  "input_pins": [
+    {
+      "commit": "643ff3e4448253e784ec17d8a85eadb0d44b155f",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/vnm17-v1-qualification-001/country-reference-conflict17.json",
+      "mode": "100644",
+      "git_blob_oid": "c03f51c9dc3b146aa9b010d4e58ed716d2300024",
+      "bytes": 26589,
+      "sha256": "97d264a9786d7e7ec6912fca3c27821b41173ee396317fd1ece7ebe1c8ca412e"
+    },
+    {
+      "commit": "4587fd821b40ff5e54f5b05ce228418b63f5b7b3",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/source-choice348-supported17-blocked.json",
+      "mode": "100644",
+      "git_blob_oid": "812be276f83659c250d80a5f9d77aaf710ec6434",
+      "bytes": 620603,
+      "sha256": "15f0a3368358a6696888cd82a4402c4f97a47683274482a66074ddd723c838f2"
+    },
+    {
+      "commit": "4587fd821b40ff5e54f5b05ce228418b63f5b7b3",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/scientific-source-choice-assessment.json",
+      "mode": "100644",
+      "git_blob_oid": "13c86eea70b9b2ac69f27fcf031cff74f08d74d6",
+      "bytes": 661488,
+      "sha256": "ad251207682c8a9080385bc246d5b257da07733c8383a623bd906d7f70301088"
+    },
+    {
+      "commit": "4587fd821b40ff5e54f5b05ce228418b63f5b7b3",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/full-country365-exact-native-observation.json",
+      "mode": "100644",
+      "git_blob_oid": "8fe35ab541ec5d4410cdcbee27f758b975d20ce8",
+      "bytes": 354254,
+      "sha256": "ed44a49fec93797b9bba24c3cba546b5a78d2a7313f38dfa2dae92b525124f03"
+    },
+    {
+      "commit": "4587fd821b40ff5e54f5b05ce228418b63f5b7b3",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine365-001/current-fine365-observation.json",
+      "mode": "100644",
+      "git_blob_oid": "3e302c0b2bbdade92555f10104373b8aca9c4951",
+      "bytes": 406578,
+      "sha256": "963f917f94e2e69144c6e091e76771e313d9b29995f987a1db18cf820408359a"
+    },
+    {
+      "commit": "4587fd821b40ff5e54f5b05ce228418b63f5b7b3",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine-independent-review/independent-current-competitor-delta-review.json",
+      "mode": "100644",
+      "git_blob_oid": "e2955de21728aaaaa319d42cf1520341ca8d7d37",
+      "bytes": 25177,
+      "sha256": "10c9073fbe0e75cbdc2f324f982e0a8644407abe87cda1a126d69645ecc56ef2"
+    },
+    {
+      "commit": "6ef487cd8f29e714dd10ae963d9fd58c41fd1b54",
+      "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/literal-CN-native-kernel-comparison.json",
+      "mode": "100644",
+      "git_blob_oid": "1f06945d8c4a016762a8ddb158516372ea8caadf",
+      "bytes": 436149,
+      "sha256": "d326aef83d771657a67a3e8abaf4ce6d0a583df328b10f29eff89a2a04457cf5"
+    },
+    {
+      "commit": "4587fd821b40ff5e54f5b05ce228418b63f5b7b3",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/whole-new-source-stage-inputs.json",
+      "mode": "100644",
+      "git_blob_oid": "ff12987f4bfb1df9fabc13e474614a4a31604ef0",
+      "bytes": 872634,
+      "sha256": "620c3aab733389f4511491ba5c1f916f22c9235188b6e00d6a20053ef1020988"
+    },
+    {
+      "commit": "f63c26ef357a062f084ce6ea01b2f7c6cd0d7586",
+      "path": "coordination/engineering/vietnam-chn365-source-update-20261016/physical-001/whole-target-support.json",
+      "mode": "100644",
+      "git_blob_oid": "4a58650b6c16469ab842f2d41b66f7fa3c1fceac",
+      "bytes": 861435,
+      "sha256": "a3b6e2d42f5f136bf1ed4c23d0e6ee388ffddaefeb069fc92a0c4ac9f8c5cd66"
+    }
+  ],
+  "method": "Read-only exact immutable Git input authentication and literal key joins; no geometric predicate or scientific producer executed for this proposal."
+}

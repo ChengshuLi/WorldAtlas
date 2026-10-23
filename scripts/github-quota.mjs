@@ -1,20 +1,16 @@
 // Quota failures are distinct from permission errors and ambiguous writes.
 export function quotaDelay(error, wallNow = Date.now()) {
-  // A local admission refusal is not an HTTP 403. Keep it distinct while
-  // allowing existing bounded recovery to wait for the observed window.
-  const admission=error?.quotaAdmission;
-  if(admission?.resource==='core'&&['limit','remaining','reset','minimum_remaining'].every(key=>Number.isSafeInteger(admission[key]))&&
-     admission.limit>0&&admission.remaining>=0&&admission.remaining<=admission.minimum_remaining&&
-     admission.minimum_remaining>=0&&admission.minimum_remaining<admission.limit&&admission.reset>0)
-    return Math.max(1000,admission.reset*1000-wallNow+1000);
   const row = error?.github;
   if (![403, 429].includes(row?.http_status)) return null;
   const seconds = Number(row.retry_after);
-  if (/^\d+$/.test(row.retry_after ?? '') && seconds > 0 && seconds <= 3600) return seconds * 1000 + 1000;
+  const retryAfter = /^\d+$/.test(row.retry_after ?? '') && seconds > 0 && seconds <= 3600
+    ? seconds * 1000 + 1000 : null;
   const reset = Number(row.rate_reset);
+  // Both signals can apply. A shorter secondary delay must not resume reads
+  // while the primary window is still exhausted (or vice versa).
   if (row.rate_remaining === '0' && /^\d+$/.test(row.rate_reset ?? '') && Number.isSafeInteger(reset))
-    return Math.max(1000, reset * 1000 - wallNow + 1000);
-  return null;
+    return Math.max(retryAfter ?? 0, 1000, reset * 1000 - wallNow + 1000);
+  return retryAfter;
 }
 export function requestCategory(route) {
   if (route === '/rate_limit') return 'generic-capacity';
@@ -43,7 +39,7 @@ export function requestAccounting(phase) {
     ...(first?{observed_repository_core:{first,last,lowest_remaining:lowest}}:{})};}};
 }
 export function copyAPIFeatures(target, source) {
-  for (const name of ['readRepositoryCapacity', 'prefetchGitBlobs', 'setHTTPAdmission', 'hasGitBlobs', 'artifactRedirect', 'jobLogRedirect', 'recovery'])
+  for (const name of ['prefetchGitBlobs', 'artifactRedirect', 'recovery'])
     if (typeof source[name] === 'function') target[name] = source[name].bind(source);
   return target;
 }

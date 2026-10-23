@@ -1,0 +1,26 @@
+{
+  "advertised_feature_count": 519,
+  "cohort": "administrative-registry",
+  "feature_count": 519,
+  "key": "gb:IDN:ADM2",
+  "metadata_sha256": "d013dc8421984003f0466cedb71895d3914882a5d7a544a41bf97144f811e36f",
+  "original_bytes": 11002896,
+  "original_metadata_file": "data/administrative-sources.json",
+  "original_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c",
+  "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+  "parts": [
+    {
+      "bytes": 3051391,
+      "hash_kind": "file-bytes",
+      "offset": 0,
+      "ordinal": 0,
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+      "uncompressed_bytes": 11002896,
+      "uncompressed_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+    }
+  ],
+  "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2_simplified.geojson",
+  "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+  "source_represented_year_claim": "2020"
+}

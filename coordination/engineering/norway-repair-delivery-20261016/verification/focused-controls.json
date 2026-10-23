@@ -1,0 +1,23 @@
+{
+  "runtime": "v24.19.0",
+  "command": "env -u NODE_PATH -u NODE_OPTIONS node --test test/source-target-native-delivery.test.mjs test/source-member-native-delivery.test.mjs test/source-target-native-diagnostic.test.mjs test/delivery-finalize-config.test.mjs test/delivery-registry-delta.test.mjs test/selected-delivery-smoke.test.mjs",
+  "test_files": [
+    "test/source-target-native-delivery.test.mjs",
+    "test/source-member-native-delivery.test.mjs",
+    "test/source-target-native-diagnostic.test.mjs",
+    "test/delivery-finalize-config.test.mjs",
+    "test/delivery-registry-delta.test.mjs",
+    "test/selected-delivery-smoke.test.mjs"
+  ],
+  "tests": 139,
+  "pass": 139,
+  "fail": 0,
+  "skipped": 0,
+  "duration_ms": 6628.40571,
+  "output_sha256": "af1592351a60ab7bee60c29d6100cf8d463e75df5ca1278ae1997bd3898d22fb",
+  "setup_recovery": [
+    "Initial run: two setup failures because @noble/hashes was absent in the sparse workspace. Five exact files of @noble/hashes 2.0.1, matching package-lock, were copied from an existing local accepted-work environment. No dependency download or lock change.",
+    "Second run: one setup failure because the native-row-latitudes.f64le.gz historical fixture was outside the sparse checkout. The exact HEAD Git blob was restored without changing its contents. The final complete six-file run passed."
+  ],
+  "limit": "Focused controls do not substitute for real hosted selected-native conservation and emitted consumer proof."
+}

@@ -1,3 +1,4 @@
+import {normativeLatitudeBytes} from './fixtures/native-latitudes.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {deriveSourceTargetNativeDelta,nativeRowLatitudes} from '../src/native-grid.js';
@@ -22,7 +23,7 @@ test('native-only default and affected historical contexts retain exact cells an
   const {pickOwnership}=await import('../src/pixel-ownership.js');
   const {applyAdditiveNativePatch,footprintValueSha256:hash,additiveReleaseFootprintDigest,
     effectiveFootprintBounds,nativeOnlyComponent,verifyAdditiveLedgerSelection}=await import('../src/effective-footprint.js');
-  const size=262166, raw=gunzipSync(fs.readFileSync('coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz'));
+  const size=262166, raw=gunzipSync(normativeLatitudeBytes());
   const latitudes=Float64Array.from({length:size},(_,i)=>raw.readDoubleLE(i*8));
   const rectangle=(a,b,c,d)=>({type:'Polygon',coordinates:[[[a,b],[c,b],[c,d],[a,d],[a,b]]]});
   const a=feature('A',1,rectangle(0,0,1,1)), b=feature('B',2,rectangle(2,0,3,1));

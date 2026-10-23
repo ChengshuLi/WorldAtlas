@@ -1,0 +1,18 @@
+{
+  "method_commit": "49c0dc2b4b5cba2a87dc0969aa313e16ca62c529",
+  "observed_error": "Expected requested-owner count112 was wrong; the complete prior source-fitness hold also removes every one of Pinamar's three original keys.",
+  "correct_counts": {
+    "native_requested_keys": 23721,
+    "native_requested_owners": 111,
+    "whole_held_owners": [
+      7,
+      8100,
+      8196,
+      8259
+    ]
+  },
+  "limits": [
+    "The attempt stopped before any native config or native authority output.",
+    "No source, physical, original key or hold was changed. Expected inventory counts were corrected from the exact original key set, preserving the prior complete hold."
+  ]
+}

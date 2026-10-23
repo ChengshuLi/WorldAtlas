@@ -1,0 +1,2912 @@
+{
+  "kind": "exact19-actual-foreign-ADM-conflict-source-choice-request",
+  "count": 19,
+  "source_only": true,
+  "source": {
+    "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+    "producer": "Myanmar Information Management Unit (MIMU)",
+    "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+    "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+    "local_pdf": "MIMU2020-Paletwa.pdf",
+    "bytes": 9057135,
+    "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+    "printed_production_date": "2020-04-20",
+    "map_id": "MIMU154v05",
+    "projection_datum": "Geographic/WGS84",
+    "boundary_source_printed": "MIMU",
+    "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+    "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+  },
+  "requirements": "Consequentially review exact panels. If supported, explicitly choose this dated township border depiction over every contrary actual administrative/reference input listed per key, retaining raw contacts/pins as contextual disagreement. No country, state-name or administrative-level blanket priority.",
+  "native_accepted_repairs": 0,
+  "cleared_holds": 0,
+  "points": [
+    {
+      "local_index": 16,
+      "owner": 30078,
+      "y": 114534,
+      "x": 198589,
+      "original_interval": 1558,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1433/runs/0"
+      },
+      "inside": [
+        0,
+        12
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 92.69829039616121,
+      "longitude_exact_rational": "12151170/131083",
+      "latitude_degrees_north": 22.15066522453617,
+      "latitude_native_f64le_hex": "000704ff91263640",
+      "registered_pdf_point": [
+        275.00238558514684,
+        2368.6653361608805
+      ],
+      "render_scale1_pixel": [
+        275,
+        223
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        204,
+        206,
+        182
+      ],
+      "name": "Paletwa",
+      "review_order_rank": 0,
+      "source_point_interpretation": "Registered centre is depicted on the named Paletwa/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Paletwa-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India/Bangladesh country labels and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 72,
+          "boundary": 0
+        },
+        {
+          "index": 12,
+          "hash": "f40897948af42fd815e640ad8663ca4de6a061e9282dd192fab7fc7560297cc3",
+          "registry_index": 12,
+          "id": "gb:IND:ADM3:7132399B73294925645165",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4044",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 30,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70790,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B73294925645165",
+            "ordinal": 4044,
+            "owners": [],
+            "name": "Lawngtlai",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Paletwa.pdf",
+        "bytes": 9057135,
+        "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1387.5578972952578,
+          "intercept_points": -128349.2425193775,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.11117935176298488,
+          "rms_residual_pdf_points": 0.06695843979267092,
+          "alternating_label_holdout_max_pdf_points": 0.13209152221679688
+        },
+        "N": {
+          "slope_points_per_degree": 1387.6000793456988,
+          "intercept_points": -28367.59948696552,
+          "controls": 18,
+          "distinct_label_values": 9,
+          "max_residual_pdf_points": 0.10781521268290817,
+          "rms_residual_pdf_points": 0.063140020705772,
+          "alternating_label_holdout_max_pdf_points": 0.127536010761105
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            92.66666666666667,
+            93.66666666666667
+          ],
+          "target_degrees": 92.69829039616121,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            20.833333333333332,
+            22.166666666666668
+          ],
+          "target_degrees": 22.15066522453617,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Paletwa-016.png",
+      "review_contact_sheet": "105-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 26,
+      "owner": 30078,
+      "y": 114535,
+      "x": 198589,
+      "original_interval": 1562,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1434/runs/0"
+      },
+      "inside": [
+        12
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 92.69829039616121,
+      "longitude_exact_rational": "12151170/131083",
+      "latitude_degrees_north": 22.14939338945325,
+      "latitude_native_f64le_hex": "b8f029a53e263640",
+      "registered_pdf_point": [
+        275.00238558514684,
+        2366.900537698908
+      ],
+      "render_scale1_pixel": [
+        275,
+        225
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        221,
+        223,
+        199
+      ],
+      "name": "Paletwa",
+      "review_order_rank": 1,
+      "source_point_interpretation": "Registered centre is depicted on the named Paletwa/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Paletwa-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India/Bangladesh country labels and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 12,
+          "hash": "f40897948af42fd815e640ad8663ca4de6a061e9282dd192fab7fc7560297cc3",
+          "registry_index": 12,
+          "id": "gb:IND:ADM3:7132399B73294925645165",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4044",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 30,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70790,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B73294925645165",
+            "ordinal": 4044,
+            "owners": [],
+            "name": "Lawngtlai",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Paletwa.pdf",
+        "bytes": 9057135,
+        "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1387.5578972952578,
+          "intercept_points": -128349.2425193775,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.11117935176298488,
+          "rms_residual_pdf_points": 0.06695843979267092,
+          "alternating_label_holdout_max_pdf_points": 0.13209152221679688
+        },
+        "N": {
+          "slope_points_per_degree": 1387.6000793456988,
+          "intercept_points": -28367.59948696552,
+          "controls": 18,
+          "distinct_label_values": 9,
+          "max_residual_pdf_points": 0.10781521268290817,
+          "rms_residual_pdf_points": 0.063140020705772,
+          "alternating_label_holdout_max_pdf_points": 0.127536010761105
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            92.66666666666667,
+            93.66666666666667
+          ],
+          "target_degrees": 92.69829039616121,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            20.833333333333332,
+            22.166666666666668
+          ],
+          "target_degrees": 22.14939338945325,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Paletwa-026.png",
+      "review_contact_sheet": "105-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 45,
+      "owner": 30078,
+      "y": 114572,
+      "x": 198814,
+      "original_interval": 1593,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1467/runs/1"
+      },
+      "inside": [
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.00725494533998,
+      "longitude_exact_rational": "12191670/131083",
+      "latitude_degrees_north": 22.10232741676722,
+      "latitude_native_f64le_hex": "d77f2c21321a3640",
+      "registered_pdf_point": [
+        703.7085857824131,
+        2301.591790265291
+      ],
+      "render_scale1_pixel": [
+        704,
+        290
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        168,
+        170,
+        146
+      ],
+      "name": "Paletwa",
+      "review_order_rank": 2,
+      "source_point_interpretation": "Registered centre is depicted on the named Paletwa/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Paletwa-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India/Bangladesh country labels and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 9,
+          "hash": "28cf256580ccd0fea94e98ccbf0af695920637676e401f99d5600d0e1236aa14",
+          "registry_index": 9,
+          "id": "gb:IND:ADM3:7132399B89986450073812",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4022",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 25,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70768,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B89986450073812",
+            "ordinal": 4022,
+            "owners": [],
+            "name": "Tuipang",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Paletwa.pdf",
+        "bytes": 9057135,
+        "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1387.5578972952578,
+          "intercept_points": -128349.2425193775,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.11117935176298488,
+          "rms_residual_pdf_points": 0.06695843979267092,
+          "alternating_label_holdout_max_pdf_points": 0.13209152221679688
+        },
+        "N": {
+          "slope_points_per_degree": 1387.6000793456988,
+          "intercept_points": -28367.59948696552,
+          "controls": 18,
+          "distinct_label_values": 9,
+          "max_residual_pdf_points": 0.10781521268290817,
+          "rms_residual_pdf_points": 0.063140020705772,
+          "alternating_label_holdout_max_pdf_points": 0.127536010761105
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            92.66666666666667,
+            93.66666666666667
+          ],
+          "target_degrees": 93.00725494533998,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            20.833333333333332,
+            22.166666666666668
+          ],
+          "target_degrees": 22.10232741676722,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Paletwa-045.png",
+      "review_contact_sheet": "105-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 10,
+      "owner": 30078,
+      "y": 114533,
+      "x": 198589,
+      "original_interval": 1555,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1432/runs/0"
+      },
+      "inside": [
+        0,
+        12
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 92.69829039616121,
+      "longitude_exact_rational": "12151170/131083",
+      "latitude_degrees_north": 22.151937048126342,
+      "latitude_native_f64le_hex": "e0c0ac58e5263640",
+      "registered_pdf_point": [
+        275.00238558514684,
+        2370.4301186755183
+      ],
+      "render_scale1_pixel": [
+        275,
+        222
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        206,
+        208,
+        184
+      ],
+      "name": "Paletwa",
+      "review_order_rank": 3,
+      "source_point_interpretation": "Registered centre is depicted on the named Paletwa/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Paletwa-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India/Bangladesh country labels and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 72,
+          "boundary": 0
+        },
+        {
+          "index": 12,
+          "hash": "f40897948af42fd815e640ad8663ca4de6a061e9282dd192fab7fc7560297cc3",
+          "registry_index": 12,
+          "id": "gb:IND:ADM3:7132399B73294925645165",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4044",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 30,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70790,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B73294925645165",
+            "ordinal": 4044,
+            "owners": [],
+            "name": "Lawngtlai",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Paletwa.pdf",
+        "bytes": 9057135,
+        "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1387.5578972952578,
+          "intercept_points": -128349.2425193775,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.11117935176298488,
+          "rms_residual_pdf_points": 0.06695843979267092,
+          "alternating_label_holdout_max_pdf_points": 0.13209152221679688
+        },
+        "N": {
+          "slope_points_per_degree": 1387.6000793456988,
+          "intercept_points": -28367.59948696552,
+          "controls": 18,
+          "distinct_label_values": 9,
+          "max_residual_pdf_points": 0.10781521268290817,
+          "rms_residual_pdf_points": 0.063140020705772,
+          "alternating_label_holdout_max_pdf_points": 0.127536010761105
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            92.66666666666667,
+            93.66666666666667
+          ],
+          "target_degrees": 92.69829039616121,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            20.833333333333332,
+            22.166666666666668
+          ],
+          "target_degrees": 22.151937048126342,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Paletwa-010.png",
+      "review_contact_sheet": "105-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 17,
+      "owner": 30078,
+      "y": 114534,
+      "x": 198590,
+      "original_interval": 1558,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1433/runs/0"
+      },
+      "inside": [
+        0,
+        12
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 92.69966357193533,
+      "longitude_exact_rational": "12151350/131083",
+      "latitude_degrees_north": 22.15066522453617,
+      "latitude_native_f64le_hex": "000704ff91263640",
+      "registered_pdf_point": [
+        276.9077464748989,
+        2368.6653361608805
+      ],
+      "render_scale1_pixel": [
+        277,
+        223
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        203,
+        205,
+        181
+      ],
+      "name": "Paletwa",
+      "review_order_rank": 4,
+      "source_point_interpretation": "Registered centre is depicted on the named Paletwa/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Paletwa-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India/Bangladesh country labels and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 72,
+          "boundary": 0
+        },
+        {
+          "index": 12,
+          "hash": "f40897948af42fd815e640ad8663ca4de6a061e9282dd192fab7fc7560297cc3",
+          "registry_index": 12,
+          "id": "gb:IND:ADM3:7132399B73294925645165",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4044",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 30,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70790,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B73294925645165",
+            "ordinal": 4044,
+            "owners": [],
+            "name": "Lawngtlai",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Paletwa.pdf",
+        "bytes": 9057135,
+        "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1387.5578972952578,
+          "intercept_points": -128349.2425193775,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.11117935176298488,
+          "rms_residual_pdf_points": 0.06695843979267092,
+          "alternating_label_holdout_max_pdf_points": 0.13209152221679688
+        },
+        "N": {
+          "slope_points_per_degree": 1387.6000793456988,
+          "intercept_points": -28367.59948696552,
+          "controls": 18,
+          "distinct_label_values": 9,
+          "max_residual_pdf_points": 0.10781521268290817,
+          "rms_residual_pdf_points": 0.063140020705772,
+          "alternating_label_holdout_max_pdf_points": 0.127536010761105
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            92.66666666666667,
+            93.66666666666667
+          ],
+          "target_degrees": 92.69966357193533,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            20.833333333333332,
+            22.166666666666668
+          ],
+          "target_degrees": 22.15066522453617,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Paletwa-017.png",
+      "review_contact_sheet": "105-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 41,
+      "owner": 30078,
+      "y": 114571,
+      "x": 198814,
+      "original_interval": 1590,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1466/runs/0"
+      },
+      "inside": [
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.00725494533998,
+      "longitude_exact_rational": "12191670/131083",
+      "latitude_degrees_north": 22.103599676713863,
+      "latitude_native_f64le_hex": "ba5c2782851a3640",
+      "registered_pdf_point": [
+        703.7085857824131,
+        2303.3571782681975
+      ],
+      "render_scale1_pixel": [
+        704,
+        289
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        167,
+        169,
+        145
+      ],
+      "name": "Paletwa",
+      "review_order_rank": 5,
+      "source_point_interpretation": "Registered centre is depicted on the named Paletwa/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Paletwa-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India/Bangladesh country labels and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 9,
+          "hash": "28cf256580ccd0fea94e98ccbf0af695920637676e401f99d5600d0e1236aa14",
+          "registry_index": 9,
+          "id": "gb:IND:ADM3:7132399B89986450073812",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4022",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 25,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70768,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B89986450073812",
+            "ordinal": 4022,
+            "owners": [],
+            "name": "Tuipang",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Paletwa.pdf",
+        "bytes": 9057135,
+        "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1387.5578972952578,
+          "intercept_points": -128349.2425193775,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.11117935176298488,
+          "rms_residual_pdf_points": 0.06695843979267092,
+          "alternating_label_holdout_max_pdf_points": 0.13209152221679688
+        },
+        "N": {
+          "slope_points_per_degree": 1387.6000793456988,
+          "intercept_points": -28367.59948696552,
+          "controls": 18,
+          "distinct_label_values": 9,
+          "max_residual_pdf_points": 0.10781521268290817,
+          "rms_residual_pdf_points": 0.063140020705772,
+          "alternating_label_holdout_max_pdf_points": 0.127536010761105
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            92.66666666666667,
+            93.66666666666667
+          ],
+          "target_degrees": 93.00725494533998,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            20.833333333333332,
+            22.166666666666668
+          ],
+          "target_degrees": 22.103599676713863,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Paletwa-041.png",
+      "review_contact_sheet": "105-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 47,
+      "owner": 30078,
+      "y": 114573,
+      "x": 198814,
+      "original_interval": 1595,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1468/runs/1"
+      },
+      "inside": [
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.00725494533998,
+      "longitude_exact_rational": "12191670/131083",
+      "latitude_degrees_north": 22.101055145347736,
+      "latitude_native_f64le_hex": "6e5c00c0de193640",
+      "registered_pdf_point": [
+        703.7085857824131,
+        2299.8263863426655
+      ],
+      "render_scale1_pixel": [
+        704,
+        292
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        172,
+        174,
+        150
+      ],
+      "name": "Paletwa",
+      "review_order_rank": 6,
+      "source_point_interpretation": "Registered centre is depicted on the named Paletwa/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Paletwa-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India/Bangladesh country labels and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 9,
+          "hash": "28cf256580ccd0fea94e98ccbf0af695920637676e401f99d5600d0e1236aa14",
+          "registry_index": 9,
+          "id": "gb:IND:ADM3:7132399B89986450073812",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4022",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 25,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70768,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B89986450073812",
+            "ordinal": 4022,
+            "owners": [],
+            "name": "Tuipang",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Paletwa.pdf",
+        "bytes": 9057135,
+        "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1387.5578972952578,
+          "intercept_points": -128349.2425193775,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.11117935176298488,
+          "rms_residual_pdf_points": 0.06695843979267092,
+          "alternating_label_holdout_max_pdf_points": 0.13209152221679688
+        },
+        "N": {
+          "slope_points_per_degree": 1387.6000793456988,
+          "intercept_points": -28367.59948696552,
+          "controls": 18,
+          "distinct_label_values": 9,
+          "max_residual_pdf_points": 0.10781521268290817,
+          "rms_residual_pdf_points": 0.063140020705772,
+          "alternating_label_holdout_max_pdf_points": 0.127536010761105
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            92.66666666666667,
+            93.66666666666667
+          ],
+          "target_degrees": 93.00725494533998,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            20.833333333333332,
+            22.166666666666668
+          ],
+          "target_degrees": 22.101055145347736,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Paletwa-047.png",
+      "review_contact_sheet": "105-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 11,
+      "owner": 30078,
+      "y": 114533,
+      "x": 198590,
+      "original_interval": 1555,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1432/runs/0"
+      },
+      "inside": [
+        0,
+        12
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 92.69966357193533,
+      "longitude_exact_rational": "12151350/131083",
+      "latitude_degrees_north": 22.151937048126342,
+      "latitude_native_f64le_hex": "e0c0ac58e5263640",
+      "registered_pdf_point": [
+        276.9077464748989,
+        2370.4301186755183
+      ],
+      "render_scale1_pixel": [
+        277,
+        222
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        187,
+        189,
+        165
+      ],
+      "name": "Paletwa",
+      "review_order_rank": 7,
+      "source_point_interpretation": "Registered centre is depicted on the named Paletwa/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Paletwa-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India/Bangladesh country labels and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 72,
+          "boundary": 0
+        },
+        {
+          "index": 12,
+          "hash": "f40897948af42fd815e640ad8663ca4de6a061e9282dd192fab7fc7560297cc3",
+          "registry_index": 12,
+          "id": "gb:IND:ADM3:7132399B73294925645165",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4044",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 30,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70790,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B73294925645165",
+            "ordinal": 4044,
+            "owners": [],
+            "name": "Lawngtlai",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Paletwa.pdf",
+        "bytes": 9057135,
+        "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1387.5578972952578,
+          "intercept_points": -128349.2425193775,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.11117935176298488,
+          "rms_residual_pdf_points": 0.06695843979267092,
+          "alternating_label_holdout_max_pdf_points": 0.13209152221679688
+        },
+        "N": {
+          "slope_points_per_degree": 1387.6000793456988,
+          "intercept_points": -28367.59948696552,
+          "controls": 18,
+          "distinct_label_values": 9,
+          "max_residual_pdf_points": 0.10781521268290817,
+          "rms_residual_pdf_points": 0.063140020705772,
+          "alternating_label_holdout_max_pdf_points": 0.127536010761105
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            92.66666666666667,
+            93.66666666666667
+          ],
+          "target_degrees": 92.69966357193533,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            20.833333333333332,
+            22.166666666666668
+          ],
+          "target_degrees": 22.151937048126342,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Paletwa-011.png",
+      "review_contact_sheet": "105-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 15,
+      "owner": 30078,
+      "y": 114534,
+      "x": 198588,
+      "original_interval": 1557,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1433/runs/0"
+      },
+      "inside": [
+        10
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 92.69691722038708,
+      "longitude_exact_rational": "12150990/131083",
+      "latitude_degrees_north": 22.15066522453617,
+      "latitude_native_f64le_hex": "000704ff91263640",
+      "registered_pdf_point": [
+        273.0970246953657,
+        2368.6653361608805
+      ],
+      "render_scale1_pixel": [
+        273,
+        223
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        210,
+        212,
+        188
+      ],
+      "name": "Paletwa",
+      "review_order_rank": 8,
+      "source_point_interpretation": "Registered centre is depicted on the named Paletwa/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Paletwa-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India/Bangladesh country labels and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 10,
+          "hash": "9753f237cd1a355c2ad3e38139561b288d03db809f8c6d21e25998613b2ebc03",
+          "registry_index": 10,
+          "id": "gb:IND:ADM3:7132399B23395447529424",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4030",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 12,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70776,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B23395447529424",
+            "ordinal": 4030,
+            "owners": [],
+            "name": "S' Bungtlang",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Paletwa.pdf",
+        "bytes": 9057135,
+        "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1387.5578972952578,
+          "intercept_points": -128349.2425193775,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.11117935176298488,
+          "rms_residual_pdf_points": 0.06695843979267092,
+          "alternating_label_holdout_max_pdf_points": 0.13209152221679688
+        },
+        "N": {
+          "slope_points_per_degree": 1387.6000793456988,
+          "intercept_points": -28367.59948696552,
+          "controls": 18,
+          "distinct_label_values": 9,
+          "max_residual_pdf_points": 0.10781521268290817,
+          "rms_residual_pdf_points": 0.063140020705772,
+          "alternating_label_holdout_max_pdf_points": 0.127536010761105
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            92.66666666666667,
+            93.66666666666667
+          ],
+          "target_degrees": 92.69691722038708,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            20.833333333333332,
+            22.166666666666668
+          ],
+          "target_degrees": 22.15066522453617,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Paletwa-015.png",
+      "review_contact_sheet": "105-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 42,
+      "owner": 30078,
+      "y": 114571,
+      "x": 198815,
+      "original_interval": 1590,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1466/runs/0"
+      },
+      "inside": [
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.0086281211141,
+      "longitude_exact_rational": "12191850/131083",
+      "latitude_degrees_north": 22.103599676713863,
+      "latitude_native_f64le_hex": "ba5c2782851a3640",
+      "registered_pdf_point": [
+        705.6139466721652,
+        2303.3571782681975
+      ],
+      "render_scale1_pixel": [
+        706,
+        289
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        161,
+        163,
+        139
+      ],
+      "name": "Paletwa",
+      "review_order_rank": 9,
+      "source_point_interpretation": "Registered centre is depicted on the named Paletwa/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Paletwa-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India/Bangladesh country labels and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 9,
+          "hash": "28cf256580ccd0fea94e98ccbf0af695920637676e401f99d5600d0e1236aa14",
+          "registry_index": 9,
+          "id": "gb:IND:ADM3:7132399B89986450073812",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4022",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 25,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70768,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B89986450073812",
+            "ordinal": 4022,
+            "owners": [],
+            "name": "Tuipang",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Paletwa.pdf",
+        "bytes": 9057135,
+        "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1387.5578972952578,
+          "intercept_points": -128349.2425193775,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.11117935176298488,
+          "rms_residual_pdf_points": 0.06695843979267092,
+          "alternating_label_holdout_max_pdf_points": 0.13209152221679688
+        },
+        "N": {
+          "slope_points_per_degree": 1387.6000793456988,
+          "intercept_points": -28367.59948696552,
+          "controls": 18,
+          "distinct_label_values": 9,
+          "max_residual_pdf_points": 0.10781521268290817,
+          "rms_residual_pdf_points": 0.063140020705772,
+          "alternating_label_holdout_max_pdf_points": 0.127536010761105
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            92.66666666666667,
+            93.66666666666667
+          ],
+          "target_degrees": 93.0086281211141,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            20.833333333333332,
+            22.166666666666668
+          ],
+          "target_degrees": 22.103599676713863,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Paletwa-042.png",
+      "review_contact_sheet": "105-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 49,
+      "owner": 30078,
+      "y": 114574,
+      "x": 198814,
+      "original_interval": 1598,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1469/runs/1"
+      },
+      "inside": [
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.00725494533998,
+      "longitude_exact_rational": "12191670/131083",
+      "latitude_degrees_north": 22.09978286245591,
+      "latitude_native_f64le_hex": "0cf3a25e8b193640",
+      "registered_pdf_point": [
+        703.7085857824131,
+        2298.060966501016
+      ],
+      "render_scale1_pixel": [
+        704,
+        294
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        187,
+        189,
+        165
+      ],
+      "name": "Paletwa",
+      "review_order_rank": 10,
+      "source_point_interpretation": "Registered centre is depicted on the named Paletwa/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Paletwa-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India/Bangladesh country labels and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 9,
+          "hash": "28cf256580ccd0fea94e98ccbf0af695920637676e401f99d5600d0e1236aa14",
+          "registry_index": 9,
+          "id": "gb:IND:ADM3:7132399B89986450073812",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4022",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 25,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70768,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B89986450073812",
+            "ordinal": 4022,
+            "owners": [],
+            "name": "Tuipang",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Paletwa.pdf",
+        "bytes": 9057135,
+        "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1387.5578972952578,
+          "intercept_points": -128349.2425193775,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.11117935176298488,
+          "rms_residual_pdf_points": 0.06695843979267092,
+          "alternating_label_holdout_max_pdf_points": 0.13209152221679688
+        },
+        "N": {
+          "slope_points_per_degree": 1387.6000793456988,
+          "intercept_points": -28367.59948696552,
+          "controls": 18,
+          "distinct_label_values": 9,
+          "max_residual_pdf_points": 0.10781521268290817,
+          "rms_residual_pdf_points": 0.063140020705772,
+          "alternating_label_holdout_max_pdf_points": 0.127536010761105
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            92.66666666666667,
+            93.66666666666667
+          ],
+          "target_degrees": 93.00725494533998,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            20.833333333333332,
+            22.166666666666668
+          ],
+          "target_degrees": 22.09978286245591,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Paletwa-049.png",
+      "review_contact_sheet": "105-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 9,
+      "owner": 30078,
+      "y": 114533,
+      "x": 198588,
+      "original_interval": 1554,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1432/runs/0"
+      },
+      "inside": [
+        0,
+        10
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 92.69691722038708,
+      "longitude_exact_rational": "12150990/131083",
+      "latitude_degrees_north": 22.151937048126342,
+      "latitude_native_f64le_hex": "e0c0ac58e5263640",
+      "registered_pdf_point": [
+        273.0970246953657,
+        2370.4301186755183
+      ],
+      "render_scale1_pixel": [
+        273,
+        222
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        213,
+        215,
+        191
+      ],
+      "name": "Paletwa",
+      "review_order_rank": 11,
+      "source_point_interpretation": "Registered centre is depicted on the named Paletwa/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Paletwa-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India/Bangladesh country labels and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 72,
+          "boundary": 0
+        },
+        {
+          "index": 10,
+          "hash": "9753f237cd1a355c2ad3e38139561b288d03db809f8c6d21e25998613b2ebc03",
+          "registry_index": 10,
+          "id": "gb:IND:ADM3:7132399B23395447529424",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4030",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 12,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70776,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B23395447529424",
+            "ordinal": 4030,
+            "owners": [],
+            "name": "S' Bungtlang",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Paletwa.pdf",
+        "bytes": 9057135,
+        "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1387.5578972952578,
+          "intercept_points": -128349.2425193775,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.11117935176298488,
+          "rms_residual_pdf_points": 0.06695843979267092,
+          "alternating_label_holdout_max_pdf_points": 0.13209152221679688
+        },
+        "N": {
+          "slope_points_per_degree": 1387.6000793456988,
+          "intercept_points": -28367.59948696552,
+          "controls": 18,
+          "distinct_label_values": 9,
+          "max_residual_pdf_points": 0.10781521268290817,
+          "rms_residual_pdf_points": 0.063140020705772,
+          "alternating_label_holdout_max_pdf_points": 0.127536010761105
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            92.66666666666667,
+            93.66666666666667
+          ],
+          "target_degrees": 92.69691722038708,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            20.833333333333332,
+            22.166666666666668
+          ],
+          "target_degrees": 22.151937048126342,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Paletwa-009.png",
+      "review_contact_sheet": "105-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 25,
+      "owner": 30078,
+      "y": 114535,
+      "x": 198588,
+      "original_interval": 1562,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1434/runs/0"
+      },
+      "inside": [
+        12
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 92.69691722038708,
+      "longitude_exact_rational": "12150990/131083",
+      "latitude_degrees_north": 22.14939338945325,
+      "latitude_native_f64le_hex": "b8f029a53e263640",
+      "registered_pdf_point": [
+        273.0970246953657,
+        2366.900537698908
+      ],
+      "render_scale1_pixel": [
+        273,
+        225
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        202,
+        204,
+        180
+      ],
+      "name": "Paletwa",
+      "review_order_rank": 12,
+      "source_point_interpretation": "Registered centre is depicted on the named Paletwa/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Paletwa-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India/Bangladesh country labels and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 12,
+          "hash": "f40897948af42fd815e640ad8663ca4de6a061e9282dd192fab7fc7560297cc3",
+          "registry_index": 12,
+          "id": "gb:IND:ADM3:7132399B73294925645165",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4044",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 30,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70790,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B73294925645165",
+            "ordinal": 4044,
+            "owners": [],
+            "name": "Lawngtlai",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Paletwa.pdf",
+        "bytes": 9057135,
+        "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1387.5578972952578,
+          "intercept_points": -128349.2425193775,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.11117935176298488,
+          "rms_residual_pdf_points": 0.06695843979267092,
+          "alternating_label_holdout_max_pdf_points": 0.13209152221679688
+        },
+        "N": {
+          "slope_points_per_degree": 1387.6000793456988,
+          "intercept_points": -28367.59948696552,
+          "controls": 18,
+          "distinct_label_values": 9,
+          "max_residual_pdf_points": 0.10781521268290817,
+          "rms_residual_pdf_points": 0.063140020705772,
+          "alternating_label_holdout_max_pdf_points": 0.127536010761105
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            92.66666666666667,
+            93.66666666666667
+          ],
+          "target_degrees": 92.69691722038708,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            20.833333333333332,
+            22.166666666666668
+          ],
+          "target_degrees": 22.14939338945325,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Paletwa-025.png",
+      "review_contact_sheet": "105-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 18,
+      "owner": 30078,
+      "y": 114534,
+      "x": 198591,
+      "original_interval": 1558,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1433/runs/0"
+      },
+      "inside": [
+        0,
+        12
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 92.70103674770947,
+      "longitude_exact_rational": "12151530/131083",
+      "latitude_degrees_north": 22.15066522453617,
+      "latitude_native_f64le_hex": "000704ff91263640",
+      "registered_pdf_point": [
+        278.81310736468004,
+        2368.6653361608805
+      ],
+      "render_scale1_pixel": [
+        279,
+        223
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        193,
+        195,
+        172
+      ],
+      "name": "Paletwa",
+      "review_order_rank": 13,
+      "source_point_interpretation": "Registered centre is depicted on the named Paletwa/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Paletwa-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India/Bangladesh country labels and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 72,
+          "boundary": 0
+        },
+        {
+          "index": 12,
+          "hash": "f40897948af42fd815e640ad8663ca4de6a061e9282dd192fab7fc7560297cc3",
+          "registry_index": 12,
+          "id": "gb:IND:ADM3:7132399B73294925645165",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4044",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 30,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70790,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B73294925645165",
+            "ordinal": 4044,
+            "owners": [],
+            "name": "Lawngtlai",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Paletwa.pdf",
+        "bytes": 9057135,
+        "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1387.5578972952578,
+          "intercept_points": -128349.2425193775,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.11117935176298488,
+          "rms_residual_pdf_points": 0.06695843979267092,
+          "alternating_label_holdout_max_pdf_points": 0.13209152221679688
+        },
+        "N": {
+          "slope_points_per_degree": 1387.6000793456988,
+          "intercept_points": -28367.59948696552,
+          "controls": 18,
+          "distinct_label_values": 9,
+          "max_residual_pdf_points": 0.10781521268290817,
+          "rms_residual_pdf_points": 0.063140020705772,
+          "alternating_label_holdout_max_pdf_points": 0.127536010761105
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            92.66666666666667,
+            93.66666666666667
+          ],
+          "target_degrees": 92.70103674770947,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            20.833333333333332,
+            22.166666666666668
+          ],
+          "target_degrees": 22.15066522453617,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Paletwa-018.png",
+      "review_contact_sheet": "105-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 40,
+      "owner": 30078,
+      "y": 114571,
+      "x": 198813,
+      "original_interval": 1590,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1466/runs/0"
+      },
+      "inside": [
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.00588176956585,
+      "longitude_exact_rational": "12191490/131083",
+      "latitude_degrees_north": 22.103599676713863,
+      "latitude_native_f64le_hex": "ba5c2782851a3640",
+      "registered_pdf_point": [
+        701.8032248926465,
+        2303.3571782681975
+      ],
+      "render_scale1_pixel": [
+        702,
+        289
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        164,
+        166,
+        142
+      ],
+      "name": "Paletwa",
+      "review_order_rank": 14,
+      "source_point_interpretation": "Registered centre is depicted on the named Paletwa/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Paletwa-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India/Bangladesh country labels and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 9,
+          "hash": "28cf256580ccd0fea94e98ccbf0af695920637676e401f99d5600d0e1236aa14",
+          "registry_index": 9,
+          "id": "gb:IND:ADM3:7132399B89986450073812",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4022",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 25,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70768,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B89986450073812",
+            "ordinal": 4022,
+            "owners": [],
+            "name": "Tuipang",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Paletwa.pdf",
+        "bytes": 9057135,
+        "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1387.5578972952578,
+          "intercept_points": -128349.2425193775,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.11117935176298488,
+          "rms_residual_pdf_points": 0.06695843979267092,
+          "alternating_label_holdout_max_pdf_points": 0.13209152221679688
+        },
+        "N": {
+          "slope_points_per_degree": 1387.6000793456988,
+          "intercept_points": -28367.59948696552,
+          "controls": 18,
+          "distinct_label_values": 9,
+          "max_residual_pdf_points": 0.10781521268290817,
+          "rms_residual_pdf_points": 0.063140020705772,
+          "alternating_label_holdout_max_pdf_points": 0.127536010761105
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            92.66666666666667,
+            93.66666666666667
+          ],
+          "target_degrees": 93.00588176956585,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            20.833333333333332,
+            22.166666666666668
+          ],
+          "target_degrees": 22.103599676713863,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Paletwa-040.png",
+      "review_contact_sheet": "105-contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 44,
+      "owner": 30078,
+      "y": 114572,
+      "x": 198813,
+      "original_interval": 1593,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1467/runs/1"
+      },
+      "inside": [
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.00588176956585,
+      "longitude_exact_rational": "12191490/131083",
+      "latitude_degrees_north": 22.10232741676722,
+      "latitude_native_f64le_hex": "d77f2c21321a3640",
+      "registered_pdf_point": [
+        701.8032248926465,
+        2301.591790265291
+      ],
+      "render_scale1_pixel": [
+        702,
+        290
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        168,
+        170,
+        146
+      ],
+      "name": "Paletwa",
+      "review_order_rank": 16,
+      "source_point_interpretation": "Registered centre is depicted on the named Paletwa/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Paletwa-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India/Bangladesh country labels and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 9,
+          "hash": "28cf256580ccd0fea94e98ccbf0af695920637676e401f99d5600d0e1236aa14",
+          "registry_index": 9,
+          "id": "gb:IND:ADM3:7132399B89986450073812",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4022",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 25,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70768,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B89986450073812",
+            "ordinal": 4022,
+            "owners": [],
+            "name": "Tuipang",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Paletwa.pdf",
+        "bytes": 9057135,
+        "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1387.5578972952578,
+          "intercept_points": -128349.2425193775,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.11117935176298488,
+          "rms_residual_pdf_points": 0.06695843979267092,
+          "alternating_label_holdout_max_pdf_points": 0.13209152221679688
+        },
+        "N": {
+          "slope_points_per_degree": 1387.6000793456988,
+          "intercept_points": -28367.59948696552,
+          "controls": 18,
+          "distinct_label_values": 9,
+          "max_residual_pdf_points": 0.10781521268290817,
+          "rms_residual_pdf_points": 0.063140020705772,
+          "alternating_label_holdout_max_pdf_points": 0.127536010761105
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            92.66666666666667,
+            93.66666666666667
+          ],
+          "target_degrees": 93.00588176956585,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            20.833333333333332,
+            22.166666666666668
+          ],
+          "target_degrees": 22.10232741676722,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Paletwa-044.png",
+      "review_contact_sheet": "105-contact-01.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 35,
+      "owner": 30078,
+      "y": 114570,
+      "x": 198814,
+      "original_interval": 1587,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1465/runs/0"
+      },
+      "inside": [
+        6,
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.00725494533998,
+      "longitude_exact_rational": "12191670/131083",
+      "latitude_degrees_north": 22.10487192518712,
+      "latitude_native_f64le_hex": "7ef2f0e2d81a3640",
+      "registered_pdf_point": [
+        703.7085857824131,
+        2305.1225503506357
+      ],
+      "render_scale1_pixel": [
+        704,
+        287
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        176,
+        178,
+        154
+      ],
+      "name": "Paletwa",
+      "review_order_rank": 21,
+      "source_point_interpretation": "Registered centre is depicted on the named Paletwa/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Paletwa-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India/Bangladesh country labels and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 6,
+          "hash": "dc80ff501425e87baeaf2c8d6a46459a79e4ec3216ff6b33e32c18d2dac62221",
+          "registry_index": 6,
+          "id": "gb:IND:ADM1:1811400B49281905528064",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/18",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM1-000.bin.gz",
+              "git_blob_oid": "6c717053e0e9893cbe32ee9e09e4cba76760798a",
+              "mode": "100644",
+              "bytes": 2009868,
+              "sha256": "4a716fa04288d6742b1f43031ea90a26998c86becb1389f46acd3200b3acb1e0",
+              "decoded_bytes": 5103747,
+              "decoded_sha256": "4c63fe43294a391e8f2de4e9f86f3edb60f8688275b9fee90c61fb2aa0c26061"
+            }
+          ],
+          "inside": 48,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 36797,
+            "family_index": 154,
+            "source_id": "gb:IND:ADM1:1811400B49281905528064",
+            "ordinal": 18,
+            "owners": [],
+            "name": "Mizoram",
+            "geometry_status": "raw-native-supported"
+          }
+        },
+        {
+          "index": 9,
+          "hash": "28cf256580ccd0fea94e98ccbf0af695920637676e401f99d5600d0e1236aa14",
+          "registry_index": 9,
+          "id": "gb:IND:ADM3:7132399B89986450073812",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4022",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 25,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70768,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B89986450073812",
+            "ordinal": 4022,
+            "owners": [],
+            "name": "Tuipang",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Paletwa.pdf",
+        "bytes": 9057135,
+        "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1387.5578972952578,
+          "intercept_points": -128349.2425193775,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.11117935176298488,
+          "rms_residual_pdf_points": 0.06695843979267092,
+          "alternating_label_holdout_max_pdf_points": 0.13209152221679688
+        },
+        "N": {
+          "slope_points_per_degree": 1387.6000793456988,
+          "intercept_points": -28367.59948696552,
+          "controls": 18,
+          "distinct_label_values": 9,
+          "max_residual_pdf_points": 0.10781521268290817,
+          "rms_residual_pdf_points": 0.063140020705772,
+          "alternating_label_holdout_max_pdf_points": 0.127536010761105
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            92.66666666666667,
+            93.66666666666667
+          ],
+          "target_degrees": 93.00725494533998,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            20.833333333333332,
+            22.166666666666668
+          ],
+          "target_degrees": 22.10487192518712,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Paletwa-035.png",
+      "review_contact_sheet": "105-contact-01.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 12,
+      "owner": 30078,
+      "y": 114533,
+      "x": 198591,
+      "original_interval": 1556,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1432/runs/0"
+      },
+      "inside": [
+        0,
+        6,
+        12
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 92.70103674770947,
+      "longitude_exact_rational": "12151530/131083",
+      "latitude_degrees_north": 22.151937048126342,
+      "latitude_native_f64le_hex": "e0c0ac58e5263640",
+      "registered_pdf_point": [
+        278.81310736468004,
+        2370.4301186755183
+      ],
+      "render_scale1_pixel": [
+        279,
+        222
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        188,
+        190,
+        177
+      ],
+      "name": "Paletwa",
+      "review_order_rank": 23,
+      "source_point_interpretation": "Registered centre is depicted on the named Paletwa/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Paletwa-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India/Bangladesh country labels and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 72,
+          "boundary": 0
+        },
+        {
+          "index": 6,
+          "hash": "dc80ff501425e87baeaf2c8d6a46459a79e4ec3216ff6b33e32c18d2dac62221",
+          "registry_index": 6,
+          "id": "gb:IND:ADM1:1811400B49281905528064",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/18",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM1-000.bin.gz",
+              "git_blob_oid": "6c717053e0e9893cbe32ee9e09e4cba76760798a",
+              "mode": "100644",
+              "bytes": 2009868,
+              "sha256": "4a716fa04288d6742b1f43031ea90a26998c86becb1389f46acd3200b3acb1e0",
+              "decoded_bytes": 5103747,
+              "decoded_sha256": "4c63fe43294a391e8f2de4e9f86f3edb60f8688275b9fee90c61fb2aa0c26061"
+            }
+          ],
+          "inside": 48,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 36797,
+            "family_index": 154,
+            "source_id": "gb:IND:ADM1:1811400B49281905528064",
+            "ordinal": 18,
+            "owners": [],
+            "name": "Mizoram",
+            "geometry_status": "raw-native-supported"
+          }
+        },
+        {
+          "index": 12,
+          "hash": "f40897948af42fd815e640ad8663ca4de6a061e9282dd192fab7fc7560297cc3",
+          "registry_index": 12,
+          "id": "gb:IND:ADM3:7132399B73294925645165",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4044",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 30,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70790,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B73294925645165",
+            "ordinal": 4044,
+            "owners": [],
+            "name": "Lawngtlai",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Paletwa.pdf",
+        "bytes": 9057135,
+        "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1387.5578972952578,
+          "intercept_points": -128349.2425193775,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.11117935176298488,
+          "rms_residual_pdf_points": 0.06695843979267092,
+          "alternating_label_holdout_max_pdf_points": 0.13209152221679688
+        },
+        "N": {
+          "slope_points_per_degree": 1387.6000793456988,
+          "intercept_points": -28367.59948696552,
+          "controls": 18,
+          "distinct_label_values": 9,
+          "max_residual_pdf_points": 0.10781521268290817,
+          "rms_residual_pdf_points": 0.063140020705772,
+          "alternating_label_holdout_max_pdf_points": 0.127536010761105
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            92.66666666666667,
+            93.66666666666667
+          ],
+          "target_degrees": 92.70103674770947,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            20.833333333333332,
+            22.166666666666668
+          ],
+          "target_degrees": 22.151937048126342,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Paletwa-012.png",
+      "review_contact_sheet": "105-contact-01.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 36,
+      "owner": 30078,
+      "y": 114570,
+      "x": 198815,
+      "original_interval": 1587,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1465/runs/0"
+      },
+      "inside": [
+        6,
+        9
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.0086281211141,
+      "longitude_exact_rational": "12191850/131083",
+      "latitude_degrees_north": 22.10487192518712,
+      "latitude_native_f64le_hex": "7ef2f0e2d81a3640",
+      "registered_pdf_point": [
+        705.6139466721652,
+        2305.1225503506357
+      ],
+      "render_scale1_pixel": [
+        706,
+        287
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        169,
+        171,
+        151
+      ],
+      "name": "Paletwa",
+      "review_order_rank": 29,
+      "source_point_interpretation": "Registered centre is depicted on the named Paletwa/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Paletwa-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India/Bangladesh country labels and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "foreign-administrative-only",
+      "original_hit_operands": [
+        {
+          "index": 6,
+          "hash": "dc80ff501425e87baeaf2c8d6a46459a79e4ec3216ff6b33e32c18d2dac62221",
+          "registry_index": 6,
+          "id": "gb:IND:ADM1:1811400B49281905528064",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/18",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM1-000.bin.gz",
+              "git_blob_oid": "6c717053e0e9893cbe32ee9e09e4cba76760798a",
+              "mode": "100644",
+              "bytes": 2009868,
+              "sha256": "4a716fa04288d6742b1f43031ea90a26998c86becb1389f46acd3200b3acb1e0",
+              "decoded_bytes": 5103747,
+              "decoded_sha256": "4c63fe43294a391e8f2de4e9f86f3edb60f8688275b9fee90c61fb2aa0c26061"
+            }
+          ],
+          "inside": 48,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 36797,
+            "family_index": 154,
+            "source_id": "gb:IND:ADM1:1811400B49281905528064",
+            "ordinal": 18,
+            "owners": [],
+            "name": "Mizoram",
+            "geometry_status": "raw-native-supported"
+          }
+        },
+        {
+          "index": 9,
+          "hash": "28cf256580ccd0fea94e98ccbf0af695920637676e401f99d5600d0e1236aa14",
+          "registry_index": 9,
+          "id": "gb:IND:ADM3:7132399B89986450073812",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4022",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 25,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70768,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B89986450073812",
+            "ordinal": 4022,
+            "owners": [],
+            "name": "Tuipang",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Paletwa Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-paletwa-township-chin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/5787c655-8144-4cf5-90b2-e5e608aa34ae/Tsp_Map_VL_Paletwa_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Paletwa.pdf",
+        "bytes": 9057135,
+        "sha256": "cfc21afdafe6d5ca570eab063bc8848ee6ab321d6f91955fc88183f376a412df",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the northern international border, Bangladesh across the western international border; Paletwa is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1387.5578972952578,
+          "intercept_points": -128349.2425193775,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.11117935176298488,
+          "rms_residual_pdf_points": 0.06695843979267092,
+          "alternating_label_holdout_max_pdf_points": 0.13209152221679688
+        },
+        "N": {
+          "slope_points_per_degree": 1387.6000793456988,
+          "intercept_points": -28367.59948696552,
+          "controls": 18,
+          "distinct_label_values": 9,
+          "max_residual_pdf_points": 0.10781521268290817,
+          "rms_residual_pdf_points": 0.063140020705772,
+          "alternating_label_holdout_max_pdf_points": 0.127536010761105
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            92.66666666666667,
+            93.66666666666667
+          ],
+          "target_degrees": 93.0086281211141,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            20.833333333333332,
+            22.166666666666668
+          ],
+          "target_degrees": 22.10487192518712,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Paletwa-036.png",
+      "review_contact_sheet": "105-contact-01.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    }
+  ]
+}

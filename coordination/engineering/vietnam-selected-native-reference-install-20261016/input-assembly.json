@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "purpose": "Portable immutable input assembly for actual parent-only671 metadata application; no source/native generator",
+  "metadata_baseline_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+  "current_selector": {
+    "commit": "71d95f45ea0457d60d4b8263bf36ab78316cf0cc",
+    "path": "data/ownership-selection.json",
+    "git_blob_oid": "b2abcfeb2ef1fded14f7c553cd324bffd6a43bd2",
+    "bytes": 1564,
+    "sha256": "6a0d4c7596dc8cf5cddf17547621a2a73db66d67ddc0870d4709d1da8746bedb"
+  },
+  "dependency_code_commit": "9b121653b4e775a34c5bb78a0ce5dea69c7dd656",
+  "dependency_acceptance_claimed": false,
+  "executed_installer_sha256": "3ff40d8c495e677630107edad3984aa05303eb96094491ff157eeeb74f75f2ae",
+  "before_data_selection": {
+    "report": "actual-report-010.json",
+    "include": [
+      "all keys of preserved",
+      "all keys of originals with non-null values"
+    ],
+    "repository_path_prefix": "data/",
+    "default_source_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "exception": "data/ownership-selection.json uses current_selector pin instead",
+    "additional_reads": "For each current prepared-evidence product, retain its original source_product_files from the same89ff product directory. Exact revalidation receipts already are original write preimages."
+  },
+  "native_manifest": {
+    "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+    "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+  },
+  "registered_comparison_receipt": {
+    "commit": "77b345faf2fc02df8e6669ac4b6ea746e81a61cd",
+    "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-selection-receipt.json",
+    "sha256": "dcc3533b9eea251b9d5a323a05da441816a2affe2889c2484174ec853e591691"
+  },
+  "candidate_geography": {
+    "base": "Exact assembled before hierarchy/index/36geography parts",
+    "overlays": [
+      {
+        "destination": "hierarchy.json",
+        "commit": "1bdea2f51598daa0cec045384537823506531b9e",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cathai-parent-reference-release-20261016/after/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+        "git_blob_oid": "0ec8bae8e04140326d8b48f09a35ac66ae54deb0",
+        "mode": "100644"
+      },
+      {
+        "destination": "geography/part-27.json",
+        "commit": "1bdea2f51598daa0cec045384537823506531b9e",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/cathai-parent-reference-release-20261016/after/geography/part-27.json",
+        "bytes": 4865691,
+        "sha256": "bdaa057e28a89bcfd3ddf9f9dbe677352b3fb259ff70e61da113cf8032d19b20",
+        "git_blob_oid": "8f5eb1b821e880720a962b54d1e5dfdb413b8473",
+        "mode": "100644"
+      }
+    ]
+  },
+  "candidate_release": {
+    "commit": "1bdea2f51598daa0cec045384537823506531b9e",
+    "prefix": "coordination/engineering/vietnam-current-cell-20261014/cathai-parent-reference-release-20261016/actual-release-v10/",
+    "files": 857,
+    "index": {
+      "commit": "1bdea2f51598daa0cec045384537823506531b9e",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cathai-parent-reference-release-20261016/actual-release-v10/index.json",
+      "bytes": 170327,
+      "sha256": "d10e1d41ea52ab67a55d5318b312670ab3d5f04fc9281cc9757becfea14776ea",
+      "git_blob_oid": "5f5ef8b69efd9734cd23ba86847a1f338f97a835",
+      "mode": "100644"
+    },
+    "rule": "Read exact ordinary blobs beneath this immutable prefix; index batch paths and SHA256 authenticate every original release input."
+  },
+  "normal_receipt": {
+    "commit": "1bdea2f51598daa0cec045384537823506531b9e",
+    "path": "coordination/engineering/vietnam-current-cell-20261014/cathai-parent-reference-release-20261016/cathai-reference-migration-receipt.json.gz",
+    "bytes": 1015684,
+    "sha256": "93188024a4937986e5553b49b63e8cdfad8a38a9f46a6f599c41e0ffa4cbf6f5",
+    "git_blob_oid": "9826d1306fc3cbe1bfe87db4237ff0e963395299",
+    "mode": "100644"
+  },
+  "prepare_options": {
+    "metadataMode": "reference-correction",
+    "data": "<assembly>/data",
+    "geographyData": "<candidate>",
+    "releaseData": "<candidate-release>",
+    "receipts": [
+      "<assembly>/coordination/engineering/vietnam-current-cell-20261014/cathai-parent-reference-release-20261016/cathai-reference-migration-receipt.json.gz"
+    ],
+    "repository": "<immutable-source Git repository>",
+    "stage": "<owned-stage-outside-data>"
+  },
+  "limits": [
+    "Do not reconstruct340 absent unrelated old release bodies or a current legacy grid. Historical descriptors/status are preserved, not revalidated.",
+    "Read source bytes only from exact commits and ordinary paths; verify expected SHA256. No live taskfile is a source.",
+    "After candidate archive paths are input evidence only. Existing M after pins require genuine canonical data paths at an actual application commit.",
+    "Copy exactly existing report.writes targets to fresh owned inodes before apply/rollback if inputs were hardlinked.",
+    "Use existing Python3.12 canonical/gzip encoder. Disclosed task-local input-FD transport changes neither encoder predicates nor bytes."
+  ]
+}

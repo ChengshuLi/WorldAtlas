@@ -4,26 +4,27 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {spawnSync, execFileSync} from 'node:child_process';
-import {checkGitScope} from '../scripts/check-handoff-scope.mjs';
-import {createHash} from 'node:crypto';
+import {loadPackageInputs,focusedCheckoutPatterns} from '../scripts/package-inputs.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
-const workflows = ['issue-claims.yml', 'worker-merge.yml', 'merge-integration-checks.yml'];
+const workflows = ['issue-claims.yml', 'worker-merge.yml'];
 
 // Reproduce each declared sparse tree, including cone-mode root files. Load
 // trusted modules without executing workflow entrypoints or contacting GitHub.
-function probe(directories, {geography = false, checkoutTests = false} = {}) {
+function probe(directories, {geography = false} = {}) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-checkout-'));
   try {
     fs.copyFileSync(path.join(root, 'package.json'), path.join(directory, 'package.json'));
-    for (const relative of directories) {
+    const paths = new Set(directories.flatMap(pattern => pattern.includes('*')
+      ? fs.globSync(pattern.replace(/^\//,''),{cwd:root}) : [pattern]));
+    for (const relative of paths) {
       const source = path.join(root, relative);
       const destination = path.join(directory, relative);
       fs.mkdirSync(path.dirname(destination), {recursive: true});
       fs.cpSync(source, destination, {recursive: true});
     }
-    return spawnSync(process.execPath, checkoutTests ? ['--test', '--test-concurrency=1', '--test-name-pattern', 'actual sparse declarations include trusted module dependencies', 'test/trusted-workflow-checkouts.test.mjs'] : ['--input-type=module', '-e',
-      "await import('./scripts/issue-claim-contract.mjs'); await import('./scripts/research-import-gate.mjs'); await import('./scripts/premerge-evidence.mjs'); await import('./scripts/check-pr-gates.mjs');" +
+    return spawnSync(process.execPath, ['--input-type=module', '-e',
+      "await import('./scripts/issue-claim-contract.mjs'); await import('./scripts/research-import-gate.mjs'); await import('./scripts/premerge-evidence.mjs');" +
       (geography ? "await import('./scripts/check-effective-geographic-regression.mjs'); await import('./coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs'); console.log('complete trusted geography closure imported');" : '')],
     {cwd: directory, encoding: 'utf8', env: {PATH: process.env.PATH}});
   } finally { fs.rmSync(directory, {recursive: true, force: true}); }
@@ -52,8 +53,9 @@ for (const workflow of workflows) {
     const source = fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8');
     const blocks = [...source.matchAll(/^          sparse-checkout: \|\n((?:            .+\n)+)/gm)];
     assert.ok(blocks.length > 0, 'expected explicit sparse checkout declarations');
-    for (const block of blocks) {
-      const directories = block[1].trim().split('\n').map(row => row.trim());
+    const checkouts=blocks.map(block=>block[1].trim().split('\n').map(row=>row.trim()))
+      .filter(rows=>rows.join('\n')!=='/*\n!/*/'); // Root-only bootstrap is expanded by the tested stdin step.
+    for (const directories of checkouts) {
       const result = probe(directories);
       assert.equal(result.status, 0, result.stderr);
     }
@@ -68,76 +70,6 @@ test('negative control: old scripts-only tree cannot load relocated regional gat
 });
 
 
-test('sparse candidate still detects changes and rename sources outside the working tree', () => {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-sparse-scope-'));
-  const git = args => execFileSync('git', args, {cwd: directory, encoding: 'utf8'});
-  const run = (command, args, options) => execFileSync(command, args, {...options, cwd: directory});
-  try {
-    git(['init', '-q']); git(['config', 'user.email', 'test@example.invalid']); git(['config', 'user.name', 'test']);
-    fs.mkdirSync(path.join(directory, 'src'), {recursive: true});
-    fs.mkdirSync(path.join(directory, 'research/campaigns/example'), {recursive: true});
-    fs.writeFileSync(path.join(directory, 'src/main.js'), 'original source\n');
-    fs.writeFileSync(path.join(directory, 'research/campaigns/example/notes.txt'), 'original notes\n');
-    git(['add', '.']); git(['commit', '-qm', 'baseline']); const base = git(['rev-parse', 'HEAD']).trim();
-    fs.writeFileSync(path.join(directory, 'research/campaigns/example/notes.txt'), 'updated notes\n');
-    git(['commit', '-qam', 'owned evidence']);
-    git(['sparse-checkout', 'init', '--cone']); git(['sparse-checkout', 'set', 'src']);
-    assert.equal(fs.existsSync(path.join(directory, 'research')), false);
-    assert.equal(checkGitScope({branch: 'research/example', base, run}).changed_files, 1);
-    git(['sparse-checkout', 'disable']);
-    git(['mv', 'src/main.js', 'research/campaigns/example/copied.js']); git(['commit', '-qm', 'rename core source']);
-    git(['sparse-checkout', 'set', 'src']);
-    assert.equal(fs.existsSync(path.join(directory, 'research')), false);
-    assert.throws(() => checkGitScope({branch: 'research/example', base, run}), /Research changes/);
-  } finally { fs.rmSync(directory, {recursive: true, force: true}); }
-});
-
-
-for (const [workflow, expected] of [['worker-merge.yml', 1]]) {
-  test(`${workflow}: immutable normal routes build Cloudflare and retain the separate Site gate`, () => {
-    const source = fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8');
-    const routes = [...source.matchAll(/^        run: (npm run build:cloudflare)$/gm)];
-    assert.equal(routes.length, expected, 'all actual package/shard routes must be covered');
-    assert.doesNotMatch(source, /WORLDATLAS_PACKAGE_PROFILE|run: npm run build:hosted/);
-    const site = fs.readFileSync(path.join(root, '.github/workflows/deployment-budget.yml'), 'utf8');
-    assert.match(site, /run: npm run build:hosted/);
-    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-package-routing-'));
-    try {
-      fs.writeFileSync(path.join(directory, 'npm'), '#!/bin/sh\nprintf "%s\\n" "$*"\n', {mode: 0o755});
-      for (const route of routes) {
-        const result = spawnSync('/bin/bash', ['-c', route[1]], {encoding: 'utf8', env: {PATH: directory, WORLDATLAS_PACKAGE_PROFILE: 'foreign'}});
-        assert.equal(result.status, 0, result.stderr);assert.equal(result.stdout.trim(), 'run build:cloudflare');
-      }
-    } finally { fs.rmSync(directory, {recursive: true, force: true}); }
-  });
-}
-
-
-test('actual scope candidate sparse declaration contains cold-checkout test imports', () => {
-  const source = fs.readFileSync(path.join(root, '.github/workflows/merge-integration-checks.yml'), 'utf8');
-  const scope = source.split('  scope:\n')[1].split('  geography:\n')[0];
-  const candidate = scope.match(/path: candidate[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
-  assert.ok(candidate, 'actual scope candidate checkout must be declared');
-  const directories = candidate[1].trim().split('\n').map(row => row.trim());
-  const qualified = probe(directories, {geography: true});
-  assert.equal(qualified.status, 0, qualified.stderr);
-  const missing = probe(directories.filter(row => !row.startsWith('coordination/')), {geography: true});
-  assert.notEqual(missing.status, 0);assert.match(missing.stderr, /selected-geography-effective-prevention-20261009/);
-});
-
-test('scope candidate includes the inputs of its nested actual-checkout probes', () => {
-  const source = fs.readFileSync(path.join(root, '.github/workflows/merge-integration-checks.yml'), 'utf8');
-  const scope = source.split('  scope:\n')[1].split('  geography:\n')[0];
-  const candidate = scope.match(/path: candidate[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
-  assert.ok(candidate);
-  const directories = candidate[1].trim().split('\n').map(row => row.trim());
-  const result = probe(directories, {checkoutTests: true});
-  assert.equal(result.status, 0, result.stdout + result.stderr);
-  const missing = probe(directories.filter(row => !row.includes('selected-checkpoint-reuse-20261012')), {checkoutTests: true});
-  assert.notEqual(missing.status, 0);
-  assert.match(missing.stdout + missing.stderr, /ENOENT/);
-  assert.match(missing.stdout + missing.stderr, /selected-checkpoint-reuse-20261012/);
-});
 
 // Read the actual workflow declarations and shell bodies. These bounded controls
 // model the status-expression subset used here; hosted execution remains required.
@@ -165,274 +97,72 @@ function queueWorkflow() {
 }
 function workflowCondition(expression, context, {success=true,cancelled=false}={}) {
   if(expression&&!/\b(?:always|success|failure|cancelled)\(/.test(expression)&&!success)return false;
-  return expression?Boolean(new Function('needs','github','matrix','steps','always','cancelled','success','failure',
-    `return (${expression});`)(context.needs,context.github,context.matrix,context.steps??{},()=>true,()=>cancelled,()=>success,()=>!success)):success;
+  return expression?Boolean(new Function('needs','github','matrix','steps','inputs','always','cancelled','success','failure',
+    `return (${expression});`)(context.needs,context.github,context.matrix,context.steps??{},context.inputs??{},()=>true,()=>cancelled,()=>success,()=>!success)):success;
 }
-function queueContext({profile='full',selection='complete'}={}){
+function queueContext({profile='full',selection='complete',reviewedTests=''}={}){
  return {needs:{prepare:{outputs:{profile,test_selection:selection}}},matrix:{shard:0},
+   inputs:{reviewed_tests:reviewedTests},
    steps:{assembly:{outputs:{assembled:'false'}}}};
 }
 function packageStep(job,name){const found=job.steps.filter(step=>step.name===name);assert.equal(found.length,1,name);return found[0];}
 
 
-test('normal package workflow closes full, shard and assembly branches without historical readback', () => {
- const {source,integration}=queueWorkflow();
- assert.doesNotMatch(source,/Read back qualified native build outputs|native-normal-built-output\.json|--built-output-readback/);
- const names=['Snapshot original final-worker package inputs',
-  'Build the combined application once before asset-dependent tests',
-  'Inventory original final-worker package output',
-  'Install browser dependencies only for tests that use Playwright',
-  'Test applicable combined-tree invariants without publishing or live imports'];
- const routes=names.map(name=>packageStep(integration,name));
- assert.deepEqual(integration.steps.filter(step=>names.includes(step.name)).map(step=>step.name),names);
+test('package setup and retention follow the current build and assembly branches', () => {
+ const {integration}=queueWorkflow();
+ const build=packageStep(integration,'Build the combined application once before asset-dependent tests');
+ assert.equal(build.run,'npm run build:cloudflare');
+ const setup=['Snapshot original final-worker package inputs',build.name,'Inventory original final-worker package output']
+   .map(name=>packageStep(integration,name));
  const original=packageStep(integration,'Retain original final-worker package output');
  const smoke=packageStep(integration,'Retain selected delivery smoke');
- assert.match(smoke.text,/name: selected-delivery-smoke-\$\{\{ inputs\.request_id \}\}-\$\{\{ github\.run_attempt \}\}/);
- assert.match(smoke.text,/path: \.cache\/selected-delivery-smoke\.json\n/);
- const directory=fs.mkdtempSync(path.join(os.tmpdir(),'worldatlas-normal-package-route-'));
- try {
-  const calls=path.join(directory,'calls.jsonl');
-  const recorder=`#!${process.execPath}
-const fs=require('node:fs'),path=require('node:path'),args=process.argv.slice(2);
-const programme=path.basename(process.argv[1]);let call;
-if(programme==='npm'&&args.join(' ')==='run build:cloudflare')call='build';
-else if(programme==='npx'&&args.join(' ')==='playwright install --with-deps chromium')call='browser-install';
-else if(programme==='node'){
- if(args[0]==='scripts/package-output-artifact.mjs'){
-  if(args.length===1)call='inventory';else if(args.length===2&&args[1]==='--snapshot')call='snapshot';
- }else if(args.length===1&&args[0]==='scripts/run-integration-tests.mjs')call='packaged-tests';
- else if(args[0]==='--input-type=module'&&args[1]==='-e'&&args.length===3){
-  if(args[2].includes('integrationNeedsBrowser('))call='browser-check';
-  else if(args[2].includes('await selectedDeliverySmoke(process.env.SELECTED_EXPECTATIONS_PATH)'))call='selected-smoke';
-  else if(args[2].includes('package_assembly:requireCurrentPackageAssembly()'))call='assembly-admission';
- }
-}
-if(!call)throw Error('Unexpected normal package command: '+programme+' '+JSON.stringify(args));
-fs.appendFileSync(process.env.FIXTURE_CALLS,JSON.stringify(call)+'\\n');
-`;
-  for(const name of ['node','npm','npx'])fs.writeFileSync(path.join(directory,name),recorder,{mode:0o755});
-  const cases=[
-   {selection:'complete',assembled:undefined,shard:0,expected:['snapshot','build','inventory','browser-check','browser-install','packaged-tests'],output:true},
-   {selection:'selected-data',assembled:'false',shard:0,expected:['snapshot','build','inventory','selected-smoke'],output:true},
-   {selection:'selected-data',assembled:'true',shard:0,expected:['selected-smoke','assembly-admission'],output:false},
-   ...[1,2].map(shard=>({selection:'complete',assembled:undefined,shard,expected:['browser-check','browser-install','packaged-tests'],output:false})),
-  ];
-  for(const branch of cases){
-   fs.rmSync(calls,{force:true});
-   const context=queueContext({selection:branch.selection});context.matrix.shard=branch.shard;
-   context.steps.assembly.outputs.assembled=branch.assembled;
-   const effective=branch.assembled==='true'?'selected-output':branch.selection;
-   for(const step of routes.filter(step=>workflowCondition(step.condition,context))){
-    const result=spawnSync('/bin/bash',['-e','-o','pipefail','-c',step.run],{cwd:directory,encoding:'utf8',
-     env:{PATH:directory,INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:String(branch.shard),
-      INTEGRATION_TEST_SELECTION:effective,SELECTED_EXPECTATIONS_PATH:'current-expectations.json',FIXTURE_CALLS:calls}});
-    assert.equal(result.status,0,step.name+': '+result.stderr);
-   }
-   const actual=fs.readFileSync(calls,'utf8').trim().split('\n').map(JSON.parse);
-   assert.deepEqual(actual,branch.expected,JSON.stringify(branch));
-   assert.equal(workflowCondition(original.condition,context),branch.output);
-   assert.equal(workflowCondition(original.condition,context,{success:false}),false,'Failed checks cannot upload original output');
-   assert.equal(workflowCondition(smoke.condition,context),branch.shard===0);
-  }
- } finally {fs.rmSync(directory,{recursive:true,force:true});}
- const explicit=fs.readFileSync(path.join(root,'.github/workflows/selected-package-proof.yml'),'utf8');
- assert.match(explicit,/model-reader-call-boundary-controls\.mjs --built-output-readback \.cache\/native-normal-built-output\.json/);
-});
-
-test('automatic author compute is absent while final queue and explicit rollout keep current consumers',()=>{
- const author=fs.readFileSync(path.join(root,'.github/workflows/merge-integration-checks.yml'),'utf8');
- assert.deepEqual([...author.matchAll(/^  ([a-z]+):$/gm)].map(m=>m[1]),['profile','evidence','scope']);
- assert.doesNotMatch(author,/npm ci|pip install|playwright|build:cloudflare|native-built-output|package-input-build/);
- const queue=fs.readFileSync(path.join(root,'.github/workflows/worker-merge.yml'),'utf8');
- assert.match(queue,/run: npm run build:cloudflare/);assert.match(queue,/node scripts\/run-integration-tests.mjs/);
- assert.doesNotMatch(queue,/proof_run|proof_attempt|GEOGRAPHY_PROOF|PROOF_RUN/);
- const explicit=fs.readFileSync(path.join(root,'.github/workflows/selected-package-proof.yml'),'utf8');
- assert.match(explicit,/npx playwright install --with-deps chromium/);
- assert.match(explicit,/INTEGRATION_TEST_SELECTION: selected-output/);assert.match(explicit,/node scripts\/run-integration-tests.mjs/);
- const site=fs.readFileSync(path.join(root,'.github/workflows/deployment-budget.yml'),'utf8');
- assert.match(site,/run: npm run build:hosted/);assert.match(site,/path: \.cache\/deployment-budget.json/);
-});
-
-function checkoutBootstrapBodies() {
-  return ['merge-integration-checks.yml','worker-merge.yml'].flatMap(workflow => {
-    const source=fs.readFileSync(path.join(root,'.github/workflows',workflow),'utf8');
-    return [...source.matchAll(/python3 -I -S -B - <<'CHECKOUT_BOOTSTRAP'\n([\s\S]*?)          CHECKOUT_BOOTSTRAP/g)]
-      .map(match=>({workflow,body:match[1].split('\n').map(line=>line.slice(10)).join('\n')}));
-  });
-}
-function checkoutBootstrapFixture({absence=false,helperMode='100644'}={}) {
-  const object=(kind,raw)=>createHash('sha1').update(Buffer.from(kind+' '+raw.length+'\0')).update(raw).digest('hex');
-  const raw=Buffer.from("print('authenticated baseline helper')\n"),helper=object('blob',raw),repo='ChengshuLi/WorldAtlas';
-  const base='a'.repeat(40),sha='b'.repeat(40),candidateTree='c'.repeat(40),routes={};
-  const entry=(path,mode,type,sha)=>({path,mode,type,sha});
-  const makeTree=rows=>{
-    const sorted=[...rows].sort((a,b)=>Buffer.compare(Buffer.from(a.path+(a.type==='tree'?'/':'\0')),Buffer.from(b.path+(b.type==='tree'?'/':'\0'))));
-    const raw=Buffer.concat(sorted.map(row=>Buffer.concat([Buffer.from(row.mode.replace(/^0+/,'')+' '+row.path+'\0'),Buffer.from(row.sha,'hex')])));
-    const hash=object('tree',raw);routes['/git/trees/'+hash]={sha:hash,truncated:false,tree:rows};return hash;
-  };
-  const scripts=makeTree([entry('a.py','100644','blob','1'.repeat(40)),...(absence?[]:[entry('acquire-ci-checkout.py',helperMode,'blob',helper)]),entry('é.py','100644','blob','2'.repeat(40))]);
-  // Directory ordering uses a slash, and raw tree mode drops API's leading zero.
-  const baseTree=makeTree([entry('scripts','040000','tree',scripts),entry('scripts.txt','100644','blob','3'.repeat(40)),entry('submodule','160000','commit','4'.repeat(40))]);
-  routes['/pulls/17']={number:17,state:'open',base:{sha:base,ref:'main',repo:{full_name:repo}},head:{sha,ref:'engineering/fixture',repo:{full_name:repo}}};
-  routes['/git/commits/'+base]={sha:base,tree:{sha:baseTree}};routes['/git/commits/'+sha]={sha,tree:{sha:candidateTree}};
-  routes['/git/blobs/'+helper]={sha:helper,size:raw.length,encoding:'base64',content:raw.toString('base64')+'\n'};
-  return {routes,raw,helper,base,sha,baseTree,scripts,candidateTree,repo};
-}
-function runCheckoutBootstrap(body,fixture,{queue=false,failure='',failureRoute='',rawRoute='',rawResponse='',symlinkTemp=false}={}) {
-  const temporary=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-checkout-bootstrap-')));
-  try {
-    const runner=path.join(temporary,'runner');fs.mkdirSync(runner);
-    const temp=symlinkTemp?path.join(temporary,'runner-link'):runner;if(symlinkTemp)fs.symlinkSync(runner,temp);
-    const source=path.join(temporary,'bootstrap.py'),input=path.join(temporary,'fixture.json'),output=path.join(temporary,'output'),trace=path.join(temporary,'trace.json');
-    fs.writeFileSync(source,body);fs.writeFileSync(input,JSON.stringify({...fixture,failure,failureRoute,rawRoute,rawResponse}));
-    const wrapper=`import io,json,os,sys,urllib.request,urllib.error,signal,time,threading,http.server,socketserver
-fixture=json.load(open(sys.argv[2])); calls=[]; servers=[]
-real_open=urllib.request.build_opener().open
-if fixture['failure']=='trickle':
- original_timer=signal.setitimer
- def bounded_timer(which,seconds):
-  assert seconds in (0,60)
-  return original_timer(which,0.25 if seconds else 0)
- signal.setitimer=bounded_timer
-class Trickle(http.server.BaseHTTPRequestHandler):
- def log_message(self,*args): pass
- def do_GET(self):
-  self.send_response(200); self.send_header('Content-Length','100000'); self.end_headers()
-  try:
-   while True:
-    self.wfile.write(b' '); self.wfile.flush(); calls.append('trickle-chunk'); time.sleep(0.04)
-  except (BrokenPipeError,ConnectionResetError): pass
-class TrickleServer(http.server.ThreadingHTTPServer):
- daemon_threads=True
- block_on_close=False
- def server_bind(self):
-  socketserver.TCPServer.server_bind(self); self.server_name='fixture'; self.server_port=self.server_address[1]
-class Response:
- status=200
- def __init__(self,raw): self.body=io.BytesIO(raw)
- def __enter__(self): return self
- def __exit__(self,*args): pass
- def read(self,limit): return self.body.read(limit)
-class Opener:
- def open(self,request,timeout):
-  assert request.full_url.startswith('https://api.github.com/repos/ChengshuLi/WorldAtlas/')
-  assert request.get_header('Authorization')=='Bearer fixture-secret-never-print'
-  assert 0 < timeout <= 20
-  route=request.full_url.split('/WorldAtlas',1)[1]; calls.append(route)
-  if route==fixture['failureRoute']:
-   if fixture['failure']=='trickle':
-    server=TrickleServer(('127.0.0.1',0),Trickle); servers.append(server)
-    threading.Thread(target=server.serve_forever,daemon=True).start()
-    return real_open('http://127.0.0.1:'+str(server.server_port)+'/',timeout=20)
-   if fixture['failure']=='timeout': raise TimeoutError('fixture-secret-never-print')
-   raise urllib.error.HTTPError(request.full_url,int(fixture['failure']),'fixture-secret-never-print',None,None)
-  raw=fixture['rawResponse'].encode() if route==fixture['rawRoute'] else json.dumps(fixture['routes'][route]).encode()
-  return Response(raw)
-urllib.request.build_opener=lambda *handlers: Opener()
-try: exec(compile(open(sys.argv[1]).read(),sys.argv[1],'exec'),{'__name__':'__main__'})
-finally:
- for server in servers: server.server_close()
- json.dump(calls,open(sys.argv[3],'w'))
-`;
-    const result=spawnSync('python3',['-I','-S','-B','-c',wrapper,source,input,trace],{encoding:'utf8',timeout:10000,
-      env:{...process.env,WORLDATLAS_CHECKOUT_TOKEN:'fixture-secret-never-print',CI_CHECKOUT_REPOSITORY:fixture.repo,
-        CI_CHECKOUT_BASE:fixture.base,CI_CHECKOUT_SHA:fixture.sha,CI_CHECKOUT_PR:queue?'':'17',CI_CHECKOUT_HEAD_REF:'engineering/fixture',RUNNER_TEMP:temp,GITHUB_OUTPUT:output}});
-    const outputs=Object.fromEntries((fs.existsSync(output)?fs.readFileSync(output,'utf8'):'').trim().split('\n').filter(Boolean).map(row=>{const split=row.indexOf('=');return[row.slice(0,split),row.slice(split+1)];}));
-    const materialized=outputs.helper?fs.readFileSync(outputs.helper):null;
-    assert.doesNotMatch(result.stdout+result.stderr,/fixture-secret-never-print/,'failures must not log credentials');
-    return {...result,outputs,materialized,calls:fs.existsSync(trace)?JSON.parse(fs.readFileSync(trace)):[]};
-  } finally {fs.rmSync(temporary,{recursive:true,force:true});}
-}
-
-test('full-checkout inline bootstrap authenticates base trees and helper bytes before exposing immutable candidate identity',()=>{
-  const bodies=checkoutBootstrapBodies();assert.equal(bodies.length,1);
-  assert.equal(bodies[0].workflow,'worker-merge.yml','Only final-candidate acquisition remains');
-  for(const {body,workflow} of bodies){
-    const f=checkoutBootstrapFixture(),result=runCheckoutBootstrap(body,f,{queue:workflow==='worker-merge.yml'});
-    assert.equal(result.status,0,result.stderr);assert.equal(result.outputs.mode,'helper');
-    assert.equal(result.outputs.sha,f.sha);assert.equal(result.outputs.tree,f.candidateTree);assert.deepEqual(result.materialized,f.raw);
-    assert.ok(Number(result.outputs.elapsed)>=0&&Number(result.outputs.elapsed)<60);
-    assert.equal(result.calls.includes('/pulls/17'),workflow!=='worker-merge.yml');
-    assert.deepEqual(result.calls.filter(route=>route.startsWith('/git/blobs/')),['/git/blobs/'+f.helper]);
-    assert.match(body,/signal.setitimer\(signal.ITIMER_REAL, 60\)/);assert.match(body,/consumed <= 8 \* 1024 \* 1024/);
-    assert(body.indexOf('os.fsync(output.fileno())')<body.indexOf('elapsed = time.monotonic() - started'));
-  }
-});
-
-test('full-checkout inline bootstrap permits legacy only after positively verified ordinary tree absence',()=>{
-  for(const {body} of checkoutBootstrapBodies()){
-    const f=checkoutBootstrapFixture({absence:true}),result=runCheckoutBootstrap(body,f);
-    assert.equal(result.status,0,result.stderr);assert.equal(result.outputs.mode,'legacy');assert.equal(result.materialized,null);
-    assert.equal(result.calls.some(route=>route.startsWith('/git/blobs/')),false);
-  }
-});
-
-test('full-checkout inline bootstrap refuses authentication, completeness, identity and transport errors without fallback',()=>{
-  const body=checkoutBootstrapBodies()[0].body;
-  for(const kind of ['base-ref','base-repo','head-ref','head-drift','commit-sha','candidate-tree','tree-hash','truncated','helper-mode','blob-sha','blob-size','blob-hash','malformed','oversized','404','401','timeout','symlink-temp']){
-    const f=checkoutBootstrapFixture({helperMode:kind==='helper-mode'?'120000':'100644'}),options={};
-    if(kind==='base-ref')f.routes['/pulls/17'].base.ref='other';
-    if(kind==='base-repo')f.routes['/pulls/17'].base.repo.full_name='foreign/repo';
-    if(kind==='head-ref')f.routes['/pulls/17'].head.ref='engineering/foreign';
-    if(kind==='head-drift')f.routes['/pulls/17'].head.sha='d'.repeat(40);
-    if(kind==='commit-sha')f.routes['/git/commits/'+f.base].sha='d'.repeat(40);
-    if(kind==='candidate-tree')f.routes['/git/commits/'+f.sha].tree.sha='not-a-tree';
-    if(kind==='tree-hash')f.routes['/git/trees/'+f.scripts].tree=f.routes['/git/trees/'+f.scripts].tree.filter(row=>row.path!=='acquire-ci-checkout.py');
-    if(kind==='truncated')f.routes['/git/trees/'+f.scripts].truncated=true;
-    if(kind==='blob-sha')f.routes['/git/blobs/'+f.helper].sha='d'.repeat(40);
-    if(kind==='blob-size')f.routes['/git/blobs/'+f.helper].size++;
-    if(kind==='blob-hash')f.routes['/git/blobs/'+f.helper].content=Buffer.from('x'.repeat(f.raw.length)).toString('base64');
-    if(['malformed','oversized'].includes(kind)){options.rawRoute='/git/trees/'+f.scripts;options.rawResponse=kind==='malformed'?'{bad':'x'.repeat(2*1024*1024+1);}
-    if(['404','401','timeout'].includes(kind)){options.failureRoute='/git/blobs/'+f.helper;options.failure=kind;}
-    if(kind==='symlink-temp')options.symlinkTemp=true;
-    const result=runCheckoutBootstrap(body,f,options);assert.notEqual(result.status,0,kind);assert.equal(result.outputs.mode,undefined,kind);
-    assert.match(result.stderr,/no legacy fallback authorized/,kind);
-  }
-});
-
-test('final queue retains one canonical verification and acquisition-only credentials',()=>{
- const job=queueWorkflow().integration;
- for(const mode of ['helper','legacy']){
-  const ctx=queueContext();ctx.steps.checkout_bootstrap={outputs:{mode}};
-  const canonical='Checkout complete candidate for application regression';
-  assert.equal(job.steps.filter(step=>step.name===canonical&&workflowCondition(step.condition,ctx)).length,1);
-  const helper=packageStep(job,'Acquire full checkout with authenticated bounded helper');
-  const legacy=packageStep(job,'Legacy full checkout only for proven trusted-helper absence');
-  assert.equal(workflowCondition(helper.condition,ctx),mode==='helper');assert.equal(workflowCondition(legacy.condition,ctx),mode==='legacy');
-  for(const step of [helper,legacy,...job.steps.filter(step=>step.name===canonical)])assert.equal(workflowCondition(step.condition,ctx,{success:false}),false);
-  const tokens=job.steps.filter(step=>/WORLDATLAS_CHECKOUT_TOKEN:/.test(step.text));assert.equal(tokens.length,2);
-  for(const step of tokens)assert.ok(['Authenticate trusted full-checkout bootstrap','Acquire full checkout with authenticated bounded helper'].includes(step.name));
-  const verify=packageStep(job,canonical);
-  assert.match(verify.run,/HEAD\^\{tree\}/);assert.match(verify.run,/symbolic-ref/);assert.match(verify.run,/extraheader/);assert.doesNotMatch(verify.text,/WORLDATLAS_CHECKOUT_TOKEN:/);
+ const browser=packageStep(integration,'Install browser dependencies only for tests that use Playwright');
+ // The actual queue shell is exercised in integration-profile-restoration;
+ // package-output-artifact verifies immediate capture and successful-only upload.
+ for(const [selection,assembled,shard,profile='full'] of [['complete',false,0],['selected-data',false,0],
+   ['selected-data',true,0],['complete',false,1],['complete',false,2],
+   ['reviewed',false,0,'full'],['reviewed',false,0,'evidence']]){
+   const context=queueContext({selection,profile});context.matrix.shard=shard;
+   context.steps.assembly.outputs.assembled=String(assembled);
+   const builds=profile==='full'&&shard===0&&!assembled;
+   for(const step of setup)assert.equal(workflowCondition(step.condition,context),builds,step.name);
+   assert.equal(workflowCondition(original.condition,context),builds);
+   assert.equal(workflowCondition(original.condition,context,{success:false}),false);
+   assert.equal(workflowCondition(smoke.condition,context),profile==='full'&&shard===0);
+   assert.equal(workflowCondition(browser.condition,context),selection!=='selected-data');
  }
 });
 
-test('final queue keeps complete software sparse selection without importing source-only namespaces',()=>{
- const acquire=packageStep(queueWorkflow().integration,'Acquire full checkout with authenticated bounded helper');
- assert.match(acquire.text,/INTEGRATION_PROFILE: \$\{\{ needs\.prepare\.outputs\.profile \}\}/);
- assert.match(acquire.text,/INTEGRATION_TEST_SELECTION: \$\{\{ needs\.prepare\.outputs\.test_selection \}\}/);
- assert.doesNotMatch(acquire.run,/--(?:total-timeout|elapsed)-seconds/);
- assert.match(fs.readFileSync(path.join(root,'.github/workflows/worker-merge.yml'),'utf8'),/integration:[\s\S]*?timeout-minutes: 35/);
- const definition=JSON.parse(fs.readFileSync(path.join(root,'.github/package-inputs.json'),'utf8'));
- for(const name of [...definition.inputs,...definition.verification_paths])assert.ok(!['data/regional-review/','research/campaigns/'].some(prefix=>name===prefix.slice(0,-1)||name.startsWith(prefix)||prefix.startsWith(name)),name);
-});
-
-test('full-checkout bootstrap accepts live main movement while authenticating only the original frozen helper base',()=>{
-  for(const {body} of checkoutBootstrapBodies()){
-    const f=checkoutBootstrapFixture();f.routes['/pulls/17'].base.sha='d'.repeat(40);
-    const result=runCheckoutBootstrap(body,f);
-    assert.equal(result.status,0,result.stderr);assert.equal(result.outputs.mode,'helper');
-    assert.deepEqual(result.materialized,f.raw);assert.ok(result.calls.includes('/git/commits/'+f.base));
-    assert.equal(result.calls.includes('/git/commits/'+'d'.repeat(40)),false);
-  }
+test('final queue uses pinned stock checkout with exact candidate and transient read-only credentials',()=>{
+ const {source,integration}=queueWorkflow();
+ const step=packageStep(integration,'Checkout exact candidate for application regression');
+ assert.match(step.text,/uses: actions\/checkout@d23441a48e516b6c34aea4fa41551a30e30af803/);
+ assert.match(step.text,/ref: \$\{\{ needs\.prepare\.outputs\.candidate \}\}/);
+ assert.match(step.text,/persist-credentials: false/);assert.match(step.text,/fetch-depth: 1/);
+ assert.match(step.text,/sparse-checkout-cone-mode: false/);
+ assert.match(step.text,/sparse-checkout: \|\n            \/\*\n            !\/\*\//);
+ for(const line of ['lfs: false','submodules: false','GIT_CONFIG_NOSYSTEM:', 'GIT_CONFIG_GLOBAL: /dev/null',
+   'GIT_CONFIG_KEY_0: core.hooksPath','GIT_CONFIG_KEY_1: credential.helper'])assert(step.text.includes(line),line);
+ assert.doesNotMatch(source,/CHECKOUT_BOOTSTRAP|checkout_bootstrap|acquire-ci-checkout|WORLDATLAS_CHECKOUT_TOKEN:/);
+ assert.equal(workflowCondition(step.condition,queueContext()),true);
+ assert.equal(workflowCondition(step.condition,queueContext({profile:'evidence'})),true);
+ assert.equal(workflowCondition(step.condition,queueContext(),{success:false}),false);
+ const verification=packageStep(integration,'Checkout complete candidate for application regression');
+ assert.match(verification.text,/CI_CHECKOUT_SHA: \$\{\{ needs\.prepare\.outputs\.candidate \}\}/);
+ assert.match(verification.text,/CI_CHECKOUT_TREE: \$\{\{ needs\.prepare\.outputs\.candidate_tree \}\}/);
+ assert.match(verification.run,/HEAD\^\{tree\}/);assert.match(verification.run,/symbolic-ref/);
+ assert.match(verification.run,/extraheader/);assert.match(verification.run,/git-credentials-/);
+ assert.match(verification.run,/remote.origin.promisor/);assert.match(verification.run,/partialclonefilter/);
+ const permissions=source.split('  integration:')[1].split('    permissions:')[1].split('    steps:')[0];
+ assert.match(permissions,/contents: read/);assert.doesNotMatch(permissions,/: write/);
 });
 
 test('full-checkout canonical verification executes against real Git and refuses mismatched identity or retained credentials',()=>{
-  const bodies=['merge-integration-checks.yml','worker-merge.yml'].flatMap(workflow=>
+  const bodies=['worker-merge.yml'].flatMap(workflow=>
     [...fs.readFileSync(path.join(root,'.github/workflows',workflow),'utf8').matchAll(/python3 -I -S -B - <<'CHECKOUT_VERIFY'\n([\s\S]*?)          CHECKOUT_VERIFY/g)]
       .map(match=>match[1].split('\n').map(line=>line.slice(10)).join('\n')));
   assert.equal(bodies.length,1);assert.equal(new Set(bodies).size,1);
-  for(const kind of ['valid','wrong-head','wrong-tree','attached','header','credential-helper','remote-credential','inherited-token']){
+  for(const kind of ['valid','wrong-head','wrong-tree','attached','header','credential-helper','remote-credential','inherited-token','input-token','include','temp-credential']){
     const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-checkout-verification-'));
     try{
       const git=(...args)=>execFileSync('git',args,{cwd:directory,encoding:'utf8',stdio:['pipe','pipe','pipe']}).trim();
@@ -443,37 +173,18 @@ test('full-checkout canonical verification executes against real Git and refuses
       git('remote','add','origin','https://github.com/ChengshuLi/WorldAtlas.git');
       if(kind==='header')git('config','http.https://github.com/.extraheader','fixture-secret-never-print');
       if(kind==='credential-helper')git('config','credential.helper','fixture-secret-never-print');
+      if(kind==='include')git('config','include.path','fixture-secret-never-print');
+      if(kind==='temp-credential')fs.writeFileSync(path.join(directory,'git-credentials-fixture.config'),'fixture-secret-never-print');
       if(kind==='remote-credential')git('remote','set-url','origin','https://fixture-secret-never-print@github.com/ChengshuLi/WorldAtlas.git');
-      const env={...process.env,CI_CHECKOUT_REPOSITORY:'ChengshuLi/WorldAtlas',CI_CHECKOUT_SHA:kind==='wrong-head'?'a'.repeat(40):sha,CI_CHECKOUT_TREE:kind==='wrong-tree'?'b'.repeat(40):tree};
-      for(const key of ['WORLDATLAS_CHECKOUT_TOKEN','GH_TOKEN','GITHUB_TOKEN'])delete env[key];
+      const env={...process.env,RUNNER_TEMP:directory,CI_CHECKOUT_REPOSITORY:'ChengshuLi/WorldAtlas',CI_CHECKOUT_SHA:kind==='wrong-head'?'a'.repeat(40):sha,CI_CHECKOUT_TREE:kind==='wrong-tree'?'b'.repeat(40):tree};
+      for(const key of ['WORLDATLAS_CHECKOUT_TOKEN','GH_TOKEN','GITHUB_TOKEN','INPUT_TOKEN'])delete env[key];
       if(kind==='inherited-token')env.WORLDATLAS_CHECKOUT_TOKEN='fixture-secret-never-print';
+      if(kind==='input-token')env.INPUT_TOKEN='fixture-secret-never-print';
       const result=spawnSync('python3',['-I','-S','-B','-c',bodies[0]],{cwd:directory,env,encoding:'utf8',timeout:10000});
       assert.equal(result.status===0,kind==='valid',kind+': '+result.stderr);assert.doesNotMatch(result.stdout+result.stderr,/fixture-secret-never-print/);
     }finally{fs.rmSync(directory,{recursive:true,force:true});}
   }
 });
-
-test('full-checkout bootstrap real wall alarm interrupts a continuously trickling HTTP body',()=>{
-  const f=checkoutBootstrapFixture(),started=Date.now();
-  const result=runCheckoutBootstrap(checkoutBootstrapBodies()[0].body,f,{failure:'trickle',failureRoute:'/git/blobs/'+f.helper});
-  assert.notEqual(result.status,0);assert.match(result.stderr,/no legacy fallback authorized/);
-  assert.equal(result.outputs.mode,undefined);assert.ok(result.calls.filter(value=>value==='trickle-chunk').length>=2);
-  assert.ok(Date.now()-started<3000,'real SIGALRM interrupts socket read despite continuous incoming bytes');
-});
-
-test('queue focused candidate includes the inputs of its nested actual-checkout probes', () => {
-  const source = fs.readFileSync(path.join(root, '.github/workflows/worker-merge.yml'), 'utf8');
-  const candidate = source.match(/- name: Checkout only focused-test inputs for evidence regression[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
-  assert.ok(candidate, 'actual focused queue checkout must be declared');
-  const directories = candidate[1].trim().split('\n').map(row => row.trim());
-  const result = probe(directories, {checkoutTests: true});
-  assert.equal(result.status, 0, result.stdout + result.stderr);
-  const missing = probe(directories.filter(row => !row.includes('selected-checkpoint-reuse-20261012')), {checkoutTests: true});
-  assert.notEqual(missing.status, 0);
-  assert.match(missing.stdout + missing.stderr, /ENOENT/);
-  assert.match(missing.stdout + missing.stderr, /selected-checkpoint-reuse-20261012/);
-});
-
 
 for (const workflow of ['worker-merge.yml']) {
   test(`${workflow}: native geography omits polygon dependencies while general regressions retain them`, () => {
@@ -488,32 +199,190 @@ for (const workflow of ['worker-merge.yml']) {
 
 test('focused delivery tests receive their real Node/Python runtime without an atlas build', () => {
   const {source,integration}=queueWorkflow();
+  const manual=JSON.stringify({base:'a'.repeat(40),head:'b'.repeat(40),files:[
+    'test/evidence-quality.test.mjs','test/premerge-evidence.test.mjs','test/engineering-owned-scope-routing.test.mjs']});
   for(const command of ['npm ci --no-audit --no-fund','python -m pip install -r requirements.txt']) {
     const steps=integration.steps.filter(step=>step.text.includes('run: '+command));
     assert.equal(steps.length,1,command);
     for(const profile of ['full','evidence'])assert.equal(workflowCondition(steps[0].condition,queueContext({profile})),true);
+    // Actions represents an omitted optional string input as empty. Only the
+    // automatic inert prepare branch can emit evidence/reviewed in that case.
+    for(const reviewedTests of [undefined,''])assert.equal(workflowCondition(steps[0].condition,
+      queueContext({profile:'evidence',selection:'reviewed',reviewedTests})),false);
+    for(const [profile,selection,reviewedTests] of [
+      ['evidence','reviewed',manual],
+      ['evidence','complete',''],['evidence','unknown',''],['evidence',null,''],
+      ['full','reviewed',''],['full','complete',''],['full','selected-data','']
+    ])assert.equal(workflowCondition(steps[0].condition,queueContext({profile,selection,reviewedTests})),true);
+    const old=queueContext({profile:'evidence'});delete old.needs.prepare.outputs.test_selection;
+    assert.equal(workflowCondition(steps[0].condition,old),true,'Older or missing selection output cannot opt out');
     assert.equal(workflowCondition(steps[0].condition,queueContext({profile:'unknown'})),false);
     assert.equal(workflowCondition(steps[0].condition,queueContext({profile:'evidence'}),{success:false}),false);
   }
   const build=integration.steps.find(step=>step.run==='npm run build:cloudflare');assert(build);
   assert.equal(workflowCondition(build.condition,queueContext({profile:'evidence'})),false);
   assert.equal(workflowCondition(build.condition,queueContext({profile:'full'})),true);
-  const match=source.match(/- name: Checkout only focused-test inputs for evidence regression[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
-  assert(match);const inputs=new Set(match[1].trim().split('\n').map(line=>line.trim()));
+  assert.match(source,/- name: Materialize exact prepared checkout inputs[\s\S]*?needs\.prepare\.outputs\.checkout_patterns_base64/);
+  const inputs=new Set(focusedCheckoutPatterns(loadPackageInputs(root)).map(name=>name.replace(/^\//,'')));
   for(const name of ['coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
     'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz',
+    'coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json',
     'docs/LOCAL_WORKSPACES.md'])assert(inputs.has(name),name);
   assert(!inputs.has('research'),'no blanket scientific archive checkout');
   const checker=source.match(/- name: Checkout trusted geographic checker([\s\S]*?)(?=      - uses: actions\/setup-node)/)?.[1];
   assert(checker);assert.doesNotMatch(checker,/sparse-checkout-cone-mode: false/);
-  const scope=fs.readFileSync(path.join(root,'.github/workflows/merge-integration-checks.yml'),'utf8').split('  scope:')[1];
-  const candidate=scope.match(/path: candidate([\s\S]*?)(?=      - uses: actions\/setup-node)/)?.[1];
-  assert(candidate);assert.match(candidate,/sparse-checkout-cone-mode: false/);
   for(const name of ['coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
     'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz',
-    'docs/LOCAL_WORKSPACES.md']) {
-    assert(!checker.includes(name),'ordinary leaves must not enter trusted cone checkout');
-    assert(candidate.split('\n').some(line=>line.trim()===name),name);
-  }
+    'coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json',
+    'docs/LOCAL_WORKSPACES.md'])assert(!checker.includes(name),'ordinary leaves must not enter trusted cone checkout');
 
+});
+
+// Execute the actual runner script file: the large value must never become an
+// environment entry or argv item, and decoded paths must never become shell code.
+function materializationFixture(patterns) {
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-checkout-inputs-'));
+  const git=(...args)=>execFileSync('git',args,{cwd:directory,encoding:'utf8',stdio:['pipe','pipe','pipe']}).trim();
+  git('init','-q');git('config','user.name','Fixture');git('config','user.email','fixture@example.invalid');
+  fs.writeFileSync(path.join(directory,'root-file'),'root\n');
+  for(const name of ['selected/input.txt','excluded/private.txt','selected/$(touch INJECTED)','selected/quote\'"; echo nope']){
+    fs.mkdirSync(path.dirname(path.join(directory,name)),{recursive:true});fs.writeFileSync(path.join(directory,name),name+'\n');
+  }
+  git('add','.');git('commit','-qm','fixture');
+  const sha=git('rev-parse','HEAD'),tree=git('rev-parse','HEAD^{tree}');
+  git('checkout','--detach','-q',sha);git('remote','add','origin','https://github.com/ChengshuLi/WorldAtlas.git');
+  execFileSync('git',['sparse-checkout','set','--no-cone','--stdin'],{cwd:directory,input:'/*\n!/*/\n'});
+  const {integration}=queueWorkflow(),step=packageStep(integration,'Materialize exact prepared checkout inputs');
+  const env={...process.env,CI_CHECKOUT_REPOSITORY:'ChengshuLi/WorldAtlas',CI_CHECKOUT_SHA:sha,CI_CHECKOUT_TREE:tree,
+    GH_TOKEN:'fixture-secret-never-print',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0',
+    GIT_CONFIG_COUNT:'2',GIT_CONFIG_KEY_0:'core.hooksPath',GIT_CONFIG_VALUE_0:'/dev/null',GIT_CONFIG_KEY_1:'credential.helper',GIT_CONFIG_VALUE_1:''};
+  const run=({encoded=(Buffer.from(patterns).toString('base64').match(/.{1,76}/g)??[]).join('\n'),override={}}={})=>{
+    // Match Actions: expressions are resolved into a file, then bash runs that file.
+    const script=path.join(directory,'.git','materialize.sh');
+    fs.writeFileSync(script,step.run.replace('${{ needs.prepare.outputs.checkout_patterns_base64 }}',encoded));
+    return spawnSync('bash',[script],{cwd:directory,env:{...env,...override},encoding:'utf8'});
+  };
+  return {directory,git,sha,tree,env,run};
+}
+
+test('both queue profiles share minimal checkout, stdin materialization and exact verification',()=>{
+  const {source,integration}=queueWorkflow();
+  const checkout=packageStep(integration,'Checkout exact candidate for application regression');
+  const materialize=packageStep(integration,'Materialize exact prepared checkout inputs');
+  const verify=packageStep(integration,'Checkout complete candidate for application regression');
+  assert.equal(integration.steps.filter(step=>step.text.includes('uses: actions/checkout@')).length,1);
+  assert.doesNotMatch(source,/sparse-checkout: \$\{\{|checkout_patterns<<|WORLDATLAS_CHECKOUT_PATTERNS/);
+  assert.match(source,/checkout_patterns_base64: \$\{\{ steps\.prepare\.outputs\.checkout_patterns_base64 \}\}/);
+  assert.match(source.split('  prepare:\n')[1].split('  geography:\n')[0],/CHECKOUT_PATTERNS_FORMAT: wrapped-base64/);
+  assert.match(materialize.run,/encoded = '''\$\{\{ needs\.prepare\.outputs\.checkout_patterns_base64 \}\}'''/);
+  assert.match(materialize.run,/b64decode\(encoded\.replace\('\\n', ''\), validate=True\)/);
+  assert.match(materialize.run,/'sparse-checkout', 'set', '--no-cone', '--stdin'\], input=patterns, env=env, check=True/);
+  assert(integration.steps.indexOf(checkout)<integration.steps.indexOf(materialize));
+  assert(integration.steps.indexOf(materialize)<integration.steps.indexOf(verify));
+  for(const step of [checkout,materialize,verify]){
+    for(const profile of ['full','evidence'])assert.equal(workflowCondition(step.condition,queueContext({profile})),true);
+    assert.equal(workflowCondition(step.condition,queueContext({profile:'unknown'})),false);
+    assert.equal(workflowCondition(step.condition,queueContext(),{success:false}),false);
+  }
+});
+
+test('new workflow consumes legacy single-line output from an older producer',()=>{
+  const patterns='/*\n!/*/\n/selected/input.txt',f=materializationFixture(patterns);
+  try {
+    const result=f.run({encoded:Buffer.from(patterns).toString('base64')});
+    assert.equal(result.status,0,result.stderr);
+    assert.equal(fs.readFileSync(path.join(f.directory,'.git/info/sparse-checkout'),'utf8'),patterns+'\n');
+  } finally {fs.rmSync(f.directory,{recursive:true,force:true});}
+});
+
+test('large prepared list reaches real Git as exact stdin bytes; hostile path text remains data',()=>{
+  const rows=['/*','!/*/','/selected/input.txt','/selected/$(touch INJECTED)','/selected/quote\'"; echo nope',
+    ...Array.from({length:1800},(_,i)=>`/coordination/engineering/retained-literal-input-${String(i).padStart(5,'0')}/original-products/source-contact-features.geojson.gz`),
+    'CHECKOUT_INPUTS','touch INJECTED'];
+  const patterns=rows.join('\n');assert(Buffer.byteLength(patterns)>150987);
+  const f=materializationFixture(patterns);
+  try{
+    const realGit=execFileSync('which',['git'],{encoding:'utf8'}).trim();
+    const bin=path.join(f.directory,'.git/probe-bin');fs.mkdirSync(bin);
+    fs.writeFileSync(path.join(bin,'git'),`#!/usr/bin/env python3
+import json, os, subprocess, sys
+args = sys.argv[1:]
+if args[:1] == ['sparse-checkout']:
+    data = sys.stdin.buffer.read()
+    with open('.git/stdin-probe.json', 'w') as stream:
+        json.dump({'args': args, 'stdin': data.decode(), 'token_environment': 'GH_TOKEN' in os.environ,
+                   'config_count': os.environ.get('GIT_CONFIG_COUNT'),
+                   'auth_key': os.environ.get('GIT_CONFIG_KEY_2'),
+                   'has_auth': os.environ.get('GIT_CONFIG_VALUE_2', '').startswith('AUTHORIZATION: basic ')}, stream)
+    sys.exit(subprocess.run([${JSON.stringify(realGit)}, *args], input=data).returncode)
+os.execv(${JSON.stringify(realGit)}, [${JSON.stringify(realGit)}, *args])
+`,{mode:0o755});
+    const result=f.run({override:{PATH:bin+path.delimiter+process.env.PATH}});assert.equal(result.status,0,result.stderr);
+    const rendered=fs.readFileSync(path.join(f.directory,'.git/materialize.sh'),'utf8');
+    const encoded=rendered.match(/encoded = '''([A-Za-z0-9+/=\n]+)'''/)[1];
+    assert(encoded.split('\n').length>1&&encoded.split('\n').every(line=>line.length<=76));
+    assert.equal(Buffer.from(encoded.replaceAll('\n',''),'base64').toString(),patterns);
+    assert.deepEqual(JSON.parse(fs.readFileSync(path.join(f.directory,'.git/stdin-probe.json'))),{
+      args:['sparse-checkout','set','--no-cone','--stdin'],stdin:patterns,token_environment:false,
+      config_count:'3',auth_key:'http.https://github.com/.extraheader',has_auth:true});
+    assert.doesNotMatch(result.stdout+result.stderr,/fixture-secret-never-print/);
+    assert.equal(fs.readFileSync(path.join(f.directory,'.git/info/sparse-checkout'),'utf8'),patterns+'\n');
+    for(const name of ['selected/input.txt','selected/$(touch INJECTED)','selected/quote\'"; echo nope'])
+      assert.equal(fs.readFileSync(path.join(f.directory,name),'utf8'),name+'\n');
+    assert.equal(fs.existsSync(path.join(f.directory,'excluded/private.txt')),false);
+    assert.equal(fs.existsSync(path.join(f.directory,'INJECTED')),false);
+    assert.equal(f.git('rev-parse','HEAD'),f.sha);assert.equal(f.git('rev-parse','HEAD^{tree}'),f.tree);
+    assert.doesNotMatch(f.git('config','--local','--list'),/extraheader|fixture-secret-never-print|credential\./);
+  }finally{fs.rmSync(f.directory,{recursive:true,force:true});}
+});
+
+for(const kind of ['invalid-base64','truncated-base64','foreign-whitespace','wrong-head','wrong-tree','wrong-repository','wrong-remote','header','credential-helper','include','failed-git']){
+  test(`prepared checkout refuses ${kind} without successful materialization`,()=>{
+    const f=materializationFixture('/*\n!/*/\n/selected/input.txt');
+    try{
+      const override={},options={override};
+      if(kind==='invalid-base64')options.encoded='not!base64';
+      if(kind==='truncated-base64')options.encoded=Buffer.from('/*\n!/*/\n/selected/input.txt').toString('base64').slice(0,-1);
+      if(kind==='foreign-whitespace')options.encoded='Lyo= ';
+      if(kind==='wrong-head')override.CI_CHECKOUT_SHA='a'.repeat(40);
+      if(kind==='wrong-tree')override.CI_CHECKOUT_TREE='b'.repeat(40);
+      if(kind==='wrong-repository')override.CI_CHECKOUT_REPOSITORY='other/repo';
+      if(kind==='wrong-remote')f.git('remote','set-url','origin','https://example.invalid/other/repo');
+      if(kind==='header')f.git('config','http.https://github.com/.extraheader','fixture-secret-never-print');
+      if(kind==='credential-helper')f.git('config','credential.helper','fixture-secret-never-print');
+      if(kind==='include')f.git('config','include.path','fixture-secret-never-print');
+      if(kind==='failed-git')fs.writeFileSync(path.join(f.directory,'.git/index.lock'),'occupied');
+      const result=f.run(options);assert.notEqual(result.status,0,kind);
+      assert.equal(fs.existsSync(path.join(f.directory,'selected/input.txt')),false);
+      assert.doesNotMatch(result.stdout+result.stderr,/fixture-secret-never-print/);
+    }finally{fs.rmSync(f.directory,{recursive:true,force:true});}
+  });
+}
+
+
+test('scientific Python install follows assembly and runs only for fallback or ordinary regressions',()=>{
+ const {integration}=queueWorkflow();
+ const installs=integration.steps.filter(step=>step.text.includes('run: python -m pip install -r requirements.txt'));
+ assert.equal(installs.length,1,'One existing pinned requirements install, without a parallel fallback installer');
+ const install=installs[0],assembly=packageStep(integration,'Assemble unchanged base with current selected output');
+ const snapshot=packageStep(integration,'Snapshot original final-worker package inputs');
+ const npm=integration.steps.find(step=>step.text.includes('run: npm ci --no-audit --no-fund'));assert(npm);
+ const python=integration.steps.find(step=>step.text.includes('uses: actions/setup-python@'));assert(python);
+ const order=[python,npm,assembly,install,snapshot].map(step=>integration.steps.indexOf(step));
+ assert.deepEqual(order,[...order].sort((a,b)=>a-b));
+ for(const [profile,selection,shard,assembled,expected] of [
+  ['full','selected-data',0,'true',false],['full','selected-data',0,'false',true],
+  ['full','selected-data',0,'',true],['full','complete',0,'',true],
+  ['full','complete',1,'',true],['full','complete',2,'',true],
+  ['full','reviewed',0,'',true],['evidence','reviewed',0,'',true],
+  ['evidence','complete',0,'',true],['unknown','complete',0,'',false]]){
+  const context=queueContext({profile,selection,reviewedTests:selection==='reviewed'?'{"files":["test/premerge-evidence.test.mjs"]}':''});context.matrix.shard=shard;
+  context.steps.assembly.outputs.assembled=assembled;
+  assert.equal(workflowCondition(install.condition,context),expected,JSON.stringify({profile,selection,shard,assembled}));
+  assert.equal(workflowCondition(install.condition,context,{success:false}),false,'No install after failed assembly or earlier setup');
+  if(selection!=='selected-data')assert.equal(workflowCondition(assembly.condition,context),false,'Ordinary regressions cannot issue an assembled result');
+ }
+ const source=fs.readFileSync(path.join(root,'scripts/assemble-selected-package.mjs'),'utf8');
+ assert.match(source,/inspectPackageNodeRuntime/);assert.doesNotMatch(source,/inspectPackageRuntime/);
+ assert.match(source,/pythonArgs=\['-I','-S','-B'/,'Archive extraction excludes site packages');
 });

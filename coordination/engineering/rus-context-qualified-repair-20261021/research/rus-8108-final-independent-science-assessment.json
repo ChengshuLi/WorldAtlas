@@ -1,0 +1,109 @@
+{
+  "kind": "rus-8108-final-independent-science-assessment",
+  "version": 1,
+  "status": "Independent source/physical/native interpretation; not root acceptance, hosted conservation, or public formal review.",
+  "candidate": {
+    "commit": "9294fb08f04440f42d376b53d9a6a6f944fc8e28",
+    "parent": "256e7a6495601299dec332d01b466e2b5b27493e",
+    "branch": "engineering/rus-context-qualified-repair-20261021",
+    "read_only_checks": [
+      "candidate README and changed-file stat",
+      "ownership-selection.json",
+      "selection-sidecar-001.json",
+      "selected-delivery-expectations.json",
+      "package-inputs.json"
+    ],
+    "selection_expectations": {
+      "cumulative_native_cells": 6344537,
+      "cohorts": 231,
+      "ledger_sha256": "4bdfeae2e778f1994a32525e051a553c6290f617352b9a7a5cfb52bca7e21ee4"
+    }
+  },
+  "original_scope": {
+    "package_id": "gb-RUS-ADM2--repair-evaluation",
+    "original_cells": 2566967,
+    "prior_accepted_historical_not_recounted": 2557516,
+    "residual": 9451,
+    "candidate": 8108,
+    "land": 7971,
+    "water": 137,
+    "held_residual": 1343,
+    "held_land": 1264,
+    "held_water": 79,
+    "preserved_groups": {
+      "opposite_side_CHN": 872,
+      "other_source_families": 471
+    }
+  },
+  "source_comparison": {
+    "report": "inventory/rus-mng-source-geometry-canonical-comparison.json",
+    "report_sha256": "46ccf40d0f11cd1f3157ec0b3f540bdf30bfcead6c04d87cb8c1e32225c3664b",
+    "source_commit": "9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c",
+    "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MNG-ADM1-000.bin.gz",
+    "source_blob_oid": "3268f5d6bc0cb37009f5861e8913b0b71e237949",
+    "encoded_bytes": 81094,
+    "encoded_sha256": "41e797ec554a3e90965c3354f5abe33da2068cc71e9491bf503e7dc13640b793",
+    "decoded_bytes": 260408,
+    "decoded_sha256": "4e692ea5cff967b716e59975768d1560ade8c9844fbe6831bd4d9e6a7123f7aa",
+    "features": 22,
+    "original_negative_operands_compared": 29,
+    "canonical_geometry_equal": 29,
+    "mismatches": 0,
+    "conclusion": "The earlier six cross-runtime hash differences are JSON serialization/hash-method differences; stock JavaScript canonical parsed geometry values are equal for all 29 original MNG negative bindings.",
+    "exact_MNG_point_contacts": {
+      "count": 8,
+      "proposed_8108": 0,
+      "preserved_other_families_471": 8
+    }
+  },
+  "physical_join": {
+    "commit": "d41ba96f505fe507773cb1a23aab558941ee5a9c",
+    "path": "coordination/engineering/russia-repair-delivery-20261017/physical-001/whole-target-support.json",
+    "blob_oid": "68cdef5a025eb092990571c2181c736ae76e4eec",
+    "bytes": 54074211,
+    "sha256": "38c8d148dbc33bab7fc94e2c7931b9a2ca757ff04d90191f08fa2506a6fc1a8c",
+    "targets": 334,
+    "issue_bearing_targets": 140,
+    "proposal_targets": 32,
+    "proposal_targets_with_issues": 6,
+    "proposal_keys_on_issue_targets": 937,
+    "land_keys_on_issue_targets": 800,
+    "water_keys_on_issue_targets": 137,
+    "issue_target_ids": [
+      "gb:RUS:ADM2:50074027B15761543307374",
+      "gb:RUS:ADM2:50074027B18064199701976",
+      "gb:RUS:ADM2:50074027B22004389566857",
+      "gb:RUS:ADM2:50074027B42733914964900",
+      "gb:RUS:ADM2:50074027B52464361757597",
+      "gb:RUS:ADM2:50074027B57903229029345"
+    ],
+    "limit": "These are whole-target adverse issue records and exact proposed-key counts per affected target; the receipt does not establish that every candidate center intersects an issue geometry or that target issues are immaterial.",
+    "residual_targets_with_any_issues": 9,
+    "all_original_residual_keys_on_issue_bearing_targets": 1089
+  },
+  "native_evidence": {
+    "diagnostic": "coordination/engineering/rus-context-qualified-repair-20261021/native-diagnostic-002/native-diagnostic.json",
+    "diagnostic_sha256": "72d66e29049391e01c06a31a3460efa5d581c16975e2daaa7cf54cf57da9683c",
+    "requested": 9451,
+    "supported": 8108,
+    "held": 1343,
+    "exact_key_partition": true,
+    "constructor_commit": "7baddfd25c2ac30618451af26398ad27c6eeee8c",
+    "qualified_candidate_cells": 8108,
+    "components": 32,
+    "duplicates": 0,
+    "held_keys_outside_constructor": 1343,
+    "authority_commit": "7baddfd25c2ac30618451af26398ad27c6eeee8c",
+    "authority_qualified_cells": 8108
+  },
+  "assessment": {
+    "decision": "The exact 8,108 contextual subset is supported for final independent review under the source-specific original contract, provided the packet updates the now-resolved MNG hash comparison and retains all physical/source limitations. The exact stock diagnostic and constructor agree on the same key set; the remainder of the original 9,451 stays held.",
+    "limits": [
+      "This does not establish current-owner conservation or root acceptance.",
+      "The 937 candidate keys on six issue-bearing physical targets remain adverse context; all 137 candidate water keys are among them.",
+      "The 8,108 are contextualized by the exact CHN-facing source record and cited boundary context; this does not establish sovereignty, exact legal coordinates, current municipal authority, or a provider-accuracy threshold.",
+      "The 872 opposite-side CHN keys and 471 other-family keys remain outside this candidate."
+    ],
+    "candidate_text_correction": "Candidate README in 9294fb0 still says six MNG hash differences are under investigation. Replace with the settled 29/29 equality result and ensure the immutable comparison report/source bindings are included in the public packet."
+  }
+}

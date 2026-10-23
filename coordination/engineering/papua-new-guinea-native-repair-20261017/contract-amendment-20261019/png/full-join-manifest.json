@@ -1,0 +1,286 @@
+{
+  "accepted_delta_keys": [
+    [
+      239882,
+      138070,
+      35458,
+      "gb:PNG:ADM3:22992897B15196249368430"
+    ],
+    [
+      239883,
+      138070,
+      35458,
+      "gb:PNG:ADM3:22992897B15196249368430"
+    ],
+    [
+      239881,
+      138071,
+      35458,
+      "gb:PNG:ADM3:22992897B15196249368430"
+    ],
+    [
+      239882,
+      138071,
+      35458,
+      "gb:PNG:ADM3:22992897B15196249368430"
+    ],
+    [
+      239883,
+      138071,
+      35458,
+      "gb:PNG:ADM3:22992897B15196249368430"
+    ],
+    [
+      239884,
+      138071,
+      35458,
+      "gb:PNG:ADM3:22992897B15196249368430"
+    ],
+    [
+      239883,
+      138072,
+      35458,
+      "gb:PNG:ADM3:22992897B15196249368430"
+    ],
+    [
+      239884,
+      138072,
+      35458,
+      "gb:PNG:ADM3:22992897B15196249368430"
+    ],
+    [
+      239885,
+      138072,
+      35458,
+      "gb:PNG:ADM3:22992897B15196249368430"
+    ]
+  ],
+  "artifact": "PNG original 56,552-key owner/source/class join",
+  "contact_summary": {
+    "coordinate_rule": "Longitude (360*x + 180 - 180*262166) / 262166; latitude native-row-latitudes.f64le[row.y] decoded as little-endian IEEE-754 binary64. Source GeoJSON coordinates are evaluated as stored; no CRS/datum transformation, snapping, or normalization.",
+    "country_admin1_identical_key_set": true,
+    "country_or_admin1_union_original_source_contact_count": 18,
+    "foreign_admin1_contact_count": 15,
+    "foreign_country_admin0_contact_count": 15,
+    "foreign_original_source_contact_count": 9,
+    "method": "Even-odd point-in-ring over each Polygon/MultiPolygon, respecting interior rings; centers are tested separately against each full pinned operand. A boundary result would be retained as unresolved; none occurred.",
+    "original_source_overlap_with_country_admin1": 6,
+    "territorial_cells_without_any_source_operand_contact": 0
+  },
+  "current_native_bridge": {
+    "PNG": {
+      "base_additive_effective": 0,
+      "overlap": 0,
+      "prior_accepted_targets": 56485,
+      "residual_keys": 67
+    },
+    "RWA": {
+      "base_additive_effective": 0,
+      "overlap": 0,
+      "residual_keys": 307
+    },
+    "accepted_main": "962811940c1aa62ed432ccf8c81c062d3a136a7c",
+    "bytes": 47624,
+    "file": "current-native-bridge.json",
+    "geometry_runs": 0,
+    "native_grid_manifest_latitude_changes": false,
+    "normative_latitude_pin_unchanged": true,
+    "note": "Immutable bridge witness payload to include in durable/public support; no Library-only locator is required.",
+    "observer_invocations": 0,
+    "original_current_base_identity_matches": true,
+    "qualification": false,
+    "sha256": "401189eea736614ecbdbe9c33e8001fb8f74d6202567d77776b96addf429fd84",
+    "task_root_relative_path": "contract-amendment-materialized-20261019/current-native-bridge.json"
+  },
+  "current_total": {
+    "accepted": 56485,
+    "held": 67,
+    "new_credit": 0
+  },
+  "data_file": "png-56552-key-owner-source-class-join.jsonl.gz",
+  "data_sha256": "5cb86d9ddbee9e10cc47f5b325dcc97c5c6b699ead273aa0bfc3ceb1dd81b545",
+  "held_reasons": {
+    "source_fitness": 49,
+    "territorial": 18
+  },
+  "interval_limitation": "Superseded: the independent original-interval witness directly reconstructs the exact 20,060-row original contract tuple partition and verifies that the 56,552 full-join keys/run memberships match it. The 67 current residual keys touch 34 original tuples. No arbitrary historical IDs were invented; use each exact tuple plus its canonical 1-based witness ordinal. The derived source/physical run-pair locator remains a convenience locator, not a historical ID.",
+  "interval_validation": {
+    "all_full_join_keys_and_run_memberships_match": true,
+    "all_pairs_constant_owner_source_feature_set_class": true,
+    "all_rows_form_one_contiguous_intersection_within_paired_run_extents": true,
+    "all_run_pairs_same_block_and_row": true,
+    "derived_locator_scheme": "png-source-physical-run-pair-v1",
+    "exact_original_tuple_partition_verified": true,
+    "historical_interval_ids_recovered": false,
+    "historical_interval_note": "The exact original contract tuple and canonical 1-based ordinal are present in original-interval-review.json for all 67 residual keys, with the full 20,060-row partition validated. No arbitrary historical IDs were invented. The derived run-pair locator remains convenience-only, not an interval ID.",
+    "matches_reported_original_interval_count": true,
+    "residual_keys": 67,
+    "residual_original_intervals": 34,
+    "residual_partition": {
+      "overlap": 0,
+      "source_fitness": 49,
+      "territorial": 18
+    },
+    "rows": 56552,
+    "tuple_partition_rows": 20060,
+    "tuple_partition_sha256": "629edd1565b40132b489390c8ae7146af612cab0f96df7ada5e74f11dc5cec3d",
+    "unique_run_pairs": 20060
+  },
+  "mixed_original_interval_1213": {
+    "accepted_key": [
+      238388,
+      132808,
+      35660
+    ],
+    "held_key": [
+      238387,
+      132808,
+      35660
+    ],
+    "interpretation": "One original tuple with mixed held/accepted cells; retain without collapsing the distinction.",
+    "ordinal_1_based": 1213,
+    "tuple": [
+      132808,
+      238387,
+      238389,
+      [
+        35660
+      ],
+      [
+        50892,
+        50948,
+        51016
+      ],
+      "land"
+    ]
+  },
+  "original_interval_witness": {
+    "all_full_join_keys_and_run_memberships_match": true,
+    "all_land": true,
+    "bytes": 56936,
+    "cells": 56552,
+    "data_commit": "962811940c1aa62ed432ccf8c81c062d3a136a7c",
+    "derived_locators_equal_exact_original_tuple_partition": true,
+    "file": "original-interval-review.json",
+    "intervals": 20060,
+    "owners": 130,
+    "package": "gb-PNG-ADM3--repair-evaluation",
+    "residual_keys": 67,
+    "residual_original_intervals": 34,
+    "residual_witness": "packages.gb-PNG-ADM3--repair-evaluation.residual_original_witness",
+    "row_count": 20060,
+    "sha256": "332b9b1e7ee967e2144fe2a522111ce09ff945eb6be4880a4c761ea2205e1f95",
+    "source_extractor_git_blob": "c5ba9331deb93eed40662d1dc579cdaedea55c46",
+    "source_features": 186,
+    "task_root_relative_path": "contract-amendment-materialized-20261019/original-interval-review.json",
+    "tuple_definition": [
+      "y",
+      "start",
+      "end",
+      "owners",
+      "source_feature_set",
+      "class"
+    ]
+  },
+  "pins": {
+    "current_residual_dispositions": {
+      "blob": "87da83591b19d46a8270333f502c732f4d2e451e",
+      "bytes": 206458,
+      "commit": "e84f5bf25b1335eaa084abb9894596dd56867cf9",
+      "sha256": "6c446d77a418cb438135c299d7468822bdf1456e29b50d800862c9d5b621bc61"
+    },
+    "old_native_patch": {
+      "blob": "e98517fdaf728a6aac2f4c96f4dd3ae4232079b9",
+      "bytes": 563915,
+      "commit": "b7dd53ee88dfacf0472401f331998ca0b2e881b4",
+      "sha256": "cbdf511b78ed34f9b5733b3b4bf8848ac4047464a62277c915917106ce9ec4ef"
+    },
+    "physical_support": [
+      {
+        "blob": "5f8f1e8aa032abc85e931930eb4eb9b0dbc0ebdb",
+        "block": 32,
+        "bytes": 516947,
+        "sha256": "2b3d882155a28df8782b346bd7382b2faa1ccfa0ebf1c2f0f2c6d779c055905a"
+      },
+      {
+        "blob": "f489fb1c9f462c1bda2c1e0b2818114e51bcc061",
+        "block": 33,
+        "bytes": 431020,
+        "sha256": "440955ea8d0654a1bc5367c4da0b9eb73df1e79c152ebc7c8576d9a2af9bb7a1"
+      },
+      {
+        "blob": "7128c4c4c2709f327e42584448fb14797801fbbf",
+        "block": 34,
+        "bytes": 306738,
+        "sha256": "05e067f8e532302cf5f94a8565fd5dfc231ac0214ff5710d51745315fe568840"
+      }
+    ],
+    "previous_held_original": {
+      "blob": "a804f1b9f790affe4ac65d8fb072933f3093d404",
+      "bytes": 2575,
+      "commit": "b7dd53ee88dfacf0472401f331998ca0b2e881b4",
+      "sha256": "b1228939a08d58b00fa7d11b7bbb06ad548f67748a6fa0487ae2082b097f5c79"
+    },
+    "source_candidates": [
+      {
+        "blob": "5c56cb06a4879060a4ad933395cd643cdaaa5565",
+        "block": 32,
+        "bytes": 800317,
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-032.json.gz",
+        "sha256": "00a677c75540d3be3a750e7f41d2d296f05dc24b84cec9d3776713986a7f6064"
+      },
+      {
+        "blob": "192de4b75ca39bf07e4ead53647b39892a904642",
+        "block": 33,
+        "bytes": 533464,
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-033.json.gz",
+        "sha256": "dfd5c9e9e7aa5768b13d80799d8ec899fbaa64baf2a8fdf35d3bb7d8c9db3933"
+      },
+      {
+        "blob": "8f9fd6a445d02d67ec6aa130ee7b06d904f84c48",
+        "block": 34,
+        "bytes": 360842,
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-034.json.gz",
+        "sha256": "3b0256943972951dce2a3fc3c6c4d0c19b0c88e33a0c0870c1ebd130303ed68d"
+      }
+    ],
+    "source_scope_assessment": {
+      "blob": "5b25e8ff9c17e992928227591fe9d36e55f91d4e",
+      "bytes": 488509,
+      "commit": "eb14f131b455ff3d45caf6bba876495714c17a53",
+      "sha256": "b706173bb3158e8fe26bc5a8971b8e53c0351f1caf5664ca1c3b855184667fcf"
+    }
+  },
+  "public_support_payloads": [
+    {
+      "file": "original-interval-review.json",
+      "role": "immutable exact tuple partition and 67 residual tuple/ordinal witnesses; include bytes in eventual public support",
+      "sha256": "332b9b1e7ee967e2144fe2a522111ce09ff945eb6be4880a4c761ea2205e1f95"
+    },
+    {
+      "file": "current-native-bridge.json",
+      "role": "immutable current-native conservation bridge at accepted main; include bytes in eventual public support",
+      "sha256": "401189eea736614ecbdbe9c33e8001fb8f74d6202567d77776b96addf429fd84"
+    }
+  ],
+  "review_status": "Finite documented-unresolved proposal prepared; no acceptance or credit until final exact-public-head review, durable public evidence delivery, and explicit root acceptance.",
+  "row_count": 56552,
+  "scope": {
+    "all_land": true,
+    "original_cells": 56552,
+    "original_intervals": 20060,
+    "owners": 130,
+    "package": "gb-PNG-ADM3--repair-evaluation"
+  },
+  "source_mapping": {
+    "candidate_run_lookups": 56552,
+    "mapped_source_index_rows": 168125,
+    "missing_source_indices": 0,
+    "physical_support_run_lookups": 56552
+  },
+  "status_counts": {
+    "accepted_by_current_packet_complement": 9,
+    "accepted_prior_native_patch": 56476,
+    "held_current": 67
+  }
+}

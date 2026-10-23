@@ -4,673 +4,536 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {pathToFileURL, fileURLToPath} from 'node:url';
+import {fileURLToPath} from 'node:url';
+import {deflateSync} from 'node:zlib';
+import {inspectUnchangedSelectedGeography, inspectExecutingSelectedGeography} from '../scripts/check-unchanged-selected-geography.mjs';
 import {createRoutingMetadataAcquisition} from '../scripts/geography-routing-metadata.mjs';
-import {inspectUnchangedSelectedGeography, inspectExecutingSelectedGeography, EXECUTION_CODE, REBIND_CODE} from '../scripts/check-unchanged-selected-geography.mjs';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
-const P = 'research/geography/selected-fixture/';
-const POLICY = 'coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
+const P = 'coordination/engineering/selected-data-fixture/';
 const CHECKPOINTS = 'coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
-const canonical = value => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object' ? Object.fromEntries(Object.keys(value).sort().map(k => [k, canonical(value[k])])) : value;
-const HANDOFFS = 'coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json';
-const RECEIVING = 'coordination/engineering/receiving-metadata-fixture/';
-const METADATA = [RECEIVING + 'README.md', RECEIVING + 'evidence-quality.json'];
+const RECEIVING = P + 'README.md';
 const body = value => Buffer.isBuffer(value) ? value : Buffer.from(typeof value === 'string' ? value : JSON.stringify(value));
 const sha = value => createHash('sha256').update(body(value)).digest('hex');
 
-// These intentionally tiny opaque leaf bodies test immutable routing/equality,
-// not scientific validity. Historical collector replay is compared separately
-// with retained original full-reader logs; these leaf sentinels are not decoded.
-function fixture({missingOrigin = false, splitBaseline = false, rebind = true, missingStrictOrigin = false, checkpoint = false} = {}) {
+// Opaque scientific outputs deliberately have no historical producer schema.
+// This fixture proves immutable data applicability, never scientific legality.
+function fixture({projection = false} = {}) {
   const cache = path.join(ROOT, '.cache/unchanged-selected-fixtures');
   fs.mkdirSync(cache, {recursive: true});
   const directory = fs.mkdtempSync(path.join(cache, 'case-'));
   const env = {...Object.fromEntries(Object.entries(process.env).filter(([k]) => !k.startsWith('GIT_'))),
-    GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_NO_LAZY_FETCH: '1',
-    GIT_AUTHOR_NAME: 'fixture', GIT_AUTHOR_EMAIL: 'fixture@example.invalid',
-    GIT_COMMITTER_NAME: 'fixture', GIT_COMMITTER_EMAIL: 'fixture@example.invalid'};
-  const git = (args, input) => execFileSync('git', ['-C', directory, ...args], {env, input, maxBuffer: 4 * 1024 * 1024, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
+    GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_NO_LAZY_FETCH: '1'};
+  const git = (args, input) => execFileSync('git', ['-C', directory, ...args],
+    {env, input, maxBuffer: 4 * 1024 * 1024, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
   git(['init', '--bare']);
   const files = {}, commits = new Map();
   const put = (name, value) => { files[name] = body(value); return name; };
   function commit(values = files, parent, modes = {}) {
-    // Git writes the complete fixture tree in one process. The import-only ref
-    // is removed before returning; ordinary fixture refs and HEAD stay untouched.
-    const reference = 'refs/test-fixture-import';
-    const stream = [Buffer.from(`commit ${reference}\nmark :1\n`
-      + 'committer fixture <fixture@example.invalid> 0 +0000\ndata 8\nfixture\n'
+    const ref = 'refs/test-fixture-import';
+    const stream = [Buffer.from(`commit ${ref}\nmark :1\ncommitter fixture <fixture@example.invalid> 0 +0000\ndata 8\nfixture\n`
       + (parent ? `from ${parent}\n` : '') + 'deleteall\n')];
     for (const [name, value] of Object.entries(values)) {
       const raw = body(value);
       stream.push(Buffer.from(`M ${modes[name] ?? '100644'} inline ${JSON.stringify(name)}\ndata ${raw.length}\n`), raw, Buffer.from('\n'));
     }
-    stream.push(Buffer.from(`\nget-mark :1\nreset ${reference}\n\ndone\n`));
+    stream.push(Buffer.from(`\nget-mark :1\nreset ${ref}\n\ndone\n`));
     const id = git(['fast-import', '--quiet', '--force'], Buffer.concat(stream));
     commits.set(id, {...values}); return id;
   }
-  const pin = (name, at, extra = {}) => {
+  const pin = (name, at) => {
     const raw = commits.get(at)[name];
-    return {commit: at, path: name, mode: '100644', git_blob_oid: git(['hash-object', '--stdin'], raw), bytes: raw.length, sha256: sha(raw), ...extra};
+    return {commit: at, path: name, mode: '100644', git_blob_oid: git(['hash-object', '--stdin'], raw), bytes: raw.length, sha256: sha(raw)};
   };
-  for (const name of new Set([...EXECUTION_CODE, ...REBIND_CODE, 'scripts/geography-prefetch.mjs'])) put(name, 'trusted code leaf');
-  const catalogue = {version: 1, kind: 'accepted-selected-checkpoints-v1', checkpoints: []};
-  put(CHECKPOINTS, catalogue);
-  put(POLICY, fs.readFileSync(path.join(ROOT, POLICY)));
-  const world = {parts: ['geography/source.json']};
-  put('data/world-index.json', world);
-  for (const name of ['data/geography/source.json', 'data/canonical-grid/bounds.json.gz', 'data/hierarchy.json', 'data/canonical-grid/manifest.json', 'data/geographic-releases/index.json', 'data/geographic-releases/current.json.gz']) put(name, 'opaque complete scientific leaf');
-  for (const name of ['handoff', 'receipt', 'source-publication', 'source-inventory', 'source-operating', 'native-publication', 'native-inventory', 'native-operating', 'native-asset', 'source-facts', 'native-facts', 'original-ledger', 'original-manifest', 'rule', 'predecessor', 'code-source', 'terminal', 'stderr', 'stdout']) put(P + name + '.json', {leaf: name});
-  put(P + 'original-source-map.json', {kind: 'complete-world-index-with-exact-encoded-overrides'});
-  put('data/ownership-selection.json', {selected_geography: {kind: 'complete-world-index-with-exact-encoded-overrides', path: P + 'original-source-map.json'}});
-  const original = commit();
-  const origin = missingOrigin ? 'f'.repeat(40) : original;
-  const historical = name => pin(name, original, {commit: origin});
-  const ordinaryBaseline = {version: 1, pins: []};
-  const oldBaseline = splitBaseline ? {version: 2, kind: 'current-selected-native-baseline-v1', pins: [pin('data/ownership-selection.json', original)]} : ordinaryBaseline;
-  const newBaseline = splitBaseline ? {...oldBaseline, pins: [{...oldBaseline.pins[0], kind: 'not-consumed-shape-control'}]} : ordinaryBaseline;
-  // Distinct but valid historical selector baselines exercise the strict route.
-  let selectedOriginal = original;
-  if (splitBaseline) {
-    put(P + 'marker.json', 'second original selector commit'); selectedOriginal = commit(files, original);
-    newBaseline.pins = [pin('data/ownership-selection.json', selectedOriginal)];
-  }
-  const aliasOriginal = {...historical(P + 'source-publication.json'), path: '.cache/native-grid-candidates/example/publication.json', kind: 'completed-inventory-body'};
-  const source = {operation: 'retained-land-source-premises-v1', baseline: oldBaseline, source_rule: {profile: 'retained-consumed-administrative-source'}};
-  const request = {operation: 'unactivated-additive-native-batch-v1', baseline: newBaseline,
-    additive: {source_profile: 'retained-consumed-administrative-source', publication_path: aliasOriginal.path,
-      inventory_path: P + 'source-inventory.json', operating_path: P + 'source-operating.json',
-      inputs: [aliasOriginal, historical(P + 'source-inventory.json'), historical(P + 'source-operating.json')]}};
-  put(P + 'source-request.json', source); put(P + 'native-request.json', request);
-  const requests = commit(files, original);
-  const originalPins = Object.fromEntries(['ledger', 'native_facts', 'native_manifest', 'source_facts'].map(role => [role, historical(P + ({ledger: 'original-ledger', native_facts: 'native-facts', native_manifest: 'original-manifest', source_facts: 'source-facts'}[role]) + '.json')]));
-  originalPins.source_request = pin(P + 'source-request.json', requests);
-  originalPins.native_request = pin(P + 'native-request.json', requests);
-  const binding = {version: 1, kind: 'original-issued-rule-source-custody-v1', original_pins: originalPins,
-    source_output_aliases: [{original: aliasOriginal, published: pin(P + 'source-publication.json', original, missingStrictOrigin ? {commit: 'e'.repeat(40)} : {})}],
-    native_proof: {publication: historical(P + 'native-publication.json'), inventory: historical(P + 'native-inventory.json'), operating: historical(P + 'native-operating.json'), assets: [historical(P + 'native-asset.json')]}};
-  put(P + 'binding.json', binding);
-  const bindings = commit(files, requests);
-  const entry = {authority_sha256: 'a'.repeat(64), rule_sha256: sha(files[P + 'rule.json']), policy_id: 'retained-source-literal-additions', policy_version: 1,
-    rule_preimage: historical(P + 'rule.json'), source_authority: pin(P + 'binding.json', bindings)};
-  put(P + 'registry.json', {version: 1, kind: 'retained-rule-authority-registry-v1', entries: [entry]});
-  const ledger = {version: 2, kind: 'native-additive-repair-ledger-v2'};
-  if (rebind) {
-    put(P + 'rebind-request.json', {acquisition: {target_sources: [{target_id: 'one', path: 'data/geography/source.json'}], predecessor_proof: historical(P + 'predecessor.json')}});
-    put(P + 'issued-plan.json', {original_inputs: [pin(P + 'native-asset.json', original)]});
-    const inputs = commit(files, bindings);
-    const custody = Object.fromEntries(['code_source', 'terminal', 'stderr', 'stdout'].map(role => [role, pin(P + role.replace('_', '-') + '.json', original)]));
-    custody.issued_plan = pin(P + 'issued-plan.json', inputs);
-    put(P + 'rebind-operating.json', {execution_custody: custody});
-    const operating = commit(files, inputs);
-    const certificate = {version: 1, kind: 'qualified-native-additive-current-bank-rebind-v1', authority_registry_sha256: 'a'.repeat(64), base_selection: {}, execution_commit: original,
-      request: pin(P + 'rebind-request.json', inputs), operating: pin(P + 'rebind-operating.json', operating),
-      facts: pin(P + 'native-facts.json', original), publication: pin(P + 'native-publication.json', original), result: pin(P + 'native-asset.json', original)};
-    put(P + 'rebind-certificate.json', certificate);
-    const certificates = commit(files, operating);
-    ledger.current_rebind = pin(P + 'rebind-certificate.json', certificates);
-  }
-  put(P + 'ledger.json', ledger); put(P + 'envelope.json', {version: 2}); put(P + 'patch.json', {rows: []});
-  const assets = commit(files, bindings);
-  const index = {version: 1, kind: 'ordered-exact-original-byte-fragments', parts: [{path: 'fragment.gz'}]};
-  put(P + 'native-bank/index.json', index); put(P + 'native-bank/fragment.gz', 'opaque native fragment');
-  const manifest = {version: 2, method: 'native-linear-evenodd-first-owner-v1', parts: [{kind: 'runs', path: 'absent.bin.gz'}],
-    original_assets: {bounds: {commit: original, path: 'data/canonical-grid/bounds.json.gz'}},
-    native_asset_transport: {version: 1, kind: index.kind, logical_assets: 1, original_compressed_bytes: 1, index: {path: P + 'native-bank/index.json', bytes: files[P + 'native-bank/index.json'].length, sha256: sha(index)}}};
-  put(P + 'native/manifest.json', manifest);
-  const bank = {version: 1, kind: 'complete-world-index-with-exact-encoded-overrides', world_index: historical('data/world-index.json'), unchanged_files: [historical('data/geography/source.json')], overrides: []};
-  put(P + 'source-bank.json', bank);
-  const sidecar = {version: 2, kind: 'retained-native-additive-selection-v2', base_selection: {}, runtime_envelope: pin(P + 'envelope.json', assets), authority_registry: pin(P + 'registry.json', assets),
-    logical_asset_map: {base_manifest: historical(P + 'original-manifest.json'), owner_roster: historical('data/canonical-grid/bounds.json.gz'), patch: pin(P + 'patch.json', assets), ledger: pin(P + 'ledger.json', assets)}};
-  put(P + 'sidecar.json', sidecar);
   const currentPin = name => ({path: name, bytes: files[name].length, sha256: sha(files[name])});
-  const selection = {version: 1, method: manifest.method, release_id: 'fixture', manifest_path: P + 'native/manifest.json', sha256: sha(manifest),
-    selected_geography: {version: 1, kind: bank.kind, ...currentPin(P + 'source-bank.json')}, additive_release: currentPin(P + 'sidecar.json')};
-  put('data/ownership-selection.json', selection);
-  put('scripts/native-ownership/verified-candidates.json', {version: 1, candidates: {[selection.sha256]: {role: 'reviewed-exhaustive-native-rule-comparison', commit: original, path: P + 'receipt.json'}}});
-  put(HANDOFFS, {version: 1, kind: 'accepted-administrative-handoffs-v1', entries: [{accepted_source_commit: original, source: pin(P + 'handoff.json', original)}]});
-  put('data/geographic-releases/current-manifest.json', {path: 'current.json.gz', sha256: sha(files['data/geographic-releases/current.json.gz'])});
-  if (checkpoint) {
-    // Opaque complete products must remain unread: only their original pins and
-    // the explicitly authenticated route metadata are needed for applicability.
-    for (const role of ['facts', 'certificate', 'publication', 'routed']) put(P + 'checkpoint-' + role, 'opaque checkpoint ' + role);
-    put(P + 'checkpoint-custody', {complete_cold_custody:[{facts:{selected_commit:original}, inventory:[pin(POLICY, original)]}]});
-    const routes = [{path: POLICY, tree: `100644 blob ${git(['hash-object', '--stdin'], files[POLICY])}\t${POLICY}\0`}, {path: P + 'checkpoint-absent', tree: ''}, {path: P + 'checkpoint-routed',
-      tree: `100644 blob ${git(['hash-object', '--stdin'], files[P + 'checkpoint-routed'])}\t${P}checkpoint-routed\0`}];
-    put(P + 'checkpoint-routes', routes);
-    const retained = commit(files, assets);
-    catalogue.checkpoints.push({id: 'ordinary-retained-root', accepted_head: retained, selected_commit: original,
-      selection_sha256: sha(JSON.stringify(canonical(selection)) + '\n'), execution_commit: original,
-      execution_code_sha256: 'a'.repeat(64), runtime_sha256: 'b'.repeat(64),
-      ...Object.fromEntries(['facts', 'certificate', 'publication', 'custody', 'routes'].map(role => [role, pin(P + 'checkpoint-' + role, retained)]))});
-    put(CHECKPOINTS, catalogue);
+  put(CHECKPOINTS, {version: 1, kind: 'accepted-selected-checkpoints-v1', checkpoints: []});
+  put('data/world-index.json', {parts: ['geography/source.json']});
+  for (const name of ['data/geography/source.json', 'data/canonical-grid/bounds.json.gz', 'data/hierarchy.json',
+    'data/canonical-grid/manifest.json', 'data/geographic-releases/index.json', 'data/geographic-releases/current.json.gz',
+    ...['source-override.json', 'ledger.json', 'registry.json', 'patch.json', 'runtime.json', 'base-manifest.json',
+      'owners.json.gz', 'receipt.json', 'native/rows.bin.gz', 'native-bank/fragment.gz', 'review.json', 'code.json', 'qualification.gz'].map(p => P + p)]) {
+    put(name, 'opaque selected output: ' + name);
   }
-  put(METADATA[0], 'Receiving packet description.\n');
-  put(METADATA[1], {version: 1, description: 'Receiving packet metadata.'});
-  const baseline = commit(files, assets), candidateFiles = {...files, 'research/geography/new-packet/source.json': body('unactivated source publication')};
+  put(RECEIVING, 'receiving metadata');
+  if (projection) for (const name of ['reference-before.json', 'reference-receipt.json', 'reference-source-before.json']) put(P + name, 'original metadata operand: ' + name);
+  // A huge/unknown historical graph is not part of selected-data applicability.
+  put(P + 'historical-authority.json', {unrecognized_producer: true, routes: Array.from({length: 5000}, (_, i) => 'old-' + i)});
+  const original = commit();
+  const historical = name => pin(name, original);
+  put(P + 'native-bank/index.json', {version: 1, kind: 'ordered-exact-original-byte-fragments', parts: [{path: 'fragment.gz'}]});
+  put(P + 'manifest.json', {version: 2, method: 'native-linear-evenodd-first-owner-v1',
+    parts: [{kind: 'rows', path: 'native/rows.bin.gz'}, {kind: 'runs', path: 'native/absent.bin.gz'}],
+    original_assets: {bounds: {commit: original, path: 'data/canonical-grid/bounds.json.gz'}},
+    native_asset_transport: {version: 1, kind: 'ordered-exact-original-byte-fragments', index: currentPin(P + 'native-bank/index.json'), logical_assets: 2, original_compressed_bytes: 1}});
+  put(P + 'source-bank.json', {version: 1, kind: 'complete-world-index-with-exact-encoded-overrides',
+    world_index: historical('data/world-index.json'), unchanged_files: [historical('data/geography/source.json')], overrides: [historical(P + 'source-override.json')]});
+  put(P + 'artifact-certificate.json', {version: 1, kind: 'qualified-arctic-immutable-product-certificate-v1',
+    application_consumer_code: currentPin(P + 'code.json'), qualification_inventory: currentPin(P + 'qualification.gz')});
+  const selection = {version: 1, method: 'native-linear-evenodd-first-owner-v1', release_id: 'fixture-release',
+    manifest_path: P + 'manifest.json', sha256: sha(files[P + 'manifest.json']),
+    selected_geography: {version: 1, kind: 'complete-world-index-with-exact-encoded-overrides', ...currentPin(P + 'source-bank.json')},
+    artifact_consumption: {certificate: currentPin(P + 'artifact-certificate.json'), review: currentPin(P + 'review.json')}};
+  if (projection) {
+    put(P + 'reference-projection.json', {version: 1, kind: 'native-reference-metadata-projection-v1',
+      hierarchy: {before: historical(P + 'reference-before.json'), after: historical('data/hierarchy.json')},
+      receipts: [historical(P + 'reference-receipt.json')], source_updates: [{logical_path: 'data/geography/source.json',
+        before: historical(P + 'reference-source-before.json'), after: historical('data/geography/source.json')}]});
+    selection.reference_projection = currentPin(P + 'reference-projection.json');
+  }
+  put(P + 'sidecar.json', {version: 2, kind: 'retained-native-additive-selection-v2', base_selection: selection,
+    authority_registry: historical(P + 'registry.json'), runtime_envelope: historical(P + 'runtime.json'),
+    logical_asset_map: {base_manifest: historical(P + 'base-manifest.json'), ledger: historical(P + 'ledger.json'),
+      owner_roster: historical(P + 'owners.json.gz'), patch: historical(P + 'patch.json')}});
+  put('data/ownership-selection.json', {...selection, additive_release: currentPin(P + 'sidecar.json')});
+  put('data/geographic-releases/current-manifest.json', {path: 'current.json.gz', sha256: sha(files['data/geographic-releases/current.json.gz'])});
+  put('scripts/native-ownership/verified-candidates.json', {version: 1, candidates: {[selection.sha256]:
+    {role: 'reviewed-exhaustive-native-rule-comparison', commit: original, path: P + 'receipt.json'}}});
+  const baseline = commit(files, original), candidateFiles = {...files, 'scripts/changed-reader.mjs': body('new software'),
+    [P + 'new-evidence.json']: body('new evidence has no selected data binding')};
   const candidate = commit(candidateFiles, baseline);
-  const inspect = (head = candidate, base = baseline, options = {}) => inspectUnchangedSelectedGeography({repo: directory, baseline: base, candidate: head, ...options});
-  return {directory, git, env, files, baseline, candidate, candidateFiles, inspect, commit, original,
-    close() { fs.rmSync(directory, {recursive: true, force: true}); }};
+  const calls = {acquire: 0, origins: 0};
+  const acquisition = {async acquire() { calls.acquire++; throw Error('unexpected metadata acquisition'); },
+    acquireOrigins() { calls.origins++; throw Error('historical replay forbidden'); }, summary() { return {...calls}; }};
+  return {directory, files, candidateFiles, original, baseline, candidate, git, pin, commit, calls,
+    inspect: (head = candidate, base = baseline, extra = {}) => inspectUnchangedSelectedGeography({repo: directory, baseline: base, candidate: head, acquisition, ...extra}),
+    close() { fs.rmSync(directory, {recursive: true}); }};
 }
 
-test('complete typed closure accepts a source-only addition without scientific leaf reads', async () => {
+test('unchanged selected outputs need no historical legality or producer-schema replay', async () => {
   const f = fixture(); try {
-    const result = await f.inspect(); assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
-    assert.equal(result.candidate_code_executed, false); assert.equal(result.science_reexecuted, false);
-    assert.equal(result.trusted_reader_policy_commit, f.baseline);
-    assert(result.current_and_absent_alternatives.some(p => p.path === P + 'native/absent.bin.gz' && p.absent));
-    assert(result.immutable_descriptors.some(p => p.path === P + 'issued-plan.json'));
-    assert(result.metadata_bytes_read < 1024 * 1024);
-  } finally { f.close(); }
-});
-
-test('checkpoint roots and complete present/absent route aliases are collected without scientific decoding', async () => {
-  const f = fixture({checkpoint: true}); try {
     const result = await f.inspect();
     assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
-    for (const role of ['facts', 'certificate', 'publication', 'custody', 'routes', 'routed', 'absent']) {
-      assert(result.current_and_absent_alternatives.some(p => p.path === P + 'checkpoint-' + role), role);
-    }
-    // These aliases were outside the old selected-bank collector. Each remains
-    // source-publication scoped, so only the new dependency traversal rejects it.
-    for (const role of ['facts', 'certificate', 'publication', 'custody', 'routes', 'routed', 'absent']) {
-      const target = P + 'checkpoint-' + role;
-      const candidate = f.commit({...f.candidateFiles, [target]: body('altered retained alias')}, f.baseline);
-      const rejected = await f.inspect(candidate);
-      assert.equal(rejected.status, 'full-check-required', role);
-      assert.match(rejected.reason, /changed-current-input/, role);
-    }
+    assert.equal(result.science_reexecuted, false); assert.equal(result.source_approval, false); assert.equal(result.published, false);
+    assert(result.immutable_descriptors.some(p => p.path === P + 'patch.json' && p.commit === f.original));
+    assert(result.current_and_absent_alternatives.some(p => p.path === P + 'native/absent.bin.gz' && p.absent));
+    assert(!result.immutable_descriptors.some(p => p.path.includes('historical-authority')));
+    assert(result.metadata_bytes_read < 10000); assert(result.git_calls < 200);
+    assert.deepEqual(f.calls, {acquire: 0, origins: 0});
   } finally { f.close(); }
 });
 
-test('checkpoint execution policy evolves independently while its original custody remains bound', async () => {
-  const f = fixture({checkpoint:true}); try {
-    const files = {...f.files, [POLICY]:body({...JSON.parse(f.files[POLICY]), programs:[...JSON.parse(f.files[POLICY]).programs, {new_accepted_record:'trusted-only'}]})};
-    const baseline = f.commit(files, f.baseline), candidate = f.commit({...files, 'research/geography/new-packet/source.json':body('source')}, baseline);
-    const accepted = await f.inspect(candidate, baseline);
-    assert.equal(accepted.status, 'unchanged-selected-inputs', accepted.reason);
-    assert(accepted.immutable_descriptors.some(p => p.path === POLICY && p.commit === f.original));
-    assert(accepted.immutable_descriptors.some(p => p.path === POLICY && p.commit === baseline));
-    assert(!accepted.immutable_descriptors.some(p => p.path === POLICY && p.commit === candidate));
-    const altered = f.commit({...files, [P + 'checkpoint-routed']:body('adjacent scientific drift')}, baseline);
-    assert.match((await f.inspect(altered, baseline)).reason, /changed-current-input/);
-    for (const mutate of [p => p.programs.pop(), p => p.current_rebind_migrations.pop(), p => { p.programs[0].accepted_head = 'f'.repeat(40); }]) {
-      const policy = JSON.parse(f.files[POLICY]); mutate(policy);
-      const changedFiles = {...f.files, [POLICY]:body(policy)}, changedBase = f.commit(changedFiles, f.baseline);
-      const changedCandidate = f.commit({...changedFiles, 'research/geography/new-packet/source.json':body('source')}, changedBase);
-      assert.match((await f.inspect(changedCandidate, changedBase)).reason, /checkpoint-policy-eligibility-removed/);
-    }
-  } finally { f.close(); }
-});
-
-test('checkpoint trust is executing catalogue authority and rejects unknown roots, vectors and route schemas', async () => {
-  const f = fixture({checkpoint: true}); try {
-    const unknownModule = 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
-    const changedCode = f.commit({...f.files, [unknownModule]: body('changed checkpoint reader')}, f.baseline);
-    assert.match((await f.inspect(f.candidate, changedCode)).reason, /changed-current-input/);
-    const changedCatalogue = f.commit({...f.files, [CHECKPOINTS]: body({candidate: 'cannot supply roster'})}, f.baseline);
-    assert.match((await f.inspect(f.candidate, changedCatalogue)).reason, /changed-current-input/);
-    const candidateCatalogue = JSON.parse(f.files[CHECKPOINTS]); candidateCatalogue.checkpoints = [];
-    const untrustedFiles = {...f.files, [CHECKPOINTS]: body(candidateCatalogue)};
-    const untrustedBase = f.commit(untrustedFiles, f.baseline);
-    const untrustedCandidate = f.commit({...untrustedFiles, [P + 'checkpoint-routed']: body('changed source-scoped alias')}, untrustedBase);
-    assert.match((await f.inspect(untrustedCandidate, untrustedBase, {trusted:f.baseline})).reason,
-      /changed-current-input/, 'candidate catalogue cannot suppress the executing trusted roster');
-    for (const mutate of [c => c.checkpoints.push(c.checkpoints[0]),
-      c => c.checkpoints[0].extra_route = {}, c => c.checkpoints[0].certificate.git_blob_oid = 'e'.repeat(40)]) {
-      const catalogue = JSON.parse(f.files[CHECKPOINTS]); mutate(catalogue);
-      const files = {...f.files, [CHECKPOINTS]: body(catalogue)};
-      const baseline = f.commit(files, f.baseline), candidate = f.commit({...files, 'research/geography/new-packet/source.json': body('source')}, baseline);
-      assert.equal((await f.inspect(candidate, baseline)).status, 'full-check-required');
-    }
-    for (const routes of [[{path: P + 'checkpoint-absent', tree: '', extra: true}],
-      [{path: P + 'checkpoint-routed', tree: ''}], [{path: '../outside', tree: ''}]]) {
-      const files = {...f.files, [P + 'checkpoint-routes']: body(routes)};
-      const retained = f.commit(files, f.baseline), catalogue = JSON.parse(files[CHECKPOINTS]);
-      const raw = files[P + 'checkpoint-routes'];
-      catalogue.checkpoints[0].routes = {...catalogue.checkpoints[0].routes, commit: retained,
-        git_blob_oid: f.git(['hash-object', '--stdin'], raw), bytes: raw.length, sha256: sha(raw)};
-      files[CHECKPOINTS] = body(catalogue);
-      const baseline = f.commit(files, retained), candidate = f.commit({...files, 'research/geography/new-packet/source.json': body('source')}, baseline);
-      assert.equal((await f.inspect(candidate, baseline)).status, 'full-check-required');
-    }
-  } finally { f.close(); }
-});
-
-test('unchanged same-path fallbacks and strict administrative selector splits are covered', async () => {
-  for (const options of [{missingOrigin: true}, {splitBaseline: true}]) {
-    const f = fixture(options); try { const result = await f.inspect(); assert.equal(result.status, 'unchanged-selected-inputs', result.reason); }
-    finally { f.close(); }
-  }
-});
-
-test('every nested current/fallback custody family rejects changed retained aliases', async () => {
+for (const mode of ['valid', 'wrong declared hash', 'corrupt fetched object'])
+test('real cold routing transport leaves actual collector authentication intact: ' + mode, async () => {
   const f = fixture(); try {
-    for (const name of ['binding', 'native-request', 'source-request', 'source-facts', 'native-facts', 'original-manifest', 'original-ledger',
-      'source-publication', 'source-inventory', 'source-operating', 'native-publication', 'native-inventory', 'native-operating', 'native-asset', 'predecessor', 'handoff', 'rule']) {
-      const target = P + name + '.json';
-      const candidate = f.commit({...f.candidateFiles, [target]: body('changed retained body')}, f.baseline);
-      const result = await f.inspect(candidate);
-      assert.equal(result.status, 'full-check-required', target);
-      assert.match(result.reason, /changed-current-input|historical-pin/);
+    let baseline = f.baseline, candidate = f.candidate;
+    if (mode === 'wrong declared hash') {
+      const selection = JSON.parse(f.files['data/ownership-selection.json']); selection.sha256 = '0'.repeat(64);
+      const files = {...f.files, 'data/ownership-selection.json': body(selection)};
+      baseline = f.commit(files, f.baseline); candidate = f.commit({...files, 'unrelated.txt': body('changed')}, baseline);
+    }
+    const cold = path.join(f.directory, 'cold'); fs.mkdirSync(cold);
+    const git = (args, input) => execFileSync('git', ['-C', cold, ...args],
+      {input, env: {...process.env, GIT_NO_LAZY_FETCH: '1'}, stdio: ['pipe', 'pipe', 'pipe']});
+    git(['init', '--bare']);
+    // A real no-alternates object store starts with every exact commit/tree and
+    // no file bodies. Fetches below import only the requested locator OIDs.
+    for (const line of f.git(['cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype)']).split('\n')) {
+      const [oid, type] = line.split(' ');
+      if (type === 'tree' || type === 'commit') git(['hash-object', '-w', '-t', type, '--stdin'],
+        execFileSync('git', ['-C', f.directory, 'cat-file', type, oid]));
+    }
+    let transportBodyReads = 0, corrupted = false;
+    const acquisition = createRoutingMetadataAcquisition({repo: cold, baseline, token: '',
+      loadTree: async (root, recursive) => ({sha: root, truncated: false,
+        tree: f.git(['ls-tree', '-l', ...(recursive ? ['-r'] : []), root]).split('\n').map(line => {
+          const match = line.match(/^(\d+) (\w+) ([a-f0-9]+)\s+(\d+|-)\t(.+)$/);
+          return {mode: match[1], type: match[2], sha: match[3], size: Number(match[4]), path: match[5]};
+        })}),
+      execute(command, args, options) {
+        if (args.includes('blob')) transportBodyReads++;
+        const result = execFileSync(command, args.map(arg => arg === 'https://github.com/ChengshuLi/WorldAtlas.git' ? f.directory : arg), options);
+        if (mode === 'corrupt fetched object' && args.includes('fetch') && !corrupted) {
+          const oid = options.input.trim().split('\n')[0], file = path.join(cold, 'objects', oid.slice(0, 2), oid.slice(2));
+          // Remove only this generated cold store's fetched pack, so a valid
+          // packed copy cannot shadow the deliberately damaged loose fixture.
+          for (const name of fs.readdirSync(path.join(cold, 'objects', 'pack')))
+            fs.unlinkSync(path.join(cold, 'objects', 'pack', name));
+          fs.mkdirSync(path.dirname(file), {recursive: true});
+          fs.writeFileSync(file, deflateSync(Buffer.from('blob 2\0{}'))); corrupted = true;
+          assert.equal(git(['cat-file', 'blob', oid]).toString(), '{}');
+        }
+        return result;
+      }});
+    const result = await inspectUnchangedSelectedGeography({repo: cold, baseline, candidate, acquisition});
+    assert.equal(transportBodyReads, 0); assert(acquisition.summary().fetched_objects > 0);
+    if (mode === 'valid') {
+      assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+      assert(result.metadata_bodies_read > 0); assert.equal(result.science_reexecuted, false);
+    } else {
+      assert.equal(result.status, 'full-check-required');
+      assert.match(result.reason, mode === 'wrong declared hash' ? /metadata-pin-hash/ : /metadata-git-object-identity/);
     }
   } finally { f.close(); }
 });
 
-test('native materialization absence, source map, transport and selected registry changes reject', async () => {
+test('every directly selected data family rejects changed bytes, including baseline-only drift', async () => {
   const f = fixture(); try {
-    for (const target of ['native/absent.bin.gz', 'native-bank/fragment.gz', 'source-bank.json', 'registry.json', 'sidecar.json', 'ledger.json']) {
-      const candidate = f.commit({...f.candidateFiles, [P + target]: body('changed selected input')}, f.baseline);
-      assert.equal((await f.inspect(candidate)).status, 'full-check-required', target);
+    const names = ['data/ownership-selection.json', 'data/world-index.json', 'data/geography/source.json', 'data/hierarchy.json',
+      'data/canonical-grid/manifest.json', 'data/geographic-releases/index.json', 'data/geographic-releases/current-manifest.json',
+      'data/geographic-releases/current.json.gz', 'scripts/native-ownership/verified-candidates.json',
+      ...['manifest.json', 'source-bank.json', 'source-override.json', 'native/rows.bin.gz', 'native-bank/index.json',
+        'native-bank/fragment.gz', 'sidecar.json', 'registry.json', 'ledger.json', 'patch.json', 'runtime.json', 'base-manifest.json',
+        'owners.json.gz', 'receipt.json', 'artifact-certificate.json', 'review.json', 'code.json', 'qualification.gz'].map(p => P + p)];
+    for (const name of names) {
+      const changed = f.commit({...f.candidateFiles, [name]: body('changed selected data')}, f.baseline);
+      const result = await f.inspect(changed);
+      assert.equal(result.status, 'full-check-required', name); assert.match(result.reason, /changed-current-input/, name);
+    }
+    const baseline = f.commit({...f.files, [P + 'patch.json']: body('baseline-only changed output')}, f.baseline);
+    assert.match((await f.inspect(f.candidate, baseline)).reason, /changed-current-input/);
+  } finally { f.close(); }
+});
+
+test('selected modes, missing bodies, newly materialized aliases and nonordinary members fail closed', async () => {
+  const f = fixture(); try {
+    const target = P + 'patch.json';
+    const removed = {...f.candidateFiles}; delete removed[target];
+    for (const head of [f.commit(removed, f.baseline), f.commit(f.candidateFiles, f.baseline, {[target]: '100755'}),
+      f.commit(f.candidateFiles, f.baseline, {[target]: '120000'}),
+      f.commit({...f.candidateFiles, [P + 'native/absent.bin.gz']: body('new materialization')}, f.baseline),
+      f.commit({...f.candidateFiles, [P + 'native/absent.bin.gz/child']: body('directory alias')}, f.baseline)]) {
+      assert.equal((await f.inspect(head)).status, 'full-check-required');
     }
   } finally { f.close(); }
 });
 
-test('baseline-only relevant code differs even when candidate authored scope is only source', async () => {
+test('equal malformed or mismatched selected pins cannot manufacture applicability', async () => {
   const f = fixture(); try {
-    const baseline = f.commit({...f.files, 'src/effective-footprint.js': body('changed current custody code')}, f.baseline);
-    const result = await f.inspect(f.candidate, baseline);
-    assert.equal(result.status, 'full-check-required'); assert.match(result.reason, /changed-current-input:src\/effective-footprint/);
+    const cases = [
+      ['data/ownership-selection.json', value => { value.unpinned_input = {path: 'foreign.json'}; }],
+      ['data/ownership-selection.json', value => { value.selected_geography.sha256 = 'f'.repeat(64); }],
+      [P + 'sidecar.json', value => { delete value.logical_asset_map.patch.git_blob_oid; }],
+      [P + 'sidecar.json', value => { value.authority_registry.git_blob_oid = 'f'.repeat(40); }],
+      [P + 'sidecar.json', value => { value.runtime_envelope.mode = '100755'; }],
+      [P + 'sidecar.json', value => { value.logical_asset_map.ledger.path = P + 'missing.json'; }],
+      [P + 'source-bank.json', value => { value.world_index.git_blob_oid = 'e'.repeat(40); }],
+      [P + 'source-bank.json', value => { delete value.overrides[0].sha256; }]
+    ];
+    for (const [name, mutate] of cases) {
+      const value = JSON.parse(f.files[name]); mutate(value);
+      const files = {...f.files, [name]: body(value)};
+      // Keep parent selector hashes coherent so the actual nested pin is tested.
+      if (name !== 'data/ownership-selection.json') {
+        const selection = JSON.parse(files['data/ownership-selection.json']);
+        const role = name.endsWith('sidecar.json') ? 'additive_release' : 'selected_geography';
+        selection[role].bytes = files[name].length; selection[role].sha256 = sha(files[name]);
+        files['data/ownership-selection.json'] = body(selection);
+      }
+      const baseline = f.commit(files, f.baseline), head = f.commit({...files, 'unrelated.txt': body('change')}, baseline);
+      assert.equal((await f.inspect(head, baseline)).status, 'full-check-required', name);
+    }
   } finally { f.close(); }
 });
 
-test('baseline-only unused programme-copy and source support changes do not alter actual consumed code', async () => {
+test('software changes bind one actual executing checkout and do not certify its science', async () => {
   const f = fixture(); try {
-    const baseline = f.commit({...f.files, [POLICY]: body({version: 1, kind: 'trusted-source-native-programmes-v1', changed: 'trusted-only'}),
-      'scripts/additive-gap-repair.mjs': body('not executed by this reader'), 'coordination/engineering/unrelated-source-support/README.md': body('unrelated')}, f.baseline);
-    const result = await f.inspect(f.candidate, baseline);
-    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
-    assert(result.immutable_descriptors.some(p => p.path === POLICY && p.commit === baseline));
-    assert(!result.immutable_descriptors.some(p => p.path === POLICY && p.commit === f.candidate));
+    const head = f.commit({...f.candidateFiles, 'scripts/check-effective-geographic-regression.mjs': body('new checker'),
+      'src/native-grid.js': body('new algorithm'), 'package.json': body('new runtime')}, f.baseline);
+    f.git(['update-ref', 'refs/heads/executing', head]); f.git(['symbolic-ref', 'HEAD', 'refs/heads/executing']);
+    const options = {repo: f.directory, baseline: f.baseline, candidate: head, trusted: head};
+    const result = await inspectExecutingSelectedGeography(options);
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason); assert.equal(result.trusted_reader_policy_commit, head);
+    assert.equal(result.science_reexecuted, false); assert(result.limits.some(p => p.includes('no historical legality')));
+    assert.equal((await inspectExecutingSelectedGeography({...options, trusted: f.baseline})).reason, 'executing-checkout-mismatch');
   } finally { f.close(); }
 });
 
-test('artifact transport code is equality-bound without a scientific reader hash whitelist', async () => {
+test('a metadata-labelled file cannot exempt an actual selected output', async () => {
   const f = fixture(); try {
-    const code = 'scripts/geographic-report-artifact.mjs';
-    assert(EXECUTION_CODE.includes(code));
-    const upgraded = body('reviewed artifact transport update; no scientific route discovery');
-    const baseline = f.commit({...f.files, [code]: upgraded}, f.baseline);
-    const candidate = f.commit({...f.candidateFiles, [code]: upgraded}, baseline);
-    const accepted = await f.inspect(candidate, baseline);
-    assert.equal(accepted.status, 'unchanged-selected-inputs', accepted.reason);
-    const changed = f.commit({...f.candidateFiles, [code]: body('different candidate transport code')}, baseline);
-    const refused = await f.inspect(changed, baseline);
-    assert.equal(refused.status, 'full-check-required');
-    assert.equal(refused.reason, 'outside-source-publication-scope');
-    const differentBaseline = await f.inspect(f.candidate, baseline);
-    assert.equal(differentBaseline.status, 'full-check-required');
-    assert.equal(differentBaseline.reason, 'changed-current-input:' + code);
+    const head = f.commit({...f.files, [RECEIVING]: body('updated metadata')}, f.baseline);
+    assert.equal((await f.inspect(head, f.baseline, {})).status, 'unchanged-selected-inputs');
+    const bank = JSON.parse(f.files[P + 'source-bank.json']); bank.overrides[0] = f.pin(RECEIVING, f.original);
+    const files = {...f.files, [P + 'source-bank.json']: body(bank)}, selection = JSON.parse(files['data/ownership-selection.json']);
+    selection.selected_geography.bytes = files[P + 'source-bank.json'].length; selection.selected_geography.sha256 = sha(files[P + 'source-bank.json']);
+    files['data/ownership-selection.json'] = body(selection);
+    const baseline = f.commit(files, f.baseline), changed = f.commit({...files, [RECEIVING]: body('changed selected output')}, baseline);
+    assert.match((await f.inspect(changed, baseline, {})).reason, /changed-current-input/);
   } finally { f.close(); }
 });
 
-test('reviewed equal readers need no hash catalogue; unsafe modes, limits and identical commits decline', async () => {
+test('invalid and self comparisons retain the full route', async () => {
   const f = fixture(); try {
     assert.match((await f.inspect(f.baseline)).reason, /baseline-proof/);
-    assert.match((await f.inspect(f.candidate, f.baseline, {limits: {member: 32 * 1024 * 1024, metadata: 1, entries: 4096}})).reason, /metadata-byte-limit/);
-    assert.match((await f.inspect(f.candidate, f.baseline, {limits: {member: 32 * 1024 * 1024, metadata: 64 * 1024 * 1024, entries: 1}})).reason, /identity-entry-limit/);
-    const code = 'scripts/check-effective-geographic-regression.mjs';
-    const baseline = f.commit({...f.files, [code]: body('reviewed reader update with unchanged routes')}, f.baseline);
-    const candidate = f.commit({...f.candidateFiles, [code]: body('reviewed reader update with unchanged routes')}, baseline);
-    const accepted = await f.inspect(candidate, baseline);
-    assert.equal(accepted.status, 'unchanged-selected-inputs', accepted.reason);
-    assert.match((await f.inspect(f.candidate, baseline)).reason, /changed-current-input/);
-    const symlink = f.commit(f.candidateFiles, f.baseline, {'research/geography/new-packet/source.json': '120000'});
-    assert.match((await f.inspect(symlink)).reason, /nonordinary/);
+    assert.match((await f.inspect('not-a-commit')).reason, /require-immutable/);
   } finally { f.close(); }
 });
 
-test('CLI emits bounded explicit full fallback for invalid or engineering inputs', async () => {
+
+test('unrelated authored files do not create selected-input descriptors', async () => {
   const f = fixture(); try {
-    const output = execFileSync(process.execPath, [path.join(ROOT, 'scripts/check-unchanged-selected-geography.mjs'), f.directory, f.baseline, f.baseline]);
-    assert.equal(JSON.parse(output).status, 'full-check-required');
-    const candidate = f.commit({...f.candidateFiles, 'scripts/other.mjs': body('engineering')}, f.baseline);
-    assert.match((await f.inspect(candidate)).reason, /outside-source-publication-scope/);
+    const prefix = 'unrelated/';
+    const additions = Object.fromEntries(Array.from({length: 2}, (_, i) => [prefix + i + '.txt', body('ordinary change')]));
+    const head = f.commit({...f.files, ...additions}, f.baseline), result = await f.inspect(head);
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    assert(!result.immutable_descriptors.some(p => p.path.startsWith(prefix)));
+    assert(!result.current_and_absent_alternatives.some(p => p.path.startsWith(prefix)));
+    assert.equal(result.science_reexecuted, false); assert.deepEqual(f.calls, {acquire: 0, origins: 0});
+    const changed = f.commit({...f.files, ...additions, [P + 'patch.json']: body('changed selected output')}, f.baseline);
+    assert.match((await f.inspect(changed)).reason, /changed-current-input/);
   } finally { f.close(); }
 });
 
-test('receipt fallback requires an absent commit, not a missing path in an existing commit', async () => {
+test('complete source arrays retain every member identity', async () => {
   const f = fixture(); try {
-    const registryPath = 'scripts/native-ownership/verified-candidates.json';
-    const registry = JSON.parse(f.files[registryPath]);
-    const receipt = Object.values(registry.candidates)[0];
-    const emptyTree = f.git(['mktree'], '');
-    const emptyCommit = f.git(['commit-tree', emptyTree], 'empty historical commit\n');
-    for (const [commit, expected] of [[emptyCommit, 'full-check-required'], ['e'.repeat(40), 'unchanged-selected-inputs']]) {
-      receipt.commit = commit;
-      const files = {...f.files, [registryPath]: body(registry)};
-      const baseline = f.commit(files, f.baseline);
-      const candidate = f.commit({...files, 'research/geography/new-packet/source.json': body('source only')}, baseline);
-      const result = await f.inspect(candidate, baseline);
-      assert.equal(result.status, expected, result.reason);
-      if (expected === 'full-check-required') assert.match(result.reason, /missing-required-input/);
-    }
+    const prefix = 'geography/';
+    const parts = Array.from({length: 2}, (_, i) => prefix + i + '.json');
+    const files = {...f.files, 'data/world-index.json': body({parts}),
+      ...Object.fromEntries(parts.map(name => ['data/' + name, body('opaque exact source')]))};
+    const baseline = f.commit(files, f.baseline), head = f.commit({...files, 'unrelated.txt': body('new')}, baseline);
+    const result = await f.inspect(head, baseline);
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    for (const name of parts) assert(result.current_and_absent_alternatives.some(p => p.path === 'data/' + name));
+    const changed = f.commit({...files, 'unrelated.txt': body('new'), ['data/' + parts.at(-1)]: body('changed')}, baseline);
+    assert.match((await f.inspect(changed, baseline)).reason, /changed-current-input/);
   } finally { f.close(); }
 });
 
-test('unknown routing layouts decline even when their before/after blobs are equal', async () => {
+test('actual selected-input equality does not require shared authored ancestry or a nonempty diff', async () => {
   const f = fixture(); try {
-    const selector = JSON.parse(f.files['data/ownership-selection.json']);
-    selector.new_routing_hook = {path: 'outside.json'};
-    const files = {...f.files, 'data/ownership-selection.json': body(selector)};
-    const baseline = f.commit(files, f.baseline);
-    const candidate = f.commit({...files, 'research/geography/new-packet/source.json': body('source only')}, baseline);
-    const result = await f.inspect(candidate, baseline);
-    assert.equal(result.status, 'full-check-required'); assert.match(result.reason, /unsupported-selection/);
+    const orphan = f.commit(f.files), result = await f.inspect(orphan);
+    assert.notEqual(orphan, f.baseline);
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    assert.equal(result.science_reexecuted, false);
+    const changed = f.commit({...f.files, [P + 'patch.json']: body('changed selected output')});
+    assert.match((await f.inspect(changed)).reason, /changed-current-input/);
   } finally { f.close(); }
 });
 
 
-function coldFixture(f, options = {}) {
-  const destination = path.join(f.directory, 'cold');
-  f.git(['config', 'uploadpack.allowFilter', 'true']);
-  f.git(['update-ref', 'refs/heads/fixture', f.candidate]);
-  f.git(['symbolic-ref', 'HEAD', 'refs/heads/fixture']);
-  if (options.shallowStart) {
-    execFileSync('git', ['init', '--bare', destination], {env: f.env, stdio: ['ignore', 'pipe', 'pipe']});
-    for (const args of [['--depth=1', f.baseline], [f.candidate]]) {
-      execFileSync('git', ['-C', destination, 'fetch', '--filter=blob:none', '--no-tags', '--no-write-fetch-head',
-        ...(args.length === 2 ? [args[0]] : []), pathToFileURL(f.directory).href, args.at(-1)],
-        {env: f.env, stdio: ['ignore', 'pipe', 'pipe']});
-    }
-  } else {
-    execFileSync('git', ['clone', '--bare', '--filter=blob:none', '--no-local', pathToFileURL(f.directory).href, destination],
-      {env: f.env, stdio: ['ignore', 'pipe', 'pipe']});
+test('optional checkpoint transport may be added, changed or removed without changing selected science',async()=>{
+ const f=fixture();try{
+  const locator='data/selected-checkpoint.json',archive=P+'retained-checkpoint.zip';
+  const hints={...f.files,[locator]:body({transport_hint:'original',retained_artifact:{path:archive}}),
+   [archive]:body('unconsumed original archive')};
+  const baseline=f.commit(hints,f.baseline);
+  const cases=[
+   {...f.files,[locator]:body({transport_hint:'new',retained_artifact:{path:archive}}),[archive]:body('new archive')},
+   {...hints,[locator]:body('malformed optional hint is not scientific input')},
+   {...hints,[archive]:body('different optional transport')},
+   {...f.files}
+  ];
+  for(const files of cases){
+   const result=await f.inspect(f.commit(files,baseline),baseline);
+   assert.equal(result.status,'unchanged-selected-inputs',result.reason);
+   assert.equal(result.science_reexecuted,false);assert.equal(result.source_approval,false);
+   assert(!result.current_and_absent_alternatives.some(p=>[locator,archive].includes(p.path)));
   }
-  const git = (args, input) => execFileSync('git', ['-C', destination, ...args],
-    {env: f.env, input, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
-  const requests = [], batches = [], originBatches = [];
-  const loadTree = async (root, recursive) => {
-    requests.push({root, recursive});
-    const lines = f.git(['ls-tree', '-z', '-l', ...(recursive ? ['-r'] : []), root]).split('\0').filter(Boolean);
-    const tree = lines.map(line => {
-      const match = line.match(/^(\d+) (\w+) ([a-f0-9]{40}) +([0-9-]+)\t(.+)$/);
-      assert(match, line);
-      return {mode: match[1], type: match[2], sha: match[3], ...(match[2] === 'blob' ? {size: Number(match[4])} : {}), path: match[5]};
-    });
-    return {sha: root, truncated: false, tree};
-  };
-  const execute = (command, args, callOptions) => {
-    assert.equal(callOptions.env.GIT_NO_LAZY_FETCH, '1');
-    if (args.includes('fetch')) {
-      assert(args.includes('--stdin')); assert(args.includes('--filter=blob:none'));
-      assert(args.includes('fetch.negotiationAlgorithm=noop'));
-      const ids = callOptions.input.trim().split('\n');
-      if (ids.every(id => { try { return f.git(['cat-file', '-t', id]) === 'commit'; } catch { return id === 'e'.repeat(40); } })) originBatches.push(ids);
-      else batches.push(ids);
-      args = args.map(arg => arg === 'https://github.com/ChengshuLi/WorldAtlas.git' ? pathToFileURL(f.directory).href : arg);
+  const added=await f.inspect(f.commit(hints,f.baseline));
+  assert.equal(added.status,'unchanged-selected-inputs',added.reason);
+  assert.deepEqual(f.calls,{acquire:0,origins:0});
+ }finally{f.close();}
+});
+
+test('checkpoint hints cannot exempt actual selected source, selector or consumed code identities',async()=>{
+ const f=fixture();try{
+  for(const name of ['data/geography/source.json','data/ownership-selection.json',P+'code.json']){
+   const files={...f.files,'data/selected-checkpoint.json':body({retained_artifact:{path:name}}),
+    [name]:body('changed actual scientific operand')};
+   const result=await f.inspect(f.commit(files,f.baseline));
+   assert.equal(result.status,'full-check-required',name);assert.match(result.reason,/changed-current-input/);
+  }
+ }finally{f.close();}
+});
+
+
+test('unchanged reference metadata binds its complete projection and all existing input roles', async () => {
+  const f = fixture({projection: true}); try {
+    const result = await f.inspect();
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    for (const name of ['reference-projection.json', 'reference-before.json', 'reference-receipt.json', 'reference-source-before.json'])
+      assert(result.current_and_absent_alternatives.some(row => row.path === P + name));
+    assert.equal(result.science_reexecuted, false);
+    assert.deepEqual(f.calls, {acquire: 0, origins: 0});
+    for (const name of ['reference-projection.json', 'reference-before.json', 'reference-receipt.json', 'reference-source-before.json']) {
+      const changed = f.commit({...f.candidateFiles, [P + name]: body('changed actual metadata input')}, f.baseline);
+      assert.match((await f.inspect(changed)).reason, /changed-current-input/, name);
     }
-    const result = execFileSync(command, args, callOptions);
-    if (options.injectUnexpectedBlob && args.includes('fetch') && originBatches.length) {
-      git(['hash-object', '-w', '--stdin'], 'unexpected scientific body');
+  } finally { f.close(); }
+});
+
+test('reference metadata applicability refuses missing, nonordinary or mismatched complete projection', async () => {
+  const f = fixture({projection: true}); try {
+    const name = P + 'reference-projection.json', absent = {...f.candidateFiles}; delete absent[name];
+    for (const head of [f.commit(absent, f.baseline), f.commit(f.candidateFiles, f.baseline, {[name]: '120000'}),
+      f.commit(f.candidateFiles, f.baseline, {[name]: '100755'})])
+      assert.equal((await f.inspect(head)).status, 'full-check-required');
+    for (const edit of [pin => pin.bytes++, pin => pin.sha256 = 'f'.repeat(64), pin => pin.unbound = true]) {
+      const selection = JSON.parse(f.files['data/ownership-selection.json']); edit(selection.reference_projection);
+      const values = {...f.files, 'data/ownership-selection.json': body(selection)};
+      const base = f.commit(values, f.baseline), head = f.commit({...values, unrelated: body('new')}, base);
+      assert.equal((await f.inspect(head, base)).status, 'full-check-required');
     }
-    return result;
-  };
-  const acquisition = createRoutingMetadataAcquisition({repo: destination, baseline: f.baseline, execute, loadTree, token: undefined, ...options});
-  return {destination, git, batches, originBatches, requests, acquisition};
+  } finally { f.close(); }
+});
+
+test('reference metadata cannot omit or replace its declared operand locators', async () => {
+  const f = fixture({projection: true}); try {
+    for (const edit of [p => delete p.hierarchy.before, p => p.receipts = [],
+      p => p.source_updates[0].before.git_blob_oid = 'f'.repeat(40), p => p.receipts[0].mode = '100755']) {
+      const name = P + 'reference-projection.json', projection = JSON.parse(f.files[name]); edit(projection);
+      const selection = JSON.parse(f.files['data/ownership-selection.json']), raw = body(projection);
+      selection.reference_projection = {path: name, bytes: raw.length, sha256: sha(raw)};
+      const values = {...f.files, [name]: raw, 'data/ownership-selection.json': body(selection)};
+      const base = f.commit(values, f.baseline), head = f.commit({...values, unrelated: body('new')}, base);
+      assert.equal((await f.inspect(head, base)).status, 'full-check-required');
+    }
+  } finally { f.close(); }
+});
+
+function coldOrigins(f, baseline, candidate, extra = {}) {
+  const directory = fs.mkdtempSync(path.join(f.directory, 'cold-origins-'));
+  const env = {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null'};
+  const git = (repo, args, input) => execFileSync('git', ['-C', repo, ...args], {env, input, stdio: ['pipe', 'pipe', 'pipe']});
+  git(directory, ['init', '--bare']);
+  f.git(['config', 'uploadpack.allowFilter', 'true']); f.git(['config', 'uploadpack.allowAnySHA1InWant', 'true']);
+  const metadata = new Map();
+  for (const id of [baseline, candidate]) {
+    metadata.set(id, 'commit'); metadata.set(f.git(['rev-parse', id + '^{tree}']), 'tree');
+    for (const line of git(f.directory, ['ls-tree', '-r', '-t', '-z', id]).toString().split('\0').filter(Boolean)) {
+      const [mode, type, oid] = line.split(/\s/); if (type === 'tree') metadata.set(oid, type);
+    }
+  }
+  for (const [id, type] of metadata) git(directory, ['hash-object', '-w', '-t', type, '--stdin'], git(f.directory, ['cat-file', type, id]));
+  // Only locator JSON is warm. Scientific leaves and historical commits are
+  // physically absent; the collector never asks for those leaf bodies.
+  const locators = ['data/world-index.json', 'data/geographic-releases/current-manifest.json', 'data/ownership-selection.json',
+    'scripts/native-ownership/verified-candidates.json', ...['manifest.json', 'source-bank.json', 'artifact-certificate.json',
+      'sidecar.json', 'native-bank/index.json', 'reference-projection.json'].map(name => P + name)];
+  for (const name of locators) {
+    const raw = git(f.directory, ['show', baseline + ':' + name]); git(directory, ['hash-object', '-w', '--stdin'], raw);
+  }
+  const fetches = [];
+  const acquisition = createRoutingMetadataAcquisition({repo: directory, baseline, token: '',
+    loadTree() { assert.fail('Historical metadata must use native Git'); },
+    execute(command, args, options) {
+      if (args.includes('fetch')) {
+        assert(args.includes('--filter=tree:0'));
+        if(args.includes('--depth=1'))fetches.push(options.input.trim());
+        args = args.map(arg => arg === 'https://github.com/ChengshuLi/WorldAtlas.git' ? 'file://' + f.directory : arg);
+      }
+      return execFileSync(command, args, options);
+    }, ...extra});
+  return {directory, acquisition, fetches, git: args => git(directory, args),
+    inspect: () => inspectUnchangedSelectedGeography({repo: directory, baseline, candidate, acquisition})};
 }
 
-test('clean blob:none clone acquires only routing metadata in bounded discovery batches', async () => {
-  const f = fixture({splitBaseline: true}); try {
-    const cold = coldFixture(f);
-    const before = cold.git(['cat-file', '--batch-all-objects', '--batch-check=%(objecttype)']);
-    assert(!before.split('\n').includes('blob'));
-    // Retain the actual shallow marker found in a depth-one baseline checkout.
-    // Candidate ancestry already supplies its parents; no graph import is needed.
-    fs.writeFileSync(path.join(cold.destination, 'shallow'), f.baseline + '\n');
-    const result = await f.inspect(f.candidate, f.baseline, {repo: cold.destination, acquisition: cold.acquisition});
-    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
-    assert(cold.batches.length > 0 && cold.batches.length <= 12);
-    assert(cold.batches.some(batch => batch.length >= 4));
-    assert.equal(new Set(cold.batches.flat()).size, cold.batches.flat().length);
-    const forbidden = ['data/geography/source.json', 'data/canonical-grid/bounds.json.gz',
-      P + 'native-bank/fragment.gz', P + 'native-asset.json', P + 'source-publication.json', P + 'patch.json'];
-    for (const name of forbidden) {
-      const oid = f.git(['hash-object', '--stdin'], f.files[name]);
-      assert(!cold.batches.flat().includes(oid), name);
-      assert.equal(cold.git(['cat-file', '--batch-check'], oid + '\n'), oid + ' missing', name);
+function changedHistoricalAliases(f) {
+  const source = f.commit({...f.files, 'data/geography/source.json': body('historical source before-image')}),
+    hierarchy = f.commit({...f.files, 'data/hierarchy.json': body('historical hierarchy before-image')});
+  const bank = JSON.parse(f.files[P + 'source-bank.json']); bank.unchanged_files[0] = f.pin('data/geography/source.json', source);
+  const projection = JSON.parse(f.files[P + 'reference-projection.json']);
+  projection.hierarchy.before = f.pin('data/hierarchy.json', hierarchy);
+  projection.source_updates[0].before = f.pin('data/geography/source.json', source);
+  const files = {...f.files, [P + 'source-bank.json']: body(bank), [P + 'reference-projection.json']: body(projection)};
+  const selection = JSON.parse(files['data/ownership-selection.json']);
+  for (const [key, name] of [['selected_geography', 'source-bank.json'], ['reference_projection', 'reference-projection.json']])
+    Object.assign(selection[key], {bytes: files[P + name].length, sha256: sha(files[P + name])});
+  files['data/ownership-selection.json'] = body(selection);
+  return {source, hierarchy, files};
+}
+
+test('cold collector resolves all original before-images without replacing changed current aliases', async () => {
+  const f = fixture({projection: true}); try {
+    const {source, hierarchy, files} = changedHistoricalAliases(f), baseline = f.commit(files, f.baseline),
+      candidate = f.commit({...files, unrelated: body('new evidence')}, baseline), cold = coldOrigins(f, baseline, candidate);
+    for (const id of [f.original, source, hierarchy]) assert.throws(() => cold.git(['cat-file', '-e', id]));
+    const before = new Set(cold.git(['cat-file', '--batch-all-objects', '--batch-check=%(objectname)']).toString().trim().split('\n'));
+    const result = await cold.inspect(); assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    assert.deepEqual(cold.fetches.sort(), [f.original, source, hierarchy].sort());
+    assert(result.immutable_descriptors.some(row => row.commit === source && row.path === 'data/geography/source.json'));
+    assert(result.immutable_descriptors.some(row => row.commit === hierarchy && row.path === 'data/hierarchy.json'));
+    const added = cold.git(['cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype)']).toString().trim().split('\n').map(row => row.split(' ')).filter(([id]) => !before.has(id));
+    assert.deepEqual(added, []); assert(!fs.existsSync(path.join(cold.directory, 'shallow')));
+    assert.equal(result.science_reexecuted, false); assert.equal(result.metadata_acquisition.fetched_objects, 0);
+    // Private authenticated metadata permits replay without exposing any origin.
+    const calls = cold.fetches.length; assert.equal((await cold.inspect()).status, 'unchanged-selected-inputs');
+    assert.equal(cold.fetches.length, calls);
+  } finally { f.close(); }
+});
+
+for (const failure of ['denied origin', 'changed alias', 'forged pin'])
+test('cold collector retains full-check fallback and pin guards: ' + failure, async () => {
+  const f = fixture({projection: true}); try {
+    let {files} = changedHistoricalAliases(f);
+    if (failure === 'forged pin') {
+      const bank = JSON.parse(files[P + 'source-bank.json']); bank.unchanged_files[0].git_blob_oid = 'f'.repeat(40);
+      files[P + 'source-bank.json'] = body(bank);
+      const selection = JSON.parse(files['data/ownership-selection.json']);
+      Object.assign(selection.selected_geography, {bytes: files[P + 'source-bank.json'].length, sha256: sha(files[P + 'source-bank.json'])});
+      files['data/ownership-selection.json'] = body(selection);
     }
-    assert.equal(result.metadata_acquisition.scientific_leaf_imports, 0);
-    const importedBlobs = cold.git(['cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype)'])
-      .split('\n').filter(line => line.endsWith(' blob')).map(line => line.split(' ')[0]).sort();
-    assert.deepEqual(importedBlobs, [...new Set(cold.batches.flat())].sort());
-    assert.equal(fs.readFileSync(path.join(cold.destination, 'shallow'), 'utf8'), f.baseline + '\n');
-    assert(cold.originBatches.length > 0); // Detached strict producer commits are real missing objects.
-    assert.deepEqual(result.metadata_acquisition.strict_origin_commits.sort(), cold.originBatches.flat().sort());
-    assert.equal(result.metadata_acquisition.verified_import_objects, cold.batches.flat().length);
-    assert(cold.requests.filter(row => row.recursive).length === 1);
-    const count = cold.batches.length;
-    const warm = await f.inspect(f.candidate, f.baseline, {repo: cold.destination, acquisition: cold.acquisition});
-    assert.equal(warm.status, 'unchanged-selected-inputs', warm.reason); assert.equal(cold.batches.length, count);
+    const baseline = f.commit(files, f.baseline), candidate = f.commit({...files, unrelated: body('new evidence'),
+      ...(failure === 'changed alias' ? {'data/geography/source.json': body('candidate drift')} : {})}, baseline);
+    const cold = coldOrigins(f, baseline, candidate, failure === 'denied origin' ? {execute: (command,args,options) => {if(args.includes('fetch'))throw Error('origin unavailable');return execFileSync(command,args,options);}} : {});
+    const result = await cold.inspect(); assert.equal(result.status, 'full-check-required');
+    assert.match(result.reason, failure === 'denied origin' ? /Immutable origin object fetch failed/ : failure === 'changed alias' ? /changed-current-input/ : /historical-pin-identity/);
+    if (failure !== 'forged pin') assert.equal(cold.fetches.length, 0);
   } finally { f.close(); }
 });
 
-test('shallow descendant admits its baseline without traversing an absent parent', async () => {
-  const f = fixture(); try {
-    const cold = coldFixture(f, {shallowStart: true});
-    const parent = f.git(['rev-parse', f.baseline + '^']);
-    assert.equal(cold.git(['cat-file', '--batch-check'], parent + '\n'), parent + ' missing');
-    assert.equal(cold.git(['merge-base', f.baseline, f.candidate]), f.baseline);
-    assert.throws(() => execFileSync('git', ['-C', cold.destination, 'merge-base', f.baseline, f.candidate],
-      {env: {...f.env, GIT_SHALLOW_FILE: '/dev/null'}, stdio: ['ignore', 'pipe', 'pipe']}));
-    const result = await f.inspect(f.candidate, f.baseline, {repo: cold.destination, acquisition: cold.acquisition});
+for (const variant of ['matching current alias', 'absent current alias'])
+test('cold collector preserves historical alias rules: ' + variant, async () => {
+  const f = fixture({projection: true}); try {
+    const files = {...f.files}, bank = JSON.parse(files[P + 'source-bank.json']), unavailable = 'e'.repeat(40);
+    if (variant === 'matching current alias') bank.overrides[0].commit = unavailable;
+    else delete files[P + 'source-override.json'];
+    files[P + 'source-bank.json'] = body(bank);
+    const selection = JSON.parse(files['data/ownership-selection.json']);
+    Object.assign(selection.selected_geography, {bytes: files[P + 'source-bank.json'].length, sha256: sha(files[P + 'source-bank.json'])});
+    files['data/ownership-selection.json'] = body(selection);
+    const baseline = f.commit(files, f.baseline), candidate = f.commit({...files, unrelated: body('evidence')}, baseline);
+    const cold = coldOrigins(f, baseline, candidate), result = await cold.inspect();
     assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
-    assert.equal(result.metadata_acquisition.scientific_leaf_imports, 0);
-    assert.equal(fs.readFileSync(path.join(cold.destination, 'shallow'), 'utf8'), f.baseline + '\n');
+    assert.deepEqual(cold.fetches, [f.original]);
+    if (variant === 'matching current alias') assert(!result.immutable_descriptors.some(row => row.commit === unavailable));
+    else assert(result.current_and_absent_alternatives.some(row => row.path === P + 'source-override.json' && row.absent));
   } finally { f.close(); }
 });
 
-test('divergent shallow heads use present ancestry only and missing ancestry declines', async () => {
-  const f = fixture(); try {
-    const baseline = f.commit({...f.files, 'research/geography/baseline-only/readme': body('unrelated')}, f.baseline);
-    fs.writeFileSync(path.join(f.directory, 'shallow'), baseline + '\n');
-    assert.throws(() => f.git(['merge-base', baseline, f.candidate]));
-    const result = await f.inspect(f.candidate, baseline);
-    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
-    // The fixture writes loose objects only. Remove the needed common ancestor,
-    // not a real repository object; neither query may fetch missing history.
-    const ancestor = path.join(f.directory, 'objects', f.baseline.slice(0, 2), f.baseline.slice(2));
-    assert(fs.existsSync(ancestor)); fs.unlinkSync(ancestor);
-    const missing = await f.inspect(f.candidate, baseline);
-    assert.equal(missing.status, 'full-check-required');
-    assert.match(missing.reason, /^immutable-object-unavailable:merge-base:/);
-    assert.equal(missing.metadata_acquisition.fetch_batches, 0);
-    assert.equal(fs.readFileSync(path.join(f.directory, 'shallow'), 'utf8'), baseline + '\n');
-  } finally { f.close(); }
-});
-
-test('cold absent historical origins retain fallback versus strict semantics', async () => {
-  for (const missingStrictOrigin of [false, true]) {
-    const f = fixture({missingOrigin: true, missingStrictOrigin}); try {
-      const cold = coldFixture(f);
-      const result = await f.inspect(f.candidate, f.baseline, {repo: cold.destination, acquisition: cold.acquisition});
-      assert.equal(result.status, missingStrictOrigin ? 'full-check-required' : 'unchanged-selected-inputs', result.reason);
-      if (missingStrictOrigin) assert.match(result.reason, /routing-strict-origin-acquisition-failed/);
-      assert(!cold.batches.flat().includes('e'.repeat(40)));
-    } finally { f.close(); }
+for (const variant of ['matching alias', 'changed alias', 'forged pin', 'missing original and alias', 'known original mismatch'])
+test('partial origin acquisition then decline preserves full-reader guards: ' + variant, async () => {
+  const f = fixture({projection: true}), previous = process.env.GIT_NO_LAZY_FETCH;
+  try {
+    const {ImmutableReader} = await import('../scripts/check-effective-geographic-regression.mjs');
+    const files = {...f.files, 'data/geography/current-only.json': body('unconsumed current sibling'),
+      'scripts/native-ownership/verified-candidates.json': body({version: 0, candidates: {}})};
+    let pin = f.pin('data/geography/source.json', f.original);
+    if (variant === 'changed alias') files[pin.path] = body('changed current source');
+    if (variant === 'forged pin') pin = {...pin, sha256: 'f'.repeat(64)};
+    if (variant === 'missing original and alias') { pin = f.pin(P + 'historical-authority.json', f.original); delete files[pin.path]; }
+    const baseline = f.commit(files, f.baseline), candidate = f.commit({...files, unrelated: body('evidence')}, baseline);
+    const cold = coldOrigins(f, baseline, candidate);
+    if (variant === 'known original mismatch') {
+      // An available original disagrees with a matching current alias. The
+      // actual full reader must continue to prefer and reject that original.
+      const old = f.commit({...f.files, [pin.path]: body('different known original')});
+      pin = {...pin, commit: old};
+      const ids = new Map([[old, 'commit']]);
+      for (const line of f.git(['ls-tree', '-rt', old]).split('\n')) {
+        const [, type, id] = line.split(/\s/); if (type === 'tree') ids.set(id, type);
+      }
+      ids.set(f.git(['rev-parse', old + '^{tree}']), 'tree');
+      ids.set(f.git(['rev-parse', old + ':' + pin.path]), 'blob');
+      for (const [id, type] of ids) execFileSync('git', ['-C', cold.directory, 'hash-object', '-w', '-t', type, '--stdin'],
+        {input: execFileSync('git', ['-C', f.directory, 'cat-file', type, id]), stdio: ['pipe', 'pipe', 'pipe']});
+    }
+    if (files[pin.path]) execFileSync('git', ['-C', cold.directory, 'hash-object', '-w', '--stdin'],
+      {input: files[pin.path], stdio: ['pipe', 'pipe', 'pipe']});
+    process.env.GIT_NO_LAZY_FETCH = '1';
+    const read = () => new ImmutableReader(cold.directory, baseline).readPinned([pin])[0];
+    const check = () => variant === 'matching alias' ? assert.deepEqual(read(), files[pin.path]) : assert.throws(read,
+      variant === 'forged pin' ? /Whole immutable input differs/ : variant === 'missing original and alias' ? /Missing whole ordinary/ : /historical alias changed/);
+    check();
+    const inventory = () => cold.git(['cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype) %(objectsize)']).toString();
+    const before = inventory(), shallow = path.join(cold.directory, 'shallow');
+    assert(!fs.existsSync(shallow));
+    const result = await cold.inspect(); assert.equal(result.status, 'full-check-required');
+    assert.match(result.reason, /unsupported-native-receipt/); assert.equal(cold.fetches.length, 1);
+    assert.equal(inventory(), before); assert(!fs.existsSync(shallow));
+    assert.throws(() => cold.git(['cat-file', '-e', f.original]));
+    check();
+  } finally {
+    if (previous === undefined) delete process.env.GIT_NO_LAZY_FETCH; else process.env.GIT_NO_LAZY_FETCH = previous;
+    f.close();
   }
-});
-
-test('cold remote metadata identity declines before object acquisition', async () => {
-  const f = fixture(); try {
-    const cold = coldFixture(f, {loadTree: async () => ({sha: '0'.repeat(40), tree: []})});
-    const result = await f.inspect(f.candidate, f.baseline, {repo: cold.destination, acquisition: cold.acquisition});
-    assert.equal(result.status, 'full-check-required');
-    assert.equal(cold.batches.length, 0);
-  } finally { f.close(); }
-});
-
-
-test('strict graph imports refuse unexpected blobs and aggregate metadata growth', async () => {
-  for (const options of [{injectUnexpectedBlob: true},
-    {limits: {member: 32 * 1024 * 1024, metadata: 64 * 1024 * 1024, entries: 4096, graphBytes: 1}}]) {
-    const f = fixture(); try {
-      const cold = coldFixture(f, options);
-      const result = await f.inspect(f.candidate, f.baseline, {repo: cold.destination, acquisition: cold.acquisition});
-      assert.equal(result.status, 'full-check-required');
-      assert.match(result.reason, options.injectUnexpectedBlob ? /routing-strict-fetch-imported-blobs/ : /routing-strict-graph-growth-limit/);
-    } finally { f.close(); }
-  }
-});
-
-test('accepted checkpoint locator and retained whole-member custody remain applicability dependencies', async () => {
-  const f=fixture();try {
-    const locatorPath='data/selected-checkpoint.json', archivePath='coordination/engineering/next-batch/accepted-a/geography-artifact.zip';
-    const locator={version:1,kind:'accepted-selected-checkpoint-locator-v1',acceptance:{pr_number:7,
-      request_id:'01234567-abcd-4321-aaaa-123456789012',head:'a'.repeat(40)},retained_artifact:{path:archivePath}};
-    const files={...f.files,[locatorPath]:body(locator),[archivePath]:body('opaque accepted artifact body')};
-    const base=f.commit(files,f.baseline), candidate=f.commit({...files,'research/geography/new-packet/source.json':body('source addition')},base);
-    const unchanged=await f.inspect(candidate,base);assert.equal(unchanged.status,'unchanged-selected-inputs',unchanged.reason);
-    assert(unchanged.current_and_absent_alternatives.some(p=>p.path===archivePath));
-    for(const target of [locatorPath,archivePath]) {
-      const nextBase=f.commit({...files,[target]:body('changed acceptance or member custody')},base);
-      const result=await f.inspect(candidate,nextBase);
-      assert.equal(result.status,'full-check-required');assert.match(result.reason,/changed-current-input/);
-    }
-    const absent={...files};delete absent[archivePath];const absentBase=f.commit(absent,base);
-    assert.equal((await f.inspect(candidate,absentBase)).status,'full-check-required');
-  }finally{f.close();}
-});
-test('receiving metadata admits exact inert modifications without executing science', async () => {
-  const f = fixture(); try {
-    for (const metadataPaths of [[METADATA[0]], [METADATA[1]], [...METADATA].reverse()]) {
-      const files = {...f.files, ...Object.fromEntries(metadataPaths.map(name => [name, body('updated inert metadata')]))};
-      const candidate = f.commit(files, f.baseline);
-      const result = await f.inspect(candidate, f.baseline, {metadataPaths});
-      assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
-      assert.equal(result.candidate_code_executed, false);
-      assert.equal(result.science_reexecuted, false);
-      assert.equal(result.source_approval, false);
-      assert.equal(result.published, false);
-      assert.equal(result.trusted_reader_policy_commit, f.baseline);
-      assert(result.current_and_absent_alternatives.some(p => p.path === P + 'native/absent.bin.gz' && p.absent));
-      assert(result.immutable_descriptors.some(p => p.path === P + 'issued-plan.json'));
-      assert(result.metadata_bytes_read < 1024 * 1024);
-      for (const name of metadataPaths) {
-        const pins = result.immutable_descriptors.filter(p => p.path === name);
-        assert.deepEqual(pins.map(p => p.commit).sort(), [f.baseline, candidate].sort());
-        assert(pins.every(p => p.mode === '100644'));
-        assert.notEqual(pins[0].git_blob_oid, pins[1].git_blob_oid);
-      }
-      assert.match((await f.inspect(candidate)).reason, /outside-source-publication-scope/);
-    }
-  } finally { f.close(); }
-});
-
-test('receiving metadata refuses malformed, foreign, mixed or incomplete changed-path scope', async () => {
-  const f = fixture(); try {
-    const candidate = f.commit({...f.files, [METADATA[0]]: body('updated')}, f.baseline);
-    const invalid = [null, METADATA[0], [], [METADATA[0], METADATA[0]], [...METADATA, RECEIVING + 'extra.json'],
-      [METADATA[1]], [METADATA[0], METADATA[1]], ['README.md'], ['research/geography/packet/README.md'],
-      ['coordination/engineering/job.with.dots/README.md'], [RECEIVING + 'nested/README.md'],
-      [RECEIVING + '../README.md'], [RECEIVING + 'README.md/'], [RECEIVING + 'readme.md'],
-      [METADATA[0], 'coordination/engineering/another-packet/evidence-quality.json']];
-    for (const metadataPaths of invalid) {
-      const result = await f.inspect(candidate, f.baseline, {metadataPaths});
-      assert.equal(result.status, 'full-check-required', JSON.stringify(metadataPaths));
-      assert.match(result.reason, /outside-receiving-metadata-scope/);
-    }
-    for (const extra of ['coordination/engineering/another-packet/README.md', RECEIVING + 'extra.json',
-      'research/geography/new-packet/source.json', 'scripts/run-geographic-check.py',
-      'data/geography/source.json', P + 'native-bank/fragment.gz']) {
-      const head = f.commit({...f.files, [METADATA[0]]: body('updated'), [extra]: body('changed extra input')}, f.baseline);
-      const result = await f.inspect(head, f.baseline, {metadataPaths: [METADATA[0]]});
-      assert.equal(result.status, 'full-check-required', extra);
-      assert.match(result.reason, /outside-receiving-metadata-scope/);
-    }
-    const mixed = 'coordination/engineering/another-packet/evidence-quality.json';
-    const head = f.commit({...f.files, [METADATA[0]]: body('updated'), [mixed]: body('other packet')}, f.baseline);
-    assert.match((await f.inspect(head, f.baseline, {metadataPaths: [METADATA[0], mixed]})).reason,
-      /outside-receiving-metadata-scope/);
-  } finally { f.close(); }
-});
-
-test('receiving metadata requires modifications of ordinary non-executable files', async () => {
-  const f = fixture(); try {
-    for (const target of METADATA) {
-      const absent = {...f.files}; delete absent[target];
-      const addedBase = f.commit(absent, f.baseline);
-      const added = f.commit(f.files, addedBase);
-      assert.match((await f.inspect(added, addedBase, {metadataPaths: [target]})).reason, /missing-required-input/);
-      const deleted = f.commit(absent, f.baseline);
-      assert.match((await f.inspect(deleted, f.baseline, {metadataPaths: [target]})).reason, /missing-required-input/);
-      for (const mode of ['100755', '120000']) {
-        const candidate = f.commit(f.files, f.baseline, {[target]: mode});
-        assert.match((await f.inspect(candidate, f.baseline, {metadataPaths: [target]})).reason, /nonordinary/);
-        const baseline = f.commit(f.files, f.baseline, {[target]: mode});
-        const restored = f.commit(f.files, baseline);
-        assert.match((await f.inspect(restored, baseline, {metadataPaths: [target]})).reason, /nonordinary/);
-      }
-    }
-  } finally { f.close(); }
-});
-
-test('receiving metadata requires the supplied baseline to be the actual merge base', async () => {
-  const f = fixture(); try {
-    const candidate = f.commit({...f.files, [METADATA[0]]: body('updated')}, f.baseline);
-    const baseline = f.commit({...f.files, 'unrelated-baseline.txt': body('baseline-only change')}, f.baseline);
-    assert.equal(f.git(['merge-base', baseline, candidate]), f.baseline);
-    const result = await f.inspect(candidate, baseline, {metadataPaths: [METADATA[0]]});
-    assert.equal(result.status, 'full-check-required');
-    assert.match(result.reason, /outside-receiving-metadata-scope/);
-  } finally { f.close(); }
-});
-
-test('receiving metadata cannot exempt either filename when it is a selected current or historical route', async () => {
-  const f = fixture(); try {
-    for (const target of METADATA) {
-      for (const route of ['source-map', 'native-manifest', 'historical-source', 'fallback-source', 'historical-receipt', 'fallback-receipt']) {
-        const files = {...f.files}, selection = JSON.parse(files['data/ownership-selection.json']);
-        const other = METADATA.find(name => name !== target);
-        if (route === 'source-map') {
-          files[target] = files[selection.selected_geography.path];
-          selection.selected_geography = {...selection.selected_geography, path: target};
-        } else if (route === 'native-manifest') {
-          files[target] = files[selection.manifest_path];
-          selection.manifest_path = target;
-        } else {
-          files[target] = body('opaque consumed historical leaf');
-          const original = f.commit(files, f.baseline);
-          const commit = route.startsWith('fallback-') ? 'd'.repeat(40) : original;
-          if (route.endsWith('-source')) {
-            const name = selection.selected_geography.path, bank = JSON.parse(files[name]);
-            bank.unchanged_files.push({commit, path: target, mode: '100644',
-              git_blob_oid: f.git(['hash-object', '--stdin'], files[target]), bytes: files[target].length, sha256: sha(files[target])});
-            files[name] = body(bank);
-            selection.selected_geography = {...selection.selected_geography, bytes: files[name].length, sha256: sha(files[name])};
-          } else {
-            const name = 'scripts/native-ownership/verified-candidates.json', verified = JSON.parse(files[name]);
-            verified.candidates[selection.sha256] = {...verified.candidates[selection.sha256], commit, path: target};
-            files[name] = body(verified);
-          }
-        }
-        files['data/ownership-selection.json'] = body(selection);
-        const baseline = f.commit(files, f.baseline);
-        // First prove this exact relocated route is supported, so malformed
-        // fixture routing cannot make the changed-input rejection vacuous.
-        const control = f.commit({...files, [other]: body('inert metadata control')}, baseline);
-        const accepted = await f.inspect(control, baseline, {metadataPaths: [other]});
-        assert.equal(accepted.status, 'unchanged-selected-inputs', `${target} ${route}: ${accepted.reason}`);
-        assert(accepted.current_and_absent_alternatives.some(p => p.path === target && !p.absent));
-        const candidate = f.commit({...files, [target]: body('changed consumed scientific route')}, baseline);
-        const result = await f.inspect(candidate, baseline, {metadataPaths: [target]});
-        assert.equal(result.status, 'full-check-required', `${target} ${route}`);
-        assert.equal(result.reason, 'changed-current-input:' + target);
-      }
-    }
-  } finally { f.close(); }
-});
-
-
-test('production collector rejects a moving-main policy label different from its executing checkout', async () => {
-  const f = fixture(); try {
-    f.git(['update-ref', 'HEAD', f.baseline]);
-    const accepted = await inspectExecutingSelectedGeography({repo: f.directory, baseline: f.baseline, candidate: f.candidate});
-    assert.equal(accepted.status, 'unchanged-selected-inputs', accepted.reason);
-    const movedMain = f.commit({...f.files, 'reviewed-main-note': body('later main')}, f.baseline);
-    const rejected = await inspectExecutingSelectedGeography({repo: f.directory, baseline: f.baseline, candidate: f.candidate, trusted: movedMain});
-    assert.equal(rejected.status, 'full-check-required');
-    assert.equal(rejected.reason, 'executing-checkout-mismatch');
-  } finally { f.close(); }
 });

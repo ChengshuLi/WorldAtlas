@@ -1,0 +1,36 @@
+{
+  "kind": "stock-constructor-territorial-exclusion-route-controls",
+  "cases": [
+    {
+      "name": "supported simple split with whole original exclusion",
+      "result": {
+        "pass": true,
+        "cells": 1
+      }
+    },
+    {
+      "name": "coherent multi-member descendants with whole original exclusion",
+      "result": {
+        "pass": false,
+        "error": "Incomplete or ambiguous accepted split-source descendant"
+      }
+    },
+    {
+      "name": "missing descendant lineage cannot be bypassed by whole exclusion",
+      "result": {
+        "pass": false,
+        "error": "Incomplete accepted split-source descendant inventory"
+      }
+    },
+    {
+      "name": "no membership cannot be bypassed by whole exclusion",
+      "result": {
+        "pass": false,
+        "error": "Missing or ambiguous accepted source membership"
+      }
+    }
+  ],
+  "limits": [
+    "Synthetic authenticated Git-transport fixtures exercise the actual unmodified constructOriginalAuthority entry point. They establish representation/guard behavior, not qualification of Canada cells."
+  ]
+}

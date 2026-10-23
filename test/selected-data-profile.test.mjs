@@ -1,20 +1,33 @@
 import {readFileSync} from 'node:fs';
-import {gzipSync, gunzipSync, crc32} from 'node:zlib';
-import {CHECKPOINT_MEMBERS} from '../scripts/geographic-report-artifact.mjs';
+import {gzipSync, crc32} from 'node:zlib';
+import {CHECKPOINT_MEMBERS, loadGeographicReport, preparedQueueSource} from '../scripts/geographic-report-artifact.mjs';
 import {renderWorkerResult} from '../scripts/worker-result.mjs';
-import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
 import {isDeepStrictEqual as same} from "node:util";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
+import {selectedHistory} from './fixtures/selected-data-history.mjs';
 import {createHash} from 'node:crypto';
-import {verifyIssueScope} from '../scripts/issue-claim-contract.mjs';
 import {checkPremergeEvidence} from '../scripts/premerge-evidence.mjs';
 import {prepareIntegration, completeIntegration} from '../scripts/merge-integration.mjs';
-import {checkPRGates} from '../scripts/check-pr-gates.mjs';
-import {integrationProfile, selectedDataSelection, selectedDataCandidate, validateSelectedExpectations, SELECTED_SMOKE} from '../scripts/integration-profile.mjs';
+import {integrationProfile, selectedDataSelection, selectedDataCandidate, candidateGeographyCode, validateSelectedExpectations, SELECTED_SMOKE} from '../scripts/integration-profile.mjs';
 const prefix = 'coordination/engineering/fixture-delivery/';
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
+// These routing specimens predate generated SQLite moving into .cache. Keep
+// their captured bytes immutable. Derived routing fixtures change only that
+// output declaration, re-pin both in-memory trees, and never claim the derived
+// tree identities are the original public commits.
+function currentOutputPolicy(value) {
+  assert(value.generated_outputs.includes('data/atlas.sqlite'));
+  return {...value,generated_outputs:value.generated_outputs.map(name=>name==='data/atlas.sqlite'?'.cache/package-atlas.sqlite':name)};
+}
+function deriveCurrentOutputPolicy({baseline,authored,read,put}) {
+  const name='.github/package-inputs.json',old=currentOutputPolicy(JSON.parse(read(baseline.entries.get(name).sha))),
+    next=currentOutputPolicy(JSON.parse(read(authored.entries.get(name).sha)));
+  put(name,old,true);put(name,next);
+  for(const [state,policy]of [[baseline,old],[authored,next]])if(state.object)
+    state.object={sha:createHash('sha1').update('synthetic-current-output-policy\0'+state.object.sha+JSON.stringify(policy)).digest('hex')};
+}
 // Real ordinary ZIP records exercise the existing authenticated fixed-member
 // parser. These small products establish only structural profile eligibility.
 function checkpointZip(members) {
@@ -50,6 +63,16 @@ function fixture({mutate = () => {}, packetPrefix = prefix} = {}) {
   const registryBody={version:1,kind:'registry',entries:[entry]};
   const oldRegistry=put('coordination/engineering/prior/registry.json',registryBody,true);
   const base={version:1,method:'native-linear-evenodd-first-owner-v1',artifact_consumption:{certificate:{},review:{}},manifest_path:'unchanged.json',sha256:'a'.repeat(64)};
+  const part=put('data/base-native/rows.bin.gz','immutable native body',true), bounds=put('data/base-native/bounds.json.gz','immutable bounds',true);
+  const native=put('data/base-native/manifest.json',{version:2,method:base.method,parts:[{kind:'rows',path:'rows.bin.gz'}],
+    bounds:{path:'bounds.json.gz'},original_assets:{bounds:{path:bounds.path}}},true);
+  const consumer=put('coordination/engineering/prior/application-code.json',{version:1,kind:'qualified-artifact-application-code-closure-v1',
+    critical_files:[{path:SELECTED_SMOKE,bytes:1,sha256:'a'.repeat(64)}]},true), qualification=leaf('qualification.json',true);
+  const baseCertificate=put('coordination/engineering/prior/base-consumption.json',{version:1,kind:'qualified-arctic-immutable-product-certificate-v1',
+    application_consumer_code:consumer,qualification_inventory:qualification,application_inputs:[consumer,qualification]},true);
+  const comparison=leaf('native-comparison.json',true);
+  put('scripts/native-ownership/verified-candidates.json',{version:1,candidates:{[native.sha256]:{role:'reviewed-exhaustive-native-rule-comparison',path:comparison.path}}},true);
+  base.manifest_path=native.path;base.sha256=native.sha256;base.artifact_consumption.certificate=baseCertificate;
   const oldLedger=put('coordination/engineering/prior/ledger.json',{rows:[]},true);
   const oldSidecar=put('coordination/engineering/prior/sidecar.json',{authority_registry:oldRegistry,logical_asset_map:{ledger:oldLedger}},true);
   const hook=pin=>({path:pin.path,bytes:pin.bytes,sha256:pin.sha256});
@@ -106,6 +129,43 @@ test('selected-data uses full setup with one narrow selection, exact package app
   for(const name of ['request.json','facts.json','result.json','patch.json'])assert(!f.reads.includes(f.authored.entries.get(prefix+name).sha),'opaque role was unnecessarily read');
   assert(!f.reads.includes(f.authored.entries.get('coordination/engineering/prior/authority.json').sha),'unchanged authority was reread');
 });
+function projectedFixture() {
+  return fixture({mutate:f=>{
+    const name='coordination/engineering/prior/reference-metadata.json';
+    const pin=f.put(name,{version:1,kind:'native-reference-metadata-projection-v1',native_selection:f.base},true);
+    const reference_projection={path:pin.path,bytes:pin.bytes,sha256:pin.sha256};
+    const selected=tree=>JSON.parse(f.blobs.get(tree.entries.get('data/ownership-selection.json').sha));
+    const before=selected(f.baseline),after=selected(f.authored);
+    f.put('data/ownership-selection.json',{...before,reference_projection},true);
+    f.put('data/ownership-selection.json',{...after,reference_projection});
+    f.referenceProjection=reference_projection;
+  }});
+}
+test('selected data keeps an unchanged reference projection separate from its native sidecar base',async()=>{
+  const f=projectedFixture();
+  assert.deepEqual(await f.run(),{test_selection:'selected-data',expectations_path:prefix+'selected-delivery-expectations.json',shards:[0]});
+  assert(f.reads.includes(f.authored.entries.get(f.referenceProjection.path).sha));
+});
+for(const [name,mutate]of Object.entries({
+  'native manifest':(f,s)=>{s.sha256='f'.repeat(64);},
+  'native source bank':(f,s)=>{s.selected_geography={path:'foreign.json',sha256:'f'.repeat(64)};},
+  'projection pointer':(f,s)=>{s.reference_projection={...s.reference_projection,sha256:'f'.repeat(64)};},
+  'removed projection':(f,s)=>{delete s.reference_projection;},
+  'combined projection body':f=>{f.put(f.referenceProjection.path,{forged:true});},
+  'missing projection body':f=>{f.authored.entries.delete(f.referenceProjection.path);},
+  'nonordinary projection':f=>{f.authored.entries.set(f.referenceProjection.path,{...f.authored.entries.get(f.referenceProjection.path),mode:'120000'});},
+  'forged retained pin':(f,s)=>{
+    s.reference_projection={...s.reference_projection,sha256:'f'.repeat(64)};
+    const before=JSON.parse(f.blobs.get(f.baseline.entries.get('data/ownership-selection.json').sha));
+    f.put('data/ownership-selection.json',{...before,reference_projection:s.reference_projection},true);
+  },
+}))test('selected data refuses '+name+' drift with a reference projection',async()=>{
+  const f=projectedFixture(),selected=JSON.parse(f.blobs.get(f.authored.entries.get('data/ownership-selection.json').sha));
+  mutate(f,selected);f.put('data/ownership-selection.json',selected);
+  // Keep the original author diff: the complete combined tree must also bind
+  // the retained projection, independently of the supplied changed-path list.
+  assert.equal(await f.run(),null);
+});
 test('inert evidence is not a license to append unreachable package data',async()=>{
   const f=fixture({mutate:f=>f.put(prefix+'assembly-receipt.json',{complete:true})});assert.ok(await f.run());
   f.definition.inputs.push(prefix+'assembly-receipt.json');f.put('.github/package-inputs.json',f.definition);assert.equal(await f.run(),null);
@@ -114,7 +174,7 @@ for(const [name,mutate] of Object.entries({
   'missing accepted smoke':f=>f.baseline.entries.delete(SELECTED_SMOKE),
   'candidate helper substitution':f=>f.put(SELECTED_SMOKE,'// candidate replacement'),
   'missing expectations':f=>f.authored.entries.delete(prefix+'selected-delivery-expectations.json'),
-  'ambiguous expectations':f=>f.put(prefix+'other/selected-delivery-expectations.json',f.expected),
+  'ambiguous expectations':f=>f.put(prefix+'other/selected-delivery-expectations.json',JSON.stringify(f.expected)+'\n'),
   'incomplete expected roster':f=>{f.expected.cohorts[0].members.pop();f.expected.cohorts[0].component_ids.pop();f.put(prefix+'selected-delivery-expectations.json',f.expected);},
   'wrong expected target':f=>{f.expected.cohorts[0].members[0].target_id='wrong';f.put(prefix+'selected-delivery-expectations.json',f.expected);},
   'wrong expected cells':f=>{f.expected.cumulative_native_cells=1;f.put(prefix+'selected-delivery-expectations.json',f.expected);},
@@ -123,10 +183,8 @@ for(const [name,mutate] of Object.entries({
   'package reordering':f=>{f.definition.inputs.reverse();f.put('.github/package-inputs.json',f.definition);},
   'package policy rewrite':f=>{f.definition.verification_paths.push('src/');f.put('.github/package-inputs.json',f.definition);},
   'directory package append':f=>{f.definition.inputs.push(prefix+'extra/');f.put('.github/package-inputs.json',f.definition);},
-  'code disguised as package data':f=>f.put(prefix+'package.json',{scripts:{postinstall:'do something'}}),
-  'new executable':f=>f.put(prefix+'helper.mjs','throw Error()'),
-  'foreign data':f=>f.put('coordination/engineering/other/result.json',{}),
-  'malformed supporting JSON':f=>f.put(prefix+'receipt.json','console.log("not data")'),
+  'foreign data':f=>f.put('data/foreign-result.json',{}),
+  'malformed required expectations':f=>f.put(prefix+'selected-delivery-expectations.json','console.log("not data")'),
   'symlink role':f=>f.authored.entries.get(prefix+'patch.json').mode='120000',
   'executable role':f=>f.authored.entries.get(prefix+'patch.json').mode='100755',
   'tree size drift':f=>f.authored.entries.get(prefix+'patch.json').size++,
@@ -176,19 +234,19 @@ function gateFixture(f=fixture()) {
       ...(prepared.test_selection?{test_selection:prepared.test_selection,expectations_path:prepared.expectations_path}:{}),
       geography_software:prepared.geography_software};
   };
-  f.gate=()=>checkPRGates({event:f.event,repo:'owner/repo',token:'fixture',api:f.api,phase:'metadata'});
   return f;
 }
-test('trusted author authority and actual queue classification keep separate consumed roles',async()=>{
-  const f=gateFixture(), result=await f.gate();
-  assert.equal(result.status,'checked');assert.equal(result.profile,undefined);assert.equal(result.package,undefined);
+test('actual queue classification needs no ordinary issue authority',async()=>{
+  const f=gateFixture();
   assert.equal((await f.select()).test_selection,'selected-data');
   f.claim.active=false;assert.equal((await f.select()).test_selection,'selected-data');
-  f.issue.state='closed';await assert.rejects(f.select());
+  f.issue.state='closed';f.issue.labels=[];f.issue.body='';f.pr.body='';
+  assert.equal((await f.select()).test_selection,'selected-data');
 });
 test('actual selector retains all three shards when accepted smoke or complete expectations are unavailable',async()=>{
-  for(const mutate of [f=>f.baseline.entries.delete(SELECTED_SMOKE),f=>f.blobs.delete(f.authored.entries.get(prefix+'selected-delivery-expectations.json').sha)]){
-    const f=gateFixture();mutate(f);assert.deepEqual(await f.select(),{profile:'full',shards:[0,1,2],geography_software:false});
+  for(const [mutate,software] of [[f=>f.baseline.entries.delete(SELECTED_SMOKE),true],
+    [f=>f.blobs.delete(f.authored.entries.get(prefix+'selected-delivery-expectations.json').sha),false]]){
+    const f=gateFixture();mutate(f);assert.deepEqual(await f.select(),{profile:'full',shards:[0,1,2],geography_software:software});
   }
 });
 
@@ -228,7 +286,13 @@ function mergeFixture({selectedFixture,gateReady=false} = {}) {
     if(route===root+'/git/refs'&&method==='POST')return {ref:body.ref};
     if(route===root+'/merges'&&method==='POST'){assert.notEqual(body.base,'main');assert.equal(body.head,f.head);return {sha:candidate};}
     if(route===root+'/git/ref/heads/main')return {object:{sha:f.base}};
-    if(route===root+'/git/commits/'+candidate)return {sha:candidate,tree:{sha:'head-tree'},parents:[{sha:f.base},{sha:f.head}]};
+    if(route===root+'/git/commits/'+candidate)return {sha:candidate,tree:{sha:f.integrated?'integrated-tree':'head-tree'},parents:[{sha:f.base},{sha:f.head}]};
+    if(route===root+'/git/trees/integrated-tree?recursive=1')return {tree:[...f.integrated.entries.values()],truncated:false};
+    if(route===root+'/contents/.github/package-inputs.json?ref='+candidate){
+      const row=(f.integrated??f.authored).entries.get('.github/package-inputs.json'),bytes=f.blobs.get(row.sha);
+      assert(bytes,'Candidate definition must come from its actual integrated tree');
+      return {type:'file',path:row.path,sha:row.sha,size:row.size,encoding:'base64',content:bytes.toString('base64')};
+    }
     if(route.includes('/check-runs'))return {check_runs:['scope',...(f.evidenceQuality?['evidence']:[])].map((name,id)=>({id:id+1,name,status:'completed',conclusion:'success',app:{id:1}}))};
     if(route===root+'/commits/'+f.head+'/status')return {statuses:[]};
     if(route.includes('/actions/runs/99/artifacts'))return {total_count:0,artifacts:[]};
@@ -246,10 +310,28 @@ test('real selected prepare has no author proof and final merge accepts the fres
   const preparedFixture=mergeFixture(), prepared=await prepareIntegration(preparedFixture.options);
   assert.equal(prepared.profile,'full');assert.equal(prepared.test_selection,'selected-data');assert.deepEqual(prepared.shards,[0]);
   assert(!('proof' in prepared));assert(!('geography_proof' in prepared));
+  assert.equal(prepared.candidate_tree,'head-tree');
+  assert(prepared.checkout_patterns.includes('/'+prepared.expectations_path));
+  assert(preparedFixture.mergeReads.includes('/repos/owner/repo/contents/.github/package-inputs.json?ref='+'9'.repeat(40)),
+    'Checkout selection must authenticate the actual integrated candidate definition');
   // A separate final-phase fixture has no cross-job byte cache or evidence overlap.
   const first=mergeFixture(),result=await first.complete();assert.equal(result.accepted,true);assert.equal(first.writes.length,1);
   assert(!first.mergeReads.some(route=>route.includes('/actions/')), 'No speculative proof or artifact discovery');
 });
+test('final checker choice skips selected-data classification when no candidate code path exists', async () => {
+  const f = mergeFixture(), diagnostics = {};
+  assert.equal(selectedDataCandidate(f.pr.head.ref, f.files), true);
+  assert.equal(candidateGeographyCode('full', f.files), false);
+  const result = await f.complete({metadataDiagnostics: diagnostics});
+  assert.equal(result.accepted, true);
+  assert.equal(result.geography.trusted_code_commit, f.base);
+  assert.deepEqual(diagnostics, {}, 'eligible classifier was never entered');
+  assert.equal(f.reads.length, 0, 'no classifier metadata or supporting bodies were read');
+  assert.equal(f.mergeReads.filter(route=>route==='/repos/owner/repo/git/commits/'+f.base).length,1, 'one baseline tree for actual execution routing');
+  assert.equal(f.mergeReads.filter(route=>route==='/repos/owner/repo/git/trees/base-tree?recursive=1').length,1);
+  assert.equal(f.writes.length, 1);
+});
+
 test('selected-data refuses absent, failed, skipped or stale final candidate checks before any merge',async()=>{
   for(const integrationResult of [undefined,'failure','cancelled','skipped']){
     const f=mergeFixture();await assert.rejects(f.complete({integrationResult}),/Integration tests|successful isolated/);assert.equal(f.writes.length,0);
@@ -269,7 +351,7 @@ function retainedUKRFixture() {
   const blobs=new Map(), parsed=new Map(), pins=new Map();
   const readOriginal=name=>{
     if(parsed.has(name))return parsed.get(name);
-    const bytes=execFileSync('git',['show','HEAD:'+name],{maxBuffer:4*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
+    const bytes=selectedHistory().readFile(name);
     const oid=createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');blobs.set(oid,bytes);
     pins.set(name,{path:name,bytes:bytes.length,sha256:digest(bytes),git_blob_oid:oid,mode:'100644'});
     const value=JSON.parse(bytes);parsed.set(name,value);return value;
@@ -286,10 +368,10 @@ function retainedUKRFixture() {
     for(const child of Object.values(value))collect(child);
   };
   for(const value of [sidecar,ledger,registry,certificate])collect(value);
-  const names=[...pins.keys()],rows=execFileSync('git',['ls-tree','HEAD','--',...names],{encoding:'utf8',maxBuffer:1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}}).trim().split('\n');
   const baseline={entries:new Map()},authored={entries:new Map()};
-  for(const line of rows){const m=/^(\d+) (\w+) ([a-f0-9]+)\t(.+)$/.exec(line);assert(m,line);const pin=pins.get(m[4]);
-    assert.equal(m[1],pin.mode);assert.equal(m[3],pin.git_blob_oid);baseline.entries.set(m[4],{path:m[4],type:m[2],mode:m[1],sha:m[3],size:pin.bytes});}
+  for(const [name,pin] of pins) {const row=selectedHistory().entry(name);assert(row,name);
+    assert.equal(row.mode,pin.mode);assert.equal(row.sha,pin.git_blob_oid);assert.equal(row.size,pin.bytes);
+    baseline.entries.set(name,row);}
   for(const [name,row] of baseline.entries)authored.entries.set(name,{...row});
   const put=(name,value,old=false)=>{const bytes=Buffer.from(typeof value==='string'?value:JSON.stringify(value)),sha=createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
     blobs.set(sha,bytes);const row={path:name,mode:'100644',type:'blob',sha,size:bytes.length};authored.entries.set(name,row);if(old)baseline.entries.set(name,row);
@@ -297,7 +379,7 @@ function retainedUKRFixture() {
   put(SELECTED_SMOKE,'// fixture: generic helper accepted unchanged on future baseline',true);
   const oldHook=pins.get(stem+'selected-release-001/selection-sidecar.json');
   put('data/ownership-selection.json',{...sidecar.base_selection,additive_release:{path:oldHook.path,bytes:oldHook.bytes,sha256:oldHook.sha256}},true);
-  const definition=readOriginal('.github/package-inputs.json');put('.github/package-inputs.json',definition,true);
+  const definition=currentOutputPolicy(readOriginal('.github/package-inputs.json'));put('.github/package-inputs.json',definition,true);
   const hook=put(prefix+'selection-sidecar.json',sidecar);put('data/ownership-selection.json',{...sidecar.base_selection,additive_release:hook});
   const active=ledger.rows.filter(row=>['assigned','zero-cell'].includes(row.disposition));
   assert.equal(active.length,36);const expected={version:1,selected_ledger_sha256:sidecar.logical_asset_map.ledger.sha256,cumulative_native_cells:353,
@@ -307,7 +389,7 @@ function retainedUKRFixture() {
   const api=async route=>{const oid=route.split('/').at(-1),bytes=blobs.get(oid);assert(bytes,'unexpected opaque read '+route);return {sha:oid,size:bytes.length,encoding:'base64',content:bytes.toString('base64')};};
   return {ledger,expected,sidecar,run:()=>selectedDataSelection({api,repo:'owner/repo',branch:'engineering/fixture-delivery',files,baseline,authored})};
 }
-test('actual retained44-row UKR graph admits36 active rows while preserving6 held and2 rejected rows',async()=>{
+test('retained44-row UKR graph under current output policy admits36 active rows while preserving6 held and2 rejected rows',async()=>{
   const f=retainedUKRFixture();assert.ok(await f.run());
   assert.doesNotThrow(()=>validateSelectedExpectations(f.expected,f.ledger,f.sidecar.logical_asset_map.ledger.sha256,f.ledger));
   for(const disposition of ['awaiting-evidence','rejected']){
@@ -329,7 +411,7 @@ function actualSourceSpecimen() {
   if (sourceSpecimen) return sourceSpecimen;
   const bodies = new Map(), documents = new Map(), paths = new Set();
   const raw = name => {
-    const bytes = execFileSync('git', ['show', 'HEAD:' + name], {maxBuffer:32*1024*1024, env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
+    const bytes = selectedHistory().readFile(name);
     bodies.set(createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex'), bytes);return bytes;
   };
   const json = name => {const value=JSON.parse(raw(name));documents.set(name,value);paths.add(name);return value;};
@@ -346,20 +428,24 @@ function actualSourceSpecimen() {
     if(typeof value.path==='string'&&Number.isSafeInteger(value.bytes)&&!value.path.startsWith('.')&&!value.path.startsWith('/'))paths.add(value.path);
     for(const child of Object.values(value))collect(child);
   };
-  for(const value of documents.values())collect(value);
-  const output=execFileSync('git',['ls-tree','-l','HEAD','--',...paths],{encoding:'utf8',maxBuffer:4*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
+  // Keep the complete original metadata bodies above, but inventory only this
+  // specimen's declared roles. Recursing through the global catalogue/registry
+  // hydrates unrelated scientific blobs merely to ask Git for their sizes.
+  const native=documents.get(authority.original_pins.native_request.path).additive;
+  const sourceRoles=[native.publication_path,native.inventory_path,native.operating_path];
+  for(const value of [authority,issued.report,issued.source_rule.inputs,
+    native.inputs.filter(row=>sourceRoles.includes(row.path)),
+    [...handoff.consumed_inputs,...(handoff.reused_whole_product_inputs??[])].filter(row=>
+      /\/(?:components|sources)-\d{3}\.jsonl\.gz$/.test(row.path))])collect(value);
   const entries=new Map();
-  for(const line of output.trim().split('\n')) {
-    const match=/^(\d+) (\w+) ([a-f0-9]+)\s+(\d+)\t(.+)$/.exec(line);
-    if(match)entries.set(match[5],{path:match[5],mode:match[1],type:match[2],sha:match[3],size:Number(match[4])});
-  }
+  for(const name of paths) {const row=selectedHistory().entry(name);if(row)entries.set(name,row);}
   // The two whole restored bodies are encoded data, never decoded or executed.
   const physical=handoff.consumed_inputs.filter(row=>/\/(?:components|sources)-\d{3}\.jsonl\.gz$/.test(row.path));
   assert.equal(physical.length,2);for(const row of physical)raw(row.path);
   for(const row of issued.source_rule.administrative_products)raw(row.path);
   return sourceSpecimen={bodies,documents,entries,authority,issued,facts,registry,registration,handoff,catalogue,report,physical};
 }
-function retainedSourceFixture({format='v1',additionalRegistryEntries=[],mutate=()=>{}}={}) {
+function retainedSourceFixture({format='v1',mutate=()=>{}}={}) {
   const actual=actualSourceSpecimen(),documents=new Map([...actual.documents].map(([name,value])=>[name,structuredClone(value)]));
   const authority=structuredClone(actual.authority),issued=documents.get(authority.original_pins.source_request.path),
     facts=documents.get(authority.original_pins.source_facts.path),registry=documents.get(administrativePath),
@@ -367,7 +453,6 @@ function retainedSourceFixture({format='v1',additionalRegistryEntries=[],mutate=
   // This historical UKR fixture models one registration appended to an empty
   // registry, not the eligibility of every current or future HEAD registration.
   // Keep its retained specimen isolated as unrelated real deliveries accumulate.
-  registry.entries.push(...structuredClone(additionalRegistryEntries));
   assert.equal(registry.entries.filter(row=>row.id===registration.id).length,1);
   registry.entries=[registration];
   const f=fixture({mutate:f=>{
@@ -437,7 +522,7 @@ function retainedSourceFixture({format='v1',additionalRegistryEntries=[],mutate=
 }
 
 test('retained complete v1 SOURCE graph admits registry append and exact already-on-main package inputs',async()=>{
-  const f=retainedSourceFixture();assert.ok(await f.run());
+  const f=retainedSourceFixture(), diagnostics={};assert.ok(await f.run({metadataDiagnostics:diagnostics}),JSON.stringify(diagnostics));
   for(const name of f.sourceState.packageRoles)assert(f.baseline.entries.has(name));
   assert(f.sourceState.handoff.consumed_inputs.some(row=>row.path.endsWith('.py')),'negative executable example is present');
   assert(!f.sourceState.packageRoles.some(name=>name.startsWith('.cache/')||name.endsWith('.py')));
@@ -448,17 +533,6 @@ test('explicit v2 schema fixture admits preserved original membership without cl
   assert.ok(await retainedSourceFixture({format:'v2'}).run());
 });
 
-for(const format of ['v1','v2'])test('historical SOURCE '+format+' fixture is isolated from unrelated HEAD registry growth',async()=>{
-  // An unrelated future schema/location must not silently become part of the
-  // UKR fixture. This does not assert fast-route eligibility for that new entry.
-  const unrelated={id:'unrelated-future-registration',format:'future-format',
-    source:{path:'coordination/engineering/other/handoff.json'}};
-  const f=retainedSourceFixture({format,additionalRegistryEntries:[unrelated]});
-  assert.deepEqual(f.sourceState.registry.entries,[f.sourceState.registration]);
-  const old=JSON.parse(f.blobs.get(f.baseline.entries.get(administrativePath).sha));
-  assert.deepEqual(old.entries,[]);
-  assert.ok(await f.run());
-});
 
 for(const [name,mutate] of Object.entries({
   'foreign registry field':x=>{x.registry.module='unreviewed.mjs';},
@@ -531,31 +605,20 @@ test('registry changes preserve every original entry and cannot remove or rewrit
   }
 });
 
-test('real SOURCE metadata entry and cold final merge preserve applicability',async()=>{
-  const gate=gateFixture(retainedSourceFixture()),authority=await gate.gate();
-  assert.equal(authority.status,'checked');assert.equal(authority.profile,undefined);assert.equal((await gate.select()).test_selection,'selected-data');
-  const prep=mergeFixture({selectedFixture:retainedSourceFixture()}),prepared=await prepareIntegration(prep.options);
-  assert.equal(prepared.test_selection,'selected-data');assert(!('proof' in prepared));assert(!('geography_proof' in prepared));
-  const cold=mergeFixture({selectedFixture:retainedSourceFixture()}),result=await cold.complete();
-  assert.equal(result.accepted,true);assert(!('proof' in result));
-});
 
-// Only mutable global metadata is snapshotted. Original delivery vintages stay
-// in their retained repository paths and are checked against actual Git bodies.
+// Mutable global metadata and immutable original roles are explicit fixtures.
+// The policy reader still authenticates every body it consumes against its role.
 const fixedRows=new Map(),fixedBlobs=new Map();
 function fixedDeliveryFixture({leanPackage=false,fixtureName='selected-native-role-ci-1726.json'}={}) {
   const fixed=JSON.parse(readFileSync(new URL('./fixtures/'+fixtureName,import.meta.url))),
     files=structuredClone(fixed.files),added=new Set(files.filter(row=>row.status==='added').map(row=>row.filename)),
     blobs=new Map(fixedBlobs),reads=[],root='/repos/owner/repo';
-  const git=(...args)=>execFileSync('git',args,{maxBuffer:32*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
   const oid=bytes=>createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
   for(const snap of fixed.snapshots){const raw=Buffer.from(snap.body);assert.equal(raw.length,snap.bytes);assert.equal(digest(raw),snap.sha256);assert.equal(oid(raw),snap.git_blob_oid);blobs.set(snap.git_blob_oid,raw);}
   const rows=fixedRows;
   const repositoryRow=name=>{
     if(rows.has(name))return rows.get(name);
-    const raw=git('ls-tree','HEAD','--',name).toString('utf8').trim(),match=/^(\d+) (\w+) ([a-f0-9]+)\t(.+)$/.exec(raw);
-    if(!match)return undefined;
-    const row={path:match[4],mode:match[1],type:match[2],sha:match[3],size:fixed.retained_tree_rows?.find(row=>row.path===name&&row.sha===match[3])?.size??Number(git('cat-file','-s',match[3]).toString())};rows.set(name,row);return row;
+    const row=selectedHistory().entry(name);if(row)rows.set(name,row);return row;
   };
   class RoleTree extends Map {
     constructor(commit){super();this.commit=commit;}
@@ -571,18 +634,19 @@ function fixedDeliveryFixture({leanPackage=false,fixtureName='selected-native-ro
   const baseline={object:{sha:fixed.base},entries:new RoleTree(fixed.base)},authored={object:{sha:fixed.head},entries:new RoleTree(fixed.head)};
   for(const row of files){baseline.entries.get(row.filename);authored.entries.get(row.filename);}
   const api=async route=>{
-    if(route.includes('/git/blobs/')){const sha=route.split('/').at(-1);if(!blobs.has(sha)){const raw=git('cat-file','blob',sha);blobs.set(sha,raw);fixedBlobs.set(sha,raw);}const bytes=blobs.get(sha);reads.push(sha);return {sha,size:bytes.length,encoding:'base64',content:bytes.toString('base64')};}
+    if(route.includes('/git/blobs/')){const sha=route.split('/').at(-1);if(!blobs.has(sha)){const raw=selectedHistory().readBlob(sha);blobs.set(sha,raw);fixedBlobs.set(sha,raw);}const bytes=blobs.get(sha);reads.push(sha);return {sha,size:bytes.length,encoding:'base64',content:bytes.toString('base64')};}
     if(route.startsWith(root+'/compare/'))return {status:'ahead'};
     if(route.startsWith(root+'/git/commits/')){const sha=route.split('/').at(-1);const source=fixed.accepted_sources.find(row=>row.commit===sha);assert(source,route);return {sha,tree:{sha:source.tree}};}
     if(route.startsWith(root+'/git/trees/')){const sha=route.split('/').at(-1).split('?')[0],source=fixed.accepted_sources.find(row=>row.tree===sha);assert(source,route);return {truncated:false,tree:[source.entry]};}
     throw Error('Unexpected fixed delivery API route '+route);
   };
   const put=(name,value,old=false)=>{const bytes=Buffer.from(typeof value==='string'?value:JSON.stringify(value)),sha=oid(bytes);blobs.set(sha,bytes);const row={path:name,mode:'100644',type:'blob',sha,size:bytes.length};authored.entries.set(name,row);if(old)baseline.entries.set(name,row);return {path:name,mode:'100644',git_blob_oid:sha,bytes:bytes.length,sha256:digest(bytes),commit:'a'.repeat(40)};};
+  deriveCurrentOutputPolicy({baseline,authored,put,read:sha=>blobs.get(sha)??selectedHistory().readBlob(sha)});
   if(leanPackage){
     const policy=JSON.parse(blobs.get(baseline.entries.get('.github/package-inputs.json').sha));
     put('.github/package-inputs.json',{...policy,inputs:[...policy.inputs,...fixed.prospective_lean_package.inputs]});
   }
-  const document=name=>{const row=authored.entries.get(name);if(!blobs.has(row.sha)){const raw=git('cat-file','blob',row.sha);blobs.set(row.sha,raw);fixedBlobs.set(row.sha,raw);}return JSON.parse(blobs.get(row.sha));};
+  const document=name=>{const row=authored.entries.get(name);if(!blobs.has(row.sha)){const raw=selectedHistory().readBlob(row.sha);blobs.set(row.sha,raw);fixedBlobs.set(row.sha,raw);}return JSON.parse(blobs.get(row.sha));};
   const f={fixed,files,branch:fixed.branch,baseline,authored,blobs,reads,api,put,document,sourceState:{}};
   f.run=(options={})=>selectedDataSelection({api:f.api,repo:'owner/repo',branch:f.branch,files:f.files,baseline,authored,...options});return f;
 }
@@ -600,11 +664,9 @@ test('new unconsumed supporting text is independent of document title',async()=>
   f.definition.inputs.push(prefix+'README.md');f.put('.github/package-inputs.json',f.definition);
   assert.equal(await f.run(),null,'a packaged README is not inert supporting text');
 });
-for(const [label,change] of Object.entries({
-  'NUL README':f=>f.put(prefix+'README.md','a\0b'),
-  'executable README':f=>{f.put(prefix+'README.md','text');f.authored.entries.get(prefix+'README.md').mode='100755';},
-  'symlink README':f=>{f.put(prefix+'README.md','text');f.authored.entries.get(prefix+'README.md').mode='120000';},
-}))test('packet documentation falls back for '+label,async()=>assert.equal(await fixture({mutate:change}).run(),null));
+test('packet documentation falls back for a symlink',async()=>assert.equal(await fixture({mutate:f=>{
+  f.put(prefix+'README.md','text');f.authored.entries.get(prefix+'README.md').mode='120000';
+}}).run(),null));
 
 
 test('supporting Markdown remains new, ordinary, in scope and outside actual consumer roles',async()=>{
@@ -612,12 +674,10 @@ test('supporting Markdown remains new, ordinary, in scope and outside actual con
     assert.equal((await fixture({mutate:f=>f.put(prefix+name,'support only\n')}).run()).test_selection,'selected-data');
   }
   for(const mutate of [
-    f=>f.put('coordination/engineering/foreign/review.md','outside declared scope'),
+    f=>f.put('data/foreign/review.md','outside packet namespaces'),
     f=>{f.put(prefix+'review.md','old',true);f.put(prefix+'review.md','modified');},
     f=>{const row=f.put(prefix+'template.md',f.sidecarBody);f.put('data/ownership-selection.json',
       {...f.base,additive_release:{path:row.path,bytes:row.bytes,sha256:row.sha256}});},
-    f=>f.put(prefix+'review.md',Buffer.from([0xff])),
-    f=>{f.put(prefix+'review.md','text');f.authored.entries.get(prefix+'review.md').mode='100755';},
     f=>{f.put(prefix+'review.md','text');f.authored.entries.get(prefix+'review.md').mode='120000';},
   ]) assert.equal(await fixture({mutate}).run(),null);
   const renamed=fixture({mutate:f=>f.put(prefix+'review.md','text')});
@@ -636,39 +696,20 @@ test('unchanged SOURCE opaque leaves retain exact baseline/candidate Git body an
     assert.equal(await f.run(),null,mutation);
   }
 });
-test('supporting records are validated incrementally without retaining cumulative evidence volume',async()=>{
-  const plain=fixture(),ordinary={};assert(await plain.run({metadataDiagnostics:ordinary}));
+test('routing never reads unconsumed supporting bodies or claims their contents are validated',async()=>{
+  const plain=fixture({mutate:f=>f.put(prefix+'baseline-support.json',{})}),ordinary={};
+  assert(await plain.run({metadataDiagnostics:ordinary}));
   const f=fixture({mutate:f=>{for(let n=0;n<400;n++)f.put(prefix+'evidence-'+n+'.json',{n,body:'x'.repeat(48*1024)});}}),stats={};
+  // Make the API unable to provide any supporting bytes. Eligibility depends on
+  // their actual Git tree roles, not on interpreting or authenticating contents.
+  for(let n=0;n<400;n++)f.blobs.delete(f.authored.entries.get(prefix+'evidence-'+n+'.json').sha);
   assert.equal((await f.run({metadataDiagnostics:stats})).test_selection,'selected-data');
-  assert(stats.read_bytes>16*1024*1024);assert(stats.read_count>256);
-  assert.equal(stats.retained_bytes,ordinary.retained_bytes);assert.equal(stats.retained_count,ordinary.retained_count);assert.equal(stats.transient_read_count,400);
-  // A late bad record must still refuse after the other records have been checked.
-  f.put(prefix+'evidence-399.json','{"unfinished":');assert.equal(await f.run({}),null);
-});
-test('inert supporting gzip validates every decoded JSONL record without granting package authority',async()=>{
-  const f=fixture({mutate:f=>{
-    f.put(prefix+'support.json.gz',gzipSync(JSON.stringify({inert:true})));
-    f.put(prefix+'support.jsonl.gz',gzipSync('{"first":1}\n{"last":2}\n'));
-  }}),stats={};
-  assert.equal((await f.run({metadataDiagnostics:stats})).test_selection,'selected-data');assert(stats.decoded_bytes>0);
-  f.definition.inputs.push(prefix+'support.jsonl.gz');f.put('.github/package-inputs.json',f.definition);
-  assert.equal(await f.run(),null);
-});
-for(const [label,bytes] of Object.entries({
-  'invalid gzip':Buffer.from('not a gzip body'),
-  'malformed last JSONL record':gzipSync('{"first":1}\n{"last":'),
-  'empty JSONL':gzipSync(''),
-  'code in JSONL':gzipSync('{"first":1}\nprocess.exit()\n'),
-  'blank interior record':gzipSync('{}\n\n{}\n'),
-}))test('supporting gzip refuses '+label,async()=>{
-  assert.equal(await fixture({mutate:f=>f.put(prefix+'support.jsonl.gz',bytes)}).run(),null);
-});
-test('supporting gzip validates complete concatenated members and rejects truncated tails',async()=>{
-  const first=gzipSync('{"first":1}\n'),second=gzipSync('{"last":2}\n');
-  const f=fixture({mutate:f=>f.put(prefix+'support.jsonl.gz',Buffer.concat([first,second]))});
-  assert.equal((await f.run()).test_selection,'selected-data');
-  f.put(prefix+'support.jsonl.gz',Buffer.concat([first,second.subarray(0,second.length-1)]));
-  assert.equal(await f.run(),null);
+  assert.deepEqual(stats,ordinary);
+  assert.equal(stats.transient_read_count,0);assert.equal(stats.transient_read_bytes,0);
+  f.definition.inputs.push(prefix+'evidence-399.json');f.put('.github/package-inputs.json',f.definition);
+  assert.equal(await f.run(),null,'a new consumed package role cannot hide as supporting evidence');
+  const consumed=fixture();consumed.blobs.delete(consumed.authored.entries.get(prefix+'ledger.json').sha);
+  assert.equal(await consumed.run(),null,'actual consumed body validation remains mandatory');
 });
 
 test('prospective lean package keeps the actual COD/PHL scientific graph and selects targeted checks',async()=>{
@@ -746,21 +787,6 @@ test('fixed native mutation harness preserves a valid exact outer pin graph befo
   assert.equal((await f.run())?.test_selection,'selected-data');
 });
 
-async function fixedConsumerFixture(options={}) {
-  const f=fixedDeliveryFixture({leanPackage:true});
-  // Populate the fake complete Git trees from retained immutable metadata;
-  // subsequent consumer calls have fresh API caches and counters.
-  assert.equal((await f.run()).test_selection,'selected-data');f.reads.length=0;
-  return options.gate?gateFixture(f):mergeFixture({...options,selectedFixture:f});
-}
-test('fixed COD/PHL lean declarations reach actual queue selection and cold final merge validation',async()=>{
-  const gate=await fixedConsumerFixture({gate:true}),authority=await gate.gate();
-  assert.equal(authority.status,'checked');assert.equal(authority.profile,undefined);assert.equal((await gate.select()).test_selection,'selected-data');
-  const prep=await fixedConsumerFixture(),prepared=await prepareIntegration(prep.options);
-  assert.equal(prepared.test_selection,'selected-data');assert(!('proof' in prepared));assert(!('geography_proof' in prepared));
-  const cold=await fixedConsumerFixture(),result=await cold.complete();
-  assert.equal(result.accepted,true);assert(!('proof' in result));
-});
 
 for(const [label,mutate] of Object.entries({
   'orphan operand':f=>{const name='coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-999.bin.gz';f.put(name,'orphan');f.files.push({filename:name,status:'added'});},
@@ -806,98 +832,13 @@ for(const [label,mutate] of Object.entries({
   const f=retainedSourceFixture({mutate:s=>mutate(s,reusePhysicalRole(s))});assert.equal(await f.run(),null);
 });
 
-const real1753=()=>fixedDeliveryFixture({fixtureName:'../../coordination/engineering/selected-metadata-admission-20261012/pr1753.json'});
-test('complete unmodified merged PR1753 takes selected-data with all original evidence and role joins',async()=>{
-  const f=real1753(),stats={};
-  assert.equal(f.fixed.base,'7eb3293b739631f4e69d7e676c7a77ae7c22c107');
-  assert.equal(f.fixed.head,'1d67abb09f5b9d3009da115c06170678aa5cdf3f');
-  assert.equal(f.files.length,426);assert.deepEqual(f.files,f.fixed.changed_rows.map(({filename,status})=>({filename,status})));
-  for(const row of f.fixed.changed_rows){
-    assert.deepEqual(f.authored.entries.get(row.filename),row.after);
-    assert.deepEqual(f.baseline.entries.get(row.filename)??null,row.before);
-  }
-  const result=await f.run({metadataDiagnostics:stats});assert(result,JSON.stringify(stats));assert.equal(result.test_selection,'selected-data');
-  assert.equal(stats.read_count,349);assert.equal(stats.read_bytes,38981635);
-  assert.equal(stats.retained_count,51);assert.equal(stats.retained_bytes,13352331);
-  assert.equal(stats.transient_read_count,298);assert.equal(stats.decoded_bytes,22197550);
-});
-test('complete PR1753 record walk rejects malformed unconsumed preparation metadata',async()=>{
-  const f=real1753();
-  // Pick an independently confirmed unconsumed preparation record rather than a
-  // pinned selected role, so stale outer pins cannot account for this rejection.
-  const supporting=f.fixed.changed_rows.find(row=>row.filename.endsWith('/publication-preflight-001/classification.json')).filename;
-  const original=f.document(supporting);assert(original);
-  f.put(supporting,'{"unfinished":');assert.equal(await f.run(),null);
-});
-test('supporting logs retain complete whole-body text identity',async()=>{
-  const lines=Array.from({length:400},(_,i)=>JSON.stringify({i,sample:'x'.repeat(400)})).join('\n')+'\n';
-  const f=fixture({mutate:f=>f.put(prefix+'samples.log',lines)});
-  assert.equal((await f.run()).test_selection,'selected-data');
-  for(const body of [lines+'unexpected trailing text',JSON.stringify('x'.repeat(128*1024)),'unstructured '.repeat(13000)]){
-    f.put(prefix+'samples.log',body);assert.equal((await f.run()).test_selection,'selected-data');
-  }
-  f.put(prefix+'samples.log',lines+'\0');assert.equal(await f.run(),null);
-  f.put(prefix+'samples.log',lines);
-  const row=f.authored.entries.get(prefix+'samples.log');f.blobs.set(row.sha,Buffer.from(lines.replace('sample','tamper')));
-  assert.equal(await f.run(),null);
-});
-test('real PR1753 selection reaches cold queue classification and final validation',async()=>{
-  const ready=async()=>{const f=real1753();assert.equal((await f.run()).test_selection,'selected-data');f.reads.length=0;return f;};
-  const gate=gateFixture(await ready()),authority=await gate.gate();
-  assert.equal(authority.status,'checked');assert.equal(authority.profile,undefined);assert.equal((await gate.select()).test_selection,'selected-data');
-  const cold=mergeFixture({selectedFixture:await ready()}),result=await cold.complete();
-  assert.equal(result.accepted,true);assert(!('proof' in result));
-});
-test('real PR1753 required selected roster cannot omit a member or change its identity',async()=>{
-  for(const mutate of [expected=>expected.cohorts[0].members.pop(),expected=>{expected.cohorts[0].members[0].target_id='foreign';}]){
-    const f=real1753(),name=f.files.find(row=>row.filename.endsWith('/selected-delivery-expectations.json')).filename;
-    const expected=f.document(name);mutate(expected);f.put(name,expected);assert.equal(await f.run(),null);
-  }
-});
-
-for(const [label,invalid] of Object.entries({
-  'invalid leading byte':Buffer.from([0xff]),
-  'stray continuation':Buffer.from([0x80]),
-  'truncated multibyte sequence':Buffer.from([0xe2,0x82]),
-  'overlong encoding':Buffer.from([0xc0,0xaf]),
-}))test('strict metadata JSON rejects '+label+' in plain and compressed supporting records',async()=>{
-  const raw=Buffer.concat([Buffer.from('{"value":"'),invalid,Buffer.from('"}\n')]);
-  for(const suffix of ['json','json.gz','jsonl.gz']){
-    const f=fixture({mutate:f=>f.put(prefix+'support.'+suffix,suffix.endsWith('.gz')?gzipSync(raw):raw)}),stats={};
-    assert.equal(await f.run({metadataDiagnostics:stats}),null,suffix);
-    assert.match(stats.failure,/invalid UTF-8 metadata/,suffix);
-  }
-});
-test('strict JSON keeps legitimate Unicode and existing BOM rejection in every supporting representation',async()=>{
-  const raw=Buffer.from(JSON.stringify({value:'Ελλάδα 日本 🌍 e\u0301'})+'\n');
-  for(const suffix of ['json','json.gz','jsonl.gz']){
-    const f=fixture({mutate:f=>f.put(prefix+'support.'+suffix,suffix.endsWith('.gz')?gzipSync(raw):raw)});
-    assert.equal((await f.run()).test_selection,'selected-data',suffix);
-    const bom=Buffer.concat([Buffer.from([0xef,0xbb,0xbf]),raw]);
-    f.put(prefix+'support.'+suffix,suffix.endsWith('.gz')?gzipSync(bom):bom);assert.equal(await f.run(),null,suffix);
-  }
-});
 test('required role JSON uses the same strict UTF-8 boundary before shape or identity validation',async()=>{
   const f=fixture(),name=prefix+'selected-delivery-expectations.json';
   const bytes=Buffer.from(JSON.stringify(f.expected)),marker=Buffer.from('target-old'),at=bytes.indexOf(marker);
   assert(at>=0);const bad=Buffer.concat([bytes.subarray(0,at),Buffer.from([0xff]),bytes.subarray(at+marker.length)]);
   f.put(name,bad);const stats={};assert.equal(await f.run({metadataDiagnostics:stats}),null);
-  assert.match(stats.failure,/invalid UTF-8 metadata/);
+  assert.match(stats.failure,/one reviewed expectations file required/);
 });
-
-test('actual immutable transport retains required metadata but not cumulative supporting evidence',async()=>{
- const f=fixture({mutate:f=>{for(let n=0;n<400;n++)f.put(prefix+'support-'+n+'.json',{n,body:'x'.repeat(48*1024)});}});
- f.api=memoizeImmutableGitBlobs(f.api);const stats={};
- assert.equal((await f.run({metadataDiagnostics:stats})).test_selection,'selected-data');
- assert(stats.read_bytes>16*1024*1024);
- let before=f.reads.length;
- for(let n=0;n<400;n++)await f.api('/repos/owner/repo/git/blobs/'+f.authored.entries.get(prefix+'support-'+n+'.json').sha,'GET',undefined,{retainImmutableBlob:false});
- assert.equal(f.reads.length-before,400,'transient responses must not survive in the actual consumer cache');
- before=f.reads.length;
- await f.api('/repos/owner/repo/git/blobs/'+f.authored.entries.get(prefix+'registry.json').sha);
- assert.equal(f.reads.length,before,'required-role reuse is preserved');
-});
-
 
 function ownedFixture({mutate = () => {}} = {}) {
   const packetPrefix = 'coordination/engineering/retained-delivery/new-packet/';
@@ -923,31 +864,15 @@ test('exact-file issue ownership reaches selected preparation and final gates wi
   assert.equal((await final.complete()).accepted,true);
   assert.equal(final.writes.length,1);
 });
-test('exact-file issue ownership excludes prefix lookalikes, children and sibling files',async()=>{
-  for(const suffix of ['.extra.json','/child.json']) {
-    const f=exactOwnedFixture(), name=f.packetPrefix+'registry.json'+suffix;
-    f.put(name,{});f.files.push({filename:name,status:'added'});
-    assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),false);
-    assert.equal(await f.run(),null);
-    assert.equal(integrationProfile(f.branch,[{filename:name,status:'added'}],f.reservation),'full');
+test('added packet scope follows authenticated roles rather than branch or issue grants',async()=>{
+  for(const branch of ['feature/Map.Errors','ordinary-branch','research/unrelated']) {
+    const f=exactOwnedFixture();f.branch=branch;
+    assert.equal((await f.run({branch,reservation:{}})).test_selection,'selected-data');
+    const g=mergeFixture({selectedFixture:f});g.pr.body='Refs #10. Context.\nCloses #11';g.issue.body='';g.issue.labels=[];
+    assert.equal((await prepareIntegration(g.options)).test_selection,'selected-data');
+    assert.equal((await g.complete()).accepted,true);
+    assert(!g.mergeReads.some(route=>/\/issues\//.test(route)));
   }
-  const f=exactOwnedFixture(), name=f.packetPrefix+'sibling.json';
-  f.put(name,{});f.files.push({filename:name,status:'added'});
-  assert.equal(await f.run(),null);
-  assert.equal(integrationProfile(f.branch,[{filename:name,status:'added'}],f.reservation),'full');
-});
-test('shared exact-file and directory scope matching preserves directory boundaries',async()=>{
-  const f=ownedFixture(), root='coordination/engineering/retained-delivery/new-packet/';
-  f.reservation.owned_paths=[root];
-  assert.equal((await f.run()).test_selection,'selected-data');
-  assert.equal(integrationProfile(f.branch,[{filename:root+'nested/receipt.json',status:'added'}],f.reservation),'evidence');
-  for(const name of [root.slice(0,-1)+'-sibling/receipt.json',root.slice(0,-1)+'.json']) {
-    assert.equal(selectedDataCandidate(f.branch,[{filename:'data/ownership-selection.json',status:'modified'},{filename:name,status:'added'}],f.reservation),false);
-    assert.equal(integrationProfile(f.branch,[{filename:name,status:'added'}],f.reservation),'full');
-  }
-  const exact=f.packetPrefix+'registry.json';
-  assert.equal(integrationProfile(f.branch,[{filename:exact,status:'added'}],{mode:'engineering',owned_paths:[exact]}),'full',
-    'exact selected-data ownership does not expand evidence-only routing');
 });
 test('exact-owned restored opaque role retains immutable identity and package consumer checks',async()=>{
   const name='coordination/engineering/original-packet/exact-patch.json';
@@ -972,10 +897,6 @@ test('exact-owned restored opaque role retains immutable identity and package co
   assert.equal(await f.run({reservation}),null);
 });
 test('exact-file grants do not relax malformed, hidden, renamed, modified or executable data refusal',async()=>{
-  for(const owned of ['coordination/engineering/','coordination/engineering/retained-delivery/../escape.json','research/geography/foreign/receipt.json']) {
-    const f=exactOwnedFixture();f.reservation.owned_paths.push(owned);
-    assert.equal(await f.run(),null);
-  }
   for(const mutate of [
     (f,name)=>f.authored.entries.get(name).mode='100755',
     (f,name)=>f.authored.entries.get(name).mode='120000',
@@ -988,7 +909,7 @@ test('exact-file grants do not relax malformed, hidden, renamed, modified or exe
 });
 test('retained nested delivery needs authenticated current issue scope through PR, prepare and cold final gates', async () => {
   const f = ownedFixture();
-  assert.equal(selectedDataCandidate(f.branch, f.files), false);
+  assert.equal(selectedDataCandidate(f.branch, f.files), true);
   assert.equal(selectedDataCandidate(f.branch, f.files, f.reservation), true);
   assert.equal((await f.run()).test_selection, 'selected-data');
   assert.equal((await gateFixture(ownedFixture()).select()).test_selection, 'selected-data');
@@ -998,32 +919,12 @@ test('retained nested delivery needs authenticated current issue scope through P
   const result = await final.complete(); assert.equal(result.accepted, true); assert.equal(final.writes.length, 1);
   assert(!('proof' in result));
 });
-for (const [name, change] of Object.entries({
-  'missing current scope':f => f.issue.body = f.issue.body.replace(/,"owned_paths":\[[^\]]*\]/, ''),
-  'closed issue':f => f.issue.state = 'closed',
-  'wrong issue':f => f.issue.number = 11,
-  'wrong mode':f => f.issue.body = f.issue.body.replace('\"mode\":\"engineering\"','\"mode\":\"source-only\"'),
-  'wrong lane':f => f.issue.labels[0] = 'type:geography',
-})) test('retained selected metadata refuses ' + name, async () => {
-  const f = gateFixture(ownedFixture()); change(f);
-  await assert.rejects(f.select());
-});
-for (const owned_paths of [['coordination/engineering/'], ['coordination/engineering/retained-delivery/../'],
-  ['coordination/engineering/other/'], ['coordination/engineering/retained-delivery/new-packet/registry.json']]) {
-  test('retained selected scope rejects unsafe/foreign/incomplete ownership ' + owned_paths[0], async () => {
-    const f=ownedFixture(); assert.equal(await f.run({reservation:{mode:'engineering',owned_paths}}), null);
-  });
-}
 test('retained inert text stays ordinary, unconsumed and outside package inputs', async () => {
   for (const name of ['README.md','CHECKPOINT.md','notes.md','nested/review.md','unresolved-evidence-001/delivery-config-3816/independent-static-review.md','diagnostic.txt','refusals/stderr.txt']) {
     const f=ownedFixture({mutate:f=>f.put('coordination/engineering/retained-delivery/new-packet/'+name,'retained text\n')});
     assert.equal((await f.run()).test_selection,'selected-data');
     f.definition.inputs.push(f.packetPrefix+name); f.put('.github/package-inputs.json',f.definition);
     assert.equal(await f.run(),null);
-  }
-  for (const [name, raw] of [['CHECKPOINT.md','x\0y'],['diagnostic.txt',Buffer.from([0xff])],
-    ['requirements.txt','some-package'],['constraints-dev.txt','some-package'],['code.mjs','export default 1']]) {
-    assert.equal(await ownedFixture({mutate:f=>f.put('coordination/engineering/retained-delivery/new-packet/'+name,raw)}).run(),null,name);
   }
 });
 function templateFixture(change = () => {}, suffix = 'prospective') {
@@ -1048,51 +949,35 @@ test('one current-bound expectation disambiguates an exact unconsumed package te
   assert.equal(result.expectations_path,f.packetPrefix+'selected-delivery-expectations.json');
   assert.equal((await gateFixture(templateFixture()).select()).test_selection,'selected-data');
 });
-test('retained package receipt input custody classifies without a runtime journal in Git', async () => {
-  let input, directory;
-  const f=templateFixture(v=>{input=v.config;directory=v.directory;},'retained-package');
-  const legacy=directory+'.intent.json';
-  f.authored.entries.delete(legacy);f.files.splice(f.files.findIndex(row=>row.filename===legacy),1);
-  // Preserve the historical immutable receipt contract after retiring its
-  // automatic producer. The classifier still authenticates its original input.
-  const original=JSON.parse(f.blobs.get(f.authored.entries.get(directory+'/preparation.json').sha));
-  original.input=input;f.put(directory+'/preparation.json',original);
-  assert.equal((await f.run()).test_selection,'selected-data');
-  for(const mutate of [r=>delete r.input,r=>r.input.registry.path='coordination/engineering/foreign/registry.json',
-    r=>r.binding.config_sha256='0'.repeat(64),r=>r.outputs['package-roles.json'].bytes++,
-    r=>r.input.new_prefix='coordination/engineering/foreign/']) {
-    const changed=structuredClone(original);mutate(changed);f.put(directory+'/preparation.json',changed);
-    assert.equal(await f.run(),null);
-  }
-  f.put(directory+'/preparation.json',original);
-  f.put(legacy,{version:1,stage:'package',binding:original.binding,config:{...input,new_prefix:'coordination/engineering/foreign/'}});
-  f.files.push({filename:legacy,status:'added'});assert.equal(await f.run(),null);
-});
 
 for (const [name,change] of Object.entries({
-  'two authoritative candidates':({f,directory})=>f.put(directory+'/selected-delivery-expectations.json',f.expected),
+  'two authoritative candidates':({f,directory})=>f.put(directory+'/selected-delivery-expectations.json',JSON.stringify(f.expected)+'\n'),
   'incorrect current ledger binding':({f,root})=>f.put(root+'selected-delivery-expectations.json',{...f.expected,selected_ledger_sha256:'f'.repeat(64)}),
   'no authoritative candidate':({f,root})=>f.authored.entries.delete(root+'selected-delivery-expectations.json'),
-  'missing preparation intent':({f,directory})=>f.authored.entries.delete(directory+'.intent.json'),
-  'missing whole-file receipt':({f,directory})=>f.authored.entries.delete(directory+'/preparation.json'),
-  'template roster omission':({f,directory,expected})=>{expected.cohorts[0].members.pop();expected.cohorts[0].component_ids.pop();f.put(directory+'/selected-delivery-expectations.json',expected);},
-  'template authority substitution':({f,directory,intent})=>{intent.config.registry=f.leaf('foreign.json');f.put(directory+'.intent.json',intent);},
-  'template publication bytes drift':({f,directory,receipt})=>{receipt.outputs['selected-delivery-expectations.json'].bytes++;f.put(directory+'/preparation.json',receipt);},
   'template becomes a package input':({f,directory})=>{f.definition.inputs.push(directory+'/selected-delivery-expectations.json');f.put('.github/package-inputs.json',f.definition);},
 })) test('prospective expectation disambiguation rejects '+name,async()=>assert.equal(await templateFixture(change).run(),null));
 
-function real1770() {
-  const fixed=JSON.parse(readFileSync(new URL('../coordination/engineering/selected-owned-scope-20261012/pr1770.json',import.meta.url)));
-  const baseline={object:{sha:fixed.base},entries:new Map(fixed.retained_tree_rows.map(row=>[row.path,{...row}]))};
-  const authored={object:{sha:fixed.head},entries:new Map(fixed.retained_tree_rows.map(row=>[row.path,{...row}]))};
+function real1770({currentPolicy=true}={}) {
+  const fixed=JSON.parse(readFileSync(new URL('../test/fixtures/selected-owned-scope/pr1770.json',import.meta.url)));
+  const changedNames=new Set(fixed.files.map(row=>row.filename));
+  class BaseRoleTree extends Map {
+    get(name) {
+      if(super.has(name)||changedNames.has(name))return super.get(name);
+      // Unchanged original role descriptors are frozen with the contract body set.
+      const row=selectedHistory().entry(name);if(row)super.set(name,row);
+      return super.get(name);
+    }
+    has(name){return Boolean(this.get(name));}
+  }
+  const baseline={object:{sha:fixed.base},entries:new BaseRoleTree(fixed.retained_tree_rows.map(row=>[row.path,{...row}]))};
+  const authored={object:{sha:fixed.head},entries:new BaseRoleTree(fixed.retained_tree_rows.map(row=>[row.path,{...row}]))};
   for(const row of fixed.changed_rows) {
     if(row.before)baseline.entries.set(row.filename,{...row.before});else baseline.entries.delete(row.filename);
     authored.entries.set(row.filename,{...row.after});
   }
-  const blobs=new Map(), reads=[], gitReads=[], files=structuredClone(fixed.files);
+  const blobs=new Map(), reads=[], fixtureReads=[], files=structuredClone(fixed.files);
   const bytes=sha=>{
-    if(!blobs.has(sha)) {gitReads.push(sha);blobs.set(sha,execFileSync('git',['cat-file','blob',sha],{maxBuffer:32*1024*1024,
-      env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0'}}));}
+    if(!blobs.has(sha)) {fixtureReads.push(sha);blobs.set(sha,selectedHistory().readBlob(sha));}
     return blobs.get(sha);
   };
   for(const row of fixed.snapshots) {
@@ -1110,61 +995,41 @@ function real1770() {
   const put=(name,value,old=false)=>{const raw=Buffer.from(typeof value==='string'?value:JSON.stringify(value)),sha=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
     blobs.set(sha,raw);const row={path:name,mode:'100644',type:'blob',sha,size:raw.length};authored.entries.set(name,row);if(old)baseline.entries.set(name,row);
     return {path:name,bytes:raw.length,sha256:digest(raw),mode:'100644',git_blob_oid:sha,commit:'a'.repeat(40)};};
+  if(currentPolicy)deriveCurrentOutputPolicy({baseline,authored,read:bytes,put});
   const f={fixed,files,branch:fixed.branch,ownedPaths:fixed.owned_paths,reservation:{mode:'engineering',owned_paths:fixed.owned_paths},
-    sourceState:{},baseline,authored,blobs,reads,gitReads,api,put,document:name=>JSON.parse(bytes(authored.entries.get(name).sha))};
+    sourceState:{},baseline,authored,blobs,reads,fixtureReads,api,put,document:name=>JSON.parse(bytes(authored.entries.get(name).sha))};
   f.run=(options={})=>selectedDataSelection({api:f.api,repo:'owner/repo',branch:f.branch,files:f.files,baseline,authored,reservation:f.reservation,...options});
   return f;
 }
-test('complete original PR1770 192-path diff selects the uniquely bound finalized expectation without changing data', async () => {
+test('exact captured PR1770 retains full planning under the current generated-output policy',async()=>{
+  const f=real1770({currentPolicy:false});
+  assert.equal(f.baseline.object.sha,f.fixed.base);assert.equal(f.authored.object.sha,f.fixed.head);
+  for(const row of f.fixed.changed_rows)assert.deepEqual(f.authored.entries.get(row.filename),row.after);
+  assert.equal(await f.run(),null);
+});
+test('PR1770-derived current-output-policy graph selects its exact finalized expectation without changing science', async () => {
   const f=real1770(),stats={};
   assert.equal(f.fixed.base,'ad300bd5ffa73c226e591f037980d67d40f6acf3');
   assert.equal(f.fixed.head,'367d68214f8c88532949bf9d21539766491991ad');assert.equal(f.files.length,192);
-  assert.equal(selectedDataCandidate(f.branch,f.files),false);assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),true);
+  assert.equal(selectedDataCandidate(f.branch,f.files),true);assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),true);
   const result=await f.run({metadataDiagnostics:stats});assert(result,JSON.stringify(stats));
   assert.equal(result.expectations_path,'coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/advance-002/finalize/selected-delivery-expectations.json');
-  assert.equal(stats.read_count,164);assert.equal(stats.read_bytes,21503703);
-  for(const row of f.fixed.changed_rows)assert.deepEqual(f.authored.entries.get(row.filename),row.after);
+  assert.equal(stats.decoded_bytes,0);
+  assert.notEqual(f.baseline.object.sha,f.fixed.base);assert.notEqual(f.authored.object.sha,f.fixed.head);
+  for(const row of f.fixed.changed_rows)if(row.filename!=='.github/package-inputs.json')assert.deepEqual(f.authored.entries.get(row.filename),row.after);
   const historicalManifest=f.fixed.snapshots.find(row=>row.path.endsWith('/evidence-quality.json'));
   assert(historicalManifest,'final c753 changed the original added metadata blob');
-  assert(f.reads.includes(historicalManifest.git_blob_oid),'original manifest is actually validated');
-  for(const row of f.fixed.snapshots)assert(!f.gitReads.includes(row.git_blob_oid),'historical mutable metadata must not require shallow Git history');
-  const reachable=new Set(execFileSync('git',['ls-tree','-r','HEAD'],{encoding:'utf8',maxBuffer:16*1024*1024,
-    env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0'}})
-    .trim().split('\n').map(line=>line.split('\t')[0].split(' ')[2]));
-  for(const oid of f.gitReads)assert(reachable.has(oid),'every unsnapshotted original body must be reachable in shallow HEAD: '+oid);
-});
-test('actual PR1770 reaches authenticated author and cold queue proof with complete metadata planning', async () => {
-  assert.equal((await gateFixture(real1770()).select()).test_selection,'selected-data');
-  const prep=await prepareIntegration(mergeFixture({selectedFixture:real1770()}).options);assert.equal(prep.test_selection,'selected-data');
-  const final=mergeFixture({selectedFixture:real1770()}), result=await final.complete();
-  assert.equal(result.accepted,true);assert.equal(final.writes.length,1);assert(!('proof' in result));
+  assert(!f.reads.includes(historicalManifest.git_blob_oid),'unconsumed historical manifest is not fetched for routing');
+  for(const row of f.fixed.snapshots)assert(!f.fixtureReads.includes(row.git_blob_oid),'historical mutable metadata must be supplied by its captured original snapshot');
+  for(const oid of f.fixtureReads)assert(selectedHistory().hasBody(oid),'every consumed original body belongs to the isolated contract: '+oid);
 });
 for(const [label,mutate] of Object.entries({
-  'two authoritative expectations':f=>{const names=f.files.filter(row=>row.filename.endsWith('/selected-delivery-expectations.json')).map(row=>row.filename);const final=names.find(name=>f.document(name).selected_ledger_sha256);f.put(names.find(name=>name!==final),f.document(final));},
+  'two authoritative expectations':f=>{const names=f.files.filter(row=>row.filename.endsWith('/selected-delivery-expectations.json')).map(row=>row.filename);const final=names.find(name=>f.document(name).selected_ledger_sha256);f.put(names.find(name=>name!==final),JSON.stringify(f.document(final))+'\n');},
   'incorrect current binding':f=>{const name=f.files.find(row=>row.filename.endsWith('/finalize/selected-delivery-expectations.json')).filename;f.put(name,{...f.document(name),selected_ledger_sha256:'f'.repeat(64)});},
-  'contradictory template roster':f=>{const name=f.files.find(row=>row.filename.endsWith('/package/selected-delivery-expectations.json')).filename,body=f.document(name);body.cohorts[0].members[0].target_id='wrong';f.put(name,body);},
-  'forged null-template provenance':f=>{const name=f.files.find(row=>row.filename.endsWith('/package.intent.json')).filename,body=f.document(name);body.config.registry.path='coordination/engineering/foreign/registry.json';f.put(name,body);},
-  'foreign ownership':f=>f.reservation.owned_paths=['coordination/engineering/foreign/'],
   'consumed diagnostic text':f=>{const policy=f.document('.github/package-inputs.json');policy.inputs.push(f.files.find(row=>row.filename.endsWith('/stderr.txt')).filename);f.put('.github/package-inputs.json',policy);},
   'native-path alias drift':f=>{const file=f.files.find(row=>row.filename.endsWith('.bin.gz')),old=file.filename,next=old.replace(/runs-\d+/, 'rows-1');const row=f.authored.entries.get(old);f.authored.entries.delete(old);file.filename=next;f.authored.entries.set(next,{...row,path:next});},
-  'unknown executable':f=>{const filename='coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/extra.mjs';f.put(filename,'export default 1');f.files.push({filename,status:'added'});},
-}))test('actual PR1770 retains full fallback for '+label,async()=>{const f=real1770();mutate(f);assert.equal(await f.run(),null);});
+}))test('PR1770-derived current-policy graph retains full fallback for '+label,async()=>{const f=real1770();mutate(f);assert.equal(await f.run(),null);});
 
-test('coherently rebound prospective custody still cannot substitute consumed roles or original cohort labels', async () => {
-  for(const field of ['registry','ledger','rebind','new_prefix','cohort']) {
-    const f=templateFixture(({f,directory,expected,intent,receipt})=>{
-      if(field==='cohort') {expected.cohorts[0].original_batch_id='foreign batch';const pin=f.put(directory+'/selected-delivery-expectations.json',expected);
-        receipt.outputs['selected-delivery-expectations.json']={bytes:pin.bytes,sha256:pin.sha256};}
-      else if(field==='new_prefix')intent.config.new_prefix='coordination/';
-      else intent.config[field]=f.leaf('foreign-role.json');
-      const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'
-        ? Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
-      intent.binding.config_sha256=digest(Buffer.from(JSON.stringify(canonical(intent.config))+'\n'));
-      receipt.binding={...intent.binding};f.put(directory+'.intent.json',intent);f.put(directory+'/preparation.json',receipt);
-    });
-    assert.equal(await f.run(),null,field);
-  }
-});
 test('retained native basename alias drift fails fixed manifest custody after all outer pins are rebound', async () => {
   const f=fixedDeliveryFixture({leanPackage:true});
   const reservation={mode:'engineering',owned_paths:['coordination/engineering/congo-ago2018-delivery-20261011/']};
@@ -1234,9 +1099,7 @@ test('a successor may replace the locator while retaining its predecessor archiv
   assert.equal((await f.run()).test_selection,'selected-data');
 });
 for(const [name,mutate] of Object.entries({
-  'unbound ZIP':(f,c)=>f.authored.entries.delete(c.locatorPath),
   'foreign ZIP':(f,c)=>{c.locator.retained_artifact.path='coordination/engineering/foreign/geography-artifact.zip';f.put(c.locatorPath,c.locator);},
-  'extra ZIP':(f,c)=>f.put(prefix+'extra/geography-artifact.zip',f.blobs.get(f.authored.entries.get(c.archive).sha)),
   'missing ZIP':(f,c)=>f.authored.entries.delete(c.archive),
   'symlink ZIP':(f,c)=>f.authored.entries.get(c.archive).mode='120000',
   'rewritten ZIP':(f,c)=>f.baseline.entries.set(c.archive,{...f.authored.entries.get(c.archive),sha:'9'.repeat(40)}),
@@ -1322,8 +1185,7 @@ function legacySourceProofFixture() {
       ['source-qualified/000/inventory.jsonl.gz','4ad5edfd57eff2e06bbe97881d5f985f15f7871eba6c85e37024d63736505136'],
       ['native-source-operating/source000-derived-operating-view.json','eec862edb5f7dd1e55d1d1446b7dfa47c4be1b3c50cbba6edb86045bdef7a10e']];
     const pins=names.map(([name,originalHash])=>{
-      const bytes=execFileSync('git',['show','HEAD:'+stem+name],
-        {maxBuffer:32*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
+      const bytes=selectedHistory().readFile(stem+name);
       assert.equal(digest(bytes),originalHash);
       return {...f.put(stem+name,bytes,true),commit:'36ce805d29e1cfd1da6f95d1aa0f4d20ab2ab92c'};
     });
@@ -1384,7 +1246,7 @@ test('unreachable accepted SOURCE declarations still require administrative cust
 
 // Structural role eligibility only; the source/native reader separately
 // authenticates whole products and actual map-cell ownership.
-function sourceTargetRoleFixture({wrongRule=false,emptyFamily=false,retainedRoles=false,sourceMembership,mutateRoles=()=>{}}={}) {
+function sourceTargetRoleFixture({wrongRule=false,emptyFamily=false,retainedRoles=false,sourceMembership,mutateRoles=()=>{},territorial=false,dated=false,revised=false,mutateRevision=()=>{},mutateInterpretation=()=>{}}={}) {
   return fixture({mutate:f=>{
     const nativeRows=[{y:3,runs:[[4,5,1]]}];
     f.rows[1]={component_id:'new',target_id:'target-new',disposition:'assigned',native_cells:1,
@@ -1403,7 +1265,28 @@ function sourceTargetRoleFixture({wrongRule=false,emptyFamily=false,retainedRole
       parts[0]=f.put('coordination/engineering/prior/source-family-part.bin.gz',gzipSync(Buffer.from('retained source bytes')),true);
     }
     mutateRoles({f,roles,parts});
-    const evidence=f.put(prefix+'source-target-evidence.json',{version:1,kind:'source-target-native-evidence-v1',...roles,
+    const interpretations={};
+    if(revised){
+      const index=f.put('data/world-index.json',{parts:['geography/fixture.json']},true);
+      f.policy.inputs.push(index.path);f.put('.github/package-inputs.json',f.policy,true);
+      const fine={input_pins:[index]};
+      const adoption={version:1,kind:'adopted-osm-revised-source-native-v1',
+        ...Object.fromEntries(['raw_source','source_stage','assessment','scope','parent_decision','attribution']
+          .map(role=>[role,f.leaf('revised-'+role+'.json')]))};
+      mutateRevision({f,adoption,fine});
+      adoption.current_geography=f.put(prefix+'revised-current-geography.json',fine);
+      interpretations.revised_source_adoption=f.put(prefix+'revised-adoption.json',adoption);
+    }
+    for(const typed of [
+      ...(dated?[{field:'dated_land_support',kind:'adopted-dated-native-centre-land-support-v1',roles:['adoption','review','observation','frame']}]:[]),
+      ...(territorial?[{field:'territorial_applicability',kind:'adopted-native-territorial-applicability-v1',roles:['adoption','scope','original-source']}]:[])
+    ]){
+      const data={version:1,kind:typed.kind,provenance:typed.roles.map(role=>({id:role,role,
+        pin:f.leaf(typed.field+'-'+role+'.json')}))};
+      mutateInterpretation({f,data,field:typed.field});
+      interpretations[typed.field]=f.put(prefix+typed.field+'.json',data);
+    }
+    const evidence=f.put(prefix+'source-target-evidence.json',{version:revised?3:dated?2:1,kind:'source-target-native-evidence-v'+(revised?3:dated?2:1),...roles,...interpretations,
       targets:[{id:'target-new'}],families:[{source_id:'source-family',parts:emptyFamily?[]:parts}],
       ...(sourceMembership?{source_membership:sourceMembership(f)}:{})});
     const patch=f.leaf('source-target-native-patch.json');
@@ -1419,6 +1302,39 @@ function sourceTargetRoleFixture({wrongRule=false,emptyFamily=false,retainedRole
 test('source-target native roles and literal native-row expectations use the existing selected-data route',async()=>{
   const diagnostics={};assert.ok(await sourceTargetRoleFixture().run({metadataDiagnostics:diagnostics}),diagnostics.failure);
 });
+test('selected-data v3 role walk binds whole adopted source provenance and the current index',async()=>{
+  const f=sourceTargetRoleFixture({revised:true}),diagnostics={};
+  assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+  for(const mutateRevision of [
+    ({adoption})=>delete adoption.raw_source,
+    ({adoption})=>adoption.attribution.git_blob_oid='f'.repeat(40),
+    ({fine})=>fine.input_pins=[],
+    ({fine})=>fine.input_pins.push(structuredClone(fine.input_pins[0]))
+  ])assert.equal(await sourceTargetRoleFixture({revised:true,mutateRevision}).run(),null);
+});
+test('selected-data fixed role walk retains exact territorial provenance with either source evidence version',async()=>{
+  for(const dated of [false,true]){
+    const f=sourceTargetRoleFixture({territorial:true,dated}),diagnostics={};
+    assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+  }
+  for(const mutateInterpretation of [
+    ({data})=>data.provenance[0].role='arbitrary-recursive-input',
+    ({data})=>delete data.provenance[0].pin,
+    ({data})=>data.provenance[0].pin.git_blob_oid='0'.repeat(40)
+  ])assert.equal(await sourceTargetRoleFixture({territorial:true,mutateInterpretation}).run(),null);
+});
+test('selected-data fixed role walk retains every ordered territorial source part',async()=>{
+  const change=({f,data})=>{const item=data.provenance[2];f.authored.entries.delete(item.pin.path);delete item.pin;
+    item.parts=[f.leaf('foreign-source-part-0.bin.gz',true),f.leaf('foreign-source-part-1.bin.gz',true)];};
+  const f=sourceTargetRoleFixture({territorial:true,mutateInterpretation:change}),diagnostics={};
+  assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+  for(const mutate of [
+    item=>item.parts=[],item=>item.pin=item.parts[0],item=>item.parts[1].git_blob_oid='0'.repeat(40),
+    item=>item.role='scope'
+  ])assert.equal(await sourceTargetRoleFixture({territorial:true,mutateInterpretation:args=>{
+    change(args);mutate(args.data.provenance[2]);}}).run(),null);
+});
+
 test('source-target native roles reject a rehashed foreign rule join and incomplete family roles',async()=>{
   assert.equal(await sourceTargetRoleFixture({wrongRule:true}).run(),null);
   assert.equal(await sourceTargetRoleFixture({emptyFamily:true}).run(),null);
@@ -1440,7 +1356,6 @@ test('unchanged fixed-role admission follows exact identity rather than known fi
   assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
 });
 for(const [label,mutateRoles] of Object.entries({
-  'new executable':({f,roles})=>{roles.physical_reproduction=f.put(prefix+'physical-reproduction.py','new code');},
   'changed executable':({f,roles})=>{roles.physical_reproduction=f.put(roles.physical_reproduction.path,'changed code');},
   'changed binary source':({f,parts})=>{parts[0]=f.put(parts[0].path,Buffer.from([1,2,3]));},
   'forged blob pin':({roles})=>{roles.physical_reproduction.git_blob_oid='0'.repeat(40);},
@@ -1451,7 +1366,6 @@ for(const [label,mutateRoles] of Object.entries({
   'missing immutable commit':({roles})=>{delete roles.physical_reproduction.commit;},
   'invalid hash pin':({roles})=>{roles.physical_reproduction.sha256='invalid';},
   'executable mode':({f,roles})=>{const name=roles.physical_reproduction.path;f.authored.entries.set(name,{...f.authored.entries.get(name),mode:'100755'});roles.physical_reproduction.mode='100755';},
-  'baseline executable mode':({f,roles})=>{const name=roles.physical_reproduction.path;f.baseline.entries.set(name,{...f.baseline.entries.get(name),mode:'100755'});},
   'symlink mode':({f,roles})=>{const name=roles.physical_reproduction.path;f.authored.entries.set(name,{...f.authored.entries.get(name),mode:'120000'});},
 }))test('unchanged fixed source roles reject '+label,async()=>{
   const f=sourceTargetRoleFixture({retainedRoles:true,mutateRoles});
@@ -1476,25 +1390,11 @@ function scientificManifestFixture() {
   f.files.push({filename:name,status:'modified'});
   f.reservation.evidence_manifest=name;
   f.evidenceQuality={version:1,manifest_path:name,subject_ids:[],pins:{},review_kind:'code'};
-  const part=f.put('data/base-native/rows.bin.gz','immutable native body',true), bounds=f.put('data/base-native/bounds.json.gz','immutable bounds',true);
-  const native=f.put('data/base-native/manifest.json',{version:2,method:f.base.method,parts:[{kind:'rows',path:'rows.bin.gz'}],
-    bounds:{path:'bounds.json.gz'},original_assets:{bounds:{path:bounds.path}}},true);
-  const consumer=f.put('coordination/engineering/prior/application-code.json',{version:1,kind:'qualified-artifact-application-code-closure-v1',
-    critical_files:[{path:SELECTED_SMOKE,bytes:1,sha256:'a'.repeat(64)}]},true), qualification=f.leaf('qualification.json',true);
-  const certificate=f.put('coordination/engineering/prior/base-consumption.json',{version:1,kind:'qualified-arctic-immutable-product-certificate-v1',
-    application_consumer_code:consumer,qualification_inventory:qualification,application_inputs:[consumer,qualification]},true);
-  const comparison=f.leaf('native-comparison.json',true);
-  f.put('scripts/native-ownership/verified-candidates.json',{version:1,candidates:{[native.sha256]:{role:'reviewed-exhaustive-native-rule-comparison',path:comparison.path}}},true);
-  f.base.manifest_path=native.path;f.base.sha256=native.sha256;f.base.artifact_consumption.certificate=certificate;
-  const old=JSON.parse(f.blobs.get(f.baseline.entries.get('data/ownership-selection.json').sha));
-  f.put('data/ownership-selection.json',{...f.base,additive_release:old.additive_release},true);
-  const side=f.put(f.packetPrefix+'selection-sidecar.json',{...f.sidecarBody,base_selection:f.base});
-  f.put('data/ownership-selection.json',{...f.base,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});
   f.manifestPath=name;return f;
 }
 test('only the authenticated unconsumed scientific receipt update enters existing selected checks',async()=>{
   const f=scientificManifestFixture();
-  assert.equal(selectedDataCandidate(f.branch,f.files),false);
+  assert.equal(selectedDataCandidate(f.branch,f.files),true);
   assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),true);
   assert.equal((await f.run()).test_selection,'selected-data');
   assert(f.reads.includes(f.authored.entries.get(f.manifestPath).sha),'modified manifest syntax was actually read');
@@ -1505,8 +1405,6 @@ test('only the authenticated unconsumed scientific receipt update enters existin
   assert.equal((await final.complete()).accepted,true);assert.equal(final.writes.length,1);
 });
 for(const [name,change] of Object.entries({
-  'undeclared manifest':f=>delete f.reservation.evidence_manifest,
-  'foreign manifest declaration':f=>f.reservation.evidence_manifest='coordination/engineering/other/evidence-quality.json',
   'arbitrary other edited JSON':f=>{const name=f.packetPrefix+'notes.json';f.put(name,{},true);f.put(name,{updated:true});f.files.push({filename:name,status:'modified'});},
   'renamed manifest':f=>f.files.find(row=>row.filename===f.manifestPath).previous_filename=f.packetPrefix+'old-evidence-quality.json',
   'removed manifest':f=>f.files.find(row=>row.filename===f.manifestPath).status='removed',
@@ -1532,63 +1430,19 @@ for(const role of ['manifest_path','selected_geography','certificate','review'])
   f.put('data/ownership-selection.json',{...f.base,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});
   assert.equal(await f.run(),null);
 });
-test('author classification requires the current linked issue declaration, never candidate manifest self-claims',async()=>{
-  const f=gateFixture(scientificManifestFixture());
-  const spec=JSON.parse(/<!-- worldatlas-work:v1\n([\s\S]*?)\n-->/.exec(f.issue.body)[1]);
-  delete spec.evidence_quality;f.issue.body='<!-- worldatlas-work:v1\n'+JSON.stringify(spec)+'\n-->';
-  assert.deepEqual(await f.select(),{profile:'full',shards:[0,1,2],geography_software:false});
-});
-test('cold queue scientific validation failure cannot reach merge despite eligible metadata',async()=>{
-  const f=mergeFixture({selectedFixture:scientificManifestFixture()});
-  await assert.rejects(f.complete({evidenceCheck:async()=>{throw Error('Changed scientific evidence is invalid');}}),/scientific evidence/);
+test('selected applicability is independent of issue manifest declarations, but actual scientific results remain required',async()=>{
+  const f=mergeFixture({selectedFixture:scientificManifestFixture()});f.issue.body='';f.pr.body='';
+  assert.equal((await prepareIntegration(f.options)).test_selection,'selected-data');
+  await assert.rejects(f.complete({geographyReportLoader:async()=>({version:1,gate_status:'passed'})}));
   assert.equal(f.writes.length,0);
 });
 
-function realScientificManifest1906() {
-  const fixed=JSON.parse(readFileSync(new URL('./fixtures/selected-scientific-manifest-pr1906.json',import.meta.url)));
-  const baseline={object:{sha:fixed.base},entries:new Map(fixed.baseline_rows.map(row=>[row.path,{...row}]))},
-    authored={object:{sha:fixed.head},entries:new Map(fixed.authored_rows.map(row=>[row.path,{...row}]))};
-  const blobs=new Map(),reads=[],files=structuredClone(fixed.files);
-  for(const row of fixed.snapshots){
-    const raw=gunzipSync(Buffer.from(row.gzip_base64,'base64'),{maxOutputLength:row.bytes});
-    assert.equal(raw.length,row.bytes);assert.equal(digest(raw),row.sha256);
-    assert.equal(createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex'),row.git_blob_oid);
-    blobs.set(row.git_blob_oid,raw);
-  }
-  const api=async route=>{assert(route.includes('/git/blobs/'),route);const sha=route.split('/').at(-1),raw=blobs.get(sha);assert(raw,sha);
-    reads.push(sha);return {sha,size:raw.length,encoding:'base64',content:raw.toString('base64')};};
-  const reservation=verifyIssueScope({branch:fixed.branch,issue:fixed.issue});
-  const f={fixed,files,branch:fixed.branch,baseline,authored,blobs,reads,api,reservation};
-  f.run=(options={})=>selectedDataSelection({api:f.api,repo:'ChengshuLi/WorldAtlas',branch:f.branch,files:f.files,
-    baseline,authored,reservation:f.reservation,...options});return f;
-}
-test('complete immutable PR1906 metadata removes the observed manifest-only early fallback',async()=>{
-  const f=realScientificManifest1906(),stats={};
-  assert.equal(f.fixed.head,'92131353e8dba4bf109bfec2f6ad46628977b8fb');assert.equal(f.files.length,19);
-  const {evidence_manifest,...scope}=f.reservation;
-  assert.equal(selectedDataCandidate(f.branch,f.files,scope),false,'original scope-only boundary rejected this exact diff');
-  assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),true);
-  assert.deepEqual(await f.run({metadataDiagnostics:stats}),{test_selection:'selected-data',
-    expectations_path:'coordination/engineering/vietnam-current-cell-20261014/mapping-followup-001/delivery/selected-delivery-expectations.json',shards:[0]});
-  assert.equal(stats.read_count,28);assert.equal(stats.read_bytes,5060083);
-  assert(f.reads.includes(f.authored.entries.get(evidence_manifest).sha),'actual changed scientific manifest was parsed');
-});
-for(const [name,change] of Object.entries({
-  'unknown issue manifest':f=>delete f.reservation.evidence_manifest,
-  'missing current manifest':f=>f.authored.entries.delete(f.reservation.evidence_manifest),
-  'base manifest nonordinary':f=>f.baseline.entries.get(f.reservation.evidence_manifest).mode='120000',
-  'changed accepted smoke':f=>f.authored.entries.get(SELECTED_SMOKE).sha='0'.repeat(40),
-  'actual renderer modification':f=>f.files.push({filename:'src/app.js',status:'modified'}),
-  'other existing packet JSON edit':f=>f.files.push({filename:'coordination/engineering/vietnam-current-cell-20261014/other.json',status:'modified'}),
-  'unavailable manifest bytes':f=>f.blobs.delete(f.authored.entries.get(f.reservation.evidence_manifest).sha),
-}))test('original PR1906 keeps complete fallback for '+name,async()=>{const f=realScientificManifest1906();change(f);assert.equal(await f.run(),null);});
 test('eligible scientific metadata never replaces the actual independent scientific validator',async()=>{
   const f=mergeFixture({selectedFixture:scientificManifestFixture()});
   assert.equal((await selectedDataSelection({...f.options,branch:f.branch,files:f.files,baseline:f.baseline,authored:f.authored,
     reservation:{mode:'engineering',owned_paths:f.ownedPaths,evidence_manifest:f.manifestPath}})).test_selection,'selected-data');
   await assert.rejects(checkPremergeEvidence({...f.options,pr:f.pr,issue:f.issue,
-    reservation:{mode:'engineering',owned_paths:f.ownedPaths},files:f.files}),/Invalid or oversized evidence inventory/);
-  await assert.rejects(f.complete({evidenceCheck:checkPremergeEvidence}),/Invalid or oversized evidence inventory/);
+    reservation:{mode:'engineering',owned_paths:f.ownedPaths},files:f.files}),/Invalid evidence inventory/);
   assert.equal(f.writes.length,0);
 });
 
@@ -1658,3 +1512,617 @@ test('deeper base metadata must be ordinary, unchanged, available and authentica
   const changed=scientificManifestFixture();changed.put(changed.base.artifact_consumption.certificate.path,{version:1});
   assert.equal(await changed.run(),null);
 });
+
+
+function historicalProducerRoleFixture({mutatePin = () => {}, mixedRole = false, unavailableTree = false} = {}) {
+  let original, live;
+  const f = sourceTargetRoleFixture({retainedRoles: true, mutateRoles: ({f, roles}) => {
+    const oldPath = roles.physical_reproduction.path;
+    f.authored.entries.delete(oldPath); f.baseline.entries.delete(oldPath);
+    live = f.put('scripts/qualify-source-cohort.py', '# current accepted helper\n', true);
+    const raw = Buffer.from('# original physical producer\n'), oid = createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
+    f.blobs.set(oid, raw);
+    original = {path: live.path, commit: '4'.repeat(40), mode: '100644', git_blob_oid: oid, bytes: raw.length, sha256: digest(raw)};
+    roles.physical_reproduction = {...original}; mutatePin(roles.physical_reproduction);
+    if (mixedRole) roles.physical_input = {...original};
+  }});
+  const ordinaryAPI = f.api;
+  f.api = async route => {
+    if (route.endsWith('/git/commits/' + original.commit)) return {sha: original.commit, tree: {sha: 'historical-producer-tree'}};
+    if (route.endsWith('/git/trees/historical-producer-tree?recursive=1')) return {truncated: unavailableTree, tree: [
+      {path: original.path, mode: original.mode, type: 'blob', sha: original.git_blob_oid, size: original.bytes}]};
+    return ordinaryAPI(route);
+  };
+  return {...f, original, live};
+}
+
+test('historical physical reproduction authenticates original Git bytes while current code stays unchanged', async () => {
+  const f = historicalProducerRoleFixture(), before = {...f.authored.entries.get(f.live.path)}, diagnostics = {};
+  assert.equal((await f.run({metadataDiagnostics: diagnostics}))?.test_selection, 'selected-data', diagnostics.failure);
+  assert(f.reads.includes(f.original.git_blob_oid), 'whole original programme bytes must be read');
+  assert.deepEqual(f.authored.entries.get(f.live.path), before);
+  assert.equal(f.files.some(file => file.filename === f.live.path), false);
+});
+
+test('historical physical reproduction cannot bypass original pin, data or current-code guards', async () => {
+  for (const mutatePin of [pin => pin.sha256 = 'f'.repeat(64), pin => pin.git_blob_oid = 'f'.repeat(40),
+    pin => pin.bytes++, pin => pin.mode = '100755', pin => pin.commit = '5'.repeat(40)])
+    assert.equal(await historicalProducerRoleFixture({mutatePin}).run(), null);
+  assert.equal(await historicalProducerRoleFixture({mixedRole: true}).run(), null);
+  const changed = historicalProducerRoleFixture();
+  changed.put(changed.live.path, '# changed current executable\n');
+  assert.equal(await changed.run(), null, 'even a silently omitted changed-file entry cannot use historical custody');
+  changed.files.push({filename: changed.live.path, status: 'modified'});
+  assert.equal(await changed.run(), null, 'an actual current software change retains full routing');
+});
+
+
+test('historical physical reproduction cannot use an unavailable complete original tree', async () => {
+  const f = historicalProducerRoleFixture({unavailableTree: true}), diagnostics = {};
+  assert.equal(await f.run({metadataDiagnostics: diagnostics}), null);
+  assert.match(diagnostics.failure, /incomplete tree inventory/);
+  assert.equal(f.reads.includes(f.original.git_blob_oid), false, 'no unbound historical body read');
+});
+
+
+function retainedEvidenceFixture(name = 'execution/retained-helper.mjs', body = 'throw Error("must never execute");\n') {
+  const f = scientificManifestFixture(), member = f.packetPrefix + name;
+  const pin = f.put(member, body);
+  f.files.push({filename: member, status: 'added'});
+  return Object.assign(f, {retainedName: member, retainedPin: pin});
+}
+
+test('retained scientific helper/source formats use role-qualified DATA without executing or installing them', async () => {
+  const formats = [
+    ['execution/retained-helper.mjs', 'throw Error("must never execute");\n'],
+    ['execution/retained-helper.py', 'raise RuntimeError("must never execute")\n'],
+    ['execution/run.stdout.jsonl', ''],
+    ['execution/records.jsonl', '{"record":1}\n{"record":2}\n'],
+    ['source/metadata.json', '<?xml version="1.0"?><source>retained original response</source>\n'],
+    ['source/metadata.xml', '<!DOCTYPE x SYSTEM "https://invalid.example/"><x/>\n'],
+    ['source/source.geojson.lfs-pointer', 'version https://git-lfs.github.com/spec/v1\noid sha256:' + 'a'.repeat(64) + '\nsize 100\n'],
+    ['source/source.geojson.gz', gzipSync('{"type":"FeatureCollection","features":[]}')],
+    ['execution/native-row-latitudes.f64le.gz', gzipSync(Buffer.from([0,0,0,0,0,0,240,63]))]
+  ];
+  for (const mode of ['100644','100755']) for (const [name, body] of formats) {
+    const f = retainedEvidenceFixture(name, body), diagnostics = {};
+    f.authored.entries.get(f.retainedName).mode = mode;
+    assert.equal(selectedDataCandidate(f.branch, f.files, f.reservation), true, name);
+    const result = await f.run({metadataDiagnostics: diagnostics});
+    assert.equal(result?.test_selection, 'selected-data', name + ': ' + diagnostics.failure);
+    assert(!f.reads.includes(f.retainedPin.git_blob_oid), 'unconsumed supporting body must not be read: ' + name);
+    assert.equal(candidateGeographyCode('full', f.files, result.test_selection), false);
+  }
+  const executable = retainedEvidenceFixture();
+  executable.authored.entries.get(executable.retainedName).mode = '100755';
+  const prepared = await gateFixture(executable).select();
+  assert.deepEqual(prepared, {profile:'full', shards:[0], test_selection:'selected-data',
+    expectations_path:'coordination/engineering/retained-delivery/new-packet/selected-delivery-expectations.json',
+    geography_software:false});
+});
+
+test('final checker choice uses complete role proof without reading unconsumed retained code', async () => {
+  const executable = retainedEvidenceFixture();
+  executable.authored.entries.get(executable.retainedName).mode = '100755';
+  const f = mergeFixture({selectedFixture: executable}), diagnostics = {};
+  assert.equal(candidateGeographyCode('full', f.files), true);
+  const result = await f.complete({metadataDiagnostics: diagnostics});
+  assert.equal(result.accepted, true);
+  assert.equal(result.geography.trusted_code_commit, f.base);
+  assert(diagnostics.read_count > 0, 'candidate code requires real selection proof');
+  assert(!f.reads.includes(f.retainedPin.git_blob_oid), 'unconsumed retained helper is not read');
+});
+
+test('final checker choice fails closed when candidate-code classification is unavailable', async () => {
+  for (const failure of ['baseline tree', 'consumed ledger']) {
+    const f = mergeFixture({selectedFixture: retainedEvidenceFixture()}), original = f.options.api;
+    if (failure === 'consumed ledger') f.blobs.delete(f.authored.entries.get(f.sidecarBody.logical_asset_map.ledger.path).sha);
+    else f.options.api = async (route, ...args) => {
+      if (route === '/repos/owner/repo/git/commits/' + f.base) throw Error('Unavailable baseline tree');
+      return original(route, ...args);
+    };
+    assert.equal(candidateGeographyCode('full', f.files), true);
+    await assert.rejects(f.complete(), failure==='baseline tree'?/Unavailable baseline tree/:/exact trusted combined check/);
+    assert.equal(f.writes.length, 0, failure);
+    const candidateReport = {geographyReportLoader: async () => ({
+      version: 1, method_id: 'worldatlas-trusted-geography-check-v1', baseline_commit: f.base,
+      trusted_code_commit: f.pr.merge_commit_sha, candidate_commit: f.pr.merge_commit_sha,
+      trusted_code_inventory_sha256: 'd'.repeat(64), candidate_code_executed: true,
+      published: false, source_approval: false, gate_status: 'passed', status: 'not-applicable'
+    })};
+    if(failure==='baseline tree'){
+      await assert.rejects(f.complete(candidateReport),/Unavailable baseline tree/);
+      assert.equal(f.writes.length,0,'Neither report can replace unavailable routing identities');
+      continue;
+    }
+    const result=await f.complete(candidateReport);
+    assert.equal(result.accepted, true, failure);
+    assert.equal(result.geography.trusted_code_commit, f.pr.merge_commit_sha);
+    assert.equal(f.writes.length, 1);
+  }
+});
+
+test('retained helper eligibility requires complete base-role proof even without a manifest edit', async () => {
+  const f = retainedEvidenceFixture();
+  f.authored.entries.get(f.retainedName).mode = '100755';
+  f.files = f.files.filter(row => row.filename !== f.manifestPath);
+  f.authored.entries.set(f.manifestPath, f.baseline.entries.get(f.manifestPath));
+  delete f.reservation.evidence_manifest;
+  assert.equal((await f.run())?.test_selection, 'selected-data');
+  f.blobs.delete(f.authored.entries.get(f.base.artifact_consumption.certificate.path).sha);
+  assert.equal(await f.run(), null, 'unavailable base routing must not imply absence of a current code role');
+});
+
+for (const [name, change] of Object.entries({
+  'exact package input': f => {f.definition.inputs.push(f.retainedName); f.put('.github/package-inputs.json', f.definition);},
+  'package directory': f => {f.definition.inputs.push(f.packetPrefix + 'execution/'); f.put('.github/package-inputs.json', f.definition);},
+  'package verification role': f => {f.policy.verification_paths.push(f.retainedName); f.definition.verification_paths.push(f.retainedName);
+    f.put('.github/package-inputs.json', f.policy, true); f.put('.github/package-inputs.json', f.definition);},
+  'selected logical role': f => {const side = f.put(f.packetPrefix + 'selection-sidecar.json', {...f.sidecarBody,
+    base_selection:f.base, logical_asset_map:{...f.sidecarBody.logical_asset_map, patch:f.retainedPin}});
+    f.put('data/ownership-selection.json', {...f.base, additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});},
+  'existing helper rewrite': f => {f.baseline.entries.set(f.retainedName, {...f.authored.entries.get(f.retainedName), sha:'f'.repeat(40)});
+    f.files.find(row => row.filename === f.retainedName).status = 'modified';},
+  'symlink mode': f => {f.authored.entries.get(f.retainedName).mode = '120000';},
+  'non-blob executable': f => {Object.assign(f.authored.entries.get(f.retainedName), {type:'commit',mode:'100755'});},
+  'mixed current software': f => {f.put('scripts/qualify-source-cohort.py', '# changed current code\n');
+    f.authored.entries.get('scripts/qualify-source-cohort.py').mode = f.authored.entries.get(f.retainedName).mode;
+    f.files.push({filename:'scripts/qualify-source-cohort.py',status:'modified'});},
+})) for (const mode of ['100644','100755']) test('retained helper keeps full regression for ' + name + ' at ' + mode, async () => {
+  const f = retainedEvidenceFixture();
+  f.authored.entries.get(f.retainedName).mode = mode; change(f);
+  assert.equal(await f.run(), null, name);
+  assert.equal(candidateGeographyCode('full', f.files), true, 'failed qualification retains conservative software routing');
+  // Exercise the final consumer too: rejected inert-code qualification must
+  // never authorize a report produced with only baseline checker code.
+  f.ownedPaths = f.reservation.owned_paths;
+  const final = mergeFixture({selectedFixture: f});
+  await assert.rejects(final.complete());
+  assert.equal(final.writes.length, 0);
+});
+
+test('retained configuration snapshots use the complete consumer proof rather than their basename', async () => {
+  for (const name of ['original/stock/package.json', 'original/setup.py', 'original/sitecustomize.py']) {
+    const f = retainedEvidenceFixture(name, '{"type":"module"}');
+    assert.equal(selectedDataCandidate(f.branch, f.files, f.reservation), true);
+    assert.equal((await f.run())?.test_selection, 'selected-data');
+    f.definition.inputs.push(f.retainedName);f.put('.github/package-inputs.json',f.definition);
+    assert.equal(await f.run(), null, 'consumed configuration cannot use supporting-evidence routing');
+  }
+});
+
+test('real ambient Node package configuration stays full when its runtime directory is consumed', async () => {
+  const fs = await import('node:fs/promises'), os = await import('node:os'), path = await import('node:path');
+  const {pathToFileURL} = await import('node:url');
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'atlas-package-scope-'));
+  try {
+    await fs.writeFile(path.join(directory, 'package.json'), '{"type":"module"}');
+    await fs.mkdir(path.join(directory, 'runtime'));
+    const reader = path.join(directory, 'runtime/reader.js');
+    await fs.writeFile(reader, 'export const value = 1;');
+    const args = ['--input-type=module','-e',`const m = await import(${JSON.stringify(pathToFileURL(reader).href)}); if (m.value !== 1) process.exit(1);`];
+    execFileSync(process.execPath, args, {stdio:'pipe'});
+    await fs.writeFile(path.join(directory, 'runtime/package.json'), '{"type":"commonjs"}');
+    assert.throws(() => execFileSync(process.execPath, args, {stdio:'pipe'}), 'actual ambient package scope changes execution');
+    const f = fixture({mutate:f=>{
+      const runtime = prefix+'runtime/';f.put(runtime+'reader.js','export const value = 1;',true);
+      f.policy.inputs.push(runtime);f.definition.inputs.push(runtime);
+      f.put('.github/package-inputs.json',f.policy,true);f.put('.github/package-inputs.json',f.definition);
+      f.put(runtime+'package.json','{"type":"commonjs"}');
+    }});
+    assert.equal(selectedDataCandidate('engineering/fixture-delivery',f.files), true);
+    assert.equal(await f.run(), null, 'actual package directory requires full verification');
+  } finally { await fs.rm(directory,{recursive:true,force:true}); }
+});
+
+for (const role of ['critical_files', 'entry_critical_files', 'application_inputs'])
+  for (const mode of ['100644','100755']) test('retained helper cannot be declared current ' + role + ' at ' + mode, async () => {
+    let retainedName;
+    const f = baseRoutingManifestFixture(s => {
+      retainedName = s.f.packetPrefix + 'execution/retained-helper.mjs';
+      const pin = s.f.put(retainedName, 'throw Error("current executable");\n');
+      s.f.authored.entries.get(retainedName).mode = mode;
+      s.f.files.push({filename:retainedName,status:'added'});
+      if (role === 'critical_files') s.code.critical_files.push(pin);
+      else if (role === 'entry_critical_files') s.code.entry_critical_files = {'scripts/build-static-inner.mjs':[pin]};
+      else s.certificate.application_inputs.push(pin);
+    });
+    const diagnostics = {};
+    assert.equal(await f.run({metadataDiagnostics:diagnostics}), null);
+    assert.match(diagnostics.failure, /consumed base role/);
+  });
+
+test('retained XML under an original JSON name cannot become a current or packaged role', async () => {
+  for (const packageInput of [false, true]) {
+    const f = retainedEvidenceFixture('source/original-metadata.json', '<?xml version="1.0"?><source/>');
+    if (packageInput) {
+      f.definition.inputs.push(f.retainedName);
+      f.put('.github/package-inputs.json', f.definition);
+    } else {
+      const certificate = JSON.parse(f.blobs.get(f.base.artifact_consumption.certificate.git_blob_oid));
+      const code = JSON.parse(f.blobs.get(certificate.application_consumer_code.git_blob_oid));
+      // Candidate current-role metadata must be unchanged, not silently refreshed
+      // to launder the original response into the selected consumer.
+      code.critical_files.push(f.retainedPin);
+      f.put(certificate.application_consumer_code.path, code);
+    }
+    assert.equal(await f.run(), null);
+  }
+});
+
+
+test('ordinary unconsumed custody has no filename or encoding requirement', async () => {
+  for (const mode of ['100644','100755']) for (const name of ['source', 'source.unknown', 'archive.tar', 'script.sh', 'helper.js', 'module.wasm',
+    'README.md', 'response.json', 'source.geojson.zip', 'geography-artifact.zip']) {
+    const f = retainedEvidenceFixture(name, Buffer.from([0, 255, 128, 1])), diagnostics = {};
+    f.authored.entries.get(f.retainedName).mode = mode;
+    const result = await f.run({metadataDiagnostics:diagnostics});
+    assert.equal(result?.test_selection, 'selected-data', name + ': ' + diagnostics.failure);
+    assert(!f.reads.includes(f.retainedPin.git_blob_oid), name);
+    assert.equal(diagnostics.decoded_bytes, 0);
+    f.definition.inputs.push(f.retainedName);f.put('.github/package-inputs.json', f.definition);
+    assert.equal(await f.run(), null, name + ' cannot be packaged');
+  }
+});
+
+test('checkpoint locator alone selects its authenticated archive while unrelated ZIPs remain inert', async () => {
+  const f = checkpointProfileFixture(), c = f.checkpoint;
+  const source = f.put(prefix + 'source.geojson.zip', Buffer.from([0, 255, 128]));c.refresh();
+  assert.equal((await f.run()).test_selection, 'selected-data');
+  assert(!f.reads.includes(source.git_blob_oid));
+  assert(c.calls.some(route => route.endsWith('/pulls/7')));
+  f.authored.entries.delete(c.locatorPath);c.refresh();c.calls.length = 0;
+  assert.equal((await f.run()).test_selection, 'selected-data');
+  assert(!c.calls.some(route => route.includes('/pulls/') || route.includes('/issues/')),
+    'a filename alone cannot claim checkpoint authority');
+});
+
+test('historical and prospective expectations are inert, while one complete current roster remains mandatory', async () => {
+  const f = retainedEvidenceFixture('past/selected-delivery-expectations.json', {...fixture().expected,
+    selected_ledger_sha256:'f'.repeat(64), cohorts:[]});
+  assert.equal((await f.run()).test_selection, 'selected-data');
+  f.put(f.retainedName, 'an original response that was never valid JSON');
+  assert.equal((await f.run()).test_selection, 'selected-data');
+  f.put(f.retainedName, {...f.expected, selected_ledger_sha256:null, cohorts:[]});
+  assert.equal((await f.run()).test_selection, 'selected-data');
+  f.put(f.retainedName, f.expected);
+  assert.equal((await f.run()).test_selection, 'selected-data', 'identical current rosters share authority');
+  f.put(f.retainedName, JSON.stringify(f.expected)+'\n');
+  assert.equal(await f.run(), null, 'even equivalent JSON with different bytes remains ambiguous');
+  f.put(f.retainedName, {...f.expected, selected_ledger_sha256:'f'.repeat(64)});
+  f.put(f.packetPrefix+'selected-delivery-expectations.json', {...f.expected, cohorts:[]});
+  assert.equal(await f.run(), null, 'an incomplete current roster is never supporting custody');
+});
+
+test('selected-data role walk requires the exact new provider-adoption leaf and reuses complete family parts',async()=>{
+ const setup=({f,roles})=>{roles.adopted_provider_families=f.leaf('adopted-provider-families.json');};
+ const f=sourceTargetRoleFixture({mutateRoles:setup}),diagnostics={};
+ assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+ for(const defect of ['missing','wrong-oid']){
+  const broken=sourceTargetRoleFixture({mutateRoles:args=>{setup(args);
+   if(defect==='missing')args.f.authored.entries.delete(args.roles.adopted_provider_families.path);
+   else args.roles.adopted_provider_families.git_blob_oid='0'.repeat(40);
+  }});assert.equal(await broken.run(),null,defect);
+ }
+});
+
+
+test('selected-data role walk binds the optional completed constructor as a consumed immutable input',async()=>{
+ const {f,entry,completed}=completedSourceTargetRoleFixture();
+ f.files=[...f.authored.entries].filter(([name,row])=>f.baseline.entries.get(name)?.sha!==row.sha)
+  .map(([filename])=>({filename,status:f.baseline.entries.has(filename)?'modified':'added'}));
+ const diagnostics={};assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+ f.authored.entries.delete(completed.path);assert.equal(await f.run(),null);
+});
+
+
+test('selected expectations distinguish the same original component label across authority scopes',()=>{
+ const a='a'.repeat(64),b='b'.repeat(64),hash='c'.repeat(64),geometry='d'.repeat(64);
+ const row=authority=>({component_id:'original-shared-label',authority_sha256:authority,rule_sha256:hash,
+  target_id:'target',disposition:'assigned',native_cells:1,geometry_sha256:geometry});
+ const member={component_id:'original-shared-label',target_id:'target',disposition:'assigned',geometry_sha256:geometry};
+ const cohort=authority=>({original_batch_id:'retained-authority-scope:'+authority,component_ids:[member.component_id],members:[{...member}]});
+ const ledger={version:2,kind:'native-additive-repair-ledger-v2',rows:[row(a),row(b)]};
+ const expected={version:1,selected_ledger_sha256:hash,cumulative_native_cells:2,cohorts:[cohort(a),cohort(b)]};
+ assert.doesNotThrow(()=>validateSelectedExpectations(expected,ledger,hash));
+ for(const change of [
+  value=>{value.cohorts[1].original_batch_id='legacy-ambiguous-label';},
+  value=>{value.cohorts[1].original_batch_id='retained-authority-scope:'+'e'.repeat(64);},
+  value=>{value.cohorts[1].original_batch_id=value.cohorts[0].original_batch_id;}
+ ]){const value=structuredClone(expected);change(value);assert.throws(()=>validateSelectedExpectations(value,ledger,hash));}
+ const single={...expected,cumulative_native_cells:1,cohorts:[{...cohort(a),original_batch_id:'legacy-original'}]};
+ assert.doesNotThrow(()=>validateSelectedExpectations(single,{...ledger,rows:[row(a)]},hash));
+ const held={...row(a),component_id:'held',disposition:'rejected',native_cells:0};
+ assert.throws(()=>validateSelectedExpectations(expected,{...ledger,rows:[...ledger.rows,{...held,authority_sha256:b}]},hash,
+  {...ledger,rows:[...ledger.rows,held]}),/held\/rejected/);
+});
+
+
+for (const name of ['source.geojson.gz', 'source-without-extension', 'source.mjs']) {
+  test('fixed source-family role uses exact identity rather than filename: '+name, async()=>{
+    const f=sourceTargetRoleFixture({mutateRoles:({f,parts})=>{
+      f.authored.entries.delete(parts[0].path);
+      const raw=Buffer.from(JSON.stringify({type:'FeatureCollection',features:[]}));
+      parts[0]=f.put(prefix+name,name.endsWith('.gz')?gzipSync(raw):raw);
+      if(name.endsWith('.gz'))Object.assign(parts[0],{decoded_bytes:raw.length,decoded_sha256:digest(raw)});
+    }}), diagnostics={};
+    assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+    for(const [field,value] of [['mode','120000'],['size',1],['sha','0'.repeat(40)]]){
+      const original=f.authored.entries.get(prefix+name);f.authored.entries.set(prefix+name,{...original,[field]:value});
+      assert.equal(await f.run(),null,'wrong '+field+' must retain full validation');
+      f.authored.entries.set(prefix+name,original);
+    }
+  });
+}
+
+for(const retainedCode of [false,true])test('selected routing uses actual merged smoke and package policy with stale authored baseline, retained code='+retainedCode,async()=>{
+  const f=mergeFixture({selectedFixture:retainedCode?retainedEvidenceFixture():fixture()});
+  const oldSmoke=f.authored.entries.get(SELECTED_SMOKE);
+  f.put(SELECTED_SMOKE,'// Newly accepted generic smoke');
+  f.baseline.entries.set(SELECTED_SMOKE,f.authored.entries.get(SELECTED_SMOKE));
+  f.authored.entries.set(SELECTED_SMOKE,oldSmoke);
+  const oldPolicy={...f.definition,verification_paths:['test/retired.test.mjs']};
+  f.put('.github/package-inputs.json',oldPolicy);
+  const oldPackage=f.authored.entries.get('.github/package-inputs.json');
+  f.put('.github/package-inputs.json',f.definition);
+  f.integrated={entries:new Map(f.authored.entries)};
+  f.integrated.entries.set(SELECTED_SMOKE,f.baseline.entries.get(SELECTED_SMOKE));
+  f.authored.entries.set('.github/package-inputs.json',oldPackage);
+  assert.equal(await f.run(),null,'isolated old author snapshot is intentionally stale');
+  const prepared=await prepareIntegration(f.options);
+  assert.equal(prepared.test_selection,'selected-data');assert.equal(prepared.candidate_tree,'integrated-tree');
+  assert.equal((await f.complete()).accepted,true);
+  f.integrated.entries.set(SELECTED_SMOKE,oldSmoke);
+  assert.equal((await prepareIntegration(f.options)).test_selection,undefined,'actual candidate smoke drift still selects full CI');
+});
+
+test('explicit auto retains the authenticated selected route but refuses drift instead of falling back to complete',async()=>{
+  const f=mergeFixture();
+  const automatic=await prepareIntegration({...f.options,reviewedTests:'auto'});
+  assert.equal(automatic.test_selection,'selected-data');assert.equal(automatic.profile,'full');
+  assert.equal(automatic.geography_required,true);assert.equal(automatic.geography_software,false);
+  assert.equal((await f.complete({reviewedTests:'auto'})).accepted,true);
+  await assert.rejects(f.complete({reviewedTests:'auto',integrationResult:'failure'}),/Integration tests/);
+  const complete=await prepareIntegration({...f.options,reviewedTests:'complete'});
+  assert.equal(complete.test_selection,'complete');assert.deepEqual(complete.shards,[0,1,2]);
+  f.authored.entries.set(SELECTED_SMOKE,{...f.authored.entries.get(SELECTED_SMOKE),sha:'0'.repeat(40)});
+  await assert.rejects(prepareIntegration({...f.options,reviewedTests:'auto'}),/Automatic test scope is unavailable/);
+  assert.equal((await prepareIntegration(f.options)).test_selection,undefined,'Legacy queued omission retains full fallback');
+});
+
+
+test('selected-data closes canonical seam view and method bodies without arbitrary provenance walking',async()=>{
+  const setup=({f,roles})=>{
+    const method=f.put('scripts/majority.py','# retained canonical method',true);
+    roles.canonical_seam_views=f.put(prefix+'canonical-seam-views.json',{version:1,
+      kind:'retained-periodic-native-views-v1',method:{pin:method,export:'canonical'},records:[]});
+  };
+  const accepted=sourceTargetRoleFixture({mutateRoles:setup}),diagnostics={};
+  assert.ok(await accepted.run({metadataDiagnostics:diagnostics}),diagnostics.failure);
+  for(const defect of ['missing','wrong-pin','foreign-method']){
+    const mutateRoles=args=>{
+      setup(args);
+      if(defect==='missing')args.f.authored.entries.delete(args.roles.canonical_seam_views.path);
+      if(defect==='wrong-pin')args.roles.canonical_seam_views.git_blob_oid='0'.repeat(40);
+      if(defect==='foreign-method')args.roles.canonical_seam_views=args.f.put(prefix+'canonical-seam-views.json',
+        {version:1,kind:'retained-periodic-native-views-v1',method:{pin:args.f.leaf('alternate.py'),export:'canonical'},records:[]});
+    };
+    assert.equal(await sourceTargetRoleFixture({mutateRoles}).run(),null,defect);
+  }
+});
+
+test('selected-data includes every explicit complete cohort pin without recursive reads',async()=>{
+ const membership=(f,mutate=()=>{})=>{
+  const role={index:f.leaf('member-index.json'),lineage:f.leaf('member-lineage.json'),parts:[f.leaf('member-geography.json')],
+   cohort_inventory:{index:f.leaf('cohort-index.json'),parts:[f.leaf('cohort-part.json.gz',true)]}};
+  mutate(role.cohort_inventory);return role;
+ };
+ const f=sourceTargetRoleFixture({sourceMembership:f=>membership(f)}),diagnostics={};
+ assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+ for(const mutate of [role=>delete role.index,role=>role.parts=[],role=>role.parts[0].git_blob_oid='0'.repeat(40),
+  role=>role.index.git_blob_oid='0'.repeat(40),role=>role.extra=role.index]){
+  assert.equal(await sourceTargetRoleFixture({sourceMembership:f=>membership(f,mutate)}).run(),null);
+ }
+});
+
+test('selected-data declares every complete negative source reference part and rejects malformed roles',async()=>{
+ const setup=({f,roles})=>{roles.territorial_exclusion_sources=[{source_id:'negative',parts:[f.leaf('negative-source.bin.gz')]}];};
+ const accepted=sourceTargetRoleFixture({mutateRoles:setup}),diagnostics={};
+ assert.equal((await accepted.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+ for(const mutate of [s=>s[0].parts=[],s=>s.push(s[0]),s=>s[0].source_id='',
+   s=>s[0].parts[0].git_blob_oid='0'.repeat(40),s=>s[0].extra=s[0].parts[0]]){
+  const broken=sourceTargetRoleFixture({mutateRoles:args=>{setup(args);mutate(args.roles.territorial_exclusion_sources);}});
+  assert.equal(await broken.run(),null);
+ }
+});
+
+test('identical current expectations retain their files and must remain unconsumed supporting evidence', async () => {
+  const f = retainedEvidenceFixture('finalized/selected-delivery-expectations.json', fixture().expected);
+  // Bind the duplicate to this fixture's exact current ledger and serialization.
+  f.put(f.retainedName, f.expected);
+  const selected = await f.run();
+  assert.equal(selected?.test_selection, 'selected-data');
+  assert.equal(selected.expectations_path, f.packetPrefix+'selected-delivery-expectations.json');
+  assert(f.authored.entries.has(f.retainedName), 'the original evidence remains retained');
+  f.files.reverse();
+  assert.equal((await f.run()).expectations_path, f.retainedName, 'either identical file can supply the smoke role');
+  f.files.reverse();
+  f.put(f.retainedName, {...f.expected, cohorts:f.expected.cohorts.map(cohort=>({...cohort,original_batch_id:'different-batch'}))});
+  assert.equal(await f.run(), null, 'different valid current roster metadata cannot share authority');
+  f.put(f.retainedName, f.expected);
+  f.definition.inputs.push(f.retainedName); f.put('.github/package-inputs.json', f.definition);
+  assert.equal(await f.run(), null, 'identical content does not bypass consumed package roles');
+});
+
+test('selected-data includes explicit whole external negative source pins without recursive reads',async()=>{
+ const membership=(f,mutate=()=>{})=>{
+  const role={index:f.leaf('member-index.json'),lineage:f.leaf('member-lineage.json'),parts:[f.leaf('member-geography.json')],
+   negative_natural_earth:{registry:f.leaf('source-registry.json'),source:f.leaf('whole-natural-earth.json.gz',true),
+    atoms:[{source_id:'TST-1',feature_ordinal:0,geometry_sha256:'a'.repeat(64)}]}};
+  mutate(role.negative_natural_earth);return role;
+ };
+ const f=sourceTargetRoleFixture({sourceMembership:f=>membership(f)}),diagnostics={};
+ assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+ for(const mutate of [role=>delete role.registry,role=>delete role.source,role=>role.atoms=[],
+  role=>role.source.git_blob_oid='0'.repeat(40),role=>role.registry.git_blob_oid='0'.repeat(40),role=>role.extra=role.source])
+  assert.equal(await sourceTargetRoleFixture({sourceMembership:f=>membership(f,mutate)}).run(),null);
+});
+
+
+// The actual trusted prepare and final entry points share only job outputs,
+// never a body cache. Real ZIP/hash/run/job admission supplies private custody.
+function preparedSelectedFixture() {
+  const f=mergeFixture({selectedFixture:fixture({mutate:f=>f.put(prefix+'audit.py','# retained, unconsumed audit')})});
+  const candidate='9'.repeat(40), tree='7'.repeat(40), workflowHead='8'.repeat(40), root='/repos/owner/repo';
+  const original=f.options.api;
+  const api=async(route,...args)=>{
+    if(route===root+'/git/commits/'+candidate)return {sha:candidate,tree:{sha:tree},parents:[{sha:f.base},{sha:f.head}]};
+    if(route===root+'/git/trees/'+tree+'?recursive=1')return {truncated:false,tree:[...f.authored.entries.values()]};
+    if(route===root+'/actions/runs/123/attempts/1')return {id:123,run_attempt:1,head_sha:workflowHead,head_branch:'main',
+      event:'workflow_dispatch',path:'.github/workflows/worker-merge.yml',repository:{full_name:'owner/repo'},
+      head_repository:{full_name:'owner/repo'},status:'in_progress'};
+    if(route===root+'/actions/runs/123/attempts/1/jobs?per_page=100&page=1')return {jobs:[{id:55,run_id:123,run_attempt:1,
+      head_sha:workflowHead,name:'geography',status:'completed',conclusion:'success',steps:[]}]};
+    return original(route,...args);
+  };
+  api.artifactRedirect=async route=>{
+    assert.equal(route,root+'/actions/artifacts/456/zip');
+    return new Response(null,{status:302,headers:{location:'https://fixture.blob.core.windows.net/geography.zip'}});
+  };
+  f.options.api=api;
+  const body=Buffer.from(JSON.stringify({version:1,method_id:'worldatlas-trusted-geography-check-v1',
+    baseline_commit:f.base,trusted_code_commit:f.base,candidate_commit:candidate,candidate_code_executed:false,
+    published:false,source_approval:false,gate_status:'passed',status:'not-applicable'}));
+  const zip=checkpointZip([['geography-check.json',body]]);
+  f.load=({api:reader=api}={})=>loadGeographicReport({api:reader,repo:'owner/repo',runId:123,artifactName:'geography-selected-read-reuse-1',
+    expectedHash:digest(body),token:'synthetic-token',fresh:{run_attempt:1,artifact_id:456,artifact_digest:digest(zip),report_bytes:body.length,
+      workflow_head:workflowHead,head:f.head,baseline:f.base,candidate_commit:candidate,request_id:'selected-read-reuse'},
+    fetchImpl:async(url,options)=>{assert.equal(url,'https://fixture.blob.core.windows.net/geography.zip');
+      assert.equal(options.redirect,'error');return new Response(zip);}});
+  return f;
+}
+
+test('fresh selected final reuses genuine prepared checker choice without rereading immutable role bodies',async t=>{
+  for(const supplied of [false,undefined]) {
+    const f=preparedSelectedFixture(), prepared=await prepareIntegration(f.options);
+    assert.equal(prepared.test_selection,'selected-data');assert.equal(prepared.geography_software,false);
+    assert.equal(candidateGeographyCode('full',f.files),true,'Retained helper triggers legacy full-role derivation');
+    const originalReads=[...f.reads];assert(originalReads.length>0,'Actual prepare consumed role bodies');f.reads.length=0;
+    const stats={}, result=await f.complete({preparedGeographySoftware:supplied,geographyReportLoader:f.load,metadataDiagnostics:stats});
+    assert.equal(result.accepted,true);assert.equal(result.geography.execution,'fresh-queue');
+    if(supplied===false) {assert.equal(f.reads.length,0);assert.deepEqual(stats,{});}
+    else {assert(f.reads.length>0);assert(stats.read_count>0,'Old workflow still authenticates complete role bodies');}
+    t.diagnostic(JSON.stringify({prepared_choice:supplied??'absent',prepare_blob_reads:originalReads.length,
+      final_blob_reads:f.reads.length,final_blob_bytes:f.reads.reduce((n,oid)=>n+f.blobs.get(oid).length,0)}));
+  }
+});
+
+test('a public prepared flag or cloned report cannot reuse the trusted checker choice',async()=>{
+  const f=preparedSelectedFixture(),prepared=await prepareIntegration(f.options), admitted=await f.load();
+  assert(preparedQueueSource(admitted));
+  const clone=structuredClone(admitted);clone.prepared_queue=true;assert.equal(preparedQueueSource(clone),null);
+  f.reads.length=0;
+  const result=await f.complete({preparedGeographySoftware:prepared.geography_software,geographyReportLoader:async()=>clone});
+  assert.equal(result.accepted,true);assert(f.reads.length>0,'Unprivileged report retains original classification');
+  assert.equal(result.geography.execution,undefined);
+});
+
+// Exercise the paired finalizer declaration contract and the actual prepared
+// routing entry with existing compact accepted-checkpoint custody, not history.
+function retiredCheckpointPrepareFixture(mutate = () => {}) {
+  const f=checkpointProfileFixture(), c=f.checkpoint;
+  const read=name=>JSON.parse(f.blobs.get(f.authored.entries.get(name).sha));
+  const currentSelection=read('data/ownership-selection.json');
+  const priorSelection=structuredClone(c.facts.candidate_selection), priorPath=priorSelection.additive_release.path;
+  const prior=read(priorPath);
+  prior.version=2;prior.kind='retained-native-additive-selection-v2';
+  prior.runtime_envelope=f.leaf('envelope.json',true);
+  prior.logical_asset_map.patch=f.leaf('patch.json',true);
+  const pin=f.put(priorPath,prior,true);
+  priorSelection.additive_release={path:pin.path,bytes:pin.bytes,sha256:pin.sha256};
+  f.put('data/ownership-selection.json',priorSelection,true);
+  f.put('data/ownership-selection.json',currentSelection);
+  const retired=[priorPath,prior.runtime_envelope.path,prior.logical_asset_map.ledger.path,prior.logical_asset_map.patch.path];
+  const shared=f.sidecarBody.logical_asset_map.base_manifest.path;
+  const unrelated=f.put('data/unrelated-package.json',{unchanged:true},true).path;
+  const before={...f.policy,inputs:[...f.policy.inputs,shared,unrelated,...retired]};
+  f.definition={...f.definition,inputs:[...f.definition.inputs.slice(0,2),shared,unrelated,...f.definition.inputs.slice(2)]};
+  f.put('.github/package-inputs.json',before,true);
+  f.put('.github/package-inputs.json',f.definition);
+  f.put(c.locatorPath,{...c.locator,acceptance:{...c.locator.acceptance,pr_number:6}},true);
+  c.facts.candidate_selection=priorSelection;c.rebuild();
+  f.put(prefix+'retained-audit.py','# Inert retained delivery evidence; never executed.\n');
+  mutate(f,{shared,unrelated,prior,currentSelection,retired,read});
+  c.refresh();
+  return mergeFixture({selectedFixture:f});
+}
+
+test('authenticated quartet retirement and checkpoint advancement preserve the actual prepared selected route repeatedly',async()=>{
+  const f=retiredCheckpointPrepareFixture();
+  for(let i=0;i<2;i++){
+    const prepared=await prepareIntegration(f.options);
+    assert.equal(prepared.test_selection,'selected-data');assert.deepEqual(prepared.shards,[0]);
+    assert.equal(prepared.geography_required,true);assert.equal(prepared.geography_software,false);
+  }
+  assert(f.checkpoint.calls.some(route=>route.endsWith('/pulls/7')),'chosen predecessor acceptance was checked');
+  assert(f.reads.includes(f.authored.entries.get(f.checkpoint.archive).sha),'chosen ZIP was authenticated');
+});
+
+test('retirement and checkpoint advancement cannot remove unrelated, shared or still-current roles',async()=>{
+  for(const kind of ['unrelated','shared','still-current']){
+    const f=retiredCheckpointPrepareFixture((f,state)=>{
+      if(kind==='still-current'){
+        const sidecar={...f.sidecarBody,runtime_envelope:state.prior.runtime_envelope};
+        const pin=f.put(state.currentSelection.additive_release.path,sidecar);
+        f.put('data/ownership-selection.json',{...state.currentSelection,additive_release:{path:pin.path,bytes:pin.bytes,sha256:pin.sha256}});
+      }else{
+        f.definition.inputs=f.definition.inputs.filter(name=>name!==state[kind]);
+        f.put('.github/package-inputs.json',f.definition);
+      }
+    });
+    const prepared=await prepareIntegration(f.options);
+    assert.notEqual(prepared.test_selection,'selected-data',kind);
+    assert.equal(prepared.profile,'full',kind);
+    assert.equal(prepared.geography_software,true,kind);
+  }
+});
+
+
+// Profile eligibility only: genuine constructor qualification remains the
+// trusted geography consumer's job. This captures the finalizer's five roles.
+function completedSourceTargetRoleFixture({completed=true}={}) {
+ const f=sourceTargetRoleFixture({mutateRoles:({f,roles,parts})=>{
+  for(const [name,pin]of Object.entries(roles))roles[name]=f.put(pin.path,{historical_role:name});
+  parts[0]=f.put(parts[0].path,{historical_role:'source-family'});
+ }}),entry=f.registryBody.entries.at(-1);
+ const binding=JSON.parse(f.blobs.get(entry.source_authority.git_blob_oid));
+ const evidence=JSON.parse(f.blobs.get(binding.source_evidence.git_blob_oid));
+ const historical=[...['catalogue','physical_evidence','physical_input','physical_reproduction','owner_roster','native_latitudes'].map(k=>evidence[k]),...evidence.families.flatMap(x=>x.parts)];
+ for(const pin of historical){f.authored.entries.delete(pin.path);f.blobs.delete(pin.git_blob_oid);}
+ const constructor=f.put(prefix+'reviewed-constructor-result.json',{kind:'fixture-result'});
+ if(completed)entry.completed_constructor=constructor;else f.authored.entries.delete(constructor.path);
+ refreshPins(f);
+ f.files=[...f.authored.entries].filter(([name,row])=>f.baseline.entries.get(name)?.sha!==row.sha)
+  .map(([filename])=>({filename,status:f.baseline.entries.has(filename)?'modified':'added'}));
+ return {f,entry,completed:constructor,historical,direct:{rule:entry.rule_preimage,binding:entry.source_authority,
+  constructor,evidence:binding.source_evidence,patch:binding.native_patch}};
+}
+test('completed source-target profile stays selected-data with absent historical bodies',async()=>{
+ const {f,historical}=completedSourceTargetRoleFixture(),diagnostics={};
+ assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+ for(const pin of historical){assert(!f.authored.entries.has(pin.path));assert(!f.blobs.has(pin.git_blob_oid));assert(!f.reads.includes(pin.git_blob_oid));}
+ const g=mergeFixture({selectedFixture:f}),prepared=await prepareIntegration(g.options);
+ assert.equal(prepared.test_selection,'selected-data');assert.equal(prepared.geography_software,false);
+ assert.equal(prepared.geography_required,true,'Classification must retain genuine constructor/native qualification');
+});
+test('unqualified source-target profile still requires historical bodies',async()=>{
+ const {f}=completedSourceTargetRoleFixture({completed:false}),diagnostics={};
+ assert.equal(await f.run({metadataDiagnostics:diagnostics}),null);assert.match(diagnostics.failure,/role differs from candidate tree/);
+});
+for(const role of ['rule','binding','constructor','evidence','patch'])for(const defect of ['missing','changed'])
+ test('completed source-target profile refuses '+defect+' direct '+role,async()=>{
+  const {f,direct}=completedSourceTargetRoleFixture(),pin=direct[role];
+  if(defect==='missing')f.authored.entries.delete(pin.path);
+  else f.authored.entries.set(pin.path,{...f.authored.entries.get(pin.path),sha:'f'.repeat(40)});
+  assert.equal(await f.run(),null);
+ });

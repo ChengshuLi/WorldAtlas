@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "selector": {
+    "commit": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "b2abcfeb2ef1fded14f7c553cd324bffd6a43bd2",
+    "bytes": 1564,
+    "sha256": "6a0d4c7596dc8cf5cddf17547621a2a73db66d67ddc0870d4709d1da8746bedb"
+  },
+  "effective_release_id": "geography:myanmar-territorial-applicability2041-delivery-20261016",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/native-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "26cf31ce645796abd8d1fbf88f76aa0eb98ded7a",
+        "bytes": 817,
+        "sha256": "1fc1386bd604a2c7d8f8bf643522d5101219a23c83f41e230c0591d351543082",
+        "commit": "9139b3302fc40daa5037996046b1eff60966f9b0"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/native-authority-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "1bbe22058524552b60ff57c9254dd9f928de1aea",
+        "bytes": 820,
+        "sha256": "1642b6cf21502041bd3900f901c85a3007a6f50b5e0690e30d2933f3567e976f",
+        "commit": "9139b3302fc40daa5037996046b1eff60966f9b0"
+      },
+      "ledger": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/native-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "bfebd7837d0402f7e32a09242ede19dc392dfb66",
+        "bytes": 1252284,
+        "sha256": "b03a429e224cb39f30f0b1cd2faea34b5d4facf5d67bbfc87e5011f51d68fbeb",
+        "commit": "9139b3302fc40daa5037996046b1eff60966f9b0"
+      },
+      "native_patch": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability1929-001/native-inputs-001/candidate-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "f47b5fd30942a16d00dee1d65b50c8971e041524",
+        "bytes": 52723,
+        "sha256": "8eaeb5b8826c81159870a785a1bda6a5793b435463e3c892521b977264e835eb",
+        "commit": "bfc7e2b4417ca8b1eec0b1d4439b35019e472bf6"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability112-001/native-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "7757b6f6f8e163c6217e0a20a0b79cf30816af05",
+        "bytes": 813,
+        "sha256": "c0546b3fcdcd29a72f01499ef79ff7290b3a2bc660eb93981bf9fc1949ff07d8",
+        "commit": "59fa99205cf02182cc48f684706c5e379f9a97c2"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability112-001/native-authority-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "5cfcde87986452ec27ec59680438598b2d582d96",
+        "bytes": 816,
+        "sha256": "0d5cae11bafc13fff1b0b6dde229eeeb24c90376930f7ae1dabe4a459729fecc",
+        "commit": "59fa99205cf02182cc48f684706c5e379f9a97c2"
+      },
+      "ledger": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability112-001/native-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "ca9d60dc18ee1e58ab113d557700c79318cd1914",
+        "bytes": 135077,
+        "sha256": "6b8c882f2e003f610e3bf04ddeb1b224d2ffdb3628b33ebeda6099869598845c",
+        "commit": "59fa99205cf02182cc48f684706c5e379f9a97c2"
+      },
+      "native_patch": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability112-001/native-inputs-001/candidate-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "01ae96f223370928346eb7eec79036bfc3529d31",
+        "bytes": 2673,
+        "sha256": "6bf7a31fa7143240e79dd3f7313e117190ace4419905bd2ec83f101aed8ed2e7",
+        "commit": "8972782a77bf7ac069765b3d39cb14f2cd376db8"
+      }
+    }
+  ]
+}

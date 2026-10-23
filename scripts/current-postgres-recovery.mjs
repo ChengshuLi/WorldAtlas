@@ -3,13 +3,14 @@ import path from 'node:path';
 import {execFileSync,spawn} from 'node:child_process';
 import {createHash,randomUUID} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
-import {storageExportV2Contract,storageExportV2Definitions,storageExportV2Collections} from '../hosted/storage-export-v2-contract.js';
+import {storageExportV2Contract} from '../hosted/storage-export-v2-contract.js';
 import {storageCatalogV2} from '../hosted/storage-export-v2.js';
-import {storageRowsHashV2Ordered} from './restore-postgres-storage-v2.mjs';
+import {storageRowsHashV3Ordered} from './restore-postgres-storage-v3.mjs';
+import {storageExportV3Definitions} from '../hosted/storage-export-v3-contract.js';
 import {readClaim,workSpec,githubPages,githubAPI} from './issue-claim-contract.mjs';
 import {expectedNeonProjectId,verifyNeonProject} from './verify-neon-project.mjs';
 import {backupRecipientFingerprint,sealRecoveryBackup} from './recovery-backup-envelope.mjs';
-import {originalRecoveryProfile,compactRecoveryProfile,compactRecoveryTables,recoveryProfileForMarker,readCompactRecoveryStorage,verifyCompactRecoveryRegistry} from './compact-recovery-profile.mjs';
+import {originalRecoveryProfile,recoveryBaseContract,compactRecoveryTables,recoveryProfileForMarker,readCompactRecoveryStorage,verifyCompactRecoveryRegistry} from './compact-recovery-profile.mjs';
 import {readPublicationState,marker as publicationMarker} from './publication-plan.mjs';
 
 export const recoveryImage='postgres@sha256:77f585114c32fbca283dc835b0596f4e52b51b4c6662d7810b2f4084f60a1873';
@@ -109,7 +110,7 @@ export function validatedOwnerConnection(value,host){
 }
 
 export function tableReadSQL(collection){
- const definition=storageExportV2Definitions[collection];need(definition,'unknown-factual-table');
+ const definition=storageExportV3Definitions[collection];need(definition,'unknown-factual-table');
  const order=definition.keys.map(k=>ident(k)+(k==='rowid'?'':' COLLATE "C"')).join(',');
  return `SELECT ${definition.columns.map(ident).join(',')} FROM ${ident(definition.table)} ORDER BY ${order}`;
 }
@@ -135,17 +136,17 @@ export function nativeMembershipDigestSQL(){
  return `SELECT count(*)::bigint rows,encode(sha256(convert_to(coalesce(string_agg(encode(sha256(convert_to(row_to_json(q)::text,'UTF8')),'hex'),'' ORDER BY ${order}),''),'UTF8')),'hex') ordered_rows_sha256 FROM (${tableReadSQL('geographic_memberships')}) q`;
 }
 
-export async function readRecoveryInventory(query,{directory,profile=originalRecoveryProfile}={}){
- need([originalRecoveryProfile,compactRecoveryProfile].includes(profile),'unsupported-recovery-profile');
- const compact=profile===compactRecoveryProfile;
- const names=await query(inventorySQL),expected=[...storageExportV2Collections.filter(k=>!compact||k!=='geographic_memberships').map(k=>storageExportV2Definitions[k].table),'worldatlas_schema_migrations',...(compact?Object.keys(compactRecoveryTables):[])].sort();
+export async function readRecoveryInventory(query,{profile=originalRecoveryProfile}={}){
+ const contract=recoveryBaseContract(profile),definitions=contract.definitions,collections=Object.keys(definitions);
+ const compact=profile!==originalRecoveryProfile;
+ const names=await query(inventorySQL),expected=[...collections.filter(k=>!compact||k!=='geographic_memberships').map(k=>definitions[k].table),'worldatlas_schema_migrations',...(compact?Object.keys(compactRecoveryTables):[])].sort();
  need(same(names.map(r=>r.table_name),expected),'incomplete-owner-and-factual-inventory');
  const identity=(await query("SELECT current_database() database_name,current_user role_name,current_schema() schema_name,current_setting('server_version_num') version"))[0];
  need(identity?.role_name==='neondb_owner'&&identity.schema_name==='public'&&/^18\d{4}$/.test(String(identity.version)),'unexpected-postgres-owner-or-version');
- const compactStorage=compact?await readCompactRecoveryStorage(query):null;
+ const compactStorage=compact?await readCompactRecoveryStorage(query,contract.version):null;
  const catalog=compactStorage?.catalog??await storageCatalogV2({dialect:'postgres',prepare:sql=>({all:async()=>({results:await query(sql)})})});
  const proofs={};let revision=0;
- for(const collection of storageExportV2Collections){
+ for(const collection of collections){
   const metrics=(await query(`SELECT count(*) rows,coalesce(sum(octet_length(row_to_json(q)::text)),0) bytes,coalesce(max(octet_length(row_to_json(q)::text)),0) largest FROM (${tableReadSQL(collection)}) q`))[0];
   need(metrics&&['rows','bytes','largest'].every(k=>Number.isSafeInteger(metrics[k])&&metrics[k]>=0)&&metrics.largest<=8*1024*1024,'measured-source-table-exceeds-bound');
   if(collection==='geographic_memberships'){
@@ -157,23 +158,23 @@ export async function readRecoveryInventory(query,{directory,profile=originalRec
   need(metrics.bytes+metrics.rows*2+2<=maxJSON,'measured-source-table-exceeds-bound');
   const rows=await query(tableReadSQL(collection));
   need(rows.length===metrics.rows,'measured-source-table-changed');
-  need(rows.every(row=>same(Object.keys(row),storageExportV2Definitions[collection].columns)),'changed-raw-factual-columns');
+  need(rows.every(row=>same(Object.keys(row),definitions[collection].columns)),'changed-raw-factual-columns');
   if(collection==='ingestions')for(const row of rows){need(Number.isSafeInteger(row.rowid)&&row.rowid>0,'unsafe-original-rowid');revision=Math.max(revision,row.rowid);}
-  proofs[collection]={count:rows.length,ordered_rows_sha256:storageRowsHashV2Ordered(collection,rows)};
-  if(directory)fs.writeFileSync(path.join(directory,collection+'.json'),JSON.stringify(rows)+'\n',{flag:'wx',mode:0o600});
+  proofs[collection]={count:rows.length,ordered_rows_sha256:storageRowsHashV3Ordered(collection,rows)};
  }
  const registry=await query(registrySQL);need(registry.length>0,'missing-owner-registry-state');
- if(compact)await verifyCompactRecoveryRegistry(query,registry);
+ if(compact)await verifyCompactRecoveryRegistry(query,registry,contract.version);
  const permissions=await query(permissionSQL),privateRegistry=permissions.find(r=>r.object_name==='worldatlas_schema_migrations');
  need(privateRegistry?.owner==='neondb_owner'&&!privateRegistry.app_select&&!privateRegistry.app_insert&&!privateRegistry.app_update&&!privateRegistry.app_delete&&!privateRegistry.app_truncate,'owner-registry-exposed');
  const sequence=await query('SELECT last_value,is_called FROM atlas_ingestions_rowid_seq');
  need(sequence.length===1&&Number.isSafeInteger(sequence[0].last_value)&&sequence[0].last_value>=revision,'invalid-ingestion-sequence');
+ const column_permissions=await query(`SELECT c.relname object_name,a.attname column_name,${canonicalACL('a.attacl','c.relowner','c')} acl FROM pg_attribute a JOIN pg_class c ON c.oid=a.attrelid JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND a.attnum>0 AND NOT a.attisdropped AND a.attacl IS NOT NULL ORDER BY c.relname,a.attnum`);
  const database_acl=await query("SELECT datacl::text acl FROM pg_database WHERE datname=current_database()");
  const default_acls=await query("SELECT pg_get_userbyid(d.defaclrole) role_name,n.nspname schema_name,d.defaclobjtype object_type,d.defaclacl::text acl FROM pg_default_acl d LEFT JOIN pg_namespace n ON n.oid=d.defaclnamespace WHERE n.nspname='public' ORDER BY role_name,object_type");
  // acldefault uses lowercase 's' for sequences; uppercase 'S' is a foreign server.
  const sequence_permissions=await query(`SELECT c.relname name,pg_get_userbyid(c.relowner) owner,${canonicalACL('c.relacl','c.relowner','s')} acl,has_sequence_privilege('worldatlas_app',c.oid,'USAGE') app_usage,has_sequence_privilege('worldatlas_app',c.oid,'SELECT') app_select,has_sequence_privilege('worldatlas_app',c.oid,'UPDATE') app_update FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND c.relkind='S' ORDER BY c.relname`);
  const function_permissions=await query(`SELECT p.proname name,pg_get_function_identity_arguments(p.oid) arguments,pg_get_userbyid(p.proowner) owner,${canonicalACL('p.proacl','p.proowner','f')} acl,p.prosecdef security_definer,p.proconfig settings FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='public' AND p.prokind IN ('f','p') ORDER BY p.proname,arguments`);
- return {database_acl,default_acls,identity,revision,catalog_sha256:sha(JSON.stringify(catalog)),collections:proofs,owner_registry:registry,owner_registry_sha256:sha(JSON.stringify(registry)),permissions,sequence,sequence_permissions,function_permissions,...(compact?{profile,compact_storage:compactStorage}:{} )};
+ return {database_acl,default_acls,column_permissions,identity,revision,catalog_sha256:sha(JSON.stringify(catalog)),collections:proofs,owner_registry:registry,owner_registry_sha256:sha(JSON.stringify(registry)),permissions,sequence,sequence_permissions,function_permissions,...(compact?{profile,compact_storage:compactStorage}:{} )};
 }
 
 // pg_restore clears search_path, but frozen PL/pgSQL helpers resolve public
@@ -281,9 +282,10 @@ export function isolatedOriginalChecks(schema){
 
 export function assertCurrentInventory(inventory,marker){
  const profile=recoveryProfileForMarker(marker);
- need(profile===compactRecoveryProfile?inventory.profile===profile:inventory.profile===undefined,'source-profile-drift');
+ need(profile!==originalRecoveryProfile?inventory.profile===profile:inventory.profile===undefined,'source-profile-drift');
  need(inventory.identity.database_name==='neondb'&&inventory.revision===marker.revision&&inventory.catalog_sha256===marker.catalog_sha256,'source-identity-or-catalog-drift');
- need(storageExportV2Collections.every(k=>inventory.collections[k].count===marker.counts[k]),'source-count-drift');
+ const collections=Object.keys(recoveryBaseContract(profile).definitions);
+ need(same(Object.keys(inventory.collections).sort(),[...collections].sort())&&collections.every(k=>inventory.collections[k].count===marker.counts[k]),'source-count-drift');
  need(inventory.collections.geographic_releases.ordered_rows_sha256===marker.geographic_releases_sha256&&inventory.collections.footprint_versions.ordered_rows_sha256===marker.footprint_versions_sha256,'source-release-drift');
 }
 export function assertRestoredInventory(before,target,after){
@@ -352,26 +354,33 @@ export async function boundedOwnerJSON(response){
  const result=JSON.parse(Buffer.concat(chunks).toString());need(result&&typeof result==='object'&&!Array.isArray(result),'invalid-owner-api-object');return result;
 }
 
+export async function authenticateRecoveryWindow({env,fetcher=fetch,phase='start',forwardOperationSHA,expectedWindowSHA}={}){
+  need(env.GITHUB_EVENT_NAME==='workflow_dispatch'&&env.GITHUB_REPOSITORY===repo&&[recoveryWorkflow,'.github/workflows/neon-forward-migrations.yml'].some(workflow=>env.GITHUB_WORKFLOW_REF===repo+'/'+workflow+'@refs/heads/main')&&/^[a-f0-9]{40}$/.test(env.GITHUB_SHA??'')&&/^[1-9]\d*$/.test(env.WINDOW_COMMENT_ID??'')&&env.NEON_PROJECT_ID===expectedNeonProjectId,'trusted-main-manual-context-required');
+  const api=githubAPI(env.GITHUB_TOKEN,{fetchImpl:fetcher});
+  const comment=await api('/repos/'+repo+'/issues/comments/'+env.WINDOW_COMMENT_ID);
+  need(/^https:\/\/github\.com\/ChengshuLi\/WorldAtlas\/issues\/(51|714)#issuecomment-[1-9]\d*$/.test(comment.html_url??'')&&comment.user?.type==='User'&&['OWNER','MEMBER','COLLABORATOR'].includes(comment.author_association)&&comment.user.login===env.GITHUB_ACTOR,'authorized-publisher-queue-window-required');
+  const matches=[...String(comment.body).matchAll(/<!-- worldatlas-recovery-window:v1\n([\s\S]*?)\n-->/g)];need(matches.length===1,'unique-publisher-window-required');
+  const toolSHA=sha(fs.readFileSync(fileURLToPath(import.meta.url))),requestedWindow=JSON.parse(matches[0][1]),reservation=await loadRecoveryReservation(requestedWindow,api),{claim}=reservation;
+  const window=validateRecoveryWindow(requestedWindow,claim,{head:env.GITHUB_SHA,toolSHA,phase,...reservation});
+  need(comment.html_url==='https://github.com/'+repo+'/issues/'+window.queue+'#issuecomment-'+comment.id,'window-tracking-issue-mismatch');
+  need(window.operator_github_login===comment.user.login,'publisher-author-binding-required');
+  const windowSHA=sha(JSON.stringify(window));need(expectedWindowSHA===undefined||expectedWindowSHA===windowSHA,'changed-publisher-window');
+  if(env.GITHUB_WORKFLOW_REF!==repo+'/'+recoveryWorkflow+'@refs/heads/main')need(/^[a-f0-9]{64}$/.test(forwardOperationSHA??'')&&window.forward_operation_sha256===forwardOperationSHA,'unreviewed-forward-recovery-window');
+  return {window,windowSHA,comment,claim,api};
+}
+
 /** Only the publisher's fresh reviewed window plus a live canonical claim can
  * obtain the existing owner connection. Source clients enforce read-only; all
  * restoration and role/schema writes stay on a network-none ephemeral target.
  */
-export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,output='data/validation/current-postgres-recovery'}={}){
+export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,output='data/validation/current-postgres-recovery',forwardOperationSHA}={}){
  const started=Date.now(),receipt={version:1,status:'failed',source_read_only:true,production_writes:0,started_at_utc:new Date().toISOString()},secrets=[];
  let target,lock,releaseProbe,stage='authorize';const readers=new Set();
  need(!fs.existsSync(output),'preserve-existing-recovery-target');fs.mkdirSync(output,{recursive:true,mode:0o700});
  const publicOutput=path.join(output,'public-receipts');fs.mkdirSync(publicOutput,{mode:0o700});const receiptFile=path.join(publicOutput,'receipt.json');
  try{
-  need(env.GITHUB_EVENT_NAME==='workflow_dispatch'&&env.GITHUB_REPOSITORY===repo&&env.GITHUB_WORKFLOW_REF===repo+'/'+recoveryWorkflow+'@refs/heads/main'&&/^[a-f0-9]{40}$/.test(env.GITHUB_SHA??'')&&/^[1-9]\d*$/.test(env.WINDOW_COMMENT_ID??'')&&env.NEON_PROJECT_ID===expectedNeonProjectId,'trusted-main-manual-context-required');
-  secrets.push(env.NEON_API_KEY,env.GITHUB_TOKEN);const api=githubAPI(env.GITHUB_TOKEN);
-  const comment=await api('/repos/'+repo+'/issues/comments/'+env.WINDOW_COMMENT_ID);
-  need(/^https:\/\/github\.com\/ChengshuLi\/WorldAtlas\/issues\/(51|714)#issuecomment-[1-9]\d*$/.test(comment.html_url??'')&&comment.user?.type==='User'&&['OWNER','MEMBER','COLLABORATOR'].includes(comment.author_association)&&comment.user.login===env.GITHUB_ACTOR,'authorized-publisher-queue-window-required');
-  const matches=[...String(comment.body).matchAll(/<!-- worldatlas-recovery-window:v1\n([\s\S]*?)\n-->/g)];need(matches.length===1,'unique-publisher-window-required');
-  const toolSHA=sha(fs.readFileSync(fileURLToPath(import.meta.url))),requestedWindow=JSON.parse(matches[0][1]),reservation=await loadRecoveryReservation(requestedWindow,api),{claim}=reservation;
-  const window=validateRecoveryWindow(requestedWindow,claim,{head:env.GITHUB_SHA,toolSHA,...reservation});
-  need(comment.html_url==='https://github.com/'+repo+'/issues/'+window.queue+'#issuecomment-'+comment.id,'window-tracking-issue-mismatch');
-  need(window.operator_github_login===comment.user.login,'publisher-author-binding-required');
-  receipt.window_comment_id=comment.id;receipt.claim_id=claim.claim_id;receipt.reservation_issue=claim.issue_number;receipt.source_marker=window.source_marker;receipt.site=window.site;receipt.hosting=window.hosting;receipt.github={head:env.GITHUB_SHA,run_id:env.GITHUB_RUN_ID,run_attempt:env.GITHUB_RUN_ATTEMPT};save(receiptFile,receipt,secrets);
+  secrets.push(env.NEON_API_KEY,env.GITHUB_TOKEN);const {window,windowSHA,comment,claim,api}=await authenticateRecoveryWindow({env,fetcher,forwardOperationSHA});
+  receipt.window_sha256=windowSHA;receipt.window_comment_id=comment.id;receipt.claim_id=claim.claim_id;receipt.reservation_issue=claim.issue_number;receipt.source_marker=window.source_marker;receipt.site=window.site;receipt.hosting=window.hosting;receipt.github={head:env.GITHUB_SHA,run_id:env.GITHUB_RUN_ID,run_attempt:env.GITHUB_RUN_ATTEMPT};save(receiptFile,receipt,secrets);
   stage='verify-hosting-and-registry';receipt.hosting_start=await verifyRecoveryHosting(window,api,fetcher);
   stage='verify-production-metadata';receipt.project=await verifyNeonProject({apiKey:env.NEON_API_KEY,projectId:expectedNeonProjectId,fetchImpl:fetcher});
   need(receipt.project.branch.id===branchId&&receipt.project.project.configured_postgres_major===18,'production-branch-or-major-changed');
@@ -382,9 +391,8 @@ export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,
   const client=sourceClient(connection,readers),rawSourceQuery=queryJSON(sql=>client(['psql','-X','-Atq','-v','ON_ERROR_STOP=1','-v','VERBOSITY=sqlstate'],sql),secrets);
   stage='shared-source-lock';lock=await holdSourceLock(connection,readers);releaseProbe=async()=>{const result=(await rawSourceQuery(`SELECT exists(SELECT 1 FROM pg_locks WHERE locktype='advisory' AND pid=${lock.pid} AND classid=807245315 AND objid=1 AND objsubid=2 AND granted) held`))[0];need(result?.held===false,'source-lock-release-unconfirmed');};receipt.source_lock={key:[807245315,1],backend_pid:lock.pid,kind:'session-level; no open transaction'};
   const sourceQuery=async sql=>{need(lock.alive(),'source-lock-session-lost');const held=(await rawSourceQuery(`SELECT exists(SELECT 1 FROM pg_locks WHERE locktype='advisory' AND pid=${lock.pid} AND classid=807245315 AND objid=1 AND objsubid=2 AND granted) held`))[0];need(held?.held===true,'source-lock-lost');const rows=await rawSourceQuery(sql);need(lock.alive(),'source-lock-session-lost');return rows;};
-  const capture=path.join(output,'original-rows');fs.mkdirSync(capture,{mode:0o700});
   const profile=recoveryProfileForMarker(window.source_marker);
-  stage='current-source-inventory';const before=await readRecoveryInventory(sourceQuery,{directory:capture,profile});assertCurrentInventory(before,window.source_marker);save(path.join(output,'source-inventory.json'),before,secrets);
+  stage='current-source-inventory';const before=await readRecoveryInventory(sourceQuery,{profile});assertCurrentInventory(before,window.source_marker);save(path.join(output,'source-inventory.json'),before,secrets);
   stage='current-native-dump';await sourceQuery('SELECT 1 lock_checkpoint');const dumpStarted=Date.now(),dump=client(['pg_dump','--format=custom','--schema=public','--no-owner','--lock-wait-timeout=5000'],undefined,maxDump);
   await sourceQuery('SELECT 1 lock_checkpoint');need(dump.length>5&&dump.subarray(0,5).toString()==='PGDMP'&&!secrets.some(s=>s&&dump.includes(Buffer.from(s))),'invalid-or-unsafe-native-dump');
   fs.writeFileSync(path.join(output,'current-public-schema.dump'),dump,{flag:'wx',mode:0o600});receipt.dump={bytes:dump.length,sha256:sha(dump),duration_ms:Date.now()-dumpStarted,owner_registry_included:true,acl_included:true};save(receiptFile,receipt,secrets);
@@ -406,15 +414,14 @@ export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,
   stage='restored-target-inventory';const targetQuery=queryJSON(sql=>targetExec(['psql','-X','-Atq','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1','-v','VERBOSITY=sqlstate'],'SET ROLE neondb_owner; '+sql),secrets),restored=await readRecoveryInventory(targetQuery,{profile});
   stage='final-source-inventory';const after=await readRecoveryInventory(sourceQuery,{profile});assertCurrentInventory(after,window.source_marker);assertRestoredInventory(before,restored,after);
   stage='final-hosting-and-registry';receipt.hosting_end=await verifyRecoveryHosting(window,api,fetcher);
-  const finalReservation=await loadRecoveryReservation(window,api);
-  validateRecoveryWindow(window,finalReservation.claim,{head:env.GITHUB_SHA,toolSHA,phase:'end',...finalReservation});
+  await authenticateRecoveryWindow({env,fetcher,phase:'end',forwardOperationSHA,expectedWindowSHA:windowSHA});
   save(path.join(output,'restored-inventory.json'),restored,secrets);save(path.join(output,'after-inventory.json'),after,secrets);receipt.status='verified';receipt.collections=before.collections;receipt.owner_registry_sha256=before.owner_registry_sha256;receipt.catalog_sha256=before.catalog_sha256;receipt.owner_registry_private=true;if(before.compact_storage)receipt.compact_storage={profile,public_sha256:before.compact_storage.catalog.public_sha256,private_sha256:before.compact_storage.catalog.private_sha256,physical:before.compact_storage.physical,sequences:before.compact_storage.sequences};
  }catch(error){receipt.status='failed';receipt.failure_stage=stage;receipt.native_error_code=/^[a-z0-9-]{1,100}$/.test(error?.message??'')?error.message:'native-command-failed';receipt.error_code='bounded-current-recovery-'+stage+'-failed';}
  finally{
   if(lock){try{lock.close();await releaseProbe();receipt.source_lock_cleanup='database-lock-absence-and-reader-removal-confirmed';}catch{receipt.status='failed';receipt.source_lock_cleanup='unconfirmed';}}
   for(const reader of readers){try{removeOwnedContainer(reader);}catch{receipt.status='failed';(receipt.retained_source_readers??=[]).push(reader);}}
   if(target){try{receipt.isolated_target_filesystem_after_readback=isolatedFilesystemUsage(native(['exec',target,'df','-Pk','/var/lib/postgresql']).toString());}catch{}try{removeOwnedContainer(target);receipt.isolated_target_cleanup='removed-and-absence-confirmed';}catch{receipt.status='failed';receipt.isolated_target_cleanup='failed';receipt.retained_target_name=target;}}
-  receipt.duration_ms=Date.now()-started;receipt.completed_at_utc=new Date().toISOString();receipt.limitations=['Logical public-schema recovery; not verified provider-managed backup or server-global recovery.','Source role passwords, managed role memberships, provider secrets and private runtime bindings are excluded; restore through unchanged provider/Sites setup and documented private credential handoff.','Isolated roles are NOLOGIN, with inert cloud_admin/neon_superuser placeholders and isolated neondb database; original owner/database/default ACL statements are restored as the isolated superuser; table owners/ACLs and effective table privileges are compared. Membership rows use a bounded native ordered row-digest inventory; original raw bytes are retained in the dump, not duplicated as an unbounded client JSON array. Public sequence/function owner ACLs and default/database ACLs are compared; compact dictionary sequence values, private DDL/ACLs and physical rows are compared under their exact profile. Server globals and provider role credentials remain excluded.','Historical Site read-only/drain attestation is authenticated by queue author/dispatch actor; Actions does not independently access private Site. Cloudflare windows additionally verify the actual public marker/mutation guards and retained successful delivery/result registry at start and end. Worker IDs are cooperative identities, not separate security principals.','Registered object bytes are the separate414-object proof from PR711; no R2 objects are written.','Publisher must settle maintenance and prove restored writes separately; this tool never changes hosting/read-only state.','Artifacts/local copies have limited retention; preserve original dump/rows and receipts before expiry.'];save(receiptFile,receipt,secrets);
+  receipt.duration_ms=Date.now()-started;receipt.completed_at_utc=new Date().toISOString();receipt.limitations=['Logical public-schema recovery; not verified provider-managed backup or server-global recovery.','Source role passwords, managed role memberships, provider secrets and private runtime bindings are excluded; restore through unchanged provider/Sites setup and documented private credential handoff.','Isolated roles are NOLOGIN, with inert cloud_admin/neon_superuser placeholders and isolated neondb database; original owner/database/default ACL statements are restored as the isolated superuser; table owners/ACLs and effective table privileges are compared. Membership rows use a bounded native ordered row-digest inventory; original raw bytes are retained in the dump, not duplicated as an unbounded client JSON array. Public sequence/function owner ACLs and default/database ACLs are compared; compact dictionary sequence values, private DDL/ACLs and physical rows are compared under their exact profile. Server globals and provider role credentials remain excluded.','Historical Site read-only/drain attestation is authenticated by queue author/dispatch actor; Actions does not independently access private Site. Cloudflare windows additionally verify the actual public marker/mutation guards and retained successful delivery/result registry at start and end. Worker IDs are cooperative identities, not separate security principals.','Registered object bytes are the separate414-object proof from PR711; no R2 objects are written.','Publisher must settle maintenance and prove restored writes separately; this tool never changes hosting/read-only state.','Artifacts/local copies have limited retention; preserve the original native dump and receipts before expiry.'];save(receiptFile,receipt,secrets);
  }
  return receipt;
 }

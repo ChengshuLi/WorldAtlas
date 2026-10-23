@@ -1,0 +1,355 @@
+{
+  "version": 1,
+  "kind": "swz-original-package-prior-credit-and-ownership-reconciliation",
+  "as_of_public_main": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+  "package_id": "gb-SWZ-ADM2--repair-evaluation",
+  "original_scope": {
+    "queue_blob": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "original_cells": 14,
+    "land_cells": 14,
+    "interval_segments": 14,
+    "owners": [
+      40983,
+      40984,
+      40991,
+      41002,
+      41003,
+      41011,
+      41016,
+      41017
+    ],
+    "source_features": [
+      56921,
+      56922,
+      56923,
+      56924,
+      56927,
+      56933,
+      56935,
+      56940,
+      56950,
+      56955,
+      56975,
+      56977
+    ],
+    "keys_y_x": [
+      [
+        150666,
+        154238
+      ],
+      [
+        150701,
+        153734
+      ],
+      [
+        150714,
+        153728
+      ],
+      [
+        150748,
+        154451
+      ],
+      [
+        150784,
+        154456
+      ],
+      [
+        150820,
+        154461
+      ],
+      [
+        151365,
+        154464
+      ],
+      [
+        151385,
+        153585
+      ],
+      [
+        151386,
+        153529
+      ],
+      [
+        151698,
+        153813
+      ],
+      [
+        151708,
+        153840
+      ],
+      [
+        151711,
+        153848
+      ],
+      [
+        151721,
+        153875
+      ],
+      [
+        151731,
+        153902
+      ]
+    ],
+    "key_derivation": "Expanded the 14 source-candidate singleton runs in blocks 036/037 where candidate owner index intersects the exact queued package owner set and a source feature intersects the exact queued contact set; exactly 14 distinct keys result, matching the original queue count. This identifies queue contacts only, not all competitors or source fitness.",
+    "input_blocks": [
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-036.json.gz",
+        "blob": "5f936f6e18a5e4c7b6a398c0990dee045d1cc0a3",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-036.json.gz",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/5f936f6e18a5e4c7b6a398c0990dee045d1cc0a3"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-037.json.gz",
+        "blob": "158db3a4ae8076def67a7aa289c20e57e6c3a5b1",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-037.json.gz",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/158db3a4ae8076def67a7aa289c20e57e6c3a5b1"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-036.json.gz",
+        "blob": "7369c93e48d3b67a394d27e5a857612ae1e3d7e2",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-036.json.gz",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/7369c93e48d3b67a394d27e5a857612ae1e3d7e2"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-037.json.gz",
+        "blob": "1acfb0bcbd519f8781e2ad6196d1c8ba2e7dac29",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-037.json.gz",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/1acfb0bcbd519f8781e2ad6196d1c8ba2e7dac29"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-036.json.gz",
+        "blob": "95890a0fc5a9cb9fb6bbd8f48425a8887b043a6e",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-036.json.gz",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/95890a0fc5a9cb9fb6bbd8f48425a8887b043a6e"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-037.json.gz",
+        "blob": "150081fec15e4da19c8259327209fec2c2a1d110",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-037.json.gz",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/150081fec15e4da19c8259327209fec2c2a1d110"
+      }
+    ],
+    "queue_url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json"
+  },
+  "named_acceptance_lineage": {
+    "active_roster": {
+      "path": "coordination/engineering/cri-eri-phl-original-exceptions-20261018/active50-roster.json",
+      "blob_at_prior_inventory": "4d061e144db89a4fac016944d093e82fc244c21b",
+      "package_present": false
+    },
+    "completed_unfinished_named_ledger": {
+      "path": "coordination/engineering/poland-original-repair-20261017/source-review/current-named-package-ledger.json",
+      "blob": "cdcfb584a6b5a65e3aaef8d8b8c13cd730ad9a4a",
+      "accepted_main": "282d14b4682f738fed6a0e6f3ee0d0e4b775d611",
+      "completed_count": 28,
+      "unfinished_count": 18,
+      "package_in_completed": false,
+      "package_in_unfinished": false,
+      "scope_limit": "Named package activation/completion lineage, not a complete per-key ledger for all 660 queue entries."
+    },
+    "later_public_record": "Issue #1202 comment 6273601439 is a publication-only MCO37/ZWE121 handoff: explicitly no positive repair or accepted credit; no SWZ. Issue #1202 comment 6246102397 says PR #2477 merge alone is not accepted repair credit and hosted gates remained pending.",
+    "targeted_pr_search": {
+      "queries": [
+        "Eswatini",
+        "SWZ",
+        "SWZ-ADM2",
+        "gb-SWZ-ADM2--repair-evaluation"
+      ],
+      "results_relevant_to_SWZ": [
+        "#965 Southern Africa source research, explicit handoff to #964; no geography/import authorization",
+        "#1240 original source custody",
+        "#1253 and #1280 broad source comparisons"
+      ],
+      "repair_evaluation_pr_found": false
+    },
+    "public_links": {
+      "current_active_roster": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/cri-eri-phl-original-exceptions-20261018/active50-roster.json",
+      "historical_completed_unfinished_ledger": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/poland-original-repair-20261017/source-review/current-named-package-ledger.json",
+      "source_issue_964": "https://github.com/ChengshuLi/WorldAtlas/issues/964",
+      "source_handoff_pr_965": "https://github.com/ChengshuLi/WorldAtlas/pull/965",
+      "issue_1202_publication_context": "https://github.com/ChengshuLi/WorldAtlas/issues/1202#issuecomment-6273601439",
+      "issue_1202_cohort_acceptance_caution": "https://github.com/ChengshuLi/WorldAtlas/issues/1202#issuecomment-6246102397"
+    },
+    "later_public_record_links": [
+      "https://github.com/ChengshuLi/WorldAtlas/issues/1202#issuecomment-6273601439",
+      "https://github.com/ChengshuLi/WorldAtlas/issues/1202#issuecomment-6246102397",
+      "https://github.com/ChengshuLi/WorldAtlas/pull/965",
+      "https://github.com/ChengshuLi/WorldAtlas/issues/964"
+    ]
+  },
+  "exact_exception_record_scan": {
+    "method": "Expanded the 14 exact original (y,x) keys and intersected them with each keyed exception_records/held_records/all_cases array in the 11 named exception partitions, four current held partitions, explicit 3-case disposition partition, plus the retained compressed Africa held partition.",
+    "record_count": 2147,
+    "exact_key_intersection_count": 0,
+    "partition_blobs": [
+      {
+        "name": "civ",
+        "path": "coordination/engineering/civ-tun-gtm-original-exceptions-20261018/civ-original-partition.json",
+        "blob": "7c4f80f5aca2f65f726234b17188361556e60686",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/civ-tun-gtm-original-exceptions-20261018/civ-original-partition.json",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/7c4f80f5aca2f65f726234b17188361556e60686"
+      },
+      {
+        "name": "tun",
+        "path": "coordination/engineering/civ-tun-gtm-original-exceptions-20261018/tun-original-partition.json",
+        "blob": "705a7e145d04829888eacf5bd4bc6a7e495f0c7e",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/civ-tun-gtm-original-exceptions-20261018/tun-original-partition.json",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/705a7e145d04829888eacf5bd4bc6a7e495f0c7e"
+      },
+      {
+        "name": "gtm",
+        "path": "coordination/engineering/civ-tun-gtm-original-exceptions-20261018/gtm-original-partition.json",
+        "blob": "21c64b2940a3efa3323a5d64b9f8cf962c404c34",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/civ-tun-gtm-original-exceptions-20261018/gtm-original-partition.json",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/21c64b2940a3efa3323a5d64b9f8cf962c404c34"
+      },
+      {
+        "name": "cri",
+        "path": "coordination/engineering/cri-eri-phl-original-exceptions-20261018/cri-original-partition.json",
+        "blob": "3a42bbccdb068c48016c29b16d56ff4f63b78bea",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/cri-eri-phl-original-exceptions-20261018/cri-original-partition.json",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/3a42bbccdb068c48016c29b16d56ff4f63b78bea"
+      },
+      {
+        "name": "eri",
+        "path": "coordination/engineering/cri-eri-phl-original-exceptions-20261018/eri-original-partition.json",
+        "blob": "da097dfb7a72212537a4566fda862e877824ffc6",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/cri-eri-phl-original-exceptions-20261018/eri-original-partition.json",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/da097dfb7a72212537a4566fda862e877824ffc6"
+      },
+      {
+        "name": "phl",
+        "path": "coordination/engineering/cri-eri-phl-original-exceptions-20261018/phl-original-partition.json",
+        "blob": "0659720e192c13c31ddd2b76b2774552e272fb83",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/cri-eri-phl-original-exceptions-20261018/phl-original-partition.json",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/0659720e192c13c31ddd2b76b2774552e272fb83"
+      },
+      {
+        "name": "swe",
+        "path": "coordination/engineering/sweden-el-salvador-original-exceptions-20261018/swe-original-partition.json",
+        "blob": "173f5a5785e9131792d8edcd6e1fa77e6b6f288b",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/sweden-el-salvador-original-exceptions-20261018/swe-original-partition.json",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/173f5a5785e9131792d8edcd6e1fa77e6b6f288b"
+      },
+      {
+        "name": "slv",
+        "path": "coordination/engineering/sweden-el-salvador-original-exceptions-20261018/slv-original-partition.json",
+        "blob": "92e036bb7eb5fab7d23cbed7b0a00d042f9469d3",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/sweden-el-salvador-original-exceptions-20261018/slv-original-partition.json",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/92e036bb7eb5fab7d23cbed7b0a00d042f9469d3"
+      },
+      {
+        "name": "zaf",
+        "path": "coordination/engineering/zaf-pol-original-exceptions-20261018/zaf-original-partition.json",
+        "blob": "11d47a4cf4c6d76fae600e7ac0a13a1a23e8cb52",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/zaf-pol-original-exceptions-20261018/zaf-original-partition.json",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/11d47a4cf4c6d76fae600e7ac0a13a1a23e8cb52"
+      },
+      {
+        "name": "pol",
+        "path": "coordination/engineering/zaf-pol-original-exceptions-20261018/pol-original-partition.json",
+        "blob": "7e73c93098ac7f1142eacb5783ca82cf378a2a45",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/zaf-pol-original-exceptions-20261018/pol-original-partition.json",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/7e73c93098ac7f1142eacb5783ca82cf378a2a45"
+      },
+      {
+        "name": "svk",
+        "path": "coordination/engineering/slovakia-original-exceptions-20261018/svk-original-partition.json",
+        "blob": "95f2df4ae273f4ba0c97fc93088bd0e44b990281",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/slovakia-original-exceptions-20261018/svk-original-partition.json",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/95f2df4ae273f4ba0c97fc93088bd0e44b990281"
+      },
+      {
+        "name": "can",
+        "path": "coordination/engineering/four-original-exceptions-20261018/can-original-partition.json",
+        "blob": "ee61ce77c7d17483684c37cd24892ff9fcd01da9",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/four-original-exceptions-20261018/can-original-partition.json",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/ee61ce77c7d17483684c37cd24892ff9fcd01da9"
+      },
+      {
+        "name": "cze",
+        "path": "coordination/engineering/four-original-exceptions-20261018/cze-original-partition.json",
+        "blob": "ff2ba535dece81a548b49dc88e0f17fd8721ccc7",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/four-original-exceptions-20261018/cze-original-partition.json",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/ff2ba535dece81a548b49dc88e0f17fd8721ccc7"
+      },
+      {
+        "name": "ecu",
+        "path": "coordination/engineering/four-original-exceptions-20261018/ecu-original-partition.json",
+        "blob": "c2f91506ae9d34a4665f567093c43d9f87fa16ca",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/four-original-exceptions-20261018/ecu-original-partition.json",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/c2f91506ae9d34a4665f567093c43d9f87fa16ca"
+      },
+      {
+        "name": "mex",
+        "path": "coordination/engineering/four-original-exceptions-20261018/mex-original-partition.json",
+        "blob": "b94c06fb496d7434a8ec05d760e6d8e4fdd5a9ea",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/four-original-exceptions-20261018/mex-original-partition.json",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/b94c06fb496d7434a8ec05d760e6d8e4fdd5a9ea"
+      },
+      {
+        "name": "held_lbr_egy",
+        "path": "coordination/engineering/original-held-cell-exceptions-20261018/disposition-partition.json",
+        "blob": "37cd3d2a8fbddec85605f7e22a51a9f69828bcbe",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/original-held-cell-exceptions-20261018/disposition-partition.json",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/37cd3d2a8fbddec85605f7e22a51a9f69828bcbe"
+      },
+      {
+        "name": "africa_ken_moz_tza_gzip",
+        "path": "coordination/engineering/africa-held-original-exceptions-20261018/original-partition.json.gz",
+        "blob": "2c2dbd50086f63f737a07d5dc64db23c3de3da2e",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/africa-held-original-exceptions-20261018/original-partition.json.gz",
+        "blob_api_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/2c2dbd50086f63f737a07d5dc64db23c3de3da2e"
+      }
+    ],
+    "scope_limit": "This establishes zero intersection with the retained public named and held exception records listed here, not a private/global cell-by-cell audit across all 660 packages.",
+    "africa_partition_result": {
+      "records": 914,
+      "blob": "2c2dbd50086f63f737a07d5dc64db23c3de3da2e",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2e83fd74fe09794b0b4be1329cdeb10f27b1952d/coordination/engineering/africa-held-original-exceptions-20261018/original-partition.json.gz",
+      "packages": [
+        "gb-KEN-ADM2--repair-evaluation",
+        "gb-MOZ-ADM2--repair-evaluation",
+        "gb-TZA-ADM2--repair-evaluation"
+      ],
+      "intersection_count": 0
+    }
+  },
+  "current_selected_owner_observation": {
+    "path": "swz-selected-owner-observation.json.gz",
+    "commit": "2e83fd74fe09794b0b4be1329cdeb10f27b1952d",
+    "query_sha256": "3c3a964f4cf25f972b2fe4b911e1101c023c5653d45840b53c6865ae74c423b9",
+    "original_intervals_sha256": "cb77d25749144f3b1c7e2b7ec26bd7d31d0e4f7dfdcdf55e1dd15e95710fbfb0",
+    "independent_exact_key_check": {
+      "expected": 14,
+      "observed": 14,
+      "unique": 14,
+      "same_order": true,
+      "missing": 0,
+      "extra": 0,
+      "recomputed_query_sha_matches": true
+    },
+    "selected_owner_counts": {
+      "base_owner_nonzero": 0,
+      "accepted_additive_owner_nonzero": 0,
+      "effective_selected_owner_nonzero": 0,
+      "existing_product_overlap_true": 0
+    },
+    "scientific_qualification": false,
+    "interpretation_limit": "This is current literal selected-owner state only; it does not prove prior accepted disposition."
+  },
+  "reconciliation": {
+    "prior_named_disposition_credit": 0,
+    "prior_retained_exception_key_overlap": 0,
+    "current_selected_assigned_keys": 0,
+    "residual_keys_after_checked_prior_records_and_current_assignment": 14,
+    "qualification_or_repair_credit": 0,
+    "basis": "Package absent from active50 and 28-completed/18-unfinished named ledger; no exact package repair PR found; 2,147 retained public exception/held records had zero exact (y,x) intersection; independent exact-key readback of the single stock owner observation shows 14/14 keys and all selected owner fields zero.",
+    "limits": [
+      "Not a global 660-package per-key audit; named ledger and retained exception record coverage are bounded to the public evidence cited above.",
+      "#964/#965 source and semantic work is distinct from this 14-cell repair scope and does not qualify or accept repair credit.",
+      "Preserve EBC copyright restriction: #964 explicitly prohibits tracing or redistributing the 2017 EBC map without permission. No EBC raw material was acquired or inspected.",
+      "No source applicability, physical interpretation, competitor fitness, rights qualification, repair, or documented-exception qualification is inferred by this ownership/prior-credit reconciliation."
+    ]
+  }
+}

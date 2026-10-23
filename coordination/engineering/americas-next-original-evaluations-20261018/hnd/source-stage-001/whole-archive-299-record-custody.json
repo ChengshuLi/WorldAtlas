@@ -1,0 +1,4853 @@
+{
+  "archive_path": "americas-20261017/honduras-worker-001/upstream-source-HND_ADM2.zip",
+  "archive_bytes": 23978016,
+  "archive_sha256": "4ceffd3844e8e425159c63b3fb2baf2dfc280b73a173f632caff674f9b39bb13",
+  "members": [
+    {
+      "name": "HND_ADM2.dbf",
+      "bytes": 18336,
+      "sha256": "f57dea2943b910b384c22c0633a6172cedfd061c825b81d23a22c20c18630c11"
+    },
+    {
+      "name": "HND_ADM2.prj",
+      "bytes": 143,
+      "sha256": "98aaf3d1c0ecadf1a424a4536de261c3daf4e373697cb86c40c43b989daf52eb"
+    },
+    {
+      "name": "HND_ADM2.qpj",
+      "bytes": 257,
+      "sha256": "1de411dcdeedce3219242306fc29bfa1d7fa08883e4ff6779baf798ec50d1657"
+    },
+    {
+      "name": "HND_ADM2.shp",
+      "bytes": 32768384,
+      "sha256": "a77b304a073bd1e2f866648a01da25eeeaf46f5f33ffea3799d1bb24e7401ae8"
+    },
+    {
+      "name": "HND_ADM2.shx",
+      "bytes": 2492,
+      "sha256": "0fe8d7e6ba578db42771a8738786b727601bac90a49f5691361b284b9586042a"
+    },
+    {
+      "name": "license.png",
+      "bytes": 87792,
+      "sha256": "7e75906d563e4773bc1170f43a70ab82f011b669869d9120b18f3af350cf0487"
+    },
+    {
+      "name": "meta.txt",
+      "bytes": 596,
+      "sha256": "5f30a6f2505bffdc7744158afb0cc73be7fb250a6be705a54b239609e7271daf"
+    }
+  ],
+  "source_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.017453292519943295]]",
+  "source_qpj": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]]\n",
+  "source_meta": "Boundary Representative of Year: 2019\r\nISO-3166-1 (Alpha-3): HND\r\nBoundary Type: ADM2\r\nCanonical Boundary Type Name: Municipalities\r\nSource 1: ICF - Instituto Nacional de Conservaci\u00f3n y Desarrollo Forestal, \u00c1reas Protegidas y Vida Silvestre\r\nSource 2: Gobierno de la Rep\u00fablica de Honduras\r\nRelease Type: gbOpen\r\nLicense: Creative Commons Attribution 4.0 International (CC BY 4.0)\r\nLicense Notes: \r\nLicense Source: https://creativecommons.org/licenses/by/4.0/\r\nLink to Source Data: https://datos.gob.hn/en/dataset/limites-municipales/resource/0a086bb7-1e3e-4cb0-b7d8-e21a8417dc5f\r\nOther Notes: ",
+  "shapefile_header_shape_type": 5,
+  "complete_archive_records": 299,
+  "complete_released_features": 298,
+  "archive_records": [
+    {
+      "archive_record_ordinal": 0,
+      "dbf_attributes": {
+        "record_ordinal": 0,
+        "deleted": false,
+        "Name": "Lago de Yojoa",
+        "Name_raw_hex": "4c61676f20646520596f6a6f6120202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 1,
+      "shp_offset_bytes": 100,
+      "shp_content_bytes": 109784,
+      "shp_record_sha256": "114dd185a690516bc1de55201ebe8c4b6bb2f55a437543f08089509f1a73c70e",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 1,
+      "dbf_attributes": {
+        "record_ordinal": 1,
+        "deleted": false,
+        "Name": "La Ceiba",
+        "Name_raw_hex": "4c61204365696261202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 2,
+      "shp_offset_bytes": 109892,
+      "shp_content_bytes": 104272,
+      "shp_record_sha256": "a89232ddad9a49b0dc23f874ea63209b4882591727e3cfafffea7f72b71315f6",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 2,
+      "dbf_attributes": {
+        "record_ordinal": 2,
+        "deleted": false,
+        "Name": "Esparta",
+        "Name_raw_hex": "4573706172746120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 3,
+      "shp_offset_bytes": 214172,
+      "shp_content_bytes": 327024,
+      "shp_record_sha256": "096cb63ece9656f921dfc042d6cc0f795eeb65cb381a5fcb33be60c82fa27079",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 3,
+      "dbf_attributes": {
+        "record_ordinal": 3,
+        "deleted": false,
+        "Name": "Jutiapa",
+        "Name_raw_hex": "4a75746961706120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 4,
+      "shp_offset_bytes": 541204,
+      "shp_content_bytes": 66336,
+      "shp_record_sha256": "4217afe7f9b6f11de39a9b097bbc03f39df220bae11f2d4745b599178f2e1aad",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 4,
+      "dbf_attributes": {
+        "record_ordinal": 4,
+        "deleted": false,
+        "Name": "La Masica",
+        "Name_raw_hex": "4c61204d61736963612020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 5,
+      "shp_offset_bytes": 607548,
+      "shp_content_bytes": 255168,
+      "shp_record_sha256": "69637c8655057f714ca13fa79f773f82f7c5cc234f737b4e3ac607a9c12b027b",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 5,
+      "dbf_attributes": {
+        "record_ordinal": 5,
+        "deleted": false,
+        "Name": "San Francisco",
+        "Name_raw_hex": "53616e204672616e636973636f20202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 6,
+      "shp_offset_bytes": 862724,
+      "shp_content_bytes": 173616,
+      "shp_record_sha256": "4f859f147c60d9816c8ffcb362e14a73b091aac84dba08ee7a25ff45b457bdb4",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 6,
+      "dbf_attributes": {
+        "record_ordinal": 6,
+        "deleted": false,
+        "Name": "Tela",
+        "Name_raw_hex": "54656c6120202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 7,
+      "shp_offset_bytes": 1036348,
+      "shp_content_bytes": 478720,
+      "shp_record_sha256": "d64222d947193d0c4dfc8ec7b628f5e93dd7b7359d223d613a4bebc6ecdd6ecc",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 7,
+      "dbf_attributes": {
+        "record_ordinal": 7,
+        "deleted": false,
+        "Name": "Arizona",
+        "Name_raw_hex": "4172697a6f6e6120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 8,
+      "shp_offset_bytes": 1515076,
+      "shp_content_bytes": 300000,
+      "shp_record_sha256": "4a852a135d9f32c45b4e6b5108b978a07bc690d1bb6bfce9feae4b22461fb17b",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 8,
+      "dbf_attributes": {
+        "record_ordinal": 8,
+        "deleted": false,
+        "Name": "Trujillo",
+        "Name_raw_hex": "5472756a696c6c6f202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 9,
+      "shp_offset_bytes": 1815084,
+      "shp_content_bytes": 212704,
+      "shp_record_sha256": "566b9753579a7a07d3b93e1fcb4e3a5d883a73729b86cabca9e2b29270faaad4",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 9,
+      "dbf_attributes": {
+        "record_ordinal": 9,
+        "deleted": false,
+        "Name": "Balfate",
+        "Name_raw_hex": "42616c6661746520202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 10,
+      "shp_offset_bytes": 2027796,
+      "shp_content_bytes": 88112,
+      "shp_record_sha256": "29b3f73d08e1cdb5a1eadb50fbeea981ce8b82ef5c1f59e7897fb61e40c9e58e",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 10,
+      "dbf_attributes": {
+        "record_ordinal": 10,
+        "deleted": false,
+        "Name": "Iriona",
+        "Name_raw_hex": "4972696f6e612020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 11,
+      "shp_offset_bytes": 2115916,
+      "shp_content_bytes": 76512,
+      "shp_record_sha256": "fa647bc2575e76ad7ee72a7ff440d72b60913e90c1d261af790e698a1158150d",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 11,
+      "dbf_attributes": {
+        "record_ordinal": 11,
+        "deleted": false,
+        "Name": "Limon",
+        "Name_raw_hex": "4c696d6f6e202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 12,
+      "shp_offset_bytes": 2192436,
+      "shp_content_bytes": 123296,
+      "shp_record_sha256": "d9f994e92b5f03d6e5f31a8996acaa509771a9962c1a25b15e02a9eb632284c5",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 12,
+      "dbf_attributes": {
+        "record_ordinal": 12,
+        "deleted": false,
+        "Name": "Saba",
+        "Name_raw_hex": "5361626120202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 13,
+      "shp_offset_bytes": 2315740,
+      "shp_content_bytes": 157616,
+      "shp_record_sha256": "1fa389549fa257cb382365534a9bb973c4138410d2c71fe3dd07490a4c700741",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 13,
+      "dbf_attributes": {
+        "record_ordinal": 13,
+        "deleted": false,
+        "Name": "Santa Fe",
+        "Name_raw_hex": "53616e7461204665202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 14,
+      "shp_offset_bytes": 2473364,
+      "shp_content_bytes": 54128,
+      "shp_record_sha256": "e1a257b3e38b467440c1daf95f8357d06bac05c5a5bb5a8377864e1e83978a70",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 14,
+      "dbf_attributes": {
+        "record_ordinal": 14,
+        "deleted": false,
+        "Name": "Santa Rosa de Aguan",
+        "Name_raw_hex": "53616e746120526f736120646520416775616e20202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 15,
+      "shp_offset_bytes": 2527500,
+      "shp_content_bytes": 60656,
+      "shp_record_sha256": "8f94c1e3f160f227bad5bf692824f4d88757fcf81695bf332b37890760ed816e",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 15,
+      "dbf_attributes": {
+        "record_ordinal": 15,
+        "deleted": false,
+        "Name": "Sonaguera",
+        "Name_raw_hex": "536f6e6167756572612020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 16,
+      "shp_offset_bytes": 2588164,
+      "shp_content_bytes": 97024,
+      "shp_record_sha256": "486c39ee01fe9ec7687db41f003ef1eb1481c233abb2b19fb97bc2df487ba307",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 16,
+      "dbf_attributes": {
+        "record_ordinal": 16,
+        "deleted": false,
+        "Name": "Tocoa",
+        "Name_raw_hex": "546f636f61202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 17,
+      "shp_offset_bytes": 2685196,
+      "shp_content_bytes": 192400,
+      "shp_record_sha256": "f5ff93ac8e984739c6edfaba2927c2806a889e5879df6c2e376e5c4bf45b6456",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 17,
+      "dbf_attributes": {
+        "record_ordinal": 17,
+        "deleted": false,
+        "Name": "Bonito Oriental",
+        "Name_raw_hex": "426f6e69746f204f7269656e74616c2020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 18,
+      "shp_offset_bytes": 2877604,
+      "shp_content_bytes": 190160,
+      "shp_record_sha256": "18ae9c41ca98ebabb91daa7ddd26771cd4473abdaa242ba3b33a0c72b49dcf87",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 18,
+      "dbf_attributes": {
+        "record_ordinal": 18,
+        "deleted": false,
+        "Name": "Comayagua",
+        "Name_raw_hex": "436f6d6179616775612020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 19,
+      "shp_offset_bytes": 3067772,
+      "shp_content_bytes": 234688,
+      "shp_record_sha256": "0a89c2909d9194f3eaddafdb674e948a32229feffd608711f3d144f33e365e29",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 19,
+      "dbf_attributes": {
+        "record_ordinal": 19,
+        "deleted": false,
+        "Name": "Ajuterique",
+        "Name_raw_hex": "416a757465726971756520202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 20,
+      "shp_offset_bytes": 3302468,
+      "shp_content_bytes": 26112,
+      "shp_record_sha256": "267446d37acc8bbe7bd5150abd0114fd4568b34a2ea255e415f59922f0f64575",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 20,
+      "dbf_attributes": {
+        "record_ordinal": 20,
+        "deleted": false,
+        "Name": "El Rosario",
+        "Name_raw_hex": "456c20526f736172696f20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 21,
+      "shp_offset_bytes": 3328588,
+      "shp_content_bytes": 210544,
+      "shp_record_sha256": "441966a792cb703cc76ccdf5cc01034b961d793e9d651c0918f6c41dcfb473a3",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 21,
+      "dbf_attributes": {
+        "record_ordinal": 21,
+        "deleted": false,
+        "Name": "Esquias",
+        "Name_raw_hex": "4573717569617320202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 22,
+      "shp_offset_bytes": 3539140,
+      "shp_content_bytes": 182976,
+      "shp_record_sha256": "2c9d8c863f53221c72ca25011434b2eacb0acfe90fa7c0bdab2471a74e9980e2",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 22,
+      "dbf_attributes": {
+        "record_ordinal": 22,
+        "deleted": false,
+        "Name": "Humuya",
+        "Name_raw_hex": "48756d7579612020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 23,
+      "shp_offset_bytes": 3722124,
+      "shp_content_bytes": 111616,
+      "shp_record_sha256": "7ad18a523b1dc5c817538bfcb8b4e16280013c65632a22879a065eeb9a3b21f0",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 23,
+      "dbf_attributes": {
+        "record_ordinal": 23,
+        "deleted": false,
+        "Name": "La Libertad",
+        "Name_raw_hex": "4c61204c69626572746164202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 24,
+      "shp_offset_bytes": 3833748,
+      "shp_content_bytes": 121632,
+      "shp_record_sha256": "96b830b3191049092055dbfb773437f4c480a859b5cddc0fe3ecdebceb1299b7",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 24,
+      "dbf_attributes": {
+        "record_ordinal": 24,
+        "deleted": false,
+        "Name": "Lamani",
+        "Name_raw_hex": "4c616d616e692020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 25,
+      "shp_offset_bytes": 3955388,
+      "shp_content_bytes": 96160,
+      "shp_record_sha256": "2648823d6373c2c27ee5b382eb1342aa2b447ee1b149e17ac42553fba678091b",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 25,
+      "dbf_attributes": {
+        "record_ordinal": 25,
+        "deleted": false,
+        "Name": "La Trinidad",
+        "Name_raw_hex": "4c61205472696e69646164202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 26,
+      "shp_offset_bytes": 4051556,
+      "shp_content_bytes": 63232,
+      "shp_record_sha256": "70f7880fec49c1acd69b4f1e33c870c873d01d8838ae82e9c0faa7a16f1a5bfb",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 26,
+      "dbf_attributes": {
+        "record_ordinal": 26,
+        "deleted": false,
+        "Name": "Lejamani",
+        "Name_raw_hex": "4c656a616d616e69202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 27,
+      "shp_offset_bytes": 4114796,
+      "shp_content_bytes": 7296,
+      "shp_record_sha256": "c1c4673207418de4eb9c4f506eca57707d3fe0ca1fde8bef43b8640a26867cc2",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 27,
+      "dbf_attributes": {
+        "record_ordinal": 27,
+        "deleted": false,
+        "Name": "Meambar",
+        "Name_raw_hex": "4d65616d62617220202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 28,
+      "shp_offset_bytes": 4122100,
+      "shp_content_bytes": 110256,
+      "shp_record_sha256": "ef9717d86485e81a687a35a04f65fa5a88d7826413068dd50f9bb9728f2111b1",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 28,
+      "dbf_attributes": {
+        "record_ordinal": 28,
+        "deleted": false,
+        "Name": "Minas de Oro",
+        "Name_raw_hex": "4d696e6173206465204f726f2020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 29,
+      "shp_offset_bytes": 4232364,
+      "shp_content_bytes": 151664,
+      "shp_record_sha256": "fef7e9c900201d602f434d6d011bdffd0489b477d34c6a88fe271b50f8392788",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 29,
+      "dbf_attributes": {
+        "record_ordinal": 29,
+        "deleted": false,
+        "Name": "Ojos de Agua",
+        "Name_raw_hex": "4f6a6f7320646520416775612020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 30,
+      "shp_offset_bytes": 4384036,
+      "shp_content_bytes": 59904,
+      "shp_record_sha256": "b60392bd11a7959a4c2f2a3d763d979326a1423f55f3c73a0903c11359b79901",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 30,
+      "dbf_attributes": {
+        "record_ordinal": 30,
+        "deleted": false,
+        "Name": "San Jer\u00f3nimo",
+        "Name_raw_hex": "53616e204a6572f36e696d6f2020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 31,
+      "shp_offset_bytes": 4443948,
+      "shp_content_bytes": 134800,
+      "shp_record_sha256": "958677d298d84f8fc779c56e77b601721312d4f9c89e3eca600fd62bd039aa33",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 31,
+      "dbf_attributes": {
+        "record_ordinal": 31,
+        "deleted": false,
+        "Name": "San Jose de Comayagua",
+        "Name_raw_hex": "53616e204a6f736520646520436f6d6179616775612020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 32,
+      "shp_offset_bytes": 4578756,
+      "shp_content_bytes": 25696,
+      "shp_record_sha256": "60a577c9620bff52e5dca631dd0e8c54e83a9399892b0fafd58c700343e53479",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 32,
+      "dbf_attributes": {
+        "record_ordinal": 32,
+        "deleted": false,
+        "Name": "San Jose del Potrero",
+        "Name_raw_hex": "53616e204a6f73652064656c20506f747265726f202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 33,
+      "shp_offset_bytes": 4604460,
+      "shp_content_bytes": 120336,
+      "shp_record_sha256": "2333233248282b02b6a9765ea0f2ea0d820569574a5680515b696d3ea5d56bb0",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 33,
+      "dbf_attributes": {
+        "record_ordinal": 33,
+        "deleted": false,
+        "Name": "San Luis",
+        "Name_raw_hex": "53616e204c756973202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 34,
+      "shp_offset_bytes": 4724804,
+      "shp_content_bytes": 9776,
+      "shp_record_sha256": "ee6d0562675e15f6a6957152f23390340702393536e9d5b78dd957e6f98f015a",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 34,
+      "dbf_attributes": {
+        "record_ordinal": 34,
+        "deleted": false,
+        "Name": "San Sebastian",
+        "Name_raw_hex": "53616e2053656261737469616e20202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 35,
+      "shp_offset_bytes": 4734588,
+      "shp_content_bytes": 77956,
+      "shp_record_sha256": "3b70447c42e0ca5f38be0a6d06568c52a61337e8a4783192272a33e7f2984076",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 35,
+      "dbf_attributes": {
+        "record_ordinal": 35,
+        "deleted": false,
+        "Name": "Siguatepeque",
+        "Name_raw_hex": "5369677561746570657175652020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 36,
+      "shp_offset_bytes": 4812552,
+      "shp_content_bytes": 111440,
+      "shp_record_sha256": "9174f8d159dd87d2ceab10afd13f9249e8847dc4504c49589358818b137a02fe",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 36,
+      "dbf_attributes": {
+        "record_ordinal": 36,
+        "deleted": false,
+        "Name": "Villa de San Antonio",
+        "Name_raw_hex": "56696c6c612064652053616e20416e746f6e696f202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 37,
+      "shp_offset_bytes": 4924000,
+      "shp_content_bytes": 149200,
+      "shp_record_sha256": "22b2f2705bc0ee2c9c34a0485dbb3a5a87fd706cfffc5d2a9602a8e3232f9ed7",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 37,
+      "dbf_attributes": {
+        "record_ordinal": 37,
+        "deleted": false,
+        "Name": "Las Lajas",
+        "Name_raw_hex": "4c6173204c616a61732020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 38,
+      "shp_offset_bytes": 5073208,
+      "shp_content_bytes": 26448,
+      "shp_record_sha256": "8e70a4ecb218169e69e336a1c6513512d29d6037c02ff379acc02cbfde46e74d",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 38,
+      "dbf_attributes": {
+        "record_ordinal": 38,
+        "deleted": false,
+        "Name": "Taulabe",
+        "Name_raw_hex": "5461756c61626520202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 39,
+      "shp_offset_bytes": 5099664,
+      "shp_content_bytes": 33920,
+      "shp_record_sha256": "b0736c59208edcf603ddbc9b35852e0f693b36fe505afaaaf32566fc89d6ad1a",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 39,
+      "dbf_attributes": {
+        "record_ordinal": 39,
+        "deleted": false,
+        "Name": "Santa Rosa de Copan",
+        "Name_raw_hex": "53616e746120526f736120646520436f70616e20202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 40,
+      "shp_offset_bytes": 5133592,
+      "shp_content_bytes": 190480,
+      "shp_record_sha256": "4193ad9c5a6c24099e28f0db1392ce46c529709ca9e838246d52f2faa47a6c69",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 40,
+      "dbf_attributes": {
+        "record_ordinal": 40,
+        "deleted": false,
+        "Name": "Cabana",
+        "Name_raw_hex": "436162616e612020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 41,
+      "shp_offset_bytes": 5324080,
+      "shp_content_bytes": 40256,
+      "shp_record_sha256": "3bb1ed1d9b562aead2da18599206aa243ee1008af5eda8fad5b0cf1bd20ed1d4",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 41,
+      "dbf_attributes": {
+        "record_ordinal": 41,
+        "deleted": false,
+        "Name": "Concepci\u00f3n",
+        "Name_raw_hex": "436f6e6365706369f36e20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 42,
+      "shp_offset_bytes": 5364344,
+      "shp_content_bytes": 65888,
+      "shp_record_sha256": "f903da67fe4edf22edf7d1a6632e103d689fcb92c8f28c2a43da1290d0200a78",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 42,
+      "dbf_attributes": {
+        "record_ordinal": 42,
+        "deleted": false,
+        "Name": "Copan Ruinas",
+        "Name_raw_hex": "436f70616e205275696e61732020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 43,
+      "shp_offset_bytes": 5430240,
+      "shp_content_bytes": 115456,
+      "shp_record_sha256": "3043e22d153bdf4bb8b8ac261cc5534d0f0897a6cad13cdfedba38195b9c1323",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 43,
+      "dbf_attributes": {
+        "record_ordinal": 43,
+        "deleted": false,
+        "Name": "Corquin",
+        "Name_raw_hex": "436f727175696e20202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 44,
+      "shp_offset_bytes": 5545704,
+      "shp_content_bytes": 64288,
+      "shp_record_sha256": "f6756dfb6c95777144c4f1828532ea21b5a70b21dee6fa7ad62a24cb63f27704",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 44,
+      "dbf_attributes": {
+        "record_ordinal": 44,
+        "deleted": false,
+        "Name": "Cucuyagua",
+        "Name_raw_hex": "4375637579616775612020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 45,
+      "shp_offset_bytes": 5610000,
+      "shp_content_bytes": 91856,
+      "shp_record_sha256": "49092066e68cd8a8bed71d524789924e1ca1254e7deed6772cd0eea5a8ede494",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 45,
+      "dbf_attributes": {
+        "record_ordinal": 45,
+        "deleted": false,
+        "Name": "Dolores",
+        "Name_raw_hex": "446f6c6f72657320202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 46,
+      "shp_offset_bytes": 5701864,
+      "shp_content_bytes": 47616,
+      "shp_record_sha256": "fa5f50136c952779c4d29a3f881dca88a6085d3cfb64a05f42ec605208736616",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 46,
+      "dbf_attributes": {
+        "record_ordinal": 46,
+        "deleted": false,
+        "Name": "Dulce Nombre",
+        "Name_raw_hex": "44756c6365204e6f6d6272652020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 47,
+      "shp_offset_bytes": 5749488,
+      "shp_content_bytes": 21936,
+      "shp_record_sha256": "722032145c04e7321380097f67b0313170f260a2f75b7617f4e88cf617e1c7c3",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 47,
+      "dbf_attributes": {
+        "record_ordinal": 47,
+        "deleted": false,
+        "Name": "El Paraiso",
+        "Name_raw_hex": "456c205061726169736f20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 48,
+      "shp_offset_bytes": 5771432,
+      "shp_content_bytes": 51856,
+      "shp_record_sha256": "001c1b58fcf9af4a2c6b7e55a5176e3b7fae1b06f158b1eadbb92e533de4a6ba",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 48,
+      "dbf_attributes": {
+        "record_ordinal": 48,
+        "deleted": false,
+        "Name": "Florida",
+        "Name_raw_hex": "466c6f7269646120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 49,
+      "shp_offset_bytes": 5823296,
+      "shp_content_bytes": 122720,
+      "shp_record_sha256": "b597d1b007475ba3f3ea9eef09dfdb4ec7eb8a3cd7c37abfb8361ff877805af1",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 49,
+      "dbf_attributes": {
+        "record_ordinal": 49,
+        "deleted": false,
+        "Name": "La Jigua",
+        "Name_raw_hex": "4c61204a69677561202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 50,
+      "shp_offset_bytes": 5946024,
+      "shp_content_bytes": 122320,
+      "shp_record_sha256": "7cff2a392a1ea34c13fcf6ce0968fe674ce58027001e9233aec27cdf3f2c96dd",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 50,
+      "dbf_attributes": {
+        "record_ordinal": 50,
+        "deleted": false,
+        "Name": "La Union",
+        "Name_raw_hex": "4c6120556e696f6e202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 51,
+      "shp_offset_bytes": 6068352,
+      "shp_content_bytes": 90624,
+      "shp_record_sha256": "3bfe1f864c971a745cd65c6dc7460464f656cf984b24451642c2e34807eaba5b",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 51,
+      "dbf_attributes": {
+        "record_ordinal": 51,
+        "deleted": false,
+        "Name": "Nueva Arcadia",
+        "Name_raw_hex": "4e75657661204172636164696120202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 52,
+      "shp_offset_bytes": 6158984,
+      "shp_content_bytes": 87600,
+      "shp_record_sha256": "18203c334a6fd9b331b32367d5643df3736e6762128efc009b4a8a8708665411",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 52,
+      "dbf_attributes": {
+        "record_ordinal": 52,
+        "deleted": false,
+        "Name": "San Agustin",
+        "Name_raw_hex": "53616e204167757374696e202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 53,
+      "shp_offset_bytes": 6246592,
+      "shp_content_bytes": 23456,
+      "shp_record_sha256": "46290bf9dd0096746e9662874ec19f8b7de3560df189920d3d77baa5da8e93a7",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 53,
+      "dbf_attributes": {
+        "record_ordinal": 53,
+        "deleted": false,
+        "Name": "San Antonio",
+        "Name_raw_hex": "53616e20416e746f6e696f202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 54,
+      "shp_offset_bytes": 6270056,
+      "shp_content_bytes": 30864,
+      "shp_record_sha256": "cb699a5bf7e018f495cde4ef9a6418e03107c5f949e4d49b1d45d1ad479d4157",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 54,
+      "dbf_attributes": {
+        "record_ordinal": 54,
+        "deleted": false,
+        "Name": "San Jeronimo",
+        "Name_raw_hex": "53616e204a65726f6e696d6f2020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 55,
+      "shp_offset_bytes": 6300928,
+      "shp_content_bytes": 81824,
+      "shp_record_sha256": "04b6c4558a2e1ae4b6ddb07f7e4b5be74771566fa87b479055063a5173c0e9aa",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 55,
+      "dbf_attributes": {
+        "record_ordinal": 55,
+        "deleted": false,
+        "Name": "San Jose",
+        "Name_raw_hex": "53616e204a6f7365202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 56,
+      "shp_offset_bytes": 6382760,
+      "shp_content_bytes": 9776,
+      "shp_record_sha256": "c01db9fcab44d6745672fccd9431d94294e48ea7749827ecf2baf562fc8140ef",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 56,
+      "dbf_attributes": {
+        "record_ordinal": 56,
+        "deleted": false,
+        "Name": "San Juan de Opoa",
+        "Name_raw_hex": "53616e204a75616e206465204f706f6120202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 57,
+      "shp_offset_bytes": 6392544,
+      "shp_content_bytes": 71488,
+      "shp_record_sha256": "0dfb56efb0b7ef63cdc25ad96bbf47de98325f0efaeaf5efcfb784bd1c1560c4",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 57,
+      "dbf_attributes": {
+        "record_ordinal": 57,
+        "deleted": false,
+        "Name": "San Nicolas",
+        "Name_raw_hex": "53616e204e69636f6c6173202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 58,
+      "shp_offset_bytes": 6464040,
+      "shp_content_bytes": 19872,
+      "shp_record_sha256": "c00c9d8c88840412403084516ab2d9da56fedb3c19dabf12458711a9f21607ed",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 58,
+      "dbf_attributes": {
+        "record_ordinal": 58,
+        "deleted": false,
+        "Name": "San Pedro",
+        "Name_raw_hex": "53616e20506564726f2020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 59,
+      "shp_offset_bytes": 6483920,
+      "shp_content_bytes": 31232,
+      "shp_record_sha256": "bd15d9e4836dde67d774d89c79ddf7f4ba337d56510037ca169e927a43315751",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 59,
+      "dbf_attributes": {
+        "record_ordinal": 59,
+        "deleted": false,
+        "Name": "Santa Rita",
+        "Name_raw_hex": "53616e7461205269746120202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 60,
+      "shp_offset_bytes": 6515160,
+      "shp_content_bytes": 36480,
+      "shp_record_sha256": "4ad0e66228dac6c7d1e699e356d65f65311d3b8a0cc7c937b5f287e081c6d151",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 60,
+      "dbf_attributes": {
+        "record_ordinal": 60,
+        "deleted": false,
+        "Name": "Trinidad de Copan",
+        "Name_raw_hex": "5472696e6964616420646520436f70616e202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 61,
+      "shp_offset_bytes": 6551648,
+      "shp_content_bytes": 40992,
+      "shp_record_sha256": "01d6e56a7afaad890148d36031a0d48d9533e83f8aea49edbf135319689a917c",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 61,
+      "dbf_attributes": {
+        "record_ordinal": 61,
+        "deleted": false,
+        "Name": "Veracruz",
+        "Name_raw_hex": "566572616372757a202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 62,
+      "shp_offset_bytes": 6592648,
+      "shp_content_bytes": 2272,
+      "shp_record_sha256": "6dafd62c9763e9c809693f60dde1b7851c741257b3cd4677481992abd05937cd",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 62,
+      "dbf_attributes": {
+        "record_ordinal": 62,
+        "deleted": false,
+        "Name": "San Pedro Sula",
+        "Name_raw_hex": "53616e20506564726f2053756c61202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 63,
+      "shp_offset_bytes": 6594928,
+      "shp_content_bytes": 178496,
+      "shp_record_sha256": "35c7cd98b1d8e26dc96d6adbcc682260e3c990960b888221efcbe6827728eb79",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 63,
+      "dbf_attributes": {
+        "record_ordinal": 63,
+        "deleted": false,
+        "Name": "Choloma",
+        "Name_raw_hex": "43686f6c6f6d6120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 64,
+      "shp_offset_bytes": 6773432,
+      "shp_content_bytes": 84112,
+      "shp_record_sha256": "5388bffa8279203adeb1607040e46b764b93cca2ae3a513e314c7b8eb910a0e0",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 64,
+      "dbf_attributes": {
+        "record_ordinal": 64,
+        "deleted": false,
+        "Name": "Omoa",
+        "Name_raw_hex": "4f6d6f6120202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 65,
+      "shp_offset_bytes": 6857552,
+      "shp_content_bytes": 109840,
+      "shp_record_sha256": "0da406f79dcf60ea88ae8331834d70bf0af078af3e40acab05a30e070046aa96",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 65,
+      "dbf_attributes": {
+        "record_ordinal": 65,
+        "deleted": false,
+        "Name": "Pimienta",
+        "Name_raw_hex": "50696d69656e7461202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 66,
+      "shp_offset_bytes": 6967400,
+      "shp_content_bytes": 22144,
+      "shp_record_sha256": "1e8dda84791352421911c905e3d532dd4dfd259d8f370bd803f36faa31f7b34b",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 66,
+      "dbf_attributes": {
+        "record_ordinal": 66,
+        "deleted": false,
+        "Name": "Potrerillos",
+        "Name_raw_hex": "506f74726572696c6c6f73202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 67,
+      "shp_offset_bytes": 6989552,
+      "shp_content_bytes": 85680,
+      "shp_record_sha256": "d3a0eea9d19d138848d10b7b67c9e456f96536da72201ab91e635442ad276427",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 67,
+      "dbf_attributes": {
+        "record_ordinal": 67,
+        "deleted": false,
+        "Name": "Puerto Cortes",
+        "Name_raw_hex": "50756572746f20436f7274657320202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 68,
+      "shp_offset_bytes": 7075240,
+      "shp_content_bytes": 203488,
+      "shp_record_sha256": "cac0b19edacf66048f9bbccb5cd75b1903973ddddcb59b58624182192bd9a6c7",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 68,
+      "dbf_attributes": {
+        "record_ordinal": 68,
+        "deleted": false,
+        "Name": "San Antonio de Cortes",
+        "Name_raw_hex": "53616e20416e746f6e696f20646520436f727465732020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 69,
+      "shp_offset_bytes": 7278736,
+      "shp_content_bytes": 102496,
+      "shp_record_sha256": "89ba7cbe5b91a50ff851d88c356e0865971204714abe57f8ced8e1c46f507f7f",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 69,
+      "dbf_attributes": {
+        "record_ordinal": 69,
+        "deleted": false,
+        "Name": "San Francisco de Yojoa",
+        "Name_raw_hex": "53616e204672616e636973636f20646520596f6a6f6120202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 70,
+      "shp_offset_bytes": 7381240,
+      "shp_content_bytes": 35072,
+      "shp_record_sha256": "f05372c3154f8b40d9f8eec591c309f3c94effa0328e3f0c561069219aa65b18",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 70,
+      "dbf_attributes": {
+        "record_ordinal": 70,
+        "deleted": false,
+        "Name": "San Manuel",
+        "Name_raw_hex": "53616e204d616e75656c20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 71,
+      "shp_offset_bytes": 7416320,
+      "shp_content_bytes": 57936,
+      "shp_record_sha256": "16ce028c351abf0c26776dcd862b07ebf8e9d6dbc07fdf10dca31070a1d0b06a",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 71,
+      "dbf_attributes": {
+        "record_ordinal": 71,
+        "deleted": false,
+        "Name": "Santa Cruz de Yojoa",
+        "Name_raw_hex": "53616e7461204372757a20646520596f6a6f6120202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 72,
+      "shp_offset_bytes": 7474264,
+      "shp_content_bytes": 248248,
+      "shp_record_sha256": "fe118e7777e42574b829b03a451cf21ee29306026d7ab4526d490452b963c2f1",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 72,
+      "dbf_attributes": {
+        "record_ordinal": 72,
+        "deleted": false,
+        "Name": "Villanueva",
+        "Name_raw_hex": "56696c6c616e7565766120202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 73,
+      "shp_offset_bytes": 7722520,
+      "shp_content_bytes": 92608,
+      "shp_record_sha256": "cefe85ca1ddea71442811e25b3f9c06252a5148812d1193ca1c5016d6e89735f",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 73,
+      "dbf_attributes": {
+        "record_ordinal": 73,
+        "deleted": false,
+        "Name": "La Lima",
+        "Name_raw_hex": "4c61204c696d6120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 74,
+      "shp_offset_bytes": 7815136,
+      "shp_content_bytes": 105680,
+      "shp_record_sha256": "4f24618dba3ab6a58be3c1d55699ab555a026383ab9710dd1e716d8e1f5dc27b",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 74,
+      "dbf_attributes": {
+        "record_ordinal": 74,
+        "deleted": false,
+        "Name": "Choluteca",
+        "Name_raw_hex": "43686f6c75746563612020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 75,
+      "shp_offset_bytes": 7920824,
+      "shp_content_bytes": 577792,
+      "shp_record_sha256": "3c9313b8dc730175f6367db7617eddc583d40f869e01c0c4f9fefb3644c8118f",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 75,
+      "dbf_attributes": {
+        "record_ordinal": 75,
+        "deleted": false,
+        "Name": "Apacilagua",
+        "Name_raw_hex": "41706163696c6167756120202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 76,
+      "shp_offset_bytes": 8498624,
+      "shp_content_bytes": 83440,
+      "shp_record_sha256": "7edeacd75e7a6019eb7ad6e5551851a9e5ce7a84283bb0927f67ce781e7e27f0",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 76,
+      "dbf_attributes": {
+        "record_ordinal": 76,
+        "deleted": false,
+        "Name": "Concepcion de Maria",
+        "Name_raw_hex": "436f6e63657063696f6e206465204d6172696120202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 77,
+      "shp_offset_bytes": 8582072,
+      "shp_content_bytes": 108032,
+      "shp_record_sha256": "016d19b349fd80b099118d5c87e1619cb13030243260767dbdaa46f31566a967",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 77,
+      "dbf_attributes": {
+        "record_ordinal": 77,
+        "deleted": false,
+        "Name": "Duyure",
+        "Name_raw_hex": "4475797572652020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 78,
+      "shp_offset_bytes": 8690112,
+      "shp_content_bytes": 58160,
+      "shp_record_sha256": "dd657b91c19f393ee92592247bed14c568119ef5e079fd282047122da26bba8d",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 78,
+      "dbf_attributes": {
+        "record_ordinal": 78,
+        "deleted": false,
+        "Name": "El Corpus",
+        "Name_raw_hex": "456c20436f727075732020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 79,
+      "shp_offset_bytes": 8748280,
+      "shp_content_bytes": 91776,
+      "shp_record_sha256": "7703ac8271624b41ea4d1aa94ac03cb3a93c30ad5ac2eadc9adda4779651a6f4",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 79,
+      "dbf_attributes": {
+        "record_ordinal": 79,
+        "deleted": false,
+        "Name": "El Triunfo",
+        "Name_raw_hex": "456c20547269756e666f20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 80,
+      "shp_offset_bytes": 8840064,
+      "shp_content_bytes": 157760,
+      "shp_record_sha256": "2359b951ecdff603f94d6d938ef4d947c75b4eb5cb60c6f57e31658116a6aee6",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 80,
+      "dbf_attributes": {
+        "record_ordinal": 80,
+        "deleted": false,
+        "Name": "Marcovia",
+        "Name_raw_hex": "4d6172636f766961202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 81,
+      "shp_offset_bytes": 8997832,
+      "shp_content_bytes": 655224,
+      "shp_record_sha256": "c1ca396b9eb70fb4b9c6c653edb14e9840340dcfabc715033bfcf18a734c2e12",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 81,
+      "dbf_attributes": {
+        "record_ordinal": 81,
+        "deleted": false,
+        "Name": "Morolica",
+        "Name_raw_hex": "4d6f726f6c696361202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 82,
+      "shp_offset_bytes": 9653064,
+      "shp_content_bytes": 73312,
+      "shp_record_sha256": "aaa5689c80c3b42149b48ea3de2e8e0b2903dda4625e1f635024f150bb60f903",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 82,
+      "dbf_attributes": {
+        "record_ordinal": 82,
+        "deleted": false,
+        "Name": "Namasigue",
+        "Name_raw_hex": "4e616d6173696775652020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 83,
+      "shp_offset_bytes": 9726384,
+      "shp_content_bytes": 144128,
+      "shp_record_sha256": "12c9ce3d9fae8f7d97ff6f6772cbbe4dd311ca0c39de7c8706fb3b825e13c5c2",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 83,
+      "dbf_attributes": {
+        "record_ordinal": 83,
+        "deleted": false,
+        "Name": "Orocuina",
+        "Name_raw_hex": "4f726f6375696e61202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 84,
+      "shp_offset_bytes": 9870520,
+      "shp_content_bytes": 42832,
+      "shp_record_sha256": "f2f803d4ad842c3f27d34f5e0d9889a1c883b90b87a55f98d827b2f9af453631",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 84,
+      "dbf_attributes": {
+        "record_ordinal": 84,
+        "deleted": false,
+        "Name": "Pespire",
+        "Name_raw_hex": "5065737069726520202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 85,
+      "shp_offset_bytes": 9913360,
+      "shp_content_bytes": 78880,
+      "shp_record_sha256": "6ebfd9c701f8e97f7004691c2b2612c89172a5a38aa989c453866660eabb3300",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 85,
+      "dbf_attributes": {
+        "record_ordinal": 85,
+        "deleted": false,
+        "Name": "San Antonio de Flores",
+        "Name_raw_hex": "53616e20416e746f6e696f20646520466c6f7265732020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 86,
+      "shp_offset_bytes": 9992248,
+      "shp_content_bytes": 41504,
+      "shp_record_sha256": "023e767a5690f510abe275c3a1332337f33016ce2ecca43b512087d2d277f5cb",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 86,
+      "dbf_attributes": {
+        "record_ordinal": 86,
+        "deleted": false,
+        "Name": "San Isidro",
+        "Name_raw_hex": "53616e2049736964726f20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 87,
+      "shp_offset_bytes": 10033760,
+      "shp_content_bytes": 18288,
+      "shp_record_sha256": "4a46cc46d6c9c46b518013712028a21914c2b4ec87580f168c03734614f7c6ce",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 87,
+      "dbf_attributes": {
+        "record_ordinal": 87,
+        "deleted": false,
+        "Name": "San Jose",
+        "Name_raw_hex": "53616e204a6f7365202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 88,
+      "shp_offset_bytes": 10052056,
+      "shp_content_bytes": 3312,
+      "shp_record_sha256": "48d31ab63c2719ef0f03f81816f9cd1d0ff503a69cdcddb9d1a944deb48e7544",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 88,
+      "dbf_attributes": {
+        "record_ordinal": 88,
+        "deleted": false,
+        "Name": "San Marcos de Colon",
+        "Name_raw_hex": "53616e204d6172636f7320646520436f6c6f6e20202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 89,
+      "shp_offset_bytes": 10055376,
+      "shp_content_bytes": 101136,
+      "shp_record_sha256": "e7bc0cb9278d7f04b5368182bc95084e69f7f91a4a34edee85b88b5a5aabcced",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 89,
+      "dbf_attributes": {
+        "record_ordinal": 89,
+        "deleted": false,
+        "Name": "Santa Ana de Yusguare",
+        "Name_raw_hex": "53616e746120416e612064652059757367756172652020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 90,
+      "shp_offset_bytes": 10156520,
+      "shp_content_bytes": 99776,
+      "shp_record_sha256": "afe87a5435c69564acb864ae857dfec008c018eeda581b5f4ae29ffd8a10c7f6",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 90,
+      "dbf_attributes": {
+        "record_ordinal": 90,
+        "deleted": false,
+        "Name": "Yuscaran",
+        "Name_raw_hex": "597573636172616e202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 91,
+      "shp_offset_bytes": 10256304,
+      "shp_content_bytes": 133008,
+      "shp_record_sha256": "e046c9aae94d3288da99137bcf4792bc2d745ace994b4360ff90769f068f431d",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 91,
+      "dbf_attributes": {
+        "record_ordinal": 91,
+        "deleted": false,
+        "Name": "Alauca",
+        "Name_raw_hex": "416c617563612020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 92,
+      "shp_offset_bytes": 10389320,
+      "shp_content_bytes": 139024,
+      "shp_record_sha256": "043ca1f4c92b0714a54b0175f7fd4b623064f843d1d01191f66eeb8c2111343e",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 92,
+      "dbf_attributes": {
+        "record_ordinal": 92,
+        "deleted": false,
+        "Name": "Danli",
+        "Name_raw_hex": "44616e6c69202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 93,
+      "shp_offset_bytes": 10528352,
+      "shp_content_bytes": 263488,
+      "shp_record_sha256": "93c60c82c729f1ea3ce47dab114fc55190822c11495a29d6c4575850596def02",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 93,
+      "dbf_attributes": {
+        "record_ordinal": 93,
+        "deleted": false,
+        "Name": "El Paraiso",
+        "Name_raw_hex": "456c205061726169736f20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 94,
+      "shp_offset_bytes": 10791848,
+      "shp_content_bytes": 161888,
+      "shp_record_sha256": "d0e04edc2ea90184252e86fa36aa8531b7727a64255004c84cdd11d1e2dfbaf0",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 94,
+      "dbf_attributes": {
+        "record_ordinal": 94,
+        "deleted": false,
+        "Name": "Guinope",
+        "Name_raw_hex": "4775696e6f706520202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 95,
+      "shp_offset_bytes": 10953744,
+      "shp_content_bytes": 141520,
+      "shp_record_sha256": "5418565142c40df034966b97352fd6e76d51c3b573721609ebf384619fc2ec27",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 95,
+      "dbf_attributes": {
+        "record_ordinal": 95,
+        "deleted": false,
+        "Name": "Jacaleapa",
+        "Name_raw_hex": "4a6163616c656170612020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 96,
+      "shp_offset_bytes": 11095272,
+      "shp_content_bytes": 60000,
+      "shp_record_sha256": "6e3e4ac88f8b10ad8f6802eed135c5e52d2c0f05ec233d2dfaba9566d76c9476",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 96,
+      "dbf_attributes": {
+        "record_ordinal": 96,
+        "deleted": false,
+        "Name": "Liure",
+        "Name_raw_hex": "4c69757265202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 97,
+      "shp_offset_bytes": 11155280,
+      "shp_content_bytes": 61264,
+      "shp_record_sha256": "aa93cfe8021f28d23586cf74d6ed1bb9faadbcc9d46d6019d5c5509bdad80c44",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 97,
+      "dbf_attributes": {
+        "record_ordinal": 97,
+        "deleted": false,
+        "Name": "Moroceli",
+        "Name_raw_hex": "4d6f726f63656c69202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 98,
+      "shp_offset_bytes": 11216552,
+      "shp_content_bytes": 162464,
+      "shp_record_sha256": "dd650acbb3034195f34b450b5667e15779b452a33da586958c720b55508866bb",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 98,
+      "dbf_attributes": {
+        "record_ordinal": 98,
+        "deleted": false,
+        "Name": "Oropoli",
+        "Name_raw_hex": "4f726f706f6c6920202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 99,
+      "shp_offset_bytes": 11379024,
+      "shp_content_bytes": 83152,
+      "shp_record_sha256": "09de1135db76a31a139e702e95c7d3b8dc121fa8a12f92868e25721fe2679fb7",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 99,
+      "dbf_attributes": {
+        "record_ordinal": 99,
+        "deleted": false,
+        "Name": "Potrerillos",
+        "Name_raw_hex": "506f74726572696c6c6f73202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 100,
+      "shp_offset_bytes": 11462184,
+      "shp_content_bytes": 108992,
+      "shp_record_sha256": "fbbf1d6f12cecc54c31d6f361e8cfae9152cd624f7dfb24a84a45b4803bd0a80",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 100,
+      "dbf_attributes": {
+        "record_ordinal": 100,
+        "deleted": false,
+        "Name": "San Antonio de Flores",
+        "Name_raw_hex": "53616e20416e746f6e696f20646520466c6f7265732020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 101,
+      "shp_offset_bytes": 11571184,
+      "shp_content_bytes": 67472,
+      "shp_record_sha256": "2a7ac9f8b997ccc57be2450a6ab55e592f404144b26f7a7e30255f7856e7a4c3",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 101,
+      "dbf_attributes": {
+        "record_ordinal": 101,
+        "deleted": false,
+        "Name": "San Lucas",
+        "Name_raw_hex": "53616e204c756361732020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 102,
+      "shp_offset_bytes": 11638664,
+      "shp_content_bytes": 73584,
+      "shp_record_sha256": "9ca65422976ba11af632734ed527e91ecddf207da5978eb4d5d5e1f22ab082d1",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 102,
+      "dbf_attributes": {
+        "record_ordinal": 102,
+        "deleted": false,
+        "Name": "San Matias",
+        "Name_raw_hex": "53616e204d617469617320202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 103,
+      "shp_offset_bytes": 11712256,
+      "shp_content_bytes": 97296,
+      "shp_record_sha256": "2638dbe6197158c5b916e0397280d3ef9949501b30499f10d351ae8a8085964b",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 103,
+      "dbf_attributes": {
+        "record_ordinal": 103,
+        "deleted": false,
+        "Name": "Soledad",
+        "Name_raw_hex": "536f6c6564616420202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 104,
+      "shp_offset_bytes": 11809560,
+      "shp_content_bytes": 49280,
+      "shp_record_sha256": "9d61e87cac364098edafe034784d7ebb533bf10dc9fa78bd7e907d85f6b76902",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 104,
+      "dbf_attributes": {
+        "record_ordinal": 104,
+        "deleted": false,
+        "Name": "Teupasenti",
+        "Name_raw_hex": "546575706173656e746920202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 105,
+      "shp_offset_bytes": 11858848,
+      "shp_content_bytes": 179808,
+      "shp_record_sha256": "6d7b457a3534673a2d1e2ca7fb96543b2b718500bd91f40a0fdd846c1a26a4a6",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 105,
+      "dbf_attributes": {
+        "record_ordinal": 105,
+        "deleted": false,
+        "Name": "Texiguat",
+        "Name_raw_hex": "5465786967756174202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 106,
+      "shp_offset_bytes": 12038664,
+      "shp_content_bytes": 63376,
+      "shp_record_sha256": "8c317d162da4f06b747b98d4d21a1824acf335fa546c50ccb9ff610eb4287c48",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 106,
+      "dbf_attributes": {
+        "record_ordinal": 106,
+        "deleted": false,
+        "Name": "Vado Ancho",
+        "Name_raw_hex": "5661646f20416e63686f20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 107,
+      "shp_offset_bytes": 12102048,
+      "shp_content_bytes": 36064,
+      "shp_record_sha256": "32e34435dd9133cbd381161d5ddf1274e6c67b4d0c2808bd0954e2ae9ba88281",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 107,
+      "dbf_attributes": {
+        "record_ordinal": 107,
+        "deleted": false,
+        "Name": "Yauyupe",
+        "Name_raw_hex": "5961757975706520202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 108,
+      "shp_offset_bytes": 12138120,
+      "shp_content_bytes": 11552,
+      "shp_record_sha256": "568d63eafcfab5eee2ca8b0993b09388b673ef7dec45fc9dea8eaef1eb83154c",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 108,
+      "dbf_attributes": {
+        "record_ordinal": 108,
+        "deleted": false,
+        "Name": "Trojes",
+        "Name_raw_hex": "54726f6a65732020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 109,
+      "shp_offset_bytes": 12149680,
+      "shp_content_bytes": 440624,
+      "shp_record_sha256": "b333ac5595257ccfbe9cda1bcae74f4d2a63f8e28a0ed2de507799c64d40d77e",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 109,
+      "dbf_attributes": {
+        "record_ordinal": 109,
+        "deleted": false,
+        "Name": "Distrito Central",
+        "Name_raw_hex": "446973747269746f2043656e7472616c20202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 110,
+      "shp_offset_bytes": 12590312,
+      "shp_content_bytes": 133616,
+      "shp_record_sha256": "f50c3331405ae64c9c11a1b8f18235b69242b721445ea6eb84bfee3bb34650c8",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 110,
+      "dbf_attributes": {
+        "record_ordinal": 110,
+        "deleted": false,
+        "Name": "Alubaren",
+        "Name_raw_hex": "416c75626172656e202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 111,
+      "shp_offset_bytes": 12723936,
+      "shp_content_bytes": 7616,
+      "shp_record_sha256": "c7a98974583b84a5684c5db195eb73ab6cd39e9663a4de4e78bc655e4cf53bec",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 111,
+      "dbf_attributes": {
+        "record_ordinal": 111,
+        "deleted": false,
+        "Name": "Cedros",
+        "Name_raw_hex": "436564726f732020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 112,
+      "shp_offset_bytes": 12731560,
+      "shp_content_bytes": 299760,
+      "shp_record_sha256": "df0656c52ee465a0e8d5d4123d2364235082de21c7e08cf2453608af6524bc7a",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 112,
+      "dbf_attributes": {
+        "record_ordinal": 112,
+        "deleted": false,
+        "Name": "Curaren",
+        "Name_raw_hex": "4375726172656e20202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 113,
+      "shp_offset_bytes": 13031328,
+      "shp_content_bytes": 73216,
+      "shp_record_sha256": "c230d5fb19f7924dce4fe6cbcd5d66574141c1beb54d832bf75f55b77f50c85b",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 113,
+      "dbf_attributes": {
+        "record_ordinal": 113,
+        "deleted": false,
+        "Name": "El Porvenir",
+        "Name_raw_hex": "456c20506f7276656e6972202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 114,
+      "shp_offset_bytes": 13104552,
+      "shp_content_bytes": 249888,
+      "shp_record_sha256": "21b50ba72a361f8d1b27723a71ba6dc3732e86d42d9081061dfb560a6e9d7898",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 114,
+      "dbf_attributes": {
+        "record_ordinal": 114,
+        "deleted": false,
+        "Name": "Guaimaca",
+        "Name_raw_hex": "477561696d616361202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 115,
+      "shp_offset_bytes": 13354448,
+      "shp_content_bytes": 150208,
+      "shp_record_sha256": "5a080a48ca5e455ce46b537a21a1a5ef8c5705c69aff34dc8b914d4934bc9a6a",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 115,
+      "dbf_attributes": {
+        "record_ordinal": 115,
+        "deleted": false,
+        "Name": "La Libertad",
+        "Name_raw_hex": "4c61204c69626572746164202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 116,
+      "shp_offset_bytes": 13504664,
+      "shp_content_bytes": 38464,
+      "shp_record_sha256": "207eb398461aaf6f73556d900310ab6518dffc4d5f26f99d5cbe1ab731baa336",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 116,
+      "dbf_attributes": {
+        "record_ordinal": 116,
+        "deleted": false,
+        "Name": "La Venta",
+        "Name_raw_hex": "4c612056656e7461202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 117,
+      "shp_offset_bytes": 13543136,
+      "shp_content_bytes": 59280,
+      "shp_record_sha256": "6c4db9a7553aae09a5e56bd1ba6c1d84bbe332d4fda818c787524d6e21afb1c9",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 117,
+      "dbf_attributes": {
+        "record_ordinal": 117,
+        "deleted": false,
+        "Name": "Lepaterique",
+        "Name_raw_hex": "4c65706174657269717565202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 118,
+      "shp_offset_bytes": 13602424,
+      "shp_content_bytes": 63376,
+      "shp_record_sha256": "c10ee4ffb50a73b9e9c9d3a53ca5d69f48470e82891e0be2c04e7385e68d090b",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 118,
+      "dbf_attributes": {
+        "record_ordinal": 118,
+        "deleted": false,
+        "Name": "Maraita",
+        "Name_raw_hex": "4d61726169746120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 119,
+      "shp_offset_bytes": 13665808,
+      "shp_content_bytes": 81328,
+      "shp_record_sha256": "a43293faf4408f5cb26290793e8faab32f26810b9fc7c6dc8789790b26f96aac",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 119,
+      "dbf_attributes": {
+        "record_ordinal": 119,
+        "deleted": false,
+        "Name": "Marale",
+        "Name_raw_hex": "4d6172616c652020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 120,
+      "shp_offset_bytes": 13747144,
+      "shp_content_bytes": 104928,
+      "shp_record_sha256": "9831e4402d3f10cd2b357ec2785b98b848b4bb1cba39794f2e55684dfec2fd00",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 120,
+      "dbf_attributes": {
+        "record_ordinal": 120,
+        "deleted": false,
+        "Name": "Nueva Armenia",
+        "Name_raw_hex": "4e756576612041726d656e696120202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 121,
+      "shp_offset_bytes": 13852080,
+      "shp_content_bytes": 41728,
+      "shp_record_sha256": "b427606626643abf9409fbee6841682c05a4e51240c646f52bf9ddc891d819f0",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 121,
+      "dbf_attributes": {
+        "record_ordinal": 121,
+        "deleted": false,
+        "Name": "Ojojona",
+        "Name_raw_hex": "4f6a6f6a6f6e6120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 122,
+      "shp_offset_bytes": 13893816,
+      "shp_content_bytes": 84912,
+      "shp_record_sha256": "be0d803aab49f43a27599d6922dafb6b5f912966676dd570c6c84fce8b15eedb",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 122,
+      "dbf_attributes": {
+        "record_ordinal": 122,
+        "deleted": false,
+        "Name": "Orica",
+        "Name_raw_hex": "4f72696361202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 123,
+      "shp_offset_bytes": 13978736,
+      "shp_content_bytes": 106752,
+      "shp_record_sha256": "550a3d64be40e646a2f328cb55a986cdf90aef6e9a470487ad0081196b0593ab",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 123,
+      "dbf_attributes": {
+        "record_ordinal": 123,
+        "deleted": false,
+        "Name": "Reitoca",
+        "Name_raw_hex": "526569746f636120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 124,
+      "shp_offset_bytes": 14085496,
+      "shp_content_bytes": 36672,
+      "shp_record_sha256": "9175b37c353a7f3fbf7525d7dc83989d612fc264a3033b93b781ef4ff67e7caf",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 124,
+      "dbf_attributes": {
+        "record_ordinal": 124,
+        "deleted": false,
+        "Name": "Sabanagrande",
+        "Name_raw_hex": "536162616e616772616e64652020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 125,
+      "shp_offset_bytes": 14122176,
+      "shp_content_bytes": 107040,
+      "shp_record_sha256": "183c029cb48a0af52536a6798c7a2d77773b851b6310c585f962bab43c4cb311",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 125,
+      "dbf_attributes": {
+        "record_ordinal": 125,
+        "deleted": false,
+        "Name": "San Antonio de Oriente",
+        "Name_raw_hex": "53616e20416e746f6e696f206465204f7269656e746520202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 126,
+      "shp_offset_bytes": 14229224,
+      "shp_content_bytes": 67296,
+      "shp_record_sha256": "fc870dc21cf1871f199c702bfadd017f593a976c11408bd1c3276e58804be634",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 126,
+      "dbf_attributes": {
+        "record_ordinal": 126,
+        "deleted": false,
+        "Name": "San Buenaventura",
+        "Name_raw_hex": "53616e204275656e6176656e7475726120202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 127,
+      "shp_offset_bytes": 14296528,
+      "shp_content_bytes": 2736,
+      "shp_record_sha256": "e3f5ae1c997b56e9f42368a035470f0f2c122887bf9a319fbe7257cef0f65b21",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 127,
+      "dbf_attributes": {
+        "record_ordinal": 127,
+        "deleted": false,
+        "Name": "San Ignacio",
+        "Name_raw_hex": "53616e2049676e6163696f202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 128,
+      "shp_offset_bytes": 14299272,
+      "shp_content_bytes": 111248,
+      "shp_record_sha256": "7a8bb535d444c0f1c4e62e338f855913421a4d2c1f71a044eaca60eca8ea8b30",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 128,
+      "dbf_attributes": {
+        "record_ordinal": 128,
+        "deleted": false,
+        "Name": "San Juan de Flores",
+        "Name_raw_hex": "53616e204a75616e20646520466c6f7265732020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 129,
+      "shp_offset_bytes": 14410528,
+      "shp_content_bytes": 86496,
+      "shp_record_sha256": "28d875a204d360d7769ce3261afb93604bb9a1e491a036a751dcc4496c6fd0aa",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 129,
+      "dbf_attributes": {
+        "record_ordinal": 129,
+        "deleted": false,
+        "Name": "San Miguelito",
+        "Name_raw_hex": "53616e204d696775656c69746f20202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 130,
+      "shp_offset_bytes": 14497032,
+      "shp_content_bytes": 14800,
+      "shp_record_sha256": "69deb3225b7c5b55dbff2c7f49325a3c68120488d6075f4b4273e94e6a2ddc38",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 130,
+      "dbf_attributes": {
+        "record_ordinal": 130,
+        "deleted": false,
+        "Name": "Santa Ana",
+        "Name_raw_hex": "53616e746120416e612020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 131,
+      "shp_offset_bytes": 14511840,
+      "shp_content_bytes": 19540,
+      "shp_record_sha256": "22bdc9ce28a8946c62c79b32949af1673c7cc7f3c290ec1aed2576212424a5cc",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 131,
+      "dbf_attributes": {
+        "record_ordinal": 131,
+        "deleted": false,
+        "Name": "Santa Lucia",
+        "Name_raw_hex": "53616e7461204c75636961202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 132,
+      "shp_offset_bytes": 14531388,
+      "shp_content_bytes": 16208,
+      "shp_record_sha256": "f59c7e87c99c787026d39ce416cc82d015c870e8edff58d1fde5bd0f45de7690",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 132,
+      "dbf_attributes": {
+        "record_ordinal": 132,
+        "deleted": false,
+        "Name": "Talanga",
+        "Name_raw_hex": "54616c616e676120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 133,
+      "shp_offset_bytes": 14547604,
+      "shp_content_bytes": 136544,
+      "shp_record_sha256": "e69a5de14931aa2f1efc2f90c8cdde82d34b387f3ed9d3860fecd4f08df37c7f",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 133,
+      "dbf_attributes": {
+        "record_ordinal": 133,
+        "deleted": false,
+        "Name": "Tatumbla",
+        "Name_raw_hex": "546174756d626c61202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 134,
+      "shp_offset_bytes": 14684156,
+      "shp_content_bytes": 44864,
+      "shp_record_sha256": "0654a1886f87018787fc276bd486c4559161ecbc3bfeb62239f5c21b21f11d8c",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 134,
+      "dbf_attributes": {
+        "record_ordinal": 134,
+        "deleted": false,
+        "Name": "Valle de Angeles",
+        "Name_raw_hex": "56616c6c6520646520416e67656c657320202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 135,
+      "shp_offset_bytes": 14729028,
+      "shp_content_bytes": 75120,
+      "shp_record_sha256": "ed86964ccdd5dfdeafa506812a3ce2929f62f7f7e839c2dbd6a40fed6ced7833",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 135,
+      "dbf_attributes": {
+        "record_ordinal": 135,
+        "deleted": false,
+        "Name": "Villa de San Francisco",
+        "Name_raw_hex": "56696c6c612064652053616e204672616e636973636f20202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 136,
+      "shp_offset_bytes": 14804156,
+      "shp_content_bytes": 45232,
+      "shp_record_sha256": "fbd8def00e6a1881b8ff277d2cad9ad5698921e76195815ad1dda163fc0ff218",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 136,
+      "dbf_attributes": {
+        "record_ordinal": 136,
+        "deleted": false,
+        "Name": "Vallecillo",
+        "Name_raw_hex": "56616c6c6563696c6c6f20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 137,
+      "shp_offset_bytes": 14849396,
+      "shp_content_bytes": 147120,
+      "shp_record_sha256": "7f8c1f80179e0edeb4e4beef56ead7fed7534f58536e3b679d9ba4e2d03dbb11",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 137,
+      "dbf_attributes": {
+        "record_ordinal": 137,
+        "deleted": false,
+        "Name": "La Esperanza",
+        "Name_raw_hex": "4c61204573706572616e7a612020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 138,
+      "shp_offset_bytes": 14996524,
+      "shp_content_bytes": 131060,
+      "shp_record_sha256": "cbf4413e6b7f7fa568bff84e03c825088f8d42a603c1b2a95ad396287578e06c",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 138,
+      "dbf_attributes": {
+        "record_ordinal": 138,
+        "deleted": false,
+        "Name": "Camasca",
+        "Name_raw_hex": "43616d6173636120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 139,
+      "shp_offset_bytes": 15127592,
+      "shp_content_bytes": 48480,
+      "shp_record_sha256": "12539c9f4a4f0cc3a3e00bbe41c0325b4d11a7fa1a8887906ea721926994bd9e",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 139,
+      "dbf_attributes": {
+        "record_ordinal": 139,
+        "deleted": false,
+        "Name": "Colomoncagua",
+        "Name_raw_hex": "436f6c6f6d6f6e63616775612020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 140,
+      "shp_offset_bytes": 15176080,
+      "shp_content_bytes": 123744,
+      "shp_record_sha256": "997520a1809e7537d374f2e38841cd8f29d56feaf222d67a1ad5102c3fff1fe2",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 140,
+      "dbf_attributes": {
+        "record_ordinal": 140,
+        "deleted": false,
+        "Name": "Concepcion",
+        "Name_raw_hex": "436f6e63657063696f6e20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 141,
+      "shp_offset_bytes": 15299832,
+      "shp_content_bytes": 75280,
+      "shp_record_sha256": "15edea41b5cf93d6c4ad40b6e62e8a194f75895cfa71694ee61afb92eae8847c",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 141,
+      "dbf_attributes": {
+        "record_ordinal": 141,
+        "deleted": false,
+        "Name": "Dolores",
+        "Name_raw_hex": "446f6c6f72657320202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 142,
+      "shp_offset_bytes": 15375120,
+      "shp_content_bytes": 64992,
+      "shp_record_sha256": "4d580fde2f2655d726a3af96c0154f427350cad585b75291c34fe50fd4bfa638",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 142,
+      "dbf_attributes": {
+        "record_ordinal": 142,
+        "deleted": false,
+        "Name": "Intibuca",
+        "Name_raw_hex": "496e746962756361202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 143,
+      "shp_offset_bytes": 15440120,
+      "shp_content_bytes": 216848,
+      "shp_record_sha256": "e7a1e94b31059249ef837af7ba0ddba20ab91ae960e9f7b4b61fdcd1569a6bb9",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 143,
+      "dbf_attributes": {
+        "record_ordinal": 143,
+        "deleted": false,
+        "Name": "Jesus de Otoro",
+        "Name_raw_hex": "4a65737573206465204f746f726f202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 144,
+      "shp_offset_bytes": 15656976,
+      "shp_content_bytes": 129040,
+      "shp_record_sha256": "92a8fc18fee3792bd070400ab12918d01a4681a89ce98de1c56bb97fa69b71e4",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 144,
+      "dbf_attributes": {
+        "record_ordinal": 144,
+        "deleted": false,
+        "Name": "Magdalena",
+        "Name_raw_hex": "4d616764616c656e612020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 145,
+      "shp_offset_bytes": 15786024,
+      "shp_content_bytes": 61680,
+      "shp_record_sha256": "29573eaf41ff00095736e71bd29fe4a7765064c8bf22bef0c189927b6284e5f8",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 145,
+      "dbf_attributes": {
+        "record_ordinal": 145,
+        "deleted": false,
+        "Name": "Masaguara",
+        "Name_raw_hex": "4d61736167756172612020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 146,
+      "shp_offset_bytes": 15847712,
+      "shp_content_bytes": 139680,
+      "shp_record_sha256": "980a6bf00cbc84a3d2358bbba57be26fb619fc7303670d98560b9b9f9fb378b3",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 146,
+      "dbf_attributes": {
+        "record_ordinal": 146,
+        "deleted": false,
+        "Name": "San Antonio",
+        "Name_raw_hex": "53616e20416e746f6e696f202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 147,
+      "shp_offset_bytes": 15987400,
+      "shp_content_bytes": 92704,
+      "shp_record_sha256": "d9453e756bdc31a9bdf5b30294b53ada4f2304a9896d6c86a73c9e2125ced66c",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 147,
+      "dbf_attributes": {
+        "record_ordinal": 147,
+        "deleted": false,
+        "Name": "San Isidro",
+        "Name_raw_hex": "53616e2049736964726f20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 148,
+      "shp_offset_bytes": 16080112,
+      "shp_content_bytes": 59552,
+      "shp_record_sha256": "9bdd39131922a0740ced1bbfca162364d9964321a396b4ddfb199fa44db96ac2",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 148,
+      "dbf_attributes": {
+        "record_ordinal": 148,
+        "deleted": false,
+        "Name": "San Juan",
+        "Name_raw_hex": "53616e204a75616e202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 149,
+      "shp_offset_bytes": 16139672,
+      "shp_content_bytes": 50112,
+      "shp_record_sha256": "20783ea1c16c9b2f42be563bd7fb7b2d3181facaa60369fa752563a104402cf3",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 149,
+      "dbf_attributes": {
+        "record_ordinal": 149,
+        "deleted": false,
+        "Name": "San Marcos de Sierra",
+        "Name_raw_hex": "53616e204d6172636f7320646520536965727261202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 150,
+      "shp_offset_bytes": 16189792,
+      "shp_content_bytes": 87920,
+      "shp_record_sha256": "fd5efab64ba06e8c5e36c4a882df57e499bef89d55d40a31a8cb580036b1670a",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 150,
+      "dbf_attributes": {
+        "record_ordinal": 150,
+        "deleted": false,
+        "Name": "San Miguelito",
+        "Name_raw_hex": "53616e204d696775656c69746f20202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 151,
+      "shp_offset_bytes": 16277720,
+      "shp_content_bytes": 76176,
+      "shp_record_sha256": "76c7d29964cd7136a15fccd201f055a6b92b95a9c86a371ed46cb07540071daf",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 151,
+      "dbf_attributes": {
+        "record_ordinal": 151,
+        "deleted": false,
+        "Name": "Santa Lucia",
+        "Name_raw_hex": "53616e7461204c75636961202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 152,
+      "shp_offset_bytes": 16353904,
+      "shp_content_bytes": 93280,
+      "shp_record_sha256": "441daaec13770847ebf011cf5f04ccbc0838810a61e0b11a2bce921359999a74",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 152,
+      "dbf_attributes": {
+        "record_ordinal": 152,
+        "deleted": false,
+        "Name": "Yamaranguila",
+        "Name_raw_hex": "59616d6172616e6775696c612020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 153,
+      "shp_offset_bytes": 16447192,
+      "shp_content_bytes": 103552,
+      "shp_record_sha256": "e3dce09448f2530062edc6de84d09e4189528efadf5a6e4bf12e6cd9662e9e49",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 153,
+      "dbf_attributes": {
+        "record_ordinal": 153,
+        "deleted": false,
+        "Name": "San Francisco de Opalaca",
+        "Name_raw_hex": "53616e204672616e636973636f206465204f70616c6163612020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 154,
+      "shp_offset_bytes": 16550752,
+      "shp_content_bytes": 83824,
+      "shp_record_sha256": "ff10f016f4fe38df4f74e4c3255204ff493ac1ba803bf5f89ef7658e7654eba4",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 154,
+      "dbf_attributes": {
+        "record_ordinal": 154,
+        "deleted": false,
+        "Name": "Roatan",
+        "Name_raw_hex": "526f6174616e2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 155,
+      "shp_offset_bytes": 16634584,
+      "shp_content_bytes": 237208,
+      "shp_record_sha256": "ea18be764f2c6240aae28894b243a03deb6ef83e6b30b4c8b4546c6b5743f46f",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 155,
+      "dbf_attributes": {
+        "record_ordinal": 155,
+        "deleted": false,
+        "Name": "Guanaja",
+        "Name_raw_hex": "4775616e616a6120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 156,
+      "shp_offset_bytes": 16871800,
+      "shp_content_bytes": 142560,
+      "shp_record_sha256": "edfd9f7f3af7678b5178b48dcb9ece115b4ddc445082122ae2308c4279459599",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 156,
+      "dbf_attributes": {
+        "record_ordinal": 156,
+        "deleted": false,
+        "Name": "Jose Santos Guardiola",
+        "Name_raw_hex": "4a6f73652053616e746f73204775617264696f6c612020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 157,
+      "shp_offset_bytes": 17014368,
+      "shp_content_bytes": 298144,
+      "shp_record_sha256": "ac6635b8eb9fc7260bd3667e5426093f09c994ab9c4f9426fc18a50427e2e753",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 157,
+      "dbf_attributes": {
+        "record_ordinal": 157,
+        "deleted": false,
+        "Name": "Utila",
+        "Name_raw_hex": "5574696c61202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 158,
+      "shp_offset_bytes": 17312520,
+      "shp_content_bytes": 128076,
+      "shp_record_sha256": "e829173fdee8d21125d0a2daf5f75a1087e0518293c7e1de4f8dfbb26acb8292",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 158,
+      "dbf_attributes": {
+        "record_ordinal": 158,
+        "deleted": false,
+        "Name": "La Paz",
+        "Name_raw_hex": "4c612050617a2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 159,
+      "shp_offset_bytes": 17440604,
+      "shp_content_bytes": 119008,
+      "shp_record_sha256": "8c9bf76945b0ca717f1387dcaa6f334ec19cd85afdcc4a0cc55a1fc66f2ab184",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 159,
+      "dbf_attributes": {
+        "record_ordinal": 159,
+        "deleted": false,
+        "Name": "Aguanqueterique",
+        "Name_raw_hex": "416775616e717565746572697175652020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 160,
+      "shp_offset_bytes": 17559620,
+      "shp_content_bytes": 85344,
+      "shp_record_sha256": "e9edd951578d85a7a172e69f3e5ee2df859af3c5aca65d622097e3d4880d2af5",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 160,
+      "dbf_attributes": {
+        "record_ordinal": 160,
+        "deleted": false,
+        "Name": "Cabanas",
+        "Name_raw_hex": "436162616e617320202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 161,
+      "shp_offset_bytes": 17644972,
+      "shp_content_bytes": 151808,
+      "shp_record_sha256": "3c62492b583ddf6c1b43891e6781c1e1f277e341c8b996bd6ff2d66dbac386ee",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 161,
+      "dbf_attributes": {
+        "record_ordinal": 161,
+        "deleted": false,
+        "Name": "Cane",
+        "Name_raw_hex": "43616e6520202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 162,
+      "shp_offset_bytes": 17796788,
+      "shp_content_bytes": 42048,
+      "shp_record_sha256": "014a37e47f5b9a741a29b4e06afa3fb68aa83fcb5a426d7be31cb6bd942c49cc",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 162,
+      "dbf_attributes": {
+        "record_ordinal": 162,
+        "deleted": false,
+        "Name": "Chinacla",
+        "Name_raw_hex": "4368696e61636c61202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 163,
+      "shp_offset_bytes": 17838844,
+      "shp_content_bytes": 61216,
+      "shp_record_sha256": "ddbf2b844497ff9aba77ba15f3b136801315bbaf05656e1b29c1a2d32c28016d",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 163,
+      "dbf_attributes": {
+        "record_ordinal": 163,
+        "deleted": false,
+        "Name": "Guajiquiro",
+        "Name_raw_hex": "4775616a69717569726f20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 164,
+      "shp_offset_bytes": 17900068,
+      "shp_content_bytes": 104992,
+      "shp_record_sha256": "00e1950023b5b2408dad27fde0d06a18a1634175526476ccdbd57dfb6b76647d",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 164,
+      "dbf_attributes": {
+        "record_ordinal": 164,
+        "deleted": false,
+        "Name": "Lauterique",
+        "Name_raw_hex": "4c61757465726971756520202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 165,
+      "shp_offset_bytes": 18005068,
+      "shp_content_bytes": 26416,
+      "shp_record_sha256": "ecc40b89a334766680d5faad2b932c3c0eed79f29751e7a2f77f811f1a1e3215",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 165,
+      "dbf_attributes": {
+        "record_ordinal": 165,
+        "deleted": false,
+        "Name": "Marcala",
+        "Name_raw_hex": "4d617263616c6120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 166,
+      "shp_offset_bytes": 18031492,
+      "shp_content_bytes": 159344,
+      "shp_record_sha256": "e594a75ac9323dbd8c5626fb2dc04d8dcdbd561daa2c170244a18d9c3c4f169f",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 166,
+      "dbf_attributes": {
+        "record_ordinal": 166,
+        "deleted": false,
+        "Name": "Mercedes de Oriente",
+        "Name_raw_hex": "4d65726365646573206465204f7269656e746520202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 167,
+      "shp_offset_bytes": 18190844,
+      "shp_content_bytes": 60464,
+      "shp_record_sha256": "63f8a70f1bb9bd2aa2e8d75ebb3d6fcc13796840412edc63a9f9456a43466c65",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 167,
+      "dbf_attributes": {
+        "record_ordinal": 167,
+        "deleted": false,
+        "Name": "Opatoro",
+        "Name_raw_hex": "4f7061746f726f20202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 168,
+      "shp_offset_bytes": 18251316,
+      "shp_content_bytes": 168288,
+      "shp_record_sha256": "48c2d928de5517ffaf9ca43f370463e20393fc84784a75720f17e7f585e253c7",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 168,
+      "dbf_attributes": {
+        "record_ordinal": 168,
+        "deleted": false,
+        "Name": "San Antonio del Norte",
+        "Name_raw_hex": "53616e20416e746f6e696f2064656c204e6f7274652020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 169,
+      "shp_offset_bytes": 18419612,
+      "shp_content_bytes": 56048,
+      "shp_record_sha256": "d5ffeb3bbbbfeff77909c087f11fbe2ccc489116f6bbdd0ecd01d73d43acc5bb",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 169,
+      "dbf_attributes": {
+        "record_ordinal": 169,
+        "deleted": false,
+        "Name": "San Jose",
+        "Name_raw_hex": "53616e204a6f7365202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 170,
+      "shp_offset_bytes": 18475668,
+      "shp_content_bytes": 46112,
+      "shp_record_sha256": "b72e33e1245576364b42c598e2594754c0f061253394ce681e4715d314b1c58f",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 170,
+      "dbf_attributes": {
+        "record_ordinal": 170,
+        "deleted": false,
+        "Name": "San Juan",
+        "Name_raw_hex": "53616e204a75616e202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 171,
+      "shp_offset_bytes": 18521788,
+      "shp_content_bytes": 39376,
+      "shp_record_sha256": "adf4ba4d3c15578732a4f6157366471aef4c76941bb3f95381fb80fdc04c6e69",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 171,
+      "dbf_attributes": {
+        "record_ordinal": 171,
+        "deleted": false,
+        "Name": "San Pedro de Tutule",
+        "Name_raw_hex": "53616e20506564726f20646520547574756c6520202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 172,
+      "shp_offset_bytes": 18561172,
+      "shp_content_bytes": 46608,
+      "shp_record_sha256": "f35fcd975a3ba8a48ce23b32b993fb4089e38efe25c1c3f10b4e52ada9e1c4ae",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 172,
+      "dbf_attributes": {
+        "record_ordinal": 172,
+        "deleted": false,
+        "Name": "Santa Ana",
+        "Name_raw_hex": "53616e746120416e612020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 173,
+      "shp_offset_bytes": 18607788,
+      "shp_content_bytes": 224624,
+      "shp_record_sha256": "79f9da5950b9596486cd1c4e305c0faa01b783ef0b16cd3d84774e32378df77f",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 173,
+      "dbf_attributes": {
+        "record_ordinal": 173,
+        "deleted": false,
+        "Name": "Santa Elena",
+        "Name_raw_hex": "53616e746120456c656e61202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 174,
+      "shp_offset_bytes": 18832420,
+      "shp_content_bytes": 93968,
+      "shp_record_sha256": "e02ee18ae21d67374939f4ef6d342db5a0172c7aa1f0cf06894d402b16fc1954",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 174,
+      "dbf_attributes": {
+        "record_ordinal": 174,
+        "deleted": false,
+        "Name": "Santa Maria",
+        "Name_raw_hex": "53616e7461204d61726961202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 175,
+      "shp_offset_bytes": 18926396,
+      "shp_content_bytes": 76032,
+      "shp_record_sha256": "b530d6e258cf73e41725275d3b7ea8a805d26e09f9a18f9d422791e651ad9330",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 175,
+      "dbf_attributes": {
+        "record_ordinal": 175,
+        "deleted": false,
+        "Name": "Santiago de Puringla",
+        "Name_raw_hex": "53616e746961676f20646520507572696e676c61202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 176,
+      "shp_offset_bytes": 19002436,
+      "shp_content_bytes": 85504,
+      "shp_record_sha256": "5dfbe548249973d8ac8a0b494a67445150e9f911d36d4e5352389dd3cea7c430",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 176,
+      "dbf_attributes": {
+        "record_ordinal": 176,
+        "deleted": false,
+        "Name": "Yarula",
+        "Name_raw_hex": "596172756c612020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 177,
+      "shp_offset_bytes": 19087948,
+      "shp_content_bytes": 118080,
+      "shp_record_sha256": "089dbf184f9ebd4d1feabc32d7a2fc9638e6d05c0b836ae2d224fbac94cdc8f9",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 177,
+      "dbf_attributes": {
+        "record_ordinal": 177,
+        "deleted": false,
+        "Name": "Gracias",
+        "Name_raw_hex": "4772616369617320202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 178,
+      "shp_offset_bytes": 19206036,
+      "shp_content_bytes": 183108,
+      "shp_record_sha256": "8acd3c5143d65adb73f538d80cf20470308c30f75e4e38f33c7c4213a43b6e20",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 178,
+      "dbf_attributes": {
+        "record_ordinal": 178,
+        "deleted": false,
+        "Name": "Belen",
+        "Name_raw_hex": "42656c656e202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 179,
+      "shp_offset_bytes": 19389152,
+      "shp_content_bytes": 115408,
+      "shp_record_sha256": "2d04a4d7b364c2b098c1b09cbfc6d7ec6f963f8419aa9cbe63a1a1d371096bc1",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 179,
+      "dbf_attributes": {
+        "record_ordinal": 179,
+        "deleted": false,
+        "Name": "Candelaria",
+        "Name_raw_hex": "43616e64656c6172696120202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 180,
+      "shp_offset_bytes": 19504568,
+      "shp_content_bytes": 30896,
+      "shp_record_sha256": "426184670801b0792d755c5d308abf4bbec9294727adc28f80adddab13336349",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 180,
+      "dbf_attributes": {
+        "record_ordinal": 180,
+        "deleted": false,
+        "Name": "Cololaca",
+        "Name_raw_hex": "436f6c6f6c616361202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 181,
+      "shp_offset_bytes": 19535472,
+      "shp_content_bytes": 75360,
+      "shp_record_sha256": "3b3273e3786ea4ade863fb6eeab74fb55ab6a43d205a59df5724c3fba75062f8",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 181,
+      "dbf_attributes": {
+        "record_ordinal": 181,
+        "deleted": false,
+        "Name": "Erandique",
+        "Name_raw_hex": "4572616e64697175652020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 182,
+      "shp_offset_bytes": 19610840,
+      "shp_content_bytes": 114640,
+      "shp_record_sha256": "175d37e4718aa4f51c53e4f0c680127b22690d74fc43c8510d9c29806f8fcf5e",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 182,
+      "dbf_attributes": {
+        "record_ordinal": 182,
+        "deleted": false,
+        "Name": "Gualcince",
+        "Name_raw_hex": "4775616c63696e63652020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 183,
+      "shp_offset_bytes": 19725488,
+      "shp_content_bytes": 116944,
+      "shp_record_sha256": "6cbac708e50e357fc5c491807512e6728f00098b5607158ed30f67dbdad1b018",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 183,
+      "dbf_attributes": {
+        "record_ordinal": 183,
+        "deleted": false,
+        "Name": "Guarita",
+        "Name_raw_hex": "4775617269746120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 184,
+      "shp_offset_bytes": 19842440,
+      "shp_content_bytes": 92112,
+      "shp_record_sha256": "5d4b79651f5cc6766d48108a8e8b2abe2863d98a93eb52554dc733806d7c6ce8",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 184,
+      "dbf_attributes": {
+        "record_ordinal": 184,
+        "deleted": false,
+        "Name": "La Campa",
+        "Name_raw_hex": "4c612043616d7061202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 185,
+      "shp_offset_bytes": 19934560,
+      "shp_content_bytes": 105680,
+      "shp_record_sha256": "c72efab61a98bfd2bcca4e3ac8176f042023946fd138df5e607a9b7f3f41d68a",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 185,
+      "dbf_attributes": {
+        "record_ordinal": 185,
+        "deleted": false,
+        "Name": "La Iguala",
+        "Name_raw_hex": "4c6120496775616c612020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 186,
+      "shp_offset_bytes": 20040248,
+      "shp_content_bytes": 128656,
+      "shp_record_sha256": "0b648c4db2002d4ff74b3429e8ff2531f58b88e6e5e04305cab763e08376fc40",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 186,
+      "dbf_attributes": {
+        "record_ordinal": 186,
+        "deleted": false,
+        "Name": "Las Flores",
+        "Name_raw_hex": "4c617320466c6f72657320202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 187,
+      "shp_offset_bytes": 20168912,
+      "shp_content_bytes": 76112,
+      "shp_record_sha256": "89bc47801082017d041975f3e17eb0b4991899020aafc7ccb891f3c283e54cb5",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 187,
+      "dbf_attributes": {
+        "record_ordinal": 187,
+        "deleted": false,
+        "Name": "La Union",
+        "Name_raw_hex": "4c6120556e696f6e202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 188,
+      "shp_offset_bytes": 20245032,
+      "shp_content_bytes": 34992,
+      "shp_record_sha256": "092cbd497303b5487afbeb720d865cd4badc9950579454aaaa75cf2b5cf3f3ee",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 188,
+      "dbf_attributes": {
+        "record_ordinal": 188,
+        "deleted": false,
+        "Name": "La Virtud",
+        "Name_raw_hex": "4c61205669727475642020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 189,
+      "shp_offset_bytes": 20280032,
+      "shp_content_bytes": 61504,
+      "shp_record_sha256": "596d4cf7edc5841e23bda2b37d83ec6b556b5eb0c9a0c8a2fde20741780ab6a9",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 189,
+      "dbf_attributes": {
+        "record_ordinal": 189,
+        "deleted": false,
+        "Name": "Lepaera",
+        "Name_raw_hex": "4c65706165726120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 190,
+      "shp_offset_bytes": 20341544,
+      "shp_content_bytes": 74768,
+      "shp_record_sha256": "680b00bb0a2264c6e98a6b11666d9f47d1d9ab3909c1ab4d7ab77b5fcb1df334",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 190,
+      "dbf_attributes": {
+        "record_ordinal": 190,
+        "deleted": false,
+        "Name": "Mapulaca",
+        "Name_raw_hex": "4d6170756c616361202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 191,
+      "shp_offset_bytes": 20416320,
+      "shp_content_bytes": 43328,
+      "shp_record_sha256": "3cf8442ca158452c6f72a9ed524ae375a27ff9ec00f78505b83b8c475c496bd6",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 191,
+      "dbf_attributes": {
+        "record_ordinal": 191,
+        "deleted": false,
+        "Name": "Piraera",
+        "Name_raw_hex": "5069726165726120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 192,
+      "shp_offset_bytes": 20459656,
+      "shp_content_bytes": 165408,
+      "shp_record_sha256": "378b38773de9cbf9f97b2483770ccfe1f20af8763c5b94ef40d59073ff9b0ec4",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 192,
+      "dbf_attributes": {
+        "record_ordinal": 192,
+        "deleted": false,
+        "Name": "San Andres",
+        "Name_raw_hex": "53616e20416e6472657320202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 193,
+      "shp_offset_bytes": 20625072,
+      "shp_content_bytes": 158688,
+      "shp_record_sha256": "ba5cd905a3d4134c78a2c3012c96cded70119681fec5e7a610c65c30ccccfa82",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 193,
+      "dbf_attributes": {
+        "record_ordinal": 193,
+        "deleted": false,
+        "Name": "San Francisco",
+        "Name_raw_hex": "53616e204672616e636973636f20202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 194,
+      "shp_offset_bytes": 20783768,
+      "shp_content_bytes": 121792,
+      "shp_record_sha256": "8d068b347b6b25b80f7bc570188304c193ae1fee758b842eb84d3256b9b0e2ad",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 194,
+      "dbf_attributes": {
+        "record_ordinal": 194,
+        "deleted": false,
+        "Name": "San Juan Guarita",
+        "Name_raw_hex": "53616e204a75616e204775617269746120202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 195,
+      "shp_offset_bytes": 20905568,
+      "shp_content_bytes": 40768,
+      "shp_record_sha256": "37a1e0ffc1ef7767b1bc887ddf3a6ef01eef5dafbbfbc38a0199f75d762aac1d",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 195,
+      "dbf_attributes": {
+        "record_ordinal": 195,
+        "deleted": false,
+        "Name": "San Manuel Colohete",
+        "Name_raw_hex": "53616e204d616e75656c20436f6c6f6865746520202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 196,
+      "shp_offset_bytes": 20946344,
+      "shp_content_bytes": 102724,
+      "shp_record_sha256": "6dead73f6199383ccdd06966ea07935725809eb664dd6e62edf53aa4f0322cff",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 196,
+      "dbf_attributes": {
+        "record_ordinal": 196,
+        "deleted": false,
+        "Name": "San Rafael",
+        "Name_raw_hex": "53616e2052616661656c20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 197,
+      "shp_offset_bytes": 21049076,
+      "shp_content_bytes": 42128,
+      "shp_record_sha256": "19e1d225436b6e74d4f1988d8c8b6bbcb1b7d958e96e980d9531f6795f618fe3",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 197,
+      "dbf_attributes": {
+        "record_ordinal": 197,
+        "deleted": false,
+        "Name": "San Sebastian",
+        "Name_raw_hex": "53616e2053656261737469616e20202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 198,
+      "shp_offset_bytes": 21091212,
+      "shp_content_bytes": 98368,
+      "shp_record_sha256": "65c4f96784bc0c52fb49b6ad18872e4a39961b940156f260d10c28c4540c766e",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 198,
+      "dbf_attributes": {
+        "record_ordinal": 198,
+        "deleted": false,
+        "Name": "Santa Cruz",
+        "Name_raw_hex": "53616e7461204372757a20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 199,
+      "shp_offset_bytes": 21189588,
+      "shp_content_bytes": 103296,
+      "shp_record_sha256": "5ba300b3441e6138b3d39b340a6dae7ffede75c5d7fb3ac972d78b461c6bb0f7",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 199,
+      "dbf_attributes": {
+        "record_ordinal": 199,
+        "deleted": false,
+        "Name": "Talgua",
+        "Name_raw_hex": "54616c6775612020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 200,
+      "shp_offset_bytes": 21292892,
+      "shp_content_bytes": 76992,
+      "shp_record_sha256": "57e883c65c516aa1cb6ccf6af004fc3b7014f465a066f38032e76e71969f27d3",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 200,
+      "dbf_attributes": {
+        "record_ordinal": 200,
+        "deleted": false,
+        "Name": "Tambla",
+        "Name_raw_hex": "54616d626c612020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 201,
+      "shp_offset_bytes": 21369892,
+      "shp_content_bytes": 68112,
+      "shp_record_sha256": "734ebcbc5d63852624ebec07a8340f2e6363ee559fbd1d332326f1aac6f8928b",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 201,
+      "dbf_attributes": {
+        "record_ordinal": 201,
+        "deleted": false,
+        "Name": "Tomala",
+        "Name_raw_hex": "546f6d616c612020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 202,
+      "shp_offset_bytes": 21438012,
+      "shp_content_bytes": 44256,
+      "shp_record_sha256": "cd39f56ca37515062ad4487132dbde62b43782032c1853a35a0354c44687c04d",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 202,
+      "dbf_attributes": {
+        "record_ordinal": 202,
+        "deleted": false,
+        "Name": "Valladolid",
+        "Name_raw_hex": "56616c6c61646f6c696420202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 203,
+      "shp_offset_bytes": 21482276,
+      "shp_content_bytes": 40480,
+      "shp_record_sha256": "7077f474c7704c0d565bd3432c5334d494ef766fecab3e47fdbcf7fe85e5adb3",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 203,
+      "dbf_attributes": {
+        "record_ordinal": 203,
+        "deleted": false,
+        "Name": "Virginia",
+        "Name_raw_hex": "56697267696e6961202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 204,
+      "shp_offset_bytes": 21522764,
+      "shp_content_bytes": 37824,
+      "shp_record_sha256": "9a0b711873ebabe5d73ab64ffaabe38e6672260b13f7173426cb4c09b481fadf",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 204,
+      "dbf_attributes": {
+        "record_ordinal": 204,
+        "deleted": false,
+        "Name": "San Marcos de Caiquin",
+        "Name_raw_hex": "53616e204d6172636f73206465204361697175696e2020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 205,
+      "shp_offset_bytes": 21560596,
+      "shp_content_bytes": 46480,
+      "shp_record_sha256": "259cf6339e58f438b81c7ab457723d8dff2b253fc50bf29cc565fb687ff1bb40",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 205,
+      "dbf_attributes": {
+        "record_ordinal": 205,
+        "deleted": false,
+        "Name": "Ocotepeque",
+        "Name_raw_hex": "4f636f7465706571756520202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 206,
+      "shp_offset_bytes": 21607084,
+      "shp_content_bytes": 56672,
+      "shp_record_sha256": "42d756df6cfb997ea02addae739ad52cb5fe37a050bde0d044ba67e1f7e01cf7",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 206,
+      "dbf_attributes": {
+        "record_ordinal": 206,
+        "deleted": false,
+        "Name": "Belen Gualcho",
+        "Name_raw_hex": "42656c656e204775616c63686f20202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 207,
+      "shp_offset_bytes": 21663764,
+      "shp_content_bytes": 74288,
+      "shp_record_sha256": "04820d4616da3e9ec46582bbe1b0608cea7362db0bda6bdbac82047efc106ed5",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 207,
+      "dbf_attributes": {
+        "record_ordinal": 207,
+        "deleted": false,
+        "Name": "Concepcion",
+        "Name_raw_hex": "436f6e63657063696f6e20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 208,
+      "shp_offset_bytes": 21738060,
+      "shp_content_bytes": 168512,
+      "shp_record_sha256": "d1f38427c81b2b903d6e45e30bd99aed4ad34c444a2d554eb5a97e7b8d1e01ba",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 208,
+      "dbf_attributes": {
+        "record_ordinal": 208,
+        "deleted": false,
+        "Name": "Dolores Merendon",
+        "Name_raw_hex": "446f6c6f726573204d6572656e646f6e20202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 209,
+      "shp_offset_bytes": 21906580,
+      "shp_content_bytes": 59568,
+      "shp_record_sha256": "9843cfab83d1387b009a251c4c5a3edefd09dd77858011b2c7152f5b91359c58",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 209,
+      "dbf_attributes": {
+        "record_ordinal": 209,
+        "deleted": false,
+        "Name": "Fraternidad",
+        "Name_raw_hex": "4672617465726e69646164202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 210,
+      "shp_offset_bytes": 21966156,
+      "shp_content_bytes": 66176,
+      "shp_record_sha256": "3cdf49502b7a428add67c6fa3632ff5491be40d8da39ddd7ccdd3c03689f09c8",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 210,
+      "dbf_attributes": {
+        "record_ordinal": 210,
+        "deleted": false,
+        "Name": "La Encarnacion",
+        "Name_raw_hex": "4c6120456e6361726e6163696f6e202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 211,
+      "shp_offset_bytes": 22032340,
+      "shp_content_bytes": 51568,
+      "shp_record_sha256": "744836d08891bc2825fe983ee78da442d4488e3245728a7c5019b1d302fe3baa",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 211,
+      "dbf_attributes": {
+        "record_ordinal": 211,
+        "deleted": false,
+        "Name": "La Labor",
+        "Name_raw_hex": "4c61204c61626f72202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 212,
+      "shp_offset_bytes": 22083916,
+      "shp_content_bytes": 85920,
+      "shp_record_sha256": "8ff0540924802cd1c788a790ea11c93822107c83ca94c2884609ff7731871141",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 212,
+      "dbf_attributes": {
+        "record_ordinal": 212,
+        "deleted": false,
+        "Name": "Lucerna",
+        "Name_raw_hex": "4c756365726e6120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 213,
+      "shp_offset_bytes": 22169844,
+      "shp_content_bytes": 140352,
+      "shp_record_sha256": "9608c62f3c73fdb381e0d4aa778c9de2939ed189e44967ffff7963dfc01505ef",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 213,
+      "dbf_attributes": {
+        "record_ordinal": 213,
+        "deleted": false,
+        "Name": "Mercedes",
+        "Name_raw_hex": "4d65726365646573202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 214,
+      "shp_offset_bytes": 22310204,
+      "shp_content_bytes": 145776,
+      "shp_record_sha256": "e7e4ae796e93a66d538ba8ebeaa7d233911894574199a17712da62f03269a1f0",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 214,
+      "dbf_attributes": {
+        "record_ordinal": 214,
+        "deleted": false,
+        "Name": "San Fernando",
+        "Name_raw_hex": "53616e204665726e616e646f2020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 215,
+      "shp_offset_bytes": 22455988,
+      "shp_content_bytes": 70592,
+      "shp_record_sha256": "45989d269c66024a366297437bc5b5fab78521d2415b3c117c8fae964ac792b4",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 215,
+      "dbf_attributes": {
+        "record_ordinal": 215,
+        "deleted": false,
+        "Name": "San Francisco del Valle",
+        "Name_raw_hex": "53616e204672616e636973636f2064656c2056616c6c65202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 216,
+      "shp_offset_bytes": 22526588,
+      "shp_content_bytes": 74416,
+      "shp_record_sha256": "6a6e201f62174b10916abd290b8dfc48bacea8ef2159d96eaf467e5b7f8607d7",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 216,
+      "dbf_attributes": {
+        "record_ordinal": 216,
+        "deleted": false,
+        "Name": "San Jorge",
+        "Name_raw_hex": "53616e204a6f7267652020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 217,
+      "shp_offset_bytes": 22601012,
+      "shp_content_bytes": 112692,
+      "shp_record_sha256": "dd55cd06a59d3bf14b69eaafb0980be07bed498854d9d195e2e8e8ee361545ac",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 217,
+      "dbf_attributes": {
+        "record_ordinal": 217,
+        "deleted": false,
+        "Name": "San Marcos",
+        "Name_raw_hex": "53616e204d6172636f7320202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 218,
+      "shp_offset_bytes": 22713712,
+      "shp_content_bytes": 100240,
+      "shp_record_sha256": "34233e8c853cec0aeb4e91ef529de8a4549ac1b0335007b2ce3ef3e001a4f645",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 218,
+      "dbf_attributes": {
+        "record_ordinal": 218,
+        "deleted": false,
+        "Name": "Santa Fe",
+        "Name_raw_hex": "53616e7461204665202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 219,
+      "shp_offset_bytes": 22813960,
+      "shp_content_bytes": 136656,
+      "shp_record_sha256": "dca1ccabaa05605146d7759aaa735d2f3e6565a515d1da099b47d9badfdb2bd8",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 219,
+      "dbf_attributes": {
+        "record_ordinal": 219,
+        "deleted": false,
+        "Name": "Sensenti",
+        "Name_raw_hex": "53656e73656e7469202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 220,
+      "shp_offset_bytes": 22950624,
+      "shp_content_bytes": 72496,
+      "shp_record_sha256": "5bc7b7eb5824ca180e7fcd8eb6460fc200649ffeab849be30d5f68cbdba1f20f",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 220,
+      "dbf_attributes": {
+        "record_ordinal": 220,
+        "deleted": false,
+        "Name": "Sinuapa",
+        "Name_raw_hex": "53696e7561706120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 221,
+      "shp_offset_bytes": 23023128,
+      "shp_content_bytes": 97296,
+      "shp_record_sha256": "67ad03ac7c59dc48411d5d12f8fbddd27918f5ba071a6bb580b54c8cd32f38b3",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 221,
+      "dbf_attributes": {
+        "record_ordinal": 221,
+        "deleted": false,
+        "Name": "Juticalpa",
+        "Name_raw_hex": "4a75746963616c70612020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 222,
+      "shp_offset_bytes": 23120432,
+      "shp_content_bytes": 339232,
+      "shp_record_sha256": "cb9f32afad0e09fcc5bcfc7439bad3f42c3f2cf5edebf186cbc315b657032588",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 222,
+      "dbf_attributes": {
+        "record_ordinal": 222,
+        "deleted": false,
+        "Name": "Campamento",
+        "Name_raw_hex": "43616d70616d656e746f20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 223,
+      "shp_offset_bytes": 23459672,
+      "shp_content_bytes": 134336,
+      "shp_record_sha256": "69a3d7dd608e66a3de5057c73dea8d9aba18583e6922cc2194856a8dfe910d05",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 223,
+      "dbf_attributes": {
+        "record_ordinal": 223,
+        "deleted": false,
+        "Name": "Catacamas",
+        "Name_raw_hex": "4361746163616d61732020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 224,
+      "shp_offset_bytes": 23594016,
+      "shp_content_bytes": 671904,
+      "shp_record_sha256": "d82c818ea47c94fac34c9ab9f8811f293554c41fa841a2ff0924f727c936a412",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 224,
+      "dbf_attributes": {
+        "record_ordinal": 224,
+        "deleted": false,
+        "Name": "Concordia",
+        "Name_raw_hex": "436f6e636f726469612020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 225,
+      "shp_offset_bytes": 24265928,
+      "shp_content_bytes": 155552,
+      "shp_record_sha256": "86f94950dcb07c5e53f204202a4512727853797eb0fa83d132418ff5f6f9767e",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 225,
+      "dbf_attributes": {
+        "record_ordinal": 225,
+        "deleted": false,
+        "Name": "Dulce Nombre de Culmi",
+        "Name_raw_hex": "44756c6365204e6f6d6272652064652043756c6d692020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 226,
+      "shp_offset_bytes": 24421488,
+      "shp_content_bytes": 192704,
+      "shp_record_sha256": "13a5f802697cc8495124fda48af62d9f3c184a808795858275e55762105afa14",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 226,
+      "dbf_attributes": {
+        "record_ordinal": 226,
+        "deleted": false,
+        "Name": "El Rosario",
+        "Name_raw_hex": "456c20526f736172696f20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 227,
+      "shp_offset_bytes": 24614200,
+      "shp_content_bytes": 43472,
+      "shp_record_sha256": "db83cc4803ab16b8576e42947ba554836c7a94098de9fa508220add465e06c24",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 227,
+      "dbf_attributes": {
+        "record_ordinal": 227,
+        "deleted": false,
+        "Name": "Esquipulas del Norte",
+        "Name_raw_hex": "457371756970756c61732064656c204e6f727465202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 228,
+      "shp_offset_bytes": 24657680,
+      "shp_content_bytes": 141712,
+      "shp_record_sha256": "85e548753322fbd2801900b6fb2c9ad45dbd7f19ae09f50c912734e702ddbcb2",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 228,
+      "dbf_attributes": {
+        "record_ordinal": 228,
+        "deleted": false,
+        "Name": "Gualaco",
+        "Name_raw_hex": "4775616c61636f20202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 229,
+      "shp_offset_bytes": 24799400,
+      "shp_content_bytes": 206944,
+      "shp_record_sha256": "7eec68a1386dee37aeaa6faf3adfa6d2b761ed4ce4f5befcc0e2e0e62b275e5b",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 229,
+      "dbf_attributes": {
+        "record_ordinal": 229,
+        "deleted": false,
+        "Name": "Guarizama",
+        "Name_raw_hex": "47756172697a616d612020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 230,
+      "shp_offset_bytes": 25006352,
+      "shp_content_bytes": 86528,
+      "shp_record_sha256": "f3b2009a46f9107ef0e84c4dbbd176fb5fc5f2021eb21403a1f0361b2ddf96b3",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 230,
+      "dbf_attributes": {
+        "record_ordinal": 230,
+        "deleted": false,
+        "Name": "Guata",
+        "Name_raw_hex": "4775617461202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 231,
+      "shp_offset_bytes": 25092888,
+      "shp_content_bytes": 97664,
+      "shp_record_sha256": "fb773d38ded7cf526a46a66cc133521e145bf117d0825d4ff4e8a8954b2bdd47",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 231,
+      "dbf_attributes": {
+        "record_ordinal": 231,
+        "deleted": false,
+        "Name": "Guayape",
+        "Name_raw_hex": "4775617961706520202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 232,
+      "shp_offset_bytes": 25190560,
+      "shp_content_bytes": 94608,
+      "shp_record_sha256": "e8939329c79782453b5318e4e55c51cc55ddcbc5f4c034164f4eb0a61d6da518",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 232,
+      "dbf_attributes": {
+        "record_ordinal": 232,
+        "deleted": false,
+        "Name": "Jano",
+        "Name_raw_hex": "4a616e6f20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 233,
+      "shp_offset_bytes": 25285176,
+      "shp_content_bytes": 148176,
+      "shp_record_sha256": "76789b25298d9d35167a40cab2dc7b2256e6d3a97e6472fe580c8a1376e0c875",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 233,
+      "dbf_attributes": {
+        "record_ordinal": 233,
+        "deleted": false,
+        "Name": "La Union",
+        "Name_raw_hex": "4c6120556e696f6e202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 234,
+      "shp_offset_bytes": 25433360,
+      "shp_content_bytes": 114288,
+      "shp_record_sha256": "c785f21373e95299f13f33a5a55361a39b3b7804cd1579f338bec4eda4fdb93d",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 234,
+      "dbf_attributes": {
+        "record_ordinal": 234,
+        "deleted": false,
+        "Name": "Mangulile",
+        "Name_raw_hex": "4d616e67756c696c652020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 235,
+      "shp_offset_bytes": 25547656,
+      "shp_content_bytes": 109280,
+      "shp_record_sha256": "fa4da3bd698cda49fc80c72f5754e8cf0282d24ac6869564fc26e0be6ad104af",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 235,
+      "dbf_attributes": {
+        "record_ordinal": 235,
+        "deleted": false,
+        "Name": "Manto",
+        "Name_raw_hex": "4d616e746f202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 236,
+      "shp_offset_bytes": 25656944,
+      "shp_content_bytes": 143312,
+      "shp_record_sha256": "08abd16c9ccbffeec8bbf5d2ad8b1716c09474bfccdc2db861b959672be4a3ac",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 236,
+      "dbf_attributes": {
+        "record_ordinal": 236,
+        "deleted": false,
+        "Name": "Salama",
+        "Name_raw_hex": "53616c616d612020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 237,
+      "shp_offset_bytes": 25800264,
+      "shp_content_bytes": 123120,
+      "shp_record_sha256": "56e31e9396289ae55a5645306a41bcca808990c60d117e26bd45b05836f93ade",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 237,
+      "dbf_attributes": {
+        "record_ordinal": 237,
+        "deleted": false,
+        "Name": "San Esteban",
+        "Name_raw_hex": "53616e204573746562616e202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 238,
+      "shp_offset_bytes": 25923392,
+      "shp_content_bytes": 120448,
+      "shp_record_sha256": "d63affa433d816adacd993b777321b843cf64f6aaf04d33b6a76748686b662d6",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 238,
+      "dbf_attributes": {
+        "record_ordinal": 238,
+        "deleted": false,
+        "Name": "San Francisco de Becerra",
+        "Name_raw_hex": "53616e204672616e636973636f20646520426563657272612020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 239,
+      "shp_offset_bytes": 26043848,
+      "shp_content_bytes": 142624,
+      "shp_record_sha256": "1ff43ff6752748351804836ead63b011596003684187358a85110d7dc9e8f958",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 239,
+      "dbf_attributes": {
+        "record_ordinal": 239,
+        "deleted": false,
+        "Name": "San Francisco de La Paz",
+        "Name_raw_hex": "53616e204672616e636973636f206465204c612050617a202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 240,
+      "shp_offset_bytes": 26186480,
+      "shp_content_bytes": 69008,
+      "shp_record_sha256": "bcb7a4f3260a81126e076cd376c5f428a5626610ac0f1b48c49b98969c111aa8",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 240,
+      "dbf_attributes": {
+        "record_ordinal": 240,
+        "deleted": false,
+        "Name": "Santa Maria del Real",
+        "Name_raw_hex": "53616e7461204d617269612064656c205265616c202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 241,
+      "shp_offset_bytes": 26255496,
+      "shp_content_bytes": 71472,
+      "shp_record_sha256": "5ff614b246322aa63989ca72232cd8992d5941885af49ca3adab9ed6d37e7771",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 241,
+      "dbf_attributes": {
+        "record_ordinal": 241,
+        "deleted": false,
+        "Name": "Silca",
+        "Name_raw_hex": "53696c6361202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 242,
+      "shp_offset_bytes": 26326976,
+      "shp_content_bytes": 91984,
+      "shp_record_sha256": "d58227be40b96fea76113b34af7979e50fe0494c4ef8bb1128c9fd9e29b3ac9d",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 242,
+      "dbf_attributes": {
+        "record_ordinal": 242,
+        "deleted": false,
+        "Name": "Yocon",
+        "Name_raw_hex": "596f636f6e202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 243,
+      "shp_offset_bytes": 26418968,
+      "shp_content_bytes": 47600,
+      "shp_record_sha256": "86056154cdb482c6461fe733cdf5dc7e6e31a4ad83cddcb07a58e25111be7936",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 243,
+      "dbf_attributes": {
+        "record_ordinal": 243,
+        "deleted": false,
+        "Name": "Patuca",
+        "Name_raw_hex": "5061747563612020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 244,
+      "shp_offset_bytes": 26466576,
+      "shp_content_bytes": 182944,
+      "shp_record_sha256": "e3bbc70a6e10995e62c6907446f9d9d8cf01dfce16797f2b4d1af2341a85c19e",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 244,
+      "dbf_attributes": {
+        "record_ordinal": 244,
+        "deleted": false,
+        "Name": "Santa Barbara",
+        "Name_raw_hex": "53616e7461204261726261726120202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 245,
+      "shp_offset_bytes": 26649528,
+      "shp_content_bytes": 87552,
+      "shp_record_sha256": "eb0c69282d07be30d1af56f08c6ea1d98715a1efa184eadf3bd6e15d457ae9a7",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 245,
+      "dbf_attributes": {
+        "record_ordinal": 245,
+        "deleted": false,
+        "Name": "Arada",
+        "Name_raw_hex": "4172616461202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 246,
+      "shp_offset_bytes": 26737088,
+      "shp_content_bytes": 28112,
+      "shp_record_sha256": "700405d8a45d374cd919ef3b918a7acf7ef720a8d8fafdcf87a00b6c2c8c7b74",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 246,
+      "dbf_attributes": {
+        "record_ordinal": 246,
+        "deleted": false,
+        "Name": "Atima",
+        "Name_raw_hex": "4174696d61202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 247,
+      "shp_offset_bytes": 26765208,
+      "shp_content_bytes": 59072,
+      "shp_record_sha256": "d56a2b580b1d88a85c16fc9e1639c7f2934e378b55c19a71a6b11883756c61c5",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 247,
+      "dbf_attributes": {
+        "record_ordinal": 247,
+        "deleted": false,
+        "Name": "Azacualpa",
+        "Name_raw_hex": "417a616375616c70612020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 248,
+      "shp_offset_bytes": 26824288,
+      "shp_content_bytes": 10000,
+      "shp_record_sha256": "efdd8f0bb34066d49f597901af42160b16543347d2f67a6175a0c869d72d2f07",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 248,
+      "dbf_attributes": {
+        "record_ordinal": 248,
+        "deleted": false,
+        "Name": "Ceguaca",
+        "Name_raw_hex": "4365677561636120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 249,
+      "shp_offset_bytes": 26834296,
+      "shp_content_bytes": 43008,
+      "shp_record_sha256": "82131e65a8dcae08e8ceccd3b72849c7f959ce5a27f6fcb5cc3dbb97205299a9",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 249,
+      "dbf_attributes": {
+        "record_ordinal": 249,
+        "deleted": false,
+        "Name": "Concepcion del Norte",
+        "Name_raw_hex": "436f6e63657063696f6e2064656c204e6f727465202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 250,
+      "shp_offset_bytes": 26877312,
+      "shp_content_bytes": 31664,
+      "shp_record_sha256": "afc2f65885d55094c523de664eeea2d7c1e71fd12533c470a3ac098b3192015e",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 250,
+      "dbf_attributes": {
+        "record_ordinal": 250,
+        "deleted": false,
+        "Name": "Concepcion del Sur",
+        "Name_raw_hex": "436f6e63657063696f6e2064656c205375722020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 251,
+      "shp_offset_bytes": 26908984,
+      "shp_content_bytes": 62240,
+      "shp_record_sha256": "bc3e9d2c4227d40eea72a7a25d7758d33965b42f9bc609ad4e7357f2d8f21faa",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 251,
+      "dbf_attributes": {
+        "record_ordinal": 251,
+        "deleted": false,
+        "Name": "Chinda",
+        "Name_raw_hex": "4368696e64612020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 252,
+      "shp_offset_bytes": 26971232,
+      "shp_content_bytes": 20272,
+      "shp_record_sha256": "599096a74611af1451a24d7bb7a04c1ecd29387adf6de537740ee83c02a6d75d",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 252,
+      "dbf_attributes": {
+        "record_ordinal": 252,
+        "deleted": false,
+        "Name": "El Nispero",
+        "Name_raw_hex": "456c204e69737065726f20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 253,
+      "shp_offset_bytes": 26991512,
+      "shp_content_bytes": 13120,
+      "shp_record_sha256": "d77d8bf7a769d08434186a92b00fc5cce059c7a8283636c61ce1d2645ff6e309",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 253,
+      "dbf_attributes": {
+        "record_ordinal": 253,
+        "deleted": false,
+        "Name": "Gualala",
+        "Name_raw_hex": "4775616c616c6120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 254,
+      "shp_offset_bytes": 27004640,
+      "shp_content_bytes": 15968,
+      "shp_record_sha256": "726c01dd3a7c3297108f7bcbe27c6ed6f06985b1ef810228a7e813a4a2e43fd4",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 254,
+      "dbf_attributes": {
+        "record_ordinal": 254,
+        "deleted": false,
+        "Name": "Ilama",
+        "Name_raw_hex": "496c616d61202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 255,
+      "shp_offset_bytes": 27020616,
+      "shp_content_bytes": 28064,
+      "shp_record_sha256": "bf911e1b7e2ca187ef6b550692fa40d81a53b3d277a8384bdd0f46c884d3bd22",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 255,
+      "dbf_attributes": {
+        "record_ordinal": 255,
+        "deleted": false,
+        "Name": "Macuelizo",
+        "Name_raw_hex": "4d616375656c697a6f2020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 256,
+      "shp_offset_bytes": 27048688,
+      "shp_content_bytes": 101648,
+      "shp_record_sha256": "b8cb615d684693d187648c3fd3a2005216f77fa2e606c313f2ed56d195c979a9",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 256,
+      "dbf_attributes": {
+        "record_ordinal": 256,
+        "deleted": false,
+        "Name": "Naranjito",
+        "Name_raw_hex": "4e6172616e6a69746f2020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 257,
+      "shp_offset_bytes": 27150344,
+      "shp_content_bytes": 26736,
+      "shp_record_sha256": "c224cc70d4b5833b2b4d575199e568b843e3b242f0173235cf51d891a0a23527",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 257,
+      "dbf_attributes": {
+        "record_ordinal": 257,
+        "deleted": false,
+        "Name": "Nuevo Celilac",
+        "Name_raw_hex": "4e7565766f2043656c696c616320202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 258,
+      "shp_offset_bytes": 27177088,
+      "shp_content_bytes": 106864,
+      "shp_record_sha256": "e21d62d414a053534f7b02b933b1bfcffdf5c687b9169cd97f2fb7922869528c",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 258,
+      "dbf_attributes": {
+        "record_ordinal": 258,
+        "deleted": false,
+        "Name": "Petoa",
+        "Name_raw_hex": "5065746f61202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 259,
+      "shp_offset_bytes": 27283960,
+      "shp_content_bytes": 40800,
+      "shp_record_sha256": "e79c256b77c464c719fd505ba2e4a8eea38a3bdde5125e88acd4d57104de57cb",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 259,
+      "dbf_attributes": {
+        "record_ordinal": 259,
+        "deleted": false,
+        "Name": "Proteccion",
+        "Name_raw_hex": "50726f74656363696f6e20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 260,
+      "shp_offset_bytes": 27324768,
+      "shp_content_bytes": 28288,
+      "shp_record_sha256": "82d067459f2cf90e402908e61e0c6ccdf64397ada7e7cab746d6efbceedf9af9",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 260,
+      "dbf_attributes": {
+        "record_ordinal": 260,
+        "deleted": false,
+        "Name": "Quimistan",
+        "Name_raw_hex": "5175696d697374616e2020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 261,
+      "shp_offset_bytes": 27353064,
+      "shp_content_bytes": 155312,
+      "shp_record_sha256": "a71042d7ba6b37a8123309ff1363ac9ec079dca04c7865edcb521af9fb6df1a2",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 261,
+      "dbf_attributes": {
+        "record_ordinal": 261,
+        "deleted": false,
+        "Name": "San Francisco de Ojuera",
+        "Name_raw_hex": "53616e204672616e636973636f206465204f6a75657261202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 262,
+      "shp_offset_bytes": 27508384,
+      "shp_content_bytes": 39952,
+      "shp_record_sha256": "4513263320635d2ba62072c9b543ddac0cc957cae19535867cee897ff82844e1",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 262,
+      "dbf_attributes": {
+        "record_ordinal": 262,
+        "deleted": false,
+        "Name": "San Jose de Colinas",
+        "Name_raw_hex": "53616e204a6f736520646520436f6c696e617320202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 263,
+      "shp_offset_bytes": 27548344,
+      "shp_content_bytes": 85632,
+      "shp_record_sha256": "c20a333b660231379655cb775a965c5caeaec85d6e96de1a846ed5c8f0ebcb14",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 263,
+      "dbf_attributes": {
+        "record_ordinal": 263,
+        "deleted": false,
+        "Name": "San Luis",
+        "Name_raw_hex": "53616e204c756973202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 264,
+      "shp_offset_bytes": 27633984,
+      "shp_content_bytes": 110720,
+      "shp_record_sha256": "6998f052e2496df248d839eacf7259863a2bb9fda0706057300dfd5a2640e101",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 264,
+      "dbf_attributes": {
+        "record_ordinal": 264,
+        "deleted": false,
+        "Name": "San Marcos",
+        "Name_raw_hex": "53616e204d6172636f7320202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 265,
+      "shp_offset_bytes": 27744712,
+      "shp_content_bytes": 84448,
+      "shp_record_sha256": "ceb0919abe470bae693b550dd772ad6a396eb9e1982be9bed9bf5e75fd65a464",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 265,
+      "dbf_attributes": {
+        "record_ordinal": 265,
+        "deleted": false,
+        "Name": "San Nicolas",
+        "Name_raw_hex": "53616e204e69636f6c6173202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 266,
+      "shp_offset_bytes": 27829168,
+      "shp_content_bytes": 66656,
+      "shp_record_sha256": "aa22c1218f468d85271015d604ab8c502dec5a323d1526641e6dc9e8df9a3eeb",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 266,
+      "dbf_attributes": {
+        "record_ordinal": 266,
+        "deleted": false,
+        "Name": "San Pedro Zacapa",
+        "Name_raw_hex": "53616e20506564726f205a616361706120202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 267,
+      "shp_offset_bytes": 27895832,
+      "shp_content_bytes": 38816,
+      "shp_record_sha256": "04700022d6ed6216ae5f9cb93cc7a631e23d5d9d16deea636aed92bd6b8e8dcd",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 267,
+      "dbf_attributes": {
+        "record_ordinal": 267,
+        "deleted": false,
+        "Name": "San Vicente Centenario",
+        "Name_raw_hex": "53616e20566963656e74652043656e74656e6172696f20202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 268,
+      "shp_offset_bytes": 27934656,
+      "shp_content_bytes": 45552,
+      "shp_record_sha256": "71717b8669df0088bf09b3fdf779b24b319a35cf35d1103c83694214de7561b6",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 268,
+      "dbf_attributes": {
+        "record_ordinal": 268,
+        "deleted": false,
+        "Name": "Santa Rita",
+        "Name_raw_hex": "53616e7461205269746120202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 269,
+      "shp_offset_bytes": 27980216,
+      "shp_content_bytes": 43824,
+      "shp_record_sha256": "8941a257923c3ae7cea2852fa8080efdc20f334b8db4704698ad7b295dbbe787",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 269,
+      "dbf_attributes": {
+        "record_ordinal": 269,
+        "deleted": false,
+        "Name": "Trinidad",
+        "Name_raw_hex": "5472696e69646164202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 270,
+      "shp_offset_bytes": 28024048,
+      "shp_content_bytes": 23360,
+      "shp_record_sha256": "911a65705b1a627746e80a636ba11b93133e7d4757da69ccce94f111b35c5067",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 270,
+      "dbf_attributes": {
+        "record_ordinal": 270,
+        "deleted": false,
+        "Name": "Las Vegas",
+        "Name_raw_hex": "4c61732056656761732020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 271,
+      "shp_offset_bytes": 28047416,
+      "shp_content_bytes": 51696,
+      "shp_record_sha256": "d6b918ec22d040100f2ce058100a9860ead854e160d661cdb93dab4f92d3e9fd",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 271,
+      "dbf_attributes": {
+        "record_ordinal": 271,
+        "deleted": false,
+        "Name": "Nacaome",
+        "Name_raw_hex": "4e6163616f6d6520202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 272,
+      "shp_offset_bytes": 28099120,
+      "shp_content_bytes": 424528,
+      "shp_record_sha256": "6659fbf296592cf7d9755f6c655a847518a8326c5ffd817f88cc56d139f27f96",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 272,
+      "dbf_attributes": {
+        "record_ordinal": 272,
+        "deleted": false,
+        "Name": "Alianza",
+        "Name_raw_hex": "416c69616e7a6120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 273,
+      "shp_offset_bytes": 28523656,
+      "shp_content_bytes": 367136,
+      "shp_record_sha256": "de52fe5e78a18f467be22ef46d92f9ef300ff05e737d67de24dabf6b89c47840",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 273,
+      "dbf_attributes": {
+        "record_ordinal": 273,
+        "deleted": false,
+        "Name": "Amapala",
+        "Name_raw_hex": "416d6170616c6120202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 274,
+      "shp_offset_bytes": 28890800,
+      "shp_content_bytes": 321888,
+      "shp_record_sha256": "c536fbb24a40c8d13cb2cbcfcfcd1c0ee96de2061685343dcfc6c598c2a0485f",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 274,
+      "dbf_attributes": {
+        "record_ordinal": 274,
+        "deleted": false,
+        "Name": "Aramecina",
+        "Name_raw_hex": "4172616d6563696e612020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 275,
+      "shp_offset_bytes": 29212696,
+      "shp_content_bytes": 69344,
+      "shp_record_sha256": "381f15aff873a871c7e7f97623d19671868dbd1788149ec4d94a30b38bcd0913",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 275,
+      "dbf_attributes": {
+        "record_ordinal": 275,
+        "deleted": false,
+        "Name": "Caridad",
+        "Name_raw_hex": "4361726964616420202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 276,
+      "shp_offset_bytes": 29282048,
+      "shp_content_bytes": 24624,
+      "shp_record_sha256": "b73d01d6320f7ff2e7ce9937ca296acfcabcd118ec620c23916e35aa52efdfd4",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 276,
+      "dbf_attributes": {
+        "record_ordinal": 276,
+        "deleted": false,
+        "Name": "Goascoran",
+        "Name_raw_hex": "476f6173636f72616e2020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 277,
+      "shp_offset_bytes": 29306680,
+      "shp_content_bytes": 87344,
+      "shp_record_sha256": "72845cdc869df1213faeef3599f34e3d6890e61d2eeae64ed964a7c1afa0bc64",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 277,
+      "dbf_attributes": {
+        "record_ordinal": 277,
+        "deleted": false,
+        "Name": "Langue",
+        "Name_raw_hex": "4c616e6775652020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 278,
+      "shp_offset_bytes": 29394032,
+      "shp_content_bytes": 20384,
+      "shp_record_sha256": "18d3557f4778a713ca42236798bd51efca6188427d7bac296482872216ff7312",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 278,
+      "dbf_attributes": {
+        "record_ordinal": 278,
+        "deleted": false,
+        "Name": "San Francisco de Coray",
+        "Name_raw_hex": "53616e204672616e636973636f20646520436f72617920202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 279,
+      "shp_offset_bytes": 29414424,
+      "shp_content_bytes": 23632,
+      "shp_record_sha256": "2567153e85c73807717b1379a595eba2b657ba90398826308386bd156ed27cd1",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 279,
+      "dbf_attributes": {
+        "record_ordinal": 279,
+        "deleted": false,
+        "Name": "San Lorenzo",
+        "Name_raw_hex": "53616e204c6f72656e7a6f202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 280,
+      "shp_offset_bytes": 29438064,
+      "shp_content_bytes": 769580,
+      "shp_record_sha256": "8679a5af7f8919a16c1be7b95ae603de2fe7075bcc22b3f64e800b8224ea7474",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 280,
+      "dbf_attributes": {
+        "record_ordinal": 280,
+        "deleted": false,
+        "Name": "Yoro",
+        "Name_raw_hex": "596f726f20202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 281,
+      "shp_offset_bytes": 30207652,
+      "shp_content_bytes": 380432,
+      "shp_record_sha256": "892415b98df53101446bf78b1ad54e25c7c1401ad464e2b90eb3abc93f3df79d",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 281,
+      "dbf_attributes": {
+        "record_ordinal": 281,
+        "deleted": false,
+        "Name": "Arenal",
+        "Name_raw_hex": "4172656e616c2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 282,
+      "shp_offset_bytes": 30588092,
+      "shp_content_bytes": 137072,
+      "shp_record_sha256": "65c0f00f8d68b940e601fe64115749c80bb1c8329f7d5b04311178cacbbd8d1b",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 282,
+      "dbf_attributes": {
+        "record_ordinal": 282,
+        "deleted": false,
+        "Name": "El Negrito",
+        "Name_raw_hex": "456c204e65677269746f20202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 283,
+      "shp_offset_bytes": 30725172,
+      "shp_content_bytes": 219744,
+      "shp_record_sha256": "8944ddae8b6c6010d2a6410b2de0d8107ceb9ccdc67f64037d41d79279374bee",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 283,
+      "dbf_attributes": {
+        "record_ordinal": 283,
+        "deleted": false,
+        "Name": "El Progreso",
+        "Name_raw_hex": "456c2050726f677265736f202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 284,
+      "shp_offset_bytes": 30944924,
+      "shp_content_bytes": 166832,
+      "shp_record_sha256": "b46d2f471541935b8824c85ee1db0485f4da31eae29466cfd1de1b2b9e1dfdc4",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 284,
+      "dbf_attributes": {
+        "record_ordinal": 284,
+        "deleted": false,
+        "Name": "Jocon",
+        "Name_raw_hex": "4a6f636f6e202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 285,
+      "shp_offset_bytes": 31111764,
+      "shp_content_bytes": 131776,
+      "shp_record_sha256": "b71201185bf6aa8f784d3fb5916cdaeddd4c2914f69138cf425570764557c0a8",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 285,
+      "dbf_attributes": {
+        "record_ordinal": 285,
+        "deleted": false,
+        "Name": "Morazan",
+        "Name_raw_hex": "4d6f72617a616e20202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 286,
+      "shp_offset_bytes": 31243548,
+      "shp_content_bytes": 190464,
+      "shp_record_sha256": "a2ea5ef04c543399bc07a8864f8a3ff65881d3f04b95db6dc1b016ebde7244bc",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 286,
+      "dbf_attributes": {
+        "record_ordinal": 286,
+        "deleted": false,
+        "Name": "Olanchito",
+        "Name_raw_hex": "4f6c616e636869746f2020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 287,
+      "shp_offset_bytes": 31434020,
+      "shp_content_bytes": 376416,
+      "shp_record_sha256": "a0870516bc44ca7ab5712c2ebb4223338e09f001bd48daadef6fdcacb414e245",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 287,
+      "dbf_attributes": {
+        "record_ordinal": 287,
+        "deleted": false,
+        "Name": "Santa Rita",
+        "Name_raw_hex": "53616e7461205269746120202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 288,
+      "shp_offset_bytes": 31810444,
+      "shp_content_bytes": 72368,
+      "shp_record_sha256": "16d62d97cc83ca4465d0e464d1cf5c53dffea28f288fb0d64ef4143c5d665285",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 288,
+      "dbf_attributes": {
+        "record_ordinal": 288,
+        "deleted": false,
+        "Name": "Sulaco",
+        "Name_raw_hex": "53756c61636f2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 289,
+      "shp_offset_bytes": 31882820,
+      "shp_content_bytes": 121376,
+      "shp_record_sha256": "615e2026c201595cf9a118873385ba15458c2a6c369a11ef0d6000e5dadd0f97",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 289,
+      "dbf_attributes": {
+        "record_ordinal": 289,
+        "deleted": false,
+        "Name": "Yorito",
+        "Name_raw_hex": "596f7269746f2020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 290,
+      "shp_offset_bytes": 32004204,
+      "shp_content_bytes": 104592,
+      "shp_record_sha256": "c63f788a6fa552c754f3f3ca045a10fceee3633b49fb7943f3e6e68e514c1f16",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 290,
+      "dbf_attributes": {
+        "record_ordinal": 290,
+        "deleted": false,
+        "Name": "El Porvenir",
+        "Name_raw_hex": "456c20506f7276656e6972202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 291,
+      "shp_offset_bytes": 32108804,
+      "shp_content_bytes": 168768,
+      "shp_record_sha256": "0768ea6ba50061ba4d967591742f7d521bc88914aa72e3b999c68c15c8d79cdd",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 291,
+      "dbf_attributes": {
+        "record_ordinal": 291,
+        "deleted": false,
+        "Name": "Puerto Lempira",
+        "Name_raw_hex": "50756572746f204c656d70697261202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 292,
+      "shp_offset_bytes": 32277580,
+      "shp_content_bytes": 89476,
+      "shp_record_sha256": "55ad9919147b8545064c617192af9579dbd3568c4f8af85bc65be64b08038026",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 292,
+      "dbf_attributes": {
+        "record_ordinal": 292,
+        "deleted": false,
+        "Name": "Brus Laguna",
+        "Name_raw_hex": "42727573204c6167756e61202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 293,
+      "shp_offset_bytes": 32367064,
+      "shp_content_bytes": 45104,
+      "shp_record_sha256": "406374a2986ffb1e0b466555d3aab97cfa7828233e76c87fa24864148e1e4070",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 293,
+      "dbf_attributes": {
+        "record_ordinal": 293,
+        "deleted": false,
+        "Name": "Ahuas",
+        "Name_raw_hex": "4168756173202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 294,
+      "shp_offset_bytes": 32412176,
+      "shp_content_bytes": 22128,
+      "shp_record_sha256": "33ebbd5a6e2c401fb26c7e9b4253ff3c5080019edb953f501af4f5c143f03214",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 294,
+      "dbf_attributes": {
+        "record_ordinal": 294,
+        "deleted": false,
+        "Name": "Juan Francisco  Bulnes",
+        "Name_raw_hex": "4a75616e204672616e636973636f202042756c6e657320202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 295,
+      "shp_offset_bytes": 32434312,
+      "shp_content_bytes": 9744,
+      "shp_record_sha256": "2c2c24760bc0dd07b811c1951f94e8acb63ea625438454902026ca0413ae2101",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 295,
+      "dbf_attributes": {
+        "record_ordinal": 295,
+        "deleted": false,
+        "Name": "Ram\u00f3n Villeda Morales",
+        "Name_raw_hex": "52616df36e2056696c6c656461204d6f72616c65732020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 296,
+      "shp_offset_bytes": 32444064,
+      "shp_content_bytes": 16240,
+      "shp_record_sha256": "743e3854a14b06c88071eae8ae46c5d6d5b4b52bd343b243e61fa60ecf3c98ab",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 296,
+      "dbf_attributes": {
+        "record_ordinal": 296,
+        "deleted": false,
+        "Name": "Wampusirpi",
+        "Name_raw_hex": "57616d7075736972706920202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 297,
+      "shp_offset_bytes": 32460312,
+      "shp_content_bytes": 28160,
+      "shp_record_sha256": "4a39a0504504596f383cc04f008557ceefd12ae19767dff9436106cd5114515c",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 297,
+      "dbf_attributes": {
+        "record_ordinal": 297,
+        "deleted": false,
+        "Name": "Nueva Frontera",
+        "Name_raw_hex": "4e756576612046726f6e74657261202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 298,
+      "shp_offset_bytes": 32488480,
+      "shp_content_bytes": 448,
+      "shp_record_sha256": "cc9943fbe8d68a4bce1bed7f02d98d75f06843f7c261e0801e46975aed4bc64d",
+      "record_shape_type": 5
+    },
+    {
+      "archive_record_ordinal": 298,
+      "dbf_attributes": {
+        "record_ordinal": 298,
+        "deleted": false,
+        "Name": "Victoria",
+        "Name_raw_hex": "566963746f726961202020202020202020202020202020202020202020202020202020202020202020202020202020202020",
+        "Level": "ADM2",
+        "Level_raw_hex": "41444d32202020202020"
+      },
+      "shp_record_number": 299,
+      "shp_offset_bytes": 32488936,
+      "shp_content_bytes": 279440,
+      "shp_record_sha256": "d7da39cb750c4dc510a62f5f51b2207aaa5d1f3c3929831a4326d613b2d187ca",
+      "record_shape_type": 5
+    }
+  ],
+  "nueva_frontera_archive_record_ordinal": 297,
+  "limits": [
+    "Archive association uses source SHX/SHP/DBF ordinal only. No archive name is joined to a canonical owner.",
+    "Each complete original SHP record remains in the authenticated whole archive. Coordinates have not been transformed, simplified, repaired, or interpreted by a spatial predicate.",
+    "299archive versus298released remains an unresolved source-vintage/completeness issue; Nueva Frontera is not silently dropped or added to47stage targets."
+  ],
+  "complete_sequential_shp_record_stream": true,
+  "complete_dbf_raw_fields_independently_match": true,
+  "dbf_field_layout": [
+    {
+      "name": "Name",
+      "bytes": 50
+    },
+    {
+      "name": "Level",
+      "bytes": 10
+    }
+  ],
+  "dbf_text_interpretation": "Reversible Latin1 view preserves every source byte; no independent native codepage declaration inferred."
+}

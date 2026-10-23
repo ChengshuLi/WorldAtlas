@@ -1,0 +1,9 @@
+# Three complete-owner union requests
+
+The earlier eight ordinary authority successes are preserved unchanged. They establish the exact43 cells but cannot all be composed directly: three repair/conflict pairs use byte-identical source-evidence per owner and therefore the same existing source-derived component identity. Ordinary composition rejects repeated component identities.
+
+The only new data are three ordinary native patches containing the exact tuple union of the two original3156 patches for each owner: Nunukan22771=23repair+1conflict=24; Malinau22935=1+5=6; KapuasHulu23115=1+2=3. The original50f907 raw source-evidence bytes, every positive/source/negative field, original patch predecessors and all eight successful products are unchanged. No cosmetic source edit, invented component ID, hand-written constructor result or production change is made.
+
+These are changed complete owner requests and require three new ordinary authority executions against their immutable patch checkpoint. This reruns no source classifier, physical producer or old requested execution. The new complete request is the exact union, not added scientific credit. Sintang23065=4 andSanggau23071=6 keep their original unique quartets, so eventual cohort composition uses five unique authority identities for43cells. Original accounting stays25repair474 and18conflict27; a combined component is not a new package and does not merge denominators or infer acceptance.
+
+publication-manifest.json retains all original immutable3156 patch and50f907 source descriptors plus private actual-product/execution pins, and records every exact owner tuple. Root is sole publisher; Worker6 will bind new immutable patch locators and execute the three ordinary union requests. No native call, source body alteration, code wrapper, memory policy or accepted credit is introduced here.

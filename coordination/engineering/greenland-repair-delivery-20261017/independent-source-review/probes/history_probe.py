@@ -1,0 +1,24 @@
+import os,json,pathlib,subprocess,gzip,hashlib,collections
+import shapely,numpy as np
+from shapely.geometry import shape
+W=pathlib.Path(__file__).resolve().parents[1];HEAD='19858cf7aa887efad5d0c6ba0736d5672bf0aef5';BASE='defe4dea8d79963350f34bd09fe80d1825049ed5';PREFIX='coordination/engineering/greenland-repair-delivery-20261017/'
+def raw(path,commit=BASE):return subprocess.check_output(['git','-c','protocol.allow=never','-C',str(W),'show',commit+':'+path],env={**os.environ,'GIT_NO_LAZY_FETCH':'1','GIT_NO_REPLACE_OBJECTS':'1'})
+def load(path,commit=BASE):return json.loads(raw(path,commit))
+prior=load('data/regional-review/regional-review-a9f03b364bdefa4a/subject-assessment.json');mem=load(PREFIX+'source-review/complete-primary-membership.json',HEAD);ids={f['id'] for s in mem['splits'] for f in s['descendants']}|{r['id'] for r in load(PREFIX+'source-review/greenland-prior-assessments.json',HEAD)};rows=[r for r in prior['subjects'] if r['id'] in ids];assert len(rows)==11
+upath='data/regional-review/regional-review-a9f03b364bdefa4a/sources/geoboundaries-GRL-ADM1-9469f09.geojson';original=raw(upath);assert hashlib.sha256(original).hexdigest()=='a3132d9511f99c11a70aa40969567e29aa6f12d347117286025f87c6cdde86b0';source=json.loads(original);assert len(source['features'])==6;features={f['properties']['shapeID']:f for f in source['features']}
+e=load(PREFIX+'native-inputs-001/source-evidence.json',HEAD);lat=np.frombuffer(gzip.decompress(raw(e['native_latitudes']['path'],e['native_latitudes']['commit'])),dtype='<f8');patch=load(PREFIX+'source-stage/native-patch.json',HEAD);out=[];exterior_rows=[]
+for t in e['targets']:
+ g=shape(features[t['id'].removeprefix('gb:GRL:ADM1:')]['geometry']);shapely.prepare(g);rr=[(r['y'],a,z) for r in patch['rows'] for a,z,o in r['runs'] if o==t['pixelIndex']];xs=np.concatenate([np.arange(a,z,dtype=np.float64) for y,a,z in rr]);ys=np.concatenate([np.full(z-a,lat[y]) for y,a,z in rr]);points=shapely.points((xs+.5)/262166*360-180,ys);own_mask=shapely.covers(g,points);hits=int(np.count_nonzero(own_mask));other_hits={};other_on_outside={};all_mask=own_mask.copy()
+ for feature_id,ff in features.items():
+  if feature_id==t['id'].removeprefix('gb:GRL:ADM1:'):continue
+  gg=shape(ff['geometry']);shapely.prepare(gg);mm=shapely.covers(gg,points);all_mask|=mm;other_hits[ff['properties']['shapeName']]=int(np.count_nonzero(mm));other_on_outside[ff['properties']['shapeName']]=int(np.count_nonzero(mm & ~own_mask))
+ grid_y=np.concatenate([np.full(z-a,y,dtype=np.int64) for y,a,z in rr]);grid_x=np.concatenate([np.arange(a,z,dtype=np.int64) for y,a,z in rr]);outside_indices=np.flatnonzero(~own_mask)
+ for index in outside_indices:
+  yy,xx=int(grid_y[index]),int(grid_x[index]);oo=t['pixelIndex']
+  if exterior_rows and exterior_rows[-1][0]==yy and exterior_rows[-1][2]==xx and exterior_rows[-1][3]==oo:exterior_rows[-1][2]=xx+1
+  else:exterior_rows.append([yy,xx,xx+1,oo])
+ prior_row=next(r for r in rows if r['id']==t['id']);assert prior_row['geoBoundaries_source_geometry_inventory']['vertex_count']==shapely.get_num_coordinates(g)
+ out.append({'id':t['id'],'full_unsimplified_source_vertices':int(shapely.get_num_coordinates(g)),'unsimplified_source_candidates_inside':hits,'outside_unsimplified_but_inside_consumed_simplified':len(xs)-hits,'outside_all_six_unsimplified_features':int(np.count_nonzero(~all_mask)),'other_unsimplified_feature_hits':other_hits,'own_exterior_centres_supported_by_other_original':other_on_outside,'original_historical_assessment':prior_row})
+result={'head':HEAD,'reviewer':os.environ['CODEX_THREAD_ID'],'unsimplified_source_sha256':hashlib.sha256(original).hexdigest(),'source_is_distinct_from_consumed_simplified':True,'all_11_historical_assessments':rows,'target_unsimplified_comparison':out,'limit':'Native qualification is relative to the recorded consumed simplified source product. This comparison does not confer geographic correctness or turn unsimplified/simplified differences into adjudicated territorial exclusions. #888 stays open.'}
+manifest=load('data/regional-review/regional-review-a9f03b364bdefa4a/sources-manifest.json');admin=load('data/administrative-sources.json')['gb:GRL:ADM1'];result['same_release_vintage_metadata']=admin;result['unsimplified_manifest_record']=next(r for r in manifest['sources'] if r.get('path')=='sources/geoboundaries-GRL-ADM1-9469f09.geojson');result['native_generalization_difference_rows']=exterior_rows;assert sum(z-a for y,a,z,o in exterior_rows)==3203
+(W/'.review-greenland/history-probe-result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps([{k:v for k,v in r.items() if k!='original_historical_assessment'} for r in out]));print('all 11 historical assessments',len(rows));print('nine resolve sources',collections.Counter(r['source_id'] for r in rows if r['id'].startswith('atlas:physical:')))

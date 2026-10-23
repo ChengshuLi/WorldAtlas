@@ -1,0 +1,207 @@
+{
+  "version": 1,
+  "kind": "lux-active-primary-source-vintage-evidence",
+  "as_of": "2026-10-21",
+  "scope": {
+    "package": "gb-LUX-ADM1--repair-evaluation",
+    "original_keys": 624,
+    "original_intervals": 214,
+    "original_source_year_claim": "2017",
+    "original_source_data_update": "Thu Jan 19 07:31:04 2023",
+    "original_source_build_date": "Dec 12, 2023",
+    "original_source_terms": "Open Data Commons Open Database License 1.0",
+    "foreign_overlap_keys": 26,
+    "lux_only_outside_2026_canton_keys": 25
+  },
+  "new_primary_sources_reviewed": [
+    {
+      "title": "ACT, Limites administratives du Grand-Duché de Luxembourg dataset page",
+      "url": "https://data.public.lu/fr/datasets/limites-administratives-du-grand-duche-de-luxembourg/",
+      "facts": {
+        "producer": "Administration du cadastre et de la topographie (ACT)",
+        "source_description": "Vector data from the PCN (digital cadastral plan), including administrative cantons and national boundaries, plus generalized versions.",
+        "dataset_last_updated": "2026-10-05",
+        "license": "CC0",
+        "temporal_coverage": "not provided",
+        "spatial_coverage": "not provided",
+        "limadmin_geojson_file": {
+          "url": "https://download.data.public.lu/resources/limites-administratives-du-grand-duche-de-luxembourg/20261005-030016/limadmin.geojson",
+          "page_modified": "2026-10-05",
+          "created": "2018-02-13",
+          "size": "1.2 MB",
+          "md5": "b7efcb9fac2d724fe493e32713ff3977"
+        },
+        "limadmin_shapefile_file": {
+          "url": "https://download.data.public.lu/resources/limites-administratives-du-grand-duche-de-luxembourg/20261005-031853/limadmin-shp.zip",
+          "page_modified": "2026-10-05",
+          "created": "2016-04-05",
+          "size": "9.5 MB",
+          "md5": "32583e80058af744a0de1dad145bb390",
+          "crs": "LUREF EPSG:2169"
+        }
+      },
+      "assessment": "This identifies a current ACT-produced national administrative dataset and its PCN origin. The page does not declare source observation date/temporal coverage or positional accuracy; its 2026 modification date alone cannot be treated as the boundary vintage."
+    },
+    {
+      "title": "ACT, Activity Report 2024, section 4.1.7, State Boundaries",
+      "url": "https://act.public.lu/dam-assets/fr/publications/documents-techniques/2024-act-rapport-activites.pdf",
+      "pages": "25-26",
+      "facts": [
+        "The report describes INSPIRE requirements for neighboring states to agree on representation and position of shared geographic elements; it says common border linework was agreed with France, Belgium and Germany and categorized by point-position precision.",
+        "For Belgium, an interpretation from archival documents between monuments LB190 and LB202 had been transmitted to Belgian authorities for validation (already in 2023), for Harlange II perimeter work.",
+        "For Germany, the report says the Our river and Vianden land border were transformed into LUREF using coordinates from German counterparts, integrated in cadastral databases, and the full German border was defined in LUREF."
+      ],
+      "assessment": "This establishes that national boundary representation is grounded in treaty/archive evidence and cross-border validation, with a specifically reported Belgian segment still submitted for Belgian validation at report time. The record does not georeference LB190-LB202 against the 25 package cells, so no direct attribution is made."
+    },
+    {
+      "title": "ACT, State Boundaries page",
+      "url": "https://act.public.lu/fr/parcelles-residences/mensuration-officielle/limites-etat.html",
+      "facts": [
+        "Identifies the 1843 Maastricht limits convention for the Belgium-Luxembourg border.",
+        "Says national boundary traces are described in detailed survey records forming part of treaties."
+      ],
+      "assessment": "Provides the official legal/historical source basis, but does not resolve exact cell membership or the Belgian 25-cell overlay."
+    },
+    {
+      "title": "ACT, BD-L-GeoBase dataset page",
+      "url": "https://data.public.lu/fr/datasets/bd-l-geobase/",
+      "facts": {
+        "description": "Official reference for ACT geographic vector data for the whole Grand Duchy.",
+        "administrative_units_theme": "Separate AdministrativeUnits package; 8.6 MB ZIP; MD5 e7f1b5b50df68bba899d9655017c243c.",
+        "CRS": "LUREF LTM / EPSG:2169",
+        "license": "CC0",
+        "last_updated": "2026-10-01",
+        "update_frequency": "quarterly"
+      },
+      "assessment": "A further current primary comparator source is explicitly identified. This inventory does not fetch or inspect that 8.6 MB package or change the prior exact comparison."
+    }
+  ],
+  "retained_source_provenance": {
+    "geoBoundaries_metadata": {
+      "boundary_id": "LUX-ADM1-76397094",
+      "represented_year": "2017",
+      "source": "OpenStreetMap, Wambacher",
+      "source_data_updated": "Thu Jan 19 07:31:04 2023",
+      "built": "Dec 12, 2023",
+      "units": "12",
+      "license_claim": "Open Data Commons Open Database License 1.0",
+      "metadata_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/LUX/ADM1/geoBoundaries-LUX-ADM1-metaData.json"
+    },
+    "assessment": "2017 is the product represented-year claim; Jan 2023 data update and Dec 2023 build are separate metadata fields. The current ACT dataset update does not establish that the older layer is obsolete or adopted."
+  },
+  "retained_scope_crosscheck": {
+    "current_canton_comparison": {
+      "comparison_file": "inventory/lux-official-canton-2026-exact-comparison.json",
+      "source": "SIG-GR / Luxembourg Ministry canton layer described in prior inventory, not the just-reviewed ACT file",
+      "target_keys": 624,
+      "inside_canton_union": 599,
+      "outside_all_cantons": 25,
+      "boundary_ties": 0,
+      "foreign_contact_keys": 26,
+      "foreign_group_canton_membership": {
+        "05:Clervaux": 22,
+        "10:Echternach": 1,
+        "07:Redange": 3
+      },
+      "contact_partition_counts": {
+        "LUX": 598,
+        "BEL+LUX": 25,
+        "DEU+LUX": 1
+      }
+    },
+    "outside_canton_proximity": {
+      "comparison_file": "inventory/lux-outside-canton-distance-diagnostic.json",
+      "keys": 25,
+      "distance_min_metres": 0.7799805386629156,
+      "distance_max_metres": 63.31792232530701,
+      "nearest_canton_counts": {
+        "05:Clervaux": 2,
+        "06:Diekirch": 7,
+        "10:Echternach": 8,
+        "11:Grevenmacher": 4,
+        "02:Esch-sur-Alzette": 3,
+        "12:Remich": 1
+      },
+      "method": "Prior bounded projected point-to-canton diagnostic; no recomputation here"
+    },
+    "existing_source_groups": {
+      "LUX_only": {
+        "keys": 598,
+        "intervals": 196
+      },
+      "Belgian_contact": {
+        "keys": 25,
+        "intervals": 17,
+        "source_features": {
+          "BEL source index 2160 Wallonne Gewest + LUX feature 41818": 22,
+          "BEL source index 2160 Wallonne Gewest + LUX feature 41815": 3
+        }
+      },
+      "German_contact": {
+        "keys": 1,
+        "intervals": 1,
+        "source_features": [
+          20561,
+          20596,
+          41809
+        ]
+      }
+    },
+    "interpretation": "All 26 foreign-contact centers fall within the current 2026 canton union: 22 BE+LUX in Clervaux, 3 BE+LUX in Redange, and the single DEU+LUX key in Echternach. The separate 25 LUX-only keys are outside current canton polygons but 0.78–63.32 m from a nearest canton in the prior projected diagnostic. These are consistent with a small representation/simplification/vintage or boundary-line discrepancy; they prove neither territorial transfer nor source misattribution."
+  },
+  "denied_transfer_state": {
+    "record": "inventory/lux-belgian-download-attempt.json",
+    "exact_target": "https://opendata.fin.belgium.be/download/datasets/AU-RefSit_20260522_shp_3812_01000.zip",
+    "status": "One previous attempt failed/uncertain; the browser later showed ERR_BLOCKED_BY_CLIENT. No artifact, byte count, or hash. Approval resolution was not exposed.",
+    "directive": "No retry or alternate route; this review makes no attempt."
+  },
+  "new_operations": {
+    "web_reads": [
+      "ACT dataset page",
+      "ACT BD-L-GeoBase page",
+      "ACT 2024 activity report section 4.1.7",
+      "ACT State Boundaries page"
+    ],
+    "public_geometry_download": true,
+    "public_geometry_download_file": "https://download.data.public.lu/resources/limites-administratives-du-grand-duche-de-luxembourg/20261005-030016/limadmin.geojson",
+    "public_geometry_download_bytes": 1207257,
+    "public_geometry_download_sha256": "6c3128de3763704397d9a7c44ea04d952fd467fc88a368e2d188c236cbfbae83",
+    "source_geometry_operation": "bounded ACT point-in-polygon comparison documented in inventory/lux-act-official-boundary-adverse-comparison.json",
+    "observer_or_native_constructor": false,
+    "Belgian_transfer_retry": false
+  },
+  "assessment": [
+    "The official ACT records add substantive context: current national administrative vectors are PCN-derived; border positioning relies on treaty/archive material and neighbor coordination; a specific Belgium segment was still submitted for Belgian validation.",
+    "This supports treating the 25 Belgian overlaps and 25 LUX-only cells as concrete, narrow source/application questions, rather than assuming a synthetic global boundary. It does not establish that LB190-LB202 is geographically one of the 25 contact cells or show a 2017-to-2026 boundary change.",
+    "The ACT 2026 page supplies no temporal coverage field; a refresh date is not evidence that every point was observed or legally adjudicated on that date. The 2017 GeoBoundaries represented-year claim and later data-update/build fields remain distinct.",
+    "At the initial inventory stage no ACT geometry had been downloaded. The exact ACT comparison was later completed and is recorded in inventory/lux-act-official-boundary-adverse-comparison.json. Neither step establishes source adoption, legal interpretation, positive repair, or root accounting."
+  ],
+  "next_narrow_evidence": {
+    "status": "The authorized exact ACT limadmin.geojson comparison was completed in the follow-up inventory.",
+    "followup_file": "inventory/lux-act-official-boundary-adverse-comparison.json",
+    "additional_open_question": "The ACT and SIG-GR current representations disagree for five further LUX-only keys; the source representation difference is established, but source applicability, legal status, and per-key cause are not.",
+    "remaining_specific_evidence": "If a per-key historical boundary attribution is needed, georeference the official archival border record LB190-LB202 against the identified package keys. This is not required to preserve the observed ACT/SIG-GR comparison and should not be treated as an automatic universal gate.",
+    "belgian_transfer": "Stopped; no retry or alternate route."
+  },
+  "cumulative_followup": {
+    "file": "inventory/lux-act-official-boundary-adverse-comparison.json",
+    "source_downloaded": "ACT limadmin.geojson, exactly the public URL and MD5 stated in the dataset page",
+    "operation": "Bounded point-in-polygon comparison of the package’s 624 retained observation point centers against ACT’s 12 canton and one pays geometry; no reprojection or distance calculation.",
+    "result": "All 26 foreign-contact points are inside ACT canton and national polygons. The 25 keys outside the SIG-GR canton union are also outside ACT. Five additional LUX-only keys inside SIG-GR cantons are outside ACT cantons and national outline.",
+    "limitations": "ACT’s refresh date does not establish observation vintage or legal adoption; geometry comparison does not establish sovereignty, source rights, attribution, or causal explanation.",
+    "belgian_transfer_retry": false,
+    "local_source_path": "/tmp/lux-act-limadmin-20261005.geojson"
+  },
+  "initial_inventory_operations": {
+    "web_reads": [
+      "ACT dataset page",
+      "ACT BD-L-GeoBase page",
+      "ACT 2024 activity report section 4.1.7",
+      "ACT State Boundaries page"
+    ],
+    "public_geometry_download": false,
+    "source_geometry_operation": false,
+    "observer_or_native_constructor": false,
+    "Belgian_transfer_retry": false
+  }
+}

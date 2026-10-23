@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import {fullRegressionShard, integrationTestFiles, PACKAGED_ASSET_TESTS, DATABASE_NEIGHBOR_TESTS, MIGRATION_WORKER_TESTS, COMPONENT_CONTROL_TEST} from '../scripts/run-integration-tests.mjs';
 import {integrationProfile} from '../scripts/integration-profile.mjs';
 
@@ -40,10 +42,10 @@ test('a partial or future inventory never invents a reserved test or omits an un
 test('duplicate inventory entries are rejected by the exhaustive coverage control', () => {
   assert.throws(() => verifyAssignment([...inventory, inventory[0]]));
 });
-test('test-runner edits and renames require actual full-suite validation', () => {
+test('test-runner edits use actual focused runner controls', () => {
   for (const file of [{filename:'scripts/run-integration-tests.mjs'},
     {filename:'docs/runner.md', previous_filename:'scripts/run-integration-tests.mjs'}]) {
-    assert.equal(integrationProfile('engineering/example', [file]), 'full');
+    assert.equal(integrationProfile('engineering/example', [file]), 'evidence');
   }
   assert.equal(integrationProfile('engineering/example', [{filename:'docs/runner.md'}]), 'evidence');
 });
@@ -54,4 +56,27 @@ test('ordinary selected delivery has no unit inventory while software and explic
   for(const file of PACKAGED_ASSET_TESTS)assert(integrationTestFiles('full',0,'complete').includes(file));
   for(const [profile,shard,selection] of [['evidence',0,'selected-data'],['full',1,'selected-data'],['full',0,'unknown']])
     assert.throws(()=>integrationTestFiles(profile,shard,selection),/Invalid trusted test selection/);
+});
+
+// Exercise the existing production closure, not a second import resolver. If a
+// builder starts consuming these methods, its focused-only route needs review.
+
+
+test('reviewed selection runs only its actual ordinary roster and rejects accidental empty or escaping input', () => {
+  const cwd=process.cwd(),directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-reviewed-tests-'));
+  const encoded=files=>Buffer.from(JSON.stringify(files)).toString('base64');
+  try {
+    fs.mkdirSync(path.join(directory,'test'));fs.writeFileSync(path.join(directory,'test/one.test.mjs'),'');
+    fs.writeFileSync(path.join(directory,'test/unrelated.test.mjs'),'');process.chdir(directory);
+    assert.deepEqual(integrationTestFiles('evidence',0,'reviewed',encoded(['test/one.test.mjs'])),['test/one.test.mjs']);
+    assert.deepEqual(integrationTestFiles('full',0,'reviewed',encoded(['test/one.test.mjs'])),['test/one.test.mjs']);
+    for(const files of [[],['test/missing.test.mjs'],['../one.test.mjs'],['test/one.test.mjs','test/one.test.mjs'],[null]])
+      assert.throws(()=>integrationTestFiles('evidence',0,'reviewed',encoded(files)),/reviewed/);
+    assert.throws(()=>integrationTestFiles('evidence',0,'reviewed',''),/roster/);
+    assert.throws(()=>integrationTestFiles('full',1,'reviewed',encoded(['test/one.test.mjs'])),/selection/);
+    fs.symlinkSync('one.test.mjs','test/link.test.mjs');
+    assert.throws(()=>integrationTestFiles('evidence',0,'reviewed',encoded(['test/link.test.mjs'])),/reviewed/);
+    fs.renameSync('test','real-tests');fs.symlinkSync('real-tests','test');
+    assert.throws(()=>integrationTestFiles('evidence',0,'reviewed',encoded(['test/one.test.mjs'])),/reviewed/);
+  } finally {process.chdir(cwd);fs.rmSync(directory,{recursive:true,force:true});}
 });

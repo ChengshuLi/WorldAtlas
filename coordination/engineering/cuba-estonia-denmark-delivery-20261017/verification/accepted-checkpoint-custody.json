@@ -1,0 +1,39 @@
+{
+  "locator": {
+    "version": 1,
+    "kind": "accepted-selected-checkpoint-locator-v1",
+    "acceptance": {
+      "pr_number": 2399,
+      "request_id": "png-argentina-korea-2399-17ef5bc-20261017-001",
+      "head": "17ef5bc145ff17554b9cea8e958372b2c3801975"
+    },
+    "retained_artifact": {
+      "path": "coordination/engineering/cuba-estonia-denmark-delivery-20261017/checkpoint-accepted-2399/geography-artifact.zip"
+    }
+  },
+  "source": {
+    "run_id": 39008914740,
+    "run_attempt": 1,
+    "head": "17ef5bc145ff17554b9cea8e958372b2c3801975",
+    "baseline": "821d5eacfec816f9eb21eeec8a9ebb990f4e16f4",
+    "candidate_commit": "d0f3ec36cfeeb59759eb8c4bb7e2d4884767505b",
+    "workflow_path": ".github/workflows/worker-merge.yml",
+    "event": "workflow_dispatch",
+    "workflow_head": "821d5eacfec816f9eb21eeec8a9ebb990f4e16f4",
+    "tree": "641fb025e0fce616b4956d32cefd92d1fd0b2585",
+    "job_id": 117327130514,
+    "artifact_name": "geography-png-argentina-korea-2399-17ef5bc-20261017-001-1",
+    "artifact_id": 12092262289,
+    "artifact_digest": "8f823a3c0ac6a65d132e1cf1d1e341af07aeff0a966053d68fe7e41041c8dbfc",
+    "report_sha256": "1416f1574c63ba956332c60b02da6cad4b5c0dcaff180fb02660f5c910e32538",
+    "report_bytes": 377965,
+    "artifact_bytes": 7748581
+  },
+  "archive_origin": "retained-exact",
+  "products": [
+    "checkpoint-routes.json",
+    "derived-certificate.json.gz",
+    "derived-facts.json",
+    "derived-publication.json"
+  ]
+}

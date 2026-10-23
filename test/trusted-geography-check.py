@@ -86,6 +86,69 @@ class TrustedCheckControls(unittest.TestCase):
     def tearDown(self):
         self.f.close()
 
+    def selected_native_child(self, program):
+        # A real child runs through the existing Python-selected cold route. Only its
+        # scientific calculation is a small controlled program; stdout/stderr,
+        # immutable checkout validation and subprocess failure remain production.
+        self.f.write('data/ownership-selection.json', {})
+        (self.f.repo / 'scripts/check-effective-geographic-regression.mjs').write_text(
+            'export async function inspectSelectedAcquired(repo, baseline, candidate, {parentRuntimePath}) {\n' + program + '\n}\n')
+        candidate = self.f.commit('selected-native-child-control')
+        return self.f.run(candidate, rewind=False, extra_env={'GEOGRAPHY_CODE_COMMIT': candidate})
+
+    def test_failed_selected_native_child_preserves_original_stderr_and_exit_behavior(self):
+        message = 'Original native refusal: complete source identity differs \u03c0\n'
+        result, report = self.selected_native_child(
+            'process.stderr.write(' + json.dumps(message) + ');\n'
+            'process.stdout.write("{\\"partial\\":true}\\n"); process.exit(7);\n')
+        self.assertEqual(result.returncode, 1)  # Unhandled CalledProcessError, as before.
+        self.assertIsNone(report)
+        self.assertEqual(result.stdout, '')
+        self.assertEqual(result.stderr.count(message), 1)
+        self.assertIn('returned non-zero exit status 7', result.stderr)
+        self.assertIn('selected-native', result.stderr)
+
+    def test_successful_selected_native_child_keeps_json_stdout_separate_from_stderr(self):
+        native = {'method': 'selected-native-owner-conservation-v1', 'status': 'no-new-native-loss',
+                  'candidate_code_executed': False, 'lost_or_reassigned_cells': 0, 'intervals': []}
+        message = 'Original native progress remains on stderr\n'
+        result, report = self.selected_native_child(
+            'process.stderr.write(' + json.dumps(message) + ');\n'
+            'return ' + json.dumps(native) + ';\n')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(report['selected_native_report'], native)
+        self.assertEqual(report['status'], 'no-new-native-loss')
+        self.assertEqual(result.stderr.count(message), 1)
+        self.assertNotIn(message.strip(), result.stdout)
+        self.assertEqual(json.loads(result.stdout)['status'], 'no-new-native-loss')
+
+    def test_identical_final_bank_software_child_keeps_native_proof_and_truthful_markers(self):
+        bank = {'path': 'data/canonical-grid/current-startup/index.json', 'bytes': 123, 'sha256': 'c' * 64}
+        selection = {'version': 2, 'kind': 'selected-final-native-bank-v2', 'prepared_bank': bank}
+        native = {'method': 'selected-native-owner-conservation-v1', 'status': 'no-new-native-loss',
+                  'candidate_code_executed': True, 'lost_or_reassigned_cells': 0, 'intervals': [],
+                  'baseline_selection': selection, 'candidate_selection': selection, 'affected_rows': 0,
+                  'checkpoint_custody': {'accepted_bank': bank, 'candidate_bank': bank},
+                  'native_row_scope': {'proof': 'complete-accepted-final-bank-and-qualified-new-intervals',
+                      'compared_rows': 8, 'changed_rows': [], 'added_cells': 0, 'representation_migration': False}}
+        result, report = self.selected_native_child('return ' + json.dumps(native) + ';')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(report['status'], 'no-footprint-change')
+        self.assertEqual(report['regressions'], 0)
+        self.assertTrue(report['candidate_code_executed'])
+        self.assertEqual(report['selected_native_report'], native)
+        self.assertEqual(report['validation_scope'], 'selected-native-map-cells')
+        self.assertNotIn('checkpoint', report)
+
+    def test_fatal_git_child_preserves_original_stderr_without_publishing_a_report(self):
+        result, report = self.f.run('f' * 40)
+        self.assertEqual(result.returncode, 1)
+        self.assertIsNone(report)
+        self.assertEqual(result.stdout, '')
+        self.assertIn('fatal:', result.stderr)
+        self.assertIn('f' * 40, result.stderr)
+        self.assertIn('returned non-zero exit status 128', result.stderr)
+
     def test_software_candidate_executes_its_exact_checker_and_distinct_data(self):
         checker = self.f.repo / 'scripts/check-geographic-regression.py'
         checker.write_text(checker.read_text() + "\n# Independently reviewed software change.\n")
@@ -106,10 +169,15 @@ class TrustedCheckControls(unittest.TestCase):
     def test_software_candidate_valid_joint_move_passes(self):
         self.f.write('data/geography/part.json', collection(left=.9, right=.9))
         candidate = self.f.commit('software-joint-move')
-        result, report = self.f.run(candidate, rewind=False, extra_env={'GEOGRAPHY_CODE_COMMIT': candidate})
+        outputs = self.f.repo / 'job-outputs'
+        result, report = self.f.run(candidate, rewind=False, extra_env={
+            'GEOGRAPHY_CODE_COMMIT': candidate, 'GITHUB_OUTPUT': str(outputs)})
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertTrue(report['candidate_code_executed'])
         self.assertEqual(report['status'], 'no-new-regression')
+        raw = (self.f.repo / 'geography-check.json').read_bytes()
+        self.assertEqual(dict(line.split('=', 1) for line in outputs.read_text().splitlines()), {
+            'report_sha256': hashlib.sha256(raw).hexdigest(), 'report_bytes': str(len(raw))})
 
     def test_software_candidate_requires_actual_execution_checkout(self):
         self.f.write('data/geography/part.json', collection(left=.9))
@@ -471,7 +539,7 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
                 result = self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate)
                 self.assertEqual(result, self.proof if value == self.proof else None)
 
-    def test_helper_failures_and_bounds_preserve_full_validation(self):
+    def test_helper_failures_and_malformed_output_preserve_full_validation(self):
         for output in [subprocess.CompletedProcess([], 1, json.dumps(self.proof).encode(), b''),
                        subprocess.CompletedProcess([], 0, b'x' * (2 * 1024 * 1024 + 1), b''),
                        subprocess.CompletedProcess([], 0, b'{', b'')]:
@@ -480,6 +548,38 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
         for error in [OSError('missing'), subprocess.TimeoutExpired('node', 60)]:
             with self.mock.patch.object(self.g, 'run_applicability_collector', side_effect=error):
                 self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
+
+    def test_large_complete_applicability_output_retains_its_exact_binding(self):
+        proof = {**self.proof, 'immutable_descriptors': [{'path': 'exact-retained-path', 'note': 'x' * (3 * 1024 * 1024)}]}
+        raw = json.dumps(proof).encode()
+        with self.mock.patch.object(self.g, 'run_applicability_collector', return_value=
+                subprocess.CompletedProcess([], 0, raw, b'')):
+            self.assertEqual(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate), proof)
+        proof['candidate_commit'] = self.baseline
+        with self.mock.patch.object(self.g, 'run_applicability_collector', return_value=
+                subprocess.CompletedProcess([], 0, json.dumps(proof).encode(), b'')):
+            self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
+
+    def test_large_prefetch_summary_keeps_completion_truth_and_owned_cleanup(self):
+        import io
+        summary = {'complete_scientific_closure': False, 'status': 'scoped-prefetch-completed',
+                   'note': 'x' * (2 * 1024 * 1024)}
+        for status in [0, 1]:
+            child = self.mock.Mock(pid=123456, returncode=status)
+            child.communicate.return_value = (json.dumps(summary).encode(), b'')
+            stream = io.StringIO()
+            with self.mock.patch.object(self.g.subprocess, 'Popen', return_value=child), \
+                 self.mock.patch.object(self.g.os, 'killpg') as kill, \
+                 self.mock.patch.object(self.g.sys, 'stderr', stream):
+                self.g.prefetch_declared_inputs(ROOT, self.baseline, self.candidate)
+            result = json.loads(stream.getvalue())['geography_prefetch']
+            self.assertEqual(result['note'], summary['note'])
+            self.assertFalse(result['complete_scientific_closure'])
+            self.assertEqual(result['status'], 'scoped-prefetch-unavailable' if status else summary['status'])
+            if status:
+                self.assertTrue(result['partial_import_possible'])
+            kill.assert_called_once_with(child.pid, self.g.signal.SIGKILL)
+            self.assertEqual(child.communicate.call_args_list, [self.mock.call(timeout=120), self.mock.call(timeout=5)])
 
     def test_decline_diagnostic_preserves_safe_category_and_operation_only(self):
         import io
@@ -517,6 +617,15 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
         self.assertEqual(json.loads(stream.getvalue())['geography_applicability']['reason'], 'collector-timeout')
         self.assertNotIn('secret', stream.getvalue())
 
+    def test_metadata_default_uses_outer_job_deadline_and_still_reaps_owned_group(self):
+        child = self.mock.Mock(pid=123456, returncode=0)
+        child.communicate.return_value = (json.dumps(self.proof).encode(), b'')
+        with self.mock.patch.object(self.g.subprocess, 'Popen', return_value=child), \
+             self.mock.patch.object(self.g.os, 'killpg') as kill:
+            self.assertEqual(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate), self.proof)
+        self.assertEqual(child.communicate.call_args_list, [self.mock.call(timeout=None), self.mock.call(timeout=5)])
+        kill.assert_called_once_with(child.pid, self.g.signal.SIGKILL)
+
     def test_metadata_timeout_reaps_owned_git_group_before_fallback(self):
         child = self.mock.Mock(pid=123456, returncode=-9)
         child.communicate.side_effect = [subprocess.TimeoutExpired('node', 60), (b'', b'')]
@@ -547,6 +656,104 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
         self.assertIs(result['unchanged_selected_inputs'], self.proof)
         self.assertNotIn('selected_native_report', result)
         self.assertNotIn('selected_continuous_report', result)
+
+    def test_software_identity_uses_actual_executing_commit_and_never_runs_science_or_mints_checkpoint(self):
+        proof = {**self.proof, 'trusted_reader_policy_commit': self.candidate}
+        g = self.g
+        with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='actual-inventory'), \
+             self.mock.patch.object(g, 'inventory', return_value=['same']), \
+             self.mock.patch.object(g, 'run_applicability_collector', return_value=
+                subprocess.CompletedProcess([], 0, json.dumps(proof).encode(), b'')) as child, \
+             self.mock.patch.object(g, 'prefetch_declared_inputs', side_effect=AssertionError('prefetch ran')), \
+             self.mock.patch.object(g, 'selected_joint', side_effect=AssertionError('checkpoint ran')), \
+             self.mock.patch.object(g.subprocess, 'check_output', side_effect=AssertionError('science ran')):
+            result = g.inspect(ROOT, self.baseline, self.candidate, code_commit=self.candidate,
+                               prefetch=True, checkpoint_destination=ROOT / 'must-not-create')
+        self.assertEqual(result['status'], 'not-applicable')
+        self.assertEqual(result['unchanged_selected_inputs'], proof)
+        self.assertEqual(result['trusted_code_commit'], self.candidate)
+        self.assertEqual(result['trusted_code_inventory_sha256'], 'actual-inventory')
+        self.assertTrue(result['candidate_code_executed'])
+        self.assertEqual(child.call_args.args[0][-3:], [self.baseline, self.candidate, self.candidate])
+        self.assertNotIn('checkpoint', result)
+        self.assertNotIn('selected_native_report', result)
+        with self.mock.patch.object(g, 'run_applicability_collector', return_value=
+                subprocess.CompletedProcess([], 0, json.dumps(self.proof).encode(), b'')):
+            self.assertIsNone(g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate,
+                                                       code_commit=self.candidate))
+
+    def test_changed_selected_inputs_retain_the_existing_native_validation_route(self):
+        g = self.g
+        for version in [1, 2]:
+            with self.subTest(selector_version=version):
+                selection = {'version': version}
+                if version == 2:
+                    selection['kind'] = 'selected-final-native-bank-v2'
+                native = {'method': 'selected-native-owner-conservation-v1', 'status': 'no-new-native-loss',
+                          'candidate_code_executed': version == 2, 'lost_or_reassigned_cells': 0,
+                          'intervals': [], 'candidate_selection': selection}
+                with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='fixture'), \
+                     self.mock.patch.object(g, 'inventory', return_value=['same raw world']), \
+                     self.mock.patch.object(g, 'unchanged_selected_inputs', return_value=None), \
+                     self.mock.patch.object(g, 'git', return_value=b'selected'), \
+                     self.mock.patch.object(g, 'read', return_value=json.dumps(selection).encode()) as selector, \
+                     self.mock.patch.object(g, 'selected_joint', side_effect=AssertionError('software checkpoint reuse')), \
+                     self.mock.patch.object(g, 'prefetch_declared_inputs') as prefetch, \
+                     self.mock.patch.object(g.subprocess, 'check_output', return_value=json.dumps(native).encode()) as checker:
+                    result = g.inspect(ROOT, self.baseline, self.candidate, code_commit=self.candidate, prefetch=True)
+                selector.assert_called_once_with(ROOT, self.baseline, 'data/ownership-selection.json')
+                if version == 1:
+                    prefetch.assert_called_once_with(ROOT, self.baseline, self.candidate)
+                else:
+                    prefetch.assert_not_called()
+                checker.assert_called_once()
+                command = checker.call_args.args[0]
+                self.assertEqual(command[1:3], ['--input-type=module', '--eval'])
+                self.assertIn('inspectSelectedAcquired', command[3])
+                self.assertEqual(command[4:], [(ROOT / 'scripts/check-effective-geographic-regression.mjs').as_uri(),
+                                               str(ROOT), self.baseline, self.candidate, sys.executable])
+                self.assertEqual(result['selected_native_report'], native)
+                self.assertEqual(result['trusted_code_commit'], self.candidate)
+                self.assertEqual(result['status'], 'no-new-native-loss')
+                self.assertNotIn('unchanged_selected_inputs', result)
+                self.assertNotIn('checkpoint', result)
+
+    def test_final_bank_summary_never_labels_changed_or_incomplete_bindings_unchanged(self):
+        import copy
+        bank = {'path': 'data/canonical-grid/current-startup/index.json', 'bytes': 123, 'sha256': 'c' * 64}
+        selection = {'version': 2, 'kind': 'selected-final-native-bank-v2', 'prepared_bank': bank}
+        native = {'method': 'selected-native-owner-conservation-v1', 'status': 'no-new-native-loss',
+                  'candidate_code_executed': True, 'lost_or_reassigned_cells': 0, 'intervals': [],
+                  'baseline_selection': selection, 'candidate_selection': selection, 'affected_rows': 0,
+                  'checkpoint_custody': {'accepted_bank': bank, 'candidate_bank': bank},
+                  'native_row_scope': {'proof': 'complete-accepted-final-bank-and-qualified-new-intervals',
+                      'compared_rows': 8, 'changed_rows': [], 'added_cells': 0, 'representation_migration': False}}
+        def inspect(value):
+            g = self.g
+            with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='actual-inventory'), \
+                 self.mock.patch.object(g, 'inventory', return_value=['same']), \
+                 self.mock.patch.object(g, 'unchanged_selected_inputs', return_value=None), \
+                 self.mock.patch.object(g, 'git', return_value=b'selected'), \
+                 self.mock.patch.object(g, 'selected_joint', side_effect=AssertionError('software checkpoint reuse')), \
+                 self.mock.patch.object(g.subprocess, 'check_output', return_value=json.dumps(value).encode()):
+                return g.inspect(ROOT, self.baseline, self.candidate, code_commit=self.candidate)
+        for field, replacement in [
+            ('checkpoint_custody', {'accepted_bank': bank, 'candidate_bank': {**bank, 'sha256': 'e' * 64}}),
+            ('checkpoint_custody', {'accepted_bank': {**bank, 'bytes': 124}, 'candidate_bank': bank}),
+            ('candidate_selection', {**selection, 'reference': {'id': 'changed-context'}}),
+            ('candidate_selection', {**selection, 'prepared_bank': {**bank, 'sha256': 'e' * 64}}),
+            ('checkpoint_custody', {}), ('affected_rows', 1),
+            *[('native_row_scope', {**native['native_row_scope'], k: v}) for k, v in
+              [('changed_rows', [3]), ('added_cells', 1), ('representation_migration', True), ('compared_rows', 0)]]]:
+            with self.subTest(field=field, replacement=replacement):
+                value = copy.deepcopy(native); value[field] = replacement
+                result = inspect(value)
+                self.assertEqual(result['status'], 'no-new-native-loss')
+                self.assertEqual(result['selected_native_report'], value)
+        for changed in [{'candidate_code_executed': False}, {'lost_or_reassigned_cells': 1},
+                        {'intervals': [{'row': 1}]}, {'candidate_selection': {**selection, 'kind': 'unknown'}}]:
+            with self.subTest(changed=changed), self.assertRaises(ValueError):
+                inspect({**native, **changed})
 
     def test_changed_raw_inputs_never_consult_selected_shortcut(self):
         g = self.g

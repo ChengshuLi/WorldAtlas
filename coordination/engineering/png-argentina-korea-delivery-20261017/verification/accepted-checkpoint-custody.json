@@ -1,0 +1,39 @@
+{
+  "locator": {
+    "version": 1,
+    "kind": "accepted-selected-checkpoint-locator-v1",
+    "acceptance": {
+      "pr_number": 2377,
+      "request_id": "eight-country-delivery-2377-0db52cf-20261017-002",
+      "head": "0db52cf5a1b7c06a1b27989ec044face48c65286"
+    },
+    "retained_artifact": {
+      "path": "coordination/engineering/png-argentina-korea-delivery-20261017/checkpoint-accepted-2377/geography-artifact.zip"
+    }
+  },
+  "source": {
+    "run_id": 39006904251,
+    "run_attempt": 1,
+    "head": "0db52cf5a1b7c06a1b27989ec044face48c65286",
+    "baseline": "2223d85bbe8b18585c221cc1329d115e8e774a42",
+    "candidate_commit": "412a3718ed62be75ddf55897a7768e66042c6c75",
+    "workflow_path": ".github/workflows/worker-merge.yml",
+    "event": "workflow_dispatch",
+    "workflow_head": "2223d85bbe8b18585c221cc1329d115e8e774a42",
+    "tree": "44fe9c69e3807c1030186f4455cc96707b9e3eb0",
+    "job_id": 117321304603,
+    "artifact_name": "geography-eight-country-delivery-2377-0db52cf-20261017-002-1",
+    "artifact_id": 12091710508,
+    "artifact_digest": "bdd8cc3955dbfc805995a7a77b498441effb8e89fd0714efeeecbb46add32315",
+    "report_sha256": "7de144a5d9f572875f7e5e89ea6489c6efabcf3370020fff7853c61664f7d13a",
+    "report_bytes": 2285553,
+    "artifact_bytes": 8353550
+  },
+  "archive_origin": "retained-exact",
+  "products": [
+    "checkpoint-routes.json",
+    "derived-certificate.json.gz",
+    "derived-facts.json",
+    "derived-publication.json"
+  ]
+}

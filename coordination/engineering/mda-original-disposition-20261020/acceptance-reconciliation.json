@@ -1,0 +1,269 @@
+{
+  "version": 1,
+  "kind": "mda-acceptance-reconciliation",
+  "as_of_public_main": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+  "original_package": "gb-MDA-ADM1--repair-evaluation",
+  "scope": {
+    "land_cells": 1986,
+    "intervals": 539,
+    "owners": 16
+  },
+  "original_contract": {
+    "source": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "blob": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "text": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned."
+  },
+  "one_stock_observation": {
+    "path": "mda-selected-owner-observation.json.gz",
+    "code_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+    "query_count": 1986,
+    "query_sha256": "4b1ce66500215334b172a5e39c8e52a7a4df5a8925a76806d06b0cd087f7de86",
+    "interval_sha256": "b07b8d0285d29219de713ea7e6f72f9c10164ae312aba4050858094dbc85cafc",
+    "independent_exact_key_join": {
+      "unique_observed_keys": 1986,
+      "original_keys": 1986,
+      "missing": 0,
+      "extra": 0,
+      "duplicates": 0,
+      "query_hash_recomputed_match": true
+    },
+    "selected_owner_counts": {
+      "base_owner_nonzero": 0,
+      "accepted_additive_owner_nonzero": 0,
+      "effective_selected_owner_nonzero": 0,
+      "existing_product_overlap_true": 0
+    },
+    "limit": "Current literal selected-owner observation only. It does not establish prior accepted documented exceptions, source applicability, physical qualification, or package completion."
+  },
+  "durable_acceptance_context": {
+    "active_roster": {
+      "path": "coordination/engineering/cri-eri-phl-original-exceptions-20261018/active50-roster.json",
+      "blob": "4d061e144db89a4fac016944d093e82fc244c21b",
+      "accepted_commit": "dfe57bc8511fea3ee6cc78384ff2e94d19c7cecd",
+      "tree": "b6a4f5a61aa94697092890a8fef3254c972fb66e",
+      "active_packages": 50,
+      "roster_original_cells": 3935466,
+      "roster_accepted_within_original": 3800508,
+      "roster_remaining_without_accepted_disposition": 134958,
+      "contains_mda_row": false,
+      "limit": "The roster says it is the accepted2493 boundary and does not count pending exceptions or future activations. Absence of MDA from this 50-row roster is not, by itself, exhaustive historical acceptance proof.",
+      "historical_named_ledger": {
+        "path": "coordination/engineering/poland-original-repair-20261017/source-review/current-named-package-ledger.json",
+        "blob": "cdcfb584a6b5a65e3aaef8d8b8c13cd730ad9a4a",
+        "accepted_main_and_queue_commit": "282d14b4682f738fed6a0e6f3ee0d0e4b775d611",
+        "completed_count": 28,
+        "unfinished_count": 18,
+        "mda_in_completed": false,
+        "mda_in_unfinished": false,
+        "baseline_ledger": {
+          "commit": "c1a507348cd1ade4167f548a1f9fe384da8fe7c2",
+          "path": "coordination/engineering/spain-original-repair-20261017/source-review/current-named-package-ledger.json",
+          "blob_at_bb9bcf8": "12ac906a6b7202e57390c2eff6cda25cec405c49",
+          "mda_in_completed_or_unfinished": false
+        },
+        "ledger_queue_total": 660,
+        "ledger_scope_limit": "Tracks named activated/completed original packages, not an exhaustive per-key disposition ledger for all 660 queued packages."
+      },
+      "reconstruction_note": "The roster reconstruction states it uses the historical named18-package ledger plus individually reported later activations, accepted deliveries and seven completed package removals; it reports 52 names recovered. Independently, the current roster has 50 rows; comparing its IDs to the linked Poland ledger yields 17 overlapping unfinished IDs, 28 completed IDs absent from current rows, and one unfinished Sweden ID absent from current rows: 79 unique named package IDs total, with MDA absent from all.",
+      "current_named_id_union": {
+        "current_roster_rows": 50,
+        "historical_completed_ids": 28,
+        "historical_unfinished_ids": 18,
+        "overlap_current_roster_and_completed": 0,
+        "overlap_current_roster_and_unfinished": 17,
+        "completed_not_current_roster": 28,
+        "unfinished_not_current_roster": 1,
+        "unique_named_package_ids_union": 79,
+        "mda_in_union": false
+      }
+    },
+    "retained_exception_partition_scan": {
+      "check": "Expanded all 1,986 exact observed MDA keys and tested (y,x) against exception_records in 11 current-main partition files searchable by accepted_original_key_sha256, four held_records partitions, and the explicit three-case disposition partition; all exact-key overlaps are zero. These are other packages, not MDA outcomes. Their embedded proposal-era status fields are historical packet payload; later current-main active50 accepted-delivery rows supersede those status labels. No inference about MDA acceptance is drawn from those other packages.",
+      "results": [
+        {
+          "path": "coordination/engineering/civ-tun-gtm-original-exceptions-20261018/civ-original-partition.json",
+          "blob": "7c4f80f5aca2f65f726234b17188361556e60686",
+          "package": "gb-CIV-ADM3--repair-evaluation",
+          "mda_exception_overlap": 0,
+          "status": "proposed; independent substantive review and accepted integration required"
+        },
+        {
+          "path": "coordination/engineering/civ-tun-gtm-original-exceptions-20261018/tun-original-partition.json",
+          "blob": "705a7e145d04829888eacf5bd4bc6a7e495f0c7e",
+          "package": "gb-TUN-ADM2--repair-evaluation",
+          "mda_exception_overlap": 0,
+          "status": "proposed; independent substantive review and accepted integration required"
+        },
+        {
+          "path": "coordination/engineering/civ-tun-gtm-original-exceptions-20261018/gtm-original-partition.json",
+          "blob": "21c64b2940a3efa3323a5d64b9f8cf962c404c34",
+          "package": "gb-GTM-ADM2--repair-evaluation",
+          "mda_exception_overlap": 0,
+          "status": "proposed; independent substantive review and accepted integration required"
+        },
+        {
+          "path": "coordination/engineering/cri-eri-phl-original-exceptions-20261018/cri-original-partition.json",
+          "blob": "3a42bbccdb068c48016c29b16d56ff4f63b78bea",
+          "package": "gb-CRI-ADM2--repair-evaluation",
+          "mda_exception_overlap": 0,
+          "status": "proposed documented unresolved outcomes; distinct review and normal acceptance pending"
+        },
+        {
+          "path": "coordination/engineering/cri-eri-phl-original-exceptions-20261018/eri-original-partition.json",
+          "blob": "da097dfb7a72212537a4566fda862e877824ffc6",
+          "package": "gb-ERI-ADM2--repair-evaluation",
+          "mda_exception_overlap": 0,
+          "status": "proposed documented unresolved outcomes; distinct review and normal acceptance pending"
+        },
+        {
+          "path": "coordination/engineering/cri-eri-phl-original-exceptions-20261018/phl-original-partition.json",
+          "blob": "0659720e192c13c31ddd2b76b2774552e272fb83",
+          "package": "gb-PHL-ADM3--repair-evaluation",
+          "mda_exception_overlap": 0,
+          "status": "proposed documented unresolved outcomes; distinct review and normal acceptance pending"
+        },
+        {
+          "path": "coordination/engineering/sweden-el-salvador-original-exceptions-20261018/swe-original-partition.json",
+          "blob": "173f5a5785e9131792d8edcd6e1fa77e6b6f288b",
+          "package": "gb-SWE-ADM2--repair-evaluation",
+          "mda_exception_overlap": 0,
+          "status": "proposed; independent substantive review and accepted integration required"
+        },
+        {
+          "path": "coordination/engineering/sweden-el-salvador-original-exceptions-20261018/slv-original-partition.json",
+          "blob": "92e036bb7eb5fab7d23cbed7b0a00d042f9469d3",
+          "package": "gb-SLV-ADM2--repair-evaluation",
+          "mda_exception_overlap": 0,
+          "status": "proposed; independent substantive review and accepted integration required"
+        },
+        {
+          "path": "coordination/engineering/zaf-pol-original-exceptions-20261018/zaf-original-partition.json",
+          "blob": "11d47a4cf4c6d76fae600e7ac0a13a1a23e8cb52",
+          "package": "gb-ZAF-ADM3--repair-evaluation",
+          "mda_exception_overlap": 0,
+          "status": "proposed; independent substantive review and accepted integration required"
+        },
+        {
+          "path": "coordination/engineering/zaf-pol-original-exceptions-20261018/pol-original-partition.json",
+          "blob": "7e73c93098ac7f1142eacb5783ca82cf378a2a45",
+          "package": "gb-POL-ADM2--repair-evaluation",
+          "mda_exception_overlap": 0,
+          "status": "proposed; independent substantive review and accepted integration required"
+        },
+        {
+          "path": "coordination/engineering/slovakia-original-exceptions-20261018/svk-original-partition.json",
+          "blob": "95f2df4ae273f4ba0c97fc93088bd0e44b990281",
+          "package": "gb-SVK-ADM2--repair-evaluation",
+          "mda_exception_overlap": 0,
+          "records": 130,
+          "status": "proposed; independent substantive review and accepted integration required"
+        }
+      ],
+      "additional_held_record_scan": [
+        {
+          "path": "coordination/engineering/four-original-exceptions-20261018/can-original-partition.json",
+          "blob": "ee61ce77c7d17483684c37cd24892ff9fcd01da9",
+          "held_records": 103,
+          "exact_mda_key_overlap": 0,
+          "disposition_status": "proposed documented-unresolved original-scope exceptions; normal reviewed integration pending"
+        },
+        {
+          "path": "coordination/engineering/four-original-exceptions-20261018/cze-original-partition.json",
+          "blob": "ff2ba535dece81a548b49dc88e0f17fd8721ccc7",
+          "held_records": 148,
+          "exact_mda_key_overlap": 0,
+          "disposition_status": "proposed documented-unresolved original-scope exceptions; normal reviewed integration pending"
+        },
+        {
+          "path": "coordination/engineering/four-original-exceptions-20261018/ecu-original-partition.json",
+          "blob": "c2f91506ae9d34a4665f567093c43d9f87fa16ca",
+          "held_records": 582,
+          "exact_mda_key_overlap": 0,
+          "disposition_status": "proposed documented-unresolved original-scope exceptions; normal reviewed integration pending"
+        },
+        {
+          "path": "coordination/engineering/four-original-exceptions-20261018/mex-original-partition.json",
+          "blob": "b94c06fb496d7434a8ec05d760e6d8e4fdd5a9ea",
+          "held_records": 116,
+          "exact_mda_key_overlap": 0,
+          "disposition_status": "proposed documented-unresolved original-scope exceptions; normal reviewed integration pending"
+        }
+      ],
+      "later_current_acceptance_examples": [
+        {
+          "package": "gb-CRI-ADM2--repair-evaluation",
+          "accepted_delivery_pr": 2469,
+          "current_status": "accepted_supported_partition_with_unresolved_original_remainder",
+          "accepted": 4376,
+          "remaining": 4
+        },
+        {
+          "package": "gb-ERI-ADM2--repair-evaluation",
+          "accepted_delivery_pr": 2466,
+          "current_status": "accepted_supported_partition_with_unresolved_original_remainder",
+          "accepted": 15444,
+          "remaining": 5
+        },
+        {
+          "package": "gb-PHL-ADM3--repair-evaluation",
+          "accepted_delivery_pr": 2377,
+          "current_status": "accepted_supported_partition_with_unresolved_original_remainder",
+          "accepted": 96600,
+          "remaining": 7
+        }
+      ]
+    },
+    "receipt_visibility": "Roster lists seven evidence_reuse_receipts by name, bytes, hash, and summary. Fetches at the active50 directory and current code-search queries by exact filenames returned no separate paths; receipt bodies and their full package coverage were not independently read. Do not claim their contents.",
+    "other_public_disposition_record": {
+      "path": "coordination/engineering/original-held-cell-exceptions-20261018/disposition-partition.json",
+      "blob": "37cd3d2a8fbddec85605f7e22a51a9f69828bcbe",
+      "accepted": 0,
+      "pending_independent_review": 3,
+      "cases": "one LBR and two EGY keys",
+      "mda_overlap": 0,
+      "README_sha": "5f190e083ba0ee872a6b13ae893e2eb319d62388",
+      "README_status": "0 accepted, 3 pending independent review, 0 otherwise resolved"
+    },
+    "historical_checkpoints": [
+      {
+        "path": "coordination/engineering/accepted-checkpoint-2168-20261016/artifact-001/selected-checkpoint.json",
+        "blob": "67466a0f5eafd5171d483d8586fae7963e8202d8",
+        "acceptance_pr": 2168,
+        "head": "59675301ab2b9493cc8bc7d813beb9f68d745cd8",
+        "limit": "Locator only, points to global geography artifact zip; no MDA-specific disposition index exposed."
+      },
+      {
+        "path": "coordination/engineering/accepted-checkpoint-2013-20261015/artifact-001/selected-checkpoint.json",
+        "blob": "6b53ccc540ab917f3b82b2a36ef52d63ddb863c0",
+        "acceptance_pr": 2013,
+        "head": "6af0e9d589777881b5cdabe80d85eb7e24b354f8",
+        "limit": "Locator only, points to global geography artifact zip; MDA-specific disposition is not exposed."
+      }
+    ],
+    "latest_root_named_accounting": {
+      "public_root_acceptance_comment_id": 6299383329,
+      "package_count": 87,
+      "mda_activation_recorded": false,
+      "source": "parent-confirmed current root accounting; no URL/comment body was independently read in this pass",
+      "effect": "reinforces absence of MDA activation in the latest accepted named accounting"
+    }
+  },
+  "reconciliation": {
+    "current_selected_assignment": {
+      "assigned_keys": 0,
+      "unassigned_keys": 1986
+    },
+    "recorded_mda_package_dispositions_in_named_history": 0,
+    "named_history_scope": "Original package is bound to 1,986 cells/539 intervals/16 owners at the immutable queue pin. The linked historical ledger lists 28 completed +18 unfinished named packages and excludes MDA; the current active50 roster has no MDA row; parent-confirmed latest accepted87 accounting has no MDA activation. Exact key joins and current selected observation also return no MDA owner assignment. Under this named accounting, prior accepted MDA credit is 0.",
+    "residual_after_prior_named_disposition_credit": 1986,
+    "residual_scope_limit": "Sufficient to carry 1,986 as residual under the named accepted-package accounting. This is not a per-key disposition census of every one of the 660 global source/physical queue entries."
+  },
+  "not_done": [
+    "No claim, mutation, observer replay, geometry run, or publication.",
+    "No broad native payload reread."
+  ],
+  "unclosed_evidence": [
+    "This closes the public named activation/completion history represented by the linked ledger and active50 roster. It is not a per-key disposition census of all 660 entries in the global source/physical queue. No MDA source package disposition was found or recorded in the named history."
+  ]
+}

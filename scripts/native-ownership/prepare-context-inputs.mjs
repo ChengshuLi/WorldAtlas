@@ -14,7 +14,8 @@ const repo=fs.realpathSync('.'),head=execFileSync('git',['rev-parse','HEAD'],{en
 const code=committedPreparationFiles(repo,head,['package.json',
  'scripts/native-ownership/prepare-context-inputs.mjs','scripts/native-ownership/compact-context-inputs.mjs',
  'scripts/native-ownership/native-only-inputs.mjs','scripts/native-ownership/native-preparation-guards.mjs',
- 'src/native-runtime.js','scripts/native-ownership/compile-native-ownership.mjs','src/native-grid.js','scripts/audit-grid-intervals.mjs']);
+ 'src/native-runtime.js','scripts/native-ownership/compile-native-ownership.mjs','src/native-grid.js','scripts/audit-grid-intervals.mjs',
+ 'scripts/selected-reference-metadata.mjs','src/reference-metadata.js']);
 const inputs=await loadNativeSourceInputs(repo,baseline),sourceFiles=new Map(inputs.sourceFiles.map(file=>[file.path,file]));
 const digest=raw=>createHash('sha256').update(raw).digest('hex');
 const read=name=>{

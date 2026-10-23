@@ -1,0 +1,91 @@
+{
+  "reviewer": "/root/physical_remainder_exact_scope",
+  "review_utc": "2026-10-16T01:52:36.200627+00:00",
+  "outcome": "PASS WITH LIMITS for actual393 composition contribution",
+  "actual_execution": {
+    "path": "idn-border393-execution-001/compose-execution.json",
+    "bytes": 916,
+    "sha256": "f744a06b3ff59459c8671a725660e5f4e90408713eefb9bbd8da1096b7d7996e"
+  },
+  "actual_code_commit": "71d95f45ea0457d60d4b8263bf36ab78316cf0cc",
+  "actual_exit_code": 0,
+  "actual_elapsed_seconds": 64.17400074999999,
+  "actual_ended_at": "2026-10-16T01:50:48.198560+00:00",
+  "actual_config": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/267133ee5fd33696ea7c63ec50cf78bebfb3c92f9a18ca0fb1c4db8be3e0c49e/review/.cache/border393-config-001/compose.json",
+    "bytes": 35087,
+    "sha256": "0b19e360068076d4d0ece05f21944d4920466e2c9333957e0d53a1b5b83ca125"
+  },
+  "independent_original393_roster": {
+    "path": "idn-physical-remainder80712-001/worker5-remainder-verification/expected393-original-authority-roster.json",
+    "bytes": 195086,
+    "sha256": "1601870bf0af151cc61472b4153707b04d071f83b7697c9599c52307d262f19d"
+  },
+  "actual_four_products": {
+    "authority-registry.json": {
+      "output": "authority-registry.json",
+      "bytes": 98905,
+      "sha256": "dccc2765bc382039f8845e9917d84a78ca37a4ddda2c7a1b97d1fa910a7bcf7c"
+    },
+    "patch.json": {
+      "output": "patch.json",
+      "bytes": 2723238,
+      "sha256": "b88cd153fbf2a117cb2523761f5a807a672b17e65c8af76625b6332f59f7b633"
+    },
+    "runtime-envelope.json": {
+      "output": "runtime-envelope.json",
+      "bytes": 1395,
+      "sha256": "ce8dc7fbd2f753b5e2856d76d63c2677d1490e765b37bf48ca61a1d2c573d98c"
+    },
+    "selected-ledger.json": {
+      "output": "selected-ledger.json",
+      "bytes": 6957873,
+      "sha256": "81edb7cc814bf8993988191ac76bf7d6ee44d66dbd25b5aa66da8e54f318408a"
+    }
+  },
+  "consequential_results": {
+    "original_authority_groups": 18,
+    "original_appended_components": 29,
+    "new_original_native_cells": 393,
+    "original_repair474": 368,
+    "original_conflict27": 25,
+    "inherited_accepted_additive_cells": 281915,
+    "actual_cumulative_native_cells": 282308,
+    "duplicate_coordinates": 0,
+    "inherited_new_overlap": 0,
+    "changed_inherited_tuple_owners": 0,
+    "inherited_raw_ledger_rows_preserved": 691,
+    "actual_ledger_rows": 720,
+    "inherited_registry_entries_preserved": 83,
+    "actual_registry_entries": 101,
+    "all_original_constructor_fields_preserved": true,
+    "only_added_per_constructor_row_fields": [
+      "authority_sha256",
+      "rule_sha256"
+    ],
+    "preserved_inherited_ledger_metadata": [
+      "current_targets",
+      "current_rebind",
+      "parent_inventory",
+      "original_scope_ids",
+      "kind",
+      "version"
+    ],
+    "unchanged_complete_native_base_and_owner_roster": true,
+    "original_excluded_repair_keys": 106,
+    "original_excluded_conflict_keys": 2
+  },
+  "actual_scope_meaning": [
+    "Every emitted new tuple exactly equals the independent393 roster derived from actual original18 immutable constructors, not an assumed group total or author-composed array. All29 raw component rows preserve their original native rows/base/source receipt/target identity and exact original authority/rule descriptors.",
+    "All inherited691 literal ledger rows and83 authority records remain unchanged. All281915 inherited patch tuples are preserved without owner transfer. Complete native base/owner roster, current targets, rebind and parent inventory remain unchanged.",
+    "Actual5 unique Gov owner groups consume3 genuine union quartets plus original Sintang/Sanggau quartets; the duplicate8 predecessor calls are retained evidence but are not appended again. TLS6 and Fatumean1 retain their separate original physical/source custody.",
+    "The full actual patch is exactly282308 tuples=281915+393, with0 duplicate native coordinates or overlap. The exact106 repair and2 conflict keys outside this scope are not inserted. Source package denominators/class claims are preserved."
+  ],
+  "execution_identity_limit": "The actual composition ran accepted71d95f45, as its receipt records. Earlier native qualification ranb638; no historical executing identity is relabelled and no new source/native predicate was run by this review.",
+  "pending": [
+    "Actual finalizer and exact emitted-to-canonical byte binding review",
+    "Actual selected-joint ownerzero/conservation/native visibility against genuine675 baseline and real canonical candidate",
+    "Ordinary publication/acceptance;0 new accepted credit granted here"
+  ],
+  "scientific_limits": "Earlier scoped country-source priority, full original candidate claims, physical/member/water/residual/tie/witness and datum/vintage limits remain unchanged. Composition does not issue a new legal/source/whole-parent certification."
+}

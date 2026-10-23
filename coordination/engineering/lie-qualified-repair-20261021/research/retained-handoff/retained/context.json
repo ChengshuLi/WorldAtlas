@@ -1,0 +1,525 @@
+{
+  "version": 1,
+  "kind": "liechtenstein-original-retained-source-physical-context",
+  "purpose": "Retained original source property, lineage and physical/water context for the exact LIE repair scope. Three exact public payloads were authenticated for property-only joins. No raw geometry is redistributed or recomputed; no positive qualification or current rights decision.",
+  "original_scope": {
+    "package_id": "gb-LIE-ADM1--repair-evaluation",
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "queue_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "land_cells": 148,
+    "intervals": 60,
+    "owner_indices": [
+      7121
+    ],
+    "primary_source": "gb:LIE:ADM1",
+    "source_family_index": 193,
+    "source_features": [
+      41684,
+      41687,
+      41690,
+      41691,
+      41692,
+      41693
+    ],
+    "source_families": [
+      193
+    ],
+    "native_block": 22,
+    "province_id": "framework:province:liechtenstein:0523cb1ade45",
+    "original_question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+    "original_completion_contract": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+    "source_domain_transform": [],
+    "exact_key_inventory": "lie-selected-owner-observation.json.gz",
+    "exact_key_count": 148,
+    "exact_key_sha256": "8de2ba3e6e2e3c712e8759729552eecd23a2f4956afa5adc5c8a72893dcbd9c5",
+    "exact_key_encoding": "Compact JSON array of sorted [y,x] pairs followed by LF"
+  },
+  "original_selected_source_contacts": [
+    {
+      "source_index": 41684,
+      "family_index": 193,
+      "ordinal": 0,
+      "source_id": "gb:LIE:ADM1:41692755B66371769109520",
+      "name": "Triesen",
+      "owner_indices": [
+        7121
+      ],
+      "geometry_status": "raw-native-supported",
+      "retained_physical_supported_candidate_incidence": 5
+    },
+    {
+      "source_index": 41687,
+      "family_index": 193,
+      "ordinal": 3,
+      "source_id": "gb:LIE:ADM1:41692755B18610673403937",
+      "name": "Triesenberg",
+      "owner_indices": [
+        7121
+      ],
+      "geometry_status": "raw-native-supported",
+      "retained_physical_supported_candidate_incidence": 3
+    },
+    {
+      "source_index": 41690,
+      "family_index": 193,
+      "ordinal": 6,
+      "source_id": "gb:LIE:ADM1:41692755B54662867343220",
+      "name": "Mauren",
+      "owner_indices": [
+        7121
+      ],
+      "geometry_status": "raw-native-supported",
+      "retained_physical_supported_candidate_incidence": 9
+    },
+    {
+      "source_index": 41691,
+      "family_index": 193,
+      "ordinal": 7,
+      "source_id": "gb:LIE:ADM1:41692755B26730620500431",
+      "name": "Schaan",
+      "owner_indices": [
+        7121
+      ],
+      "geometry_status": "raw-native-supported",
+      "retained_physical_supported_candidate_incidence": 53
+    },
+    {
+      "source_index": 41692,
+      "family_index": 193,
+      "ordinal": 8,
+      "source_id": "gb:LIE:ADM1:41692755B63992629942054",
+      "name": "Balzers",
+      "owner_indices": [
+        7121
+      ],
+      "geometry_status": "raw-native-supported",
+      "retained_physical_supported_candidate_incidence": 43
+    },
+    {
+      "source_index": 41693,
+      "family_index": 193,
+      "ordinal": 9,
+      "source_id": "gb:LIE:ADM1:41692755B23424129986871",
+      "name": "Planken",
+      "owner_indices": [
+        7121
+      ],
+      "geometry_status": "raw-native-supported",
+      "retained_physical_supported_candidate_incidence": 35
+    }
+  ],
+  "lineage": {
+    "owner_7121_location": {
+      "id": "atlas:territory:LIE",
+      "index": 7121,
+      "bounds": [
+        137981.7526422222,
+        91920.97471498145,
+        138100.0186377778,
+        92158.84517667477
+      ],
+      "province_id": "framework:province:liechtenstein:0523cb1ade45",
+      "province_index": 2691,
+      "name": "Liechtenstein",
+      "reference_owner": "Liechtenstein",
+      "source_id": "atlas:territory:LIE",
+      "location_basis": "Compact source country/territory",
+      "source_atoms": [
+        "gb:LIE:ADM1:41692755B18610673403937",
+        "gb:LIE:ADM1:41692755B23424129986871",
+        "gb:LIE:ADM1:41692755B26730620500431",
+        "gb:LIE:ADM1:41692755B33734108210637",
+        "gb:LIE:ADM1:41692755B54479018835512",
+        "gb:LIE:ADM1:41692755B54662867343220",
+        "gb:LIE:ADM1:41692755B63992629942054",
+        "gb:LIE:ADM1:41692755B66371769109520",
+        "gb:LIE:ADM1:41692755B68962474767900",
+        "gb:LIE:ADM1:41692755B90684947638296",
+        "gb:LIE:ADM1:41692755B941757218579"
+      ]
+    },
+    "extra_conflict_owner_8836_location": {
+      "id": "gb:AUT:ADM2:14549572B41160672699042",
+      "index": 8836,
+      "bounds": [
+        138079.40947722222,
+        91894.45927352214,
+        138527.27639388887,
+        92378.67004832599
+      ],
+      "province_id": "framework:province:vorarlberg:2ef5211c2090",
+      "province_index": 4848,
+      "name": "Bludenz",
+      "reference_owner": "Austria",
+      "source_id": "gb:AUT:ADM2",
+      "source_atoms": [
+        "gb:AUT:ADM2:14549572B41160672699042"
+      ]
+    },
+    "interpretation_limit": "Lineage identifies retained attribution records; it does not prove current source applicability, territorial authority or complete exclusions."
+  },
+  "retained_mask_context": {
+    "source_candidate_block_022_blob_oid": "a19137a19e92e16b9d331913a963e5367788cb0c",
+    "physical_support_block_022_blob_oid": "6473fa0629f974d76909d8d5db126ab6fea02cfd",
+    "inland_water_support_block_022_blob_oid": "81411b27437b95b18314fbeb8c7e6a40f0e51c94",
+    "method": "Read retained block-022 indexed source-candidate and land/water x-run masks; reproduced pinned source-batch-intervals classification and kept exactly gb-LIE-ADM1--repair-evaluation segments. No geometry or owner observer.",
+    "package_intervals": 60,
+    "package_cells": 148,
+    "package_cells_on_physical_support": 148,
+    "package_cells_on_inland_water_support": 0,
+    "package_cells_source_relative": 0,
+    "broad_owner_plus_selected_contact_mask_cells": 149,
+    "separate_aut_conflict_cell": {
+      "y": 92138,
+      "x": 138082,
+      "source_run": [
+        138082,
+        138083
+      ],
+      "owners": [
+        7121,
+        8836
+      ],
+      "source_feature_indices": [
+        1844,
+        1848,
+        41691
+      ],
+      "mapped_source_features": [
+        {
+          "index": 1848,
+          "family_index": 16,
+          "source_id": "gb:AUT:ADM2:14549572B41160672699042",
+          "owner_indices": [
+            8836
+          ],
+          "name": "Bludenz"
+        },
+        {
+          "index": 41691,
+          "family_index": 193,
+          "source_id": "gb:LIE:ADM1:41692755B26730620500431",
+          "owner_indices": [
+            7121
+          ],
+          "name": "Schaan"
+        }
+      ],
+      "source_conflict": true,
+      "emitted_family_index": 16,
+      "emitted_product": "gb:AUT:ADM2",
+      "emitted_package_id": "gb-AUT-ADM2--source-conflict",
+      "physical_support": "land",
+      "water_support": false
+    },
+    "limits": [
+      "The additional source-candidate key is emitted under the separate AUT source-conflict package by the pinned classifier, not the LIE repair-evaluation package.",
+      "Retained mask membership is not per-source geometry witness, fit, legal authority or complete competitor exclusion."
+    ]
+  },
+  "source_catalogue_declarations": {
+    "catalogue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "catalogue_path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+    "catalogue_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+    "catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+    "products": [
+      {
+        "key": "gb:LIE:ADM1",
+        "feature_count": 11,
+        "recorded_license": "Open Data Commons Open Database License 1.0",
+        "source_represented_year_claim": "2017",
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/LIE/ADM1/geoBoundaries-LIE-ADM1_simplified.geojson",
+        "catalogue_metadata_sha256": "27b35cdfb0f05cf09307aa6f2d7e6b408fb6512d4380a84dccfa181103b244f6",
+        "payload": {
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LIE-ADM1-000.bin.gz",
+          "blob_oid": "fb895b3ea2445a1f8b67d5f474c8f20fe2399106",
+          "compressed_bytes": 3986,
+          "compressed_sha256": "3285859249ca41e6de8357137249abd79780c9f196f5dcdb99bffc8556ff7bdd",
+          "decoded_bytes": 18157,
+          "decoded_sha256": "6e951b381a6529bd8fbda4194414f822777ebc8f470caa30eb89c2a8b3576ebc",
+          "immutable_url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LIE-ADM1-000.bin.gz",
+          "local_object_warm": true,
+          "property_join_performed": true
+        }
+      },
+      {
+        "key": "gb:AUT:ADM1",
+        "feature_count": 9,
+        "recorded_license": "Creative Commons Attribution-ShareAlike 2.0",
+        "source_represented_year_claim": "2017",
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUT/ADM1/geoBoundaries-AUT-ADM1_simplified.geojson",
+        "catalogue_metadata_sha256": "a34badb5a88d89c2ddcb1a198387e22c5863d57bc321f2b4303309853ce129f8",
+        "payload": {
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AUT-ADM1-000.bin.gz",
+          "blob_oid": "c5f2b986a47a1d38d600fc343830402cec89e1b1",
+          "compressed_bytes": 155729,
+          "compressed_sha256": "c85e17851fd78b71bcbd7f1499a3edb43bb06a687cd81c4f61c364a79598cee0",
+          "decoded_bytes": 392050,
+          "decoded_sha256": "b4a2304bac51b36a7f8463c91089e4b468ef8ee1faa529592673dbefc8cee69e",
+          "immutable_url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AUT-ADM1-000.bin.gz",
+          "local_object_warm": true,
+          "property_join_performed": true
+        }
+      },
+      {
+        "key": "gb:AUT:ADM2",
+        "feature_count": 94,
+        "recorded_license": "Creative Commons Attribution-ShareAlike 2.0",
+        "source_represented_year_claim": "2017",
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUT/ADM2/geoBoundaries-AUT-ADM2_simplified.geojson",
+        "catalogue_metadata_sha256": "9fba7ed9af46a961c05ddf19173dc89ebdfcf85e8122f8fd8e85da3b316fb3a1",
+        "payload": {
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AUT-ADM2-000.bin.gz",
+          "blob_oid": "425e5424dece78939cd2f6055f42c3c57f2092a9",
+          "compressed_bytes": 466860,
+          "compressed_sha256": "d04b8f5684bacecd68a52b9d6804828075913a3b8449b0b2e53329e97df00302",
+          "decoded_bytes": 1240074,
+          "decoded_sha256": "d233a5447dfbe517844536aec583cc7054475ce9e6a34013ab0d4e6e8b63bb18",
+          "immutable_url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AUT-ADM2-000.bin.gz",
+          "local_object_warm": true,
+          "property_join_performed": true
+        }
+      }
+    ],
+    "interpretation": "These are the retained catalogue license and represented-year claims for the original products; they do not establish current rights clearance, authorization, applicable source membership or reuse terms. The LIE product is recorded as ODbL 1.0; adjacent AUT products are recorded CC BY-SA 2.0."
+  },
+  "property_evidence": {
+    "method": "For each exact authenticated compressed payload, decompress and parse the source document, then compare only properties.shapeID against the retained selected source_id suffix. Retain only the five named property fields; no geometry field was inspected, printed, transformed or computed.",
+    "raw_property_match_count": 8,
+    "all_eight_target_contacts_matched_once": true,
+    "payload_results": [
+      {
+        "key": "gb:LIE:ADM1",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LIE-ADM1-000.bin.gz",
+        "blob_oid": "fb895b3ea2445a1f8b67d5f474c8f20fe2399106",
+        "compressed_bytes": 3986,
+        "compressed_sha256": "3285859249ca41e6de8357137249abd79780c9f196f5dcdb99bffc8556ff7bdd",
+        "decoded_bytes": 18157,
+        "decoded_sha256": "6e951b381a6529bd8fbda4194414f822777ebc8f470caa30eb89c2a8b3576ebc",
+        "feature_count": 11,
+        "catalogue_feature_count": 11,
+        "target_contact_count": 6,
+        "matched_once_count": 6,
+        "all_target_contacts_matched_once": true,
+        "geometry_read_or_used": false
+      },
+      {
+        "key": "gb:AUT:ADM1",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AUT-ADM1-000.bin.gz",
+        "blob_oid": "c5f2b986a47a1d38d600fc343830402cec89e1b1",
+        "compressed_bytes": 155729,
+        "compressed_sha256": "c85e17851fd78b71bcbd7f1499a3edb43bb06a687cd81c4f61c364a79598cee0",
+        "decoded_bytes": 392050,
+        "decoded_sha256": "b4a2304bac51b36a7f8463c91089e4b468ef8ee1faa529592673dbefc8cee69e",
+        "feature_count": 9,
+        "catalogue_feature_count": 9,
+        "target_contact_count": 1,
+        "matched_once_count": 1,
+        "all_target_contacts_matched_once": true,
+        "geometry_read_or_used": false
+      },
+      {
+        "key": "gb:AUT:ADM2",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AUT-ADM2-000.bin.gz",
+        "blob_oid": "425e5424dece78939cd2f6055f42c3c57f2092a9",
+        "compressed_bytes": 466860,
+        "compressed_sha256": "d04b8f5684bacecd68a52b9d6804828075913a3b8449b0b2e53329e97df00302",
+        "decoded_bytes": 1240074,
+        "decoded_sha256": "d233a5447dfbe517844536aec583cc7054475ce9e6a34013ab0d4e6e8b63bb18",
+        "feature_count": 94,
+        "catalogue_feature_count": 94,
+        "target_contact_count": 1,
+        "matched_once_count": 1,
+        "all_target_contacts_matched_once": true,
+        "geometry_read_or_used": false
+      }
+    ],
+    "selected_property_records": [
+      {
+        "source_index": 41684,
+        "source_id": "gb:LIE:ADM1:41692755B66371769109520",
+        "roster_owner_indices": [
+          7121
+        ],
+        "roster_name": "Triesen",
+        "expected_shapeID": "41692755B66371769109520",
+        "match_count": 1,
+        "matched_properties": {
+          "shapeName": "Triesen",
+          "shapeISO": "LI-09",
+          "shapeID": "41692755B66371769109520",
+          "shapeGroup": "LIE",
+          "shapeType": "ADM1"
+        }
+      },
+      {
+        "source_index": 41687,
+        "source_id": "gb:LIE:ADM1:41692755B18610673403937",
+        "roster_owner_indices": [
+          7121
+        ],
+        "roster_name": "Triesenberg",
+        "expected_shapeID": "41692755B18610673403937",
+        "match_count": 1,
+        "matched_properties": {
+          "shapeName": "Triesenberg",
+          "shapeISO": "LI-10",
+          "shapeID": "41692755B18610673403937",
+          "shapeGroup": "LIE",
+          "shapeType": "ADM1"
+        }
+      },
+      {
+        "source_index": 41690,
+        "source_id": "gb:LIE:ADM1:41692755B54662867343220",
+        "roster_owner_indices": [
+          7121
+        ],
+        "roster_name": "Mauren",
+        "expected_shapeID": "41692755B54662867343220",
+        "match_count": 1,
+        "matched_properties": {
+          "shapeName": "Mauren",
+          "shapeISO": "LI-04",
+          "shapeID": "41692755B54662867343220",
+          "shapeGroup": "LIE",
+          "shapeType": "ADM1"
+        }
+      },
+      {
+        "source_index": 41691,
+        "source_id": "gb:LIE:ADM1:41692755B26730620500431",
+        "roster_owner_indices": [
+          7121
+        ],
+        "roster_name": "Schaan",
+        "expected_shapeID": "41692755B26730620500431",
+        "match_count": 1,
+        "matched_properties": {
+          "shapeName": "Schaan",
+          "shapeISO": "LI-07",
+          "shapeID": "41692755B26730620500431",
+          "shapeGroup": "LIE",
+          "shapeType": "ADM1"
+        }
+      },
+      {
+        "source_index": 41692,
+        "source_id": "gb:LIE:ADM1:41692755B63992629942054",
+        "roster_owner_indices": [
+          7121
+        ],
+        "roster_name": "Balzers",
+        "expected_shapeID": "41692755B63992629942054",
+        "match_count": 1,
+        "matched_properties": {
+          "shapeName": "Balzers",
+          "shapeISO": "LI-01",
+          "shapeID": "41692755B63992629942054",
+          "shapeGroup": "LIE",
+          "shapeType": "ADM1"
+        }
+      },
+      {
+        "source_index": 41693,
+        "source_id": "gb:LIE:ADM1:41692755B23424129986871",
+        "roster_owner_indices": [
+          7121
+        ],
+        "roster_name": "Planken",
+        "expected_shapeID": "41692755B23424129986871",
+        "match_count": 1,
+        "matched_properties": {
+          "shapeName": "Planken",
+          "shapeISO": "LI-05",
+          "shapeID": "41692755B23424129986871",
+          "shapeGroup": "LIE",
+          "shapeType": "ADM1"
+        }
+      },
+      {
+        "source_index": 1844,
+        "source_id": "gb:AUT:ADM1:97560089B20931628540879",
+        "roster_owner_indices": [],
+        "roster_name": "Vorarlberg",
+        "expected_shapeID": "97560089B20931628540879",
+        "match_count": 1,
+        "matched_properties": {
+          "shapeName": "Vorarlberg",
+          "shapeISO": "AT-8",
+          "shapeID": "97560089B20931628540879",
+          "shapeGroup": "AUT",
+          "shapeType": "ADM1"
+        }
+      },
+      {
+        "source_index": 1848,
+        "source_id": "gb:AUT:ADM2:14549572B41160672699042",
+        "roster_owner_indices": [
+          8836
+        ],
+        "roster_name": "Bludenz",
+        "expected_shapeID": "14549572B41160672699042",
+        "match_count": 1,
+        "matched_properties": {
+          "shapeName": "Bludenz",
+          "shapeISO": "",
+          "shapeID": "14549572B41160672699042",
+          "shapeGroup": "AUT",
+          "shapeType": "ADM2"
+        }
+      }
+    ],
+    "limits": [
+      "This establishes raw feature property identity only, not that any source feature applies to any LIE package cell.",
+      "The payload catalogue terms and represented-year strings remain historical metadata claims; no current license or legal clearance is established.",
+      "AUT ADM1 Vorarlberg (1844) is an ownerless contact in the excluded AUT conflict run; AUT ADM2 Bludenz (1848) carries owner 8836 in retained roster/lineage. These source properties do not resolve the separate source conflict or establish complete competitors.",
+      "Raw geometry was not used or redistributed."
+    ]
+  },
+  "limits": [
+    "The package requires qualified source membership, retained territorial exclusions and complete competitors before any repair; none is established by this metadata and run-mask inventory.",
+    "The source contacts are the queue-selected contacts, not a proven complete competitor universe.",
+    "All six selected LIE IDs and two adjacent AUT IDs matched once in the authenticated historical raw payload properties. This confirms feature identity, not current applicability or territorial qualification.",
+    "The separate selected-owner observation is retained in this packet. No current rights clearance, source applicability, territorial determination or positive repair qualification is asserted."
+  ],
+  "original_input_pins": [
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "immutable_url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+      "git_blob_oid": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+      "immutable_url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs",
+      "git_blob_oid": "c5ba9331deb93eed40662d1dc579cdaedea55c46",
+      "immutable_url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-022.json.gz",
+      "git_blob_oid": "a19137a19e92e16b9d331913a963e5367788cb0c",
+      "immutable_url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-022.json.gz"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-022.json.gz",
+      "git_blob_oid": "6473fa0629f974d76909d8d5db126ab6fea02cfd",
+      "immutable_url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-022.json.gz"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-022.json.gz",
+      "git_blob_oid": "81411b27437b95b18314fbeb8c7e6a40f0e51c94",
+      "immutable_url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-022.json.gz"
+    }
+  ]
+}

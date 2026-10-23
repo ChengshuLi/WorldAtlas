@@ -84,7 +84,18 @@ const record=readPackageCurrentExecution(process.cwd());requireCurrentExecution(
 async function currentNegative(t){
  const {root,definition}=await executionFixture(t),stage=path.join(root,'test-stage');
  await materializePackageInputs({source:root,destination:stage,definition});
- const record=issueCurrentExecution({source:root,stage});requireCurrentExecution(record);
+ const opened=new Map(),open=syncFs.openSync;let record;
+ try{
+  syncFs.openSync=(name,...args)=>{if(typeof name==='string'&&name.startsWith(stage+'/'))opened.set(name.slice(stage.length+1),(opened.get(name.slice(stage.length+1))??0)+1);return open(name,...args);};
+  record=issueCurrentExecution({source:root,stage});
+ }finally{syncFs.openSync=open;}
+ assert.deepEqual([...opened.keys()].sort(),record.files.map(pin=>pin.path));
+ assert([...opened.values()].every(count=>count===1),'Issuer authenticates each copied stage body once');
+ requireCurrentExecution(record);
+ const stageBody=path.join(stage,'scripts/evidence-quality.mjs'),original=await fs.readFile(stageBody);
+ await fs.appendFile(stageBody,'// changed before issue');
+ assert.throws(()=>issueCurrentExecution({source:root,stage}),/Materialized execution body/);
+ await fs.writeFile(stageBody,original);
  assert.throws(()=>requireCurrentExecution(structuredClone(record)),/authenticated/);
  const badHead={...record,source_commit:'0'.repeat(40)};assert.throws(()=>authenticateCurrentExecution(badHead,{root:stage,executingRoot:root,sourceRoot:root}),/HEAD/);
  assert.throws(()=>authenticateCurrentExecution({...record,source_root:stage},{root:stage,executingRoot:root,sourceRoot:root}));
@@ -101,9 +112,12 @@ async function currentNegative(t){
 
 async function authoredControls(t){
  const base=path.dirname(fileURLToPath(import.meta.url)),scratch=await fs.mkdtemp(path.join(os.tmpdir(),'atlas-authored-code-'));t.after(()=>fs.rm(scratch,{recursive:true,force:true}));
- const wire=await fs.readFile(base+'/current-consumer-code/index.json');assert.equal(createHash('sha256').update(wire).digest('hex'),'de4a8f7aac3380fc7c5f1cc06ac9bbf0d170c0921d7ef72d5e46187439a80be9');
- const authored=path.join(await fs.realpath(scratch),'image'),codeIndex=restoreWholeImage(base+'/current-consumer-code',authored,{expectedIndexSha:createHash('sha256').update(wire).digest('hex')});
- const stage=JSON.parse(await fs.readFile(base+'/../../../data/native-context-migration/manifest.json'));
+ // These are exact historical authored-code operands. Current execution and
+ // the reviewed restoration extension below still read the live checkout.
+ const historical=path.resolve(base,'../../../test/fixtures/current-execution-authored');
+ const wire=await fs.readFile(historical+'/index.json');assert.equal(createHash('sha256').update(wire).digest('hex'),'de4a8f7aac3380fc7c5f1cc06ac9bbf0d170c0921d7ef72d5e46187439a80be9');
+ const authored=path.join(await fs.realpath(scratch),'image'),codeIndex=restoreWholeImage(historical,authored,{expectedIndexSha:createHash('sha256').update(wire).digest('hex')});
+ const stage=JSON.parse(await fs.readFile(historical+'/stage-manifest.json'));
  const currentFiles=stage.validator_sources.map(p=>({...p,mode:codeIndex.files.find(f=>f.path===p.path).mode}));
  const args={stage,codeIndex,authored,currentFiles},result=verifyAuthoredValidatorSources(args);assert.equal(result.authored_files,31);
  const extensionName='coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs',actualRoot=path.resolve(base,'../../..'),extensionRaw=await fs.readFile(path.join(actualRoot,extensionName)),extended=structuredClone(currentFiles),extendedPin=extended.find(p=>p.path===extensionName);extendedPin.bytes=extensionRaw.length;extendedPin.sha256=createHash('sha256').update(extensionRaw).digest('hex');verifyAuthoredValidatorSources({...args,currentFiles:extended,currentRoot:actualRoot});

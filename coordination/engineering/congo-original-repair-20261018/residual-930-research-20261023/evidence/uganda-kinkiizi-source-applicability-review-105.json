@@ -1,0 +1,48 @@
+{
+  "kind": "cod-residual-930-kinkiizi-source-applicability-review-105-v1",
+  "status": "independent-source-context-review; no per-key disposition; all 105 remain pending and held",
+  "scope": {
+    "original_package": "gb-COD-ADM2--repair-evaluation",
+    "stratum": "Rutshuru / Kinkiizi",
+    "original_owner_index": 14462,
+    "key_count": 105,
+    "target_id": "gb:COD:ADM2:63176286B25642850349509",
+    "candidate_id": "gb:UGA:ADM2:47994165B13656364891086"
+  },
+  "reviewed_artifacts": [
+    {
+      "path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/rutshuru-kinkiizi-105-source-qualification/README.md",
+      "bytes": 3480,
+      "sha256": "c6f95449293854caa969b050b354f72f2e74f98cdba28f2964e8ed6c8b0ce180"
+    },
+    {
+      "path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/evidence/uganda-kinkiizi-administrative-context-105.json",
+      "bytes": 17274,
+      "sha256": "433e8bded8a34d09446af0922a3c111acca20dfd0d0b1ec3d92bb0b87c709ac5"
+    }
+  ],
+  "reviewer_finding": {
+    "result": "The OCHA COD-AB / IMWG adoption and periodic-review guidance and geoBoundaries individual-country representation statement are general product context only. They explain why national layers may differ but do not establish that this is the cause here, do not provide a crosswalk, and do not decide per-key territorial applicability.",
+    "overclaim_check": "No unsupported applicability inference found. The artifacts state the evidence does not adjudicate the 105 cells and preserve their pending/held status.",
+    "decision_relevant_finite_step": "Obtain exact official OCHA/RGC DRC COD-AB release or review metadata for the 2019 Rutshuru feature, or a direct source crosswalk linking the exact feature/version to the competing UGA feature/version.",
+    "access_result": "The exact linked HDX record returned HTTP 403 in the prior documented read. No alternate route was attempted. Reviewer identified no other feasible retained primary source.",
+    "status": "No positive qualification, source-context clearance, hold removal, repair, owner change, package completion, or credit."
+  },
+  "source_references": [
+    {
+      "title": "OCHA Administrative Boundaries (COD-AB)",
+      "url": "https://knowledge.base.unocha.org/wiki/spaces/imtoolbox/pages/2557378679/Administrative%2BBoundaries%2BCOD-AB",
+      "accessed": "2026-10-23"
+    },
+    {
+      "title": "OCHA COD-AB development, reviews, and maintenance",
+      "url": "https://knowledge.base.unocha.org/wiki/spaces/imtoolbox/pages/3923640334/COD-AB%2Bdevelopment%2Breviews%2Band%2Bmaintenance",
+      "accessed": "2026-10-23"
+    },
+    {
+      "title": "geoBoundaries individual country files",
+      "url": "https://www.geoboundaries.org/countryDownloads.html",
+      "accessed": "2026-10-23"
+    }
+  ]
+}

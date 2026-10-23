@@ -22,12 +22,86 @@ node --test test/coverage-classification.test.mjs test/coverage-browser.test.mjs
 
 These checks prove the implementation contract, not complete hydrological accuracy. See `GEOGRAPHIC_GAP_AUDIT.md` for the global candidate inventory. Detailed water evidence and source-backed coordinated administrative repairs remain necessary before closing confirmed geography defects. Issue #920 separately tracks the differential integration gate and actionable repair reports. This rendering change does not install that gate or fix boundary geometry. Deployment is deferred at the user's request.
 
-## Read a current cell before proposing a repair
+## Observe selected ownership, without source geometry
 
-The offline, read-only command follows the committed selection, including additive
-repairs. It answers the useful questions separately: what owns the cell now,
-what physical source says water/land, and which exact upstream source ID joins to
-a current location. It does not install a UI feature or change any geometry.
+For “which selected product owns this original queue package?”, use only the bounded reader:
+
+```sh
+PATH="/absolute/task-supplied/git/bin:$PATH" GIT_NO_LAZY_FETCH=1 GIT_NO_REPLACE_OBJECTS=1 \
+  "/absolute/task-supplied/node" scripts/observe-selected-owners.mjs --repo . --commit EXACT_DATA_COMMIT \
+  --package gb-TUV-ADM1--repair-evaluation --out /path/to/new-observation.json
+```
+
+Replace the executable placeholders with the task's installed Node 24+ and compatible
+Git paths, not an assumed system executable or another shell's PATH. No particular
+provider variable or installation directory is required. The reader resolves Git once;
+explicit acquisition reuses that same implementation rather than selecting Git again.
+This does not make an incompatible explicitly invoked Node able to parse the reader.
+
+Use the exact package ID from the original `global-current-cell-work-queue-20261014`
+queue. The existing extractor derives every original key from its pinned metadata
+and package blocks. There is no arbitrary keys file, reduced-subset or certificate
+option. Unknown packages and incomplete census counts fail before reading native
+row/run bodies. The output parent must already exist without symlinks; an existing output
+is never replaced. Use the committed reader in an owned checkout. The explicit
+40-character data commit may differ from that checkout's HEAD: no checkout switch,
+reset or ad hoc script copy is required. Executed source must match the checkout's
+own committed code. The artifact records both revisions, the exact ordered key
+digest, selected product pins, normative latitude bytes and actual consumed inputs.
+`original_intervals` retains the exact block/row table bound by `original_intervals_sha256`;
+its columns are the original package's `execution.output_columns` (end is exclusive).
+Use its recorded owner/source-feature indices and original mask class directly, rather
+than reconstructing them or replacing them with null. These are original queue observations,
+not current physical or source qualification.
+Use a Git implementation accepting `git --no-lazy-fetch --version`. The same command
+now acquires missing immutable inputs explicitly, instead of requiring a separate
+fetch/resume loop. It derives every package block and native input from authenticated
+metadata, batches only exact tree-bound missing OIDs through the existing transport,
+and checks declared object growth against actual free disk. Executable code and
+commit/tree metadata must already be local. Size lookup uses only exact containing
+directory trees, never a recursive repository inventory. A final-bank selection authenticates the complete selected index, then acquires
+only its complete row table and the final run members containing package rows.
+It does not acquire unrelated final members or replay historical native fragments,
+ledgers and patches. The explicit historical additive profile retains its complete
+fragment-descriptor checks and decodes only required logical row/run members. `GIT_NO_LAZY_FETCH=1`
+remains mandatory: no implicit graph fetch, world-source prefetch, or alternate reader
+is enabled. Existing objects are reused without a fetch; corruption, denied/unavailable
+transport or insufficient space stops without a final observation. Imported objects
+remain available for an ordinary retry. Acquisition byte totals describe declared Git
+blob bodies, not network transfer, peak memory or a complete disk-growth guarantee.
+
+This replaces the separately transferred owner-example, latitude-companion and
+package-specific finalizer recipes. It reads the selected final E bank directly, together with original package
+queue metadata/interval blocks, the authenticated original id/index roster and
+pinned normative latitudes. The explicit historical additive profile instead
+reads its native base and full patch; it is not a fallback for a malformed final
+selector. It never constructs a geometry
+resolver, reads a source qualification certificate or offers a full-geometry mode.
+Final-profile output is `literal-selected-owner-observation-v2`: the existing
+`effective_selected_owner` and `owner_id` columns describe current E.
+`base_owner`, `accepted_additive_owner` and `existing_product_overlap` are null,
+not zero or a reconstructed historical decomposition. The report binds the final
+index and selected reference and states that unrequested runs and context bodies
+were not read. Historical v1 output keeps separate base/additive owners; overlap
+returns a null effective owner, not invented precedence. Zero means no selected
+owner, not proof of physical water.
+Current province/parent metadata is not inferred from the original owner roster.
+
+Both output versions are explicitly not scientific qualification. Its key count covers exactly that original queue package, not a larger campaign
+or proof that the source qualifies. Full source-based residual work still uses the
+retained original evidence, not the supported-only subset: `supported-inputs` already preserves
+`original-scope-partition.json` → `original_inputs.source_evidence` and the exact
+supported/held partition. A selected-base certificate is not package-specific source
+or repair authority. The existing source/native qualification consumers continue to
+require their own actual complete inputs; an observation cannot substitute for them.
+
+## Diagnose source lineage and physical coverage
+
+Use the distinct diagnostic below only to ask what the source geometries and
+physical evidence say, not merely to look up ownership. It intentionally reads the
+complete selected source roster and compares source membership. That necessary
+scientific operation remains separate from the bounded observation above; neither
+command installs a UI feature or changes geometry.
 
 ```sh
 node scripts/diagnose-map-cell.mjs --repo . --commit EXACT_MAIN_COMMIT \

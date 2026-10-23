@@ -1,3 +1,7 @@
+import {gzipSync,gunzipSync} from 'node:zlib';
+import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
+import {additiveReleaseFootprintDigest,footprintValueSha256,bindAdditiveLedgerFeatures} from '../src/effective-footprint.js';
+import {packageStartupOwnership} from '../scripts/package-startup-ownership.mjs';
 import {createHash} from 'node:crypto';
 import {selectedDataSelection, SELECTED_SMOKE} from '../scripts/integration-profile.mjs';
 import test from 'node:test';
@@ -80,9 +84,89 @@ function fixture(t) {
   return {root, reader, full, compact, write, commit, baseline, products, run};
 }
 
+
+async function nativeFixture(t){
+ const f=fixture(t),prefix=PREFIX+'native/',bank='data/canonical-grid/current-startup/';
+ const save=(name,raw)=>{fs.mkdirSync(path.dirname(path.join(f.root,name)),{recursive:true});fs.writeFileSync(path.join(f.root,name),raw);};
+ const pin=name=>f.reader().pin(f.commit(),name),reference=f.products['runtime-envelope.json'].base_reference;
+ const size=262166,coordinateBits=19,rows=new Uint32Array(size*2);for(let y=1;y<size;y++)rows[y*2]=1;rows[1]=1;
+ const encode=(kind,words)=>{const raw=gzipSync(shuffleOwnershipBytes(words)),name=`native-v1/ownership/${kind}-0.bin.gz`;save('data/'+name,raw);return {kind,path:name,offset:0,words:words.length,encoding:'byte-shuffle',sha256:digest(raw),decoded_sha256:digest(Buffer.from(words.buffer))};};
+ const parts=[encode('rows',rows),encode('runs',Uint32Array.from([2*2**coordinateBits+2,2]))];
+ const latitudePath='coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz';
+ const latitudeBytes=fs.readFileSync(latitudePath),latitudes=gunzipSync(latitudeBytes);save(latitudePath,latitudeBytes);const latitude=pin(latitudePath);
+ const owners=[{id:'target:original',index:1,province_id:'parent',bounds:[0,0,1,1]},
+  {id:'untouched',index:2,province_id:'parent',bounds:[2,0,3,1]}],rosterBytes=gzipSync(jsonBytes(owners));
+ save(prefix+'owners.json.gz',rosterBytes);const roster={...pin(prefix+'owners.json.gz'),encoding:'gzip',decoded_bytes:jsonBytes(owners).length,decoded_sha256:digest(jsonBytes(owners))};
+ const manifest={version:2,size,coordinateBits,method:'native-linear-evenodd-first-owner-v1',runWords:2,
+  geographic_release:reference.id,footprints_sha256:reference.footprints_sha256,hierarchy_sha256:reference.hierarchy_sha256,
+  original_assets:{bounds:{sha256:roster.sha256}},native_latitudes:{...latitude,root:'repository',role:'immutable-normative-rule-input',decoded_bytes:latitudes.length,decoded_sha256:digest(latitudes)},parts};
+ f.write('data/native-manifest.json',manifest);const manifestPin=pin('data/native-manifest.json');
+ const packed=await packageStartupOwnership({manifest,source:path.join(f.root,'data'),destination:path.join(f.root,bank,'ownership-vintages/'+manifestPin.sha256)});
+ for(const part of parts.filter(p=>p.kind==='rows'))save(bank+part.path,fs.readFileSync(path.join(f.root,'data',part.path)));
+ save(bank+'native-v1/native-row-latitudes.f64le.gz',latitudeBytes);
+ const pixelMap={...packed.pixelMap,canonical_grid_sha256:manifestPin.sha256,
+  native_latitudes:{...manifest.native_latitudes,transport_path:'native-v1/native-row-latitudes.f64le.gz'},
+  parts:packed.pixelMap.parts.map(p=>p.kind==='rows'?p:{...p,path:'ownership-vintages/'+manifestPin.sha256+'/'+p.path})};
+ const files=[];function inventory(dir,relative=''){for(const e of fs.readdirSync(dir,{withFileTypes:true})){const name=relative+e.name,full=path.join(dir,e.name);if(e.isDirectory())inventory(full,name+'/');else{const raw=fs.readFileSync(full);files.push({path:name,bytes:raw.length,sha256:digest(raw)});}}}inventory(path.join(f.root,bank));
+ const originalIndex={version:1,native_manifest_sha256:manifestPin.sha256,release_id:reference.id,footprints_sha256:reference.footprints_sha256,hierarchy_sha256:reference.hierarchy_sha256,pixelMap,files:files.sort((a,b)=>a.path.localeCompare(b.path))};
+ f.write(bank+'index.json',originalIndex);
+ const ledger=structuredClone(f.products['selected-ledger.json']),row=ledger.rows[0];row.base_geometry_sha256=footprintValueSha256(row.base_geometry);
+ ledger.parent_inventory={components:1,report_sha256:'a'.repeat(64),roster_sha256:'b'.repeat(64)};ledger.current_targets=[{target_id:row.target_id,pixelIndex:row.pixelIndex,geometry:row.base_geometry,geometry_sha256:row.base_geometry_sha256}];
+ f.write(prefix+'selected-ledger.json',ledger);const ledgerPin=pin(prefix+'selected-ledger.json');
+ const descriptor=(name,p)=>({path:'additive-repairs/'+name,bytes:p.bytes,sha256:p.sha256,...(p.encoding?{encoding:p.encoding,decoded_bytes:p.decoded_bytes,decoded_sha256:p.decoded_sha256}:{})});
+ const envelope={version:2,kind:'retained-native-base-plus-delta-v2',base_reference:reference,effective_reference:{...reference,id:'geography:finished'},
+  base_manifest:descriptor('base.json',manifestPin),owner_roster:descriptor('owners.json.gz',roster),ledger:descriptor('ledger.json',ledgerPin)};
+ const features=owners.map(o=>({id:o.id,pixelIndex:o.index,geometry:null,properties:{id:o.id,parent_id:o.province_id}}));
+ envelope.effective_reference.footprints_sha256=additiveReleaseFootprintDigest(reference,bindAdditiveLedgerFeatures(features,ledger,envelope,reference));
+ const patch={...f.products['patch.json'],version:2,kind:'unassigned-native-cells-v1',ledger_sha256:ledgerPin.sha256,effective_reference:envelope.effective_reference};
+ f.write(prefix+'patch.json',patch);const patchPin=pin(prefix+'patch.json');envelope.patch=descriptor('patch.json',patchPin);
+ f.write(prefix+'runtime-envelope.json',envelope);const envelopePin=pin(prefix+'runtime-envelope.json');
+ const base={version:1,method:manifest.method,manifest_path:'data/native-manifest.json',sha256:manifestPin.sha256,release_id:reference.id};
+ const sidecar={version:2,kind:'retained-native-additive-selection-v2',base_selection:base,authority_registry:f.full.registry,
+  runtime_envelope:envelopePin,logical_asset_map:{base_manifest:manifestPin,owner_roster:roster,ledger:ledgerPin,patch:patchPin}};
+ f.write(prefix+'old-sidecar.json',sidecar);const sidecarPin=pin(prefix+'old-sidecar.json');
+ f.write('data/ownership-selection.json',{...base,additive_release:{path:sidecarPin.path,bytes:sidecarPin.bytes,sha256:sidecarPin.sha256}});
+ const definition=f.reader().json(f.full.package_inputs);definition.inputs.push(bank);f.write('.github/package-inputs.json',definition);
+ const baseline=f.commit(),reader=f.reader(),full={...f.full,selector:reader.pin(baseline,'data/ownership-selection.json'),package_inputs:reader.pin(baseline,'.github/package-inputs.json'),
+  ledger:ledgerPin,selected_ledger:ledgerPin,patch:patchPin,runtime_envelope:envelopePin};
+ return {...f,full,originalIndex,bank,baseline,save};
+}
+
+test('normal finalization adopts the complete finished native bank and selector together, with exact resume',async t=>{
+ const f=await nativeFixture(t),before=fs.readFileSync(path.join(f.root,'data/ownership-selection.json'));
+ const destination='.cache/delivery-handoff/native',result=f.run(f.full,destination);assert.equal(result.status,0,result.stderr);
+ const selector=fs.readFileSync(path.join(f.root,'data/ownership-selection.json')),index=JSON.parse(fs.readFileSync(path.join(f.root,f.bank,'index.json')));
+ assert.notDeepEqual(selector,before);assert.equal(index.version,2);assert.equal(index.preparedOwnership.selection_sha256,digest(selector));
+ assert.equal(index.preparedOwnership.additive_added_cells,1);assert.equal(index.preparedOwnership.owners,2);
+ assert.deepEqual(fs.readFileSync(path.join(f.root,f.bank,'index.json')),fs.readFileSync(path.join(f.root,destination,'startup-ownership.json')));
+ for(const pin of index.files){const raw=fs.readFileSync(path.join(f.root,f.bank,pin.path));assert.equal(raw.length,pin.bytes);assert.equal(digest(raw),pin.sha256);}
+ for(const pin of f.originalIndex.files)assert.deepEqual(index.files.find(p=>p.path===pin.path),pin,'Every original immutable URL remains exact');
+ assert.equal(f.run(f.full,destination,'--resume').status,0);f.commit();assert.equal(f.run(f.full,destination,'--resume').status,0);
+});
+
+test('native finalization refuses a missing bank or unknown/missing selector method before any output or adoption',async t=>{
+ for(const change of ['missing-bank','missing-method','unknown-method']){
+  const f=await nativeFixture(t);
+  if(change==='missing-bank')fs.rmSync(path.join(f.root,f.bank),{recursive:true});
+  else{const value=JSON.parse(fs.readFileSync(path.join(f.root,'data/ownership-selection.json')));if(change==='missing-method')delete value.method;else value.method='other';
+   // Keep the prior sidecar base coherent so the ordinary native method guard,
+   // rather than a stale whole pin, is the decisive refusal.
+   const sidecar=f.reader().json(f.reader().pin(f.baseline,value.additive_release.path));sidecar.base_selection={...value};delete sidecar.base_selection.additive_release;
+   f.write(value.additive_release.path,sidecar);const at=f.commit(),pin=f.reader().pin(at,value.additive_release.path);value.additive_release={path:pin.path,bytes:pin.bytes,sha256:pin.sha256};f.write('data/ownership-selection.json',value);
+  }
+  const at=f.commit(),config={...f.full,selector:f.reader().pin(at,'data/ownership-selection.json')};
+  const before=fs.readFileSync(path.join(f.root,'data/ownership-selection.json')),definition=fs.readFileSync(path.join(f.root,'.github/package-inputs.json'));
+  const result=f.run(config,'.cache/delivery-handoff/native-refused');assert.notEqual(result.status,0);assert.match(result.stderr,/Missing ordinary exact Git body|selector\/manifest method differs/);
+  assert.equal(fs.existsSync(path.join(f.root,'.cache/delivery-handoff/native-refused')),false);
+  assert.deepEqual(fs.readFileSync(path.join(f.root,'data/ownership-selection.json')),before);assert.deepEqual(fs.readFileSync(path.join(f.root,'.github/package-inputs.json')),definition);
+  assert.equal(fs.existsSync(path.join(f.root,config.sidecar_output)),false);
+ }
+});
+
 test('modern compact config resolves exact full pins and preserves legacy objects and canonical outputs', t => {
   const f = fixture(t), before = jsonBytes(f.compact);
-  assert.deepEqual(resolveFinalizeConfig(f.compact, f.reader()), f.full);
+  assert.deepEqual(resolveFinalizeConfig(f.compact, f.reader()), {...f.full,
+    restored_read_roles: {commit: f.compact.composition.commit}});
   assert.strictEqual(resolveFinalizeConfig(f.full, f.reader()), f.full);
   assert.deepEqual(finalizeDelivery(f.compact, f.reader()), finalizeDelivery(f.full, f.reader()));
   assert.deepEqual(jsonBytes(f.compact), before);
@@ -92,6 +176,7 @@ test('cold CLI emits identical final products and resumes compact configuration 
   const f = fixture(t), destinations = ['full', 'compact'].map(name => '.cache/delivery-handoff/' + name);
   for (const [i, config] of [f.full, f.compact].entries()) {
     const result = f.run(config, destinations[i]); assert.equal(result.status, 0, result.stderr);
+    f.commit(); // The next independent finalization starts with committed adoption.
   }
   const receipts = destinations.map(dir => JSON.parse(fs.readFileSync(path.join(f.root, dir, 'preparation.json'))));
   assert.deepEqual(receipts[0].outputs, receipts[1].outputs);
@@ -108,6 +193,69 @@ test('compact form refuses mixed full pins, existing sidecar and handwritten loc
     assert.throws(() => finalizeDelivery({...f.compact, [key]: f.full.ledger}, f.reader()), /cannot mix/);
   for (const key of ['selector', 'package_inputs', 'rebind', 'composition'])
     assert.throws(() => finalizeDelivery({...f.compact, [key]: {...f.compact[key], sha256: '0'.repeat(64)}}, f.reader()), /exact commit\/path locator/);
+});
+
+test('compact finalization uses its committed composition for exact absent original roles', t => {
+  const f = fixture(t), original = f.reader().json(f.full.registry).entries[0].rule_preimage;
+  const filename = path.join(f.root, original.path), raw = fs.readFileSync(filename);
+  fs.unlinkSync(filename);
+  const missing = f.commit();
+  fs.writeFileSync(filename, raw, {flag: 'wx'});
+  f.write('coordination/engineering/unbound/snapshot-file.json', {unrelated: true});
+  const restored = f.commit();
+  const config = {...f.compact, new_prefix: PREFIX + 'compose/', sidecar_output: PREFIX + 'compose/sidecar.json',
+    package_inputs: {...f.compact.package_inputs, commit: missing},
+    composition: {...f.compact.composition, commit: restored}};
+  const before = jsonBytes(config), destination = '.cache/delivery-handoff/composition-restoration';
+  const result = f.run(config, destination); assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(jsonBytes(config), before, 'The caller does not supply or receive a second snapshot choice');
+  const explicit = finalizeDelivery({...config, restored_read_roles: {commit: restored}}, f.reader());
+  const output = name => fs.readFileSync(path.join(f.root, destination, name));
+  const receipt = JSON.parse(output('preparation.json'));
+  assert.deepEqual(Object.keys(receipt.outputs).sort(), Object.keys(explicit).sort());
+  for (const [name, body] of Object.entries(explicit)) assert.deepEqual(output(name), body);
+  const roles = JSON.parse(output('package-roles.json')).paths;
+  assert.ok(roles.some(pin => pin.path === original.path && pin.sha256 === original.sha256));
+  assert.ok(!roles.some(pin => pin.path.includes('/unbound/')));
+  assert.ok(Object.keys(explicit).every(name => !name.includes('/')), 'No original-body copying');
+  assert.deepEqual(fs.readFileSync(filename), raw);
+
+  // The following independent snapshot refusals start from original selection,
+  // not a committed sidecar generated by the preceding successful case.
+  for (const pin of [f.full.selector, f.full.package_inputs])
+    fs.writeFileSync(path.join(f.root, pin.path), f.reader().read(pin));
+  fs.unlinkSync(path.join(f.root, config.sidecar_output));
+  fs.unlinkSync(path.join(f.root, config.new_prefix, 'selected-delivery-expectations.json'));
+  f.write(original.path, {retained: false});
+  const changed = f.commit();
+  fs.writeFileSync(filename, raw); fs.chmodSync(filename, 0o755);
+  const executable = f.commit();
+  const cases = [
+    ['missing', {...config, composition: {...config.composition, commit: missing}}],
+    ['changed', {...config, composition: {...config.composition, commit: changed}}],
+    ['nonordinary', {...config, composition: {...config.composition, commit: executable}}],
+    ['accepted-conflict', {...config, package_inputs: {...config.package_inputs, commit: changed}}],
+    ['explicit-null', {...config, restored_read_roles: null}],
+    ['explicit-missing', {...config, restored_read_roles: {commit: missing}}],
+    ['explicit-incomplete', {...config, restored_read_roles: {commit: restored, paths: []}}]
+  ];
+  for (const [name, refusedConfig] of cases) {
+    const refusedDestination = '.cache/delivery-handoff/composition-refused-' + name;
+    const refused = f.run(refusedConfig, refusedDestination);
+    assert.notEqual(refused.status, 0, name);
+    assert.match(refused.stderr, /accepted path identity|restored read-role inventory/i, name);
+    assert.equal(fs.existsSync(path.join(f.root, refusedDestination)), false, name);
+  }
+  // Start the independent override case from its original canonical preimages,
+  // not the intervening deliberately invalid snapshot or a third selection.
+  fs.chmodSync(filename, 0o644); fs.writeFileSync(filename, raw);
+  for (const pin of [f.full.selector, f.full.package_inputs])
+    fs.writeFileSync(path.join(f.root, pin.path), f.reader().read(pin));
+  f.commit();
+  const override = {...config, composition: {...config.composition, commit: missing},
+    restored_read_roles: {commit: restored}};
+  const overridden = f.run(override, '.cache/delivery-handoff/explicit-other-snapshot');
+  assert.equal(overridden.status, 0, overridden.stderr);
 });
 
 test('wrong commit, wrong path, missing product and changed product hash fail before writes', t => {
@@ -201,6 +349,40 @@ test('delivery finalizer satisfies actual append-only selected-data classifier a
   f.put('.github/package-inputs.json',{...definition,inputs:definition.inputs.toSorted()});
   assert.equal(await f.run(),null,'the same globally sorted input set must not pass the accepted-prefix classifier');
 });
+test('actual selected-data classifier derives final-bank additions and exact prior-v2 retirements',async()=>{
+  const bank='data/canonical-grid/current-startup/';
+  const f=fixture({mutate(f){
+    const fixed=['rows','runs','latitudes','old-promised'].map(name=>{
+      const p=f.put(bank+name+'.bin',Buffer.from(name),true);return {path:name+'.bin',bytes:p.bytes,sha256:p.sha256};});
+    const base={id:'geography:base',footprints_sha256:'b'.repeat(64),hierarchy_sha256:'c'.repeat(64)};
+    for(const old of [true,false]){
+      const label=old?'before':'after',tree=old?f.baseline:f.authored;
+      const selectionRaw=f.blobs.get(tree.entries.get('data/ownership-selection.json').sha),selection=JSON.parse(selectionRaw);
+      const active=['runs','context'].map(name=>{
+        const p=f.put(bank+label+'/'+name+'.bin',Buffer.from(label+name),old);
+        if(old)f.authored.entries.delete(p.path);
+        return {path:label+'/'+name+'.bin',bytes:p.bytes,sha256:p.sha256};});
+      const effective={...base,id:'geography:'+label,footprints_sha256:digest(Buffer.from(label))};
+      f.put(bank+'index.json',{version:2,native_manifest_sha256:selection.sha256,
+        release_id:effective.id,footprints_sha256:effective.footprints_sha256,hierarchy_sha256:effective.hierarchy_sha256,
+        compatibility_files:fixed,files:[...fixed,...active],pixelMap:{parts:[fixed[0],active[0]]},
+        additiveRelease:{base_reference:base,effective_reference:effective},preparedOwnership:{version:2,
+          selection_sha256:digest(selectionRaw),native_manifest_sha256:selection.sha256,
+          native_pixel_map:{canonical_grid_sha256:selection.sha256,parts:fixed.slice(0,2),
+            native_latitudes:{transport_path:fixed[2].path,sha256:fixed[2].sha256}},
+          context_parts:[active[1]],base_reference:base,effective_reference:effective}},old);
+    }
+    const additions=f.definition.inputs.slice(f.policy.inputs.length);
+    f.policy.inputs.push(bank);f.definition.inputs=[...f.policy.inputs,...additions];
+    f.put('.github/package-inputs.json',f.policy,true);f.put('.github/package-inputs.json',f.definition);
+  }});
+  f.files.push(...[...f.baseline.entries.keys()].filter(name=>!f.authored.entries.has(name)).map(filename=>({filename,status:'removed'})));
+  const reasons=[];
+  assert.deepEqual(await f.run({onReject:r=>reasons.push(r)}),{test_selection:'selected-data',expectations_path:prefix+'selected-delivery-expectations.json',shards:[0]},reasons.join('; '));
+  const old=f.authored.entries.get(bank+'old-promised.bin');f.authored.entries.delete(old.path);
+  f.files.push({filename:old.path,status:'removed'});
+  assert.equal(await f.run(),null,'A fixed prior URL cannot be removed with the derived retirement set');
+});
 }
 
 test('canonical originals remain in the candidate while absent historical roles require explicit exact restoration', t => {
@@ -220,6 +402,7 @@ test('canonical originals remain in the candidate while absent historical roles 
   const missing = f.commit();
   config.package_inputs = read().pin(missing, '.github/package-inputs.json');
   fs.writeFileSync(filename, raw, {flag: 'wx'});
+  f.write('coordination/engineering/unbound/snapshot-file.json', {unrelated: true});
   const restored = f.commit();
   config.restored_read_roles = {commit: restored, paths: [original.path]};
   const result = f.run(config, '.cache/delivery-handoff/restored');
@@ -227,6 +410,23 @@ test('canonical originals remain in the candidate while absent historical roles 
   const receipt = JSON.parse(fs.readFileSync(path.join(f.root, '.cache/delivery-handoff/restored/preparation.json')));
   assert.ok(Object.keys(receipt.outputs).every(name => !name.includes('/')));
   assert.deepEqual(fs.readFileSync(filename), raw);
+
+  f.commit(); // Preserve exact adopted outputs before a fresh finalization.
+  const derivedConfig = {...config, restored_read_roles: {commit: restored}};
+  const derived = f.run(derivedConfig, '.cache/delivery-handoff/derived-restoration');
+  assert.equal(derived.status, 0, derived.stderr);
+  const derivedRoot = path.join(f.root, '.cache/delivery-handoff/derived-restoration');
+  const derivedReceipt = JSON.parse(fs.readFileSync(path.join(derivedRoot, 'preparation.json')));
+  assert.deepEqual(derivedReceipt.outputs, receipt.outputs);
+  for (const name of Object.keys(receipt.outputs))
+    assert.deepEqual(fs.readFileSync(path.join(derivedRoot, name)),
+      fs.readFileSync(path.join(f.root, '.cache/delivery-handoff/restored', name)));
+  assert.ok(!JSON.parse(fs.readFileSync(path.join(derivedRoot, 'package-roles.json'))).paths
+    .some(pin => pin.path.includes('/unbound/')));
+  const missingDerived = f.run({...derivedConfig, restored_read_roles: {commit: missing}},
+    '.cache/delivery-handoff/derived-missing');
+  assert.notEqual(missingDerived.status, 0);
+  assert.equal(fs.existsSync(path.join(f.root, '.cache/delivery-handoff/derived-missing')), false);
 
   const withoutSnapshot = {...config}; delete withoutSnapshot.restored_read_roles;
   const refused = f.run(withoutSnapshot, '.cache/delivery-handoff/missing-snapshot');
@@ -240,4 +440,60 @@ test('canonical originals remain in the candidate while absent historical roles 
   assert.notEqual(divergent.status, 0); assert.match(divergent.stderr, /Restored snapshot differs/);
   assert.equal(fs.existsSync(path.join(f.root, '.cache/delivery-handoff/changed-snapshot')), false);
   assert.deepEqual(fs.readFileSync(filename), changedRaw);
+  const changedDerived = f.run({...derivedConfig, restored_read_roles: {commit: changed}},
+    '.cache/delivery-handoff/derived-changed');
+  assert.notEqual(changedDerived.status, 0);
+  assert.match(changedDerived.stderr, /Restored snapshot differs/);
+  assert.equal(fs.existsSync(path.join(f.root, '.cache/delivery-handoff/derived-changed')), false);
+
+  const currentConflict = f.run({...derivedConfig, package_inputs: read().pin(changed, '.github/package-inputs.json')},
+    '.cache/delivery-handoff/derived-current-conflict');
+  assert.notEqual(currentConflict.status, 0);
+  assert.match(currentConflict.stderr, /Original consumed role differs from accepted path/);
+  assert.equal(fs.existsSync(path.join(f.root, '.cache/delivery-handoff/derived-current-conflict')), false);
+  assert.deepEqual(fs.readFileSync(filename), changedRaw);
+});
+
+
+test('next native finalization retires only prior v2 context with exact preimages and resumable selector-last adoption',async t=>{
+ const f=await nativeFixture(t),first=f.run(f.full,'.cache/delivery-handoff/first');assert.equal(first.status,0,first.stderr);f.commit();
+ const indexPath=f.bank+'index.json',index=JSON.parse(fs.readFileSync(path.join(f.root,indexPath)));
+ const originalPart=index.preparedOwnership.context_parts[0],oldBody=fs.readFileSync(path.join(f.root,f.bank,originalPart.path));
+ // A valid prior encoder emitted the exact same context at another gzip level.
+ // The current encoder will restore its existing encoding and retire this URL.
+ const alternate=gzipSync(gunzipSync(oldBody),{level:1}),oldPath='geography/effective-context-'+digest(alternate)+'.json.gz';
+ assert.notEqual(digest(alternate),digest(oldBody));
+ const previousPart={...originalPart,path:oldPath,bytes:alternate.length,sha256:digest(alternate)};
+ f.save(f.bank+oldPath,alternate);fs.unlinkSync(path.join(f.root,f.bank,originalPart.path));
+ index.preparedOwnership.context_parts[0]=previousPart;
+ index.files=index.files.filter(p=>p.path!==originalPart.path).concat({path:oldPath,bytes:alternate.length,sha256:digest(alternate)}).sort((a,b)=>a.path.localeCompare(b.path));
+ f.write(indexPath,index);const accepted=f.commit(),reader=f.reader();
+ const config={...f.full,selector:reader.pin(accepted,'data/ownership-selection.json'),package_inputs:reader.pin(accepted,'.github/package-inputs.json'),
+   new_prefix:PREFIX+'next/',sidecar_output:PREFIX+'next/sidecar.json'};
+ const baseline=new Map(['data/ownership-selection.json','.github/package-inputs.json',indexPath].map(name=>[name,fs.readFileSync(path.join(f.root,name))]));
+ const oldFile=path.join(f.root,f.bank,oldPath);
+ for(const kind of ['edited','linked','missing']){
+   if(kind==='edited')fs.writeFileSync(oldFile,Buffer.concat([alternate,Buffer.from('changed')]));
+   if(kind==='linked'){fs.unlinkSync(oldFile);fs.symlinkSync(path.join(f.root,'data/ownership-selection.json'),oldFile);}
+   if(kind==='missing')fs.unlinkSync(oldFile);
+   const destination='.cache/delivery-handoff/retire-'+kind,result=f.run(config,destination);
+   assert.notEqual(result.status,0,result.stdout);assert.match(result.stderr,/Canonical output|Nonordinary|Missing canonical/);
+   assert.equal(fs.existsSync(path.join(f.root,destination)),false,'Complete retirement preflight precedes staging');
+   for(const [name,raw]of baseline)assert.deepEqual(fs.readFileSync(path.join(f.root,name)),raw);
+   if(fs.existsSync(oldFile)||kind==='linked')fs.unlinkSync(oldFile);f.save(f.bank+oldPath,alternate);
+ }
+ const destination='.cache/delivery-handoff/retire',result=f.run(config,destination);assert.equal(result.status,0,result.stderr);
+ assert.equal(fs.existsSync(oldFile),false);assert.deepEqual(fs.readFileSync(path.join(f.root,f.bank,originalPart.path)),oldBody);
+ const finalIndex=JSON.parse(fs.readFileSync(path.join(f.root,indexPath)));
+ assert.deepEqual(finalIndex.compatibility_files,f.originalIndex.files);
+ for(const pin of finalIndex.compatibility_files)assert.equal(digest(fs.readFileSync(path.join(f.root,f.bank,pin.path))),pin.sha256);
+ // Simulate the published-output/exact-adoption mixture an interrupted writer
+ // leaves before its final selector rename, including an already removed member.
+ for(const [name,raw]of baseline)f.save(name,raw);
+ assert.notEqual(f.run(config,destination).status,0);
+ const resumed=f.run(config,destination,'--resume');assert.equal(resumed.status,0,resumed.stderr);
+ assert.equal(fs.existsSync(oldFile),false);
+ const selector=fs.readFileSync(path.join(f.root,'data/ownership-selection.json'));
+ assert.equal(JSON.parse(fs.readFileSync(path.join(f.root,indexPath))).preparedOwnership.selection_sha256,digest(selector));
+ f.commit();assert.equal(f.run(config,destination,'--resume').status,0,'Committed exact retirement is idempotent');
 });

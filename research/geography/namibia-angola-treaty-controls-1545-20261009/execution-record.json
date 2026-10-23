@@ -1,0 +1,91 @@
+{
+  "captured_stderr": {
+    "bytes": 105,
+    "sha256": "53f174579c0babad2c3246979f1f35f5d16384d41b0dc9a9c60b6815ee515834",
+    "utf8": ".......\n----------------------------------------------------------------------\nRan 7 tests in 1.115s\n\nOK\n"
+  },
+  "captured_stdout": {
+    "bytes": 87,
+    "sha256": "04ff3af53f4ece768bd7f20830a86b19a56fb7ffeec703e642217f857a99f780",
+    "utf8": "passed_receipt_sha256=dc34b5fe8ede8a407f66d1b2e5867255f606b1d61aafd5e82ada424632c1e9d1\n"
+  },
+  "code": [
+    {
+      "bytes": 8261,
+      "path": "research/geography/namibia-angola-treaty-controls-1545-20261009/verify_semantic_comparison.py",
+      "sha256": "d9a2ed5bd0499343fd42f8019eb226c5e6dbf8fe755527b442834b432a8d17f0"
+    },
+    {
+      "bytes": 8077,
+      "path": "research/geography/namibia-angola-treaty-controls-1545-20261009/test_semantic_comparison.py",
+      "sha256": "e157a0cd007d453988ecfb48e8a2b58bc90bf1d3d69d5637809a71e938ae4ce3"
+    }
+  ],
+  "command": [
+    "python3.7",
+    "repair-1657/test_semantic_comparison.py",
+    "repair-1657/exact-947fa"
+  ],
+  "consumed_inputs": [
+    {
+      "bytes": 16169,
+      "commit": "947fa467d11379dd6a2e5f4772df2e891402d735",
+      "fixture_path": "exact-947fa/run5-findings.json",
+      "historical_path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-5/findings.json",
+      "sha256": "b7172e9925789b55af0f96c1e0ec11ea15933aa979c968f7b792d000475db914"
+    },
+    {
+      "bytes": 285,
+      "commit": "947fa467d11379dd6a2e5f4772df2e891402d735",
+      "fixture_path": "exact-947fa/run5-positive-control.json",
+      "historical_path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-5/positive-control.json",
+      "sha256": "4f82d861b0e9686ef7ade967e650ebeb56e2324fd4ae9e54c8a323b67ce9e78c"
+    },
+    {
+      "bytes": 1834,
+      "commit": "947fa467d11379dd6a2e5f4772df2e891402d735",
+      "fixture_path": "exact-947fa/run5-negative-control.json",
+      "historical_path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-5/negative-control.json",
+      "sha256": "2f5884878a3c4bc4d88da796b9d4858841e78aac914b021141664498acbb3d16"
+    },
+    {
+      "bytes": 16169,
+      "commit": "947fa467d11379dd6a2e5f4772df2e891402d735",
+      "fixture_path": "exact-947fa/run6-findings.json",
+      "historical_path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-6/findings.json",
+      "sha256": "b3220b47354b22eb7cdd05468f1ff71059a37d5f0ad7613227de885aa5343c74"
+    },
+    {
+      "bytes": 285,
+      "commit": "947fa467d11379dd6a2e5f4772df2e891402d735",
+      "fixture_path": "exact-947fa/run6-positive-control.json",
+      "historical_path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-6/positive-control.json",
+      "sha256": "4a78839f8af3cf9489a2953c61454e0f45dc4167ff71ee4233199e26b9ed68df"
+    },
+    {
+      "bytes": 1834,
+      "commit": "947fa467d11379dd6a2e5f4772df2e891402d735",
+      "fixture_path": "exact-947fa/run6-negative-control.json",
+      "historical_path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-6/negative-control.json",
+      "sha256": "6cb81d2960b06fd4f121985882d73be5acda31477097c05324d9880ccf3acd8c"
+    }
+  ],
+  "execution_root": "task workspace root; absolute local path withheld",
+  "exit_code": 0,
+  "limits": [
+    "This ran the successor verifier on synthetic temporary control pairs built from the retained final findings and controls.",
+    "It did not rerun the historical treaty producer, retrieve or inspect treaty PDFs, or establish any geographic/legal conclusion.",
+    "The received fixture bytes are locally authenticated against the exact PR #1545 Git tree; their copies receive generated publication descriptors only inside isolated test temp directories."
+  ],
+  "positive_receipt_sha256": "dc34b5fe8ede8a407f66d1b2e5867255f606b1d61aafd5e82ada424632c1e9d1",
+  "record_version": 1,
+  "result": "passed",
+  "runtime": {
+    "binary_sha256": "b27e4ef865657c9a8ce607da7cee3a3971170ebd8560675164a17c2c8e40a82a",
+    "bytes": 13620,
+    "implementation": "CPython",
+    "version": "3.7.3 (default, Mar 27 2019, 09:23:32) \n[Clang 9.0.0 (clang-900.0.39.2)]"
+  },
+  "scope": "Focused CLI control execution for issue #1657; fixtures are copies of retained PR #1545 final run outputs and are not new producer executions.",
+  "test_count": 7
+}

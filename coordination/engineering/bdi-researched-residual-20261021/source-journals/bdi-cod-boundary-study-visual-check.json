@@ -1,0 +1,47 @@
+{
+  "checked_at": "2026-10-21",
+  "source": {
+    "title": "Burundi – Democratic Republic of the Congo (Zaire) Boundary, International Boundary Study No. 48",
+    "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs048.pdf",
+    "pages": 8
+  },
+  "requested_page_renders": [
+    {"pdf_page_index": 5, "printed_page": 6, "purpose": "Appendix map references"},
+    {"pdf_page_index": 6, "printed_page": 7, "purpose": "End matter"},
+    {"pdf_page_index": 7, "printed_page": 8, "purpose": "End matter"}
+  ],
+  "prior_web_screenshot_attempt": "The web PDF screenshot action returned citation/reference identifiers only and did not expose page pixels. After confirming no local copy existed under the task tree, the exact public PDF was acquired once by ordinary HTTP and rendered locally with macOS PDFKit/CoreGraphics.",
+  "acquisition": {
+    "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs048.pdf",
+    "path": "inventory/ibs048.pdf",
+    "http_result": "The first default-network attempt failed before transfer with DNS resolution error; one ordinary network-enabled retry succeeded. No HTTP access denial occurred.",
+    "bytes": 261300,
+    "sha256": "e1a58fe341544b0ec617160d0211178d8bf51ee5c0fc0383eec725cdcd979f20"
+  },
+  "visual_inspection": {
+    "renderer": "macOS PDFKit/CoreGraphics, no installed software",
+    "rendered_images": [
+      "inventory/ibs048-page-6.png",
+      "inventory/ibs048-page-7.png",
+      "inventory/ibs048-page-8.png"
+    ],
+    "printed_pages_actually_viewed": [5, 6, 7],
+    "observations": [
+      "Printed page 5 is appendix text and document references. It notes that the 1923 correspondence includes a map and that the 1924 protocol includes three map sheets; those plates are not included on this page.",
+      "Printed page 6 is a textual list of map references: Ruanda-Urundi sheets at 1:200,000 (published 1937), sheets at 1:100,000 (published 1936), and Rwanda and Burundi Series 1301 at 1:500,000 (published 1964). The page itself contains no map plate.",
+      "Printed page 7 is study-series boilerplate, with no map plate."
+    ],
+    "scope_limit": "Only printed pages 5–7 were visually inspected. This establishes that these appendix/reference/final pages are text-only; it does not assert anything about uninspected pages or establish the location of the three held cell centers."
+  },
+  "textual_page_evidence": {
+    "printed_page_6": "Lists referenced historical maps: Ruanda-Urundi sheets at 1:200,000 (published 1937), sheets at 1:100,000 (published 1936), and Rwanda and Burundi Series 1301 at 1:500,000 (published 1964).",
+    "printed_page_7": "Series boilerplate, not a map plate, in extracted PDF text."
+  },
+  "conclusion": "Visual inspection confirms that the map-reference and final pages inspected are text-only; the maps are cited as separate historical sources and are not reproduced on those pages. This does not improve the exact three-key location join. The study's thalweg/delta description remains relevant context, but no exact side-of-boundary determination is supported for the saved COD contact centers.",
+  "affected_keys": [
+    {"x": 152388, "y": 133327},
+    {"x": 152389, "y": 133323},
+    {"x": 152240, "y": 133142}
+  ],
+  "operations_not_performed": ["No browser interaction", "No map/geometry comparison", "No geometry computation", "No observer or producer rerun"]
+}

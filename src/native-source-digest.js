@@ -1,17 +1,24 @@
-import {effectiveFootprintValue,additiveReleaseFootprintDigest} from './effective-footprint.js';
+import {effectiveFootprintValue,additiveReleaseFootprintDigest,finishedReleaseFootprintDigest} from './effective-footprint.js';
 import {sha256} from '@noble/hashes/sha2.js';
 
 // Hash exactly the retained JSON.stringify(sorted [id, geometry] pairs) bytes,
 // incrementally. This changes neither the original digest nor source authority;
 // it avoids a second complete-world JSON string and UTF-8 buffer in the worker.
-export async function nativeSourceDigest(features, {signal, onProgress = () => {}, additiveBaseReference} = {}) {
+export async function nativeSourceDigest(features, {signal, onProgress = () => {}, additiveBaseReference, finalBaseReference} = {}) {
+  if(finalBaseReference){
+    if(additiveBaseReference)throw Error('Mixed original/final reference digest profiles');
+    const base=await nativeSourceDigest(features.map(feature=>({id:feature.id,geometry:feature.geometry})),{signal,onProgress});
+    if(base.sha256!==finalBaseReference.footprints_sha256)throw Error('Complete loaded original reference differs from final bank');
+    return {...base,sha256:finishedReleaseFootprintDigest(finalBaseReference,features),base_sha256:base.sha256,
+      domain:'worldatlas-final-native-footprints:v1'};
+  }
   if(additiveBaseReference&&features.some(feature=>Object.hasOwn(feature,'additiveFootprint'))){
     const base=await nativeSourceDigest(features.map(feature=>({id:feature.id,geometry:feature.geometry})),{signal,onProgress});
     if(base.sha256!==additiveBaseReference.footprints_sha256)throw Error('Complete loaded original base footprint differs from selected additive bank');
     return {...base,sha256:additiveReleaseFootprintDigest(additiveBaseReference,features),base_sha256:base.sha256,
       domain:features.some(feature=>feature?.additiveFootprint?.version===2)?'worldatlas-effective-native-footprints:v2':'worldatlas-effective-native-footprints:v1'};
   }
-  const ordered = features.map(feature => [feature.id, Object.hasOwn(feature,'additiveFootprint') ? effectiveFootprintValue(feature) : feature.geometry])
+  const ordered = features.map(feature => [feature.id, Object.hasOwn(feature,'additiveFootprint') || Object.hasOwn(feature,'finishedFootprint') ? effectiveFootprintValue(feature) : feature.geometry])
     .sort((a, b) => a[0].localeCompare(b[0]));
   const hash = sha256.create(), encoder = new TextEncoder();
   let bytes = 2, largestFeatureBytes = 0;

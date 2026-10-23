@@ -95,6 +95,41 @@ workflow jobs below invoke the check on exact PR and combined merge commits.
 
 ## Trusted premerge enforcement
 
+### Cold unchanged-input origin metadata
+
+The unchanged-selected-input collector compares current paths and absences on
+both exact commits. Historical full pins may use a same-path current copy only
+when its ordinary mode and complete Git blob OID match. A legitimately changed
+current alias cannot substitute for a source or hierarchy before-image.
+
+When an original descriptor's commit or intermediate tree is absent, the routing
+acquisition authenticates that exact commit/path and returns its descriptor.
+A missing commit is admitted through the exact GitHub commit endpoint, fetched
+with `tree:0`, depth one and no negotiation into an owned temporary bare store,
+and checked for native type/hash and the declared root. The store contains only
+that commit and is removed on success or failure. Each required nonrecursive
+tree is reconstructed from its complete metadata and checked against its native
+Git object hash; authenticated rows and descriptors stay in private memory.
+No origin commit, tree or shallow boundary is added to the caller's repository.
+This matters even when the proof later declines: full scientific readers must
+retain their existing original-versus-current-alias availability decisions.
+Missing, malformed, wrong-hash or nonordinary metadata retains the full checker.
+Current alias equality and original full-pin identity checks still apply. Explicit
+routing JSON body acquisition remains separate and may import only those bodies.
+
+The exact PR 2496 base `4d87bbff6dc37dd585dad7be154bec46c35f25e0` and queue tree
+`6ff9eb3d0feeb15982b9b7114a630c8b69172c8b` reproduced the old `ls-tree` decline
+with original bounds metadata absent. Restoring bounds alone exposed two more
+required historical before-images. The complete private resolver succeeds from
+that cold origin boundary by authenticating three commits and eight path trees,
+38,650 native bytes, with identical caller object inventory and shallow state.
+Its ten existing routing JSON bodies total 614,026 bytes. An earlier shared-store
+prototype's public-network observation used 151,484 bytes of decoded API JSON
+and took 29.6 seconds; that prototype was rejected because a later decline could
+expose an incomplete original to full readers. Neither observation establishes
+an end-to-end speedup. Applicability does not revalidate source authority, rerun
+science or authorize publication.
+
 ### Selected native assignment conservation
 
 The same trusted wrapper also compares `data/ownership-selection.json` when

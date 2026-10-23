@@ -6,10 +6,13 @@ import importlib.util
 import json
 import math
 from pathlib import Path
+import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
+import evidence.exact_predicates as predicates
 from evidence.exact_predicates import (DiagnosticError, MAX_SEGMENTS, context, diagnose,
                                       point, prepare_geometry, geometry_state, ring_state, segment_certificate, read_inputs, original_segment)
 
@@ -167,6 +170,83 @@ class Predicates(unittest.TestCase):
             self.assertEqual(one, two); self.assertEqual((root / 'one.json').read_bytes(), (root / 'two.json').read_bytes())
             with self.assertRaises(FileExistsError): cli.run(root, path, root / 'one.json')
             self.assertEqual(json.loads((root / 'one.json').read_bytes())['crossings'][0]['status'], 'export-incidence-failure')
+
+    def test_cli_uses_one_authenticated_preparation_and_reacquires_on_later_calls(self):
+        spec = importlib.util.spec_from_file_location('cli', Path(__file__).resolve().parents[1] / 'scripts/exact-source-diagnostic.py')
+        cli = importlib.util.module_from_spec(spec); spec.loader.exec_module(cli)
+        for crossings in (False, True):
+            with self.subTest(crossings=crossings), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory); request = self.build_request(root)
+                refs = {role: {'role': role, 'member_id': role + '-0',
+                              'source_sha256': next(d['sha256'] for d in request['files'] if d['role'] == role),
+                              'polygon_index': 0, 'ring_index': 0, 'segment_index': 0 if role == 'first' else 3}
+                        for role in ('first', 'second')}
+                request['crossings'] = [{'first': refs['first'], 'second': refs['second']}] if crossings else []
+                source_paths = {root / d['path'] for d in request['files']}
+                source_bytes = sum(d['bytes'] for d in request['files'])
+                request_path = root / 'request.json'; request_path.write_text(json.dumps(request))
+                original_read, original_prepare = Path.read_bytes, predicates.prepare_geometry
+                counts = {'reads': 0, 'bytes': 0, 'preparations': 0}
+                def read(source):
+                    raw = original_read(source)
+                    if source in source_paths:
+                        counts['reads'] += 1; counts['bytes'] += len(raw)
+                    return raw
+                def prepare(geometry):
+                    counts['preparations'] += 1
+                    return original_prepare(geometry)
+                reports = []
+                for index in range(2):
+                    counts.update(reads=0, bytes=0, preparations=0)
+                    output = root / f'report-{index}.json'
+                    with patch.object(Path, 'read_bytes', read), patch.object(predicates, 'prepare_geometry', prepare):
+                        cli.run(root, request_path, output)
+                    self.assertEqual(counts, {'reads': 3, 'bytes': source_bytes, 'preparations': 4})
+                    reports.append(output.read_bytes())
+                self.assertEqual(*reports)
+                report = json.loads(reports[0])
+                self.assertEqual({k: v for k, v in report.items() if k not in ('request_sha256', 'crossings')},
+                                 diagnose(root, request))
+                self.assertEqual([row['status'] for row in report['crossings']], ['exact-incidence'] if crossings else [])
+                launched = subprocess.run([sys.executable, '-B', str(Path(cli.__file__)), '--root', str(root),
+                                           '--request', str(request_path), '--output', str(root / 'cli.json')],
+                                          check=True, capture_output=True, text=True)
+                self.assertEqual((root / 'cli.json').read_bytes(), reports[0])
+                self.assertEqual(json.loads(launched.stdout)['output_sha256'], hashlib.sha256(reports[0]).hexdigest())
+                # A later invocation must read current files and refuse their old pin.
+                (root / 'first.json').write_bytes(b'{}')
+                cli.run(root, request_path, root / 'changed.json')
+                changed = json.loads((root / 'changed.json').read_bytes())
+                self.assertEqual(changed['reason'], 'original-byte-pin-mismatch')
+                self.assertTrue(all(row['reason'] == 'crossing-original-source-closure-unavailable'
+                                    for row in changed['crossings']))
+
+    def test_cli_preserves_source_failure_query_failure_and_output_safety(self):
+        spec = importlib.util.spec_from_file_location('cli', Path(__file__).resolve().parents[1] / 'scripts/exact-source-diagnostic.py')
+        cli = importlib.util.module_from_spec(spec); spec.loader.exec_module(cli)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); request = self.build_request(root)
+            self.assertEqual(diagnose(root, None)['reason'], 'malformed-request')
+            refs = {role: {'role': role, 'member_id': role + '-0',
+                          'source_sha256': next(d['sha256'] for d in request['files'] if d['role'] == role),
+                          'polygon_index': 0, 'ring_index': 0, 'segment_index': 0 if role == 'first' else 3}
+                    for role in ('first', 'second')}
+            request['crossings'] = [{'first': refs['first'], 'second': refs['second']}]
+            request_path = root / 'request.json'
+            changed = copy.deepcopy(request); changed['points'] = None
+            request_path.write_text(json.dumps(changed)); cli.run(root, request_path, root / 'query-error.json')
+            report = json.loads((root / 'query-error.json').read_bytes())
+            self.assertEqual(report['reason'], 'query-point-budget-or-missing-points')
+            self.assertEqual(report['crossings'][0]['status'], 'exact-incidence')
+            request_path.write_text(json.dumps(request))
+            sentinel = root / 'sentinel'; sentinel.write_bytes(b'preserved')
+            linked = root / 'linked.json'; linked.symlink_to(sentinel)
+            with self.assertRaisesRegex(ValueError, 'Symlink output refused'): cli.run(root, request_path, linked)
+            self.assertEqual(sentinel.read_bytes(), b'preserved')
+            (root / 'gap.json').unlink(); cli.run(root, request_path, root / 'missing.json')
+            report = json.loads((root / 'missing.json').read_bytes())
+            self.assertEqual(report['reason'], 'missing-or-oversized-original-file')
+            self.assertEqual(report['crossings'][0]['reason'], 'crossing-original-source-closure-unavailable')
 
 
 if __name__ == '__main__': unittest.main()

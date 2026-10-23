@@ -9,6 +9,8 @@ This workflow is for Luna researching evidence and adding content to existing lo
 
 Start from branch `main` of `ChengshuLi/WorldAtlas`, create an isolated `research/<campaign-id>` branch under [the parallel protocol](PARALLEL_WORK_PROTOCOL.md), run `npm ci` with Node 24, and read `docs/LUNA_DATA_HANDOFF.md`, `docs/ATTRIBUTE_CONTRACT.md` and `docs/ENVIRONMENT_CLASSIFICATIONS.md`. Obtain the current published release using `GET /api/geography/release` through the existing private Site access and save its JSON response as `geographic-release.json`. Preserve stable location/category/entity IDs; names are labels. Current geographic membership is reference context unless separately dated evidence establishes otherwise.
 
+The separately reviewed [retained settlement-population transfer](TYPED_MODULE_INTEGRATION.md#retained-settlement-population-transfer-2696) reuses these commands with identity-only typed observations. It does not change this location-research approval contract.
+
 ## Prepare a research collection
 
 Create `research.json` containing arrays named `sources`, `entity_types`, `entities`, `categories`, `records`, `names`, `retirements`, `relationships` or `media_links`. Only include collections needed for this research. Sources/categories/identities already present in the service can be referenced by ID. This workflow cannot add geographic locations, change footprints or redefine geographic tiers. People, events, armies, routes and other nongeographic graph subjects can use existing types or sourced new type definitions. Media links reference already uploaded immutable objects; media uploads remain a separate bounded API operation.

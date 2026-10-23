@@ -1,0 +1,21 @@
+{
+  "command": "node scripts/prepare-delivery-handoff.mjs native-authority .cache/delivery-handoff/bdi31-native-authority.json coordination/engineering/bdi-boundary-continuity-20261021/native-authority-001",
+  "execution_commit": "fa01b8a5aff7613e24dcaddf700f5ca925a52324",
+  "exit_code": 0,
+  "result": {
+    "destination": "coordination/engineering/bdi-boundary-continuity-20261021/native-authority-001",
+    "resumed": false,
+    "binding": {
+      "phase": "native-authority",
+      "config_sha256": "3c2d48a0cf62b270ac25fa10278216dcb374c55dff8212cfe9fb59e7ed97471e"
+    },
+    "observation": {
+      "elapsed_seconds": 2.5174941669999997,
+      "qualified_cells": 31,
+      "limits": [
+        "Original source/physical producers are not replayed.",
+        "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+      ]
+    }
+  }
+}

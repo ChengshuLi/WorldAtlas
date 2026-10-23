@@ -1,0 +1,84 @@
+{
+  "kind": "BDI exact-original-key versus current-selected-patch bridge",
+  "reviewer_uuid": "01a15a0e-e0a9-7609-a600-2551d2b1902d",
+  "current_main": {
+    "commit": "eb338df800b6664d9bc54831644469480b25f6e0",
+    "ownership_selection_path": "data/ownership-selection.json",
+    "selection_sidecar_path": "coordination/engineering/brazil-native-evaluation-20261021/selection-sidecar.json",
+    "selection_sidecar_blob": "79a74ba4f8f21274a0a4cb21bbf383ab7a8987fa",
+    "selected_patch_commit": "b807d74c096bf811d59b435d16a95530ad91acd0",
+    "selected_patch_path": "coordination/engineering/brazil-native-evaluation-20261021/composition-001/patch.json",
+    "selected_patch_blob": "9089da59311499dbd0fe3b9172824599daa02a26",
+    "selected_patch_bytes": 30604372,
+    "selected_patch_sha256": "843d6d44ff65cdff897135feb968b561ad55c4f68a33ef33058d733e7968499d",
+    "selected_patch_kind": "unassigned-native-cells-v1",
+    "selected_patch_cumulative_cells": 6335397,
+    "selected_patch_effective_id": "geography:bra-supported24078-20261021",
+    "selected_patch_effective_footprints_sha256": "9262b341182296669646c055f1900e07e7c65c6a568c1ddc86adb582a6b29785",
+    "selected_patch_base_id": "geography:review:211cb423e8c3bdcb3cbe88a4327fbd47eb10ccb61cd0ca4b884ed376564e7718",
+    "selected_patch_hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144"
+  },
+  "original_scope": {
+    "package_id": "gb-BDI-ADM2--repair-evaluation",
+    "original_native_patch": {
+      "path": "coordination/engineering/bdi-source-qualification-20261021/native-preparation/original-native-patch.json",
+      "bytes": 14271,
+      "sha256": "0a4bd4e4d5420f7fd38e13641dabe0a4dccf9c93c12b9cc39e08871bb2fd133e",
+      "commit": "590147fe5928ee201ee2009edcd9b5afaaa4bbb1",
+      "git_blob_oid": "52ef192ab4d288df960bcbbbd49fc8b0b097d0b0"
+    },
+    "original_keys": 583,
+    "supported_keys": 448,
+    "held_keys": 135,
+    "partition_disjoint": true,
+    "partition_union_equals_original": true,
+    "held_partition": {
+      "target_specific_source_provenance": 81,
+      "territorial_exclusion": 54,
+      "completed_unresolved_claim": false
+    },
+    "supported_native_patch_sha256": "b11c56d8d3b67de1a67fc328028e86a9d0dea8f58ad73220a733c6b9e0e93450",
+    "held_original_sha256": "e6c9ce7c9b6ed021f9159979b7f948cce84b28afb4fc1a2dbacdf6f1b3b8d1f4"
+  },
+  "overlap_test": {
+    "method": "Expanded each exact original (y,x) key from the pinned original patch and checked it against the authenticated current Brazil patch's native run intervals at the same (y,x).",
+    "original_partition_reconstructed": true,
+    "supported_keys_present_in_original": 448,
+    "held_keys_present_in_original": 135,
+    "intersection_current_patch_vs_original_583": 0,
+    "intersection_current_patch_vs_supported_448": 0,
+    "intersection_current_patch_vs_held_135": 0,
+    "result": "The current selected Brazil patch and all 583 original BDI keys are disjoint. This is a native-cell overlap check only; it does not prove source qualification, current ownership observation, or acceptance."
+  },
+  "constructor_and_composition_crosscheck": {
+    "constructor_commit": "fd35809976a5b3791c0a6710c6aeccf50e707e9f",
+    "constructor_rows": 17,
+    "constructor_cells": 448,
+    "composition_before_refresh_commit": "80a5ba7b823fb69a70a9fcd4962f3db70e2baa9e",
+    "composed_ledger_rows": 6879,
+    "composed_ledger_native_cells": 6311767,
+    "composed_patch_native_cells": 6311767,
+    "constructor_rows_found_in_composition": 17,
+    "constructor_cells_found_in_composition": 448,
+    "held_original_coordinates_found_in_composed_patch": 0,
+    "caveat": "The initial BDI composition was tied to the pre-Brazil selection state and is superseded. Root is recomposing/finalizing against eb338df; this record does not certify the refreshed composition or selected-native conservation."
+  },
+  "observer_reuse_context": {
+    "original_execution_commit": "5c1919dd1c7e89618398454220b57edf0fa388d2",
+    "prior_comparison_base": "94fd166b4e0ced382659e2c15a1a5c14141717f8",
+    "original_observation_inputs_compared": 38,
+    "unchanged_from_original_execution_to_94fd": 35,
+    "changed_from_original_execution_to_94fd": [
+      "scripts/check-effective-geographic-regression.mjs",
+      "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "data/ownership-selection.json"
+    ],
+    "impact": "The two changed code files are helper refactors/additions outside the observer call path. From 94fd166b to eb338df, code is unchanged and only the selection pointer advances; the original observer remains historical execution at its literal code/base, not a new-run claim."
+  },
+  "limits": [
+    "The current Brazil patch was read from its authenticated Git blob; no owner observation, geometry, diagnostic, constructor, or physical producer was rerun.",
+    "The zero-overlap result is a coordinate-level selected-patch comparison, not a source-science conclusion or root acceptance.",
+    "The initial 80a5ba7b composition is superseded after the selected base advanced; final review must use the refreshed public head and exact eb338df-based composition.",
+    "The package still requires the normal stock selected-native conservation and hosted validation path."
+  ]
+}

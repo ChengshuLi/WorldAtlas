@@ -1,0 +1,65 @@
+{
+  "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+  "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+  "git_blob_oid": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+  "bytes": 4404456,
+  "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4",
+  "decoded_bytes": 22336586,
+  "decoded_sha256": "607372a1af11bebf58c24aa15bdfae1999fafc532bb65ab7d822c0c20b57a435",
+  "records": [
+    {
+      "pointer": "/locations/7120",
+      "value": {
+        "id": "atlas:territory:LIE",
+        "index": 7121,
+        "bounds": [
+          137981.7526422222,
+          91920.97471498145,
+          138100.0186377778,
+          92158.84517667477
+        ],
+        "province_id": "framework:province:liechtenstein:0523cb1ade45",
+        "province_index": 2691,
+        "name": "Liechtenstein",
+        "reference_owner": "Liechtenstein",
+        "source_id": "atlas:territory:LIE",
+        "location_basis": "Compact source country/territory",
+        "source_atoms": [
+          "gb:LIE:ADM1:41692755B18610673403937",
+          "gb:LIE:ADM1:41692755B23424129986871",
+          "gb:LIE:ADM1:41692755B26730620500431",
+          "gb:LIE:ADM1:41692755B33734108210637",
+          "gb:LIE:ADM1:41692755B54479018835512",
+          "gb:LIE:ADM1:41692755B54662867343220",
+          "gb:LIE:ADM1:41692755B63992629942054",
+          "gb:LIE:ADM1:41692755B66371769109520",
+          "gb:LIE:ADM1:41692755B68962474767900",
+          "gb:LIE:ADM1:41692755B90684947638296",
+          "gb:LIE:ADM1:41692755B941757218579"
+        ]
+      }
+    },
+    {
+      "pointer": "/locations/8835",
+      "value": {
+        "id": "gb:AUT:ADM2:14549572B41160672699042",
+        "index": 8836,
+        "bounds": [
+          138079.40947722222,
+          91894.45927352214,
+          138527.27639388887,
+          92378.67004832599
+        ],
+        "province_id": "framework:province:vorarlberg:2ef5211c2090",
+        "province_index": 4848,
+        "name": "Bludenz",
+        "reference_owner": "Austria",
+        "source_id": "gb:AUT:ADM2",
+        "source_atoms": [
+          "gb:AUT:ADM2:14549572B41160672699042"
+        ]
+      }
+    }
+  ],
+  "whole_11_atom_set_equals_target": true
+}

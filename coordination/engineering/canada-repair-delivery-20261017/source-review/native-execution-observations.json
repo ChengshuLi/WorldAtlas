@@ -1,0 +1,395 @@
+{
+  "kind": "retained-actual-native-preparation-stdout",
+  "author_baseline": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+  "observations": [
+    {
+      "phase": "native-diagnostic",
+      "batch": "001",
+      "command": [
+        "node",
+        "scripts/prepare-delivery-handoff.mjs",
+        "native-diagnostic",
+        "coordination/engineering/canada-repair-delivery-20261017/config/aafc-native-001-diagnostic.json",
+        "coordination/engineering/canada-repair-delivery-20261017/aafc-native-diagnostic-001"
+      ],
+      "stdout": {
+        "destination": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-diagnostic-001",
+        "resumed": false,
+        "binding": {
+          "phase": "native-diagnostic",
+          "config_sha256": "57f78a60ce0ae248c7afe618484a5d0313cf7e1dcc1c8194107cd31dfc3b3cc8"
+        },
+        "observation": {
+          "elapsed_seconds": 131.23181615,
+          "requested_cells": 59677,
+          "supported_cells": 59677,
+          "held_cells": 0,
+          "limits": [
+            "Original source/physical producers are not replayed.",
+            "Diagnostic screening produces no authority, current-owner-zero or selected-output acceptance."
+          ]
+        }
+      },
+      "stdout_sha256": "7cfc73f3b69276d686ed269748c67b74482fd51b777626c00045042e40348850",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "phase": "native-diagnostic",
+      "batch": "002",
+      "command": [
+        "node",
+        "scripts/prepare-delivery-handoff.mjs",
+        "native-diagnostic",
+        "coordination/engineering/canada-repair-delivery-20261017/config/aafc-native-002-diagnostic.json",
+        "coordination/engineering/canada-repair-delivery-20261017/aafc-native-diagnostic-002"
+      ],
+      "stdout": {
+        "destination": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-diagnostic-002",
+        "resumed": false,
+        "binding": {
+          "phase": "native-diagnostic",
+          "config_sha256": "8956291a951c9ac8522f2615c316d351103653330074f1a308416f4e481a2f0b"
+        },
+        "observation": {
+          "elapsed_seconds": 34.507688348,
+          "requested_cells": 1378,
+          "supported_cells": 1378,
+          "held_cells": 0,
+          "limits": [
+            "Original source/physical producers are not replayed.",
+            "Diagnostic screening produces no authority, current-owner-zero or selected-output acceptance."
+          ]
+        }
+      },
+      "stdout_sha256": "563d365dcc6793c9cfe9ca7088c668231dd4f8639b61f4e8d576558cc8114863",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "phase": "native-diagnostic",
+      "batch": "003",
+      "command": [
+        "node",
+        "scripts/prepare-delivery-handoff.mjs",
+        "native-diagnostic",
+        "coordination/engineering/canada-repair-delivery-20261017/config/aafc-native-003-diagnostic.json",
+        "coordination/engineering/canada-repair-delivery-20261017/aafc-native-diagnostic-003"
+      ],
+      "stdout": {
+        "destination": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-diagnostic-003",
+        "resumed": false,
+        "binding": {
+          "phase": "native-diagnostic",
+          "config_sha256": "0dd55ef8b08d35bf88d147e63e5b51d903bcd7c7a47cac9df53466d815c631e8"
+        },
+        "observation": {
+          "elapsed_seconds": 64.950741841,
+          "requested_cells": 24954,
+          "supported_cells": 24954,
+          "held_cells": 0,
+          "limits": [
+            "Original source/physical producers are not replayed.",
+            "Diagnostic screening produces no authority, current-owner-zero or selected-output acceptance."
+          ]
+        }
+      },
+      "stdout_sha256": "0f2768f1ebaf1a6d854996d989e5dbcaba79ac0929ca9b8c2cd32e6e19e4347e",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "phase": "native-diagnostic",
+      "batch": "004",
+      "command": [
+        "node",
+        "scripts/prepare-delivery-handoff.mjs",
+        "native-diagnostic",
+        "coordination/engineering/canada-repair-delivery-20261017/config/aafc-native-004-diagnostic.json",
+        "coordination/engineering/canada-repair-delivery-20261017/aafc-native-diagnostic-004"
+      ],
+      "stdout": {
+        "destination": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-diagnostic-004",
+        "resumed": false,
+        "binding": {
+          "phase": "native-diagnostic",
+          "config_sha256": "db4e32c1476c3e1ba51c7dde2921de36fba7a5f2720651fd4ca93950a939493c"
+        },
+        "observation": {
+          "elapsed_seconds": 72.752729552,
+          "requested_cells": 28320,
+          "supported_cells": 28320,
+          "held_cells": 0,
+          "limits": [
+            "Original source/physical producers are not replayed.",
+            "Diagnostic screening produces no authority, current-owner-zero or selected-output acceptance."
+          ]
+        }
+      },
+      "stdout_sha256": "2457642781828387f3c3ccdc71bda7a3ba0409baf6c8e57d7cce411ead49e252",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "phase": "native-diagnostic",
+      "batch": "005",
+      "command": [
+        "node",
+        "scripts/prepare-delivery-handoff.mjs",
+        "native-diagnostic",
+        "coordination/engineering/canada-repair-delivery-20261017/config/aafc-native-005-diagnostic.json",
+        "coordination/engineering/canada-repair-delivery-20261017/aafc-native-diagnostic-005"
+      ],
+      "stdout": {
+        "destination": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-diagnostic-005",
+        "resumed": false,
+        "binding": {
+          "phase": "native-diagnostic",
+          "config_sha256": "4b65a0451094dcdf40b20ef79eaac3eb620d6cf1ead76b9f13c8c366ce858a01"
+        },
+        "observation": {
+          "elapsed_seconds": 17.714527375000003,
+          "requested_cells": 29718,
+          "supported_cells": 29718,
+          "held_cells": 0,
+          "limits": [
+            "Original source/physical producers are not replayed.",
+            "Diagnostic screening produces no authority, current-owner-zero or selected-output acceptance."
+          ]
+        }
+      },
+      "stdout_sha256": "835a5d468edd4d9a375fe75d2f8a4736f4a7c91feb61a0837088f5828ab7bf02",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "phase": "native-authority",
+      "batch": "001",
+      "command": [
+        "node",
+        "scripts/prepare-delivery-handoff.mjs",
+        "native-authority",
+        "coordination/engineering/canada-repair-delivery-20261017/config/aafc-native-001-diagnostic.json",
+        "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-001"
+      ],
+      "stdout": {
+        "destination": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-001",
+        "resumed": false,
+        "binding": {
+          "phase": "native-authority",
+          "config_sha256": "57f78a60ce0ae248c7afe618484a5d0313cf7e1dcc1c8194107cd31dfc3b3cc8"
+        },
+        "observation": {
+          "elapsed_seconds": 84.080064858,
+          "qualified_cells": 59677,
+          "limits": [
+            "Original source/physical producers are not replayed.",
+            "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+          ]
+        }
+      },
+      "stdout_sha256": "8af65b7e91b5f62dc1c9363fe283eb0dbddb6f3adc73e13893f5c2519da60c20",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "phase": "native-authority",
+      "batch": "002",
+      "command": [
+        "node",
+        "scripts/prepare-delivery-handoff.mjs",
+        "native-authority",
+        "coordination/engineering/canada-repair-delivery-20261017/config/aafc-native-002-diagnostic.json",
+        "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-002"
+      ],
+      "stdout": {
+        "destination": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-002",
+        "resumed": false,
+        "binding": {
+          "phase": "native-authority",
+          "config_sha256": "8956291a951c9ac8522f2615c316d351103653330074f1a308416f4e481a2f0b"
+        },
+        "observation": {
+          "elapsed_seconds": 20.307782005,
+          "qualified_cells": 1378,
+          "limits": [
+            "Original source/physical producers are not replayed.",
+            "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+          ]
+        }
+      },
+      "stdout_sha256": "7eeefa1c934beea393ee1a95b7637fda2f7cb651b34a43f5e102bf39fd6e6a20",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "phase": "native-authority",
+      "batch": "003",
+      "command": [
+        "node",
+        "scripts/prepare-delivery-handoff.mjs",
+        "native-authority",
+        "coordination/engineering/canada-repair-delivery-20261017/config/aafc-native-003-diagnostic.json",
+        "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-003"
+      ],
+      "stdout": {
+        "destination": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-003",
+        "resumed": false,
+        "binding": {
+          "phase": "native-authority",
+          "config_sha256": "0dd55ef8b08d35bf88d147e63e5b51d903bcd7c7a47cac9df53466d815c631e8"
+        },
+        "observation": {
+          "elapsed_seconds": 40.191379221000005,
+          "qualified_cells": 24954,
+          "limits": [
+            "Original source/physical producers are not replayed.",
+            "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+          ]
+        }
+      },
+      "stdout_sha256": "a791b6793ae16c8d15b794bd1be5c2ad18df9fc8a3f8efc9906d380338be5be3",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "phase": "native-authority",
+      "batch": "004",
+      "command": [
+        "node",
+        "scripts/prepare-delivery-handoff.mjs",
+        "native-authority",
+        "coordination/engineering/canada-repair-delivery-20261017/config/aafc-native-004-diagnostic.json",
+        "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-004"
+      ],
+      "stdout": {
+        "destination": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-004",
+        "resumed": false,
+        "binding": {
+          "phase": "native-authority",
+          "config_sha256": "db4e32c1476c3e1ba51c7dde2921de36fba7a5f2720651fd4ca93950a939493c"
+        },
+        "observation": {
+          "elapsed_seconds": 32.306254992999996,
+          "qualified_cells": 28320,
+          "limits": [
+            "Original source/physical producers are not replayed.",
+            "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+          ]
+        }
+      },
+      "stdout_sha256": "bb92bdc73018b96dd4a0ce41ef79d3618e0549ecc8bccc785b30475aa8a902f4",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "phase": "native-authority",
+      "batch": "005",
+      "command": [
+        "node",
+        "scripts/prepare-delivery-handoff.mjs",
+        "native-authority",
+        "coordination/engineering/canada-repair-delivery-20261017/config/aafc-native-005-diagnostic.json",
+        "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-005"
+      ],
+      "stdout": {
+        "destination": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-005",
+        "resumed": false,
+        "binding": {
+          "phase": "native-authority",
+          "config_sha256": "4b65a0451094dcdf40b20ef79eaac3eb620d6cf1ead76b9f13c8c366ce858a01"
+        },
+        "observation": {
+          "elapsed_seconds": 13.35926736,
+          "qualified_cells": 29718,
+          "limits": [
+            "Original source/physical producers are not replayed.",
+            "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+          ]
+        }
+      },
+      "stdout_sha256": "f0021fa8aef788d4abb211a0cc2230427dc69b187d6cb47db82b94ca7ddc7d66",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "entrypoint_static_import_closure": [
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+      "commit": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+      "bytes": 2389,
+      "sha256": "b40c3ec6030662edafc656b24a2c3c7a081a59dde71ec4500a9eaa83aecc082b"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "commit": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+      "bytes": 207562,
+      "sha256": "6f6910288a4d818778c5586797f902d1d909f0b861efaefbf8e6dfeb9ba9572f"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "commit": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+      "bytes": 91666,
+      "sha256": "2383adb76514c737e3e8b0ef48f24fced00f1e5c7e6b34f292273d1e34357e61"
+    },
+    {
+      "path": "scripts/delivery-handoff-advance.mjs",
+      "commit": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+      "bytes": 21490,
+      "sha256": "ffc72039bc753a4a8457e54cbba8cec91c610663b6053ec8f355bc9a676261ce"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "commit": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+      "bytes": 34050,
+      "sha256": "d9749a72d15a5f248cd222260213990a2075321476822668068bd2ef3a0964cd"
+    },
+    {
+      "path": "scripts/geography-prefetch.mjs",
+      "commit": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+      "bytes": 13104,
+      "sha256": "9be7623e6d9fdb3e4e7493615b44cab5f003912367efa5c85bb67556f070cb1a"
+    },
+    {
+      "path": "scripts/package-inputs.mjs",
+      "commit": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+      "bytes": 11974,
+      "sha256": "69bf385719df9cd86b4762b0769136d7d815f1b1e473bd3dee0fd79acb2ea454"
+    },
+    {
+      "path": "scripts/prepare-delivery-handoff.mjs",
+      "commit": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+      "bytes": 118614,
+      "sha256": "3fb06abfdfb9a17ba144796eb5dba3c8df6f8bd9570177cee536405999f3eaee"
+    },
+    {
+      "path": "scripts/selected-reference-metadata.mjs",
+      "commit": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+      "bytes": 10403,
+      "sha256": "369352d4b78a862fd79ea88bcc6420fbec9ea8d80348dd2d3b6a122dc5dd2a5d"
+    },
+    {
+      "path": "src/native-grid.js",
+      "commit": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+      "bytes": 47443,
+      "sha256": "fab520ead243d13efb9231fd8b15c567554274d343c3746dd5be06fb25ff20ee"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "commit": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+    },
+    {
+      "path": "src/reference-metadata.js",
+      "commit": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+      "bytes": 25758,
+      "sha256": "15130cb6bb9cd0cb32879de01ca13d8e8d96490cce6fc2640e5e406bcfc6cf02"
+    }
+  ],
+  "limits": [
+    "These are actual captured stock-entry-point stdout results and empty stderr observations, not a fabricated supervisor terminal.",
+    "The unchanged static import closure was checked against the author baseline after all runs; it is a conservative loaded-code inventory, not a new pre-use/post-use execution-monitor claim.",
+    "Native authority qualification does not establish current owner-zero or selected-output acceptance."
+  ]
+}

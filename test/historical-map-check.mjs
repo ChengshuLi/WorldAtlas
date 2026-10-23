@@ -5,8 +5,8 @@ import {categoryColor,formatYear} from '../src/model.js';
 import {categoryPresentationKey} from '../src/category-presentation.js';
 
 // Select a real, partially covered territory rather than a mocked owner value.
-export async function findHistoricalMapCase(getSnapshot){
- const db=new DatabaseSync('data/atlas.sqlite',{readOnly:true});
+export async function findHistoricalMapCase(getSnapshot,databasePath='data/atlas.sqlite'){
+ const db=new DatabaseSync(databasePath,{readOnly:true});
  try{
   const location=db.prepare('SELECT id,name,geometry FROM locations WHERE active=1 AND id=?');
   for(const year of [1444,1000]){

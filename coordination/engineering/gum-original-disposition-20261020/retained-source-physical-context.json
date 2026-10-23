@@ -1,0 +1,943 @@
+{
+  "version": 1,
+  "kind": "gum-original-retained-source-physical-context",
+  "purpose": "Retained original source, source-property, lineage and physical/water context for the exact GUM repair scope. No raw geometry is redistributed or recomputed; no positive qualification or rights decision.",
+  "original_scope": {
+    "package_id": "gb-GUM-ADM2--repair-evaluation",
+    "primary_source": "gb:GUM:ADM2",
+    "family_index": 141,
+    "owner_indices": [
+      7117
+    ],
+    "native_cells": 139,
+    "land_cells": 139,
+    "inland_water_cells": 0,
+    "interval_segments": 86,
+    "source_feature_indices": [
+      35004,
+      35006,
+      35009,
+      35011,
+      35012,
+      35013,
+      35014,
+      35015,
+      35016,
+      35019,
+      35020,
+      35021,
+      35022,
+      61268,
+      63645
+    ],
+    "source_families": [
+      141,
+      346,
+      347
+    ],
+    "native_blocks": [
+      29
+    ],
+    "province_ids": [
+      "framework:province:guam:8e3b3943a164"
+    ],
+    "separate_physical_companion": {
+      "package_id": "gb-GUM-ADM2--physical-interpretation",
+      "source_relative_cells": 37,
+      "interval_segments": 29,
+      "excluded_from_repair_scope": true
+    },
+    "contract": {
+      "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+      "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+      "priority": 1
+    }
+  },
+  "authenticated_inputs": {
+    "queue": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json"
+    },
+    "catalogue": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+      "blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json"
+    },
+    "feature_roster": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "bytes": 1844315,
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa",
+      "decoded_entries": 73567,
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz"
+    },
+    "lineage": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+      "blob_oid": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+      "bytes": 4404456,
+      "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz"
+    },
+    "block_source_candidates": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-029.json.gz",
+      "blob_oid": "3fc846f1a3a57841d82c695b97ad31b93af681e6",
+      "compressed_or_raw_bytes": 613896,
+      "sha256": "7775f315311056808bfead2394034459a83a3590a201fe0deedb66fea1866528",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-029.json.gz",
+      "decoded_bytes": 4552072,
+      "decoded_sha256": "a497602aa36f61e9d86b2078d6811e2362612fe7a11920f50df315b991106798"
+    },
+    "block_physical_support": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-029.json.gz",
+      "blob_oid": "2e1d884705c104bd3dbc61ac5444761875210ba5",
+      "compressed_or_raw_bytes": 508848,
+      "sha256": "7af023db048ed84fe910c0ce966508b5b4127c95c6215f0d36213ed20d94b5d2",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-029.json.gz",
+      "decoded_bytes": 2354796,
+      "decoded_sha256": "a62fb29038527ceba28ebef27ee3d487ec4fb0a31ca64610d16f02947b5189ee"
+    },
+    "block_inland_water": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-029.json.gz",
+      "blob_oid": "01851c2ff5b06938769c6662bea70c19c69148ba",
+      "compressed_or_raw_bytes": 19710,
+      "sha256": "c3a2e3b0c84e34e19aa39c7afbb02f62a434f29fad6e64aa7429522b9ebfe30f",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-029.json.gz",
+      "decoded_bytes": 125470,
+      "decoded_sha256": "c4611ff0fcfb89048a4c524493a60b90ced1ff4d80ef9c1bc94a66d6b02b62c9"
+    },
+    "unknown_residual_artifact": {
+      "blob_oid": "95890a0fc5a9cb9fb6bbd8f48425a8887b043a6e",
+      "compressed_bytes": 23,
+      "decoded_bytes": 3,
+      "decoded_value": [],
+      "note": "The same empty-array blob was referenced by block-029 unknown envelope/residual artifacts in prior retained inventory; not used to infer global unknown absence."
+    }
+  },
+  "retained_catalogue_declarations": {
+    "source_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+    "products": [
+      {
+        "key": "gb:GUM:ADM2",
+        "feature_count": 19,
+        "advertised_feature_count": 19,
+        "recorded_license": "Public Domain",
+        "source_represented_year_claim": "2021",
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GUM/ADM2/geoBoundaries-GUM-ADM2_simplified.geojson",
+        "metadata_sha256": "76f5800eb720cd4465465eae131f44ee9fe2275123c984a6eb2c0b3428cc13e9",
+        "original_decoded_bytes": 22061,
+        "original_decoded_sha256": "cda4a989f68bbf9b34e5cf5916226bdc9de1e9fe9012e9ab62c6cb6a3fa52805",
+        "payload": {
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-GUM-ADM2-000.bin.gz",
+          "blob_oid": "b30237d46e5686fae44bae2f9814c8a17f08d7d8",
+          "compressed_bytes": 4698,
+          "compressed_sha256": "9a4ff550526f62ce2447a74ba6836cc7c5fd1bdbc1a57989d4e499b29c1ab913",
+          "decoded_bytes": 22061,
+          "decoded_sha256": "cda4a989f68bbf9b34e5cf5916226bdc9de1e9fe9012e9ab62c6cb6a3fa52805",
+          "local_object_store": "Exact public payload acquired and authenticated; property records retained below; raw geometry not redistributed."
+        },
+        "immutable_url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-GUM-ADM2-000.bin.gz"
+      },
+      {
+        "key": "gb:USA:ADM1",
+        "feature_count": 56,
+        "advertised_feature_count": 56,
+        "recorded_license": "Public Domain",
+        "source_represented_year_claim": "2018",
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM1/geoBoundaries-USA-ADM1_simplified.geojson",
+        "metadata_sha256": "1347e4c224f3d8dc9525287f224b623540abba51d14f45cb0a857ddb2c22fbc7",
+        "original_decoded_bytes": 5469814,
+        "original_decoded_sha256": "9d7a32244a5c3c2868d039355db2fdd9eb903ef255cfda128decd20bedc0dfbe",
+        "payload": {
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-USA-ADM1-000.bin.gz",
+          "blob_oid": "f482da25b1b259e9726dd6aade4b8a1a381f3e3f",
+          "compressed_bytes": 1702347,
+          "compressed_sha256": "a1059264c0f20ad40a50fb51a19c49182bfd9fb012c591a1a6e8a971340ed43b",
+          "decoded_bytes": 5469814,
+          "decoded_sha256": "9d7a32244a5c3c2868d039355db2fdd9eb903ef255cfda128decd20bedc0dfbe",
+          "local_object_store": "Exact public payload acquired and authenticated; property records retained below; raw geometry not redistributed."
+        },
+        "immutable_url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-USA-ADM1-000.bin.gz"
+      },
+      {
+        "key": "gb:USA:ADM2",
+        "feature_count": 3233,
+        "advertised_feature_count": 3233,
+        "recorded_license": "Public Domain",
+        "source_represented_year_claim": "2018",
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2_simplified.geojson",
+        "metadata_sha256": "52c9da4222df0f4997e544db39bfcd2952c47d38f58924041d743b8d25aa6518",
+        "original_decoded_bytes": 7938450,
+        "original_decoded_sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a",
+        "payload": {
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-USA-ADM2-000.bin.gz",
+          "blob_oid": "05f3069c9ef0686e6ff2e74753ea855bc0077f98",
+          "compressed_bytes": 2476897,
+          "compressed_sha256": "fe2128f4a5c164c9a9f58a6321af446782f6a689e4d5d9452e5967047c1958c9",
+          "decoded_bytes": 7938450,
+          "decoded_sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a",
+          "local_object_store": "Exact public payload acquired and authenticated; property records retained below; raw geometry not redistributed."
+        },
+        "immutable_url": "https://github.com/ChengshuLi/WorldAtlas/blob/2d1fc6f430e756498908bf2c4e267356a13f5cc7/coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-USA-ADM2-000.bin.gz"
+      }
+    ],
+    "meaning_limit": "Recorded catalogue claims only: not current authority, source applicability, competitor completeness, legal clearance or a reuse decision."
+  },
+  "contact_metadata": {
+    "selected_package_feature_count": 15,
+    "family_feature_counts": {
+      "141": 19,
+      "346": 56,
+      "347": 3233
+    },
+    "package_contact_roster": [
+      {
+        "source_index": 35004,
+        "family_index": 141,
+        "ordinal": 0,
+        "source_id": "gb:GUM:ADM2:77769853B39660846480906",
+        "name": "Agat",
+        "roster_owner_indices": [
+          7117
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 35006,
+        "family_index": 141,
+        "ordinal": 2,
+        "source_id": "gb:GUM:ADM2:77769853B92026365900832",
+        "name": "Hagåtña",
+        "roster_owner_indices": [
+          7117
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 35009,
+        "family_index": 141,
+        "ordinal": 5,
+        "source_id": "gb:GUM:ADM2:77769853B17205204900927",
+        "name": "Talofofo",
+        "roster_owner_indices": [
+          7117
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 35011,
+        "family_index": 141,
+        "ordinal": 7,
+        "source_id": "gb:GUM:ADM2:77769853B26973637010941",
+        "name": "Santa Rita",
+        "roster_owner_indices": [
+          7117
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 35012,
+        "family_index": 141,
+        "ordinal": 8,
+        "source_id": "gb:GUM:ADM2:77769853B60030225466541",
+        "name": "Asan",
+        "roster_owner_indices": [
+          7117
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 35013,
+        "family_index": 141,
+        "ordinal": 9,
+        "source_id": "gb:GUM:ADM2:77769853B76375240183470",
+        "name": "Dededo",
+        "roster_owner_indices": [
+          7117
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 35014,
+        "family_index": 141,
+        "ordinal": 10,
+        "source_id": "gb:GUM:ADM2:77769853B63444042999452",
+        "name": "Inarajan",
+        "roster_owner_indices": [
+          7117
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 35015,
+        "family_index": 141,
+        "ordinal": 11,
+        "source_id": "gb:GUM:ADM2:77769853B7245743220793",
+        "name": "Merizo",
+        "roster_owner_indices": [
+          7117
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 35016,
+        "family_index": 141,
+        "ordinal": 12,
+        "source_id": "gb:GUM:ADM2:77769853B98386396694239",
+        "name": "Tamuning",
+        "roster_owner_indices": [
+          7117
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 35019,
+        "family_index": 141,
+        "ordinal": 15,
+        "source_id": "gb:GUM:ADM2:77769853B97114790292533",
+        "name": "Umatac",
+        "roster_owner_indices": [
+          7117
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 35020,
+        "family_index": 141,
+        "ordinal": 16,
+        "source_id": "gb:GUM:ADM2:77769853B27536991093250",
+        "name": "Piti",
+        "roster_owner_indices": [
+          7117
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 35021,
+        "family_index": 141,
+        "ordinal": 17,
+        "source_id": "gb:GUM:ADM2:77769853B33377803133936",
+        "name": "Yigo",
+        "roster_owner_indices": [
+          7117
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 35022,
+        "family_index": 141,
+        "ordinal": 18,
+        "source_id": "gb:GUM:ADM2:77769853B72833595516841",
+        "name": "Yona",
+        "roster_owner_indices": [
+          7117
+        ],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 61268,
+        "family_index": 346,
+        "ordinal": 44,
+        "source_id": "gb:USA:ADM1:66186276B63361112364184",
+        "name": "Guam",
+        "roster_owner_indices": [],
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 63645,
+        "family_index": 347,
+        "ordinal": 2365,
+        "source_id": "gb:USA:ADM2:52423323B58805530467838",
+        "name": "Guam",
+        "roster_owner_indices": [],
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "lineage_record": {
+      "id": "atlas:territory:GUM",
+      "index": 7117,
+      "province_id": "framework:province:guam:8e3b3943a164",
+      "province_index": 1901,
+      "name": "Guam",
+      "reference_owner": "Guam",
+      "source_id": "atlas:territory:GUM",
+      "location_basis": "Compact source country/territory",
+      "source_atom_count": 19,
+      "source_atoms": [
+        "gb:GUM:ADM2:77769853B17205204900927",
+        "gb:GUM:ADM2:77769853B20896286289421",
+        "gb:GUM:ADM2:77769853B26973637010941",
+        "gb:GUM:ADM2:77769853B27536991093250",
+        "gb:GUM:ADM2:77769853B28089182733682",
+        "gb:GUM:ADM2:77769853B33377803133936",
+        "gb:GUM:ADM2:77769853B39660846480906",
+        "gb:GUM:ADM2:77769853B46824849398692",
+        "gb:GUM:ADM2:77769853B60030225466541",
+        "gb:GUM:ADM2:77769853B63444042999452",
+        "gb:GUM:ADM2:77769853B67534366547029",
+        "gb:GUM:ADM2:77769853B7245743220793",
+        "gb:GUM:ADM2:77769853B72833595516841",
+        "gb:GUM:ADM2:77769853B74833203647496",
+        "gb:GUM:ADM2:77769853B76375240183470",
+        "gb:GUM:ADM2:77769853B91363375193449",
+        "gb:GUM:ADM2:77769853B92026365900832",
+        "gb:GUM:ADM2:77769853B97114790292533",
+        "gb:GUM:ADM2:77769853B98386396694239"
+      ]
+    },
+    "limit": "The two ownerless USA Guam contacts are retained selected contacts; they are not a complete foreign competitor universe or evidence of source applicability."
+  },
+  "retained_run_and_mask_join": {
+    "method": "Expanded the already-retained indexed half-open x runs at y into cell-key sets and joined package source-feature indices / owner 7117 against physical and inland-water mask membership. No geometry was read, rasterized, transformed or tested.",
+    "owner_package_source_candidate_cell_count": 176,
+    "candidate_cells_overlapping_physical_support": 139,
+    "candidate_cells_overlapping_water_support": 0,
+    "candidate_cells_in_neither_physical_nor_water_support": 37,
+    "physical_and_water_overlap_count": 0,
+    "package_scope_cells_with_vector_count": 139,
+    "selected_contact_incidence_counts_by_source_index": {
+      "35004": 15,
+      "35006": 3,
+      "35009": 12,
+      "35011": 5,
+      "35012": 10,
+      "35013": 10,
+      "35014": 10,
+      "35015": 15,
+      "35016": 4,
+      "35019": 10,
+      "35020": 18,
+      "35021": 20,
+      "35022": 7,
+      "61268": 133,
+      "63645": 136
+    },
+    "disjoint_contact_vector_cell_groups": [
+      {
+        "source_feature_indices": [
+          35004,
+          61268,
+          63645
+        ],
+        "cells": 15
+      },
+      {
+        "source_feature_indices": [
+          35006,
+          61268,
+          63645
+        ],
+        "cells": 3
+      },
+      {
+        "source_feature_indices": [
+          35009,
+          61268,
+          63645
+        ],
+        "cells": 12
+      },
+      {
+        "source_feature_indices": [
+          35011,
+          61268,
+          63645
+        ],
+        "cells": 5
+      },
+      {
+        "source_feature_indices": [
+          35012,
+          61268
+        ],
+        "cells": 2
+      },
+      {
+        "source_feature_indices": [
+          35012,
+          61268,
+          63645
+        ],
+        "cells": 8
+      },
+      {
+        "source_feature_indices": [
+          35013,
+          61268,
+          63645
+        ],
+        "cells": 9
+      },
+      {
+        "source_feature_indices": [
+          35013,
+          63645
+        ],
+        "cells": 1
+      },
+      {
+        "source_feature_indices": [
+          35014,
+          61268,
+          63645
+        ],
+        "cells": 9
+      },
+      {
+        "source_feature_indices": [
+          35014,
+          63645
+        ],
+        "cells": 1
+      },
+      {
+        "source_feature_indices": [
+          35015,
+          61268,
+          63645
+        ],
+        "cells": 15
+      },
+      {
+        "source_feature_indices": [
+          35016,
+          61268,
+          63645
+        ],
+        "cells": 4
+      },
+      {
+        "source_feature_indices": [
+          35019,
+          61268,
+          63645
+        ],
+        "cells": 7
+      },
+      {
+        "source_feature_indices": [
+          35019,
+          63645
+        ],
+        "cells": 3
+      },
+      {
+        "source_feature_indices": [
+          35020,
+          61268,
+          63645
+        ],
+        "cells": 17
+      },
+      {
+        "source_feature_indices": [
+          35020,
+          63645
+        ],
+        "cells": 1
+      },
+      {
+        "source_feature_indices": [
+          35021,
+          61268,
+          63645
+        ],
+        "cells": 20
+      },
+      {
+        "source_feature_indices": [
+          35022,
+          61268
+        ],
+        "cells": 1
+      },
+      {
+        "source_feature_indices": [
+          35022,
+          61268,
+          63645
+        ],
+        "cells": 6
+      }
+    ],
+    "interpretation_limits": [
+      "This run-level join confirms the retained block records attach all 139 queue package cells to physical-support land and none to inland-water support; it is not a new native owner observation or source/physical witness adjudication.",
+      "Contact vectors overlap on foreign features (USA ADM1/ADM2), so a contact incidence is not a disjoint territory/source partition or a finding of unique current-location applicability.",
+      "The package completion clause still requires interval-by-interval qualified additive repair OR documented exception, selected-native conservation and source/physical witness checks; this inventory does not meet those substantive checks."
+    ]
+  },
+  "missing_inputs_and_limits": {
+    "raw_source_payloads_not_acquired": [],
+    "source_property_witness": "Property identity join is now available for all 15 selected contact IDs from the three exact authenticated payloads. This is not a source or geometric witness for the 139 cells.",
+    "complete_foreign_competitor_set": "Not established. The source features named in this queue row are the row’s selected contact set only.",
+    "rights_and_authority": "Recorded catalogue license/vintage strings are not current clearance or qualification.",
+    "scientific_disposition": "No positive source-membership, exclusion, competitor, territorial or physical repair qualification; no root acceptance or prior-credit conclusion.",
+    "separate_review": "Issue #383 is a distinct open research/source-semantic review packet, not this repair-evaluation claim; do not infer its state resolves this package.",
+    "source_payload_property_reads": {
+      "payloads": [
+        {
+          "key": "gb:GUM:ADM2",
+          "blob_oid": "b30237d46e5686fae44bae2f9814c8a17f08d7d8",
+          "compressed_bytes": 4698,
+          "compressed_sha256": "9a4ff550526f62ce2447a74ba6836cc7c5fd1bdbc1a57989d4e499b29c1ab913",
+          "decoded_bytes": 22061,
+          "decoded_sha256": "cda4a989f68bbf9b34e5cf5916226bdc9de1e9fe9012e9ab62c6cb6a3fa52805",
+          "feature_count": 19,
+          "target_contacts": 13,
+          "matched_target_contacts": 13,
+          "property_match_complete": true,
+          "geometry_read_or_used": false
+        },
+        {
+          "key": "gb:USA:ADM1",
+          "blob_oid": "f482da25b1b259e9726dd6aade4b8a1a381f3e3f",
+          "compressed_bytes": 1702347,
+          "compressed_sha256": "a1059264c0f20ad40a50fb51a19c49182bfd9fb012c591a1a6e8a971340ed43b",
+          "decoded_bytes": 5469814,
+          "decoded_sha256": "9d7a32244a5c3c2868d039355db2fdd9eb903ef255cfda128decd20bedc0dfbe",
+          "feature_count": 56,
+          "target_contacts": 1,
+          "matched_target_contacts": 1,
+          "property_match_complete": true,
+          "geometry_read_or_used": false
+        },
+        {
+          "key": "gb:USA:ADM2",
+          "blob_oid": "05f3069c9ef0686e6ff2e74753ea855bc0077f98",
+          "compressed_bytes": 2476897,
+          "compressed_sha256": "fe2128f4a5c164c9a9f58a6321af446782f6a689e4d5d9452e5967047c1958c9",
+          "decoded_bytes": 7938450,
+          "decoded_sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a",
+          "feature_count": 3233,
+          "target_contacts": 1,
+          "matched_target_contacts": 1,
+          "property_match_complete": true,
+          "geometry_read_or_used": false
+        }
+      ],
+      "raw_geometry": "Payloads contain geometry, but geometry fields were not extracted, printed or computed on for this property-only join."
+    }
+  },
+  "source_payload_property_join": {
+    "method": "For each authenticated exact payload, decompress and parse GeoJSON; compare only the raw `properties.shapeID` fields to retained source-feature roster IDs for the package’s 15 selected contacts. Geometry fields were not traversed or output. This joins identity metadata only; it does not test spatial overlap, applicability, authority or territory.",
+    "property_record_count": 15,
+    "all_15_selected_contacts_matched_once": true,
+    "canonical_selected_property_records_sha256": "a471779c3cc2b54fd42a2ea20fb3848232d3405c5afa46c451585c778a4a85cd",
+    "payloads": [
+      {
+        "key": "gb:GUM:ADM2",
+        "blob_oid": "b30237d46e5686fae44bae2f9814c8a17f08d7d8",
+        "compressed_bytes": 4698,
+        "compressed_sha256": "9a4ff550526f62ce2447a74ba6836cc7c5fd1bdbc1a57989d4e499b29c1ab913",
+        "decoded_bytes": 22061,
+        "decoded_sha256": "cda4a989f68bbf9b34e5cf5916226bdc9de1e9fe9012e9ab62c6cb6a3fa52805",
+        "feature_count": 19,
+        "target_contacts": 13,
+        "matched_target_contacts": 13,
+        "property_match_complete": true,
+        "geometry_read_or_used": false
+      },
+      {
+        "key": "gb:USA:ADM1",
+        "blob_oid": "f482da25b1b259e9726dd6aade4b8a1a381f3e3f",
+        "compressed_bytes": 1702347,
+        "compressed_sha256": "a1059264c0f20ad40a50fb51a19c49182bfd9fb012c591a1a6e8a971340ed43b",
+        "decoded_bytes": 5469814,
+        "decoded_sha256": "9d7a32244a5c3c2868d039355db2fdd9eb903ef255cfda128decd20bedc0dfbe",
+        "feature_count": 56,
+        "target_contacts": 1,
+        "matched_target_contacts": 1,
+        "property_match_complete": true,
+        "geometry_read_or_used": false
+      },
+      {
+        "key": "gb:USA:ADM2",
+        "blob_oid": "05f3069c9ef0686e6ff2e74753ea855bc0077f98",
+        "compressed_bytes": 2476897,
+        "compressed_sha256": "fe2128f4a5c164c9a9f58a6321af446782f6a689e4d5d9452e5967047c1958c9",
+        "decoded_bytes": 7938450,
+        "decoded_sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a",
+        "feature_count": 3233,
+        "target_contacts": 1,
+        "matched_target_contacts": 1,
+        "property_match_complete": true,
+        "geometry_read_or_used": false
+      }
+    ],
+    "selected_properties": [
+      {
+        "source_index": 35004,
+        "family_index": 141,
+        "source_id": "gb:GUM:ADM2:77769853B39660846480906",
+        "roster_name": "Agat",
+        "roster_owner_indices": [
+          7117
+        ],
+        "raw_payload_properties": {
+          "shapeName": "Agat",
+          "shapeISO": "",
+          "shapeID": "77769853B39660846480906",
+          "shapeGroup": "GUM",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 35006,
+        "family_index": 141,
+        "source_id": "gb:GUM:ADM2:77769853B92026365900832",
+        "roster_name": "Hagåtña",
+        "roster_owner_indices": [
+          7117
+        ],
+        "raw_payload_properties": {
+          "shapeName": "Hagåtña",
+          "shapeISO": "",
+          "shapeID": "77769853B92026365900832",
+          "shapeGroup": "GUM",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 35009,
+        "family_index": 141,
+        "source_id": "gb:GUM:ADM2:77769853B17205204900927",
+        "roster_name": "Talofofo",
+        "roster_owner_indices": [
+          7117
+        ],
+        "raw_payload_properties": {
+          "shapeName": "Talofofo",
+          "shapeISO": "",
+          "shapeID": "77769853B17205204900927",
+          "shapeGroup": "GUM",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 35011,
+        "family_index": 141,
+        "source_id": "gb:GUM:ADM2:77769853B26973637010941",
+        "roster_name": "Santa Rita",
+        "roster_owner_indices": [
+          7117
+        ],
+        "raw_payload_properties": {
+          "shapeName": "Santa Rita",
+          "shapeISO": "",
+          "shapeID": "77769853B26973637010941",
+          "shapeGroup": "GUM",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 35012,
+        "family_index": 141,
+        "source_id": "gb:GUM:ADM2:77769853B60030225466541",
+        "roster_name": "Asan",
+        "roster_owner_indices": [
+          7117
+        ],
+        "raw_payload_properties": {
+          "shapeName": "Asan",
+          "shapeISO": "",
+          "shapeID": "77769853B60030225466541",
+          "shapeGroup": "GUM",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 35013,
+        "family_index": 141,
+        "source_id": "gb:GUM:ADM2:77769853B76375240183470",
+        "roster_name": "Dededo",
+        "roster_owner_indices": [
+          7117
+        ],
+        "raw_payload_properties": {
+          "shapeName": "Dededo",
+          "shapeISO": "",
+          "shapeID": "77769853B76375240183470",
+          "shapeGroup": "GUM",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 35014,
+        "family_index": 141,
+        "source_id": "gb:GUM:ADM2:77769853B63444042999452",
+        "roster_name": "Inarajan",
+        "roster_owner_indices": [
+          7117
+        ],
+        "raw_payload_properties": {
+          "shapeName": "Inarajan",
+          "shapeISO": "",
+          "shapeID": "77769853B63444042999452",
+          "shapeGroup": "GUM",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 35015,
+        "family_index": 141,
+        "source_id": "gb:GUM:ADM2:77769853B7245743220793",
+        "roster_name": "Merizo",
+        "roster_owner_indices": [
+          7117
+        ],
+        "raw_payload_properties": {
+          "shapeName": "Merizo",
+          "shapeISO": "",
+          "shapeID": "77769853B7245743220793",
+          "shapeGroup": "GUM",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 35016,
+        "family_index": 141,
+        "source_id": "gb:GUM:ADM2:77769853B98386396694239",
+        "roster_name": "Tamuning",
+        "roster_owner_indices": [
+          7117
+        ],
+        "raw_payload_properties": {
+          "shapeName": "Tamuning",
+          "shapeISO": "",
+          "shapeID": "77769853B98386396694239",
+          "shapeGroup": "GUM",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 35019,
+        "family_index": 141,
+        "source_id": "gb:GUM:ADM2:77769853B97114790292533",
+        "roster_name": "Umatac",
+        "roster_owner_indices": [
+          7117
+        ],
+        "raw_payload_properties": {
+          "shapeName": "Umatac",
+          "shapeISO": "",
+          "shapeID": "77769853B97114790292533",
+          "shapeGroup": "GUM",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 35020,
+        "family_index": 141,
+        "source_id": "gb:GUM:ADM2:77769853B27536991093250",
+        "roster_name": "Piti",
+        "roster_owner_indices": [
+          7117
+        ],
+        "raw_payload_properties": {
+          "shapeName": "Piti",
+          "shapeISO": "",
+          "shapeID": "77769853B27536991093250",
+          "shapeGroup": "GUM",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 35021,
+        "family_index": 141,
+        "source_id": "gb:GUM:ADM2:77769853B33377803133936",
+        "roster_name": "Yigo",
+        "roster_owner_indices": [
+          7117
+        ],
+        "raw_payload_properties": {
+          "shapeName": "Yigo",
+          "shapeISO": "",
+          "shapeID": "77769853B33377803133936",
+          "shapeGroup": "GUM",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 35022,
+        "family_index": 141,
+        "source_id": "gb:GUM:ADM2:77769853B72833595516841",
+        "roster_name": "Yona",
+        "roster_owner_indices": [
+          7117
+        ],
+        "raw_payload_properties": {
+          "shapeName": "Yona",
+          "shapeISO": "",
+          "shapeID": "77769853B72833595516841",
+          "shapeGroup": "GUM",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 61268,
+        "family_index": 346,
+        "source_id": "gb:USA:ADM1:66186276B63361112364184",
+        "roster_name": "Guam",
+        "roster_owner_indices": [],
+        "raw_payload_properties": {
+          "shapeName": "Guam",
+          "shapeISO": "US-GU",
+          "shapeID": "66186276B63361112364184",
+          "shapeGroup": "USA",
+          "shapeType": "ADM1"
+        }
+      },
+      {
+        "source_index": 63645,
+        "family_index": 347,
+        "source_id": "gb:USA:ADM2:52423323B58805530467838",
+        "roster_name": "Guam",
+        "roster_owner_indices": [],
+        "raw_payload_properties": {
+          "shapeName": "Guam",
+          "shapeISO": "",
+          "shapeID": "52423323B58805530467838",
+          "shapeGroup": "USA",
+          "shapeType": "ADM2"
+        }
+      }
+    ],
+    "foreign_contact_summary": {
+      "source_index_61268": {
+        "family": 346,
+        "source_id": "gb:USA:ADM1:66186276B63361112364184",
+        "owners": [],
+        "matched_properties": {
+          "shapeName": "Guam",
+          "shapeISO": "US-GU",
+          "shapeID": "66186276B63361112364184",
+          "shapeGroup": "USA",
+          "shapeType": "ADM1"
+        }
+      },
+      "source_index_63645": {
+        "family": 347,
+        "source_id": "gb:USA:ADM2:52423323B58805530467838",
+        "owners": [],
+        "matched_properties": {
+          "shapeName": "Guam",
+          "shapeISO": "",
+          "shapeID": "52423323B58805530467838",
+          "shapeGroup": "USA",
+          "shapeType": "ADM2"
+        }
+      },
+      "interpretation": "Both foreign records are named Guam in source metadata; the retained owner roster arrays are empty. These records explain the selected foreign contacts, but do not establish whether they apply to any cell or that all competitors are represented."
+    }
+  }
+}

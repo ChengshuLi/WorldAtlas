@@ -1,0 +1,1804 @@
+{
+  "kind": "read-only-original-Korea-proposal-screen",
+  "accepted_head": "3b3e9e675cfb37999d5665438f9fbf25bbd4238b",
+  "queue_commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+  "source_packages": 644,
+  "physical_packages": 16,
+  "package": {
+    "package_id": "gb-KOR-ADM2--repair-evaluation",
+    "primary_source": "gb:KOR:ADM2",
+    "source_family_index": 183,
+    "category": "repair-evaluation",
+    "native_cells": 31206,
+    "land_cells": 31206,
+    "inland_water_cells": 0,
+    "source_relative_cells": 0,
+    "interval_segments": 9449,
+    "owners": [
+      24,
+      25,
+      26,
+      28,
+      30,
+      26617,
+      26622,
+      26625,
+      26629,
+      26630,
+      26631,
+      26632,
+      26637,
+      26638,
+      26639,
+      26642,
+      26645,
+      26652,
+      26653,
+      26656,
+      26657,
+      26660,
+      26672,
+      26673,
+      26677,
+      26680,
+      26684,
+      26686,
+      26690,
+      26693,
+      26696,
+      26697,
+      26700,
+      26701,
+      26705,
+      26707,
+      26712,
+      26713,
+      26718,
+      26719,
+      26720,
+      26728,
+      26729,
+      26731,
+      26732,
+      26735,
+      26736,
+      26737,
+      26738,
+      26739,
+      26745,
+      26749,
+      26751,
+      26752,
+      26753,
+      26758,
+      26759,
+      26762,
+      26765,
+      26766,
+      26767,
+      26768,
+      26769,
+      26770
+    ],
+    "source_features": [
+      41049,
+      41050,
+      41051,
+      41052,
+      41053,
+      41054,
+      41055,
+      41056,
+      41057,
+      41058,
+      41059,
+      41060,
+      41066,
+      41067,
+      41068,
+      41069,
+      41070,
+      41071,
+      41073,
+      41074,
+      41075,
+      41076,
+      41077,
+      41078,
+      41079,
+      41085,
+      41087,
+      41088,
+      41131,
+      41136,
+      41146,
+      41147,
+      41156,
+      41175,
+      41176,
+      41177,
+      41178,
+      41179,
+      41180,
+      41181,
+      41182,
+      41183,
+      41184,
+      41185,
+      41186,
+      41187,
+      41188,
+      41189,
+      41190,
+      41191,
+      41192,
+      41203,
+      41204,
+      41206,
+      41209,
+      41210,
+      41211,
+      41212,
+      41213,
+      41214,
+      41215,
+      41216,
+      41217,
+      41218,
+      41220,
+      41222,
+      41223,
+      41224,
+      41226,
+      41227,
+      41228,
+      41229,
+      41230,
+      41231,
+      41232,
+      41233,
+      41240,
+      41241,
+      41242,
+      41243,
+      41244,
+      41245,
+      41246,
+      41248,
+      41249,
+      41255,
+      41256,
+      41257,
+      41283,
+      41287,
+      41288,
+      41289,
+      41291,
+      41292,
+      41293
+    ],
+    "source_families": [
+      182,
+      183
+    ],
+    "native_blocks": [
+      24,
+      25
+    ],
+    "provinces": [
+      "framework:province:busan:ab3a002fd5bb",
+      "framework:province:gangwon:f03a1b4b1415",
+      "framework:province:gwangju:442ef0b1f925",
+      "framework:province:gyeonggi:cab3f1730e43",
+      "framework:province:incheon:67b65b635e5a",
+      "framework:province:jeju:344787fc3766",
+      "framework:province:north-gyeongsang:40073bf0ca17",
+      "framework:province:north-jeolla:1c4c69379989",
+      "framework:province:seoul:58f28921848c",
+      "framework:province:south-chungcheong:8232eef599ef",
+      "framework:province:south-gyeongsang:a5df06879297",
+      "framework:province:south-jeolla:26ae61db8c49",
+      "framework:province:ulsan:b9b11edfa612"
+    ],
+    "location_count": 64,
+    "source_feature_count": 95,
+    "locality_count": 13,
+    "cost": {
+      "primary_source_decoded_bytes": 890825,
+      "all_required_source_decoded_bytes": 1079711,
+      "primary_full_source_raster_measured_seconds": 0.287,
+      "source_interval_segments": 9449,
+      "maximum_native_rows_per_execution_frame": 4096,
+      "observed_global_census_peak_rss_bytes": 884973568
+    },
+    "evidence": {
+      "selection": "ownership-binding.json",
+      "lineage": "lineage.json",
+      "territorial_source_catalogue": "retained-source-catalogue.json",
+      "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "source_features": "source-feature-roster.json",
+      "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+      "physical": "physical-unassigned-summary.json",
+      "source_domain_transform": []
+    },
+    "work": {
+      "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+      "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+      "priority": 1
+    },
+    "execution": {
+      "command": "node source-batch-intervals.mjs gb-KOR-ADM2--repair-evaluation OUTPUT_DIRECTORY",
+      "output_columns": [
+        "y",
+        "start",
+        "end",
+        "candidate_owner_indices",
+        "source_feature_indices",
+        "physical_class"
+      ]
+    }
+  },
+  "measured_cells": 31206,
+  "measured_intervals": 9449,
+  "measured_owners": 64,
+  "physical_classes": {
+    "land": 31206
+  },
+  "accepted_cumulative_cells": 2209586,
+  "accepted_overlap_cells": 0,
+  "accepted_overlaps": [],
+  "owners": [
+    {
+      "id": "atlas:city:KOR-10",
+      "index": 24,
+      "bounds": [
+        224872.3039088889,
+        103505.21537912598,
+        225239.9189,
+        103833.07073101187
+      ],
+      "province_id": "framework:province:busan:ab3a002fd5bb",
+      "province_index": 1106,
+      "name": "Busan",
+      "reference_owner": "Republic of Korea",
+      "source_id": "atlas:city:KOR-10",
+      "location_basis": "Named metropolitan city; verified district membership",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B11476058556898",
+        "gb:KOR:ADM2:91817680B12008242239928",
+        "gb:KOR:ADM2:91817680B15590775835688",
+        "gb:KOR:ADM2:91817680B24548286345957",
+        "gb:KOR:ADM2:91817680B32751924176777",
+        "gb:KOR:ADM2:91817680B37722151409475",
+        "gb:KOR:ADM2:91817680B50207003035",
+        "gb:KOR:ADM2:91817680B54012703126739",
+        "gb:KOR:ADM2:91817680B55707549130569",
+        "gb:KOR:ADM2:91817680B63526671374694",
+        "gb:KOR:ADM2:91817680B65504384218086",
+        "gb:KOR:ADM2:91817680B8006777837161",
+        "gb:KOR:ADM2:91817680B85909931268472",
+        "gb:KOR:ADM2:91817680B87761816793360",
+        "gb:KOR:ADM2:91817680B90297389150949",
+        "gb:KOR:ADM2:91817680B91211823266814"
+      ],
+      "original_cells": 1091
+    },
+    {
+      "id": "atlas:city:KOR-11",
+      "index": 25,
+      "bounds": [
+        223401.91676833332,
+        101410.271590812,
+        223702.8979011111,
+        101663.43138259514
+      ],
+      "province_id": "framework:province:seoul:58f28921848c",
+      "province_index": 4179,
+      "name": "Seoul",
+      "reference_owner": "Republic of Korea",
+      "source_id": "atlas:city:KOR-11",
+      "location_basis": "Named metropolitan city; verified district membership",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B10131618900015",
+        "gb:KOR:ADM2:91817680B14643286354390",
+        "gb:KOR:ADM2:91817680B1968034056748",
+        "gb:KOR:ADM2:91817680B19736947579274",
+        "gb:KOR:ADM2:91817680B25965069984368",
+        "gb:KOR:ADM2:91817680B29418542168397",
+        "gb:KOR:ADM2:91817680B49246193334347",
+        "gb:KOR:ADM2:91817680B50347392057391",
+        "gb:KOR:ADM2:91817680B53321453404308",
+        "gb:KOR:ADM2:91817680B53616587081026",
+        "gb:KOR:ADM2:91817680B5490200958143",
+        "gb:KOR:ADM2:91817680B55050579859044",
+        "gb:KOR:ADM2:91817680B55576639555152",
+        "gb:KOR:ADM2:91817680B5725333816693",
+        "gb:KOR:ADM2:91817680B63185877293812",
+        "gb:KOR:ADM2:91817680B65126245655882",
+        "gb:KOR:ADM2:91817680B66829558888986",
+        "gb:KOR:ADM2:91817680B69479464976516",
+        "gb:KOR:ADM2:91817680B6950995223857",
+        "gb:KOR:ADM2:91817680B72690271662871",
+        "gb:KOR:ADM2:91817680B75936691302089",
+        "gb:KOR:ADM2:91817680B8017156108400",
+        "gb:KOR:ADM2:91817680B8309013283439",
+        "gb:KOR:ADM2:91817680B92844029998138",
+        "gb:KOR:ADM2:91817680B99536699865294"
+      ],
+      "original_cells": 7
+    },
+    {
+      "id": "atlas:city:KOR-12",
+      "index": 26,
+      "bounds": [
+        221830.81418944447,
+        101140.27929535533,
+        223413.13164722224,
+        101964.97445391683
+      ],
+      "province_id": "framework:province:incheon:67b65b635e5a",
+      "province_index": 2157,
+      "name": "Incheon",
+      "reference_owner": "Republic of Korea",
+      "source_id": "atlas:city:KOR-12",
+      "location_basis": "Named metropolitan city; verified district membership",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B14745943099772",
+        "gb:KOR:ADM2:91817680B16033238555875",
+        "gb:KOR:ADM2:91817680B24929628173287",
+        "gb:KOR:ADM2:91817680B43125449030549",
+        "gb:KOR:ADM2:91817680B43546326994356",
+        "gb:KOR:ADM2:91817680B45509654992593",
+        "gb:KOR:ADM2:91817680B54049766777888",
+        "gb:KOR:ADM2:91817680B6497324316239",
+        "gb:KOR:ADM2:91817680B73279111808647",
+        "gb:KOR:ADM2:91817680B94833670639499"
+      ],
+      "original_cells": 4319
+    },
+    {
+      "id": "atlas:city:KOR-18",
+      "index": 28,
+      "bounds": [
+        223318.60623944446,
+        103617.04379936076,
+        223583.17542777778,
+        103798.20802281202
+      ],
+      "province_id": "framework:province:gwangju:442ef0b1f925",
+      "province_index": 1940,
+      "name": "Gwangju",
+      "reference_owner": "Republic of Korea",
+      "source_id": "atlas:city:KOR-18",
+      "location_basis": "Named metropolitan city; verified district membership",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B16538338684661",
+        "gb:KOR:ADM2:91817680B68494559899558",
+        "gb:KOR:ADM2:91817680B75710427976091",
+        "gb:KOR:ADM2:91817680B87996420220515",
+        "gb:KOR:ADM2:91817680B89733153975870"
+      ],
+      "original_cells": 88
+    },
+    {
+      "id": "atlas:city:KOR-21",
+      "index": 30,
+      "bounds": [
+        225009.1399961111,
+        103206.99073908124,
+        225363.4282155556,
+        103555.9300209365
+      ],
+      "province_id": "framework:province:ulsan:b9b11edfa612",
+      "province_index": 4709,
+      "name": "Ulsan",
+      "reference_owner": "Republic of Korea",
+      "source_id": "atlas:city:KOR-21",
+      "location_basis": "Named metropolitan city; verified district membership",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B33034423068968",
+        "gb:KOR:ADM2:91817680B44823551048989",
+        "gb:KOR:ADM2:91817680B57927404517776",
+        "gb:KOR:ADM2:91817680B63178832268751",
+        "gb:KOR:ADM2:91817680B65451529480853"
+      ],
+      "original_cells": 276
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B11339106619066",
+      "index": 26617,
+      "bounds": [
+        224918.2557827778,
+        101618.85643395879,
+        225290.60432666668,
+        102010.32973897856
+      ],
+      "province_id": "framework:province:gangwon:f03a1b4b1415",
+      "province_index": 1783,
+      "name": "Samcheok-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B11339106619066"
+      ],
+      "original_cells": 51
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B14253606839965",
+      "index": 26622,
+      "bounds": [
+        223328.073345,
+        101132.51776084332,
+        223583.7580188889,
+        101412.66427481892
+      ],
+      "province_id": "framework:province:gyeonggi:cab3f1730e43",
+      "province_index": 1941,
+      "name": "Paju-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B14253606839965"
+      ],
+      "original_cells": 79
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B16002130574290",
+      "index": 26625,
+      "bounds": [
+        223697.36328555553,
+        103680.33352622022,
+        224004.461625,
+        103992.67447290827
+      ],
+      "province_id": "framework:province:south-jeolla:26ae61db8c49",
+      "province_index": 4336,
+      "name": "Suncheon-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B16002130574290"
+      ],
+      "original_cells": 28
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B1708787718818",
+      "index": 26629,
+      "bounds": [
+        224816.88492944444,
+        103496.10439258303,
+        225036.23048277778,
+        103710.17637870321
+      ],
+      "province_id": "framework:province:south-gyeongsang:a5df06879297",
+      "province_index": 4333,
+      "name": "Gimhae-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B1708787718818"
+      ],
+      "original_cells": 2
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B17319558643664",
+      "index": 26630,
+      "bounds": [
+        223991.57179666666,
+        103551.28861370523,
+        224255.77686555553,
+        103896.26125343896
+      ],
+      "province_id": "framework:province:south-gyeongsang:a5df06879297",
+      "province_index": 4333,
+      "name": "Hadong-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B17319558643664"
+      ],
+      "original_cells": 63
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B20286966250971",
+      "index": 26631,
+      "bounds": [
+        223020.1739427778,
+        103714.3623033501,
+        223250.66155111114,
+        104055.54967256292
+      ],
+      "province_id": "framework:province:south-jeolla:26ae61db8c49",
+      "province_index": 4336,
+      "name": "Muan-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B20286966250971"
+      ],
+      "original_cells": 617
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B21216327036282",
+      "index": 26632,
+      "bounds": [
+        224995.95887222223,
+        101496.53927174251,
+        225147.9423283333,
+        101660.68068059237
+      ],
+      "province_id": "framework:province:gangwon:f03a1b4b1415",
+      "province_index": 1783,
+      "name": "Donghae-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B21216327036282"
+      ],
+      "original_cells": 209
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B26152541530210",
+      "index": 26637,
+      "bounds": [
+        224549.25713777775,
+        103497.26566081066,
+        224906.38548888892,
+        103793.84900813829
+      ],
+      "province_id": "framework:province:south-gyeongsang:a5df06879297",
+      "province_index": 4333,
+      "name": "Changwon-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B26152541530210"
+      ],
+      "original_cells": 524
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B26607970527366",
+      "index": 26638,
+      "bounds": [
+        223100.20739666666,
+        103982.2048009796,
+        223182.20709555555,
+        104037.28685006393
+      ],
+      "province_id": "framework:province:south-jeolla:26ae61db8c49",
+      "province_index": 4336,
+      "name": "Mokpo-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B26607970527366"
+      ],
+      "original_cells": 516
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B27152027053647",
+      "index": 26639,
+      "bounds": [
+        223551.7883316667,
+        103857.51801621943,
+        223875.56334166665,
+        104158.48097052328
+      ],
+      "province_id": "framework:province:south-jeolla:26ae61db8c49",
+      "province_index": 4336,
+      "name": "Boseong-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B27152027053647"
+      ],
+      "original_cells": 63
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B29624883381183",
+      "index": 26642,
+      "bounds": [
+        222966.72120833333,
+        105108.89378754713,
+        223546.32653999998,
+        105363.0499430054
+      ],
+      "province_id": "framework:province:jeju:344787fc3766",
+      "province_index": 2225,
+      "name": "Jeju-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B29624883381183"
+      ],
+      "original_cells": 357
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B30407776748413",
+      "index": 26645,
+      "bounds": [
+        224160.96016222224,
+        103892.97421015393,
+        224355.61841722223,
+        104107.21055388723
+      ],
+      "province_id": "framework:province:south-gyeongsang:a5df06879297",
+      "province_index": 4333,
+      "name": "Namhae-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B30407776748413"
+      ],
+      "original_cells": 533
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B35753357340942",
+      "index": 26652,
+      "bounds": [
+        223349.11944888887,
+        103030.17294904088,
+        223637.57487277777,
+        103248.325721086
+      ],
+      "province_id": "framework:province:north-jeolla:1c4c69379989",
+      "province_index": 3335,
+      "name": "Gimje-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B35753357340942"
+      ],
+      "original_cells": 23
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B36456413113015",
+      "index": 26653,
+      "bounds": [
+        223105.0137733333,
+        103894.57333081825,
+        223471.09946277775,
+        104135.5509655738
+      ],
+      "province_id": "framework:province:south-jeolla:26ae61db8c49",
+      "province_index": 4336,
+      "name": "Yeongam-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B36456413113015"
+      ],
+      "original_cells": 34
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B37660936440541",
+      "index": 26656,
+      "bounds": [
+        223324.8690938889,
+        104035.60218530963,
+        223484.062115,
+        104338.30853200305
+      ],
+      "province_id": "framework:province:south-jeolla:26ae61db8c49",
+      "province_index": 4336,
+      "name": "Gangjin-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B37660936440541"
+      ],
+      "original_cells": 97
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B37911583032119",
+      "index": 26657,
+      "bounds": [
+        223344.24024833334,
+        101627.20497539498,
+        223481.80457444445,
+        101762.20029276577
+      ],
+      "province_id": "framework:province:gyeonggi:cab3f1730e43",
+      "province_index": 1941,
+      "name": "Siheung-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B37911583032119"
+      ],
+      "original_cells": 1
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B39459501575733",
+      "index": 26660,
+      "bounds": [
+        223238.57278555553,
+        101707.15275291733,
+        223530.15963666665,
+        101865.94735221924
+      ],
+      "province_id": "framework:province:gyeonggi:cab3f1730e43",
+      "province_index": 1941,
+      "name": "Ansan-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B39459501575733"
+      ],
+      "original_cells": 378
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B43357769940671",
+      "index": 26672,
+      "bounds": [
+        223174.92470666667,
+        102347.60159281602,
+        223410.1458677778,
+        102542.70317552175
+      ],
+      "province_id": "framework:province:south-chungcheong:8232eef599ef",
+      "province_index": 4324,
+      "name": "Hongseong-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B43357769940671"
+      ],
+      "original_cells": 20
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B43621567480447",
+      "index": 26673,
+      "bounds": [
+        224607.07930555556,
+        100928.73652260812,
+        224738.74489666667,
+        101018.6721724331
+      ],
+      "province_id": "framework:province:gangwon:f03a1b4b1415",
+      "province_index": 1783,
+      "name": "Sokcho-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B43621567480447"
+      ],
+      "original_cells": 48
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B44911241756091",
+      "index": 26677,
+      "bounds": [
+        223181.77015222225,
+        103135.56207416189,
+        223452.01960388888,
+        103333.87873248465
+      ],
+      "province_id": "framework:province:north-jeolla:1c4c69379989",
+      "province_index": 3335,
+      "name": "Buan-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B44911241756091"
+      ],
+      "original_cells": 19
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B46467557111645",
+      "index": 26680,
+      "bounds": [
+        222186.63171055555,
+        103716.76687414582,
+        223112.15051444448,
+        104689.88938544324
+      ],
+      "province_id": "framework:province:south-jeolla:26ae61db8c49",
+      "province_index": 4336,
+      "name": "Sinan-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B46467557111645"
+      ],
+      "original_cells": 3011
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B48442195707238",
+      "index": 26684,
+      "bounds": [
+        225015.9126177778,
+        102655.78038488478,
+        225447.685455,
+        103099.10231561033
+      ],
+      "province_id": "framework:province:north-gyeongsang:40073bf0ca17",
+      "province_index": 3332,
+      "name": "Pohang-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B48442195707238"
+      ],
+      "original_cells": 131
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B50485812736392",
+      "index": 26686,
+      "bounds": [
+        224456.1882077778,
+        100569.55784578666,
+        224727.74848944444,
+        100952.3666528366
+      ],
+      "province_id": "framework:province:gangwon:f03a1b4b1415",
+      "province_index": 1783,
+      "name": "Goseong-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B50485812736392"
+      ],
+      "original_cells": 51
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B51344731064077",
+      "index": 26690,
+      "bounds": [
+        223075.15597888888,
+        102889.41073903833,
+        223509.69612388886,
+        103202.77520097217
+      ],
+      "province_id": "framework:province:north-jeolla:1c4c69379989",
+      "province_index": 3335,
+      "name": "Gunsan-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B51344731064077"
+      ],
+      "original_cells": 178
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B5353031397212",
+      "index": 26693,
+      "bounds": [
+        225007.9748138889,
+        102886.79805955887,
+        225396.78155666668,
+        103273.24070245257
+      ],
+      "province_id": "framework:province:north-gyeongsang:40073bf0ca17",
+      "province_index": 3332,
+      "name": "Gyeongju-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B5353031397212"
+      ],
+      "original_cells": 26
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B56099735913612",
+      "index": 26696,
+      "bounds": [
+        222778.03451222225,
+        104217.0571855644,
+        223118.99595999997,
+        104535.49068722097
+      ],
+      "province_id": "framework:province:south-jeolla:26ae61db8c49",
+      "province_index": 4336,
+      "name": "Jindo-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B56099735913612"
+      ],
+      "original_cells": 729
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B56248521536513",
+      "index": 26697,
+      "bounds": [
+        223445.6111016667,
+        102107.96640316136,
+        223660.2959261111,
+        102366.75503761946
+      ],
+      "province_id": "framework:province:south-chungcheong:8232eef599ef",
+      "province_index": 4324,
+      "name": "Asan-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B56248521536513"
+      ],
+      "original_cells": 18
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B58085958229296",
+      "index": 26700,
+      "bounds": [
+        223325.37886111112,
+        101787.83137484481,
+        223686.0755827778,
+        102045.89962180848
+      ],
+      "province_id": "framework:province:gyeonggi:cab3f1730e43",
+      "province_index": 1941,
+      "name": "Hwaseong-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B58085958229296"
+      ],
+      "original_cells": 250
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B58127051569150",
+      "index": 26701,
+      "bounds": [
+        224643.2727783333,
+        103807.3699970349,
+        224839.8972783333,
+        104107.21055388723
+      ],
+      "province_id": "framework:province:south-gyeongsang:a5df06879297",
+      "province_index": 4333,
+      "name": "Geoje-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B58127051569150"
+      ],
+      "original_cells": 2058
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B59614790278386",
+      "index": 26705,
+      "bounds": [
+        222926.15830222223,
+        102075.80068452841,
+        223155.84484777777,
+        102577.91229510237
+      ],
+      "province_id": "framework:province:south-chungcheong:8232eef599ef",
+      "province_index": 4324,
+      "name": "Taean-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B59614790278386"
+      ],
+      "original_cells": 807
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B60871253292980",
+      "index": 26707,
+      "bounds": [
+        223081.1275377778,
+        102036.59849200604,
+        223322.61155333335,
+        102411.75859817743
+      ],
+      "province_id": "framework:province:south-chungcheong:8232eef599ef",
+      "province_index": 4324,
+      "name": "Seosan-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B60871253292980"
+      ],
+      "original_cells": 156
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B6691327376510",
+      "index": 26712,
+      "bounds": [
+        223205.0009727778,
+        102779.23418502515,
+        223473.57547499996,
+        102955.50652758914
+      ],
+      "province_id": "framework:province:south-chungcheong:8232eef599ef",
+      "province_index": 4324,
+      "name": "Seocheon-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B6691327376510"
+      ],
+      "original_cells": 32
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B67324121140218",
+      "index": 26713,
+      "bounds": [
+        223426.4584188889,
+        103965.69871041861,
+        223609.1007322222,
+        104338.30853200305
+      ],
+      "province_id": "framework:province:south-jeolla:26ae61db8c49",
+      "province_index": 4336,
+      "name": "Jangheung-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B67324121140218"
+      ],
+      "original_cells": 214
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B720891985776",
+      "index": 26718,
+      "bounds": [
+        223152.4949488889,
+        101986.88011213424,
+        223470.07992833332,
+        102272.57118660226
+      ],
+      "province_id": "framework:province:south-chungcheong:8232eef599ef",
+      "province_index": 4324,
+      "name": "Dangjin-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B720891985776"
+      ],
+      "original_cells": 262
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B73346878676901",
+      "index": 26719,
+      "bounds": [
+        223653.37765666668,
+        100823.18018736197,
+        224011.37989444443,
+        101048.65497950892
+      ],
+      "province_id": "framework:province:gangwon:f03a1b4b1415",
+      "province_index": 1783,
+      "name": "Cheorwon-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B73346878676901"
+      ],
+      "original_cells": 63
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B73468302874709",
+      "index": 26720,
+      "bounds": [
+        223158.53933166666,
+        103331.72995967531,
+        223407.74267944446,
+        103571.01253334616
+      ],
+      "province_id": "framework:province:north-jeolla:1c4c69379989",
+      "province_index": 3335,
+      "name": "Gochang-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B73468302874709"
+      ],
+      "original_cells": 252
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B75900877128055",
+      "index": 26728,
+      "bounds": [
+        224212.15535611112,
+        103707.86065694725,
+        224429.6074883333,
+        103910.56260740315
+      ],
+      "province_id": "framework:province:south-gyeongsang:a5df06879297",
+      "province_index": 4333,
+      "name": "Sacheon-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B75900877128055"
+      ],
+      "original_cells": 201
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B78599330358722",
+      "index": 26729,
+      "bounds": [
+        223641.87148222222,
+        103992.67447290827,
+        223960.25752444443,
+        104392.50664064745
+      ],
+      "province_id": "framework:province:south-jeolla:26ae61db8c49",
+      "province_index": 4336,
+      "name": "Goheung-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B78599330358722"
+      ],
+      "original_cells": 1623
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B78801700081843",
+      "index": 26731,
+      "bounds": [
+        223121.61762,
+        102482.38124588468,
+        223380.57936888887,
+        102799.89408679225
+      ],
+      "province_id": "framework:province:south-chungcheong:8232eef599ef",
+      "province_index": 4324,
+      "name": "Boryeong-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B78801700081843"
+      ],
+      "original_cells": 748
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B7912985797785",
+      "index": 26732,
+      "bounds": [
+        223112.95157722218,
+        103633.98591367377,
+        223332.36995444447,
+        103871.38264406512
+      ],
+      "province_id": "framework:province:south-jeolla:26ae61db8c49",
+      "province_index": 4336,
+      "name": "Hampyeong-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B7912985797785"
+      ],
+      "original_cells": 87
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B8449507929864",
+      "index": 26735,
+      "bounds": [
+        223488.14025277778,
+        102339.4302796087,
+        223777.32391555555,
+        102705.29622410351
+      ],
+      "province_id": "framework:province:south-chungcheong:8232eef599ef",
+      "province_index": 4324,
+      "name": "Gongju-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B8449507929864"
+      ],
+      "original_cells": 12
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B85110926045998",
+      "index": 26736,
+      "bounds": [
+        222967.595095,
+        105186.3739644243,
+        223513.77426166667,
+        105431.91720075831
+      ],
+      "province_id": "framework:province:jeju:344787fc3766",
+      "province_index": 2225,
+      "name": "Seogwipo-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B85110926045998"
+      ],
+      "original_cells": 169
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B85222249357664",
+      "index": 26737,
+      "bounds": [
+        223209.15193444447,
+        104321.35241702214,
+        223634.73474111108,
+        104620.07577306558
+      ],
+      "province_id": "framework:province:south-jeolla:26ae61db8c49",
+      "province_index": 4336,
+      "name": "Wando-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B85222249357664"
+      ],
+      "original_cells": 3379
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B85680883794904",
+      "index": 26738,
+      "bounds": [
+        223422.74440055556,
+        101919.58942037218,
+        223683.52674666664,
+        102135.56419320569
+      ],
+      "province_id": "framework:province:gyeonggi:cab3f1730e43",
+      "province_index": 1941,
+      "name": "Pyeongtaek-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B85680883794904"
+      ],
+      "original_cells": 6
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B86395324328742",
+      "index": 26739,
+      "bounds": [
+        223895.22579166666,
+        100811.34337232515,
+        224232.54604500002,
+        101131.22408535551
+      ],
+      "province_id": "framework:province:gangwon:f03a1b4b1415",
+      "province_index": 1783,
+      "name": "Hwacheon-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B86395324328742"
+      ],
+      "original_cells": 3
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B88731995383072",
+      "index": 26745,
+      "bounds": [
+        225091.21251888887,
+        101912.37255536663,
+        225373.18661666664,
+        102365.93817319049
+      ],
+      "province_id": "framework:province:gangwon:f03a1b4b1415",
+      "province_index": 1783,
+      "name": "Uljin-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B88731995383072"
+      ],
+      "original_cells": 212
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B8944082307158",
+      "index": 26749,
+      "bounds": [
+        223730.8622744445,
+        103935.6942132002,
+        224170.7913872222,
+        104725.47442685744
+      ],
+      "province_id": "framework:province:south-jeolla:26ae61db8c49",
+      "province_index": 4336,
+      "name": "Yeosu-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B8944082307158"
+      ],
+      "original_cells": 2777
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B91067436457746",
+      "index": 26751,
+      "bounds": [
+        225132.72213555555,
+        102345.33187945031,
+        225349.59167666672,
+        102712.16063921242
+      ],
+      "province_id": "framework:province:north-gyeongsang:40073bf0ca17",
+      "province_index": 3332,
+      "name": "Yeongdeok-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B91067436457746"
+      ],
+      "original_cells": 29
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B915295689263",
+      "index": 26752,
+      "bounds": [
+        223273.018485,
+        103414.41131301757,
+        223521.71206555556,
+        103681.22453569011
+      ],
+      "province_id": "framework:province:south-jeolla:26ae61db8c49",
+      "province_index": 4336,
+      "name": "Jangseong-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B915295689263"
+      ],
+      "original_cells": 28
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B91736183236009",
+      "index": 26753,
+      "bounds": [
+        224069.0564144444,
+        103033.3198106599,
+        224365.95940944442,
+        103387.66661629947
+      ],
+      "province_id": "framework:province:south-gyeongsang:a5df06879297",
+      "province_index": 4333,
+      "name": "Geochang-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B91736183236009"
+      ],
+      "original_cells": 1
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B93241302453804",
+      "index": 26758,
+      "bounds": [
+        223212.5018333333,
+        101328.31751945335,
+        223425.8030038889,
+        101516.94064571672
+      ],
+      "province_id": "framework:province:gyeonggi:cab3f1730e43",
+      "province_index": 1941,
+      "name": "Gimpo-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B93241302453804"
+      ],
+      "original_cells": 64
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B93885607227135",
+      "index": 26759,
+      "bounds": [
+        223028.62151388888,
+        104054.6632330429,
+        223370.6024961111,
+        104465.79621395165
+      ],
+      "province_id": "framework:province:south-jeolla:26ae61db8c49",
+      "province_index": 4336,
+      "name": "Haenam-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B93885607227135"
+      ],
+      "original_cells": 435
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B95262291256995",
+      "index": 26762,
+      "bounds": [
+        224420.94144555557,
+        103869.51640566623,
+        224668.90678722222,
+        104178.04106488472
+      ],
+      "province_id": "framework:province:south-gyeongsang:a5df06879297",
+      "province_index": 4333,
+      "name": "Tongyeong-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B95262291256995"
+      ],
+      "original_cells": 2972
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B97433571779884",
+      "index": 26765,
+      "bounds": [
+        224376.8829927778,
+        103731.10358526852,
+        224655.58001555555,
+        103936.49330945265
+      ],
+      "province_id": "framework:province:south-gyeongsang:a5df06879297",
+      "province_index": 4333,
+      "name": "Goseong-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B97433571779884"
+      ],
+      "original_cells": 520
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B98224083425041",
+      "index": 26766,
+      "bounds": [
+        223431.7745627778,
+        100855.84797487824,
+        223708.28686888886,
+        101193.66197493605
+      ],
+      "province_id": "framework:province:gyeonggi:cab3f1730e43",
+      "province_index": 1941,
+      "name": "Yeoncheon-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B98224083425041"
+      ],
+      "original_cells": 68
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B98862203953263",
+      "index": 26767,
+      "bounds": [
+        226327.54368055557,
+        101551.48045600708,
+        226419.95719555556,
+        101632.43376418012
+      ],
+      "province_id": "framework:province:north-gyeongsang:40073bf0ca17",
+      "province_index": 3332,
+      "name": "Ulleung-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B98862203953263"
+      ],
+      "original_cells": 32
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B99071511370380",
+      "index": 26768,
+      "bounds": [
+        223957.19892111112,
+        103684.6102717,
+        224145.52149777778,
+        103945.10523569901
+      ],
+      "province_id": "framework:province:south-jeolla:26ae61db8c49",
+      "province_index": 4336,
+      "name": "Gwangyang-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B99071511370380"
+      ],
+      "original_cells": 40
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B99242230797556",
+      "index": 26769,
+      "bounds": [
+        224721.63128277782,
+        101203.53963090984,
+        225073.58913777777,
+        101591.87727602985
+      ],
+      "province_id": "framework:province:gangwon:f03a1b4b1415",
+      "province_index": 1783,
+      "name": "Gangneung-si",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B99242230797556"
+      ],
+      "original_cells": 106
+    },
+    {
+      "id": "gb:KOR:ADM2:91817680B9940099959324",
+      "index": 26770,
+      "bounds": [
+        224597.17525666664,
+        100982.93454599754,
+        224881.91666222227,
+        101260.28523770324
+      ],
+      "province_id": "framework:province:gangwon:f03a1b4b1415",
+      "province_index": 1783,
+      "name": "Yangyang-gun",
+      "reference_owner": "Republic of Korea",
+      "source_id": "gb:KOR:ADM2",
+      "source_atoms": [
+        "gb:KOR:ADM2:91817680B9940099959324"
+      ],
+      "original_cells": 13
+    }
+  ],
+  "complete_declared_source_checks": [
+    {
+      "key": "gb:KOR:ADM1",
+      "feature_count": 17,
+      "advertised_feature_count": 17,
+      "original_bytes": 188886,
+      "original_sha256": "7d774c8bb1ee65dde693431985423616fd059ffbe1c1bb497b5fed4f47bcac01",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KOR/ADM1/geoBoundaries-KOR-ADM1_simplified.geojson",
+      "recorded_license": "Public Domain",
+      "source_represented_year_claim": "2021"
+    },
+    {
+      "key": "gb:KOR:ADM2",
+      "feature_count": 228,
+      "advertised_feature_count": 229,
+      "original_bytes": 890825,
+      "original_sha256": "06d1b604a843b5cc8b7adb6483ca0e2fbf4fe5cbbd8d3633ebe0c6e1df01119f",
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KOR/ADM2/geoBoundaries-KOR-ADM2_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 3.0 License",
+      "source_represented_year_claim": "2020"
+    }
+  ],
+  "open_issue_count": 859,
+  "open_pr_count": 76,
+  "potential_scope_matches": [
+    {
+      "kind": "issue",
+      "number": 347,
+      "title": "Review Northeast China interior batch 1: Heilongjiang, Jilin, Liaoning",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/347",
+      "subject_matches": [],
+      "package_literal": false,
+      "country_text": true
+    },
+    {
+      "kind": "issue",
+      "number": 223,
+      "title": "Integrate and certify complete regional branch: Korean Peninsula",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/223",
+      "subject_matches": [],
+      "package_literal": false,
+      "country_text": true
+    },
+    {
+      "kind": "issue",
+      "number": 222,
+      "title": "Review Korean Peninsula interior batch 2: Korea",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/222",
+      "subject_matches": [
+        "atlas:city:KOR-10",
+        "atlas:city:KOR-21",
+        "gb:KOR:ADM2:91817680B11339106619066",
+        "gb:KOR:ADM2:91817680B14253606839965",
+        "gb:KOR:ADM2:91817680B1708787718818",
+        "gb:KOR:ADM2:91817680B17319558643664",
+        "gb:KOR:ADM2:91817680B21216327036282",
+        "gb:KOR:ADM2:91817680B26152541530210",
+        "gb:KOR:ADM2:91817680B30407776748413",
+        "gb:KOR:ADM2:91817680B35753357340942",
+        "gb:KOR:ADM2:91817680B37911583032119",
+        "gb:KOR:ADM2:91817680B39459501575733",
+        "gb:KOR:ADM2:91817680B43621567480447",
+        "gb:KOR:ADM2:91817680B44911241756091",
+        "gb:KOR:ADM2:91817680B48442195707238",
+        "gb:KOR:ADM2:91817680B50485812736392",
+        "gb:KOR:ADM2:91817680B51344731064077",
+        "gb:KOR:ADM2:91817680B5353031397212",
+        "gb:KOR:ADM2:91817680B58085958229296",
+        "gb:KOR:ADM2:91817680B58127051569150",
+        "gb:KOR:ADM2:91817680B73346878676901",
+        "gb:KOR:ADM2:91817680B73468302874709",
+        "gb:KOR:ADM2:91817680B75900877128055",
+        "gb:KOR:ADM2:91817680B85680883794904",
+        "gb:KOR:ADM2:91817680B86395324328742",
+        "gb:KOR:ADM2:91817680B88731995383072",
+        "gb:KOR:ADM2:91817680B91067436457746",
+        "gb:KOR:ADM2:91817680B91736183236009",
+        "gb:KOR:ADM2:91817680B93241302453804",
+        "gb:KOR:ADM2:91817680B95262291256995",
+        "gb:KOR:ADM2:91817680B97433571779884",
+        "gb:KOR:ADM2:91817680B98224083425041",
+        "gb:KOR:ADM2:91817680B98862203953263",
+        "gb:KOR:ADM2:91817680B99242230797556",
+        "gb:KOR:ADM2:91817680B9940099959324"
+      ],
+      "package_literal": false,
+      "country_text": true
+    },
+    {
+      "kind": "issue",
+      "number": 221,
+      "title": "Review Korean Peninsula interior batch 1: Korea",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/221",
+      "subject_matches": [
+        "atlas:city:KOR-11",
+        "atlas:city:KOR-12",
+        "atlas:city:KOR-18",
+        "gb:KOR:ADM2:91817680B16002130574290",
+        "gb:KOR:ADM2:91817680B20286966250971",
+        "gb:KOR:ADM2:91817680B26607970527366",
+        "gb:KOR:ADM2:91817680B27152027053647",
+        "gb:KOR:ADM2:91817680B29624883381183",
+        "gb:KOR:ADM2:91817680B36456413113015",
+        "gb:KOR:ADM2:91817680B37660936440541",
+        "gb:KOR:ADM2:91817680B43357769940671",
+        "gb:KOR:ADM2:91817680B46467557111645",
+        "gb:KOR:ADM2:91817680B56099735913612",
+        "gb:KOR:ADM2:91817680B56248521536513",
+        "gb:KOR:ADM2:91817680B59614790278386",
+        "gb:KOR:ADM2:91817680B60871253292980",
+        "gb:KOR:ADM2:91817680B6691327376510",
+        "gb:KOR:ADM2:91817680B67324121140218",
+        "gb:KOR:ADM2:91817680B720891985776",
+        "gb:KOR:ADM2:91817680B78599330358722",
+        "gb:KOR:ADM2:91817680B78801700081843",
+        "gb:KOR:ADM2:91817680B7912985797785",
+        "gb:KOR:ADM2:91817680B8449507929864",
+        "gb:KOR:ADM2:91817680B85110926045998",
+        "gb:KOR:ADM2:91817680B85222249357664",
+        "gb:KOR:ADM2:91817680B8944082307158",
+        "gb:KOR:ADM2:91817680B915295689263",
+        "gb:KOR:ADM2:91817680B93885607227135",
+        "gb:KOR:ADM2:91817680B99071511370380"
+      ],
+      "package_literal": false,
+      "country_text": true
+    },
+    {
+      "kind": "issue",
+      "number": 220,
+      "title": "Complete regional geography audit: Korean Peninsula",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/220",
+      "subject_matches": [],
+      "package_literal": false,
+      "country_text": true
+    }
+  ],
+  "inputs": [
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "bytes": 1754890,
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-package-queue.json",
+      "bytes": 3259790,
+      "sha256": "3ccb2d5ef10ea9b7501784b44c7c0ea783df346009dfbb2cc9189a147b9df2f0"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "bytes": 1844315,
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json",
+      "bytes": 120963,
+      "sha256": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-unassigned-summary.json",
+      "bytes": 154672,
+      "sha256": "a82c56c1d92ff52c0b0e52c9bf329905a05bace4b6a27c12771509d419888501"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+      "bytes": 4404456,
+      "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-024.json.gz",
+      "bytes": 725013,
+      "sha256": "29707fb31f48406c8972e2532f2ce9b437d092d5a93fb9e44f41b27f5186140d",
+      "decoded_bytes": 5163894,
+      "decoded_sha256": "d0a634d49383afb6a794d02521d9e0b6200aae6d3e951e0c7532bff281c2e8ce"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-024.json.gz",
+      "bytes": 573670,
+      "sha256": "6bd541316430926a198355faa17e934aa5e1bf23962bc5e433607450122b5679",
+      "decoded_bytes": 2688050,
+      "decoded_sha256": "dbcb2f58c81adcaf1aa3aa2d0bbaa6cc185939683bed053bac2d5287b4836665"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-024.json.gz",
+      "bytes": 35756,
+      "sha256": "4808672fac8b42ca9ce7b29a1528dbb8abaeb65d43f9754079ab20afd18a2729",
+      "decoded_bytes": 236242,
+      "decoded_sha256": "471189001084221221a7caeec61a9609d4fadd650ea1a53b45e93d20bca5bb15"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-025.json.gz",
+      "bytes": 463017,
+      "sha256": "3949a150d960a3bb0591f2d76d1752532f0dd5e5001909748ad2a58322efa76e",
+      "decoded_bytes": 3239363,
+      "decoded_sha256": "b548fbad4cfca8501ea11bab96897a0941411fc04e60575bab38e25ba13f2b48"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-025.json.gz",
+      "bytes": 401770,
+      "sha256": "28caabab2857b01a6191637b690e2b0d128bac8b3e2ba45aaae0e5ee44072b44",
+      "decoded_bytes": 1909434,
+      "decoded_sha256": "505a4feee9ae726db0334f6cb6e6b26cf749668de30ecc31f9dfca99a501148f"
+    },
+    {
+      "commit": "b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-025.json.gz",
+      "bytes": 258,
+      "sha256": "6c0ec3db20bf6278b142e7df333e1f864b7d4850810cf6cad8eaef832ec38aec",
+      "decoded_bytes": 1006,
+      "decoded_sha256": "81e61e62d48e929dca3506db5222bfd085bdc459183b09ab5a1a5e86662fadfb"
+    },
+    {
+      "commit": "3b3e9e675cfb37999d5665438f9fbf25bbd4238b",
+      "path": "data/ownership-selection.json",
+      "bytes": 1850,
+      "sha256": "73cd741bc51a43faeda36cf8e034f3c49caf45ca7f7c60e042569551f4bb2716"
+    },
+    {
+      "commit": "3b3e9e675cfb37999d5665438f9fbf25bbd4238b",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/ownership-selection-greenland-current.json",
+      "bytes": 3484,
+      "sha256": "6b65c91bfd633d0a8b275ef8c7a13890349e366d4c77053f8bad9b3f3d0c8ac8"
+    },
+    {
+      "commit": "c8a5133bc78923b8ca78c6feeb992b87ceaa8c17",
+      "bytes": 12708346,
+      "git_blob_oid": "df3c7f8efa3c0d694e4b0629b9486e09dbe294c5",
+      "mode": "100644",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/composition-current-001/patch.json",
+      "sha256": "bb62deda4e1bf4b2d51a08baf6503b21ed13e54a9f1cf03e7c52e408b3518643"
+    },
+    {
+      "commit": "3b3e9e675cfb37999d5665438f9fbf25bbd4238b",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    {
+      "commit": "3b3e9e675cfb37999d5665438f9fbf25bbd4238b",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-KOR-ADM1-000.bin.gz",
+      "bytes": 65165,
+      "sha256": "701a522680965eb0237dda5bc82f43df98aac237fd1c80a1dba264decee53148",
+      "decoded_bytes": 188886,
+      "decoded_sha256": "7d774c8bb1ee65dde693431985423616fd059ffbe1c1bb497b5fed4f47bcac01"
+    },
+    {
+      "commit": "3b3e9e675cfb37999d5665438f9fbf25bbd4238b",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-KOR-ADM2-000.bin.gz",
+      "bytes": 216472,
+      "sha256": "f8f1e89f4ed1bafb9d50925404daae3aabd3be73011750b08c5e0a72069e7f90",
+      "decoded_bytes": 890825,
+      "decoded_sha256": "06d1b604a843b5cc8b7adb6483ca0e2fbf4fe5cbbd8d3633ebe0c6e1df01119f"
+    }
+  ],
+  "transport": {
+    "path": "original-intervals.json.gz",
+    "bytes": 52954,
+    "sha256": "de7061d0220a60cf5da9819e7858b0dcea61572bedda5aa314a58b07401f235f"
+  },
+  "limits": [
+    "No claim or scientific qualification has been made.",
+    "Original queue owner mapping is only the frozen requested scope; complete ownerless foreign originals must be tested separately.",
+    "Current source authority, actual construction intent and unresolved obligations still require substantive review."
+  ]
+}

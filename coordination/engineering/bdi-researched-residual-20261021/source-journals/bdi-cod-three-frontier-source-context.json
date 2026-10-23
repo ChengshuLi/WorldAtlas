@@ -1,0 +1,61 @@
+{
+  "scope": "Bounded primary boundary-source check for the exact three held COD-contact keys in the BDI package. No geometry or producer was rerun.",
+  "checked_at": "2026-10-21",
+  "keys": [
+    {
+      "x": 152388,
+      "y": 133327,
+      "latitude": -3.0806076822523325,
+      "longitude": 29.256196455681,
+      "source_owner_index": 9001,
+      "physical_class": "land"
+    },
+    {
+      "x": 152389,
+      "y": 133323,
+      "latitude": -3.075122902449578,
+      "longitude": 29.257569631455,
+      "source_owner_index": 9001,
+      "physical_class": "land"
+    },
+    {
+      "x": 152240,
+      "y": 133142,
+      "latitude": -2.826907874256714,
+      "longitude": 29.052966441110,
+      "source_owner_index": 9047,
+      "physical_class": "land"
+    }
+  ],
+  "coordinate_binding": {
+    "latitude_source": "inventory/bdi-selected-owner-observation.json; existing original observation only",
+    "longitude_formula": "((x + 0.5) / 262166 * 360) - 180, the original native-center mapping supplied by root",
+    "calculation_scope": "Coordinate conversion only; no source/physical/ownership test or geometry operation."
+  },
+  "retained_contact": {
+    "source_feature_id": "gb:COD:ADM1:28894549B54646848790483",
+    "source_feature_name": "South Kivu",
+    "contact_count": 3,
+    "source_family": "COD ADM1"
+  },
+  "primary_cartographic_boundary_record": {
+    "title": "Burundi – Democratic Republic of the Congo (Zaire) Boundary, International Boundary Study No. 48",
+    "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs048.pdf",
+    "publisher_authorship": "The Geographer, Office of the Geographer, Bureau of Intelligence and Research, U.S. Department of State",
+    "date": "1965-04-30",
+    "relevant_pages": [2, 3, 4, 5, 6],
+    "findings": [
+      "The report describes the northern land segment as following the thalweg of the Rusizi/Ruzizi and its Rusizi Rutoya (Petite Ruzizi) branch, from Lake Tanganyika toward the Rwanda tripoint.",
+      "It attributes the present Burundi–Congo boundary to the Belgium–Germany convention of 1910, ratifications exchanged in 1911, and cites a 1911 demarcation protocol approved by 1912 notes.",
+      "It states that no official boundary area was then known to be disputed, while noting recent unofficial Congolese claims concerning the delta between the Rusizi Rutoya and Rusizi."
+    ],
+    "cartographic_references_named_by_report": [
+      "Ruanda–Urundi map sheets published 1937 at 1:200,000",
+      "Ruanda–Urundi map sheets published 1936 at 1:100,000",
+      "Rwanda and Burundi Series 1301, Edition 2, published 1964 at 1:500,000"
+    ],
+    "limits": "This is a State Department boundary study that quotes or cites historical instruments; it is not itself the signed 1910 convention, and its named maps are historical regional sheets. It gives no surveyed coordinates for these three modern raster-cell centers and does not establish which side of the thalweg any center lies on. Its historical statement about unofficial delta claims is not a finding that these three points fall within that claimed delta."
+  },
+  "interpretation": "The primary study supplies relevant historical legal/cartographic context for the South Kivu contact corridor and identifies a thalweg-based boundary plus a localized delta claim. The exact three retained cells are land-class centers with COD ADM1 contact; the report alone cannot resolve their exact source membership or current ownership. Their contact remains an adverse competitor requiring a finer, lawful exact-location witness, without inferring that every COD contact is a sovereignty dispute.",
+  "excluded_work": ["No geometry acquisition", "No owner observation", "No physical producer", "No native diagnostic", "No Stanford, Assembly, CENI, or SALB-term access retry"]
+}

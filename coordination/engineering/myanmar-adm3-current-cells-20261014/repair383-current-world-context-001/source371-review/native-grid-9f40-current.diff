@@ -1,0 +1,270 @@
+--- /workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/8d1b48b3f5b8875aad38141c4d25c15394578cc67b5692c93e18a8ae8ed29678/work/.takeover/remaining1295/diagnostic383/original-native-grid-9f40.js	2026-10-16 00:44:07.486258348 -0700
++++ /workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/8d1b48b3f5b8875aad38141c4d25c15394578cc67b5692c93e18a8ae8ed29678/work/src/native-grid.js	2026-10-15 19:22:14.884814389 -0700
+@@ -60,8 +60,8 @@
+ export function nativePolygonIntervals(index,{size,rowStart,rowEnd,latitudes}){
+   if(!Number.isSafeInteger(size)||size<2||size>2**31||
+      !Number.isInteger(rowStart)||!Number.isInteger(rowEnd)||rowStart<0||rowEnd>size||
+-     rowStart>=rowEnd||rowEnd-rowStart>4096||latitudes?.length!==size)
+-    throw Error('Require explicit latitude table and at most4096 native rows');
++     rowStart>=rowEnd||latitudes?.length!==size)
++    throw Error('Require explicit latitude table and valid native row bounds');
+   for(let y=0;y<size;y++)if(!Number.isFinite(latitudes[y])||Math.abs(latitudes[y])>=90||
+     y&&latitudes[y]>=latitudes[y-1])throw Error('Invalid decreasing native latitude table');
+   const rows=new Map(),ties=[];let previousOwner=0;
+@@ -214,7 +214,8 @@
+   return true;
+ }
+ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverageFeatures,
+-  territorialExclusions = [], ownerRows, size, latitudes, rowStart, rowEnd, diagnosticRows, coverageFeatureGroups}) {
++  territorialExclusions = [], territorialApplicability, ownerRows, size, latitudes, rowStart, rowEnd, diagnosticRows, coverageFeatureGroups,
++  coverageCentres, coverageCentreGroups}) {
+   require(Array.isArray(targets) && targets.length > 0, 'Missing source targets');
+   const targetByOwner = new Map(), targetById = new Map();
+   for (const target of targets) {
+@@ -238,8 +239,20 @@
+   }
+   for (const target of targets) require(sourceOwners.get(target.pixelIndex) === target.id,
+     'Source target differs from complete source owner roster');
+-  const validateCoverage = features => {
+-    require(Array.isArray(features) && features.length > 0, 'Missing reviewed coverage');
++  const validateCentres = centres => {
++    require(Array.isArray(centres), 'Invalid reviewed centre coverage');const seen=new Set();
++    for(const point of centres){
++      exactKeys(point,['source_id','pixelIndex','y','x'],'Reviewed coverage centre');
++      const source=sourceIds.get(point.source_id),key=point.pixelIndex+':'+point.y+':'+point.x;
++      require(source&&targetByOwner.get(point.pixelIndex)?.id===source.id&&source.owner===point.pixelIndex
++        &&Number.isSafeInteger(point.y)&&point.y>=rowStart&&point.y<rowEnd
++        &&Number.isSafeInteger(point.x)&&point.x>=0&&point.x<size&&!seen.has(key),
++      'Coverage centre lacks exact original source membership');seen.add(key);
++    }
++  };
++  if(coverageCentres!==undefined)validateCentres(coverageCentres);
++  const validateCoverage = (features,centres) => {
++    require(Array.isArray(features) && (features.length > 0 || centres?.length > 0), 'Missing reviewed coverage');
+     for (const feature of [...features, ...territorialExclusions])
+       require(targetByOwner.get(feature.pixelIndex)?.id === feature.id, 'Foreign coverage or exclusion target');
+     for (const feature of features) {
+@@ -248,11 +261,46 @@
+         'Coverage lacks exact original source membership');
+     }
+   };
+-  validateCoverage(coverageFeatures);
++  validateCoverage(coverageFeatures,coverageCentres);
+   if (coverageFeatureGroups !== undefined) {
+     require(Array.isArray(coverageFeatureGroups), 'Invalid additional coverage groups');
+-    for (const features of coverageFeatureGroups) validateCoverage(features);
+-  }
++    require(coverageCentreGroups===undefined||Array.isArray(coverageCentreGroups)
++      &&coverageCentreGroups.length===coverageFeatureGroups.length,'Invalid centre coverage groups');
++    for (const [i,features] of coverageFeatureGroups.entries()) {
++      const centres=coverageCentreGroups?.[i];if(centres!==undefined)validateCentres(centres);
++      validateCoverage(features,centres);
++    }
++  } else require(coverageCentreGroups===undefined,'Centre groups require coverage groups');
++  // The closed source reader authenticates adoption and complete geometries.
++  // This numerical seam can contextualize only one original member/operand
++  // interior contact at one native centre; it never suppresses a boundary.
++  const contextual=new Map();
++  if(territorialApplicability!==undefined){
++    require(Array.isArray(territorialApplicability)&&territorialApplicability.length>0,
++      'Missing territorial applicability records');
++    for(const record of territorialApplicability){
++      require(record&&Object.keys(record).sort().join(',')===
++        'decision_sha256,exclusion_geometry_sha256,exclusion_index,operand_sha256,pixelIndex,source_id,x,y'
++        &&Number.isSafeInteger(record.y)&&record.y>=rowStart&&record.y<rowEnd
++        &&Number.isSafeInteger(record.x)&&record.x>=0&&record.x<size
++        &&Number.isSafeInteger(record.exclusion_index)&&record.exclusion_index>=0
++        &&/^[a-f0-9]{64}$/.test(record.decision_sha256)
++        &&/^[a-f0-9]{64}$/.test(record.operand_sha256)
++        &&/^[a-f0-9]{64}$/.test(record.exclusion_geometry_sha256),
++      'Invalid territorial applicability record');
++      const source=sourceIds.get(record.source_id),negative=territorialExclusions[record.exclusion_index];
++      require(source?.owner===record.pixelIndex&&targetByOwner.get(record.pixelIndex)?.id===source.id
++        &&negative?.pixelIndex===record.pixelIndex
++        &&negative.operand_sha256===record.operand_sha256
++        &&negative.geometry_sha256===record.exclusion_geometry_sha256,
++      'Territorial applicability member or operand differs');
++      const key=JSON.stringify([record.source_id,record.pixelIndex,record.y,record.x,record.exclusion_index]);
++      require(!contextual.has(key),'Duplicate territorial applicability contact');contextual.set(key,record);
++    }
++  }
++  const contactFor=(member,owner,y,x,index)=>contextual.get(JSON.stringify([member,owner,y,x,index]))
++    ??[...contextual.values()].find(record=>record.source_id===member&&record.pixelIndex===owner
++      &&record.y===y&&record.x===x&&record.operand_sha256===territorialExclusions[index].operand_sha256);
+   const options = {size, latitudes, rowStart, rowEnd};
+   const scan = (features, masks = false) => {
+     if (!features.length) return {rows:new Map(),ties:[]};
+@@ -276,12 +324,34 @@
+     return result;
+   };
+   const sources=remap(scan(sourceFeatures.map(feature=>({...feature,pixelIndex:sourceIds.get(feature.id).index}))));
++  const activeSourceMembers=(source,owner,x)=>new Set(source.filter(run=>
++    run.owner===owner&&run.start<=x&&x<run.end).map(run=>run.source_id));
+   const scanCoverage = features => remap(scan(features.map(feature=>{
+     const id=feature.source_id??feature.id;
+     return {id,pixelIndex:sourceIds.get(id).index,geometry:feature.geometry};
+   }),true));
+-  let coverage=scanCoverage(coverageFeatures);
+-  const excluded=scan(territorialExclusions,true);
++  // Exact adopted centres add positive spans only. The unchanged decision below
++  // still requires the same active original member and every negative guard.
++  const withCentres=(coverage,centres=[])=>{
++    for(const point of centres){
++      const spans=coverage.rows.get(point.y)??[];
++      spans.push({start:point.x,end:point.x+1,owner:point.pixelIndex,source_id:point.source_id});
++      coverage.rows.set(point.y,spans);
++    }
++    return coverage;
++  };
++  let coverage=withCentres(scanCoverage(coverageFeatures),coverageCentres);
++  let excluded;
++  if(territorialApplicability===undefined)excluded=scan(territorialExclusions,true);
++  else{
++    // Preserve every complete negative and its ordinal instead of losing
++    // operand identity in the owner union. The original ties remain vetoes.
++    excluded=scan(territorialExclusions.map((feature,i)=>({...feature,id:String(i),pixelIndex:i+1})));
++    for(const spans of excluded.rows.values())for(const span of spans){
++      span.exclusion_index=span.owner-1;span.owner=territorialExclusions[span.exclusion_index].pixelIndex;
++    }
++    for(const tie of excluded.ties){tie.exclusion_index=tie.owner-1;tie.owner=territorialExclusions[tie.exclusion_index].pixelIndex;}
++  }
+   const current = new Map();
+   for (const row of ownerRows) {
+     require(Number.isSafeInteger(row.y) && row.y >= rowStart && row.y < rowEnd
+@@ -326,12 +396,13 @@
+     }
+     const counts = {assigned_cells: 0, already_owned_cells: 0, ambiguous_owner_cells: 0,
+       unsupported_coverage_cells: 0, territorial_exclusion_cells: 0, boundary_cells: 0};
+-    const rows = [], perTarget = new Map(targets.map(target => [target.id, 0]));
++    const rows = [], perTarget = new Map(targets.map(target => [target.id, 0])),contextualContacts=new Map();
+     for (let y = rowStart; y < rowEnd; y++) {
+       const source = sources.rows.get(y) ?? [], support = coverage.rows.get(y) ?? [];
+       const holes = excluded.rows.get(y) ?? [], owned = current.get(y), boundary = ties.get(y) ?? [];
+       const cuts = new Set();
+       for (const run of requested.get(y) ?? []) { cuts.add(run[0]); cuts.add(run[1]); }
++      for(const record of contextual.values())if(record.y===y){cuts.add(record.x);cuts.add(record.x+1);}
+       for (const run of [...source, ...support, ...holes]) { cuts.add(run.start); cuts.add(run.end); }
+       for (const run of [...owned, ...boundary]) { cuts.add(run[0]); cuts.add(run[1]); }
+       const points = [...cuts].sort((a, b) => a - b), runs = [], trace = [];
+@@ -342,9 +413,16 @@
+         if (boundary.some(run => run[0] <= start && start < run[1])) return {reason: 'boundary_cells'};
+         if (owners.size !== 1) return {reason: 'ambiguous_owner_cells'};
+         const owner = [...owners][0];
+-        if (holes.some(run => run.owner === owner && run.start <= start && start < run.end))
+-          return {reason: 'territorial_exclusion_cells'};
+-        const activeMembers = new Set(source.filter(run => run.owner === owner && run.start <= start && start < run.end).map(run => run.source_id));
++        const activeMembers = activeSourceMembers(source,owner,start);
++        let territorial=false;
++        for(const run of holes.filter(run=>run.owner===owner&&run.start<=start&&start<run.end)){
++          const matches=[...activeMembers].map(member=>contactFor(member,owner,y,start,run.exclusion_index)).filter(Boolean);
++          // Every active member needs its own adopted interpretation. A
++          // sibling's interpretation cannot clear this shared owner's veto.
++          if(matches.length!==activeMembers.size)territorial=true;
++          else for(const record of matches)contextualContacts.set(JSON.stringify(record),{...record,kind:'interior'});
++        }
++        if(territorial)return {reason:'territorial_exclusion_cells'};
+         if (!support.some(run => run.owner === owner && activeMembers.has(run.source_id) && run.start <= start && start < run.end))
+           return {reason: 'unsupported_coverage_cells'};
+         return {reason: 'assigned_cells', owner};
+@@ -370,24 +448,55 @@
+       if (runs.length) rows.push({y, runs});
+       if (trace.length) diagnostic.push({y, runs: trace});
+     }
++    const territorialContacts=[];
++    if(territorialApplicability!==undefined){
++      const points=new Map([...contextual.values()].map(record=>[
++        JSON.stringify([record.source_id,record.pixelIndex,record.y,record.x]),record]));
++      for(const point of points.values())for(const [exclusion_index,negative]of territorialExclusions.entries()){
++        if(negative.pixelIndex!==point.pixelIndex)continue;
++        const kinds=[];
++        if((excluded.rows.get(point.y)??[]).some(run=>run.exclusion_index===exclusion_index
++          &&run.start<=point.x&&point.x<run.end))kinds.push('interior');
++        for(const tie of excluded.ties)if(tie.exclusion_index===exclusion_index&&tie.y===point.y
++          &&(tie.start??tie.x)<=point.x&&point.x<(tie.end??tie.x+1))kinds.push(tie.kind);
++        const record=contactFor(point.source_id,point.pixelIndex,point.y,point.x,exclusion_index);
++        for(const kind of new Set(kinds))territorialContacts.push({source_id:point.source_id,pixelIndex:point.pixelIndex,
++          y:point.y,x:point.x,exclusion_index,exclusion_geometry_sha256:negative.geometry_sha256,kind,
++          ...(negative.operand_sha256?{operand_sha256:negative.operand_sha256}:{}),
++          resolution:kind!=='interior'?'retained-boundary-veto'
++            :record&&contextualContacts.has(JSON.stringify(record))?'contextual':'retained-territorial-veto',
++          ...(record?{decision_sha256:record.decision_sha256}:{})});
++      }
++    }
+     return {rows, ...counts, removed_cells: 0, reassigned_cells: 0,
+       targets: targets.map(target => ({...target, native_cells: perTarget.get(target.id)})),
++      ...(territorialApplicability===undefined?{}:{territorial_contacts:territorialContacts}),
+       ...(diagnosticRows === undefined ? {} : {diagnostic_rows: diagnostic})};
+   };
+   const result=evaluate(coverage,diagnosticRows);
++  // Internal member-level view of the already scanned domain. A successful
++  // owner row is necessary but insufficient: the exact dated member must be
++  // active here as well. No new geometry scan or authority input is introduced.
++  if(coverageCentres!==undefined){
++    const allowedRows=new Map(result.rows.map(row=>[row.y,row.runs]));
++    result.source_matched_coverage_centres=coverageCentres.filter(point=>
++      activeSourceMembers(sources.rows.get(point.y)??[],point.pixelIndex,point.x).has(point.source_id)
++      &&(allowedRows.get(point.y)??[]).some(run=>run[2]===point.pixelIndex
++        &&run[0]<=point.x&&point.x<run[1]));
++  }
+   if (coverageFeatureGroups === undefined) return result;
+   // Drop the combined mask before sequential class scans; no cross-call state.
+   coverage=null;
+   result.coverage_groups=[];
+-  for (const features of coverageFeatureGroups)
+-    result.coverage_groups.push(evaluate(scanCoverage(features),undefined));
++  for (const [i,features] of coverageFeatureGroups.entries())
++    result.coverage_groups.push(evaluate(withCentres(scanCoverage(features),coverageCentreGroups?.[i]),undefined));
+   return result;
+ }
+ 
+ // Private exact-witness arithmetic has no shared mutable policy state.
+ export const {witnessCellEffects, validateWitnessGeometry} = (() => {
+ // Exact candidate-cell witness operator. The caller authenticates the passed stock scanner,
+-// admits the complete geometry/runtime/scan/output phase and supplies a deadline.
++// supplies the complete geometry and requested native rows.
+ // This function establishes cell effects only, never scientific qualification.
+ const BLOCK_ROWS = 4096;
+ const VIEW = new DataView(new ArrayBuffer(8));
+@@ -616,40 +725,11 @@
+ }
+ 
+ // Validation retains every recognized primitive, including empty and mixed parts.
+-// Statistics permit the caller to reserve the full flattened/scan scratch phase.
+-function validateWitnessGeometry(geometry, options) {
++function validateWitnessGeometry(geometry) {
+   const p = primitives(geometry);
+-  const stats = {parts:p.parts, vertices:p.vertices, polygons:p.polygons.length,
++  return {parts:p.parts, vertices:p.vertices, polygons:p.polygons.length,
+     segments:p.segments.length, points:p.points.length,
+     empty:p.polygons.length+p.segments.length+p.points.length===0};
+-  if(options){
+-    const {latitudes,rowStart,rowEnd,requestedCells=0}=options;
+-    require(Number.isInteger(rowStart)&&Number.isInteger(rowEnd)&&rowStart>=0
+-      &&rowEnd<=latitudes.length&&rowEnd>rowStart&&rowEnd-rowStart<=4096
+-      &&Number.isSafeInteger(requestedCells)&&requestedCells>=0,'Invalid witness scratch admission extent');
+-    // The caller already authenticates/validates the normative decreasing table.
+-    // These schedules exactly match stock half-open crossings; tie bounds remain
+-    // inclusive. No polygon predicate is executed to establish admission.
+-    const first=value=>{let lo=rowStart,hi=rowEnd;while(lo<hi){const mid=Math.floor((lo+hi)/2);
+-      if(latitudes[mid]>value)lo=mid+1;else hi=mid;}return lo;};
+-    let crossings=0,lowerTies=0,edges=0;
+-    for(const polygon of p.polygons)for(const ring of polygon)
+-      for(let i=0;i<ring.length-2;i+=2){
+-        edges++;const low=Math.min(ring[i+1],ring[i+3]),high=Math.max(ring[i+1],ring[i+3]);
+-        const end=first(low),start=first(high);
+-        if(low!==high)crossings+=Math.max(0,end-start);
+-        if(end<rowEnd&&latitudes[end]===low)lowerTies++;
+-      }
+-    const spans=Math.ceil(crossings/2),ties=crossings+lowerTies;
+-    // Edges, exact dyadic arithmetic, flattened coordinates and active columns;
+-    // all retained stock rows/ties; complete helper hit/kind/output inventory.
+-    const scratch=p.vertices*1024+p.parts*128+(spans+ties)*192
+-      +(rowEnd-rowStart)*128+requestedCells*1024+4096;
+-    require(Number.isSafeInteger(scratch),'Nonfinite witness scratch admission');
+-    Object.assign(stats,{edges,crossing_edge_rows:crossings,span_upper_bound:spans,
+-      tie_upper_bound:ties,scratch_bytes:scratch});
+-  }
+-  return stats;
+ }
+ 
+ return {witnessCellEffects, validateWitnessGeometry};

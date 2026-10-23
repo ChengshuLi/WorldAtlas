@@ -1,0 +1,376 @@
+{
+  "kind": "BDI retained full-target comparison against adjacent RWA ADM1 source",
+  "scope": {
+    "package_id": "gb-BDI-ADM2--repair-evaluation",
+    "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "original_cells": 583,
+    "original_land": 378,
+    "original_inland_water": 205,
+    "original_intervals": 433,
+    "target_polygons": 21
+  },
+  "rwa_source": {
+    "source_key": "gb:RWA:ADM1",
+    "source_id": "RWA-ADM1-91480417",
+    "represented_year_claim": 2020,
+    "catalogue_terms": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "source_url": "https://rwanda.africageoportal.com/datasets/dac12729b2cd4f0db92fddaa6a80460d_0",
+    "upstream_pin": "9469f09",
+    "git_corpus_commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+    "git_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-RWA-ADM1-000.bin.gz",
+    "git_blob": "f6c9170aff891718fb4019d495bf8369415fe7ab",
+    "encoded_bytes": 50477,
+    "encoded_sha256": "0edc5c7683e929c1bc582b3e707d815cdb808f43ad8ad3e1f7c8958dcf6e3439",
+    "decoded_bytes": 132231,
+    "decoded_sha256": "426c73767ed4bed8b2d92890eaeb2ce8906d5f07e9367dba3330077abcdcc383",
+    "features": 5,
+    "feature_validity": {
+      "gb:RWA:ADM1:91480417B22690809677968": true,
+      "gb:RWA:ADM1:91480417B18399648061901": true,
+      "gb:RWA:ADM1:91480417B74917756285357": true,
+      "gb:RWA:ADM1:91480417B20985019767017": true,
+      "gb:RWA:ADM1:91480417B44016762519517": true
+    }
+  },
+  "bdi_targets_source": {
+    "git_corpus_commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+    "git_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BDI-ADM2-000.bin.gz",
+    "git_blob": "2443da0c46ca3884e36a0c8ab5a3dca9678cb332",
+    "encoded_bytes": 85146,
+    "encoded_sha256": "521c5c2318763d957a1b164ca1f41e540965c0f5db06e0974b247a0f3f203c0e",
+    "decoded_bytes": 350000,
+    "decoded_sha256": "b90f58bf70724da30e8fd2fc5e89ea68ce2139e88dade8722fd85d20f92b15c2",
+    "target_polygons": 21
+  },
+  "method": {
+    "geometry_operation": "Shapely exact planar intersection in source coordinate coordinates; no reprojection, geometry repair or simplification",
+    "point_operation": "retained original 583 centers reconstructed with same documented native-grid longitude formula and latitudes; covers against RWA source features",
+    "runtime": {
+      "shapely": "2.1.2",
+      "geos": "3.13.1"
+    },
+    "no_new_owner_observation_or_physical_producer": true
+  },
+  "summary": {
+    "target_polygons_intersecting_any_rwa_feature": 4,
+    "target_polygons_with_positive_area_overlap": 4,
+    "target_polygon_feature_intersection_pairs": 6,
+    "original_centers_covered_by_rwa": 0,
+    "original_centers_rwa_hits_by_owner": {},
+    "original_center_hits_by_rwa_feature": {}
+  },
+  "targets": [
+    {
+      "owner": 8987,
+      "target_source_id": "gb:BDI:ADM2:21766830B12025098844752",
+      "target_name": "Mabayi",
+      "valid": true,
+      "rwa_intersections": [
+        {
+          "rwa_source_id": "gb:RWA:ADM1:91480417B18399648061901",
+          "rwa_name": "Southern Province",
+          "geometry_type": "MultiPolygon",
+          "area_deg2": 9.316129975378668e-05,
+          "length_deg": 0.17827662413665366,
+          "area_overlap": true
+        },
+        {
+          "rwa_source_id": "gb:RWA:ADM1:91480417B44016762519517",
+          "rwa_name": "Western Province",
+          "geometry_type": "MultiPolygon",
+          "area_deg2": 0.00013371729412620635,
+          "length_deg": 0.4177354401739206,
+          "area_overlap": true
+        }
+      ]
+    },
+    {
+      "owner": 8990,
+      "target_source_id": "gb:BDI:ADM2:21766830B14140898215143",
+      "target_name": "Muhuta",
+      "valid": true,
+      "rwa_intersections": []
+    },
+    {
+      "owner": 8994,
+      "target_source_id": "gb:BDI:ADM2:21766830B1729082638594",
+      "target_name": "Gisagara",
+      "valid": true,
+      "rwa_intersections": []
+    },
+    {
+      "owner": 9001,
+      "target_source_id": "gb:BDI:ADM2:21766830B2147150443328",
+      "target_name": "Buganda",
+      "valid": true,
+      "rwa_intersections": []
+    },
+    {
+      "owner": 9019,
+      "target_source_id": "gb:BDI:ADM2:21766830B31049489476840",
+      "target_name": "Bugarama",
+      "valid": true,
+      "rwa_intersections": []
+    },
+    {
+      "owner": 9021,
+      "target_source_id": "gb:BDI:ADM2:21766830B32777890626704",
+      "target_name": "Rumonge",
+      "valid": true,
+      "rwa_intersections": []
+    },
+    {
+      "owner": 9028,
+      "target_source_id": "gb:BDI:ADM2:21766830B36835382033084",
+      "target_name": "Kabezi",
+      "valid": true,
+      "rwa_intersections": []
+    },
+    {
+      "owner": 9029,
+      "target_source_id": "gb:BDI:ADM2:21766830B3809417619483",
+      "target_name": "Buhinyuza",
+      "valid": true,
+      "rwa_intersections": []
+    },
+    {
+      "owner": 9030,
+      "target_source_id": "gb:BDI:ADM2:21766830B38172137244003",
+      "target_name": "Giharo",
+      "valid": true,
+      "rwa_intersections": []
+    },
+    {
+      "owner": 9036,
+      "target_source_id": "gb:BDI:ADM2:21766830B41528201457160",
+      "target_name": "Muyinga",
+      "valid": true,
+      "rwa_intersections": []
+    },
+    {
+      "owner": 9040,
+      "target_source_id": "gb:BDI:ADM2:21766830B44986812705529",
+      "target_name": "Kigamba",
+      "valid": true,
+      "rwa_intersections": []
+    },
+    {
+      "owner": 9047,
+      "target_source_id": "gb:BDI:ADM2:21766830B51540876931984",
+      "target_name": "Rugombo",
+      "valid": true,
+      "rwa_intersections": [
+        {
+          "rwa_source_id": "gb:RWA:ADM1:91480417B44016762519517",
+          "rwa_name": "Western Province",
+          "geometry_type": "MultiPolygon",
+          "area_deg2": 1.2966042661586296e-05,
+          "length_deg": 0.04681861705894236,
+          "area_overlap": true
+        }
+      ]
+    },
+    {
+      "owner": 9050,
+      "target_source_id": "gb:BDI:ADM2:21766830B53810177315638",
+      "target_name": "Bugabira",
+      "valid": true,
+      "rwa_intersections": [
+        {
+          "rwa_source_id": "gb:RWA:ADM1:91480417B18399648061901",
+          "rwa_name": "Southern Province",
+          "geometry_type": "MultiPolygon",
+          "area_deg2": 0.00010795451645792897,
+          "length_deg": 0.33554695397155376,
+          "area_overlap": true
+        },
+        {
+          "rwa_source_id": "gb:RWA:ADM1:91480417B20985019767017",
+          "rwa_name": "Eastern Province",
+          "geometry_type": "MultiPolygon",
+          "area_deg2": 7.370662287057377e-05,
+          "length_deg": 0.252981198181362,
+          "area_overlap": true
+        }
+      ]
+    },
+    {
+      "owner": 9057,
+      "target_source_id": "gb:BDI:ADM2:21766830B6345718789328",
+      "target_name": "Mutimbuzi",
+      "valid": true,
+      "rwa_intersections": []
+    },
+    {
+      "owner": 9067,
+      "target_source_id": "gb:BDI:ADM2:21766830B71257741300393",
+      "target_name": "Mabanda",
+      "valid": true,
+      "rwa_intersections": []
+    },
+    {
+      "owner": 9072,
+      "target_source_id": "gb:BDI:ADM2:21766830B74257208244788",
+      "target_name": "Nyanza-Lac",
+      "valid": true,
+      "rwa_intersections": []
+    },
+    {
+      "owner": 9077,
+      "target_source_id": "gb:BDI:ADM2:21766830B78190696569930",
+      "target_name": "Busoni",
+      "valid": true,
+      "rwa_intersections": [
+        {
+          "rwa_source_id": "gb:RWA:ADM1:91480417B20985019767017",
+          "rwa_name": "Eastern Province",
+          "geometry_type": "MultiPolygon",
+          "area_deg2": 0.0004944497057790384,
+          "length_deg": 0.5638352547205501,
+          "area_overlap": true
+        }
+      ]
+    },
+    {
+      "owner": 9078,
+      "target_source_id": "gb:BDI:ADM2:21766830B78591112120307",
+      "target_name": "Gihanga",
+      "valid": true,
+      "rwa_intersections": []
+    },
+    {
+      "owner": 9079,
+      "target_source_id": "gb:BDI:ADM2:21766830B80223800900582",
+      "target_name": "Mishiha",
+      "valid": true,
+      "rwa_intersections": []
+    },
+    {
+      "owner": 9087,
+      "target_source_id": "gb:BDI:ADM2:21766830B84199363749171",
+      "target_name": "Muha",
+      "valid": true,
+      "rwa_intersections": []
+    },
+    {
+      "owner": 9089,
+      "target_source_id": "gb:BDI:ADM2:21766830B87038696970617",
+      "target_name": "Ntahangwa",
+      "valid": true,
+      "rwa_intersections": []
+    }
+  ],
+  "physical_issue_crosscheck": [
+    {
+      "target": "gb:BDI:ADM2:21766830B12025098844752",
+      "issue_count": 0,
+      "rwa_overlap_even_if_adverse": true
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B14140898215143",
+      "issue_count": 0,
+      "rwa_overlap_even_if_adverse": false
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B1729082638594",
+      "issue_count": 0,
+      "rwa_overlap_even_if_adverse": false
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B2147150443328",
+      "issue_count": 0,
+      "rwa_overlap_even_if_adverse": false
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B31049489476840",
+      "issue_count": 2,
+      "rwa_overlap_even_if_adverse": false
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B32777890626704",
+      "issue_count": 3,
+      "rwa_overlap_even_if_adverse": false
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B36835382033084",
+      "issue_count": 1,
+      "rwa_overlap_even_if_adverse": false
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B3809417619483",
+      "issue_count": 0,
+      "rwa_overlap_even_if_adverse": false
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B38172137244003",
+      "issue_count": 0,
+      "rwa_overlap_even_if_adverse": false
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B41528201457160",
+      "issue_count": 0,
+      "rwa_overlap_even_if_adverse": false
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B44986812705529",
+      "issue_count": 0,
+      "rwa_overlap_even_if_adverse": false
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B51540876931984",
+      "issue_count": 0,
+      "rwa_overlap_even_if_adverse": true
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B53810177315638",
+      "issue_count": 2,
+      "rwa_overlap_even_if_adverse": true
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B6345718789328",
+      "issue_count": 2,
+      "rwa_overlap_even_if_adverse": false
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B71257741300393",
+      "issue_count": 0,
+      "rwa_overlap_even_if_adverse": false
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B74257208244788",
+      "issue_count": 3,
+      "rwa_overlap_even_if_adverse": false
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B78190696569930",
+      "issue_count": 2,
+      "rwa_overlap_even_if_adverse": true
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B78591112120307",
+      "issue_count": 0,
+      "rwa_overlap_even_if_adverse": false
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B80223800900582",
+      "issue_count": 0,
+      "rwa_overlap_even_if_adverse": false
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B84199363749171",
+      "issue_count": 2,
+      "rwa_overlap_even_if_adverse": false
+    },
+    {
+      "target": "gb:BDI:ADM2:21766830B87038696970617",
+      "issue_count": 2,
+      "rwa_overlap_even_if_adverse": false
+    }
+  ],
+  "limits": [
+    "This compares one adjacent neighboring source family (RWA ADM1) against the exact 21 retained BDI ADM2 source polygons and the original 583 centers; it is not a global competitor census.",
+    "Source-vintage and license declarations describe the retained geoBoundaries source and do not establish current legal authority, source applicability, or rights clearance.",
+    "Shared boundary contact and positive-area overlay are reported separately; geometric contact alone is not a territorial claim.",
+    "No original owner observation or whole-target physical producer was rerun. The prior physical receipt and adverse issues remain unchanged."
+  ]
+}

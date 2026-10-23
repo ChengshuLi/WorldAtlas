@@ -1,0 +1,104 @@
+{
+  "provenance": "Existing lawful read-only stock extraction executed2026-10-18 around04:12:26UTC. Copied retained outputs only; no new extractor execution. A later author duplicate invocation was denied and is not replayed by this handoff.",
+  "source_commit": "75861b9784f75b7894bfc51fa0419f40f966157d",
+  "source_prefix": "coordination/engineering/global-current-cell-work-queue-20261014",
+  "command": "node input/source-batch-intervals.mjs gb-SLE-ADM2--physical-interpretation intervals",
+  "exit": 0,
+  "stdout": {
+    "package_id": "gb-SLE-ADM2--physical-interpretation",
+    "cells": 1213,
+    "blocks": 1
+  },
+  "input_pins": [
+    {
+      "path": "inland-water-support-block-030.json.gz",
+      "bytes": 2805,
+      "sha256": "0d1d7952380dc823b6eafcf1803b6124a80c06d6e1f16500cc36d9dd82142a4d",
+      "git_blob_oid": "126ed25c39ecf26af8188d20f6f3a0e90bdcbf09"
+    },
+    {
+      "path": "lineage.json.gz",
+      "bytes": 4404456,
+      "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4",
+      "git_blob_oid": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa"
+    },
+    {
+      "path": "normalized-source-seams.json",
+      "bytes": 156199,
+      "sha256": "0e74bb81ae45ae9913ee5d43afd303fa33a4b7da8b06e4e6f1cd4419ecd264b4",
+      "git_blob_oid": "e22b6270aaf9c27dd3d21381d757b6c34ab81d7b"
+    },
+    {
+      "path": "ownership-binding.json",
+      "bytes": 3048,
+      "sha256": "b952192475435c8fbc74a84627994aff4f4e073c36c479d369554fc75251bc89",
+      "git_blob_oid": "b9d81d18aab6d03dc701ff1337b35e53be81d0af"
+    },
+    {
+      "path": "physical-support-block-030.json.gz",
+      "bytes": 490718,
+      "sha256": "2731421e881dd1c8121364409088523a67b12c52ed054642a5994edc96037c0b",
+      "git_blob_oid": "e87d23b077e9a0b47bcdc38cdf6126f9ca8e3b48"
+    },
+    {
+      "path": "physical-unassigned-summary.json",
+      "bytes": 154672,
+      "sha256": "a82c56c1d92ff52c0b0e52c9bf329905a05bace4b6a27c12771509d419888501",
+      "git_blob_oid": "0c934cdaf4b007a741e66d4a080890154bdae53c"
+    },
+    {
+      "path": "retained-source-catalogue.json",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d"
+    },
+    {
+      "path": "source-batch-intervals.mjs",
+      "bytes": 6840,
+      "sha256": "2589022806876f7faa645293fd9a0ea4b22d0c35a5a6a29fbdc30f5b730f5689",
+      "git_blob_oid": "c5ba9331deb93eed40662d1dc579cdaedea55c46"
+    },
+    {
+      "path": "source-candidates-block-030.json.gz",
+      "bytes": 636933,
+      "sha256": "c28ed9ba4a3b04ec9cee0884a025c4e5c207c5b8fee543883f43e94164b013c7",
+      "git_blob_oid": "bcb16439246dfebc52708996ca21897070c8bc46"
+    },
+    {
+      "path": "source-census-summary.json",
+      "bytes": 120963,
+      "sha256": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d",
+      "git_blob_oid": "fa1e4d101edb54b02bd1ff42a240f2f80ac65832"
+    },
+    {
+      "path": "source-feature-roster.json.gz",
+      "bytes": 1844315,
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa",
+      "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26"
+    },
+    {
+      "path": "source-package-queue.json",
+      "bytes": 1754890,
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+      "git_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54"
+    },
+    {
+      "path": "source-raster-summary.json",
+      "bytes": 110705,
+      "sha256": "2eec390eb9f9b6595bd0f3c7059b75f271dba013fbad0b3ac0c404114d48eea9",
+      "git_blob_oid": "e17b10b5643c1f6b0c492d02edc70a0d7afc5ee3"
+    }
+  ],
+  "output_pins": [
+    {
+      "path": "intervals/block-030.json.gz",
+      "bytes": 3755,
+      "sha256": "534192593d9caba16e86286e888e8384cfdadf35f5372d6536b31139565001a0"
+    },
+    {
+      "path": "intervals/package.json",
+      "bytes": 2354,
+      "sha256": "3d63642a25356435c2190094367a1292085893ee56fad451fe0018dabd7cdad1"
+    }
+  ]
+}

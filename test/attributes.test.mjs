@@ -3,17 +3,18 @@ import assert from 'node:assert/strict';
 import {resolveAttributes} from '../src/attributes.js';
 import {environmentalClassification} from '../src/environment-classifications.js';
 import {openDatabase,importRecords} from '../database.mjs';
+const ownerLabels=new Map([['owner:fixed','Direct'],['owner:d','Derived'],['owner:specific','Specific'],['owner:modern%20owner','Modern owner'],['owner:Q148','China']].map(([id,name])=>[id,{name}]));
 const features=[{id:'l',properties:{reference_owner:'Modern owner'}}];
 const r=(id,attribute,value,extra={})=>({id,location_id:'l',attribute,value,valid_from:1000,valid_to:1100,method:'direct',source:'Fixture',...extra});
 test('attributes resolve independently with direct evidence ahead of spatial derivations and examples',()=>{
  const records=[r('derived','owner','Derived',{method:'majority-area',category_id:'owner:d'}),r('owner','owner','Direct',{category_id:'owner:fixed'}),r('population','population',0),r('example','religion','Example',{is_example:1})];
- const at=year=>resolveAttributes(features,year,{records,examples:true}).get('l');
+ const at=year=>resolveAttributes(features,year,{records,examples:true,ownerLabels}).get('l');
  assert.equal(at(1050).owner,'Direct');assert.equal(at(1050).population,0);assert.equal(at(1050).category_ids.owner,'owner:fixed');assert.equal(at(1050).culture,null);assert.equal(at(1100).owner,null);assert.equal(at(2026).owner,'Modern owner');assert.equal(at(1050).rank,'unsettled');assert.equal(at(1050).provenance.rank.metadata.supporting_record_id,'population');
  const unknown=resolveAttributes(features,1050,{records:[r('unknown','owner',null),records[0]]}).get('l');assert.equal(unknown.owner,null);assert.equal(unknown.provenance.owner.method,'direct');
 });
 test('field evidence does not erase an independently supported attribute and examples do not mask modern reference',()=>{
  const state={id:1,location_id:'l',valid_from:1000,valid_to:1100,owner:'Legacy',religion:'Faith',is_example:0,source:'Legacy fixture'};
- const result=resolveAttributes(features,1050,{states:[state],records:[r('new','owner','Specific')]}).get('l');assert.equal(result.owner,'Specific');assert.equal(result.religion,'Faith');
+ const result=resolveAttributes(features,1050,{states:[state],records:[r('new','owner','Specific')],ownerLabels}).get('l');assert.equal(result.owner,'Specific');assert.equal(result.religion,'Faith');
 });
 test('typed imports reject overlapping field records and preserve stable category IDs',()=>{
  const db=openDatabase(':memory:');
@@ -56,7 +57,7 @@ test('no-year-zero resolution, exclusive interval ends and opt-in examples remai
  assert.equal(resolveAttributes(features,-1,{records}).get('l').climate,environmentalClassification('climate','climate:Cfb').label);
  assert.equal(resolveAttributes(features,1,{records}).get('l').climate,environmentalClassification('climate','climate:Af').label);
  assert.throws(()=>resolveAttributes(features,0,{records}),/excluding zero/);
- assert.equal(resolveAttributes(features,2026,{records,examples:true}).get('l').owner,'Modern owner');
+ assert.equal(resolveAttributes(features,2026,{records,examples:true,ownerLabels}).get('l').owner,'Modern owner');
  const forward=resolveAttributes(features,1050,{records:[r('b','vegetation','vegetation:mangroves',{method:'derived'}),r('a','vegetation','vegetation:farmlands',{method:'derived'})]}).get('l');
  const reverse=resolveAttributes(features,1050,{records:[r('a','vegetation','vegetation:farmlands',{method:'derived'}),r('b','vegetation','vegetation:mangroves',{method:'derived'})]}).get('l');
  assert.equal(forward.vegetation,reverse.vegetation);
@@ -74,6 +75,6 @@ test('compact references preserve supported dates and field provenance',async()=
 
 test('reference territories resolve to their political owner without changing geographic identity',()=>{
  const data=[{id:'hong-kong',properties:{reference_owner:'Hong Kong S.A.R.',metadata:{reference_polity:'China',reference_owner_id:'owner:Q148',reference_polity_status:'reference'}}},{id:'reef',properties:{reference_owner:'Scarborough Reef',metadata:{reference_polity:null,reference_polity_status:'disputed'}}}];
- const result=resolveAttributes(data,2026);assert.equal(result.get('hong-kong').owner,'China');assert.equal(result.get('hong-kong').category_ids.owner,'owner:Q148');assert.equal(data[0].properties.reference_owner,'Hong Kong S.A.R.');assert.equal(result.get('reef').owner,null);assert.equal(result.get('reef').provenance.owner.status,'disputed');
+ const result=resolveAttributes(data,2026,{ownerLabels});assert.equal(result.get('hong-kong').owner,'China');assert.equal(result.get('hong-kong').category_ids.owner,'owner:Q148');assert.equal(data[0].properties.reference_owner,'Hong Kong S.A.R.');assert.equal(result.get('reef').owner,null);assert.equal(result.get('reef').provenance.owner.status,'disputed');
  assert.equal(resolveAttributes(data,1000).get('hong-kong').owner,null);
 });

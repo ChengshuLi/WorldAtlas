@@ -17,7 +17,7 @@ export const ACCEPTED_CHECKPOINT_CODE = Object.freeze([
   'scripts/accepted-selected-checkpoint.mjs', 'scripts/check-handoff-scope.mjs',
   'scripts/evidence-policy.mjs', 'scripts/evidence-quality.mjs', 'scripts/geographic-report-artifact.mjs',
   'scripts/github-quota.mjs', 'scripts/github-snapshots.mjs', 'scripts/integration-proof.mjs',
-  'scripts/issue-claim-contract.mjs', 'scripts/job-deadline.mjs', 'scripts/research-import-gate.mjs',
+  'scripts/issue-claim-contract.mjs', 'scripts/research-import-gate.mjs',
   'scripts/worker-result.mjs', 'src/regional-import-gate.js'
 ]);
 const need = (ok, message) => { if (!ok) throw Error(message); };
@@ -30,8 +30,8 @@ const freeze = value => {
   return value;
 };
 
-export function acceptedCheckpointAPI(token, {fetchImpl = fetch} = {}) {
-  return githubAPI(token, {conditionalReads: false, fetchImpl});
+export function acceptedCheckpointAPI(token, {fetchImpl = fetch, publicReadOnly = false} = {}) {
+  return githubAPI(token, {conditionalReads: false, fetchImpl, publicReadOnly});
 }
 
 export async function acquireAcceptedCheckpoint({api, repo, locator, token, retainedArchive, fetchImpl = fetch}) {
@@ -63,14 +63,8 @@ export async function acquireAcceptedCheckpoint({api, repo, locator, token, reta
   need(acceptedCommit.sha === receipt.merge_commit && testedCommit.sha === receipt.tested_candidate &&
     acceptedCommit.tree?.sha === source.tree && testedCommit.tree?.sha === source.tree,
     'Accepted checkpoint tree differs from actual merge or tested candidate');
-  let report;
-  try {
-    report = await loadGeographicReport({api, repo, runId: source.run_id, artifactName: source.artifact_name,
-      expectedHash: source.report_sha256, source, token, retainedArchive, fetchImpl});
-  } catch (error) {
-    if (error.geographyUnavailable) return unavailable(error.message);
-    throw error;
-  }
+  const report = await loadGeographicReport({api, repo, runId: source.run_id, artifactName: source.artifact_name,
+    expectedHash: source.report_sha256, source, token, retainedArchive, fetchImpl});
   checkGeographicReport(report, source.baseline, source.candidate_commit);
   if (!report.checkpoint) return unavailable('Accepted legacy report has no complete checkpoint products');
   const artifact = geographicReportProducts(report);

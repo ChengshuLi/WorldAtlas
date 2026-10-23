@@ -1,0 +1,288 @@
+{
+  "kind": "bdi-native-authority-448-independent-assessment",
+  "as_of": "2026-10-21",
+  "review_scope": "Independent read-only review of the stock native-authority result and preservation of the exact original package partition. No observer, physical producer, diagnostic, or constructor was rerun.",
+  "source_provenance_link": "inventory/bdi-upstream-archive-property-provenance-20261021.json",
+  "inputs": {
+    "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "supported_inputs_commit": "fd35809976a5b3791c0a6710c6aeccf50e707e9f",
+    "native_patch": {
+      "path": "coordination/engineering/bdi-source-qualification-20261021/supported-inputs-001/native-patch.json",
+      "git_blob_oid": "63dd11fda8ed78e0c131b0b79ffaefe857fdefa4",
+      "bytes": 11202,
+      "sha256": "b11c56d8d3b67de1a67fc328028e86a9d0dea8f58ad73220a733c6b9e0e93450"
+    },
+    "source_evidence": {
+      "path": "coordination/engineering/bdi-source-qualification-20261021/supported-inputs-001/source-evidence.json",
+      "git_blob_oid": "e1ca91d25d8127e6fab2956057dd9672c40a4438",
+      "bytes": 55464,
+      "sha256": "3736b4b66a792eeed2804e27479a2ef44c79b1d5cae574552865e13a5f3735c1"
+    },
+    "whole_target_physical_receipt": {
+      "path": "coordination/engineering/bdi-source-qualification-20261021/physical-001/whole-target-support.json",
+      "git_blob_oid": "931aa930495df81b39acd37119110468d785e7a3",
+      "sha256": "bf9f07eff9b26e237d717e9a060e35ad242924eb1a0d91fb0f239e3dcff911c3"
+    },
+    "source_identity_and_lineage": "inventory/bdi-source-property-identity-join.json"
+  },
+  "stock_constructor": {
+    "result_path": "coordination/engineering/bdi-source-qualification-20261021/native-authority-001/constructor-result.json",
+    "result_bytes": 44038,
+    "result_sha256": "8f5480eb806052d89775ec7ba638205b8fa37eb9211e9931c4726ff266259e37",
+    "preparation_sha256": "01366f1a066a7099bfc8aeb4d67743bf9c67916a055b889289b5eef7a73f8926",
+    "stock_report": {
+      "exit_code": 0,
+      "qualified_cells": 448,
+      "elapsed_seconds": 3.515441208,
+      "attempts": "First attempt stopped before output because the system scratch path was nonordinary; output absence was checked. Same stock command and guards succeeded once with ordinary task-owned TMPDIR. Logs: inventory/bdi-native-authority-001.stderr.txt and inventory/bdi-native-authority-001-ordinary-scratch.stderr.txt/stdout.json."
+    },
+    "independent_result_checks": {
+      "ledger_rows": 17,
+      "all_rows_assigned": true,
+      "all_17_target_ids_match_source_shape_ids": true,
+      "all_17_owner_indices_match_patch_run_owners": true,
+      "sum_of_ledger_native_cells": 448,
+      "ledger_keyset_equals_native_patch_keyset": true,
+      "source_receipt_sha256_for_all_rows": "bf9f07eff9b26e237d717e9a060e35ad242924eb1a0d91fb0f239e3dcff911c3",
+      "rule_sha256": "85bad24c01b9477144ce05161ae242193e2bfd63a2aff4ebd949ec1a104a8c07"
+    },
+    "qualified_target_groups": [
+      {
+        "owner": 8987,
+        "name": "Mabayi",
+        "target_id": "gb:BDI:ADM2:21766830B12025098844752",
+        "cells": 1
+      },
+      {
+        "owner": 8994,
+        "name": "Gisagara",
+        "target_id": "gb:BDI:ADM2:21766830B1729082638594",
+        "cells": 1
+      },
+      {
+        "owner": 9001,
+        "name": "Buganda",
+        "target_id": "gb:BDI:ADM2:21766830B2147150443328",
+        "cells": 49
+      },
+      {
+        "owner": 9021,
+        "name": "Rumonge",
+        "target_id": "gb:BDI:ADM2:21766830B32777890626704",
+        "cells": 190
+      },
+      {
+        "owner": 9028,
+        "name": "Kabezi",
+        "target_id": "gb:BDI:ADM2:21766830B36835382033084",
+        "cells": 14
+      },
+      {
+        "owner": 9029,
+        "name": "Buhinyuza",
+        "target_id": "gb:BDI:ADM2:21766830B3809417619483",
+        "cells": 1
+      },
+      {
+        "owner": 9030,
+        "name": "Giharo",
+        "target_id": "gb:BDI:ADM2:21766830B38172137244003",
+        "cells": 10
+      },
+      {
+        "owner": 9036,
+        "name": "Muyinga",
+        "target_id": "gb:BDI:ADM2:21766830B41528201457160",
+        "cells": 1
+      },
+      {
+        "owner": 9040,
+        "name": "Kigamba",
+        "target_id": "gb:BDI:ADM2:21766830B44986812705529",
+        "cells": 24
+      },
+      {
+        "owner": 9047,
+        "name": "Rugombo",
+        "target_id": "gb:BDI:ADM2:21766830B51540876931984",
+        "cells": 6
+      },
+      {
+        "owner": 9050,
+        "name": "Bugabira",
+        "target_id": "gb:BDI:ADM2:21766830B53810177315638",
+        "cells": 1
+      },
+      {
+        "owner": 9057,
+        "name": "Mutimbuzi",
+        "target_id": "gb:BDI:ADM2:21766830B6345718789328",
+        "cells": 36
+      },
+      {
+        "owner": 9067,
+        "name": "Mabanda",
+        "target_id": "gb:BDI:ADM2:21766830B71257741300393",
+        "cells": 11
+      },
+      {
+        "owner": 9072,
+        "name": "Nyanza-Lac",
+        "target_id": "gb:BDI:ADM2:21766830B74257208244788",
+        "cells": 69
+      },
+      {
+        "owner": 9077,
+        "name": "Busoni",
+        "target_id": "gb:BDI:ADM2:21766830B78190696569930",
+        "cells": 5
+      },
+      {
+        "owner": 9078,
+        "name": "Gihanga",
+        "target_id": "gb:BDI:ADM2:21766830B78591112120307",
+        "cells": 8
+      },
+      {
+        "owner": 9079,
+        "name": "Mishiha",
+        "target_id": "gb:BDI:ADM2:21766830B80223800900582",
+        "cells": 21
+      }
+    ],
+    "constructor_limitations_from_result": [
+      "Physical interpretation and semantic reconciliation remain in the reviewed source evidence; current owner-zero is checked by native consumers.",
+      "Witness exclusions apply only to requested native centers; this result does not certify whole-parent issues or constitute final acceptance."
+    ]
+  },
+  "exact_original_partition": {
+    "full_scope": {
+      "cells": 583,
+      "land": 378,
+      "inland_water": 205,
+      "intervals": 433
+    },
+    "candidate": {
+      "cells": 448,
+      "land": 290,
+      "inland_water": 158,
+      "target_groups": 17
+    },
+    "held": {
+      "cells": 135,
+      "land": 88,
+      "inland_water": 47
+    },
+    "sets": {
+      "candidate_and_held_disjoint": true,
+      "candidate_union_held_equals_original": true,
+      "no_extra_or_missing_key": true,
+      "original_sorted_y_x_owner_sha256": "33ae1901c9af60065a89614d3815d736536fa17c0dd204b81ed8d5de88e80776",
+      "candidate_sorted_y_x_owner_sha256": "19ce0047df3abc560cc303a74a37632f04841a4e6e0647d4b24a17c4ee756287",
+      "held_sorted_y_x_owner_sha256": "d803893cc871b22351012a528246f848150aca9e46a792572e680cbad30bc6ef"
+    },
+    "held_reasons": [
+      {
+        "reason": "pending_target_specific_source_provenance",
+        "cells": 81,
+        "owners": {
+          "8990": "Muhuta",
+          "9019": "Bugarama",
+          "9087": "Muha",
+          "9089": "Ntahangwa"
+        }
+      },
+      {
+        "reason": "territorial_exclusion_cells",
+        "cells": 54,
+        "owners": {
+          "9001": "Buganda",
+          "9030": "Giharo",
+          "9036": "Muyinga",
+          "9040": "Kigamba",
+          "9047": "Rugombo",
+          "9067": "Mabanda",
+          "9079": "Mishiha"
+        }
+      }
+    ],
+    "territorial_hold_counts_by_owner": {
+      "9001": 2,
+      "9030": 7,
+      "9036": 1,
+      "9040": 31,
+      "9047": 1,
+      "9067": 1,
+      "9079": 11
+    }
+  },
+  "whole_target_physical_context": {
+    "producer_targets": 21,
+    "elapsed_seconds": 5.449713000096381,
+    "targets_with_nonempty_issue_geometry": 9,
+    "issue_record_counts": {
+      "extra_reconstruction": 4,
+      "missing_reconstruction": 1,
+      "contradictory_land_water_support": 9,
+      "L2-outside-L1": 5
+    },
+    "issue_targets": [
+      {
+        "name": "Bugarama",
+        "owner": 9019,
+        "cells": 19
+      },
+      {
+        "name": "Rumonge",
+        "owner": 9021,
+        "cells": 190
+      },
+      {
+        "name": "Kabezi",
+        "owner": 9028,
+        "cells": 14
+      },
+      {
+        "name": "Bugabira",
+        "owner": 9050,
+        "cells": 1
+      },
+      {
+        "name": "Mutimbuzi",
+        "owner": 9057,
+        "cells": 36
+      },
+      {
+        "name": "Nyanza-Lac",
+        "owner": 9072,
+        "cells": 69
+      },
+      {
+        "name": "Busoni",
+        "owner": 9077,
+        "cells": 5
+      },
+      {
+        "name": "Muha",
+        "owner": 9087,
+        "cells": 41
+      },
+      {
+        "name": "Ntahangwa",
+        "owner": 9089,
+        "cells": 9
+      }
+    ],
+    "interpretation": "Six issue-bearing whole targets contain some of the 448 candidate cells; the stock evaluator checks exact candidate-center pointsets. A whole-target issue is retained context, not a blanket exclusion or whole-parent certification. The 81 special-owner keys remain held separately."
+  },
+  "original_contract_assessment": {
+    "candidate_path": "The 448 have an ordinary positive-candidate path under the successful stock constructor; their exact source IDs/selected owner mapping, complete BDI ADM2 feature family and foreign territorial negatives are bound in the source evidence.",
+    "remaining_delivery_checks": [
+      "Run the stock selected-native consumer/conservation check against the exact current delivery base; the constructor itself explicitly does not establish current owner-zero.",
+      "Verify final selected output is zero-reassignment/additive and preserves all existing assignments, with all original 583 accounted as 448 candidate plus 81 source-provenance holds plus 54 territorial holds.",
+      "Keep 205 water cells in the original denominator and retain their water classification; the 448 candidate contains 158 water and 290 land cells."
+    ],
+    "not_required_as_blanket_gate": "No universal modern 42-commune crosswalk is required solely due the source's 2007 represented year; the source ID and exact canonical stable target identity are retained. A concrete target-specific contradiction must still be evaluated on its own evidence.",
+    "no_acceptance_claim": "The stock constructor says 448 qualified under its own predicates, but no root acceptance, merged delivery, or final current selected-native conservation result is established by this assessment."
+  }
+}

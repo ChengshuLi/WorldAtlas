@@ -1,0 +1,35 @@
+{
+  "executing_head": "6d7f2550867f9dafaa8d497457de44c24081f7f0",
+  "reviewed_tree": "7bcc218864254084cf33d0eeac09264351274fec",
+  "baseline": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
+  "candidate": "655a6b8ae76e0ebe54e721c1c6c9e5b6a9b7fe12",
+  "exit_code": 0,
+  "elapsed_seconds": 95.10254437500001,
+  "mode": "authenticated-checkpoint-append-v1",
+  "native_status": "no-new-native-loss",
+  "original_requested_keys": 1929,
+  "all_original_keys_prior_base_and_effective_owner_zero_retained": true,
+  "current_consumer_complete_base_overlap_guard_passed": true,
+  "exact_affected_rows": 1180,
+  "all1180_complete_shared_base_rows_actually_acquired": true,
+  "lost_or_reassigned_cells": 0,
+  "new_component_visibility_witnesses": 27,
+  "witness_prior_owner_zero_and_candidate_owner_exact": true,
+  "all_four_emitted_products_hash_readback_passed": true,
+  "native_result_digest_matches_facts": true,
+  "certificate_entries": 49625,
+  "certificate_input_roles": 36,
+  "actual_reader_inventory_counts": {
+    "baseline": 341,
+    "candidate": 33
+  },
+  "route_count": 738,
+  "accepted_checkpoint": false,
+  "accepted_repair_credit": 0,
+  "source_or_qualification_replay": false,
+  "limits": [
+    "Prior-owner-zero whole-key observations are retained from actual accepted-data lookups; current consumer independently applied cumulative patches to the same complete original base rows, refusing any additive overlap.",
+    "27 visibility witnesses are component-level visibility, not a substitute for the 1929 exact-request/result join already independently reviewed.",
+    "Executing capability remains reviewed and unmerged; emitted native-passed candidate custody is not accepted adoption."
+  ]
+}

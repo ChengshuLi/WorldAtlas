@@ -1,0 +1,36 @@
+{
+  "source_evidence": [
+    {
+      "country": "CRI",
+      "commit": "dfe57bc8511fea3ee6cc78384ff2e94d19c7cecd",
+      "path": "coordination/engineering/americas-next-original-evaluations-20261018/cri/source-evidence-001/source-evidence.json",
+      "git_blob_oid": "f34c4b09cb9a090e6f5ca357cebe957c5108c403",
+      "limited_use": "Retained positive mapped-land coverage classes and complete target-wide negative operand descriptors; not a claim every descriptor hits each held point."
+    },
+    {
+      "country": "ERI",
+      "commit": "dadbbabbd407f00661def8524493b64858e8a0d0",
+      "path": "coordination/engineering/eritrea-original-repair-20261017/source-evidence-001/source-evidence.json",
+      "git_blob_oid": "cfd792b117a5f95862da50c0df226c021555acc0",
+      "limited_use": "Retained original source and negative operand context; exact5 original contacts come from independently joined source intervals and original Djibouti-contact receipt."
+    }
+  ],
+  "accepted_supported_deliveries": {
+    "CRI": "https://github.com/ChengshuLi/WorldAtlas/pull/2469",
+    "ERI": "https://github.com/ChengshuLi/WorldAtlas/pull/2466",
+    "PHL": "https://github.com/ChengshuLi/WorldAtlas/pull/2377"
+  },
+  "prior_philippines_substantive_reviews": [
+    "https://github.com/ChengshuLi/WorldAtlas/pull/1333#issuecomment-6033728360",
+    "https://github.com/ChengshuLi/WorldAtlas/pull/1333#issuecomment-6066089262"
+  ],
+  "original_queue": {
+    "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "git_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "bytes": 1754890,
+    "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8"
+  },
+  "zero_new_repair_credit": true,
+  "source_geometry_republished": false
+}

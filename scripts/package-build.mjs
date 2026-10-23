@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import fsSync, {constants} from 'node:fs';
 import path from 'node:path';
-import {fileURLToPath, pathToFileURL} from 'node:url';
+import {fileURLToPath} from 'node:url';
 import {spawn, spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {loadPackageInputs, validatePackageInputs, containsPackagePath} from './package-inputs.mjs';
@@ -146,19 +146,6 @@ export function inspectPackageInputs(root, definition) {
     materialized_bytes: materialized.reduce((n, row) => n + row.bytes, 0), missing_objects: missingObjects, errors};
 }
 
-export function inspectPackageAncestry(root, definition, requiredAncestors = []) {
-  const errors = [], ancestors = [...requiredAncestors];
-  // Only caller-required ancestry is checked. Historical qualified-source
-  // custody does not require a full ancestor graph in an ordinary shallow CI
-  // package checkout; its existing immutable reader authenticates those pins.
-  for (const commit of new Set(ancestors)) {
-    if (!/^[a-f0-9]{40}$/.test(commit ?? '')) { errors.push({kind: 'source-ancestry', detail: 'Invalid required ancestor'}); continue; }
-    const result = spawnSync('git', ['-C', root, '-c', 'protocol.allow=never', 'merge-base', '--is-ancestor', commit, 'HEAD'], {env: gitEnv(), encoding: 'utf8', timeout: 30000});
-    if (result.error || result.status !== 0) errors.push({kind: 'source-ancestry', commit, detail: result.error?.message ?? (result.status === 1 ? 'Not an ancestor of HEAD' : result.stderr.trim())});
-  }
-  return {required_ancestors: [...new Set(ancestors)], errors};
-}
-
 export function inspectPackageExecutionInputs(root, definition, kind = 'cloudflare') {
   if (!['static', 'hosted', 'cloudflare'].includes(kind)) throw Error('Unknown package build');
   const errors = [];let files = [];
@@ -169,7 +156,7 @@ export function inspectPackageExecutionInputs(root, definition, kind = 'cloudfla
   return {files,errors};
 }
 
-export function inspectPackageRuntime(root, {python = 'python3'} = {}) {
+export function inspectPackageNodeRuntime(root) {
   const errors = [], result = {node: {version: process.version, executable: process.execPath}, python: null, npm_packages: 0, optional_npm_omissions: []};
   if(process.env.NODE_OPTIONS?.trim()||process.env.NODE_PATH?.trim())errors.push({kind:'node-execution',detail:'Actual package issuer requires NODE_OPTIONS and NODE_PATH unset'});
   const attempt = (kind, run) => { try { run(); } catch (error) { errors.push({kind, detail: error.message}); } };
@@ -201,6 +188,12 @@ export function inspectPackageRuntime(root, {python = 'python3'} = {}) {
     }
     for (const name of Object.keys(installed.packages)) if (!lock.packages[name]) errors.push({kind: 'npm-lock', path: name, detail: 'Unlisted installed package'});
   });
+  return {...result, errors};
+}
+
+export function inspectPackageRuntime(root, {python = 'python3'} = {}) {
+  const {errors,...result}=inspectPackageNodeRuntime(root);
+  const attempt = (kind, run) => { try { run(); } catch (error) { errors.push({kind, detail: error.message}); } };
   attempt('python-runtime', () => {
     const requirements = fsSync.readFileSync(path.join(root, 'requirements.txt'), 'utf8');
     const modules = ['numpy', 'shapely', 'pyproj'].map(name => {
@@ -215,31 +208,16 @@ export function inspectPackageRuntime(root, {python = 'python3'} = {}) {
   return {...result, errors};
 }
 
-export async function inspectPackageBrowser(root, mode = 'probe') {
-  if (!['probe', 'required', 'off'].includes(mode)) throw Error('Browser mode must be probe, required or off');
-  if (mode === 'off') return {mode, status: 'not-requested', limitation: 'No browser capability or GPU/Canvas check performed', errors: []};
-  try {
-    // Use the installed locked Playwright only. Never npx or download a browser.
-    const module = path.join(root, 'node_modules/playwright/index.mjs');
-    const source = `import {chromium} from ${JSON.stringify(pathToFileURL(module).href)};const browser=await chromium.launch({headless:true,timeout:5000});try{console.log(JSON.stringify({version:browser.version()}));}finally{await browser.close();}`;
-    const observed = JSON.parse(command(process.execPath, ['--input-type=module', '-e', source], {cwd: root, timeout: 10000, maxBuffer: 64 * 1024}));
-    return {mode, status: 'available', ...observed, limitation: 'Launch capability only; actual GPU/Canvas assertions remain separate', errors: []};
-  } catch (error) {
-    const detail = error.message.slice(0, 1600);
-    return {mode, status: 'unavailable', detail, errors: mode === 'required' ? [{kind: 'browser-capability', detail}] : []};
-  }
-}
-
-export async function preflightPackageBuild({root = process.cwd(), kind = 'cloudflare', browser = 'probe', python = 'python3', requiredAncestors = []} = {}) {
+export async function preflightPackageBuild({root = process.cwd(), kind = 'cloudflare', python = 'python3'} = {}) {
   const started = performance.now();
   root = fsSync.realpathSync(root);
   const definition = loadPackageInputs(root);
-  const inputs = inspectPackageInputs(root, definition), ancestry = inspectPackageAncestry(root, definition, requiredAncestors);
+  const inputs = inspectPackageInputs(root, definition);
   const execution = inspectPackageExecutionInputs(root, definition, kind);
-  const runtime = inspectPackageRuntime(root, {python}), browserCapability = await inspectPackageBrowser(root, browser);
-  const errors = [...inputs.errors, ...ancestry.errors, ...execution.errors, ...runtime.errors, ...browserCapability.errors];
+  const runtime = inspectPackageRuntime(root, {python});
+  const errors = [...inputs.errors, ...execution.errors, ...runtime.errors];
   return {version: 1, kind: 'package-build-preflight', passed: errors.length === 0, input_definition_sha256: sha(fsSync.readFileSync(path.join(root, '.github/package-inputs.json'))),
-    inputs, ancestry, execution, runtime, browser: browserCapability, errors, elapsed_seconds: (performance.now() - started) / 1000,
+    inputs, execution, runtime, errors, elapsed_seconds: (performance.now() - started) / 1000,
     limitation: 'Availability and runtime preflight only. Existing authenticated package/selected readers and applicable hosted tests remain authoritative; no scientific producer, fetch or installation invoked.'};
 }
 
@@ -313,6 +291,27 @@ export async function verifyPackageDependencies(directory) {
   return root;
 }
 
+// A real provider limit on new published static files, not decoded scientific
+// inputs or historical custody: https://developers.cloudflare.com/workers/platform/limits/#static-assets
+export const CLOUDFLARE_STATIC_ASSET_BYTES=25*1024*1024;
+export function assertCloudflareStaticAssets(root) {
+  root=fsSync.realpathSync(root);
+  for(const relative of ['dist','dist/client']){
+    const stat=fsSync.lstatSync(path.join(root,relative));
+    if(!stat.isDirectory()||stat.isSymbolicLink())throw Error('Cloudflare static asset directory must be ordinary: '+relative);
+  }
+  const visit=relative=>{
+    for(const name of fsSync.readdirSync(path.join(root,relative))){
+      const child=relative+'/'+name,stat=fsSync.lstatSync(path.join(root,child));
+      if(stat.isSymbolicLink())throw Error('Cloudflare static asset must be ordinary: '+child);
+      if(stat.isDirectory())visit(child);
+      else if(!stat.isFile()||stat.size>CLOUDFLARE_STATIC_ASSET_BYTES)
+        throw Error('Cloudflare static asset exceeds 25 MiB or is nonordinary: '+child);
+    }
+  };
+  visit('dist/client');
+}
+
 export function assertPackageStage(directory = repository) {
   const expected = process.env.WORLDATLAS_PACKAGE_STAGE;
   if (!expected || path.resolve(expected) !== path.resolve(directory)) throw Error('Private builder requires a declared input image; use build:static, build:hosted or build:cloudflare');
@@ -368,6 +367,7 @@ export async function runPackageBuild(kind, {root = repository, execute, preflig
     }
     pythonExecution?.verify();
     if(currentExecution)requireCurrentExecution(currentExecution);
+    if(kind==='cloudflare')assertCloudflareStaticAssets(stage);
     // Only explicit generated outputs return to the caller. Source archives and
     // unpublished research never get copied back or altered by this wrapper.
     for (const output of definition.generated_outputs) {
@@ -391,6 +391,18 @@ export async function runPackageBuild(kind, {root = repository, execute, preflig
     if(currentExecution)receipt.current_context_execution=currentExecution;
     if(pythonExecution)receipt.current_python_execution=pythonExecution.record;
     receipt.preflight = readiness;
+    // Only the closed file actually exported by this successful build is disposable.
+    const database = '.cache/package-atlas.sqlite';
+    if (exports.some(output => output.target === path.join(root, database))) {
+      const file = path.join(root, database), before = fsSync.lstatSync(file);
+      if (!before.isFile() || fsSync.realpathSync(file) !== file) throw Error('Generated comparison database must be ordinary');
+      // Native Git streams this binary with no filters, object write or hydration.
+      const oid = command('git', ['-C', root, '-c', 'core.bigFileThreshold=0', 'hash-object', '--no-filters', '--', database], {env: gitEnv()}).trim();
+      const after = fsSync.lstatSync(file);
+      if (!/^[a-f0-9]{40}$/.test(oid) || ['dev','ino','size','mode','mtimeMs','ctimeMs'].some(key => before[key] !== after[key]))
+        throw Error('Generated comparison database changed while hashing');
+      receipt.generated_database = {path: database, bytes: after.size, git_blob_oid: oid};
+    }
     await fs.writeFile(path.join(cache, 'package-input-build.json'), JSON.stringify(receipt, null, 2) + '\n');
     return receipt;
   } finally {

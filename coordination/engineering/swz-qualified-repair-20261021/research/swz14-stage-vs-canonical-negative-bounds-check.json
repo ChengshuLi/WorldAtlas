@@ -1,0 +1,278 @@
+{
+  "kind": "SWZ14 simplified-stage versus canonical negative-screen envelope comparison",
+  "scope": "Eight exact simplified source features consumed by the prior physical receipt, compared by coordinate bounding box against the canonical target envelope used by the active negative-candidate screen. No candidate-run rescan or source-evidence construction.",
+  "inputs": {
+    "stage_commit": "ec47bf3998bf44b50d4ed59c0a1768faea6ad6b5",
+    "stage_path": ".worldatlas-workspaces/2d82c0ae06b92ab3/42d17456f7a54d6568c34d0f3b55d222f56a720a7015812071dce708422d5208/work/coordination/engineering/swz-qualified-repair-20261021/physical-preparation/original-stage-inputs.json",
+    "stage_git_blob_oid": "f4f04330352612aa6d408f593e6a760c0818fa92",
+    "stage_bytes": 18743,
+    "stage_sha256": "7710b7fe818907b51b20f775dde4009c9642a3e401fcde80290c01957713b7fc",
+    "source_payload_path": "inventory/swz-audit-handoff/extracted/primary/gb-ADM2-original.geojson",
+    "source_payload_bytes": 120065,
+    "source_payload_sha256": "5d54a3629b8b766c061734f7fa3d04c84eab5946b62932e77d067d1b01e7749f",
+    "canonical_parts_commit": "34b44bf538aabcb1a6485d56ed4859ecf553aa72",
+    "canonical_target_inventory": "inventory/swz-current-canonical-targets.json",
+    "canonical_target_inventory_sha256": "cc9f307d49321d3694cf26c8f8dd3b57baf6dbf1134e7edeb298394fb3c4fad1",
+    "canonical_part_blob_oids": [
+      "b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f",
+      "371e95033d9c542bbf07c42afe7111074e35f246"
+    ],
+    "negative_bounds_path": ".worldatlas-workspaces/2d82c0ae06b92ab3/42d17456f7a54d6568c34d0f3b55d222f56a720a7015812071dce708422d5208/work/coordination/engineering/swz-qualified-repair-20261021/research/swz14-whole-target-negative-candidate-bounds.json",
+    "negative_bounds_sha256": "2db9614b8bf3b407bd7b5a9a39fffb4dead1a33a2eef098db673d3e72c3fc93b",
+    "screen_method": "Exact current selected canonical feature geometry read from two pinned part blobs; only its envelope was transformed to native-grid x/y, with x=(lon+180)/360*262166 and y=(0.5-ln((1+sin(lat))/(1-sin(lat)))/(4*pi))*262166, matching src/pixel-grid.js."
+  },
+  "coordinate_method": "Compute each geometry envelope from retained GeoJSON positions, then transform minLon/maxLat/minLat/maxLon using x=(lon+180)/360*262166 and y=(0.5-ln((1+sin(lat))/(1-sin(lat)))/(4*pi))*262166, with latitude in radians, matching the screen formula. Compare continuous native-grid bounding boxes; no integer candidate runs were recalculated.",
+  "results": [
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B37706944907644",
+      "name": "Inkhundla Mhlume",
+      "source_blob_binding": {
+        "source_id": "gb:SWZ:ADM2:25544865B37706944907644",
+        "geometry_equals_stage": true
+      },
+      "canonical_target_native_bbox": [
+        154144.14089444,
+        150650.70914231,
+        154411.47739056,
+        150930.98856549
+      ],
+      "consumed_simplified_native_bbox": [
+        154143.50004422222,
+        150650.7054172332,
+        154411.44731428946,
+        150930.96419961148
+      ],
+      "consumed_minus_canonical_native_bbox": [
+        -0.640850218,
+        -0.003725077,
+        -0.030076271,
+        -0.024365879
+      ],
+      "source_extent_within_canonical_screen_bbox": false,
+      "screened_run_count": 12,
+      "screened_candidate_feature_count": 4
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B4123625373150",
+      "name": "Inkhundla Gege",
+      "source_blob_binding": {
+        "source_id": "gb:SWZ:ADM2:25544865B4123625373150",
+        "geometry_equals_stage": true
+      },
+      "canonical_target_native_bbox": [
+        153578.59057333,
+        151331.93302868,
+        153807.62170389,
+        151583.42609419
+      ],
+      "consumed_simplified_native_bbox": [
+        153578.6109640222,
+        151331.51702806278,
+        153814.65117541168,
+        151586.84710379512
+      ],
+      "consumed_minus_canonical_native_bbox": [
+        0.020390692,
+        -0.416000617,
+        7.029471522,
+        3.421009605
+      ],
+      "source_extent_within_canonical_screen_bbox": false,
+      "screened_run_count": 15,
+      "screened_candidate_feature_count": 2
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B616938903867",
+      "name": "Inkhundla Ngwempisi",
+      "source_blob_binding": {
+        "source_id": "gb:SWZ:ADM2:25544865B616938903867",
+        "geometry_equals_stage": true
+      },
+      "canonical_target_native_bbox": [
+        153506.20362778,
+        151204.20246542,
+        153871.92519778,
+        151389.37537893
+      ],
+      "consumed_simplified_native_bbox": [
+        153506.21091016667,
+        151204.210611099,
+        153871.94704494442,
+        151389.3590550128
+      ],
+      "consumed_minus_canonical_native_bbox": [
+        0.007282387,
+        0.008145679,
+        0.021847164,
+        -0.016323917
+      ],
+      "source_extent_within_canonical_screen_bbox": false,
+      "screened_run_count": 4,
+      "screened_candidate_feature_count": 7
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B74382320525051",
+      "name": "Inkhundla Maseyisini",
+      "source_blob_binding": {
+        "source_id": "gb:SWZ:ADM2:25544865B74382320525051",
+        "geometry_equals_stage": true
+      },
+      "canonical_target_native_bbox": [
+        153685.86016167,
+        151522.83831856,
+        153854.44746444,
+        151703.00214542
+      ],
+      "consumed_simplified_native_bbox": [
+        153685.89089334777,
+        151522.7283811399,
+        153855.1757033333,
+        151703.03572399603
+      ],
+      "consumed_minus_canonical_native_bbox": [
+        0.030731678,
+        -0.10993742,
+        0.728238893,
+        0.033578576
+      ],
+      "source_extent_within_canonical_screen_bbox": false,
+      "screened_run_count": 2,
+      "screened_candidate_feature_count": 2
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B75252057291440",
+      "name": "Inkhundla Zombodze",
+      "source_blob_binding": {
+        "source_id": "gb:SWZ:ADM2:25544865B75252057291440",
+        "geometry_equals_stage": true
+      },
+      "canonical_target_native_bbox": [
+        153825.68202833,
+        151588.82451786,
+        153955.45419833,
+        151744.94405126
+      ],
+      "consumed_simplified_native_bbox": [
+        153825.65100535666,
+        151588.84905687792,
+        153955.48332788888,
+        151744.9597830983
+      ],
+      "consumed_minus_canonical_native_bbox": [
+        -0.031022973,
+        0.024539018,
+        0.029129559,
+        0.015731838
+      ],
+      "source_extent_within_canonical_screen_bbox": false,
+      "screened_run_count": 9,
+      "screened_candidate_feature_count": 8
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B91965971492812",
+      "name": "Inkhundla Piggs Peak",
+      "source_blob_binding": {
+        "source_id": "gb:SWZ:ADM2:25544865B91965971492812",
+        "geometry_equals_stage": true
+      },
+      "canonical_target_native_bbox": [
+        153720.30586111,
+        150591.28841506,
+        153969.94615222,
+        150773.71598595
+      ],
+      "consumed_simplified_native_bbox": [
+        153720.27949886335,
+        150588.14840171175,
+        153969.92168339554,
+        150774.38899075115
+      ],
+      "consumed_minus_canonical_native_bbox": [
+        -0.026362247,
+        -3.140013348,
+        -0.024468824,
+        0.673004801
+      ],
+      "source_extent_within_canonical_screen_bbox": false,
+      "screened_run_count": 11,
+      "screened_candidate_feature_count": 2
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B99062950351047",
+      "name": "Inkhundla Lomahasha",
+      "source_blob_binding": {
+        "source_id": "gb:SWZ:ADM2:25544865B99062950351047",
+        "geometry_equals_stage": true
+      },
+      "canonical_target_native_bbox": [
+        154295.97870278,
+        150664.25230734,
+        154463.32799944,
+        150860.02932696
+      ],
+      "consumed_simplified_native_bbox": [
+        154295.98474716055,
+        150664.27115638345,
+        154463.36404726945,
+        150860.0591121533
+      ],
+      "consumed_minus_canonical_native_bbox": [
+        0.006044381,
+        0.018849043,
+        0.036047829,
+        0.029785193
+      ],
+      "source_extent_within_canonical_screen_bbox": false,
+      "screened_run_count": 78,
+      "screened_candidate_feature_count": 4
+    },
+    {
+      "target_id": "gb:SWZ:ADM2:25544865B99429407754877",
+      "name": "Inkhundla Tikhuba",
+      "source_blob_binding": {
+        "source_id": "gb:SWZ:ADM2:25544865B99429407754877",
+        "geometry_equals_stage": true
+      },
+      "canonical_target_native_bbox": [
+        154349.79555667,
+        151080.63287021,
+        154484.95669444,
+        151385.94741954
+      ],
+      "consumed_simplified_native_bbox": [
+        154349.82468622224,
+        151079.957675075,
+        154484.95108700497,
+        151385.9162420157
+      ],
+      "consumed_minus_canonical_native_bbox": [
+        0.029129552,
+        -0.675195135,
+        -0.005607435,
+        -0.031177524
+      ],
+      "source_extent_within_canonical_screen_bbox": false,
+      "screened_run_count": 34,
+      "screened_candidate_feature_count": 3
+    }
+  ],
+  "conclusion": {
+    "consumed_source_extent_contained_count": 0,
+    "target_count": 8,
+    "all_source_extents_covered": false,
+    "effect": "The canonical-target boxes used by the candidate-family screen do not envelope the full simplified source geometry consumed by physical staging for any of the eight targets. The author-side negative preparation should enlarge the bbox query envelope to the union of each canonical target bbox and its exact consumed simplified-source bbox before deriving candidate rows. The differences range from subcell edge deltas to multi-cell deltas; all deltas are native-grid cells, not degrees. Largest observed is Gege +7.029471522 maxX (east) and +3.421009605 maxY (south); Piggs Peak extends -3.140013348 minY (north). For [minX,minY,maxX,maxY], negative minY extends north and positive maxY extends south. This comparison identifies the extent gap only; it does not identify additional source features or prove intersection/disjointness."
+  },
+  "limits": [
+    "A bounding box is a screening envelope, not polygon overlay.",
+    "No source-candidate rows were rescanned; counts shown are from the prior canonical-only screen.",
+    "No negative family was declared complete and no source-evidence operand was built.",
+    "Previously verified physical receipt remains bound to the eight simplified stage geometries; this report only finds that the separate canonical-based screen envelope does not fully contain them."
+  ],
+  "operations": {
+    "read_only": true,
+    "candidate_rescan": false,
+    "source_evidence_constructed": false,
+    "geometry_or_physical_producer_rerun": false,
+    "new_fetch": false
+  }
+}

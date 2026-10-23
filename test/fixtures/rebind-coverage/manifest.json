@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "kind": "literal-rebind-coverage-fixtures-v1",
+  "source_commit": "c9e14de1ebf2fbef0682085dfc9a035af6ead550",
+  "files": [
+    {
+      "file": "original-grid.json",
+      "source_path": "data/canonical-grid/manifest.json",
+      "git_blob_oid": "ab4ca9a15f0645b9d6721e90726e593851fe4013",
+      "bytes": 271171,
+      "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6"
+    },
+    {
+      "file": "selected-grid.json",
+      "source_path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/manifest.json",
+      "git_blob_oid": "26ff3990084460de30891dfff8b81cbb5ad065ed",
+      "bytes": 251190,
+      "sha256": "efe31373ff6a2c3f4ba5f11f8cbe37b25337778b344d9dbf1d3dfde301e3e722"
+    },
+    {
+      "file": "classification.json",
+      "source_path": "data/coverage-classification/manifest.json",
+      "git_blob_oid": "c2ff3de5e87a4082c69417e68e52b4accea4861d",
+      "bytes": 4921,
+      "sha256": "be2a88a8ae0a9516ea116ccc378fb3d06663d327b0dde2c05b1cb72be4c8d5ed"
+    }
+  ]
+}

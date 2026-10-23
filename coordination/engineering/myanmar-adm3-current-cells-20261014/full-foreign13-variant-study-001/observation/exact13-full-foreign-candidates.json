@@ -1,0 +1,1707 @@
+[
+  {
+    "owner": 30078,
+    "y": 114536,
+    "x": 198611,
+    "full_interiors": [
+      {
+        "family": "gb:IND:ADM2",
+        "country": "IND",
+        "source_id": "gb:IND:ADM2:76128533B70210707786180",
+        "full_feature_ordinal": 272,
+        "geometry_pointer": "/features/272/geometry",
+        "full_shapeID": "76128533B70210707786180",
+        "full_name": "Lawngtlai",
+        "existing_location": {
+          "id": "gb:IND:ADM2:76128533B70210707786180",
+          "index": 23459,
+          "bounds": [
+            198440.58214111108,
+            114016.593934138,
+            198910.80599166665,
+            114664.68101408768
+          ],
+          "province_id": "framework:province:mizoram:551c4e28d025",
+          "province_index": 3058
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/272"
+        ],
+        "bounds": [
+          92.4938,
+          21.98499,
+          93.14148,
+          22.80814
+        ],
+        "geometry_sha256": "9490151505435122df5a8343a034d84da1e21a94479e1aeda3a8242ae0c32107"
+      }
+    ],
+    "full_boundaries": [],
+    "original_question": {
+      "owner": 30078,
+      "y": 114536,
+      "x": 198611,
+      "retained_negative_class": "reference-and-administrative",
+      "original_attribution": {
+        "owner": 30078,
+        "y": 114536,
+        "x": 198611,
+        "original_interval": 1568,
+        "diagnostic": {
+          "reason": "territorial_exclusion_cells",
+          "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+          "pointer": "/decision_rows/1435/runs/3"
+        },
+        "inside": [
+          0,
+          6,
+          12
+        ],
+        "boundary": []
+      },
+      "negative_operands": [
+        {
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "index": 0
+        },
+        {
+          "id": "gb:IND:ADM1:1811400B49281905528064",
+          "kind": "complete-retained-foreign-source-feature",
+          "hash": "dc80ff501425e87baeaf2c8d6a46459a79e4ec3216ff6b33e32c18d2dac62221",
+          "index": 6
+        },
+        {
+          "id": "gb:IND:ADM3:7132399B73294925645165",
+          "kind": "complete-retained-foreign-source-feature",
+          "hash": "f40897948af42fd815e640ad8663ca4de6a061e9282dd192fab7fc7560297cc3",
+          "index": 12
+        }
+      ]
+    },
+    "original_requested_existing_location": {
+      "id": "gb:MMR:ADM3:66882298B10368150445219",
+      "index": 30078,
+      "bounds": [
+        198519.4504127778,
+        114535.02304420488,
+        199277.76556777777,
+        115662.31084638364
+      ],
+      "province_id": "framework:province:mindat:51d16d6706c4",
+      "province_index": 3037
+    },
+    "country_interiors": [
+      {
+        "ordinal": 8,
+        "code": "IND",
+        "name": "India"
+      }
+    ],
+    "country_boundaries": [],
+    "current_world_interiors": [],
+    "current_world_boundaries": [],
+    "contrary_original_MMR_fine_interiors": [
+      {
+        "family": "gb:MMR:ADM3",
+        "country": "MMR",
+        "source_id": "gb:MMR:ADM3:66882298B10368150445219",
+        "pointer": "/features/199/geometry",
+        "original_name": "Paletwa",
+        "existing_location": {
+          "id": "gb:MMR:ADM3:66882298B10368150445219",
+          "index": 30078,
+          "bounds": [
+            198519.4504127778,
+            114535.02304420488,
+            199277.76556777777,
+            115662.31084638364
+          ],
+          "province_id": "framework:province:mindat:51d16d6706c4",
+          "province_index": 3037
+        },
+        "geometry_sha256": "9bee18b47c770806b322c6728eff68976f6fa9218a7af807f619504d2c1684f4"
+      }
+    ],
+    "original_simplified_foreign_interiors": [],
+    "reference_consistent_full_interiors": [
+      {
+        "family": "gb:IND:ADM2",
+        "country": "IND",
+        "source_id": "gb:IND:ADM2:76128533B70210707786180",
+        "full_feature_ordinal": 272,
+        "geometry_pointer": "/features/272/geometry",
+        "full_shapeID": "76128533B70210707786180",
+        "full_name": "Lawngtlai",
+        "existing_location": {
+          "id": "gb:IND:ADM2:76128533B70210707786180",
+          "index": 23459,
+          "bounds": [
+            198440.58214111108,
+            114016.593934138,
+            198910.80599166665,
+            114664.68101408768
+          ],
+          "province_id": "framework:province:mizoram:551c4e28d025",
+          "province_index": 3058
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/272"
+        ],
+        "bounds": [
+          92.4938,
+          21.98499,
+          93.14148,
+          22.80814
+        ],
+        "geometry_sha256": "9490151505435122df5a8343a034d84da1e21a94479e1aeda3a8242ae0c32107"
+      }
+    ],
+    "disposition": "unique-existing-reference-consistent-full-foreign-target"
+  },
+  {
+    "owner": 30149,
+    "y": 121594,
+    "x": 203307,
+    "full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B83426526195600",
+        "full_feature_ordinal": 212,
+        "geometry_pointer": "/features/212/geometry",
+        "full_shapeID": "78962969B83426526195600",
+        "full_name": "Kaeng Krachan",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B83426526195600",
+          "index": 41899,
+          "bounds": [
+            203296.8431716667,
+            121426.3973611814,
+            203755.56084777776,
+            121859.48453130835
+          ],
+          "province_id": "framework:province:phetchaburi-province:1509065382e5",
+          "province_index": 3639
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/212"
+        ],
+        "bounds": [
+          99.16227378900004,
+          12.56320607500004,
+          99.79222889000005,
+          13.14341819200007
+        ],
+        "geometry_sha256": "1d2906b5beb96ce873da8959bb1f597667762f15e1251333d2667433398e4a8f"
+      }
+    ],
+    "full_boundaries": [],
+    "original_question": {
+      "owner": 30149,
+      "y": 121594,
+      "x": 203307,
+      "retained_negative_class": "earlier-or-foreign-source-hold"
+    },
+    "original_requested_existing_location": {
+      "id": "gb:MMR:ADM3:66882298B30308301468052",
+      "index": 30149,
+      "bounds": [
+        203000.15864833334,
+        121194.49754545478,
+        203662.6448809462,
+        122787.77470253423
+      ],
+      "province_id": "framework:province:myeik:2820a791707f",
+      "province_index": 3148
+    },
+    "country_interiors": [
+      {
+        "ordinal": 110,
+        "code": "THA",
+        "name": "Thailand"
+      }
+    ],
+    "country_boundaries": [],
+    "current_world_interiors": [],
+    "current_world_boundaries": [],
+    "contrary_original_MMR_fine_interiors": [
+      {
+        "family": "gb:MMR:ADM3",
+        "country": "MMR",
+        "source_id": "gb:MMR:ADM3:66882298B30308301468052",
+        "pointer": "/features/165/geometry",
+        "original_name": "Tanintharyi",
+        "existing_location": {
+          "id": "gb:MMR:ADM3:66882298B30308301468052",
+          "index": 30149,
+          "bounds": [
+            203000.15864833334,
+            121194.49754545478,
+            203662.6448809462,
+            122787.77470253423
+          ],
+          "province_id": "framework:province:myeik:2820a791707f",
+          "province_index": 3148
+        },
+        "geometry_sha256": "f9d8d80703e2a7935c443e5d0c355d538b6a96bc980dbbae30d4f9577d720138"
+      }
+    ],
+    "original_simplified_foreign_interiors": [],
+    "reference_consistent_full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B83426526195600",
+        "full_feature_ordinal": 212,
+        "geometry_pointer": "/features/212/geometry",
+        "full_shapeID": "78962969B83426526195600",
+        "full_name": "Kaeng Krachan",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B83426526195600",
+          "index": 41899,
+          "bounds": [
+            203296.8431716667,
+            121426.3973611814,
+            203755.56084777776,
+            121859.48453130835
+          ],
+          "province_id": "framework:province:phetchaburi-province:1509065382e5",
+          "province_index": 3639
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/212"
+        ],
+        "bounds": [
+          99.16227378900004,
+          12.56320607500004,
+          99.79222889000005,
+          13.14341819200007
+        ],
+        "geometry_sha256": "1d2906b5beb96ce873da8959bb1f597667762f15e1251333d2667433398e4a8f"
+      }
+    ],
+    "disposition": "unique-existing-reference-consistent-full-foreign-target"
+  },
+  {
+    "owner": 30149,
+    "y": 121742,
+    "x": 203360,
+    "full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B83426526195600",
+        "full_feature_ordinal": 212,
+        "geometry_pointer": "/features/212/geometry",
+        "full_shapeID": "78962969B83426526195600",
+        "full_name": "Kaeng Krachan",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B83426526195600",
+          "index": 41899,
+          "bounds": [
+            203296.8431716667,
+            121426.3973611814,
+            203755.56084777776,
+            121859.48453130835
+          ],
+          "province_id": "framework:province:phetchaburi-province:1509065382e5",
+          "province_index": 3639
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/212"
+        ],
+        "bounds": [
+          99.16227378900004,
+          12.56320607500004,
+          99.79222889000005,
+          13.14341819200007
+        ],
+        "geometry_sha256": "1d2906b5beb96ce873da8959bb1f597667762f15e1251333d2667433398e4a8f"
+      }
+    ],
+    "full_boundaries": [],
+    "original_question": {
+      "owner": 30149,
+      "y": 121742,
+      "x": 203360,
+      "retained_negative_class": "earlier-or-foreign-source-hold"
+    },
+    "original_requested_existing_location": {
+      "id": "gb:MMR:ADM3:66882298B30308301468052",
+      "index": 30149,
+      "bounds": [
+        203000.15864833334,
+        121194.49754545478,
+        203662.6448809462,
+        122787.77470253423
+      ],
+      "province_id": "framework:province:myeik:2820a791707f",
+      "province_index": 3148
+    },
+    "country_interiors": [
+      {
+        "ordinal": 110,
+        "code": "THA",
+        "name": "Thailand"
+      }
+    ],
+    "country_boundaries": [],
+    "current_world_interiors": [],
+    "current_world_boundaries": [],
+    "contrary_original_MMR_fine_interiors": [
+      {
+        "family": "gb:MMR:ADM3",
+        "country": "MMR",
+        "source_id": "gb:MMR:ADM3:66882298B30308301468052",
+        "pointer": "/features/165/geometry",
+        "original_name": "Tanintharyi",
+        "existing_location": {
+          "id": "gb:MMR:ADM3:66882298B30308301468052",
+          "index": 30149,
+          "bounds": [
+            203000.15864833334,
+            121194.49754545478,
+            203662.6448809462,
+            122787.77470253423
+          ],
+          "province_id": "framework:province:myeik:2820a791707f",
+          "province_index": 3148
+        },
+        "geometry_sha256": "f9d8d80703e2a7935c443e5d0c355d538b6a96bc980dbbae30d4f9577d720138"
+      }
+    ],
+    "original_simplified_foreign_interiors": [],
+    "reference_consistent_full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B83426526195600",
+        "full_feature_ordinal": 212,
+        "geometry_pointer": "/features/212/geometry",
+        "full_shapeID": "78962969B83426526195600",
+        "full_name": "Kaeng Krachan",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B83426526195600",
+          "index": 41899,
+          "bounds": [
+            203296.8431716667,
+            121426.3973611814,
+            203755.56084777776,
+            121859.48453130835
+          ],
+          "province_id": "framework:province:phetchaburi-province:1509065382e5",
+          "province_index": 3639
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/212"
+        ],
+        "bounds": [
+          99.16227378900004,
+          12.56320607500004,
+          99.79222889000005,
+          13.14341819200007
+        ],
+        "geometry_sha256": "1d2906b5beb96ce873da8959bb1f597667762f15e1251333d2667433398e4a8f"
+      }
+    ],
+    "disposition": "unique-existing-reference-consistent-full-foreign-target"
+  },
+  {
+    "owner": 30163,
+    "y": 118383,
+    "x": 202648,
+    "full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B58793256407954",
+        "full_feature_ordinal": 827,
+        "geometry_pointer": "/features/827/geometry",
+        "full_shapeID": "78962969B58793256407954",
+        "full_name": "Tha Song Yang",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B58793256407954",
+          "index": 41670,
+          "bounds": [
+            202262.8167733333,
+            117860.37460587466,
+            202793.77574722221,
+            118466.54105618357
+          ],
+          "province_id": "framework:province:tak-province:0acaef8f5815",
+          "province_index": 4480
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/827"
+        ],
+        "bounds": [
+          97.74235826500006,
+          17.066507175000027,
+          98.47151227300009,
+          17.86791724400007
+        ],
+        "geometry_sha256": "df2913d8ceb7e2f1a701ae117305637e16a84c6c0c290c378e6808c3a264443e"
+      }
+    ],
+    "full_boundaries": [],
+    "original_question": {
+      "owner": 30163,
+      "y": 118383,
+      "x": 202648,
+      "retained_negative_class": "earlier-or-foreign-source-hold"
+    },
+    "original_requested_existing_location": {
+      "id": "gb:MMR:ADM3:66882298B33854457780857",
+      "index": 30163,
+      "bounds": [
+        202161.44592,
+        117874.910970332,
+        202675.21845611112,
+        118761.20059524034
+      ],
+      "province_id": "framework:province:hpa-an:3b606d253d82",
+      "province_index": 2077
+    },
+    "country_interiors": [
+      {
+        "ordinal": 110,
+        "code": "THA",
+        "name": "Thailand"
+      }
+    ],
+    "country_boundaries": [],
+    "current_world_interiors": [],
+    "current_world_boundaries": [],
+    "contrary_original_MMR_fine_interiors": [
+      {
+        "family": "gb:MMR:ADM3",
+        "country": "MMR",
+        "source_id": "gb:MMR:ADM3:66882298B33854457780857",
+        "pointer": "/features/151/geometry",
+        "original_name": "Hlaingbwe",
+        "existing_location": {
+          "id": "gb:MMR:ADM3:66882298B33854457780857",
+          "index": 30163,
+          "bounds": [
+            202161.44592,
+            117874.910970332,
+            202675.21845611112,
+            118761.20059524034
+          ],
+          "province_id": "framework:province:hpa-an:3b606d253d82",
+          "province_index": 2077
+        },
+        "geometry_sha256": "5586f86c6dd2a78a8ffd249c80a137732581c1ec851d020efc4f9b786d606102"
+      }
+    ],
+    "original_simplified_foreign_interiors": [],
+    "reference_consistent_full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B58793256407954",
+        "full_feature_ordinal": 827,
+        "geometry_pointer": "/features/827/geometry",
+        "full_shapeID": "78962969B58793256407954",
+        "full_name": "Tha Song Yang",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B58793256407954",
+          "index": 41670,
+          "bounds": [
+            202262.8167733333,
+            117860.37460587466,
+            202793.77574722221,
+            118466.54105618357
+          ],
+          "province_id": "framework:province:tak-province:0acaef8f5815",
+          "province_index": 4480
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/827"
+        ],
+        "bounds": [
+          97.74235826500006,
+          17.066507175000027,
+          98.47151227300009,
+          17.86791724400007
+        ],
+        "geometry_sha256": "df2913d8ceb7e2f1a701ae117305637e16a84c6c0c290c378e6808c3a264443e"
+      }
+    ],
+    "disposition": "unique-existing-reference-consistent-full-foreign-target"
+  },
+  {
+    "owner": 30163,
+    "y": 118392,
+    "x": 202646,
+    "full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B58793256407954",
+        "full_feature_ordinal": 827,
+        "geometry_pointer": "/features/827/geometry",
+        "full_shapeID": "78962969B58793256407954",
+        "full_name": "Tha Song Yang",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B58793256407954",
+          "index": 41670,
+          "bounds": [
+            202262.8167733333,
+            117860.37460587466,
+            202793.77574722221,
+            118466.54105618357
+          ],
+          "province_id": "framework:province:tak-province:0acaef8f5815",
+          "province_index": 4480
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/827"
+        ],
+        "bounds": [
+          97.74235826500006,
+          17.066507175000027,
+          98.47151227300009,
+          17.86791724400007
+        ],
+        "geometry_sha256": "df2913d8ceb7e2f1a701ae117305637e16a84c6c0c290c378e6808c3a264443e"
+      }
+    ],
+    "full_boundaries": [],
+    "original_question": {
+      "owner": 30163,
+      "y": 118392,
+      "x": 202646,
+      "retained_negative_class": "earlier-or-foreign-source-hold"
+    },
+    "original_requested_existing_location": {
+      "id": "gb:MMR:ADM3:66882298B33854457780857",
+      "index": 30163,
+      "bounds": [
+        202161.44592,
+        117874.910970332,
+        202675.21845611112,
+        118761.20059524034
+      ],
+      "province_id": "framework:province:hpa-an:3b606d253d82",
+      "province_index": 2077
+    },
+    "country_interiors": [
+      {
+        "ordinal": 110,
+        "code": "THA",
+        "name": "Thailand"
+      }
+    ],
+    "country_boundaries": [],
+    "current_world_interiors": [],
+    "current_world_boundaries": [],
+    "contrary_original_MMR_fine_interiors": [
+      {
+        "family": "gb:MMR:ADM3",
+        "country": "MMR",
+        "source_id": "gb:MMR:ADM3:66882298B33854457780857",
+        "pointer": "/features/151/geometry",
+        "original_name": "Hlaingbwe",
+        "existing_location": {
+          "id": "gb:MMR:ADM3:66882298B33854457780857",
+          "index": 30163,
+          "bounds": [
+            202161.44592,
+            117874.910970332,
+            202675.21845611112,
+            118761.20059524034
+          ],
+          "province_id": "framework:province:hpa-an:3b606d253d82",
+          "province_index": 2077
+        },
+        "geometry_sha256": "5586f86c6dd2a78a8ffd249c80a137732581c1ec851d020efc4f9b786d606102"
+      }
+    ],
+    "original_simplified_foreign_interiors": [],
+    "reference_consistent_full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B58793256407954",
+        "full_feature_ordinal": 827,
+        "geometry_pointer": "/features/827/geometry",
+        "full_shapeID": "78962969B58793256407954",
+        "full_name": "Tha Song Yang",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B58793256407954",
+          "index": 41670,
+          "bounds": [
+            202262.8167733333,
+            117860.37460587466,
+            202793.77574722221,
+            118466.54105618357
+          ],
+          "province_id": "framework:province:tak-province:0acaef8f5815",
+          "province_index": 4480
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/827"
+        ],
+        "bounds": [
+          97.74235826500006,
+          17.066507175000027,
+          98.47151227300009,
+          17.86791724400007
+        ],
+        "geometry_sha256": "df2913d8ceb7e2f1a701ae117305637e16a84c6c0c290c378e6808c3a264443e"
+      }
+    ],
+    "disposition": "unique-existing-reference-consistent-full-foreign-target"
+  },
+  {
+    "owner": 30165,
+    "y": 113132,
+    "x": 199536,
+    "full_interiors": [
+      {
+        "family": "gb:IND:ADM2",
+        "country": "IND",
+        "source_id": "gb:IND:ADM2:76128533B59855617266389",
+        "full_feature_ordinal": 278,
+        "geometry_pointer": "/features/278/geometry",
+        "full_shapeID": "76128533B59855617266389",
+        "full_name": "Chandel",
+        "existing_location": {
+          "id": "gb:IND:ADM2:76128533B59855617266389",
+          "index": 23411,
+          "bounds": [
+            199350.5894566667,
+            112678.37378662215,
+            199723.2292961111,
+            113202.61483023297
+          ],
+          "province_id": "framework:province:manipur:aee657059de0",
+          "province_index": 2875
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/278"
+        ],
+        "bounds": [
+          93.74344,
+          23.83044,
+          94.26514,
+          24.49099
+        ],
+        "geometry_sha256": "056ee00d4ffb59d81e0aff62aa59c53a0ca2612968375cbb3166980093c046ca"
+      }
+    ],
+    "full_boundaries": [],
+    "original_question": {
+      "owner": 30165,
+      "y": 113132,
+      "x": 199536,
+      "retained_negative_class": "reference-and-administrative",
+      "original_attribution": {
+        "owner": 30165,
+        "y": 113132,
+        "x": 199536,
+        "original_interval": 964,
+        "diagnostic": {
+          "reason": "territorial_exclusion_cells",
+          "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+          "pointer": "/decision_rows/909/runs/0"
+        },
+        "inside": [
+          0,
+          3
+        ],
+        "boundary": []
+      },
+      "negative_operands": [
+        {
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "index": 0
+        },
+        {
+          "id": "gb:IND:ADM1:1811400B97532436596698",
+          "kind": "complete-retained-foreign-source-feature",
+          "hash": "510557ffb3ec715fc6444c75a12d7df079692d239ce4ef15e5f726a311db7a0c",
+          "index": 3
+        }
+      ]
+    },
+    "original_requested_existing_location": {
+      "id": "gb:MMR:ADM3:66882298B34348354141761",
+      "index": 30165,
+      "bounds": [
+        199046.40407277775,
+        112997.48554745292,
+        199648.87610555557,
+        113478.50621910098
+      ],
+      "province_id": "framework:province:falam:6bc2430c5172",
+      "province_index": 1702
+    },
+    "country_interiors": [
+      {
+        "ordinal": 8,
+        "code": "IND",
+        "name": "India"
+      }
+    ],
+    "country_boundaries": [],
+    "current_world_interiors": [],
+    "current_world_boundaries": [],
+    "contrary_original_MMR_fine_interiors": [
+      {
+        "family": "gb:MMR:ADM3",
+        "country": "MMR",
+        "source_id": "gb:MMR:ADM3:66882298B34348354141761",
+        "pointer": "/features/191/geometry",
+        "original_name": "Tonzang",
+        "existing_location": {
+          "id": "gb:MMR:ADM3:66882298B34348354141761",
+          "index": 30165,
+          "bounds": [
+            199046.40407277775,
+            112997.48554745292,
+            199648.87610555557,
+            113478.50621910098
+          ],
+          "province_id": "framework:province:falam:6bc2430c5172",
+          "province_index": 1702
+        },
+        "geometry_sha256": "20b4c42d76c3735ac1dbea5e3f08d2859012fb1da308d15aa3fc0e7f28c19f52"
+      }
+    ],
+    "original_simplified_foreign_interiors": [],
+    "reference_consistent_full_interiors": [
+      {
+        "family": "gb:IND:ADM2",
+        "country": "IND",
+        "source_id": "gb:IND:ADM2:76128533B59855617266389",
+        "full_feature_ordinal": 278,
+        "geometry_pointer": "/features/278/geometry",
+        "full_shapeID": "76128533B59855617266389",
+        "full_name": "Chandel",
+        "existing_location": {
+          "id": "gb:IND:ADM2:76128533B59855617266389",
+          "index": 23411,
+          "bounds": [
+            199350.5894566667,
+            112678.37378662215,
+            199723.2292961111,
+            113202.61483023297
+          ],
+          "province_id": "framework:province:manipur:aee657059de0",
+          "province_index": 2875
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/278"
+        ],
+        "bounds": [
+          93.74344,
+          23.83044,
+          94.26514,
+          24.49099
+        ],
+        "geometry_sha256": "056ee00d4ffb59d81e0aff62aa59c53a0ca2612968375cbb3166980093c046ca"
+      }
+    ],
+    "disposition": "unique-existing-reference-consistent-full-foreign-target"
+  },
+  {
+    "owner": 30170,
+    "y": 116190,
+    "x": 203211,
+    "full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B22433102808870",
+        "full_feature_ordinal": 184,
+        "geometry_pointer": "/features/184/geometry",
+        "full_shapeID": "78962969B22433102808870",
+        "full_name": "Fang",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B22433102808870",
+          "index": 41303,
+          "bounds": [
+            203194.5984316667,
+            116130.38362703683,
+            203445.33108111113,
+            116436.32368600396
+          ],
+          "province_id": "framework:province:chiang-mai-province:f5fced7246d2",
+          "province_index": 1283
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/184"
+        ],
+        "bounds": [
+          99.02188943000004,
+          19.711672320000048,
+          99.36619695500008,
+          20.107175656000038
+        ],
+        "geometry_sha256": "4ac8e402671e480404a82ed92f2026078aa103c345154479cb3554d1ee65735a"
+      }
+    ],
+    "full_boundaries": [],
+    "original_question": {
+      "owner": 30170,
+      "y": 116190,
+      "x": 203211,
+      "retained_negative_class": "earlier-or-foreign-source-hold"
+    },
+    "original_requested_existing_location": {
+      "id": "gb:MMR:ADM3:66882298B34816344861267",
+      "index": 30170,
+      "bounds": [
+        202807.1753427778,
+        115597.12884461948,
+        203357.94241444443,
+        116433.6361601506
+      ],
+      "province_id": "framework:province:monghsat:6a0b26b82693",
+      "province_index": 3075
+    },
+    "country_interiors": [
+      {
+        "ordinal": 110,
+        "code": "THA",
+        "name": "Thailand"
+      }
+    ],
+    "country_boundaries": [],
+    "current_world_interiors": [],
+    "current_world_boundaries": [],
+    "contrary_original_MMR_fine_interiors": [
+      {
+        "family": "gb:MMR:ADM3",
+        "country": "MMR",
+        "source_id": "gb:MMR:ADM3:66882298B34816344861267",
+        "pointer": "/features/248/geometry",
+        "original_name": "Mongton",
+        "existing_location": {
+          "id": "gb:MMR:ADM3:66882298B34816344861267",
+          "index": 30170,
+          "bounds": [
+            202807.1753427778,
+            115597.12884461948,
+            203357.94241444443,
+            116433.6361601506
+          ],
+          "province_id": "framework:province:monghsat:6a0b26b82693",
+          "province_index": 3075
+        },
+        "geometry_sha256": "816f71b1d441a264d7d01c164433d3fac6a81700f0e3a313c1e1caec015326da"
+      }
+    ],
+    "original_simplified_foreign_interiors": [],
+    "reference_consistent_full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B22433102808870",
+        "full_feature_ordinal": 184,
+        "geometry_pointer": "/features/184/geometry",
+        "full_shapeID": "78962969B22433102808870",
+        "full_name": "Fang",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B22433102808870",
+          "index": 41303,
+          "bounds": [
+            203194.5984316667,
+            116130.38362703683,
+            203445.33108111113,
+            116436.32368600396
+          ],
+          "province_id": "framework:province:chiang-mai-province:f5fced7246d2",
+          "province_index": 1283
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/184"
+        ],
+        "bounds": [
+          99.02188943000004,
+          19.711672320000048,
+          99.36619695500008,
+          20.107175656000038
+        ],
+        "geometry_sha256": "4ac8e402671e480404a82ed92f2026078aa103c345154479cb3554d1ee65735a"
+      }
+    ],
+    "disposition": "unique-existing-reference-consistent-full-foreign-target"
+  },
+  {
+    "owner": 30170,
+    "y": 116191,
+    "x": 203211,
+    "full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B22433102808870",
+        "full_feature_ordinal": 184,
+        "geometry_pointer": "/features/184/geometry",
+        "full_shapeID": "78962969B22433102808870",
+        "full_name": "Fang",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B22433102808870",
+          "index": 41303,
+          "bounds": [
+            203194.5984316667,
+            116130.38362703683,
+            203445.33108111113,
+            116436.32368600396
+          ],
+          "province_id": "framework:province:chiang-mai-province:f5fced7246d2",
+          "province_index": 1283
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/184"
+        ],
+        "bounds": [
+          99.02188943000004,
+          19.711672320000048,
+          99.36619695500008,
+          20.107175656000038
+        ],
+        "geometry_sha256": "4ac8e402671e480404a82ed92f2026078aa103c345154479cb3554d1ee65735a"
+      }
+    ],
+    "full_boundaries": [],
+    "original_question": {
+      "owner": 30170,
+      "y": 116191,
+      "x": 203211,
+      "retained_negative_class": "earlier-or-foreign-source-hold"
+    },
+    "original_requested_existing_location": {
+      "id": "gb:MMR:ADM3:66882298B34816344861267",
+      "index": 30170,
+      "bounds": [
+        202807.1753427778,
+        115597.12884461948,
+        203357.94241444443,
+        116433.6361601506
+      ],
+      "province_id": "framework:province:monghsat:6a0b26b82693",
+      "province_index": 3075
+    },
+    "country_interiors": [
+      {
+        "ordinal": 110,
+        "code": "THA",
+        "name": "Thailand"
+      }
+    ],
+    "country_boundaries": [],
+    "current_world_interiors": [],
+    "current_world_boundaries": [],
+    "contrary_original_MMR_fine_interiors": [
+      {
+        "family": "gb:MMR:ADM3",
+        "country": "MMR",
+        "source_id": "gb:MMR:ADM3:66882298B34816344861267",
+        "pointer": "/features/248/geometry",
+        "original_name": "Mongton",
+        "existing_location": {
+          "id": "gb:MMR:ADM3:66882298B34816344861267",
+          "index": 30170,
+          "bounds": [
+            202807.1753427778,
+            115597.12884461948,
+            203357.94241444443,
+            116433.6361601506
+          ],
+          "province_id": "framework:province:monghsat:6a0b26b82693",
+          "province_index": 3075
+        },
+        "geometry_sha256": "816f71b1d441a264d7d01c164433d3fac6a81700f0e3a313c1e1caec015326da"
+      }
+    ],
+    "original_simplified_foreign_interiors": [],
+    "reference_consistent_full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B22433102808870",
+        "full_feature_ordinal": 184,
+        "geometry_pointer": "/features/184/geometry",
+        "full_shapeID": "78962969B22433102808870",
+        "full_name": "Fang",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B22433102808870",
+          "index": 41303,
+          "bounds": [
+            203194.5984316667,
+            116130.38362703683,
+            203445.33108111113,
+            116436.32368600396
+          ],
+          "province_id": "framework:province:chiang-mai-province:f5fced7246d2",
+          "province_index": 1283
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/184"
+        ],
+        "bounds": [
+          99.02188943000004,
+          19.711672320000048,
+          99.36619695500008,
+          20.107175656000038
+        ],
+        "geometry_sha256": "4ac8e402671e480404a82ed92f2026078aa103c345154479cb3554d1ee65735a"
+      }
+    ],
+    "disposition": "unique-existing-reference-consistent-full-foreign-target"
+  },
+  {
+    "owner": 30263,
+    "y": 118747,
+    "x": 202824,
+    "full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B92609473950758",
+        "full_feature_ordinal": 370,
+        "geometry_pointer": "/features/370/geometry",
+        "full_shapeID": "78962969B92609473950758",
+        "full_name": "Mae Sot",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B92609473950758",
+          "index": 41995,
+          "bounds": [
+            202786.85747777778,
+            118536.07497925198,
+            203148.3552622222,
+            118871.1635810457
+          ],
+          "province_id": "framework:province:tak-province:0acaef8f5815",
+          "province_index": 4480
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/370"
+        ],
+        "bounds": [
+          98.46198166000005,
+          16.533425240000042,
+          98.96575513300007,
+          16.977837288000046
+        ],
+        "geometry_sha256": "16250bc20cde5df0f21d7e90c250db8538785418473946d35864c49b44e1e3a9"
+      }
+    ],
+    "full_boundaries": [],
+    "original_question": {
+      "owner": 30263,
+      "y": 118747,
+      "x": 202824,
+      "retained_negative_class": "earlier-or-foreign-source-hold"
+    },
+    "original_requested_existing_location": {
+      "id": "gb:MMR:ADM3:66882298B59879554977018",
+      "index": 30263,
+      "bounds": [
+        202569.11405,
+        118448.71418708746,
+        203119.73596263982,
+        119246.43500495217
+      ],
+      "province_id": "framework:province:myawaddy:32bf363d965b",
+      "province_index": 3147
+    },
+    "country_interiors": [
+      {
+        "ordinal": 110,
+        "code": "THA",
+        "name": "Thailand"
+      }
+    ],
+    "country_boundaries": [],
+    "current_world_interiors": [],
+    "current_world_boundaries": [],
+    "contrary_original_MMR_fine_interiors": [
+      {
+        "family": "gb:MMR:ADM3",
+        "country": "MMR",
+        "source_id": "gb:MMR:ADM3:66882298B59879554977018",
+        "pointer": "/features/153/geometry",
+        "original_name": "Myawaddy",
+        "existing_location": {
+          "id": "gb:MMR:ADM3:66882298B59879554977018",
+          "index": 30263,
+          "bounds": [
+            202569.11405,
+            118448.71418708746,
+            203119.73596263982,
+            119246.43500495217
+          ],
+          "province_id": "framework:province:myawaddy:32bf363d965b",
+          "province_index": 3147
+        },
+        "geometry_sha256": "1c621bcb0686b8209a961479d40f8b9d9a85d3df7bd457e6b317bf4f690e6877"
+      }
+    ],
+    "original_simplified_foreign_interiors": [],
+    "reference_consistent_full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B92609473950758",
+        "full_feature_ordinal": 370,
+        "geometry_pointer": "/features/370/geometry",
+        "full_shapeID": "78962969B92609473950758",
+        "full_name": "Mae Sot",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B92609473950758",
+          "index": 41995,
+          "bounds": [
+            202786.85747777778,
+            118536.07497925198,
+            203148.3552622222,
+            118871.1635810457
+          ],
+          "province_id": "framework:province:tak-province:0acaef8f5815",
+          "province_index": 4480
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/370"
+        ],
+        "bounds": [
+          98.46198166000005,
+          16.533425240000042,
+          98.96575513300007,
+          16.977837288000046
+        ],
+        "geometry_sha256": "16250bc20cde5df0f21d7e90c250db8538785418473946d35864c49b44e1e3a9"
+      }
+    ],
+    "disposition": "unique-existing-reference-consistent-full-foreign-target"
+  },
+  {
+    "owner": 30263,
+    "y": 118752,
+    "x": 202812,
+    "full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B92609473950758",
+        "full_feature_ordinal": 370,
+        "geometry_pointer": "/features/370/geometry",
+        "full_shapeID": "78962969B92609473950758",
+        "full_name": "Mae Sot",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B92609473950758",
+          "index": 41995,
+          "bounds": [
+            202786.85747777778,
+            118536.07497925198,
+            203148.3552622222,
+            118871.1635810457
+          ],
+          "province_id": "framework:province:tak-province:0acaef8f5815",
+          "province_index": 4480
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/370"
+        ],
+        "bounds": [
+          98.46198166000005,
+          16.533425240000042,
+          98.96575513300007,
+          16.977837288000046
+        ],
+        "geometry_sha256": "16250bc20cde5df0f21d7e90c250db8538785418473946d35864c49b44e1e3a9"
+      }
+    ],
+    "full_boundaries": [],
+    "original_question": {
+      "owner": 30263,
+      "y": 118752,
+      "x": 202812,
+      "retained_negative_class": "earlier-or-foreign-source-hold"
+    },
+    "original_requested_existing_location": {
+      "id": "gb:MMR:ADM3:66882298B59879554977018",
+      "index": 30263,
+      "bounds": [
+        202569.11405,
+        118448.71418708746,
+        203119.73596263982,
+        119246.43500495217
+      ],
+      "province_id": "framework:province:myawaddy:32bf363d965b",
+      "province_index": 3147
+    },
+    "country_interiors": [
+      {
+        "ordinal": 110,
+        "code": "THA",
+        "name": "Thailand"
+      }
+    ],
+    "country_boundaries": [],
+    "current_world_interiors": [],
+    "current_world_boundaries": [],
+    "contrary_original_MMR_fine_interiors": [
+      {
+        "family": "gb:MMR:ADM3",
+        "country": "MMR",
+        "source_id": "gb:MMR:ADM3:66882298B59879554977018",
+        "pointer": "/features/153/geometry",
+        "original_name": "Myawaddy",
+        "existing_location": {
+          "id": "gb:MMR:ADM3:66882298B59879554977018",
+          "index": 30263,
+          "bounds": [
+            202569.11405,
+            118448.71418708746,
+            203119.73596263982,
+            119246.43500495217
+          ],
+          "province_id": "framework:province:myawaddy:32bf363d965b",
+          "province_index": 3147
+        },
+        "geometry_sha256": "1c621bcb0686b8209a961479d40f8b9d9a85d3df7bd457e6b317bf4f690e6877"
+      }
+    ],
+    "original_simplified_foreign_interiors": [],
+    "reference_consistent_full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B92609473950758",
+        "full_feature_ordinal": 370,
+        "geometry_pointer": "/features/370/geometry",
+        "full_shapeID": "78962969B92609473950758",
+        "full_name": "Mae Sot",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B92609473950758",
+          "index": 41995,
+          "bounds": [
+            202786.85747777778,
+            118536.07497925198,
+            203148.3552622222,
+            118871.1635810457
+          ],
+          "province_id": "framework:province:tak-province:0acaef8f5815",
+          "province_index": 4480
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/370"
+        ],
+        "bounds": [
+          98.46198166000005,
+          16.533425240000042,
+          98.96575513300007,
+          16.977837288000046
+        ],
+        "geometry_sha256": "16250bc20cde5df0f21d7e90c250db8538785418473946d35864c49b44e1e3a9"
+      }
+    ],
+    "disposition": "unique-existing-reference-consistent-full-foreign-target"
+  },
+  {
+    "owner": 30263,
+    "y": 119217,
+    "x": 202932,
+    "full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B38032656496356",
+        "full_feature_ordinal": 871,
+        "geometry_pointer": "/features/871/geometry",
+        "full_shapeID": "78962969B38032656496356",
+        "full_name": "Umphang",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B38032656496356",
+          "index": 41467,
+          "bounds": [
+            202848.53931166665,
+            118980.9682449852,
+            203279.8023816667,
+            119896.6888083397
+          ],
+          "province_id": "framework:province:tak-province:0acaef8f5815",
+          "province_index": 4480
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/871"
+        ],
+        "bounds": [
+          98.54669972200008,
+          15.179953423000029,
+          99.13885649600007,
+          16.390118605000055
+        ],
+        "geometry_sha256": "d52c9a50c54e29055d5fa8b7274d737c355521ab27b4fc66459184027f722045"
+      }
+    ],
+    "full_boundaries": [],
+    "original_question": {
+      "owner": 30263,
+      "y": 119217,
+      "x": 202932,
+      "retained_negative_class": "earlier-or-foreign-source-hold"
+    },
+    "original_requested_existing_location": {
+      "id": "gb:MMR:ADM3:66882298B59879554977018",
+      "index": 30263,
+      "bounds": [
+        202569.11405,
+        118448.71418708746,
+        203119.73596263982,
+        119246.43500495217
+      ],
+      "province_id": "framework:province:myawaddy:32bf363d965b",
+      "province_index": 3147
+    },
+    "country_interiors": [
+      {
+        "ordinal": 110,
+        "code": "THA",
+        "name": "Thailand"
+      }
+    ],
+    "country_boundaries": [],
+    "current_world_interiors": [],
+    "current_world_boundaries": [],
+    "contrary_original_MMR_fine_interiors": [
+      {
+        "family": "gb:MMR:ADM3",
+        "country": "MMR",
+        "source_id": "gb:MMR:ADM3:66882298B59879554977018",
+        "pointer": "/features/153/geometry",
+        "original_name": "Myawaddy",
+        "existing_location": {
+          "id": "gb:MMR:ADM3:66882298B59879554977018",
+          "index": 30263,
+          "bounds": [
+            202569.11405,
+            118448.71418708746,
+            203119.73596263982,
+            119246.43500495217
+          ],
+          "province_id": "framework:province:myawaddy:32bf363d965b",
+          "province_index": 3147
+        },
+        "geometry_sha256": "1c621bcb0686b8209a961479d40f8b9d9a85d3df7bd457e6b317bf4f690e6877"
+      }
+    ],
+    "original_simplified_foreign_interiors": [],
+    "reference_consistent_full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B38032656496356",
+        "full_feature_ordinal": 871,
+        "geometry_pointer": "/features/871/geometry",
+        "full_shapeID": "78962969B38032656496356",
+        "full_name": "Umphang",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B38032656496356",
+          "index": 41467,
+          "bounds": [
+            202848.53931166665,
+            118980.9682449852,
+            203279.8023816667,
+            119896.6888083397
+          ],
+          "province_id": "framework:province:tak-province:0acaef8f5815",
+          "province_index": 4480
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/871"
+        ],
+        "bounds": [
+          98.54669972200008,
+          15.179953423000029,
+          99.13885649600007,
+          16.390118605000055
+        ],
+        "geometry_sha256": "d52c9a50c54e29055d5fa8b7274d737c355521ab27b4fc66459184027f722045"
+      }
+    ],
+    "disposition": "unique-existing-reference-consistent-full-foreign-target"
+  },
+  {
+    "owner": 30350,
+    "y": 123084,
+    "x": 203178,
+    "full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B56380938562562",
+        "full_feature_ordinal": 825,
+        "geometry_pointer": "/features/825/geometry",
+        "full_shapeID": "78962969B56380938562562",
+        "full_name": "Tha Sae",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B56380938562562",
+          "index": 41647,
+          "bounds": [
+            203095.19382333333,
+            122997.70120245147,
+            203379.862405,
+            123365.33068364339
+          ],
+          "province_id": "framework:province:chumphon-province:1a04f4d4375e",
+          "province_index": 1315
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/825"
+        ],
+        "bounds": [
+          98.88521324200008,
+          10.536511705000066,
+          99.27628133400003,
+          11.033847722000075
+        ],
+        "geometry_sha256": "c53c828bbbe51e11e247d2a1737ae37324376b7709018bd33ae0764d1de7db3c"
+      }
+    ],
+    "full_boundaries": [],
+    "original_question": {
+      "owner": 30350,
+      "y": 123084,
+      "x": 203178,
+      "retained_negative_class": "earlier-or-foreign-source-hold"
+    },
+    "original_requested_existing_location": {
+      "id": "gb:MMR:ADM3:66882298B82483484204646",
+      "index": 30350,
+      "bounds": [
+        202366.80928666666,
+        122369.67516448515,
+        203414.70027830516,
+        123348.66361063575
+      ],
+      "province_id": "framework:province:kawthoung:25f2b1f750b9",
+      "province_index": 2383
+    },
+    "country_interiors": [
+      {
+        "ordinal": 110,
+        "code": "THA",
+        "name": "Thailand"
+      }
+    ],
+    "country_boundaries": [],
+    "current_world_interiors": [],
+    "current_world_boundaries": [],
+    "contrary_original_MMR_fine_interiors": [
+      {
+        "family": "gb:MMR:ADM3",
+        "country": "MMR",
+        "source_id": "gb:MMR:ADM3:66882298B82483484204646",
+        "pointer": "/features/146/geometry",
+        "original_name": "Bokpyin",
+        "existing_location": {
+          "id": "gb:MMR:ADM3:66882298B82483484204646",
+          "index": 30350,
+          "bounds": [
+            202366.80928666666,
+            122369.67516448515,
+            203414.70027830516,
+            123348.66361063575
+          ],
+          "province_id": "framework:province:kawthoung:25f2b1f750b9",
+          "province_index": 2383
+        },
+        "geometry_sha256": "e1a1a2fdf96fbdbe68051f66c1e77c27e4065374d1b198504c3a85b6796f18ea"
+      }
+    ],
+    "original_simplified_foreign_interiors": [],
+    "reference_consistent_full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B56380938562562",
+        "full_feature_ordinal": 825,
+        "geometry_pointer": "/features/825/geometry",
+        "full_shapeID": "78962969B56380938562562",
+        "full_name": "Tha Sae",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B56380938562562",
+          "index": 41647,
+          "bounds": [
+            203095.19382333333,
+            122997.70120245147,
+            203379.862405,
+            123365.33068364339
+          ],
+          "province_id": "framework:province:chumphon-province:1a04f4d4375e",
+          "province_index": 1315
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/825"
+        ],
+        "bounds": [
+          98.88521324200008,
+          10.536511705000066,
+          99.27628133400003,
+          11.033847722000075
+        ],
+        "geometry_sha256": "c53c828bbbe51e11e247d2a1737ae37324376b7709018bd33ae0764d1de7db3c"
+      }
+    ],
+    "disposition": "unique-existing-reference-consistent-full-foreign-target"
+  },
+  {
+    "owner": 30350,
+    "y": 123085,
+    "x": 203178,
+    "full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B56380938562562",
+        "full_feature_ordinal": 825,
+        "geometry_pointer": "/features/825/geometry",
+        "full_shapeID": "78962969B56380938562562",
+        "full_name": "Tha Sae",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B56380938562562",
+          "index": 41647,
+          "bounds": [
+            203095.19382333333,
+            122997.70120245147,
+            203379.862405,
+            123365.33068364339
+          ],
+          "province_id": "framework:province:chumphon-province:1a04f4d4375e",
+          "province_index": 1315
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/825"
+        ],
+        "bounds": [
+          98.88521324200008,
+          10.536511705000066,
+          99.27628133400003,
+          11.033847722000075
+        ],
+        "geometry_sha256": "c53c828bbbe51e11e247d2a1737ae37324376b7709018bd33ae0764d1de7db3c"
+      }
+    ],
+    "full_boundaries": [],
+    "original_question": {
+      "owner": 30350,
+      "y": 123085,
+      "x": 203178,
+      "retained_negative_class": "earlier-or-foreign-source-hold"
+    },
+    "original_requested_existing_location": {
+      "id": "gb:MMR:ADM3:66882298B82483484204646",
+      "index": 30350,
+      "bounds": [
+        202366.80928666666,
+        122369.67516448515,
+        203414.70027830516,
+        123348.66361063575
+      ],
+      "province_id": "framework:province:kawthoung:25f2b1f750b9",
+      "province_index": 2383
+    },
+    "country_interiors": [
+      {
+        "ordinal": 110,
+        "code": "THA",
+        "name": "Thailand"
+      }
+    ],
+    "country_boundaries": [],
+    "current_world_interiors": [],
+    "current_world_boundaries": [],
+    "contrary_original_MMR_fine_interiors": [
+      {
+        "family": "gb:MMR:ADM3",
+        "country": "MMR",
+        "source_id": "gb:MMR:ADM3:66882298B82483484204646",
+        "pointer": "/features/146/geometry",
+        "original_name": "Bokpyin",
+        "existing_location": {
+          "id": "gb:MMR:ADM3:66882298B82483484204646",
+          "index": 30350,
+          "bounds": [
+            202366.80928666666,
+            122369.67516448515,
+            203414.70027830516,
+            123348.66361063575
+          ],
+          "province_id": "framework:province:kawthoung:25f2b1f750b9",
+          "province_index": 2383
+        },
+        "geometry_sha256": "e1a1a2fdf96fbdbe68051f66c1e77c27e4065374d1b198504c3a85b6796f18ea"
+      }
+    ],
+    "original_simplified_foreign_interiors": [],
+    "reference_consistent_full_interiors": [
+      {
+        "family": "gb:THA:ADM2",
+        "country": "THA",
+        "source_id": "gb:THA:ADM2:78962969B56380938562562",
+        "full_feature_ordinal": 825,
+        "geometry_pointer": "/features/825/geometry",
+        "full_shapeID": "78962969B56380938562562",
+        "full_name": "Tha Sae",
+        "existing_location": {
+          "id": "gb:THA:ADM2:78962969B56380938562562",
+          "index": 41647,
+          "bounds": [
+            203095.19382333333,
+            122997.70120245147,
+            203379.862405,
+            123365.33068364339
+          ],
+          "province_id": "framework:province:chumphon-province:1a04f4d4375e",
+          "province_index": 1315
+        },
+        "exact_same_build_member_crosswalk": true,
+        "retained_original_member_pointers": [
+          "/features/825"
+        ],
+        "bounds": [
+          98.88521324200008,
+          10.536511705000066,
+          99.27628133400003,
+          11.033847722000075
+        ],
+        "geometry_sha256": "c53c828bbbe51e11e247d2a1737ae37324376b7709018bd33ae0764d1de7db3c"
+      }
+    ],
+    "disposition": "unique-existing-reference-consistent-full-foreign-target"
+  }
+]

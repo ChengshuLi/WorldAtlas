@@ -43,11 +43,16 @@ test('duplicate paths at different vintages require explicit pin and metric iden
  f.manifest.baseline.pin_files.original={path:'reference.json',commit:old};delete f.manifest.metrics[0].input_file;assert.throws(()=>validate(f),/Ambiguous/);
  f.manifest.metrics[0].input_file={path:'reference.json',commit:old};f.manifest.baseline.files.push(desc('reference.json',f.input,old));assert.throws(()=>validate(f),/Duplicate/);
 });
-test('historical inventories retain bounded file/phase/commit admission',()=>{
+test('historical inventories keep exact vintages beyond the old commit count and honor explicit byte limits',()=>{
  const f=fixture();assert.throws(()=>validateEvidence(f.manifest,{readFile:f.readFile,maxTotalBytes:1}),/budget/);
  assert.throws(()=>validateEvidence(f.manifest,{readFile:f.readFile,maxFileBytes:1}),/budget/);
- for(let i=0;i<16;i++)f.manifest.baseline.files.push(desc(`extra-${i}`,Buffer.from('x'),i.toString(16).padStart(40,'0')));
- assert.throws(()=>baselineFiles(f.manifest),/commit inventory/);
+ const ancestors=new Set([old,later,evaluation]);
+ for(let i=0;i<17;i++){const commit=i.toString(16).padStart(40,'0'),name=`extra-${i}`,raw=Buffer.from('x');
+  f.manifest.baseline.files.push(desc(name,raw,commit));f.store.set(`${commit}:${name}`,raw);ancestors.add(commit);}
+ const seen=new Set();f.readFile.assertAncestor=commit=>{assert.ok(ancestors.has(commit));seen.add(commit);};
+ assert.equal(validate(f).checked.length,20);assert.deepEqual(seen,ancestors);
+ f.store.set('0000000000000000000000000000000000000010:extra-16',Buffer.from('corrupt'));
+ assert.throws(()=>validate(f),/Input bytes mismatch/);
 });
 test('subject lookup selects the declared historical file rather than snapshot bytes',()=>{
  const f=fixture();const raw=Buffer.from(JSON.stringify({features:[{id:'A'}]}));
@@ -114,9 +119,6 @@ test('historical versions do not widen remote descriptors or tree reads',async()
  assert.equal(r.calls.filter(x=>x.includes('/git/commits/')).length,5);
  assert.equal(r.calls.filter(x=>x.endsWith('/git/commits/'+evaluation)).length,1);
  assert.equal(r.calls.filter(x=>x.includes('/git/trees/')).length,5);
- const g=fixture();for(let i=0;i<511;i++)g.manifest.baseline.files.push(desc(`extra-${i}`,Buffer.from('x'),old));
- const oversized=remoteFixture(g);await assert.rejects(()=>checkPremergeEvidence({...g,api:oversized.api,repo:'test/repo'}),/oversized evidence inventory/);
- assert.equal(oversized.calls.filter(x=>x.includes('/compare/')).length,0);
 });
 
 test('altering consumed historical bytes fails while hashes and summaries remain unchanged',()=>{
@@ -137,10 +139,7 @@ test('composed geography identities select historical bytes while retaining exis
  binding.commit=old;binding.unrecognized=true;assert.throws(()=>validate(f),/Invalid versioned/);
 });
 
-test('local validation rejects excess descriptors and ignored source commit declarations before reading',()=>{
- const f=fixture();for(let i=0;i<511;i++)f.manifest.baseline.files.push(desc(`extra-${i}`,Buffer.from('x'),old));
- let reads=0;const reader=()=>{reads++;throw Error('Must not read');};reader.assertAncestor=()=>{reads++;};
- assert.throws(()=>validateEvidence(f.manifest,{readFile:reader}),/inventory exceeds/);assert.equal(reads,0);
+test('local validation rejects ignored source commit declarations',()=>{
  const g=fixture();g.manifest.sources=[{files:[desc('unretained.txt',Buffer.from('x'),old)],retention:'restoration-only'}];
  assert.throws(()=>validate(g),/source file cannot declare historical commit/);
 });

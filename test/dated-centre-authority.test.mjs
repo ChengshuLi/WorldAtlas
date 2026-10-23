@@ -2,13 +2,16 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {gzipSync} from 'node:zlib';
 import {deriveSourceTargetNativeDelta,nativeRowLatitudes} from '../src/native-grid.js';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {constructOriginalAuthority} from '../scripts/delivery-handoff-advance.mjs';
-import {valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {valueSha,valueBytes,readRetainedRegistryAuthority} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const version='a'.repeat(40),foreign='b'.repeat(40);
-const executingHead=execFileSync('git',['-c','protocol.allow=never','rev-parse','HEAD'],{encoding:'utf8'}).trim();
 const prefix='coordination/engineering/dated-centre-fixture',family='gb:TST:ADM2',sourceId=family+':A',siblingId=family+':B';
 const size=262166,y=size/2,x=(size/2-1)/2,longitude=-90;
 const latitudes=nativeRowLatitudes(size),latitude=latitudes[y],latitudeBytes=Buffer.alloc(size*8);
@@ -78,8 +81,6 @@ function fixture({legacy=false,displayPrefix='',change=()=>{},changeSupport=()=>
  changeSupport(support,state);
  const supportPath=prefix+'/dated-land-support.json';
  let dated=put(supportPath,support);
- // The executing module tree, not the caller's reader.version, is authoritative.
- put(supportPath,support,executingHead);
  if(forgeSupport){const forged=clone(support);forgeSupport(forged);dated=put(supportPath,forged,foreign);}
  const membership=state.membership?{
   index:put('data/world-index.json',{parts:['geography/part-0.json']}),
@@ -108,7 +109,7 @@ function fixture({legacy=false,displayPrefix='',change=()=>{},changeSupport=()=>
  const reader=()=>new FixtureReader('.',version);
  return {run:(inputReader=reader())=>constructOriginalAuthority(inputReader,{
   source_evidence:{commit:version,path:evidence.path},native_patch:{commit:version,path:patch.path}}),
-  reader,files,byBlob,state,support,adoption,review,observation};
+  reader,files,byBlob,state,support,adoption,review,observation,put};
 }
 
 function positive(result){
@@ -128,7 +129,7 @@ test('actual constructor consumes dated-only land at exactly one native centre a
  assert.throws(()=>fixture({change:s=>s.proposed.rows[0].runs[0][1]++}).run(),/coverage|support/i);
 });
 
-test('coherent caller replacement cannot turn reader.version or arbitrary pins into adopted authority',()=>{
+test('original pins cannot substitute a different adoption than the selected candidate',()=>{
  positive(fixture().run());
  for(const mutate of [
   s=>s.records[0].adoption.pointer='/records/1',
@@ -354,4 +355,77 @@ test('native positive seam cannot spread, borrow a sibling or overwrite an exist
  grouped.coverageCentreGroups=[grouped.coverageCentres,[]];
  const classes=deriveSourceTargetNativeDelta(grouped).coverage_groups;
  assert.deepEqual(classes[0].rows,[{y:3,runs:[[2,3,1]]}]);assert.deepEqual(classes[1].rows,[]);
+});
+
+
+test('actual candidate Git tree admits reviewed adoption absent from checker baseline and refuses missing or changed bodies', t => {
+ const f=fixture(),root=fs.mkdtempSync(path.join(os.tmpdir(),'adopted-candidate-'));
+ t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+ const git=(...args)=>execFileSync('git',['-c','protocol.allow=never','-c','core.hooksPath=/dev/null','-C',root,...args],{encoding:'utf8',env:{...process.env,GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null'}}).trim();
+ git('init','-q');git('config','user.name','Candidate fixture');git('config','user.email','fixture@example.invalid');
+ const name=prefix+'/dated-land-support.json',body=f.files.get(version+':'+name).raw;
+ for(const [key,{raw}] of f.files){const file=key.slice(41);if(file===name)continue;const target=path.join(root,file);fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,raw);}
+ git('add','.');git('commit','-qm','baseline');const baseline=git('rev-parse','HEAD');
+ assert.equal(git('ls-tree',baseline,'--',name),'');
+ fs.mkdirSync(path.dirname(path.join(root,name)),{recursive:true});fs.writeFileSync(path.join(root,name),body);
+ git('add','.');git('commit','-qm','exact reviewed adoption');const candidate=git('rev-parse','HEAD');
+ const reader=f.reader(),originalGit=reader.git.bind(reader);reader.version=candidate;
+ reader.git=(...args)=>(args[0]==='ls-tree'&&args[2]===reader.version ||
+   args[0]==='cat-file'&&['-s','blob'].includes(args[1])&&!f.byBlob.has(args[2]))
+   ?execFileSync('git',['-c','protocol.allow=never','-C',root,...args]):originalGit(...args);
+ positive(f.run(reader));
+ fs.writeFileSync(path.join(root,name),JSON.stringify({...f.support,changed:true}));git('add','.');git('commit','-qm','changed adoption');reader.version=git('rev-parse','HEAD');
+ assert.throws(()=>f.run(reader),/selected candidate input/);
+ reader.version=baseline;assert.throws(()=>f.run(reader),/whole ordinary Git input/);
+});
+
+
+test('retained completed native qualification reuses exact reviewed output without replaying source predicates',()=>{
+ const f=fixture(),result=f.run();positive(result);
+ const binding=JSON.parse(result.products['authority-binding.json']);
+ const rule=f.put(prefix+'/completed-rule.json',result.products['original-rule-preimage.json']);
+ const source=f.put(prefix+'/completed-binding.json',result.products['authority-binding.json']);
+ const constructed={version:1,kind:'existing-source-target-native-constructor-result',
+  inputs:Object.fromEntries(['source_evidence','native_patch'].map(role=>[role,
+   {commit:binding[role].commit,path:binding[role].path}])),
+  component_ids:result.component_ids,ledger_rows:result.ledger_rows,rule_sha256:result.rule_sha256,limitations:result.limitations};
+ const completed=f.put(prefix+'/completed-constructor.json',constructed);
+ const authority={policy_id:'retained-source-literal-additions',policy_version:1,rule_preimage:rule,
+  rule_sha256:rule.sha256,source_authority:source};
+ const originalEntry={authority_sha256:valueSha(authority),...authority};
+ const entry={...originalEntry,completed_constructor:completed};
+ const reader=f.reader(),reads=[],read=reader.read.bind(reader);
+ reader.read=(name,options)=>{reads.push(name);return read(name,options);};
+ const proof=readRetainedRegistryAuthority(reader,entry);
+ assert.deepEqual(proof.original_ledger.rows,result.ledger_rows);
+ assert.deepEqual(proof.source_scope_ids,result.component_ids);
+ assert.deepEqual(proof.original_pins,{source_evidence:binding.source_evidence,native_patch:binding.native_patch});
+ assert(reads.includes(completed.path));assert(!reads.includes('original-source.json'));assert(!reads.includes('physical.py'));
+ assert.equal(entry.authority_sha256,originalEntry.authority_sha256);
+ const decoded=Buffer.from(JSON.stringify(constructed)),encoded=f.put(prefix+'/completed-constructor.json.gz',gzipSync(decoded));
+ const compressed={...encoded,decoded_bytes:decoded.length,decoded_sha256:digest(decoded)};
+ assert.deepEqual(readRetainedRegistryAuthority(f.reader(),{...entry,completed_constructor:compressed}).original_ledger.rows,result.ledger_rows);
+ assert.throws(()=>readRetainedRegistryAuthority(f.reader(),{...entry,completed_constructor:{...compressed,decoded_sha256:'0'.repeat(64)}}),/decoded body differs/);
+ // Preexisting modern entries retain their real qualification path.
+ const oldReader=f.reader(),oldReads=[],oldRead=oldReader.read.bind(oldReader);
+ oldReader.read=(name,options)=>{oldReads.push(name);return oldRead(name,options);};
+ assert.deepEqual(readRetainedRegistryAuthority(oldReader,originalEntry).original_ledger.rows,result.ledger_rows);
+ assert(oldReads.includes('original-source.json'));
+ for(const mutate of [
+  body=>{body.inputs.source_evidence.commit=foreign;},
+  body=>{body.rule_sha256='0'.repeat(64);},
+  body=>{body.component_ids.push('invented');},
+  body=>{body.ledger_rows[0].pixelIndex=2;},
+  body=>{body.ledger_rows[0].source_receipt_sha256='0'.repeat(64);},
+  body=>{body.ledger_rows[0].native_rows[0].runs[0][1]++;}
+ ]){
+  const body=clone(constructed);mutate(body);const pin=f.put(prefix+'/mismatched-constructor.json',body);
+  assert.throws(()=>readRetainedRegistryAuthority(f.reader(),{...entry,completed_constructor:pin}),
+   /constructor scope|source target|ledger intervals/);
+ }
+ const stored=f.files.get(version+':'+completed.path);f.files.delete(version+':'+completed.path);
+ assert.throws(()=>readRetainedRegistryAuthority(f.reader(),entry));
+ f.files.set(version+':'+completed.path,stored);const raw=f.byBlob.get(completed.git_blob_oid);
+ f.byBlob.set(completed.git_blob_oid,Buffer.from('x'.repeat(raw.length)));
+ assert.throws(()=>readRetainedRegistryAuthority(f.reader(),entry),/SHA|hash|whole|changed|differs/i);
 });

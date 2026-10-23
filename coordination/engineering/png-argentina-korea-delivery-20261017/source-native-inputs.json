@@ -1,0 +1,246 @@
+{
+  "status": "Read-only prospective plan, not acceptance or final composition",
+  "pending_baseline": {
+    "commit": "f6f6f15109d63b918e1a4569ac68906e948117a7",
+    "path": "coordination/engineering/five-repair-delivery-20261017/composition-004/patch.json",
+    "mode": "100644",
+    "git_blob_oid": "344e0872eeb602a42bcd92cef495a7c01d07ee99",
+    "bytes": 26453595,
+    "sha256": "c3c83e3bec5a1dbe60df63eea7d22d5173281de1ad1068c5632cbda674c6cf9d"
+  },
+  "pending_baseline_cells": 5800532,
+  "packages": [
+    {
+      "country": "PNG",
+      "reviewed_head": "b6e467e9e303af19723e9788a2e2403307740ab8",
+      "review_comment": 6229960183,
+      "handoff": {
+        "commit": "b6e467e9e303af19723e9788a2e2403307740ab8",
+        "path": "coordination/engineering/papua-new-guinea-native-repair-20261017/handoff/native-authority-quartet.json",
+        "mode": "100644",
+        "git_blob_oid": "9185fbd5d1f4fb1cb1be87aabbcabbf05642d43e",
+        "bytes": 1584,
+        "sha256": "fe2941e8236374318c4b6141a6add2c99b8040bccc73fc6326758eb1e326e595"
+      },
+      "accounting": {
+        "commit": "b6e467e9e303af19723e9788a2e2403307740ab8",
+        "path": "coordination/engineering/papua-new-guinea-native-repair-20261017/accounting-001/original-scope-disposition.json",
+        "mode": "100644",
+        "git_blob_oid": "747e14d3f9b6889446122c48fc3cb39385ab1722",
+        "bytes": 24879,
+        "sha256": "196a783dd91ceabef351ea5e9fcf302bad4fb4cd499fa668420bb3a36de4e56c"
+      },
+      "original_patch": {
+        "commit": "b6e467e9e303af19723e9788a2e2403307740ab8",
+        "path": "coordination/engineering/papua-new-guinea-native-repair-20261017/source-stage/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "cecf5c074b4ae89e13d4a31dbacb96c15a5b749e",
+        "bytes": 564729,
+        "sha256": "0e040693839b43bd547db46af5200165a67e4102d83d0293117c455d9fd2a3c5"
+      },
+      "literal_holds": {
+        "commit": "b6e467e9e303af19723e9788a2e2403307740ab8",
+        "path": "coordination/engineering/papua-new-guinea-native-repair-20261017/qualified-native-inputs-001/held-original.json",
+        "mode": "100644",
+        "git_blob_oid": "a804f1b9f790affe4ac65d8fb072933f3093d404",
+        "bytes": 2575,
+        "sha256": "b1228939a08d58b00fa7d11b7bbb06ad548f67748a6fa0487ae2082b097f5c79"
+      },
+      "quartets": [
+        {
+          "rule_preimage": {
+            "path": "coordination/engineering/papua-new-guinea-native-repair-20261017/native-authority-001/original-rule-preimage.json",
+            "commit": "8439f0fe672754896797430801c23e1f9f059c8b",
+            "mode": "100644",
+            "git_blob_oid": "a2620888baee0e6f92997ee396d0d2021301d778",
+            "bytes": 767,
+            "sha256": "2d91dc12933b5547cee80e9570d3b0ccfb557ec2d73624f3520169d599d1653a"
+          },
+          "source_authority": {
+            "path": "coordination/engineering/papua-new-guinea-native-repair-20261017/native-authority-001/authority-binding.json",
+            "commit": "8439f0fe672754896797430801c23e1f9f059c8b",
+            "mode": "100644",
+            "git_blob_oid": "e4eb853a315969891adf233975db20347c8ccbe3",
+            "bytes": 770,
+            "sha256": "cd5dd5f230fee30fc1424a32be2a30cf003dac4dafd88659ee9aaf8143e3d424"
+          },
+          "ledger": {
+            "path": "coordination/engineering/papua-new-guinea-native-repair-20261017/native-authority-001/constructor-result.json",
+            "commit": "8439f0fe672754896797430801c23e1f9f059c8b",
+            "mode": "100644",
+            "git_blob_oid": "2a9487d798fe81e1191e4868e5efec849eb250ef",
+            "bytes": 926095,
+            "sha256": "e6a1db2845e8919619cd7de5769aabbb9ec83d76af2409ba0eb623d52cc8aa23"
+          },
+          "native_patch": {
+            "bytes": 563915,
+            "commit": "b4b67dd9881bc394e49c69e818b24224fe530955",
+            "git_blob_oid": "e98517fdaf728a6aac2f4c96f4dd3ae4232079b9",
+            "mode": "100644",
+            "path": "coordination/engineering/papua-new-guinea-native-repair-20261017/qualified-native-inputs-001/native-patch.json",
+            "sha256": "cbdf511b78ed34f9b5733b3b4bf8848ac4047464a62277c915917106ce9ec4ef"
+          }
+        }
+      ],
+      "original_cells": 56552,
+      "supported_cells": 56476,
+      "held_cells": 76,
+      "supported_owners": 129
+    },
+    {
+      "country": "ARG",
+      "reviewed_head": "10117e8522b0238e330f8786a7d079806005301f",
+      "review_comment": 6230033473,
+      "handoff": {
+        "commit": "10117e8522b0238e330f8786a7d079806005301f",
+        "path": "coordination/engineering/argentina-repair-delivery-20261017/final-handoff-001/qualified-authority-handoff.json",
+        "mode": "100644",
+        "git_blob_oid": "7befa26687d607464ab8fd5ff59c2dfd90524475",
+        "bytes": 7076,
+        "sha256": "06f7ce19ca890bee88c3b60e5c5c62ecfc0fd1a9b6b2efd820f933a4e5cf053a"
+      },
+      "accounting": {
+        "commit": "10117e8522b0238e330f8786a7d079806005301f",
+        "path": "coordination/engineering/argentina-repair-delivery-20261017/final-handoff-001/complete-native-authority-accounting.json",
+        "mode": "100644",
+        "git_blob_oid": "eafb64ab05ac33f0dff4def543b7baab8af9b9ab",
+        "bytes": 800414,
+        "sha256": "b192965b21dc05facaa15fd7e71d07ccb40226287c59a41dbd628a9801e8ec38"
+      },
+      "original_patch": {
+        "commit": "10117e8522b0238e330f8786a7d079806005301f",
+        "path": "coordination/engineering/argentina-repair-delivery-20261017/source-stage-001/original-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "45f3e101362eca3401e53c299945aa9c98656ef7",
+        "bytes": 359161,
+        "sha256": "8ff5760a6f6a48132f2cace25f4efe7ded45eef5b2dbbac241a317dd9f374262"
+      },
+      "literal_holds": {
+        "commit": "10117e8522b0238e330f8786a7d079806005301f",
+        "path": "coordination/engineering/argentina-repair-delivery-20261017/source-review/complete-scope-002/held-original-keys.json",
+        "mode": "100644",
+        "git_blob_oid": "d54be66ce49fa5f25b43efe04b0c5c47465d1f67",
+        "bytes": 762814,
+        "sha256": "95b0b947a853f167f60bffaa44578a87f5301f661850a863d210c19f4dd5a604"
+      },
+      "quartets": [
+        {
+          "rule_preimage": {
+            "path": "coordination/engineering/argentina-repair-delivery-20261017/native-authority-001/original-rule-preimage.json",
+            "commit": "946ea8df5f4a6ed4a554f5b9e620dfbb5862f152",
+            "mode": "100644",
+            "git_blob_oid": "d8bbaf3a2eb4673469e80db3881d637fcdf04724",
+            "bytes": 746,
+            "sha256": "85559683ac1962ecc49319e6d21c7d3d20efcdc58a59bd8012d1baabefb17294"
+          },
+          "source_authority": {
+            "path": "coordination/engineering/argentina-repair-delivery-20261017/native-authority-001/authority-binding.json",
+            "commit": "946ea8df5f4a6ed4a554f5b9e620dfbb5862f152",
+            "mode": "100644",
+            "git_blob_oid": "cb892e4228ae0528fe3ce8d1ff2ca496bb302ed8",
+            "bytes": 749,
+            "sha256": "c4c649ca9159d7d261d1607d87d89a504d74ea3791872748da92c424b5db1ecf"
+          },
+          "ledger": {
+            "path": "coordination/engineering/argentina-repair-delivery-20261017/native-authority-001/constructor-result.json",
+            "commit": "946ea8df5f4a6ed4a554f5b9e620dfbb5862f152",
+            "mode": "100644",
+            "git_blob_oid": "6a1d4a90e519102d5e2ea74403788477f3bffa91",
+            "bytes": 808927,
+            "sha256": "b2b22a00dc8265fd50fd92c0ad21b46ab2fa22bad9ebe97c53b834f0099374e7"
+          },
+          "native_patch": {
+            "bytes": 302798,
+            "commit": "29e71770341ee0481e6e47c5d6a1ac119cdd3b6a",
+            "git_blob_oid": "8e9e644ea87820bd818f0ced3bfe1048db624b72",
+            "mode": "100644",
+            "path": "coordination/engineering/argentina-repair-delivery-20261017/native-config-002/native-qualified-patch.json",
+            "sha256": "e9a9db71a85f7da569007a006257846413b37af513a2529aafb1830dc9c1c20a"
+          }
+        }
+      ],
+      "original_cells": 28846,
+      "supported_cells": 22697,
+      "held_cells": 6149,
+      "supported_owners": 110
+    },
+    {
+      "country": "KOR",
+      "reviewed_head": "413163781f6a169b6c1eb2c939486e397c3f9046",
+      "review_comment": 6230237828,
+      "handoff": {
+        "commit": "413163781f6a169b6c1eb2c939486e397c3f9046",
+        "path": "coordination/engineering/korea-native-repair-20261017/handoff/native-authority-quartet.json",
+        "mode": "100644",
+        "git_blob_oid": "a8823ced7534cd61177891ec2cd5f75e4a6132f2",
+        "bytes": 1356,
+        "sha256": "971d2cc0b5d4bfd71861dd3044153e65bd1c59f0e46a9bb43bab04f98a35ea8b"
+      },
+      "accounting": {
+        "commit": "413163781f6a169b6c1eb2c939486e397c3f9046",
+        "path": "coordination/engineering/korea-native-repair-20261017/handoff/original-scope-disposition.json",
+        "mode": "100644",
+        "git_blob_oid": "3b9c3af1cd55d0cd2c897a68b8698297db0f0f91",
+        "bytes": 10942,
+        "sha256": "e254d1fc2c96c2f75850a23323904c69fdd8436c423a17aea20ee4ea6b8cfd3c"
+      },
+      "original_patch": {
+        "commit": "413163781f6a169b6c1eb2c939486e397c3f9046",
+        "path": "coordination/engineering/korea-native-repair-20261017/source-stage-001/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "b2358ddaa06dc8c87cc399d89ca7bb81121c8946",
+        "bytes": 250632,
+        "sha256": "2a9f8cd03e242657295706c780ba71c35ed7319609c37ac2ea1fa88f396ed9e3"
+      },
+      "literal_holds": null,
+      "quartets": [
+        {
+          "rule_preimage": {
+            "path": "coordination/engineering/korea-native-repair-20261017/native-authority-001/original-rule-preimage.json",
+            "commit": "88df79651afee4754c0f0b5132bb195fff518aaf",
+            "mode": "100644",
+            "git_blob_oid": "d4cfd289b820a85e9e3ef6b8032678522477cc02",
+            "bytes": 723,
+            "sha256": "98ce33e1426cf0b141506e3c771652b73833bb0862c68c8f7d9b6a6fe8816157"
+          },
+          "source_authority": {
+            "path": "coordination/engineering/korea-native-repair-20261017/native-authority-001/authority-binding.json",
+            "commit": "88df79651afee4754c0f0b5132bb195fff518aaf",
+            "mode": "100644",
+            "git_blob_oid": "279ed0149777b4e578b417d1c09d0538a2de76f1",
+            "bytes": 726,
+            "sha256": "5984368aa4e53ef81cce8a10bab5233edef71f6be0de2ba51d41d34984cf7037"
+          },
+          "ledger": {
+            "path": "coordination/engineering/korea-native-repair-20261017/native-authority-001/constructor-result.json",
+            "commit": "88df79651afee4754c0f0b5132bb195fff518aaf",
+            "mode": "100644",
+            "git_blob_oid": "3a8357cb10ba30c7aac220334affabde51314994",
+            "bytes": 428165,
+            "sha256": "1999b8e122e90c590617f540d2f818917d6f39e472202d5755d9613469aff751"
+          },
+          "native_patch": {
+            "bytes": 250632,
+            "commit": "4f096288f74f3da95be825134fb10b3c7df8d5d9",
+            "git_blob_oid": "b2358ddaa06dc8c87cc399d89ca7bb81121c8946",
+            "mode": "100644",
+            "path": "coordination/engineering/korea-native-repair-20261017/source-stage-001/native-patch.json",
+            "sha256": "2a9f8cd03e242657295706c780ba71c35ed7319609c37ac2ea1fa88f396ed9e3"
+          }
+        }
+      ],
+      "original_cells": 31206,
+      "supported_cells": 31206,
+      "held_cells": 0,
+      "supported_owners": 64
+    }
+  ],
+  "new_original_cells": 116604,
+  "new_supported_cells": 110379,
+  "new_held_cells": 6225,
+  "prospective_native_cells": 5910911,
+  "exact_disjoint_union": true,
+  "complete_original_packages_disjoint_from_pending_patch": true,
+  "exact_literal_original_supported_held_partition": true,
+  "finalization_requires_actual_accepted_main_and_identical_reviewed_data_readback": true
+}

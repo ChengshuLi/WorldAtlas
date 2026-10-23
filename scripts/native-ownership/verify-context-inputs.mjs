@@ -24,7 +24,8 @@ const repo=fs.realpathSync('.'),head=execFileSync('git',['rev-parse','HEAD'],{en
 const code=committedPreparationFiles(repo,head,['package.json','scripts/native-ownership/verify-context-inputs.mjs',
  'scripts/native-ownership/compact-context-inputs.mjs','scripts/native-ownership/native-only-inputs.mjs',
  'scripts/native-ownership/native-preparation-guards.mjs','src/native-runtime.js',
- 'scripts/native-ownership/compile-native-ownership.mjs','src/native-grid.js','scripts/audit-grid-intervals.mjs']);
+ 'scripts/native-ownership/compile-native-ownership.mjs','src/native-grid.js','scripts/audit-grid-intervals.mjs',
+ 'scripts/selected-reference-metadata.mjs','src/reference-metadata.js']);
 const source=await loadNativeSourceInputs(repo,report.baseline_commit);
 assert.deepEqual(report.source_files,source.sourceFiles);
 assert.equal(report.original_release,source.release.id);assert.equal(report.installation_ready,false);

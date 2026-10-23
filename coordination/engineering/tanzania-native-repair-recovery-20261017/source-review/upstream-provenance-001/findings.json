@@ -1,0 +1,45 @@
+{
+  "reviewer": "01a14b7a-618c-7470-8d82-dbc7ac4c7037",
+  "reviewed_accepted_commit": "07d177c76bc5172fd5cce78621ed4cd8d992c4c3",
+  "upstream_ref": "9469f09",
+  "source": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09/releaseData/gbOpen/TZA/ADM2",
+  "metadata": {
+    "bytes": 1076,
+    "sha256": "4660b48a4aea31f5485656d945a30e4b81cd381934f397d17e6935eeea8fdb40",
+    "git_blob_oid": "02ee934886c59ad31676b0dbc6e8535e65ecf4ac"
+  },
+  "citation": {
+    "bytes": 4316,
+    "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+    "git_blob_oid": "ff1d1d9a4ab9c714a5a60eca051696f41446a086"
+  },
+  "authentication": "Metadata and citation bodies fetched through official GitHub media endpoint and verified against exact upstream Git-LFS SHA/size. Original geometry retained bodies independently decompressed from accepted repository objects and matched upstream exact-ref LFS pointers without downloading geometry again.",
+  "original_bodies": [
+    {
+      "level": "ADM1",
+      "bytes": 426148,
+      "sha256": "8b84f3f0a9e6e16322b777a5bba90c8e33c5e93c0dcb03ef1d3f6332036d066f",
+      "features": 30,
+      "unique_shape_ids": 30,
+      "unique_names": 30,
+      "invalid_or_empty": 0,
+      "CRS": "CRS84"
+    },
+    {
+      "level": "ADM2",
+      "bytes": 2828833,
+      "sha256": "ab80d1831c5c45f08d401514c057dcef05abad790225fa2208805fd0b93dc993",
+      "features": 170,
+      "unique_shape_ids": 170,
+      "unique_names": 170,
+      "invalid_or_empty": 0,
+      "CRS": "CRS84"
+    }
+  ],
+  "assessment": "Retained ADM2 source provenance and specific CC BY3.0IGO declaration are independently authenticated to consumed upstream release. Citation separately requires geoBoundaries attribution and source citations; derivative/code CC BY4.0 does not replace per-source licenses. No contradictory rights evidence found. ADM1 is separate OSM/Wambacher2015 ODbL context.",
+  "limits": [
+    "No request made to denied HDX endpoint or workaround for its403. Current provider rights not freshly refreshed.",
+    "Source body validity and identity do not establish each original native key, whole foreign negatives, source fitness, physical evidence or selected-owner-zero acceptance.",
+    "Full frozen Tanzania source/authority review remains pending."
+  ]
+}

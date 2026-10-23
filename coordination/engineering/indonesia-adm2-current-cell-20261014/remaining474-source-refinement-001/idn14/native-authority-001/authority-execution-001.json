@@ -1,0 +1,61 @@
+{
+  "outcome": "EXIT0",
+  "exit_code": 0,
+  "start_utc": "2026-10-15T23:52:49.534098+00:00",
+  "completed_utc": "2026-10-15T23:53:03.482823+00:00",
+  "elapsed_seconds": 13.936330542,
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "native-authority",
+    ".cache/idn14-worker6-authority-001/config.json",
+    ".cache/delivery-handoff/idn14-worker6-native-authority-001"
+  ],
+  "cwd": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/267133ee5fd33696ea7c63ec50cf78bebfb3c92f9a18ca0fb1c4db8be3e0c49e/review",
+  "executing_checkout_head": "f82acf8da15646afd9ef51d57e2bd0c186f4aabd",
+  "executing_entry_sha256": "6ca4f00e7617506c2d1276fd100f5c16a79e84c1a5a45715200be85afb9d5146",
+  "input_bindings": [
+    {
+      "commit": "e201cfae0476779c66e6d6e90b4f2960e719e67e",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/idn14/source-evidence.json",
+      "bytes": 28239499,
+      "sha256": "32b804432fca20b8223535eef93ba83832ff49d4dde6d6c7b05cc7590e5db80e"
+    },
+    {
+      "commit": "e201cfae0476779c66e6d6e90b4f2960e719e67e",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/idn14/candidate-native-patch.json",
+      "bytes": 627,
+      "sha256": "c3be5fef548f7b39c89ee4271112f3dd3f4accaff7c4dfc7c8aa905d72980a82"
+    }
+  ],
+  "requested_original_cells": 14,
+  "memory_fields_or_heap_flags": false,
+  "source_or_physical_producer_replayed": false,
+  "shared_index_or_branch_mutation": false,
+  "direct_child_peak_rss_bytes": 427802624,
+  "products": [
+    {
+      "path": "actual-native-authority-001/authority-binding.json",
+      "bytes": 798,
+      "sha256": "77f25d78acd6b7fa69f1e735ed919d43f8b8cb6ee8448564e09d7d8ff5724fee"
+    },
+    {
+      "path": "actual-native-authority-001/constructor-result.json",
+      "bytes": 44304,
+      "sha256": "a1d5f834bbc43d90d6dfe0f45eea2a838eb25c0ba0244dcc90974ed826a2ab87"
+    },
+    {
+      "path": "actual-native-authority-001/original-rule-preimage.json",
+      "bytes": 795,
+      "sha256": "8539d1c3e5ed4b50c2b6dd1b2ade6f9f846152315ce5a455b02844926cda57d2"
+    },
+    {
+      "path": "actual-native-authority-001/preparation.json",
+      "bytes": 501,
+      "sha256": "b25149cde8dec1c43237d2ad3b54e122e09f085acf0b3716b890bdc270597703"
+    }
+  ],
+  "actual_stderr_tail": null
+}

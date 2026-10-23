@@ -1,0 +1,43 @@
+{
+  "kind": "independent-source-applicability-disposition-review",
+  "scope": {
+    "keys": [[86689, 188743], [86691, 188744]],
+    "owner": "gb:RUS:ADM2:50074027B35507316918508",
+    "retained_source_contact": "gb:KAZ:ADM1:16772668B56556955248260",
+    "other_kaz_contacts": "unchanged; this assessment applies only to the two listed keys"
+  },
+  "review_inputs": {
+    "original_contract": "inventory/rus-original-contract-readback.json (issue #2302)",
+    "registration_report_sha256": "95ee2e18e4fea27aa64c2a931c2aa900a79b29e1d6a1c7d6fe54b7027d25b07e",
+    "trace_report_sha256": "64aec3fe62b1e7074811ba7646b60769d741bd8985fd5e2e5d362a25ff1903f7",
+    "country_side_join_sha256": "58fea6d7ce4df22bce2072c839f53536836076a6da1a4a67a98a082be16ebe01",
+    "map_pdf_sha256": "9e95ac45ac157d022245901a6e0d63f7281d4deec6cceab31edf0dc58d270374",
+    "map_render_sha256": "3814b8917fcac6551ec442647d70584fbfa891b942a594fba8ece002fe7b17bc"
+  },
+  "independent_check": {
+    "method": "Recomputed the local route interpolation and perpendicular distance from the corrected meter-to-kilometer pixel predictions and retained red-marker route anchors; no map, geometry, owner, physical or native producer was rerun.",
+    "key_results": [
+      {
+        "key": [86689, 188743],
+        "registered_center_px": [1765.13, 1634.78],
+        "route_center_px_at_key_y": [1852.392, 1634.78],
+        "distance_west_km": 1.325
+      },
+      {
+        "key": [86691, 188744],
+        "registered_center_px": [1775.7, 1657.29],
+        "route_center_px_at_key_y": [1865.482, 1657.29],
+        "distance_west_km": 1.427
+      }
+    ],
+    "map_context": "The 2004-edition, 1983-terrain-state Treaty I-52717 Annex 2 sheet M-44-3 is labeled Kazakhstan: East Kazakhstan/Pavlodar west/left and Russia: Altai Krai east/right. Both conditional registered centers fall west/left of the continuous red marker-linked route."
+  },
+  "disposition_assessment": {
+    "recommendation": "These exact two cells meet the substantial-research basis for a narrowly researched-unresolved disposition with their native holds retained. The map is a concrete, key-specific adverse conflict with the recorded Pavlodar source contact, rather than an inference from country names or absence of evidence. It is not support for a positive Russia-side repair.",
+    "uncertainty": "The side and distance finding is conditional on the candidate zone-14 Pulkovo 1942 interpretation and identification of the continuous numbered red stroke as the relevant treaty route. The map says only coordinate system 1942; source positional accuracy/generalization is not quantified. The approximately 0.22 km sensitivity envelope is not statistical and does not measure legal boundary uncertainty. No present-day sovereignty or de facto control claim follows.",
+    "scope_limit": "Do not extrapolate this finding to the other 16 KAZ contacts. The complete original denominator and all 18 holds remain unchanged pending the normal package disposition/accounting process.",
+    "further_step": "No additional step is necessary to justify a researched-unresolved disposition for these two cells. If later pursuing positive repair, the material issue is a source-specific resolution of this documented historical treaty-map/source-contact conflict, not a blanket current-boundary certificate."
+  },
+  "artifact_consistency_note": "The country-side join was corrected after the independent review. Its registration_and_error_limits now bind to the corrected registration and route-comparison hashes listed above, and its two per-key centers/distances agree with the independent recomputation.",
+  "no_mutation": "No source geometry, selected owner, physical result, native hold, accepted accounting, or producer output was changed."
+}

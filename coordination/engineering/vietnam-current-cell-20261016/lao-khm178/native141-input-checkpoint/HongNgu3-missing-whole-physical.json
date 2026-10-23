@@ -1,0 +1,185 @@
+[
+  {
+    "owner": 48437,
+    "target_id": "gb:VNM:ADM2:81297802B50587214410487",
+    "name": "Huyen Hong Ngu",
+    "keys": [
+      {
+        "owner": 48437,
+        "y": 123106,
+        "x": 207754
+      },
+      {
+        "owner": 48437,
+        "y": 123107,
+        "x": 207756
+      },
+      {
+        "owner": 48437,
+        "y": 123108,
+        "x": 207758
+      }
+    ],
+    "count": 3,
+    "current_accepted_commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+    "current_parent_id": "framework:province:ong-thap:831b00388f10",
+    "current_metadata": {
+      "source_id": "gb:VNM:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "reference_year": "2020",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "District",
+      "selection_reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "81297802B50587214410487",
+      "representative_point": [
+        105.29027292191435,
+        10.804
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:VNM:ADM1",
+      "hierarchy_overlap": 0.797095,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 1,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "bb3fca9272a7cadaa43d4dd42f70144e9a7809ca5926d89d68651472975557c0",
+      "reference_version": 3,
+      "geographic_area_code": "VIE",
+      "geographic_region_code": 41,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "VNM-500",
+        "overlap": 0.772368
+      },
+      "regional_match": {
+        "reference_iso": "VNM",
+        "source_id": "VNM-500",
+        "overlap": 0.772368,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q881",
+      "reference_polity": "Vietnam",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "Vietnam",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "Asia",
+        "decision_index": 1764,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_source_atoms": [
+      "gb:VNM:ADM2:81297802B50587214410487"
+    ],
+    "actual_observed_source_records": [
+      {
+        "source_index": 65112,
+        "family_index": 353,
+        "source_id": "gb:VNM:ADM1:63759600B81354309972615",
+        "ordinal": 20,
+        "owners": [],
+        "name": "Đồng Tháp",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 65436,
+        "family_index": 354,
+        "source_id": "gb:VNM:ADM2:81297802B50587214410487",
+        "ordinal": 280,
+        "owners": [
+          48437
+        ],
+        "name": "Huyen Hong Ngu",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "physical_classes": {
+      "land": 3
+    },
+    "original_contradictions": [
+      {
+        "key": {
+          "owner": 48437,
+          "y": 123106,
+          "x": 207754
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65112,
+          65436
+        ]
+      },
+      {
+        "key": {
+          "owner": 48437,
+          "y": 123107,
+          "x": 207756
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65112,
+          65436
+        ]
+      },
+      {
+        "key": {
+          "owner": 48437,
+          "y": 123108,
+          "x": 207758
+        },
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "foreign-source-family"
+        ],
+        "reference_countries": [
+          "KHM"
+        ],
+        "actual_sids": [
+          65112,
+          65436
+        ]
+      }
+    ],
+    "stock_input_status": "held-missing-whole-target-physical-receipt",
+    "missing_fact": "Exact whole-target physical result and matching consumed/selected original stage for this HuyenHongNgu member; sourcequalification physical=land strings cannot substitute."
+  }
+]

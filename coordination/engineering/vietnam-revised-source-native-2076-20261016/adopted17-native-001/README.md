@@ -1,0 +1,17 @@
+# Exact seventeen-key continuation after explicit parent source adoption
+
+The parent adopted the exact source-ranking proposal SHA256 `2fdab36bd5ef904f82f5fc74f69f24546bc5d7f179491fa98c718e9edabb9152` on 2026-10-16. The full original365 record roster remains present. The earlier348/17 assessment, all contrary Natural Earth/Vietnamese interiors and all failed VNM qualifications stay unchanged historical evidence. This is a scoped cartographic exception, with no general hierarchy or legal/de-facto truth claim. The missing original WFS edition and remote self-intersection remain explicit in the proposal and addendum.
+
+Actual stock v3 qualification executed at `8584efe9860567baa619ad3ac6346372bada9f13`: exactly17 cells, five existing targets/components and12 native rows. Elapsed7.074146339s, sampled process-group RSS196,837,376 bytes under enforced768MiB/120s bounds. Whole twelve-source raw/staged operands and original whole-target physical results were reused without replay. Eight existing launcher admission controls passed. The current launcher removes its obsolete10GiB incidental floor while preserving finite64MiB prospective disk admission and the32MiB actual output cap.
+
+The initial invocation with all twelve output targets was refused at final ledger construction because seven targets had no requested cell. Its admission/log/failure receipt is retained in initial-unused-target-refusal. The second invocation narrowed only the output target roster to the five actually requested targets; the full twelve-member competing source stage remained unchanged. This actual successful execution is distinct from every earlier348/VNM execution.
+
+The current zero/conservation check binds accepted predecessor225e0d36 (same selected scientific data as accepted7ef13f96). All17 are literal original15470 repair questions with unchanged exhaustive native-zero baseline and no hit in the complete current additive patch. The private stock composition preserves every prior authority, ledger row and285582 assignment, adding exactly17 for285599; it emits no selector. All37 current canonical index/part mode/OID/size identities equal the independently reviewed full365 comparison. The current check completed3.692939503s. Final subsequent delivery must rebind the actual accepted predecessor and verify the actual selected consumer.
+
+`qualified17-authority-handoff.json` carries the immutable quartet, exact17 target/y/x cells, source adoption and genuine execution pins. The sole cumulative composer receives this only for a subsequent delivery; the frozen967 candidate is untouched. No accepted repair/native credit is claimed here. OSM attribution and ODbL rights obligations remain explicit in the unchanged adoption attribution role.
+
+Reproduce only the metadata/current-applicability check after running the existing stock compose phase with private-conservation-compose-config.json into a fresh .cache/delivery-handoff destination:
+
+    node check-current-zero-conservation.mjs CONFIG HANDOFF COMPOSED_DIRECTORY REPORT
+
+Run from repository root using the full script/config/handoff paths. This check authenticates retained immutable bodies and compares actual literal outputs; it performs no geographic source-bank, physical or native predicate replay. The metadata check uses key-indexed predecessor comparisons. Its first quadratic draft was interrupted and replaced before producing any success report.

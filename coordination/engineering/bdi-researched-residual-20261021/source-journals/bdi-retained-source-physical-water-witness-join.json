@@ -1,0 +1,6624 @@
+{
+  "version": 1,
+  "kind": "bdi-retained-source-physical-water-witness-join",
+  "package_id": "gb-BDI-ADM2--repair-evaluation",
+  "original_scope": {
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_tree": "3ec07af8d596b08bd9b7392a26f7aa4cabebc750",
+    "queue_directory_tree": "9954105d964a6239c5721d4909881da7b1f558d4",
+    "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "queue_blob": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "queue_index_zero_based": 168,
+    "cells": 583,
+    "land_cells": 378,
+    "inland_water_cells": 205,
+    "source_relative_cells": 0,
+    "intervals": 433,
+    "owners": [
+      8987,
+      8990,
+      8994,
+      9001,
+      9019,
+      9021,
+      9028,
+      9029,
+      9030,
+      9036,
+      9040,
+      9047,
+      9050,
+      9057,
+      9067,
+      9072,
+      9077,
+      9078,
+      9079,
+      9087,
+      9089
+    ],
+    "source_features": [
+      2022,
+      2025,
+      2026,
+      2028,
+      2030,
+      2032,
+      2034,
+      2035,
+      2038,
+      2042,
+      2043,
+      2046,
+      2047,
+      2128,
+      2130,
+      2131,
+      2132,
+      2133,
+      2134,
+      2135,
+      2136,
+      2140,
+      2141,
+      2142,
+      2143,
+      2144,
+      2147,
+      2148,
+      2154,
+      2156,
+      18746,
+      60195,
+      60207
+    ],
+    "source_families": [
+      19,
+      20,
+      69,
+      338
+    ],
+    "block": 32,
+    "contract": {
+      "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+      "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+      "priority": 1
+    }
+  },
+  "inputs": [
+    {
+      "kind": "source-candidates",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "tree": "9954105d964a6239c5721d4909881da7b1f558d4",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-032.json.gz",
+      "blob": "5c56cb06a4879060a4ad933395cd643cdaaa5565",
+      "compressed_bytes": 800317,
+      "compressed_sha256": "00a677c75540d3be3a750e7f41d2d296f05dc24b84cec9d3776713986a7f6064",
+      "decoded_bytes": 5600583,
+      "decoded_sha256": "f86385a134758b6df4f13ad07ba81a2c545547a9068c5ad66fdffd0f8ece6aa9"
+    },
+    {
+      "kind": "physical-support",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "tree": "9954105d964a6239c5721d4909881da7b1f558d4",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-032.json.gz",
+      "blob": "5f8f1e8aa032abc85e931930eb4eb9b0dbc0ebdb",
+      "compressed_bytes": 516947,
+      "compressed_sha256": "2b3d882155a28df8782b346bd7382b2faa1ccfa0ebf1c2f0f2c6d779c055905a",
+      "decoded_bytes": 2359068,
+      "decoded_sha256": "7f6b485f745b9523165108a1868b7b57e1677aac90f065bbc2e45694d4106566"
+    },
+    {
+      "kind": "inland-water-support",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "tree": "9954105d964a6239c5721d4909881da7b1f558d4",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-032.json.gz",
+      "blob": "9bee5462a2f4a8bf1e54816c4a3bd61d9227e221",
+      "compressed_bytes": 32628,
+      "compressed_sha256": "5a8910efab0c7f8667167655e138c1ae0efb7d5ec52ff143c7ef377f925c98a6",
+      "decoded_bytes": 207160,
+      "decoded_sha256": "fa64308a425e6d6484635c2c62cfbcce85e0cfdae138bbde81fec0e7798b632d"
+    }
+  ],
+  "candidate_interval_rows": [
+    {
+      "y": 132849,
+      "start": 153003,
+      "end_exclusive": 153004,
+      "owner_indices": [
+        9050
+      ],
+      "source_feature_indices": [
+        2148
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 132855,
+      "start": 153038,
+      "end_exclusive": 153039,
+      "owner_indices": [
+        9077
+      ],
+      "source_feature_indices": [
+        2147
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 132855,
+      "start": 153039,
+      "end_exclusive": 153040,
+      "owner_indices": [
+        9077
+      ],
+      "source_feature_indices": [
+        2022,
+        2147
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 132855,
+      "start": 153040,
+      "end_exclusive": 153041,
+      "owner_indices": [
+        9077
+      ],
+      "source_feature_indices": [
+        2022,
+        2147
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 132856,
+      "start": 153036,
+      "end_exclusive": 153038,
+      "owner_indices": [
+        9077
+      ],
+      "source_feature_indices": [
+        2022,
+        2147
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133033,
+      "start": 153248,
+      "end_exclusive": 153249,
+      "owner_indices": [
+        9036
+      ],
+      "source_feature_indices": [
+        2144
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133033,
+      "start": 153249,
+      "end_exclusive": 153250,
+      "owner_indices": [
+        9036
+      ],
+      "source_feature_indices": [
+        2144,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133041,
+      "start": 152440,
+      "end_exclusive": 152441,
+      "owner_indices": [
+        8987
+      ],
+      "source_feature_indices": [
+        2030,
+        2128
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133139,
+      "start": 152239,
+      "end_exclusive": 152240,
+      "owner_indices": [
+        9047
+      ],
+      "source_feature_indices": [
+        2130
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133140,
+      "start": 152240,
+      "end_exclusive": 152241,
+      "owner_indices": [
+        9047
+      ],
+      "source_feature_indices": [
+        2130
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133141,
+      "start": 152240,
+      "end_exclusive": 152242,
+      "owner_indices": [
+        9047
+      ],
+      "source_feature_indices": [
+        2130
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133142,
+      "start": 152240,
+      "end_exclusive": 152241,
+      "owner_indices": [
+        9047
+      ],
+      "source_feature_indices": [
+        2130,
+        18746
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133142,
+      "start": 152241,
+      "end_exclusive": 152242,
+      "owner_indices": [
+        9047
+      ],
+      "source_feature_indices": [
+        2130
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133143,
+      "start": 152242,
+      "end_exclusive": 152243,
+      "owner_indices": [
+        9047
+      ],
+      "source_feature_indices": [
+        2130
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133205,
+      "start": 153265,
+      "end_exclusive": 153266,
+      "owner_indices": [
+        9029
+      ],
+      "source_feature_indices": [
+        2143
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133206,
+      "start": 153331,
+      "end_exclusive": 153332,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133209,
+      "start": 153329,
+      "end_exclusive": 153330,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133210,
+      "start": 153328,
+      "end_exclusive": 153329,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133212,
+      "start": 153327,
+      "end_exclusive": 153328,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133213,
+      "start": 153326,
+      "end_exclusive": 153327,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133214,
+      "start": 153325,
+      "end_exclusive": 153326,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133215,
+      "start": 153325,
+      "end_exclusive": 153326,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133219,
+      "start": 153321,
+      "end_exclusive": 153323,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133220,
+      "start": 153319,
+      "end_exclusive": 153322,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2028,
+        2142
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133221,
+      "start": 152298,
+      "end_exclusive": 152299,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133221,
+      "start": 153317,
+      "end_exclusive": 153320,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2028,
+        2142
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133221,
+      "start": 153387,
+      "end_exclusive": 153388,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133222,
+      "start": 152299,
+      "end_exclusive": 152300,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133222,
+      "start": 153316,
+      "end_exclusive": 153318,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2028,
+        2142
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133222,
+      "start": 153388,
+      "end_exclusive": 153389,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133223,
+      "start": 152301,
+      "end_exclusive": 152302,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133223,
+      "start": 153314,
+      "end_exclusive": 153317,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2028,
+        2142
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133223,
+      "start": 153389,
+      "end_exclusive": 153390,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133224,
+      "start": 153312,
+      "end_exclusive": 153313,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133224,
+      "start": 153313,
+      "end_exclusive": 153315,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2028,
+        2142
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133224,
+      "start": 153390,
+      "end_exclusive": 153391,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133225,
+      "start": 153311,
+      "end_exclusive": 153312,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133225,
+      "start": 153312,
+      "end_exclusive": 153313,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2028,
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133225,
+      "start": 153391,
+      "end_exclusive": 153392,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133226,
+      "start": 153310,
+      "end_exclusive": 153311,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133226,
+      "start": 153311,
+      "end_exclusive": 153312,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2028,
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133226,
+      "start": 153392,
+      "end_exclusive": 153393,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133227,
+      "start": 153307,
+      "end_exclusive": 153309,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133227,
+      "start": 153309,
+      "end_exclusive": 153310,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2028,
+        2142
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133228,
+      "start": 153306,
+      "end_exclusive": 153307,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133228,
+      "start": 153307,
+      "end_exclusive": 153308,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2028,
+        2142
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133229,
+      "start": 153304,
+      "end_exclusive": 153305,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133229,
+      "start": 153305,
+      "end_exclusive": 153306,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133229,
+      "start": 153306,
+      "end_exclusive": 153307,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2028,
+        2142
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133230,
+      "start": 153303,
+      "end_exclusive": 153304,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133230,
+      "start": 153304,
+      "end_exclusive": 153305,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133231,
+      "start": 153287,
+      "end_exclusive": 153290,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133231,
+      "start": 153290,
+      "end_exclusive": 153291,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133231,
+      "start": 153302,
+      "end_exclusive": 153303,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133231,
+      "start": 153396,
+      "end_exclusive": 153397,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133232,
+      "start": 153291,
+      "end_exclusive": 153292,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133232,
+      "start": 153292,
+      "end_exclusive": 153293,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133232,
+      "start": 153300,
+      "end_exclusive": 153302,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133233,
+      "start": 153295,
+      "end_exclusive": 153296,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133233,
+      "start": 153299,
+      "end_exclusive": 153300,
+      "owner_indices": [
+        9040
+      ],
+      "source_feature_indices": [
+        2142,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133254,
+      "start": 153529,
+      "end_exclusive": 153531,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133255,
+      "start": 153523,
+      "end_exclusive": 153525,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2141
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133255,
+      "start": 153525,
+      "end_exclusive": 153527,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133255,
+      "start": 153527,
+      "end_exclusive": 153528,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133256,
+      "start": 153521,
+      "end_exclusive": 153522,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2141,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133256,
+      "start": 153522,
+      "end_exclusive": 153523,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2141
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133256,
+      "start": 153523,
+      "end_exclusive": 153526,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133257,
+      "start": 153520,
+      "end_exclusive": 153521,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2141,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133257,
+      "start": 153521,
+      "end_exclusive": 153522,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133257,
+      "start": 153522,
+      "end_exclusive": 153523,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133258,
+      "start": 153519,
+      "end_exclusive": 153520,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133258,
+      "start": 153520,
+      "end_exclusive": 153521,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133259,
+      "start": 153514,
+      "end_exclusive": 153516,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141,
+        60195
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133308,
+      "start": 152387,
+      "end_exclusive": 152388,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133310,
+      "start": 153510,
+      "end_exclusive": 153511,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133311,
+      "start": 152388,
+      "end_exclusive": 152389,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133311,
+      "start": 153511,
+      "end_exclusive": 153512,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133312,
+      "start": 152388,
+      "end_exclusive": 152389,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133312,
+      "start": 153511,
+      "end_exclusive": 153512,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133313,
+      "start": 153512,
+      "end_exclusive": 153513,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141,
+        60207
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133314,
+      "start": 152389,
+      "end_exclusive": 152390,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133314,
+      "start": 153512,
+      "end_exclusive": 153513,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133315,
+      "start": 152389,
+      "end_exclusive": 152390,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133316,
+      "start": 152389,
+      "end_exclusive": 152390,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133316,
+      "start": 153513,
+      "end_exclusive": 153514,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133317,
+      "start": 152389,
+      "end_exclusive": 152391,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133318,
+      "start": 153514,
+      "end_exclusive": 153515,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133319,
+      "start": 152390,
+      "end_exclusive": 152391,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133319,
+      "start": 153515,
+      "end_exclusive": 153516,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133320,
+      "start": 152390,
+      "end_exclusive": 152391,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133320,
+      "start": 153516,
+      "end_exclusive": 153517,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133321,
+      "start": 152390,
+      "end_exclusive": 152391,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133321,
+      "start": 153517,
+      "end_exclusive": 153518,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133322,
+      "start": 152390,
+      "end_exclusive": 152391,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133322,
+      "start": 153518,
+      "end_exclusive": 153519,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133323,
+      "start": 152389,
+      "end_exclusive": 152390,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131,
+        18746
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133323,
+      "start": 152390,
+      "end_exclusive": 152391,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133323,
+      "start": 153519,
+      "end_exclusive": 153520,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133324,
+      "start": 152389,
+      "end_exclusive": 152391,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133324,
+      "start": 153520,
+      "end_exclusive": 153521,
+      "owner_indices": [
+        9079
+      ],
+      "source_feature_indices": [
+        2028,
+        2141
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133325,
+      "start": 152389,
+      "end_exclusive": 152391,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133326,
+      "start": 152389,
+      "end_exclusive": 152391,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133327,
+      "start": 152388,
+      "end_exclusive": 152389,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131,
+        18746
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133327,
+      "start": 152389,
+      "end_exclusive": 152391,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133328,
+      "start": 152389,
+      "end_exclusive": 152390,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133333,
+      "start": 152389,
+      "end_exclusive": 152390,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133334,
+      "start": 152388,
+      "end_exclusive": 152390,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133335,
+      "start": 152388,
+      "end_exclusive": 152390,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133336,
+      "start": 152388,
+      "end_exclusive": 152390,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133337,
+      "start": 152388,
+      "end_exclusive": 152390,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133338,
+      "start": 152387,
+      "end_exclusive": 152390,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133339,
+      "start": 152387,
+      "end_exclusive": 152390,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133340,
+      "start": 152387,
+      "end_exclusive": 152390,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133341,
+      "start": 152387,
+      "end_exclusive": 152390,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133342,
+      "start": 152387,
+      "end_exclusive": 152388,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2032,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133342,
+      "start": 152388,
+      "end_exclusive": 152390,
+      "owner_indices": [
+        9001
+      ],
+      "source_feature_indices": [
+        2030,
+        2131
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133343,
+      "start": 152388,
+      "end_exclusive": 152389,
+      "owner_indices": [
+        9078
+      ],
+      "source_feature_indices": [
+        2032,
+        2132
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133378,
+      "start": 152374,
+      "end_exclusive": 152376,
+      "owner_indices": [
+        9078
+      ],
+      "source_feature_indices": [
+        2032,
+        2132
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133379,
+      "start": 152373,
+      "end_exclusive": 152374,
+      "owner_indices": [
+        9078
+      ],
+      "source_feature_indices": [
+        2132
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133379,
+      "start": 152374,
+      "end_exclusive": 152375,
+      "owner_indices": [
+        9078
+      ],
+      "source_feature_indices": [
+        2032,
+        2132
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133380,
+      "start": 152373,
+      "end_exclusive": 152374,
+      "owner_indices": [
+        9078
+      ],
+      "source_feature_indices": [
+        2032,
+        2132
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133426,
+      "start": 152370,
+      "end_exclusive": 152371,
+      "owner_indices": [
+        9078
+      ],
+      "source_feature_indices": [
+        2132
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133426,
+      "start": 152371,
+      "end_exclusive": 152372,
+      "owner_indices": [
+        9078
+      ],
+      "source_feature_indices": [
+        2032,
+        2132
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133449,
+      "start": 153533,
+      "end_exclusive": 153534,
+      "owner_indices": [
+        8994
+      ],
+      "source_feature_indices": [
+        2028,
+        2140
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133518,
+      "start": 152361,
+      "end_exclusive": 152362,
+      "owner_indices": [
+        9057
+      ],
+      "source_feature_indices": [
+        2034,
+        2133
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133519,
+      "start": 152359,
+      "end_exclusive": 152360,
+      "owner_indices": [
+        9057
+      ],
+      "source_feature_indices": [
+        2034,
+        2133
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133519,
+      "start": 152366,
+      "end_exclusive": 152367,
+      "owner_indices": [
+        9057
+      ],
+      "source_feature_indices": [
+        2034,
+        2133
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133522,
+      "start": 152372,
+      "end_exclusive": 152373,
+      "owner_indices": [
+        9057
+      ],
+      "source_feature_indices": [
+        2034,
+        2133
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133525,
+      "start": 152389,
+      "end_exclusive": 152390,
+      "owner_indices": [
+        9057
+      ],
+      "source_feature_indices": [
+        2034,
+        2133
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133526,
+      "start": 152385,
+      "end_exclusive": 152391,
+      "owner_indices": [
+        9057
+      ],
+      "source_feature_indices": [
+        2034,
+        2133
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133527,
+      "start": 152368,
+      "end_exclusive": 152392,
+      "owner_indices": [
+        9057
+      ],
+      "source_feature_indices": [
+        2034,
+        2133
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133528,
+      "start": 152439,
+      "end_exclusive": 152440,
+      "owner_indices": [
+        9089
+      ],
+      "source_feature_indices": [
+        2035,
+        2156
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133529,
+      "start": 152396,
+      "end_exclusive": 152397,
+      "owner_indices": [
+        9057
+      ],
+      "source_feature_indices": [
+        2034,
+        2133
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133529,
+      "start": 152440,
+      "end_exclusive": 152443,
+      "owner_indices": [
+        9089
+      ],
+      "source_feature_indices": [
+        2035,
+        2156
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133530,
+      "start": 152445,
+      "end_exclusive": 152446,
+      "owner_indices": [
+        9089
+      ],
+      "source_feature_indices": [
+        2035,
+        2156
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133539,
+      "start": 152448,
+      "end_exclusive": 152450,
+      "owner_indices": [
+        9089
+      ],
+      "source_feature_indices": [
+        2156
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133539,
+      "start": 152450,
+      "end_exclusive": 152451,
+      "owner_indices": [
+        9089
+      ],
+      "source_feature_indices": [
+        2156
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133540,
+      "start": 152450,
+      "end_exclusive": 152451,
+      "owner_indices": [
+        9089
+      ],
+      "source_feature_indices": [
+        2156
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133565,
+      "start": 152452,
+      "end_exclusive": 152453,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2035,
+        2154
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133566,
+      "start": 152451,
+      "end_exclusive": 152453,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2035,
+        2154
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133567,
+      "start": 152451,
+      "end_exclusive": 152453,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2035,
+        2154
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133568,
+      "start": 152451,
+      "end_exclusive": 152452,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2035,
+        2154
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133569,
+      "start": 152451,
+      "end_exclusive": 152452,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2035,
+        2154
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133570,
+      "start": 152451,
+      "end_exclusive": 152452,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2035,
+        2154
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133571,
+      "start": 152451,
+      "end_exclusive": 152452,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2035,
+        2154
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133604,
+      "start": 152451,
+      "end_exclusive": 152452,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2034,
+        2154
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133606,
+      "start": 152450,
+      "end_exclusive": 152451,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2034,
+        2154
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133609,
+      "start": 152449,
+      "end_exclusive": 152450,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2034,
+        2154
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133611,
+      "start": 152447,
+      "end_exclusive": 152449,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2034,
+        2154
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133612,
+      "start": 152445,
+      "end_exclusive": 152447,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2034,
+        2154
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133612,
+      "start": 152447,
+      "end_exclusive": 152449,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2034,
+        2154
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133613,
+      "start": 152444,
+      "end_exclusive": 152445,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2154
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133613,
+      "start": 152445,
+      "end_exclusive": 152446,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2034,
+        2154
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133613,
+      "start": 152446,
+      "end_exclusive": 152448,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2034,
+        2154
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133614,
+      "start": 152443,
+      "end_exclusive": 152445,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2154
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133614,
+      "start": 152445,
+      "end_exclusive": 152446,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2034,
+        2154
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133614,
+      "start": 152446,
+      "end_exclusive": 152448,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2034,
+        2154
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133615,
+      "start": 152444,
+      "end_exclusive": 152445,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2154
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133615,
+      "start": 152445,
+      "end_exclusive": 152446,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2034,
+        2154
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133615,
+      "start": 152446,
+      "end_exclusive": 152448,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2034,
+        2154
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133616,
+      "start": 152444,
+      "end_exclusive": 152445,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2154
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133616,
+      "start": 152445,
+      "end_exclusive": 152446,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2034,
+        2154
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133616,
+      "start": 152446,
+      "end_exclusive": 152447,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2034,
+        2154
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133617,
+      "start": 152444,
+      "end_exclusive": 152445,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2154
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133617,
+      "start": 152445,
+      "end_exclusive": 152446,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2034,
+        2154
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133617,
+      "start": 152446,
+      "end_exclusive": 152447,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2034,
+        2154
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133618,
+      "start": 152445,
+      "end_exclusive": 152447,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2034,
+        2154
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133619,
+      "start": 152445,
+      "end_exclusive": 152446,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2034,
+        2154
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133620,
+      "start": 152445,
+      "end_exclusive": 152446,
+      "owner_indices": [
+        9087
+      ],
+      "source_feature_indices": [
+        2034,
+        2154
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133622,
+      "start": 152445,
+      "end_exclusive": 152446,
+      "owner_indices": [
+        9028
+      ],
+      "source_feature_indices": [
+        2046
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133623,
+      "start": 152446,
+      "end_exclusive": 152447,
+      "owner_indices": [
+        9028
+      ],
+      "source_feature_indices": [
+        2046
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133671,
+      "start": 152452,
+      "end_exclusive": 152453,
+      "owner_indices": [
+        9028
+      ],
+      "source_feature_indices": [
+        2034,
+        2046
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133672,
+      "start": 152452,
+      "end_exclusive": 152453,
+      "owner_indices": [
+        9028
+      ],
+      "source_feature_indices": [
+        2046
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133672,
+      "start": 152453,
+      "end_exclusive": 152454,
+      "owner_indices": [
+        9028
+      ],
+      "source_feature_indices": [
+        2034,
+        2046
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133673,
+      "start": 152453,
+      "end_exclusive": 152454,
+      "owner_indices": [
+        9028
+      ],
+      "source_feature_indices": [
+        2046
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133674,
+      "start": 152454,
+      "end_exclusive": 152455,
+      "owner_indices": [
+        9028
+      ],
+      "source_feature_indices": [
+        2046
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133675,
+      "start": 152455,
+      "end_exclusive": 152456,
+      "owner_indices": [
+        9028
+      ],
+      "source_feature_indices": [
+        2034,
+        2046
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133691,
+      "start": 152452,
+      "end_exclusive": 152453,
+      "owner_indices": [
+        9028
+      ],
+      "source_feature_indices": [
+        2046
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133692,
+      "start": 152452,
+      "end_exclusive": 152453,
+      "owner_indices": [
+        9028
+      ],
+      "source_feature_indices": [
+        2046
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133693,
+      "start": 152452,
+      "end_exclusive": 152453,
+      "owner_indices": [
+        9028
+      ],
+      "source_feature_indices": [
+        2046
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133694,
+      "start": 152452,
+      "end_exclusive": 152453,
+      "owner_indices": [
+        9028
+      ],
+      "source_feature_indices": [
+        2046
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133695,
+      "start": 152452,
+      "end_exclusive": 152453,
+      "owner_indices": [
+        9028
+      ],
+      "source_feature_indices": [
+        2046
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133697,
+      "start": 152453,
+      "end_exclusive": 152454,
+      "owner_indices": [
+        9028
+      ],
+      "source_feature_indices": [
+        2034,
+        2046
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133710,
+      "start": 152455,
+      "end_exclusive": 152456,
+      "owner_indices": [
+        8990
+      ],
+      "source_feature_indices": [
+        2038,
+        2047
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133712,
+      "start": 152454,
+      "end_exclusive": 152455,
+      "owner_indices": [
+        8990
+      ],
+      "source_feature_indices": [
+        2047
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133713,
+      "start": 152454,
+      "end_exclusive": 152455,
+      "owner_indices": [
+        8990
+      ],
+      "source_feature_indices": [
+        2047
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133714,
+      "start": 152454,
+      "end_exclusive": 152455,
+      "owner_indices": [
+        8990
+      ],
+      "source_feature_indices": [
+        2047
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133717,
+      "start": 152453,
+      "end_exclusive": 152454,
+      "owner_indices": [
+        8990
+      ],
+      "source_feature_indices": [
+        2047
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133718,
+      "start": 152452,
+      "end_exclusive": 152453,
+      "owner_indices": [
+        8990
+      ],
+      "source_feature_indices": [
+        2047
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133719,
+      "start": 152451,
+      "end_exclusive": 152453,
+      "owner_indices": [
+        8990
+      ],
+      "source_feature_indices": [
+        2047
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133720,
+      "start": 152451,
+      "end_exclusive": 152453,
+      "owner_indices": [
+        8990
+      ],
+      "source_feature_indices": [
+        2047
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133721,
+      "start": 152452,
+      "end_exclusive": 152453,
+      "owner_indices": [
+        8990
+      ],
+      "source_feature_indices": [
+        2047
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133738,
+      "start": 152447,
+      "end_exclusive": 152448,
+      "owner_indices": [
+        8990
+      ],
+      "source_feature_indices": [
+        2047
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133771,
+      "start": 152438,
+      "end_exclusive": 152439,
+      "owner_indices": [
+        9019
+      ],
+      "source_feature_indices": [
+        2042
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133773,
+      "start": 152437,
+      "end_exclusive": 152438,
+      "owner_indices": [
+        9019
+      ],
+      "source_feature_indices": [
+        2042
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133774,
+      "start": 152436,
+      "end_exclusive": 152438,
+      "owner_indices": [
+        9019
+      ],
+      "source_feature_indices": [
+        2042
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133775,
+      "start": 152436,
+      "end_exclusive": 152437,
+      "owner_indices": [
+        9019
+      ],
+      "source_feature_indices": [
+        2042
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133776,
+      "start": 152435,
+      "end_exclusive": 152437,
+      "owner_indices": [
+        9019
+      ],
+      "source_feature_indices": [
+        2042
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133777,
+      "start": 152435,
+      "end_exclusive": 152436,
+      "owner_indices": [
+        9019
+      ],
+      "source_feature_indices": [
+        2042
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133777,
+      "start": 152436,
+      "end_exclusive": 152437,
+      "owner_indices": [
+        9019
+      ],
+      "source_feature_indices": [
+        2038,
+        2042
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133778,
+      "start": 152435,
+      "end_exclusive": 152436,
+      "owner_indices": [
+        9019
+      ],
+      "source_feature_indices": [
+        2042
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133778,
+      "start": 152436,
+      "end_exclusive": 152437,
+      "owner_indices": [
+        9019
+      ],
+      "source_feature_indices": [
+        2038,
+        2042
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133779,
+      "start": 152435,
+      "end_exclusive": 152436,
+      "owner_indices": [
+        9019
+      ],
+      "source_feature_indices": [
+        2042
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133780,
+      "start": 152435,
+      "end_exclusive": 152436,
+      "owner_indices": [
+        9019
+      ],
+      "source_feature_indices": [
+        2042
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133781,
+      "start": 152435,
+      "end_exclusive": 152436,
+      "owner_indices": [
+        9019
+      ],
+      "source_feature_indices": [
+        2038,
+        2042
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133784,
+      "start": 152433,
+      "end_exclusive": 152434,
+      "owner_indices": [
+        9019
+      ],
+      "source_feature_indices": [
+        2042
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133785,
+      "start": 152432,
+      "end_exclusive": 152433,
+      "owner_indices": [
+        9019
+      ],
+      "source_feature_indices": [
+        2042
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133786,
+      "start": 152431,
+      "end_exclusive": 152432,
+      "owner_indices": [
+        9019
+      ],
+      "source_feature_indices": [
+        2042
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133787,
+      "start": 152430,
+      "end_exclusive": 152431,
+      "owner_indices": [
+        9019
+      ],
+      "source_feature_indices": [
+        2042
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133790,
+      "start": 152428,
+      "end_exclusive": 152429,
+      "owner_indices": [
+        9019
+      ],
+      "source_feature_indices": [
+        2042
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133816,
+      "start": 152442,
+      "end_exclusive": 152443,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133817,
+      "start": 152443,
+      "end_exclusive": 152444,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133818,
+      "start": 152443,
+      "end_exclusive": 152444,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133821,
+      "start": 152444,
+      "end_exclusive": 152445,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133822,
+      "start": 152444,
+      "end_exclusive": 152445,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133825,
+      "start": 152445,
+      "end_exclusive": 152446,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133826,
+      "start": 152445,
+      "end_exclusive": 152446,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133827,
+      "start": 152445,
+      "end_exclusive": 152446,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133828,
+      "start": 152445,
+      "end_exclusive": 152446,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133829,
+      "start": 152444,
+      "end_exclusive": 152446,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133829,
+      "start": 152446,
+      "end_exclusive": 152447,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133830,
+      "start": 152444,
+      "end_exclusive": 152446,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133830,
+      "start": 152446,
+      "end_exclusive": 152447,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133831,
+      "start": 152443,
+      "end_exclusive": 152444,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133831,
+      "start": 152444,
+      "end_exclusive": 152446,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133831,
+      "start": 152446,
+      "end_exclusive": 152447,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133832,
+      "start": 152444,
+      "end_exclusive": 152446,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133832,
+      "start": 152446,
+      "end_exclusive": 152448,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133833,
+      "start": 152445,
+      "end_exclusive": 152446,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133833,
+      "start": 152446,
+      "end_exclusive": 152448,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133834,
+      "start": 152445,
+      "end_exclusive": 152446,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133834,
+      "start": 152446,
+      "end_exclusive": 152447,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133834,
+      "start": 152447,
+      "end_exclusive": 152448,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133835,
+      "start": 152446,
+      "end_exclusive": 152447,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133835,
+      "start": 152447,
+      "end_exclusive": 152448,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133836,
+      "start": 152447,
+      "end_exclusive": 152449,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133837,
+      "start": 152448,
+      "end_exclusive": 152449,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133840,
+      "start": 152449,
+      "end_exclusive": 152450,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133841,
+      "start": 152449,
+      "end_exclusive": 152450,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133842,
+      "start": 152449,
+      "end_exclusive": 152450,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133843,
+      "start": 152449,
+      "end_exclusive": 152451,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133844,
+      "start": 152449,
+      "end_exclusive": 152451,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133845,
+      "start": 152450,
+      "end_exclusive": 152451,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133846,
+      "start": 152450,
+      "end_exclusive": 152451,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133847,
+      "start": 152450,
+      "end_exclusive": 152452,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133848,
+      "start": 152451,
+      "end_exclusive": 152452,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133862,
+      "start": 152453,
+      "end_exclusive": 152454,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133863,
+      "start": 152453,
+      "end_exclusive": 152454,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133864,
+      "start": 152454,
+      "end_exclusive": 152455,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133865,
+      "start": 152454,
+      "end_exclusive": 152455,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133866,
+      "start": 152454,
+      "end_exclusive": 152455,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133875,
+      "start": 152463,
+      "end_exclusive": 152464,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133876,
+      "start": 152463,
+      "end_exclusive": 152464,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133877,
+      "start": 152464,
+      "end_exclusive": 152465,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133878,
+      "start": 152464,
+      "end_exclusive": 152465,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133879,
+      "start": 152464,
+      "end_exclusive": 152465,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133879,
+      "start": 152465,
+      "end_exclusive": 152466,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133882,
+      "start": 152466,
+      "end_exclusive": 152467,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133883,
+      "start": 152466,
+      "end_exclusive": 152467,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133884,
+      "start": 152466,
+      "end_exclusive": 152467,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133884,
+      "start": 152467,
+      "end_exclusive": 152468,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133885,
+      "start": 152467,
+      "end_exclusive": 152468,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133886,
+      "start": 152468,
+      "end_exclusive": 152469,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133887,
+      "start": 152468,
+      "end_exclusive": 152469,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133888,
+      "start": 152468,
+      "end_exclusive": 152470,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133889,
+      "start": 152467,
+      "end_exclusive": 152468,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133889,
+      "start": 152468,
+      "end_exclusive": 152470,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133890,
+      "start": 152467,
+      "end_exclusive": 152468,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133890,
+      "start": 152468,
+      "end_exclusive": 152470,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133890,
+      "start": 152470,
+      "end_exclusive": 152471,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133891,
+      "start": 152467,
+      "end_exclusive": 152468,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133891,
+      "start": 152468,
+      "end_exclusive": 152470,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133891,
+      "start": 152470,
+      "end_exclusive": 152471,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133892,
+      "start": 152468,
+      "end_exclusive": 152470,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133892,
+      "start": 152470,
+      "end_exclusive": 152472,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133893,
+      "start": 152469,
+      "end_exclusive": 152470,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133893,
+      "start": 152470,
+      "end_exclusive": 152472,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133894,
+      "start": 152469,
+      "end_exclusive": 152470,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133894,
+      "start": 152470,
+      "end_exclusive": 152473,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133895,
+      "start": 152471,
+      "end_exclusive": 152473,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133896,
+      "start": 152473,
+      "end_exclusive": 152474,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133897,
+      "start": 152473,
+      "end_exclusive": 152474,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133899,
+      "start": 152474,
+      "end_exclusive": 152475,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133907,
+      "start": 152478,
+      "end_exclusive": 152479,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133909,
+      "start": 152479,
+      "end_exclusive": 152480,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133911,
+      "start": 153119,
+      "end_exclusive": 153120,
+      "owner_indices": [
+        9030
+      ],
+      "source_feature_indices": [
+        2026,
+        2136
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133912,
+      "start": 153118,
+      "end_exclusive": 153120,
+      "owner_indices": [
+        9030
+      ],
+      "source_feature_indices": [
+        2026,
+        2136
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133913,
+      "start": 153117,
+      "end_exclusive": 153118,
+      "owner_indices": [
+        9030
+      ],
+      "source_feature_indices": [
+        2026,
+        2136,
+        60207
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133913,
+      "start": 153118,
+      "end_exclusive": 153120,
+      "owner_indices": [
+        9030
+      ],
+      "source_feature_indices": [
+        2026,
+        2136
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133932,
+      "start": 152494,
+      "end_exclusive": 152495,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133933,
+      "start": 152493,
+      "end_exclusive": 152494,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133933,
+      "start": 152494,
+      "end_exclusive": 152495,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133934,
+      "start": 152494,
+      "end_exclusive": 152495,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133934,
+      "start": 152495,
+      "end_exclusive": 152496,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133935,
+      "start": 152494,
+      "end_exclusive": 152495,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133935,
+      "start": 152495,
+      "end_exclusive": 152496,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133936,
+      "start": 152495,
+      "end_exclusive": 152496,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133936,
+      "start": 152496,
+      "end_exclusive": 152497,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133937,
+      "start": 152495,
+      "end_exclusive": 152496,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133937,
+      "start": 152496,
+      "end_exclusive": 152497,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133938,
+      "start": 152496,
+      "end_exclusive": 152498,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133939,
+      "start": 152497,
+      "end_exclusive": 152498,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133941,
+      "start": 152498,
+      "end_exclusive": 152499,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133945,
+      "start": 152499,
+      "end_exclusive": 152500,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133946,
+      "start": 152499,
+      "end_exclusive": 152500,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133947,
+      "start": 152499,
+      "end_exclusive": 152500,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133948,
+      "start": 152499,
+      "end_exclusive": 152501,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133949,
+      "start": 152499,
+      "end_exclusive": 152500,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133949,
+      "start": 152500,
+      "end_exclusive": 152501,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133950,
+      "start": 152500,
+      "end_exclusive": 152501,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133951,
+      "start": 152500,
+      "end_exclusive": 152501,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133951,
+      "start": 153102,
+      "end_exclusive": 153103,
+      "owner_indices": [
+        9030
+      ],
+      "source_feature_indices": [
+        2026,
+        2136,
+        60207
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133952,
+      "start": 152500,
+      "end_exclusive": 152501,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133952,
+      "start": 153101,
+      "end_exclusive": 153102,
+      "owner_indices": [
+        9030
+      ],
+      "source_feature_indices": [
+        2026,
+        2136,
+        60207
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133953,
+      "start": 152500,
+      "end_exclusive": 152501,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133954,
+      "start": 152500,
+      "end_exclusive": 152501,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133955,
+      "start": 152500,
+      "end_exclusive": 152502,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133956,
+      "start": 152500,
+      "end_exclusive": 152502,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133956,
+      "start": 153099,
+      "end_exclusive": 153100,
+      "owner_indices": [
+        9030
+      ],
+      "source_feature_indices": [
+        2026,
+        2136
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133956,
+      "start": 153100,
+      "end_exclusive": 153101,
+      "owner_indices": [
+        9030
+      ],
+      "source_feature_indices": [
+        2026,
+        2136,
+        60207
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133957,
+      "start": 152501,
+      "end_exclusive": 152502,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133957,
+      "start": 153099,
+      "end_exclusive": 153100,
+      "owner_indices": [
+        9030
+      ],
+      "source_feature_indices": [
+        2026,
+        2136
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133958,
+      "start": 152501,
+      "end_exclusive": 152502,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133959,
+      "start": 152501,
+      "end_exclusive": 152502,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133965,
+      "start": 153097,
+      "end_exclusive": 153098,
+      "owner_indices": [
+        9030
+      ],
+      "source_feature_indices": [
+        2026,
+        2136,
+        60207
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133966,
+      "start": 153097,
+      "end_exclusive": 153098,
+      "owner_indices": [
+        9030
+      ],
+      "source_feature_indices": [
+        2026,
+        2136,
+        60207
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133967,
+      "start": 153097,
+      "end_exclusive": 153098,
+      "owner_indices": [
+        9030
+      ],
+      "source_feature_indices": [
+        2026,
+        2136,
+        60207
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133968,
+      "start": 152503,
+      "end_exclusive": 152504,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133968,
+      "start": 153097,
+      "end_exclusive": 153098,
+      "owner_indices": [
+        9030
+      ],
+      "source_feature_indices": [
+        2026,
+        2136
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133969,
+      "start": 152505,
+      "end_exclusive": 152506,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133969,
+      "start": 153097,
+      "end_exclusive": 153098,
+      "owner_indices": [
+        9030
+      ],
+      "source_feature_indices": [
+        2026,
+        2136
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133970,
+      "start": 152506,
+      "end_exclusive": 152507,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133970,
+      "start": 152507,
+      "end_exclusive": 152509,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133970,
+      "start": 153097,
+      "end_exclusive": 153098,
+      "owner_indices": [
+        9030
+      ],
+      "source_feature_indices": [
+        2136
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 133971,
+      "start": 152508,
+      "end_exclusive": 152511,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133984,
+      "start": 152518,
+      "end_exclusive": 152519,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133985,
+      "start": 152517,
+      "end_exclusive": 152518,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133986,
+      "start": 152517,
+      "end_exclusive": 152518,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133987,
+      "start": 152516,
+      "end_exclusive": 152518,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133988,
+      "start": 152516,
+      "end_exclusive": 152517,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133989,
+      "start": 152514,
+      "end_exclusive": 152515,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133989,
+      "start": 152515,
+      "end_exclusive": 152517,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133990,
+      "start": 152514,
+      "end_exclusive": 152515,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133990,
+      "start": 152515,
+      "end_exclusive": 152517,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133991,
+      "start": 152514,
+      "end_exclusive": 152515,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133991,
+      "start": 152515,
+      "end_exclusive": 152516,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133992,
+      "start": 152514,
+      "end_exclusive": 152516,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133993,
+      "start": 152514,
+      "end_exclusive": 152516,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133994,
+      "start": 152513,
+      "end_exclusive": 152514,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133994,
+      "start": 152514,
+      "end_exclusive": 152515,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133995,
+      "start": 152512,
+      "end_exclusive": 152513,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133995,
+      "start": 152513,
+      "end_exclusive": 152515,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133996,
+      "start": 152512,
+      "end_exclusive": 152514,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133996,
+      "start": 152514,
+      "end_exclusive": 152515,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133997,
+      "start": 152513,
+      "end_exclusive": 152514,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133998,
+      "start": 152513,
+      "end_exclusive": 152514,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 133999,
+      "start": 152513,
+      "end_exclusive": 152514,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 134000,
+      "start": 152513,
+      "end_exclusive": 152514,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 134013,
+      "start": 152525,
+      "end_exclusive": 152526,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134015,
+      "start": 152526,
+      "end_exclusive": 152527,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134016,
+      "start": 152527,
+      "end_exclusive": 152528,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134017,
+      "start": 152527,
+      "end_exclusive": 152528,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134018,
+      "start": 152528,
+      "end_exclusive": 152529,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134019,
+      "start": 152528,
+      "end_exclusive": 152529,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134020,
+      "start": 152529,
+      "end_exclusive": 152530,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134021,
+      "start": 152529,
+      "end_exclusive": 152530,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134021,
+      "start": 152530,
+      "end_exclusive": 152531,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134022,
+      "start": 152530,
+      "end_exclusive": 152531,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134023,
+      "start": 152530,
+      "end_exclusive": 152531,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 134023,
+      "start": 152531,
+      "end_exclusive": 152532,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134024,
+      "start": 152531,
+      "end_exclusive": 152532,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 134025,
+      "start": 152532,
+      "end_exclusive": 152533,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134026,
+      "start": 152533,
+      "end_exclusive": 152534,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2038,
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134056,
+      "start": 152548,
+      "end_exclusive": 152549,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134057,
+      "start": 152549,
+      "end_exclusive": 152550,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134070,
+      "start": 152558,
+      "end_exclusive": 152559,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134094,
+      "start": 152567,
+      "end_exclusive": 152568,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134095,
+      "start": 152567,
+      "end_exclusive": 152568,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134096,
+      "start": 152568,
+      "end_exclusive": 152569,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134097,
+      "start": 152568,
+      "end_exclusive": 152569,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134119,
+      "start": 152572,
+      "end_exclusive": 152573,
+      "owner_indices": [
+        9021
+      ],
+      "source_feature_indices": [
+        2043
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134156,
+      "start": 152599,
+      "end_exclusive": 152600,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134157,
+      "start": 152599,
+      "end_exclusive": 152600,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134158,
+      "start": 152599,
+      "end_exclusive": 152600,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134183,
+      "start": 152608,
+      "end_exclusive": 152609,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134184,
+      "start": 152608,
+      "end_exclusive": 152610,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134185,
+      "start": 152609,
+      "end_exclusive": 152611,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134186,
+      "start": 152611,
+      "end_exclusive": 152612,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2025,
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134187,
+      "start": 152612,
+      "end_exclusive": 152613,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2025,
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134204,
+      "start": 152612,
+      "end_exclusive": 152613,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134207,
+      "start": 152613,
+      "end_exclusive": 152614,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134215,
+      "start": 152616,
+      "end_exclusive": 152617,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2025,
+        2134
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 134234,
+      "start": 152628,
+      "end_exclusive": 152629,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2025,
+        2134
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 134235,
+      "start": 152627,
+      "end_exclusive": 152629,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 134236,
+      "start": 152627,
+      "end_exclusive": 152629,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 134237,
+      "start": 152627,
+      "end_exclusive": 152629,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 134238,
+      "start": 152628,
+      "end_exclusive": 152629,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 134239,
+      "start": 152628,
+      "end_exclusive": 152629,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 134250,
+      "start": 152636,
+      "end_exclusive": 152637,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2025,
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134251,
+      "start": 152635,
+      "end_exclusive": 152636,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 134251,
+      "start": 152636,
+      "end_exclusive": 152637,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134251,
+      "start": 152637,
+      "end_exclusive": 152638,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2025,
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134252,
+      "start": 152635,
+      "end_exclusive": 152636,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "inland-water",
+      "land_support_mask": false,
+      "inland_water_support_mask": true
+    },
+    {
+      "y": 134252,
+      "start": 152636,
+      "end_exclusive": 152639,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134253,
+      "start": 152639,
+      "end_exclusive": 152640,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134288,
+      "start": 152684,
+      "end_exclusive": 152685,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134291,
+      "start": 152685,
+      "end_exclusive": 152686,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134292,
+      "start": 152685,
+      "end_exclusive": 152686,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134293,
+      "start": 152685,
+      "end_exclusive": 152686,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134294,
+      "start": 152686,
+      "end_exclusive": 152687,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134312,
+      "start": 152685,
+      "end_exclusive": 152686,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2025,
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134313,
+      "start": 152685,
+      "end_exclusive": 152686,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134314,
+      "start": 152686,
+      "end_exclusive": 152687,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2025,
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134315,
+      "start": 152686,
+      "end_exclusive": 152687,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2025,
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134316,
+      "start": 152686,
+      "end_exclusive": 152688,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2025,
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134317,
+      "start": 152686,
+      "end_exclusive": 152688,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2025,
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134318,
+      "start": 152687,
+      "end_exclusive": 152689,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2025,
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134319,
+      "start": 152687,
+      "end_exclusive": 152689,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2025,
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134320,
+      "start": 152687,
+      "end_exclusive": 152690,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2025,
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134321,
+      "start": 152686,
+      "end_exclusive": 152687,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134321,
+      "start": 152687,
+      "end_exclusive": 152690,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2025,
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134322,
+      "start": 152686,
+      "end_exclusive": 152687,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134322,
+      "start": 152687,
+      "end_exclusive": 152691,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2025,
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134323,
+      "start": 152686,
+      "end_exclusive": 152688,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134323,
+      "start": 152688,
+      "end_exclusive": 152691,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2025,
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134324,
+      "start": 152688,
+      "end_exclusive": 152689,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134324,
+      "start": 152689,
+      "end_exclusive": 152692,
+      "owner_indices": [
+        9072
+      ],
+      "source_feature_indices": [
+        2025,
+        2134
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134336,
+      "start": 152743,
+      "end_exclusive": 152744,
+      "owner_indices": [
+        9067
+      ],
+      "source_feature_indices": [
+        2135,
+        60207
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134336,
+      "start": 152744,
+      "end_exclusive": 152745,
+      "owner_indices": [
+        9067
+      ],
+      "source_feature_indices": [
+        2135
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134337,
+      "start": 152744,
+      "end_exclusive": 152746,
+      "owner_indices": [
+        9067
+      ],
+      "source_feature_indices": [
+        2135
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134338,
+      "start": 152744,
+      "end_exclusive": 152747,
+      "owner_indices": [
+        9067
+      ],
+      "source_feature_indices": [
+        2135
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134339,
+      "start": 152746,
+      "end_exclusive": 152748,
+      "owner_indices": [
+        9067
+      ],
+      "source_feature_indices": [
+        2135
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    },
+    {
+      "y": 134340,
+      "start": 152747,
+      "end_exclusive": 152750,
+      "owner_indices": [
+        9067
+      ],
+      "source_feature_indices": [
+        2135
+      ],
+      "physical_class": "land",
+      "land_support_mask": true,
+      "inland_water_support_mask": false
+    }
+  ],
+  "counts": {
+    "cells": 583,
+    "land_cells": 378,
+    "inland_water_cells": 205,
+    "intervals": 433,
+    "unique_owner_indices": [
+      8987,
+      8990,
+      8994,
+      9001,
+      9019,
+      9021,
+      9028,
+      9029,
+      9030,
+      9036,
+      9040,
+      9047,
+      9050,
+      9057,
+      9067,
+      9072,
+      9077,
+      9078,
+      9079,
+      9087,
+      9089
+    ],
+    "unique_source_indices": [
+      2022,
+      2025,
+      2026,
+      2028,
+      2030,
+      2032,
+      2034,
+      2035,
+      2038,
+      2042,
+      2043,
+      2046,
+      2047,
+      2128,
+      2130,
+      2131,
+      2132,
+      2133,
+      2134,
+      2135,
+      2136,
+      2140,
+      2141,
+      2142,
+      2143,
+      2144,
+      2147,
+      2148,
+      2154,
+      2156,
+      18746,
+      60195,
+      60207
+    ],
+    "water_intersection_rows": 143
+  },
+  "selection_method": {
+    "code_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "code_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs",
+    "code_blob": "c5ba9331deb93eed40662d1dc579cdaedea55c46",
+    "method": "Independent retained-mask join implementing stock segment classification: family = lowest family index among directly owner-mapped sids; unique candidate iff native owner vector length is one; physical class from retained land/water masks; keep exactly family20 + repair-evaluation segments. No producer/observer was executed.",
+    "rejected_or_unselected_counters": {
+      "source_segments_other_family": 171138,
+      "source_segments_nonunique_owner": 13,
+      "eligible_unique_owner_segments_without_land_or_water": 0
+    }
+  },
+  "separate_package_kinds": [
+    {
+      "queue_index_zero_based": 274,
+      "package_id": "gb-BDI-ADM2--source-conflict",
+      "category": "source-conflict",
+      "cells": 13,
+      "land_cells": 13,
+      "inland_water_cells": 0,
+      "intervals": 13,
+      "owners": [
+        9001,
+        9029,
+        9040,
+        9047,
+        14494,
+        43775
+      ],
+      "source_features": [
+        2023,
+        2030,
+        2130,
+        2131,
+        2142,
+        2143,
+        18746,
+        18932,
+        60195,
+        60255
+      ]
+    },
+    {
+      "queue_index_zero_based": 427,
+      "package_id": "gb-BDI-ADM1--location-mapping",
+      "category": "location-mapping",
+      "cells": 784,
+      "land_cells": 319,
+      "inland_water_cells": 465,
+      "intervals": 332,
+      "owners": [],
+      "source_features": [
+        2022,
+        2023,
+        2025,
+        2026,
+        2027,
+        2028,
+        2030,
+        2032,
+        2034,
+        2035,
+        2038,
+        18746,
+        60195,
+        60207
+      ]
+    }
+  ],
+  "limits": [
+    "The retained input joins reproduce the frozen queue package filter and confirm all 583 cells / 433 intervals: 378 land and 205 inland water. Water remains in the denominator and is not reclassified as repairable or unowned.",
+    "This join establishes only source-candidate and physical/water mask support. It does not qualify a positive additive repair, current selected ownership, native conservation, or a documented exception. The one author observer is separate and was not run here.",
+    "The 33 source indices are preserved per interval; ownerless contacts remain in the candidate vectors as source context but were not treated as direct owners.",
+    "The same-country source-conflict row and location-mapping row below are separate queue kinds and are not counted in this repair package.",
+    "No geometry was inspected, computed, or published."
+  ]
+}

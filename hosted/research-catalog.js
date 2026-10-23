@@ -1,5 +1,6 @@
 import {RecordError} from './records.js';
 import {validYear} from '../src/model.js';
+import {geographicRelease} from './geographic-releases.js';
 
 const fail=message=>{throw new RecordError(message,400);};
 const text=(value,label,max=2000)=>{if(typeof value!=='string'||!value.trim()||value.length>max)fail(`Invalid ${label}`);return value;};
@@ -99,4 +100,24 @@ export async function capacityReport(db,{databaseBudgetBytes=null,warningFractio
   media:{registered_objects:counts.media,registered_bytes:mediaBytes,measurement:'database metadata; object existence and checksums require separate read-back',upload_limit_bytes:20*1024*1024},
   storage_scope:'Hosted database and registered object metadata only; prepared ownership, environment and grid assets are separate.',
   backend:{kind:db.dialect==='postgres'?'postgres-plus-r2':'single-d1-plus-r2',partitioning_deployed:false,managed_plan:'unverified',growth_policy:'Use sparse supported intervals. Measure database/index bytes and query latency. Technical maintainers own storage partitioning and map-read changes behind stable IDs/API; research contributors only submit supported evidence.'}};
+}
+
+/** Read-only replica of the canonical owner category labels. The geographic
+ * release records capture context, not owner membership or dated name evidence.
+ * The caller commits this derived input before the ordinary source-image build.
+ */
+export async function ownerLabelSnapshot(db,{releaseId}={}){
+ text(releaseId,'capture release ID');
+ const before=await revision(db),release=await geographicRelease(db,releaseId);
+ if(!release)fail('Owner labels require an existing published capture release');
+ const owners=[];let cursor='';
+ do{
+  const result=await catalogPage(db,'categories',{kind:'owner',cursor,limit:250});
+  if(result.revision!==before){const error=new RecordError('Owner labels changed while exporting; retry the complete snapshot',409);error.retryable=true;throw error;}
+  owners.push(...result.records.map(({id,kind,name,source_id})=>({id,kind,name,source_id})));
+  cursor=result.next_cursor;
+ }while(cursor);
+ await sameRevision(db,before);
+ return {version:1,kind:'neon-owner-label-replica-v1',revision:before,capture_reference:{id:release.id,
+  hierarchy_sha256:release.hierarchy_sha256,footprints_sha256:release.footprints_sha256},owners};
 }

@@ -1,0 +1,242 @@
+{
+  "kind": "BDI original observation consumed-input comparison",
+  "observation_commit": "5c1919dd1c7e89618398454220b57edf0fa388d2",
+  "compared_base": "94fd166b4e0ced382659e2c15a1a5c14141717f8",
+  "inputs": [
+    {
+      "path": "scripts/run-geographic-check.py",
+      "observed_blob": "aa34cb268a3b826ef74601a69852b86bb5b49782",
+      "base_blob": "aa34cb268a3b826ef74601a69852b86bb5b49782",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "observed_blob": "f1ba9acb95e949b778131245229888e72437b582",
+      "base_blob": "0758e885885d76549bf6835324afba7942889a3f",
+      "unchanged": false
+    },
+    {
+      "path": "src/native-grid.js",
+      "observed_blob": "add4cef02bb5a790f22a9078fdf9bd51679059d3",
+      "base_blob": "add4cef02bb5a790f22a9078fdf9bd51679059d3",
+      "unchanged": true
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "observed_blob": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+      "base_blob": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "observed_blob": "ccd128029e0b9522c29acb4bbc5bd35f36f2d1dd",
+      "base_blob": "b56641a48e2c5456999c2ea60dd68d8404a10cd1",
+      "unchanged": false
+    },
+    {
+      "path": "scripts/selected-reference-metadata.mjs",
+      "observed_blob": "38c941e96aee6a0cc62615b7d797e51439570c42",
+      "base_blob": "38c941e96aee6a0cc62615b7d797e51439570c42",
+      "unchanged": true
+    },
+    {
+      "path": "src/reference-metadata.js",
+      "observed_blob": "7db5ba2883a6d8542f830b25e54d96c7d837a187",
+      "base_blob": "7db5ba2883a6d8542f830b25e54d96c7d837a187",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/observe-selected-owners.mjs",
+      "observed_blob": "17ef3bf3f31db9b2c3324743829f09e590016fd8",
+      "base_blob": "17ef3bf3f31db9b2c3324743829f09e590016fd8",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/geography-prefetch.mjs",
+      "observed_blob": "245acaf961811fcc5a1023f53ac42f80e0c7b2c4",
+      "base_blob": "245acaf961811fcc5a1023f53ac42f80e0c7b2c4",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/native-word-store.mjs",
+      "observed_blob": "07a7d06cd7a0c030fcf4327faaf2b69fe5a37dbb",
+      "base_blob": "07a7d06cd7a0c030fcf4327faaf2b69fe5a37dbb",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/native-patch-store.mjs",
+      "observed_blob": "c4afd08b55e176b90ade259d80059f2393bb54b5",
+      "base_blob": "c4afd08b55e176b90ade259d80059f2393bb54b5",
+      "unchanged": true
+    },
+    {
+      "path": "src/pixel-ownership.js",
+      "observed_blob": "de88d87bea5ddca72c5816b1356ab18b9795f985",
+      "base_blob": "de88d87bea5ddca72c5816b1356ab18b9795f985",
+      "unchanged": true
+    },
+    {
+      "path": "src/pixel-grid.js",
+      "observed_blob": "008aaf69e65105029e64e09317b8f9aa4df1f352",
+      "base_blob": "008aaf69e65105029e64e09317b8f9aa4df1f352",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs",
+      "observed_blob": "b42e2fed2890296d6d410047d942e4a407563638",
+      "base_blob": "b42e2fed2890296d6d410047d942e4a407563638",
+      "unchanged": true
+    },
+    {
+      "path": "data/ownership-selection.json",
+      "observed_blob": "2e1ec2875d2932eafb33f4c1062412282df234cb",
+      "base_blob": "7e687549a0d97acd46079cf84986af59d34051ad",
+      "unchanged": false
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+      "observed_blob": "31d970d0fe2bf8c899f020aad09a3826ea451790",
+      "base_blob": "31d970d0fe2bf8c899f020aad09a3826ea451790",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "observed_blob": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+      "base_blob": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "observed_blob": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "base_blob": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-raster-summary.json",
+      "observed_blob": "e17b10b5643c1f6b0c492d02edc70a0d7afc5ee3",
+      "base_blob": "e17b10b5643c1f6b0c492d02edc70a0d7afc5ee3",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json",
+      "observed_blob": "fa1e4d101edb54b02bd1ff42a240f2f80ac65832",
+      "base_blob": "fa1e4d101edb54b02bd1ff42a240f2f80ac65832",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-unassigned-summary.json",
+      "observed_blob": "0c934cdaf4b007a741e66d4a080890154bdae53c",
+      "base_blob": "0c934cdaf4b007a741e66d4a080890154bdae53c",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+      "observed_blob": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+      "base_blob": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/ownership-binding.json",
+      "observed_blob": "b9d81d18aab6d03dc701ff1337b35e53be81d0af",
+      "base_blob": "b9d81d18aab6d03dc701ff1337b35e53be81d0af",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+      "observed_blob": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "base_blob": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/normalized-source-seams.json",
+      "observed_blob": "e22b6270aaf9c27dd3d21381d757b6c34ab81d7b",
+      "base_blob": "e22b6270aaf9c27dd3d21381d757b6c34ab81d7b",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-032.json.gz",
+      "observed_blob": "5c56cb06a4879060a4ad933395cd643cdaaa5565",
+      "base_blob": "5c56cb06a4879060a4ad933395cd643cdaaa5565",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-032.json.gz",
+      "observed_blob": "5f8f1e8aa032abc85e931930eb4eb9b0dbc0ebdb",
+      "base_blob": "5f8f1e8aa032abc85e931930eb4eb9b0dbc0ebdb",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-032.json.gz",
+      "observed_blob": "9bee5462a2f4a8bf1e54816c4a3bd61d9227e221",
+      "base_blob": "9bee5462a2f4a8bf1e54816c4a3bd61d9227e221",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/brunei-original-repair-20261019/finalized-002/ownership-selection-brn-828.json",
+      "observed_blob": "ea5fb193ca975d499ebae354d257d4ce9332ba95",
+      "base_blob": "ea5fb193ca975d499ebae354d257d4ce9332ba95",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/base-native-manifest.json",
+      "observed_blob": "31d970d0fe2bf8c899f020aad09a3826ea451790",
+      "base_blob": "31d970d0fe2bf8c899f020aad09a3826ea451790",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "observed_blob": "9c44513df64995d417dd3832ae604c703e84a506",
+      "base_blob": "9c44513df64995d417dd3832ae604c703e84a506",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/brunei-original-repair-20261019/composition-002/runtime-envelope.json",
+      "observed_blob": "756fc10940ac428fabebdc4d5362ad671d56d911",
+      "base_blob": "756fc10940ac428fabebdc4d5362ad671d56d911",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/brunei-original-repair-20261019/composition-002/authority-registry.json",
+      "observed_blob": "6e827006b2542340fc3b87f822769cbc9eafa428",
+      "base_blob": "6e827006b2542340fc3b87f822769cbc9eafa428",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "observed_blob": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "base_blob": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/index.json",
+      "observed_blob": "f9e9bb67281cec0ceeb3b8d7a5cf94616f26c32c",
+      "base_blob": "f9e9bb67281cec0ceeb3b8d7a5cf94616f26c32c",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-00/part-000.bin.gz",
+      "observed_blob": "359bfc9c3b80f2d0b60fa2cc859aaaebdeb6b22f",
+      "base_blob": "359bfc9c3b80f2d0b60fa2cc859aaaebdeb6b22f",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-01/part-000.bin.gz",
+      "observed_blob": "4ad9de48ccd8db37d753b5c024ca6cdc0e5836a5",
+      "base_blob": "4ad9de48ccd8db37d753b5c024ca6cdc0e5836a5",
+      "unchanged": true
+    },
+    {
+      "path": "coordination/engineering/brunei-original-repair-20261019/composition-002/patch.json",
+      "observed_blob": "441d191f751eff76845cecd7666bdd0c76f14d19",
+      "base_blob": "441d191f751eff76845cecd7666bdd0c76f14d19",
+      "unchanged": true
+    }
+  ],
+  "unchanged": 35,
+  "total": 38,
+  "limits": [
+    "Original execution remains at its literal old code.",
+    "Changed selected-release selector requires an exact additive-delta binding; this path comparison alone does not establish current selected-owner equivalence.",
+    "Changed code requires bounded review before any equivalence claim; no observer rerun."
+  ]
+}

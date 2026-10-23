@@ -42,7 +42,6 @@ const origin = `http://127.0.0.1:${server.address().port}`;
 try {
   AbortSignal.timeout = ms => {assert.equal(ms, 20_000);return nativeTimeout(500);};
   const api = githubAPI('synthetic-native-review', {
-    minimumRemaining: 0,
     readWaitMs: 60_000,
     sleep: async () => assert.fail('uncertain transport must not retry'),
     fetchImpl: (url, options) => {

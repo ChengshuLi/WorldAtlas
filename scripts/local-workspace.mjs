@@ -5,8 +5,6 @@ import {execFileSync, spawnSync} from 'node:child_process';
 import {createHash, randomUUID} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 
-export const GiB = 1024 ** 3;
-export const policy = {minimumFree: 10 * GiB};
 const support = ['docs', 'scripts', 'test', 'src', 'hosted', 'drizzle', '.github', '.agents', 'coordination/templates'];
 const engineeringCode = name => name.startsWith('coordination/engineering/') && /\.(?:mjs|js|cjs|py|sh)$/.test(name);
 const id = value => typeof value === 'string' && /^[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}$/.test(value);
@@ -14,7 +12,7 @@ const safeInclude = value => typeof value === 'string' && /^(data|research|coord
   && value.split('/').every(part => part && part !== '.' && part !== '..');
 
 // No shell, background mutations, timeout retries, or automatic lock breaking.
-export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
+export function workspaceManager(repo, {freeBytes} = {}) {
   const noLazyFetch = {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1'};
   const git = (...args) => execFileSync('git', ['-C', repo, ...args], {encoding: 'utf8', maxBuffer: 32 * 1024 * 1024, env: noLazyFetch});
   const objectGit = (args, input, maxBuffer = 128 * 1024) => {
@@ -53,8 +51,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     if (value.version !== 1 || !Array.isArray(value.entries)) throw Error('Unknown workspace registry; inspect manually');
     for (const entry of value.entries) {
       if (!id(entry.worker) || !['work', 'review'].includes(entry.slot) || !id(entry.token)
-        || entry.path !== slotPath(entry.worker, entry.slot) || !Number.isSafeInteger(entry.reservation)
-        || entry.reservation < 0 || !/^[a-f0-9]{40}$/.test(entry.head)) throw Error('Invalid workspace registry; inspect manually');
+        || entry.path !== slotPath(entry.worker, entry.slot) || !/^[a-f0-9]{40}$/.test(entry.head)) throw Error('Invalid workspace registry; inspect manually');
     }
     if (new Set(value.entries.map(entry => entry.path)).size !== value.entries.length) throw Error('Duplicate workspace registry entries');
     return value;
@@ -79,17 +76,21 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     }
     try { return operation(); } finally { fs.rmdirSync(lock); }
   };
-  const worktrees = (measure = true) => git('worktree', 'list', '--porcelain').trim().split('\n\n').map(block => {
-    const lines = block.split('\n');
-    const directory = lines.find(line => line.startsWith('worktree '))?.slice(9);
-    if (!directory) throw Error('Incomplete worktree inventory');
-    ordinaryDirectory(directory);
-    if (!measure) return {path: directory};
-    // Missing/prunable paths need explicit inspection; they are not zero-cost proof.
-    const bytes = Number(execFileSync('du', ['-sk', directory], {encoding: 'utf8'}).split(/\s/)[0]) * 1024;
-    if (!Number.isSafeInteger(bytes) || bytes < 0) throw Error('Unknown checkout usage');
-    return {path: directory, bytes};
-  });
+  const worktrees = (measure = true) => {
+    const output = git('worktree', 'list', '--porcelain', '-z');
+    if (!output.endsWith('\0\0')) throw Error('Incomplete worktree inventory');
+    return output.slice(0, -2).split('\0\0').map(block => {
+      const [first, ...fields] = block.split('\0');
+      const directory = first.startsWith('worktree ') ? first.slice(9) : null;
+      if (!directory || !path.isAbsolute(directory) || fields.some(field => field.startsWith('worktree '))) throw Error('Incomplete worktree inventory');
+      ordinaryDirectory(directory);
+      if (!measure) return {path: directory};
+      // Missing/prunable paths need explicit inspection; they are not zero-cost proof.
+      const bytes = Number(execFileSync('du', ['-sk', directory], {encoding: 'utf8'}).split(/\s/)[0]) * 1024;
+      if (!Number.isSafeInteger(bytes) || bytes < 0) throw Error('Unknown checkout usage');
+      return {path: directory, bytes};
+    });
+  };
   const availableBytes = () => {
     const stats = fs.statfsSync(common);
     return freeBytes ? freeBytes() : stats.bavail * stats.bsize;
@@ -100,13 +101,10 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     let checkoutBytes = 0;
     for (const item of inventory) {
       const entry = value.entries.find(entry => entry.path === item.path);
-      checkoutBytes += Math.max(item.bytes, entry?.reservation ?? 0);
+      checkoutBytes += item.bytes;
       item.managed = Boolean(entry);
     }
-    for (const entry of value.entries) {
-      if (!inventory.some(item => item.path === entry.path)) checkoutBytes += entry.reservation;
-    }
-    return {root, registry, freeBytes: availableBytes(), checkoutBytes, limits, entries: value.entries, worktrees: inventory};
+    return {root, registry, freeBytes: availableBytes(), checkoutBytes, entries: value.entries, worktrees: inventory};
   };
   const inputInventory = (head, profile, include) => {
     requireCommit(head);
@@ -117,7 +115,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     if (missingTrees.length) throw Error(`Missing tree metadata: ${missingTrees.join(', ')}; selected inventory cannot be enumerated`);
     // Tree metadata needs no blob contents. Global -l sizing can fetch excluded
     // promisor blobs, or abort on them before sparse filtering on some Git versions.
-    const tree = git('ls-tree', '-rz', head).split('\0').filter(Boolean).map(line => {
+    const tree = git('ls-tree', '--full-tree', '-rz', head).split('\0').filter(Boolean).map(line => {
       const separator = line.indexOf('\t');
       const [mode, type, oid] = line.slice(0, separator).split(' ');
       if (separator < 0 || !/^[0-7]{6}$/.test(mode) || !/^[a-f0-9]{40,64}$/.test(oid)) throw Error('Unknown tree entry');
@@ -168,7 +166,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
         }
         input.bytes = bytes.get(oid);
         estimated += input.bytes;
-        if (!Number.isSafeInteger(estimated)) throw Error('Reserve and selected inputs must represent a safe finite byte count');
+        if (!Number.isSafeInteger(estimated)) throw Error('Selected inputs must represent a safe finite byte count');
       }
     }
     const sparsePatterns = [...selected.map(prefix => `/${prefix}${tree.some(({name}) => name.startsWith(prefix + '/')) ? '/' : ''}`),
@@ -184,39 +182,62 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
       selectedBytes: missing.length ? null : estimated,
       inputs: inputs.map(({name, oid, bytes}) => ({path: name, oid, bytes})), missing};
   };
-  const allocate = ({worker, slot = 'work', branch, commit, profile = 'sparse', include = [], reserveGiB = 1}) => locked(() => {
+  const allocate = ({worker, slot = 'work', branch, commit, profile = 'sparse', include = []}) => {
     if (!id(worker) || !['work', 'review'].includes(slot)) throw Error('Supply a safe unique worker ID and work/review slot');
     if (!['sparse', 'full'].includes(profile) || !Array.isArray(include) || !include.every(safeInclude)) throw Error('Use sparse/full profile and literal data/research/coordination paths without traversal or globs');
-    if (!Number.isFinite(reserveGiB) || reserveGiB <= 0 || !Number.isSafeInteger(Math.ceil(reserveGiB * GiB))) throw Error('Reserve must be positive and represent a safe finite byte count');
-    if (slot === 'work' && (!/^(engineering|geography|research)\/[a-z0-9][a-z0-9-]{0,63}$/.test(branch ?? '') || commit)) throw Error('Work needs a fresh lane branch; main is fetched by the allocator');
+    if (slot === 'work' && (typeof branch !== 'string' || !branch || branch.startsWith('-') || branch === 'main' || commit)) throw Error('Work needs a fresh branch; main is fetched by the allocator');
+    if (slot === 'work') git('check-ref-format', `refs/heads/${branch}`);
     if (slot === 'review' && (branch || !/^[a-f0-9]{40}$/.test(commit ?? ''))) throw Error('Review needs an exact detached 40-character commit');
-    const value = state();
-    if (value.entries.some(entry => entry.worker === worker && entry.slot === slot)) throw Error('Slot occupied; finish and release it before allocating another checkout');
-    const destination = slotPath(worker, slot);
-    ordinaryDirectory(destination);
-    if (fs.existsSync(destination)) throw Error('Unregistered checkout directory exists; inspect instead of overwriting');
-    if (slot === 'work') git('fetch', 'origin', 'main');
-    const head = slot === 'work' ? git('rev-parse', '--verify', 'origin/main').trim() : commit;
-    const {sparsePatterns, estimated, missing} = inputInventory(head, profile, include);
-    if (missing.length) throw Error(`Unknown input size; selected blobs must be available locally. Run inspect --commit ${head} with this same profile/include scope to list missing paths/OIDs.`);
-    const reservation = Math.max(Math.ceil(reserveGiB * GiB), estimated);
-    if (!Number.isSafeInteger(reservation)) throw Error('Reserve and selected inputs must represent a safe finite byte count');
-    if (availableBytes() - reservation < limits.minimumFree) throw Error('Insufficient disk headroom; release completed workspaces before allocation');
-    const entry = {worker, slot, path: destination, token: randomUUID(), head, branch: branch ?? null,
-      profile, include, reservation, status: 'preparing', createdAt: new Date().toISOString()};
-    value.entries.push(entry);
-    save(value); // Preserve interrupted attempts for inspection, even if Git fails below.
-    fs.mkdirSync(path.dirname(destination), {recursive: true});
-    git('worktree', 'add', '--no-checkout', ...(slot === 'work' ? ['-b', branch] : ['--detach']), destination, head);
-    if (profile === 'sparse') {
-      execFileSync('git', ['-C', destination, 'sparse-checkout', 'set', '--no-cone', '--stdin'], {
-        input: ['/*', '!/*/', ...sparsePatterns].join('\n') + '\n', encoding: 'utf8', env: noLazyFetch});
+    if (slot === 'work') {
+      if (git('for-each-ref', '--format=%(refname)', `refs/heads/${branch}`).split('\n').includes(`refs/heads/${branch}`)) {
+        throw Error('Fresh branch already exists; choose a new branch without changing its history');
+      }
+      // Network interruption must not strand the registry lock. Freeze the
+      // fetched commit before reserving; later ref movement cannot change it.
+      // Request metadata only even from conventional clones; selected missing
+      // blobs still need explicit acquisition before the inventory can pass.
+      git('fetch', '--no-tags', '--no-recurse-submodules', '--no-auto-maintenance', '--filter=blob:none', 'origin', 'main');
     }
-    execFileSync('git', ['-C', destination, 'read-tree', '-mu', 'HEAD'], {env: noLazyFetch});
-    entry.status = 'ready';
-    save(value);
-    return entry;
-  });
+    const head = slot === 'work' ? git('rev-parse', '--verify', 'origin/main').trim() : commit;
+    return locked(() => {
+      const value = state();
+      if (value.entries.some(entry => entry.worker === worker && entry.slot === slot)) throw Error('Slot occupied; finish and release it before allocating another checkout');
+      const destination = slotPath(worker, slot);
+      ordinaryDirectory(destination);
+      if (fs.lstatSync(destination, {throwIfNoEntry: false})) throw Error('Unregistered checkout directory exists; inspect instead of overwriting');
+      const {sparsePatterns, missing} = inputInventory(head, profile, include);
+      if (missing.length) throw Error(`Unknown input size; selected blobs must be available locally. Run inspect --commit ${head} with this same profile/include scope to list missing paths/OIDs.`);
+      const entry = {worker, slot, path: destination, token: randomUUID(), head, branch: branch ?? null,
+        profile, include, reservation: 0, status: 'preparing', createdAt: new Date().toISOString()};
+      value.entries.push(entry);
+      save(value);
+      try {
+        fs.mkdirSync(path.dirname(destination), {recursive: true});
+        git('worktree', 'add', '--no-checkout', ...(slot === 'work' ? ['-b', branch] : ['--detach']), destination, head);
+      } catch (error) {
+        // Undo only our reservation when both filesystem and Git prove no checkout
+        // was created. Any partial checkout, unknown state or hard interruption
+        // remains recorded for operator inspection. Never remove files or refs.
+        try {
+          if (!fs.lstatSync(destination, {throwIfNoEntry: false}) && !worktrees(false).some(item => item.path === destination)) {
+            value.entries = value.entries.filter(item => item !== entry);
+            save(value);
+          }
+        } catch (inspectionError) {
+          throw new AggregateError([error, inspectionError], 'Allocation failed; reservation recovery requires operator inspection');
+        }
+        throw error;
+      }
+      if (profile === 'sparse') {
+        execFileSync('git', ['-C', destination, 'sparse-checkout', 'set', '--no-cone', '--stdin'], {
+          input: ['/*', '!/*/', ...sparsePatterns].join('\n') + '\n', encoding: 'utf8', env: noLazyFetch});
+      }
+      execFileSync('git', ['-C', destination, 'read-tree', '-mu', 'HEAD'], {env: noLazyFetch});
+      entry.status = 'ready';
+      save(value);
+      return entry;
+    });
+  };
   const release = ({worker, slot = 'work', token}) => locked(() => {
     const value = state();
     const entry = value.entries.find(entry => entry.worker === worker && entry.slot === slot);
@@ -234,21 +255,37 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
         throw Error('Index trust flags can hide edits; inspect materialized files and clear flags before cleanup');
       }
     }
-    if (localGit('status', '--porcelain', '--untracked-files=all') || localGit('ls-files', '--others', '--ignored', '--exclude-standard')) throw Error('Workspace contains uncommitted, untracked or ignored files; preserve unique work and remove only verified generated artifacts first');
+    if (localGit('status', '--porcelain', '--untracked-files=all')) throw Error('Workspace contains uncommitted or untracked files; preserve unique work first');
     const head = localGit('rev-parse', 'HEAD').trim();
+    const ignored = localGit('ls-files', '--others', '--ignored', '--exclude-standard', '-z').split('\0').filter(Boolean);
+    let generatedDatabase;
+    if (ignored.length) {
+      const database = '.cache/package-atlas.sqlite', receiptPath = '.cache/package-input-build.json';
+      const refuse = () => { throw Error('Workspace contains unbound or changed ignored files; preserve unique work and remove only verified generated artifacts first'); };
+      if (ignored.sort().join('\0') !== [database, receiptPath].sort().join('\0')) refuse();
+      ordinaryDirectory(path.join(entry.path, '.cache'));
+      const file = path.join(entry.path, database), receiptFile = path.join(entry.path, receiptPath);
+      const before = fs.lstatSync(file), receiptBefore = fs.lstatSync(receiptFile);
+      if (!before.isFile() || before.isSymbolicLink() || !receiptBefore.isFile() || receiptBefore.isSymbolicLink()) refuse();
+      const raw = fs.readFileSync(receiptFile), receipt = JSON.parse(raw), pin = receipt.generated_database;
+      const definition = localGit('show', `${head}:.github/package-inputs.json`);
+      if (receipt.version !== 1 || !['static','hosted','cloudflare'].includes(receipt.kind) || receipt.preflight?.passed !== true || receipt.preflight?.inputs?.head !== head
+        || receipt.preflight.input_definition_sha256 !== receipt.input_definition_sha256 || receipt.input_definition_sha256 !== createHash('sha256').update(definition).digest('hex') || !JSON.parse(definition).generated_outputs?.includes(database)
+        || !pin || Object.keys(pin).sort().join(',') !== 'bytes,git_blob_oid,path' || pin.path !== database || !Number.isSafeInteger(pin.bytes) || pin.bytes <= 0 || pin.bytes !== before.size || !/^[a-f0-9]{40}$/.test(pin.git_blob_oid ?? '')) refuse();
+      const oid = localGit('-c', 'core.bigFileThreshold=0', 'hash-object', '--no-filters', '--', database).trim();
+      const after = fs.lstatSync(file), receiptAfter = fs.lstatSync(receiptFile);
+      if (oid !== pin.git_blob_oid || ['dev','ino','size','mode','mtimeMs','ctimeMs'].some(key => before[key] !== after[key] || receiptBefore[key] !== receiptAfter[key]) || !raw.equals(fs.readFileSync(receiptFile))) refuse();
+      generatedDatabase = {...pin, producer_head: head, build_receipt_sha256: createHash('sha256').update(raw).digest('hex'), input_definition_sha256: receipt.input_definition_sha256};
+    }
     const preservedRef = `refs/worldatlas-local-recovery/${entry.token}`;
     git('update-ref', preservedRef, head);
     // Git's own dirty/in-use worktree guards remain enabled; no --force.
     git('worktree', 'remove', entry.path);
     value.entries = value.entries.filter(item => item !== entry);
     save(value);
-    return {released: true, path: entry.path, preservedRef, head};
+    return {released: true, path: entry.path, preservedRef, head, ...(generatedDatabase ? {removed_generated_database: generatedDatabase} : {})};
   });
-  const check = () => {
-    const usage = {freeBytes: availableBytes(), limits};
-    if (usage.freeBytes < limits.minimumFree) throw Error('Local storage budget breached; stop new generation/installations and inspect report');
-    return usage;
-  };
+  const check = () => ({freeBytes: availableBytes()});
   return {report, check, inspect, allocate, release};
 }
 
@@ -258,14 +295,13 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     const options = {include: []};
     for (let index = 0; index < args.length; index += 2) {
       const key = args[index]?.replace(/^--/, '');
-      if (!['worker', 'slot', 'branch', 'commit', 'profile', 'include', 'token', 'reserve-gib'].includes(key) || !args[index + 1]) throw Error('Use report, inspect, allocate or release with documented --key value arguments');
+      if (!['worker', 'slot', 'branch', 'commit', 'profile', 'include', 'token'].includes(key) || !args[index + 1]) throw Error('Use report, inspect, allocate or release with documented --key value arguments');
       if (key === 'include') options.include.push(args[index + 1]);
       else if (Object.hasOwn(options, key)) throw Error(`Duplicate ${key}`);
       else options[key] = args[index + 1];
     }
-    if (options['reserve-gib']) options.reserveGiB = Number(options['reserve-gib']);
     if (action === 'allocate' && (options.slot ?? 'work') === 'work') assertAuthorWorkerIdentity(options.worker);
-    const manager = workspaceManager(process.cwd());
+    const manager = workspaceManager(path.dirname(fileURLToPath(import.meta.url)));
     if (!['report', 'check', 'inspect', 'allocate', 'release'].includes(action)) throw Error('Choose report, check, inspect, allocate or release');
     console.log(JSON.stringify(manager[action](options), null, 2));
   } catch (error) { console.error(error.message); process.exitCode = 1; }

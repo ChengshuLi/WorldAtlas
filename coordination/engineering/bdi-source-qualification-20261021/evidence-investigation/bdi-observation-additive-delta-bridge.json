@@ -1,0 +1,2902 @@
+{
+  "kind": "BDI prior-observation additive-delta reconciliation",
+  "old_commit": "5c1919dd1c7e89618398454220b57edf0fa388d2",
+  "base_commit": "94fd166b4e0ced382659e2c15a1a5c14141717f8",
+  "patches": [
+    {
+      "bytes": 30403385,
+      "commit": "cbc470a2185a739fc07835c622ec1987d867310a",
+      "git_blob_oid": "441d191f751eff76845cecd7666bdd0c76f14d19",
+      "mode": "100644",
+      "path": "coordination/engineering/brunei-original-repair-20261019/composition-002/patch.json",
+      "sha256": "fca6c6c0227f67513bf24fcf46c550da045edecec189379c26783724f474ae3e"
+    },
+    {
+      "bytes": 30411523,
+      "commit": "d6bd132bc32cfa05fa0440ceb2064f0d2938084c",
+      "git_blob_oid": "05a5043840538fb20988a49ade4c9b2bbbec7d08",
+      "mode": "100644",
+      "path": "coordination/engineering/lux-vct-evidenced-repair-20261021/composition-002/patch.json",
+      "sha256": "b8b2bd6d333b3a4c5821b196417d16c44474268215209e05a9519b5712dbd2f0"
+    }
+  ],
+  "base_reference_unchanged": true,
+  "delta_cells": 1201,
+  "delta_by_owner": {
+    "7122": 568,
+    "7132": 633
+  },
+  "changed_intervals": [
+    {
+      "y": 88734,
+      "start": 135488,
+      "end": 135489,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88737,
+      "start": 135495,
+      "end": 135496,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88762,
+      "start": 135545,
+      "end": 135546,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88763,
+      "start": 135546,
+      "end": 135547,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88817,
+      "start": 135370,
+      "end": 135371,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88818,
+      "start": 135370,
+      "end": 135371,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88831,
+      "start": 135540,
+      "end": 135541,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88832,
+      "start": 135540,
+      "end": 135541,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88833,
+      "start": 135540,
+      "end": 135541,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88848,
+      "start": 135537,
+      "end": 135538,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88849,
+      "start": 135538,
+      "end": 135539,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88850,
+      "start": 135538,
+      "end": 135540,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88851,
+      "start": 135539,
+      "end": 135541,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88852,
+      "start": 135540,
+      "end": 135541,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88853,
+      "start": 135541,
+      "end": 135542,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88854,
+      "start": 135541,
+      "end": 135543,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88855,
+      "start": 135542,
+      "end": 135544,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88856,
+      "start": 135543,
+      "end": 135544,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88857,
+      "start": 135543,
+      "end": 135545,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88858,
+      "start": 135544,
+      "end": 135545,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88859,
+      "start": 135545,
+      "end": 135546,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88860,
+      "start": 135546,
+      "end": 135547,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88861,
+      "start": 135546,
+      "end": 135547,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88862,
+      "start": 135547,
+      "end": 135548,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88919,
+      "start": 135561,
+      "end": 135562,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88920,
+      "start": 135562,
+      "end": 135563,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88925,
+      "start": 135565,
+      "end": 135566,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88926,
+      "start": 135566,
+      "end": 135567,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88927,
+      "start": 135567,
+      "end": 135570,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88928,
+      "start": 135567,
+      "end": 135573,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88929,
+      "start": 135568,
+      "end": 135574,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88930,
+      "start": 135568,
+      "end": 135575,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88931,
+      "start": 135569,
+      "end": 135575,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88932,
+      "start": 135570,
+      "end": 135575,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88933,
+      "start": 135570,
+      "end": 135575,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88934,
+      "start": 135571,
+      "end": 135575,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88935,
+      "start": 135572,
+      "end": 135574,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88936,
+      "start": 135572,
+      "end": 135574,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88937,
+      "start": 135573,
+      "end": 135574,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 88975,
+      "start": 135610,
+      "end": 135611,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89004,
+      "start": 135620,
+      "end": 135621,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89007,
+      "start": 135621,
+      "end": 135622,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89030,
+      "start": 135628,
+      "end": 135631,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89031,
+      "start": 135629,
+      "end": 135632,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89032,
+      "start": 135630,
+      "end": 135633,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89033,
+      "start": 135630,
+      "end": 135634,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89034,
+      "start": 135631,
+      "end": 135634,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89035,
+      "start": 135632,
+      "end": 135635,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89036,
+      "start": 135633,
+      "end": 135635,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89037,
+      "start": 135634,
+      "end": 135636,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89038,
+      "start": 135635,
+      "end": 135637,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89039,
+      "start": 135636,
+      "end": 135638,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89040,
+      "start": 135637,
+      "end": 135639,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89041,
+      "start": 135638,
+      "end": 135639,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89042,
+      "start": 135639,
+      "end": 135640,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89043,
+      "start": 135640,
+      "end": 135641,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89060,
+      "start": 135676,
+      "end": 135679,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89061,
+      "start": 135674,
+      "end": 135680,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89062,
+      "start": 135673,
+      "end": 135680,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89063,
+      "start": 135671,
+      "end": 135681,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89064,
+      "start": 135670,
+      "end": 135681,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89065,
+      "start": 135672,
+      "end": 135681,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89066,
+      "start": 135674,
+      "end": 135681,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89067,
+      "start": 135676,
+      "end": 135681,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89068,
+      "start": 135677,
+      "end": 135681,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89069,
+      "start": 135679,
+      "end": 135681,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89071,
+      "start": 135681,
+      "end": 135682,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89073,
+      "start": 135682,
+      "end": 135683,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89074,
+      "start": 135682,
+      "end": 135683,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89075,
+      "start": 135682,
+      "end": 135683,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89076,
+      "start": 135682,
+      "end": 135684,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89077,
+      "start": 135682,
+      "end": 135685,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89078,
+      "start": 135683,
+      "end": 135686,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89079,
+      "start": 135683,
+      "end": 135687,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89080,
+      "start": 135683,
+      "end": 135687,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89081,
+      "start": 135683,
+      "end": 135687,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89082,
+      "start": 135683,
+      "end": 135687,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89083,
+      "start": 135684,
+      "end": 135687,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89084,
+      "start": 135684,
+      "end": 135686,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89085,
+      "start": 135684,
+      "end": 135686,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89086,
+      "start": 135684,
+      "end": 135686,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89087,
+      "start": 135684,
+      "end": 135686,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89115,
+      "start": 135797,
+      "end": 135799,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89116,
+      "start": 135795,
+      "end": 135800,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89117,
+      "start": 135794,
+      "end": 135801,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89118,
+      "start": 135793,
+      "end": 135802,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89119,
+      "start": 135791,
+      "end": 135803,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89120,
+      "start": 135790,
+      "end": 135804,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89121,
+      "start": 135789,
+      "end": 135804,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89122,
+      "start": 135787,
+      "end": 135805,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89123,
+      "start": 135786,
+      "end": 135802,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89124,
+      "start": 135785,
+      "end": 135792,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89126,
+      "start": 135767,
+      "end": 135768,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89155,
+      "start": 135823,
+      "end": 135824,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89156,
+      "start": 135823,
+      "end": 135824,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89157,
+      "start": 135823,
+      "end": 135824,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89158,
+      "start": 135823,
+      "end": 135824,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89162,
+      "start": 135824,
+      "end": 135825,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89163,
+      "start": 135824,
+      "end": 135825,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89170,
+      "start": 135825,
+      "end": 135826,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89171,
+      "start": 135825,
+      "end": 135826,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89172,
+      "start": 135825,
+      "end": 135826,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89175,
+      "start": 135826,
+      "end": 135827,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89176,
+      "start": 135826,
+      "end": 135827,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89177,
+      "start": 135826,
+      "end": 135827,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89178,
+      "start": 135826,
+      "end": 135827,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89179,
+      "start": 135826,
+      "end": 135827,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89181,
+      "start": 135827,
+      "end": 135828,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89182,
+      "start": 135827,
+      "end": 135828,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89183,
+      "start": 135827,
+      "end": 135828,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89198,
+      "start": 135817,
+      "end": 135818,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89199,
+      "start": 135817,
+      "end": 135818,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89200,
+      "start": 135817,
+      "end": 135818,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89201,
+      "start": 135817,
+      "end": 135818,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89202,
+      "start": 135817,
+      "end": 135818,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89203,
+      "start": 135817,
+      "end": 135818,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89204,
+      "start": 135817,
+      "end": 135818,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89205,
+      "start": 135817,
+      "end": 135818,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89206,
+      "start": 135817,
+      "end": 135818,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89207,
+      "start": 135817,
+      "end": 135818,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89208,
+      "start": 135817,
+      "end": 135818,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89216,
+      "start": 135818,
+      "end": 135819,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89217,
+      "start": 135818,
+      "end": 135820,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89218,
+      "start": 135819,
+      "end": 135820,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89219,
+      "start": 135819,
+      "end": 135820,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89220,
+      "start": 135351,
+      "end": 135352,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89220,
+      "start": 135819,
+      "end": 135820,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89233,
+      "start": 135820,
+      "end": 135821,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89234,
+      "start": 135819,
+      "end": 135820,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89235,
+      "start": 135818,
+      "end": 135819,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89256,
+      "start": 135796,
+      "end": 135797,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89263,
+      "start": 135784,
+      "end": 135785,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89264,
+      "start": 135783,
+      "end": 135784,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89265,
+      "start": 135782,
+      "end": 135783,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89266,
+      "start": 135782,
+      "end": 135783,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89267,
+      "start": 135781,
+      "end": 135782,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89268,
+      "start": 135780,
+      "end": 135781,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89269,
+      "start": 135779,
+      "end": 135780,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89270,
+      "start": 135778,
+      "end": 135779,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89273,
+      "start": 135776,
+      "end": 135777,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89274,
+      "start": 135775,
+      "end": 135776,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89275,
+      "start": 135774,
+      "end": 135775,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89276,
+      "start": 135773,
+      "end": 135774,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89279,
+      "start": 135771,
+      "end": 135772,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89280,
+      "start": 135770,
+      "end": 135771,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89281,
+      "start": 135769,
+      "end": 135770,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89282,
+      "start": 135768,
+      "end": 135769,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89284,
+      "start": 135372,
+      "end": 135373,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89285,
+      "start": 135373,
+      "end": 135375,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89286,
+      "start": 135373,
+      "end": 135376,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89287,
+      "start": 135374,
+      "end": 135375,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89288,
+      "start": 135374,
+      "end": 135375,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89298,
+      "start": 135771,
+      "end": 135772,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89306,
+      "start": 135382,
+      "end": 135383,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89328,
+      "start": 135368,
+      "end": 135369,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89331,
+      "start": 135369,
+      "end": 135370,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89342,
+      "start": 135757,
+      "end": 135758,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89343,
+      "start": 135756,
+      "end": 135757,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89396,
+      "start": 135353,
+      "end": 135354,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89397,
+      "start": 135351,
+      "end": 135353,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89398,
+      "start": 135351,
+      "end": 135352,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89399,
+      "start": 135351,
+      "end": 135352,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89410,
+      "start": 135728,
+      "end": 135729,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89460,
+      "start": 135625,
+      "end": 135627,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89461,
+      "start": 135623,
+      "end": 135626,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89462,
+      "start": 135621,
+      "end": 135626,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89463,
+      "start": 135619,
+      "end": 135626,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89464,
+      "start": 135619,
+      "end": 135625,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89465,
+      "start": 135622,
+      "end": 135625,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89492,
+      "start": 135433,
+      "end": 135434,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89503,
+      "start": 135432,
+      "end": 135433,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89514,
+      "start": 135501,
+      "end": 135504,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89515,
+      "start": 135506,
+      "end": 135513,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89516,
+      "start": 135510,
+      "end": 135522,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89517,
+      "start": 135510,
+      "end": 135524,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89518,
+      "start": 135511,
+      "end": 135524,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89519,
+      "start": 135511,
+      "end": 135524,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89520,
+      "start": 135511,
+      "end": 135525,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89521,
+      "start": 135511,
+      "end": 135525,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89522,
+      "start": 135512,
+      "end": 135526,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89523,
+      "start": 135514,
+      "end": 135526,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89524,
+      "start": 135516,
+      "end": 135526,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89525,
+      "start": 135519,
+      "end": 135526,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89526,
+      "start": 135521,
+      "end": 135526,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 89527,
+      "start": 135523,
+      "end": 135526,
+      "old_owner": 0,
+      "new_owner": 7122
+    },
+    {
+      "y": 121251,
+      "start": 86523,
+      "end": 86524,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121258,
+      "start": 86511,
+      "end": 86513,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121258,
+      "start": 86559,
+      "end": 86560,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121259,
+      "start": 86511,
+      "end": 86512,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121259,
+      "start": 86560,
+      "end": 86561,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121260,
+      "start": 86511,
+      "end": 86512,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121265,
+      "start": 86509,
+      "end": 86510,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121266,
+      "start": 86508,
+      "end": 86509,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121267,
+      "start": 86507,
+      "end": 86509,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121268,
+      "start": 86507,
+      "end": 86508,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121269,
+      "start": 86507,
+      "end": 86508,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121272,
+      "start": 86506,
+      "end": 86507,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121274,
+      "start": 86504,
+      "end": 86506,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121275,
+      "start": 86504,
+      "end": 86505,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121276,
+      "start": 86504,
+      "end": 86505,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121281,
+      "start": 86502,
+      "end": 86503,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121282,
+      "start": 86501,
+      "end": 86502,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121283,
+      "start": 86500,
+      "end": 86502,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121284,
+      "start": 86499,
+      "end": 86502,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121285,
+      "start": 86499,
+      "end": 86501,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121286,
+      "start": 86499,
+      "end": 86501,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121287,
+      "start": 86499,
+      "end": 86500,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121288,
+      "start": 86498,
+      "end": 86500,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121289,
+      "start": 86498,
+      "end": 86499,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121290,
+      "start": 86498,
+      "end": 86499,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121291,
+      "start": 86497,
+      "end": 86499,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121292,
+      "start": 86497,
+      "end": 86498,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121293,
+      "start": 86497,
+      "end": 86498,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121294,
+      "start": 86496,
+      "end": 86497,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121295,
+      "start": 86496,
+      "end": 86497,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121296,
+      "start": 86494,
+      "end": 86496,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121297,
+      "start": 86493,
+      "end": 86496,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121298,
+      "start": 86492,
+      "end": 86496,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121299,
+      "start": 86491,
+      "end": 86495,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121300,
+      "start": 86490,
+      "end": 86495,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121301,
+      "start": 86489,
+      "end": 86494,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121302,
+      "start": 86489,
+      "end": 86494,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121303,
+      "start": 86489,
+      "end": 86493,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121304,
+      "start": 86489,
+      "end": 86493,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121305,
+      "start": 86489,
+      "end": 86493,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121306,
+      "start": 86490,
+      "end": 86492,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121307,
+      "start": 86490,
+      "end": 86492,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121308,
+      "start": 86490,
+      "end": 86491,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121309,
+      "start": 86490,
+      "end": 86491,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121320,
+      "start": 86470,
+      "end": 86474,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121321,
+      "start": 86470,
+      "end": 86473,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121322,
+      "start": 86470,
+      "end": 86473,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121323,
+      "start": 86471,
+      "end": 86472,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121342,
+      "start": 86462,
+      "end": 86463,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121343,
+      "start": 86462,
+      "end": 86463,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121344,
+      "start": 86462,
+      "end": 86463,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121349,
+      "start": 86460,
+      "end": 86461,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121386,
+      "start": 86462,
+      "end": 86463,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121398,
+      "start": 86467,
+      "end": 86468,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121399,
+      "start": 86468,
+      "end": 86469,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121405,
+      "start": 86475,
+      "end": 86476,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121411,
+      "start": 86481,
+      "end": 86482,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121412,
+      "start": 86480,
+      "end": 86484,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121413,
+      "start": 86481,
+      "end": 86485,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121414,
+      "start": 86482,
+      "end": 86486,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121415,
+      "start": 86481,
+      "end": 86487,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121415,
+      "start": 86552,
+      "end": 86553,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121416,
+      "start": 86481,
+      "end": 86486,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121416,
+      "start": 86552,
+      "end": 86553,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121417,
+      "start": 86483,
+      "end": 86485,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121417,
+      "start": 86551,
+      "end": 86553,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121418,
+      "start": 86551,
+      "end": 86553,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121419,
+      "start": 86550,
+      "end": 86552,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121420,
+      "start": 86549,
+      "end": 86552,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121421,
+      "start": 86549,
+      "end": 86551,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121422,
+      "start": 86548,
+      "end": 86550,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121423,
+      "start": 86497,
+      "end": 86499,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121423,
+      "start": 86548,
+      "end": 86550,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121424,
+      "start": 86497,
+      "end": 86501,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121425,
+      "start": 86496,
+      "end": 86502,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121426,
+      "start": 86496,
+      "end": 86504,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121427,
+      "start": 86495,
+      "end": 86505,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121428,
+      "start": 86494,
+      "end": 86503,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121428,
+      "start": 86506,
+      "end": 86507,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121429,
+      "start": 86495,
+      "end": 86499,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121430,
+      "start": 86495,
+      "end": 86498,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121430,
+      "start": 86508,
+      "end": 86510,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121431,
+      "start": 86508,
+      "end": 86511,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121432,
+      "start": 86512,
+      "end": 86513,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121433,
+      "start": 86514,
+      "end": 86515,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121434,
+      "start": 86514,
+      "end": 86516,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121435,
+      "start": 86515,
+      "end": 86518,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121439,
+      "start": 86522,
+      "end": 86528,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121440,
+      "start": 86521,
+      "end": 86526,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121440,
+      "start": 86528,
+      "end": 86530,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121440,
+      "start": 86532,
+      "end": 86534,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121441,
+      "start": 86519,
+      "end": 86522,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121441,
+      "start": 86529,
+      "end": 86530,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121441,
+      "start": 86536,
+      "end": 86537,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121499,
+      "start": 86508,
+      "end": 86509,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121500,
+      "start": 86507,
+      "end": 86510,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121501,
+      "start": 86507,
+      "end": 86510,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121502,
+      "start": 86507,
+      "end": 86511,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121503,
+      "start": 86507,
+      "end": 86510,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121504,
+      "start": 86506,
+      "end": 86510,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121505,
+      "start": 86504,
+      "end": 86510,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121506,
+      "start": 86504,
+      "end": 86510,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121507,
+      "start": 86506,
+      "end": 86510,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121514,
+      "start": 86489,
+      "end": 86490,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121515,
+      "start": 86488,
+      "end": 86489,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121516,
+      "start": 86487,
+      "end": 86488,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121517,
+      "start": 86485,
+      "end": 86488,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121518,
+      "start": 86483,
+      "end": 86488,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121519,
+      "start": 86482,
+      "end": 86488,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121520,
+      "start": 86479,
+      "end": 86488,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121521,
+      "start": 86479,
+      "end": 86488,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121522,
+      "start": 86479,
+      "end": 86488,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121523,
+      "start": 86479,
+      "end": 86488,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121524,
+      "start": 86479,
+      "end": 86483,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121524,
+      "start": 86486,
+      "end": 86489,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121525,
+      "start": 86480,
+      "end": 86481,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121525,
+      "start": 86488,
+      "end": 86489,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121539,
+      "start": 86492,
+      "end": 86493,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121540,
+      "start": 86458,
+      "end": 86459,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121540,
+      "start": 86463,
+      "end": 86464,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121540,
+      "start": 86491,
+      "end": 86493,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121541,
+      "start": 86454,
+      "end": 86456,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121541,
+      "start": 86467,
+      "end": 86468,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121542,
+      "start": 86470,
+      "end": 86472,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121543,
+      "start": 86473,
+      "end": 86474,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121543,
+      "start": 86475,
+      "end": 86476,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121544,
+      "start": 86477,
+      "end": 86480,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121561,
+      "start": 86478,
+      "end": 86480,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121562,
+      "start": 86477,
+      "end": 86480,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121563,
+      "start": 86477,
+      "end": 86479,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121564,
+      "start": 86476,
+      "end": 86479,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121565,
+      "start": 86476,
+      "end": 86478,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121566,
+      "start": 86473,
+      "end": 86478,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121566,
+      "start": 86552,
+      "end": 86553,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121567,
+      "start": 86472,
+      "end": 86477,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121567,
+      "start": 86552,
+      "end": 86556,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121568,
+      "start": 86470,
+      "end": 86477,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121568,
+      "start": 86552,
+      "end": 86555,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121569,
+      "start": 86467,
+      "end": 86471,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121569,
+      "start": 86472,
+      "end": 86477,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121569,
+      "start": 86552,
+      "end": 86555,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121570,
+      "start": 86465,
+      "end": 86470,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121570,
+      "start": 86473,
+      "end": 86477,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121570,
+      "start": 86553,
+      "end": 86554,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121571,
+      "start": 86466,
+      "end": 86470,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121571,
+      "start": 86553,
+      "end": 86554,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121572,
+      "start": 86553,
+      "end": 86554,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121574,
+      "start": 86554,
+      "end": 86557,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121575,
+      "start": 86555,
+      "end": 86558,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121576,
+      "start": 86555,
+      "end": 86558,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121577,
+      "start": 86555,
+      "end": 86557,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121578,
+      "start": 86554,
+      "end": 86556,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121616,
+      "start": 86536,
+      "end": 86537,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121617,
+      "start": 86524,
+      "end": 86525,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121618,
+      "start": 86523,
+      "end": 86524,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121618,
+      "start": 86534,
+      "end": 86536,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121619,
+      "start": 86522,
+      "end": 86524,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121619,
+      "start": 86534,
+      "end": 86536,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121620,
+      "start": 86522,
+      "end": 86523,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121620,
+      "start": 86534,
+      "end": 86537,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121621,
+      "start": 86522,
+      "end": 86523,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121632,
+      "start": 86521,
+      "end": 86525,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121633,
+      "start": 86521,
+      "end": 86528,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121634,
+      "start": 86522,
+      "end": 86528,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121635,
+      "start": 86522,
+      "end": 86529,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121636,
+      "start": 86522,
+      "end": 86523,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121636,
+      "start": 86524,
+      "end": 86528,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121637,
+      "start": 86524,
+      "end": 86528,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121638,
+      "start": 86526,
+      "end": 86528,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121639,
+      "start": 86526,
+      "end": 86527,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121731,
+      "start": 86429,
+      "end": 86430,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121732,
+      "start": 86428,
+      "end": 86431,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121733,
+      "start": 86417,
+      "end": 86419,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121733,
+      "start": 86428,
+      "end": 86432,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121733,
+      "start": 86433,
+      "end": 86434,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121734,
+      "start": 86418,
+      "end": 86419,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121734,
+      "start": 86427,
+      "end": 86432,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121735,
+      "start": 86417,
+      "end": 86419,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121735,
+      "start": 86427,
+      "end": 86433,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121736,
+      "start": 86417,
+      "end": 86419,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121736,
+      "start": 86427,
+      "end": 86433,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121737,
+      "start": 86418,
+      "end": 86419,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121737,
+      "start": 86427,
+      "end": 86433,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121738,
+      "start": 86418,
+      "end": 86419,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121738,
+      "start": 86427,
+      "end": 86431,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121739,
+      "start": 86427,
+      "end": 86432,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121740,
+      "start": 86427,
+      "end": 86433,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121741,
+      "start": 86426,
+      "end": 86433,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121742,
+      "start": 86426,
+      "end": 86433,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121743,
+      "start": 86426,
+      "end": 86428,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121743,
+      "start": 86432,
+      "end": 86433,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121759,
+      "start": 86421,
+      "end": 86423,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121760,
+      "start": 86420,
+      "end": 86423,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121761,
+      "start": 86420,
+      "end": 86423,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121797,
+      "start": 86373,
+      "end": 86375,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121798,
+      "start": 86373,
+      "end": 86375,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121799,
+      "start": 86374,
+      "end": 86375,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121800,
+      "start": 86372,
+      "end": 86376,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121801,
+      "start": 86372,
+      "end": 86377,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121802,
+      "start": 86371,
+      "end": 86379,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121803,
+      "start": 86370,
+      "end": 86379,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121804,
+      "start": 86371,
+      "end": 86379,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121805,
+      "start": 86372,
+      "end": 86375,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121806,
+      "start": 86372,
+      "end": 86375,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121807,
+      "start": 86371,
+      "end": 86374,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121808,
+      "start": 86371,
+      "end": 86374,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121809,
+      "start": 86370,
+      "end": 86372,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121810,
+      "start": 86370,
+      "end": 86372,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121823,
+      "start": 86336,
+      "end": 86339,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121824,
+      "start": 86336,
+      "end": 86337,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121825,
+      "start": 86335,
+      "end": 86336,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121826,
+      "start": 86330,
+      "end": 86336,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121827,
+      "start": 86331,
+      "end": 86335,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121832,
+      "start": 86356,
+      "end": 86357,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121833,
+      "start": 86356,
+      "end": 86358,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121833,
+      "start": 86359,
+      "end": 86360,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121834,
+      "start": 86356,
+      "end": 86357,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121837,
+      "start": 86326,
+      "end": 86327,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121838,
+      "start": 86325,
+      "end": 86326,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121838,
+      "start": 86345,
+      "end": 86349,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121838,
+      "start": 86352,
+      "end": 86354,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121839,
+      "start": 86346,
+      "end": 86347,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121841,
+      "start": 86343,
+      "end": 86344,
+      "old_owner": 0,
+      "new_owner": 7132
+    },
+    {
+      "y": 121842,
+      "start": 86342,
+      "end": 86343,
+      "old_owner": 0,
+      "new_owner": 7132
+    }
+  ],
+  "original_BDI_overlap_intervals": [],
+  "original_query_sha256": "3e51e503891e714c22546e801535fb1833dce1b0ffe05eabe67bd2024a62d19a",
+  "limits": [
+    "Compares complete retained old/new additive patch operands; does not execute a second native owner observation.",
+    "Original owner observation remains literal old-code execution.",
+    "Two changed helper code bodies still require bounded review; no current-code execution claim.",
+    "No prior accepted-key accounting or source qualification inferred."
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "package_id": "gb-SWZ-ADM2--repair-evaluation",
+  "purpose": "Exact output-byte bindings; input descriptors are retained in the linked packet files. This document excludes itself. No scientific qualification or acceptance is inferred.",
+  "files": [
+    {
+      "path": "coordination/engineering/swz-original-disposition-20261020/README.md",
+      "bytes": 5703,
+      "sha256": "d502898ffa4d9c6dac5730a1b0e9d0fd3084168528fca7458f45409625b70935",
+      "git_blob_oid": "f5314680d313e6606a88c1c3b470536e9bd6d31d"
+    },
+    {
+      "path": "coordination/engineering/swz-original-disposition-20261020/acceptance-reconciliation.json",
+      "bytes": 20463,
+      "sha256": "d066c7e522ce13da3c1d4314438498c37e9286e66a8eba183ad673028f6838b7",
+      "git_blob_oid": "79ed5d906c5512c23cf48a087cc5700ea3c4efc4"
+    },
+    {
+      "path": "coordination/engineering/swz-original-disposition-20261020/observation-input-binding.json",
+      "bytes": 6953,
+      "sha256": "27854fbf8c64ba5a11407a5a8988a6185eacb4f55fadbeecf79bb906aac2f54b",
+      "git_blob_oid": "dd668701cd08ce1c48dc8c61aa4de99874faea2c"
+    },
+    {
+      "path": "coordination/engineering/swz-original-disposition-20261020/retained-source-physical-context.json",
+      "bytes": 45681,
+      "sha256": "7097f2facf5a3cc3897fff4b6514d4546fde8e526cef6ac04bc32de357d26f8a",
+      "git_blob_oid": "aa654cc63803d19a5595c6a283413ae1c3aa7600"
+    },
+    {
+      "path": "coordination/engineering/swz-original-disposition-20261020/swz-disposition.json",
+      "bytes": 24830,
+      "sha256": "669ef7a59435c69cdb8101d4adee35b3d9ec27818873e73bca2f94660946d4b6",
+      "git_blob_oid": "5a3148bb097379b7441b484bbd3e1d7f3e457b2d"
+    },
+    {
+      "path": "coordination/engineering/swz-original-disposition-20261020/swz-selected-owner-observation.json.gz",
+      "bytes": 7172,
+      "sha256": "e02c56a415d13bc7be09932f1c5da49a7f8626c2b6f7609dc608a53e89738e36",
+      "git_blob_oid": "4fbbac00fb1e047e1713ec36f080f1f76b5dcd83"
+    }
+  ],
+  "checks": {
+    "original_rows": 14,
+    "unique_interval_keys": 14,
+    "owner_groups": 8,
+    "source_physical_water_rows_joined": 14,
+    "prior_credit": 0,
+    "current_assigned": 0,
+    "proposed_residual": 14
+  }
+}

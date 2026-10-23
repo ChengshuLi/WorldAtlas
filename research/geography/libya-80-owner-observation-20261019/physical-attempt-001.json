@@ -1,0 +1,40 @@
+{
+  "command": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/prepare-delivery-handoff.mjs physical research/geography/libya-80-owner-observation-20261019/physical-config-001.json .cache/delivery-handoff/lby80-physical-20261019",
+  "config_path": "research/geography/libya-80-owner-observation-20261019/physical-config-001.json",
+  "config_sha256": "63b71b73e9c572b7aab22ef6913b174f35645c09951c99e0e1d336ebc6c800ad",
+  "exact_error": "ModuleNotFoundError: No module named 'shapely'",
+  "failure_site": "scripts/qualify-source-cohort.py:548 in run_physical, at import shapely; child invoked with -I -B",
+  "isolated_runtime_check": [
+    {
+      "numpy": "2.3.5",
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "shapely": "ModuleNotFoundError in -I mode",
+      "version": "3.12.14"
+    },
+    {
+      "numpy": "2.3.5",
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+      "shapely": "ModuleNotFoundError in -I mode",
+      "version": "3.12.14"
+    },
+    {
+      "numpy": "ModuleNotFoundError in -I mode",
+      "path": "/usr/local/bin/python3",
+      "version": "3.7.3"
+    },
+    {
+      "numpy": "ModuleNotFoundError in -I mode",
+      "path": "/usr/bin/python3",
+      "version": "3.9.6"
+    }
+  ],
+  "kind": "lby80-physical-attempt-record-v1",
+  "normal_mode_note": "Bundled Python normal mode imports Shapely 2.1.2 from ~/.local/lib/python3.12/site-packages; isolated -I mode excludes that user site.",
+  "outputs_published": false,
+  "phase": "physical",
+  "qualification_or_credit": false,
+  "result": "failed-before-physical-processing",
+  "temporary_destination": ".cache/delivery-handoff/lby80-physical-20261019",
+  "temporary_staging_cleaned": true,
+  "version": 1
+}

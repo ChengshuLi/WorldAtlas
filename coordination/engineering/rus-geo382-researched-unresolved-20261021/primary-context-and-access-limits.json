@@ -1,0 +1,33 @@
+{
+  "scope": "GEO382 only; laws identify source-role context rather than resolving exact geometric contacts",
+  "primary_evidence": [
+    {
+      "url": "https://matsne.gov.ge/en/document/view/4716521",
+      "publisher": "Legislative Herald of Georgia (Matsne)",
+      "document": "Constitution of the Autonomous Republic of Abkhazia, consolidated 2019-11-21 through 2025-04-03",
+      "observed_article_1": "Article 1(1) describes the Autonomous Republic of Abkhazia as an indivisible territorial unit of Georgia; Article 1(3) says its territory may not be changed without its consent; Article 1(4) says its administrative-territorial division is determined by Georgian and Autonomous Republic legislation.",
+      "applicability": "Confirms the named Abkhazia feature denotes an administrative territorial entity in Georgia domestic legal texts. It does not define or validate the precise source polygon, boundary coordinates, or source capture date."
+    },
+    {
+      "url": "https://matsne.gov.ge/en/document/view/19132",
+      "publisher": "Legislative Herald of Georgia (Matsne)",
+      "document": "Law of Georgia on Occupied Territories; opened consolidated 2015-07-17 through 2018-06-06",
+      "observed_article_2": "Article 2(a) lists the territories of the Autonomous Republic of Abkhazia among territories covered by the law.",
+      "applicability": "Confirms the legal scope/name in that statute, not cartographic boundary equivalence, effective local control, or the source feature’s exact spatial fit."
+    },
+    {
+      "url": "https://maps.gov.ge/map/portal",
+      "publisher": "Georgia National Agency of Public Registry map portal (NAPR)",
+      "observation": "Portal HTML identifies itself as NAPR Maps; the retrieved landing shell exposed no ADM1 data-service locator or dataset metadata. A EuroGeographics case study states the portal was released by NAPR and provides cadastral/address/orthophoto and other data, but that secondary description is not an ADM1 boundary source.",
+      "applicability": "This bounded portal read did not yield an official downloadable ADM1 feature or a per-feature source lineage record."
+    }
+  ],
+  "comparator": {
+    "url": "https://data.humdata.org/dataset/cod-ab-geo",
+    "identified_by_search": "Georgia COD-AB described as sourced from National Statistics Office of Georgia",
+    "actual_open_result": "HTTP 403; request stopped. No API, mirror, alternate host or geometry retrieval.",
+    "response_body_retention": "No raw 403 body is claimed retained in this packet.",
+    "limit": "No comparator geometry was obtained; denial is not evidence that it would support either side."
+  },
+  "reasonable_search_limit": "The inspected upstream records do not identify a concrete public locator for the omitted GEO_subdivisions input linework or digitization method. This is a bounded assessment, not proof that no relevant record exists anywhere. A lawful documented comparator or new lineage record would justify reopening the exact keys."
+}

@@ -1,0 +1,35 @@
+{
+  "scope": "Bounded license/reuse reading for the distinct BDI gbAuthoritative ADM2 metadata source. No boundary geometry was acquired and no legal-clearance conclusion is made.",
+  "checked_at": "2026-10-21",
+  "primary_terms_reference": {
+    "metadata_license": "UN SALB Data License",
+    "metadata_license_source": "https://www.unsalb.org/sites/default/files/wysiwyg_uploads/docs_uploads/TermsOfUseSALB2021.pdf",
+    "metadata_source_url": "https://www.unsalb.org/data/bdi",
+    "requested_pdf_action": "Opened the exact terms PDF reference, then followed search result for the same named PDF on the official salb.un.org hostname.",
+    "result": "The first URL was inaccessible to the web reader. The official salb.un.org copy returned HTTP 403 Forbidden.",
+    "state": "Denied by the official document host; no PDF body read. No retries, mirrors, alternate file routes, or third-party contact were attempted.",
+    "consequence": "Exact SALB clauses about private research/comparison, attribution, derivative works, or redistribution are unknown from this inspection. Do not infer them from the license name."
+  },
+  "geoBoundaries_primary_reuse_statements": [
+    {
+      "url": "https://www.geoboundaries.org/api.html",
+      "statement": "gbAuthoritative files are mirrored from UN SALB, may not be used for commercial purposes, and are verified through in-country processes.",
+      "scope": "geoBoundaries release-family statement; the BDI record separately identifies the UN SALB Data License and links the terms."
+    },
+    {
+      "url": "https://www.geoboundaries.org/index.html#usage",
+      "statement": "The general site describes geoBoundaries as CC BY 4.0 and requests acknowledgement/citation, while the API documents release-specific terms for gbAuthoritative.",
+      "scope": "General reuse statement; not a substitute for the specific BDI gbAuthoritative metadata license."
+    }
+  ],
+  "BDI_authoritative_metadata_context": {
+    "api_url": "https://www.geoboundaries.org/api/current/gbAuthoritative/BDI/ADM2/",
+    "boundaryID": "BDI-ADM2-91688708",
+    "boundaryYearRepresented": "26-03-2015 to 01-05-2015",
+    "boundarySource": "UN SALB, Institut Geographique de Burundi",
+    "admUnitCount": "119",
+    "license": "UN SALB Data License",
+    "release_commit": "https://github.com/wmgeolab/geoBoundaries/commit/9469f09592ced973a3448cf66b6100b741b64c0d"
+  },
+  "bounded_finding": "The publisher calls gbAuthoritative non-commercial and in-country verified, and gives a distinct represented period and source for this 119-unit family. That makes it a potentially relevant evidentiary source, but neither the 2015 layer metadata nor its unit count establishes a feature-level match for Muha or Ntahangwa. Because the linked SALB terms body was denied (403), this inspection cannot state that private comparison or redistribution/adoption is permitted. A later use must honor the record-specific SALB terms; this report does not authorize it."
+}

@@ -5,24 +5,23 @@ import path from 'node:path';
 import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
+import {assertCloudflareStaticAssets, CLOUDFLARE_STATIC_ASSET_BYTES} from '../scripts/package-build.mjs';
 import {createPackageOutputManifest, snapshotPackageOutputSource, inventoryPackageOutput, validatePackageOutputManifest,
-  verifyPackageOutput, streamedPackageFile, installedPackageIdentity, admitPackageInputTransition, admitPackageOutputTransition, committedPackageInputs, committedPackageProducer, packageWorkflowExecution} from '../scripts/package-output-artifact.mjs';
+  verifyPackageOutput, streamedPackageFile, admitPackageInputTransition, admitPackageOutputTransition, committedPackageInputs, committedPackageProducer, packageWorkflowExecution} from '../scripts/package-output-artifact.mjs';
 
-import {compareSelectedPackageOutput,compareSelectedPackageReadback,normalizeDeclarationReadAccounting} from '../scripts/compare-selected-package-output.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
-function fixture(t) {
+function fixture(t,{author=true}={}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'atlas-package-output-'));
   t.after(() => fs.rmSync(root, {recursive: true, force: true}));
   const write = (name, value) => { fs.mkdirSync(path.dirname(path.join(root, name)), {recursive: true});
     fs.writeFileSync(path.join(root, name), typeof value === 'string' ? value : JSON.stringify(value)); };
-  const definition = {version: 1, inputs: ['.github/package-inputs.json','data/ownership-selection.json','package-lock.json','scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs'],
+  const definition = {version: 1, inputs: ['.github/package-inputs.json','data/ownership-selection.json','package-lock.json','scripts/package-output-artifact.mjs'],
     optional_inputs: [], verification_paths: [], generated_outputs: ['dist/']};
   write('.github/package-inputs.json', definition); write('data/ownership-selection.json', {version: 1});
   write('package-lock.json', {lockfileVersion: 3});
   write('scripts/package-output-artifact.mjs','synthetic capture writer');
-  write('scripts/package-node-runtime.mjs','synthetic runtime inventory');
-  write('.github/workflows/merge-integration-checks.yml', 'genuine package build and immediate capture');
+  if(author)write('.github/workflows/merge-integration-checks.yml', 'genuine package build and immediate capture');
   write('.github/workflows/worker-merge.yml','genuine final-worker package producer');
   write('node_modules/example/index.js','original dependency body');
   const git = (...args) => execFileSync('git', ['-C', root, ...args], {encoding: 'utf8'}).trim();
@@ -39,9 +38,60 @@ function fixture(t) {
 test('retains complete actual Cloudflare output and original input identity', t => {
   const {root, git} = fixture(t), manifest = createPackageOutputManifest(root);
   assert.equal(manifest.source.head, git('rev-parse','HEAD'));
-  assert.equal(manifest.source.files.length, 5); assert.equal(manifest.output.files.length, 4);
+  assert.equal(manifest.source.files.length, 4); assert.equal(manifest.output.files.length, 4);
   assert.equal(verifyPackageOutput(root, manifest), true);
   assert.match(manifest.semantics, /Original full/);
+});
+
+test('queue-only captures bind their actual producer and cannot adopt historical two-workflow identity',t=>{
+  const current=fixture(t,{author:false}), historical=fixture(t);
+  const manifest=createPackageOutputManifest(current.root);
+  assert.deepEqual(manifest.source.producer.workflows.map(row=>row.path),['.github/workflows/worker-merge.yml']);
+  assert.equal(validatePackageOutputManifest(manifest),manifest);
+  assert.equal(verifyPackageOutput(current.root,manifest),true);
+  const before=createPackageOutputManifest(historical.root).source;
+  before.selection={additive_release:{path:'coordination/engineering/old/release.json'}};
+  const after={...structuredClone(before),producer:manifest.source.producer};
+  assert.throws(()=>admitPackageInputTransition(before,after),/unchanged producer workflow/);
+  for(const workflows of [[],[before.producer.workflows[0]],
+    [{...manifest.source.producer.workflows[0],path:'.github/workflows/foreign.yml'}],
+    [{...manifest.source.producer.workflows[0],mode:'120000'}],
+    [{...manifest.source.producer.workflows[0],oid:'invalid'}],
+    [manifest.source.producer.workflows[0],manifest.source.producer.workflows[0]]]) {
+    const changed=structuredClone(manifest);changed.source.producer.workflows=workflows;
+    assert.throws(()=>validatePackageOutputManifest(changed),/producer identity/);
+  }
+  current.git('rm','.github/workflows/worker-merge.yml');
+  current.git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','remove queue');
+  assert.throws(()=>committedPackageProducer(current.root),/Complete package producer workflows/);
+});
+
+test('read-only output custody preserves historical runtime evidence without recreating it', t => {
+  const f=fixture(t),manifest=createPackageOutputManifest(f.root);
+  manifest.runtime.installed={version:2,node:{historical:'original executable'},
+    dependencies:{historical:'original installation'},python:{historical:'original science'}};
+  const original=JSON.stringify(manifest),previous=process.env.PATH;
+  try {
+    process.env.PATH='';
+    assert.equal(validatePackageOutputManifest(manifest),manifest);
+    assert.equal(verifyPackageOutput(f.root,manifest),true);
+    assert.equal(JSON.stringify(manifest),original,'Custody must not rewrite original execution history');
+  } finally {if(previous===undefined)delete process.env.PATH;else process.env.PATH=previous;}
+});
+
+test('capture records actual build metadata without inventorying an installed environment',t=>{
+  const f=fixture(t),source=JSON.parse(fs.readFileSync(path.join(f.root,'.cache/package-output-source.json')));
+  assert.equal(Object.hasOwn(source,'installed_runtime'),false);
+  // No dependency body, generated cache, or scientific installation is needed
+  // to inventory the output that the successful build actually produced.
+  fs.rmSync(path.join(f.root,'node_modules'),{recursive:true});
+  const manifest=createPackageOutputManifest(f.root);
+  assert.equal(Object.hasOwn(manifest.runtime,'installed'),false);
+  assert.equal(manifest.runtime.node,process.version);
+  assert.equal(verifyPackageOutput(f.root,manifest),true);
+  source.installed_runtime={historical_evidence:'original capture'};
+  f.write('.cache/package-output-source.json',source);
+  assert.deepEqual(createPackageOutputManifest(f.root).runtime.installed,source.installed_runtime);
 });
 
 test('missing, extra, truncated and same-size substituted output cannot pass custody', t => {
@@ -232,6 +282,32 @@ print(mode+': one authenticated archive pass; mutation/cleanup controls passed')
   }
 });
 
+
+test('authenticated archive metadata can exceed 8 MiB while exact sizes and hashes remain required', t => {
+  const f=fixture(t), note='retained original context '.repeat(360000);
+  const receipt=JSON.parse(fs.readFileSync(path.join(f.root,'.cache/package-input-build.json')));
+  f.write('.cache/package-input-build.json',{...receipt,retained_context:note});
+  const manifest=createPackageOutputManifest(f.root);manifest.retained_context=note;
+  const raw=Buffer.from(JSON.stringify(manifest)+'\n'), manifestPath=path.join(f.root,'manifest.json');fs.writeFileSync(manifestPath,raw);
+  assert(raw.length>8*1024*1024);assert(manifest.original_build_receipt.bytes>8*1024*1024);
+  const archive=path.join(f.root,'large-metadata.zip');
+  execFileSync('python3',['-I','-B','-c',`import json,pathlib,sys,zipfile
+root=pathlib.Path(sys.argv[1]);manifest=json.loads((root/'manifest.json').read_bytes())
+with zipfile.ZipFile(sys.argv[2],'w',compression=zipfile.ZIP_DEFLATED) as z:
+ for row in manifest['output']['files']: z.write(root/row['path'],row['path'])
+ z.write(root/'.cache/package-input-build.json','.cache/package-input-build.json')
+ z.write(root/'manifest.json','.cache/package-output-manifest.json')
+`,f.root,archive]);
+  const extractor=path.resolve('scripts/extract-package-output.py'), digest=hash(fs.readFileSync(archive)), target=path.join(f.root,'extracted');
+  execFileSync('python3',['-I','-B',extractor,'--manifest',archive,path.join(f.root,'read-manifest.json'),digest]);
+  assert.deepEqual(fs.readFileSync(path.join(f.root,'read-manifest.json')),raw);
+  execFileSync('python3',['-I','-B',extractor,archive,target,digest,hash(raw),String(raw.length)]);
+  assert.equal(verifyPackageOutput(target,manifest),true);
+  for(const [expectedHash,size]of [[hash(raw),raw.length+1],['0'.repeat(64),raw.length]]){
+    const wrong=path.join(f.root,'rejected');assert.throws(()=>execFileSync('python3',['-I','-B',extractor,archive,wrong,digest,expectedHash,String(size)],{stdio:'pipe'}));assert.equal(fs.existsSync(wrong),false);
+  }
+});
+
 test('source snapshot rejects untracked declared-directory inputs',t=>{
   const f=fixture(t),definition=JSON.parse(fs.readFileSync(path.join(f.root,'.github/package-inputs.json')));
   definition.inputs=definition.inputs.filter(name=>name!=='data/ownership-selection.json');definition.inputs.push('data/');
@@ -243,199 +319,7 @@ test('source snapshot rejects untracked declared-directory inputs',t=>{
 });
 
 
-test('installed identity detects dependency body substitution under unchanged lock metadata',t=>{
-  const f=fixture(t),before=installedPackageIdentity(f.root);
-  f.write('node_modules/example/index.js','modified dependency body');
-  const after=installedPackageIdentity(f.root);
-  assert.deepEqual(before.node,after.node);
-  assert.notEqual(before.dependencies.sha256,after.dependencies.sha256);
-});
-
-
-for(const retainedCode of [false,true])test('changed-declaration full/readback comparison authenticates '+(retainedCode?'retained typed code':'inert data')+' and the actual current delta',t=>{
-  const source=fixture(t),full=fixture(t),assembled=fixture(t);
-  const declaration='.github/package-inputs.json',added=retainedCode?'scripts/accepted-source.py':'coordination/engineering/next/selected.json';
-  const definition=JSON.parse(fs.readFileSync(path.join(source.root,declaration)));
-  const commit=()=>source.git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','selection');
-  source.write('data/ownership-selection.json',{version:1,additive_release:{state:'original'}});
-  source.git('add','data/ownership-selection.json');commit();
-  const originalHead=source.git('rev-parse','HEAD');
-  const descriptor=head=>{
-    const raw=execFileSync('git',['-C',source.root,'show',head+':'+declaration]);
-    return {path:declaration,mode:'100644',bytes:raw.length,sha256:hash(raw),
-      git_blob:createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')};
-  };
-  const atlas=(head,pin)=>({nativeContextInputStage:{current_execution:{source_head:head,
-    runtime:{sha256:'c'.repeat(64)},full_code_closure:[pin,{path:'scripts/invariant.mjs',sha256:'d'.repeat(64)}]},
-    consumed_input_bytes:{encoded:42+pin.bytes,decoded:80}},additiveRelease:{ledger:'current'}});
-  source.write('.cache/package-input-build.json',{version:1,kind:'cloudflare',input_definition_sha256:descriptor(originalHead).sha256,
-    preflight:{passed:true,errors:[],inputs:{head:originalHead}}});
-  source.write('.cache/package-output-source.json',snapshotPackageOutputSource(source.root));
-  const manifest=createPackageOutputManifest(source.root),originalManifest=path.join(source.root,'.cache/original.json');
-  source.write('.cache/original.json',manifest);const manifestSha=hash(fs.readFileSync(originalManifest));
-  let trustedBase,acceptedInputs;
-  if(retainedCode){
-    source.write(added,'accepted source code');source.git('add',added);commit();trustedBase=source.git('rev-parse','HEAD');
-    acceptedInputs={commit:trustedBase,files:[{path:added,mode:'100644',oid:source.git('rev-parse','HEAD:'+added),bytes:fs.statSync(path.join(source.root,added)).size}]};
-  }
-  source.write(declaration,{...definition,inputs:[...definition.inputs,added]});if(!retainedCode)source.write(added,{selected:true});
-  source.write('data/ownership-selection.json',{version:1,additive_release:{state:'current'}});
-  source.git('add',declaration,added,'data/ownership-selection.json');commit();
-  const currentHead=source.git('rev-parse','HEAD'),current=snapshotPackageOutputSource(source.root);
-  const pin={commit:currentHead,path:added,mode:'100644',git_blob_oid:source.git('rev-parse','HEAD:'+added),
-    bytes:fs.statSync(path.join(source.root,added)).size,sha256:hash(fs.readFileSync(path.join(source.root,added))),whole_body_consumed:true};
-  const receipt={version:1,kind:'cloudflare',input_definition_sha256:descriptor(currentHead).sha256,
-    preflight:{passed:true,errors:[],inputs:{head:currentHead}},assembly:{kind:'retained-original-output-plus-current-additive',
-      origin:{head:originalHead},original_manifest_sha256:manifestSha,
-      current_execution:{source_commit:currentHead,source_tree:current.tree},
-      original_base_context_retained:true,base_restoration_invoked:false,invariant_build_invoked:false,
-      transition:admitPackageOutputTransition(manifest,current,{acceptedInputs,typedInputs:[pin]}),current_selected_inputs:[pin]}};
-  const originalAtlas=atlas(originalHead,descriptor(originalHead)),currentAtlas=atlas(currentHead,descriptor(currentHead));
-  const reset=()=>{full.write('dist/client/atlas-geography.json',currentAtlas);
-    assembled.write('dist/client/atlas-geography.json',originalAtlas);assembled.write('.cache/package-input-build.json',receipt);};
-  const args={full:full.root,assembled:assembled.root,originalHead,currentHead,sourceRoot:source.root,originalManifest,trustedBase};
-  reset();assert.equal(compareSelectedPackageOutput(args).exact_byte_files,3);
-  if(retainedCode){
-    assert.throws(()=>compareSelectedPackageOutput({...args,trustedBase:undefined}),/Exact trusted comparison base/);
-    assert.throws(()=>compareSelectedPackageOutput({...args,trustedBase:originalHead}),/Ordinary unchanged trusted comparison input/);
-    const forged=structuredClone(receipt);forged.assembly.transition.accepted_selected_inputs.commit=currentHead;
-    assembled.write('.cache/package-input-build.json',forged);
-    assert.throws(()=>compareSelectedPackageOutput(args),/Assembly delta transition differs/);reset();
-  }
-  const fullInventory=inventoryPackageOutput(full.root).files;
-  const client=fullInventory.filter(row=>row.path.startsWith('dist/client/')).map(row=>({...row,path:row.path.slice('dist/client/'.length)}));
-  const readback={version:1,kind:'ordinary-cloudflare-built-output-readback',head:currentHead,
-    static_assets:{files:client,count:client.length,bytes:client.reduce((sum,row)=>sum+row.bytes,0)},
-    worker_bundle_files:fullInventory.filter(row=>row.path.startsWith('dist/cloudflare/')).map(row=>({...row,path:row.path.slice('dist/cloudflare/'.length)})),
-    nativeContextInputStage:structuredClone(currentAtlas.nativeContextInputStage)};
-  assert.equal(compareSelectedPackageReadback({...args,readback}).atlas_exact_after_authenticated_provenance,true);
-  if(retainedCode)assert.throws(()=>compareSelectedPackageReadback({...args,readback,trustedBase:undefined}),/Exact trusted comparison base/);
-  for(const mutate of [value=>value.head=originalHead,value=>value.static_assets.files.pop(),
-    value=>value.static_assets.files.push(value.static_assets.files[0]),value=>value.static_assets.files[0].sha256='0'.repeat(64),
-    value=>value.worker_bundle_files[0].bytes++,value=>value.nativeContextInputStage.consumed_input_bytes.encoded++,
-    value=>value.nativeContextInputStage.consumed_input_bytes.decoded++,
-    value=>value.static_assets.files[0].path='../escape',value=>value.static_assets.bytes++]){
-    const changed=structuredClone(readback);mutate(changed);assert.throws(()=>compareSelectedPackageReadback({...args,readback:changed}));
-  }
-  const unknownField=structuredClone(originalAtlas);unknownField.unreported_extra_field='must still fail exact full atlas hash';
-  assembled.write('dist/client/atlas-geography.json',unknownField);
-  assert.throws(()=>compareSelectedPackageReadback({...args,readback}),/Complete atlas bytes/);
-  reset();
-
-  for(const mutate of [
-    value=>value.nativeContextInputStage.consumed_input_bytes.encoded++,
-    value=>value.nativeContextInputStage.consumed_input_bytes.decoded++,
-    value=>value.nativeContextInputStage.current_execution.runtime.sha256='e'.repeat(64),
-    value=>value.nativeContextInputStage.current_execution.full_code_closure[1].sha256='e'.repeat(64),
-    value=>value.nativeContextInputStage.current_execution.full_code_closure[0].sha256='e'.repeat(64),
-    value=>value.nativeContextInputStage.current_execution.full_code_closure.shift(),
-    value=>value.nativeContextInputStage.current_execution.full_code_closure.push(value.nativeContextInputStage.current_execution.full_code_closure[0])]){
-    reset();const changed=structuredClone(originalAtlas);mutate(changed);assembled.write('dist/client/atlas-geography.json',changed);
-    assert.throws(()=>compareSelectedPackageOutput(args));
-  }
-  for(const mutate of [value=>value.assembly.original_manifest_sha256='0'.repeat(64),
-    value=>value.assembly.current_selected_inputs[0].git_blob_oid='0'.repeat(40),
-    value=>value.assembly.current_selected_inputs[0].bytes++,
-    value=>value.assembly.current_selected_inputs[0].sha256='0'.repeat(64),
-    value=>value.assembly.current_selected_inputs[0].whole_body_consumed=false,
-    value=>value.assembly.current_selected_inputs=[],value=>value.assembly.transition.added_selected_inputs=[],
-    value=>value.assembly.current_execution.source_tree='0'.repeat(40)]){
-    reset();const changed=structuredClone(receipt);mutate(changed);assembled.write('.cache/package-input-build.json',changed);
-    assert.throws(()=>compareSelectedPackageOutput(args));
-  }
-  reset();const alteredManifest=structuredClone(manifest);
-  alteredManifest.source.definition.inputs.push('coordination/engineering/forged/source.json');
-  source.write('.cache/original.json',alteredManifest);
-  const alteredReceipt=structuredClone(receipt);alteredReceipt.assembly.original_manifest_sha256=hash(fs.readFileSync(originalManifest));
-  assembled.write('.cache/package-input-build.json',alteredReceipt);
-  assert.throws(()=>compareSelectedPackageOutput(args),/immutable Git/);
-  source.write('.cache/original.json',manifest);
-  reset();source.write('.github/workflows/merge-integration-checks.yml','changed build command');source.git('add','.github/workflows/merge-integration-checks.yml');commit();
-  const changedHead=source.git('rev-parse','HEAD'),changedFull=structuredClone(currentAtlas),changedReceipt=structuredClone(receipt);
-  changedFull.nativeContextInputStage.current_execution.source_head=changedHead;
-  changedReceipt.preflight.inputs.head=changedHead;changedReceipt.assembly.current_execution.source_commit=changedHead;
-  changedReceipt.assembly.current_execution.source_tree=source.git('rev-parse','HEAD^{tree}');
-  changedReceipt.assembly.transition.current_head=changedHead;
-  full.write('dist/client/atlas-geography.json',changedFull);assembled.write('.cache/package-input-build.json',changedReceipt);
-  assert.throws(()=>compareSelectedPackageOutput({...args,currentHead:changedHead}),/producer workflow required/);
-  reset();assembled.write('dist/client/assets/a.js','different bytes');
-  assert.throws(()=>compareSelectedPackageOutput(args),/Output bytes differ/);
-});
-
-
-test('original installed input identity is captured before generated consumer caches',t=>{
-  const f=fixture(t),before=JSON.parse(fs.readFileSync(path.join(f.root,'.cache/package-output-source.json'))).installed_runtime;
-  f.write('node_modules/.vite/deps/generated-cache.js','generated consumer cache');
-  const manifest=createPackageOutputManifest(f.root);
-  assert.deepEqual(manifest.runtime.installed,before);
-  assert.notDeepEqual(installedPackageIdentity(f.root),before,'Control establishes actual post-consumer tree differs');
-});
-
-
-test('installed identity admits ordinary scoped and punctuated filenames without weakening package paths', t => {
-  const f=fixture(t);
-  for (const name of ['@scope/package/index.js','@scope/package/LICENSE (MIT).txt',
-    'example/Unicode-é+file.js','example/file#?.json']) f.write('node_modules/'+name, name);
-  const before=installedPackageIdentity(f.root);
-  assert.equal(before.dependencies.files, 5);
-  f.write('node_modules/@scope/package/index.js', 'changed scoped dependency');
-  assert.notEqual(installedPackageIdentity(f.root).dependencies.sha256,before.dependencies.sha256);
-  assert.throws(()=>streamedPackageFile(f.root,'node_modules/@scope/package/index.js'),/Safe ordinary package path/);
-  fs.symlinkSync('/tmp',path.join(f.root,'node_modules/escape'));
-  assert.throws(()=>installedPackageIdentity(f.root),/link escapes/);
-});
-
-
-test('declaration accounting preserves actual observations and every nondeclaration byte', () => {
-  const original={consumed_input_bytes:{encoded:321352440,decoded:192828074}};
-  const current={consumed_input_bytes:{encoded:321356198,decoded:192828074}};
-  const a={bytes:92514},b={bytes:96272};
-  const observed=structuredClone(current),result=normalizeDeclarationReadAccounting(current,original,b,a);
-  assert.deepEqual(current,observed);assert.deepEqual(result.normalized,original);
-  assert.equal(result.accounting.unchanged_other_encoded_bytes,321259926);
-  for (const delta of [-1,1,3758]) {
-    const wrong=structuredClone(current);wrong.consumed_input_bytes.encoded+=delta;
-    assert.throws(()=>normalizeDeclarationReadAccounting(wrong,original,b,a),/Consumed bytes/);
-  }
-  for (const descriptor of [{bytes:0},{bytes:96273},{bytes:96271},{bytes:0.5}])
-    assert.throws(()=>normalizeDeclarationReadAccounting(current,original,descriptor,a));
-  const changedDecoded=structuredClone(current);changedDecoded.consumed_input_bytes.decoded++;
-  assert.notDeepEqual(normalizeDeclarationReadAccounting(changedDecoded,original,b,a).normalized,original);
-});
-
-test('versioned runtime evidence requires complete bound inventories before summary equality',async t=>{
-  const {installedPackageDifferences,validateInstalledPackageIdentity}=await import('../scripts/package-output-artifact.mjs');
-  const f=fixture(t),identity=installedPackageIdentity(f.root);
-  assert.equal(identity.version,2);assert.equal(validateInstalledPackageIdentity(identity),identity);
-  assert.deepEqual(installedPackageDifferences(identity,structuredClone(identity)),[]);
-  const legacy={node:identity.node,dependencies:{files:identity.dependencies.files,sha256:identity.dependencies.sha256},python:null};
-  assert.equal(installedPackageDifferences(legacy,identity)[0].component,'identity-policy');
-  assert.throws(()=>installedPackageDifferences({...legacy,version:2},identity));
-  for(const mutate of [
-    value=>delete value.dependencies.inventory,
-    value=>value.dependencies.inventory[0].sha256='f'.repeat(64),
-    value=>value.dependencies.inventory.push(structuredClone(value.dependencies.inventory[0])),
-    value=>value.dependencies.files++,
-    value=>delete value.python,
-  ]){const changed=structuredClone(identity);mutate(changed);assert.throws(()=>installedPackageDifferences(changed,identity));}
-  f.write('node_modules/example/index.js','actually changed execution bytes');
-  const current=installedPackageIdentity(f.root),diff=installedPackageDifferences(identity,current);
-  assert.deepEqual(diff.map(row=>row.component),['dependencies']);
-  assert.deepEqual(diff[0].changed_files,['node_modules/example/index.js']);
-});
-
-test('scientific identity roots follow every exact declared requirement',async t=>{
-  const {declaredPackagePythonRoots}=await import('../scripts/package-output-artifact.mjs');
-  const f=fixture(t);assert.deepEqual(declaredPackagePythonRoots(f.root),[]);
-  f.write('requirements.txt','# scientific roots\nnumpy==2.3.5\nshapely==2.1.2\npyproj==3.7.2\nrasterio==1.4.3\nscipy==1.17.0\n');
-  assert.deepEqual(declaredPackagePythonRoots(f.root).map(row=>row.name),['numpy','shapely','pyproj','rasterio','scipy']);
-  for(const unknown of ['numpy>=2','-r elsewhere.txt','package @ https://example.invalid/file']){
-    f.write('requirements.txt',unknown);assert.throws(()=>declaredPackagePythonRoots(f.root),/Exact pinned/);
-  }
-});
-
-
-test('parent independently binds Python executable before any consumer identity process',async t=>{
+test('parent independently binds Python executable before archive extraction',async t=>{
   const {resolvePackagePythonExecutable}=await import('../scripts/package-output-artifact.mjs');
   const observed=resolvePackagePythonExecutable();assert.equal(resolvePackagePythonExecutable(observed.sha256).executable,observed.executable);
   const f=fixture(t),bin=path.join(f.root,'bin'),marker=path.join(f.root,'forged-executable-ran');fs.mkdirSync(bin);
@@ -445,13 +329,16 @@ test('parent independently binds Python executable before any consumer identity 
   finally{process.env.PATH=before;}
 });
 
-test('assembly admits original custody and installed bytes before scientific imports',()=>{
+test('assembly admits original custody and current locked dependencies before current-product imports',()=>{
   const source=fs.readFileSync(new URL('../scripts/assemble-selected-package.mjs',import.meta.url),'utf8');
-  const custody=source.indexOf('const original=await authenticateOriginalPackageOutput('),identity=source.indexOf('const installed=installedPackageIdentity('),admission=source.indexOf('if(differences.length)recordAndRequireRuntime();'),probe=source.indexOf('const runtime=inspectPackageRuntime(root)');
-  assert.ok(custody>0&&identity>custody&&admission>identity&&probe>admission);
-  assert.match(source,/expectedParser:manifest\.runtime\.installed\.python\.parser/);
-  assert.match(source,/expectedExecutable:manifest\.runtime\.installed\.python\.executable_sha256/);
-  assert.ok(source.indexOf('if(runtime.errors.length)')<source.indexOf('const actualRuntime='));
+  const custody=source.indexOf('const original=await authenticateOriginalPackageOutput(');
+  const runtime=source.indexOf('const runtime=inspectPackageNodeRuntime(root)');
+  const admission=source.indexOf('need(runtime.errors.length===0');
+  const computation=source.indexOf("await import('./package-current-additive.mjs')");
+  assert.ok(custody>0&&runtime>custody&&admission>runtime&&computation>admission);
+  assert.doesNotMatch(source,/installedNodeIdentity|installedPackageDifferences|runtime_identity_version|runtime\.installed/);
+  assert.match(source,/resolvePackagePythonExecutable\(python\.sha256\)/);
+  assert.match(source,/same\(manifest\.configuration,packageBuildConfiguration\(\)\)/);
 });
 
 test('declared build image rejects real producer changes but ignores incidental programmes', t => {
@@ -476,12 +363,12 @@ test('declared build image rejects real producer changes but ignores incidental 
     f.write(name,'observer version two');commit();assert.doesNotThrow(()=>admitPackageOutputTransition(original,current()),name+' changed');
     fs.unlinkSync(path.join(f.root,name));commit();assert.doesNotThrow(()=>admitPackageOutputTransition(original,current()),name+' deleted');
   }
-  for(const name of [...Object.keys(inputs),'package-lock.json','scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs','.github/workflows/merge-integration-checks.yml','.github/workflows/worker-merge.yml']){
+  for(const name of [...Object.keys(inputs),'package-lock.json','scripts/package-output-artifact.mjs','.github/workflows/merge-integration-checks.yml','.github/workflows/worker-merge.yml']){
     const prior=fs.readFileSync(path.join(f.root,name));f.write(name,'changed consumed bytes');commit();
     assert.throws(()=>admitPackageOutputTransition(original,current()),/input changed|producer workflow required/,name);
     f.write(name,prior.toString());commit();
   }
-  for(const name of ['scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs']){
+  for(const name of ['scripts/package-output-artifact.mjs']){
     const prior=fs.readFileSync(path.join(f.root,name),'utf8');f.write(name,'dirty capture code');
     assert.throws(()=>snapshotPackageOutputSource(f.root),/complete immutable inventory/,name+' dirty');
     f.write(name,prior);
@@ -492,7 +379,7 @@ test('declared build image rejects real producer changes but ignores incidental 
   assert.throws(()=>admitPackageOutputTransition(legacy,current()),/Immediate original build capture/);
 });
 
-test('final queue captures genuine build output immediately and uploads only after checks', () => {
+test('final queue retains genuine build output immediately before independent checks', () => {
   const workflow=fs.readFileSync(new URL('../.github/workflows/worker-merge.yml',import.meta.url),'utf8');
   const steps=workflow.split(/^      - name: /m).slice(1).map(raw=>({name:raw.split('\n')[0],raw}));
   const at=steps.findIndex(step=>step.name==='Build the combined application once before asset-dependent tests');
@@ -500,12 +387,13 @@ test('final queue captures genuine build output immediately and uploads only aft
   assert.equal(steps[at+1].name,'Inventory original final-worker package output',
     'No observer/test may intervene before original capture');
   const end=steps.findIndex(step=>step.name==='Retain original final-worker package output');
+  assert.equal(end,at+2,'Upload must immediately preserve the inventoried original');
   for(const name of ['Install browser dependencies only for tests that use Playwright',
     'Test applicable combined-tree invariants without publishing or live imports']){
     const control=steps.findIndex(step=>step.name===name);
-    assert(control>at+1&&control<end,name+' must run between original capture and upload');
+    assert(control>end,name+' must remain after original retention');
   }
-  assert.match(steps[end].raw,/if: success\(\)/,'Failed checks cannot upload an original');
+  assert.match(steps[end].raw,/if: success\(\)/,'Failed build or inventory cannot upload an original');
   assert.doesNotMatch(workflow,/Read back qualified native build outputs|native-normal-built-output\.json|--built-output-readback/);
   const selectedSmoke=steps.find(step=>step.name==='Retain selected delivery smoke');
   assert.match(selectedSmoke.raw,/name: selected-delivery-smoke-/);
@@ -610,4 +498,22 @@ test('all32 selected appends retain unchanged typed code across original/trusted
     changed.files.push({path:unsafe,mode:'100644',oid});
     assert.throws(()=>admitPackageOutputTransition(original,changed,{acceptedInputs,typedInputs}));
   }
+});
+
+
+test('new Cloudflare static files obey the exact provider boundary without rewriting historical custody',t=>{
+ const f=fixture(t),name=path.join(f.root,'dist/client/large.bin');
+ assert.equal(CLOUDFLARE_STATIC_ASSET_BYTES,26214400);
+ const fd=fs.openSync(name,'w');fs.ftruncateSync(fd,26214400);fs.closeSync(fd);
+ assert.doesNotThrow(()=>assertCloudflareStaticAssets(f.root));
+ fs.truncateSync(name,26214401);
+ // Old output must remain authenticatable so a subsequent assembly can replace
+ // its oversized raw ledger. New-output admission is an independent boundary.
+ const old=createPackageOutputManifest(f.root);assert.equal(verifyPackageOutput(f.root,old),true);
+ assert.throws(()=>assertCloudflareStaticAssets(f.root),/Cloudflare static asset exceeds 25 MiB/);
+ fs.unlinkSync(name);const worker=path.join(f.root,'dist/cloudflare/large-worker.bin');
+ const workerFd=fs.openSync(worker,'w');fs.ftruncateSync(workerFd,26214401);fs.closeSync(workerFd);
+ assert.doesNotThrow(()=>assertCloudflareStaticAssets(f.root),'Static-file ceiling is not a Worker-script limit');
+ fs.symlinkSync('../atlas-geography.json',path.join(f.root,'dist/client/assets/link'));
+ assert.throws(()=>assertCloudflareStaticAssets(f.root),/must be ordinary/);
 });

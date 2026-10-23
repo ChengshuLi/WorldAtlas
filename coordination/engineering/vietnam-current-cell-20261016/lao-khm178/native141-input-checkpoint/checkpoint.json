@@ -1,0 +1,114 @@
+{
+  "status": "DATA-ONLY-root-applicability-adopted-stock-qualification-pending",
+  "complete_original_cohort": 141,
+  "original_physical_classes": {
+    "land": 135,
+    "inland_water": 6
+  },
+  "stock_prepared_with_whole_physical": 138,
+  "missing_whole_physical": 3,
+  "exact_target_count": 17,
+  "prepared_target_count": 16,
+  "groups": [
+    {
+      "physical_evidence_sha256": "0b0247438ee15cf8f56f28060d4ee3152d66ccbae81c22afb5e8cd75339eeb78",
+      "cells": 112,
+      "owners": [
+        48181,
+        48212,
+        48268,
+        48365,
+        48373,
+        48532,
+        48556,
+        48596,
+        48597,
+        48599,
+        48661,
+        48757
+      ],
+      "source_evidence": {
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/native141-input-checkpoint/native-source-evidence-0b0247438ee1-PROPOSED.json",
+        "bytes": 27819072,
+        "sha256": "1adf7617b9f204137504686164b04ab2942dd7a2376965ea9265735acf585310"
+      },
+      "native_patch": {
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/native141-input-checkpoint/native-patch-0b0247438ee1-PROPOSED.json",
+        "bytes": 8722,
+        "sha256": "18beeaedb445604db6ac3c5511bacd89305462bf99fbccf7d4a58ab8b6dd447b"
+      }
+    },
+    {
+      "physical_evidence_sha256": "31701e6f28114770f49de65a52b8570c7a723c4c662409bf0660dc7b3612d424",
+      "cells": 1,
+      "owners": [
+        48348
+      ],
+      "source_evidence": {
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/native141-input-checkpoint/native-source-evidence-31701e6f2811-PROPOSED.json",
+        "bytes": 2724885,
+        "sha256": "af6012edb82e9f04aace8533326d43226a1db9a14aebccf67cf7b766c2f6bb9a"
+      },
+      "native_patch": {
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/native141-input-checkpoint/native-patch-31701e6f2811-PROPOSED.json",
+        "bytes": 146,
+        "sha256": "fda4ecaa250612d458a0e19fc6ea0eb901cbc90ddb59925e361b63a75730af4c"
+      }
+    },
+    {
+      "physical_evidence_sha256": "4ade7d21d33ed399d1cf234396fd426ca5cb37d7e8a7a41c099b71dadefbd405",
+      "cells": 18,
+      "owners": [
+        48575
+      ],
+      "source_evidence": {
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/native141-input-checkpoint/native-source-evidence-4ade7d21d33e-PROPOSED.json",
+        "bytes": 310487,
+        "sha256": "45d74c79b582ab29dc5467035001f1b4f3f008fe5a05a4846f3f87d4fb8782ca"
+      },
+      "native_patch": {
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/native141-input-checkpoint/native-patch-4ade7d21d33e-PROPOSED.json",
+        "bytes": 1938,
+        "sha256": "d579623b020fd2cab2d149919f7c8bbeccb65b21448bda1b004cb82a7c477bea"
+      }
+    },
+    {
+      "physical_evidence_sha256": "ac86cd6687663e237db1473830d14e5151b0b5df6a1aeae7e997a2ac6bfbc0a3",
+      "cells": 7,
+      "owners": [
+        48168,
+        48336
+      ],
+      "source_evidence": {
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/native141-input-checkpoint/native-source-evidence-ac86cd668766-PROPOSED.json",
+        "bytes": 5448220,
+        "sha256": "73ed118df428a35976ea3693418b37fccd9b61db9c80d4b798a26aeb74812f80"
+      },
+      "native_patch": {
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/native141-input-checkpoint/native-patch-ac86cd668766-PROPOSED.json",
+        "bytes": 402,
+        "sha256": "8527290b4f1e9da814b036d4cd52efe6545cafb13f547c24ae311b84e1417c59"
+      }
+    }
+  ],
+  "root_final_gate": "Root source-location adoption, actual unchanged generic stock qualification, then normal current-native consumer/current-owner-zero/conservation/global competition. No fresh current0 claim from old roster.",
+  "original_scope": {
+    "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/vnm141-location-proposals.json",
+    "bytes": 567479,
+    "sha256": "84302efbf18b27462eecd6db4133da26632242aa7eda3678c18836798e6c1a08"
+  },
+  "source_facts": {
+    "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/all178-reconciled-location-facts.json",
+    "bytes": 727237,
+    "sha256": "58f807c26d37b086fca6dd6866a4ae0e519024926172700d8f9390b610061fd0"
+  },
+  "applicability_decision": "ROOT ADOPTED finite141: whole official LAO NGD2019 and KHMgovernment/WFP2018 ADM0 masks supersede old coarse NaturalEarth and foreignADM1 assertions solely for these exactkeys as current exclusion authority. All old assertions/flags/contacts and whole operands remain immutable ancestry. New GSO2025 ADM0 positive supports VNcountry location only; no claim of 2020district or current34province parent update.",
+  "actual_scientific_replay": 0,
+  "native_qualification_runs": 0,
+  "ownership_changes": 0,
+  "repair_credit": 0,
+  "root_applicability_decision": {
+    "local_path": "/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/root-country-source-applicability-decision141.json",
+    "decision": "adopt-current-country-source-applicability-for-defined-source-native-attempt"
+  }
+}
