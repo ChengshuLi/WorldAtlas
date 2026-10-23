@@ -39,6 +39,21 @@
     "result": "failed before output publication",
     "stderr": "no oauth token found for github.com; Geography object acquisition failed",
     "destination_created": false,
-    "authorization_route": "No credential changes/login; no alternate route attempted"
+    "authorization_route": "No credential changes/login; no alternate route attempted",
+    "cli": {
+      "executable": "/usr/local/bin/gh",
+      "config_dir_env": "GH_CONFIG_DIR unset (default CLI configuration)",
+      "account": "ChengshuLi (active default account; stored credential reported invalid)",
+      "same_repository_remote": "https://github.com/ChengshuLi/WorldAtlas.git"
+    },
+    "missing_object_inventory": {
+      "path": "coordination/engineering/rus-ukr12-continuation-20261023/finalize-001/missing-object-manifest.json",
+      "missing_blobs": 71,
+      "missing_bytes": 137418243,
+      "manifest_sha256": "6ecaf9b40fe37fbae37cb6c2d5fc380eee24271d64e6b28bc8920c0358b4c0ac",
+      "target_commit": "9e3637776d2593f0a024adee41a19e319e3b6385",
+      "target_repo": "ChengshuLi/WorldAtlas",
+      "fetch_not_executed": true
+    }
   }
 }
