@@ -1222,6 +1222,9 @@ test('final-bank software cold report reuses comparison without checkpoint issua
    fs.writeFileSync(raw,JSON.stringify({...report,candidate_code_executed:false}));
    assert.throws(enclosing,/lacks a completed native result/,'The real wrapper refuses a false candidate-code child claim');
    f.save('data/selected-checkpoint.json',a.fixture.locator);const missingArchive=f.commit();
-   await assert.rejects(()=>native.inspectSelectedAcquired(f.root,f.trusted,missingArchive),/requires its authenticated accepted checkpoint/);
+   const finalWithoutLegacyLocator=await native.inspectSelectedAcquired(f.root,f.trusted,missingArchive);
+   assert.equal(finalWithoutLegacyLocator.status,'no-new-native-loss',
+     'A v2 final-bank comparison reads the accepted final selection directly, independent of the legacy locator/archive');
+   assert.equal(finalWithoutLegacyLocator.checkpoint,undefined,'A software-only final-bank comparison does not issue a checkpoint');
  }finally{globalThis.fetch=previous.fetch;for(const [key,value]of Object.entries(previous.environment)){if(value===undefined)delete process.env[key];else process.env[key]=value;}}
 });
