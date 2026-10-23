@@ -1,0 +1,58 @@
+{
+  "kind": "argentina-tdf-485-current-aref-claim-correction-v1",
+  "status": "corrective-hold-pending-complete-department-boundary-evidence",
+  "based_on": {
+    "current_main": "334fd645b05c7926127bb6d1a72d37d28c7e0144",
+    "merged_argentina_pr": 2750,
+    "merge_commit": "c9475d557db0bcc0caafdd6673508c9f8020f41a",
+    "merge_parent_before_candidate": "549f1a1966fa5861005cc7caf5ccd97867ba072e"
+  },
+  "scope": {
+    "original_package": "gb-ARG-ADM2--repair-evaluation",
+    "source_id": "gb:ARG:ADM2:61730980B7053808465014",
+    "owner": 8100,
+    "cells": 485,
+    "candidate_key_path": "coordination/engineering/argentina-repair-delivery-20261023/native-config-485-001/candidate-keys.json",
+    "candidate_key_bytes": 26575,
+    "candidate_key_sha256": "3aa6709fa8562f0f98254c9a929f1059904a5bb774fcdab3962fd0137a9f7b60",
+    "canonical_key_sha256": "9c2706472ff28b16990dfc6a493e54b5dfbe0990cc4f1b4bb09fce840f536ad1"
+  },
+  "claim_being_corrected": "A 485-way spatial intersection between the archived Río Grande source polygon and the cited current AREF administrative-boundary body.",
+  "verification": {
+    "comparison_kind": "bounded-argentina-485-source-intersection-check-v1",
+    "comparison_sha256": "6749309d3ec60ad082b3416252846e0fee00f92e5ce64691b394e5bd2c90b1fe",
+    "candidate_exact_count": 485,
+    "archived_hdx": {
+      "file": "arg_adm_unhcr2017_SHP.zip",
+      "sha256": "523c2453d3a9a9bbdc07fe43c79dce5e41070a2daf7cb4fb2d4cfe29fd9b1bf7",
+      "feature": "ADM2 record index 88, AR094007 Río Grande; ADM1 AR094",
+      "center_covered": 485
+    },
+    "available_aref": {
+      "endpoint": "https://catastro.aref.gob.ar/arcgis/services/publica/TDF_DGC_wfs/MapServer/WFSServer",
+      "capabilities_sha256": "2a7bb1465010dcc5fa8f6d81580a22692d3dddba0191cc95aeae28fb173e6cf0",
+      "layers": [
+        "DGC-SECCIONES (33 Río Grande-labeled features; WFS response timestamp 23/10/2026 07:11:57 p.m.; response SHA-256 797249207adf542497420c89d1ffdabf4c87b124dcafcff3d81ff93365181ed5; 9 candidate centers covered)",
+        "DGC-Parcelario_RURAL (926 Río Grande-labeled features; WFS response timestamp 23/10/2026 07:11:15 p.m.; response SHA-256 a970be96cb9b36a5d9b5726dbb61967ab7677f938b35353fe80392c64783118c; 465 candidate centers covered)"
+      ],
+      "either_layer_count": 466,
+      "neither_layer_count": 19,
+      "limitations": "The listed layers are cadastral sections and rural parcel geometries, not a complete AREF administrative department boundary. The 19 without either cadastral hit are not shown to be outside Río Grande; the 466 hits do not establish a complete departmental boundary."
+    },
+    "missing_evidence": "The exact previously cited AREF department-boundary feature/response and 485-key join body were not present in the merged evidence. The official WFS capabilities expose no departmental boundary layer. An AREF site download link could not be retrieved with valid TLS, and no TLS bypass was attempted.",
+    "result": "No one of the 485 centers failed the archived Río Grande polygon predicate. The alleged 485-way current-AREF departmental intersection remains unverified because the cited current boundary body is missing and the accessible AREF WFS has cadastral layers only. This is not a finding that any key lies outside Río Grande."
+  },
+  "disposition": {
+    "action": "Return all 485 candidate assignments to held/unresolved status pending a complete applicable AREF department-boundary source body and exact 485-key join, or a separately supported original-contract source basis. Preserve the prior accepted selected state exactly; do not credit this candidate.",
+    "reason": "The current-AREF spatial assertion was used in the delivered derivation but cannot be reproduced from the exact cited body. Cadastral layer footprints cannot substitute for a department boundary.",
+    "unchanged": {
+      "prior_accepted_cells": 22697,
+      "original_residual_cells": 6149,
+      "other_485_proposal_holds": 4017,
+      "other_residual_outside_tdf_first_scope": 1647
+    },
+    "map_transition": "The only canonical selection changes between the accepted pre-PR2750 baseline and current main 334fd645 are PR2750's 485-cell change: the selector, current-startup index, two ownership-vintage bodies, and one effective-context body replacement/addition. This correction restores those canonical files to exact pre-PR2750 bytes and preserves all other current-main code and historical evidence."
+  },
+  "privacy": "No raw HDX or AREF geometry, geographic point coordinates, or coordinate-derived per-key rows are included. Source bodies remain private; the comparison output is retained locally.",
+  "review": "Independent reviewer checked the exact key/source comparison. Exact-public-head review of this corrective PR remains required. No root scientific credit or acceptance is asserted."
+}
