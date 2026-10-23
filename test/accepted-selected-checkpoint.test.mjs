@@ -44,7 +44,7 @@ function checkpoint({historical = false} = {}) {
   const report = {version: 1, method_id: 'worldatlas-trusted-geography-check-v1', baseline_commit: baseline,
     candidate_commit: candidate, trusted_code_commit: baseline, candidate_code_executed: false,
     published: false, source_approval: false, gate_status: 'passed', status: historical ? 'no-new-regression' : 'no-new-native-loss',
-    ...(!historical ? {validation_scope: 'selected-native-map-cells', selected_native_report: {method: 'selected-native-owner-conservation-v1',
+    ...(!historical ? {regressions: 0, validation_scope: 'selected-native-map-cells', selected_native_report: {method: 'selected-native-owner-conservation-v1',
       status: 'no-new-native-loss', candidate_code_executed: false, lost_or_reassigned_cells: 0, intervals: []}} : {}),
     checkpoint: {version: 1, kind: 'selected-checkpoint-products-v1', members: bodies.map(([name, raw]) => ({name, bytes: raw.length,
       sha256: reportHash(raw), ...(name.endsWith('.gz') ? {decoded_bytes: json({member:name}).length, decoded_sha256: reportHash(json({member:name}))} : {})}))}};
@@ -131,7 +131,8 @@ test('real acquisition accepts bot/merged/tree/origin/artifact custody and mints
   releaseAcceptedCheckpoint(result.handle); assert.throws(()=>readAcceptedCheckpoint(result.handle),/private/);
 });
 test('fresh accepted map reports require completed native conservation even with refreshed authenticated provenance', async () => {
-  for (const alter of [r => delete r.validation_scope, r => delete r.selected_native_report,
+  for (const alter of [r => delete r.regressions, r => r.regressions = 1,
+    r => delete r.validation_scope, r => delete r.selected_native_report,
     r => r.selected_native_report.method = 'foreign', r => r.selected_native_report.status = 'native-regressions-found',
     r => r.selected_native_report.candidate_code_executed = true, r => r.selected_native_report.lost_or_reassigned_cells = 1,
     r => delete r.selected_native_report.lost_or_reassigned_cells, r => delete r.selected_native_report.intervals,

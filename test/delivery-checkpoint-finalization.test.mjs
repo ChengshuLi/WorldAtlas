@@ -45,7 +45,7 @@ function checkpoint({historical = false} = {}) {
   const report = {version: 1, method_id: 'worldatlas-trusted-geography-check-v1', baseline_commit: baseline,
     candidate_commit: candidate, trusted_code_commit: baseline, candidate_code_executed: false,
     published: false, source_approval: false, gate_status: 'passed', status: historical ? 'no-new-regression' : 'no-new-native-loss',
-    ...(!historical ? {validation_scope: 'selected-native-map-cells', selected_native_report: {method: 'selected-native-owner-conservation-v1',
+    ...(!historical ? {regressions: 0, validation_scope: 'selected-native-map-cells', selected_native_report: {method: 'selected-native-owner-conservation-v1',
       status: 'no-new-native-loss', candidate_code_executed: false, lost_or_reassigned_cells: 0, intervals: []}} : {}),
     checkpoint: {version: 1, kind: 'selected-checkpoint-products-v1', members: bodies.map(([name, raw]) => ({name, bytes: raw.length,
       sha256: reportHash(raw), ...(name.endsWith('.gz') ? {decoded_bytes: json({member:name}).length, decoded_sha256: reportHash(json({member:name}))} : {})}))}};
