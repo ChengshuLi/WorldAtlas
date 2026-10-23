@@ -6,6 +6,8 @@ import path from 'node:path';
 import {execFileSync, spawnSync} from 'node:child_process';
 import {gzipSync, gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
+import {finalBankReference} from '../src/reference-metadata.js';
+import {ownershipMetadata} from '../src/ownership-method.js';
 import {staticModuleClosure} from './helpers/static-module-closure.mjs';
 import {shuffledChunks} from './fixtures/native-word-store.mjs';
 import {nativeAuthority, pinReader} from '../scripts/prepare-delivery-handoff.mjs';
@@ -150,6 +152,109 @@ function fixture({missingOrigins = false, changeManifest, changePatch, changeSid
   };
   return {repo, git, write, commit, pin, head, manifest, selection, side, run, cleanup: () => fs.rmSync(repo, {recursive: true})};
 }
+
+// Actual final-profile dimensions and normative bytes, but only five synthetic
+// requested cells. No source science, full bank, or production geometry is run.
+function finalFixture() {
+  const f = fixture(), root = 'data/canonical-grid/current-startup';
+  const latitudePath = 'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz';
+  const latitudeRaw = fs.readFileSync(latitudePath), latitudeDecoded = gunzipSync(latitudeRaw);
+  f.write(latitudePath, latitudeRaw);
+  const owners = [{index: 1, id: 'owner-A'}, {index: 2, id: 'owner-B'}];
+  const ownerRaw = gzipSync(Buffer.from(JSON.stringify(owners)));
+  f.write('inputs/owners.gz', ownerRaw);
+  const origin = f.commit(), size = 262166, bits = 19;
+  const reference = {id: 'geography:fixture-native', footprints_sha256: 'b'.repeat(64), hierarchy_sha256: 'c'.repeat(64)};
+  const encode = (kind, values, offset, prefix) => {
+    const raw = Buffer.alloc(values.length * 4); values.forEach((v, i) => raw.writeUInt32LE(v, i * 4));
+    const encoded = gzipSync(Buffer.concat([...shuffledChunks(values.length, {value: n => values[n]})]));
+    const name = `${prefix}/${kind}-${offset}.bin.gz`; f.write(root + '/' + name, encoded);
+    return {path: name, kind, offset, words: values.length, bytes: encoded.length, sha256: sha(encoded),
+      decoded_bytes: raw.length, decoded_sha256: sha(raw), encoding: 'byte-shuffle'};
+  };
+  const rows = counts => {
+    let cursor = 0;
+    return Array.from({length: size * 2}, (_, i) => i % 2 ? (cursor += counts[i >> 1] ?? 0, counts[i >> 1] ?? 0) : cursor);
+  };
+  const oldRows = encode('rows', rows([1, 1, 0, 1]), 0, 'native-v1/ownership');
+  const oldRuns = encode('runs', [2 ** bits, 1, 2 * 2 ** bits + 1, 1, 2 ** bits + 3, 3], 0, 'original');
+  const manifest = {...f.manifest, size, coordinateBits: bits, geographic_release: reference.id,
+    hierarchy_sha256: reference.hierarchy_sha256, footprints_sha256: reference.footprints_sha256,
+    parts: [oldRows, oldRuns], runWords: 6,
+    bounds: {path: 'owners.gz', sha256: sha(ownerRaw)},
+    original_assets: {bounds: {commit: origin, path: 'inputs/owners.gz', sha256: sha(ownerRaw), role: 'original-identity-parent-camera-context'}},
+    native_latitudes: {root: 'repository', role: 'immutable-normative-rule-input', commit: origin, path: latitudePath,
+      bytes: latitudeRaw.length, sha256: sha(latitudeRaw), decoded_bytes: latitudeDecoded.length, decoded_sha256: sha(latitudeDecoded)}};
+  const manifestRaw = f.write('inputs/native/manifest.json', manifest), manifestSha = sha(manifestRaw);
+  const native = {version: 1, method: manifest.method, release_id: reference.id, manifest_path: 'inputs/native/manifest.json', sha256: manifestSha,
+    selected_geography: {kind: 'complete-world-index-with-exact-encoded-overrides', path: 'absent-scientific-bank.json'}};
+  const remap = p => {
+    const raw = fs.readFileSync(path.join(f.repo, root, p.path));
+    const name = p.kind === 'rows' ? p.path : 'ownership-vintages/' + manifestSha + '/native-v1/ownership/runs-0.bin.gz';
+    f.write(root + '/' + name, raw); return {...p, path: name};
+  };
+  const nativeParts = manifest.parts.map(remap), latitudeTransport = 'native-v1/native-row-latitudes.f64le.gz';
+  f.write(root + '/' + latitudeTransport, latitudeRaw);
+  const nativeMap = {...ownershipMetadata(manifest), canonical_grid_sha256: manifestSha, parts: nativeParts,
+    native_latitudes: {...manifest.native_latitudes, transport_path: latitudeTransport}};
+  const finalRuns = [2 * 2 ** bits, 0, 2 ** bits + 2, 2, 2 * 2 ** bits + 1, 1, 2 ** bits + 1, 1];
+  const parts = [encode('rows', rows([2, 1, 1, 1]), 0, 'final'), encode('runs', finalRuns, 0, 'final'),
+    encode('runs', [2 ** bits + 3, 3], finalRuns.length, 'final')];
+  const ownerHash = sha(Buffer.from(JSON.stringify(owners.map(o => [o.index, o.id]))));
+  const contextBody = Buffer.from(JSON.stringify(owners.map(o => ({...o, fixtureContext: true}))));
+  const contextRaw = gzipSync(contextBody), context = {path: 'geography/effective-context-' + sha(contextRaw) + '.json.gz',
+    bytes: contextRaw.length, sha256: sha(contextRaw), encoding: 'gzip', decoded_bytes: contextBody.length,
+    decoded_sha256: sha(contextBody), offset: 0, features: owners.length};
+  f.write(root + '/' + context.path, contextRaw);
+  const runBytes = Buffer.alloc((finalRuns.length + 2) * 4);
+  [...finalRuns, 2 ** bits + 3, 3].forEach((v, i) => runBytes.writeUInt32LE(v, i * 4));
+  const proof = {version: 3, kind: 'prepared-final-native-bank-v3', native_manifest_sha256: manifestSha,
+    native_pixel_map: nativeMap, base_reference: reference, effective_reference: reference, context_parts: [context],
+    owners: owners.length, reference_owner_sha256: ownerHash, rows_sha256: parts[0].decoded_sha256,
+    runs_word_stream_sha256: sha(runBytes), effective_footprint_domain: 'worldatlas-final-native-footprints:v1'};
+  const pixelMap = {...nativeMap, parts, runWords: finalRuns.length + 2, reference_owner_sha256: ownerHash}; delete pixelMap.canonical_grid_sha256;
+  const effective = finalBankReference(proof, pixelMap, 'd'.repeat(64), valueSha); proof.effective_reference = effective;
+  Object.assign(pixelMap, {geographic_release: effective.id, footprints_sha256: effective.footprints_sha256, hierarchy_sha256: effective.hierarchy_sha256});
+  const filePin = p => ({path: p.path, bytes: p.bytes, sha256: p.sha256});
+  const compatibility = [...nativeParts.map(filePin), {path: latitudeTransport, bytes: latitudeRaw.length, sha256: sha(latitudeRaw)}];
+  const index = {version: 3, native_manifest_sha256: manifestSha, release_id: effective.id, footprints_sha256: effective.footprints_sha256,
+    hierarchy_sha256: effective.hierarchy_sha256, pixelMap, preparedOwnership: proof, compatibility_files: compatibility,
+    files: [...compatibility, ...parts.map(filePin), filePin(context)]};
+  const indexRaw = f.write(root + '/index.json', index);
+  const selection = {version: 2, kind: 'selected-final-native-bank-v2', native_selection: native,
+    prepared_bank: {path: root + '/index.json', bytes: indexRaw.length, sha256: sha(indexRaw)}, reference: effective};
+  f.write('data/ownership-selection.json', selection);
+  const originalGrid = {size, selection: {method: manifest.method}, native_latitudes: {decoded_bytes: latitudeDecoded.length, decoded_sha256: sha(latitudeDecoded)}};
+  const gridRaw = f.write(queueRoot + '/ownership-binding.json', originalGrid);
+  const queue = JSON.parse(fs.readFileSync(path.join(f.repo, queueRoot, 'source-package-queue.json')));
+  queue.input_sha256['ownership-binding.json'] = sha(gridRaw); f.write(queueRoot + '/source-package-queue.json', queue);
+  // Historical cumulative products are deliberately absent at this final head.
+  for (const name of ['inputs/patch.json', 'inputs/sidecar.json', 'inputs/envelope.json', 'inputs/registry.json']) fs.unlinkSync(path.join(f.repo, name));
+  f.commit();
+  return {...f, finalIndex: index, finalSelection: selection, finalRoot: root};
+}
+
+test('documented package CLI reads final E directly with honest absent historical columns', () => {
+  const f = finalFixture(); try {
+    const r = f.run(); assert.equal(r.status, 0, r.stderr);
+    assert.equal(r.report.kind, 'literal-selected-owner-observation-v2'); assert.equal(r.report.version, 2); assert.equal(r.report.ownership_profile, 'selected-final-native-bank-v2');
+    assert.deepEqual(r.report.final_bank_pin, f.finalSelection.prepared_bank);
+    assert.deepEqual(r.report.selected_reference, f.finalSelection.reference);
+    assert.deepEqual(r.report.keys.map(k => [k.effective_selected_owner, k.owner_id]),
+      [[2, 'owner-B'], [1, 'owner-A'], [0, null], [2, 'owner-B'], [1, 'owner-A']]);
+    assert.ok(r.report.keys.every(k => k.base_owner === null && k.accepted_additive_owner === null && k.existing_product_overlap === null));
+    assert.equal(r.report.patch_pin, undefined); assert.equal(r.report.query_count, keys.length);
+    assert.equal(r.report.query_sha256, sha(Buffer.from(JSON.stringify(keys) + '\n')));
+    assert.equal(r.report.run_members.length, 1);
+    const consumed = r.report.consumed_inputs.map(p => p.path);
+    assert.ok(consumed.includes(f.finalRoot + '/' + f.finalIndex.pixelMap.parts[1].path));
+    for (const name of [f.finalIndex.pixelMap.parts[2].path, ...f.finalIndex.preparedOwnership.context_parts.map(p => p.path)])
+      assert.ok(!consumed.includes(f.finalRoot + '/' + name), 'Unrequested final member was read: ' + name);
+    assert.ok(!consumed.some(p => /^inputs\/(patch|sidecar|envelope|registry|bank)/.test(p)));
+    for (const name of ['scripts/package-startup-ownership.mjs', 'src/ownership-assets.js', 'src/ownership-method.js'])
+      assert.ok(r.report.execution_code.some(p => p.path === name), 'New executed dependency is not bound: ' + name);
+  } finally { f.cleanup(); }
+});
 
 test('literal ownership entrypoint needs no geometry or qualification inputs and binds exact keys, head and latitude', () => {
   const f = fixture(); try {
@@ -391,8 +496,8 @@ test('original queue grid identity is joined before native body reads, not the c
 
 // Genuine cold Git objects, not missing working-tree copies. Only committed code,
 // commit/tree metadata and the test transport are installed before the CLI runs.
-function coldFixture({splitCandidates = false, gitFilenameAlias = false, helperEscape} = {}) {
-  const f = fixture({multiBlock: !splitCandidates, splitCandidates}), root = path.join(f.repo, 'cold'), bin = path.join(f.repo, 'bin');
+function coldFixture({splitCandidates = false, gitFilenameAlias = false, helperEscape, finalBank = false} = {}) {
+  const f = finalBank ? finalFixture() : fixture({multiBlock: !splitCandidates, splitCandidates}), root = path.join(f.repo, 'cold'), bin = path.join(f.repo, 'bin');
   const forbidden = ['data/world-index.json', 'inputs/source-geometries.json', 'inputs/certificate.json', 'inputs/ledger.json'];
   for (const name of forbidden) f.write(name, {forbidden: name});
   const head = f.commit(), objects = f.git('cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype)').split('\n').map(s => s.split(' '));
@@ -625,5 +730,53 @@ test('a partial acquisition failure leaves no receipt and an ordinary retry reus
     assert(!f.batches().slice(prior).flat().some(oid => retained.includes(oid)));
     assert.equal(resumed.report.acquisition.fetched_objects,
       f.inventory().filter(([oid,kind]) => kind === 'blob' && !f.codeOids.has(oid)).length - retained.length);
+  } finally { f.cleanup(); }
+});
+
+
+for (const [label, mutate, expected] of [
+  ['selector shape', f => { f.finalSelection.additive_release = {path: 'inputs/sidecar.json'}; f.write('data/ownership-selection.json', f.finalSelection); }, /Unsupported final ownership selection/],
+  ['selected index bytes', f => { f.write(f.finalRoot + '/index.json', {...f.finalIndex, changed: true}); }, /differs|mismatch/],
+  ['required encoded member', f => { f.write(f.finalRoot + '/' + f.finalIndex.pixelMap.parts[1].path, Buffer.from('changed complete member')); }, /differs|mismatch/],
+  ['original owner body', f => { f.write('inputs/owners.gz', gzipSync(Buffer.from('[{"index":1,"id":"different"}]'))); }, /differs|mismatch/],
+  ['coherently bound wrong owner mapping', f => { f.finalIndex.preparedOwnership.reference_owner_sha256 = 'e'.repeat(64); repinFinal(f); }, /Final bank owner mapping differs/],
+  ['coherently bound wrong decoded words', f => { f.finalIndex.pixelMap.parts[1].decoded_sha256 = 'e'.repeat(64); repinFinal(f); }, /Whole native canonical words differ/],
+  ['incomplete row stream', f => { f.finalIndex.pixelMap.parts[0].words -= 2; const raw=f.write(f.finalRoot + '/index.json',f.finalIndex); f.finalSelection.prepared_bank.bytes=raw.length; f.finalSelection.prepared_bank.sha256=sha(raw); f.write('data/ownership-selection.json',f.finalSelection); }, /Incomplete final word extent/],
+  ['unselected metadata projection', f => { f.finalIndex.referenceMetadata = {invented: true}; repinFinal(f); }, /Final bank reference metadata differs/],
+]) test('final package observation refuses ' + label + ' without publishing', () => {
+  const f = finalFixture(); try {
+    mutate(f); f.commit(); const r = f.run();
+    assert.notEqual(r.status, 0, label); assert.match(r.stderr, expected); assert.equal(fs.existsSync(r.output), false);
+  } finally { f.cleanup(); }
+});
+
+function repinFinal(f) {
+  const index = f.finalIndex, proof = index.preparedOwnership;
+  const effective = finalBankReference(proof, index.pixelMap, proof.effective_reference.footprints_sha256, valueSha);
+  proof.effective_reference = effective;
+  Object.assign(index.pixelMap, {geographic_release: effective.id, footprints_sha256: effective.footprints_sha256, hierarchy_sha256: effective.hierarchy_sha256});
+  Object.assign(index, {release_id: effective.id, footprints_sha256: effective.footprints_sha256, hierarchy_sha256: effective.hierarchy_sha256});
+  const raw = f.write(f.finalRoot + '/index.json', index);
+  f.finalSelection.reference = effective;
+  f.finalSelection.prepared_bank = {path: f.finalRoot + '/index.json', bytes: raw.length, sha256: sha(raw)};
+  f.write('data/ownership-selection.json', f.finalSelection);
+}
+
+test('cold final package observation imports only requested final members and reuses them warm', t => {
+  const f = coldFixture({finalBank: true}); try {
+    assert.deepEqual(f.inventory().filter(([oid, kind]) => kind === 'blob' && !f.codeOids.has(oid)), []);
+    const r = f.run(); assert.equal(r.status, 0, r.stderr);
+    const imported = new Set(f.batches().flat());
+    const bank = f.finalIndex;
+    for (const p of [bank.pixelMap.parts[0], bank.pixelMap.parts[1]])
+      assert.ok(imported.has(f.git('rev-parse', f.head + ':' + f.finalRoot + '/' + p.path)));
+    for (const p of [bank.pixelMap.parts[2], ...bank.preparedOwnership.context_parts, ...bank.preparedOwnership.native_pixel_map.parts])
+      assert.ok(!imported.has(f.git('rev-parse', f.head + ':' + f.finalRoot + '/' + p.path)), 'Unexpected body: ' + p.path);
+    const prior = f.batches().length, warm = f.run(); assert.equal(warm.status, 0, warm.stderr);
+    assert.equal(f.batches().length, prior); assert.equal(warm.report.acquisition.fetched_objects, 0);
+    assert.deepEqual(warm.report.keys, r.report.keys);
+    assert.equal(r.report.query_count, 5);
+    t.diagnostic(JSON.stringify({acquired_objects: imported.size, declared_blob_bytes: r.report.acquisition.fetched_bytes,
+      final_word_members_read: 2, final_word_members_declared: bank.pixelMap.parts.length}));
   } finally { f.cleanup(); }
 });

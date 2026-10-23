@@ -14,6 +14,8 @@ import {admitNativePatchStore, canonicalNativeJsonChunks, writeNativeByteChunks}
 import {createAcquisition, githubTree} from './geography-prefetch.mjs';
 import {packageInputs, packageIntervals, ROOT as queueDirectory} from '../coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs';
 import {ownershipRun} from '../src/pixel-ownership.js';
+import {finalBankSelection, scientificNativeSelection, originalNativeReference, validateReferenceMetadataHeader} from '../src/reference-metadata.js';
+import {validatePreparedStartupIndex} from './package-startup-ownership.mjs';
 import {nativeBaseSelection, valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -21,7 +23,8 @@ const relative = name => typeof name === 'string' && !path.posix.isAbsolute(name
   name.split('/').every(p => p && p !== '.' && p !== '..') && !name.includes('\\');
 const codeRoot = fileURLToPath(new URL('../', import.meta.url));
 const ownCode = ['scripts/observe-selected-owners.mjs', 'scripts/geography-prefetch.mjs', 'scripts/native-word-store.mjs',
-  'scripts/native-patch-store.mjs', 'src/pixel-ownership.js', 'src/pixel-grid.js',
+  'scripts/native-patch-store.mjs', 'scripts/package-startup-ownership.mjs', 'src/ownership-assets.js',
+  'src/ownership-method.js', 'src/pixel-ownership.js', 'src/pixel-grid.js',
   'coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs'];
 
 export async function observeSelectedPackage({repo, commit, packageId}) {
@@ -74,7 +77,8 @@ export async function observeSelectedPackage({repo, commit, packageId}) {
     for (const row of rows) missing.delete(row.oid);
   };
   await acquire([{path: 'data/ownership-selection.json'}]);
-  const selection = reader.json('data/ownership-selection.json');
+  const selected = reader.json('data/ownership-selection.json'), finalBank = finalBankSelection(selected);
+  const selection = finalBank ? scientificNativeSelection(selected) : selected;
   await acquire([{path: selection.manifest_path, sha256: selection.sha256}]);
   const manifest = reader.json(selection.manifest_path, {expected: selection.sha256});
   assert.equal(selection.method, 'native-linear-evenodd-first-owner-v1');
@@ -129,31 +133,68 @@ export async function observeSelectedPackage({repo, commit, packageId}) {
     assert.equal(sha(decoded), p.decoded_sha256, 'Pinned decoded body differs');
     return decoded;
   }
-  const hook = selection.additive_release;
-  assert.ok(hook, 'This observation entrypoint requires the selected retained additive product');
-  await acquire([hook]);
-  const sideRaw = reader.read(hook.path, {expected: hook.sha256});
-  assert.equal(sideRaw.length, hook.bytes);
-  const side = JSON.parse(sideRaw);
-  assert.equal(side.kind, 'retained-native-additive-selection-v2');
-  assert.equal(side.version, 2);
-  assert.deepEqual(side.base_selection, nativeBaseSelection(selection));
-  const assets = side.logical_asset_map;
-  await acquire([assets.base_manifest, assets.owner_roster, side.runtime_envelope, side.authority_registry]);
-  assert.equal(assets.base_manifest.sha256, selection.sha256);
-  assert.deepEqual(JSON.parse(readPin(assets.base_manifest)), manifest);
-  assert.equal(assets.owner_roster.sha256, manifest.original_assets.bounds.sha256);
-  const owners = JSON.parse(readPin(assets.owner_roster));
-  assert.equal(owners.length, manifest.accounting.owners);
-  assert.ok(owners.every((o, i) => o.index === i + 1 && typeof o.id === 'string' && o.id.length));
-  assert.equal(new Set(owners.map(o => o.id)).size, owners.length);
-  const envelope = JSON.parse(readPin(side.runtime_envelope));
-  const registry = JSON.parse(readPin(side.authority_registry));
-  for (const role of ['base_manifest', 'owner_roster', 'patch', 'ledger']) {
-    for (const field of ['bytes', 'sha256', 'decoded_bytes', 'decoded_sha256'])
-      assert.equal(assets[role][field], envelope[role][field], role + ' ' + field);
+  function readCurrentPin(p) {
+    const raw = reader.read(p.path, {expected: p.sha256});
+    assert.equal(raw.length, p.bytes, 'Pinned encoded body length differs');
+    return raw;
   }
-  assert.equal(envelope.base_reference.footprints_sha256, manifest.footprints_sha256);
+  let assets, owners, envelope, registry, prepared, bank = manifest;
+  if (finalBank) {
+    await acquire([finalBank]);
+    const indexRaw = readCurrentPin(finalBank), index = JSON.parse(indexRaw);
+    const bounds = manifest.original_assets?.bounds;
+    assert.ok(bounds?.role === 'original-identity-parent-camera-context' && /^[a-f0-9]{40}$/.test(bounds.commit ?? '') &&
+      /^[a-f0-9]{64}$/.test(bounds.sha256 ?? '') && bounds.sha256 === manifest.bounds?.sha256,
+      'Missing independent original native owner roster');
+    await acquire([{path: bounds.path, sha256: bounds.sha256}]);
+    owners = JSON.parse(gunzipSync(reader.read(bounds.path, {expected: bounds.sha256})));
+    let base = originalNativeReference(manifest), referenceMetadata;
+    if (selected.reference_projection) {
+      await acquire([selected.reference_projection]);
+      const raw = readCurrentPin(selected.reference_projection);
+      const projected = validateReferenceMetadataHeader(JSON.parse(raw), {selection: selected, manifest});
+      base = projected.reference;
+      referenceMetadata = {version: 1, asset: {path: 'reference-metadata/current.json', bytes: raw.length, sha256: sha(raw)},
+        native_reference: projected.native, reference: projected.reference};
+    }
+    assert.deepEqual(index.referenceMetadata, referenceMetadata, 'Final bank reference metadata differs');
+    prepared = validatePreparedStartupIndex({index, indexRaw, manifest, manifestSha: selection.sha256,
+      selected: {finalBank, base, reference_release: selected.reference}, features: owners});
+    assert.ok(prepared.authority, 'Final selector requires the authoritative final-bank profile');
+    bank = {...index.pixelMap, parts: index.pixelMap.parts.map(p => ({...p,
+      bytes: prepared.pins.get(p.path).bytes, decoded_bytes: p.words * 4}))};
+  } else {
+    const hook = selection.additive_release;
+    assert.ok(hook, 'This observation entrypoint requires the selected retained additive product');
+    await acquire([hook]);
+    const sideRaw = reader.read(hook.path, {expected: hook.sha256});
+    assert.equal(sideRaw.length, hook.bytes);
+    const side = JSON.parse(sideRaw);
+    assert.equal(side.kind, 'retained-native-additive-selection-v2');
+    assert.equal(side.version, 2);
+    assert.deepEqual(side.base_selection, nativeBaseSelection(selection));
+    assets = side.logical_asset_map;
+    await acquire([assets.base_manifest, assets.owner_roster, side.runtime_envelope, side.authority_registry]);
+    assert.equal(assets.base_manifest.sha256, selection.sha256);
+    assert.deepEqual(JSON.parse(readPin(assets.base_manifest)), manifest);
+    assert.equal(assets.owner_roster.sha256, manifest.original_assets.bounds.sha256);
+    owners = JSON.parse(readPin(assets.owner_roster));
+    envelope = JSON.parse(readPin(side.runtime_envelope));
+    registry = JSON.parse(readPin(side.authority_registry));
+    for (const role of ['base_manifest', 'owner_roster', 'patch', 'ledger']) {
+      for (const field of ['bytes', 'sha256', 'decoded_bytes', 'decoded_sha256'])
+        assert.equal(assets[role][field], envelope[role][field], role + ' ' + field);
+    }
+    assert.equal(envelope.base_reference.footprints_sha256, manifest.footprints_sha256);
+  }
+  assert.ok(Array.isArray(owners) && owners.length === manifest.accounting.owners &&
+    owners.every((o, i) => o.index === i + 1 && typeof o.id === 'string' && o.id.length), 'Incomplete native owner roster');
+  assert.equal(new Set(owners.map(o => o.id)).size, owners.length, 'Duplicate native owner identity');
+  if (finalBank) {
+    const ownerHash = sha(Buffer.from(JSON.stringify(owners.map(o => [o.index, o.id]))));
+    assert.equal(prepared.proof.reference_owner_sha256, ownerHash, 'Final bank owner mapping differs');
+    assert.equal(bank.reference_owner_sha256, ownerHash, 'Final words owner mapping differs');
+  }
 
   // Same original-commit/same-path whole-hash alias rule as inspectSelected.
   const latitudePin = manifest.native_latitudes;
@@ -168,46 +209,53 @@ export async function observeSelectedPackage({repo, commit, packageId}) {
     {version: latitudeVersion, expected: latitudePin.sha256}), latitudePin, manifest.size);
   assert.ok(latitudes.every(Number.isFinite), 'Nonfinite normative latitude');
 
-  const transport = manifest.native_asset_transport;
-  assert.ok(transport?.index, 'Missing selected native transport index');
-  await acquire([transport.index]);
-  const index = reader.json(transport.index.path, {expected: transport.index.sha256});
-  assert.ok(Array.isArray(index.parts), 'Missing native transport fragments');
-  await acquire([assets.patch, ...index.parts.map(p => {
-    assert.ok(relative(p.path), 'Unsafe native transport fragment');
-    return {...p, path: path.posix.join(path.posix.dirname(transport.index.path), p.path)};
-  })]);
-  const image = new NativeAssetImage(reader, manifest, selection.manifest_path);
-  const logicalRoot = path.posix.dirname(selection.manifest_path), stores = [];
+  let image;
+  if (!finalBank) {
+    const transport = manifest.native_asset_transport;
+    assert.ok(transport?.index, 'Missing selected native transport index');
+    await acquire([transport.index]);
+    const index = reader.json(transport.index.path, {expected: transport.index.sha256});
+    assert.ok(Array.isArray(index.parts), 'Missing native transport fragments');
+    await acquire([assets.patch, ...index.parts.map(p => {
+      assert.ok(relative(p.path), 'Unsafe native transport fragment');
+      return {...p, path: path.posix.join(path.posix.dirname(transport.index.path), p.path)};
+    })]);
+    image = new NativeAssetImage(reader, manifest, selection.manifest_path);
+  }
+  const logicalRoot = path.posix.dirname(finalBank ? finalBank.path : selection.manifest_path), stores = [];
   let patchStore;
   try {
-    const rowPins = manifest.parts.filter(p => p.kind === 'rows');
+    const rowPins = bank.parts.filter(p => p.kind === 'rows');
     assert.equal(rowPins.length, 1);
     assert.equal(rowPins[0].offset, 0);
     assert.equal(rowPins[0].words, manifest.size * 2);
     const open = async pin => {
       assert.equal(pin.encoding, 'byte-shuffle');
-      const store = await openNativeWordStore(image.logicalStream(path.posix.join(logicalRoot, pin.path), pin), pin, {directory: os.tmpdir()});
+      const name = path.posix.join(logicalRoot, pin.path);
+      if (finalBank) await acquire([{...pin, path: name}]);
+      const chunks = finalBank ? [reader.read(name, {expected: pin.sha256})] : image.logicalStream(name, pin);
+      const store = await openNativeWordStore(chunks, pin, {directory: os.tmpdir()});
       stores.push(store); return store;
     };
+    if (finalBank) assert.equal(rowPins[0].decoded_sha256, prepared.proof.rows_sha256, 'Final row table identity differs');
     const table = await open(rowPins[0]);
     let cursor = 0;
     for (let y = 0; y < manifest.size; y++) {
       assert.equal(table.get(y * 2), cursor, 'Native row partition differs');
       cursor += table.get(y * 2 + 1);
     }
-    assert.equal(cursor * 2, manifest.runWords, 'Native rows omit run words');
+    assert.equal(cursor * 2, bank.runWords, 'Native rows omit run words');
     const ranges = rows.map(y => ({y, start: table.get(y * 2) * 2,
       end: (table.get(y * 2) + table.get(y * 2 + 1)) * 2}));
     let offset = 0;
-    const runPins = manifest.parts.filter(p => p.kind === 'runs');
+    const runPins = bank.parts.filter(p => p.kind === 'runs');
     for (const p of runPins) {
       assert.equal(p.offset, offset);
       assert.ok(Number.isSafeInteger(p.words) && p.words > 0 && p.words % 2 === 0);
       offset += p.words;
     }
-    assert.equal(offset, manifest.runWords);
-    assert.equal(rowPins.length + runPins.length, manifest.parts.length, 'Unknown native part kind');
+    assert.equal(offset, bank.runWords);
+    assert.equal(rowPins.length + runPins.length, bank.parts.length, 'Unknown native part kind');
     const needed = runPins.filter(p => ranges.some(r => r.start < p.offset + p.words && p.offset < r.end));
     const baseRows = new Map(rows.map(y => [y, []]));
     for (const p of needed) {
@@ -226,29 +274,35 @@ export async function observeSelectedPackage({repo, commit, packageId}) {
         assert.ok(a >= end && b > a && b <= manifest.size && owner > 0 && owner <= owners.length, 'Invalid selected native row'); end = b;
       }
     }
-    const p = assets.patch;
-    patchStore = await admitNativePatchStore({chunks: [readPin(p)], directory: os.tmpdir(),
-      size: manifest.size, ownerCount: owners.length,
-      expected: {bytes: p.decoded_bytes ?? p.bytes, sha256: p.decoded_sha256 ?? p.sha256}});
-    assert.equal(patchStore.metadata.kind, 'unassigned-native-cells-v1');
-    assert.equal(patchStore.metadata.version, 2);
-    assert.deepEqual(patchStore.metadata.base_reference, envelope.base_reference);
-    assert.deepEqual(patchStore.metadata.effective_reference, envelope.effective_reference);
-    assert.equal(patchStore.metadata.ledger_sha256, assets.ledger.decoded_sha256 ?? assets.ledger.sha256);
-    assert.equal(patchStore.metadata.authority_registry_sha256, valueSha(registry));
-    const patchRows = new Map(rows.map(y => {
-      const row = patchStore.rowAt(y); return [y, row ? Array.from(patchStore.intervals(row)) : []];
-    }));
+    const p = assets?.patch;
+    let patchRows;
+    if (!finalBank) {
+      patchStore = await admitNativePatchStore({chunks: [readPin(p)], directory: os.tmpdir(),
+        size: manifest.size, ownerCount: owners.length,
+        expected: {bytes: p.decoded_bytes ?? p.bytes, sha256: p.decoded_sha256 ?? p.sha256}});
+      assert.equal(patchStore.metadata.kind, 'unassigned-native-cells-v1');
+      assert.equal(patchStore.metadata.version, 2);
+      assert.deepEqual(patchStore.metadata.base_reference, envelope.base_reference);
+      assert.deepEqual(patchStore.metadata.effective_reference, envelope.effective_reference);
+      assert.equal(patchStore.metadata.ledger_sha256, assets.ledger.decoded_sha256 ?? assets.ledger.sha256);
+      assert.equal(patchStore.metadata.authority_registry_sha256, valueSha(registry));
+      patchRows = new Map(rows.map(y => {
+        const row = patchStore.rowAt(y); return [y, row ? Array.from(patchStore.intervals(row)) : []];
+      }));
+    }
     const contacts = (runs, x) => runs.filter(([a, b]) => a <= x && x < b).map(r => r[2]);
     const observations = requested.map(k => {
-      const b = contacts(baseRows.get(k.y), k.x), a = contacts(patchRows.get(k.y), k.x);
+      const b = contacts(baseRows.get(k.y), k.x), a = finalBank ? [] : contacts(patchRows.get(k.y), k.x);
       assert.ok(b.length <= 1 && a.length <= 1);
       const overlap = b.length > 0 && a.length > 0, index = overlap ? null : (a[0] ?? b[0] ?? 0);
+      if (finalBank) return {...k, latitude: latitudes[k.y], base_owner: null, accepted_additive_owner: null,
+        effective_selected_owner: index, owner_id: index ? owners[index - 1].id : null, existing_product_overlap: null};
       return {...k, latitude: latitudes[k.y], base_owner: b[0] ?? 0, accepted_additive_owner: a[0] ?? 0,
         effective_selected_owner: index, owner_id: index ? owners[index - 1].id : null, existing_product_overlap: overlap};
     });
     requireHead();
-    return {version: 1, kind: 'literal-selected-owner-observation-v1', scientific_qualification: false,
+    return {version: finalBank ? 2 : 1, kind: finalBank ? 'literal-selected-owner-observation-v2' : 'literal-selected-owner-observation-v1', scientific_qualification: false,
+      ...(finalBank ? {ownership_profile: 'selected-final-native-bank-v2', final_bank_pin: finalBank, selected_reference: selected.reference} : {}),
       commit, code_commit: codeCommit, original_package: original.package,
       acquisition: {...acquisition.stats, scope: 'original-package-and-selected-native-observation'},
       original_intervals: original.blocks,
@@ -256,15 +310,17 @@ export async function observeSelectedPackage({repo, commit, packageId}) {
       query_encoding: 'JSON.stringify([{x,y},...]) in input order, followed by LF',
       query_sha256: sha(Buffer.from(JSON.stringify(requested) + '\n')),
       selector_pin: reader.inventory.get(commit + ':data/ownership-selection.json'),
-      native_manifest_sha256: selection.sha256, patch_pin: p, row_member: rowPins[0], run_members: needed,
+      native_manifest_sha256: selection.sha256, ...(finalBank ? {} : {patch_pin: p}), row_member: rowPins[0], run_members: needed,
       native_latitudes: latitudePin, consumed_latitudes: reader.inventory.get(latitudeVersion + ':' + latitudePin.path),
       latitude_whole_body_alias: latitudeVersion !== latitudePin.commit, keys: observations,
       execution_code: code, consumed_inputs: [...reader.inventory.values()].filter(p => p.whole_body_consumed),
       limits: ['Literal selected-product observation of this original queue package; not source applicability, a package qualification certificate or complete repair acceptance.',
         'Original interval classes retain the queue mask observations, not current physical qualification.',
         'No current physical water/land classification, source applicability, geometric overlay, repair acceptance or publication approval is asserted.',
-        'Base and patch remain separate; an existing overlap reports null, never invented precedence. Intervals are [start,end-exclusive,owner-index].',
-        'Ledger body and source authorities are not reread; only the selected ledger digest is joined to authenticated patch metadata.']};
+        ...(finalBank ? ['Current E is read directly; historical base/additive/overlap columns are null, not reconstructed or zero.',
+          'Complete selected index and original owner roster are authenticated; only required final row/run members are consumed. Context bodies, unrelated runs and historical repair products are not read; no whole-bank or source qualification is claimed.'] :
+          ['Base and patch remain separate; an existing overlap reports null, never invented precedence. Intervals are [start,end-exclusive,owner-index].',
+          'Ledger body and source authorities are not reread; only the selected ledger digest is joined to authenticated patch metadata.'])]};
   } finally { patchStore?.close(); for (const store of stores) store.close(); }
 }
 

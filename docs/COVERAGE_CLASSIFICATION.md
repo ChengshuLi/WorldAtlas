@@ -59,9 +59,11 @@ fetch/resume loop. It derives every package block and native input from authenti
 metadata, batches only exact tree-bound missing OIDs through the existing transport,
 and checks declared object growth against actual free disk. Executable code and
 commit/tree metadata must already be local. Size lookup uses only exact containing
-directory trees, never a recursive repository inventory. All selected native
-fragments must be available for the existing descriptor checks; only required
-logical row/run members are decoded. `GIT_NO_LAZY_FETCH=1`
+directory trees, never a recursive repository inventory. A final-bank selection authenticates the complete selected index, then acquires
+only its complete row table and the final run members containing package rows.
+It does not acquire unrelated final members or replay historical native fragments,
+ledgers and patches. The explicit historical additive profile retains its complete
+fragment-descriptor checks and decodes only required logical row/run members. `GIT_NO_LAZY_FETCH=1`
 remains mandatory: no implicit graph fetch, world-source prefetch, or alternate reader
 is enabled. Existing objects are reused without a fetch; corruption, denied/unavailable
 transport or insufficient space stops without a final observation. Imported objects
@@ -69,17 +71,23 @@ remain available for an ordinary retry. Acquisition byte totals describe declare
 blob bodies, not network transfer, peak memory or a complete disk-growth guarantee.
 
 This replaces the separately transferred owner-example, latitude-companion and
-package-specific finalizer recipes. It reads the selected retained additive product,
-original package queue metadata/interval blocks, complete native row table, only the
-needed run members, full patch, original
-id/index roster and pinned normative latitudes. It never constructs a geometry
+package-specific finalizer recipes. It reads the selected final E bank directly, together with original package
+queue metadata/interval blocks, the authenticated original id/index roster and
+pinned normative latitudes. The explicit historical additive profile instead
+reads its native base and full patch; it is not a fallback for a malformed final
+selector. It never constructs a geometry
 resolver, reads a source qualification certificate or offers a full-geometry mode.
-Base and additive owners remain separate; overlap returns a null effective owner,
-not invented precedence. Zero means no selected owner, not proof of physical water.
+Final-profile output is `literal-selected-owner-observation-v2`: the existing
+`effective_selected_owner` and `owner_id` columns describe current E.
+`base_owner`, `accepted_additive_owner` and `existing_product_overlap` are null,
+not zero or a reconstructed historical decomposition. The report binds the final
+index and selected reference and states that unrequested runs and context bodies
+were not read. Historical v1 output keeps separate base/additive owners; overlap
+returns a null effective owner, not invented precedence. Zero means no selected
+owner, not proof of physical water.
 Current province/parent metadata is not inferred from the original owner roster.
 
-The output kind is `literal-selected-owner-observation-v1`, explicitly not scientific
-qualification. Its key count covers exactly that original queue package, not a larger campaign
+Both output versions are explicitly not scientific qualification. Its key count covers exactly that original queue package, not a larger campaign
 or proof that the source qualifies. Full source-based residual work still uses the
 retained original evidence, not the supported-only subset: `supported-inputs` already preserves
 `original-scope-partition.json` → `original_inputs.source_evidence` and the exact
