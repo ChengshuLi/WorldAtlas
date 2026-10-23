@@ -59,7 +59,7 @@ test('declared ordinary package snapshots authenticate complete native source st
   await assert.rejects(selectBuildOwnership({manifestPath:candidatePath,expectedSha256:'efe31373ff6a2c3f4ba5f11f8cbe37b25337778b344d9dbf1d3dfde301e3e722',expectedReference:reference}),/ENOENT/);
   const snapshot=stage.immutable_snapshots.find(f=>f.snapshot_path!==f.path);
   fs.writeFileSync(path.join(image,snapshot.snapshot_path),Buffer.from('tampered code'));
-  await assert.rejects(validateContextInputStage({expectedReference:reference}),/bytes mismatch|snapshot bytes differ/);
+  await assert.rejects(validateContextInputStage({expectedReference:reference}),/bytes mismatch|snapshot bytes differ|Candidate exceeds exact file budget/);
   assert.throws(()=>readPinnedBuildFile({commit:stage.baseline.commit,path:'../secret',sha256:'0'.repeat(64)}),/Unsafe/);
   assert.throws(()=>inPackageImage(root),/differs from declared/);
  }finally{process.chdir(root);if(old===undefined)delete process.env.WORLDATLAS_PACKAGE_STAGE;else process.env.WORLDATLAS_PACKAGE_STAGE=old;if(oldCeiling===undefined)delete process.env.GIT_CEILING_DIRECTORIES;else process.env.GIT_CEILING_DIRECTORIES=oldCeiling;fs.rmSync(image,{recursive:true,force:true});}

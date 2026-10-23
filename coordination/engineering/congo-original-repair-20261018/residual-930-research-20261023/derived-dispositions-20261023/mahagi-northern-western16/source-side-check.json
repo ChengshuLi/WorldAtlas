@@ -1,0 +1,282 @@
+{
+  "kind": "cod-mahagi-rutshuru-versioned-border-side-check-v1",
+  "status": "local bounded source-relative center-side classification; no stock decision or territorial adjudication",
+  "scope": {
+    "mahagi_original_keys": 36,
+    "mahagi_okoro_hits": 28,
+    "mahagi_nonhits": 8,
+    "mahagi_side_checked": 8,
+    "rutshuru_original_keys": 9,
+    "rutshuru_side_checked": 9,
+    "all_original_cells_remain_held": true
+  },
+  "inputs": {
+    "original_center_overlay": {
+      "path": ".worldatlas-workspaces/746183045662994f/c8b0f9c0619e94196ab1f6e5c11e057f64c3060b1585ca68b84999448389b457/work/coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/evidence/complete-537-feature-center-overlay.json",
+      "bytes": 799945,
+      "sha256": "00fc57c3290d4d0cf1ef7df68860ac6d2c3ee82e67509d0ae2f9d1c550cdf24d"
+    },
+    "stock_diagnostic": {
+      "commit": "347f0692367a0c51a49683ff33e4a5ed9b9c7c5b",
+      "path": "coordination/engineering/congo-original-repair-20261018/diagnostic-original-001/native-diagnostic.json",
+      "git_blob_oid": "24b226726a62dd9cfbcbd3598ca34720b6ecd793",
+      "bytes": 326162,
+      "sha256": "0deb2340d65b786e61debb9df7e1b2bd1fb6cd6c8ab26311b43afdd6017965dc",
+      "existing_result": "3905 requested, 2975 supported, 930 held; all36 Mahagi and all9 Rutshuru keys held as territorial_exclusion_cells; bound, not rerun"
+    }
+  },
+  "method": {
+    "source": "Official OSM API versioned relations/ways and node histories. Select nearest relevant outer member-way segment to each existing original center. Retrieve the latest node coordinates at or before the relation-version timestamp, preserve way direction, then use the OSM left/right country tags to label the center side.",
+    "distance": "Approximate equirectangular point-to-segment distance in meters. Proximity is descriptive only.",
+    "limits": [
+      "OSM left/right tags are OSM source attribution and are not a legal ruling or proof of de facto control.",
+      "This classifies original centers only, not full cell footprints or all physical contacts.",
+      "The original native diagnostic's held rows are unchanged; no science credit, repair, owner change, hold removal, or acceptance is claimed."
+    ]
+  },
+  "osm_versions": [
+    {
+      "relation": "https://api.openstreetmap.org/api/0.6/relation/3771442/70",
+      "relation_version": 70,
+      "timestamp": "2022-11-22T02:19:16Z",
+      "member_way": "https://api.openstreetmap.org/api/0.6/way/396444481/4",
+      "way_version": 4,
+      "way_timestamp": "2021-06-21T19:46:45Z",
+      "way_role": "outer",
+      "way_tags": {
+        "boundary": "administrative",
+        "admin_level": "2",
+        "border_type": "nation",
+        "left:country": "Uganda",
+        "right:country": "RD Congo",
+        "source": "Large Scale International Boundary (US DoS/INR/GGI)"
+      }
+    },
+    {
+      "relation": "https://api.openstreetmap.org/api/0.6/relation/3772011/89",
+      "relation_version": 89,
+      "timestamp": "2023-01-07T15:02:08Z",
+      "member_ways": [
+        {
+          "url": "https://api.openstreetmap.org/api/0.6/way/80914329/8",
+          "version": 8,
+          "timestamp": "2022-12-20T10:36:21Z",
+          "left:country": "Uganda",
+          "right:country": "DR Congo",
+          "member_role": "outer"
+        },
+        {
+          "url": "https://api.openstreetmap.org/api/0.6/way/80914332/5",
+          "version": 5,
+          "timestamp": "2022-12-20T10:36:21Z",
+          "left:country": "Uganda",
+          "right:country": "DR Congo",
+          "member_role": "outer"
+        },
+        {
+          "url": "https://api.openstreetmap.org/api/0.6/way/942192721/2",
+          "version": 2,
+          "timestamp": "2022-12-20T10:36:21Z",
+          "left:country": "DR Congo",
+          "right:country": "Uganda",
+          "member_role": "outer"
+        },
+        {
+          "url": "https://api.openstreetmap.org/api/0.6/way/133294944/6",
+          "version": 6,
+          "timestamp": "2022-12-20T10:36:21Z",
+          "left:country": "DR Congo",
+          "right:country": "Uganda",
+          "member_role": "outer"
+        }
+      ],
+      "common_way_tags": {
+        "boundary": "administrative",
+        "admin_level": "2",
+        "border_type": "nation",
+        "waterway": "river",
+        "source": "Large Scale International Boundary (US DoS/INR/GGI)"
+      }
+    }
+  ],
+  "results": [
+    {
+      "key": [
+        14441,
+        129380,
+        153709
+      ],
+      "contact": "Uganda Northern Region / COD Mahagi",
+      "osm_way": 396444481,
+      "center_side": "Uganda",
+      "distance_m_approx": 79.7
+    },
+    {
+      "key": [
+        14441,
+        129381,
+        153709
+      ],
+      "contact": "Uganda Northern Region / COD Mahagi",
+      "osm_way": 396444481,
+      "center_side": "Uganda",
+      "distance_m_approx": 88.1
+    },
+    {
+      "key": [
+        14441,
+        129383,
+        153710
+      ],
+      "contact": "Uganda Northern Region / COD Mahagi",
+      "osm_way": 396444481,
+      "center_side": "Uganda",
+      "distance_m_approx": 179.0
+    },
+    {
+      "key": [
+        14441,
+        129384,
+        153710
+      ],
+      "contact": "Uganda Northern Region / COD Mahagi",
+      "osm_way": 396444481,
+      "center_side": "Uganda",
+      "distance_m_approx": 68.8
+    },
+    {
+      "key": [
+        14441,
+        129387,
+        153711
+      ],
+      "contact": "Uganda Northern Region / COD Mahagi",
+      "osm_way": 396444481,
+      "center_side": "Uganda",
+      "distance_m_approx": 37.6
+    },
+    {
+      "key": [
+        14441,
+        129388,
+        153711
+      ],
+      "contact": "Uganda Northern Region / COD Mahagi",
+      "osm_way": 396444481,
+      "center_side": "DR Congo",
+      "distance_m_approx": 20.7
+    },
+    {
+      "key": [
+        14441,
+        129391,
+        153712
+      ],
+      "contact": "Uganda Northern Region / COD Mahagi",
+      "osm_way": 396444481,
+      "center_side": "Uganda",
+      "distance_m_approx": 4.0
+    },
+    {
+      "key": [
+        14462,
+        131478,
+        152687
+      ],
+      "contact": "Uganda Western Region / COD Rutshuru",
+      "osm_way": 80914329,
+      "center_side": "DR Congo",
+      "distance_m_approx": 134.2
+    },
+    {
+      "key": [
+        14462,
+        131479,
+        152687
+      ],
+      "contact": "Uganda Western Region / COD Rutshuru",
+      "osm_way": 80914329,
+      "center_side": "DR Congo",
+      "distance_m_approx": 283.1
+    },
+    {
+      "key": [
+        14462,
+        131576,
+        152665
+      ],
+      "contact": "Uganda Western Region / COD Rutshuru",
+      "osm_way": 80914332,
+      "center_side": "Uganda",
+      "distance_m_approx": 3.2
+    },
+    {
+      "key": [
+        14462,
+        131577,
+        152665
+      ],
+      "contact": "Uganda Western Region / COD Rutshuru",
+      "osm_way": 80914332,
+      "center_side": "Uganda",
+      "distance_m_approx": 7.0
+    },
+    {
+      "key": [
+        14462,
+        131650,
+        152659
+      ],
+      "contact": "Uganda Western Region / COD Rutshuru",
+      "osm_way": 942192721,
+      "center_side": "Uganda",
+      "distance_m_approx": 60.9
+    },
+    {
+      "key": [
+        14462,
+        131655,
+        152660
+      ],
+      "contact": "Uganda Western Region / COD Rutshuru",
+      "osm_way": 942192721,
+      "center_side": "DR Congo",
+      "distance_m_approx": 78.1
+    },
+    {
+      "key": [
+        14462,
+        131662,
+        152661
+      ],
+      "contact": "Uganda Western Region / COD Rutshuru",
+      "osm_way": 133294944,
+      "center_side": "Uganda",
+      "distance_m_approx": 12.1
+    },
+    {
+      "key": [
+        14462,
+        131671,
+        152663
+      ],
+      "contact": "Uganda Western Region / COD Rutshuru",
+      "osm_way": 133294944,
+      "center_side": "Uganda",
+      "distance_m_approx": 111.4
+    },
+    {
+      "key": [
+        14462,
+        131673,
+        152664
+      ],
+      "contact": "Uganda Western Region / COD Rutshuru",
+      "osm_way": 133294944,
+      "center_side": "DR Congo",
+      "distance_m_approx": 11.6
+    }
+  ],
+  "interpretation": "For the 16 relation-linked ADM1 contacts, exact versioned OSM member-way direction and left/right country tags place 11 original centers on the Uganda-tagged side and 5 on the DR Congo-tagged side (Northern: 6/1; Western: 5/4). These are source-relative center classifications only, based on approximate center-to-line distances; they do not establish legal territory, whole-cell location, exact geoBoundaries/Wambacher export lineage, or a uniform disposition. All original stock holds remain unchanged.",
+  "next_step": "The bounded source-relative checks and original stock diagnostic do not decide which source representation governs the original contract or establish territorial applicability. Retain all 16 native holds for independent/root disposition; no alternate access route, legal assertion, or automatic repair/unresolved credit is claimed."
+}

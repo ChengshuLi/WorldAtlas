@@ -1,0 +1,4 @@
+Command: node scripts/prepare-delivery-handoff.mjs native-authority .cache/delivery-handoff/arg-485-native-authority-002.json .cache/delivery-handoff/native-scratch-485-001/native-authority-485-003
+Exit: 1
+Output: Nonordinary native scratch directory
+Cause: native-patch-store ordinaryDirectory rejected the process default temporary directory before constructor work.

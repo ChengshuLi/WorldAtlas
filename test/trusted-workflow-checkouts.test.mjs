@@ -48,6 +48,9 @@ test('negative control: old geographic sparse tree omits mandatory coordinator b
   assert.match(result.stderr, /selected-geography-effective-prevention-20261009/);
 });
 
+// Workflow declarations are still asserted separately. Only identical positive
+// import probes share results; geography and negative probes remain independent.
+const declaredCheckoutResults = new Map();
 for (const workflow of workflows) {
   test(`${workflow}: actual sparse declarations include trusted module dependencies`, () => {
     const source = fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8');
@@ -56,7 +59,9 @@ for (const workflow of workflows) {
     const checkouts=blocks.map(block=>block[1].trim().split('\n').map(row=>row.trim()))
       .filter(rows=>rows.join('\n')!=='/*\n!/*/'); // Root-only bootstrap is expanded by the tested stdin step.
     for (const directories of checkouts) {
-      const result = probe(directories);
+      const key = JSON.stringify(directories);
+      if (!declaredCheckoutResults.has(key)) declaredCheckoutResults.set(key, probe(directories));
+      const result = declaredCheckoutResults.get(key);
       assert.equal(result.status, 0, result.stderr);
     }
   });

@@ -1,0 +1,73 @@
+{
+  "kind": "argentina-tdf-rio-grande-stock-patch-derivation-v1",
+  "scope": {
+    "original_package": "gb-ARG-ADM2--repair-evaluation",
+    "owner": 8100,
+    "source_id": "gb:ARG:ADM2:61730980B7053808465014",
+    "cells": 485
+  },
+  "derivation": "Exact projection of the independently reviewed deterministic 485-key subset native rows into stock canonical patch shape {rows}. No geometry, owner observation, physical producer, source producer, or native constructor was rerun.",
+  "key_binding": {
+    "key_manifest": {
+      "path": "source-review/tdf-hdx-provenance-003/rio-grande-485-proposal-keys.json",
+      "bytes": 26575,
+      "sha256": "3aa6709fa8562f0f98254c9a929f1059904a5bb774fcdab3962fd0137a9f7b60"
+    },
+    "canonical_key_sha256": "9c2706472ff28b16990dfc6a493e54b5dfbe0990cc4f1b4bb09fce840f536ad1"
+  },
+  "patch_output": {
+    "file": {
+      "path": "source-review/tdf-hdx-provenance-003/rio-grande-485-stock-patch.json",
+      "bytes": 9182,
+      "sha256": "ff5466bbc5585f9a9adba6e9ba0909fc7afbb2be7f460ba317b896d9e63852a0"
+    },
+    "representation": "half-open [x0,x1) rows; owner8100 only",
+    "cells": 485,
+    "row_count": 207,
+    "run_count": 243
+  },
+  "provenance": {
+    "archive_addendum": {
+      "path": "source-review/tdf-hdx-provenance-003/archive-485-keyset-addendum-20261023.json",
+      "bytes": 15965,
+      "sha256": "62c4942ec9284dbb204c5b44dc246d46d423d95da3ab82c8f000e1fd44fc9e31"
+    },
+    "subset_patch": {
+      "path": "source-review/tdf-hdx-provenance-003/rio-grande-485-proposal-native-subset.json",
+      "bytes": 29004,
+      "sha256": "e895c0feeb1e16b157b711912bcb0d57ef9839b3a90f3a7857a46df5a93d1da1"
+    },
+    "existing_full_native_patch": {
+      "commit": "d70d605ecc454e56443cd894ffdad6e67a3d4aff",
+      "path": "native-config-003/native-patch.json",
+      "bytes": 33887,
+      "sha256": "6084abd9b83f48d737c4bc773c864df6b06ff3d2ba3e8a8fa5c940deca6f331d"
+    },
+    "existing_source_evidence": {
+      "commit": "baf7c6422057f42f7a829387a6f46fa9ed4a4ff6",
+      "path": "native-config-003/source-evidence-001/source-evidence.json",
+      "bytes": 82372,
+      "sha256": "43b05a6fe5fc9b56aa49762b85cf986d9a24e9a5a7839b10c825fb1f8c7b6d82"
+    },
+    "existing_constructor_result": {
+      "path": "native-config-003/native-authority-001/constructor-result.json",
+      "bytes": 42570,
+      "sha256": "a87a58039b192064bf7f0ea3a9e03a06050ad3855a094d8bf829010e295dcc98"
+    },
+    "existing_native_source_result_scope": 4502,
+    "existing_rio_grande_assigned_superset": 537
+  },
+  "checks": {
+    "subset_keys_match_manifest": true,
+    "all_subset_keys_in_existing_native_patch_and_constructor": true,
+    "all_noncandidate_keys_excluded": true,
+    "remaining_owner8100_candidate_keys_held": 52,
+    "other_existing_4502_candidate_cells_not_in_subset": 4017
+  },
+  "limits": [
+    "This is a local-only proposed additive patch projection, not a completed current-final-map compose/finalize result.",
+    "Do not publish or redistribute this coordinate-derived artifact without the applicable authorization.",
+    "Normal stock current-map composition and conservation must show exactly +485 owner8100, preserving all current base rows and every other held original key.",
+    "No acceptance, credit, or live map change is claimed."
+  ]
+}
