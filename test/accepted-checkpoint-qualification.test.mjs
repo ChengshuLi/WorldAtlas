@@ -1192,7 +1192,9 @@ test('final-bank software cold report reuses comparison without checkpoint issua
  };
  for(const key of keys)delete process.env[key];process.env.GITHUB_REPOSITORY='owner/repo';
  try{
-   const publicApi=f.transport.acceptedCheckpointAPI(undefined,{publicReadOnly:true});
+   const publicApi=f.transport.acceptedCheckpointAPI(undefined,{publicReadOnly:true,fetchImpl:globalThis.fetch});
+   const publicMetadata=await publicApi('/repos/owner/repo/issues','GET');
+   assert.deepEqual(publicMetadata,await a.fixture.api('/repos/owner/repo/issues'));
    await assert.rejects(()=>publicApi('/repos/owner/repo/issues','POST',{}),/metadata GET only/);
    await assert.rejects(()=>publicApi.artifactRedirect('/repos/owner/repo/actions/artifacts/56/zip'),/metadata GET only/);
    assert.throws(()=>f.transport.acceptedCheckpointAPI('fixture',{publicReadOnly:true}),/cannot carry credentials/);
@@ -1202,12 +1204,13 @@ test('final-bank software cold report reuses comparison without checkpoint issua
      expectedHash:acceptedSource.report_sha256,source:acceptedSource};
    await assert.rejects(()=>loadGeographicReport({...retained,retainedArchive:()=>undefined}),/requires its exact retained geographic archive/);
    await assert.rejects(()=>loadGeographicReport({...retained,retainedArchive:()=>Buffer.from('corrupt')}),/differs from accepted artifact digest/);
-   const report=await native.inspectSelectedAcquired(f.root,f.trusted,candidate);
+   const report=await native.inspectSelectedAcquired(f.root,f.trusted,candidate,{fetchImpl:globalThis.fetch});
    assert.equal(report.status,'no-new-native-loss');assert.equal(report.candidate_code_executed,true);
    assert.equal(report.derived_checkpoint,undefined);assert.equal(report.checkpoint,undefined);
    assert(report.execution_code_inventory.some(p=>p.path.endsWith('selected-checkpoint.mjs')));
    assert(report.execution_code_inventory.some(p=>p.path===codePath&&p.sha256===sha(fs.readFileSync(path.join(f.root,codePath)))));
-   assert(requests.length>0,'Accepted input was authenticated through the existing transport');
+   assert.equal(requests.length,1,'The public-only fixture performs one explicit metadata GET');
+   assert.equal(new URL(requests[0]).pathname,'/repos/owner/repo/issues');
    assert.deepEqual(f.git('status','--porcelain').toString().trim(),'','Report-only comparison writes no checkpoint products');
    const raw=path.join(f.root,'fixture-native-report.json');fs.writeFileSync(raw,JSON.stringify(report));
    const driver="import importlib.util,json,pathlib,sys,io,contextlib\nrepo=pathlib.Path(sys.argv[1]);baseline,candidate,raw,out=sys.argv[2:];s=importlib.util.spec_from_file_location('wrapper',repo/'scripts/run-geographic-check.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)\noriginal=m.subprocess.check_output\ndef transport(command,*args,**kwargs):\n if '--input-type=module' in command:return pathlib.Path(raw).read_bytes()\n return original(command,*args,**kwargs)\nm.subprocess.check_output=transport\nm.unchanged_selected_inputs=lambda *args,**kwargs:None\nsys.argv=['run-geographic-check.py','--repo',str(repo),'--baseline',baseline,'--candidate',candidate,'--code-commit',candidate,'--out',out]\nwith contextlib.redirect_stdout(io.StringIO()):result=m.main()\nassert result==0\nprint(pathlib.Path(out).read_text())";
