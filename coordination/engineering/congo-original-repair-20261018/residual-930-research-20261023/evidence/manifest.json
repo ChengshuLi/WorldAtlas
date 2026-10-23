@@ -3,11 +3,59 @@
   "status": "proposal-only-no-accepted-credit",
   "files": [
     {
+      "path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/evidence/uganda-kinkiizi-administrative-context-105.json",
+      "bytes": 17274,
+      "sha256": "433e8bded8a34d09446af0922a3c111acca20dfd0d0b1ec3d92bb0b87c709ac5",
+      "git_blob_oid": "cc0df9610deed65a27ee27e4464af86cacc060e2"
+    },
+    {
+      "path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/rutshuru-kinkiizi-105-source-qualification/README.md",
+      "bytes": 6539,
+      "sha256": "384262df4229b1f5e19f4692d80e83c78bfd3097c1d4fb54a2c99d149ae2c0dd",
+      "git_blob_oid": "0d652864f00694d1f85706dfa0961c8662f2a9bd"
+    },
+    {
+      "path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/rutshuru-kinkiizi-105-source-qualification/native-patch.json",
+      "bytes": 9235,
+      "sha256": "9534cd8118295a1c97006c4ef64424770eb1e12e96275b1109e4f611ecb0c064",
+      "git_blob_oid": "9fdf7f3a1647999c832fd964c00f11a348e6d6bd"
+    },
+    {
+      "path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/rutshuru-kinkiizi-105-source-qualification/source-evidence-generated/preparation.json",
+      "bytes": 394,
+      "sha256": "597f11417267ee82fe7212ca3184f0e6296705b40a51950bacac1bb1227349aa",
+      "git_blob_oid": "bfc4c5ad1f9798ef37c32346b4cdf861f3ad4ba5"
+    },
+    {
+      "path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/rutshuru-kinkiizi-105-source-qualification/source-evidence-generated/source-evidence.json",
+      "bytes": 37486,
+      "sha256": "146c0af163ae23a636559d5eb2e44cdf9cefe23185777547b92017585421dbc0",
+      "git_blob_oid": "b0f8de5dd262c548fbbb63cd13bfcc0d5346a7db"
+    },
+    {
+      "path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/rutshuru-kinkiizi-105-source-qualification/source-evidence-generated/territorial-exclusion-provenance.json",
+      "bytes": 68170,
+      "sha256": "3c61ecbdb800e2484de58878017e436b91e02c305b9286cb2e00f4ed6758e7fc",
+      "git_blob_oid": "929f9ba07cc7f7f82c5722479b2e9e717f99ea24"
+    },
+    {
+      "path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/rutshuru-kinkiizi-105-source-qualification/source-evidence-input-config.json",
+      "bytes": 52539,
+      "sha256": "2ccaca61e0135fb5b1e33efda4ecd003a1c5dffe09f7fc23a50e28d9bba76740",
+      "git_blob_oid": "b879f71191c6a93b12f6618398b1454ce7c9c5c8"
+    },
+    {
       "path": "evidence/930-key-center-conflict-matrix.json",
       "bytes": 1977447,
       "sha256": "1b3805a65d528b24d9327bd4c13f1e0b4a8cc0ef908addd728dc2482ff986174",
       "git_blob_oid": "aa41d922bdb2e9d2e9baed2a7649645416b7a6a1",
       "local_source_name": "center-conflict-disposition-candidate-20261023.local.json"
+    },
+    {
+      "path": "evidence/compare_kinkiizi_2006_candidate_ubos.py",
+      "bytes": 4450,
+      "sha256": "bb79c936d24bd964beaea0c0c113af2d0b542bf6dbac5363a17c6edee92bd93a",
+      "git_blob_oid": "7b89a373ec5ffd72c628dd095a31f20000196722"
     },
     {
       "path": "evidence/compare_uganda_2006_candidate_county_polygons.py",
@@ -129,6 +177,24 @@
       "local_source_name": "uganda-2006-district-line-source-metadata.json"
     },
     {
+      "path": "evidence/uganda-2006-kinkiizi-center-crosswalk-105.json",
+      "bytes": 128500,
+      "sha256": "30b48df7466fecc9ea085606ace1fff1248cd0efffe06fc8a2d90b656193a506",
+      "git_blob_oid": "d0612f1a0e0579fb14c436f3ac9560bc2821c4f0"
+    },
+    {
+      "path": "evidence/uganda-2006-kinkiizi-crs-lineage-review.json",
+      "bytes": 6898,
+      "sha256": "f1f0dd40e6f94c6ea64b23c6ce0a40d4a398b3da9dc07427cd3627d8557c598d",
+      "git_blob_oid": "3e4470105aa9381012620976cde26c3480840d31"
+    },
+    {
+      "path": "evidence/uganda-kinkiizi-administrative-context-105.json",
+      "bytes": 10225,
+      "sha256": "74518c9f8a0576ef4c1b4330b77273ba39e3a5117471ed714fbbc619658bfbe3",
+      "git_blob_oid": "06446b75c0ecb95223a1fefcdabbc601701e2d0e"
+    },
+    {
       "path": "evidence/uganda-primary-census-context-2002-2014.json",
       "bytes": 3595,
       "sha256": "447fec966a88c96fb58a1efe0920cfa92afa66aa948f3a1421bc75012d9a1eb9",
@@ -141,6 +207,42 @@
       "sha256": "912ac9d8cad6f44be5208b3ed9fd49448f0b8dab3d1253a8852564593180b7e6",
       "git_blob_oid": "f2b54d7c310c872a2c0d8eebe6efc4732d3e4133",
       "local_source_name": "source-family-bodies-20261023/verified-source-body-manifest.json"
+    },
+    {
+      "path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/evidence/uganda-kinkiizi-source-applicability-review-105.json",
+      "bytes": 2860,
+      "sha256": "0e2ea6ae90291e4a1f7a90ab3c97f06fcb0b831c9fce01592022c5897c2965c9",
+      "git_blob_oid": "2e3a03b958f4d968fc3083a114d5ab1feb19c48a"
+    },
+    {
+      "path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/rutshuru-kinkiizi-105-source-qualification/native-diagnostic-config.json",
+      "bytes": 541,
+      "sha256": "0aa361d08938dde3b62c57d121088a6a1ba70141946ad7148076caaf7a69fe21",
+      "git_blob_oid": "8c76cf41cc453bfaa3e75bca73ddad95a63624d6"
+    },
+    {
+      "path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/rutshuru-kinkiizi-105-source-qualification/native-diagnostic-generated/native-diagnostic.json",
+      "bytes": 14220,
+      "sha256": "9ef6d444f8a82cbc497dc875bbaea111285b2d3954bd74211b2a52482e62a749",
+      "git_blob_oid": "77bdd9e694e776faef76842a8c77605295841db8"
+    },
+    {
+      "path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/rutshuru-kinkiizi-105-source-qualification/native-diagnostic-generated/preparation.json",
+      "bytes": 266,
+      "sha256": "b8bac6f4ba64a27367168504f4dff20fe87824e72f4b7a9f680d9fb39f93867b",
+      "git_blob_oid": "6d699cf6fc22a122a2fef7ec5c9f6b4f0fbfd5cf"
+    },
+    {
+      "path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/rutshuru-kinkiizi-105-source-qualification/native-diagnostic-review-105.json",
+      "bytes": 2834,
+      "sha256": "afb4c5f3e49c0d2792c407d5fa8a56f0abb834983d5566e99cb1c12947877756",
+      "git_blob_oid": "7eb3de0b94bf40bcff8760d5170115814f93acdd"
+    },
+    {
+      "path": "coordination/engineering/congo-original-repair-20261018/residual-930-research-20261023/rutshuru-kinkiizi-105-source-qualification/disposition-proposal-105.json",
+      "bytes": 14498,
+      "sha256": "d61e1f3cf8f6ef5a44d9751631f05169742f0fea2e9f992d3a8770a1d4668dd7",
+      "git_blob_oid": "b63784e4df9ca8c63aaaf5663a86ddf05e174249"
     }
   ]
 }
