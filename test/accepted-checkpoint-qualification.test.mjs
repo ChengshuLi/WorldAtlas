@@ -1202,7 +1202,7 @@ test('final-bank software cold report reuses comparison without checkpoint issua
      expectedHash:acceptedSource.report_sha256,source:acceptedSource};
    await assert.rejects(()=>loadGeographicReport({...retained,retainedArchive:()=>undefined}),/requires its exact retained geographic archive/);
    await assert.rejects(()=>loadGeographicReport({...retained,retainedArchive:()=>Buffer.from('corrupt')}),/differs from accepted artifact digest/);
-   const report=await native.inspectSelectedAcquired(f.root,f.trusted,candidate);
+   const report=await native.inspectSelectedAcquired(f.root,f.trusted,candidate,{fetchImpl:globalThis.fetch});
    assert.equal(report.status,'no-new-native-loss');assert.equal(report.candidate_code_executed,true);
    assert.equal(report.derived_checkpoint,undefined);assert.equal(report.checkpoint,undefined);
    assert(report.execution_code_inventory.some(p=>p.path.endsWith('selected-checkpoint.mjs')));

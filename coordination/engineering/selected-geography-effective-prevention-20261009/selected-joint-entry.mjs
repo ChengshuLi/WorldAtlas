@@ -90,7 +90,7 @@ function executionGuard(repo, trusted) {
   });
 }
 
-async function withSelectedComparison({repo,baseline,candidate,startup,phaseComplete,publicAccepted=false},consume) {
+async function withSelectedComparison({repo,baseline,candidate,startup,phaseComplete,publicAccepted=false,checkpointFetchImpl},consume) {
   const {compareSelectedCheckpointNative} = await import('../../../scripts/selected-checkpoint-native.mjs');
   const checkpoint = await import('./selected-checkpoint.mjs');
   const {valueBytes, valueSha} = await import('./selected-neighbor-prevention.mjs');
@@ -134,7 +134,8 @@ async function withSelectedComparison({repo,baseline,candidate,startup,phaseComp
       }
       const proof = await accepted.acquireAcceptedCheckpoint({repo:process.env.GITHUB_REPOSITORY ?? 'ChengshuLi/WorldAtlas',
         locator:locator.acceptance, token,
-        ...(!token?{api:accepted.acceptedCheckpointAPI(undefined,{publicReadOnly:true})}:{}),
+        ...(!token?{api:accepted.acceptedCheckpointAPI(undefined,{publicReadOnly:true,
+          ...(checkpointFetchImpl?{fetchImpl:checkpointFetchImpl}:{})})}:{}),
         retainedArchive:archiveName ? () => {
           const input = checkpointTransportInput(afterReader, archiveName);
           transportInputs[archiveIndex] = input.pin;
@@ -173,8 +174,10 @@ function coldDecision(decision) {
 // The existing cold/software entry uses the same exhaustive comparison but has
 // no checkpoint destination or publication callback. It cannot mint a retained
 // acceptance product, and an unavailable current final state never replays v1.
-export async function inspectSelectedFinalBank(repo,baseline,candidate,startup) {
-  const answer=await withSelectedComparison({repo,baseline,candidate,startup,phaseComplete:()=>{},publicAccepted:true},
+export async function inspectSelectedFinalBank(repo,baseline,candidate,startup,{fetchImpl:checkpointFetchImpl}={}) {
+  // Trusted report-only callers may inject a deterministic public metadata transport.
+  if(checkpointFetchImpl!==undefined&&typeof checkpointFetchImpl!=='function')throw Error('Invalid checkpoint fetch implementation');
+  const answer=await withSelectedComparison({repo,baseline,candidate,startup,phaseComplete:()=>{},publicAccepted:true,checkpointFetchImpl},
     async ({transition,nativeReport,checkpoint})=>{
       const genuine=checkpoint.authenticateTransition({transition});
       demand(genuine.candidate.version===2,'Current final-bank report cannot downgrade to historical replay');

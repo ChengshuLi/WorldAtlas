@@ -1220,12 +1220,12 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
   demand(!usesFinalProfile(bootstrap),'Current final ownership requires the acquired accepted-checkpoint reader');
   return compareSelected(bootstrap,baseline,candidate,loadSelection(bootstrap.beforeReader),loadSelection(bootstrap.afterReader));
 }
-export async function inspectSelectedAcquired(repo,baseline,candidate,{parentRuntimePath}={}) {
+export async function inspectSelectedAcquired(repo,baseline,candidate,{parentRuntimePath,fetchImpl}={}) {
   const bootstrap=selectedBootstrap(repo,baseline,candidate,{parentRuntimePath});
   if(usesFinalProfile(bootstrap)){
     const {JOINT_CODE,inspectSelectedFinalBank}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs');
     bootstrap.executionCode=selectedExecutionCode(JOINT_CODE);
-    return inspectSelectedFinalBank(repo,baseline,candidate,bootstrap);
+    return inspectSelectedFinalBank(repo,baseline,candidate,bootstrap,{fetchImpl});
   }
   return compareSelected(bootstrap,baseline,candidate,await loadSelectionAcquired(bootstrap.beforeReader),await loadSelectionAcquired(bootstrap.afterReader));
 }
