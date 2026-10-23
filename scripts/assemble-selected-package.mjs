@@ -10,8 +10,8 @@ import {isDeepStrictEqual} from 'node:util';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
 import {footprintHash} from './check-prepared.mjs';
-import {additiveBaseReference} from '../src/effective-footprint.js';
-import {scientificNativeSelection,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
+import {canonicalValue} from '../src/native-grid.js';
+import {additiveBaseReference,scientificNativeSelection,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
 import {githubAPI, githubPages} from './issue-claim-contract.mjs';
 import {loadPackageInputs, readPackageInputs, containsPackagePath, safePackagePath, PREPARED_STARTUP_INDEX} from './package-inputs.mjs';
 import {compatiblePackageProducers,requireProducerInstallation} from './package-producer-contract.mjs';
@@ -23,6 +23,7 @@ import {authenticateOriginalPackageOutput, readOriginalPackageInventory, require
 
 const need=(ok,message)=>{if(!ok)throw Error(message);};
 const hash=raw=>createHash('sha256').update(raw).digest('hex');
+const canonicalHash=value=>hash(JSON.stringify(canonicalValue(value))+'\n');
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const root=path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const git=args=>execFileSync('git',['-C',root,...args],{encoding:'utf8',maxBuffer:Infinity,
@@ -267,7 +268,7 @@ export function readOriginalPackageGeography(original,{sourceRoot}={}) {
     need(raw.length===pin.bytes&&hash(raw)===pin.sha256,'Original geography output differs');return raw;
   };
   const atlas=JSON.parse(read('dist/client/atlas-geography.json'));
-  need(additiveBaseReference(atlas),'Original content base descriptor missing');
+  need(additiveBaseReference(atlas,canonicalHash),'Original content base descriptor missing');
   const asset=pin=>{
     need(/^additive-repairs\/[A-Za-z0-9_.-]+$/.test(pin?.path??''),'Original additive asset path differs');
     const name='dist/client/'+pin.path;
@@ -302,7 +303,7 @@ export function readOriginalPackageGeography(original,{sourceRoot}={}) {
     need(typeof feature.id==='string'&&!ids.has(feature.id)&&feature.geometry===null&&geometries.has(feature.id),'Original geography identity join differs');
     ids.add(feature.id);return {...feature,geometry:geometries.get(feature.id)};
   });
-  const geographicRelease=additiveBaseReference(atlas);
+  const geographicRelease=additiveBaseReference(atlas,canonicalHash);
   need(ids.size===geometries.size&&footprintHash(features)===geographicRelease.footprints_sha256,'Original complete base geometry differs');
   let referenceRevision;
   if(manifest.source.selection?.reference_projection!==undefined||atlas.referenceMetadata!==undefined){

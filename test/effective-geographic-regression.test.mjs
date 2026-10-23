@@ -121,7 +121,7 @@ test('software checker executes candidate native code against distinct data and 
   assert.equal(report.candidate_code_executed, true);
   assert.equal(report.selected_native_report.lost_or_reassigned_cells, 1);
   assert.equal(report.selected_native_report.candidate_code_executed, false, 'retain legacy child bytes honestly');
-  assert.match(report.execution_limits.join(' '), /marker is not evidence/);
+  assert.match(report.execution_limits.join(' '), /Historical child receipts retain their legacy candidate_code_executed=false marker; final-bank children bind actual execution/);
   const code = report.selected_native_report.execution_code_inventory.find(row => row.path === nativePath);
   assert.equal(code.sha256, sha(fs.readFileSync(path.join(f.repo, nativePath))));
   assert.notEqual(code.sha256, sha(execFileSync('git', ['-C', f.repo, 'show', base + ':' + nativePath])));

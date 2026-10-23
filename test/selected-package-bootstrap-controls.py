@@ -311,6 +311,8 @@ class BootstrapTests(unittest.TestCase):
         # Copy Node's independently parsed static graph, without evaluating modules.
         names=actual_static_graph(SOURCE_ROOT, 'scripts/assemble-selected-package.mjs')
         self.assertIn('scripts/assemble-selected-package.mjs',names)
+        self.assertIn('src/reference-metadata.js',names)
+        self.assertNotIn('src/effective-footprint.js',names, 'Use the pure reference API before installed dependencies are admitted')
         self.assertNotIn('scripts/package-current-additive.mjs',names, 'Installed modules stay outside credential-bearing static startup')
         self.assertNotIn('scripts/check-effective-geographic-regression.mjs',names, 'Assembly must not import the historical scientific reader')
         for name in names+['scripts/extract-package-output.py']: self.write(name,(SOURCE_ROOT/name).read_bytes())
