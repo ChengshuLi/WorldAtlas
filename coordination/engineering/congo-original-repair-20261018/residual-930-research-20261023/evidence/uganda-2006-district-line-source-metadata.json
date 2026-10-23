@@ -1,0 +1,35 @@
+{
+  "kind": "cod-residual-930-uganda-2006-district-line-source-metadata-v1",
+  "status": "context-only-no-key-disposition",
+  "source": {
+    "publisher": "World Resources Institute",
+    "source_attribution": "Uganda Bureau of Statistics (UBOS), 2006, Uganda Administrative Boundaries GIS Database",
+    "catalogue_url": "https://www.wri.org/data/uganda-gis-data",
+    "archive_url": "https://wriorg.s3.amazonaws.com/s3fs-public/docs/Ug_District-boundaries2006.zip",
+    "retrieved_at": "2026-10-23T06:10:56Z",
+    "archive_bytes": 1646436,
+    "archive_sha256": "be2f3ed89101fd68a909f20bc69fc1f097fcb203254ce06ad584588bf4284de5"
+  },
+  "embedded_metadata": {
+    "district_count": 80,
+    "feature_count": 5767,
+    "geometry_type": "Polyline",
+    "spatial_reference": "GCS_WGS_1984",
+    "bounding_box": {
+      "west": 29.572742,
+      "east": 35.000308,
+      "south": -1.478794,
+      "north": 4.234077
+    },
+    "data_collection_period": "July 1999 to March 2002",
+    "updated": 2006,
+    "metadata_advice": "Contact Uganda Bureau of Statistics for an updated version of district boundaries",
+    "use_constraint": "Dataset is not for use in litigation; WRI disclaims accuracy/reliability warranties"
+  },
+  "review": {
+    "inspection": "Archive entries, .prj, and embedded .shp.xml were examined. No source geometry is included in this evidence packet.",
+    "applicability_limit": "This is district-level polyline data, not county-level polygon geometry. It cannot determine the original 112 Irumu residual keys' county containment, validate the UBOS county archive projection, or determine territorial applicability.",
+    "method_limit": "No polygon reconstruction or per-key linework overlay was performed.",
+    "effect": "Adds contemporaneous UBOS/WRI source context only; no repair, disposition, hold, owner, credit, or denominator changes."
+  }
+}
