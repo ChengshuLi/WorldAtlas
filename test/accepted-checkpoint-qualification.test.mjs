@@ -431,6 +431,7 @@ async function acquire(f,mutate,{merged=f.trusted,tree=f.git('rev-parse',f.trust
     'Checkout trusted geographic checker','Install trusted geographic dependencies','Check exact combined geography with trusted baseline code',
     'Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02'].map(name=>({name,status:'completed',conclusion:'success'}))};
   const api=async route=>{
+    if(route==='/repos/owner/repo/issues')return [];
     if(route.endsWith('/comments?per_page=100&page=1'))return [{id:11,user:{login:'github-actions[bot]'},body:renderWorkerResult('merge',receipt)}];
     if(route.endsWith('/pulls/7'))return {number:7,merged:true,head:{sha:head,repo:{full_name:'owner/repo'}},base:{ref:'main',repo:{full_name:'owner/repo'}},merge_commit_sha:merged};
     if(route.endsWith('/attempts/2'))return run;
