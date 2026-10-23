@@ -57,11 +57,15 @@ export function finalizationCheckpointBytes(config, reader, handle) {
 // with the same immutable outputs and exact preimage/postimage bytes.
 const identity = raw => raw === null ? undefined : ({bytes: raw.length, sha256: createHash('sha256').update(raw).digest('hex')});
 export function admitCanonicalOutputs(root, bindings, resume = false) {
-  const rows = bindings.map(({path: name, bytes, expected = identity(bytes), previous, allowMissing = false}) => {
+  const rows = bindings.map(({path: name, bytes, expected, previous, allowMissing = false, retained = false}) => {
+    if (!retained && expected === undefined) expected = identity(bytes);
     need(typeof name === 'string' && !path.isAbsolute(name)
       && name.split('/').every(part => part && part !== '.' && part !== '..'), 'Safe canonical output path required');
-    need((Buffer.isBuffer(bytes) || bytes === null && previous && Number.isSafeInteger(previous.bytes) && /^[a-f0-9]{64}$/.test(previous.sha256)) && same(identity(bytes), expected), 'Canonical output changed after finalization');
-    return {name, bytes, expected: expected && {...expected}, previous: previous && {...previous}, allowMissing};
+    if (retained) need(retained === true && bytes === undefined && expected
+      && Number.isSafeInteger(expected.bytes) && expected.bytes > 0 && /^[a-f0-9]{64}$/.test(expected.sha256)
+      && same(expected, previous), 'Complete unchanged canonical retention required');
+    else need((Buffer.isBuffer(bytes) || bytes === null && previous && Number.isSafeInteger(previous.bytes) && /^[a-f0-9]{64}$/.test(previous.sha256)) && same(identity(bytes), expected), 'Canonical output changed after finalization');
+    return {name, bytes, expected: expected && {...expected}, previous: previous && {...previous}, allowMissing, retained};
   });
   need(new Set(rows.map(row => row.name)).size === rows.length, 'Duplicate canonical output path');
   need(rows.every(row => rows.every(other => row === other || !row.name.startsWith(other.name + '/'))),
@@ -86,6 +90,9 @@ export function admitCanonicalOutputs(root, bindings, resume = false) {
   for (const row of rows) inspect(row);
   return () => {
     for (const row of rows) {
+      // Retained inputs are already bound to the accepted Git tree by the
+      // finalizer. Recheck any materialized bytes, but leave sparse holes alone.
+      if (row.retained) { inspect(row); continue; }
       need(same(identity(row.bytes), row.expected), 'Canonical output changed after finalization');
       if (same(inspect(row), row.expected)) continue;
       const filename = path.join(root, row.name), directory = path.dirname(filename);

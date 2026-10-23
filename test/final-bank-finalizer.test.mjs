@@ -5,6 +5,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
+import {fileURLToPath} from 'node:url';
 import {committedPackageInputs} from '../scripts/package-output-artifact.mjs';
 import {admitPackageInputTransition,preparedStartupPackageTransition} from '../scripts/package-inputs.mjs';
 import {trustedFixture,appendNativeAuthority,referenceCheckpointFixture} from './fixtures/selected-checkpoint.mjs';
@@ -195,4 +196,95 @@ test('final-bank reference-only authoring retains words and uses the existing co
  write('atlas-geography.json',{...atlas,referenceMetadata:{...referenceMetadata,asset:{...referenceMetadata.asset,sha256:'d'.repeat(64)}}});
  await assert.rejects(checkEmittedSelectedDelivery(options),/deep-equal|equal/);write('atlas-geography.json',atlas);
  f.api.releaseCheckpoint(next.candidate);f.api.releaseCheckpoint(original.state);
+});
+
+
+test('final-to-final preparation retains cold sparse compatibility bodies and exact resume without acquisition',async t=>{
+ const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit),at=f.commit();f.api.releaseCheckpoint(before.state);
+ const active=new Set([...migration.index.pixelMap.parts,...migration.index.preparedOwnership.context_parts].map(p=>p.path));
+ const fixed=migration.index.compatibility_files.find(p=>!active.has(p.path)&&p.path.endsWith('startup-runs-999.bin.gz'));assert(fixed);
+ const name=bank+fixed.path,oid=f.git('rev-parse',at+':'+name).toString().trim();
+ const object=path.join(f.root,'.git/objects',oid.slice(0,2),oid.slice(2)),held=object+'.test-held';
+ execFileSync('git',['sparse-checkout','set','--no-cone','--stdin'],{cwd:f.root,input:`/*\n!/${name}\n`,stdio:'pipe'});
+ assert(!fs.existsSync(path.join(f.root,name)));assert.equal(f.git('ls-files','-t','--',name).toString(),'S '+name+'\n');
+ assert(fs.statSync(object).isFile());fs.renameSync(object,held);
+ try {
+  const normal=pinReader(f.root,{execute(command,args,options){assert(!args.includes('fetch'),'Unchanged compatibility body must not be acquired');return execFileSync(command,args,options);}});
+  const read=normal.read,reader={...normal,read(pin){assert.notEqual(pin.path,name,'Unchanged compatibility body must not be read');return read(pin);}};
+  const outputs=finalizeDelivery({version:2,selector:{commit:at,path:'data/ownership-selection.json'},package_inputs:{commit:at,path:'.github/package-inputs.json'}},reader);
+  await prepareFinalizedStartupOwnership(outputs);
+  const destination='coordination/engineering/final-bank-test/cold-finalized';
+  publishFinalizedDelivery(f.root,destination,outputs,{phase:'finalize'});
+  publishFinalizedDelivery(f.root,destination,outputs,{phase:'finalize'},true);
+  assert.deepEqual(JSON.parse(outputs['startup-ownership.json']),migration.index);
+  assert(!fs.existsSync(path.join(f.root,name)),'Sparse compatibility path remains absent');
+  assert(!fs.existsSync(object),'Missing compatibility object remains absent');
+  assert.equal(f.git('rev-parse','HEAD:'+name).toString().trim(),oid,'Accepted ordinary Git identity is retained');
+  const configPath='coordination/engineering/final-bank-test/cold-config.json',cliDestination='coordination/engineering/final-bank-test/cold-cli-finalized';
+  f.save(configPath,{version:2,selector:{commit:at,path:'data/ownership-selection.json'},package_inputs:{commit:at,path:'.github/package-inputs.json'}});
+  const command=fileURLToPath(new URL('../scripts/prepare-delivery-handoff.mjs',import.meta.url));
+  for(const flags of [[],['--resume']]) execFileSync(process.execPath,[command,'finalize',configPath,cliDestination,...flags],
+   {cwd:f.root,env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_NO_REPLACE_OBJECTS:'1'},stdio:'pipe'});
+  assert(!fs.existsSync(object)&&!fs.existsSync(path.join(f.root,name)),'Actual CLI/resume leaves the same absent body unhydrated');
+  assert.deepEqual(JSON.parse(fs.readFileSync(path.join(f.root,cliDestination,'startup-ownership.json'))),migration.index);
+  const committed=f.commit();assert.equal(f.git('rev-parse',committed+':'+name).toString().trim(),oid,
+   'Normal git add -A and commit preserve the exact cold sparse member');
+ } finally {fs.renameSync(held,object);}
+});
+
+
+test('retained final compatibility keeps canonical preflight, committed identity and recheck guards',async t=>{
+ const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit),at=f.commit();f.api.releaseCheckpoint(before.state);
+ const fixed=migration.index.compatibility_files.find(p=>p.path.endsWith('startup-runs-999.bin.gz'));assert(fixed);
+ const name=bank+fixed.path,file=path.join(f.root,name),original=fs.readFileSync(file),reader=pinReader(f.root);
+ const outputs=finalizeDelivery({version:2,selector:{commit:at,path:'data/ownership-selection.json'},package_inputs:{commit:at,path:'.github/package-inputs.json'}},reader);
+ await prepareFinalizedStartupOwnership(outputs);
+ const destination='coordination/engineering/final-bank-test/retained-guards';
+ const publish=()=>publishFinalizedDelivery(f.root,destination,outputs,{phase:'finalize'});
+ for(const mutation of ['bytes','symlink','mode','directory','missing']){
+  if(mutation==='bytes')fs.writeFileSync(file,Buffer.from('edited compatibility'));
+  if(mutation==='symlink'){fs.unlinkSync(file);fs.symlinkSync('missing-sentinel',file);}
+  if(mutation==='mode')fs.chmodSync(file,0o755);
+  if(mutation==='directory'){fs.unlinkSync(file);fs.mkdirSync(file);}
+  if(mutation==='missing')fs.unlinkSync(file);
+  assert.throws(publish,/Canonical output changed outside|Nonordinary canonical output/);
+  assert(!fs.existsSync(path.join(f.root,destination)),'Refusal precedes staging');
+  if(mutation==='directory')fs.rmdirSync(file);else if(mutation!=='missing')fs.unlinkSync(file);
+  fs.writeFileSync(file,original,{mode:0o644});
+ }
+ f.git('update-index','--force-remove',name);
+ assert.throws(publish,/Indexed retained compatibility differs/);assert(!fs.existsSync(path.join(f.root,destination)));
+ f.git('add','--',name);
+ f.save(name,Buffer.from('different staged compatibility'));f.git('add','--',name);fs.writeFileSync(file,original);
+ assert.throws(publish,/Indexed retained compatibility differs/);assert(!fs.existsSync(path.join(f.root,destination)));
+ f.git('add','--',name);
+ f.save(name,Buffer.from('different committed compatibility'));f.commit();
+ assert.throws(publish,/Committed retained compatibility differs/);assert(!fs.existsSync(path.join(f.root,destination)));
+ f.save(name,original);f.commit();
+ assert.throws(()=>publishFinalizedDelivery(f.root,name+'/child',outputs,{}),/overlaps canonical/);
+ // Alter the index after preflight while staging occurs, without touching bytes.
+ const initialWrite=fs.writeFileSync,indexDestination=destination+'-index';let indexChanged=false;
+ fs.writeFileSync=function(filename,...args){const result=initialWrite.call(this,filename,...args);
+  if(!indexChanged&&typeof filename==='string'&&filename.includes(indexDestination)){indexChanged=true;f.git('update-index','--force-remove',name);}return result;};
+ try{assert.throws(()=>publishFinalizedDelivery(f.root,indexDestination,outputs,{phase:'finalize'}),/Indexed retained compatibility differs/);assert(indexChanged);}finally{fs.writeFileSync=initialWrite;f.git('add','--',name);}
+ assert.deepEqual(fs.readFileSync(file),original);
+ // Alter a retained input after the full-set preflight, while staging occurs.
+ const write=fs.writeFileSync;let changed=false;
+ fs.writeFileSync=function(filename,...args){const result=write.call(this,filename,...args);
+  if(!changed&&typeof filename==='string'&&filename.includes(destination)){changed=true;write(file,Buffer.from('changed during staging'));}return result;};
+ try{assert.throws(publish,/Canonical output changed outside/);assert(changed);}finally{fs.writeFileSync=write;}
+ assert.equal(fs.readFileSync(file).toString(),'changed during staging');fs.writeFileSync(file,original);
+ publishFinalizedDelivery(f.root,destination,outputs,{phase:'finalize'},true);
+ assert.deepEqual(fs.readFileSync(file),original,'Exact explicit resume preserves compatibility');
+});
+
+test('compatibility roles that also serve current E retain complete body acquisition',async t=>{
+ const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit);f.api.releaseCheckpoint(before.state);
+ const part=migration.index.pixelMap.parts.find(p=>!migration.index.compatibility_files.some(c=>c.path===p.path));assert(part);
+ const pin=migration.index.files.find(p=>p.path===part.path);migration.index.compatibility_files.push(pin);
+ const raw=Buffer.from(JSON.stringify(migration.index)),selection={...migration.selection,prepared_bank:{...migration.selection.prepared_bank,bytes:raw.length,sha256:createHash('sha256').update(raw).digest('hex')}};
+ f.save(bank+'index.json',raw);f.save('data/ownership-selection.json',selection);const at=f.commit(),normal=pinReader(f.root),acquire=normal.acquire;
+ const reader={...normal,async acquire(pins){if(pins.some(p=>p.path===bank+part.path))throw Error('required current-E member acquired');return acquire(pins);}};
+ const outputs=finalizeDelivery({version:2,selector:{commit:at,path:'data/ownership-selection.json'},package_inputs:{commit:at,path:'.github/package-inputs.json'}},reader);
+ await assert.rejects(prepareFinalizedStartupOwnership(outputs),/required current-E member acquired/);
 });

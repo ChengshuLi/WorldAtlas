@@ -1502,9 +1502,21 @@ export async function prepareFinalizedStartupOwnership(outputs) {
     need(safe(pin.path) && Number.isSafeInteger(pin.bytes) && pin.bytes > 0 && hex(pin.sha256, 64), 'Invalid prepared bank pin');
     return {...pin, path: prefix + pin.path, commit: plan.selector.commit, mode: '100644', git_blob_oid: tree.get(pin.path)};
   });
-  // The index supplies the entire exact consumed group, not a missing-file loop.
-  await reader.acquire(pins);
-  const originalBodies = new Map(pins.map(pin => [pin.path.slice(prefix.length), reader.read(pin)]));
+  // Final-to-final preparation consumes current E and context, not the fixed
+  // compatibility copies. Keep their complete accepted pins/tree identities; a
+  // role also used by current E must still be acquired and fully authenticated.
+  const retained = new Map();
+  if (plan.finalProfile && selection.version === 2) {
+    const current = new Set([...previous.pixelMap.parts, ...previous.preparedOwnership.context_parts].map(pin => pin.path));
+    need(Array.isArray(previous.compatibility_files), 'Complete compatibility roster required');
+    for (const pin of previous.compatibility_files) {
+      need(previous.files.some(old => same(old, pin)), 'Compatibility member differs from accepted index');
+      if (!current.has(pin.path)) retained.set(pin.path, pin);
+    }
+  }
+  const consumed = pins.filter(pin => !retained.has(pin.path.slice(prefix.length)));
+  await reader.acquire(consumed);
+  const originalBodies = new Map(consumed.map(pin => [pin.path.slice(prefix.length), reader.read(pin)]));
   const inputs = new Map(plan.adoption.map(row => [row.path, row.bytes]));
   const readPin = pin => {
     const body = inputs.get(pin.path);
@@ -1523,7 +1535,7 @@ export async function prepareFinalizedStartupOwnership(outputs) {
     const index = plan.finalProfile?await prepareProposedFinalBank({plan,selection,manifest,previous,originalIndex,originalBodies,readPin,destination:temporary}):await prepareSelectedStartupOwnership({selectionBytes: outputs['ownership-selection.json'], manifest,
       previous, destination: temporary,
       readNative: name => { need(originalBodies.has(name), 'Undeclared original native part'); return originalBodies.get(name); }, readPin});
-    const bodies = new Map(index.compatibility_files.map(pin => [pin.path, originalBodies.get(pin.path)]));
+    const bodies = new Map(index.compatibility_files.filter(pin => !retained.has(pin.path)).map(pin => [pin.path, originalBodies.get(pin.path)]));
     const collect = (directory, relative = '') => {
       for (const entry of fs.readdirSync(directory, {withFileTypes: true})) {
         const name = relative + entry.name, full = path.join(directory, entry.name);
@@ -1536,8 +1548,15 @@ export async function prepareFinalizedStartupOwnership(outputs) {
       }
     };
     collect(temporary);
-    index.files = [...bodies].map(([name, bytes]) => ({path: name, ...visitProduct(bytes)})).sort((a, b) => a.path.localeCompare(b.path));
+    need([...retained.keys()].every(name => !bodies.has(name)), 'Generated output overlaps retained compatibility');
+    index.files = [...retained.values(), ...[...bodies].map(([name, bytes]) => ({path: name, ...visitProduct(bytes)}))].sort((a, b) => a.path.localeCompare(b.path));
     const indexBytes = jsonBytes(index), adoption = new Map(plan.adoption.map(row => [row.path, row]));
+    for (const [name, pin] of retained) {
+      const expected = {bytes: pin.bytes, sha256: pin.sha256};
+      need(!adoption.has(prefix + name), 'Conflicting retained compatibility role');
+      adoption.set(prefix + name, {path: prefix + name, expected, previous: expected,
+        git_blob_oid: tree.get(name), kind: 'input', retained: true});
+    }
     for (const [name, bytes] of originalBodies) if (!bodies.has(name)) {
       need([2,3].includes(previous.version) && [...previous.pixelMap.parts, ...previous.preparedOwnership.context_parts].some(pin => pin.path === name),
         'Only inactive prior final-bank operands may retire');
@@ -1575,7 +1594,22 @@ export function publishFinalizedDelivery(root, destination, outputs, binding, re
     'Authenticated complete finalization outputs required');
   need(!plan.startupRequired || plan.startupPrepared, 'Native finalization requires the finished startup bank before publication');
   const reader = plan.reader, head = reader.git('rev-parse', 'HEAD').toString().trim();
+  const retainedSparse = row => {
+    const entry = reader.git('ls-files', '--stage', '-t', '-z', '--', row.path).toString();
+    const identity = `100644 ${row.git_blob_oid} 0\t${row.path}\0`;
+    need(entry === 'H ' + identity || entry === 'S ' + identity,
+      'Indexed retained compatibility differs: ' + row.path);
+    return entry === 'S ' + identity;
+  };
   const rows = plan.adoption.map(row => {
+    if (row.retained) {
+      // No cat-file sizing/read: an unchanged accepted ordinary tree entry is
+      // and index entry preserve this unconsumed body. Only a real sparse
+      // omission may remain absent; ordinary/staged deletions must not survive.
+      need(reader.git('ls-tree', '-z', head, '--', row.path).toString()
+        === `100644 blob ${row.git_blob_oid}\t${row.path}\0`, 'Committed retained compatibility differs: ' + row.path);
+      return {...row, allowMissing: retainedSparse(row)};
+    }
     const current = reader.hasPath(head, row.path) ? visitProduct(reader.read(reader.pin(head, row.path))) : undefined;
     need(row.kind === 'canonical' || row.kind === 'retired'
       ? same(current, row.previous) || same(current, row.expected)
@@ -1590,6 +1624,8 @@ export function publishFinalizedDelivery(root, destination, outputs, binding, re
   const publication = publish(root, destination, outputs,
     {...binding, selector: plan.selector, package_inputs: plan.package_inputs}, resume);
   need(reader.git('rev-parse', 'HEAD').toString().trim() === head, 'Finalization HEAD changed before adoption');
+  for (const row of rows.filter(row => row.retained)) need(retainedSparse(row) === row.allowMissing,
+    'Retained compatibility index changed before adoption: ' + row.path);
   adopt();
   return publication;
 }

@@ -42,8 +42,17 @@ its complete new projection pin may be supplied as `reference_projection` withou
 new cell authorities. Original N/source-contract changes require their genuine
 separate path, not an append exemption.
 
-Preparation reads the accepted final bank, applies only the proposed new intervals
-and emits the complete final bank/context. The ordinary joint consumer separately
+Preparation reads the accepted current-E words and finished context, applies only
+the proposed new intervals and emits their complete next bank/context. Unchanged
+compatibility-only members keep their complete accepted index pins and ordinary
+Git tree and index identities; only genuine sparse copies may remain absent
+instead of being fetched and rewritten. Any materialized compatibility file must
+still match its exact accepted bytes. Committed or staged changes, ordinary
+deletions, links and nonordinary files refuse before adoption. A member also used by current E is always consumed and authenticated.
+This avoids compatibility hydration, not the complete current-E/context read and
+whole-stream/footprint hash recomputation. A small key change is not a bounded-row
+finalization, and later complete packaging still requires its actual declared
+inputs. The ordinary joint consumer separately
 qualifies new evidence and exhaustively checks all changed and unchanged cells
 and context. It retains canonical prior authority identity/full-entry digest
 pairs without reacquiring their old bodies. No public preparation result is a
