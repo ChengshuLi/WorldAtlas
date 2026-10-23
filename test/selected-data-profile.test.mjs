@@ -1876,6 +1876,20 @@ for(const retainedCode of [false,true])test('selected routing uses actual merged
   assert.equal((await prepareIntegration(f.options)).test_selection,undefined,'actual candidate smoke drift still selects full CI');
 });
 
+test('explicit auto retains the authenticated selected route but refuses drift instead of falling back to complete',async()=>{
+  const f=mergeFixture();
+  const automatic=await prepareIntegration({...f.options,reviewedTests:'auto'});
+  assert.equal(automatic.test_selection,'selected-data');assert.equal(automatic.profile,'full');
+  assert.equal(automatic.geography_required,true);assert.equal(automatic.geography_software,false);
+  assert.equal((await f.complete({reviewedTests:'auto'})).accepted,true);
+  await assert.rejects(f.complete({reviewedTests:'auto',integrationResult:'failure'}),/Integration tests/);
+  const complete=await prepareIntegration({...f.options,reviewedTests:'complete'});
+  assert.equal(complete.test_selection,'complete');assert.deepEqual(complete.shards,[0,1,2]);
+  f.authored.entries.set(SELECTED_SMOKE,{...f.authored.entries.get(SELECTED_SMOKE),sha:'0'.repeat(40)});
+  await assert.rejects(prepareIntegration({...f.options,reviewedTests:'auto'}),/Automatic test scope is unavailable/);
+  assert.equal((await prepareIntegration(f.options)).test_selection,undefined,'Legacy queued omission retains full fallback');
+});
+
 
 test('selected-data closes canonical seam view and method bodies without arbitrary provenance walking',async()=>{
   const setup=({f,roles})=>{
