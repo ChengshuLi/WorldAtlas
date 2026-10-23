@@ -1,0 +1,638 @@
+{
+  "kind": "mda_residual_source_family_spatial_followup",
+  "date": "2026-10-23",
+  "status": "research evidence only; no owner, hold, qualification, repair, or acceptance change",
+  "scope": {
+    "original_cells": 1986,
+    "original_intervals": 539,
+    "owners": 16,
+    "pending_cells": 133,
+    "groups": {
+      "MDA_full_upstream_nonmatch_only": 65,
+      "MDA_full_upstream_match_plus_UKR_contact": 46,
+      "MDA_full_upstream_nonmatch_plus_UKR_contact": 22
+    }
+  },
+  "inputs": [
+    {
+      "role": "consumed simplified MDA source",
+      "path": "inventory/mda-research-handoff/unpacked/retained/gb-MDA-ADM1-000.bin",
+      "bytes": 317753,
+      "sha256": "b9f85b5b94d053cd3fc7f60d9823ec2ba9cd37b780f4935a778203d67cb5f523",
+      "features": 37
+    },
+    {
+      "role": "archived full upstream MDA source",
+      "path": "inventory/mda-research-handoff/unpacked/primary/source-archive/upstream-mda-37.geojson",
+      "bytes": 525940,
+      "sha256": "ca7378f66c2a635e2a0ceccf58cfa711c6390bebb13ee656efa5d72c4dda45de",
+      "features": 37
+    },
+    {
+      "role": "complete full-source UKR ADM1",
+      "path": "inventory/mda-research-handoff/unpacked/retained/gb-UKR-ADM1-000.bin",
+      "bytes": 761290,
+      "sha256": "4a5947e7497574d51f93255dfa7e03dce0c7acf6ecee52d25773a5205854a399",
+      "features": 27
+    },
+    {
+      "role": "exact 65-key held class",
+      "path": "inventory/mda-research-handoff/unpacked/keys-upstream-nonmatch-MDA-only.json",
+      "bytes": 10890,
+      "sha256": "f65d6a3277a4ad1233c28f7097bdcbb85638674fc9ca52dc3597c3143c2e7e91"
+    },
+    {
+      "role": "original UKR-contact groups",
+      "paths": [
+        "inventory/mda-research-handoff/unpacked/keys-upstream-matched-UKR-contact.json",
+        "inventory/mda-research-handoff/unpacked/keys-upstream-nonmatch-UKR-contact.json"
+      ],
+      "keys": 68
+    },
+    {
+      "role": "comparison method output",
+      "path": "inventory/mda-research-handoff/unpacked/source-version-key-comparison.json",
+      "bytes": 1562022,
+      "sha256": "c0c345116ac2b48991cd2c4b1c10ba605f4199ee13def0752fcca2aec241981b"
+    },
+    {
+      "role": "original source scanner",
+      "path": "inventory/mda-research-handoff/unpacked/code/native-grid.mjs",
+      "sha256": "3d20777f5896d28192e40428dd34cab89d47873a08bf073a17338c4ff97d43cd"
+    },
+    {
+      "role": "native exact row latitude table, decompressed",
+      "sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+    }
+  ],
+  "mda_65_comparison": {
+    "exact_result": "all 65 exact original cell centers uniquely hit their same-named/ISO MDA feature in consumed simplified source and hit no feature in the archived full upstream source; no ties. This verifies the existing complete-family native comparison, not new qualification.",
+    "distance_method": "For each of the 65 original center coordinates, nearest ring-segment distance to its same-named source feature boundary in each pinned MDA source, calculated in a local equirectangular tangent plane (111195.0802335 m per degree; longitude scaled by cos(latitude)). Distances are diagnostic approximations, not positional accuracy or a legal boundary measure.",
+    "simplified_boundary_inside_depth_m": {
+      "count": 65,
+      "min_m": 0.128,
+      "median_m": 11.553,
+      "p90_m": 40.728,
+      "max_m": 69.062,
+      "within_2m": 7,
+      "within_5m": 19,
+      "within_10m": 27,
+      "within_20m": 43
+    },
+    "full_boundary_outside_depth_m": {
+      "count": 65,
+      "min_m": 0.045,
+      "median_m": 17.626,
+      "p90_m": 38.93,
+      "max_m": 60.59,
+      "within_2m": 6,
+      "within_5m": 13,
+      "within_10m": 22,
+      "within_20m": 37
+    },
+    "per_key_diagnostics": [
+      {
+        "x": 150838,
+        "y": 91116,
+        "target": "Edinet",
+        "interval_ordinal": 35,
+        "simplified_boundary_distance_m": 0.722273301529257,
+        "full_boundary_distance_m": 15.476203255498516
+      },
+      {
+        "x": 150847,
+        "y": 91141,
+        "target": "Edinet",
+        "interval_ordinal": 37,
+        "simplified_boundary_distance_m": 1.571498901108108,
+        "full_boundary_distance_m": 14.377334628729267
+      },
+      {
+        "x": 152236,
+        "y": 91193,
+        "target": "Transnistria",
+        "interval_ordinal": 40,
+        "simplified_boundary_distance_m": 1.771696984339539,
+        "full_boundary_distance_m": 18.88510892303577
+      },
+      {
+        "x": 152226,
+        "y": 91194,
+        "target": "Transnistria",
+        "interval_ordinal": 41,
+        "simplified_boundary_distance_m": 5.175884645589989,
+        "full_boundary_distance_m": 29.13343092025075
+      },
+      {
+        "x": 152889,
+        "y": 92678,
+        "target": "Transnistria",
+        "interval_ordinal": 157,
+        "simplified_boundary_distance_m": 40.7264859446904,
+        "full_boundary_distance_m": 41.409105766854175
+      },
+      {
+        "x": 152891,
+        "y": 92679,
+        "target": "Transnistria",
+        "interval_ordinal": 158,
+        "simplified_boundary_distance_m": 14.5850502298616,
+        "full_boundary_distance_m": 5.349289661673707
+      },
+      {
+        "x": 151634,
+        "y": 92705,
+        "target": "Leova",
+        "interval_ordinal": 165,
+        "simplified_boundary_distance_m": 0.12811223118953424,
+        "full_boundary_distance_m": 9.461320836154131
+      },
+      {
+        "x": 152874,
+        "y": 92735,
+        "target": "Stefan Voda",
+        "interval_ordinal": 184,
+        "simplified_boundary_distance_m": 14.303348141416183,
+        "full_boundary_distance_m": 0.5674183511790312
+      },
+      {
+        "x": 152874,
+        "y": 92738,
+        "target": "Stefan Voda",
+        "interval_ordinal": 193,
+        "simplified_boundary_distance_m": 7.414158568882918,
+        "full_boundary_distance_m": 13.807564316565713
+      },
+      {
+        "x": 152875,
+        "y": 92739,
+        "target": "Stefan Voda",
+        "interval_ordinal": 197,
+        "simplified_boundary_distance_m": 4.099580623291235,
+        "full_boundary_distance_m": 9.18822875804761
+      },
+      {
+        "x": 152878,
+        "y": 92740,
+        "target": "Stefan Voda",
+        "interval_ordinal": 201,
+        "simplified_boundary_distance_m": 2.0863638420395976,
+        "full_boundary_distance_m": 18.282261155538606
+      },
+      {
+        "x": 152897,
+        "y": 92741,
+        "target": "Stefan Voda",
+        "interval_ordinal": 208,
+        "simplified_boundary_distance_m": 2.178702208035273,
+        "full_boundary_distance_m": 20.733983890978607
+      },
+      {
+        "x": 152900,
+        "y": 92742,
+        "target": "Stefan Voda",
+        "interval_ordinal": 213,
+        "simplified_boundary_distance_m": 32.21751074206414,
+        "full_boundary_distance_m": 24.218491311882254
+      },
+      {
+        "x": 152917,
+        "y": 92743,
+        "target": "Stefan Voda",
+        "interval_ordinal": 219,
+        "simplified_boundary_distance_m": 3.61462002371194,
+        "full_boundary_distance_m": 4.620342238771338
+      },
+      {
+        "x": 152899,
+        "y": 92744,
+        "target": "Stefan Voda",
+        "interval_ordinal": 222,
+        "simplified_boundary_distance_m": 19.435234529249378,
+        "full_boundary_distance_m": 43.89753591369146
+      },
+      {
+        "x": 152921,
+        "y": 92745,
+        "target": "Stefan Voda",
+        "interval_ordinal": 228,
+        "simplified_boundary_distance_m": 44.44974047281653,
+        "full_boundary_distance_m": 2.5897979760592955
+      },
+      {
+        "x": 152882,
+        "y": 92746,
+        "target": "Stefan Voda",
+        "interval_ordinal": 230,
+        "simplified_boundary_distance_m": 26.093866316415326,
+        "full_boundary_distance_m": 8.486383347632623
+      },
+      {
+        "x": 152892,
+        "y": 92746,
+        "target": "Stefan Voda",
+        "interval_ordinal": 231,
+        "simplified_boundary_distance_m": 26.61934385896005,
+        "full_boundary_distance_m": 14.744514507554399
+      },
+      {
+        "x": 152898,
+        "y": 92746,
+        "target": "Stefan Voda",
+        "interval_ordinal": 231,
+        "simplified_boundary_distance_m": 6.648667906035176,
+        "full_boundary_distance_m": 37.07011046642572
+      },
+      {
+        "x": 152920,
+        "y": 92747,
+        "target": "Stefan Voda",
+        "interval_ordinal": 238,
+        "simplified_boundary_distance_m": 47.91472766131701,
+        "full_boundary_distance_m": 0.2334115154240928
+      },
+      {
+        "x": 152883,
+        "y": 92748,
+        "target": "Stefan Voda",
+        "interval_ordinal": 241,
+        "simplified_boundary_distance_m": 10.441751312356283,
+        "full_boundary_distance_m": 10.92645106296424
+      },
+      {
+        "x": 152887,
+        "y": 92748,
+        "target": "Stefan Voda",
+        "interval_ordinal": 242,
+        "simplified_boundary_distance_m": 11.553480319578275,
+        "full_boundary_distance_m": 17.486788481093132
+      },
+      {
+        "x": 152444,
+        "y": 92750,
+        "target": "Causeni",
+        "interval_ordinal": 248,
+        "simplified_boundary_distance_m": 12.535335941807716,
+        "full_boundary_distance_m": 0.04462669453772137
+      },
+      {
+        "x": 152902,
+        "y": 92751,
+        "target": "Stefan Voda",
+        "interval_ordinal": 253,
+        "simplified_boundary_distance_m": 0.7984791368004748,
+        "full_boundary_distance_m": 22.3683677472173
+      },
+      {
+        "x": 152926,
+        "y": 92751,
+        "target": "Stefan Voda",
+        "interval_ordinal": 254,
+        "simplified_boundary_distance_m": 10.750183769152569,
+        "full_boundary_distance_m": 16.32635276999476
+      },
+      {
+        "x": 152925,
+        "y": 92752,
+        "target": "Stefan Voda",
+        "interval_ordinal": 256,
+        "simplified_boundary_distance_m": 25.889708972285693,
+        "full_boundary_distance_m": 26.33738868479616
+      },
+      {
+        "x": 152445,
+        "y": 92753,
+        "target": "Causeni",
+        "interval_ordinal": 258,
+        "simplified_boundary_distance_m": 7.935640405509883,
+        "full_boundary_distance_m": 1.151755085962494
+      },
+      {
+        "x": 152924,
+        "y": 92753,
+        "target": "Stefan Voda",
+        "interval_ordinal": 259,
+        "simplified_boundary_distance_m": 41.02839685050678,
+        "full_boundary_distance_m": 21.61732371953748
+      },
+      {
+        "x": 152923,
+        "y": 92754,
+        "target": "Stefan Voda",
+        "interval_ordinal": 261,
+        "simplified_boundary_distance_m": 56.16624735777898,
+        "full_boundary_distance_m": 4.146822885733753
+      },
+      {
+        "x": 152446,
+        "y": 92756,
+        "target": "Causeni",
+        "interval_ordinal": 264,
+        "simplified_boundary_distance_m": 3.3404935868552212,
+        "full_boundary_distance_m": 2.283683486159954
+      },
+      {
+        "x": 152926,
+        "y": 92770,
+        "target": "Stefan Voda",
+        "interval_ordinal": 273,
+        "simplified_boundary_distance_m": 25.41380757500269,
+        "full_boundary_distance_m": 5.555775187995707
+      },
+      {
+        "x": 152927,
+        "y": 92771,
+        "target": "Stefan Voda",
+        "interval_ordinal": 274,
+        "simplified_boundary_distance_m": 40.97753727936259,
+        "full_boundary_distance_m": 4.761693857873279
+      },
+      {
+        "x": 152960,
+        "y": 92802,
+        "target": "Stefan Voda",
+        "interval_ordinal": 336,
+        "simplified_boundary_distance_m": 3.499577859787037,
+        "full_boundary_distance_m": 18.014919818179862
+      },
+      {
+        "x": 152946,
+        "y": 92803,
+        "target": "Stefan Voda",
+        "interval_ordinal": 337,
+        "simplified_boundary_distance_m": 3.916931427628216,
+        "full_boundary_distance_m": 4.458536057740366
+      },
+      {
+        "x": 152948,
+        "y": 92803,
+        "target": "Stefan Voda",
+        "interval_ordinal": 338,
+        "simplified_boundary_distance_m": 3.080302289241534,
+        "full_boundary_distance_m": 32.545215852748214
+      },
+      {
+        "x": 152949,
+        "y": 92803,
+        "target": "Stefan Voda",
+        "interval_ordinal": 338,
+        "simplified_boundary_distance_m": 11.85275122396657,
+        "full_boundary_distance_m": 32.302909968182156
+      },
+      {
+        "x": 153001,
+        "y": 92815,
+        "target": "Stefan Voda",
+        "interval_ordinal": 366,
+        "simplified_boundary_distance_m": 40.7284251540798,
+        "full_boundary_distance_m": 23.361123992565503
+      },
+      {
+        "x": 153001,
+        "y": 92816,
+        "target": "Stefan Voda",
+        "interval_ordinal": 369,
+        "simplified_boundary_distance_m": 32.98652209366535,
+        "full_boundary_distance_m": 45.277989707752226
+      },
+      {
+        "x": 153005,
+        "y": 92816,
+        "target": "Stefan Voda",
+        "interval_ordinal": 369,
+        "simplified_boundary_distance_m": 27.113683906563526,
+        "full_boundary_distance_m": 6.006096182296239
+      },
+      {
+        "x": 153001,
+        "y": 92817,
+        "target": "Stefan Voda",
+        "interval_ordinal": 372,
+        "simplified_boundary_distance_m": 25.24421714972232,
+        "full_boundary_distance_m": 48.219970838686685
+      },
+      {
+        "x": 153001,
+        "y": 92818,
+        "target": "Stefan Voda",
+        "interval_ordinal": 377,
+        "simplified_boundary_distance_m": 17.501510314561333,
+        "full_boundary_distance_m": 30.34142554420134
+      },
+      {
+        "x": 152996,
+        "y": 92819,
+        "target": "Stefan Voda",
+        "interval_ordinal": 381,
+        "simplified_boundary_distance_m": 21.158040194955714,
+        "full_boundary_distance_m": 22.728230330501283
+      },
+      {
+        "x": 153022,
+        "y": 92823,
+        "target": "Stefan Voda",
+        "interval_ordinal": 392,
+        "simplified_boundary_distance_m": 23.913089521143885,
+        "full_boundary_distance_m": 0.714738043558809
+      },
+      {
+        "x": 153023,
+        "y": 92824,
+        "target": "Stefan Voda",
+        "interval_ordinal": 394,
+        "simplified_boundary_distance_m": 18.465904616515903,
+        "full_boundary_distance_m": 18.001051460759587
+      },
+      {
+        "x": 153024,
+        "y": 92825,
+        "target": "Stefan Voda",
+        "interval_ordinal": 396,
+        "simplified_boundary_distance_m": 13.01986229035343,
+        "full_boundary_distance_m": 30.45926739459576
+      },
+      {
+        "x": 153025,
+        "y": 92826,
+        "target": "Stefan Voda",
+        "interval_ordinal": 398,
+        "simplified_boundary_distance_m": 7.574962583000793,
+        "full_boundary_distance_m": 32.35243477494231
+      },
+      {
+        "x": 153026,
+        "y": 92827,
+        "target": "Stefan Voda",
+        "interval_ordinal": 400,
+        "simplified_boundary_distance_m": 2.1312055310538027,
+        "full_boundary_distance_m": 25.400587955449424
+      },
+      {
+        "x": 151624,
+        "y": 92891,
+        "target": "Cantemir",
+        "interval_ordinal": 436,
+        "simplified_boundary_distance_m": 29.752769689779072,
+        "full_boundary_distance_m": 28.835159879495347
+      },
+      {
+        "x": 151622,
+        "y": 92892,
+        "target": "Cantemir",
+        "interval_ordinal": 437,
+        "simplified_boundary_distance_m": 16.8415003730928,
+        "full_boundary_distance_m": 60.59017283272734
+      },
+      {
+        "x": 151623,
+        "y": 92892,
+        "target": "Cantemir",
+        "interval_ordinal": 437,
+        "simplified_boundary_distance_m": 69.06232369712846,
+        "full_boundary_distance_m": 1.1910344834929094
+      },
+      {
+        "x": 151620,
+        "y": 92893,
+        "target": "Cantemir",
+        "interval_ordinal": 438,
+        "simplified_boundary_distance_m": 3.9317085601823374,
+        "full_boundary_distance_m": 22.305518609602483
+      },
+      {
+        "x": 151611,
+        "y": 92900,
+        "target": "Cantemir",
+        "interval_ordinal": 445,
+        "simplified_boundary_distance_m": 36.21699283839451,
+        "full_boundary_distance_m": 11.60822992493079
+      },
+      {
+        "x": 151612,
+        "y": 92900,
+        "target": "Cantemir",
+        "interval_ordinal": 445,
+        "simplified_boundary_distance_m": 10.017158610921566,
+        "full_boundary_distance_m": 44.31435340498717
+      },
+      {
+        "x": 151622,
+        "y": 92931,
+        "target": "Cantemir",
+        "interval_ordinal": 450,
+        "simplified_boundary_distance_m": 2.753852855651013,
+        "full_boundary_distance_m": 16.0899705066174
+      },
+      {
+        "x": 151600,
+        "y": 92964,
+        "target": "Cantemir",
+        "interval_ordinal": 463,
+        "simplified_boundary_distance_m": 7.5903919321707205,
+        "full_boundary_distance_m": 7.600627069870147
+      },
+      {
+        "x": 151601,
+        "y": 92965,
+        "target": "Cantemir",
+        "interval_ordinal": 465,
+        "simplified_boundary_distance_m": 8.870807304573843,
+        "full_boundary_distance_m": 17.626252235564973
+      },
+      {
+        "x": 151602,
+        "y": 92966,
+        "target": "Cantemir",
+        "interval_ordinal": 467,
+        "simplified_boundary_distance_m": 10.152548036383706,
+        "full_boundary_distance_m": 27.65087160002287
+      },
+      {
+        "x": 151603,
+        "y": 92967,
+        "target": "Cantemir",
+        "interval_ordinal": 469,
+        "simplified_boundary_distance_m": 11.435614158544201,
+        "full_boundary_distance_m": 37.674485123237886
+      },
+      {
+        "x": 151604,
+        "y": 92968,
+        "target": "Cantemir",
+        "interval_ordinal": 471,
+        "simplified_boundary_distance_m": 12.72000570884434,
+        "full_boundary_distance_m": 11.591534220004293
+      },
+      {
+        "x": 151592,
+        "y": 92972,
+        "target": "Cantemir",
+        "interval_ordinal": 477,
+        "simplified_boundary_distance_m": 39.26954248424796,
+        "full_boundary_distance_m": 7.1965134822213805
+      },
+      {
+        "x": 151543,
+        "y": 93252,
+        "target": "Cahul",
+        "interval_ordinal": 480,
+        "simplified_boundary_distance_m": 0.3452955822625917,
+        "full_boundary_distance_m": 9.51808241973667
+      },
+      {
+        "x": 151866,
+        "y": 93546,
+        "target": "Cahul",
+        "interval_ordinal": 514,
+        "simplified_boundary_distance_m": 32.486679440288526,
+        "full_boundary_distance_m": 25.35419761737002
+      },
+      {
+        "x": 151867,
+        "y": 93546,
+        "target": "Cahul",
+        "interval_ordinal": 514,
+        "simplified_boundary_distance_m": 9.251085168395543,
+        "full_boundary_distance_m": 38.930306877800895
+      },
+      {
+        "x": 151862,
+        "y": 93675,
+        "target": "Cahul",
+        "interval_ordinal": 521,
+        "simplified_boundary_distance_m": 0.5974555193752165,
+        "full_boundary_distance_m": 23.475832764358046
+      },
+      {
+        "x": 151653,
+        "y": 93784,
+        "target": "Cahul",
+        "interval_ordinal": 527,
+        "simplified_boundary_distance_m": 3.507105801206731,
+        "full_boundary_distance_m": 4.976690948897431
+      }
+    ],
+    "interpretation": "The memberships differ in a near-boundary band (all nearest offsets <=69.063 m on consumed simplified and <=60.591 m on archived full), with medians 11.553 m and 17.627 m respectively. The original archive metadata identifies UNHCR and OCHA FISS sources and 2020 representative year, with a 2019 shapefile processing date; it gives no quantitative positional accuracy/scale. Therefore distances do not establish which version is more accurate or justify a blanket class disposition. The 2020 source package is the consumed simplified family; archived full is its source input, not independent survey/cadastral corroboration."
+  },
+  "ukr_68_check": {
+    "method": "Exact original center coordinates from the two retained UKR-contact key groups were tested by point-in-polygon against every feature of the complete 27-feature retained full-source UKR ADM1 GeoJSON, using standard ring crossing with hole exclusion; grid coordinates use the pinned row latitude table and x-center formula.",
+    "result": {
+      "keys_tested": 68,
+      "unique_centers": 68,
+      "full_source_hits": 68,
+      "misses": 0,
+      "multi_feature_hits": 0,
+      "hit_feature_counts": {
+        "Vinnytsia Oblast": 6,
+        "Odessa Oblast": 62
+      }
+    },
+    "interpretation": "All 68 simplified-source UKR contacts persist in the complete full UKR source (62 Odessa, 6 Vinnytsia). Thus they are not eliminated by replacing the simplified UKR source with its retained full family. The independent source contact is real within those retained representations, but this is not legal/title adjudication and does not alone determine which MDA source membership controls. The 46/22 split remains: 46 also match the full MDA target; 22 do not."
+  },
+  "limits": [
+    "No new whole-world/native/owner/physical observer or constructor was run.",
+    "No modern registry/cadastral geometry was treated as the consumed 2020 MDA/UKR source; no exact 2020 capture date or positional-accuracy statement is present in the cited archive metadata.",
+    "No raw geometry is redistributed in this report.",
+    "No cells were qualified, repaired, released, or accepted; all 133 remain pending and existing native holds remain unchanged."
+  ]
+}
