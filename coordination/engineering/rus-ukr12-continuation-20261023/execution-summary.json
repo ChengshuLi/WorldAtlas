@@ -9,7 +9,7 @@
   "constructor_qualified": 7,
   "separate_adverse_keys": 5,
   "root_credit_requested": false,
-  "current_owner_zero_established": false,
+  "current_owner_zero_established": true,
   "selected_final_bank_changed": false,
   "physical_producer_repeated": false,
   "owner_observation_repeated": false,
@@ -22,10 +22,14 @@
     "retry_result": "qualified_cells=7"
   },
   "remaining": [
-    "Independent actual-output review",
-    "Exact current final-bank ownership binding",
     "Version-2 new-evidence composition and finalization",
-    "One independent exact-public-head review and sole normal delivery",
+    "Independent exact-public-head review",
+    "One normal stock delivery",
     "Root scientific acceptance remains separate"
-  ]
+  ],
+  "independent_review": {
+    "path": "coordination/engineering/rus-ukr12-continuation-20261023/seven-key-independent-review-20261023.json",
+    "sha256": "a1c55bb713a633b4157937031eb2631e3fac5b57e9184f7898f2c61299359e03",
+    "result": "all 12 pending keys effective_selected_owner=0; historical fields remain null; report scientific_qualification=false"
+  }
 }
