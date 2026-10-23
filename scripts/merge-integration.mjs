@@ -265,7 +265,7 @@ export function reviewedTestPlan(request, {base, head, entries, files, definitio
   for (const name of inputs) need(ordinary(name,entries.get(name)), 'Current executing authority input is unavailable: '+name);
   const fixtures=[...entries].filter(([name,row])=>name.startsWith('test/fixtures/')&&row.type!=='tree');
   need(fixtures.length>0&&fixtures.every(([name,row])=>ordinary(name,row)), 'Self-contained fixture boundary is missing or nonordinary');
-  return {files:tests, inputs, build,
+  return {request:{base, head, files:tests}, files:tests, inputs, build,
     // Full-profile consumers can read historical fixtures outside package roles.
     checkout_patterns:build ? fullCheckoutPatterns(definition) : focusedCheckoutPatterns(definition, inputs)};
 }

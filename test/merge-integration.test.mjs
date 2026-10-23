@@ -238,13 +238,16 @@ test('default mixed changes retain broad routing and missing packet consumers ca
 
 test('reviewed tests bind both trusted phases without changing actual geography obligations', async () => {
   const f=controlFixture({withContractBoundary:true}), files=['test/example.test.mjs'];
-  const request={base:f.base,head:f.head,files,inputs:[]};
-  const prepared=await prepareIntegration({...f.options(),reviewedTests:JSON.stringify(request)});
+  const context={base:f.base,head:f.head,entries:new Map(f.integrated.map(row=>[row.path,row])),files:[],definition:f.packageInputs};
+  const request=reviewedTestPlan({base:f.base,head:f.head,files},context).request;
+  const serialized=JSON.stringify(request);
+  assert.deepEqual(reviewedTestPlan(serialized,context).request,request);
+  const prepared=await prepareIntegration({...f.options(),reviewedTests:serialized});
   assert.equal(prepared.profile,'evidence');assert.equal(prepared.test_selection,'reviewed');
   assert.deepEqual(prepared.test_files,files);assert.deepEqual(prepared.shards,[0]);
   assert.equal(prepared.geography_required,false);
   assert.deepEqual(prepared.checkout_patterns,focusedCheckoutPatterns(f.packageInputs,[...EXECUTION_CODE]));
-  assert.equal((await f.complete({reviewedTests:request,geographyResult:'skipped'})).accepted,true);
+  assert.equal((await f.complete({reviewedTests:serialized,geographyResult:'skipped'})).accepted,true);
   for(const changed of [{base:sha('0')},{head:sha('0')},{head:undefined}]) {
     const stale={...request,...changed};
     await assert.rejects(prepareIntegration({...f.options(),reviewedTests:stale}),/stale|binding/);
@@ -264,6 +267,12 @@ test('reviewed tests derive the complete fixture and executing-policy boundary w
   const context={base:plan.base,head:plan.head,entries,files:[],definition:loadPackageInputs()};
   const result=reviewedTestPlan(plan,context);
   assert.deepEqual(result.files,plan.files);assert.deepEqual(result.inputs,[...EXECUTION_CODE]);assert.equal(result.build,false);
+  assert.deepEqual(result.request,{base:plan.base,head:plan.head,files:plan.files});
+  assert.deepEqual(reviewedTestPlan(JSON.stringify(result.request),context),result);
+  assert.deepEqual(reviewedTestPlan({...plan,files:[...plan.files,...plan.files]},context).request,result.request,'Request uses the normalized reviewed roster');
+  assert.throws(()=>reviewedTestPlan(JSON.stringify(result.files),context),/stale|binding/,'A bare suite list is not a bound dispatch argument');
+  for(const changed of [{base:sha('c')},{head:sha('c')}])
+    assert.throws(()=>reviewedTestPlan(JSON.stringify(result.request),{...context,...changed}),/stale|binding/);
   assert.deepEqual(reviewedTestPlan({...plan,inputs:undefined},context),result);
   assert.deepEqual(reviewedTestPlan({...plan,inputs:result.inputs},context),result,'Derived compatibility envelope works unchanged');
   for(const files of [[],['test/missing.test.mjs'],['../escape.test.mjs'],['test/../escape.test.mjs'],[null]])
@@ -280,7 +289,7 @@ test('reviewed tests derive the complete fixture and executing-policy boundary w
   assert.throws(()=>reviewedTestPlan(plan,{...context,entries:omitted}),/unavailable/);
   const noFixtures=new Map(entries);noFixtures.delete('test/fixtures/contract/input.json');
   assert.throws(()=>reviewedTestPlan(plan,{...context,entries:noFixtures}),/fixture boundary/);
-  assert.equal(reviewedTestPlan(undefined,context),null);
+  for(const absent of [undefined,null,'']) assert.equal(reviewedTestPlan(absent,context),null);
 });
 
 
@@ -441,6 +450,8 @@ test('reviewed lists cannot omit actual packaged consumers when package source c
     const context={base:f.base,head:f.head,entries,files:[changed],definition:f.packageInputs};
     const plan=reviewedTestPlan(request,context);
     assert.equal(plan.build,true);assert.deepEqual(plan.files,[...request.files,...required]);
+    assert.deepEqual(plan.request,{base:f.base,head:f.head,files:[...request.files,...required]});
+    assert.deepEqual(reviewedTestPlan(JSON.stringify(plan.request),context),plan,'The dispatch argument retains automatically required consumers');
     assert.deepEqual(plan.checkout_patterns,fullCheckoutPatterns(f.packageInputs));
     entries.delete(required[0]);assert.throws(()=>reviewedTestPlan(request,context),/packaged consumer/);
   }
