@@ -1,0 +1,107 @@
+{
+  "kind": "cod-oicha-33-uga-ubos-2006-polygon-overlap-v1",
+  "status": "local research only; no target-cell disposition or territorial/legal determination",
+  "scope": {
+    "original_target": "gb:COD:ADM2:63176286B86170870415972",
+    "owner": 14599,
+    "strata": {
+      "Bukonjo_center_contacts": 32,
+      "Busongora_center_contacts": 1
+    }
+  },
+  "inputs": {
+    "geoboundaries_commit": "923e9c210b59836e069c182d68daf85439096381",
+    "geoboundaries_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-UGA-ADM2-000.bin.gz",
+    "geoboundaries_git_blob_oid": "1f8672d7303051dd6425dc822598dd935bc3c61f",
+    "geoboundaries_compressed_bytes": 317239,
+    "geoboundaries_compressed_sha256": "c16dc4723d4a48cbe5622bfe3f555cf46e0490a1a08324a22503696a5fc9389c",
+    "geoboundaries_decoded_bytes": 1021800,
+    "geoboundaries_decoded_sha256": "0a13e10b3bc6beeb02db4502c7f29a2ebbbb681a932307ccba4cd53e994feac7",
+    "ubos_archive_bytes": 8325415,
+    "ubos_archive_sha256": "9857cf0088b578beccea29c467f9e1a1224b6341ebe944320c975cb9ca984921",
+    "ubos_feature_count": 164,
+    "projection": "candidate WGS84 transformed to archive embedded WGS84 UTM36N with custom false northing 200000m"
+  },
+  "results": [
+    {
+      "candidate_name": "Bukonjo",
+      "registered_source_id": "gb:UGA:ADM2:47994165B33706557437921",
+      "candidate_area_km2": 1022.559,
+      "positive_area_intersections": [
+        {
+          "ubos_county": "BUKONJO",
+          "intersection_km2": 823.245,
+          "candidate_area_pct": 80.5083,
+          "county_area_pct": 93.5354
+        },
+        {
+          "ubos_county": "BUSONGORA",
+          "intersection_km2": 186.829,
+          "candidate_area_pct": 18.2708,
+          "county_area_pct": 7.4553
+        }
+      ]
+    },
+    {
+      "candidate_name": "Busongora",
+      "registered_source_id": "gb:UGA:ADM2:47994165B17746304388431",
+      "candidate_area_km2": 2210.421,
+      "positive_area_intersections": [
+        {
+          "ubos_county": "BUSONGORA",
+          "intersection_km2": 2107.62,
+          "candidate_area_pct": 95.3493,
+          "county_area_pct": 84.103
+        },
+        {
+          "ubos_county": "BUKONJO",
+          "intersection_km2": 38.83,
+          "candidate_area_pct": 1.7567,
+          "county_area_pct": 4.4117
+        },
+        {
+          "ubos_county": "BUNYANGABU",
+          "intersection_km2": 24.56,
+          "candidate_area_pct": 1.1111,
+          "county_area_pct": 4.9262
+        },
+        {
+          "ubos_county": "BUGHENDERA",
+          "intersection_km2": 16.081,
+          "candidate_area_pct": 0.7275,
+          "county_area_pct": 2.8319
+        },
+        {
+          "ubos_county": "KIBALE",
+          "intersection_km2": 11.675,
+          "candidate_area_pct": 0.5282,
+          "county_area_pct": 0.6521
+        },
+        {
+          "ubos_county": "BURAHYA",
+          "intersection_km2": 5.737,
+          "candidate_area_pct": 0.2596,
+          "county_area_pct": 0.4494
+        },
+        {
+          "ubos_county": "BUNYARUGURU",
+          "intersection_km2": 2.032,
+          "candidate_area_pct": 0.0919,
+          "county_area_pct": 0.1531
+        },
+        {
+          "ubos_county": "KITAGWENDA",
+          "intersection_km2": 0.055,
+          "candidate_area_pct": 0.0025,
+          "county_area_pct": 0.0089
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Pairwise polygon overlays compare these two registered 2006-era UGA candidates with the separately retained 2006 UBOS county features only.",
+    "Area is planar in the archive embedded projection; ISO/ESRI metadata conflicts remain and results follow the embedded .prj.",
+    "Same-name polygon overlap corroborates source-context identity but does not establish feature-level lineage, political/territorial applicability to the 2019 COD target, whole-target cell qualification, or ownership.",
+    "No coordinates or geometry are included in this result; retain local only."
+  ]
+}
