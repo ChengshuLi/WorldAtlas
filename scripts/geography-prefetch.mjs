@@ -255,7 +255,73 @@ export async function prefetchSelectedGeography(acquisition, baseline, candidate
 
 
 export async function githubTree(version, recursive = true) {
-  return githubMetadata(`trees/${version}${recursive ? '?recursive=1' : ''}`);
+  const value = await githubMetadata(`trees/${version}${recursive ? '?recursive=1' : ''}`);
+  if (!recursive || value?.truncated !== true) return value;
+  return completeTruncatedTree(version, value);
+}
+
+// GitHub caps recursive tree responses. Discard a truncated response's partial
+// rows, then rebuild the exact complete inventory from direct child trees.
+async function completeTruncatedTree(root, initial) {
+  const inventories = new Map(), oid = value => /^[a-f0-9]{40}$/.test(value ?? '');
+  const need = (condition, message) => { if (!condition) throw Error(message); };
+  const checkedRows = (response, sha, recursive) => {
+    need(response?.sha === sha && typeof response.truncated === 'boolean' && Array.isArray(response.tree),
+      'Invalid immutable tree response identity');
+    const rows = new Map();
+    for (const row of response.tree) {
+      const parts = typeof row.path === 'string' ? row.path.split('/') : [];
+      need(parts.length > 0 && parts.every(part => part && part !== '.' && part !== '..' && !/[\x00-\x1f\x7f\\]/.test(part)) &&
+        (recursive || parts.length === 1) && oid(row.sha) && !rows.has(row.path) &&
+        (row.type === 'tree' && row.mode === '040000' || row.type === 'commit' && row.mode === '160000' ||
+          row.type === 'blob' && ['100644','100755','120000'].includes(row.mode) && Number.isSafeInteger(row.size) && row.size >= 0),
+      'Invalid or duplicate immutable tree entry');
+      rows.set(row.path, row);
+    }
+    if (recursive) for (const [name, row] of rows) {
+      if (row.type === 'tree') need(row.sha !== sha, 'Cyclic immutable tree inventory');
+      for (let at = name.indexOf('/'); at >= 0; at = name.indexOf('/', at + 1)) {
+        const parent = rows.get(name.slice(0, at));
+        need(parent?.type === 'tree', 'Incomplete immutable tree parent inventory');
+        if (row.type === 'tree') need(row.sha !== parent.sha, 'Cyclic immutable tree inventory');
+      }
+    }
+    return rows;
+  };
+  const collect = async (sha, response, ancestors) => {
+    need(!ancestors.has(sha), 'Cyclic immutable tree inventory');
+    if (inventories.has(sha)) {
+      const cached = inventories.get(sha);
+      for (const row of cached.values()) if (row.type === 'tree') need(!ancestors.has(row.sha), 'Cyclic immutable tree inventory');
+      return cached;
+    }
+    response ??= await githubMetadata(`trees/${sha}?recursive=1`);
+    need(response?.sha === sha && typeof response.truncated === 'boolean' && Array.isArray(response.tree),
+      'Invalid immutable tree response identity');
+    let rows;
+    if (!response.truncated) {
+      rows = checkedRows(response, sha, true);
+      for (const row of rows.values()) if (row.type === 'tree')
+        need(!ancestors.has(row.sha), 'Cyclic immutable tree inventory');
+    }
+    else {
+      const direct = await githubMetadata(`trees/${sha}`);
+      need(direct?.truncated === false, 'Incomplete direct immutable tree inventory');
+      rows = checkedRows(direct, sha, false);
+      const next = new Set([...ancestors, sha]);
+      for (const row of [...rows.values()]) if (row.type === 'tree') {
+        for (const [relative, child] of await collect(row.sha, undefined, next)) {
+          const name = row.path + '/' + relative;
+          need(!rows.has(name), 'Duplicate expanded immutable tree path');
+          rows.set(name, {...child, path: name});
+        }
+      }
+    }
+    inventories.set(sha, rows);
+    return rows;
+  };
+  const entries = await collect(root, initial, new Set());
+  return {...initial, tree: [...entries.values()].sort((a, b) => a.path < b.path ? -1 : a.path > b.path ? 1 : 0), truncated: false};
 }
 
 async function githubMetadata(locator) {
