@@ -14,6 +14,23 @@ const requireValue = (value, message) => { if (!value) throw Error(message); };
 
 export function createAcquisition({repo, loadTree, loadDescriptor, execute = execFileSync, token = process.env.GH_TOKEN}) {
   const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('GIT_')));
+  let command = 'git';
+  // A relocated installation may need its invocation-local helper directory.
+  // Admit only the actual selected binary's own installation, never arbitrary
+  // Git environment/configuration. Existing execute adapters bind their own pair.
+  if (execute === execFileSync && process.env.GIT_EXEC_PATH !== undefined) {
+    const selected = (env.PATH ?? '').split(path.delimiter).map(p => path.resolve(p, 'git')).find(p => {
+      try { fs.accessSync(p, fs.constants.X_OK); return fs.statSync(p).isFile(); } catch { return false; }
+    });
+    requireValue(selected, 'Missing selected acquisition Git');
+    command = fs.realpathSync(selected);
+    const helpers = fs.realpathSync(process.env.GIT_EXEC_PATH), prefix = path.resolve(path.dirname(command), '..');
+    requireValue(fs.statSync(helpers).isDirectory()
+      && ['libexec', 'lib'].some(dir => helpers === path.join(prefix, dir, 'git-core'))
+      && fs.realpathSync(path.join(prefix, 'bin', 'git')) === command,
+    'Acquisition Git helpers do not belong to the selected installation');
+    env.GIT_EXEC_PATH = helpers;
+  }
   Object.assign(env, {GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0',
     GIT_CONFIG_COUNT: token ? '3' : '2', GIT_CONFIG_KEY_0: 'core.hooksPath', GIT_CONFIG_VALUE_0: '/dev/null',
     GIT_CONFIG_KEY_1: 'credential.helper', GIT_CONFIG_VALUE_1: ''});
@@ -23,7 +40,7 @@ export function createAcquisition({repo, loadTree, loadDescriptor, execute = exe
     // Captured output has an exact immutable/protocol length. Commands whose
     // output is not consumed need no buffered stdout or stderr at all.
     const output = expectedBytes === undefined ? {} : {maxBuffer: expectedBytes + 1};
-    try { return execute('git', ['-C', directory, ...args], {env, input, ...output, timeout: 60000,
+    try { return execute(command, ['-C', directory, ...args], {env, input, ...output, timeout: 60000,
       stdio: ['pipe', expectedBytes === undefined ? 'ignore' : 'pipe', 'ignore']}); }
     catch { throw Error('Geography object acquisition failed'); }
   };
