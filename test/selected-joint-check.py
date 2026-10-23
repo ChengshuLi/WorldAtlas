@@ -82,6 +82,14 @@ class JointRouting(unittest.TestCase):
         self.assertNotIn('continuous', result)
         self.assertNotIn('continuous_result', result)
 
+    def test_final_map_result_needs_no_retained_checkpoint_product(self):
+        value = self.issued(mode='accepted-final-map-comparison-v1', native=native(), derived_checkpoint=None)
+        with mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)), \
+             mock.patch.object(G, 'checkpoint_products_module') as products:
+            result = G.selected_joint(ROOT, BASE, NEXT, checkpoint_destination=ROOT / 'unused-checkpoint')
+        self.assertEqual(result, value)
+        products.return_value.retain_checkpoint_products.assert_not_called()
+
     def test_joint_invalid_or_foreign_acknowledgements_fail_closed(self):
         valid = self.issued(mode='authenticated-checkpoint-append-v1', native=native())
         cases = [{**valid, 'kind': 'foreign'}, {**valid, 'candidate_code_executed': True},

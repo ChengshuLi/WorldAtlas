@@ -70,3 +70,15 @@ test('geography software route is derived from changed checker inputs, retaining
   ...changed('coordination/engineering/example/source-adjudication.json')]), false);
  assert.equal(candidateGeographyCode('full', [{filename: 'docs/removed.txt', previous_filename: 'scripts/check-geographic-regression.py'}]), true);
 });
+
+
+test('a selected final-bank edit cannot choose its candidate checker',()=>{
+ const accepted=new Map([['data/canonical-grid/current-startup/index.json',{type:'blob'}]]);
+ const code={filename:'scripts/check-effective-geographic-regression.mjs',status:'modified'};
+ assert.equal(candidateGeographyCode('full',[code],undefined,accepted),true,'Code-only upgrade remains an actual software test');
+ for(const name of ['data/ownership-selection.json','data/canonical-grid/current-startup/index.json',
+  'data/canonical-grid/current-startup/ownership/new.bin.gz']){
+  for(const file of [{filename:name,status:'modified'},{filename:'retired.json',previous_filename:name,status:'renamed'}])
+   assert.equal(candidateGeographyCode('full',[code,file],undefined,accepted),false,name);
+ }
+});

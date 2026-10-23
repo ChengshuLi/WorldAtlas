@@ -1677,6 +1677,31 @@ test('changed checker uses fresh candidate science and cannot accept a baseline-
  assert.equal(unrelated.writes.length, 0);
 });
 
+test('actual queue validates simultaneous final-map and checker edits with accepted main code', async () => {
+ const f=fixture(),original=f.api;
+ const paths=['scripts/check-geographic-regression.py','data/canonical-grid/current-startup/index.json'];
+ for(const filename of paths){
+  f.baseline.push({path:filename,sha:'before-'+filename,mode:'100644',type:'blob'});
+  f.authored.push({path:filename,sha:'after-'+filename,mode:'100644',type:'blob'});
+  f.integrated.push({path:filename,sha:'after-'+filename,mode:'100644',type:'blob'});
+ }
+ f.pr.changed_files=3;
+ f.api=async(route,...args)=>route.includes('/pulls/2/files')
+  ? ['src/a.js',...paths].map(filename=>({filename,status:'modified'})):original(route,...args);
+ const prepared=await prepareIntegration(f.options());
+ assert.equal(prepared.geography_required,true);
+ assert.equal(prepared.geography_software,false);
+ await assert.rejects(f.complete({geographyReportLoader:async()=>({version:1,method_id:'worldatlas-trusted-geography-check-v1',
+  baseline_commit:f.base,candidate_commit:f.candidate,trusted_code_commit:f.candidate,
+  trusted_code_inventory_sha256:'d'.repeat(64),candidate_code_executed:true,
+  published:false,source_approval:false,gate_status:'passed',status:'not-applicable'})}),/exact trusted combined check/);
+ assert.equal(f.writes.length,0);
+ const result=await f.complete();
+ assert.equal(result.geography.trusted_code_commit,f.base);
+ assert.equal(result.tested_base,f.base);
+ assert.equal(f.writes.length,1);
+});
+
 test('workflow candidate geography is selected by trusted profile output without credentials', () => {
  for (const [file, selector, candidate, baseline] of [
   ['worker-merge.yml', 'prepare', 'needs.prepare.outputs.candidate', 'needs.prepare.outputs.base']

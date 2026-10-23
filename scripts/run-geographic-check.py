@@ -63,7 +63,7 @@ def prefetch_declared_inputs(repo, baseline, candidate, timeout=120):
               'complete_scientific_closure': False, 'partial_import_possible': True}}), file=sys.stderr, flush=True)
 
 
-TRUSTED_PATHS = ['scripts/run-geographic-check.py', 'scripts/geography-prefetch.mjs', 'scripts/check-geographic-regression.py',
+TRUSTED_PATHS = ['scripts/run-geographic-check.py', 'scripts/geography-prefetch.mjs', 'scripts/geography-routing-metadata.mjs', 'scripts/check-geographic-regression.py',
                  'scripts/package-startup-ownership.mjs','src/ownership-assets.js','src/ownership-method.js',
                  'scripts/native-word-store.mjs','scripts/native-patch-store.mjs', 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',  'src/native-grid.js', 'src/ownership-codec.js',
                  'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py',
@@ -204,7 +204,7 @@ def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destin
                 raise ValueError('Joint fallback omitted its unavailable custody decision')
             print(json.dumps(issued), file=sys.stderr, flush=True)
             return issued
-        if issued.get('mode') != 'authenticated-checkpoint-append-v1' or not isinstance(issued.get('native'), dict):
+        if issued.get('mode') not in ['authenticated-checkpoint-append-v1', 'accepted-final-map-comparison-v1'] or not isinstance(issued.get('native'), dict):
             raise ValueError('Joint selected comparison did not complete native validation')
         native = issued['native']
         if native.get('method') != 'selected-native-owner-conservation-v1' or native.get('candidate_code_executed') is not False or native.get('status') not in ['native-regressions-found', 'no-new-native-loss']:
@@ -213,7 +213,7 @@ def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destin
             return issued
         if native.get('lost_or_reassigned_cells') != 0 or native.get('intervals') != []:
             raise ValueError('Successful native comparison contradicts conservation results')
-        if checkpoint_destination is not None:
+        if checkpoint_destination is not None and issued.get('mode') == 'authenticated-checkpoint-append-v1':
             with stage_timing('selected-checkpoint-retention'):
                 issued['checkpoint'] = products.retain_checkpoint_products(destination, checkpoint_destination, issued)
         return issued
@@ -337,7 +337,7 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
         env = dict(os.environ)
         for name in ['NODE_OPTIONS', 'NODE_PATH']:
             env.pop(name, None)
-        if joint is not None and joint['mode'] == 'authenticated-checkpoint-append-v1':
+        if joint is not None and joint['mode'] in ['authenticated-checkpoint-append-v1', 'accepted-final-map-comparison-v1']:
             native = joint['native']
         else:
             # Eager whole-bank transport helps the legacy cold consumers, but

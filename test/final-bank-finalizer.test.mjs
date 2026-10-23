@@ -32,6 +32,7 @@ test('existing finalizer migrates accepted E without reading old ledger/patch an
  const forbidden=new Set([f.sidecar.logical_asset_map.ledger.path,f.sidecar.logical_asset_map.patch.path,f.sidecar.authority_registry.path]);
  const actual={...normal,read(pin){assert(!forbidden.has(pin.path),'Historical repairs are not final-bank preparation operands');return read(pin);}};
  const config={version:2,selector:{commit:f.bankCommit,path:'data/ownership-selection.json'},package_inputs:{commit:f.bankCommit,path:'.github/package-inputs.json'}};
+ assert.throws(()=>finalizeDelivery({...config,accepted_checkpoint:{obsolete:true}},actual),/Exact final-bank preparation config/);
  const outputs=finalizeDelivery(config,actual);assert.throws(()=>publishFinalizedDelivery(f.root,'early',outputs,{}),/finished startup bank/);
  await prepareFinalizedStartupOwnership(outputs);const selection=JSON.parse(outputs['ownership-selection.json']);assert.equal(selection.version,2);assert.equal(selection.additive_release,undefined);
  publishFinalizedDelivery(f.root,'coordination/engineering/final-bank-test/finalized',outputs,{phase:'finalize'});publishFinalizedDelivery(f.root,'coordination/engineering/final-bank-test/finalized',outputs,{phase:'finalize'},true);
@@ -154,6 +155,9 @@ test('final-bank reference-only authoring retains words and uses the existing co
  const result=await finalize(f,at,{reference_projection:pin},'coordination/engineering/final-bank-test/reference-finalized'),candidate=f.commit();
  const next=await f.api.qualifyTransition({state:first.candidate,reader:new f.native.ImmutableReader(f.root,candidate,{invocation:reader.invocation})});
  assert.equal(next.available,true);assert.deepEqual(next.changedNativeRows,[]);assert(next.changedIds.length>0);
+ const directBefore=new f.native.ImmutableReader(f.root,at);
+ const direct=await f.api.compareAcceptedFinalBank({beforeReader:directBefore,afterReader:new f.native.ImmutableReader(f.root,candidate,{invocation:directBefore.invocation})});
+ assert.equal(direct.native_row_scope.added_cells,0);assert(direct.changed_ids.length>0);
  assert.deepEqual(result.index.preparedOwnership.native_pixel_map,migration.index.preparedOwnership.native_pixel_map);
  assert.equal(result.index.preparedOwnership.rows_sha256,migration.index.preparedOwnership.rows_sha256);
  assert.equal(result.index.preparedOwnership.runs_word_stream_sha256,migration.index.preparedOwnership.runs_word_stream_sha256);

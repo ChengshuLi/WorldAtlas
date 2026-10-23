@@ -296,7 +296,7 @@ export async function prepareIntegration(options) {
       } catch { /* Unknown applicability retains the complete suite. */ }
     }
     const geographyRequiredForCandidate = geographyRequired(state.pr.head.ref, files, {}, integrated.entries);
-    const software = geographyRequiredForCandidate && candidateGeographyCode(applicability, files, selection?.test_selection);
+    const software = geographyRequiredForCandidate && candidateGeographyCode(applicability, files, selection?.test_selection, baseline.entries);
     const packageInputs = await readPackageInputs({api: options.api, route: root(options.repo), base: candidate, maximumBytes: 8 * 1024 * 1024});
     // Pure new evidence packets need the same reviewed consumer contract by
     // default, not an operator-selected mode or all coordination-code regressions.
@@ -395,13 +395,13 @@ export async function completeIntegration(options) {
       // derivation. Missing preparation output never implies baseline code.
       const profile = integrationProfile(state.pr.head.ref, files, {}, integrated.entries);
       let selection = null;
-      if (candidateGeographyCode(profile, files) && selectedDataCandidate(state.pr.head.ref, files, {})) {
+      if (candidateGeographyCode(profile, files, undefined, baseline.entries) && selectedDataCandidate(state.pr.head.ref, files, {})) {
         try {
           selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files,
             reservation: {}, baseline, authored: integrated});
         } catch { /* Unknown applicability retains full software validation. */ }
       }
-      software = candidateGeographyCode(profile, files, selection?.test_selection);
+      software = candidateGeographyCode(profile, files, selection?.test_selection, baseline.entries);
     }
     const codeCommit = software ? options.testedCandidate : state.base;
     waterPass = checkGeographicReport(geography, state.base, options.testedCandidate, codeCommit);

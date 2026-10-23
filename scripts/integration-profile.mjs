@@ -92,11 +92,16 @@ export function inertEvidenceAdditions(files, entries, definition) {
     }));
 }
 
-// Route executable checker/producer changes through actual candidate science.
+// Exercise checker upgrades on unchanged data; proposed map edits use accepted code.
 // This is conservative path classification, not a programme/hash exemption.
 // Data-only full checks still use baseline code and authenticated adjudication.
-export function candidateGeographyCode(profile, files, testSelection) {
+export function candidateGeographyCode(profile, files, testSelection, acceptedEntries) {
   if (!['full','evidence'].includes(profile) || testSelection === 'selected-data') return false;
+  // A candidate cannot certify its own map edit, even when it also changes the
+  // checker. Ordinary source tests exercise that upgrade separately.
+  if (acceptedEntries?.has('data/canonical-grid/current-startup/index.json') &&
+    files.some(file => [file.filename,file.previous_filename].some(name =>
+      name === 'data/ownership-selection.json' || name?.startsWith('data/canonical-grid/current-startup/')))) return false;
   return files.some(file => [file.filename, file.previous_filename].filter(Boolean).some(name =>
     /^scripts\/.*\.(?:[cm]?js|[cm]?ts|py|wasm)$/.test(name) ||
     /^src\/(?:native-|effective-footprint\.|ownership-codec\.|regional-import-gate\.|reference-metadata\.)/.test(name) ||

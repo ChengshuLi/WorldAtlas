@@ -54,10 +54,15 @@ whole-stream/footprint hash recomputation. A small key change is not a bounded-r
 finalization, and later complete packaging still requires its actual declared
 inputs. The ordinary joint consumer separately
 qualifies new evidence and exhaustively checks all changed and unchanged cells
-and context. It retains canonical prior authority identity/full-entry digest
-pairs without reacquiring their old bodies. No public preparation result is a
+and context against the immutable accepted main pinned by the queue. It reads
+only the newly proposed authority, not a history of accepted repairs. The next
+accepted main is automatically the next baseline; no checkpoint locator, artifact
+download, prior-authority ledger or manual promotion is part of this path. No public preparation result is a
 scientific capability. Historical evidence remains in Git; `change_evidence` is a
-qualification input, not a browser/build product.
+qualification input, not a browser/build product. Version-2 finalization has no
+`accepted_checkpoint` option. Keep old evidence as history, not as a prerequisite
+for the next repair. Checker upgrades cannot certify their own simultaneous map
+changes; that comparison executes the accepted-main checker.
 
 The same staging, full-set preflight, exact interrupted resume and selector-last
 adoption below apply. The new expectations point to the complete current bank;
