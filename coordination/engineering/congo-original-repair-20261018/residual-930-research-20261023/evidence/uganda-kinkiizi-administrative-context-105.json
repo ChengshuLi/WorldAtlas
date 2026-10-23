@@ -1,0 +1,217 @@
+{
+  "kind": "cod-residual-930-uganda-kinkiizi-primary-administrative-context-105-v1",
+  "status": "research-only; all 105 original keys pending; no disposition, repair, hold removal, package completion, or credit",
+  "scope": {
+    "original_package": "gb-COD-ADM2--repair-evaluation",
+    "original_owner_index": 14462,
+    "original_target": "gb:COD:ADM2:63176286B25642850349509",
+    "original_target_name": "Rutshuru",
+    "foreign_candidate": "gb:UGA:ADM2:47994165B13656364891086",
+    "foreign_candidate_name": "Kinkiizi",
+    "key_count": 105,
+    "prior_crosswalk": "evidence/uganda-2006-kinkiizi-center-crosswalk-105.json",
+    "prior_center_result": {
+      "inside_ubos_2006_kinkiizi": 64,
+      "outside_all_164_ubos_2006_counties": 41,
+      "inside_other_ubos_2006_counties": 0,
+      "method": "reuse of already retained center overlay; no geometry recomputation"
+    },
+    "prior_frozen_mask_join": "evidence/frozen-physical-mask-membership-join.json",
+    "prior_frozen_mask_result": {
+      "exact_key_matches": 105,
+      "original_class_land": 105,
+      "physical_support_mask_true": 105,
+      "inland_water_support_mask_true": 0,
+      "method": "reuse of the already retained exact-key frozen-mask join; no physical observation or qualification rerun",
+      "limitation": "mask membership is a prior input consistency fact, not a new whole-cell physical qualification"
+    },
+    "recorded_source_center_hits": {
+      "inside_registered_2019_cod_rutshuru": 105,
+      "inside_registered_2006_uganda_kinkiizi": 105,
+      "additional_registered_uganda_adm1_western_region": 51,
+      "method": "reused exact retained complete-537-feature center overlay, joined to the 105 original owner-14462 land keys; no geometry rerun",
+      "limitation": "a recorded center hit is source-relative and not whole-cell qualification or territorial applicability"
+    }
+  },
+  "primary_sources_examined": [
+    {
+      "url": "https://geodata-cdn.lib.utexas.edu/catalog/stanford-sv534fc7879",
+      "publisher_record": "University of Texas Libraries GeoData catalog record for County Boundaries: Uganda, 2006",
+      "recorded_creator_and_publisher": "Uganda Bureau of Statistics",
+      "recorded_level_and_purpose": "Level 4 county polygons, described as based on 2006 data and intended for reference/mapping applications",
+      "recorded_rights": "Public domain; no restrictions on use",
+      "coordinate_system_note": "The web-display layer is presented in WGS84; downloadable data are provided in their native coordinate system or projection",
+      "limitation": "The catalog record authenticates the product description and its published use context, but does not authenticate the conflicting coordinate-system declarations found inside the retained archive or provide a feature-level lineage/crosswalk to the 2019 DRC target."
+    },
+    {
+      "url": "https://www.kanungu.go.ug/lg/backgroundhistory",
+      "publisher_record": "Kanungu District Local Government background/history page, opened and examined",
+      "observed_content": [
+        "The page states that, in its historical account of 1962 independence, Kanungu existed within the former Kigezi (then called Kinkizi County); it provides no historical boundary map or polygon lineage.",
+        "It says Kanungu became a district in 2001 after being carved from Rukungiri District.",
+        "It describes the current district as comprising Kinkizi East and Kinkizi West counties."
+      ],
+      "limitation": "This local-government history supports the administrative identity and subsequent subdivision context of the Kinkiizi name. It does not supply the 2006 polygon lineage, resolve the archive CRS conflict, or state whether any of the 105 Rutshuru-key centers should be included in or excluded from the original target."
+    },
+    {
+      "url": "https://unstats.un.org/unsd/demographic-social/census/documents/Uganda/UGA-2014-11.pdf",
+      "publisher_record": "Uganda Bureau of Statistics, National Population and Housing Census 2014 Provisional Results, official copy hosted by UN Statistics Division",
+      "pages_and_content": [
+        "Pages 8-9 state that census mapping took place from January 2009 through June 2012 to update administrative boundaries and create enumeration-area maps.",
+        "Page 9 says census mapping identified administrative boundary-conflict areas; UBOS management did not resolve those conflicts as outside its mandate, and neutral teams enumerated affected areas.",
+        "Appendix 3, pages 62-63, lists the Kinkiizi county and its Kanungu subcounty/town-council units in the 2014 administrative tabulation."
+      ],
+      "limitation": "The report confirms a census administrative context and expressly recognizes administrative boundary-conflict areas that UBOS did not resolve. It does not identify these COD keys, tie a conflict area to the target feature, make an international-boundary finding, or resolve the specific 2006/2019 source applicability question."
+    },
+    {
+      "url": "https://knowledge.base.unocha.org/wiki/spaces/imtoolbox/pages/2557378679/Administrative%2BBoundaries%2BCOD-AB",
+      "publisher_record": "OCHA Information Management Toolbox, Administrative Boundaries (COD-AB), updated 23 Oct 2024; read directly",
+      "observed_content": [
+        "OCHA describes COD-AB as reflecting a country’s specific administrative hierarchy and as adopted by the country or regional Information Management Working Group as the standard.",
+        "The page says COD-AB distribution metadata typically include start/end dates defining the period the boundaries represent, often an established and sometimes legislated reality."
+      ],
+      "application_limit": "The retained geoBoundaries metadata calls the COD source RGC/OCHA DR Congo and points to the HDX dataset, but the exact HDX record could not be opened here; this general COD-AB policy does not itself prove the exact 2019 source layer was adopted/reviewed on a specific date or resolve the COD–UGA overlap."
+    },
+    {
+      "url": "https://knowledge.base.unocha.org/wiki/spaces/imtoolbox/pages/3923640334/COD-AB%2Bdevelopment%2Breviews%2Band%2Bmaintenance",
+      "publisher_record": "OCHA Information Management Toolbox, COD-AB development, reviews, and maintenance, updated 04 Nov 2024; read directly",
+      "observed_content": [
+        "OCHA states that COD-AB development is coordinated for the country or regional Information Management Working Group representing COD stakeholders; country/regional OCHA focal points gather consensus on source data and P-coding.",
+        "It describes a 12-month review cycle and allows review to identify errors or newly available data even where an update cannot yet be completed."
+      ],
+      "application_limit": "This supplies the source-system context for a layer whose pinned metadata names RGC/OCHA; it is not a direct DRC release record or a finding about any of these 105 cells."
+    },
+    {
+      "url": "https://www.geoboundaries.org/countryDownloads.html",
+      "publisher_record": "geoBoundaries official individual-country files documentation, read directly",
+      "observed_content": [
+        "The publisher says its country-specific open files represent each nation as that nation represents itself and do not specially identify disputed areas; it distinguishes those single-country files from its global composite.",
+        "The official archival table identifies geoBoundaries 2.0.0 as released 07 Dec 2019. The retained feature metadata additionally identifies a 2019 represented-year claim but records a 2023 metadata integration/build."
+      ],
+      "application_limit": "The current program documentation gives context for the single-country product class, not a dated cross-border adjudication or exact-version explanation of this COD/UGA overlap."
+    }
+  ],
+  "interpretation": {
+    "supported": [
+      "The registered foreign feature label is consistent with an official Ugandan county product and with the Ugandan administrative history of Kinkizi/Kinkiizi.",
+      "For the retained UBOS overlay interpretation, 64 of the 105 original cell centers are in the Kinkiizi county polygon; 41 fall outside every one of the 164 UBOS county polygons.",
+      "These are source-relative association facts and are relevant to the original territorial-exclusion question.",
+      "All 105 original keys are recorded center hits in both the pinned 2019 COD ADM2 Rutshuru feature and the pinned 2006 UGA ADM2 Kinkiizi feature; 51 also hit the registered UGA ADM1 Western Region feature in the retained full-family overlay.",
+      "The pinned source metadata names the COD source as RGC/OCHA DR Congo and the UGA source as geoBoundaries/Wikimedia Commons; it records 2019 and 2006 represented-year claims respectively, while both source metadata records were integrated/built in 2023.",
+      "OCHA describes COD-AB as coordinated through country/regional Information Management Working Groups and subject to periodic review; geoBoundaries describes individual-country files as representing each nation as it represents itself. These source-system descriptions explain why independent national datasets may disagree, but they do not adjudicate the overlap."
+    ],
+    "not_established": [
+      "The examined official sources do not establish a direct producer feature-version crosswalk between the 2006 Kinkiizi product and the 2019 OCHA/RGC Rutshuru target.",
+      "They do not resolve the 2006 UBOS archive's conflicting CRS/version metadata.",
+      "They do not determine whether any individual center's foreign candidate is an applicable territorial exclusion under the original contract or establish whole-cell physical qualification.",
+      "The exact DRC HDX/RGC record was not readable in this review (web access returned HTTP 403); the OCHA general COD-AB guidance cannot replace its exact date/adoption metadata.",
+      "No direct feature-version crosswalk, per-cell applicability disposition, whole-cell physical qualification, or evidence that the 41 centers outside all UBOS counties should be accepted has been established."
+    ],
+    "next_step": "Use the completed exact 105-cell stock source-evidence output for one bounded original-contract native diagnostic only after its inputs are pinned in a separate properly owned research branch/workspace; preserve all 105 as held unless exact per-key source applicability and physical predicates support a decision. Do not merge this evidence into the 116-key proposal by association."
+  },
+  "preservation": {
+    "excluded_scopes": [
+      "The 116 Irumu/Kimvula proposal keys are separate.",
+      "The other 709 residual keys are separate and remain pending unless their own evidence supports a disposition."
+    ],
+    "holds": "All source, rights, vintage, physical, competitor, ownership, and native holds remain unchanged."
+  },
+  "geometry_comparison": {
+    "kind": "retained-feature-geometry-representation-comparison",
+    "inputs": {
+      "geoboundaries_commit": "923e9c210b59836e069c182d68daf85439096381",
+      "geoboundaries_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-UGA-ADM2-000.bin.gz",
+      "geoboundaries_compressed_bytes": 317239,
+      "geoboundaries_compressed_sha256": "c16dc4723d4a48cbe5622bfe3f555cf46e0490a1a08324a22503696a5fc9389c",
+      "geoboundaries_decoded_bytes": 1021800,
+      "geoboundaries_decoded_sha256": "0a13e10b3bc6beeb02db4502c7f29a2ebbbb681a932307ccba4cd53e994feac7",
+      "ubos_archive_path": "/tmp/ubos-uganda-county-2006-sv534fc7879.zip",
+      "ubos_archive_bytes": 8325415,
+      "ubos_archive_sha256": "9857cf0088b578beccea29c467f9e1a1224b6341ebe944320c975cb9ca984921",
+      "candidate_feature": "Kinkiizi",
+      "candidate_source_id": "gb:UGA:ADM2:47994165B13656364891086"
+    },
+    "method": "Reused the exact authenticated retained geoBoundaries family body and UBOS archive; applied the already documented custom WGS84 UTM Zone 36N projection with 200000 m false northing from the archive .prj; computed planar intersections against each of 164 valid UBOS county polygons. No new download, cell overlay, or observer run.",
+    "candidate_valid": true,
+    "ubos_all_164_polygons_valid": true,
+    "candidate_planar_area_km2": 1173.348,
+    "positive_intersections": [
+      {
+        "ubos_county": "KINKIIZI",
+        "intersection_km2": 1137.052,
+        "candidate_area_pct": 96.907,
+        "ubos_county_area_pct": 85.543
+      },
+      {
+        "ubos_county": "RUBANDA",
+        "intersection_km2": 15.957,
+        "candidate_area_pct": 1.36,
+        "ubos_county_area_pct": 2.208
+      },
+      {
+        "ubos_county": "BUJUMBURA",
+        "intersection_km2": 5.29,
+        "candidate_area_pct": 0.451,
+        "ubos_county_area_pct": 0.511
+      },
+      {
+        "ubos_county": "RUBABO",
+        "intersection_km2": 1.617,
+        "candidate_area_pct": 0.138,
+        "ubos_county_area_pct": 0.329
+      }
+    ],
+    "interpretation": "The two 2006 representations substantially correspond by name and area: 96.907% of the registered candidate overlaps UBOS KINKIIZI. The candidate also has reported intersections with RUBANDA, BUJUMBURA, and RUBABO; those pairwise intersections total 1.949% of candidate area. Of the 3.093% outside KINKIIZI, approximately 1.145% is not accounted for by the rounded listed pairwise intersections; no county-union topology was computed. The UBOS KINKIIZI polygon itself extends 14.457% outside the registered candidate. This is not an exact feature crosswalk and does not establish which 2006 representation applies to the 2019 COD/RGC Rutshuru target or qualify any original cell.",
+    "limits": [
+      "Planar overlap follows the UBOS embedded .prj; its ISO and ESRI metadata contain conflicting CRS declarations.",
+      "This comparison is between source representations only; it is not a legal boundary decision, exact per-cell territorial applicability, physical qualification, or acceptance."
+    ],
+    "reproduction_script": "evidence/compare_kinkiizi_2006_candidate_ubos.py",
+    "runtime": "bundled Python 3.12 with Shapely 2.1.2",
+    "area_arithmetic": {
+      "candidate_area_km2": 1173.348,
+      "outside_kinkiizi_area_km2": 36.296,
+      "outside_kinkiizi_candidate_pct": 3.093,
+      "reported_other_county_intersection_km2_sum": 22.864,
+      "reported_other_county_candidate_pct_sum": 1.949,
+      "candidate_area_not_accounted_for_by_rounded_reported_intersections_km2": 13.432,
+      "candidate_area_not_accounted_for_by_rounded_reported_intersections_pct": 1.145,
+      "note": "The union of overlapping other-county polygons was not calculated; describe the remainder as not accounted for by the reported pairwise intersections."
+    }
+  },
+  "source_metadata_from_retained_catalogue": {
+    "pinned_metadata_commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+    "cod_adm2": {
+      "source_id": "gb:COD:ADM2:63176286B25642850349509",
+      "shape_name": "Rutshuru",
+      "source": "Referenciel Géographique Commun, OCHA DR Congo",
+      "represented_year_claim": "2019",
+      "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "source_data_update_date": "Thu Jan 19 07:31:04 2023",
+      "geoBoundaries_build_date": "Dec 12, 2023",
+      "recorded_source_url": "https://data.humdata.org/dataset/drc-administrative-boundaries-levels-0-2",
+      "limits": "The retained feature geometry is exact and hash-pinned; source metadata does not state this particular feature’s national review/adoption date or provide a Rutshuru-to-Kinkiizi crosswalk."
+    },
+    "uga_adm2": {
+      "source_id": "gb:UGA:ADM2:47994165B13656364891086",
+      "shape_name": "Kinkiizi",
+      "source": "geoBoundaries, Wikimedia Commons",
+      "represented_year_claim": "2006",
+      "recorded_license": "Public Domain",
+      "license_source": "https://commons.wikimedia.org/wiki/File",
+      "source_data_update_date": "Sun Mar 26 09:13:39 2023",
+      "geoBoundaries_build_date": "Dec 12, 2023",
+      "limits": "The retained feature geometry is exact and hash-pinned. The generic Commons license-source URL does not identify the exact Wikimedia file or independently authenticate provenance."
+    }
+  },
+  "stock_source_evidence_preparation": {
+    "command": "node scripts/prepare-delivery-handoff.mjs source-evidence <pinned-config> <destination>",
+    "runtime": "Node v24.19.0; Git 2.53.0; GIT_NO_LAZY_FETCH=1; GIT_NO_REPLACE_OBJECTS=1",
+    "config_sha256": "2ccaca61e0135fb5b1e33efda4ecd003a1c5dffe09f7fc23a50e28d9bba76740",
+    "target": "gb:COD:ADM2:63176286B25642850349509; pixelIndex 14462",
+    "scope": "exactly105 original land keys represented as72 contiguous coverage runs",
+    "competitors": "20 complete registered negative families; ten target-level bounds candidates (3 Rwanda,7 Uganda); remaining1,369 feature IDs recorded as disjoint",
+    "result": "preparation completed successfully; no source/native diagnostic or owner observation was run",
+    "independent_review": "Existing reviewer confirmed exact105-key patch/coverage and complete family/candidate accounting; no mismatch or overclaim found. Reviewer note does not decide scientific applicability."
+  }
+}
