@@ -1698,11 +1698,22 @@ function* evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnos
   }
   demand(used.size===provenance.size,'Unused territorial evidence provenance');
  }
- const diagnosticRows=new Map(); let firstFailure=null;
- const recordDiagnostic=(y,start,end,owner,reason)=>{
+ // Raw contacts are diagnostic attribution, not a second hold decision. In
+ // particular, dated same-member land can supersede exterior interior context,
+ // and mapped water is a veto only under the existing exact dated-land rule.
+ const witnessKinds=['missing_reconstruction','extra_reconstruction','contradictory_land_water_support',
+  'L2-outside-L1','L3-outside-L2','L4-outside-L3','outside_mapped_L1_context','mapped_inland_water_support'];
+ const witnessKindBits=new Map(witnessKinds.map((kind,index)=>[kind,1<<index]));
+ const diagnosticRows=new Map(),witnessKindRows=new Map(); let firstFailure=null;
+ const recordDiagnostic=(y,start,end,owner,reason,mask)=>{
   const runs=diagnosticRows.get(y)??[],prior=runs.at(-1);
   if(prior&&prior[1]===start&&prior[2]===owner&&prior[3]===reason)prior[1]=end;
   else runs.push([start,end,owner,reason]);diagnosticRows.set(y,runs);
+  if(mask){
+   const contacts=witnessKindRows.get(y)??[],previous=contacts.at(-1);
+   if(previous&&previous[1]===start&&previous[2]===owner&&previous[3]===mask)previous[1]=end;
+   else contacts.push([start,end,owner,mask]);witnessKindRows.set(y,contacts);
+  }
  };
  // A new source is deliberately separate from the retained shapeID catalogue.
  // The opt-in executing-tree adoption binds the whole raw snapshot, explicit
@@ -1853,7 +1864,7 @@ function* evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnos
    const rowStart=block*4096,rowEnd=Math.min(262166,rowStart+4096);
    // Preserve every actual role/member contact. Only exact exterior interiors
    // can be considered below, after the unchanged native source/owner guards.
-   const residualHits=new Set(),waterHits=new Set(),exteriorHits=[];
+   const residualHits=new Set(),waterHits=new Set(),exteriorHits=[],witnessMasks=diagnostic?new Map():null;
    for(const item of residualsByOwner.values())if(selectedOwners.has(item.index)){
     const requestedRows=rows.map(row=>({y:row.y,runs:row.runs.filter(run=>run[2]===item.index)}))
      .filter(row=>row.runs.length);
@@ -1862,6 +1873,7 @@ function* evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnos
      const effects=witnessCellEffects(witness.geometry,{size:262166,latitudes,requestedRows,nativePolygonIntervals});
      for(const hit of effects.hits){
       const key=item.index+':'+hit.y+':'+hit.x;
+      if(diagnostic)witnessMasks.set(key,(witnessMasks.get(key)??0)|witnessKindBits.get(witness.role));
       if(witness.role==='mapped_inland_water_support')waterHits.add(key);
       else if(witness.role==='outside_mapped_L1_context')exteriorHits.push({
        source_id:witness.source_id,pixelIndex:item.index,role:witness.role,...hit});
@@ -1946,7 +1958,7 @@ function* evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnos
       const segment=coverageRowsByOwner.get(run[2])?.find(r=>r.y===row.y)?.runs.find(span=>span[0]<=x&&x<span[1]);
       if(reason==='assigned_cells'&&segment&&!(classAllowed.get(segment[2])?.get(row.y)??[])
        .some(span=>span[2]===run[2]&&span[0]<=x&&x<span[1]))reason='declared-land-water-class-support';
-      recordDiagnostic(row.y,x,x+1,run[2],reason);cellReasons.push(reason);
+      recordDiagnostic(row.y,x,x+1,run[2],reason,witnessMasks.get(run[2]+':'+row.y+':'+x)??0);cellReasons.push(reason);
      }
      if(!firstFailure){
       const residual=cellReasons.includes('physical-reconstruction-residual-or-conflict');
@@ -1983,6 +1995,9 @@ function* evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnos
   demand(supportedCells+heldCells===requested,'Incomplete native diagnostic partition');
   const result={version:1,kind:'source-target-native-diagnostic-v1',requested_rows:proposed.rows,
    supported_rows:supported,held_rows:held,decision_rows:decisions,first_failure:firstFailure,
+   physical_witness_kind_legend:witnessKinds,
+   physical_witness_kind_rows:[...witnessKindRows].sort((a,b)=>a[0]-b[0])
+    .map(([y,runs])=>({y,runs:runs.sort((a,b)=>a[0]-b[0])})),
    requested_cells:requested,supported_cells:supportedCells,held_cells:heldCells,
    original_pins:{source_evidence:binding.source_evidence,native_patch:binding.native_patch},
    ...(adoptedFamilies.size?{provider_competitors:providerCompetitors}:{}),

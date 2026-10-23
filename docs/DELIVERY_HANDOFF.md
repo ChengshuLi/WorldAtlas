@@ -685,6 +685,15 @@ still aborts. Outputs are only `native-diagnostic.json` and the ordinary
 Exit status zero means screening completed, even if every requested cell is held.
 Supported cells still require the unchanged qualification and delivery checks.
 
+`physical_witness_kind_rows` records raw contacts as `[start,end,owner,mask]`
+intervals, with bits indexed by `physical_witness_kind_legend`. These are collected
+in the existing witness traversal, not a second geometry scan or hold decision.
+The mask can be nonzero for a supported cell: authenticated dated same-member
+land can supersede exterior interior context, and mapped water remains legitimate
+for non-dated water-class cells. Use `decision_rows` and retained
+`physical_context_hits` for the actual outcome. Constructor authority outputs and
+all source, territorial, dated-member and class predicates are unchanged.
+
 Use this entry to investigate an existing coverage refusal without creating a
 bespoke producer or changing its predicates. It does not run source or physical
 producers. Exact `--resume` repeats screening and verifies unchanged product bytes
@@ -806,6 +815,16 @@ native-cell and witness checks still apply. Exact whole-target support is not
 country approval, native-cell qualification, ownership-zero proof or delivery.
 `--resume` verifies complete original products, code/configuration and input pins
 without repeating physical operations. Invalid or incomplete evidence refuses.
+
+Fresh `source` and `physical` stdout is a compact display summary with the actual
+`resumed` flag, exact product references, observed quantities and a digest of the
+complete runtime-file records, rather than their installed-path array. Read the
+unchanged `execution-receipt.json` and source qualification for complete evidence.
+Any historical admission fields are reported only when actually present; they are
+not fresh admission or a revived resource gate. Projection precedes publication;
+publication and staging-cleanup failures remain failures with retained evidence.
+The summary establishes no qualification or acceptance, and the existing early
+`--resume` response is unchanged.
 
 The native constructor also recognizes the candidate-frame semantics of the
 retained `scripts/qualify-source-cohort.py` body with SHA-256

@@ -1,6 +1,7 @@
 // Metadata preparation and explicit body acquisition. Existing
 // operators, source authority and independent review remain authoritative.
 import fs from 'node:fs';
+import {scientificOperationSummary} from './native-ownership/scientific-operation-summary.mjs';
 import os from 'node:os';
 import {writeNativeByteChunks} from './native-patch-store.mjs';
 import {performance} from 'node:perf_hooks';
@@ -1812,6 +1813,10 @@ export async function sourceCohort(config, reader, root, destination, phase = 's
 // Completed producer bodies remain available if the existing outer writer refuses.
 // This is not a completed outer publication or an automatic replay/resume route.
 export function publishCompletedSource(root, destination, result, binding, resume, reader) {
+  // Project display bytes before publication. A formatting refusal cannot leave
+  // a newly published receipt or discard the completed producer's staging.
+  const summary = scientificOperationSummary({destination, binding, observation: result.observation},
+    {products: result.products});
   let publication;
   try { publication = publish(root, destination, result.products, binding, resume); }
   catch (error) {
@@ -1822,7 +1827,7 @@ export function publishCompletedSource(root, destination, result, binding, resum
   catch (error) {
     throw new Error('Outer publication complete at ' + destination + '; producer staging cleanup failed: ' + error.message, {cause: error});
   }
-  return publication;
+  return {...summary, resumed: publication.resumed};
 }
 
 // Preparation only: the reviewed family list declares conservative negatives,
@@ -2246,7 +2251,7 @@ async function main(args) {
   let outputs, observation;
   if (['source','physical'].includes(phase)) {
     const result = await sourceCohort(config, reader, root, destination, phase);
-    console.log(JSON.stringify({...publishCompletedSource(root, destination, result, binding, flags.includes('--resume'), reader), observation: result.observation}));
+    console.log(JSON.stringify(publishCompletedSource(root, destination, result, binding, flags.includes('--resume'), reader)));
     return;
   }
   if (['native-authority','native-diagnostic'].includes(phase)) { const result = await nativeAuthority(config, reader, root, phase === 'native-diagnostic'); outputs = result.products; observation = result.observation; }

@@ -104,3 +104,39 @@ test('delayed cleanup refuses a replaced ancestor even when the original staging
   assert.ok(fs.existsSync(path.join(stage, 'products/execution-receipt.json')));
   assert.ok(fs.existsSync(path.join(f.root, f.destination, 'preparation.json')));
 });
+
+
+for (const phase of ['source','physical']) test(phase+' publication returns only compact display facts and unchanged raw bytes', async t => {
+  const f=fixture(t,phase), result=await sourceCohort(f.config,f.reader,f.root,f.destination,phase);
+  const originals=Object.fromEntries(Object.entries(result.products).map(([name,raw])=>[name,Buffer.from(raw)]));
+  const binding={phase,config_sha256:'a'.repeat(64)}, observation=JSON.stringify(result.observation);
+  const summary=publishCompletedSource(f.root,f.destination,result,binding,false,f.reader);
+  assert.equal(summary.kind,'derived-scientific-operation-summary');
+  assert.deepEqual(summary.binding,binding);assert.equal(summary.resumed,false);
+  assert.equal(summary.runtime_inventory.records,1);
+  assert.equal(summary.observed.elapsed_seconds,result.observation.elapsed_seconds);
+  assert(!JSON.stringify(summary).includes(f.root));
+  assert(!summary.admission && !summary.observed.allowance && !summary.success);
+  assert.equal(JSON.stringify(result.observation),observation);
+  assert.equal(summary.outputs.length,f.names.length);
+  for(const [name,raw]of Object.entries(originals)){
+    assert.deepEqual(result.products[name],raw);
+    assert.deepEqual(fs.readFileSync(path.join(f.root,f.destination,name)),raw);
+    const pin=summary.outputs.find(p=>p.path===f.destination+'/'+name);
+    assert.equal(pin.bytes,raw.length);assert.equal(pin.sha256,sha(raw));
+  }
+  const receipt=fs.readFileSync(path.join(f.root,f.destination,'preparation.json'));
+  const again=await sourceCohort(f.config,f.reader,f.root,f.destination,phase);
+  const resumed=publishCompletedSource(f.root,f.destination,again,binding,true,f.reader);
+  assert.equal(resumed.resumed,true);
+  assert.deepEqual(fs.readFileSync(path.join(f.root,f.destination,'preparation.json')),receipt);
+  assert.equal(fs.existsSync(path.join(f.root,again.retained_staging)),false);
+});
+
+test('summary projection refusal publishes nothing and retains completed staging', async t => {
+  const f=fixture(t),result=await sourceCohort(f.config,f.reader,f.root,f.destination,f.phase);
+  const cyclic={};cyclic.self=cyclic;result.observation.runtime_inventory=[cyclic];
+  assert.throws(()=>publishCompletedSource(f.root,f.destination,result,{phase:f.phase},false,f.reader),RangeError);
+  assert.equal(fs.existsSync(path.join(f.root,f.destination)),false);
+  assert.ok(fs.existsSync(path.join(f.root,result.retained_staging,'products/execution-receipt.json')));
+});

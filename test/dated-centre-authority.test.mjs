@@ -9,7 +9,7 @@ import {gzipSync} from 'node:zlib';
 import {deriveSourceTargetNativeDelta,nativeRowLatitudes} from '../src/native-grid.js';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {constructOriginalAuthority} from '../scripts/delivery-handoff-advance.mjs';
-import {valueSha,valueBytes,readRetainedRegistryAuthority} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {valueSha,valueBytes,readRetainedRegistryAuthority,diagnoseSourceTargetNativeAuthority} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const version='a'.repeat(40),foreign='b'.repeat(40);
 const prefix='coordination/engineering/dated-centre-fixture',family='gb:TST:ADM2',sourceId=family+':A',siblingId=family+':B';
@@ -109,6 +109,8 @@ function fixture({legacy=false,displayPrefix='',change=()=>{},changeSupport=()=>
  const reader=()=>new FixtureReader('.',version);
  return {run:(inputReader=reader())=>constructOriginalAuthority(inputReader,{
   source_evidence:{commit:version,path:evidence.path},native_patch:{commit:version,path:patch.path}}),
+  diagnose:()=>{const binding={version:1,kind:'source-target-native-custody-v1',source_evidence:evidence,native_patch:patch};
+   return diagnoseSourceTargetNativeAuthority(reader(),{...binding,kind:'source-target-native-rule-v1'},binding);},
   reader,files,byBlob,state,support,adoption,review,observation,put};
 }
 
@@ -428,4 +430,30 @@ test('retained completed native qualification reuses exact reviewed output witho
  f.files.set(version+':'+completed.path,stored);const raw=f.byBlob.get(completed.git_blob_oid);
  f.byBlob.set(completed.git_blob_oid,Buffer.from('x'.repeat(raw.length)));
  assert.throws(()=>readRetainedRegistryAuthority(f.reader(),entry),/SHA|hash|whole|changed|differs/i);
+});
+
+
+test('diagnostic raw exterior and water masks remain distinct from dated-member decisions',()=>{
+ const exterior=fixture({change:s=>physicalVeto(s,'outside_mapped_L1_context')});
+ const accepted=exterior.diagnose();
+ assert.equal(accepted.supported_cells,1);assert.equal(accepted.held_cells,0);
+ assert.deepEqual(accepted.physical_witness_kind_rows,[{y,runs:[[x,x+1,1,64]]}]);
+ assert.equal(accepted.physical_context_hits[0].resolution,'superseded-by-adopted-dated-terrestrial-centre');
+ assert.equal('physical_witness_kind_rows' in exterior.run(),false);
+ const contradiction=fixture({change:s=>{
+  physicalVeto(s,'outside_mapped_L1_context');
+  s.physical.results[0].support.mapped_inland_water_support=rectangle(-90.01,-89.99);
+ }}).diagnose();
+ assert.equal(contradiction.supported_cells,0);assert.equal(contradiction.held_cells,1);
+ assert.deepEqual(contradiction.physical_witness_kind_rows,[{y,runs:[[x,x+1,1,192]]}]);
+ assert.equal(contradiction.physical_context_hits[0].resolution,'retained-exterior-veto');
+ const mixed=fixture({change:s=>{
+  s.targets[0].coverage_classes=['mapped_land_support','mapped_inland_water_support'];
+  s.targets[0].coverage_rows=[{y,runs:[[x,x+1,'mapped_land_support'],[x+1,x+2,'mapped_inland_water_support']]}];
+  s.physical.results[0].support.mapped_inland_water_support=rectangle(longitude+180/size,longitude+540/size);
+  s.proposed.rows[0].runs[0][1]=x+2;
+ }}).diagnose();
+ assert.equal(mixed.supported_cells,2);assert.equal(mixed.held_cells,0);
+ assert.deepEqual(mixed.physical_witness_kind_rows,[{y,runs:[[x+1,x+2,1,128]]}]);
+ assert.deepEqual(mixed.decision_rows,[{y,runs:[[x,x+2,1,'assigned_cells']]}]);
 });
