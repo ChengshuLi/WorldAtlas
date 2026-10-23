@@ -22,8 +22,8 @@ for the preserved inputs and method limitations.
 
 ## Newly examined official proposal
 
-On 2026-10-23, the Romanian-language Moldovan government announcement was
-retrieved from:
+The Romanian-language Moldovan government announcement was retrieved during
+this review from:
 
 `https://www.gov.md/ro/comunicate-de-presa/guvernul-prezentat-propunerea-noii-harti-administrativ-teritoriale`
 
