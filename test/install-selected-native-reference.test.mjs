@@ -11,9 +11,13 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {selectedNativeReference,composeEvidence,applyInstall,retainHistoricalMacroReview,validateMetadataStages} from '../scripts/install-macro-reference.mjs';
 import {preparedEvidenceJSON} from '../src/prepared-evidence.js';
+import {staticModuleClosure} from './helpers/static-module-closure.mjs';
 
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
-const fixtureDirectory=fileURLToPath(new URL('../coordination/engineering/vietnam-selected-native-reference-install-20261016/test-fixtures/',import.meta.url));
+const fixtureDirectory=fileURLToPath(new URL('./fixtures/selected-native-reference/',import.meta.url));
+// Only eager module imports are discovered. Synthetic registrations and
+// all non-module scientific/data operands below remain explicit fixture roles.
+const installerSources=staticModuleClosure(fileURLToPath(new URL('../',import.meta.url)),['scripts/install-macro-reference.mjs']);
 function nativeFixture(run){
  const base=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-selected-reference-')));
  try{
@@ -212,7 +216,7 @@ async function aliasInstallerFixture(t,{referenceVersion=3}={}){
  const commit=()=>{git('add','.');git('commit','-m','Synthetic reference alias fixture');return git('rev-parse','HEAD');};
  const read=p=>execFileSync('git',['-C',repo,'show',p.commit+':'+p.path],{maxBuffer:32*1024*1024});
  const pin=(name,version)=>{const raw=read({path:name,commit:version}),[mode,,oid]=git('ls-tree',version,'--',name).split(/[ \t]/);return {commit:version,path:name,mode,git_blob_oid:oid,bytes:raw.length,sha256:sha(raw)};};
- for(const name of ['hosted/geographic-releases.js','scripts/check-prepared.mjs','scripts/evidence-quality.mjs','scripts/evidence/encode-json.mjs','scripts/install-macro-reference.mjs','scripts/native-ownership/read-pinned-build-file.mjs','scripts/native-ownership/require-verified-selection.mjs','scripts/prepare-geographic-release.mjs','scripts/prepare-macro-review-projection.mjs','scripts/prepare-reference-macro-binding.mjs','scripts/read-geographic-release-manifest.mjs','scripts/selected-reference-metadata.mjs','scripts/validate-evidence-revalidation-chain.mjs','src/category-palette.js','src/environment-classifications.js','src/model.js','src/native-grid.js','src/ownership-method.js','src/prepared-evidence.js','src/reference-metadata.js'])write(name,fs.readFileSync(new URL('../'+name,import.meta.url)));
+ for(const name of installerSources)write(name,fs.readFileSync(new URL('../'+name,import.meta.url)));
  write('package.json',{type:'module'});
  const units=[],features=[],owners=[];
  for(let i=0;i<6;i++){
