@@ -350,7 +350,7 @@ test('reviewed tests derive the complete fixture and executing-policy boundary w
 
 for (const [label, consumer, operand] of [
   ...['test/final-bank-finalizer.test.mjs','test/selected-delivery-smoke.test.mjs','test/final-bank-checkpoint.test.mjs','test/selected-owner-observation.test.mjs',
-    'test/accepted-checkpoint-qualification.test.mjs'].map(consumer =>
+    'test/accepted-checkpoint-qualification.test.mjs', 'test/map-cell-diagnosis.test.mjs'].map(consumer =>
     [consumer,consumer,'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz']),
   ['rebind custody', 'test/current-rebind-product-custody.test.mjs', 'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json'],
   ['workspace bootstrap', 'test/local-workspace.test.mjs', 'docs/LOCAL_WORKSPACES.md'],
@@ -414,7 +414,7 @@ test('reviewed quota consumer reads its current guide through actual sparse chec
 });
 
 for (const consumer of ['test/final-bank-finalizer.test.mjs','test/selected-delivery-smoke.test.mjs','test/final-bank-checkpoint.test.mjs','test/selected-owner-observation.test.mjs',
-    'test/accepted-checkpoint-qualification.test.mjs'])
+    'test/accepted-checkpoint-qualification.test.mjs','test/map-cell-diagnosis.test.mjs'])
 test(`reviewed ${consumer} materializes its normative latitude operand through actual sparse checkout`, () => {
   const operand='coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz';
   const row={sha:sha('e'),mode:'100644',type:'blob'};

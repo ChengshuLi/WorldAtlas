@@ -88,3 +88,51 @@ export function mapCellSelectionFixture(t) {
   const current = project();
   return {repo, git, write, commit, pin, plain, selection, sidecar, projection, owners, features, currentFeatures, original, base, current, project, cells: [{x, y}, {x: x + 1000, y}]};
 }
+
+// The same three-owner source/projection fixture, now with a complete current E
+// emitted by the ordinary encoder. The cells are synthetic, not qualified edits.
+export async function finalMapCellSelectionFixture(t) {
+  const f = mapCellSelectionFixture(t), root = 'data/canonical-grid/current-startup';
+  const {prepareFinalBankStartupOwnership} = await import('../../scripts/prepare-startup-ownership.mjs');
+  const {ownershipMetadata} = await import('../../src/ownership-method.js');
+  const {scientificNativeSelection} = await import('../../src/reference-metadata.js');
+  const nativeSelection = scientificNativeSelection(f.selection), manifest = JSON.parse(f.git('show', f.current + ':' + nativeSelection.manifest_path));
+  const native = {...ownershipMetadata(manifest), canonical_grid_sha256: nativeSelection.sha256,
+    native_latitudes: {...manifest.native_latitudes, transport_path: 'native-v1/native-row-latitudes.f64le.gz'},
+    parts: manifest.parts.map(p => ({...p, path: p.kind === 'runs' ? 'ownership-vintages/' + nativeSelection.sha256 + '/native-v1/ownership/startup-runs-0.bin.gz' : p.path}))};
+  const bodies = new Map(manifest.parts.map((pin, i) => [native.parts[i].path,
+    fs.readFileSync(path.join(f.repo, path.posix.dirname(nativeSelection.manifest_path), pin.path))]));
+  bodies.set(native.native_latitudes.transport_path, normativeLatitudeBytes());
+  const compatibility = [...bodies].map(([name, bytes]) => ({path: name, bytes: bytes.length, sha256: sha(bytes)}));
+  const ownerHash = sha(Buffer.from(JSON.stringify(f.owners.map(o => [o.index, o.id]))));
+  const previous = {version: 2, native_manifest_sha256: nativeSelection.sha256, files: compatibility, compatibility_files: compatibility,
+    preparedOwnership: {native_pixel_map: native, owners: f.owners.length, reference_owner_sha256: ownerHash}, pixelMap: {parts: []}};
+  const referenceMetadata = {version: 1, asset: {...f.selection.reference_projection, path: 'reference-metadata/current.json'},
+    native_reference: f.projection.native_reference, reference: f.projection.reference};
+  const emit = async (owner = 1, {wordOwner = owner} = {}) => {
+    fs.rmSync(path.join(f.repo, root), {recursive: true, force: true});
+    for (const [name, raw] of bodies) f.write(root + '/' + name, raw);
+    const [{x, y}, gap] = f.cells, rows = new Uint32Array(manifest.size * 2);
+    const runs = Uint32Array.from([2 ** 19 + x, x, ...(wordOwner ? [wordOwner * 2 ** 19 + gap.x, gap.x] : [])]);
+    rows[y * 2 + 1] = runs.length / 2; for (let row = y + 1; row < manifest.size; row++) rows[row * 2] = runs.length / 2;
+    const features = f.currentFeatures.map((feature, i) => ({id: feature.id, pixelIndex: i + 1, properties: structuredClone(feature.properties),
+      geometry: owner === i + 1 ? feature.geometry : null, gridBounds: f.owners[i].bounds,
+      ...(owner === i + 1 ? {finishedFootprint: {version: 1, kind: 'complete-native-footprint-v1', reference_geometry_sha256: valueSha(feature.geometry),
+        geometry: {type: 'MultiPolygon', coordinates: [feature.geometry.coordinates]}, native_rows: [{y, runs: [[gap.x, gap.x + 1]]}], native_bounds: [-180, -90, 180, 90]}} : {})}));
+    const ownership = {...native, rows, runs, runWords: runs.length, reference_owner_sha256: ownerHash};
+    const index = await prepareFinalBankStartupOwnership({manifest, manifestSha: nativeSelection.sha256, previous, ownership, features,
+      baseReference: f.projection.reference, referenceMetadata, destination: path.join(f.repo, root)});
+    index.files = fs.readdirSync(path.join(f.repo, root), {recursive: true}).filter(n => fs.statSync(path.join(f.repo, root, n)).isFile()).sort().map(name => {
+      const bytes = fs.readFileSync(path.join(f.repo, root, name)); return {path: name, bytes: bytes.length, sha256: sha(bytes)};
+    });
+    const selection = {version: 2, kind: 'selected-final-native-bank-v2', native_selection: nativeSelection,
+      prepared_bank: f.plain(root + '/index.json', index), reference: index.preparedOwnership.effective_reference,
+      reference_projection: f.selection.reference_projection,
+      // An old qualification hook must never become a current map operand.
+      change_evidence: {commit: f.current, path: 'inputs/absent-old-registry.json', mode: '100644', git_blob_oid: 'a'.repeat(40), bytes: 1, sha256: 'b'.repeat(64)}};
+    f.write('data/ownership-selection.json', selection);
+    for (const name of ['inputs/sidecar.json', 'inputs/ledger.json', 'inputs/registry.json', 'inputs/patch.json']) fs.rmSync(path.join(f.repo, name), {force: true});
+    return {commit: f.commit(), index, selection};
+  };
+  return {...f, emit};
+}

@@ -7,15 +7,16 @@ import {gunzipSync} from 'node:zlib';
 import {execFileSync} from 'node:child_process';
 import {isDeepStrictEqual} from 'node:util';
 import {ImmutableReader, loadBaseSelection, selectedReferenceOwners, loadNativeRowTable, acquireNativeRows} from './check-effective-geographic-regression.mjs';
-import {normaliseRetainedRepairLedger} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
-import {scientificNativeSelection} from '../src/reference-metadata.js';
+import {normaliseRetainedRepairLedger, valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {scientificNativeSelection, originalNativeReference, validateReferenceMetadataHeader} from '../src/reference-metadata.js';
 import {nativeRuntimeIndex} from '../src/native-runtime.js';
-import {nativePolygonIntervals, NATIVE_GRID_METHOD} from '../src/native-grid.js';
+import {nativePolygonIntervals, NATIVE_GRID_METHOD, effectivePrimitiveGeometries, nativeRowAt} from '../src/native-grid.js';
 import {loadNativeLatitudes} from '../src/native-latitudes.js';
 import {loadCoverageClassification} from '../src/coverage-classification.js';
 import {pickOwnership} from '../src/pixel-ownership.js';
 import {projectCell} from '../src/pixel-grid.js';
 import {diagnoseMapCell} from '../src/map-cell-diagnosis.js';
+import {readPreparedFinalOwnership} from './package-startup-ownership.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const demand = (condition, message) => { if (!condition) throw Error(message); };
@@ -72,6 +73,22 @@ export function measureCellFeatures(features, cell, {size, latitudes}) {
     boundary_ties: measured.ties.filter(t => t.x === cell.x || t.start <= cell.x && cell.x < t.end).map(t => ({...t, feature_id: candidates[Math.floor((t.owner - 1) / 2)].info.id}))};
 }
 
+// Measure the current finished context independently of E's words. Original
+// source geometry remains provenance, not an alternative effective map master.
+function measureFinishedFeatures(features, cell, context) {
+  const measured = measureCellFeatures(features.flatMap(feature =>
+    effectivePrimitiveGeometries(feature, valueSha).map(geometry => ({...feature, geometry}))), cell, context);
+  const hits = features.filter(feature => nativeRowAt(feature.finishedFootprint?.native_rows ?? [], cell.y)
+    ?.runs.some(([start, end]) => start <= cell.x && cell.x < end));
+  const ids = new Set(measured.matches.map(feature => feature.id));
+  for (const feature of hits) if (!ids.has(feature.id)) {measured.matches.push(featureInfo(feature)); ids.add(feature.id);}
+  const nativeIds = new Set(hits.map(feature => feature.id));
+  measured.holes = measured.holes.filter(feature => !nativeIds.has(feature.id));
+  measured.first_owner = Math.min(...measured.matches.map(feature => feature.owner), Infinity);
+  if (measured.first_owner === Infinity) measured.first_owner = 0;
+  return measured;
+}
+
 function mergeMeasurement(target, incoming) {
   target.matches.push(...incoming.matches); target.holes.push(...incoming.holes); target.boundary_ties.push(...incoming.boundary_ties);
   target.first_owner = Math.min(...[target.first_owner, incoming.first_owner].filter(n => n > 0), Infinity);
@@ -125,8 +142,9 @@ export async function diagnoseCells({repo, commit, cells, original = [], consume
   const latitudePin = snapshot.manifest.native_latitudes;
   const latitudes = await loadNativeLatitudes({...snapshot.manifest, native_latitudes: {...latitudePin, transport_path: 'native-v1/native-row-latitudes.f64le.gz'}}, reference,
     async () => new Response(readPin(latitudePin)));
+  const final = snapshot.selection.version === 2;
   let patch = {rows: []}, additions = [];
-  if (snapshot.selection.additive_release) {
+  if (!final && snapshot.selection.additive_release) {
     const sidecar = json(readPin(snapshot.selection.additive_release));
     // loadBaseSelection separately authenticates and applies reference metadata.
     // The retained sidecar still binds the original scientific native selection.
@@ -137,11 +155,11 @@ export async function diagnoseCells({repo, commit, cells, original = [], consume
     const registry = json(readPin(sidecar.authority_registry));
     additions = [...normaliseRetainedRepairLedger(ledger, registry).rows.values()];
   }
-  const table = loadNativeRowTable(snapshot);
-  const ys = [...new Set(cells.map(c => c.y))].sort((a, b) => a - b), native = acquireNativeRows(snapshot, table, ys);
+  const ys = [...new Set(cells.map(c => c.y))].sort((a, b) => a - b);
+  const native = final ? null : acquireNativeRows(snapshot, loadNativeRowTable(snapshot), ys);
   const reports = cells.map(cell => {
     const k = ys.indexOf(cell.y), row = [];
-    for (let n = native.offsets[k]; n < native.offsets[k + 1]; n += 3) row.push([...native.words.subarray(n, n + 3)]);
+    for (let n = native?.offsets[k]; n < native?.offsets[k + 1]; n += 3) row.push([...native.words.subarray(n, n + 3)]);
     row.push(...(patch.rows.find(r => r.y === cell.y)?.runs ?? [])); row.sort((a, b) => a[0] - b[0]);
     let end = 0;
     for (const run of row) { demand(run.length === 3 && run.every(Number.isSafeInteger) && run[0] >= end && run[1] > run[0] && run[1] <= size && snapshot.owners[run[2] - 1], 'Invalid or overlapping effective native row'); end = run[1]; }
@@ -151,7 +169,7 @@ export async function diagnoseCells({repo, commit, cells, original = [], consume
       physicalEvidence: [], lineage: {original: [], consumed: [], selected: empty(), native: {first_owner: owner, method: NATIVE_GRID_METHOD}}, transitions: []};
   });
   const owners = new Map(snapshot.owners.map(o => [o.id, o.index])), seen = new Set();
-  const sourceInfo = new Map();
+  const sourceInfo = new Map(), currentFeatures = [];
   for (const name of snapshot.geometrySources.paths) {
     const result = snapshot.geometrySources.read(name), features = result.collection.features;
     for (const feature of features) {
@@ -160,15 +178,39 @@ export async function diagnoseCells({repo, commit, cells, original = [], consume
       const info = featureInfo(feature);
       sourceInfo.set(feature.id, {id: feature.id, name: info.name, date: info.date, source: info.source});
     }
-    for (const report of reports) mergeMeasurement(report.lineage.selected, measureCellFeatures(features, report.cell, {size, latitudes}));
+    if (final) currentFeatures.push(...features);
+    else for (const report of reports) mergeMeasurement(report.lineage.selected, measureCellFeatures(features, report.cell, {size, latitudes}));
   }
   demand(seen.size === owners.size, 'Selected world roster is incomplete');
+  if (final) {
+    const selection = snapshot.selection, indexRaw = readPin(selection.prepared_bank), index = JSON.parse(indexRaw);
+    let base = originalNativeReference(snapshot.manifest), referenceMetadata;
+    if (selection.reference_projection) {
+      const references = validateReferenceMetadataHeader(snapshot.geometrySources.metadataProjection, {selection, manifest: snapshot.manifest});
+      base = references.reference;
+      referenceMetadata = {version: 1, asset: {...selection.reference_projection, path: 'reference-metadata/current.json'},
+        native_reference: references.native, reference: base};
+    }
+    demand(isDeepStrictEqual(index.referenceMetadata, referenceMetadata), 'Final bank projection identity differs');
+    const bank = await readPreparedFinalOwnership({indexRaw, manifest: snapshot.manifest,
+      manifestSha: scientificNativeSelection(selection).sha256,
+      selected: {finalBank: selection.prepared_bank, reference_release: selection.reference, base, referenceMetadata},
+      features: currentFeatures,
+      read: pin => reader.read(path.posix.join(path.posix.dirname(selection.prepared_bank.path), pin.path), {expected: pin.sha256})});
+    for (const report of reports) {
+      const owner = pickOwnership(bank.ownership, report.cell.x, report.cell.y);
+      demand(owner === 0 || referenceOwners[owner - 1], 'Final native owner is outside the selected roster');
+      report.effectiveOwner = owner ? referenceOwners[owner - 1] : {index: 0, id: null};
+      report.lineage.native.first_owner = owner;
+      report.lineage.selected = measureFinishedFeatures(bank.features, report.cell, {size, latitudes});
+    }
+  }
   for (const row of additions) demand(owners.get(row.target_id) === row.pixelIndex, 'Additive source target differs from current owner roster');
   const added = additions.map(r => ({id: r.target_id, pixelIndex: r.pixelIndex, properties: {name: sourceInfo.get(r.target_id)?.name, component_id: r.component_id}, geometry: r.geometry}));
   for (const report of reports) {
     if (report.effectiveOwner.index) report.effectiveOwner = {...report.effectiveOwner, name: sourceInfo.get(report.effectiveOwner.id)?.name ?? null};
     mergeMeasurement(report.lineage.selected, measureCellFeatures(added, report.cell, {size, latitudes}));
-    report.lineage.selected.coverage = 'complete-selected-world-roster-and-committed-additions';
+    report.lineage.selected.coverage = final ? 'complete-current-finished-context' : 'complete-selected-world-roster-and-committed-additions';
   }
 
   const administrativeSources = reader.json('data/administrative-sources.json');
