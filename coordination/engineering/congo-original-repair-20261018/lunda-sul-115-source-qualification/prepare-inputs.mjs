@@ -69,7 +69,7 @@ patchRows.sort((a,b)=>a.y-b.y||a.runs[0][0]-b.runs[0][0]);
 const sourceEvidence = structuredClone(template);
 delete sourceEvidence.base_reference; delete sourceEvidence.native_contract; delete sourceEvidence.native_latitudes; delete sourceEvidence.owner_roster; delete sourceEvidence.territorial_exclusion_sources;
 sourceEvidence.targets = targets;
-const config = {version:1, selector:reader.pin(head,'data/ownership-selection.json'), compact_territorial_exclusions:true,
+const config = {version:1, selector:{commit:head,path:'data/ownership-selection.json'}, compact_territorial_exclusions:true,
   territorial_exclusion_families:familyParts.map(f=>f.source_id), source_evidence:sourceEvidence};
 const out=`${path.dirname(new URL(import.meta.url).pathname)}`;
 fs.writeFileSync(path.join(out,'source-evidence-config.json'),jsonBytes(config));
