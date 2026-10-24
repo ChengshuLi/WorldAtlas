@@ -1,0 +1,242 @@
+{
+  "status": "Derived one-key binding; no raw geometry included.",
+  "scope": {
+    "owner": 14441,
+    "target_name": "Mahagi",
+    "target_source_id": "gb:COD:ADM2:63176286B15680618396169",
+    "key": [
+      14441,
+      129432,
+      153804
+    ],
+    "residual_partition": {
+      "accepted_COD18_Northern": 7,
+      "pending_Okoro": 28,
+      "pending_Padyere": 1
+    }
+  },
+  "diagnostic": {
+    "observation_commit": "347f0692367a0c51a49683ff33e4a5ed9b9c7c5b",
+    "path": "coordination/engineering/congo-original-repair-20261018/diagnostic-original-001/native-diagnostic.json",
+    "git_blob_oid": "24b226726a62dd9cfbcbd3598ca34720b6ecd793",
+    "bytes": 326162,
+    "sha256": "0deb2340d65b786e61debb9df7e1b2bd1fb6cd6c8ab26311b43afdd6017965dc",
+    "terminal_path": "coordination/engineering/congo-original-repair-20261018/execution/diagnostic-original-001/terminal.json",
+    "terminal_git_blob_oid": "a7ae175fcd7c4c78762148f0e20f851525772cd7",
+    "terminal_bytes": 441,
+    "terminal_sha256": "b934ee210f94d0ad775831b6b53ea1e813d1a885d045dae447ae153cce48c81e",
+    "terminal": {
+      "authority_emitted": false,
+      "exit_code": 0,
+      "first_failure": {
+        "predicate": "unique-source-target-coverage",
+        "run": [
+          145235,
+          145238,
+          14509
+        ],
+        "y": 127342
+      },
+      "held_cells": 930,
+      "requested_cells": 3905,
+      "supported_cells": 2975,
+      "wall_seconds": 6.27,
+      "mahagi_target": {
+        "requested_cells": 63,
+        "supported_cells": 27,
+        "held_cells": 36,
+        "interpretation": "The 36 key_result rows are only the Mahagi residual held subset, not the full Mahagi target request."
+      }
+    }
+  },
+  "original_inputs": {
+    "native_patch": {
+      "bytes": 90849,
+      "commit": "ea94be0de429ebbb19607f9d07e21ecd57214cff",
+      "git_blob_oid": "ed5851866ad2da7c55cab5a669b3945dc9147b32",
+      "mode": "100644",
+      "path": "coordination/engineering/congo-original-repair-20261018/native-request-001/native-requested-patch.json",
+      "sha256": "cf6b5dff6cee5996d32863dde90f927739f172b73a810aef35cb42976b28795e"
+    },
+    "source_evidence": {
+      "bytes": 485660,
+      "commit": "ea94be0de429ebbb19607f9d07e21ecd57214cff",
+      "git_blob_oid": "6e052aac94cf7ef9a1ce9787b4e3b80b86825676",
+      "mode": "100644",
+      "path": "coordination/engineering/congo-original-repair-20261018/native-inputs-001/source-evidence.json",
+      "sha256": "25188ef15a2c73c17595d99f7a61dd33bf4e24c80ecc87cca6e858b7add66081"
+    }
+  },
+  "input_bindings": {
+    "interpretation": "The historical stock source-evidence input binds whole-target physical evidence, the original target coverage rows, and the recorded territorial-exclusion operands. It screens these 36 original land-support cells but does not adjudicate the applicability of the foreign features.",
+    "native_patch": {
+      "bytes": 90849,
+      "commit": "ea94be0de429ebbb19607f9d07e21ecd57214cff",
+      "git_blob_oid": "ed5851866ad2da7c55cab5a669b3945dc9147b32",
+      "mode": "100644",
+      "path": "coordination/engineering/congo-original-repair-20261018/native-request-001/native-requested-patch.json",
+      "sha256": "cf6b5dff6cee5996d32863dde90f927739f172b73a810aef35cb42976b28795e"
+    },
+    "physical_evidence": {
+      "bytes": 2264808,
+      "commit": "7839ae9de7d57c732050df05e7f6d5c9b42afd88",
+      "git_blob_oid": "272f696249d4b495eee03cb164fd1da9331ccb41",
+      "mode": "100644",
+      "path": "coordination/engineering/congo-original-repair-20261018/physical-001/whole-target-support.json",
+      "sha256": "8a926e4fa97f70f814c9cfd5d2c92792798669254de0d072761518bf91105a75"
+    },
+    "physical_input": {
+      "bytes": 1278579,
+      "commit": "7839ae9de7d57c732050df05e7f6d5c9b42afd88",
+      "git_blob_oid": "89c85fc8594e90c055e580b6a162b362600de533",
+      "mode": "100644",
+      "path": "coordination/engineering/congo-original-repair-20261018/source-stage-001/original-stage-inputs.json",
+      "sha256": "08f6c7af0286afb3eb73e6f663de02f1c6cc31b9789071a84ea7b26fcd0f1cc0"
+    },
+    "source_evidence": {
+      "bytes": 485660,
+      "commit": "ea94be0de429ebbb19607f9d07e21ecd57214cff",
+      "git_blob_oid": "6e052aac94cf7ef9a1ce9787b4e3b80b86825676",
+      "mode": "100644",
+      "path": "coordination/engineering/congo-original-repair-20261018/native-inputs-001/source-evidence.json",
+      "sha256": "25188ef15a2c73c17595d99f7a61dd33bf4e24c80ecc87cca6e858b7add66081"
+    },
+    "stock_source_evidence_kind": "source-target-native-evidence-v1",
+    "target_level_issue_limitation": "These two issues apply to the whole target record and are not allocated to the 36 Mahagi keys or to the 28/8 center-hit strata.",
+    "target_level_whole_target_issue_reasons": [
+      "contradictory_land_water_support",
+      "L2-outside-L1"
+    ],
+    "target_record": {
+      "coverage_classes": [
+        "mapped_land_support",
+        "mapped_inland_water_support"
+      ],
+      "id": "gb:COD:ADM2:63176286B15680618396169",
+      "okoro_operand": {
+        "feature_ordinal": 63,
+        "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e",
+        "negative_ordinal": 4,
+        "source_id": "gb:UGA:ADM2:47994165B72215977726895"
+      },
+      "pixelIndex": 14441,
+      "source_receipt_sha256": "8a926e4fa97f70f814c9cfd5d2c92792798669254de0d072761518bf91105a75",
+      "target_id": "gb:COD:ADM2:63176286B15680618396169",
+      "territorial_exclusion_operand_count": 15,
+      "territorial_exclusion_operands": [
+        {
+          "feature_ordinal": 0,
+          "geometry_sha256": "bc713c76bcc703834cc4d3f973e5b298aeb06da0208a323d5bdc1b56d4e016da",
+          "negative_ordinal": 0,
+          "source_id": "gb:UGA:ADM1:17295835B80141219017784"
+        },
+        {
+          "feature_ordinal": 3,
+          "geometry_sha256": "bbe132cb0655cbeac4989587c7c37535c4ef35fa2ce57fdd273d6708769f7840",
+          "negative_ordinal": 1,
+          "source_id": "gb:UGA:ADM1:17295835B91329899113986"
+        },
+        {
+          "feature_ordinal": 61,
+          "geometry_sha256": "c2b9fab07075aa38db47d09379f0d15d7a9fe289e0fb8e108d18aded12cc44e5",
+          "negative_ordinal": 2,
+          "source_id": "gb:UGA:ADM2:47994165B92141857832480"
+        },
+        {
+          "feature_ordinal": 62,
+          "geometry_sha256": "fb79b141925368d6f6d437b1cdca0f7b22ccc5180e947254d5895ef0ed3a8b66",
+          "negative_ordinal": 3,
+          "source_id": "gb:UGA:ADM2:47994165B20901550230314"
+        },
+        {
+          "feature_ordinal": 63,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e",
+          "negative_ordinal": 4,
+          "source_id": "gb:UGA:ADM2:47994165B72215977726895"
+        },
+        {
+          "feature_ordinal": 64,
+          "geometry_sha256": "67f15ca577dcd052a3f437ab214392bb7c203b40a142852ee05809937630fd50",
+          "negative_ordinal": 5,
+          "source_id": "gb:UGA:ADM2:47994165B98583791721874"
+        },
+        {
+          "feature_ordinal": 65,
+          "geometry_sha256": "405ef0ee3c310889e81fc1d8b91010ad8187c55ca0f22313da9b3e729aa31b34",
+          "negative_ordinal": 6,
+          "source_id": "gb:UGA:ADM2:47994165B82358514726491"
+        },
+        {
+          "feature_ordinal": 85,
+          "geometry_sha256": "6cedd715af2d923a285b4d870fbc5191fb63529cf35947903cb3d322da6c2627",
+          "negative_ordinal": 7,
+          "source_id": "gb:UGA:ADM2:47994165B50184791272452"
+        },
+        {
+          "feature_ordinal": 11,
+          "geometry_sha256": "9e32795444cbf9dbc359c96ee96093a3a499de6819a7ac4304322b4a9880fc4f",
+          "negative_ordinal": 8,
+          "source_id": "gb:UGA:ADM3:73843447B22829770815183"
+        },
+        {
+          "feature_ordinal": 12,
+          "geometry_sha256": "3d3ba595b213271d76cc5cc72f6e8e691785f602b7f19761643768824d7191cb",
+          "negative_ordinal": 9,
+          "source_id": "gb:UGA:ADM3:73843447B19916900524531"
+        },
+        {
+          "feature_ordinal": 14,
+          "geometry_sha256": "731ac4b4d822c2621fae95b2aa856a310ea4c7e9e7ab9451ee6eaebf5de4d8c1",
+          "negative_ordinal": 10,
+          "source_id": "gb:UGA:ADM3:73843447B40673054046757"
+        },
+        {
+          "feature_ordinal": 16,
+          "geometry_sha256": "36dc07a065ca899c51f97dd9e03f1325fc643d7f6ed61114d777b0f16247d314",
+          "negative_ordinal": 11,
+          "source_id": "gb:UGA:ADM3:73843447B76126410719346"
+        },
+        {
+          "feature_ordinal": 17,
+          "geometry_sha256": "72a500a13613e4aa356a9e947567051e60efe42f295da5a218213b598f8bb490",
+          "negative_ordinal": 12,
+          "source_id": "gb:UGA:ADM3:73843447B39830520593409"
+        },
+        {
+          "feature_ordinal": 20,
+          "geometry_sha256": "4d3ece719d4debf795785600287079708e363bfc43bb71e5847cf33ab0fb3ddb",
+          "negative_ordinal": 13,
+          "source_id": "gb:UGA:ADM3:73843447B94882022779308"
+        },
+        {
+          "feature_ordinal": 21,
+          "geometry_sha256": "67f030965bbc76cd16ada1f420aeca3dd494c39487cd7f52fcbe8909a5936c34",
+          "negative_ordinal": 14,
+          "source_id": "gb:UGA:ADM3:73843447B25495488087259"
+        }
+      ]
+    }
+  },
+  "key_result": {
+    "candidate_okoro_center_hit": false,
+    "held": true,
+    "key": [
+      14441,
+      129432,
+      153804
+    ],
+    "original_target_coverage": "mapped_land_support",
+    "stock_native_decision": "territorial_exclusion_cells",
+    "supported": false,
+    "ubos_2006_county_hits": []
+  },
+  "preserved_target_level_context": [
+    "contradictory_land_water_support",
+    "L2-outside-L1"
+  ],
+  "limitations": [
+    "The stock screen records a hold; it does not adjudicate source applicability or territorial status.",
+    "Target-level issues are not assigned to this individual key.",
+    "Physical evidence is bound by its exact commit/path/blob/size/SHA-256; its raw body is not included."
+  ]
+}
