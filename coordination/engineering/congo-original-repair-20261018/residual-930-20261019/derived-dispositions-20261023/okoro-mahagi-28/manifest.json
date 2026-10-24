@@ -1,0 +1,47 @@
+{
+  "kind": "cod-mahagi-okoro-28-public-derived-evidence-v1",
+  "scope": {
+    "original_target": "gb:COD:ADM2:63176286B15680618396169",
+    "owner": 14441,
+    "feature": "gb:UGA:ADM2:47994165B72215977726895",
+    "exact_key_count": 28,
+    "key_order": "[owner,y,x]",
+    "all_keys_remain_held": true,
+    "root_acceptance": false
+  },
+  "files": [
+    {
+      "path": "okoro28-researched-unresolved-proposal.md",
+      "bytes": 9437,
+      "sha256": "456c0cffc37f44c17569572bf55acf5c142617a2d2c7cf5ef1085b29329c42e9"
+    },
+    {
+      "path": "exact-28-key-roster.json",
+      "bytes": 1683,
+      "sha256": "7e3aa3edbf9818cca3982e1d4cf904ec0fa53f1cb62b2df09396fcb163521b29"
+    },
+    {
+      "path": "retained-context-citation-handoff.json",
+      "bytes": 35019,
+      "sha256": "cba70f48e06f5bccab3965e6f6d0a121dfe87f7592b1d11348317898f6241654"
+    }
+  ],
+  "source_roster_sha256": "ad8149330b83835e1675c0857cba8c89ec0af3009a827863822167c1d187bdde",
+  "diagnostic_binding_sha256": "c356dfef6381db832cccf48ab23b6137768fe5fe8b157549063fb748ef788650",
+  "diagnostic_output_sha256": "0deb2340d65b786e61debb9df7e1b2bd1fb6cd6c8ab26311b43afdd6017965dc",
+  "comparison_result_sha256": "ed19f05ad630deb010ba627d8c21f2daf78d1dfeb0a34db6644254cd4d5b8586",
+  "retained_context_handoff_sha256": "cba70f48e06f5bccab3965e6f6d0a121dfe87f7592b1d11348317898f6241654",
+  "review_status": "The independent reviewer supports the 15/9/4 cross-tab as context and the proposal-only researched-unresolved disposition. Exact-head review is recorded in the associated PR discussion; the submitting operator must verify that the comment matches the current public head. No scientific acceptance or credit is implied.",
+  "diagnostic_scope": "Mahagi 63 requested, 27 supported, 36 held; held partition is 7 already-accepted Northern, 28 pending Okoro, 1 separate pending Padyere.",
+  "context_cross_tab": {
+    "15": "no UBOS county hit; current DRC inside; Okoro-only",
+    "9": "UBOS OKORO; current DRC outside; Northern+Okoro",
+    "4": "UBOS OKORO; current DRC inside; Northern+Okoro"
+  },
+  "excluded_material": [
+    "raw polygon geometry",
+    "raw source map image",
+    "raw OSM history",
+    "accepted Northern-key roster as a new disposition"
+  ]
+}

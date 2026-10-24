@@ -1,0 +1,1096 @@
+{
+  "kind": "COD-Mahagi-Okoro28-retained-context-and-citation-correction",
+  "status": "Proposal remains pending. Read-only extraction of existing derived results, not a new scientific observation or qualification.",
+  "original_packet": {
+    "library_file_id": "libfile_47278bed62f0819187f330f07de3d502",
+    "version": 0,
+    "archive_sha256": "7f0faa705a4d56ee4d5775947cac47b9918c561c9affb9a2cb8ca55c56c3d1d1",
+    "proposal": {
+      "file_name": "okoro28-researched-unresolved-proposal.md",
+      "bytes": 7002,
+      "sha256": "0768f65f374b63750c2bfc7b6900d30b53bb93c8dbe9218ec742e6c755d16933"
+    }
+  },
+  "citation_correction": {
+    "issue": "Diagnostic citation path",
+    "proposal_path": "coordination/engineering/congo-original-repair-20261018/residual-930-20261019/diagnostic-original-001/native-diagnostic.json",
+    "actual_path": "coordination/engineering/congo-original-repair-20261018/diagnostic-original-001/native-diagnostic.json",
+    "verified_commit": "347f0692367a0c51a49683ff33e4a5ed9b9c7c5b",
+    "git_blob_oid": "24b226726a62dd9cfbcbd3598ca34720b6ecd793",
+    "sha256": "0deb2340d65b786e61debb9df7e1b2bd1fb6cd6c8ab26311b43afdd6017965dc"
+  },
+  "denominator_correction": {
+    "original_target_requested": 63,
+    "supported": 27,
+    "held": 36,
+    "held_partition": {
+      "already_accepted_Northern": 7,
+      "pending_Okoro": 28,
+      "separate_pending_Padyere": 1
+    },
+    "clarification": "All 28 proposed keys remain held. The original target is not a 36-request/zero-supported target."
+  },
+  "target": {
+    "id": "gb:COD:ADM2:63176286B15680618396169",
+    "owner": 14441,
+    "source_family": "gb:COD:ADM2",
+    "original_class": "land",
+    "coverage": "mapped_land_support",
+    "native_hold": "territorial_exclusion_cells"
+  },
+  "retained_comparison_sources": {
+    "contact_result": {
+      "file_name": "COD930-exact-source-contact-comparison.json",
+      "bytes": 1319681,
+      "sha256": "397dee1ee1ad69c4b6eb5f3f5d8169a807d61a27c1d4b87996c818e3553ca58b"
+    },
+    "USCB_result": {
+      "file_name": "COD930-USCB-exact-key-comparison.json",
+      "bytes": 835360,
+      "sha256": "56a7f729edf25e20ab927b69668cd9f515761c6ddd760db99ac852414d89f512"
+    },
+    "UBOS_and_stock_binding": {
+      "file_name": "mahagi-stock-diagnostic-binding-36.json",
+      "bytes": 22446,
+      "sha256": "c356dfef6381db832cccf48ab23b6137768fe5fe8b157549063fb748ef788650"
+    },
+    "USCB_result_created_pacific": "2026-10-20T21:38:14.627982-07:00",
+    "USCB_input_sources": {
+      "official_archive": {
+        "url": "https://www2.census.gov/programs-surveys/international-programs/mapping-files/time-series/ep/democratic-republic-of-the-congo-adm1-adm2-uscb-oct24.zip",
+        "retrieved_utc": "2026-10-21T04:36:37.913152+00:00",
+        "status": 200,
+        "content_type": "application/zip",
+        "bytes": 8357535,
+        "sha256": "f7a9ef69f55b77a656beef308f8db482cb6bf82565fed85f5e760f35dd26b3f9"
+      },
+      "original_source": {
+        "bytes": 1074327,
+        "commit": "923e9c210b59836e069c182d68daf85439096381",
+        "decoded_bytes": 3294607,
+        "decoded_sha256": "922427143fcff23010af3931fb3f5e4ffea8b05c5d2b797ca02fc04c6c8b1baa",
+        "git_blob_oid": "dc4f2926dc0945eef1f35fa34c506a270b6239b2",
+        "mode": "100644",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-COD-ADM2-000.bin.gz",
+        "sha256": "a75f184d075817469627f2b9eff892ff043597fefccdb9d61d2503f31a8486db"
+      },
+      "normative_latitudes": {
+        "bytes": 1851757,
+        "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+        "decoded_bytes": 2097328,
+        "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+        "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+        "mode": "100644",
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147"
+      },
+      "retained_key_join_sha256": "c3b6705c130417e0629df8873977e508050e8311c056a14f96c48fb78043f13a"
+    },
+    "USCB_national_layer": "Democratic_Republic_of_the_Congo_adm0_uscb_2024",
+    "USCB_national_wkb_sha256": "fcfe2f0b62d110b9c1f608243e5149e2bc47e517bc8cc0435422c113eb3ca482",
+    "USCB_source_interpretation": "LSIB accessed July 10, 2024, and OCHA shoreline accessed February 24, 2021; current ADM2 names/hits are context, not an original identity crosswalk.",
+    "UBOS_source_archive": {
+      "catalogue_url": "https://geodata-cdn.lib.utexas.edu/catalog/stanford-sv534fc7879",
+      "title": "County Boundaries: Uganda, 2006",
+      "creator": "Uganda Bureau of Statistics",
+      "bytes": 8325415,
+      "sha256": "9857cf0088b578beccea29c467f9e1a1224b6341ebe944320c975cb9ca984921",
+      "projection_limit": "Retained comparison follows the embedded projection file; conflicting ISO/ESRI metadata remains disclosed."
+    }
+  },
+  "counts": {
+    "Okoro_contact": 28,
+    "also_Northern_contact": 13,
+    "Okoro_only": 15,
+    "UBOS_OKORO_hit": 13,
+    "UBOS_no_county_hit": 15,
+    "USCB_DRC_MAHAGI_inside": 19,
+    "USCB_DRC_outside": 9
+  },
+  "cross_tab": [
+    {
+      "UBOS_OKORO": false,
+      "current_DRC_inside": true,
+      "pinned_contact_count": 1,
+      "keys": 15
+    },
+    {
+      "UBOS_OKORO": true,
+      "current_DRC_inside": false,
+      "pinned_contact_count": 2,
+      "keys": 9
+    },
+    {
+      "UBOS_OKORO": true,
+      "current_DRC_inside": true,
+      "pinned_contact_count": 2,
+      "keys": 4
+    }
+  ],
+  "key_order": "[owner,y,x]",
+  "rows": [
+    {
+      "key": [
+        14441,
+        129255,
+        153483
+      ],
+      "USCB_national_inside": true,
+      "USCB_national_strict_interior": true,
+      "USCB_adm2_context": [
+        {
+          "fid": 145,
+          "name": "MAHAGI",
+          "GEO_MATCH": "COD_24_04",
+          "NSO_CODE": "CD5407",
+          "strict_interior": true
+        }
+      ],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": []
+    },
+    {
+      "key": [
+        14441,
+        129256,
+        153483
+      ],
+      "USCB_national_inside": true,
+      "USCB_national_strict_interior": true,
+      "USCB_adm2_context": [
+        {
+          "fid": 145,
+          "name": "MAHAGI",
+          "GEO_MATCH": "COD_24_04",
+          "NSO_CODE": "CD5407",
+          "strict_interior": true
+        }
+      ],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": []
+    },
+    {
+      "key": [
+        14441,
+        129257,
+        153482
+      ],
+      "USCB_national_inside": true,
+      "USCB_national_strict_interior": true,
+      "USCB_adm2_context": [
+        {
+          "fid": 145,
+          "name": "MAHAGI",
+          "GEO_MATCH": "COD_24_04",
+          "NSO_CODE": "CD5407",
+          "strict_interior": true
+        }
+      ],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": []
+    },
+    {
+      "key": [
+        14441,
+        129257,
+        153483
+      ],
+      "USCB_national_inside": true,
+      "USCB_national_strict_interior": true,
+      "USCB_adm2_context": [
+        {
+          "fid": 145,
+          "name": "MAHAGI",
+          "GEO_MATCH": "COD_24_04",
+          "NSO_CODE": "CD5407",
+          "strict_interior": true
+        }
+      ],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": []
+    },
+    {
+      "key": [
+        14441,
+        129258,
+        153482
+      ],
+      "USCB_national_inside": true,
+      "USCB_national_strict_interior": true,
+      "USCB_adm2_context": [
+        {
+          "fid": 145,
+          "name": "MAHAGI",
+          "GEO_MATCH": "COD_24_04",
+          "NSO_CODE": "CD5407",
+          "strict_interior": true
+        }
+      ],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": []
+    },
+    {
+      "key": [
+        14441,
+        129259,
+        153481
+      ],
+      "USCB_national_inside": true,
+      "USCB_national_strict_interior": true,
+      "USCB_adm2_context": [
+        {
+          "fid": 145,
+          "name": "MAHAGI",
+          "GEO_MATCH": "COD_24_04",
+          "NSO_CODE": "CD5407",
+          "strict_interior": true
+        }
+      ],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": []
+    },
+    {
+      "key": [
+        14441,
+        129259,
+        153482
+      ],
+      "USCB_national_inside": true,
+      "USCB_national_strict_interior": true,
+      "USCB_adm2_context": [
+        {
+          "fid": 145,
+          "name": "MAHAGI",
+          "GEO_MATCH": "COD_24_04",
+          "NSO_CODE": "CD5407",
+          "strict_interior": true
+        }
+      ],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": []
+    },
+    {
+      "key": [
+        14441,
+        129260,
+        153481
+      ],
+      "USCB_national_inside": true,
+      "USCB_national_strict_interior": true,
+      "USCB_adm2_context": [
+        {
+          "fid": 145,
+          "name": "MAHAGI",
+          "GEO_MATCH": "COD_24_04",
+          "NSO_CODE": "CD5407",
+          "strict_interior": true
+        }
+      ],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": []
+    },
+    {
+      "key": [
+        14441,
+        129260,
+        153482
+      ],
+      "USCB_national_inside": true,
+      "USCB_national_strict_interior": true,
+      "USCB_adm2_context": [
+        {
+          "fid": 145,
+          "name": "MAHAGI",
+          "GEO_MATCH": "COD_24_04",
+          "NSO_CODE": "CD5407",
+          "strict_interior": true
+        }
+      ],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": []
+    },
+    {
+      "key": [
+        14441,
+        129261,
+        153481
+      ],
+      "USCB_national_inside": true,
+      "USCB_national_strict_interior": true,
+      "USCB_adm2_context": [
+        {
+          "fid": 145,
+          "name": "MAHAGI",
+          "GEO_MATCH": "COD_24_04",
+          "NSO_CODE": "CD5407",
+          "strict_interior": true
+        }
+      ],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": []
+    },
+    {
+      "key": [
+        14441,
+        129261,
+        153482
+      ],
+      "USCB_national_inside": true,
+      "USCB_national_strict_interior": true,
+      "USCB_adm2_context": [
+        {
+          "fid": 145,
+          "name": "MAHAGI",
+          "GEO_MATCH": "COD_24_04",
+          "NSO_CODE": "CD5407",
+          "strict_interior": true
+        }
+      ],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": []
+    },
+    {
+      "key": [
+        14441,
+        129262,
+        153480
+      ],
+      "USCB_national_inside": true,
+      "USCB_national_strict_interior": true,
+      "USCB_adm2_context": [
+        {
+          "fid": 145,
+          "name": "MAHAGI",
+          "GEO_MATCH": "COD_24_04",
+          "NSO_CODE": "CD5407",
+          "strict_interior": true
+        }
+      ],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": []
+    },
+    {
+      "key": [
+        14441,
+        129262,
+        153481
+      ],
+      "USCB_national_inside": true,
+      "USCB_national_strict_interior": true,
+      "USCB_adm2_context": [
+        {
+          "fid": 145,
+          "name": "MAHAGI",
+          "GEO_MATCH": "COD_24_04",
+          "NSO_CODE": "CD5407",
+          "strict_interior": true
+        }
+      ],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": []
+    },
+    {
+      "key": [
+        14441,
+        129263,
+        153480
+      ],
+      "USCB_national_inside": true,
+      "USCB_national_strict_interior": true,
+      "USCB_adm2_context": [
+        {
+          "fid": 145,
+          "name": "MAHAGI",
+          "GEO_MATCH": "COD_24_04",
+          "NSO_CODE": "CD5407",
+          "strict_interior": true
+        }
+      ],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": []
+    },
+    {
+      "key": [
+        14441,
+        129263,
+        153481
+      ],
+      "USCB_national_inside": true,
+      "USCB_national_strict_interior": true,
+      "USCB_adm2_context": [
+        {
+          "fid": 145,
+          "name": "MAHAGI",
+          "GEO_MATCH": "COD_24_04",
+          "NSO_CODE": "CD5407",
+          "strict_interior": true
+        }
+      ],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": []
+    },
+    {
+      "key": [
+        14441,
+        129264,
+        153479
+      ],
+      "USCB_national_inside": true,
+      "USCB_national_strict_interior": true,
+      "USCB_adm2_context": [
+        {
+          "fid": 145,
+          "name": "MAHAGI",
+          "GEO_MATCH": "COD_24_04",
+          "NSO_CODE": "CD5407",
+          "strict_interior": true
+        }
+      ],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM1:17295835B80141219017784",
+          "family": "gb:UGA:ADM1",
+          "feature_ordinal": 0,
+          "name": "Northern Region",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 0,
+          "geometry_sha256": "bc713c76bcc703834cc4d3f973e5b298aeb06da0208a323d5bdc1b56d4e016da"
+        },
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": [
+        "OKORO"
+      ]
+    },
+    {
+      "key": [
+        14441,
+        129264,
+        153480
+      ],
+      "USCB_national_inside": true,
+      "USCB_national_strict_interior": true,
+      "USCB_adm2_context": [
+        {
+          "fid": 145,
+          "name": "MAHAGI",
+          "GEO_MATCH": "COD_24_04",
+          "NSO_CODE": "CD5407",
+          "strict_interior": true
+        }
+      ],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM1:17295835B80141219017784",
+          "family": "gb:UGA:ADM1",
+          "feature_ordinal": 0,
+          "name": "Northern Region",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 0,
+          "geometry_sha256": "bc713c76bcc703834cc4d3f973e5b298aeb06da0208a323d5bdc1b56d4e016da"
+        },
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": [
+        "OKORO"
+      ]
+    },
+    {
+      "key": [
+        14441,
+        129265,
+        153479
+      ],
+      "USCB_national_inside": true,
+      "USCB_national_strict_interior": true,
+      "USCB_adm2_context": [
+        {
+          "fid": 145,
+          "name": "MAHAGI",
+          "GEO_MATCH": "COD_24_04",
+          "NSO_CODE": "CD5407",
+          "strict_interior": true
+        }
+      ],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM1:17295835B80141219017784",
+          "family": "gb:UGA:ADM1",
+          "feature_ordinal": 0,
+          "name": "Northern Region",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 0,
+          "geometry_sha256": "bc713c76bcc703834cc4d3f973e5b298aeb06da0208a323d5bdc1b56d4e016da"
+        },
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": [
+        "OKORO"
+      ]
+    },
+    {
+      "key": [
+        14441,
+        129265,
+        153480
+      ],
+      "USCB_national_inside": true,
+      "USCB_national_strict_interior": true,
+      "USCB_adm2_context": [
+        {
+          "fid": 145,
+          "name": "MAHAGI",
+          "GEO_MATCH": "COD_24_04",
+          "NSO_CODE": "CD5407",
+          "strict_interior": true
+        }
+      ],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM1:17295835B80141219017784",
+          "family": "gb:UGA:ADM1",
+          "feature_ordinal": 0,
+          "name": "Northern Region",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 0,
+          "geometry_sha256": "bc713c76bcc703834cc4d3f973e5b298aeb06da0208a323d5bdc1b56d4e016da"
+        },
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": [
+        "OKORO"
+      ]
+    },
+    {
+      "key": [
+        14441,
+        129266,
+        153478
+      ],
+      "USCB_national_inside": false,
+      "USCB_national_strict_interior": false,
+      "USCB_adm2_context": [],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM1:17295835B80141219017784",
+          "family": "gb:UGA:ADM1",
+          "feature_ordinal": 0,
+          "name": "Northern Region",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 0,
+          "geometry_sha256": "bc713c76bcc703834cc4d3f973e5b298aeb06da0208a323d5bdc1b56d4e016da"
+        },
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": [
+        "OKORO"
+      ]
+    },
+    {
+      "key": [
+        14441,
+        129266,
+        153479
+      ],
+      "USCB_national_inside": false,
+      "USCB_national_strict_interior": false,
+      "USCB_adm2_context": [],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM1:17295835B80141219017784",
+          "family": "gb:UGA:ADM1",
+          "feature_ordinal": 0,
+          "name": "Northern Region",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 0,
+          "geometry_sha256": "bc713c76bcc703834cc4d3f973e5b298aeb06da0208a323d5bdc1b56d4e016da"
+        },
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": [
+        "OKORO"
+      ]
+    },
+    {
+      "key": [
+        14441,
+        129267,
+        153478
+      ],
+      "USCB_national_inside": false,
+      "USCB_national_strict_interior": false,
+      "USCB_adm2_context": [],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM1:17295835B80141219017784",
+          "family": "gb:UGA:ADM1",
+          "feature_ordinal": 0,
+          "name": "Northern Region",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 0,
+          "geometry_sha256": "bc713c76bcc703834cc4d3f973e5b298aeb06da0208a323d5bdc1b56d4e016da"
+        },
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": [
+        "OKORO"
+      ]
+    },
+    {
+      "key": [
+        14441,
+        129268,
+        153477
+      ],
+      "USCB_national_inside": false,
+      "USCB_national_strict_interior": false,
+      "USCB_adm2_context": [],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM1:17295835B80141219017784",
+          "family": "gb:UGA:ADM1",
+          "feature_ordinal": 0,
+          "name": "Northern Region",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 0,
+          "geometry_sha256": "bc713c76bcc703834cc4d3f973e5b298aeb06da0208a323d5bdc1b56d4e016da"
+        },
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": [
+        "OKORO"
+      ]
+    },
+    {
+      "key": [
+        14441,
+        129268,
+        153478
+      ],
+      "USCB_national_inside": false,
+      "USCB_national_strict_interior": false,
+      "USCB_adm2_context": [],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM1:17295835B80141219017784",
+          "family": "gb:UGA:ADM1",
+          "feature_ordinal": 0,
+          "name": "Northern Region",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 0,
+          "geometry_sha256": "bc713c76bcc703834cc4d3f973e5b298aeb06da0208a323d5bdc1b56d4e016da"
+        },
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": [
+        "OKORO"
+      ]
+    },
+    {
+      "key": [
+        14441,
+        129269,
+        153477
+      ],
+      "USCB_national_inside": false,
+      "USCB_national_strict_interior": false,
+      "USCB_adm2_context": [],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM1:17295835B80141219017784",
+          "family": "gb:UGA:ADM1",
+          "feature_ordinal": 0,
+          "name": "Northern Region",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 0,
+          "geometry_sha256": "bc713c76bcc703834cc4d3f973e5b298aeb06da0208a323d5bdc1b56d4e016da"
+        },
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": [
+        "OKORO"
+      ]
+    },
+    {
+      "key": [
+        14441,
+        129270,
+        153476
+      ],
+      "USCB_national_inside": false,
+      "USCB_national_strict_interior": false,
+      "USCB_adm2_context": [],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM1:17295835B80141219017784",
+          "family": "gb:UGA:ADM1",
+          "feature_ordinal": 0,
+          "name": "Northern Region",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 0,
+          "geometry_sha256": "bc713c76bcc703834cc4d3f973e5b298aeb06da0208a323d5bdc1b56d4e016da"
+        },
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": [
+        "OKORO"
+      ]
+    },
+    {
+      "key": [
+        14441,
+        129271,
+        153476
+      ],
+      "USCB_national_inside": false,
+      "USCB_national_strict_interior": false,
+      "USCB_adm2_context": [],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM1:17295835B80141219017784",
+          "family": "gb:UGA:ADM1",
+          "feature_ordinal": 0,
+          "name": "Northern Region",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 0,
+          "geometry_sha256": "bc713c76bcc703834cc4d3f973e5b298aeb06da0208a323d5bdc1b56d4e016da"
+        },
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": [
+        "OKORO"
+      ]
+    },
+    {
+      "key": [
+        14441,
+        129273,
+        153475
+      ],
+      "USCB_national_inside": false,
+      "USCB_national_strict_interior": false,
+      "USCB_adm2_context": [],
+      "pinned_contacts": [
+        {
+          "negative_source_id": "gb:UGA:ADM1:17295835B80141219017784",
+          "family": "gb:UGA:ADM1",
+          "feature_ordinal": 0,
+          "name": "Northern Region",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 0,
+          "geometry_sha256": "bc713c76bcc703834cc4d3f973e5b298aeb06da0208a323d5bdc1b56d4e016da"
+        },
+        {
+          "negative_source_id": "gb:UGA:ADM2:47994165B72215977726895",
+          "family": "gb:UGA:ADM2",
+          "feature_ordinal": 63,
+          "name": "Okoro",
+          "strict_interior": true,
+          "declared_for_original_target": true,
+          "negative_ordinal": 4,
+          "geometry_sha256": "60a20732ebf5e8a7cfc81c51f866eb949a237861f491a45f36b1bcb36615161e"
+        }
+      ],
+      "UBOS_2006_county_hits": [
+        "OKORO"
+      ]
+    }
+  ],
+  "interpretation_limits": [
+    "All original identities, mask classes, 20 foreign families and 2975 prior assignments remain; no geometry replacement or adopted policy.",
+    "USCB national interpretation is LSIB accessed July10,2024 and OCHA shoreline accessed February24,2021. It represents its stated source interpretation, not universal legal sovereignty.",
+    "Current ADM2 has164 features versus189 original RGC2019 targets. Its names/hits are context only, not identity crosswalk or permission to merge/drop original city/territory owners.",
+    "This is ordinary WGS84 centre geometry comparison, not production native intervals, source applicability, physical qualification or current ownership.",
+    "A national-inside key still needs exact original foreign-contact/applicability assessment and unchanged qualification; national-outside does not establish a foreign assignment.",
+    "Whole20-family retained point contact is not an applicability judgment. Do not relabel actual foreign hits as contextual solely because another map places the centre in COD.",
+    "All exact-source operands are preserved, including unused/adverse records. No source access waiver, current legal conclusion, native evaluation or owner change."
+  ],
+  "remaining_documentary_task": "Correct the diagnostic citation and original target denominator, preserve the retained 15/9/4 strata and concurrent Northern contacts, and clarify the original substantive applicability conclusion against this existing context. This is not a request for a geometry rerun, another reviewer, universal modern authority certificate, or exact historical-capture requirement.",
+  "not_included": "Raw polygons, direct longitude/latitude center coordinates, images and private workspace paths."
+}
