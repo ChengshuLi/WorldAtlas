@@ -17,7 +17,7 @@ import {loadPackageInputs, readPackageInputs, containsPackagePath, safePackagePa
 import {compatiblePackageProducers,requireProducerInstallation} from './package-producer-contract.mjs';
 import {assertCloudflareStaticAssets, inspectPackageNodeRuntime, verifyPackageDependencies} from './package-build.mjs';
 import {committedPackageInputs, committedPackageProducer, PACKAGE_PRODUCER_WORKFLOWS, PACKAGE_PRODUCER_KIND, packageBuildConfiguration,
-  validatePackageOutputManifest, admitPackageInputTransition, admitPackageOutputTransition, inertSelectedPackageInput, streamedPackageFile, resolvePackagePythonExecutable} from './package-output-artifact.mjs';
+  inventoryPackageOutput, validatePackageOutputManifest, admitPackageInputTransition, admitPackageOutputTransition, inertSelectedPackageInput, streamedPackageFile, resolvePackagePythonExecutable} from './package-output-artifact.mjs';
 import {authenticateOriginalPackageOutput, readOriginalPackageInventory, requireOriginalPackageOutput, issuePackageAssemblyExecution, requirePackageAssemblyExecution}
   from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
 
@@ -404,6 +404,8 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
       original_base_context_retained:true,base_restoration_invoked:false,invariant_build_invoked:false,
       current_selected_inputs:consumed,elapsed_seconds:(performance.now()-started)/1000};
     const receipt={version:1,kind:'cloudflare',input_definition_sha256:current.input_definition_sha256,assembly,
+      input_files_sha256:hash(JSON.stringify(current.files)),
+      preview_output_sha256:hash(JSON.stringify(inventoryPackageOutput(stage,{preview:true}))),
       preflight:{passed:true,errors:[],inputs:{head:current.head},runtime:{...runtime,extractor:{python,source:extractor,startup:['-I','-S','-B']}},
         limitation:'Current assembly code, dependency and selected-source admission; original invariant build is reused, not reexecuted.'}};
     const receiptRaw=Buffer.from(JSON.stringify(receipt,null,2)+'\n');

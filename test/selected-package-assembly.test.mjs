@@ -14,7 +14,7 @@ import {execFileSync,spawnSync} from 'node:child_process';
 import {inspectPackageNodeRuntime,inspectPackageRuntime} from '../scripts/package-build.mjs';
 import {loadPackageInputs} from '../scripts/package-inputs.mjs';
 import {githubAPI} from '../scripts/issue-claim-contract.mjs';
-import {admitPackageInputTransition,committedPackageInputs,committedPackageProducer} from '../scripts/package-output-artifact.mjs';
+import {admitPackageInputTransition,committedPackageInputs,committedPackageProducer,inventoryPackageOutput} from '../scripts/package-output-artifact.mjs';
 
 // Private execution must run in a plain child, but only its requested probe.
 const probeName=process.argv[2];let probeRegistered=false;
@@ -1186,9 +1186,13 @@ with zipfile.ZipFile(sys.argv[2],'w',zipfile.ZIP_DEFLATED) as z:
   const assemble=()=>assembleSelectedPackage({api,repo:f.f.repo,expectedHead:git('rev-parse','HEAD'),originalRunId:17});
   const result=await assemble();assert.equal(result.assembled,true,JSON.stringify(result));assert.equal(downloads,1);
   assert.equal(result.current_prepared_assets,currentPrepared.index.files.length);
+  const assemblyReceipt=JSON.parse(fs.readFileSync(path.join(directory,'.cache/package-input-build.json')));
+  assert.equal(assemblyReceipt.input_files_sha256,sha(JSON.stringify(committedPackageInputs(directory,loadPackageInputs(directory)))));
+  assert.equal(assemblyReceipt.preview_output_sha256,sha(JSON.stringify(inventoryPackageOutput(directory,{preview:true}))));
+  assert.equal(assemblyReceipt.assembly.invariant_build_invoked,false);
+  assert.match(assemblyReceipt.preflight.limitation,/original invariant build is reused, not reexecuted/);
   if(retirement){
-    const receipt=JSON.parse(fs.readFileSync(path.join(directory,'.cache/package-input-build.json')));
-    assert.deepEqual([...receipt.assembly.transition.removed_selected_inputs].sort(),[...retired].sort());
+    assert.deepEqual([...assemblyReceipt.assembly.transition.removed_selected_inputs].sort(),[...retired].sort());
     // Discovery, private execution issuance and final output admission must use
     // the same original selector-bound bytes, never a caller's retirement flag.
     const currentDefinition=loadPackageInputs(directory),current={head:git('rev-parse','HEAD'),

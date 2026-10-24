@@ -13,6 +13,38 @@ export const safePackagePath = value => typeof value === 'string' && /^[A-Za-z0-
   && !value.startsWith('/') && value.replace(/\/$/, '').split('/').every(part => part && part !== '.' && part !== '..');
 export const containsPackagePath = (paths, file) => paths.some(input => input.endsWith('/') ? file.startsWith(input) : file === input);
 
+// The one actual declared-input inventory shared by build capture and preview.
+// It describes copied/consumed bytes, including dirty and untracked inputs, not HEAD.
+export function materializedPackageInputs(root,definition=loadPackageInputs(root)) {
+  root=fs.realpathSync(root);validatePackageInputs(definition);
+  const actual=[];
+  const ordinary=(relative,directory=false)=>{
+    let at=root;const parts=relative.split('/');
+    for(let i=0;i<parts.length;i++){
+      if(!parts[i]||parts[i]==='.'||parts[i]==='..'||/[\\\0]/.test(parts[i]))throw Error('Unsafe package input path');
+      at=path.join(at,parts[i]);const stat=fs.lstatSync(at);
+      if(stat.isSymbolicLink()||!(i<parts.length-1||directory?stat.isDirectory():stat.isFile()))throw Error('Nonordinary package input: '+relative);
+    }
+    return at;
+  };
+  const visit=name=>{
+    const file=ordinary(name),before=fs.lstatSync(file),fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);
+    const digest=createHash('sha1').update(`blob ${before.size}\0`),buffer=Buffer.alloc(1048576);let bytes=0;
+    try{
+      for(;;){const count=fs.readSync(fd,buffer,0,buffer.length,null);if(!count)break;bytes+=count;digest.update(buffer.subarray(0,count));}
+      const held=fs.fstatSync(fd),after=fs.lstatSync(file);
+      if(bytes!==before.size||!['dev','ino','size','mode','mtimeMs','ctimeMs'].every(key=>before[key]===held[key]&&held[key]===after[key]))throw Error('Package input changed while inventorying');
+    }finally{fs.closeSync(fd);}
+    actual.push({path:name,mode:before.mode&0o111?'100755':'100644',oid:digest.digest('hex')});
+  };
+  const walk=name=>{ordinary(name,true);for(const part of fs.readdirSync(path.join(root,name))){const child=name+'/'+part,stat=fs.lstatSync(path.join(root,child));if(stat.isDirectory()&&!stat.isSymbolicLink())walk(child);else visit(child);}};
+  for(const input of definition.inputs){
+    if(!fs.existsSync(path.join(root,input))){if(!definition.optional_inputs.includes(input))throw Error('Required original input absent');continue;}
+    if(input.endsWith('/'))walk(input.slice(0,-1));else visit(input);
+  }
+  return actual.sort((a,b)=>a.path.localeCompare(b.path,'en'));
+}
+
 export function validatePackageInputs(value) {
   if (value?.version !== 1) throw Error('Unsupported package input definition');
   for (const name of ['inputs', 'optional_inputs', 'verification_paths', 'generated_outputs']) {

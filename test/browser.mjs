@@ -94,7 +94,7 @@ test('pixel map uses the same cell for hover and selection, with zoom-aware hier
   await page.waitForFunction(()=>document.querySelector('.atlas-pixel-canvas')?.dataset.locationBorders==='true');
   assert.equal(await page.locator('.atlas-pixel-canvas').getAttribute('data-grid-zoom'),'7');
   assert.equal(await page.locator('.atlas-pixel-canvas').getAttribute('data-province-borders'),'true');
-  await page.screenshot({path:'/workspace/atlas-pixel-hong-kong.png',fullPage:true});
+  await page.screenshot({path:'.cache/atlas-pixel-hong-kong.png',fullPage:true});
   await page.locator('#close-details').click();
   const box=await page.locator('#map').boundingBox();let hit=false;
   for(const [dx,dy] of [[0,0],[-40,0],[40,0],[0,-40],[0,40],[-80,-60],[80,60]]){
@@ -185,7 +185,7 @@ test('location profiles keep only requested fields visible and preserve citation
    }
   }
  }
- await page.screenshot({path:'/workspace/atlas-location-profile-mobile.png',fullPage:true});
+ await page.screenshot({path:'.cache/atlas-location-profile-mobile.png',fullPage:true});
  await page.setViewportSize({width:1440,height:1080});assert.deepEqual(errors,[]);
 });
 
@@ -364,6 +364,6 @@ test('prepared historical ownership colors every sampled location cell with its 
  const expected=check.expected.match(/\d+/g).slice(0,3).map(Number);
  assert.ok(expected.every((channel,i)=>Math.abs(channel-check.palette[i])<=1),'map palette must match the resolved owner category');
  console.log(`Historical whole-location fill: ${example.name}, ${formatYear(example.year)}, ${example.record.value}, ${(example.record.metadata.share*100).toFixed(1)}% source share, ${check.tested} canonical cells checked.`);
- await page.screenshot({path:'/workspace/atlas-historical-majority.png'});
+ await page.screenshot({path:'.cache/atlas-historical-majority.png'});
  assert.deepEqual(errors,[]);
 });

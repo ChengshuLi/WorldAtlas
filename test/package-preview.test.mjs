@@ -8,6 +8,9 @@ import {execFileSync,spawn} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {staticModuleClosure} from './helpers/static-module-closure.mjs';
 import {inspectPreviewPackage,preparePreviewPackage,startPreview} from '../server.mjs';
+import {materializedPackageInputs} from '../scripts/package-inputs.mjs';
+import {runPackageBuild} from '../scripts/package-build.mjs';
+import {inventoryPackageOutput} from '../scripts/package-output-artifact.mjs';
 import {observationContract} from '../src/observation-modules.js';
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 const git=(root,...args)=>execFileSync('git',['--no-replace-objects','-C',root,...args],{encoding:'utf8',env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_NO_REPLACE_OBJECTS:'1'}}).trim();
@@ -37,7 +40,7 @@ async function fixture(t,{cloudflare=false}={}){
   put(output+'/index.html','<!doctype html><title>Exact compiled preview</title>');put(output+'/atlas-history.json.gz','fixture-history');
   put(output+'/typed-evidence.json',typed);put(output+'/typed-evidence-manifest.json',JSON.stringify({version:1,path:'typed-evidence.json',bytes:Buffer.byteLength(typed),sha256:sha(typed)}));
   put(output+'/environment-classifications.json','{"version":1,"unknown":null,"attributes":{"fixture":true}}');
-  put('.cache/package-input-build.json',JSON.stringify({kind:cloudflare?'cloudflare':'static',input_definition_sha256:sha(definition),preflight:{passed:true,inputs:{head}}}));
+  put('.cache/package-input-build.json',JSON.stringify({kind:cloudflare?'cloudflare':'static',input_definition_sha256:sha(definition),input_files_sha256:sha(JSON.stringify(materializedPackageInputs(root))),preview_output_sha256:sha(JSON.stringify(inventoryPackageOutput(root,{preview:true}))),preflight:{passed:true,inputs:{head}}}));
  }
  publish();fs.symlinkSync(fs.realpathSync(new URL('../node_modules',import.meta.url)),path.join(root,'node_modules'),'dir');
  return {root,output,put,publish,pin,selection,atlas};
@@ -60,7 +63,7 @@ test('preview reuses canonical output without build; missing/stale/damaged outpu
 });
 
 for(const production of [false,true])for(const cloudflare of [false,true])test(`actual ${production?'start':'dev'} HTTP route serves ${cloudflare?'Cloudflare':'standalone'} package, preserves GETs and never creates a DB`,async t=>{
- const f=await fixture(t,{cloudflare});
+ const f=await fixture(t,{cloudflare});f.put('dist/drizzle/incidental.sql','not a served atlas asset');
  const child=spawn(process.execPath,['server.mjs',...(production?['--production']:[])],{cwd:f.root,env:{...process.env,PORT:'0',ATLAS_TEST_MODE:'1'},stdio:['ignore','pipe','pipe']});
  let stdout='',stderr='';child.stdout.on('data',chunk=>stdout+=chunk);child.stderr.on('data',chunk=>stderr+=chunk);
  t.after(async()=>{if(child.exitCode===null){const exit=new Promise(resolve=>child.once('exit',resolve));child.kill('SIGTERM');await exit;}});
@@ -76,6 +79,7 @@ for(const production of [false,true])for(const cloudflare of [false,true])test(`
  for(const route of ['/api/geography','/api/snapshot?year=2026'])assert.equal((await fetch(base+route)).status,404);
  assert.equal((await fetch(base+'/api/classifications',{method:'POST'})).status,405);
  assert.equal((await fetch(base+'/atlas-geography.json',{method:'POST'})).status,405);
+ assert.equal((await fetch(base+'/drizzle/incidental.sql')).status,404);
  if(production)assert.match(await(await fetch(base+'/')).text(),/Exact compiled preview/);
  else{const source=await(await fetch(base+'/src/probe.js')).text();const module=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));assert.equal(module.staticAtlas,'true');assert.equal(module.hosted,'false');}
  assert.doesNotMatch(stdout,/Preparing canonical/);assert.equal(fs.existsSync(path.join(f.root,'data/atlas.sqlite')),false);
@@ -94,4 +98,33 @@ test('preview refuses mismatched current headers, members, staged inputs and hid
  git(f.root,'restore','--staged','--worktree','src/probe.js');git(f.root,'update-index','--assume-unchanged','src/probe.js');
  f.put('src/probe.js','// hidden dirty change');await assert.rejects(preparePreviewPackage(f.root,{build:failBuild}),/normal constructor selected/);
  assert.equal(fs.readFileSync(path.join(f.root,'src/probe.js'),'utf8'),'// hidden dirty change');
+});
+
+test('actual builder receipt permits unchanged dirty inputs but rebuilds after their reversion',async t=>{
+ const f=await fixture(t),source='data/preview-classification.json';
+ const definition={version:1,inputs:['.github/package-inputs.json',source,'data/preview-optional.json','scripts/build-static-inner.mjs'],optional_inputs:['data/preview-optional.json'],verification_paths:[],generated_outputs:['dist/']};
+ f.put(source,'{"fixture":"committed"}');f.put('.github/package-inputs.json',JSON.stringify(definition));
+ const files={};const visit=directory=>{for(const name of fs.readdirSync(path.join(f.root,directory))){const relative=directory+'/'+name;if(fs.statSync(path.join(f.root,relative)).isDirectory())visit(relative);else files[relative]=fs.readFileSync(path.join(f.root,relative)).toString('base64');}};visit('dist');
+ f.put('scripts/build-static-inner.mjs',`import fs from 'node:fs';import path from 'node:path';for(const [name,raw] of Object.entries(${JSON.stringify(files)})){fs.mkdirSync(path.dirname(name),{recursive:true});fs.writeFileSync(name,Buffer.from(raw,'base64'));}fs.copyFileSync(${JSON.stringify(source)},'dist/environment-classifications.json');`);
+ git(f.root,'add','.');git(f.root,'-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','Actual auxiliary-input builder');
+ const preflight=async()=>({passed:true,errors:[],inputs:{head:git(f.root,'rev-parse','HEAD')},synthetic_package_boundary_fixture:true});
+ f.put(source,'{"fixture":"dirty consumed bytes"}');
+ const dirty=await runPackageBuild('static',{root:f.root,preflight});
+ assert.equal(dirty.input_files_sha256,sha(JSON.stringify(materializedPackageInputs(f.root))));
+ let builds=0;const build=async(kind,{root})=>{builds++;return runPackageBuild(kind,{root,preflight});};
+ await preparePreviewPackage(f.root,{build});assert.equal(builds,0,'unchanged actual dirty input is reusable');
+ assert.equal(JSON.parse(fs.readFileSync(path.join(f.root,'dist/environment-classifications.json'))).fixture,'dirty consumed bytes');
+ git(f.root,'restore','--worktree',source);
+ await preparePreviewPackage(f.root,{build});assert.equal(builds,1,'reverted bytes differ from the consumed dirty image');
+ assert.equal(JSON.parse(fs.readFileSync(path.join(f.root,'dist/environment-classifications.json'))).fixture,'committed');
+ await preparePreviewPackage(f.root,{build});assert.equal(builds,1,'unchanged rebuilt package is reused');
+ f.put('dist/environment-classifications.json','{"fixture":"foreign output"}');
+ await preparePreviewPackage(f.root,{build});assert.equal(builds,2,'changed auxiliary output cannot be reused');
+ assert.equal(JSON.parse(fs.readFileSync(path.join(f.root,'dist/environment-classifications.json'))).fixture,'committed');
+ f.put('dist/drizzle/incidental.sql','independent migration-test output');
+ await preparePreviewPackage(f.root,{build});assert.equal(builds,2,'independent drizzle output is not an atlas rebuild trigger');
+ fs.chmodSync(path.join(f.root,source),0o755);await preparePreviewPackage(f.root,{build});assert.equal(builds,3,'input mode is part of consumed identity');
+ f.put('data/preview-optional.json','present optional bytes');await preparePreviewPackage(f.root,{build});assert.equal(builds,4,'optional presence changes the image');
+ fs.unlinkSync(path.join(f.root,'data/preview-optional.json'));await preparePreviewPackage(f.root,{build});assert.equal(builds,5,'optional absence changes the image back');
+ await preparePreviewPackage(f.root,{build});assert.equal(builds,5);
 });

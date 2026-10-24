@@ -3,25 +3,24 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
-import {execFileSync} from 'node:child_process';
 import {isDeepStrictEqual} from 'node:util';
 import {resolveTypedSnapshot} from './src/typed-snapshot.js';
 import {finalBankSelection,scientificNativeSelection} from './src/reference-metadata.js';
-import {loadPackageInputs} from './scripts/package-inputs.mjs';
-import {streamedPackageFile} from './scripts/package-output-artifact.mjs';
+import {loadPackageInputs,materializedPackageInputs} from './scripts/package-inputs.mjs';
+import {inventoryPackageOutput} from './scripts/package-output-artifact.mjs';
 
 const repository=path.dirname(fileURLToPath(import.meta.url));
 const json=file=>JSON.parse(fs.readFileSync(file));
 const need=(ok,message)=>{if(!ok)throw Error(message);};
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
-const git=(root,args)=>execFileSync('git',['--no-replace-objects','-C',root,...args],{encoding:'utf8',maxBuffer:Infinity,
-  env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_NO_REPLACE_OBJECTS:'1',GIT_TERMINAL_PROMPT:'0'}});
+
 
 // Preview copies no map and constructs no alternate ownership. Reuse the actual
 // ordinary package, with its current E header and whole file identities checked.
-export function inspectPreviewPackage(root=repository) {
+export function inspectPreviewPackage(root=repository,inventory=inventoryPackageOutput(root,{preview:true})) {
   root=fs.realpathSync(root);
   const output=fs.existsSync(path.join(root,'dist/client/atlas-geography.json'))?'dist/client':'dist';
+  const outputFiles=new Map(inventory.files.map(pin=>[pin.path,pin]));
   const atlas=json(path.join(root,output,'atlas-geography.json'));
   const selection=json(path.join(root,'data/ownership-selection.json')),bank=finalBankSelection(selection);
   const indexRaw=fs.readFileSync(path.join(root,bank?.path??'data/canonical-grid/current-startup/index.json')),index=JSON.parse(indexRaw);
@@ -36,40 +35,35 @@ export function inspectPreviewPackage(root=repository) {
   need(isDeepStrictEqual(index.referenceMetadata,atlas.referenceMetadata?referenceMetadata:undefined),'Preview reference projection differs');
   need(Array.isArray(index.files)&&index.files.length>0,'Preview complete package files missing');
   for(const pin of index.files){
-    const actual=streamedPackageFile(root,output+'/'+pin.path);
-    need(actual.bytes===pin.bytes&&actual.sha256===pin.sha256,'Preview package member differs: '+pin.path);
+    const actual=outputFiles.get(output+'/'+pin.path);
+    need(actual?.bytes===pin.bytes&&actual.sha256===pin.sha256,'Preview package member differs: '+pin.path);
   }
   for(const name of ['index.html','atlas-history.json.gz','typed-evidence.json','typed-evidence-manifest.json','environment-classifications.json'])
-    streamedPackageFile(root,output+'/'+name);
+    need(outputFiles.has(output+'/'+name),'Preview package member missing: '+name);
   return {root,output,atlas};
 }
 
-function reusablePreviewSource(root) {
+function reusablePreviewPackage(root) {
   const receipt=json(path.join(root,'.cache/package-input-build.json'));
   need(receipt.preflight?.passed===true&&['static','cloudflare'].includes(receipt.kind),'Successful canonical package build required');
-  const head=receipt.preflight.inputs?.head;
-  need(/^[a-f0-9]{40}$/.test(head??''),'Package input source identity missing');
   const definition=loadPackageInputs(root);
   need(receipt.input_definition_sha256===sha(fs.readFileSync(path.join(root,'.github/package-inputs.json'))),'Package input declaration changed');
-  // Existing declared inputs cover data and code. A dirty source is not erased or
-  // rejected: the normal builder handles it. Only unchanged input bytes are reused.
-  const flags=git(root,['ls-files','-v','-z','--',...definition.inputs]).split('\0').filter(Boolean);
-  need(!flags.some(row=>/[a-z]/.test(row[0])||row[0]==='S'&&fs.existsSync(path.join(root,row.slice(2)))),
-    'Package input trust flags cannot establish unchanged preview bytes');
-  need(git(root,['diff','--no-ext-diff','--no-textconv','--name-only',head,'--',...definition.inputs]).trim()===''&&
-    git(root,['ls-files','--others','--',...definition.inputs]).trim()==='',
-    'Package inputs changed since the canonical build');
+  need(receipt.input_files_sha256===sha(JSON.stringify(materializedPackageInputs(root,definition))),
+    'Actual package inputs changed since the canonical build');
+  const output=inventoryPackageOutput(root,{preview:true});
+  need(receipt.preview_output_sha256===sha(JSON.stringify(output)),'Actual package outputs changed since the canonical build');
+  return output;
 }
 
 export async function preparePreviewPackage(root=repository,{build}={}) {
   let reason;
-  try{reusablePreviewSource(root);return inspectPreviewPackage(root);}catch(error){reason=error.message;}
+  try{return inspectPreviewPackage(root,reusablePreviewPackage(root));}catch(error){reason=error.message;}
   console.log('Preparing canonical standalone atlas for preview: '+reason);
   // One existing constructor, including its normal declared-input preparation,
   // prior-output preservation and failure behavior. No hidden second map master.
   const run=build??(await import('./scripts/package-build.mjs')).runPackageBuild;
   await run('static',{root});
-  return inspectPreviewPackage(root);
+  return inspectPreviewPackage(root,reusablePreviewPackage(root));
 }
 
 export async function startPreview({root=repository,production=false,port=Number(process.env.PORT||3000),host='0.0.0.0',build}={}) {
@@ -97,6 +91,7 @@ export async function startPreview({root=repository,production=false,port=Number
     if(req.method!=='GET'&&req.method!=='HEAD'){res.writeHead(405);return res.end('Method not allowed');}
     let pathname;
     try{pathname=decodeURIComponent(url.pathname);}catch{res.writeHead(400);return res.end('Invalid path');}
+    if(pathname==='/drizzle'||pathname.startsWith('/drizzle/')){res.writeHead(404);return res.end('Not found');}
     const file=path.resolve(assets,'.'+(pathname==='/'?'/index.html':pathname));
     if(!file.startsWith(assets+path.sep)){res.writeHead(404);return res.end('Not found');}
     // Source UI/HMR stays with Vite; all canonical data comes from the one package.
