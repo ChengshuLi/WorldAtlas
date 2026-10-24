@@ -1639,6 +1639,24 @@ function partitionSupportedInputs(config, reader, accepted) {
     ...(accepted ? {'already-present-original.json': jsonBytes({rows: alreadyPresent})} : {})};
 }
 
+// Lossless deletion of duplicated original-N polygons from publication
+// transport only. The full private artifacts remain unchanged and are still
+// used by compose/finalize. This command cannot qualify or adopt any cells.
+export async function prepareCompletedGeometryCustody(config,reader,root) {
+  need(config?.version===1&&same(Object.keys(config).sort(),['accepted_selector','authority_registry','version']),
+    'Explicit completed geometry custody configuration required');
+  const selector=locate(reader,config.accepted_selector),registryPin=locate(reader,config.authority_registry);
+  need(selector.path==='data/ownership-selection.json'&&finalBankSelection(reader.json(selector)),
+    'Pinned accepted final selector required for completed geometry custody');
+  const {ImmutableReader}=await import('./check-effective-geographic-regression.mjs');
+  const {projectCompletedAuthorityRegistry}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs');
+  const {canonicalNativeJsonChunks}=await import('./native-patch-store.mjs');
+  const beforeReader=new ImmutableReader(root,selector.commit);
+  const projected=await projectCompletedAuthorityRegistry({beforeReader,registry:reader.json(registryPin),
+    readOriginal:async pin=>{await reader.acquire?.([pin]);return reader.read(pin);}});
+  return {'authority-registry.json':stageProduct(canonicalNativeJsonChunks(projected))};
+}
+
 // Execute the existing modern constructor or its admitted read-only diagnostic,
 // rather than authoring a country wrapper. Only qualification emits authority.
 export async function nativeAuthority(config, reader, root, diagnostic = false) {
@@ -1703,8 +1721,8 @@ async function main(args) {
     console.log(JSON.stringify({...publishComplete(), acquisition: result, acquisition_ms: performance.now() - started}));
     return;
   }
-  need(['reference-metadata', 'source', 'physical', 'source-evidence', 'native-authority', 'native-diagnostic', 'supported-inputs', 'requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'finalize'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
-    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|finalize|source|physical|source-evidence|native-authority|native-diagnostic|supported-inputs|reference-metadata CONFIG DESTINATION [--resume]');
+  need(['completed-custody', 'reference-metadata', 'source', 'physical', 'source-evidence', 'native-authority', 'native-diagnostic', 'supported-inputs', 'requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'finalize'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
+    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|finalize|source|physical|source-evidence|native-authority|native-diagnostic|supported-inputs|reference-metadata|completed-custody CONFIG DESTINATION [--resume]');
   need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
   const root = fs.realpathSync(process.cwd()); admitDestination(root, destination, flags.includes('--resume'));
   const raw = ordinary(root, configFile), config = JSON.parse(raw), reader = pinReader(root);
@@ -1721,6 +1739,7 @@ async function main(args) {
   }
   if (['native-authority','native-diagnostic'].includes(phase)) { const result = await nativeAuthority(config, reader, root, phase === 'native-diagnostic'); outputs = result.products; observation = result.observation; }
   if (phase === 'reference-metadata') { const result = prepareReferenceMetadata(config, reader); outputs = result.products; binding.input_inventory = result.input_inventory; }
+  if (phase === 'completed-custody') outputs = await prepareCompletedGeometryCustody(config, reader, root);
   if (phase === 'supported-inputs') outputs = await supportedInputs(config, reader);
   if (phase === 'source-evidence') outputs = await sourceEvidence(config, reader);
   if (phase === 'requests') outputs = prepareRequests(config, reader);
