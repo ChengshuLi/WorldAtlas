@@ -73,6 +73,8 @@ test('accepted main directly advances A then B then code-only without any histor
     readOriginal:p=>f.git('show',p.commit+':'+p.path)});
   const originals=[a.added.entry.completed_constructor,binding.source_evidence];
   assert.equal(projected.completed_geometry_custody.length,1);
+  assert.equal(projected.completed_geometry_custody[0].completed_constructor.native_bounds,'accepted-native-centres-v1');
+  assert(projected.completed_geometry_custody[0].completed_constructor.body.ledger_rows.every(row=>!Object.hasOwn(row,'native_bounds')));
   for(const role of ['completed_constructor','source_evidence']){
     const part=projected.completed_geometry_custody[0][role];
     assert(part.slots.length>0);
@@ -85,19 +87,51 @@ test('accepted main directly advances A then B then code-only without any histor
     for(const p of originals)fs.unlinkSync(path.join(f.root,p.path));
     return f.commit();
   };
-  const compareProjection=async candidate=>{
+  const compareProjection=async(candidate,configure=()=>{})=>{
     const beforeReader=new f.native.ImmutableReader(f.root,initial.commit),afterReader=new f.native.ImmutableReader(f.root,candidate,{invocation:beforeReader.invocation});
     for(const r of [beforeReader,afterReader])for(const method of ['read','stream']){
       const original=r[method].bind(r);r[method]=(name,...args)=>{
         assert(!originals.some(p=>p.path===name),'Projected proof must not reopen the full private original');return original(name,...args);
       };
     }
+    configure(beforeReader,afterReader);
     return f.api.compareAcceptedFinalBank({beforeReader,afterReader});
   };
   const candidate=commitProjection();const report=await compareProjection(candidate);
   assert.equal(report.native_row_scope.added_cells,1);assert.equal(report.completed_geometry_custody.length,1);
   assert.deepEqual(report.completed_geometry_custody[0].originals,originals);
   assert(report.input_inventory.some(p=>p.path==='data/source.json'&&p.whole_body_consumed));
+  assert(report.input_inventory.some(p=>p.path===f.manifest.native_latitudes.path&&p.whole_body_consumed));
+  await t.test('candidate lattice cannot rescue unavailable accepted lattice',async()=>{
+    let candidateAvailable=false,acceptedReads=0;
+    await assert.rejects(compareProjection(candidate,(before,after)=>{
+      const p=f.manifest.native_latitudes;
+      candidateAvailable=after.read(p.path,{version:p.commit,expected:p.sha256}).length===p.bytes;
+      const read=before.read.bind(before);before.read=(name,...args)=>{
+        if(name===p.path){acceptedReads++;throw Error('Accepted custody lattice unavailable');}return read(name,...args);
+      };
+    }),/Accepted custody lattice unavailable/);
+    assert(candidateAvailable);assert(acceptedReads>0);
+  });
+  await t.test('altered accepted encoded lattice is rejected before reconstruction',async()=>{
+    let reached=false;
+    await assert.rejects(compareProjection(candidate,before=>{
+      const read=before.read.bind(before);before.read=(name,...args)=>{
+        const raw=read(name,...args);if(name!==f.manifest.native_latitudes.path)return raw;
+        reached=true;const changed=Buffer.from(raw);changed[changed.length-1]^=1;return changed;
+      };
+    }),/latitude encoded binding differs/);
+    assert(reached);
+  });
+  await t.test('legacy geometry-only custody still reconstructs the original constructor',async()=>{
+    const legacy=commitProjection(r=>{
+      const p=r.completed_geometry_custody[0].completed_constructor;
+      const original=JSON.parse(f.git('show',p.original.commit+':'+p.original.path));
+      p.body.ledger_rows.forEach((row,i)=>row.native_bounds=original.ledger_rows[i].native_bounds);delete p.native_bounds;
+    });
+    assert.equal((await compareProjection(legacy)).native_row_scope.added_cells,1);
+  });
+
   const cold=async(name,omitted,expected)=>t.test(name,async t=>{
     const clone=fs.mkdtempSync(path.join(os.tmpdir(),'projected-proof-cold-'));t.after(()=>fs.rmSync(clone,{recursive:true,force:true}));
     fs.cpSync(f.root,clone,{recursive:true});omitFixtureObjects(t,clone,[...new Set(omitted)]);
@@ -118,6 +152,11 @@ test('accepted main directly advances A then B then code-only without any histor
   const acceptedSource=f.pin('data/source.json',sourceWorld);
   await cold('candidate geometry cannot replace unavailable accepted N',[acceptedSource.git_blob_oid],new RegExp(acceptedSource.git_blob_oid));
   const bad=[
+    ['unknown bounds derivation',r=>r.completed_geometry_custody[0].completed_constructor.native_bounds='candidate-lattice',/native bounds projection/],
+    ['source bounds tag',r=>r.completed_geometry_custody[0].source_evidence.native_bounds='accepted-native-centres-v1',/native bounds projection/],
+    ['retained bounds under tag',r=>r.completed_geometry_custody[0].completed_constructor.body.ledger_rows[0].native_bounds=[0,0,0,0],/retains native bounds/],
+    ['empty bounds rows',r=>r.completed_geometry_custody[0].completed_constructor.body.ledger_rows[0].native_rows=[],/require native rows/],
+    ['altered retained native owner',r=>r.completed_geometry_custody[0].completed_constructor.body.ledger_rows[0].native_rows[0].runs[0][2]++,/native interval/],
     ['retained source field',r=>r.completed_geometry_custody[0].source_evidence.body.base_reference.id+='x',/original (whole byte identity|byte size)/],
     ['geometry hash',r=>r.completed_geometry_custody[0].source_evidence.slots[0].base_geometry_sha256='0'.repeat(64),/geometry hash/],
     ['owner',r=>r.completed_geometry_custody[0].source_evidence.slots[0].pixelIndex++,/slot/],
@@ -489,4 +528,51 @@ test('completed geometry transport requires exact canonical original wire bytes'
   ['duplicate JSON key',Buffer.from(raw.toString().replace('"version":1','"version":1,"version":1'))],
   ['negative zero lexical form',Buffer.from(raw.toString().replace('[0,0]','[-0,0]'))]])
   await t.test(name,()=>assert.throws(()=>projectCompletedGeometryBody(bytes,pin(bytes),'source_evidence'),/whole byte identity|byte size/));
+});
+
+
+test('constructor-only bounds custody is exact, typed and backward compatible',async t=>{
+ const geometry={type:'Polygon',coordinates:[[[0,0],[1,0],[1,1],[0,0]]]},size=262166;
+ const latitudes=Float64Array.from({length:size},(_,i)=>80-i/2000),rows=[{y:10,runs:[[0,2,1],[5,6,1]]},{y:20,runs:[[3,4,1]]}];
+ const originalBounds=[.5/262166*360-180,79.99,5.5/262166*360-180,79.995];
+ const body={version:1,kind:'existing-source-target-native-constructor-result',ledger_rows:[
+  {target_id:'A',pixelIndex:1,base_geometry:geometry,native_rows:rows,native_bounds:originalBounds},
+  {target_id:'B',pixelIndex:2,base_geometry:geometry,native_rows:rows.map(r=>({...r,runs:r.runs.map(([a,b])=>[a,b,2])})),native_bounds:originalBounds}
+ ],negative_evidence:{held:['unchanged']}};
+ const pin=raw=>({commit:'a'.repeat(40),path:'original.json',mode:'100644',bytes:raw.length,sha256:hash(raw),
+  git_blob_oid:createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')});
+ const raw=valueBytes(body),original=pin(raw),projection=projectCompletedGeometryBody(raw,original,'completed_constructor',{omitNativeBounds:true});
+ const restore=(p,lattice=()=>({size,latitudes}))=>restoreCompletedGeometryBody(p,'completed_constructor',p.original,()=>geometry,lattice);
+ assert.deepEqual(await restore(projection),body);
+ assert(projection.body.ledger_rows.every(row=>!Object.hasOwn(row,'native_bounds')&&!Object.hasOwn(row,'base_geometry')));
+ const legacy=projectCompletedGeometryBody(raw,original,'completed_constructor');
+ assert.deepEqual(await restore(legacy,()=>{throw Error('Legacy must not request lattice');}),body);
+ const changed=async(change,reason)=>{const p=structuredClone(projection);change(p);await assert.rejects(restore(p),reason);};
+ for(const [name,change,reason]of [
+  ['partial omission',p=>p.body.ledger_rows[1].native_bounds=originalBounds,/retains native bounds/],
+  ['untagged missing bounds',p=>delete p.native_bounds,/whole byte identity|byte size/],
+  ['unknown tag',p=>p.native_bounds='unknown',/native bounds projection/],
+  ['empty rows',p=>p.body.ledger_rows[0].native_rows=[],/require native rows/],
+  ['negative row',p=>p.body.ledger_rows[0].native_rows[0].y=-1,/native row/],
+  ['reordered rows',p=>p.body.ledger_rows[0].native_rows.reverse(),/native row/],
+  ['duplicate row',p=>p.body.ledger_rows[0].native_rows.push(p.body.ledger_rows[0].native_rows[1]),/native row/],
+  ['foreign owner',p=>p.body.ledger_rows[0].native_rows[0].runs[0][2]=2,/native interval/],
+  ['out of range column',p=>p.body.ledger_rows[0].native_rows[0].runs[0][1]=size+1,/native interval/],
+  ['fractional column',p=>p.body.ledger_rows[0].native_rows[0].runs[0][0]=.5,/native interval/],
+  ['overlapping run',p=>p.body.ledger_rows[0].native_rows[0].runs[1][0]=1,/native interval/],
+  ['changed native rows',p=>p.body.ledger_rows[0].native_rows[0].runs[0][1]=1,/whole byte identity|byte size/],
+  ['wrong original size',p=>p.original.bytes++,/whole byte identity/],
+  ['wrong original SHA',p=>p.original.sha256='0'.repeat(64),/whole byte identity/],
+  ['wrong original OID',p=>p.original.git_blob_oid='0'.repeat(40),/whole byte identity/],
+  ['changed negative evidence',p=>p.body.negative_evidence.held=[],/whole byte identity|byte size/]
+ ])await t.test(name,()=>changed(change,reason));
+ await t.test('wrong lattice size',()=>assert.rejects(restore(projection,()=>({size:10,latitudes})),/fixed native lattice/));
+ await t.test('missing lattice',()=>assert.rejects(restore(projection,()=>{throw Error('accepted lattice unavailable');}),/accepted lattice unavailable/));
+ await t.test('changed latitude value',()=>{const bad=latitudes.slice();bad[10]+=.1;return assert.rejects(restore(projection,()=>({size,latitudes:bad})),/whole byte identity|byte size/);});
+ await t.test('source role cannot request bounds omission',()=>assert.throws(()=>projectCompletedGeometryBody(raw,original,'source_evidence',{omitNativeBounds:true}),/constructor-only/));
+ await t.test('larger original bounds cannot be rebound',async()=>{
+  const larger=structuredClone(body);larger.ledger_rows[0].native_bounds=[-180,-90,180,90];
+  const bytes=valueBytes(larger),p=projectCompletedGeometryBody(bytes,pin(bytes),'completed_constructor',{omitNativeBounds:true});
+  await assert.rejects(restore(p),/whole byte identity|byte size/);
+ });
 });
