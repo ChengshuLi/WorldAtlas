@@ -977,3 +977,51 @@ The dated initial accepted-282d inventory remains at
 It documents a completed historical cleanup, not a list to replay on later final
 banks. Current finalization retires only authenticated superseded current-bank
 members and preserves unrelated declarations and immutable evidence.
+
+### Completed-proof geometry custody (no science rerun)
+
+When an already completed native authority duplicates original-N polygons in its
+source-evidence targets and constructor ledger, keep its exact full artifacts
+privately. The `completed-custody` phase can omit **only** those duplicated
+`base_geometry` fields from publication transport:
+
+```json
+{"version":1,"accepted_selector":{"commit":"EXACT_ACCEPTED_COMMIT","path":"data/ownership-selection.json"},"authority_registry":{"commit":"EXACT_COMPLETED_REGISTRY_COMMIT","path":"coordination/engineering/JOB/compose/authority-registry.json"}}
+```
+
+```sh
+node scripts/prepare-delivery-handoff.mjs completed-custody CONFIG.json coordination/engineering/JOB/completed-custody-001
+```
+
+This emits a new `authority-registry.json` with the original entries/pins plus
+an explicit `completed_geometry_custody` field. Each referenced authority has
+exactly two typed inline projections: `completed_constructor` and
+`source_evidence`, each containing `original`, `body`, and ordered `slots`.
+The new registry's ordinary whole-file hook authenticates the inline data; it
+is not the same body/hash as the original registry. Commit the output and use
+its exact new pin as the finalizer's `change_evidence`. Preserve the private
+originals and their original commits: the existing local compose/finalize path
+still consumes their authenticated full bodies, including lazy-owner geometry.
+Do not pass projection bodies off as original constructor/source bodies.
+
+Preparation verifies original whole bytes and independently joins every omitted
+polygon to the pinned original-N source roster and stable owner identity. The
+operator/reviewer establishes that the preparation selector is actually accepted;
+a private commit is not made accepted merely by this command. The hosted checker
+always uses its own accepted **before** reader, never the candidate's geometry.
+It reconstructs only the typed omitted fields and requires the exact original
+canonical JSON-plus-newline length, SHA-256 and Git blob OID before admitting the
+original completed proof to unchanged source/negative/owner/conservation checks.
+Noncanonical originals, unknown/duplicate slots, changed retained fields, wrong
+original pins, unavailable accepted N, and known-original tree conflicts fail.
+No original commit/tree is fabricated; reports label reconstructed custody
+separately from actual Git input bodies. Sparse incomplete original descriptors
+are not a supported projection contract.
+
+This is lossless transport preparation, not qualification, source redistribution
+permission or acceptance. Inspect the emitted data for any other restricted
+content: only the specified original polygons are elided; all other original
+fields, holds and evidence remain unchanged. Source polygons elsewhere must not
+be silently redacted or published. A code-only accepted prerequisite is required
+before a data proposal can use a new custody schema; candidate code cannot
+self-certify its own map. No source producer or physical research is rerun.

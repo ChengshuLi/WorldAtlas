@@ -2,13 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
 import {spawnSync,execFileSync} from 'node:child_process';
 import {pathToFileURL} from 'node:url';
 import {omitFixtureObjects} from './helpers/git-object-fixture.mjs';
 import {trustedFixture,appendNativeAuthority} from './fixtures/selected-checkpoint.mjs';
-import {valueSha,valueBytes,coordinateBounds} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {valueSha,valueBytes,coordinateBounds,projectCompletedGeometryBody,restoreCompletedGeometryBody} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {nativeLiteral} from './helpers/native-literal.mjs';
 import {unshuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {finalBankReference} from '../src/reference-metadata.js';
@@ -62,6 +63,83 @@ test('accepted main directly advances A then B then code-only without any histor
  const b=await add(a,2,'repair-b');
  const second=await compare(a.commit,b.commit);assert.equal(second.native_row_scope.added_cells,1);
  assert.deepEqual(second.native_row_scope.changed_rows,[b.added.y]);
+
+ await t.test('typed geometry custody reconstructs exact private originals from accepted N',async t=>{
+  f.git('reset','--hard',a.commit);
+  const originalRegistry=JSON.parse(f.git('show',a.hook.commit+':'+a.hook.path));
+  const binding=JSON.parse(f.git('show',a.added.entry.source_authority.commit+':'+a.added.entry.source_authority.path));
+  const beforeReader=new f.native.ImmutableReader(f.root,initial.commit);
+  const projected=await f.api.projectCompletedAuthorityRegistry({beforeReader,registry:originalRegistry,
+    readOriginal:p=>f.git('show',p.commit+':'+p.path)});
+  const originals=[a.added.entry.completed_constructor,binding.source_evidence];
+  assert.equal(projected.completed_geometry_custody.length,1);
+  for(const role of ['completed_constructor','source_evidence']){
+    const part=projected.completed_geometry_custody[0][role];
+    assert(part.slots.length>0);
+    assert((part.body[role==='source_evidence'?'targets':'ledger_rows']).every(row=>!Object.hasOwn(row,'base_geometry')));
+  }
+  const commitProjection=mutation=>{
+    f.git('reset','--hard',a.commit);const registry=structuredClone(projected);mutation?.(registry);
+    f.save('projected-registry.json',registry);const at=f.commit();
+    f.save('data/ownership-selection.json',{...a.selection,change_evidence:f.pin('projected-registry.json',at)});
+    for(const p of originals)fs.unlinkSync(path.join(f.root,p.path));
+    return f.commit();
+  };
+  const compareProjection=async candidate=>{
+    const beforeReader=new f.native.ImmutableReader(f.root,initial.commit),afterReader=new f.native.ImmutableReader(f.root,candidate,{invocation:beforeReader.invocation});
+    for(const r of [beforeReader,afterReader])for(const method of ['read','stream']){
+      const original=r[method].bind(r);r[method]=(name,...args)=>{
+        assert(!originals.some(p=>p.path===name),'Projected proof must not reopen the full private original');return original(name,...args);
+      };
+    }
+    return f.api.compareAcceptedFinalBank({beforeReader,afterReader});
+  };
+  const candidate=commitProjection();const report=await compareProjection(candidate);
+  assert.equal(report.native_row_scope.added_cells,1);assert.equal(report.completed_geometry_custody.length,1);
+  assert.deepEqual(report.completed_geometry_custody[0].originals,originals);
+  assert(report.input_inventory.some(p=>p.path==='data/source.json'&&p.whole_body_consumed));
+  const cold=async(name,omitted,expected)=>t.test(name,async t=>{
+    const clone=fs.mkdtempSync(path.join(os.tmpdir(),'projected-proof-cold-'));t.after(()=>fs.rmSync(clone,{recursive:true,force:true}));
+    fs.cpSync(f.root,clone,{recursive:true});omitFixtureObjects(t,clone,[...new Set(omitted)]);
+    const beforeReader=new f.native.ImmutableReader(clone,initial.commit),afterReader=new f.native.ImmutableReader(clone,candidate,{invocation:beforeReader.invocation});
+    const run=()=>f.api.compareAcceptedFinalBank({beforeReader,afterReader});
+    if(expected)await assert.rejects(run(),expected);else {
+      assert.equal((await run()).native_row_scope.added_cells,1);
+      execFileSync('git',['-C',clone,'reset','--hard',initial.commit],{stdio:'ignore'});
+      const env={...process.env};delete env.NODE_PATH;delete env.NODE_OPTIONS;delete env.GH_TOKEN;
+      const entry=path.join(clone,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs');
+      const result=spawnSync(process.execPath,[entry,clone,initial.commit,initial.commit,candidate,path.join(clone,'no-checkpoint')],{env,encoding:'utf8',timeout:30000});
+      assert.equal(result.status,0,result.stderr);const report=JSON.parse(result.stdout);
+      assert.equal(report.native.native_row_scope.added_cells,1);assert.equal(report.native.completed_geometry_custody.length,1);
+    }
+  });
+  await cold('known original commits with both private artifact bodies absent',originals.map(p=>p.git_blob_oid));
+  await cold('absent private origin commits and bodies',originals.flatMap(p=>[p.commit,p.git_blob_oid]));
+  const acceptedSource=f.pin('data/source.json',sourceWorld);
+  await cold('candidate geometry cannot replace unavailable accepted N',[acceptedSource.git_blob_oid],new RegExp(acceptedSource.git_blob_oid));
+  const bad=[
+    ['retained source field',r=>r.completed_geometry_custody[0].source_evidence.body.base_reference.id+='x',/original (whole byte identity|byte size)/],
+    ['geometry hash',r=>r.completed_geometry_custody[0].source_evidence.slots[0].base_geometry_sha256='0'.repeat(64),/geometry hash/],
+    ['owner',r=>r.completed_geometry_custody[0].source_evidence.slots[0].pixelIndex++,/slot/],
+    ['target',r=>r.completed_geometry_custody[0].source_evidence.slots[0].target_id='foreign',/slot/],
+    ['missing slot',r=>r.completed_geometry_custody[0].source_evidence.slots=[],/slots/],
+    ['duplicate slot',r=>r.completed_geometry_custody[0].source_evidence.slots.push(r.completed_geometry_custody[0].source_evidence.slots[0]),/slots/],
+    ['foreign slot field',r=>r.completed_geometry_custody[0].source_evidence.slots[0].path='targets/0/other',/slot/],
+    ['retained geometry',r=>r.completed_geometry_custody[0].source_evidence.body.targets[0].base_geometry=f.features[1].geometry,/slot/],
+    ['wrong original pin',r=>r.completed_geometry_custody[0].source_evidence.original.sha256='0'.repeat(64),/source pin differs/],
+    ['known original mode',r=>{r.entries[0].completed_constructor.mode='100755';r.completed_geometry_custody[0].completed_constructor.original.mode='100755';},/Known completed geometry origin differs/],
+    ['known original path',r=>{r.entries[0].completed_constructor.path='absent.json';r.completed_geometry_custody[0].completed_constructor.original.path='absent.json';},/Known completed geometry origin differs/],
+    ['known original OID',r=>{r.entries[0].completed_constructor.git_blob_oid='0'.repeat(40);r.completed_geometry_custody[0].completed_constructor.original.git_blob_oid='0'.repeat(40);},/Known completed geometry origin differs/],
+    ['original reconstructed size',r=>{r.entries[0].completed_constructor.bytes++;r.completed_geometry_custody[0].completed_constructor.original.bytes++;},/whole byte identity/],
+
+    ['unused authority',r=>r.completed_geometry_custody[0].authority_sha256='f'.repeat(64),/custody/],
+    ['duplicate authority',r=>r.completed_geometry_custody.push(r.completed_geometry_custody[0]),/custody/],
+    ['unknown role',r=>r.completed_geometry_custody[0].native_patch={},/custody/],
+    ['foreign original source path',r=>r.completed_geometry_custody[0].source_evidence.body.source_membership.parts[0].path='data/foreign.json',/outside accepted original N/]
+  ];
+  for(const [name,change,reason]of bad)await t.test(name,()=>assert.rejects(compareProjection(commitProjection(change)),reason));
+  f.git('reset','--hard',b.commit);
+ });
 
  const mutateIndex=async(name,mutator,expression)=>t.test(name,async()=>{
   f.git('reset','--hard',b.commit);const index=structuredClone(b.index),selection=structuredClone(b.selection);
@@ -386,4 +464,29 @@ test('historical descriptor acquisition authenticates cold original objects, nev
   assert.deepEqual(f.git('cat-file','blob',oid),raw);
   if(absentOrigin)assert.throws(()=>f.git('--no-lazy-fetch','cat-file','-e',p.commit+'^{commit}'));
  });
+});
+
+
+test('completed geometry transport requires exact canonical original wire bytes',async t=>{
+ const geometry={type:'Polygon',coordinates:[[[0,0],[1,0],[1,1],[0,0]]]},body={version:1,kind:'source-target-native-evidence-v1',
+  targets:[{id:'one',target_id:'A',pixelIndex:1,base_geometry:geometry},{id:'two',target_id:'B',pixelIndex:2,base_geometry:geometry}],
+  negative_evidence:{held:['original-hold'],source:'original-source'}};
+ const raw=valueBytes(body),pin=bytes=>({commit:'a'.repeat(40),path:'original.json',mode:'100644',bytes:bytes.length,sha256:hash(bytes),
+  git_blob_oid:createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex')}),original=pin(raw);
+ const projection=projectCompletedGeometryBody(raw,original,'source_evidence');
+ const restored=await restoreCompletedGeometryBody(projection,'source_evidence',original,()=>geometry);
+ assert.deepEqual(restored,body);assert(Object.isFrozen(restored)&&Object.isFrozen(restored.targets[0].base_geometry.coordinates));
+ const changed=async(change,reason)=>{const p=structuredClone(projection);change(p);await assert.rejects(restoreCompletedGeometryBody(p,'source_evidence',p.original,()=>geometry),reason);};
+ await t.test('wrong original size',()=>changed(p=>p.original.bytes++,/whole byte identity/));
+ await t.test('wrong original SHA',()=>changed(p=>p.original.sha256='0'.repeat(64),/whole byte identity/));
+ await t.test('wrong original Git OID',()=>changed(p=>p.original.git_blob_oid='0'.repeat(40),/whole byte identity/));
+ await t.test('nonordinary original mode',()=>changed(p=>p.original.mode='120000',/immutable body identity/));
+ await t.test('altered negative evidence',()=>changed(p=>p.body.negative_evidence.held=[],/whole byte identity/));
+ await t.test('nongeometry omission',()=>changed(p=>delete p.body.negative_evidence,/whole byte identity/));
+ await t.test('reordered omission slots',()=>changed(p=>p.slots.reverse(),/slot/));
+ await t.test('unknown compression contract',()=>changed(p=>p.original.decoded_bytes=1,/decoded body|unencoded original/));
+ for(const [name,bytes]of [['whitespace',Buffer.from(JSON.stringify(body,null,2)+'\n')],['missing newline',raw.subarray(0,-1)],
+  ['duplicate JSON key',Buffer.from(raw.toString().replace('"version":1','"version":1,"version":1'))],
+  ['negative zero lexical form',Buffer.from(raw.toString().replace('[0,0]','[-0,0]'))]])
+  await t.test(name,()=>assert.throws(()=>projectCompletedGeometryBody(bytes,pin(bytes),'source_evidence'),/whole byte identity|byte size/));
 });
