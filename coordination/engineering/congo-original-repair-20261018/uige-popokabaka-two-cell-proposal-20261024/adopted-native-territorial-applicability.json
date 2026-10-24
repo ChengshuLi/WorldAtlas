@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "kind": "adopted-native-territorial-applicability-v1",
+  "provenance": [
+    {
+      "id": "uige-original-source",
+      "role": "original-source",
+      "parts": [
+        {
+          "bytes": 179282,
+          "commit": "923e9c210b59836e069c182d68daf85439096381",
+          "decoded_bytes": 574816,
+          "decoded_sha256": "71796d87bc112f7969b92ca4c8beb2fa60a4e0a37c3a5e7801ee51a3e7e58c76",
+          "git_blob_oid": "1206ddaf2ff1c1a4b40db92ddfe79bccfb0f0ce8",
+          "mode": "100644",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AGO-ADM1-000.bin.gz",
+          "sha256": "a54aaaf45c85240aba8b99cf98126350cc070306e6da12b746259168e6a6ee71"
+        }
+      ]
+    },
+    {
+      "id": "bounded-adoption-decision",
+      "role": "adoption",
+      "pin": {
+        "commit": "290af4d9b8893e5878fd1bccc7817a90554174b2",
+        "path": "coordination/engineering/congo-original-repair-20261018/uige-popokabaka-contextual-20261024/contextual-decision.json",
+        "mode": "100644",
+        "git_blob_oid": "7026a9a54daa148ee52b3db6f3fde2c1fc767e00",
+        "bytes": 2329,
+        "sha256": "953eb7f9fb257a18918ef8c6b92b4a587641e736693d2be18419b546380a2fe8"
+      }
+    },
+    {
+      "id": "two-key-scope",
+      "role": "scope",
+      "pin": {
+        "commit": "1fdc44379dcd760faea564d7d6d472a1b8afa57b",
+        "path": "coordination/engineering/congo-original-repair-20261018/uige-popokabaka-contextual-20261024/contextual-scope.json",
+        "mode": "100644",
+        "git_blob_oid": "cb743d6e6cb083fcbc34324526736e50a159a3a4",
+        "bytes": 251,
+        "sha256": "8235ed4da77c2507c7ce7d7d3e81cb093e73784e86a1634ce4137577ea27e2b1"
+      }
+    }
+  ],
+  "records": [
+    {
+      "role": "contextual",
+      "source_id": "gb:COD:ADM2:63176286B47421332346835",
+      "target_id": "gb:COD:ADM2:63176286B47421332346835",
+      "pixelIndex": 14501,
+      "y": 135347,
+      "x": 143089,
+      "negative_ordinal": 0,
+      "geometry_sha256": "39fcf2d95283675f6c2eecf0466063678a04c7803dc92eae502123879d589e9d",
+      "original_source": {
+        "id": "uige-original-source",
+        "pointer": "/features/16/geometry"
+      },
+      "adoption": {
+        "id": "bounded-adoption-decision",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "two-key-scope",
+        "pointer": "/keys/0",
+        "owner_pointer": "/owner"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:COD:ADM2:63176286B47421332346835",
+      "target_id": "gb:COD:ADM2:63176286B47421332346835",
+      "pixelIndex": 14501,
+      "y": 135350,
+      "x": 143072,
+      "negative_ordinal": 0,
+      "geometry_sha256": "39fcf2d95283675f6c2eecf0466063678a04c7803dc92eae502123879d589e9d",
+      "original_source": {
+        "id": "uige-original-source",
+        "pointer": "/features/16/geometry"
+      },
+      "adoption": {
+        "id": "bounded-adoption-decision",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "two-key-scope",
+        "pointer": "/keys/1",
+        "owner_pointer": "/owner"
+      }
+    }
+  ]
+}
