@@ -21,19 +21,18 @@ before(async()=>{
 after(async()=>{await browser?.close();server?.kill('SIGTERM');});
 async function goYear(input) {
  const year=parseYear(input);
- const response=year===null?null:page.waitForResponse(r=>{const url=new URL(r.url());return url.pathname==='/api/snapshot'&&Number(url.searchParams.get('year'))===year&&r.status()===200;});
  await page.locator('#year-input').fill(input);await page.locator('#year-form button').click();
- if(response)await response;
  if(year===null)await page.waitForFunction(()=>document.querySelector('#year-error').textContent.length>0);
  else{await page.waitForFunction(expected=>document.querySelector('#map-year').textContent===expected,formatYear(year));await page.locator('#loading').waitFor({state:'hidden'});}
 }
 test('world renders at full scale with every map mode',async()=>{
   assert.match(await page.locator('#coverage').textContent(),/[\d,]+ geographic locations/);
+  const canvas=page.locator('.atlas-pixel-canvas');assert.equal(await canvas.getAttribute('data-precompiled'),'true');assert.equal(await canvas.getAttribute('data-compilations'),'0');
   for (const mode of ['owner','population','culture','religion','rank','topography','vegetation','climate','location','province','area','region','subcontinent','continent']) {
     await page.locator(`[data-mode="${mode}"]`).click();assert.equal(await page.locator(`[data-mode="${mode}"]`).getAttribute('aria-pressed'),'true');
   }
   await page.locator('[data-mode="owner"]').click();
-  await page.screenshot({path:'/workspace/atlas-desktop.png',fullPage:true});
+  await page.screenshot({path:'.cache/atlas-desktop.png',fullPage:true});
 });
 test('search, region selection, hierarchy, and examples show the requested London record',async()=>{
   await page.locator('#search').fill('London'); await page.locator('[data-result="atlas:city:GBR-Greater London"]').click();
@@ -73,7 +72,7 @@ test('mobile layout, data information, zoom, fit, and default borders work witho
   await page.locator('#zoom-in').click();await page.locator('#zoom-out').click();await page.locator('#home').click();
   await page.setViewportSize({width:390,height:844});
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth));
-  await page.screenshot({path:'/workspace/atlas-mobile.png',fullPage:true});
+  await page.screenshot({path:'.cache/atlas-mobile.png',fullPage:true});
   assert.deepEqual(errors,[]);
 });
 
@@ -308,7 +307,7 @@ test('coverage ledger exposes every continent and every geographic tier',async t
  const report=await page.evaluate(async()=>await(await fetch('./world-review.json')).json());
  assert.deepEqual(report.audit_order,['continent','subcontinent','region','area','province','location']);
  assert.equal(report.semantic_complete,false);assert.equal(report.locations,report.level_progress.location.total);
- const geography=await page.evaluate(async()=>{const data=await(await fetch('/api/geography')).json();return {units:data.units.map(unit=>({level:unit.level})),locations:data.features.length};});
+ const geography=await page.evaluate(async()=>{const data=await(await fetch('./atlas-geography.json')).json();const parts=await Promise.all(data.parts.map(async path=>{const response=await fetch(path);return JSON.parse(await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).text());}));return {units:data.units.map(unit=>({level:unit.level})),locations:parts.reduce((sum,rows)=>sum+rows.length,0)};});
  for(const level of ['continent','subcontinent','region','area','province'])assert.equal(report.level_progress[level].total,geography.units.filter(unit=>unit.level===level).length,`${level} coverage must follow the current dataset`);
  assert.equal(report.level_progress.location.total,geography.locations);
  assert.match(await page.locator('#coverage-levels').textContent(),new RegExp(`province: ${report.level_progress.province.total.toLocaleString()} inventoried`));

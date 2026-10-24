@@ -237,7 +237,7 @@ export function reviewedTestPlan(request, {base, head, entries, files, definitio
   // These consumers read current declared policy, not historical fixture copies.
   for (const [consumer, operand] of [
     ...['test/final-bank-finalizer.test.mjs', 'test/selected-delivery-smoke.test.mjs', 'test/final-bank-checkpoint.test.mjs', 'test/selected-owner-observation.test.mjs',
-      'test/accepted-checkpoint-qualification.test.mjs'].map(consumer =>
+      'test/accepted-checkpoint-qualification.test.mjs', 'test/map-cell-diagnosis.test.mjs', 'test/native-location-context.test.mjs'].map(consumer =>
       [consumer, 'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz']),
     ['test/current-rebind-product-custody.test.mjs', 'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json'],
     ['test/local-workspace.test.mjs', 'docs/LOCAL_WORKSPACES.md'],
@@ -257,7 +257,7 @@ export function reviewedTestPlan(request, {base, head, entries, files, definitio
     ...['test/neon-forward-migrations.test.mjs', 'test/settlement-population-import.test.mjs',
       'test/merge-integration.test.mjs'].map(consumer => [consumer, 'data/settlement-estimates.json']),
     ...['data/observation-registry-history/base-v1.json', 'data/research-geography-gate.json']
-      .map(operand => ['test/cloudflare-access.test.mjs', operand])
+      .flatMap(operand => ['test/cloudflare-access.test.mjs', 'test/package-preview.test.mjs'].map(consumer => [consumer, operand]))
   ]) if (tests.includes(consumer)) {
     need(definition.verification_paths.includes(operand), 'Current reviewed operand lacks its verification declaration: ' + operand);
     if (!inputs.includes(operand)) inputs.push(operand);

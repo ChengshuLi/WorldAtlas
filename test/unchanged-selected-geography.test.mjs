@@ -99,6 +99,19 @@ function fixture({projection = false} = {}) {
     close() { fs.rmSync(directory, {recursive: true}); }};
 }
 
+test('final-profile applicability declines before legacy checkpoint and source acquisition', async () => {
+  const f = fixture(); try {
+    const files = {'data/ownership-selection.json': body({version: 2, kind: 'selected-final-native-bank-v2'})};
+    const baseline = f.commit(files, f.baseline), candidate = f.commit({...files, 'unrelated.txt': 'evidence'}, baseline);
+    const acquisition = {summary: () => ({}), acquire: () => assert.fail('Final profile must not acquire legacy metadata'),
+      resolvePath: () => assert.fail('Final profile must not resolve historical origins')};
+    const result = await inspectUnchangedSelectedGeography({repo: f.directory, baseline, candidate, acquisition});
+    assert.equal(result.status, 'full-check-required');
+    assert.equal(result.reason, 'unsupported-selection');
+    assert.equal(result.science_reexecuted, false);
+  } finally { f.close(); }
+});
+
 test('unchanged selected outputs need no historical legality or producer-schema replay', async () => {
   const f = fixture(); try {
     const result = await f.inspect();

@@ -315,8 +315,11 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         const p=selection.reference_projection,a=baseline.entries.get(p.path),b=authored.entries.get(p.path);
         needSelected(ordinary(a)&&a.sha===b?.sha&&a.size===b.size,'Final reference body changed');await pinned(p);
       }
-      if(!same(oldSelection.change_evidence,selection.change_evidence)){
-        needSelected(selection.change_evidence,'New final evidence required');const registry=await pinned(selection.change_evidence,true),seen=new Set();
+      // A switched/restored pointer is not an append command. Only genuinely
+      // changed evidence files need role discovery; current bank validation
+      // independently qualifies every actual positive destination.
+      if(selection.change_evidence&&files.some(file=>file.filename===selection.change_evidence.path)){
+        const registry=await pinned(selection.change_evidence,true),seen=new Set();
         needSelected(registry.version===1&&registry.kind==='retained-rule-authority-registry-v1'&&Array.isArray(registry.entries)&&registry.entries.length>0,'New final registry required');
         for(const entry of registry.entries){
           needSelected(keys(entry,['authority_sha256','policy_id','policy_version','rule_preimage','rule_sha256','source_authority','completed_constructor'])

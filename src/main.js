@@ -1,7 +1,7 @@
 import {installRecordImport} from './import-records.js';
 import {installCoverage} from './coverage.js';
 import {resolveAttributes} from './attributes.js';
-import {resolveTemporal} from './temporal.js';
+import {resolveTemporal,withDatedGeometry} from './temporal.js';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './style.css';
@@ -146,7 +146,7 @@ function select(id, zoom = false) {
 }
 function rebuildGeometry(preparedNative) {
   if (geoLayer) map.removeLayer(geoLayer);
-  geoLayer=new PixelLayer(preparedNative?.features??data.features.map(f=>({...f,geometry:boundaries.get(f.id)?.geometry || f.geometry})),{
+  geoLayer=new PixelLayer(preparedNative?.features??data.features.map(f=>withDatedGeometry(f,boundaries.get(f.id)?.geometry)),{
     coverage:referenceData.coverage,
     ownership:preparedNative?.grid??(!boundaries.size&&!locationInventoryChanged(referenceData.features,data.features)?referenceData.ownership:null),
     orderedOwners:!!preparedNative,
@@ -189,7 +189,7 @@ async function loadYear(next) {
     const changed=boundaryFootprintsChanged(boundaries,nextBoundaries)||locationInventoryChanged(data.features,resolved.features);
     let preparedNative;
     if(changed&&referenceData.ownership?.method===NATIVE_METHOD){
-      const effective=resolved.features.map(f=>({...f,geometry:nextBoundaries.get(f.id)?.geometry??f.geometry}));
+      const effective=resolved.features.map(f=>withDatedGeometry(f,nextBoundaries.get(f.id)?.geometry));
       const context=nativeDisplayContext(referenceData.features,effective);
       if(!nextBoundaries.size&&!locationInventoryChanged(referenceData.features,resolved.features)){
         preparedNative={grid:referenceData.ownership,features:context.features};

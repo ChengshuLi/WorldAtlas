@@ -10,7 +10,7 @@ import {admitNativePatchStore,admitNativeLedgerStore,admitNativeEnvelopeStore,ad
 import {nativeSequence,isNativeSequence,nativeRowAt} from '../../../src/native-grid.js';
 import {openNativeWordStore} from '../../../scripts/native-word-store.mjs';
 import {ImmutableReader, NativeAssetImage, decodeVisibilityLatitudes,
-  loadBaseSelection, selectedGeometrySourceAlias, selectedReferenceOwners, readSelectedGeometryBank} from '../../../scripts/check-effective-geographic-regression.mjs';
+  loadBaseSelection, selectedGeometrySourceAlias, selectedReferenceOwners, readSelectedGeometryBank, compareIntervals} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {repairComponentKey, nativeOnlyComponent} from '../../../src/native-grid.js';
 import {finalBankSelection,scientificNativeSelection,validateReferenceMetadataHeader} from '../../../src/reference-metadata.js';
 import {readPreparedFinalOwnership} from '../../../scripts/package-startup-ownership.mjs';
@@ -1294,7 +1294,7 @@ function disjointPatchRows(before,patches) {
   }
 }
 
-async function appendAuthority(session, reader, entry, domain) {
+async function appendAuthority(session, reader, entry, domain, completedNativeOnly=false) {
   const child = new ImmutableReader(reader.repo,reader.version,{invocation:reader.invocation,gitExecutable:reader.gitExecutable});
   child.inventory=reader.inventory; // retain actual appended-producer inputs without reopening them
   let proof, evidence;
@@ -1309,7 +1309,10 @@ async function appendAuthority(session, reader, entry, domain) {
       proof=verifyCompletedSourceTargetNativeAuthority({constructed,preimage,binding,evidence,candidate});
     }
   }
-  proof??=readRetainedRegistryAuthority(child,entry);
+  if(!proof){
+    demand(!completedNativeOnly,'Final-bank positive changes require completed native source-target authority');
+    proof=readRetainedRegistryAuthority(child,entry);
+  }
 
   return {entry,nativeOnly:proof.original_pins.source_evidence!==undefined,patches:proof.native_proof.native_patches,ledger:proof.original_ledger,
     contract:proof.native_proof.native_contract,source_scope_ids:proof.source_scope_ids,
@@ -1627,11 +1630,11 @@ export async function visitNativeIntervals({state,rows,visit}) {
   }
 }
 
-// Only newly issued evidence is read after final-bank adoption. The existing
-// authority reader still admits the complete original scope and physical proof.
-async function finalNativeAdditions(session,reader,state,selected,priorIdentities,ownerCount=state.certificate?.entries.length) {
+// Only evidence for actual positive destinations is read after final adoption.
+// The existing reader admits its complete original scope and physical proof.
+async function qualifyFinalPositiveEvidence(session,reader,state,selected,priorIdentities,ownerCount=state.certificate?.entries.length) {
   const hook=selected.selection.change_evidence;
-  if(!hook||same(hook,state.selection.change_evidence))return {identities:priorIdentities,components:[],patches:[],referenceSources:[]};
+  if(!hook)return {identities:priorIdentities,components:[],patches:[],referenceSources:[]};
   demand(state.version===2,'Representation migration cannot add scientific cells');
   await acquireInputs(session,reader,[hook]);
   const registry=readBody(session,reader,hook);
@@ -1642,7 +1645,7 @@ async function finalNativeAdditions(session,reader,state,selected,priorIdentitie
   for(const entry of entries){
     demand(!seen.has(entry.authority_sha256),'Candidate repeats an already accepted authority identity');seen.add(entry.authority_sha256);
     demand(entry.policy_id==='retained-source-literal-additions'&&entry.policy_version===1,'Unsupported appended source policy');
-    const qualified=await appendAuthority(session,reader,entry,{size:state.manifest.size,ownerCount});
+    const qualified=await appendAuthority(session,reader,entry,{size:state.manifest.size,ownerCount},true);
     supported(qualified.nativeOnly,'Final-bank positive changes require original native source-target authority');
     demand(same(qualified.contract,contract)&&qualified.ledger.parent_inventory===undefined,
       'New native authority changed the original physical/source contract');
@@ -1669,9 +1672,47 @@ function finalPatchRows(patches,size,ownerCount) {
     for(const row of patch.rows){const runs=groups.get(row.y)??[];runs.push(...Array.from(row.runs,run=>[...run]));groups.set(row.y,runs);}}
   const rows=[...groups].sort((a,b)=>a[0]-b[0]).map(([y,runs])=>({y,runs:runs.sort((a,b)=>a[0]-b[0]||a[1]-b[1]||a[2]-b[2])}));
   // Even equal-owner overlap is not a new disjoint scientific addition.
-  completeRows(rows,size,ownerCount);return rows;
+  completeRows(rows,size,ownerCount);
+  return rows.map(({y,runs})=>{const joined=[];for(const run of runs){const last=joined.at(-1);
+    if(last&&last[1]===run[0]&&last[2]===run[2])last[1]=run[1];else joined.push([...run]);}return {y,runs:joined};});
 }
 function sameWords(a,b){return a.length===b.length&&a.every((word,i)=>word===b[i]);}
+// A final map is current state, not an instruction to replay an old addition.
+// The same interval comparison describes additions, withdrawals and transfers.
+function finalRowChanges(before,after,y,owners) {
+  const values=[...compareIntervals(before,after,{row:y,ownersBefore:owners,ownersAfter:owners}),
+    ...compareIntervals(after,before,{row:y,ownersBefore:owners,ownersAfter:owners})
+      .filter(p=>p.candidate_owner===null).map(p=>({...p,previous_owner:null,candidate_owner:p.previous_owner}))]
+    .sort((a,b)=>a.start-b.start);
+  const result=[];
+  for(const value of values){const prior=result.at(-1);
+    if(prior&&prior.end===value.start&&prior.previous_owner===value.previous_owner&&prior.candidate_owner===value.candidate_owner)prior.end=value.end;
+    else result.push(value);
+  }
+  return result;
+}
+function finalWordChanges(before,after,owners) {
+  demand(before.size===after.size&&before.coordinateBits===after.coordinateBits,'Final map numerical domain changed');
+  const changes=[],bits=before.coordinateBits,mask=2**bits-1;
+  const decode=(bank,y)=>{const result=[],start=bank.rows[y*2],stop=start+bank.rows[y*2+1];
+    for(let i=start;i<stop;i++){const a=bank.runs[i*2],b=bank.runs[i*2+1];
+      result.push([a&mask,(b&mask)+1,(a>>>bits)+(b>>>bits)*2**(32-bits)]);}
+    return result;};
+  for(let y=0;y<before.size;y++){
+    const a=before.rows[y*2]*2,b=after.rows[y*2]*2,length=before.rows[y*2+1]*2;
+    if(length===after.rows[y*2+1]*2&&sameWords(before.runs.subarray(a,a+length),after.runs.subarray(b,b+length)))continue;
+    changes.push(...finalRowChanges(decode(before,y),decode(after,y),y,owners));
+  }
+  return changes;
+}
+function finalContextRows(features) {
+  const rows=new Map();
+  for(const feature of features)for(const row of feature.finishedFootprint?.native_rows??[]){
+    const runs=rows.get(row.y)??[];runs.push(...row.runs.map(([start,end])=>[start,end,feature.pixelIndex]));rows.set(row.y,runs);
+  }
+  for(const runs of rows.values())runs.sort((a,b)=>a[0]-b[0]||a[1]-b[1]||a[2]-b[2]);
+  return rows;
+}
 // Normal authority is the immutable accepted main supplied by the merge queue,
 // not a locator or a replayable chain of old repair receipts. Read current E,
 // validate only the new reviewed proposal, and require the complete result.
@@ -1772,21 +1813,27 @@ export async function compareAcceptedFinalBank({beforeReader,afterReader,acquire
       properties=new Map(projection.location_changes.map(p=>[p.location_id,p.after_properties]));
     }
     demand(same(after.reference,reference),'Final bank silently changed content reference');
-    const added=await finalNativeAdditions(session,afterReader,
-      {version:2,selection:beforeSelection,manifest:before.manifest},after,[],count);
-    const rows=finalPatchRows(added.patches,before.manifest.size,count);
-    demand(same(rows,finalPatchRows(added.components.map(c=>({rows:c.native_rows})),before.manifest.size,count)),
+    const ownerRecords=before.bank.features.map((f,i)=>{
+      demand(f.id===after.bank.features[i].id&&f.pixelIndex===after.bank.features[i].pixelIndex&&f.pixelIndex===i+1,
+        'Final map changed stable owner identity/order');return {id:f.id,index:f.pixelIndex};});
+    const changes=finalWordChanges(before.bank.ownership,after.bank.ownership,ownerRecords);
+    const positive=changes.filter(p=>p.candidate_owner!==null),ownerIndex=new Map(ownerRecords.map(p=>[p.id,p.index]));
+    // Only actual new destinations require new positive source/target evidence.
+    // An old hook restored during withdrawal is provenance, not an append command.
+    const added=positive.length?await qualifyFinalPositiveEvidence(session,afterReader,
+      {version:2,selection:beforeSelection,manifest:before.manifest},after,[],count):{components:[],patches:[],referenceSources:[]};
+    const positiveRows=new Map();
+    for(const p of positive){const runs=positiveRows.get(p.row)??[];runs.push([p.start,p.end,ownerIndex.get(p.candidate_owner)]);positiveRows.set(p.row,runs);}
+    const expectedPositive=finalPatchRows([{rows:[...positiveRows].map(([y,runs])=>({y,runs}))}],before.manifest.size,count);
+    const qualified=finalPatchRows(added.patches,before.manifest.size,count);
+    demand(same(qualified,finalPatchRows(added.components.map(c=>({rows:c.native_rows})),before.manifest.size,count)),
       'New proposal includes cells outside its assigned dispositions');
-    const owners=new Set(before.bank.features.map(f=>f.pixelIndex));
-    const expected=mergeUnassignedNativeIntervals(before.bank.ownership,rows,{owners,allowed:owners});
-    demand(sameWords(expected.rows,after.bank.ownership.rows)&&sameWords(expected.runs,after.bank.ownership.runs),
-      'Final bank omitted, invented, held or reassigned cells outside the qualified new intervals');
-    const byTarget=new Map();
-    for(const component of added.components){const group=byTarget.get(component.target_id)??[];group.push(component);byTarget.set(component.target_id,group);}
-    const lazy=new Set(before.bank.features.filter(f=>f.geometry===null&&byTarget.has(f.id)).map(f=>f.id)),originals=new Map();
+    demand(same(expectedPositive,qualified),'Final map positive destinations differ from complete qualified source scope');
+    for(const component of added.components)
+      demand(ownerIndex.get(component.target_id)===component.pixelIndex,'Positive source target differs from the accepted owner identity');
+    const lazy=new Set(before.bank.features.filter((f,i)=>f.geometry===null&&after.bank.features[i].geometry!==null).map(f=>f.id)),originals=new Map();
     if(lazy.size){
-      // Candidate paths only locate a member of the accepted immutable source
-      // index. They cannot supply the original geometry or redefine its pin.
+      // Proposed containing paths locate accepted N, never redefine its bytes.
       const sources=await originalSources();
       for(const name of added.referenceSources){
         const pin=sources.get(name);demand(pin,'New target source is outside the accepted original source roster');
@@ -1799,29 +1846,63 @@ export async function compareAcceptedFinalBank({beforeReader,afterReader,acquire
       }
       demand(originals.size===lazy.size,'New lazy target lacks its accepted original containing source');
     }
-    const changedIds=[];
+    const changedIds=[],oldContexts=[],newContexts=[];
+    let latitudes;
+    const checkBounds=async footprint=>{
+      if(!footprint?.native_rows.length)return;
+      if(!latitudes){const pin=before.manifest.native_latitudes;
+        await acquireInputs(session,beforeReader,[pin]);
+        latitudes=decodeVisibilityLatitudes(beforeReader.read(pin.path,{version:resolvePin(beforeReader,pin).version,expected:pin.sha256}),pin,before.manifest.size);
+      }
+      const box=footprint.native_bounds,size=before.manifest.size;
+      for(const row of footprint.native_rows)for(const [start,end] of row.runs)
+        demand(box[0]<=(start+.5)/size*360-180&&box[2]>=(end-.5)/size*360-180
+          &&box[1]<=latitudes[row.y]&&box[3]>=latitudes[row.y], 'Final native bounds omit declared cells');
+    };
     for(let i=0;i<count;i++){
-      const feature=before.bank.features[i],components=byTarget.get(feature.id)??[];
-      const source=originals.has(feature.id)?{...feature,geometry:originals.get(feature.id)}:feature;
-      const current=extendFinishedNativeFootprint({...source,properties:properties.get(feature.id)??source.properties},components);
-      demand(same(after.bank.features[i],current),'Final context changed outside the qualified original owner/reference/native scope');
-      if(!same(feature,current))changedIds.push(feature.id);byTarget.delete(feature.id);
+      const feature=before.bank.features[i],current=after.bank.features[i];
+      const {geometry:oldGeometry,finishedFootprint:oldFootprint,...oldRest}=feature;
+      const {geometry:newGeometry,finishedFootprint:newFootprint,...newRest}=current;
+      demand(same({...oldRest,properties:properties.get(feature.id)??feature.properties},newRest),
+        'Final context changed unrelated owner/reference properties');
+      const original=originals.get(feature.id)??oldGeometry;
+      demand(newGeometry===null?!newFootprint:same(newGeometry,original), 'Final context changed original reference geometry');
+      for(const component of added.components.filter(c=>c.target_id===feature.id))
+        demand(component.pixelIndex===feature.pixelIndex&&same(component.base_geometry,original)
+          &&component.base_geometry_sha256===valueSha(original),'New source evidence changed original target identity/geometry');
+      const parts=geometry=>geometry.type==='MultiPolygon'?geometry.coordinates:[geometry.coordinates];
+      const oldPolygons=oldFootprint?.geometry??(original?{type:'MultiPolygon',coordinates:parts(original)}:null);
+      const newPolygons=newFootprint?.geometry??(original?{type:'MultiPolygon',coordinates:parts(original)}:null);
+      demand(same(oldPolygons,newPolygons),'Final native-cell edit changed polygon coverage/order');
+      const oldRows=oldFootprint?.native_rows??[],newRows=newFootprint?.native_rows??[];
+      if(!same(oldRows,newRows)){await checkBounds(newFootprint);oldContexts.push(feature);newContexts.push(current);}
+      else demand(same(oldFootprint,newFootprint)&&same(oldGeometry,newGeometry),
+        'Final context changed without a native-cell or reference-metadata edit');
+      if(!same(feature,current))changedIds.push(feature.id);
     }
-    demand(byTarget.size===0,'New native authority names a foreign owner');
-    return {version:1,method:'selected-native-owner-conservation-v1',status:'no-new-native-loss',
+    const oldRows=finalContextRows(oldContexts),newRows=finalContextRows(newContexts),contextChanges=[];
+    for(const y of [...new Set([...oldRows.keys(),...newRows.keys()])].sort((a,b)=>a-b))
+      contextChanges.push(...finalRowChanges(oldRows.get(y)??[],newRows.get(y)??[],y,ownerRecords));
+    demand(same(changes,contextChanges),'Final words and exact finished-context changes differ; unrelated cells changed');
+    const addedCells=changes.filter(p=>p.previous_owner===null).reduce((n,p)=>n+p.end-p.start,0);
+    const removedCells=changes.filter(p=>p.candidate_owner===null).reduce((n,p)=>n+p.end-p.start,0);
+    const reassignedCells=changes.filter(p=>p.previous_owner!==null&&p.candidate_owner!==null).reduce((n,p)=>n+p.end-p.start,0);
+    const loss=removedCells+reassignedCells,rows=[...new Set(changes.map(p=>p.row))];
+    return {version:1,method:'selected-native-owner-conservation-v1',status:loss?'validated-native-map-transition':'no-new-native-loss',
       baseline_selection:beforeSelection,candidate_selection:afterSelection,
-      affected_rows:rows.length,lost_or_reassigned_cells:0,intervals:[],
+      affected_rows:rows.length,lost_or_reassigned_cells:loss,intervals:changes.filter(p=>p.previous_owner!==null),
+      changes,added_cells:addedCells,removed_cells:removedCells,reassigned_cells:reassignedCells,
       repair_visibility:{new_components:added.components.length,witnesses:added.components.map(c=>{
         const row=c.native_rows.at(0),run=Array.from(row.runs)[0];
         return {component_id:c.component_id,authority_sha256:c.authority_sha256,native_rows_sha256:valueSha(c.native_rows),
-          x:run[0],y:row.y,previous_owner:0,candidate_owner:run[2]};})},
+          x:run[0],y:row.y,previous_owner:ownerIndex.get(changes.find(p=>p.row===row.y&&p.start<=run[0]&&p.end>run[0])?.previous_owner)??0,candidate_owner:run[2]};})},
       native_row_scope:{proof:'complete-accepted-final-bank-and-qualified-new-intervals',
-        compared_rows:before.manifest.size,changed_rows:rows.map(r=>r.y),representation_migration:false,added_cells:expected.addedCells},
+        compared_rows:before.manifest.size,changed_rows:rows,representation_migration:false,added_cells:addedCells},
       checkpoint_custody:{baseline_commit:beforeReader.version,accepted_bank:before.bank.indexIdentity,candidate_bank:after.bank.indexIdentity},
       changed_ids:changedIds,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],
       candidate_code_executed:false,
-      limits:['Accepted main is the baseline. Only the new reviewed proposal is consumed; historical repairs and checkpoint promotion are not replayed.',
-        'Exact map/context equality does not itself establish the scientific truth of an author-provided proposal.']};
+      limits:['Accepted main and proposed final files are the map authorities. Complete native words and finished context are compared; old repair hooks are not replayed.',
+        'New positive destinations retain original source/target/method qualification. Withdrawals and scientific source fitness require substantive exact-head review; this result is not source approval.']};
   } finally {session.closed=true;closeStores(session);}
 }
 
@@ -1846,7 +1927,9 @@ async function qualifyFinalBankTransition(state,reader,selected,baseProof) {
   demand(same(selected.reference,metadata.reference??reference),'Final bank silently changed content reference');
   const identities=migration?state.registry.entries.map(entry=>[entry.authority_sha256,valueSha(entry)]).sort((a,b)=>a[0].localeCompare(b[0])):state.accepted_authorities;
   acceptedAuthorityIdentities(identities);
-  const added=await finalNativeAdditions(session,reader,state,selected,identities);
+  const added=same(selected.selection.change_evidence,state.selection.change_evidence)
+    ?{identities,components:[],patches:[],referenceSources:[]}
+    :await qualifyFinalPositiveEvidence(session,reader,state,selected,identities);
   const rows=finalPatchRows(added.patches,state.manifest.size,state.certificate.entries.length);
   const ownerSet=new Set(state.certificate.entries.map(row=>row[1]));
   const expected=mergeUnassignedNativeIntervals(before.ownership,rows,{owners:ownerSet,allowed:ownerSet});

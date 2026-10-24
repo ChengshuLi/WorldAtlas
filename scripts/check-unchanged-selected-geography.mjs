@@ -212,6 +212,12 @@ function createReader({repo, baseline, candidate, acquisition}) {
 }
 
 async function collect(reader) {
+  // This optional legacy optimization cannot decide final-bank applicability.
+  // Decline before unrelated old checkpoint/source discovery; the canonical
+  // final reader performs the actual current-map comparison.
+  const selection = await reader.currentJson('data/ownership-selection.json');
+  keys(selection, 'manifest_path,method,release_id,sha256,version' + ['selected_geography', 'additive_release', 'artifact_consumption', 'reference_projection'].filter(k => Object.hasOwn(selection, k)).map(k => ',' + k).join(''), 'selection');
+  demand(selection.version === 1 && selection.method === 'native-linear-evenodd-first-owner-v1' && safe(selection.manifest_path), 'unsupported-selection');
   // Only actual selected inputs determine applicability. Unrelated authored
   // changes and their ancestry are not scientific operands.
   // The accepted catalogue is authority data, separate from executing software.
@@ -229,9 +235,6 @@ async function collect(reader) {
   const pointer = await reader.currentJson('data/geographic-releases/current-manifest.json');
   demand(safe(pointer.path) && hash(pointer.sha256) && !pointer.path.startsWith('data/'), 'unsupported-release-pointer');
   reader.equalCurrent('data/geographic-releases/' + pointer.path);
-  const selection = await reader.currentJson('data/ownership-selection.json');
-  keys(selection, 'manifest_path,method,release_id,sha256,version' + ['selected_geography', 'additive_release', 'artifact_consumption', 'reference_projection'].filter(k => Object.hasOwn(selection, k)).map(k => ',' + k).join(''), 'selection');
-  demand(selection.version === 1 && selection.method === 'native-linear-evenodd-first-owner-v1' && safe(selection.manifest_path), 'unsupported-selection');
   await joined([reader.currentJson(selection.manifest_path, {sha256: selection.sha256}),
     ...(selection.selected_geography ? [reader.currentJson(selection.selected_geography.path, selection.selected_geography)] : []),
     ...(selection.additive_release ? [reader.jsonAt(reader.currentPin(selection.additive_release), selection.additive_release)] : []),

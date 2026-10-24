@@ -1,6 +1,6 @@
-# Accepted selected-checkpoint handoff
+# Historical accepted selected-checkpoint handoff
 
-A batch's provisional products become reusable only through the normal accepted
+For the explicit legacy/initial-migration route described below, a batch's provisional products become reusable only through the normal accepted
 merge boundary. A locator, a candidate certificate, a local digest or an uploaded
 ZIP alone cannot qualify a checkpoint. Source authority and delivered-map validation remain required. Continuous polygon
 overlap is outside the selected map-cell repair scope.
@@ -27,30 +27,27 @@ between the Python wrapper and a new Node child. Releasing it expires access.
 Original predecessor acceptance remains lineage; it is not a request to reacquire
 or rerun historical science.
 
-## Final-bank authority profile
+## Current final maps versus historical checkpoints
 
-The versioned existing checkpoint can bind selector-v2's complete index-v3 final
-bank/context instead of cumulative repair products. Initial adoption authenticates
-the actual accepted predecessor's exact words and deterministic finished-footprint
-conversion. Its compact authority list is derived from the complete accepted
-registry: unique sorted authority SHA plus the complete canonical entry digest,
-including any completed constructor. Later transitions retain every prior pair
-exactly and reject a repeated authority SHA even if its completion pin changes.
-Only the existing privately qualified new native append can add pairs/cells.
+Normal selector-v2 authoring and validation use the actual accepted-main E bank
+and the proposed complete E bank, not checkpoint ZIPs, cumulative authority pairs,
+old change hooks or locator promotion. The existing finalizer accepts the proposed
+selector, derives its actual writable/retired paths and preserves exact sparse
+preimages and explicit resume. See [PREPARED_CURRENT_ASSETS.md](PREPARED_CURRENT_ASSETS.md)
+and [DELIVERY_HANDOFF.md](DELIVERY_HANDOFF.md) for the current route.
 
-The shared comparison checks every unchanged word/context value, exact new
-unassigned-before intervals/qualified owners, fixed compatibility URLs and current
-reference metadata. Lazy untouched reference geometry stays lazy; a newly touched
-owner must match its retained original geometry hash. Metadata-only projection
-updates remain distinct from new positive cell authorities. Old authority bodies
-and cumulative ledgers remain historical evidence, not normal final-bank inputs.
+The direct comparison checks every native row and finished context. It qualifies
+newly positive destinations from their completed evidence and permits reviewed
+withdrawals/transfers of explicit native-overlay cells while preserving unrelated
+state, original polygon coverage, N and fixed compatibility URLs. Research is
+qualification evidence, never a second map master. Candidate-code reports retain
+their truthful execution marker and cannot issue accepted checkpoint authority.
 
-Candidate-code cold reports use the same exhaustive comparison, identify their
-actual executing code, and cannot issue or retain accepted checkpoint authority.
-This route is credential-free: anonymous read-only custody metadata plus the exact
-retained artifact, with no authenticated Actions-download fallback. Ordinary
-accepted-code joint issuance still requires its existing authenticated custody.
-A malformed or downgraded current profile cannot choose legacy replay.
+The remaining archive, custody and retention instructions on this page document
+explicit legacy-v1 reproduction and initial v1-to-final migration. Their exact
+producer and receipt guards remain necessary when those historical functions are
+invoked; they are not prerequisites for later final-to-final delivery. Malformed
+current selectors cannot select this legacy route.
 
 ## Authenticated artifact
 

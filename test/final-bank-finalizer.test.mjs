@@ -79,6 +79,28 @@ test('existing finalizer prepares only a new native append and preserves its nex
  const diagnostics={},planning={api,repo:'fixture/repo',branch:'codex/final-bank',files,baseline,authored,metadataDiagnostics:diagnostics};
  const planned=await selectedDataSelection(planning);assert.equal(planned?.test_selection,'selected-data',JSON.stringify(diagnostics));assert.equal(planned.expectations_path,expectedPath);
  assert(!requested.includes(f.sidecar.authority_registry.git_blob_oid),'No old registry traversal');
+ // A withdrawal restores the prior complete bank without making the previous
+ // authority registry a current metadata operand. Use the actual emitted bank
+ // descriptors on both sides, and derive the complete changed-file vector.
+ const withdrawn={entries:new Map(authored.entries)};
+ for(const name of [...withdrawn.entries.keys()])if(name.startsWith(bank))withdrawn.entries.delete(name);
+ for(const [name,row]of baseline.entries)if(name.startsWith(bank))withdrawn.entries.set(name,row);
+ withdrawn.entries.set('data/ownership-selection.json',baseline.entries.get('data/ownership-selection.json'));
+ withdrawn.entries.set('.github/package-inputs.json',baseline.entries.get('.github/package-inputs.json'));
+ const withdrawalExpected=Buffer.from(JSON.stringify({version:2,kind:'selected-final-bank-consumer-v2',bank:migration.selection.prepared_bank,reference:migration.selection.reference}));
+ const expectedOid=execFileSync('git',['-C',f.root,'hash-object','-w','--stdin'],{input:withdrawalExpected,encoding:'utf8'}).trim();
+ const withdrawalExpectedPath='coordination/engineering/final-bank-test/withdrawal-planner/selected-delivery-expectations.json';
+ withdrawn.entries.set(withdrawalExpectedPath,{path:withdrawalExpectedPath,mode:'100644',type:'blob',sha:expectedOid,size:withdrawalExpected.length});
+ const withdrawalFiles=[...new Set([...authored.entries.keys(),...withdrawn.entries.keys()])]
+  .filter(name=>authored.entries.get(name)?.sha!==withdrawn.entries.get(name)?.sha)
+  .map(filename=>({filename,status:!authored.entries.has(filename)?'added':!withdrawn.entries.has(filename)?'removed':'modified'}));
+ const withdrawalRequests=[],withdrawalDiagnostics={};
+ const withdrawalPlan=await selectedDataSelection({...planning,baseline:authored,authored:withdrawn,files:withdrawalFiles,
+  metadataDiagnostics:withdrawalDiagnostics,api:async route=>{withdrawalRequests.push(route);return api(route);}});
+ assert.equal(withdrawalPlan?.test_selection,'selected-data',JSON.stringify(withdrawalDiagnostics));
+ assert(!withdrawalRequests.some(route=>route.endsWith(hook.git_blob_oid)||route.endsWith(f.sidecar.authority_registry.git_blob_oid)),
+  'Withdrawal planning does not traverse either previous repair registry');
+
  assert.equal(await selectedDataSelection({...planning,files:[...files,{filename:'coordination/engineering/unbound/new.json',status:'added'}]}),null,'Unbound changes retain full integration');
 
  const refresh=(source,name,body)=>{source.files=source.files.filter(row=>row.path!==name);source.files.push({path:name,mode:'100644',oid:createHash('sha1').update(`blob ${body.length}\0`).update(body).digest('hex'),bytes:body.length});};
@@ -498,4 +520,29 @@ test('normal finalize CLI automatically materializes its sparse canonical preima
  assert.deepEqual(fs.readFileSync(path.join(f.root,'data/ownership-selection.json')),fs.readFileSync(path.join(f.root,destination,'ownership-selection.json')));
  run(['--resume']);f.git('add','-A');const committed=f.commit();
  assert.deepEqual(f.git('ls-tree','-r','--name-only',committed,'--',bank).toString().trim().split('\n').sort(),[bank+'index.json',...index.files.map(p=>bank+p.path)].sort());
+});
+
+test('actual finalizer CLI adopts a proposed withdrawal bank through the ordinary writer and exact resume',async t=>{
+ const {f,before}=await prepare(t),migration=await finalize(f,f.bankCommit),at=f.commit();f.api.releaseCheckpoint(before.state);
+ const added=await appendNativeAuthority(f,{owner:1,name:'withdrawal-source',completedConstructor:true});
+ f.save('data/ownership-selection.json',migration.selection);
+ f.save('withdrawal-source/only.json',{version:1,kind:'retained-rule-authority-registry-v1',entries:[added.entry]});
+ const issued=f.commit(),hook=f.pin('withdrawal-source/only.json',issued);
+ await finalize(f,at,{change_evidence:hook},'coordination/engineering/final-bank-test/positive');const current=f.commit();
+ const config={version:2,selector:{commit:current,path:'data/ownership-selection.json'},
+  package_inputs:{commit:current,path:'.github/package-inputs.json'},proposed_selector:{commit:at,path:'data/ownership-selection.json'}};
+ f.save('.cache/delivery-handoff/withdrawal-config.json',config);
+ const command=fileURLToPath(new URL('../scripts/prepare-delivery-handoff.mjs',import.meta.url));
+ const args=[command,'finalize','.cache/delivery-handoff/withdrawal-config.json','coordination/engineering/final-bank-test/withdrawal'];
+ const env={...process.env};delete env.NODE_OPTIONS;delete env.NODE_PATH;
+ const actual=spawnSync(process.execPath,args,{cwd:f.root,env,encoding:'utf8'});assert.equal(actual.status,0,actual.stderr);
+ assert.deepEqual(JSON.parse(fs.readFileSync(path.join(f.root,'data/ownership-selection.json'))),migration.selection);
+ const resumed=spawnSync(process.execPath,[...args,'--resume'],{cwd:f.root,env,encoding:'utf8'});assert.equal(resumed.status,0,resumed.stderr);
+ const candidate=f.commit(),beforeReader=new f.native.ImmutableReader(f.root,current),afterReader=new f.native.ImmutableReader(f.root,candidate,{invocation:beforeReader.invocation});
+ const report=await f.api.compareAcceptedFinalBank({beforeReader,afterReader});
+ assert.equal(report.status,'validated-native-map-transition');assert.equal(report.removed_cells,1);assert.equal(report.reassigned_cells,0);
+ assert.equal(report.repair_visibility.new_components,0);
+ assert(!report.input_inventory.some(p=>p.path.startsWith('withdrawal-source/')),'Withdrawal never reopens the positive source constructor');
+ const source=pinReader(f.root);
+ assert.throws(()=>finalizeDelivery({...config,change_evidence:hook},source),/already carries its complete/);
 });

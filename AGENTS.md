@@ -40,7 +40,7 @@ Follow the delivery and proportionate-verification policy in docs/WORKER_COORDIN
 - Use the validation commands defined by the project when they exist.
 - If no relevant validation command exists, say what you checked and what remains unverified.
 - Do not report checks as passing unless you ran them.
-- `npm ci` and `npm run dev` run the committed prepared atlas on Node 24. Python preparation dependencies are pinned in `requirements.txt`.
+- `npm ci` and `npm run dev` preview the canonical prepared atlas on Node 24, reusing matching package data or invoking the existing package builder once when needed. Install the declared Python preparation dependencies in `requirements.txt`; missing inputs fail before serving rather than falling back to raw polygons.
 - `docs/STRUCTURAL_VALIDATION.md` and `scripts/validate-structure.mjs` define contract, scientific, publication, browser and content-only verification phases. Match prepared products, grid, release and build before publication tests; source checks do not establish semantic or historical completion.
 
 ## Evidence and independent review

@@ -537,8 +537,8 @@ test('cold routing acquisition supplies exact objects and authenticates tree met
     const metadata = f.maps.get(head), row = metadata.tree[0];
     const pin = {commit: head, path: row.path, mode: row.mode, git_blob_oid: row.sha};
     const options = {repo: f.destination, baseline: head, execute: f.execute, token: 'fixture-secret'};
-    const a = createRoutingMetadataAcquisition({...options, loadTree: async root => {
-      assert.equal(root, metadata.sha); return {...metadata, note: 'complete tree metadata'};
+    const a = createRoutingMetadataAcquisition({...options, loadTree: async (root, recursive) => {
+      assert.equal(recursive, false); assert.equal(root, metadata.sha); return {...metadata, note: 'complete tree metadata'};
     }});
     await a.acquire(pin, {bytes: row.size, sha256: digest(raw)});
     assert.equal(a.summary().fetched_bytes, row.size); assert.equal(a.summary().fetch_batches, 1);
@@ -550,6 +550,55 @@ test('cold routing acquisition supplies exact objects and authenticates tree met
       const bad = createRoutingMetadataAcquisition({...options, loadTree: async () => alter(metadata)});
       await assert.rejects(bad.acquire(pin, {bytes: row.size, sha256: digest(raw)}), /tree-response|differs from tree/);
     }
+  } finally { f.close(); }
+});
+
+test('routing reads only exact input directories, never the baseline or unrelated history', async () => {
+  const f = fixture(); try {
+    const files = {'selected/one.json': 'first complete routing body', 'selected/two.json': 'second complete routing body',
+      'unrelated/historical/receipt.json': 'not a routing operand'};
+    const head = f.commit(files); f.importMetadata();
+    const root = f.git(f.origin, ['rev-parse', head + ':selected']).toString().trim();
+    const rows = f.maps.get(head).tree.filter(row => row.path.startsWith('selected/'));
+    const calls = [], a = createRoutingMetadataAcquisition({repo: f.destination, baseline: f.baseline,
+      execute: f.execute, token: '', loadTree: async (id, recursive) => {
+        calls.push([id, recursive]);
+        assert.equal(id, root, 'Only the exact containing directory is a required input');
+        assert.equal(recursive, false, 'Routing must not expand the repository tree');
+        return {sha: root, truncated: false, tree: rows.map(row => ({...row, path: path.posix.basename(row.path)}))};
+      }});
+    await Promise.all(rows.map(row => a.acquire({commit: head, path: row.path, mode: row.mode, git_blob_oid: row.sha},
+      {bytes: row.size, sha256: digest(files[row.path])})));
+    assert.deepEqual(calls, [[root, false]]);
+    assert.equal(a.summary().tree_metadata_requests, 1);
+    assert.equal(a.summary().fetch_batches, 1);
+    assert.deepEqual(f.batches.flat().sort(), rows.map(row => row.sha).sort());
+    for (const row of rows) assert.equal(f.git(f.destination, ['cat-file', 'blob', row.sha]).toString(), files[row.path]);
+    const inventory = f.git(f.destination, ['cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype)'])
+      .toString().trim().split('\n').filter(row => row.endsWith(' blob')).map(row => row.split(' ')[0]);
+    assert.deepEqual(inventory.sort(), rows.map(row => row.sha).sort());
+  } finally { f.close(); }
+});
+
+for (const variant of ['denied', 'missing', 'foreign mode', 'foreign oid', 'wrong size'])
+test('exact routing directory failures remain terminal without another route: ' + variant, async () => {
+  const f = fixture(); try {
+    const head = f.commit({'selected/input.json': 'exact required body'}); f.importMetadata();
+    const row = f.maps.get(head).tree[0], root = f.git(f.origin, ['rev-parse', head + ':selected']).toString().trim();
+    let calls = 0;
+    const a = createRoutingMetadataAcquisition({repo: f.destination, baseline: f.baseline, execute: f.execute,
+      token: '', loadTree: async (id, recursive) => {
+        calls++; assert.equal(id, root); assert.equal(recursive, false);
+        if (variant === 'denied') throw Error('fixture provider HTTP 403');
+        const value = {...row, path: 'input.json'};
+        if (variant === 'foreign mode') value.mode = '120000';
+        if (variant === 'foreign oid') value.sha = 'f'.repeat(40);
+        if (variant === 'wrong size') value.size++;
+        return {sha: root, truncated: false, tree: variant === 'missing' ? [] : [value]};
+      }});
+    await assert.rejects(a.acquire({commit: head, path: row.path, mode: row.mode, git_blob_oid: row.sha},
+      {bytes: row.size}), /fixture provider HTTP 403|remote-identity|differs from tree/);
+    assert.equal(calls, 1); assert.deepEqual(f.batches, []);
   } finally { f.close(); }
 });
 

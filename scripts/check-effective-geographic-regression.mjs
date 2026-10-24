@@ -1217,7 +1217,7 @@ function usesFinalProfile(bootstrap){return [bootstrap.beforeReader,bootstrap.af
   reader.treeRoute('data/ownership-selection.json')&&reader.json('data/ownership-selection.json')?.version===2);}
 export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) {
   const bootstrap=selectedBootstrap(repo,baseline,candidate,{parentRuntimePath});
-  demand(!usesFinalProfile(bootstrap),'Current final ownership requires the acquired accepted-checkpoint reader');
+  demand(!usesFinalProfile(bootstrap),'Current final ownership requires the canonical acquired final-map reader');
   return compareSelected(bootstrap,baseline,candidate,loadSelection(bootstrap.beforeReader),loadSelection(bootstrap.afterReader));
 }
 export async function inspectSelectedAcquired(repo,baseline,candidate,{parentRuntimePath}={}) {

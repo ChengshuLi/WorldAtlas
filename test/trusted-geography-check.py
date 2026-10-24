@@ -140,6 +140,37 @@ class TrustedCheckControls(unittest.TestCase):
         self.assertEqual(report['validation_scope'], 'selected-native-map-cells')
         self.assertNotIn('checkpoint', report)
 
+    def test_real_main_keeps_accepted_withdrawal_result(self):
+        # Only the child result is controlled. The real main, trusted checkout,
+        # joint result handling, gate status and output publication all execute.
+        bank = {'path': 'bank.json', 'bytes': 123, 'sha256': 'c' * 64}
+        other = {**bank, 'sha256': 'd' * 64}
+        changes = [{'row': 2, 'start': 3, 'end': 6, 'previous_owner': 'A', 'candidate_owner': None}]
+        native = {'method': 'selected-native-owner-conservation-v1', 'status': 'validated-native-map-transition',
+                  'candidate_code_executed': False, 'lost_or_reassigned_cells': 3, 'intervals': changes,
+                  'changes': changes, 'added_cells': 0, 'removed_cells': 3, 'reassigned_cells': 0, 'affected_rows': 1,
+                  'baseline_selection': {'version': 2, 'kind': 'selected-final-native-bank-v2', 'prepared_bank': bank},
+                  'candidate_selection': {'version': 2, 'kind': 'selected-final-native-bank-v2', 'prepared_bank': other},
+                  'checkpoint_custody': {'accepted_bank': bank, 'candidate_bank': other},
+                  'native_row_scope': {'compared_rows': 8, 'changed_rows': [2], 'added_cells': 0, 'representation_migration': False}}
+        shutil.copyfile(ROOT / 'scripts/geographic_checkpoint_products.py', self.f.repo / 'scripts/geographic_checkpoint_products.py')
+        self.f.write('data/ownership-selection.json', native['baseline_selection'])
+        entry = self.f.repo / 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs'
+        entry.write_text('const native=' + json.dumps(native) + '; native.checkpoint_custody.baseline_commit=process.argv[4];'
+                         'process.stdout.write(JSON.stringify({kind:"trusted-selected-joint-comparison-v1",candidate_code_executed:false,'
+                         'mode:"accepted-final-map-comparison-v1",native,derived_checkpoint:null}));')
+        self.f.baseline = self.f.commit('controlled-accepted-child-boundary')
+        self.f.write('data/ownership-selection.json', native['candidate_selection'])
+        candidate = self.f.commit('withdrawn-map')
+        result, report = self.f.run(candidate)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(report['status'], 'validated-native-map-transition')
+        self.assertEqual(report['gate_status'], 'passed')
+        self.assertEqual(report['selected_native_report']['lost_or_reassigned_cells'], 3)
+        self.assertEqual(report['regressions'], 0)
+        self.assertFalse(report['source_approval'])
+        self.assertNotIn('checkpoint', report)
+
     def test_fatal_git_child_preserves_original_stderr_without_publishing_a_report(self):
         result, report = self.f.run('f' * 40)
         self.assertEqual(result.returncode, 1)
@@ -754,6 +785,32 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
                         {'intervals': [{'row': 1}]}, {'candidate_selection': {**selection, 'kind': 'unknown'}}]:
             with self.subTest(changed=changed), self.assertRaises(ValueError):
                 inspect({**native, **changed})
+
+    def test_transition_accounting_refuses_inconsistent_scope_and_unaccepted_code(self):
+        import copy
+        bank = {'path': 'bank.json', 'bytes': 123, 'sha256': 'c' * 64}
+        selection = {'version': 2, 'kind': 'selected-final-native-bank-v2', 'prepared_bank': bank}
+        change = {'row': 2, 'start': 3, 'end': 6, 'previous_owner': 'A', 'candidate_owner': None}
+        native = {'method': 'selected-native-owner-conservation-v1', 'status': 'validated-native-map-transition',
+                  'candidate_code_executed': False, 'lost_or_reassigned_cells': 3, 'intervals': [change], 'changes': [change],
+                  'added_cells': 0, 'removed_cells': 3, 'reassigned_cells': 0, 'affected_rows': 1,
+                  'baseline_selection': selection, 'candidate_selection': selection,
+                  'checkpoint_custody': {'baseline_commit': self.baseline, 'accepted_bank': bank, 'candidate_bank': bank},
+                  'native_row_scope': {'compared_rows': 8, 'changed_rows': [2], 'added_cells': 0, 'representation_migration': False}}
+        self.assertTrue(self.g.valid_final_transition(native, self.baseline))
+        for key, value in [('removed_cells', 0), ('lost_or_reassigned_cells', 0), ('intervals', []), ('changes', [change, change]),
+                           ('native_row_scope', {'compared_rows': 8}), ('checkpoint_custody', {}), ('affected_rows', 2)]:
+            with self.subTest(key=key):
+                changed = copy.deepcopy(native); changed[key] = value
+                self.assertFalse(self.g.valid_final_transition(changed, self.baseline))
+        software = {**native, 'candidate_code_executed': True}
+        g = self.g
+        with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='actual-inventory'), \
+             self.mock.patch.object(g, 'inventory', return_value=['same']), \
+             self.mock.patch.object(g, 'git', return_value=b'selected'), \
+             self.mock.patch.object(g.subprocess, 'check_output', return_value=json.dumps(software).encode()):
+            with self.assertRaisesRegex(ValueError, 'exact accepted comparison'):
+                g.inspect(ROOT, self.baseline, self.candidate, code_commit=self.candidate)
 
     def test_changed_raw_inputs_never_consult_selected_shortcut(self):
         g = self.g

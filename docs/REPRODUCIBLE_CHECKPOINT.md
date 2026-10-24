@@ -11,9 +11,19 @@ npm ci
 npm run dev
 ```
 
-Node 24 or later is required. Prepared geography, sparse dated ownership intervals, environmental references, source manifests, migration archives, and completed dated-name/religion products are tracked. SQLite databases, build output, downloaded caches, local credentials, and dependency directories are intentionally excluded. A fresh local database is created from tracked inputs; existing local imports remain preserved when reopening it.
+Node 24 or later is required. Prepared geography, sparse dated ownership intervals, environmental references, source manifests, migration archives, and completed dated-name/religion products are tracked. SQLite databases, build output, downloaded caches, local credentials, and dependency directories are intentionally excluded. Local preview serves the canonical package, never a separately seeded raw-polygon database. `npm run dev` reuses matching package data with Vite hot reload; `npm start` serves its compiled assets. If the package is missing, changed or damaged, startup invokes the existing standalone package builder once before listening. Install the declared Python/runtime prerequisites as well as npm dependencies; missing required inputs fail visibly without serving stale output. This does not rebuild on each HMR edit, alter source files or import content.
 
-For geographic preparation, use Python 3.12 and install `requirements.txt` in a virtual environment. Source URLs, source byte hashes, executed algorithms, and restoration commands are retained with each producer. Some source downloads are large; running the website does not require downloading them again. Do not replace a checksum-pinned source with a newer release under the same identity.
+For geographic preparation, use Python 3.12 and install `requirements.txt` in a virtual environment. Source URLs, source byte hashes, executed algorithms, and restoration commands are retained with each producer. Some source downloads are large; preparing the website from its declared current package inputs does not replay or redownload historical repair research. Do not replace a checksum-pinned source with a newer release under the same identity.
+
+Both standalone `dist/` and Cloudflare `dist/client/` data are supported. Development
+uses the static data client, including prepared years/examples and evidence. A
+compiled hosted package remains a hosted asset preview: it does not acquire or
+proxy a Neon connection, and unavailable hosted content stays visibly unavailable.
+For an offline standalone compiled preview, use the existing `npm run build:static`.
+The auxiliary GET `/api/classifications` and `/api/typed/v1/prepared-snapshot`
+remain backed by packaged data and the shared typed resolver. Raw `/api/geography`
+and `/api/snapshot` reconstruction is retired. Local preview cannot write data or
+establish publication parity; the normal exact E/M release checks still apply.
 
 ## Preserve existing research
 

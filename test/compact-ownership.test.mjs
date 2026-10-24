@@ -221,3 +221,33 @@ test('actual emitted selected additive cells retain exact owners and sampler out
  assert.equal(latitudes.length,atlas.pixelMap.size);
  console.log(JSON.stringify(report));
 });
+
+
+test('actual dev/start previews consume the real built final bank without polygon fallback or a second build',{timeout:240000},async()=>{
+ const {spawn}=await import('node:child_process');
+ const {readFileSync,existsSync}=await import('node:fs');
+ const index=JSON.parse(readFileSync('data/canonical-grid/current-startup/index.json'));
+ const receipt=readFileSync('.cache/package-input-build.json'),dbBefore=existsSync('data/atlas.sqlite')?readFileSync('data/atlas.sqlite'):null;
+ const browser=await chromium.launch({args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+ try{for(const production of [false,true]){
+   const child=spawn(process.execPath,['server.mjs',...(production?['--production']:[])],{env:{...process.env,PORT:'0',ATLAS_TEST_MODE:'1'},stdio:['ignore','pipe','pipe']});
+   let stdout='',stderr='';child.stdout.on('data',chunk=>stdout+=chunk);child.stderr.on('data',chunk=>stderr+=chunk);
+   try{
+     const url=await new Promise((resolve,reject)=>{child.stdout.on('data',()=>{if(stdout.includes('Preparing canonical'))return reject(Error('Captured preview unexpectedly requested a second build: '+stdout));const match=/WorldAtlas listening on (http:\/\/localhost:\d+)/.exec(stdout);if(match)resolve(match[1]);});child.once('error',reject);child.once('exit',code=>reject(Error('Preview exited '+code+': '+stderr)));});
+     const page=await browser.newPage({viewport:{width:1280,height:900}}),errors=[];page.on('pageerror',error=>errors.push(error.message));
+     await page.goto(url);await page.waitForFunction(()=>document.querySelector('.atlas-pixel-canvas')?.dataset.rendered==='true',null,{timeout:60000});
+     await page.locator('#loading').waitFor({state:'hidden',timeout:60000});
+     const atlas=await page.evaluate(async()=>await(await fetch('./atlas-geography.json')).json());
+     assert.deepEqual(atlas.preparedOwnership,index.preparedOwnership);
+     const canvas=page.locator('.atlas-pixel-canvas');assert.equal(await canvas.getAttribute('data-precompiled'),'true');assert.equal(await canvas.getAttribute('data-compilations'),'0');
+     await page.locator('#year-input').fill('2025');await page.locator('#year-form button').click();
+     await page.waitForFunction(()=>document.querySelector('#map-year').textContent==='2,025 AD');await page.locator('#loading').waitFor({state:'hidden'});
+     if(production)assert.match(await page.locator('#year-error').textContent(),/Historical content.*unavailable/);
+     else{await page.locator('#examples').check();await page.locator('#loading').waitFor({state:'hidden'});assert.equal(await page.locator('#year-error').textContent(),'');}
+     assert.equal(await canvas.getAttribute('data-compilations'),'0');assert.deepEqual(errors,[]);await page.close();
+     assert.doesNotMatch(stdout,/Preparing canonical/,'the real captured output is reused, not rebuilt');
+   }finally{if(child.exitCode===null){const exit=new Promise(resolve=>child.once('exit',resolve));child.kill('SIGTERM');await exit;}}
+ }}finally{await browser.close();}
+ assert.deepEqual(readFileSync('.cache/package-input-build.json'),receipt);
+ assert.deepEqual(existsSync('data/atlas.sqlite')?readFileSync('data/atlas.sqlite'):null,dbBefore);
+});

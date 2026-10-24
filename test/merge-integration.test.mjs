@@ -350,7 +350,7 @@ test('reviewed tests derive the complete fixture and executing-policy boundary w
 
 for (const [label, consumer, operand] of [
   ...['test/final-bank-finalizer.test.mjs','test/selected-delivery-smoke.test.mjs','test/final-bank-checkpoint.test.mjs','test/selected-owner-observation.test.mjs',
-    'test/accepted-checkpoint-qualification.test.mjs'].map(consumer =>
+    'test/accepted-checkpoint-qualification.test.mjs', 'test/map-cell-diagnosis.test.mjs'].map(consumer =>
     [consumer,consumer,'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz']),
   ['rebind custody', 'test/current-rebind-product-custody.test.mjs', 'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json'],
   ['workspace bootstrap', 'test/local-workspace.test.mjs', 'docs/LOCAL_WORKSPACES.md'],
@@ -414,7 +414,7 @@ test('reviewed quota consumer reads its current guide through actual sparse chec
 });
 
 for (const consumer of ['test/final-bank-finalizer.test.mjs','test/selected-delivery-smoke.test.mjs','test/final-bank-checkpoint.test.mjs','test/selected-owner-observation.test.mjs',
-    'test/accepted-checkpoint-qualification.test.mjs'])
+    'test/accepted-checkpoint-qualification.test.mjs','test/map-cell-diagnosis.test.mjs','test/native-location-context.test.mjs'])
 test(`reviewed ${consumer} materializes its normative latitude operand through actual sparse checkout`, () => {
   const operand='coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz';
   const row={sha:sha('e'),mode:'100644',type:'blob'};
@@ -447,7 +447,7 @@ test('reviewed hosted consumers retain their current inputs through actual spars
     'data/research-geography-gate.json','data/hosted-type-catalog.json','data/settlement-estimates.json',
     'coordination/engineering/cloudflare-publication-846-20261007/registry-source.json','docs/MERGE_QUEUE_CLIENT.md'];
   const consumers=['test/neon-forward-migrations.test.mjs','test/compact-membership-profile.test.mjs','test/current-postgres-recovery.test.mjs',
-    'test/merge-integration.test.mjs','test/settlement-population-import.test.mjs','test/publication-cloudflare.test.mjs','test/cloudflare-access.test.mjs'];
+    'test/merge-integration.test.mjs','test/settlement-population-import.test.mjs','test/publication-cloudflare.test.mjs','test/cloudflare-access.test.mjs','test/package-preview.test.mjs'];
   const row={sha:sha('e'),mode:'100644',type:'blob'};
   const entries=new Map([...EXECUTION_CODE,...operands,...consumers,'test/example.test.mjs','test/fixtures/contract/input.json'].map(name=>[name,row]));
   const request={base:sha('a'),head:sha('b'),files:consumers};
@@ -457,7 +457,7 @@ test('reviewed hosted consumers retain their current inputs through actual spars
   assert.deepEqual(plan.inputs,[...EXECUTION_CODE,operands[6],operands[0],operands[5],...operands.slice(1,5)]);
   assert(plan.checkout_patterns.includes('postgres'),'PostgreSQL DDL is executing source, like drizzle');
   for(const consumer of consumers) {
-    const expected=consumer===consumers[6]?operands.slice(1,3):consumer===consumers[5]?[operands[0],operands[5]]:consumer===consumers[3]?[operands[6],operands[5],...operands.slice(0,5)]:consumer===consumers[2]?[operands[0]]:consumer===consumers[1]?operands.slice(0,4):
+    const expected=(consumer===consumers[6]||consumer===consumers[7])?operands.slice(1,3):consumer===consumers[5]?[operands[0],operands[5]]:consumer===consumers[3]?[operands[6],operands[5],...operands.slice(0,5)]:consumer===consumers[2]?[operands[0]]:consumer===consumers[1]?operands.slice(0,4):
       consumer===consumers[4]?operands.slice(1,5):operands.slice(0,5);
     const single=reviewedTestPlan({...request,files:[consumer]},context);
     assert.deepEqual(single.inputs,[...EXECUTION_CODE,...expected]);
