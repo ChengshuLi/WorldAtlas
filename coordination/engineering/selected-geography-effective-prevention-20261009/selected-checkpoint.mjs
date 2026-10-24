@@ -9,7 +9,7 @@ import {gunzipSync} from 'node:zlib';
 
 import os from 'node:os';
 
-import {admitNativePatchStore, admitNativeLedgerStore, admitNativeEnvelopeStore, admitNativeMetadataStore, decodedNativeChunks, authenticatedDecodedNativeChunks} from '../../../scripts/native-patch-store.mjs';
+import {admitNativePatchStore, admitNativeLedgerStore, admitNativeEnvelopeStore, admitNativeMetadataStore, decodedNativeChunks, authenticatedDecodedNativeChunks, canonicalNativeJsonChunks} from '../../../scripts/native-patch-store.mjs';
 
 import {nativeSequence, isNativeSequence} from '../../../src/native-grid.js';
 
@@ -23,7 +23,7 @@ import {readPreparedFinalOwnership} from '../../../scripts/package-startup-owner
 
 import {validateReferenceMetadataProjection} from '../../../scripts/selected-reference-metadata.mjs';
 
-import {valueSha, nativeBaseSelection, authorityRegistry, readRegistryAuthorityInputs, verifyCompletedSourceTargetNativeAuthority} from './selected-neighbor-prevention.mjs';
+import {valueSha, nativeBaseSelection, authorityRegistry, readRegistryAuthorityInputs, verifyCompletedSourceTargetNativeAuthority, projectCompletedGeometryBody, restoreCompletedGeometryBody, completedGeometryCustody} from './selected-neighbor-prevention.mjs';
 
 const demand = (ok, message) => { if (!ok) throw Error(message); };
 
@@ -135,9 +135,10 @@ const decodedChunks=decodedNativeChunks;
 
 const custodyChunks=(chunks,p)=>authenticatedDecodedNativeChunks(chunks,p,{directory:os.tmpdir(),footer:true});
 
-async function storedProduct(session,reader,p,domain,ledger) {
-  const {version}=resolvePin(reader,p);
-  let chunks=reader.stream(p.path,{version,expected:p.sha256});
+async function storedProduct(session,reader,p,domain,ledger,restored) {
+  let chunks;
+  if(restored!==undefined)chunks=(function*(){for(const chunk of canonicalNativeJsonChunks(restored))yield Buffer.from(chunk);})();
+  else {const {version}=resolvePin(reader,p);chunks=reader.stream(p.path,{version,expected:p.sha256});}
   if(ledger==='custody')chunks=custodyChunks(chunks,p);else if(p.decoded_bytes)chunks=decodedChunks(chunks);
   let store;try{store=await (ledger==='custody'?admitNativeMetadataStore:ledger==='envelope'?admitNativeEnvelopeStore:ledger?admitNativeLedgerStore:admitNativePatchStore)({chunks,
     expected:{bytes:p.decoded_bytes??p.bytes,sha256:p.decoded_sha256??p.sha256},
@@ -243,7 +244,78 @@ function acceptedAuthorityIdentities(values) {
   return values;
 }
 
-async function appendAuthority(session, reader, entry, domain) {
+// Resolve geometry only from the accepted original N roster, even when the
+// accepted current context already materializes that owner. Candidate paths are
+// locating hints; their pins/geometry never establish the original authority.
+async function completedOriginalGeometry(session,reader,state,sourcePaths) {
+  const selection=state.selection,source=scientificNativeSelection(selection).selected_geography;
+  demand(source&&Array.isArray(sourcePaths)&&sourcePaths.length>0&&new Set(sourcePaths).size===sourcePaths.length,
+    'Completed geometry needs an original containing-source roster');
+  const route=reader.treeRoute(source.path),match=/^(100644) blob ([a-f0-9]{40})\t/.exec(route);
+  demand(match,'Completed geometry original index is not ordinary');
+  await acquireInputs(session,reader,[{commit:reader.version,path:source.path,mode:match[1],git_blob_oid:match[2],bytes:source.bytes,sha256:source.sha256}]);
+  const bank=readSelectedGeometryBank(reader,selection);
+  demand(bank.locations===state.bank.features.length&&bank.footprints_sha256===state.manifest.footprints_sha256,
+    'Completed geometry original owner/source scope differs');
+  await acquireInputs(session,reader,[bank.world_index]);
+  const world=readBody(session,reader,bank.world_index),paths=world.parts.map(p=>'data/'+p),roster=new Map();
+  demand(new Set(paths).size===paths.length,'Duplicate original geometry containing route');
+  for(const p of [...bank.unchanged_files,...bank.overrides]){
+    const name=p.logical_path??p.path;pin(p);
+    demand(paths.includes(name)&&!roster.has(name),'Foreign original geometry containing route');roster.set(name,p);
+  }
+  demand(roster.size===paths.length,'Incomplete original geometry containing roster');
+  const found=new Map();
+  for(const name of sourcePaths){
+    const p=roster.get(name);demand(p,'Completed geometry source is outside accepted original N');
+    await acquireInputs(session,reader,[p]);const collection=readBody(session,reader,p);
+    demand(collection.type==='FeatureCollection'&&Array.isArray(collection.features),'Incomplete original geometry containing body');
+    for(const feature of collection.features){
+      demand(typeof feature.id==='string'&&!found.has(feature.id),'Duplicate original geometry target');found.set(feature.id,feature.geometry);
+    }
+  }
+  return slot=>{
+    const owner=state.bank.features[slot.pixelIndex-1],geometry=found.get(slot.target_id);
+    demand(owner?.id===slot.target_id&&owner.pixelIndex===slot.pixelIndex&&geometry
+      &&(owner.geometry===null||same(owner.geometry,geometry)),'Missing or changed accepted original geometry/owner');
+    return geometry;
+  };
+}
+function knownProjectionOrigin(reader,p) {
+  let known=true;try{reader.git('--no-lazy-fetch','cat-file','-e',p.commit+'^{commit}');}catch{known=false;}
+  if(known){const row=reader.git('--literal-pathspecs','ls-tree','-z',p.commit,'--',p.path).toString();
+    demand(row===`${p.mode} blob ${p.git_blob_oid}\t${p.path}\0`,'Known completed geometry origin differs');}
+}
+// Authoring only: caller establishes accepted commit provenance. Original
+// qualification artifacts are read, not regenerated; publication remains a new
+// honest registry hook. Full local originals remain the finalizer's inputs.
+export async function projectCompletedAuthorityRegistry({beforeReader,registry,readOriginal}) {
+  sessionCheck(beforeReader);
+  const session={invocation:beforeReader.invocation,repo:beforeReader.repo,closed:false,stores:new Set()};
+  try {
+    demand(registry.completed_geometry_custody===undefined,'Completed geometry registry is already projected');
+    const selection=beforeReader.json('data/ownership-selection.json');demand(finalBankSelection(selection),'Accepted final bank required for geometry custody');
+    const state=await readFinalSelectionProducts(session,beforeReader,selection);
+    const rows=[];
+    for(const entry of authorityRegistry(registry).values()){
+      demand(entry.completed_constructor,'Completed geometry custody cannot qualify unfinished authority');
+      const binding=JSON.parse(await readOriginal(entry.source_authority));
+      demand(binding.kind==='source-target-native-custody-v1','Completed source-target binding required');
+      const record={authority_sha256:entry.authority_sha256};
+      for(const role of ['completed_constructor','source_evidence']){
+        const original=role==='completed_constructor'?entry.completed_constructor:binding.source_evidence;
+        record[role]=projectCompletedGeometryBody(await readOriginal(original),original,role);
+      }
+      const geometry=await completedOriginalGeometry(session,beforeReader,state,record.source_evidence.body.source_membership?.parts?.map(p=>p.path));
+      for(const role of ['completed_constructor','source_evidence'])
+        await restoreCompletedGeometryBody(record[role],role,record[role].original,geometry);
+      rows.push(record);
+    }
+    return {...registry,completed_geometry_custody:rows};
+  }finally{session.closed=true;closeStores(session);}
+}
+
+async function appendAuthority(session, reader, entry, domain, custody) {
   const child = new ImmutableReader(reader.repo,reader.version,{invocation:reader.invocation,gitExecutable:reader.gitExecutable});
   child.inventory=reader.inventory; // retain actual appended-producer inputs without reopening them
   let proof, evidence;
@@ -251,9 +323,23 @@ async function appendAuthority(session, reader, entry, domain) {
     await acquireInputs(session,child,[entry.rule_preimage,entry.source_authority]);
     const {preimage,binding}=readRegistryAuthorityInputs(child,entry);
     if(binding?.kind==='source-target-native-custody-v1'){
-      await acquireInputs(session,child,[entry.completed_constructor,binding.source_evidence,binding.native_patch]);
-      const constructed=await storedProduct(session,child,entry.completed_constructor,domain,'constructor');
-      evidence=await storedProduct(session,child,binding.source_evidence,domain,'envelope');
+      let restored;
+      if(custody){
+        demand(same(custody.source_evidence?.original,binding.source_evidence),'Completed geometry source pin differs');
+        knownProjectionOrigin(child,entry.completed_constructor);knownProjectionOrigin(child,binding.source_evidence);
+        const geometry=await completedOriginalGeometry(session,session.beforeReader,session.beforeState,
+          custody.source_evidence.body?.source_membership?.parts?.map(p=>p.path));
+        restored={};
+        for(const role of ['completed_constructor','source_evidence'])
+          restored[role]=await restoreCompletedGeometryBody(custody[role],role,
+            role==='completed_constructor'?entry.completed_constructor:binding.source_evidence,geometry);
+        (session.completedGeometryCustody??=[]).push({authority_sha256:entry.authority_sha256,
+          kind:'original-n-reconstructed-completed-bodies-v1',originals:[entry.completed_constructor,binding.source_evidence],
+          geometry_slots:custody.source_evidence.slots});
+      }
+      await acquireInputs(session,child,[...(custody?[]:[entry.completed_constructor,binding.source_evidence]),binding.native_patch]);
+      const constructed=await storedProduct(session,child,entry.completed_constructor,domain,'constructor',restored?.completed_constructor);
+      evidence=await storedProduct(session,child,binding.source_evidence,domain,'envelope',restored?.source_evidence);
       const candidate=await storedProduct(session,child,binding.native_patch,domain,false);
       proof=verifyCompletedSourceTargetNativeAuthority({constructed,preimage,binding,evidence,candidate});
     }
@@ -273,6 +359,7 @@ async function qualifyFinalPositiveEvidence(session,reader,state,selected,priorI
   demand(state.version===2,'Representation migration cannot add scientific cells');
   await acquireInputs(session,reader,[hook]);
   const registry=readBody(session,reader,hook);
+  const custody=completedGeometryCustody(registry);
   const entries=[...authorityRegistry(registry).values()],seen=new Set(priorIdentities.map(pair=>pair[0]));
   const components=[],patches=[],referenceSources=new Set(),identities=priorIdentities.map(pair=>[...pair]);
   const contract=Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k=>[k,state.manifest[k]]));
@@ -280,7 +367,7 @@ async function qualifyFinalPositiveEvidence(session,reader,state,selected,priorI
   for(const entry of entries){
     demand(!seen.has(entry.authority_sha256),'Candidate repeats an already accepted authority identity');seen.add(entry.authority_sha256);
     demand(entry.policy_id==='retained-source-literal-additions'&&entry.policy_version===1,'Unsupported appended source policy');
-    const qualified=await appendAuthority(session,reader,entry,{size:state.manifest.size,ownerCount});
+    const qualified=await appendAuthority(session,reader,entry,{size:state.manifest.size,ownerCount},custody.get(entry.authority_sha256));
     supported(qualified.nativeOnly,'Final-bank positive changes require original native source-target authority');
     demand(same(qualified.contract,contract)&&qualified.ledger.parent_inventory===undefined,
       'New native authority changed the original physical/source contract');
@@ -364,6 +451,7 @@ export async function compareAcceptedFinalBank({beforeReader,afterReader,acquire
     demand(same(nativeBaseSelection(beforeSelection),nativeBaseSelection(afterSelection)),
       'Final bank changed original native/source/domain contract');
     const before=await readFinalSelectionProducts(session,beforeReader,beforeSelection);
+    session.beforeReader=beforeReader;session.beforeState=before;
     const count=before.bank.features.length;
     const after=await readFinalSelectionProducts(session,afterReader,afterSelection,count);
     demand(same(before.index.compatibility_files,after.index.compatibility_files),
@@ -537,6 +625,7 @@ export async function compareAcceptedFinalBank({beforeReader,afterReader,acquire
       checkpoint_custody:{baseline_commit:beforeReader.version,accepted_bank:before.bank.indexIdentity,candidate_bank:after.bank.indexIdentity},
       changed_ids:changedIds,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],
       candidate_code_executed:false,
+      ...(session.completedGeometryCustody?{completed_geometry_custody:session.completedGeometryCustody}:{}),
       limits:['Accepted main and proposed final files are the map authorities. Complete native words and finished context are compared; old repair hooks are not replayed.',
         'New positive destinations retain original source/target/method qualification. Withdrawals and scientific source fitness require substantive exact-head review; this result is not source approval.']};
   } finally {session.closed=true;closeStores(session);}

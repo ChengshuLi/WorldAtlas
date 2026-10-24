@@ -1,6 +1,7 @@
 // #1569 prevention helper. Input pins/binding must be derived by the trusted
 // selected-bank resolver. These functions do not select/activate a release.
 import {createHash} from 'node:crypto';
+import {canonicalNativeJsonChunks} from '../../../scripts/native-patch-store.mjs';
 import {isNativeSequence,nativeSequence} from '../../../src/native-grid.js';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -546,6 +547,83 @@ export function qualifyOriginalNativeAuthority(custody, pins) {
 // Comparison is conservation, not admission of new authorities. The caller
 // must authenticate every whole registry preimage/source-authority body through
 // the committed selector before using this view. A registry is not approval.
+// Fixed completed-proof transport only. Original full artifacts/pins are never
+// replaced by projected assertions: accepted original N must reconstruct their
+// exact canonical wire bytes before the ordinary completed verifier sees them.
+function geometryProjectionRows(body,role) {
+ demand(role==='source_evidence'||role==='completed_constructor','Unknown completed geometry role');
+ const source=role==='source_evidence';
+ demand(body&& (source?[1,2,3].includes(body.version)&&body.kind===`source-target-native-evidence-v${body.version}`:
+  body.version===1&&body.kind==='existing-source-target-native-constructor-result'),'Wrong completed geometry body kind');
+ const rows=body[source?'targets':'ledger_rows'];
+ demand(Array.isArray(rows)&&rows.length>0,'Complete geometry projection rows required');return rows;
+}
+function geometryProjectionPin(p) {
+ pinCheck(p);
+ demand(Object.keys(p).sort().join(',')==='bytes,commit,git_blob_oid,mode,path,sha256',
+  'Geometry custody requires an exact unencoded original pin');
+}
+export function verifyCompletedGeometryBytes(body,original) {
+ geometryProjectionPin(original);
+ const hash=createHash('sha256'),oid=createHash('sha1').update(`blob ${original.bytes}\0`);let bytes=0;
+ for(const chunk of canonicalNativeJsonChunks(body)){
+  const raw=Buffer.from(chunk);bytes+=raw.length;demand(bytes<=original.bytes,'Reconstructed original byte size differs');hash.update(raw);oid.update(raw);
+ }
+ demand(bytes===original.bytes&&hash.digest('hex')===original.sha256&&oid.digest('hex')===original.git_blob_oid,
+  'Reconstructed original whole byte identity differs');
+ return body;
+}
+export function projectCompletedGeometryBody(raw,original,role) {
+ geometryProjectionPin(original);
+ demand(Buffer.isBuffer(raw)&&raw.length===original.bytes&&sha(raw)===original.sha256
+  &&createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')===original.git_blob_oid,
+  'Original projection input whole bytes differ');
+ const body=JSON.parse(raw);verifyCompletedGeometryBytes(body,original);
+ const slots=geometryProjectionRows(body,role).map((row,index)=>{
+  demand(row&&Object.hasOwn(row,'base_geometry'),'Missing original geometry projection field');polygonParts(row.base_geometry);
+  const target_id=role==='source_evidence'?row.target_id??row.id:row.target_id;
+  demand(typeof target_id==='string'&&target_id&&Number.isSafeInteger(row.pixelIndex)&&row.pixelIndex>0,'Invalid geometry projection owner');
+  const slot={index,target_id,pixelIndex:row.pixelIndex,base_geometry_sha256:valueSha(row.base_geometry)};
+  delete row.base_geometry;return slot;
+ });
+ return {original:{...original},body,slots};
+}
+export async function restoreCompletedGeometryBody(projection,role,original,originalGeometry) {
+ geometryProjectionPin(original);
+ demand(projection&&Object.keys(projection).sort().join(',')==='body,original,slots'
+  &&same(projection.original,original)&&typeof originalGeometry==='function','Completed geometry original pin differs');
+ // JSON data only; clone before adding fields, never mutate the authenticated
+ // registry or an accepted source object shared with another comparison.
+ const body=structuredClone(projection.body),rows=geometryProjectionRows(body,role),slots=projection.slots;
+ demand(Array.isArray(slots)&&slots.length===rows.length,'Incomplete completed geometry slots');
+ for(let i=0;i<rows.length;i++){
+  const row=rows[i],slot=slots[i],id=role==='source_evidence'?row.target_id??row.id:row.target_id;
+  demand(slot&&Object.keys(slot).sort().join(',')==='base_geometry_sha256,index,pixelIndex,target_id'
+   &&slot.index===i&&slot.target_id===id&&slot.pixelIndex===row.pixelIndex&&hash(slot.base_geometry_sha256)
+   &&!Object.hasOwn(row,'base_geometry'),'Foreign, duplicate or reordered completed geometry slot');
+  const geometry=await originalGeometry(slot);
+  polygonParts(geometry);demand(valueSha(geometry)===slot.base_geometry_sha256,'Accepted original geometry hash differs');
+  row.base_geometry=geometry;
+ }
+ return freeze(verifyCompletedGeometryBytes(body,original));
+}
+export function completedGeometryCustody(registry) {
+ const entries=authorityRegistry(registry),rows=registry.completed_geometry_custody;
+ if(rows===undefined)return new Map();
+ demand(Array.isArray(rows)&&rows.length>0,'Explicit completed geometry custody required');
+ const result=new Map();let prior='';
+ for(const row of rows){
+  demand(row&&Object.keys(row).sort().join(',')==='authority_sha256,completed_constructor,source_evidence'
+   &&entries.has(row.authority_sha256)&&row.authority_sha256>prior&&!result.has(row.authority_sha256),
+   'Unused, duplicate or unordered completed geometry custody');
+  const entry=entries.get(row.authority_sha256);
+  demand(entry.completed_constructor&&same(row.completed_constructor?.original,entry.completed_constructor),
+   'Completed geometry constructor pin differs');
+  result.set(row.authority_sha256,row);prior=row.authority_sha256;
+ }
+ return result;
+}
+
 export function authorityRegistry(registry) {
  demand(registry?.version===1&&registry.kind==='retained-rule-authority-registry-v1'&&Array.isArray(registry.entries)&&registry.entries.length>0,'Missing explicit retained authority registry');
  const byId=new Map();let previous='';

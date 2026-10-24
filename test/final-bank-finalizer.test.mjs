@@ -664,3 +664,28 @@ test('stock supported-inputs CLI awaits accepted-map preparation and preserves e
    for(const [name,value]of Object.entries(output))assert.deepEqual(JSON.parse(fs.readFileSync(path.join(f.root,'coordination/engineering/incremental-test/output',name))),value);
   }
  });
+
+test('stock completed-custody CLI preserves private originals and genuine finalizer qualification',async t=>{
+ const {f}=await prepare(t),migration=await finalize(f,f.bankCommit),base=f.commit();
+ const added=await appendNativeAuthority(f,{membershipPath:'data/source.json',owner:1,name:'coordination/engineering/projected-next',completedConstructor:true});
+ f.save('data/ownership-selection.json',migration.selection);
+ const reader=pinReader(f.root),binding=reader.json(added.entry.source_authority);
+ const composed=await composeAuthorities({version:2,selector:f.pin('data/ownership-selection.json',base),authorities:[{
+  rule_preimage:added.entry.rule_preimage,source_authority:added.entry.source_authority,ledger:added.entry.completed_constructor,native_patch:binding.native_patch}]},reader);
+ f.save('coordination/engineering/projected-next/registry.json',JSON.parse(composed['authority-registry.json']));const original=f.commit();
+ const originals=[added.entry.completed_constructor,binding.source_evidence],bytes=originals.map(p=>reader.read(p));
+ const config={version:1,accepted_selector:{commit:base,path:'data/ownership-selection.json'},
+  authority_registry:{commit:original,path:'coordination/engineering/projected-next/registry.json'}};
+ f.save('custody-config.json',config);
+ const destination='coordination/engineering/projected-custody/output',args=[path.resolve('scripts/prepare-delivery-handoff.mjs'),'completed-custody','custody-config.json',destination];
+ const run=extra=>spawnSync(process.execPath,[...args,...extra],{cwd:f.root,encoding:'utf8',env:{...process.env,NODE_OPTIONS:'',NODE_PATH:''},timeout:30000});
+ const first=run([]);assert.equal(first.status,0,first.stderr);
+ const registry=JSON.parse(fs.readFileSync(path.join(f.root,destination,'authority-registry.json')));
+ assert.deepEqual(registry.entries,[added.entry]);assert.equal(registry.completed_geometry_custody.length,1);
+ const resumed=run(['--resume']);assert.equal(resumed.status,0,resumed.stderr);
+ for(let i=0;i<originals.length;i++)assert.deepEqual(reader.read(originals[i]),bytes[i]);
+ const projected=f.commit(),hook=f.pin(destination+'/authority-registry.json',projected);
+ await finalize(f,base,{change_evidence:hook},'coordination/engineering/projected-finalized/output');const candidate=f.commit();
+ const report=await compareFinal(f,base,candidate);
+ assert.equal(report.native_row_scope.added_cells,1);assert.equal(report.completed_geometry_custody.length,1);
+});
