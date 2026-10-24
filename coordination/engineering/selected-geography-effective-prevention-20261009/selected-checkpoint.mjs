@@ -281,6 +281,17 @@ async function completedOriginalGeometry(session,reader,state,sourcePaths) {
     return geometry;
   };
 }
+function completedAcceptedLattice(session,reader,state) {
+ let acquired;
+ return ()=>acquired??=(async()=>{
+  demand(state.manifest.size===262166&&state.manifest.method==='native-linear-evenodd-first-owner-v1',
+    'Completed bounds require the accepted fixed native contract');
+  const p=state.manifest.native_latitudes;
+  await acquireInputs(session,reader,[p]);
+  const latitudes=decodeVisibilityLatitudes(reader.read(p.path,{version:resolvePin(reader,p).version,expected:p.sha256}),p,state.manifest.size);
+  return {size:state.manifest.size,latitudes};
+ })();
+}
 function knownProjectionOrigin(reader,p) {
   let known=true;try{reader.git('--no-lazy-fetch','cat-file','-e',p.commit+'^{commit}');}catch{known=false;}
   if(known){const row=reader.git('--literal-pathspecs','ls-tree','-z',p.commit,'--',p.path).toString();
@@ -296,7 +307,7 @@ export async function projectCompletedAuthorityRegistry({beforeReader,registry,r
     demand(registry.completed_geometry_custody===undefined,'Completed geometry registry is already projected');
     const selection=beforeReader.json('data/ownership-selection.json');demand(finalBankSelection(selection),'Accepted final bank required for geometry custody');
     const state=await readFinalSelectionProducts(session,beforeReader,selection);
-    const rows=[];
+    const rows=[],lattice=completedAcceptedLattice(session,beforeReader,state);
     for(const entry of authorityRegistry(registry).values()){
       demand(entry.completed_constructor,'Completed geometry custody cannot qualify unfinished authority');
       const binding=JSON.parse(await readOriginal(entry.source_authority));
@@ -304,11 +315,11 @@ export async function projectCompletedAuthorityRegistry({beforeReader,registry,r
       const record={authority_sha256:entry.authority_sha256};
       for(const role of ['completed_constructor','source_evidence']){
         const original=role==='completed_constructor'?entry.completed_constructor:binding.source_evidence;
-        record[role]=projectCompletedGeometryBody(await readOriginal(original),original,role);
+        record[role]=projectCompletedGeometryBody(await readOriginal(original),original,role,{omitNativeBounds:role==='completed_constructor'});
       }
       const geometry=await completedOriginalGeometry(session,beforeReader,state,record.source_evidence.body.source_membership?.parts?.map(p=>p.path));
       for(const role of ['completed_constructor','source_evidence'])
-        await restoreCompletedGeometryBody(record[role],role,record[role].original,geometry);
+        await restoreCompletedGeometryBody(record[role],role,record[role].original,geometry,lattice);
       rows.push(record);
     }
     return {...registry,completed_geometry_custody:rows};
@@ -329,10 +340,11 @@ async function appendAuthority(session, reader, entry, domain, custody) {
         knownProjectionOrigin(child,entry.completed_constructor);knownProjectionOrigin(child,binding.source_evidence);
         const geometry=await completedOriginalGeometry(session,session.beforeReader,session.beforeState,
           custody.source_evidence.body?.source_membership?.parts?.map(p=>p.path));
+        const lattice=completedAcceptedLattice(session,session.beforeReader,session.beforeState);
         restored={};
         for(const role of ['completed_constructor','source_evidence'])
           restored[role]=await restoreCompletedGeometryBody(custody[role],role,
-            role==='completed_constructor'?entry.completed_constructor:binding.source_evidence,geometry);
+            role==='completed_constructor'?entry.completed_constructor:binding.source_evidence,geometry,lattice);
         (session.completedGeometryCustody??=[]).push({authority_sha256:entry.authority_sha256,
           kind:'original-n-reconstructed-completed-bodies-v1',originals:[entry.completed_constructor,binding.source_evidence],
           geometry_slots:custody.source_evidence.slots});

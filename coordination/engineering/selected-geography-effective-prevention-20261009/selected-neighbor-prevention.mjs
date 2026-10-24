@@ -573,8 +573,31 @@ export function verifyCompletedGeometryBytes(body,original) {
   'Reconstructed original whole byte identity differs');
  return body;
 }
-export function projectCompletedGeometryBody(raw,original,role) {
+const completedNativeBounds = 'accepted-native-centres-v1';
+// Exactly the completed constructor's native-centre extent, not a source bbox.
+// Validate the retained intervals before indexing the independently accepted lattice.
+function restoreCompletedNativeBounds(row,{size,latitudes}) {
+ demand(size===262166&&latitudes?.length===size,'Completed bounds require the accepted fixed native lattice');
+ demand(Number.isSafeInteger(row.pixelIndex)&&row.pixelIndex>0&&Array.isArray(row.native_rows)
+  &&row.native_rows.length>0,'Completed bounds require native rows');
+ let west=262166,east=0,prior=-1;
+ for(const item of row.native_rows){
+  demand(item&&Object.keys(item).sort().join(',')==='runs,y'&&Number.isSafeInteger(item.y)
+   &&item.y>prior&&item.y<size&&Array.isArray(item.runs)&&item.runs.length>0,'Invalid completed bounds native row');
+  prior=item.y;let end=0;
+  demand(Number.isFinite(latitudes[item.y]),'Missing accepted native latitude');
+  for(const run of item.runs){
+   demand(Array.isArray(run)&&run.length===3&&run.every(Number.isSafeInteger)
+    &&run[0]>=end&&run[1]>run[0]&&run[1]<=size&&run[2]===row.pixelIndex,'Invalid completed bounds native interval');
+   end=run[1];west=Math.min(west,run[0]);east=Math.max(east,run[1]-1);
+  }
+ }
+ return [(west+.5)/262166*360-180,latitudes[row.native_rows.at(-1).y],
+  (east+.5)/262166*360-180,latitudes[row.native_rows[0].y]];
+}
+export function projectCompletedGeometryBody(raw,original,role,{omitNativeBounds=false}={}) {
  geometryProjectionPin(original);
+ demand(typeof omitNativeBounds==='boolean'&&(!omitNativeBounds||role==='completed_constructor'),'Native bounds projection is constructor-only');
  demand(Buffer.isBuffer(raw)&&raw.length===original.bytes&&sha(raw)===original.sha256
   &&createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')===original.git_blob_oid,
   'Original projection input whole bytes differ');
@@ -584,18 +607,24 @@ export function projectCompletedGeometryBody(raw,original,role) {
   const target_id=role==='source_evidence'?row.target_id??row.id:row.target_id;
   demand(typeof target_id==='string'&&target_id&&Number.isSafeInteger(row.pixelIndex)&&row.pixelIndex>0,'Invalid geometry projection owner');
   const slot={index,target_id,pixelIndex:row.pixelIndex,base_geometry_sha256:valueSha(row.base_geometry)};
-  delete row.base_geometry;return slot;
+  delete row.base_geometry;
+  if(omitNativeBounds){demand(Object.hasOwn(row,'native_bounds'),'Missing original native bounds');delete row.native_bounds;}
+  return slot;
  });
- return {original:{...original},body,slots};
+ return {original:{...original},body,slots,...(omitNativeBounds?{native_bounds:completedNativeBounds}:{})};
 }
-export async function restoreCompletedGeometryBody(projection,role,original,originalGeometry) {
+export async function restoreCompletedGeometryBody(projection,role,original,originalGeometry,acceptedLattice) {
  geometryProjectionPin(original);
- demand(projection&&Object.keys(projection).sort().join(',')==='body,original,slots'
+ const bounds=projection&&Object.hasOwn(projection,'native_bounds');
+ demand(!bounds||role==='completed_constructor'&&projection.native_bounds===completedNativeBounds
+  &&typeof acceptedLattice==='function','Invalid constructor native bounds projection');
+ demand(projection&&Object.keys(projection).sort().join(',')===(bounds?'body,native_bounds,original,slots':'body,original,slots')
   &&same(projection.original,original)&&typeof originalGeometry==='function','Completed geometry original pin differs');
  // JSON data only; clone before adding fields, never mutate the authenticated
  // registry or an accepted source object shared with another comparison.
  const body=structuredClone(projection.body),rows=geometryProjectionRows(body,role),slots=projection.slots;
  demand(Array.isArray(slots)&&slots.length===rows.length,'Incomplete completed geometry slots');
+ const lattice=bounds?await acceptedLattice():undefined;
  for(let i=0;i<rows.length;i++){
   const row=rows[i],slot=slots[i],id=role==='source_evidence'?row.target_id??row.id:row.target_id;
   demand(slot&&Object.keys(slot).sort().join(',')==='base_geometry_sha256,index,pixelIndex,target_id'
@@ -604,6 +633,10 @@ export async function restoreCompletedGeometryBody(projection,role,original,orig
   const geometry=await originalGeometry(slot);
   polygonParts(geometry);demand(valueSha(geometry)===slot.base_geometry_sha256,'Accepted original geometry hash differs');
   row.base_geometry=geometry;
+  if(bounds){
+   demand(!Object.hasOwn(row,'native_bounds'),'Projected constructor retains native bounds');
+   row.native_bounds=restoreCompletedNativeBounds(row,lattice);
+  }
  }
  return freeze(verifyCompletedGeometryBytes(body,original));
 }
