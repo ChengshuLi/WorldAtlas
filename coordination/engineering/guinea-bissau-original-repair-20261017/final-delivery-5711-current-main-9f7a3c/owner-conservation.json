@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "kind": "read-only-stock-final-owner-conservation",
+  "status": "passed",
+  "baseline_commit": "9f7a3c98448424790e88adca4b5427998a10490d",
+  "authoring_head_before_commit": "ca9c5f57806945edec5d3be5f6206d81fa7bed36",
+  "selected_reference": {
+    "id": "geography:final:29ce65e8e9795ba6e080b6a2d929477c25b9220fe11e1a9a7ddae782d0f329d7",
+    "footprints_sha256": "d763363228450a8b9c87c7f91bfc4251494d849cf9d61a8ecc94974b60be61fa",
+    "hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144"
+  },
+  "partition": {
+    "original_keys": 6117,
+    "baseline_owner_zero": 6117,
+    "candidate_cells": 5711,
+    "candidate_assigned_to_exact_native_patch_owner": 5711,
+    "retained_held_cells": 406,
+    "retained_held_cells_still_owner_zero": 406,
+    "partition_complete_and_disjoint": true
+  },
+  "full_bank_conservation": {
+    "prior_owned_cells": 13860749642,
+    "final_owned_cells": 13860755353,
+    "net_additions": 5711,
+    "removed_cells": 0,
+    "reassigned_cells": 0,
+    "new_interval_delta_exactly_matches_candidate_patch": true
+  },
+  "pins": {
+    "prior_index": {
+      "commit": "9f7a3c98448424790e88adca4b5427998a10490d",
+      "path": "data/canonical-grid/current-startup/index.json",
+      "bytes": 49610,
+      "sha256": "b5bca9c4643bf1ba5c979768b71e377b22da6129af9ca6af14caa5d2c5c92178"
+    },
+    "final_index": {
+      "bytes": 49610,
+      "sha256": "7dfc2dd568bdb374cbfa83e6cb17fb688917c21f3b7609cfd402b318f6b61c2d"
+    },
+    "supported_patch": {
+      "commit": "6a9e4bb7540eda418072388f1c6e0f6fdf98e279",
+      "path": "coordination/engineering/guinea-bissau-original-repair-20261017/supported-inputs-002/prepared-5711/native-patch.json",
+      "bytes": 49203,
+      "sha256": "be29bff5e58f9a5b2b17133047ba3a2e80c46e9bd14fee4b3398dc56a157b4e7"
+    },
+    "held_partition": {
+      "commit": "6a9e4bb7540eda418072388f1c6e0f6fdf98e279",
+      "path": "coordination/engineering/guinea-bissau-original-repair-20261017/supported-inputs-002/prepared-5711/held-original.json",
+      "bytes": 11907,
+      "sha256": "390a61165477409faf310eb33be26b582fb3368ec67223dc5d3cfc29ddcdd93d"
+    },
+    "current_owner_observation": {
+      "commit": "1edbab62757fe9c83d21d3ce47c10bfc1293c0ac",
+      "path": ".gnb-owner-observation-current-main-1edbab.json",
+      "sha256": "c8db11cfd146648d97503e1057b8692787e2aea3e640ee944d8d4d737a8a4352"
+    }
+  },
+  "method": {
+    "runtime": "Node.js v24.19.0",
+    "consumer": "Production loadOwnershipAssets and pickOwnership",
+    "comparison": "Exact full ownership intervals from baseline to finalized bank; row-wise interval subtraction and direct per-key owner lookup",
+    "source_or_geometry_producers_rerun": false
+  },
+  "limits": [
+    "This is a current-owner and native ownership-bank conservation result; it does not grant source/physical/native qualification beyond the pinned 5,711 inputs.",
+    "The 405 source-applicability holds and separate Pitche hold remain unassigned; this receipt groups them only as 406 held cells.",
+    "No hosted dispatch, merge, formal package acceptance, or browser emitted-asset smoke is claimed."
+  ]
+}
