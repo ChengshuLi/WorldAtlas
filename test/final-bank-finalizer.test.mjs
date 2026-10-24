@@ -682,6 +682,9 @@ test('stock completed-custody CLI preserves private originals and genuine finali
  const first=run([]);assert.equal(first.status,0,first.stderr);
  const registry=JSON.parse(fs.readFileSync(path.join(f.root,destination,'authority-registry.json')));
  assert.deepEqual(registry.entries,[added.entry]);assert.equal(registry.completed_geometry_custody.length,1);
+ assert.equal(registry.completed_geometry_custody[0].completed_constructor.native_bounds,'accepted-native-centres-v1');
+ assert(registry.completed_geometry_custody[0].completed_constructor.body.ledger_rows.every(row=>!Object.hasOwn(row,'native_bounds')));
+ assert(!Object.hasOwn(registry.completed_geometry_custody[0].source_evidence,'native_bounds'));
  const resumed=run(['--resume']);assert.equal(resumed.status,0,resumed.stderr);
  for(let i=0;i<originals.length;i++)assert.deepEqual(reader.read(originals[i]),bytes[i]);
  const projected=f.commit(),hook=f.pin(destination+'/authority-registry.json',projected);

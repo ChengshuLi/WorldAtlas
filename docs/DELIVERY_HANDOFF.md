@@ -997,6 +997,18 @@ This emits a new `authority-registry.json` with the original entries/pins plus
 an explicit `completed_geometry_custody` field. Each referenced authority has
 exactly two typed inline projections: `completed_constructor` and
 `source_evidence`, each containing `original`, `body`, and ordered `slots`.
+New constructor projections also carry the fixed optional tag
+`"native_bounds":"accepted-native-centres-v1"` and omit **every** ledger row's
+`native_bounds`. The reader restores these redundant result extents using the
+unchanged constructor arithmetic on retained native intervals and its independently
+authenticated accepted fixed lattice/latitude table. It never uses candidate
+latitude pins or a source bounding box. Unknown tags, partial omissions, retained
+bounds under the tag, invalid intervals, or unavailable accepted lattice fail.
+The original whole-body byte checks still apply: even legitimate original bounds
+larger than the exact constructor extent cannot be silently narrowed/rebound.
+Old geometry-only projections without this tag remain supported unchanged; the
+source-evidence projection does not accept the bounds tag.
+
 The new registry's ordinary whole-file hook authenticates the inline data; it
 is not the same body/hash as the original registry. Commit the output and use
 its exact new pin as the finalizer's `change_evidence`. Preserve the private
@@ -1020,7 +1032,7 @@ are not a supported projection contract.
 
 This is lossless transport preparation, not qualification, source redistribution
 permission or acceptance. Inspect the emitted data for any other restricted
-content: only the specified original polygons are elided; all other original
+content: only the specified original polygons and tagged constructor native bounds are elided; all other original
 fields, holds and evidence remain unchanged. Source polygons elsewhere must not
 be silently redacted or published. A code-only accepted prerequisite is required
 before a data proposal can use a new custody schema; candidate code cannot
