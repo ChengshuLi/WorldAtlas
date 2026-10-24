@@ -19,14 +19,15 @@ import {prepareFinalBankStartupOwnership} from '../scripts/prepare-startup-owner
 import {oldBank,writeFinal} from './fixtures/final-bank.mjs';
 const root='data/canonical-grid/current-startup',hash=b=>createHash('sha256').update(b).digest('hex');
 test('accepted main directly advances A then B then code-only without any historical checkpoint',async t=>{
- const f=await trustedFixture(t,{nativeAppend:true,finalBank:true});
+ const f=await trustedFixture(t,{nativeAppend:true,finalBank:true,omitLatitudeFields:['mode','git_blob_oid']});
  const old=await oldBank(f);
  // One actual accepted source member locates the lazy owner. No old certificate
  // or candidate-authored geometry is used as its original geometry authority.
  const sourceWorld=f.selected;
- f.save('data/bank.json',{version:1,kind:'complete-world-index-with-exact-encoded-overrides',locations:old.features.length,world_index:f.pin('data/world-index.json',sourceWorld),
+ const historicalPin=(name,at)=>{const p=f.pin(name,at);delete p.mode;delete p.git_blob_oid;return p;};
+ f.save('data/bank.json',{version:1,kind:'complete-world-index-with-exact-encoded-overrides',locations:old.features.length,world_index:historicalPin('data/world-index.json',sourceWorld),
   release_id:f.selection.release_id,native_manifest_sha256:f.selection.sha256,
-  footprints_sha256:f.manifest.footprints_sha256,unchanged_files:[f.pin('data/source.json',f.selected)],overrides:[]});
+  footprints_sha256:f.manifest.footprints_sha256,unchanged_files:[historicalPin('data/source.json',f.selected)],overrides:[]});
  const sourceAt=f.commit(),sourcePin=f.pin('data/bank.json',sourceAt);
  f.sidecar.base_selection={...f.sidecar.base_selection,selected_geography:{version:1,
   kind:'complete-world-index-with-exact-encoded-overrides',path:sourcePin.path,bytes:sourcePin.bytes,sha256:sourcePin.sha256}};
@@ -301,4 +302,88 @@ console.log(JSON.stringify({report,metadata_requests:calls}));`);
   t.diagnostic('Imported '+required.length+' current/new-evidence blobs, '+required.reduce((n,p)=>n+p.bytes,0)+' logical bytes; no compatibility or previous-authority body.');
  });
  f.git('reset','--hard',code);
+});
+
+async function historicalDescriptorFixture(t,options={}) {
+ const f=await trustedFixture(t,{nativeAppend:true,finalBank:true,
+  omitLatitudeFields:['mode','git_blob_oid'],...options});
+ const old=await oldBank(f),features=old.features.map(p=>finishEffectiveFootprint(p,valueSha));
+ // Two accepted synthetic final banks differ by a one-cell withdrawal. Keeping
+ // one native cell forces the comparator to authenticate the original lattice;
+ // an unchanged-bank comparison would never exercise its bounds reader.
+ const y=Math.floor(f.manifest.size/2),x=y;
+ const bank=async(count,prior)=>{
+  const context=structuredClone(features);
+  context[0].finishedFootprint.native_rows=[{y,runs:[[x,x+count]]}];
+  context[0].finishedFootprint.native_bounds=[-180,-90,180,90];
+  const words=mergeUnassignedNativeIntervals(old.ownership,[{y,runs:[[x,x+count,1]]}],{owners:new Set([1,2,3]),allowed:new Set([1,2,3])});
+  return writeFinal(f,prior,context,{...old.ownership,...words,runWords:words.runs.length});
+ };
+ const baseline=await bank(2,old.index),initial=await bank(1,baseline.index);
+ const compare=(version=initial.commit,configure=()=>{})=>{
+  const beforeReader=new f.native.ImmutableReader(f.root,baseline.commit),afterReader=new f.native.ImmutableReader(f.root,version,{invocation:beforeReader.invocation});
+  const callbacks=configure(beforeReader,afterReader)??{};
+  return f.api.compareAcceptedFinalBank({beforeReader,afterReader,...callbacks});
+ };
+ return {...f,initial,compare};
+}
+
+test('final-bank admission and comparison preserve historical body descriptor identities',async t=>{
+ for(const omitted of [['mode','git_blob_oid'],['mode'],['git_blob_oid']])await t.test('missing '+omitted.join('/'),async t=>{
+  const f=await historicalDescriptorFixture(t,{omitLatitudeFields:omitted,latitudePinChanges:{role:'immutable-normative-rule-input'}});
+  const original=structuredClone(f.manifest.native_latitudes),report=await f.compare();
+  assert.equal(report.native_row_scope.added_cells,0);assert.equal(report.removed_cells,1);assert.deepEqual(f.manifest.native_latitudes,original);
+ });
+ const cases=[
+  ['contradictory supplied OID',{omitLatitudeFields:['mode'],latitudePinChanges:{git_blob_oid:'0'.repeat(40)}},/original mode\/OID differs/],
+  ['contradictory supplied mode',{omitLatitudeFields:['git_blob_oid'],latitudePinChanges:{mode:'100755'}},/original mode\/OID differs/],
+  ['explicit missing mode is malformed',{latitudePinChanges:{mode:null}},/Incomplete immutable checkpoint pin/],
+  ['missing mandatory encoded size',{omitLatitudeFields:['mode','git_blob_oid','bytes']},/Native ownership rule input is missing or incompatible/],
+  ['wrong encoded size',{latitudePinChanges:{bytes:1}},/whole mode\/OID\/size|whole size/],
+  ['wrong encoded hash',{latitudePinChanges:{sha256:'0'.repeat(64)}},/Prepared startup native latitude differs/],
+  ['wrong decoded size',{latitudePinChanges:{decoded_bytes:8}},/Native ownership rule input is missing or incompatible/],
+  ['wrong decoded hash',{latitudePinChanges:{decoded_sha256:'0'.repeat(64)}},/Native ownership rule input is missing or incompatible/],
+  ['missing decoded size',{omitLatitudeFields:['mode','git_blob_oid','decoded_bytes']},/Native ownership rule input is missing or incompatible/],
+  ['symlink original',{latitudeSymlink:true},/Missing ordinary original checkpoint path/],
+  ['missing original path',{latitudePinChanges:{path:'original/missing-latitudes.gz'}},/Native ownership rule input is missing or incompatible/]
+ ];
+ // Invalid normative headers may be refused by the unchanged bank admission
+ // guard before comparison; neither construction nor comparison may accept them.
+ for(const [name,options,pattern]of cases)await t.test(name,async t=>{
+  await assert.rejects(async()=>{const f=await historicalDescriptorFixture(t,options);await f.compare();},pattern);
+ });
+});
+
+test('historical descriptor acquisition authenticates cold original objects, never a changed current alias',async t=>{
+ for(const absentOrigin of [false,true])await t.test(absentOrigin?'private absent origin with differing current alias':'known origin with absent body',async t=>{
+  const f=await historicalDescriptorFixture(t),p=f.manifest.native_latitudes,raw=f.git('show',p.commit+':'+p.path),oid=f.git('rev-parse',p.commit+':'+p.path).toString().trim();
+  const remote=path.join(f.root,'original-remote.git');execFileSync('git',['clone','--bare','--no-hardlinks',f.root,remote],{stdio:'pipe'});
+  for(const key of ['uploadpack.allowFilter','uploadpack.allowAnySHA1InWant'])execFileSync('git',['-C',remote,'config',key,'true']);
+  f.save(p.path,Buffer.from('Different current alias must never authenticate original latitude bytes\n'));const current=f.commit();
+  omitFixtureObjects(t,f.root,[oid,...(absentOrigin?[p.commit]:[])]);
+  const execute=(command,args,options)=>execFileSync(command,args.map(arg=>arg==='https://github.com/ChengshuLi/WorldAtlas.git'?'file://'+remote:arg),options);
+  if(absentOrigin){
+   await assert.rejects(f.compare(current,before=>{
+    const original=before.acquireOriginalPaths.bind(before);
+    before.acquireOriginalPaths=pins=>original(pins,{execute:(command,args,options)=>{
+     if(args.includes('fetch'))throw Error('Fixture unavailable original origin');
+     return execFileSync(command,args,options);
+    }});
+    return {acquireAuthorityInputs:async(reader,pins)=>{for(const pin of pins){assert.notEqual(pin.path,p.path,'An incomplete original pin must not use the current alias transport');await reader.acquirePinned(pin);}}};
+   }),/Immutable origin object fetch failed/);
+   assert.throws(()=>f.git('--no-lazy-fetch','cat-file','-e',p.commit+'^{commit}'));
+   assert.throws(()=>f.git('--no-lazy-fetch','cat-file','-e',oid));
+  }
+  let normalized=0,privateOrigins=0;
+  const report=await f.compare(current,before=>{
+   const original=before.acquireOriginalPaths.bind(before);
+   before.acquireOriginalPaths=(pins)=>{privateOrigins++;assert.deepEqual(pins,[p]);return original(pins,{execute});};
+   return {acquireAuthorityInputs:async(reader,pins)=>{
+    for(const complete of pins){if(complete.path===p.path){normalized++;assert.deepEqual(complete,{...p,mode:'100644',git_blob_oid:oid});}await reader.acquirePinned(complete,{execute});}
+   }};
+  });
+  assert.equal(report.native_row_scope.added_cells,0);assert.equal(privateOrigins,absentOrigin?1:0);assert.equal(normalized,absentOrigin?0:1);
+  assert.deepEqual(f.git('cat-file','blob',oid),raw);
+  if(absentOrigin)assert.throws(()=>f.git('--no-lazy-fetch','cat-file','-e',p.commit+'^{commit}'));
+ });
 });

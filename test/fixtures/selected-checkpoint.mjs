@@ -39,7 +39,7 @@ function fixtureRepository(root){
 const trustedSeeds=new Map();
 after(()=>{for(const seed of trustedSeeds.values())fs.rmSync(seed.root,{recursive:true,force:true});});
 
-function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,nativeConsumer,sourceOverride,physicalLogicalSource,originalPatchRows,overrideLogicalPath,nativeLayout,sourceFeatures,finalBank,packageRoles}){
+function buildTrustedSeed(root,{latitudePinChanges,omitLatitudeFields,latitudeSymlink,incompleteNative,codeRoutes,nativeAppend,nativeConsumer,sourceOverride,physicalLogicalSource,originalPatchRows,overrideLogicalPath,nativeLayout,sourceFeatures,finalBank,packageRoles}){
  const {git,save,commit,pin}=fixtureRepository(root);
  git('init','-q');if(codeRoutes)save('data/scientific.js',{fixture:'scientific input, not executed code'});for(const name of new Set([...CODE,...(finalBank?JOINT_CODE:[])]))save(name,fs.readFileSync(name));save('package.json',{type:'module'});
  const {features,certificate}=fixtures(sourceFeatures), source={type:'FeatureCollection',features};save('data/source.json',source);
@@ -69,10 +69,13 @@ function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,nativeC
   manifest.native_latitudes={root:'repository',commit:initial,path:'original/latitudes.f64le.gz',mode:tree[0],git_blob_oid:tree[2],bytes:body.length,sha256:sha(body),decoded_bytes:bytes.length,decoded_sha256:sha(bytes)};
   if(finalBank){
     const name='coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz';
-    const encoded=fs.readFileSync(name),decoded=gunzipSync(encoded);save(name,encoded);const at=commit();
+    const encoded=fs.readFileSync(name),decoded=gunzipSync(encoded);save(name,encoded);
+    if(latitudeSymlink){fs.unlinkSync(path.join(root,name));fs.symlinkSync('foreign-target',path.join(root,name));}
+    const at=commit();
     manifest.version=2;manifest.footprints_sha256=reference.footprints_sha256;manifest.geographic_release=reference.id;
     manifest.native_latitudes={root:'repository',role:'immutable-normative-rule-input',...pin(name,at),decoded_bytes:decoded.length,decoded_sha256:sha(decoded)};
   }
+  for(const field of omitLatitudeFields)delete manifest.native_latitudes[field];Object.assign(manifest.native_latitudes,latitudePinChanges);
   manifest.original_assets={bounds:{sha256:sha(fs.readFileSync(path.join(root,'data/owners.json')))}};
  }
  if(nativeConsumer){
@@ -123,9 +126,9 @@ function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,nativeC
 
 // The real entry reads each independent copy's ordinary committed catalogue and
 // products. Qualification, readers and private module state are always fresh.
-async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeAppend=false,nativeConsumer=false,sourceOverride=false,physicalLogicalSource=false,originalPatchRows,overrideLogicalPath='data/source.json',nativeLayout,sourceFeatures,finalBank=false,packageRoles=false}={}){
+async function trustedFixture(t,{latitudePinChanges={},omitLatitudeFields=[],latitudeSymlink=false,incompleteNative=false,codeRoutes=false,nativeAppend=false,nativeConsumer=false,sourceOverride=false,physicalLogicalSource=false,originalPatchRows,overrideLogicalPath='data/source.json',nativeLayout,sourceFeatures,finalBank=false,packageRoles=false}={}){
  // Snapshot caller-owned rows before both keying and building the private seed.
- const options={incompleteNative,codeRoutes,nativeAppend,nativeConsumer,sourceOverride,physicalLogicalSource,finalBank,packageRoles,
+ const options={latitudePinChanges,omitLatitudeFields,latitudeSymlink,incompleteNative,codeRoutes,nativeAppend,nativeConsumer,sourceOverride,physicalLogicalSource,finalBank,packageRoles,
   originalPatchRows:structuredClone(originalPatchRows??[{y:1,runs:[[2,3,1]]}]),overrideLogicalPath,nativeLayout:structuredClone(nativeLayout??null),sourceFeatures:structuredClone(sourceFeatures??null)};
  const key=JSON.stringify(options);
  let seed=finalBank?null:trustedSeeds.get(key);
@@ -172,7 +175,7 @@ async function appendNativeAuthority(f,{owner=0,targetOwners,name='appended',com
   catalogue:f.pin('coordination/engineering/original-geography-source-corpus-20261006/catalogue.json',originals),
   owner_roster:f.pin('data/owners.json',originals),physical_evidence:physicalEvidence,
   physical_input:f.pin(name+'/measured.json',originals),physical_reproduction:f.pin(name+'/physical.py',originals),
-  native_latitudes:f.manifest.native_latitudes,
+  native_latitudes:{...f.manifest.native_latitudes,...f.pin(f.manifest.native_latitudes.path,f.manifest.native_latitudes.commit)},
   native_contract:Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k=>[k,f.manifest[k]])),
   base_reference:f.envelope.base_reference,families:[{source_id:family,parts:[f.pin(name+'/source.json',originals)]}],
   targets:requested.map(({target,feature,owner})=>({id:target,target_id:feature.id,pixelIndex:owner+1,source_family:family,base_geometry:feature.geometry,

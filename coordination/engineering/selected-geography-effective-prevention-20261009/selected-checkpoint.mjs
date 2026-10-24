@@ -49,26 +49,55 @@ function sessionCheck(reader, session) {
     && reader.repo === session.repo, 'Foreign or expired checkpoint invocation');
 }
 
+// Some original body descriptors predate explicit Git custody fields. Their
+// declared byte/hash identities remain mandatory; only absent mode/OID may be
+// obtained from the exact original Git path, never from a current alias.
+const missingMetadata = p => !Object.hasOwn(p, 'mode') || !Object.hasOwn(p, 'git_blob_oid');
 function pin(p) {
-  demand(p && commit(p.commit) && safe(p.path) && ['100644','100755'].includes(p.mode)
-    && /^[a-f0-9]{40}$/.test(p.git_blob_oid) && Number.isSafeInteger(p.bytes)
-    && p.bytes >= 0 && hash(p.sha256), 'Incomplete immutable checkpoint pin');
-  if (p.decoded_bytes !== undefined) demand(Number.isSafeInteger(p.decoded_bytes)
+  demand(p && commit(p.commit) && safe(p.path)
+    && (!Object.hasOwn(p,'mode') || ['100644','100755'].includes(p.mode))
+    && (!Object.hasOwn(p,'git_blob_oid') || /^[a-f0-9]{40}$/.test(p.git_blob_oid))
+    && Number.isSafeInteger(p.bytes) && p.bytes >= 0 && hash(p.sha256), 'Incomplete immutable checkpoint pin');
+  if (Object.hasOwn(p,'decoded_bytes') || Object.hasOwn(p,'decoded_sha256')) demand(Number.isSafeInteger(p.decoded_bytes)
     && p.decoded_bytes > 0 && hash(p.decoded_sha256),
   'Incomplete whole decoded checkpoint pin');
 }
-
+function metadataPin(p, actual) {
+  demand(['100644','100755'].includes(actual.mode) && commit(actual.git_blob_oid)
+    && (!Object.hasOwn(p,'mode') || p.mode===actual.mode)
+    && (!Object.hasOwn(p,'git_blob_oid') || p.git_blob_oid===actual.git_blob_oid),
+    'Checkpoint original mode/OID differs: '+p.path);
+  return {...p,mode:actual.mode,git_blob_oid:actual.git_blob_oid};
+}
 async function acquireInputs(session, reader, pins) {
   pins.forEach(pin);
-  if (pins.length) await session.acquireAuthorityInputs?.(reader, pins);
+  const complete=[];
+  for(const p of pins) {
+    if(!missingMetadata(p)){complete.push(p);continue;}
+    let known=true;try{reader.git('--no-lazy-fetch','cat-file','-e',p.commit+'^{commit}');}catch{known=false;}
+    if(known){
+      const row=reader.git('ls-tree','-z',p.commit,'--',p.path).toString();
+      const match=/^(100644|100755) blob ([a-f0-9]{40})\t([^\0]+)\0$/.exec(row);
+      demand(match&&match[3]===p.path,'Missing ordinary original checkpoint path: '+p.path);
+      complete.push(metadataPin(p,{mode:match[1],git_blob_oid:match[2]}));
+    }else{
+      await reader.acquireOriginalPaths([p]);
+      const actual=reader.descriptor(p.path,p.commit);
+      metadataPin(p,actual);
+      demand(actual.bytes===p.bytes,'Checkpoint original whole size differs: '+p.path);
+    }
+  }
+  if (complete.length) await session.acquireAuthorityInputs?.(reader, complete);
 }
 
 function resolvePin(reader, p) {
   pin(p);
   let version = p.commit;
-  try { reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}'); } catch { version = reader.version; }
+  // A descriptor without custody fields has no authenticated current alias.
+  if(!missingMetadata(p))try { reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}'); } catch { version = reader.version; }
   const actual = reader.descriptor(p.path, version);
-  demand(actual.mode === p.mode && actual.git_blob_oid === p.git_blob_oid && actual.bytes === p.bytes,
+  metadataPin(p,actual);
+  demand(actual.bytes === p.bytes,
     'Checkpoint whole mode/OID/size or historical alias changed: '+p.path);
   return {actual, version};
 }
