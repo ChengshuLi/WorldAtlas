@@ -1172,6 +1172,149 @@ export function sourceTerritorialExclusions(evidence, families, reader, compact 
 // Fill only the accepted baseline block of ordinary source evidence. Scientific
 // claims stay explicit; this metadata preparation does not qualify their support.
 // In particular, the normative manifest descriptor is not a Git custody pin.
+// Adapt existing stock correction/release products into one native application.
+// The caller supplies whole input pins, never a handwritten release or receipt.
+export function prepareReferenceMetadata(config, reader) {
+  need(config?.version === 1 && same(Object.keys(config).sort(), ['version', 'selector', 'native_manifest',
+    'owner_roster', 'current_release', 'hierarchy', 'receipts', 'source_updates'].sort())
+    && config.selector?.path === 'data/ownership-selection.json'
+    && config.current_release?.path === 'data/geographic-releases/current-manifest.json'
+    && config.hierarchy && same(Object.keys(config.hierarchy).sort(), ['after', 'before'])
+    && Array.isArray(config.receipts) && config.receipts.length > 0 && Array.isArray(config.source_updates),
+  'Exact reference metadata preparation inputs required');
+  const inventory = new Map();
+  function read(pin, role = 'reference metadata input') {
+    need(pin && safe(pin.path) && hex(pin.commit, 40) && pin.mode === '100644'
+      && hex(pin.git_blob_oid, 40) && Number.isSafeInteger(pin.bytes) && pin.bytes > 0
+      && hex(pin.sha256, 64), 'Complete ordinary reference preparation pin required');
+    const raw = reader.read(pin);
+    need(Buffer.isBuffer(raw) && raw.length === pin.bytes && digest(raw) === pin.sha256
+      && createHash('sha1').update('blob ' + raw.length + '\0').update(raw).digest('hex') === pin.git_blob_oid,
+    'Whole reference preparation input differs');
+    const key = pin.commit + ':' + pin.path, prior = inventory.get(key);
+    need(!prior || same(prior.pin, pin), 'Conflicting reference preparation input vintages');
+    if (!prior) inventory.set(key, {pin: {...pin}, roles: []});
+    const entry = inventory.get(key); if (!entry.roles.includes(role)) entry.roles.push(role);
+    return raw;
+  }
+  const json = (pin, role) => JSON.parse(read(pin, role));
+  const selection = json(config.selector, 'original scientific selector');
+  const manifest = json(config.native_manifest, 'original native manifest');
+  need(config.native_manifest.sha256 === scientificNativeSelection(selection).sha256, 'Reference preparation native manifest differs from selector');
+  const encodedOwners = read(config.owner_roster, 'original complete owner roster');
+  need(config.owner_roster.sha256 === manifest.original_assets?.bounds?.sha256,
+    'Reference preparation original owner roster differs');
+  let ownersRaw = encodedOwners;
+  if (encodedOwners[0] === 31 && encodedOwners[1] === 139) {
+    need(Number.isSafeInteger(config.owner_roster.decoded_bytes) && config.owner_roster.decoded_bytes > 0
+      && hex(config.owner_roster.decoded_sha256, 64),
+    'Complete bounded original owner roster decoding required');
+    ownersRaw = gunzipSync(encodedOwners, {maxOutputLength: config.owner_roster.decoded_bytes + 1});
+    need(ownersRaw.length === config.owner_roster.decoded_bytes && digest(ownersRaw) === config.owner_roster.decoded_sha256,
+      'Reference preparation decoded original owners differ');
+  }
+  need(same(Object.keys(config.current_release).sort(), ['commit', 'path']) && hex(config.current_release.commit, 40),
+    'Actual current release commit/path locator required');
+  const releasePointer = reader.pin(config.current_release.commit, config.current_release.path);
+  need(releasePointer.bytes <= 4096, 'Bounded actual current release pointer required');
+  const pointer = json(releasePointer, 'accepted current release pointer');
+  need(typeof pointer.path === 'string' && /^[A-Za-z0-9][A-Za-z0-9_.-]*\.json\.gz$/.test(pointer.path)
+    && hex(pointer.sha256, 64) && hex(pointer.predecessor_index_sha256, 64), 'Actual current release pointer required');
+  const releasePin = reader.pin(releasePointer.commit, 'data/geographic-releases/' + pointer.path);
+  need(releasePin.sha256 === pointer.sha256, 'Current reference release whole identity differs');
+  const originalIndex = reader.pin(releasePointer.commit, 'data/geographic-releases/index.json');
+  need(originalIndex.sha256 === pointer.predecessor_index_sha256, 'Current reference release predecessor differs');
+  const before = json(originalIndex, 'original geographic release index');
+  const releases = JSON.parse(gunzipSync(read(releasePin, 'accepted current release registry'), {maxOutputLength: 64 * 1024 * 1024}));
+  need(releases.version === before.version && releases.original_catalog_sha256 === before.original_catalog_sha256
+    && Array.isArray(before.releases) && Array.isArray(releases.releases)
+    && releases.releases.length > before.releases.length
+    && same(releases.releases.slice(0, before.releases.length), before.releases)
+    && new Set(releases.releases.map(row => row.id)).size === releases.releases.length
+    && releases.releases.every((row, i, rows) => Number.isSafeInteger(row.version)
+      && row.version > (i ? rows[i - 1].version : 0)), 'Current reference release does not preserve its actual predecessor');
+  const current = releases.releases.at(-1);
+  const native = originalNativeReference(manifest);
+  need(releases.releases.some(row => same(Object.fromEntries(['id', 'footprints_sha256', 'hierarchy_sha256']
+    .map(key => [key, row[key]])), native)), 'Current reference registry omits the exact original native release');
+  const reference = Object.fromEntries(['id', 'footprints_sha256', 'hierarchy_sha256'].map(key => [key, current[key]]));
+  const migrationPins=new Set(Object.values(current.metadata?.metadata_migration_sha256??{}));
+  read(config.hierarchy.before, 'original complete hierarchy'); read(config.hierarchy.after, 'current complete hierarchy');
+  for (const pin of config.receipts) read(pin, 'existing reference correction receipt');
+  for (const update of config.source_updates) {
+    need(update && same(Object.keys(update).sort(), ['after', 'before', 'logical_path']), 'Exact whole metadata source update required');
+    read(update.before, 'original complete source'); read(update.after, 'current complete source');
+  }
+  // Use the same selected N bank as the actual consumer. Identical bytes at a
+  // later commit do not replace the original issued source-path identity.
+  const bank = readSelectedGeometryBank({
+    descriptor: name => reader.pin(config.selector.commit, name),
+    json: (name, {expected}) => {
+      const pin = reader.pin(config.selector.commit, name);
+      need(pin.sha256 === expected, 'Original selected source bank checksum differs');
+      return json(pin, 'original selected source bank');
+    }
+  }, selection);
+  need(Array.isArray(bank.unchanged_files) && Array.isArray(bank.overrides),
+    'Complete original selected source roster required');
+  const originalSources = new Map();
+  for (const [name, pin] of [...bank.unchanged_files.map(pin => [pin.path, pin]),
+    ...bank.overrides.map(pin => [pin.logical_path, pin])]) {
+    need(/^data\/geography\/[^/]+\.json$/.test(name) && !originalSources.has(name),
+      'Duplicate or foreign original selected source');
+    originalSources.set(name, pin);
+  }
+  const projection = prepareReferenceMetadataProjection({selection, manifest, owners: JSON.parse(ownersRaw), reference,
+    hierarchy: config.hierarchy, receipts: config.receipts, source_updates: config.source_updates, read, originalSources});
+  const receiptJSON = referenceMetadataReader(pin => read(pin, 'existing reference correction receipt'));
+  need(config.receipts.every(pin=>migrationPins.has(pin.sha256) || isReferenceAliasReceipt(receiptJSON(pin))),
+    'Current reference release does not bind every applied metadata receipt');
+  return {products: {'reference-metadata.json': jsonBytes(projection)},
+    input_inventory: [...inventory.values()].map(({pin, roles}) => ({...pin, roles, whole_body_consumed: true}))};
+}
+
+// Original-source preparation retains authenticated historical metadata pins.
+function selectedDeliveryReference(selection, manifest, reader, commit) {
+  const native = {id: manifest.geographic_release, footprints_sha256: manifest.footprints_sha256,
+    hierarchy_sha256: manifest.hierarchy_sha256};
+  const pointer = selection.reference_projection;
+  if (pointer === undefined) return {native, reference: native};
+  originalNativeReference(manifest);
+  need(scientificNativeSelection(selection).release_id === native.id, 'Delivery native reference differs from original selector');
+  need(same(Object.keys(pointer).sort(), ['bytes', 'path', 'sha256']) && safe(pointer.path)
+    && Number.isSafeInteger(pointer.bytes) && pointer.bytes > 0 && hex(pointer.sha256, 64),
+  'Complete ordinary delivery reference projection pointer required');
+  const projectionPin = reader.pin(commit, pointer.path);
+  need(projectionPin.mode === '100644' && projectionPin.bytes === pointer.bytes && projectionPin.sha256 === pointer.sha256,
+    'Delivery reference projection whole identity differs');
+  const projection = reader.json(projectionPin);
+  const references = validateReferenceMetadataHeader(projection, {selection, manifest});
+  return {...references, projectionPin};
+}
+
+// Authenticate a pinned original-source baseline projection, including its complete
+// receipt/source proof. This is historical provenance, not current-map replay.
+function qualifiedDeliveryReference(selection, manifest, reader, commit, ownerPin) {
+  const references = selectedDeliveryReference(selection, manifest, reader, commit);
+  if (!references.projectionPin) return references;
+  need(ownerPin?.sha256 === manifest.original_assets?.bounds?.sha256,
+    'Delivery metadata differs from original owner roster');
+  const raw = reader.read(ownerPin);
+  need(raw.length === ownerPin.bytes && digest(raw) === ownerPin.sha256, 'Delivery metadata whole owner roster differs');
+  let decoded = raw;
+  if (raw[0] === 31 && raw[1] === 139) {
+    need(Number.isSafeInteger(ownerPin.decoded_bytes) && ownerPin.decoded_bytes > 0
+      && hex(ownerPin.decoded_sha256, 64),
+    'Complete bounded delivery original owner decoding required');
+    decoded = gunzipSync(raw, {maxOutputLength: ownerPin.decoded_bytes + 1});
+    need(decoded.length === ownerPin.decoded_bytes && digest(decoded) === ownerPin.decoded_sha256,
+      'Delivery metadata decoded original owner roster differs');
+  }
+  const projection = reader.json(references.projectionPin);
+  validateReferenceMetadataProjection({projection, selection, manifest, owners: JSON.parse(decoded), read: pin => reader.read(pin)});
+  return references;
+}
+
 export async function sourceEvidence(config, reader) {
   need(config.version === 1 && (config.source_evidence?.version === 1
     && config.source_evidence.kind === 'source-target-native-evidence-v1'
