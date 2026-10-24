@@ -1,0 +1,103 @@
+{
+  "kind": "pending-non-coordinate-research-preservation",
+  "adoption_status": "PENDING; no new scientific or accepted-map credit",
+  "exact_private_custody": {
+    "version": 1,
+    "archive_sha256": "b8edc8e668250f09f7b33f64dc4387b138827e797d1da3b28690b775a287fa82"
+  },
+  "limits": [
+    "Projections are not lossless and cannot reconstruct omitted coordinates.",
+    "Original row ordinal plus original-body SHA identifies the exact private record.",
+    "Source/reviewer pointers preserve identity, not possession of the pointed-to bodies.",
+    "PENDING preservation is not scientific adoption or publication of raw source polygons."
+  ],
+  "items": [
+    {
+      "path": "proposed-physical-interpretations.non-coordinate.json.gz",
+      "bytes": 920790,
+      "sha256": "18f39b8745b903a02226170c0934646473f63c4badd2a417c310c80dbf235995",
+      "decoded_bytes": 43781383,
+      "decoded_sha256": "00ce88aaae7ea87a72e4a8b870a82244901d91373fe2b56b679c2fc16474f204",
+      "record_count": 13649,
+      "original_sha256": "c87eebb4f733808670121daec797b3a0a5f810f7e6d0a121395ac28bd1eb0a92",
+      "original_bytes": 76740284,
+      "private_archive_member": "payload/proposed-physical-interpretations.json.gz",
+      "omitted_field_occurrences": {
+        "y": 27298,
+        "x": 27298,
+        "centre_unchanged": 13649,
+        "source_pixels": 13649,
+        "source_subpixels": 13649,
+        "block": 13646,
+        "native_10m_local_pixel_row_col": 13646
+      },
+      "root_path_normalizations": 0,
+      "free_text_coordinate_redactions": 1
+    },
+    {
+      "path": "proposed-annual8184-original-dispositions.non-coordinate.json.gz",
+      "bytes": 416383,
+      "sha256": "9ab90902975aaa030c8d9740ef14987ee343d213042de501ebef4ad1e9eb6854",
+      "decoded_bytes": 25653268,
+      "decoded_sha256": "efb95a52d9695ae6adb65f34dde9b7fce20dac91a74c5bc1c8f2df63219fd209",
+      "record_count": 8184,
+      "original_sha256": "cc709925a4cd656e0ed67e0db0f83515796a81d6007aa30a1e2fb9273ed864e5",
+      "original_bytes": 37404841,
+      "private_archive_member": "payload/proposed-annual8184-original-dispositions.json.gz",
+      "omitted_field_occurrences": {
+        "y": 16368,
+        "x": 16368,
+        "centre_unchanged": 8184,
+        "latitude_f64_le_hex_unchanged": 8184,
+        "native_row": 8184,
+        "native_col": 8184
+      },
+      "root_path_normalizations": 14243,
+      "free_text_coordinate_redactions": 0
+    },
+    {
+      "path": "point-plan.non-coordinate.json.gz",
+      "bytes": 274749,
+      "sha256": "62264eb2fa6c1aea5e83801d0e03a236889d4efeea94a34f7681317db89c29ef",
+      "decoded_bytes": 25935149,
+      "decoded_sha256": "329f5991263657682242cfd36d18dd7108b17e169c1c21889538f71ab7c4b844",
+      "record_count": 16222,
+      "original_sha256": "fb3db9d02a72c066f8908826eb143adefa1b566277f9ac51ed11e630089d5f52",
+      "original_bytes": 31094495,
+      "private_archive_member": "payload/point-plan.jsonl.gz",
+      "omitted_field_occurrences": {
+        "y": 32444,
+        "x": 32444,
+        "original_interval": 16222,
+        "longitude": 18885,
+        "latitude": 18885,
+        "ideal_longitude_numerator": 16222,
+        "ideal_longitude_denominator": 16222,
+        "native_row": 16222,
+        "native_col": 16222,
+        "missing_context_native_blocks": 16222,
+        "physical_block": 2663
+      },
+      "root_path_normalizations": 0,
+      "free_text_coordinate_redactions": 0
+    },
+    {
+      "path": "original18459-associations.non-coordinate.json.gz",
+      "bytes": 221829,
+      "sha256": "925622de098c855523d037f0eeaccf232d9e9ff9643de6f076b13bf7a9eb562d",
+      "decoded_bytes": 23017549,
+      "decoded_sha256": "6df355dd15e33f7468554fda47c231f1526193cd5cc5aa10d6013fb5e63960e4",
+      "record_count": 18459,
+      "original_sha256": "1d339c88d9ac2b4a064a838b18817024a47c1fa84176c8f8def2fc4bfb26e3ab",
+      "original_bytes": 24740235,
+      "private_archive_member": "payload/original18459-associations.jsonl.gz",
+      "omitted_field_occurrences": {
+        "y": 18459,
+        "x": 18459,
+        "normative_centre": 18459
+      },
+      "root_path_normalizations": 0,
+      "free_text_coordinate_redactions": 0
+    }
+  ]
+}
