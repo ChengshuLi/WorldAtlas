@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "kind": "current-main-native-owner-conservation",
+  "baseline": {
+    "commit": "a1156620081daa0f01868e0e109a95baaae957f7",
+    "observation": {
+      "path": ".mwi-current-main-owner-observation-a1156620.json",
+      "sha256": "3b16525648890c78cf3a8549ddbd795798766b6eb0f50d6c3c5aa21208b8a95f",
+      "query_count": 4028
+    }
+  },
+  "candidate": {
+    "commit": "66ff69472d5eb9407c133cf92ce8a647f1e7f890",
+    "observation": {
+      "path": ".mwi-final-map-owner-observation-66ff6947.json",
+      "bytes": 1016286,
+      "sha256": "63433e154098a6cc00b4e41e0a298d009bae4a93a9c313a313330304c99c7c89",
+      "query_count": 4028
+    }
+  },
+  "original_scope": {
+    "package_id": "gb-MWI-ADM2--repair-evaluation",
+    "total_cells": 4028,
+    "proposed_cells": 3939,
+    "held_cells": 89
+  },
+  "authenticated_native_patch": {
+    "commit": "eacbbb53cf38caab6742a2c98a8c5e6bdee2cca1",
+    "path": "coordination/engineering/malawi-original-repair-20261018/supported-inputs-001/native-patch.json",
+    "bytes": 82687,
+    "sha256": "9677428e965ac1088b536458f9f214d8fca6bc94ac469d3044b8432c1c0debc2",
+    "rows": 1664,
+    "half_open_interval_cell_sum": 3939,
+    "unique_cells": 3939
+  },
+  "checks": {
+    "query_count_preserved": true,
+    "proposed_cells_owner_zero_at_baseline": 3939,
+    "proposed_cells_nonzero_after_finalization": 3939,
+    "proposed_cells_missing": 0,
+    "proposed_cells_duplicate": 0,
+    "held_complement_owner_zero_after_finalization": 89,
+    "held_complement_assigned": 0
+  },
+  "limits": [
+    "Current selected-owner conservation only; not a new source/physical qualification or independent review.",
+    "All original 89 held cells remain unassigned.",
+    "No root acceptance or science credit asserted."
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "selector": {
+    "path": "data/ownership-selection.json",
+    "commit": "a1156620081daa0f01868e0e109a95baaae957f7",
+    "mode": "100644",
+    "git_blob_oid": "a66e8911dd73e468f34f2f8702c9ced9aec30183",
+    "bytes": 2325,
+    "sha256": "101c53a04f89011dff8db5a641eba79c062126b279bf1464efdb552de559e50c"
+  },
+  "authorities": [
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/malawi-original-repair-20261018/native-authority-supported-001/original-rule-preimage.json",
+        "commit": "f154021d1d9ed1bfb867054dcacf5bfde3c29280",
+        "mode": "100644",
+        "git_blob_oid": "6660f71f629308ae7a5665bc84543bbba1167e28",
+        "bytes": 735,
+        "sha256": "e20e82ce98c104fe5d9cdb4c9e303c4dba955296545621fdb013e4244aa3fa0f"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/malawi-original-repair-20261018/native-authority-supported-001/authority-binding.json",
+        "commit": "f154021d1d9ed1bfb867054dcacf5bfde3c29280",
+        "mode": "100644",
+        "git_blob_oid": "681594a56724cd379ed147c65bc4d3a9e4959900",
+        "bytes": 738,
+        "sha256": "1eda68d126f77260ef644861b1a157905c279504296fb3658784655d85e3a0a0"
+      },
+      "ledger": {
+        "path": "coordination/engineering/malawi-original-repair-20261018/native-authority-supported-001/constructor-result.json",
+        "commit": "f154021d1d9ed1bfb867054dcacf5bfde3c29280",
+        "mode": "100644",
+        "git_blob_oid": "12e18c333ea84baf7a255f8ee78cfc40b735e676",
+        "bytes": 168606,
+        "sha256": "0b2f87d4e395900ba9aff15c131489befd5f021e9184a22077c3edb32615ee63"
+      },
+      "native_patch": {
+        "path": "coordination/engineering/malawi-original-repair-20261018/supported-inputs-001/native-patch.json",
+        "commit": "eacbbb53cf38caab6742a2c98a8c5e6bdee2cca1",
+        "mode": "100644",
+        "git_blob_oid": "af055439c058bdb7c2f0804c5ca78062f70e3a08",
+        "bytes": 82687,
+        "sha256": "9677428e965ac1088b536458f9f214d8fca6bc94ac469d3044b8432c1c0debc2"
+      }
+    }
+  ]
+}
