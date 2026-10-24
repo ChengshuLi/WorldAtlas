@@ -16,6 +16,8 @@ The proposal was finalized against accepted selector/code at `f34b2873a25a1a5f20
 
 The selected package context is re-keyed and regenerated as part of final-map output. Its 1,500 decoded records match the existing public current-main context except for the target COD feature's derived `finishedFootprint` field; feature geometry and properties are unchanged. This is a required package artifact, not a new source-geometry edit.
 
+The current startup tree replaces the prior content-addressed context and owner-run shard with the regenerated versions referenced by the final indices. Their predecessor files are removed from the current tree so the selected-bank and package-startup rosters are complete; the original objects remain available in Git history.
+
 ## Source custody and limits
 
 The exact source-evidence JSON and source geometries remain in private local custody. The source-custody manifest lists all 21 required source bodies by their immutable public commit, path, Git blob, byte/hash pins, and the recorded catalogue license. All 21 paths and blob IDs were checked against the pinned public source-corpus commit `923e9c210b59836e069c182d68daf85439096381`. The target `gb:COD:ADM2` geometry is recorded as CC BY 3.0 IGO; the other referenced sources retain their individual recorded licenses. The manifest republishes no source geometry or map image.
