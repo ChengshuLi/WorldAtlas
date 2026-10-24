@@ -65,24 +65,13 @@ def prefetch_declared_inputs(repo, baseline, candidate, timeout=120):
 
 TRUSTED_PATHS = ['scripts/run-geographic-check.py', 'scripts/geography-prefetch.mjs', 'scripts/geography-routing-metadata.mjs', 'scripts/check-geographic-regression.py',
                  'scripts/package-startup-ownership.mjs','src/ownership-assets.js','src/ownership-method.js',
-                 'scripts/native-word-store.mjs','scripts/native-patch-store.mjs', 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',  'src/native-grid.js', 'src/ownership-codec.js',
+                 'scripts/native-word-store.mjs','scripts/native-patch-store.mjs', 'scripts/check-effective-geographic-regression.mjs',  'src/native-grid.js', 'src/ownership-codec.js',
                  'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py',
                  'scripts/ellipsoidal_area.py', 'requirements.txt',
                  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
                  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs',
                  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs',
-                 'scripts/geographic_checkpoint_products.py',
-                 'scripts/accepted-selected-checkpoint.mjs',
-                 'scripts/check-handoff-scope.mjs',
-                 'scripts/evidence-policy.mjs',
-                 'scripts/evidence-quality.mjs',
-                 'scripts/geographic-report-artifact.mjs',
-                 'scripts/github-quota.mjs',
-                 'scripts/github-snapshots.mjs',
-                 'scripts/integration-proof.mjs',
-                 'scripts/issue-claim-contract.mjs',
                  'scripts/research-import-gate.mjs',
-                 'scripts/worker-result.mjs',
                  'src/regional-import-gate.js',
                  'scripts/selected-reference-metadata.mjs', 'src/reference-metadata.js']
 PIN_PATHS = ['data/hierarchy.json', 'data/canonical-grid/manifest.json',
@@ -176,14 +165,6 @@ def verify_trusted_checkout(repo, code_commit):
     return hashlib.sha256((json.dumps(expected, sort_keys=True, separators=(',', ':')) + '\n').encode()).hexdigest()
 
 
-def checkpoint_products_module(repo):
-    # Called only after the trusted checkout namespace has been authenticated.
-    spec = importlib.util.spec_from_file_location('trusted_checkpoint_products', repo / 'scripts/geographic_checkpoint_products.py')
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
-
-
 def valid_final_transition(native, baseline):
     scope, custody = native.get('native_row_scope') or {}, native.get('checkpoint_custody') or {}
     changes, intervals = native.get('changes'), native.get('intervals')
@@ -218,10 +199,7 @@ def valid_final_transition(native, baseline):
             and scope.get('added_cells') == totals[0])
 
 
-def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destination=None):
-    products = checkpoint_products_module(repo) if checkpoint_destination is not None else None
-    if products is not None:
-        products.admit_checkpoint_destination(checkpoint_destination)
+def selected_joint(repo, baseline, candidate, *, trusted=None):
     env = {key: value for key, value in os.environ.items() if key not in ['NODE_OPTIONS', 'NODE_PATH']}
     entrypoint = repo / 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs'
     with tempfile.TemporaryDirectory(prefix='trusted-selected-joint-') as temporary:
@@ -232,13 +210,7 @@ def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destin
         issued = json.loads(raw)
         if issued.get('kind') != 'trusted-selected-joint-comparison-v1' or issued.get('candidate_code_executed') is not False:
             raise ValueError('Unsupported joint selected acknowledgement')
-        if issued.get('mode') == 'legacy-cold-required':
-            decision = issued.get('reuse_unavailable')
-            if not isinstance(decision, dict) or decision.get('cold') not in ['candidate', 'baseline-and-candidate'] or not decision.get('reason'):
-                raise ValueError('Joint fallback omitted its unavailable custody decision')
-            print(json.dumps(issued), file=sys.stderr, flush=True)
-            return issued
-        if issued.get('mode') not in ['authenticated-checkpoint-append-v1', 'accepted-final-map-comparison-v1'] or not isinstance(issued.get('native'), dict):
+        if issued.get('mode') not in ['accepted-final-map-comparison-v1'] or not isinstance(issued.get('native'), dict):
             raise ValueError('Joint selected comparison did not complete native validation')
         native = issued['native']
         if native.get('method') != 'selected-native-owner-conservation-v1' or native.get('candidate_code_executed') is not False or native.get('status') not in ['native-regressions-found', 'no-new-native-loss', 'validated-native-map-transition']:
@@ -247,91 +219,11 @@ def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destin
             return issued
         if native['status'] == 'no-new-native-loss' and (native.get('lost_or_reassigned_cells') != 0 or native.get('intervals') != []):
             raise ValueError('Successful native comparison contradicts conservation results')
-        if checkpoint_destination is not None and issued.get('mode') == 'authenticated-checkpoint-append-v1':
-            with stage_timing('selected-checkpoint-retention'):
-                issued['checkpoint'] = products.retain_checkpoint_products(destination, checkpoint_destination, issued)
         return issued
 
 
 
-def run_applicability_collector(command, env, timeout=None):
-    # The hosting provider bounds the overall job. A separate shortcut cutoff
-    # can turn finite cold acquisition into a much longer replay.
-    # Keep explicit timeout injection for cleanup controls, and always reap Git's
-    # owned group before ordinary prefetch/full checks can use the object store.
-    if os.name != 'posix':
-        raise OSError('Owned applicability process groups unavailable')
-    child = subprocess.Popen(command, env=env, stdout=subprocess.PIPE,
-                             stderr=subprocess.PIPE, start_new_session=True)
-    try:
-        stdout, stderr = child.communicate(timeout=timeout)
-    finally:
-        try:
-            os.killpg(child.pid, signal.SIGKILL)
-        except ProcessLookupError:
-            pass
-        except OSError as error:
-            raise RuntimeError('Cannot terminate owned applicability process group') from error
-        try:
-            child.communicate(timeout=5)
-        except subprocess.TimeoutExpired as error:
-            raise RuntimeError('Applicability process group did not terminate') from error
-    return subprocess.CompletedProcess(command, child.returncode, stdout, stderr)
-
-
-def applicability_decline(reason, collector_reason=None):
-    # Emit only fixed reason/operation categories, never child stderr, raw error
-    # text, locators, environment values or candidate-supplied metadata.
-    diagnostic = {'status': 'full-check-required', 'reason': reason}
-    if isinstance(collector_reason, str):
-        category, _, operation = collector_reason.partition(':')
-        if category in {'immutable-object-unavailable', 'missing-strict-historical-commit',
-                        'outside-source-publication-scope', 'source-scope-merge-base-unavailable',
-                        'routing-strict-origin-acquisition-failed', 'routing-strict-graph-growth-limit',
-                        'routing-strict-fetch-imported-blobs', 'invalid-routing-metadata',
-                        'unsupported-reader-profile', 'identity-entry-limit', 'metadata-byte-limit'}:
-            diagnostic['collector_reason'] = category
-        if category == 'immutable-object-unavailable' and operation.split(':')[0] in {
-                'merge-base', 'ls-tree', 'cat-file', 'diff-tree', 'rev-parse'}:
-            diagnostic['operation'] = operation.split(':')[0]
-    print(json.dumps({'geography_applicability': diagnostic}), file=sys.stderr, flush=True)
-    return None
-
-
-def unchanged_selected_inputs(repo, baseline, candidate, *, code_commit=None):
-    """Bounded applicability only; incomplete identity discovery keeps full checks."""
-    if baseline == candidate:
-        # A self-comparison must still execute its applicable scientific checks.
-        return None
-    code_commit = code_commit or baseline
-    env = dict(os.environ, GIT_NO_LAZY_FETCH='1', GIT_TERMINAL_PROMPT='0')
-    for name in ['NODE_OPTIONS', 'NODE_PATH']:
-        env.pop(name, None)
-    try:
-        result = run_applicability_collector([
-            env.get('NODE', 'node'), str(repo / 'scripts/check-unchanged-selected-geography.mjs'),
-            str(repo), baseline, candidate, code_commit], env)
-        if result.returncode:
-            return applicability_decline('collector-process-failed')
-        proof = json.loads(result.stdout)
-        if (not isinstance(proof, dict) or proof.get('version') != 1
-                or proof.get('baseline_commit') != baseline
-                or proof.get('candidate_commit') != candidate
-                or proof.get('trusted_reader_policy_commit') != code_commit
-                or proof.get('candidate_code_executed') is not False):
-            return applicability_decline('collector-binding-invalid')
-        if proof.get('status') != 'unchanged-selected-inputs':
-            return applicability_decline('collector-declined', proof.get('reason'))
-        return proof
-    except subprocess.TimeoutExpired:
-        return applicability_decline('collector-timeout')
-    except OSError:
-        return applicability_decline('collector-unavailable')
-    except ValueError:
-        return applicability_decline('collector-output-invalid')
-
-
-def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, checkpoint_destination=None):
+def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False):
     immutable_sha(baseline)
     immutable_sha(candidate)
     code_commit = code_commit or baseline
@@ -352,34 +244,20 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
             'Candidate checker code executed against distinct baseline and candidate data; authenticated accepted-state input may be read, but no new checkpoint authority is issued.',
             'Authenticated source adjudication remains baseline-only; deliver checker upgrades separately from data corrections that require it.',
             'Historical child receipts retain their legacy candidate_code_executed=false marker; final-bank children bind actual execution. Neither format grants accepted-checkpoint issuance under candidate code.']
-    if before == after and baseline != candidate:
-        with stage_timing('unchanged-selected-inputs'):
-            applicability = unchanged_selected_inputs(repo, baseline, candidate, code_commit=code_commit)
-        if applicability is not None:
-            return {**report, 'status': 'not-applicable', 'regressions': None,
-                    'unchanged_selected_inputs': applicability,
-                    'limits': ['Actual immutable selected data is unchanged under one executing checker; applicability only, not historical legality, scientific validation of new code or global gap clearance.',
-                               'Independent source quality, evidence, review and current combined-tree consumer gates remain required.']}
     selected = any(git(repo, 'ls-tree', '-z', version, '--', 'data/ownership-selection.json')
                    for version in [baseline, candidate])
     joint = None
     if selected and not software:
         with stage_timing('selected-joint'):
-            joint = selected_joint(repo, baseline, candidate, checkpoint_destination=checkpoint_destination)
+            joint = selected_joint(repo, baseline, candidate)
     if selected:
         import sys
         env = dict(os.environ)
         for name in ['NODE_OPTIONS', 'NODE_PATH']:
             env.pop(name, None)
-        if joint is not None and joint['mode'] in ['authenticated-checkpoint-append-v1', 'accepted-final-map-comparison-v1']:
+        if joint is not None and joint['mode'] in ['accepted-final-map-comparison-v1']:
             native = joint['native']
         else:
-            # The final-bank reader acquires its exact current operands itself.
-            # This optional prefetch serves only historical version-1 selectors;
-            # selection shape and all pins are still admitted by the real reader.
-            if prefetch and json.loads(read(repo, baseline, 'data/ownership-selection.json')).get('version') != 2:
-                with stage_timing('selected-prefetch'):
-                    prefetch_declared_inputs(repo, baseline, candidate)
             with stage_timing('selected-native'):
                 native_raw = subprocess.check_output([
                     os.environ.get('NODE', 'node'), '--input-type=module', '--eval',
@@ -559,8 +437,7 @@ def main():
         if comparison != 'pull-request-merge-v1':
             raise ValueError('Unsupported geographic comparison')
         verify_pr_candidate(repo, args.baseline, args.candidate, os.environ.get('GEOGRAPHY_REVIEWED_HEAD'))
-    result = inspect(repo, args.baseline, args.candidate, code_commit=args.code_commit, prefetch=args.fetch,
-        checkpoint_destination=None if software else args.out.absolute().parent)
+    result = inspect(repo, args.baseline, args.candidate, code_commit=args.code_commit, prefetch=args.fetch)
     if not software:
         result = apply_adjudications(repo, args.candidate, result)
     passed = result['status'] in ['not-applicable', 'no-footprint-change', 'no-new-regression', 'no-new-native-loss', 'validated-native-map-transition'] or (

@@ -14,15 +14,43 @@ import {inventoryPackageOutput} from '../scripts/package-output-artifact.mjs';
 import {observationContract} from '../src/observation-modules.js';
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 const git=(root,...args)=>execFileSync('git',['--no-replace-objects','-C',root,...args],{encoding:'utf8',env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_NO_REPLACE_OBJECTS:'1'}}).trim();
+function previewChild(root,args,{readyMs=15000,stopMs=3000}={}) {
+ const child=spawn(process.execPath,args,{cwd:root,detached:process.platform!=='win32',
+  env:{...process.env,PORT:'0',ATLAS_TEST_MODE:'1'},stdio:['ignore','pipe','pipe']});
+ let stdout='',stderr='',closed=false,stopped=false;
+ const closedPromise=new Promise(resolve=>child.once('close',()=>{closed=true;resolve();}));
+ const diagnostic=()=>`Preview child ${child.pid}: stdout=${stdout} stderr=${stderr}`;
+ const ready=new Promise((resolve,reject)=>{
+  const timer=setTimeout(()=>finish(Error('Preview readiness deadline exceeded. '+diagnostic())),readyMs);
+  const onError=error=>finish(error),onExit=code=>finish(Error('Preview exited '+code+'. '+diagnostic()));
+  function finish(error,url){clearTimeout(timer);child.off('error',onError);child.off('exit',onExit);error?reject(error):resolve(url);}
+  child.once('error',onError);child.once('exit',onExit);
+  child.stdout.on('data',chunk=>{stdout=(stdout+chunk).slice(-65536);const match=/WorldAtlas listening on (http:\/\/localhost:\d+)/.exec(stdout);if(match)finish(null,match[1].replace('localhost','127.0.0.1'));});
+  child.stderr.on('data',chunk=>stderr=(stderr+chunk).slice(-65536));
+ });
+ const signal=value=>{try{if(process.platform==='win32')child.kill(value);else process.kill(-child.pid,value);}catch(error){if(error.code!=='ESRCH')throw error;}};
+ const wait=async()=>{let timer;try{return await Promise.race([closedPromise.then(()=>true),new Promise(resolve=>{timer=setTimeout(()=>resolve(false),stopMs);})]);}finally{clearTimeout(timer);}};
+ return {ready,get stdout(){return stdout;},async stop(){
+  if(stopped||!child.pid)return;
+  stopped=true;
+  signal('SIGTERM');
+  if(!await wait()){signal('SIGKILL');if(!await wait())throw Error('Preview child did not close after termination. '+diagnostic());}
+  // A closed parent may still have descendants in its owned process group.
+  if(process.platform!=='win32')signal('SIGKILL');
+  assert(closed,'Preview child must be reaped before removing its fixture');
+ }};
+}
+
 async function fixture(t,{cloudflare=false}={}){
- const root=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-preview-'));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+ const root=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-preview-')),cleanups=[];
+ t.after(async()=>{for(const cleanup of cleanups.reverse())await cleanup();fs.rmSync(root,{recursive:true,force:true});});
  const put=(name,raw)=>{fs.mkdirSync(path.dirname(path.join(root,name)),{recursive:true});fs.writeFileSync(path.join(root,name),raw);};
  const source=fileURLToPath(new URL('../',import.meta.url));
  for(const name of staticModuleClosure(source,['server.mjs']))put(name,fs.readFileSync(path.join(source,name)));
  const reference={id:'geography:preview',footprints_sha256:'b'.repeat(64),hierarchy_sha256:'c'.repeat(64)};
  const output=cloudflare?'dist/client':'dist',word=Buffer.from('exact fixture words'),pin={path:'native-v1/ownership/rows-0.bin.gz',bytes:word.length,sha256:sha(word)};
  const proof={version:3,native_manifest_sha256:'a'.repeat(64),effective_reference:reference,base_reference:reference};
- const pixelMap={version:2,method:'native-linear-evenodd-first-owner-v1',parts:[pin]};
+ const pixelMap={version:2,method:'native-linear-evenodd-first-owner-v1',reference_owner_sha256:'d'.repeat(64),parts:[pin]};
  const indexRaw=Buffer.from(JSON.stringify({version:3,native_manifest_sha256:'a'.repeat(64),preparedOwnership:proof,pixelMap,files:[pin]}));
  const selection={version:2,kind:'selected-final-native-bank-v2',native_selection:{version:1,method:pixelMap.method,manifest_path:'data/native/manifest.json',sha256:'a'.repeat(64),release_id:'geography:native',selected_geography:{kind:'complete-world-index-with-exact-encoded-overrides'}},prepared_bank:{path:'data/canonical-grid/current-startup/index.json',bytes:indexRaw.length,sha256:sha(indexRaw)},reference};
  put(selection.prepared_bank.path,indexRaw);put('data/ownership-selection.json',JSON.stringify(selection));
@@ -34,7 +62,7 @@ async function fixture(t,{cloudflare=false}={}){
  git(root,'init','-q');git(root,'-c','user.name=Fixture','-c','user.email=fixture@example.invalid','add','.');git(root,'-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','Preview input fixture');
  const head=git(root,'rev-parse','HEAD');
  const typed=JSON.stringify({version:1,registry_sha256:(await observationContract()).registry_sha256,sources:[],entities:[],observations:[],feature_links:[],retirements:[]});
- const atlas=JSON.stringify({reference_release:reference,preparedOwnership:proof,pixelMap:{...pixelMap,reference_owner_sha256:'d'.repeat(64)}});
+ const atlas=JSON.stringify({reference_release:reference,preparedOwnership:proof,pixelMap});
  function publish(){
   put(output+'/atlas-geography.json',atlas);put(output+'/'+pin.path,word);
   put(output+'/index.html','<!doctype html><title>Exact compiled preview</title>');put(output+'/atlas-history.json.gz','fixture-history');
@@ -43,7 +71,7 @@ async function fixture(t,{cloudflare=false}={}){
   put('.cache/package-input-build.json',JSON.stringify({kind:cloudflare?'cloudflare':'static',input_definition_sha256:sha(definition),input_files_sha256:sha(JSON.stringify(materializedPackageInputs(root))),preview_output_sha256:sha(JSON.stringify(inventoryPackageOutput(root,{preview:true}))),preflight:{passed:true,inputs:{head}}}));
  }
  publish();fs.symlinkSync(fs.realpathSync(new URL('../node_modules',import.meta.url)),path.join(root,'node_modules'),'dir');
- return {root,output,put,publish,pin,selection,atlas};
+ return {root,output,put,publish,pin,selection,atlas,beforeCleanup:cleanup=>cleanups.push(cleanup)};
 }
 
 test('preview reuses canonical output without build; missing/stale/damaged output uses only the normal builder',async t=>{
@@ -62,34 +90,31 @@ test('preview reuses canonical output without build; missing/stale/damaged outpu
  assert.throws(()=>inspectPreviewPackage(f.root),/final release differs/);
 });
 
-for(const production of [false,true])for(const cloudflare of [false,true])test(`actual ${production?'start':'dev'} HTTP route serves ${cloudflare?'Cloudflare':'standalone'} package, preserves GETs and never creates a DB`,async t=>{
+for(const production of [false,true])for(const cloudflare of [false,true])test(`actual ${production?'start':'dev'} HTTP route serves ${cloudflare?'Cloudflare':'standalone'} package, preserves GETs and never creates a DB`,{timeout:30000},async t=>{
  const f=await fixture(t,{cloudflare});f.put('dist/drizzle/incidental.sql','not a served atlas asset');
- const child=spawn(process.execPath,['server.mjs',...(production?['--production']:[])],{cwd:f.root,env:{...process.env,PORT:'0',ATLAS_TEST_MODE:'1'},stdio:['ignore','pipe','pipe']});
- let stdout='',stderr='';child.stdout.on('data',chunk=>stdout+=chunk);child.stderr.on('data',chunk=>stderr+=chunk);
- t.after(async()=>{if(child.exitCode===null){const exit=new Promise(resolve=>child.once('exit',resolve));child.kill('SIGTERM');await exit;}});
- const base=await new Promise((resolve,reject)=>{
-   child.stdout.on('data',()=>{const match=/WorldAtlas listening on (http:\/\/localhost:\d+)/.exec(stdout);if(match)resolve(match[1].replace('localhost','127.0.0.1'));});
-   child.once('error',reject);child.once('exit',code=>reject(Error('Preview exited '+code+': '+stderr)));
- });
- assert.equal(await(await fetch(base+'/atlas-geography.json')).text(),f.atlas);
- assert.equal(await(await fetch(base+'/'+f.pin.path)).text(),'exact fixture words');
- assert.deepEqual(await(await fetch(base+'/api/classifications')).json(),{version:1,unknown:null,attributes:{fixture:true}});
- const typed=await fetch(base+'/api/typed/v1/prepared-snapshot?year=2026');assert.equal(typed.status,200);assert.equal((await typed.json()).year,2026);
- assert.equal((await fetch(base+'/api/typed/v1/prepared-snapshot?year=0')).status,400);
- for(const route of ['/api/geography','/api/snapshot?year=2026'])assert.equal((await fetch(base+route)).status,404);
- assert.equal((await fetch(base+'/api/classifications',{method:'POST'})).status,405);
- assert.equal((await fetch(base+'/atlas-geography.json',{method:'POST'})).status,405);
- assert.equal((await fetch(base+'/drizzle/incidental.sql')).status,404);
- if(production)assert.match(await(await fetch(base+'/')).text(),/Exact compiled preview/);
- else{const source=await(await fetch(base+'/src/probe.js')).text();const module=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));assert.equal(module.staticAtlas,'true');assert.equal(module.hosted,'false');}
- assert.doesNotMatch(stdout,/Preparing canonical/);assert.equal(fs.existsSync(path.join(f.root,'data/atlas.sqlite')),false);
+ const child=previewChild(f.root,['server.mjs',...(production?['--production']:[])]);
+ f.beforeCleanup(()=>child.stop());
+ const base=await child.ready;
+ const request=(url,options={})=>fetch(url,{...options,signal:AbortSignal.timeout(5000)});
+ assert.equal(await(await request(base+'/atlas-geography.json')).text(),f.atlas);
+ assert.equal(await(await request(base+'/'+f.pin.path)).text(),'exact fixture words');
+ assert.deepEqual(await(await request(base+'/api/classifications')).json(),{version:1,unknown:null,attributes:{fixture:true}});
+ const typed=await request(base+'/api/typed/v1/prepared-snapshot?year=2026');assert.equal(typed.status,200);assert.equal((await typed.json()).year,2026);
+ assert.equal((await request(base+'/api/typed/v1/prepared-snapshot?year=0')).status,400);
+ for(const route of ['/api/geography','/api/snapshot?year=2026'])assert.equal((await request(base+route)).status,404);
+ assert.equal((await request(base+'/api/classifications',{method:'POST'})).status,405);
+ assert.equal((await request(base+'/atlas-geography.json',{method:'POST'})).status,405);
+ assert.equal((await request(base+'/drizzle/incidental.sql')).status,404);
+ if(production)assert.match(await(await request(base+'/')).text(),/Exact compiled preview/);
+ else{const source=await(await request(base+'/src/probe.js')).text();const module=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));assert.equal(module.staticAtlas,'true');assert.equal(module.hosted,'false');}
+ assert.doesNotMatch(child.stdout,/Preparing canonical/);assert.equal(fs.existsSync(path.join(f.root,'data/atlas.sqlite')),false);
  assert.equal(fs.existsSync(path.join(f.root,'.cache/package-atlas.sqlite')),false);
 });
 
 
 test('preview refuses mismatched current headers, members, staged inputs and hidden worktree edits',async t=>{
  const f=await fixture(t);
- for(const mutate of [atlas=>atlas.preparedOwnership.native_manifest_sha256='f'.repeat(64),atlas=>atlas.pixelMap.parts=[],atlas=>atlas.referenceMetadata={version:1}]){
+ for(const mutate of [atlas=>atlas.preparedOwnership.native_manifest_sha256='f'.repeat(64),atlas=>atlas.pixelMap.parts=[],atlas=>atlas.pixelMap.reference_owner_sha256='e'.repeat(64),atlas=>atlas.referenceMetadata={version:1}]){
   const atlas=JSON.parse(f.atlas);mutate(atlas);f.put('dist/atlas-geography.json',JSON.stringify(atlas));assert.throws(()=>inspectPreviewPackage(f.root),/differs/);f.publish();
  }
  const failBuild=async()=>{throw Error('normal constructor selected');};
@@ -127,4 +152,12 @@ test('actual builder receipt permits unchanged dirty inputs but rebuilds after t
  f.put('data/preview-optional.json','present optional bytes');await preparePreviewPackage(f.root,{build});assert.equal(builds,4,'optional presence changes the image');
  fs.unlinkSync(path.join(f.root,'data/preview-optional.json'));await preparePreviewPackage(f.root,{build});assert.equal(builds,5,'optional absence changes the image back');
  await preparePreviewPackage(f.root,{build});assert.equal(builds,5);
+});
+
+test('preview readiness failure is bounded and child is reaped before fixture removal',async t=>{
+ const f=await fixture(t),child=previewChild(f.root,['-e',"process.on('SIGTERM',()=>{});process.stderr.write('not-ready-control');setInterval(()=>{},1000)"],{readyMs:150,stopMs:150});
+ f.beforeCleanup(()=>child.stop());
+ await assert.rejects(child.ready,/readiness deadline exceeded.*not-ready-control/);
+ await child.stop();
+ assert(fs.existsSync(f.root),'Owned child shutdown precedes fixture removal');
 });

@@ -15,7 +15,7 @@ function inventory(directory){return fs.readdirSync(directory,{recursive:true}).
  .sort().map(name=>{const raw=fs.readFileSync(path.join(directory,name));return {path:name,bytes:raw.length,sha256:hash(raw)};});}
 function copyCompatibility(f,prior,destination){for(const pin of prior.compatibility_files){const raw=f.git('show',f.bankCommit+':'+root+'/'+pin.path);
  const target=path.join(destination,pin.path);fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,raw);}}
-export async function oldBank(f,state){
+export async function oldBank(f,state={patch:f.patch,additions:f.ledger.rows.filter(row=>row.disposition==='assigned').map(row=>({...row,rule_sha256:f.registry.entries.find(e=>e.authority_sha256===row.authority_sha256).rule_sha256}))}){
  const destination=path.join(f.root,root);fs.mkdirSync(destination,{recursive:true});
  const native={...ownershipMetadata(f.manifest),native_latitudes:{...f.manifest.native_latitudes,transport_path:'native-v1/native-row-latitudes.f64le.gz'},
   canonical_grid_sha256:f.selection.sha256,parts:f.manifest.parts.map(p=>({...p,path:p.kind==='rows'?p.path:'ownership-vintages/'+f.selection.sha256+'/native-v1/ownership/startup-runs-0.bin.gz'}))};
@@ -58,3 +58,22 @@ export async function writeFinal(f,prior,features,ownership,changeEvidence){
  return {index,selection,commit};
 }
 
+
+export async function initialFinalBank(f,state) {
+ const old=await oldBank(f,state);
+ if(f.sidecar.base_selection.selected_geography.path==='data/bank.json'){
+  f.save('data/bank.json',{version:1,kind:'complete-world-index-with-exact-encoded-overrides',locations:old.features.length,
+   world_index:f.pin('data/world-index.json',f.selected),release_id:f.envelope.base_reference.id,
+   native_manifest_sha256:f.selection.sha256,footprints_sha256:f.manifest.footprints_sha256,unchanged_files:[f.pin('data/source.json',f.selected)],overrides:[]});
+  const pin=f.pin('data/bank.json',f.commit());
+  f.sidecar.base_selection={...f.sidecar.base_selection,selected_geography:{version:1,kind:'complete-world-index-with-exact-encoded-overrides',path:pin.path,bytes:pin.bytes,sha256:pin.sha256}};
+ }
+ const features=old.features.map(feature=>finishEffectiveFootprint(feature,valueSha));
+ const final=await writeFinal(f,old.index,features,old.ownership);
+ f.bankCommit=final.commit;
+ return {...old,index:final.index,features,selection:final.selection};
+}
+export async function compareFinal(f,base,candidate) {
+ const beforeReader=new f.native.ImmutableReader(f.root,base);
+ return f.api.compareAcceptedFinalBank({beforeReader,afterReader:new f.native.ImmutableReader(f.root,candidate,{invocation:beforeReader.invocation})});
+}

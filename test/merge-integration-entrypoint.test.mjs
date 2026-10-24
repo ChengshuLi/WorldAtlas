@@ -6,7 +6,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
-import {EXECUTION_CODE} from '../scripts/check-unchanged-selected-geography.mjs';
+import {EXECUTION_CODE} from '../scripts/selected-geography-code.mjs';
 
 const root=path.resolve(import.meta.dirname,'..');
 // Mock the real authenticated core-response boundary even when these child

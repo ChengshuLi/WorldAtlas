@@ -4,7 +4,6 @@ import vm from 'node:vm';
 import assert from 'node:assert/strict';
 import {repairComponentKey, compareRepairComponents} from '../src/native-grid.js';
 import {valueSha, normaliseRetainedRepairLedger, compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
-import {deriveCoordinateDelta} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 import {newVisibleRepairCandidates, repairVisibilityWitnesses} from '../scripts/check-effective-geographic-regression.mjs';
 import {bindAdditiveLedgerFeatures, verifyAdditiveLedgerSelection, additiveReleaseFootprintDigest, effectiveNativeAdditionRows} from '../src/effective-footprint.js';
 import {fixtures} from './fixtures/selected-checkpoint.mjs';
@@ -45,10 +44,7 @@ test('versioned identity retains equal original labels and conserves exact autho
   assert.throws(()=>normaliseRetainedRepairLedger(duplicate,f.registry),/duplicate/);
   const changed=structuredClone(f.ledger);changed.rows[0].native_rows[0].runs[0]=[10,11,1];
   assert.throws(()=>compareVersionedRepairLedgers(old,changed,{beforeRegistry:oldRegistry,afterRegistry:f.registry}),/lost\/rebound/);
-  const before=deriveCoordinateDelta({certificate:f.certificate,oldAdditions:[],additions:[f.rows[0]],selection:{}}).certificate;
-  const delta=deriveCoordinateDelta({certificate:before,oldAdditions:[f.rows[0]],additions:f.rows,selection:{next:true}});
-  assert.deepEqual(delta.changedIds,['A']);
-  assert.equal(delta.certificate.entries[0][8],valueSha({base_geometry_sha256:f.rows[0].base_geometry_sha256,additions:f.rows}));
+
 });
 
 test('browser ledger binding and release digest preserve both same-label native interval sets',()=>{

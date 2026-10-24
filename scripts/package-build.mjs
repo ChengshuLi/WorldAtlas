@@ -148,7 +148,7 @@ export function inspectPackageInputs(root, definition) {
 }
 
 export function inspectPackageExecutionInputs(root, definition, kind = 'cloudflare') {
-  if (!['static', 'hosted', 'cloudflare'].includes(kind)) throw Error('Unknown package build');
+  if (!['static', 'cloudflare'].includes(kind)) throw Error('Unknown package build');
   const errors = [];let files = [];
   try {
     files=currentExecutionClosure(root,`scripts/build-${kind}-inner.mjs`);
@@ -228,7 +228,7 @@ export function requirePackagePreflight(report) {
 }
 
 
-const entries = {static: 'scripts/build-static-inner.mjs', hosted: 'scripts/build-hosted-inner.mjs', cloudflare: 'scripts/build-cloudflare-inner.mjs'};
+const entries = {static: 'scripts/build-static-inner.mjs', cloudflare: 'scripts/build-cloudflare-inner.mjs'};
 const repository = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 
 async function copyOrdinary(source, destination, inventory, relative) {
@@ -315,7 +315,7 @@ export function assertCloudflareStaticAssets(root) {
 
 export function assertPackageStage(directory = repository) {
   const expected = process.env.WORLDATLAS_PACKAGE_STAGE;
-  if (!expected || path.resolve(expected) !== path.resolve(directory)) throw Error('Private builder requires a declared input image; use build:static, build:hosted or build:cloudflare');
+  if (!expected || path.resolve(expected) !== path.resolve(directory)) throw Error('Private builder requires a declared input image; use build:static or build:cloudflare');
 }
 
 // The programmatic injection is for synthetic boundary tests only. Ordinary

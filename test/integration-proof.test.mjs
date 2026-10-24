@@ -25,7 +25,7 @@ test('geography reuse requires one actual successful producer, independently of 
 test('explicit coordination allowlist defaults full for unknown/application/data/schema/import/deploy/rename impact',()=>{
   for(const filename of COORDINATION_PATHS) assert.equal(integrationProfile('engineering/job',[{filename}]),'evidence',filename);
   for(const filename of ['src/attributes.js','hosted/a.mjs','drizzle/0001.sql','data/hierarchy.json',
-    'scripts/import.mjs','scripts/build-hosted.mjs','docs/unknown.json',
+    'scripts/import.mjs','scripts/build-cloudflare.mjs','docs/unknown.json',
     '.github/workflows/deploy.yml','test/application.test.mjs']) {
     assert.equal(integrationProfile('engineering/job',[{filename}]),'full',filename);
     assert.equal(integrationProfile('engineering/job',[{filename:'docs/WORKER_COORDINATION.md',previous_filename:filename}]),'full',filename);
@@ -43,8 +43,8 @@ test('queue profile retains geography owned scope and full fallback outside it',
 });
 
 test('package verification, builders and runners stay full', () => {
-  for (const filename of ['scripts/build-hosted.mjs', 'scripts/build-static.mjs', 'scripts/deployment-budget.mjs',
-    
+  for (const filename of ['scripts/build-cloudflare.mjs', 'scripts/build-static.mjs', 'scripts/build-static-inner.mjs',
+
     'scripts/build-cloudflare-inner.mjs', 'src/main.js', 'data/hierarchy.json', 'drizzle/0002.sql']) {
     assert.equal(integrationProfile('engineering/example', [{filename}]), 'full', filename);
   }

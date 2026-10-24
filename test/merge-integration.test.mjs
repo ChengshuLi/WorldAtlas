@@ -13,7 +13,7 @@ import {focusedIntegrationTest, integrationTestFiles, integrationNeedsBrowser, p
 import {renderClaim, githubAPI} from '../scripts/issue-claim-contract.mjs';
 import {reviewedTestPlan, prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile, integrationChanges, geographyRequired, createCandidate, cleanupCandidate, cleanupMergedHead} from '../scripts/merge-integration.mjs';
 
-import {EXECUTION_CODE, REBIND_CODE} from '../scripts/check-unchanged-selected-geography.mjs';
+import {EXECUTION_CODE, REBIND_CODE} from '../scripts/selected-geography-code.mjs';
 import {staticModuleClosure} from './helpers/static-module-closure.mjs';
 const sha = letter => letter.repeat(40);
 const FOCUSED_INTEGRATION_TESTS = integrationTestFiles('evidence', 0);
@@ -33,23 +33,6 @@ test('actual sparse preparation imports method inventories without scientific co
   } finally { fs.rmSync(temporary, {recursive: true, force: true}); }
 });
 
-test('only staging-test shards prepare the immutable migration derivative', () => {
-  const cwd=process.cwd(), temporary=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-integration-prerequisite-'));
-  fs.cpSync('drizzle',path.join(temporary,'drizzle'),{recursive:true});
-  const original=fs.readFileSync(path.join(temporary,'drizzle/0002_geographic_reference_releases.sql'));
-  try {
-    process.chdir(temporary);
-    assert.throws(()=>prepareIntegrationTests(['test/compact-ownership.test.mjs']),/requires the actual hosted build/);
-    assert.throws(()=>prepareIntegrationTests(['test/prepared-parity.test.mjs']),/requires the actual hosted build/);
-    prepareIntegrationTests(['test/merge-integration.test.mjs']);
-    assert.equal(fs.existsSync('dist'),false);
-    prepareIntegrationTests(['test/stage-site-migrations.test.mjs']);
-    const receipt=JSON.parse(fs.readFileSync('dist/drizzle/transport-receipt.json'));
-    assert.equal(receipt.source_sql_rewritten,false);
-    assert.equal(receipt.migrations.length,fs.readdirSync('drizzle').filter(name=>name.endsWith('.sql')).length);
-    assert.deepEqual(fs.readFileSync('drizzle/0002_geographic_reference_releases.sql'),original);
-  } finally { process.chdir(cwd); fs.rmSync(temporary,{recursive:true,force:true}); }
-});
 test('new native dispatch refuses absent or blank intent before API setup without changing queued legacy inputs', () => {
   const workflow=fs.readFileSync('.github/workflows/worker-merge.yml','utf8');
   const field=workflow.match(/      reviewed_tests:\n([\s\S]*?)(?=      request_id:)/)[1];
@@ -350,7 +333,7 @@ test('reviewed tests derive the complete fixture and executing-policy boundary w
 
 for (const [label, consumer, operand] of [
   ...['test/final-bank-finalizer.test.mjs','test/selected-delivery-smoke.test.mjs','test/final-bank-checkpoint.test.mjs','test/selected-owner-observation.test.mjs',
-    'test/accepted-checkpoint-qualification.test.mjs', 'test/map-cell-diagnosis.test.mjs'].map(consumer =>
+    'test/map-cell-diagnosis.test.mjs'].map(consumer =>
     [consumer,consumer,'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz']),
   ['rebind custody', 'test/current-rebind-product-custody.test.mjs', 'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json'],
   ['workspace bootstrap', 'test/local-workspace.test.mjs', 'docs/LOCAL_WORKSPACES.md'],
@@ -414,7 +397,7 @@ test('reviewed quota consumer reads its current guide through actual sparse chec
 });
 
 for (const consumer of ['test/final-bank-finalizer.test.mjs','test/selected-delivery-smoke.test.mjs','test/final-bank-checkpoint.test.mjs','test/selected-owner-observation.test.mjs',
-    'test/accepted-checkpoint-qualification.test.mjs','test/map-cell-diagnosis.test.mjs','test/native-location-context.test.mjs'])
+    'test/map-cell-diagnosis.test.mjs','test/native-location-context.test.mjs'])
 test(`reviewed ${consumer} materializes its normative latitude operand through actual sparse checkout`, () => {
   const operand='coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz';
   const row={sha:sha('e'),mode:'100644',type:'blob'};
@@ -812,7 +795,7 @@ test('trusted profile uses focused invariants only for isolated evidence and doc
    }
  }
  assert.equal(integrationProfile('engineering/example',[{filename:'docs/WORKER_COORDINATION.md'},{filename:'coordination/engineering/example/receipt.json',status:'added'}],{}),'evidence');
- for(const filename of ['src/attributes.js','data/hierarchy.json','drizzle/0001.sql','scripts/build-hosted.mjs'])
+ for(const filename of ['src/attributes.js','data/hierarchy.json','drizzle/0001.sql','scripts/build-cloudflare.mjs'])
    assert.equal(integrationProfile('engineering/example',[{filename}],{}),'full');
  assert.equal(integrationProfile('engineering/example',[{filename:'docs/a.md',previous_filename:'src/attributes.js'}],{}),'full');
  assert.equal(integrationProfile('engineering/example',[{filename:'coordination/engineering/other/receipt.json'}],{}),'full');
@@ -820,25 +803,20 @@ test('trusted profile uses focused invariants only for isolated evidence and doc
 
 test('immutable reader and checkpoint routing retains the complete actual consumer roster and geography gate', () => {
   const prefix='coordination/engineering/selected-geography-effective-prevention-20261009/';
-  const methods=['scripts/check-effective-geographic-regression.mjs','scripts/selected-checkpoint-native.mjs', 'scripts/run-geographic-check.py',
+  const methods=['scripts/check-effective-geographic-regression.mjs','scripts/run-geographic-check.py',
     prefix+'selected-checkpoint.mjs',prefix+'selected-joint-entry.mjs'];
   const consumers=[
-    "test/accepted-checkpoint-qualification.test.mjs",
-    "test/accepted-joint-transport.test.mjs",
     "test/additive-gap-repair.test.mjs",
     "test/administrative-original-hashes.test.mjs",
     "test/component-authority-identity.test.mjs",
     "test/current-rebind-product-custody.test.mjs",
     "test/dated-centre-authority.test.mjs",
-    "test/delivery-finalize-config.test.mjs",
     "test/delivery-handoff-advance.test.mjs",
     "test/delivery-handoff.test.mjs",
-    "test/delivery-registry-delta.test.mjs",
     "test/effective-geographic-regression.test.mjs",
     "test/evidence-byte-bounds.test.mjs",
     "test/fiji-canonical-reproduction.test.mjs",
     "test/geographic-adjudication-api.test.mjs",
-    "test/geographic-checkpoint-products.test.mjs",
     "test/geographic-regression.test.mjs",
     "test/geographic-report-artifact.test.mjs",
     "test/geography-prefetch.test.mjs",
@@ -851,19 +829,14 @@ test('immutable reader and checkpoint routing retains the complete actual consum
     "test/merge-integration.test.mjs",
     "test/native-additions-order.test.mjs",
     "test/native-authority-entry.test.mjs",
-    "test/native-checkpoint-consumer.test.mjs",
     "test/native-diagnostic-entry.test.mjs",
     "test/native-witness-authority.test.mjs",
     "test/parallel-geography-comparison.test.mjs",
     "test/physical-source-retention.test.mjs",
     "test/qualification-exclusion-prefilter.test.mjs",
     "test/revised-source-native.test.mjs",
-    "test/selected-checkpoint.test.mjs",
     "test/selected-data-profile.test.mjs",
     "test/selected-joint-check.test.mjs",
-    "test/selected-joint-entry.test.mjs",
-    "test/selected-joint-package-boundary.test.mjs",
-    "test/selected-metadata-wiring.test.mjs",
     "test/source-completed-staging.test.mjs",
     "test/source-evidence-derivation.test.mjs",
     "test/source-member-native-delivery.test.mjs",
@@ -872,7 +845,6 @@ test('immutable reader and checkpoint routing retains the complete actual consum
     "test/supported-programs.test.mjs",
     "test/trusted-geography-check.test.mjs",
     "test/trusted-workflow-checkouts.test.mjs",
-    "test/unchanged-selected-geography.test.mjs",
     "test/visible-gap-eligibility.test.mjs"
 ];
   const focused=integrationTestFiles('evidence',0), full=[0,1,2].flatMap(shard=>integrationTestFiles('full',shard));
@@ -927,7 +899,7 @@ test('ordinary focused tests and checkpoint fixture compose while unknown runtim
   }
   // These package-contract, asset-dependent and Python-helper tests are not
   // executed by the exact focused Node roster, even with ordinary tree proof.
-  for(const filename of ['test/deployment-budget.test.mjs','test/pr-gates.test.mjs',
+  for(const filename of ['test/compact-ownership.test.mjs','test/pr-gates.test.mjs',
     'test/canonical-compact-repack.test.mjs','test/source-cohort.test.py','test/physical-source-retention.test.py']) {
     assert.ok(!files.some(file=>file.filename===filename));
     const ordinary=new Map([[filename,{type:'blob',mode:'100644',sha:'1'.repeat(40)}]]);
@@ -943,9 +915,9 @@ test('the exact checkpoint fixture retains every actual importer on the existing
       .some(([,specifier])=>specifier.startsWith('.')&&path.posix.normalize(path.posix.join('test',path.posix.dirname(name),specifier))===fixture)
   ).map(name=>'test/'+name).sort();
   assert(consumers.length>0,'Fixture importer scan must be nonempty');
-  assert(consumers.includes('test/selected-checkpoint.test.mjs'),'Scan must find the known direct checkpoint importer');
+  assert(consumers.includes('test/final-bank-checkpoint.test.mjs'),'Scan must find the known direct checkpoint importer');
   const focused=integrationTestFiles('evidence',0),full=[0,1,2].flatMap(shard=>integrationTestFiles('full',shard));
-  for(const consumer of [...consumers,'test/selected-joint-entry.test.mjs']) {
+  for(const consumer of consumers) {
     assert(focused.includes(consumer),consumer);
     assert.equal(full.filter(name=>name===consumer).length,1);
   }
@@ -1011,13 +983,13 @@ test('geography omission derives only non-scientific control and validated focus
   const required = (filename, extra = {}) => geographyRequired('engineering/controls',
     [{filename,status:'modified',...extra}],{},ordinary(filename));
   for (const name of ['scripts/merge-integration.mjs','scripts/run-worker-merge.mjs',
-    'scripts/integration-profile.mjs','scripts/prepare-delivery-handoff.mjs'])
+    'scripts/integration-profile.mjs','scripts/prepare-delivery-handoff.mjs',
+    'scripts/check-handoff-scope.mjs','scripts/evidence-policy.mjs','scripts/integration-proof.mjs',
+    'scripts/issue-claim-contract.mjs','scripts/worker-result.mjs'])
     assert.equal(required(name),false,name);
   // Existing checkpoint/current-method and package roles remain mandatory,
   // including shared helpers that otherwise qualify for focused regression.
-  for (const name of ['scripts/check-handoff-scope.mjs','scripts/evidence-policy.mjs',
-    'scripts/evidence-quality.mjs','scripts/integration-proof.mjs','scripts/issue-claim-contract.mjs',
-    'scripts/worker-result.mjs','scripts/local-workspace.mjs',
+  for (const name of ['scripts/evidence-quality.mjs','scripts/local-workspace.mjs',
     'src/native-grid.js','data/hierarchy.json','data/ownership-selection.json',
     '.github/workflows/worker-merge.yml','.github/workflows/merge-integration-checks.yml',
     '.github/evidence-policy.json','docs/WORKER_COORDINATION.md','docs/unknown.md',

@@ -2,14 +2,13 @@
 
 `.github/package-inputs.json` is the shared source of truth for deployment package inputs and the applicability of package CI. It declares ordinary source files/directories, optional directories, package verification controls, and approved generated outputs. Directory entries end in `/`; other entries match exactly. No implementation byte fingerprints are maintained.
 
-`npm run build:static`, `npm run build:hosted`, and `npm run build:cloudflare` create a temporary source image containing only those declared inputs and the caller's installed dependencies. Private inner builders run there. Ordinary filesystem reads, imports and child tools cannot consume unpublished repository files absent from that image. Required missing inputs, source symlinks and dependency links escaping the dependency installation fail the build. Successful builds return only approved outputs; failed child builds retain previous caller outputs. Temporary images are removed in `finally` and live inside the managed checkout's cache so abandoned images remain subject to workspace cleanup.
+`npm run build:static` and `npm run build:cloudflare` create a temporary source image containing only those declared inputs and the caller's installed dependencies. Private inner builders run there. Ordinary filesystem reads, imports and child tools cannot consume unpublished repository files absent from that image. Required missing inputs, source symlinks and dependency links escaping the dependency installation fail the build. Successful builds return only approved outputs; failed child builds retain previous caller outputs. Temporary images are removed in `finally` and live inside the managed checkout's cache so abandoned images remain subject to workspace cleanup.
 
 This is a cooperative build boundary, not an operating-system security sandbox. Deliberate absolute access to outside files, malicious dependencies and forged stage environment variables are not contained. It also does not guarantee a reproducible environment or pin remote network responses. Build jobs retain existing read-only credentials and deployment/import restrictions. Use the public package commands and review build changes under the normal independent-review gate.
 
 The integration queue builds the Cloudflare application for full software profiles.
-The declaration also bounds selected-output reuse and its source inventory. Legacy
-Site package budget checks run when explicitly invoking `npm run build:hosted` for
-recovery, rather than through an automatic main-push workflow.
+The declaration also bounds selected-output reuse and its source inventory. The historical Site builder is retired on latest main; recovery uses its frozen
+provider copy and original source revision.
 
 Application regression selection remains a separate question. Unpublished geography packets and history campaigns run their focused scope/evidence/invariant checks. If a research file is explicitly included in the package, its changes also run package checks; they do not automatically require unrelated application tests. Runtime, schema and build-boundary changes retain application regression according to the integration profile.
 
@@ -116,12 +115,11 @@ new, or enable the separately reviewed final-worker adoption by itself.
 Local checks:
 
 ```sh
-node --test test/package-inputs.test.mjs test/package-build.test.mjs test/deployment-budget.test.mjs
+node --test test/package-inputs.test.mjs test/package-build.test.mjs
 npm run build:cloudflare
-npm run build:hosted
 ```
 
-The hosted archive budget uses GNU tar and is verified on Ubuntu CI; macOS BSD tar is not an equivalent archive measurement. Cloudflare preparation creates local artifacts only, without deployment or live database changes.
+Cloudflare preparation creates local artifacts only, without deployment or live database changes.
 
 
 Cumulative selected roots use one authenticated role contract in finalization and

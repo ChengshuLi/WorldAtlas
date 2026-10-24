@@ -61,13 +61,11 @@ test('manifest arithmetic failures are rejected before any reader or decoder', (
     assert.throws(() => validateEvidence(m, {readFile: () => {reads++;}})); assert.equal(reads, 0);
   }
 });
-test('current joint code custody authenticates the inlined byte helpers before execution', async t => {
-  const {trustedFixture} = await import('./helpers/selected-joint-fixture.mjs');
-  const f = await trustedFixture(t), name = 'scripts/evidence-quality.mjs', target = path.join(f.root, name);
+test('current joint code custody authenticates its byte-stream reader before execution', async t => {
+  const {trustedFixture} = await import('./fixtures/selected-checkpoint.mjs');
+  const f = await trustedFixture(t,{nativeAppend:true,finalBank:true}), name = 'scripts/native-patch-store.mjs', target = path.join(f.root, name);
   const original = fs.readFileSync(target, 'utf8');
-  assert.ok(original.includes('export function finiteBytes('));
-  assert.equal([...original.matchAll(/from ['"]([^'"]+)['"]/g)].some(match => !match[1].startsWith('node:')), false);
-  const changed = original.replace('value < 0', 'value < 1'); assert.notEqual(changed, original);
+  const changed = original.replace('const demand=', 'const demanD='); assert.notEqual(changed, original);
   assert.equal(changed.length, original.length); fs.writeFileSync(target, changed);
   const env = {...process.env}; delete env.NODE_OPTIONS; delete env.NODE_PATH;
   const head = f.git('rev-parse', 'HEAD').toString().trim(), destination = path.join(f.root, 'byte-helper-refused');

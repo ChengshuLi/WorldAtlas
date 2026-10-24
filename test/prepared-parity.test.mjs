@@ -168,7 +168,7 @@ test('default-map static and server exports preserve complete state and attribut
 import os from 'node:os';
 import {inspectPackageExecutionInputs} from '../scripts/package-build.mjs';
 import {loadPackageInputs, containsPackagePath} from '../scripts/package-inputs.mjs';
-const closureKinds=['static','hosted','cloudflare'];
+const closureKinds=['static','cloudflare'];
 let baselineClosures;
 function actualBuilderClosures(){
  // Only this unchanged checkout shares results. Mutated fixture roots below
@@ -183,14 +183,14 @@ function actualBuilderClosures(){
 test('all actual builders declare their complete current closure without checkpoint-only methods',()=>{
  const {definition,entries}=actualBuilderClosures();
  const prefix='coordination/engineering/selected-geography-effective-prevention-20261009/';
- const excluded=['scripts/check-effective-geographic-regression.mjs','scripts/selected-checkpoint-native.mjs',
+ const excluded=['scripts/check-effective-geographic-regression.mjs',
   'scripts/run-geographic-check.py',prefix+'selected-checkpoint.mjs',prefix+'selected-joint-entry.mjs',
   'test/fixtures/selected-checkpoint.mjs','scripts/visible-gap-eligibility.mjs',
-  'scripts/native-ownership/validate-build-context-stage.mjs','scripts/package-output-artifact.mjs'];
+  'scripts/native-ownership/validate-build-context-stage.mjs'];
  for(const [kind,actual]of entries){
   assert.deepEqual(actual.errors,[],'Actual '+kind+' preflight must include its complete current import closure');
   for(const name of [`scripts/build-${kind}-inner.mjs`,'scripts/package-build.mjs',
-   'scripts/package-current-additive.mjs','src/native-grid.js'])assert(actual.files.includes(name),name);
+   'scripts/package-current-additive.mjs','scripts/package-output-artifact.mjs','src/native-grid.js'])assert(actual.files.includes(name),name);
   for(const name of excluded)assert(!actual.files.includes(name),kind+' now executes '+name);
   assert.deepEqual(actual.files,[...new Set(actual.files)].sort());
   for(const name of actual.files)assert(containsPackagePath(definition.inputs,name),name);

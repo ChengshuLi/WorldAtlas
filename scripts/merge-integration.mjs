@@ -1,7 +1,7 @@
 import {collectGeographicApproval, bindingHash} from './geographic-adjudication-api.mjs';
 import {COORDINATION_PATHS, integrationProfile, inertEvidenceAdditions, selectedDataCandidate, selectedDataSelection, candidateGeographyCode} from './integration-profile.mjs';
 import {focusedIntegrationTest, PACKAGED_ASSET_TESTS} from './run-integration-tests.mjs';
-import {EXECUTION_CODE, REBIND_CODE} from './check-unchanged-selected-geography.mjs';
+import {EXECUTION_CODE, REBIND_CODE} from './selected-geography-code.mjs';
 import {loadPackageInputs, packagePathRequired, readPackageInputs, safePackagePath, containsPackagePath, selectedDataCheckoutPatterns, fullCheckoutPatterns, focusedCheckoutPatterns} from './package-inputs.mjs';
 import {githubPages} from './issue-claim-contract.mjs';
 import {memoizeImmutableGitBlobs} from './immutable-git-blobs.mjs';
@@ -237,7 +237,7 @@ export function reviewedTestPlan(request, {base, head, entries, files, definitio
   // These consumers read current declared policy, not historical fixture copies.
   for (const [consumer, operand] of [
     ...['test/final-bank-finalizer.test.mjs', 'test/selected-delivery-smoke.test.mjs', 'test/final-bank-checkpoint.test.mjs', 'test/selected-owner-observation.test.mjs',
-      'test/accepted-checkpoint-qualification.test.mjs', 'test/map-cell-diagnosis.test.mjs', 'test/native-location-context.test.mjs'].map(consumer =>
+      'test/map-cell-diagnosis.test.mjs', 'test/native-location-context.test.mjs'].map(consumer =>
       [consumer, 'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz']),
     ['test/current-rebind-product-custody.test.mjs', 'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json'],
     ['test/local-workspace.test.mjs', 'docs/LOCAL_WORKSPACES.md'],

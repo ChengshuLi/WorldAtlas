@@ -28,8 +28,7 @@ export function inspectPreviewPackage(root=repository,inventory=inventoryPackage
   need(index.native_manifest_sha256===scientificNativeSelection(selection).sha256,
     'Preview native selection differs');
   need(isDeepStrictEqual(atlas.preparedOwnership,index.preparedOwnership),'Preview prepared ownership differs');
-  const {reference_owner_sha256,...pixelMap}=atlas.pixelMap??{};
-  need(isDeepStrictEqual(pixelMap,index.pixelMap),'Preview complete ownership header differs');
+  need(isDeepStrictEqual(atlas.pixelMap,index.pixelMap),'Preview complete ownership header differs');
   if(bank)need(isDeepStrictEqual(atlas.reference_release,selection.reference),'Preview final release differs');
   const {application_reference_revision,...referenceMetadata}=atlas.referenceMetadata??{};
   need(isDeepStrictEqual(index.referenceMetadata,atlas.referenceMetadata?referenceMetadata:undefined),'Preview reference projection differs');

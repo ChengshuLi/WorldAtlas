@@ -407,3 +407,7 @@ test('cold selected-data checkout preserves the full fallback build image withou
   await fs.unlink(path.join(root,required[0]));
   assert(inspectPackageInputs(root,definition).errors.some(error=>error.path===required[0]));
 });
+
+test('retired Site build has no latest-main entrypoint',async()=>{
+ await assert.rejects(runPackageBuild('hosted'),/Unknown package build/);
+});

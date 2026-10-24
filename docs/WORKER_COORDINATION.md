@@ -601,9 +601,8 @@ could transfer before admission; the simpler default now places that single pass
 in the serialized lane. Measure actual lane occupancy and completed delivery time,
 including removed duplicate/reworked prequeue work, rather than adding job durations.
 
-The Cloudflare step does not measure the historical Site archive reserve. An
-explicit `npm run build:hosted` recovery build retains its actual file/archive
-budget check. Normal main pushes do not schedule a separate legacy Site build.
+The Cloudflare step does not measure the historical Site archive reserve. The historical Site builder is retired on latest main. Recovery uses the frozen
+provider copy and its original Git revision, not a parallel current build.
 
 ### Run the reviewed consumers
 
