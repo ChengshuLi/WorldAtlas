@@ -12,7 +12,7 @@ import {admitPackageInputTransition,preparedStartupPackageTransition} from '../s
 import {trustedFixture,appendNativeAuthority,referenceCheckpointFixture} from './fixtures/selected-checkpoint.mjs';
 import {selectedDataSelection} from '../scripts/integration-profile.mjs';
 import {oldBank,initialFinalBank,compareFinal} from './fixtures/final-bank.mjs';
-import {pinReader,composeAuthorities,finalizeDelivery,prepareFinalizedStartupOwnership,publishFinalizedDelivery} from '../scripts/prepare-delivery-handoff.mjs';
+import {pinReader,composeAuthorities,finalizeDelivery,prepareFinalizedStartupOwnership,publishFinalizedDelivery,supportedInputs,nativeAuthority,publishOwnedProducts} from '../scripts/prepare-delivery-handoff.mjs';
 const bank='data/canonical-grid/current-startup/';
 async function prepare(t,options={}){
  const f=await trustedFixture(t,{nativeAppend:true,finalBank:true,...options});
@@ -524,4 +524,43 @@ test('retired version-1 finalization and composition refuse before reading any o
  const reader=new Proxy({}, {get(){throw Error('Retired route read an operand');}});
  assert.throws(()=>finalizeDelivery({version:1},reader),/requires final-map version 2/);
  await assert.rejects(composeAuthorities({version:1},reader),/requires final-map version 2/);
+});
+
+
+test('accepted-map supported inputs construct and finalize only the genuinely novel cells',async t=>{
+ const {f}=await prepare(t),baseline=f.bankCommit;
+ const first=await appendNativeAuthority(f,{membershipPath:'data/source.json',owner:1,name:'coordination/engineering/incremental-first',completedConstructor:true});
+ const compose=async(entry,at,name)=>{
+  const reader=pinReader(f.root),binding=reader.json(entry.source_authority);
+  const outputs=await composeAuthorities({version:2,selector:f.pin('data/ownership-selection.json',at),authorities:[{
+   rule_preimage:entry.rule_preimage,source_authority:entry.source_authority,ledger:entry.completed_constructor,native_patch:binding.native_patch}]},reader);
+  f.save(name,outputs['authority-registry.json']);return f.pin(name,f.commit());
+ };
+ f.save('data/ownership-selection.json',JSON.parse(f.git('show',baseline+':data/ownership-selection.json')));
+ const firstHook=await compose(first.entry,baseline,'coordination/engineering/incremental-first/registry.json');
+ await finalize(f,baseline,{change_evidence:firstHook},'coordination/engineering/incremental-first/final');const accepted=f.commit();
+ const {x,y}=first;
+ const full=await appendNativeAuthority(f,{membershipPath:'data/source.json',owner:1,name:'coordination/engineering/incremental-full',completedConstructor:true,
+  nativePatchRows:[{y,runs:[[x,x+3,2]]}],mutateEvidence:e=>{for(const target of e.targets)target.coverage_rows=[{y,runs:[[x,x+3,'mapped_land_support']]}];}});
+ f.save('data/ownership-selection.json',JSON.parse(f.git('show',accepted+':data/ownership-selection.json')));
+ const fullHook=await compose(full.entry,accepted,'coordination/engineering/incremental-full/registry.json');
+ await assert.rejects(finalize(f,accepted,{change_evidence:fullHook},'coordination/engineering/incremental-full/refused'),/would replace an assigned cell/);
+ const binding=pinReader(f.root).json(full.entry.source_authority),locator=p=>({commit:p.commit,path:p.path});
+ const diagnostic=await nativeAuthority({version:1,source_evidence:locator(binding.source_evidence),native_patch:locator(binding.native_patch)},pinReader(f.root),f.root,true);
+ assert.equal(diagnostic.observation.supported_cells,3);
+ f.save('coordination/engineering/incremental-full/diagnostic.json',diagnostic.products['native-diagnostic.json']);const diagnosticAt=f.commit();
+ const prepared=await supportedInputs({version:1,diagnostic:{commit:diagnosticAt,path:'coordination/engineering/incremental-full/diagnostic.json'},
+  accepted_selector:{commit:accepted,path:'data/ownership-selection.json'}},pinReader(f.root));
+ const account=JSON.parse(prepared['original-scope-partition.json']);assert.equal(account.original_cells,3);assert.equal(account.already_present_cells,1);assert.equal(account.supported_cells,2);
+ assert.deepEqual(JSON.parse(prepared['native-patch.json']).rows,[{y,runs:[[x+1,x+3,2]]}]);
+ for(const [name,raw]of Object.entries(prepared))f.save('coordination/engineering/incremental-novel/'+name,raw);
+ const preparedAt=f.commit(),inputs={version:1,source_evidence:{commit:preparedAt,path:'coordination/engineering/incremental-novel/source-evidence.json'},native_patch:{commit:preparedAt,path:'coordination/engineering/incremental-novel/native-patch.json'}};
+ const qualified=await nativeAuthority(inputs,pinReader(f.root),f.root);assert.equal(qualified.observation.qualified_cells,2);
+ const destination='coordination/engineering/incremental-novel/authority';
+ publishOwnedProducts(f.root,destination,qualified.products,{phase:'native-authority',fixture:true});const authorityAt=f.commit();
+ const entry={rule_preimage:f.pin(destination+'/original-rule-preimage.json',authorityAt),source_authority:f.pin(destination+'/authority-binding.json',authorityAt),completed_constructor:f.pin(destination+'/constructor-result.json',authorityAt)};
+ const hook=await compose(entry,accepted,'coordination/engineering/incremental-novel/registry.json');
+ await finalize(f,accepted,{change_evidence:hook},'coordination/engineering/incremental-novel/final');const candidate=f.commit();
+ const report=await compareFinal(f,accepted,candidate);assert.equal(report.added_cells,2);assert.equal(report.removed_cells,0);assert.equal(report.reassigned_cells,0);
+ assert.deepEqual(report.changes,[{row:y,start:x+1,end:x+3,previous_owner:null,candidate_owner:'B'}]);
 });

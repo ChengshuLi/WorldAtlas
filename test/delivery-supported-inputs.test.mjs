@@ -1,5 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import {spawnSync} from 'node:child_process';
 import {supportedInputs, jsonBytes, digest} from '../scripts/prepare-delivery-handoff.mjs';
 
 function fixture() {
@@ -130,3 +133,103 @@ test('supported-inputs operates on full-width intervals without expanding native
   assert.equal(result['original-scope-partition.json'].original_cells,262166);
   assert.deepEqual(result['source-evidence.json'].targets[1].coverage_rows,[{y:262165,runs:[[0,262165,'mapped_land_support']]}]);
 });
+
+// Real immutable Git readers and the existing canonical final-bank loader own
+// acceptance input authentication; no caller-supplied ownership map is trusted.
+async function acceptedFixture(t) {
+  const {trustedFixture} = await import('./fixtures/selected-checkpoint.mjs');
+  const {initialFinalBank} = await import('./fixtures/final-bank.mjs');
+  const {pinReader} = await import('../scripts/prepare-delivery-handoff.mjs');
+  const f = await trustedFixture(t, {nativeAppend:true, finalBank:true});
+  await initialFinalBank(f);
+  const selectorCommit = f.git('rev-parse','HEAD').toString().trim();
+  const contract = Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k=>[k,f.manifest[k]]));
+  async function run({supported=[[2,4,1]], held=[[4,5,1]], mutateSource=()=>{}, mutateDiagnostic=()=>{}, mutateSelector=()=>{}, mutateReader=()=>{}, priorHoldRuns, accepted=true}={}) {
+    f.git('reset','--hard',selectorCommit);
+    const requested=[...supported,...held].sort((a,b)=>a[0]-b[0]);
+    const source={version:1,kind:'source-target-native-evidence-v1',native_contract:contract,base_reference:f.envelope.base_reference,
+      families:[{original:'complete retained source'}],negative_sources:[{original:'complete foreign family'}],
+      targets:[{id:'member-a',target_id:'A',pixelIndex:1,source_members:['a','b'],
+        coverage_rows:[{y:1,runs:requested.map(([a,b])=>[a,b,'mapped_land_support'])}]}]};
+    mutateSource(source);
+    f.save('incremental/source.json',source);f.save('incremental/patch.json',{rows:[{y:1,runs:requested}]});
+    const inputsAt=f.commit(),pins={source_evidence:f.pin('incremental/source.json',inputsAt),native_patch:f.pin('incremental/patch.json',inputsAt)};
+    const count=r=>r.reduce((n,[a,b])=>n+b-a,0);
+    const diagnostic={version:1,kind:'source-target-native-diagnostic-v1',native_contract:contract,original_pins:pins,
+      rule_sha256:digest(jsonBytes({version:1,kind:'source-target-native-rule-v1',...pins})),
+      requested_rows:[{y:1,runs:requested}],supported_rows:supported.length?[{y:1,runs:supported}]:[],held_rows:held.length?[{y:1,runs:held}]:[],
+      decision_rows:[{y:1,runs:[...supported.map(r=>[...r,'assigned_cells']),...held.map(r=>[...r,'territorial_exclusion_cells'])].sort((a,b)=>a[0]-b[0])}],
+      requested_cells:count(requested),supported_cells:count(supported),held_cells:count(held)};
+    mutateDiagnostic(diagnostic);f.save('incremental/diagnostic.json',diagnostic);const at=f.commit();
+    const config={version:1,diagnostic:{commit:at,path:'incremental/diagnostic.json'},
+      ...(accepted?{accepted_selector:{commit:selectorCommit,path:'data/ownership-selection.json'}}:{})};
+    if(priorHoldRuns){f.save('incremental/prior-holds.json',{rows:[{y:1,runs:priorHoldRuns}]});config.prior_holds={commit:f.commit(),path:'incremental/prior-holds.json'};}
+    mutateSelector(config,f);
+    const reader=pinReader(f.root);mutateReader(reader);
+    const output=await supportedInputs(config,reader);
+    return {output:Object.fromEntries(Object.entries(output).map(([name,raw])=>[name,JSON.parse(raw)])),source,diagnostic,pins,config};
+  }
+  return {...f,run,selectorCommit};
+}
+
+test('accepted final map partitions full support into exact novel/already-present/held keys',async t=>{
+ const f=await acceptedFixture(t);
+ for(const [name,supported,held,novel,present] of [
+  ['mixed',[[2,4,1]],[[4,5,1]],[[3,4,1]],[[2,3,1]]],
+  ['all novel',[[10,12,1]],[[12,13,1]],[[10,12,1]],[]],
+  ['zero novel',[[2,3,1]],[[4,5,1]],[],[[2,3,1]]],
+  ['entirely held',[],[[2,3,1]],[],[]],
+  ['full-width intervals',[[2,262166,1]],[],[[3,262166,1]],[[2,3,1]]]
+ ])await t.test(name,async()=>{
+  const {output:o,source,diagnostic,pins}=await f.run({supported,held});
+  assert.deepEqual(o['native-patch.json'].rows,novel.length?[{y:1,runs:novel}]:[]);
+  assert.deepEqual(o['already-present-original.json'].rows,present.length?[{y:1,runs:present}]:[]);
+  assert.deepEqual(o['held-original.json'].rows,held.length?[{y:1,runs:held.map(r=>[...r,'territorial_exclusion_cells'])}]:[]);
+  assert.deepEqual(o['source-evidence.json'],{...source,targets:novel.length?source.targets.map(target=>({...target,coverage_rows:[{y:1,runs:novel.map(([a,b])=>[a,b,'mapped_land_support'])}]})):[]});
+  const a=o['original-scope-partition.json'];assert.equal(a.original_cells,a.supported_cells+a.already_present_cells+a.held_cells);
+  assert.equal(a.native_supported_cells,diagnostic.supported_cells);assert.deepEqual(a.original_inputs,pins);
+  assert(a.accepted_input_inventory.some(p=>p.path.endsWith('/index.json')));
+  for(const owner of a.owners)assert.equal(owner.original_cells,owner.supported_cells+owner.already_present_cells+owner.held_cells);
+ });
+ await t.test('prior holds cannot become already-present or novel authority',async()=>{
+  const {output:o}=await f.run({priorHoldRuns:[[2,4,1,'prior-unresolved']]});
+  assert.deepEqual(o['native-patch.json'].rows,[]);assert.deepEqual(o['already-present-original.json'].rows,[]);
+  assert.deepEqual(o['held-original.json'].rows,[{y:1,runs:[[2,4,1,'prior-unresolved'],[4,5,1,'territorial_exclusion_cells']]}]);
+  const a=o['original-scope-partition.json'];assert.equal(a.original_cells,3);assert.equal(a.held_cells,3);assert.equal(a.already_present_cells,0);
+ });
+ await t.test('omitting selector retains complete original supported route',async()=>{
+  const {output:o}=await f.run({accepted:false});assert.deepEqual(o['native-patch.json'].rows,[{y:1,runs:[[2,4,1]]}]);
+  assert(!Object.hasOwn(o,'already-present-original.json'));assert(!Object.hasOwn(o['original-scope-partition.json'],'accepted_selector'));
+ });
+});
+
+test('incremental support refuses conflicts, identity substitutions and incomplete accepted state',async t=>{
+ const f=await acceptedFixture(t);
+ const cases=[
+  ['unexpected replacement operand',{mutateSelector:c=>c.source_evidence={}},/Explicit incremental supported-input locators/],
+  ['different occupied owner',{supported:[[0,1,1]],held:[]},/conflicts with accepted owner/],
+  ['foreign target identity',{mutateSource:s=>s.targets[0].target_id='B'},/owner identity differs/],
+  ['missing target identity',{mutateSource:s=>delete s.targets[0].target_id},/owner identity differs/],
+  ['native contract substitution',{mutateSource:s=>s.base_reference={...s.base_reference,id:'geography:foreign'}},/original native contract/],
+  ['noncanonical selector path',{mutateSelector:c=>c.accepted_selector.path='incremental/source.json'},/Canonical accepted selector/],
+  ['missing immutable selector',{mutateSelector:c=>c.accepted_selector.commit='0'.repeat(40)},/Missing ordinary|not a tree|bad object|Not a valid object/],
+  ['stale committed selection',{mutateSelector:(_c,f)=>{const s=JSON.parse(f.git('show','HEAD:data/ownership-selection.json'));s.reference.id='geography:stale';f.save('data/ownership-selection.json',s);f.commit();}},/differs from current committed selection/],
+  ['mismatched accepted native manifest',{mutateSelector:(c,f)=>{const s=JSON.parse(f.git('show','HEAD:data/ownership-selection.json'));s.native_selection.sha256='0'.repeat(64);f.save('data/ownership-selection.json',s);c.accepted_selector.commit=f.commit();}},/Accepted native manifest differs/],
+  ['incomplete original owner coverage',{mutateSource:s=>s.targets[0].coverage_rows[0].runs.shift()},/coverage rows differ/],
+  ['missing accepted body',{mutateReader:r=>{const read=r.read;r.read=p=>{if((p.path.startsWith('data/canonical-grid/current-startup/')&&!p.path.endsWith('/index.json')))throw Error('Fixture required accepted body unavailable');return read(p);};}},/required accepted body unavailable/],
+  ['altered accepted body',{mutateReader:r=>{const read=r.read;r.read=p=>{const raw=read(p);return (p.path.startsWith('data/canonical-grid/current-startup/')&&!p.path.endsWith('/index.json'))?Buffer.from(raw).fill(0):raw;};}},/whole identity differs/]
+ ];
+ for(const [name,options,pattern]of cases)await t.test(name,async()=>{await assert.rejects(f.run(options),pattern);});
+});
+
+test('stock supported-inputs CLI awaits accepted-map preparation and preserves exact resume',async t=>{
+  const f=await acceptedFixture(t),{config,output}=await f.run();
+  f.save('incremental/config.json',config);f.commit();
+  const env={...process.env};delete env.NODE_PATH;delete env.NODE_OPTIONS;
+  const args=[path.resolve('scripts/prepare-delivery-handoff.mjs'),'supported-inputs','incremental/config.json','coordination/engineering/incremental-test/output'];
+  for(const flags of [[],['--resume']]){
+   const run=spawnSync(process.execPath,[...args,...flags],{cwd:f.root,env,encoding:'utf8'});
+   assert.equal(run.status,0,run.stderr);
+   for(const [name,value]of Object.entries(output))assert.deepEqual(JSON.parse(fs.readFileSync(path.join(f.root,'coordination/engineering/incremental-test/output',name))),value);
+  }
+ });

@@ -540,6 +540,44 @@ does not accept a replacement source operand. Frozen historical adapters and
 results remain reproducible; future authors should use this stock phase instead
 of copying readers, per-file caps, per-cell sets and output writers.
 
+### Incremental supported inputs against an accepted final bank
+
+For a diagnostic that includes cells already present in the accepted map, add
+`"accepted_selector": {"commit": "<reviewed accepted base>", "path": "data/ownership-selection.json"}`
+to the same `supported-inputs` configuration. Establish that immutable accepted
+base through the normal operator/review boundary; do not supply a candidate map.
+The helper authenticates its canonical final index, complete ownership words and
+context bodies, original native contract and every requested owner's identity.
+It also requires the selected-map bytes to match the author's committed checkout;
+a changed selection fails rather than silently using a stale map. That equality
+is a staleness check, not proof of public acceptance. Refresh the accepted pin and
+normal review after main changes; the queue still checks the actual current base.
+
+After validating the complete original requested-owner coverage, the helper
+partitions supported intervals into unassigned novel cells and cells already
+present under the same owner. Any different occupied owner or owner-identity
+mismatch fails; this path cannot authorize reassignment. It emits the novel
+`native-patch.json` and correspondingly narrowed surviving target coverage, while
+preserving their whole source, physical and negative operands. An additional
+`already-present-original.json` records exact same-owner keys. The original
+accounting pins the accepted selector and consumed immutable members and adds
+`already_present_cells` per owner and in total:
+
+`original_cells = supported_cells (novel) + already_present_cells + held_cells`.
+
+`native_supported_cells` retains the original diagnostic's supported count.
+Held rows and reasons are unchanged. Same-owner presence is a technical
+non-addition, not new scientific credit, and cannot resolve a held cell. An
+all-present scope emits no positive targets or patch; do not invoke the positive
+constructor on an empty request. Otherwise commit the prepared products and run
+the normal genuine `native-authority`, compose and finalizer phases on those
+exact novel inputs. Do not slice an issued constructor result or suppress the
+finalizer's occupied-cell refusal. The final comparator still requires every
+actual positive change to match complete qualified new evidence.
+
+Omitting `accepted_selector` preserves the original command and output contract;
+no accepted map is then read and the complete supported partition is emitted.
+
 ### Subsequent batch preparation
 
 For an unchanged accepted command, change the scientific input pins/configuration,

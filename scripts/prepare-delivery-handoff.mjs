@@ -1408,6 +1408,51 @@ export async function sourceEvidence(config, reader) {
 // remain in its original pin; surviving target records change only coverage rows.
 // This preparation never substitutes for the subsequent native constructor.
 export function supportedInputs(config, reader) {
+  if (config && Object.hasOwn(config, 'accepted_selector')) return supportedFinalInputs(config, reader);
+  return partitionSupportedInputs(config, reader);
+}
+
+async function supportedFinalInputs(config, reader) {
+  need(config.version === 1 && Object.keys(config).every(key =>
+    ['version', 'diagnostic', 'original_patch', 'prior_holds', 'accepted_selector'].includes(key)),
+  'Explicit incremental supported-input locators required');
+  const {accepted_selector, ...original} = config;
+  need(accepted_selector?.path === 'data/ownership-selection.json', 'Canonical accepted selector required');
+  const selector = locate(reader, accepted_selector), selection = reader.json(selector);
+  need(finalBankSelection(selection), 'Supported inputs require an accepted final bank');
+  // Refuse a stale selected map in the author's committed checkout. The caller
+  // and independent review establish the accepted commit; this preparation does
+  // not promote a private selector to acceptance or replace queue comparison.
+  const current = reader.pin(reader.git('rev-parse', 'HEAD').toString().trim(), selector.path);
+  need(current.git_blob_oid === selector.git_blob_oid && current.sha256 === selector.sha256
+    && current.bytes === selector.bytes, 'Accepted selector differs from current committed selection');
+  const native = scientificNativeSelection(selection), manifestPin = reader.pin(selector.commit, native.manifest_path);
+  need(manifestPin.sha256 === native.sha256, 'Accepted native manifest differs');
+  const manifest = reader.json(manifestPin), inventory = [selector, manifestPin];
+  const read = async pointer => {
+    need(pointer && safe(pointer.path), 'Exact accepted final input required');
+    await reader.acquire?.([{...pointer, commit: selector.commit, mode: '100644'}]);
+    const pin = reader.pin(selector.commit, pointer.path);
+    need(pin.bytes === pointer.bytes && pin.sha256 === pointer.sha256, 'Accepted final input whole identity differs');
+    inventory.push(pin); return reader.read(pin);
+  };
+  let referenceMetadata;
+  if (selection.reference_projection) {
+    const raw = await read(selection.reference_projection), projection = JSON.parse(raw);
+    const references = validateReferenceMetadataHeader(projection, {selection, manifest});
+    referenceMetadata = {version: 1, asset: {...selection.reference_projection, path: 'reference-metadata/current.json'},
+      native_reference: references.native, reference: references.reference};
+  }
+  const indexRaw = await read(selection.prepared_bank), index = JSON.parse(indexRaw);
+  const {readPreparedFinalOwnership} = await import('./package-startup-ownership.mjs');
+  const bank = await readPreparedFinalOwnership({indexRaw, manifest, manifestSha: native.sha256,
+    selected: {finalBank: selection.prepared_bank, base: index.preparedOwnership?.base_reference,
+      reference_release: selection.reference, referenceMetadata}, ownerCount: index.preparedOwnership?.owners,
+    read: pin => read({...pin, path: path.posix.join(path.posix.dirname(selection.prepared_bank.path), pin.path)})});
+  return partitionSupportedInputs(original, reader, {selector, manifest, inventory, ...bank});
+}
+
+function partitionSupportedInputs(config, reader, accepted) {
   need(config?.version === 1 && Object.keys(config).every(key =>
     ['version', 'diagnostic', 'original_patch', 'prior_holds'].includes(key)), 'Explicit supported-input locators required');
   const diagnosticPin = locate(reader, config.diagnostic), diagnostic = reader.json(diagnosticPin);
@@ -1494,6 +1539,44 @@ export function supportedInputs(config, reader) {
     if (keep.length) narrowed.push({y, runs: keep});
     if (holds.length) withheld.push({y, runs: holds});
   }
+  const alreadyPresent = [];
+  if (accepted) {
+    const contract = Object.fromEntries(['size', 'coordinateBits', 'method', 'native_latitudes', 'hierarchy_sha256', 'original_assets']
+      .map(key => [key, accepted.manifest[key]]));
+    need(same(source.native_contract, contract) && same(source.base_reference, originalNativeReference(accepted.manifest)),
+      'Supported source differs from accepted original native contract');
+    const identities = new Map(accepted.features.map(feature => [feature.pixelIndex, feature.id]));
+    need(Array.isArray(source.targets) && source.targets.every(target => identities.get(target.pixelIndex) === target.target_id),
+      'Supported source owner identity differs from accepted final bank');
+    // Intersect ordered intervals, never materialize one record per native cell.
+    // Presence under the same owner is a technical non-addition, not new credit.
+    const {rows: wordRows, runs: words} = accepted.ownership, bits = 19, mask = 2 ** bits - 1;
+    const novel = [];
+    for (const {y, runs} of narrowed) {
+      const start = wordRows[y * 2], count = wordRows[y * 2 + 1], keep = [], present = [];
+      let offset = 0;
+      for (const [a, b, owner] of runs) {
+        let x = a;
+        while (x < b) {
+          while (offset < count && (words[(start + offset) * 2 + 1] & mask) + 1 <= x) offset++;
+          if (offset === count || (words[(start + offset) * 2] & mask) >= b) {append(keep, [x, b, owner]); break;}
+          const first = words[(start + offset) * 2], last = words[(start + offset) * 2 + 1];
+          const from = first & mask, end = Math.min(b, (last & mask) + 1);
+          if (x < from) {append(keep, [x, Math.min(b, from), owner]); x = from; continue;}
+          const occupiedOwner = (first >>> bits) + (last >>> bits) * 2 ** (32 - bits);
+          need(occupiedOwner === owner, 'Supported input conflicts with accepted owner');
+          append(present, [x, end, owner]);
+          const record = owners.get(owner); record.supported_cells -= end - x;
+          record.already_present_cells = (record.already_present_cells ?? 0) + end - x;
+          x = end;
+        }
+      }
+      if (keep.length) novel.push({y, runs: keep});
+      if (present.length) alreadyPresent.push({y, runs: present});
+    }
+    narrowed.splice(0, narrowed.length, ...novel);
+    for (const record of owners.values()) record.already_present_cells ??= 0;
+  }
   const byOwner = value => {
     const result = new Map();
     for (const {y, runs} of value) for (const run of runs) {
@@ -1537,16 +1620,23 @@ export function supportedInputs(config, reader) {
   }
   need([...requestedOwners.keys()].every(owner => source.targets.some(target => target.pixelIndex === owner)),
     'Missing requested source owner');
+  if (accepted) need(count(original) === count(narrowed) + count(alreadyPresent) + count(withheld),
+    'Original incremental scope is not conserved');
   const accounting = {version: 1, diagnostic: diagnosticPin, original_patch: originalPin,
     ...(priorPin ? {prior_holds: priorPin} : {}), original_inputs: pins,
     original_cells: count(original), supported_cells: count(narrowed), held_cells: count(withheld),
+    ...(accepted ? {accepted_selector: accepted.selector, accepted_input_inventory: accepted.inventory,
+      already_present_cells: count(alreadyPresent)} : {}),
     native_requested_cells: diagnostic.requested_cells, native_supported_cells: diagnostic.supported_cells,
     native_held_cells: diagnostic.held_cells, prior_held_cells: count(prior), prior_already_native_held_cells: priorNativeHeld,
     owners: [...owners.values()].sort((a, b) => a.owner - b.owner),
     limits: ['Preparation only. Exact emitted source and patch still require genuine native authority.',
-      'Original source, physical and negative operands remain pinned; only positive coverage and wholly held owners are narrowed.']};
+      accepted ? 'Original source, physical and negative operands remain pinned; only positive coverage and owners with no novel keys are narrowed.'
+        : 'Original source, physical and negative operands remain pinned; only positive coverage and wholly held owners are narrowed.',
+      ...(accepted ? ['Same-owner current presence is not new scientific credit; novel, already-present and held keys retain the complete original denominator.'] : [])]};
   return {'source-evidence.json': jsonBytes({...source, targets}), 'native-patch.json': jsonBytes({rows: narrowed}),
-    'held-original.json': jsonBytes({rows: withheld}), 'original-scope-partition.json': jsonBytes(accounting)};
+    'held-original.json': jsonBytes({rows: withheld}), 'original-scope-partition.json': jsonBytes(accounting),
+    ...(accepted ? {'already-present-original.json': jsonBytes({rows: alreadyPresent})} : {})};
 }
 
 // Execute the existing modern constructor or its admitted read-only diagnostic,
@@ -1631,7 +1721,7 @@ async function main(args) {
   }
   if (['native-authority','native-diagnostic'].includes(phase)) { const result = await nativeAuthority(config, reader, root, phase === 'native-diagnostic'); outputs = result.products; observation = result.observation; }
   if (phase === 'reference-metadata') { const result = prepareReferenceMetadata(config, reader); outputs = result.products; binding.input_inventory = result.input_inventory; }
-  if (phase === 'supported-inputs') outputs = supportedInputs(config, reader);
+  if (phase === 'supported-inputs') outputs = await supportedInputs(config, reader);
   if (phase === 'source-evidence') outputs = await sourceEvidence(config, reader);
   if (phase === 'requests') outputs = prepareRequests(config, reader);
   if (phase === 'native-requests') outputs = nativeRequests(config, reader);
